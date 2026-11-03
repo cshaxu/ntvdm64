@@ -30,14 +30,20 @@
 #include "gvi.h"
 #include CpuH
 #ifdef NOVELL
+#line 33
 #error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register.
 #endif
+#line 35
 #ifdef GISP_SVGA
+#line 36
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
+#line 39
 #ifdef LICENSING
+#line 40
 #error DIVERGENCE MVDM-HOST-DIV-531: LICENSING branch is not selected; see mirror register.
 #endif
+#line 42
 #include "emm.h"
 
 #ifdef SEGMENTATION
@@ -68,28 +74,36 @@ void terminate()
 		already_called_terminate = TRUE;
 
 #ifdef MSWDVR
+#line 70
 #error Unsupported excluded original configuration
 #endif
-#line 76
+#line 72
 
 #ifdef SWIN_SNDBLST_NULL
+#line 74
 #error DIVERGENCE MVDM-HOST-DIV-528: SWIN_SNDBLST_NULL platform branch is not selected; see mirror register.
 #endif /* SWIN_SNDBLST_NULL */
+#line 76
 
 #ifdef GISP_SVGA
+#line 78
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
+#line 82
 
 	/* terminate COM and LPT devices */
 #ifdef  PC_CONFIG
+#line 85
 #error DIVERGENCE MVDM-HOST-DIV-531: PC_CONFIG branch is not selected; see mirror register.
 #else
+#line 89
 	for (i = 0 ; i < NUM_PARALLEL_PORTS; i++)
 		config_activate(C_LPT1_NAME + i, FALSE);
 
 	for (i = 0 ; i < NUM_SERIAL_PORTS; i++)
 		config_activate(C_COM1_NAME + i, FALSE);
 #endif
+#line 95
 
 	/* Update the cmos.ram file */
 	cmos_update();
@@ -111,12 +125,15 @@ void terminate()
 
 	config_activate(C_FLOPPY_A_DEVICE, FALSE);
 #ifdef FLOPPY_B
+#line 113
 #error Unsupported excluded original configuration
 #endif /* FLOPPY_B */
 #line 115
 #ifdef SLAVEPC
+#line 116
 #error DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register.
 #endif /* SLAVEPC */
+#line 118
 
 	/*
 	 * Do any cpu-specific termination bits.
@@ -128,12 +145,16 @@ void terminate()
 #line 125
 
 #ifdef NOVELL
+#line 127
 #error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register.
 #endif
+#line 129
 
 #ifdef LICENSING
+#line 131
 #error DIVERGENCE MVDM-HOST-DIV-531: LICENSING branch is not selected; see mirror register.
 #endif
+#line 133
 	/*
 	 * Do any host-specific termination bits.
 	 */

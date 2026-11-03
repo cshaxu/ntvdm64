@@ -105,8 +105,10 @@ GLOBALS		  :	uses EGA_GRAPH struct, specially display_state to decide which mode
 #include	"host_gfx.h"
 
 #ifdef GORE
+#line 108
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #endif /* GORE */
+#line 110
 
 /* [3.1.2 DECLARATIONS]                                                 */
 
@@ -606,10 +608,13 @@ DISPLAY_MODE	mode;
 		case EGA_LO:
 			assert0( !is_it_text(), "In graphics memory mode, but not in graphics mode !!" );
 #ifdef GORE
+#line 612
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
+#line 614
 			set_gfx_update_routines( ega_graph_update, EGA_GRAPHICS_MARKING, EGA_GRAPH_SCROLL );
 #endif /* GORE */
+#line 616
 			break;
 		case EGA_HI_SP_WR:
 		case EGA_MED_SP_WR:
@@ -646,10 +651,13 @@ DISPLAY_MODE	mode;
 			assert1(NO,"Funny memory organisation selected %s", get_mode_string(mode) );
 			do_display_trace("dumping EGA_GRAPH struct ...", dump_EGA_GRAPH());
 #ifdef GORE
+#line 652
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
+#line 654
 			set_gfx_update_routines( ega_graph_update, EGA_GRAPHICS_MARKING, NO_SCROLL );
 #endif /* GORE */
+#line 656
 			break;
 		case DUMMY_FUN:
 			assert0(NO,"Using the dummy mode!!");

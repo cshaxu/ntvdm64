@@ -1191,7 +1191,7 @@
     "after_sha256": "5908873bd5f6391511efc733b04537bd56007df973b95d0cd1124ab84ff283d4",
     "final_sha256": "453798cd8f6f46277dc74f27db2a764933605f4461df45e417724f3210ae44c4",
     "current_line": 217,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r639-basic-guard-lines.json"
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r658-guard-line-audit.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
@@ -1552,8 +1552,8 @@
     "removed_body_lines": 6,
     "after_sha256": "21846776c2f3538e914cd255780d7e252e9381e2a82ed299709046752f320625",
     "final_sha256": "cb6328db687f1156bd4bec1b69c6f4921ade18baeccd8237125d5d78b2cb336b",
-    "current_line": 43,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r642-guard-line-audit.json"
+    "current_line": 49,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r658-guard-line-audit.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
@@ -1765,8 +1765,8 @@
     "removed_body_lines": 6,
     "after_sha256": "aaa62441ca46226aafcc02d74cdf4b1abcafae0772b7ec24e998c34232cb2e87",
     "final_sha256": "aaa62441ca46226aafcc02d74cdf4b1abcafae0772b7ec24e998c34232cb2e87",
-    "current_line": 125,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r639-basic-guard-lines.json"
+    "current_line": 127,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r658-guard-line-audit.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
@@ -2122,8 +2122,8 @@
     "removed_body_lines": 6,
     "after_sha256": "56105733a0bf01d7e067bd2d85196864338d19e5fa992b2932e900de04e18877",
     "final_sha256": "56105733a0bf01d7e067bd2d85196864338d19e5fa992b2932e900de04e18877",
-    "current_line": 154,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r639-basic-guard-lines.json"
+    "current_line": 156,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r658-guard-line-audit.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/video/gvi.c",
@@ -2138,7 +2138,7 @@
     "after_sha256": "56105733a0bf01d7e067bd2d85196864338d19e5fa992b2932e900de04e18877",
     "final_sha256": "56105733a0bf01d7e067bd2d85196864338d19e5fa992b2932e900de04e18877",
     "current_line": 41,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r639-basic-guard-lines.json"
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r658-guard-line-audit.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/video/v7_ports.c",

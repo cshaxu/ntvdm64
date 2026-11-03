@@ -88,6 +88,7 @@ extern IU32 host_speed IPT1( IU32, ControlMachineNumber );
 
 extern void host_timer_init IPT0();
 #ifdef SWIN_MOUSE_OPTS
+#line 91
 #error Unsupported excluded original configuration
 #else
 #line 94

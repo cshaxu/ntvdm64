@@ -2706,3 +2706,8 @@ Evidence: ../../artifacts/mvdm-audit/s13-r653-platform-guard-lines.json.
 MVDM-HOST-DIV-739: restore original diagnostic line mappings for existing
 excluded conditional arms in ten further sources. Other arms remain under
 review. Evidence: ../../artifacts/mvdm-audit/s13-r656-guard-line-audit.json.
+
+MVDM-HOST-DIV-740: restore original diagnostic line mappings for existing
+excluded device, platform and graphics branches in ten further sources.
+Other groups remain under review. Evidence:
+../../artifacts/mvdm-audit/s13-r658-guard-line-audit.json.

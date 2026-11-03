@@ -4593,7 +4593,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
-      "sha256": "edca461adde479ac3b2ec5ea906b1c30bbc14dbec365ebb8bb9da86b5bb277ea",
+      "sha256": "a411189acddb5765562919e1cca0e5c6e7c553ee43cdaf621ea27b60a7c3cc9f",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -4876,8 +4876,8 @@
       "sha256": "56c76d5816dd61ebc92666504e7c530a85f30a201c9d0d317056bfc3d0d4c807",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-identical-original-selected-conditional",
+      "additional_evidence": "s13-r657-selected-headers.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egamode.h",
       "original_candidate_sha256": "56c76d5816dd61ebc92666504e7c530a85f30a201c9d0d317056bfc3d0d4c807"
     },
@@ -5243,7 +5243,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/mouse_io.h",
-      "sha256": "478062d41796254f73a80b230470bf30fe7bb2e6acb507003bba0b8efb2128b4",
+      "sha256": "adeeb2ea37931dd7ebca540fe6b16e6ec8c8294490fca4ef8ea2e8f524ac584e",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -5263,7 +5263,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/printer.h",
-      "sha256": "9ac6a0d0fa47623a542044312be06d77e8feffe2b597ba8a883b71d29b756122",
+      "sha256": "0e9d274fec56e50fd2da4cc8179dcf2174f72568a483317694313dfffe566282",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -5296,8 +5296,8 @@
       "sha256": "2075310f9ca8a1a94d9606cd79af36328615412b6912e17f50e2b46081685a5a",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-identical-original-selected-conditional",
+      "additional_evidence": "s13-r657-selected-headers.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\rom.h",
       "original_candidate_sha256": "2075310f9ca8a1a94d9606cd79af36328615412b6912e17f50e2b46081685a5a"
     },
@@ -5373,7 +5373,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/timer.h",
-      "sha256": "4976517cd454b50ce3a28a818895e8ba05264047b49b1c6a7d09cd4db57c25b9",
+      "sha256": "2e6cad2ecadfa8d4343b0989767005726b4f9e6a5421a46d1c1faed9cb4f9728",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -5436,8 +5436,8 @@
       "sha256": "a747934a6f6257d470ecfdc8a4808f6f11cac2cc96b0bd6e9be75facd327b5c3",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-identical-original-selected-conditional",
+      "additional_evidence": "s13-r657-selected-headers.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\vga_dac.h",
       "original_candidate_sha256": "a747934a6f6257d470ecfdc8a4808f6f11cac2cc96b0bd6e9be75facd327b5c3"
     },
@@ -5573,7 +5573,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
-      "sha256": "bad2b204d0bfaa70bf8b2d5e0cd2ffbee00503ca494907e43000a195005cdd5c",
+      "sha256": "ae346e8909b066924ec2ad0be4356ce14a8ff12a44f307f067e9cd7397bba82f",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -5733,7 +5733,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/ega_mode.c",
-      "sha256": "56f79c06847720778441c9ff8ef91de019465429a086f1d6dac227311bbfe95c",
+      "sha256": "7a1f442ae2f2371fdecff75cd95c824676e1ca20f5b388f66476ce416c1ba99c",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -5763,7 +5763,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/ega_trcr.c",
-      "sha256": "8b32afe9f4ab479a5e121ad384660be1bf17665e47ede886046325454fbd01c5",
+      "sha256": "45dd02a03795260a248ac62ec522a7199f339f070483eea23ea7dbbfbf5050be",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -5823,7 +5823,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/gvi.c",
-      "sha256": "1313dc6bc5044274f474577797a224ed8c6726f2788aeaff712556745b42560a",
+      "sha256": "17542b3d138f00c7f6f4417663dbcfdfd814e30d1188467c47aa6aac8644c1fb",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -6013,7 +6013,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/inc/host_rrr.h",
-      "sha256": "09d6b98cf0e8545f6e16196ab7ca0fe4675e1aa556e45511954f3bd25b9f3091",
+      "sha256": "b48dbb4e7165d7002786542322da2b2f406dd78180ca8e476fd0f7a66509d0ba",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -6303,7 +6303,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/cpucstbs.c",
-      "sha256": "06dda5218ab8fdf1de61fdac7e33106aac2d24d0acdec21ca5b47defc6de2dca",
+      "sha256": "9c5da3266f1f8729ed3dd80bfc74e748e28b23852372390385f399540abd45a7",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",

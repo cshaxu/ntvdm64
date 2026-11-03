@@ -64,8 +64,10 @@
 #include "gmi.h"
 #include "cga.h"
 #ifdef HERC
+#line 70
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif
+#line 72
 #include "debug.h"
 #include "gfx_upd.h"
 #ifdef EGG
@@ -169,12 +171,16 @@ void gvi_init IFN1(half_word, v_adapter)
     if (soft_reset)
         switch (video_adapter) {
 #ifdef DUMB_TERMINAL
+#line 178
 #error DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register.
 #endif /* DUMB_TERMINAL */
+#line 182
         case CGA:
 #ifdef CGAMONO 
+#line 184
 #error DIVERGENCE MVDM-HOST-DIV-531: CGAMONO branch is not selected; see mirror register.
 #endif 
+#line 186
             cga_term();
             break;
 #ifdef EGG
@@ -188,8 +194,10 @@ void gvi_init IFN1(half_word, v_adapter)
 	    break;
 #endif
 #ifdef HERC
+#line 199
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif
+#line 203
         default:
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
@@ -205,14 +213,18 @@ void gvi_init IFN1(half_word, v_adapter)
     case MDA:
     case CGA:
 #ifdef CGAMONO  
+#line 219
 #error DIVERGENCE MVDM-HOST-DIV-531: CGAMONO branch is not selected; see mirror register.
 #endif
+#line 221
 	screen_height = CGA_HEIGHT;
         video_adapter = v_adapter;
         break;
 #ifdef HERC
+#line 225
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif
+#line 230
 #ifdef EGG
     case EGA:
 	screen_height = EGA_HEIGHT;
@@ -231,23 +243,31 @@ void gvi_init IFN1(half_word, v_adapter)
     }
 
 #ifdef GORE
+#line 248
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #endif /* GORE */
+#line 255
 
 /* Setting all these variables should be done in the appropriate xxx_init() */
     switch (video_adapter) {
 #ifdef DUMB_TERMINAL
+#line 259
 #error DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register.
 #endif /* DUMB_TERMINAL */
+#line 263
     case CGA:
 #ifdef CGAMONO  
+#line 265
 #error DIVERGENCE MVDM-HOST-DIV-531: CGAMONO branch is not selected; see mirror register.
 #endif
+#line 267
         cga_init();
         break;
 #ifdef HERC
+#line 270
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif
+#line 274
 #ifdef EGG
     case EGA:
 	ega_init();
@@ -280,17 +300,23 @@ void gvi_term IFN0()
 {
     switch (video_adapter) {
 #ifdef DUMB_TERMINAL
+#line 303
 #error DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register.
 #endif /* DUMB_TERMINAL */
+#line 307
     case CGA:
 #ifdef CGAMONO  
+#line 309
 #error DIVERGENCE MVDM-HOST-DIV-531: CGAMONO branch is not selected; see mirror register.
 #endif
+#line 311
         cga_term();
         break;
 #ifdef HERC
+#line 314
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif
+#line 318
 #ifdef EGG
     case EGA:
 	ega_term();
@@ -311,6 +337,8 @@ void gvi_term IFN0()
     }
 
 #ifdef GORE
+#line 339
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #endif /* GORE */
+#line 341
 }

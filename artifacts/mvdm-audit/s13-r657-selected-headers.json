@@ -1,0 +1,52 @@
+{
+  "scope": "Three byte-identical product headers with a single selected original condition and no alternative.",
+  "method": "Compare entire original bytes and directive groups; inspect declarations in actual x86 worker preprocessing from Ninja compile commands.",
+  "limits": "Observed preprocessing is x86 evidence; independent complete enumeration of supported contexts is still open.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/rom.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\rom.h",
+      "sha256": "2075310f9ca8a1a94d9606cd79af36328615412b6912e17f50e2b46081685a5a",
+      "directives": [
+        "#ifndef macintosh",
+        "#endif"
+      ],
+      "actual_x86_preprocess": "ccpu_ccpusas4.i",
+      "witness_regex": "extern\\s+\\w+\\s+ROM_BIOS1\\[\\]",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/vga_dac.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\vga_dac.h",
+      "sha256": "a747934a6f6257d470ecfdc8a4808f6f11cac2cc96b0bd6e9be75facd327b5c3",
+      "directives": [
+        "#ifndef\tmacintosh",
+        "#endif\t/* ! macintosh */"
+      ],
+      "actual_x86_preprocess": "video_vga_vide.i",
+      "witness_regex": "\\w+\\s+vga_dac\\[0x300\\]\\s*=",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egamode.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egamode.h",
+      "sha256": "56c76d5816dd61ebc92666504e7c530a85f30a201c9d0d317056bfc3d0d4c807",
+      "directives": [
+        "#ifdef VGG",
+        "#endif"
+      ],
+      "actual_x86_preprocess": "video_vga_mode.i",
+      "witness_regex": "extern\\s+\\w+\\s+choose_vga_display_mode\\s*\\(",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
+      ]
+    }
+  ]
+}

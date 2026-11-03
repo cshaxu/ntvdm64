@@ -1499,12 +1499,16 @@ GLOBAL VOID fdisk_inb IFN2(io_addr, port, UTINY *,value)
 GLOBAL VOID fdisk_inw IFN2(io_addr, port, USHORT *, value)
 {
 #ifdef	JOKER
+#line 1517
 #error DIVERGENCE MVDM-HOST-DIV-531: JOKER branch is not selected; see mirror register.
 #else	/* JOKER */
+#line 1537
 
 #ifdef BIGEND
+#line 1539
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
+#line 1541
 		switch (port)
 	{
 	case TFBASE:
@@ -1514,8 +1518,10 @@ GLOBAL VOID fdisk_inw IFN2(io_addr, port, USHORT *, value)
 #endif
 
 #ifdef BIGEND
+#line 1550
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
+#line 1553
 
 #if 0
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
@@ -1532,6 +1538,7 @@ GLOBAL VOID fdisk_inw IFN2(io_addr, port, USHORT *, value)
 			break;
 	}
 #endif	/* JOKER */
+#line 1569
 }
 
 
@@ -1605,8 +1612,10 @@ GLOBAL VOID fdisk_outb IFN2(io_addr, port, UTINY, value)
 GLOBAL VOID fdisk_outw IFN2(io_addr, port, USHORT, value)
 {
 #ifdef BIGEND
+#line 1642
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
+#line 1644
 		switch (port)
 	{
 	case TFBASE:
@@ -1622,8 +1631,10 @@ GLOBAL VOID fdisk_outw IFN2(io_addr, port, USHORT, value)
 #endif
 
 #ifdef BIGEND
+#line 1660
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
+#line 1663
 
 			break;
 	default:
@@ -1675,15 +1686,19 @@ GLOBAL VOID fdisk_ioattach IFN0()
 		nheads = drives[0].maxhead + 1;
 		nsects = drives[0].maxsect + 1;
 #ifdef REAL_ROM
+#line 1714
 #error DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register.
 #endif
+#line 1716
 		patch_rom(DPB0, (unsigned char) (ncyls & 0xff));
 		patch_rom(DPB0+1, (unsigned char) (ncyls >> 8));
 		patch_rom(DPB0+2, nheads);
 		patch_rom(DPB0+0xe, nsects);
 #ifdef REAL_ROM
+#line 1721
 #error DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register.
 #endif
+#line 1723
 		dt1(DHW | IOAD, 0, "drive 0 wiredup, total cyls %d\n",
 		    (unsigned) ncyls)
 	}
@@ -1703,15 +1718,19 @@ GLOBAL VOID fdisk_ioattach IFN0()
 		nheads = drives[1].maxhead + 1;
 		nsects = drives[1].maxsect + 1;
 #ifdef REAL_ROM
+#line 1742
 #error DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register.
 #endif
+#line 1744
 		patch_rom(DPB1, ncyls & 0xff);
 		patch_rom(DPB1 + 1, (ncyls >> 8));
 		patch_rom(DPB1+2, nheads);
 		patch_rom(DPB1+0xe, nsects);
 #ifdef REAL_ROM
+#line 1749
 #error DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register.
 #endif
+#line 1751
 		dt1(DHW | IOAD, 0, "drive 1 wiredup, total cyls %d\n",
 		    (unsigned) ncyls)
 	}
@@ -1738,15 +1757,19 @@ GLOBAL VOID fdisk_iodetach IFN0()
 		 */
 		drives[0].wiredup = 0;
 #ifdef REAL_ROM
+#line 1777
 #error DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register.
 #endif
+#line 1779
 		patch_rom(DPB0, 0);
 		patch_rom(DPB0 + 1, 0);
 		patch_rom(DPB0 + 2, 0);
 		patch_rom(DPB0 + 0xe, 0);
 #ifdef REAL_ROM
+#line 1784
 #error DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register.
 #endif
+#line 1786
 		dt0(DHW | IOAD, 0, "drive 0 unplugged\n")
 	}
 	if (drives[1].physattached)
@@ -1758,15 +1781,19 @@ GLOBAL VOID fdisk_iodetach IFN0()
 		 */
 		drives[1].wiredup = 0;
 #ifdef REAL_ROM
+#line 1797
 #error DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register.
 #endif
+#line 1799
 		patch_rom(DPB1, 0);
 		patch_rom(DPB1 + 1, 0);
 		patch_rom(DPB1 + 2, 0);
 		patch_rom(DPB1 + 0xe, 0);
 #ifdef REAL_ROM
+#line 1804
 #error DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register.
 #endif
+#line 1806
 		dt0(DHW | IOAD, 0, "drive 1 unplugged\n")
 	}
 }
