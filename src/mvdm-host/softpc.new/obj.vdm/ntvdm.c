@@ -26,9 +26,12 @@ typedef struct _CpuEnvironmentVariable {
 
 PCPUENVVAR CpuEnvVarListHead=NULL;
 
+#line 26
 #if DBG
+#line 27
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 29
 
 
 INT host_main(INT argc, CHAR **argv);  // located in base\support\main.c
@@ -336,9 +339,12 @@ CpuEnvInit(
 
     NtClose(CpuEnvKey);
 
+#line 317
 #if DBG
+#line 318
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 324
 
 }
 
@@ -362,9 +368,12 @@ char * _CRTAPI1 getenv(const char *Name)
      CpuEnvVar = CpuEnvVar->Next;
      }
 
+#line 347
 #if DBG
+#line 348
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 352
 
   return Value;
 }

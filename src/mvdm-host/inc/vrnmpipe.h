@@ -268,9 +268,12 @@ typedef struct _DOS_ASYNC_NAMED_PIPE_INFO {
     DWORD   pErrorCode;
     DWORD   ANR;                // 16:16 address of ANR
     DWORD   Semaphore;          // 16:16 address of 'semaphore' in VDM
+#line 267
 #if DBG
+#line 268
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 270
     /* DIVERGENCE(MVDM-HOST-DIV-167): private host-only staging state for one
      * outstanding original async request.  It never enters a guest, MVDM or
      * adapter ABI and is released at the original request cleanup points. */

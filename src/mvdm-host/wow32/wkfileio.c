@@ -37,7 +37,9 @@ HMAPPEDFILEALIAS aMappedFileCache[MAX_MAPPED_FILES] = {0}; // File Handle To Map
 DWORD dwTotalCacheBytes = 0;
 DWORD dwTotalCacheAccess = 0;
 
+#line 38
 #ifdef DEBUG
+#line 39
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 42
@@ -554,7 +556,9 @@ ULONG FASTCALL WK32FileRead (PVDMFRAME pFrame)
 
         FLUSHVDMCODEPTR(parg16->lpBuf, (WORD)dwBytesRead, pDst);
 
+#line 555
 #ifdef DEBUG
+#line 556
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 559

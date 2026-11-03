@@ -361,7 +361,9 @@ ULONG FASTCALL WK32GetProfileString(PVDMFRAME pFrame)
         }
     }
 
+#line 345
 #ifdef DEBUG
+#line 346
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 372
@@ -553,7 +555,9 @@ ULONG FASTCALL WK32GetPrivateProfileString(PVDMFRAME pFrame)
         }
     }
 
+#line 556
 #ifdef DEBUG
+#line 557
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 583
@@ -565,7 +569,9 @@ FlushAndReturn:
         LOGDEBUG(8,("GetPrivateProfileString returns '%s'\n", pszReturnBuffer));
     }
 
+#line 591
 #ifdef DEBUG
+#line 592
 #error Excluded unsupported DEBUG WOW profile
 #endif // DEBUG
 #line 635

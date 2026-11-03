@@ -374,7 +374,9 @@ INT GetBMI16Size(PVPVOID vpbmi16, WORD fuColorUse, LPDWORD lpdwClrUsed)
 
     // if this asserts it's an app bug
     // Changed assert to warning at Craig's request - DaveHart
+#line 429
 #ifdef DEBUG
+#line 430
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 434
@@ -678,7 +680,9 @@ VOID getmsg16(VPMSG16 vpmsg16, LPMSG lpmsg, LPMSGPARAMEX lpmpex)
     lParam  = FETCHLONG(pmsg16->lParam);
     uParam  = INT32(wParam);              // default thunking - sign extend
 
+#line 734
 #ifdef DEBUG
+#line 735
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 743

@@ -1,0 +1,65 @@
+{
+  "scope": "Three WOW source files; add original physical-line anchors to existing excluded DEBUG arms; selected statements unchanged. Original nested groups under excluded DBG are not restored.",
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkernel.c",
+      "before_sha256": "ba8d49a89324de2c559034d4f443d6e72f17c817aebcdaa4446d38bccffb31af",
+      "after_sha256": "aeeb73ae5acad1d5ca6e69884d9f58fac936eb0f197c77ef7975e12d8c023c20",
+      "guards": [
+        {
+          "if": 345,
+          "following": 372,
+          "replaced_existing_following_anchor": true
+        },
+        {
+          "if": 556,
+          "following": 583,
+          "replaced_existing_following_anchor": true
+        },
+        {
+          "if": 591,
+          "following": 635,
+          "replaced_existing_following_anchor": true
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkfileio.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkfileio.c",
+      "before_sha256": "977a8e14161b5b9a8d4fb743b32b4e9c54a67ccaf8bede274b4fe54f067da6ac",
+      "after_sha256": "1831a9aba0e796bc0034d021f3c17d6d8ab978f0c8bed0874bc00909e05e1372",
+      "guards": [
+        {
+          "if": 38,
+          "following": 42,
+          "replaced_existing_following_anchor": true
+        },
+        {
+          "if": 555,
+          "following": 559,
+          "replaced_existing_following_anchor": true
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wstruc.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wstruc.c",
+      "before_sha256": "006dc8b7ee255e8a6e0a31501583af08b878d61afd1da4443d9be8c548272c05",
+      "after_sha256": "46b7509bfaf87f2533d043625adf90d5e46af24481d2d1925a669b7f82ec6c0d",
+      "guards": [
+        {
+          "if": 429,
+          "following": 434,
+          "replaced_existing_following_anchor": true
+        },
+        {
+          "if": 734,
+          "following": 743,
+          "replaced_existing_following_anchor": true
+        }
+      ]
+    }
+  ],
+  "status": "r581 cached x86, x86-extra and x64 builds passed; per-file condition review remains partial."
+}

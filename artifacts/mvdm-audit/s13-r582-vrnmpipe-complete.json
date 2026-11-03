@@ -1,0 +1,14 @@
+{
+  "path": "src/mvdm-host/inc/vrnmpipe.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\vrnmpipe.h",
+  "current_sha256": "9b86ded8d08d6b8327b9e75491ec1c6c6de22dfad5fbf0a987073fdeb706107a",
+  "original_sha256": "06e77e0e94ff590b0aef18577f53eda9987c6dc2331ac6e8c185cfd10fe79da6",
+  "evidence": "Both VDMREDIR_DLL conditional groups and their selected/alternative bodies are byte-line-identical to the original; the original DBG arm is error-only with line anchors. The adjacent DIV-167 guest pointer adaptation is outside these conditional bodies. Redirector graph defines VDMREDIR_DLL; other observed consumers retain the original alternative.",
+  "observed_in": [
+    "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
+    "build\\.ninja\\msvc-x86-redir-contract\\build.ninja:deps",
+    "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps",
+    "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
+  ],
+  "limitations": "Conditional structure only; no claim of full nonconditional-source equivalence or undocumented configurations."
+}

@@ -109,9 +109,12 @@ q_event_init(
      PQEV_ENTRY pqevEntry;
 
 
+#line 111
 #if DBG
+#line 112
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 117
 
      host_ica_lock();
 

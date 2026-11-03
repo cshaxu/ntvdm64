@@ -1,0 +1,297 @@
+{
+  "scope": "Seven product-source files; add original physical-line anchors to existing excluded DBG arms; selected statements unchanged. Original nested groups under excluded DBG are not restored.",
+  "records": [
+    {
+      "path": "src/mvdm-host/inc/vrnmpipe.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\vrnmpipe.h",
+      "before_sha256": "5ab62f01e3fd2628ed1b5fab8d1456387128a92467c29d14d099bed978850443",
+      "after_sha256": "9b86ded8d08d6b8327b9e75491ec1c6c6de22dfad5fbf0a987073fdeb706107a",
+      "guards": [
+        {
+          "if": 267,
+          "following": 270,
+          "replaced_existing_following_anchor": false
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\qevnt.c",
+      "before_sha256": "da8cc74b8451863fdc370ee86789fcd5026d186bfd231742135d1329df553795",
+      "after_sha256": "fcab7cd5440884eb8cadb97263297caeaf5213f8e4e4310c7691e92af08601ef",
+      "guards": [
+        {
+          "if": 111,
+          "following": 117,
+          "replaced_existing_following_anchor": false
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\obj.vdm\\ntvdm.c",
+      "before_sha256": "ed81a07c7bbcafa43554edecb351828af7c988c047e46fbd9203313f58b30155",
+      "after_sha256": "b4062bb577ca79ae7c66e445fb80ae1bdba5021386d7b8b24688e503659ce915",
+      "guards": [
+        {
+          "if": 26,
+          "following": 29,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 317,
+          "following": 324,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 347,
+          "following": 352,
+          "replaced_existing_following_anchor": false
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "before_sha256": "3915e6734279cee1766836ca4436bb5373feb7e6e5242a00fe1cf83cc2bc97d0",
+      "after_sha256": "5460621376e0b83cbd72341db57ef20ab8f06305dcc87fe33c129eca9b0e9979",
+      "guards": [
+        {
+          "if": 226,
+          "following": 232,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 303,
+          "following": 309,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 380,
+          "following": 386,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 406,
+          "following": 411,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 458,
+          "following": 467,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 476,
+          "following": 483,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 488,
+          "following": 493,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 520,
+          "following": 527,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 576,
+          "following": 584,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 621,
+          "following": 627,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 643,
+          "following": 648,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 659,
+          "following": 668,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 688,
+          "following": 693,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 743,
+          "following": 749,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 752,
+          "following": 757,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 777,
+          "following": 782,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 796,
+          "following": 807,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 817,
+          "following": 822,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 825,
+          "following": 833,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 871,
+          "following": 876,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 916,
+          "following": 919,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 936,
+          "following": 941,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 956,
+          "following": 961,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 967,
+          "following": 972,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 1015,
+          "following": 1020,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 1120,
+          "following": 1134,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 1177,
+          "following": 1191,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 1233,
+          "following": 1244,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 1278,
+          "following": 1285,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 1295,
+          "following": 1306,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 1309,
+          "following": 1320,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 1433,
+          "following": 1442,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 1451,
+          "following": 1457,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 1497,
+          "following": 1505,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 1508,
+          "following": 1513,
+          "replaced_existing_following_anchor": false
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/waccel.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\waccel.c",
+      "before_sha256": "b84e4821bb550209081cc9782e9f9c01b1bb9d5754a7be99c6eea9fa739b50b0",
+      "after_sha256": "b3677ef2ad59ae352ff4cb9fcbc8ef0cf0daa35933773274803c0983ab9d312e",
+      "guards": [
+        {
+          "if": 258,
+          "following": 261,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 279,
+          "following": 284,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 291,
+          "following": 298,
+          "replaced_existing_following_anchor": false
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkman.c",
+      "before_sha256": "b6daf4b15721351d241003d49d7ca92b7f40f83a0fd583d98af6748497248eea",
+      "after_sha256": "782cc4d0ec0f02cabdd28cd36b0884a5800e60c8404556ac3e823b9909674a78",
+      "guards": [
+        {
+          "if": 1281,
+          "following": 1285,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 1305,
+          "following": 1309,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 1316,
+          "following": 1320,
+          "replaced_existing_following_anchor": false
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.h",
+      "before_sha256": "4012613910937d5733133fb1578949855e5a4a08112a927cfc18c687920f5744",
+      "after_sha256": "fb82ba68fff4be7e834d015e7258b6ec8d23d79598463265b0be680455cb0948",
+      "guards": [
+        {
+          "if": 21,
+          "following": 24,
+          "replaced_existing_following_anchor": false
+        }
+      ]
+    }
+  ],
+  "status": "r581 cached x86, x86-extra and x64 builds passed; vrnmpipe.h per-file condition review is recorded in s13-r582-vrnmpipe-complete.json; remaining files are partial."
+}

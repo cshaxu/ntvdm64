@@ -255,9 +255,12 @@ HACCEL CreateAccel32(VPVOID vpAccel16, DWORD cbAccel16)
     LPACCEL lpAccel;
     HACCEL  hAccel = (HACCEL)NULL;
     UINT    i;
+#line 258
 #if DBG
+#line 259
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 261
 
     //
     // pAccel16 is pointer to an array of records of length:
@@ -276,9 +279,12 @@ HACCEL CreateAccel32(VPVOID vpAccel16, DWORD cbAccel16)
         if (lpAccel) {
             for (i=0; i<nElem16; ++i) {
                  lpAccel[i].fVirt = *(LPBYTE)(pAccel16);
+#line 279
 #if DBG
+#line 280
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 284
                  ((LPBYTE)pAccel16)++;
                  lpAccel[i].key   = FETCHWORD(*(LPWORD)pAccel16);
                  ((LPWORD)pAccel16)++;
@@ -286,9 +292,12 @@ HACCEL CreateAccel32(VPVOID vpAccel16, DWORD cbAccel16)
                  ((LPWORD)pAccel16)++;
             }
 
+#line 291
 #if DBG
+#line 292
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 298
             hAccel = CreateAcceleratorTable(lpAccel, i);
             free_w(lpAccel);
         }

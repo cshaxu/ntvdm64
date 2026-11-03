@@ -18,9 +18,12 @@
 
 #define HACK32
 
+#line 21
 #if DBG
+#line 22
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 24
 
 #line 25
 #ifdef i386

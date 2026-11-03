@@ -2,7 +2,7 @@
   "baseline_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r379.zip",
   "graph_inventory": "s13-r473-all-graph-coverage.json",
   "total_observed_files": 1057,
-  "completed_files": 574,
+  "completed_files": 575,
   "records": [
     {
       "path": "src/mvdm-host/dbg/dbg.c",
@@ -991,7 +991,7 @@
     {
       "path": "src/mvdm-host/inc/vrnmpipe.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\vrnmpipe.h",
-      "current_sha256": "5ab62f01e3fd2628ed1b5fab8d1456387128a92467c29d14d099bed978850443",
+      "current_sha256": "9b86ded8d08d6b8327b9e75491ec1c6c6de22dfad5fbf0a987073fdeb706107a",
       "original_sha256": "06e77e0e94ff590b0aef18577f53eda9987c6dc2331ac6e8c185cfd10fe79da6",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
@@ -999,7 +999,8 @@
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-redirector-header-conditions",
+      "evidence": "s13-r582-vrnmpipe-complete.json"
     },
     {
       "path": "src/mvdm-host/inc/vrremote.h",

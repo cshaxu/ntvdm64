@@ -1263,9 +1263,12 @@ DWORD W32RemoteThread(VOID)
         NULL
         );
     if ( !NT_SUCCESS(Status) ) {
+#line 1281
 #if DBG
+#line 1282
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1285
         return( 0 );
     }
 
@@ -1286,9 +1289,12 @@ DWORD W32RemoteThread(VOID)
                 &ThreadInfo.ClientId );
 
     if ( !NT_SUCCESS(Status) ) {
+#line 1305
 #if DBG
+#line 1306
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1309
         return( 0 );
     }
 
@@ -1296,9 +1302,12 @@ DWORD W32RemoteThread(VOID)
 
     Status = NtClose( hThread );
     if ( !NT_SUCCESS(Status) ) {
+#line 1316
 #if DBG
+#line 1317
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1320
         return( 0 );
     }
 
