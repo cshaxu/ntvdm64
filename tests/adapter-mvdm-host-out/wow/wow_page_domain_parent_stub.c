@@ -93,7 +93,7 @@ unsigned long __cdecl mvdm_softpc_wow_page_domain_publish_named_class(
  * parent boundary explicit here so this fixture neither links a second
  * session/CCPU image nor pretends to test page-domain publication.  The real
  * parent export is checked by the formal WOW32 DLL import audit and exercised
- * by wow-page-domain-test.exe. */
+ * by the page-domain case of verify-wow-task-lifecycle.ps1. */
 int __cdecl mvdm_softpc_wow_page_domain_retire_class(unsigned long server)
 {
     UNREFERENCED_PARAMETER(server);

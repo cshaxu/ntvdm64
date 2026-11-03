@@ -1,0 +1,31 @@
+{
+  "x87": [
+    {
+      "path": "build\\t473-s13\\r478-x86-span.json",
+      "sha256": "38cc811c90d17af6ae102ea5e640343dd537f2c589eb9fe842ff61ab58735d4e",
+      "cases": 8
+    },
+    {
+      "path": "build\\t473-s13\\r478-x86-pages.json",
+      "sha256": "13465d2e0ccf511f6bb16edd2aae05941deb117117b9a1c454338e515e4d6204",
+      "cases": 64
+    },
+    {
+      "path": "build\\t473-s13\\r478-x64-ref-span.json",
+      "sha256": "38cc811c90d17af6ae102ea5e640343dd537f2c589eb9fe842ff61ab58735d4e",
+      "cases": 8
+    },
+    {
+      "path": "build\\t473-s13\\r478-x64-ref-pages.json",
+      "sha256": "13465d2e0ccf511f6bb16edd2aae05941deb117117b9a1c454338e515e4d6204",
+      "cases": 64
+    }
+  ],
+  "oem_pif": {
+    "fixture": "build/t473-s13/bfs-softpc-i386/oemuni/oemuni-pif-caller-fixture.exe",
+    "fixture_sha256": "a2ff178f145e208dd4f2ebdff7cff802cbab4f65db2c4443f8ce4cbed8ceb813",
+    "result": "S37_ORIGINAL_PIF_CALLER_OEM_PATH_ERRORS_CLEANUP_OK\nS37_ORIGINAL_PIF_LONG_STARTDIR_REJECT_OK",
+    "exit": 0
+  },
+  "scope": "Selected-object x87 and original OEM PIF caller fixtures; does not prove full guest execution or all NIDDB semantics."
+}

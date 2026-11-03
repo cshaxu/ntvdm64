@@ -1,0 +1,88 @@
+{
+  "scope": "Unselected historical standalone FORCEDOS utility",
+  "files": [
+    {
+      "path": "src/mvdm-host/vdmutils/forcedos/forcedos.c",
+      "sha256": "17b21584c4eeb3f5758af12161261c04e52b7c39aa8286f41cc6ce8d166168b0"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/forcedos/forcedos.h",
+      "sha256": "a76251430396a24da19e110ed5491b3e8464664455003a76fc0b3afd647db1ae"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/forcedos/forcedos.rc",
+      "sha256": "13c0a83ca1450ee35a473f5c9b09209502718d25ff9c13c3a4e60d995ec090de"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/forcedos/makefile",
+      "sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/forcedos/obj/_objects.mac",
+      "sha256": "8cc8fa4e5bb5d8b614e6fe620ca099e449872a42c923d55104e11425f625ac1a"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/forcedos/obj/i386/forcedos.exe",
+      "sha256": "5e93e8b89865d611391b25c6bf451cfa63f07d6643bb422da36542e2e554d320"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/forcedos/obj/i386/forcedos.lib",
+      "sha256": "29806b8114a07fa0548fb5b8a3863e94d745d1d263faaecf6ae6903e69d0fb0a"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/forcedos/obj/i386/forcedos.obj",
+      "sha256": "380e47ce71e2808f560e97ddadb2aaf53c8e825d570e3896249f2c3afcd7f124"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/forcedos/obj/i386/forcedos.pdb",
+      "sha256": "f70add5206a698adb316d99d9b52503ec3bb099041c687848f2539221927ed98"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/forcedos/obj/i386/forcedos.res",
+      "sha256": "9aa5cb74fec63374c5bbb343020d90ac7b6d292b1d901566f56748179ade9c18"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/forcedos/pif.h",
+      "sha256": "11c3b14b529bedf674c7769822c2bc228db535b0869c562d259c321e30062c56"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/forcedos/sources",
+      "sha256": "2cfafb5fdee3a48c5e5613136415d8c39b461519fd72c9da26faac2df2f35d77"
+    }
+  ],
+  "mirror_sources": [
+    {
+      "path": "src/mvdm-host/vdmutils/forcedos/forcedos.c",
+      "current_sha256": "17b21584c4eeb3f5758af12161261c04e52b7c39aa8286f41cc6ce8d166168b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmutils\\forcedos\\forcedos.c",
+      "original_sha256": "27aaa61a441cd754fb8373c3df0ebb3ff49a098926c1aec0151ac9deb5927f44",
+      "pinned_expected_sha256": "27aaa61a441cd754fb8373c3df0ebb3ff49a098926c1aec0151ac9deb5927f44",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/forcedos/forcedos.h",
+      "current_sha256": "a76251430396a24da19e110ed5491b3e8464664455003a76fc0b3afd647db1ae",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmutils\\forcedos\\forcedos.h",
+      "original_sha256": "9383fc6b92e6250a00793bd1ebc608026ae8061db09d5f75e60d7964d5bc4544",
+      "pinned_expected_sha256": "9383fc6b92e6250a00793bd1ebc608026ae8061db09d5f75e60d7964d5bc4544",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/forcedos/pif.h",
+      "current_sha256": "11c3b14b529bedf674c7769822c2bc228db535b0869c562d259c321e30062c56",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmutils\\forcedos\\pif.h",
+      "original_sha256": "6473e80a539b746f5af25c15afb85f2f1498b0a0f429fea861708e78d9e9d266",
+      "pinned_expected_sha256": "6473e80a539b746f5af25c15afb85f2f1498b0a0f429fea861708e78d9e9d266",
+      "original_matches_pinned": true
+    }
+  ],
+  "removed_condition_groups": 8,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r131.zip",
+  "evidence": [
+    "No current product or test graph selects this standalone utility; the prior T276 disposition classifies it as profile-excluded.",
+    "The release guest package assets/winnt.zip has no forcedos.exe; references in DOS command source are historical comments."
+  ],
+  "limitations": [
+    "Does not alter DOS command or launcher behavior."
+  ]
+}

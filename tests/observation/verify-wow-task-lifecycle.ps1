@@ -2,7 +2,7 @@ param(
     [Parameter(Mandatory=$true)][string]$ProviderBuildRoot,
     [Parameter(Mandatory=$true)][string]$WorkerBuildRoot,
     [string]$BuildRoot,
-    [ValidateSet('task-lifecycle','process-retirement','menu-cleanup','menu-resource','native-dispatch-gate','window-procedure','standard-class','class-query','class-procedure','class-lifetime','dialog-lifecycle','init-notification','start-notification','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect','task-order','class-client','window-borrow','window-reclaim','graph-snapshot','thunk-scope','native-creation')] [string]$Case = 'task-lifecycle',
+    [ValidateSet('task-lifecycle','process-retirement','menu-cleanup','menu-resource','page-domain','native-dispatch-gate','window-procedure','standard-class','class-query','class-procedure','class-lifetime','dialog-lifecycle','init-notification','start-notification','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect','task-order','class-client','window-borrow','window-reclaim','graph-snapshot','thunk-scope','native-creation')] [string]$Case = 'task-lifecycle',
     [switch]$InitRollback,
     [switch]$CreationUnwind,
     [switch]$RetirementLockProbe,
@@ -243,7 +243,7 @@ if ($Case -eq 'task-order') { $fixtureName = 'wow_task_order_fixture.c' }
 if ($Case -eq 'thunk-scope') { $fixtureName = 'wow_user_thunk_scope_fixture.c' }
 if ($Case -eq 'native-creation') { $fixtureName = 'wow_native_creation_binding_fixture.c' }
 $fixturePath = Join-Path $repo ('tests/adapter-mvdm-host-out/wow/' + $fixtureName)
-if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource')) { $fixturePath = Join-Path $repo 'tests/mvdm-host/wow_page_domain_fixture.c' }
+if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource','page-domain')) { $fixturePath = Join-Path $repo 'tests/mvdm-host/wow_page_domain_fixture.c' }
 if ($Case -eq 'native-creation') { $fixturePath = Join-Path $repo 'tests/mvdm-host/wow_page_domain_fixture.c' }
 if ($Case -eq 'class-procedure') { $fixturePath = Join-Path $repo 'tests/mvdm-host/wow_page_domain_fixture.c' }
 if ($Case -eq 'standard-class') { $fixturePath = Join-Path $repo 'tests/mvdm-host/wow_page_domain_fixture.c' }
@@ -298,7 +298,17 @@ if ($Case -eq 'native-foreign') { $fixture += ' /DWOW_NATIVE_FOREIGN_FIXTURE' }
 # The thunk fixture supplies original LPFNW32 callbacks. With this profile's
 # FASTCALL definition they inherit /Gz, exactly like the production provider.
 # Compiling those callbacks as /Gd corrupts the stack at the first invocation.
-if ($Case -eq 'thunk-scope') { Invoke-Build ($fixture + ' /we4113 /we4047') }
+if ($Case -eq 'page-domain') {
+    # Use the exact object selected by the worker's original standalone test
+    # edge; the production provider closure below supplies its current owners.
+    Invoke-NinjaTarget $worker 'obj/tests/wow_page_domain_fixture.obj'
+    $workerFixture = Join-Path $worker 'obj/tests/wow_page_domain_fixture.obj'
+    Copy-Item -LiteralPath $workerFixture -Destination (Join-Path $out 'fixture.obj')
+    if ((Get-FileHash -LiteralPath $workerFixture).Hash -ne
+        (Get-FileHash -LiteralPath (Join-Path $out 'fixture.obj')).Hash) {
+        throw 'Worker page-domain fixture copy did not preserve its object bytes'
+    }
+} elseif ($Case -eq 'thunk-scope') { Invoke-Build ($fixture + ' /we4113 /we4047') }
 else { Invoke-Build ($fixture.Replace('/Gz', '/Gd')) }
 $staticImports = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\worker-static-imports.obj" "'+$repo+'\tests\adapter-mvdm-host-out\wow\wow_worker_static_imports.c"')
 if ($staticImports -eq $compile) { throw 'Static import substitution failed' }
@@ -359,7 +369,7 @@ if ($Case -eq 'window-reclaim') {
     Invoke-CompilerCommand $worker $faultCompile
     $parentObjects += Join-Path $out 'page-reclaim.obj'
 }
-if ($Case -eq 'menu-resource') {
+if ($Case -in @('menu-resource','page-domain')) {
     # Namespace controlled W32 inputs and their exact original resource-client
     # copies. Both this executable and ordinary window-borrow keep production
     # callbacks linked, with no archive-order replacement or FORCE:MULTIPLE.
@@ -377,7 +387,7 @@ if ($Case -eq 'menu-resource') {
     Invoke-Build ($thunkFixture + ' /DWOW_MENU_THUNK_BOUND_FIXTURE /I"'+$out+'"')
     $parentObjects += Join-Path $out 'menu-thunk-fixture.obj'
 }
-if ($Case -notin @('window-borrow','window-reclaim','graph-snapshot','menu-resource','native-creation','class-procedure','standard-class','window-procedure')) {
+if ($Case -notin @('window-borrow','window-reclaim','graph-snapshot','menu-resource','page-domain','native-creation','class-procedure','standard-class','window-procedure')) {
 $parentStub = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\parent-stub.obj" "'+$repo+'\tests\adapter-mvdm-host-out\wow\wow_page_domain_parent_stub.c"')
 if ($parentStub -eq $compile) { throw 'Parent-stub substitution failed' }
 if ($Case -in @('class-client','class-query','class-lifetime')) { $parentStub += ' /DWOW_CLASS_CLIENT_FIXTURE' }
@@ -1033,6 +1043,10 @@ if ($Case -eq 'start-notification' -and
     throw 'Start notification fixture exited without its successful completion marker'
 }
 if ($null -eq $fixtureExitCode -or $fixtureExitCode -ne 0) { throw "Task cleanup fixture failed: exit=$fixtureExitCode case=$Case" }
+if ($Case -eq 'page-domain' -and
+    !($fixtureOutput -match '^WOW_PAGE_DOMAIN_LIFECYCLE_OK$')) {
+    throw 'The default page-domain fixture did not complete its lifecycle checks'
+}
 if ($RetirementLockProbe -and !($fixtureOutput -match '^WOW_RETIREMENT_LOCK competitor_excluded=1$')) { throw 'Retirement lock witness missing' }
 if ($Case -in @('task-lifecycle','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect')) {
     if (!($fixtureOutput -match '^WOW_NATIVE_QUEUE_PRECONDITION errors=0 drained=\d+ own_preserved=1$') -or

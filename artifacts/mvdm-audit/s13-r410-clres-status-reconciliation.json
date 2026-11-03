@@ -1,0 +1,10 @@
+{
+  "original": "O:/repos.external/OpenNT/windows/core/ntuser/client/clres.c",
+  "original_condition_line": 1480,
+  "previous_structure_status": "original-excluded-guard-restored",
+  "corrected_structure_status": "pending-original-function-scope",
+  "evidence": "s13-r321-withdraw-clres-misplaced.json",
+  "why": "Prior incorrectly placed guard was removed; its original enclosing CreateIconFromResourceEx is absent in the current subset. Pending arm status was already correct.",
+  "input_queue_sha256": "43dcee60cdef59ab8d58ad12e280b408b8b24c0026b61fa581345431ee9f730c",
+  "output_queue_sha256": "6e97ca0a9da0d25b2bb0c6d1cbc9da521770708b5b20993b3abba7cc5d7df2cc"
+}

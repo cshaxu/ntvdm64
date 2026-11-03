@@ -1,0 +1,21 @@
+{
+  "inputs": {
+    "src/mvdm-host/dos/command/cmdmisc.c": "9d6e609d830e31b2bf69608c9659c410905efc5eecfb33b179577ed42d901468",
+    "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c": "46046ada434ca0ab38023ef2f3c986eac797687b25a332a47cb886d6b994da18",
+    "src/ntvdm-exe/softpc/mvdm_softpc_termination.c": "ca48182ce7cf321aba1892f3f99c09fa5e3acbd2f339fcaa637be86ef23a3a86",
+    "src/mvdm-host/README.md": "ce393184d4ebaa11b5f0c9ff761190846c2c1a83cfedefafcc8592ffbadb68cd"
+  },
+  "findings": [
+    {
+      "id": "MVDM-HOST-DIV-108",
+      "status": "stale source marker; added factual register note",
+      "evidence": "cmdmisc.c still uses original FETCHDWORD/STOREDWORD pointer casts; same sites appear in pinned OpenNT cmdmisc.c. The marker claim of host-resource mapping is not supported by those sites."
+    },
+    {
+      "id": "MVDM-HOST-DIV-303",
+      "status": "previously unregistered observer; added register note",
+      "evidence": "c_seg.c invokes mvdm_softpc_report_wow_code_segment_load; that function checks trace-path and selector environment variables, writes diagnostic fields and restores GetLastError."
+    }
+  ],
+  "limits": "Source inspection only; does not assert x64 COMMAND support, observer concurrency, or complete diff coverage. No product source or guest modified."
+}

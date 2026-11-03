@@ -1,0 +1,1318 @@
+{
+  "source_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r220.zip",
+  "output_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r221.zip",
+  "source_sha256": "ae513d48dc53617d566ebfb4b04c4087f8652d1cc939ab2a441a0408c5662279",
+  "output_sha256": "320578e4785bf245dbc0ade50bbfa3e09f030e67f1a3d7cdaf69eb9401d46003",
+  "depth1_group_coordinates_changed": 261,
+  "depth1_groups_checked": 276,
+  "child_parent_references_adjusted": 51,
+  "changes": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 220,
+      "to_physical": 218
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 232,
+      "to_physical": 230
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 247,
+      "to_physical": 245
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 260,
+      "to_physical": 258
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 270,
+      "to_physical": 268
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 283,
+      "to_physical": 281
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 297,
+      "to_physical": 295
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 324,
+      "to_physical": 322
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 355,
+      "to_physical": 353
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 415,
+      "to_physical": 413
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 513,
+      "to_physical": 511
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 535,
+      "to_physical": 533
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 550,
+      "to_physical": 548
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 556,
+      "to_physical": 554
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 562,
+      "to_physical": 560
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 568,
+      "to_physical": 566
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 574,
+      "to_physical": 572
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 580,
+      "to_physical": 578
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 586,
+      "to_physical": 584
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 592,
+      "to_physical": 590
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 598,
+      "to_physical": 596
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 609,
+      "to_physical": 607
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 715,
+      "to_physical": 713
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 749,
+      "to_physical": 747
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 775,
+      "to_physical": 773
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 790,
+      "to_physical": 788
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 808,
+      "to_physical": 806
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 948,
+      "to_physical": 946
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 969,
+      "to_physical": 967
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "from_splitlines": 982,
+      "to_physical": 980
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "from_splitlines": 766,
+      "to_physical": 765
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "from_splitlines": 1206,
+      "to_physical": 1202
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "from_splitlines": 1955,
+      "to_physical": 1949
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "from_splitlines": 3220,
+      "to_physical": 3203
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "from_splitlines": 3323,
+      "to_physical": 3304
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "from_splitlines": 355,
+      "to_physical": 353
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "from_splitlines": 458,
+      "to_physical": 454
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "from_splitlines": 561,
+      "to_physical": 557
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "from_splitlines": 642,
+      "to_physical": 637
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "from_splitlines": 679,
+      "to_physical": 674
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "from_splitlines": 702,
+      "to_physical": 697
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "from_splitlines": 845,
+      "to_physical": 839
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "from_splitlines": 406,
+      "to_physical": 404
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "from_splitlines": 608,
+      "to_physical": 606
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "from_splitlines": 1161,
+      "to_physical": 1159
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "from_splitlines": 1176,
+      "to_physical": 1174
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "from_splitlines": 1211,
+      "to_physical": 1209
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "from_splitlines": 1870,
+      "to_physical": 1864
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "from_splitlines": 2277,
+      "to_physical": 2267
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "from_splitlines": 2292,
+      "to_physical": 2282
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "from_splitlines": 2502,
+      "to_physical": 2490
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "from_splitlines": 2550,
+      "to_physical": 2538
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "from_splitlines": 3147,
+      "to_physical": 3132
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "from_splitlines": 3409,
+      "to_physical": 3390
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "from_splitlines": 3550,
+      "to_physical": 3530
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "from_splitlines": 3740,
+      "to_physical": 3717
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "from_splitlines": 3765,
+      "to_physical": 3742
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "from_splitlines": 3792,
+      "to_physical": 3769
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "from_splitlines": 3826,
+      "to_physical": 3802
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "from_splitlines": 3851,
+      "to_physical": 3827
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "from_splitlines": 3867,
+      "to_physical": 3843
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrinit.c",
+      "from_splitlines": 185,
+      "to_physical": 182
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmisc.c",
+      "from_splitlines": 72,
+      "to_physical": 71
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmisc.c",
+      "from_splitlines": 106,
+      "to_physical": 104
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 230,
+      "to_physical": 228
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 305,
+      "to_physical": 302
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 380,
+      "to_physical": 376
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 403,
+      "to_physical": 399
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 453,
+      "to_physical": 449
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 465,
+      "to_physical": 461
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 473,
+      "to_physical": 469
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 503,
+      "to_physical": 499
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 556,
+      "to_physical": 551
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 597,
+      "to_physical": 591
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 616,
+      "to_physical": 610
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 630,
+      "to_physical": 624
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 653,
+      "to_physical": 647
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 707,
+      "to_physical": 700
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 713,
+      "to_physical": 706
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 736,
+      "to_physical": 729
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 753,
+      "to_physical": 746
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 766,
+      "to_physical": 759
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 772,
+      "to_physical": 765
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 814,
+      "to_physical": 806
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 858,
+      "to_physical": 849
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 878,
+      "to_physical": 869
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 896,
+      "to_physical": 887
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 905,
+      "to_physical": 896
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 952,
+      "to_physical": 942
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 1057,
+      "to_physical": 1045
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 1104,
+      "to_physical": 1091
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 1150,
+      "to_physical": 1136
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 1188,
+      "to_physical": 1173
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 1201,
+      "to_physical": 1186
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 1207,
+      "to_physical": 1192
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 1324,
+      "to_physical": 1308
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 1336,
+      "to_physical": 1320
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 1380,
+      "to_physical": 1363
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "from_splitlines": 1386,
+      "to_physical": 1369
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 200,
+      "to_physical": 199
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 254,
+      "to_physical": 253
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 288,
+      "to_physical": 286
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 299,
+      "to_physical": 297
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 313,
+      "to_physical": 311
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 347,
+      "to_physical": 344
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 351,
+      "to_physical": 348
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 384,
+      "to_physical": 380
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 388,
+      "to_physical": 384
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 429,
+      "to_physical": 424
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 491,
+      "to_physical": 485
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 495,
+      "to_physical": 489
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 542,
+      "to_physical": 535
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 566,
+      "to_physical": 559
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 602,
+      "to_physical": 594
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 659,
+      "to_physical": 650
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 1075,
+      "to_physical": 1066
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 1225,
+      "to_physical": 1214
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 1289,
+      "to_physical": 1278
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 1303,
+      "to_physical": 1292
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 1368,
+      "to_physical": 1357
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 1433,
+      "to_physical": 1421
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 1493,
+      "to_physical": 1481
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 1567,
+      "to_physical": 1554
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 1620,
+      "to_physical": 1606
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 1701,
+      "to_physical": 1687
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 1753,
+      "to_physical": 1738
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 1833,
+      "to_physical": 1817
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 1939,
+      "to_physical": 1922
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 1958,
+      "to_physical": 1941
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 1964,
+      "to_physical": 1947
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 1970,
+      "to_physical": 1953
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 1976,
+      "to_physical": 1959
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 1983,
+      "to_physical": 1966
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 2007,
+      "to_physical": 1990
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 2085,
+      "to_physical": 2067
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 2106,
+      "to_physical": 2088
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 2121,
+      "to_physical": 2103
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 2137,
+      "to_physical": 2119
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 2164,
+      "to_physical": 2146
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 2524,
+      "to_physical": 2506
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 2537,
+      "to_physical": 2519
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 2568,
+      "to_physical": 2550
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 2574,
+      "to_physical": 2556
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 2602,
+      "to_physical": 2583
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 2606,
+      "to_physical": 2587
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 2757,
+      "to_physical": 2735
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 2804,
+      "to_physical": 2782
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 2857,
+      "to_physical": 2835
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 2871,
+      "to_physical": 2849
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 2918,
+      "to_physical": 2896
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 2932,
+      "to_physical": 2910
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 3040,
+      "to_physical": 3017
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 3141,
+      "to_physical": 3118
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 3156,
+      "to_physical": 3133
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 3227,
+      "to_physical": 3203
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 3323,
+      "to_physical": 3298
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 3329,
+      "to_physical": 3304
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 3358,
+      "to_physical": 3333
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 3366,
+      "to_physical": 3341
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 3609,
+      "to_physical": 3584
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "from_splitlines": 3673,
+      "to_physical": 3647
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 249,
+      "to_physical": 248
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 312,
+      "to_physical": 310
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 381,
+      "to_physical": 379
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 388,
+      "to_physical": 386
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 439,
+      "to_physical": 436
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 522,
+      "to_physical": 518
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 551,
+      "to_physical": 547
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 605,
+      "to_physical": 600
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 653,
+      "to_physical": 648
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 660,
+      "to_physical": 655
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 725,
+      "to_physical": 719
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 765,
+      "to_physical": 759
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 787,
+      "to_physical": 781
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 808,
+      "to_physical": 802
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 818,
+      "to_physical": 812
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 885,
+      "to_physical": 878
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 900,
+      "to_physical": 893
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 908,
+      "to_physical": 901
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 956,
+      "to_physical": 948
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 967,
+      "to_physical": 959
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1020,
+      "to_physical": 1011
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1105,
+      "to_physical": 1095
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1265,
+      "to_physical": 1253
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1276,
+      "to_physical": 1264
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1295,
+      "to_physical": 1283
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1320,
+      "to_physical": 1308
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1338,
+      "to_physical": 1326
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1363,
+      "to_physical": 1351
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1393,
+      "to_physical": 1381
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1416,
+      "to_physical": 1404
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1428,
+      "to_physical": 1416
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1448,
+      "to_physical": 1436
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1459,
+      "to_physical": 1447
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1466,
+      "to_physical": 1454
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1506,
+      "to_physical": 1493
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1520,
+      "to_physical": 1507
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1556,
+      "to_physical": 1543
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1595,
+      "to_physical": 1581
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1678,
+      "to_physical": 1662
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1700,
+      "to_physical": 1684
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1709,
+      "to_physical": 1693
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1719,
+      "to_physical": 1703
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1725,
+      "to_physical": 1709
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1731,
+      "to_physical": 1715
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1768,
+      "to_physical": 1751
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1781,
+      "to_physical": 1764
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1820,
+      "to_physical": 1802
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1833,
+      "to_physical": 1815
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1884,
+      "to_physical": 1865
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1911,
+      "to_physical": 1892
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1923,
+      "to_physical": 1904
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1942,
+      "to_physical": 1923
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 1980,
+      "to_physical": 1960
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 2037,
+      "to_physical": 2016
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 2066,
+      "to_physical": 2045
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 2104,
+      "to_physical": 2082
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 2116,
+      "to_physical": 2094
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 2159,
+      "to_physical": 2136
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 2165,
+      "to_physical": 2142
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 2178,
+      "to_physical": 2155
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 2218,
+      "to_physical": 2194
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 2267,
+      "to_physical": 2242
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 2309,
+      "to_physical": 2284
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 2371,
+      "to_physical": 2346
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 2379,
+      "to_physical": 2354
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 2431,
+      "to_physical": 2405
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 2478,
+      "to_physical": 2452
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 2489,
+      "to_physical": 2463
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 2545,
+      "to_physical": 2518
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 2565,
+      "to_physical": 2538
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 2582,
+      "to_physical": 2555
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 2599,
+      "to_physical": 2572
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 2608,
+      "to_physical": 2581
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 2744,
+      "to_physical": 2715
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 2823,
+      "to_physical": 2793
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 2850,
+      "to_physical": 2820
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 2930,
+      "to_physical": 2898
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 2945,
+      "to_physical": 2913
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 2957,
+      "to_physical": 2925
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "from_splitlines": 3043,
+      "to_physical": 3008
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrputil.c",
+      "from_splitlines": 74,
+      "to_physical": 73
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "from_splitlines": 507,
+      "to_physical": 505
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "from_splitlines": 518,
+      "to_physical": 516
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "from_splitlines": 690,
+      "to_physical": 688
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "from_splitlines": 707,
+      "to_physical": 705
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "from_splitlines": 715,
+      "to_physical": 713
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "from_splitlines": 739,
+      "to_physical": 737
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "from_splitlines": 1105,
+      "to_physical": 1100
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "from_splitlines": 1419,
+      "to_physical": 1411
+    },
+    {
+      "path": "src/mvdm-host/wow32/mapembed.c",
+      "from_splitlines": 81,
+      "to_physical": 80
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcommdlg.c",
+      "from_splitlines": 484,
+      "to_physical": 481
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.c",
+      "from_splitlines": 178,
+      "to_physical": 176
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+      "from_splitlines": 197,
+      "to_physical": 196
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "from_splitlines": 61,
+      "to_physical": 60
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "from_splitlines": 197,
+      "to_physical": 194
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "from_splitlines": 204,
+      "to_physical": 200
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "from_splitlines": 867,
+      "to_physical": 863
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "from_splitlines": 889,
+      "to_physical": 885
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "from_splitlines": 1020,
+      "to_physical": 1016
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+      "from_splitlines": 145,
+      "to_physical": 142
+    }
+  ],
+  "scope": "only current depth-one group/arm coordinates and child references to those groups; original and deeper-group own coordinates are unchanged",
+  "classification_changes": 0
+}

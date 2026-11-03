@@ -478,9 +478,12 @@ Routine Description:
         goto SilentError;
     }
 
+#line 672
 #if DBG
+#line 673
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 686
 
     // This should be removed when all thunk functions appropiately fill these
     // in, till then we must have these 3 lines before calling thunk functions !

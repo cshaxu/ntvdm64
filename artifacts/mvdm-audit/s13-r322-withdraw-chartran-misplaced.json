@@ -1,0 +1,14 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+  "before_sha256": "ecbc01f4bcbeb0ab2aa7b667811398ef5cd5df662807b13cdea6cafc2b41e62e",
+  "after_sha256": "296df54fe8a6bb05f5b9af52a0c04c8bd08d1f7e933e1309e9db34dc05a06c39",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+  "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+  "original_guard_line": 351,
+  "original_function": "RtlWCSMessageWParamCharToMB",
+  "condition": "FE_SB",
+  "original_function_status": "omitted from current subset",
+  "selected_macro": "#define NWCH 2 retained, with its original #line 363",
+  "original_structure": "pending",
+  "validation": "pending"
+}

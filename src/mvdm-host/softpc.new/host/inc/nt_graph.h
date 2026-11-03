@@ -74,9 +74,12 @@ typedef struct
     BOOL        Focus;                    /* Window has Input Focus */
     HANDLE      FocusEvent;               /* Focus has changed event */
     HANDLE      ActiveOutputBufferHandle; /* The current Console screen buffer handle. */
+#line 77
 #ifdef X86GFX
+#line 78
 #error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register.
 #endif
+#line 80
     WORD	ScreenSizeX;
     WORD	ScreenSizeY;
     HANDLE	AltOutputHandle;

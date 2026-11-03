@@ -738,9 +738,12 @@ ULONG FASTCALL WK32GetCurrentDate(PVDMFRAME pFrame)
 }
 
 
+#line 740
 #if 0
+#line 741
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#line 771
 
 /* WK32DeviceIOCTL - Emulate misc. DOS IOCTLs
  *

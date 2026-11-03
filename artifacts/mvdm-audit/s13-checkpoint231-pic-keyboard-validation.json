@@ -1,0 +1,26 @@
+{
+  "results": {
+    "keyboard-pic": {
+      "profile": "x86 /MT NTVDM CCPU40",
+      "elapsed_ms": 258,
+      "executable_sha256": "53726497D920B35506134B1ED61FDF7477CEB05D00DF42E55C66232B865FBC41",
+      "keyba_sha256": "5E3FF6F5FF8346D38B6E1AA3F96F8A6BCE42871368C932A9A9E0BB649B4F9DE0",
+      "ica_sha256": "75122E0BF4E18195896DBF98AB125ED3A867E5264B2A02C5AA9C30D6EC2E0902",
+      "controller_reply": "C0 returns input port; 20, AA, AB, D0 and E0 return their response bytes",
+      "scope": "Actual controller/PIC; normal and early EOI slot order, controlled host callbacks, no BIOS ISR/timer acceptance"
+    },
+    "pic-reset": {
+      "profile": "x86 /MT NTVDM CCPU40",
+      "elapsed_ms": 258,
+      "executable_sha256": "B495325C101D146FB6F5933D3C184BC5DD695ADB373BD3F9F0792A76D7235548",
+      "ica_sha256": "75122E0BF4E18195896DBF98AB125ED3A867E5264B2A02C5AA9C30D6EC2E0902",
+      "scope": "actual production PIC reset; controlled EOI callback boundary; no guest mutation"
+    }
+  },
+  "controls": [
+    "86 keyboard/PIC assertions",
+    "24 PIC reset assertions"
+  ],
+  "ten_staged_inputs_match_current_linked_images": true,
+  "limits": "controlled host callbacks and seams; no separate real PIC reset guest run in this checkpoint"
+}

@@ -1,0 +1,10 @@
+{
+  "package": "build\\t473-s13\\r477-phase1-package",
+  "test": "tests/observation/verify-wow-write-lifecycle.ps1",
+  "result": "PASS WRITE normal close followed by clean restart and second normal close",
+  "probe_output": "PASS WRITE round=1 close=observed exit=0\nPASS WRITE round=2 close=observed exit=0",
+  "input_count": 4,
+  "input_hashes_match": true,
+  "inputs_sha256": "6d2824473b1cd11948f8decbd8a30b64dc4e485441186c3e12bf2d17cc5056d0",
+  "limits": "Two normal start/close rounds. Editing, saving, dialog interactions and other WRITE features not asserted."
+}

@@ -1,0 +1,35 @@
+{
+  "full_gate_candidate": "build\\t473-s13\\r386-phase1-package\\system32",
+  "current_candidate": "build\\t473-s13\\r463-phase1-package\\system32",
+  "files": 83,
+  "changes": [
+    {
+      "file": "ntvdm.exe",
+      "sizes": [
+        2103808,
+        2103808
+      ],
+      "count": 4,
+      "offsets": [
+        288,
+        289,
+        1698412,
+        1698413
+      ]
+    },
+    {
+      "file": "WOW32.DLL",
+      "sizes": [
+        712192,
+        712192
+      ],
+      "count": 4,
+      "offsets": [
+        280,
+        281,
+        625412,
+        625413
+      ]
+    }
+  ]
+}

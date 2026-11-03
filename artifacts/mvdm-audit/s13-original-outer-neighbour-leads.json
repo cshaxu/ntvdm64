@@ -1,0 +1,403 @@
+{
+  "leads": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+      "original_line": 387,
+      "original_end": 396,
+      "pre": [
+        385,
+        "LockedPMStackCount = 0;"
+      ],
+      "post": [
+        400,
+        "BeginUseLockedPMStack("
+      ],
+      "current_pre": 378,
+      "current_post": 429,
+      "arms": [
+        [
+          "ifdef",
+          "i386"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+      "original_line": 859,
+      "original_end": 977,
+      "pre": [
+        856,
+        "DBGTRACE(DPMI_INT_IRET32, 0, 0, 0);"
+      ],
+      "post": [
+        980,
+        "DpmiFaultHandlerIret16("
+      ],
+      "current_pre": 919,
+      "current_post": 1063,
+      "arms": [
+        [
+          "ifndef",
+          "i386"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_line": 226,
+      "original_end": 230,
+      "pre": [
+        225,
+        "LOCAL IU16 cpu_hw_interrupt_number;"
+      ],
+      "post": [
+        233,
+        "GLOBAL IBOOL took_relative_jump;"
+      ],
+      "current_pre": 228,
+      "current_post": 241,
+      "arms": [
+        [
+          "if",
+          "defined(SFELLOW)"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_event.c",
+      "original_line": 1493,
+      "original_end": 1495,
+      "pre": [
+        1492,
+        "CntrlHandlerState |= CNTRL_VDMBLOCKED;"
+      ],
+      "post": [
+        1501,
+        "void nt_resume_event_thread(void)"
+      ],
+      "current_pre": 1573,
+      "current_post": 1586,
+      "arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_line": 77,
+      "original_end": 79,
+      "pre": [
+        76,
+        "GLOBAL BOOL blocked_in_gfx_mode = FALSE;  /* need to force text mode? */"
+      ],
+      "post": [
+        86,
+        "GLOBAL UTINY tempbabymode[] ="
+      ],
+      "current_pre": 76,
+      "current_post": 86,
+      "arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_msscs.c",
+      "original_line": 123,
+      "original_end": 127,
+      "pre": [
+        121,
+        "FIXED_NTVDMSTATE_SIZE"
+      ],
+      "post": [
+        128,
+        "sas_storedw((ULONG)FIXED_NTVDMSTATE_LINEAR,fVirtualInt);"
+      ],
+      "current_pre": 130,
+      "current_post": 154,
+      "arms": [
+        [
+          "ifndef",
+          "i386"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\win32\\client\\vdm.c",
+      "original_line": 205,
+      "original_end": 208,
+      "pre": [
+        204,
+        "case STATUS_INVALID_IMAGE_NE_FORMAT:"
+      ],
+      "post": [
+        210,
+        "case STATUS_INVALID_IMAGE_PROTECT:"
+      ],
+      "current_pre": 2210,
+      "current_post": 2216,
+      "arms": [
+        [
+          "ifdef",
+          "_X86_"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\win32\\client\\vdm.c",
+      "original_line": 259,
+      "original_end": 271,
+      "pre": [
+        257,
+        "RtlImageNtHeader(NtCurrentPeb()->ImageBaseAddress)->FileHeader.Machine) {"
+      ],
+      "post": [
+        274,
+        "if ( ImageInformation.SubSystemType != IMAGE_SUBSYSTEM_WINDOWS_GUI &&"
+      ],
+      "current_pre": 2263,
+      "current_post": 2273,
+      "arms": [
+        [
+          "ifdef",
+          "_MIPS_"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgmgr.c",
+      "original_line": 1056,
+      "original_end": 1065,
+      "pre": [
+        1051,
+        "if (!PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {"
+      ],
+      "post": [
+        1067,
+        "NtUserShowWindow(hwnd, SHOW_OPENWINDOW);"
+      ],
+      "current_pre": 87,
+      "current_post": 98,
+      "arms": [
+        [
+          "ifdef",
+          "SYSMODALWINDOWS"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgmgr2.c",
+      "original_line": 221,
+      "original_end": 234,
+      "pre": [
+        220,
+        "switch (lpmsg->message) {"
+      ],
+      "post": [
+        235,
+        "case WM_CHARTOITEM:"
+      ],
+      "current_pre": 244,
+      "current_post": 251,
+      "arms": [
+        [
+          "ifdef",
+          "FE_SB"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgmgr2.c",
+      "original_line": 240,
+      "original_end": 243,
+      "pre": [
+        238,
+        "case WM_SYSDEADCHAR:"
+      ],
+      "post": [
+        245,
+        "RtlMBMessageWParamCharToWCS(lpmsg->message, (PDWORD)&lpmsg->wParam);"
+      ],
+      "current_pre": 254,
+      "current_post": 260,
+      "arms": [
+        [
+          "ifdef",
+          "FE_IME"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "original_line": 953,
+      "original_end": 955,
+      "pre": [
+        951,
+        "(!TestWindowProcess(pwnd) || ((PLBWND)pwnd)->pLBIV->fInitialized)) {"
+      ],
+      "post": [
+        957,
+        "dwNewLong &= ~(LBS_OWNERDRAWFIXED |"
+      ],
+      "current_pre": 212,
+      "current_post": 218,
+      "arms": [
+        [
+          "ifdef",
+          "DEBUG"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\rtlinit.c",
+      "original_line": 349,
+      "original_end": 351,
+      "pre": [
+        345,
+        "void FreeLookasideEntry("
+      ],
+      "post": [
+        356,
+        "if ( (PVOID)pEntry >= pla->LookasideBase && (PVOID)pEntry < pla->LookasideBounds ) {"
+      ],
+      "current_pre": 211,
+      "current_post": 222,
+      "arms": [
+        [
+          "if",
+          "DBG"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+      "original_line": 337,
+      "original_end": 340,
+      "pre": [
+        330,
+        "WORD CodePage = THREAD_CODEPAGE();"
+      ],
+      "post": [
+        342,
+        "case WM_CHARTOITEM:"
+      ],
+      "current_pre": 35,
+      "current_post": 47,
+      "arms": [
+        [
+          "ifdef",
+          "FE_IME"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+      "original_line": 351,
+      "original_end": 364,
+      "pre": [
+        346,
+        "case WM_SYSDEADCHAR:"
+      ],
+      "post": [
+        366,
+        "if (IS_ACP(CodePage)) {"
+      ],
+      "current_pre": 51,
+      "current_post": 56,
+      "arms": [
+        [
+          "ifdef",
+          "FE_SB"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+      "original_line": 446,
+      "original_end": 449,
+      "pre": [
+        442,
+        "BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)"
+      ],
+      "post": [
+        450,
+        "WORD CodePage = THREAD_CODEPAGE();"
+      ],
+      "current_pre": 28,
+      "current_post": 35,
+      "arms": [
+        [
+          "ifdef",
+          "FE_SB"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+      "original_line": 457,
+      "original_end": 498,
+      "pre": [
+        450,
+        "WORD CodePage = THREAD_CODEPAGE();"
+      ],
+      "post": [
+        499,
+        "case WM_CHARTOITEM:"
+      ],
+      "current_pre": 35,
+      "current_post": 47,
+      "arms": [
+        [
+          "ifdef",
+          "FE_SB"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    }
+  ],
+  "scope": "candidate neighboring lines outside outer branches only; unverified and not a classification"
+}

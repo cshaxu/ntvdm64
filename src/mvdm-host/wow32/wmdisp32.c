@@ -33,7 +33,7 @@ extern WORD msgFINDREPLACE;  // see WCOMMDLG.C
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
 #error Excluded unsupported WOW profiling configuration
 #endif
-#line 36
+#line 31
 
 LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
     VPWNDPROC vpWndProc16,  // Next WndProc to call or NULL if default
@@ -52,7 +52,7 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 54
+#line 45
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
 #error Excluded unsupported WOW profiling configuration
@@ -234,14 +234,14 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 237
+#line 220
 
     if (fMessageNeedsThunking) {
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
 #error Excluded unsupported WOW profiling configuration
 #endif
-#line 245
+#line 228
 
         wm32mpex.fThunk = UNTHUNKMSG;
         (wm32mpex.lpfnM32)(&wm32mpex);
@@ -249,7 +249,7 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
 #error Excluded unsupported WOW profiling configuration
 #endif
-#line 253
+#line 236
 
     }
 
@@ -378,9 +378,12 @@ SilentError:
 BOOL FASTCALL WM32NoThunking(LPWM32MSGPARAMEX lpwm32mpex)
 {
 
+#line 358
 #if 0
+#line 359
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#line 382
 
     //
     // Return FALSE, so if for some reason this routine gets used
@@ -393,7 +396,7 @@ BOOL FASTCALL WM32NoThunking(LPWM32MSGPARAMEX lpwm32mpex)
 #ifdef DEBUG         // see the macro WM32UNDOCUMENTED
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 413
+#line 411
 
 // This function thunks the messages,
 //

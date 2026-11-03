@@ -231,3 +231,20 @@ PPCLS GetClassPtr(
     return ppcls;
 }
 #endif
+
+
+#line 1070
+#ifdef DBG
+#line 1071
+#error Unsupported DBG original branch
+#endif
+#line 1075
+
+#line 375
+#ifdef FE_SB // InternalRegisterClassEx()
+#line 376
+#error Unsupported FE_SB original branch
+#else
+#line 378
+#endif // FE_SB
+#line 380

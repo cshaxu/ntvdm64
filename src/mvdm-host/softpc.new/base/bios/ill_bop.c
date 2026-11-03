@@ -49,9 +49,12 @@
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif	/* PROD */
 
+#line 58
 #if defined(NTVDM) && defined(MONITOR)
+#line 59
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
+#line 61
 
 void illegal_bop()
 {

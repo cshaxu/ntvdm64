@@ -1,0 +1,26 @@
+{
+  "current": "src/mvdm-host/softpc.new/base/comms/com.c",
+  "current_sha256": "106b2ac1f9ba81fb9c735d894176a7f202aeb703f74c8c10965f43d0c5d7e3ed",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+  "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+  "original_guard_lines": [
+    2590,
+    2593
+  ],
+  "current_guard_lines": [
+    2117,
+    2121
+  ],
+  "controls": "s13-com-adaptor-guard-controls.json",
+  "build": "cached MSVC x86 NTVDM passed",
+  "comparison": {
+    "previous_sha256": "38f3b26011b1d0630627fa93bd696d915225b60bcf1330f5a94d5b7bc82f54d3",
+    "current_sha256": "16b93f524eabd10c796026f02c89a67884c080c1f332d3117b294b1617bd8752",
+    "differing_offsets": [
+      288,
+      289,
+      1698412,
+      1698413
+    ]
+  }
+}

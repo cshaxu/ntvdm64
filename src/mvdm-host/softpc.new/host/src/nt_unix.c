@@ -92,9 +92,12 @@ void host_idle_init(void)
 
     IdleEvent = CreateEvent((LPSECURITY_ATTRIBUTES) NULL, FALSE, FALSE, NULL);
 
+#line 96
 #ifndef PROD
+#line 97
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 100
 }
 
 /*****************************************************************************
@@ -321,10 +324,12 @@ memset(addr, val, size);
 
 
 
+#line 317
 #ifdef NO_LONGER_USED
+#line 318
 #error Unsupported excluded original configuration
 #endif
-#line 350
+#line 343
 
 /*
  * Host-specific equivalent of the Unix function time().

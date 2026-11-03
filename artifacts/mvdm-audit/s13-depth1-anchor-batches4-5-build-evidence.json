@@ -1,0 +1,34 @@
+[
+  {
+    "before": "anchor-batch3-ntvdm-stamped.exe",
+    "after": "anchor-batch4-ntvdm-stamped.exe",
+    "before_sha256": "e31dcd73f8b0162ca99f0d38f7a9728c78a92d93af4bfb5348d49927065eb95b",
+    "after_sha256": "576aa767feaac5c485670a62eb9617af4b9d4f0fa32bd22af77ac4db66fef036",
+    "byte_diff_offsets": [
+      288,
+      1698412
+    ]
+  },
+  {
+    "before": "probe-anchor-wow32-stamped.dll",
+    "after": "anchor-batch4-wow32-stamped.dll",
+    "before_sha256": "1bf07042f7a94028c22c80c4c819218928b0bb5ab8c72f68a34c6cbd92db79eb",
+    "after_sha256": "b8846cb222cfb513310c22349df54c7ab3783469ff86ac493bf996e8148e6a95",
+    "byte_diff_offsets": [
+      280,
+      281,
+      625412,
+      625413
+    ]
+  },
+  {
+    "before": "anchor-batch4-wow32-stamped.dll",
+    "after": "anchor-batch5-wow32-stamped.dll",
+    "before_sha256": "b8846cb222cfb513310c22349df54c7ab3783469ff86ac493bf996e8148e6a95",
+    "after_sha256": "3e0c2e43f7b3e3863390ccc8a66dbb97d6843fa684ac1080ef1ef18ea934d847",
+    "byte_diff_offsets": [
+      280,
+      625412
+    ]
+  }
+]

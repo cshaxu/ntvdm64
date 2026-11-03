@@ -71,7 +71,7 @@ if ($Contract -eq 'vdd') {
     $extraObjects = @(Join-Path $WorkerBuild 'obj/disks/gfi_mpty.obj')
     $extraSources = @(Join-Path $repo 'src/mvdm-host/softpc.new/base/disks/gfi_mpty.c')
     $negativeDefine = 'MVDM_GFI_EXPECT_TABLE_BYTES'
-    $extraFlags = '/DNTVDM /DSPC386 /DANSI /I"' + (Join-Path $repo 'src/mvdm-host/softpc.new/host/inc') + '" /I"' + (Join-Path $repo 'src/mvdm-host/softpc.new/base/inc') + '" '
+    $extraFlags = '/DNTVDM /DSPC386 /DANSI /DPROD /I"' + (Join-Path $repo 'src/mvdm-host/softpc.new/host/inc') + '" /I"' + (Join-Path $repo 'src/mvdm-host/softpc.new/base/inc') + '" '
 } else {
     $original = Join-Path $repo 'src/mvdm-host/softpc.new/base/support/ios.c'
     $headers = @('src/mvdm-host/softpc.new/host/inc/insignia.h','src/mvdm-host/softpc.new/base/inc/base_def.h','src/mvdm-host/softpc.new/base/inc/ios.h','src/mvdm-host/softpc.new/base/ccpu386/in.h','src/mvdm-host/softpc.new/base/ccpu386/out.h') | ForEach-Object { Join-Path $repo $_ }
@@ -101,6 +101,7 @@ try {
     $linkedObjects = (@($object) + $extraObjects | ForEach-Object { '"' + $_ + '"' }) -join ' '
     $command = '/d /s /c ""' + $driver + '" cl.exe /nologo /W4 /MT /Od /D_CRT_SECURE_NO_WARNINGS ' + $extraFlags + '"' + $source + '" ' + $linkedObjects + ' /Fo:"' + $fixtureObject + '" /Fe:"' + $exe + '" /link kernel32.lib' + $extraLibraries + '"'
     $build = Start-Process cmd.exe -ArgumentList $command -WorkingDirectory $repo -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $BuildRoot 'build.stdout.txt') -RedirectStandardError (Join-Path $BuildRoot 'build.stderr.txt')
+    $null = $build.Handle
     $receipt.runs += @{ kind = 'build'; pid = $build.Id; command = $command }
     $receipt | ConvertTo-Json -Depth 8 | Set-Content -Encoding utf8 (Join-Path $BuildRoot 'result.json')
     $build.WaitForExit()
@@ -108,12 +109,14 @@ try {
     if ($build.ExitCode -ne 0) { throw "Fixture build failed: $($build.ExitCode)" }
     $negativeCommand = '/d /s /c ""' + $driver + '" cl.exe /nologo /MT /c /D' + $negativeDefine + '=' + $negativeSize + ' ' + $extraFlags + '"' + $source + '" /Fo:"' + (Join-Path $BuildRoot 'negative-abi.obj') + '""'
     $negative = Start-Process cmd.exe -ArgumentList $negativeCommand -WorkingDirectory $repo -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $BuildRoot 'negative-abi.stdout.txt') -RedirectStandardError (Join-Path $BuildRoot 'negative-abi.stderr.txt')
+    $null = $negative.Handle
     $receipt.runs += @{ kind = 'negative-abi-compile'; pid = $negative.Id; command = $negativeCommand }
     $receipt | ConvertTo-Json -Depth 8 | Set-Content -Encoding utf8 (Join-Path $BuildRoot 'result.json')
     $negative.WaitForExit()
     $receipt.runs[-1].exit = $negative.ExitCode
     if ($negative.ExitCode -eq 0 -or (Get-Content -Raw (Join-Path $BuildRoot 'negative-abi.stdout.txt')) -notmatch 'C2118') { throw 'Wrong-width ABI negative did not fail at the declared type check' }
     $run = Start-Process -FilePath $exe -WorkingDirectory $BuildRoot -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $BuildRoot 'run.stdout.txt') -RedirectStandardError (Join-Path $BuildRoot 'run.stderr.txt')
+    $null = $run.Handle
     $receipt.runs += @{ kind = 'fixture'; pid = $run.Id; diagnostic_budget_ms = 30000 }
     $receipt | ConvertTo-Json -Depth 8 | Set-Content -Encoding utf8 (Join-Path $BuildRoot 'result.json')
     if (-not $run.WaitForExit(30000)) { $run.Kill(); $run.WaitForExit(); throw 'Owned fixture exceeded diagnostic budget' }
@@ -128,6 +131,18 @@ try {
             throw 'NIDDB three-VM slot-reuse contract was not completed'
         }
         $receipt.three_vm_reuse = 'pass'
+        foreach ($mode in @('stale','out-of-range','active-stale')) {
+            $invalid = Start-Process -FilePath $exe -ArgumentList "--$mode" -WorkingDirectory $BuildRoot -WindowStyle Hidden -PassThru `
+                -RedirectStandardOutput (Join-Path $BuildRoot "$mode.stdout.txt") -RedirectStandardError (Join-Path $BuildRoot "$mode.stderr.txt")
+            $null = $invalid.Handle
+            $receipt.runs += @{ kind = "invalid-$mode"; pid = $invalid.Id }
+            if (!$invalid.WaitForExit(30000)) { $invalid.Kill(); $invalid.WaitForExit(); throw "NIDDB $mode control exceeded diagnostic budget" }
+            $invalid.WaitForExit()
+            $code = [BitConverter]::ToUInt32([BitConverter]::GetBytes([int]$invalid.ExitCode),0)
+            $receipt.runs[-1].exit = ('0x{0:X8}' -f $code)
+            if ($code -ne [uint32]3221226528) { throw "NIDDB $mode did not fail through its explicit test seam: $($receipt.runs[-1].exit)" }
+        }
+        $receipt.invalid_identity_controls = 'pass (fixture termination seam)'
     }
     foreach ($inputRecord in $receipt.inputs) {
         if ((Get-FileHash -LiteralPath $inputRecord.path -Algorithm SHA256).Hash -ne $inputRecord.sha256) { throw "Input changed during fixture: $($inputRecord.path)" }

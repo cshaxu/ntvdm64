@@ -1,6 +1,0 @@
-LIBRARY VDD
-
-DESCRIPTION 'Sample ISV VDD for NT-MVDM'
-
-EXPORTS
-        VDDInitialize

@@ -38,7 +38,9 @@ MODNAME(wres16.c);
 
 PRES presFirst;     // pointer to first RES entry
 
+#line 41
 #ifdef DEBUG
+#line 42
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 78

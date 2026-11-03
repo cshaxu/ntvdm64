@@ -1,0 +1,57 @@
+[
+  {
+    "path": "src/non-mvdm/base/ntos/rtl/time.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\ntos\\rtl\\time.c",
+    "original_line": 50,
+    "current_line": 50,
+    "kind": "if",
+    "expression": "defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)",
+    "status": "newly-excluded",
+    "original_sha256": "ac422e072432aff83c17b03c2127a80d067e801170eba9216ab86d2520767d40",
+    "current_sha256": "0f2f0270c5343db8f4bd5db9074199e8c27fbea7c45cbb373e69cac1259fa6f3"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\usercli.h",
+    "original_line": 2307,
+    "current_line": 1083,
+    "kind": "if",
+    "expression": "DBG",
+    "status": "newly-excluded",
+    "original_sha256": "11edc7c5b3f32ce40114bd0c4026e43381f2b131f036506376e23c8eb1db5bba",
+    "current_sha256": "771fc0fbcce586991c814a40450ce15931ebc13c1d83ee3695b1b4117f9c738f"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\usercli.h",
+    "original_line": 2320,
+    "current_line": 1090,
+    "kind": "if",
+    "expression": "DBG",
+    "status": "newly-excluded",
+    "original_sha256": "11edc7c5b3f32ce40114bd0c4026e43381f2b131f036506376e23c8eb1db5bba",
+    "current_sha256": "771fc0fbcce586991c814a40450ce15931ebc13c1d83ee3695b1b4117f9c738f"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\usercli.h",
+    "original_line": 2342,
+    "current_line": 1097,
+    "kind": "if",
+    "expression": "HANDLE_FIXUP",
+    "status": "newly-excluded",
+    "original_sha256": "11edc7c5b3f32ce40114bd0c4026e43381f2b131f036506376e23c8eb1db5bba",
+    "current_sha256": "771fc0fbcce586991c814a40450ce15931ebc13c1d83ee3695b1b4117f9c738f"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\usercli.h",
+    "original_line": 2358,
+    "current_line": 1107,
+    "kind": "if",
+    "expression": "HANDLE_FIXUP",
+    "status": "newly-excluded",
+    "original_sha256": "11edc7c5b3f32ce40114bd0c4026e43381f2b131f036506376e23c8eb1db5bba",
+    "current_sha256": "771fc0fbcce586991c814a40450ce15931ebc13c1d83ee3695b1b4117f9c738f"
+  }
+]

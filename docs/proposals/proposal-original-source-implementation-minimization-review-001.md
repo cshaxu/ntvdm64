@@ -18,7 +18,7 @@ only at admission through CURRENT.md. It does not interrupt or replace the
 active package. The owner's queue request authorizes this proposal, not its
 implementation before admission.
 
-This third queued candidate is an independent audit after
+This candidate is an independent audit after
 [implementation of the existing DOS16 and WOW32 inventories](proposal-mvdm-whole-closure-recovery-001.md)
 and [mirror-diff review](proposal-unconnected-mirror-diff-cleanup-001.md).
 All three serve the same goals: maximize justified original integration while

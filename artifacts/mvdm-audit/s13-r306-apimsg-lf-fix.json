@@ -1,0 +1,9 @@
+{
+  "source": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+  "before_sha256": "64875f79832c54e25828e41a41342fb506c7082fb7481537373224d43056a847",
+  "after_sha256": "2d820c06c3667fc73fafbcf5ad6324f3542b5d0f4f7018b4a33b5945282f06d7",
+  "reason": "original contains form-feed; count LF physical lines: original endif=112, blank=113, first statement=114. Prior correction incorrectly counted form-feed as a line.",
+  "old_marker": 114,
+  "corrected_marker": 113,
+  "limits": "actual build and diagnostic control pending"
+}

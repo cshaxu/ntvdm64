@@ -1,0 +1,113 @@
+{
+  "source_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r256.zip",
+  "scope": "15 selected host C files; only CRLF versus LF differed",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/xlat.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\xlat.c",
+      "before_sha256": "99328c616aa48f90ce2458c30e991045e4ffc842dcdea4c16c42ba462ac21a39",
+      "after_sha256": "de749c418a1639c589c39d6e0ecb7ad95084c33da1a40a61bcbc617257dee9a6",
+      "normalized_sha256": "99328c616aa48f90ce2458c30e991045e4ffc842dcdea4c16c42ba462ac21a39"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/xor.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\xor.c",
+      "before_sha256": "180d3f21396d075a1fbf7cee17b6ff34fa9d088c0c368ee44da218bc1f479ef7",
+      "after_sha256": "2f27c4985f7a2b6f0233c849d58e59b65cfdcbeeea200ea2826b07ede495700c",
+      "normalized_sha256": "180d3f21396d075a1fbf7cee17b6ff34fa9d088c0c368ee44da218bc1f479ef7"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/prt_scrn.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\prt_scrn.c",
+      "before_sha256": "1e63d3541dab631b71b48300191eb8c134cb9143a444f29a5c5cf3fd39739d2c",
+      "after_sha256": "8be0f3950eb2daa5b35d7e789fc7b7895dc68b2b841b97f056e2a304b157ea23",
+      "normalized_sha256": "1e63d3541dab631b71b48300191eb8c134cb9143a444f29a5c5cf3fd39739d2c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cpu\\src\\evid\\vglob.c",
+      "before_sha256": "3aed97d21cd1e0f7eaf6f94a54b7a2724b500e2b74d771f475f127cbbca1fa66",
+      "after_sha256": "e695a9807285703119cffb0c3bc8a3aa6433ede43efa499f21a6e736f94395d8",
+      "normalized_sha256": "3aed97d21cd1e0f7eaf6f94a54b7a2724b500e2b74d771f475f127cbbca1fa66"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/evidfunc.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\evidfunc.c",
+      "before_sha256": "8fff7bbc6e43755371d22edc5c4d1d8e5ab793501019bbe74b738e43f006eda6",
+      "after_sha256": "c932fe38359660386fc8a61c3dad1691385f5080b32a7e30a16f53664384d4ed",
+      "normalized_sha256": "8fff7bbc6e43755371d22edc5c4d1d8e5ab793501019bbe74b738e43f006eda6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid000.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\sevid000.c",
+      "before_sha256": "e2d3d1eb1d08a323c131f18fabe5322a35f8a09f6ae3017fc3793a97ec07c18b",
+      "after_sha256": "251bdd0925969a79d3ff98f5e19a249e99849d0db0c3c908ae5005040e8e7758",
+      "normalized_sha256": "e2d3d1eb1d08a323c131f18fabe5322a35f8a09f6ae3017fc3793a97ec07c18b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid001.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\sevid001.c",
+      "before_sha256": "77b08a47e90ab64182118de473a1b7f0c921585a5a92acc0454a3b773d542644",
+      "after_sha256": "963affcefa6e16b2754365787ada8c2a7944b8890d96807d1a98df44ccae2c84",
+      "normalized_sha256": "77b08a47e90ab64182118de473a1b7f0c921585a5a92acc0454a3b773d542644"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid002.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\sevid002.c",
+      "before_sha256": "ef40c8e164ed34f03cfcd0b91c5bed3d548761eecb16865b6960d04a30bbc648",
+      "after_sha256": "12b47548aec0a692c2371d7fb90f9625a840e6f4109ad1fcc1e4a14b3bd9ee53",
+      "normalized_sha256": "ef40c8e164ed34f03cfcd0b91c5bed3d548761eecb16865b6960d04a30bbc648"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid003.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\sevid003.c",
+      "before_sha256": "19f87d7cdd00a65c725dea946a413238d30e1328d3d78e648f8830b958c602a5",
+      "after_sha256": "a975eb71ef1b8ee0d3ff544de2cd9c0091e2188305c0d3c8882b03670688a65a",
+      "normalized_sha256": "19f87d7cdd00a65c725dea946a413238d30e1328d3d78e648f8830b958c602a5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid004.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\sevid004.c",
+      "before_sha256": "2475f9a09749173b9d4dde8b947d20af221ffaed4b0fb1db68ed336270e28959",
+      "after_sha256": "92f4f394a1325293279cdaf520dc493b25be739a5c91c35078735fabdea9fbfa",
+      "normalized_sha256": "2475f9a09749173b9d4dde8b947d20af221ffaed4b0fb1db68ed336270e28959"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid005.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\sevid005.c",
+      "before_sha256": "8afc078a1048d820dde939729c6c79fc61550a5e947e14d1c9aec87ecea8e87d",
+      "after_sha256": "b6edd25cf46622ba0ab6c68504bb760034dc8b35250e011e882e69d1e1c24f73",
+      "normalized_sha256": "8afc078a1048d820dde939729c6c79fc61550a5e947e14d1c9aec87ecea8e87d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid006.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\sevid006.c",
+      "before_sha256": "067262f7ca9ebbb4577264d2872db835b6e6ec45c3f55db777140471b636ee64",
+      "after_sha256": "7391b56d3ea5a52fa7b6845a773ed3a45e47822a874cc93a6ed0b2c9abc80688",
+      "normalized_sha256": "067262f7ca9ebbb4577264d2872db835b6e6ec45c3f55db777140471b636ee64"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid007.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\sevid007.c",
+      "before_sha256": "a0d23a551a0a1d70d0df184bb86fab7f870d6d155ac6a9dc5936716c448e06c7",
+      "after_sha256": "820322a3f21f6a7a59591b1f49d1b867994584ebb0ef8d30fcc2fbc8635bbcec",
+      "normalized_sha256": "a0d23a551a0a1d70d0df184bb86fab7f870d6d155ac6a9dc5936716c448e06c7"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid008.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\sevid008.c",
+      "before_sha256": "011fc67217c7a176da5ef1555db4416f343f53df2c6af059d5a51c3421712ff3",
+      "after_sha256": "d397c21f6d57ae0975c9a7598dc6fb23e4fb9b7bfabd55bd9af9e194d6d192c7",
+      "normalized_sha256": "011fc67217c7a176da5ef1555db4416f343f53df2c6af059d5a51c3421712ff3"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid009.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\sevid009.c",
+      "before_sha256": "1aeffcd2a58d19189c680ef1b36016c97fc27f3ada9d1545122ea603e50030ee",
+      "after_sha256": "40b6e072787a1835f01f3c370cd6a3c77e3b425cdfe357acad2ea6e882c0e75d",
+      "normalized_sha256": "1aeffcd2a58d19189c680ef1b36016c97fc27f3ada9d1545122ea603e50030ee"
+    }
+  ],
+  "build_status": "passed",
+  "build_evidence": "s13-normalized-identical-batch6-build.json"
+}

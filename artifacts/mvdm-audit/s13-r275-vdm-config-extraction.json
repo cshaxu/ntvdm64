@@ -1,0 +1,9 @@
+{
+  "source": "src/non-mvdm/base/win32/client/vdm.c",
+  "generator": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+  "extract": "BaseGetVdmConfigInfo",
+  "old_sha256": "9b821cf874b97f679d1db3effe26d82064910239a6ec2b041b068523d6b6ab9f",
+  "current_sha256": "9b821cf874b97f679d1db3effe26d82064910239a6ec2b041b068523d6b6ab9f",
+  "equal": true,
+  "limits": "Function extraction equality; does not independently compare every generated build input."
+}

@@ -1,0 +1,65 @@
+{
+  "changes": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "macro": "A2CPU",
+      "old_current": 334,
+      "new_current": 337
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "macro": "A2CPU",
+      "old_current": 316,
+      "new_current": 319
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "macro": "A2CPU",
+      "old_current": 272,
+      "new_current": 275
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "macro": "A2CPU",
+      "old_current": 102,
+      "new_current": 105
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "macro": "REAL_VGA",
+      "old_current": 5551,
+      "new_current": 5554
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "macro": "REAL_VGA",
+      "old_current": 5465,
+      "new_current": 5468
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "macro": "REAL_VGA",
+      "old_current": 5383,
+      "new_current": 5386
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "macro": "REAL_VGA",
+      "old_current": 5193,
+      "new_current": 5196
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "macro": "SEGMENTATION",
+      "old_current": 1341,
+      "new_current": 1343
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "macro": "SEGMENTATION",
+      "old_current": 2092,
+      "new_current": 2095
+    }
+  ],
+  "method": "exact inserted physical-line offsets and current guard/error verification"
+}

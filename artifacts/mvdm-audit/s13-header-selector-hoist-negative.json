@@ -1,0 +1,21 @@
+{
+  "scope": "scratch-only early-selector hoist in actual x86 wow_control_extent_bindings compiler context",
+  "candidate": "enable DIALOG_GETSET, CONTROL_EXTENT, COMBO_STATE before wow_edit_state_bindings; with and without _USER_ wrapper",
+  "result": "both fail before completion because early usercli declarations require PWND before it is declared",
+  "logs": [
+    {
+      "path": "build\\t473-s13\\header-hoist-experiment\\compile.log",
+      "sha256": "9cd0898b9d0e390aca92a9eca9864dc03e7e2b0a43c85584b869066853e45e2b",
+      "exit": 1,
+      "first_failure": "usercli.h:642 PWND undeclared"
+    },
+    {
+      "path": "build\\t473-s13\\header-hoist-experiment\\compile-no-wrapper.log",
+      "sha256": "7dc45018e97e72d4f3c2314a19ef073ac32ce7053043153fee36608904df094c",
+      "exit": 1,
+      "first_failure": "usercli.h:642 PWND undeclared"
+    }
+  ],
+  "control": "without wrapper hoist fails identically; the failure is not attributable to the wrapper alone",
+  "limits": "This rejects only naive early selector hoist, not all possible header restructures. Production files untouched."
+}

@@ -1,0 +1,13 @@
+{
+  "failure": "Class original-subset fixture compared inserted diagnostic line directives and eight registered empty Unicode exclusion frames as retained source tokens.",
+  "fix": "Remove exactly eight structurally empty excluded frames and diagnostic line directives in comparison; continue comparing complete retained token stream and two registered frees.",
+  "checks": {
+    "positive": "r460-class-fixture.log, exit 0",
+    "negative": "r460-class-negative.err, modified GetClassInfo rejected for mirror mismatch"
+  },
+  "inputs": {
+    "tests/observation/extract-wow-class-registration-fixture.ps1": "46f3d228cb7205a9179bac377a1bae4cc57567ddb29541ccd442566452034905",
+    "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h": "988bfc6c78a71721f95b4d768b123bfbd01e9f72701f9e25b7d5744f648c7272"
+  },
+  "scope": "Test-only change; no product binary or guest changed."
+}

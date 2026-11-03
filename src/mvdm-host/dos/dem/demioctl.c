@@ -64,7 +64,9 @@ ULONG	iIoctl;
 
     iIoctl = (ULONG) getAL();
 
+#line 67
 #if DBG
+#line 68
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 #line 74

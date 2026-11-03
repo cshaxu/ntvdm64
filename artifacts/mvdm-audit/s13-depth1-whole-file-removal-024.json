@@ -1,0 +1,25 @@
+{
+  "scope": "Unselected hardware-monitor declaration header and classification of existing CPU guard",
+  "file": "src/mvdm-host/softpc.new/host/inc/nt_mon.h",
+  "sha256": "46d5cfeea0d1c2235174843154c4ffa37fb2f97c3ce11f049550f6e8fa755a58",
+  "mirror_sources": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_mon.h",
+      "current_sha256": "46d5cfeea0d1c2235174843154c4ffa37fb2f97c3ce11f049550f6e8fa755a58",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_mon.h",
+      "original_sha256": "c55c392d342b5dbef7c5c692d5f7c4d06486e9cf1597fe8a1b4a166e61bdc804",
+      "pinned_expected_sha256": "c55c392d342b5dbef7c5c692d5f7c4d06486e9cf1597fe8a1b4a166e61bdc804",
+      "original_matches_pinned": true
+    }
+  ],
+  "removed_condition_groups": 2,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r129.zip",
+  "evidence": [
+    "No current include, build or test input references nt_mon.h; worker Ninja dependencies do not include it.",
+    "A diagnostic script comment names the file as historical type context only.",
+    "base/inc/cpu.h is retained because CCPU tests include it; its NTVDM+MONITOR arm already consists solely of #error and is covered by an existing guard control."
+  ],
+  "limitations": [
+    "This does not remove software V86 or the CCPU CPU header."
+  ]
+}

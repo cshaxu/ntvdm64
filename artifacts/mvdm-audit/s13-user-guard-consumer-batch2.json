@@ -1,0 +1,201 @@
+{
+  "scope": "12 real x86 WOW32 compilation entries; scratch _USER_ wrapper plus precomp selector hoist, including dialog and button resources",
+  "compile_pass": 12,
+  "semantic_section_byte_equal": 8,
+  "rows": [
+    {
+      "target": "obj/wuser31.obj",
+      "compile_exit": 0,
+      "content_differences": [],
+      "relocation_byte_differences": [],
+      "log_sha256": "3626344330950db15d0c425ecde0a7f337d2f6e2a9bd8cc91fe29f496e459e50"
+    },
+    {
+      "target": "obj/wuclip.obj",
+      "compile_exit": 0,
+      "content_differences": [],
+      "relocation_byte_differences": [],
+      "log_sha256": "b1ca95eb6d54c16a9132f5b503a092c32fa1f60c527b6e5bb7ad9b08208e9ff0"
+    },
+    {
+      "target": "obj/opennt-user/control-body-editec.obj",
+      "compile_exit": 0,
+      "content_differences": [
+        ".text$mn@66",
+        ".text$mn@60"
+      ],
+      "relocation_byte_differences": [
+        ".text$mn@26",
+        ".text$mn@66",
+        ".text$mn@60",
+        ".text$mn@32",
+        ".text$mn@8",
+        ".text$mn@12",
+        ".text$mn@50",
+        ".text$mn@38",
+        ".text$mn@64",
+        ".text$mn@30",
+        ".text$mn@54",
+        ".text$mn@68",
+        ".text$mn@62"
+      ],
+      "log_sha256": "ca1340ca096257ead28986c57ec73f58eb2ab29b393c5cd631d1e8372648a6a6"
+    },
+    {
+      "target": "obj/opennt-user/control-body-edecrare.obj",
+      "compile_exit": 0,
+      "content_differences": [
+        ".text$mn@12",
+        ".text$mn@10"
+      ],
+      "relocation_byte_differences": [
+        ".text$mn@12",
+        ".text$mn@22",
+        ".text$mn@20",
+        ".text$mn@6",
+        ".text$mn@10",
+        ".text$mn@14",
+        ".text$mn@24"
+      ],
+      "log_sha256": "981abc5a5e885600ee95a121b06e2dcb9db3d7f64f1c463cb22d0719bedb4d6b"
+    },
+    {
+      "target": "obj/opennt-user/control-body-editsl.obj",
+      "compile_exit": 0,
+      "content_differences": [],
+      "relocation_byte_differences": [],
+      "log_sha256": "eaee99ade9f3eab24abf2abf18d5af774404130e5cf55807b525df39c9f18ec7"
+    },
+    {
+      "target": "obj/opennt-user/control-body-editml.obj",
+      "compile_exit": 0,
+      "content_differences": [],
+      "relocation_byte_differences": [],
+      "log_sha256": "7da36dc6c80ee53118887759870875c6dfdb05e3ff051156e757e490067b2362"
+    },
+    {
+      "target": "obj/opennt-user/control-body-edmlonce.obj",
+      "compile_exit": 0,
+      "content_differences": [],
+      "relocation_byte_differences": [],
+      "log_sha256": "d7785961c67ae6dfb11722b309d23d2c50580ce6d555ee16bf5b2a7013dc2be2"
+    },
+    {
+      "target": "obj/opennt-user/control-body-edmlrare.obj",
+      "compile_exit": 0,
+      "content_differences": [],
+      "relocation_byte_differences": [],
+      "log_sha256": "b689381e1e4e6f4a71ebef6a7de6eb2bf4d3366b5d4dbdac1bdac5a880eddb55"
+    },
+    {
+      "target": "obj/opennt-user/control-body-edslrare.obj",
+      "compile_exit": 0,
+      "content_differences": [],
+      "relocation_byte_differences": [],
+      "log_sha256": "cec7423f337c25fc6d96d4dafbe27dd33dcbcebccddf35dfb6a42678d74a6523"
+    },
+    {
+      "target": "obj/opennt-user/control-body-combo.obj",
+      "compile_exit": 0,
+      "content_differences": [
+        ".text$mn@27",
+        ".text$mn@21",
+        ".sxdata@40",
+        ".text$mn@18",
+        ".text$mn@16",
+        ".text$mn@23",
+        ".text$mn@25",
+        ".text$mn@29",
+        ".text$mn@11",
+        ".text$mn@6",
+        ".text$mn@32",
+        ".text$mn@8"
+      ],
+      "relocation_byte_differences": [
+        ".text$mn@4",
+        ".text$mn@21",
+        ".text$mn@16",
+        ".text$mn@23",
+        ".xdata$x@37",
+        ".xdata$x@34",
+        ".xdata$x@35",
+        ".text$mn@2",
+        ".text$mn@6",
+        ".text$mn@32",
+        ".text$mn@8",
+        ".text$mn@27",
+        ".text$mn@13",
+        ".text$mn@31",
+        ".text$mn@18",
+        ".xdata$x@36",
+        ".text$mn@25",
+        ".text$mn@11",
+        ".text$mn@29",
+        ".text$mn@10"
+      ],
+      "log_sha256": "0658168801323cabe969ccc9d73e95389936363b3320d93520088c582121c213"
+    },
+    {
+      "target": "obj/opennt-user/control-body-combodir.obj",
+      "compile_exit": 0,
+      "content_differences": [],
+      "relocation_byte_differences": [],
+      "log_sha256": "67c2cced8ab14110422fe2397141356331ba6699196e256f1961b56352edfed4"
+    },
+    {
+      "target": "obj/opennt-user/control-body-comboini.obj",
+      "compile_exit": 0,
+      "content_differences": [
+        ".text$mn@12",
+        ".text$mn@4",
+        ".text$mn@6",
+        ".text$mn@16",
+        ".text$mn@8",
+        ".text$mn@10",
+        ".text$mn@14"
+      ],
+      "relocation_byte_differences": [
+        ".text$mn@12",
+        ".text$mn@4",
+        ".text$mn@6",
+        ".text$mn@16",
+        ".text$mn@8",
+        ".text$mn@10",
+        ".text$mn@14"
+      ],
+      "log_sha256": "b6e4184828d9ca6ddc4ee63ea92c086424d4540c1f8323b722f4929eac9f9d53"
+    }
+  ],
+  "limits": "Object section indices and raw relocation symbol indexes are compared, not resolved semantic relocation symbols; differences need diagnosis. Scratch only, original usercli guard unchanged; no product link or runtime verification.",
+  "fresh_baseline": {
+    "compile_results": [
+      "0 0 ",
+      "1 0 ",
+      "2 0 ",
+      "3 0 ",
+      "4 0 ",
+      "5 0 ",
+      "6 0 ",
+      "7 0 ",
+      "8 0 ",
+      "9 0 ",
+      "10 0 ",
+      "11 0 "
+    ],
+    "log_sha256": [
+      "42bf4593f62c5b171ff7fa84afcedcd0b35871842d9daad3b3699b08d523b742",
+      "a0fd1912a176b1d7acfda2c2756bbad855a5483e8c733581fc463dd2592d20ad",
+      "0c1a8594dc3d78246e4d18ccb1a5980ffc1ff10949bf9c76381f4bb2a8d12fa5",
+      "547adce4e921b1d509a55284474bb89efa841da444ef40f88e3afac9b8a58a68",
+      "9f43fdaa88879516acf0cdb76fe22bdae5f1b599113b20039bccabed569ee357",
+      "6d411801817de94da9cc90e35d7e1c26eb7f5ce315562748cbe47307284a7de5",
+      "9284d16f5b958f64fcf358983e576716abaec89e712fdc680bf5fcabaa84d39a",
+      "b11b49330b372f556606ac27a3ef772e1c27425c7a82d9f176c1430b5affe0d1",
+      "0822bbfdeb61d3e8b717158692a84dcce3b9654fae8d36d1152d62229165f3c7",
+      "aae5300761cf43e3f32d7d489a998194247561fc7f6f79615297f1ad40c22ef9",
+      "33ea7e9504812f316fa76f211fd63683da941f9deeafb6f8d31435f0eb5343e8",
+      "885f4f9677b9b36c4f4f0c6d172b999106b6f92cb6cb09eac8ee2c809f6161e6"
+    ],
+    "result": "All 12 fresh baseline compiles passed; candidate-vs-fresh-baseline section comparison reproduced the same 8 identical and 4 different results as against cached objects."
+  }
+}

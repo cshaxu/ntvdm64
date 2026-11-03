@@ -503,7 +503,7 @@ BOOL WOWCallback16Ex(
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif // DEBUG
-#line 556
+#line 552
 
     if (cbArgs > sizeof(PARM16)) {
         LOGDEBUG(LOG_ALWAYS, ("WOWCallback16V: cbArgs = %u, must be <= %u",
@@ -540,7 +540,7 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 654
+#line 648
     register PTD ptd;
     register PVDMFRAME pFrame;
     register PCBVDMFRAME pCBFrame;
@@ -560,7 +560,7 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 670
+#line 659
 
 
     WOW32ASSERT(iRetID != RET_RETURN && iRetID != RET_DEBUGRETURN);
@@ -637,7 +637,7 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 781
+#line 756
 
     wow_callback_frame_trace("before", (DWORD)iRetID, ptd->vpStack,
         ptd->vpCBStack, 0, pFrame->wTDB,
@@ -655,7 +655,7 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
 #line 795
     SETVDMSTACK(ptd->vpCBStack);
 #endif
-#line 797
+#line 768
 
     //
     // do the callback!
@@ -678,7 +678,7 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
     setIP(SaveIp);
     ptd->vpStack = VDMSTACK();
 #endif
-#line 820
+#line 784
 
     // after return from callback ptd->vpStack will point to PCBVDMFRAME
 

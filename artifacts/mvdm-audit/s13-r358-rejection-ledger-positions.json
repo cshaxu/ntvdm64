@@ -1,0 +1,41 @@
+{
+  "changes": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "macro": "A2CPU",
+      "old_current": 738,
+      "new_current": 741
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "FIFO_ON",
+      "old_current": 2088,
+      "new_current": 2091
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "macro": "YODA",
+      "old_current": 68,
+      "new_current": 69
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "SEGMENTATION",
+      "old_current": 2010,
+      "new_current": 2013
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "macro": "SEGMENTATION",
+      "old_current": 3097,
+      "new_current": 3100
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "macro": "MONITOR",
+      "old_current": 19,
+      "new_current": 20
+    }
+  ],
+  "method": "exact inserted physical-line offsets and current guard/error verification"
+}

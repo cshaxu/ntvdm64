@@ -1,0 +1,96 @@
+{
+  "result": "passed",
+  "controls": [
+    {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "body_line": 42,
+      "continuation_line": 45,
+      "negative_diagnostic_sha256": "b4dde8140f2db408a1b042bb5aaf50f856e44b2c055cefafdabfde1ff97a6010"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmddisp.c",
+      "body_line": 47,
+      "continuation_line": 53,
+      "negative_diagnostic_sha256": "2697e3fc4d70722e464f462a7fb43197299a760ca0b0aae13fe7f6e93468e555"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "body_line": 657,
+      "continuation_line": 714,
+      "negative_diagnostic_sha256": "777988dadc43ed82564c81e1254e7f35699f8a4571c0e7cb5fa035ff6dfc7994"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "body_line": 370,
+      "continuation_line": 374,
+      "negative_diagnostic_sha256": "c36ce83ed29c483ca1783f125f129136f5523def9830ada9d1bc72f4f070224c"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demioctl.c",
+      "body_line": 68,
+      "continuation_line": 74,
+      "negative_diagnostic_sha256": "a922b5282c18c0c79825cdfe48ff1ebd0386e04dc8c986cd01c7eb4119c7b1a3"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demmisc.c",
+      "body_line": 531,
+      "continuation_line": 537,
+      "negative_diagnostic_sha256": "168324bcebc2a0e6ee4ea436f083f57cff593cd242df4c945f8862f635eafcd9"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demmsg.c",
+      "body_line": 8,
+      "continuation_line": 49,
+      "negative_diagnostic_sha256": "f6c388685aea3b9ebc1b5033f60303745c858328710164de9a1e345f21863201"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/debug.c",
+      "body_line": 25,
+      "continuation_line": 83,
+      "negative_diagnostic_sha256": "d7f9aece617bdae108cc3951f5ee3b2351ee0583063d82dba32b26076278889f"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "body_line": 104,
+      "continuation_line": 106,
+      "negative_diagnostic_sha256": "a5fe636c28bcb7e58b4114b68cb4c752152120b1ffe79121a2d0df4013ba67ea"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "body_line": 54,
+      "continuation_line": 59,
+      "negative_diagnostic_sha256": "147b8379f80155115f97a204f7396cd2860274d9bc17815022416465de42a815"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmidata.h",
+      "body_line": 197,
+      "continuation_line": 199,
+      "negative_diagnostic_sha256": "5a1a51e2c177efaea93ae866aef46188e6dfc07fce07ff6781f9cada72302f86"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "body_line": 565,
+      "continuation_line": 573,
+      "negative_diagnostic_sha256": "bf5bb90cb715195676d2b0b25b9a89f27cce35e6c23ecf3692bc8ecb592cc836"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "body_line": 165,
+      "continuation_line": 169,
+      "negative_diagnostic_sha256": "1261598616a382c36c3040187859feb4525088a9cb1a7cf0852b44d63d400630"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "body_line": 202,
+      "continuation_line": 210,
+      "negative_diagnostic_sha256": "20a6a94ff611b2e5827e433f98862d335ad0c10284adf014504e52118e68f32b"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/savestat.c",
+      "body_line": 117,
+      "continuation_line": 126,
+      "negative_diagnostic_sha256": "0780971783c16a917d67a2f2c9e42507fd1a46b19954ec102ab2e59e10d693db"
+    }
+  ],
+  "scope": "extracted actual source, false/true forced guard; not all include contexts"
+}

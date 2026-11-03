@@ -1,0 +1,103 @@
+{
+  "controls": [
+    {
+      "line": 134,
+      "macro": "LATER",
+      "arch": "x86",
+      "exit": 2,
+      "error_line": 137
+    },
+    {
+      "line": 134,
+      "macro": "LATER",
+      "arch": "x64",
+      "exit": 2,
+      "error_line": 137
+    },
+    {
+      "line": 18,
+      "macro": "DEBUG_LOCKS",
+      "arch": "x86",
+      "exit": 2,
+      "error_line": 19
+    },
+    {
+      "line": 18,
+      "macro": "DEBUG_LOCKS",
+      "arch": "x64",
+      "exit": 2,
+      "error_line": 19
+    },
+    {
+      "line": 594,
+      "macro": "DEBUG",
+      "arch": "x86",
+      "exit": 2,
+      "error_line": 623
+    },
+    {
+      "line": 594,
+      "macro": "DEBUG",
+      "arch": "x64",
+      "exit": 2,
+      "error_line": 623
+    },
+    {
+      "line": 1321,
+      "macro": "DEBUG",
+      "arch": "x86",
+      "exit": 2,
+      "error_line": 1322
+    },
+    {
+      "line": 1321,
+      "macro": "DEBUG",
+      "arch": "x64",
+      "exit": 2,
+      "error_line": 1322
+    },
+    {
+      "line": 680,
+      "macro": "WINDOWS_ME",
+      "arch": "x86",
+      "exit": 2,
+      "error_line": 681
+    },
+    {
+      "line": 680,
+      "macro": "WINDOWS_ME",
+      "arch": "x64",
+      "exit": 2,
+      "error_line": 681
+    },
+    {
+      "line": 378,
+      "macro": "_USERK_",
+      "arch": "x86",
+      "exit": 2,
+      "error_line": 379
+    },
+    {
+      "line": 378,
+      "macro": "_USERK_",
+      "arch": "x64",
+      "exit": 2,
+      "error_line": 379
+    },
+    {
+      "line": 1657,
+      "macro": "_USERK_",
+      "arch": "x86",
+      "exit": 2,
+      "error_line": 1658
+    },
+    {
+      "line": 1657,
+      "macro": "_USERK_",
+      "arch": "x64",
+      "exit": 2,
+      "error_line": 1658
+    }
+  ],
+  "limits": "isolated forced profiles; omitted selected functions not recovered"
+}

@@ -1,0 +1,17 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+  "old_commit": "build-owned immediate pre-edit snapshot",
+  "old_sha256": "869df62743b8a17c40934b3bce28afcb14113ab378e9bccf46c27ff6eac9179e",
+  "current_sha256": "f24f5cd7c7a4b31626630b33225a3539e03bd7316a1e7dc11e0b69edda124104",
+  "method": "MSVC /EP, exact Ninja target flags, identical scratch source path; nonblank stripped lines hashed. ntSend.h copied without modification.",
+  "contexts": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/queue.obj",
+      "old_sha256": "c0677329c61a31baee811824e784eda9cd74c05b75065dae16ebbd8065fced6f",
+      "current_sha256": "c0677329c61a31baee811824e784eda9cd74c05b75065dae16ebbd8065fced6f",
+      "equal": true
+    }
+  ],
+  "limits": "Tests selected preprocessed text only; excludes diagnostics and does not establish other contexts, link or runtime behavior."
+}

@@ -1,0 +1,64 @@
+{
+  "scope": "Unselected original winbasep and legacy network declaration header copies",
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/winbasep.h",
+      "sha256": "73d579d36fc22961ab8ee75d800f658709cee759bd1086ff4af185baa5ec997b"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/names.h",
+      "sha256": "046f82c3b94d0423d165b8c1c7d6837e745a1a9f83badb341d64423a0a01a456"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/status.h",
+      "sha256": "af4af274f3b7d981bc21741ed8942ffcab6b28e3f65a2b686158cad3a4baf151"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/thread.h",
+      "sha256": "8d3fe4e23a0795c746bad80b2995b60ef14c125d4635ed81cc2280fe28966f10"
+    }
+  ],
+  "mirror_sources": [
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/winbasep.h",
+      "current_sha256": "73d579d36fc22961ab8ee75d800f658709cee759bd1086ff4af185baa5ec997b",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\winbasep.h",
+      "original_sha256": "b58bf6522d37c13879a0a091867eb7d7355fb9fd27f40d75d3bc746e65f52124",
+      "pinned_expected_sha256": "b58bf6522d37c13879a0a091867eb7d7355fb9fd27f40d75d3bc746e65f52124",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/names.h",
+      "current_sha256": "046f82c3b94d0423d165b8c1c7d6837e745a1a9f83badb341d64423a0a01a456",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\names.h",
+      "original_sha256": "93adf5f9f1231c9328ed9753b5538f4d96a53d5c459616742f5ba756ddb441e1",
+      "pinned_expected_sha256": "93adf5f9f1231c9328ed9753b5538f4d96a53d5c459616742f5ba756ddb441e1",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/status.h",
+      "current_sha256": "af4af274f3b7d981bc21741ed8942ffcab6b28e3f65a2b686158cad3a4baf151",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\status.h",
+      "original_sha256": "730c928405b92127ca2572327f6d86c0866c098b83bfd3285cf2a388f95c5240",
+      "pinned_expected_sha256": "730c928405b92127ca2572327f6d86c0866c098b83bfd3285cf2a388f95c5240",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/thread.h",
+      "current_sha256": "8d3fe4e23a0795c746bad80b2995b60ef14c125d4635ed81cc2280fe28966f10",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\thread.h",
+      "original_sha256": "262ca6ff27f375284e8ccca83dc64fd4fea460e14ed0a7404735b0d5cdbc048d",
+      "pinned_expected_sha256": "262ca6ff27f375284e8ccca83dc64fd4fea460e14ed0a7404735b0d5cdbc048d",
+      "original_matches_pinned": true
+    }
+  ],
+  "removed_condition_groups": 12,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r148.zip",
+  "evidence": [
+    "Current literal winbasep.h includes resolve through src/compat/include/winbasep.h in the worker dependency database.",
+    "No current literal include of the removed names.h, status.h, or thread.h is present; captured product/test preprocessing did not select these exact paths."
+  ],
+  "limitations": [
+    "The selected compatibility header and current thread/status implementations remain unchanged."
+  ]
+}

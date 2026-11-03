@@ -1,0 +1,419 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+  "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+  "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+  "groups": [
+    {
+      "original_line": 352,
+      "original_else": 354,
+      "original_endif": 359,
+      "x86_first_line": "dwAlign = sizeof(BYTE);",
+      "non_x86_first_line": "if (nIndex == UOI_FLAGS)",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 390,
+      "original_else": 392,
+      "original_endif": 394,
+      "x86_first_line": "ProbeForRead(pvInfo, nLength, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForRead(pvInfo, nLength, sizeof(DWORD));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 563,
+      "original_else": 565,
+      "original_endif": 567,
+      "x86_first_line": "ProbeForRead(strKLID.Buffer, strKLID.Length, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForRead(strKLID.Buffer, strKLID.Length, sizeof(WCHAR));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 715,
+      "original_else": 717,
+      "original_endif": 719,
+      "x86_first_line": "ProbeForWrite(pObja->ObjectName, sizeof(*(pObja->ObjectName)), sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForWrite(pObja->ObjectName, sizeof(*(pObja->ObjectName)), sizeof(DWORD));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 738,
+      "original_else": 740,
+      "original_endif": 742,
+      "x86_first_line": "ProbeForWrite(pObja->ObjectName->Buffer, pObja->ObjectName->Length, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForWrite(pObja->ObjectName->Buffer, pObja->ObjectName->Length, sizeof(WCHAR));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 964,
+      "original_else": 966,
+      "original_endif": 968,
+      "x86_first_line": "ProbeForRead(strDesktop.Buffer, strDesktop.Length, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForRead(strDesktop.Buffer, strDesktop.Length, sizeof(WCHAR));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 1135,
+      "original_else": 1138,
+      "original_endif": 1141,
+      "x86_first_line": "ProbeForRead(strClassName.Buffer, strClassName.Length, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForRead(strClassName.Buffer, strClassName.Length, sizeof(WCHAR));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 1229,
+      "original_else": 1231,
+      "original_endif": 1233,
+      "x86_first_line": "ProbeForWrite(piconinfo, sizeof(*piconinfo), sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForWrite(piconinfo, sizeof(*piconinfo), sizeof(DWORD));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 1312,
+      "original_else": 1314,
+      "original_endif": 1316,
+      "x86_first_line": "ProbeForWrite(pdid, sizeof(*pdid), sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForWrite(pdid, sizeof(*pdid), sizeof(DWORD));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 1957,
+      "original_else": 1959,
+      "original_endif": 1961,
+      "x86_first_line": "ProbeForRead(strData.Buffer, strData.Length, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForRead(strData.Buffer, strData.Length, sizeof(WCHAR));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 2027,
+      "original_else": 2029,
+      "original_endif": 2031,
+      "x86_first_line": "ProbeForRead(lpData, ulLength, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForRead(lpData, ulLength, sizeof(DWORD));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 2112,
+      "original_else": 2114,
+      "original_endif": 2116,
+      "x86_first_line": "ProbeForWrite(lpData, ulLength, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForWrite(lpData, ulLength, sizeof(DWORD));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 2288,
+      "original_else": 2290,
+      "original_endif": 2292,
+      "x86_first_line": "ProbeForRead(strClassName.Buffer, strClassName.Length, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForRead(strClassName.Buffer, strClassName.Length, sizeof(WCHAR));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 2369,
+      "original_else": 2371,
+      "original_endif": 2373,
+      "x86_first_line": "ProbeForRead(strAppName.Buffer, strAppName.Length, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForRead(strAppName.Buffer, strAppName.Length, sizeof(WCHAR));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 2723,
+      "original_else": 2725,
+      "original_endif": 2727,
+      "x86_first_line": "ProbeForRead(paccel, cbElem, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForRead(paccel, cbElem, sizeof(DWORD));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 3107,
+      "original_else": 3109,
+      "original_endif": 3111,
+      "x86_first_line": "ProbeForRead(pqosNew, sizeof(*pqosNew), sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForRead(pqosNew, sizeof(*pqosNew), sizeof(DWORD));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 3158,
+      "original_else": 3160,
+      "original_endif": 3162,
+      "x86_first_line": "ProbeForWrite(pqos, sizeof(*pqos), sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForWrite(pqos, sizeof(*pqos), sizeof(DWORD));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 3446,
+      "original_else": 3448,
+      "original_endif": 3450,
+      "x86_first_line": "ProbeForRead(strItem.Buffer, strItem.Length, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForRead(strItem.Buffer, strItem.Length, sizeof(WCHAR));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 3972,
+      "original_else": 3974,
+      "original_endif": 3976,
+      "x86_first_line": "ProbeForRead(paFormatPriorityList, sizeof(UINT) * cFormats, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForRead(paFormatPriorityList, sizeof(UINT) * cFormats, sizeof(DWORD));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 4318,
+      "original_else": 4320,
+      "original_endif": 4323,
+      "x86_first_line": "ProbeForRead(strLParam.Buffer, strLParam.Length, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForRead(strLParam.Buffer, strLParam.Length,",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 4727,
+      "original_else": 4730,
+      "original_endif": 4733,
+      "x86_first_line": "ProbeForRead(pSysColor, nCount * sizeof(*pSysColor), sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForRead(pSysColor, nCount * sizeof(*pSysColor), sizeof(DWORD));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 5472,
+      "original_else": 5474,
+      "original_endif": 5476,
+      "x86_first_line": "ProbeForWrite(lpString, nMaxCount * sizeof(WCHAR), sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForWrite(lpString, nMaxCount * sizeof(WCHAR), sizeof(WCHAR));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 5506,
+      "original_else": 5508,
+      "original_endif": 5510,
+      "x86_first_line": "ProbeForWrite(pwszBuff, cchBuff * sizeof(WCHAR), sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForWrite(pwszBuff, cchBuff * sizeof(WCHAR), sizeof(WCHAR));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 5768,
+      "original_else": 5770,
+      "original_endif": 5772,
+      "x86_first_line": "ProbeForRead(strModName.Buffer, strModName.Length, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForRead(strModName.Buffer, strModName.Length, sizeof(WCHAR));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 5823,
+      "original_else": 5825,
+      "original_endif": 5827,
+      "x86_first_line": "ProbeForRead(strResName.Buffer, strResName.Length, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForRead(strResName.Buffer, strResName.Length, sizeof(WCHAR));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 5986,
+      "original_else": 5988,
+      "original_endif": 5991,
+      "x86_first_line": "ProbeForRead(strText.Buffer, strText.Length, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForRead(strText.Buffer, strText.Length,",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 6312,
+      "original_else": 6314,
+      "original_endif": 6317,
+      "x86_first_line": "ProbeForWrite((PVOID)str.Buffer, str.MaximumLength, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForWrite((PVOID)str.Buffer, str.MaximumLength,",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 6417,
+      "original_else": 6435,
+      "original_endif": 6453,
+      "x86_first_line": "if (ARGUMENT_PRESENT(pWOW)) {",
+      "non_x86_first_line": "if (ARGUMENT_PRESENT(pWOW)) {",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 6689,
+      "original_else": 6691,
+      "original_endif": 6693,
+      "x86_first_line": "ProbeForRead(strKLID.Buffer, strKLID.Length, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForRead(strKLID.Buffer, strKLID.Length, sizeof(WCHAR));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 6929,
+      "original_else": 6932,
+      "original_endif": 6935,
+      "x86_first_line": "ProbeForWrite(lpAccelDst, cAccelEntries * sizeof(*lpAccelDst),",
+      "non_x86_first_line": "ProbeForWrite(lpAccelDst, cAccelEntries * sizeof(*lpAccelDst),",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 6977,
+      "original_else": 6980,
+      "original_endif": 6983,
+      "x86_first_line": "ProbeForRead(strClassName.Buffer, strClassName.Length, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForRead(strClassName.Buffer, strClassName.Length, sizeof(WCHAR));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 7026,
+      "original_else": 7031,
+      "original_endif": 7036,
+      "x86_first_line": "if (HIWORD(strClassName.Buffer))",
+      "non_x86_first_line": "if (HIWORD(strClassName.Buffer))",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 7071,
+      "original_else": 7074,
+      "original_endif": 7077,
+      "x86_first_line": "ProbeForWrite(strClassName.Buffer, strClassName.MaximumLength,",
+      "non_x86_first_line": "ProbeForWrite(strClassName.Buffer, strClassName.MaximumLength,",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 7102,
+      "original_else": 7104,
+      "original_endif": 7106,
+      "x86_first_line": "ProbeForWrite(lpszFormatName, chMax * sizeof(WCHAR), sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForWrite(lpszFormatName, chMax * sizeof(WCHAR), sizeof(WCHAR));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 7131,
+      "original_else": 7133,
+      "original_endif": 7135,
+      "x86_first_line": "ProbeForWrite(lpszKeyName, chMax * sizeof(WCHAR), sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForWrite(lpszKeyName, chMax * sizeof(WCHAR), sizeof(WCHAR));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 7161,
+      "original_else": 7163,
+      "original_endif": 7165,
+      "x86_first_line": "ProbeForWrite(strKLID.Buffer, strKLID.MaximumLength, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForWrite(strKLID.Buffer, strKLID.MaximumLength, sizeof(WCHAR));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 7188,
+      "original_else": 7190,
+      "original_endif": 7192,
+      "x86_first_line": "ProbeForWrite(lpBuff, nItems * sizeof(*lpBuff), sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForWrite(lpBuff, nItems * sizeof(*lpBuff), sizeof(DWORD));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 7333,
+      "original_else": 7335,
+      "original_endif": 7337,
+      "x86_first_line": "ProbeForRead(strFormat.Buffer, strFormat.Length, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForRead(strFormat.Buffer, strFormat.Length, sizeof(WCHAR));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 7363,
+      "original_else": 7365,
+      "original_endif": 7367,
+      "x86_first_line": "ProbeForRead(strMessage.Buffer, strMessage.Length, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForRead(strMessage.Buffer, strMessage.Length, sizeof(WCHAR));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 7439,
+      "original_else": 7441,
+      "original_endif": 7443,
+      "x86_first_line": "ProbeForRead(strClassName.Buffer, strClassName.Length, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForRead(strClassName.Buffer, strClassName.Length, sizeof(WCHAR));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 7917,
+      "original_else": 7919,
+      "original_endif": 7921,
+      "x86_first_line": "ProbeForRead(strEvent.Buffer, strEvent.Length, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForRead(strEvent.Buffer, strEvent.Length, sizeof(WCHAR));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 8558,
+      "original_else": 8561,
+      "original_endif": 8564,
+      "x86_first_line": "ProbeForRead(mdics.strTitle.Buffer, mdics.strTitle.Length,",
+      "non_x86_first_line": "ProbeForRead(mdics.strTitle.Buffer, mdics.strTitle.Length,",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 8571,
+      "original_else": 8574,
+      "original_endif": 8577,
+      "x86_first_line": "ProbeForRead(mdics.strClass.Buffer, mdics.strClass.Length,",
+      "non_x86_first_line": "ProbeForRead(mdics.strClass.Buffer, mdics.strClass.Length,",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 8687,
+      "original_else": 8689,
+      "original_endif": 8692,
+      "x86_first_line": "ProbeForRead(str.Buffer, str.Length, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForRead(str.Buffer, str.Length,",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 8747,
+      "original_else": 8749,
+      "original_endif": 8752,
+      "x86_first_line": "ProbeForRead(str.Buffer, str.Length, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForRead(str.Buffer, str.Length,",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 9237,
+      "original_else": 9239,
+      "original_endif": 9242,
+      "x86_first_line": "ProbeForWrite((PVOID)str.Buffer, str.MaximumLength, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForWrite((PVOID)str.Buffer, str.MaximumLength,",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 9303,
+      "original_else": 9305,
+      "original_endif": 9308,
+      "x86_first_line": "ProbeForWrite((PVOID)str.Buffer, str.MaximumLength, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForWrite((PVOID)str.Buffer, str.MaximumLength,",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 9354,
+      "original_else": 9356,
+      "original_endif": 9359,
+      "x86_first_line": "ProbeForWrite((PVOID)str.Buffer, str.MaximumLength, sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForWrite((PVOID)str.Buffer, str.MaximumLength,",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 9395,
+      "original_else": 9397,
+      "original_endif": 9399,
+      "x86_first_line": "ProbeForWrite((PVOID)lParam, wParam * sizeof(INT), sizeof(BYTE));",
+      "non_x86_first_line": "ProbeForWrite((PVOID)lParam, wParam * sizeof(INT), sizeof(INT));",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 9435,
+      "original_else": 9438,
+      "original_endif": 9441,
+      "x86_first_line": "if (lParam)",
+      "non_x86_first_line": "if (lParam)",
+      "status": "pending original-scope recovery"
+    },
+    {
+      "original_line": 9558,
+      "original_else": 9561,
+      "original_endif": 9564,
+      "x86_first_line": "ProbeForRead(csex.strName.Buffer, csex.strName.MaximumLength,",
+      "non_x86_first_line": "ProbeForRead(csex.strName.Buffer, csex.strName.MaximumLength,",
+      "status": "pending original-scope recovery"
+    }
+  ],
+  "count": 51,
+  "observed_context": "x86 WOW32 control-fnid _X86_ defined: s13-r341-ntstubs-actual-x86-context.json",
+  "limits": "The existing selected owner is NtUserSetWindowFNID and the retained alignment scaffold; other original functions are omitted. Actual source-scope reconstruction and other supported compilation contexts remain unproved. This confirms exact original boundaries only; does not assert all negative arms can safely be rejected."
+}

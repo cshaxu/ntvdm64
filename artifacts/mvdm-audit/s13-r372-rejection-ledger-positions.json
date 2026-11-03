@@ -1,0 +1,47 @@
+{
+  "changes": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "macro": "A2CPU",
+      "old_current": 337,
+      "new_current": 340
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "macro": "A2CPU",
+      "old_current": 319,
+      "new_current": 322
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "macro": "A2CPU",
+      "old_current": 275,
+      "new_current": 278
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "macro": "A2CPU",
+      "old_current": 105,
+      "new_current": 108
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "macro": "SEGMENTATION",
+      "old_current": 1343,
+      "new_current": 1346
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_event.h",
+      "macro": "YODA",
+      "old_current": 18,
+      "new_current": 19
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "macro": "0",
+      "old_current": 95,
+      "new_current": 98
+    }
+  ],
+  "method": "exact inserted physical-line offsets and current guard/error verification"
+}

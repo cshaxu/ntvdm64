@@ -1,0 +1,75 @@
+{
+  "path": "src/non-mvdm/base/win32/server/srvinit.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\win32\\server\\srvinit.c",
+  "original_sha256": "f53d4ca6f7d3eee8945d94fc237f73b892fb0f509da8a47256043180b48bfc70",
+  "removed_original_groups": [
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\win32\\server\\srvinit.c",
+      "role": "original",
+      "line": 94,
+      "depth": 1,
+      "parent": null,
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 94,
+          "status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\win32\\server\\srvinit.c",
+      "role": "original",
+      "line": 161,
+      "depth": 1,
+      "parent": null,
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "WX86",
+          "line": 161,
+          "status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\win32\\server\\srvinit.c",
+      "role": "original",
+      "line": 475,
+      "depth": 1,
+      "parent": null,
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 475,
+          "status": "unreviewed"
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 477,
+          "status": "unreviewed"
+        }
+      ]
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\win32\\server\\srvinit.c",
+      "role": "original",
+      "line": 662,
+      "depth": 1,
+      "parent": null,
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "WX86",
+          "line": 662,
+          "status": "unreviewed"
+        }
+      ]
+    }
+  ],
+  "basis": "s13-depth1-srvinit-removal.json; current product Ninja build graphs contain no source reference",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r210.zip"
+}

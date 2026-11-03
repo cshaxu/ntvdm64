@@ -880,7 +880,7 @@ get_next_dde_message:
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 885
+#line 852
 
     { /* DIVERGENCE(MVDM-HOST-DIV-350): GetMessage consumed its own queue item. */
         BOOL savedThunkDDE = fThunkDDEmsg;
@@ -1181,7 +1181,7 @@ get_next_dde_message:
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 1187
+#line 1148
 
     // If PeekMessage returned NULL don't bother to copy anything back
 
@@ -2008,7 +2008,7 @@ ULONG FASTCALL WU32SetMessageQueue(PVDMFRAME pFrame)
 
     return TRUE;    // WIN32 doesn't have sizeable message queues
 #endif
-#line 2020
+#line 1923
 }
 
 

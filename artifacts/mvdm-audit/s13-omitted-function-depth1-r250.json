@@ -1,0 +1,79 @@
+{
+  "input_queue": "artifacts/mvdm-audit/s13-bfs-depth1-working-queue-195r249.zip",
+  "input_sha256": "d8ce569000d4476e1c16557b08eb15df66c22410fc638802f9583e3dfff30858",
+  "finding": "Original depth-one groups are within original code absent from selected source subset; no guard was added at an invented position. The #if 0 arms are structurally excluded by expression but correct retained original placement is still pending. Marker absence is evidence for the missing selected surrounding code, not proof of its full function bounds.",
+  "files": [
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\ntos\\ex\\probe.c",
+      "original_sha256": "0d1cae414b609c624e6bdf04fa28ebd84ff38dbb9687a63d8bc9e840c2f2372b",
+      "original_line": 106,
+      "current": "src/non-mvdm/base/ntos/ex/probe.c",
+      "current_sha256": "d5a4aa697600bba9c8d8a4be71103e88c548c6f93c7a6951c9c0557b978fd7d3",
+      "original_marker_absent_from_current": "ProbeForWrite",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "defined(_ALPHA_)",
+          "line": 106,
+          "status": "pending",
+          "review_evidence": "artifacts/mvdm-audit/s13-omitted-function-depth1-r250.json"
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 121,
+          "status": "pending",
+          "review_evidence": "artifacts/mvdm-audit/s13-omitted-function-depth1-r250.json"
+        }
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c",
+      "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
+      "original_line": 2624,
+      "current": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "current_sha256": "14286278fad14fcb21a961aa3108d398593072cc3694e22acc69b6ace1e7e646",
+      "original_marker_absent_from_current": "FindExistingCursorIcon",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "0",
+          "line": 2624,
+          "status": "pending",
+          "review_evidence": "artifacts/mvdm-audit/s13-omitted-function-depth1-r250.json"
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 2626,
+          "status": "pending",
+          "review_evidence": "artifacts/mvdm-audit/s13-omitted-function-depth1-r250.json"
+        }
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c",
+      "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
+      "original_line": 3751,
+      "current": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "current_sha256": "14286278fad14fcb21a961aa3108d398593072cc3694e22acc69b6ace1e7e646",
+      "original_marker_absent_from_current": "MatchImage",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "0",
+          "line": 3751,
+          "status": "pending",
+          "review_evidence": "artifacts/mvdm-audit/s13-omitted-function-depth1-r250.json"
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 3757,
+          "status": "pending",
+          "review_evidence": "artifacts/mvdm-audit/s13-omitted-function-depth1-r250.json"
+        }
+      ]
+    }
+  ]
+}

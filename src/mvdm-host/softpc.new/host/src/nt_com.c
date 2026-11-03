@@ -746,9 +746,12 @@ GLOBAL CPU void host_com_close IFN1(int, adapter)
 /*:::::::::::::::: Request from base for character :::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
+#line 743
 #ifdef FIFO_ON
+#line 744
 #error DIVERGENCE MVDM-HOST-DIV-525: FIFO_ON platform branch is not selected; see mirror register.
 #endif
+#line 778
 
 GLOBAL RXCPU VOID host_com_read IFN3(int, adapter, UTINY *, data, int *, error)
 {

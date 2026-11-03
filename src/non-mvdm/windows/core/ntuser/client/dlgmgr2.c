@@ -242,20 +242,31 @@ BOOL IsDialogMessageA(
     BOOL bRet;
 
     switch (lpmsg->message) {
+#endif /* WOW_ORIGINAL_DIALOG_KEYBOARD */
+#line 221
 #ifdef FE_SB // IsDialogMessageA()
 #error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
 #else
+#ifdef WOW_ORIGINAL_DIALOG_KEYBOARD
+#line 232
     case WM_CHAR:
     case EM_SETPASSWORDCHAR:
+#endif /* WOW_ORIGINAL_DIALOG_KEYBOARD */
 #endif // FE_SB
+#ifdef WOW_ORIGINAL_DIALOG_KEYBOARD
+#line 235
     case WM_CHARTOITEM:
     case WM_DEADCHAR:
     case WM_SYSCHAR:
     case WM_SYSDEADCHAR:
     case WM_MENUCHAR:
+#endif /* WOW_ORIGINAL_DIALOG_KEYBOARD */
+#line 240
 #ifdef FE_IME // IsDialogMessageA()
 #error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
 #endif // FE_IME
+#ifdef WOW_ORIGINAL_DIALOG_KEYBOARD
+#line 244
 
         RtlMBMessageWParamCharToWCS(lpmsg->message, (PDWORD)&lpmsg->wParam);
     }
@@ -294,9 +305,13 @@ BOOL IsDialogMessageW(
 
     CheckLock(pwndDlg);
 
+#endif /* WOW_ORIGINAL_DIALOG_KEYBOARD */
+#line 281
 #ifdef LATER // JerrySh - we shouldn't need this on the client-side
 #error DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register.
 #endif
+#ifdef WOW_ORIGINAL_DIALOG_KEYBOARD
+#line 309
 
     if (CallMsgFilter(lpMsg, MSGF_DIALOGBOX))
         return TRUE;

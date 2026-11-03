@@ -1,0 +1,124 @@
+{
+  "pairs": [
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\jmp.c",
+      "original_sha256": "470889ec4ca8311980f1b700e56d028009fc459c47eb484e1451a799ac7feb87",
+      "original_line": 45,
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/jmp.c",
+      "current_sha256": "da944fd6a955d1bbfd18f1050f1f736c9e5602c5f0571e0a03bc19ec2aec948a",
+      "current_line": 45,
+      "anchor_original_start": 1,
+      "anchor_current_start": 1,
+      "anchor_lines": 49,
+      "arms": [
+        [
+          "ifdef",
+          "ANSI"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\jmp.c",
+      "original_sha256": "470889ec4ca8311980f1b700e56d028009fc459c47eb484e1451a799ac7feb87",
+      "original_line": 70,
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/jmp.c",
+      "current_sha256": "da944fd6a955d1bbfd18f1050f1f736c9e5602c5f0571e0a03bc19ec2aec948a",
+      "current_line": 70,
+      "anchor_original_start": 53,
+      "anchor_current_start": 53,
+      "anchor_lines": 18,
+      "arms": [
+        [
+          "ifdef",
+          "TAKE_REAL_MODE_LIMIT_FAULT"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\jmp.c",
+      "original_sha256": "470889ec4ca8311980f1b700e56d028009fc459c47eb484e1451a799ac7feb87",
+      "original_line": 148,
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/jmp.c",
+      "current_sha256": "da944fd6a955d1bbfd18f1050f1f736c9e5602c5f0571e0a03bc19ec2aec948a",
+      "current_line": 142,
+      "anchor_original_start": 89,
+      "anchor_current_start": 83,
+      "anchor_lines": 60,
+      "arms": [
+        [
+          "ifdef",
+          "TAKE_REAL_MODE_LIMIT_FAULT"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\mov.c",
+      "original_sha256": "d274ed1ad9f8114f8c7ff0c0d6d57f08116d70fd8e6b26f0d0051b70ba9f8348",
+      "original_line": 93,
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/mov.c",
+      "current_sha256": "c5b14a99fe4c9a2b0cea442a5f70d090cb58ee76152447698592f677b606cda8",
+      "current_line": 93,
+      "anchor_original_start": 1,
+      "anchor_current_start": 1,
+      "anchor_lines": 93,
+      "arms": [
+        [
+          "ifdef",
+          "SPC486"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wucomm.c",
+      "original_sha256": "c9c8b11d65ac3f2b1ee9216a8102ef56908bff5c5bf4ed2dd2badc30ca8a4284",
+      "original_line": 1700,
+      "current": "src/mvdm-host/wow32/wucomm.c",
+      "current_sha256": "f53c39ae01386587bed787518ccd64e3042ecb3c271cee886ad35a8190f9c9fa",
+      "current_line": 1700,
+      "anchor_original_start": 1,
+      "anchor_current_start": 1,
+      "anchor_lines": 1700,
+      "arms": [
+        [
+          "ifdef",
+          "DEBUG"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wucomm.c",
+      "original_sha256": "c9c8b11d65ac3f2b1ee9216a8102ef56908bff5c5bf4ed2dd2badc30ca8a4284",
+      "original_line": 2532,
+      "current": "src/mvdm-host/wow32/wucomm.c",
+      "current_sha256": "f53c39ae01386587bed787518ccd64e3042ecb3c271cee886ad35a8190f9c9fa",
+      "current_line": 2529,
+      "anchor_original_start": 1707,
+      "anchor_current_start": 1704,
+      "anchor_lines": 826,
+      "arms": [
+        [
+          "ifdef",
+          "DEBUG"
+        ]
+      ]
+    }
+  ],
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r175.zip",
+  "scope": "first-depth only; inherits current evidence, not new compile"
+}

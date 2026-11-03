@@ -1038,13 +1038,13 @@ IMPORT VOID disable_gfx_update_routines IPT0();
 #ifndef cursor_changed
 IMPORT VOID cursor_changed IPT2(int, x, int, y);
 #endif
-#line 1034
+#line 1996
 IMPORT VOID update_shift_count IPT0();
 
 #ifdef V7VGA 
 IMPORT struct extensions_controller extensions_controller;
 #endif /* V7VGA */ 
-#line 1039
+#line 2001
 IMPORT struct crt_controller		crt_controller;
 IMPORT struct sequencer			sequencer;
 IMPORT struct attribute_controller	attribute_controller;

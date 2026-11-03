@@ -1,0 +1,23 @@
+{
+  "changes": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "macro": "A3CPU",
+      "old_current": 161,
+      "new_current": 164
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "macro": "SEGMENTATION",
+      "old_current": 1352,
+      "new_current": 1355
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "macro": "YODA",
+      "old_current": 432,
+      "new_current": 435
+    }
+  ],
+  "method": "exact inserted physical-line offsets and current guard/error verification"
+}

@@ -1,0 +1,11 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+  "source_sha256": "7e96e6b39d65b47e4226bb49e48885dcdd8bf046fbb1f4f7195b8e9dc8dbc161",
+  "original_line": 8377,
+  "original_end": 8411,
+  "continuation": 8412,
+  "current_line": 29,
+  "compile": "x86 WOW32 control-fnid.obj and wow32.dll built successfully",
+  "scope": "one excluded original first-depth guard; other original guards remain unreviewed",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r178.zip"
+}

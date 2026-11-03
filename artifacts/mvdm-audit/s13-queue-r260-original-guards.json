@@ -1,0 +1,15 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+  "before_sha256": "869df62743b8a17c40934b3bce28afcb14113ab378e9bccf46c27ff6eac9179e",
+  "after_sha256": "f24f5cd7c7a4b31626630b33225a3539e03bd7316a1e7dc11e0b69edda124104",
+  "original_groups": [
+    957,
+    963,
+    1203
+  ],
+  "selected_alternatives": "enclosing functions omitted; selected sides remain pending",
+  "preprocessing": "s13-queue-r260-preprocess.json",
+  "forced_controls": "s13-queue-r260-controls.json",
+  "build": "cached x86 WOW32 passed",
+  "limits": "No runtime, x64 product or original functions restored; not first-depth completion."
+}

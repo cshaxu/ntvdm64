@@ -1,0 +1,44 @@
+{
+  "source": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+  "before_sha256": "9debd71995948be2fabceb646f973f3f32fed215f73d41749846089e43a3546b",
+  "after_sha256": "3bcbd4d8a2a54b73b9e24106bd6ce69c177bac579c7664a515426512fe409e0d",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+  "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+  "groups": [
+    {
+      "current_guard_line": 203,
+      "original_runtime_if_line": 202
+    },
+    {
+      "current_guard_line": 252,
+      "original_runtime_if_line": 535
+    },
+    {
+      "current_guard_line": 307,
+      "original_runtime_if_line": 594
+    },
+    {
+      "current_guard_line": 899,
+      "original_runtime_if_line": 1986
+    },
+    {
+      "current_guard_line": 926,
+      "original_runtime_if_line": 2010
+    },
+    {
+      "current_guard_line": 943,
+      "original_runtime_if_line": 2024
+    },
+    {
+      "current_guard_line": 1059,
+      "original_runtime_if_line": 2410
+    }
+  ],
+  "line_correction": {
+    "current_guard_line": 943,
+    "old": 2053,
+    "corrected": 2025,
+    "original_brace_lf_line": 2025
+  },
+  "limits": "Original runtime conditions are pre-existing missing selected-path text; no equivalence or behavior claim; local selected paths preserved."
+}

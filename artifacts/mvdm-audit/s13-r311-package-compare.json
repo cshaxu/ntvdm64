@@ -1,0 +1,117 @@
+{
+  "baseline": "r276 Full-pass",
+  "candidate": "r311",
+  "images": [
+    {
+      "name": "run16.exe",
+      "lengths": [
+        316416,
+        316416
+      ],
+      "differences": 0,
+      "offsets": [],
+      "equal": true
+    },
+    {
+      "name": "ntsrv.exe",
+      "lengths": [
+        398848,
+        398848
+      ],
+      "differences": 0,
+      "offsets": [],
+      "equal": true
+    },
+    {
+      "name": "ntcon.exe",
+      "lengths": [
+        351744,
+        351744
+      ],
+      "differences": 0,
+      "offsets": [],
+      "equal": true
+    },
+    {
+      "name": "ntvdm.exe",
+      "lengths": [
+        2103808,
+        2103808
+      ],
+      "differences": 5,
+      "offsets": [
+        288,
+        289,
+        373638,
+        1698412,
+        1698413
+      ],
+      "equal": false
+    },
+    {
+      "name": "ntvwm.exe",
+      "lengths": [
+        340480,
+        340480
+      ],
+      "differences": 0,
+      "offsets": [],
+      "equal": true
+    },
+    {
+      "name": "ntmon.exe",
+      "lengths": [
+        167936,
+        167936
+      ],
+      "differences": 0,
+      "offsets": [],
+      "equal": true
+    },
+    {
+      "name": "WOW32.DLL",
+      "lengths": [
+        712192,
+        712192
+      ],
+      "differences": 4,
+      "offsets": [
+        280,
+        281,
+        625412,
+        625413
+      ],
+      "equal": false
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "lengths": [
+        206848,
+        206848
+      ],
+      "differences": 0,
+      "offsets": [],
+      "equal": true
+    },
+    {
+      "name": "nthook32.dll",
+      "lengths": [
+        221184,
+        221184
+      ],
+      "differences": 0,
+      "offsets": [],
+      "equal": true
+    },
+    {
+      "name": "nthook64.dll",
+      "lengths": [
+        270848,
+        270848
+      ],
+      "differences": 0,
+      "offsets": [],
+      "equal": true
+    }
+  ]
+}

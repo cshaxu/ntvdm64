@@ -1383,7 +1383,7 @@ BOOL CntrlHandler(ULONG CtrlType)
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 1389
+#line 1333
             if (CntrlHandlerState & CNTRL_PUSHEXIT) {
                 /* DIVERGENCE(MVDM-HOST-DIV-355): defer the original
                  * cmdPushExit cleanup until the service's Console-close
@@ -1575,9 +1575,11 @@ BOOL CntrlHandler(ULONG CtrlType)
      * original mode restoration must precede native frontend activation. */
     if (!VDMForWOW && !ntvdm_console_set_active(FALSE))
         DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);
+#line 1493
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 1496
 
 }
 
@@ -1601,6 +1603,7 @@ void nt_resume_event_thread(void)
     if (!ntvdm_console_set_active(TRUE))
         DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);
 
+#line 1514
     /* re-enable stream io if the application is terminating */
 
     if (event_thread_blocked_reason == 1 &&

@@ -42,7 +42,7 @@
 #ifndef NTVDM
 #error DIVERGENCE MVDM-HOST-DIV-591: non-NTVDM branch is not selected
 #endif
-#line 80
+#line 81
 
 
 GLOBAL IBOOL IBOOLgetenv IFN2(char *, name, IBOOL, default_value)

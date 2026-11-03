@@ -1,0 +1,24 @@
+{
+  "git_diff_check": "passed; Git emitted LF/CRLF conversion warnings on existing files",
+  "zip_sha256": "b79dfb38d99335f59688966d2d13688bd4b8d19af44760d2d68ce5c72a6076e7",
+  "preserved_original_executable_payloads": [
+    {
+      "entry": "WINNT/SYSTEM32/FORCEDOS.EXE",
+      "sha256": "5e93e8b89865d611391b25c6bf451cfa63f07d6643bb422da36542e2e554d320"
+    },
+    {
+      "entry": "WINNT/SYSTEM32/WIN.COM",
+      "sha256": "5eb085d36b58b1b2ca57e07beffc341860d451265d2f913f4de799c0235f05cf"
+    },
+    {
+      "entry": "WINNT/SYSTEM32/VDMEXTS.DLL",
+      "sha256": "5ad8d07da714e9d9c4391da5fbb75c6e5150c244d570fbbcd89171083b340170"
+    },
+    {
+      "entry": "WINNT/SYSTEM32/VCDEX.DLL",
+      "sha256": "3679db6245b7717d3e58c19b19097c8031d6c5a94df773b5c01e5ca7ed98ebde"
+    }
+  ],
+  "historical_test": "tests/observation/verify-wow-external-native.ps1 pins historical P13 archive and 13-image release; not a current-package acceptance result; disposition not decided",
+  "limits": "No full runtime suite or publication performed."
+}

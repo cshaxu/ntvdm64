@@ -1,0 +1,350 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/command/cmddisp.c",
+      "before_sha256": "3d36738e1bae20472f7d0a1a7f2961c928830b93328a9091aa7b9e35b9996ac9",
+      "after_sha256": "91e321e7d4bf19527ef7a0371d1c6137ec056f37c2da85bc8f59d009b12c0a94",
+      "removed_physical_lines": [
+        52
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "before_sha256": "ec219af7d5a366586c63db3827395fc3f1a3f7ee63cb9fa851dfff302b5d5491",
+      "after_sha256": "b7eff58c600eae81d54a78f8f45cf5b513be7b5ae9bb3cfc759c7cacef0a57cc",
+      "removed_physical_lines": [
+        446
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demioctl.c",
+      "before_sha256": "eb70bdd94c727607146d9de014c931863b3cf88114ab2aaf0d76cd0f34cce518",
+      "after_sha256": "6c0db6e312ca2800614fb9b9068a9c39a6ffca7531e1aaab00d64f95b35c4ddd",
+      "removed_physical_lines": [
+        73
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "before_sha256": "116c5363285f06e79d808fa681f19fa856bb68e45eab1a06261fd43033404b0f",
+      "after_sha256": "b9d1b7803f22f12e1d4c8ea474a391fff0e0cd3fa1aff29ba4130c983e5466af",
+      "removed_physical_lines": [
+        262
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "before_sha256": "2bbc67099ec57c6a0a0ddb02fa50844a5be02a59453af4320cea1bec06a7d19c",
+      "after_sha256": "0bc1801df122b0d848a7e06250055c73fb27877227ff50adec797af752120d56",
+      "removed_physical_lines": [
+        58
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "before_sha256": "c81d6d2b650c3fd59eb9183cbd7d857e3ef39bee03cbb2fb8a407d0158601c35",
+      "after_sha256": "45201ac174ae87bf3b8123870f7cb94ef0aaf5267caf2bc82a56c36eeec62596",
+      "removed_physical_lines": [
+        313
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/savestat.c",
+      "before_sha256": "3c5980bf80f3c509996e2ab99968468789291e05f3615dd3d18f144b3d17f16b",
+      "after_sha256": "59efaecefb32f3c1bd839cbf602587f0fb65ffd360c5e12ea807a255b06781de",
+      "removed_physical_lines": [
+        122
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/mvdm.h",
+      "before_sha256": "26dfe92613a4a00c1641c97f1d167f26541d67fa361da41b69188a166a11ec62",
+      "after_sha256": "98d97184a942a2c67971577522f9d52bd708d6627d45349347cc9c097f56e967",
+      "removed_physical_lines": [
+        28
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/wow.h",
+      "before_sha256": "2f3ecb65a230f8765ffef505116a319eb4ac2a435e46def6a89669e8df6df785",
+      "after_sha256": "6e4d16d313b4acff87ce0d7a723e55983eaebde362e39bd0e9ad19d432b9eea2",
+      "removed_physical_lines": [
+        35
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/wowkbd.h",
+      "before_sha256": "7e6d07fd851abca566b6fd81f00302b4f684c3fe35b83c98d3f2dba007e720af",
+      "after_sha256": "86f533eb464f1bae992b8f6410ed6d9789d49d9bb74fa77e7477cef9ac48d6ef",
+      "removed_physical_lines": [
+        63
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/wowmmed.h",
+      "before_sha256": "79f7a102e18bc6973408aea6b667ad68562fa4f9206c1ba096d417a5c86eaf2c",
+      "after_sha256": "e991fd5c0a50d5f167a1688e44385b5fd85966596e5eeef635b8ae86a0f77a5f",
+      "removed_physical_lines": [
+        29
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "before_sha256": "a4cb2d48e9742f5ad0086fde78751dd9e88a83f287bf1c48420bb5aa609df2f3",
+      "after_sha256": "8ad0d0437bcbfded709722f374fdca2396ee4c943d7b25e3881f20aa0033e225",
+      "removed_physical_lines": [
+        10
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "before_sha256": "663a2d259d0e612a2a6ae435c8ccc8c55cb44de41388e5e0086cd95e3e475b36",
+      "after_sha256": "c562cc490dc18ea14cd2a0de3aa822dea4fe4bfeaa05c38d15ed872889682c1c",
+      "removed_physical_lines": [
+        375,
+        639,
+        718,
+        827
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "before_sha256": "696d7e3c7f7d6844541ccc39fb89ca6f44c863f901941b6e3fcda784935d7a39",
+      "after_sha256": "68a26100c166645e21c36c9cc46c264b13490ddeca1c1c52372c1f0e08222c63",
+      "removed_physical_lines": [
+        296
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/bswap.c",
+      "before_sha256": "1f16d5389322880ef37473faa17cf3648aa52698d71b4f9db6250e34caabe941",
+      "after_sha256": "5859c6f4480ab7db9d4a0f2cead39649478a9e28a490ce97df6a4d0ed0525c27",
+      "removed_physical_lines": [
+        41
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_page.h",
+      "before_sha256": "5a545e1879beb139916b5831bd9fecd892a8d4a33d3753239165a55f44dea376",
+      "after_sha256": "50e62c347f220ef41e863e4b47d011e09303abffd6b30fc2b5d8b52c00fc45fb",
+      "removed_physical_lines": [
+        205
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.c",
+      "before_sha256": "d56122639d151698611a9e266625ce3901ada312068bb35dfc858506c2798de5",
+      "after_sha256": "a2dca4afd750314d4f79311ca8757a595dcabbd1e3312e27e5b96b292aa1ff20",
+      "removed_physical_lines": [
+        36
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "before_sha256": "e63479720c77108aa1a08435d58a4ffdbef1c2e4f6a5ef957929de1e61b601dd",
+      "after_sha256": "63601f275852cc347f33c880c4b8d26526b89c9d7aeeb06c32683030c060b5df",
+      "removed_physical_lines": [
+        264
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cmpxchg.c",
+      "before_sha256": "a47ce885dc73270ccafab3650f691cb9404219ab6237a847650057cb53acb711",
+      "after_sha256": "586fef62de0d56e81d1c2d675be00f7738f71226c4f1a7e770efe76255e8a6ed",
+      "removed_physical_lines": [
+        42
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "before_sha256": "cd91cd3b98d446bafa2fa9e196a53abf1a9926ec1b1f5dad09c8d05f36756016",
+      "after_sha256": "953b927de0339ab1c1eb16b437425ccaf68461d40f45b78583fb130909e3cd5a",
+      "removed_physical_lines": [
+        1542
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "before_sha256": "db736b265958338f17a695453ab2488a6c6fd60001c8cee5724383ca0e17cb0d",
+      "after_sha256": "7458752870244f406d223ce57babdd7e6605f92ed3b630c378152e79b87bfd24",
+      "removed_physical_lines": [
+        88,
+        141
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "before_sha256": "0aa1452300186f856edff9a60d169c5430f33d35868fff02886ab861c4c9cd6b",
+      "after_sha256": "29ce8dea782f2420282aaea6755c63e741be098599354dd2a3458e446a55e5e6",
+      "removed_physical_lines": [
+        2900
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "before_sha256": "8409193896676dd5dacce232244970fb48544b25e857ec719bb7a0405fb521e4",
+      "after_sha256": "c7a8e6614243b9980d51c0774092edc466e7724ddefe236048f8b7187556197d",
+      "removed_physical_lines": [
+        196,
+        215,
+        229,
+        263
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cntlbop.h",
+      "before_sha256": "d0a6f95a675ec43afeb081556ea65af059b50e968ae2f6093313d44658ac7d18",
+      "after_sha256": "6c87e963d683f71bcdd8869a2324a158a94c3c05992d14b726af019ce6559ded",
+      "removed_physical_lines": [
+        84
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "before_sha256": "a5f15ef689bba60e829f758957a384b1616d04a3a5f6671f905127b94bf51911",
+      "after_sha256": "7b1ac388bebfe9fd20b2d32fdb4240d2dae416eb6218db3a6683bf6f30a64680",
+      "removed_physical_lines": [
+        108
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gendrvr.h",
+      "before_sha256": "69bc4554f00c81b5a27e3749a6759c53c14a8a9c34a0c37a5816a47cc13324f1",
+      "after_sha256": "029f02de7df34ed10d1d8859ccdad30a51c91d3313a8c078c0a650269f5de8c8",
+      "removed_physical_lines": [
+        32
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+      "before_sha256": "2953cf31babcaad20ffc749b5a609db3606050bd416f6ed3ce2ea3e17d943ab1",
+      "after_sha256": "ef88233164fe6c29bdaed8da9fec07860a795b472ab805e507c1286793dfe5ac",
+      "removed_physical_lines": [
+        70
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_sas.h",
+      "before_sha256": "c9cb89cba13425926eeab0e86ed5ed8394bbc3048ead8a60cdc733ac85b12b40",
+      "after_sha256": "56d90296ef3e600caf6184760fa4ec930a4c49037dc65b2bfba90fdba621506c",
+      "removed_physical_lines": [
+        26
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "before_sha256": "46048af60247df2834dce2700b34b764f2f6f456de1f4ec627097e9d06ea923e",
+      "after_sha256": "e979cb47cfc5880536164b7a25a6f70f1013f7aea03e93cdb4db7b13c237fe90",
+      "removed_physical_lines": [
+        77
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/idetect.h",
+      "before_sha256": "053c8d6845222efef4e5b4c0e8889a880f34366c475b680d3122e1589bc00775",
+      "after_sha256": "9663d049aef20f0198288c489e19902bd55a2997b3b9b205c05c6daf53fac6c5",
+      "removed_physical_lines": [
+        17
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timeval.h",
+      "before_sha256": "2ef3e4bcd25968282eb358b5faa66e4154071922505e9ef9dd2be6dff3e1148c",
+      "after_sha256": "f8b21a5f43ab4feaada51e428b14060c72a9107a933d0234ee8a4d61c4549e62",
+      "removed_physical_lines": [
+        44
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/winhelp.h",
+      "before_sha256": "0ad3102154301a15e3b76df6b5e829b9561d44f220c8698d96f294c939ce02fa",
+      "after_sha256": "f89763309d2b3feab698bcca98ded001c4d9d63741fc7501058759cdd737bd70",
+      "removed_physical_lines": [
+        28
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "before_sha256": "31fc60c8cbad97142d8b5e8a41a357544bd4446d78e72d5f98465375d8454b65",
+      "after_sha256": "00bc52ffb3faa922ddf5bdd7b0bb88b9605c4ca83fcc1d9f2c1de1662487bca0",
+      "removed_physical_lines": [
+        95
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "before_sha256": "e06a2798b07b7c11b0d4f0113c2f4be6e1727fd91ecbd9c1f020a45d3db5d6ec",
+      "after_sha256": "e46f449895e2cce351cb8907b32867a5b2a531200904021eb02152361acd9927",
+      "removed_physical_lines": [
+        108
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/cmosnt.c",
+      "before_sha256": "6e2d3b4e04da988ca919107afc124bf2091cf9dbb20b643e7611f965f598f076",
+      "after_sha256": "b9ac408049e037927811b7727a80a2b40f5364bf2b7ce38ab0ef08392bf1dd15",
+      "removed_physical_lines": [
+        461
+      ]
+    }
+  ],
+  "removed_lines": 42,
+  "ledger_updates": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "macro": "A2CPU",
+      "old_current": 367,
+      "new_current": 366
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "macro": "A2CPU",
+      "old_current": 114,
+      "new_current": 113
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "macro": "SEGMENTATION",
+      "old_current": 376,
+      "new_current": 375
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "macro": "SEGMENTATION",
+      "old_current": 281,
+      "new_current": 280
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "macro": "SEGMENTATION",
+      "old_current": 71,
+      "new_current": 70
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "macro": "A2CPU",
+      "old_current": 744,
+      "new_current": 741
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "FIFO_ON",
+      "old_current": 2094,
+      "new_current": 2093
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "SEGMENTATION",
+      "old_current": 2016,
+      "new_current": 2015
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "macro": "SEGMENTATION",
+      "old_current": 3100,
+      "new_current": 3099
+    }
+  ],
+  "method": "remove only second of consecutive identical #line directives; surviving directive preserves next logical line",
+  "validation": "x86/x64 cached builds and condition suites pass; MSVC line control confirms equivalence; package compare recorded"
+}

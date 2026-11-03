@@ -1,0 +1,8 @@
+{
+  "target": "obj/opennt-user/control-fnid.obj",
+  "source": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+  "source_sha256": "79365c48a1b1752c7a09040f2b5096bac04db2bbdae5cdf5edb2387eda759547",
+  "x86_defined": true,
+  "command_sha256": "2a406a72284c22541caef81688c7d0e82816cf83fee4a04a6fab75a9c5ebc3bf",
+  "limits": "One actual compiled context; the omitted original receive-stub functions remain absent and no branch disposition follows solely from this observation."
+}

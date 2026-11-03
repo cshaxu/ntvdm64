@@ -1,0 +1,12 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+  "previous_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r153.zip",
+  "current_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r230.zip",
+  "output_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r231.zip",
+  "old_parent_line": 687,
+  "new_parent_line": 714,
+  "unchanged_parent_expression": "CPU_40_STYLE",
+  "child_record_line": 804,
+  "scope": "parent pointer only; the child coordinate and contents are not audited at depth one",
+  "current_source_sha256": "61cbc5cb4fdd0de86b1b821fef65358f4cfe6c42b3d164b4d93f1d7d697db500"
+}

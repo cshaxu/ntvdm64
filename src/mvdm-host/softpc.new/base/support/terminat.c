@@ -101,9 +101,12 @@ void terminate()
 
 	gvi_term();	/* close down the video adaptor */
 
+#line 103
 #ifndef NTVDM
+#line 104
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 106
 
 #ifdef LIM
 	host_deinitialise_EM(); /* free memory or file used by EM */

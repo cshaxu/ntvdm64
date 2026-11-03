@@ -379,7 +379,9 @@ VOID TerminateVDM(void)
 
 
 
+#line 359
 #ifdef NOTUSEDNOTUSED
+#line 360
 #error Unsupported excluded original configuration
 #endif
-#line 408
+#line 423

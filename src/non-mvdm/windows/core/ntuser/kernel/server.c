@@ -1,13 +1,14 @@
 /* DIVERGENCE(OPENNT-HOST-090): retain original message tables/initializer;
  * omit the unrelated USER server. SharedAlloc binds their local storage. */
-#if defined(WOW_ORIGINAL_DEFAULT_MESSAGES)
-#include "wow_default_message_bindings.h"
-#define SharedAlloc(bytes) HeapAlloc(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, (bytes))
-
 #line 53
 #ifdef FE_IME
 #error Excluded unsupported FE_IME server global
 #endif
+
+#if defined(WOW_ORIGINAL_DEFAULT_MESSAGES)
+#include "wow_default_message_bindings.h"
+#define SharedAlloc(bytes) HeapAlloc(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, (bytes))
+
 #line 190
 /* DIVERGENCE(OPENNT-HOST-117): unchanged original Button dispatch membership. */
 CONST WORD gawButtonWndProc[] = {
@@ -280,9 +281,13 @@ CONST WORD gawEditWndProc[] = {
     WM_RBUTTONDOWN,
     WM_RBUTTONUP,
     WM_FINALDESTROY,
+#endif /* WOW_ORIGINAL_DEFAULT_MESSAGES */
+#line 461
 #if 0
 #error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#if defined(WOW_ORIGINAL_DEFAULT_MESSAGES)
+#line 464
     WM_PAINT,
     WM_PASTE,
     WM_PRINTCLIENT,
@@ -379,9 +384,14 @@ CONST WORD gawDefWindowSpecMsgs[] = {
     WM_DEVICECHANGE,
     WM_POWERBROADCAST,
     WM_MOUSEWHEEL,
+#endif /* WOW_ORIGINAL_DEFAULT_MESSAGES */
+#line 583
 #ifdef FE_IME
+#line 584
 #error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
 #endif
+#if defined(WOW_ORIGINAL_DEFAULT_MESSAGES)
+#line 597
     0
 };
 
@@ -413,3 +423,85 @@ VOID InitWindowMsgTable(
 #ifndef PAGE_SIZE
 #define PAGE_SIZE 0x1000
 #endif
+
+#line 481
+#ifdef FE_IME
+#error Excluded unsupported original FE_IME branch
+#endif
+#line 499
+
+
+#line 833
+#ifdef FE_IME // amsgsSyncOnly[]
+#line 834
+#error Excluded unsupported original FE_IME branch
+#endif
+#line 840
+
+#line 1054
+#ifdef FE_IME
+#line 1055
+#error Excluded unsupported original FE_IME branch
+#endif
+#line 1057
+
+#line 1861
+#ifdef FE_IME
+#line 1862
+#error Excluded unsupported original FE_IME branch
+#endif
+#line 1864
+
+
+#line 990
+#ifdef FE_IME
+#line 991
+#error Excluded unsupported original FE_IME branch
+#else
+#line 993
+#endif
+#line 995
+
+
+#line 1703
+#ifdef ANDREVA_DBG
+#line 1704
+#error Excluded unsupported original ANDREVA_DBG branch
+#endif
+#line 1706
+
+
+#line 850
+#ifdef DEBUG
+#line 851
+#error Unsupported DEBUG original branch
+#endif // DEBUG
+#line 878
+
+#line 934
+#ifdef DEBUG
+#line 935
+#error Unsupported DEBUG original branch
+#endif
+#line 940
+
+#line 1002
+#ifdef DEBUG
+#line 1003
+#error Unsupported DEBUG original branch
+#endif
+#line 1020
+
+#line 1163
+#ifdef DEBUG
+#line 1164
+#error Unsupported DEBUG original branch
+#endif
+#line 1210
+
+#line 1822
+#ifdef DEBUG
+#line 1823
+#error Unsupported DEBUG original branch
+#endif
+#line 1825

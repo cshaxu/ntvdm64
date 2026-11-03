@@ -1,0 +1,129 @@
+{
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "before_sha256": "c0be8bb945fc98e43631961d043c8cdf91df7e7503ebeab76206b328e46e3bfc",
+      "guards": [
+        {
+          "original_line": 2204,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 2210
+        }
+      ],
+      "after_sha256": "5da4eb58366fe15bb2e312956c48071b9377361e09b9a40b20f8c4a423be6a48"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\getset.c",
+      "original_sha256": "f0d22e4285e8b33b873854913a11587c67d78e50e1f5db28ec89ef8b6ff06d3d",
+      "before_sha256": "09e2ea800d489f0a8364f10a906e97d04f62e8db3c22ef19d73a2343c4340bdb",
+      "guards": [
+        {
+          "original_line": 749,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 752
+        },
+        {
+          "original_line": 759,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 770
+        },
+        {
+          "original_line": 776,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 779
+        },
+        {
+          "original_line": 781,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 794
+        }
+      ],
+      "after_sha256": "42a0eaabf60af5f3da3fcfa8e686a1d737a55a8913a07f254f348ae2b6f7c10b"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_sha256": "0400c034bb5a782e81777e9fd805c07dbcd18d60ec9f1a876cfa67444577e0f8",
+      "before_sha256": "1fe6419eb1959ae564164d5195123e3d207d0a373e41684d4538257c0dfc80c4",
+      "guards": [
+        {
+          "original_line": 1480,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 1490
+        },
+        {
+          "original_line": 1626,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 1636
+        },
+        {
+          "original_line": 2649,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 2658
+        }
+      ],
+      "after_sha256": "d03d0c37ce9491f554987df3c226548f5c3c32ec85fb5ae7927e8db56c968760"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_sha256": "b7656bca55e892a42ba825be0324211450ad298c40717e1ae5a889d084467529",
+      "before_sha256": "46480b297969e9cff89f0090f693ed013873c3cfb47518a8505cce51f6475bdc",
+      "guards": [
+        {
+          "original_line": 3188,
+          "kind": "if",
+          "expression": "DBG",
+          "continuation": 3231
+        }
+      ],
+      "after_sha256": "d96229944220118fdc816f722db6a5bd8fc90b39f75e1193f123bbe11cfacd90"
+    }
+  ],
+  "scope": "first-depth DEBUG/DBG branches; original enclosing functions omitted from current subset",
+  "validation": "x86 worker, WOW32 and call-boundaries builds passed; 14 focused guards checked",
+  "existing_guards": [
+    {
+      "source": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "original_line": 23,
+      "current_line": 12,
+      "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd"
+    },
+    {
+      "source": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "original_line": 36,
+      "current_line": 39,
+      "original_sha256": "9bdd58d63029de9438633a62934af2b2b868206cb7f06cc868f537e030fbd234"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "original_line": 44,
+      "current_line": 48,
+      "original_sha256": "94f049032a9298802cab09afc61651469dcbf1fec80ab36444e5c2fed2f681ad"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "original_line": 908,
+      "current_line": 842,
+      "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "original_line": 77,
+      "current_line": 78,
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c"
+    }
+  ],
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r213.zip"
+}

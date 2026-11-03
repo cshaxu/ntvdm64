@@ -231,7 +231,7 @@ PVOID AddParamMap(DWORD dwPtr32, DWORD dwPtr16)
 #ifdef MAPPARAM_EXTRA
 #error Unsupported excluded original configuration
 #endif
-#line 233
+#line 211
             lpn->nAliasCount = 0;
             lpn->htask16 = CURRENTPTD()->htask16;
             gParamMap.pHead = lpn;
@@ -334,7 +334,7 @@ BOOL DeleteParamMap(DWORD lParam, UINT fMode, BOOL* pfFreePtr)
 #line 364
                 *pfFreePtr = FALSE;
 #endif
-#line 366
+#line 341
             }
             CacheBlockFree(&gParamMap.blkCache, lpn);
         }
@@ -459,7 +459,7 @@ else { \
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #else 
-#line 496
+#line 471
 #define LINK_WORKLIST(pc, pNew, pLast)
 #endif
 #line 473
@@ -520,10 +520,12 @@ LPVOID CacheBlockAllocate(PBLKCACHE pc, DWORD dwSize)
                 }
 
                 // include into busy blocks
+#line 530
 #ifdef DEBUG
+#line 531
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 559
+#line 534
                 return (LPVOID)(pbh+1);
            }
 
@@ -550,7 +552,7 @@ VOID CacheBlockFree(PBLKCACHE pc, LPVOID lpv)
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #else
-#line 607
+#line 582
         PBLKHEADER pbhf = pc->pCacheFree;
         PBLKHEADER pbhLast = NULL;
 #endif

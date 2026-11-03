@@ -437,10 +437,12 @@ HANDLE  hFile;
 LONG    lLoc;
 DWORD   dwLoc;
 
+#line 369
 #if (FILE_BEGIN != 0 || FILE_CURRENT != 1 || FILE_END !=2)
+#line 370
 #error Unsupported excluded original configuration
 #endif
-#line 445
+#line 374
     hFile =  GETHANDLE (getAX(),getBP());
     lLoc  = (LONG)((((int)getCX()) << 16) + (int)getDX());
 
@@ -595,9 +597,12 @@ VOID demCommit(VOID)
 
     hFile = GETHANDLE(getAX(),getBP());
     bRet = FlushFileBuffers(hFile);
+#line 528
 #if DBG
+#line 529
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 548
 
     setCF(0);
 

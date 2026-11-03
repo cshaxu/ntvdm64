@@ -35,9 +35,11 @@ Revision History:
 #include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 
+#line 36
 #if DBG
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 39
 
 #ifndef i386
 ULONG
@@ -302,7 +304,9 @@ Return Value:
         }
     }
 
+#line 164
 #ifdef i386
+#line 165
 #error DIVERGENCE MVDM-HOST-DIV-619: unsupported i386 kernel VDM host path
 #endif
 #line 169

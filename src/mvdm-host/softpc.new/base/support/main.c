@@ -58,6 +58,7 @@
  * host startup provider but hid its declaration, while the NT DOS-emulation
  * and mouse providers have no selected public declaration carrier. Publish
  * their exact existing contracts without changing startup order. */
+#line 54
 #ifndef CPU_40_STYLE
 #error Excluded unsupported non-CPU40 host startup profile
 #else
@@ -68,6 +69,7 @@ extern void host_start_cpu(void);
 extern int InitialiseDosEmulation(int argc, char **argv);
 extern void mouse_driver_initialisation(void);
 
+#line 58
 void init_virtual_drivers IPT0();
 
 IMPORT void host_set_yoda_ints IPT0();
@@ -80,9 +82,11 @@ extern void host_applInit(int argc, char *argv[]);
 #endif	/* ANSI */
 #line 75
 
+#line 69
 #ifdef REAL_VGA
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #endif
+#line 72
 
 /* Have global variables defined here to indicate what product to run as. */
 
@@ -108,7 +112,7 @@ INT host_main IFN2(INT, argc, CHAR **, argv)
 #else   /* host_main */
 #error Unsupported excluded original configuration
 #endif  /* host_main */
-#line 106
+#line 99
 {
   IMPORT ULONG setup_global_data_ptr();
 
@@ -146,9 +150,11 @@ INT host_main IFN2(INT, argc, CHAR **, argv)
 #endif	/* NTVDM, macintosh, VMS */
 #line 142
 
+#line 140
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* !PROD */
+#line 143
 
 #ifdef SECURE
 #error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register.
@@ -162,10 +168,11 @@ INT host_main IFN2(INT, argc, CHAR **, argv)
 #ifdef SECURE
 #error Unsupported excluded original configuration
 #endif
-#line 170
+#line 167
 #if defined(CPU_40_STYLE) && !defined(CCPU)
 #error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
 #endif /* assembler 4.0 cpu */
+#line 174
 
   verbose = FALSE;
 
@@ -207,9 +214,12 @@ INT host_main IFN2(INT, argc, CHAR **, argv)
 
   config();
 
+#line 210
 #if defined(PROFILE) && !defined(CPU_40_STYLE)
+#line 211
 #error Excluded unsupported non-CPU40 profiling startup
 #endif	/*PROFILE*/
+#line 217
 #line 221
 
 #if defined(NTVDM) || defined(macintosh)
@@ -233,13 +243,18 @@ INT host_main IFN2(INT, argc, CHAR **, argv)
 
 
 
+#line 248
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
+#line 263
 
+#line 264
 #ifdef GISP_SVGA
+#line 265
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
+#line 269
 
 	/*
 	 * Set up the VGA globals before host_init_screen() in
@@ -266,9 +281,12 @@ INT host_main IFN2(INT, argc, CHAR **, argv)
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #endif /* REAL_VGA */
 
+#line 296
 #ifdef IPC
+#line 297
 #error Unsupported excluded original configuration
 #endif
+#line 299
 #line 290
 
 #ifdef NTVDM
@@ -306,9 +324,11 @@ INT host_main IFN2(INT, argc, CHAR **, argv)
 
 GLOBAL void init_virtual_drivers IFN0()
 {
+#line 335
 #ifdef HFX
+#line 336
 #error Unsupported excluded original configuration
 #endif
-#line 329
+#line 338
 	mouse_driver_initialisation();
 }

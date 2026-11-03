@@ -1,0 +1,26 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+  "current_sha256": "da1db0c309b1233b528cbfe920a55c9f5842299ddb4c2f6b2814503c5c0295b2",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+  "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+  "original_group": {
+    "line": 583,
+    "depth": 1,
+    "expression": "FE_IME"
+  },
+  "current_matching_group": {
+    "line": 387,
+    "depth": 2,
+    "parent_line": 289,
+    "parent_condition": "defined(WOW_ORIGINAL_DEFAULT_MESSAGES)",
+    "status": "unreviewed; do not inspect inner branch during depth 1"
+  },
+  "matching_context": [
+    "WM_POWERBROADCAST,",
+    "WM_MOUSEWHEEL,",
+    "0",
+    "};"
+  ],
+  "correction": "Earlier evidence that the original owner is omitted is inaccurate: the same array context exists under a local outer condition. Original first-depth reconciliation stays pending until parent reachability is audited and the local depth-2 group can be examined.",
+  "limitations": "source-context match only; macro reachability and all build contexts not yet established; no source changed"
+}

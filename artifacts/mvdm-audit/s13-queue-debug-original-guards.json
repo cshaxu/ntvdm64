@@ -1,0 +1,41 @@
+{
+  "source": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\queue.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+  "original_sha256": "0400c034bb5a782e81777e9fd805c07dbcd18d60ec9f1a876cfa67444577e0f8",
+  "before_sha256": "ffdb15b0d675568e9bb9c27383b896dc8d6466b9c8ed8ac778cd0c3f0f605cb8",
+  "after_sha256": "869df62743b8a17c40934b3bce28afcb14113ab378e9bccf46c27ff6eac9179e",
+  "guards": [
+    {
+      "original_line": 30,
+      "else_line": 36,
+      "selected_line": 37
+    },
+    {
+      "original_line": 54,
+      "else_line": 114,
+      "selected_line": 115
+    }
+  ],
+  "selected": "Original no-op macros retained; selected source and known fixture wrappers do not invoke them.",
+  "status": "candidate verified by selected x86 builds and isolated forced DEBUG controls",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r240.zip",
+  "forced_diagnostic_lines": [
+    31,
+    55
+  ],
+  "builds": [
+    "x86 WOW32 passed",
+    "x86 call-boundaries passed"
+  ],
+  "stamped_wow32_diff_offsets": [
+    280,
+    281,
+    625412,
+    625413
+  ],
+  "reusable_regression": {
+    "arch": "MSVC x86",
+    "result": "185 retained guards pass",
+    "log_sha256": "a6bfa5801a653f6bb658b4b219689dfb9c1a02a3f62b1cd6e1659607ace8f4f6"
+  }
+}

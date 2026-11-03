@@ -1,0 +1,138 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "original_if_line": 300,
+      "identical_line_run": 2,
+      "next_current": "#error Unsupported excluded original configuration",
+      "next_original": "\t/* only indicate two floppies if a second is configured */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "original_if_line": 385,
+      "identical_line_run": 4,
+      "next_current": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_original": "\tchar *cp;"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "original_if_line": 245,
+      "identical_line_run": 2,
+      "next_current": "#error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.",
+      "next_original": "LOCAL IBOOL psFlushEnabled[NUM_SERIAL_PORTS];\t/* TRUE if PostScript flushing"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "original_if_line": 1046,
+      "identical_line_run": 1,
+      "next_current": "#error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.",
+      "next_original": "\t\t\t\t}"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "original_if_line": 468,
+      "identical_line_run": 4,
+      "next_current": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.",
+      "next_original": "#ifdef CPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "original_if_line": 314,
+      "identical_line_run": 2,
+      "next_current": "#error Unsupported excluded original configuration",
+      "next_original": "extern void IPXResInit ();"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "original_if_line": 322,
+      "identical_line_run": 2,
+      "next_current": "#error Unsupported excluded original configuration",
+      "next_original": "extern void TCPResInit ();"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "original_if_line": 328,
+      "identical_line_run": 2,
+      "next_current": "#error Unsupported excluded original configuration",
+      "next_original": "extern void ISWSEntry();"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "original_if_line": 333,
+      "identical_line_run": 2,
+      "next_current": "#error DIVERGENCE MVDM-HOST-DIV-529: SWINAPI platform branch is not selected; see mirror register.",
+      "next_original": "extern void User_call IPT0();"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "original_if_line": 343,
+      "identical_line_run": 2,
+      "next_current": "#error DIVERGENCE MVDM-HOST-DIV-528: SOFTWIN_API platform branch is not selected; see mirror register.",
+      "next_original": "extern void SoftWindowsApi IPT0();"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "original_if_line": 97,
+      "identical_line_run": 2,
+      "next_current": "#error Unsupported excluded original configuration",
+      "next_original": "IMPORT VOID host_mswin_disable IPT0();"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "original_if_line": 106,
+      "identical_line_run": 3,
+      "next_current": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_original": "#ifdef  REAL_ICA"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "original_if_line": 404,
+      "identical_line_run": 2,
+      "next_current": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.",
+      "next_original": "\tif (io_verbose & MOUSE_VERBOSE) {"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "original_if_line": 94,
+      "identical_line_run": 4,
+      "next_current": "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.",
+      "next_original": "  IMPORT ULONG Gdp;"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "original_if_line": 377,
+      "identical_line_run": 4,
+      "next_current": "#error DIVERGENCE MVDM-HOST-DIV-528: BSD4_2 platform branch is not selected; see mirror register.",
+      "next_original": "    host_release_timer();"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "original_if_line": 409,
+      "identical_line_run": 2,
+      "next_current": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.",
+      "next_original": ""
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "original_if_line": 89,
+      "identical_line_run": 9,
+      "next_current": "cleanup:",
+      "next_original": "    if ( !XsApiSuccess( status )) {"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "original_if_line": 282,
+      "identical_line_run": 100,
+      "next_current": "    if (hdcDlg == NULL) goto DeleteFontAndMenuAndFail;",
+      "next_original": "    if (hdcDlg == NULL) goto DeleteFontAndMenuAndFail;"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+      "original_if_line": 649,
+      "identical_line_run": 96,
+      "next_current": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "next_original": "    if (ped->lpfnCharset)"
+    }
+  ],
+  "limits": "text comparison only, no whole-context semantic or profile proof"
+}

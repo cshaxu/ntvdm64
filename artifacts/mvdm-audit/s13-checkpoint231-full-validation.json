@@ -1,0 +1,36 @@
+{
+  "scope": "coherent scratch candidate; not published",
+  "suite": "Full",
+  "gate_count": 17,
+  "all_pass": true,
+  "elapsed_ms": 390674,
+  "gate_names": [
+    "guest-media",
+    "ntvdm-export-ordinals",
+    "wow-frontiers",
+    "Console-17",
+    "Window-17",
+    "rpc",
+    "native-gui",
+    "version-negatives",
+    "strict-dir",
+    "modern-edit-return",
+    "cooked-return",
+    "rapid-relaunch",
+    "interactive-relaunch",
+    "session-isolation",
+    "retirement-wiring",
+    "nested-window-handoff",
+    "dos4gw-nesticle"
+  ],
+  "manifest_sha256": "025baf2482e9c2525dbfe22007fd1492e0bdb15eeaa8762daf11ebd42d6aa906",
+  "timings_sha256": "e614a1f4b37d6f4aa7ee529c0738876db52696db9772ee3fc7afb51e676cdb41",
+  "guest_immutable_files_verified": 63,
+  "initial_failure": "old baseline omitted four subsequently added guest resources; four were copied byte-for-byte from assets/winnt.zip with manifest hash verification before the fresh retry",
+  "limits": [
+    "WOW frontier gate observes windows but explicitly does not prove playable gameplay",
+    "DOS4GW gate observes a graphics window but does not assert gameplay or pixels",
+    "Win3.1 four-mode and separate gameplay gates are not included in this result",
+    "first-depth exclusions and full audit remain incomplete; no publication or submission"
+  ]
+}

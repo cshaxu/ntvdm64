@@ -1,0 +1,182 @@
+{
+  "scope": "Unbuilt original WOWFAX provider source and its legacy build/resource inputs; selected WOW32 bridge remains unchanged",
+  "files": [
+    {
+      "path": "src/mvdm-host/fax/dirs",
+      "sha256": "a5bb120a63f8ea3f635ec5962906b8e88fcc7b8b350bd0202a9f3d03ccb20695"
+    },
+    {
+      "path": "src/mvdm-host/fax/dummy.hlp",
+      "sha256": "624187783b0840215f6e9d9f2f55577bb243c9aa623d78affe46b2ca5f496a16"
+    },
+    {
+      "path": "src/mvdm-host/fax/dummy.ppd",
+      "sha256": "624187783b0840215f6e9d9f2f55577bb243c9aa623d78affe46b2ca5f496a16"
+    },
+    {
+      "path": "src/mvdm-host/fax/faxcomm.h",
+      "sha256": "e62eceaca2be64d3895671507f46f40493f47abdd0b9ccdcb218423f75684ceb"
+    },
+    {
+      "path": "src/mvdm-host/fax/printer.inf",
+      "sha256": "c64cc3163a83d257b51325f87ab5076f471eff324029a8d7efad6ef23cc81df6"
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfax/makefile",
+      "sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70"
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfax/obj/i386/wowfax.res",
+      "sha256": "ecf443ad3bdb1bb5d29ef34b19f9073d3b7f6720ff527f23c27d2046cd3f9756"
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfax/sources",
+      "sha256": "e6ade0bc934385e8b9fa39736d050f529b755c55cde611465bfb4ef6969e18b4"
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfax/wowfax.c",
+      "sha256": "8bf9f9f105cebec3635630379aa30d4fffcd7ec5ca3b1616e66a35556e167528"
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfax/wowfax.def",
+      "sha256": "4cac02a463f862a54a676d18ed84981a36780b19d84802f13426ce4711a660d3"
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfax/wowfax.rc",
+      "sha256": "57b744c3520857ea9f6f65a18235a65af82e7140a6eabaf9df02130bea83d47f"
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfax/wowfaxdd.h",
+      "sha256": "8a5fda1efe059a72eb81c82a597e04cae39407483ade2a4f28b3566e529083c6"
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfaxui/makefile",
+      "sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70"
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfaxui/obj/i386/wowfaxui.res",
+      "sha256": "7aae9671cd45f8cefcd80f6a719f90b26d9196ccf7d2cde82bcc2dde4f5ee311"
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfaxui/sources",
+      "sha256": "cc072032f11a16a455d6575c5006460c109cbb4cff6ce58c0cf6539c9922573c"
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfaxui/wfhelper.c",
+      "sha256": "ab024a4470f736e9823aca39921e20cfb222b031c2440d039352af0d67aff14c"
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfaxui/wfsheets.c",
+      "sha256": "674bf252d57d0d23f35ed17ecda0add5f2f164753075891ba95e583708712a51"
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfaxui/wfsheets.h",
+      "sha256": "642c0e42ae95045382624badfd73ec1a487ff4d43852c6159316e589e09c0f05"
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfaxui/wfupgrad.c",
+      "sha256": "7bf4fec02bfe56471ef33894afa6d7eb03cf953104193d77098c40b6fe94bf8e"
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfaxui/wowfaxui.c",
+      "sha256": "b3d1a2d98873607b2a1642b0bc958ecc96f1699eff9e6bc492b722a5fd745daa"
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfaxui/wowfaxui.def",
+      "sha256": "437c1e93ffce9ca9481123cf46bd1147b0ca048f38a7e512dd73ca5bdd37fa81"
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfaxui/wowfaxui.h",
+      "sha256": "835ec1943329e1cfc2d63e4a944cfecf90adb68058093db8fa13ed07250ddef2"
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfaxui/wowfaxui.rc",
+      "sha256": "8621037c13f0c9f93ec71a2583ada1af1514ad4aea43e6f792f205525b06cf1f"
+    }
+  ],
+  "mirror_sources": [
+    {
+      "path": "src/mvdm-host/fax/faxcomm.h",
+      "current_sha256": "e62eceaca2be64d3895671507f46f40493f47abdd0b9ccdcb218423f75684ceb",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\fax\\faxcomm.h",
+      "original_sha256": "3f0ebb1007332c1c02b6b32af42577992886f5e2447433c0193cc89b988b25f4",
+      "pinned_expected_sha256": "3f0ebb1007332c1c02b6b32af42577992886f5e2447433c0193cc89b988b25f4",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfax/wowfax.c",
+      "current_sha256": "8bf9f9f105cebec3635630379aa30d4fffcd7ec5ca3b1616e66a35556e167528",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\fax\\wowfax\\wowfax.c",
+      "original_sha256": "cf77ad0a7fad02c80a872c388ebf5b38d59e69cca2b84c36d316734c095381d4",
+      "pinned_expected_sha256": "cf77ad0a7fad02c80a872c388ebf5b38d59e69cca2b84c36d316734c095381d4",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfax/wowfaxdd.h",
+      "current_sha256": "8a5fda1efe059a72eb81c82a597e04cae39407483ade2a4f28b3566e529083c6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\fax\\wowfax\\wowfaxdd.h",
+      "original_sha256": "b198e348fad62c416d8451ddd24e25f76132786a1cc8aed6a9c4b481f7518129",
+      "pinned_expected_sha256": "b198e348fad62c416d8451ddd24e25f76132786a1cc8aed6a9c4b481f7518129",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfaxui/wfhelper.c",
+      "current_sha256": "ab024a4470f736e9823aca39921e20cfb222b031c2440d039352af0d67aff14c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\fax\\wowfaxui\\wfhelper.c",
+      "original_sha256": "bf8cd7fe0a51e9339b98c1ced13a7d295a25a0f49dc08be83d7c07e1b6785bec",
+      "pinned_expected_sha256": "bf8cd7fe0a51e9339b98c1ced13a7d295a25a0f49dc08be83d7c07e1b6785bec",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfaxui/wfsheets.c",
+      "current_sha256": "674bf252d57d0d23f35ed17ecda0add5f2f164753075891ba95e583708712a51",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\fax\\wowfaxui\\wfsheets.c",
+      "original_sha256": "c43b25cb761cd8a3ca6dd95c3e4707b9a118544a1bcbc014ca5c780a40f0aac6",
+      "pinned_expected_sha256": "c43b25cb761cd8a3ca6dd95c3e4707b9a118544a1bcbc014ca5c780a40f0aac6",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfaxui/wfsheets.h",
+      "current_sha256": "642c0e42ae95045382624badfd73ec1a487ff4d43852c6159316e589e09c0f05",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\fax\\wowfaxui\\wfsheets.h",
+      "original_sha256": "262ccb34768eabc0e64c6ea30096356c3823e5872a790991785cea0b72cfcf0c",
+      "pinned_expected_sha256": "262ccb34768eabc0e64c6ea30096356c3823e5872a790991785cea0b72cfcf0c",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfaxui/wfupgrad.c",
+      "current_sha256": "7bf4fec02bfe56471ef33894afa6d7eb03cf953104193d77098c40b6fe94bf8e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\fax\\wowfaxui\\wfupgrad.c",
+      "original_sha256": "67d44211d4014e713116b72347159da85df18ec5d9042094c009357f9062617e",
+      "pinned_expected_sha256": "67d44211d4014e713116b72347159da85df18ec5d9042094c009357f9062617e",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfaxui/wowfaxui.c",
+      "current_sha256": "b3d1a2d98873607b2a1642b0bc958ecc96f1699eff9e6bc492b722a5fd745daa",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\fax\\wowfaxui\\wowfaxui.c",
+      "original_sha256": "d96bf03ebd449b537c25e0126529af008e5ecc8d7421658497fe35fde4261ca4",
+      "pinned_expected_sha256": "d96bf03ebd449b537c25e0126529af008e5ecc8d7421658497fe35fde4261ca4",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfaxui/wowfaxui.h",
+      "current_sha256": "445322af41d9e7e5d4a29200f7de7472d89d72ac189aa9a8d186d71e2c666cd2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\fax\\wowfaxui\\wowfaxui.h",
+      "original_sha256": "88d90b14cec1ebf6cb08d142f8ccc19b9dcb246cf9fab6c63124b468284cdf51",
+      "pinned_expected_sha256": "88d90b14cec1ebf6cb08d142f8ccc19b9dcb246cf9fab6c63124b468284cdf51",
+      "original_matches_pinned": true,
+      "working_sha256": "835ec1943329e1cfc2d63e4a944cfecf90adb68058093db8fa13ed07250ddef2"
+    }
+  ],
+  "removed_condition_groups": 12,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r114.zip",
+  "evidence": [
+    "No references to this subtree in generated Ninja graphs; literal header/resource name searches find only historical inventory and rejected-branch snippet.",
+    "Staged candidate package contains no fax assets. WOW32 dynamically names system WOWFAX.DLL and WOWFAXUI.DLL; removing source files does not assert availability of those drivers."
+  ],
+  "limitations": [
+    "No claim that historical fax functionality is supported or that its system DLLs exist.",
+    "Unsupported future build profiles are not covered."
+  ]
+}

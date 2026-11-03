@@ -1,0 +1,31 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+  "old_commit": "1d2ddfb18",
+  "old_sha256": "413fc6e2209039169fd1b72c4272e22df1df6c9a2d4bbd1a8b8ab3b2eeaf7820",
+  "current_sha256": "0053b665908d6142a181b6fdcc894504b03cd4b811c7b729c2aa348b9362a5cb",
+  "method": "MSVC /EP, exact Ninja target flags, identical scratch source path; nonblank stripped lines hashed. ntSend.h copied without modification.",
+  "contexts": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-view-wow.obj",
+      "old_sha256": "1bee5c365a2d36652749cf9a08294035c71f223ca58bbe1a244bbf925e37c44f",
+      "current_sha256": "1bee5c365a2d36652749cf9a08294035c71f223ca58bbe1a244bbf925e37c44f",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/view_wow.obj",
+      "old_sha256": "5f828c71e26f9da4ee0fdfcd4804864034e55d9ad20cdda75aed4cbd96e04923",
+      "current_sha256": "5f828c71e26f9da4ee0fdfcd4804864034e55d9ad20cdda75aed4cbd96e04923",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/default_view.obj",
+      "old_sha256": "694380d4363ba29ecf5180a092a4151f9489610aa7d470d63be0af8f89d18556",
+      "current_sha256": "694380d4363ba29ecf5180a092a4151f9489610aa7d470d63be0af8f89d18556",
+      "equal": true
+    }
+  ],
+  "limits": "Tests selected preprocessed text only; excludes diagnostics and does not establish other contexts, link or runtime behavior."
+}

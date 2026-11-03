@@ -1,0 +1,55 @@
+{
+  "scope": "current depth-one newly-excluded groups; logical-line mapping and exact directive text",
+  "groups_examined": 679,
+  "exact": 381,
+  "unique_near": 82,
+  "unresolved": 216,
+  "possible_scope_mismatch": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "current_line": 2678,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keyba.c",
+      "original_line": 3049,
+      "mapping": "unique-near-line-map",
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "current_line": 980,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_bop.c",
+      "original_line": 958,
+      "mapping": "line-map-exact",
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "current_line": 18,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_line": 238,
+      "mapping": "line-map-exact",
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "current_line": 27,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_line": 3310,
+      "mapping": "line-map-exact",
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "current_line": 29,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+      "original_line": 351,
+      "mapping": "line-map-exact",
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 2
+    }
+  ],
+  "limits": "discovery only: macro expansions, comments and alternate branches can change lexical braces; nearby mapping is not proof; no edits"
+}

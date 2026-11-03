@@ -1,0 +1,90 @@
+{
+  "scope": "Owner correction: preserve executable tools, DLLs and tool scripts",
+  "restored": [
+    {
+      "path": "src/mvdm-host/vdmutils/forcedos/obj/i386/forcedos.exe",
+      "sha256": "5e93e8b89865d611391b25c6bf451cfa63f07d6643bb422da36542e2e554d320",
+      "zip_entry": "WINNT/SYSTEM32/FORCEDOS.EXE"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/win/obj/i386/win.com",
+      "sha256": "5eb085d36b58b1b2ca57e07beffc341860d451265d2f913f4de799c0235f05cf",
+      "zip_entry": "WINNT/SYSTEM32/WIN.COM"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/i386/vdmexts.dll",
+      "sha256": "5ad8d07da714e9d9c4391da5fbb75c6e5150c244d570fbbcd89171083b340170",
+      "zip_entry": "WINNT/SYSTEM32/VDMEXTS.DLL"
+    },
+    {
+      "path": "tools/audit/New-T288S1MonitorSourceLedger.ps1",
+      "sha256": "79e84d5132858e3cf6d52c2a31b10cc258e4215a9ac492e45d95008e2a1ed6c1",
+      "zip_entry": null
+    },
+    {
+      "path": "tools/build/New-T279SupportLibraryNinja.ps1",
+      "sha256": "22118f557ce05a253a61c641872a7d4ceffb37aac96687f55f216ac5111c1b4a",
+      "zip_entry": null
+    },
+    {
+      "path": "tools/build/New-T288S2MonitorDeclarationNinja.ps1",
+      "sha256": "6f16b20a8e835f0e8ed6e7d953ac7a9e260403704b780b9efe9c694228585c68",
+      "zip_entry": null
+    },
+    {
+      "path": "tools/governance/Verify-T279Closure.ps1",
+      "sha256": "3c348c8497df401ecc1de5534566ca3b543673a04fcf88ade74509167a654c84",
+      "zip_entry": null
+    },
+    {
+      "path": "tools/governance/Verify-T279S3SupportLibraryBuild.ps1",
+      "sha256": "798166851371df91913365138277f0ba09b36ec35d15d53f1ab6af78f4b2f4b2",
+      "zip_entry": null
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/mscdex/vdd/obj/i386/vcdex.dll",
+      "sha256": "3679db6245b7717d3e58c19b19097c8031d6c5a94df773b5c01e5ca7ed98ebde",
+      "zip_entry": "WINNT/SYSTEM32/VCDEX.DLL",
+      "status": "previously retained host sample DLL"
+    }
+  ],
+  "original_zip_entries_verified": 62,
+  "added_zip_entries": [
+    "WINNT/SYSTEM32/FORCEDOS.EXE",
+    "WINNT/SYSTEM32/WIN.COM",
+    "WINNT/SYSTEM32/VDMEXTS.DLL",
+    "WINNT/SYSTEM32/VCDEX.DLL"
+  ],
+  "archive_sha256": "b79dfb38d99335f59688966d2d13688bd4b8d19af44760d2d68ce5c72a6076e7",
+  "limitations": [
+    "Retained prebuilt tools are not asserted functional on current Windows; VDMEXTS is an historical debugger extension.",
+    "Historical tool scripts are retained; their former source/build dependencies need separate audit.",
+    "Historical verify-wow-external-native.ps1 pins an older P13 ZIP hash and is not valid against the updated archive without a new baseline."
+  ],
+  "preserved_nonbuild_resources": [
+    {
+      "path": "src/mvdm-host/fax/dummy.hlp",
+      "sha256": "624187783b0840215f6e9d9f2f55577bb243c9aa623d78affe46b2ca5f496a16"
+    },
+    {
+      "path": "src/mvdm-host/fax/dummy.ppd",
+      "sha256": "624187783b0840215f6e9d9f2f55577bb243c9aa623d78affe46b2ca5f496a16"
+    },
+    {
+      "path": "src/mvdm-host/fax/printer.inf",
+      "sha256": "c64cc3163a83d257b51325f87ab5076f471eff324029a8d7efad6ef23cc81df6"
+    },
+    {
+      "path": "src/mvdm-host/vdmdbg/vdmdbg.txt",
+      "sha256": "ced20d1a69fe8c4bdbac5f7487fe3878de8f7bddc7b779b01d973d8325c4df0f"
+    }
+  ],
+  "resource_scope": "Retained help, PPD, INF and documentation pending separate independent usefulness review. No deleted .fon/.ttf font files were found.",
+  "manifest": "assets/winnt-guest-manifest.json updated with archive identity and four native PE file records",
+  "verification": [
+    "Archive CRC passed; every original member payload matched HEAD, and every existing payload matched during VCDEx addition.",
+    "verify-guest-media.py passed 63 immutable files with three configuration files excluded.",
+    "Static NE module closure contains no missing modules."
+  ],
+  "original_zip_entries_verified_before_vcdex": 65
+}

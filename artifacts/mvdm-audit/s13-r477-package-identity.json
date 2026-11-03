@@ -1,0 +1,66 @@
+{
+  "package": "build\\t473-s13\\r463-phase1-package",
+  "rows": [
+    {
+      "name": "run16.exe",
+      "input": "build\\.ninja\\msvc-x64-release\\launcher\\run16.exe",
+      "input_matches": true,
+      "package_matches": true
+    },
+    {
+      "name": "ntsrv.exe",
+      "input": "build\\.ninja\\msvc-x64-release\\service\\ntsrv.exe",
+      "input_matches": true,
+      "package_matches": true
+    },
+    {
+      "name": "ntcon.exe",
+      "input": "build\\.ninja\\msvc-x64-release\\frontend\\ntcon.exe",
+      "input_matches": true,
+      "package_matches": true
+    },
+    {
+      "name": "ntvdm.exe",
+      "input": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe",
+      "input_matches": true,
+      "package_matches": true
+    },
+    {
+      "name": "ntvwm.exe",
+      "input": "build\\.ninja\\msvc-x64-release\\worker\\ntvwm.exe",
+      "input_matches": true,
+      "package_matches": true
+    },
+    {
+      "name": "ntmon.exe",
+      "input": "build\\.ninja\\msvc-x64-release\\monitor\\ntmon.exe",
+      "input_matches": true,
+      "package_matches": true
+    },
+    {
+      "name": "WOW32.DLL",
+      "input": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+      "input_matches": true,
+      "package_matches": true
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "input": "build\\.ninja\\msvc-x86-release\\worker\\VDMREDIR.DLL",
+      "input_matches": true,
+      "package_matches": true
+    },
+    {
+      "name": "nthook32.dll",
+      "input": "build\\.ninja\\msvc-x86-release\\worker\\nthook32.dll",
+      "input_matches": true,
+      "package_matches": true
+    },
+    {
+      "name": "nthook64.dll",
+      "input": "build\\.ninja\\msvc-x64-release\\hook\\nthook64.dll",
+      "input_matches": true,
+      "package_matches": true
+    }
+  ],
+  "limits": "Identity of current linked inputs and staged images, not source or runtime semantic proof."
+}

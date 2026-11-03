@@ -1,0 +1,18 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+  "before_sha256": "48cd5dcf5dd20a16b03a26be4579b1594b7fc0d1c98a3b4664c33f7b36566ff6",
+  "after_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+  "original_lines": [
+    206,
+    243,
+    310,
+    353,
+    992,
+    1096,
+    1122,
+    1191,
+    1317,
+    1434
+  ],
+  "reason": "These directives were placed at file scope but original contexts belong to omitted functions; restored verified immediate preimage. Original groups pending."
+}

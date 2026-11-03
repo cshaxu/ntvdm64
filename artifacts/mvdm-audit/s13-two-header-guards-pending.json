@@ -1,0 +1,20 @@
+{
+  "queue_from": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r234.zip",
+  "queue_to": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r235.zip",
+  "original_whole_header_guards_reclassified_from_unreviewed_to_pending": [
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\usercli.h",
+      "line": 15,
+      "evidence": "s13-depth1-usercli-guard-positive-negative.json",
+      "register": "OPENNT-HOST-072/074"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\user.h",
+      "line": 15,
+      "evidence": "s13-user-multicohort-guard.json",
+      "register": "OPENNT-HOST-063/093/105"
+    }
+  ],
+  "scope": "These selected guards cannot be replaced by #error; original structure and current repeated-inclusion adaptation require reconciliation without loss of declarations. Existing original bodies and local adaptations left unchanged.",
+  "no_semantic_concession": "pending, not an approved exception to final structural requirement."
+}

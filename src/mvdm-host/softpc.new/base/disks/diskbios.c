@@ -373,7 +373,7 @@ LOCAL void (*disk_func[]) (void) =
 #else
 #error Unsupported excluded original configuration
 #endif
-#line 375
+#line 572
 {
 	disk_reset,		/* 0x00 */
 	return_status,		/* 0x01 */
@@ -1005,7 +1005,10 @@ GLOBAL void fast_disk_bios_detach IFN1(int, drive)
 }
 
 
+#line 1245
 #ifdef WDCTRL_BOP
+#line 1246
 #error Unsupported excluded original configuration
 #endif	/* WDCTRL_BOP */
+#line 1475
 #line 1195

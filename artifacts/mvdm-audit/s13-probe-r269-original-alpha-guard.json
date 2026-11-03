@@ -1,0 +1,11 @@
+{
+  "source": "src/non-mvdm/base/ntos/ex/probe.c",
+  "before_sha256": "d5a4aa697600bba9c8d8a4be71103e88c548c6f93c7a6951c9c0557b978fd7d3",
+  "after_sha256": "01e82e25e9f06ee036c7781385e05e6090da6cb9e27c225a03fe9ac4efcb8515",
+  "original_group": 106,
+  "selected_alternative": "ProbeForWrite omitted; selected side remains pending",
+  "preprocessing": "s13-probe-r269-preprocess.json",
+  "forced_controls": "s13-probe-r269-controls.json",
+  "build": "cached x86 WOW32 passed",
+  "limits": "No runtime, x64 product or omitted original function restored; not first-depth completion."
+}

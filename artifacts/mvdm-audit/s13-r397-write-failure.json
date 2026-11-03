@@ -1,0 +1,9 @@
+{
+  "input_queue": "s13-bfs-depth1-working-queue-195r352.zip",
+  "first_failure": "OSError errno 22 writing src/mvdm-host/wow32/wparam.c",
+  "second_failure": "OSError errno 22 writing src/mvdm-host/wow32/wstruc.c",
+  "cause": "unconfirmed",
+  "recovery": "All previously written inputs recovered byte-for-byte to queue hashes; no new batch recorded.",
+  "queue_file_count": 1110,
+  "mismatched_hashes": 0
+}

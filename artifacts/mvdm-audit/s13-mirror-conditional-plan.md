@@ -31,8 +31,12 @@ admission is clean `c97d4ee2c`.
 The owner subsequently specified a breadth-first conditional review. The
 current uncommitted S13 tree is preserved and frozen separately from the
 pinned upstream identities. At each depth, classify every arm of the current
-group before examining children of an arm still possibly reachable. A proven
-excluded arm retains its own boundary and contains only `#error`; its nested
+group before examining children of an arm still possibly reachable.
+Depth is counted independently in each file: the file itself is depth 0 and
+its outermost conditional groups are depth 1. Including another file does not
+transfer nesting depth; inclusion and macro state remain relevant evidence for
+whether a branch is selected. A proven excluded arm retains its own boundary
+and contains only `#error`; its nested
 groups do not enter the next-depth queue. Unproven reachability is not an
 exclusion. Reconcile missing original structure independently from the current
 tree inventory, including intentional whole-function subsets and local

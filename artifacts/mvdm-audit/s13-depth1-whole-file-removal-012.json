@@ -1,0 +1,76 @@
+{
+  "scope": "Unselected original SIM32 serial-monitor package and obsolete exclusive declaration fixture and generator",
+  "files": [
+    {
+      "path": "src/mvdm-host/sim32/b.cmd",
+      "sha256": "cd17b33e61624d3547c9fdf7d3dbd96b62d0f27002edccb3d389f1bfbadb25d9"
+    },
+    {
+      "path": "src/mvdm-host/sim32/makefile",
+      "sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70"
+    },
+    {
+      "path": "src/mvdm-host/sim32/sim32.c",
+      "sha256": "490e033b6dd6dc2f659da007b1e83cb61f199c27ef4a5fbc8008ce9ad3bd6901"
+    },
+    {
+      "path": "src/mvdm-host/sim32/sim32.h",
+      "sha256": "a4573c3f55d72387cdffcb60fd5468a6f9649dc19a5b3fedab199b5d2f20aa52"
+    },
+    {
+      "path": "src/mvdm-host/sim32/sources",
+      "sha256": "6a90a39aa8de801c235437f69a7e6f82c2dbb87aea0fc2f6249fa5045b3cdbcc"
+    },
+    {
+      "path": "tools/build/New-T288S2MonitorDeclarationNinja.ps1",
+      "sha256": "6f16b20a8e835f0e8ed6e7d953ac7a9e260403704b780b9efe9c694228585c68"
+    },
+    {
+      "path": "tests/adapter-mvdm-host-out/monitor/t288_s2_sim32_declaration_fixture.c",
+      "sha256": "4ecf0069bafa150dfeb2b24cc188bdb27111e925460251c563fc86387614292c"
+    }
+  ],
+  "mirror_sources": [
+    {
+      "path": "src/mvdm-host/sim32/sim32.c",
+      "current_sha256": "490e033b6dd6dc2f659da007b1e83cb61f199c27ef4a5fbc8008ce9ad3bd6901",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\sim32\\sim32.c",
+      "original_sha256": "0adaea6079e0d913d3fe82aa5dcb51edab5cd419e2fdc570749568fb64f27b92",
+      "pinned_expected_sha256": "0adaea6079e0d913d3fe82aa5dcb51edab5cd419e2fdc570749568fb64f27b92",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/sim32/sim32.h",
+      "current_sha256": "c26dacff13e0e5b894e3abdad629693dbff3fd89a566820133987b1f0cee1488",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\sim32\\sim32.h",
+      "original_sha256": "7f41068e8cf87af5aa84a62b2642b1224824424382dbbd4056cdf6744191f311",
+      "pinned_expected_sha256": "7f41068e8cf87af5aa84a62b2642b1224824424382dbbd4056cdf6744191f311",
+      "original_matches_pinned": true,
+      "working_sha256": "a4573c3f55d72387cdffcb60fd5468a6f9649dc19a5b3fedab199b5d2f20aa52"
+    }
+  ],
+  "removed_condition_groups": 15,
+  "removed_parse_failures": [
+    [
+      "src/mvdm-host/sim32/sim32.c",
+      "current",
+      368,
+      "unclosed condition/comment"
+    ],
+    [
+      "O:\\repos.external\\OpenNT\\base\\mvdm\\sim32\\sim32.c",
+      "original",
+      368,
+      "unclosed condition/comment"
+    ]
+  ],
+  "prior_queue": "s13-bfs-depth1-working-queue-195r116.zip",
+  "evidence": [
+    "Product and generated test graphs do not select src/mvdm-host/sim32; selected CCPU sources resolve sim32.h from softpc.new/host/inc.",
+    "The standalone T288 generator refers to a fixture path that no longer exists and has no current callers; its remaining relocated fixture is exclusive to this obsolete declaration check."
+  ],
+  "limitations": [
+    "This is not a change to the active CCPU SIM32 implementation.",
+    "Unsupported future profiles are not covered."
+  ]
+}

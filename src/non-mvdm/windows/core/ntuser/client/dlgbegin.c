@@ -287,10 +287,12 @@ HWND InternalCreateDialog(
             dsStyleOld |= DS_3DLOOK;
         }
     } else {
+#line 282
 #ifdef DEBUG
+#line 283
 #error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
 #endif // DEBUG
-#line 295
+#line 287
 
 
         /*

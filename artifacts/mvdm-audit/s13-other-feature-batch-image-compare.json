@@ -1,0 +1,30 @@
+[
+  {
+    "previous": "debug-followup-ntvdm-final-stamped.exe",
+    "current": "other-feature-ntvdm-stamped.exe",
+    "bytes": 2103808,
+    "previous_sha256": "fd00202c297c8d9d7244aba6970afce43cd79195dea2beaf20a3a3952d727502",
+    "current_sha256": "8681d43076e0e740bdda34d39e25e0c070d047396804a0538ac4749a54bc70ea",
+    "differing_offsets": [
+      288,
+      289,
+      1698412,
+      1698413
+    ],
+    "comparison": "only PE/link timestamp offsets"
+  },
+  {
+    "previous": "debug-followup-wow32-stamped.dll",
+    "current": "other-feature-wow32-stamped.dll",
+    "bytes": 712192,
+    "previous_sha256": "d84ed0ea84016942ec78f22374b577a1cbbe92ae84a42d2b128f79d00034c534",
+    "current_sha256": "783fff3145dfdfe01fbc145e3e6f63ca6b6d98aca689d58d363914e64f1dd6ae",
+    "differing_offsets": [
+      280,
+      281,
+      625412,
+      625413
+    ],
+    "comparison": "only PE/link timestamp offsets"
+  }
+]

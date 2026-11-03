@@ -1,0 +1,12 @@
+{
+  "source": "src/mvdm-host/wow32/wkman.c",
+  "before_sha256": "ac803f62f27b9a188109de8c2aaf386ff34c952f1b1e2ebd441da043448478f2",
+  "after_sha256": "0d0d887a231969248784f0d2c350a432e79ac845b5e6a3fb03a581ff703b6b80",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkman.c",
+  "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9",
+  "original_else": 200,
+  "old_selected_line": 221,
+  "new_selected_line": 201,
+  "scope": "diagnostic line mapping only; selected code unchanged",
+  "validation": "pending"
+}

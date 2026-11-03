@@ -1931,9 +1931,12 @@ LOCAL fmtdma_set IFN0()
 	 *	for wrapping of the bottom 16 bits of the address
 	 */
 
+#line 2014
 #ifndef NTVDM
+#line 2015
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 2023
 
 	return(SUCCESS);
 }
@@ -2888,7 +2891,9 @@ LOCAL wait_int IFN0()
 	if ((seek_status & SS_INT_OCCURRED) == 0)
 	{
 
+#line 3020
 #ifdef FLOPPIES_KEEP_TRYING
+#line 3021
 #error Unsupported excluded original configuration
 #endif /* FLOPPIES_KEEP_TRYING */
 #line 3036

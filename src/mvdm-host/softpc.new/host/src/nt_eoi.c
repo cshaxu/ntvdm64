@@ -47,7 +47,7 @@ ULONG DelayIrqLine=0xffffffff;  // all ints are blocked until, spckbd loaded
 #ifdef MONITOR
 #error Excluded original conditional branch
 #endif
-#line 47
+#line 56
 
 HANDLE hWowIdleEvent = INVALID_HANDLE_VALUE;
 
@@ -199,9 +199,12 @@ BOOL RemoveEOIHook(int IrqLine, EOIHOOKPROC EoiHookProc)
 VOID host_EOI_hook(int IrqLine, int CallCount)
 {
      if ((ULONG)IrqLine >= sizeof(EoiHooks)/sizeof(EOIHOOKPROC)) {
+#line 201
 #if DBG
+#line 202
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 204
          return;
          }
 

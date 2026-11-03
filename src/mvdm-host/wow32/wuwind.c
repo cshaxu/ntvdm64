@@ -885,7 +885,9 @@ ULONG FASTCALL W32CreateWindow(PVDMFRAME pFrame)
 
     }
 
+#line 888
 #ifdef DEBUG
+#line 889
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 898

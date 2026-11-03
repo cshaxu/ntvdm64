@@ -1,0 +1,88 @@
+{
+  "scope": "Unselected non-MVDM network configuration header closure",
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/config.h",
+      "sha256": "2cebe4cd16ae4dd4bace3565d8cbdefa4ceb6fbbde534d407aad58f710678c0c"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/configp.h",
+      "sha256": "e2b025127cb88516b9e24bf4e8f1f378f71a5ceb01d0c6e26b58acb0f84f0a6d"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/confname.h",
+      "sha256": "1f5ff57b8176b4b0505882dbffa3ada250a7c3d09d0a86442f698c50bf48aaa4"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlock.h",
+      "sha256": "faa913127de39d61425622d94b28eed75db45fea65b9db53034efa5cdc1f0a69"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlockp.h",
+      "sha256": "632cbd8ff1cf165bb234312b0b61cae73f156c98d39030411833737b64a3e7ce"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/strarray.h",
+      "sha256": "e77002a8948a0f51a698a581cf8c668f22d48fffab315de728d4f4895ad3ccef"
+    }
+  ],
+  "mirror_sources": [
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/config.h",
+      "current_sha256": "2cebe4cd16ae4dd4bace3565d8cbdefa4ceb6fbbde534d407aad58f710678c0c",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\config.h",
+      "original_sha256": "e246112ea37cc2158e494d3acfebf2d2023603ac1b6c2b4f38971b48e0794578",
+      "pinned_expected_sha256": "e246112ea37cc2158e494d3acfebf2d2023603ac1b6c2b4f38971b48e0794578",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/configp.h",
+      "current_sha256": "e2b025127cb88516b9e24bf4e8f1f378f71a5ceb01d0c6e26b58acb0f84f0a6d",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\configp.h",
+      "original_sha256": "b20d9cc466dad59ea33becfe923824e959a7551cd4db2ea5359d48e6259d053a",
+      "pinned_expected_sha256": "b20d9cc466dad59ea33becfe923824e959a7551cd4db2ea5359d48e6259d053a",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/confname.h",
+      "current_sha256": "1f5ff57b8176b4b0505882dbffa3ada250a7c3d09d0a86442f698c50bf48aaa4",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\confname.h",
+      "original_sha256": "e992c67363160f99259395503e3fbde72d968e4063b243559fdcf7ec010820f8",
+      "pinned_expected_sha256": "e992c67363160f99259395503e3fbde72d968e4063b243559fdcf7ec010820f8",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlock.h",
+      "current_sha256": "faa913127de39d61425622d94b28eed75db45fea65b9db53034efa5cdc1f0a69",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\netlock.h",
+      "original_sha256": "dadaefe455d80221691dee11e0304645e4996b8a2195d2e5a61001640ce9ff08",
+      "pinned_expected_sha256": "dadaefe455d80221691dee11e0304645e4996b8a2195d2e5a61001640ce9ff08",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlockp.h",
+      "current_sha256": "632cbd8ff1cf165bb234312b0b61cae73f156c98d39030411833737b64a3e7ce",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\netlockp.h",
+      "original_sha256": "5ffef28fad37f08213886c254b491b8a480c1fca9926d47a3d3d3293a3fae9ea",
+      "pinned_expected_sha256": "5ffef28fad37f08213886c254b491b8a480c1fca9926d47a3d3d3293a3fae9ea",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/strarray.h",
+      "current_sha256": "e77002a8948a0f51a698a581cf8c668f22d48fffab315de728d4f4895ad3ccef",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\strarray.h",
+      "original_sha256": "89f5cee2992d38781467b555998534db86e64cdbde026301c05e96f1ed43b1a4",
+      "pinned_expected_sha256": "89f5cee2992d38781467b555998534db86e64cdbde026301c05e96f1ed43b1a4",
+      "original_matches_pinned": true
+    }
+  ],
+  "removed_condition_groups": 34,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r133.zip",
+  "evidence": [
+    "No observed supported product or test preprocessing context resolved to these files.",
+    "Literal include scans show configp/netlock/strarray dependencies are confined to this unselected group; actual worker dependencies resolve config.h to softpc.new/base/inc/config.h."
+  ],
+  "limitations": [
+    "No claim about unobserved unsupported configurations or network-configuration functionality."
+  ]
+}

@@ -116,9 +116,12 @@ typedef struct
  */
 IMPORT HANDLE MainThread;
 IMPORT DWORD stateLength;
+#line 137
 #ifdef X86GFX
+#line 138
 #error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register.
 #endif
+#line 142
 IMPORT PVOID textState; //Tim Nov 92.
 IMPORT WCHAR_STRING videoSection;
 IMPORT WCHAR_STRING textSection;
@@ -126,16 +129,22 @@ IMPORT BOOL NoTicks;
 IMPORT HANDLE StartTToG;
 IMPORT HANDLE EndTToG;
 IMPORT BOOL BiosModeChange;
+#line 149
 #ifndef PROD
+#line 150
 #error DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.
 #endif /* PROD */
+#line 152
 
 extern DWORD savedScreenState;
 extern BOOL  ConsoleInitialised;
 extern BOOL  ConsoleNoUpdates;
+#line 156
 #ifdef X86GFX
+#line 157
 #error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register.
 #endif /* X86GFX */
+#line 160
 extern BOOL blocked_in_gfx_mode;
 
 
@@ -173,11 +182,16 @@ IMPORT HANDLE GetDetectEvent(VOID);
 IMPORT VOID ResetConsoleState IPT0();
 IMPORT int  getModeType(VOID);
 
+#line 197
 #ifdef X86GFX
+#line 198
 #error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register.
 #endif
+#line 246
 
 
+#line 248
 #ifdef X86GFX
+#line 249
 #error DIVERGENCE MVDM-HOST-DIV-584: hardware X86GFX declarations are not selected
 #endif

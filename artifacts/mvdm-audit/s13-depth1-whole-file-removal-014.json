@@ -1,0 +1,52 @@
+{
+  "scope": "Unselected historical VDMDBG provider package",
+  "files": [
+    {
+      "path": "src/mvdm-host/vdmdbg/makefile",
+      "sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70"
+    },
+    {
+      "path": "src/mvdm-host/vdmdbg/obj/i386/vdmdbg.res",
+      "sha256": "53e69855791bc6f8cdd6fa0930d9499337246996a8033f90ee80e986ed7b90c9"
+    },
+    {
+      "path": "src/mvdm-host/vdmdbg/sources",
+      "sha256": "17e31052e377294680b41ab7215ad8f6346f8ead44178c92c7bac71dca8b241f"
+    },
+    {
+      "path": "src/mvdm-host/vdmdbg/vdmdbg.c",
+      "sha256": "02ed2ac6cb65dfe3565e90a84c9dab2f0f65183d2d6d280a2b06f2edb7d51707"
+    },
+    {
+      "path": "src/mvdm-host/vdmdbg/vdmdbg.def",
+      "sha256": "2d8aa1711d2553714e87278e0225f9b90d3b4bf5908dafc337241cba60dd60ce"
+    },
+    {
+      "path": "src/mvdm-host/vdmdbg/vdmdbg.rc",
+      "sha256": "605a3474ea4c60b8ec1060a596ea8f3a99899c1ea5cf5fe5125c8beb447a58e1"
+    },
+    {
+      "path": "src/mvdm-host/vdmdbg/vdmdbg.txt",
+      "sha256": "ced20d1a69fe8c4bdbac5f7487fe3878de8f7bddc7b779b01d973d8325c4df0f"
+    }
+  ],
+  "mirror_sources": [
+    {
+      "path": "src/mvdm-host/vdmdbg/vdmdbg.c",
+      "current_sha256": "02ed2ac6cb65dfe3565e90a84c9dab2f0f65183d2d6d280a2b06f2edb7d51707",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmdbg\\vdmdbg.c",
+      "original_sha256": "11cad596254d09929987cf110f5b492862972d06077c5fecc100dc79b087e1d2",
+      "pinned_expected_sha256": "11cad596254d09929987cf110f5b492862972d06077c5fecc100dc79b087e1d2",
+      "original_matches_pinned": true
+    }
+  ],
+  "removed_condition_groups": 16,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r119.zip",
+  "evidence": [
+    "No current build or test graph selects this provider or loads its DLL; references outside its directory are historical inventory and a separate public ABI header.",
+    "Already removed tracked intermediates were left as recorded."
+  ],
+  "limitations": [
+    "The separate public header remains; no claim about future debugger functionality."
+  ]
+}

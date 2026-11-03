@@ -14,6 +14,40 @@
  * thread replaces implicit USER context. Native queue lifetime is required. */
 #include "wow_input_group_bindings.h"
 
+#line 238
+#ifdef MARKPATH
+#error Excluded unsupported original MARKPATH get-message instrumentation
+#else
+#line 244
+#define PATHTAKEN(x)
+#define DUMPPATHTAKEN()
+#endif
+#line 247
+#line 1409
+#if 0
+#line 1410
+#error Excluded original disabled input branch
+#endif
+#line 1431
+#line 2295
+#ifdef NEVER
+#line 2296
+#error Excluded unsupported original NEVER input branch
+#endif
+#line 2310
+#line 3310
+#ifdef MARKPATH
+#error Excluded unsupported original MARKPATH system-queue instrumentation
+#else
+#line 3321
+#define PATHTAKEN(x)
+#define PATHTAKEN2(x)
+#define PATHTAKEN3(x)
+#define DUMPPATHTAKEN()
+#define DUMPSUBPATHTAKEN(p, x)
+#endif
+#line 3327
+#line 5015
 void AddAttachment(
     PTHREADINFO pti,
     PQ pqAttach,
@@ -154,3 +188,147 @@ void RecalcThreadAttachment(PTHREADINFO ptiCurrent)
         }
     }
 }
+
+
+#line 58
+#if DBG
+#error Excluded unsupported original DBG branch
+#endif
+#line 85
+
+#line 91
+#if DBG
+#error Excluded unsupported original DBG branch
+#endif
+#line 98
+
+#line 3188
+#if DBG
+#error Excluded unsupported original DBG branch
+#endif
+#line 3231
+
+#line 17
+#ifdef MARKPATH
+#error Excluded unsupported original MARKPATH branch
+#endif
+#line 20
+
+#line 22
+#ifdef TRACESYSPEEK
+#error Excluded unsupported original TRACESYSPEEK branch
+#endif
+#line 57
+
+#line 1154
+#ifdef SYSMODALWINDOWS
+#error Excluded unsupported original SYSMODALWINDOWS branch
+#endif
+#line 1182
+
+#line 1764
+#if (CBKEYSTATERECENTDOWN % 4) != 0
+#error "CBKEYSTATERECENTDOWN assumed to be an integral number of DWORDs"
+#endif
+#line 1767
+
+#line 1641
+#if DBG
+#line 1642
+#error Excluded unsupported original DBG branch
+#endif // DBG
+#line 1644
+
+#line 1647
+#if DBG
+#line 1648
+#error Excluded unsupported original DBG branch
+#endif // DBG
+#line 1654
+
+#line 1669
+#if DBG
+#line 1670
+#error Excluded unsupported original DBG branch
+#endif // DBG
+#line 1672
+
+#line 1679
+#if DBG
+#line 1680
+#error Excluded unsupported original DBG branch
+#endif // DBG
+#line 1682
+
+#line 2924
+#ifdef TRACESYSPEEK
+#line 2925
+#error Excluded unsupported original TRACESYSPEEK branch
+#endif
+#line 2927
+
+#line 4764
+#if DBG
+#line 4765
+#error Excluded unsupported original DBG branch
+#endif  // DBG
+#line 4768
+
+#line 5295
+#if DBG
+#line 5296
+#error Excluded unsupported original DBG branch
+#endif
+#line 5300
+
+#line 5316
+#if DBG
+#line 5317
+#error Excluded unsupported original DBG branch
+#endif
+#line 5321
+
+
+#line 2928
+#ifdef DEBUG
+#line 2929
+#error Unsupported DEBUG original branch
+#endif
+#line 2950
+
+#line 2957
+#ifdef DEBUG
+#line 2958
+#error Unsupported DEBUG original branch
+#endif
+#line 2965
+
+#line 2971
+#ifdef DEBUG
+#line 2972
+#error Unsupported DEBUG original branch
+#endif
+#line 2974
+
+#line 3307
+#ifdef FE_IME
+#line 3308
+#error Unsupported FE_IME original branch
+#endif
+#line 3310
+
+#line 4551
+#ifdef FE_IME
+#line 4552
+#error Unsupported FE_IME original branch
+#endif
+#line 4576
+
+#line 4750
+#ifdef FE_IME
+#line 4751
+#error Unsupported FE_IME original branch
+#else
+#line 4758
+#endif
+#line 4760

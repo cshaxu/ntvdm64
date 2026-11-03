@@ -61,7 +61,9 @@
 #endif  /* EGG */
 
 
+#line 64
 #ifdef HERC
+#line 65
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif	/* HERC */
 #line 92
@@ -155,7 +157,7 @@ typedef	struct {
 #else
 #error Unsupported excluded original configuration
 #endif
-#line 157
+#line 187
 	half_word *screen_ptr;		/* pointer to start of regen buffer	    */
 	int screen_length;		/* Number of bytes in one screenfull        */
 	int display_disabled;		/* 0 if it's OK to do screen output.        */

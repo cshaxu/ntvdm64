@@ -1,0 +1,79 @@
+{
+  "source": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "before_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+  "after_sha256": "2ca5d6e82c18c592b2eb9fd0c02bf26f7c2227de5fe49e35b24f695d7ee9a26e",
+  "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+  "changes": [
+    {
+      "current_if_line": 2267,
+      "original_if_line": 2641,
+      "current_marker_line": 2286,
+      "original_endif_line": 2656,
+      "previous": 2276,
+      "corrected": 2657,
+      "matched_preceding_nonblank_lines": 8,
+      "verified_next_line": "}"
+    },
+    {
+      "current_if_line": 2580,
+      "original_if_line": 2950,
+      "current_marker_line": 2603,
+      "original_endif_line": 2969,
+      "previous": 2587,
+      "corrected": 2970,
+      "matched_preceding_nonblank_lines": 8,
+      "verified_next_line": ""
+    },
+    {
+      "current_if_line": 2631,
+      "original_if_line": 2996,
+      "current_marker_line": 2645,
+      "original_endif_line": 3006,
+      "previous": 2623,
+      "corrected": 3007,
+      "matched_preceding_nonblank_lines": 8,
+      "verified_next_line": "#if defined(NTVDM) && defined(X86GFX)"
+    },
+    {
+      "current_if_line": 2958,
+      "original_if_line": 3310,
+      "current_marker_line": 3023,
+      "original_endif_line": 3371,
+      "previous": 2995,
+      "corrected": 3372,
+      "matched_preceding_nonblank_lines": 8,
+      "verified_next_line": "\t/*"
+    },
+    {
+      "current_if_line": 4792,
+      "original_if_line": 5227,
+      "current_marker_line": 4816,
+      "original_endif_line": 5242,
+      "previous": 4782,
+      "corrected": 5243,
+      "matched_preceding_nonblank_lines": 8,
+      "verified_next_line": "}"
+    },
+    {
+      "current_if_line": 4825,
+      "original_if_line": 5250,
+      "current_marker_line": 4916,
+      "original_endif_line": 5343,
+      "previous": 4876,
+      "corrected": 5344,
+      "matched_preceding_nonblank_lines": 4,
+      "verified_next_line": "}"
+    },
+    {
+      "current_if_line": 4926,
+      "original_if_line": 5351,
+      "current_marker_line": 5005,
+      "original_endif_line": 5429,
+      "previous": 4959,
+      "corrected": 5430,
+      "matched_preceding_nonblank_lines": 4,
+      "verified_next_line": "}"
+    }
+  ],
+  "limits": "original ifndef matched by preceding context; current local else and nested conditions unchanged; full context, build and diagnostics required"
+}

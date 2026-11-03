@@ -111,6 +111,8 @@ void mvdm_softpc_report_dpmi_fast_bop_result(unsigned short bx,
  * selects its source-defined control action. */
 void mvdm_softpc_report_virtual_device_control(unsigned long eax,
     unsigned short bx, unsigned short cx, unsigned short dx);
+/* A stale NIDDB identity cannot safely select a device instance. */
+__declspec(noreturn) void mvdm_softpc_invalid_virtual_instance(unsigned long id);
 /* Default-off witness for an already-entered software interrupt.  It is
  * intentionally observation-only while the WOW DPMI publication boundary is
  * being identified. */

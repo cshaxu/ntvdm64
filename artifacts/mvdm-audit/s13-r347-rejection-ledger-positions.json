@@ -1,0 +1,47 @@
+{
+  "changes": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "macro": "A2CPU",
+      "old_current": 364,
+      "new_current": 367
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "macro": "A2CPU",
+      "old_current": 111,
+      "new_current": 114
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "macro": "A2CPU",
+      "old_current": 726,
+      "new_current": 729
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "macro": "A2CPU",
+      "old_current": 118,
+      "new_current": 121
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "macro": "SEGMENTATION",
+      "old_current": 373,
+      "new_current": 376
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "macro": "SEGMENTATION",
+      "old_current": 278,
+      "new_current": 281
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "macro": "SEGMENTATION",
+      "old_current": 68,
+      "new_current": 71
+    }
+  ],
+  "method": "exact inserted physical-line offsets and current guard/error verification"
+}

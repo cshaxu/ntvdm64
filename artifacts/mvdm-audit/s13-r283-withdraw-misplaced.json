@@ -1,0 +1,43 @@
+{
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "before_sha256": "2a32010e1d863ddf01f7751a564f4a620467d789826c422abb642ca7ccfe1d49",
+      "after_sha256": "674c9eae8d81a27d2389b86c4f2d7e977cdea572e40e1aff3a1933c13b449a98",
+      "groups": [
+        {
+          "current_old_start": 235,
+          "current_old_end": 242,
+          "original_line": 375,
+          "macro": "FE_SB"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "before_sha256": "16edf6de8f326cc34808a2dcd4cba1dfe54b975070ee58b92fb96e44f7bf222a",
+      "after_sha256": "7c6f64db0d1064b25850b8503254b6026e20b9976eb58e6f16af6cbc639882b8",
+      "groups": [
+        {
+          "current_old_start": 229,
+          "current_old_end": 236,
+          "original_line": 719,
+          "macro": "FE_SB"
+        },
+        {
+          "current_old_start": 237,
+          "current_old_end": 244,
+          "original_line": 875,
+          "macro": "FE_SB"
+        },
+        {
+          "current_old_start": 251,
+          "current_old_end": 258,
+          "original_line": 1224,
+          "macro": "FE_SB"
+        }
+      ]
+    }
+  ],
+  "reason": "Original conditions lie in omitted functions; file-scope placeholders withdrawn and original groups remain pending"
+}

@@ -50,7 +50,7 @@ $includes = @(
     'src/compat/include',
     'src/ntvdm-exe/softpc/include',
     'src/ntvdm-exe/monitor/include',
-    'src/mvdm-support/inc',
+    'src/mvdm-host/inc',
     'src/non-mvdm/public/sdk/inc',
     'src/non-mvdm/public/internal/base/inc',
     'src/non-mvdm/public/internal/windows/inc',
@@ -60,7 +60,7 @@ $includes = @(
     'src/mvdm-host/softpc.new/host/inc',
     'src/mvdm-host/softpc.new/base/inc'
 ) | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
-$flags = '/nologo /TC /c /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /Di386 /DNTVDM ' +
+$flags = '/nologo /TC /c /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /DNTVDM /DCPU_40_STYLE /DCCPU /DC_VID /DNEW_CPU /DPROD ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/compat/include/nt.h')) + '" ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/softpc/include/error_abi.h')) + '" ' +
     ($includes -join ' ')

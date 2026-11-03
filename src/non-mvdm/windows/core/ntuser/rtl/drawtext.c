@@ -62,9 +62,11 @@ LONG GetPrefixCount(
                 lpstr++;
                 chprintpos++;
             }
+#line 811
 #ifdef FE_SB // GetPrefixCount()
 #error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
 #endif // FE_SB
+#line 842
         } else {
 
             /*
@@ -189,3 +191,91 @@ void PSMTextOut(
     }
 }
 #endif
+
+#line 22
+#ifdef FE_SB
+#error Excluded unsupported original FE_SB branch
+#endif
+#line 26
+
+#line 59
+#ifdef FE_SB
+#error Excluded unsupported original FE_SB branch
+#endif
+#line 641
+
+
+
+#line 677
+#ifdef FE_SB // GetNextWordbreak()
+#line 678
+#error Excluded unsupported original FE_SB branch
+#endif // FE_SB
+#line 712
+
+#line 1213
+#ifdef FE_SB // DT_GetLineBreak()
+#line 1214
+#error Excluded unsupported original FE_SB branch
+#endif // FE_SB
+#line 1216
+
+
+#line 719
+#ifdef FE_SB // GetNextWordbreak()
+#line 720
+#error Excluded unsupported original FE_SB branch
+#else
+#line 721
+#endif // FE_SB
+#line 723
+
+#line 875
+#ifdef FE_SB // DT_GetExtentMinusPrefixes()
+#line 876
+#error Excluded unsupported original FE_SB branch
+#else
+#line 882
+#endif // FE_SB
+#line 886
+
+#line 1224
+#ifdef FE_SB // DT_GetLineBreak()
+#line 1225
+#error Excluded unsupported original FE_SB branch
+#else
+#line 1227
+#endif // FE_SB
+#line 1229
+
+
+#line 1622
+#ifdef LATER
+#line 1623
+#error Excluded unsupported original LATER branch
+#endif
+#line 1635
+
+#line 1673
+#ifdef LATER
+#line 1674
+#error Excluded unsupported original LATER branch
+#endif
+#line 1686
+
+
+#line 1598
+#ifdef DEBUG
+#line 1599
+#error Unsupported DEBUG original branch
+#endif
+#line 1602
+
+#line 1657
+#ifdef _USERK_
+#line 1658
+#error Unsupported _USERK_ original branch
+#else
+#line 1660
+#endif
+#line 1662

@@ -1,0 +1,39 @@
+{
+  "scope": "Explicitly excluded CCPU stub carrier",
+  "file": "src/mvdm-host/softpc.new/base/ccpu386/ntstubs.c",
+  "sha256": "fdac99ff486fc5a3637ef88e403a194ebf4f38a53d1f6062ce08b549953344d0",
+  "mirror_sources": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ntstubs.c",
+      "current_sha256": "fdac99ff486fc5a3637ef88e403a194ebf4f38a53d1f6062ce08b549953344d0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ntstubs.c",
+      "original_sha256": "e25542825eb5efb323deae41e8d8368e75e5dcc2acabad02a974f602e67641e8",
+      "pinned_expected_sha256": "e25542825eb5efb323deae41e8d8368e75e5dcc2acabad02a974f602e67641e8",
+      "original_matches_pinned": true
+    }
+  ],
+  "removed_guard_ledger_entries": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ntstubs.c",
+      "macro": "0",
+      "line": 85,
+      "body_end": 89,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ntstubs.c",
+      "original_sha256": "e25542825eb5efb323deae41e8d8368e75e5dcc2acabad02a974f602e67641e8",
+      "local_sha256": "e25542825eb5efb323deae41e8d8368e75e5dcc2acabad02a974f602e67641e8",
+      "removed_body_sha256": "41be86e583e4c7b0ac4af919131ea28942253ddbe9490521f26332654f9cf2e8",
+      "removed_body_lines": 4,
+      "after_sha256": "502cf19b93e4ab121ff2d92b9016d9cc81a0983fe70a3939e7a79674f0dbc1d3",
+      "final_sha256": "fdac99ff486fc5a3637ef88e403a194ebf4f38a53d1f6062ce08b549953344d0"
+    }
+  ],
+  "removed_condition_groups": 4,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r120.zip",
+  "evidence": [
+    "Selected CCPU graph deliberately filters ntstubs.c because selected fpu.c provides the implementation and the stub would duplicate FPU/SAS definitions.",
+    "The source manifest removed only that filename; both generators no longer need their filter."
+  ],
+  "limitations": [
+    "Does not change or prove unselected alternate CPU profiles."
+  ]
+}

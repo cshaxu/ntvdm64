@@ -1,0 +1,45 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.h",
+      "original_group_line": 218,
+      "after_marker_nonempty": [],
+      "classification": "eof-no-following-token",
+      "current_marker": 217,
+      "original_candidate": 226
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "original_group_line": 1245,
+      "after_marker_nonempty": [],
+      "classification": "eof-no-following-token",
+      "current_marker": 1195,
+      "original_candidate": 1475
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "original_group_line": 407,
+      "after_marker_nonempty": [],
+      "classification": "eof-no-following-token",
+      "current_marker": 392,
+      "original_candidate": 410
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cga.h",
+      "original_group_line": 100,
+      "after_marker_nonempty": [],
+      "classification": "eof-no-following-token",
+      "current_marker": 97,
+      "original_candidate": 113
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "original_group_line": 1560,
+      "after_marker_nonempty": [],
+      "classification": "eof-no-following-token",
+      "current_marker": 1437,
+      "original_candidate": 1612
+    }
+  ],
+  "limits": "no later tokens means no diagnostic use of this continuation marker; no source mutation"
+}

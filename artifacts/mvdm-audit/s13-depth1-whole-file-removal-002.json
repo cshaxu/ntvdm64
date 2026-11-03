@@ -1,0 +1,193 @@
+{
+  "scope": "14 unselected non-MVDM mirror headers whose literal references are confined to this batch or previously removed files; no active manifest hits",
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/arc.h",
+      "sha256": "e188bef39db838de53cdae08c8bfcd8f976f9fb64079413b24d1cd11262e3836",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\arc.h",
+      "original_sha256": "91e85dec145edf9abfcb2174aa1d2bee323614f58fabdb669d307b2a1ea1ed08",
+      "references": [
+        "src/non-mvdm/public/internal/base/inc/arccodes.h",
+        "src/non-mvdm/public/internal/base/inc/profiles.h"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/profiles.h",
+      "sha256": "4940f312a8f401e47a3a85b43299d859f9e99bbe367346b94de9c17cdf2ee967",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\profiles.h",
+      "original_sha256": "9ba20a1f435a74af1fc6f9f31ec5534c949a8def0b2c4eed8b149a1e809b52ee",
+      "references": [
+        "src/non-mvdm/public/internal/base/inc/arc.h"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/svcs.h",
+      "sha256": "be5be516ecdd44e79a9652a4a79f726400da1a6c0a21afb13d3149fa06887012",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\svcs.h",
+      "original_sha256": "109f8132de59dcf06f30273b77fc98027ef58169b893dcc0180fa37671a9f4d5",
+      "references": [
+        "src/non-mvdm/public/internal/ds/inc/services.h"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tdi.h",
+      "sha256": "e2d310021e1fc0d9e63f8fb896ef700c9c5db3678cab289d37181aab462cc539",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\tdi.h",
+      "original_sha256": "dcad14f13c02afd9aa952ded041165a44a9792e7cf4c995cd3d4963beddb42c8",
+      "references": [
+        "src/non-mvdm/public/internal/base/inc/nbtioctl.h",
+        "src/non-mvdm/public/internal/base/inc/tdikrnl.h"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/dlserver.h",
+      "sha256": "b8892fc49485be1f3c004fd3e548c513c63d6dbca86e3c4ef3fe055b5f1f5e0f",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\dlserver.h",
+      "original_sha256": "517e24032f715358914bafe963eb15d26f10def77330433f24f0c78ea9c2a481",
+      "references": [
+        "src/non-mvdm/public/internal/ds/inc/dlwksta.h"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/icanon.h",
+      "sha256": "9988968d2ab1a984c8bd9ea0b679150f0e99b4d9654872a3f963312deb613cd5",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\icanon.h",
+      "original_sha256": "e837ba030bfb4f55a4e7b8ac4c88f7d54ef5b5ff63434cc2b65111f9c5152799",
+      "references": [
+        "src/non-mvdm/public/internal/ds/inc/nticanon.h"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/mapsupp.h",
+      "sha256": "8bf427edebfc093f65e7f7937702f480120f4e8511ff784cb0e7ef8cd1c7caf8",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\mapsupp.h",
+      "original_sha256": "c426d20a0bea1350fd202f7c45638f68647b8c3119acc84ccad83df0385a1d2a",
+      "references": [
+        "src/non-mvdm/public/internal/ds/inc/dlwksta.h"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/ntsamp.h",
+      "sha256": "c3305f56d1534ddd605fe3332b4927e827afd69b51fb65e94113b2b529387505",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\ntsamp.h",
+      "original_sha256": "2abbf3e981feb807bb3594c2fd94ebb5755e447c3d18c97e306dfd83fa7fdd30",
+      "references": [
+        "src/non-mvdm/public/internal/ds/inc/samimp.h"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rx.h",
+      "sha256": "fe7d94e51f54e69f4aecd1a22e384d8f5eed3cd3cb0049ad29d4c3580d13e19c",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\rx.h",
+      "original_sha256": "2576b2cf2302fe8f816844f1715403fb35f2fa3fed3279f2cc03c503a6f0552d",
+      "references": [
+        "src/non-mvdm/public/internal/ds/inc/nticanon.h"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxserver.h",
+      "sha256": "82bd075563163172a277ef904ae92dc8aa56f2cb226bd4a923784147ed08a8ec",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\rxserver.h",
+      "original_sha256": "04f0063118df79c226528c92f24c2afc11f3066aadde708c067642146166ef22",
+      "references": [
+        "src/non-mvdm/public/internal/ds/inc/rx.h"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/samimp.h",
+      "sha256": "a8cfa62fbdfcb0935f70d6b7309c94d9c625623d732c371ac9d3992d51a76e5e",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\samimp.h",
+      "original_sha256": "ebc9bb41cad86e8786e57d21d0b5cedf245bc44f87cf957d6d9a123590ecaf62",
+      "references": [
+        "src/non-mvdm/public/internal/ds/inc/samrpc.h"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/samisrv.h",
+      "sha256": "0c6eb6c61929b72292f6cc89038306aaff1c07db45e7bfce0fb714af6acb7ca1",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\samisrv.h",
+      "original_sha256": "8ebabe6173027f2153994cff892358e5e63d1f553346e79a4aaab89f88f6e080",
+      "references": [
+        "src/non-mvdm/public/internal/ds/inc/samsrv.h"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/services.h",
+      "sha256": "2ef151cd619a75794f8819c9f6ed1bdca4b5bbd56e11b091f62016e2e84f4c71",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\services.h",
+      "original_sha256": "e7092a2ec6660703800c00bf94736a3cbf7e9e9f1473098a130cab51220676d5",
+      "references": [
+        "src/non-mvdm/public/internal/base/inc/svcs.h"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/uascache.h",
+      "sha256": "d0e17e66e1787040e50a5f003ed799c2b514e5282475445064afe2dd9ddfdd38",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\uascache.h",
+      "original_sha256": "74024f77a5c044130a39bb916b6678523b90cf305b7163ac8a5c287bcd4e2f5d",
+      "references": [
+        "src/non-mvdm/public/internal/ds/inc/permit.h"
+      ]
+    }
+  ],
+  "removed_active_guard_ledger_entries": [
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tdi.h",
+      "macro": "0",
+      "line": 885,
+      "body_end": 905,
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\tdi.h",
+      "original_sha256": "dcad14f13c02afd9aa952ded041165a44a9792e7cf4c995cd3d4963beddb42c8",
+      "local_sha256": "070a4d896f0e513b0b1b108a693a50d326a4ea3ff7af91aad282b8b0a83c9646",
+      "removed_body_sha256": "4c391fad3f256543e2491a35a687871f97f72d8727b292ba4f59d6e78813d724",
+      "removed_body_lines": 20,
+      "after_sha256": "935898011830c24b27bc88f34da5f60d3a8b2dfda2cd4f79f42219c54d18a0fa",
+      "final_sha256": "e2d310021e1fc0d9e63f8fb896ef700c9c5db3678cab289d37181aab462cc539"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tdi.h",
+      "macro": "0",
+      "line": 832,
+      "body_end": 865,
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\tdi.h",
+      "original_sha256": "dcad14f13c02afd9aa952ded041165a44a9792e7cf4c995cd3d4963beddb42c8",
+      "local_sha256": "070a4d896f0e513b0b1b108a693a50d326a4ea3ff7af91aad282b8b0a83c9646",
+      "removed_body_sha256": "a26b83fa3ac9790e7d1ed0afab36ca320070f0da01ea550b14ad01da1c008ad2",
+      "removed_body_lines": 33,
+      "after_sha256": "935898011830c24b27bc88f34da5f60d3a8b2dfda2cd4f79f42219c54d18a0fa",
+      "final_sha256": "e2d310021e1fc0d9e63f8fb896ef700c9c5db3678cab289d37181aab462cc539"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tdi.h",
+      "macro": "0",
+      "line": 579,
+      "body_end": 581,
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\tdi.h",
+      "original_sha256": "dcad14f13c02afd9aa952ded041165a44a9792e7cf4c995cd3d4963beddb42c8",
+      "local_sha256": "070a4d896f0e513b0b1b108a693a50d326a4ea3ff7af91aad282b8b0a83c9646",
+      "removed_body_sha256": "f571e378192ec86207c99d3f316e1bf675addec1e0c124977db970a6e1ab6355",
+      "removed_body_lines": 2,
+      "after_sha256": "935898011830c24b27bc88f34da5f60d3a8b2dfda2cd4f79f42219c54d18a0fa",
+      "final_sha256": "e2d310021e1fc0d9e63f8fb896ef700c9c5db3678cab289d37181aab462cc539"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/icanon.h",
+      "macro": "0",
+      "line": 58,
+      "body_end": 66,
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\icanon.h",
+      "original_sha256": "e837ba030bfb4f55a4e7b8ac4c88f7d54ef5b5ff63434cc2b65111f9c5152799",
+      "local_sha256": "69a1976557533e73bb83086f3937c1d859252b6b98794f95f4cf8398ccfe0179",
+      "removed_body_sha256": "5188dc5bf4f0da106adcb8d4da13bb0200a600411d92093e69f8c28f055b7c2e",
+      "removed_body_lines": 8,
+      "after_sha256": "c1c9947a55db96e7924c2f0e0b85fdf02aa0221a6266242c66a9a6a83bffd48d",
+      "final_sha256": "9988968d2ab1a984c8bd9ea0b679150f0e99b4d9654872a3f963312deb613cd5"
+    }
+  ],
+  "prior_queue": "s13-bfs-depth1-working-queue-195r106.zip",
+  "removed_condition_groups": 74,
+  "limitations": [
+    "Previously captured build graph data predates current edits; no candidate or referring path is modified.",
+    "Unsupported future configurations not proven."
+  ]
+}

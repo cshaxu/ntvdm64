@@ -1,0 +1,16 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+  "original": "O:/repos.external/OpenNT/windows/core/ntuser/client/clres.c",
+  "before_sha256": "14286278fad14fcb21a961aa3108d398593072cc3694e22acc69b6ace1e7e646",
+  "after_sha256": "0ebc54f15b39628d9014c1a2179b5ffd53a4cf41d6155ae7a326d2e10a0bc3aa",
+  "original_groups": [
+    2624,
+    3751
+  ],
+  "selected_alternatives": "boundaries present but enclosing LoadIcoCur and MatchImage functions remain omitted; pending",
+  "preprocessing": "s13-clres-r257-preprocess.json",
+  "historical_preprocessing": "s13-clres-full-baseline-preprocess-r257.json; clres has two assertion diagnostic line changes 848->2922 and 992->3066 from earlier #line work, dialog-template identical",
+  "forced_controls": "s13-clres-r257-forced-controls.json",
+  "build": "cached x86 WOW32 passed",
+  "limits": "No runtime, x64 product DLL or original functions restored; this is not first-depth completion."
+}

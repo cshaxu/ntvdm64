@@ -77,6 +77,19 @@ frontends; internal chains do not directly take over the outer NTCON.
    process failure, VxD unload, payload exit with worker reuse, worker death,
    nested descendants and resource release. Coordinate each layer with NTSRV;
    old identities must not target a reused VM or revive a retired endpoint.
+7. Audit the selected original NIDDB device-state manager and its BOP B1
+   `INSIGNIA.386` protocol as a separate possible dependency of the same guest
+   DOS-VM lifecycle. Establish whether the chosen VxD bridge must coordinate,
+   reuse, replace, or leave inactive that optional protocol; do not infer the
+   answer merely from shared VM identity. Account for per-VM mouse state,
+   initialization, VM switching and retirement, reused identities, direct
+   video/mouse consumers, and invalid or missing notifications. Preserve the
+   ordinary single-instance mouse path. The controlled NIDDB failure and
+   current unshipped experiments are recorded in
+   [S13 test-failure evidence](../../artifacts/mvdm-audit/s13-test-failure-recheck.md);
+   neither establishes actual guest-provider ordering or authorizes a guest
+   modification. The tested Win3.1 installation ran without observed B1
+   lifecycle controls; this is not a universal absence claim.
 
 ## Admission and provenance boundaries
 

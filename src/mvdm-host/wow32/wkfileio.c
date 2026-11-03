@@ -850,10 +850,12 @@ ULONG   dwLoc;
 PHMAPPEDFILEALIAS pCache;
 register PFILEIOLSEEK16 parg16;
 
+#line 851
 #if (FILE_BEGIN != 0 || FILE_CURRENT != 1 || FILE_END !=2)
+#line 852
 #error Unsupported excluded original configuration
 #endif
-#line 858
+#line 856
 
     GETARGPTR(pFrame, sizeof(FILEIOLSEEK16), parg16);
 

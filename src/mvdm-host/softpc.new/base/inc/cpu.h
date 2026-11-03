@@ -16,6 +16,9 @@
 
 /* SccsID[]="@(#)cpu.h	1.28 12/10/92 Copyright Insignia Solutions Ltd."; */
 
+#line 19
 #if defined(NTVDM) && defined(MONITOR)
+#line 20
 #error Excluded unsupported monitor CPU header profile
 #endif /* NTVDM && MONITOR */
+#line 1461

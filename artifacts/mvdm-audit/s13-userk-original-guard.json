@@ -1,0 +1,39 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\userk.h",
+  "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+  "working_sha256": "46b8db6ffd263fe6d0260b6dc73a2a3d2919f4908c733388cc90bcc757052b19",
+  "new_guard": "_USERK_",
+  "contexts": [
+    {
+      "source": "taskman.c",
+      "nonblank_preprocessing_equal": true
+    },
+    {
+      "source": "handtabl.c",
+      "nonblank_preprocessing_equal": true
+    },
+    {
+      "source": "cleanup.c",
+      "nonblank_preprocessing_equal": true
+    },
+    {
+      "source": "queue.c",
+      "nonblank_preprocessing_equal": true
+    }
+  ],
+  "build": "x86 WOW32 passed",
+  "tests": [
+    "x86/x64 profile controls",
+    "WOW task-order fixture"
+  ],
+  "image_compare": "s13-userk-guard-image-comparison.json",
+  "limitation": "actual contexts match ignoring blank lines; restoration changes behavior for a hypothetical flags-only then full double inclusion, which is not observed in supported callers",
+  "actual_wow32_ninja_dependency_owners": [
+    "obj/opennt-user/handtabl.obj",
+    "obj/opennt-user/cleanup.obj",
+    "obj/opennt-user/taskman.obj",
+    "obj/opennt-user/queue.obj"
+  ],
+  "dependency_evidence": "ninja -t deps on current WOW32 graph lists exactly these four objects as including kernel/userk.h"
+}

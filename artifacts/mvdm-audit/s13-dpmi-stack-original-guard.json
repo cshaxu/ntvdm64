@@ -1,0 +1,10 @@
+{
+  "source": "src/mvdm-host/dpmi32/dpmiint.c",
+  "sha256": "dbfb6b45782b2eb9df0dd8c473e8f85093646962d2d832dde3aba6c50ebc828c",
+  "original_guard": 387,
+  "original_continuation": 397,
+  "adaptation": "DIV-226 CPU40 guest-memory publication retained",
+  "build": "x86 worker compiled",
+  "test": "x86 first-depth guard suite passed",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r196.zip"
+}

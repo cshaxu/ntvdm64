@@ -326,7 +326,9 @@ Notes:
         ASSERT((SubAlloc->BaseAddress <= *Address) && 
             ((SubAlloc->BaseAddress + SubAlloc->Size * SUBALLOC_GRANULARITY)
             > *Address));
+#line 329
 #if 0            
+#line 330
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif        
 #line 337

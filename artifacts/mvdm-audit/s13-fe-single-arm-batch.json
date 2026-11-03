@@ -1,0 +1,192 @@
+{
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\client.c",
+      "original_sha256": "787eda33785a87ce9e71202c97b5913e2857f7106fed5bb97103049b1d5e3472",
+      "before_sha256": "a549389f2dcec8fb9932eb5b1554c193042264057cbd474b3324594a229ed56a",
+      "guards": [
+        {
+          "original_line": 3494,
+          "expression": "FE_IME",
+          "continuation": 3503
+        }
+      ],
+      "after_sha256": "75c6f18d17bfe05b74ab4c7e948748743de51c91fefa757066320ba6fba04e17"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+      "before_sha256": "3da84f73862ec7953175f626f929b7157a78eca9c8832d1ef08d4e23fefc67df",
+      "guards": [
+        {
+          "original_line": 270,
+          "expression": "FE_SB",
+          "continuation": 274
+        },
+        {
+          "original_line": 1719,
+          "expression": "FE_SB",
+          "continuation": 1722
+        }
+      ],
+      "after_sha256": "369b8bf29e6c2cb69fe1d3737a610ff32d9ae2dd12267654e193b01385be9bcd"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "before_sha256": "265e17be9063e3bec1580c291079d958408cc5eccf4ffee5c56057a0804f7371",
+      "guards": [
+        {
+          "original_line": 77,
+          "expression": "FE_IME",
+          "continuation": 84
+        },
+        {
+          "original_line": 1020,
+          "expression": "FE_IME",
+          "continuation": 1034
+        }
+      ],
+      "after_sha256": "2d1bbfe6dbd6871cac702380ed61fbb8f301dfbcd8ca4ee015cca306d2ede729"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "before_sha256": "97e62e44c3d3961b8f7dd9bafb445468e559a0608c064c896c2acd32bd2683b1",
+      "guards": [
+        {
+          "original_line": 293,
+          "expression": "FE_SB",
+          "continuation": 302
+        },
+        {
+          "original_line": 340,
+          "expression": "FE_SB",
+          "continuation": 345
+        }
+      ],
+      "after_sha256": "6b7d26901c1492ed2348cc27c038f1ff584a4e814dee3eeeff1ebf1ecf65c873"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_sha256": "b7656bca55e892a42ba825be0324211450ad298c40717e1ae5a889d084467529",
+      "before_sha256": "548dcf0394c1a2989d5d1b8cfb07c476f9f8a5f7e05746d5c2e56a89dfb67cf1",
+      "guards": [
+        {
+          "original_line": 3307,
+          "expression": "FE_IME",
+          "continuation": 3310
+        },
+        {
+          "original_line": 4551,
+          "expression": "FE_IME",
+          "continuation": 4576
+        }
+      ],
+      "after_sha256": "f593e93d9d47216d590e9e26a17fd289a7a59f513b7f2c22d348143af2060e1a"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "before_sha256": "3455b2af72d8f207a1bc6cbca6fa22dbbf5a1853d90104c6037075e17a2b65e9",
+      "guards": [
+        {
+          "original_line": 268,
+          "expression": "FE_IME",
+          "continuation": 281
+        },
+        {
+          "original_line": 6241,
+          "expression": "FE_IME",
+          "continuation": 6249
+        },
+        {
+          "original_line": 7849,
+          "expression": "FE_IME",
+          "continuation": 7858
+        },
+        {
+          "original_line": 9993,
+          "expression": "FE_IME",
+          "continuation": 10310
+        }
+      ],
+      "after_sha256": "92a3cab3712106205f318498f9fd1f3b86073ce061a60f4cf43017b33af1c376"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\profile.c",
+      "original_sha256": "8ecbb58954eca0fece4ab180bb56a3953b8b4408400d3c7aa01d50b62caaa531",
+      "before_sha256": "fdffc12447832ad019b849c58b20b67c9b1683b95f2f5620ff67058d081729a8",
+      "guards": [
+        {
+          "original_line": 68,
+          "expression": "FE_SB",
+          "continuation": 71
+        }
+      ],
+      "after_sha256": "f3e7448db627629ff520271e399627a007eb69d61080febb5502fdc1a9cfd8af"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_sha256": "0400c034bb5a782e81777e9fd805c07dbcd18d60ec9f1a876cfa67444577e0f8",
+      "before_sha256": "659cb5d751c68ad8dbc2de41aab55219cb442f6faa9f497cc689a1bebcd9ad44",
+      "guards": [
+        {
+          "original_line": 992,
+          "expression": "FE_IME",
+          "continuation": 997
+        },
+        {
+          "original_line": 1915,
+          "expression": "FE_IME",
+          "continuation": 1921
+        }
+      ],
+      "after_sha256": "51b27149bf0157e181f71b011af90a403d229c43627070f273e3f3e641d001bd"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+      "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+      "before_sha256": "4a4c9cfa0e69d1c7c250b7cc68fe75a45dc6ea9698e6434c6b79d7997b523291",
+      "guards": [
+        {
+          "original_line": 337,
+          "expression": "FE_IME",
+          "continuation": 341
+        }
+      ],
+      "after_sha256": "64d4f951d3b0b6d7991f8cc1d3b6dd38e6838250fcc66b396e134f033d8ff652"
+    }
+  ],
+  "scope": "first-depth, single-arm FE_IME / FE_SB only; original enclosing functions not in current subset",
+  "classification": "FE_IME and FE_SB absent from repository source/build definitions; actual selected x86 WOW32 and call-boundaries builds passed",
+  "build": "x86 WOW32 and call-boundaries passed; x64 hook/worker binaries not rebuilt for this source batch",
+  "focused_test": "17 guard and continuation structures passed",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r209.zip",
+  "binary_comparison": {
+    "candidate_sha256": "bfac1d33b0e0909b4dff68be2fc55f32a21a9d17ed5af697cfb5b29dd8da1136",
+    "reference_sha256": "3b28866bbb77133fab948e934cc9c75317afa54793bd79727c1169498d58820e",
+    "same_package_identity": "ee3df81e-ca78-4406-a273-9a757530d1b3",
+    "different_offsets": [
+      280,
+      281,
+      282,
+      310700,
+      310701,
+      625412,
+      625413,
+      625414
+    ],
+    "non_timestamp_change": "x86 assertion line immediate 848 -> 2922, original source clres.c line 2922, at file offset 310700",
+    "qualification": "release gate not met; assertion failure diagnostic changed; no complete product or runtime verification"
+  }
+}

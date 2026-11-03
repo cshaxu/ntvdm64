@@ -1,0 +1,52 @@
+{
+  "scope": "Unselected historical LAN Manager protocol and application-error headers",
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/protocol.h",
+      "sha256": "782b1787f8cb79f8fc95e091867c2eec22f7d8d70c1ee30764736bd0f67f4158"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/apperr.h",
+      "sha256": "557ea43398ca41f62c753d4022807676802745a4acb1255ea41e9d7c7885b3e2"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/apperr2.h",
+      "sha256": "4339037794c0b191c52c4828e296dda39b4c3fea3306a7451cc8a022eceac865"
+    }
+  ],
+  "mirror_sources": [
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/protocol.h",
+      "current_sha256": "782b1787f8cb79f8fc95e091867c2eec22f7d8d70c1ee30764736bd0f67f4158",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\protocol.h",
+      "original_sha256": "28d18576dc7e7c22fa28ae98b3b94931209e26a64e1bdbb74f4fc6246e3557a5",
+      "pinned_expected_sha256": "28d18576dc7e7c22fa28ae98b3b94931209e26a64e1bdbb74f4fc6246e3557a5",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/apperr.h",
+      "current_sha256": "557ea43398ca41f62c753d4022807676802745a4acb1255ea41e9d7c7885b3e2",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\apperr.h",
+      "original_sha256": "b00b149cd5f3f2ecaadd5522046f11309a765fbf9a244ce854d12df5de30ea4c",
+      "pinned_expected_sha256": "b00b149cd5f3f2ecaadd5522046f11309a765fbf9a244ce854d12df5de30ea4c",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/apperr2.h",
+      "current_sha256": "4339037794c0b191c52c4828e296dda39b4c3fea3306a7451cc8a022eceac865",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\apperr2.h",
+      "original_sha256": "c88b993249c81b206eb432d578af33c4cf766221e82ff8d2310bc32f31386047",
+      "pinned_expected_sha256": "c88b993249c81b206eb432d578af33c4cf766221e82ff8d2310bc32f31386047",
+      "original_matches_pinned": true
+    }
+  ],
+  "removed_condition_groups": 4,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r135.zip",
+  "evidence": [
+    "No current source, test or tool include directive or explicit full path references these headers.",
+    "The worker Ninja dependency database does not contain these headers; captured supported preprocessing contexts did not select them."
+  ],
+  "limitations": [
+    "The similarly named current common protocol headers are unaffected."
+  ]
+}

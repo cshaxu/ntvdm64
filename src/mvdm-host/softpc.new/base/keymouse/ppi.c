@@ -40,9 +40,12 @@
 #include "ios.h"
 #include "ppi.h"
 #include "timer.h"
+#line 43
 #ifndef PROD
+#line 44
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 46
 #include "debug.h"
 
 /*

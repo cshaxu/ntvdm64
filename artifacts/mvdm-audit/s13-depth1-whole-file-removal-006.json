@@ -1,0 +1,184 @@
+{
+  "scope": "Nine unselected host mirror files with no recorded context in 2070 captured product graph contexts or 29 generated-TU contexts and no other current literal source/test/tool/build/manifest references",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/flexlmif.h",
+      "sha256": "0c4f62bfaeec39f468a80aa4607482c87774aca9dadec6a68577cfa3d345c99c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\flexlmif.h",
+      "original_sha256": "ba27db4f84cc7707fe35cf96c3c8f0d99ad22adb99dfc755f5ddfe750b34d0e6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/haw.h",
+      "sha256": "75175e21a24c272abb8d9d720d87b92c03f52442ea1d0ee004002ae63a199417",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\haw.h",
+      "original_sha256": "e1efd15347a661c2aa26c60c9d125ab6916e931af39faa7f5ef22ec9440a7c5c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hg_cpu.h",
+      "sha256": "d04da67ee5ee4ff974868ad8fefcc43f6a8049f584f9613b5042136dfc28477b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\hg_cpu.h",
+      "original_sha256": "81ae1604f915ac0d7ca8e0ad9a07b0ae280f7b0029edd2260c6cba142276b7a0"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hosthunt.h",
+      "sha256": "f78cea4fd0994ade4a4f754742f96c12e0f8c3423897d17333ca9d733ed4a469",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\hosthunt.h",
+      "original_sha256": "2af5ffe292725c250f8ce2df821b4c8b9996d89958f144dcacd8d405ca633fe2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ipx.h",
+      "sha256": "398ec2bd7bbd635164ccbd77cb3a2091ad9f993d68709f1c75de2fbd1a25b8bd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ipx.h",
+      "original_sha256": "617b31c65dc4aa4ba02947eafac27459710c04f609401a6af19c46cea1bb178c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/msw_snd.h",
+      "sha256": "d2cd03c8892944f577f9c0a70c78812320bdb052f782b37a5e2e28827ac7c8b1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\msw_snd.h",
+      "original_sha256": "3cb956d90427a1212e64c08bee246cf11c261545d5ac2d7f5764a8d7d27fb7dc"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/unix_cnf.h",
+      "sha256": "d911a78990e1fcb794b3061ce58afc38c0e5a3ca1ebfa64792d377f5680aabb9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\unix_cnf.h",
+      "original_sha256": "1db2d689864893264a6c40445525840a6047213caea4945a646fc59cc41d9019"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/winfiles.h",
+      "sha256": "735561202e6c2714f5fe0f835fed3819a1df13e76e1f081cdd5d9ad0dc274c82",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\winfiles.h",
+      "original_sha256": "f307fc3f4039b70639a9403ff07bfc8c44a1d14baac5df8f51ce7ab69d27a4b7"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/hostgrph.h",
+      "sha256": "81a5d44ca57274fe0e2f897866736ed2d3cbef8cf8a238cc51f80ca015e2ac4b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\hostgrph.h",
+      "original_sha256": "de614afaf98aba14ba184f6ce8381b17c20a244f9f96f823ea60b713861b26e4"
+    }
+  ],
+  "removed_guard_ledger_entries": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/flexlmif.h",
+      "macro": "LICENSING",
+      "line": 21,
+      "body_end": 54,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\flexlmif.h",
+      "original_sha256": "ba27db4f84cc7707fe35cf96c3c8f0d99ad22adb99dfc755f5ddfe750b34d0e6",
+      "local_sha256": "eebed1b9d58ade8154b0b9de0921cae9bc82ea24c9c0384ff5e5a0139e65fb81",
+      "removed_body_sha256": "562e57cdacf9b8cfcc0bd2983021a8cce7ea26ff25debb6c5106be3ac9a4f1b6",
+      "removed_body_lines": 33,
+      "after_sha256": "0c4f62bfaeec39f468a80aa4607482c87774aca9dadec6a68577cfa3d345c99c",
+      "final_sha256": "0c4f62bfaeec39f468a80aa4607482c87774aca9dadec6a68577cfa3d345c99c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hg_cpu.h",
+      "macro": "IRET_HOOKS",
+      "line": 236,
+      "body_end": 237,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\hg_cpu.h",
+      "original_sha256": "81ae1604f915ac0d7ca8e0ad9a07b0ae280f7b0029edd2260c6cba142276b7a0",
+      "local_sha256": "1236eb8a3c4afcaa1f8b3a898fae4e9b82d8c2cbd166041d5cde6e2e55ec0bf2",
+      "removed_body_sha256": "d77d0eddfbfde923be5a0ac1b59d4664358dd463645719faf0e61c4087cf5733",
+      "removed_body_lines": 1,
+      "after_sha256": "d04da67ee5ee4ff974868ad8fefcc43f6a8049f584f9613b5042136dfc28477b",
+      "final_sha256": "d04da67ee5ee4ff974868ad8fefcc43f6a8049f584f9613b5042136dfc28477b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hosthunt.h",
+      "macro": "HUNTER",
+      "line": 14,
+      "body_end": 38,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\hosthunt.h",
+      "original_sha256": "2af5ffe292725c250f8ce2df821b4c8b9996d89958f144dcacd8d405ca633fe2",
+      "local_sha256": "642042c14a8b67ecd9d3c935ffc1d9c4a6573873c6c6ab471c094f76ccff6789",
+      "removed_body_sha256": "d661070d8abe486ce116ec60ba9e3a2bb3c55c8dfc86ba9d0a167fc321ece630",
+      "removed_body_lines": 24,
+      "after_sha256": "f78cea4fd0994ade4a4f754742f96c12e0f8c3423897d17333ca9d733ed4a469",
+      "final_sha256": "f78cea4fd0994ade4a4f754742f96c12e0f8c3423897d17333ca9d733ed4a469"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/unix_cnf.h",
+      "macro": "HUNTER",
+      "line": 48,
+      "body_end": 54,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\unix_cnf.h",
+      "original_sha256": "1db2d689864893264a6c40445525840a6047213caea4945a646fc59cc41d9019",
+      "local_sha256": "aaa85f6ff0e1e1e18594f148bd754f69310804d11cca6883f15ecbc087d8d040",
+      "removed_body_sha256": "c064ae70af9466d10ec2fa9800e12d0e46b723f2435166a63e9c357c8923477f",
+      "removed_body_lines": 6,
+      "after_sha256": "d911a78990e1fcb794b3061ce58afc38c0e5a3ca1ebfa64792d377f5680aabb9",
+      "final_sha256": "d911a78990e1fcb794b3061ce58afc38c0e5a3ca1ebfa64792d377f5680aabb9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/unix_cnf.h",
+      "macro": "HUNTER",
+      "line": 34,
+      "body_end": 37,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\unix_cnf.h",
+      "original_sha256": "1db2d689864893264a6c40445525840a6047213caea4945a646fc59cc41d9019",
+      "local_sha256": "aaa85f6ff0e1e1e18594f148bd754f69310804d11cca6883f15ecbc087d8d040",
+      "removed_body_sha256": "e3661f560dc03d9e34cda1d3cd611b710a0daeed6b2e59fd3f8a533e72efbf75",
+      "removed_body_lines": 3,
+      "after_sha256": "d911a78990e1fcb794b3061ce58afc38c0e5a3ca1ebfa64792d377f5680aabb9",
+      "final_sha256": "d911a78990e1fcb794b3061ce58afc38c0e5a3ca1ebfa64792d377f5680aabb9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/winfiles.h",
+      "macro": "SWIN_HFX",
+      "line": 8,
+      "body_end": 49,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\winfiles.h",
+      "original_sha256": "f307fc3f4039b70639a9403ff07bfc8c44a1d14baac5df8f51ce7ab69d27a4b7",
+      "local_sha256": "d1cb60e812d2d0587554fb3fca6cb49d8ebf57459775923c5ca8766f764ea581",
+      "removed_body_sha256": "109e05e03215e882f8a3b6d6919068f71120bbb46b8e7cb92b31ecee282d226e",
+      "removed_body_lines": 41,
+      "after_sha256": "735561202e6c2714f5fe0f835fed3819a1df13e76e1f081cdd5d9ad0dc274c82",
+      "final_sha256": "735561202e6c2714f5fe0f835fed3819a1df13e76e1f081cdd5d9ad0dc274c82"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/hostgrph.h",
+      "macro": "SUN_VA",
+      "line": 38,
+      "body_end": 39,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\hostgrph.h",
+      "original_sha256": "de614afaf98aba14ba184f6ce8381b17c20a244f9f96f823ea60b713861b26e4",
+      "local_sha256": "684ca246a2709af22c839fc25d6d0d3dd7b2d8ddb6fc1be31c58aee14b00f02f",
+      "removed_body_sha256": "86b510c52aebffe4a02b668f10b0e097e8f32060ad65b8a36d06116a29cd9203",
+      "removed_body_lines": 1,
+      "after_sha256": "81a5d44ca57274fe0e2f897866736ed2d3cbef8cf8a238cc51f80ca015e2ac4b",
+      "final_sha256": "81a5d44ca57274fe0e2f897866736ed2d3cbef8cf8a238cc51f80ca015e2ac4b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/haw.h",
+      "macro": "SCCSID",
+      "line": 20,
+      "body_end": 21,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\haw.h",
+      "original_sha256": "e1efd15347a661c2aa26c60c9d125ab6916e931af39faa7f5ef22ec9440a7c5c",
+      "local_sha256": "7ab12a62f16e424f99955085cef4fa86e3c6e5ce93e1152db5dae5c54d9e13c5",
+      "removed_body_sha256": "225f7554178ff61f21d3c482daa753b72b6f7ba8a9003157a0eed79f7854a556",
+      "removed_body_lines": 1,
+      "after_sha256": "75175e21a24c272abb8d9d720d87b92c03f52442ea1d0ee004002ae63a199417",
+      "final_sha256": "75175e21a24c272abb8d9d720d87b92c03f52442ea1d0ee004002ae63a199417"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/msw_snd.h",
+      "macro": "SCCSID",
+      "line": 19,
+      "body_end": 20,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\msw_snd.h",
+      "original_sha256": "3cb956d90427a1212e64c08bee246cf11c261545d5ac2d7f5764a8d7d27fb7dc",
+      "local_sha256": "ac47677b610faa015336c9a3bbfb0780c5031afa50a95d813d76cba47798c8f9",
+      "removed_body_sha256": "ab6ec91c92c401ca6ee75f8d3423aa3bbf72aa9459c0f76b63b2cddb7e590b31",
+      "removed_body_lines": 1,
+      "after_sha256": "d2cd03c8892944f577f9c0a70c78812320bdb052f782b37a5e2e28827ac7c8b1",
+      "final_sha256": "d2cd03c8892944f577f9c0a70c78812320bdb052f782b37a5e2e28827ac7c8b1"
+    }
+  ],
+  "prior_queue": "s13-bfs-depth1-working-queue-195r110.zip",
+  "removed_condition_groups": 34,
+  "limitations": [
+    "Recorded graph contexts predate current edits; current references and file hashes were checked.",
+    "No claim for unsupported future profiles."
+  ]
+}

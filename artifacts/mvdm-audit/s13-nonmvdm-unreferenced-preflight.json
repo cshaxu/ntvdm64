@@ -1,0 +1,98 @@
+{
+  "scope": "seven no-literal-basename static scan candidates",
+  "rows": [
+    {
+      "source": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+      "graph_entries": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja",
+          "entry": "build obj/original_combo.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/combo.c"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+          "entry": "build obj/opennt-user/control-body-combo.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/combo.c"
+        }
+      ]
+    },
+    {
+      "source": "src/non-mvdm/windows/core/ntuser/client/combodir.c",
+      "graph_entries": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja",
+          "entry": "build obj/original_combodir.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/combodir.c"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+          "entry": "build obj/opennt-user/control-body-combodir.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/combodir.c"
+        }
+      ]
+    },
+    {
+      "source": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "graph_entries": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja",
+          "entry": "build obj/original_dlgmgrc.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+          "entry": "build obj/opennt-user/control-body-dlgmgrc.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c"
+        }
+      ]
+    },
+    {
+      "source": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+      "graph_entries": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja",
+          "entry": "build obj/original_dmmnem.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/dmmnem.c"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+          "entry": "build obj/opennt-user/control-body-dmmnem.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/dmmnem.c"
+        }
+      ]
+    },
+    {
+      "source": "src/non-mvdm/windows/core/ntuser/client/lboxctl1.c",
+      "graph_entries": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja",
+          "entry": "build obj/original_lboxctl1.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/lboxctl1.c"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+          "entry": "build obj/opennt-user/control-body-lboxctl1.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/lboxctl1.c"
+        }
+      ]
+    },
+    {
+      "source": "src/non-mvdm/windows/core/ntuser/client/lboxmult.c",
+      "graph_entries": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja",
+          "entry": "build obj/original_lboxmult.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/lboxmult.c"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+          "entry": "build obj/opennt-user/control-body-lboxmult.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/lboxmult.c"
+        }
+      ]
+    },
+    {
+      "source": "src/non-mvdm/windows/core/ntuser/client/lboxvar.c",
+      "graph_entries": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja",
+          "entry": "build obj/original_lboxvar.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/lboxvar.c"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+          "entry": "build obj/opennt-user/control-body-lboxvar.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/lboxvar.c"
+        }
+      ]
+    }
+  ],
+  "result": "All seven have actual Ninja build graph entries; none is eligible for deletion based on this preflight.",
+  "limits": "Graph evidence is not a runtime test. Scanned static inputs did not include build graphs and builders can compose source names."
+}

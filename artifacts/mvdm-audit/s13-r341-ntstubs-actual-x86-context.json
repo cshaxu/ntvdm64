@@ -1,0 +1,10 @@
+{
+  "result": "passed",
+  "translation_unit": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+  "context": "actual x86 WOW32 control-fnid compile command with preprocess-only probe include",
+  "observed": "_X86_ defined at end of included unit",
+  "stderr": "cl D9025 /DANSI overridden by /UANSI, as in actual compile options",
+  "probe_sha256": "46a51d4d6135cd88d8baedc48311cb799103201930fc7fb1d8a2f15d577939d0",
+  "stdout_sha256": "c19f492e73cc5434c7b84b0c01e15f5216eda2f3e27c42650c4e6efde72af5c6",
+  "limitations": "one actual product translation-unit context; not proof for all supported fixtures or a justification for recreating deleted function-scope guards at file scope"
+}

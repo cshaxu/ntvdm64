@@ -17,6 +17,26 @@
 #include "wow_task_init_bindings.h"
 #include "userk.h"
 
+#line 30
+#ifdef DEBUG
+#error Excluded unsupported original DEBUG DDE tracing
+#else
+#line 37
+#define TraceDdeMsg(m, h1, h2, c)
+#endif
+#line 39
+
+#line 54
+#ifdef DEBUG
+#error Excluded unsupported original DEBUG queue validation
+#else
+#line 115
+#define DebugValidateMLIST(pml)
+#define DebugValidateMLISTandQMSG(pml, pqmsg)
+#endif
+#line 118
+
+#line 526
 void SetAppCompatFlags(
     PTHREADINFO pti)
 {
@@ -252,7 +272,7 @@ NTSTATUS xxxInitTask(
 #ifdef DEBUG
 #error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
 #endif
-#line 257
+#line 790
         }
     }
     pti->pClientInfo->dwTIFlags |= pti->TIF_flags;
@@ -351,3 +371,155 @@ void _ShowStartGlass(
 }
 
 
+
+#line 43
+#if DBG
+#error Excluded unsupported original DBG branch
+#endif
+#line 50
+
+#line 2962
+#ifdef LOCK_MOUSE_CODE
+#error Excluded unsupported original LOCK_MOUSE_CODE branch
+#endif
+#line 2965
+
+#line 1480
+#ifdef DEBUG
+#line 1481
+#error Excluded unsupported original DEBUG branch
+#endif
+#line 1490
+
+#line 1518
+#if DBG
+#line 1519
+#error Excluded unsupported original DBG branch
+#endif
+#line 1521
+
+#line 1555
+#if DBG
+#line 1556
+#error Excluded unsupported original DBG branch
+#endif
+#line 1559
+
+#line 1598
+#if DBG
+#line 1599
+#error Excluded unsupported original DBG branch
+#endif
+#line 1609
+
+#line 1626
+#ifdef DEBUG
+#line 1627
+#error Excluded unsupported original DEBUG branch
+#endif
+#line 1636
+
+#line 1784
+#if DBG
+#line 1785
+#error Excluded unsupported original DBG branch
+#endif
+#line 1788
+
+#line 2275
+#if DBG
+#line 2276
+#error Excluded unsupported original DBG branch
+#endif // DBG
+#line 2278
+
+#line 2282
+#if DBG
+#line 2283
+#error Excluded unsupported original DBG branch
+#endif // DBG
+#line 2289
+
+#line 2322
+#if DBG
+#line 2323
+#error Excluded unsupported original DBG branch
+#endif // DBG
+#line 2325
+
+#line 2355
+#if DBG
+#line 2356
+#error Excluded unsupported original DBG branch
+#endif // DBG
+#line 2358
+
+#line 2375
+#if DBG
+#line 2376
+#error Excluded unsupported original DBG branch
+#endif // DBG
+#line 2378
+
+#line 2385
+#if DBG
+#line 2386
+#error Excluded unsupported original DBG branch
+#endif // DBG
+#line 2388
+
+#line 2649
+#ifdef DEBUG
+#line 2650
+#error Excluded unsupported original DEBUG branch
+#endif
+#line 2658
+
+#line 3705
+#if DBG
+#line 3706
+#error Excluded unsupported original DBG branch
+#endif
+#line 3728
+
+
+#line 992
+#ifdef FE_IME
+#line 993
+#error Unsupported FE_IME original branch
+#endif
+#line 997
+
+#line 1915
+#ifdef FE_IME
+#line 1916
+#error Unsupported FE_IME original branch
+#endif
+#line 1921
+
+#line 957
+#ifdef FE_IME
+#line 958
+#error Unsupported FE_IME original branch
+#else
+#line 960
+#endif
+#line 962
+
+#line 963
+#ifdef FE_IME
+#line 964
+#error Unsupported FE_IME original branch
+#else
+#line 966
+#endif
+#line 968
+
+#line 1203
+#ifdef FE_IME
+#line 1204
+#error Unsupported FE_IME original branch
+#else
+#line 1209
+#endif
+#line 1211

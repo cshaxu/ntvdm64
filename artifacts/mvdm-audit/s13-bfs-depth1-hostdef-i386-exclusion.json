@@ -1,0 +1,43 @@
+{
+  "scope": "First-depth original i386 host library-loader selector",
+  "file": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+  "original_sha256": "480c35aa09b40d75d82fe0e1fe3e6cb0f981e573549ea2e193e8a62be4816d10",
+  "before_sha256": "0ab22fc80460cbaf4c7b27e69099e44c2832808dad65c5bfe62c5ce3054bbf9d",
+  "after_sha256": "eeffe68172cf381d394ff2c72a4b109e0a82f0c2efa4e82dde328a6a4e79dfdf",
+  "original_boundary_lines": [
+    220,
+    221,
+    222,
+    223,
+    224,
+    225
+  ],
+  "evidence": [
+    "Actual worker nt_bop compile probe reports i386 undefined immediately before header.",
+    "592 product compile contexts do not define i386; project and scanned MSVC/Windows SDK headers contain no definition.",
+    "Retained T309 dispatcher tool was stale: its old /Di386 profile triggers the known unsupported kernel-VDM guard. Updated to selected CCPU profile; x86 and x64 object graphs now pass and do not include host_def.h.",
+    "T279 inputs and T289 stale sources do not directly include host_def.h; T288 references a removed obsolete fixture and header."
+  ],
+  "limitations": [
+    "The exclusion is for the current supported build and test contexts, not all hypothetical external programs.",
+    "T313/T335 historical callback link remains independently unresolved."
+  ],
+  "verification": [
+    "Actual x86 worker ntvdm.exe target rebuilt successfully and VdmTib owner check passed.",
+    "x86 and x64 rejection suites passed 181 guards each, including forced i386 failure and original lines 223/225.",
+    "Updated T309 dispatcher object graph compiled on x86 and x64; incremental repeats did no work."
+  ],
+  "same_package_identity_comparison": {
+    "candidate_sha256": "b9385aba3625e563418411a3fb2becd1203133de5c0fa6e1d5f20610c8c80e8a",
+    "current_sha256": "9e0cc42122558e76f6fe94377994544fc008657937d4cdf413a24d82cbd8aa0b",
+    "differing_offsets": [
+      288,
+      289,
+      1698412,
+      1698413
+    ],
+    "coff_timestamp_offset": 288,
+    "debug_timestamp_offset": 1698412,
+    "conclusion": "Only PE COFF and IMAGE_DEBUG_DIRECTORY timestamp bytes differ."
+  }
+}

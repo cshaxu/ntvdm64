@@ -1,0 +1,52 @@
+{
+  "source": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+  "original_source": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\cfpu_def.h",
+  "original_sha256": "fe3bb4a06759e1cbef74bff327661f9649c92fb2490cdc751bc625a8170d3d4f",
+  "before_sha256": "1ed79b8fc85e89b0cbd2ed6838b29610106591dd02717cf50ae7dc74dcb1f24e",
+  "after_sha256": "d6b34a9e58cedf022909f6996ca3a7729a135382acef9c1ad2c68b974167d507",
+  "changes": [
+    {
+      "old": 30,
+      "corrected": 22,
+      "statement": "} FP32;",
+      "original_lf_line": 22,
+      "current_marker_line": 28
+    },
+    {
+      "old": 42,
+      "corrected": 28,
+      "statement": "} FP64HI;",
+      "original_lf_line": 28,
+      "current_marker_line": 39
+    },
+    {
+      "old": 52,
+      "corrected": 33,
+      "statement": "} FP80SE;",
+      "original_lf_line": 33,
+      "current_marker_line": 49
+    },
+    {
+      "old": 64,
+      "corrected": 40,
+      "statement": "} FP64;",
+      "original_lf_line": 40,
+      "current_marker_line": 61
+    },
+    {
+      "old": 76,
+      "corrected": 46,
+      "statement": "} FPU_I64;",
+      "original_lf_line": 46,
+      "current_marker_line": 73
+    },
+    {
+      "old": 92,
+      "corrected": 57,
+      "statement": "FP80SE\tsign_exp;",
+      "original_lf_line": 57,
+      "current_marker_line": 89
+    }
+  ],
+  "limits": "local LITTLEND layouts retained; field order and runtime ABI are not established by line mapping"
+}

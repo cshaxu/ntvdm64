@@ -1,0 +1,95 @@
+{
+  "scope": "nine #line corrections in three files; branch classification unchanged",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "before_sha256": "168bd9b845c99f7f6f974d26bdf2885e076a16017bcac0481cc9ce08a07b1227",
+      "after_sha256": "0ca682e5b5e5a11cf84b07683469f1faeeb87f63c6dd9db16d5bbe33a786eb69",
+      "original_sha256": "fd73ce7181f7dfb61432d63466c7641c3d010ca0c60bf446666b6c0118ddb8a9",
+      "changes": [
+        {
+          "line": 992,
+          "old": 990,
+          "new": 1191,
+          "original_following_line": 1191
+        },
+        {
+          "line": 1047,
+          "old": 1044,
+          "new": 1249,
+          "original_following_line": 1250
+        },
+        {
+          "line": 1215,
+          "old": 1209,
+          "new": 1414,
+          "original_following_line": 1414
+        },
+        {
+          "line": 1259,
+          "old": 1248,
+          "new": 1453,
+          "original_following_line": 1453
+        },
+        {
+          "line": 1486,
+          "old": 1472,
+          "new": 1677,
+          "original_following_line": 1678
+        },
+        {
+          "line": 1501,
+          "old": 1486,
+          "new": 1691,
+          "original_following_line": 1692
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/vgaports.h",
+      "before_sha256": "22c9bfde5be2df338ba9d0b39a2669643f7879d0d51b88fd5a75e30238f35c69",
+      "after_sha256": "8fb2101973becd8f592ff53effa40460e0679e1f510b5a0913228452c0f06f33",
+      "original_sha256": "7d2c9ceadd144ea014757549ab83e8ff8e28b6e92c11f0cd379119d07c0bd2f2",
+      "changes": [
+        {
+          "line": 1041,
+          "old": 1034,
+          "new": 1996,
+          "original_following_line": 1996
+        },
+        {
+          "line": 1047,
+          "old": 1039,
+          "new": 2001,
+          "original_following_line": 2001
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "before_sha256": "f71cc24fde1c557386109d2b871e45d965d4410d61ac655f5776e7c9e7001aa1",
+      "after_sha256": "2d820c06c3667fc73fafbcf5ad6324f3542b5d0f4f7018b4a33b5945282f06d7",
+      "original_sha256": "1ed708dee1236ea6424610d2274830b651062ba602d4b2cfa60e49e33de4c186",
+      "changes": [
+        {
+          "line": 58,
+          "old": 61,
+          "new": 113,
+          "original_following_line": 114
+        }
+      ]
+    }
+  ],
+  "build": "MSVC x86 worker ntvdm.exe cached build passed",
+  "compare": {
+    "previous_sha256": "5c53229d69657cc81b1182bf6e50703771129c1e2352c11a89ca537eec3262c8",
+    "current_sha256": "24a268643b1da2a3725f9bf1550146b0807ddbd0a9efdc39afaf3a1a4a2a5f4e",
+    "diff_offsets": [
+      288,
+      289,
+      1698412,
+      1698413
+    ]
+  },
+  "limits": "A unique nearby original statement supplies the anchor; this does not validate all anchors in these files."
+}

@@ -33,6 +33,9 @@ Sccs ID: 07/29/91 @(#)hunt.c 1.7
 
 #include "debug.h"
 
+#line 36
 #ifdef HUNTER
+#line 37
 #error Excluded unsupported HUNTER configuration
 #endif /*HUNTER*/
+#line 251

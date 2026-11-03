@@ -1,0 +1,21 @@
+[
+  {
+    "defines": [],
+    "expected_rejection": false,
+    "exit_code": 0
+  },
+  {
+    "defines": [
+      "/DDBG=0"
+    ],
+    "expected_rejection": true,
+    "exit_code": 2
+  },
+  {
+    "defines": [
+      "/DDBG=1"
+    ],
+    "expected_rejection": true,
+    "exit_code": 2
+  }
+]

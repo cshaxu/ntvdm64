@@ -419,7 +419,7 @@ word TimerInt1COff;
 #else
 #error Unsupported excluded original configuration
 #endif /* NTVDM */
-#line 456
+#line 475
 
 #ifndef PROD	/* Specific Timer change tracing that isn't timer_verbose */
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
@@ -612,7 +612,7 @@ void SWTMR_outb IFN2(io_addr, port, half_word, value)
 #else
 #error Unsupported excluded original configuration
 #endif
-#line 647
+#line 698
 
     port = port & TIMER_BIT_MASK;
 	if(port == 0x43)
@@ -921,13 +921,16 @@ LOCAL void loadCounter IFN0()
 #ifndef NTVDM
 #error Excluded unsupported non-NTVDM timer profile
 #endif
-#line 964
+#line 1037
 
         }
 
+#line 1040
 #if defined(NTVDM) && !defined(PROD)
+#line 1041
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif /*NTVDM & !PROD*/
+#line 1046
 }
 
 /* read counter into latch, ready for next read */
@@ -1600,7 +1603,7 @@ LOCAL void startCounting IFN0()
 #ifndef NTVDM
 #error Excluded unsupported non-NTVDM timer profile
 #endif
-#line 1681
+#line 1784
 
 
 LOCAL void updateCounter IFN0()
@@ -1835,14 +1838,14 @@ LOCAL void issueIREQ0 IFN1(unsigned int, n)
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-590: non-PROD branch is not selected
 #endif
-#line 1995
+#line 2175
 
     if (ticks_blocked == 0)
     {
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-590: non-PROD branch is not selected
 #endif
-#line 2004
+#line 2186
 		if (timer_int_enabled)
 		{
 #ifdef DELAYED_INTS
@@ -1864,7 +1867,7 @@ LOCAL void issueIREQ0 IFN1(unsigned int, n)
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* !NTVDM */
 #endif /* !DELAYED_INTS */
-#line 2025
+#line 2235
 		}
     }
     else if (ticks_blocked > 0)
@@ -1979,7 +1982,7 @@ unsigned long updateCount(void)
 #else
 #error Excluded unsupported non-NTVDM alternative
 #endif  /* NTVDM*/
-#line 2238
+#line 2452
 
 
 
@@ -2070,7 +2073,7 @@ LOCAL void updateIdealTime IFN0()
 #ifndef NTVDM
 #error Excluded unsupported non-NTVDM timer profile
 #endif /* !NTVDM */
-#line 2421
+#line 2648
 
 
 /*
@@ -2136,9 +2139,12 @@ LOCAL void counter_init IFN1(COUNTER_UNIT *, p)
 #endif
 }
 
+#line 2728
 #if !defined (NTVDM)
+#line 2729
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* !NTVDM */
+#line 2769
 #line 2489
 
 void timer_init IFN0()

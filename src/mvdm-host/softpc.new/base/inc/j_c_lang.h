@@ -39,7 +39,10 @@ extern IUH rolb IPT2(IUH, src, IUH, rots);
 #define	REGWORD		0
 #define	REGLONG		0
 #endif
+#line 42
 #ifdef BIGEND
+#line 43
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
+#line 49
 #define __J_C_LANG	/* mark as already included */

@@ -53,9 +53,12 @@ memfill(
      len = h_addr_in + 1 - l_addr_in;
      memset(l_addr_in, data, len);
 
+#line 59
 #if 0
+#line 60
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#line 80
 }
 
 void

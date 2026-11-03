@@ -1,0 +1,859 @@
+{
+  "scope": "uniquely signature-paired groups from r294 logical-unmapped set",
+  "unique_mapped": 69,
+  "continuation_marker_mismatch_candidates": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_group_line": 292,
+      "original_group_line": 300,
+      "original_endif_line": 321,
+      "current_endif_line": 297,
+      "current_next_line_marker": 312,
+      "candidate_marker": 322,
+      "signature": [
+        [
+          "ifdef",
+          "NPX"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_group_line": 300,
+      "original_group_line": 323,
+      "original_endif_line": 331,
+      "current_endif_line": 305,
+      "current_next_line_marker": 322,
+      "candidate_marker": 332,
+      "signature": [
+        [
+          "ifdef",
+          "FLOPPY_B"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_group_line": 360,
+      "original_group_line": 385,
+      "original_endif_line": 507,
+      "current_endif_line": 362,
+      "current_next_line_marker": 499,
+      "candidate_marker": 508,
+      "signature": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "current_group_line": 284,
+      "original_group_line": 286,
+      "original_endif_line": 293,
+      "current_endif_line": 286,
+      "current_next_line_marker": 276,
+      "candidate_marker": 294,
+      "signature": [
+        [
+          "ifdef",
+          "SPC486"
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_group_line": 200,
+      "original_group_line": 191,
+      "original_endif_line": 203,
+      "current_endif_line": 208,
+      "current_next_line_marker": 215,
+      "candidate_marker": 204,
+      "signature": [
+        [
+          "ifdef",
+          "LITTLEND"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.h",
+      "current_group_line": 209,
+      "original_group_line": 218,
+      "original_endif_line": 225,
+      "current_endif_line": 211,
+      "current_next_line_marker": 217,
+      "candidate_marker": 226,
+      "signature": [
+        [
+          "ifdef",
+          "DOUBLE_CPU"
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "current_group_line": 50,
+      "original_group_line": 42,
+      "original_endif_line": 49,
+      "current_endif_line": 56,
+      "current_next_line_marker": 58,
+      "candidate_marker": 50,
+      "signature": [
+        [
+          "ifdef",
+          "ANSI"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "current_group_line": 4850,
+      "original_group_line": 4844,
+      "original_endif_line": 4859,
+      "current_endif_line": 4855,
+      "current_next_line_marker": 4866,
+      "candidate_marker": 4860,
+      "signature": [
+        [
+          "ifdef",
+          "SPC486"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_group_line": 236,
+      "original_group_line": 245,
+      "original_endif_line": 247,
+      "current_endif_line": 238,
+      "current_next_line_marker": 239,
+      "candidate_marker": 248,
+      "signature": [
+        [
+          "if",
+          "!defined(PROD) || defined(SHORT_TRACE)"
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_group_line": 437,
+      "original_group_line": 446,
+      "original_endif_line": 451,
+      "current_endif_line": 441,
+      "current_next_line_marker": 442,
+      "candidate_marker": 452,
+      "signature": [
+        [
+          "ifndef",
+          "DELAYED_INTS"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_group_line": 820,
+      "original_group_line": 1046,
+      "original_endif_line": 1055,
+      "current_endif_line": 824,
+      "current_next_line_marker": 857,
+      "candidate_marker": 1056,
+      "signature": [
+        [
+          "if",
+          "defined (DELAYED_INTS) || defined (NTVDM)"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_group_line": 1527,
+      "original_group_line": 1926,
+      "original_endif_line": 1949,
+      "current_endif_line": 1529,
+      "current_next_line_marker": 1582,
+      "candidate_marker": 1950,
+      "signature": [
+        [
+          "if",
+          "!defined(PROD) || defined(IRET_HOOKS)"
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "current_group_line": 132,
+      "original_group_line": 468,
+      "original_endif_line": 492,
+      "current_endif_line": 134,
+      "current_next_line_marker": 273,
+      "candidate_marker": 493,
+      "signature": [
+        [
+          "if",
+          "!defined(PROD) || defined(HUNTER)"
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "current_group_line": 371,
+      "original_group_line": 567,
+      "original_endif_line": 571,
+      "current_endif_line": 375,
+      "current_next_line_marker": 375,
+      "candidate_marker": 572,
+      "signature": [
+        [
+          "ifdef",
+          "ANSI"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "current_group_line": 1008,
+      "original_group_line": 1245,
+      "original_endif_line": 1474,
+      "current_endif_line": 1010,
+      "current_next_line_marker": 1195,
+      "candidate_marker": 1475,
+      "signature": [
+        [
+          "ifdef",
+          "WDCTRL_BOP"
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "current_group_line": 297,
+      "original_group_line": 314,
+      "original_endif_line": 320,
+      "current_endif_line": 299,
+      "current_next_line_marker": 305,
+      "candidate_marker": 321,
+      "signature": [
+        [
+          "ifdef",
+          "MSWDVR"
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "current_group_line": 302,
+      "original_group_line": 322,
+      "original_endif_line": 326,
+      "current_endif_line": 304,
+      "current_next_line_marker": 311,
+      "candidate_marker": 327,
+      "signature": [
+        [
+          "ifdef",
+          "NOVELL_IPX"
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "current_group_line": 307,
+      "original_group_line": 328,
+      "original_endif_line": 331,
+      "current_endif_line": 309,
+      "current_next_line_marker": 316,
+      "candidate_marker": 332,
+      "signature": [
+        [
+          "ifdef",
+          "NOVELL_TCPIP"
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "current_group_line": 312,
+      "original_group_line": 333,
+      "original_endif_line": 335,
+      "current_endif_line": 314,
+      "current_next_line_marker": 320,
+      "candidate_marker": 336,
+      "signature": [
+        [
+          "ifdef",
+          "WINSOCK"
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "current_group_line": 321,
+      "original_group_line": 343,
+      "original_endif_line": 346,
+      "current_endif_line": 323,
+      "current_next_line_marker": 329,
+      "candidate_marker": 347,
+      "signature": [
+        [
+          "if",
+          "defined(SOFTWIN_API) || defined(SWIN_HFX)"
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "current_group_line": 382,
+      "original_group_line": 407,
+      "original_endif_line": 409,
+      "current_endif_line": 384,
+      "current_next_line_marker": 392,
+      "candidate_marker": 410,
+      "signature": [
+        [
+          "if",
+          "defined(SPC386) && defined(WDCTRL_BOP)"
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cga.h",
+      "current_group_line": 84,
+      "original_group_line": 100,
+      "original_endif_line": 112,
+      "current_endif_line": 86,
+      "current_next_line_marker": 97,
+      "candidate_marker": 113,
+      "signature": [
+        [
+          "if",
+          "!defined(EGG) && !defined(A_VID) && !defined(C_VID)"
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "current_group_line": 90,
+      "original_group_line": 97,
+      "original_endif_line": 105,
+      "current_endif_line": 96,
+      "current_next_line_marker": 99,
+      "candidate_marker": 106,
+      "signature": [
+        [
+          "ifdef",
+          "ANSI"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "current_group_line": 99,
+      "original_group_line": 107,
+      "original_endif_line": 109,
+      "current_endif_line": 101,
+      "current_next_line_marker": 103,
+      "candidate_marker": 110,
+      "signature": [
+        [
+          "ifdef",
+          "MSWDVR"
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "current_group_line": 102,
+      "original_group_line": 106,
+      "original_endif_line": 205,
+      "current_endif_line": 138,
+      "current_next_line_marker": 200,
+      "candidate_marker": 206,
+      "signature": [
+        [
+          "if",
+          "defined (NTVDM)"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "current_group_line": 512,
+      "original_group_line": 528,
+      "original_endif_line": 582,
+      "current_endif_line": 537,
+      "current_next_line_marker": 560,
+      "candidate_marker": 583,
+      "signature": [
+        [
+          "if",
+          "defined(NTVDM) || defined(GISP_CPU)"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "current_group_line": 367,
+      "original_group_line": 404,
+      "original_endif_line": 409,
+      "current_endif_line": 369,
+      "current_next_line_marker": 373,
+      "candidate_marker": 410,
+      "signature": [
+        [
+          "ifdef",
+          "KIPPER"
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "current_group_line": 110,
+      "original_group_line": 94,
+      "original_endif_line": 98,
+      "current_endif_line": 114,
+      "current_next_line_marker": 106,
+      "candidate_marker": 99,
+      "signature": [
+        [
+          "if",
+          "defined(NTVDM) || defined(host_main)"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "current_group_line": 299,
+      "original_group_line": 377,
+      "original_endif_line": 394,
+      "current_endif_line": 305,
+      "current_next_line_marker": 345,
+      "candidate_marker": 395,
+      "signature": [
+        [
+          "ifdef",
+          "XTSFD"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "current_group_line": 261,
+      "original_group_line": 282,
+      "original_endif_line": 342,
+      "current_endif_line": 301,
+      "current_next_line_marker": 317,
+      "candidate_marker": 343,
+      "signature": [
+        [
+          "if",
+          "!defined(NTVDM) || ( defined(NTVDM) && !defined(X86GFX) )"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_group_line": 392,
+      "original_group_line": 409,
+      "original_endif_line": 474,
+      "current_endif_line": 421,
+      "current_next_line_marker": 456,
+      "candidate_marker": 475,
+      "signature": [
+        [
+          "if",
+          "defined(NTVDM)"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_group_line": 606,
+      "original_group_line": 689,
+      "original_endif_line": 697,
+      "current_endif_line": 614,
+      "current_next_line_marker": 647,
+      "candidate_marker": 698,
+      "signature": [
+        [
+          "if",
+          "defined(NTVDM) || defined(GISP_SVGA)"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_group_line": 1848,
+      "original_group_line": 2188,
+      "original_endif_line": 2234,
+      "current_endif_line": 1866,
+      "current_next_line_marker": 2025,
+      "candidate_marker": 2235,
+      "signature": [
+        [
+          "ifdef",
+          "DELAYED_INTS"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "current_group_line": 161,
+      "original_group_line": 186,
+      "original_endif_line": 190,
+      "current_endif_line": 166,
+      "current_next_line_marker": 165,
+      "candidate_marker": 191,
+      "signature": [
+        [
+          "ifdef",
+          "NO_STRING_OPERATIONS"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "current_group_line": 133,
+      "original_group_line": 125,
+      "original_endif_line": 199,
+      "current_endif_line": 196,
+      "current_next_line_marker": 210,
+      "candidate_marker": 200,
+      "signature": [
+        [
+          "ifdef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "current_group_line": 245,
+      "original_group_line": 1560,
+      "original_endif_line": 1611,
+      "current_endif_line": 247,
+      "current_next_line_marker": 1437,
+      "candidate_marker": 1612,
+      "signature": [
+        [
+          "ifdef",
+          "PLANEDUMPER"
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "current_group_line": 324,
+      "original_group_line": 317,
+      "original_endif_line": 342,
+      "current_endif_line": 326,
+      "current_next_line_marker": 350,
+      "candidate_marker": 343,
+      "signature": [
+        [
+          "ifdef",
+          "NO_LONGER_USED"
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsg16.c",
+      "current_group_line": 226,
+      "original_group_line": 246,
+      "original_endif_line": 250,
+      "current_endif_line": 231,
+      "current_next_line_marker": 270,
+      "candidate_marker": 251,
+      "signature": [
+        [
+          "ifdef",
+          "DEBUG"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "current_group_line": 1574,
+      "original_group_line": 1901,
+      "original_endif_line": 1903,
+      "current_endif_line": 1576,
+      "current_next_line_marker": 1938,
+      "candidate_marker": 1904,
+      "signature": [
+        [
+          "if",
+          "FASTBOPPING"
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "current_group_line": 331,
+      "original_group_line": 336,
+      "original_endif_line": 340,
+      "current_endif_line": 336,
+      "current_next_line_marker": 366,
+      "candidate_marker": 341,
+      "signature": [
+        [
+          "ifdef",
+          "MAPPARAM_EXTRA"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.c",
+      "current_group_line": 2003,
+      "original_group_line": 1908,
+      "original_endif_line": 1922,
+      "current_endif_line": 2010,
+      "current_next_line_marker": 2020,
+      "candidate_marker": 1923,
+      "signature": [
+        [
+          "ifdef",
+          "ONLY_API16"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "current_group_line": 2987,
+      "original_group_line": 2974,
+      "original_endif_line": 3002,
+      "current_endif_line": 2989,
+      "current_next_line_marker": 3031,
+      "candidate_marker": 3003,
+      "signature": [
+        [
+          "ifdef",
+          "NEVER"
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser31.c",
+      "current_group_line": 740,
+      "original_group_line": 738,
+      "original_endif_line": 748,
+      "current_endif_line": 747,
+      "current_next_line_marker": 759,
+      "candidate_marker": 749,
+      "signature": [
+        [
+          "ifdef",
+          "APRIL15"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "current_group_line": 36,
+      "original_group_line": 89,
+      "original_endif_line": 113,
+      "current_endif_line": 57,
+      "current_next_line_marker": 113,
+      "candidate_marker": 114,
+      "signature": [
+        [
+          "ifdef",
+          "UNICODE"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "current_group_line": 290,
+      "original_group_line": 282,
+      "original_endif_line": 286,
+      "current_endif_line": 292,
+      "current_next_line_marker": 295,
+      "candidate_marker": 287,
+      "signature": [
+        [
+          "ifdef",
+          "DEBUG"
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+      "current_group_line": 610,
+      "original_group_line": 649,
+      "original_endif_line": 653,
+      "current_endif_line": 612,
+      "current_next_line_marker": 615,
+      "candidate_marker": 654,
+      "signature": [
+        [
+          "ifdef",
+          "DEBUG"
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "current_group_line": 213,
+      "original_group_line": 194,
+      "original_endif_line": 208,
+      "current_endif_line": 224,
+      "current_next_line_marker": 220,
+      "candidate_marker": 209,
+      "signature": [
+        [
+          "ifdef",
+          "i386"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "lexical mapping candidate; intervening retained/local source and #line policy require individual review"
+    }
+  ],
+  "limits": "scanner only; comments, continuation, selected content and local diagnostic patches must be checked before changes"
+}

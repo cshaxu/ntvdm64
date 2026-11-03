@@ -44,7 +44,9 @@ PFNSVC	apfnXMSSvc [] = {
 BOOL XMSDispatch (ULONG iSvc)
 {
 
+#line 47
 #if DBG
+#line 48
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 #line 56

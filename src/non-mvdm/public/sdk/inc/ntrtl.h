@@ -5,8 +5,8 @@
  * file preserves only declarations reached by imported MVDM/OpenNT sources;
  * adapter-mvdm-host-out owns any modern implementation binding.
  */
-#ifndef OPENNT_HOST_NTRTL_SUBSET_H
-#define OPENNT_HOST_NTRTL_SUBSET_H
+#ifndef _NTRTL_
+#define _NTRTL_
 
 #include <nt.h>
 

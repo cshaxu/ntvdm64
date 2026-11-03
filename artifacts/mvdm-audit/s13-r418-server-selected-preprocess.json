@@ -1,0 +1,23 @@
+{
+  "method": "actual x86 WOW32 server compile flags with /EP; same scratch path, exact pinned before/after source hashes",
+  "results": [
+    {
+      "variant": "before",
+      "sha256": "7e253d461cf143db44714dac0735d6c4596250c2566edf6881bf4efcf4748d74",
+      "bytes": 1440285
+    },
+    {
+      "variant": "after",
+      "sha256": "67831806f306d049b40781e7f25c94c4fc95492adbef3f21c2eb1ecea7cc362d",
+      "bytes": 1440295
+    }
+  ],
+  "scope": "selected x86 product context; unsupported FE_IME covered separately",
+  "comparison": {
+    "raw_hashes_identical": false,
+    "nonblank_lines_byte_identical": true,
+    "before_nonblank_sha256": "a0eda04308accc27507479185f6bd6134329f5a9bd780d3081400eb0feb486c0",
+    "after_nonblank_sha256": "a0eda04308accc27507479185f6bd6134329f5a9bd780d3081400eb0feb486c0",
+    "limits": "Only all-whitespace lines omitted; original output remains unequal. Same actual x86 selected product context."
+  }
+}

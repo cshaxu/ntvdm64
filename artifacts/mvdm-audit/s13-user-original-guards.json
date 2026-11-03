@@ -1,0 +1,46 @@
+{
+  "headers": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+      "old_guard": "OPENNT_GLOBALS_EDIT_MEMORY_SUBSET_H",
+      "new_guard": "_GLOBALS_",
+      "working_sha256": "f6733a61e6a517e6d0072f39803c1ea426fa880ad07a6bb19b92713c19e97344",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\globals.h",
+      "original_sha256": "fd78200232574074f7ec68d2f5b851c27ee9d5024427310d18ebbcb048336e97"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "old_guard": "OPENNT_USERRTL_SAME_ADDRESS_SUBSET_H",
+      "new_guard": "_USERRTL_",
+      "working_sha256": "89746a9d75726978c9ccac667b92c98c72596e1c9c0fcc12bfbbec9548ce2459",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\userrtl.h",
+      "original_sha256": "b632fc75232db7c2bc95baf758820c087a23f7e17a61c361e47c4687a4f543d3"
+    }
+  ],
+  "five_x86_preprocessed_sources": [
+    {
+      "source": "editec.c",
+      "preprocessed_sha256": "d73eae157da9a80181a8dd498c592a239179b59859d1df3eecf86531105af797"
+    },
+    {
+      "source": "editsl.c",
+      "preprocessed_sha256": "48633a0949fe28a44e07f560e84705bb1e301b7fce5e494508dfd5963156a8c1"
+    },
+    {
+      "source": "wow_edit_entry_bindings.c",
+      "preprocessed_sha256": "47027e1e1f300a9fd9615ad2c885183883f47c69820336b400579821834155a5"
+    },
+    {
+      "source": "wow_default_window_bindings.c",
+      "preprocessed_sha256": "bc815a4ee8b9f11c6ad7acce10ba5a5ec362966c123fe50daad440883a5099bd"
+    },
+    {
+      "source": "help.c",
+      "preprocessed_sha256": "0fa90a6f29a00e9b440506bf7a3915eefc26943ed6b370ed45e77fdbf9ade229"
+    }
+  ],
+  "wow32_build": "passed",
+  "guard_suites": "x86 and x64 passed",
+  "image_compare": "s13-user-guards-image-comparison.json",
+  "limitation": "five captured WOW translation-unit contexts; no full runtime test and no assertion about other SDK configurations"
+}

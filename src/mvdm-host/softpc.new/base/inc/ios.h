@@ -44,9 +44,12 @@ typedef struct _extioentry {
 #define MDA_PORT_END            0x3BF
 
 
+#line 46
 #ifdef HERC
+#line 47
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif
+#line 50
 
 /*
  * Memory bounds for the colour graphics adaptor
@@ -309,9 +312,12 @@ typedef struct _extioentry {
 
 /* SoundBlaster I/O Ports */
 
+#line 312
 #ifdef SWIN_SNDBLST_NULL
+#line 313
 #error DIVERGENCE MVDM-HOST-DIV-528: SWIN_SNDBLST_NULL platform branch is not selected; see mirror register.
 #endif
+#line 318
 
 /*
  * PCI configuration ports.
@@ -452,7 +458,7 @@ IMPORT void	io_define_inb
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #endif	/* SFELLOW */
-#line 454
+#line 499
 
 IMPORT void	io_define_in_routines
 (
@@ -478,7 +484,7 @@ IMPORT void	io_define_outb
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #endif	/* SFELLOW */
-#line 479
+#line 538
 
 IMPORT void	io_define_out_routines
 (
@@ -499,7 +505,7 @@ IMPORT IBOOL	io_connect_port IPT3(io_addr, io_address, half_word, adapter,
 #else
 #error Unsupported excluded original configuration
 #endif	/* NTVDM */
-#line 500
+#line 559
 
 IMPORT void	io_disconnect_port IPT2(io_addr, io_address, half_word, adapter);
 IMPORT void	io_init IPT0();

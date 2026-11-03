@@ -1,0 +1,34 @@
+{
+  "input_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r373.zip",
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 293,
+      "original_end": 301,
+      "directive": "#ifdef FE_SB // GetMessage()",
+      "endif": "#endif // FE_SB",
+      "macro": "FE_SB",
+      "before_sha256": "988bfc6c78a71721f95b4d768b123bfbd01e9f72701f9e25b7d5744f648c7272",
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current_condition_line": 409,
+      "after_sha256": "862827bb5a68a478fd102228fa030f9e43a4a8022a955f24ddb81e10981c603e"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 340,
+      "original_end": 344,
+      "directive": "#ifdef FE_SB // GetMessage()",
+      "endif": "#endif // FE_SB",
+      "macro": "FE_SB",
+      "before_sha256": "988bfc6c78a71721f95b4d768b123bfbd01e9f72701f9e25b7d5744f648c7272",
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current_condition_line": 416,
+      "after_sha256": "862827bb5a68a478fd102228fa030f9e43a4a8022a955f24ddb81e10981c603e"
+    }
+  ],
+  "context_evidence": "s13-r459-macro-contexts.json",
+  "scope": "Original first-depth frames appended after retained header subset. Original GetMessage C owner remains omitted. No selected tokens added or removed. Existing historical fixture has a separate extracted header.",
+  "verification": "cached build exit 0; x86/x64 guard controls exit 0; class fixture positive and selected-code negative controls pass; scanner 2525 excluded arms no detected remnants or stale lines; 1110 queue hashes match; staged candidate differs from r457 only at four WOW32 PE/debug timestamp bytes"
+}

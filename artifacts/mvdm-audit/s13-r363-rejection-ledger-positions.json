@@ -1,0 +1,41 @@
+{
+  "changes": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "macro": "GISP_CPU",
+      "old_current": 2636,
+      "new_current": 2639
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "macro": "GISP_CPU",
+      "old_current": 281,
+      "new_current": 284
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "macro": "GISP_CPU",
+      "old_current": 723,
+      "new_current": 726
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "macro": "GISP_CPU",
+      "old_current": 176,
+      "new_current": 177
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "macro": "SEGMENTATION",
+      "old_current": 2618,
+      "new_current": 2621
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "macro": "SEGMENTATION",
+      "old_current": 1451,
+      "new_current": 1454
+    }
+  ],
+  "method": "exact inserted physical-line offsets and current guard/error verification"
+}

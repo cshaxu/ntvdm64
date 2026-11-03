@@ -1,0 +1,37 @@
+{
+  "failures": [
+    {
+      "runs": "r465 x86/x64",
+      "diagnostic": "input.c:1641 original guard or line mismatch",
+      "cause": "Historical evidence recorded physical line; later insertion moved the frame."
+    },
+    {
+      "runs": "r467 x86/x64",
+      "diagnostic": "class.c:1070 guard not unique",
+      "cause": "Test expected an old withdrawn placeholder, rather than the restored original frame with diagnostic #line."
+    },
+    {
+      "runs": "r468 x86/x64",
+      "diagnostic": "ENABLE_CLIENTSIDE_ACCESSCHECK guard not unique",
+      "cause": "Test expected the old frame without the newly restored diagnostic #line."
+    }
+  ],
+  "fix": "Locate unique original-line/condition and validate complete frame; accept only exact old/new diagnostic-line variants where applicable; retain normal and forced checks.",
+  "results": {
+    "r466": "14 main test scripts per architecture exit 0",
+    "r469": "two additional test scripts per architecture exit 0"
+  },
+  "logs": {
+    "r465-x86.err": "ac9c37ed26a4947ebed0621c499d9e1aa7f12b17a636072e551e8a8f49ac48ad",
+    "r465-x64.err": "ac9c37ed26a4947ebed0621c499d9e1aa7f12b17a636072e551e8a8f49ac48ad",
+    "r466-x86.log": "adde432c4a370aba847af241111601a7cc1f4f71e366fa4dd1e2b74c9c72920e",
+    "r466-x64.log": "4e0987cee295cd9156e0b05dcefe51c1f7baa9306c16596d52e1de385f7b1bb2",
+    "r467-x86.err": "277c3eccaaad2f8690e5f020b4767a81dbb1cb907f31e75cac1d0e8d155f5b22",
+    "r467-x64.err": "277c3eccaaad2f8690e5f020b4767a81dbb1cb907f31e75cac1d0e8d155f5b22",
+    "r468-x86.err": "5e604e44ca154a1400716b356a5d233313021cf2e44ad563169fd11ab3fffd57",
+    "r468-x64.err": "5e604e44ca154a1400716b356a5d233313021cf2e44ad563169fd11ab3fffd57",
+    "r469-x86.log": "0fdd40d99efebfe11b5943f949d69569ed8ac527273cc184c4f28ab9d3a4d434",
+    "r469-x64.log": "0fdd40d99efebfe11b5943f949d69569ed8ac527273cc184c4f28ab9d3a4d434"
+  },
+  "limits": "Condition suite only; does not prove full product or resolve previously recorded NIDDB semantic issues."
+}

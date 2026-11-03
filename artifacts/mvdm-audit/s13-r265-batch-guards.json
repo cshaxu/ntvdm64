@@ -1,0 +1,85 @@
+{
+  "groups": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+      "original_line": 134,
+      "kind": "ifndef",
+      "macro": "LATER",
+      "original_else_line": 136,
+      "original_endif_line": 142,
+      "before_sha256": "db8c589b7c2ea3aa0da53e5097d91d0106495fe447e2c82e31772b2e80d70286",
+      "after_sha256": "10180ecbc81056777970d26d22876b2d17378d5592441bc601792080b4bdf710"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "original_line": 18,
+      "kind": "ifdef",
+      "macro": "DEBUG_LOCKS",
+      "original_else_line": 20,
+      "original_endif_line": 22,
+      "before_sha256": "f86e1cfd44d38827593b5e1f898fab73777315d2e32e0f387856a7bcf64d46ee",
+      "after_sha256": "8b5bf0623ccfdc3eecf64e2648dc17704e9b6b653b2025c4be1466477e870965"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "original_line": 594,
+      "kind": "ifndef",
+      "macro": "DEBUG",
+      "original_else_line": 622,
+      "original_endif_line": 712,
+      "before_sha256": "f86e1cfd44d38827593b5e1f898fab73777315d2e32e0f387856a7bcf64d46ee",
+      "after_sha256": "8b5bf0623ccfdc3eecf64e2648dc17704e9b6b653b2025c4be1466477e870965"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "original_line": 1321,
+      "kind": "ifdef",
+      "macro": "DEBUG",
+      "original_else_line": 1325,
+      "original_endif_line": 1329,
+      "before_sha256": "f86e1cfd44d38827593b5e1f898fab73777315d2e32e0f387856a7bcf64d46ee",
+      "after_sha256": "8b5bf0623ccfdc3eecf64e2648dc17704e9b6b653b2025c4be1466477e870965"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "original_line": 680,
+      "kind": "ifdef",
+      "macro": "WINDOWS_ME",
+      "original_else_line": 683,
+      "original_endif_line": 685,
+      "before_sha256": "eaaac6553c29be08f4c0fe6295106337a4d433b2a95273acc02c5267c3a657d4",
+      "after_sha256": "73b78704076e02ab60c4935b6b048750a1e122db7c83a95e0d96c19598168c4e"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 378,
+      "kind": "ifdef",
+      "macro": "_USERK_",
+      "original_else_line": 382,
+      "original_endif_line": 386,
+      "before_sha256": "582061d61aafbe8efa6b58a5e680aaa5faa2b4fd984639614ee1eb14d8908340",
+      "after_sha256": "a6a78049abf1d3725eaea63265278b0eae608e3838034c90e68ba9989dac3b1c"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "original_line": 1657,
+      "kind": "ifdef",
+      "macro": "_USERK_",
+      "original_else_line": 1659,
+      "original_endif_line": 1661,
+      "before_sha256": "c99aadb1149c2dfa0d9d054ac4d7516758165c520867fbb3677411d6c14403e3",
+      "after_sha256": "16edf6de8f326cc34808a2dcd4cba1dfe54b975070ee58b92fb96e44f7bf222a"
+    }
+  ],
+  "build": "cached x86 WOW32 and five call-boundary objects passed",
+  "selected_alternatives": "enclosing original functions or globals absent; selected arms remain pending",
+  "preprocessing": [
+    "s13-r265-exitwin-preprocess.json",
+    "s13-r265-handtabl-preprocess.json",
+    "s13-r265-draw-preprocess.json",
+    "s13-r265-chartran-preprocess.json",
+    "s13-r265-drawtext-preprocess.json"
+  ],
+  "forced_controls": "s13-r265-batch-controls.json",
+  "limits": "Selected original content omitted; no runtime, x64 product or layer completion claimed."
+}

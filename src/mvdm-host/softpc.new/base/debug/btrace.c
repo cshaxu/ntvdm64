@@ -43,7 +43,10 @@
 #include "sas.h"
 #include "trace.h"
 
+#line 46
 #ifndef PROD
+#line 47
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 194
 #line 49

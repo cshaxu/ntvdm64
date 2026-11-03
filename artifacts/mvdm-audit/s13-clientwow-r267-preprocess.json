@@ -1,0 +1,24 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+  "old_commit": "build-owned immediate pre-edit snapshot",
+  "old_sha256": "847231838a5d7809e6b2553b0239c7c9df572c9675e9d343040a644d2650f09f",
+  "current_sha256": "9ab5966eb93bf8240993ff0e6a855001a7a15bed630574edadb1e389831285a4",
+  "method": "MSVC /EP, exact Ninja target flags, identical scratch source path; nonblank stripped lines hashed. ntSend.h copied without modification.",
+  "contexts": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-body-wow.obj",
+      "old_sha256": "ab242c999ddf791a667218c190fce6d48c2159075b71d130d1815fa3fa5cfe68",
+      "current_sha256": "ab242c999ddf791a667218c190fce6d48c2159075b71d130d1815fa3fa5cfe68",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_wow.obj",
+      "old_sha256": "7aadb0a11de6c75429c0fe7e052dc7bc45bcdd8729553b4d69c06dc422d53008",
+      "current_sha256": "7aadb0a11de6c75429c0fe7e052dc7bc45bcdd8729553b4d69c06dc422d53008",
+      "equal": true
+    }
+  ],
+  "limits": "Tests selected preprocessed text only; excludes diagnostics and does not establish other contexts, link or runtime behavior."
+}

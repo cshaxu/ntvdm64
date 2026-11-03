@@ -99,7 +99,9 @@ int verbose;			/* TRUE => trace instructions   */
  */
 
 
+#line 158
 #ifdef CPU_30_STYLE
+#line 159
 #error Excluded original conditional branch
 #endif /* CPU_30_STYLE */
 #line 340

@@ -1,0 +1,56 @@
+[
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+    "defines": [],
+    "expected_rejection": false,
+    "exit_code": 0
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+    "defines": [
+      "DBG"
+    ],
+    "expected_rejection": true,
+    "exit_code": 2
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+    "defines": [
+      "TRACE_OBJECT_ALLOCS"
+    ],
+    "expected_rejection": true,
+    "exit_code": 2
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+    "defines": [],
+    "expected_rejection": false,
+    "exit_code": 0
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+    "defines": [
+      "DEBUG"
+    ],
+    "expected_rejection": true,
+    "exit_code": 2
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+    "defines": [
+      "DEBUG",
+      "_USERK_"
+    ],
+    "expected_rejection": false,
+    "exit_code": 0
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+    "defines": [
+      "DEBUG",
+      "WOW"
+    ],
+    "expected_rejection": false,
+    "exit_code": 0
+  }
+]

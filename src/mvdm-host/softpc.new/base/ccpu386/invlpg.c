@@ -32,7 +32,10 @@ INVLPG CPU Functions.
  */
 
 
+#line 35
 #ifdef SPC486
+#line 36
 #error Excluded unsupported SPC486 profile
 #endif /* SPC486 */
+#line 50
 #line 50

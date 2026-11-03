@@ -1,0 +1,45 @@
+{
+  "controls": [
+    {
+      "line": 331,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 331,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 453,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 453,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 1777,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 1777,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 1803,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 1803,
+      "arch": "x64",
+      "exit": 2
+    }
+  ],
+  "limits": "Isolated scratch forced-profile tests; selected original functions remain omitted."
+}

@@ -1,0 +1,37 @@
+{
+  "scope": "Unselected dat2obj utility",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
+      "sha256": "49f7980131944c8ad92402b96f94ddd2f4be471bba248d7cb986efa4a00e6c89"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/dat2obj/makefile",
+      "sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/dat2obj/sources",
+      "sha256": "474b1bde4bb3e5da18354dee082ffddca51685b52af196e1a7572c1c55fb09bb"
+    }
+  ],
+  "mirror_sources": [
+    {
+      "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
+      "current_sha256": "c179bea2ce71c33477e26dad3edfaf9a5f3639935310bc042d66ab6d37be1818",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\dat2obj\\dat2obj.c",
+      "original_sha256": "9ddeb8decf8bbadbeaf61dcbee3b2607d6a28a15f06c1b0d35e719563a77c3da",
+      "pinned_expected_sha256": "9ddeb8decf8bbadbeaf61dcbee3b2607d6a28a15f06c1b0d35e719563a77c3da",
+      "original_matches_pinned": true,
+      "working_sha256": "49f7980131944c8ad92402b96f94ddd2f4be471bba248d7cb986efa4a00e6c89"
+    }
+  ],
+  "removed_condition_groups": 40,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r121.zip",
+  "evidence": [
+    "No current product/build/test graph selects dat2obj; four rejection snippets were the sole external references.",
+    "DIV-609 applied exclusively to this package and is retired."
+  ],
+  "limitations": [
+    "Unsupported historical DAT-to-object tooling is not provided by this cleanup."
+  ]
+}

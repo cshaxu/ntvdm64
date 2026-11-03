@@ -1,0 +1,40 @@
+{
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "before_sha256": "4023523b6d3bf996271194cf09fcdd648d21ec400cbda35b22ad07e515da05bc",
+      "after_sha256": "801aeed525ab87590879d897771cc083ee483cf8a1c421084344d1cbfb4f6aa9",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editec.c",
+      "original_sha256": "13e3aa26649c7b21a49a3f3114a73bc06fdfc6472b782663bb10879cabc0ddb6",
+      "old_condition_line": 1954,
+      "original_condition_line": 1965,
+      "original_body_line": 1966,
+      "original_endif_line": 1970,
+      "original_continuation_line": 1971,
+      "inserted_continuation": true,
+      "following_three_nonblank_sha256": "c0a8c53103a33e658ed3f092f74b8442ff0c0f6880c90e0d9d7471adf62b5ab5"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+      "before_sha256": "56569a31d2c81ab904f432ad0ac7c5585900a0c1aad734f82c469dcfd636ceb0",
+      "after_sha256": "9f229babdf6e1ec940dbdf3a33ecdd59afc8b0f6467e000d0061a4cced711849",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clglobal.c",
+      "original_sha256": "d8fe5a80d5848f2951843d7ba94752cb3223945a48630350835422389cd1da6f",
+      "old_condition_line": 1205,
+      "original_condition_line": 1309,
+      "original_body_line": 1310,
+      "original_endif_line": 1316,
+      "original_continuation_line": 1317,
+      "inserted_continuation": true,
+      "following_three_nonblank_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "method": "unique original first-depth one-arm match; original and current continuation three-line comparison; no selected statements changed",
+  "verification": {
+    "source_controls": "2 selected/rejected diagnostics passed: s13-r408-depth1-anchor-controls.json",
+    "build": "x86 NTVDM, x64 reference worker, x86 WOW32 passed: build/t473-s13/r408-build.log",
+    "condition_suites": "x86 build/t473-s13/r408-tests.log; x64 build/t473-s13/r409-x64.log passed",
+    "package": "s13-r408-package-compare.json: 82 files identical to r404; WOW32 differs only in 4 PE/debug timestamp bytes",
+    "limitations": "wparam.c and wstruc.c writing failed, skipped pending diagnosis; other original pending groups remain unresolved; no depth closure or publication claimed"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+      "original_line": 134,
+      "macro": "LATER",
+      "before_sha256": "10180ecbc81056777970d26d22876b2d17378d5592441bc601792080b4bdf710",
+      "after_sha256": "9bbe6c5aed316a745fd2413be77c59617c467fcf3e963f317175016678ee7598",
+      "current_old_start": 74,
+      "current_old_end": 82
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "original_line": 594,
+      "macro": "DEBUG",
+      "before_sha256": "8b5bf0623ccfdc3eecf64e2648dc17704e9b6b653b2025c4be1466477e870965",
+      "after_sha256": "e43ddc8e69a7decbcf57bbea20ab1e60c950fe244c23912871e227c7a7db8f55",
+      "current_old_start": 71,
+      "current_old_end": 79
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "original_line": 680,
+      "macro": "WINDOWS_ME",
+      "before_sha256": "73b78704076e02ab60c4935b6b048750a1e122db7c83a95e0d96c19598168c4e",
+      "after_sha256": "23bff7c9eca08f9ac066a014cd0ab39e1575c99e036f88b5619cc30d12aa5c18",
+      "current_old_start": 132,
+      "current_old_end": 139
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 378,
+      "macro": "_USERK_",
+      "before_sha256": "59f38d32cba4cd821bf6ef0f155b60e82908618af720b28dea77c774867083de",
+      "after_sha256": "e6fb88b1fc6d4c9ec324bb6277773d801e98ed8685f0f505391c5967d101f35b",
+      "current_old_start": 414,
+      "current_old_end": 421
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "original_line": 1657,
+      "macro": "_USERK_",
+      "before_sha256": "7c6f64db0d1064b25850b8503254b6026e20b9976eb58e6f16af6cbc639882b8",
+      "after_sha256": "535ade8e58a8fc0770ecd5a5c79067cd54545e530b520ab61615c317d81441fa",
+      "current_old_start": 236,
+      "current_old_end": 243
+    }
+  ],
+  "reason": "Original conditions lie in omitted functions; file-scope placeholders withdrawn and original groups remain pending"
+}

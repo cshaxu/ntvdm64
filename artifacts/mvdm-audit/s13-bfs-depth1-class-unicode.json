@@ -1,0 +1,37 @@
+{
+  "scope": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+  "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+  "before_sha256": "e0ed75ed45d52eaf8e8efb124035565299e0fb29bbf20e735133d17ca4bb5dbf",
+  "after_sha256": "97e62e44c3d3961b8f7dd9bafb445468e559a0608c064c896c2acd32bd2683b1",
+  "existing_entry_exclusion": 14,
+  "new_excluded_original_lines": [
+    601,
+    802
+  ],
+  "original_selected_continuations": [
+    610,
+    805
+  ],
+  "selection_evidence": "Entry rejects UNICODE before either subsequent selector; no define/undef of UNICODE occurs in this file. ANSI selected in product and existing fixture.",
+  "limitations": [
+    "Fixture compares original retained token stream with only the explicitly enumerated exclusion transformations and registered failure-path frees.",
+    "Not a claim that other USER files exclude Unicode."
+  ],
+  "same_package_identity_comparison": {
+    "size": 712192,
+    "current_sha256": "fb0489c32c252f719cc23d7afe1b665270c009e3d02dab7590da314676d249de",
+    "candidate_sha256": "3b28866bbb77133fab948e934cc9c75317afa54793bd79727c1169498d58820e",
+    "differing_offsets": [
+      280,
+      281,
+      282,
+      625412,
+      625413,
+      625414
+    ],
+    "pe_timestamp_offset": 280,
+    "debug_timestamp_offset": 625412,
+    "package_id": "ee3df81e-ca78-4406-a273-9a757530d1b3",
+    "conclusion": "Only PE COFF and IMAGE_DEBUG_DIRECTORY timestamp fields differ."
+  }
+}

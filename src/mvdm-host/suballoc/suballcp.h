@@ -123,9 +123,12 @@ typedef enum {
 //
 //
 typedef struct _SubAllocation {
+#line 130
 #if DBG
+#line 131
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 133
     PSACOMMITROUTINE CommitRoutine;
     PSACOMMITROUTINE DecommitRoutine;
     PSAMEMORYMOVEROUTINE MoveMemRoutine;

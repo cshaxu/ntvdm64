@@ -1,7 +1,7 @@
 {
   "schema": "ntvdm64.guest-archive.v1",
   "baseline_sha256": "539a910247c5478bde19fb2a431cd4c5ab26355cdc46f8160f49b23f060b495b",
-  "archive_sha256": "7a0534dec9940b2d8366c8ef71dd536ed94be7817d7c4e1e19bed05f6e60b8f7",
+  "archive_sha256": "b79dfb38d99335f59688966d2d13688bd4b8d19af44760d2d68ce5c72a6076e7",
   "added": [
     "WINNT/EDIT.COM",
     "WINNT/EDIT.HLP",
@@ -10,6 +10,7 @@
     "WINNT/SOL.EXE",
     "WINNT/SOL.HLP",
     "WINNT/SYSTEM32/CTL3DV2.DLL",
+    "WINNT/SYSTEM32/FORCEDOS.EXE",
     "WINNT/SYSTEM32/LANMAN.DRV",
     "WINNT/SYSTEM32/LZEXPAND.DLL",
     "WINNT/SYSTEM32/MCIOLE16.DLL",
@@ -20,7 +21,10 @@
     "WINNT/SYSTEM32/RASAPI16.DLL",
     "WINNT/SYSTEM32/TIMER.DRV",
     "WINNT/SYSTEM32/TOOLHELP.DLL",
+    "WINNT/SYSTEM32/VCDEX.DLL",
+    "WINNT/SYSTEM32/VDMEXTS.DLL",
     "WINNT/SYSTEM32/VER.DLL",
+    "WINNT/SYSTEM32/WIN.COM",
     "WINNT/SYSTEM32/WIN87EM.DLL",
     "WINNT/SYSTEM32/WINHELP.EXE",
     "WINNT/SYSTEM32/WINSOCK.DLL",
@@ -711,7 +715,43 @@
       "format": "DOS/data",
       "module": null,
       "imports": []
+    },
+    {
+      "path": "WINNT/SYSTEM32/FORCEDOS.EXE",
+      "bytes": 50176,
+      "sha256": "5e93e8b89865d611391b25c6bf451cfa63f07d6643bb422da36542e2e554d320",
+      "source": "src/mvdm-host/vdmutils/forcedos/obj/i386/forcedos.exe",
+      "format": "PE",
+      "module": null,
+      "imports": []
+    },
+    {
+      "path": "WINNT/SYSTEM32/WIN.COM",
+      "bytes": 29696,
+      "sha256": "5eb085d36b58b1b2ca57e07beffc341860d451265d2f913f4de799c0235f05cf",
+      "source": "src/mvdm-host/vdmutils/win/obj/i386/win.com",
+      "format": "PE",
+      "module": null,
+      "imports": []
+    },
+    {
+      "path": "WINNT/SYSTEM32/VDMEXTS.DLL",
+      "bytes": 230912,
+      "sha256": "5ad8d07da714e9d9c4391da5fbb75c6e5150c244d570fbbcd89171083b340170",
+      "source": "src/mvdm-host/vdmexts/obj/i386/vdmexts.dll",
+      "format": "PE",
+      "module": null,
+      "imports": []
+    },
+    {
+      "path": "WINNT/SYSTEM32/VCDEX.DLL",
+      "bytes": 22016,
+      "sha256": "3679db6245b7717d3e58c19b19097c8031d6c5a94df773b5c01e5ca7ed98ebde",
+      "source": "src/mvdm-host/vdd/samples/mscdex/vdd/obj/i386/vcdex.dll",
+      "format": "PE",
+      "module": null,
+      "imports": []
     }
   ],
-  "acceptance": "byte-identical original inputs and static closure; not full runtime capability"
+  "acceptance": "Byte-identical preserved guest inputs and static NE closure; historical native tools retained without functional certification."
 }

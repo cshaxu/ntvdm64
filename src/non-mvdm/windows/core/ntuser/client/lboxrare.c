@@ -130,9 +130,12 @@ LONG xxxLBCreate(
     plb->iMouseDown = -1;  /* Anchor point for multi selection */
     plb->iLastMouseMove = -1;
 
+#line 133
 #ifdef NEVER
+#line 134
 #error DIVERGENCE OPENNT-HOST-131: NEVER branch is not selected; see mirror register.
 #endif
+#line 136
 
     /*
      * Get ownerdraw style bits

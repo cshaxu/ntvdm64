@@ -143,9 +143,12 @@ extern void host_simulate(void);
 #define host_popen  popen
 #define host_pipe_init()
 
+#line 131
 #ifdef HUNTER
+#line 132
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
+#line 134
 
 #define HOST_TIMER_TOOLONG_DELAY        15000   //BCN 1781
 
@@ -238,9 +241,11 @@ void *ch_malloc(unsigned int NumBytes);
 
 // from nt_bop.c
 #ifdef i386
-HINSTANCE SafeLoadLibrary(char *name);
+#error Excluded unsupported i386 host library loader
 #else
+#line 223
 #define SafeLoadLibrary(name) LoadLibrary(name)
 #endif
+#line 225
 
 #define HOST_PRINTER_DELAY 1000

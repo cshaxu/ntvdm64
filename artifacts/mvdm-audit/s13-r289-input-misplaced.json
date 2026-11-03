@@ -1,0 +1,86 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+  "before_sha256": "5109ca9321d5f67a16ed9a3d0eebce997ebf7048a0d6456fc7f857cd7931ff01",
+  "after_sha256": "73d731c936bd3085d0c7f9a541440e8db3d54c52f8a5ea3369e7b0bb1e1529c6",
+  "groups": [
+    {
+      "current_old_start": 181,
+      "current_old_end": 186,
+      "original_line": 3307,
+      "directive": "#ifdef FE_IME"
+    },
+    {
+      "current_old_start": 187,
+      "current_old_end": 192,
+      "original_line": 4551,
+      "directive": "#ifdef FE_IME"
+    },
+    {
+      "current_old_start": 205,
+      "current_old_end": 210,
+      "original_line": 1641,
+      "directive": "#if DBG"
+    },
+    {
+      "current_old_start": 211,
+      "current_old_end": 216,
+      "original_line": 1647,
+      "directive": "#if DBG"
+    },
+    {
+      "current_old_start": 217,
+      "current_old_end": 222,
+      "original_line": 1669,
+      "directive": "#if DBG"
+    },
+    {
+      "current_old_start": 223,
+      "current_old_end": 228,
+      "original_line": 1679,
+      "directive": "#if DBG"
+    },
+    {
+      "current_old_start": 229,
+      "current_old_end": 234,
+      "original_line": 2928,
+      "directive": "#ifdef DEBUG"
+    },
+    {
+      "current_old_start": 235,
+      "current_old_end": 240,
+      "original_line": 2957,
+      "directive": "#ifdef DEBUG"
+    },
+    {
+      "current_old_start": 241,
+      "current_old_end": 246,
+      "original_line": 2971,
+      "directive": "#ifdef DEBUG"
+    },
+    {
+      "current_old_start": 247,
+      "current_old_end": 252,
+      "original_line": 4764,
+      "directive": "#if DBG"
+    },
+    {
+      "current_old_start": 253,
+      "current_old_end": 258,
+      "original_line": 5295,
+      "directive": "#if DBG"
+    },
+    {
+      "current_old_start": 259,
+      "current_old_end": 264,
+      "original_line": 5316,
+      "directive": "#if DBG"
+    },
+    {
+      "current_old_start": 283,
+      "current_old_end": 288,
+      "original_line": 2924,
+      "directive": "#ifdef TRACESYSPEEK"
+    }
+  ],
+  "reason": "original source places these single-arm conditions inside omitted functions; their file-scope placeholders were misplaced; original groups pending"
+}

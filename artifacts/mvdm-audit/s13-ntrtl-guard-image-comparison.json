@@ -1,0 +1,38 @@
+[
+  {
+    "image": "ntvdm.exe",
+    "baseline_sha256": "b9385aba3625e563418411a3fb2becd1203133de5c0fa6e1d5f20610c8c80e8a",
+    "candidate_sha256": "ce5d400a80a07016096741b97656bae98a84ccc2413d512c6168f054969db5c9",
+    "lengths": [
+      2103808,
+      2103808
+    ],
+    "difference_count": 4,
+    "only_verified_timestamp_positions": true,
+    "first_positions": [
+      288,
+      289,
+      1698412,
+      1698413
+    ]
+  },
+  {
+    "image": "wow32.dll",
+    "baseline_sha256": "3b28866bbb77133fab948e934cc9c75317afa54793bd79727c1169498d58820e",
+    "candidate_sha256": "228d5e99358529d137cc6b41457d97bb6d703f06691bf265268344398dc2bcb0",
+    "lengths": [
+      712192,
+      712192
+    ],
+    "difference_count": 6,
+    "only_verified_timestamp_positions": true,
+    "first_positions": [
+      280,
+      281,
+      282,
+      625412,
+      625413,
+      625414
+    ]
+  }
+]

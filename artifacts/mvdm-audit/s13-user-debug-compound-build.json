@@ -1,0 +1,13 @@
+{
+  "builds": [
+    "MSVC x86 WOW32",
+    "MSVC x86 call-boundaries"
+  ],
+  "prior_sha256": "53e214b65e5ea7789ace6cec3143831ea666fe969b142145b832d70a6d72e8f3",
+  "current_sha256": "ef20089eb919f844a8f99cbe743a7552bd650f0c329b60879bbde61b74b35867",
+  "diff_offsets": [
+    280,
+    625412
+  ],
+  "controls": "s13-user-debug-compound-controls.json"
+}

@@ -1,0 +1,864 @@
+{
+  "scope": "depth-one current groups containing newly-excluded arms; direct original-line marker and matching directive only",
+  "groups_examined": 771,
+  "exact_directive_line_matches": 190,
+  "not_matched_or_unresolved": 581,
+  "possible_scope_mismatch": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "current_line": 27,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_line": 1409,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 3,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "current_line": 32,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_line": 2295,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 5,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_line": 91,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "original_line": 1622,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_line": 96,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "original_line": 1673,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 2,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "current_line": 192,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_line": 3307,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "current_line": 198,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_line": 4551,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 3,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+      "current_line": 145,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\profile.c",
+      "original_line": 68,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "current_line": 409,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+      "original_line": 337,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 2,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "current_line": 60,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "original_line": 134,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "current_line": 66,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "original_line": 585,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "current_line": 72,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "original_line": 764,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "current_line": 78,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "original_line": 797,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "current_line": 96,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "original_line": 1056,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 2,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "current_line": 102,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "original_line": 1084,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 2,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "current_line": 108,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "original_line": 1139,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 2,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "current_line": 140,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "original_line": 1353,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "current_line": 164,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "original_line": 1886,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 2,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "current_line": 216,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_line": 1641,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 2,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "current_line": 222,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_line": 1647,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "current_line": 228,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_line": 1669,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "current_line": 234,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_line": 1679,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 2,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "current_line": 240,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_line": 2928,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 4,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "current_line": 246,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_line": 2957,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 6,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "current_line": 252,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_line": 2971,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 5,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "current_line": 258,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_line": 4764,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "current_line": 264,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_line": 5295,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 3,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "current_line": 270,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_line": 5316,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 3,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+      "current_line": 151,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\profile.c",
+      "original_line": 745,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+      "current_line": 157,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\profile.c",
+      "original_line": 827,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/random.c",
+      "current_line": 35,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\random.c",
+      "original_line": 185,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 2,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "current_line": 423,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+      "original_line": 850,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "current_line": 429,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+      "original_line": 934,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "current_line": 435,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+      "original_line": 1002,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "current_line": 441,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+      "original_line": 1163,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "current_line": 447,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+      "original_line": 1822,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_line": 206,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "original_line": 1598,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "current_line": 176,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "original_line": 81,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "current_line": 182,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "original_line": 456,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 2,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "current_line": 188,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "original_line": 1519,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 2,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "current_line": 459,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+      "original_line": 583,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "current_line": 465,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+      "original_line": 833,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 2,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "current_line": 471,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+      "original_line": 1054,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "current_line": 477,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+      "original_line": 1861,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "current_line": 416,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+      "original_line": 326,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_line": 224,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "original_line": 677,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 3,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_line": 230,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "original_line": 1213,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "current_line": 150,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\getset.c",
+      "original_line": 749,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "current_line": 156,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\getset.c",
+      "original_line": 759,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 2,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "current_line": 162,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\getset.c",
+      "original_line": 776,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 2,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "current_line": 168,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\getset.c",
+      "original_line": 781,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_line": 40,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_line": 519,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_line": 46,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_line": 752,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "current_line": 294,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_line": 2924,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 4,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "current_line": 483,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+      "original_line": 1703,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "current_line": 125,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+      "original_line": 262,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "current_line": 236,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\class.c",
+      "original_line": 1070,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "current_line": 18,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_line": 238,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "current_line": 37,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_line": 3310,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "current_line": 29,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+      "original_line": 351,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 2,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "current_line": 1071,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c",
+      "original_line": 2298,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 2,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "current_line": 1081,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c",
+      "original_line": 4516,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 2,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "current_line": 1086,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c",
+      "original_line": 4574,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "current_line": 1076,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c",
+      "original_line": 2640,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "current_line": 1092,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c",
+      "original_line": 881,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "current_line": 1098,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c",
+      "original_line": 3901,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 2,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "current_line": 428,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "original_line": 270,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "current_line": 434,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "original_line": 1719,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "current_line": 440,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "original_line": 327,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 3,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_line": 299,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "original_line": 358,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_line": 319,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "original_line": 77,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_line": 325,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "original_line": 1020,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_line": 331,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "original_line": 693,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_line": 337,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "original_line": 797,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_line": 343,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "original_line": 2204,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 2,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_line": 376,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_line": 992,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_line": 382,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_line": 1915,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_line": 394,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_line": 1518,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_line": 400,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_line": 1555,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 5,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_line": 406,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_line": 1598,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 3,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_line": 412,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_line": 1784,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_line": 418,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_line": 2275,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 2,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_line": 424,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_line": 2282,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_line": 430,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_line": 2322,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_line": 436,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_line": 2355,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 2,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_line": 442,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_line": 2375,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_line": 448,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_line": 2385,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 2,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_line": 454,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_line": 3705,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 2,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_line": 460,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_line": 1480,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_line": 466,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_line": 1626,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_line": 472,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_line": 2649,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 2,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_line": 336,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 293,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_line": 342,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 340,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_line": 348,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 362,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 1,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "current_line": 202,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\client.c",
+      "original_line": 3494,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 2,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "current_line": 208,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\client.c",
+      "original_line": 642,
+      "current_lexical_brace_depth": 0,
+      "original_lexical_brace_depth": 2,
+      "limits": "lexical signal only; macros, inactive branches and omitted whole functions require manual source review"
+    }
+  ],
+  "limits": "heuristic, not proof of scope or reachability; no edits made"
+}

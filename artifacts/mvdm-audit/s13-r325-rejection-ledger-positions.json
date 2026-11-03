@@ -1,0 +1,35 @@
+{
+  "entries": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "historical_line": 519,
+      "current_line": 521,
+      "macro": "SFELLOW",
+      "guard": "#ifdef SFELLOW",
+      "error": "#error Excluded unsupported SFELLOW configuration",
+      "source_sha256": "65d9c32cb6ff8d650948248b8d0ac9d654308f41754fc67d4cf7f5a4c1844bc2",
+      "queue_evidence": "SFELLOW unsupported in all selected contexts; s13-bfs-depth1-sfellow-existing-guard-audit.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "historical_line": 667,
+      "current_line": 669,
+      "macro": "PIG",
+      "guard": "#if defined(PIG) && defined(SFELLOW)",
+      "error": "#error Excluded unsupported PIG configuration",
+      "source_sha256": "65d9c32cb6ff8d650948248b8d0ac9d654308f41754fc67d4cf7f5a4c1844bc2",
+      "queue_evidence": "SFELLOW unsupported in all selected contexts; s13-bfs-depth1-sfellow-existing-guard-audit.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "historical_line": 37,
+      "current_line": 27,
+      "macro": "MARKPATH",
+      "guard": "#ifdef MARKPATH",
+      "error": "#error Excluded unsupported original MARKPATH system-queue instrumentation",
+      "source_sha256": "73d731c936bd3085d0c7f9a541440e8db3d54c52f8a5ea3369e7b0bb1e1529c6",
+      "queue_evidence": "OPENNT-HOST-192; s13-input-markpath-original-guards.json"
+    }
+  ],
+  "scope": "identified by current depth-1 queue, exact guard expression and original reconciliation evidence; historical locations retained"
+}

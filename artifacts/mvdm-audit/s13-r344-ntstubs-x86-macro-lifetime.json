@@ -1,0 +1,22 @@
+{
+  "files": [
+    {
+      "path": "O:/repos.external/OpenNT/windows/core/ntuser/kernel/ntstubs.c",
+      "sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "x86_define_or_undef_lines": [],
+      "include_lines": [
+        13
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "x86_define_or_undef_lines": [],
+      "include_lines": [
+        6
+      ]
+    }
+  ],
+  "observation": "Neither file explicitly changes _X86_ after its single initial include. The actual selected product compile observed _X86_ defined in s13-r341-ntstubs-actual-x86-context.json.",
+  "limits": "This does not prove macro state for all historical or supported fixture contexts; nor does it make omitted function scopes present or establish safe restoration placement."
+}

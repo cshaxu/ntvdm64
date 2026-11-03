@@ -263,9 +263,12 @@ extern	void	ega_wrap_split_graph_update IPT0();
 extern	void	vga_graph_update IPT0();
 extern	void	vga_split_graph_update IPT0();
 
+#line 263
 #if defined(HERC)
+#line 264
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif
+#line 266
 
 extern	boolean	dummy_scroll IPT6(int,dummy1,int,dummy2,int,dummy3,
 				int,dummy4,int,dummy5,int,dummy6);

@@ -144,9 +144,13 @@ BOOL ClientDrawState(
              * Now, pretend we're complex if qfnCallBack is supplied AND
              * we're supporting GrayString().
              */
+#endif /* WOW_ORIGINAL_STATE_DRAWING */
+#line 209
 #if 0 // This will get turned on if/when we change GrayString to tie
 #error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#ifdef WOW_ORIGINAL_STATE_DRAWING
+#line 218
             break;
 
         case DST_PREFIXTEXT:
@@ -180,9 +184,13 @@ BOOL ClientDrawState(
             break;
 
         case DST_COMPLEX:
+#endif /* WOW_ORIGINAL_STATE_DRAWING */
+#line 251
 #if 0
 #error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#ifdef WOW_ORIGINAL_STATE_DRAWING
+#line 258
             break;
 
         default:

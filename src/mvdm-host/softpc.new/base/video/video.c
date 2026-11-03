@@ -324,7 +324,7 @@ simple_bios_word_wrt IFN2(ULONG, ch_attr, ULONG, ch_addr)
 #if !defined(EGG) && !defined(C_VID) && !defined(A_VID)
 #error Unsupported excluded original configuration
 #endif	/* not EGG or C_VID or A_VID */
-#line 326
+#line 317
 }
 
 /*
@@ -2055,7 +2055,7 @@ GLOBAL void vd_write_teletype IFN0()
 #else
 #error Excluded unsupported non-monitor video profile
 #endif
-#line 2043
+#line 2056
 	    }
 	}
 #ifdef EGG

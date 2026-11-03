@@ -628,7 +628,7 @@ LONG ThunkCallWndProcHook(INT nCode, LONG wParam, LPCWPSTRUCT lpCwpStruct,
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 636
+#line 625
 
     if (fMessageNeedsThunking) {
 
@@ -1222,7 +1222,7 @@ LONG ThunkJournalHook(INT nCode, LONG wParam, LPEVENTMSG lpEventMsg,
 #ifdef  DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 1231
+#line 1164
 
         } else {
             WOW32ASSERT(lpHSData->iHook == WH_JOURNALRECORD);

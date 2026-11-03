@@ -1,0 +1,56 @@
+[
+  {
+    "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+    "requested_prefix": "fc740728c4fd",
+    "searched_head_history_commits": 12,
+    "match": [
+      "2659616aa279ae75f4c393917fad300dc8d35788"
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+    "requested_prefix": "8913f71c6632",
+    "searched_head_history_commits": 23,
+    "match": [
+      "0bbea1d597a3622e71de9a6be0833bb023a5d666"
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+    "requested_prefix": "ea0ebad8ee27",
+    "searched_head_history_commits": 13,
+    "match": [
+      "2a2f01e8933e39a5fb680c3359d84d20a4522f3d"
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+    "requested_prefix": "e09cbd5648b4",
+    "searched_head_history_commits": 10,
+    "match": [
+      "0bbea1d597a3622e71de9a6be0833bb023a5d666"
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+    "requested_prefix": "4aad1200537d",
+    "searched_head_history_commits": 12,
+    "match": [
+      "f6fd5eead635d6145ffd16be6d3fd74b753b18a1"
+    ]
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+    "requested_prefix": "f4122df4a940",
+    "searched_head_history_commits": 3,
+    "match": [
+      "c37733f631bf95d19fedc8d5b1b43cffbdeb3b66"
+    ]
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+    "requested_prefix": "9493d5c74f2a",
+    "searched_head_history_commits": 6,
+    "match": []
+  }
+]

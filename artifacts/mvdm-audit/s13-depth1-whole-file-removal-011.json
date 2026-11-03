@@ -1,0 +1,437 @@
+{
+  "scope": "Unselected MIPS and PowerPC host-specific include trees",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/pig/c2cpusad.h",
+      "sha256": "a34e0b46dc56dfbad7757c29b1550fd846b88a8490bab5e7504a3550fecef7d0"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/pig/cpu4gen.h",
+      "sha256": "1992b9fde6196531eb6c35bcaca011d74ee568a355e86ab2c8c383dad8af730d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/pig/cpu_c.h",
+      "sha256": "1b048a373b94da51ab22b05dcc4cb294b6d8efb3ae27c34039b33e61a26b3234"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/pig/cpuint_c.h",
+      "sha256": "25addbb388de3f89c7277a832933192de53c2d2199dfc379d67ed86f3aaf25e4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/pig/evidgen.h",
+      "sha256": "05737651808fa634f26fa4dd5c3c11b14b066acb7d8c01dd88ce79c0e2ed29b6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/pig/gdpvar.h",
+      "sha256": "601a9433c3fc395323a475af12bdbe1cc480e30be7ce4583465453372dc4cd72"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/pig/sas4gen.h",
+      "sha256": "627a0434c0440c4a2d2c4fd58459053959e8d45ada629c0886d2fca072812cf7"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/prod/c2cpusad.h",
+      "sha256": "a34e0b46dc56dfbad7757c29b1550fd846b88a8490bab5e7504a3550fecef7d0"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/prod/cpu4gen.h",
+      "sha256": "1992b9fde6196531eb6c35bcaca011d74ee568a355e86ab2c8c383dad8af730d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/prod/cpu_c.h",
+      "sha256": "cf5a1288c5e913ef43dfbabe96267809f520c4a21f7588cbe7ba16348f0424b3"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/prod/cpuint_c.h",
+      "sha256": "25addbb388de3f89c7277a832933192de53c2d2199dfc379d67ed86f3aaf25e4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/prod/evid_c.h",
+      "sha256": "a2e3a90ac6c426420173f799a46509be8ec386a33773d80b123ebf039fe2a3ce"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/prod/evidfunc.h",
+      "sha256": "18796b169217072f280d674a40cb20079389bc3bba5c4741e231405520b59240"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/prod/evidgen.h",
+      "sha256": "05737651808fa634f26fa4dd5c3c11b14b066acb7d8c01dd88ce79c0e2ed29b6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/prod/fm_c.h",
+      "sha256": "8f0b336409c912fffc86b85137ba1de58c11b805956786003a977da3512358d8"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/prod/fpu_c.h",
+      "sha256": "7cd1dea7c33b06379b7d4881a69bd870db0f2e90841521d1005027d12cb21f99"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/prod/gdpvar.h",
+      "sha256": "47e594eac21eb5e0131da30949e6d6d4e355438b77e08ae1020cfeefb3f7baef"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/prod/pigger_c.h",
+      "sha256": "67628017366f5352cf965626bb3b82dba588be825321b8ccc962427e3f1867e6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/prod/pigreg_c.h",
+      "sha256": "c88d79cd8947c3acd3903841d95f6489a4df0828bf9e40d0f10886ad5eeeaa2a"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/prod/sas4gen.h",
+      "sha256": "627a0434c0440c4a2d2c4fd58459053959e8d45ada629c0886d2fca072812cf7"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/prod/univer_c.h",
+      "sha256": "5197493ee8899825119b45f33fcbfbff331a1be112186d7861cd6eebada35ecf"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ppc/pig/c2cpusad.h",
+      "sha256": "a34e0b46dc56dfbad7757c29b1550fd846b88a8490bab5e7504a3550fecef7d0"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ppc/pig/cpu4gen.h",
+      "sha256": "1992b9fde6196531eb6c35bcaca011d74ee568a355e86ab2c8c383dad8af730d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ppc/pig/cpu_c.h",
+      "sha256": "1cae34bb68157187c3e79db8df74e17b850184d7eecae6e4421add47e8778b7b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ppc/pig/cpuint_c.h",
+      "sha256": "25addbb388de3f89c7277a832933192de53c2d2199dfc379d67ed86f3aaf25e4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ppc/pig/evidgen.h",
+      "sha256": "05737651808fa634f26fa4dd5c3c11b14b066acb7d8c01dd88ce79c0e2ed29b6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ppc/pig/gdpvar.h",
+      "sha256": "601a9433c3fc395323a475af12bdbe1cc480e30be7ce4583465453372dc4cd72"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ppc/pig/sas4gen.h",
+      "sha256": "627a0434c0440c4a2d2c4fd58459053959e8d45ada629c0886d2fca072812cf7"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ppc/prod/c2cpusad.h",
+      "sha256": "a34e0b46dc56dfbad7757c29b1550fd846b88a8490bab5e7504a3550fecef7d0"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ppc/prod/cpu4gen.h",
+      "sha256": "1992b9fde6196531eb6c35bcaca011d74ee568a355e86ab2c8c383dad8af730d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ppc/prod/cpu_c.h",
+      "sha256": "ccf273b99697126bc0368d4732f67d691f037ee4714f2299c6d83d28a26db4d0"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ppc/prod/cpuint_c.h",
+      "sha256": "25addbb388de3f89c7277a832933192de53c2d2199dfc379d67ed86f3aaf25e4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ppc/prod/evidgen.h",
+      "sha256": "05737651808fa634f26fa4dd5c3c11b14b066acb7d8c01dd88ce79c0e2ed29b6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ppc/prod/gdpvar.h",
+      "sha256": "47e594eac21eb5e0131da30949e6d6d4e355438b77e08ae1020cfeefb3f7baef"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ppc/prod/sas4gen.h",
+      "sha256": "627a0434c0440c4a2d2c4fd58459053959e8d45ada629c0886d2fca072812cf7"
+    }
+  ],
+  "mirror_sources": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/pig/c2cpusad.h",
+      "current_sha256": "a34e0b46dc56dfbad7757c29b1550fd846b88a8490bab5e7504a3550fecef7d0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\mips\\pig\\c2cpusad.h",
+      "original_sha256": "7f3a09f96bd67856e38a263dd2c570d2cb089c4ed0546c7dcd8c0bd4c60e3621",
+      "pinned_expected_sha256": "7f3a09f96bd67856e38a263dd2c570d2cb089c4ed0546c7dcd8c0bd4c60e3621",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/pig/cpu4gen.h",
+      "current_sha256": "1992b9fde6196531eb6c35bcaca011d74ee568a355e86ab2c8c383dad8af730d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\mips\\pig\\cpu4gen.h",
+      "original_sha256": "11aa60613b6d85e24b0b1c747ed7fec595239eee4959e062f9e6c3f3fb63d9f5",
+      "pinned_expected_sha256": "11aa60613b6d85e24b0b1c747ed7fec595239eee4959e062f9e6c3f3fb63d9f5",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/pig/cpu_c.h",
+      "current_sha256": "1b048a373b94da51ab22b05dcc4cb294b6d8efb3ae27c34039b33e61a26b3234",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\mips\\pig\\cpu_c.h",
+      "original_sha256": "0c186d02fc708445f937fb2675ab91635c39f0a6ee7c0cf4bce5e3730b0334a8",
+      "pinned_expected_sha256": "0c186d02fc708445f937fb2675ab91635c39f0a6ee7c0cf4bce5e3730b0334a8",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/pig/cpuint_c.h",
+      "current_sha256": "25addbb388de3f89c7277a832933192de53c2d2199dfc379d67ed86f3aaf25e4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\mips\\pig\\cpuint_c.h",
+      "original_sha256": "b171b9bb51bf810c5e9f839a88a79a6f1eb66c37c4128069fe3e7972da849ede",
+      "pinned_expected_sha256": "b171b9bb51bf810c5e9f839a88a79a6f1eb66c37c4128069fe3e7972da849ede",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/pig/evidgen.h",
+      "current_sha256": "05737651808fa634f26fa4dd5c3c11b14b066acb7d8c01dd88ce79c0e2ed29b6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\mips\\pig\\evidgen.h",
+      "original_sha256": "7e429987c49ec9e87ca45394eeddc87c73877e5f95aed73e1bc1d7224d308772",
+      "pinned_expected_sha256": "7e429987c49ec9e87ca45394eeddc87c73877e5f95aed73e1bc1d7224d308772",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/pig/gdpvar.h",
+      "current_sha256": "601a9433c3fc395323a475af12bdbe1cc480e30be7ce4583465453372dc4cd72",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\mips\\pig\\gdpvar.h",
+      "original_sha256": "390632880e396c5ffc49d568bd6f47d49b20ccd0ddd43068bf1ab6476543a334",
+      "pinned_expected_sha256": "390632880e396c5ffc49d568bd6f47d49b20ccd0ddd43068bf1ab6476543a334",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/pig/sas4gen.h",
+      "current_sha256": "627a0434c0440c4a2d2c4fd58459053959e8d45ada629c0886d2fca072812cf7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\mips\\pig\\sas4gen.h",
+      "original_sha256": "27fbe4d2cc6b0ff3657b8ffdea1cfcf9622afc851639894c8948c39b5ae0ebf2",
+      "pinned_expected_sha256": "27fbe4d2cc6b0ff3657b8ffdea1cfcf9622afc851639894c8948c39b5ae0ebf2",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/prod/c2cpusad.h",
+      "current_sha256": "a34e0b46dc56dfbad7757c29b1550fd846b88a8490bab5e7504a3550fecef7d0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\c2cpusad.h",
+      "original_sha256": "7f3a09f96bd67856e38a263dd2c570d2cb089c4ed0546c7dcd8c0bd4c60e3621",
+      "pinned_expected_sha256": "7f3a09f96bd67856e38a263dd2c570d2cb089c4ed0546c7dcd8c0bd4c60e3621",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/prod/cpu4gen.h",
+      "current_sha256": "1992b9fde6196531eb6c35bcaca011d74ee568a355e86ab2c8c383dad8af730d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\cpu4gen.h",
+      "original_sha256": "11aa60613b6d85e24b0b1c747ed7fec595239eee4959e062f9e6c3f3fb63d9f5",
+      "pinned_expected_sha256": "11aa60613b6d85e24b0b1c747ed7fec595239eee4959e062f9e6c3f3fb63d9f5",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/prod/cpu_c.h",
+      "current_sha256": "cf5a1288c5e913ef43dfbabe96267809f520c4a21f7588cbe7ba16348f0424b3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\cpu_c.h",
+      "original_sha256": "03aa7b45cd9da10d327f3393d3d8bfb99fc2d30070091cb36ce12aaae52a0a36",
+      "pinned_expected_sha256": "03aa7b45cd9da10d327f3393d3d8bfb99fc2d30070091cb36ce12aaae52a0a36",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/prod/cpuint_c.h",
+      "current_sha256": "25addbb388de3f89c7277a832933192de53c2d2199dfc379d67ed86f3aaf25e4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\cpuint_c.h",
+      "original_sha256": "b171b9bb51bf810c5e9f839a88a79a6f1eb66c37c4128069fe3e7972da849ede",
+      "pinned_expected_sha256": "b171b9bb51bf810c5e9f839a88a79a6f1eb66c37c4128069fe3e7972da849ede",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/prod/evid_c.h",
+      "current_sha256": "a2e3a90ac6c426420173f799a46509be8ec386a33773d80b123ebf039fe2a3ce",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\evid_c.h",
+      "original_sha256": "8a263941fdd26a81105219c2d9189be5452a52ef82497e774a483c2e09836631",
+      "pinned_expected_sha256": "8a263941fdd26a81105219c2d9189be5452a52ef82497e774a483c2e09836631",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/prod/evidfunc.h",
+      "current_sha256": "18796b169217072f280d674a40cb20079389bc3bba5c4741e231405520b59240",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\evidfunc.h",
+      "original_sha256": "d8b14822247f7fe9eff4d189e3d0714cb4b50f153eb3ebf4e211e443357953c3",
+      "pinned_expected_sha256": "d8b14822247f7fe9eff4d189e3d0714cb4b50f153eb3ebf4e211e443357953c3",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/prod/evidgen.h",
+      "current_sha256": "05737651808fa634f26fa4dd5c3c11b14b066acb7d8c01dd88ce79c0e2ed29b6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\evidgen.h",
+      "original_sha256": "7e429987c49ec9e87ca45394eeddc87c73877e5f95aed73e1bc1d7224d308772",
+      "pinned_expected_sha256": "7e429987c49ec9e87ca45394eeddc87c73877e5f95aed73e1bc1d7224d308772",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/prod/fm_c.h",
+      "current_sha256": "8f0b336409c912fffc86b85137ba1de58c11b805956786003a977da3512358d8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\fm_c.h",
+      "original_sha256": "0ac7aee929cd5b133ecc5aee07768e2128ae0ee523db9776b4ae7f1213427f79",
+      "pinned_expected_sha256": "0ac7aee929cd5b133ecc5aee07768e2128ae0ee523db9776b4ae7f1213427f79",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/prod/fpu_c.h",
+      "current_sha256": "7cd1dea7c33b06379b7d4881a69bd870db0f2e90841521d1005027d12cb21f99",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\fpu_c.h",
+      "original_sha256": "0f1d67436ed417b6726f958cfd97ece40ddedd05997369449be5861a47b7b912",
+      "pinned_expected_sha256": "0f1d67436ed417b6726f958cfd97ece40ddedd05997369449be5861a47b7b912",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/prod/gdpvar.h",
+      "current_sha256": "47e594eac21eb5e0131da30949e6d6d4e355438b77e08ae1020cfeefb3f7baef",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\gdpvar.h",
+      "original_sha256": "2eea3e1519eb72cb50ac504855abe2ee81e0145ef588fc771900c5fe2b3b2248",
+      "pinned_expected_sha256": "2eea3e1519eb72cb50ac504855abe2ee81e0145ef588fc771900c5fe2b3b2248",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/prod/pigger_c.h",
+      "current_sha256": "67628017366f5352cf965626bb3b82dba588be825321b8ccc962427e3f1867e6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\pigger_c.h",
+      "original_sha256": "e2a38c8c78ace9905661b6faca96605a871e1ff4208ddf1893c0a6e6172ca34c",
+      "pinned_expected_sha256": "e2a38c8c78ace9905661b6faca96605a871e1ff4208ddf1893c0a6e6172ca34c",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/prod/pigreg_c.h",
+      "current_sha256": "c88d79cd8947c3acd3903841d95f6489a4df0828bf9e40d0f10886ad5eeeaa2a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\pigreg_c.h",
+      "original_sha256": "30113bfb9ac8e521895189480fb0070295751d43dab47179ec1c43083be62b44",
+      "pinned_expected_sha256": "30113bfb9ac8e521895189480fb0070295751d43dab47179ec1c43083be62b44",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/prod/sas4gen.h",
+      "current_sha256": "627a0434c0440c4a2d2c4fd58459053959e8d45ada629c0886d2fca072812cf7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\sas4gen.h",
+      "original_sha256": "27fbe4d2cc6b0ff3657b8ffdea1cfcf9622afc851639894c8948c39b5ae0ebf2",
+      "pinned_expected_sha256": "27fbe4d2cc6b0ff3657b8ffdea1cfcf9622afc851639894c8948c39b5ae0ebf2",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/mips/prod/univer_c.h",
+      "current_sha256": "5197493ee8899825119b45f33fcbfbff331a1be112186d7861cd6eebada35ecf",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\univer_c.h",
+      "original_sha256": "9b1e1de6db974a35af34e1bffe52114a2e9ce9202ab9e2057da745e08878c5a0",
+      "pinned_expected_sha256": "9b1e1de6db974a35af34e1bffe52114a2e9ce9202ab9e2057da745e08878c5a0",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ppc/pig/c2cpusad.h",
+      "current_sha256": "a34e0b46dc56dfbad7757c29b1550fd846b88a8490bab5e7504a3550fecef7d0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\ppc\\pig\\c2cpusad.h",
+      "original_sha256": "7f3a09f96bd67856e38a263dd2c570d2cb089c4ed0546c7dcd8c0bd4c60e3621",
+      "pinned_expected_sha256": "7f3a09f96bd67856e38a263dd2c570d2cb089c4ed0546c7dcd8c0bd4c60e3621",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ppc/pig/cpu4gen.h",
+      "current_sha256": "1992b9fde6196531eb6c35bcaca011d74ee568a355e86ab2c8c383dad8af730d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\ppc\\pig\\cpu4gen.h",
+      "original_sha256": "11aa60613b6d85e24b0b1c747ed7fec595239eee4959e062f9e6c3f3fb63d9f5",
+      "pinned_expected_sha256": "11aa60613b6d85e24b0b1c747ed7fec595239eee4959e062f9e6c3f3fb63d9f5",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ppc/pig/cpu_c.h",
+      "current_sha256": "1cae34bb68157187c3e79db8df74e17b850184d7eecae6e4421add47e8778b7b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\ppc\\pig\\cpu_c.h",
+      "original_sha256": "fd2ebb84a6f8a9c3092c619a10a701e2b0ae813b8689a0364f7e17cca8bacaff",
+      "pinned_expected_sha256": "fd2ebb84a6f8a9c3092c619a10a701e2b0ae813b8689a0364f7e17cca8bacaff",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ppc/pig/cpuint_c.h",
+      "current_sha256": "25addbb388de3f89c7277a832933192de53c2d2199dfc379d67ed86f3aaf25e4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\ppc\\pig\\cpuint_c.h",
+      "original_sha256": "b171b9bb51bf810c5e9f839a88a79a6f1eb66c37c4128069fe3e7972da849ede",
+      "pinned_expected_sha256": "b171b9bb51bf810c5e9f839a88a79a6f1eb66c37c4128069fe3e7972da849ede",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ppc/pig/evidgen.h",
+      "current_sha256": "05737651808fa634f26fa4dd5c3c11b14b066acb7d8c01dd88ce79c0e2ed29b6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\ppc\\pig\\evidgen.h",
+      "original_sha256": "7e429987c49ec9e87ca45394eeddc87c73877e5f95aed73e1bc1d7224d308772",
+      "pinned_expected_sha256": "7e429987c49ec9e87ca45394eeddc87c73877e5f95aed73e1bc1d7224d308772",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ppc/pig/gdpvar.h",
+      "current_sha256": "601a9433c3fc395323a475af12bdbe1cc480e30be7ce4583465453372dc4cd72",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\ppc\\pig\\gdpvar.h",
+      "original_sha256": "390632880e396c5ffc49d568bd6f47d49b20ccd0ddd43068bf1ab6476543a334",
+      "pinned_expected_sha256": "390632880e396c5ffc49d568bd6f47d49b20ccd0ddd43068bf1ab6476543a334",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ppc/pig/sas4gen.h",
+      "current_sha256": "627a0434c0440c4a2d2c4fd58459053959e8d45ada629c0886d2fca072812cf7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\ppc\\pig\\sas4gen.h",
+      "original_sha256": "27fbe4d2cc6b0ff3657b8ffdea1cfcf9622afc851639894c8948c39b5ae0ebf2",
+      "pinned_expected_sha256": "27fbe4d2cc6b0ff3657b8ffdea1cfcf9622afc851639894c8948c39b5ae0ebf2",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ppc/prod/c2cpusad.h",
+      "current_sha256": "a34e0b46dc56dfbad7757c29b1550fd846b88a8490bab5e7504a3550fecef7d0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\ppc\\prod\\c2cpusad.h",
+      "original_sha256": "7f3a09f96bd67856e38a263dd2c570d2cb089c4ed0546c7dcd8c0bd4c60e3621",
+      "pinned_expected_sha256": "7f3a09f96bd67856e38a263dd2c570d2cb089c4ed0546c7dcd8c0bd4c60e3621",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ppc/prod/cpu4gen.h",
+      "current_sha256": "1992b9fde6196531eb6c35bcaca011d74ee568a355e86ab2c8c383dad8af730d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\ppc\\prod\\cpu4gen.h",
+      "original_sha256": "11aa60613b6d85e24b0b1c747ed7fec595239eee4959e062f9e6c3f3fb63d9f5",
+      "pinned_expected_sha256": "11aa60613b6d85e24b0b1c747ed7fec595239eee4959e062f9e6c3f3fb63d9f5",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ppc/prod/cpu_c.h",
+      "current_sha256": "ccf273b99697126bc0368d4732f67d691f037ee4714f2299c6d83d28a26db4d0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\ppc\\prod\\cpu_c.h",
+      "original_sha256": "886bc29491f7c54e7210d8a456cda7f935ca279065149c90e109cbbfc16155dc",
+      "pinned_expected_sha256": "886bc29491f7c54e7210d8a456cda7f935ca279065149c90e109cbbfc16155dc",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ppc/prod/cpuint_c.h",
+      "current_sha256": "25addbb388de3f89c7277a832933192de53c2d2199dfc379d67ed86f3aaf25e4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\ppc\\prod\\cpuint_c.h",
+      "original_sha256": "b171b9bb51bf810c5e9f839a88a79a6f1eb66c37c4128069fe3e7972da849ede",
+      "pinned_expected_sha256": "b171b9bb51bf810c5e9f839a88a79a6f1eb66c37c4128069fe3e7972da849ede",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ppc/prod/evidgen.h",
+      "current_sha256": "05737651808fa634f26fa4dd5c3c11b14b066acb7d8c01dd88ce79c0e2ed29b6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\ppc\\prod\\evidgen.h",
+      "original_sha256": "7e429987c49ec9e87ca45394eeddc87c73877e5f95aed73e1bc1d7224d308772",
+      "pinned_expected_sha256": "7e429987c49ec9e87ca45394eeddc87c73877e5f95aed73e1bc1d7224d308772",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ppc/prod/gdpvar.h",
+      "current_sha256": "47e594eac21eb5e0131da30949e6d6d4e355438b77e08ae1020cfeefb3f7baef",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\ppc\\prod\\gdpvar.h",
+      "original_sha256": "2eea3e1519eb72cb50ac504855abe2ee81e0145ef588fc771900c5fe2b3b2248",
+      "pinned_expected_sha256": "2eea3e1519eb72cb50ac504855abe2ee81e0145ef588fc771900c5fe2b3b2248",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ppc/prod/sas4gen.h",
+      "current_sha256": "627a0434c0440c4a2d2c4fd58459053959e8d45ada629c0886d2fca072812cf7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\ppc\\prod\\sas4gen.h",
+      "original_sha256": "27fbe4d2cc6b0ff3657b8ffdea1cfcf9622afc851639894c8948c39b5ae0ebf2",
+      "pinned_expected_sha256": "27fbe4d2cc6b0ff3657b8ffdea1cfcf9622afc851639894c8948c39b5ae0ebf2",
+      "original_matches_pinned": true
+    }
+  ],
+  "removed_condition_groups": 4812,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r115.zip",
+  "evidence": [
+    "Supported product target contexts are x86 and x64; generated Ninja and current source/build/test path scans found no mips or ppc host include path.",
+    "A historical archived CMake file refers to old MIPS source tree but is not a supported build."
+  ],
+  "limitations": [
+    "No claim for unsupported MIPS or PowerPC configurations.",
+    "Deeper condition groups are removed with their whole unselected file without classification."
+  ]
+}

@@ -1,0 +1,2572 @@
+{
+  "scope": "existing uniquely anchored exclusions with unchanged current and pinned-original hashes and exact full arm signatures",
+  "counts": {
+    "hash_mismatch": 325,
+    "paired_original_arms": 270,
+    "paired_groups": 256
+  },
+  "records": [
+    {
+      "current": "src/mvdm-host/dos/command/cmdmisc.c",
+      "current_sha256": "d5c16b68f8f6ac670032d5a1f06b26fc75b32de1ff8726a54bb67216f1dcbc28",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdmisc.c",
+      "original_sha256": "1ca036932368a0d0bf1848b078cc80cd66e67a4cc46ad26a0c1b236fe40f4281",
+      "original_line": 656,
+      "current_line": 853,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+      "current_sha256": "e7ce4347f850fcfb359ec1c5265a9790789e6741cb2e50f5ecd1f88ebd0d9e06",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\ill_bop.c",
+      "original_sha256": "89df5a6fa3fc27def18b904fcd83f6c872778fec33dfc58634c9f73449165799",
+      "original_line": 17,
+      "current_line": 17,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/bios/mem_size.c",
+      "current_sha256": "d498fee0e5045ad07813556a3afa5e920e8568307c3de4525c7540b1592f364e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\mem_size.c",
+      "original_sha256": "2e8937e8fc10fbc69425692fb8b127b20e786fae37fd453049b62dd0472c9e8f",
+      "original_line": 16,
+      "current_line": 16,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/bios/slave_bs.c",
+      "current_sha256": "86e6b73c7d98d74ec4b679eb54ec98c583aeb92823972993a8fa28199c6ed209",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\slave_bs.c",
+      "original_sha256": "22079cb4c1e033f1d33246da6f60f8d5e1bba5c925ee3e9e5ea3c3fd756c7368",
+      "original_line": 33,
+      "current_line": 33,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "current_sha256": "2453f77768e01b5f4a26200886096aa405f627d3758b98d65413780debe24b85",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\printer.c",
+      "original_sha256": "b1456dcbc0dc6b4d1fd5d101bfaa6bdc9a4cd5d970c14215f3ae62a173f17ccb",
+      "original_line": 801,
+      "current_line": 796,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "current_sha256": "b104e4d3f599d97ba05998b2bd9c918ea1fb718fbcdffc1c548fd570b9a7f674",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\printer_.c",
+      "original_sha256": "53edfe9fb4bb9d965acb8a7cc5f33d14cdf0694957dadfa912e0175488dbcf81",
+      "original_line": 23,
+      "current_line": 23,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/debug/btrace.c",
+      "current_sha256": "92372fa13f5b16fa698b91839fe5e8e92b64abad3d973e1f2e65df0f40f1d131",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\btrace.c",
+      "original_sha256": "5a19a8cf73bd5c06c47bf3292189c8989bc970933bb4968336580f4be0028e3f",
+      "original_line": 16,
+      "current_line": 16,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "current_sha256": "83b24e36f133cc750c886aba6a43e5746c1ae69d015b47174a2324a814ca58e0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\yoda.c",
+      "original_sha256": "444f1350d7c50b270652d7b062a375536e327952ebb5ba83937fba090db3c817",
+      "original_line": 36,
+      "current_line": 36,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "current_sha256": "244b5bbcc258a737c240fc7803aba9c9f2ad80eed24371e8065498fe734d9a9b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\fla.c",
+      "original_sha256": "b8c5f0420eac7f14f662799b995b37e86d14dc252271b7bf4ae309ba6650fb5d",
+      "original_line": 46,
+      "current_line": 46,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "current_sha256": "244b5bbcc258a737c240fc7803aba9c9f2ad80eed24371e8065498fe734d9a9b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\fla.c",
+      "original_sha256": "b8c5f0420eac7f14f662799b995b37e86d14dc252271b7bf4ae309ba6650fb5d",
+      "original_line": 168,
+      "current_line": 168,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "current_sha256": "244b5bbcc258a737c240fc7803aba9c9f2ad80eed24371e8065498fe734d9a9b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\fla.c",
+      "original_sha256": "b8c5f0420eac7f14f662799b995b37e86d14dc252271b7bf4ae309ba6650fb5d",
+      "original_line": 180,
+      "current_line": 180,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "current_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi.c",
+      "original_sha256": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+      "original_line": 29,
+      "current_line": 29,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "current_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi.c",
+      "original_sha256": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+      "original_line": 294,
+      "current_line": 287,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "current_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi.c",
+      "original_sha256": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+      "original_line": 306,
+      "current_line": 297,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "current_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi.c",
+      "original_sha256": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+      "original_line": 320,
+      "current_line": 307,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "current_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi.c",
+      "original_sha256": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+      "original_line": 331,
+      "current_line": 317,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "current_sha256": "4d6b018fd4f18c77dc891c8c158801b25a976da0c45683d133f16af425d75ecd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_ibm.c",
+      "original_sha256": "234d4fdac97c117a01ee642242dbab691e6809d0a3d25e63df4604d5fbbd955f",
+      "original_line": 3,
+      "current_line": 3,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "current_sha256": "e27b0c9b6a55a1ce12921aef83e83be03855a746e05daabb8d20ae7f9719bfd6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_mpty.c",
+      "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
+      "original_line": 23,
+      "current_line": 23,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "current_sha256": "e114562513ab06eb62d8811cc85dbab8ff1c823156e4fd36ae82074c011c661d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_sflp.c",
+      "original_sha256": "396c621a6c6abf135fdec730a0be91c8bc5582de51687ed006ca5df97d354dc5",
+      "original_line": 18,
+      "current_line": 18,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/inc/cpu4.h",
+      "current_sha256": "cbf57be356f8c69dbe92bf77767177efa547965b2d878590876e7baf55f20227",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cpu4.h",
+      "original_sha256": "c1296168c866527a931bfa4b7cefe21f54acc96a6f242b0a60d6cdba4cdba725",
+      "original_line": 66,
+      "current_line": 66,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/inc/cpu4.h",
+      "current_sha256": "cbf57be356f8c69dbe92bf77767177efa547965b2d878590876e7baf55f20227",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cpu4.h",
+      "original_sha256": "c1296168c866527a931bfa4b7cefe21f54acc96a6f242b0a60d6cdba4cdba725",
+      "original_line": 91,
+      "current_line": 86,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/inc/dma.h",
+      "current_sha256": "1bd227f7ecaaa315551191e1f1d0d7ff6036dc0427e3c09f53262b3aeb036c52",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\dma.h",
+      "original_sha256": "d69831cddb3de18bebe1532c659608b404686374324b3eeebed5607e15a774e4",
+      "original_line": 138,
+      "current_line": 138,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/inc/dma.h",
+      "current_sha256": "1bd227f7ecaaa315551191e1f1d0d7ff6036dc0427e3c09f53262b3aeb036c52",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\dma.h",
+      "original_sha256": "d69831cddb3de18bebe1532c659608b404686374324b3eeebed5607e15a774e4",
+      "original_line": 174,
+      "current_line": 160,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/inc/dma.h",
+      "current_sha256": "1bd227f7ecaaa315551191e1f1d0d7ff6036dc0427e3c09f53262b3aeb036c52",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\dma.h",
+      "original_sha256": "d69831cddb3de18bebe1532c659608b404686374324b3eeebed5607e15a774e4",
+      "original_line": 216,
+      "current_line": 191,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+      "current_sha256": "08c38f4d5967454cb09983cf3b93e35b2829cae04c6a00da653501fd0c9afad1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egacpu.h",
+      "original_sha256": "4a53a9d1c7fb984deb2c5b0fd629442ee8a35272ad90323624d55daa65886194",
+      "original_line": 22,
+      "current_line": 22,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
+      "current_sha256": "2213bdd7d4f5f4e45d5843277e20686b34dea37316f9d3c42865fa54f7bf17a6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gfx_upd.h",
+      "original_sha256": "a8577d81b26da6831e8d5dd496e41ebd40a947c3d641c39c77304d509ba2be61",
+      "original_line": 119,
+      "current_line": 123,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
+      "current_sha256": "2213bdd7d4f5f4e45d5843277e20686b34dea37316f9d3c42865fa54f7bf17a6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gfx_upd.h",
+      "original_sha256": "a8577d81b26da6831e8d5dd496e41ebd40a947c3d641c39c77304d509ba2be61",
+      "original_line": 168,
+      "current_line": 172,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/inc/gisp_sas.h",
+      "current_sha256": "eef0579057cb7e9b57a79ea04eb145dbaf694c2fcaee2da2349bef9d6329fc88",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gisp_sas.h",
+      "original_sha256": "2413fd0f1b4a4d9cb0238a4c811d088d2d0d1b0c0eaa423956400bd8256558e3",
+      "original_line": 21,
+      "current_line": 21,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/inc/gispsvga.h",
+      "current_sha256": "b32d48f90f789bdef5ca8e781eee82d212fa6b9253125ae76c0b7b955efabd48",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gispsvga.h",
+      "original_sha256": "27cf2b856a23d0fb84e1162959043377dade1414d063349acaf952cf741bf60e",
+      "original_line": 23,
+      "current_line": 23,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
+      "current_sha256": "d6a4afd247ff8753e85d8b45217d2fad04ac7dd9ce7c56dc90178a212ca469dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\ppi.c",
+      "original_sha256": "367cceaa88345e16b2e138faef9addd441da2cd39f95ea3ab6c359651bd8ebf5",
+      "original_line": 17,
+      "current_line": 17,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/system/dummy_nt.c",
+      "current_sha256": "ee773fb807240be4573520fe85b51c83de3843e2661f6c186b75cf918339f4d1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\dummy_nt.c",
+      "original_sha256": "ce1b03e11f45eb795dfbfdde1e3ac4ebc2022d77dfa5f4dd30453ba6eebdb233",
+      "original_line": 16,
+      "current_line": 16,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/system/unexp_nt.c",
+      "current_sha256": "1b3d0b8d0816842c0c5a87c956da415e19403fa8399bd28c2149b5a868ceac93",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\unexp_nt.c",
+      "original_sha256": "a96ba5effe9b1cec5d78545f9656486a8e7b692e829c1c06634653bb8c905f0e",
+      "original_line": 17,
+      "current_line": 17,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "current_sha256": "56105733a0bf01d7e067bd2d85196864338d19e5fa992b2932e900de04e18877",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gvi.c",
+      "original_sha256": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80",
+      "original_line": 177,
+      "current_line": 177,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "current_sha256": "56105733a0bf01d7e067bd2d85196864338d19e5fa992b2932e900de04e18877",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gvi.c",
+      "original_sha256": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80",
+      "original_line": 183,
+      "current_line": 181,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "current_sha256": "56105733a0bf01d7e067bd2d85196864338d19e5fa992b2932e900de04e18877",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gvi.c",
+      "original_sha256": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80",
+      "original_line": 218,
+      "current_line": 213,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "current_sha256": "56105733a0bf01d7e067bd2d85196864338d19e5fa992b2932e900de04e18877",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gvi.c",
+      "original_sha256": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80",
+      "original_line": 247,
+      "current_line": 239,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "current_sha256": "56105733a0bf01d7e067bd2d85196864338d19e5fa992b2932e900de04e18877",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gvi.c",
+      "original_sha256": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80",
+      "original_line": 264,
+      "current_line": 249,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "current_sha256": "56105733a0bf01d7e067bd2d85196864338d19e5fa992b2932e900de04e18877",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gvi.c",
+      "original_sha256": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80",
+      "original_line": 293,
+      "current_line": 276,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "current_sha256": "56105733a0bf01d7e067bd2d85196864338d19e5fa992b2932e900de04e18877",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gvi.c",
+      "original_sha256": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80",
+      "original_line": 302,
+      "current_line": 285,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "current_sha256": "56105733a0bf01d7e067bd2d85196864338d19e5fa992b2932e900de04e18877",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gvi.c",
+      "original_sha256": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80",
+      "original_line": 308,
+      "current_line": 289,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "current_sha256": "56105733a0bf01d7e067bd2d85196864338d19e5fa992b2932e900de04e18877",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gvi.c",
+      "original_sha256": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80",
+      "original_line": 338,
+      "current_line": 316,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrputil.c",
+      "current_sha256": "eb0dfbf4e9b4089f65cc54e187a2480ef2b3ef9042dff0b275cf7fb723f8e8ce",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrputil.c",
+      "original_sha256": "1440cd1379dee1bbe65b0a1e6f6a637a3de48765da85cfd94153e8876a66fe16",
+      "original_line": 73,
+      "current_line": 73,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrremote.c",
+      "current_sha256": "26e245025ef37e69f75721b86767c378ac50f274e5a3610ed312cad1d33b493c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrremote.c",
+      "original_sha256": "f75d2984624cee1a77b6f5bf6a18fe4a7f38a059d32b0e711edb97d03a08c9b8",
+      "original_line": 504,
+      "current_line": 505,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrremote.c",
+      "current_sha256": "26e245025ef37e69f75721b86767c378ac50f274e5a3610ed312cad1d33b493c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrremote.c",
+      "original_sha256": "f75d2984624cee1a77b6f5bf6a18fe4a7f38a059d32b0e711edb97d03a08c9b8",
+      "original_line": 515,
+      "current_line": 516,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrremote.c",
+      "current_sha256": "26e245025ef37e69f75721b86767c378ac50f274e5a3610ed312cad1d33b493c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrremote.c",
+      "original_sha256": "f75d2984624cee1a77b6f5bf6a18fe4a7f38a059d32b0e711edb97d03a08c9b8",
+      "original_line": 680,
+      "current_line": 688,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrremote.c",
+      "current_sha256": "26e245025ef37e69f75721b86767c378ac50f274e5a3610ed312cad1d33b493c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrremote.c",
+      "original_sha256": "f75d2984624cee1a77b6f5bf6a18fe4a7f38a059d32b0e711edb97d03a08c9b8",
+      "original_line": 733,
+      "current_line": 737,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrremote.c",
+      "current_sha256": "26e245025ef37e69f75721b86767c378ac50f274e5a3610ed312cad1d33b493c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrremote.c",
+      "original_sha256": "f75d2984624cee1a77b6f5bf6a18fe4a7f38a059d32b0e711edb97d03a08c9b8",
+      "original_line": 1097,
+      "current_line": 1100,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrremote.c",
+      "current_sha256": "26e245025ef37e69f75721b86767c378ac50f274e5a3610ed312cad1d33b493c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrremote.c",
+      "original_sha256": "f75d2984624cee1a77b6f5bf6a18fe4a7f38a059d32b0e711edb97d03a08c9b8",
+      "original_line": 1408,
+      "current_line": 1411,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/ds/netapi/rap/convert.c",
+      "current_sha256": "c49b0669e6df00108ebc054f8c782a870e1c0b86dbf332a4de272be6565422c1",
+      "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\rap\\convert.c",
+      "original_sha256": "3c6f6c878aefe962b0b93bf798569d9d8ed20e3f4112bd56e370989afdadf5d5",
+      "original_line": 368,
+      "current_line": 368,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/non-mvdm/ds/netapi/rap/convert.c",
+      "current_sha256": "c49b0669e6df00108ebc054f8c782a870e1c0b86dbf332a4de272be6565422c1",
+      "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\rap\\convert.c",
+      "original_sha256": "3c6f6c878aefe962b0b93bf798569d9d8ed20e3f4112bd56e370989afdadf5d5",
+      "original_line": 647,
+      "current_line": 645,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/non-mvdm/ds/netapi/rap/convert.c",
+      "current_sha256": "c49b0669e6df00108ebc054f8c782a870e1c0b86dbf332a4de272be6565422c1",
+      "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\rap\\convert.c",
+      "original_sha256": "3c6f6c878aefe962b0b93bf798569d9d8ed20e3f4112bd56e370989afdadf5d5",
+      "original_line": 752,
+      "current_line": 743,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/non-mvdm/ds/netapi/rap/convert.c",
+      "current_sha256": "c49b0669e6df00108ebc054f8c782a870e1c0b86dbf332a4de272be6565422c1",
+      "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\rap\\convert.c",
+      "original_sha256": "3c6f6c878aefe962b0b93bf798569d9d8ed20e3f4112bd56e370989afdadf5d5",
+      "original_line": 1090,
+      "current_line": 1080,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/non-mvdm/ds/netapi/rap/convert.c",
+      "current_sha256": "c49b0669e6df00108ebc054f8c782a870e1c0b86dbf332a4de272be6565422c1",
+      "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\rap\\convert.c",
+      "original_sha256": "3c6f6c878aefe962b0b93bf798569d9d8ed20e3f4112bd56e370989afdadf5d5",
+      "original_line": 1176,
+      "current_line": 1166,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/non-mvdm/ds/netapi/rap/convert.c",
+      "current_sha256": "c49b0669e6df00108ebc054f8c782a870e1c0b86dbf332a4de272be6565422c1",
+      "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\rap\\convert.c",
+      "original_sha256": "3c6f6c878aefe962b0b93bf798569d9d8ed20e3f4112bd56e370989afdadf5d5",
+      "original_line": 1269,
+      "current_line": 1258,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/non-mvdm/ds/netapi/rap/convert.c",
+      "current_sha256": "c49b0669e6df00108ebc054f8c782a870e1c0b86dbf332a4de272be6565422c1",
+      "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\rap\\convert.c",
+      "original_sha256": "3c6f6c878aefe962b0b93bf798569d9d8ed20e3f4112bd56e370989afdadf5d5",
+      "original_line": 1417,
+      "current_line": 1399,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+      "current_sha256": "c4b44a31b4b004f93aa05f0aa57c457fe172f018abc9fbd337cc8eff9b8f1e72",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\btnctl.c",
+      "original_sha256": "579205cfbd7da6cf97e05235c74b3a221415dd07ae6f73c30649c9bf9e06ef2e",
+      "original_line": 245,
+      "current_line": 247,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+      "current_sha256": "c4b44a31b4b004f93aa05f0aa57c457fe172f018abc9fbd337cc8eff9b8f1e72",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\btnctl.c",
+      "original_sha256": "579205cfbd7da6cf97e05235c74b3a221415dd07ae6f73c30649c9bf9e06ef2e",
+      "original_line": 295,
+      "current_line": 302,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+      "current_sha256": "ace318f51c48b1cfcb694b1c79bd1e639f291a4143ca794bc75e11bdf2bc0eef",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\combo.c",
+      "original_sha256": "360e3c653cc70079f8f9d0db42d37f5580a82881f1ffb9b1fef954d8f1e7463d",
+      "original_line": 1748,
+      "current_line": 1748,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+      "current_sha256": "19235c8575eab883c42cea33000e0180043d1d08682fbf9b3afa5aa65ba65efc",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgend.c",
+      "original_sha256": "191c9ce7dce323873f5ef40f74141950940f6723e14d48b5fa09ca5517dde6cd",
+      "original_line": 30,
+      "current_line": 24,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+      "current_sha256": "19235c8575eab883c42cea33000e0180043d1d08682fbf9b3afa5aa65ba65efc",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgend.c",
+      "original_sha256": "191c9ce7dce323873f5ef40f74141950940f6723e14d48b5fa09ca5517dde6cd",
+      "original_line": 95,
+      "current_line": 103,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+      "current_sha256": "19235c8575eab883c42cea33000e0180043d1d08682fbf9b3afa5aa65ba65efc",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgend.c",
+      "original_sha256": "191c9ce7dce323873f5ef40f74141950940f6723e14d48b5fa09ca5517dde6cd",
+      "original_line": 143,
+      "current_line": 133,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+      "current_sha256": "ad7266b1739515f398a14761cb19ec0ccb304598963f4f61f579ef12f18f5ff1",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dmmnem.c",
+      "original_sha256": "638efc31ffd622ba31e16672d1418291c3e1291b6d0c57f31d08c32d45fa1720",
+      "original_line": 44,
+      "current_line": 44,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+      "current_sha256": "ad7266b1739515f398a14761cb19ec0ccb304598963f4f61f579ef12f18f5ff1",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dmmnem.c",
+      "original_sha256": "638efc31ffd622ba31e16672d1418291c3e1291b6d0c57f31d08c32d45fa1720",
+      "original_line": 55,
+      "current_line": 55,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "current_sha256": "591c2c88edfdf58c738f489eb77660851e0345e85b182061d9edad342730eb9d",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "original_line": 2345,
+      "current_line": 2326,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/edmlrare.c",
+      "current_sha256": "fcf472a1b30bff5eab25cbad029f9fc78edabfd4de5dcb81643244e5b086ccd9",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\edmlrare.c",
+      "original_sha256": "fb9dd31919b7b90db2f713daa83684f1231558e7653ae72cd72458f1212000f1",
+      "original_line": 399,
+      "current_line": 399,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/lboxrare.c",
+      "current_sha256": "71d1fe7584b2f8c110b9cace0b3dac23603e67f010b8276e3b733eda8ccfe055",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\lboxrare.c",
+      "original_sha256": "e8914f4761ade70a1a7357b5dc8c17744ce1bc49379d03a99470f815ef85f64d",
+      "original_line": 133,
+      "current_line": 133,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_sha256": "59b57920a816fbc1e46413c6c9747468b2f27149f46c7af27f69aa06e680211a",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+      "original_line": 811,
+      "current_line": 65,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "current_sha256": "413fc6e2209039169fd1b72c4272e22df1df6c9a2d4bbd1a8b8ab3b2eeaf7820",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+      "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+      "original_line": 781,
+      "current_line": 83,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "current_sha256": "413fc6e2209039169fd1b72c4272e22df1df6c9a2d4bbd1a8b8ab3b2eeaf7820",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+      "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+      "original_line": 794,
+      "current_line": 94,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/server/exports.c",
+      "current_sha256": "f8175fab8ac937f36fe97d187a75b2dfbfa0be12c21d6044efcfaef6b9f9010b",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\server\\exports.c",
+      "original_sha256": "dbeb0ad48349bf5887a1333f21b427d8e0fdd3cb226977a9dc786373e961c71f",
+      "original_line": 157,
+      "current_line": 63,
+      "anchor_evidence": "s13-bfs-depth1-macro-broad-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowkrn.h",
+      "current_sha256": "0e172fc74921ae84831ed646b0432320dd565cace21182ce5a8b1deac340c3d1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowkrn.h",
+      "original_sha256": "8d9fbb2c3b74c21588eaa7541513db0e3181e41caa0d6a38d2395ae27c01b8cf",
+      "original_line": 327,
+      "current_line": 327,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowkrn.h",
+      "current_sha256": "0e172fc74921ae84831ed646b0432320dd565cace21182ce5a8b1deac340c3d1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowkrn.h",
+      "original_sha256": "8d9fbb2c3b74c21588eaa7541513db0e3181e41caa0d6a38d2395ae27c01b8cf",
+      "original_line": 408,
+      "current_line": 406,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowkrn.h",
+      "current_sha256": "0e172fc74921ae84831ed646b0432320dd565cace21182ce5a8b1deac340c3d1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowkrn.h",
+      "original_sha256": "8d9fbb2c3b74c21588eaa7541513db0e3181e41caa0d6a38d2395ae27c01b8cf",
+      "original_line": 420,
+      "current_line": 414,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowkrn.h",
+      "current_sha256": "0e172fc74921ae84831ed646b0432320dd565cace21182ce5a8b1deac340c3d1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowkrn.h",
+      "original_sha256": "8d9fbb2c3b74c21588eaa7541513db0e3181e41caa0d6a38d2395ae27c01b8cf",
+      "original_line": 460,
+      "current_line": 452,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowkrn.h",
+      "current_sha256": "0e172fc74921ae84831ed646b0432320dd565cace21182ce5a8b1deac340c3d1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowkrn.h",
+      "original_sha256": "8d9fbb2c3b74c21588eaa7541513db0e3181e41caa0d6a38d2395ae27c01b8cf",
+      "original_line": 525,
+      "current_line": 515,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowkrn.h",
+      "current_sha256": "0e172fc74921ae84831ed646b0432320dd565cace21182ce5a8b1deac340c3d1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowkrn.h",
+      "original_sha256": "8d9fbb2c3b74c21588eaa7541513db0e3181e41caa0d6a38d2395ae27c01b8cf",
+      "original_line": 542,
+      "current_line": 530,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowkrn.h",
+      "current_sha256": "0e172fc74921ae84831ed646b0432320dd565cace21182ce5a8b1deac340c3d1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowkrn.h",
+      "original_sha256": "8d9fbb2c3b74c21588eaa7541513db0e3181e41caa0d6a38d2395ae27c01b8cf",
+      "original_line": 646,
+      "current_line": 632,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowkrn.h",
+      "current_sha256": "0e172fc74921ae84831ed646b0432320dd565cace21182ce5a8b1deac340c3d1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowkrn.h",
+      "original_sha256": "8d9fbb2c3b74c21588eaa7541513db0e3181e41caa0d6a38d2395ae27c01b8cf",
+      "original_line": 818,
+      "current_line": 802,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowkrn.h",
+      "current_sha256": "0e172fc74921ae84831ed646b0432320dd565cace21182ce5a8b1deac340c3d1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowkrn.h",
+      "original_sha256": "8d9fbb2c3b74c21588eaa7541513db0e3181e41caa0d6a38d2395ae27c01b8cf",
+      "original_line": 842,
+      "current_line": 824,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowkrn.h",
+      "current_sha256": "0e172fc74921ae84831ed646b0432320dd565cace21182ce5a8b1deac340c3d1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowkrn.h",
+      "original_sha256": "8d9fbb2c3b74c21588eaa7541513db0e3181e41caa0d6a38d2395ae27c01b8cf",
+      "original_line": 848,
+      "current_line": 828,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowkrn.h",
+      "current_sha256": "0e172fc74921ae84831ed646b0432320dd565cace21182ce5a8b1deac340c3d1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowkrn.h",
+      "original_sha256": "8d9fbb2c3b74c21588eaa7541513db0e3181e41caa0d6a38d2395ae27c01b8cf",
+      "original_line": 880,
+      "current_line": 858,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowsnd.h",
+      "current_sha256": "00d8cd7ba8f60e24583794c1911ffa1609c8d9172a473d7f85172ca247eae713",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowsnd.h",
+      "original_sha256": "944acedf0708f0fc2176b28a18e07747da57042fd93bfb63a51663e9e2a250e6",
+      "original_line": 42,
+      "current_line": 42,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowsnd.h",
+      "current_sha256": "00d8cd7ba8f60e24583794c1911ffa1609c8d9172a473d7f85172ca247eae713",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowsnd.h",
+      "original_sha256": "944acedf0708f0fc2176b28a18e07747da57042fd93bfb63a51663e9e2a250e6",
+      "original_line": 53,
+      "current_line": 51,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowsnd.h",
+      "current_sha256": "00d8cd7ba8f60e24583794c1911ffa1609c8d9172a473d7f85172ca247eae713",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowsnd.h",
+      "original_sha256": "944acedf0708f0fc2176b28a18e07747da57042fd93bfb63a51663e9e2a250e6",
+      "original_line": 65,
+      "current_line": 59,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowsnd.h",
+      "current_sha256": "00d8cd7ba8f60e24583794c1911ffa1609c8d9172a473d7f85172ca247eae713",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowsnd.h",
+      "original_sha256": "944acedf0708f0fc2176b28a18e07747da57042fd93bfb63a51663e9e2a250e6",
+      "original_line": 120,
+      "current_line": 112,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowsnd.h",
+      "current_sha256": "00d8cd7ba8f60e24583794c1911ffa1609c8d9172a473d7f85172ca247eae713",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowsnd.h",
+      "original_sha256": "944acedf0708f0fc2176b28a18e07747da57042fd93bfb63a51663e9e2a250e6",
+      "original_line": 132,
+      "current_line": 120,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 529,
+      "current_line": 529,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 672,
+      "current_line": 670,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 726,
+      "current_line": 722,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 805,
+      "current_line": 799,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 811,
+      "current_line": 803,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 924,
+      "current_line": 914,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 986,
+      "current_line": 974,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 1096,
+      "current_line": 1082,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 1123,
+      "current_line": 1107,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 1146,
+      "current_line": 1128,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 1219,
+      "current_line": 1199,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 1240,
+      "current_line": 1218,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 1271,
+      "current_line": 1247,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 1282,
+      "current_line": 1256,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 1288,
+      "current_line": 1260,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 1343,
+      "current_line": 1313,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 1349,
+      "current_line": 1317,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 1380,
+      "current_line": 1346,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 1396,
+      "current_line": 1360,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 1408,
+      "current_line": 1368,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 1441,
+      "current_line": 1399,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 1452,
+      "current_line": 1408,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 1464,
+      "current_line": 1418,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 1503,
+      "current_line": 1455,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 1554,
+      "current_line": 1504,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 1560,
+      "current_line": 1508,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 1634,
+      "current_line": 1580,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 1665,
+      "current_line": 1609,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 1671,
+      "current_line": 1613,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 1788,
+      "current_line": 1728,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 1807,
+      "current_line": 1745,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 1825,
+      "current_line": 1761,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 1925,
+      "current_line": 1859,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 1951,
+      "current_line": 1883,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 2140,
+      "current_line": 2070,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 2271,
+      "current_line": 2199,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 2296,
+      "current_line": 2222,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 2824,
+      "current_line": 2748,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 2842,
+      "current_line": 2764,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 2886,
+      "current_line": 2806,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/bios/cmos_bis.c",
+      "current_sha256": "80c4caeb665bb756c977f42430ca7f182ffd75d7b2e2e9b15a9ef7de6610d583",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\cmos_bis.c",
+      "original_sha256": "e3b6710db5887ef77c5a38c881ebb4eeff2575db65e86a3468258aaa9293e1bd",
+      "original_line": 38,
+      "current_line": 38,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+      "current_sha256": "0bbcf3d6eafb9bf1c3f10e190721cd0062db7614549d28f9363c65afe791f582",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\equipmnt.c",
+      "original_sha256": "08b798882c49443b2641ebf091adf07959059d46bc703467d860ab22659f2967",
+      "original_line": 23,
+      "current_line": 23,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+      "current_sha256": "e7ce4347f850fcfb359ec1c5265a9790789e6741cb2e50f5ecd1f88ebd0d9e06",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\ill_bop.c",
+      "original_sha256": "89df5a6fa3fc27def18b904fcd83f6c872778fec33dfc58634c9f73449165799",
+      "original_line": 21,
+      "current_line": 21,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/bios/mem_size.c",
+      "current_sha256": "d498fee0e5045ad07813556a3afa5e920e8568307c3de4525c7540b1592f364e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\mem_size.c",
+      "original_sha256": "2e8937e8fc10fbc69425692fb8b127b20e786fae37fd453049b62dd0472c9e8f",
+      "original_line": 20,
+      "current_line": 20,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/bios/rom_basc.c",
+      "current_sha256": "5b03ffa5ba2ecb77f60c7f01d61a6ca96029c838d2b92ffcfba5cf00ee098c87",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\rom_basc.c",
+      "original_sha256": "2e6f1783fcb3695443ab0a3a6fcb5dbf2bd3e2e7905217cd61021e031a8a709a",
+      "original_line": 16,
+      "current_line": 16,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/bios/slave_bs.c",
+      "current_sha256": "86e6b73c7d98d74ec4b679eb54ec98c583aeb92823972993a8fa28199c6ed209",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\slave_bs.c",
+      "original_sha256": "22079cb4c1e033f1d33246da6f60f8d5e1bba5c925ee3e9e5ea3c3fd756c7368",
+      "original_line": 37,
+      "current_line": 37,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "current_sha256": "b104e4d3f599d97ba05998b2bd9c918ea1fb718fbcdffc1c548fd570b9a7f674",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\printer_.c",
+      "original_sha256": "53edfe9fb4bb9d965acb8a7cc5f33d14cdf0694957dadfa912e0175488dbcf81",
+      "original_line": 27,
+      "current_line": 27,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/debug/btrace.c",
+      "current_sha256": "92372fa13f5b16fa698b91839fe5e8e92b64abad3d973e1f2e65df0f40f1d131",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\btrace.c",
+      "original_sha256": "5a19a8cf73bd5c06c47bf3292189c8989bc970933bb4968336580f4be0028e3f",
+      "original_line": 20,
+      "current_line": 20,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/debug/dasm.c",
+      "current_sha256": "97faea60eb6e496a092b1e892c980a87a4888802927d9f7ffc2b7abf20e8549a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\dasm.c",
+      "original_sha256": "6f90249d51eee69af65f59de138f915dc05af3a67b7bb529ea33596c04888b9b",
+      "original_line": 23,
+      "current_line": 23,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "current_sha256": "83b24e36f133cc750c886aba6a43e5746c1ae69d015b47174a2324a814ca58e0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\yoda.c",
+      "original_sha256": "444f1350d7c50b270652d7b062a375536e327952ebb5ba83937fba090db3c817",
+      "original_line": 27,
+      "current_line": 27,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "current_sha256": "244b5bbcc258a737c240fc7803aba9c9f2ad80eed24371e8065498fe734d9a9b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\fla.c",
+      "original_sha256": "b8c5f0420eac7f14f662799b995b37e86d14dc252271b7bf4ae309ba6650fb5d",
+      "original_line": 50,
+      "current_line": 50,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "current_sha256": "244b5bbcc258a737c240fc7803aba9c9f2ad80eed24371e8065498fe734d9a9b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\fla.c",
+      "original_sha256": "b8c5f0420eac7f14f662799b995b37e86d14dc252271b7bf4ae309ba6650fb5d",
+      "original_line": 1131,
+      "current_line": 1041,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "current_sha256": "27eef526811e071ee080aeb20de3f9f6f78600f7343617f2877fc07c9202d0d6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy_i.c",
+      "original_sha256": "22b503047688d4d1f2d4b99ffba29e71612a165bbc9069976ce7a8b8d62ba042",
+      "original_line": 33,
+      "current_line": 33,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "current_sha256": "27eef526811e071ee080aeb20de3f9f6f78600f7343617f2877fc07c9202d0d6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy_i.c",
+      "original_sha256": "22b503047688d4d1f2d4b99ffba29e71612a165bbc9069976ce7a8b8d62ba042",
+      "original_line": 417,
+      "current_line": 190,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "current_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi.c",
+      "original_sha256": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+      "original_line": 33,
+      "current_line": 33,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "current_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi.c",
+      "original_sha256": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+      "original_line": 357,
+      "current_line": 325,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "current_sha256": "e27b0c9b6a55a1ce12921aef83e83be03855a746e05daabb8d20ae7f9719bfd6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_mpty.c",
+      "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
+      "original_line": 27,
+      "current_line": 27,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/inc/hunter.h",
+      "current_sha256": "5684b95b5304dc4ae1b15139d197caa0b584dc7db0f82328725ab0deeb7fa042",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\hunter.h",
+      "original_sha256": "92958f20ad0e03e8423eb190f0793813e02a752b1820e94aff01049573475edf",
+      "original_line": 17,
+      "current_line": 17,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/inc/keyba.h",
+      "current_sha256": "963b27f7e39b804f6bcb716c1c478959a865679f4a50d451b3089bee2fd605b7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\keyba.h",
+      "original_sha256": "619a9be301eb3a4ca8632d2f2459413e8285c4796e3de35e20aba2488aa7a0b9",
+      "original_line": 35,
+      "current_line": 35,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
+      "current_sha256": "d6a4afd247ff8753e85d8b45217d2fad04ac7dd9ce7c56dc90178a212ca469dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\ppi.c",
+      "original_sha256": "367cceaa88345e16b2e138faef9addd441da2cd39f95ea3ab6c359651bd8ebf5",
+      "original_line": 21,
+      "current_line": 21,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
+      "current_sha256": "d6a4afd247ff8753e85d8b45217d2fad04ac7dd9ce7c56dc90178a212ca469dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\ppi.c",
+      "original_sha256": "367cceaa88345e16b2e138faef9addd441da2cd39f95ea3ab6c359651bd8ebf5",
+      "original_line": 181,
+      "current_line": 171,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/system/dummy_nt.c",
+      "current_sha256": "ee773fb807240be4573520fe85b51c83de3843e2661f6c186b75cf918339f4d1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\dummy_nt.c",
+      "original_sha256": "ce1b03e11f45eb795dfbfdde1e3ac4ebc2022d77dfa5f4dd30453ba6eebdb233",
+      "original_line": 20,
+      "current_line": 20,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/system/unexp_nt.c",
+      "current_sha256": "1b3d0b8d0816842c0c5a87c956da415e19403fa8399bd28c2149b5a868ceac93",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\unexp_nt.c",
+      "original_sha256": "a96ba5effe9b1cec5d78545f9656486a8e7b692e829c1c06634653bb8c905f0e",
+      "original_line": 21,
+      "current_line": 21,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "current_sha256": "56105733a0bf01d7e067bd2d85196864338d19e5fa992b2932e900de04e18877",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gvi.c",
+      "original_sha256": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80",
+      "original_line": 41,
+      "current_line": 41,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "current_sha256": "56105733a0bf01d7e067bd2d85196864338d19e5fa992b2932e900de04e18877",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gvi.c",
+      "original_sha256": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80",
+      "original_line": 69,
+      "current_line": 69,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "current_sha256": "56105733a0bf01d7e067bd2d85196864338d19e5fa992b2932e900de04e18877",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gvi.c",
+      "original_sha256": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80",
+      "original_line": 157,
+      "current_line": 157,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "current_sha256": "56105733a0bf01d7e067bd2d85196864338d19e5fa992b2932e900de04e18877",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gvi.c",
+      "original_sha256": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80",
+      "original_line": 198,
+      "current_line": 196,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "current_sha256": "56105733a0bf01d7e067bd2d85196864338d19e5fa992b2932e900de04e18877",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gvi.c",
+      "original_sha256": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80",
+      "original_line": 224,
+      "current_line": 219,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "current_sha256": "56105733a0bf01d7e067bd2d85196864338d19e5fa992b2932e900de04e18877",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gvi.c",
+      "original_sha256": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80",
+      "original_line": 269,
+      "current_line": 254,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "current_sha256": "56105733a0bf01d7e067bd2d85196864338d19e5fa992b2932e900de04e18877",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gvi.c",
+      "original_sha256": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80",
+      "original_line": 313,
+      "current_line": 294,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/video/video_io.c",
+      "current_sha256": "8cc434196ece9db3d25981b8b2b5aa5d2d2ad3ac244998257a5e675cb5ee6dd4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video_io.c",
+      "original_sha256": "92680ac402633dd5dd52bbccfff55f41a65a1485dc2736666a9da45b7ea6bf86",
+      "original_line": 19,
+      "current_line": 19,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/fprt.c",
+      "current_sha256": "efe65dc779005a9f387e8d10fadd64570922571e55aeec348071c65a4ec68338",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\fprt.c",
+      "original_sha256": "f7918f49be621c55f53c51c9ae6db756ff239768bb886b84fcfe39eeedb65424",
+      "original_line": 6,
+      "current_line": 6,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/fprt.c",
+      "current_sha256": "efe65dc779005a9f387e8d10fadd64570922571e55aeec348071c65a4ec68338",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\fprt.c",
+      "original_sha256": "f7918f49be621c55f53c51c9ae6db756ff239768bb886b84fcfe39eeedb65424",
+      "original_line": 65,
+      "current_line": 29,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_hosts.c",
+      "current_sha256": "41d26e3e9a959a37918dd12f7544545b826a53b27eafe73ebbfb63cdc9d514e9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_hosts.c",
+      "original_sha256": "9840cb53a0298fdf7f9d27ade387c57659e3c57afbe587cfdf63fbdbafe8c41d",
+      "original_line": 28,
+      "current_line": 28,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_hosts.c",
+      "current_sha256": "41d26e3e9a959a37918dd12f7544545b826a53b27eafe73ebbfb63cdc9d514e9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_hosts.c",
+      "original_sha256": "9840cb53a0298fdf7f9d27ade387c57659e3c57afbe587cfdf63fbdbafe8c41d",
+      "original_line": 62,
+      "current_line": 62,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_hosts.c",
+      "current_sha256": "41d26e3e9a959a37918dd12f7544545b826a53b27eafe73ebbfb63cdc9d514e9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_hosts.c",
+      "original_sha256": "9840cb53a0298fdf7f9d27ade387c57659e3c57afbe587cfdf63fbdbafe8c41d",
+      "original_line": 221,
+      "current_line": 248,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_hosts.c",
+      "current_sha256": "41d26e3e9a959a37918dd12f7544545b826a53b27eafe73ebbfb63cdc9d514e9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_hosts.c",
+      "original_sha256": "9840cb53a0298fdf7f9d27ade387c57659e3c57afbe587cfdf63fbdbafe8c41d",
+      "original_line": 294,
+      "current_line": 321,
+      "anchor_evidence": "s13-bfs-depth1-macro-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+      "current_sha256": "e7ce4347f850fcfb359ec1c5265a9790789e6741cb2e50f5ecd1f88ebd0d9e06",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\ill_bop.c",
+      "original_sha256": "89df5a6fa3fc27def18b904fcd83f6c872778fec33dfc58634c9f73449165799",
+      "original_line": 48,
+      "current_line": 48,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+      "current_sha256": "e7ce4347f850fcfb359ec1c5265a9790789e6741cb2e50f5ecd1f88ebd0d9e06",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\ill_bop.c",
+      "original_sha256": "89df5a6fa3fc27def18b904fcd83f6c872778fec33dfc58634c9f73449165799",
+      "original_line": 64,
+      "current_line": 58,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/debug/btrace.c",
+      "current_sha256": "92372fa13f5b16fa698b91839fe5e8e92b64abad3d973e1f2e65df0f40f1d131",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\btrace.c",
+      "original_sha256": "5a19a8cf73bd5c06c47bf3292189c8989bc970933bb4968336580f4be0028e3f",
+      "original_line": 46,
+      "current_line": 46,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/debug/dasm.c",
+      "current_sha256": "97faea60eb6e496a092b1e892c980a87a4888802927d9f7ffc2b7abf20e8549a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\dasm.c",
+      "original_sha256": "6f90249d51eee69af65f59de138f915dc05af3a67b7bb529ea33596c04888b9b",
+      "original_line": 34,
+      "current_line": 34,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/debug/debuggng.c",
+      "current_sha256": "c682aff394697e28f8f12ee13976dedfb625261dfb8340c5ef0941b04fb4223a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\debuggng.c",
+      "original_sha256": "c483e5ef755f537c7197fc7ce929ed3837b1227f57f6b874b5c8ab46b15045ad",
+      "original_line": 9,
+      "current_line": 9,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "current_sha256": "244b5bbcc258a737c240fc7803aba9c9f2ad80eed24371e8065498fe734d9a9b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\fla.c",
+      "original_sha256": "b8c5f0420eac7f14f662799b995b37e86d14dc252271b7bf4ae309ba6650fb5d",
+      "original_line": 436,
+      "current_line": 425,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "current_sha256": "244b5bbcc258a737c240fc7803aba9c9f2ad80eed24371e8065498fe734d9a9b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\fla.c",
+      "original_sha256": "b8c5f0420eac7f14f662799b995b37e86d14dc252271b7bf4ae309ba6650fb5d",
+      "original_line": 712,
+      "current_line": 697,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "current_sha256": "27eef526811e071ee080aeb20de3f9f6f78600f7343617f2877fc07c9202d0d6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy_i.c",
+      "original_sha256": "22b503047688d4d1f2d4b99ffba29e71612a165bbc9069976ce7a8b8d62ba042",
+      "original_line": 66,
+      "current_line": 66,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "current_sha256": "27eef526811e071ee080aeb20de3f9f6f78600f7343617f2877fc07c9202d0d6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy_i.c",
+      "original_sha256": "22b503047688d4d1f2d4b99ffba29e71612a165bbc9069976ce7a8b8d62ba042",
+      "original_line": 308,
+      "current_line": 84,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "current_sha256": "27eef526811e071ee080aeb20de3f9f6f78600f7343617f2877fc07c9202d0d6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy_i.c",
+      "original_sha256": "22b503047688d4d1f2d4b99ffba29e71612a165bbc9069976ce7a8b8d62ba042",
+      "original_line": 359,
+      "current_line": 134,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "current_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi.c",
+      "original_sha256": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+      "original_line": 155,
+      "current_line": 155,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "current_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi.c",
+      "original_sha256": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+      "original_line": 187,
+      "current_line": 186,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "current_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi.c",
+      "original_sha256": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+      "original_line": 201,
+      "current_line": 199,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "current_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi.c",
+      "original_sha256": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+      "original_line": 220,
+      "current_line": 217,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "current_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi.c",
+      "original_sha256": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+      "original_line": 248,
+      "current_line": 244,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "current_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi.c",
+      "original_sha256": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+      "original_line": 263,
+      "current_line": 258,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "current_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi.c",
+      "original_sha256": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+      "original_line": 277,
+      "current_line": 271,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "current_sha256": "e27b0c9b6a55a1ce12921aef83e83be03855a746e05daabb8d20ae7f9719bfd6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_mpty.c",
+      "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
+      "original_line": 152,
+      "current_line": 152,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "current_sha256": "e27b0c9b6a55a1ce12921aef83e83be03855a746e05daabb8d20ae7f9719bfd6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_mpty.c",
+      "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
+      "original_line": 159,
+      "current_line": 158,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "current_sha256": "e27b0c9b6a55a1ce12921aef83e83be03855a746e05daabb8d20ae7f9719bfd6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_mpty.c",
+      "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
+      "original_line": 166,
+      "current_line": 164,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "current_sha256": "e27b0c9b6a55a1ce12921aef83e83be03855a746e05daabb8d20ae7f9719bfd6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_mpty.c",
+      "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
+      "original_line": 173,
+      "current_line": 170,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "current_sha256": "e27b0c9b6a55a1ce12921aef83e83be03855a746e05daabb8d20ae7f9719bfd6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_mpty.c",
+      "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
+      "original_line": 180,
+      "current_line": 176,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "current_sha256": "e27b0c9b6a55a1ce12921aef83e83be03855a746e05daabb8d20ae7f9719bfd6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_mpty.c",
+      "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
+      "original_line": 187,
+      "current_line": 182,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "current_sha256": "e27b0c9b6a55a1ce12921aef83e83be03855a746e05daabb8d20ae7f9719bfd6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_mpty.c",
+      "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
+      "original_line": 202,
+      "current_line": 196,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "current_sha256": "e27b0c9b6a55a1ce12921aef83e83be03855a746e05daabb8d20ae7f9719bfd6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_mpty.c",
+      "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
+      "original_line": 209,
+      "current_line": 202,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "current_sha256": "e27b0c9b6a55a1ce12921aef83e83be03855a746e05daabb8d20ae7f9719bfd6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_mpty.c",
+      "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
+      "original_line": 216,
+      "current_line": 208,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "current_sha256": "e27b0c9b6a55a1ce12921aef83e83be03855a746e05daabb8d20ae7f9719bfd6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_mpty.c",
+      "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
+      "original_line": 222,
+      "current_line": 213,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi_test.c",
+      "current_sha256": "5213723a877ad7c6241e8891f8ee8157ecc3fd7d3e982d3f0c78f16f7fd965dc",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_test.c",
+      "original_sha256": "cfba520508d5e274ac23d471af6656b7bc41af1a8b0606b3b7020570ab2e2210",
+      "original_line": 3,
+      "current_line": 3,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/gfi_test.c",
+      "current_sha256": "5213723a877ad7c6241e8891f8ee8157ecc3fd7d3e982d3f0c78f16f7fd965dc",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_test.c",
+      "original_sha256": "cfba520508d5e274ac23d471af6656b7bc41af1a8b0606b3b7020570ab2e2210",
+      "original_line": 42,
+      "current_line": 9,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
+      "current_sha256": "d6a4afd247ff8753e85d8b45217d2fad04ac7dd9ce7c56dc90178a212ca469dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\ppi.c",
+      "original_sha256": "367cceaa88345e16b2e138faef9addd441da2cd39f95ea3ab6c359651bd8ebf5",
+      "original_line": 43,
+      "current_line": 43,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "current_sha256": "56105733a0bf01d7e067bd2d85196864338d19e5fa992b2932e900de04e18877",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gvi.c",
+      "original_sha256": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80",
+      "original_line": 204,
+      "current_line": 200,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "current_sha256": "56105733a0bf01d7e067bd2d85196864338d19e5fa992b2932e900de04e18877",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gvi.c",
+      "original_sha256": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80",
+      "original_line": 331,
+      "current_line": 310,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/fprt.c",
+      "current_sha256": "efe65dc779005a9f387e8d10fadd64570922571e55aeec348071c65a4ec68338",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\fprt.c",
+      "original_sha256": "f7918f49be621c55f53c51c9ae6db756ff239768bb886b84fcfe39eeedb65424",
+      "original_line": 14,
+      "current_line": 14,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/fprt.c",
+      "current_sha256": "efe65dc779005a9f387e8d10fadd64570922571e55aeec348071c65a4ec68338",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\fprt.c",
+      "original_sha256": "f7918f49be621c55f53c51c9ae6db756ff239768bb886b84fcfe39eeedb65424",
+      "original_line": 32,
+      "current_line": 26,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/fprt.c",
+      "current_sha256": "efe65dc779005a9f387e8d10fadd64570922571e55aeec348071c65a4ec68338",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\fprt.c",
+      "original_sha256": "f7918f49be621c55f53c51c9ae6db756ff239768bb886b84fcfe39eeedb65424",
+      "original_line": 78,
+      "current_line": 41,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/fprt.c",
+      "current_sha256": "efe65dc779005a9f387e8d10fadd64570922571e55aeec348071c65a4ec68338",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\fprt.c",
+      "original_sha256": "f7918f49be621c55f53c51c9ae6db756ff239768bb886b84fcfe39eeedb65424",
+      "original_line": 146,
+      "current_line": 50,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "current_sha256": "501f27c0f3f2e9f830c4fb36bf84bc98ecb5ff09cd94bec722a16cc9dd9780e4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_error.c",
+      "original_sha256": "3305eaabac76e039dfe80aa0f2e15c48433edd95a74615e5db55b97d2b393228",
+      "original_line": 148,
+      "current_line": 152,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "current_sha256": "501f27c0f3f2e9f830c4fb36bf84bc98ecb5ff09cd94bec722a16cc9dd9780e4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_error.c",
+      "original_sha256": "3305eaabac76e039dfe80aa0f2e15c48433edd95a74615e5db55b97d2b393228",
+      "original_line": 194,
+      "current_line": 197,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "current_sha256": "501f27c0f3f2e9f830c4fb36bf84bc98ecb5ff09cd94bec722a16cc9dd9780e4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_error.c",
+      "original_sha256": "3305eaabac76e039dfe80aa0f2e15c48433edd95a74615e5db55b97d2b393228",
+      "original_line": 614,
+      "current_line": 616,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "current_sha256": "501f27c0f3f2e9f830c4fb36bf84bc98ecb5ff09cd94bec722a16cc9dd9780e4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_error.c",
+      "original_sha256": "3305eaabac76e039dfe80aa0f2e15c48433edd95a74615e5db55b97d2b393228",
+      "original_line": 1157,
+      "current_line": 1159,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
+      "current_sha256": "07e5929db0ac96e15d3efbcb44416d8b1a2ae210e57ebef2f1443bd34ed993d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ntfun.c",
+      "original_sha256": "c2beca20761b59db5f8aede5f80e48d15ffd05cc0c81d1e0e5e017041ae01e63",
+      "original_line": 122,
+      "current_line": 122,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
+      "current_sha256": "07e5929db0ac96e15d3efbcb44416d8b1a2ae210e57ebef2f1443bd34ed993d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ntfun.c",
+      "original_sha256": "c2beca20761b59db5f8aede5f80e48d15ffd05cc0c81d1e0e5e017041ae01e63",
+      "original_line": 194,
+      "current_line": 177,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
+      "current_sha256": "07e5929db0ac96e15d3efbcb44416d8b1a2ae210e57ebef2f1443bd34ed993d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ntfun.c",
+      "original_sha256": "c2beca20761b59db5f8aede5f80e48d15ffd05cc0c81d1e0e5e017041ae01e63",
+      "original_line": 208,
+      "current_line": 190,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
+      "current_sha256": "07e5929db0ac96e15d3efbcb44416d8b1a2ae210e57ebef2f1443bd34ed993d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ntfun.c",
+      "original_sha256": "c2beca20761b59db5f8aede5f80e48d15ffd05cc0c81d1e0e5e017041ae01e63",
+      "original_line": 237,
+      "current_line": 218,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
+      "current_sha256": "07e5929db0ac96e15d3efbcb44416d8b1a2ae210e57ebef2f1443bd34ed993d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ntfun.c",
+      "original_sha256": "c2beca20761b59db5f8aede5f80e48d15ffd05cc0c81d1e0e5e017041ae01e63",
+      "original_line": 251,
+      "current_line": 231,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
+      "current_sha256": "07e5929db0ac96e15d3efbcb44416d8b1a2ae210e57ebef2f1443bd34ed993d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ntfun.c",
+      "original_sha256": "c2beca20761b59db5f8aede5f80e48d15ffd05cc0c81d1e0e5e017041ae01e63",
+      "original_line": 281,
+      "current_line": 260,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
+      "current_sha256": "07e5929db0ac96e15d3efbcb44416d8b1a2ae210e57ebef2f1443bd34ed993d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ntfun.c",
+      "original_sha256": "c2beca20761b59db5f8aede5f80e48d15ffd05cc0c81d1e0e5e017041ae01e63",
+      "original_line": 295,
+      "current_line": 273,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
+      "current_sha256": "07e5929db0ac96e15d3efbcb44416d8b1a2ae210e57ebef2f1443bd34ed993d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ntfun.c",
+      "original_sha256": "c2beca20761b59db5f8aede5f80e48d15ffd05cc0c81d1e0e5e017041ae01e63",
+      "original_line": 348,
+      "current_line": 325,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
+      "current_sha256": "07e5929db0ac96e15d3efbcb44416d8b1a2ae210e57ebef2f1443bd34ed993d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ntfun.c",
+      "original_sha256": "c2beca20761b59db5f8aede5f80e48d15ffd05cc0c81d1e0e5e017041ae01e63",
+      "original_line": 419,
+      "current_line": 395,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
+      "current_sha256": "07e5929db0ac96e15d3efbcb44416d8b1a2ae210e57ebef2f1443bd34ed993d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ntfun.c",
+      "original_sha256": "c2beca20761b59db5f8aede5f80e48d15ffd05cc0c81d1e0e5e017041ae01e63",
+      "original_line": 434,
+      "current_line": 409,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_sound.c",
+      "current_sha256": "776859017c17fbf478ee3b391e401f59e7ecc33a92ec437a6cafb9312a31fb74",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_sound.c",
+      "original_sha256": "19e602c67a87241daf66e8613f4897d632acc7c6765f74c2b1eb09cf080e53f6",
+      "original_line": 138,
+      "current_line": 144,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_wcom.c",
+      "current_sha256": "01506dc2f6685a35770060fa3d9d860d418130aafed00bcb240cd8ab1d1e2db0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_wcom.c",
+      "original_sha256": "18c709bc88c37de4d9323101d528af0ec23a5e7e7b6942a1d2a1a9e7ded111a8",
+      "original_line": 45,
+      "current_line": 45,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_wcom.c",
+      "current_sha256": "01506dc2f6685a35770060fa3d9d860d418130aafed00bcb240cd8ab1d1e2db0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_wcom.c",
+      "original_sha256": "18c709bc88c37de4d9323101d528af0ec23a5e7e7b6942a1d2a1a9e7ded111a8",
+      "original_line": 161,
+      "current_line": 160,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_wcom.c",
+      "current_sha256": "01506dc2f6685a35770060fa3d9d860d418130aafed00bcb240cd8ab1d1e2db0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_wcom.c",
+      "original_sha256": "18c709bc88c37de4d9323101d528af0ec23a5e7e7b6942a1d2a1a9e7ded111a8",
+      "original_line": 250,
+      "current_line": 247,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_wcom.c",
+      "current_sha256": "01506dc2f6685a35770060fa3d9d860d418130aafed00bcb240cd8ab1d1e2db0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_wcom.c",
+      "original_sha256": "18c709bc88c37de4d9323101d528af0ec23a5e7e7b6942a1d2a1a9e7ded111a8",
+      "original_line": 400,
+      "current_line": 396,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "current_sha256": "ba5902276a1e7c96589c7fa6ee49bd04fe67640661fed297fa9927d49ccc8daa",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\obj.vdm\\ntvdm.c",
+      "original_sha256": "693a169cf1e91435c326ee05a17c928e85af10982c2c3bb95a5631ae76415a0a",
+      "original_line": 115,
+      "current_line": 134,
+      "anchor_evidence": "s13-bfs-depth1-prod-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+      "current_sha256": "527d692afa2ed9001c79d64d53e52cbbfbf8a1b0aaeb07efc05ae5191339db52",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cga.c",
+      "original_sha256": "ef84222253b20092ab43505ea3232b3c1174833166ebb4880cb378880a967cc7",
+      "original_line": 42,
+      "current_line": 42,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+      "current_sha256": "527d692afa2ed9001c79d64d53e52cbbfbf8a1b0aaeb07efc05ae5191339db52",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cga.c",
+      "original_sha256": "ef84222253b20092ab43505ea3232b3c1174833166ebb4880cb378880a967cc7",
+      "original_line": 77,
+      "current_line": 76,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+      "current_sha256": "527d692afa2ed9001c79d64d53e52cbbfbf8a1b0aaeb07efc05ae5191339db52",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cga.c",
+      "original_sha256": "ef84222253b20092ab43505ea3232b3c1174833166ebb4880cb378880a967cc7",
+      "original_line": 100,
+      "current_line": 99,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+      "current_sha256": "527d692afa2ed9001c79d64d53e52cbbfbf8a1b0aaeb07efc05ae5191339db52",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cga.c",
+      "original_sha256": "ef84222253b20092ab43505ea3232b3c1174833166ebb4880cb378880a967cc7",
+      "original_line": 105,
+      "current_line": 104,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+      "current_sha256": "527d692afa2ed9001c79d64d53e52cbbfbf8a1b0aaeb07efc05ae5191339db52",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cga.c",
+      "original_sha256": "ef84222253b20092ab43505ea3232b3c1174833166ebb4880cb378880a967cc7",
+      "original_line": 971,
+      "current_line": 934,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_ega.c",
+      "current_sha256": "a67f73bd95a1fe81e2b878a63dd145ad9a486d701cc3a3f2c58841db080f48d3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ega.c",
+      "original_sha256": "ebc58583cec7e257a997185a1ab83f3284dbd1efe6e06c99f680bcce93dca695",
+      "original_line": 43,
+      "current_line": 43,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_ega.c",
+      "current_sha256": "a67f73bd95a1fe81e2b878a63dd145ad9a486d701cc3a3f2c58841db080f48d3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ega.c",
+      "original_sha256": "ebc58583cec7e257a997185a1ab83f3284dbd1efe6e06c99f680bcce93dca695",
+      "original_line": 1666,
+      "current_line": 1633,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "original_line": 58,
+      "current_line": 68,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "original_line": 127,
+      "current_line": 130,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "original_line": 327,
+      "current_line": 335,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "original_line": 389,
+      "current_line": 353,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "original_line": 420,
+      "current_line": 378,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "original_line": 510,
+      "current_line": 398,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "original_line": 541,
+      "current_line": 414,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "original_line": 549,
+      "current_line": 426,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "original_line": 594,
+      "current_line": 470,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "original_line": 713,
+      "current_line": 495,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "original_line": 849,
+      "current_line": 628,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "original_line": 1740,
+      "current_line": 1331,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "original_line": 1786,
+      "current_line": 1346,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "original_line": 2223,
+      "current_line": 1750,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "original_line": 2346,
+      "current_line": 1855,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "original_line": 2410,
+      "current_line": 1869,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_nls.c",
+      "current_sha256": "433fdb715abe00f63d28f88ca69fcee0fab4d6898cc63068412594563098a830",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_nls.c",
+      "original_sha256": "6cef4fc4adf6ce81f42cfa4ebfa9c1edb153a3ce651a69321f5b5022a9b6fa06",
+      "original_line": 40,
+      "current_line": 40,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_nls.c",
+      "current_sha256": "433fdb715abe00f63d28f88ca69fcee0fab4d6898cc63068412594563098a830",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_nls.c",
+      "original_sha256": "6cef4fc4adf6ce81f42cfa4ebfa9c1edb153a3ce651a69321f5b5022a9b6fa06",
+      "original_line": 99,
+      "current_line": 99,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "current_sha256": "89d73ca479d6b683b81a2197f9f9fafe4a7c5b0f2318402e3a44fba491e6eac1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_umb.c",
+      "original_sha256": "2a109f11985507463797e60b8b19fc12441bd18278b1444dde581cc351de72ed",
+      "original_line": 98,
+      "current_line": 98,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "current_sha256": "89d73ca479d6b683b81a2197f9f9fafe4a7c5b0f2318402e3a44fba491e6eac1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_umb.c",
+      "original_sha256": "2a109f11985507463797e60b8b19fc12441bd18278b1444dde581cc351de72ed",
+      "original_line": 167,
+      "current_line": 157,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "current_sha256": "89d73ca479d6b683b81a2197f9f9fafe4a7c5b0f2318402e3a44fba491e6eac1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_umb.c",
+      "original_sha256": "2a109f11985507463797e60b8b19fc12441bd18278b1444dde581cc351de72ed",
+      "original_line": 271,
+      "current_line": 210,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "current_sha256": "89d73ca479d6b683b81a2197f9f9fafe4a7c5b0f2318402e3a44fba491e6eac1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_umb.c",
+      "original_sha256": "2a109f11985507463797e60b8b19fc12441bd18278b1444dde581cc351de72ed",
+      "original_line": 319,
+      "current_line": 241,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "current_sha256": "89d73ca479d6b683b81a2197f9f9fafe4a7c5b0f2318402e3a44fba491e6eac1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_umb.c",
+      "original_sha256": "2a109f11985507463797e60b8b19fc12441bd18278b1444dde581cc351de72ed",
+      "original_line": 425,
+      "current_line": 305,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "current_sha256": "89d73ca479d6b683b81a2197f9f9fafe4a7c5b0f2318402e3a44fba491e6eac1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_umb.c",
+      "original_sha256": "2a109f11985507463797e60b8b19fc12441bd18278b1444dde581cc351de72ed",
+      "original_line": 516,
+      "current_line": 343,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "current_sha256": "89d73ca479d6b683b81a2197f9f9fafe4a7c5b0f2318402e3a44fba491e6eac1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_umb.c",
+      "original_sha256": "2a109f11985507463797e60b8b19fc12441bd18278b1444dde581cc351de72ed",
+      "original_line": 598,
+      "current_line": 387,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "current_sha256": "89d73ca479d6b683b81a2197f9f9fafe4a7c5b0f2318402e3a44fba491e6eac1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_umb.c",
+      "original_sha256": "2a109f11985507463797e60b8b19fc12441bd18278b1444dde581cc351de72ed",
+      "original_line": 630,
+      "current_line": 404,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "current_sha256": "89d73ca479d6b683b81a2197f9f9fafe4a7c5b0f2318402e3a44fba491e6eac1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_umb.c",
+      "original_sha256": "2a109f11985507463797e60b8b19fc12441bd18278b1444dde581cc351de72ed",
+      "original_line": 696,
+      "current_line": 444,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "current_sha256": "89d73ca479d6b683b81a2197f9f9fafe4a7c5b0f2318402e3a44fba491e6eac1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_umb.c",
+      "original_sha256": "2a109f11985507463797e60b8b19fc12441bd18278b1444dde581cc351de72ed",
+      "original_line": 744,
+      "current_line": 490,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_vga.c",
+      "current_sha256": "7a5d4b0b52af30faacb978c4258ccef3e8b3f6397425eb9ea4abae0df2c5cb1d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_vga.c",
+      "original_sha256": "81db9f2e415e58c21b0a10110d03d0f16532c2150aba84feb2cab8f74627ee6d",
+      "original_line": 36,
+      "current_line": 36,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_vga.c",
+      "current_sha256": "7a5d4b0b52af30faacb978c4258ccef3e8b3f6397425eb9ea4abae0df2c5cb1d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_vga.c",
+      "original_sha256": "81db9f2e415e58c21b0a10110d03d0f16532c2150aba84feb2cab8f74627ee6d",
+      "original_line": 1638,
+      "current_line": 1646,
+      "anchor_evidence": "s13-bfs-depth1-host-macro-contexts.json",
+      "arms_reconciled": 1
+    }
+  ],
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r170.zip",
+  "limitation": "inherits prior build and source-anchor evidence; hash-mismatched, structurally different, absent and ambiguous groups are not classified; no new compile."
+}

@@ -1,0 +1,54 @@
+{
+  "scope": "Unselected original NT SDK umbrella and subordinate IO/security headers",
+  "files": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nt.h",
+      "sha256": "471924fb89f0caac226f55ff87a3d7bf841d7802fdbd42457eb0464739db8808"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntioapi.h",
+      "sha256": "17a3a95add0ae2e2d76e98355dc2cd5431432640cb75cc2bf2ef4426d2219b9e"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntseapi.h",
+      "sha256": "f4082fd7d67a69df72dc2ef9c381758c7cc8a0e945c19213282211207f1f5f07"
+    }
+  ],
+  "mirror_sources": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nt.h",
+      "current_sha256": "471924fb89f0caac226f55ff87a3d7bf841d7802fdbd42457eb0464739db8808",
+      "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\nt.h",
+      "original_sha256": "c9fb3289b14c5e109c312050c05c064af3ee612822938f54ca12ddbb67472e2f",
+      "pinned_expected_sha256": "c9fb3289b14c5e109c312050c05c064af3ee612822938f54ca12ddbb67472e2f",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntioapi.h",
+      "current_sha256": "17a3a95add0ae2e2d76e98355dc2cd5431432640cb75cc2bf2ef4426d2219b9e",
+      "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntioapi.h",
+      "original_sha256": "fd7980ccd70169ce052baa8aa43388df2d8689f3bed43028a940093c52f9f6ee",
+      "pinned_expected_sha256": "fd7980ccd70169ce052baa8aa43388df2d8689f3bed43028a940093c52f9f6ee",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntseapi.h",
+      "current_sha256": "f4082fd7d67a69df72dc2ef9c381758c7cc8a0e945c19213282211207f1f5f07",
+      "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntseapi.h",
+      "original_sha256": "c380bc1fc7fb57ae6e55834ac5bbe1621a847f36119ff5b771d536eb6a120b30",
+      "pinned_expected_sha256": "c380bc1fc7fb57ae6e55834ac5bbe1621a847f36119ff5b771d536eb6a120b30",
+      "original_matches_pinned": true
+    }
+  ],
+  "removed_condition_groups": 52,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r138.zip",
+  "evidence": [
+    "Captured supported product/test preprocessing did not resolve to these original header paths.",
+    "Current worker Ninja dependencies resolve ntioapi.h through src/compat/include; current build flags force the compatibility nt.h.",
+    "Original nt.h is the sole current literal include site for the removed original ntseapi.h."
+  ],
+  "limitations": [
+    "This does not claim the compatibility declarations cover the full original NT SDK.",
+    "The historical T280 ABI verifier contains an obsolete pre-relocation source path and is not a current build gate."
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+  "before_sha256": "da1db0c309b1233b528cbfe920a55c9f5842299ddb4c2f6b2814503c5c0295b2",
+  "after_sha256": "d9b6ffb93f16a5325bba28369760062ca7ca0bd0a65269af8acd0f77489c4152",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+  "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+  "original_condition_line": 583,
+  "original_body_line": 584,
+  "original_endif_line": 596,
+  "original_continuation_line": 597,
+  "current_guard_line": 389,
+  "method": "split local selected wrapper around original excluded group; selected tokens unchanged; preserve original guard/body/continuation diagnostics",
+  "verification": {
+    "build": "x86 NTVDM, x64 reference worker, x86 WOW32 passed: build/t473-s13/r415-build.log",
+    "conditions": "x86 build/t473-s13/r415-tests.log and x64 build/t473-s13/r416-x64.log passed, including first-depth guard and positive/negative FE_IME controls",
+    "package": "s13-r415-package-compare.json: 82 files identical to r411; WOW32 differs only in 4 PE/debug timestamp bytes",
+    "queue": "1,110 hashes match; 2,336 excluded arms scanned without detected remnants or stale positions",
+    "limitations": "other original pending groups remain unresolved; no depth closure or publication claimed",
+    "selected_preprocessing": "s13-r418-server-selected-preprocess.json: actual x86 WOW32 product flags; raw output differs in blank lines, all nonblank lines byte-identical"
+  }
+}

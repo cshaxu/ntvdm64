@@ -72,11 +72,13 @@ GLOBAL BOOL	ConsoleNoUpdates = FALSE;
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
-#line 77
+#line 76
 GLOBAL BOOL blocked_in_gfx_mode = FALSE;  /* need to force text mode? */
+#line 77
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
+#line 80
 
 /* We have to prevent bad values from oddball video cards (eg Prodesigner II
  * EISA) from blatting us before we can load our private baby mode table in
@@ -219,10 +221,12 @@ GLOBAL VOID nt_init_event_thread(VOID)
 }
 
 
+#line 220
 #ifdef X86GFX
+#line 221
 #error Unsupported excluded original configuration
 #endif /* X86GFX */
-#line 514
+#line 511
 
 /*
 ***************************************************************************
@@ -364,10 +368,12 @@ GLOBAL VOID ConsoleInit(VOID)
 
     note_entrance0("ConsoleInit");
 
+#line 675
 #ifdef X86GFX
+#line 676
 #error Unsupported excluded original configuration
 #endif
-#line 696
+#line 687
     initTextSection();
 
     /*
@@ -494,15 +500,16 @@ GLOBAL VOID ResetConsoleState(VOID)
 	** This keeps the window re-sizing issue nice and simple, but there'll  
 	** be people who don't like having a DOS window size forced upon them.  
 	*/                                                                      
+#line 902
 #if 0                                                                           
 #error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif	//Zero
-#line 934
+#line 925
 
 #if 0
 #error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
-#line 973
+#line 964
 	/*
 	** Tim, September 92. Put the Console cursor to the same place as the
 	** SoftPC cursor. We already do this in full-screen text mode below.
@@ -513,10 +520,12 @@ GLOBAL VOID ResetConsoleState(VOID)
 
         doNullRegister();   /* revert console back to ordinary window */
 
+#line 974
 #ifdef X86GFX
+#line 975
 #error Unsupported excluded original configuration
 #endif /* X86GFX */
-#line 1202
+#line 1205
 
     /*Put console's cursor back to the shape it was on startup.*/
     SetConsoleCursorInfo(sc.OutputHandle, &StartupCursor);
@@ -940,11 +949,13 @@ VOID setVDMCursorPosition(UTINY height, PCOORD cursorPos)
 #ifdef X86GFX
 #error Unsupported excluded original configuration
 #endif
-#line 2053
+#line 2025
     {
+#line 2026
 #ifdef MONITOR
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
+#line 2029
         do_new_cursor();      /* make sure the emulation knows about it */
     }
 }

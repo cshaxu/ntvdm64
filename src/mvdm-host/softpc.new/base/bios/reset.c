@@ -83,9 +83,12 @@
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif		/* GISP_SVGA */
 #include "hunter.h"
+#line 86
 #ifdef LICENSING
+#line 87
 #error DIVERGENCE MVDM-HOST-DIV-531: LICENSING branch is not selected; see mirror register.
 #endif /* LICENSING */
+#line 89
 
 /* Exports */
 
@@ -295,7 +298,7 @@ half_word *low, *high;
 #line 310
 	low_switches |= (RAM_256KB | PPI_CO_PROCESSOR_NOT_PRESENT | NO_LOOP_ON_POST);
 #endif
-#line 312
+#line 322
 
 #ifdef FLOPPY_B
 #error Unsupported excluded original configuration
@@ -303,7 +306,7 @@ half_word *low, *high;
 #line 320
 	high_switches |= (PPI_ONE_DRIVE);
 #endif
-#line 322
+#line 332
 
 
     /* set the value of the high switches from the config settings */
@@ -311,9 +314,12 @@ half_word *low, *high;
     switch((ULONG)config_inquire(C_GFX_ADAPTER, NULL))
     {
     case CGA:
+#line 339
 #ifdef CGAMONO
+#line 340
 #error DIVERGENCE MVDM-HOST-DIV-531: CGAMONO branch is not selected; see mirror register.
 #endif
+#line 342
 	high_switches |= (PPI_CGA_80_COLUMN);
 	break;
     case MDA:
@@ -328,9 +334,12 @@ half_word *low, *high;
 	break;
 #endif
     case HERCULES:
+#line 356
 #ifdef HERC
+#line 357
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif
+#line 359
     default:
 	break;
     }
@@ -357,10 +366,12 @@ GLOBAL CHAR *get_copyright IFN0()
 
 
 
+#line 385
 #ifndef PROD
+#line 386
 #error DIVERGENCE MVDM-HOST-DIV-590: non-PROD branch is not selected
 #endif /* PROD */
-#line 499
+#line 508
 
 void reset()
 {
@@ -618,7 +629,9 @@ void reset()
 	 * indicates the existance ( or otherwise ) of a co-processor, such as
 	 * an 8087 floating point chip.
 	 */
+#line 812
 #ifdef IPC
+#line 813
 #error Unsupported excluded original configuration
 #endif /* IPC */
 #line 815
@@ -635,7 +648,7 @@ void reset()
 #else /* PRINTER */
 #error Unsupported excluded original configuration
 #endif /* PRINTER */
-#line 772
+#line 828
 	equip_flag.bits.game_io_present = FALSE;
 	equip_flag.bits.rs232_count = NUM_SERIAL_PORTS;
 	equip_flag.bits.ram_size = 0;
@@ -688,16 +701,18 @@ void reset()
 #ifndef NTVDM	/* No signon for NTVDM - transparent integration */
 #error Excluded unsupported non-NTVDM BIOS signon profile
 #endif	/* NTVDM */
-#line 898
+#line 985
 
 	/* Now search for extra ROM modules */
 	search_for_roms();
 
 	/* Now initialise the other BIOS handlers */
+#line 990
 #if defined (GEN_DRVR) || defined (CDROM)
+#line 991
 #error Unsupported excluded original configuration
 #endif /* GEN_DRVR || CDROM */
-#line 906
+#line 993
 
 	for (adapter = 0; adapter < NUM_SERIAL_PORTS; adapter++)
 	{
@@ -731,9 +746,12 @@ void reset()
 #error DIVERGENCE MVDM-HOST-DIV-528: SOFTWIN_API platform branch is not selected; see mirror register.
 #endif
 
+#line 1026
 #ifdef HUNTER
+#line 1027
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
+#line 1030
 
 #ifdef LIM
 #if !defined(SUN_VA) && !defined(NTVDM)
@@ -797,7 +815,9 @@ void reset()
 
 
 	/* Now perform any other initialisation of DOS Drivers */
+#line 1093
 #ifdef HFX
+#line 1094
 #error Unsupported excluded original configuration
 #endif
 #line 1096

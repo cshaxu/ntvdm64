@@ -1,0 +1,25 @@
+{
+  "scope": "Unselected original conapi.h duplicate",
+  "path": "src/non-mvdm/public/internal/windows/inc/conapi.h",
+  "sha256": "a8f80ca5f612a7918539f5bff7614bb41b870d6e8cb1fbf553076b1590508fc1",
+  "mirror_sources": [
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/conapi.h",
+      "current_sha256": "a8f80ca5f612a7918539f5bff7614bb41b870d6e8cb1fbf553076b1590508fc1",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\windows\\inc\\conapi.h",
+      "original_sha256": "1a78135501f91ac2a004cb68c5831c626e907481afc62970eb97747d16485de2",
+      "pinned_expected_sha256": "1a78135501f91ac2a004cb68c5831c626e907481afc62970eb97747d16485de2",
+      "original_matches_pinned": true
+    }
+  ],
+  "removed_condition_groups": 30,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r130.zip",
+  "evidence": [
+    "Current source and test includes resolve through src/compat/include/conapi.h in observed product and test preprocessing contexts; worker Ninja dependencies include that path.",
+    "No current explicit reference to the non-mvdm header path was found."
+  ],
+  "limitations": [
+    "Existing legacy dependency records may name old relocated paths; they are not current build inputs.",
+    "The retained compatibility header is not claimed to reproduce the full original console interface."
+  ]
+}

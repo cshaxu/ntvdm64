@@ -1,0 +1,22 @@
+{
+  "source": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/class.c",
+  "source_sha256": "40dc0a6b96414d7e920c16d1006f53df7bb1dc2e928732bba0961bc2def7cc05",
+  "contexts": [
+    {
+      "target": "obj/opennt-user/class.obj",
+      "dbg_defined": false,
+      "command_sha256": "6605fe3dd3fb8ddd2dc800f6bf67259cccabd6255a84d6b4ed065880c9144d0f"
+    },
+    {
+      "target": "obj/opennt-user/class-remove.obj",
+      "dbg_defined": false,
+      "command_sha256": "3f429dd4978e271964944d475f74d1fb5ab370be45c2a5a16152c26e61fe07ff"
+    },
+    {
+      "target": "obj/opennt-user/class-register.obj",
+      "dbg_defined": false,
+      "command_sha256": "a12e7d14456758908a1cd6884090e1f749c3ee8a6f115a0d0cd59e61333b1fa5"
+    }
+  ],
+  "limits": "project macro state observed after including current subset; omitted original function may have modified macro state, inspect original before restoring"
+}

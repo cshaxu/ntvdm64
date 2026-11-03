@@ -1,0 +1,52 @@
+{
+  "source": "src/non-mvdm/base/win32/client/vdm.c",
+  "old_commit": "HEAD exact recorded baseline",
+  "old_sha256": "9eb4b0dd076219c6ad22f2c03da350354119bb6956487241d5bc6ac3634a8b25",
+  "current_sha256": "ac428b7dd5601f907c98e51967c741072d24519fd28ecc180b900e56007d52c0",
+  "method": "MSVC /EP, exact Ninja target flags, identical scratch source path; nonblank stripped lines hashed. ntSend.h copied without modification.",
+  "contexts": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/opennt-base-vdm/vdm.obj",
+      "old_sha256": "74b050e8b19e3f3b25e86fb3f85f92e243c92c9ad52dd218b5738fba748ab7d9",
+      "current_sha256": "74b050e8b19e3f3b25e86fb3f85f92e243c92c9ad52dd218b5738fba748ab7d9",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/opennt-base-client/client.obj",
+      "old_sha256": "0151c97acfce0d49c94fae1aa211f720af3f6d1a28239985a40e96648ac6b6c6",
+      "current_sha256": "0151c97acfce0d49c94fae1aa211f720af3f6d1a28239985a40e96648ac6b6c6",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/opennt-base-client/classifier.obj",
+      "old_sha256": "8030e1c3e8b12ec12c40eed88f750fdc3a5c3f3d3b8efb673bbabd1b85a5d285",
+      "current_sha256": "8030e1c3e8b12ec12c40eed88f750fdc3a5c3f3d3b8efb673bbabd1b85a5d285",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/opennt-base-vdm/vdm.obj",
+      "old_sha256": "74b050e8b19e3f3b25e86fb3f85f92e243c92c9ad52dd218b5738fba748ab7d9",
+      "current_sha256": "74b050e8b19e3f3b25e86fb3f85f92e243c92c9ad52dd218b5738fba748ab7d9",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/opennt-base-client/client.obj",
+      "old_sha256": "0151c97acfce0d49c94fae1aa211f720af3f6d1a28239985a40e96648ac6b6c6",
+      "current_sha256": "0151c97acfce0d49c94fae1aa211f720af3f6d1a28239985a40e96648ac6b6c6",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/opennt-base-client/classifier.obj",
+      "old_sha256": "8030e1c3e8b12ec12c40eed88f750fdc3a5c3f3d3b8efb673bbabd1b85a5d285",
+      "current_sha256": "8030e1c3e8b12ec12c40eed88f750fdc3a5c3f3d3b8efb673bbabd1b85a5d285",
+      "equal": true
+    }
+  ],
+  "limits": "Tests selected preprocessed text only; excludes diagnostics and does not establish other contexts, link or runtime behavior."
+}

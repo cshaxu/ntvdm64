@@ -1,0 +1,91 @@
+{
+  "scope": "first 12 actual WOW32 dependency objects using scratch user.h wrapper; no per-consumer source edits",
+  "rows": [
+    {
+      "target": "obj/wuser31.obj",
+      "object_created": true,
+      "error_count": 0,
+      "first_error": null,
+      "log_sha256": "3626344330950db15d0c425ecde0a7f337d2f6e2a9bd8cc91fe29f496e459e50"
+    },
+    {
+      "target": "obj/wuclip.obj",
+      "object_created": true,
+      "error_count": 0,
+      "first_error": null,
+      "log_sha256": "b1ca95eb6d54c16a9132f5b503a092c32fa1f60c527b6e5bb7ad9b08208e9ff0"
+    },
+    {
+      "target": "obj/opennt-user/control-body-editec.obj",
+      "object_created": false,
+      "error_count": 24,
+      "first_error": "error C2081: 'PDLG': name in formal parameter list illegal\r",
+      "log_sha256": "009b90ba33def22b4d91dc39a495b91ff5408da1af76620e3b9e3976abab9788"
+    },
+    {
+      "target": "obj/opennt-user/control-body-edecrare.obj",
+      "object_created": false,
+      "error_count": 24,
+      "first_error": "error C2081: 'PDLG': name in formal parameter list illegal\r",
+      "log_sha256": "774504c42edd33d66bca02ce86b4d5d0e802840699650b332d8e600b8761a6ff"
+    },
+    {
+      "target": "obj/opennt-user/control-body-editsl.obj",
+      "object_created": false,
+      "error_count": 24,
+      "first_error": "error C2081: 'PDLG': name in formal parameter list illegal\r",
+      "log_sha256": "2f513cdffebc1466edf63764b6e36193ddf22c6c2559f33ecffb3620d395b4a4"
+    },
+    {
+      "target": "obj/opennt-user/control-body-editml.obj",
+      "object_created": false,
+      "error_count": 24,
+      "first_error": "error C2081: 'PDLG': name in formal parameter list illegal\r",
+      "log_sha256": "8f6f272267b59ecb2debf677d646440f88501b91e301b0818da00356ff32a11b"
+    },
+    {
+      "target": "obj/opennt-user/control-body-edmlonce.obj",
+      "object_created": false,
+      "error_count": 24,
+      "first_error": "error C2081: 'PDLG': name in formal parameter list illegal\r",
+      "log_sha256": "a188a68f2f88e3f6dcf98aa269537598591823bb1fc840ec5f0a11cc6fd503f3"
+    },
+    {
+      "target": "obj/opennt-user/control-body-edmlrare.obj",
+      "object_created": false,
+      "error_count": 24,
+      "first_error": "error C2081: 'PDLG': name in formal parameter list illegal\r",
+      "log_sha256": "c6353b9662bb555702394aa9ae52be38320daf946887a9da1dd6fa386a57ad15"
+    },
+    {
+      "target": "obj/opennt-user/control-body-edslrare.obj",
+      "object_created": false,
+      "error_count": 24,
+      "first_error": "error C2081: 'PDLG': name in formal parameter list illegal\r",
+      "log_sha256": "384c802fe7b207fa2814a583a2152a7050b6bcda229bcc23450e410faf30edcf"
+    },
+    {
+      "target": "obj/opennt-user/control-body-combo.obj",
+      "object_created": false,
+      "error_count": 24,
+      "first_error": "error C2081: 'PDLG': name in formal parameter list illegal\r",
+      "log_sha256": "cb7f5b3bbbb2f1b138745e31ec5dc22a9280595516730d9e4f04993be86fe0d5"
+    },
+    {
+      "target": "obj/opennt-user/control-body-combodir.obj",
+      "object_created": false,
+      "error_count": 24,
+      "first_error": "error C2081: 'PDLG': name in formal parameter list illegal\r",
+      "log_sha256": "d5e3022c4553e35f23d223b533c5c9b0aceea47752811d42053857f4795cb150"
+    },
+    {
+      "target": "obj/opennt-user/control-body-comboini.obj",
+      "object_created": false,
+      "error_count": 24,
+      "first_error": "error C2081: 'PDLG': name in formal parameter list illegal\r",
+      "log_sha256": "806186aa0661ba0914b7c82bd6ec6e1eac7d5cd6c1e53bca04ec3b3302e02202"
+    }
+  ],
+  "summary": "2 produced objects without compiler errors; 10 did not produce objects and reported 24 errors each, beginning with undeclared PDLG",
+  "limits": "A batch redirection mistake lost per-command exit status, so classification uses object existence and compiler log errors, not saved process exit codes. Build command paths were derived from actual Ninja entries; no linking or runtime tests. A different source-order candidate passed one different target separately."
+}

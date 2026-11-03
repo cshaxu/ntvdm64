@@ -159,7 +159,9 @@ ERROR RECOVERY    :     errors are ignored
 #include "idetect.h"
 
 #include "debug.h"
+#line 162
 #ifndef PROD
+#line 163
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 166
@@ -240,10 +242,12 @@ LARGE_INTEGER CreepTicCount;
 int    HeartBeatResumes=0;
 BOOL   bDoingTicInterrupt=FALSE;
 BOOL   bUpdateRtc;
-#if defined(MONITOR) && defined(X86GFX)
+#line 241
+#if defined (MONITOR) && defined (X86GFX)
+#line 242
 #error Excluded unsupported monitor timer switch state
 #endif
-#line 239
+#line 244
 
 
 
@@ -255,6 +259,7 @@ BOOL   bUpdateRtc;
 /*::::::::::::::::::::::::: NT timer initialise ::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
+#line 251
 void host_timer_init(void)
 {
 
@@ -427,9 +432,12 @@ void host_timer_event()
 
 
 
+#line 427
 #ifdef YODA
+#line 428
 #error Excluded unsupported YODA configuration
 #endif
+#line 430
 
     host_com_heart_beat();              //  com  device
 

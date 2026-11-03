@@ -49,9 +49,12 @@
 #define GRAPH_FONT_OFFSET 12
 
 /* Location of font definitions */
+#line 52
 #if 0
+#line 53
 #error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#line 62
 
 #ifdef VGG
 /* Flags controlling extra bits of VGA BIOS, not in EGA one */
@@ -94,12 +97,14 @@ extern sys_addr follow_ptr(sys_addr);
 #else
 #error Unsupported excluded original configuration
 #endif /* ANSI */
-#line 99
+#line 106
 
+#line 107
 #ifdef MSWDVR
+#line 108
 #error Unsupported excluded original configuration
 #endif
-#line 103
+#line 110
 
 #ifdef V7VGA
 IMPORT VOID v7vga_extended_set_mode IPT0();

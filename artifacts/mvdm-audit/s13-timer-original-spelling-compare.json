@@ -1,0 +1,18 @@
+{
+  "baseline": "build\\t473-s13\\niddb-rollback-final\\package\\system32\\ntvdm.exe",
+  "candidate": "build\\t473-s13\\timer-original-spelling-ntvdm.exe",
+  "baseline_sha256": "b9385aba3625e563418411a3fb2becd1203133de5c0fa6e1d5f20610c8c80e8a",
+  "candidate_sha256": "c0d889e60cc9e9886d54f39610a3a07a2e617bd0d6273998fc24e458388d70fe",
+  "lengths": [
+    2103808,
+    2103808
+  ],
+  "differing_positions": [
+    288,
+    289,
+    1698412,
+    1698413
+  ],
+  "difference_count": 4,
+  "only_previously_verified_timestamp_offsets": true
+}

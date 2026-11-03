@@ -171,14 +171,7 @@ $hostExportDefinition = Join-Path $hostEntryRoot 'ntvdm.src'
 $redirResourceSource = Join-Path $redirRoot 'vdmredir.rc'
 $redirExportDefinition = Join-Path $redirRoot 'vdmredir.def'
 $ccpuNames = Get-OriginalSources $ccpuManifest
-# The historical manifest carries the real FPU body and a host-profile stub
-# carrier in the same lexical list.  The selected CPU_40/FPU profile is the
-# real `fpu.c` body; selecting `ntstubs.c` beside it creates duplicate FPU and
-# SAS fallback definitions during a complete-library forced link.  Retain the
-# original stub as mirror evidence, but do not select the alternate body for
-# this profile.  The separately selected NTVDMx64 CCPU-vector-default patch
-# owns only its registered default symbols.
-$ccpuNames = @($ccpuNames | Where-Object { $_ -ne 'ntstubs.c' })
+# The selected profile uses the original FPU body, not the excluded stub.
 # vglob's CCPU-local GDP profile is not the selected C-VID layout. Compile
 # the identical shared original below with the C-VID header/profile instead.
 $ccpuNames = @($ccpuNames + 'localfm.c') | Select-Object -Unique
@@ -728,8 +721,8 @@ $includeRootPaths = @(
     'src/mvdm-host/vdmredir',
     'src/mvdm-host/softpc.new/base/ccpu386',
     'src/mvdm-host/softpc.new/host/inc',
-    # Original sas.h includes generated sas4gen.h. The selected mirror retains
-    # the CVIDC generated carrier; the historical host/genPg output is absent.
+    # C-VID headers remain here; sas4gen.h resolves from the earlier selected
+    # x86 generated include directory.
     'src/mvdm-host/softpc.new/base/cvidc',
     'src/mvdm-host/dos/dem',
     'src/mvdm-host/softpc.new/base/inc',
@@ -1114,10 +1107,8 @@ $graph.Add('build ' + $object + ': cc_host ' + (NinjaPath (Join-Path $hostRoot $
         $graph.Add('  host_cflags = ' + $hostFlags + ' /DMONITOR')
     } elseif ($name -in @('nt_timer.c', 'nt_thred.c', 'nt_com.c', 'nt_event.c', 'nt_error.c')) {
         $threadCompat = NinjaPath (Join-Path $root 'src/compat/include/thread_start_compat.h')
-        # `nt.h` from the modern SDK can predefine the historical include
-        # guard before the original source reaches <ntexapi.h>.  Force the
-        # selected opennt-host subset after nt.h so the original timer's
-        # declarations stay visible on both architectures.
+        # The timer uses the selected original NT service declarations even
+        # though it does not include <ntexapi.h> directly.
         $ntexapiSubset = NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc/ntexapi.h')
         # Both entry points already use WINAPI; a cdecl thunk double-pops
         # their callback argument on x86 when the thread routine returns.
@@ -2067,26 +2058,10 @@ $graph.Add('build keyboard-controller-pic-test.exe: memory_test_link obj/tests/k
 $graph.Add('build obj/tests/pic_reset_eoi_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/pic_reset_eoi_test.c')))
 $graph.Add('build pic-reset-eoi-test.exe: memory_test_link obj/tests/pic_reset_eoi_test.obj ' + $boundedExecutionFixtureSeamsObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $wowPageDomainFixtureObject = 'obj/tests/wow_page_domain_fixture.obj'
-$wowUserObjectFixtureObject = 'obj/adapter-wow/wow_user_object_bindings.obj'
-$wowMenuClientFixtureObject = 'obj/adapter-wow/wow_menu_client_bindings.obj'
-$wowMenuCleanupFixtureObjects = @(
-    @('obj/adapter-wow/wow_menu_native_bindings.obj', 'src/wow32-dll/source/wow_menu_native_bindings.c'),
-    @('obj/tests/wow_menu_runtime.obj', 'src/ntvdm-exe/wow/wow_user_runtime.c'),
-    @('obj/tests/wow_original_cleanup.obj', 'src/non-mvdm/windows/core/ntuser/kernel/cleanup.c'),
-    @('obj/tests/wow_original_handtabl.obj', 'src/non-mvdm/windows/core/ntuser/kernel/handtabl.c'),
-    @('obj/tests/wow_original_probe.obj', 'src/non-mvdm/base/ntos/ex/probe.c'),
-    @('obj/adapter-wow/wow_cleanup_bindings.obj', 'src/wow32-dll/source/wow_cleanup_bindings.c')
-)
-foreach ($pair in $wowMenuCleanupFixtureObjects) {
-    $graph.Add('build ' + $pair[0] + ': cc ' + (NinjaPath (Join-Path $root $pair[1])))
-    if ($pair[0] -eq 'obj/tests/wow_original_cleanup.obj') {
-        $graph.Add('  cflags = $cflags /Gz')
-    }
-}
+# The executable needs the actual WOW32 provider closure, owned by the
+# lifecycle verifier. Keep its worker-compiled fixture object here; do not
+# maintain a second, inevitably incomplete provider link in this graph.
 $graph.Add('build ' + $wowPageDomainFixtureObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/wow_page_domain_fixture.c')))
-$graph.Add('build ' + $wowUserObjectFixtureObject + ': cc ' + (NinjaPath (Join-Path $wow32DllRoot 'source/wow_user_object_bindings.c')))
-$graph.Add('build ' + $wowMenuClientFixtureObject + ': cc ' + (NinjaPath (Join-Path $wow32DllRoot 'source/wow_menu_client_bindings.c')))
-$graph.Add('build wow-page-domain-test.exe: memory_test_link ' + $wowPageDomainFixtureObject + ' ' + $wowUserObjectFixtureObject + ' ' + $wowMenuClientFixtureObject + ' ' + (($wowMenuCleanupFixtureObjects | ForEach-Object { $_[0] }) -join ' ') + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 # INT 2Ah publication now exercises the production native FlatAddress cache
 # and its original DIB mapping owner, not just an isolated LDT word copy.
 $graph.Add('build cpu40-descriptor-domain-fixture.exe: memory_test_link ' + $cpu40DescriptorDomainFixtureObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)

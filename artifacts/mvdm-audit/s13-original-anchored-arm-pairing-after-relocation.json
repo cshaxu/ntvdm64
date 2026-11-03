@@ -1,0 +1,11 @@
+{
+  "pairs": [],
+  "skipped": [
+    [
+      "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "large file deferred"
+    ]
+  ],
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r184.zip",
+  "scope": "first-depth only; inherited current evidence; not a new build"
+}

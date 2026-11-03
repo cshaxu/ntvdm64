@@ -164,7 +164,7 @@ int terminal_type = TERMINAL_TYPE_DEFAULT;
 #line 163
 #define	SET_VGLOBS_MARK_STRING(func)	setVideomark_string(func);
 #endif	/* NO_STRING_OPERATIONS */
-#line 165
+#line 191
 
 
 /* Parts of update and paint routines assume start of screen memory is on

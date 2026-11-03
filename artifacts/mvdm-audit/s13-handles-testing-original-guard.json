@@ -1,0 +1,32 @@
+{
+  "source": "src\\non-mvdm\\windows\\core\\ntuser\\client\\handles.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\handles.c",
+  "original_sha256": "29742b05ec55182515971ca67b54e3e0c4ad724feecd482fd50ea2e398e9c2f2",
+  "before_sha256": "8b901bc1248821850532d637c65c1e735c90057653b8df698235c96c012c3dac",
+  "after_sha256": "491a88042122f40bffe7580933bf542ab79f075d2ca502200bf53114e070f49e",
+  "original_guard_line": 38,
+  "original_else_line": 59,
+  "original_selected_line": 60,
+  "retained_function_line": 293,
+  "selected": "original empty CheckHandleTable macro, unused by the sole current include owner",
+  "verification": "Actual WOW32 object include context normal preprocess passed; /DTESTING=1 rejected the probe. Source is included by wow_user_object_bindings.c; no other direct include found.",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r238.zip",
+  "normal_preprocess_exit": 0,
+  "forced_testing_exit": 2,
+  "forced_error_original_line": 39,
+  "wow32_build": "passed",
+  "call_boundaries_build": "passed",
+  "identity_stamped_wow32_diff_offsets": [
+    280,
+    281,
+    625412,
+    625413
+  ],
+  "identity_stamped_wow32_baseline": "conditional-checkpoint-231/package/system32/WOW32.DLL",
+  "reusable_regression": {
+    "suite": "tests/build/test_mirror_rejected_conditions.py",
+    "arch": "x86",
+    "result": "pass 182 retained guards normal/rejected profiles",
+    "log_sha256": "149922acb42ed08dcfcbd8d4be41e6d27e5028a906baffe95a8fc14626681d81"
+  }
+}

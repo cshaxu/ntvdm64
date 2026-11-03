@@ -30,6 +30,9 @@
 #include "precomp.h"
 #pragma hdrstop
 
+#line 33
 #if 0
+#line 34
 #error DIVERGENCE MVDM-HOST-DIV-495: original inactive legacy multimedia branch excluded; see mirror register.
 #endif
+#line 763

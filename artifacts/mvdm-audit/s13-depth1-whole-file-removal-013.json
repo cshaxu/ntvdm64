@@ -1,0 +1,402 @@
+{
+  "scope": "Unselected historical VDM debugger extension source, resources and tracked build products",
+  "files": [
+    {
+      "path": "src/mvdm-host/vdmexts/data.c",
+      "sha256": "ab03f1ed03e509e559098703e143bde518d0a07d239741602c0d84242cf0fe66"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/debug.c",
+      "sha256": "ff948f23670c79f9227a243fd3fe3d61dbc09e62ff5640274141017bec4e2a46"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/dib.c",
+      "sha256": "0c1e790e99bf96ea87a858c5f1baee25760700c2784a800500e481f5e4d479aa"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/disasm.c",
+      "sha256": "2f2d222cc0ac8709ea97600ad841fbcdd3ce8e862c11d950c74c64ce4725a8ce"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/heap.c",
+      "sha256": "e755b169abe903a25d2f55bc368e4a249300afdbffca2ffa2ba9251f3b546b5e"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/help.c",
+      "sha256": "226ea21e3f4b7e8b2a633fd15127e94becfe4d904eea3e9b91bee5c3689fdeef"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/i386/profile.c",
+      "sha256": "00cbae22a37dc4c8f9b0b7e848fc079fedabc8f8efd3fbc34c9f0ffb9c6f15bc"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/i386/regs.c",
+      "sha256": "c80bf59b218f8b1716d4ee0fccfc898f71b508b9d5c14c476c2bc53502919f75"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/i386/vdmtib.c",
+      "sha256": "8694ad14106b1448bb729ead1a384d1034ab3be57772bab5967871189468e5d0"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/makefile",
+      "sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/misc.c",
+      "sha256": "b6757f032042b7b1eb431a026e54e1bf08a4662ca522e6dd0d76fda1d3a0a647"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/i386/data.obj",
+      "sha256": "1e3977210d88cefea0b42ff8446fc042bda157fa4ef3db176b000240df3129ab"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/i386/debug.obj",
+      "sha256": "294fc990a49c051d1a101a7c62072edaf565f19ce22e5f6e7e72994381d7fe8d"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/i386/dib.obj",
+      "sha256": "eb5eecfab59caa7b5153e14f280da0ef2b1010499d419be101ccefff0a059208"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/i386/disasm.obj",
+      "sha256": "8bb147db148b8e2779d28759e475a0de2c18df29222fa061d3970908d11b1d35"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/i386/heap.obj",
+      "sha256": "5a3a2c4d912bf44587e9a94f21792ff32bba6622b9bafb3162c6be9882ea3314"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/i386/help.obj",
+      "sha256": "9bdefcf9cd40c48729877071e5fc3e0552d266aee177f1d14f87822fd22508ac"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/i386/misc.obj",
+      "sha256": "6390ed32d8fe28a9f71301884db1b623592e4554bbc3cbc34f557672dd5e32a0"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/i386/precomp.obj",
+      "sha256": "f15fa925c4bf86c226f4befb82e994e6ae286508a7f649582619826f3db6a075"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/i386/precomp.pch",
+      "sha256": "2cc3f142b39363d1e811b989f036d7404987b42be26364c38c51c38be16abe32"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/i386/profile.obj",
+      "sha256": "e91b3aa8156bc503c9dd863e5c8f95ffe23876db127bfee98c2d868569d886a2"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/i386/stack.obj",
+      "sha256": "7db9e3fe4bc726e39ee08a63293c71cf40855fbcd0662537ff0404a292f5c165"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/i386/sym.obj",
+      "sha256": "3b6c3cc2915ed2fa46948a91773b54d4d5eb37d729eb4dbb9dc6df81a58ac1c2"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/i386/system.obj",
+      "sha256": "fd00d5f2cba1e92f307bb70e6140b8f851cab27cf562fcf7ce5368960b9d7d80"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/i386/trace.obj",
+      "sha256": "72e2fceaedd8505e2c06ce1621348c31e000433914d602a34e7f7b9d4a8d4170"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/i386/util.obj",
+      "sha256": "34043a2898e626dbe6526b7305a00756ee169fdf06008e8ede24069950daee8d"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/i386/vdmexts.dll",
+      "sha256": "5ad8d07da714e9d9c4391da5fbb75c6e5150c244d570fbbcd89171083b340170"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/i386/vdmexts.exp",
+      "sha256": "b5884801c3b159296e80342bf7809e0a04ba1cfa35576fa030069a5fff3b039d"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/i386/vdmexts.res",
+      "sha256": "bee423c893542f81b0ab0bdfc74d44a436ddfe276f1335c51563eda4a7cc0cfe"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/i386/wow.obj",
+      "sha256": "45cd4030bb7ce0df36d35dd930ec78ca04f9a7d5050464b701018fbef35e54c1"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/platform.c",
+      "sha256": "9cdfe0eee7f303359ebb06fa2fcc2de4a3561d5eb21e2d75f8bcd9fa7a5e2f7a"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/precomp.h",
+      "sha256": "694f59fe20cf1f92c22ee998802024ca0d7199617137fcddf501198154398f90"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/reflect.c",
+      "sha256": "15b4b9732351d7f5a4d76b169d2f46817e2e16e3e8e5b89d72409da69c4340c7"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/sources",
+      "sha256": "a6b6bd75a17201b5be6a5cb0c70648fcc1a6c79ffbae96dde2099920665ed9f3"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/stack.c",
+      "sha256": "4e89d1934a06693fd686a1be5b9a73236a580a688e6f02815d889434b719b827"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/sym.c",
+      "sha256": "7c8b982e39e0425a8e90f2ead7865fe06619990bee0bc61714f5c2a4e311bb17"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/system.c",
+      "sha256": "ead087eb0b03731bc4a0293b948d60d5cea8fb268965d301d6f022c53d9a0121"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/trace.c",
+      "sha256": "94e2682029bb028a4db48d49461761eeba73b798aa63516f4d6cb801222327cd"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/util.c",
+      "sha256": "86a2ad67c7832af1ea19311a307e661c66f521ad74506e7c7804c56f66286ee3"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/vdmexts.def",
+      "sha256": "6575072d005de0be3b92bf80d3ba1f0aee0bd3197f5ca7a8109c79631e90afc8"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/vdmexts.h",
+      "sha256": "e2841fce0dfb35d537e5b532c470b34a721338717f8470d25d45ade3a2e2a8c5"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/vdmexts.rc",
+      "sha256": "d5e5de4ad47ceabfef5cfabbd6cd99253b452003f80566eff1c721471e877aaa"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/wow.c",
+      "sha256": "2190f55373bdfcb0afd31cbbe4c8052e9907484f0c740f0c98bb6d97d1148797"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/wowprof.c",
+      "sha256": "44f00618339caf9b5f13855dbda1292e5f64de6979a93326a4cddb61a56c2458"
+    }
+  ],
+  "mirror_sources": [
+    {
+      "path": "src/mvdm-host/vdmexts/data.c",
+      "current_sha256": "ab03f1ed03e509e559098703e143bde518d0a07d239741602c0d84242cf0fe66",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmexts\\data.c",
+      "original_sha256": "75731661d637b1455ebb0166cd1ff8e7de35ae904d4118ec630b1d767e0199b5",
+      "pinned_expected_sha256": "75731661d637b1455ebb0166cd1ff8e7de35ae904d4118ec630b1d767e0199b5",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/debug.c",
+      "current_sha256": "ff948f23670c79f9227a243fd3fe3d61dbc09e62ff5640274141017bec4e2a46",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmexts\\debug.c",
+      "original_sha256": "35df768f94e937a09353c0daf51f0752187ac0c55d5befd65bd8817a1868ebec",
+      "pinned_expected_sha256": "35df768f94e937a09353c0daf51f0752187ac0c55d5befd65bd8817a1868ebec",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/dib.c",
+      "current_sha256": "0c1e790e99bf96ea87a858c5f1baee25760700c2784a800500e481f5e4d479aa",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmexts\\dib.c",
+      "original_sha256": "35266593ddf2ff1cf7965bdf99f5345c2791f62fed379d9b4f96fa51d9386d47",
+      "pinned_expected_sha256": "35266593ddf2ff1cf7965bdf99f5345c2791f62fed379d9b4f96fa51d9386d47",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/disasm.c",
+      "current_sha256": "2f2d222cc0ac8709ea97600ad841fbcdd3ce8e862c11d950c74c64ce4725a8ce",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmexts\\disasm.c",
+      "original_sha256": "6da5a9f7cf7510a0e93586aef7d25f3f14b149250bb7419422edeb32f0c8da71",
+      "pinned_expected_sha256": "6da5a9f7cf7510a0e93586aef7d25f3f14b149250bb7419422edeb32f0c8da71",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/heap.c",
+      "current_sha256": "e755b169abe903a25d2f55bc368e4a249300afdbffca2ffa2ba9251f3b546b5e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmexts\\heap.c",
+      "original_sha256": "3e4544bbd3030ea995b0d79c91ad34a45c6a022f8e67c69060454049b3489d8f",
+      "pinned_expected_sha256": "3e4544bbd3030ea995b0d79c91ad34a45c6a022f8e67c69060454049b3489d8f",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/help.c",
+      "current_sha256": "226ea21e3f4b7e8b2a633fd15127e94becfe4d904eea3e9b91bee5c3689fdeef",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmexts\\help.c",
+      "original_sha256": "d1d776c6733c3f692a4e72ddf8f7b983187a7c2a960ef3a1f505a8741f4d9942",
+      "pinned_expected_sha256": "d1d776c6733c3f692a4e72ddf8f7b983187a7c2a960ef3a1f505a8741f4d9942",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/i386/profile.c",
+      "current_sha256": "00cbae22a37dc4c8f9b0b7e848fc079fedabc8f8efd3fbc34c9f0ffb9c6f15bc",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmexts\\i386\\profile.c",
+      "original_sha256": "376c2fec8cb42783ca220165681d88fcd95c0eba155ea2b397a4ab1bd5431efa",
+      "pinned_expected_sha256": "376c2fec8cb42783ca220165681d88fcd95c0eba155ea2b397a4ab1bd5431efa",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/i386/regs.c",
+      "current_sha256": "c80bf59b218f8b1716d4ee0fccfc898f71b508b9d5c14c476c2bc53502919f75",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmexts\\i386\\regs.c",
+      "original_sha256": "d31ba6e3342c76df3dba260b21b0df25700f30d2c153a3c05b79353146b79c60",
+      "pinned_expected_sha256": "d31ba6e3342c76df3dba260b21b0df25700f30d2c153a3c05b79353146b79c60",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/i386/vdmtib.c",
+      "current_sha256": "8694ad14106b1448bb729ead1a384d1034ab3be57772bab5967871189468e5d0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmexts\\i386\\vdmtib.c",
+      "original_sha256": "f56ce99fa7d3166cfa82f825e3ac8beed562064a3cc9cce0285378e6e0c100e8",
+      "pinned_expected_sha256": "f56ce99fa7d3166cfa82f825e3ac8beed562064a3cc9cce0285378e6e0c100e8",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/misc.c",
+      "current_sha256": "b6757f032042b7b1eb431a026e54e1bf08a4662ca522e6dd0d76fda1d3a0a647",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmexts\\misc.c",
+      "original_sha256": "bfbf56ceda6cdb56e09ba098377b1edaa2aa9cfa168c3d79b083e74d754bfca9",
+      "pinned_expected_sha256": "bfbf56ceda6cdb56e09ba098377b1edaa2aa9cfa168c3d79b083e74d754bfca9",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/platform.c",
+      "current_sha256": "9cdfe0eee7f303359ebb06fa2fcc2de4a3561d5eb21e2d75f8bcd9fa7a5e2f7a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmexts\\platform.c",
+      "original_sha256": "3483655e311e105900194db2a9bd6083bc03bb2da943bdd16e8da29ab74f9e53",
+      "pinned_expected_sha256": "3483655e311e105900194db2a9bd6083bc03bb2da943bdd16e8da29ab74f9e53",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/precomp.h",
+      "current_sha256": "694f59fe20cf1f92c22ee998802024ca0d7199617137fcddf501198154398f90",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmexts\\precomp.h",
+      "original_sha256": "4a72dc0ab4119baad9b1eed2ed7c6cdc20d141e7fed9f52133eccbc2d0c5c9c1",
+      "pinned_expected_sha256": "4a72dc0ab4119baad9b1eed2ed7c6cdc20d141e7fed9f52133eccbc2d0c5c9c1",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/reflect.c",
+      "current_sha256": "15b4b9732351d7f5a4d76b169d2f46817e2e16e3e8e5b89d72409da69c4340c7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmexts\\reflect.c",
+      "original_sha256": "1776b1242808a0d3c456ed7725f16b55eacd2326bce5370c06f3d1a66048b433",
+      "pinned_expected_sha256": "1776b1242808a0d3c456ed7725f16b55eacd2326bce5370c06f3d1a66048b433",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/stack.c",
+      "current_sha256": "4e89d1934a06693fd686a1be5b9a73236a580a688e6f02815d889434b719b827",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmexts\\stack.c",
+      "original_sha256": "eb5992dad41aeb3d8cc325a49aae8f586e3fdf6552250d71bd84708c86525f39",
+      "pinned_expected_sha256": "eb5992dad41aeb3d8cc325a49aae8f586e3fdf6552250d71bd84708c86525f39",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/sym.c",
+      "current_sha256": "408503899b12b887fde5394e31990bf106a605bed1654d1324df46450d583f97",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmexts\\sym.c",
+      "original_sha256": "469c9612de293034fdbc7a74e1d2bd479222fe1cd3e1350f1f90c0737c2d701e",
+      "pinned_expected_sha256": "469c9612de293034fdbc7a74e1d2bd479222fe1cd3e1350f1f90c0737c2d701e",
+      "original_matches_pinned": true,
+      "working_sha256": "7c8b982e39e0425a8e90f2ead7865fe06619990bee0bc61714f5c2a4e311bb17"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/system.c",
+      "current_sha256": "ead087eb0b03731bc4a0293b948d60d5cea8fb268965d301d6f022c53d9a0121",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmexts\\system.c",
+      "original_sha256": "a9a4a81d076c075bb3bb1b6bf62be8ef45a8b5ec44de009f24bcdd1b9989feed",
+      "pinned_expected_sha256": "a9a4a81d076c075bb3bb1b6bf62be8ef45a8b5ec44de009f24bcdd1b9989feed",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/trace.c",
+      "current_sha256": "94e2682029bb028a4db48d49461761eeba73b798aa63516f4d6cb801222327cd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmexts\\trace.c",
+      "original_sha256": "167378c220d44d08cc9abbb7fb53948bc9d7ac6d6199473e05e9366a68d292c3",
+      "pinned_expected_sha256": "167378c220d44d08cc9abbb7fb53948bc9d7ac6d6199473e05e9366a68d292c3",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/util.c",
+      "current_sha256": "86a2ad67c7832af1ea19311a307e661c66f521ad74506e7c7804c56f66286ee3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmexts\\util.c",
+      "original_sha256": "572625bf57190ade673921f11a564c36e45f8458cbb5c63726b9d00d55e89702",
+      "pinned_expected_sha256": "572625bf57190ade673921f11a564c36e45f8458cbb5c63726b9d00d55e89702",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/vdmexts.h",
+      "current_sha256": "e2841fce0dfb35d537e5b532c470b34a721338717f8470d25d45ade3a2e2a8c5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmexts\\vdmexts.h",
+      "original_sha256": "1e79c2ae94e529e01122a087a728a16561c36d26c76052c06b18db5ded498e76",
+      "pinned_expected_sha256": "1e79c2ae94e529e01122a087a728a16561c36d26c76052c06b18db5ded498e76",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/wow.c",
+      "current_sha256": "2190f55373bdfcb0afd31cbbe4c8052e9907484f0c740f0c98bb6d97d1148797",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmexts\\wow.c",
+      "original_sha256": "385755e94188901161a9e22d63790210f25af014e0a06878655c86f0af856ec4",
+      "pinned_expected_sha256": "385755e94188901161a9e22d63790210f25af014e0a06878655c86f0af856ec4",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/wowprof.c",
+      "current_sha256": "44f00618339caf9b5f13855dbda1292e5f64de6979a93326a4cddb61a56c2458",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmexts\\wowprof.c",
+      "original_sha256": "ba37908b211095f7d8785690485390c924217ee1b82757f046cae8f99be6b73d",
+      "pinned_expected_sha256": "ba37908b211095f7d8785690485390c924217ee1b82757f046cae8f99be6b73d",
+      "original_matches_pinned": true
+    }
+  ],
+  "removed_guard_ledger_entries": [
+    {
+      "path": "src/mvdm-host/vdmexts/sym.c",
+      "macro": "0",
+      "line": 696,
+      "body_end": 740,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmexts\\sym.c",
+      "original_sha256": "469c9612de293034fdbc7a74e1d2bd479222fe1cd3e1350f1f90c0737c2d701e",
+      "local_sha256": "6f573b9ae9e0b14eea07f748a1fc4d22809acd886a8faa780b2de60fda202378",
+      "removed_body_sha256": "3925bf377bc463ff3056acc6c1037d44106562ec28eb1061cc5fa5f90d2e6c4d",
+      "removed_body_lines": 13,
+      "after_sha256": "a99602d5e36ab2e4281f225156f6bc1859aee86de80bb97280e320165bc49c96",
+      "final_sha256": "408503899b12b887fde5394e31990bf106a605bed1654d1324df46450d583f97"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/wowprof.c",
+      "macro": "0",
+      "line": 482,
+      "body_end": 493,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmexts\\wowprof.c",
+      "original_sha256": "ba37908b211095f7d8785690485390c924217ee1b82757f046cae8f99be6b73d",
+      "local_sha256": "623a3e64a9ec9fdfbc755905e68d28c1f8583a90ddb2ac55f53f618ea7c23dd1",
+      "removed_body_sha256": "fa374f5f62df8f8d707313903caf89b0c351ddfc0c77f97657162e96d9e0c0af",
+      "removed_body_lines": 11,
+      "after_sha256": "41cf3f4420bdc90d78f79d6e347af83081eed0a4b9966bbc552b190b080f3e57",
+      "final_sha256": "44f00618339caf9b5f13855dbda1292e5f64de6979a93326a4cddb61a56c2458"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/wowprof.c",
+      "macro": "0",
+      "line": 279,
+      "body_end": 305,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmexts\\wowprof.c",
+      "original_sha256": "ba37908b211095f7d8785690485390c924217ee1b82757f046cae8f99be6b73d",
+      "local_sha256": "623a3e64a9ec9fdfbc755905e68d28c1f8583a90ddb2ac55f53f618ea7c23dd1",
+      "removed_body_sha256": "d6f2c514c4c2b0a0e897388fa7be0b94592fab0df2d47be51f8505a3a3521a78",
+      "removed_body_lines": 26,
+      "after_sha256": "41cf3f4420bdc90d78f79d6e347af83081eed0a4b9966bbc552b190b080f3e57",
+      "final_sha256": "44f00618339caf9b5f13855dbda1292e5f64de6979a93326a4cddb61a56c2458"
+    }
+  ],
+  "removed_condition_groups": 62,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r117.zip",
+  "evidence": [
+    "No product graph or active build/test references to vdmexts package or DLL; remaining references are historical inventory and two exclusive rejection snippets.",
+    "Already removed tracked intermediates were left as their earlier recorded deletions."
+  ],
+  "limitations": [
+    "No claims about future debugger extension support."
+  ]
+}

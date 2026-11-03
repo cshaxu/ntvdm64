@@ -16,8 +16,8 @@
  * DIVERGENCE: retain only the unchanged same-address _USERK_ REBASE
  * definitions; omit unrelated RTL declarations and cross-address forms.
  * Selection describes pointer representation, not kernel execution. */
-#ifndef OPENNT_USERRTL_SAME_ADDRESS_SUBSET_H
-#define OPENNT_USERRTL_SAME_ADDRESS_SUBSET_H
+#ifndef _USERRTL_
+#define _USERRTL_
 
 #define REBASEALWAYS(p, elem) ((p)->elem)
 #define REBASEPTR(obj, p) (p)

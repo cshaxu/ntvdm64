@@ -27,6 +27,9 @@
  * ============================================================================
 ]*/
 
+#line 30
 #if defined(PIG)
+#line 31
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif /* PIG */
+#line 291

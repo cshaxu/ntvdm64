@@ -1,0 +1,20 @@
+{
+  "original": "O:\\repos.external\\OpenNT\\base\\ntos\\ex\\probe.c",
+  "original_sha256": "0d1cae414b609c624e6bdf04fa28ebd84ff38dbb9687a63d8bc9e840c2f2372b",
+  "current": "src/non-mvdm/base/ntos/ex/probe.c",
+  "current_sha256": "d5a4aa697600bba9c8d8a4be71103e88c548c6f93c7a6951c9c0557b978fd7d3",
+  "original_guard_line": 27,
+  "original_retained_body_line": 144,
+  "current_guard_line": 30,
+  "build": "MSVC x86 WOW32 cached build passed",
+  "compare": {
+    "previous_sha256": "783fff3145dfdfe01fbc145e3e6f63ca6b6d98aca689d58d363914e64f1dd6ae",
+    "current_sha256": "1bf07042f7a94028c22c80c4c819218928b0bb5ab8c72f68a34c6cbd92db79eb",
+    "differing_offsets": [
+      280,
+      281,
+      625412,
+      625413
+    ]
+  }
+}

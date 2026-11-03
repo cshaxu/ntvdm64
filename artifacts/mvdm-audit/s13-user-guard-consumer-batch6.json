@@ -1,0 +1,91 @@
+{
+  "scope": "20 additional actual x86 WOW32 units; isolated original user.h guard and candidate inclusion order",
+  "rows": [
+    {
+      "target": "obj/opennt-user/control-brush.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/dialog-memory.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/dialog-template.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-text.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-fnid.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/dialog-pointer.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/default-client.obj",
+      "resolved_section_differences": [
+        "('.text$mn', 2)"
+      ]
+    },
+    {
+      "target": "obj/opennt-user/control-rect.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/private-word-client.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/private-word-reader.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/private-word-setter.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/default-window-bits.obj",
+      "resolved_section_differences": [
+        "('.rdata', 4)",
+        "('.text$mn', 2)"
+      ]
+    },
+    {
+      "target": "obj/opennt-user/client-callproc.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/default-borders.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/default-messages.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-text-extent.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-text-rtl.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-draw.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-text-client.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/button-blit.obj",
+      "resolved_section_differences": []
+    }
+  ],
+  "limits": "COFF symbol-resolved sections only; scratch, no link/runtime verification. Earlier two batches must be rerun under final unified candidate."
+}

@@ -27,7 +27,9 @@ Stack (and related SP/BP access) Support.
 #include <fault.h>
 #include <ccpupig.h>
 
+#line 30
 #if	defined(PIG) && !defined(PROD)
+#line 31
 #error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
 #endif	/* PIG && !PROD */
 #line 37
@@ -289,9 +291,12 @@ IFN1(
       byte_change_SP((IS32)-4);
       addr = GET_SS_BASE() + GetStackPointer();
       vir_write_word(addr, NO_PHYSICAL_MAPPING, (IU16)data);
+#line 341
 #ifdef	PIG_DONT_CHECK_OTHER_WORD_ON_STACK
+#line 342
 #error DIVERGENCE MVDM-HOST-DIV-536: PIG_DONT_CHECK_OTHER_WORD_ON_STACK branch is not selected; see mirror register.
 #endif	/* PIG_DONT_CHECK_OTHER_WORD_ON_STACK */
+#line 344
       }
    }
 
@@ -375,7 +380,7 @@ IFN4(
 #ifdef SPC486
 #error Excluded unsupported SPC486 profile
 #else
-#line 376
+#line 463
 #define XX_error_code 0
 #endif
 #line 465

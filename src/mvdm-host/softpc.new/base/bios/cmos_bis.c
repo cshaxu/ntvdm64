@@ -52,9 +52,12 @@ AMENDMENTS	:
 #include "ios.h"
 #include "rtc_bios.h"
 
+#line 55
 #ifndef NTVDM
+#line 56
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 126
 
 
 /*

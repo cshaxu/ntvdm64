@@ -140,3 +140,25 @@ DefExit:
 }
 
 
+
+
+#line 68
+#ifdef FE_SB // PMAP_WINLOGON
+#line 69
+#error Unsupported FE_SB original branch
+#endif // FE_SB
+#line 71
+
+#line 745
+#ifdef DEBUG
+#line 746
+#error Unsupported DEBUG original branch
+#endif
+#line 751
+
+#line 827
+#ifdef DEBUG
+#line 828
+#error Unsupported DEBUG original branch
+#endif
+#line 833

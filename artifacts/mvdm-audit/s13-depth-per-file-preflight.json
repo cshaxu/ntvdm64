@@ -1,0 +1,38 @@
+{
+  "definition": "depth resets per file; include edges do not affect nesting",
+  "groups_found": 5440,
+  "files": 581,
+  "leads": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "line": 1971,
+      "recorded": 4,
+      "physical": 3,
+      "review": "Previously marked location_stale child; not a current first-layer depth error. Deferred until its parent is reconciled and child depth is admitted."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "line": 4795,
+      "recorded": 3,
+      "physical": 2,
+      "review": "Previously marked location_stale child; not a current first-layer depth error. Deferred until its parent is reconciled and child depth is admitted."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "line": 5186,
+      "recorded": 2,
+      "physical": 1,
+      "review": "Previously marked location_stale child; not a current first-layer depth error. Deferred until its parent is reconciled and child depth is admitted."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": 1282,
+      "recorded": 2,
+      "physical": 1,
+      "review": "Previously marked location_stale child; not a current first-layer depth error. Deferred until its parent is reconciled and child depth is admitted."
+    }
+  ],
+  "limits": "Heuristic lexical scan. Four apparent mismatches are stale child positions already marked in queue; this does not claim child completeness or correctness.",
+  "first_depth_mismatch_count": 0,
+  "stale_deeper_candidates": 4
+}

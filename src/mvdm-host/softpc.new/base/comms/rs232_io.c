@@ -83,9 +83,12 @@ void rs232_io()
       } bit;
    } parameters;
 #endif
+#line 80
 #ifdef BIT_ORDER1
+#line 81
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
+#line 91
 
    DIVISOR_LATCH divisor_latch;
    int j;

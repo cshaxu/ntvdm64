@@ -1,0 +1,5 @@
+{
+  "scope": "Exact reverse byte verification across recorded line-anchor changes",
+  "rows": [],
+  "limits": "Does not assert original branch behavior or classify missing evidence."
+}

@@ -16,9 +16,12 @@
 */
 
 #include <stdio.h>
+#line 19
 #if defined(NTVDM) && defined(MONITOR)
+#line 20
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
+#line 22
 
 #include TypesH
 #include MemoryH
@@ -69,9 +72,12 @@
 #define	V7VGAROM_FILENAME	"v7vga.rom"
 #endif /* V7VGAROM_FILENAME */
 
+#line 72
 #ifdef 	GISP_SVGA
+#line 73
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif
+#line 77
 
 #ifndef ADAPTOR_ROM_START
 #define ADAPTOR_ROM_START	0xc8000
@@ -157,9 +163,12 @@ patchCheckSum IFN3(PHY_ADDR, start, PHY_ADDR, length, PHY_ADDR, offset)
 	roundedLength = (length + 511) & (~511);
 	sas_connect_memory(start, start + roundedLength - 1, SAS_RAM);
 
+#line 161
 #ifndef PROD
+#line 162
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 178
 
 	signature = sas_PR16(start);
 	if (signature != 0xaa55) {
@@ -299,7 +308,7 @@ GLOBAL void rom_init IFN0()
 #else	/* !NTVDM | (NTVDM & !X86GFX) */
 #error Unsupported excluded original configuration
 #endif /* !NTVDM | (NTVDM & !X86GFX) */
-#line 317
+#line 343
 
 	host_rom_init();
 }

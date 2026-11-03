@@ -1,0 +1,37 @@
+{
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "before_sha256": "66a14d6f4fb27a3eaa51b99fc270d82ea1084ca5d6299f8c9a1e48224bd0c40a",
+      "after_sha256": "5109ca9321d5f67a16ed9a3d0eebce997ebf7048a0d6456fc7f857cd7931ff01",
+      "groups": [
+        {
+          "current_old_start": 26,
+          "current_old_end": 30,
+          "original_line": 1409,
+          "macro": "0"
+        },
+        {
+          "current_old_start": 31,
+          "current_old_end": 35,
+          "original_line": 2295,
+          "macro": "NEVER"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+      "before_sha256": "435a8ae75b59748894429f19e197a083f9bb795596a9b9ad48c9d38801256d08",
+      "after_sha256": "52b78f41ed85471b2a5bbfb4dae703bdaa9dc93c4e272479329c76ca89ae15eb",
+      "groups": [
+        {
+          "current_old_start": 144,
+          "current_old_end": 149,
+          "original_line": 68,
+          "macro": "FE_SB"
+        }
+      ]
+    }
+  ],
+  "reason": "original conditions are inside omitted executable/function or data initializer scope; file-scope placeholders withdrawn; original groups pending"
+}

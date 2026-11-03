@@ -1,0 +1,121 @@
+{
+  "fixed": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "sha256": "f8af567557ab2d3f895c93225ceb56b90d1c7e51cbc485212642e08eebd15462",
+      "groups": 31,
+      "changed": 30
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "sha256": "10447fb253fa3e6f769bd469769e10a440080256ada4851ad8de2c2e11b4bd04",
+      "groups": 5,
+      "changed": 5
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "sha256": "bd2cc4bad1327d13cd4f86efb66e587bfc59356ffa99593e6432ea07efb76fb5",
+      "groups": 7,
+      "changed": 7
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "groups": 19,
+      "changed": 19
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrinit.c",
+      "sha256": "b0a057a5e888d1ce9329e61fa58fdce4b8550977d58e65c91be8bdaca0a0f0f6",
+      "groups": 1,
+      "changed": 1
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmisc.c",
+      "sha256": "ae8f13a5ccbb38f8411c0d387d0abca7dd206cacd219736b8b31e9a5c4e34926",
+      "groups": 2,
+      "changed": 2
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "sha256": "3915e6734279cee1766836ca4436bb5373feb7e6e5242a00fe1cf83cc2bc97d0",
+      "groups": 36,
+      "changed": 35
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "groups": 64,
+      "changed": 62
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "groups": 80,
+      "changed": 80
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrputil.c",
+      "sha256": "eb0dfbf4e9b4089f65cc54e187a2480ef2b3ef9042dff0b275cf7fb723f8e8ce",
+      "groups": 1,
+      "changed": 1
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "sha256": "26e245025ef37e69f75721b86767c378ac50f274e5a3610ed312cad1d33b493c",
+      "groups": 8,
+      "changed": 8
+    },
+    {
+      "path": "src/mvdm-host/wow32/mapembed.c",
+      "sha256": "a58b5663135b9ca0f40b9148f35158671efbf7ff8920c95ecbc9d1518ea8dddd",
+      "groups": 1,
+      "changed": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcommdlg.c",
+      "sha256": "a72c354d1d05b1e2cf9f4fd70727bf227944a5556dee0ef0426ad4ee22593121",
+      "groups": 2,
+      "changed": 1
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.c",
+      "sha256": "356ebf6b2235e08b1493569ec6a7c37be0cb095802e723736878cf2b25b94b5f",
+      "groups": 3,
+      "changed": 1
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+      "sha256": "bc05f16d93a9fa2933aa057d0c9c8b6ca6f1ff6b97a4701d9509ac156311b6c5",
+      "groups": 1,
+      "changed": 1
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "sha256": "85a6e322a46388a1cceb9403f4fdb20670be38d6e8c1482a135b75625d57f0fc",
+      "groups": 3,
+      "changed": 3
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "sha256": "d321412ac340d83d55d034a9daf89e0fd594b1815fdbedecac9f749871cc83d2",
+      "groups": 3,
+      "changed": 3
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+      "sha256": "65a0ae3d65923ad5292213cf2c0f84bae48d91daebc6e087462bad42ed73c266",
+      "groups": 1,
+      "changed": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "groups": 95,
+      "changed": 65
+    }
+  ],
+  "deferred": [],
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r182.zip",
+  "method": "complete ordered root signatures match actual text; deeper locations flagged stale, not reviewed"
+}

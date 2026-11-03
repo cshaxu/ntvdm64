@@ -222,7 +222,7 @@ ULONG MoveInfoAddress;
     }
     mvdm_softpc_report_xms_move((ULONG)pSrc, (ULONG)pDst, cbTransfer, TRUE);
 #endif
-#line 220
+#line 209
     setAX(1);
     return;
 }

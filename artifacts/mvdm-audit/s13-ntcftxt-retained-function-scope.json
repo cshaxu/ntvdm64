@@ -1,0 +1,63 @@
+{
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+  "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+  "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r234.zip",
+  "retained_function_original_ranges": [
+    {
+      "name": "BOOL GetClassInfo(",
+      "first": 111,
+      "last": 155
+    },
+    {
+      "name": "LPTSTR StringDuplicate(",
+      "first": 578,
+      "last": 588
+    },
+    {
+      "name": "BOOL InitClsMenuName (",
+      "first": 595,
+      "last": 632
+    },
+    {
+      "name": "ATOM TEXT_FN(RegisterClassExWOW)(",
+      "first": 701,
+      "last": 844
+    },
+    {
+      "name": "BOOL UnregisterClass(",
+      "first": 1051,
+      "last": 1087
+    }
+  ],
+  "unreviewed_arm_count": 35,
+  "unreviewed_group_lines": [
+    38,
+    206,
+    217,
+    243,
+    254,
+    271,
+    310,
+    353,
+    369,
+    395,
+    414,
+    431,
+    514,
+    549,
+    934,
+    976,
+    992,
+    1096,
+    1111,
+    1122,
+    1191,
+    1295,
+    1317,
+    1434,
+    1505
+  ],
+  "groups_within_retained_functions": [],
+  "limits": "Only the five named current functions were compared. No arm is classified as unreachable or exempt from original-structure reconciliation; other current header code and scaffold placement require review."
+}

@@ -1,0 +1,125 @@
+{
+  "controls": [
+    {
+      "line": 19,
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 19,
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 304,
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 304,
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 435,
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 435,
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 719,
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 719,
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 776,
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 776,
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 795,
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 795,
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 835,
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 835,
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 911,
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 911,
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 15,
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 15,
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 135,
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 135,
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "arch": "x64",
+      "exit": 2
+    }
+  ],
+  "limits": "isolated forced WOW profiles; guest and omitted selected functions not tested"
+}

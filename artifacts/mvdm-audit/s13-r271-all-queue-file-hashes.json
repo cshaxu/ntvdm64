@@ -1,0 +1,860 @@
+{
+  "queue": "artifacts/mvdm-audit/s13-bfs-depth1-working-queue-195r271.zip",
+  "checked": 1110,
+  "missing": [],
+  "mismatches": [
+    {
+      "path": "src/mvdm-host/dos/dem/demdir.c",
+      "recorded": "ae23fe48cf1fc6c1bba1592c08faa2c5d07f7ab0fe447d38267d8fe9c651249d",
+      "actual": "7013b557f8d89527e719484c032bcb3befe8bf6f79cbd7c97eae49c737e1b9ac",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demlabel.c",
+      "recorded": "51a079e3a48523bedf993c0eb21f86682502d8740d27c3729f4db81bb3cb6a87",
+      "actual": "f77e781014ad34f6686fc3a94019bd82c995d7830ebd29f91dc358272ed30f22",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demlock.c",
+      "recorded": "0555541a04a44af24dcd316988f63aa841327843c982116859a0020d09fe0842",
+      "actual": "7716ab3be08f3532a60e3b05b2214bf1f8cb9f66f362b5f7f555dc3cd2755a71",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/register.c",
+      "recorded": "a4e1848b06b6ff138188235b67984ab8f68bc87d99025f37f2cd1956a3f40ad6",
+      "actual": "98e8c569ac743fa59fa6ede4118259bb18fc3cfd5d387f9c2b9cce8ece7c0b45",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/vxd.c",
+      "recorded": "240af56e0a6644e1e4465be781858fb7bbbe581ad062b7b62ed0bca7f3436c22",
+      "actual": "c42db46a3e7f985b83988668778613ba497b0a940f2aef4e0a2e082e54d8dd3a",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/inc/sharewow.h",
+      "recorded": "e51d6da5652d4ca45c12fb2fa0e341e5785afb206d4e6991dacc174ac1b8cf9c",
+      "actual": "6773774b049eed89820cf10c2354b95537e7d67c8e700566da14658dfa3a84a8",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/inc/wowcomm.h",
+      "recorded": "06c918b95d1819915732c63ba15d92f237b6265c9daf46880df232b0ec871001",
+      "actual": "4817961493d33932a98f5ee2222c0f2e20a43fd4900430910b81e5c70c5f1c85",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/inc/wowfax.h",
+      "recorded": "96d4925f0fc2019cbed210fc6209b7215f3ae32e8bbcb2cef88c5b08c83f505e",
+      "actual": "97c6c40dc2d0565a21dc1be4112fe24f138b10ddbb55fbd29e55da972a2a2c84",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/inc/wowinfo.h",
+      "recorded": "9d93877c7253d3c5f90eba3e72d554d6534fc25b4b78624a8281eaaef89c79e5",
+      "actual": "a0a125eedf4138d353fea1f97316331fd5a8acfb82dbd80d7abfe5dedf350026",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/build_id.c",
+      "recorded": "b1baf16037375ad8618e91e354b5136c85cca46b457179bbbd03557b129fa341",
+      "actual": "9ff03f58980437d69cf245e18907ed5e5f4760622d90c870c617e410eeafd6e4",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/aaa.c",
+      "recorded": "beaa8a8d2254d416ddad0745c24a92719854f5cd81946ff59f5123584ef4ea80",
+      "actual": "43583535e19a181d7a4c665c5fba5c00109eb1079b65d462f2b8a3d92ce2c052",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/aad.c",
+      "recorded": "416dc004e0ee4fa4062b2024e834a57af6276c991711f05b98fc5c99413e87e6",
+      "actual": "7f6216d39411838509402cc45a93741ee4e0142c1fc36a0dc7682f126c447cde",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/aam.c",
+      "recorded": "541458f143ac6f1a147a53280568f119afdee72f0267928e3329524dbbf6f88d",
+      "actual": "fda0622e61bc039dad01cf0594389af7e9ffdc678719b107f90a5e1607d893ee",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/aas.c",
+      "recorded": "aaa811b7a27567c8f19ab3d35a502e788723d388c26af8778e0377e46be424c4",
+      "actual": "f58060b5f0732ca174b1124b2622aaafa9d7341774cd71427509f2548ace4672",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/adc.c",
+      "recorded": "18292188f126e1122262543f186bd2c19b8e4078733a87298d27ea13b7f7b5a0",
+      "actual": "f9cb50e05aa3198c03e670556a6b8a849105c9ffbc6ea22dcc41dcfb2875c56b",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/add.c",
+      "recorded": "03805cd9b1ab9e55618cdaecd09f63d63ce0d8c217c00e44d72375cf2eebd576",
+      "actual": "6bbfc3cacd07b66ef1d5c882a45aa88431404571538ef2134f6b0f081e5c3c11",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/and.c",
+      "recorded": "2ee7ccd0381840886a16b939965da42482a081bce097a8888a5833738501515e",
+      "actual": "2973105fbfc70afd2a1f6846e1358c5c781538974e2dde72576286de95d1c489",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/arpl.c",
+      "recorded": "34da8b307913bbc70eb9191351948960012bd98529fcdf7ae1b10479a5fdc5f8",
+      "actual": "676f5413ca79b4d5ff4656a6ca960fdc290445d37ac21358040788db9e113c0a",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/bsf.c",
+      "recorded": "47d26b22620dfe41980a07ba577e3eb42b0e163bffb5b5a7e85a15265a81c735",
+      "actual": "229e244bdb8d904ee6e2e390c36a8f5c7bccef6aa8fb2bc832b7d91f723b1fd0",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/bsr.c",
+      "recorded": "752953dac1f4600838f7a7817cdb59b8cb12a6bfd60dd27b755830fef4c83946",
+      "actual": "d277ee7bc0ffddfaf980eefe097d8f1b9d201fcc79bfd3774fc342f50041eaed",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/bt.c",
+      "recorded": "e767bfa446dd7ae8a16a5e15e903ca76f5d2b292e6e64962255b9264b2299d36",
+      "actual": "3bc8f44b7d00374e4749de45303450c59baea54435bf1773b6bc6205c6877541",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/btc.c",
+      "recorded": "25d93cb660a3179dd81449b9abbc90a09438443c2a26e068c433313a04ba52bb",
+      "actual": "b6a883564d9f0f426274376c88410698a129542ed0e2ea22a4942c11085def89",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/btr.c",
+      "recorded": "3a55db91b101e9551becbafb771fecf1a69ae98eecbfb5d2a6900f7a2b4cec9d",
+      "actual": "b3a555c2e227f2e24200673a772c06b9d659b1210335e1ac90bb88eb53749393",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/bts.c",
+      "recorded": "fffe71a551f9c01a609d3014b3c76dac14d23b48e21f9c1d3b06e50afb575083",
+      "actual": "4d14baba2ac83c0ecfee89d0ec4bafe6d6c713b6cd82bcb6c40b2373119236ba",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_addr.c",
+      "recorded": "a27e379750ac865bde13594bc7465b8020c656dddff278d938bfe919999b243d",
+      "actual": "c60e097b1ccaf789c1b37098085e337118e765a357acd0950ce01c5a08ab129a",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_div64.c",
+      "recorded": "d30048e16462a7e44a6546d2ec8c8eb8280baf77353ad62b0f863f3573cbd8ba",
+      "actual": "09876e41103bddd1397dbf36598e1b6766c1c39d8bb3181731e509e80fdd2278",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_mul64.c",
+      "recorded": "71bf6464a3c6d2e19a9cd99e120f97a6851678ca8aa6d7a33a279f00a06ccd66",
+      "actual": "388c195d7dfcc8a5874b2ca805e6ad22c5427f2ff4a6c4fc345cb9cd26b8760c",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_neg64.c",
+      "recorded": "56cc2befdfe1fa1d5ec7ef9c3852a2fe9d3e7ceae6c3a4dc956a119e649717af",
+      "actual": "222aa1e94318d59a0cbbdc32b43c68c9c09ce06c8962eaa185d789c32cadab33",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_prot.c",
+      "recorded": "bb31bdda1f73911f23339050bbcddfd6c7f2e5651666a8c4a92e6ede124417a0",
+      "actual": "a8af9fa354d7a293045e95af706957130173e5319683ee6a1070f9285458b8f5",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cbw.c",
+      "recorded": "b8cb499e7b2f8f0c95a10004be92ee89413f2441f19390204c5892bf43bc4074",
+      "actual": "57ed4c085f1deff04e4a1f1d48e19f104928d338d468fef516d3772adbae4f5e",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cdq.c",
+      "recorded": "8fe8ccd28bdaea96a19e1f36fbba6718cf10faffe39767fd42dc633dfa0f6093",
+      "actual": "b1eb591cbf098e64b5dfefa9de3b4ab214c35e23f72c83501ee5a9f713664510",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/clc.c",
+      "recorded": "edc3ab62c3de0540020ae58f7bacb2c751eb4560e6e7f9d16aa7fbbbba2e247d",
+      "actual": "6d356c318117e69751ed0c4e41ef86ad3106882a0dec530bd47cc4bf3fe5c091",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cld.c",
+      "recorded": "f94995a333e74f7b0e0edf4dbf80d2ec47be3240efe9c9a6250eb61bbaaeacec",
+      "actual": "6956d48a4b0d63dba81b277584429102624c064658e0a1c4c921efdda8c84d96",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cli.c",
+      "recorded": "d45a528c552a858e08504145fdee54d5335a0e3cd7d3578cf90ce86e985d7005",
+      "actual": "3f044715990199f959ec05a8a18c98b084956f43f39f2f172705f6fdecb80018",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/clts.c",
+      "recorded": "3971b1e4ac67040395773986f8e22d16bd859283681374326a6eb303876f0fa7",
+      "actual": "7021e4711bed42bba118d565707c6735735068119c5030f54a79ac704bb28533",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cmc.c",
+      "recorded": "89e7e30d7b04f161056ac0221cf4c31ac20effc3f53d2e66c5053a59c8119aa7",
+      "actual": "7b1dc3c22e44fd0608e616508737e3367bee80520692780b4e1cfa1ee60b5ed8",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cmp.c",
+      "recorded": "319c807286e90dabf6fb57690d64f8d2ac9320bfc730ce1f20cf77baf448ca6f",
+      "actual": "05a601eb2a232efc5e87fb0c6daf44916256b8f0532a607a9a0dbf8755791b77",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpuint_c.h",
+      "recorded": "25addbb388de3f89c7277a832933192de53c2d2199dfc379d67ed86f3aaf25e4",
+      "actual": "b171b9bb51bf810c5e9f839a88a79a6f1eb66c37c4128069fe3e7972da849ede",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cwd.c",
+      "recorded": "b0931dfa8de33c44ac6cce3976e9a11375b3300318fb51fca37e5116f7f6c7eb",
+      "actual": "e0b3aeead327b314760573c98a7a20028e74a0f20d2045971566ef9f3b1122bc",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cwde.c",
+      "recorded": "88d8888ec2904af037eb519c425497cdcfacb186ede22a9cd9f17b405a139e73",
+      "actual": "1b3345efcfe8d617eefd829fe90dbed07a3cb6ab8826c0ffd856efca3c57a436",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/daa.c",
+      "recorded": "f991e39bc0aa9e1e4ae5d0be2ec4fd53ab5bb5ed2206dee4db23525b30e39112",
+      "actual": "5cd3ba3ee4989fb02c85a07e020f9a67a1939e8333fe5b83b7c16b3a828c9817",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/das.c",
+      "recorded": "6c8af64a0edf18134ba6eb4fa827f7c6a76b31a145ece21c0b1f05e5f1b8aaef",
+      "actual": "31aea3f55537c576caa4403de3d250220d15016a8936be5c4402d623c2cd1fdd",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/dec.c",
+      "recorded": "f0b26d7c6eae51fa2e0c4b57934498fbb6dd6006a7dc11adc0504015090b2ec0",
+      "actual": "4cb52793a88de120f63d1ecf3ba38507ae4e35e48b1b0a7984db034fd4c2e594",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/div.c",
+      "recorded": "9d321fd56c435786d33aeebab00d9a59bd3e8a09358c24a8473cc69919255069",
+      "actual": "e1e9653d0883617e12ed70ff4ab08c96d75c7a8b09ea4eb855b3cd4ab3e73007",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/enter.c",
+      "recorded": "97567b10c98ce137af8afe9ac7d7447d5d7ad25fdaae4389efa4b37f9c6fc0d7",
+      "actual": "68528701e321729d9d758f49661d1fbaa0cdbfbf75b9af074a7be7dbb35ffec2",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/evidgen.h",
+      "recorded": "05737651808fa634f26fa4dd5c3c11b14b066acb7d8c01dd88ce79c0e2ed29b6",
+      "actual": "7e429987c49ec9e87ca45394eeddc87c73877e5f95aed73e1bc1d7224d308772",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu_c.h",
+      "recorded": "7cd1dea7c33b06379b7d4881a69bd870db0f2e90841521d1005027d12cb21f99",
+      "actual": "0f1d67436ed417b6726f958cfd97ece40ddedd05997369449be5861a47b7b912",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/gdpvar.h",
+      "recorded": "6ca53692e60067bef99950b87e1126de8e8858799cdde86cb6a8f51db9dad54a",
+      "actual": "a8fc9f81af3c06eb4263cc5acb3005a41f849677cba4d09ae171ab450f7fb3ec",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/idiv.c",
+      "recorded": "654856645a37c6151041b11f6536cc059b567779f770d1dc0a5da9ec1dc4d084",
+      "actual": "4e48281278345855d027392dd434e286e92591776b8c0d15a3ffb4bcfbb533a6",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/imul.c",
+      "recorded": "e6a1426d65bd02933d4408ddaf75c93e8604ce59e91006730ed580e81f092c28",
+      "actual": "9cc48f0ff83909e122e01fc417d909fa93964ba4b5c79b3553810d1a6162adc4",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/inc.c",
+      "recorded": "163bd7267d7542aecebc53144438f7ac5d34c8389bc0c6578d13fb990f0f2020",
+      "actual": "6c8c8fd705953ab943e2b0a683ebadfc07318f68f1141ccfca37c3a4435efaf7",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/into.c",
+      "recorded": "8f71c9edb289113a01d2c3cbe3bd7df5227b2b75090026ed4e0e1af3339e2be6",
+      "actual": "fbe4dfe731c9d367c0270675c679bbf6acf1a45cf0b4d4548b54e5d2080c74c3",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/jcxz.c",
+      "recorded": "b6e19055754a8a9532c1b0b5fa3553e012fe7573f246bfa48b127e3b9846d1ab",
+      "actual": "dbc17e4a01510661ac3a9c2e4e4853ba11f22c945f8aee3707e47a2df76bfaa0",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/jxx.c",
+      "recorded": "87d024e64aaa4b6f30839b18fd5bd2dec9b7b0f7111b0f3b678a8df9f24a96d3",
+      "actual": "6b147a75ea73ca8f0c49bf5db7949a03f978ff35ec151ab8d2202b19120d2ccd",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lahf.c",
+      "recorded": "73c712b0aa56e9071e5140ceeba137e3a668e74abc9fe5a3368c9b9dfbd2c1a0",
+      "actual": "63807c02f388652e88f9db506e8c638e5e25c74991a9788eb2a7685803d132a3",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lar.c",
+      "recorded": "909ec13eff2ef855cd04068b273738fcc1abfc8d8ed8755a53b0b2f57cac3bb3",
+      "actual": "d637793c088b68b29cb376ed3613af82511bda14a026031ec6cba1db480b1dee",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lea.c",
+      "recorded": "a08e863075eb772938f04b0ba0ff96fa88442657233ee94276068020103b18c9",
+      "actual": "f1577b3dec150b5112803df1c1e1c41ed8faa3baa1552ffd231e22da541ea486",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/leave.c",
+      "recorded": "937d3dbec0cc052a8da1b1f835a476c61d5bea1aa018e7339904c410b2d61a9b",
+      "actual": "4eea05832d65f01828635c8e6eaa83055f793b31a6db159bffa47c7c9979e940",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/loopxx.c",
+      "recorded": "c42e16f41733b7bdc51530c0f69e605f15351d4aef193bd0fb58ccf526188220",
+      "actual": "31f72b86e1edf698a5a82055ff0d762e95358d5a7a452b93504ae432a2403a94",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lsl.c",
+      "recorded": "0068a3727dd852dc5ff534d2c6252d0da702e9330f2c9dd4573975d94656ac0b",
+      "actual": "2ace24ab44a5640aa887e8595da5a5a2ee4c89cba76dcaead2b74267ff4710af",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ltr.c",
+      "recorded": "f049e08405e4a88068665d347751afab1f11073847e1e371dbabb1de5934b5da",
+      "actual": "1bd1f793db2cfd4066a896d5e8cf87d4abed2327f86cc4f24536a1ea3d80d955",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/mul.c",
+      "recorded": "dc89c0c235dd2081bf9ac9faab160de07fffedc8a0517310b19353dac461d46e",
+      "actual": "5e7f349937d7302ae969bbb3fbd994cc93c23c1b4838e5243e7cd242ce384973",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/pigger_c.h",
+      "recorded": "60084b4d3e48f9dd335af1f26426ea5446a8ae6838387f5cddf28bc3d3a8aa21",
+      "actual": "f8abfab1a7001e498a6ddb782c8b0831db138e8daad8f52ccfccdd4e2a7c297e",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sar.c",
+      "recorded": "3510841fdc9bfb73a1960a0201888a08d49ae6a89f83c93a6fa1cc823292c81a",
+      "actual": "4ff881f97ffd7b6b0188f6a95f671b308f06f8da2dfcb4e9c7be3a51ec673011",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/shl.c",
+      "recorded": "cb9bdcd0efd86f065e3219d9bc726b4b0782219fcbc37ed64d0dda9f16011ac9",
+      "actual": "03354bdb3d04e84d2e569273e38952300ddbd1d0f2924c6363c63b2f9064c8c1",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/shr.c",
+      "recorded": "57e14bd7d49f06f11087ade046607f850c4ba06b6fa4189abdb1d2339c04a791",
+      "actual": "423ddf4206e009deb3eab3b17feab5cd4db1c9745643da5809ade351e26d1b70",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/univer_c.h",
+      "recorded": "be241ef045b48ab5744e5ff2c71e129e655e2acc4d0178e292afd7bc346a83fa",
+      "actual": "72655450d96db6f58f2dbd8887334222647014e38f8386fad58791502dcd52cd",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/accessfn.c",
+      "recorded": "1e3e5e520c3f20df5f5039d0711a66f6acad04510c48af04a8a7a9cf4cf19ed1",
+      "actual": "326046c10f56b4da4eb4d7fe8b7e2052a46955a229cd94f717ab3ff6b52a1a37",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/cpu4gen.h",
+      "recorded": "79825604d1efce8ce1c2068a13c476fe929413bb43f68c17fe42127cf896a6c3",
+      "actual": "c7775bb2a65b0c398b3d326b17bbc183526b7ba19736942f0db5d77dd6625127",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/cpu_c.h",
+      "recorded": "b8053aab0869cae44ec197df7937876f03858d7a50da834cc8d3199d7dc91a31",
+      "actual": "8cd25a965f1866a6d8e64621712c00d2c5cb83f47c053c7aac8cb72ce6620f15",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/cpuint_c.h",
+      "recorded": "6d5a28e8e3922b63814ebeaeafce0c0176c69cb1d7ec2f900fe16d0eab9e195b",
+      "actual": "814357a9371e97b0db7f39943b0e55c9b76507371440614802ed7745e9d9f67b",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/evid_c.h",
+      "recorded": "d9cafb094b5230db7f6be626f53d7b15048eb39ca30faace383cdd8bb8d5f21b",
+      "actual": "efd4bbf01556bb661a47131c75f05e321a41c00e407ec6177b66e80718df8710",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/fm_c.h",
+      "recorded": "67400ab822a98aac6946ec5f2b325d82f01dc73a5a0dff7ef98b50e24bf49d77",
+      "actual": "e8f877260ef1f968714a8ecaa3684b2fa4d041c0ff7dc1c9e7b564ba1036486d",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/fpu_c.h",
+      "recorded": "bc4960c41d182fc7da103a32f1229b5e5f725fee14808988129ca0763bb4892a",
+      "actual": "4a3f2226e9d1ca9fa2e0a806d1d40719e94f97e98b6f22936147240f568ab244",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/pigger_c.h",
+      "recorded": "da8c15abd4725222119197bdbfe4c9abcfd89dd1f281f0573b573a196a2ab180",
+      "actual": "61c86d668bddaf998101a0da469115325ad822f751d4b964dcaad35ea4e7de9f",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/univer_c.h",
+      "recorded": "6aa718d4f8fcd4e0774c21eef3516b6fa37c1c2d1fecc1433c739cedef9a3c1d",
+      "actual": "95963b89f5b99a06fe1c3ea85a0916500bc582881ad5bf2db508f75bcb07638e",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "recorded": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
+      "actual": "e7307f37be775a00ba95378b4a9442e069f3fb93364eea5be1905a7bad9156b2",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "recorded": "168bd9b845c99f7f6f974d26bdf2885e076a16017bcac0481cc9ce08a07b1227",
+      "actual": "0ca682e5b5e5a11cf84b07683469f1faeeb87f63c6dd9db16d5bbe33a786eb69",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cmos.h",
+      "recorded": "ed45d50c623bbb896bf3c9f00b494663730f1b4829514d75657bfcc2ba6fce35",
+      "actual": "ef4dae92c641b3dbeb7aaab67c3f49e1da9d01d2473d2b96fbece0121b235f99",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dterm.h",
+      "recorded": "69dc2b3032bab6ac9037ea1c18ebf2e31e23fc899873f3ec6574375a4a856e73",
+      "actual": "1a31bf16bf46b520110fd0d5e3562034f2c0d1f5e474ea030f98148c1c686924",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egagraph.h",
+      "recorded": "20f8ab0e65f3fe19fbe98ccc029fde8551c522fcfa14a53352685fdc42a61f78",
+      "actual": "20c58d8fb126135214410b44cda85a9fb57c7644088e820ce979ad37e7681a39",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egamode.h",
+      "recorded": "470f4fc979205920e82e87e9dd919d2a19dd45bcdf9c3abbdaf84392d0b6faec",
+      "actual": "56c76d5816dd61ebc92666504e7c530a85f30a201c9d0d317056bfc3d0d4c807",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gfi.h",
+      "recorded": "f8c8457309bf87d8e298d3725f7baae0a5331690f972dad10981bd259c608cbc",
+      "actual": "ae7b3dc66f9d618a841068e0e730c79751a7e496e223cf1d01ef0c4505e54a9d",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_cfg.h",
+      "recorded": "cc396afb209e97d88fd9ef66a180bbecc442f56562de6cb24b6971a172e45a07",
+      "actual": "b51660d37cc8249d10c74800eea996836c807e108ba627bbaf799078ae9098f6",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/rom.h",
+      "recorded": "8beb30e866d660cb7c7d02b6364ea092f8e8974dfaef6e19c3f9a7c5de17d1ec",
+      "actual": "2075310f9ca8a1a94d9606cd79af36328615412b6912e17f50e2b46081685a5a",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/umb.h",
+      "recorded": "c59d1f35512a9e58009abf5bf398903eec16a04d3ce646bccf89d113e629484d",
+      "actual": "2461d7f74c3317a98d1456c238ad2f14bcdb2cbcd189d39836f24a353893e4b3",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/vga_dac.h",
+      "recorded": "d10f721bd10a3844c94398a51dc3587cfbcd97caf4023f35c95ec79ae6b9adad",
+      "actual": "a747934a6f6257d470ecfdc8a4808f6f11cac2cc96b0bd6e9be75facd327b5c3",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/vgaports.h",
+      "recorded": "22c9bfde5be2df338ba9d0b39a2669643f7879d0d51b88fd5a75e30238f35c69",
+      "actual": "8fb2101973becd8f592ff53effa40460e0679e1f510b5a0913228452c0f06f33",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_inc.h",
+      "recorded": "dffeded7f83a02092fe1e963573097f52c9da37e214a7ec737153cc3e9f6ee21",
+      "actual": "c78271903a7a00e13a8756b47f25a91993ab962c39c5fb89435783ee3d411efe",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_com.h",
+      "recorded": "772b66e8a279eea916d1a91769b5017020e0d4c4d0b5eec4ca8371036d4a2cc1",
+      "actual": "203bf4bcfa6ddd5ff89cad3743fd99251df19838dd9e8bfcbf549a2e23dd4298",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_extra.h",
+      "recorded": "8660e7b1ae9b31dd4f85b717a7e40194fdbf159a4c5533a03653488940796daf",
+      "actual": "a422d528074b6a16b5a09e2b2df2d83f3f8ba4c5729e368cd0acc64c0bebbd96",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_munge.c",
+      "recorded": "69fdeee61a9090f7aad0697aa39d482b2b9377d439e3715428b417f1c3066363",
+      "actual": "3d4d9557f0c055db81d54e320150898f93addc5808c9562e4f7ebd94f9c51061",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdisp.c",
+      "recorded": "3fa60d1fe23656bc7081ab0e6b64d151c93b4f65d4d4e8ddbcefd845206afa16",
+      "actual": "0515639d5e97ba2fd0d5e7ba3d31c0ec1ad80c79f1141345c02b460b3da13ed6",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/wow32/isz.h",
+      "recorded": "2179e7130a6a53d6e08588e06b8f74654d5e394957421203fbbe7fbf1738b5dd",
+      "actual": "7168be4c0f441b97e25c04894ef9b331a1577adb002f6e5f116f262d25cd5892",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/wow32/mapembed.h",
+      "recorded": "bd7ce87a1cc21e18c826d01480caf8d8376deec788ecdd66d8a734371360cf20",
+      "actual": "90fd350c4770756416917cf3e3318a7926b15760c1b15c32e22d9eb6fd045fd7",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall32.c",
+      "recorded": "9c6e8c767cfc4a1d91ba8e33eeb9917fe31185be0936c4cd9d050bec2231680b",
+      "actual": "0f72ae39e691f3ef672df4f1aeb3ebb6443e87f091fb6322ef1c13604ab3d571",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wshell.c",
+      "recorded": "b5b20ee8ac0e9f6e7323d8efa9890590c18ad5f677a5bc84a0a7730a044d93dd",
+      "actual": "1daa7860c95a0e374566b900d2da01e7459e7b88c0dfbe8e84b23f68bdf3ad40",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "recorded": "9eb4b0dd076219c6ad22f2c03da350354119bb6956487241d5bc6ac3634a8b25",
+      "actual": "ac428b7dd5601f907c98e51967c741072d24519fd28ecc180b900e56007d52c0",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rpcxlate/apiworke.h",
+      "recorded": "d00f1ef07909f75400e09fe52dad8ea6667c6d4f17b91d4c08a7e324532c5174",
+      "actual": "805d632a97f750e4b15544d67fc0cc2e36070cbcbb44dd4600a031a528f85c75",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/private/windows/inc/pmvdm.h",
+      "recorded": "e95d2746008e827dffb406df51d0ebdb5bf560070b4ba69e3cca09b626c28de2",
+      "actual": "d9bc8a4e975f9d2bc1aef89d8e8854f2dc8ad8fac53b49d6f4998bccafd4afc8",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddbeep.h",
+      "recorded": "5ae6bfc56a1033b90c58de22e149662f7a4f6463529698766dff8a1dab381778",
+      "actual": "4e9e17a77c0e173166ab528de3a68d0c53883f513d55a998329d14f207e4272a",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntdddisk.h",
+      "recorded": "660b695c26ffd2e79a9d62d99d8c097fa2af7d1bb5475c89b69703345d4f5081",
+      "actual": "ab1a18990f477e823de45110a12a83498e87b0c4ce87c39d89720cce8ed9e455",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddkbd.h",
+      "recorded": "cb505a7e90d41a4145b436dde5823857256959b98ac6baa888b82ce449d77e11",
+      "actual": "f3bf258135d2853ebb77d6bc81e12499528c5b7efe1f58ead6f5c1315c5bf5c1",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddser.h",
+      "recorded": "5205a926bf74673a56e0642febd9303eedae581dece06f009c0a0ebefde650f0",
+      "actual": "707287adc6162093ebe5dd9608b6f4e528b4b94cb0e2caa0df930ecffd4d3b46",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+      "recorded": "37a5ac7a2abe2812b8749d9633942aeb751cfcdf8763e4748e46e17876f8a450",
+      "actual": "e81160b69920ee87d603fe593916994f8448a280b2a2adfefd34c190b1b3cb78",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/align.h",
+      "recorded": "2bad93351b7fe722343b8835d9ea8e5996d1ea13438be24bf2cbe94889308f34",
+      "actual": "b2922ca133bfd608bf86f33595c1dfb2b325cb31a0e83d4bfe18f0d91795e28f",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/debugfmt.h",
+      "recorded": "027514c5455d7b54a09f706e94cf28ec5a2661abea70f961bdae17e327ce81dd",
+      "actual": "679c56f19ab86710f1866e90df828baf6f6ff96630f2ddddd26b35de9aff49e8",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/nettypes.h",
+      "recorded": "8ad93464cb243ab0cb7679b0d91cd6de0906d9307b0accfaf30f13c7b2b35b36",
+      "actual": "19a93583be57f9972c150af4c482f7fa1a2bfaf9769abb31de02cd8678064bb6",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/packoff.h",
+      "recorded": "dbc08b74dccbadd340074396e6e3945c0f37f6a9d9b6550e290a73d4b978327e",
+      "actual": "245b295120a0096cf8cd379d84b0352fe6fb6b090e61804485badd00e772696e",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/packon.h",
+      "recorded": "7da0a9d127623cf592a26d7e820aab131313f7a2e73183281312ac8d43690674",
+      "actual": "b6d5e46dc0e41e95265f3de79ebe371f4f77aa3882c087f7a4a95ae2f03cb1a2",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbgtpt.h",
+      "recorded": "c5d9ae2a075d5274f788a540afb3bfa5c05f8230e8b47d9e6f9cc91c5184dc29",
+      "actual": "d2ab723bc1f95cb53ae6970f950f5ce50d4b0d177ba31c8b7d7c8d83a5262d75",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbmacro.h",
+      "recorded": "de4b66c03110e7fde0a30e355a031bc21e939b0f9bdc199ae424b84c010955b3",
+      "actual": "e7a4ff096b5e2fdd0a81cd1c080e57253231664f87cb329c17a25c694282d8d1",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbtypes.h",
+      "recorded": "065ac468ba152967b660e030642fc703ecea40c34d7da1fc31b423b4c82c84b6",
+      "actual": "f04a563368f33bb6d8ba50a50e68d68f081aecce94ecc37b6d787cc6f38ea622",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tstr.h",
+      "recorded": "189e823c111218594156d2e135bf338158866583d6883fcc35bc37df82b4adf8",
+      "actual": "dfc0a04bbeb35130d655e20521c972d43df3500efda32d7de6ddcea53be791c6",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/apiparam.h",
+      "recorded": "99540755983fedf7057b43ead34f005423b5a9b46a4c1eb56ee56e7d0d900eb9",
+      "actual": "f5d8f906f3af10302f9e877091661dd3e2ba7d1f6760ce3c8dfb3bffc8e9e462",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/crypt.h",
+      "recorded": "530561f4b83bba78c99f8ac6010b46660bb15831a007000bbff849f863798398",
+      "actual": "0a325a131b109964594681317389ac7b7e4dce8f05f6dc553c499203f296c3ed",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlibnt.h",
+      "recorded": "20d74f1e556db7c448589d0b0fce8b243e2c07780c3cca463092cee6034f022e",
+      "actual": "8545a4ebfe8156e40405fd6a22d6c49b42aaf3b6df1b6254a52b63c330e11ba8",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/prefix.h",
+      "recorded": "8e97e490527f13348d8435c3f2e685fce0d2b30ca6ecaa18bc9f741319dc1aee",
+      "actual": "f37544194f395b67176d4e99067e605a4c79269fd6a34a2353b9244d42d32e71",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rap.h",
+      "recorded": "8014aa01e648991ee8b93e0c109efd1efa26c700761467412be69daa06d9613a",
+      "actual": "f1b132b2ab6d5b848303f27696fbcf4a78d8d937919b46dda004efb0930b9086",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rapgtpt.h",
+      "recorded": "28cb1774f4c4b98db75a4207f5d114b60a029d0dbe4d1981b4579a418ff81ad3",
+      "actual": "b77a81c76ebf5a82bddbc4812a94f9fc4281f4e01612380d843f16b47878b8e4",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/remdef.h",
+      "recorded": "e61d1fc9b9cd41d7dcb88be77d3e516ab324770e2ce4e73c5cce13a576c4cacd",
+      "actual": "bf4341d5c9fea49d79a5fd074c19e7ceebd2b9b17e8ad2085fff5d3f4969c7ed",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/remtypes.h",
+      "recorded": "adca0b697bcd143e0d118bf5f2fd8113d2d6ddc5a79beb503114950cccf52163",
+      "actual": "53c776fa1300bc533fb616bb6dadb0fcb1ca9721b82b229e08fabbdb00e9c4e7",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxp.h",
+      "recorded": "102ba177dae5c571b39eeef3bde302daaae37773ea82b77dfeb7ff774b12cca7",
+      "actual": "a9872ea30eaf56286b6306885a577198190724ff68c4bc6d387a426a23d2442e",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/strucinf.h",
+      "recorded": "94ff3286c76a6347c0918292c5b42c6a133cd1f8f78ede9f0a90c4a18bf79a5a",
+      "actual": "5dffd99e3a625c86176c8b68e67ad89672a8e4f0727eaa3ca707e7aaf72c352d",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/timelib.h",
+      "recorded": "e0e7d89d32b80c2bd2bd1feba400005135d91c6f26e3d797b5cbfff243ca23a6",
+      "actual": "6f44ad84f7119f62c58646f5c1f9405a8e2b6da7d6dc91503264aa4128bd3dcc",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/xsprocs.h",
+      "recorded": "c19759b3af651d6fbd174e7abae665143c799697b754055b3fb4fa781625f0c3",
+      "actual": "92f877f06d37706c1f1acabab1784e826be365f637c8fb40a82357b66d8b866f",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/xstypes.h",
+      "recorded": "933f190be6d76778904de33d817f0b11c0a38b7628f18ecdabeadafffe7a9e1d",
+      "actual": "b140254bef8ca8c871c6ca3a94a09c5f858ad9b5560cb687392af22e7c8d8539",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/tstring.h",
+      "recorded": "522f3713d5e33d8957eba5431fbc002b95d25c1dd50e4f82bbdc8e2aea955421",
+      "actual": "0dd95258b49d3c4e283d5cf49ca8e309af05d24343a3f7680a94d9769611b517",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/winconp.h",
+      "recorded": "76ceafb087e736b272513f2c9eceaef29d7a6378cbaceee45ed3614c1294d6c2",
+      "actual": "26b1b3cff877ee2802aeff0eeab04f1daf7127e63279bcaa990c8b4f97384f2d",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/winddi.h",
+      "recorded": "0f3685faeaeac434361412f83c9936f8561e6686ca6022faa09a2a77c1e68e3d",
+      "actual": "f3ba4a33dbbb58768c2fb8aacc205a017f05d11521ad1650e39a998be5344f4a",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+      "recorded": "fd9395f3d74001454f097d687fa3eeb2bd7d0f29ee27e5dab48ba0216d4036b4",
+      "actual": "10ce21b98498ec4170806af9909854429c99929083b4730d370e5a7cc4e479d8",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/devioctl.h",
+      "recorded": "265f7e1cdbeb5df0218d2e7281148ab0a18e076f1396ea39412e1ec6ad29c55d",
+      "actual": "87098d18c8afaf1265522380b682662125c59af17d775f9ab062e5b1e17db33b",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/dlcapi.h",
+      "recorded": "e2fb32ca94c0fe88147fc579111541327bd927e7784955182662d450839c83bf",
+      "actual": "c98cae26f503b5285e465b2fd40e0fe1a6344a44d5bb5bd00e876f20dd8c1dda",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nt_vdd.h",
+      "recorded": "43ca219e17f9c56167c8808cc09706d9fde1eeda680c1a2e9d12018cbe9d84e6",
+      "actual": "7e89fd4420381a54bc89e9807e54ccfe138a0767996ab7c74712e5e96aeb6609",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntcsrdll.h",
+      "recorded": "1bc3d123b14d46662d7a7eb8e1bb40875bdbce974a65096a81cad35b58ab42a4",
+      "actual": "ed1f1868eaca9e9d2a781bb57bd5e35538c0f5755f508438a6b804816655d7e8",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntcsrsrv.h",
+      "recorded": "31b150668bcb0bf0f4c4199f7a612ebf083b5e3be6a8c6fc5e135bcb400ac960",
+      "actual": "9f22e4932d1b51c404c6bdaa6c4ca875ab8c19f1266c31c930985bdf75d1bbf2",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "recorded": "2fbd567b9a4c88db59aca25ce63d4d4e94639daf3d2a1352798a9441af79d345",
+      "actual": "10c7fca6959e9c77f047d8acf1eb6f8c593386d4e892fed7970c6a3e50c820cc",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "recorded": "249991fd20d874ece85ca9fbae411c96a6d883aaa5f9990cf2e75d221e95add9",
+      "actual": "1da660aa8e942172f9eaad5ac4ef280fda58540a7416c0a8f029a62fb8ccdff0",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "recorded": "8e6b12e4b7b7b1106c80c9fe1bfaacd16434633e6feb39714cafc3bb56c99610",
+      "actual": "06dad1cd402c2712b21e5b573ea8be67facb0087b5e322b594abe0664caad644",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+      "recorded": "d985c94cf553d28e5a7bb2434076c6c55c426798bd9805b113548f7ce99c2b02",
+      "actual": "2d3978a4da2b4146f5da2beec1cf829bb06227137f0ec567a6a4acb3b975e587",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+      "recorded": "fdffc12447832ad019b849c58b20b67c9b1683b95f2f5620ff67058d081729a8",
+      "actual": "435a8ae75b59748894429f19e197a083f9bb795596a9b9ad48c9d38801256d08",
+      "field": "current_sha256"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/random.c",
+      "recorded": "3469699a957c71db994ae52c4d72b0998ebd656bc9eea991fbb65041b0f50271",
+      "actual": "729c7bafa6bc5eb6e6a0296dfe7e494582a42199b6551961fb834856601bfedd",
+      "field": "current_sha256"
+    }
+  ],
+  "limits": "File existence and SHA-256 only; no branch or semantic proof."
+}

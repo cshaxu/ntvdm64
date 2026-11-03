@@ -1,0 +1,39 @@
+{
+  "scope": "Unselected historical host CPU access-table carrier",
+  "path": "src/mvdm-host/softpc.new/host/src/nt_cprgs.c",
+  "sha256": "336d13bbf226733aae42135e0eae16a95f10d35c961223dc1fb4ec2ca53b66a8",
+  "mirror_sources": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cprgs.c",
+      "current_sha256": "48c46f5ac657fb9c3755fd0d90d350200b20b76d0b71db86404ca0849293e554",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cprgs.c",
+      "original_sha256": "cbf9ee8a199d48ee74171b2e23d55bb1e5d019710fdea2a917762739d6a49044",
+      "pinned_expected_sha256": "cbf9ee8a199d48ee74171b2e23d55bb1e5d019710fdea2a917762739d6a49044",
+      "original_matches_pinned": true,
+      "working_sha256": "336d13bbf226733aae42135e0eae16a95f10d35c961223dc1fb4ec2ca53b66a8"
+    }
+  ],
+  "upstream_diff_numstat": "28\t1884\t\"O:\\\\repos.external\\\\OpenNT\\\\base\\\\mvdm\\\\softpc.new\\\\host\\\\src\\\\nt_cprgs.c\" => \"O:\\\\repos.hobby\\\\ntvdm64\\\\src\\\\mvdm-host\\\\softpc.new\\\\host\\\\src\\\\nt_cprgs.c\"",
+  "removed_condition_groups": 90,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r147.zip",
+  "retired_or_archived_divergences": [
+    "MVDM-HOST-DIV-549",
+    "MVDM-HOST-DIV-150",
+    "MVDM-HOST-DIV-151",
+    "MVDM-HOST-DIV-182",
+    "MVDM-HOST-DIV-152",
+    "MVDM-HOST-DIV-047"
+  ],
+  "retained_partial_divergences": [
+    "MVDM-HOST-DIV-046",
+    "MVDM-HOST-DIV-102"
+  ],
+  "evidence": [
+    "Current x86 worker graph does not select nt_cprgs.c; prior candidate records identify its vector as unselected.",
+    "Retained T310 historical audit tool now reads and verifies the pinned original source, and labels its 62 rows historical."
+  ],
+  "limitations": [
+    "Historical comparison output describes the old CPU30/T310 profile, not the current CCPU product vector.",
+    "Selected CPU execution and current vector binding were not changed."
+  ]
+}

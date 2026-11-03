@@ -1,0 +1,39 @@
+{
+  "scope": "Unselected historical assembler-CPU register glue",
+  "path": "src/mvdm-host/softpc.new/obj.vdm/c_regs.c",
+  "sha256": "03ceaa2a570d371bf4eb87320f4700b2572dc0800394a3c4fad1dce84b250d67",
+  "mirror_sources": [
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/c_regs.c",
+      "current_sha256": "03ceaa2a570d371bf4eb87320f4700b2572dc0800394a3c4fad1dce84b250d67",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\obj.vdm\\c_regs.c",
+      "original_sha256": "9ab5185cd9d8a3ca163bf4654321c31c73adcf3127bc574a3a4574cc1366de95",
+      "pinned_expected_sha256": "9ab5185cd9d8a3ca163bf4654321c31c73adcf3127bc574a3a4574cc1366de95",
+      "original_matches_pinned": true
+    }
+  ],
+  "removed_guard_ledger_entries": [
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/c_regs.c",
+      "macro": "A3CPU",
+      "line": 13,
+      "body_end": 429,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\obj.vdm\\c_regs.c",
+      "original_sha256": "9ab5185cd9d8a3ca163bf4654321c31c73adcf3127bc574a3a4574cc1366de95",
+      "local_sha256": "2907bf3ce954887601777e34d591f30610412d8ad8be8a3181b3a6064f7d94f0",
+      "removed_body_sha256": "154cbbe05fbf68d1b46534d105d7a8384b52be2580b7515f466accb08213af0b",
+      "removed_body_lines": 416,
+      "after_sha256": "51a0b7f59149428df39c62f14c8ddfa0def316e4a63de0f9b899a2b626f92593",
+      "final_sha256": "03ceaa2a570d371bf4eb87320f4700b2572dc0800394a3c4fad1dce84b250d67"
+    }
+  ],
+  "removed_condition_groups": 9,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r142.zip",
+  "evidence": [
+    "No current product, build, or test graph selects this temporary assembler-CPU mapping file.",
+    "The remaining references are historical source-disposition records."
+  ],
+  "limitations": [
+    "Selected CCPU register execution is unchanged."
+  ]
+}

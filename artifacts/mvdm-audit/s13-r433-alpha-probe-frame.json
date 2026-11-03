@@ -1,0 +1,21 @@
+{
+  "path": "src/non-mvdm/base/ntos/ex/probe.c",
+  "before_sha256": "d5a4aa697600bba9c8d8a4be71103e88c548c6f93c7a6951c9c0557b978fd7d3",
+  "after_sha256": "b32dde63fa296acffbf472259792568fcb167c24acb5a8d89d02b6314fd77302",
+  "original": "O:\\repos.external\\OpenNT\\base\\ntos\\ex\\probe.c",
+  "original_sha256": "0d1cae414b609c624e6bdf04fa28ebd84ff38dbb9687a63d8bc9e840c2f2372b",
+  "original_condition_line": 106,
+  "original_else_line": 121,
+  "original_endif_line": 128,
+  "original_continuation_line": 129,
+  "original_owner": "ProbeForWrite, omitted",
+  "placement": "file-scope after retained ProbeForRead; original C lexical scope and selected body remain omitted",
+  "basis": "Actual x86 WOW32 target in s13-probe-r269-preprocess.json; forced x86/x64 Alpha negative controls in s13-probe-r269-controls.json; no supported Alpha compiler target identified.",
+  "verification": {
+    "build": "x86 NTVDM, x64 reference worker, x86 WOW32 passed: build/t473-s13/r433-build.log",
+    "condition_suites": "x86 build/t473-s13/r433-tests.log; x64 build/t473-s13/r434-x64.log passed, including Alpha forced rejection and original diagnostic line",
+    "package": "s13-r433-package-compare.json: 82 files identical to r431; WOW32 differs only in 4 PE/debug timestamp bytes",
+    "queue": "1,110 hashes match; 2,471 excluded arms scanned without detected remnants or stale positions",
+    "limits": "Original ProbeForWrite C function and selected non-Alpha body remain omitted and pending. No layer closure or publication claimed."
+  }
+}

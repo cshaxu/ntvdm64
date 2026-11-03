@@ -1,0 +1,15 @@
+{
+  "test": "tests/build/test_mirror_rejected_conditions.py",
+  "test_sha256": "32ab70f9a7d7e22dc182ba69a51c70016363bc420feaab296361403fcc9083e7",
+  "architecture": "MSVC x86",
+  "guard_cases": 181,
+  "pass_lines": 42,
+  "log_sha256": "84b9b2035addf0a408c20c95b3c565c039aa387c50bd7488a6a79fd451b8a3a6",
+  "limit": "preprocessor/guard controls only, no product runtime claim",
+  "x64": {
+    "status": "pass",
+    "guard_cases": 181,
+    "pass_lines": 42,
+    "log_sha256": "c193f8509208adc08227f87fce08ea1adb3fa0d2d0df8ddb950faa03a7742dcb"
+  }
+}

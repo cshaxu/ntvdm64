@@ -1,0 +1,12 @@
+{
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cpu_vid.h",
+  "original_sha256": "f7b5efebebd8bf8c6ad5c56adb74c8217490b2b92f113b1e850401fd5f029500",
+  "current": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+  "current_sha256": "fa6208cee585d5d9151b05892858cb457a07fe8f49e3df7090b03d6bac834a51",
+  "original_line": 90,
+  "current_line": 97,
+  "selector": "#ifndef NO_STRING_OPERATIONS",
+  "preprocessing_evidence": "s13-bfs-depth1-original-cpu-vid.json",
+  "local_adaptation": "MVDM-HOST-DIV-089",
+  "limits": "outer guard only; nested conditions were not audited; selected preprocessing is not runtime equivalence"
+}

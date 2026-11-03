@@ -1,0 +1,31 @@
+{
+  "method": "scratch lexical first-depth directives only; comments and line continuations handled",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+      "sha256": "61cbc5cb4fdd0de86b1b821fef65358f4cfe6c42b3d164b4d93f1d7d697db500",
+      "current_groups": 4,
+      "queued_groups": 4,
+      "matches_queued_signatures": true,
+      "current_lines": [
+        13,
+        21,
+        714,
+        875
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_oprnd.h",
+      "sha256": "810a513084253fe8d93f3e23e1c059240a254f0765b984704797756286b20d0b",
+      "current_groups": 3,
+      "queued_groups": 3,
+      "matches_queued_signatures": true,
+      "current_lines": [
+        717,
+        764,
+        1065
+      ]
+    }
+  ],
+  "limitation": "Does not classify reachability or nested structure"
+}

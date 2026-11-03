@@ -1,0 +1,254 @@
+{
+  "scope": "Nine unselected historical host object files; all remaining matching lines in current graphs/tools/tests name build obj/<component> outputs rather than src/.../obj/i386 inputs",
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/command/obj/i386/cmdenv.obj",
+      "sha256": "c03e97d53606e20b114118895ce407033c2f509d9ec0b6a5c62f45e7b8c9e60e",
+      "manifest_sha256": "c03e97d53606e20b114118895ce407033c2f509d9ec0b6a5c62f45e7b8c9e60e",
+      "source_root": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm",
+      "source_relative_path": "dos/command/obj/i386/cmdenv.obj",
+      "refs": [
+        "build/.ninja/msvc-x64-formal-release/build.ninja",
+        "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja",
+        "build/.ninja/msvc-x86-formal-release/build.ninja",
+        "build/.ninja/msvc-x86-release/worker/build.ninja",
+        "build/.ninja/pkg-uuid-x64/worker-reference-x86/build.ninja",
+        "build/.ninja/pkg-uuid-x86/worker/build.ninja",
+        "src/mvdm-host/dos/command/obj/_objects.mac",
+        "tools/build/build-t420s35environmenttrace.ps1"
+      ],
+      "modified": false,
+      "live_refs": [
+        "build/.ninja/msvc-x64-formal-release/build.ninja",
+        "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja",
+        "build/.ninja/msvc-x86-formal-release/build.ninja",
+        "build/.ninja/msvc-x86-release/worker/build.ninja",
+        "build/.ninja/pkg-uuid-x64/worker-reference-x86/build.ninja",
+        "build/.ninja/pkg-uuid-x86/worker/build.ninja",
+        "tools/build/build-t420s35environmenttrace.ps1"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/command/obj/i386/cmdmisc.obj",
+      "sha256": "22b1671b9a132a0afe68ec0d0937afe4646d21121eabbe279d86903cad9f260f",
+      "manifest_sha256": "22b1671b9a132a0afe68ec0d0937afe4646d21121eabbe279d86903cad9f260f",
+      "source_root": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm",
+      "source_relative_path": "dos/command/obj/i386/cmdmisc.obj",
+      "refs": [
+        "build/.ninja/msvc-x64-formal-release/build.ninja",
+        "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja",
+        "build/.ninja/msvc-x86-formal-release/build.ninja",
+        "build/.ninja/msvc-x86-release/worker/build.ninja",
+        "build/.ninja/pkg-uuid-x64/worker-reference-x86/build.ninja",
+        "build/.ninja/pkg-uuid-x86/worker/build.ninja",
+        "src/mvdm-host/dos/command/obj/_objects.mac",
+        "tools/build/build-t420s35environmenttrace.ps1"
+      ],
+      "modified": false,
+      "live_refs": [
+        "build/.ninja/msvc-x64-formal-release/build.ninja",
+        "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja",
+        "build/.ninja/msvc-x86-formal-release/build.ninja",
+        "build/.ninja/msvc-x86-release/worker/build.ninja",
+        "build/.ninja/pkg-uuid-x64/worker-reference-x86/build.ninja",
+        "build/.ninja/pkg-uuid-x86/worker/build.ninja",
+        "tools/build/build-t420s35environmenttrace.ps1"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/obj/i386/dpmi32.obj",
+      "sha256": "d04f83d66eace53a9c6ecda796b5ae20baa044cbaa10348dd48283f7c97dac5f",
+      "manifest_sha256": "d04f83d66eace53a9c6ecda796b5ae20baa044cbaa10348dd48283f7c97dac5f",
+      "source_root": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm",
+      "source_relative_path": "dpmi32/obj/i386/dpmi32.obj",
+      "refs": [
+        "build/.ninja/msvc-x64-formal-release/build.ninja",
+        "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja",
+        "build/.ninja/msvc-x86-formal-release/build.ninja",
+        "build/.ninja/msvc-x86-release/worker/build.ninja",
+        "build/.ninja/pkg-uuid-x64/worker-reference-x86/build.ninja",
+        "build/.ninja/pkg-uuid-x86/worker/build.ninja",
+        "src/mvdm-host/dpmi32/obj/_objects.mac",
+        "tools/build/build-t420s35environmenttrace.ps1"
+      ],
+      "modified": false,
+      "live_refs": [
+        "build/.ninja/msvc-x64-formal-release/build.ninja",
+        "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja",
+        "build/.ninja/msvc-x86-formal-release/build.ninja",
+        "build/.ninja/msvc-x86-release/worker/build.ninja",
+        "build/.ninja/pkg-uuid-x64/worker-reference-x86/build.ninja",
+        "build/.ninja/pkg-uuid-x86/worker/build.ninja",
+        "tools/build/build-t420s35environmenttrace.ps1"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/obj/i386/int21map.obj",
+      "sha256": "104ac7850efda46e028cb8ba8993efa363166379d1821b52a0c8aea15187efc1",
+      "manifest_sha256": "104ac7850efda46e028cb8ba8993efa363166379d1821b52a0c8aea15187efc1",
+      "source_root": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm",
+      "source_relative_path": "dpmi32/obj/i386/int21map.obj",
+      "refs": [
+        "build/.ninja/msvc-x64-formal-release/build.ninja",
+        "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja",
+        "build/.ninja/msvc-x86-formal-release/build.ninja",
+        "build/.ninja/msvc-x86-release/worker/build.ninja",
+        "build/.ninja/pkg-uuid-x64/worker-reference-x86/build.ninja",
+        "build/.ninja/pkg-uuid-x86/worker/build.ninja",
+        "src/mvdm-host/dpmi32/obj/_objects.mac",
+        "tools/build/build-t420s35environmenttrace.ps1"
+      ],
+      "modified": false,
+      "live_refs": [
+        "build/.ninja/msvc-x64-formal-release/build.ninja",
+        "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja",
+        "build/.ninja/msvc-x86-formal-release/build.ninja",
+        "build/.ninja/msvc-x86-release/worker/build.ninja",
+        "build/.ninja/pkg-uuid-x64/worker-reference-x86/build.ninja",
+        "build/.ninja/pkg-uuid-x86/worker/build.ninja",
+        "tools/build/build-t420s35environmenttrace.ps1"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/obj/i386/xmem.obj",
+      "sha256": "ce7a7d1e603ff43eff3d054cf35c1955ef7ba0d5430ff24c3448f9c7f9456231",
+      "manifest_sha256": "ce7a7d1e603ff43eff3d054cf35c1955ef7ba0d5430ff24c3448f9c7f9456231",
+      "source_root": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm",
+      "source_relative_path": "dpmi32/obj/i386/xmem.obj",
+      "refs": [
+        "build/.ninja/msvc-x64-formal-release/build.ninja",
+        "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja",
+        "build/.ninja/msvc-x86-formal-release/build.ninja",
+        "build/.ninja/msvc-x86-release/worker/build.ninja",
+        "build/.ninja/pkg-uuid-x64/worker-reference-x86/build.ninja",
+        "build/.ninja/pkg-uuid-x86/worker/build.ninja",
+        "src/mvdm-host/dpmi32/obj/_objects.mac",
+        "tools/build/build-t420s35environmenttrace.ps1"
+      ],
+      "modified": false,
+      "live_refs": [
+        "build/.ninja/msvc-x64-formal-release/build.ninja",
+        "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja",
+        "build/.ninja/msvc-x86-formal-release/build.ninja",
+        "build/.ninja/msvc-x86-release/worker/build.ninja",
+        "build/.ninja/pkg-uuid-x64/worker-reference-x86/build.ninja",
+        "build/.ninja/pkg-uuid-x86/worker/build.ninja",
+        "tools/build/build-t420s35environmenttrace.ps1"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/obj/i386/at_dma.obj",
+      "sha256": "f3965b58035f31d859e984921fea937dd67180e2488f95295023ccfb81ea43f7",
+      "manifest_sha256": "f3965b58035f31d859e984921fea937dd67180e2488f95295023ccfb81ea43f7",
+      "source_root": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm",
+      "source_relative_path": "softpc.new/base/system/obj/i386/at_dma.obj",
+      "refs": [
+        "build/.ninja/msvc-x64-formal-release/build.ninja",
+        "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja",
+        "build/.ninja/msvc-x86-formal-release/build.ninja",
+        "build/.ninja/msvc-x86-release/worker/build.ninja",
+        "build/.ninja/pkg-uuid-x64/worker-reference-x86/build.ninja",
+        "build/.ninja/pkg-uuid-x86/worker/build.ninja",
+        "src/mvdm-host/softpc.new/base/system/obj/_objects.mac",
+        "tools/build/generate-t335s3wowcallbackccpuninja.mjs"
+      ],
+      "modified": false,
+      "live_refs": [
+        "build/.ninja/msvc-x64-formal-release/build.ninja",
+        "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja",
+        "build/.ninja/msvc-x86-formal-release/build.ninja",
+        "build/.ninja/msvc-x86-release/worker/build.ninja",
+        "build/.ninja/pkg-uuid-x64/worker-reference-x86/build.ninja",
+        "build/.ninja/pkg-uuid-x86/worker/build.ninja",
+        "tools/build/generate-t335s3wowcallbackccpuninja.mjs"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/obj/i386/nt_inthk.obj",
+      "sha256": "1b043014b36c8d2e49eb2d0a30c2cab594b79a3b9941ab9484f367442d399453",
+      "manifest_sha256": "1b043014b36c8d2e49eb2d0a30c2cab594b79a3b9941ab9484f367442d399453",
+      "source_root": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm",
+      "source_relative_path": "softpc.new/host/src/obj/i386/nt_inthk.obj",
+      "refs": [
+        "build/.ninja/msvc-x64-formal-release/build.ninja",
+        "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja",
+        "build/.ninja/msvc-x86-formal-release/build.ninja",
+        "build/.ninja/msvc-x86-release/worker/build.ninja",
+        "build/.ninja/pkg-uuid-x64/worker-reference-x86/build.ninja",
+        "build/.ninja/pkg-uuid-x86/worker/build.ninja",
+        "src/mvdm-host/softpc.new/host/src/obj/_objects.mac",
+        "tools/build/build-t420s35environmenttrace.ps1",
+        "tools/build/new-t310originalsoftpcninja.ps1"
+      ],
+      "modified": false,
+      "live_refs": [
+        "build/.ninja/msvc-x64-formal-release/build.ninja",
+        "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja",
+        "build/.ninja/msvc-x86-formal-release/build.ninja",
+        "build/.ninja/msvc-x86-release/worker/build.ninja",
+        "build/.ninja/pkg-uuid-x64/worker-reference-x86/build.ninja",
+        "build/.ninja/pkg-uuid-x86/worker/build.ninja",
+        "tools/build/build-t420s35environmenttrace.ps1",
+        "tools/build/new-t310originalsoftpcninja.ps1"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/obj/i386/nt_vdd.obj",
+      "sha256": "e374bb89034e7db4d174d6c973dbf64ac9e456472da4a7ecf313756f868e433c",
+      "manifest_sha256": "e374bb89034e7db4d174d6c973dbf64ac9e456472da4a7ecf313756f868e433c",
+      "source_root": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm",
+      "source_relative_path": "softpc.new/host/src/obj/i386/nt_vdd.obj",
+      "refs": [
+        "build/.ninja/msvc-x64-formal-release/build.ninja",
+        "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja",
+        "build/.ninja/msvc-x86-formal-release/build.ninja",
+        "build/.ninja/msvc-x86-release/worker/build.ninja",
+        "build/.ninja/pkg-uuid-x64/worker-reference-x86/build.ninja",
+        "build/.ninja/pkg-uuid-x86/worker/build.ninja",
+        "src/mvdm-host/softpc.new/host/src/obj/_objects.mac",
+        "tests/observation/verify-softpc-object-contract.ps1"
+      ],
+      "modified": false,
+      "live_refs": [
+        "build/.ninja/msvc-x64-formal-release/build.ninja",
+        "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja",
+        "build/.ninja/msvc-x86-formal-release/build.ninja",
+        "build/.ninja/msvc-x86-release/worker/build.ninja",
+        "build/.ninja/pkg-uuid-x64/worker-reference-x86/build.ninja",
+        "build/.ninja/pkg-uuid-x86/worker/build.ninja",
+        "tests/observation/verify-softpc-object-contract.ps1"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/xms.486/obj/i386/xmsblock.obj",
+      "sha256": "4b8b6d30aa65ca6274c5cfd654104ad1005525e09d3382c6cf34da3f7addbc29",
+      "manifest_sha256": "4b8b6d30aa65ca6274c5cfd654104ad1005525e09d3382c6cf34da3f7addbc29",
+      "source_root": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm",
+      "source_relative_path": "xms.486/obj/i386/xmsblock.obj",
+      "refs": [
+        "build/.ninja/msvc-x64-formal-release/build.ninja",
+        "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja",
+        "build/.ninja/msvc-x86-formal-release/build.ninja",
+        "build/.ninja/msvc-x86-release/worker/build.ninja",
+        "build/.ninja/pkg-uuid-x64/worker-reference-x86/build.ninja",
+        "build/.ninja/pkg-uuid-x86/worker/build.ninja",
+        "src/mvdm-host/xms.486/obj/_objects.mac",
+        "tools/audit/test-t420s36originalxmscompile.ps1"
+      ],
+      "modified": false,
+      "live_refs": [
+        "build/.ninja/msvc-x64-formal-release/build.ninja",
+        "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja",
+        "build/.ninja/msvc-x86-formal-release/build.ninja",
+        "build/.ninja/msvc-x86-release/worker/build.ninja",
+        "build/.ninja/pkg-uuid-x64/worker-reference-x86/build.ninja",
+        "build/.ninja/pkg-uuid-x86/worker/build.ninja",
+        "tools/audit/test-t420s36originalxmscompile.ps1"
+      ]
+    }
+  ],
+  "source_manifest": "artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t301-s1-opennt-src-2-mvdm-extra-import-manifest.tsv",
+  "limitations": [
+    "Literal reference and recorded graph evidence only; unsupported future builds not proven."
+  ]
+}

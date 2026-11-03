@@ -1,0 +1,26 @@
+{
+  "source": "src/mvdm-host/softpc.new/base/support/main.c",
+  "sha256": "ceb1e56e69bd52d32d7d1dcfc7ffefd08f12b197ad9d4923b8d6087ac6fd51f1",
+  "original_guards": [
+    54,
+    69,
+    140,
+    167,
+    248
+  ],
+  "anchors": [
+    54,
+    58,
+    69,
+    72,
+    140,
+    143,
+    167,
+    174,
+    248,
+    263
+  ],
+  "build": "x86 worker compiled",
+  "test": "focused structure check passed",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r203.zip"
+}

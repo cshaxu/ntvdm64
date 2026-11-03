@@ -1,0 +1,1118 @@
+{
+  "scope": "current depth-one groups with selected-arm omitted evidence; no child branch analysis",
+  "groups": [
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_line": 304,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "original_approx_line": 380,
+      "original_context": [
+        "    ERRORTRAP(0);",
+        "    ENDCALL(BOOL);",
+        "}",
+        "",
+        "#ifdef MEMPHIS_MENUS",
+        "BOOL ThunkedMenuItemInfo(",
+        "    HMENU hMenu,",
+        "    UINT nPosition,"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "current_line": 1076,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c",
+      "original_approx_line": 2624,
+      "original_context": [
+        " * will tell the cache-lookup to ignore the bpp.  This fixes a problem",
+        " * in Crayola Art Studio where the coloring-book cursor was being created",
+        " * as an invisible cursor.  This lookup is compatible with Win95.",
+        " */",
+        "#if 0",
+        "            cfSearch.bpp = GetIcoCurBpp(LR_flags);",
+        "#else",
+        "            cfSearch.bpp = 0;"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "current_line": 1089,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c",
+      "original_approx_line": 3751,
+      "original_context": [
+        "     *",
+        "     * The color count, width, and height are powers of 2.  So we use Magnitude()",
+        "     * which calculates the order of magnitude in base 2.",
+        "     */",
+        "#if 0 //CHRISWIL: Not in Win95",
+        "",
+        "    return (MagnitudeDiff(uColorsWant, uColorsNew) +",
+        "            MagnitudeDiff(cxNew, *lpcxWant) +"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "current_line": 462,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "original_approx_line": 331,
+      "original_context": [
+        "#ifdef FE_IME // SendMessageWorker()",
+        "        case WM_IME_CHAR:",
+        "        case WM_IME_COMPOSITION:",
+        "#endif // FE_IME",
+        "#ifdef FE_SB // SendMessageWorker()",
+        "            if (fAnsi) {",
+        "                /*",
+        "                 * Setup DBCS Messaging for WM_CHAR..."
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "current_line": 470,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "original_approx_line": 453,
+      "original_context": [
+        "        }",
+        "    }",
+        "#endif",
+        "",
+        "#ifdef FE_SB // SendMessageWorker()",
+        "    /*",
+        "     * Call Client Windows procudure.",
+        "     */"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "current_line": 440,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "original_approx_line": 1777,
+      "original_context": [
+        "     * WM_PAINTs are passed over so the WFPAINTNOTPROCESSED code can be",
+        "     * executed.",
+        "     */",
+        "    if (TestWF(pwnd, WFSERVERSIDEPROC) || (pmsg->message == WM_PAINT)) {",
+        "#ifdef FE_SB // DispatchMessageWorker()",
+        "        if (fAnsi) {",
+        "            /*",
+        "             * Setup DBCS Messaging for WM_CHAR..."
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "current_line": 448,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "original_approx_line": 1803,
+      "original_context": [
+        "     * If the dispatcher and the receiver are both ANSI or both UNICODE",
+        "     * then no message translation is necessary.  NOTE: this test",
+        "     * assumes that fAnsi is FALSE or TRUE, not just zero or non-zero.",
+        "     */",
+        "#ifdef FE_SB // DispatchMessageWorker()",
+        "    if (fAnsi != ((TestWF(pwnd, WFANSIPROC)) ? TRUE : FALSE)) {",
+        "        UserAssert(PtiCurrent() == GETPTI(pwnd)); // use receiver's codepage",
+        "        if (fAnsi) {"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_line": 337,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "original_approx_line": 717,
+      "original_context": [
+        "",
+        "            // !!! LATER if the unichar translates into multiple ANSI chars",
+        "            // !!! then what??? Send two messages??  WM_SYSDEADCHAR??",
+        "            if (bAnsi) {",
+        "#ifdef FE_IME // _PeekMessage()",
+        "               if ((pmsg->message == WM_CHAR)     || (pmsg->message == WM_DEADCHAR) ||",
+        "                   (pmsg->message == WM_IME_CHAR) || (pmsg->message == WM_IME_COMPOSITION)) {",
+        "#else"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_line": 345,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "original_approx_line": 753,
+      "original_context": [
+        "                            NULL)) {",
+        "                       pmsg->wParam = (WPARAM)0x00;",
+        "                       retval = 0;",
+        "                   } else {",
+        "#ifdef FE_SB // _PeekMessage()",
+        "                       //",
+        "                       // Build DBCS-ware wParam. (for WM_CHAR...)",
+        "                       //"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_line": 353,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "original_approx_line": 769,
+      "original_context": [
+        "                       pmsg->wParam = (WPARAM)dwAnsi;",
+        "#endif // FE_SB",
+        "                   }",
+        "               } else {",
+        "#ifdef FE_SB // _PeekMessage()",
+        "                if (RtlWCSMessageWParamCharToMB(pmsg->message, (LPDWORD)&(pmsg->wParam))) {",
+        "                    dwAnsi = pmsg->wParam;",
+        "                    //"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_line": 361,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "original_approx_line": 784,
+      "original_context": [
+        "                if (!RtlWCSMessageWParamCharToMB(pmsg->message, (LPDWORD)&(pmsg->wParam)))",
+        "                    retval = 0;",
+        "#endif // FE_SB",
+        "               }",
+        "#ifdef FE_SB // _PeekMessage()",
+        "            } else {",
+        "               //",
+        "               // Only LOWORD of WPARAM is valid for WM_CHAR...."
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_line": 376,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_approx_line": 957,
+      "original_context": [
+        "     * threads (RIT, Console, etc) don't have a client-server eventpair",
+        "     * handle.  We use this to distinguish the two cases.",
+        "     */",
+        "    if (IS_SYSTEM_THREAD(Thread)) {",
+        "#ifdef FE_IME",
+        "        dwTIFlags = TIF_SYSTEMTHREAD | TIF_DONTATTACHQUEUE | TIF_DISABLEIME;",
+        "#else",
+        "        dwTIFlags = TIF_SYSTEMTHREAD | TIF_DONTATTACHQUEUE;"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_line": 384,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_approx_line": 963,
+      "original_context": [
+        "#else",
+        "        dwTIFlags = TIF_SYSTEMTHREAD | TIF_DONTATTACHQUEUE;",
+        "#endif",
+        "    } else if (Process == gpepCSRSS) {",
+        "#ifdef FE_IME",
+        "        dwTIFlags = TIF_CSRSSTHREAD | TIF_DONTATTACHQUEUE | TIF_DISABLEIME;",
+        "#else",
+        "        dwTIFlags = TIF_CSRSSTHREAD | TIF_DONTATTACHQUEUE;"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_line": 398,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_approx_line": 1203,
+      "original_context": [
+        "     * away.",
+        "     */",
+        "    if (ProcessParams && ProcessParams->WindowFlags & STARTF_SCREENSAVER) {",
+        "        SetForegroundPriority(pti, TRUE);",
+        "#ifdef FE_IME",
+        "        /*",
+        "         * Screen saver doesn't need any IME processing.",
+        "         */"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "current_line": 258,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_approx_line": 4750,
+      "original_context": [
+        "     * Get the message and split.",
+        "     */",
+        "    lpMsg->hwnd = HW(pwnd);",
+        "    lpMsg->message = message;",
+        "#ifdef FE_IME",
+        "    /*",
+        "     * If the IME claims that it needs this vkey, replace it",
+        "     * with VK_PROCESSKEY. The real vkey has been saved in"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "current_line": 435,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+      "original_approx_line": 990,
+      "original_context": [
+        "    FNID(FNID_MB_DLGPROC)               = xxxUnusedFunctionId;",
+        "    FNID(FNID_MDIACTIVATEDLGPROC)       = xxxUnusedFunctionId;",
+        "    FNID(FNID_MDICLIENT)                = xxxUnusedFunctionId;",
+        "    FNID(FNID_STATIC)                   = xxxUnusedFunctionId;",
+        "#ifdef FE_IME",
+        "    FNID(FNID_IME)                      = xxxUnusedFunctionId;",
+        "#else",
+        "    FNID(FNID_UNUSED)                   = xxxUnusedFunctionId;"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "current_line": 423,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+      "original_approx_line": 393,
+      "original_context": [
+        "                *pWParam = 0x00;",
+        "                return TRUE;",
+        "            }",
+        "        }",
+        "#ifdef FE_SB // RtlWCSMessageWParamCharToMB()",
+        "        wAnsi = LOWORD(dwAnsi);",
+        "        //",
+        "        // From:"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "current_line": 236,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\class.c",
+      "original_approx_line": 375,
+      "original_context": [
+        "     * Make an ANSI version of the class name to optimize",
+        "     * GetClassNameA for WOW.",
+        "     */",
+        "    if (HIWORD(lpwndcls->lpszClassName) != 0) {",
+        "#ifdef FE_SB // InternalRegisterClassEx()",
+        "        cch = (wcslen(lpwndcls->lpszClassName) * 2) + 1;",
+        "#else",
+        "        cch = wcslen(lpwndcls->lpszClassName) + 1;"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_line": 230,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "original_approx_line": 719,
+      "original_context": [
+        "    }",
+        "",
+        "  return lpch;",
+        "",
+        "#ifdef FE_SB // GetNextWordbreak()",
+        "#else",
+        "  UNREFERENCED_PARAMETER(dwCodePage);",
+        "#endif // FE_SB"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_line": 238,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "original_approx_line": 875,
+      "original_context": [
+        "  SIZE size;",
+        "",
+        "  if((!(wFormat & DT_NOPREFIX)) &&",
+        "      (iPrefixCount = HIWORD(GetPrefixCount(lpchStr, cchCount, NULL, 0)))) {",
+        "#ifdef FE_SB // DT_GetExtentMinusPrefixes()",
+        "      //",
+        "      // Kanji Windows has three shortcut prefixes...",
+        "      //  (ported from Win95 ctlmgr.c)"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_line": 252,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "original_approx_line": 1224,
+      "original_context": [
+        "  lpchEnd = lpchLineStart + cchCount;",
+        "",
+        "",
+        "  while(lpchText < lpchEnd) {",
+        "#ifdef FE_SB // DT_GetLineBreak()",
+        "      lpchLineEnd = lpch = GetNextWordbreak(dwCodePage,lpchText, lpchEnd, (dwFormat & DT_WORDBREAK));",
+        "#else",
+        "      lpchLineEnd = lpch = GetNextWordbreak(0,lpchText, lpchEnd, (dwFormat & DT_WORDBREAK));"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_line": 83,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_approx_line": 206,
+      "original_context": [
+        "    LPWSTR lpszReserve;",
+        "",
+        "    BEGINCALL()",
+        "",
+        "#ifdef UNICODE",
+        "        lpszReserve = pFormatName;",
+        "#else",
+        "        lpszReserve = LocalAlloc(LMEM_FIXED, chMaxCount * sizeof(WCHAR));"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_line": 91,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_approx_line": 243,
+      "original_context": [
+        "    LPWSTR lpszReserve;",
+        "",
+        "    BEGINCALL()",
+        "",
+        "#ifdef UNICODE",
+        "        lpszReserve = pString;",
+        "#else",
+        "        lpszReserve = LocalAlloc(LMEM_FIXED, cchSize * sizeof(WCHAR));"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_line": 99,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_approx_line": 310,
+      "original_context": [
+        "                wMsgFilterMin,",
+        "                wMsgFilterMax,",
+        "                &hkl);",
+        "",
+        "#ifndef UNICODE",
+        "        // May have a bit more work to do if this MSG is for an ANSI app",
+        "",
+        "        // !!! LATER if the unichar translates into multiple ANSI chars"
+      ],
+      "arm_statuses": [
+        "pending",
+        "newly-excluded"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_line": 108,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_approx_line": 353,
+      "original_context": [
+        "",
+        "BOOL GetKeyboardLayoutName(",
+        "    LPTSTR pwszKL)",
+        "{",
+        "#ifdef UNICODE",
+        "    UNICODE_STRING str;",
+        "    PUNICODE_STRING pstr = &str;",
+        "#else"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_line": 326,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_approx_line": 992,
+      "original_context": [
+        "         * Allow system notification messages containing",
+        "         * strings to go through.",
+        "         */",
+        "        if ((wMsg == WM_WININICHANGE || wMsg == WM_DEVMODECHANGE) && lParam) {",
+        "#ifdef UNICODE",
+        "            RtlInitLargeUnicodeString((PLARGE_UNICODE_STRING)&str,",
+        "                    (LPWSTR)lParam, (UINT)-1);",
+        "#else"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_line": 377,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_approx_line": 1096,
+      "original_context": [
+        "    WCHAR wChar;",
+        "",
+        "    BEGINCALL()",
+        "",
+        "#ifdef UNICODE",
+        "        wChar = cChar;",
+        "#else",
+        "        RtlMultiByteToUnicodeN((LPWSTR)&(wChar), sizeof(WCHAR), NULL, &cChar, sizeof(CHAR));"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_line": 385,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_approx_line": 1122,
+      "original_context": [
+        "{",
+        "    WCHAR wChar;",
+        "    BEGINCALL()",
+        "",
+        "#ifdef UNICODE",
+        "        wChar = cChar;",
+        "#else",
+        "        if (hkl != hVKSCachedHKL) {"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_line": 393,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_approx_line": 1191,
+      "original_context": [
+        "                    &tmpDisplayDevice);",
+        "",
+        "        if (NT_SUCCESS(Status))",
+        "        {",
+        "#ifndef UNICODE",
+        "            LPSTR psz;",
+        "",
+        "            if (lpDisplayDevice->cb >= FIELD_OFFSET(DISPLAY_DEVICE, DeviceString)) {"
+      ],
+      "arm_statuses": [
+        "pending",
+        "newly-excluded"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_line": 402,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_approx_line": 1317,
+      "original_context": [
+        "                                  min(lpDevMode->dmDriverExtra,",
+        "                                      lpDevModeReserve->dmDriverExtra));",
+        "                }",
+        "",
+        "#ifndef UNICODE",
+        "                psz = (LPSTR)&(lpDevMode->dmDeviceName[0]);",
+        "",
+        "                retval = WCSToMB(lpDevModeReserve->dmDeviceName,"
+      ],
+      "arm_statuses": [
+        "pending",
+        "newly-excluded"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_line": 411,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_approx_line": 1434,
+      "original_context": [
+        "    /*",
+        "     * Convert the Dos file name into an Nt file name",
+        "     */",
+        "",
+        "#ifdef UNICODE",
+        "",
+        "    if (NT_SUCCESS(MapDeviceName((LPCWSTR)lpszDeviceName,",
+        "                                 &strNtDeviceName,"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+      "current_line": 75,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\exitwin.c",
+      "original_approx_line": 134,
+      "original_context": [
+        "        dwFlags &= ~EWX_WINLOGON_CALLER;",
+        "        *lpdwFlags = dwFlags;",
+        "",
+        "        if (pwinsta == NULL) {",
+        "#ifndef LATER",
+        "            return STATUS_INVALID_HANDLE;",
+        "#else",
+        "            hwinsta = ppi->pOpenObjectTable[HI_WINDOWSTATION].h;"
+      ],
+      "arm_statuses": [
+        "pending",
+        "newly-excluded"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "current_line": 46,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "original_approx_line": 18,
+      "original_context": [
+        "/*",
+        " * Turning this variable on results in lock tracking, for debugging",
+        " * purposes. This is FALSE by default.",
+        " */",
+        "#ifdef DEBUG_LOCKS",
+        "BOOL gfTrackLocks = TRUE;",
+        "#else",
+        "BOOL gfTrackLocks = FALSE;"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "current_line": 72,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "original_approx_line": 594,
+      "original_context": [
+        "     * Free the object first.",
+        "     */",
+        "    pheT = HMPheFromObject(pobj);",
+        "    UserAssert(((PHEAD)pobj)->cLockObj == 0);",
+        "#ifndef DEBUG",
+        "    switch(pheT->bType) {",
+        "    case TYPE_MENU:",
+        "    case TYPE_WINDOW:"
+      ],
+      "arm_statuses": [
+        "pending",
+        "newly-excluded"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "current_line": 141,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "original_approx_line": 1321,
+      "original_context": [
+        "*",
+        "* 03-04-92 ScottLu      Created.",
+        "\\***************************************************************************/",
+        "",
+        "#ifdef DEBUG",
+        "PVOID",
+        "ThreadUnlock1(",
+        "    PTL ptlIn)"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "current_line": 133,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\draw.c",
+      "original_approx_line": 680,
+      "original_context": [
+        "        wState |= DFCS_FLAT;",
+        "",
+        "    if ((wType != DFC_MENU) &&",
+        "        ((wType != DFC_BUTTON) || (wState & DFCS_BUTTONPUSH)) &&",
+        "#ifdef WINDOWS_ME",
+        "        ((wType != DFC_SCROLL) ||",
+        "          !(wState & (DFCS_SCROLLSIZEGRIP | DFCS_SCROLLSIZEGRIPRIGHT))))",
+        "#else"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "current_line": 415,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+      "original_approx_line": 378,
+      "original_context": [
+        "                return TRUE;",
+        "            }",
+        "        } else {",
+        "            int cwch;",
+        "#ifdef _USERK_",
+        "            cwch = EngWideCharToMultiByte(CodePage,",
+        "                    (LPWSTR)pWParam, NWCH,",
+        "                    (LPSTR)&dwAnsi, sizeof(dwAnsi));"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_line": 261,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "original_approx_line": 1657,
+      "original_context": [
+        "        /*",
+        "         * We used to return a non-zero value in win31.",
+        "         * If the kernel calls this we are always Ver 4.0 or above",
+        "         */",
+        "#ifdef _USERK_",
+        "        if (0) {",
+        "#else",
+        "        if (GETAPPVER() < VER40) {"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_line": 9,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_approx_line": 19,
+      "original_context": [
+        "#ifndef WOW",
+        "#pragma hdrstop",
+        "#endif",
+        "",
+        "#ifdef WOW",
+        "#if (WOW != WINVER)",
+        "#error \"WOW does not match WINVER\"",
+        "#endif"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_line": 34,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_approx_line": 304,
+      "original_context": [
+        "",
+        "BOOL GetKeyboardState(",
+        "    BYTE *pb)",
+        "{",
+        "#ifdef WOW",
+        "    SetCallServerFlag();",
+        "    return FALSE;",
+        "#else"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_line": 48,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_approx_line": 435,
+      "original_context": [
+        "    /*",
+        "     * And validate this handle is valid for this desktop by trying to read it",
+        "     */",
+        "    if (pwnd != NULL) {",
+        "#ifdef WOW",
+        "        PHE phe;",
+        "",
+        "        phe = (&ClientSharedInfo()->aheList[HMIndexFromHandle(hwnd)]);"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_line": 62,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_approx_line": 719,
+      "original_context": [
+        "",
+        "    if (pwnd == NULL)",
+        "        return FALSE;",
+        "",
+        "#ifdef WOW",
+        "    {",
+        "        LPPOINT16 lpT = (LPPOINT16)ppoint;",
+        "        lpT->x = NORMALIZEDSHORTVALUE(lpT->x + pwnd->rcClient.left);"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_line": 76,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_approx_line": 776,
+      "original_context": [
+        "",
+        "    if (pwnd == NULL)",
+        "        return FALSE;",
+        "",
+        "#ifdef WOW",
+        "    UNREFERENCED_PARAMETER(prect);",
+        "    return  (BOOL) &pwnd->rcWindow;    // return pointer to rect.",
+        "#else"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_line": 84,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_approx_line": 795,
+      "original_context": [
+        "",
+        "    if (pwnd == NULL)",
+        "        return FALSE;",
+        "",
+        "#ifdef WOW",
+        "    {",
+        "        LPPOINT16 lpT = (LPPOINT16)ppoint;",
+        "        lpT->x = NORMALIZEDSHORTVALUE(lpT->x - pwnd->rcClient.left);"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_line": 92,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_approx_line": 835,
+      "original_context": [
+        "            (uEnable & MFS_GRAYED)) {",
+        "        return pItem->fState & MFS_GRAYED;",
+        "    }",
+        "",
+        "#ifdef WOW",
+        "    NtUserEnableMenuItem(hMenu, uIDEnableItem, uEnable);",
+        "#else",
+        "    return NtUserEnableMenuItem(hMenu, uIDEnableItem, uEnable);"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_line": 100,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_approx_line": 911,
+      "original_context": [
+        "    if ((phk = _PhkNext((PHOOK)((PBYTE)pci->phkCurrent - pci->ulClientDelta))) == 0) {",
+        "        return 0;",
+        "    }",
+        "",
+        "#ifdef WOW",
+        "    ServerCallNextHookEx();",
+        "#else",
+        "    switch ((INT)(SHORT)HIWORD(dwHookCurrent)) {"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "current_line": 9,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+      "original_approx_line": 15,
+      "original_context": [
+        "* 29-DEC-93 NanduriR      shared user32/user16 code.",
+        "\\***************************************************************************/",
+        "",
+        "",
+        "#ifdef WOW",
+        "",
+        "/*",
+        " * Win 3.1 does not set errors code"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "current_line": 17,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+      "original_approx_line": 135,
+      "original_context": [
+        " * We have three type of desktop validation:",
+        " *",
+        " */",
+        "",
+        "#ifdef WOW",
+        "#define DESKTOPVALIDATE(pobj) \\",
+        "    PCLIENTINFO pci = GetClientInfo();                          \\",
+        "                                                                \\"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "current_line": 202,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\client.c",
+      "original_approx_line": 2288,
+      "original_context": [
+        "    pfnWowWndProcEx = apfnWowIn->pfnWowWndProcEx;",
+        "    pfnWowSetFakeDialogClass = apfnWowIn->pfnWowSetFakeDialogClass;",
+        "",
+        "    // Out'ees",
+        "#ifdef DEBUG",
+        "    apfnWowOut->dwBldInfo = (WINVER << 16) | 0x80000000;",
+        "#else",
+        "    apfnWowOut->dwBldInfo = (WINVER << 16);"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 114,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_approx_line": 2756,
+      "original_context": [
+        "",
+        "    TESTFLAGS(dwFlags, MF_VALID);",
+        "",
+        "    ValidateHMENU(pmenu, hmenu);",
+        "#ifdef MEMPHIS_MENUS",
+        "    ThreadLock(pmenu, &tlpmenu);",
+        "    retval = xxxDeleteMenu(",
+        "            pmenu,"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 134,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_approx_line": 3465,
+      "original_context": [
+        "#ifdef MEMPHIS_MENUS",
+        "    ThreadLock(pmenu, &tlpmenu);",
+        "#endif // MEMPHIS_MENUS",
+        "    if (fInsert)",
+        "#ifdef MEMPHIS_MENUS",
+        "        retval = xxxInsertMenuItem(",
+        "#else",
+        "        retval = _InsertMenuItem("
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 142,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_approx_line": 3476,
+      "original_context": [
+        "                fByPosition,",
+        "                &mii,",
+        "                &strItem);",
+        "    else",
+        "#ifdef MEMPHIS_MENUS",
+        "        retval = xxxSetMenuItemInfo(",
+        "#else",
+        "        retval = _SetMenuItemInfo("
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 162,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_approx_line": 4420,
+      "original_context": [
+        "    TESTFLAGS(dwFlags, MF_VALID);",
+        "",
+        "    ValidateHMENU(pmenu, hmenu);",
+        "",
+        "#ifdef MEMPHIS_MENUS",
+        "    ThreadLock( pmenu, &tlpmenu);",
+        "    retval = xxxRemoveMenu(",
+        "            pmenu,"
+      ],
+      "arm_statuses": [
+        "newly-excluded",
+        "pending"
+      ],
+      "classification": "pending manual function-scope verification; line anchor is approximate"
+    }
+  ]
+}

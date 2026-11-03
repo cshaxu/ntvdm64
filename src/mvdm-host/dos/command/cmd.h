@@ -37,9 +37,12 @@
 #include <malloc.h>
 #include <process.h>
 
+#line 41
 #ifdef WIN_16
+#line 42
 #error DIVERGENCE MVDM-HOST-DIV-600: Unsupported original DOS/Win16 host profile
 #endif
+#line 45
 #line 43
 
 #ifdef WIN_32

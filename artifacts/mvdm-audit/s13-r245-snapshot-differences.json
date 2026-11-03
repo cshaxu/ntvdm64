@@ -1,0 +1,800 @@
+{
+  "rows": [
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\client\\clmsg.c",
+      "snapshot": "build\\t473-s13\\bfs-depth1-clmsg-restore-preflight\\clmsg.c",
+      "hunks": [
+        {
+          "old": 11,
+          "new": 11,
+          "old_count": 0,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [],
+          "new_sample": [
+            "#line 23"
+          ]
+        },
+        {
+          "old": 14,
+          "new": 15,
+          "old_count": 0,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [],
+          "new_sample": [
+            "#line 26"
+          ]
+        },
+        {
+          "old": 56,
+          "new": 58,
+          "old_count": 0,
+          "new_count": 2,
+          "line_only": false,
+          "old_sample": [],
+          "new_sample": [
+            "#endif /* WOW_ORIGINAL_DEFAULT_WINDOW */",
+            "#line 566"
+          ]
+        },
+        {
+          "old": 60,
+          "new": 64,
+          "old_count": 0,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [],
+          "new_sample": [
+            "#line 572"
+          ]
+        },
+        {
+          "old": 61,
+          "new": 66,
+          "old_count": 4,
+          "new_count": 1,
+          "line_only": false,
+          "old_sample": [
+            "    if (!gfTurboDWP) {",
+            "        return CsSendMessage(hwnd, message, wParam, lParam, 0L,"
+          ],
+          "new_sample": [
+            "#error Excluded unsupported original DEBUG default-window path"
+          ]
+        },
+        {
+          "old": 67,
+          "new": 69,
+          "old_count": 1,
+          "new_count": 2,
+          "line_only": false,
+          "old_sample": [
+            ""
+          ],
+          "new_sample": [
+            "#if defined(WOW_ORIGINAL_DEFAULT_WINDOW)",
+            "#line 580"
+          ]
+        },
+        {
+          "old": 396,
+          "new": 399,
+          "old_count": 0,
+          "new_count": 2,
+          "line_only": false,
+          "old_sample": [],
+          "new_sample": [
+            "#endif /* WOW_ORIGINAL_DEFAULT_WINDOW */",
+            "#line 905"
+          ]
+        },
+        {
+          "old": 400,
+          "new": 405,
+          "old_count": 0,
+          "new_count": 2,
+          "line_only": false,
+          "old_sample": [],
+          "new_sample": [
+            "#if defined(WOW_ORIGINAL_DEFAULT_WINDOW)",
+            "#line 1210"
+          ]
+        },
+        {
+          "old": 404,
+          "new": 411,
+          "old_count": 0,
+          "new_count": 2,
+          "line_only": false,
+          "old_sample": [],
+          "new_sample": [
+            "#endif /* WOW_ORIGINAL_DEFAULT_WINDOW */",
+            "#line 1214"
+          ]
+        },
+        {
+          "old": 405,
+          "new": 414,
+          "old_count": 1,
+          "new_count": 1,
+          "line_only": false,
+          "old_sample": [
+            "    } // gfTurboDWP"
+          ],
+          "new_sample": [
+            "#error Excluded unsupported original DEBUG default-window close"
+          ]
+        },
+        {
+          "old": 407,
+          "new": 416,
+          "old_count": 0,
+          "new_count": 2,
+          "line_only": false,
+          "old_sample": [],
+          "new_sample": [
+            "#if defined(WOW_ORIGINAL_DEFAULT_WINDOW)",
+            "#line 1217"
+          ]
+        },
+        {
+          "old": 409,
+          "new": 420,
+          "old_count": 0,
+          "new_count": 24,
+          "line_only": false,
+          "old_sample": [],
+          "new_sample": [
+            "",
+            "#line 1650"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\base\\support\\main.c",
+      "snapshot": "build\\t473-s13\\bfs-depth1-command-xms-markers\\shadow\\src\\mvdm-host\\softpc.new\\base\\support\\main.c",
+      "hunks": [
+        {
+          "old": 61,
+          "new": 61,
+          "old_count": 0,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [],
+          "new_sample": [
+            "#line 54"
+          ]
+        },
+        {
+          "old": 71,
+          "new": 72,
+          "old_count": 0,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [],
+          "new_sample": [
+            "#line 58"
+          ]
+        },
+        {
+          "old": 83,
+          "new": 85,
+          "old_count": 0,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [],
+          "new_sample": [
+            "#line 69"
+          ]
+        },
+        {
+          "old": 86,
+          "new": 89,
+          "old_count": 0,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [],
+          "new_sample": [
+            "#line 72"
+          ]
+        },
+        {
+          "old": 149,
+          "new": 153,
+          "old_count": 0,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [],
+          "new_sample": [
+            "#line 140"
+          ]
+        },
+        {
+          "old": 152,
+          "new": 157,
+          "old_count": 0,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [],
+          "new_sample": [
+            "#line 143"
+          ]
+        },
+        {
+          "old": 165,
+          "new": 171,
+          "old_count": 1,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [
+            "#line 170"
+          ],
+          "new_sample": [
+            "#line 167"
+          ]
+        },
+        {
+          "old": 169,
+          "new": 175,
+          "old_count": 0,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [],
+          "new_sample": [
+            "#line 174"
+          ]
+        },
+        {
+          "old": 236,
+          "new": 243,
+          "old_count": 0,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [],
+          "new_sample": [
+            "#line 248"
+          ]
+        },
+        {
+          "old": 239,
+          "new": 247,
+          "old_count": 0,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [],
+          "new_sample": [
+            "#line 263"
+          ]
+        },
+        {
+          "old": 312,
+          "new": 321,
+          "old_count": 1,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [
+            "#line 329"
+          ],
+          "new_sample": [
+            "#line 338"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\base\\system\\ica.c",
+      "snapshot": "build\\t473-s13\\bfs-depth1-command-xms-markers\\shadow\\src\\mvdm-host\\softpc.new\\base\\system\\ica.c",
+      "hunks": [
+        {
+          "old": 270,
+          "new": 270,
+          "old_count": 1,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [
+            "#line 291"
+          ],
+          "new_sample": [
+            "#line 304"
+          ]
+        },
+        {
+          "old": 275,
+          "new": 275,
+          "old_count": 1,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [
+            "#line 297"
+          ],
+          "new_sample": [
+            "#line 310"
+          ]
+        },
+        {
+          "old": 336,
+          "new": 336,
+          "old_count": 1,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [
+            "#line 357"
+          ],
+          "new_sample": [
+            "#line 370"
+          ]
+        },
+        {
+          "old": 341,
+          "new": 341,
+          "old_count": 0,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [],
+          "new_sample": [
+            "#line 384"
+          ]
+        },
+        {
+          "old": 841,
+          "new": 842,
+          "old_count": 0,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [],
+          "new_sample": [
+            "#line 908"
+          ]
+        },
+        {
+          "old": 844,
+          "new": 846,
+          "old_count": 0,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [],
+          "new_sample": [
+            "#line 912"
+          ]
+        },
+        {
+          "old": 1132,
+          "new": 1135,
+          "old_count": 0,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [],
+          "new_sample": [
+            "#line 1303"
+          ]
+        },
+        {
+          "old": 1135,
+          "new": 1139,
+          "old_count": 0,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [],
+          "new_sample": [
+            "#line 1322"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\host\\src\\nt_cpu.c",
+      "snapshot": "build\\t473-s13\\bfs-depth1-command-xms-markers\\shadow\\src\\mvdm-host\\softpc.new\\host\\src\\nt_cpu.c",
+      "hunks": [
+        {
+          "old": 56,
+          "new": 56,
+          "old_count": 0,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [],
+          "new_sample": [
+            "#line 42"
+          ]
+        },
+        {
+          "old": 59,
+          "new": 60,
+          "old_count": 0,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [],
+          "new_sample": [
+            "#line 47"
+          ]
+        },
+        {
+          "old": 63,
+          "new": 65,
+          "old_count": 1,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [
+            "#line 68"
+          ],
+          "new_sample": [
+            "#line 56"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\host\\src\\nt_event.c",
+      "snapshot": "build\\t473-s13\\bfs-depth1-command-xms-markers\\shadow\\src\\mvdm-host\\softpc.new\\host\\src\\nt_event.c",
+      "hunks": [
+        {
+          "old": 1386,
+          "new": 1386,
+          "old_count": 1,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [
+            "#line 1389"
+          ],
+          "new_sample": [
+            "#line 1333"
+          ]
+        },
+        {
+          "old": 1578,
+          "new": 1578,
+          "old_count": 0,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [],
+          "new_sample": [
+            "#line 1493"
+          ]
+        },
+        {
+          "old": 1581,
+          "new": 1582,
+          "old_count": 0,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [],
+          "new_sample": [
+            "#line 1496"
+          ]
+        },
+        {
+          "old": 1604,
+          "new": 1606,
+          "old_count": 0,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [],
+          "new_sample": [
+            "#line 1514"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "src\\non-mvdm\\base\\ntos\\ex\\probe.c",
+      "snapshot": "build\\t473-s13\\bfs-depth1-command-xms-markers\\shadow\\src\\non-mvdm\\base\\ntos\\ex\\probe.c",
+      "hunks": [
+        {
+          "old": 29,
+          "new": 29,
+          "old_count": 0,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [],
+          "new_sample": [
+            "#line 27"
+          ]
+        },
+        {
+          "old": 32,
+          "new": 33,
+          "old_count": 1,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [
+            "#line 29"
+          ],
+          "new_sample": [
+            "#line 143"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "src\\non-mvdm\\ds\\netapi\\xactsrv\\apimsg.c",
+      "snapshot": "build\\t473-s13\\bfs-depth1-command-xms-markers\\shadow\\src\\non-mvdm\\ds\\netapi\\xactsrv\\apimsg.c",
+      "hunks": [
+        {
+          "old": 58,
+          "new": 58,
+          "old_count": 1,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [
+            "#line 61"
+          ],
+          "new_sample": [
+            "#line 113"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+      "snapshot": "build\\t473-s13\\bfs-depth1-command-xms-markers\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+      "hunks": [
+        {
+          "old": 174,
+          "new": 174,
+          "old_count": 1,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [
+            "#line 172"
+          ],
+          "new_sample": [
+            "#line 180"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\getset.c",
+      "snapshot": "build\\t473-s13\\bfs-depth1-command-xms-markers\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\kernel\\getset.c",
+      "hunks": [
+        {
+          "old": 148,
+          "new": 148,
+          "old_count": 0,
+          "new_count": 24,
+          "line_only": false,
+          "old_sample": [],
+          "new_sample": [
+            "",
+            "#line 749"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\dpmi32\\dpmiint.c",
+      "snapshot": "build\\t473-s13\\bfs-dpmi-vdmtib\\dpmiint.c",
+      "hunks": [
+        {
+          "old": 94,
+          "new": 94,
+          "old_count": 0,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [],
+          "new_sample": [
+            "#line 88"
+          ]
+        },
+        {
+          "old": 99,
+          "new": 100,
+          "old_count": 1,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [
+            "#line 95"
+          ],
+          "new_sample": [
+            "#line 107"
+          ]
+        },
+        {
+          "old": 422,
+          "new": 423,
+          "old_count": 0,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [],
+          "new_sample": [
+            "#line 387"
+          ]
+        },
+        {
+          "old": 425,
+          "new": 427,
+          "old_count": 1,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [
+            "#line 424"
+          ],
+          "new_sample": [
+            "#line 397"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\wow32\\wow32.c",
+      "snapshot": "build\\t473-s13\\bfs-fastwow-outers\\wow32.c",
+      "hunks": [
+        {
+          "old": 169,
+          "new": 169,
+          "old_count": 1,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [
+            "#line 192"
+          ],
+          "new_sample": [
+            "#line 181"
+          ]
+        },
+        {
+          "old": 449,
+          "new": 449,
+          "old_count": 1,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [
+            "#line 475"
+          ],
+          "new_sample": [
+            "#line 468"
+          ]
+        },
+        {
+          "old": 701,
+          "new": 701,
+          "old_count": 1,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [
+            "#line 803"
+          ],
+          "new_sample": [
+            "#line 778"
+          ]
+        },
+        {
+          "old": 706,
+          "new": 706,
+          "old_count": 1,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [
+            "#line 809"
+          ],
+          "new_sample": [
+            "#line 784"
+          ]
+        },
+        {
+          "old": 737,
+          "new": 737,
+          "old_count": 1,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [
+            "#line 896"
+          ],
+          "new_sample": [
+            "#line 871"
+          ]
+        },
+        {
+          "old": 821,
+          "new": 821,
+          "old_count": 1,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [
+            "#line 991"
+          ],
+          "new_sample": [
+            "#line 963"
+          ]
+        },
+        {
+          "old": 826,
+          "new": 826,
+          "old_count": 1,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [
+            "#line 995"
+          ],
+          "new_sample": [
+            "#line 967"
+          ]
+        },
+        {
+          "old": 861,
+          "new": 861,
+          "old_count": 1,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [
+            "#line 1030"
+          ],
+          "new_sample": [
+            "#line 1001"
+          ]
+        },
+        {
+          "old": 868,
+          "new": 868,
+          "old_count": 1,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [
+            "#line 1040"
+          ],
+          "new_sample": [
+            "#line 1011"
+          ]
+        },
+        {
+          "old": 890,
+          "new": 890,
+          "old_count": 1,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [
+            "#line 1060"
+          ],
+          "new_sample": [
+            "#line 1031"
+          ]
+        },
+        {
+          "old": 1606,
+          "new": 1606,
+          "old_count": 1,
+          "new_count": 1,
+          "line_only": true,
+          "old_sample": [
+            "#line 2290"
+          ],
+          "new_sample": [
+            "#line 2251"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "snapshot": "build\\t473-s13\\bfs-mouse-original\\mouse_io.c",
+      "hunks": [
+        {
+          "old": 1485,
+          "new": 1485,
+          "old_count": 0,
+          "new_count": 2,
+          "line_only": false,
+          "old_sample": [],
+          "new_sample": [
+            "    /* DIVERGENCE MVDM-HOST-DIV-467: video changes bypass mouse BOP dispatch. */",
+            "    virtual_swap_instance();"
+          ]
+        },
+        {
+          "old": 5013,
+          "new": 5015,
+          "old_count": 0,
+          "new_count": 2,
+          "line_only": false,
+          "old_sample": [],
+          "new_sample": [
+            "    /* DIVERGENCE MVDM-HOST-DIV-467: route changes also bypass mouse BOPs. */",
+            "    virtual_swap_instance();"
+          ]
+        }
+      ]
+    }
+  ],
+  "limits": "Textual differences are leads; selected behavior and branch identity must be checked before updating classifications."
+}

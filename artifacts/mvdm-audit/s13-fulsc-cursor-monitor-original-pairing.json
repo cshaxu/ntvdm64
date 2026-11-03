@@ -1,0 +1,21 @@
+{
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+  "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+  "current": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+  "current_sha256": "67cea7498083e74a51816f501e8887f711e17e7f765973badc327e04f7bbd48b",
+  "original_guard_line": 2026,
+  "original_retained_continuation_line": 2029,
+  "current_guard_line": 949,
+  "build": "MSVC x86 NTVDM cached build passed",
+  "compare": {
+    "previous_sha256": "b0624d2d4fa75fd9fca763d630ffc31e448773480713c8aa0e8e780b5788131b",
+    "current_sha256": "5c53229d69657cc81b1182bf6e50703771129c1e2352c11a89ca537eec3262c8",
+    "differing_offsets": [
+      288,
+      289,
+      1698412,
+      1698413
+    ]
+  },
+  "limits": "The surrounding X86GFX/window-state adaptation remains independent; no claim of runtime equivalence beyond existing evidence."
+}

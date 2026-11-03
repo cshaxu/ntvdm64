@@ -163,10 +163,12 @@ extern void EDL_fast_bop(ULONG immed);
 #include  <xor.h>	/*     ...     */
 #include  <zfrsrvd.h>	/*     ...     */
 
+#line 155
 #ifdef CPU_486
+#line 156
 #error Unsupported excluded original configuration
 #endif /* CPU_486 */
-#line 174
+#line 163
 
 #define FIX_BT_BUG	/* Of course we want the bug fixed! */
 
@@ -204,7 +206,7 @@ typedef union
 #else /* BIGEND */
 #error Unsupported excluded original configuration
 #endif /* LITTLEND */
-#line 215
+#line 204
 
 /* CPU hardware interrupt definitions */
 #define CPU_HW_INT_MASK         (1 << 0)
@@ -231,11 +233,14 @@ LOCAL IU16 cpu_hw_interrupt_number;
 /* DIVERGENCE: MVDM-HOST-DIV-325. Coarse worker diagnostics remain available;
  * per-instruction attribution is selected only by the diagnostic build. */
 #endif
+#line 226
 #if defined(SFELLOW)
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else
+#line 229
 LOCAL volatile IUM32	cpu_interrupt_map = 0;
 #endif	/* SFELLOW */
+#line 231
 
 
 GLOBAL IBOOL took_relative_jump;
@@ -511,15 +516,12 @@ IMPORT VOID dispatch_q_event();
 #else	/* SFELLOW */
 #error DIVERGENCE MVDM-HOST-DIV-521: SFELLOW alternative is not selected; see mirror register.
 #endif	/* SFELLOW */
-#line 521
+#line 537
 
 #ifdef SFELLOW
 #error Excluded unsupported SFELLOW configuration
-
-
-
-
 #endif	/* SFELLOW */
+#line 545
 
 #if defined(NTVDM) && !defined(SFELLOW)
 static BOOL debug_context_resume_check;
@@ -1153,10 +1155,10 @@ TYPE0F01_2:
 #ifdef SPC486
 #error Excluded unsupported SPC486 profile
 #else
-#line 1167
+#line 1106
 	    Int6();
 #endif /* SPC486 */
-#line 1169
+#line 1108
 
 	    break;
 	    } /* end switch ( GET_XXX(modRM) ) */
@@ -1274,10 +1276,10 @@ TYPE0F02:
 #ifdef SPC486
 #error Excluded unsupported SPC486 profile
 #else
-#line 1290
+#line 1229
 	 Int6();
 #endif /* SPC486 */
-#line 1292
+#line 1231
 
 	 break;
 
@@ -1286,10 +1288,10 @@ TYPE0F02:
 #ifdef SPC486
 #error Excluded unsupported SPC486 profile
 #else
-#line 1304
+#line 1243
 	 Int6();
 #endif /* SPC486 */
-#line 1306
+#line 1245
 
 	 break;
 
@@ -1449,7 +1451,7 @@ TYPE0F90:
 #ifndef FIX_BT_BUG
 #error Unsupported excluded original configuration
 #endif
-#line 1465
+#line 1406
 	 modRM = GET_INST_BYTE(p);
 	 if ( GET_OPERAND_SIZE() == USE16 )
 	    {
@@ -1522,7 +1524,7 @@ TYPE0FA5:
 #ifndef FIX_BT_BUG
 #error Unsupported excluded original configuration
 #endif
-#line 1537
+#line 1478
 TYPE0FAB:
 	 modRM = GET_INST_BYTE(p);
 	 if ( GET_OPERAND_SIZE() == USE16 )
@@ -1574,10 +1576,10 @@ TYPE0FAB:
 #ifdef SPC486
 #error Excluded unsupported SPC486 profile
 #else
-#line 1596
+#line 1537
 	 Int6();
 #endif /* SPC486 */
-#line 1598
+#line 1539
 
 	 break;
 
@@ -1586,10 +1588,10 @@ TYPE0FAB:
 #ifdef SPC486
 #error Excluded unsupported SPC486 profile
 #else
-#line 1626
+#line 1567
 	 Int6();
 #endif /* SPC486 */
-#line 1628
+#line 1569
 
 	 break;
 
@@ -1600,7 +1602,7 @@ TYPE0FAB:
 #line 1635
       case  0xb3:   /* T5 BTR Ev Gv */   instp32328 = BTR;   goto TYPE0FAB;
 #endif
-#line 1637
+#line 1578
       case  0xb4:   /* T4 LFS Gv Mp */   instp32p32 = LFS;   goto TYPEC4;
       case  0xb5:   /* T4 LGS Gv Mp */   instp32p32 = LGS;   goto TYPEC4;
 
@@ -1672,7 +1674,7 @@ TYPE0FAB:
 #line 1705
 	 goto TYPE0FAB;
 #endif
-#line 1707
+#line 1648
       case  0xbc:   /* T5 BSF Gv Ev */
 	 modRM = GET_INST_BYTE(p);
 	 if ( GET_OPERAND_SIZE() == USE16 )
@@ -1733,10 +1735,10 @@ TYPE0FAB:
 #ifdef SPC486
 #error Excluded unsupported SPC486 profile
 #else
-#line 1776
+#line 1717
 	 Int6();
 #endif /* SPC486 */
-#line 1778
+#line 1719
 
 	 break;
 
@@ -1745,10 +1747,10 @@ TYPE0FAB:
 #ifdef SPC486
 #error Excluded unsupported SPC486 profile
 #else
-#line 1808
+#line 1749
 	 Int6();
 #endif /* SPC486 */
-#line 1810
+#line 1751
 
 	 break;
 
@@ -1764,7 +1766,7 @@ TYPE0FAB:
 #ifdef SPC486
 #error Excluded unsupported SPC486 profile
 #else
-#line 1840
+#line 1781
 	 Int6();
 #endif /* SPC486 */
 #line 1783
@@ -4263,6 +4265,7 @@ CPU_RESTORED_RESET:
 #ifdef SYNCH_TIMERS
 #error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register.
 #endif /* SYNCH_TIMERS */
+#line 4402
 #ifndef SFELLOW
    if (GET_IF() && c_cpu_take_event(CPU_HW_INT_MASK))
       {
@@ -4301,6 +4304,7 @@ CPU_RESTORED_RESET:
 #else	/* SFELLOW */
 #error DIVERGENCE MVDM-HOST-DIV-521: SFELLOW alternative is not selected; see mirror register.
 #endif	/* SFELLOW */
+#line 4443
 
 #ifdef PIG
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
@@ -4329,10 +4333,11 @@ NEXT_INST:
    }
 #endif
 
+#line 4492
 #if defined(SFELLOW) && !defined(PROD)
 #error Unsupported excluded original configuration
 #endif	/* SFELLOW && !PROD */
-#line 4407
+#line 4498
 
    /* Reset default mode */
    SET_OPERAND_SIZE(GET_CS_AR_X());
@@ -4589,7 +4594,7 @@ LOCAL VOID
 #ifdef SPC486
 #error Excluded unsupported SPC486 profile
 #endif /* SPC486 */
-#line 4663
+#line 4777
 
       SET_DR(DR_DAR0, 0);   /* Really Undefined */
       SET_DR(DR_DAR1, 0);   /* Really Undefined */
@@ -4620,10 +4625,10 @@ LOCAL VOID
 #ifdef SPC486
 #error Excluded unsupported SPC486 profile
 #else
-#line 4693
+#line 4803
       SET_EDX(0x00000303);	/* Give component ID : revision ID */
 #endif
-#line 4695
+#line 4805
       SET_EBX(0);   /* Really Undefined */
       SET_ESP(0);	/* Really Undefined */
       SET_EBP(0);   /* Really Undefined */
@@ -4631,9 +4636,12 @@ LOCAL VOID
       SET_EDI(0);   /* Really Undefined */
 
 
+#line 4812
 #if defined(SWITCHNPX)
+#line 4813
 #error Unsupported excluded original configuration
 #endif	/* SWITCHNPX */
+#line 4816
 #line 4706
 
       if ( disableNpx )
@@ -4707,7 +4715,7 @@ LOCAL VOID
 #else
 #error Unsupported excluded original configuration
 #endif
-#line 4790
+#line 4887
       }
 
 #ifdef	PIG

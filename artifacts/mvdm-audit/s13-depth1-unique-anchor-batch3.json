@@ -1,0 +1,248 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keyba.c",
+    "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+    "before_sha256": "796cc0e4c0698be1abaebf9728490a36497de9818ae1f4e4c37719328576df9a",
+    "after_sha256": "5e3ff6f5ff8346d38b6e1aa3f96f8a6bce42871368c932a9a9e0bb649b4f9de0",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keyba.c",
+        "anchor_line": 2080,
+        "old": 2149,
+        "new": 2361,
+        "following": "LOCAL VOID cmd_to_8042  IFN1(half_word,cmd_code)",
+        "original_line": 2363,
+        "group_line": 1950,
+        "depth1_endline": 2079,
+        "arm_statuses": [
+          "retained-observed",
+          "newly-excluded"
+        ]
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keyba.c",
+        "anchor_line": 2561,
+        "old": 2692,
+        "new": 2932,
+        "following": "sure_note_trace2(AT_KBD_VERBOSE,\"...kbd_inb(%#x) returns %#x\", port, *val);",
+        "original_line": 2933,
+        "group_line": 2532,
+        "depth1_endline": 2560,
+        "arm_statuses": [
+          "retained-observed",
+          "newly-excluded"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\get_env.c",
+    "original_sha256": "7e0fc5e63e423a6bfc0f29e871d55c60d95cc1319f621571317b8f5a73433a2f",
+    "before_sha256": "82599d9f09b128e2109ed8fc8ae7088987c626b20f06ec4836c51edcb74af1ef",
+    "after_sha256": "2b2965c828aaa56c4b52a7da835206e7daf1e65cecaa280e85f6a0da29660f2c",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\get_env.c",
+        "anchor_line": 45,
+        "old": 80,
+        "new": 81,
+        "following": "GLOBAL IBOOL IBOOLgetenv IFN2(char *, name, IBOOL, default_value)",
+        "original_line": 83,
+        "group_line": 42,
+        "depth1_endline": 44,
+        "arm_statuses": [
+          "newly-excluded"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/support/main.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\main.c",
+    "original_sha256": "5dfdca835f1ca6fddf07826f2b4aa9e25f4c8bd0ceef21b2dce9884de721376c",
+    "before_sha256": "ceb1e56e69bd52d32d7d1dcfc7ffefd08f12b197ad9d4923b8d6087ac6fd51f1",
+    "after_sha256": "e76b5d42d93b188c2d2d5cdc62b47f18df27d365d247652ec28b2af90f41a871",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/softpc.new/base/support/main.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\main.c",
+        "anchor_line": 321,
+        "old": 329,
+        "new": 338,
+        "following": "mouse_driver_initialisation();",
+        "original_line": 338,
+        "group_line": 318,
+        "depth1_endline": 320,
+        "arm_statuses": [
+          "newly-excluded"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\at_dma.c",
+    "original_sha256": "4867e3e03e0a5f49066963a37a957d231ec9addbc203789beed42bcf510f3f01",
+    "before_sha256": "5118918c1f2f6607d96b31aa6c13a8a0e4c55c198a7bd7e53aea678978665b01",
+    "after_sha256": "f51346082abab3ebfe9931b0947f699e9184d69ddb59f9fb3af74aed0db35870",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\at_dma.c",
+        "anchor_line": 801,
+        "old": 811,
+        "new": 817,
+        "following": "sas_PWS(dma_addr, (host_addr) hw_buffer, length);",
+        "original_line": 817,
+        "group_line": 798,
+        "depth1_endline": 800,
+        "arm_statuses": [
+          "newly-excluded"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+    "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+    "before_sha256": "4e2728687508b9c240c56e65fc4ca8e93a557e2ffdeaf61f761775b11d0a0d6b",
+    "after_sha256": "9e78384698a9e7c936a935e7c6895e25b85d9179f4898058e00c9eef8a2e5064",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+        "anchor_line": 1603,
+        "old": 1681,
+        "new": 1784,
+        "following": "LOCAL void updateCounter IFN0()",
+        "original_line": 1786,
+        "group_line": 1600,
+        "depth1_endline": 1602,
+        "arm_statuses": [
+          "newly-excluded"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_eoi.c",
+    "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
+    "before_sha256": "793b9989d7e691bd458cd6a6c82f2c7d1bbec78d0c3a35aa5b65c58eb8f07cf4",
+    "after_sha256": "6bfb427c75b1e50decac4c528a86410adc5aba55bbccc74bf049c1b2fef67ab7",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_eoi.c",
+        "anchor_line": 50,
+        "old": 47,
+        "new": 56,
+        "following": "HANDLE hWowIdleEvent = INVALID_HANDLE_VALUE;",
+        "original_line": 57,
+        "group_line": 47,
+        "depth1_endline": 49,
+        "arm_statuses": [
+          "already-excluded"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_event.c",
+    "original_sha256": "7f555a87ba029627d6811c0f7b96964bb8a96af90c60c89012975a4ac5442076",
+    "before_sha256": "5769344117115a39c5ad4f7a9f3eaf0f316552485a042f16372c387cedabd2ca",
+    "after_sha256": "517c246720970ad2b6b575c9721c13801910576d094e99d09ad6241224a6e488",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_event.c",
+        "anchor_line": 1386,
+        "old": 1389,
+        "new": 1333,
+        "following": "if (CntrlHandlerState & CNTRL_PUSHEXIT) {",
+        "original_line": 1333,
+        "group_line": 1383,
+        "depth1_endline": 1385,
+        "arm_statuses": [
+          "already-excluded"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+    "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+    "before_sha256": "0f57d1a99ea71c9258a0e7664db08af1699ac15d0b7a6af5333e5fc4078e26e1",
+    "after_sha256": "8a6ac4cbc55e1a10577b52da591406924fac41d8aac5f8beff65fa0d5a4a0c19",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+        "anchor_line": 815,
+        "old": 918,
+        "new": 827,
+        "following": "if (sc.ScreenState == STREAM_IO) {",
+        "original_line": 827,
+        "group_line": 812,
+        "depth1_endline": 814,
+        "arm_statuses": [
+          "newly-excluded"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_rez.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_rez.c",
+    "original_sha256": "12a6486b8cf81e2469b1acd7f9e9d03cada6b4690fad03ea171941802f0945fc",
+    "before_sha256": "bae57804948438a516ae0cc8e16919d88c4cf9daa8ebce59a78a65393c8398a4",
+    "after_sha256": "0511f195c0a8a6c4721c164bd546e866bfd345f48492469e48e70137e2e6102a",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_rez.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_rez.c",
+        "anchor_line": 56,
+        "old": 56,
+        "new": 55,
+        "following": "long host_read_resource(int type, char *name, byte *addr, int maxsize, int display_error)",
+        "original_line": 56,
+        "group_line": 53,
+        "depth1_endline": 55,
+        "arm_statuses": [
+          "newly-excluded"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_rflop.c",
+    "original_sha256": "22c82627bf993ac4fd072ad1bb7d4f62000b60889e6955e83f5f676ac5bd7a29",
+    "before_sha256": "2c84f2fcd52f333c74e33c3986844f6252e91149215333762bf98be693b07983",
+    "after_sha256": "9ff9228bc8c2b2ef7ba3fd89a76653b0a83d0f5814cb6b88d4c08edbe95afd99",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_rflop.c",
+        "anchor_line": 345,
+        "old": 344,
+        "new": 396,
+        "following": "nt_gfi_rdiskette_term(flp);\t/*  shutdown process */",
+        "original_line": 396,
+        "group_line": 342,
+        "depth1_endline": 344,
+        "arm_statuses": [
+          "newly-excluded"
+        ]
+      }
+    ]
+  }
+]

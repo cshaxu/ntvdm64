@@ -5,6 +5,23 @@
  * Unselected until the complete EDIT dependency group is wired. */
 #include "precomp.h"
 
+#line 15
+#ifdef WOW
+#error Excluded unsupported original 16-bit WOW source branch
+#else
+#line 109
+#endif  // WOW
+#line 128
+
+#line 135
+#ifdef WOW
+#error Excluded unsupported original 16-bit WOW source branch
+#else
+#line 145
+#endif
+#line 171
+
+
 /* OPENNT-HOST-106: complete original relationship/coordinate leaves. */
 BOOL _IsChild(
     PWND pwndParent,
@@ -103,3 +120,11 @@ BOOL _GetClientRect(
     return TRUE;
 }
 
+
+
+#line 262
+#if defined(DEBUG) && !defined(_USERK_) && !defined(WOW)
+#line 263
+#error Unsupported DEBUG original branch
+#endif
+#line 275

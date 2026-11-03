@@ -1,0 +1,46 @@
+{
+  "cases": [
+    {
+      "name": "anchor00",
+      "expected_line": 1761,
+      "source": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "marker_line": 1306,
+      "ok": true,
+      "log_sha256": "b38fe257f7107d0c52aa6d98aa5ea648a2c248a92a852e005f85fa2b8f9a88e0"
+    },
+    {
+      "name": "anchor01",
+      "expected_line": 1991,
+      "source": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "marker_line": 1335,
+      "ok": true,
+      "log_sha256": "a34b4005f606b3cb4ed7d1b91ba21b47644f550cea8ca795ad2f053c76ef6eb9"
+    },
+    {
+      "name": "anchor02",
+      "expected_line": 2452,
+      "source": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "marker_line": 1982,
+      "ok": true,
+      "log_sha256": "9aa0fd4f32b597299847d64f593cb375a431d2d1b8602de76e2f0e76ab9b11a2"
+    },
+    {
+      "name": "anchor03",
+      "expected_line": 250,
+      "source": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "marker_line": 232,
+      "ok": true,
+      "log_sha256": "e40bb8c4b9b2c3375b72c105eb6419079acd04fd09cd5d7da642d9ec1a788ba1"
+    },
+    {
+      "name": "anchor04",
+      "expected_line": 784,
+      "source": "src/mvdm-host/wow32/wcall16.c",
+      "marker_line": 681,
+      "ok": true,
+      "log_sha256": "c6b1c2d3175fb0a61d00560da884bfe61d35e68b5af4a2294a1f0da7dff3e7db"
+    }
+  ],
+  "failed": [],
+  "limits": "source-derived #line directive snippets; selected full-context builds separately recorded"
+}

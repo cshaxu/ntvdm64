@@ -1,0 +1,336 @@
+{
+  "candidate_files_checked": 484,
+  "matches": [
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\client\\clmsg.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-clmsg-restore-preflight\\clmsg.c",
+      "sha256": "b18629e01f8b6f00e5667753b12b1498b821f40adb11e562cb1ab7e9226af52c"
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\base\\support\\main.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-command-xms-markers\\shadow\\src\\mvdm-host\\softpc.new\\base\\support\\main.c",
+      "sha256": "e470c985eebea0e46578d24b9de80ed03d89b06c1c0f8997ecb3d8cab1074eea"
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\base\\system\\ica.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-command-xms-markers\\shadow\\src\\mvdm-host\\softpc.new\\base\\system\\ica.c",
+      "sha256": "b9527bc864083fe7783e9836bde7a1bc3784d18b838c439455ca7e57c001ee2a"
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\host\\src\\nt_cpu.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-command-xms-markers\\shadow\\src\\mvdm-host\\softpc.new\\host\\src\\nt_cpu.c",
+      "sha256": "c2b950d588b62953194a3f6e5063f76e5db3ca3237993ae6842b9651f75fe274"
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\host\\src\\nt_event.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-command-xms-markers\\shadow\\src\\mvdm-host\\softpc.new\\host\\src\\nt_event.c",
+      "sha256": "e7a626a7f35aa5bc734163d6c5e4f8caa62468b9cbccb310497a51259f01e5a2"
+    },
+    {
+      "source": "src\\non-mvdm\\base\\ntos\\ex\\probe.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-command-xms-markers\\shadow\\src\\non-mvdm\\base\\ntos\\ex\\probe.c",
+      "sha256": "d90adbadd7b0d9937302509c577e5f846a05ba4562ccf02f7d6ddfb346e17f82"
+    },
+    {
+      "source": "src\\non-mvdm\\ds\\netapi\\xactsrv\\apimsg.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-command-xms-markers\\shadow\\src\\non-mvdm\\ds\\netapi\\xactsrv\\apimsg.c",
+      "sha256": "f71cc24fde1c557386109d2b871e45d965d4410d61ac655f5776e7c9e7001aa1"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\client\\clmsg.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-command-xms-markers\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\client\\clmsg.c",
+      "sha256": "b18629e01f8b6f00e5667753b12b1498b821f40adb11e562cb1ab7e9226af52c"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-command-xms-markers\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+      "sha256": "59441bf9bbd1e173632198a172f8f14273d417491c0616ee9fbca4c31db0ba43"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\getset.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-command-xms-markers\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\kernel\\getset.c",
+      "sha256": "09e2ea800d489f0a8364f10a906e97d04f62e8db3c22ef19d73a2343c4340bdb"
+    },
+    {
+      "source": "src\\non-mvdm\\base\\ntos\\ex\\probe.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-host-header-probes\\shadow\\src\\non-mvdm\\base\\ntos\\ex\\probe.c",
+      "sha256": "d90adbadd7b0d9937302509c577e5f846a05ba4562ccf02f7d6ddfb346e17f82"
+    },
+    {
+      "source": "src\\non-mvdm\\ds\\netapi\\xactsrv\\apimsg.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-host-header-probes\\shadow\\src\\non-mvdm\\ds\\netapi\\xactsrv\\apimsg.c",
+      "sha256": "f71cc24fde1c557386109d2b871e45d965d4410d61ac655f5776e7c9e7001aa1"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\client\\clmsg.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-host-header-probes\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\client\\clmsg.c",
+      "sha256": "b18629e01f8b6f00e5667753b12b1498b821f40adb11e562cb1ab7e9226af52c"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-host-header-probes\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+      "sha256": "59441bf9bbd1e173632198a172f8f14273d417491c0616ee9fbca4c31db0ba43"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\getset.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-host-header-probes\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\kernel\\getset.c",
+      "sha256": "09e2ea800d489f0a8364f10a906e97d04f62e8db3c22ef19d73a2343c4340bdb"
+    },
+    {
+      "source": "src\\non-mvdm\\base\\ntos\\ex\\probe.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-inactive-header-probes\\shadow\\src\\non-mvdm\\base\\ntos\\ex\\probe.c",
+      "sha256": "d90adbadd7b0d9937302509c577e5f846a05ba4562ccf02f7d6ddfb346e17f82"
+    },
+    {
+      "source": "src\\non-mvdm\\ds\\netapi\\xactsrv\\apimsg.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-inactive-header-probes\\shadow\\src\\non-mvdm\\ds\\netapi\\xactsrv\\apimsg.c",
+      "sha256": "f71cc24fde1c557386109d2b871e45d965d4410d61ac655f5776e7c9e7001aa1"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\client\\clmsg.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-inactive-header-probes\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\client\\clmsg.c",
+      "sha256": "b18629e01f8b6f00e5667753b12b1498b821f40adb11e562cb1ab7e9226af52c"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-inactive-header-probes\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+      "sha256": "59441bf9bbd1e173632198a172f8f14273d417491c0616ee9fbca4c31db0ba43"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\getset.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-inactive-header-probes\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\kernel\\getset.c",
+      "sha256": "09e2ea800d489f0a8364f10a906e97d04f62e8db3c22ef19d73a2343c4340bdb"
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\base\\support\\main.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-ntbop-i386\\shadow\\src\\mvdm-host\\softpc.new\\base\\support\\main.c",
+      "sha256": "e470c985eebea0e46578d24b9de80ed03d89b06c1c0f8997ecb3d8cab1074eea"
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\base\\system\\ica.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-ntbop-i386\\shadow\\src\\mvdm-host\\softpc.new\\base\\system\\ica.c",
+      "sha256": "b9527bc864083fe7783e9836bde7a1bc3784d18b838c439455ca7e57c001ee2a"
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\host\\src\\nt_cpu.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-ntbop-i386\\shadow\\src\\mvdm-host\\softpc.new\\host\\src\\nt_cpu.c",
+      "sha256": "c2b950d588b62953194a3f6e5063f76e5db3ca3237993ae6842b9651f75fe274"
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\host\\src\\nt_event.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-ntbop-i386\\shadow\\src\\mvdm-host\\softpc.new\\host\\src\\nt_event.c",
+      "sha256": "e7a626a7f35aa5bc734163d6c5e4f8caa62468b9cbccb310497a51259f01e5a2"
+    },
+    {
+      "source": "src\\non-mvdm\\base\\ntos\\ex\\probe.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-ntbop-i386\\shadow\\src\\non-mvdm\\base\\ntos\\ex\\probe.c",
+      "sha256": "d90adbadd7b0d9937302509c577e5f846a05ba4562ccf02f7d6ddfb346e17f82"
+    },
+    {
+      "source": "src\\non-mvdm\\ds\\netapi\\xactsrv\\apimsg.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-ntbop-i386\\shadow\\src\\non-mvdm\\ds\\netapi\\xactsrv\\apimsg.c",
+      "sha256": "f71cc24fde1c557386109d2b871e45d965d4410d61ac655f5776e7c9e7001aa1"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\client\\clmsg.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-ntbop-i386\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\client\\clmsg.c",
+      "sha256": "b18629e01f8b6f00e5667753b12b1498b821f40adb11e562cb1ab7e9226af52c"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-ntbop-i386\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+      "sha256": "59441bf9bbd1e173632198a172f8f14273d417491c0616ee9fbca4c31db0ba43"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\getset.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-ntbop-i386\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\kernel\\getset.c",
+      "sha256": "09e2ea800d489f0a8364f10a906e97d04f62e8db3c22ef19d73a2343c4340bdb"
+    },
+    {
+      "source": "src\\non-mvdm\\base\\ntos\\ex\\probe.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-pending-graph-markers\\shadow\\src\\non-mvdm\\base\\ntos\\ex\\probe.c",
+      "sha256": "d90adbadd7b0d9937302509c577e5f846a05ba4562ccf02f7d6ddfb346e17f82"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\client\\clmsg.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-pending-graph-markers\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\client\\clmsg.c",
+      "sha256": "b18629e01f8b6f00e5667753b12b1498b821f40adb11e562cb1ab7e9226af52c"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-pending-graph-markers\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+      "sha256": "59441bf9bbd1e173632198a172f8f14273d417491c0616ee9fbca4c31db0ba43"
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\base\\support\\main.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-pending-positive-observation\\shadow\\src\\mvdm-host\\softpc.new\\base\\support\\main.c",
+      "sha256": "e470c985eebea0e46578d24b9de80ed03d89b06c1c0f8997ecb3d8cab1074eea"
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\base\\system\\ica.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-pending-positive-observation\\shadow\\src\\mvdm-host\\softpc.new\\base\\system\\ica.c",
+      "sha256": "b9527bc864083fe7783e9836bde7a1bc3784d18b838c439455ca7e57c001ee2a"
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\host\\src\\nt_cpu.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-pending-positive-observation\\shadow\\src\\mvdm-host\\softpc.new\\host\\src\\nt_cpu.c",
+      "sha256": "c2b950d588b62953194a3f6e5063f76e5db3ca3237993ae6842b9651f75fe274"
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\host\\src\\nt_event.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-pending-positive-observation\\shadow\\src\\mvdm-host\\softpc.new\\host\\src\\nt_event.c",
+      "sha256": "e7a626a7f35aa5bc734163d6c5e4f8caa62468b9cbccb310497a51259f01e5a2"
+    },
+    {
+      "source": "src\\non-mvdm\\base\\ntos\\ex\\probe.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-pending-positive-observation\\shadow\\src\\non-mvdm\\base\\ntos\\ex\\probe.c",
+      "sha256": "d90adbadd7b0d9937302509c577e5f846a05ba4562ccf02f7d6ddfb346e17f82"
+    },
+    {
+      "source": "src\\non-mvdm\\ds\\netapi\\xactsrv\\apimsg.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-pending-positive-observation\\shadow\\src\\non-mvdm\\ds\\netapi\\xactsrv\\apimsg.c",
+      "sha256": "f71cc24fde1c557386109d2b871e45d965d4410d61ac655f5776e7c9e7001aa1"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\client\\clmsg.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-pending-positive-observation\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\client\\clmsg.c",
+      "sha256": "b18629e01f8b6f00e5667753b12b1498b821f40adb11e562cb1ab7e9226af52c"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-pending-positive-observation\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+      "sha256": "59441bf9bbd1e173632198a172f8f14273d417491c0616ee9fbca4c31db0ba43"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\getset.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-pending-positive-observation\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\kernel\\getset.c",
+      "sha256": "09e2ea800d489f0a8364f10a906e97d04f62e8db3c22ef19d73a2343c4340bdb"
+    },
+    {
+      "source": "src\\non-mvdm\\base\\ntos\\ex\\probe.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-prepared-cfpu\\shadow\\src\\non-mvdm\\base\\ntos\\ex\\probe.c",
+      "sha256": "d90adbadd7b0d9937302509c577e5f846a05ba4562ccf02f7d6ddfb346e17f82"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\client\\clmsg.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-prepared-cfpu\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\client\\clmsg.c",
+      "sha256": "b18629e01f8b6f00e5667753b12b1498b821f40adb11e562cb1ab7e9226af52c"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-prepared-cfpu\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+      "sha256": "59441bf9bbd1e173632198a172f8f14273d417491c0616ee9fbca4c31db0ba43"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\getset.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-prepared-cfpu\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\kernel\\getset.c",
+      "sha256": "09e2ea800d489f0a8364f10a906e97d04f62e8db3c22ef19d73a2343c4340bdb"
+    },
+    {
+      "source": "src\\non-mvdm\\base\\ntos\\ex\\probe.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-prepared-headers\\shadow\\src\\non-mvdm\\base\\ntos\\ex\\probe.c",
+      "sha256": "d90adbadd7b0d9937302509c577e5f846a05ba4562ccf02f7d6ddfb346e17f82"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\client\\clmsg.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-prepared-headers\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\client\\clmsg.c",
+      "sha256": "b18629e01f8b6f00e5667753b12b1498b821f40adb11e562cb1ab7e9226af52c"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-prepared-headers\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+      "sha256": "59441bf9bbd1e173632198a172f8f14273d417491c0616ee9fbca4c31db0ba43"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\getset.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-prepared-headers\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\kernel\\getset.c",
+      "sha256": "09e2ea800d489f0a8364f10a906e97d04f62e8db3c22ef19d73a2343c4340bdb"
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\base\\support\\main.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-standalone-r2\\shadow\\src\\mvdm-host\\softpc.new\\base\\support\\main.c",
+      "sha256": "e470c985eebea0e46578d24b9de80ed03d89b06c1c0f8997ecb3d8cab1074eea"
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\base\\system\\ica.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-standalone-r2\\shadow\\src\\mvdm-host\\softpc.new\\base\\system\\ica.c",
+      "sha256": "b9527bc864083fe7783e9836bde7a1bc3784d18b838c439455ca7e57c001ee2a"
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\host\\src\\nt_cpu.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-standalone-r2\\shadow\\src\\mvdm-host\\softpc.new\\host\\src\\nt_cpu.c",
+      "sha256": "c2b950d588b62953194a3f6e5063f76e5db3ca3237993ae6842b9651f75fe274"
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\host\\src\\nt_event.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-standalone-r2\\shadow\\src\\mvdm-host\\softpc.new\\host\\src\\nt_event.c",
+      "sha256": "e7a626a7f35aa5bc734163d6c5e4f8caa62468b9cbccb310497a51259f01e5a2"
+    },
+    {
+      "source": "src\\non-mvdm\\base\\ntos\\ex\\probe.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-standalone-r2\\shadow\\src\\non-mvdm\\base\\ntos\\ex\\probe.c",
+      "sha256": "d90adbadd7b0d9937302509c577e5f846a05ba4562ccf02f7d6ddfb346e17f82"
+    },
+    {
+      "source": "src\\non-mvdm\\ds\\netapi\\xactsrv\\apimsg.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-standalone-r2\\shadow\\src\\non-mvdm\\ds\\netapi\\xactsrv\\apimsg.c",
+      "sha256": "f71cc24fde1c557386109d2b871e45d965d4410d61ac655f5776e7c9e7001aa1"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\client\\clmsg.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-standalone-r2\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\client\\clmsg.c",
+      "sha256": "b18629e01f8b6f00e5667753b12b1498b821f40adb11e562cb1ab7e9226af52c"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-standalone-r2\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+      "sha256": "59441bf9bbd1e173632198a172f8f14273d417491c0616ee9fbca4c31db0ba43"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\getset.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-standalone-r2\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\kernel\\getset.c",
+      "sha256": "09e2ea800d489f0a8364f10a906e97d04f62e8db3c22ef19d73a2343c4340bdb"
+    },
+    {
+      "source": "src\\non-mvdm\\base\\ntos\\ex\\probe.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-video-header-probes\\shadow\\src\\non-mvdm\\base\\ntos\\ex\\probe.c",
+      "sha256": "d90adbadd7b0d9937302509c577e5f846a05ba4562ccf02f7d6ddfb346e17f82"
+    },
+    {
+      "source": "src\\non-mvdm\\ds\\netapi\\xactsrv\\apimsg.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-video-header-probes\\shadow\\src\\non-mvdm\\ds\\netapi\\xactsrv\\apimsg.c",
+      "sha256": "f71cc24fde1c557386109d2b871e45d965d4410d61ac655f5776e7c9e7001aa1"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\client\\clmsg.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-video-header-probes\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\client\\clmsg.c",
+      "sha256": "b18629e01f8b6f00e5667753b12b1498b821f40adb11e562cb1ab7e9226af52c"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-video-header-probes\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+      "sha256": "59441bf9bbd1e173632198a172f8f14273d417491c0616ee9fbca4c31db0ba43"
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\getset.c",
+      "old_snapshot": "build\\t473-s13\\bfs-depth1-video-header-probes\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\kernel\\getset.c",
+      "sha256": "09e2ea800d489f0a8364f10a906e97d04f62e8db3c22ef19d73a2343c4340bdb"
+    },
+    {
+      "source": "src\\mvdm-host\\dpmi32\\dpmiint.c",
+      "old_snapshot": "build\\t473-s13\\bfs-dpmi-vdmtib\\dpmiint.c",
+      "sha256": "07cdba736041854ca2f1f7bf7574df5efd15c702ceb367854670d4da5d955646"
+    },
+    {
+      "source": "src\\mvdm-host\\wow32\\wow32.c",
+      "old_snapshot": "build\\t473-s13\\bfs-fastwow-outers\\wow32.c",
+      "sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "old_snapshot": "build\\t473-s13\\bfs-mouse-original\\mouse_io.c",
+      "sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
+    }
+  ],
+  "limits": "SHA-256 exact matches to old queue hash only; scratch evidence has no source ownership claim and does not imply use as build input."
+}

@@ -137,12 +137,15 @@ Return Value:
 #if 0
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
-#line 140
+#line 144
 
     if (SvcCode > LAST_VR_FUNCTION) {
+#line 146
 #if DBG
+#line 147
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 150
         return FALSE;
     }
     VrDispatchTable[SvcCode]();

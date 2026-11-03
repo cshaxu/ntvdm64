@@ -1,0 +1,96 @@
+{
+  "result": "passed",
+  "controls": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "body_line": 357,
+      "continuation_line": 359,
+      "negative_diagnostic_sha256": "7b1d0bf8b467bb1fa3165eb565b1316f21f9d4d57cf036f0e6d924330f6af725"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "body_line": 287,
+      "continuation_line": 294,
+      "negative_diagnostic_sha256": "6dc0fda4bb69b710686337aeace32465f98fdca058383103e552ad75b9833570"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.h",
+      "body_line": 219,
+      "continuation_line": 226,
+      "negative_diagnostic_sha256": "2c4f228336b8ef7dc430111ec8f1c411f13b1a6dd4603e6fca86c04be07bbfbd"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.c",
+      "body_line": 342,
+      "continuation_line": 344,
+      "negative_diagnostic_sha256": "d547a1338fc2c9bc36481a57f81ce989917011311b6a1ebb6e4405bd5827c5dc"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "body_line": 261,
+      "continuation_line": 263,
+      "negative_diagnostic_sha256": "4959ab0470ab407e684a685ea077fe921ae9eead8260345ee112a8d625925ce8"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/invd.c",
+      "body_line": 35,
+      "continuation_line": 46,
+      "negative_diagnostic_sha256": "b9d13e86c82bdca906abbd755b21d2ab18164a10da4e4ec976ebae40e58fb816"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/invlpg.c",
+      "body_line": 36,
+      "continuation_line": 50,
+      "negative_diagnostic_sha256": "72422b669c51a6c6125c57770e3d316562987740f3437ab2315a651d372e16fd"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/wbinvd.c",
+      "body_line": 35,
+      "continuation_line": 46,
+      "negative_diagnostic_sha256": "bd8250f1bdcc107698e12219597796cfb9c7a733cd7779b9d2aa7bf811dd5b15"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/xadd.c",
+      "body_line": 37,
+      "continuation_line": 60,
+      "negative_diagnostic_sha256": "420e17fbd428c520a16f8bb9c68cb2f15d0a32d6fe469e5eafd2547e10f63e8d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "body_line": 29,
+      "continuation_line": 31,
+      "negative_diagnostic_sha256": "b01fdd87db0ed63767411b85e16a2ddebd1b4a63b481d9b4d6319cf9145879ba"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "body_line": 34,
+      "continuation_line": 36,
+      "negative_diagnostic_sha256": "6f5451b552f123710437b702eef32b22dffb8f6e5bd0a731b9b937c14f861e07"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "body_line": 802,
+      "continuation_line": 837,
+      "negative_diagnostic_sha256": "f00519c4f8188434e325c2212ad2849dc00d26c91220a8cfd3435f41d3551c2a"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+      "body_line": 81,
+      "continuation_line": 91,
+      "negative_diagnostic_sha256": "c8d1fe592c18f32f3711a9365fddd13a498b47480d4a5d2c1dd9aa005fbfd403"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/j_c_lang.h",
+      "body_line": 43,
+      "continuation_line": 49,
+      "negative_diagnostic_sha256": "5b175a9ee88e3c0f15667fb168e4b726a70739dde0e687f853d8c21529922369"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/btrace.c",
+      "body_line": 47,
+      "continuation_line": 194,
+      "negative_diagnostic_sha256": "cb8c019594144fd0cdcd03c3210a7e1c2b491650b1ee4e34a4b4e02eca5f2c21"
+    }
+  ],
+  "scope": "extracted actual source, false/true forced guard; not all include contexts"
+}

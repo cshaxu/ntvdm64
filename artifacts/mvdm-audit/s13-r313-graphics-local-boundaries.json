@@ -1,0 +1,60 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "current_line": 1479,
+      "current_directive": "#ifdef X86GFX",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_event.c",
+      "original_line": 1413,
+      "original_text": "if (sc.ScreenState != FULLSCREEN)",
+      "working_sha256": "517c246720970ad2b6b575c9721c13801910576d094e99d09ad6241224a6e488",
+      "original_sha256": "7f555a87ba029627d6811c0f7b96964bb8a96af90c60c89012975a4ac5442076",
+      "limits": "context-based provenance only; selected behavior and equivalence not established"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "current_line": 1509,
+      "current_directive": "#ifdef X86GFX",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_event.c",
+      "original_line": 1428,
+      "original_text": "if (BlockFlags == 1 && sc.ScreenState == FULLSCREEN)",
+      "working_sha256": "517c246720970ad2b6b575c9721c13801910576d094e99d09ad6241224a6e488",
+      "original_sha256": "7f555a87ba029627d6811c0f7b96964bb8a96af90c60c89012975a4ac5442076",
+      "limits": "context-based provenance only; selected behavior and equivalence not established"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "current_line": 742,
+      "current_directive": "#if defined(CCPU) && defined(X86GFX)",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "original_line": 802,
+      "original_text": "#ifdef X86GFX",
+      "working_sha256": "8a6ac4cbc55e1a10577b52da591406924fac41d8aac5f8beff65fa0d5a4a0c19",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "limits": "context-based provenance only; selected behavior and equivalence not established"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "current_line": 812,
+      "current_directive": "#if !defined(CCPU) || defined(X86GFX)",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "original_line": 827,
+      "original_text": "if (sc.ScreenState == STREAM_IO) {",
+      "working_sha256": "8a6ac4cbc55e1a10577b52da591406924fac41d8aac5f8beff65fa0d5a4a0c19",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "limits": "context-based provenance only; selected behavior and equivalence not established"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "current_line": 2070,
+      "current_directive": "#ifdef X86GFX",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "original_line": 2067,
+      "original_text": "if (sc.ScreenState == FULLSCREEN)",
+      "working_sha256": "8a6ac4cbc55e1a10577b52da591406924fac41d8aac5f8beff65fa0d5a4a0c19",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "limits": "context-based provenance only; selected behavior and equivalence not established"
+    }
+  ],
+  "limits": "no source or arm-status change; runtime-owner semantics remain to be reviewed"
+}

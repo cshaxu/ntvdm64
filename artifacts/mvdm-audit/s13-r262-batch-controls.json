@@ -1,0 +1,45 @@
+{
+  "controls": [
+    {
+      "line": 375,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 375,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 719,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 719,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 875,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 875,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 1224,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 1224,
+      "arch": "x64",
+      "exit": 2
+    }
+  ],
+  "limits": "isolated forced profiles; omitted selected functions not recovered"
+}

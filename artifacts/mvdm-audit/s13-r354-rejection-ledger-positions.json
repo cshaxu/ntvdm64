@@ -1,0 +1,77 @@
+{
+  "changes": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "macro": "A2CPU",
+      "old_current": 732,
+      "new_current": 735
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "FIFO_ON",
+      "old_current": 2082,
+      "new_current": 2085
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "IRET_HOOKS",
+      "old_current": 1069,
+      "new_current": 1072
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "FIFO_ON",
+      "old_current": 913,
+      "new_current": 916
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "FIFO_ON",
+      "old_current": 698,
+      "new_current": 701
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "FIFO_ON",
+      "old_current": 464,
+      "new_current": 467
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "FIFO_ON",
+      "old_current": 456,
+      "new_current": 459
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "FIFO_ON",
+      "old_current": 432,
+      "new_current": 435
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "FIFO_ON",
+      "old_current": 397,
+      "new_current": 400
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "FIFO_ON",
+      "old_current": 158,
+      "new_current": 161
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "FIFO_ON",
+      "old_current": 90,
+      "new_current": 93
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "SEGMENTATION",
+      "old_current": 2004,
+      "new_current": 2007
+    }
+  ],
+  "method": "exact inserted physical-line offsets and current guard/error verification"
+}

@@ -1,0 +1,10 @@
+{
+  "suite": "tests/build/test_mirror_rejected_conditions.py",
+  "architecture": "MSVC x86",
+  "exit": 0,
+  "log": "build\\t473-s13\\rejected-conditions-r235.log",
+  "log_sha256": "84b9b2035addf0a408c20c95b3c565c039aa387c50bd7488a6a79fd451b8a3a6",
+  "pass_lines": 41,
+  "retained_guards": 181,
+  "scope": "Current normal and rejected profiles, including two multi-cohort negative controls. Does not show equivalence to original guard or runtime acceptance."
+}

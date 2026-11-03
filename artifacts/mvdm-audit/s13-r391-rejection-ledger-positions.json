@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "macro": "YODA",
+      "old_current": 435,
+      "new_current": 436
+    }
+  ],
+  "method": "exact inserted physical-line offsets and current guard/error verification"
+}

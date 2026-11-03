@@ -54,7 +54,7 @@ CALLF
 #else
 #error Unsupported excluded original configuration
 #endif
-#line 58
+#line 50
    {
    IU16  new_cs;	/* The destination */
    IU32 new_ip;
@@ -149,7 +149,7 @@ CALLF
        */
 
 #endif	/* TAKE_REAL_MODE_LIMIT_FAULT */
-#line 155
+#line 103
    
 
       /* ALL SYSTEMS GO */
@@ -332,7 +332,7 @@ IFN1(
        */
 
 #endif	/* TAKE_REAL_MODE_LIMIT_FAULT */
-#line 339
+#line 290
 
    /* all systems go */
    spush((IU32)GET_EIP());
@@ -394,7 +394,7 @@ IFN1(
        */
 
 #endif	/* TAKE_REAL_MODE_LIMIT_FAULT */
-#line 402
+#line 353
 
    /* all systems go */
    spush((IU32)GET_EIP());

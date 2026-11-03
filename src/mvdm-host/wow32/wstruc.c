@@ -299,7 +299,9 @@ VOID putdrawitem16(VPDRAWITEMSTRUCT16 vpDI16, LPDRAWITEMSTRUCT lpDI)
     return;
 }
 
+#line 302
 #ifdef NOTUSED
+#line 303
 #error DIVERGENCE MVDM-HOST-DIV-529: NOTUSED platform branch is not selected; see mirror register.
 #endif
 #line 360
@@ -679,7 +681,7 @@ VOID getmsg16(VPMSG16 vpmsg16, LPMSG lpmsg, LPMSGPARAMEX lpmpex)
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 688
+#line 743
 
     if ( message == WM_TIMER ) {
         HAND16  htask16;

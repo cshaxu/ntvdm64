@@ -1,0 +1,59 @@
+{
+  "input_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r374.zip",
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 310,
+      "original_else_line": 330,
+      "original_end": 338,
+      "selector": "#ifndef UNICODE",
+      "else": "#else",
+      "endif": "#endif // UNICODE",
+      "macro": "UNICODE",
+      "excluded_arm": 1,
+      "before_sha256": "862827bb5a68a478fd102228fa030f9e43a4a8022a955f24ddb81e10981c603e",
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current_condition_line": 423,
+      "current_else_line": 425,
+      "after_sha256": "7a6c475465b988d8b0b48528994a01701014af7dd61a466e4fe228b356bdc10e"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 1191,
+      "original_else_line": 1207,
+      "original_end": 1213,
+      "selector": "#ifndef UNICODE",
+      "else": "#else",
+      "endif": "#endif",
+      "macro": "UNICODE",
+      "excluded_arm": 1,
+      "before_sha256": "862827bb5a68a478fd102228fa030f9e43a4a8022a955f24ddb81e10981c603e",
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current_condition_line": 432,
+      "current_else_line": 434,
+      "after_sha256": "7a6c475465b988d8b0b48528994a01701014af7dd61a466e4fe228b356bdc10e"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 1317,
+      "original_else_line": 1349,
+      "original_end": 1354,
+      "selector": "#ifndef UNICODE",
+      "else": "#else",
+      "endif": "#endif",
+      "macro": "UNICODE",
+      "excluded_arm": 1,
+      "before_sha256": "862827bb5a68a478fd102228fa030f9e43a4a8022a955f24ddb81e10981c603e",
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current_condition_line": 441,
+      "current_else_line": 443,
+      "after_sha256": "7a6c475465b988d8b0b48528994a01701014af7dd61a466e4fe228b356bdc10e"
+    }
+  ],
+  "basis": "Current header rejects UNICODE before other content, has no include and no later define/undef of UNICODE; original source contains no local define/undef of UNICODE.",
+  "scope": "Original first-depth frames after retained header subset. Original C owners and selected ANSI arm bodies omitted and pending. No selected tokens changed.",
+  "verification": "cached build exit 0; x86/x64 guard controls exit 0; class fixture positive and selected-code negative controls pass; scanner 2528 excluded arms no detected remnants or stale lines; 1110 queue hashes match; staged candidate differs from r461 only at two WOW32 PE/debug timestamp bytes"
+}

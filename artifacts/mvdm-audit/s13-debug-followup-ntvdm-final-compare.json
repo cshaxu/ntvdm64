@@ -1,0 +1,29 @@
+{
+  "candidate_sha256": "fd00202c297c8d9d7244aba6970afce43cd79195dea2beaf20a3a3952d727502",
+  "reference_sha256": "b9385aba3625e563418411a3fb2becd1203133de5c0fa6e1d5f20610c8c80e8a",
+  "candidate_size": 2103808,
+  "reference_size": 2103808,
+  "different_offsets": [
+    288,
+    289,
+    333036,
+    333037,
+    333113,
+    333114,
+    1698412,
+    1698413
+  ],
+  "immediates": [
+    {
+      "offset": 333036,
+      "current": 1517,
+      "reference": 1606
+    },
+    {
+      "offset": 333113,
+      "current": 1522,
+      "reference": 1616
+    }
+  ],
+  "interpretation": "two nt_event.c DisplayErrorTerm diagnostic line arguments: project-owned DIV-313 site and original resume site; latter restored to original line 1522; remaining differences require review before full delivery"
+}

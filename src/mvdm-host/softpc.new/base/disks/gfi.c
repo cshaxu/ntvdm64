@@ -317,7 +317,7 @@ gfi_attach_adapter IFN2(UTINY, adapter, BOOL, attach)
 #ifdef SLAVEPC
 #error DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register.
 #endif /* SLAVEPC */
-#line 320
+#line 353
 
 	config_activate(C_FLOPPY_A_DEVICE + adapter, attach);
 }

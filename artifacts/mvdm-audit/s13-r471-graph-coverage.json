@@ -1,0 +1,41 @@
+{
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r375.zip",
+  "queue_sha256": "6c9ff38b606e475916156b36d982e0dfc5fae0cda310db72d6e20b4913b95c28",
+  "graphs": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker/build.ninja",
+      "sha256": "8c00ccbf0b1b12421e5f9b628eb203ab5ff43540efbb99a2e1ac26a558a8c4f8",
+      "explicit_source_paths": 398,
+      "outside_queue": [
+        "src/compat/console_grid.c",
+        "src/compat/opennt_support_rtl.c"
+      ]
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja",
+      "sha256": "88af1765f34b1f312fbb2d5a9bd97140ff17b34aa64a3aebcecceb8cd8539ca8",
+      "explicit_source_paths": 398,
+      "outside_queue": [
+        "src/compat/console_grid.c",
+        "src/compat/opennt_support_rtl.c"
+      ]
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32/build.ninja",
+      "sha256": "57cc276a409e24a25cd956b822478ff85ae464f25c093b8ac1b921b237c8b87a",
+      "explicit_source_paths": 140,
+      "outside_queue": []
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries/build.ninja",
+      "sha256": "94312559ea82a774d8f71974ede03f1c366e2a1df7ea7dbb67eb4d56d8637fe3",
+      "explicit_source_paths": 45,
+      "outside_queue": []
+    }
+  ],
+  "classification": {
+    "src/compat/console_grid.c": "project-owned adapter",
+    "src/compat/opennt_support_rtl.c": "project-owned adapter, ADAPTER-WIN32-001"
+  },
+  "limits": "Text-level inventory of explicit C/C++ source paths in these four existing Ninja graphs. Does not establish every supported graph, recursively included headers, selected original arm bodies, or runtime behavior."
+}

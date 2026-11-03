@@ -1,0 +1,18 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "candidate_original_line": 3049,
+      "conclusion": "not established: nearby-line heuristic selected a different repeated #ifndef NTVDM; original line 2799 begins a file-level block with the relevant NTVDM alternative, while line 3049 is inside AT_kbd_post",
+      "action": "preserve current code and perform identity mapping before classification",
+      "working_sha256": "5e3ff6f5ff8346d38b6e1aa3f96f8a6bce42871368c932a9a9e0bb649b4f9de0"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "candidate_original_line": 958,
+      "conclusion": "false brace-depth candidate: original i386 guarded LoadLibrary helper begins at line 929 at file scope; inline assembler braces invalidate simple lexical depth",
+      "action": "preserve current code; no source change",
+      "working_sha256": "f8af567557ab2d3f895c93225ceb56b90d1c7e51cbc485212642e08eebd15462"
+    }
+  ]
+}

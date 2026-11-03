@@ -1,0 +1,104 @@
+{
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "before_sha256": "424a28e338b80604b31ec71e60285bc3638fb2cf9da7d2e607c6c84c860ed726",
+      "guards": [
+        {
+          "original_line": 519,
+          "kind": "ifdef",
+          "expression": "ENABLE_CLIENTSIDE_ACCESSCHECK",
+          "continuation": 527
+        },
+        {
+          "original_line": 752,
+          "kind": "ifdef",
+          "expression": "ENABLE_CLIENTSIDE_ACCESSCHECK",
+          "continuation": 759
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_sha256": "b7656bca55e892a42ba825be0324211450ad298c40717e1ae5a889d084467529",
+      "before_sha256": "d96229944220118fdc816f722db6a5bd8fc90b39f75e1193f123bbe11cfacd90",
+      "guards": [
+        {
+          "original_line": 17,
+          "kind": "ifdef",
+          "expression": "MARKPATH",
+          "continuation": 20
+        },
+        {
+          "original_line": 22,
+          "kind": "ifdef",
+          "expression": "TRACESYSPEEK",
+          "continuation": 57
+        },
+        {
+          "original_line": 2924,
+          "kind": "ifdef",
+          "expression": "TRACESYSPEEK",
+          "continuation": 2927
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "before_sha256": "e9818b02c52f8efaf2b06ffd83c15d6c635b2a2375557165b2ceeb734e9b835d",
+      "guards": [
+        {
+          "original_line": 3494,
+          "kind": "ifdef",
+          "expression": "MEMPHIS_MENU_WATERMARKS",
+          "continuation": 3529
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_sha256": "0400c034bb5a782e81777e9fd805c07dbcd18d60ec9f1a876cfa67444577e0f8",
+      "before_sha256": "d03d0c37ce9491f554987df3c226548f5c3c32ec85fb5ae7927e8db56c968760",
+      "guards": [
+        {
+          "original_line": 2962,
+          "kind": "ifdef",
+          "expression": "LOCK_MOUSE_CODE",
+          "continuation": 2965
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+      "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+      "before_sha256": "484339eb2f998defc958526b7dfb1bf0452050b72090892ea8538236159724f8",
+      "guards": [
+        {
+          "original_line": 1703,
+          "kind": "ifdef",
+          "expression": "ANDREVA_DBG",
+          "continuation": 1706
+        }
+      ]
+    }
+  ],
+  "skips": [
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "original_line": 1084,
+      "reason": "original body text also present in current source"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "original_line": 1154,
+      "reason": "original body text also present in current source"
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "scope": "fresh existence/hash recheck of previously identified original depth-1 structural leads; not an exhaustive mirror scan",
+  "inventory_sha256": "7a40246dff09216bff9225c059262ce040ea5ee5c0502a52676938b951b50f8f",
+  "queue": "195r153",
+  "current_depth1_pending_arms": [
+    {
+      "path": "src/mvdm-host/inc/wowfax.h",
+      "line": 37,
+      "expression": "DEBUG"
+    },
+    {
+      "path": "src/mvdm-host/inc/wowfax.h",
+      "line": 76,
+      "expression": "defined(_WOWFAX16_)"
+    },
+    {
+      "path": "src/mvdm-host/inc/wowfax.h",
+      "line": 161,
+      "expression": "_DEF_WOW32_"
+    },
+    {
+      "path": "src/mvdm-host/inc/wowinfo.h",
+      "line": 20,
+      "expression": "UNALIGNED"
+    }
+  ],
+  "original_leads": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "exists": true,
+      "sha256": "0a60d195722d68331e296a72b9713747c9e29717b1c7f321bc22308f7c00ff4a",
+      "expression": "DEBUG",
+      "disposition": "pending-unselected-function-boundary",
+      "unpaired_count": 2
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "exists": true,
+      "sha256": "0a60d195722d68331e296a72b9713747c9e29717b1c7f321bc22308f7c00ff4a",
+      "expression": "0",
+      "disposition": "pending-unselected-function-boundary",
+      "unpaired_count": 6
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "exists": true,
+      "sha256": "0a60d195722d68331e296a72b9713747c9e29717b1c7f321bc22308f7c00ff4a",
+      "expression": "LATER",
+      "disposition": "pending-unselected-function-boundary",
+      "unpaired_count": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "exists": true,
+      "sha256": "f4122df4a940d2493116297bf4760695aa38ea4c0235e170ea6967bc3c5f0474",
+      "expression": "FE_IME",
+      "disposition": "pending-unselected-function-boundary",
+      "unpaired_count": 3
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "exists": true,
+      "sha256": "f4122df4a940d2493116297bf4760695aa38ea4c0235e170ea6967bc3c5f0474",
+      "expression": "LATER",
+      "disposition": "pending-unselected-function-boundary",
+      "unpaired_count": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "exists": true,
+      "sha256": "f4122df4a940d2493116297bf4760695aa38ea4c0235e170ea6967bc3c5f0474",
+      "expression": "FE_SB",
+      "disposition": "pending-unselected-function-boundary",
+      "unpaired_count": 5
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "exists": true,
+      "sha256": "f4122df4a940d2493116297bf4760695aa38ea4c0235e170ea6967bc3c5f0474",
+      "expression": "DEBUG",
+      "disposition": "pending-unselected-function-boundary",
+      "unpaired_count": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "exists": true,
+      "sha256": "771fc0fbcce586991c814a40450ce15931ebc13c1d83ee3695b1b4117f9c738f",
+      "expression": "_USERCLI_",
+      "disposition": "pending-boundary-proof",
+      "unpaired_count": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "exists": true,
+      "sha256": "3740c3789f3069fb0957cacbb83758fc157027c1205097400139a5b89edbc679",
+      "expression": "FE_IME",
+      "disposition": "pending-unselected-function-boundary",
+      "unpaired_count": 6
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "exists": true,
+      "sha256": "3740c3789f3069fb0957cacbb83758fc157027c1205097400139a5b89edbc679",
+      "expression": "DEBUG",
+      "disposition": "pending-unselected-function-boundary",
+      "unpaired_count": 5
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "exists": true,
+      "sha256": "3740c3789f3069fb0957cacbb83758fc157027c1205097400139a5b89edbc679",
+      "expression": "ANDREVA_DBG",
+      "disposition": "pending-unselected-function-boundary",
+      "unpaired_count": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "exists": true,
+      "sha256": "e2cd5d6a924328db5528a16d413ab34a34e393bf11f971aa69bbdf527d0b8f7c",
+      "expression": "_USERK_",
+      "disposition": "pending-unselected-function-boundary",
+      "unpaired_count": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "exists": true,
+      "sha256": "e2cd5d6a924328db5528a16d413ab34a34e393bf11f971aa69bbdf527d0b8f7c",
+      "expression": "FE_SB",
+      "disposition": "pending-unselected-function-boundary",
+      "unpaired_count": 3
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "exists": true,
+      "sha256": "e2cd5d6a924328db5528a16d413ab34a34e393bf11f971aa69bbdf527d0b8f7c",
+      "expression": "FE_IME",
+      "disposition": "pending-unselected-function-boundary",
+      "unpaired_count": 1
+    }
+  ],
+  "counts": {
+    "original_records": 14,
+    "missing_current_files": 0,
+    "dispositions": {
+      "pending-unselected-function-boundary": 13,
+      "pending-boundary-proof": 1
+    }
+  },
+  "limitation": "Guest builds were not run; source reachability and missing-structure decisions remain unproven. No next-depth analysis was performed."
+}

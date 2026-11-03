@@ -1,0 +1,28 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+  "before_sha256": "8cdacdb2fd7561bc72c0e0261e24c906f98812ff114e1b73b67dc3bf0b45bf75",
+  "after_sha256": "f88efd1efb5a08e82880f8e29bd477e6fa8684c31fb01d60e6465402d7552d47",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+  "original_sha256": "b7656bca55e892a42ba825be0324211450ad298c40717e1ae5a889d084467529",
+  "original_condition_line": 2295,
+  "original_body_line": 2296,
+  "original_endif_line": 2309,
+  "original_continuation_line": 2310,
+  "placement": "file scope between original-line sections; original enclosing C function remains omitted",
+  "basis": "s13-r435-input-never-context.json: actual product and two fixture profiles with forced-macro negative controls; no source macro mutation in current or original.",
+  "ledger_shifts": [
+    [
+      "MARKPATH",
+      33,
+      39
+    ]
+  ],
+  "verification": {
+    "context": "s13-r435-input-never-context.json: actual x86 product and two independent x86 fixture compile contexts, plus forced macro rejection",
+    "build": "x86 NTVDM, x64 reference worker, x86 WOW32 passed: build/t473-s13/r436-build.log",
+    "condition_suites": "x86 build/t473-s13/r436-tests.log; x64 build/t473-s13/r437-x64.log passed, including forced NEVER and original error line",
+    "package": "s13-r436-package-compare.json: 82 files identical to r433; WOW32 differs only in 4 PE/debug timestamp bytes",
+    "queue": "1,110 hashes match; 2,472 excluded arms scanned without detected remnants or stale positions",
+    "limits": "Original containing C function and lexical scope remain omitted. No layer closure or publication claimed."
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "source": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntregapi.h",
+  "original_sha256": "0fb164317335d8b48c51122182922259c902c7f60afb28111bafa9fb75735a6a",
+  "working_sha256": "58440554432e525dcab5fd7faf9b805ad2dcafe8bae30a6a582eb699b85900a6",
+  "old_guard": "WOW_PROFILE_NTREGAPI_H",
+  "new_guard": "_NTREGAPI_",
+  "four_x86_preprocessed_sources": [
+    {
+      "source": "profile.c",
+      "preprocessed_sha256": "e429d295fc156c9d86998dc6838f586481a6e6d497a2a442e8dc031191658964"
+    },
+    {
+      "source": "wow_task_profile_binding.c",
+      "preprocessed_sha256": "db8add5086ee9367da5cadb2a5211f5c6318867061b856b06b69509aacb3f1d1"
+    },
+    {
+      "source": "wow_user_task_lifecycle.c",
+      "preprocessed_sha256": "27b51c31971e6964de8ac015a5b418f2dd0f78424dea7939e98c5a8a1d59111b"
+    },
+    {
+      "source": "wow_edit_entry_bindings.c",
+      "preprocessed_sha256": "47027e1e1f300a9fd9615ad2c885183883f47c69820336b400579821834155a5"
+    }
+  ],
+  "task_order_fixture_old_new_sha256": "29d3f76b18ae2ab2745ba4418a5366313888a2ecf85998e538e716493c6ab786",
+  "wow32_build": "passed",
+  "guard_suite": "x86 and x64 passed",
+  "task_order_fixture": "passed with valid and invalid handle controls after environment-compatible invalid-handle exception handling",
+  "image_compare": "s13-ntregapi-guard-image-comparison.json",
+  "limitations": "No claims for untested future SDKs or original guest rebuild."
+}

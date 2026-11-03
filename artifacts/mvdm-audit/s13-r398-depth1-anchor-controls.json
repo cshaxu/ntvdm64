@@ -1,0 +1,96 @@
+{
+  "result": "passed",
+  "controls": [
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "body_line": 474,
+      "continuation_line": 476,
+      "negative_diagnostic_sha256": "08d55f4e16470ccb60fc5880c077c8c65a4653d29f56cd4bfb97dffa64897434"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32fax.c",
+      "body_line": 961,
+      "continuation_line": 965,
+      "negative_diagnostic_sha256": "84083e616b70aeae795d057e712e2ea6b994fa98d6097763a83ab3d1b540b818"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.h",
+      "body_line": 70,
+      "continuation_line": 72,
+      "negative_diagnostic_sha256": "841449baf44234117d14ffd3690604c13a9523aa6beba393a08cd3f01444773a"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wres16.c",
+      "body_line": 42,
+      "continuation_line": 78,
+      "negative_diagnostic_sha256": "5776b86c4763a7a7b97997215f4a84e7de8ecb4645a3b74b6c65fd70c1a0d383"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wshltbl.h",
+      "body_line": 24,
+      "continuation_line": 26,
+      "negative_diagnostic_sha256": "7cc4a0a05466402a88498f8ab76246ad40a80f511b86d73a16345ce91e2b18e0"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsocktbl.h",
+      "body_line": 22,
+      "continuation_line": 24,
+      "negative_diagnostic_sha256": "c6ef7c09e54ae6599b639a3d503fa2931642e1f221e954fac98888ebf35b64eb"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wstbl.h",
+      "body_line": 22,
+      "continuation_line": 24,
+      "negative_diagnostic_sha256": "baa3f222d0a843bd2a671e16d38c81fecd061ccaada2ea5bc3d187d7ad3c70e4"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsubcls.c",
+      "body_line": 21,
+      "continuation_line": 225,
+      "negative_diagnostic_sha256": "5ad07ab1145af929f475cdf82bbb63c2fa34df2690042ad6e7064e7aa5f00f20"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wthtbl.h",
+      "body_line": 23,
+      "continuation_line": 25,
+      "negative_diagnostic_sha256": "7f0ac89dbc882333101552160305455bc4bb9bdb6357d02c689fb9e462b8c67a"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "body_line": 155,
+      "continuation_line": 162,
+      "negative_diagnostic_sha256": "37c91f8bcfb710d2018288285ab627af5b6c2c2491fa9828cf89ea45c1b25778"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclip.c",
+      "body_line": 1216,
+      "continuation_line": 1227,
+      "negative_diagnostic_sha256": "46e835fcf2bfd61835ff77a9cabe067022b17d30846c6bcede2e13c03cd67065"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "body_line": 1908,
+      "continuation_line": 1918,
+      "negative_diagnostic_sha256": "edbe007f7704b1d69db032e548964443381b2c30f56d75a99313ca5bca2a7019"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wutbl.h",
+      "body_line": 23,
+      "continuation_line": 25,
+      "negative_diagnostic_sha256": "9c1ee5ba2e8c58fa2e39c9d6bc0f00c57204b01d662d1afe2976644af19f9134"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "body_line": 889,
+      "continuation_line": 898,
+      "negative_diagnostic_sha256": "1517aba1170c7f386ec267ef8589961d978e60fa3eb5c50bce41b88e5dabd03d"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "body_line": 44,
+      "continuation_line": 47,
+      "negative_diagnostic_sha256": "dffa8244364b34ee7a6c3a9fe2757ea5699286279e2bf2dfec9f8938110f02c0"
+    }
+  ],
+  "scope": "extracted actual source, false/true forced guard; not all include contexts"
+}

@@ -1,0 +1,18 @@
+{
+  "baseline": "conditional-checkpoint-231/package/system32/wow32.dll",
+  "current": "r269-wow32-stamped.dll",
+  "baseline_sha256": "0b61d694d735cf0be466eeed48462a3108cd53fd9f19c05b58ede91bee971f64",
+  "current_sha256": "88749cc5a964a4a6ca3032c3754fabf3ce4d78392d275a8ed9e5a32bb36fd374",
+  "sizes": [
+    712192,
+    712192
+  ],
+  "diff_offsets": [
+    280,
+    281,
+    625412,
+    625413
+  ],
+  "limits": "Only prior-verified PE/debug timestamp positions differ from checkpoint231; this comparison alone does not validate the other nine components or current entire working tree.",
+  "timestamp_evidence": "s13-ntstubs-class-alignment-original-guard.json and s13-ten-image-vs-full-tested-candidate.json"
+}

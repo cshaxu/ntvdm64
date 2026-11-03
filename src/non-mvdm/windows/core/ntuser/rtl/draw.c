@@ -128,3 +128,14 @@ BOOL DrawFrame(
     return TRUE;
 }
 
+
+
+#line 680
+#ifdef WINDOWS_ME
+#line 681
+#error Excluded unsupported original WINDOWS_ME branch
+#else
+#line 684
+#endif
+#line 686
+

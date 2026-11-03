@@ -1,0 +1,143 @@
+{
+  "candidate": "build/t473-s13/r463-phase1-package",
+  "stage_guest_original_hashes": [
+    {
+      "sha256": "0E34B06601B2C9056186C937E2BAA8ADF14BD572FD15BC72B8B7FFF679AA2E47",
+      "name": "WIN.COM"
+    },
+    {
+      "sha256": "75E931AE000FB7C70CF686DA6F7D3FCB032FDC0E0A4E3187ED68179B85E2CD4A",
+      "name": "SYSTEM\\KRNL386.EXE"
+    },
+    {
+      "sha256": "98036967F8396B387DA431699A9D3BE95EB56FCD0118F529E1FC2F25105EFAC6",
+      "name": "SYSTEM\\USER.EXE"
+    },
+    {
+      "sha256": "6D28146961AB4733E167B1657289206CE16A856E431F843E4EE3D504836DFB6F",
+      "name": "SYSTEM\\GDI.EXE"
+    },
+    {
+      "sha256": "83032A1386558FF6B4869876ECB7F13824805A6AD987B3E2F10CE49A7CE95A8C",
+      "name": "SYSTEM\\V7VGA.DRV"
+    },
+    {
+      "sha256": "F4A4C4F742161AAF7E83441C5440ACEA7C20B73BA6B4EEC0EFF1D5A8F214A36E",
+      "name": "SYSTEM\\MOUSE.DRV"
+    }
+  ],
+  "cases": [
+    {
+      "case": "std-dosonly0",
+      "dosonly": false,
+      "enhanced": false,
+      "probeStarted": true,
+      "progmanAndMode": true,
+      "flags": 21,
+      "hwnd": 4456,
+      "observedDosOnly": 0,
+      "normalExit": true,
+      "passed": true,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\r476-win31-matrix\\std-dosonly0.observer.txt"
+    },
+    {
+      "case": "std-dosonly1",
+      "dosonly": true,
+      "enhanced": false,
+      "probeStarted": true,
+      "progmanAndMode": true,
+      "flags": 21,
+      "hwnd": 4456,
+      "observedDosOnly": 1,
+      "normalExit": true,
+      "passed": true,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\r476-win31-matrix\\std-dosonly1.observer.txt"
+    },
+    {
+      "case": "386-dosonly0",
+      "dosonly": false,
+      "enhanced": true,
+      "probeStarted": true,
+      "progmanAndMode": true,
+      "flags": 2085,
+      "hwnd": 4456,
+      "observedDosOnly": 0,
+      "normalExit": true,
+      "passed": true,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\r476-win31-matrix\\386-dosonly0.observer.txt"
+    },
+    {
+      "case": "386-dosonly1",
+      "dosonly": true,
+      "enhanced": true,
+      "probeStarted": true,
+      "progmanAndMode": true,
+      "flags": 2085,
+      "hwnd": 4456,
+      "observedDosOnly": 1,
+      "normalExit": true,
+      "passed": true,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\r476-win31-matrix\\386-dosonly1.observer.txt"
+    }
+  ],
+  "case_inputs": {
+    "std-dosonly0": {
+      "case": "std-dosonly0",
+      "package": "O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\r463-phase1-package",
+      "packageId": "8D7BC5F42D9C8542845771989303C892",
+      "ntvdmSha256": "4D855853F62276DB5386E03C97CEA08E0AF46A7FE5769BDA0FF4B1C2FE9162C5",
+      "pifSha256": "275E13D3CB1ED11618FEAB005605318BB45A0B6F826988D7B3D6FB63620104BF",
+      "configSha256": "6CC01C26DBC03199E316731E4EFA517F457A5A038C3C6B1268A8D67B28CB2249",
+      "autoexecSha256": "716B0598EF96BCA429CC532698AA48FFAD62AD93AE3C9972A9C2CCFBDF79CB71",
+      "systemIniSha256": "2EEB77CD214BDAC58794892797BEBB9F31D672DCB206D4A2092307AAE1F1ED4C",
+      "winIniSha256": "97CB67009E5FABEA65C94FD5608F361642DEE6019E428101D1BB35E8F7EC83A5",
+      "dosProbeSha256": "884FD96DCF6534AFA2E2D27B0266087B1F7BACD03CDB8201A66A91A660628E24",
+      "windowsProbeSha256": "B19C2F346C4BEB9CB4441214E25BEA8D46EF052AF035AEB2F4CD14572CAFC623"
+    },
+    "std-dosonly1": {
+      "case": "std-dosonly1",
+      "package": "O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\r463-phase1-package",
+      "packageId": "31F8C2D3A792EA418E30BEB9F34B0E20",
+      "ntvdmSha256": "491C712BEBF7446572B49CB3375E8D30A4C3C47CCB4415610F20E66523DC2744",
+      "pifSha256": "275E13D3CB1ED11618FEAB005605318BB45A0B6F826988D7B3D6FB63620104BF",
+      "configSha256": "84079CA63F417BD5B60774D404CA588861C2AF9BDF9A1802AB0FA90DA1A2AABF",
+      "autoexecSha256": "716B0598EF96BCA429CC532698AA48FFAD62AD93AE3C9972A9C2CCFBDF79CB71",
+      "systemIniSha256": "2EEB77CD214BDAC58794892797BEBB9F31D672DCB206D4A2092307AAE1F1ED4C",
+      "winIniSha256": "97CB67009E5FABEA65C94FD5608F361642DEE6019E428101D1BB35E8F7EC83A5",
+      "dosProbeSha256": "884FD96DCF6534AFA2E2D27B0266087B1F7BACD03CDB8201A66A91A660628E24",
+      "windowsProbeSha256": "B19C2F346C4BEB9CB4441214E25BEA8D46EF052AF035AEB2F4CD14572CAFC623"
+    },
+    "386-dosonly0": {
+      "case": "386-dosonly0",
+      "package": "O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\r463-phase1-package",
+      "packageId": "837B401FCF107747BCF2AC556A3C721A",
+      "ntvdmSha256": "8609AA436F4B61DFCE12AF9C319CC229C7E91BF9BEB71898696E6A69A0CDC0FD",
+      "pifSha256": "1889B5BFAA505A8C97DA23F0ED9AC184B8E68849AFDD4F457E557F268775E551",
+      "configSha256": "6CC01C26DBC03199E316731E4EFA517F457A5A038C3C6B1268A8D67B28CB2249",
+      "autoexecSha256": "716B0598EF96BCA429CC532698AA48FFAD62AD93AE3C9972A9C2CCFBDF79CB71",
+      "systemIniSha256": "2EEB77CD214BDAC58794892797BEBB9F31D672DCB206D4A2092307AAE1F1ED4C",
+      "winIniSha256": "97CB67009E5FABEA65C94FD5608F361642DEE6019E428101D1BB35E8F7EC83A5",
+      "dosProbeSha256": "884FD96DCF6534AFA2E2D27B0266087B1F7BACD03CDB8201A66A91A660628E24",
+      "windowsProbeSha256": "B19C2F346C4BEB9CB4441214E25BEA8D46EF052AF035AEB2F4CD14572CAFC623"
+    },
+    "386-dosonly1": {
+      "case": "386-dosonly1",
+      "package": "O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\r463-phase1-package",
+      "packageId": "48A1F84B5CFC6B438CF0C56AC46520AC",
+      "ntvdmSha256": "E8C48845A6599D85365DF9663AE8D272C6D30789C437DBAA9AE60CA04981F64C",
+      "pifSha256": "1889B5BFAA505A8C97DA23F0ED9AC184B8E68849AFDD4F457E557F268775E551",
+      "configSha256": "84079CA63F417BD5B60774D404CA588861C2AF9BDF9A1802AB0FA90DA1A2AABF",
+      "autoexecSha256": "716B0598EF96BCA429CC532698AA48FFAD62AD93AE3C9972A9C2CCFBDF79CB71",
+      "systemIniSha256": "2EEB77CD214BDAC58794892797BEBB9F31D672DCB206D4A2092307AAE1F1ED4C",
+      "winIniSha256": "97CB67009E5FABEA65C94FD5608F361642DEE6019E428101D1BB35E8F7EC83A5",
+      "dosProbeSha256": "884FD96DCF6534AFA2E2D27B0266087B1F7BACD03CDB8201A66A91A660628E24",
+      "windowsProbeSha256": "B19C2F346C4BEB9CB4441214E25BEA8D46EF052AF035AEB2F4CD14572CAFC623"
+    }
+  },
+  "matrix_sha256": "8ad3619fafa5ffad0715e9cbc0569bd3d1272a70c8fb7667c1e9f1d683642d81",
+  "limits": "Isolated copy of O:/w31, PIF/config paths retargeted; probe proves Program Manager and mode, DOSONLY value and normal exit, not interactive applications or NIDDB provider order. Guest executables not modified or rebuilt."
+}

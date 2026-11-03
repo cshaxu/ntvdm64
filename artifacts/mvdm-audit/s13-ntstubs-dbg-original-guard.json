@@ -1,0 +1,40 @@
+{
+  "source": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+  "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+  "before_sha256": "79365c48a1b1752c7a09040f2b5096bac04db2bbdae5cdf5edb2387eda759547",
+  "after_sha256": "e42fc1898f12fe0734c4a3abe1fc13eca7cc212bdbe4e6e2050d1c03c9d77f10",
+  "original_guard_line": 149,
+  "original_else_line": 151,
+  "original_selected_line": 152,
+  "selected": "Original retail StubExceptionHandler macro; the retained NtUserSetWindowFNID does not invoke it.",
+  "observed": "Actual x86 control-fnid context: DBG false; forced DBG=1 hits scratch probe. Only actual current selected context observed; profile scope to be verified in negative control.",
+  "queue": "s13-bfs-depth1-working-queue-195r239.zip",
+  "actual_normal_preprocess_exit": 0,
+  "actual_forced": "rejected earlier by existing usercli.h DBG guard",
+  "isolated_forced": {
+    "exit": 2,
+    "original_diagnostic_line": 150
+  },
+  "builds": [
+    "x86 WOW32 passed",
+    "x86 call-boundaries passed"
+  ],
+  "stamped_diff_offsets": [
+    280,
+    281,
+    625412,
+    625413
+  ],
+  "reusable_regression": {
+    "suite": "tests/build/test_mirror_rejected_conditions.py",
+    "arch": "x86",
+    "result": "pass 183 retained guards normal/rejected profiles",
+    "log_sha256": "71ddb5de1575705b07e5838f82db2a7197d704c5c661152a21a03abe5a9047b3"
+  },
+  "reusable_regression_x64": {
+    "suite": "tests/build/test_mirror_rejected_conditions.py",
+    "result": "pass 183 retained guards normal/rejected profiles",
+    "log_sha256": "16e568428e93ed79985e7a69023da5815a154e8c5c793053c4c783e4d6907766"
+  }
+}

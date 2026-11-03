@@ -1,0 +1,46 @@
+{
+  "input_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r372.zip",
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "original_line": 1657,
+      "original_else_line": 1659,
+      "original_end": 1661,
+      "selector": "#ifdef _USERK_",
+      "else": "#else",
+      "endif": "#endif",
+      "macro": "_USERK_",
+      "kind": "ifdef",
+      "expression": "_USERK_",
+      "before_sha256": "34a6f2843913cc63381c0c1e49faa63a807bb3cf4fa34edd0b5b7ec7f431ca7d",
+      "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+      "current_condition_line": 275,
+      "current_else_line": 278,
+      "after_sha256": "fb330c396a31f8b7e30f470197f7f7327972edba787e2286c4d8089e7223a9db"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+      "original_line": 262,
+      "original_else_line": null,
+      "original_end": 274,
+      "selector": "#if defined(DEBUG) && !defined(_USERK_) && !defined(WOW)",
+      "else": null,
+      "endif": "#endif",
+      "macro": "DEBUG",
+      "kind": "if",
+      "expression": "defined(DEBUG) && !defined(_USERK_) && !defined(WOW)",
+      "before_sha256": "de77cb392cd6b5890909b75c4202a5998cfbf6b00eb5ac6aeef34dc7d8dc6064",
+      "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+      "current_condition_line": 126,
+      "after_sha256": "e8be318d64cbd2bd6928c0019169473132c97a70ae7fcf26cfa6e97ae4abec77"
+    }
+  ],
+  "context_evidence": [
+    "s13-r455-macro-contexts.json",
+    "s13-r456-macro-contexts.json"
+  ],
+  "scope": "Original first-depth file-level frames restored after retained subsets. Original C owners and selected else body remain omitted and pending. No selected C tokens added or removed.",
+  "verification": "cached build exit 0; x86/x64 guard controls exit 0; scanner 2523 excluded arms no detected remnants or stale lines; 1110 queue hashes match; staged candidate differs from r453 only at four WOW32 PE/debug timestamp bytes"
+}

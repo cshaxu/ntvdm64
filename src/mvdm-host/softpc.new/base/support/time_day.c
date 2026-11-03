@@ -86,7 +86,9 @@
  */
 
 
+#line 89
 #ifdef XTSFD
+#line 90
 #error Unsupported excluded original configuration
 #endif
 #line 92
@@ -158,7 +160,7 @@ void time_of_day()
 #else   /* ! NTVDM */
 #error Excluded unsupported non-NTVDM alternative
 #endif /* NTVDM */
-#line 186
+#line 206
 
 	    break;
 
@@ -236,7 +238,7 @@ void time_of_day()
 #ifndef NTVDM
 #error Excluded unsupported non-NTVDM time service profile
 #endif
-#line 268
+#line 318
 		break;
 
 	case 5:	/* Set the date into the real time clock	*/
@@ -303,7 +305,7 @@ void time_of_day()
         default:
             ; /* Do nothing */
 #endif
-#line 345
+#line 395
     }
     setAH( 0 );
 

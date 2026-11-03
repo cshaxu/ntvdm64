@@ -1,0 +1,24 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/kernel/random.c",
+  "old_commit": "HEAD exact recorded baseline",
+  "old_sha256": "3469699a957c71db994ae52c4d72b0998ebd656bc9eea991fbb65041b0f50271",
+  "current_sha256": "729c7bafa6bc5eb6e6a0296dfe7e494582a42199b6551961fb834856601bfedd",
+  "method": "MSVC /EP, exact Ninja target flags, identical scratch source path; nonblank stripped lines hashed. ntSend.h copied without modification.",
+  "contexts": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-brush.obj",
+      "old_sha256": "f7fd0612194bc38a2a7a99e92b7e0283bc7dae46f3e154cef49a97fb34e48f9f",
+      "current_sha256": "f7fd0612194bc38a2a7a99e92b7e0283bc7dae46f3e154cef49a97fb34e48f9f",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/brush_owner.obj",
+      "old_sha256": "d3e31fb301318fc4ba05050dfd249331d3bf5d0ae31c6726d23fc01d0d0fbb1e",
+      "current_sha256": "d3e31fb301318fc4ba05050dfd249331d3bf5d0ae31c6726d23fc01d0d0fbb1e",
+      "equal": true
+    }
+  ],
+  "limits": "Tests selected preprocessed text only; excludes diagnostics and does not establish other contexts, link or runtime behavior."
+}

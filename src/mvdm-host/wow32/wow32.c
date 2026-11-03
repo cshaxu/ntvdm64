@@ -163,10 +163,12 @@ extern BOOL GdiReserveHandles(VOID);
 extern CRITICAL_SECTION VdmLoadCritSec;
 extern LIST_ENTRY TimerList;
 
+#line 162
 #if defined (_X86_)
+#line 163
 #error Unsupported excluded original configuration
 #endif
-#line 192
+#line 181
 
 BOOLEAN
 W32DllInitialize(
@@ -446,14 +448,16 @@ BOOL W32Init(VOID)
 #ifdef DEBUG
 #error DIVERGENCE MVDM-HOST-DIV-595: DEBUG initialization profile is not selected
 #endif
-#line 475
+#line 468
     PTD ptd;
     PFNWOWHANDLERSIN pfnIn;
     LPVOID lpSharedTaskMemory;
+#line 473
 #ifdef _X86_
+#line 474
 #error Unsupported excluded original configuration
 #endif                                             // UP.
-#line 481
+#line 476
 
 #ifndef _X86_
     //
@@ -608,7 +612,7 @@ BOOL W32Init(VOID)
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 697
+#line 673
 
     //
     // Initialize list of known DLLs used by WK32WowIsKnownDLL
@@ -698,12 +702,12 @@ BOOL W32Init(VOID)
 #ifdef DEBUG_OR_WOWPROFILE
 #error Excluded unsupported WOW profiling configuration
 #endif
-#line 803
+#line 778
 
 #ifdef DEBUG_OR_WOWPROFILE // define symbols for API profiling only (debugger extension)
 #error Excluded unsupported WOW profiling configuration
 #endif // WOWPROFILE
-#line 809
+#line 784
 
 
 /* WOW32UnimplementedAPI - Error Thunk is Not Implemented
@@ -723,10 +727,10 @@ ULONG FASTCALL WOW32UnimplementedAPI(PVDMFRAME pFrame)
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #else
-#line 837
+#line 812
     UNREFERENCED_PARAMETER(pFrame);
 #endif
-#line 839
+#line 814
     return FALSE;
 }
 
@@ -734,7 +738,7 @@ ULONG FASTCALL WOW32UnimplementedAPI(PVDMFRAME pFrame)
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif // DEBUG
-#line 896
+#line 871
 
 
 LPFNW32 FASTCALL W32PatchCodeWithLpfnw32(PVDMFRAME pFrame , INT iFun )
@@ -818,12 +822,12 @@ VOID W32Dispatch()
 #ifdef DEBUG_OR_WOWPROFILE
 #error Excluded unsupported WOW profiling configuration
 #endif
-#line 991
+#line 963
 
 #ifdef  WOWPROFILE
 #error Excluded unsupported WOW profiling configuration
 #endif
-#line 995
+#line 967
 
     //
     // WARNING: DO NOT ADD ANYTHING TO THIS FUNCTION UNLESS YOU ADD THE SAME
@@ -858,14 +862,14 @@ VOID W32Dispatch()
 #ifdef DEBUG_OR_WOWPROFILE
 #error Excluded unsupported WOW profiling configuration
 #endif
-#line 1030
+#line 1001
         iWOWTaskCur = pFrame->wTDB;                     // Record the task's current ID
 
         if (ISFUNCID(iFun)) {
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 1040
+#line 1011
             iFun = (INT)W32PatchCodeWithLpfnw32(pFrame, iFun);
         }
 
@@ -887,7 +891,7 @@ VOID W32Dispatch()
 #ifdef DEBUG_OR_WOWPROFILE
 #error Excluded unsupported WOW profiling configuration
 #endif
-#line 1060
+#line 1031
 
 #ifdef WOWPROFILE // For API profiling only (debugger extension)
 #error Excluded unsupported WOW profiling configuration
@@ -904,7 +908,7 @@ VOID W32Dispatch()
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif // DEBUG
-#line 1090
+#line 1061
 
         FREEVDMPTR(pFrame);
 
@@ -1440,7 +1444,7 @@ GetPModeVDMPointerAssert(
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 1788
+#line 1755
     )
 /*++
 
@@ -1462,7 +1466,7 @@ Return Value:
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 1809
+#line 1776
 
     //
     // Check to see if the descriptor is marked present
@@ -1511,10 +1515,10 @@ Return Value:
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #else
-#line 1889
+#line 1861
     return GetPModeVDMPointerMacro(Address, 0);  // No limit check on free build.
 #endif // DEBUG
-#line 1891
+#line 1863
 }
 
 
@@ -1571,10 +1575,12 @@ ULONG FASTCALL W32GetTableOffsets( PVDMFRAME pFrame )
 
     FREEARGPTR(parg16);
 
+#line 1901
 #if FASTBOPPING
+#line 1902
 #error Unsupported excluded original configuration
 #endif
-#line 1938
+#line 1904
 
     return 1;
 }
@@ -1596,14 +1602,14 @@ ULONG FASTCALL W32GetFlatAddressArray( PVDMFRAME pFrame )
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 #endif
-#line 1954
+#line 1915
 }
 
 
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif // DEBUG
-#line 2290
+#line 2251
 
 PVOID FASTCALL malloc_w (ULONG size)
 {

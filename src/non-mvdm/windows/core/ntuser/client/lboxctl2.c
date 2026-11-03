@@ -1145,7 +1145,9 @@ void xxxNotifyOwner(
 
     CheckLock(plb->spwnd);
 
+#line 1148
 #ifdef NEVER
+#line 1149
 #error DIVERGENCE OPENNT-HOST-131: NEVER branch is not selected; see mirror register.
 #endif
 #line 1160

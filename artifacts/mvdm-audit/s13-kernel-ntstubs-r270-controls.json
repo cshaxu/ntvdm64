@@ -1,0 +1,618 @@
+{
+  "forced_controls": [
+    {
+      "line": 352,
+      "else_line": 354,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 352,
+      "else_line": 354,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 390,
+      "else_line": 392,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 390,
+      "else_line": 392,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 563,
+      "else_line": 565,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 563,
+      "else_line": 565,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 715,
+      "else_line": 717,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 715,
+      "else_line": 717,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 738,
+      "else_line": 740,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 738,
+      "else_line": 740,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 964,
+      "else_line": 966,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 964,
+      "else_line": 966,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 1135,
+      "else_line": 1138,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 1135,
+      "else_line": 1138,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 1229,
+      "else_line": 1231,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 1229,
+      "else_line": 1231,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 1312,
+      "else_line": 1314,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 1312,
+      "else_line": 1314,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 1957,
+      "else_line": 1959,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 1957,
+      "else_line": 1959,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 2027,
+      "else_line": 2029,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 2027,
+      "else_line": 2029,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 2112,
+      "else_line": 2114,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 2112,
+      "else_line": 2114,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 2288,
+      "else_line": 2290,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 2288,
+      "else_line": 2290,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 2369,
+      "else_line": 2371,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 2369,
+      "else_line": 2371,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 2723,
+      "else_line": 2725,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 2723,
+      "else_line": 2725,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 3107,
+      "else_line": 3109,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 3107,
+      "else_line": 3109,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 3158,
+      "else_line": 3160,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 3158,
+      "else_line": 3160,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 3446,
+      "else_line": 3448,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 3446,
+      "else_line": 3448,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 3972,
+      "else_line": 3974,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 3972,
+      "else_line": 3974,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 4318,
+      "else_line": 4320,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 4318,
+      "else_line": 4320,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 4727,
+      "else_line": 4730,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 4727,
+      "else_line": 4730,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 5472,
+      "else_line": 5474,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 5472,
+      "else_line": 5474,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 5506,
+      "else_line": 5508,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 5506,
+      "else_line": 5508,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 5768,
+      "else_line": 5770,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 5768,
+      "else_line": 5770,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 5823,
+      "else_line": 5825,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 5823,
+      "else_line": 5825,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 5986,
+      "else_line": 5988,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 5986,
+      "else_line": 5988,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 6312,
+      "else_line": 6314,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 6312,
+      "else_line": 6314,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 6417,
+      "else_line": 6435,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 6417,
+      "else_line": 6435,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 6689,
+      "else_line": 6691,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 6689,
+      "else_line": 6691,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 6929,
+      "else_line": 6932,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 6929,
+      "else_line": 6932,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 6977,
+      "else_line": 6980,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 6977,
+      "else_line": 6980,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 7026,
+      "else_line": 7031,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 7026,
+      "else_line": 7031,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 7071,
+      "else_line": 7074,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 7071,
+      "else_line": 7074,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 7102,
+      "else_line": 7104,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 7102,
+      "else_line": 7104,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 7131,
+      "else_line": 7133,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 7131,
+      "else_line": 7133,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 7161,
+      "else_line": 7163,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 7161,
+      "else_line": 7163,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 7188,
+      "else_line": 7190,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 7188,
+      "else_line": 7190,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 7333,
+      "else_line": 7335,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 7333,
+      "else_line": 7335,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 7363,
+      "else_line": 7365,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 7363,
+      "else_line": 7365,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 7439,
+      "else_line": 7441,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 7439,
+      "else_line": 7441,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 7917,
+      "else_line": 7919,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 7917,
+      "else_line": 7919,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 8558,
+      "else_line": 8561,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 8558,
+      "else_line": 8561,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 8571,
+      "else_line": 8574,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 8571,
+      "else_line": 8574,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 8687,
+      "else_line": 8689,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 8687,
+      "else_line": 8689,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 8747,
+      "else_line": 8749,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 8747,
+      "else_line": 8749,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 9237,
+      "else_line": 9239,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 9237,
+      "else_line": 9239,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 9303,
+      "else_line": 9305,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 9303,
+      "else_line": 9305,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 9354,
+      "else_line": 9356,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 9354,
+      "else_line": 9356,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 9395,
+      "else_line": 9397,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 9395,
+      "else_line": 9397,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 9435,
+      "else_line": 9438,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 9435,
+      "else_line": 9438,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 9558,
+      "else_line": 9561,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 9558,
+      "else_line": 9561,
+      "arch": "x64",
+      "exit": 2
+    }
+  ],
+  "selected_controls": "51 grouped boundaries selected on x86 and x64 compiler",
+  "limits": "isolated forced profiles; omitted selected functions not recovered"
+}

@@ -1,0 +1,26 @@
+{
+  "scope": "Unselected i386 DPMI memory implementation",
+  "path": "src/mvdm-host/dpmi32/i386/dpmimem.c",
+  "sha256": "1dd4ca27edd47167edac1342bd90f462f3e7bf9c10a60fc820ba600d74b4566a",
+  "mirror_sources": [
+    {
+      "path": "src/mvdm-host/dpmi32/i386/dpmimem.c",
+      "current_sha256": "1dd4ca27edd47167edac1342bd90f462f3e7bf9c10a60fc820ba600d74b4566a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\i386\\dpmimem.c",
+      "original_sha256": "69695ab6dcb6c977318a4981b6b255ffcbb643b072549dc1c22b89c564ec2de4",
+      "pinned_expected_sha256": "69695ab6dcb6c977318a4981b6b255ffcbb643b072549dc1c22b89c564ec2de4",
+      "original_matches_pinned": true
+    }
+  ],
+  "removed_condition_groups": 2,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r134.zip",
+  "evidence": [
+    "Current CCPU worker graph explicitly compiles dpmimemr.c, not i386/dpmimem.c.",
+    "The only change to the historical DPMI sources manifest is the removed filename.",
+    "The adapter fixture references the old source in a comment to document a behavioral comparison, not as a compile or runtime input."
+  ],
+  "limitations": [
+    "Historical T289 mirror audit script retains its old inventory and is not a current build gate; it needs separate modernization.",
+    "Does not establish behavior of unsupported historical i386 DPMI path."
+  ]
+}

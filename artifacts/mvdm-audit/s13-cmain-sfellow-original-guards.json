@@ -1,0 +1,20 @@
+{
+  "source": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+  "sha256": "805366897f1c4fa4309b4fcfa2e952a4d18214ad11c4b299d73dc9b739ea32a0",
+  "original_guards": [
+    538,
+    4402,
+    4492
+  ],
+  "continuations": [
+    537,
+    545,
+    4402,
+    4443,
+    4492,
+    4498
+  ],
+  "build": "x86 worker built",
+  "test": "x86 first-depth guard suite passed",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r198.zip"
+}

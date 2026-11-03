@@ -41,9 +41,12 @@ int FindMnemChar(
     if (fPrefix) {
         while (chc = *lpstr++) {
             if (((WCHAR)CharLower((LPWSTR)(DWORD)(UTCHAR)chc) == CH_PREFIX)
+#line 44
 #ifdef KANJI
+#line 45
 #error DIVERGENCE OPENNT-HOST-132: KANJI branch is not selected; see mirror register.
 #endif
+#line 47
             ) {
                 chnext = (WCHAR)CharLowerW((LPWSTR)(DWORD)(UTCHAR)*lpstr);
 

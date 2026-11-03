@@ -785,9 +785,12 @@ void MS_bop_F(void)
     kb_setup_vectors();
 
 
+#line 735
 #ifdef MONITOR
+#line 736
 #error Excluded original conditional branch
 #endif
+#line 746
 #line 778
 
     /*
@@ -977,7 +980,9 @@ void ISV_DispatchCall (void)
     return;
 }
 
+#line 929
 #ifdef i386
+#line 930
 #error DIVERGENCE MVDM-HOST-DIV-601: unsupported hardware-host FPU save path
 #endif  //i386
-#line 994
+#line 961

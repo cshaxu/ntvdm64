@@ -1,0 +1,95 @@
+{
+  "scope": "20 real WOW32 x86 compilation units under a single scratch candidate after dialog/default ordering fixes",
+  "rows": [
+    {
+      "target": "obj/opennt-user/control-brush.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/dialog-memory.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/dialog-template.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-text.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-fnid.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/dialog-pointer.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/default-client.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-rect.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/private-word-client.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/private-word-reader.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/private-word-setter.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/default-window-bits.obj",
+      "resolved_section_differences": [],
+      "explanation": "The first scratch source copy changed __FILE__ diagnostic text; rerun b3-cand5 used the original source path under the same header overlays and had byte-identical non-debug sections and relocations; see s13-user-guard-default-order.json."
+    },
+    {
+      "target": "obj/opennt-user/client-callproc.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/default-borders.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/default-messages.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-text-extent.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-text-rtl.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-draw.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-text-client.obj",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/button-blit.obj",
+      "resolved_section_differences": []
+    }
+  ],
+  "compiled": 20,
+  "resolved_equal": 20,
+  "candidate_header_sha256": {
+    "build\\t473-s13\\header-hoist-experiment\\overlay\\non-mvdm\\windows\\core\\ntuser\\inc\\user.h": "b12d6aafb8d2e0c2bc69dd1c4a90738c03ca4ab6bdb2752347bfe05ad86f30f9",
+    "build\\t473-s13\\header-hoist-experiment\\overlay\\wow_dialog_state_bindings.h": "bbed94a2edf7e2d914234f8fcaeda72544ed83ff7da575d427c02e3ed8e53f5d",
+    "build\\t473-s13\\header-hoist-experiment\\control-client-overlay\\precomp.h": "8137d41c76023456a57b551d509a826c072d2ccc1e0e62b0bff32b057ca4c8df",
+    "build\\t473-s13\\header-hoist-experiment\\control-client-overlay\\default-precomp.h": "70fe2445d2ee4dc8f5e49850ff1a0f8687b29f439adcc78efc797a37f7a2dd86"
+  },
+  "limitations": "20 TUs: one used original source path to preserve __FILE__. Previous 32 need retesting under unified candidate, remaining graph and link/runtime remain unverified."
+}

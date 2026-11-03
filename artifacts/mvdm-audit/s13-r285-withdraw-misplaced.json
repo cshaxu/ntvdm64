@@ -1,0 +1,12 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+  "original_lines": [
+    2756,
+    3465,
+    3476,
+    4420
+  ],
+  "before_sha256": "69f97773e1cb92b423683f0bbb639ca6b31d621d5fbce71b0aa3dbfa6fe750be",
+  "after_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+  "reason": "four original directives lie inside omitted functions, not at file scope; original groups pending"
+}

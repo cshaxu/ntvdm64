@@ -1,0 +1,4222 @@
+{
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r375.zip",
+  "queue_sha256": "6c9ff38b606e475916156b36d982e0dfc5fae0cda310db72d6e20b4913b95c28",
+  "scope": "Each source file has its own depth zero. Counts include queue roles separately and are not distinct branch totals. Pending includes selected original arms awaiting the later phase, shared guest contexts and unresolved include guards.",
+  "roles": {
+    "original": {
+      "groups": 3493,
+      "statuses": {
+        "newly-excluded": 830,
+        "retained-observed": 1718,
+        "already-excluded": 1648,
+        "retained-original-assertion": 20,
+        "pending": 133
+      },
+      "pending_groups": 133,
+      "pending": [
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowfax.h",
+          "line": 37,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "DEBUG",
+              "status": "pending",
+              "evidence": "byte-identical current arm: Original guest WOWEXEC source or debug makefile refers to this shared header/selector; preserve the body. No guest build or actual guest macro context was observed. See s13-bfs-depth1-shared-guest-headers.json."
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowfax.h",
+          "line": 76,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_WOWFAX16_)",
+              "status": "pending",
+              "evidence": "byte-identical current arm: Original guest WOWEXEC source or debug makefile refers to this shared header/selector; preserve the body. No guest build or actual guest macro context was observed. See s13-bfs-depth1-shared-guest-headers.json."
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowfax.h",
+          "line": 161,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "_DEF_WOW32_",
+              "status": "pending",
+              "evidence": "byte-identical current arm: Original guest WOWEXEC source or debug makefile refers to this shared header/selector; preserve the body. No guest build or actual guest macro context was observed. See s13-bfs-depth1-shared-guest-headers.json."
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowinfo.h",
+          "line": 20,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "UNALIGNED",
+              "status": "pending",
+              "evidence": "byte-identical current arm: Original guest WOWEXEC source or debug makefile refers to this shared header/selector; preserve the body. No guest build or actual guest macro context was observed. See s13-bfs-depth1-shared-guest-headers.json."
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\usercli.h",
+          "line": 15,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "_USERCLI_",
+              "status": "pending",
+              "evidence": "OPENNT-HOST-072/074; s13-depth1-usercli-guard-positive-negative.json: naive original whole-header guard suppresses declarations required by real two-stage inclusion."
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+          "line": 15,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "WOW",
+              "status": "pending",
+              "evidence": "s13-r319-original-selected-guards.json: original negative guard, omitted context and selected status require precise restoration proof"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+          "line": 19,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "WOW",
+              "status": "newly-excluded",
+              "evidence": "OPENNT-HOST-204; 16-bit WOW source profile excluded in observed host builds"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Boundary restored; enclosing selected original content omitted"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+          "line": 304,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "WOW",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original enclosing function omitted; prior file-scope scaffold withdrawn; s13-r279-wow-misplaced.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+          "line": 435,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "WOW",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original enclosing function omitted; prior file-scope scaffold withdrawn; s13-r279-wow-misplaced.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+          "line": 719,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "WOW",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original enclosing function omitted; prior file-scope scaffold withdrawn; s13-r279-wow-misplaced.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+          "line": 776,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "WOW",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original enclosing function omitted; prior file-scope scaffold withdrawn; s13-r279-wow-misplaced.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+          "line": 795,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "WOW",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original enclosing function omitted; prior file-scope scaffold withdrawn; s13-r279-wow-misplaced.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+          "line": 835,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "WOW",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original enclosing function omitted; prior file-scope scaffold withdrawn; s13-r279-wow-misplaced.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+          "line": 890,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "WOW",
+              "status": "pending",
+              "evidence": "s13-r319-original-selected-guards.json: original negative guard, omitted context and selected status require precise restoration proof"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+          "line": 911,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "WOW",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original enclosing function omitted; prior file-scope scaffold withdrawn; s13-r279-wow-misplaced.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\user.h",
+          "line": 15,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "_USER_",
+              "status": "pending",
+              "evidence": "OPENNT-HOST-063/093/105; s13-user-multicohort-guard.json: naive original whole-header guard suppresses declarations required by real two-stage inclusion."
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\class.c",
+          "line": 375,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_SB",
+              "status": "newly-excluded",
+              "evidence": "s13-r453-frames.json; s13-r452-macro-contexts.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original C owner and selected arm omitted; pending audit. s13-r453-frames.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\exitwin.c",
+          "line": 134,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "LATER",
+              "status": "pending",
+              "evidence": "Original C owner and selected arm omitted; pending audit. s13-r453-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r453-frames.json; s13-r452-macro-contexts.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+          "line": 18,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "DEBUG_LOCKS",
+              "status": "newly-excluded",
+              "evidence": "OPENNT-HOST-203; excluded observed profile"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Boundary restored; original function or global omitted"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+          "line": 594,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "DEBUG",
+              "status": "pending",
+              "evidence": "Original C owner and selected arm omitted; pending audit. s13-r453-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r453-frames.json; s13-r452-macro-contexts.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+          "line": 1321,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "DEBUG",
+              "status": "newly-excluded",
+              "evidence": "OPENNT-HOST-203; excluded observed profile"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Boundary restored; original function or global omitted"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\inctlpan.c",
+          "line": 840,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "KOREA",
+              "status": "pending",
+              "evidence": "s13-r319-original-selected-guards.json: original negative guard, omitted context and selected status require precise restoration proof"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+          "line": 4750,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_IME",
+              "status": "newly-excluded",
+              "evidence": "s13-r450-frames.json; s13-r449-input-ime-context.json; s13-r449-input-debug-context.json; s13-r449-macro-contexts.json; s13-r446-macro-contexts.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original C owner and selected else body omitted; pending audit. s13-r450-frames.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+          "line": 990,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_IME",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r282)."
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+          "line": 351,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_SB",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "s13-r322-withdraw-chartran-misplaced.json: original function omitted; wrong-scope condition withdrawn; selected NWCH macro preserved"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+          "line": 378,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "_USERK_",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r286)."
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+          "line": 393,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_SB",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r282)."
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\draw.c",
+          "line": 680,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "WINDOWS_ME",
+              "status": "newly-excluded",
+              "evidence": "s13-r439-probed-macro-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r286)."
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+          "line": 719,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_SB",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r283)."
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+          "line": 875,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_SB",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r283)."
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+          "line": 1224,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_SB",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r283)."
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+          "line": 1657,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "_USERK_",
+              "status": "newly-excluded",
+              "evidence": "s13-r457-frames.json; s13-r455-macro-contexts.json; s13-r456-macro-contexts.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original C owner and selected else body omitted; pending audit. s13-r457-frames.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+          "line": 15,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "WOW",
+              "status": "newly-excluded",
+              "evidence": "OPENNT-HOST-204; 16-bit WOW source profile excluded in observed host builds"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Boundary restored; enclosing selected original content omitted"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+          "line": 135,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "WOW",
+              "status": "newly-excluded",
+              "evidence": "OPENNT-HOST-204; 16-bit WOW source profile excluded in observed host builds"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Boundary restored; enclosing selected original content omitted"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+          "line": 244,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "WOW",
+              "status": "pending",
+              "evidence": "s13-r319-original-selected-guards.json: original negative guard, omitted context and selected status require precise restoration proof"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+          "line": 344,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "WOW",
+              "status": "pending",
+              "evidence": "s13-r319-original-selected-guards.json: original negative guard, omitted context and selected status require precise restoration proof"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\ntos\\ex\\probe.c",
+          "line": 106,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_ALPHA_)",
+              "status": "newly-excluded",
+              "evidence": "s13-r433-alpha-probe-frame.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": ""
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 352,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 390,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 563,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 715,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 738,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 964,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 1135,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 1229,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 1312,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 1957,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 2027,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 2112,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 2288,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 2369,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 2723,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 3107,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 3158,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 3446,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 3972,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 4318,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 4727,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 5472,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 5506,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 5768,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 5823,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 5986,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 6312,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 6417,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 6689,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 6929,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 6977,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 7026,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 7071,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 7102,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 7131,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 7161,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 7188,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 7333,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 7363,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 7439,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 7917,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 8558,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 8571,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 8687,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 8747,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 9237,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 9303,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 9354,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 9395,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 9435,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 9558,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r277)."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c",
+          "line": 2624,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "0",
+              "status": "newly-excluded",
+              "evidence": "s13-r425-clres-literal-zero.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": ""
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c",
+          "line": 3751,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "0",
+              "status": "newly-excluded",
+              "evidence": "s13-r425-clres-literal-zero.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": ""
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+          "line": 331,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_SB",
+              "status": "newly-excluded",
+              "evidence": "s13-r444-paired-frames.json; s13-r441-macro-contexts.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original C owner and selected else body omitted; pending audit. s13-r444-paired-frames.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+          "line": 373,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "LATER",
+              "status": "pending",
+              "evidence": "s13-r319-original-selected-guards.json: original negative guard, omitted context and selected status require precise restoration proof"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+          "line": 453,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_SB",
+              "status": "newly-excluded",
+              "evidence": "s13-r444-paired-frames.json; s13-r441-macro-contexts.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original C owner and selected else body omitted; pending audit. s13-r444-paired-frames.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+          "line": 1777,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_SB",
+              "status": "newly-excluded",
+              "evidence": "s13-r444-paired-frames.json; s13-r441-macro-contexts.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original C owner and selected else body omitted; pending audit. s13-r444-paired-frames.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+          "line": 1803,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_SB",
+              "status": "newly-excluded",
+              "evidence": "s13-r444-paired-frames.json; s13-r441-macro-contexts.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original C owner and selected else body omitted; pending audit. s13-r444-paired-frames.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+          "line": 380,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MEMPHIS_MENUS",
+              "status": "newly-excluded",
+              "evidence": "existing OPENNT-HOST-159 / FE_SB restoration; s13-ntstubs-original-partial-guards.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original else boundary restored, but its function remains absent; no recovery claim."
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+          "line": 717,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_IME",
+              "status": "newly-excluded",
+              "evidence": "s13-r450-frames.json; s13-r449-input-ime-context.json; s13-r449-input-debug-context.json; s13-r449-macro-contexts.json; s13-r446-macro-contexts.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original C owner and selected else body omitted; pending audit. s13-r450-frames.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+          "line": 753,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_SB",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r281)."
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+          "line": 769,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_SB",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r281)."
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+          "line": 784,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_SB",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r281)."
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+          "line": 957,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_IME",
+              "status": "newly-excluded",
+              "evidence": "s13-r444-paired-frames.json; s13-r441-macro-contexts.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original C owner and selected else body omitted; pending audit. s13-r444-paired-frames.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+          "line": 963,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_IME",
+              "status": "newly-excluded",
+              "evidence": "s13-r444-paired-frames.json; s13-r441-macro-contexts.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original C owner and selected else body omitted; pending audit. s13-r444-paired-frames.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+          "line": 1203,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_IME",
+              "status": "newly-excluded",
+              "evidence": "s13-r444-paired-frames.json; s13-r441-macro-contexts.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original C owner and selected else body omitted; pending audit. s13-r444-paired-frames.json"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+          "line": 38,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "UNICODE",
+              "status": "pending",
+              "evidence": "s13-r318-ntcftxt-unresolved-ansi.json: original ANSI-selected structure; excluded owner function or scope requires exact placement and dependency analysis"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+          "line": 206,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "UNICODE",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r284)."
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+          "line": 217,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "UNICODE",
+              "status": "pending",
+              "evidence": "s13-r318-ntcftxt-unresolved-ansi.json: original ANSI-selected structure; excluded owner function or scope requires exact placement and dependency analysis"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+          "line": 243,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "UNICODE",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r284)."
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+          "line": 254,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "UNICODE",
+              "status": "pending",
+              "evidence": "s13-r318-ntcftxt-unresolved-ansi.json: original ANSI-selected structure; excluded owner function or scope requires exact placement and dependency analysis"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+          "line": 271,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "UNICODE",
+              "status": "pending",
+              "evidence": "s13-r318-ntcftxt-unresolved-ansi.json: original ANSI-selected structure; excluded owner function or scope requires exact placement and dependency analysis"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+          "line": 310,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "UNICODE",
+              "status": "pending",
+              "evidence": "Selected ANSI arm and original C owner omitted; pending audit. s13-r463-header-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r463-header-frames.json; original unconditional header UNICODE rejection OPENNT-HOST-156"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+          "line": 353,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "UNICODE",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r284)."
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+          "line": 369,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "UNICODE",
+              "status": "pending",
+              "evidence": "s13-r318-ntcftxt-unresolved-ansi.json: original ANSI-selected structure; excluded owner function or scope requires exact placement and dependency analysis"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+          "line": 395,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "UNICODE",
+              "status": "pending",
+              "evidence": "s13-r318-ntcftxt-unresolved-ansi.json: original ANSI-selected structure; excluded owner function or scope requires exact placement and dependency analysis"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+          "line": 414,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "UNICODE",
+              "status": "pending",
+              "evidence": "s13-r318-ntcftxt-unresolved-ansi.json: original ANSI-selected structure; excluded owner function or scope requires exact placement and dependency analysis"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+          "line": 431,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "UNICODE",
+              "status": "pending",
+              "evidence": "s13-r318-ntcftxt-unresolved-ansi.json: original ANSI-selected structure; excluded owner function or scope requires exact placement and dependency analysis"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+          "line": 514,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "UNICODE",
+              "status": "pending",
+              "evidence": "s13-r318-ntcftxt-unresolved-ansi.json: original ANSI-selected structure; excluded owner function or scope requires exact placement and dependency analysis"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+          "line": 549,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "UNICODE",
+              "status": "pending",
+              "evidence": "s13-r318-ntcftxt-unresolved-ansi.json: original ANSI-selected structure; excluded owner function or scope requires exact placement and dependency analysis"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+          "line": 934,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "UNICODE",
+              "status": "pending",
+              "evidence": "s13-r318-ntcftxt-unresolved-ansi.json: original ANSI-selected structure; excluded owner function or scope requires exact placement and dependency analysis"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+          "line": 976,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "UNICODE",
+              "status": "pending",
+              "evidence": "s13-r318-ntcftxt-unresolved-ansi.json: original ANSI-selected structure; excluded owner function or scope requires exact placement and dependency analysis"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+          "line": 992,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "UNICODE",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r284)."
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+          "line": 1096,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "UNICODE",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r284)."
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+          "line": 1111,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "UNICODE",
+              "status": "pending",
+              "evidence": "s13-r318-ntcftxt-unresolved-ansi.json: original ANSI-selected structure; excluded owner function or scope requires exact placement and dependency analysis"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+          "line": 1122,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "UNICODE",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r284)."
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+          "line": 1191,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "UNICODE",
+              "status": "pending",
+              "evidence": "Selected ANSI arm and original C owner omitted; pending audit. s13-r463-header-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r463-header-frames.json; original unconditional header UNICODE rejection OPENNT-HOST-156"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+          "line": 1295,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "UNICODE",
+              "status": "pending",
+              "evidence": "s13-r318-ntcftxt-unresolved-ansi.json: original ANSI-selected structure; excluded owner function or scope requires exact placement and dependency analysis"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+          "line": 1317,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "UNICODE",
+              "status": "pending",
+              "evidence": "Selected ANSI arm and original C owner omitted; pending audit. s13-r463-header-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r463-header-frames.json; original unconditional header UNICODE rejection OPENNT-HOST-156"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+          "line": 1434,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "UNICODE",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r284)."
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+          "line": 1505,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "UNICODE",
+              "status": "pending",
+              "evidence": "s13-r318-ntcftxt-unresolved-ansi.json: original ANSI-selected structure; excluded owner function or scope requires exact placement and dependency analysis"
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 2756,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MEMPHIS_MENUS",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r285)."
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 3465,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MEMPHIS_MENUS",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r285)."
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 3476,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MEMPHIS_MENUS",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r285)."
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+          "line": 4420,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MEMPHIS_MENUS",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original scope not restored; withdrawn misplaced scaffold (r285)."
+            }
+          ]
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\client.c",
+          "line": 2288,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "DEBUG",
+              "status": "newly-excluded",
+              "evidence": "s13-r450-frames.json; s13-r449-input-ime-context.json; s13-r449-input-debug-context.json; s13-r449-macro-contexts.json; s13-r446-macro-contexts.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original C owner and selected else body omitted; pending audit. s13-r450-frames.json"
+            }
+          ]
+        }
+      ]
+    },
+    "current": {
+      "groups": 3650,
+      "statuses": {
+        "newly-excluded": 871,
+        "retained-observed": 1904,
+        "already-excluded": 1657,
+        "retained-original-assertion": 20,
+        "pending": 110
+      },
+      "pending_groups": 110,
+      "pending": [
+        {
+          "path": "src/mvdm-host/inc/wowfax.h",
+          "line": 37,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "DEBUG",
+              "status": "pending",
+              "evidence": "Original guest WOWEXEC source or debug makefile refers to this shared header/selector; preserve the body. No guest build or actual guest macro context was observed. See s13-bfs-depth1-shared-guest-headers.json."
+            }
+          ]
+        },
+        {
+          "path": "src/mvdm-host/inc/wowfax.h",
+          "line": 76,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_WOWFAX16_)",
+              "status": "pending",
+              "evidence": "Original guest WOWEXEC source or debug makefile refers to this shared header/selector; preserve the body. No guest build or actual guest macro context was observed. See s13-bfs-depth1-shared-guest-headers.json."
+            }
+          ]
+        },
+        {
+          "path": "src/mvdm-host/inc/wowfax.h",
+          "line": 161,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "_DEF_WOW32_",
+              "status": "pending",
+              "evidence": "Original guest WOWEXEC source or debug makefile refers to this shared header/selector; preserve the body. No guest build or actual guest macro context was observed. See s13-bfs-depth1-shared-guest-headers.json."
+            }
+          ]
+        },
+        {
+          "path": "src/mvdm-host/inc/wowinfo.h",
+          "line": 20,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "UNALIGNED",
+              "status": "pending",
+              "evidence": "Original guest WOWEXEC source or debug makefile refers to this shared header/selector; preserve the body. No guest build or actual guest macro context was observed. See s13-bfs-depth1-shared-guest-headers.json."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+          "line": 49,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "DEBUG_LOCKS",
+              "status": "newly-excluded",
+              "evidence": "OPENNT-HOST-203; forced diagnostics verified."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Selected original content absent."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+          "line": 93,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "DEBUG",
+              "status": "newly-excluded",
+              "evidence": "OPENNT-HOST-203; forced diagnostics verified."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Selected original content absent."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+          "line": 9,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "WOW",
+              "status": "newly-excluded",
+              "evidence": "OPENNT-HOST-204; forced WOW diagnostic verified."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Selected original content absent."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+          "line": 9,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "WOW",
+              "status": "newly-excluded",
+              "evidence": "OPENNT-HOST-204; forced WOW diagnostic verified."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Selected original content absent."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+          "line": 17,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "WOW",
+              "status": "newly-excluded",
+              "evidence": "OPENNT-HOST-204; forced WOW diagnostic verified."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Selected original content absent."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+          "line": 299,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MEMPHIS_MENUS",
+              "status": "newly-excluded",
+              "evidence": "Restored pinned original global selector; 9 selected source compile contexts omit feature; see s13-bfs-depth1-ntstubs-memphis.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original boundary restored; selected original function remains absent from current subset."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+          "line": 1081,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "0",
+              "status": "newly-excluded",
+              "evidence": "s13-r425-clres-literal-zero.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else is retained as an empty framework; owner function remains omitted."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+          "line": 1090,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "0",
+              "status": "newly-excluded",
+              "evidence": "s13-r425-clres-literal-zero.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else is retained as an empty framework; owner function remains omitted."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 144,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 153,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 162,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 171,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 180,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 189,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 198,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 207,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 216,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 225,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 234,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 243,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 252,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 261,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 270,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 279,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 288,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 297,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 306,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 315,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 324,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 333,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 342,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 351,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 360,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 369,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 378,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 387,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 396,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 405,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 414,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 423,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 432,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 441,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 450,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 459,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 468,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 477,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 486,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 495,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 504,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 513,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 522,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 531,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 540,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 549,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 558,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 567,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 576,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 585,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 594,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_X86_)",
+              "status": "pending",
+              "evidence": "Original x86 selected body belongs to an omitted function; empty branch awaits selected-phase review."
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r427-ntstubs-x86-exclusions.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+          "line": 47,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "WOW",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+          "line": 56,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "WOW",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+          "line": 65,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "WOW",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+          "line": 74,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "WOW",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+          "line": 83,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "WOW",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+          "line": 92,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "WOW",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+          "line": 101,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "WOW",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+          "line": 457,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_IME",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+          "line": 417,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_SB",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+          "line": 426,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "_USERK_",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+          "line": 435,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_SB",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+          "line": 225,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_SB",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+          "line": 234,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_SB",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+          "line": 243,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_SB",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+          "line": 330,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_SB",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+          "line": 339,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_SB",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+          "line": 348,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_SB",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+          "line": 345,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "UNICODE",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+          "line": 354,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "UNICODE",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+          "line": 363,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "UNICODE",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+          "line": 372,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "UNICODE",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+          "line": 381,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "UNICODE",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+          "line": 390,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "UNICODE",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+          "line": 399,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "UNICODE",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 603,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MEMPHIS_MENUS",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 612,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MEMPHIS_MENUS",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 621,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MEMPHIS_MENUS",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+          "line": 630,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MEMPHIS_MENUS",
+              "status": "newly-excluded",
+              "evidence": "s13-r431-known-else-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/base/ntos/ex/probe.c",
+          "line": 87,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(_ALPHA_)",
+              "status": "newly-excluded",
+              "evidence": "s13-r433-alpha-probe-frame.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original non-Alpha body belongs to omitted ProbeForWrite and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+          "line": 134,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "WINDOWS_ME",
+              "status": "newly-excluded",
+              "evidence": "s13-r439-probed-macro-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original selected else body belongs to omitted function and remains pending."
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+          "line": 451,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_SB",
+              "status": "newly-excluded",
+              "evidence": "s13-r444-paired-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original C owner and selected else body omitted; pending audit. s13-r444-paired-frames.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+          "line": 460,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_SB",
+              "status": "newly-excluded",
+              "evidence": "s13-r444-paired-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original C owner and selected else body omitted; pending audit. s13-r444-paired-frames.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+          "line": 469,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_SB",
+              "status": "newly-excluded",
+              "evidence": "s13-r444-paired-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original C owner and selected else body omitted; pending audit. s13-r444-paired-frames.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+          "line": 478,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_SB",
+              "status": "newly-excluded",
+              "evidence": "s13-r444-paired-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original C owner and selected else body omitted; pending audit. s13-r444-paired-frames.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+          "line": 501,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_IME",
+              "status": "newly-excluded",
+              "evidence": "s13-r444-paired-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original C owner and selected else body omitted; pending audit. s13-r444-paired-frames.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+          "line": 510,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_IME",
+              "status": "newly-excluded",
+              "evidence": "s13-r444-paired-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original C owner and selected else body omitted; pending audit. s13-r444-paired-frames.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+          "line": 519,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_IME",
+              "status": "newly-excluded",
+              "evidence": "s13-r444-paired-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original C owner and selected else body omitted; pending audit. s13-r444-paired-frames.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+          "line": 328,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_IME",
+              "status": "newly-excluded",
+              "evidence": "s13-r450-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original C owner and selected else body omitted; pending audit. s13-r450-frames.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+          "line": 380,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_IME",
+              "status": "newly-excluded",
+              "evidence": "s13-r450-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original C owner and selected else body omitted; pending audit. s13-r450-frames.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+          "line": 217,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "DEBUG",
+              "status": "newly-excluded",
+              "evidence": "s13-r450-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original C owner and selected else body omitted; pending audit. s13-r450-frames.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+          "line": 244,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FE_SB",
+              "status": "newly-excluded",
+              "evidence": "s13-r453-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "s13-r453-frames.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+          "line": 76,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "LATER",
+              "status": "pending",
+              "evidence": "s13-r453-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r453-frames.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+          "line": 216,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "DEBUG",
+              "status": "pending",
+              "evidence": "s13-r453-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r453-frames.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+          "line": 275,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "_USERK_",
+              "status": "newly-excluded",
+              "evidence": "s13-r457-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "pending",
+              "evidence": "Original C owner and selected else body omitted; pending audit. s13-r457-frames.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+          "line": 423,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "UNICODE",
+              "status": "pending",
+              "evidence": "Selected ANSI arm and original C owner omitted; pending audit. s13-r463-header-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r463-header-frames.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+          "line": 432,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "UNICODE",
+              "status": "pending",
+              "evidence": "Selected ANSI arm and original C owner omitted; pending audit. s13-r463-header-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r463-header-frames.json"
+            }
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+          "line": 441,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "UNICODE",
+              "status": "pending",
+              "evidence": "Selected ANSI arm and original C owner omitted; pending audit. s13-r463-header-frames.json"
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "status": "newly-excluded",
+              "evidence": "s13-r463-header-frames.json"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "delivery": "No layer closure or release claimed; broader S13 unpublished NIDDB and CPU test-failure candidates remain under separate review."
+}

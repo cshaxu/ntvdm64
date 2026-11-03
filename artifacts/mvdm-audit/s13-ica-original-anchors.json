@@ -1,0 +1,45 @@
+{
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\ica.c",
+  "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075",
+  "current": "src/mvdm-host/softpc.new/base/system/ica.c",
+  "current_sha256": "75122e0bf4e18195896dbf98ab125ed3a867e5264b2a02c5aa9c30d6ec2e0902",
+  "matched": [
+    [
+      305,
+      272,
+      "HOOKED_IRETS",
+      "ifdef"
+    ],
+    [
+      371,
+      338,
+      "!defined (NTVDM)",
+      "if"
+    ],
+    [
+      1303,
+      1136,
+      "defined (CPU_40_STYLE) && !defined(NTVDM)",
+      "if"
+    ]
+  ],
+  "line_resumption": {
+    "305": 310,
+    "367": 370,
+    "371": 384,
+    "1303": 1322
+  },
+  "build": "cached MSVC x86 ntvdm.exe passed",
+  "binary_comparison": "matching package identity; only four link timestamp bytes differ from previous candidate",
+  "comparison": {
+    "prior_sha256": "8681d43076e0e740bdda34d39e25e0c070d047396804a0538ac4749a54bc70ea",
+    "current_sha256": "b0624d2d4fa75fd9fca763d630ffc31e448773480713c8aa0e8e780b5788131b",
+    "length": 2103808,
+    "differing_offsets": [
+      288,
+      289,
+      1698412,
+      1698413
+    ]
+  }
+}

@@ -17,7 +17,9 @@ MODNAME(wsubcls.c);
 
 VPVOID vptwpFirst = (VPVOID)NULL;
 
+#line 20
 #ifdef OLD_SUBCLASS_STUFF
+#line 21
 #error Unsupported excluded original configuration
 #endif
 #line 225
@@ -268,9 +270,12 @@ DWORD GetThunkWindowProc(
 }
 
 
+#line 472
 #if 0  // Currently unused
+#line 473
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#line 540
 
 DWORD IsThunkWindowProc(
     DWORD       vpProc16,       // IN

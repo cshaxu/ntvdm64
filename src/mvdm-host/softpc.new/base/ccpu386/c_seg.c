@@ -78,7 +78,7 @@ IFN3(
 #ifdef	SPC486
 #error Excluded unsupported SPC486 profile
 #endif	/* SPC486 */
-#line 81
+#line 80
 	 spr_write_byte(descr_addr+5, (IU8)entry->AR | ACCESSED);
       entry->AR |= ACCESSED;
 
@@ -124,7 +124,7 @@ IFN3(
 #ifdef	SPC486
 #error Excluded unsupported SPC486 profile
 #endif	/* SPC486 */
-#line 126
+#line 119
       spr_write_byte(descr_addr+5, (IU8)entry->AR | ACCESSED);
    entry->AR |= ACCESSED;
 

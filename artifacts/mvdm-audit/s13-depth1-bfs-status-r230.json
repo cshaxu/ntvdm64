@@ -1,0 +1,99 @@
+{
+  "queue": "artifacts/mvdm-audit/s13-bfs-depth1-working-queue-195r230.zip",
+  "queue_sha256": "f7245385ef2069f2b2695b2576a3b551f5f9b02c1c6d93e7410076e4795137a3",
+  "depth": 1,
+  "scope": "recorded lexical groups, not proof all pinned-original structures were restored",
+  "roles": {
+    "current": {
+      "groups": 3535,
+      "arms_by_status": {
+        "newly-excluded": 757,
+        "retained-observed": 1896,
+        "already-excluded": 1657,
+        "retained-original-assertion": 20,
+        "pending": 4
+      },
+      "groups_with_unreviewed_arms": 0,
+      "depth2_groups_parent_aggregate": {
+        "parent_has_retained": 1410,
+        "parent_has_unknown": 3
+      },
+      "depth2_missing_parent_refs": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+          "line": 804,
+          "parent": 687
+        }
+      ]
+    },
+    "original": {
+      "groups": 3493,
+      "arms_by_status": {
+        "newly-excluded": 716,
+        "retained-observed": 1711,
+        "already-excluded": 1648,
+        "retained-original-assertion": 20,
+        "pending": 4,
+        "unreviewed": 250
+      },
+      "groups_with_unreviewed_arms": 138,
+      "depth2_groups_parent_aggregate": {
+        "parent_has_retained": 1512,
+        "parent_has_no_retained": 293,
+        "parent_has_unknown": 70
+      },
+      "depth2_missing_parent_refs": [],
+      "structure_reconciliation": {
+        "matched-unchanged-anchor": 2076,
+        "matched-complete-ordered-file-sequence": 168,
+        "anchored-original-group": 569,
+        "matched-original-context-with-adaptation": 6,
+        "matched-original-function-context": 28,
+        "matched-registered-adaptation": 2,
+        "byte-identical-original": 328,
+        "matched-registered-ordered-adaptation": 2,
+        "matched-original-outer-guard": 1,
+        "matched-original-context": 3,
+        "matched-original-line": 2,
+        "original-excluded-guard-restored": 138,
+        "matched-original-line-and-body": 8,
+        "original-guard-restored": 5,
+        "restored-single-arm": 14,
+        "partially-matched-missing-original-else": 1,
+        "retained-registered-local-adaptation": 1,
+        "restored-original-assertion": 1
+      },
+      "recorded_restored_groups": 158,
+      "unreviewed_by_file": {
+        "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c": 114,
+        "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h": 35,
+        "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c": 20,
+        "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c": 10,
+        "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c": 9,
+        "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c": 9,
+        "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c": 8,
+        "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c": 6,
+        "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c": 6,
+        "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c": 6,
+        "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c": 6,
+        "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c": 4,
+        "O:\\repos.external\\OpenNT\\base\\ntos\\ex\\probe.c": 2,
+        "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\client.c": 2,
+        "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\handles.c": 2,
+        "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\class.c": 2,
+        "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\exitwin.c": 2,
+        "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c": 2,
+        "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\draw.c": 2,
+        "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\usercli.h": 1,
+        "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\user.h": 1,
+        "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\inctlpan.c": 1
+      }
+    }
+  },
+  "limitations": [
+    "Depth-two counts are grouped only by whole parent group, not branch; not a validated next-depth queue.",
+    "One current depth-two record has an unresolved parent location; no child branch was examined.",
+    "Original selected-arm bodies in wholly omitted functions and four shared-header contexts remain unresolved.",
+    "No publication, whole-product regression or depth closure is implied."
+  ]
+}

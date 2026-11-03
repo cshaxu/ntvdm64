@@ -1,0 +1,43 @@
+{
+  "scope": "Unselected original storage IOCTL header",
+  "path": "src/non-mvdm/public/ddk/inc/ntddstor.h",
+  "sha256": "862cf41979ee15c4f2fcc35b8350fa8b00729a10dd8fecc277992f9c10d8cb09",
+  "mirror_sources": [
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddstor.h",
+      "current_sha256": "862cf41979ee15c4f2fcc35b8350fa8b00729a10dd8fecc277992f9c10d8cb09",
+      "original": "O:\\repos.external\\OpenNT\\public\\ddk\\inc\\ntddstor.h",
+      "original_sha256": "78056c337304e2d4e2885c5780f44279c74d39a7c8a261cad39b539652bd316a",
+      "pinned_expected_sha256": "78056c337304e2d4e2885c5780f44279c74d39a7c8a261cad39b539652bd316a",
+      "original_matches_pinned": true
+    }
+  ],
+  "removed_condition_groups": 12,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r145.zip",
+  "evidence": [
+    "Actual x86 worker compile-context probes at all three current ntdddisk include sites (DEM, nt_fdisk, nt_rflop) report _NTDDDISK_H_ already defined.",
+    "Captured product preprocessing recorded no selection of the original ntdddisk guard body, and worker dependency records do not contain the original ntddstor.h.",
+    "The only remaining current source include is within the unselected original disk-header body; historical governance mentions are not compile inputs."
+  ],
+  "probes": [
+    {
+      "name": "probe",
+      "command_sha256": "4473b8400ac3e5e934fd84fa3ef0c27ab45f1eb5e6151ee8461cb5273783dc3c",
+      "observed_marker": "S13_DISK_GUARD_PREDEFINED"
+    },
+    {
+      "name": "nt_fdisk",
+      "command_sha256": "0086dbee21e2c00c7397793923a0a0502c8b09c173fdb34c637a14ebf1bc05ac",
+      "observed_marker": "S13_DISK_GUARD_PREDEFINED"
+    },
+    {
+      "name": "nt_rflop",
+      "command_sha256": "a46c7a8529614493e660a9991c0b4450accb2abb3f6e81547371f8e57686848f",
+      "observed_marker": "S13_DISK_GUARD_PREDEFINED"
+    }
+  ],
+  "limitations": [
+    "The retained ntdddisk.h guard body is not claimed unreachable in unsupported configurations.",
+    "No selected disk implementation or SDK header was modified."
+  ]
+}

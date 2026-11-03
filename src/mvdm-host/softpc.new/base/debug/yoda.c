@@ -33,9 +33,12 @@
 
 #endif
 
+#line 36
 #ifdef SCCSID
+#line 37
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
+#line 39
 
 /*
  * The following dummies are necessary to make the production version
@@ -62,7 +65,10 @@ void delta_check_I()
 #endif /* DELTA */
 #endif /* PROD */
 
+#line 74
 #ifdef	YODA
+#line 75
 #error Excluded unsupported YODA debugger profile
 #endif /* YODA */
+#line 9519
 #line 8938

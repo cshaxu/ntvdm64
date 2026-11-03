@@ -1,0 +1,46 @@
+{
+  "scope": "Historical .lib/.pdb products with matching supplemental import manifest, no current source/test/tool/build/active-manifest literal references; not guest images or runtime resources",
+  "files": [
+    {
+      "path": "src/mvdm-host/vdd/samples/mscdex/vdd/obj/i386/vcdex.lib",
+      "sha256": "ecaae84d5d5eafab0fb3ff72ab4d8fc05a8d1f1ad7af5b7e9ba5d6c0e56fb841",
+      "manifest_sha256": "ecaae84d5d5eafab0fb3ff72ab4d8fc05a8d1f1ad7af5b7e9ba5d6c0e56fb841",
+      "source_root": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm",
+      "source_relative_path": "vdd/samples/mscdex/vdd/obj/i386/vcdex.lib",
+      "refs": [],
+      "modified": false
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/mscdex/vdd/obj/i386/vcdex.pdb",
+      "sha256": "23a689337c30774c92d98075a476bc313c8a914a3c0783e365df01bb06f40236",
+      "manifest_sha256": "23a689337c30774c92d98075a476bc313c8a914a3c0783e365df01bb06f40236",
+      "source_root": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm",
+      "source_relative_path": "vdd/samples/mscdex/vdd/obj/i386/vcdex.pdb",
+      "refs": [],
+      "modified": false
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/i386/vdmexts.lib",
+      "sha256": "1f315c4b1725b60ca618eca0199dd7675947be7ab22d039dd7e6494edaab1ce7",
+      "manifest_sha256": "1f315c4b1725b60ca618eca0199dd7675947be7ab22d039dd7e6494edaab1ce7",
+      "source_root": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm",
+      "source_relative_path": "vdmexts/obj/i386/vdmexts.lib",
+      "refs": [],
+      "modified": false
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/i386/vdmexts.pdb",
+      "sha256": "0815e593e446801247d015c70cc83c44d68abf9692fcdf828bd0102842f57be1",
+      "manifest_sha256": "0815e593e446801247d015c70cc83c44d68abf9692fcdf828bd0102842f57be1",
+      "source_root": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm",
+      "source_relative_path": "vdmexts/obj/i386/vdmexts.pdb",
+      "refs": [],
+      "modified": false
+    }
+  ],
+  "source_manifest": "artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t301-s1-opennt-src-2-mvdm-extra-import-manifest.tsv",
+  "limitations": [
+    "Literal reference scan and current graph inspection do not prove unsupported future profiles.",
+    "Historical import evidence remains unchanged."
+  ]
+}

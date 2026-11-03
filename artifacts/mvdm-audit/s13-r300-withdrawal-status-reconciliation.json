@@ -1,0 +1,1022 @@
+{
+  "withdrawn_original_groups_checked": 191,
+  "arm_status_changes": [
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 352,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 390,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 563,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 715,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 738,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 964,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 1135,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 1229,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 1312,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 1957,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 2027,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 2112,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 2288,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 2369,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 2723,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 3107,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 3158,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 3446,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 3972,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 4318,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 4727,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 5472,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 5506,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 5768,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 5823,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 5986,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 6312,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 6417,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 6689,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 6929,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 6977,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 7026,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 7071,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 7102,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 7131,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 7161,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 7188,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 7333,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 7363,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 7439,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 7917,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 8558,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 8571,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 8687,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 8747,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 9237,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 9303,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 9354,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 9395,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 9435,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 9558,
+      "kind": "if",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r277"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "line": 331,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r280"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "line": 331,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r280"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "line": 453,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r280"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "line": 453,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r280"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "line": 1777,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r280"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "line": 1777,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r280"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "line": 1803,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r280"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "line": 1803,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r280"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "line": 717,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r281"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "line": 717,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r281"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "line": 753,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r281"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "line": 753,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r281"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "line": 769,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r281"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "line": 769,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r281"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "line": 784,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r281"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "line": 784,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r281"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "line": 957,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r281"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "line": 957,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r281"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "line": 963,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r281"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "line": 963,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r281"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "line": 1203,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r281"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "line": 1203,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r281"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "line": 4750,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r282"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "line": 4750,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r282"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+      "line": 990,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r282"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+      "line": 990,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r282"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+      "line": 393,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r282"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+      "line": 393,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r282"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\exitwin.c",
+      "line": 134,
+      "kind": "ifndef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r286"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\exitwin.c",
+      "line": 134,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r286"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "line": 594,
+      "kind": "ifndef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r286"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "line": 594,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r286"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\draw.c",
+      "line": 680,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r286"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\draw.c",
+      "line": 680,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r286"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+      "line": 378,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r286"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+      "line": 378,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r286"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "line": 1657,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r286"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "line": 1657,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r286"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\class.c",
+      "line": 375,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r283"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\class.c",
+      "line": 375,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r283"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "line": 719,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r283"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "line": 719,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r283"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "line": 875,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r283"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "line": 875,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r283"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "line": 1224,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r283"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "line": 1224,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r283"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "line": 206,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r284"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "line": 206,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r284"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "line": 243,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r284"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "line": 243,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r284"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "line": 310,
+      "kind": "ifndef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r284"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "line": 310,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r284"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "line": 353,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r284"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "line": 353,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r284"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "line": 992,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r284"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "line": 992,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r284"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "line": 1096,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r284"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "line": 1096,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r284"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "line": 1122,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r284"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "line": 1122,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r284"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "line": 1191,
+      "kind": "ifndef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r284"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "line": 1191,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r284"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "line": 1317,
+      "kind": "ifndef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r284"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "line": 1317,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r284"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "line": 1434,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r284"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "line": 1434,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r284"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 2756,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r285"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 2756,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r285"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 3465,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r285"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 3465,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r285"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 3476,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r285"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 3476,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r285"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 4420,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r285"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "line": 4420,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r285"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\client.c",
+      "line": 2288,
+      "kind": "ifdef",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r287"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\client.c",
+      "line": 2288,
+      "kind": "else",
+      "old": "unreviewed",
+      "new": "pending",
+      "withdrawal_evidence": "r287"
+    }
+  ],
+  "limits": "pending means unresolved, not excluded; no source or reachability decision"
+}

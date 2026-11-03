@@ -1,0 +1,163 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+  "queue_old_sha256": "d1a7a880eb5ef0444b05609c537518c6c425a4932716b0fe60e34fd05d5a0a6e",
+  "current_sha256": "f86e1cfd44d38827593b5e1f898fab73777315d2e32e0f387856a7bcf64d46ee",
+  "evidence_chain": [
+    {
+      "evidence": "artifacts/mvdm-audit/s13-debug-single-arm-batch.json",
+      "evidence_sha256": "5fb51777e010e0583c04f319fd22ca663d99b235ef4275a56ddbc952fd5ccb42",
+      "before": "d1a7a880eb5ef0444b05609c537518c6c425a4932716b0fe60e34fd05d5a0a6e",
+      "after": "5b1eda962e6a419bf356ee3aa59c1c72c9f84a7321d2107831299489ad921d65",
+      "original_guard_details": [
+        {
+          "original_line": 86,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 99
+        },
+        {
+          "original_line": 134,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 138
+        },
+        {
+          "original_line": 585,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 588
+        },
+        {
+          "original_line": 764,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 777
+        },
+        {
+          "original_line": 797,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 804
+        },
+        {
+          "original_line": 852,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 953
+        },
+        {
+          "original_line": 963,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 995
+        },
+        {
+          "original_line": 1056,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 1070
+        },
+        {
+          "original_line": 1084,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 1099
+        },
+        {
+          "original_line": 1139,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 1153
+        },
+        {
+          "original_line": 1169,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 1189
+        },
+        {
+          "original_line": 1198,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 1240
+        },
+        {
+          "original_line": 1250,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 1302
+        },
+        {
+          "original_line": 1353,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 1362
+        },
+        {
+          "original_line": 1394,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 1424
+        },
+        {
+          "original_line": 1691,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 1713
+        },
+        {
+          "original_line": 1714,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 1795
+        },
+        {
+          "original_line": 1886,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 1912
+        },
+        {
+          "original_line": 1933,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 2014
+        }
+      ]
+    },
+    {
+      "evidence": "artifacts/mvdm-audit/s13-feature-single-arm-batch.json",
+      "evidence_sha256": "b81f4d04bd9f329029c5a0dd98971f2d4bc22ea6b4d327c0d39180ac327c80fd",
+      "before": "5b1eda962e6a419bf356ee3aa59c1c72c9f84a7321d2107831299489ad921d65",
+      "after": "cd45b12df2e1291f0f9733fb3607e45f5bf783426e75399775b43a1be1024849",
+      "original_guard_details": [
+        {
+          "original_line": 81,
+          "kind": "ifdef",
+          "expression": "FE_IME",
+          "continuation": 84
+        },
+        {
+          "original_line": 456,
+          "kind": "ifdef",
+          "expression": "FE_IME",
+          "continuation": 459
+        },
+        {
+          "original_line": 1519,
+          "kind": "ifdef",
+          "expression": "FE_IME",
+          "continuation": 1524
+        }
+      ]
+    },
+    {
+      "evidence": "artifacts/mvdm-audit/s13-user-debug-compound-guards.json",
+      "evidence_sha256": "82e679b9bbe0054e40dc51efd4d210f1f9218596bd5afe6c663b80452c8d3704",
+      "before": "cd45b12df2e1291f0f9733fb3607e45f5bf783426e75399775b43a1be1024849",
+      "after": "f86e1cfd44d38827593b5e1f898fab73777315d2e32e0f387856a7bcf64d46ee",
+      "original_guard_details": "(DBG || TRACE_OBJECT_ALLOCS)"
+    }
+  ],
+  "limitation": "Recorded hash chain establishes attribution to three documented edits; it does not independently reconstruct old bytes or prove all macro contexts and selected semantics. Prior build and guard records remain separate."
+}

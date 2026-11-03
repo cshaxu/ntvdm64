@@ -1,0 +1,99 @@
+{
+  "input_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r367.zip",
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\client.c",
+      "original_line": 3494,
+      "original_end": 3502,
+      "directive": "#ifdef FE_IME",
+      "endif": "#endif",
+      "macro": "FE_IME",
+      "before_sha256": "91bd17fcab06d33c2bb617651d747633e7a435f3722127ee780f6dde97066d2d",
+      "original_sha256": "787eda33785a87ce9e71202c97b5913e2857f7106fed5bb97103049b1d5e3472",
+      "current_condition_line": 203,
+      "after_sha256": "f411e23824da4f539f67e94ffe55716ee9e991a9cce3a44fc9212d591f957932"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\profile.c",
+      "original_line": 68,
+      "original_end": 70,
+      "directive": "#ifdef FE_SB // PMAP_WINLOGON",
+      "endif": "#endif // FE_SB",
+      "macro": "FE_SB",
+      "before_sha256": "fc2e849308e48607c5e4ec16643982ef97a68324c6ecfd6f916fe54070450574",
+      "original_sha256": "8ecbb58954eca0fece4ab180bb56a3953b8b4408400d3c7aa01d50b62caaa531",
+      "current_condition_line": 146,
+      "after_sha256": "18919fd47cd4a7c3f4fd627c6bf7549833f6c7baff38a74d053c54e571a58e89"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+      "original_line": 337,
+      "original_end": 340,
+      "directive": "#ifdef FE_IME // RtlWCSMessageWParamCharToMB()",
+      "endif": "#endif // FE_IME",
+      "macro": "FE_IME",
+      "before_sha256": "38306adb23f1bcbc0d0280055b311fd9cd937fc513184c351d2f866936861816",
+      "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+      "current_condition_line": 445,
+      "after_sha256": "426cd27bcfae2ae7bc31626353a97a2da70e4b7fca8a0227e071a6c7ac1ae969"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "original_line": 270,
+      "original_end": 273,
+      "directive": "#ifdef FE_SB // SendMessageWorker()",
+      "endif": "#endif // FE_SB",
+      "macro": "FE_SB",
+      "before_sha256": "432590b1af4a4c95af8636b9add5336a0d32dd112f83df8eb51111175d7629db",
+      "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+      "current_condition_line": 437,
+      "after_sha256": "0bdbd5531a37878f17f7909eb1aba83ea0b0d6afd68ef8ad097ab34b572b2a96"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "original_line": 1719,
+      "original_end": 1721,
+      "directive": "#ifdef FE_SB // DispatchMessageWorker()",
+      "endif": "#endif // FE_SB",
+      "macro": "FE_SB",
+      "before_sha256": "432590b1af4a4c95af8636b9add5336a0d32dd112f83df8eb51111175d7629db",
+      "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+      "current_condition_line": 444,
+      "after_sha256": "0bdbd5531a37878f17f7909eb1aba83ea0b0d6afd68ef8ad097ab34b572b2a96"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_line": 992,
+      "original_end": 996,
+      "directive": "#ifdef FE_IME",
+      "endif": "#endif",
+      "macro": "FE_IME",
+      "before_sha256": "d78ec8e06b4f1e2482886564f0fbedcfe3282895c6a88e4c9302836ded121240",
+      "original_sha256": "0400c034bb5a782e81777e9fd805c07dbcd18d60ec9f1a876cfa67444577e0f8",
+      "current_condition_line": 487,
+      "after_sha256": "662fbb6252be16151450d55111dd152f14309cb9479c903954f0631b9354ea8b"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_line": 1915,
+      "original_end": 1920,
+      "directive": "#ifdef FE_IME",
+      "endif": "#endif",
+      "macro": "FE_IME",
+      "before_sha256": "d78ec8e06b4f1e2482886564f0fbedcfe3282895c6a88e4c9302836ded121240",
+      "original_sha256": "0400c034bb5a782e81777e9fd805c07dbcd18d60ec9f1a876cfa67444577e0f8",
+      "current_condition_line": 494,
+      "after_sha256": "662fbb6252be16151450d55111dd152f14309cb9479c903954f0631b9354ea8b"
+    }
+  ],
+  "context_evidence": "s13-r441-macro-contexts.json",
+  "scope": "Original first-depth file-scope frames restored after retained subset. Original C lexical owners remain omitted. No selected C tokens added or removed.",
+  "verification": "cached builds exit 0; x86 and x64 forced and allowed guard controls exit 0; queue scanner 2487 arms no remnants or stale lines; candidate versus r439 only four WOW32 timestamp bytes differ"
+}

@@ -1,0 +1,7 @@
+{
+  "result": "passed",
+  "source": "actual selected #if 0 scaffold forced to #if 1 for standalone MSVC control",
+  "expected_line": 545,
+  "log": "build/t473-s13/r320-anchor-controls/anchor.log",
+  "sha256": "c24854675ea47b389f67f9c8715fee9def3a35528ad0f059192ac5a77ec82ef5"
+}

@@ -1,0 +1,23 @@
+{
+  "changes": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "macro": "A2CPU",
+      "old_current": 741,
+      "new_current": 744
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "FIFO_ON",
+      "old_current": 2091,
+      "new_current": 2094
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "SEGMENTATION",
+      "old_current": 2013,
+      "new_current": 2016
+    }
+  ],
+  "method": "exact inserted physical-line offsets and current guard/error verification"
+}

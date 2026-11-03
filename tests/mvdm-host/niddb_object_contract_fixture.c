@@ -5,6 +5,11 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+__declspec(dllimport) void __stdcall ExitProcess(unsigned long);
+__declspec(noreturn) void mvdm_softpc_invalid_virtual_instance(unsigned long id)
+{ (void)id; ExitProcess(0xc0000420u); }
 
 #ifndef MVDM_NIDDB_EXPECT_POINTER_BYTES
 #define MVDM_NIDDB_EXPECT_POINTER_BYTES 4
@@ -111,7 +116,7 @@ static int verify_three_vm_reuse(void)
     return 0;
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
     void **instance = NIDDB_Allocate_Instance_Data(16, NULL, termination_callback);
     uint32_t system_id, child_id;
@@ -135,6 +140,18 @@ int main(void)
     expected_termination = child_address;
     control(11, 200);
     if (errors || termination_count != 1) return 2;
+    if (argc == 2) {
+        if (!strcmp(argv[1], "--stale")) current_virtual_byte = (uint8_t)child_id;
+        else if (!strcmp(argv[1], "--out-of-range")) current_virtual_byte = 0xff;
+        else if (!strcmp(argv[1], "--active-stale")) {
+            child_id = control(9, 201);
+            current_virtual_byte = (uint8_t)child_id;
+            control(11, 201);
+        } else return 2;
+        virtual_swap_instance();
+        return 3; /* Invalid identity must not return to a device caller. */
+    }
+    if (argc != 1) return 2;
     if ((uintptr_t)*instance != system_address) {
         printf("FAIL: retiring inactive child changed master pointer to retired instance\n");
         control(5, 100);

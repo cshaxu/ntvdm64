@@ -2323,9 +2323,12 @@ ICH PASCAL NEAR MLPasteText(
     ICH cchAdded = 0;
     HCURSOR hCursorOld;
 
+#line 2345
 #ifdef UNDO_CLEANUP           // #ifdef Added in Chicago  - johnl
+#line 2346
 #error DIVERGENCE OPENNT-HOST-133: UNDO_CLEANUP branch is not selected; see mirror register.
 #endif
+#line 2356
 
     hCursorOld = NtUserSetCursor(LoadCursor(NULL, IDC_WAIT));
 

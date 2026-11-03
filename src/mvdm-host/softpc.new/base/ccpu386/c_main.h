@@ -125,9 +125,12 @@ typedef struct
  */
 IMPORT IU8 pf_table[];
 
+#line 128
 #ifdef	PIG
+#line 129
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
+#line 131
 
 
 /*
@@ -206,8 +209,11 @@ IMPORT VOID c_cpu_unsimulate IPT0();
 /* Turn operand size into mask for Operand. */
 #define SZ2MASK(x) ((IU32)0xffffffff >> 32 - x )
 
+#line 218
 #ifdef DOUBLE_CPU
+#line 219
 #error Unsupported excluded original configuration
 #endif
+#line 226
 #line 217
 

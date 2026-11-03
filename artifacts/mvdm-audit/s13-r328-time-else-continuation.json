@@ -1,0 +1,12 @@
+{
+  "source": "src/mvdm-host/softpc.new/base/support/time_day.c",
+  "before_sha256": "a5af38b5a0b61f07a81b88e5d30d728881c9ff2f1cac1a9f76aa6e11752b53bf",
+  "after_sha256": "5640af83928589b45b59ed3ee50b34f136d72d3bebcddf2a6c3536cf5e84f856",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\time_day.c",
+  "original_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2",
+  "original_endif": 205,
+  "old_continuation": 186,
+  "new_continuation": 206,
+  "scope": "diagnostic line mapping only; selected code unchanged",
+  "validation": "pending"
+}

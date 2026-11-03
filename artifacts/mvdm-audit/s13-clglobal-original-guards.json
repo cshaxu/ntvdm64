@@ -1,0 +1,23 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+  "working_sha256": "4e70733287239a82f0aec9e87d0511bae32fcc07ceb9b2a5187ab85704f57b7b",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clglobal.c",
+  "original_sha256": "d8fe5a80d5848f2951843d7ba94752cb3223945a48630350835422389cd1da6f",
+  "original_conditions": [
+    {
+      "line": 24,
+      "expression": "#if DBG"
+    },
+    {
+      "line": 1309,
+      "expression": "#ifdef WX86"
+    }
+  ],
+  "actual_wow_context": "DBG false and WX86 undefined, observed by preprocessor with captured graph flags",
+  "controls": "forced DBG=1 and WX86 each fail at intended #error; original logical line 34 checked with __LINE__",
+  "preprocessing": "baseline and candidate nonblank output equal",
+  "build": "WOW32 passed",
+  "guard_suites": "x86 and x64 passed",
+  "image_comparison": "s13-clglobal-guards-image-comparison.json",
+  "limitation": "No claim about unsupported debug/WX86 profiles or full runtime testing."
+}

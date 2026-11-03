@@ -1,0 +1,735 @@
+{
+  "rows": [
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\support\\main.c",
+      "snapshot": "build\\t473-s13\\bfs-depth1-command-xms-markers\\shadow\\src\\mvdm-host\\softpc.new\\base\\support\\main.c",
+      "queue_hash": "e470c985eebea0e46578d24b9de80ed03d89b06c1c0f8997ecb3d8cab1074eea",
+      "current_hash": "e76b5d42d93b188c2d2d5cdc62b47f18df27d365d247652ec28b2af90f41a871",
+      "verified": true,
+      "changes": [
+        {
+          "old_line": 61,
+          "new_line": 61,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 71,
+          "new_line": 72,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 83,
+          "new_line": 85,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 86,
+          "new_line": 89,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 149,
+          "new_line": 153,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 152,
+          "new_line": 157,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 165,
+          "new_line": 171,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 169,
+          "new_line": 175,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 236,
+          "new_line": 243,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 239,
+          "new_line": 247,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 312,
+          "new_line": 321,
+          "line_directives_or_blanks_only": true
+        }
+      ],
+      "durable_hunks": [
+        {
+          "old_line": 61,
+          "new_line": 61,
+          "old_lines": [],
+          "new_lines": [
+            "#line 54"
+          ]
+        },
+        {
+          "old_line": 71,
+          "new_line": 72,
+          "old_lines": [],
+          "new_lines": [
+            "#line 58"
+          ]
+        },
+        {
+          "old_line": 83,
+          "new_line": 85,
+          "old_lines": [],
+          "new_lines": [
+            "#line 69"
+          ]
+        },
+        {
+          "old_line": 86,
+          "new_line": 89,
+          "old_lines": [],
+          "new_lines": [
+            "#line 72"
+          ]
+        },
+        {
+          "old_line": 149,
+          "new_line": 153,
+          "old_lines": [],
+          "new_lines": [
+            "#line 140"
+          ]
+        },
+        {
+          "old_line": 152,
+          "new_line": 157,
+          "old_lines": [],
+          "new_lines": [
+            "#line 143"
+          ]
+        },
+        {
+          "old_line": 165,
+          "new_line": 171,
+          "old_lines": [
+            "#line 170"
+          ],
+          "new_lines": [
+            "#line 167"
+          ]
+        },
+        {
+          "old_line": 169,
+          "new_line": 175,
+          "old_lines": [],
+          "new_lines": [
+            "#line 174"
+          ]
+        },
+        {
+          "old_line": 236,
+          "new_line": 243,
+          "old_lines": [],
+          "new_lines": [
+            "#line 248"
+          ]
+        },
+        {
+          "old_line": 239,
+          "new_line": 247,
+          "old_lines": [],
+          "new_lines": [
+            "#line 263"
+          ]
+        },
+        {
+          "old_line": 312,
+          "new_line": 321,
+          "old_lines": [
+            "#line 329"
+          ],
+          "new_lines": [
+            "#line 338"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\system\\ica.c",
+      "snapshot": "build\\t473-s13\\bfs-depth1-command-xms-markers\\shadow\\src\\mvdm-host\\softpc.new\\base\\system\\ica.c",
+      "queue_hash": "b9527bc864083fe7783e9836bde7a1bc3784d18b838c439455ca7e57c001ee2a",
+      "current_hash": "75122e0bf4e18195896dbf98ab125ed3a867e5264b2a02c5aa9c30d6ec2e0902",
+      "verified": true,
+      "changes": [
+        {
+          "old_line": 270,
+          "new_line": 270,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 275,
+          "new_line": 275,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 336,
+          "new_line": 336,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 341,
+          "new_line": 341,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 841,
+          "new_line": 842,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 844,
+          "new_line": 846,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 1132,
+          "new_line": 1135,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 1135,
+          "new_line": 1139,
+          "line_directives_or_blanks_only": true
+        }
+      ],
+      "durable_hunks": [
+        {
+          "old_line": 270,
+          "new_line": 270,
+          "old_lines": [
+            "#line 291\r"
+          ],
+          "new_lines": [
+            "#line 304\r"
+          ]
+        },
+        {
+          "old_line": 275,
+          "new_line": 275,
+          "old_lines": [
+            "#line 297\r"
+          ],
+          "new_lines": [
+            "#line 310\r"
+          ]
+        },
+        {
+          "old_line": 336,
+          "new_line": 336,
+          "old_lines": [
+            "#line 357\r"
+          ],
+          "new_lines": [
+            "#line 370\r"
+          ]
+        },
+        {
+          "old_line": 341,
+          "new_line": 341,
+          "old_lines": [],
+          "new_lines": [
+            "#line 384\r"
+          ]
+        },
+        {
+          "old_line": 841,
+          "new_line": 842,
+          "old_lines": [],
+          "new_lines": [
+            "#line 908\r"
+          ]
+        },
+        {
+          "old_line": 844,
+          "new_line": 846,
+          "old_lines": [],
+          "new_lines": [
+            "#line 912\r"
+          ]
+        },
+        {
+          "old_line": 1132,
+          "new_line": 1135,
+          "old_lines": [],
+          "new_lines": [
+            "#line 1303\r"
+          ]
+        },
+        {
+          "old_line": 1135,
+          "new_line": 1139,
+          "old_lines": [],
+          "new_lines": [
+            "#line 1322\r"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\host\\src\\nt_cpu.c",
+      "snapshot": "build\\t473-s13\\bfs-depth1-command-xms-markers\\shadow\\src\\mvdm-host\\softpc.new\\host\\src\\nt_cpu.c",
+      "queue_hash": "c2b950d588b62953194a3f6e5063f76e5db3ca3237993ae6842b9651f75fe274",
+      "current_hash": "95f8281fab486dba3d7cdcda40c432c0675e9ed3431562ab59097a3cdb75d316",
+      "verified": true,
+      "changes": [
+        {
+          "old_line": 56,
+          "new_line": 56,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 59,
+          "new_line": 60,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 63,
+          "new_line": 65,
+          "line_directives_or_blanks_only": true
+        }
+      ],
+      "durable_hunks": [
+        {
+          "old_line": 56,
+          "new_line": 56,
+          "old_lines": [],
+          "new_lines": [
+            "#line 42"
+          ]
+        },
+        {
+          "old_line": 59,
+          "new_line": 60,
+          "old_lines": [],
+          "new_lines": [
+            "#line 47"
+          ]
+        },
+        {
+          "old_line": 63,
+          "new_line": 65,
+          "old_lines": [
+            "#line 68"
+          ],
+          "new_lines": [
+            "#line 56"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\host\\src\\nt_event.c",
+      "snapshot": "build\\t473-s13\\bfs-depth1-command-xms-markers\\shadow\\src\\mvdm-host\\softpc.new\\host\\src\\nt_event.c",
+      "queue_hash": "e7a626a7f35aa5bc734163d6c5e4f8caa62468b9cbccb310497a51259f01e5a2",
+      "current_hash": "517c246720970ad2b6b575c9721c13801910576d094e99d09ad6241224a6e488",
+      "verified": true,
+      "changes": [
+        {
+          "old_line": 1386,
+          "new_line": 1386,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 1578,
+          "new_line": 1578,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 1581,
+          "new_line": 1582,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 1604,
+          "new_line": 1606,
+          "line_directives_or_blanks_only": true
+        }
+      ],
+      "durable_hunks": [
+        {
+          "old_line": 1386,
+          "new_line": 1386,
+          "old_lines": [
+            "#line 1389\r"
+          ],
+          "new_lines": [
+            "#line 1333\r"
+          ]
+        },
+        {
+          "old_line": 1578,
+          "new_line": 1578,
+          "old_lines": [],
+          "new_lines": [
+            "#line 1493\r"
+          ]
+        },
+        {
+          "old_line": 1581,
+          "new_line": 1582,
+          "old_lines": [],
+          "new_lines": [
+            "#line 1496\r"
+          ]
+        },
+        {
+          "old_line": 1604,
+          "new_line": 1606,
+          "old_lines": [],
+          "new_lines": [
+            "#line 1514\r"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src\\non-mvdm\\base\\ntos\\ex\\probe.c",
+      "snapshot": "build\\t473-s13\\bfs-depth1-command-xms-markers\\shadow\\src\\non-mvdm\\base\\ntos\\ex\\probe.c",
+      "queue_hash": "d90adbadd7b0d9937302509c577e5f846a05ba4562ccf02f7d6ddfb346e17f82",
+      "current_hash": "d5a4aa697600bba9c8d8a4be71103e88c548c6f93c7a6951c9c0557b978fd7d3",
+      "verified": true,
+      "changes": [
+        {
+          "old_line": 29,
+          "new_line": 29,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 32,
+          "new_line": 33,
+          "line_directives_or_blanks_only": true
+        }
+      ],
+      "durable_hunks": [
+        {
+          "old_line": 29,
+          "new_line": 29,
+          "old_lines": [],
+          "new_lines": [
+            "#line 27\r"
+          ]
+        },
+        {
+          "old_line": 32,
+          "new_line": 33,
+          "old_lines": [
+            "#line 29\r"
+          ],
+          "new_lines": [
+            "#line 143\r"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src\\non-mvdm\\ds\\netapi\\xactsrv\\apimsg.c",
+      "snapshot": "build\\t473-s13\\bfs-depth1-command-xms-markers\\shadow\\src\\non-mvdm\\ds\\netapi\\xactsrv\\apimsg.c",
+      "queue_hash": "f71cc24fde1c557386109d2b871e45d965d4410d61ac655f5776e7c9e7001aa1",
+      "current_hash": "2d820c06c3667fc73fafbcf5ad6324f3542b5d0f4f7018b4a33b5945282f06d7",
+      "verified": true,
+      "changes": [
+        {
+          "old_line": 58,
+          "new_line": 58,
+          "line_directives_or_blanks_only": true
+        }
+      ],
+      "durable_hunks": [
+        {
+          "old_line": 58,
+          "new_line": 58,
+          "old_lines": [
+            "#line 61"
+          ],
+          "new_lines": [
+            "#line 113"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src\\non-mvdm\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+      "snapshot": "build\\t473-s13\\bfs-depth1-command-xms-markers\\shadow\\src\\non-mvdm\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+      "queue_hash": "59441bf9bbd1e173632198a172f8f14273d417491c0616ee9fbca4c31db0ba43",
+      "current_hash": "12c43e3bd8abfd81ab6e61e033c9cbf2a2aa39372fc65ac3110603f6f825d18c",
+      "verified": true,
+      "changes": [
+        {
+          "old_line": 174,
+          "new_line": 174,
+          "line_directives_or_blanks_only": true
+        }
+      ],
+      "durable_hunks": [
+        {
+          "old_line": 174,
+          "new_line": 174,
+          "old_lines": [
+            "#line 172"
+          ],
+          "new_lines": [
+            "#line 180"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src\\mvdm-host\\dpmi32\\dpmiint.c",
+      "snapshot": "build\\t473-s13\\bfs-dpmi-vdmtib\\dpmiint.c",
+      "queue_hash": "07cdba736041854ca2f1f7bf7574df5efd15c702ceb367854670d4da5d955646",
+      "current_hash": "38343b287fa0623c1962773af4613d39a6de47a3bfc0f581c38e3124680ec0aa",
+      "verified": true,
+      "changes": [
+        {
+          "old_line": 94,
+          "new_line": 94,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 99,
+          "new_line": 100,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 422,
+          "new_line": 423,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 425,
+          "new_line": 427,
+          "line_directives_or_blanks_only": true
+        }
+      ],
+      "durable_hunks": [
+        {
+          "old_line": 94,
+          "new_line": 94,
+          "old_lines": [],
+          "new_lines": [
+            "#line 88\r"
+          ]
+        },
+        {
+          "old_line": 99,
+          "new_line": 100,
+          "old_lines": [
+            "#line 95\r"
+          ],
+          "new_lines": [
+            "#line 107\r"
+          ]
+        },
+        {
+          "old_line": 422,
+          "new_line": 423,
+          "old_lines": [],
+          "new_lines": [
+            "#line 387\r"
+          ]
+        },
+        {
+          "old_line": 425,
+          "new_line": 427,
+          "old_lines": [
+            "#line 424\r"
+          ],
+          "new_lines": [
+            "#line 397\r"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src\\mvdm-host\\wow32\\wow32.c",
+      "snapshot": "build\\t473-s13\\bfs-fastwow-outers\\wow32.c",
+      "queue_hash": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7",
+      "current_hash": "2abb1dd15c9a97c6c4fb7c0808bfad806d26c6cebd16c69a63d5f4731f42c061",
+      "verified": true,
+      "changes": [
+        {
+          "old_line": 169,
+          "new_line": 169,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 449,
+          "new_line": 449,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 701,
+          "new_line": 701,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 706,
+          "new_line": 706,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 737,
+          "new_line": 737,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 821,
+          "new_line": 821,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 826,
+          "new_line": 826,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 861,
+          "new_line": 861,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 868,
+          "new_line": 868,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 890,
+          "new_line": 890,
+          "line_directives_or_blanks_only": true
+        },
+        {
+          "old_line": 1606,
+          "new_line": 1606,
+          "line_directives_or_blanks_only": true
+        }
+      ],
+      "durable_hunks": [
+        {
+          "old_line": 169,
+          "new_line": 169,
+          "old_lines": [
+            "#line 192"
+          ],
+          "new_lines": [
+            "#line 181"
+          ]
+        },
+        {
+          "old_line": 449,
+          "new_line": 449,
+          "old_lines": [
+            "#line 475"
+          ],
+          "new_lines": [
+            "#line 468"
+          ]
+        },
+        {
+          "old_line": 701,
+          "new_line": 701,
+          "old_lines": [
+            "#line 803"
+          ],
+          "new_lines": [
+            "#line 778"
+          ]
+        },
+        {
+          "old_line": 706,
+          "new_line": 706,
+          "old_lines": [
+            "#line 809"
+          ],
+          "new_lines": [
+            "#line 784"
+          ]
+        },
+        {
+          "old_line": 737,
+          "new_line": 737,
+          "old_lines": [
+            "#line 896"
+          ],
+          "new_lines": [
+            "#line 871"
+          ]
+        },
+        {
+          "old_line": 821,
+          "new_line": 821,
+          "old_lines": [
+            "#line 991"
+          ],
+          "new_lines": [
+            "#line 963"
+          ]
+        },
+        {
+          "old_line": 826,
+          "new_line": 826,
+          "old_lines": [
+            "#line 995"
+          ],
+          "new_lines": [
+            "#line 967"
+          ]
+        },
+        {
+          "old_line": 861,
+          "new_line": 861,
+          "old_lines": [
+            "#line 1030"
+          ],
+          "new_lines": [
+            "#line 1001"
+          ]
+        },
+        {
+          "old_line": 868,
+          "new_line": 868,
+          "old_lines": [
+            "#line 1040"
+          ],
+          "new_lines": [
+            "#line 1011"
+          ]
+        },
+        {
+          "old_line": 890,
+          "new_line": 890,
+          "old_lines": [
+            "#line 1060"
+          ],
+          "new_lines": [
+            "#line 1031"
+          ]
+        },
+        {
+          "old_line": 1606,
+          "new_line": 1606,
+          "old_lines": [
+            "#line 2290"
+          ],
+          "new_lines": [
+            "#line 2251"
+          ]
+        }
+      ]
+    }
+  ],
+  "limits": "Snapshot and current bytes checked; all nonidentical lines are #line directives or blanks. #line can change observable diagnostics, so prior runtime or selected semantics are not inferred solely from this check."
+}

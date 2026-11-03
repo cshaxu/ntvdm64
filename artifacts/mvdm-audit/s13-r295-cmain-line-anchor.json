@@ -1,0 +1,11 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+  "before_sha256": "102bdfaab6fea42e19deea0115f82523fdff5d6e486272887139740955a5e224",
+  "after_sha256": "b3e8e9e582286aef7245cc53e4909e59f38e788feaff5b24c154413a3e89084c",
+  "original_group_line": 155,
+  "original_next_line": 163,
+  "old_line_directive": 174,
+  "new_line_directive": 163,
+  "proof": "pinned OpenNT source CPU_486 group ends line 162, blank line 163 then FIX_BT_BUG line 164; current selected continuation is same. No __LINE__ or assert token found before next #line.",
+  "limits": "text audit only; actual diagnostics and affected product build still required"
+}

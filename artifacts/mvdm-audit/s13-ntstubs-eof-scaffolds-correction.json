@@ -1,0 +1,27 @@
+{
+  "action": "Remove 52 EOF-only condition scaffolds; they were not restored at original functions and selected arms were empty. Return original arms to unreviewed using queue r231.",
+  "source": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+  "removed_scaffolds": 52,
+  "source_before_scaffolds_sha256": "79365c48a1b1752c7a09040f2b5096bac04db2bbdae5cdf5edb2387eda759547",
+  "source_with_scaffolds_sha256": "b33297dd42c7784adb514a8368eca55661cbee2c467020190bff3fcbcdf42ff6",
+  "source_after_correction_sha256": "79365c48a1b1752c7a09040f2b5096bac04db2bbdae5cdf5edb2387eda759547",
+  "queue_baseline": "s13-bfs-depth1-working-queue-195r231.zip",
+  "queue_output": "s13-bfs-depth1-working-queue-195r233.zip",
+  "queue_sha256": "55aa76bccb7f9e8d572bf0c76a6b3af9cf3cf7cbb03394787182447c1b51973f",
+  "original_evidence_retained": "s13-ntstubs-x86-outer-scaffolds.json",
+  "build": {
+    "toolchain": "MSVC x86 via VsDevCmd",
+    "commands": [
+      "ninja -C build/.ninja/msvc-x86-release/wow32",
+      "ninja -C build/.ninja/msvc-x86-release/call-boundaries"
+    ],
+    "result": "pass",
+    "sha256": {
+      "build/t473-s13/ntstubs-correction-wow32.log": "7ca9b3e563fa8925c5d812e9dd74966538218fa197f1ddf5b4383ebac851aac4",
+      "build/t473-s13/ntstubs-correction-boundaries.log": "d3cec11872eca63d3933a0e7efdea15244210da9e46343cb3220274bb7522776",
+      "build/.ninja/msvc-x86-release/wow32/wow32.dll": "c6d48bd37ae0b9a59b81e654a9400f7a10d786b22e553405029ec427cb2f66d4"
+    },
+    "prior_invocation": "cmake --build with nonexistent outer call-boundaries target failed before build; reran using real sub-build directories",
+    "runtime_tests": "not run; correction removes EOF-only empty scaffolds and returns source byte-for-byte to earlier state"
+  }
+}

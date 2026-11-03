@@ -1,0 +1,3142 @@
+{
+  "scope": "all remaining existing first-depth anchor records with unchanged current and pinned-original hashes and exact full arm signatures",
+  "counts": {
+    "paired_original_arms": 330,
+    "paired_groups": 313,
+    "hash_mismatch": 666
+  },
+  "records": [
+    {
+      "current": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+      "current_sha256": "e7ce4347f850fcfb359ec1c5265a9790789e6741cb2e50f5ecd1f88ebd0d9e06",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\ill_bop.c",
+      "original_sha256": "89df5a6fa3fc27def18b904fcd83f6c872778fec33dfc58634c9f73449165799",
+      "original_line": 58,
+      "current_line": 52,
+      "anchor_evidence": "s13-bfs-depth1-compound-following.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "current_sha256": "b104e4d3f599d97ba05998b2bd9c918ea1fb718fbcdffc1c548fd570b9a7f674",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\printer_.c",
+      "original_sha256": "53edfe9fb4bb9d965acb8a7cc5f33d14cdf0694957dadfa912e0175488dbcf81",
+      "original_line": 200,
+      "current_line": 207,
+      "anchor_evidence": "s13-bfs-depth1-compound-following.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/dem.c",
+      "current_sha256": "ae70ca4b3a2c8ba401afd7597d3863d5483a2f89228abf2f30ad6efef5e885a4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\dem.c",
+      "original_sha256": "2573da2dbf964c5e75102145b031766113cfc4e914dc00f0d80fdc6d98f5a2de",
+      "original_line": 27,
+      "current_line": 28,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch1.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/dem.c",
+      "current_sha256": "ae70ca4b3a2c8ba401afd7597d3863d5483a2f89228abf2f30ad6efef5e885a4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\dem.c",
+      "original_sha256": "2573da2dbf964c5e75102145b031766113cfc4e914dc00f0d80fdc6d98f5a2de",
+      "original_line": 66,
+      "current_line": 72,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch1.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demdasd.c",
+      "current_sha256": "20a9b79c1afeb7c1573dca44d1a3b714dff18df2d3eecc24707ce6f7af9597e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demdasd.c",
+      "original_sha256": "7438f5d4df1803664e66f16b7464d719c8e4341d1d9c2e7721ce7184bdf08942",
+      "original_line": 77,
+      "current_line": 77,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch1.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demdasd.c",
+      "current_sha256": "20a9b79c1afeb7c1573dca44d1a3b714dff18df2d3eecc24707ce6f7af9597e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demdasd.c",
+      "original_sha256": "7438f5d4df1803664e66f16b7464d719c8e4341d1d9c2e7721ce7184bdf08942",
+      "original_line": 110,
+      "current_line": 109,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch1.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demdasd.c",
+      "current_sha256": "20a9b79c1afeb7c1573dca44d1a3b714dff18df2d3eecc24707ce6f7af9597e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demdasd.c",
+      "original_sha256": "7438f5d4df1803664e66f16b7464d719c8e4341d1d9c2e7721ce7184bdf08942",
+      "original_line": 150,
+      "current_line": 148,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch1.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demdasd.c",
+      "current_sha256": "20a9b79c1afeb7c1573dca44d1a3b714dff18df2d3eecc24707ce6f7af9597e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demdasd.c",
+      "original_sha256": "7438f5d4df1803664e66f16b7464d719c8e4341d1d9c2e7721ce7184bdf08942",
+      "original_line": 178,
+      "current_line": 168,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch1.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demdisp.c",
+      "current_sha256": "e9b7447165b02e8ca945e7360eeb5bb1af9904f53eadec88b9055a1a54745713",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demdisp.c",
+      "original_sha256": "7ea3a829e3f8aad2dfe644d101cabaff514de25909db937675fc323dfce8fe3c",
+      "original_line": 189,
+      "current_line": 114,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch1.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demdisp.c",
+      "current_sha256": "e9b7447165b02e8ca945e7360eeb5bb1af9904f53eadec88b9055a1a54745713",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demdisp.c",
+      "original_sha256": "7ea3a829e3f8aad2dfe644d101cabaff514de25909db937675fc323dfce8fe3c",
+      "original_line": 217,
+      "current_line": 133,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch1.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demerror.c",
+      "current_sha256": "a688c6210ed975694b57d7b7bc352f57a5809e569dbcc2016f523da01989f70e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demerror.c",
+      "original_sha256": "8c266cc5086f5bfb834f7d2054459f0a91b1789e90095e56ff363f77d409b64f",
+      "original_line": 57,
+      "current_line": 57,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch1.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demerror.c",
+      "current_sha256": "a688c6210ed975694b57d7b7bc352f57a5809e569dbcc2016f523da01989f70e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demerror.c",
+      "original_sha256": "8c266cc5086f5bfb834f7d2054459f0a91b1789e90095e56ff363f77d409b64f",
+      "original_line": 139,
+      "current_line": 117,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch1.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demerror.c",
+      "current_sha256": "a688c6210ed975694b57d7b7bc352f57a5809e569dbcc2016f523da01989f70e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demerror.c",
+      "original_sha256": "8c266cc5086f5bfb834f7d2054459f0a91b1789e90095e56ff363f77d409b64f",
+      "original_line": 167,
+      "current_line": 142,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch1.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demfile.c",
+      "current_sha256": "4935550c7f61101569fae4643c8c70e7ac834cd7ef226dec171a0db5328f196e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demfile.c",
+      "original_sha256": "701c7ce94b6317f23d73d847c681338ddb522d0216cf6373713e542c34236620",
+      "original_line": 420,
+      "current_line": 457,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch1.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demfile.c",
+      "current_sha256": "4935550c7f61101569fae4643c8c70e7ac834cd7ef226dec171a0db5328f196e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demfile.c",
+      "original_sha256": "701c7ce94b6317f23d73d847c681338ddb522d0216cf6373713e542c34236620",
+      "original_line": 469,
+      "current_line": 503,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch1.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demfile.c",
+      "current_sha256": "4935550c7f61101569fae4643c8c70e7ac834cd7ef226dec171a0db5328f196e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demfile.c",
+      "original_sha256": "701c7ce94b6317f23d73d847c681338ddb522d0216cf6373713e542c34236620",
+      "original_line": 532,
+      "current_line": 563,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch1.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demfile.c",
+      "current_sha256": "4935550c7f61101569fae4643c8c70e7ac834cd7ef226dec171a0db5328f196e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demfile.c",
+      "original_sha256": "701c7ce94b6317f23d73d847c681338ddb522d0216cf6373713e542c34236620",
+      "original_line": 626,
+      "current_line": 668,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch1.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demfile.c",
+      "current_sha256": "4935550c7f61101569fae4643c8c70e7ac834cd7ef226dec171a0db5328f196e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demfile.c",
+      "original_sha256": "701c7ce94b6317f23d73d847c681338ddb522d0216cf6373713e542c34236620",
+      "original_line": 806,
+      "current_line": 845,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch1.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demmisc.c",
+      "current_sha256": "fec0e246b6728c860815bd77a7f5ff7b1e22d5343e33d9878559d80274a01b1f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demmisc.c",
+      "original_sha256": "19676fa5995555ec0b16c2923953b4e6236467dc42bf36cc7e746f45d0fcf912",
+      "original_line": 530,
+      "current_line": 531,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch1.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demmsg.c",
+      "current_sha256": "55e7430207a77c7c09dce36a90539d367902abb16f3715bd22ad9ac29de11fd6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demmsg.c",
+      "original_sha256": "1414099a0a5ad421440f101bbc6c669285141ab53bd9403b9ead4a6e4d9db2c8",
+      "original_line": 7,
+      "current_line": 7,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch1.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dpmi32/data.c",
+      "current_sha256": "3bbb25431211d762d91e6edb52646fb550d0ea7d1142bb0aaccb2d3253c0c07e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\data.c",
+      "original_sha256": "fa3b44b0f6a5ea6165063bae35fe66063e23e518dad8c0cdf3de16d353c54cde",
+      "original_line": 110,
+      "current_line": 110,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch1.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/mvdm-host/dpmi32/debug.c",
+      "current_sha256": "ce6652fef698e987a1cd962e1e5d60794c032cad5395a515499ef553665e456d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\debug.c",
+      "original_sha256": "88a0fb538d88f8bee711bd2aa5390602394abe1fc1a577090f15183a3bfd1fb1",
+      "original_line": 24,
+      "current_line": 24,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch1.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/command/cmdconf.c",
+      "current_sha256": "3915016769d57307fd5d6d4975b2b5caf5461addd59bfcc09fa6182b01224a84",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdconf.c",
+      "original_sha256": "32892c8c489bed9e4be8faed12e1bafbc6c580ba81a509425e8493de1e6ffc0a",
+      "original_line": 132,
+      "current_line": 133,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/command/cmdconf.c",
+      "current_sha256": "3915016769d57307fd5d6d4975b2b5caf5461addd59bfcc09fa6182b01224a84",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdconf.c",
+      "original_sha256": "32892c8c489bed9e4be8faed12e1bafbc6c580ba81a509425e8493de1e6ffc0a",
+      "original_line": 142,
+      "current_line": 143,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "current_sha256": "ba5902276a1e7c96589c7fa6ee49bd04fe67640661fed297fa9927d49ccc8daa",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\obj.vdm\\ntvdm.c",
+      "original_sha256": "693a169cf1e91435c326ee05a17c928e85af10982c2c3bb95a5631ae76415a0a",
+      "original_line": 26,
+      "current_line": 29,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "current_sha256": "ba5902276a1e7c96589c7fa6ee49bd04fe67640661fed297fa9927d49ccc8daa",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\obj.vdm\\ntvdm.c",
+      "original_sha256": "693a169cf1e91435c326ee05a17c928e85af10982c2c3bb95a5631ae76415a0a",
+      "original_line": 317,
+      "current_line": 336,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "current_sha256": "ba5902276a1e7c96589c7fa6ee49bd04fe67640661fed297fa9927d49ccc8daa",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\obj.vdm\\ntvdm.c",
+      "original_sha256": "693a169cf1e91435c326ee05a17c928e85af10982c2c3bb95a5631ae76415a0a",
+      "original_line": 347,
+      "current_line": 362,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdebug.c",
+      "current_sha256": "2512205fe61f1ff707b8dd8d77c26121455450a71e12cca50c2beaf205b41117",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdebug.c",
+      "original_sha256": "a857e79085fabc406667f849229100ee7b92cd13107ceeb37fa798aedeba42ea",
+      "original_line": 181,
+      "current_line": 181,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlcdbg.c",
+      "current_sha256": "db78341538014af2f0003967df01dac29fa357d2a8a81022e3f05c08d86faca9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcdbg.c",
+      "original_sha256": "98e30a6019415eed62efa2aed0d921d4f8b7f4fe5da150e664c925d9e61504c2",
+      "original_line": 87,
+      "current_line": 87,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdll.c",
+      "current_sha256": "a704a9141f4f67752a2479bce603519103c6a57316e6efdd0af9f0918d0ff7c5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdll.c",
+      "original_sha256": "234946e3dc0bda5851de48f05ddb2dc921f76f7c717772cb2f69d4eab5d8ec10",
+      "original_line": 26,
+      "current_line": 26,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdll.c",
+      "current_sha256": "a704a9141f4f67752a2479bce603519103c6a57316e6efdd0af9f0918d0ff7c5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdll.c",
+      "original_sha256": "234946e3dc0bda5851de48f05ddb2dc921f76f7c717772cb2f69d4eab5d8ec10",
+      "original_line": 56,
+      "current_line": 53,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdll.c",
+      "current_sha256": "a704a9141f4f67752a2479bce603519103c6a57316e6efdd0af9f0918d0ff7c5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdll.c",
+      "original_sha256": "234946e3dc0bda5851de48f05ddb2dc921f76f7c717772cb2f69d4eab5d8ec10",
+      "original_line": 90,
+      "current_line": 87,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 96,
+      "current_line": 97,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 111,
+      "current_line": 106,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetb.c",
+      "current_sha256": "4f70cd3edbf922852f95a8b5453c5ca9589070a79403dfd4c8aef7cb9edf520d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetb.c",
+      "original_sha256": "1de0507a7a4649253b63fc4a42da9c54a9670c8a2883bbe3b19b27f132e94157",
+      "original_line": 134,
+      "current_line": 134,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetb.c",
+      "current_sha256": "4f70cd3edbf922852f95a8b5453c5ca9589070a79403dfd4c8aef7cb9edf520d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetb.c",
+      "original_sha256": "1de0507a7a4649253b63fc4a42da9c54a9670c8a2883bbe3b19b27f132e94157",
+      "original_line": 313,
+      "current_line": 306,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetb.c",
+      "current_sha256": "4f70cd3edbf922852f95a8b5453c5ca9589070a79403dfd4c8aef7cb9edf520d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetb.c",
+      "original_sha256": "1de0507a7a4649253b63fc4a42da9c54a9670c8a2883bbe3b19b27f132e94157",
+      "original_line": 384,
+      "current_line": 367,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetb.c",
+      "current_sha256": "4f70cd3edbf922852f95a8b5453c5ca9589070a79403dfd4c8aef7cb9edf520d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetb.c",
+      "original_sha256": "1de0507a7a4649253b63fc4a42da9c54a9670c8a2883bbe3b19b27f132e94157",
+      "original_line": 405,
+      "current_line": 386,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 1887,
+      "current_line": 1709,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/wow32/waccel.c",
+      "current_sha256": "b84e4821bb550209081cc9782e9f9c01b1bb9d5754a7be99c6eea9fa739b50b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\waccel.c",
+      "original_sha256": "c78dd24195e1a7d28dc3a9ee535b4104e9859f98ea8869f8f5591bc9c159a8e8",
+      "original_line": 258,
+      "current_line": 258,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/wow32/waccel.c",
+      "current_sha256": "b84e4821bb550209081cc9782e9f9c01b1bb9d5754a7be99c6eea9fa739b50b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\waccel.c",
+      "original_sha256": "c78dd24195e1a7d28dc3a9ee535b4104e9859f98ea8869f8f5591bc9c159a8e8",
+      "original_line": 279,
+      "current_line": 279,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/wow32/waccel.c",
+      "current_sha256": "b84e4821bb550209081cc9782e9f9c01b1bb9d5754a7be99c6eea9fa739b50b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\waccel.c",
+      "original_sha256": "c78dd24195e1a7d28dc3a9ee535b4104e9859f98ea8869f8f5591bc9c159a8e8",
+      "original_line": 291,
+      "current_line": 289,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/wow32/wcommdlg.c",
+      "current_sha256": "a72c354d1d05b1e2cf9f4fd70727bf227944a5556dee0ef0426ad4ee22593121",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wcommdlg.c",
+      "original_sha256": "01ce83329ae37a3e987971398115b8c7b5d9dcbc3320bdffaaa595244740a7d0",
+      "original_line": 34,
+      "current_line": 35,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch2.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/mvdm-host/wow32/wole2.c",
+      "current_sha256": "889ef5e6e3d2c2b5f501e5e59c51b0afef023ad5754f30110b5399859ec3ef5a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wole2.c",
+      "original_sha256": "85fab0277735cff414d0f339557f110bf1501cbbe0f933dcf95232d9a61fd5e9",
+      "original_line": 90,
+      "current_line": 94,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/wow32/wole2.c",
+      "current_sha256": "889ef5e6e3d2c2b5f501e5e59c51b0afef023ad5754f30110b5399859ec3ef5a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wole2.c",
+      "original_sha256": "85fab0277735cff414d0f339557f110bf1501cbbe0f933dcf95232d9a61fd5e9",
+      "original_line": 115,
+      "current_line": 119,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdisp.c",
+      "current_sha256": "3fa60d1fe23656bc7081ab0e6b64d151c93b4f65d4d4e8ddbcefd845206afa16",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdisp.c",
+      "original_sha256": "030a3a2f2baaeb36bb58eb459cc91a0f6bf15bfdec777fc2998e3c3d69b2a389",
+      "original_line": 146,
+      "current_line": 143,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "current_sha256": "10447fb253fa3e6f769bd469769e10a440080256ada4851ad8de2c2e11b4bd04",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlc5c.c",
+      "original_sha256": "850f2f1a746eee3610f06ebf489cb662bcd628f556299e445daac7fdd24e9bbf",
+      "original_line": 765,
+      "current_line": 765,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "current_sha256": "10447fb253fa3e6f769bd469769e10a440080256ada4851ad8de2c2e11b4bd04",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlc5c.c",
+      "original_sha256": "850f2f1a746eee3610f06ebf489cb662bcd628f556299e445daac7fdd24e9bbf",
+      "original_line": 1237,
+      "current_line": 1202,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "current_sha256": "10447fb253fa3e6f769bd469769e10a440080256ada4851ad8de2c2e11b4bd04",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlc5c.c",
+      "original_sha256": "850f2f1a746eee3610f06ebf489cb662bcd628f556299e445daac7fdd24e9bbf",
+      "original_line": 1986,
+      "current_line": 1949,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "current_sha256": "10447fb253fa3e6f769bd469769e10a440080256ada4851ad8de2c2e11b4bd04",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlc5c.c",
+      "original_sha256": "850f2f1a746eee3610f06ebf489cb662bcd628f556299e445daac7fdd24e9bbf",
+      "original_line": 3247,
+      "current_line": 3203,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "current_sha256": "10447fb253fa3e6f769bd469769e10a440080256ada4851ad8de2c2e11b4bd04",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlc5c.c",
+      "original_sha256": "850f2f1a746eee3610f06ebf489cb662bcd628f556299e445daac7fdd24e9bbf",
+      "original_line": 3350,
+      "current_line": 3304,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "current_sha256": "bd2cc4bad1327d13cd4f86efb66e587bfc59356ffa99593e6432ea07efb76fb5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcbuf.c",
+      "original_sha256": "90e6dc8f5625c371c8c14a2a111c3403d0f4b24597eacce8549049138f5721a6",
+      "original_line": 353,
+      "current_line": 353,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "current_sha256": "bd2cc4bad1327d13cd4f86efb66e587bfc59356ffa99593e6432ea07efb76fb5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcbuf.c",
+      "original_sha256": "90e6dc8f5625c371c8c14a2a111c3403d0f4b24597eacce8549049138f5721a6",
+      "original_line": 456,
+      "current_line": 454,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "current_sha256": "bd2cc4bad1327d13cd4f86efb66e587bfc59356ffa99593e6432ea07efb76fb5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcbuf.c",
+      "original_sha256": "90e6dc8f5625c371c8c14a2a111c3403d0f4b24597eacce8549049138f5721a6",
+      "original_line": 563,
+      "current_line": 557,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "current_sha256": "bd2cc4bad1327d13cd4f86efb66e587bfc59356ffa99593e6432ea07efb76fb5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcbuf.c",
+      "original_sha256": "90e6dc8f5625c371c8c14a2a111c3403d0f4b24597eacce8549049138f5721a6",
+      "original_line": 645,
+      "current_line": 637,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "current_sha256": "bd2cc4bad1327d13cd4f86efb66e587bfc59356ffa99593e6432ea07efb76fb5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcbuf.c",
+      "original_sha256": "90e6dc8f5625c371c8c14a2a111c3403d0f4b24597eacce8549049138f5721a6",
+      "original_line": 682,
+      "current_line": 674,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "current_sha256": "bd2cc4bad1327d13cd4f86efb66e587bfc59356ffa99593e6432ea07efb76fb5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcbuf.c",
+      "original_sha256": "90e6dc8f5625c371c8c14a2a111c3403d0f4b24597eacce8549049138f5721a6",
+      "original_line": 705,
+      "current_line": 697,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "current_sha256": "bd2cc4bad1327d13cd4f86efb66e587bfc59356ffa99593e6432ea07efb76fb5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcbuf.c",
+      "original_sha256": "90e6dc8f5625c371c8c14a2a111c3403d0f4b24597eacce8549049138f5721a6",
+      "original_line": 853,
+      "current_line": 839,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "original_line": 404,
+      "current_line": 404,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "original_line": 609,
+      "current_line": 606,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "original_line": 1165,
+      "current_line": 1159,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "original_line": 1199,
+      "current_line": 1174,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "original_line": 1257,
+      "current_line": 1209,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "original_line": 1926,
+      "current_line": 1864,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "original_line": 2332,
+      "current_line": 2267,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "original_line": 2356,
+      "current_line": 2282,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "original_line": 2576,
+      "current_line": 2490,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "original_line": 2626,
+      "current_line": 2538,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "original_line": 3223,
+      "current_line": 3132,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "original_line": 3488,
+      "current_line": 3390,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "original_line": 3632,
+      "current_line": 3530,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "original_line": 3819,
+      "current_line": 3717,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "original_line": 3846,
+      "current_line": 3742,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "original_line": 3875,
+      "current_line": 3769,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "original_line": 3916,
+      "current_line": 3802,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "original_line": 3943,
+      "current_line": 3827,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "original_line": 3961,
+      "current_line": 3843,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrmisc.c",
+      "current_sha256": "ae8f13a5ccbb38f8411c0d387d0abca7dd206cacd219736b8b31e9a5c4e34926",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmisc.c",
+      "original_sha256": "1af57aba3be6a1425eb18187a73c579f56619a2593bce3b2c20be8cf67216b6d",
+      "original_line": 71,
+      "current_line": 71,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrmisc.c",
+      "current_sha256": "ae8f13a5ccbb38f8411c0d387d0abca7dd206cacd219736b8b31e9a5c4e34926",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmisc.c",
+      "original_sha256": "1af57aba3be6a1425eb18187a73c579f56619a2593bce3b2c20be8cf67216b6d",
+      "original_line": 108,
+      "current_line": 104,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrremote.c",
+      "current_sha256": "26e245025ef37e69f75721b86767c378ac50f274e5a3610ed312cad1d33b493c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrremote.c",
+      "original_sha256": "f75d2984624cee1a77b6f5bf6a18fe4a7f38a059d32b0e711edb97d03a08c9b8",
+      "original_line": 697,
+      "current_line": 705,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrremote.c",
+      "current_sha256": "26e245025ef37e69f75721b86767c378ac50f274e5a3610ed312cad1d33b493c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrremote.c",
+      "original_sha256": "f75d2984624cee1a77b6f5bf6a18fe4a7f38a059d32b0e711edb97d03a08c9b8",
+      "original_line": 707,
+      "current_line": 713,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+      "current_sha256": "bc05f16d93a9fa2933aa057d0c9c8b6ca6f1ff6b97a4701d9509ac156311b6c5",
+      "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\netlib\\ntstatus.c",
+      "original_sha256": "3db640c6cdc48e0835cc6a54c69bd12196245fba3feeb486a79e45a7c9abbf86",
+      "original_line": 196,
+      "current_line": 196,
+      "anchor_evidence": "s13-bfs-depth1-dbg-batch3.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dpmi32/xmem.c",
+      "current_sha256": "f3bff0e0ec2a7c1d1bf48c4fb2762365cf4963e2d6954341a1dee522f8b6a213",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\xmem.c",
+      "original_sha256": "50babb31bcd739318e189e88567ed27d6c89af908b8b590bbeb3e8f1377d13d5",
+      "original_line": 92,
+      "current_line": 92,
+      "anchor_evidence": "s13-bfs-depth1-dbg-dpmi2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dpmi32/xmem.c",
+      "current_sha256": "f3bff0e0ec2a7c1d1bf48c4fb2762365cf4963e2d6954341a1dee522f8b6a213",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\xmem.c",
+      "original_sha256": "50babb31bcd739318e189e88567ed27d6c89af908b8b590bbeb3e8f1377d13d5",
+      "original_line": 161,
+      "current_line": 161,
+      "anchor_evidence": "s13-bfs-depth1-dbg-dpmi2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dpmi32/xmem.c",
+      "current_sha256": "f3bff0e0ec2a7c1d1bf48c4fb2762365cf4963e2d6954341a1dee522f8b6a213",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\xmem.c",
+      "original_sha256": "50babb31bcd739318e189e88567ed27d6c89af908b8b590bbeb3e8f1377d13d5",
+      "original_line": 212,
+      "current_line": 213,
+      "anchor_evidence": "s13-bfs-depth1-dbg-dpmi2.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demsrch.c",
+      "current_sha256": "30eda1da58d338f03f102e88997ea00617c95337c31d3dd4fbf8e9d65356748f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demsrch.c",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "original_line": 282,
+      "current_line": 308,
+      "anchor_evidence": "s13-bfs-depth1-dbg-fixtures.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demsrch.c",
+      "current_sha256": "30eda1da58d338f03f102e88997ea00617c95337c31d3dd4fbf8e9d65356748f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demsrch.c",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "original_line": 447,
+      "current_line": 470,
+      "anchor_evidence": "s13-bfs-depth1-dbg-fixtures.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demsrch.c",
+      "current_sha256": "30eda1da58d338f03f102e88997ea00617c95337c31d3dd4fbf8e9d65356748f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demsrch.c",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "original_line": 520,
+      "current_line": 540,
+      "anchor_evidence": "s13-bfs-depth1-dbg-fixtures.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demsrch.c",
+      "current_sha256": "30eda1da58d338f03f102e88997ea00617c95337c31d3dd4fbf8e9d65356748f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demsrch.c",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "original_line": 621,
+      "current_line": 638,
+      "anchor_evidence": "s13-bfs-depth1-dbg-fixtures.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demsrch.c",
+      "current_sha256": "30eda1da58d338f03f102e88997ea00617c95337c31d3dd4fbf8e9d65356748f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demsrch.c",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "original_line": 1119,
+      "current_line": 1133,
+      "anchor_evidence": "s13-bfs-depth1-dbg-fixtures.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demsrch.c",
+      "current_sha256": "30eda1da58d338f03f102e88997ea00617c95337c31d3dd4fbf8e9d65356748f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demsrch.c",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "original_line": 1155,
+      "current_line": 1161,
+      "anchor_evidence": "s13-bfs-depth1-dbg-fixtures.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demsrch.c",
+      "current_sha256": "30eda1da58d338f03f102e88997ea00617c95337c31d3dd4fbf8e9d65356748f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demsrch.c",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "original_line": 1443,
+      "current_line": 1464,
+      "anchor_evidence": "s13-bfs-depth1-dbg-fixtures.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demsrch.c",
+      "current_sha256": "30eda1da58d338f03f102e88997ea00617c95337c31d3dd4fbf8e9d65356748f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demsrch.c",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "original_line": 2066,
+      "current_line": 2081,
+      "anchor_evidence": "s13-bfs-depth1-dbg-fixtures.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demsrch.c",
+      "current_sha256": "30eda1da58d338f03f102e88997ea00617c95337c31d3dd4fbf8e9d65356748f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demsrch.c",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "original_line": 2158,
+      "current_line": 2170,
+      "anchor_evidence": "s13-bfs-depth1-dbg-fixtures.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demdisp.c",
+      "current_sha256": "e9b7447165b02e8ca945e7360eeb5bb1af9904f53eadec88b9055a1a54745713",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demdisp.c",
+      "original_sha256": "7ea3a829e3f8aad2dfe644d101cabaff514de25909db937675fc323dfce8fe3c",
+      "original_line": 14,
+      "current_line": 15,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demdisp.c",
+      "current_sha256": "e9b7447165b02e8ca945e7360eeb5bb1af9904f53eadec88b9055a1a54745713",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demdisp.c",
+      "original_sha256": "7ea3a829e3f8aad2dfe644d101cabaff514de25909db937675fc323dfce8fe3c",
+      "original_line": 202,
+      "current_line": 119,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demerror.c",
+      "current_sha256": "a688c6210ed975694b57d7b7bc352f57a5809e569dbcc2016f523da01989f70e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demerror.c",
+      "original_sha256": "8c266cc5086f5bfb834f7d2054459f0a91b1789e90095e56ff363f77d409b64f",
+      "original_line": 78,
+      "current_line": 63,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demfile.c",
+      "current_sha256": "4935550c7f61101569fae4643c8c70e7ac834cd7ef226dec171a0db5328f196e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demfile.c",
+      "original_sha256": "701c7ce94b6317f23d73d847c681338ddb522d0216cf6373713e542c34236620",
+      "original_line": 166,
+      "current_line": 206,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 287,
+      "current_line": 253,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 332,
+      "current_line": 286,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 354,
+      "current_line": 311,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 483,
+      "current_line": 424,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 596,
+      "current_line": 535,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 662,
+      "current_line": 594,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 723,
+      "current_line": 650,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 1298,
+      "current_line": 1214,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 1367,
+      "current_line": 1278,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 1455,
+      "current_line": 1357,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 1527,
+      "current_line": 1421,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 1596,
+      "current_line": 1481,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 1671,
+      "current_line": 1554,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 1728,
+      "current_line": 1606,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 1814,
+      "current_line": 1687,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 1867,
+      "current_line": 1738,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 1951,
+      "current_line": 1817,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 2061,
+      "current_line": 1922,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 2109,
+      "current_line": 1959,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 2144,
+      "current_line": 1990,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 2223,
+      "current_line": 2067,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 2249,
+      "current_line": 2088,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 2269,
+      "current_line": 2103,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 2287,
+      "current_line": 2119,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 2318,
+      "current_line": 2146,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 2684,
+      "current_line": 2506,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 2699,
+      "current_line": 2519,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 2748,
+      "current_line": 2556,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 3115,
+      "current_line": 2735,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 3165,
+      "current_line": 2782,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 3228,
+      "current_line": 2835,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 3248,
+      "current_line": 2849,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 3301,
+      "current_line": 2896,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 3321,
+      "current_line": 2910,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 3432,
+      "current_line": 3017,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 3538,
+      "current_line": 3118,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 3557,
+      "current_line": 3133,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 3629,
+      "current_line": 3203,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 3735,
+      "current_line": 3304,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 3766,
+      "current_line": 3333,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 3776,
+      "current_line": 3341,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 4021,
+      "current_line": 3584,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 4092,
+      "current_line": 3647,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 245,
+      "current_line": 248,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 308,
+      "current_line": 310,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 385,
+      "current_line": 379,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 396,
+      "current_line": 386,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 465,
+      "current_line": 436,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 549,
+      "current_line": 518,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 580,
+      "current_line": 547,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 637,
+      "current_line": 600,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 692,
+      "current_line": 648,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 705,
+      "current_line": 655,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 771,
+      "current_line": 719,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 817,
+      "current_line": 759,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 832,
+      "current_line": 781,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 855,
+      "current_line": 802,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 867,
+      "current_line": 812,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 935,
+      "current_line": 878,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 952,
+      "current_line": 893,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 962,
+      "current_line": 901,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 1011,
+      "current_line": 948,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 1027,
+      "current_line": 959,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 1081,
+      "current_line": 1011,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 1167,
+      "current_line": 1095,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 1387,
+      "current_line": 1264,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 1437,
+      "current_line": 1308,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 1483,
+      "current_line": 1351,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 1525,
+      "current_line": 1381,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 1548,
+      "current_line": 1404,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 1567,
+      "current_line": 1416,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 1606,
+      "current_line": 1447,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 1617,
+      "current_line": 1454,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 1754,
+      "current_line": 1581,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 1836,
+      "current_line": 1662,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 1860,
+      "current_line": 1684,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 1908,
+      "current_line": 1715,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 1946,
+      "current_line": 1751,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 1961,
+      "current_line": 1764,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 2001,
+      "current_line": 1802,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 2073,
+      "current_line": 1865,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 2174,
+      "current_line": 1960,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 2232,
+      "current_line": 2016,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 2302,
+      "current_line": 2082,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 2316,
+      "current_line": 2094,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 2381,
+      "current_line": 2142,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 2396,
+      "current_line": 2155,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 2437,
+      "current_line": 2194,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 2499,
+      "current_line": 2242,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 2539,
+      "current_line": 2284,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 2603,
+      "current_line": 2346,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 2613,
+      "current_line": 2354,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 2666,
+      "current_line": 2405,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 2715,
+      "current_line": 2452,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 2728,
+      "current_line": 2463,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 2789,
+      "current_line": 2518,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 2809,
+      "current_line": 2538,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 2828,
+      "current_line": 2555,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 2858,
+      "current_line": 2581,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 2994,
+      "current_line": 2715,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 3074,
+      "current_line": 2793,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 3103,
+      "current_line": 2820,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 3187,
+      "current_line": 2898,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 3206,
+      "current_line": 2913,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 3224,
+      "current_line": 2925,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 3309,
+      "current_line": 3008,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/wow32/wcommdlg.c",
+      "current_sha256": "a72c354d1d05b1e2cf9f4fd70727bf227944a5556dee0ef0426ad4ee22593121",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wcommdlg.c",
+      "original_sha256": "01ce83329ae37a3e987971398115b8c7b5d9dcbc3320bdffaaa595244740a7d0",
+      "original_line": 672,
+      "current_line": 481,
+      "anchor_evidence": "s13-bfs-depth1-dbg-following-anchors.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dpmi32/xmem.c",
+      "current_sha256": "f3bff0e0ec2a7c1d1bf48c4fb2762365cf4963e2d6954341a1dee522f8b6a213",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\xmem.c",
+      "original_sha256": "50babb31bcd739318e189e88567ed27d6c89af908b8b590bbeb3e8f1377d13d5",
+      "original_line": 271,
+      "current_line": 272,
+      "anchor_evidence": "s13-bfs-depth1-dpmi-dem-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dpmi32/xmem.c",
+      "current_sha256": "f3bff0e0ec2a7c1d1bf48c4fb2762365cf4963e2d6954341a1dee522f8b6a213",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\xmem.c",
+      "original_sha256": "50babb31bcd739318e189e88567ed27d6c89af908b8b590bbeb3e8f1377d13d5",
+      "original_line": 323,
+      "current_line": 324,
+      "anchor_evidence": "s13-bfs-depth1-dpmi-dem-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demsrch.c",
+      "current_sha256": "30eda1da58d338f03f102e88997ea00617c95337c31d3dd4fbf8e9d65356748f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demsrch.c",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "original_line": 1327,
+      "current_line": 1351,
+      "anchor_evidence": "s13-bfs-depth1-dpmi-dem-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/dos/dem/demsrch.c",
+      "current_sha256": "30eda1da58d338f03f102e88997ea00617c95337c31d3dd4fbf8e9d65356748f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demsrch.c",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "original_line": 1547,
+      "current_line": 1565,
+      "anchor_evidence": "s13-bfs-depth1-dpmi-dem-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/inc/nt_eoi.h",
+      "current_sha256": "3e31a10de37d1dcc9c3ca17bd20aca823998e18477783cc97c34c709af43d71c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_eoi.h",
+      "original_sha256": "57ae39f20535e93b451e83a0e54e6e45f43512e12d99ae3ffc6a58e4f1ada8e3",
+      "original_line": 33,
+      "current_line": 32,
+      "anchor_evidence": "s13-bfs-depth1-host-header-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/inc/nt_event.h",
+      "current_sha256": "cfd92256997f559dac0bb74bfee789a0a84e5377823a6fd188eb2065665ed2de",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_event.h",
+      "original_sha256": "f4353f69708952f3bdc0f0d26db0f667eda34abf04f8694d1af059a649f76969",
+      "original_line": 46,
+      "current_line": 46,
+      "anchor_evidence": "s13-bfs-depth1-host-header-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/inc/nt_reset.h",
+      "current_sha256": "40014b316cce6aae00a37e5f8209d3a275c15db9fb275c2de5a8b31d2553dc5b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_reset.h",
+      "original_sha256": "91e93365fc76a16fea422918dc0bfb32499f27cd9c84998268a9368eb367c7f3",
+      "original_line": 4,
+      "current_line": 4,
+      "anchor_evidence": "s13-bfs-depth1-host-header-contexts.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/inc/sim32.h",
+      "current_sha256": "c9061de1c26ba34b9de2abd52831f72d8717c33c1dbc9860733b77d79bb9a680",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\sim32.h",
+      "original_sha256": "eeb9a654e53b5934850a6e7fa86fc67b1576ac9f1b9262d87acb5eed42c2fd98",
+      "original_line": 47,
+      "current_line": 47,
+      "anchor_evidence": "s13-bfs-depth1-host-header-contexts.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.h",
+      "current_sha256": "1cdb7e3778ed570b7d02036d58c19485e4b744b76c2ce920a7a7db3e520f3d27",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_reg.h",
+      "original_sha256": "968a23e991127bf74872c9ca48d37341a64a4732fe9fec397d78464644138a35",
+      "original_line": 388,
+      "current_line": 388,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/cvidc/j_c_lang.h",
+      "current_sha256": "e93c4939ffc90bd00dde4b73e31d8f01ff8bf3e6e17174a6fbb3b997b6a38516",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\j_c_lang.h",
+      "original_sha256": "24f207c966e47150f1b1be512ed73a4ff8c331009a212e4ceda76b822944dda1",
+      "original_line": 42,
+      "current_line": 44,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/inc/dma.h",
+      "current_sha256": "1bd227f7ecaaa315551191e1f1d0d7ff6036dc0427e3c09f53262b3aeb036c52",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\dma.h",
+      "original_sha256": "d69831cddb3de18bebe1532c659608b404686374324b3eeebed5607e15a774e4",
+      "original_line": 340,
+      "current_line": 307,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/inc/equip.h",
+      "current_sha256": "ea8760256e77d4d57a1dfe0f15d61a33ec30589db4425e257bb46fa0a2b817f1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\equip.h",
+      "original_sha256": "9530d21a819d9e3ff63d9fd8173f2c0df049cc48aa9ee49a740bad6db921e8aa",
+      "original_line": 23,
+      "current_line": 23,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/inc/j_c_lang.h",
+      "current_sha256": "d25433b094bf7101a8a390f8eb8e3b233a93cd60ef4ce9e81d77d5600c17e885",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\j_c_lang.h",
+      "original_sha256": "1c0727f420986a3cde9992af5cf3c4c7b084029f3a3a4c04ad7549e7b01235a4",
+      "original_line": 42,
+      "current_line": 42,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+      "current_sha256": "527d692afa2ed9001c79d64d53e52cbbfbf8a1b0aaeb07efc05ae5191339db52",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cga.c",
+      "original_sha256": "ef84222253b20092ab43505ea3232b3c1174833166ebb4880cb378880a967cc7",
+      "original_line": 152,
+      "current_line": 147,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_ega.c",
+      "current_sha256": "a67f73bd95a1fe81e2b878a63dd145ad9a486d701cc3a3f2c58841db080f48d3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ega.c",
+      "original_sha256": "ebc58583cec7e257a997185a1ab83f3284dbd1efe6e06c99f680bcce93dca695",
+      "original_line": 191,
+      "current_line": 190,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_ega.c",
+      "current_sha256": "a67f73bd95a1fe81e2b878a63dd145ad9a486d701cc3a3f2c58841db080f48d3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ega.c",
+      "original_sha256": "ebc58583cec7e257a997185a1ab83f3284dbd1efe6e06c99f680bcce93dca695",
+      "original_line": 416,
+      "current_line": 395,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "current_sha256": "591c2c88edfdf58c738f489eb77660851e0345e85b182061d9edad342730eb9d",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "original_line": 32,
+      "current_line": 32,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "current_sha256": "591c2c88edfdf58c738f489eb77660851e0345e85b182061d9edad342730eb9d",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "original_line": 517,
+      "current_line": 514,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "current_sha256": "591c2c88edfdf58c738f489eb77660851e0345e85b182061d9edad342730eb9d",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "original_line": 531,
+      "current_line": 525,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "current_sha256": "591c2c88edfdf58c738f489eb77660851e0345e85b182061d9edad342730eb9d",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "original_line": 571,
+      "current_line": 565,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "current_sha256": "591c2c88edfdf58c738f489eb77660851e0345e85b182061d9edad342730eb9d",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "original_line": 1392,
+      "current_line": 1384,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "current_sha256": "591c2c88edfdf58c738f489eb77660851e0345e85b182061d9edad342730eb9d",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "original_line": 2752,
+      "current_line": 2725,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "current_sha256": "591c2c88edfdf58c738f489eb77660851e0345e85b182061d9edad342730eb9d",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "original_line": 2823,
+      "current_line": 2788,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "current_sha256": "591c2c88edfdf58c738f489eb77660851e0345e85b182061d9edad342730eb9d",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "original_line": 2897,
+      "current_line": 2860,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "current_sha256": "591c2c88edfdf58c738f489eb77660851e0345e85b182061d9edad342730eb9d",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "original_line": 3117,
+      "current_line": 3078,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "current_sha256": "591c2c88edfdf58c738f489eb77660851e0345e85b182061d9edad342730eb9d",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "original_line": 3147,
+      "current_line": 3088,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "current_sha256": "591c2c88edfdf58c738f489eb77660851e0345e85b182061d9edad342730eb9d",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "original_line": 3164,
+      "current_line": 3100,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "current_sha256": "591c2c88edfdf58c738f489eb77660851e0345e85b182061d9edad342730eb9d",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "original_line": 3597,
+      "current_line": 3528,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "current_sha256": "f7c32cc745c21165ce10fd7d18656903b1a2853cc9b05973cd4b93e11367bc34",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+      "original_sha256": "5d730399ce35740c88e7d5f98f1a4c4882802a6e66a830d11b3d8e4bfad9eb1c",
+      "original_line": 87,
+      "current_line": 87,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "current_sha256": "f7c32cc745c21165ce10fd7d18656903b1a2853cc9b05973cd4b93e11367bc34",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+      "original_sha256": "5d730399ce35740c88e7d5f98f1a4c4882802a6e66a830d11b3d8e4bfad9eb1c",
+      "original_line": 207,
+      "current_line": 206,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "current_sha256": "f7c32cc745c21165ce10fd7d18656903b1a2853cc9b05973cd4b93e11367bc34",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+      "original_sha256": "5d730399ce35740c88e7d5f98f1a4c4882802a6e66a830d11b3d8e4bfad9eb1c",
+      "original_line": 388,
+      "current_line": 383,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "current_sha256": "f7c32cc745c21165ce10fd7d18656903b1a2853cc9b05973cd4b93e11367bc34",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+      "original_sha256": "5d730399ce35740c88e7d5f98f1a4c4882802a6e66a830d11b3d8e4bfad9eb1c",
+      "original_line": 581,
+      "current_line": 572,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "current_sha256": "f7c32cc745c21165ce10fd7d18656903b1a2853cc9b05973cd4b93e11367bc34",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+      "original_sha256": "5d730399ce35740c88e7d5f98f1a4c4882802a6e66a830d11b3d8e4bfad9eb1c",
+      "original_line": 757,
+      "current_line": 744,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "current_sha256": "f7c32cc745c21165ce10fd7d18656903b1a2853cc9b05973cd4b93e11367bc34",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+      "original_sha256": "5d730399ce35740c88e7d5f98f1a4c4882802a6e66a830d11b3d8e4bfad9eb1c",
+      "original_line": 806,
+      "current_line": 791,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "current_sha256": "f7c32cc745c21165ce10fd7d18656903b1a2853cc9b05973cd4b93e11367bc34",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+      "original_sha256": "5d730399ce35740c88e7d5f98f1a4c4882802a6e66a830d11b3d8e4bfad9eb1c",
+      "original_line": 1614,
+      "current_line": 1599,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "current_sha256": "f7c32cc745c21165ce10fd7d18656903b1a2853cc9b05973cd4b93e11367bc34",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+      "original_sha256": "5d730399ce35740c88e7d5f98f1a4c4882802a6e66a830d11b3d8e4bfad9eb1c",
+      "original_line": 1940,
+      "current_line": 1924,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "current_sha256": "f7c32cc745c21165ce10fd7d18656903b1a2853cc9b05973cd4b93e11367bc34",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+      "original_sha256": "5d730399ce35740c88e7d5f98f1a4c4882802a6e66a830d11b3d8e4bfad9eb1c",
+      "original_line": 1996,
+      "current_line": 1978,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "current_sha256": "f7c32cc745c21165ce10fd7d18656903b1a2853cc9b05973cd4b93e11367bc34",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+      "original_sha256": "5d730399ce35740c88e7d5f98f1a4c4882802a6e66a830d11b3d8e4bfad9eb1c",
+      "original_line": 2190,
+      "current_line": 2170,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "current_sha256": "f7c32cc745c21165ce10fd7d18656903b1a2853cc9b05973cd4b93e11367bc34",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+      "original_sha256": "5d730399ce35740c88e7d5f98f1a4c4882802a6e66a830d11b3d8e4bfad9eb1c",
+      "original_line": 2218,
+      "current_line": 2180,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "current_sha256": "f7c32cc745c21165ce10fd7d18656903b1a2853cc9b05973cd4b93e11367bc34",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+      "original_sha256": "5d730399ce35740c88e7d5f98f1a4c4882802a6e66a830d11b3d8e4bfad9eb1c",
+      "original_line": 2388,
+      "current_line": 2345,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/edmlonce.c",
+      "current_sha256": "20fcfff84bc7ac88d51822df0ba212b5e66603d7beb8abf899a6a389354a9b78",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\edmlonce.c",
+      "original_sha256": "ac63e8b953b97c91fe4f0c7813919cf1fa482ea253e2edfd3ef7cf606e5940a2",
+      "original_line": 72,
+      "current_line": 72,
+      "anchor_evidence": "s13-bfs-depth1-macro-next-cohort.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/mvdm-host/inc/wowkrn.h",
+      "current_sha256": "0e172fc74921ae84831ed646b0432320dd565cace21182ce5a8b1deac340c3d1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowkrn.h",
+      "original_sha256": "8d9fbb2c3b74c21588eaa7541513db0e3181e41caa0d6a38d2395ae27c01b8cf",
+      "original_line": 414,
+      "current_line": 410,
+      "anchor_evidence": "s13-bfs-depth1-macro-ordered.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowsnd.h",
+      "current_sha256": "00d8cd7ba8f60e24583794c1911ffa1609c8d9172a473d7f85172ca247eae713",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowsnd.h",
+      "original_sha256": "944acedf0708f0fc2176b28a18e07747da57042fd93bfb63a51663e9e2a250e6",
+      "original_line": 59,
+      "current_line": 55,
+      "anchor_evidence": "s13-bfs-depth1-macro-ordered.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowsnd.h",
+      "current_sha256": "00d8cd7ba8f60e24583794c1911ffa1609c8d9172a473d7f85172ca247eae713",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowsnd.h",
+      "original_sha256": "944acedf0708f0fc2176b28a18e07747da57042fd93bfb63a51663e9e2a250e6",
+      "original_line": 126,
+      "current_line": 116,
+      "anchor_evidence": "s13-bfs-depth1-macro-ordered.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "original_line": 1402,
+      "current_line": 1364,
+      "anchor_evidence": "s13-bfs-depth1-macro-ordered.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/bios/cmos_bis.c",
+      "current_sha256": "80c4caeb665bb756c977f42430ca7f182ffd75d7b2e2e9b15a9ef7de6610d583",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\cmos_bis.c",
+      "original_sha256": "e3b6710db5887ef77c5a38c881ebb4eeff2575db65e86a3468258aaa9293e1bd",
+      "original_line": 55,
+      "current_line": 55,
+      "anchor_evidence": "s13-bfs-depth1-ntvdm-batch2-existing.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "current_sha256": "27eef526811e071ee080aeb20de3f9f6f78600f7343617f2877fc07c9202d0d6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy_i.c",
+      "original_sha256": "22b503047688d4d1f2d4b99ffba29e71612a165bbc9069976ce7a8b8d62ba042",
+      "original_line": 433,
+      "current_line": 206,
+      "anchor_evidence": "s13-bfs-depth1-ntvdm-batch2-existing.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "current_sha256": "27eef526811e071ee080aeb20de3f9f6f78600f7343617f2877fc07c9202d0d6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy_i.c",
+      "original_sha256": "22b503047688d4d1f2d4b99ffba29e71612a165bbc9069976ce7a8b8d62ba042",
+      "original_line": 475,
+      "current_line": 248,
+      "anchor_evidence": "s13-bfs-depth1-ntvdm-batch2-existing.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
+      "current_sha256": "d6a4afd247ff8753e85d8b45217d2fad04ac7dd9ce7c56dc90178a212ca469dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\ppi.c",
+      "original_sha256": "367cceaa88345e16b2e138faef9addd441da2cd39f95ea3ab6c359651bd8ebf5",
+      "original_line": 69,
+      "current_line": 69,
+      "anchor_evidence": "s13-bfs-depth1-ntvdm-batch2-existing.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
+      "current_sha256": "d6a4afd247ff8753e85d8b45217d2fad04ac7dd9ce7c56dc90178a212ca469dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\ppi.c",
+      "original_sha256": "367cceaa88345e16b2e138faef9addd441da2cd39f95ea3ab6c359651bd8ebf5",
+      "original_line": 136,
+      "current_line": 136,
+      "anchor_evidence": "s13-bfs-depth1-ntvdm-batch2-existing.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/system/idetect.c",
+      "current_sha256": "3a56b6db24cc51b624d853a91489209b5875c83009f6950f8b50f62bf98b75f9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\idetect.c",
+      "original_sha256": "b93eb0784830446b53eeadb4b4f2dc5506787cd5313b313ecfc1ec14c5b7d160",
+      "original_line": 202,
+      "current_line": 201,
+      "anchor_evidence": "s13-bfs-depth1-ntvdm-batch2-existing.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/system/idetect.c",
+      "current_sha256": "3a56b6db24cc51b624d853a91489209b5875c83009f6950f8b50f62bf98b75f9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\idetect.c",
+      "original_sha256": "b93eb0784830446b53eeadb4b4f2dc5506787cd5313b313ecfc1ec14c5b7d160",
+      "original_line": 249,
+      "current_line": 238,
+      "anchor_evidence": "s13-bfs-depth1-ntvdm-batch2-existing.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/system/idetect.c",
+      "current_sha256": "3a56b6db24cc51b624d853a91489209b5875c83009f6950f8b50f62bf98b75f9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\idetect.c",
+      "original_sha256": "b93eb0784830446b53eeadb4b4f2dc5506787cd5313b313ecfc1ec14c5b7d160",
+      "original_line": 434,
+      "current_line": 352,
+      "anchor_evidence": "s13-bfs-depth1-ntvdm-batch2-existing.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/c_mem.h",
+      "current_sha256": "fe5f2a69e3bf3076512dd1cc69559079e69f9485bc51ee2c6d4729aa91ed95e2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_mem.h",
+      "original_sha256": "ed6b66363a1722415a7779879827126bb8ab2fc1df331435c3e587aef5189560",
+      "original_line": 25,
+      "current_line": 25,
+      "anchor_evidence": "s13-bfs-depth1-pig.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/c_mem.h",
+      "current_sha256": "fe5f2a69e3bf3076512dd1cc69559079e69f9485bc51ee2c6d4729aa91ed95e2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_mem.h",
+      "original_sha256": "ed6b66363a1722415a7779879827126bb8ab2fc1df331435c3e587aef5189560",
+      "original_line": 37,
+      "current_line": 36,
+      "anchor_evidence": "s13-bfs-depth1-pig.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/c_mem.h",
+      "current_sha256": "fe5f2a69e3bf3076512dd1cc69559079e69f9485bc51ee2c6d4729aa91ed95e2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_mem.h",
+      "original_sha256": "ed6b66363a1722415a7779879827126bb8ab2fc1df331435c3e587aef5189560",
+      "original_line": 53,
+      "current_line": 50,
+      "anchor_evidence": "s13-bfs-depth1-pig.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/c_page.c",
+      "current_sha256": "4692673e61932c428754425ebb8831ba409b35c5751a175b617b194b64cd7894",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_page.c",
+      "original_sha256": "f29e441f3940002924413f3bea791d12e96d65baa3931330e92878e5e71a97ee",
+      "original_line": 69,
+      "current_line": 73,
+      "anchor_evidence": "s13-bfs-depth1-pig.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/c_page.c",
+      "current_sha256": "4692673e61932c428754425ebb8831ba409b35c5751a175b617b194b64cd7894",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_page.c",
+      "original_sha256": "f29e441f3940002924413f3bea791d12e96d65baa3931330e92878e5e71a97ee",
+      "original_line": 677,
+      "current_line": 679,
+      "anchor_evidence": "s13-bfs-depth1-pig.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.h",
+      "current_sha256": "eea17e71dee29cf75da69918557f398570c10bea4f44c3569cfd45d4762fa6a0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_stack.h",
+      "original_sha256": "323384e4437fa1bba94994f6cd5a762bc74c9d35eb03d6966ac8df235e165f75",
+      "original_line": 86,
+      "current_line": 86,
+      "anchor_evidence": "s13-bfs-depth1-pig.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.h",
+      "current_sha256": "eea17e71dee29cf75da69918557f398570c10bea4f44c3569cfd45d4762fa6a0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_stack.h",
+      "original_sha256": "323384e4437fa1bba94994f6cd5a762bc74c9d35eb03d6966ac8df235e165f75",
+      "original_line": 102,
+      "current_line": 97,
+      "anchor_evidence": "s13-bfs-depth1-pig.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.c",
+      "current_sha256": "d747c21247ee493dda8561319c48b33ffe4e7a65e497517603e0735dde7a81e5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_tsksw.c",
+      "original_sha256": "5713c9351942c0c4dddb00d9ef337abf2974d3236e9aea169117d0a38fe0ad49",
+      "original_line": 286,
+      "current_line": 288,
+      "anchor_evidence": "s13-bfs-depth1-pig.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.c",
+      "current_sha256": "d747c21247ee493dda8561319c48b33ffe4e7a65e497517603e0735dde7a81e5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_tsksw.c",
+      "original_sha256": "5713c9351942c0c4dddb00d9ef337abf2974d3236e9aea169117d0a38fe0ad49",
+      "original_line": 338,
+      "current_line": 339,
+      "anchor_evidence": "s13-bfs-depth1-pig.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+      "current_sha256": "75c46dfb87a12ac861e86bafc312092fb8f6c0590d69de16d211580b0d6dba2f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_xcptn.c",
+      "original_sha256": "e1f8f19a1f513402a10dc13eaf3b43d45a208fd71a72692f690f808a7e7762b2",
+      "original_line": 161,
+      "current_line": 156,
+      "anchor_evidence": "s13-bfs-depth1-pig.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+      "current_sha256": "75c46dfb87a12ac861e86bafc312092fb8f6c0590d69de16d211580b0d6dba2f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_xcptn.c",
+      "original_sha256": "e1f8f19a1f513402a10dc13eaf3b43d45a208fd71a72692f690f808a7e7762b2",
+      "original_line": 205,
+      "current_line": 197,
+      "anchor_evidence": "s13-bfs-depth1-pig.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+      "current_sha256": "75c46dfb87a12ac861e86bafc312092fb8f6c0590d69de16d211580b0d6dba2f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_xcptn.c",
+      "original_sha256": "e1f8f19a1f513402a10dc13eaf3b43d45a208fd71a72692f690f808a7e7762b2",
+      "original_line": 265,
+      "current_line": 259,
+      "anchor_evidence": "s13-bfs-depth1-pig.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+      "current_sha256": "75c46dfb87a12ac861e86bafc312092fb8f6c0590d69de16d211580b0d6dba2f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_xcptn.c",
+      "original_sha256": "e1f8f19a1f513402a10dc13eaf3b43d45a208fd71a72692f690f808a7e7762b2",
+      "original_line": 325,
+      "current_line": 321,
+      "anchor_evidence": "s13-bfs-depth1-pig.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+      "current_sha256": "75c46dfb87a12ac861e86bafc312092fb8f6c0590d69de16d211580b0d6dba2f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_xcptn.c",
+      "original_sha256": "e1f8f19a1f513402a10dc13eaf3b43d45a208fd71a72692f690f808a7e7762b2",
+      "original_line": 386,
+      "current_line": 384,
+      "anchor_evidence": "s13-bfs-depth1-pig.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+      "current_sha256": "75c46dfb87a12ac861e86bafc312092fb8f6c0590d69de16d211580b0d6dba2f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_xcptn.c",
+      "original_sha256": "e1f8f19a1f513402a10dc13eaf3b43d45a208fd71a72692f690f808a7e7762b2",
+      "original_line": 452,
+      "current_line": 452,
+      "anchor_evidence": "s13-bfs-depth1-pig.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+      "current_sha256": "75c46dfb87a12ac861e86bafc312092fb8f6c0590d69de16d211580b0d6dba2f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_xcptn.c",
+      "original_sha256": "e1f8f19a1f513402a10dc13eaf3b43d45a208fd71a72692f690f808a7e7762b2",
+      "original_line": 596,
+      "current_line": 598,
+      "anchor_evidence": "s13-bfs-depth1-pig.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/ccpupig.c",
+      "current_sha256": "5676d46cd8e4594276a83d0f97fe58e749cff8d0f2bcc8e3d8c2ac19e49b66cf",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ccpupig.c",
+      "original_sha256": "bfeaff9c9a49039aa29740f6dac2dd6a32bce897d0d0ffe3d00a43d66cd09523",
+      "original_line": 15,
+      "current_line": 15,
+      "anchor_evidence": "s13-bfs-depth1-pig.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/ccpupig.h",
+      "current_sha256": "3f4c6e5678ef8d67c4dc0cae8d9d1418bb0ed4c4988a9216908d6c88515067f5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ccpupig.h",
+      "original_sha256": "73b2e7ceda4cb3ba83343b1fe07a428dccab76a196b2d7c3951c37962be1e1db",
+      "original_line": 12,
+      "current_line": 12,
+      "anchor_evidence": "s13-bfs-depth1-pig.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/debug/pigyoda.c",
+      "current_sha256": "9035318798d0b0f07260cc94cf954b9fef16f084e508983c6bae8ff74f3b50ac",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\pigyoda.c",
+      "original_sha256": "ede413a201fc0d4115b5bb0cd50aad3dd34d93a61dc734df49bfd464132ee7f2",
+      "original_line": 30,
+      "current_line": 30,
+      "anchor_evidence": "s13-bfs-depth1-pig.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_wcom.c",
+      "current_sha256": "01506dc2f6685a35770060fa3d9d860d418130aafed00bcb240cd8ab1d1e2db0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_wcom.c",
+      "original_sha256": "18c709bc88c37de4d9323101d528af0ec23a5e7e7b6942a1d2a1a9e7ded111a8",
+      "original_line": 91,
+      "current_line": 91,
+      "anchor_evidence": "s13-bfs-depth1-prod-extra.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_wcom.c",
+      "current_sha256": "01506dc2f6685a35770060fa3d9d860d418130aafed00bcb240cd8ab1d1e2db0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_wcom.c",
+      "original_sha256": "18c709bc88c37de4d9323101d528af0ec23a5e7e7b6942a1d2a1a9e7ded111a8",
+      "original_line": 187,
+      "current_line": 185,
+      "anchor_evidence": "s13-bfs-depth1-prod-extra.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 210,
+      "current_line": 199,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 345,
+      "current_line": 297,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 389,
+      "current_line": 344,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 398,
+      "current_line": 348,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 432,
+      "current_line": 380,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 441,
+      "current_line": 384,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 539,
+      "current_line": 485,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 548,
+      "current_line": 489,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 625,
+      "current_line": 559,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 1148,
+      "current_line": 1066,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 1383,
+      "current_line": 1292,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 2085,
+      "current_line": 1941,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 2093,
+      "current_line": 1947,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 2101,
+      "current_line": 1953,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 2118,
+      "current_line": 1966,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 2732,
+      "current_line": 2550,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 2956,
+      "current_line": 2583,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 2965,
+      "current_line": 2587,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "original_line": 3726,
+      "current_line": 3298,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 1338,
+      "current_line": 1253,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 1408,
+      "current_line": 1283,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 1459,
+      "current_line": 1326,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 1594,
+      "current_line": 1436,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 1656,
+      "current_line": 1493,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 1671,
+      "current_line": 1507,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 1708,
+      "current_line": 1543,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 1871,
+      "current_line": 1693,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 2016,
+      "current_line": 1815,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 2095,
+      "current_line": 1892,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 2114,
+      "current_line": 1904,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 2
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 2138,
+      "current_line": 1923,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 2263,
+      "current_line": 2045,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 2373,
+      "current_line": 2136,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    },
+    {
+      "current": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "original_line": 2847,
+      "current_line": 2572,
+      "anchor_evidence": "s13-bfs-depth1-vdmredir-dbg.json",
+      "arms_reconciled": 1
+    }
+  ],
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r171.zip",
+  "limitation": "inherits prior build and source-anchor evidence; hash-mismatched, structurally different, absent and ambiguous groups are not classified; no new compile."
+}

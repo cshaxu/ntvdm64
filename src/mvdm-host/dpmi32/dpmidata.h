@@ -198,9 +198,12 @@ extern USHORT CurrentDtaSelector;
 extern USHORT CurrentDtaOffset;
 extern USHORT CurrentPspSelector;
 
+#line 196
 #if DBG
+#line 197
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 199
 
 extern ULONG IntelBase;
 //

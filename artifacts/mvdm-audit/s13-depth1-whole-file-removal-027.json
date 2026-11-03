@@ -1,0 +1,75 @@
+{
+  "scope": "Unselected historical 32-bit host WIN launcher utility",
+  "files": [
+    {
+      "path": "src/mvdm-host/vdmutils/win/makefile",
+      "sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/win/obj/_objects.mac",
+      "sha256": "57dd8d6f5130aacac995ef4fcd510b34b9c95d50d9e57764acbd576ed6a2c1b9"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/win/obj/i386/win.com",
+      "sha256": "5eb085d36b58b1b2ca57e07beffc341860d451265d2f913f4de799c0235f05cf"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/win/obj/i386/win.obj",
+      "sha256": "094657a2d09b11665933f82397bbb5f3100458038d3d00eb4177a20b328b5fc2"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/win/obj/i386/win.pdb",
+      "sha256": "0995bb67fbc02fe66311bc18714014faaa86451083ecdb54ccc5a1e80f9ffb06"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/win/obj/i386/win.res",
+      "sha256": "24d77224fff0959e1e2fb81cdfb0c5068cc4f149558049f4880d5a4bbc003025"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/win/sources",
+      "sha256": "63ad4f7da8474430a2bd4c89d58093dd1d2e76800a3a0f6cd42785b9f86f4f4e"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/win/win.c",
+      "sha256": "c29273ac49dec8edac30755276607eb0c310a6c0afc5cf1d94888ce9c096a35a"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/win/win.rc",
+      "sha256": "93a9c362ddb52a116e69ee6b3fc8c3e1b8a1b1eda3bbc8300c4676765c0ccd2a"
+    }
+  ],
+  "mirror_sources": [
+    {
+      "path": "src/mvdm-host/vdmutils/win/win.c",
+      "current_sha256": "c29273ac49dec8edac30755276607eb0c310a6c0afc5cf1d94888ce9c096a35a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmutils\\win\\win.c",
+      "original_sha256": "c654c38b0665308e44b80f60791a6a767a99d4618099758e5b00aa2607f788a0",
+      "pinned_expected_sha256": "c654c38b0665308e44b80f60791a6a767a99d4618099758e5b00aa2607f788a0",
+      "original_matches_pinned": true
+    }
+  ],
+  "removed_guard_ledger_entries": [
+    {
+      "path": "src/mvdm-host/vdmutils/win/win.c",
+      "macro": "0",
+      "line": 24,
+      "body_end": 26,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmutils\\win\\win.c",
+      "original_sha256": "c654c38b0665308e44b80f60791a6a767a99d4618099758e5b00aa2607f788a0",
+      "local_sha256": "dcfa22234a38cb7b9b316174b69bcd86e7cd734cb9cd046d8d38b7169699435e",
+      "removed_body_sha256": "857c41b0497474b2464a52a89cd9c4ccd674aa8e750edc618b63e630a1a3ceca",
+      "removed_body_lines": 2,
+      "after_sha256": "77666028d0e65714729c9ab37a0eee55e3e3b74be76a237d902c17c4720fb34a",
+      "final_sha256": "c29273ac49dec8edac30755276607eb0c310a6c0afc5cf1d94888ce9c096a35a"
+    }
+  ],
+  "removed_condition_groups": 2,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r132.zip",
+  "evidence": [
+    "No current product or test graph selects this standalone utility; prior T276 disposition classified it as profile-excluded.",
+    "The tracked obj/i386/win.com is a 32-bit PE (machine 0x14c), not a guest Windows WIN.COM."
+  ],
+  "limitations": [
+    "No guest source or image was modified."
+  ]
+}

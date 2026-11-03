@@ -151,7 +151,9 @@ ULONG FASTCALL WU32GetClassInfo(PVDMFRAME pFrame)
             STORESHORT(pwc16->cbClsExtra, t3.cbClsExtra);
         }
 
+#line 154
 #ifdef OLD_WAY
+#line 155
 #error Unsupported excluded original configuration
 #endif
 #line 162
@@ -778,7 +780,7 @@ ULONG FASTCALL WU32SetClassLong(PVDMFRAME pFrame)
 #else
 #error Unsupported excluded original configuration
 #endif
-#line 783
+#line 754
                     SETWC(HWND32(parg16->f1), GCL_WOWvpfnWndProc, LONG32(parg16->f3));
                 }
 
@@ -1072,10 +1074,12 @@ ULONG FASTCALL WU32UnregisterClass(PVDMFRAME pFrame)
         pszClass = psz1;
     }
 
+#line 1039
 #ifdef WOWEDIT
+#line 1040
 #error Unsupported excluded original configuration
 #endif
-#line 1080
+#line 1043
 
     ul = GETBOOL16(UnregisterClass(
                     pszClass,

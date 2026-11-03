@@ -1,0 +1,107 @@
+{
+  "changes": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "macro": "A2CPU",
+      "old_current": 735,
+      "new_current": 738
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "FIFO_ON",
+      "old_current": 2085,
+      "new_current": 2088
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "IRET_HOOKS",
+      "old_current": 1072,
+      "new_current": 1075
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "FIFO_ON",
+      "old_current": 916,
+      "new_current": 919
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "FIFO_ON",
+      "old_current": 701,
+      "new_current": 704
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "FIFO_ON",
+      "old_current": 467,
+      "new_current": 470
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "FIFO_ON",
+      "old_current": 459,
+      "new_current": 462
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "FIFO_ON",
+      "old_current": 435,
+      "new_current": 438
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "FIFO_ON",
+      "old_current": 400,
+      "new_current": 403
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "FIFO_ON",
+      "old_current": 161,
+      "new_current": 164
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "FIFO_ON",
+      "old_current": 93,
+      "new_current": 96
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "macro": "SLAVEPC",
+      "old_current": 3,
+      "new_current": 4
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "macro": "SLAVEPC",
+      "old_current": 18,
+      "new_current": 19
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "macro": "YODA",
+      "old_current": 65,
+      "new_current": 68
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "SEGMENTATION",
+      "old_current": 2007,
+      "new_current": 2010
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "macro": "SEGMENTATION",
+      "old_current": 1041,
+      "new_current": 1044
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "macro": "SEGMENTATION",
+      "old_current": 3094,
+      "new_current": 3097
+    }
+  ],
+  "method": "exact inserted physical-line offsets and current guard/error verification"
+}

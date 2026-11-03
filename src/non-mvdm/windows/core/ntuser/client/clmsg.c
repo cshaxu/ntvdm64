@@ -8,9 +8,11 @@
 * 04-11-91 ScottLu Created.
 \***************************************************************************/
 
+#line 23
 #ifdef DEBUG
 #error Unsupported original DEBUG branch
 #endif
+#line 26
 #line 11
 /* DIVERGENCE(OPENNT-HOST-120): complete original GetCPD, separate selection.
  * Remaining clmsg bodies outside admitted default/GetCPD slices are omitted. */
@@ -53,18 +55,19 @@ LONG DefWindowProcWorker(
     int icolBack;
     int icolFore;
     PWND pwndParent;
+#endif /* WOW_ORIGINAL_DEFAULT_WINDOW */
+#line 566
 #ifdef FE_IME
 #error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
 #endif
 
+#line 572
 #ifdef DEBUG
-    if (!gfTurboDWP) {
-        return CsSendMessage(hwnd, message, wParam, lParam, 0L,
-                FNID_DEFWINDOWPROC, fAnsi);
-    } else {
+#error Excluded unsupported original DEBUG default-window path
 #endif
 
-
+#if defined(WOW_ORIGINAL_DEFAULT_WINDOW)
+#line 580
     if (FDEFWINDOWMSG(message, DefWindowMsgs)) {
         return CsSendMessage(hwnd, message, wParam, lParam, 0L,
                 FNID_DEFWINDOWPROC, fAnsi);
@@ -393,16 +396,89 @@ LONG DefWindowProcWorker(
             return(TestWF(pwnd, WFANSICREATOR) ? NFR_ANSI : NFR_UNICODE);
         break;
 
+#endif /* WOW_ORIGINAL_DEFAULT_WINDOW */
+#line 905
 #if defined(FE_IME) // DefWindowProcWorker()
 #error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
 #endif
 
+#if defined(WOW_ORIGINAL_DEFAULT_WINDOW)
+#line 1210
     }
 
     return 0;
 
+#endif /* WOW_ORIGINAL_DEFAULT_WINDOW */
+#line 1214
 #ifdef DEBUG
-    } // gfTurboDWP
+#error Excluded unsupported original DEBUG default-window close
 #endif
+#if defined(WOW_ORIGINAL_DEFAULT_WINDOW)
+#line 1217
 }
 #endif
+
+#line 1650
+#if 0
+#error Excluded original disabled WMCTLCOLOR handler
+#endif
+#line 1677
+
+
+#line 327
+#ifdef FE_IME // SendMessageWorker()
+#line 328
+#error Excluded unsupported original FE_IME branch
+#endif // FE_IME
+#line 331
+
+
+#line 270
+#ifdef FE_SB // SendMessageWorker()
+#line 271
+#error Unsupported FE_SB original branch
+#endif // FE_SB
+#line 274
+
+#line 1719
+#ifdef FE_SB // DispatchMessageWorker()
+#line 1720
+#error Unsupported FE_SB original branch
+#endif // FE_SB
+#line 1722
+
+#line 331
+#ifdef FE_SB // SendMessageWorker()
+#line 332
+#error Unsupported FE_SB original branch
+#else
+#line 356
+#endif // FE_SB
+#line 364
+
+#line 453
+#ifdef FE_SB // SendMessageWorker()
+#line 454
+#error Unsupported FE_SB original branch
+#else
+#line 467
+#endif // FE_SB
+#line 470
+
+#line 1777
+#ifdef FE_SB // DispatchMessageWorker()
+#line 1778
+#error Unsupported FE_SB original branch
+#else
+#line 1790
+#endif // FE_SB
+#line 1793
+
+#line 1803
+#ifdef FE_SB // DispatchMessageWorker()
+#line 1804
+#error Unsupported FE_SB original branch
+#else
+#line 1841
+#endif // FE_SB
+#line 1853

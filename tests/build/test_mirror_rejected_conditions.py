@@ -17,10 +17,13 @@ if not scratch.is_relative_to((repo / 'build').resolve()):
 scratch.mkdir(parents=True, exist_ok=True)
 entries = [entry for entry in json.loads(
     (repo / 'artifacts/mvdm-audit/s13-rejected-legacy-branches.json').read_text())
-    if not entry.get('disposition', '').startswith('subsumed-')]
+    if not entry.get('disposition', '').startswith(('subsumed-', 'withdrawn-'))]
 for path, marker, macro in (
     ('src/mvdm-host/softpc.new/base/bios/tape_io.c', 'Excluded unsupported CPU30 descriptor path', 'CPU_30_STYLE'),
     ('src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h', 'Excluded unsupported Unicode class-client configuration', 'UNICODE'),
+    ('src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h', 'Excluded unsupported Unicode class-client menu-name profile', 'UNICODE'),
+    ('src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h', 'Excluded unsupported Unicode class-client registration profile', 'UNICODE'),
+    ('src/mvdm-host/softpc.new/host/inc/host_def.h', 'Excluded unsupported i386 host library loader', 'i386'),
     ('src/mvdm-host/softpc.new/base/system/qevnt.c', 'Excluded unsupported quick-event hardware monitor path', 'MONITOR'),
     ('src/mvdm-host/softpc.new/host/src/nt_eoi.c', 'Excluded unsupported delayed-interrupt monitor declarations', 'MONITOR'),
     ('src/mvdm-host/softpc.new/host/src/nt_eoi.c', 'Excluded unsupported delayed-interrupt monitor dispatch', 'MONITOR'),
@@ -43,13 +46,26 @@ for path, marker, macro in (
     matches = [i for i, line in enumerate(lines) if marker in line]
     if len(matches) != 1 or matches[0] == 0:
         raise SystemExit('missing unique restored rejection: ' + path)
-    entries.append({'path': path, 'line': matches[0], 'macro': macro})
+    guard_index = matches[0] - 1
+    while guard_index >= 0 and re.match(r'^\s*#\s*line\b', lines[guard_index]):
+        guard_index -= 1
+    if guard_index < 0:
+        raise SystemExit('missing restored rejection guard: ' + path)
+    entries.append({'path': path, 'line': guard_index + 1, 'macro': macro})
 blocks = []
 names = set()
 for entry in entries:
     path = repo / entry['path']
     lines = path.read_text(encoding='latin1').split('\n')
-    guard, error = lines[entry['line'] - 1:entry['line'] + 1]
+    line = entry.get('current_line', entry['line'])
+    guard = lines[line - 1]
+    error_index = line
+    while error_index < len(lines) and re.match(r'^\s*#\s*line\b', lines[error_index]):
+        error_index += 1
+    error = lines[error_index] if error_index < len(lines) else ''
+    line_directives = lines[line:error_index]
+    entry['_diagnostic_line'] = (int(re.match(r'^\s*#\s*line\s+(\d+)', line_directives[-1]).group(1))
+                                 if line_directives else line + 1)
     guard_match = re.match(r'^\s*#\s*(if|ifdef|else)\b', guard)
     if not guard_match:
         raise SystemExit(f'missing original guard: {entry["path"]}:{entry["line"]}')
@@ -57,13 +73,13 @@ for entry in entries:
         raise SystemExit(f'missing rejection: {entry["path"]}:{entry["line"] + 1}')
     if guard_match.group(1) == 'else':
         stack = []
-        for line in lines[:entry['line'] - 1]:
-            directive = re.match(r'^\s*#\s*(if|ifdef|ifndef|elif|else|endif)\b', line)
+        for preceding in lines[:line - 1]:
+            directive = re.match(r'^\s*#\s*(if|ifdef|ifndef|elif|else|endif)\b', preceding)
             if not directive:
                 continue
             op = directive.group(1)
             if op in ('if', 'ifdef', 'ifndef'):
-                stack.append(line)
+                stack.append(preceding)
             elif op == 'endif' and stack:
                 stack.pop()
             elif op == 'elif' and stack:
@@ -78,10 +94,10 @@ for entry in entries:
             raise SystemExit('unsupported alternative structure: ' + entry['path'])
         if entry['macro'] != '1':
             names.add(entry['macro'])
-        blocks.append([f'#line {entry["line"] - 1} "{entry["path"]}"', stack[-1], guard, error, '#endif'])
+        blocks.append([f'#line {line - 1} "{entry["path"]}"', stack[-1], guard, *line_directives, error, '#endif'])
     else:
         names.update(set(re.findall(r'\b[A-Za-z_][A-Za-z_0-9]*\b', guard)) - {'if', 'ifdef', 'defined'})
-        blocks.append([f'#line {entry["line"]} "{entry["path"]}"', guard, error, '#endif'])
+        blocks.append([f'#line {line} "{entry["path"]}"', guard, *line_directives, error, '#endif'])
 probe = scratch / 'excluded-guard-probe.c'
 probe.write_text('\n'.join(line for block in blocks for line in block) + '\n', encoding='ascii')
 base = ['cl.exe', '/nologo', '/EP', '/TC', str(probe)]
@@ -100,10 +116,25 @@ for entry, block in zip(entries, blocks):
     diagnostics = negative.stdout + negative.stderr
     if negative.returncode == 0:
         raise SystemExit('unsupported condition unexpectedly succeeded: ' + entry['path'])
-    expected = f'{entry["path"]}({entry["line"] + 1})'
+    expected = f'{entry["path"]}({entry["_diagnostic_line"]})'
     if expected.lower() not in diagnostics.lower():
         raise SystemExit('missing excluded-branch diagnostic: ' + expected + '\n' + diagnostics)
 print(f'PASS {len(entries)} retained guards: normal selection and rejected profiles ({os.environ.get("VSCMD_ARG_TGT_ARCH", "unknown")})')
+
+host_def = (repo / 'src/mvdm-host/softpc.new/host/inc/host_def.h').read_text(encoding='latin1')
+host_block = ('#ifdef i386\n#error Excluded unsupported i386 host library loader\n'
+              '#else\n#line 223\n#define SafeLoadLibrary(name) LoadLibrary(name)\n'
+              '#endif\n#line 225\n')
+if host_def.count(host_block) != 1:
+    raise SystemExit('host loader selector or original line mapping changed')
+probe.write_text(host_block.replace('#define SafeLoadLibrary(name) LoadLibrary(name)',
+                                    'int selected_line = __LINE__;') +
+                 'int following_line = __LINE__;\n', encoding='ascii')
+result = subprocess.run(base, capture_output=True, text=True, errors='replace')
+if (result.returncode or not re.search(r'int\s+selected_line\s*=\s*223\s*;', result.stdout)
+        or not re.search(r'int\s+following_line\s*=\s*225\s*;', result.stdout)):
+    raise SystemExit('host loader original diagnostic lines failed: ' + result.stderr)
+print('PASS original host loader selector and line mapping')
 
 dpmi = (repo / 'src/mvdm-host/dpmi32/dpmiint.c').read_text(encoding='latin1').split('\n')
 marker = 'Excluded unsupported VdmSetInt21Handler kernel VDM path'
@@ -243,7 +274,12 @@ for name, count in (('dpmi32.c', 1), ('dpmi32p.h', 1), ('dpmiselr.c', 1), ('mode
     if len(positions) != count:
         raise SystemExit('missing original DPMI i386 guard in ' + name)
     for i in positions:
-        probe.write_text(header[i-1] + '\n' + header[i] + '\n#endif\n', encoding='ascii')
+        guard = i - 1
+        while guard >= 0 and re.match(r'^\s*#\s*line\b', header[guard]):
+            guard -= 1
+        if guard < 0 or not re.match(r'^\s*#\s*(?:ifdef\s+i386\b|if\s+defined\s*\(\s*i386\s*\))', header[guard]):
+            raise SystemExit('original DPMI i386 selector missing: ' + name)
+        probe.write_text('\n'.join(header[guard:i+1]) + '\n#endif\n', encoding='ascii')
         allowed = subprocess.run(base, capture_output=True, text=True, errors='replace')
         rejected = subprocess.run(base[:-1] + ['/Di386'] + base[-1:], capture_output=True, text=True, errors='replace')
         if allowed.returncode or not rejected.returncode or 'unsupported i386 kernel VDM host path' not in rejected.stdout + rejected.stderr:
@@ -264,55 +300,22 @@ print('PASS original EMS X86GFX/NTVDM compound boundary')
 nt_bop = (repo / 'src/mvdm-host/softpc.new/host/src/nt_bop.c').read_text(encoding='latin1').splitlines()
 marker = 'unsupported hardware-host FPU save path'
 positions = [i for i, line in enumerate(nt_bop) if marker in line]
-if len(positions) != 1 or nt_bop[positions[0]-1].strip() != '#ifdef i386':
+if (len(positions) != 1 or positions[0] < 2
+        or nt_bop[positions[0]-2].strip() != '#ifdef i386'
+        or nt_bop[positions[0]-1].strip() != '#line 930'):
     raise SystemExit('nt_bop hardware FPU rejection lost its original boundary')
 i = positions[0]
-probe.write_text('\n'.join(nt_bop[i-1:i+2]) + '\n', encoding='ascii')
+probe.write_text('\n'.join(nt_bop[i-2:i+2]) + '\n', encoding='ascii')
 allowed = subprocess.run(base, capture_output=True, text=True, errors='replace')
 rejected = subprocess.run(base[:-1] + ['/Di386'] + base[-1:], capture_output=True, text=True, errors='replace')
-if allowed.returncode or not rejected.returncode or marker not in rejected.stdout + rejected.stderr:
+if (allowed.returncode or not rejected.returncode
+        or marker not in rejected.stdout + rejected.stderr
+        or not re.search(r'\(930\)', rejected.stdout + rejected.stderr)):
     raise SystemExit('nt_bop i386 rejection control failed: ' + allowed.stderr + rejected.stderr)
 print('PASS CCPU excludes original hardware-host FPU save path')
 
 for path, macro, expected_count, divergence in (
-    ('src/mvdm-host/softpc.new/base/bios/bootstra.c', 'SECURE', 4, 'MVDM-HOST-DIV-602'),
-    ('src/mvdm-host/softpc.new/base/inc/cpu2.h', 'EGATEST', 1, 'MVDM-HOST-DIV-602'),
-    ('src/mvdm-host/wow32/wkglobal.c', 'API16', 8, 'MVDM-HOST-DIV-603'),
-    ('src/mvdm-host/wow32/wklocal.c', 'API16', 2, 'MVDM-HOST-DIV-603'),
-    ('src/mvdm-host/softpc.new/host/src/stf_conf.c', 'STUBBED', 4, 'MVDM-HOST-DIV-604'),
-    ('src/mvdm-host/sim32/sim32.h', 'ALLOCA', 1, 'MVDM-HOST-DIV-611'),
-    ('src/non-mvdm/public/internal/base/inc/isnkrnl.h', '_PNP_POWER', 1, 'OPENNT-HOST-151'),
-    ('src/mvdm-host/bde/bdesym.c', 'NEED_ABSOLUTES', 1, 'MVDM-HOST-DIV-610'),
-    ('src/mvdm-host/bde/bdesym.c', 'NEED_INDICES', 4, 'MVDM-HOST-DIV-610'),
-    ('src/mvdm-host/fax/wowfaxui/wowfaxui.h', 'NOLOG', 1, 'MVDM-HOST-DIV-610'),
-    ('src/mvdm-host/sim32/sim32.h', 'SIM_32', 1, 'MVDM-HOST-DIV-610'),
-    ('src/mvdm-host/softpc.new/base/inc/jformate.h', 'JLD_PRIVATE', 1, 'MVDM-HOST-DIV-610'),
-    ('src/mvdm-host/softpc.new/base/inc/lm_attr.h', 'VMS', 1, 'MVDM-HOST-DIV-610'),
-    ('src/mvdm-host/softpc.new/base/inc/ms_windo.h', 'MSWDVR', 1, 'MVDM-HOST-DIV-610'),
-    ('src/mvdm-host/softpc.new/base/inc/spc_icon.h', 'SOFTWINDOWS', 1, 'MVDM-HOST-DIV-610'),
-    ('src/mvdm-host/vdmexts/sym.c', 'NEED_ABSOLUTES', 1, 'MVDM-HOST-DIV-610'),
-    ('src/mvdm-host/vdmexts/sym.c', 'NEED_INDICES', 4, 'MVDM-HOST-DIV-610'),
-    ('src/mvdm-host/softpc.new/dat2obj/dat2obj.c', '_MIPS_', 1, 'MVDM-HOST-DIV-609'),
-    ('src/mvdm-host/softpc.new/dat2obj/dat2obj.c', '_PPC_', 1, 'MVDM-HOST-DIV-609'),
-    ('src/mvdm-host/softpc.new/dat2obj/dat2obj.c', 'ALPHA', 1, 'MVDM-HOST-DIV-609'),
-    ('src/mvdm-host/softpc.new/base/system/cmos.c', 'TEST_HARNESS', 2, 'MVDM-HOST-DIV-608'),
-    ('src/mvdm-host/softpc.new/base/system/cmos.c', 'FLOPPY_B', 1, 'MVDM-HOST-DIV-612'),
-    ('src/mvdm-host/softpc.new/base/dasm386/decode.c', 'CPU_286', 13, 'MVDM-HOST-DIV-607'),
-    ('src/non-mvdm/base/win32/server/srvinit.c', 'WX86', 2, 'OPENNT-HOST-150'),
-    ('src/non-mvdm/public/internal/ds/inc/token.h', 'DOS3', 1, 'OPENNT-HOST-150'),
-    ('src/mvdm-host/softpc.new/base/dasm386/decode.c', 'INTEL_BOOK_NOT_OS2', 1, 'MVDM-HOST-DIV-605'),
-    ('src/mvdm-host/softpc.new/base/dasm386/decode.c', 'NO_CHIP_BUG', 1, 'MVDM-HOST-DIV-605'),
-    ('src/mvdm-host/softpc.new/base/dasm386/decode.c', 'NPX_287', 1, 'MVDM-HOST-DIV-605'),
-    ('src/mvdm-host/softpc.new/base/dasm386/decode.c', 'OLDPIG', 1, 'MVDM-HOST-DIV-605'),
-    ('src/mvdm-host/softpc.new/base/inc/cpu3.h', 'SWIN_CPU_OPTS', 1, 'MVDM-HOST-DIV-605'),
-    ('src/mvdm-host/softpc.new/base/inc/gore.h', 'INTERLEAVED', 1, 'MVDM-HOST-DIV-605'),
-    ('src/mvdm-host/softpc.new/base/inc/host_msw.h', 'MSWDVR_DEBUG', 1, 'MVDM-HOST-DIV-605'),
-    ('src/mvdm-host/softpc.new/base/inc/keycaps.h', 'UIF_TEST', 1, 'MVDM-HOST-DIV-605'),
-    ('src/mvdm-host/softpc.new/base/inc/novell.h', 'V4CLIENT', 1, 'MVDM-HOST-DIV-605'),
-    ('src/mvdm-host/softpc.new/base/inc/smeg_hea.h', 'SMEG', 1, 'MVDM-HOST-DIV-605'),
     ('src/mvdm-host/softpc.new/base/inc/winhelp.h', 'HOST_HELP', 1, 'MVDM-HOST-DIV-605'),
-    ('src/mvdm-host/softpc.new/base/system/quick_ev.c', 'QEVENT_TESTER', 1, 'MVDM-HOST-DIV-605'),
-    ('src/mvdm-host/softpc.new/dat2obj/dat2obj.c', 'TEST_CASE', 2, 'MVDM-HOST-DIV-605'),
     ('src/mvdm-host/softpc.new/host/src/nt_vflop.c', 'VFLOPPY', 1, 'MVDM-HOST-DIV-605'),
 ):
     lines = (repo / path).read_text(encoding='latin1').splitlines()
@@ -321,9 +324,12 @@ for path, macro, expected_count, divergence in (
     if len(positions) != expected_count:
         raise SystemExit('incorrect excluded profile guard count: ' + path)
     for i in positions:
-        if not re.match(r'^\s*#\s*ifdef\s+' + re.escape(macro) + r'\s*(?:(?:/\*.*\*/|//.*)\s*)?$', lines[i-1]):
+        guard = i - 1
+        while guard >= 0 and re.match(r'^\s*#\s*line\b', lines[guard]):
+            guard -= 1
+        if guard < 0 or not re.match(r'^\s*#\s*ifdef\s+' + re.escape(macro) + r'\s*(?:(?:/\*.*\*/|//.*)\s*)?$', lines[guard]):
             raise SystemExit('excluded profile lost original selector: ' + path)
-        probe.write_text('\n'.join(lines[i-1:i+1] + ['#endif']) + '\n', encoding='ascii')
+        probe.write_text('\n'.join(lines[guard:i+1] + ['#endif']) + '\n', encoding='ascii')
         allowed = subprocess.run(base, capture_output=True, text=True, errors='replace')
         rejected = subprocess.run(base[:-1] + ['/D' + macro] + base[-1:],
                                   capture_output=True, text=True, errors='replace')
@@ -332,10 +338,6 @@ for path, macro, expected_count, divergence in (
 print('PASS original excluded host and WOW profile guards')
 
 for path, expression, marker, definitions in (
-    ('src/mvdm-host/softpc.new/base/inc/cdrom.h', 'defined(GEN_DRVR)',
-     'unsupported GEN_DRVR profile', ['GEN_DRVR']),
-    ('src/mvdm-host/softpc.new/base/inc/host_msw.h', 'defined(MSWDVR) && defined(XWINDOW)',
-     'unsupported MSWDVR_XWINDOW profile', ['MSWDVR', 'XWINDOW']),
 ):
     lines = (repo / path).read_text(encoding='latin1').splitlines()
     positions = [i for i, line in enumerate(lines) if marker in line]
@@ -499,7 +501,7 @@ print('PASS kernel VDM stack publication exclusion')
 softpc = (repo / 'src/mvdm-host/inc/softpc.h').read_text(encoding='latin1')
 for marker in ('Excluded unsupported i386 kernel VDM declarations',
                'Excluded unsupported i386 kernel VDM register interface'):
-    if '#ifdef i386\n#error ' + marker not in softpc:
+    if not re.search(r'(?m)^#ifdef i386\s*\n(?:#line\s+\d+\s*\n)?#error ' + re.escape(marker), softpc):
         raise SystemExit('SOFTPC i386 exclusion missing: ' + marker)
     probe.write_text('#ifdef i386\n#error ' + marker + '\n#endif\n', encoding='ascii')
     allowed = subprocess.run(base[:-1] + ['/Ui386'] + base[-1:], capture_output=True, text=True, errors='replace')
@@ -509,3 +511,190 @@ for marker in ('Excluded unsupported i386 kernel VDM declarations',
 if 'extern USHORT __cdecl getAX(VOID);' not in softpc:
     raise SystemExit('selected CPU40 cdecl declaration was removed')
 print('PASS SOFTPC i386 kernel exclusions and retained CPU40 cdecl')
+
+# The retained EDIT subset is deliberately included in two cohorts. A single
+# original whole-file guard would suppress the second, state-bearing inclusion.
+usercli = (repo / 'src/non-mvdm/windows/core/ntuser/client/usercli.h').read_bytes()
+for name, contents in (
+    ('usercli-current.h', usercli),
+    ('usercli-single-guard.h', b'#ifndef _USERCLI_\n#define _USERCLI_\n' + usercli + b'\n#endif\n'),
+):
+    (scratch / name).write_bytes(contents)
+    probe.write_text('#define WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY\n'
+                     '#include "' + name + '"\n'
+                     '#undef WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY\n'
+                     '#include "' + name + '"\n', encoding='ascii')
+    result = subprocess.run(base, capture_output=True, text=True, errors='replace')
+    has_lookaside = 'typedef struct _LOOKASIDE' in result.stdout
+    has_edit = 'typedef struct tagED {' in result.stdout
+    if result.returncode or not has_lookaside or has_edit != (name == 'usercli-current.h'):
+        raise SystemExit('USER client two-cohort guard control failed: ' + result.stderr)
+print('PASS USER client two-cohort inclusion and single-guard negative control')
+
+# The selected NT declaration subset now keeps its original include guard.
+ntexapi = (repo / 'src/non-mvdm/public/sdk/inc/ntexapi.h').read_text(encoding='latin1')
+if not ntexapi.startswith('#ifndef _NTEXAPI_\n#define _NTEXAPI_\n'):
+    raise SystemExit('original NTEXAPI include guard missing')
+(scratch / 'ntexapi-guard.h').write_text(ntexapi, encoding='latin1')
+for predefine in (False, True):
+    probe.write_text(('#define _NTEXAPI_\n' if predefine else '') +
+                     '#include "ntexapi-guard.h"\n#include "ntexapi-guard.h"\n',
+                     encoding='ascii')
+    result = subprocess.run(base, capture_output=True, text=True, errors='replace')
+    count = result.stdout.count('NtQueryPerformanceCounter')
+    if result.returncode or count != (0 if predefine else 1):
+        raise SystemExit('NTEXAPI original guard control failed: ' + result.stderr)
+print('PASS original NTEXAPI include guard and predefined-guard control')
+
+ntregapi = (repo / 'src/non-mvdm/public/sdk/inc/ntregapi.h').read_text(encoding='latin1')
+if '#ifndef _NTREGAPI_\n#define _NTREGAPI_\n' not in ntregapi:
+    raise SystemExit('original NTREGAPI include guard missing')
+(scratch / 'ntregapi-guard.h').write_text(ntregapi, encoding='latin1')
+for predefine in (False, True):
+    probe.write_text(('#define _NTREGAPI_\n' if predefine else '') +
+                     '#include "ntregapi-guard.h"\n#include "ntregapi-guard.h"\n',
+                     encoding='ascii')
+    result = subprocess.run(base, capture_output=True, text=True, errors='replace')
+    count = result.stdout.count('typedef struct _KEY_VALUE_PARTIAL_INFORMATION')
+    if result.returncode or count != (0 if predefine else 1):
+        raise SystemExit('NTREGAPI original guard control failed: ' + result.stderr)
+print('PASS original NTREGAPI include guard and predefined-guard control')
+
+nturtl = (repo / 'src/non-mvdm/public/sdk/inc/nturtl.h').read_text(encoding='latin1')
+if '#ifndef _NTURTL_\n#define _NTURTL_\n' not in nturtl:
+    raise SystemExit('original NTURTL include guard missing')
+(scratch / 'nturtl-guard.h').write_text(nturtl, encoding='latin1')
+for predefine in (False, True):
+    probe.write_text(('#define _NTURTL_\n' if predefine else '') +
+                     '#include "nturtl-guard.h"\n#include "nturtl-guard.h"\n',
+                     encoding='ascii')
+    result = subprocess.run(base[:-1] + ['/I' + str(repo / 'src/compat/include'),
+                             '/I' + str(repo / 'src/non-mvdm/public/sdk/inc')] + base[-1:],
+                            capture_output=True, text=True, errors='replace')
+    count = result.stdout.count('RtlIsDosDeviceName_U')
+    if result.returncode or count != (0 if predefine else 1):
+        raise SystemExit('NTURTL original guard control failed: ' + result.stderr)
+print('PASS original NTURTL include guard and predefined-guard control')
+
+ntrtl = (repo / 'src/non-mvdm/public/sdk/inc/ntrtl.h').read_text(encoding='latin1')
+if '#ifndef _NTRTL_\n#define _NTRTL_\n' not in ntrtl:
+    raise SystemExit('original NTRTL include guard missing')
+(scratch / 'ntrtl-guard.h').write_text(ntrtl, encoding='latin1')
+for predefine in (False, True):
+    probe.write_text(('#define _NTRTL_\n' if predefine else '') +
+                     '#include "ntrtl-guard.h"\n#include "ntrtl-guard.h"\n',
+                     encoding='ascii')
+    result = subprocess.run(base[:-1] + ['/I' + str(repo / 'src/compat/include'),
+                             '/I' + str(repo / 'src/non-mvdm/public/sdk/inc')] + base[-1:],
+                            capture_output=True, text=True, errors='replace')
+    count = result.stdout.count('RtlOemToUnicodeN(')
+    if result.returncode or count != (0 if predefine else 1):
+        raise SystemExit('NTRTL original guard control failed: ' + result.stderr)
+print('PASS original NTRTL include guard and predefined-guard control')
+
+for source, guard, marker in (
+    ('src/non-mvdm/windows/core/ntuser/client/globals.h', '_GLOBALS_', 'LOCALALLOC'),
+    ('src/non-mvdm/windows/core/ntuser/rtl/userrtl.h', '_USERRTL_', 'REBASEALWAYS'),
+):
+    header = (repo / source).read_text(encoding='latin1')
+    if '#ifndef ' + guard + '\n#define ' + guard + '\n' not in header:
+        raise SystemExit('original USER header guard missing: ' + source)
+    (scratch / 'user-guard.h').write_text(header, encoding='latin1')
+    for predefine in (False, True):
+        probe.write_text(('#define ' + guard + '\n' if predefine else '') +
+                         '#include "user-guard.h"\n#include "user-guard.h"\n'
+                         '#ifdef ' + marker + '\nUSER_GUARD_SELECTED\n#endif\n', encoding='ascii')
+        result = subprocess.run(base, capture_output=True, text=True, errors='replace')
+        if result.returncode or ('USER_GUARD_SELECTED' in result.stdout) == predefine:
+            raise SystemExit('USER original guard control failed: ' + source + result.stderr)
+print('PASS original GLOBALS and USERRTL guards and predefined-guard controls')
+
+userk = (repo / 'src/non-mvdm/windows/core/ntuser/kernel/userk.h').read_text(encoding='latin1')
+if '#ifndef _USERK_\n#define _USERK_\n' not in userk:
+    raise SystemExit('original USERK include guard missing')
+(scratch / 'userk-guard.h').write_text(userk, encoding='latin1')
+for prefix, expected_flags, expected_full in (
+    ('', True, True),
+    ('#define WOW_USER_OBJECT_FLAGS_ONLY\n', True, False),
+    ('#define _USERK_\n', False, False),
+):
+    probe.write_text(prefix + '#include "userk-guard.h"\n#include "userk-guard.h"\n'
+                     '#ifdef OCF_THREADOWNED\nUSERK_FLAGS_SELECTED\n#endif\n'
+                     '#ifdef PSEUDO_EVENT_ON\nUSERK_FULL_SELECTED\n#endif\n', encoding='ascii')
+    result = subprocess.run(base, capture_output=True, text=True, errors='replace')
+    if (result.returncode or ('USERK_FLAGS_SELECTED' in result.stdout) != expected_flags or
+            ('USERK_FULL_SELECTED' in result.stdout) != expected_full):
+        raise SystemExit('USERK original guard control failed: ' + result.stderr)
+print('PASS original USERK guard with flags-only, full and predefined controls')
+
+# The retained USER subsets can be requested by separate includes in one TU.
+user = (repo / 'src/non-mvdm/windows/core/ntuser/inc/user.h').read_bytes()
+for name, contents in (
+    ('user-current.h', user),
+    ('user-single-guard.h', b'#ifndef _USER_\n#define _USER_\n' + user + b'\n#endif\n'),
+):
+    (scratch / name).write_bytes(contents)
+    probe.write_text('#include "' + name + '"\n'
+                     '#define WOW_ORIGINAL_DIALOG_GETSET_LAYOUT\n'
+                     '#define WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT\n'
+                     '#include "' + name + '"\n', encoding='ascii')
+    result = subprocess.run(base, capture_output=True, text=True, errors='replace')
+    expected = name == 'user-current.h'
+    if (result.returncode or ('typedef struct _CALLPROCDATA' in result.stdout) != expected or
+            ('typedef struct tagBUTN {' in result.stdout) != expected):
+        raise SystemExit('USER multi-cohort guard control failed: ' + result.stderr)
+print('PASS USER multi-cohort inclusion and single-guard negative control')
+
+clglobal = (repo / 'src/non-mvdm/windows/core/ntuser/client/clglobal.c').read_text(encoding='latin1')
+for condition, marker, definition in (
+    ('#if DBG', 'Excluded unsupported USER debug-global profile', '/DDBG=1'),
+    ('#ifdef WX86', 'Excluded unsupported USER WX86-global profile', '/DWX86'),
+):
+    pattern = (re.escape(condition) + r'\n(?:\s*#\s*line\s+\d+\s*\n)*'
+               + re.escape('#error ' + marker) + r'\n#endif')
+    matches = list(re.finditer(pattern, clglobal))
+    if len(matches) != 1:
+        raise SystemExit('USER global original exclusion missing: ' + condition)
+    boundary = matches[0].group(0)
+    probe.write_text(boundary + '\n', encoding='ascii')
+    allowed = subprocess.run(base, capture_output=True, text=True, errors='replace')
+    rejected = subprocess.run(base[:-1] + [definition] + base[-1:],
+                              capture_output=True, text=True, errors='replace')
+    if allowed.returncode or not rejected.returncode or marker not in rejected.stdout + rejected.stderr:
+        raise SystemExit('USER global exclusion control failed: ' + condition)
+print('PASS original USER debug-global and WX86-global exclusion guards')
+
+clmenu = (repo / 'src/non-mvdm/windows/core/ntuser/client/clmenu.c').read_text(encoding='latin1')
+for macro, marker in (
+    ('MEMPHIS_MENUS', 'Excluded unsupported Memphis menu conversion profile'),
+    ('MEMPHIS_MENU_WATERMARKS', 'Excluded unsupported Memphis menu watermark profile'),
+):
+    pattern = (re.escape('#ifdef ' + macro) + r'\n(?:\s*#\s*line\s+\d+\s*\n)*'
+               + re.escape('#error ' + marker) + r'\n#endif')
+    matches = list(re.finditer(pattern, clmenu))
+    if len(matches) != 1:
+        raise SystemExit('USER menu original exclusion missing: ' + macro)
+    boundary = matches[0].group(0)
+    probe.write_text(boundary + '\n', encoding='ascii')
+    allowed = subprocess.run(base, capture_output=True, text=True, errors='replace')
+    rejected = subprocess.run(base[:-1] + ['/D' + macro] + base[-1:],
+                              capture_output=True, text=True, errors='replace')
+    if allowed.returncode or not rejected.returncode or marker not in rejected.stdout + rejected.stderr:
+        raise SystemExit('USER menu exclusion control failed: ' + macro)
+print('PASS original Memphis menu conversion and watermark exclusions')
+
+handtabl = (repo / 'src/non-mvdm/windows/core/ntuser/kernel/handtabl.c').read_text(encoding='latin1')
+boundary = ('#line 544\n#if 0\n#line 545\n'
+            '#error Excluded original disabled USER handle-table check\n'
+            '#endif\n#line 564')
+if handtabl.count(boundary) != 1:
+    raise SystemExit('original disabled handle-table check boundary missing')
+probe.write_text(boundary + '\n', encoding='ascii')
+allowed = subprocess.run(base, capture_output=True, text=True, errors='replace')
+probe.write_text(boundary.replace('#if 0', '#if 1', 1) + '\n', encoding='ascii')
+rejected = subprocess.run(base, capture_output=True, text=True, errors='replace')
+if (allowed.returncode or not rejected.returncode or
+        'Excluded original disabled USER handle-table check' not in rejected.stdout + rejected.stderr or
+        '(545)' not in rejected.stdout + rejected.stderr):
+    raise SystemExit('original disabled handle-table check control failed')
+print('PASS original literal-disabled USER handle-table guard')

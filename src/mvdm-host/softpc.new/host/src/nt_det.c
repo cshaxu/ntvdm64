@@ -142,7 +142,9 @@ LOCAL VOID syncHardwareToVGAEmulation(SHORT);
 LOCAL VOID syncVGAEmulationToHardware(VOID);
 LOCAL BOOL funnyMode(VOID);
 LOCAL VOID freezeWindow(VOID);
+#line 146
 #ifndef PROD
+#line 147
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
 #line 150
@@ -242,7 +244,9 @@ GLOBAL VOID initTextSection(VOID)
 #endif /* X86GFX */
 #line 1384
 
+#line 1560
 #ifdef PLANEDUMPER
+#line 1561
 #error Unsupported excluded original configuration
 #endif
-#line 1437
+#line 1612

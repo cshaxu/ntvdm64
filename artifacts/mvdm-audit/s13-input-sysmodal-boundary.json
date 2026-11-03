@@ -1,0 +1,34 @@
+{
+  "current": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+  "original_sha256": "b7656bca55e892a42ba825be0324211450ad298c40717e1ae5a889d084467529",
+  "before_sha256": "e3f20422c611bc219f2dfd1f3f415c818b11d30edebd05e520e6d1882865bc35",
+  "after_sha256": "139844016efa01746330ed1999b24ff4fbfb21767b566272870aece2fa7784da",
+  "original_guard": 1154,
+  "original_endif": 1181,
+  "original_functions": [
+    "_SetSysModalWindow",
+    "_GetSysModalWindow"
+  ],
+  "reason": "original unsupported system-modal stubs absent from selected input subset; generic repeated statements are not sufficient to establish body overlap; same selector already rejected under OPENNT-HOST-133",
+  "limits": "does not claim legacy modal stubs are implemented",
+  "current_guard_line": 279,
+  "builds": [
+    "MSVC x86 WOW32",
+    "MSVC x86 call-boundaries"
+  ],
+  "controls": [
+    "normal MSVC x86 preprocessor succeeded",
+    "SYSMODALWINDOWS=1 rejected at original line 1155"
+  ],
+  "binary_comparison": {
+    "previous_sha256": "3e0c2e43f7b3e3863390ccc8a66dbb97d6843fa684ac1080ef1ef18ea934d847",
+    "current_sha256": "53e214b65e5ea7789ace6cec3143831ea666fe969b142145b832d70a6d72e8f3",
+    "differing_offsets": [
+      280,
+      281,
+      625412,
+      625413
+    ]
+  }
+}

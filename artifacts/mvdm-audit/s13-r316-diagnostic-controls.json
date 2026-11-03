@@ -1,0 +1,30 @@
+{
+  "cases": [
+    {
+      "name": "anchor00",
+      "expected_line": 138,
+      "ok": true,
+      "log_sha256": "51e8fcd8d45047a3cf2eeb01430d6fa41c6bbdd7c68d037776daea4de0c7218f"
+    },
+    {
+      "name": "anchor01",
+      "expected_line": 157,
+      "ok": true,
+      "log_sha256": "4cf25b1a6834fb47a86ce1d6728949fd267943aacc260226614db514d241a1c3"
+    },
+    {
+      "name": "anchor02",
+      "expected_line": 198,
+      "ok": true,
+      "log_sha256": "e561f81962b6cc86115d8732c2b8a61b27b67eed29234ddcb7b01d9cca5de717"
+    },
+    {
+      "name": "anchor03",
+      "expected_line": 249,
+      "ok": true,
+      "log_sha256": "f8391080d19d295d2ff53fa0944374da47ab050ff761d30813ad419b2bc7ea67"
+    }
+  ],
+  "failed": [],
+  "limits": "actual excluded-group fragments; not full-context inclusion or runtime proof"
+}

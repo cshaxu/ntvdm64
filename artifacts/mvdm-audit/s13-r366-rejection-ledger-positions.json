@@ -1,0 +1,71 @@
+{
+  "changes": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "macro": "GISP_CPU",
+      "old_current": 2639,
+      "new_current": 2642
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "macro": "GISP_CPU",
+      "old_current": 726,
+      "new_current": 727
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "macro": "REAL_VGA",
+      "old_current": 5548,
+      "new_current": 5551
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "macro": "REAL_VGA",
+      "old_current": 5462,
+      "new_current": 5465
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "macro": "REAL_VGA",
+      "old_current": 5380,
+      "new_current": 5383
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "macro": "REAL_VGA",
+      "old_current": 5190,
+      "new_current": 5193
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "macro": "SEGMENTATION",
+      "old_current": 2621,
+      "new_current": 2624
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "macro": "SEGMENTATION",
+      "old_current": 1454,
+      "new_current": 1457
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
+      "macro": "SEGMENTATION",
+      "old_current": 171,
+      "new_current": 174
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "macro": "SEGMENTATION",
+      "old_current": 921,
+      "new_current": 924
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "macro": "SEGMENTATION",
+      "old_current": 1338,
+      "new_current": 1341
+    }
+  ],
+  "method": "exact inserted physical-line offsets and current guard/error verification"
+}

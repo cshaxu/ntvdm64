@@ -1,0 +1,222 @@
+{
+  "checked": 289,
+  "missing": [],
+  "mismatch": [
+    {
+      "path": "src\\mvdm-host\\dos\\dem\\demhndl.c",
+      "actual": "b5e0e3280d267729af059a5944ac411d7f2519ad3f1339fc8232accf0f439049",
+      "queue": "69b0f73d02b09c6380a1c6b809f95da0621cb13d8b9d6ef0f83ae1f5c7110275"
+    },
+    {
+      "path": "src\\mvdm-host\\dpmi32\\dpmiint.c",
+      "actual": "38343b287fa0623c1962773af4613d39a6de47a3bfc0f581c38e3124680ec0aa",
+      "queue": "07cdba736041854ca2f1f7bf7574df5efd15c702ceb367854670d4da5d955646"
+    },
+    {
+      "path": "src\\mvdm-host\\dpmi32\\dpmiselr.c",
+      "actual": "04a212111012c817062b6045b75dbccd5639936a113c8c47b4606e4b9f674cfb",
+      "queue": "fc740728c4fd1d269f9dc787a520e7f557f7f9a9fd795087d729f90e70530c60"
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\bios\\reset.c",
+      "actual": "1cda785860d29b801b2510a801e0cc60869ceefbcf6a4a5571e6d32696328836",
+      "queue": "409549cb4a046776e2d710c8325d33fa506ab93fc06090afccd8f87cf373a85e"
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\ccpu386\\c_main.c",
+      "actual": "102bdfaab6fea42e19deea0115f82523fdff5d6e486272887139740955a5e224",
+      "queue": "8913f71c6632f75b745b5061e43cd1d56c6d26208092e606ff0bf5710a8f603c"
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\comms\\com.c",
+      "actual": "106b2ac1f9ba81fb9c735d894176a7f202aeb703f74c8c10965f43d0c5d7e3ed",
+      "queue": "ea0ebad8ee2746d2bd9c52481d4ebf2d61d0e9e02bd77a90d57108391cf5d58c"
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\debug\\trace.c",
+      "actual": "062b9332cfd240d535f10c4e3ea5a205c0c9c2d733f2fdd2fd03b5f31e30e2b4",
+      "queue": "8891c3be38d33538f830f6d21ebb98307aeb9322ff38a4f0ead55cd9ce6eb3e2"
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\inc\\bios.h",
+      "actual": "248021f5a5b58067787a92f6c1436de1fc2c72760111998d99c9500121ebc9c9",
+      "queue": "eebdb2a775ef3692317ff5b990baf59c6651a67f8795f15e53577978239e50db"
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\inc\\emm.h",
+      "actual": "13c51268c07d4486e5a567bea80cebb53177abb3188bbdfa222b0f2bc7f6449d",
+      "queue": "568af7bbf7f5ef24b5b6688dfc9c5e45e9d0f6caa0d92ae7f7f49921ad8962f7"
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\inc\\gvi.h",
+      "actual": "ac27ac3db4d6f30db6de02f828426e629200e456b8578839a32bb43b742bee67",
+      "queue": "8d3d89112a91013848f3cc05e9b065a5a295f7bdc289a5f2958e417678a05573"
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\inc\\ios.h",
+      "actual": "be10431706251e0bf08ffda03662eec595fd39f731bbb6d86aed3d7424c7f995",
+      "queue": "ab2f4af08702de82f4207ea7a93d723009f200fc159d540e13adf14a33764fec"
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\keymouse\\keyba.c",
+      "actual": "5e3ff6f5ff8346d38b6e1aa3f96f8a6bce42871368c932a9a9e0bb649b4f9de0",
+      "queue": "796cc0e4c0698be1abaebf9728490a36497de9818ae1f4e4c37719328576df9a"
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "actual": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "queue": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\support\\get_env.c",
+      "actual": "2b2965c828aaa56c4b52a7da835206e7daf1e65cecaa280e85f6a0da29660f2c",
+      "queue": "82599d9f09b128e2109ed8fc8ae7088987c626b20f06ec4836c51edcb74af1ef"
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\support\\main.c",
+      "actual": "e76b5d42d93b188c2d2d5cdc62b47f18df27d365d247652ec28b2af90f41a871",
+      "queue": "e470c985eebea0e46578d24b9de80ed03d89b06c1c0f8997ecb3d8cab1074eea"
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\system\\at_dma.c",
+      "actual": "f51346082abab3ebfe9931b0947f699e9184d69ddb59f9fb3af74aed0db35870",
+      "queue": "5118918c1f2f6607d96b31aa6c13a8a0e4c55c198a7bd7e53aea678978665b01"
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\system\\ica.c",
+      "actual": "75122e0bf4e18195896dbf98ab125ed3a867e5264b2a02c5aa9c30d6ec2e0902",
+      "queue": "b9527bc864083fe7783e9836bde7a1bc3784d18b838c439455ca7e57c001ee2a"
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\system\\illegalp.c",
+      "actual": "11201c23c76031935d2ed85f90c96a08dc40d954ab2198c3a358b7556064873f",
+      "queue": "e09cbd5648b40e7b5de329344093879438e13f9acc4598a0be635dffa00baeac"
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\system\\timer.c",
+      "actual": "9e78384698a9e7c936a935e7c6895e25b85d9179f4898058e00c9eef8a2e5064",
+      "queue": "4e2728687508b9c240c56e65fc4ca8e93a557e2ffdeaf61f761775b11d0a0d6b"
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\host\\src\\nt_cpu.c",
+      "actual": "95f8281fab486dba3d7cdcda40c432c0675e9ed3431562ab59097a3cdb75d316",
+      "queue": "c2b950d588b62953194a3f6e5063f76e5db3ca3237993ae6842b9651f75fe274"
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\host\\src\\nt_eoi.c",
+      "actual": "6bfb427c75b1e50decac4c528a86410adc5aba55bbccc74bf049c1b2fef67ab7",
+      "queue": "793b9989d7e691bd458cd6a6c82f2c7d1bbec78d0c3a35aa5b65c58eb8f07cf4"
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\host\\src\\nt_event.c",
+      "actual": "517c246720970ad2b6b575c9721c13801910576d094e99d09ad6241224a6e488",
+      "queue": "e7a626a7f35aa5bc734163d6c5e4f8caa62468b9cbccb310497a51259f01e5a2"
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\host\\src\\nt_fulsc.c",
+      "actual": "67cea7498083e74a51816f501e8887f711e17e7f765973badc327e04f7bbd48b",
+      "queue": "4aad1200537d2d2de5a4e890cab4caa1a26d90a565c305b0733b89542ee2a0bd"
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\host\\src\\nt_graph.c",
+      "actual": "8a6ac4cbc55e1a10577b52da591406924fac41d8aac5f8beff65fa0d5a4a0c19",
+      "queue": "0f57d1a99ea71c9258a0e7664db08af1699ac15d0b7a6af5333e5fc4078e26e1"
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\host\\src\\nt_rez.c",
+      "actual": "0511f195c0a8a6c4721c164bd546e866bfd345f48492469e48e70137e2e6102a",
+      "queue": "bae57804948438a516ae0cc8e16919d88c4cf9daa8ebce59a78a65393c8398a4"
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\host\\src\\nt_rflop.c",
+      "actual": "9ff9228bc8c2b2ef7ba3fd89a76653b0a83d0f5814cb6b88d4c08edbe95afd99",
+      "queue": "2c84f2fcd52f333c74e33c3986844f6252e91149215333762bf98be693b07983"
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\host\\src\\nt_vdd.c",
+      "actual": "ca9802377951a597e98c933395fc9be706757c4d476522d1279e14be8fdf2e41",
+      "queue": "724163834f37e7c93231db1a104a6a66bb3c4b4c9649b0fb64ec3e5a35e1612a"
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\host\\src\\stubs.c",
+      "actual": "24a4fb4cdb538af3c2c84fdc3ca5b74e361d8ca3410e4fb0adda568a6e499cdf",
+      "queue": "e2285179cee924a8665c35285dc5580f04ff7f093eb25653ae7812cf4a1254c3"
+    },
+    {
+      "path": "src\\mvdm-host\\wow32\\wcall16.c",
+      "actual": "ce4d684e01c743f83ba46f0314f261e2f3de4d406f556ffa7058fb679f4c3fe8",
+      "queue": "51fc0ddeed8481a96b1934e500ecacf0ef2570fdf0ec90d46c8d4fd0d1a20288"
+    },
+    {
+      "path": "src\\mvdm-host\\wow32\\wkfileio.c",
+      "actual": "8f8ddccae0e5a5fec1718a5f52c78b1fc68df97b916c15d8fb536b1959b2c67f",
+      "queue": "1ad271e7c85a9d418f2940958317a4911b6fab3092d13cbe5d7cec4fcb522144"
+    },
+    {
+      "path": "src\\mvdm-host\\wow32\\wkman.c",
+      "actual": "57708c34a4d5892f5872963e79bdf27aa0410cc468b78019db93ee308024d252",
+      "queue": "4da0f527c7b807b2fa94dba88c2cb49201a01d5e5b071b15ef26a29b2975c493"
+    },
+    {
+      "path": "src\\mvdm-host\\wow32\\wmdisp32.c",
+      "actual": "2da35733ebc7631be67815e16a6e48846097a30dea623d8d104dc52a8f4e74b8",
+      "queue": "67d8e664f8db2aff4bb7138869e237ae450100214747a0a0e0ae95582c54158f"
+    },
+    {
+      "path": "src\\mvdm-host\\wow32\\wmsgcb.c",
+      "actual": "a949a029b2da94a1c3a831418f7442caccfc80b672e8a25aee69abc0943afdac",
+      "queue": "4dcb2ac3f2e432377b95b16e110ca83c6afc6df85556661c1045332aa9f1f53b"
+    },
+    {
+      "path": "src\\mvdm-host\\wow32\\wow32.c",
+      "actual": "2abb1dd15c9a97c6c4fb7c0808bfad806d26c6cebd16c69a63d5f4731f42c061",
+      "queue": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
+    },
+    {
+      "path": "src\\mvdm-host\\wow32\\wuclass.c",
+      "actual": "1c4c537bdca279cd997e099122f9b54937e92ca030f637c97f81eee93f4a4a56",
+      "queue": "ea32967cc39a7a400a783d4c1862a34b854ddb227bda951e4e62c91aabfa5155"
+    },
+    {
+      "path": "src\\non-mvdm\\base\\ntos\\ex\\probe.c",
+      "actual": "d5a4aa697600bba9c8d8a4be71103e88c548c6f93c7a6951c9c0557b978fd7d3",
+      "queue": "d90adbadd7b0d9937302509c577e5f846a05ba4562ccf02f7d6ddfb346e17f82"
+    },
+    {
+      "path": "src\\non-mvdm\\ds\\netapi\\xactsrv\\apimsg.c",
+      "actual": "2d820c06c3667fc73fafbcf5ad6324f3542b5d0f4f7018b4a33b5945282f06d7",
+      "queue": "f71cc24fde1c557386109d2b871e45d965d4410d61ac655f5776e7c9e7001aa1"
+    },
+    {
+      "path": "src\\non-mvdm\\windows\\core\\ntuser\\client\\clmsg.c",
+      "actual": "66efe6002f7731ec1bab0067c31c822db3c9ae70d9f67bc810e51f40e735e973",
+      "queue": "b18629e01f8b6f00e5667753b12b1498b821f40adb11e562cb1ab7e9226af52c"
+    },
+    {
+      "path": "src\\non-mvdm\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+      "actual": "12c43e3bd8abfd81ab6e61e033c9cbf2a2aa39372fc65ac3110603f6f825d18c",
+      "queue": "59441bf9bbd1e173632198a172f8f14273d417491c0616ee9fbca4c31db0ba43"
+    },
+    {
+      "path": "src\\non-mvdm\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "actual": "5da4eb58366fe15bb2e312956c48071b9377361e09b9a40b20f8c4a423be6a48",
+      "queue": "f4122df4a940d2493116297bf4760695aa38ea4c0235e170ea6967bc3c5f0474"
+    },
+    {
+      "path": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\getset.c",
+      "actual": "42a0eaabf60af5f3da3fcfa8e686a1d737a55a8913a07f254f348ae2b6f7c10b",
+      "queue": "09e2ea800d489f0a8364f10a906e97d04f62e8db3c22ef19d73a2343c4340bdb"
+    },
+    {
+      "path": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "actual": "f86e1cfd44d38827593b5e1f898fab73777315d2e32e0f387856a7bcf64d46ee",
+      "queue": "d1a7a880eb5ef0444b05609c537518c6c425a4932716b0fe60e34fd05d5a0a6e"
+    },
+    {
+      "path": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\server.c",
+      "actual": "fa1065b07677471fc32e2ee3d3961e2a3365bda04e5899e4ebb55963d1a70c44",
+      "queue": "9493d5c74f2a7e5360c05c991194fb54ceb85786e4f7a3689bac6f88e6319fc3"
+    }
+  ],
+  "limits": "Queue hash coherence only; does not prove source coverage, original identities or branch disposition."
+}

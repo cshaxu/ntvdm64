@@ -1,0 +1,36 @@
+{
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "before_sha256": "0ebc54f15b39628d9014c1a2179b5ffd53a4cf41d6155ae7a326d2e10a0bc3aa",
+      "after_sha256": "14286278fad14fcb21a961aa3108d398593072cc3694e22acc69b6ace1e7e646",
+      "original_lines": [
+        2624,
+        3751
+      ],
+      "original_owners": [
+        "LoadIcoCur",
+        "MatchImage"
+      ],
+      "original_evidence": "artifacts/mvdm-audit/s13-clres-r257-original-zero-guards.json",
+      "reason": "guard was installed outside omitted owning function; restore exact immediately prior bytes and return original groups to pending"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "before_sha256": "0ef86c4286f98a7bf79d1c1a97c41ad9411e3e82b37db9ecf7e23738df33962d",
+      "after_sha256": "66efe6002f7731ec1bab0067c31c822db3c9ae70d9f67bc810e51f40e735e973",
+      "original_lines": [
+        331,
+        453,
+        1777,
+        1803
+      ],
+      "original_owners": [
+        "SendMessageWorker",
+        "DispatchMessageWorker"
+      ],
+      "original_evidence": "artifacts/mvdm-audit/s13-clmsg-r258-original-fe-guards.json",
+      "reason": "guard was installed outside omitted owning function; restore exact immediately prior bytes and return original groups to pending"
+    }
+  ]
+}

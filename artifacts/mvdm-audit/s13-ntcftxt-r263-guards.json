@@ -1,0 +1,83 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+  "before_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+  "after_sha256": "48cd5dcf5dd20a16b03a26be4579b1594b7fc0d1c98a3b4664c33f7b36566ff6",
+  "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+  "groups": [
+    {
+      "original_line": 206,
+      "kind": "ifdef",
+      "else_line": 208,
+      "endif_line": 210,
+      "anchor": "#line 578"
+    },
+    {
+      "original_line": 243,
+      "kind": "ifdef",
+      "else_line": 245,
+      "endif_line": 247,
+      "anchor": "#line 578"
+    },
+    {
+      "original_line": 310,
+      "kind": "ifndef",
+      "else_line": 330,
+      "endif_line": 338,
+      "anchor": "#line 578"
+    },
+    {
+      "original_line": 353,
+      "kind": "ifdef",
+      "else_line": 356,
+      "endif_line": 358,
+      "anchor": "#line 578"
+    },
+    {
+      "original_line": 992,
+      "kind": "ifdef",
+      "else_line": 995,
+      "endif_line": 1001,
+      "anchor": "#line 1051"
+    },
+    {
+      "original_line": 1096,
+      "kind": "ifdef",
+      "else_line": 1098,
+      "endif_line": 1100,
+      "anchor": "#line 293"
+    },
+    {
+      "original_line": 1122,
+      "kind": "ifdef",
+      "else_line": 1124,
+      "endif_line": 1152,
+      "anchor": "#line 293"
+    },
+    {
+      "original_line": 1191,
+      "kind": "ifndef",
+      "else_line": 1207,
+      "endif_line": 1213,
+      "anchor": "#line 293"
+    },
+    {
+      "original_line": 1317,
+      "kind": "ifndef",
+      "else_line": 1349,
+      "endif_line": 1354,
+      "anchor": "#line 293"
+    },
+    {
+      "original_line": 1434,
+      "kind": "ifdef",
+      "else_line": 1449,
+      "endif_line": 1468,
+      "anchor": "#line 293"
+    }
+  ],
+  "selected_alternatives": "original enclosing functions absent from retained subset; pending",
+  "validation": "one actual x86 product preprocessing context identical; cached WOW32 build passed; 20 forced x86/x64 diagnostics passed",
+  "preprocessing": "s13-ntcftxt-r263-preprocess.json",
+  "forced_controls": "s13-ntcftxt-r263-controls.json",
+  "limits": "Selected original functions omitted; no guest recompilation, runtime or layer completion claimed."
+}

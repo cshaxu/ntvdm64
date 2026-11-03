@@ -146,7 +146,7 @@ ULONG FASTCALL WU32NotifyWow(PVDMFRAME pFrame)
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 172
+#line 170
 
                 //
                 // Return value tells User16 whether to thunk

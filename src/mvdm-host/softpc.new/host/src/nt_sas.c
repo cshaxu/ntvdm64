@@ -29,10 +29,12 @@ LOCAL    UTINY *reserve_for_M = NULL;
 #error DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register.
 #endif
 
+#line 33
 #ifdef HOST_SAS
+#line 34
 #error Unsupported excluded original configuration
 #endif /* HOST_SAS */
-#line 118
+#line 120
 
 /*
 	Host_sas_init: allocate intel memory space

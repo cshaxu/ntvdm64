@@ -1,0 +1,25 @@
+{
+  "controls": [
+    {
+      "line": 313,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 313,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 1067,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 1067,
+      "arch": "x64",
+      "exit": 2
+    }
+  ],
+  "limits": "isolated forced WOW profile; guest not tested"
+}

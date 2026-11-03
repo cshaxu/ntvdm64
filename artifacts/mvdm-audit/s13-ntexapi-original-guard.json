@@ -1,0 +1,21 @@
+{
+  "source": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntexapi.h",
+  "original_sha256": "d4bddfbf3eadd81cbf913a60108f1c7cb3362c6c51b042701bba43da6bb8e52a",
+  "candidate_sha256": "082316384723f6cfce62a5b5370e6cc0812badb71f11a005e03bdd39e3dbac33",
+  "guard": "_NTEXAPI_",
+  "prior_guard": "OPENNT_HOST_NTEXAPI_SUBSET_H",
+  "x86_preprocessed_sources": {
+    "nt_eoi": "caad6422f755f58cc029c831313cbb7e39dd58bbf276f57b49eb33615083aa95",
+    "timer": "00acc20d244c98d08b433b08a43d035bb023643d9de0890f32753d5d2d4bab0f",
+    "wkman": "5a9e6bb9c405ea3d00bc2af2989f7d49995e70e0612b6dbe265488dbb310a5fc"
+  },
+  "builds": [
+    "actual x86 worker",
+    "x64 configuration x86 reference worker",
+    "x86 WOW32"
+  ],
+  "guard_tests": "x86 and x64 pass",
+  "limitations": "three actual translation-unit preprocessing contexts; not all potential future SDK or unsupported test profiles",
+  "image_comparison": "s13-ntexapi-guard-image-comparison.json"
+}

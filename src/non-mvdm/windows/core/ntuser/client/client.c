@@ -197,3 +197,27 @@ LONG DispatchClientMessage(
 /* DIVERGENCE(OPENNT-HOST-038): remaining client entry points are excluded. */
 #endif
 
+
+
+#line 3494
+#ifdef FE_IME
+#line 3495
+#error Unsupported FE_IME original branch
+#endif
+#line 3503
+
+#line 642
+#ifdef DEBUG
+#line 643
+#error Unsupported DEBUG original branch
+#endif
+#line 645
+
+#line 2288
+#ifdef DEBUG
+#line 2289
+#error Unsupported DEBUG original branch
+#else
+#line 2291
+#endif
+#line 2293

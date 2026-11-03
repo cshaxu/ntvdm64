@@ -1,0 +1,315 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+  "removed_scaffolds": 51,
+  "reason": "outside omitted original functions, not uniquely anchored",
+  "pending_original_groups": [
+    {
+      "original_line": 352,
+      "original_else_line": 354,
+      "original_endif_line": 359,
+      "segment_before": "#line 6170"
+    },
+    {
+      "original_line": 390,
+      "original_else_line": 392,
+      "original_endif_line": 394,
+      "segment_before": "#line 6170"
+    },
+    {
+      "original_line": 563,
+      "original_else_line": 565,
+      "original_endif_line": 567,
+      "segment_before": "#line 6170"
+    },
+    {
+      "original_line": 715,
+      "original_else_line": 717,
+      "original_endif_line": 719,
+      "segment_before": "#line 6170"
+    },
+    {
+      "original_line": 738,
+      "original_else_line": 740,
+      "original_endif_line": 742,
+      "segment_before": "#line 6170"
+    },
+    {
+      "original_line": 964,
+      "original_else_line": 966,
+      "original_endif_line": 968,
+      "segment_before": "#line 6170"
+    },
+    {
+      "original_line": 1135,
+      "original_else_line": 1138,
+      "original_endif_line": 1141,
+      "segment_before": "#line 6170"
+    },
+    {
+      "original_line": 1229,
+      "original_else_line": 1231,
+      "original_endif_line": 1233,
+      "segment_before": "#line 6170"
+    },
+    {
+      "original_line": 1312,
+      "original_else_line": 1314,
+      "original_endif_line": 1316,
+      "segment_before": "#line 6170"
+    },
+    {
+      "original_line": 1957,
+      "original_else_line": 1959,
+      "original_endif_line": 1961,
+      "segment_before": "#line 6170"
+    },
+    {
+      "original_line": 2027,
+      "original_else_line": 2029,
+      "original_endif_line": 2031,
+      "segment_before": "#line 6170"
+    },
+    {
+      "original_line": 2112,
+      "original_else_line": 2114,
+      "original_endif_line": 2116,
+      "segment_before": "#line 6170"
+    },
+    {
+      "original_line": 2288,
+      "original_else_line": 2290,
+      "original_endif_line": 2292,
+      "segment_before": "#line 6170"
+    },
+    {
+      "original_line": 2369,
+      "original_else_line": 2371,
+      "original_endif_line": 2373,
+      "segment_before": "#line 6170"
+    },
+    {
+      "original_line": 2723,
+      "original_else_line": 2725,
+      "original_endif_line": 2727,
+      "segment_before": "#line 6170"
+    },
+    {
+      "original_line": 3107,
+      "original_else_line": 3109,
+      "original_endif_line": 3111,
+      "segment_before": "#line 6170"
+    },
+    {
+      "original_line": 3158,
+      "original_else_line": 3160,
+      "original_endif_line": 3162,
+      "segment_before": "#line 6170"
+    },
+    {
+      "original_line": 3446,
+      "original_else_line": 3448,
+      "original_endif_line": 3450,
+      "segment_before": "#line 6170"
+    },
+    {
+      "original_line": 3972,
+      "original_else_line": 3974,
+      "original_endif_line": 3976,
+      "segment_before": "#line 6170"
+    },
+    {
+      "original_line": 4318,
+      "original_else_line": 4320,
+      "original_endif_line": 4323,
+      "segment_before": "#line 6170"
+    },
+    {
+      "original_line": 4727,
+      "original_else_line": 4730,
+      "original_endif_line": 4733,
+      "segment_before": "#line 6170"
+    },
+    {
+      "original_line": 5472,
+      "original_else_line": 5474,
+      "original_endif_line": 5476,
+      "segment_before": "#line 6170"
+    },
+    {
+      "original_line": 5506,
+      "original_else_line": 5508,
+      "original_endif_line": 5510,
+      "segment_before": "#line 6170"
+    },
+    {
+      "original_line": 5768,
+      "original_else_line": 5770,
+      "original_endif_line": 5772,
+      "segment_before": "#line 6170"
+    },
+    {
+      "original_line": 5823,
+      "original_else_line": 5825,
+      "original_endif_line": 5827,
+      "segment_before": "#line 6170"
+    },
+    {
+      "original_line": 5986,
+      "original_else_line": 5988,
+      "original_endif_line": 5991,
+      "segment_before": "#line 6170"
+    },
+    {
+      "original_line": 6312,
+      "original_else_line": 6314,
+      "original_endif_line": 6317,
+      "segment_before": "#line 7261"
+    },
+    {
+      "original_line": 6417,
+      "original_else_line": 6435,
+      "original_endif_line": 6453,
+      "segment_before": "#line 7261"
+    },
+    {
+      "original_line": 6689,
+      "original_else_line": 6691,
+      "original_endif_line": 6693,
+      "segment_before": "#line 7261"
+    },
+    {
+      "original_line": 6929,
+      "original_else_line": 6932,
+      "original_endif_line": 6935,
+      "segment_before": "#line 7261"
+    },
+    {
+      "original_line": 6977,
+      "original_else_line": 6980,
+      "original_endif_line": 6983,
+      "segment_before": "#line 7261"
+    },
+    {
+      "original_line": 7026,
+      "original_else_line": 7031,
+      "original_endif_line": 7036,
+      "segment_before": "#line 7261"
+    },
+    {
+      "original_line": 7071,
+      "original_else_line": 7074,
+      "original_endif_line": 7077,
+      "segment_before": "#line 7261"
+    },
+    {
+      "original_line": 7102,
+      "original_else_line": 7104,
+      "original_endif_line": 7106,
+      "segment_before": "#line 7261"
+    },
+    {
+      "original_line": 7131,
+      "original_else_line": 7133,
+      "original_endif_line": 7135,
+      "segment_before": "#line 7261"
+    },
+    {
+      "original_line": 7161,
+      "original_else_line": 7163,
+      "original_endif_line": 7165,
+      "segment_before": "#line 7261"
+    },
+    {
+      "original_line": 7188,
+      "original_else_line": 7190,
+      "original_endif_line": 7192,
+      "segment_before": "#line 7261"
+    },
+    {
+      "original_line": 7333,
+      "original_else_line": 7335,
+      "original_endif_line": 7337,
+      "segment_before": "#line 8377"
+    },
+    {
+      "original_line": 7363,
+      "original_else_line": 7365,
+      "original_endif_line": 7367,
+      "segment_before": "#line 8377"
+    },
+    {
+      "original_line": 7439,
+      "original_else_line": 7441,
+      "original_endif_line": 7443,
+      "segment_before": "#line 8377"
+    },
+    {
+      "original_line": 7917,
+      "original_else_line": 7919,
+      "original_endif_line": 7921,
+      "segment_before": "#line 8377"
+    },
+    {
+      "original_line": 8558,
+      "original_else_line": 8561,
+      "original_endif_line": 8564,
+      "segment_before": "#line 268"
+    },
+    {
+      "original_line": 8571,
+      "original_else_line": 8574,
+      "original_endif_line": 8577,
+      "segment_before": "#line 268"
+    },
+    {
+      "original_line": 8687,
+      "original_else_line": 8689,
+      "original_endif_line": 8692,
+      "segment_before": "#line 268"
+    },
+    {
+      "original_line": 8747,
+      "original_else_line": 8749,
+      "original_endif_line": 8752,
+      "segment_before": "#line 268"
+    },
+    {
+      "original_line": 9237,
+      "original_else_line": 9239,
+      "original_endif_line": 9242,
+      "segment_before": "#line 268"
+    },
+    {
+      "original_line": 9303,
+      "original_else_line": 9305,
+      "original_endif_line": 9308,
+      "segment_before": "#line 268"
+    },
+    {
+      "original_line": 9354,
+      "original_else_line": 9356,
+      "original_endif_line": 9359,
+      "segment_before": "#line 268"
+    },
+    {
+      "original_line": 9395,
+      "original_else_line": 9397,
+      "original_endif_line": 9399,
+      "segment_before": "#line 268"
+    },
+    {
+      "original_line": 9435,
+      "original_else_line": 9438,
+      "original_endif_line": 9441,
+      "segment_before": "#line 268"
+    },
+    {
+      "original_line": 9558,
+      "original_else_line": 9561,
+      "original_endif_line": 9564,
+      "segment_before": "#line 268"
+    }
+  ],
+  "source_sha256": "69f97773e1cb92b423683f0bbb639ca6b31d621d5fbce71b0aa3dbfa6fe750be",
+  "candidate_full_pass_predates_withdrawal": true
+}

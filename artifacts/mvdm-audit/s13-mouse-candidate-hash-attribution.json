@@ -1,0 +1,7 @@
+{
+  "scope": "explain current S13 candidate relative to pre-candidate queue snapshot",
+  "mouse_source_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+  "virtual_source_sha256": "61cbc5cb4fdd0de86b1b821fef65358f4cfe6c42b3d164b4d93f1d7d697db500",
+  "finding": "Current worktree reintroduces unpublished DIV-467/468 candidate after its earlier S11 withdrawal; mouse_io has two virtual_swap_instance calls. It is registered as an S13 candidate in src/mvdm-host/README.md and included in the documented isolated candidate/full-test lineage.",
+  "limitations": "The candidate is not proven equivalent to original multi-VM semantics and is not thereby approved for default release. This records origin only; no source change, publication, or blanket branch classification."
+}

@@ -1,0 +1,17 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+  "old_commit": "HEAD exact recorded baseline",
+  "old_sha256": "fdffc12447832ad019b849c58b20b67c9b1683b95f2f5620ff67058d081729a8",
+  "current_sha256": "435a8ae75b59748894429f19e197a083f9bb795596a9b9ad48c9d38801256d08",
+  "method": "MSVC /EP, exact Ninja target flags, identical scratch source path; nonblank stripped lines hashed. ntSend.h copied without modification.",
+  "contexts": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/profile.obj",
+      "old_sha256": "3908ba3c86749ce14cd495e2dfb29050d4e1b47563bc47da9db4a65489eabab2",
+      "current_sha256": "3908ba3c86749ce14cd495e2dfb29050d4e1b47563bc47da9db4a65489eabab2",
+      "equal": true
+    }
+  ],
+  "limits": "Tests selected preprocessed text only; excludes diagnostics and does not establish other contexts, link or runtime behavior."
+}

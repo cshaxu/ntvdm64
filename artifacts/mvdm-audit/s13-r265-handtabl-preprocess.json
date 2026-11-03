@@ -1,0 +1,17 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+  "old_commit": "build-owned immediate pre-edit snapshot",
+  "old_sha256": "f86e1cfd44d38827593b5e1f898fab73777315d2e32e0f387856a7bcf64d46ee",
+  "current_sha256": "8b5bf0623ccfdc3eecf64e2648dc17704e9b6b653b2025c4be1466477e870965",
+  "method": "MSVC /EP, exact Ninja target flags, identical scratch source path; nonblank stripped lines hashed. ntSend.h copied without modification.",
+  "contexts": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/handtabl.obj",
+      "old_sha256": "f53e66c56cbfffc2c916c1d5d31bcb6db952558f9c5e7bf37a2720e689fd33fb",
+      "current_sha256": "f53e66c56cbfffc2c916c1d5d31bcb6db952558f9c5e7bf37a2720e689fd33fb",
+      "equal": true
+    }
+  ],
+  "limits": "Tests selected preprocessed text only; excludes diagnostics and does not establish other contexts, link or runtime behavior."
+}

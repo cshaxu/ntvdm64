@@ -1,0 +1,37 @@
+{
+  "source": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+  "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+  "before_sha256": "67cea7498083e74a51816f501e8887f711e17e7f765973badc327e04f7bbd48b",
+  "after_sha256": "9debd71995948be2fabceb646f973f3f32fed215f73d41749846089e43a3546b",
+  "changes": [
+    {
+      "current_if_line": 224,
+      "original_if_line": 220,
+      "current_marker_line": 227,
+      "original_endif_line": 510,
+      "previous": 514,
+      "corrected": 511,
+      "verified_following_lines": 3
+    },
+    {
+      "current_if_line": 369,
+      "original_if_line": 675,
+      "current_marker_line": 372,
+      "original_endif_line": 686,
+      "previous": 696,
+      "corrected": 687,
+      "verified_following_lines": 3
+    },
+    {
+      "current_if_line": 519,
+      "original_if_line": 974,
+      "current_marker_line": 522,
+      "original_endif_line": 1204,
+      "previous": 1202,
+      "corrected": 1205,
+      "verified_following_lines": 3
+    }
+  ],
+  "limits": "original X86GFX group pairing based on preceding retained source and identical continuation; other unmatched groups remain open"
+}

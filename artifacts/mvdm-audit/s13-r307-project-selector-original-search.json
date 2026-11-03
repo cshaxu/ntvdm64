@@ -1,0 +1,407 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "current_line": 287,
+      "labels": [
+        "MVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION"
+      ],
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_msscs.c",
+      "original_sha256": "96ee0fb677da9f35811f9dc1715d583474ce72bba9fa91f5eb2d5f6ab242b0c3",
+      "original_token_occurrences": {
+        "MVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION": 0
+      },
+      "arm_statuses": [
+        "retained-observed",
+        "newly-excluded"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "current_line": 267,
+      "labels": [
+        "WOW_USER_PRIVATE_REDIRECT"
+      ],
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuclass.c",
+      "original_sha256": "12cdd44dfec6b74a426165977f941da86d90bbad7aa9c59a085010d02528629d",
+      "original_token_occurrences": {
+        "WOW_USER_PRIVATE_REDIRECT": 0
+      },
+      "arm_statuses": [
+        "retained-observed",
+        "newly-excluded"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "current_line": 278,
+      "labels": [
+        "WOW_USER_PRIVATE_REDIRECT"
+      ],
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuclass.c",
+      "original_sha256": "12cdd44dfec6b74a426165977f941da86d90bbad7aa9c59a085010d02528629d",
+      "original_token_occurrences": {
+        "WOW_USER_PRIVATE_REDIRECT": 0
+      },
+      "arm_statuses": [
+        "retained-observed"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "current_line": 283,
+      "labels": [
+        "WOW_USER_PRIVATE_REDIRECT"
+      ],
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuclass.c",
+      "original_sha256": "12cdd44dfec6b74a426165977f941da86d90bbad7aa9c59a085010d02528629d",
+      "original_token_occurrences": {
+        "WOW_USER_PRIVATE_REDIRECT": 0
+      },
+      "arm_statuses": [
+        "retained-observed"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "current_line": 731,
+      "labels": [
+        "WOW_USER_PRIVATE_REDIRECT"
+      ],
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuclass.c",
+      "original_sha256": "12cdd44dfec6b74a426165977f941da86d90bbad7aa9c59a085010d02528629d",
+      "original_token_occurrences": {
+        "WOW_USER_PRIVATE_REDIRECT": 0
+      },
+      "arm_statuses": [
+        "retained-observed"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "current_line": 744,
+      "labels": [
+        "WOW_USER_PRIVATE_REDIRECT"
+      ],
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuclass.c",
+      "original_sha256": "12cdd44dfec6b74a426165977f941da86d90bbad7aa9c59a085010d02528629d",
+      "original_token_occurrences": {
+        "WOW_USER_PRIVATE_REDIRECT": 0
+      },
+      "arm_statuses": [
+        "retained-observed",
+        "newly-excluded"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "current_line": 774,
+      "labels": [
+        "WOW_USER_PRIVATE_REDIRECT"
+      ],
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuclass.c",
+      "original_sha256": "12cdd44dfec6b74a426165977f941da86d90bbad7aa9c59a085010d02528629d",
+      "original_token_occurrences": {
+        "WOW_USER_PRIVATE_REDIRECT": 0
+      },
+      "arm_statuses": [
+        "retained-observed",
+        "newly-excluded"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "current_line": 786,
+      "labels": [
+        "WOW_USER_PRIVATE_REDIRECT"
+      ],
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuclass.c",
+      "original_sha256": "12cdd44dfec6b74a426165977f941da86d90bbad7aa9c59a085010d02528629d",
+      "original_token_occurrences": {
+        "WOW_USER_PRIVATE_REDIRECT": 0
+      },
+      "arm_statuses": [
+        "retained-observed"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "current_line": 791,
+      "labels": [
+        "WOW_USER_PRIVATE_REDIRECT"
+      ],
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuclass.c",
+      "original_sha256": "12cdd44dfec6b74a426165977f941da86d90bbad7aa9c59a085010d02528629d",
+      "original_token_occurrences": {
+        "WOW_USER_PRIVATE_REDIRECT": 0
+      },
+      "arm_statuses": [
+        "retained-observed"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "current_line": 1699,
+      "labels": [
+        "WOW_USER_PRIVATE_REDIRECT"
+      ],
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuwind.c",
+      "original_sha256": "ab270e2669cfd383da4baac471bb63e7c9c603581f4f7592ad447e8a783953dc",
+      "original_token_occurrences": {
+        "WOW_USER_PRIVATE_REDIRECT": 0
+      },
+      "arm_statuses": [
+        "retained-observed",
+        "newly-excluded"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "current_line": 1710,
+      "labels": [
+        "WOW_USER_PRIVATE_REDIRECT"
+      ],
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuwind.c",
+      "original_sha256": "ab270e2669cfd383da4baac471bb63e7c9c603581f4f7592ad447e8a783953dc",
+      "original_token_occurrences": {
+        "WOW_USER_PRIVATE_REDIRECT": 0
+      },
+      "arm_statuses": [
+        "retained-observed"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "current_line": 1715,
+      "labels": [
+        "WOW_USER_PRIVATE_REDIRECT"
+      ],
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuwind.c",
+      "original_sha256": "ab270e2669cfd383da4baac471bb63e7c9c603581f4f7592ad447e8a783953dc",
+      "original_token_occurrences": {
+        "WOW_USER_PRIVATE_REDIRECT": 0
+      },
+      "arm_statuses": [
+        "retained-observed"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "current_line": 2462,
+      "labels": [
+        "WOW_USER_PRIVATE_REDIRECT"
+      ],
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuwind.c",
+      "original_sha256": "ab270e2669cfd383da4baac471bb63e7c9c603581f4f7592ad447e8a783953dc",
+      "original_token_occurrences": {
+        "WOW_USER_PRIVATE_REDIRECT": 0
+      },
+      "arm_statuses": [
+        "retained-observed"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "current_line": 2475,
+      "labels": [
+        "WOW_USER_PRIVATE_REDIRECT"
+      ],
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuwind.c",
+      "original_sha256": "ab270e2669cfd383da4baac471bb63e7c9c603581f4f7592ad447e8a783953dc",
+      "original_token_occurrences": {
+        "WOW_USER_PRIVATE_REDIRECT": 0
+      },
+      "arm_statuses": [
+        "retained-observed",
+        "newly-excluded"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "current_line": 2513,
+      "labels": [
+        "WOW_USER_PRIVATE_REDIRECT"
+      ],
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuwind.c",
+      "original_sha256": "ab270e2669cfd383da4baac471bb63e7c9c603581f4f7592ad447e8a783953dc",
+      "original_token_occurrences": {
+        "WOW_USER_PRIVATE_REDIRECT": 0
+      },
+      "arm_statuses": [
+        "retained-observed",
+        "newly-excluded"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "current_line": 2530,
+      "labels": [
+        "WOW_USER_PRIVATE_REDIRECT"
+      ],
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuwind.c",
+      "original_sha256": "ab270e2669cfd383da4baac471bb63e7c9c603581f4f7592ad447e8a783953dc",
+      "original_token_occurrences": {
+        "WOW_USER_PRIVATE_REDIRECT": 0
+      },
+      "arm_statuses": [
+        "retained-observed"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "current_line": 2535,
+      "labels": [
+        "WOW_USER_PRIVATE_REDIRECT"
+      ],
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuwind.c",
+      "original_sha256": "ab270e2669cfd383da4baac471bb63e7c9c603581f4f7592ad447e8a783953dc",
+      "original_token_occurrences": {
+        "WOW_USER_PRIVATE_REDIRECT": 0
+      },
+      "arm_statuses": [
+        "retained-observed"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/time.c",
+      "current_line": 61,
+      "labels": [
+        "MVDM_STANDALONE_TIME1970_ONLY"
+      ],
+      "original": "O:\\repos.external\\OpenNT\\base\\ntos\\rtl\\time.c",
+      "original_sha256": "ac422e072432aff83c17b03c2127a80d067e801170eba9216ab86d2520767d40",
+      "original_token_occurrences": {
+        "MVDM_STANDALONE_TIME1970_ONLY": 0
+      },
+      "arm_statuses": [
+        "retained-observed",
+        "newly-excluded"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/basesrv.h",
+      "current_line": 30,
+      "labels": [
+        "OPENNT_BASE_VDM_SERVER"
+      ],
+      "original": "O:\\repos.external\\OpenNT\\base\\win32\\server\\basesrv.h",
+      "original_sha256": "a6863d6360830149e0b4895423f3d0f8a8e13326d784821d88b433ff849f3e31",
+      "original_token_occurrences": {
+        "OPENNT_BASE_VDM_SERVER": 0
+      },
+      "arm_statuses": [
+        "retained-observed"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/basesrv.h",
+      "current_line": 231,
+      "labels": [
+        "OPENNT_BASE_VDM_SERVER"
+      ],
+      "original": "O:\\repos.external\\OpenNT\\base\\win32\\server\\basesrv.h",
+      "original_sha256": "a6863d6360830149e0b4895423f3d0f8a8e13326d784821d88b433ff849f3e31",
+      "original_token_occurrences": {
+        "OPENNT_BASE_VDM_SERVER": 0
+      },
+      "arm_statuses": [
+        "newly-excluded"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "current_line": 570,
+      "labels": [
+        "WOW_NATIVE_DIALOG_PROCEDURE_OWNER"
+      ],
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgbegin.c",
+      "original_sha256": "c3df77a2987e97df8872c3dab8f6e7c10a08850c5ebcb439c0ec1dc88b0cdc44",
+      "original_token_occurrences": {
+        "WOW_NATIVE_DIALOG_PROCEDURE_OWNER": 0
+      },
+      "arm_statuses": [
+        "retained-observed"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "current_line": 616,
+      "labels": [
+        "WOW_NATIVE_DIALOG_PROCEDURE_OWNER"
+      ],
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgbegin.c",
+      "original_sha256": "c3df77a2987e97df8872c3dab8f6e7c10a08850c5ebcb439c0ec1dc88b0cdc44",
+      "original_token_occurrences": {
+        "WOW_NATIVE_DIALOG_PROCEDURE_OWNER": 0
+      },
+      "arm_statuses": [
+        "retained-observed",
+        "newly-excluded"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "current_line": 636,
+      "labels": [
+        "WOW_NATIVE_DIALOG_PROCEDURE_OWNER"
+      ],
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgbegin.c",
+      "original_sha256": "c3df77a2987e97df8872c3dab8f6e7c10a08850c5ebcb439c0ec1dc88b0cdc44",
+      "original_token_occurrences": {
+        "WOW_NATIVE_DIALOG_PROCEDURE_OWNER": 0
+      },
+      "arm_statuses": [
+        "newly-excluded"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "current_line": 56,
+      "labels": [
+        "WOW_NATIVE_DIALOG_PROCEDURE_OWNER"
+      ],
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\getset.c",
+      "original_sha256": "f0d22e4285e8b33b873854913a11587c67d78e50e1f5db28ec89ef8b6ff06d3d",
+      "original_token_occurrences": {
+        "WOW_NATIVE_DIALOG_PROCEDURE_OWNER": 0
+      },
+      "arm_statuses": [
+        "retained-observed",
+        "retained-observed"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "current_line": 51,
+      "labels": [
+        "WOW_NATIVE_DIALOG_PROCEDURE_OWNER"
+      ],
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\getset.c",
+      "original_sha256": "4a2cb2067f5dd776676d7f808f40f6468082db018e16bcf9a77daf00bddb34c9",
+      "original_token_occurrences": {
+        "WOW_NATIVE_DIALOG_PROCEDURE_OWNER": 0
+      },
+      "arm_statuses": [
+        "retained-observed",
+        "retained-observed"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "current_line": 90,
+      "labels": [
+        "WOW_NATIVE_DIALOG_PROCEDURE_OWNER"
+      ],
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\getset.c",
+      "original_sha256": "4a2cb2067f5dd776676d7f808f40f6468082db018e16bcf9a77daf00bddb34c9",
+      "original_token_occurrences": {
+        "WOW_NATIVE_DIALOG_PROCEDURE_OWNER": 0
+      },
+      "arm_statuses": [
+        "retained-observed",
+        "retained-observed"
+      ]
+    }
+  ],
+  "limits": "exact token search in corresponding pinned source only; local guard purpose and supported profile still require evidence"
+}

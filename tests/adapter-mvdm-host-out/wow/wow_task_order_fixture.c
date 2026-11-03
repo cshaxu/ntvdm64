@@ -24,6 +24,15 @@ static void fixture_print(const char *format, ...)
 
 static unsigned errors;
 #define CHECK(x) do { if (!(x)) { ++errors; printf("FAIL line=%d\n",__LINE__); } } while (0)
+static BOOL is_invalid_handle(HANDLE handle)
+{
+    DWORD flags;
+    __try {
+        return !GetHandleInformation(handle, &flags) && GetLastError() == ERROR_INVALID_HANDLE;
+    } __except (GetExceptionCode() == (DWORD)0xc0000008 ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
+        return TRUE;
+    }
+}
 static void order(wow_task_order_state *state, wow_task_order_entry **expected, unsigned count)
 {
     wow_task_order_entry *p=state->ptdbHead;
@@ -140,12 +149,12 @@ static void destruction(void)
         wow_task_order_entry *owned;
         wow_task_order_waiter *waiter;
         HANDLE observer=NULL,retained=NULL;
-        DWORD flags;
         owned=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*owned));
         waiter=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*waiter));
         CHECK(owned && waiter);
         if(!owned || !waiter) ExitProcess(99);
         observer=CreateEventW(NULL,FALSE,FALSE,NULL);
+        CHECK(!is_invalid_handle(observer));
         CHECK(DuplicateHandle(GetCurrentProcess(),observer,GetCurrentProcess(),
             &retained,0,FALSE,DUPLICATE_SAME_ACCESS));
         waiter->pIdleEvent=retained;sentinel.pwtiNext=waiter;
@@ -176,7 +185,7 @@ static void destruction(void)
         if(mode!=4) {
             CHECK(shared.pwtiFirst==&sentinel && sentinel.pwtiNext==NULL);
             CHECK(WaitForSingleObject(observer,0)==(mode>=5 ? WAIT_TIMEOUT : WAIT_OBJECT_0));
-            if(mode<5) CHECK(!GetHandleInformation(retained,&flags) && GetLastError()==ERROR_INVALID_HANDLE);
+            if(mode<5) CHECK(is_invalid_handle(retained));
         }
         if(mode==0) CHECK(state.ptiScheduled==&next && state.nTaskLock==2 && state.CSLockCount==0);
         else CHECK(state.ptiScheduled==NULL && state.nTaskLock==0 &&

@@ -1,0 +1,13 @@
+{
+  "source": "src/non-mvdm/base/win32/client/vdm.c",
+  "sha256": "3ca9b5fd37a801a6707bc86861ac296274a50c777a2f0fe414a6a9eba11e8bdf",
+  "original_guards": [
+    205,
+    259
+  ],
+  "selected": "_X86_ guest NE classification retained; _MIPS_ unsupported; original selected else retained",
+  "build": "x86 worker and x64 hook compiled",
+  "test": "x86 first-depth guard suite passed",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r201.zip",
+  "preprocessing": "pre-change and current nonblank output match for actual x86 worker and x64 hook classifier commands"
+}

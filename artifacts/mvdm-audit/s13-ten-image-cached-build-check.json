@@ -1,0 +1,92 @@
+{
+  "scope": "cached outer x86/x64 graphs and explicit inner ten product targets; unsealed build outputs",
+  "images": [
+    {
+      "name": "run16.exe",
+      "candidate": "build/.ninja/msvc-x64-release/launcher/run16.exe",
+      "candidate_sha256": "366af76c38d137a5570e0888d49e14e657ed493739d0bc7d82a5a5284fd88c17",
+      "release_sha256": "9813b7123f3ffadb83fbcaee14399695698037e2fecc2202eb471a2a1d852872"
+    },
+    {
+      "name": "ntsrv.exe",
+      "candidate": "build/.ninja/msvc-x64-release/service/ntsrv.exe",
+      "candidate_sha256": "93ae4fc3dbbaeef7e052acfc0cca3091669a8ac2d6ae1144d73a0d380c2fc236",
+      "release_sha256": "874749f49dc5296dc13da300179c33d9c9f3ad114dd07d0d92956f84fb693dd1"
+    },
+    {
+      "name": "ntcon.exe",
+      "candidate": "build/.ninja/msvc-x64-release/frontend/ntcon.exe",
+      "candidate_sha256": "bdfa79bef4a3ce354c356371a2418f956da91b2b198057737474dac8f2c2ef94",
+      "release_sha256": "5cb2ba21844cd873f7e87ec2d0b9e225fb19b18eda92a28ba22d745c14cb81ce"
+    },
+    {
+      "name": "ntvdm.exe",
+      "candidate": "build/.ninja/msvc-x86-release/worker/ntvdm.exe",
+      "candidate_sha256": "3340bb52667f667ca538431b927aa355f5ccbbc2159432feb14a6a86a7853da2",
+      "release_sha256": "2ad792229ed752af4ca83ae96b44acc7a2fc6f08b213e1117767eed8a7e55acd"
+    },
+    {
+      "name": "ntvwm.exe",
+      "candidate": "build/.ninja/msvc-x64-release/worker/ntvwm.exe",
+      "candidate_sha256": "8936587f142086c664952817bc5d01edf7ac93a143169a8e96bdd5edbea9df1e",
+      "release_sha256": "684b501e1b025f4e8dc54e6ae837a71fdba4a2dcd3cf8f2909b788a206a9532e"
+    },
+    {
+      "name": "ntmon.exe",
+      "candidate": "build/.ninja/msvc-x64-release/monitor/ntmon.exe",
+      "candidate_sha256": "b6b88ebdc852e9fccdc1bbf6a26f98701a8984c7c6c1dc06c403497322d3d5d1",
+      "release_sha256": "4df75031a7d19a6c853b680476d0c3fbd7a200fd60d85a1dce1e96f099f8c345"
+    },
+    {
+      "name": "WOW32.DLL",
+      "candidate": "build/.ninja/msvc-x86-release/wow32/wow32.dll",
+      "candidate_sha256": "a650e72068d227fbf5d53585cdc3c2168d866b3f6b823a7f7a8310d1da3c4a08",
+      "release_sha256": "28041efd27e721c2b2ae18a5e51bbf05c1cfd49c718fe3faa26f6c5d4dc88973"
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "candidate": "build/.ninja/msvc-x86-release/worker/VDMREDIR.dll",
+      "candidate_sha256": "b02ec55bb07f7213f0070b8e4604525bdcac0b40e745f3a3669919d714913120",
+      "release_sha256": "681f34741e0ecc446da044ec608c1c24df10fb305db8df7688003637a5844140"
+    },
+    {
+      "name": "nthook32.dll",
+      "candidate": "build/.ninja/msvc-x86-release/worker/nthook32.dll",
+      "candidate_sha256": "6c065b88229f9f271e71048b1dd3c4d8e805d94c3c3120d4d48e362ada8d3732",
+      "release_sha256": "25f4fb75bdf2e83fb8eecf8c5d0188bc7ee5940b6ab01778f1e1fe90ea9549fb"
+    },
+    {
+      "name": "nthook64.dll",
+      "candidate": "build/.ninja/msvc-x64-release/hook/nthook64.dll",
+      "candidate_sha256": "ec0cce3a049794465eb87e26f2534fe73496c9c513a54358e12a6fcf02e48943",
+      "release_sha256": "19360df7cfd568416020926f955cef964c8d232df898e71a24b3bfaf32662407"
+    }
+  ],
+  "logs": [
+    {
+      "name": "whole-cache-build-x86.log",
+      "sha256": "0a50bcb1ad256de0084dbe60cfdbd2725849f07dba323e81330bbdb9e3340327"
+    },
+    {
+      "name": "whole-cache-build-x64.log",
+      "sha256": "60c66494fb9461cc9f2903a2f98ad78c016e4c7df2b42dcc3a87410c4110ef73"
+    },
+    {
+      "name": "whole-inner-x86.log",
+      "sha256": "fc813ea72cb45d1ec1bd13143e7e020e0fdf4fb3c10c37b876c735f583eff1cb"
+    },
+    {
+      "name": "whole-inner-x64.log",
+      "sha256": "bb3a142340a02ca3a84a07c5b108f5d861b245d4e016e5d95e1b35725618461d"
+    },
+    {
+      "name": "whole-inner-vdmredir.log",
+      "sha256": "ac105aec32496a9e470a5dffa07b0bf87861dd78c1e025cd05e636512893e5c7"
+    }
+  ],
+  "limitations": [
+    "raw output hashes are not a comparison after uniform package identity",
+    "no runtime testing, staging, publishing, or release acceptance implied",
+    "reference x86 worker had been built earlier; current build is not a new full phase gate"
+  ]
+}

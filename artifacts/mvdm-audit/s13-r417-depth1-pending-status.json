@@ -1,0 +1,23 @@
+{
+  "input_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r359.zip",
+  "input_sha256": "dfeb93067a93a6e18a3107a54e2a086a31a6bcbc1178c129d56284840fc376b5",
+  "counts": {
+    "files": 1110,
+    "current_groups": 3458,
+    "original_groups": 3493,
+    "current_pending_arms": 10,
+    "original_pending_arms": 325,
+    "original_pending_groups": 225,
+    "original_pending_by_structure": {
+      "byte-identical-original": 4,
+      "pending-original-scope": 139,
+      "pending-reconciliation-of-retained-adaptation": 2,
+      "unclassified": 21,
+      "boundary-restored-selected-content-omitted": 5,
+      "pending-original-function-scope": 2,
+      "verified-original-boundary-omitted-function-pending": 51,
+      "boundary-restored-selected-function-omitted": 1
+    }
+  },
+  "meaning": "Queue counts are status records, not independently proved reachability. Original conditions from omitted function scopes and selected local header adaptations remain unresolved. Counts cannot be summed across original and current as independent work."
+}

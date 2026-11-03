@@ -1,0 +1,78 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+  "before_sha256": "90130a4bf093ddb698dec81f104c349325923c8f0c7e0f5bb7cd29627a7a67a1",
+  "after_sha256": "050ceffcaef47d4964ffca9748cffe1cc56c21fac880779a9221d27d44f01a46",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c",
+  "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
+  "items": [
+    {
+      "original_condition_line": 1480,
+      "original_body_line": 1481,
+      "original_else_line": null,
+      "original_endif_line": 1483,
+      "original_continuation_line": 1484,
+      "current_condition_line": 1067,
+      "original_owner": "CreateIconFromResourceEx",
+      "owner_omitted": true
+    },
+    {
+      "original_condition_line": 2298,
+      "original_body_line": 2299,
+      "original_else_line": null,
+      "original_endif_line": 2301,
+      "original_continuation_line": 2302,
+      "current_condition_line": 1074,
+      "original_owner": "LoadImageW",
+      "owner_omitted": true
+    },
+    {
+      "original_condition_line": 2624,
+      "original_body_line": 2625,
+      "original_else_line": 2626,
+      "original_endif_line": 2628,
+      "original_continuation_line": 2629,
+      "current_condition_line": 1081,
+      "original_owner": "LoadIcoCur",
+      "owner_omitted": true
+    },
+    {
+      "original_condition_line": 3751,
+      "original_body_line": 3752,
+      "original_else_line": 3757,
+      "original_endif_line": 3762,
+      "original_continuation_line": 3763,
+      "current_condition_line": 1090,
+      "original_owner": "MatchImage",
+      "owner_omitted": true
+    },
+    {
+      "original_condition_line": 4516,
+      "original_body_line": 4517,
+      "original_else_line": null,
+      "original_endif_line": 4519,
+      "original_continuation_line": 4520,
+      "current_condition_line": 1099,
+      "original_owner": "InternalCopyImage",
+      "owner_omitted": true
+    },
+    {
+      "original_condition_line": 4574,
+      "original_body_line": 4575,
+      "original_else_line": null,
+      "original_endif_line": 4577,
+      "original_continuation_line": 4578,
+      "current_condition_line": 1106,
+      "original_owner": "RtlGetIdFromDirectory",
+      "owner_omitted": true
+    }
+  ],
+  "placement": "file-scope after retained current subset; original source order is not reproducible without moving the existing reordered functions; the original C functions and their lexical scopes remain omitted",
+  "scope": "restores outer preprocessor guard and empty selected alternative only; no claim of function restoration or recovered selected implementation",
+  "verification": {
+    "build": "x86 NTVDM, x64 reference worker, x86 WOW32 passed: build/t473-s13/r425-build.log",
+    "conditions": "x86 build/t473-s13/r425-tests.log and x64 build/t473-s13/r426-x64.log passed; six guards include selected and forced-error line controls",
+    "package": "s13-r425-package-compare.json: 82 files identical to r421; WOW32 differs only in 4 PE/debug timestamp bytes",
+    "queue": "1,110 hashes match; 2,343 excluded arms scanned without detected remnants or stale positions",
+    "limitations": "Original enclosing C functions and two selected else implementations remain omitted. File-scope preprocessing placement and reordered original functions are recorded; no depth closure or publication claimed."
+  }
+}

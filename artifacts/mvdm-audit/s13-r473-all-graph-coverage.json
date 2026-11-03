@@ -1,0 +1,114 @@
+{
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r375.zip",
+  "graphs": [
+    {
+      "graph": "build\\.ninja\\msvc-x64-release\\build.ninja",
+      "sha256": "d98ce45a0d63ca99f4f438b76f5bef907d983738b9b0db89049c36d35da763ac",
+      "explicit_sources": 4,
+      "missing_sources": [],
+      "observed_dependencies": 0,
+      "missing_dependencies": [],
+      "deps_error": null
+    },
+    {
+      "graph": "build\\.ninja\\msvc-x64-release\\frontend\\build.ninja",
+      "sha256": "de2e799b4fcf9d4a44b6a85a060933ac18095d69cf6bad88453afd843cb763e3",
+      "explicit_sources": 0,
+      "missing_sources": [],
+      "observed_dependencies": 16,
+      "missing_dependencies": [],
+      "deps_error": null
+    },
+    {
+      "graph": "build\\.ninja\\msvc-x64-release\\hook\\build.ninja",
+      "sha256": "86957a52bb51b4ca65c75852c180635e63c8604abfe4b2dc300e4ca278f902dd",
+      "explicit_sources": 2,
+      "missing_sources": [],
+      "observed_dependencies": 7,
+      "missing_dependencies": [],
+      "deps_error": null
+    },
+    {
+      "graph": "build\\.ninja\\msvc-x64-release\\launcher\\build.ninja",
+      "sha256": "b8311977f1dfeeaca03ec46b04947d7e9cb01da7d6e44ce62847b55f050c17fd",
+      "explicit_sources": 4,
+      "missing_sources": [],
+      "observed_dependencies": 17,
+      "missing_dependencies": [],
+      "deps_error": null
+    },
+    {
+      "graph": "build\\.ninja\\msvc-x64-release\\service\\build.ninja",
+      "sha256": "1aececf900a17fceafd125c397ded64107cbb0fa3eb062b18adf951db4f04d1a",
+      "explicit_sources": 3,
+      "missing_sources": [],
+      "observed_dependencies": 17,
+      "missing_dependencies": [],
+      "deps_error": null
+    },
+    {
+      "graph": "build\\.ninja\\msvc-x64-release\\worker\\build.ninja",
+      "sha256": "a4e284175f22876724160192dde76e338599ac52a2e415b20546dca7da5188e5",
+      "explicit_sources": 1,
+      "missing_sources": [],
+      "observed_dependencies": 17,
+      "missing_dependencies": [],
+      "deps_error": null
+    },
+    {
+      "graph": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja",
+      "sha256": "88af1765f34b1f312fbb2d5a9bd97140ff17b34aa64a3aebcecceb8cd8539ca8",
+      "explicit_sources": 396,
+      "missing_sources": [],
+      "observed_dependencies": 394,
+      "missing_dependencies": [],
+      "deps_error": null
+    },
+    {
+      "graph": "build\\.ninja\\msvc-x86-redir-contract\\build.ninja",
+      "sha256": "2a498ffd4e91b9647e321a23e349b3059a57e9a9dcb5f3f0aae33f000e687593",
+      "explicit_sources": 7,
+      "missing_sources": [],
+      "observed_dependencies": 23,
+      "missing_dependencies": [],
+      "deps_error": null
+    },
+    {
+      "graph": "build\\.ninja\\msvc-x86-release\\build.ninja",
+      "sha256": "683019e2f7cd95bdba27ce829ca2ce3880e1a92b08b6f78ba277f81647a0dd8d",
+      "explicit_sources": 4,
+      "missing_sources": [],
+      "observed_dependencies": 0,
+      "missing_dependencies": [],
+      "deps_error": null
+    },
+    {
+      "graph": "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja",
+      "sha256": "94312559ea82a774d8f71974ede03f1c366e2a1df7ea7dbb67eb4d56d8637fe3",
+      "explicit_sources": 45,
+      "missing_sources": [],
+      "observed_dependencies": 10,
+      "missing_dependencies": [],
+      "deps_error": null
+    },
+    {
+      "graph": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "8c00ccbf0b1b12421e5f9b628eb203ab5ff43540efbb99a2e1ac26a558a8c4f8",
+      "explicit_sources": 396,
+      "missing_sources": [],
+      "observed_dependencies": 394,
+      "missing_dependencies": [],
+      "deps_error": null
+    },
+    {
+      "graph": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "57cc276a409e24a25cd956b822478ff85ae464f25c093b8ac1b921b237c8b87a",
+      "explicit_sources": 140,
+      "missing_sources": [],
+      "observed_dependencies": 154,
+      "missing_dependencies": [],
+      "deps_error": null
+    }
+  ],
+  "limits": "Inventory includes all currently present stable-cache build.ninja graphs, including possibly stale or historical graphs. Ninja deps covers previously built outputs only; inclusion here does not establish current support or test acceptance."
+}

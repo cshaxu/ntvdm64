@@ -19,7 +19,9 @@
  * ============================================================================
 )*/
 
+#line 20
 #ifdef HOST_HELP
+#line 21
 #error DIVERGENCE MVDM-HOST-DIV-605: unsupported HOST_HELP profile
 #endif	/* HOST_HELP */
 #line 90

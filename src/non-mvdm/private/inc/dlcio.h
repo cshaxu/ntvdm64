@@ -467,9 +467,12 @@ typedef struct _NT_DLC_OPEN_STATION_PARMS {
 //
 //  OUT: Info.ulParameter  = BringUpDiagnostics;
 //
+#line 470
 #ifndef    MAX_PATH   // I don't want to include whole windows because of this
+#line 471
 #error Excluded unsupported missing MAX_PATH SDK profile
 #endif
+#line 473
 typedef struct _NT_DIR_OPEN_ADAPTER_PARMS {
     OUT LLC_ADAPTER_OPEN_PARMS  Adapter;
     IN  PVOID               pSecurityDescriptor;

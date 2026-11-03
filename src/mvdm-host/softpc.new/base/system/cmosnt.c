@@ -452,7 +452,9 @@ int verify_equip_byte IFN1(half_word *, equip)
 	if( host_runtime_inquire(C_NPX_ENABLED) )
 		*equip |= CO_PROCESSOR_PRESENT;
 
+#line 455
 #ifdef SLAVEPC
+#line 456
 #error DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register.
 #endif /* SLAVEPC */
 #line 464
@@ -460,7 +462,9 @@ int verify_equip_byte IFN1(half_word *, equip)
 		num_flops  =
 			(*(CHAR *) config_inquire(C_FLOPPY_A_DEVICE, NULL))
 			? 1:0;
+#line 468
 #ifdef FLOPPY_B
+#line 469
 #error Unsupported excluded original configuration
 #endif
 #line 473

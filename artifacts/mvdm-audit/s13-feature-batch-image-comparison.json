@@ -1,0 +1,14 @@
+{
+  "current_sha256": "061e4914f341433c4d4a4982148a4d23f489f31354073a847ea1a099bdc70818",
+  "prior_sha256": "af85eae1c4ecf5fd439bb0aa83ce008ab4f58a06d2463104fa06c34864aac18f",
+  "current_bytes": 712192,
+  "prior_bytes": 712192,
+  "different_offsets": [
+    280,
+    281,
+    625412,
+    625413
+  ],
+  "length_difference": 0,
+  "timestamp_positions_only": true
+}

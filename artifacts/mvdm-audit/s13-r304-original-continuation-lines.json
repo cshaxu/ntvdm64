@@ -1,0 +1,172 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "before_sha256": "fdf93520d4fed597cf353ee6b72869ac566202058856014fcc0cb34e32761920",
+      "after_sha256": "8c0b4c2fb9bdce245d0c637ea67a9061deb542bff12be5cb1d35250f5ce13b65",
+      "changes": [
+        {
+          "original_if_line": 890,
+          "original_endif_line": 984,
+          "current_marker_line": 691,
+          "previous": 898,
+          "corrected": 985,
+          "matched_before": 1,
+          "matched_after": 4,
+          "verified_exact_original_continuation_lines": 6
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "before_sha256": "3f63eeed6b174b52ccb283c1865b6fb8dbe05e71c167879a85996b4af21b477b",
+      "after_sha256": "65d9c32cb6ff8d650948248b8d0ac9d654308f41754fc67d4cf7f5a4c1844bc2",
+      "changes": [
+        {
+          "original_if_line": 4870,
+          "original_endif_line": 4886,
+          "current_marker_line": 4715,
+          "previous": 4790,
+          "corrected": 4887,
+          "matched_before": 5,
+          "matched_after": 2,
+          "verified_exact_original_continuation_lines": 3
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "original_sha256": "a181e9ddddf9cbeeff03b63f733d282455b2f21b578c6c9cf772bf726b41d064",
+      "before_sha256": "8cc625a21d20263cd046120fef3582ebbc02523141bc6b1f68afdaae3b7317e5",
+      "after_sha256": "46a877e361da26a57d00678658819faae194e77b162b6a9ac2fb26d184e24821",
+      "changes": [
+        {
+          "original_if_line": 356,
+          "original_endif_line": 370,
+          "current_marker_line": 344,
+          "previous": 353,
+          "corrected": 371,
+          "matched_before": 1,
+          "matched_after": 4,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "before_sha256": "76e4dfe122d90112675388dfe76c3f3a47b91f43dc8262f5fa5f1fcb8eb6f70e",
+      "after_sha256": "aba266d9ef51100ab82e7150bcd4594968a320e96261e6e6c27d7dd6c90b71d3",
+      "changes": [
+        {
+          "original_if_line": 1025,
+          "original_endif_line": 1036,
+          "current_marker_line": 924,
+          "previous": 964,
+          "corrected": 1037,
+          "matched_before": 5,
+          "matched_after": 2,
+          "verified_exact_original_continuation_lines": 4
+        },
+        {
+          "original_if_line": 2151,
+          "original_endif_line": 2174,
+          "current_marker_line": 1838,
+          "previous": 1995,
+          "corrected": 2175,
+          "matched_before": 1,
+          "matched_after": 3,
+          "verified_exact_original_continuation_lines": 4
+        },
+        {
+          "original_if_line": 2178,
+          "original_endif_line": 2185,
+          "current_marker_line": 1845,
+          "previous": 2004,
+          "corrected": 2186,
+          "matched_before": 3,
+          "matched_after": 3,
+          "verified_exact_original_continuation_lines": 3
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "original_sha256": "4a9004c1f57af28280d0176afd72cae76a7fbae90ffb758426c287435e5912d4",
+      "before_sha256": "2da35733ebc7631be67815e16a6e48846097a30dea623d8d104dc52a8f4e74b8",
+      "after_sha256": "de8177d050fcafa07386ab9d992c5069bd46ef5e6641484d1a8852b7e890cdb7",
+      "changes": [
+        {
+          "original_if_line": 215,
+          "original_endif_line": 219,
+          "current_marker_line": 237,
+          "previous": 237,
+          "corrected": 220,
+          "matched_before": 5,
+          "matched_after": 2,
+          "verified_exact_original_continuation_lines": 4
+        },
+        {
+          "original_if_line": 223,
+          "original_endif_line": 227,
+          "current_marker_line": 244,
+          "previous": 245,
+          "corrected": 228,
+          "matched_before": 2,
+          "matched_after": 3,
+          "verified_exact_original_continuation_lines": 5
+        },
+        {
+          "original_if_line": 232,
+          "original_endif_line": 235,
+          "current_marker_line": 252,
+          "previous": 253,
+          "corrected": 236,
+          "matched_before": 3,
+          "matched_after": 4,
+          "verified_exact_original_continuation_lines": 7
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowhooks.c",
+      "original_sha256": "345220990242cde0890884f478bef8622c2fc537c9e6200fa9b289145be0cc67",
+      "before_sha256": "38d0275c5dd499fa75cae9cd1040f132e595b090269dabb4ef3368ff9bb6c0e4",
+      "after_sha256": "fd371b9ceb4ca1ffdf248bea9979abcc816552fb462f09c05031fa19d336b2c1",
+      "changes": [
+        {
+          "original_if_line": 617,
+          "original_endif_line": 624,
+          "current_marker_line": 631,
+          "previous": 636,
+          "corrected": 625,
+          "matched_before": 0,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 8
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
+      "before_sha256": "d223c135a5486d38c61f740af4f1a260dd70ef73d68bafa44103d00e9a7bf06a",
+      "after_sha256": "96c23a36839022a9794d84455eb5cf6f08629a36115ac1f3f3e5485d9a25f27d",
+      "changes": [
+        {
+          "original_if_line": 1910,
+          "original_endif_line": 1914,
+          "current_marker_line": 1599,
+          "previous": 1954,
+          "corrected": 1915,
+          "matched_before": 5,
+          "matched_after": 2,
+          "verified_exact_original_continuation_lines": 4
+        }
+      ]
+    }
+  ],
+  "deferred": [],
+  "limits": "adjacent-source pairing with shorter or locally changed context; whole-context review still required; builds pending"
+}

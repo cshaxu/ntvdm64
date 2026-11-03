@@ -71,9 +71,12 @@ GLOBAL void ms_bop ()		    /* called from MS_bop_5 ie bop 0x55 */
 
 LOCAL void ms_not_a_bop()
 {
+#line 81
 #ifndef PROD
+#line 82
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 88
 }
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -385,7 +388,7 @@ VOID VDDDeInstallIOHook (
 #ifdef MONITOR
 #error Excluded original conditional branch
 #endif
-#line 376
+#line 413
 
 
     wAdapter = FreeVddAdapter(hVdd);

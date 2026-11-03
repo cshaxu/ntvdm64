@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 
 function fail(message) {
   throw new Error(message);
@@ -35,10 +36,8 @@ function canonicalParameters(parameters) {
   return types.join(',');
 }
 
-/* The source carries several historical CPU-engine selections with identical
- * external symbol spellings.  The formal T310 graph selects CCPU plus the
- * CPU-30 profile; a bare name scan must not let an inactive A2/A3 declaration
- * overwrite the active CCPU carrier. */
+/* This is a historical T310 CCPU/CPU30 comparison, not the current product
+ * build profile. A bare name scan must not mix its alternative CPU engines. */
 function selectedCcpuLines(lines) {
   const defined = new Set([
     'CCPU', 'CPU_30_STYLE', 'CPU_40_STYLE', 'NEW_CPU', 'C_VID', 'SPC386',
@@ -138,12 +137,16 @@ function publicDeclarations(lines, selected) {
   return table;
 }
 
-const [rootArgument, outputArgument] = process.argv.slice(2);
+const [rootArgument, outputArgument, historicalArgument] = process.argv.slice(2);
 if (!rootArgument || !outputArgument) {
-  fail('Usage: node Export-T310CcpuAccessTableLedger.mjs <repository-root> <output-tsv>');
+  fail('Usage: node Export-T310CcpuAccessTableLedger.mjs <repository-root> <output-tsv> [pinned-original-nt_cprgs.c]');
 }
 const root = path.resolve(rootArgument);
-const sourcePath = path.join(root, 'src/mvdm-host/softpc.new/host/src/nt_cprgs.c');
+const sourcePath = historicalArgument ?? 'O:/repos.external/OpenNT/base/mvdm/softpc.new/host/src/nt_cprgs.c';
+const sourceHash = crypto.createHash('sha256').update(fs.readFileSync(sourcePath)).digest('hex');
+if (sourceHash !== 'cbf9ee8a199d48ee74171b2e23d55bb1e5d019710fdea2a917762739d6a49044') {
+  fail('Historical nt_cprgs.c does not match the pinned OpenNT source.');
+}
 const generatedPath = path.join(root, 'src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h');
 const publicPath = path.join(root, 'src/mvdm-host/softpc.new/base/inc/cpu.h');
 const sourceLines = readLines(sourcePath);
@@ -212,4 +215,4 @@ for (const assignment of assignments) {
 }
 fs.mkdirSync(path.dirname(path.resolve(outputArgument)), { recursive: true });
 fs.writeFileSync(path.resolve(outputArgument), `${rows.join('\n')}\n`);
-console.log(JSON.stringify({ selected_assignments: assignments.length, review_rows: rows.length - 1 }));
+console.log(JSON.stringify({ historical_assignments: assignments.length, review_rows: rows.length - 1, source_sha256: sourceHash }));

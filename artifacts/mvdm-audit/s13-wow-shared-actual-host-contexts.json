@@ -1,0 +1,1306 @@
+{
+  "scope": "actual current WOW32 Ninja dependency owners; scratch instrumented copies; guest not built",
+  "header_sha256": {
+    "wowfax.h": "97c6c40dc2d0565a21dc1be4112fe24f138b10ddbb55fbd29e55da972a2a2c84",
+    "wowinfo.h": "a0a125eedf4138d353fea1f97316331fd5a8acfb82dbd80d7abfe5dedf350026"
+  },
+  "owners": 90,
+  "token_counts": {
+    "UNALIGNED_SET": 90,
+    "DEBUG_UNSET": 2,
+    "WOWFAX16_UNSET": 2,
+    "DEF_WOW32_SET": 2
+  },
+  "bad": [],
+  "records": [
+    {
+      "owner": "obj/mapembed.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/tests/wow-boundary-adapter.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/tests/wow-boundary-thunk.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/waccel.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/walias.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/walloc16.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wcall16.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wcall32.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wcntl32.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wcommdlg.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wcuricon.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wdde.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wdib.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wdos.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wgdi.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wgdi31.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wgfont.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wgman.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wgmeta.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wgpal.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wgprnset.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wgtext.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wheap.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wkbman.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wkernel.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wkfileio.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wkgthunk.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wkman.obj",
+      "headers": [
+        "wowfax.h",
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ],
+        [
+          "DEBUG",
+          "UNSET"
+        ],
+        [
+          "WOWFAX16",
+          "UNSET"
+        ],
+        [
+          "DEF_WOW32",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wkmem.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wmdisp32.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wmmalias.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wmmedia.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wmmedia1.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wmmedia2.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wmmstru1.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wmmstru2.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wmmstruc.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wmsg16.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wmsgbm.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wmsgcb.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wmsgem.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wmsglb.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wmsgsbm.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wmtbl32.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wole2.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wow32-dll/wow_common_dialog_calls.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wow32-dll/wow_hook_callback.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wow32-dll/wow_idle_hook_binding.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wow32-dll/wow_launch_identity.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wow32-dll/wow_message_lifetime.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wow32-dll/wow_registry_binding.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wow32-dll/wow_shell_callback.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wow32-dll/wow_task_cleanup_entry.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wow32-dll/wow_task_termination.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wow32-dll/wow_user_native_extension.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wow32-dll/wow_user_thunk_scope.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wow32.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wow32fax.obj",
+      "headers": [
+        "wowfax.h",
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ],
+        [
+          "DEBUG",
+          "UNSET"
+        ],
+        [
+          "WOWFAX16",
+          "UNSET"
+        ],
+        [
+          "DEF_WOW32",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wowhooks.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wowtbl.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wparam.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wreldc.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wres16.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wres32.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wsdata.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wsext.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wshell.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wsman.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wspool.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wsraw.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wstruc.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wsubcls.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wthman.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wucaret.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wuclass.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wuclip.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wucomm.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wucursor.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wudlg.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wuhook.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wulang.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wuman.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wumenu.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wumsg.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wuser.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wuser31.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wusercli.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wutext.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wutmr.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "owner": "obj/wuwind.obj",
+      "headers": [
+        "wowinfo.h"
+      ],
+      "exit": 0,
+      "tokens": [
+        [
+          "UNALIGNED",
+          "SET"
+        ]
+      ],
+      "stderr_tail": ""
+    }
+  ],
+  "limitations": "Host preprocessing only; does not determine historical guest compiler contexts or future configurations.",
+  "graph_sha256": "57cc276a409e24a25cd956b822478ff85ae464f25c093b8ac1b921b237c8b87a",
+  "guest_boundary": "Original guest makefile supports DEBUG and guest source defines _WOWFAX16_; neither guest compiler nor supported guest configuration was run. Host results alone do not justify rejecting these shared branches."
+}

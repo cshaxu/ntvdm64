@@ -1,0 +1,95 @@
+{
+  "scope": "Unselected WOW32 source files and exclusive guard tests",
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wddeml32.c",
+      "sha256": "7c07e86cf9c8abbc6ba97a43102db2fd6ce3be175ae005f4bfbdc6e4277e2859"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkglobal.c",
+      "sha256": "3f3bc18c49ec99406c656f8cffc005df039ffa5b15315de0da145c350d07dea1"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wklocal.c",
+      "sha256": "25f8a4a609a588a6b9ac17c184c37ec05391ec80e669d427835b04cee6ce34b8"
+    },
+    {
+      "path": "src/mvdm-host/wow32/debug.c",
+      "sha256": "cc9321735d095d34389933c1fa1cf3a0d01b0a3f74e4917c6b79ffc7e8d442d1"
+    }
+  ],
+  "mirror_sources": [
+    {
+      "path": "src/mvdm-host/wow32/debug.c",
+      "current_sha256": "cc9321735d095d34389933c1fa1cf3a0d01b0a3f74e4917c6b79ffc7e8d442d1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\debug.c",
+      "original_sha256": "0b78331bee5bd87ca5f786d162f345a46a04c255fdea1bc6733fb2f171ad02a2",
+      "pinned_expected_sha256": "0b78331bee5bd87ca5f786d162f345a46a04c255fdea1bc6733fb2f171ad02a2",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wddeml32.c",
+      "current_sha256": "7c07e86cf9c8abbc6ba97a43102db2fd6ce3be175ae005f4bfbdc6e4277e2859",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wddeml32.c",
+      "original_sha256": "13db1e133cbb9be8037fe9a57b1cf637f744ef23c9277697c096486bde3a8c2c",
+      "pinned_expected_sha256": "13db1e133cbb9be8037fe9a57b1cf637f744ef23c9277697c096486bde3a8c2c",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkglobal.c",
+      "current_sha256": "7b7e81edae26d68f6577a4928274ff7244637807805b268e62d4ee3ce3e7a1e9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkglobal.c",
+      "original_sha256": "7b7e81edae26d68f6577a4928274ff7244637807805b268e62d4ee3ce3e7a1e9",
+      "pinned_expected_sha256": "7b7e81edae26d68f6577a4928274ff7244637807805b268e62d4ee3ce3e7a1e9",
+      "original_matches_pinned": true,
+      "working_sha256": "3f3bc18c49ec99406c656f8cffc005df039ffa5b15315de0da145c350d07dea1"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wklocal.c",
+      "current_sha256": "88faeb38403ed790ff538383125b7bf1481a125d1f3f9c69f79bc1e6e1ef6ecb",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wklocal.c",
+      "original_sha256": "88faeb38403ed790ff538383125b7bf1481a125d1f3f9c69f79bc1e6e1ef6ecb",
+      "pinned_expected_sha256": "88faeb38403ed790ff538383125b7bf1481a125d1f3f9c69f79bc1e6e1ef6ecb",
+      "original_matches_pinned": true,
+      "working_sha256": "25f8a4a609a588a6b9ac17c184c37ec05391ec80e669d427835b04cee6ce34b8"
+    }
+  ],
+  "removed_guard_ledger_entries": [
+    {
+      "path": "src/mvdm-host/wow32/debug.c",
+      "macro": "0",
+      "line": 1091,
+      "body_end": 1102,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\debug.c",
+      "original_sha256": "0b78331bee5bd87ca5f786d162f345a46a04c255fdea1bc6733fb2f171ad02a2",
+      "local_sha256": "cf255a1013220ba30f65f37542815418fce58ac9f0a40a25a64dac5900520b7e",
+      "removed_body_sha256": "90d57b58d13a97b44cab802561e4a445c8cbaa7062e6ddd4fe074ce8cf06787f",
+      "removed_body_lines": 11,
+      "after_sha256": "c5776335f057b6de92e4fff9c745813a407b441c99f32c1114d56d233f6db66f",
+      "final_sha256": "cc9321735d095d34389933c1fa1cf3a0d01b0a3f74e4917c6b79ffc7e8d442d1"
+    },
+    {
+      "path": "src/mvdm-host/wow32/debug.c",
+      "macro": "0",
+      "line": 895,
+      "body_end": 921,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\debug.c",
+      "original_sha256": "0b78331bee5bd87ca5f786d162f345a46a04c255fdea1bc6733fb2f171ad02a2",
+      "local_sha256": "cf255a1013220ba30f65f37542815418fce58ac9f0a40a25a64dac5900520b7e",
+      "removed_body_sha256": "d9759e563a54980a92b2fa122458189443fa6c051bad2afc1570f2655223472c",
+      "removed_body_lines": 26,
+      "after_sha256": "c5776335f057b6de92e4fff9c745813a407b441c99f32c1114d56d233f6db66f",
+      "final_sha256": "cc9321735d095d34389933c1fa1cf3a0d01b0a3f74e4917c6b79ffc7e8d442d1"
+    }
+  ],
+  "removed_condition_groups": 50,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r125.zip",
+  "evidence": [
+    "No supported current product or test compilation graph selects these files.",
+    "Prior T276 disposition also classifies all four as excluded; the API16 snippet tests were their only active source references."
+  ],
+  "limitations": [
+    "WOW32 headers remain because their independent consumers require separate review.",
+    "This does not claim the historical APIs are fully implemented."
+  ]
+}

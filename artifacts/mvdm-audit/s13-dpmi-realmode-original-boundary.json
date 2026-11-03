@@ -1,0 +1,12 @@
+{
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\modesw.c",
+  "original_sha256": "aa7157e2a39fead41e42e87f87e332e9464bf69a668671de976c69637ce06a67",
+  "current": "src/mvdm-host/dpmi32/modesw.c",
+  "current_sha256": "5c45cbb888e2f32b099c165cb9db74019892ea98f4ad1998238dfe3a1f72bff0",
+  "original_guard_line": 68,
+  "current_guard_line": 238,
+  "original_behavior": "reload SS base/limit/access rights after real-mode switch",
+  "current_adaptation": "reload CPU40 pseudo descriptors including SS",
+  "register": "MVDM-HOST-DIV-230 real-mode cache boundary",
+  "limit": "Behavior differs in implementation; preprocessor selection and registered intended equivalence do not independently prove whole DPMI semantics. No code changed."
+}

@@ -1,0 +1,12 @@
+{
+  "source": "src/mvdm-host/wow32/wumsg.c",
+  "before_sha256": "e0b9fd54f4fdb3ebfd765951605b49f81644d2fd0a3ef90413ff5dcae27b2ca3",
+  "after_sha256": "e2cd60a76c15f9c85cdc64bca6aee99d0fc2d33d250fbd4bf9d862428164497f",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wumsg.c",
+  "original_sha256": "3404569a45421465a6b916975b978d9ede19ba3ee7f2534b20fad304e91bc7ff",
+  "original_endif": 851,
+  "old_continuation": 885,
+  "new_continuation": 852,
+  "scope": "line mapping at local cleanup wrapper; original call remains inside wrapper; changes diagnostic locations, not selected source statements",
+  "validation": "pending"
+}

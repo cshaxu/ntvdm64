@@ -1,0 +1,50 @@
+[
+  {
+    "target": "x86-worker",
+    "exit": 0,
+    "no_work": true,
+    "output": ""
+  },
+  {
+    "target": "x86-wow32",
+    "exit": 0,
+    "no_work": true,
+    "output": ""
+  },
+  {
+    "target": "x64-frontend",
+    "exit": 0,
+    "no_work": true,
+    "output": ""
+  },
+  {
+    "target": "x64-launcher",
+    "exit": 0,
+    "no_work": true,
+    "output": ""
+  },
+  {
+    "target": "x64-service",
+    "exit": 0,
+    "no_work": true,
+    "output": ""
+  },
+  {
+    "target": "x64-worker",
+    "exit": 0,
+    "no_work": true,
+    "output": ""
+  },
+  {
+    "target": "x64-monitor",
+    "exit": 0,
+    "no_work": true,
+    "output": ""
+  },
+  {
+    "target": "x64-hook",
+    "exit": 0,
+    "no_work": true,
+    "output": ""
+  }
+]

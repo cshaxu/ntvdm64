@@ -1289,7 +1289,9 @@ VOID InitCBFormats ()
     CFOLEObjectDescriptor = RegisterClipboardFormat ("Object Descriptor");
     CFOLELinkSrcDescriptor = RegisterClipboardFormat ("Link Source Descriptor");
 
+#line 1215
 #ifdef DEBUG
+#line 1216
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 1227

@@ -1,0 +1,68 @@
+{
+  "scope": "12 real x86 WOW32 compilation units; scratch _USER_ guard and control-client precomp selector hoist plus original handle macros",
+  "result": "12 compile, all non-debug section contents and raw relocations match freshly rebuilt baseline",
+  "root_cause": "First guarded include omitted WOW_ORIGINAL_CLIENT_HANDLES; HWq was treated as an undeclared external function in prior candidate. Hoisting that selector restores macro expansion.",
+  "rows": [
+    {
+      "target": "obj/wuser31.obj",
+      "baseline_sha256": "c1936d85178e20c0e0dcc933b779d73c1a674ccd52563bbf6c0f173653f6c530",
+      "candidate_sha256": "d40e45e55a9d5b598ef556dc2428ebfc6b3370b9f7ca18f18fb62210a1b3f8dd"
+    },
+    {
+      "target": "obj/wuclip.obj",
+      "baseline_sha256": "7c4353bab26c1036240d404cfade19198e7eb586f5a1de4fb88da392995ac528",
+      "candidate_sha256": "8c953d77ab4908a947c719e0e0055fd7c4200d2b673f6da5872912b9d2a4d997"
+    },
+    {
+      "target": "obj/opennt-user/control-body-editec.obj",
+      "baseline_sha256": "76289aa105b7449963b79002aa3f7ee4dc93dae5bc0310e4d5b542cc3c903992",
+      "candidate_sha256": "384a4ae83955d15f199e4f7f71b7ae6d04a42f06d0f7ea9f5671e127a5671bec"
+    },
+    {
+      "target": "obj/opennt-user/control-body-edecrare.obj",
+      "baseline_sha256": "27ac3d643cc0de122ef127d6052eec5f1038a8b69d7ce25c89114df9bcd26f33",
+      "candidate_sha256": "10739adc8bfb6ea466e72b95d183f599b23c811c06701a0d935051e966a927dc"
+    },
+    {
+      "target": "obj/opennt-user/control-body-editsl.obj",
+      "baseline_sha256": "4a65b8afb01a1af1aa85113aa07ef8dfb09ebf3995bbbd1280b783ee26edd02e",
+      "candidate_sha256": "477df6b7d83c1085644dd1bc20a375f6d3dce6794196ed38c17284e2a8e900f2"
+    },
+    {
+      "target": "obj/opennt-user/control-body-editml.obj",
+      "baseline_sha256": "4dc1f1eab5befc974e80f437be886b7b4356769d24b73e768b3df91e5fab7df5",
+      "candidate_sha256": "dee2cdf2cb0042f41b629c3ae231ab49b330b4738a4e27cf7a9c7821789e3367"
+    },
+    {
+      "target": "obj/opennt-user/control-body-edmlonce.obj",
+      "baseline_sha256": "5c2d8aa50e96e99e27ebeeb26a91f6f74207532b923577ecf6204923ac675bcf",
+      "candidate_sha256": "ae73fd57c94389ef91e3c6b77d02bade48d67a6094efad1f16ac24db4a99dd7c"
+    },
+    {
+      "target": "obj/opennt-user/control-body-edmlrare.obj",
+      "baseline_sha256": "10327c0cc5d324d64b38ceb70f826f6f80dab035ef94863edf3eccabdacfb1e0",
+      "candidate_sha256": "e654ff28d0e6a2667427811a554f3fc0feca54ca48fb2f3974b112b24610edf5"
+    },
+    {
+      "target": "obj/opennt-user/control-body-edslrare.obj",
+      "baseline_sha256": "c5972714ea661c922787c24a378a2893a500fcb1724e2fe0c0a7c6ffc874d529",
+      "candidate_sha256": "6d1bc3bef37e0548cd2b4e92ef40e55d9fc349358f760bf48dbbfb7584ba990e"
+    },
+    {
+      "target": "obj/opennt-user/control-body-combo.obj",
+      "baseline_sha256": "b37574e0a81ae40aa9dfa0252db1008d0f6366c109d75401fb1ae5538f354b08",
+      "candidate_sha256": "ce41f36100b2655f73e50f825a4387d0d7bf8a1d41295c8cea5aaeabd27ecc64"
+    },
+    {
+      "target": "obj/opennt-user/control-body-combodir.obj",
+      "baseline_sha256": "78dd5f6df5799af7191d3510714ceabfe26ffc18e8ec8ee0dddf0b5ef48b5a4a",
+      "candidate_sha256": "c40006f88d2c01e385b8ea0dd33e6f717a10f26bf86abc6d89372d7b579d1a58"
+    },
+    {
+      "target": "obj/opennt-user/control-body-comboini.obj",
+      "baseline_sha256": "79dd83a32c71bb49edbcac21a87385351d1f98ebf28b2ea19d38c81fcc758194",
+      "candidate_sha256": "43fed995b6ee47f5a951c80eddd23cb67be33b939cdd604a291da7d5a0a3454b"
+    }
+  ],
+  "limits": "Only 12 of 104 observed user.h dependency objects checked. No link/runtime test. usercli guard remains unaddressed; no production files changed."
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+    "original_sha256": "f0b56314a93423599f06645d17104391f19a0ca07c3944853b065d8866493f7c",
+    "before_sha256": "cd45b12df2e1291f0f9733fb3607e45f5bf783426e75399775b43a1be1024849",
+    "after_sha256": "f86e1cfd44d38827593b5e1f898fab73777315d2e32e0f387856a7bcf64d46ee",
+    "original_line": 286,
+    "continuation": 303,
+    "expression": "(DBG || TRACE_OBJECT_ALLOCS)",
+    "marker": "Excluded unsupported original TRACE_OBJECT_ALLOCS branch",
+    "note": "the original debug counters or HMValidateHandle body are absent from this original source subset; selected project implementations remain elsewhere"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+    "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+    "before_sha256": "413fc6e2209039169fd1b72c4272e22df1df6c9a2d4bbd1a8b8ab3b2eeaf7820",
+    "after_sha256": "4d16630695670df2c306303f25beeb3636eb6b4419f553fdd28b8d796e7ed99e",
+    "original_line": 262,
+    "continuation": 275,
+    "expression": "defined(DEBUG) && !defined(_USERK_) && !defined(WOW)",
+    "marker": "Excluded unsupported original DEBUG USER handle validation branch",
+    "note": "the original debug counters or HMValidateHandle body are absent from this original source subset; selected project implementations remain elsewhere"
+  }
+]

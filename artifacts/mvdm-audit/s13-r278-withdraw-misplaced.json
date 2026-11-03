@@ -1,0 +1,8 @@
+{
+  "probe_original": "O:/repos.external/OpenNT/base/ntos/ex/probe.c:106",
+  "owner": "ProbeForWrite (omitted)",
+  "removed_current_file_scope_guard": true,
+  "probe_sha256": "d5a4aa697600bba9c8d8a4be71103e88c548c6f93c7a6951c9c0557b978fd7d3",
+  "kernel_original_groups_reverted_to_prior_pending": 51,
+  "reason": "restore accurate pending status, not fake original placement"
+}

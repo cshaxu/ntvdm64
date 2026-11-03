@@ -19,6 +19,13 @@
  * Bind scalar declarations without importing USER global state/precomp. */
 #include <windows.h>
 
+#line 24
+#if DBG
+#line 25
+#error Excluded unsupported USER debug-global profile
+#endif
+#line 27
+
 /*
  * Amount wheel has been scrolled in a control less than WHEEL_DELTA. Each
  * control resets this variable to 0 in WM_KILLFOCUS, and verifies it is
@@ -1194,4 +1201,11 @@ CONST BOOLEAN gabThunkMessage[] = {
 };
 
 C_ASSERT(sizeof(gabThunkMessage) / sizeof(gabThunkMessage[0]) == WM_USER);
+
+#line 1309
+#ifdef WX86
+#line 1310
+#error Excluded unsupported USER WX86-global profile
+#endif
+#line 1317
 

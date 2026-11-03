@@ -1,0 +1,23 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "current_if_line": 87,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cpu_vid.h",
+      "original_sha256": "f7b5efebebd8bf8c6ad5c56adb74c8217490b2b92f113b1e850401fd5f029500",
+      "original_continuation_line": 90,
+      "original_continuation_text": "#ifndef\tNO_STRING_OPERATIONS",
+      "note": "local CPU40/C-video callback type adaptation; original callback struct does not contain this outer condition; selected ABI not assessed"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gmi.h",
+      "current_if_line": 19,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gmi.h",
+      "original_sha256": "828d5e4399c5cc396367373e96c4d6785ac0026f50467176f30a977afe01919a",
+      "original_continuation_line": 26,
+      "original_continuation_text": "} MEM_HANDLERS;",
+      "note": "local CPU40/C-video callback type adaptation; original callback struct does not contain this outer condition; selected ABI not assessed"
+    }
+  ],
+  "limits": "first-depth provenance and continuation only; nested condition not reviewed"
+}

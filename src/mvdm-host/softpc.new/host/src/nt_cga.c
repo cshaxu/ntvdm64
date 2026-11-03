@@ -144,9 +144,12 @@ void nt_init_cga_colour_med_graph()
                         byte3 = ( i & 0x30 ) >> 4;
                         byte4 = ( i & 0xC0 ) >> 6;
 
+#line 152
 #ifdef BIGEND
+#line 153
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif /* BIGEND */
+#line 188
 #line 150
 
 #ifdef LITTLEND

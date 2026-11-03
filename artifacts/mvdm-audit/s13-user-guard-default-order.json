@@ -1,0 +1,17 @@
+{
+  "scope": "Two actual x86 WOW32 default-client/default-window-bits compilation units",
+  "candidate": "In scratch default-precomp.h, select original handle macros before the first user.h inclusion; compile original source paths.",
+  "result": "Both exit 0; all non-debug COFF section and raw relocation bytes match fresh baseline.",
+  "target_source": "original source path retained, avoiding __FILE__ differences from scratch copies",
+  "logs": [
+    {
+      "path": "build\\t473-s13\\header-hoist-experiment\\b3-cand5-6.log",
+      "sha256": "4923c1df99f4c82731b6fb78ee4c654ce935ac3168bdd7228c534d21ac0c37cb"
+    },
+    {
+      "path": "build\\t473-s13\\header-hoist-experiment\\b3-cand5-11.log",
+      "sha256": "657651e013e6367c5b68bb5a4deefe87fede7d50b8f7bf49aa2a61d3e9e26eae"
+    }
+  ],
+  "limits": "Only these two TUs; previous 18 in this batch were compiled against the prior candidate, so final unified candidate must be rerun across all affected targets. No product link or runtime tests."
+}

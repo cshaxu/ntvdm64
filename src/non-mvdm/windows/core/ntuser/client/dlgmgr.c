@@ -91,9 +91,11 @@ ShowIt:
             if (!fShown) {
                 fShown = TRUE;
 
+#line 1056
 #ifdef SYSMODALWINDOWS
 #error DIVERGENCE OPENNT-HOST-133: SYSMODALWINDOWS branch is not selected; see mirror register.
 #endif
+#line 1066
 
                 NtUserShowWindow(hwnd, SHOW_OPENWINDOW);
                 /* DIVERGENCE(OPENNT-HOST-080): no update to a destroyed/reused HWND. */

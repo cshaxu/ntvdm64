@@ -1,0 +1,14 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+  "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+  "working_sha256": "9493d5c74f2a7e5360c05c991194fb54ceb85786e4f7a3689bac6f88e6319fc3",
+  "original_line": 53,
+  "original_condition": "#ifdef FE_IME",
+  "change": "move already-excluded original global guard outside local source selector; preserve #line 53 and #line 190",
+  "preprocessing": "actual selected WOW context equal ignoring blank lines",
+  "build": "WOW32 passed",
+  "tests": "x86 and x64 original line and rejection guard tests passed",
+  "image_comparison": "s13-server-feime-outer-image-comparison.json",
+  "limitation": "FE_IME in this source is unsupported and now rejects even if the local WOW selector is absent."
+}

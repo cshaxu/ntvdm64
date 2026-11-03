@@ -1,0 +1,94 @@
+{
+  "cases": [
+    {
+      "name": "anchor00",
+      "expected_line": 2235,
+      "source": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "marker_line": 1867,
+      "ok": true,
+      "log_sha256": "7a1192a7fc97b24ab6dd2f74a839058b3ddc8dc8bf3fa2b225d8dd2cf719cb77"
+    },
+    {
+      "name": "anchor01",
+      "expected_line": 191,
+      "source": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "marker_line": 167,
+      "ok": true,
+      "log_sha256": "e98054a41b984612523def0067a093dfed31d4a5f52ef46064ed5e7c8b4d1b9b"
+    },
+    {
+      "name": "anchor02",
+      "expected_line": 200,
+      "source": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "marker_line": 197,
+      "ok": true,
+      "log_sha256": "d01d460836e7c4c846169ed4f3c94dbff643eece9ade92d08db49292f919a8e1"
+    },
+    {
+      "name": "anchor03",
+      "expected_line": 343,
+      "source": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "marker_line": 327,
+      "ok": true,
+      "log_sha256": "944b8dc7650e8fdf93a97e6c92933bee79b880ca3f430bef67023539ea75bd1d"
+    },
+    {
+      "name": "anchor04",
+      "expected_line": 251,
+      "source": "src/mvdm-host/wow32/wmsg16.c",
+      "marker_line": 232,
+      "ok": true,
+      "log_sha256": "5980e9b7923c2794d8d95dd04a05e2756bc6b5e3a46a2230998d1cc847bdb73c"
+    },
+    {
+      "name": "anchor05",
+      "expected_line": 1904,
+      "source": "src/mvdm-host/wow32/wow32.c",
+      "marker_line": 1577,
+      "ok": true,
+      "log_sha256": "f1fd5064dcf57a26523d3d1e34b87cf8d6fa9afb0fd3f04bf942d773f6fc96a0"
+    },
+    {
+      "name": "anchor06",
+      "expected_line": 341,
+      "source": "src/mvdm-host/wow32/wparam.c",
+      "marker_line": 337,
+      "ok": true,
+      "log_sha256": "89a43294a5c6b0eba0d6eabf9988de8a3ba02a4c8324cb0b391385525985b7a1"
+    },
+    {
+      "name": "anchor07",
+      "expected_line": 1923,
+      "source": "src/mvdm-host/wow32/wumsg.c",
+      "marker_line": 2011,
+      "ok": true,
+      "log_sha256": "b732d3cfc288bf935b40c5c05ff02abd42d72a5b54b4018192345c0ebab96a13"
+    },
+    {
+      "name": "anchor08",
+      "expected_line": 3003,
+      "source": "src/mvdm-host/wow32/wuser.c",
+      "marker_line": 2990,
+      "ok": true,
+      "log_sha256": "07548fe5ea47160f99f5b9cf7e9ed3090a2806e1ab6825acbb3b4a8bb69536ec"
+    },
+    {
+      "name": "anchor09",
+      "expected_line": 749,
+      "source": "src/mvdm-host/wow32/wuser31.c",
+      "marker_line": 748,
+      "ok": true,
+      "log_sha256": "e70f76cf1257aedfabc6a04290573c74a18ddfa9bbc1a60629ca5add05a43362"
+    },
+    {
+      "name": "anchor10",
+      "expected_line": 209,
+      "source": "src/mvdm-host/xms.486/xmsblock.c",
+      "marker_line": 225,
+      "ok": true,
+      "log_sha256": "f12050277d5fa3edbb5cc3bf92bb95a65069759918cecd21aa3d47f1413353ae"
+    }
+  ],
+  "failed": [],
+  "limits": "source-derived #line directive snippets; selected full-context builds separately recorded"
+}

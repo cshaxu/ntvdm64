@@ -217,7 +217,9 @@ ULONG WOW32FaxHandler(UINT iFun, LPSTR lpIn)
     LPBYTE lpData;
     VPVOID vp;
 
+#line 220
 #ifdef DEBUG
+#line 221
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 227
@@ -954,7 +956,9 @@ BOOL InstallWowFaxPrinter(PSZ szSection, PSZ szKey, PSZ szString)
                 if ((*spoolerapis[WOW_AddPrinter].lpfn)(NULL, 2, &PrinterInfo) == 0) {
                     bRetVal = (GetLastError() == ERROR_PRINTER_ALREADY_EXISTS);
                 }
+#line 960
 #ifdef DBG
+#line 961
 #error Unsupported excluded original configuration
 #endif
 #line 965

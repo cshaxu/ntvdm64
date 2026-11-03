@@ -1,0 +1,38 @@
+{
+  "source": "src/non-mvdm/public/sdk/inc/nturtl.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\nturtl.h",
+  "original_sha256": "c6b7844e2e1248ac38ee90dd8173f95ab0f7997d7a7cfbafda851cc07cc80921",
+  "working_sha256": "02dfdb43c3d3db9380546a98fcf07d916059c0f4e001b5fe3c06cce19e811c03",
+  "old_guard": "OPENNT_HOST_NTURTL_SUBSET_H",
+  "new_guard": "_NTURTL_",
+  "five_x86_preprocessed_contexts": [
+    {
+      "source": "file",
+      "preprocessed_sha256": "333891c798a5e8a75c53416044c6c11a42a0ff36912ff79977d38c9581ffb1b2"
+    },
+    {
+      "source": "process",
+      "preprocessed_sha256": "8a1a6aaedc12f8fd5d47bcf992f03887be53ef640b0bec9b5a8b97c49ba75881"
+    },
+    {
+      "source": "redirector",
+      "preprocessed_sha256": "b22bf0b380700c88e314cbf9e959d19063d9f7bfaef0ca979d77f7d47786b607"
+    },
+    {
+      "source": "dem",
+      "preprocessed_sha256": "68128b960465f5ff26a3f5bb65c05afe6f314c65c4ff7eabbe720fb7e96c9d35"
+    },
+    {
+      "source": "wow",
+      "preprocessed_sha256": "d12a205a31115d68b00a2a457f045da48786bed33b113aaf6be91061044c821c"
+    }
+  ],
+  "builds": [
+    "x86 worker",
+    "x64 configuration reference x86 worker",
+    "x86 WOW32"
+  ],
+  "guard_suites": "x86 and x64 passed",
+  "image_compare": "s13-nturtl-guard-image-comparison.json",
+  "limitations": "Five representative x86 translation units; not all include contexts or future SDK versions. Images differ only at verified timestamp positions."
+}

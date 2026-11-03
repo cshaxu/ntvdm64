@@ -1,0 +1,10 @@
+{
+  "file": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+  "sha256": "ee328da82f9c5b8e70bcb3b9737880140fe5c6db5ebac0ee3bca60e90bfec57f",
+  "original_first_condition": 902,
+  "first_following": 925,
+  "second_condition": 926,
+  "second_following": 964,
+  "x86_worker": "ntvdm.exe built successfully",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r186.zip"
+}

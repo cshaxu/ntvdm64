@@ -204,9 +204,12 @@ Return Value:
     // put this back in after beta 2.5
     DpmiFreeAllBuffers();
 
+#line 201
 #ifdef Verbose
+#line 202
 #error Unsupported excluded original configuration
 #endif
+#line 210
 #line 214
 
 }

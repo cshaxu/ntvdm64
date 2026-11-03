@@ -798,7 +798,7 @@ LOCAL void do_transfer	IFN6(int, type, int, decrement,
 #ifndef PM
 #error Unsupported excluded original configuration
 #endif /* nPM */
-#line 811
+#line 817
 			sas_PWS(dma_addr, (host_addr) hw_buffer, length);
 
 		}

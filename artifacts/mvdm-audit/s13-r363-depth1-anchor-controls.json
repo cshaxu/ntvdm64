@@ -1,0 +1,96 @@
+{
+  "result": "passed",
+  "controls": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "body_line": 1027,
+      "continuation_line": 1030,
+      "negative_diagnostic_sha256": "2b2459594435c3767f1d39dfb49b0d8fce5a9bd2b9c0457744a983007dff981d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "body_line": 216,
+      "continuation_line": 224,
+      "negative_diagnostic_sha256": "b18e831c34f1e6deb2fe8d54693bf6aba0b35537a8c7b5e1cd145307e4bf296f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cntlbop.h",
+      "body_line": 73,
+      "continuation_line": 80,
+      "negative_diagnostic_sha256": "ba221f3949cf944ca31cb299aef25f1953d201fb4ff53dcf2b811d697e82a141"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host.h",
+      "body_line": 56,
+      "continuation_line": 63,
+      "negative_diagnostic_sha256": "27ee6b1a1746b2be6b64394cc68592e8f171d27e187b3bf37e0e4063741b125e"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hwvga.h",
+      "body_line": 26,
+      "continuation_line": 98,
+      "negative_diagnostic_sha256": "439c9e51718aa96b752ce64cb50f742fff7a3297226ad558e1a78b6618d2074d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "body_line": 71,
+      "continuation_line": 73,
+      "negative_diagnostic_sha256": "b3ce80f731434fdb9f28165e32f4f386b78f8440371af05e1aa8e33ba12234a9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/idetect.h",
+      "body_line": 12,
+      "continuation_line": 16,
+      "negative_diagnostic_sha256": "9e33b1bdc3522a447b53b6215c39d47f57665b5a7a7e3458cb569d98438d394d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
+      "body_line": 47,
+      "continuation_line": 50,
+      "negative_diagnostic_sha256": "501b17142e78462b5317a308b00274e924dfbb92b62078cc96b1464d1a1c6ba0"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/j_c_lang.h",
+      "body_line": 43,
+      "continuation_line": 49,
+      "negative_diagnostic_sha256": "85a4de1406776adc10db8483f1386c7ad62df37cd71cb750f2cc47253fbbba55"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/keyba.h",
+      "body_line": 36,
+      "continuation_line": 52,
+      "negative_diagnostic_sha256": "d24edec1718d0ecd635695d11b86be14a748f11380c7c7a7ddf5950ef23a897f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timer.h",
+      "body_line": 102,
+      "continuation_line": 104,
+      "negative_diagnostic_sha256": "fc75eaddb32b3126f9ed3f22f2979530f2a6be5a393ec247f139e4060f1a419f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timeval.h",
+      "body_line": 39,
+      "continuation_line": 51,
+      "negative_diagnostic_sha256": "fcd5bccb4e9fca31e48070b19bcf555b5c7d37d9e461accfb479a47db34b8fcb"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/winhelp.h",
+      "body_line": 21,
+      "continuation_line": 90,
+      "negative_diagnostic_sha256": "92f960a227cad914efa628f708fc6402c785dda4027f8378d6d8dcb166f6d8b3"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "body_line": 189,
+      "continuation_line": 192,
+      "negative_diagnostic_sha256": "de9ffa0286ed1d811960a63416d06c5b743c0c7f00b85558696670ef57531ee3"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "body_line": 187,
+      "continuation_line": 189,
+      "negative_diagnostic_sha256": "9edfe8bed191153a05292a5c1685b197f87f146b4e97be3a75b9dfb1bd5b3e23"
+    }
+  ],
+  "scope": "extracted actual source, false/true forced guard; not all include contexts"
+}

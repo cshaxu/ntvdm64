@@ -607,10 +607,12 @@ void   ECSetFont(
     // So, for apps older than 4.0, no special treatment for TrueType fonts.
     if (ped->f40Compat && (TextMetrics.tmPitchAndFamily & TMPF_TRUETYPE)) {
         ped->fTrueType = GetCharWidthInfo(hdc, &cwi);
+#line 649
 #ifdef DEBUG
+#line 650
 #error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
 #endif
-#line 615
+#line 654
     } else {
         ped->fTrueType = FALSE;
     }

@@ -1,0 +1,35 @@
+{
+  "source": "src\\non-mvdm\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+  "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+  "before_sha256": "f0797f835410d5ae3b7460fbd5ad0b718c13250c6b695421d96f81b807b7f055",
+  "after_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+  "functions": [
+    {
+      "function": "BOOL GetClassInfo(",
+      "original_line": 111
+    },
+    {
+      "function": "LPTSTR StringDuplicate(",
+      "original_line": 578
+    },
+    {
+      "function": "BOOL UnregisterClass(",
+      "original_line": 1051
+    }
+  ],
+  "effect": "Restore original diagnostic line at entry of byte-normalized identical retained original functions; no conditional reachability classified.",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r234.zip",
+  "build": {
+    "wow32": "pass",
+    "call_boundaries": "pass",
+    "same_identity_checkpoint": "conditional-checkpoint-231",
+    "wow32_non_timestamp_differences": 0,
+    "differing_offsets": [
+      280,
+      281,
+      625412,
+      625413
+    ]
+  }
+}

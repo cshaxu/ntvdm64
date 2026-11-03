@@ -1,0 +1,51 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "before_sha256": "630fecf93936ca286f0792d5b14477920c73005af406a636dc5b5276f9a66c61",
+      "after_sha256": "4799413ff806747d082ccd99de0a8aafe03c1694abadfa21213de848ffa092a3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wparam.c",
+      "original_sha256": "939785d0aee348459e02136efafdcbdac7aa1d7612f4bfcf8c4f21acf677271a",
+      "old_condition_line": 523,
+      "original_condition_line": 530,
+      "original_body_line": 531,
+      "original_endif_line": 533,
+      "original_continuation_line": 534,
+      "inserted_continuation": false
+    },
+    {
+      "path": "src/mvdm-host/wow32/wstruc.c",
+      "before_sha256": "2fb4f26fa7b09d3104343af91ca7f20c9e7191cae3cfa27d611943700827fd89",
+      "after_sha256": "006dc8b7ee255e8a6e0a31501583af08b878d61afd1da4443d9be8c548272c05",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wstruc.c",
+      "original_sha256": "04aa31f76dbb3e683c1f96101b07de006a79ca0d3b49e0a16986166349f3abb3",
+      "old_condition_line": 302,
+      "original_condition_line": 302,
+      "original_body_line": 303,
+      "original_endif_line": 359,
+      "original_continuation_line": 360,
+      "inserted_continuation": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "before_sha256": "801aeed525ab87590879d897771cc083ee483cf8a1c421084344d1cbfb4f6aa9",
+      "after_sha256": "fb801a1eabc14a5b65a8946f6829911f6f0d23464b67362c8657fb8e2618fb28",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editec.c",
+      "original_sha256": "13e3aa26649c7b21a49a3f3114a73bc06fdfc6472b782663bb10879cabc0ddb6",
+      "old_condition_line": 2021,
+      "original_condition_line": 2032,
+      "original_body_line": 2033,
+      "original_endif_line": 2041,
+      "original_continuation_line": 2042,
+      "inserted_continuation": true
+    }
+  ],
+  "method": "exact scoped patch; reconstructed preimage matches queue hashes",
+  "verification": {
+    "source_controls": "3 selected/rejected diagnostics passed: s13-r411-depth1-anchor-controls.json",
+    "build": "x86 NTVDM, x64 reference worker, x86 WOW32 passed: build/t473-s13/r411-build.log",
+    "condition_suites": "x86 build/t473-s13/r411-tests.log; x64 build/t473-s13/r412-x64.log passed",
+    "package": "s13-r411-package-compare.json: 82 files identical to r408; WOW32 differs only in 4 PE/debug timestamp bytes",
+    "limitations": "original pending groups remain unresolved; no depth closure or publication claimed"
+  }
+}

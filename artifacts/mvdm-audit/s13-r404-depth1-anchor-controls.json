@@ -1,0 +1,96 @@
+{
+  "result": "passed",
+  "controls": [
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "body_line": 3273,
+      "continuation_line": 3369,
+      "negative_diagnostic_sha256": "1801780249f23b46e0cc102a123e91dacb62c0688896d294b9f6859c7234c4d2"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/environ.c",
+      "body_line": 289,
+      "continuation_line": 294,
+      "negative_diagnostic_sha256": "89f3909fa7425f1f96b72358482a7ec34144294c62743eecec9125b5c194966c"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.c",
+      "body_line": 176,
+      "continuation_line": 185,
+      "negative_diagnostic_sha256": "e18607932dfee0b31f1fac21775c694f406bc5f04a3347148859776ccf6f1eeb"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+      "body_line": 1749,
+      "continuation_line": 1764,
+      "negative_diagnostic_sha256": "27ef88f6cb1f716fa30aec3853b29380cabfd1116431af66735e872158c67f99"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "body_line": 509,
+      "continuation_line": 518,
+      "negative_diagnostic_sha256": "7dbed3d8ab2900e78410cc24e46023f32e85bfa9b7f7d347ff18c05eaa0fcd9b"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "body_line": 2346,
+      "continuation_line": 2356,
+      "negative_diagnostic_sha256": "9008b6b075868d15eaf4b3503267338eb9f4236a82e816200edd4430b897b4e8"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edslrare.c",
+      "body_line": 53,
+      "continuation_line": 56,
+      "negative_diagnostic_sha256": "11abf23f291f67e303e681b21c8ebbdf4304f03ac069aaf6f5d3ee793ea5ca45"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl2.c",
+      "body_line": 1149,
+      "continuation_line": 1160,
+      "negative_diagnostic_sha256": "2137808905f08899c07b5c37236299b0f9631fd81e8ebdef7f801a552948a115"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxrare.c",
+      "body_line": 134,
+      "continuation_line": 136,
+      "negative_diagnostic_sha256": "e6273f38a2cbcd1358d8c9bea87a56e0c706ce86946a3ea43217a1296b6436f4"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "body_line": 321,
+      "continuation_line": 323,
+      "negative_diagnostic_sha256": "bfda4432b688ccad8b8cea73bd95694af747b7c34f864d8cbe37542654311f7c"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "body_line": 60,
+      "continuation_line": 62,
+      "negative_diagnostic_sha256": "85382bd41de20ded2adea872bcaf3a4c3c8293c4385a60ede22ef648e0a3fbce"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/server/exports.c",
+      "body_line": 158,
+      "continuation_line": 163,
+      "negative_diagnostic_sha256": "559fdba59e044baf04b264e807124ea4db6919f67cf7b94cb3e5bf92278c471f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sec.c",
+      "body_line": 116,
+      "continuation_line": 159,
+      "negative_diagnostic_sha256": "9bf603d2c502626704709b403e9b3596c39b4870d7db20dd8303c56f2111a741"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+      "body_line": 25,
+      "continuation_line": 27,
+      "negative_diagnostic_sha256": "34ddf0f85e385712ccf7ff9e28866e458ea52372f2851fb70d4f0a863012ab5e"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+      "body_line": 677,
+      "continuation_line": 755,
+      "negative_diagnostic_sha256": "cba6b75eabafdadb0247d3d9d7d2294e483490e78d64a27c0f3af8f8d0ef40dd"
+    }
+  ],
+  "scope": "extracted actual source, false/true forced guard; not all include contexts"
+}

@@ -1,0 +1,17 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+  "old_commit": "build-owned immediate pre-edit header snapshot",
+  "old_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+  "current_sha256": "48cd5dcf5dd20a16b03a26be4579b1594b7fc0d1c98a3b4664c33f7b36566ff6",
+  "method": "MSVC /EP, exact Ninja target flags, identical scratch source path; nonblank stripped lines hashed. ntSend.h copied without modification.",
+  "contexts": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/class-client.obj",
+      "old_sha256": "19453a4e2ac6e8bdb11f9218eab559cf7e7c9eb2076449fbdacdf7591ff05585",
+      "current_sha256": "19453a4e2ac6e8bdb11f9218eab559cf7e7c9eb2076449fbdacdf7591ff05585",
+      "equal": true
+    }
+  ],
+  "limits": "Tests selected preprocessed text only; excludes diagnostics and does not establish other contexts, link or runtime behavior."
+}

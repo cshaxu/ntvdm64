@@ -1,0 +1,26 @@
+{
+  "sources": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "sha256": "06dad1cd402c2712b21e5b573ea8be67facb0087b5e322b594abe0664caad644"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "sha256": "10c7fca6959e9c77f047d8acf1eb6f8c593386d4e892fed7970c6a3e50c820cc"
+    }
+  ],
+  "original_guards": {
+    "rtlinit": [
+      319,
+      326,
+      349,
+      361
+    ],
+    "dlgmgr": [
+      1056
+    ]
+  },
+  "build": "x86 WOW32 and call-boundaries completed successfully",
+  "tests": "x86 first-depth guard suite passed",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r190.zip"
+}

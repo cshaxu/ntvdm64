@@ -1,0 +1,18 @@
+{
+  "cases": [
+    {
+      "name": "anchor00",
+      "expected_line": 541,
+      "ok": true,
+      "log_sha256": "5cef3bbfe80bbe94ea34daa1fe72acda8185e75093c7419ef8d44a3bfb3862a3"
+    },
+    {
+      "name": "anchor01",
+      "expected_line": 562,
+      "ok": true,
+      "log_sha256": "8e1e03b53b593e781adf14b01da0f6ba65fecadb9080f7c7b6e207767ec68b34"
+    }
+  ],
+  "failed": [],
+  "limits": "source-derived marker snippets, not full-context runtime proof"
+}

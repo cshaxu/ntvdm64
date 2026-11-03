@@ -75,3 +75,8 @@ CONST WORD sysBmpStyles[OBI_COUNT][2] = {
     DFC_BUTTON,    DFCS_BUTTON3STATE | DFCS_CHECKED | DFCS_PUSHED,   // OBI_3STATE_CD
     DFC_BUTTON,    DFCS_BUTTON3STATE | DFCS_CHECKED | DFCS_INACTIVE,  // OBI_3STATE_CDI
 };
+#line 101
+#ifdef LATER
+#error Excluded original unsupported USER control-panel code
+#endif
+#line 273

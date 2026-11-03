@@ -1317,7 +1317,9 @@ M32 aw32Msg[] = {
 };
 
 
+#line 1320
 #ifdef DEBUG_OR_WOWPROFILE
+#line 1321
 #error Unsupported excluded original configuration
 #endif
 #line 1324

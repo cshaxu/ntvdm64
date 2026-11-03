@@ -1051,9 +1051,12 @@ void nt_std_handle_notification (BOOL fIsRedirection)
 
     stdoutRedirected = fIsRedirection;
 
+#line 1075
 #ifdef X86GFX
+#line 1076
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif //X86GFX
+#line 1110
 }
 
 /*** VDDInstallUserHook

@@ -540,7 +540,9 @@ BOOL LoadLibraryAndGetProcAddresses(char *name, DLLENTRYPOINTS *p, int num)
     return TRUE;
 }
 
+#line 543
 #ifdef i386
+#line 544
 #error DIVERGENCE MVDM-HOST-DIV-589: historical i386 WOW branch is not selected
 #endif  //i386
 #line 575

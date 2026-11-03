@@ -30,9 +30,12 @@ Revision History:
 /********** COMMON STUFF FOR MIPS AND V86 *************/
 
 /* XLATOFF */
+#line 30
 #ifdef i386
+#line 31
 #error Excluded unsupported i386 kernel VDM declarations
 #endif
+#line 33
 
 
 /* XLATON */

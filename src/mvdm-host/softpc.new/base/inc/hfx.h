@@ -14,7 +14,10 @@
  * Mods		:
  */
 
+#line 17
 #ifdef HFX
+#line 18
 #error Unsupported excluded original configuration
 #endif /* HFX */
+#line 739
 #line 711

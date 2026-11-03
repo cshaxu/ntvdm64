@@ -1,0 +1,96 @@
+{
+  "result": "passed",
+  "controls": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "body_line": 386,
+      "continuation_line": 508,
+      "negative_diagnostic_sha256": "3ca7fb0be36f317b91a78ad51d3be7290a572e3444ddb4358fb83e1f24d80bb3"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "body_line": 304,
+      "continuation_line": 313,
+      "negative_diagnostic_sha256": "b1da7f5c6691071d8334056a9d7b707e17c195b8a9aef72cc196f89a35baf53c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "body_line": 1882,
+      "continuation_line": 1886,
+      "negative_diagnostic_sha256": "5804c1290d35578f7006cf0350a3048a33cd71e3319b909dde91a69f26d5b32d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "body_line": 59,
+      "continuation_line": 61,
+      "negative_diagnostic_sha256": "5443e647955b4be75efd81fe166159ea2a714c0146f611e34d2484c025d59d5b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/dasm.c",
+      "body_line": 35,
+      "continuation_line": 2948,
+      "negative_diagnostic_sha256": "f1a9e751412c7026f9c077c70a24658413503711b321013568b307f9a7cd6772"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/debuggng.c",
+      "body_line": 10,
+      "continuation_line": 54,
+      "negative_diagnostic_sha256": "46a3cc67e4081520ef9fb293810fec0122d85e9392e618207e61b849871f5c8e"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/pigyoda.c",
+      "body_line": 31,
+      "continuation_line": 356,
+      "negative_diagnostic_sha256": "1a0c06675fd79878832ca7f965b240c6b59bfdccc25ae639cac3921958a1121c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "body_line": 92,
+      "continuation_line": 243,
+      "negative_diagnostic_sha256": "dfbd95593dee1bd40e2aeb70af1de8c7e7458a24380a9fe2644301b2030065e3"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "body_line": 37,
+      "continuation_line": 39,
+      "negative_diagnostic_sha256": "35450c9e93b7ea923e125eb8753e470dd3534b14dd865df0984d0ece31381b7a"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "body_line": 1246,
+      "continuation_line": 1475,
+      "negative_diagnostic_sha256": "a881706f598231328b4542407093cf2314f2ef1fb1774d91344837f0c50047e9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
+      "body_line": 1846,
+      "continuation_line": 1861,
+      "negative_diagnostic_sha256": "4e5b65bbc1bf49fe29cc695133775917e1a67c0e948b319185bdcd341cc53b59"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "body_line": 181,
+      "continuation_line": 194,
+      "negative_diagnostic_sha256": "86c6ea74d8232891274806c3ea0adca7f427f3d1174230140b6b705646a7d96f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "body_line": 2015,
+      "continuation_line": 2023,
+      "negative_diagnostic_sha256": "169fd0246c451c559d2b06647df7da3368bae7b9faaefe61f4f4850849fbf1d8"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "body_line": 4,
+      "continuation_line": 531,
+      "negative_diagnostic_sha256": "0d34ed8095cf24f004828906f2d135615403c95049c5e6257fa04fb8111d7ae5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "body_line": 19,
+      "continuation_line": 775,
+      "negative_diagnostic_sha256": "49639ef9f4a07d1f6824ec1a0a8a05ef4d001894a0ee85cb480f0362f6496169"
+    }
+  ],
+  "scope": "extracted actual source, false/true forced guard; not all include contexts"
+}

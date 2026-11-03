@@ -1,0 +1,94 @@
+{
+  "cases": [
+    {
+      "name": "anchor00",
+      "expected_line": 985,
+      "source": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "marker_line": 691,
+      "ok": true,
+      "log_sha256": "1f74da5dc87aac85db4a2e1b3a821cb7ffe406062ece95f629d6529aa2031aaa"
+    },
+    {
+      "name": "anchor01",
+      "expected_line": 4887,
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "marker_line": 4715,
+      "ok": true,
+      "log_sha256": "9d3992f36af89f0160bd9bb2820ba2c5b7d7049e02e4d276e666510f69b5450c"
+    },
+    {
+      "name": "anchor02",
+      "expected_line": 371,
+      "source": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "marker_line": 344,
+      "ok": true,
+      "log_sha256": "85de90350082f46c9d571698328d2cf34d31e8eaf0be6b69991550ea6f817beb"
+    },
+    {
+      "name": "anchor03",
+      "expected_line": 1037,
+      "source": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "marker_line": 924,
+      "ok": true,
+      "log_sha256": "bd3930c44533394c60082ac87f63bfb24eb9b7309fce919278c3ca1b77a92926"
+    },
+    {
+      "name": "anchor04",
+      "expected_line": 2175,
+      "source": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "marker_line": 1838,
+      "ok": true,
+      "log_sha256": "07174d331f9cd93b4f55e69722ad8b15c97c4e46216eafdfd56427894b1c7122"
+    },
+    {
+      "name": "anchor05",
+      "expected_line": 2186,
+      "source": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "marker_line": 1845,
+      "ok": true,
+      "log_sha256": "6c6c46590d23afbcc12c2a41a1f911aaf3ae7bbbc45239b8a0756b47cb42de4d"
+    },
+    {
+      "name": "anchor06",
+      "expected_line": 220,
+      "source": "src/mvdm-host/wow32/wmdisp32.c",
+      "marker_line": 237,
+      "ok": true,
+      "log_sha256": "ed2ce5d6dd5c4b495fd83f6ca70a82bcd096e82b3d823a856c8e6154e8b8f14c"
+    },
+    {
+      "name": "anchor07",
+      "expected_line": 228,
+      "source": "src/mvdm-host/wow32/wmdisp32.c",
+      "marker_line": 244,
+      "ok": true,
+      "log_sha256": "db3666e675175375779b5f0e5328c4a5beb8461664cd13cb57eb91f9e27f048e"
+    },
+    {
+      "name": "anchor08",
+      "expected_line": 236,
+      "source": "src/mvdm-host/wow32/wmdisp32.c",
+      "marker_line": 252,
+      "ok": true,
+      "log_sha256": "fe88249a7cfd4cfbda3d875b67f5f06c3adc59400c1c2961b71d44402c929e23"
+    },
+    {
+      "name": "anchor09",
+      "expected_line": 625,
+      "source": "src/mvdm-host/wow32/wowhooks.c",
+      "marker_line": 631,
+      "ok": true,
+      "log_sha256": "c103c8a0cedcaa70f4fd4a6172c942c9df8c0dffb54d8519acc7bb880cd13728"
+    },
+    {
+      "name": "anchor10",
+      "expected_line": 1915,
+      "source": "src/mvdm-host/wow32/wow32.c",
+      "marker_line": 1599,
+      "ok": true,
+      "log_sha256": "facdf83e9f0ec4692e2ea3c4f5a8c3de00ce993e818a96b45ba894ffea7ac6b4"
+    }
+  ],
+  "failed": [],
+  "limits": "source-derived #line directive snippets; selected full-context builds separately recorded"
+}

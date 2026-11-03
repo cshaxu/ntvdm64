@@ -227,10 +227,12 @@ getsdosunit()
         return(1);
 }
 
+#line 448
 #ifdef NOT_IN_USE
+#line 449
 #error Unsupported excluded original configuration
 #endif
-#line 241
+#line 460
 
 int host_timer_2_frig_factor = 20;
 

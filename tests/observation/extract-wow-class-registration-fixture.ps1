@@ -40,6 +40,16 @@ $expected = (Slice $text 'BOOL GetClassInfo(' 'BOOL GetClassInfoEx(') +
     (Slice $text '#define StringDuplicate TEXT_FN(StringDuplicate)' 'DWORD  APIENTRY SetClassLong') +
     (Slice $text 'ATOM TEXT_FN(RegisterClassExWOW)(' 'UINT RegisterClipboardFormat(') +
     (Slice $text 'BOOL UnregisterClass(' 'SHORT VkKeyScan(')
+# Only the two original Unicode arms excluded by OPENNT-HOST-156 may differ.
+$expected = $expected.Replace("`r`n", "`n")
+$unicodeArms = @(
+    @{ Pattern = '(?s)(#ifdef UNICODE\n)        if \(\(pcmn->pwszClientUnicodeMenuName = StringDuplicate\(lpszMenuName\)\) == NULL\) \{.*?\n#else\n'; Line = 610; Message = 'Excluded unsupported Unicode class-client menu-name profile' },
+    @{ Pattern = '#ifdef UNICODE\n        dwFlags = 0;\n#else\n'; Line = 805; Message = 'Excluded unsupported Unicode class-client registration profile' }
+)
+foreach ($arm in $unicodeArms) {
+    if ([regex]::Matches($expected, $arm.Pattern).Count -ne 1) { throw 'Original Unicode arm boundaries changed.' }
+    $expected = [regex]::Replace($expected, $arm.Pattern, "#ifdef UNICODE`n#error $($arm.Message)`n#else`n#line $($arm.Line)`n")
+}
 # These selected functions have no comment delimiters inside string literals.
 # Compare the complete retained token stream, exempting only the two registered
 # failure-path frees, not arbitrary lines or all differences in this function.
@@ -48,12 +58,28 @@ if ($mirror.IndexOf($correction) -lt 0 -or $mirror.IndexOf($correction) -ne $mir
     throw 'Expected one registered menu-capture cleanup correction.'
 }
 function Tokens([string]$value) {
+    $value = $value -replace '(?m)^\s*#line\s+\d+\s*$', ''
     (($value -replace '(?s)/\*.*?\*/', '') -replace '//[^\r\n]*', '') -replace '\s+', ''
 }
 $shell = "#ifdef UNICODE`n#error Excluded unsupported Unicode class-client configuration`n#else`n#define IS_ANSI TRUE`n#undef _UNICODE`n#endif`n#line 14`n"
 $normalizedMirror = $mirror.Replace("`r`n", "`n")
 if (!$normalizedMirror.Contains($shell)) { throw 'Expected the original ANSI selection and excluded Unicode guard.' }
 $normalizedMirror = $normalizedMirror.Replace($shell, '')
+$excludedFrame = '(?m)^#line \d+\n#ifdef UNICODE\n#line \d+\n#error Excluded unsupported original UNICODE branch\n(?:#else\n#line \d+\n)?#endif[^\n]*\n#line \d+\n'
+if ([regex]::Matches($normalizedMirror, $excludedFrame).Count -ne 8) {
+    throw 'Expected eight registered empty excluded Unicode frames.'
+}
+$normalizedMirror = [regex]::Replace($normalizedMirror, $excludedFrame, '')
+$excludedFeFrame = '(?m)^#line \d+\n#ifdef FE_SB // GetMessage\(\)\n#line \d+\n#error Unsupported FE_SB original branch\n#endif[^\n]*\n#line \d+\n'
+if ([regex]::Matches($normalizedMirror, $excludedFeFrame).Count -ne 2) {
+    throw 'Expected two registered empty excluded FE_SB frames.'
+}
+$normalizedMirror = [regex]::Replace($normalizedMirror, $excludedFeFrame, '')
+$excludedUnicodeElse = '(?m)^#line \d+\n#ifndef UNICODE[^\n]*\n#line \d+\n#else[^\n]*\n#line \d+\n#error Unsupported UNICODE original branch\n#endif[^\n]*\n#line \d+\n'
+if ([regex]::Matches($normalizedMirror, $excludedUnicodeElse).Count -ne 3) {
+    throw 'Expected three registered empty excluded Unicode else frames.'
+}
+$normalizedMirror = [regex]::Replace($normalizedMirror, $excludedUnicodeElse, '')
 if ((Tokens ($normalizedMirror.Replace($correction.Replace("`r`n", "`n"), ''))) -cne (Tokens $expected)) {
     throw 'Class mirror differs from its original subset beyond the registered two frees.'
 }

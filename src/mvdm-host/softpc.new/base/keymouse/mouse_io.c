@@ -928,9 +928,12 @@ void mouse_install1()
 
 	note_trace0(MOUSE_VERBOSE, "mouse_install1:");
 
+#line 984
 #ifdef MONITOR
+#line 985
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif /* MONITOR */
+#line 1040
 	/*
 	 *	Make sure that old save area does not get re-painted!
 	 */
@@ -1482,6 +1485,8 @@ GLOBAL void mouse_video_mode_changed(int new_mode)
 {
     IMPORT word VirtualX, VirtualY;
 
+    /* DIVERGENCE MVDM-HOST-DIV-467: video changes bypass mouse BOP dispatch. */
+    virtual_swap_instance();
     current_video_mode = new_mode & 0x7F;
     mouse_ega_mode(current_video_mode);
     VirtualX = virtual_screen.bottom_right.x;
@@ -2281,7 +2286,7 @@ outb(ICA0_PORT_0, END_INTERRUPT);
 			}
 #endif
 #endif
-#line 2276
+#line 2657
 }
 
 
@@ -2598,7 +2603,7 @@ LOCAL void mouse_show_cursor IFN4(word *,junk1,word *,junk2,word *,junk3,word *,
 			}
 #endif
 #endif
-#line 2587
+#line 2970
 
 #if defined(NTVDM) && defined(X86GFX)
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
@@ -2640,7 +2645,7 @@ LOCAL void mouse_hide_cursor IFN4(word *,junk1,word *,junk2,word *,junk3,word *,
 		}
 #endif
 #endif
-#line 2623
+#line 3007
 #if defined(NTVDM) && defined(X86GFX)
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
@@ -3018,7 +3023,7 @@ LOCAL void mouse_set_graphics IFN4(word *,junk1,MOUSE_SCALAR *,hot_spot_x_ptr,MO
 #endif /* MOUSE_16_BIT */
 #endif
 #endif
-#line 2995
+#line 3372
 	/*
 	 *	Redisplay cursor if necessary
 	 */
@@ -3288,9 +3293,12 @@ LOCAL void mouse_conditional_off IFN4(word *,junk1,word *,junk2,MOUSE_SCALAR *,u
 	if (cursor_flag == MOUSE_CURSOR_DISPLAYED)
 		cursor_display();
 	}
+#line 3660
 #if defined (NTVDM) && defined(MONITOR)
+#line 3661
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
+#line 3665
 
 	note_trace0(MOUSE_VERBOSE, "mouse_io:return()");
 }
@@ -4811,7 +4819,7 @@ LOCAL void cursor_update IFN0()
 
 #endif
 #endif
-#line 4782
+#line 5243
 }
 
 
@@ -4911,7 +4919,7 @@ LOCAL void cursor_display IFN0()
 	host_flush_screen();
 #endif
 #endif
-#line 4876
+#line 5344
 }
 
 
@@ -5000,7 +5008,7 @@ LOCAL void cursor_undisplay IFN0()
 	}
 #endif
 #endif
-#line 4959
+#line 5430
 }
 
 
@@ -5010,6 +5018,8 @@ LOCAL void cursor_undisplay IFN0()
    drawing operations without fabricating movement or guest callbacks. */
 GLOBAL void mouse_pointer_route_changed IFN1(int,active)
 {
+    /* DIVERGENCE MVDM-HOST-DIV-467: route changes also bypass mouse BOPs. */
+    virtual_swap_instance();
     if (active) cursor_update();
     if (active && cursor_flag == MOUSE_CURSOR_DISPLAYED) cursor_display();
     if (!active) cursor_undisplay();

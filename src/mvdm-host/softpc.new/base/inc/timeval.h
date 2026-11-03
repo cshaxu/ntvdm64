@@ -35,7 +35,9 @@ struct host_timezone {
     int tz_dsttime;
 };
 
+#line 38
 #ifndef NTVDM
+#line 39
 #error Unsupported excluded original configuration
 #endif
 #line 51

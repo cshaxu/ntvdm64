@@ -1,0 +1,34 @@
+[
+  {
+    "component": "wow32",
+    "candidate_sha256": "d84ed0ea84016942ec78f22374b577a1cbbe92ae84a42d2b128f79d00034c534",
+    "reference_sha256": "061e4914f341433c4d4a4982148a4d23f489f31354073a847ea1a099bdc70818",
+    "candidate_size": 712192,
+    "reference_size": 712192,
+    "different_count": 4,
+    "first_offsets": [
+      280,
+      281,
+      625412,
+      625413
+    ]
+  },
+  {
+    "component": "ntvdm",
+    "candidate_sha256": "f32ee31d20aa3b52143b8c18269bbc8345a61f54e4161dc4bd21631d67b3c582",
+    "reference_sha256": "b9385aba3625e563418411a3fb2becd1203133de5c0fa6e1d5f20610c8c80e8a",
+    "candidate_size": 2103808,
+    "reference_size": 2103808,
+    "different_count": 8,
+    "first_offsets": [
+      288,
+      289,
+      333036,
+      333037,
+      333113,
+      333114,
+      1698412,
+      1698413
+    ]
+  }
+]

@@ -1,0 +1,73 @@
+{
+  "scope": "Unselected original remote print and network RPC declaration headers",
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/dosprint.h",
+      "sha256": "aa73c66d6e521af5fb50749895450c36a72a80816ed0539bfdbaea71158ffca8"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxprint.h",
+      "sha256": "5720d1f7db6c88dd4db9eebb92e889cb75d1c5c220b413af5c72db73a2ef9c50"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxpdebug.h",
+      "sha256": "51be35fa8f86a30ea68cead7898d2cefac964c63e6a8e0105de489077dd697b7"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netrpc.h",
+      "sha256": "55c6de04f24045579ddcf8b9222c90cbb0c052b46ca06bf0d8e2bb3f5e492c7f"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/dosprint.x",
+      "sha256": "817db83687619aa0d4d86345c870ff5665ad100317ad2821824ad191233cb92c"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxprint.x",
+      "sha256": "d8ba6cea2c86e6c8ad19461c04748d5325a9cb36ce9db24dbe2a3dde2aa09e1e"
+    }
+  ],
+  "mirror_sources": [
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/dosprint.h",
+      "current_sha256": "aa73c66d6e521af5fb50749895450c36a72a80816ed0539bfdbaea71158ffca8",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\dosprint.h",
+      "original_sha256": "2123d9c40a7cd8073792cfe7ee7cbfb1785282365766d0339b65c0a4e58fabef",
+      "pinned_expected_sha256": "2123d9c40a7cd8073792cfe7ee7cbfb1785282365766d0339b65c0a4e58fabef",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netrpc.h",
+      "current_sha256": "55c6de04f24045579ddcf8b9222c90cbb0c052b46ca06bf0d8e2bb3f5e492c7f",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\netrpc.h",
+      "original_sha256": "df7e7d38b781cc4df30983c15afa98bc30878ae0ed1971ac5fc486733791fc83",
+      "pinned_expected_sha256": "df7e7d38b781cc4df30983c15afa98bc30878ae0ed1971ac5fc486733791fc83",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxpdebug.h",
+      "current_sha256": "51be35fa8f86a30ea68cead7898d2cefac964c63e6a8e0105de489077dd697b7",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\rxpdebug.h",
+      "original_sha256": "2e91683121ab14cc67a70d236398d6ab6e3b599bc0a0025d5103ad9c73c59a78",
+      "pinned_expected_sha256": "2e91683121ab14cc67a70d236398d6ab6e3b599bc0a0025d5103ad9c73c59a78",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxprint.h",
+      "current_sha256": "5720d1f7db6c88dd4db9eebb92e889cb75d1c5c220b413af5c72db73a2ef9c50",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\rxprint.h",
+      "original_sha256": "3affdaccc5dd5ab0486a09546cbb8a85287162e2308195903e5fdfd0e5d2937e",
+      "pinned_expected_sha256": "3affdaccc5dd5ab0486a09546cbb8a85287162e2308195903e5fdfd0e5d2937e",
+      "original_matches_pinned": true
+    }
+  ],
+  "removed_condition_groups": 106,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r140.zip",
+  "evidence": [
+    "No observed product/test compilation or active build tool references these exact paths.",
+    "The .x files contain duplicate C declaration headers, not standalone executables or resources; their local include references are within the removed group."
+  ],
+  "limitations": [
+    "No claim of implementing historical remote print or RPC functionality.",
+    "Current project RPC and native print paths are unchanged."
+  ]
+}

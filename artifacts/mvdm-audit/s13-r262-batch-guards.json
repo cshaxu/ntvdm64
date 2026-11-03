@@ -1,0 +1,53 @@
+{
+  "groups": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "original_line": 375,
+      "macro": "FE_SB",
+      "original_else_line": 377,
+      "original_endif_line": 379,
+      "before_sha256": "674c9eae8d81a27d2389b86c4f2d7e977cdea572e40e1aff3a1933c13b449a98",
+      "after_sha256": "2a32010e1d863ddf01f7751a564f4a620467d789826c422abb642ca7ccfe1d49"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "original_line": 719,
+      "macro": "FE_SB",
+      "original_else_line": 720,
+      "original_endif_line": 722,
+      "before_sha256": "419a3bd0ae994a9ef212f744bd8a41af723a8de8b26123a886f3598525baf8bc",
+      "after_sha256": "c99aadb1149c2dfa0d9d054ac4d7516758165c520867fbb3677411d6c14403e3"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "original_line": 875,
+      "macro": "FE_SB",
+      "original_else_line": 881,
+      "original_endif_line": 885,
+      "before_sha256": "419a3bd0ae994a9ef212f744bd8a41af723a8de8b26123a886f3598525baf8bc",
+      "after_sha256": "c99aadb1149c2dfa0d9d054ac4d7516758165c520867fbb3677411d6c14403e3"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "original_line": 1224,
+      "macro": "FE_SB",
+      "original_else_line": 1226,
+      "original_endif_line": 1228,
+      "before_sha256": "419a3bd0ae994a9ef212f744bd8a41af723a8de8b26123a886f3598525baf8bc",
+      "after_sha256": "c99aadb1149c2dfa0d9d054ac4d7516758165c520867fbb3677411d6c14403e3"
+    }
+  ],
+  "build": "cached x86 WOW32 and call-boundary drawing targets passed",
+  "selected_alternatives": "enclosing original functions are absent; selected arms remain pending",
+  "previous_queue_hashes": "historical Git baseline is older than immediate before-source, account separately",
+  "preprocessing": [
+    "s13-r262-class-preprocess.json",
+    "s13-r262-drawtext-preprocess.json"
+  ],
+  "historical_preprocessing": [
+    "s13-r262-class-historical-preprocess.json",
+    "s13-r262-drawtext-historical-preprocess.json"
+  ],
+  "forced_controls": "s13-r262-batch-controls.json",
+  "limits": "Selected original functions omitted; no runtime, x64 product or layer completion claimed."
+}

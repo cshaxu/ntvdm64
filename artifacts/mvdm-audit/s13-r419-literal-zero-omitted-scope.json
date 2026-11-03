@@ -1,0 +1,79 @@
+{
+  "input_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r359.zip",
+  "input_sha256": "dfeb93067a93a6e18a3107a54e2a086a31a6bcbc1178c129d56284840fc376b5",
+  "scope": "original first-depth literal #if 0 groups only",
+  "count": 7,
+  "items": [
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_sha256": "b7656bca55e892a42ba825be0324211450ad298c40717e1ae5a889d084467529",
+      "original_line": 1409,
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "current_sha256": "73d731c936bd3085d0c7f9a541440e8db3d54c52f8a5ea3369e7b0bb1e1529c6",
+      "has_else": false,
+      "existing_status": "pending-original-scope",
+      "classification": "literal zero arm false in every preprocessor context; original enclosing function is absent in current source; placement remains pending"
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c",
+      "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
+      "original_line": 1480,
+      "current": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "current_sha256": "90130a4bf093ddb698dec81f104c349325923c8f0c7e0f5bb7cd29627a7a67a1",
+      "has_else": false,
+      "existing_status": "pending-original-function-scope",
+      "classification": "literal zero arm false in every preprocessor context; original enclosing function is absent in current source; placement remains pending"
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c",
+      "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
+      "original_line": 2298,
+      "current": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "current_sha256": "90130a4bf093ddb698dec81f104c349325923c8f0c7e0f5bb7cd29627a7a67a1",
+      "has_else": false,
+      "existing_status": "pending-original-scope",
+      "classification": "literal zero arm false in every preprocessor context; original enclosing function is absent in current source; placement remains pending"
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c",
+      "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
+      "original_line": 2624,
+      "current": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "current_sha256": "90130a4bf093ddb698dec81f104c349325923c8f0c7e0f5bb7cd29627a7a67a1",
+      "has_else": true,
+      "existing_status": "pending-original-scope",
+      "classification": "literal zero arm false in every preprocessor context; original enclosing function is absent in current source; placement remains pending"
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c",
+      "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
+      "original_line": 3751,
+      "current": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "current_sha256": "90130a4bf093ddb698dec81f104c349325923c8f0c7e0f5bb7cd29627a7a67a1",
+      "has_else": true,
+      "existing_status": "pending-original-scope",
+      "classification": "literal zero arm false in every preprocessor context; original enclosing function is absent in current source; placement remains pending"
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c",
+      "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
+      "original_line": 4516,
+      "current": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "current_sha256": "90130a4bf093ddb698dec81f104c349325923c8f0c7e0f5bb7cd29627a7a67a1",
+      "has_else": false,
+      "existing_status": "pending-original-scope",
+      "classification": "literal zero arm false in every preprocessor context; original enclosing function is absent in current source; placement remains pending"
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c",
+      "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
+      "original_line": 4574,
+      "current": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "current_sha256": "90130a4bf093ddb698dec81f104c349325923c8f0c7e0f5bb7cd29627a7a67a1",
+      "has_else": false,
+      "existing_status": "pending-original-scope",
+      "classification": "literal zero arm false in every preprocessor context; original enclosing function is absent in current source; placement remains pending"
+    }
+  ],
+  "limitations": "No claim of restored structure or classification of selected else; original lexical context and current retained subset must remain correctly represented."
+}

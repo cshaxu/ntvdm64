@@ -25,7 +25,7 @@ IU32	sign:1;
 #else
 #error Unsupported excluded original configuration
 #endif
-#line 30
+#line 22
 } FP32;
 
 typedef struct {
@@ -36,7 +36,7 @@ IU32	sign:1;
 #else
 #error Unsupported excluded original configuration
 #endif
-#line 42
+#line 28
 } FP64HI;
 
 typedef struct {
@@ -46,7 +46,7 @@ IU16	sign:1;
 #else
 #error Unsupported excluded original configuration
 #endif
-#line 52
+#line 33
 } FP80SE;
 
 //#ifdef BIGEND
@@ -58,7 +58,7 @@ FP64HI	hiword;
 #else
 #error Unsupported excluded original configuration
 #endif
-#line 64
+#line 40
 } FP64;
 
 
@@ -70,7 +70,7 @@ IS32 high_word;
 #else
 #error Unsupported excluded original configuration
 #endif
-#line 76
+#line 46
 } FPU_I64;
 
 /*
@@ -86,7 +86,7 @@ IU32	mant_hi;
 #else
 #error Unsupported excluded original configuration
 #endif
-#line 92
+#line 57
 FP80SE	sign_exp;
 } FP80;
 
@@ -98,9 +98,12 @@ FP80SE	sign_exp;
  * determined by whether the host is bigendian or littleendian.
  */
 
+#line 68
 #ifdef BIGEND
+#line 69
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif	/* BIGEND */
+#line 96
 
 #ifdef LITTLEND
 /* Format for double precision on littleendian host */
@@ -194,7 +197,7 @@ FP80SE	sign_exp;
 #else	/* !NTVDM */
 #error Unsupported excluded original configuration
 #endif	/* !NTVDM */
-#line 210
+#line 200
 
 #ifndef _Fpu_c_h
 

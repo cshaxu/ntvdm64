@@ -1,0 +1,126 @@
+{
+  "scope": "20 more actual WOW32 units scratch candidate; 17 use delayed button binding; three use forced header prefix as experimental equivalent of source ordering",
+  "rows": [
+    {
+      "target": "obj/opennt-user/control-body-lb1.obj",
+      "content_differences": 0,
+      "raw_relocation_differences": 0,
+      "candidate": "cand2"
+    },
+    {
+      "target": "obj/opennt-user/control-body-lboxmult.obj",
+      "content_differences": 0,
+      "raw_relocation_differences": 0,
+      "candidate": "cand2"
+    },
+    {
+      "target": "obj/opennt-user/control-body-lboxctl1.obj",
+      "content_differences": 0,
+      "raw_relocation_differences": 0,
+      "candidate": "cand2"
+    },
+    {
+      "target": "obj/opennt-user/control-body-lboxctl2.obj",
+      "content_differences": 0,
+      "raw_relocation_differences": 0,
+      "candidate": "cand2"
+    },
+    {
+      "target": "obj/opennt-user/control-body-lboxctl3.obj",
+      "content_differences": 0,
+      "raw_relocation_differences": 0,
+      "candidate": "cand2"
+    },
+    {
+      "target": "obj/opennt-user/control-body-lboxvar.obj",
+      "content_differences": 0,
+      "raw_relocation_differences": 0,
+      "candidate": "cand2"
+    },
+    {
+      "target": "obj/opennt-user/control-body-lboxrare.obj",
+      "content_differences": 0,
+      "raw_relocation_differences": 0,
+      "candidate": "cand2"
+    },
+    {
+      "target": "obj/opennt-user/control-body-dlgend.obj",
+      "content_differences": 0,
+      "raw_relocation_differences": 1,
+      "candidate": "cand2"
+    },
+    {
+      "target": "obj/opennt-user/control-body-dlgbegin.obj",
+      "content_differences": 0,
+      "raw_relocation_differences": 2,
+      "candidate": "cand2"
+    },
+    {
+      "target": "obj/opennt-user/control-body-dlgmgr.obj",
+      "content_differences": 0,
+      "raw_relocation_differences": 10,
+      "candidate": "cand2"
+    },
+    {
+      "target": "obj/opennt-user/control-body-dlgmgrc.obj",
+      "content_differences": 0,
+      "raw_relocation_differences": 0,
+      "candidate": "cand2"
+    },
+    {
+      "target": "obj/opennt-user/control-body-dlgmgr2.obj",
+      "content_differences": 0,
+      "raw_relocation_differences": 4,
+      "candidate": "cand2"
+    },
+    {
+      "target": "obj/opennt-user/control-body-dmmnem.obj",
+      "content_differences": 0,
+      "raw_relocation_differences": 2,
+      "candidate": "cand2"
+    },
+    {
+      "target": "obj/opennt-user/control-body-winmgrc.obj",
+      "content_differences": 0,
+      "raw_relocation_differences": 0,
+      "candidate": "cand2"
+    },
+    {
+      "target": "obj/opennt-user/control-body-wow.obj",
+      "content_differences": 0,
+      "raw_relocation_differences": 0,
+      "candidate": "cand2"
+    },
+    {
+      "target": "obj/opennt-user/control-view-winmgr.obj",
+      "content_differences": 0,
+      "raw_relocation_differences": 0,
+      "candidate": "cand2"
+    },
+    {
+      "target": "obj/opennt-user/control-view-wow.obj",
+      "content_differences": 0,
+      "raw_relocation_differences": 0,
+      "candidate": "cand2"
+    },
+    {
+      "target": "obj/opennt-user/control-color.obj",
+      "content_differences": 1,
+      "raw_relocation_differences": 0,
+      "candidate": "cand4"
+    },
+    {
+      "target": "obj/opennt-user/control-state.obj",
+      "content_differences": 1,
+      "raw_relocation_differences": 0,
+      "candidate": "cand4"
+    },
+    {
+      "target": "obj/opennt-user/control-brush-client.obj",
+      "content_differences": 1,
+      "raw_relocation_differences": 0,
+      "candidate": "cand4"
+    }
+  ],
+  "limits": "Object comparisons do not prove link/runtime equivalence. Forced prefix is a temporary experiment, not a product design. Other consumers untested."
+}

@@ -1,0 +1,324 @@
+[
+  {
+    "path": "src/mvdm-host/dos/dem/demhndl.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demhndl.c",
+    "original_sha256": "5e951e14d7c88357dc25933b602cb756fbaf4cf47125a46d740135491b4eb958",
+    "before_sha256": "69b0f73d02b09c6380a1c6b809f95da0621cb13d8b9d6ef0f83ae1f5c7110275",
+    "after_sha256": "b5e0e3280d267729af059a5944ac411d7f2519ad3f1339fc8232accf0f439049",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/dos/dem/demhndl.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demhndl.c",
+        "anchor_line": 443,
+        "old": 445,
+        "new": 374,
+        "following": "hFile =  GETHANDLE (getAX(),getBP());",
+        "original_line": 374,
+        "group_line": 440,
+        "depth1_endline": 442,
+        "arm_statuses": [
+          "newly-excluded"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+    "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+    "before_sha256": "409549cb4a046776e2d710c8325d33fa506ab93fc06090afccd8f87cf373a85e",
+    "after_sha256": "1cda785860d29b801b2510a801e0cc60869ceefbcf6a4a5571e6d32696328836",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+        "anchor_line": 638,
+        "old": 772,
+        "new": 828,
+        "following": "equip_flag.bits.game_io_present = FALSE;",
+        "original_line": 828,
+        "group_line": 633,
+        "depth1_endline": 637,
+        "arm_statuses": [
+          "retained-observed",
+          "newly-excluded"
+        ]
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+        "anchor_line": 700,
+        "old": 906,
+        "new": 993,
+        "following": "for (adapter = 0; adapter < NUM_SERIAL_PORTS; adapter++)",
+        "original_line": 994,
+        "group_line": 697,
+        "depth1_endline": 699,
+        "arm_statuses": [
+          "newly-excluded"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+    "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+    "before_sha256": "805366897f1c4fa4309b4fcfa2e952a4d18214ad11c4b299d73dc9b739ea32a0",
+    "after_sha256": "102bdfaab6fea42e19deea0115f82523fdff5d6e486272887139740955a5e224",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+        "anchor_line": 1603,
+        "old": 1637,
+        "new": 1578,
+        "following": "case  0xb4:   /* T4 LFS Gv Mp */   instp32p32 = LFS;   goto TYPEC4;",
+        "original_line": 1578,
+        "group_line": 1597,
+        "depth1_endline": 1602,
+        "arm_statuses": [
+          "newly-excluded",
+          "retained-observed"
+        ]
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+        "anchor_line": 1675,
+        "old": 1707,
+        "new": 1648,
+        "following": "case  0xbc:   /* T5 BSF Gv Ev */",
+        "original_line": 1648,
+        "group_line": 1669,
+        "depth1_endline": 1674,
+        "arm_statuses": [
+          "newly-excluded",
+          "retained-observed"
+        ]
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+        "anchor_line": 4595,
+        "old": 4663,
+        "new": 4777,
+        "following": "SET_DR(DR_DAR0, 0);   /* Really Undefined */",
+        "original_line": 4778,
+        "group_line": 4592,
+        "depth1_endline": 4594,
+        "arm_statuses": [
+          "newly-excluded"
+        ]
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+        "anchor_line": 4629,
+        "old": 4695,
+        "new": 4805,
+        "following": "SET_EBX(0);   /* Really Undefined */",
+        "original_line": 4805,
+        "group_line": 4623,
+        "depth1_endline": 4628,
+        "arm_statuses": [
+          "newly-excluded",
+          "retained-observed"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+    "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+    "before_sha256": "ea0ebad8ee2746d2bd9c52481d4ebf2d61d0e9e02bd77a90d57108391cf5d58c",
+    "after_sha256": "7a54194c4bd572974478006701fcbf44b094b4b8638ee954b02cca34d4ef0541",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+        "anchor_line": 2123,
+        "old": 2189,
+        "new": 2596,
+        "following": "static int com_adaptor[4] = {COM1_ADAPTOR,COM2_ADAPTOR,",
+        "original_line": 2597,
+        "group_line": 2120,
+        "depth1_endline": 2122,
+        "arm_statuses": [
+          "newly-excluded"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\trace.c",
+    "original_sha256": "b776bec19f7c7c615684711b915c7c7d1c56a124d37e14fc30a575681c83b2e3",
+    "before_sha256": "8891c3be38d33538f830f6d21ebb98307aeb9322ff38a4f0ead55cd9ce6eb3e2",
+    "after_sha256": "062b9332cfd240d535f10c4e3ea5a205c0c9c2d733f2fdd2fd03b5f31e30e2b4",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\trace.c",
+        "anchor_line": 85,
+        "old": 233,
+        "new": 243,
+        "following": "void trace(error_msg, dump_info)",
+        "original_line": 244,
+        "group_line": 82,
+        "depth1_endline": 84,
+        "arm_statuses": [
+          "newly-excluded"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi.c",
+    "original_sha256": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+    "before_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
+    "after_sha256": "e7307f37be775a00ba95378b4a9442e069f3fb93364eea5be1905a7bad9156b2",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi.c",
+        "anchor_line": 320,
+        "old": 320,
+        "new": 353,
+        "following": "config_activate(C_FLOPPY_A_DEVICE + adapter, attach);",
+        "original_line": 354,
+        "group_line": 317,
+        "depth1_endline": 319,
+        "arm_statuses": [
+          "already-excluded"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\bios.h",
+    "original_sha256": "a181e9ddddf9cbeeff03b63f733d282455b2f21b578c6c9cf772bf726b41d064",
+    "before_sha256": "eebdb2a775ef3692317ff5b990baf59c6651a67f8795f15e53577978239e50db",
+    "after_sha256": "248021f5a5b58067787a92f6c1436de1fc2c72760111998d99c9500121ebc9c9",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\bios.h",
+        "anchor_line": 352,
+        "old": 361,
+        "new": 379,
+        "following": "extern void softpc_version IPT0();",
+        "original_line": 380,
+        "group_line": 346,
+        "depth1_endline": 351,
+        "arm_statuses": [
+          "retained-observed",
+          "newly-excluded"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\emm.h",
+    "original_sha256": "d92cc144f50e60de5042f76c67574a3fdc22b0ad38411d92d1459d4a02b17789",
+    "before_sha256": "568af7bbf7f5ef24b5b6688dfc9c5e45e9d0f6caa0d92ae7f7f49921ad8962f7",
+    "after_sha256": "13c51268c07d4486e5a567bea80cebb53177abb3188bbdfa222b0f2bc7f6449d",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\emm.h",
+        "anchor_line": 184,
+        "old": 186,
+        "new": 187,
+        "following": "IMPORT VOID LIM_b_write   IPT1(sys_addr, intel_addr);",
+        "original_line": 188,
+        "group_line": 177,
+        "depth1_endline": 183,
+        "arm_statuses": [
+          "retained-observed",
+          "newly-excluded"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gvi.h",
+    "original_sha256": "c4dfbf2bb2d6e8d79e9fd607f6ab50b149a5edb2768b25d2475002e2e9940716",
+    "before_sha256": "8d3d89112a91013848f3cc05e9b065a5a295f7bdc289a5f2958e417678a05573",
+    "after_sha256": "ac27ac3db4d6f30db6de02f828426e629200e456b8578839a32bb43b742bee67",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gvi.h",
+        "anchor_line": 158,
+        "old": 157,
+        "new": 187,
+        "following": "half_word *screen_ptr;\t\t/* pointer to start of regen buffer\t    */",
+        "original_line": 187,
+        "group_line": 153,
+        "depth1_endline": 157,
+        "arm_statuses": [
+          "retained-observed",
+          "newly-excluded"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ios.h",
+    "original_sha256": "ae58169de7aa969000f7cf4374d3d850b55d352c3d4c6edcf52dec0e985620a4",
+    "before_sha256": "ab2f4af08702de82f4207ea7a93d723009f200fc159d540e13adf14a33764fec",
+    "after_sha256": "be10431706251e0bf08ffda03662eec595fd39f731bbb6d86aed3d7424c7f995",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ios.h",
+        "anchor_line": 455,
+        "old": 454,
+        "new": 499,
+        "following": "IMPORT void\tio_define_in_routines",
+        "original_line": 500,
+        "group_line": 452,
+        "depth1_endline": 454,
+        "arm_statuses": [
+          "already-excluded"
+        ]
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ios.h",
+        "anchor_line": 481,
+        "old": 479,
+        "new": 538,
+        "following": "IMPORT void\tio_define_out_routines",
+        "original_line": 539,
+        "group_line": 478,
+        "depth1_endline": 480,
+        "arm_statuses": [
+          "already-excluded"
+        ]
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ios.h",
+        "anchor_line": 502,
+        "old": 500,
+        "new": 559,
+        "following": "IMPORT void\tio_disconnect_port IPT2(io_addr, io_address, half_word, adapter);",
+        "original_line": 560,
+        "group_line": 496,
+        "depth1_endline": 501,
+        "arm_statuses": [
+          "retained-observed",
+          "newly-excluded"
+        ]
+      }
+    ]
+  }
+]

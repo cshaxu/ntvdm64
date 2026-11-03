@@ -91,12 +91,13 @@ Routine Description:
                                          Handlers[IntNumber].Eip);
 
 
+#line 88
 #ifdef i386
 #ifndef CPU_40_STYLE /* DIVERGENCE(MVDM-HOST-DIV-554) */
 #error Excluded unsupported VdmSetInt21Handler kernel VDM path
 #endif /* !CPU_40_STYLE */
 #endif
-#line 95
+#line 107
     setAX(0);
 }
 
@@ -419,10 +420,11 @@ Notes:
     }
 #endif
 
+#line 387
 #ifdef i386
 #error Excluded unsupported i386 kernel VDM stack publication
 #endif
-#line 424
+#line 397
 }
 
 VOID
@@ -616,7 +618,7 @@ Return Value:
 #else
 #error Unsupported excluded original configuration
 #endif
-#line 618
+#line 541
             return FALSE;
         }
 
@@ -650,12 +652,15 @@ Return Value:
 #else
 #error Unsupported excluded original configuration
 #endif
-#line 656
+#line 562
         setCS(Handlers[IntNumber].CsSelector);
 
+#line 564
 #if DBG
+#line 565
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 573
     }
 
     DBGTRACE(DPMI_DISPATCH_INT, IntNumber, 0, 0);

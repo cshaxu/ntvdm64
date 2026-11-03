@@ -113,6 +113,9 @@ GLOBAL VOID RegainRegenMemory(VOID)
 
 
 
+#line 115
 #ifdef X86GFX
+#line 116
 #error DIVERGENCE MVDM-HOST-DIV-593: X86GFX branch is not selected
 #endif //X86GFX
+#line 159

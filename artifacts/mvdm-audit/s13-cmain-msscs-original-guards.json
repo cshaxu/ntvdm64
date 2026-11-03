@@ -1,0 +1,18 @@
+{
+  "sources": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "sha256": "838565b9560fdfbc4557871af06f056492c7cad2cde4882b8600467e3be7660a"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "sha256": "52eeb0eadc50d81bfd2bc7e6024163232a0906e6aa6421972f5f5dfff67afa34"
+    }
+  ],
+  "c_main_original": 226,
+  "msscs_original": 123,
+  "msscs_caveat": "original i386 alternative intentionally adapted for CPU40 by DIV-039; no equivalence claim",
+  "build": "x86 worker compiled",
+  "test": "x86 first-depth guard suite passed",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r195.zip"
+}

@@ -177,9 +177,12 @@ static int fla_ndma_sector_size;
  * The FLA stores the IBM Digital Output Register internally 
  */ 
 
+#line 180
 #ifdef BIT_ORDER1
+#line 181
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
+#line 194
 
 #ifdef BIT_ORDER2
 typedef union {

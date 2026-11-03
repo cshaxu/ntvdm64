@@ -1,0 +1,15 @@
+{
+  "corrections": 97,
+  "bad": [
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "original_endif_line": 113,
+      "current_marker_line": 58,
+      "corrected": 114,
+      "endif_lf_matches": false,
+      "current_marker_lf_matches": true,
+      "continuation_lf_matches": false
+    }
+  ],
+  "limits": "LF physical-line text check; original #line directives and full diagnostic behavior assessed separately"
+}

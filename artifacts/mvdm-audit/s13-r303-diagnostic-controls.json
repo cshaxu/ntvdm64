@@ -1,0 +1,70 @@
+{
+  "cases": [
+    {
+      "name": "anchor00",
+      "expected_line": 270,
+      "source": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "marker_line": 268,
+      "ok": true,
+      "log_sha256": "95978b2fe74aac2a04568b7027de04309b7872850594e1d9b851a547cf7d71d9"
+    },
+    {
+      "name": "anchor01",
+      "expected_line": 203,
+      "source": "src/mvdm-host/wow32/wkman.c",
+      "marker_line": 184,
+      "ok": true,
+      "log_sha256": "da1b3a0004ca03b482ff2f19792dde1c3662e5450a5e4d9941e78171cf3f8a06"
+    },
+    {
+      "name": "anchor02",
+      "expected_line": 867,
+      "source": "src/mvdm-host/wow32/wkman.c",
+      "marker_line": 850,
+      "ok": true,
+      "log_sha256": "5f105bc29efa2f243320ea9c888a67ee1a88909da1e8eb82d76a739a13bec3d0"
+    },
+    {
+      "name": "anchor03",
+      "expected_line": 882,
+      "source": "src/mvdm-host/wow32/wkman.c",
+      "marker_line": 866,
+      "ok": true,
+      "log_sha256": "766bff87ecb807443352890ca8cd03cfef4efdba4287009bb2a79973f4940b2d"
+    },
+    {
+      "name": "anchor04",
+      "expected_line": 1379,
+      "source": "src/mvdm-host/wow32/wkman.c",
+      "marker_line": 1355,
+      "ok": true,
+      "log_sha256": "8f3bbb6b44178e14c8b3d973dc8362cc20b59c8947beca306587558a386e62e3"
+    },
+    {
+      "name": "anchor05",
+      "expected_line": 1416,
+      "source": "src/mvdm-host/wow32/wkman.c",
+      "marker_line": 1393,
+      "ok": true,
+      "log_sha256": "903713dc13d7e7bd586907b6e17a6d8c06a7d41316c1f2d8d07161f32e4b8ea8"
+    },
+    {
+      "name": "anchor06",
+      "expected_line": 1429,
+      "source": "src/mvdm-host/wow32/wkman.c",
+      "marker_line": 1408,
+      "ok": true,
+      "log_sha256": "26a6049ddb398992d594518e09444ce3df3556e6242bb72ebd4552233b6259e6"
+    },
+    {
+      "name": "anchor07",
+      "expected_line": 2474,
+      "source": "src/mvdm-host/wow32/wkman.c",
+      "marker_line": 2432,
+      "ok": true,
+      "log_sha256": "294550c88d6c24a994c0732b05314fe832a037e1fb536ee323c74fcc6b6a5157"
+    }
+  ],
+  "failed": [],
+  "limits": "source-derived #line directive snippets; selected full-context builds separately recorded"
+}

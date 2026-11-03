@@ -187,7 +187,9 @@ extern void (*BIOS[])();
 #endif
 #line 188
 
+#line 189
 #ifdef GEN_DRVR
+#line 190
 #error Unsupported excluded original configuration
 #endif
 #line 192
@@ -203,7 +205,9 @@ extern void return_from_call();
 #endif
 #line 202
 
+#line 203
 #ifdef CDROM 
+#line 204
 #error Unsupported excluded original configuration
 #endif /* CDROM */
 #line 208
@@ -214,7 +218,9 @@ extern void worm_io();
 extern void cmd_install();
 extern void cmd_load();
 
+#line 215
 #ifdef DPMI
+#line 216
 #error Unsupported excluded original configuration
 #endif
 #line 224
@@ -245,7 +251,9 @@ extern void dummy_int();
 extern void unexpected_int();
 extern void Get_build_id();
 
+#line 251
 #ifdef WIN_VTD 
+#line 252
 #error Unsupported excluded original configuration
 #endif /* WIN_VTD */
 #line 254
@@ -297,22 +305,22 @@ extern void bootstrap3();
 #ifdef	MSWDVR
 #error Unsupported excluded original configuration
 #endif
-#line 305
+#line 321
 
 #ifdef	NOVELL_IPX
 #error Unsupported excluded original configuration
 #endif
-#line 311
+#line 327
 
 #ifdef	NOVELL_TCPIP
 #error Unsupported excluded original configuration
 #endif
-#line 316
+#line 332
 
 #ifdef WINSOCK
 #error Unsupported excluded original configuration
 #endif /* WINSOCK */
-#line 320
+#line 336
 
 #ifdef SWINAPI
 #error DIVERGENCE MVDM-HOST-DIV-529: SWINAPI platform branch is not selected; see mirror register.
@@ -321,15 +329,18 @@ extern void bootstrap3();
 #if	defined(SOFTWIN_API) || defined(SWIN_HFX)
 #error Unsupported excluded original configuration
 #endif	/* SOFTWIN_API or SWIN_HFX */
-#line 329
+#line 347
 
 #if	defined(SOFTWIN_API)
 #error DIVERGENCE MVDM-HOST-DIV-528: SOFTWIN_API platform branch is not selected; see mirror register.
 #endif	/* SOFTWIN_API */
 
+#line 352
 #ifdef SWIN_HAW
+#line 353
 #error DIVERGENCE MVDM-HOST-DIV-528: SWIN_HAW platform branch is not selected; see mirror register.
 #endif	/* SWIN_HAW */
+#line 355
 
 #ifdef ANSI
 extern void host_reset(void);
@@ -341,7 +352,7 @@ extern void clear_string(void);
 #else
 #error Unsupported excluded original configuration
 #endif /* ANSI */
-#line 353
+#line 371
 
 #ifdef ANSI
 extern void smeg_collect_data(void);
@@ -349,7 +360,7 @@ extern void smeg_freeze_data(void);
 #else
 #error Unsupported excluded original configuration
 #endif /* ANSI */
-#line 361
+#line 379
 
 extern void softpc_version IPT0();
 
@@ -379,7 +390,10 @@ extern void switch_to_real_mode(void);
 
 IMPORT int soft_reset;
 
+#line 407
 #if	defined(SPC386) && defined(WDCTRL_BOP)
+#line 408
 #error Unsupported excluded original configuration
 #endif	/* SPC386 && WDCTRL_BOP */
+#line 410
 #line 392

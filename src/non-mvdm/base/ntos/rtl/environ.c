@@ -24,10 +24,12 @@ Revision History:
 #include <nturtl.h>
 #include <string.h>
 
+#line 26
 #if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)
+#line 27
 #error Unsupported excluded original configuration
 #endif
-#line 34
+#line 33
 
 NTSTATUS
 RtlCreateEnvironment(
@@ -283,9 +285,12 @@ RtlQueryEnvironmentVariable_U(
             p = Peb->ProcessParameters->Environment;
 
             }
+#line 288
 #if DBG
+#line 289
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #endif
+#line 294
 
         if ( RtlpEnvironCacheValid && p == Peb->ProcessParameters->Environment ) {
             if (RtlEqualUnicodeString( Name, &RtlpEnvironCacheName, TRUE )) {

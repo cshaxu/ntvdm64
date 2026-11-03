@@ -1,0 +1,32 @@
+{
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkman.c",
+  "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9",
+  "current": "src/mvdm-host/wow32/wkman.c",
+  "current_sha256": "4da0f527c7b807b2fa94dba88c2cb49201a01d5e5b071b15ef26a29b2975c493",
+  "pairs": [
+    [
+      1173,
+      1158
+    ],
+    [
+      1179,
+      1162
+    ],
+    [
+      1187,
+      1171
+    ]
+  ],
+  "retained_arm_original_lines": [
+    1183,
+    1184,
+    1185
+  ],
+  "retained_arm_current_lines": [
+    1166,
+    1167,
+    1168
+  ],
+  "excluded_profile_evidence": "s13-bfs-depth1-wow-trycall-exclusion.json",
+  "build": "no source modification; existing cached x86 WOW32 build passed in previous batch"
+}

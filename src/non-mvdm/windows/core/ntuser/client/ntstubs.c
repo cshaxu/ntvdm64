@@ -211,9 +211,13 @@ LONG _SetWindowLong(
         ((PLBWND)pwnd)->pLBIV != NULL &&
         (!TestWindowProcess(pwnd) || ((PLBWND)pwnd)->pLBIV->fInitialized)) {
 
+#endif /* original client-owner selection */
+#line 953
 #ifdef DEBUG
-        LONG dwDebugLong = dwNewLong;
+#error Excluded unsupported original DEBUG window-style tracing
 #endif
+#if defined(WOW_ORIGINAL_DIALOG_GETSET) && !defined(WOW_ORIGINAL_CONTROL_TEXT) && !defined(WOW_ORIGINAL_CONTROL_COLOR) && !defined(WOW_ORIGINAL_CONTROL_BRUSH_CLIENT)
+#line 956
 
         dwNewLong &= ~(LBS_OWNERDRAWFIXED |
                        LBS_OWNERDRAWVARIABLE |
@@ -223,11 +227,13 @@ LONG _SetWindowLong(
                                     LBS_OWNERDRAWVARIABLE |
                                     LBS_HASSTRINGS);
 
+#endif /* WOW_ORIGINAL_DIALOG_GETSET */
+#line 965
 #ifdef DEBUG
-        if (dwDebugLong != dwNewLong) {
-           RIPMSG0(RIP_WARNING, "SetWindowLong can't change LBS_OWNERDRAW* or LBS_HASSTRINGS.");
-        }
+#error Excluded unsupported original DEBUG window-style tracing
 #endif
+#if defined(WOW_ORIGINAL_DIALOG_GETSET) && !defined(WOW_ORIGINAL_CONTROL_TEXT) && !defined(WOW_ORIGINAL_CONTROL_COLOR) && !defined(WOW_ORIGINAL_CONTROL_BRUSH_CLIENT)
+#line 970
     }
 
 
@@ -240,7 +246,7 @@ LONG _SetWindowLong(
     ERRORTRAP(0);
     ENDCALL(LONG);
 }
-#else
+#elif !defined(WOW_ORIGINAL_CONTROL_TEXT) && !defined(WOW_ORIGINAL_CONTROL_COLOR) && !defined(WOW_ORIGINAL_CONTROL_BRUSH_CLIENT)
 /**************************************************************************\
 * Module Name: ntstubs.c
 *
@@ -292,6 +298,8 @@ LONG GetClassWOWWords(
 #line 380
 #ifdef MEMPHIS_MENUS
 #error Excluded unsupported MEMPHIS_MENUS client owner
+#else // MEMPHIS_MENUS
+#line 440
 #endif // MEMPHIS_MENUS
 #line 500
 #ifdef MEMPHIS_MENU_WATERMARKS
@@ -301,3 +309,85 @@ LONG GetClassWOWWords(
 #ifdef FE_SB // fnINWPARAMDBCSCHAR()
 #error Excluded unsupported FE_SB client message owner
 #endif // FE_SB
+
+
+#line 693
+#ifdef FE_SB // _PeekMessage()
+#line 694
+#error Excluded unsupported original FE_SB branch
+#endif // FE_SB
+#line 702
+
+#line 797
+#ifdef FE_SB // _PeekMessage()
+#line 798
+#error Excluded unsupported original FE_SB branch
+#endif // FE_SB
+#line 800
+
+
+#line 753
+#ifdef FE_SB // _PeekMessage()
+#line 754
+#error Excluded unsupported original FE_SB branch
+#else
+#line 759
+#endif // FE_SB
+#line 767
+
+#line 769
+#ifdef FE_SB // _PeekMessage()
+#line 770
+#error Excluded unsupported original FE_SB branch
+#else
+#line 780
+#endif // FE_SB
+#line 783
+
+#line 784
+#ifdef FE_SB // _PeekMessage()
+#line 785
+#error Excluded unsupported original FE_SB branch
+#else
+#line 793
+#endif // FE_SB
+#line 795
+
+
+#line 358
+#ifdef LATER
+#line 359
+#error Excluded unsupported original LATER branch
+#endif
+#line 369
+
+
+#line 2204
+#ifdef DEBUG
+#line 2205
+#error Unsupported DEBUG original branch
+#endif
+#line 2210
+
+#line 77
+#ifdef FE_IME
+#line 78
+#error Unsupported FE_IME original branch
+#endif
+#line 84
+
+#line 717
+#ifdef FE_IME // _PeekMessage()
+#line 718
+#error Unsupported FE_IME original branch
+#else
+#line 721
+#endif // FE_IME
+#line 723
+
+#line 1020
+#ifdef FE_IME //@TK
+#line 1021
+#error Unsupported FE_IME original branch
+#endif
+#line 1034

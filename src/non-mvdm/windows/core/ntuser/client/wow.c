@@ -5,6 +5,15 @@
  * Standalone precomp supplies the retained, same-address WND graph. */
 #include "precomp.h"
 
+#line 19
+#ifdef WOW
+#error Excluded unsupported original 16-bit WOW source branch
+#else // WOW
+#line 120
+#endif // !WOW
+#line 138
+
+
 PWND _GetDlgItem(
     PWND pwnd,
     int id)
@@ -20,3 +29,95 @@ PWND _GetDlgItem(
 
     return pwnd;
 }
+
+#line 313
+#ifdef WOW
+#error Excluded unsupported original 16-bit WOW source branch
+#endif
+#line 323
+
+#line 1067
+#ifdef WOW
+#error Excluded unsupported original 16-bit WOW source branch
+#endif
+#line 1077
+
+
+#line 304
+#ifdef WOW
+#line 305
+#error Excluded unsupported original WOW branch
+#else
+#line 308
+#endif
+#line 310
+
+#line 435
+#ifdef WOW
+#line 436
+#error Excluded unsupported original WOW branch
+#else
+#line 443
+#endif
+#line 461
+
+#line 719
+#ifdef WOW
+#line 720
+#error Excluded unsupported original WOW branch
+#else
+#line 727
+#endif
+#line 729
+
+#line 776
+#ifdef WOW
+#line 777
+#error Excluded unsupported original WOW branch
+#else
+#line 780
+#endif
+#line 782
+
+#line 795
+#ifdef WOW
+#line 796
+#error Excluded unsupported original WOW branch
+#else
+#line 803
+#endif
+#line 805
+
+#line 835
+#ifdef WOW
+#line 836
+#error Excluded unsupported original WOW branch
+#else
+#line 838
+#endif
+#line 840
+
+#line 911
+#ifdef WOW
+#line 912
+#error Excluded unsupported original WOW branch
+#else
+#line 914
+#endif
+#line 1063
+
+
+#line 519
+#ifdef ENABLE_CLIENTSIDE_ACCESSCHECK
+#line 520
+#error Excluded unsupported original ENABLE_CLIENTSIDE_ACCESSCHECK branch
+#endif
+#line 527
+
+#line 752
+#ifdef ENABLE_CLIENTSIDE_ACCESSCHECK
+#line 753
+#error Excluded unsupported original ENABLE_CLIENTSIDE_ACCESSCHECK branch
+#endif
+#line 759
+

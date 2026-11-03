@@ -1,0 +1,51 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+  "before_sha256": "9ab5966eb93bf8240993ff0e6a855001a7a15bed630574edadb1e389831285a4",
+  "after_sha256": "13db987629d3d65fc9412341e1e03a3a9ce31e1c5b5096ed6441b2e2d61edafb",
+  "original_source": "O:/repos.external/OpenNT/windows/core/ntuser/client/wow.c",
+  "removed": [
+    {
+      "original_line": 304,
+      "original_owner": "GetKeyboardState",
+      "current_old_start": 33,
+      "current_old_end": 40
+    },
+    {
+      "original_line": 435,
+      "original_owner": "IsWindow",
+      "current_old_start": 47,
+      "current_old_end": 54
+    },
+    {
+      "original_line": 719,
+      "original_owner": "ClientToScreen",
+      "current_old_start": 61,
+      "current_old_end": 68
+    },
+    {
+      "original_line": 776,
+      "original_owner": "GetWindowRect",
+      "current_old_start": 75,
+      "current_old_end": 82
+    },
+    {
+      "original_line": 795,
+      "original_owner": "ScreenToClient",
+      "current_old_start": 83,
+      "current_old_end": 90
+    },
+    {
+      "original_line": 835,
+      "original_owner": "EnableMenuItem",
+      "current_old_start": 91,
+      "current_old_end": 98
+    },
+    {
+      "original_line": 911,
+      "original_owner": "CallNextHookEx",
+      "current_old_start": 99,
+      "current_old_end": 106
+    }
+  ],
+  "reason": "original directives inside wholly omitted function bodies were incorrectly installed at file scope; original groups remain pending"
+}

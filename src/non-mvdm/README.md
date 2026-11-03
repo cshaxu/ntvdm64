@@ -1,5 +1,75 @@
 # non-mvdm original OpenNT sources
 
+OPENNT-HOST-168 splits the local state-drawing selector around the two original
+literal-disabled `mngrayc.c` conditions, restoring their first-depth
+positions and logical continuations. Their excluded bodies remain `#error`;
+selected drawing code is unchanged. Evidence:
+`../../artifacts/mvdm-audit/s13-mngrayc-original-outer-guards.json`.
+
+OPENNT-HOST-167 restores the excluded original `server.c` FE_IME global
+condition to file scope, outside the local message-table selector. FE_IME is
+unsupported here and now rejects even when that local selector is absent.
+Selected preprocessing, line anchors and build controls are recorded in
+`../../artifacts/mvdm-audit/s13-server-feime-outer.json`.
+
+OPENNT-HOST-166 restores the original literal-disabled `handtabl.c` handle
+check boundary and rejects its omitted body. The selected ownership table is
+unchanged; see `../../artifacts/mvdm-audit/s13-handtabl-original-disabled.json`.
+
+OPENNT-HOST-165 restores the original `clmenu.c` outer Memphis menu-conversion
+and watermark conditions as excluded branches. The selected original menu
+loading subset remains unchanged. Evidence:
+`../../artifacts/mvdm-audit/s13-clmenu-original-guards.json`.
+
+OPENNT-HOST-164 restores the original `clglobal.c` DBG and WX86 outer
+conditions while rejecting both unsupported global-variable bodies. The
+selected original wheel state and message table are unchanged. Actual WOW
+macro observation, forced-profile rejection and logical-line checks are in
+`../../artifacts/mvdm-audit/s13-clglobal-original-guards.json`.
+
+S13 clarifies the OPENNT-HOST-063/093/105 USER declaration cohorts: simply
+wrapping the existing subsets in the original `_USER_` whole-header guard
+suppresses later selected dialog and button types in an actual WOW translation
+unit. The independent subset guards remain pending any independently proven
+equivalent redesign. Evidence: `../../artifacts/mvdm-audit/s13-user-multicohort-guard.json`.
+
+S13 restores the original `_USERK_` outer include guard around the registered
+OPENNT-HOST-049/063 subset. Existing flags-only and full-header consumers were
+checked separately. A hypothetical flags-only then full inclusion in one
+translation unit is not observed and would be affected by the original guard;
+see `../../artifacts/mvdm-audit/s13-userk-original-guard.json`.
+
+S13 restores `_GLOBALS_` and `_USERRTL_` as the original include guards for
+the OPENNT-HOST-075 and OPENNT-HOST-104 subsets. Five selected WOW source
+contexts produced byte-identical preprocessing; the subset registrations
+remain in force. Evidence: `../../artifacts/mvdm-audit/s13-user-original-guards.json`.
+
+S13 restores the original `_NTRTL_` include guard for the OPENNT-HOST-003
+subset and updates its WOW class-binding consumer. Six actual x86 source
+contexts had byte-identical preprocessing; see
+`../../artifacts/mvdm-audit/s13-ntrtl-original-guard.json`.
+
+S13 restores the original `_NTURTL_` include guard for the OPENNT-HOST-007
+subset. Five actual x86 source contexts produced identical preprocessing with
+the old and restored guards. The declaration subset remains registered; see
+`../../artifacts/mvdm-audit/s13-nturtl-original-guard.json`.
+
+S13 restores the original `_NTREGAPI_` include guard in the OPENNT-HOST-056
+subset. Four selected WOW compilation entries have identical preprocessing
+before and after the guard change. The retained declaration subset is otherwise
+unchanged; see `../../artifacts/mvdm-audit/s13-ntregapi-original-guard.json`.
+
+S13 restores the original `_NTEXAPI_` include guard in the OPENNT-HOST-001
+subset. Actual `nt_eoi`, `nt_timer` and WOW `wkman` preprocessing was compared
+with the prior private guard; the selected output was byte-identical for each
+captured x86 context. The subset remains registered; only its non-original
+guard was removed. See `../../artifacts/mvdm-audit/s13-ntexapi-original-guard.json`.
+
+OPENNT-HOST-156: retain the two original Unicode selectors inside the ANSI-only
+class-client subset and reject those unreachable arms. The entry selector already
+rejects UNICODE; the selected ANSI bodies remain unchanged and their original
+diagnostic line positions are restored. See `../../artifacts/mvdm-audit/s13-bfs-depth1-class-unicode.json`.
+
 OPENNT-HOST-155: correct the original continuation position in
 `windows/core/ntuser/client/lboxctl3.c`, retaining the selected code unchanged.
 Both WOW32 and call-boundary compiler contexts are documented in
@@ -17,13 +87,8 @@ OPENNT-HOST-152: restore original diagnostic positions after two excluded
 first-depth branches, preserving their selected continuations. See
 `../../artifacts/mvdm-audit/s13-bfs-depth1-original-line-batch.json`.
 
-OPENNT-HOST-151: preserve original first-depth selectors for unsupported
-historical _PNP_POWER profile, rejecting their bodies. Source and
-SDK macro scans and x86/x64 controls are recorded in
-`../../artifacts/mvdm-audit/s13-bfs-depth1-pnp-power-batch.json`.
-
-OPENNT-HOST-150: preserve original first-depth selectors for unsupported
-historical WX86 and DOS3 profiles, rejecting their bodies. Source and
+OPENNT-HOST-150: preserve original first-depth selectors in retained source for
+unsupported historical WX86 and DOS3 profiles, rejecting their bodies. Source and
 SDK macro scans and x86/x64 controls are recorded in
 `../../artifacts/mvdm-audit/s13-bfs-depth1-nonmvdm-legacy-batch.json`.
 
@@ -59,7 +124,8 @@ arm while retaining the OPENNT-HOST-119 user-mode codepage adapter. Evidence:
 
 OPENNT-HOST-144: restore the original first-depth ALLOC_PRAGMA condition in
 `base/ntos/ex/probe.c`, rejecting its unsupported kernel allocation profile;
-preserve the existing user-mode binding and logical line positions. Evidence:
+preserve the existing user-mode binding and original diagnostic line anchors
+at the guard and retained body. Evidence:
 `../../artifacts/mvdm-audit/s13-bfs-depth1-original-probe.json`.
 
 OPENNT-HOST-143: restore the original `!MIDL_PASS` condition around the
@@ -1149,6 +1215,13 @@ All unrelated controls, USER client globals and private precompiled imports
 are excluded, not replaced with new editor state. Function bodies imported by
 this row: zero. Selected/build/runtime acceptance: pending the full S3 group.
 
+S13 boundary clarification for OPENNT-HOST-072/074: the selected subset uses
+two independent inclusion guards because a declarations-only inclusion can
+precede the EDIT-state inclusion. A naive restoration of the original single
+`_USERCLI_` guard suppresses the latter; the MSVC preprocessor positive and
+negative controls are in `artifacts/mvdm-audit/s13-depth1-usercli-guard-positive-negative.json`.
+This records the present adaptation, not proof that no simpler design exists.
+
 T447 S3 registers OPENNT-HOST-071: original GetEditDS/ReleaseEditDS from
 windows/core/ntuser/client/client.c, pinned OpenNT revision
 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c, SHA-256
@@ -1559,6 +1632,10 @@ message-thunk algorithm is duplicated. The function enters the formal WOW32
 x86 link and focused nested-call test. Real window lifetime, callback routing
 from the native window gateway and Win16 acceptance remain incomplete.
 
+Original diagnostic line mappings are restored for the retained GetClassInfo,
+StringDuplicate and UnregisterClass bodies; see
+`artifacts/mvdm-audit/s13-ntcftxt-original-function-lines.json`.
+
 ### S40 USER class client recovery in progress
 
 OPENNT-HOST-036 retains the required class-client subset of original
@@ -1653,7 +1730,7 @@ same-named function body is not package admission.
 BaseSrv/client VDM command implementation and its direct original declaration
 carriers:
 
-- `base/win32/server/srvvdm.c`, `srvvdm.h`, `basesrv.h`, and `srvinit.c`;
+- `base/win32/server/srvvdm.c`, `srvvdm.h`, and `basesrv.h`;
 - `base/win32/client/vdm.c` and `basedll.h`; and
 - `base/win32/inc/base.h`, `basevdm.h`, and `basemsg.h`.
 
@@ -1862,7 +1939,10 @@ OPENNT-HOST-159: restore original ntstubs.c global MEMPHIS_MENUS and
 MEMPHIS_MENU_WATERMARKS condition shells; unsupported bodies are #error.
 Retained local owners are reordered relative to OpenNT; both original shells
 are global and precede the restored FE_SB shell. Logical lines 380/500 are
-anchored. Evidence: ../../artifacts/mvdm-audit/s13-bfs-depth1-ntstubs-memphis.json.
+anchored. The MEMPHIS_MENUS shell retains the original `#else` boundary at
+line 439, but its alternative function is absent from the current subset;
+the empty arm does not restore that function. Evidence:
+../../artifacts/mvdm-audit/s13-bfs-depth1-ntstubs-memphis.json.
 
 OPENNT-HOST-160: restore the original global FE_SB client messaging condition
 in usercli.h; unsupported body is #error. It remains outside the local
@@ -1885,3 +1965,393 @@ OPENNT-HOST-163: preserve the original x86 WOW cleanup probe alignment and
 replace only its unselected non-x86 alternative by #error; selected owner and
 test contexts are x86. Original selector and continuation lines 229/234 are
 anchored. Evidence: ../../artifacts/mvdm-audit/s13-bfs-depth1-cleanup-x86.json.
+OPENNT-HOST-169 restores four original outer `clmsg.c` FE_IME and DEBUG
+condition frames around the local default-window selector. Unsupported branch
+bodies use `#error`; `#line` preserves the original continuation locations.
+Four selected preprocessing contexts remain identical apart from blank lines;
+the original file's other unreviewed guards are not covered by this result.
+
+OPENNT-HOST-170 restores the original disabled full-screen message guard in
+`kernel/ntstubs.c` at original line 8377, replacing its excluded body with
+`#error` and restoring the original continuation at line 8412. The selected
+`NtUserSetWindowFNID` body is unchanged.
+
+OPENNT-HOST-171 restores two original literal-disabled first-depth conditions:
+the `server.c` edit-message list guard at line 461 is no longer nested in the
+local message selector, and the `clmsg.c` WMCTLCOLOR guard at line 1650 is
+restored with an `#error` body. Original continuation lines are retained.
+
+OPENNT-HOST-172 restores the original first-depth `clres.c` bitmap creation
+condition at line 1674 around the selected local bitmap body. Its unsupported
+literal-disabled arm remains an `#error`; the existing local selector gates
+the retained `else` body and the original continuation is line 1703.
+
+OPENNT-HOST-173 restores four original first-depth `rtlinit.c` DBG guards
+outside the local lookaside selector and their original continuation lines.
+It also restores the original `dlgmgr.c` SYSMODALWINDOWS diagnostic anchors;
+the previously excluded bodies and selected implementations remain unchanged.
+
+OPENNT-HOST-174 restores two original `ntstubs.c` first-depth DEBUG window-style
+diagnostic guards at lines 953 and 965 outside the local control-text selector.
+Unsupported debug-only bodies reject; selected window-style behavior remains.
+
+OPENNT-HOST-175 restores the original first-depth `dlgmgr2.c` FE_SB, FE_IME
+and LATER guards around the local dialog-keyboard selection. The unsupported
+arms reject, the selected FE_SB alternative remains, and original logical
+continuation lines are retained.
+
+OPENNT-HOST-176 records original logical line anchors around the two existing
+excluded FE_SB branches in `RtlMBMessageWParamCharToWCS`. The retained
+non-FE_SB alternative is unchanged. It also records anchors for that same
+function's later `_USERK_` and `FE_SB` branches; nested DEBUG is left for the
+next breadth-first depth. The file-scope `_USERK_` codepage boundary retains
+its separate registered OPENNT-HOST-119 adaptation and original line anchors.
+
+OPENNT-HOST-177 restores the original first-depth `_X86_` and `_MIPS_`
+conditions in the binary classifier. Local classifier selection remains
+inside their selected bodies, preserving the original OS/2 NE classification
+and the existing unsupported-MIPS rejection.
+
+OPENNT-HOST-178 records original line anchors 811 and 842 around the existing
+excluded `GetPrefixCount` FE_SB branch in `drawtext.c`; its selected code is
+unchanged.
+
+OPENNT-HOST-179 restores four literal-disabled `clres.c` first-depth guard
+frames for original lines 1480, 2298, 4516 and 4574. Their original enclosing
+functions remain outside the selected subset; no reachable body was added. It
+also restores the literal-disabled `input.c` mouse-wheel guard at line 1409,
+whose original enclosing function is outside the selected input subset. The
+line 1409 file-scope scaffold was subsequently withdrawn as misplaced; see
+../../artifacts/mvdm-audit/s13-r288-withdraw-misplaced.json.
+All four `clres.c` scaffolds were likewise withdrawn as misplaced. The last,
+original line 1480, had been placed inside a different retained function; its
+original structure remains pending. Evidence:
+../../artifacts/mvdm-audit/s13-r321-withdraw-clres-misplaced.json.
+
+OPENNT-HOST-180 restores first-depth `NEVER` guards in the retained USER input
+and server-stub subsets, rejecting unsupported profiles while preserving the
+original continuation locations and selected function bodies. The input.c
+line 2295 file-scope scaffold was subsequently withdrawn as misplaced; see
+../../artifacts/mvdm-audit/s13-r288-withdraw-misplaced.json.
+
+OPENNT-HOST-181 restores original first-depth `LATER` conditions in the USER
+resource, client-stub, text drawing and control-panel subsets. Unsupported
+bodies are rejected; the omitted enclosing functions remain outside the subset.
+
+OPENNT-HOST-182 restores first-depth, single-arm FE_IME and FE_SB guards from
+the fixed original into nine USER source subsets. Unsupported branches use
+`#error`; their original enclosing functions remain outside those subsets.
+The profile.c line 68 scaffold was subsequently withdrawn as misplaced; see
+../../artifacts/mvdm-audit/s13-r288-withdraw-misplaced.json.
+
+OPENNT-HOST-183 restores the original `BitmapFromDIB` line anchor at 2792.
+The retained `UserAssert` therefore reports its original line 2922; its
+executable line-number immediate intentionally changes without changing the
+assertion condition or successful behavior.
+
+OPENNT-HOST-184 restores original first-depth single-arm DEBUG and DBG guard
+frames in ten selected USER source subsets. Unsupported debug-only bodies
+are rejected; their omitted enclosing functions remain outside those subsets.
+
+OPENNT-HOST-185 restores original first-depth single-arm FE_IME, FE_SB and
+MEMPHIS_MENUS frames in seven selected USER source subsets. Unsupported
+bodies are rejected; omitted enclosing functions remain outside the subsets.
+
+OPENNT-HOST-186 corrects the original line anchors around the existing
+excluded `clmsg.c` DEBUG global condition.
+
+OPENNT-HOST-187 restores nine original first-depth DEBUG/DBG guards in the
+USER client-stub, input, get/set and queue subsets. Their excluded bodies
+belonged to original functions outside the selected subsets.
+
+S13 correction: thirteen input.c single-arm FE_IME, DBG, DEBUG and
+TRACESYSPEEK scaffolds installed at file scope under the preceding entries
+were withdrawn because the original directives were inside omitted functions.
+Their original groups remain pending; see
+../../artifacts/mvdm-audit/s13-r289-input-misplaced.json.
+Sixteen analogous queue.c single-arm FE_IME, DBG and DEBUG scaffolds were
+withdrawn for the same reason; see
+../../artifacts/mvdm-audit/s13-r290-queue-misplaced.json.
+Ten server.c DEBUG, FE_IME and ANDREVA_DBG scaffolds whose original owners
+were omitted functions or initializers were also withdrawn; see
+../../artifacts/mvdm-audit/s13-r291-server-misplaced.json.
+Twelve handtabl.c DEBUG and FE_IME scaffolds whose original owners were
+omitted functions or initializers were also withdrawn; see
+../../artifacts/mvdm-audit/s13-r292-handtabl-misplaced.json.
+Twenty-four single-arm scaffolds across clres.c, clmsg.c, client ntstubs.c,
+drawtext.c and getset.c were likewise withdrawn after checking their original
+function scope; see ../../artifacts/mvdm-audit/s13-r293-withdraw-misplaced.json.
+Fourteen further single-arm scaffolds across eight USER files were withdrawn
+after original function-scope review; their original groups remain pending.
+See ../../artifacts/mvdm-audit/s13-r294-withdraw-misplaced.json.
+Three non-MVDM original continuation #line corrections are registered in
+../../artifacts/mvdm-audit/s13-r299-original-continuation-lines.json; their
+short original continuation matches require full-context build validation.
+The apimsg.c anchor was subsequently corrected to count actual LF physical
+lines rather than an original form-feed; see
+../../artifacts/mvdm-audit/s13-r306-apimsg-lf-fix.json.
+Three additional original continuation corrections are recorded in
+../../artifacts/mvdm-audit/s13-r302-original-continuation-lines.json.
+
+# OPENNT-HOST-194
+
+The original `ntuser/kernel/ntstubs.c` class-registration alignment condition
+and its selected x86 macro lifetime are retained in original order. The
+unsupported non-x86 alternative is rejected. The original enclosing function
+remains outside the current subset. See
+`../../artifacts/mvdm-audit/s13-ntstubs-class-alignment-original-guard.json`.
+
+# OPENNT-HOST-193
+
+The `ntuser/rtl/chartran.c` original first-depth wide-message `FE_SB`
+condition is restored before the retained conversion subset. The unsupported
+branch is rejected; the original `NWCH 2` retail macro is retained and is not
+used by the selected subset. See
+`../../artifacts/mvdm-audit/s13-chartran-fe-sb-original-guard.json`.
+The condition was subsequently withdrawn because its original function was
+omitted, making its restored file-scope position incorrect. The selected macro
+remains; the original condition's placement is pending. See
+`../../artifacts/mvdm-audit/s13-r322-withdraw-chartran-misplaced.json`.
+
+# OPENNT-HOST-192
+
+Two original `ntuser/kernel/input.c` first-depth `MARKPATH` conditions are
+restored in original sequence. Their unsupported instrumentation bodies are
+rejected and the original retail no-op macros are retained. The selected input
+subset does not invoke those macros. See
+`../../artifacts/mvdm-audit/s13-input-markpath-original-guards.json`.
+
+# OPENNT-HOST-191
+
+The original `ntuser/kernel/queue.c` first-depth `DEBUG` boundaries for DDE
+tracing and queue validation are restored before the retained subset. Their
+unsupported debug bodies are rejected and their original retail no-op macros
+are retained. See
+`../../artifacts/mvdm-audit/s13-queue-debug-original-guards.json`.
+
+# OPENNT-HOST-190
+
+The `ntuser/kernel/ntstubs.c` original `DBG` handler condition is restored
+before the retained subset. Its unsupported debug body is rejected and the
+original retail handler macro is retained. The selected x86 control-FNID
+translation unit does not invoke that macro. See
+`../../artifacts/mvdm-audit/s13-ntstubs-dbg-original-guard.json`.
+
+# OPENNT-HOST-189
+
+The `ntuser/client/handles.c` original `TESTING` condition is restored in its
+original order before the retained `GetFullUserHandle`. The unsupported test
+body is rejected, while its original selected empty `CheckHandleTable` macro is
+retained. The only current inclusion is in `wow_user_object_bindings.c`, which
+does not use that macro. See
+`../../artifacts/mvdm-audit/s13-handles-testing-original-guard.json`.
+
+# OPENNT-HOST-188
+
+Original single-arm feature guards omitted from the selected USER subset are
+retained with an error for unsupported configurations. Their original bodies
+remain excluded; source line anchors refer to the pinned original files.
+
+The retained `xactsrv/apimsg.c` continuation also uses its pinned original
+diagnostic line after the excluded configuration boundary.
+The retained `ntuser/client/dlgmgrc.c` continuation uses its pinned original
+diagnostic line as recorded in `s13-depth1-unique-anchor-batch5.json`.
+The original `base/win32/client/vdm.c` OLD_CFG_BASED boundary is restored as
+an unsupported legacy configuration profile; the selected service-owned
+configuration implementation remains unchanged. See
+`artifacts/mvdm-audit/s13-old-config-boundary.json`.
+The original `ntuser/kernel/input.c` SYSMODALWINDOWS stub boundary is
+restored as an unsupported profile; see
+`artifacts/mvdm-audit/s13-input-sysmodal-boundary.json`.
+The original `ntuser/kernel/handtabl.c` debug allocation counters and
+`ntuser/rtl/wow.c` debug-only handle-validation guard are restored as
+unsupported outer conditions; see
+`artifacts/mvdm-audit/s13-user-debug-compound-guards.json`.
+The original `ntuser/kernel/class.c` DBG class-brush diagnostic boundary is
+restored as an unsupported profile; unlike `#if DBG`, `#ifdef DBG` selects
+even when DBG is defined as zero. See
+`artifacts/mvdm-audit/s13-class-dbg-boundary.json`.
+The original `ntuser/kernel/input.c` recent-key-state compile-time invariant
+is retained at its original diagnostic line; see
+`artifacts/mvdm-audit/s13-input-key-state-assertion.json`.
+The original `ntuser/inc/ntcftxt.h` Unicode keyboard-layout branch is restored
+as an unsupported boundary; the retained ANSI class-client subset is
+unchanged. See `artifacts/mvdm-audit/s13-ntcftxt-keyboard-unicode-guard.json`.
+
+
+OPENNT-HOST-195: withdrawn. The two clres.c literal-false conditions belong
+inside omitted functions and were incorrectly installed at file scope. Their
+original structure remains pending; see
+../../artifacts/mvdm-audit/s13-r280-withdraw-misplaced.json.
+
+OPENNT-HOST-196: withdrawn. The four clmsg.c FE_SB conditions belong inside
+omitted functions and were incorrectly installed at file scope. Their original
+structure remains pending; see
+../../artifacts/mvdm-audit/s13-r280-withdraw-misplaced.json.
+
+OPENNT-HOST-197: withdrawn. Four client ntstubs.c FE_IME/FE_SB conditions
+were misplaced outside their omitted original functions. Their original
+structure remains pending; see
+../../artifacts/mvdm-audit/s13-r281-withdraw-misplaced.json.
+
+OPENNT-HOST-198: withdrawn. Three kernel queue.c FE_IME conditions were
+misplaced outside their omitted original functions. Their original structure
+remains pending; see
+../../artifacts/mvdm-audit/s13-r281-withdraw-misplaced.json.
+
+OPENNT-HOST-199: withdrawn. The three FE_IME/FE_SB conditions belong inside
+omitted original functions and were misplaced at file scope. Their original
+structure remains pending; see
+../../artifacts/mvdm-audit/s13-r282-withdraw-misplaced.json.
+
+OPENNT-HOST-200: withdrawn. Four FE_SB conditions in kernel/class.c and
+rtl/drawtext.c belong inside omitted original functions and were misplaced at
+file scope. Their original structure remains pending; see
+../../artifacts/mvdm-audit/s13-r283-withdraw-misplaced.json.
+
+OPENNT-HOST-201: withdrawn. Ten ntcftxt.h ANSI/Unicode conditions belong
+inside omitted original functions and were misplaced at file scope. Their
+original structure remains pending; see
+../../artifacts/mvdm-audit/s13-r284-withdraw-misplaced.json.
+
+OPENNT-HOST-202: withdrawn. Four MEMPHIS_MENUS conditions belong inside
+omitted original kernel ntstubs.c functions and were misplaced at file scope.
+Their original structure remains pending; see
+../../artifacts/mvdm-audit/s13-r285-withdraw-misplaced.json.
+
+OPENNT-HOST-203: restore seven original first-depth conditional boundaries in
+exitwin.c, handtabl.c, draw.c, chartran.c and drawtext.c; unsupported debug,
+LATER, WINDOWS_ME and _USERK_ arms are #error. Five file-scope scaffolds for
+conditions originally inside omitted functions were subsequently withdrawn;
+those original conditions remain pending. The two original global conditions
+remain under review. Evidence: ../../artifacts/mvdm-audit/s13-r265-batch-guards.json
+and ../../artifacts/mvdm-audit/s13-r286-withdraw-misplaced.json.
+
+OPENNT-HOST-204: restore ten original first-depth WOW conditions in the
+client and rtl wow.c subsets; the 16-bit source alternatives are #error in
+these host-selected files. Seven client conditions originally inside omitted
+functions were subsequently withdrawn from incorrect file-scope placement;
+their original structure remains pending. The other placements remain under
+review. Guest sources and images are unchanged. Evidence:
+../../artifacts/mvdm-audit/s13-r266-wow-batch.json and
+../../artifacts/mvdm-audit/s13-r279-wow-misplaced.json.
+
+OPENNT-HOST-205: restore two original single-arm client wow.c first-depth
+WOW conditions at 313 and 1067; the unsupported 16-bit source bodies are
+#error. Guest sources and images are unchanged. Evidence:
+../../artifacts/mvdm-audit/s13-clientwow-r267-original-single-guards.json.
+
+OPENNT-HOST-206: withdrawn. The client.c DEBUG condition belongs inside an
+omitted original function and was misplaced at file scope. Its original
+structure remains pending; see
+../../artifacts/mvdm-audit/s13-r287-withdraw-misplaced.json.
+
+OPENNT-HOST-207: withdrawn. The Alpha condition belonged inside the omitted
+ProbeForWrite function and was incorrectly placed at file scope. Its original
+structure remains pending. Evidence:
+../../artifacts/mvdm-audit/s13-probe-r269-original-alpha-guard.json.
+
+OPENNT-HOST-208: withdrawn. The 51 x86/non-x86 boundaries had been placed
+outside their omitted original functions and were not uniquely anchored.
+They are not present in the current source; their disposition remains open.
+Evidence: ../../artifacts/mvdm-audit/s13-kernel-ntstubs-r270-x86-guards.json.
+
+OPENNT-HOST-209: anchor the retained excluded `handtabl.c` CheckHMTable
+condition, its error and continuation to their original diagnostic lines.
+Selected code remains unchanged. Evidence:
+../../artifacts/mvdm-audit/s13-r320-handtabl-line-anchors.json.
+
+OPENNT-HOST-210: split the project message-table selector around the original
+FE_IME condition so the excluded original boundary remains at file depth one.
+The selected table tokens remain unchanged. Evidence:
+../../artifacts/mvdm-audit/s13-r415-server-feime-depth1.json.
+
+OPENNT-HOST-211: restore the file-level preprocessor boundary for original
+input.c #if 0 at line 1409 with original diagnostic lines. Original owner
+PostInputMessage is absent; this does not restore its C function or scope.
+Evidence: ../../artifacts/mvdm-audit/s13-r421-input-literal-zero.json.
+
+OPENNT-HOST-212: restore six original clres.c literal-zero preprocessor
+boundaries with original diagnostic lines. Original enclosing functions remain
+omitted; two selected else bodies are not restored. Evidence:
+../../artifacts/mvdm-audit/s13-r425-clres-literal-zero.json.
+
+OPENNT-HOST-213: restore 51 original file-level _X86_ preprocessor
+boundaries, rejecting their non-x86 arms. The original receive-stub functions
+and selected x86 bodies remain omitted; the frames do not restore their C
+lexical positions. This explicitly supersedes the withdrawn OPENNT-HOST-208
+only for file-local preprocessor structure. Evidence:
+../../artifacts/mvdm-audit/s13-r427-ntstubs-x86-exclusions.json.
+
+OPENNT-HOST-214: restore 48 original file-level rejected conditional frames
+across ten source subsets. Existing root guards already reject each profile;
+macro state is unchanged in the verified source context. Original containing
+functions and C lexical positions remain omitted. Evidence:
+../../artifacts/mvdm-audit/s13-r429-known-rejected-frames.json.
+
+OPENNT-HOST-215: restore 28 original file-level two-arm conditional frames
+across seven source subsets, rejecting their already unsupported first arms.
+Original functions, lexical positions and selected else bodies remain omitted
+and pending. Evidence: ../../artifacts/mvdm-audit/s13-r431-known-else-frames.json.
+
+OPENNT-HOST-216: restore the original probe.c file-level Alpha rejection
+boundary. Original ProbeForWrite and the selected non-Alpha body remain
+omitted; this does not restore their C lexical scope. Evidence:
+../../artifacts/mvdm-audit/s13-r433-alpha-probe-frame.json.
+
+OPENNT-HOST-217: restore the original input.c NEVER preprocessor boundary
+and its diagnostic lines. Original containing C function remains omitted;
+product and two fixture macro contexts were checked. Evidence:
+../../artifacts/mvdm-audit/s13-r436-input-never-frame.json.
+
+OPENNT-HOST-218: restore eight original file-level rejected conditional
+frames across six subsets after checking all matching x86 product and
+call-boundary contexts. Original containing functions, lexical positions and
+one selected else body remain omitted. Evidence:
+../../artifacts/mvdm-audit/s13-r439-probed-macro-frames.json.
+
+OPENNT-HOST-219: restore seven original first-depth FE_SB / FE_IME
+excluded frames after the retained source subsets; original C owners remain
+omitted. Product and call-boundary macro contexts are recorded in
+artifacts/mvdm-audit/s13-r441-macro-contexts.json; diagnostic guard evidence
+is recorded in artifacts/mvdm-audit/s13-r442-single-frames.json.
+
+OPENNT-HOST-220: restore seven original FE_SB / FE_IME first-depth
+paired guard frames after retained source subsets; the selected else bodies
+and their original C owners remain omitted and pending review. Context and
+guard evidence: artifacts/mvdm-audit/s13-r441-macro-contexts.json and
+artifacts/mvdm-audit/s13-r444-paired-frames.json.
+
+OPENNT-HOST-221: restore fourteen original DEBUG / DBG first-depth
+excluded frames after retained source subsets; original C owners remain
+omitted. Product and call-boundary macro contexts and guard evidence:
+artifacts/mvdm-audit/s13-r446-macro-contexts.json and
+artifacts/mvdm-audit/s13-r447-single-frames.json.
+
+OPENNT-HOST-222: restore ten original DEBUG / FE_IME first-depth
+frames after retained source subsets; original C owners and selected else
+bodies remain omitted and pending. Context and guard evidence is recorded
+in artifacts/mvdm-audit/s13-r449-*-context*.json and
+artifacts/mvdm-audit/s13-r450-frames.json.
+
+OPENNT-HOST-223: restore three original FE_SB / LATER / DEBUG first-depth
+paired frames after retained source subsets; original C owners and selected
+arm bodies remain omitted and pending. Context and guard evidence:
+artifacts/mvdm-audit/s13-r452-macro-contexts.json and
+artifacts/mvdm-audit/s13-r453-frames.json.
+
+OPENNT-HOST-224: restore two original DEBUG compound / _USERK_
+first-depth frames after retained source subsets; original C owners and
+the selected else body remain omitted and pending. Context and guard
+evidence: artifacts/mvdm-audit/s13-r455-macro-contexts.json,
+s13-r456-macro-contexts.json and s13-r457-frames.json.
+
+OPENNT-HOST-225: restore two original FE_SB first-depth header frames
+after the retained ntcftxt.h subset; original GetMessage owner remains
+omitted. Context and guard evidence: artifacts/mvdm-audit/
+s13-r459-macro-contexts.json and s13-r461-header-frames.json.
+
+OPENNT-HOST-226: restore three original first-depth ANSI / Unicode
+paired frames after the retained ntcftxt.h subset; original C owners
+and selected ANSI arm bodies remain omitted and pending. Evidence:
+artifacts/mvdm-audit/s13-r463-header-frames.json.

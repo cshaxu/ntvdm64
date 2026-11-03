@@ -1,0 +1,12 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+  "working_sha256": "9debd71995948be2fabceb646f973f3f32fed215f73d41749846089e43a3546b",
+  "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+  "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+  "current_group_line": 203,
+  "finding": "in nt_init_event_thread the current X86GFX single-arm error guard precedes enableUpdates; the pinned original instead has an unguarded if (sc.ScreenState == WINDOWED) around enableUpdates and no X86GFX condition at that location",
+  "baseline": "the current shape already exists in HEAD before this S13 work",
+  "interpretation": "potential existing behavioral divergence; reachability and whether screen states make the difference observable are not established",
+  "disposition": "do not change the selected path during first-depth exclusion work; retain for selected-arm/original-source review",
+  "limits": "text comparison, not runtime or semantic proof"
+}

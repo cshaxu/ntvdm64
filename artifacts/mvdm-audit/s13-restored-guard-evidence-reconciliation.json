@@ -1,0 +1,23 @@
+{
+  "pairs": [
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "line": 544,
+      "current": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "current_line": 40,
+      "original_sha256": "f0b56314a93423599f06645d17104391f19a0ca07c3944853b065d8866493f7c",
+      "current_sha256": "d1a7a880eb5ef0444b05609c537518c6c425a4932716b0fe60e34fd05d5a0a6e",
+      "prior_evidence": "s13-handtabl-original-disabled.json"
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+      "line": 53,
+      "current": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\server.c",
+      "current_line": 4,
+      "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+      "current_sha256": "e842aafc4d21df0e2e32b3e7e48196d363c6e547945cf49a99aae0e1510e71e1",
+      "prior_evidence": "s13-server-feime-outer.json"
+    }
+  ],
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r185.zip"
+}

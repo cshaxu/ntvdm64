@@ -1,0 +1,150 @@
+{
+  "changes": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "original_group": 1097,
+      "physical_line": 1158,
+      "old": 1167,
+      "new": 1106,
+      "next_text_sha256": "3e859ae134a37e427c6fbe870de21ed3fe73081ffa45bf6a13f258629f410967"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "original_group": 1222,
+      "physical_line": 1279,
+      "old": 1290,
+      "new": 1229,
+      "next_text_sha256": "3e859ae134a37e427c6fbe870de21ed3fe73081ffa45bf6a13f258629f410967"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "original_group": 1236,
+      "physical_line": 1291,
+      "old": 1304,
+      "new": 1243,
+      "next_text_sha256": "3e859ae134a37e427c6fbe870de21ed3fe73081ffa45bf6a13f258629f410967"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "original_group": 1526,
+      "physical_line": 1579,
+      "old": 1596,
+      "new": 1537,
+      "next_text_sha256": "3e859ae134a37e427c6fbe870de21ed3fe73081ffa45bf6a13f258629f410967"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "original_group": 1544,
+      "physical_line": 1591,
+      "old": 1626,
+      "new": 1567,
+      "next_text_sha256": "3e859ae134a37e427c6fbe870de21ed3fe73081ffa45bf6a13f258629f410967"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "original_group": 1705,
+      "physical_line": 1741,
+      "old": 1778,
+      "new": 1719,
+      "next_text_sha256": "42af036c740443455b79633c4ad8b5b729798d3a7a26ae1ca2f96dda0e1d266f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "original_group": 1705,
+      "physical_line": 1738,
+      "old": 1776,
+      "new": 1717,
+      "next_text_sha256": "3e859ae134a37e427c6fbe870de21ed3fe73081ffa45bf6a13f258629f410967"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "original_group": 1724,
+      "physical_line": 1750,
+      "old": 1808,
+      "new": 1749,
+      "next_text_sha256": "3e859ae134a37e427c6fbe870de21ed3fe73081ffa45bf6a13f258629f410967"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "original_group": 1763,
+      "physical_line": 1769,
+      "old": 1840,
+      "new": 1781,
+      "next_text_sha256": "3e859ae134a37e427c6fbe870de21ed3fe73081ffa45bf6a13f258629f410967"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "original_group": 4800,
+      "physical_line": 4628,
+      "old": 4693,
+      "new": 4803,
+      "next_text_sha256": "051bc473186737f404c737e2f7003d4404740f456f02069fbecc2a3eed952e1c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "original_group": 1209,
+      "physical_line": 1207,
+      "old": 1256,
+      "new": 1252,
+      "next_text_sha256": "06bc3eae362258bdcc46d878bcf4b46972289305bb139dba8cac323ee0a4cf9a"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "original_group": 1555,
+      "physical_line": 1505,
+      "old": 1620,
+      "new": 1616,
+      "next_text_sha256": "ff4799442409808d9aa14230b0eb90a058d3cef72c66969dd597cafd952260be"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+      "original_group": 77,
+      "physical_line": 81,
+      "old": 81,
+      "new": 80,
+      "next_text_sha256": "a793852bf1dc9969c05b1d6ed4a784862ce2006079b6527da8bdeb200a7f6163"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.c",
+      "original_group": 460,
+      "physical_line": 378,
+      "old": 376,
+      "new": 463,
+      "next_text_sha256": "0099d2b8aef5f5d57ae72f68b167c38dbd0517c01c311aa87ea87c225a0b914b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "original_group": 722,
+      "physical_line": 694,
+      "old": 739,
+      "new": 727,
+      "next_text_sha256": "021fb596db81e6d02bf3d2586ee3981fe519f275c0ac9ca76bbcf2ebb4097d96"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "original_group": 722,
+      "physical_line": 691,
+      "old": 737,
+      "new": 725,
+      "next_text_sha256": "3c4a072a34cafd2c2beb9b1d1fd4ed8c612dbc589c6873296e5a6b898eb9c098"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "original_group": 762,
+      "physical_line": 734,
+      "old": 778,
+      "new": 765,
+      "next_text_sha256": "1cb7720fc9a0b2046b33e5ab2f12ed430760628e317cc2b22fa648d3246979d5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "original_group": 4844,
+      "physical_line": 4853,
+      "old": 4864,
+      "new": 4858,
+      "next_text_sha256": "bfa21b149b3110c5be7202e916239a7a5a136fdf36a411975ae38b6997c6d960"
+    }
+  ],
+  "method": "original else or endif and identical next nonblank source line",
+  "validation": "pending"
+}

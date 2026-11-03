@@ -55,7 +55,7 @@ XsNetMessageBufferSend (
 #else
 #error Unsupported excluded original configuration
 #endif // def UNICODE
-#line 61
+#line 113
 
     status = NetMessageBufferSend(
                  NULL,

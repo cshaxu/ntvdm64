@@ -53,21 +53,28 @@ GLOBAL	quick_event_delays	host_delays;
 #ifndef CCPU
 #error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register.
 #endif
+#line 42
 #ifdef A2CPU
 #error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
 #endif
+#line 47
 
+#line 48
 #ifdef I286
+#line 49
 #error Unsupported excluded original configuration
 #endif
-#line 68
+#line 56
 
 #define setBASE(base, value) base = (0xff000000 | (value & 0xffffff))
 #define setLIMIT(limit, value) limit = value
 
+#line 60
 #ifndef PROD
+#line 61
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 63
 
 
 
@@ -95,10 +102,12 @@ void	host_simulate()
 {
     ASSERT(IcaLock.OwningThread != NtCurrentTeb()->ClientId.UniqueThread);
 
+#line 86
 #ifdef _ALPHA_
+#line 87
 #error Unsupported excluded original configuration
 #endif
-#line 117
+#line 101
 
     cpu_simulate ();
 

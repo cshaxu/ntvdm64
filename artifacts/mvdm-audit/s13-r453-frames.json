@@ -1,0 +1,59 @@
+{
+  "input_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r371.zip",
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\class.c",
+      "original_line": 375,
+      "original_else_line": 377,
+      "original_end": 379,
+      "selector": "#ifdef FE_SB // InternalRegisterClassEx()",
+      "else": "#else",
+      "endif": "#endif // FE_SB",
+      "macro": "FE_SB",
+      "excluded_arm": 0,
+      "before_sha256": "db9d825ca941638a134456959bf3517066ac433c2e4c180622d8a0815292eaeb",
+      "original_sha256": "82528443bc5f6c227e0e14fe8a9dbc928ba735f98cf3891744c20c8e1604939a",
+      "current_condition_line": 244,
+      "current_else_line": 247,
+      "after_sha256": "326081a72f994be4e59e3847e77f03980ebdc8f7830d109dfb07e2d3c0395a34"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\exitwin.c",
+      "original_line": 134,
+      "original_else_line": 136,
+      "original_end": 142,
+      "selector": "#ifndef LATER",
+      "else": "#else",
+      "endif": "#endif",
+      "macro": "LATER",
+      "excluded_arm": 1,
+      "before_sha256": "9bbe6c5aed316a745fd2413be77c59617c467fcf3e963f317175016678ee7598",
+      "original_sha256": "45b92f7236fba49d58e2c3d912126067c3843ec560c28cdd8a20167c62aaef65",
+      "current_condition_line": 76,
+      "current_else_line": 78,
+      "after_sha256": "abdb6793896a0f0da1f7d79d45c4e919cfb50ae0757bbc70e39e9cc40e25b4e2"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "original_line": 594,
+      "original_else_line": 622,
+      "original_end": 712,
+      "selector": "#ifndef DEBUG",
+      "else": "#else // DEBUG",
+      "endif": "#endif",
+      "macro": "DEBUG",
+      "excluded_arm": 1,
+      "before_sha256": "f2d1e27ad2e028bce6ea7902d05459a59bdefaff9d6b80503dc0c5fc17b060af",
+      "original_sha256": "f0b56314a93423599f06645d17104391f19a0ca07c3944853b065d8866493f7c",
+      "current_condition_line": 216,
+      "current_else_line": 218,
+      "after_sha256": "86faf087619bcc9d11af866b7e06ef21e1dba335582fe2871521a52a4826195f"
+    }
+  ],
+  "context_evidence": "s13-r452-macro-contexts.json",
+  "scope": "Original first-depth file-level frames restored after retained subsets. Original C owners and selected arm bodies remain omitted and pending. No selected C tokens added or removed.",
+  "verification": "cached build exit 0; x86/x64 guard controls exit 0; scanner 2521 excluded arms no detected remnants or stale lines; 1110 queue hashes match; staged candidate differs from r450 only at two WOW32 PE/debug timestamp bytes"
+}

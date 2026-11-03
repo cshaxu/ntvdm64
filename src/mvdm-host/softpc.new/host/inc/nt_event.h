@@ -15,9 +15,12 @@
 #define ES_NOEVENTS     0
 #define ES_SCALEVENT    4
 #define ES_YODA         8
+#line 18
 #ifdef YODA
+#line 19
 #error Excluded unsupported YODA configuration
 #endif
+#line 21
 #ifndef X86GFX
 void GetScaleEvent(void);
 #endif
@@ -43,9 +46,12 @@ void GetNextMouseEvent(void);
 BOOL MoreMouseEvents(void);
 VOID DelayMouseEvents(ULONG count);
 void FlushMouseEvents(void);
+#line 46
 #ifdef X86GFX
+#line 47
 #error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register.
 #endif //X86GFX
+#line 49
 
 VOID KbdResume(VOID);
 ULONG  WaitKbdHdw(ULONG dwTimeOut);

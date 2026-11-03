@@ -28,9 +28,12 @@ Reserved Floating Point CPU Functions.
 #include <intx.h>       /* Original INTx contract */
 #include <c_xcptn.h>	/* Definition of Int16() */
 #include <fault.h>
+#line 28
 #ifdef SFELLOW
+#line 29
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #endif	/* SFELLOW */
+#line 31
 
 typedef union
 {
@@ -4850,10 +4853,10 @@ void TakeNpxExceptionInt()
 #ifdef	SPC486
 #error Excluded unsupported SPC486 profile
 #else	/* SPC486 */
-#line 4864
+#line 4858
 	ica_hw_interrupt (ICA_SLAVE, CPU_AT_NPX_INT, 1);
 #endif	/* SPC486 */
-#line 4866
+#line 4860
 
 #ifndef SFELLOW
 	/* and immediately dispatch to interrupt */

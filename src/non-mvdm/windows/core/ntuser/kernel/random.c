@@ -30,3 +30,11 @@ HBRUSH xxxGetControlBrush(
 
     return (HBRUSH)dw;
 }
+
+
+#line 185
+#ifdef DEBUG
+#line 186
+#error Unsupported DEBUG original branch
+#endif
+#line 190

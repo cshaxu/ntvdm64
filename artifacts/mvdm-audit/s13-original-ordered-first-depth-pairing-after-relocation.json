@@ -1,0 +1,1496 @@
+{
+  "pairs": [
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 1754,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 1534,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "EGG"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "EGG"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 1759,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 1539,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "if",
+          "defined(NTVDM) && defined(MONITOR)"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "defined(NTVDM) && defined(MONITOR)"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 1763,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 1543,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "V7VGA"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "V7VGA"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 1774,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 1554,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "V7VGA"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "V7VGA"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 1786,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 1566,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "V7VGA"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "V7VGA"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 1793,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 1573,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "EGG"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "EGG"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 1805,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 1585,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "if",
+          "defined(NTVDM) && defined(MONITOR)"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "defined(NTVDM) && defined(MONITOR)"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 1813,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 1593,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "if",
+          "defined(NTVDM) && defined(MONITOR)"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "defined(NTVDM) && defined(MONITOR)"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 1817,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 1597,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "MOUSE_16_BIT"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "MOUSE_16_BIT"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 1859,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 1635,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "if",
+          "defined(NTVDM) && defined(MONITOR)"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "defined(NTVDM) && defined(MONITOR)"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 1877,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 1644,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "EGG"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "EGG"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 2178,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 1944,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "if",
+          "!defined(NTVDM) || !defined(MONITOR)"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "!defined(NTVDM) || !defined(MONITOR)"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 2199,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 1965,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifndef",
+          "X86GFX"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "X86GFX"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 2232,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 1997,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "GISP_SVGA"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "GISP_SVGA"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 2238,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 2003,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "if",
+          "defined(NTVDM) && defined(MONITOR)"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "defined(NTVDM) && defined(MONITOR)"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 2350,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 2113,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifndef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 2361,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 2123,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 2589,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 2234,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifndef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 2641,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 2267,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifndef",
+          "NTVDM"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 2670,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 2300,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifndef",
+          "NTVDM"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "NTVDM"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 2691,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 2321,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "MOUSE_16_BIT"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "MOUSE_16_BIT"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 2710,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 2338,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "NTVDM"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "NTVDM"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 2808,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 2436,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "if",
+          "defined(MONITOR) && defined(NTVDM)"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "defined(MONITOR) && defined(NTVDM)"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 2817,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 2445,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "if",
+          "!defined(NTVDM) || (defined(NTVDM) && defined(V7VGA))"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "!defined(NTVDM) || (defined(NTVDM) && defined(V7VGA))"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 2891,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 2519,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "if",
+          "defined(MONITOR) && defined(NTVDM)"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "defined(MONITOR) && defined(NTVDM)"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 2950,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 2580,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifndef",
+          "NTVDM"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 2971,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 2605,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "if",
+          "defined(NTVDM) && defined(X86GFX)"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "defined(NTVDM) && defined(X86GFX)"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 2996,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 2631,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifndef",
+          "NTVDM"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 3007,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 2646,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "if",
+          "defined(NTVDM) && defined(X86GFX)"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "defined(NTVDM) && defined(X86GFX)"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 3052,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 2691,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "if",
+          "defined(NTVDM)"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "defined(NTVDM)"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 3186,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 2833,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "NTVDM"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "NTVDM"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 3235,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 2882,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "NTVDM"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "NTVDM"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 3310,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 2958,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifndef",
+          "NTVDM"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 3389,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 3041,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 3411,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 3053,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "EGG"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "EGG"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 3644,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 3286,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "MOUSE_16_BIT"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "MOUSE_16_BIT"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 3660,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 3293,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "if",
+          "defined (NTVDM) && defined(MONITOR)"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "defined (NTVDM) && defined(MONITOR)"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 3702,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 3334,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "if",
+          "defined(NTVDM) && defined(MONITOR)"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "defined(NTVDM) && defined(MONITOR)"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 3714,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 3342,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "if",
+          "defined(NTVDM) && defined(MONITOR)"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "defined(NTVDM) && defined(MONITOR)"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 3733,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 3366,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "if",
+          "defined(NTVDM) && defined(MONITOR)"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "defined(NTVDM) && defined(MONITOR)"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 3790,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 3423,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "EGG"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "EGG"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 3793,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 3426,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "if",
+          "defined(NTVDM) && defined(MONITOR)"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "defined(NTVDM) && defined(MONITOR)"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 3804,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 3434,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 4015,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 3645,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 4047,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 3677,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 4061,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 3690,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 4091,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 3713,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 4145,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 3764,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 4171,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 3787,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifndef",
+          "NTVDM"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "NTVDM"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 4267,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 3871,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "NTVDM"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "NTVDM"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 4273,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 3877,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "NTVDM"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "NTVDM"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 4280,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 3884,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifndef",
+          "NTVDM"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "NTVDM"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 4375,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 3977,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "MOUSE_16_BIT"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "MOUSE_16_BIT"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 5050,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 4650,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 5154,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 4747,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "HERC"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "HERC"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 5199,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 4763,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "V7VGA"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "V7VGA"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 5227,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 4792,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifndef",
+          "NTVDM"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 5250,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 4825,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifndef",
+          "NTVDM"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 5351,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 4926,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifndef",
+          "NTVDM"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 5441,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 5028,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "V7VGA"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "V7VGA"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 5599,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 5186,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "EGG"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "EGG"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 5874,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 5459,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "VGG"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "VGG"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 6157,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 5740,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "HERC"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "HERC"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 6416,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 5849,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "HERC"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "HERC"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_line": 6625,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "current_line": 5943,
+      "total_original_groups": 95,
+      "original_arms": [
+        [
+          "ifdef",
+          "CPU_30_STYLE"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "CPU_30_STYLE"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    }
+  ],
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r183.zip",
+  "method": "all original/current first-depth opening directives and ordered arm signatures match; only additional trailing else accepted; original hash verified",
+  "scope": "inherited current evidence, not new compile"
+}

@@ -1,0 +1,114 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/wowhooks.c",
+      "original_sha256": "345220990242cde0890884f478bef8622c2fc537c9e6200fa9b289145be0cc67",
+      "before_sha256": "befeccf5051b72af4ef59973cd22d1a8e5781bae34d089b709fa1ebf7ce4037a",
+      "after_sha256": "38d0275c5dd499fa75cae9cd1040f132e595b090269dabb4ef3368ff9bb6c0e4",
+      "changes": [
+        {
+          "original_if_line": 1159,
+          "original_endif_line": 1163,
+          "current_marker_line": 1225,
+          "previous": 1231,
+          "corrected": 1164,
+          "matched_before": 4,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "original_sha256": "939785d0aee348459e02136efafdcbdac7aa1d7612f4bfcf8c4f21acf677271a",
+      "before_sha256": "1d4c01eb08eb9386a29f86ee324c87cbfa2f8d45e043c5c2c1793d42f6873370",
+      "after_sha256": "02b34f62049eaec83fd40621bc322a4c49ba2b14b18aafed38d06801b7408c56",
+      "changes": [
+        {
+          "original_if_line": 208,
+          "original_endif_line": 210,
+          "current_marker_line": 234,
+          "previous": 233,
+          "corrected": 211,
+          "matched_before": 5,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.c",
+      "original_sha256": "3404569a45421465a6b916975b978d9ede19ba3ee7f2534b20fad304e91bc7ff",
+      "before_sha256": "cd8ee7ff8299172a39dcd1d4e6b2c964238ffec2a8d32baf79334efdb47a0576",
+      "after_sha256": "e0b9fd54f4fdb3ebfd765951605b49f81644d2fd0a3ef90413ff5dcae27b2ca3",
+      "changes": [
+        {
+          "original_if_line": 1143,
+          "original_endif_line": 1147,
+          "current_marker_line": 1184,
+          "previous": 1187,
+          "corrected": 1148,
+          "matched_before": 5,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "original_sha256": "678d2cd4b79a15a79e6c0257b4bd93ad69fa7be95a513b627565490256cb1afc",
+      "before_sha256": "12c43e3bd8abfd81ab6e61e033c9cbf2a2aa39372fc65ac3110603f6f825d18c",
+      "after_sha256": "02526a4443ceeb0340cd5023d48f2d4e68cd65d458b59c994ff6acaef1605383",
+      "changes": [
+        {
+          "original_if_line": 154,
+          "original_endif_line": 156,
+          "current_marker_line": 149,
+          "previous": 149,
+          "corrected": 157,
+          "matched_before": 3,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "original_sha256": "f0d22e4285e8b33b873854913a11587c67d78e50e1f5db28ec89ef8b6ff06d3d",
+      "before_sha256": "1f3f8e4f4b56ec6d898bb73f85537cbf7607ce094ea3027f3349f5f197c8cb85",
+      "after_sha256": "595b469a383f7823e7fe30ddca58d730ab911e9b83cd5621e36d6d6d83b2e69b",
+      "changes": [
+        {
+          "original_if_line": 268,
+          "original_endif_line": 272,
+          "current_marker_line": 34,
+          "previous": 36,
+          "corrected": 273,
+          "matched_before": 5,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "original_sha256": "0400c034bb5a782e81777e9fd805c07dbcd18d60ec9f1a876cfa67444577e0f8",
+      "before_sha256": "fcda38ed8ba3ddb2e5d562c4bb303787b49bc3228dad10006c52ef4b3540a917",
+      "after_sha256": "64c334e1a5d92d01081741608d10f92ea7985522b40f0e6bda565493dc981ac6",
+      "changes": [
+        {
+          "original_if_line": 785,
+          "original_endif_line": 789,
+          "current_marker_line": 275,
+          "previous": 257,
+          "corrected": 790,
+          "matched_before": 5,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ]
+    }
+  ],
+  "deferred": [],
+  "limits": "adjacent-source mapping requires full-context review; builds pending"
+}

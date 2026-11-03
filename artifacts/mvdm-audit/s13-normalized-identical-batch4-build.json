@@ -1,0 +1,28 @@
+{
+  "builds": [
+    "MSVC x86 worker NTVDM/VDMREDIR passed",
+    "MSVC x64 graph x86 reference worker passed"
+  ],
+  "comparisons": [
+    {
+      "baseline": "conditional-checkpoint-231/package/system32/ntvdm.exe",
+      "current": "normalized-batch4-ntvdm-stamped.exe",
+      "baseline_sha256": "7ef13ebf8a52d16783ecb2ca2e42deec00fe50c818be5097caa1d3cc7971221e",
+      "current_sha256": "077d6b8adf84bf5f763cab45f31c0f80181bb7d9fb1b914309b7ca028454e95d",
+      "diff_offsets": [
+        288,
+        289,
+        1698412,
+        1698413
+      ]
+    },
+    {
+      "baseline": "conditional-checkpoint-231/package/system32/VDMREDIR.DLL",
+      "current": "normalized-batch4-vdmredir-stamped.dll",
+      "baseline_sha256": "2c44f9334d9c2f2ecf6dfc0cd71d464006278c087b1cc9c459efdebc73d38d43",
+      "current_sha256": "2c44f9334d9c2f2ecf6dfc0cd71d464006278c087b1cc9c459efdebc73d38d43",
+      "diff_offsets": []
+    }
+  ],
+  "limitations": "No runtime rerun unless comparison shows non-timestamp changes; branch classifications not changed."
+}

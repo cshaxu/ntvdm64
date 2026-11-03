@@ -1,0 +1,163 @@
+{
+  "source": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "source_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+  "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+  "records": [
+    {
+      "current_line": 2267,
+      "best_scores": [
+        [
+          8,
+          2641
+        ],
+        [
+          0,
+          5351
+        ],
+        [
+          0,
+          5250
+        ],
+        [
+          0,
+          5227
+        ]
+      ],
+      "unique_best": true
+    },
+    {
+      "current_line": 2580,
+      "best_scores": [
+        [
+          8,
+          2950
+        ],
+        [
+          0,
+          5351
+        ],
+        [
+          0,
+          5250
+        ],
+        [
+          0,
+          5227
+        ]
+      ],
+      "unique_best": true
+    },
+    {
+      "current_line": 2631,
+      "best_scores": [
+        [
+          8,
+          2996
+        ],
+        [
+          0,
+          5351
+        ],
+        [
+          0,
+          5250
+        ],
+        [
+          0,
+          5227
+        ]
+      ],
+      "unique_best": true
+    },
+    {
+      "current_line": 2958,
+      "best_scores": [
+        [
+          8,
+          3310
+        ],
+        [
+          0,
+          5351
+        ],
+        [
+          0,
+          5250
+        ],
+        [
+          0,
+          5227
+        ]
+      ],
+      "unique_best": true
+    },
+    {
+      "current_line": 4792,
+      "best_scores": [
+        [
+          8,
+          5227
+        ],
+        [
+          1,
+          5351
+        ],
+        [
+          1,
+          5250
+        ],
+        [
+          1,
+          2350
+        ]
+      ],
+      "unique_best": true
+    },
+    {
+      "current_line": 4825,
+      "best_scores": [
+        [
+          4,
+          5250
+        ],
+        [
+          1,
+          5351
+        ],
+        [
+          1,
+          5227
+        ],
+        [
+          1,
+          2350
+        ]
+      ],
+      "unique_best": true
+    },
+    {
+      "current_line": 4926,
+      "best_scores": [
+        [
+          4,
+          5351
+        ],
+        [
+          1,
+          5250
+        ],
+        [
+          1,
+          5227
+        ],
+        [
+          1,
+          2350
+        ]
+      ],
+      "unique_best": true
+    }
+  ],
+  "limits": "preceding-text ranking only; exact branch/body scope, selected local adaptation and all contexts not established"
+}

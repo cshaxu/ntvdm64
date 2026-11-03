@@ -1,0 +1,89 @@
+{
+  "package": "build\\t473-s13\\r477-phase1-package",
+  "rows": [
+    {
+      "name": "run16.exe",
+      "sha256": "BE39650E0DBEC010ED10E7DB3252CC58ABFBC534CE4DBF752BB3ED107C0C138B",
+      "destinations": {
+        "assets\\release": true,
+        "O:\\winnt\\system32": true
+      }
+    },
+    {
+      "name": "ntsrv.exe",
+      "sha256": "37C594C394CAAA26711F5596DB24B73B775E7DA0D0AA8441488487B4A1B45BBD",
+      "destinations": {
+        "assets\\release": true,
+        "O:\\winnt\\system32": true
+      }
+    },
+    {
+      "name": "ntcon.exe",
+      "sha256": "D91412C7708EFC3E091AD7A9AACDEF104702D728F693FF1D9BB3924A4B1B81D5",
+      "destinations": {
+        "assets\\release": true,
+        "O:\\winnt\\system32": true
+      }
+    },
+    {
+      "name": "ntvdm.exe",
+      "sha256": "B7F82365AEECD6D8E026E5DFDCDBD5D6F9CC91A02A2FA38DEB98A00B937790DC",
+      "destinations": {
+        "assets\\release": true,
+        "O:\\winnt\\system32": true
+      }
+    },
+    {
+      "name": "ntvwm.exe",
+      "sha256": "CAC1F5C67B233BE83AB63FB3C979800D5AE8E324E48B3381A8E952629E086378",
+      "destinations": {
+        "assets\\release": true,
+        "O:\\winnt\\system32": true
+      }
+    },
+    {
+      "name": "ntmon.exe",
+      "sha256": "4DF75031A7D19A6C853B680476D0C3FBD7A200FD60D85A1DCE1E96F099F8C345",
+      "destinations": {
+        "assets\\release": true,
+        "O:\\winnt\\system32": true
+      }
+    },
+    {
+      "name": "WOW32.DLL",
+      "sha256": "90C6F314F29750537B494F19E1259464327C33DD73BF14D9E529BA2D1DF779E2",
+      "destinations": {
+        "assets\\release": true,
+        "O:\\winnt\\system32": true
+      }
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "sha256": "B6005C9A3FCE7B531F98A99C30F51F4EA7112A655F3B751567A38C01AC7F5524",
+      "destinations": {
+        "assets\\release": true,
+        "O:\\winnt\\system32": true
+      }
+    },
+    {
+      "name": "nthook32.dll",
+      "sha256": "4DBA1C3E507245812B3569A60A3290066B29873CFA9F447B6D93F361259203E3",
+      "destinations": {
+        "assets\\release": true,
+        "O:\\winnt\\system32": true
+      }
+    },
+    {
+      "name": "nthook64.dll",
+      "sha256": "1B35E28C869BE47CB4834EFA256EFC3676DE8B82DCD13FC3FF6A16BAE1408464",
+      "destinations": {
+        "assets\\release": true,
+        "O:\\winnt\\system32": true
+      }
+    }
+  ],
+  "manifest_sha256": "e81ce84290ac8ee94e69f2e7eb79f79bed7bbe430fddf2040e040c89f11b5c32",
+  "backup": "build/t473-s13/r483-publish-backup",
+  "status": "published and matched at both destinations",
+  "limits": "Depth one remains in progress; NIDDB provider order and historical test applicability not proven."
+}

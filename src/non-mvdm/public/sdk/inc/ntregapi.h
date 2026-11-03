@@ -1,8 +1,8 @@
 /* Copyright Microsoft Corporation. Original ntregapi.h true subset.
  * DIVERGENCE(OPENNT-HOST-056): only the native value-query ABI reached by
  * the admitted USER compatibility reader, no registry service implementation. */
-#ifndef WOW_PROFILE_NTREGAPI_H
-#define WOW_PROFILE_NTREGAPI_H
+#ifndef _NTREGAPI_
+#define _NTREGAPI_
 typedef struct _KEY_VALUE_PARTIAL_INFORMATION {
     ULONG   TitleIndex;
     ULONG   Type;

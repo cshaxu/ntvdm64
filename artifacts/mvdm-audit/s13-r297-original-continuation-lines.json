@@ -1,0 +1,190 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "before_sha256": "1cda785860d29b801b2510a801e0cc60869ceefbcf6a4a5571e6d32696328836",
+      "after_sha256": "962e3881c99cc2a9ae7ab3aa65b914836840fb4875b080c0aee14685c6224881",
+      "changes": [
+        {
+          "original_if_line": 323,
+          "original_endif_line": 331,
+          "current_marker_line": 306,
+          "previous": 322,
+          "corrected": 332,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "original_sha256": "3aa86f1faf07f68937629f1d6e410eb41f498e17dc6d747647c7d6e5697c80aa",
+      "before_sha256": "a437cdb9a3905dfee34a444277f695da561fbf185d49f0dadef029b74ad0eea6",
+      "after_sha256": "f41d9bb223f291e2411f5c47507009c67869d06e5c9af2dea1eb6007f8af63cf",
+      "changes": [
+        {
+          "original_if_line": 286,
+          "original_endif_line": 293,
+          "current_marker_line": 287,
+          "previous": 276,
+          "corrected": 294,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "before_sha256": "3a034b6d390524db0e2694a78373e0f4b9f11bf440463d9c4b5a0ea3dca52cd3",
+      "after_sha256": "c59bd4e47ec24b34ae2afad1aeddf3d90008e66d55eebd2d4c1447214f14ed90",
+      "changes": [
+        {
+          "original_if_line": 191,
+          "original_endif_line": 203,
+          "current_marker_line": 209,
+          "previous": 215,
+          "corrected": 204,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "original_sha256": "ce5f56ea27239d0c85243cee23e01de34b1f82d3ba92eced687e2b3bd90a2a94",
+      "before_sha256": "28bed89de61a111f390d3933ea07c8406c87c02f7d750239dca266277a8fc4a9",
+      "after_sha256": "1cebc140ea6e53e4efa09fc2ddac49711b0f2292298713781036d367d1b2b871",
+      "changes": [
+        {
+          "original_if_line": 42,
+          "original_endif_line": 49,
+          "current_marker_line": 57,
+          "previous": 58,
+          "corrected": 50,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "original_sha256": "3beaf1ec7ca8ac2092bb88de4597a19de8aecdd564fa2b55ccb1a4009041e961",
+      "before_sha256": "49b02acca77b383a63f2cfcafb9b05f2e09f3541629631ee033613510393cfe5",
+      "after_sha256": "ee4fdba45fbf0d3bdf11bacc104684f3dc82609f79e5e22abefd5afdc067345a",
+      "changes": [
+        {
+          "original_if_line": 4844,
+          "original_endif_line": 4859,
+          "current_marker_line": 4856,
+          "previous": 4866,
+          "corrected": 4860,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "before_sha256": "106b2ac1f9ba81fb9c735d894176a7f202aeb703f74c8c10965f43d0c5d7e3ed",
+      "after_sha256": "f8f77bc62ef5135075267243c9a5e08f33b30dd8bbd0125475cf9be836b10610",
+      "changes": [
+        {
+          "original_if_line": 446,
+          "original_endif_line": 451,
+          "current_marker_line": 442,
+          "previous": 442,
+          "corrected": 452,
+          "verified_exact_original_continuation_lines": 5
+        },
+        {
+          "original_if_line": 1926,
+          "original_endif_line": 1949,
+          "current_marker_line": 1530,
+          "previous": 1582,
+          "corrected": 1950,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "original_sha256": "d05908d6199675e65ebcf0f2b2c864169e80276639fb8de25b007c5e66751cdc",
+      "before_sha256": "07fad1da75f88d68c6ae9409b41176ab74652e62eab3ef88c52d208fcd2fea8b",
+      "after_sha256": "77a3e5ff20288e012a5cae7bd3c12611b74c3c826473c1f8035242735a1e72d9",
+      "changes": [
+        {
+          "original_if_line": 567,
+          "original_endif_line": 571,
+          "current_marker_line": 376,
+          "previous": 375,
+          "corrected": 572,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "original_sha256": "5b47f5e3566927332de3c3f9474ba3595151758c0a8ff8fd6c9cc860f2f8e6cd",
+      "before_sha256": "b82d929f7550fbb81c3d64fe2caae1d8d48206ce39ad341994521b9bd5a74c8b",
+      "after_sha256": "11f3ab720489156b7101bd5ae48b43673a0159d007dfe92fc90d9428b86a535a",
+      "changes": [
+        {
+          "original_if_line": 107,
+          "original_endif_line": 109,
+          "current_marker_line": 102,
+          "previous": 103,
+          "corrected": 110,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896",
+      "before_sha256": "477641c1c77365f962e1be2e7d5d83295d9a05c0d557fc39c07890411425e317",
+      "after_sha256": "ed99f4cec23f440cca69d5cd35451ef4647bdb906b03a0df1da50b97a2d6bc80",
+      "changes": [
+        {
+          "original_if_line": 528,
+          "original_endif_line": 582,
+          "current_marker_line": 538,
+          "previous": 560,
+          "corrected": 583,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "original_sha256": "947f9fc49dbffad48b2d1668548d63e8d26197a35d72fd4c26e7ce1e4c96af6f",
+      "before_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318",
+      "after_sha256": "6947eb20d9880243ab576e64796b6deaaa4ae9e4ccdfac095a5b02b7e400b6bc",
+      "changes": [
+        {
+          "original_if_line": 282,
+          "original_endif_line": 342,
+          "current_marker_line": 302,
+          "previous": 317,
+          "corrected": 343,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "before_sha256": "9e78384698a9e7c936a935e7c6895e25b85d9179f4898058e00c9eef8a2e5064",
+      "after_sha256": "cef9324144e13939de32a4bd129b3cd59022417404ab3ed6daec2e9a30c094bf",
+      "changes": [
+        {
+          "original_if_line": 689,
+          "original_endif_line": 697,
+          "current_marker_line": 615,
+          "previous": 647,
+          "corrected": 698,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ]
+    }
+  ],
+  "proof": "unique original first-depth group signature; original physical #endif and no preceding original #line; next five retained lines byte-identical after line-ending normalization",
+  "limits": "supported builds and diagnostic controls still required; later local code may differ and no selected branch was altered"
+}

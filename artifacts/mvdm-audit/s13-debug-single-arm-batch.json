@@ -1,0 +1,446 @@
+{
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\client.c",
+      "original_sha256": "787eda33785a87ce9e71202c97b5913e2857f7106fed5bb97103049b1d5e3472",
+      "before_sha256": "75c6f18d17bfe05b74ab4c7e948748743de51c91fefa757066320ba6fba04e17",
+      "guards": [
+        {
+          "original_line": 642,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 645
+        }
+      ],
+      "after_sha256": "ea8840b4b7a7aca6bebb6f8a2b57d9dc0ac463f080535db3979fe946e1a5817d"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c",
+      "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
+      "before_sha256": "1cd84918ca7804242dab74640f2a75803bb3eb7883208f3c5290e09535844172",
+      "guards": [
+        {
+          "original_line": 881,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 897
+        },
+        {
+          "original_line": 3901,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 3906
+        }
+      ],
+      "after_sha256": "14286278fad14fcb21a961aa3108d398593072cc3694e22acc69b6ace1e7e646"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "original_sha256": "f0b56314a93423599f06645d17104391f19a0ca07c3944853b065d8866493f7c",
+      "before_sha256": "d1a7a880eb5ef0444b05609c537518c6c425a4932716b0fe60e34fd05d5a0a6e",
+      "guards": [
+        {
+          "original_line": 86,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 99
+        },
+        {
+          "original_line": 134,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 138
+        },
+        {
+          "original_line": 585,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 588
+        },
+        {
+          "original_line": 764,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 777
+        },
+        {
+          "original_line": 797,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 804
+        },
+        {
+          "original_line": 852,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 953
+        },
+        {
+          "original_line": 963,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 995
+        },
+        {
+          "original_line": 1056,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 1070
+        },
+        {
+          "original_line": 1084,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 1099
+        },
+        {
+          "original_line": 1139,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 1153
+        },
+        {
+          "original_line": 1169,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 1189
+        },
+        {
+          "original_line": 1198,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 1240
+        },
+        {
+          "original_line": 1250,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 1302
+        },
+        {
+          "original_line": 1353,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 1362
+        },
+        {
+          "original_line": 1394,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 1424
+        },
+        {
+          "original_line": 1691,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 1713
+        },
+        {
+          "original_line": 1714,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 1795
+        },
+        {
+          "original_line": 1886,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 1912
+        },
+        {
+          "original_line": 1933,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 2014
+        }
+      ],
+      "after_sha256": "5b1eda962e6a419bf356ee3aa59c1c72c9f84a7321d2107831299489ad921d65"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_sha256": "b7656bca55e892a42ba825be0324211450ad298c40717e1ae5a889d084467529",
+      "before_sha256": "f593e93d9d47216d590e9e26a17fd289a7a59f513b7f2c22d348143af2060e1a",
+      "guards": [
+        {
+          "original_line": 58,
+          "kind": "if",
+          "expression": "DBG",
+          "continuation": 85
+        },
+        {
+          "original_line": 91,
+          "kind": "if",
+          "expression": "DBG",
+          "continuation": 98
+        },
+        {
+          "original_line": 1641,
+          "kind": "if",
+          "expression": "DBG",
+          "continuation": 1644
+        },
+        {
+          "original_line": 1647,
+          "kind": "if",
+          "expression": "DBG",
+          "continuation": 1654
+        },
+        {
+          "original_line": 1669,
+          "kind": "if",
+          "expression": "DBG",
+          "continuation": 1672
+        },
+        {
+          "original_line": 1679,
+          "kind": "if",
+          "expression": "DBG",
+          "continuation": 1682
+        },
+        {
+          "original_line": 2928,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 2950
+        },
+        {
+          "original_line": 2957,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 2965
+        },
+        {
+          "original_line": 2971,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 2974
+        },
+        {
+          "original_line": 4764,
+          "kind": "if",
+          "expression": "DBG",
+          "continuation": 4768
+        },
+        {
+          "original_line": 5295,
+          "kind": "if",
+          "expression": "DBG",
+          "continuation": 5300
+        },
+        {
+          "original_line": 5316,
+          "kind": "if",
+          "expression": "DBG",
+          "continuation": 5321
+        }
+      ],
+      "after_sha256": "46480b297969e9cff89f0090f693ed013873c3cfb47518a8505cce51f6475bdc"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "before_sha256": "92a3cab3712106205f318498f9fd1f3b86073ce061a60f4cf43017b33af1c376",
+      "guards": [
+        {
+          "original_line": 282,
+          "kind": "if",
+          "expression": "DBG",
+          "continuation": 301
+        },
+        {
+          "original_line": 9851,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 9856
+        }
+      ],
+      "after_sha256": "1b42c65405d9fc0efc15604f902a815e45e51e9adba98967f0996f8e2a43d866"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\profile.c",
+      "original_sha256": "8ecbb58954eca0fece4ab180bb56a3953b8b4408400d3c7aa01d50b62caaa531",
+      "before_sha256": "f3e7448db627629ff520271e399627a007eb69d61080febb5502fdc1a9cfd8af",
+      "guards": [
+        {
+          "original_line": 745,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 751
+        },
+        {
+          "original_line": 827,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 833
+        }
+      ],
+      "after_sha256": "435a8ae75b59748894429f19e197a083f9bb795596a9b9ad48c9d38801256d08"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_sha256": "0400c034bb5a782e81777e9fd805c07dbcd18d60ec9f1a876cfa67444577e0f8",
+      "before_sha256": "51b27149bf0157e181f71b011af90a403d229c43627070f273e3f3e641d001bd",
+      "guards": [
+        {
+          "original_line": 43,
+          "kind": "if",
+          "expression": "DBG",
+          "continuation": 50
+        },
+        {
+          "original_line": 1518,
+          "kind": "if",
+          "expression": "DBG",
+          "continuation": 1521
+        },
+        {
+          "original_line": 1555,
+          "kind": "if",
+          "expression": "DBG",
+          "continuation": 1559
+        },
+        {
+          "original_line": 1598,
+          "kind": "if",
+          "expression": "DBG",
+          "continuation": 1609
+        },
+        {
+          "original_line": 1784,
+          "kind": "if",
+          "expression": "DBG",
+          "continuation": 1788
+        },
+        {
+          "original_line": 2275,
+          "kind": "if",
+          "expression": "DBG",
+          "continuation": 2278
+        },
+        {
+          "original_line": 2282,
+          "kind": "if",
+          "expression": "DBG",
+          "continuation": 2289
+        },
+        {
+          "original_line": 2322,
+          "kind": "if",
+          "expression": "DBG",
+          "continuation": 2325
+        },
+        {
+          "original_line": 2355,
+          "kind": "if",
+          "expression": "DBG",
+          "continuation": 2358
+        },
+        {
+          "original_line": 2375,
+          "kind": "if",
+          "expression": "DBG",
+          "continuation": 2378
+        },
+        {
+          "original_line": 2385,
+          "kind": "if",
+          "expression": "DBG",
+          "continuation": 2388
+        },
+        {
+          "original_line": 3705,
+          "kind": "if",
+          "expression": "DBG",
+          "continuation": 3728
+        }
+      ],
+      "after_sha256": "1fe6419eb1959ae564164d5195123e3d207d0a373e41684d4538257c0dfc80c4"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/random.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\random.c",
+      "original_sha256": "b3ed1082041c1c600c92487b45ff0c4750a50456e5ba7ea14a3ec8ef83a1f9cd",
+      "before_sha256": "3469699a957c71db994ae52c4d72b0998ebd656bc9eea991fbb65041b0f50271",
+      "guards": [
+        {
+          "original_line": 185,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 190
+        }
+      ],
+      "after_sha256": "729c7bafa6bc5eb6e6a0296dfe7e494582a42199b6551961fb834856601bfedd"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+      "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+      "before_sha256": "e842aafc4d21df0e2e32b3e7e48196d363c6e547945cf49a99aae0e1510e71e1",
+      "guards": [
+        {
+          "original_line": 850,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 878
+        },
+        {
+          "original_line": 934,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 940
+        },
+        {
+          "original_line": 1002,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 1020
+        },
+        {
+          "original_line": 1163,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 1210
+        },
+        {
+          "original_line": 1822,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 1825
+        }
+      ],
+      "after_sha256": "c4c8c8d64527913c18026f35f8c7fe0bae8a9a1e8728de8ce4ebc421ac80a2fc"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+      "before_sha256": "65c7104ea928c93853721de93dbc85cf73bc51a126449287b308e6613bc1ca89",
+      "guards": [
+        {
+          "original_line": 1598,
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "continuation": 1602
+        }
+      ],
+      "after_sha256": "586fb661c92e38a871229436cb76e742f6c7de1875af90d8d25ec95be04ae6cb"
+    }
+  ],
+  "skips": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "original_line": 3188,
+      "reason": "original body text also present in current source"
+    }
+  ],
+  "scope": "single-arm original first-depth DEBUG/DBG only; missing original enclosing functions not imported",
+  "validation": "x86 WOW32 and call-boundaries actual builds passed; 57 source guard and continuation checks passed; DEBUG/DBG not seen in cached build graph definitions",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r211.zip"
+}

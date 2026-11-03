@@ -1,0 +1,15 @@
+{
+  "old_image_sha256": "611de5e832e75bb6ca1c2f94b9d369dbafd211ff692dce06d27614cb9ce033d7",
+  "new_image_sha256": "04c903387e50e25226f5f06b9eacb9827deecbc7684c129f81bb71a5f0ed07da",
+  "offset": 373638,
+  "rva": "0x5bf86",
+  "owner": "_calcScreenParams; original-softpc-host-roots:nt_fulsc.obj",
+  "old_line_immediate": 535,
+  "new_line_immediate": 532,
+  "source": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+  "original": "O:/repos.external/OpenNT/base/mvdm/softpc.new/host/src/nt_fulsc.c:532",
+  "macro": "ErrorExit expands DisplayErrorTerm with __FILE__ and __LINE__",
+  "trigger": "GetConsoleScreenBufferInfo fails in calcScreenParams",
+  "diagnostic_control_sha256": "65cdbe39148a25254e54434bc6f080d0cbdeb75e91b30ef76aa4fe1fcf41f45e",
+  "limits": "This changes an observable error diagnostic; no injected full-product error-path or new Full runtime acceptance claimed."
+}

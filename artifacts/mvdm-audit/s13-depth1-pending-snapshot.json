@@ -1,0 +1,373 @@
+{
+  "source_queue": "artifacts/mvdm-audit/s13-bfs-depth1-working-queue-195r104.zip",
+  "source_queue_sha256": "b17cd82b2270a235b5e1b93b435a6c25b0f689db061a5fb990462f7d5fe15287",
+  "pending_arms": 52,
+  "pending_files": 37,
+  "arms": [
+    {
+      "path": "src/mvdm-host/bde/precomp.h",
+      "line": 10,
+      "kind": "if",
+      "expression": "defined (i386)",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "line": 94,
+      "kind": "ifdef",
+      "expression": "i386",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/i386/dpmimem.c",
+      "line": 153,
+      "kind": "if",
+      "expression": "DBG",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/mvdm-host/inc/mvdm.h",
+      "line": 64,
+      "kind": "ifdef",
+      "expression": "i386",
+      "evidence": "Original selector restored; previous OR observation does not prove the i386 operand was selected."
+    },
+    {
+      "path": "src/mvdm-host/inc/suballoc.h",
+      "line": 33,
+      "kind": "ifdef",
+      "expression": "i386",
+      "evidence": "Original selector restored; previous OR observation does not prove the i386 operand was selected."
+    },
+    {
+      "path": "src/mvdm-host/inc/wowfax.h",
+      "line": 37,
+      "kind": "ifdef",
+      "expression": "DEBUG",
+      "evidence": "Original guest WOWEXEC source or debug makefile refers to this shared header/selector; preserve the body. No guest build or actual guest macro context was observed. See s13-bfs-depth1-shared-guest-headers.json."
+    },
+    {
+      "path": "src/mvdm-host/inc/wowfax.h",
+      "line": 76,
+      "kind": "if",
+      "expression": "defined(_WOWFAX16_)",
+      "evidence": "Original guest WOWEXEC source or debug makefile refers to this shared header/selector; preserve the body. No guest build or actual guest macro context was observed. See s13-bfs-depth1-shared-guest-headers.json."
+    },
+    {
+      "path": "src/mvdm-host/inc/wowfax.h",
+      "line": 161,
+      "kind": "ifndef",
+      "expression": "_DEF_WOW32_",
+      "evidence": "Original guest WOWEXEC source or debug makefile refers to this shared header/selector; preserve the body. No guest build or actual guest macro context was observed. See s13-bfs-depth1-shared-guest-headers.json."
+    },
+    {
+      "path": "src/mvdm-host/inc/wowinfo.h",
+      "line": 20,
+      "kind": "ifndef",
+      "expression": "UNALIGNED",
+      "evidence": "Original guest WOWEXEC source or debug makefile refers to this shared header/selector; preserve the body. No guest build or actual guest macro context was observed. See s13-bfs-depth1-shared-guest-headers.json."
+    },
+    {
+      "path": "src/mvdm-host/sim32/sim32.h",
+      "line": 16,
+      "kind": "ifndef",
+      "expression": "FAR",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/mvdm-host/sim32/sim32.h",
+      "line": 19,
+      "kind": "ifndef",
+      "expression": "PASCAL",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/mvdm-host/sim32/sim32.h",
+      "line": 42,
+      "kind": "else",
+      "expression": "",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/mvdm-host/sim32/sim32.h",
+      "line": 69,
+      "kind": "ifndef",
+      "expression": "DEBUG",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/mvdm-host/sim32/sim32.h",
+      "line": 71,
+      "kind": "else",
+      "expression": "",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
+      "line": 109,
+      "kind": "else",
+      "expression": "",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/evid_c.h",
+      "line": 1,
+      "kind": "ifndef",
+      "expression": "_Evid_c_h",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/gdpvar.h",
+      "line": 1,
+      "kind": "ifndef",
+      "expression": "_gdpvar_h",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ntstubs.c",
+      "line": 7,
+      "kind": "ifndef",
+      "expression": "PIG",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cdrom.h",
+      "line": 241,
+      "kind": "else",
+      "expression": "",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cdrom.h",
+      "line": 254,
+      "kind": "else",
+      "expression": "",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": 19,
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gore.h",
+      "line": 28,
+      "kind": "else",
+      "expression": "",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_msw.h",
+      "line": 32,
+      "kind": "if",
+      "expression": "!(defined(MSWDVR_DEBUG) && defined(MSWDVR_MAIN))",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_msw.h",
+      "line": 96,
+      "kind": "else",
+      "expression": "",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/novell.h",
+      "line": 168,
+      "kind": "ifndef",
+      "expression": "PROD",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/novell.h",
+      "line": 170,
+      "kind": "else",
+      "expression": "",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/smeg_hea.h",
+      "line": 17,
+      "kind": "else",
+      "expression": "",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/spc_icon.h",
+      "line": 15,
+      "kind": "else",
+      "expression": "",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "line": 240,
+      "kind": "ifdef",
+      "expression": "i386",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_mon.h",
+      "line": 55,
+      "kind": "ifdef",
+      "expression": "PROD",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_mon.h",
+      "line": 57,
+      "kind": "else",
+      "expression": "",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_aorc.c",
+      "line": 28,
+      "kind": "ifdef",
+      "expression": "CCPU",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_aorc.c",
+      "line": 556,
+      "kind": "ifdef",
+      "expression": "CPU_40_STYLE",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/win/win.c",
+      "line": 27,
+      "kind": "else",
+      "expression": "",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvinit.c",
+      "line": 94,
+      "kind": "if",
+      "expression": "DBG",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvinit.c",
+      "line": 209,
+      "kind": "if",
+      "expression": "DBG",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvinit.c",
+      "line": 211,
+      "kind": "else",
+      "expression": "",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntdddisk.h",
+      "line": 18,
+      "kind": "ifndef",
+      "expression": "_NTDDDISK_H_",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/isnkrnl.h",
+      "line": 40,
+      "kind": "else",
+      "expression": "",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/protocol.h",
+      "line": 27,
+      "kind": "ifndef",
+      "expression": "_PROTOCOL_",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/winbasep.h",
+      "line": 16,
+      "kind": "ifndef",
+      "expression": "_WINBASEP_",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/config.h",
+      "line": 59,
+      "kind": "ifndef",
+      "expression": "CONFIG_H",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/names.h",
+      "line": 31,
+      "kind": "ifndef",
+      "expression": "_NAMES_",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/status.h",
+      "line": 21,
+      "kind": "ifndef",
+      "expression": "_STATUS_",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/thread.h",
+      "line": 32,
+      "kind": "ifndef",
+      "expression": "_THREAD_",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nt.h",
+      "line": 27,
+      "kind": "ifndef",
+      "expression": "NT_INCLUDED",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntdbg.h",
+      "line": 22,
+      "kind": "ifndef",
+      "expression": "_NTDBG_",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/wownt32.h",
+      "line": 16,
+      "kind": "ifndef",
+      "expression": "_WOWNT32_",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "line": 14,
+      "kind": "ifdef",
+      "expression": "UNICODE",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "line": 104,
+      "kind": "ifdef",
+      "expression": "UNICODE",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "line": 248,
+      "kind": "ifdef",
+      "expression": "UNICODE",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "line": 146,
+      "kind": "else",
+      "expression": "",
+      "evidence": "Earlier DIV-554 records i386/CPU40 coexistence; preserve DIV-039 combined behavior and audit whether this outer arm is supported before exclusion; s13-bfs-depth1-msscs-combined-correction.json"
+    }
+  ],
+  "scope": "Queue snapshot only; current source and all contexts require revalidation before changes."
+}

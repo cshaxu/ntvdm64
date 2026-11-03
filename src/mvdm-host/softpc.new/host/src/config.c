@@ -871,10 +871,12 @@ boolean get_lim_configuration_data(PLIM_CONFIG_DATA buffer)
 #endif
 
 
+#line 1194
 #ifdef MONITOR
+#line 1195
 #error Excluded original conditional branch
 #endif
-#line 886
+#line 1215
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::::::: Get VDM Memory Size :::::::::::::::::::::::::::::*/

@@ -18,7 +18,9 @@
 MODNAME(wmsgbm.c);
 
 
+#line 21
 #ifdef DEBUG
+#line 22
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 43

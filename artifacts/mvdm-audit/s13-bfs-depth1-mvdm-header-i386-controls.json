@@ -1,0 +1,23 @@
+{
+  "scope": "Original i386 selector boundaries in shared MVDM and suballocation headers",
+  "prior_queue": "s13-bfs-depth1-working-queue-195r149.zip",
+  "files": [
+    {
+      "path": "src/mvdm-host/inc/mvdm.h",
+      "sha256": "f393dfa40f9066016586353cadce7f6fae2b71661be81e793ce631dfbb0e5386",
+      "line": 64
+    },
+    {
+      "path": "src/mvdm-host/inc/suballoc.h",
+      "sha256": "8cdfab30f7a842253ea673935a9654ba526b3011f2d7c7a3cae3980a25c45477",
+      "line": 33
+    }
+  ],
+  "evidence": [
+    "tests/build/test_bfs_depth1_cpu_guards.py tests explicit i386, MSVC _M_IX86 and generic controls and checks original line mapping.",
+    "The suite completed successfully using both x86 and x64 MSVC environments after the latest cleanup."
+  ],
+  "limitations": [
+    "Synthetic positive test context does not claim i386 is defined in the default worker."
+  ]
+}

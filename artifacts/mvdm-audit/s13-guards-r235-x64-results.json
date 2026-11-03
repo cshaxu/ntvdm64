@@ -1,0 +1,16 @@
+{
+  "architecture": "MSVC x64",
+  "results": [
+    {
+      "log": "build\\t473-s13\\additional-guards-r235-x64.log",
+      "sha256": "822d21ebf8dae261ddd30857c1d13df0d1535e4f5aa4c8122beb231cc0faae84",
+      "pass_lines": 1
+    },
+    {
+      "log": "build\\t473-s13\\rejected-conditions-r235-x64.log",
+      "sha256": "c193f8509208adc08227f87fce08ea1adb3fa0d2d0df8ddb950faa03a7742dcb",
+      "pass_lines": 41
+    }
+  ],
+  "limitations": "preprocessor controls only; not full runtime or original structure reconciliation"
+}

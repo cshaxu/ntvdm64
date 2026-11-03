@@ -1,0 +1,325 @@
+{
+  "baseline": "build/t473-s13/niddb-rollback-final/package/system32",
+  "candidate": "build/t473-s13/current-product-comparison",
+  "package_id": "ee3df81e-ca78-4406-a273-9a757530d1b3",
+  "images": [
+    {
+      "name": "ntcon.exe",
+      "baseline_sha256": "5cb2ba21844cd873f7e87ec2d0b9e225fb19b18eda92a28ba22d745c14cb81ce",
+      "candidate_sha256": "d91412c7708efc3e091ad7a9aacdef104702d728f693ff1d9bb3924a4b1b81d5",
+      "baseline_size": 351744,
+      "candidate_size": 351744,
+      "differing_count": 6,
+      "differing_offsets": [
+        248,
+        249,
+        250,
+        246004,
+        246005,
+        246006
+      ],
+      "pe_and_debug_timestamp_offsets": [
+        248,
+        249,
+        250,
+        251,
+        246004,
+        246005,
+        246006,
+        246007
+      ],
+      "non_timestamp_offsets": []
+    },
+    {
+      "name": "nthook32.dll",
+      "baseline_sha256": "3ed47bd66d99393b04b5bbc3336c5fdd521739acb42d908728748d36c3dd428f",
+      "candidate_sha256": "98aacb0460efa7cf82414cbe5ae2d5a004b45b1982a1482c417a44c026c9f399",
+      "baseline_size": 221184,
+      "candidate_size": 221184,
+      "differing_count": 6,
+      "differing_offsets": [
+        280,
+        281,
+        282,
+        133156,
+        133157,
+        133158
+      ],
+      "pe_and_debug_timestamp_offsets": [
+        280,
+        281,
+        282,
+        283,
+        133156,
+        133157,
+        133158,
+        133159
+      ],
+      "non_timestamp_offsets": []
+    },
+    {
+      "name": "nthook64.dll",
+      "baseline_sha256": "19360df7cfd568416020926f955cef964c8d232df898e71a24b3bfaf32662407",
+      "candidate_sha256": "5e083a11d9826b2550207903eaf4ffe9500ce196ff57ae0001a7921292614d03",
+      "baseline_size": 270848,
+      "candidate_size": 270848,
+      "differing_count": 6,
+      "differing_offsets": [
+        272,
+        273,
+        274,
+        167348,
+        167349,
+        167350
+      ],
+      "pe_and_debug_timestamp_offsets": [
+        272,
+        273,
+        274,
+        275,
+        167348,
+        167349,
+        167350,
+        167351
+      ],
+      "non_timestamp_offsets": []
+    },
+    {
+      "name": "ntmon.exe",
+      "baseline_sha256": "4df75031a7d19a6c853b680476d0c3fbd7a200fd60d85a1dce1e96f099f8c345",
+      "candidate_sha256": "4df75031a7d19a6c853b680476d0c3fbd7a200fd60d85a1dce1e96f099f8c345",
+      "baseline_size": 167936,
+      "candidate_size": 167936,
+      "differing_count": 0,
+      "differing_offsets": [],
+      "pe_and_debug_timestamp_offsets": [
+        264,
+        265,
+        266,
+        267,
+        146260,
+        146261,
+        146262,
+        146263
+      ],
+      "non_timestamp_offsets": []
+    },
+    {
+      "name": "ntsrv.exe",
+      "baseline_sha256": "83b7063a9dd6e4918c3a47329256d064e756c79ebf932bee2f66e30065b42dfe",
+      "candidate_sha256": "7960320a7f6dd73fe89afbd19be69cf7f9d74b8aafb63f2d25e725d8dbdc2002",
+      "baseline_size": 398848,
+      "candidate_size": 398848,
+      "differing_count": 6,
+      "differing_offsets": [
+        256,
+        257,
+        258,
+        289428,
+        289429,
+        289430
+      ],
+      "pe_and_debug_timestamp_offsets": [
+        256,
+        257,
+        258,
+        259,
+        289428,
+        289429,
+        289430,
+        289431
+      ],
+      "non_timestamp_offsets": []
+    },
+    {
+      "name": "ntvdm.exe",
+      "baseline_sha256": "b9385aba3625e563418411a3fb2becd1203133de5c0fa6e1d5f20610c8c80e8a",
+      "candidate_sha256": "7ef13ebf8a52d16783ecb2ca2e42deec00fe50c818be5097caa1d3cc7971221e",
+      "baseline_size": 2103808,
+      "candidate_size": 2103808,
+      "differing_count": 9,
+      "differing_offsets": [
+        288,
+        289,
+        333036,
+        333037,
+        333113,
+        333114,
+        360839,
+        1698412,
+        1698413
+      ],
+      "pe_and_debug_timestamp_offsets": [
+        288,
+        289,
+        290,
+        291,
+        1698412,
+        1698413,
+        1698414,
+        1698415
+      ],
+      "non_timestamp_offsets": [
+        333036,
+        333037,
+        333113,
+        333114,
+        360839
+      ],
+      "non_timestamp_attribution": [
+        {
+          "offsets": [
+            333036,
+            333037
+          ],
+          "old_immediate": 1606,
+          "new_immediate": 1517,
+          "source": "nt_event.c project DIV-313 error diagnostic"
+        },
+        {
+          "offsets": [
+            333113,
+            333114
+          ],
+          "old_immediate": 1616,
+          "new_immediate": 1522,
+          "source": "nt_event.c original resume diagnostic"
+        },
+        {
+          "offsets": [
+            360839
+          ],
+          "old_immediate": 924,
+          "new_immediate": 833,
+          "source": "nt_graph.c project DIV-314 error diagnostic",
+          "evidence": "s13-nt-graph-diagnostic-line-check.json"
+        }
+      ]
+    },
+    {
+      "name": "ntvwm.exe",
+      "baseline_sha256": "684b501e1b025f4e8dc54e6ae837a71fdba4a2dcd3cf8f2909b788a206a9532e",
+      "candidate_sha256": "ff692e055cc0452bf8189416bc33ffab2a9a434e56ccbbc201c9b67bea496077",
+      "baseline_size": 340480,
+      "candidate_size": 340480,
+      "differing_count": 6,
+      "differing_offsets": [
+        264,
+        265,
+        266,
+        229060,
+        229061,
+        229062
+      ],
+      "pe_and_debug_timestamp_offsets": [
+        264,
+        265,
+        266,
+        267,
+        229060,
+        229061,
+        229062,
+        229063
+      ],
+      "non_timestamp_offsets": []
+    },
+    {
+      "name": "run16.exe",
+      "baseline_sha256": "9813b7123f3ffadb83fbcaee14399695698037e2fecc2202eb471a2a1d852872",
+      "candidate_sha256": "738fbe28c5e0592c9ffd83c26e36e4b3c19ea4dea048b47c93e90cfea07a739d",
+      "baseline_size": 316416,
+      "candidate_size": 316416,
+      "differing_count": 6,
+      "differing_offsets": [
+        264,
+        265,
+        266,
+        209524,
+        209525,
+        209526
+      ],
+      "pe_and_debug_timestamp_offsets": [
+        264,
+        265,
+        266,
+        267,
+        209524,
+        209525,
+        209526,
+        209527
+      ],
+      "non_timestamp_offsets": []
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "baseline_sha256": "3efcf9e1c6ad51039ab152a900fbbadd86dafab1753db547c018db3fa645a4b9",
+      "candidate_sha256": "2c44f9334d9c2f2ecf6dfc0cd71d464006278c087b1cc9c459efdebc73d38d43",
+      "baseline_size": 206848,
+      "candidate_size": 206848,
+      "differing_count": 6,
+      "differing_offsets": [
+        280,
+        281,
+        282,
+        123572,
+        123573,
+        123574
+      ],
+      "pe_and_debug_timestamp_offsets": [
+        280,
+        281,
+        282,
+        283,
+        123572,
+        123573,
+        123574,
+        123575
+      ],
+      "non_timestamp_offsets": []
+    },
+    {
+      "name": "WOW32.DLL",
+      "baseline_sha256": "3b28866bbb77133fab948e934cc9c75317afa54793bd79727c1169498d58820e",
+      "candidate_sha256": "0b61d694d735cf0be466eeed48462a3108cd53fd9f19c05b58ede91bee971f64",
+      "baseline_size": 712192,
+      "candidate_size": 712192,
+      "differing_count": 8,
+      "differing_offsets": [
+        280,
+        281,
+        282,
+        310700,
+        310701,
+        625412,
+        625413,
+        625414
+      ],
+      "pe_and_debug_timestamp_offsets": [
+        280,
+        281,
+        282,
+        283,
+        625412,
+        625413,
+        625414,
+        625415
+      ],
+      "non_timestamp_offsets": [
+        310700,
+        310701
+      ],
+      "non_timestamp_attribution": [
+        {
+          "offsets": [
+            310700,
+            310701
+          ],
+          "old_immediate": 848,
+          "new_immediate": 2922,
+          "source": "ntuser/client/clres.c UserAssert; original physical source line 2922"
+        }
+      ]
+    }
+  ],
+  "limits": "full tested reference is not the currently published release; differences require interpretation; current candidate not runtime tested"
+}

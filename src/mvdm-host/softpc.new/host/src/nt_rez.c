@@ -50,10 +50,12 @@ AMENDMENTS      :
  * Allow a suitable default for the CMOS file name.
  */
 
+#line 52
 #ifndef CMOS_FILE_NAME
+#line 53
 #error Unsupported excluded original configuration
 #endif
-#line 56
+#line 55
 
 long host_read_resource(int type, char *name, byte *addr, int maxsize, int display_error)
 /* int type;                     Unused */

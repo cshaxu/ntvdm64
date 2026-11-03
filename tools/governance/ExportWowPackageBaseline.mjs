@@ -6,7 +6,7 @@ const root = path.resolve(process.argv[2] ?? process.cwd());
 const canonicalRoot = process.env.OPENNT45_MVDM_ROOT ?? "O:/repos.external/opennt-4.5/nt/private/mvdm";
 const output = path.join(root, "artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t335-s1-wow-source-profile-ledger.tsv");
 const oldLedger = path.join(root, "artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t291-s1-wow-file-subdomain-disposition-ledger.tsv");
-const packageRoots = ["wow32", "fax"];
+const packageRoots = ["wow32"];
 
 function hash(file) {
   return crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex").toUpperCase();
@@ -42,9 +42,7 @@ function parseOldDisposition() {
 }
 
 const manifests = new Map([
-  ["wow32", new Set([...parseSourceNames(path.join(root, "src/mvdm-host/wow32/sources")), ...parseSourceNames(path.join(root, "src/mvdm-host/wow32/i386/sources"))])],
-  ["fax/wowfax", parseSourceNames(path.join(root, "src/mvdm-host/fax/wowfax/sources"))],
-  ["fax/wowfaxui", parseSourceNames(path.join(root, "src/mvdm-host/fax/wowfaxui/sources"))]
+  ["wow32", new Set([...parseSourceNames(path.join(root, "src/mvdm-host/wow32/sources")), ...parseSourceNames(path.join(root, "src/mvdm-host/wow32/i386/sources"))])]
 ]);
 const inherited = parseOldDisposition();
 const files = [];
@@ -95,6 +93,6 @@ const rows = files.sort().map((file, index) => {
 
 fs.writeFileSync(output, "\uFEFF" + [headings, ...rows].map(row => row.map(quote).join("\t")).join("\n") + "\n", "utf8");
 const count = (column, value) => rows.filter(row => row[column] === value).length;
-console.log(`Wrote ${rows.length} WOW32/FAX rows: ${path.relative(root, output)}`);
+console.log(`Wrote ${rows.length} WOW32 rows: ${path.relative(root, output)}`);
 console.log(`Identity: ${count(4, "byte-exact")} byte-exact, ${count(4, "divergent")} divergent, ${count(4, "canonical-path-not-found")} canonical-path-not-found.`);
 console.log(`Selection: ${count(3, "selected-original-source")} source, ${count(3, "selected-original-resource")} resource, ${count(3, "declaration-or-build-carrier")} declaration/build, ${count(3, "mirror-intermediate-or-artifact")} artifact, ${count(3, "unselected-source-or-product-carrier")} other.`);

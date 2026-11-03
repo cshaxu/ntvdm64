@@ -1,0 +1,8 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+  "sha256": "417c9f08b48dc38b2828bfe35425d029824f0929b6898fcca7f90ec71c0ec192",
+  "original_guard": 811,
+  "continuation": 842,
+  "build": "x86 WOW32 compiled",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r202.zip"
+}

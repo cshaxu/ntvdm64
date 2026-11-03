@@ -173,9 +173,12 @@ LOCAL word rcpu_poll_segment = RCPU_POLL_SEGMENT,
 #error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif /* GISP_SVGA */
 
+#line 186
 #if defined(IRET_HOOKS) && defined(GISP_CPU)
+#line 187
 #error Excluded unsupported GISP_CPU configuration
 #endif /* IRET_HOOKS && GISP_CPU */
+#line 189
 
 #ifdef NTVDM
 
@@ -535,7 +538,7 @@ LOCAL VOID check_indicators IFN1(IBOOL, eoi)
 #else	/* not NTVDM nor GISP_CPU */
 #error Unsupported excluded original configuration
 #endif	/* NTVDM or GISP_CPU */
-#line 560
+#line 583
 
 			/* turn off update indicator and error flag	*/
 			sas_store_no_check (kb_flag_2, sas_hw_at_no_check(kb_flag_2) & ~(KB_PR_LED + KB_ERR));
@@ -720,9 +723,12 @@ LOCAL VOID PAUSE IFN0()
 	FREEKBDHDW();
 
 	do {
+#line 809
 #if defined(IRET_HOOKS)  && defined(GISP_CPU)
+#line 810
 #error Excluded unsupported GISP_CPU configuration
 #endif /* IRET_HOOKS && GISP_CPU */
+#line 812
 
 
 #if defined(NTVDM)
@@ -1494,9 +1500,12 @@ void keyboard_init()
 	*/
         host_kb_init();
 
+#line 1889
 #if defined(CPU_40_STYLE) && !defined (NTVDM)
+#line 1890
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
+#line 1892
 }
 
 

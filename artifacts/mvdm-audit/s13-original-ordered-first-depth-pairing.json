@@ -1,0 +1,2302 @@
+{
+  "pairs": [
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmd.h",
+      "original_sha256": "ea707e7955198462f93a0e795ae1751d83749578e93653e9b0baf4594d069711",
+      "original_line": 24,
+      "current": "src/mvdm-host/dos/command/cmd.h",
+      "current_sha256": "633b9668a804a85b61e6c8f92273984a6026860d71cfa409ae63c8b92a577c90",
+      "current_line": 25,
+      "total_original_groups": 9,
+      "original_arms": [
+        [
+          "ifdef",
+          "OS2_16"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "OS2_16"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmd.h",
+      "original_sha256": "ea707e7955198462f93a0e795ae1751d83749578e93653e9b0baf4594d069711",
+      "original_line": 75,
+      "current": "src/mvdm-host/dos/command/cmd.h",
+      "current_sha256": "633b9668a804a85b61e6c8f92273984a6026860d71cfa409ae63c8b92a577c90",
+      "current_line": 74,
+      "total_original_groups": 9,
+      "original_arms": [
+        [
+          "ifdef",
+          "OS2_32"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "OS2_32"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmidata.h",
+      "original_sha256": "f9772482513601c2e316e097a92485864557af77010e77285d725d903a0fd7b2",
+      "original_line": 31,
+      "current": "src/mvdm-host/dpmi32/dpmidata.h",
+      "current_sha256": "f1d94f3e394860c23485664d170d195d8fe8e38317bec2450b20a87f48d7ff13",
+      "current_line": 31,
+      "total_original_groups": 2,
+      "original_arms": [
+        [
+          "ifdef",
+          "i386"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "i386"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.h",
+      "original_sha256": "245976d103b8dd3b918b008b85e9e94b3ec245fb9119c28b897f936a94b69b5e",
+      "original_line": 23,
+      "current": "src/mvdm-host/dpmi32/dpmiint.h",
+      "current_sha256": "2f6c8f88fccaad6847b903d9c25d28bbd65494541eda7b9c9e3679e5b2e27eaf",
+      "current_line": 26,
+      "total_original_groups": 1,
+      "original_arms": [
+        [
+          "ifndef",
+          "i386"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "i386"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\int21map.c",
+      "original_sha256": "b0a8632ddb1bb0ed609115bcb113c7a43a0b042930cd281d333540089589c7e1",
+      "original_line": 2662,
+      "current": "src/mvdm-host/dpmi32/int21map.c",
+      "current_sha256": "401333753aff1b67660743c11bf67e519e396347ed97bbb5f6570285ccf3ebe0",
+      "current_line": 2622,
+      "total_original_groups": 14,
+      "original_arms": [
+        [
+          "if",
+          "DBG"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "DBG"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\suballoc.h",
+      "original_sha256": "98263eed4c261650c4b9c9b23f09f2ef19b31a0b1eb5c805d4c672ee85ded85c",
+      "original_line": 32,
+      "current": "src/mvdm-host/inc/suballoc.h",
+      "current_sha256": "8cdfab30f7a842253ea673935a9654ba526b3011f2d7c7a3cae3980a25c45477",
+      "current_line": 33,
+      "total_original_groups": 1,
+      "original_arms": [
+        [
+          "ifdef",
+          "i386"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "i386"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wow.h",
+      "original_sha256": "64663c13abaefccd99533352e08fb28efc66032c94a1780bff73be4f4cdbf70b",
+      "original_line": 1212,
+      "current": "src/mvdm-host/inc/wow.h",
+      "current_sha256": "2ca98f706f9562bd29f536a460452db35c6c4bd4ccafe2b594b7ac8b6356c777",
+      "current_line": 1203,
+      "total_original_groups": 8,
+      "original_arms": [
+        [
+          "ifndef",
+          "WM_USER"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "WM_USER"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\cntlbop.c",
+      "original_sha256": "c65121f592f91efbea0db0b3282f3252f4a58a4a87a281570ee3a0e50686cc87",
+      "original_line": 66,
+      "current": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+      "current_sha256": "00be947d2e0fedd9f801e2911ffd7ef2362a92ccda2aebc7266a15ddf6c38234",
+      "current_line": 66,
+      "total_original_groups": 8,
+      "original_arms": [
+        [
+          "if",
+          "defined(RUNUX)"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "defined(RUNUX)"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\cntlbop.c",
+      "original_sha256": "c65121f592f91efbea0db0b3282f3252f4a58a4a87a281570ee3a0e50686cc87",
+      "original_line": 69,
+      "current": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+      "current_sha256": "00be947d2e0fedd9f801e2911ffd7ef2362a92ccda2aebc7266a15ddf6c38234",
+      "current_line": 69,
+      "total_original_groups": 8,
+      "original_arms": [
+        [
+          "if",
+          "defined(DUMB_TERMINAL) && !defined(NO_SERIAL_UIF)"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "defined(DUMB_TERMINAL) && !defined(NO_SERIAL_UIF)"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\cntlbop.c",
+      "original_sha256": "c65121f592f91efbea0db0b3282f3252f4a58a4a87a281570ee3a0e50686cc87",
+      "original_line": 81,
+      "current": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+      "current_sha256": "00be947d2e0fedd9f801e2911ffd7ef2362a92ccda2aebc7266a15ddf6c38234",
+      "current_line": 73,
+      "total_original_groups": 8,
+      "original_arms": [
+        [
+          "ifndef",
+          "NTVDM"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "NTVDM"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "original_line": 108,
+      "current": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_sha256": "409549cb4a046776e2d710c8325d33fa506ab93fc06090afccd8f87cf373a85e",
+      "current_line": 109,
+      "total_original_groups": 43,
+      "original_arms": [
+        [
+          "ifdef",
+          "DPMI"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "DPMI"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "original_line": 112,
+      "current": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_sha256": "409549cb4a046776e2d710c8325d33fa506ab93fc06090afccd8f87cf373a85e",
+      "current_line": 114,
+      "total_original_groups": 43,
+      "original_arms": [
+        [
+          "ifdef",
+          "GISP_SVGA"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "GISP_SVGA"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "original_line": 323,
+      "current": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_sha256": "409549cb4a046776e2d710c8325d33fa506ab93fc06090afccd8f87cf373a85e",
+      "current_line": 300,
+      "total_original_groups": 43,
+      "original_arms": [
+        [
+          "ifdef",
+          "FLOPPY_B"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "FLOPPY_B"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\tape_io.c",
+      "original_sha256": "3aa86f1faf07f68937629f1d6e410eb41f498e17dc6d747647c7d6e5697c80aa",
+      "original_line": 71,
+      "current": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "current_sha256": "a437cdb9a3905dfee34a444277f695da561fbf185d49f0dadef029b74ad0eea6",
+      "current_line": 77,
+      "total_original_groups": 10,
+      "original_arms": [
+        [
+          "ifdef",
+          "PM"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "PM"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_reg.c",
+      "original_sha256": "54bac68daf938cc40dc69fb2b4277f7ae535daebea6a8a5a70f3113d30caa48c",
+      "original_line": 39,
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "current_sha256": "dc911e4022b22f76ea6a50b225de93f69176f0a9b4b407c97a1b43db077a350a",
+      "current_line": 43,
+      "total_original_groups": 4,
+      "original_arms": [
+        [
+          "ifdef",
+          "PIG"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "PIG"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "original_line": 249,
+      "current": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_sha256": "ea0ebad8ee2746d2bd9c52481d4ebf2d61d0e9e02bd77a90d57108391cf5d58c",
+      "current_line": 241,
+      "total_original_groups": 103,
+      "original_arms": [
+        [
+          "ifdef",
+          "PS_FLUSHING"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "PS_FLUSHING"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "original_line": 697,
+      "current": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_sha256": "ea0ebad8ee2746d2bd9c52481d4ebf2d61d0e9e02bd77a90d57108391cf5d58c",
+      "current_line": 621,
+      "total_original_groups": 103,
+      "original_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "original_line": 724,
+      "current": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_sha256": "ea0ebad8ee2746d2bd9c52481d4ebf2d61d0e9e02bd77a90d57108391cf5d58c",
+      "current_line": 634,
+      "total_original_groups": 103,
+      "original_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "original_line": 755,
+      "current": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_sha256": "ea0ebad8ee2746d2bd9c52481d4ebf2d61d0e9e02bd77a90d57108391cf5d58c",
+      "current_line": 652,
+      "total_original_groups": 103,
+      "original_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "original_line": 790,
+      "current": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_sha256": "ea0ebad8ee2746d2bd9c52481d4ebf2d61d0e9e02bd77a90d57108391cf5d58c",
+      "current_line": 674,
+      "total_original_groups": 103,
+      "original_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "original_line": 813,
+      "current": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_sha256": "ea0ebad8ee2746d2bd9c52481d4ebf2d61d0e9e02bd77a90d57108391cf5d58c",
+      "current_line": 684,
+      "total_original_groups": 103,
+      "original_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "original_line": 852,
+      "current": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_sha256": "ea0ebad8ee2746d2bd9c52481d4ebf2d61d0e9e02bd77a90d57108391cf5d58c",
+      "current_line": 705,
+      "total_original_groups": 103,
+      "original_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "original_line": 956,
+      "current": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_sha256": "ea0ebad8ee2746d2bd9c52481d4ebf2d61d0e9e02bd77a90d57108391cf5d58c",
+      "current_line": 761,
+      "total_original_groups": 103,
+      "original_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "original_line": 1056,
+      "current": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_sha256": "ea0ebad8ee2746d2bd9c52481d4ebf2d61d0e9e02bd77a90d57108391cf5d58c",
+      "current_line": 826,
+      "total_original_groups": 103,
+      "original_arms": [
+        [
+          "ifdef",
+          "PS_FLUSHING"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "PS_FLUSHING"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "original_line": 1084,
+      "current": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_sha256": "ea0ebad8ee2746d2bd9c52481d4ebf2d61d0e9e02bd77a90d57108391cf5d58c",
+      "current_line": 848,
+      "total_original_groups": 103,
+      "original_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "original_line": 1158,
+      "current": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_sha256": "ea0ebad8ee2746d2bd9c52481d4ebf2d61d0e9e02bd77a90d57108391cf5d58c",
+      "current_line": 908,
+      "total_original_groups": 103,
+      "original_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "original_line": 1260,
+      "current": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_sha256": "ea0ebad8ee2746d2bd9c52481d4ebf2d61d0e9e02bd77a90d57108391cf5d58c",
+      "current_line": 984,
+      "total_original_groups": 103,
+      "original_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "original_line": 1322,
+      "current": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_sha256": "ea0ebad8ee2746d2bd9c52481d4ebf2d61d0e9e02bd77a90d57108391cf5d58c",
+      "current_line": 1020,
+      "total_original_groups": 103,
+      "original_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "original_line": 1347,
+      "current": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_sha256": "ea0ebad8ee2746d2bd9c52481d4ebf2d61d0e9e02bd77a90d57108391cf5d58c",
+      "current_line": 1032,
+      "total_original_groups": 103,
+      "original_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "original_line": 2593,
+      "current": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_sha256": "ea0ebad8ee2746d2bd9c52481d4ebf2d61d0e9e02bd77a90d57108391cf5d58c",
+      "current_line": 2120,
+      "total_original_groups": 103,
+      "original_arms": [
+        [
+          "ifndef",
+          "COM4_ADAPTOR"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "COM4_ADAPTOR"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\bios.h",
+      "original_sha256": "a181e9ddddf9cbeeff03b63f733d282455b2f21b578c6c9cf772bf726b41d064",
+      "original_line": 189,
+      "current": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "current_sha256": "eebdb2a775ef3692317ff5b990baf59c6651a67f8795f15e53577978239e50db",
+      "current_line": 190,
+      "total_original_groups": 25,
+      "original_arms": [
+        [
+          "ifdef",
+          "GEN_DRVR"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "GEN_DRVR"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\bios.h",
+      "original_sha256": "a181e9ddddf9cbeeff03b63f733d282455b2f21b578c6c9cf772bf726b41d064",
+      "original_line": 203,
+      "current": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "current_sha256": "eebdb2a775ef3692317ff5b990baf59c6651a67f8795f15e53577978239e50db",
+      "current_line": 206,
+      "total_original_groups": 25,
+      "original_arms": [
+        [
+          "ifdef",
+          "CDROM"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "CDROM"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\bios.h",
+      "original_sha256": "a181e9ddddf9cbeeff03b63f733d282455b2f21b578c6c9cf772bf726b41d064",
+      "original_line": 314,
+      "current": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "current_sha256": "eebdb2a775ef3692317ff5b990baf59c6651a67f8795f15e53577978239e50db",
+      "current_line": 297,
+      "total_original_groups": 25,
+      "original_arms": [
+        [
+          "ifdef",
+          "MSWDVR"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "MSWDVR"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\bios.h",
+      "original_sha256": "a181e9ddddf9cbeeff03b63f733d282455b2f21b578c6c9cf772bf726b41d064",
+      "original_line": 322,
+      "current": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "current_sha256": "eebdb2a775ef3692317ff5b990baf59c6651a67f8795f15e53577978239e50db",
+      "current_line": 302,
+      "total_original_groups": 25,
+      "original_arms": [
+        [
+          "ifdef",
+          "NOVELL_IPX"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "NOVELL_IPX"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\bios.h",
+      "original_sha256": "a181e9ddddf9cbeeff03b63f733d282455b2f21b578c6c9cf772bf726b41d064",
+      "original_line": 328,
+      "current": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "current_sha256": "eebdb2a775ef3692317ff5b990baf59c6651a67f8795f15e53577978239e50db",
+      "current_line": 307,
+      "total_original_groups": 25,
+      "original_arms": [
+        [
+          "ifdef",
+          "NOVELL_TCPIP"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "NOVELL_TCPIP"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\bios.h",
+      "original_sha256": "a181e9ddddf9cbeeff03b63f733d282455b2f21b578c6c9cf772bf726b41d064",
+      "original_line": 333,
+      "current": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "current_sha256": "eebdb2a775ef3692317ff5b990baf59c6651a67f8795f15e53577978239e50db",
+      "current_line": 312,
+      "total_original_groups": 25,
+      "original_arms": [
+        [
+          "ifdef",
+          "WINSOCK"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "WINSOCK"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\bios.h",
+      "original_sha256": "a181e9ddddf9cbeeff03b63f733d282455b2f21b578c6c9cf772bf726b41d064",
+      "original_line": 337,
+      "current": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "current_sha256": "eebdb2a775ef3692317ff5b990baf59c6651a67f8795f15e53577978239e50db",
+      "current_line": 317,
+      "total_original_groups": 25,
+      "original_arms": [
+        [
+          "ifdef",
+          "SWINAPI"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "SWINAPI"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\bios.h",
+      "original_sha256": "a181e9ddddf9cbeeff03b63f733d282455b2f21b578c6c9cf772bf726b41d064",
+      "original_line": 348,
+      "current": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "current_sha256": "eebdb2a775ef3692317ff5b990baf59c6651a67f8795f15e53577978239e50db",
+      "current_line": 326,
+      "total_original_groups": 25,
+      "original_arms": [
+        [
+          "if",
+          "defined(SOFTWIN_API)"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "defined(SOFTWIN_API)"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\bios.h",
+      "original_sha256": "a181e9ddddf9cbeeff03b63f733d282455b2f21b578c6c9cf772bf726b41d064",
+      "original_line": 401,
+      "current": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "current_sha256": "eebdb2a775ef3692317ff5b990baf59c6651a67f8795f15e53577978239e50db",
+      "current_line": 376,
+      "total_original_groups": 25,
+      "original_arms": [
+        [
+          "ifdef",
+          "DOS_APP_LIC"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "DOS_APP_LIC"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\debug.h",
+      "original_sha256": "59246b3c18bf6dfcd79b4e61bf961bc0382800deb4d968c198ceb415c284f21b",
+      "original_line": 27,
+      "current": "src/mvdm-host/softpc.new/base/inc/debug.h",
+      "current_sha256": "6390ab7418beea23f1333aa32043851a5a68f5ee7fdfe6791984bf7a15565515",
+      "current_line": 27,
+      "total_original_groups": 3,
+      "original_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egavideo.h",
+      "original_sha256": "5b47f5e3566927332de3c3f9474ba3595151758c0a8ff8fd6c9cc860f2f8e6cd",
+      "original_line": 107,
+      "current": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "current_sha256": "b82d929f7550fbb81c3d64fe2caae1d8d48206ce39ad341994521b9bd5a74c8b",
+      "current_line": 99,
+      "total_original_groups": 7,
+      "original_arms": [
+        [
+          "ifdef",
+          "MSWDVR"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "MSWDVR"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gendrvr.h",
+      "original_sha256": "f6750f0da3fab360f5348981440747be5dc612ce81eabec6913557f59b5f0185",
+      "original_line": 25,
+      "current": "src/mvdm-host/softpc.new/base/inc/gendrvr.h",
+      "current_sha256": "ed6532b278e601432c49e87541087ebeaddf76e60d5fb564ec540808565f3202",
+      "current_line": 26,
+      "total_original_groups": 2,
+      "original_arms": [
+        [
+          "ifdef",
+          "GEN_DRVR"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "GEN_DRVR"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\host.h",
+      "original_sha256": "7777d03c1ab2be0f278941a5d0085847c209da5b7984e05fdbcb8aa2885a495b",
+      "original_line": 49,
+      "current": "src/mvdm-host/softpc.new/base/inc/host.h",
+      "current_sha256": "db637e00c18673a3d8f72e9aae283200bdbea240cc0dec240dfca3267f74fd63",
+      "current_line": 50,
+      "total_original_groups": 5,
+      "original_arms": [
+        [
+          "ifndef",
+          "REAL_VGA"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "REAL_VGA"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ica.h",
+      "original_sha256": "21109fa7e6b8d6a8ecfe8e733a16805829560e218be11e46e5a33dac28820316",
+      "original_line": 66,
+      "current": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "current_sha256": "d03fb73cf11f56ef8e62df868d9a5848a321f456421a1896a1467fc702944b1f",
+      "current_line": 67,
+      "total_original_groups": 8,
+      "original_arms": [
+        [
+          "if",
+          "defined (SWIN_HAW)"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "defined (SWIN_HAW)"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ica.h",
+      "original_sha256": "21109fa7e6b8d6a8ecfe8e733a16805829560e218be11e46e5a33dac28820316",
+      "original_line": 78,
+      "current": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "current_sha256": "d03fb73cf11f56ef8e62df868d9a5848a321f456421a1896a1467fc702944b1f",
+      "current_line": 79,
+      "total_original_groups": 8,
+      "original_arms": [
+        [
+          "ifndef",
+          "CPU_30_STYLE"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "CPU_30_STYLE"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ica.h",
+      "original_sha256": "21109fa7e6b8d6a8ecfe8e733a16805829560e218be11e46e5a33dac28820316",
+      "original_line": 243,
+      "current": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "current_sha256": "d03fb73cf11f56ef8e62df868d9a5848a321f456421a1896a1467fc702944b1f",
+      "current_line": 147,
+      "total_original_groups": 8,
+      "original_arms": [
+        [
+          "ifdef",
+          "GISP_CPU"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "GISP_CPU"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\quick_ev.h",
+      "original_sha256": "c59fec315058b2cc03394d02d9c3756350357f7eb8cb48a541e56aae1b7939a2",
+      "original_line": 56,
+      "current": "src/mvdm-host/softpc.new/base/inc/quick_ev.h",
+      "current_sha256": "1435e2e98f54c312f277c9d319c95a9ebcb48af547b563cef1ed59d935b46dee",
+      "current_line": 51,
+      "total_original_groups": 3,
+      "original_arms": [
+        [
+          "ifndef",
+          "NTVDM"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "NTVDM"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse.c",
+      "original_sha256": "2d196d9f0c1ef860436d8eb47c01820913a1164dd1b32e3bd518226653476785",
+      "original_line": 411,
+      "current": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "current_sha256": "bf1f7a8f0f59cd05d2d709e633e8ec781c2e57edea2629f439bb926343b6371e",
+      "current_line": 372,
+      "total_original_groups": 19,
+      "original_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\ios.c",
+      "original_sha256": "e4f39908ff9534adde52e46def732a93790ac48f2bb481590622c537c2f3b205",
+      "original_line": 413,
+      "current": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "current_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e",
+      "current_line": 398,
+      "total_original_groups": 44,
+      "original_arms": [
+        [
+          "if",
+          "defined(NTVDM) && defined(MONITOR)"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "defined(NTVDM) && defined(MONITOR)"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\terminat.c",
+      "original_sha256": "b085166424614a154a41f794bf3505f50a77a2ea60338bcefcb845be8e092e53",
+      "original_line": 35,
+      "current": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "current_sha256": "cb6328db687f1156bd4bec1b69c6f4921ade18baeccd8237125d5d78b2cb336b",
+      "current_line": 35,
+      "total_original_groups": 15,
+      "original_arms": [
+        [
+          "ifdef",
+          "GISP_SVGA"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "GISP_SVGA"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\terminat.c",
+      "original_sha256": "b085166424614a154a41f794bf3505f50a77a2ea60338bcefcb845be8e092e53",
+      "original_line": 39,
+      "current": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "current_sha256": "cb6328db687f1156bd4bec1b69c6f4921ade18baeccd8237125d5d78b2cb336b",
+      "current_line": 38,
+      "total_original_groups": 15,
+      "original_arms": [
+        [
+          "ifdef",
+          "LICENSING"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "LICENSING"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\terminat.c",
+      "original_sha256": "b085166424614a154a41f794bf3505f50a77a2ea60338bcefcb845be8e092e53",
+      "original_line": 73,
+      "current": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "current_sha256": "cb6328db687f1156bd4bec1b69c6f4921ade18baeccd8237125d5d78b2cb336b",
+      "current_line": 78,
+      "total_original_groups": 15,
+      "original_arms": [
+        [
+          "ifdef",
+          "SWIN_SNDBLST_NULL"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "SWIN_SNDBLST_NULL"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\terminat.c",
+      "original_sha256": "b085166424614a154a41f794bf3505f50a77a2ea60338bcefcb845be8e092e53",
+      "original_line": 115,
+      "current": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "current_sha256": "cb6328db687f1156bd4bec1b69c6f4921ade18baeccd8237125d5d78b2cb336b",
+      "current_line": 117,
+      "total_original_groups": 15,
+      "original_arms": [
+        [
+          "ifdef",
+          "SLAVEPC"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "SLAVEPC"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\terminat.c",
+      "original_sha256": "b085166424614a154a41f794bf3505f50a77a2ea60338bcefcb845be8e092e53",
+      "original_line": 126,
+      "current": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "current_sha256": "cb6328db687f1156bd4bec1b69c6f4921ade18baeccd8237125d5d78b2cb336b",
+      "current_line": 129,
+      "total_original_groups": 15,
+      "original_arms": [
+        [
+          "ifdef",
+          "NOVELL"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "NOVELL"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\xt.c",
+      "original_sha256": "a95cda1054b1840df73dbcec6e23cacbee1ddf2fd1ed071318c8c9252f21c0cc",
+      "original_line": 75,
+      "current": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "current_sha256": "dad2719a6fe379b5629b1c6d7fbb475e5f22bd5816fbd3b2ee6d75898faee00c",
+      "current_line": 83,
+      "total_original_groups": 4,
+      "original_arms": [
+        [
+          "if",
+          "defined(CCPU) && !defined(CPU_30_STYLE)"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "defined(CCPU) && !defined(CPU_30_STYLE)"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\xt.c",
+      "original_sha256": "a95cda1054b1840df73dbcec6e23cacbee1ddf2fd1ed071318c8c9252f21c0cc",
+      "original_line": 158,
+      "current": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "current_sha256": "dad2719a6fe379b5629b1c6d7fbb475e5f22bd5816fbd3b2ee6d75898faee00c",
+      "current_line": 102,
+      "total_original_groups": 4,
+      "original_arms": [
+        [
+          "ifdef",
+          "CPU_30_STYLE"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "CPU_30_STYLE"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\xt.c",
+      "original_sha256": "a95cda1054b1840df73dbcec6e23cacbee1ddf2fd1ed071318c8c9252f21c0cc",
+      "original_line": 346,
+      "current": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "current_sha256": "dad2719a6fe379b5629b1c6d7fbb475e5f22bd5816fbd3b2ee6d75898faee00c",
+      "current_line": 116,
+      "total_original_groups": 4,
+      "original_arms": [
+        [
+          "if",
+          "!defined(MAC_LIKE) && !defined(CPU_30_STYLE)"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "!defined(MAC_LIKE) && !defined(CPU_30_STYLE)"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\qevnt.c",
+      "original_sha256": "3e0d97d17bcc4c107b5173bf38868c79ab68d3042d29472a1a7259364da2947c",
+      "original_line": 146,
+      "current": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "current_sha256": "da8cc74b8451863fdc370ee86789fcd5026d186bfd231742135d1329df553795",
+      "current_line": 149,
+      "total_original_groups": 6,
+      "original_arms": [
+        [
+          "ifndef",
+          "MONITOR"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "MONITOR"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\qevnt.c",
+      "original_sha256": "3e0d97d17bcc4c107b5173bf38868c79ab68d3042d29472a1a7259364da2947c",
+      "original_line": 206,
+      "current": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "current_sha256": "da8cc74b8451863fdc370ee86789fcd5026d186bfd231742135d1329df553795",
+      "current_line": 206,
+      "total_original_groups": 6,
+      "original_arms": [
+        [
+          "ifdef",
+          "MONITOR"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "MONITOR"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\qevnt.c",
+      "original_sha256": "3e0d97d17bcc4c107b5173bf38868c79ab68d3042d29472a1a7259364da2947c",
+      "original_line": 449,
+      "current": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "current_sha256": "da8cc74b8451863fdc370ee86789fcd5026d186bfd231742135d1329df553795",
+      "current_line": 448,
+      "total_original_groups": 6,
+      "original_arms": [
+        [
+          "ifndef",
+          "MONITOR"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "MONITOR"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "original_line": 383,
+      "current": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_sha256": "4e2728687508b9c240c56e65fc4ca8e93a557e2ffdeaf61f761775b11d0a0d6b",
+      "current_line": 375,
+      "total_original_groups": 69,
+      "original_arms": [
+        [
+          "ifdef",
+          "SYNCH_TIMERS"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "SYNCH_TIMERS"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "original_line": 476,
+      "current": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_sha256": "4e2728687508b9c240c56e65fc4ca8e93a557e2ffdeaf61f761775b11d0a0d6b",
+      "current_line": 424,
+      "total_original_groups": 69,
+      "original_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timestrb.c",
+      "original_sha256": "e314b1b5e88474ac9d1c978b3db71820fee667f7de3eff23b66e48bf0d3532e7",
+      "original_line": 81,
+      "current": "src/mvdm-host/softpc.new/base/system/timestrb.c",
+      "current_sha256": "c10d0f6f66f43309f41bdcdd75206d3b9fcd065fa4f69fa52bddceb190e21533",
+      "current_line": 81,
+      "total_original_groups": 6,
+      "original_arms": [
+        [
+          "ifdef",
+          "HUNTER"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "HUNTER"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+      "original_line": 1374,
+      "current": "src/mvdm-host/softpc.new/base/video/video.c",
+      "current_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113",
+      "current_line": 1375,
+      "total_original_groups": 83,
+      "original_arms": [
+        [
+          "ifdef",
+          "A2CPU"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "A2CPU"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\host_cpu.h",
+      "original_sha256": "e79dd6aa79d24e37ad8390c8879abf3436674ee101037f0e09415148a938ac95",
+      "original_line": 17,
+      "current": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "current_sha256": "e7dc11cd3a445e2f7e37df01650c055ec62a48d384a823bf08c6c599301f3c89",
+      "current_line": 16,
+      "total_original_groups": 1,
+      "original_arms": [
+        [
+          "ifdef",
+          "CPU_30_STYLE"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "CPU_30_STYLE"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
+      "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+      "original_line": 506,
+      "current": "src/mvdm-host/softpc.new/host/src/config.c",
+      "current_sha256": "69e88b41f377a96f1c2ec469beaea8591a5ece7588fb07f62abe4092832e6c7d",
+      "current_line": 421,
+      "total_original_groups": 21,
+      "original_arms": [
+        [
+          "ifdef",
+          "i386"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "i386"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
+      "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+      "original_line": 524,
+      "current": "src/mvdm-host/softpc.new/host/src/config.c",
+      "current_sha256": "69e88b41f377a96f1c2ec469beaea8591a5ece7588fb07f62abe4092832e6c7d",
+      "current_line": 460,
+      "total_original_groups": 21,
+      "original_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\copy_fnc.c",
+      "original_sha256": "320d697e9969cf146d5b0f94813aa62b501b0eefeff31806b22d463912965518",
+      "original_line": 115,
+      "current": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "current_sha256": "e5e2c712cfd7307481be688a894065e0b3dfc03e28f946bb374689a9fdf1c7bc",
+      "current_line": 95,
+      "total_original_groups": 5,
+      "original_arms": [
+        [
+          "if",
+          "0"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "0"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\cpucstbs.c",
+      "original_sha256": "0e114c6368a616dc87cdf4311aff19d50283e38a51b3f0e3301cbc45487ddaeb",
+      "original_line": 1,
+      "current": "src/mvdm-host/softpc.new/host/src/cpucstbs.c",
+      "current_sha256": "06dda5218ab8fdf1de61fdac7e33106aac2d24d0acdec21ca5b47defc6de2dca",
+      "current_line": 1,
+      "total_original_groups": 1,
+      "original_arms": [
+        [
+          "ifndef",
+          "MONITOR"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "MONITOR"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_com.c",
+      "original_sha256": "56d39e89f2e077350ad07b77651224a0162314fced5abb498279b486f35afb32",
+      "original_line": 388,
+      "current": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "current_sha256": "ce733da6e9b91cb8a06d3beb85f6297b151ca33ea21db2ea29ba70af8067d7b8",
+      "current_line": 391,
+      "total_original_groups": 10,
+      "original_arms": [
+        [
+          "ifdef",
+          "MONITOR"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "MONITOR"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_com.c",
+      "original_sha256": "56d39e89f2e077350ad07b77651224a0162314fced5abb498279b486f35afb32",
+      "original_line": 712,
+      "current": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "current_sha256": "ce733da6e9b91cb8a06d3beb85f6297b151ca33ea21db2ea29ba70af8067d7b8",
+      "current_line": 716,
+      "total_original_groups": 10,
+      "original_arms": [
+        [
+          "ifdef",
+          "MONITOR"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "MONITOR"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_det.c",
+      "original_sha256": "c58d15d58672440bf94e015f61a10b43311e601ae150dae5b1559f2399f9dadc",
+      "original_line": 1560,
+      "current": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "current_sha256": "c0bca2172cb5eedcf4472097e1644d9b207a3c82b4cc25842b9514be39f7d9db",
+      "current_line": 245,
+      "total_original_groups": 8,
+      "original_arms": [
+        [
+          "ifdef",
+          "PLANEDUMPER"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "PLANEDUMPER"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_eoi.c",
+      "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
+      "original_line": 257,
+      "current": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "current_sha256": "793b9989d7e691bd458cd6a6c82f2c7d1bbec78d0c3a35aa5b65c58eb8f07cf4",
+      "current_line": 260,
+      "total_original_groups": 12,
+      "original_arms": [
+        [
+          "ifdef",
+          "MONITOR"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "MONITOR"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_eoi.c",
+      "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
+      "original_line": 332,
+      "current": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "current_sha256": "793b9989d7e691bd458cd6a6c82f2c7d1bbec78d0c3a35aa5b65c58eb8f07cf4",
+      "current_line": 321,
+      "total_original_groups": 12,
+      "original_arms": [
+        [
+          "ifndef",
+          "MONITOR"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "MONITOR"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_reset.c",
+      "original_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47",
+      "original_line": 70,
+      "current": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "current_sha256": "a8e6db859ec2046fbbcb646251c97b358acffdb732877236145a59d5b26af6f0",
+      "current_line": 75,
+      "total_original_groups": 11,
+      "original_arms": [
+        [
+          "ifdef",
+          "MONITOR"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "MONITOR"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_reset.c",
+      "original_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47",
+      "original_line": 132,
+      "current": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "current_sha256": "a8e6db859ec2046fbbcb646251c97b358acffdb732877236145a59d5b26af6f0",
+      "current_line": 138,
+      "total_original_groups": 11,
+      "original_arms": [
+        [
+          "ifdef",
+          "MONITOR"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "MONITOR"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_reset.c",
+      "original_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47",
+      "original_line": 324,
+      "current": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "current_sha256": "a8e6db859ec2046fbbcb646251c97b358acffdb732877236145a59d5b26af6f0",
+      "current_line": 346,
+      "total_original_groups": 11,
+      "original_arms": [
+        [
+          "ifdef",
+          "HUNTER"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "HUNTER"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_rflop.c",
+      "original_sha256": "22c82627bf993ac4fd072ad1bb7d4f62000b60889e6955e83f5f676ac5bd7a29",
+      "original_line": 247,
+      "current": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "current_sha256": "2c84f2fcd52f333c74e33c3986844f6252e91149215333762bf98be693b07983",
+      "current_line": 229,
+      "total_original_groups": 35,
+      "original_arms": [
+        [
+          "ifdef",
+          "EJECT_FLOPPY"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "EJECT_FLOPPY"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_rflop.c",
+      "original_sha256": "22c82627bf993ac4fd072ad1bb7d4f62000b60889e6955e83f5f676ac5bd7a29",
+      "original_line": 1300,
+      "current": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "current_sha256": "2c84f2fcd52f333c74e33c3986844f6252e91149215333762bf98be693b07983",
+      "current_line": 1148,
+      "total_original_groups": 35,
+      "original_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_sec.c",
+      "original_sha256": "2ba1facf8d0c0a00c71f78dfb1fc8e2d001b699e2659465044a94738b637c9bd",
+      "original_line": 115,
+      "current": "src/mvdm-host/softpc.new/host/src/nt_sec.c",
+      "current_sha256": "15ffac3ab16453e66ed7b5c94f5302ece860f9b466d955520234a5e36f186cd1",
+      "current_line": 116,
+      "total_original_groups": 1,
+      "original_arms": [
+        [
+          "ifdef",
+          "X86GFX"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "X86GFX"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_timer.c",
+      "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33",
+      "original_line": 241,
+      "current": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "current_sha256": "3a865cf2fd9295b853368ddf4fdd6c6b0581678ea99b417c6d4c317dbbf1e9e6",
+      "current_line": 243,
+      "total_original_groups": 15,
+      "original_arms": [
+        [
+          "if",
+          "defined (MONITOR) && defined (X86GFX)"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "defined (MONITOR) && defined (X86GFX)"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_timer.c",
+      "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33",
+      "original_line": 571,
+      "current": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "current_sha256": "3a865cf2fd9295b853368ddf4fdd6c6b0581678ea99b417c6d4c317dbbf1e9e6",
+      "current_line": 580,
+      "total_original_groups": 15,
+      "original_arms": [
+        [
+          "ifdef",
+          "MONITOR"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "MONITOR"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_timer.c",
+      "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33",
+      "original_line": 608,
+      "current": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "current_sha256": "3a865cf2fd9295b853368ddf4fdd6c6b0581678ea99b417c6d4c317dbbf1e9e6",
+      "current_line": 607,
+      "total_original_groups": 15,
+      "original_arms": [
+        [
+          "ifdef",
+          "MONITOR"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "MONITOR"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\fastwow.h",
+      "original_sha256": "0a59ccbb6b0bf66982352bfefda5c08867ec44dd9ff55731d2b701035d684520",
+      "original_line": 24,
+      "current": "src/mvdm-host/wow32/fastwow.h",
+      "current_sha256": "5fc1a824d976bfd52d2847a5052039cb013c3529f2e595b256933f663d463113",
+      "current_line": 24,
+      "total_original_groups": 4,
+      "original_arms": [
+        [
+          "if",
+          "FASTBOPPING"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "FASTBOPPING"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\fastwow.h",
+      "original_sha256": "0a59ccbb6b0bf66982352bfefda5c08867ec44dd9ff55731d2b701035d684520",
+      "original_line": 30,
+      "current": "src/mvdm-host/wow32/fastwow.h",
+      "current_sha256": "5fc1a824d976bfd52d2847a5052039cb013c3529f2e595b256933f663d463113",
+      "current_line": 29,
+      "total_original_groups": 4,
+      "original_arms": [
+        [
+          "if",
+          "FASTBOPPING"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "FASTBOPPING"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wcall16.c",
+      "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0",
+      "original_line": 583,
+      "current": "src/mvdm-host/wow32/wcall16.c",
+      "current_sha256": "51fc0ddeed8481a96b1934e500ecacf0ef2570fdf0ec90d46c8d4fd0d1a20288",
+      "current_line": 540,
+      "total_original_groups": 10,
+      "original_arms": [
+        [
+          "ifdef",
+          "DEBUG"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "DEBUG"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wcall16.c",
+      "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0",
+      "original_line": 652,
+      "current": "src/mvdm-host/wow32/wcall16.c",
+      "current_sha256": "51fc0ddeed8481a96b1934e500ecacf0ef2570fdf0ec90d46c8d4fd0d1a20288",
+      "current_line": 553,
+      "total_original_groups": 10,
+      "original_arms": [
+        [
+          "if",
+          "FASTBOPPING"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "FASTBOPPING"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wcall16.c",
+      "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0",
+      "original_line": 656,
+      "current": "src/mvdm-host/wow32/wcall16.c",
+      "current_sha256": "51fc0ddeed8481a96b1934e500ecacf0ef2570fdf0ec90d46c8d4fd0d1a20288",
+      "current_line": 560,
+      "total_original_groups": 10,
+      "original_arms": [
+        [
+          "ifdef",
+          "DEBUG"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "DEBUG"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmdisp32.c",
+      "original_sha256": "4a9004c1f57af28280d0176afd72cae76a7fbae90ffb758426c287435e5912d4",
+      "original_line": 42,
+      "current": "src/mvdm-host/wow32/wmdisp32.c",
+      "current_sha256": "67d8e664f8db2aff4bb7138869e237ae450100214747a0a0e0ae95582c54158f",
+      "current_line": 52,
+      "total_original_groups": 12,
+      "original_arms": [
+        [
+          "ifdef",
+          "DEBUG"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "DEBUG"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmdisp32.c",
+      "original_sha256": "4a9004c1f57af28280d0176afd72cae76a7fbae90ffb758426c287435e5912d4",
+      "original_line": 46,
+      "current": "src/mvdm-host/wow32/wmdisp32.c",
+      "current_sha256": "67d8e664f8db2aff4bb7138869e237ae450100214747a0a0e0ae95582c54158f",
+      "current_line": 57,
+      "total_original_groups": 12,
+      "original_arms": [
+        [
+          "ifdef",
+          "WOWPROFILE"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "WOWPROFILE"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wowhooks.c",
+      "original_sha256": "345220990242cde0890884f478bef8622c2fc537c9e6200fa9b289145be0cc67",
+      "original_line": 617,
+      "current": "src/mvdm-host/wow32/wowhooks.c",
+      "current_sha256": "befeccf5051b72af4ef59973cd22d1a8e5781bae34d089b709fa1ebf7ce4037a",
+      "current_line": 628,
+      "total_original_groups": 2,
+      "original_arms": [
+        [
+          "ifdef",
+          "DEBUG"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "DEBUG"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wowtbl.c",
+      "original_sha256": "4c053570af6e72b0159d0e1bc7c5e9859ef89d513781bbcd1e767ddaf7695960",
+      "original_line": 80,
+      "current": "src/mvdm-host/wow32/wowtbl.c",
+      "current_sha256": "d6f1591c35edb2ff74195037e983c4a766966c237f50824096da1571148be741",
+      "current_line": 81,
+      "total_original_groups": 4,
+      "original_arms": [
+        [
+          "ifdef",
+          "WOWPROFILE"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "WOWPROFILE"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\xms.486\\xms.h",
+      "original_sha256": "0fad52bf1e4c6db87bdc77cf9ec2f35540da2fc4972d2b32e32d57a46776a9fc",
+      "original_line": 26,
+      "current": "src/mvdm-host/xms.486/xms.h",
+      "current_sha256": "920404f64af0644a09150a2df0a3d6fbc0ac9ee378281c603d980e4adb3d520f",
+      "current_line": 27,
+      "total_original_groups": 10,
+      "original_arms": [
+        [
+          "ifdef",
+          "OS2_16"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "OS2_16"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\xms.486\\xms.h",
+      "original_sha256": "0fad52bf1e4c6db87bdc77cf9ec2f35540da2fc4972d2b32e32d57a46776a9fc",
+      "original_line": 77,
+      "current": "src/mvdm-host/xms.486/xms.h",
+      "current_sha256": "920404f64af0644a09150a2df0a3d6fbc0ac9ee378281c603d980e4adb3d520f",
+      "current_line": 76,
+      "total_original_groups": 10,
+      "original_arms": [
+        [
+          "ifdef",
+          "OS2_32"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "OS2_32"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\xms.486\\xmsblock.c",
+      "original_sha256": "bad1de87b499d3052e757d858b39437232f5653610dc5560c06afcc5e05fd391",
+      "original_line": 194,
+      "current": "src/mvdm-host/xms.486/xmsblock.c",
+      "current_sha256": "0299af7148f217e237a8f094e972da7b7a4d61f534d99d1ccc786e28ab752d5b",
+      "current_line": 213,
+      "total_original_groups": 1,
+      "original_arms": [
+        [
+          "ifdef",
+          "i386"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "i386"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntregapi.h",
+      "original_sha256": "0fb164317335d8b48c51122182922259c902c7f60afb28111bafa9fb75735a6a",
+      "original_line": 22,
+      "current": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+      "current_sha256": "58440554432e525dcab5fd7faf9b805ad2dcafe8bae30a6a582eb699b85900a6",
+      "current_line": 4,
+      "total_original_groups": 1,
+      "original_arms": [
+        [
+          "ifndef",
+          "_NTREGAPI_"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "_NTREGAPI_"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\nturtl.h",
+      "original_sha256": "c6b7844e2e1248ac38ee90dd8173f95ab0f7997d7a7cfbafda851cc07cc80921",
+      "original_line": 28,
+      "current": "src/non-mvdm/public/sdk/inc/nturtl.h",
+      "current_sha256": "02dfdb43c3d3db9380546a98fcf07d916059c0f4e001b5fe3c06cce19e811c03",
+      "current_line": 4,
+      "total_original_groups": 1,
+      "original_arms": [
+        [
+          "ifndef",
+          "_NTURTL_"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "_NTURTL_"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clglobal.c",
+      "original_sha256": "d8fe5a80d5848f2951843d7ba94752cb3223945a48630350835422389cd1da6f",
+      "original_line": 24,
+      "current": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+      "current_sha256": "4e70733287239a82f0aec9e87d0511bae32fcc07ceb9b2a5187ab85704f57b7b",
+      "current_line": 22,
+      "total_original_groups": 5,
+      "original_arms": [
+        [
+          "if",
+          "DBG"
+        ]
+      ],
+      "current_arms": [
+        [
+          "if",
+          "DBG"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clglobal.c",
+      "original_sha256": "d8fe5a80d5848f2951843d7ba94752cb3223945a48630350835422389cd1da6f",
+      "original_line": 1309,
+      "current": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+      "current_sha256": "4e70733287239a82f0aec9e87d0511bae32fcc07ceb9b2a5187ab85704f57b7b",
+      "current_line": 1203,
+      "total_original_groups": 5,
+      "original_arms": [
+        [
+          "ifdef",
+          "WX86"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "WX86"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmenu.c",
+      "original_sha256": "dee4bdb0c79e58993b25ab65c37eb71cc4cfc9a551a9a0e07b5a2f67eb8461cd",
+      "original_line": 676,
+      "current": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+      "current_sha256": "9a4ad9fe9fbf0dc8ed05065646fb2b8355a6518b02aeba706ab64b8e5423f4d3",
+      "current_line": 402,
+      "total_original_groups": 7,
+      "original_arms": [
+        [
+          "ifdef",
+          "MEMPHIS_MENU_WATERMARKS"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "MEMPHIS_MENU_WATERMARKS"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntsend.h",
+      "original_sha256": "b708f1fee46e93735c4c931d556e16daa9679e6352d72620904d18ad21396abf",
+      "original_line": 254,
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+      "current_sha256": "03c24b6505a66d5b9c316b02c05d914a2a4dd4467edada589e42f1e650a8b2ba",
+      "current_line": 65,
+      "total_original_groups": 1,
+      "original_arms": [
+        [
+          "ifdef",
+          "UNICODE"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifdef",
+          "UNICODE"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\userk.h",
+      "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+      "original_line": 16,
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_sha256": "46b8db6ffd263fe6d0260b6dc73a2a3d2919f4908c733388cc90bcc757052b19",
+      "current_line": 4,
+      "total_original_groups": 1,
+      "original_arms": [
+        [
+          "ifndef",
+          "_USERK_"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "_USERK_"
+        ]
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\userrtl.h",
+      "original_sha256": "b632fc75232db7c2bc95baf758820c087a23f7e17a61c361e47c4687a4f543d3",
+      "original_line": 15,
+      "current": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_sha256": "89746a9d75726978c9ccac667b92c98c72596e1c9c0fcc12bfbbec9548ce2459",
+      "current_line": 19,
+      "total_original_groups": 1,
+      "original_arms": [
+        [
+          "ifndef",
+          "_USERRTL_"
+        ]
+      ],
+      "current_arms": [
+        [
+          "ifndef",
+          "_USERRTL_"
+        ]
+      ]
+    }
+  ],
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r177.zip",
+  "method": "all original/current first-depth opening directives and ordered arm signatures match; only additional trailing else accepted; original hash verified",
+  "scope": "inherited current evidence, not new compile"
+}

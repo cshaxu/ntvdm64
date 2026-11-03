@@ -1,0 +1,54 @@
+{
+  "cases": [
+    {
+      "name": "anchor00",
+      "expected_line": 1164,
+      "source": "src/mvdm-host/wow32/wowhooks.c",
+      "marker_line": 1225,
+      "ok": true,
+      "log_sha256": "d85f811aef1619e807b9cc1faf690d2c73b9d5c95485b5161114e5ce255033c7"
+    },
+    {
+      "name": "anchor01",
+      "expected_line": 211,
+      "source": "src/mvdm-host/wow32/wparam.c",
+      "marker_line": 234,
+      "ok": true,
+      "log_sha256": "19121fcd2e83405fcbdb7f4480bf1c95d3b2f5d6f6cf124eab69b066ee3e2910"
+    },
+    {
+      "name": "anchor02",
+      "expected_line": 1148,
+      "source": "src/mvdm-host/wow32/wumsg.c",
+      "marker_line": 1184,
+      "ok": true,
+      "log_sha256": "0377b3df7921e6cd0d442bd362934034385b85c3ab1c69fd2f18ac3939daf9cd"
+    },
+    {
+      "name": "anchor03",
+      "expected_line": 157,
+      "source": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "marker_line": 149,
+      "ok": true,
+      "log_sha256": "8b376fc403520ab7d8e33795a61dccbd31ce95b9050db03bd5cb1242a435a12a"
+    },
+    {
+      "name": "anchor04",
+      "expected_line": 273,
+      "source": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "marker_line": 34,
+      "ok": true,
+      "log_sha256": "965e59b8be76f22d94516a827aff4bfea4234f170f6d2dd0b2cb68b20f0e5973"
+    },
+    {
+      "name": "anchor05",
+      "expected_line": 790,
+      "source": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "marker_line": 275,
+      "ok": true,
+      "log_sha256": "c1a591cc1a2f20f52e85f5ce6cacf1dd491d3ff5f356937bc88d10afdafb9bd9"
+    }
+  ],
+  "failed": [],
+  "limits": "source-derived #line directive snippets; selected full-context builds separately recorded"
+}

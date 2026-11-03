@@ -29,8 +29,7 @@ does not prove that recovery complete. [Evidence](../../artifacts/mvdm-audit/s11
 S10 closed as a source-role audit at its [closure](../etc/evidence/m0-t473-s10-closure.md); this does not assert functional recovery. The revised [stage plan](../etc/operations/m0-t473-whole-recovery-stage-plan.md) preserves the earlier [monitor audit](../../artifacts/mvdm-audit/s11-monitor-minimization.md) as handoff evidence. Preserve unrelated work and immutable guest media.
 
 The published foundation group includes far-transfer ownership and WOW
-entry ABI; NIDDB internal fixes remain outside scope. The selected bridge
-passed controlled loader cycles; forced WOW32 attach failure now returns correctly. [Evidence](../../artifacts/mvdm-audit/s11-foundation-candidates.md).
+entry ABI; the bridge passed controlled loader cycles. S13's [test-failure recheck](../../artifacts/mvdm-audit/s13-test-failure-recheck.md) tracks CPU/NIDDB changes. The current package passed 17 Full gates and was published as a baseline; NIDDB VM semantics and historical T313/T335 tests remain unresolved.
 
 The owner moved further SOL and related WOW multi-window performance work to
 the [queued candidate](../proposals/proposal-wow-multiwindow-performance-recovery-001.md).
@@ -76,9 +75,10 @@ and adds two memory exports; automated ordinal and selected alias/owner checks
 pass. A real-worker VDD witness and the Full suite passed; broader provider
 behavior remains under review. See [export review](../../artifacts/mvdm-audit/export-source-recovery-review.md).
 
-The unpublished DIV-467/468/469/470/471 internal fixes are saved as held
-[patches](../../artifacts/mvdm-audit/s11-held-cpu/) and removed from the active
-runtime: the owner clarified boundary-recovery scope.
+S13 reintroduced DIV-467/468 and CCPU test-failure candidates. The tested
+r477 package is [published](../../artifacts/mvdm-audit/s13-r483-publication.json);
+NIDDB multi-VM semantics remain [unproved](../../artifacts/mvdm-audit/s13-test-failure-recheck.md).
+Earlier versions remain in [held patches](../../artifacts/mvdm-audit/s11-held-cpu/).
 
 ## Active Packet
 
@@ -257,19 +257,11 @@ T456 S1/S2 disposable evidence uses `build/t456-s1` and `build/t456-s2`.
 
 ## Recent M0 Closures
 
-- [T460](../history/m0-t460-closure.md): WOW32 Clipboard selected-format and
-  lifetime acceptance, project-owned PIC/keyboard repairs, and the bounded
-  Win95 Start Menu PIF-template provenance correction.
-- [T454](../history/m0-t454-closure.md): WOW32 resource discovery and loading.
-- [T453](../history/m0-t453-closure.md): files, directories, environment and OEM.
-- T452: modules, memory and aliases.
-- [T451](../history/m0-t451-closure.md): USER objects/shared view and CUI handoff.
-- [T450](../history/m0-t450-closure.md): style removal and Run16 entry.
-- [T449](../history/m0-t449-closure.md): WOW32 execution continuation.
-- [T448](../history/m0-t448-closure.md): lifecycle.
+[T460](../history/m0-t460-closure.md), [T454](../history/m0-t454-closure.md),
+[T453](../history/m0-t453-closure.md), T452,
+[T451](../history/m0-t451-closure.md), [T450](../history/m0-t450-closure.md),
+[T449](../history/m0-t449-closure.md), [T448](../history/m0-t448-closure.md).
 
 ## Recent Governance
 
-T460 closure records a current-package metadata comparison and a sealed
-source-identical Clipboard witness. Its S4 acceptance changed no product image
-or guest media; the later independent package/tool audit is `c1729f5a9`.
+T460 package and Clipboard acceptance are recorded in its closure above.

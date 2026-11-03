@@ -68,7 +68,9 @@
 #error DIVERGENCE MVDM-HOST-DIV-528: SWIN_HAW platform branch is not selected; see mirror register.
 #endif
 
+#line 70
 #if defined (ASPI)
+#line 71
 #error Unsupported excluded original configuration
 #endif
 #line 73
@@ -136,7 +138,7 @@ extern VDMVIRTUALICA VirtualIca[];
 #else   /* ndef NTVDM */
 #error Unsupported excluded original configuration
 #endif  /* NTVDM */
-#line 200
+#line 206
 
 
 #if !defined(NTVDM)
@@ -144,7 +146,10 @@ extern VDMVIRTUALICA VirtualIca[];
 #endif  /* !NTVDM */
 #line 205
 
+#line 243
 #ifdef GISP_CPU
+#line 244
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register.
 #endif /* GISP_CPU */
+#line 255
 

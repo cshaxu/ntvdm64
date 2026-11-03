@@ -39,6 +39,9 @@ extern VOID FastWowFirstCode(VOID);
 extern VOID FixLocks(VOID);
 //#endif
 
+#line 48
 #if 0
+#line 49
 #error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#line 82

@@ -21,6 +21,9 @@ Revision History:
 #include "softpc.h"
 
 
+#line 24
 #if DBG
+#line 25
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 83

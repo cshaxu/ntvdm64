@@ -1,0 +1,17 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+  "old_commit": "2499f51a5 plus exact recorded FE_IME hoist",
+  "old_sha256": "9493d5c74f2a7e5360c05c991194fb54ceb85786e4f7a3689bac6f88e6319fc3",
+  "current_sha256": "fa1065b07677471fc32e2ee3d3961e2a3365bda04e5899e4ebb55963d1a70c44",
+  "method": "MSVC /EP, exact Ninja target flags, identical scratch source path; nonblank stripped lines hashed. ntSend.h copied without modification.",
+  "contexts": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/default-messages.obj",
+      "old_sha256": "95bca5f134d28306ba218f97afb58951ed1371a6399d4a6635f58f4a9941bdac",
+      "current_sha256": "95bca5f134d28306ba218f97afb58951ed1371a6399d4a6635f58f4a9941bdac",
+      "equal": true
+    }
+  ],
+  "limits": "Tests selected preprocessed text only; excludes diagnostics and does not establish other contexts, link or runtime behavior."
+}

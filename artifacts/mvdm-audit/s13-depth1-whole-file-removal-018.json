@@ -1,0 +1,213 @@
+{
+  "scope": "Unselected alternate CMOS and quick-event implementations",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
+      "sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "sha256": "f51322c62783e9f3d78d716b77b1f2b25b23effbb83d4d7551172ce9c292e731"
+    }
+  ],
+  "mirror_sources": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
+      "current_sha256": "550f77df4e43b76047a6bc6c9afe43fab6bafc05c135379e8c75da58377860ea",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\cmos.c",
+      "original_sha256": "c993b3e020ddd2f25524e20bef0b7651bcdf52a7d222e90fd643f828b788ac1e",
+      "pinned_expected_sha256": "c993b3e020ddd2f25524e20bef0b7651bcdf52a7d222e90fd643f828b788ac1e",
+      "original_matches_pinned": true,
+      "working_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "current_sha256": "bb24b3c5f20f3646047e860c820ab162491c31125f0fb85f90a72e1440106e61",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\quick_ev.c",
+      "original_sha256": "fe23e0ef2fb79aebadc5c0404a2369a694ac6d82347bcae5f2a7bca74b807111",
+      "pinned_expected_sha256": "fe23e0ef2fb79aebadc5c0404a2369a694ac6d82347bcae5f2a7bca74b807111",
+      "original_matches_pinned": true,
+      "working_sha256": "f51322c62783e9f3d78d716b77b1f2b25b23effbb83d4d7551172ce9c292e731"
+    }
+  ],
+  "removed_guard_ledger_entries": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "macro": "SFELLOW",
+      "line": 277,
+      "body_end": 288,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\quick_ev.c",
+      "original_sha256": "fe23e0ef2fb79aebadc5c0404a2369a694ac6d82347bcae5f2a7bca74b807111",
+      "local_sha256": "e2ca6ab27c1e8b474902bda1c6c8a4b06e634cce062fa7ca07daac7b1e8658f4",
+      "removed_body_sha256": "74c4f3decd7cf5befc22c9e61b4285c1c35a1f254c02107924372b37219026ae",
+      "removed_body_lines": 11,
+      "after_sha256": "773dfbd92e746a8c1ce9aa64761b734575a462b0fcd678fbed427beb4d781105",
+      "final_sha256": "bb24b3c5f20f3646047e860c820ab162491c31125f0fb85f90a72e1440106e61"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "macro": "SFELLOW",
+      "line": 252,
+      "body_end": 256,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\quick_ev.c",
+      "original_sha256": "fe23e0ef2fb79aebadc5c0404a2369a694ac6d82347bcae5f2a7bca74b807111",
+      "local_sha256": "e2ca6ab27c1e8b474902bda1c6c8a4b06e634cce062fa7ca07daac7b1e8658f4",
+      "removed_body_sha256": "42e9c5f74ea7f85bb113e12a9a0c85248390a78b707ba39263d3e4569d81d63d",
+      "removed_body_lines": 4,
+      "after_sha256": "773dfbd92e746a8c1ce9aa64761b734575a462b0fcd678fbed427beb4d781105",
+      "final_sha256": "bb24b3c5f20f3646047e860c820ab162491c31125f0fb85f90a72e1440106e61"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "macro": "SFELLOW",
+      "line": 91,
+      "body_end": 92,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\quick_ev.c",
+      "original_sha256": "fe23e0ef2fb79aebadc5c0404a2369a694ac6d82347bcae5f2a7bca74b807111",
+      "local_sha256": "e2ca6ab27c1e8b474902bda1c6c8a4b06e634cce062fa7ca07daac7b1e8658f4",
+      "removed_body_sha256": "0a8c859a574656de00d12a8df0318d50ec3428a262aeec967813d043b33570af",
+      "removed_body_lines": 1,
+      "after_sha256": "773dfbd92e746a8c1ce9aa64761b734575a462b0fcd678fbed427beb4d781105",
+      "final_sha256": "bb24b3c5f20f3646047e860c820ab162491c31125f0fb85f90a72e1440106e61"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "macro": "SFELLOW",
+      "line": 379,
+      "body_end": 380,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\quick_ev.c",
+      "original_sha256": "fe23e0ef2fb79aebadc5c0404a2369a694ac6d82347bcae5f2a7bca74b807111",
+      "local_sha256": "773dfbd92e746a8c1ce9aa64761b734575a462b0fcd678fbed427beb4d781105",
+      "removed_body_sha256": "f00cecc264465a2bd73b2b20803ba68450692ab07a5379952b203cd2c72653b8",
+      "removed_body_lines": 1,
+      "after_sha256": "b20540226391d3022f07583d1f86dcd7e0a28e012f79bfbe2a3ffcde8e72f052",
+      "final_sha256": "bb24b3c5f20f3646047e860c820ab162491c31125f0fb85f90a72e1440106e61"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "macro": "SFELLOW",
+      "line": 371,
+      "body_end": 372,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\quick_ev.c",
+      "original_sha256": "fe23e0ef2fb79aebadc5c0404a2369a694ac6d82347bcae5f2a7bca74b807111",
+      "local_sha256": "773dfbd92e746a8c1ce9aa64761b734575a462b0fcd678fbed427beb4d781105",
+      "removed_body_sha256": "49a8fedee0a6ae764d133d11b0abba16643189e86125774c3ae2131afb90bb9c",
+      "removed_body_lines": 1,
+      "after_sha256": "b20540226391d3022f07583d1f86dcd7e0a28e012f79bfbe2a3ffcde8e72f052",
+      "final_sha256": "bb24b3c5f20f3646047e860c820ab162491c31125f0fb85f90a72e1440106e61"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "macro": "SFELLOW",
+      "line": 169,
+      "body_end": 174,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\quick_ev.c",
+      "original_sha256": "fe23e0ef2fb79aebadc5c0404a2369a694ac6d82347bcae5f2a7bca74b807111",
+      "local_sha256": "773dfbd92e746a8c1ce9aa64761b734575a462b0fcd678fbed427beb4d781105",
+      "removed_body_sha256": "a2db57b57b43d558ea4f3421e594d0fb5aeb5d451ce3ed29770bbd915f04ed78",
+      "removed_body_lines": 5,
+      "after_sha256": "b20540226391d3022f07583d1f86dcd7e0a28e012f79bfbe2a3ffcde8e72f052",
+      "final_sha256": "bb24b3c5f20f3646047e860c820ab162491c31125f0fb85f90a72e1440106e61"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
+      "macro": "SLAVEPC",
+      "line": 351,
+      "body_end": 357,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\cmos.c",
+      "original_sha256": "c993b3e020ddd2f25524e20bef0b7651bcdf52a7d222e90fd643f828b788ac1e",
+      "local_sha256": "c993b3e020ddd2f25524e20bef0b7651bcdf52a7d222e90fd643f828b788ac1e",
+      "removed_body_sha256": "dbbe2242dd8cbea5befce05adc854abcfb53a4df05da0aab958f95e8397003b1",
+      "removed_body_lines": 7,
+      "after_sha256": "3e21a066a7b76f3cd2232191f7418394123e50e8b4bdd455ca0ef6ad9b0c90dc",
+      "final_sha256": "550f77df4e43b76047a6bc6c9afe43fab6bafc05c135379e8c75da58377860ea"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "macro": "SYNCH_TIMERS",
+      "line": 1173,
+      "body_end": 1174,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\quick_ev.c",
+      "original_sha256": "fe23e0ef2fb79aebadc5c0404a2369a694ac6d82347bcae5f2a7bca74b807111",
+      "local_sha256": "b20540226391d3022f07583d1f86dcd7e0a28e012f79bfbe2a3ffcde8e72f052",
+      "removed_body_sha256": "e41398071b64a1045012e94a6d076b061267ef5cd71dec9b784400e85f91ea9e",
+      "removed_body_lines": 1,
+      "after_sha256": "4be45b165c051f17012f1c84fa2d516b4e473d3f4606280479b7fa349a4476e2",
+      "final_sha256": "bb24b3c5f20f3646047e860c820ab162491c31125f0fb85f90a72e1440106e61"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "macro": "SYNCH_TIMERS",
+      "line": 1144,
+      "body_end": 1145,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\quick_ev.c",
+      "original_sha256": "fe23e0ef2fb79aebadc5c0404a2369a694ac6d82347bcae5f2a7bca74b807111",
+      "local_sha256": "b20540226391d3022f07583d1f86dcd7e0a28e012f79bfbe2a3ffcde8e72f052",
+      "removed_body_sha256": "b541533e520f64bdc84151e4a71c11e371f159c76fcfeb30ca847fd40be9bd2a",
+      "removed_body_lines": 1,
+      "after_sha256": "4be45b165c051f17012f1c84fa2d516b4e473d3f4606280479b7fa349a4476e2",
+      "final_sha256": "bb24b3c5f20f3646047e860c820ab162491c31125f0fb85f90a72e1440106e61"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "macro": "SCCSID",
+      "line": 59,
+      "body_end": 60,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\quick_ev.c",
+      "original_sha256": "fe23e0ef2fb79aebadc5c0404a2369a694ac6d82347bcae5f2a7bca74b807111",
+      "local_sha256": "4be45b165c051f17012f1c84fa2d516b4e473d3f4606280479b7fa349a4476e2",
+      "removed_body_sha256": "c97de09ee05b93acf44bdf0adedbacba3a25a7915dfe9e634e43b759e5494c93",
+      "removed_body_lines": 1,
+      "after_sha256": "0af4b7a566caff630bbb5c65ced5f7b325b194689e9667f873f26e833c91d0a4",
+      "final_sha256": "bb24b3c5f20f3646047e860c820ab162491c31125f0fb85f90a72e1440106e61"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
+      "macro": "SEGMENTATION",
+      "line": 818,
+      "body_end": 824,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\cmos.c",
+      "original_sha256": "c993b3e020ddd2f25524e20bef0b7651bcdf52a7d222e90fd643f828b788ac1e",
+      "local_sha256": "3e21a066a7b76f3cd2232191f7418394123e50e8b4bdd455ca0ef6ad9b0c90dc",
+      "removed_body_sha256": "85981201678d1786d6e8229c7febb7b65cd0737f9d82f18b6aa50af2a212424d",
+      "removed_body_lines": 6,
+      "after_sha256": "550f77df4e43b76047a6bc6c9afe43fab6bafc05c135379e8c75da58377860ea",
+      "final_sha256": "550f77df4e43b76047a6bc6c9afe43fab6bafc05c135379e8c75da58377860ea"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
+      "macro": "SEGMENTATION",
+      "line": 14,
+      "body_end": 20,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\cmos.c",
+      "original_sha256": "c993b3e020ddd2f25524e20bef0b7651bcdf52a7d222e90fd643f828b788ac1e",
+      "local_sha256": "3e21a066a7b76f3cd2232191f7418394123e50e8b4bdd455ca0ef6ad9b0c90dc",
+      "removed_body_sha256": "35f1871c34cab85457333bf58c91660145e0605f7fdad242733f4cbac7fe5386",
+      "removed_body_lines": 6,
+      "after_sha256": "550f77df4e43b76047a6bc6c9afe43fab6bafc05c135379e8c75da58377860ea",
+      "final_sha256": "550f77df4e43b76047a6bc6c9afe43fab6bafc05c135379e8c75da58377860ea"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "macro": "SEGMENTATION",
+      "line": 63,
+      "body_end": 69,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\quick_ev.c",
+      "original_sha256": "fe23e0ef2fb79aebadc5c0404a2369a694ac6d82347bcae5f2a7bca74b807111",
+      "local_sha256": "0af4b7a566caff630bbb5c65ced5f7b325b194689e9667f873f26e833c91d0a4",
+      "removed_body_sha256": "a1bd81502143c007274154df0afe2a84964dfb35c464bee0e8da5a9d7f112b2f",
+      "removed_body_lines": 6,
+      "after_sha256": "bb24b3c5f20f3646047e860c820ab162491c31125f0fb85f90a72e1440106e61",
+      "final_sha256": "bb24b3c5f20f3646047e860c820ab162491c31125f0fb85f90a72e1440106e61"
+    }
+  ],
+  "removed_condition_groups": 168,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r123.zip",
+  "evidence": [
+    "Selected source manifest uses cmosnt.c and qevnt.c; no product or test graph selects these files.",
+    "Only standalone unsupported-profile snippets reference the files; historical comments remain informational."
+  ],
+  "limitations": [
+    "Does not change or prove alternate CMOS or event profiles."
+  ]
+}

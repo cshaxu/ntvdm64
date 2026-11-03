@@ -1,0 +1,9 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+  "old_commit": "f6fd5eead635d6145ffd16be6d3fd74b753b18a1",
+  "old_sha256": "4aad1200537d2d2de5a4e890cab4caa1a26d90a565c305b0733b89542ee2a0bd",
+  "current_sha256": "67cea7498083e74a51816f501e8887f711e17e7f765973badc327e04f7bbd48b",
+  "method": "Exact historical Git blob; all nonblank lines except #line are bytewise equal and ordered equally; diagnostic values can differ.",
+  "diff_evidence": "artifacts/mvdm-audit/s13-r251-git-snapshot-diffs.json",
+  "limits": "No runtime equivalence, branch reachability, or diagnosis equality inferred."
+}

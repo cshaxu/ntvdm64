@@ -15,23 +15,29 @@
 
 #include "compat/include/wow_char_conversion_abi.h"
 /* DIVERGENCE(OPENNT-HOST-119): current layout input, no native CLIENTINFO cast. */
+#line 17
 #ifdef _USERK_
 #error DIVERGENCE OPENNT-HOST-145: kernel USER profile is not selected
 #else
-#line 18
+#line 20
 #define THREAD_CODEPAGE() OpenNtUserThreadCodePage()
 #endif // _USERK_
-#line 19
+#line 22
 #define IS_ACP(cp) (((cp) == NlsAnsiCodePage) || ((cp) == CP_ACP))
 
+#line 363
+#define NWCH 2
+#line 365
 /* DIVERGENCE(OPENNT-HOST-119): restore the original message converter. */
 BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
 {
     DWORD dwUni;
     NTSTATUS Status;
+#line 446
 #ifdef FE_SB // RtlMBMessageWParamCharToWCS()
 #error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
 #endif // FE_SB
+#line 450
     WORD CodePage = THREAD_CODEPAGE();
 
     /*
@@ -39,11 +45,14 @@ BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
      */
 
     switch(msg) {
+#line 457
 #ifdef FE_SB // RtlMBMessageWParamCharToWCS()
 #error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
 #else
+#line 497
     case WM_CHAR:
 #endif // FE_SB
+#line 499
     case WM_CHARTOITEM:
     case EM_SETPASSWORDCHAR:
     case WM_DEADCHAR:
@@ -60,28 +69,34 @@ BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
                 return FALSE;
         } else {
             int cwch;
+#line 515
 #ifdef _USERK_
 #error DIVERGENCE OPENNT-HOST-136: _USERK_ branch is not selected; see mirror register.
 #else
+#line 520
             cwch = MultiByteToWideChar(CodePage, 0,
                     (LPSTR)pWParam, 2,
                     (LPWSTR)&dwUni, sizeof(dwUni) / sizeof(WCHAR));
 #endif // _USERK_
+#line 524
             // KdPrint(("0x%02x -> 0x%04x (%d)\n", *pWParam, dwUni, CodePage));
             if (cwch == 0) {
                 return FALSE;
             }
         }
 
+#line 530
 #ifdef FE_SB // RtlMBMessageWParamCharToWCS
 #error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
 #else
+#line 537
 #ifdef DEBUG
         if ((dwUni == 0) || (dwUni > 0xFF)) {
             RIPMSG1(RIP_VERBOSE, "msgA -> msgW: wchar = 0x%lX\n", dwUni);
         }
 #endif
 #endif // FE_SB
+#line 543
         *pWParam = dwUni;
         break;
     }
@@ -165,9 +180,12 @@ WCSToMBEx(
     BOOL bAllocateMem)
 {
     ULONG nCharsInAnsiString;
+#line 59
 #ifdef _USERK_
+#line 60
 #error DIVERGENCE OPENNT-HOST-136: _USERK_ branch is not selected; see mirror register.
 #endif // _USERK_
+#line 62
 
     if (nAnsiChar == 0 || cchUnicodeString == 0) {
         return 0;      // nothing to translate or nowhere to put it
@@ -384,3 +402,48 @@ int MBToWCSEx(
 
 }
 
+
+
+
+#line 326
+#ifdef FE_SB
+#line 327
+#error Excluded unsupported original FE_SB branch
+#endif
+#line 329
+
+
+#line 351
+#ifdef FE_SB // RtlWCSMessageWParamCharToMB()
+#line 352
+#error Excluded unsupported original FE_SB branch
+#else
+#line 363
+#endif // FE_SB
+#line 365
+
+#line 378
+#ifdef _USERK_
+#line 379
+#error Excluded unsupported original _USERK_ branch
+#else
+#line 383
+#endif // _USERK_
+#line 387
+
+#line 393
+#ifdef FE_SB // RtlWCSMessageWParamCharToMB()
+#line 394
+#error Excluded unsupported original FE_SB branch
+#else
+#line 417
+#endif // FE_SB
+#line 425
+
+
+#line 337
+#ifdef FE_IME // RtlWCSMessageWParamCharToMB()
+#line 338
+#error Unsupported FE_IME original branch
+#endif // FE_IME
+#line 341

@@ -1,0 +1,30 @@
+{
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r236.zip",
+  "queue_sha256": "a7855ec95b25dc96b23cc2e71f770672d5f4d0a3414849c60f23e832371a1b82",
+  "rows": [
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original": "O:/repos.external/OpenNT/windows/core/ntuser/client/usercli.h",
+      "guard": "_USERCLI_",
+      "original_guard_line": 15,
+      "current_physical_depth_one_groups": 12,
+      "current_arm_statuses": {
+        "retained-observed": 11,
+        "newly-excluded": 5
+      },
+      "point": "Current physical depth is not proof of original depth while the original whole-header guard is absent. Original nesting must be reconciled; no group is newly classified or revised by this record."
+    },
+    {
+      "current": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "original": "O:/repos.external/OpenNT/windows/core/ntuser/inc/user.h",
+      "guard": "_USER_",
+      "original_guard_line": 15,
+      "current_physical_depth_one_groups": 9,
+      "current_arm_statuses": {
+        "retained-observed": 9
+      },
+      "point": "Current physical depth is not proof of original depth while the original whole-header guard is absent. Original nesting must be reconciled; no group is newly classified or revised by this record."
+    }
+  ],
+  "scope": "Avoid mixing current physical depth with original depth; this does not prove exact original counterpart or remove already-applied fixes."
+}

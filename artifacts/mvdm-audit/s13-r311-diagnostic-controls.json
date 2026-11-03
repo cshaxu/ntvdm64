@@ -1,0 +1,30 @@
+{
+  "cases": [
+    {
+      "name": "anchor00",
+      "expected_line": 511,
+      "source": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "marker_line": 227,
+      "ok": true,
+      "log_sha256": "b760cf524346186507fd65db262146064f370523c084995dcf4e260ddd02ee23"
+    },
+    {
+      "name": "anchor01",
+      "expected_line": 687,
+      "source": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "marker_line": 372,
+      "ok": true,
+      "log_sha256": "0b3e4a2453f7e8f91c551c6ef3fb9e1e5d8521cab4b27223a24ae0e0b38e4dec"
+    },
+    {
+      "name": "anchor02",
+      "expected_line": 1205,
+      "source": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "marker_line": 522,
+      "ok": true,
+      "log_sha256": "cf4b4a48121bdad07557254303edd7aaefd7f67a11d358341f15ea510d6d30f8"
+    }
+  ],
+  "failed": [],
+  "limits": "source-derived marker snippets, not full-context runtime proof"
+}

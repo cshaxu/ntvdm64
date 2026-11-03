@@ -1,0 +1,20 @@
+{
+  "package": "build/t473-s13/r463-phase1-package",
+  "records": [
+    {
+      "test": "build\\t473-s13\\r476-mine",
+      "result": "PASS flag/counter, reset, open cell, WM_CLOSE and run16 completion",
+      "input_mismatches": [],
+      "inputs_sha256": "3717ee9073e710bd08856135b4ee20989c74b27e78ca70494b095bd9bfab8346",
+      "result_sha256": "c3287d42c4deffb9ac68a6bee28ccf6258f354eeac3ba9bf7a82fd1b643a09f8"
+    },
+    {
+      "test": "build\\t473-s13\\r476-sol",
+      "result": "PASS SOL deal, stock draw, WM_CLOSE and run16 completion",
+      "input_mismatches": [],
+      "inputs_sha256": "63b774d77a434b4f268a56a90c6b698403c15210f394e5e7c7cc543d74b11022",
+      "result_sha256": "0219d9830f51b532d1572c05aae835a4bfbeddbd4250707a118ef901fba921b1"
+    }
+  ],
+  "limits": "Mine and SOL focused probes only; no WRITE, DOS17 or Win3.1 conclusions from these probes."
+}

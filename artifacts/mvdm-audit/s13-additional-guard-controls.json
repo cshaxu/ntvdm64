@@ -1,0 +1,9 @@
+{
+  "test": "tests/build/test_bfs_depth1_additional_guards.py",
+  "test_sha256": "f0d6e6b0ce5d3137a0c13456bb9b138b10be3e5b83a6336825c0e44eef7cf6a4",
+  "guard_count": 7,
+  "controls_per_architecture": 19,
+  "msvc_x86": "pass",
+  "msvc_x64": "pass",
+  "limit": "isolated current-source outer-guard snippets and expected diagnostic lines, not runtime behavior"
+}

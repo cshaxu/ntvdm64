@@ -1,0 +1,24 @@
+[
+  {
+    "defines": [
+      "/DCOM3_ADAPTOR=1",
+      "/DCOM4_ADAPTOR=1"
+    ],
+    "expected_error_line": null,
+    "exit_code": 0
+  },
+  {
+    "defines": [
+      "/DCOM4_ADAPTOR=1"
+    ],
+    "expected_error_line": 2591,
+    "exit_code": 2
+  },
+  {
+    "defines": [
+      "/DCOM3_ADAPTOR=1"
+    ],
+    "expected_error_line": 2594,
+    "exit_code": 2
+  }
+]

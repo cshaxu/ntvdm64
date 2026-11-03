@@ -1,0 +1,318 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_vdd.c",
+    "original_sha256": "cb97f2c233b1062dae7942dfa3b2bc84d9f21b9d6527f6c993a99137c2c845e3",
+    "before_sha256": "724163834f37e7c93231db1a104a6a66bb3c4b4c9649b0fb64ec3e5a35e1612a",
+    "after_sha256": "ca9802377951a597e98c933395fc9be706757c4d476522d1279e14be8fdf2e41",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_vdd.c",
+        "anchor_line": 388,
+        "old": 376,
+        "new": 413,
+        "following": "wAdapter = FreeVddAdapter(hVdd);",
+        "original_line": 415,
+        "group_line": 385,
+        "depth1_endline": 387,
+        "arm_statuses": [
+          "already-excluded"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\stubs.c",
+    "original_sha256": "c1821a3738bbee78293a47262cb8df14e68043cfd6b4092b7fa56bdb01c6d991",
+    "before_sha256": "e2285179cee924a8665c35285dc5580f04ff7f093eb25653ae7812cf4a1254c3",
+    "after_sha256": "24a4fb4cdb538af3c2c84fdc3ca5b74e361d8ca3410e4fb0adda568a6e499cdf",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\stubs.c",
+        "anchor_line": 233,
+        "old": 241,
+        "new": 460,
+        "following": "int host_timer_2_frig_factor = 20;",
+        "original_line": 461,
+        "group_line": 230,
+        "depth1_endline": 232,
+        "arm_statuses": [
+          "newly-excluded"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/vdmredir/vrdisp.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdisp.c",
+    "original_sha256": "030a3a2f2baaeb36bb58eb459cc91a0f6bf15bfdec777fc2998e3c3d69b2a389",
+    "before_sha256": "3fa60d1fe23656bc7081ab0e6b64d151c93b4f65d4d4e8ddbcefd845206afa16",
+    "after_sha256": "0515639d5e97ba2fd0d5e7ba3d31c0ec1ad80c79f1141345c02b460b3da13ed6",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/vdmredir/vrdisp.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdisp.c",
+        "anchor_line": 140,
+        "old": 140,
+        "new": 144,
+        "following": "if (SvcCode > LAST_VR_FUNCTION) {",
+        "original_line": 145,
+        "group_line": 137,
+        "depth1_endline": 139,
+        "arm_statuses": [
+          "already-excluded"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/wow32/wcall16.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wcall16.c",
+    "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0",
+    "before_sha256": "51fc0ddeed8481a96b1934e500ecacf0ef2570fdf0ec90d46c8d4fd0d1a20288",
+    "after_sha256": "ce4d684e01c743f83ba46f0314f261e2f3de4d406f556ffa7058fb679f4c3fe8",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/wow32/wcall16.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wcall16.c",
+        "anchor_line": 506,
+        "old": 556,
+        "new": 552,
+        "following": "if (cbArgs > sizeof(PARM16)) {",
+        "original_line": 553,
+        "group_line": 503,
+        "depth1_endline": 505,
+        "arm_statuses": [
+          "newly-excluded"
+        ]
+      },
+      {
+        "path": "src/mvdm-host/wow32/wcall16.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wcall16.c",
+        "anchor_line": 563,
+        "old": 670,
+        "new": 659,
+        "following": "WOW32ASSERT(iRetID != RET_RETURN && iRetID != RET_DEBUGRETURN);",
+        "original_line": 661,
+        "group_line": 560,
+        "depth1_endline": 562,
+        "arm_statuses": [
+          "newly-excluded"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/wow32/wkfileio.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkfileio.c",
+    "original_sha256": "3437d0886ec49109668f09a46f5cf8b533ccfbd08f78ef441cbf71853482a8ad",
+    "before_sha256": "1ad271e7c85a9d418f2940958317a4911b6fab3092d13cbe5d7cec4fcb522144",
+    "after_sha256": "8f8ddccae0e5a5fec1718a5f52c78b1fc68df97b916c15d8fb536b1959b2c67f",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/wow32/wkfileio.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkfileio.c",
+        "anchor_line": 856,
+        "old": 858,
+        "new": 856,
+        "following": "GETARGPTR(pFrame, sizeof(FILEIOLSEEK16), parg16);",
+        "original_line": 857,
+        "group_line": 853,
+        "depth1_endline": 855,
+        "arm_statuses": [
+          "newly-excluded"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/wow32/wkman.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkman.c",
+    "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9",
+    "before_sha256": "4da0f527c7b807b2fa94dba88c2cb49201a01d5e5b071b15ef26a29b2975c493",
+    "after_sha256": "57708c34a4d5892f5872963e79bdf27aa0410cc468b78019db93ee308024d252",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/wow32/wkman.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkman.c",
+        "anchor_line": 531,
+        "old": 568,
+        "new": 545,
+        "following": "pFrame->wRetID = RET_TASKSTARTED;",
+        "original_line": 547,
+        "group_line": 525,
+        "depth1_endline": 530,
+        "arm_statuses": [
+          "newly-excluded",
+          "retained-observed"
+        ]
+      },
+      {
+        "path": "src/mvdm-host/wow32/wkman.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkman.c",
+        "anchor_line": 574,
+        "old": 622,
+        "new": 596,
+        "following": "return hThread ? TRUE : FALSE;",
+        "original_line": 597,
+        "group_line": 571,
+        "depth1_endline": 573,
+        "arm_statuses": [
+          "newly-excluded"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/wow32/wmdisp32.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmdisp32.c",
+    "original_sha256": "4a9004c1f57af28280d0176afd72cae76a7fbae90ffb758426c287435e5912d4",
+    "before_sha256": "67d8e664f8db2aff4bb7138869e237ae450100214747a0a0e0ae95582c54158f",
+    "after_sha256": "2da35733ebc7631be67815e16a6e48846097a30dea623d8d104dc52a8f4e74b8",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/wow32/wmdisp32.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmdisp32.c",
+        "anchor_line": 36,
+        "old": 36,
+        "new": 31,
+        "following": "LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,",
+        "original_line": 32,
+        "group_line": 33,
+        "depth1_endline": 35,
+        "arm_statuses": [
+          "newly-excluded"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/wow32/wmsgcb.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsgcb.c",
+    "original_sha256": "ca644a033b4ed5974f70fad75615ef18c80466f3ed6d987554ce031cacab1e13",
+    "before_sha256": "4dcb2ac3f2e432377b95b16e110ca83c6afc6df85556661c1045332aa9f1f53b",
+    "after_sha256": "a949a029b2da94a1c3a831418f7442caccfc80b672e8a25aee69abc0943afdac",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/wow32/wmsgcb.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsgcb.c",
+        "anchor_line": 25,
+        "old": 64,
+        "new": 63,
+        "following": "BOOL FASTCALL ThunkCBMsg16(LPMSGPARAMEX lpmpex)",
+        "original_line": 66,
+        "group_line": 22,
+        "depth1_endline": 24,
+        "arm_statuses": [
+          "newly-excluded"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/wow32/wow32.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.c",
+    "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
+    "before_sha256": "3fbed80576e926391f80c29b10d404348b15a2fd2cb375115834da1d22d82f1d",
+    "after_sha256": "2abb1dd15c9a97c6c4fb7c0808bfad806d26c6cebd16c69a63d5f4731f42c061",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/wow32/wow32.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.c",
+        "anchor_line": 737,
+        "old": 896,
+        "new": 871,
+        "following": "LPFNW32 FASTCALL W32PatchCodeWithLpfnw32(PVDMFRAME pFrame , INT iFun )",
+        "original_line": 873,
+        "group_line": 734,
+        "depth1_endline": 736,
+        "arm_statuses": [
+          "newly-excluded"
+        ]
+      },
+      {
+        "path": "src/mvdm-host/wow32/wow32.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.c",
+        "anchor_line": 861,
+        "old": 1030,
+        "new": 1001,
+        "following": "iWOWTaskCur = pFrame->wTDB;                     // Record the task's current ID",
+        "original_line": 1001,
+        "group_line": 858,
+        "depth1_endline": 860,
+        "arm_statuses": [
+          "newly-excluded"
+        ]
+      },
+      {
+        "path": "src/mvdm-host/wow32/wow32.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.c",
+        "anchor_line": 868,
+        "old": 1040,
+        "new": 1011,
+        "following": "iFun = (INT)W32PatchCodeWithLpfnw32(pFrame, iFun);",
+        "original_line": 1011,
+        "group_line": 865,
+        "depth1_endline": 867,
+        "arm_statuses": [
+          "newly-excluded"
+        ]
+      },
+      {
+        "path": "src/mvdm-host/wow32/wow32.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.c",
+        "anchor_line": 1606,
+        "old": 2290,
+        "new": 2251,
+        "following": "PVOID FASTCALL malloc_w (ULONG size)",
+        "original_line": 2252,
+        "group_line": 1603,
+        "depth1_endline": 1605,
+        "arm_statuses": [
+          "newly-excluded"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/wow32/wuclass.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuclass.c",
+    "original_sha256": "12cdd44dfec6b74a426165977f941da86d90bbad7aa9c59a085010d02528629d",
+    "before_sha256": "ea32967cc39a7a400a783d4c1862a34b854ddb227bda951e4e62c91aabfa5155",
+    "after_sha256": "1c4c537bdca279cd997e099122f9b54937e92ca030f637c97f81eee93f4a4a56",
+    "anchors": [
+      {
+        "path": "src/mvdm-host/wow32/wuclass.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuclass.c",
+        "anchor_line": 781,
+        "old": 783,
+        "new": 754,
+        "following": "SETWC(HWND32(parg16->f1), GCL_WOWvpfnWndProc, LONG32(parg16->f3));",
+        "original_line": 754,
+        "group_line": 774,
+        "depth1_endline": 780,
+        "arm_statuses": [
+          "retained-observed",
+          "newly-excluded"
+        ]
+      },
+      {
+        "path": "src/mvdm-host/wow32/wuclass.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuclass.c",
+        "anchor_line": 1078,
+        "old": 1080,
+        "new": 1043,
+        "following": "ul = GETBOOL16(UnregisterClass(",
+        "original_line": 1044,
+        "group_line": 1075,
+        "depth1_endline": 1077,
+        "arm_statuses": [
+          "newly-excluded"
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "scope": "First-depth i386 SafeLoadLibrary selector in host_def.h",
+  "source_sha256": "0ab22fc80460cbaf4c7b27e69099e44c2832808dad65c5bfe62c5ce3054bbf9d",
+  "product_evidence": [
+    "Actual x86 worker nt_bop.c command compiled an isolated copy with an inserted marker immediately before host_def.h, and reported i386 undefined.",
+    "The earlier context audit found 592 matching product compile commands with no explicit i386 flag; no i386 macro definition was found in current src or MSVC/Windows SDK headers scanned."
+  ],
+  "probe_command_sha256": "6e6bb8ff205a60c3c2e14071261ef58d49fdbfa920d5f6acccfe440151fdca16",
+  "decision": "Pending: historical tool-generated test profiles explicitly use /Di386, and their complete inclusion closure/applicability has not been established. Do not replace this branch from product evidence alone.",
+  "limitations": [
+    "The BOP probe is one actual context, not proof for all possible supported test contexts.",
+    "The legacy trace fixture defines SafeLoadLibrary, but its referenced historical graph has missing paths."
+  ]
+}

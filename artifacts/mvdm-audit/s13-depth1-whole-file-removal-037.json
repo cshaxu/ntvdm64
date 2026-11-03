@@ -1,0 +1,54 @@
+{
+  "scope": "Unselected VDM TIB, CD-ROM and duplicate network alignment declaration headers",
+  "files": [
+    {
+      "path": "src/mvdm-host/inc/vdmtib.h",
+      "sha256": "a5ce8099cc9f560ef1b4ab9c0ab9b338021d928b977545a09212e1e67a6703aa"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddcdrm.h",
+      "sha256": "fa8f48a7b7e224517b1c82596da07feb583ba0563265357da6fd0da8b5ffc09c"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/align.h",
+      "sha256": "2bad93351b7fe722343b8835d9ea8e5996d1ea13438be24bf2cbe94889308f34"
+    }
+  ],
+  "mirror_sources": [
+    {
+      "path": "src/mvdm-host/inc/vdmtib.h",
+      "current_sha256": "a5ce8099cc9f560ef1b4ab9c0ab9b338021d928b977545a09212e1e67a6703aa",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\vdmtib.h",
+      "original_sha256": "a5ce8099cc9f560ef1b4ab9c0ab9b338021d928b977545a09212e1e67a6703aa",
+      "pinned_expected_sha256": "a5ce8099cc9f560ef1b4ab9c0ab9b338021d928b977545a09212e1e67a6703aa",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddcdrm.h",
+      "current_sha256": "fa8f48a7b7e224517b1c82596da07feb583ba0563265357da6fd0da8b5ffc09c",
+      "original": "O:\\repos.external\\OpenNT\\public\\ddk\\inc\\ntddcdrm.h",
+      "original_sha256": "a6c5c64a7dec56163dc86382ba550b2ae4eeacbc2bea2016e38001e3b3d90286",
+      "pinned_expected_sha256": "a6c5c64a7dec56163dc86382ba550b2ae4eeacbc2bea2016e38001e3b3d90286",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/align.h",
+      "current_sha256": "2bad93351b7fe722343b8835d9ea8e5996d1ea13438be24bf2cbe94889308f34",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\align.h",
+      "original_sha256": "b2922ca133bfd608bf86f33595c1dfb2b325cb31a0e83d4bfe18f0d91795e28f",
+      "pinned_expected_sha256": "b2922ca133bfd608bf86f33595c1dfb2b325cb31a0e83d4bfe18f0d91795e28f",
+      "original_matches_pinned": true
+    }
+  ],
+  "removed_condition_groups": 14,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r144.zip",
+  "evidence": [
+    "No current include directive uses vdmtib.h or ntddcdrm.h after excluded VDD sample removal.",
+    "Actual worker Ninja dependencies resolve align.h to public/internal/base/inc/align.h, not the removed ds/inc copy.",
+    "No current graph explicitly references these exact paths."
+  ],
+  "limitations": [
+    "Selected VDM, disk and network implementations are unchanged.",
+    "No claim is made about unsupported legacy VDD sample builds."
+  ]
+}

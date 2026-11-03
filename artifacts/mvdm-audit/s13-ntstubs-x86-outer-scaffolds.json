@@ -1,0 +1,343 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+  "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+  "before_sha256": "79365c48a1b1752c7a09040f2b5096bac04db2bbdae5cdf5edb2387eda759547",
+  "after_sha256": "b33297dd42c7784adb514a8368eca55661cbee2c467020190bff3fcbcdf42ff6",
+  "guards": [
+    {
+      "original_line": 352,
+      "original_else_line": 354,
+      "original_end_line": 359,
+      "continuation": 360
+    },
+    {
+      "original_line": 390,
+      "original_else_line": 392,
+      "original_end_line": 394,
+      "continuation": 395
+    },
+    {
+      "original_line": 563,
+      "original_else_line": 565,
+      "original_end_line": 567,
+      "continuation": 568
+    },
+    {
+      "original_line": 715,
+      "original_else_line": 717,
+      "original_end_line": 719,
+      "continuation": 720
+    },
+    {
+      "original_line": 738,
+      "original_else_line": 740,
+      "original_end_line": 742,
+      "continuation": 743
+    },
+    {
+      "original_line": 964,
+      "original_else_line": 966,
+      "original_end_line": 968,
+      "continuation": 969
+    },
+    {
+      "original_line": 1135,
+      "original_else_line": 1138,
+      "original_end_line": 1141,
+      "continuation": 1142
+    },
+    {
+      "original_line": 1229,
+      "original_else_line": 1231,
+      "original_end_line": 1233,
+      "continuation": 1234
+    },
+    {
+      "original_line": 1312,
+      "original_else_line": 1314,
+      "original_end_line": 1316,
+      "continuation": 1317
+    },
+    {
+      "original_line": 1957,
+      "original_else_line": 1959,
+      "original_end_line": 1961,
+      "continuation": 1962
+    },
+    {
+      "original_line": 2027,
+      "original_else_line": 2029,
+      "original_end_line": 2031,
+      "continuation": 2032
+    },
+    {
+      "original_line": 2112,
+      "original_else_line": 2114,
+      "original_end_line": 2116,
+      "continuation": 2117
+    },
+    {
+      "original_line": 2288,
+      "original_else_line": 2290,
+      "original_end_line": 2292,
+      "continuation": 2293
+    },
+    {
+      "original_line": 2369,
+      "original_else_line": 2371,
+      "original_end_line": 2373,
+      "continuation": 2374
+    },
+    {
+      "original_line": 2723,
+      "original_else_line": 2725,
+      "original_end_line": 2727,
+      "continuation": 2728
+    },
+    {
+      "original_line": 3107,
+      "original_else_line": 3109,
+      "original_end_line": 3111,
+      "continuation": 3112
+    },
+    {
+      "original_line": 3158,
+      "original_else_line": 3160,
+      "original_end_line": 3162,
+      "continuation": 3163
+    },
+    {
+      "original_line": 3446,
+      "original_else_line": 3448,
+      "original_end_line": 3450,
+      "continuation": 3451
+    },
+    {
+      "original_line": 3972,
+      "original_else_line": 3974,
+      "original_end_line": 3976,
+      "continuation": 3977
+    },
+    {
+      "original_line": 4318,
+      "original_else_line": 4320,
+      "original_end_line": 4323,
+      "continuation": 4324
+    },
+    {
+      "original_line": 4727,
+      "original_else_line": 4730,
+      "original_end_line": 4733,
+      "continuation": 4734
+    },
+    {
+      "original_line": 5472,
+      "original_else_line": 5474,
+      "original_end_line": 5476,
+      "continuation": 5477
+    },
+    {
+      "original_line": 5506,
+      "original_else_line": 5508,
+      "original_end_line": 5510,
+      "continuation": 5511
+    },
+    {
+      "original_line": 5768,
+      "original_else_line": 5770,
+      "original_end_line": 5772,
+      "continuation": 5773
+    },
+    {
+      "original_line": 5823,
+      "original_else_line": 5825,
+      "original_end_line": 5827,
+      "continuation": 5828
+    },
+    {
+      "original_line": 5986,
+      "original_else_line": 5988,
+      "original_end_line": 5991,
+      "continuation": 5992
+    },
+    {
+      "original_line": 6312,
+      "original_else_line": 6314,
+      "original_end_line": 6317,
+      "continuation": 6318
+    },
+    {
+      "original_line": 6417,
+      "original_else_line": 6435,
+      "original_end_line": 6453,
+      "continuation": 6454
+    },
+    {
+      "original_line": 6689,
+      "original_else_line": 6691,
+      "original_end_line": 6693,
+      "continuation": 6694
+    },
+    {
+      "original_line": 6929,
+      "original_else_line": 6932,
+      "original_end_line": 6935,
+      "continuation": 6936
+    },
+    {
+      "original_line": 6977,
+      "original_else_line": 6980,
+      "original_end_line": 6983,
+      "continuation": 6984
+    },
+    {
+      "original_line": 7026,
+      "original_else_line": 7031,
+      "original_end_line": 7036,
+      "continuation": 7037
+    },
+    {
+      "original_line": 7071,
+      "original_else_line": 7074,
+      "original_end_line": 7077,
+      "continuation": 7078
+    },
+    {
+      "original_line": 7102,
+      "original_else_line": 7104,
+      "original_end_line": 7106,
+      "continuation": 7107
+    },
+    {
+      "original_line": 7131,
+      "original_else_line": 7133,
+      "original_end_line": 7135,
+      "continuation": 7136
+    },
+    {
+      "original_line": 7161,
+      "original_else_line": 7163,
+      "original_end_line": 7165,
+      "continuation": 7166
+    },
+    {
+      "original_line": 7188,
+      "original_else_line": 7190,
+      "original_end_line": 7192,
+      "continuation": 7193
+    },
+    {
+      "original_line": 7261,
+      "original_else_line": 7264,
+      "original_end_line": 7267,
+      "continuation": 7268
+    },
+    {
+      "original_line": 7333,
+      "original_else_line": 7335,
+      "original_end_line": 7337,
+      "continuation": 7338
+    },
+    {
+      "original_line": 7363,
+      "original_else_line": 7365,
+      "original_end_line": 7367,
+      "continuation": 7368
+    },
+    {
+      "original_line": 7439,
+      "original_else_line": 7441,
+      "original_end_line": 7443,
+      "continuation": 7444
+    },
+    {
+      "original_line": 7917,
+      "original_else_line": 7919,
+      "original_end_line": 7921,
+      "continuation": 7922
+    },
+    {
+      "original_line": 8558,
+      "original_else_line": 8561,
+      "original_end_line": 8564,
+      "continuation": 8565
+    },
+    {
+      "original_line": 8571,
+      "original_else_line": 8574,
+      "original_end_line": 8577,
+      "continuation": 8578
+    },
+    {
+      "original_line": 8687,
+      "original_else_line": 8689,
+      "original_end_line": 8692,
+      "continuation": 8693
+    },
+    {
+      "original_line": 8747,
+      "original_else_line": 8749,
+      "original_end_line": 8752,
+      "continuation": 8753
+    },
+    {
+      "original_line": 9237,
+      "original_else_line": 9239,
+      "original_end_line": 9242,
+      "continuation": 9243
+    },
+    {
+      "original_line": 9303,
+      "original_else_line": 9305,
+      "original_end_line": 9308,
+      "continuation": 9309
+    },
+    {
+      "original_line": 9354,
+      "original_else_line": 9356,
+      "original_end_line": 9359,
+      "continuation": 9360
+    },
+    {
+      "original_line": 9395,
+      "original_else_line": 9397,
+      "original_end_line": 9399,
+      "continuation": 9400
+    },
+    {
+      "original_line": 9435,
+      "original_else_line": 9438,
+      "original_end_line": 9441,
+      "continuation": 9442
+    },
+    {
+      "original_line": 9558,
+      "original_else_line": 9561,
+      "original_end_line": 9564,
+      "continuation": 9565
+    }
+  ],
+  "context": "s13-ntstubs-x86-actual-context.json",
+  "scope": "first-depth structure and unsupported alternative only; selected x86 bodies of omitted original functions are not restored and remain unreviewed; original else diagnostic line anchored",
+  "limits": "empty selected scaffolds do not implement or prove original receive-stub behavior",
+  "builds": [
+    "MSVC x86 WOW32",
+    "MSVC x86 call-boundaries"
+  ],
+  "controls": {
+    "x86_log_sha256": "ceb54deebcaa96e765b92821337b89bd5d474ddb37020fb0460afe36e5c6266b",
+    "x64_log_sha256": "ceb54deebcaa96e765b92821337b89bd5d474ddb37020fb0460afe36e5c6266b",
+    "test_sha256": "78bf50de3e48ffdd4f7c13a82afa2b66b22bfe5f54e71777b09fa2fa0ced5b8b"
+  },
+  "comparison": {
+    "previous_sha256": "0b61d694d735cf0be466eeed48462a3108cd53fd9f19c05b58ede91bee971f64",
+    "current_sha256": "99ad07a07b4547571d4e5116f55a13d84933ffd981d1f2a19b0e5fd6a57d9c56",
+    "differing_offsets": [
+      280,
+      281,
+      625412,
+      625413
+    ]
+  }
+}

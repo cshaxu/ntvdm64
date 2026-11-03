@@ -1,0 +1,126 @@
+{
+  "previous": "build\\t473-s13\\r463-phase1-package\\system32",
+  "current": "build\\t473-s13\\r477-phase1-package\\system32",
+  "files": 83,
+  "changes": [
+    {
+      "file": "nthook32.dll",
+      "sizes": [
+        221184,
+        221184
+      ],
+      "count": 4,
+      "offsets": [
+        280,
+        281,
+        133156,
+        133157
+      ],
+      "pe_timestamp_offset": 280,
+      "debug_timestamp_offset": 133156,
+      "timestamp_only": true
+    },
+    {
+      "file": "nthook64.dll",
+      "sizes": [
+        270848,
+        270848
+      ],
+      "count": 4,
+      "offsets": [
+        272,
+        273,
+        167348,
+        167349
+      ],
+      "pe_timestamp_offset": 272,
+      "debug_timestamp_offset": 167348,
+      "timestamp_only": true
+    },
+    {
+      "file": "ntsrv.exe",
+      "sizes": [
+        398848,
+        398848
+      ],
+      "count": 4,
+      "offsets": [
+        256,
+        257,
+        289428,
+        289429
+      ],
+      "pe_timestamp_offset": 256,
+      "debug_timestamp_offset": 289428,
+      "timestamp_only": true
+    },
+    {
+      "file": "ntvdm.exe",
+      "sizes": [
+        2103808,
+        2103808
+      ],
+      "count": 4,
+      "offsets": [
+        288,
+        289,
+        1698412,
+        1698413
+      ],
+      "pe_timestamp_offset": 288,
+      "debug_timestamp_offset": 1698412,
+      "timestamp_only": true
+    },
+    {
+      "file": "ntvwm.exe",
+      "sizes": [
+        340480,
+        340480
+      ],
+      "count": 4,
+      "offsets": [
+        264,
+        265,
+        229060,
+        229061
+      ],
+      "pe_timestamp_offset": 264,
+      "debug_timestamp_offset": 229060,
+      "timestamp_only": true
+    },
+    {
+      "file": "run16.exe",
+      "sizes": [
+        316416,
+        316416
+      ],
+      "count": 4,
+      "offsets": [
+        264,
+        265,
+        209524,
+        209525
+      ],
+      "pe_timestamp_offset": 264,
+      "debug_timestamp_offset": 209524,
+      "timestamp_only": true
+    },
+    {
+      "file": "VDMREDIR.DLL",
+      "sizes": [
+        206848,
+        206848
+      ],
+      "count": 4,
+      "offsets": [
+        280,
+        281,
+        123572,
+        123573
+      ],
+      "pe_timestamp_offset": 280,
+      "debug_timestamp_offset": 123572,
+      "timestamp_only": true
+    }
+  ]
+}

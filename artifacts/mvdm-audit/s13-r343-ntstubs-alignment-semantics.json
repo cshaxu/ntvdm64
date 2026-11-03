@@ -1,0 +1,631 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+  "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+  "groups": [
+    {
+      "line": 352,
+      "else": 354,
+      "endif": 359,
+      "x86_sha256": "b2ba17db1332a3ff2d8b4243641d432e707cc3199bbecdbccc1033182fb4d0d3",
+      "non_x86_sha256": "70019c17e3da166946f964904c5fb18aeb3a1a455f448155fe828942719ce515",
+      "labels": [
+        "sizeof(BYTE)",
+        "sizeof(WCHAR)",
+        "sizeof(DWORD)"
+      ]
+    },
+    {
+      "line": 390,
+      "else": 392,
+      "endif": 394,
+      "x86_sha256": "0ba5e9c169ae3f8943de39dd843e0c9da269ae7fd056341b90edb60f9ab62a6c",
+      "non_x86_sha256": "fa9b6fb387179d01b6c2bbecda749f97e7787e1eedea1fbfacb6bb55ea6b4d8a",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(DWORD)"
+      ]
+    },
+    {
+      "line": 563,
+      "else": 565,
+      "endif": 567,
+      "x86_sha256": "5c70bac6f38ed51b84b0e35e7e71137ff95fe37046705b66f1e3108b235957fe",
+      "non_x86_sha256": "07adb7c9ba7f90034dae7b8a15c35871b7f320adf8a318ac41e1ec71b584016c",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(WCHAR)"
+      ]
+    },
+    {
+      "line": 715,
+      "else": 717,
+      "endif": 719,
+      "x86_sha256": "1d8f8fefbf2b5bbafeb490eaea4a59672e3e9fbd3f79220b68bfec2f445aab23",
+      "non_x86_sha256": "f593656bd69b98ee65ce5ad73307fd2129060d69ecf2865c6e8e7ddcbdaf1c10",
+      "labels": [
+        "ProbeForWrite",
+        "sizeof(BYTE)",
+        "sizeof(DWORD)"
+      ]
+    },
+    {
+      "line": 738,
+      "else": 740,
+      "endif": 742,
+      "x86_sha256": "c9003dcd5aef0526d0b4836a205da4ccfdd3a58449541bb6f742e57a346eecfd",
+      "non_x86_sha256": "83e886f426b29a115bda70bc2afac6b37e20a7a11989c09ec9555aa89fa40c93",
+      "labels": [
+        "ProbeForWrite",
+        "sizeof(BYTE)",
+        "sizeof(WCHAR)"
+      ]
+    },
+    {
+      "line": 964,
+      "else": 966,
+      "endif": 968,
+      "x86_sha256": "6dc544c7dcd79d812bce9c5deb083098143a308885e387bad3246c468d162f7e",
+      "non_x86_sha256": "a3f67eae1ff23260f87cec7b4630d5c2d91883c30d06b183a98664e398de881e",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(WCHAR)"
+      ]
+    },
+    {
+      "line": 1135,
+      "else": 1138,
+      "endif": 1141,
+      "x86_sha256": "e2a77a12dc7d3b758832c7901e90648a17aaf5de0996a98f75f08e0328673c7e",
+      "non_x86_sha256": "ad84b0762a7aa2a9365715d74f9d2d1b110c0a6a0fa0825439557b0d2a7e18a8",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(WCHAR)"
+      ]
+    },
+    {
+      "line": 1229,
+      "else": 1231,
+      "endif": 1233,
+      "x86_sha256": "01cc6d976b1c801e8764cd90b9e191560e0df3697cacbbf26cb871164848084a",
+      "non_x86_sha256": "21b27d1800ac17db3557467b4cdcd0debbdbd8086ae152cf007a0bf1e6a70173",
+      "labels": [
+        "ProbeForWrite",
+        "sizeof(BYTE)",
+        "sizeof(DWORD)"
+      ]
+    },
+    {
+      "line": 1312,
+      "else": 1314,
+      "endif": 1316,
+      "x86_sha256": "78a6ed0e877f8e5660f536a02999a73449dec7bb2666eab05add0b9cec96a8bd",
+      "non_x86_sha256": "1d46dc9117e0a901e796ad2212803a4b9dd962fcbaab4e916e5cd5f369ab2463",
+      "labels": [
+        "ProbeForWrite",
+        "sizeof(BYTE)",
+        "sizeof(DWORD)"
+      ]
+    },
+    {
+      "line": 1957,
+      "else": 1959,
+      "endif": 1961,
+      "x86_sha256": "e7ddf3333e6229d84e6bf0b9f9609eb128bf95194907b827ee019d0a1ae49aa6",
+      "non_x86_sha256": "1f602b894a0c740db90beb844c12297eb5a45c44c8776a5e5522af03fa37ccf3",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(WCHAR)"
+      ]
+    },
+    {
+      "line": 2027,
+      "else": 2029,
+      "endif": 2031,
+      "x86_sha256": "d7d81eab6a5251d6a2f08a7b510aa563708952e8db13eea6c2a7fbe2fcc0458b",
+      "non_x86_sha256": "975ee4be6d93ef15ce5638df69c954359f27fe262b67787647f2c5e4a1dce03c",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(DWORD)"
+      ]
+    },
+    {
+      "line": 2112,
+      "else": 2114,
+      "endif": 2116,
+      "x86_sha256": "fe88aa09f15af58553e0c55ef3b5c9e8936787ec2d75cf070ac19d037cd5588d",
+      "non_x86_sha256": "51472296da8af3f3d87073d78005a9f60f294125f9ce300d9d667bc5d064f37b",
+      "labels": [
+        "ProbeForWrite",
+        "sizeof(BYTE)",
+        "sizeof(DWORD)"
+      ]
+    },
+    {
+      "line": 2288,
+      "else": 2290,
+      "endif": 2292,
+      "x86_sha256": "575fc740be5882915fd17ac830278c125d23523b2880d3bfbef797b082a2a0a0",
+      "non_x86_sha256": "1a18ea58d08678f1ec4421917c7a21c2f10b1f5e90609748ef2307228056ce40",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(WCHAR)"
+      ]
+    },
+    {
+      "line": 2369,
+      "else": 2371,
+      "endif": 2373,
+      "x86_sha256": "10fd14ad2a8d8f6ca9242bef5c16ee90e8ff27e53b0c338b9523ce69bb60dbe6",
+      "non_x86_sha256": "957335492788e40cfc348ef284c77bfa9dac54aaa8bf59080b76f98ee4a41232",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(WCHAR)"
+      ]
+    },
+    {
+      "line": 2723,
+      "else": 2725,
+      "endif": 2727,
+      "x86_sha256": "e1f5e80167b25fccb4ef01b853a212283a1171f35fffc45461924e2ee89ae49a",
+      "non_x86_sha256": "1870713af50b26d2eadaded163313a3e3c3a0b732af4480da525b9dd745c7a59",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(DWORD)"
+      ]
+    },
+    {
+      "line": 3107,
+      "else": 3109,
+      "endif": 3111,
+      "x86_sha256": "18c2ce6aff4d7c569328a9d2a2428b37f35b208b3da627b4a136a9bc4e09881c",
+      "non_x86_sha256": "480c019f4cb7311ad8bb28907b6c618a623d7e2f351fedc3fb45f92bef635b79",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(DWORD)"
+      ]
+    },
+    {
+      "line": 3158,
+      "else": 3160,
+      "endif": 3162,
+      "x86_sha256": "a0d321c260110e6791b9f5e5391fd4c3d742bd1202391f4e61fca7d5f2732dcf",
+      "non_x86_sha256": "2a3c8296e450790478b25e41654cea03d9b0be0ba7ceda8f79cb75227b8cc45f",
+      "labels": [
+        "ProbeForWrite",
+        "sizeof(BYTE)",
+        "sizeof(DWORD)"
+      ]
+    },
+    {
+      "line": 3446,
+      "else": 3448,
+      "endif": 3450,
+      "x86_sha256": "4fc18ed1eaf41532c0d0ed0960c43b4d37b635bb1fbe0406335d952d7bc282c7",
+      "non_x86_sha256": "60ed7a48272e260716ce1cab852830c61652b2d7010d91c0b7a42e7b3570a801",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(WCHAR)"
+      ]
+    },
+    {
+      "line": 3972,
+      "else": 3974,
+      "endif": 3976,
+      "x86_sha256": "97d4556d8b409f3c4e408a1e88fb8e99a787fc6b5c84975063aead3d463516b4",
+      "non_x86_sha256": "d6539db37d97e9feb8cdcb1396d99dbc810d950fbc3c9148accea17fe54a4f08",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(DWORD)"
+      ]
+    },
+    {
+      "line": 4318,
+      "else": 4320,
+      "endif": 4323,
+      "x86_sha256": "0515dd8e98f1bb54e795fff53f9ef5caceb52893ae3ec31056dbffbe1f247eba",
+      "non_x86_sha256": "c22dda54baa7b230142fbe76e6f7131a977a429a2d529d16ab04226c14626788",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(WORD)"
+      ]
+    },
+    {
+      "line": 4727,
+      "else": 4730,
+      "endif": 4733,
+      "x86_sha256": "3e632877284562fc646a5e24f4fdfd4c716f7c23dd5db3fb104e0f594587545d",
+      "non_x86_sha256": "2af89039fd0d807e04137bec2d4a9b0383291fab70affa1084cf5c26bba9dba4",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(DWORD)"
+      ]
+    },
+    {
+      "line": 5472,
+      "else": 5474,
+      "endif": 5476,
+      "x86_sha256": "0215e5bdbcb57804d6c035c6385e46f757f866bc04c50899fb5565dfbf81acf8",
+      "non_x86_sha256": "8bcdac90f90f6078649ed0750fddf7b953a0cbfdfe9b95d97e54eec91bb073b8",
+      "labels": [
+        "ProbeForWrite",
+        "sizeof(BYTE)",
+        "sizeof(WCHAR)"
+      ]
+    },
+    {
+      "line": 5506,
+      "else": 5508,
+      "endif": 5510,
+      "x86_sha256": "f2c659dcdee45fd360c12c04080fbef025e53538fc92ba2c1966580a3a321c06",
+      "non_x86_sha256": "11c59c3a3c24888d2ddc36764d6430c731f7d8e423037261beeff002d6fd3e1e",
+      "labels": [
+        "ProbeForWrite",
+        "sizeof(BYTE)",
+        "sizeof(WCHAR)"
+      ]
+    },
+    {
+      "line": 5768,
+      "else": 5770,
+      "endif": 5772,
+      "x86_sha256": "f44ad6191c775ce8e661db3597a17473a0a969286f59dec34535ed7fc32639a4",
+      "non_x86_sha256": "1f1c6e081fda959020cb93c045cce5a5e8a04036e37fdafaeef69c66d2f606cd",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(WCHAR)"
+      ]
+    },
+    {
+      "line": 5823,
+      "else": 5825,
+      "endif": 5827,
+      "x86_sha256": "94c0f1f6b92f109b96894e2552a82896e7fc66411efa87bf704853b1ba7a3881",
+      "non_x86_sha256": "062d82f31017cb41b12bd36f2796615bf8f086514fa59006db08f94bc198b527",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(WCHAR)"
+      ]
+    },
+    {
+      "line": 5986,
+      "else": 5988,
+      "endif": 5991,
+      "x86_sha256": "78c643135b769ac3f808de077a408c4fd2b02d76fda1e1219eee3df8d5873ec7",
+      "non_x86_sha256": "c05badc52f9a5047c72dcda838ccb4daadbab0738ca83b8e85c7afb44d9a1fcc",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(WORD)"
+      ]
+    },
+    {
+      "line": 6312,
+      "else": 6314,
+      "endif": 6317,
+      "x86_sha256": "950254007cc30f338ee2e54a29a3fb7d27c7fa11a6f549ab7aa27cb6b73a43a7",
+      "non_x86_sha256": "253c00fcc757549508682d2b1a8e56251880e53705fa9071e341a34dcdf7e711",
+      "labels": [
+        "ProbeForWrite",
+        "sizeof(BYTE)",
+        "sizeof(WORD)"
+      ]
+    },
+    {
+      "line": 6417,
+      "else": 6435,
+      "endif": 6453,
+      "x86_sha256": "446a41a6041013b2375d69822330c5dbc94740ca53b6b8df6383dd7408a9a7d6",
+      "non_x86_sha256": "2501f85d831201f322ad6c1028879f7606d48ae24d811625b941db37dd23e198",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(WORD)",
+        "sizeof(DWORD)"
+      ]
+    },
+    {
+      "line": 6689,
+      "else": 6691,
+      "endif": 6693,
+      "x86_sha256": "62cfc8bef3d4484fc6196b2574565c7133829a216efd90e11b135673f552c708",
+      "non_x86_sha256": "eaa6f5183ed29f7173744c89ca881222e562f8e258793e76e17d19485241c9f3",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(WCHAR)"
+      ]
+    },
+    {
+      "line": 6929,
+      "else": 6932,
+      "endif": 6935,
+      "x86_sha256": "81b9bb3108462eb34c7ea0eb15525bcd9af6c7eabe82c368d8760749ef146513",
+      "non_x86_sha256": "7857d07a135e4dc1f352ede0519232b4e9647f424c0c53866dc5beda910b7316",
+      "labels": [
+        "ProbeForWrite",
+        "sizeof(BYTE)",
+        "sizeof(DWORD)"
+      ]
+    },
+    {
+      "line": 6977,
+      "else": 6980,
+      "endif": 6983,
+      "x86_sha256": "e2a77a12dc7d3b758832c7901e90648a17aaf5de0996a98f75f08e0328673c7e",
+      "non_x86_sha256": "ad84b0762a7aa2a9365715d74f9d2d1b110c0a6a0fa0825439557b0d2a7e18a8",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(WCHAR)"
+      ]
+    },
+    {
+      "line": 7026,
+      "else": 7031,
+      "endif": 7036,
+      "x86_sha256": "a1bf6e837c5164e78d8f138cc703b809a9050077f43d7dd25efb49c8bf7417f0",
+      "non_x86_sha256": "f262dcd7f692a4bc7de20cb25ba7dd76e4ff32070d8ad2339572247857f788c8",
+      "labels": [
+        "ProbeForRead",
+        "ProbeForWrite",
+        "sizeof(BYTE)",
+        "sizeof(WCHAR)",
+        "sizeof(DWORD)"
+      ]
+    },
+    {
+      "line": 7071,
+      "else": 7074,
+      "endif": 7077,
+      "x86_sha256": "34efc1292fe00e44ba0fbb4f427bb7c630fb880466c3073a699335f5811f4fcc",
+      "non_x86_sha256": "6dbdea80c92bab2a6320e6280d13955d33d78c27a382b5d251aeec13ec2079dd",
+      "labels": [
+        "ProbeForWrite",
+        "sizeof(BYTE)",
+        "sizeof(WCHAR)"
+      ]
+    },
+    {
+      "line": 7102,
+      "else": 7104,
+      "endif": 7106,
+      "x86_sha256": "d3947463adc2d41144edcbaa234852cc095a53c34ed58adcbf14a43a0df39efe",
+      "non_x86_sha256": "4fc8720bd7f416a615c27147f51ebd7c2cbcd942f218873642abce6ee1ee5ded",
+      "labels": [
+        "ProbeForWrite",
+        "sizeof(BYTE)",
+        "sizeof(WCHAR)"
+      ]
+    },
+    {
+      "line": 7131,
+      "else": 7133,
+      "endif": 7135,
+      "x86_sha256": "94809f82ccd5b1efc7d1a8fb8902126df4e93f00d39958dca749a6ea663f4e5d",
+      "non_x86_sha256": "ba619420eee3c6e7f1b38bd655bc3cc1f12580d05a0c5cbee85f26dcb3d924b5",
+      "labels": [
+        "ProbeForWrite",
+        "sizeof(BYTE)",
+        "sizeof(WCHAR)"
+      ]
+    },
+    {
+      "line": 7161,
+      "else": 7163,
+      "endif": 7165,
+      "x86_sha256": "e4da52b3407b80310ec5bc37975104c7f2b8454dc1a121349468b921844f01fa",
+      "non_x86_sha256": "fe21a9ef5f54c441954d0d7af35e572fb5ad1e7724f07693eeb73aab75a7495f",
+      "labels": [
+        "ProbeForWrite",
+        "sizeof(BYTE)",
+        "sizeof(WCHAR)"
+      ]
+    },
+    {
+      "line": 7188,
+      "else": 7190,
+      "endif": 7192,
+      "x86_sha256": "ffccff02c4b73a8bc088b2506943671a72ddf80d74e55865f83f3a1ca224904e",
+      "non_x86_sha256": "200c912e1fed1d7b1a98f585bc430d50b8d75cd5534e59fb58a6837eb7220b22",
+      "labels": [
+        "ProbeForWrite",
+        "sizeof(BYTE)",
+        "sizeof(DWORD)"
+      ]
+    },
+    {
+      "line": 7333,
+      "else": 7335,
+      "endif": 7337,
+      "x86_sha256": "57ad08cd10c1888713b1e172f9e4d895dbb5d94876385268690656a51de79eb5",
+      "non_x86_sha256": "432eac84849588cde1a4873ff33b4feb8486bbe1385bfe9669ac32651b86cfa6",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(WCHAR)"
+      ]
+    },
+    {
+      "line": 7363,
+      "else": 7365,
+      "endif": 7367,
+      "x86_sha256": "7e75e9bbca1db31c5d22ca1b9a1ecd129a87e7982a5cec3b3afa8a6c7c5867e0",
+      "non_x86_sha256": "bb99a3efbc15ed0ee15bbe7038bd6b7f07f24046b502e16cee35d9d4ae15eb99",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(WCHAR)"
+      ]
+    },
+    {
+      "line": 7439,
+      "else": 7441,
+      "endif": 7443,
+      "x86_sha256": "2c3e3d130949168c334d21b88cc1441fe3528bcd1f05b90afa5c6c0bfa787104",
+      "non_x86_sha256": "0f4a9b5161271a4f46e6c023e6e582a2a50ef69d15c1456a92cb7d8c16ad3e03",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(WCHAR)"
+      ]
+    },
+    {
+      "line": 7917,
+      "else": 7919,
+      "endif": 7921,
+      "x86_sha256": "3a5f3e716df1e9ff479eb9f838a422775bbc62bfc1e051b8304a8351ce4cc3dc",
+      "non_x86_sha256": "18998663297956d3a998cab19c79c59ecf7e796eebb3abb8bc2e4f54819bf1d3",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(WCHAR)"
+      ]
+    },
+    {
+      "line": 8558,
+      "else": 8561,
+      "endif": 8564,
+      "x86_sha256": "c2b20c2db3379a5b101d51480d1f53e7f42f002eb04c6192083bf2cd85ab53c3",
+      "non_x86_sha256": "f8d4b62d93a4b2a04cf0baea4533bffba1c611581d9e63dc840ba8c728c58e74",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(WCHAR)"
+      ]
+    },
+    {
+      "line": 8571,
+      "else": 8574,
+      "endif": 8577,
+      "x86_sha256": "80ff95d51dce4fa1cd129e62f97f6dda867d32a2a1f9ebc6d3f5e7a76e3917e3",
+      "non_x86_sha256": "69cd8e30c396ab8a8e5d733e23264d8239cb7768f7238b955a52b5b93e224ce3",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(WCHAR)"
+      ]
+    },
+    {
+      "line": 8687,
+      "else": 8689,
+      "endif": 8692,
+      "x86_sha256": "f25a29ba3c57bd509cade0682c8de490c238f01f61007cec8c64183582697eb0",
+      "non_x86_sha256": "c116cca1b75ff451229ec7fcb06178ea916bcec0625ab39b650732487b58a9bf",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(WORD)"
+      ]
+    },
+    {
+      "line": 8747,
+      "else": 8749,
+      "endif": 8752,
+      "x86_sha256": "9eb76e8a555563c976417afdf1e5e83865890c91bf71a86b65e7b80bd3f049b7",
+      "non_x86_sha256": "df867e60d904c61a9e8fdbac2c5a7b4bc30ef61e585e3c0878c09e66a2cb495a",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(WORD)"
+      ]
+    },
+    {
+      "line": 9237,
+      "else": 9239,
+      "endif": 9242,
+      "x86_sha256": "950254007cc30f338ee2e54a29a3fb7d27c7fa11a6f549ab7aa27cb6b73a43a7",
+      "non_x86_sha256": "253c00fcc757549508682d2b1a8e56251880e53705fa9071e341a34dcdf7e711",
+      "labels": [
+        "ProbeForWrite",
+        "sizeof(BYTE)",
+        "sizeof(WORD)"
+      ]
+    },
+    {
+      "line": 9303,
+      "else": 9305,
+      "endif": 9308,
+      "x86_sha256": "950254007cc30f338ee2e54a29a3fb7d27c7fa11a6f549ab7aa27cb6b73a43a7",
+      "non_x86_sha256": "253c00fcc757549508682d2b1a8e56251880e53705fa9071e341a34dcdf7e711",
+      "labels": [
+        "ProbeForWrite",
+        "sizeof(BYTE)",
+        "sizeof(WORD)"
+      ]
+    },
+    {
+      "line": 9354,
+      "else": 9356,
+      "endif": 9359,
+      "x86_sha256": "950254007cc30f338ee2e54a29a3fb7d27c7fa11a6f549ab7aa27cb6b73a43a7",
+      "non_x86_sha256": "253c00fcc757549508682d2b1a8e56251880e53705fa9071e341a34dcdf7e711",
+      "labels": [
+        "ProbeForWrite",
+        "sizeof(BYTE)",
+        "sizeof(WORD)"
+      ]
+    },
+    {
+      "line": 9395,
+      "else": 9397,
+      "endif": 9399,
+      "x86_sha256": "c53e0690124f740ab1e317f371fdf615672d1669e51cf1ef03688d574959339b",
+      "non_x86_sha256": "0c81544649b16a697c8200dbd002e7b3baca659044ffbe8c5865186c3f4126eb",
+      "labels": [
+        "ProbeForWrite",
+        "sizeof(BYTE)"
+      ]
+    },
+    {
+      "line": 9435,
+      "else": 9438,
+      "endif": 9441,
+      "x86_sha256": "3f8d7341776248233525a6408faf42f7172337a186e77cc135da4282ae5bf23e",
+      "non_x86_sha256": "2e7611f3b2bca22f926ec2ea5792d6e27f83ebcd20558dbf015db34fb075f739",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(DWORD)"
+      ]
+    },
+    {
+      "line": 9558,
+      "else": 9561,
+      "endif": 9564,
+      "x86_sha256": "d9c6c724fec9d0184c4c617e702347045711f73dacd312dae529f7e369560116",
+      "non_x86_sha256": "fc2c36eb66184f0557460c08407fa46e0e39ee173da4d5dae901c36ed0e40a0f",
+      "labels": [
+        "ProbeForRead",
+        "sizeof(BYTE)",
+        "sizeof(WORD)"
+      ]
+    }
+  ],
+  "aggregate": {
+    "sizeof(BYTE)": 51,
+    "sizeof(WCHAR)": 26,
+    "sizeof(DWORD)": 17,
+    "ProbeForRead": 31,
+    "ProbeForWrite": 20,
+    "sizeof(WORD)": 10
+  },
+  "interpretation": "Original x86 and non-x86 arms frequently implement distinct pointer-probe alignments. Selected x86 behavior cannot be replaced by an error, and omitted source owners cannot be claimed restored by placing a guard in an unrelated retained function. Exact retained-scope restoration remains pending.",
+  "limits": "Text classification of first-depth arm bodies only; not an execution proof or examination of nested branch selection."
+}

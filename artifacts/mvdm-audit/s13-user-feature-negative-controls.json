@@ -1,0 +1,14 @@
+{
+  "test": "tests/build/test_bfs_depth1_user_feature_guards.py",
+  "test_sha256": "0f834e869702a354db40494ac8211f9d43181fc0a38f24354262ae5dba867d35",
+  "plan_sha256": "7e40f43f4223597ea117cc2881851af3320a7e4dcf20aee93e084c7b1b94bf15",
+  "cases": 8,
+  "checks": [
+    "normal profile succeeds",
+    "defined unsupported feature rejected",
+    "diagnostic reports original #error line"
+  ],
+  "msvc_x86": "pass",
+  "msvc_x64": "pass",
+  "limits": "isolated extracted guards only; actual supported full-product profile coverage relies on separate builds; this does not verify UI runtime"
+}

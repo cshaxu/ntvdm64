@@ -1,0 +1,12 @@
+{
+  "source": "src/mvdm-host/softpc.new/base/system/timer.c",
+  "before_sha256": "3141688b906cb3f8c90b3b56f2913f625a595d56c5477ae6f745b601db2ebca5",
+  "after_sha256": "414a9fb71ab0bec12def3c49b735fb237d590729afe26fe89264890a1f1a3202",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+  "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+  "original_endif": 2647,
+  "old_continuation": 2421,
+  "new_continuation": 2648,
+  "scope": "diagnostic line mapping only; selected code unchanged",
+  "build_and_binary_comparison": "pending"
+}

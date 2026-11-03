@@ -32,6 +32,9 @@ extern void keyboard_post IPT0();
 extern void AT_kbd_init IPT0();
 extern void AT_kbd_post IPT0();
 
+#line 35
 #ifdef HUNTER
+#line 36
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
+#line 52

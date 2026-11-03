@@ -1,0 +1,17 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+  "old_commit": "build-owned immediate pre-edit snapshot",
+  "old_sha256": "db8c589b7c2ea3aa0da53e5097d91d0106495fe447e2c82e31772b2e80d70286",
+  "current_sha256": "10180ecbc81056777970d26d22876b2d17378d5592441bc601792080b4bdf710",
+  "method": "MSVC /EP, exact Ninja target flags, identical scratch source path; nonblank stripped lines hashed. ntSend.h copied without modification.",
+  "contexts": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/exitwin.obj",
+      "old_sha256": "9171240a1a5c96329a0e9342c94eb12e7533e58c40b73bcf01a54547bf88d1c1",
+      "current_sha256": "9171240a1a5c96329a0e9342c94eb12e7533e58c40b73bcf01a54547bf88d1c1",
+      "equal": true
+    }
+  ],
+  "limits": "Tests selected preprocessed text only; excludes diagnostics and does not establish other contexts, link or runtime behavior."
+}

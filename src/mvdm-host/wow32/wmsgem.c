@@ -21,7 +21,9 @@ VPVOID  WordBreakProc16 = 0;
 
 extern WBP W32WordBreakProc;
 
+#line 24
 #ifdef DEBUG
+#line 25
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 74

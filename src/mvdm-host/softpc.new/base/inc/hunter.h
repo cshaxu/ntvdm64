@@ -14,7 +14,10 @@
 /* static char SccsID[]="@(#)hunter.h	1.10 09/01/92 Copyright Insignia Solutions Ltd."; */
 
 /* This file has no effect unless HUNTER is defined. */
+#line 17
 #ifdef	HUNTER
+#line 18
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif	/* HUNTER */
+#line 615
 #line 20

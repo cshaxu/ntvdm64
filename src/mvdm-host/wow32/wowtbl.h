@@ -41,6 +41,9 @@ VOID InitThunkTableOffsets(VOID);
 
 extern TABLEOFFSETS tableoffsets;
 
+#line 44
 #ifdef DEBUG_OR_WOWPROFILE
+#line 45
 #error DIVERGENCE MVDM-HOST-DIV-587: WOW profiling declarations are not selected
 #endif
+#line 59

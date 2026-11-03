@@ -1,0 +1,32 @@
+{
+  "scope": "original first-depth USER header guards; retained-arm phase",
+  "inputs": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "sha256": "771fc0fbcce586991c814a40450ce15931ebc13c1d83ee3695b1b4117f9c738f"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "sha256": "8a9864877903a69d7bf8a40a8b788b37bf54c83a117acb0e79fb85ed8bdf061b"
+    },
+    {
+      "path": "src/wow32-dll/include/control-client/default-precomp.h",
+      "sha256": "1ced3c1ad3089006776e276a9c33e9144cee704a55286158cae8cddd75c845a2"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_user_client_view_layout.h",
+      "sha256": "a52b3d7d0546e99b03796bb6a8830f6866cf1cc05b3202da0bfdf45eb4698331"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_edit_lookaside_bindings.h",
+      "sha256": "353af4d5f10a7998e0b694ca4a587bd846972cb0b7f1ae35556cb199dcc2ddf3"
+    }
+  ],
+  "facts": [
+    "Original user.h has whole-file #ifndef _USER_; current subset partitions declarations under separate guards and optional feature selectors.",
+    "default-precomp.h first includes wow_user_client_view_layout.h, which includes user.h with WOW_ORIGINAL_CLIENT_VIEW_LAYOUT, then includes user.h again with WOW_ORIGINAL_CLIENT_HANDLES.",
+    "Current usercli.h partitions lookaside and EDIT declarations; wow_edit_lookaside_bindings.h requests lookaside-only declarations.",
+    "Replacing the current partitions mechanically with an original whole-file guard can suppress a later feature-specific include."
+  ],
+  "conclusion": "Original selected header-guard reconstruction requires a supported-context preservation design and tests in retained-arm phase; no currently selected logic was modified. This is not proof that restoration is impossible."
+}

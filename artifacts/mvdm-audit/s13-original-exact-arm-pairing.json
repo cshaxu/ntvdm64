@@ -1,0 +1,774 @@
+{
+  "scope": "only current files byte-identical to hash-verified pinned originals with matching depth-1 groups, arm signatures and physical lines",
+  "files": 95,
+  "statuses": {
+    "retained-observed": 536,
+    "pending": 4,
+    "retained-original-assertion": 2
+  },
+  "records": [
+    {
+      "current": "src/mvdm-host/inc/dossvc.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\dossvc.h",
+      "sha256": "82b5135e78bd3010128bd5dd54978b0e00aec0073f0a7e6b547cbe8dff08a91c",
+      "arm_statuses": {
+        "retained-observed": 2
+      }
+    },
+    {
+      "current": "src/mvdm-host/inc/sharewow.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\sharewow.h",
+      "sha256": "6773774b049eed89820cf10c2354b95537e7d67c8e700566da14658dfa3a84a8",
+      "arm_statuses": {
+        "retained-observed": 2
+      }
+    },
+    {
+      "current": "src/mvdm-host/inc/wowcomm.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowcomm.h",
+      "sha256": "4817961493d33932a98f5ee2222c0f2e20a43fd4900430910b81e5c70c5f1c85",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/inc/wowfax.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowfax.h",
+      "sha256": "97c6c40dc2d0565a21dc1be4112fe24f138b10ddbb55fbd29e55da972a2a2c84",
+      "arm_statuses": {
+        "pending": 3,
+        "retained-observed": 2
+      }
+    },
+    {
+      "current": "src/mvdm-host/inc/wowinfo.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowinfo.h",
+      "sha256": "a0a125eedf4138d353fea1f97316331fd5a8acfb82dbd80d7abfe5dedf350026",
+      "arm_statuses": {
+        "pending": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/aaa.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\aaa.c",
+      "sha256": "43583535e19a181d7a4c665c5fba5c00109eb1079b65d462f2b8a3d92ce2c052",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/aad.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\aad.c",
+      "sha256": "7f6216d39411838509402cc45a93741ee4e0142c1fc36a0dc7682f126c447cde",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/aam.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\aam.c",
+      "sha256": "fda0622e61bc039dad01cf0594389af7e9ffdc678719b107f90a5e1607d893ee",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/aas.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\aas.c",
+      "sha256": "f58060b5f0732ca174b1124b2622aaafa9d7341774cd71427509f2548ace4672",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/c_addr.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_addr.c",
+      "sha256": "c60e097b1ccaf789c1b37098085e337118e765a357acd0950ce01c5a08ab129a",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/cpuint_c.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpuint_c.h",
+      "sha256": "b171b9bb51bf810c5e9f839a88a79a6f1eb66c37c4128069fe3e7972da849ede",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/daa.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\daa.c",
+      "sha256": "5cd3ba3ee4989fb02c85a07e020f9a67a1939e8333fe5b83b7c16b3a828c9817",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/das.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\das.c",
+      "sha256": "31aea3f55537c576caa4403de3d250220d15016a8936be5c4402d623c2cd1fdd",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/div.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\div.c",
+      "sha256": "e1e9653d0883617e12ed70ff4ab08c96d75c7a8b09ea4eb855b3cd4ab3e73007",
+      "arm_statuses": {
+        "retained-observed": 3
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/evidgen.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\evidgen.h",
+      "sha256": "7e429987c49ec9e87ca45394eeddc87c73877e5f95aed73e1bc1d7224d308772",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/fpu_c.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\fpu_c.h",
+      "sha256": "0f1d67436ed417b6726f958cfd97ece40ddedd05997369449be5861a47b7b912",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/gdpvar.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\gdpvar.h",
+      "sha256": "a8fc9f81af3c06eb4263cc5acb3005a41f849677cba4d09ae171ab450f7fb3ec",
+      "arm_statuses": {
+        "retained-original-assertion": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/idiv.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\idiv.c",
+      "sha256": "4e48281278345855d027392dd434e286e92591776b8c0d15a3ffb4bcfbb533a6",
+      "arm_statuses": {
+        "retained-observed": 3
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/imul.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\imul.c",
+      "sha256": "9cc48f0ff83909e122e01fc417d909fa93964ba4b5c79b3553810d1a6162adc4",
+      "arm_statuses": {
+        "retained-observed": 5
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/into.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\into.c",
+      "sha256": "fbe4dfe731c9d367c0270675c679bbf6acf1a45cf0b4d4548b54e5d2080c74c3",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/intx.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\intx.c",
+      "sha256": "544a08aec10dff46968f48b3aa83243fac5bf78ef04d189c7b46518c242907e1",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/mul.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\mul.c",
+      "sha256": "5e7f349937d7302ae969bbb3fbd994cc93c23c1b4838e5243e7cd242ce384973",
+      "arm_statuses": {
+        "retained-observed": 3
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/pigger_c.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\pigger_c.h",
+      "sha256": "f8abfab1a7001e498a6ddb782c8b0831db138e8daad8f52ccfccdd4e2a7c297e",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/sar.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\sar.c",
+      "sha256": "4ff881f97ffd7b6b0188f6a95f671b308f06f8da2dfcb4e9c7be3a51ec673011",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/shl.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\shl.c",
+      "sha256": "03354bdb3d04e84d2e569273e38952300ddbd1d0f2924c6363c63b2f9064c8c1",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/shr.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\shr.c",
+      "sha256": "423ddf4206e009deb3eab3b17feab5cd4db1c9745643da5809ade351e26d1b70",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/ccpu386/univer_c.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\univer_c.h",
+      "sha256": "72655450d96db6f58f2dbd8887334222647014e38f8386fad58791502dcd52cd",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/cvidc/accessfn.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\accessfn.c",
+      "sha256": "326046c10f56b4da4eb4d7fe8b7e2052a46955a229cd94f717ab3ff6b52a1a37",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/cvidc/cpu4gen.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\cpu4gen.h",
+      "sha256": "c7775bb2a65b0c398b3d326b17bbc183526b7ba19736942f0db5d77dd6625127",
+      "arm_statuses": {
+        "retained-observed": 424
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/cvidc/cpu_c.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\cpu_c.h",
+      "sha256": "8cd25a965f1866a6d8e64621712c00d2c5cb83f47c053c7aac8cb72ce6620f15",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/cvidc/cpuint_c.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\cpuint_c.h",
+      "sha256": "814357a9371e97b0db7f39943b0e55c9b76507371440614802ed7745e9d9f67b",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/cvidc/evid_c.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\evid_c.h",
+      "sha256": "efd4bbf01556bb661a47131c75f05e321a41c00e407ec6177b66e80718df8710",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/cvidc/fm_c.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\fm_c.h",
+      "sha256": "e8f877260ef1f968714a8ecaa3684b2fa4d041c0ff7dc1c9e7b564ba1036486d",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/cvidc/fpu_c.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\fpu_c.h",
+      "sha256": "4a3f2226e9d1ca9fa2e0a806d1d40719e94f97e98b6f22936147240f568ab244",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/cvidc/gdpvar.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\gdpvar.h",
+      "sha256": "557c5d1d0effd1f8b1a18e0df5415924d63773edbc7ee762a624720229c24042",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/cvidc/pigger_c.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\pigger_c.h",
+      "sha256": "61c86d668bddaf998101a0da469115325ad822f751d4b964dcaad35ea4e7de9f",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/cvidc/univer_c.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\univer_c.h",
+      "sha256": "95963b89f5b99a06fe1c3ea85a0916500bc582881ad5bf2db508f75bcb07638e",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/inc/cmos.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cmos.h",
+      "sha256": "ef4dae92c641b3dbeb7aaab67c3f49e1da9d01d2473d2b96fbece0121b235f99",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/inc/dterm.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\dterm.h",
+      "sha256": "1a31bf16bf46b520110fd0d5e3562034f2c0d1f5e474ea030f98148c1c686924",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/inc/egagraph.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egagraph.h",
+      "sha256": "20c58d8fb126135214410b44cda85a9fb57c7644088e820ce979ad37e7681a39",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/inc/egamode.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egamode.h",
+      "sha256": "56c76d5816dd61ebc92666504e7c530a85f30a201c9d0d317056bfc3d0d4c807",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/inc/gfi.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gfi.h",
+      "sha256": "ae7b3dc66f9d618a841068e0e730c79751a7e496e223cf1d01ef0c4505e54a9d",
+      "arm_statuses": {
+        "retained-observed": 2
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/inc/host_cfg.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\host_cfg.h",
+      "sha256": "b51660d37cc8249d10c74800eea996836c807e108ba627bbaf799078ae9098f6",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/inc/rom.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\rom.h",
+      "sha256": "2075310f9ca8a1a94d9606cd79af36328615412b6912e17f50e2b46081685a5a",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/inc/umb.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\umb.h",
+      "sha256": "2461d7f74c3317a98d1456c238ad2f14bcdb2cbcd189d39836f24a353893e4b3",
+      "arm_statuses": {
+        "retained-observed": 3
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/base/inc/vga_dac.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\vga_dac.h",
+      "sha256": "a747934a6f6257d470ecfdc8a4808f6f11cac2cc96b0bd6e9be75facd327b5c3",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/inc/error.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\error.h",
+      "sha256": "40953fbb22a9c6a5bff875414e4dd6822340ec4a2501edec79415573fea16ab3",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/inc/host_inc.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\host_inc.h",
+      "sha256": "c78271903a7a00e13a8756b47f25a91993ab962c39c5fb89435783ee3d411efe",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/inc/nt_com.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_com.h",
+      "sha256": "203bf4bcfa6ddd5ff89cad3743fd99251df19838dd9e8bfcbf549a2e23dd4298",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/inc/nt_extra.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_extra.h",
+      "sha256": "a422d528074b6a16b5a09e2b2df2d83f3f8ba4c5729e368cd0acc64c0bebbd96",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/softpc.new/host/src/nt_munge.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_munge.c",
+      "sha256": "3d4d9557f0c055db81d54e320150898f93addc5808c9562e4f7ebd94f9c51061",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/wow32/isz.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\isz.h",
+      "sha256": "7168be4c0f441b97e25c04894ef9b331a1577adb002f6e5f116f262d25cd5892",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/wow32/mapembed.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\mapembed.h",
+      "sha256": "90fd350c4770756416917cf3e3318a7926b15760c1b15c32e22d9eb6fd045fd7",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/mvdm-host/wow32/wcall32.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wcall32.c",
+      "sha256": "0f72ae39e691f3ef672df4f1aeb3ebb6443e87f091fb6322ef1c13604ab3d571",
+      "arm_statuses": {
+        "retained-observed": 3
+      }
+    },
+    {
+      "current": "src/mvdm-host/wow32/wshell.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wshell.c",
+      "sha256": "1daa7860c95a0e374566b900d2da01e7459e7b88c0dfbe8e84b23f68bdf3ad40",
+      "arm_statuses": {
+        "retained-observed": 2
+      }
+    },
+    {
+      "current": "src/mvdm-host/xms.486/xms.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\xms.486\\xms.c",
+      "sha256": "592f4a063ad84c21890cdc15e56d4900e6669224c7c34c829c09d25dff9bed75",
+      "arm_statuses": {
+        "retained-observed": 2
+      }
+    },
+    {
+      "current": "src/non-mvdm/ds/netapi/rpcxlate/apiworke.h",
+      "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\rpcxlate\\apiworke.h",
+      "sha256": "805d632a97f750e4b15544d67fc0cc2e36070cbcbb44dd4600a031a528f85c75",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/private/windows/inc/pmvdm.h",
+      "original": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\windows\\inc\\pmvdm.h",
+      "sha256": "d9bc8a4e975f9d2bc1aef89d8e8854f2dc8ad8fac53b49d6f4998bccafd4afc8",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/ddk/inc/ntddbeep.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\ddk\\inc\\ntddbeep.h",
+      "sha256": "4e9e17a77c0e173166ab528de3a68d0c53883f513d55a998329d14f207e4272a",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/ddk/inc/ntdddisk.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\ddk\\inc\\ntdddisk.h",
+      "sha256": "ab1a18990f477e823de45110a12a83498e87b0c4ce87c39d89720cce8ed9e455",
+      "arm_statuses": {
+        "retained-original-assertion": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/ddk/inc/ntddkbd.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\ddk\\inc\\ntddkbd.h",
+      "sha256": "f3bf258135d2853ebb77d6bc81e12499528c5b7efe1f58ead6f5c1315c5bf5c1",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/ddk/inc/ntddser.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\ddk\\inc\\ntddser.h",
+      "sha256": "707287adc6162093ebe5dd9608b6f4e528b4b94cb0e2caa0df930ecffd4d3b46",
+      "arm_statuses": {
+        "retained-observed": 2
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\ddk\\inc\\ntddvdeo.h",
+      "sha256": "e81160b69920ee87d603fe593916994f8448a280b2a2adfefd34c190b1b3cb78",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/internal/base/inc/align.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\align.h",
+      "sha256": "b2922ca133bfd608bf86f33595c1dfb2b325cb31a0e83d4bfe18f0d91795e28f",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/internal/base/inc/debugfmt.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\debugfmt.h",
+      "sha256": "679c56f19ab86710f1866e90df828baf6f6ff96630f2ddddd26b35de9aff49e8",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/internal/base/inc/nettypes.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\nettypes.h",
+      "sha256": "19a93583be57f9972c150af4c482f7fa1a2bfaf9769abb31de02cd8678064bb6",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/internal/base/inc/packoff.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\packoff.h",
+      "sha256": "245b295120a0096cf8cd379d84b0352fe6fb6b090e61804485badd00e772696e",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/internal/base/inc/packon.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\packon.h",
+      "sha256": "b6d5e46dc0e41e95265f3de79ebe371f4f77aa3882c087f7a4a95ae2f03cb1a2",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/internal/base/inc/smbgtpt.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\smbgtpt.h",
+      "sha256": "d2ab723bc1f95cb53ae6970f950f5ce50d4b0d177ba31c8b7d7c8d83a5262d75",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/internal/base/inc/smbmacro.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\smbmacro.h",
+      "sha256": "e7a4ff096b5e2fdd0a81cd1c080e57253231664f87cb329c17a25c694282d8d1",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/internal/base/inc/smbtypes.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\smbtypes.h",
+      "sha256": "f04a563368f33bb6d8ba50a50e68d68f081aecce94ecc37b6d787cc6f38ea622",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/internal/base/inc/tstr.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\tstr.h",
+      "sha256": "dfc0a04bbeb35130d655e20521c972d43df3500efda32d7de6ddcea53be791c6",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/internal/ds/inc/apiparam.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\apiparam.h",
+      "sha256": "f5d8f906f3af10302f9e877091661dd3e2ba7d1f6760ce3c8dfb3bffc8e9e462",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/internal/ds/inc/crypt.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\crypt.h",
+      "sha256": "0a325a131b109964594681317389ac7b7e4dce8f05f6dc553c499203f296c3ed",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/internal/ds/inc/netlibnt.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\netlibnt.h",
+      "sha256": "8545a4ebfe8156e40405fd6a22d6c49b42aaf3b6df1b6254a52b63c330e11ba8",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/internal/ds/inc/prefix.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\prefix.h",
+      "sha256": "f37544194f395b67176d4e99067e605a4c79269fd6a34a2353b9244d42d32e71",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/internal/ds/inc/rap.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\rap.h",
+      "sha256": "f1b132b2ab6d5b848303f27696fbcf4a78d8d937919b46dda004efb0930b9086",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/internal/ds/inc/rapgtpt.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\rapgtpt.h",
+      "sha256": "b77a81c76ebf5a82bddbc4812a94f9fc4281f4e01612380d843f16b47878b8e4",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/internal/ds/inc/remdef.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\remdef.h",
+      "sha256": "bf4341d5c9fea49d79a5fd074c19e7ceebd2b9b17e8ad2085fff5d3f4969c7ed",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/internal/ds/inc/remtypes.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\remtypes.h",
+      "sha256": "53c776fa1300bc533fb616bb6dadb0fcb1ca9721b82b229e08fabbdb00e9c4e7",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/internal/ds/inc/rxp.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\rxp.h",
+      "sha256": "a9872ea30eaf56286b6306885a577198190724ff68c4bc6d387a426a23d2442e",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/internal/ds/inc/strucinf.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\strucinf.h",
+      "sha256": "5dffd99e3a625c86176c8b68e67ad89672a8e4f0727eaa3ca707e7aaf72c352d",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/internal/ds/inc/timelib.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\timelib.h",
+      "sha256": "6f44ad84f7119f62c58646f5c1f9405a8e2b6da7d6dc91503264aa4128bd3dcc",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/internal/ds/inc/xsprocs.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\xsprocs.h",
+      "sha256": "92f877f06d37706c1f1acabab1784e826be365f637c8fb40a82357b66d8b866f",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/internal/ds/inc/xstypes.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\xstypes.h",
+      "sha256": "b140254bef8ca8c871c6ca3a94a09c5f858ad9b5560cb687392af22e7c8d8539",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/internal/net/inc/tstring.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\net\\inc\\tstring.h",
+      "sha256": "0dd95258b49d3c4e283d5cf49ca8e309af05d24343a3f7680a94d9769611b517",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/internal/windows/inc/winconp.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\windows\\inc\\winconp.h",
+      "sha256": "26b1b3cff877ee2802aeff0eeab04f1daf7127e63279bcaa990c8b4f97384f2d",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/internal/windows/inc/winddi.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\windows\\inc\\winddi.h",
+      "sha256": "f3ba4a33dbbb58768c2fb8aacc205a017f05d11521ad1650e39a998be5344f4a",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\windows\\inc\\wowuserp.h",
+      "sha256": "10ce21b98498ec4170806af9909854429c99929083b4730d370e5a7cc4e479d8",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/sdk/inc/devioctl.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\devioctl.h",
+      "sha256": "87098d18c8afaf1265522380b682662125c59af17d775f9ab062e5b1e17db33b",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/sdk/inc/dlcapi.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\dlcapi.h",
+      "sha256": "c98cae26f503b5285e465b2fd40e0fe1a6344a44d5bb5bd00e876f20dd8c1dda",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/sdk/inc/nt_vdd.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\nt_vdd.h",
+      "sha256": "7e89fd4420381a54bc89e9807e54ccfe138a0767996ab7c74712e5e96aeb6609",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/sdk/inc/ntcsrdll.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntcsrdll.h",
+      "sha256": "ed1f1868eaca9e9d2a781bb57bd5e35538c0f5755f508438a6b804816655d7e8",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/sdk/inc/ntcsrsrv.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntcsrsrv.h",
+      "sha256": "9f22e4932d1b51c404c6bdaa6c4ca875ab8c19f1266c31c930985bdf75d1bbf2",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "current": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\vdmdbg.h",
+      "sha256": "a3048cbcaa26e32ae542a73aae59356e9fa2eb85af00932a027ff4e8e47f225c",
+      "arm_statuses": {
+        "retained-observed": 1
+      }
+    }
+  ],
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r169.zip",
+  "limitations": "Inherited current-arm evidence, not a new compilation; pending statuses remain pending. Other original files require separate reconciliation."
+}

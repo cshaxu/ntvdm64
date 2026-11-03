@@ -1,0 +1,145 @@
+{
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "before_sha256": "e6fb88b1fc6d4c9ec324bb6277773d801e98ed8685f0f505391c5967d101f35b",
+      "after_sha256": "ecbc01f4bcbeb0ab2aa7b667811398ef5cd5df662807b13cdea6cafc2b41e62e",
+      "groups": [
+        {
+          "current_old_start": 408,
+          "current_old_end": 413,
+          "original_line": 337,
+          "directive": "#ifdef FE_IME"
+        },
+        {
+          "current_old_start": 415,
+          "current_old_end": 419,
+          "original_line": 326,
+          "directive": "#ifdef FE_SB"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+      "before_sha256": "52b78f41ed85471b2a5bbfb4dae703bdaa9dc93c4e272479329c76ca89ae15eb",
+      "after_sha256": "fc2e849308e48607c5e4ec16643982ef97a68324c6ecfd6f916fe54070450574",
+      "groups": [
+        {
+          "current_old_start": 144,
+          "current_old_end": 149,
+          "original_line": 745,
+          "directive": "#ifdef DEBUG"
+        },
+        {
+          "current_old_start": 150,
+          "current_old_end": 154,
+          "original_line": 827,
+          "directive": "#ifdef DEBUG"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/random.c",
+      "before_sha256": "729c7bafa6bc5eb6e6a0296dfe7e494582a42199b6551961fb834856601bfedd",
+      "after_sha256": "7b8468c8e49cff647f7444cca6df3e3120ff9bab8537aaf1a94e48ea63df49af",
+      "groups": [
+        {
+          "current_old_start": 34,
+          "current_old_end": 38,
+          "original_line": 185,
+          "directive": "#ifdef DEBUG"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "before_sha256": "13db987629d3d65fc9412341e1e03a3a9ce31e1c5b5096ed6441b2e2d61edafb",
+      "after_sha256": "5e88f444cf126d17a77b1302f28fd703203809ae51489f1932423aaa719e255a",
+      "groups": [
+        {
+          "current_old_start": 39,
+          "current_old_end": 44,
+          "original_line": 519,
+          "directive": "#ifdef ENABLE_CLIENTSIDE_ACCESSCHECK"
+        },
+        {
+          "current_old_start": 45,
+          "current_old_end": 50,
+          "original_line": 752,
+          "directive": "#ifdef ENABLE_CLIENTSIDE_ACCESSCHECK"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "before_sha256": "0053b665908d6142a181b6fdcc894504b03cd4b811c7b729c2aa348b9362a5cb",
+      "after_sha256": "de77cb392cd6b5890909b75c4202a5998cfbf6b00eb5ac6aeef34dc7d8dc6064",
+      "groups": [
+        {
+          "current_old_start": 124,
+          "current_old_end": 128,
+          "original_line": 262,
+          "directive": "#if defined(DEBUG) && !defined(_USERK_) && !defined(WOW)"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "before_sha256": "674c9eae8d81a27d2389b86c4f2d7e977cdea572e40e1aff3a1933c13b449a98",
+      "after_sha256": "2e9fd573f600b4fadf83db27f99bb3ef64aa8776c01c1a0962a11eb243239910",
+      "groups": [
+        {
+          "current_old_start": 235,
+          "current_old_end": 239,
+          "original_line": 1070,
+          "directive": "#ifdef DBG"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "before_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+      "after_sha256": "9ca86902b86d24ab312087c709290d69704cb87cae41e0c6e94e3a84ed96609b",
+      "groups": [
+        {
+          "current_old_start": 335,
+          "current_old_end": 340,
+          "original_line": 293,
+          "directive": "#ifdef FE_SB"
+        },
+        {
+          "current_old_start": 341,
+          "current_old_end": 346,
+          "original_line": 340,
+          "directive": "#ifdef FE_SB"
+        },
+        {
+          "current_old_start": 347,
+          "current_old_end": 351,
+          "original_line": 362,
+          "directive": "#ifdef UNICODE"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "before_sha256": "ea8840b4b7a7aca6bebb6f8a2b57d9dc0ac463f080535db3979fe946e1a5817d",
+      "after_sha256": "91bd17fcab06d33c2bb617651d747633e7a435f3722127ee780f6dde97066d2d",
+      "groups": [
+        {
+          "current_old_start": 201,
+          "current_old_end": 206,
+          "original_line": 3494,
+          "directive": "#ifdef FE_IME"
+        },
+        {
+          "current_old_start": 207,
+          "current_old_end": 211,
+          "original_line": 642,
+          "directive": "#ifdef DEBUG"
+        }
+      ]
+    }
+  ],
+  "reason": "original directives lie inside omitted functions; file-scope placeholders withdrawn; original groups pending"
+}

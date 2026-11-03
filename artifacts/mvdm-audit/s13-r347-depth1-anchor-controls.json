@@ -1,0 +1,96 @@
+{
+  "result": "passed",
+  "controls": [
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "body_line": 529,
+      "continuation_line": 548,
+      "negative_diagnostic_sha256": "61c1cf40e70ba67027fc64c51e36033dee33ec58477197097a199045df3878bb"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "body_line": 248,
+      "continuation_line": 253,
+      "negative_diagnostic_sha256": "d783f75f3d3eb3ac6408f6f0ba52bea5f9ba1a06abd648c6c4d142f4b73c0cfd"
+    },
+    {
+      "path": "src/mvdm-host/inc/mvdm.h",
+      "body_line": 23,
+      "continuation_line": 36,
+      "negative_diagnostic_sha256": "affd3a04fe23e4bb45900f4eeec4e886df83245d26beb65e5175ed15e9a442c8"
+    },
+    {
+      "path": "src/mvdm-host/inc/softpc.h",
+      "body_line": 31,
+      "continuation_line": 33,
+      "negative_diagnostic_sha256": "b56b4becebd20bdffc8c1346696999a0801f27a8111c33c98d4656509d3a2b9e"
+    },
+    {
+      "path": "src/mvdm-host/inc/wow.h",
+      "body_line": 30,
+      "continuation_line": 40,
+      "negative_diagnostic_sha256": "a4ee9dab339087a63fedc2fa3e1310a077e01a81acc038633cec472a9c8cb5d8"
+    },
+    {
+      "path": "src/mvdm-host/inc/wowkbd.h",
+      "body_line": 58,
+      "continuation_line": 62,
+      "negative_diagnostic_sha256": "a23a1b5f02a2853e1316d0a3abaaacf80e3631b0d74ef89ff68ba84fb62d96fe"
+    },
+    {
+      "path": "src/mvdm-host/inc/wowmmed.h",
+      "body_line": 24,
+      "continuation_line": 27,
+      "negative_diagnostic_sha256": "cbd0cd5ee62c1d7dce3441482046b921ccd3bc058112ef39a8fcb042304ddf1f"
+    },
+    {
+      "path": "src/mvdm-host/oemuni/process.c",
+      "body_line": 370,
+      "continuation_line": 559,
+      "negative_diagnostic_sha256": "3be893b8a818f5f0758252e813271722593679d9f7c7ae1194ec6211b9e43352"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/cmos_bis.c",
+      "body_line": 56,
+      "continuation_line": 126,
+      "negative_diagnostic_sha256": "d0685629ba1b779d171c4634be800bb17677f92cb21e69ecfb153313d407386b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "body_line": 5,
+      "continuation_line": 10,
+      "negative_diagnostic_sha256": "88b4fcf9290dc1492c0071d919b3514ef750b3ca67b2da95cc20653b30888d6f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+      "body_line": 59,
+      "continuation_line": 61,
+      "negative_diagnostic_sha256": "f45c3d91fed4631892719a653e21d57f3f792b7e91af1b793db733e3512cb9de"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "body_line": 87,
+      "continuation_line": 89,
+      "negative_diagnostic_sha256": "d0941314063171f9d4c0c8fe3ccb56c21676ceb17a2eb2765ed373f4755baaf8"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "body_line": 101,
+      "continuation_line": 103,
+      "negative_diagnostic_sha256": "4f0be064dca6cf56e916a56c245dc813c3e610feeaa442e592c3d81ada207fdf"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+      "body_line": 14,
+      "continuation_line": 16,
+      "negative_diagnostic_sha256": "7420986360e9728c7a2edac87b8ec1e0896e421783ea55f6ddb9f51a2154b1b5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/bswap.c",
+      "body_line": 36,
+      "continuation_line": 65,
+      "negative_diagnostic_sha256": "12782a464c0e6bf404cca32e8b799ba7937879111b483f0d7ee7032f4b7ea46d"
+    }
+  ],
+  "scope": "extracted actual source, false/true forced guard; not all include contexts"
+}

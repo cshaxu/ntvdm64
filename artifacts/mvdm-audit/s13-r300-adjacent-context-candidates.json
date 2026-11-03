@@ -1,0 +1,927 @@
+{
+  "scope": "147 previously unmapped groups; signature plus adjacent-source text discovery",
+  "matched_candidates": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "current_line": 791,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+      "original_line": 689,
+      "matching_before": 3,
+      "matching_after": 0,
+      "score": 3,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "current_line": 880,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+      "original_line": 798,
+      "matching_before": 5,
+      "matching_after": 0,
+      "score": 5,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "current_line": 278,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\modesw.c",
+      "original_line": 97,
+      "matching_before": 5,
+      "matching_after": 1,
+      "score": 6,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_line": 688,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "original_line": 890,
+      "matching_before": 1,
+      "matching_after": 4,
+      "score": 5,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "current_line": 208,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\tape_io.c",
+      "original_line": 209,
+      "matching_before": 4,
+      "matching_after": 5,
+      "score": 9,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_line": 1155,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_line": 1097,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_line": 1276,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_line": 1222,
+      "matching_before": 5,
+      "matching_after": 3,
+      "score": 8,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_line": 1288,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_line": 1236,
+      "matching_before": 5,
+      "matching_after": 3,
+      "score": 8,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_line": 1451,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_line": 1403,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_line": 1524,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_line": 1475,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_line": 1576,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_line": 1526,
+      "matching_before": 5,
+      "matching_after": 3,
+      "score": 8,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_line": 1588,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_line": 1544,
+      "matching_before": 5,
+      "matching_after": 3,
+      "score": 8,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_line": 1599,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_line": 1573,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_line": 1747,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_line": 1724,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_line": 1766,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_line": 1763,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_line": 4558,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_line": 4738,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_line": 4710,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_line": 4870,
+      "matching_before": 5,
+      "matching_after": 2,
+      "score": 7,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+      "current_line": 124,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_seg.c",
+      "original_line": 116,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+      "current_line": 334,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_seg.c",
+      "original_line": 305,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "current_line": 688,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_tlb.c",
+      "original_line": 722,
+      "matching_before": 5,
+      "matching_after": 1,
+      "score": 6,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "current_line": 731,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_tlb.c",
+      "original_line": 762,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "current_line": 140,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\call.c",
+      "original_line": 88,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "current_line": 304,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\call.c",
+      "original_line": 257,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "current_line": 366,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\call.c",
+      "original_line": 320,
+      "matching_before": 5,
+      "matching_after": 4,
+      "score": 9,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_line": 600,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_line": 637,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_line": 1583,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_line": 2002,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "current_line": 334,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\bios.h",
+      "original_line": 356,
+      "matching_before": 1,
+      "matching_after": 4,
+      "score": 5,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "current_line": 64,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\sas.h",
+      "original_line": 74,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "current_line": 1950,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keyba.c",
+      "original_line": 2184,
+      "matching_before": 3,
+      "matching_after": 5,
+      "score": 8,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "current_line": 2532,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keyba.c",
+      "original_line": 2848,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "current_line": 180,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\time_day.c",
+      "original_line": 228,
+      "matching_before": 3,
+      "matching_after": 5,
+      "score": 8,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "current_line": 192,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\ica.c",
+      "original_line": 201,
+      "matching_before": 5,
+      "matching_after": 1,
+      "score": 6,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "current_line": 1130,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\ica.c",
+      "original_line": 1285,
+      "matching_before": 5,
+      "matching_after": 1,
+      "score": 6,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "current_line": 1303,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\ica.c",
+      "original_line": 1530,
+      "matching_before": 4,
+      "matching_after": 2,
+      "score": 6,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "current_line": 1332,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\ica.c",
+      "original_line": 1813,
+      "matching_before": 5,
+      "matching_after": 1,
+      "score": 6,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_line": 921,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_line": 1025,
+      "matching_before": 5,
+      "matching_after": 2,
+      "score": 7,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_line": 1600,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_line": 1737,
+      "matching_before": 5,
+      "matching_after": 3,
+      "score": 8,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_line": 1835,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_line": 2151,
+      "matching_before": 1,
+      "matching_after": 3,
+      "score": 4,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_line": 1842,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_line": 2178,
+      "matching_before": 3,
+      "matching_after": 3,
+      "score": 6,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_line": 1878,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_line": 2245,
+      "matching_before": 5,
+      "matching_after": 1,
+      "score": 6,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_line": 1986,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_line": 2455,
+      "matching_before": 1,
+      "matching_after": 5,
+      "score": 6,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "current_line": 324,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+      "original_line": 314,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "current_line": 2039,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+      "original_line": 2042,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "current_line": 95,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\copy_fnc.c",
+      "original_line": 115,
+      "matching_before": 0,
+      "matching_after": 5,
+      "score": 5,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "current_line": 229,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_rflop.c",
+      "original_line": 247,
+      "matching_before": 0,
+      "matching_after": 5,
+      "score": 5,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "current_line": 342,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_rflop.c",
+      "original_line": 393,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "current_line": 384,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_rflop.c",
+      "original_line": 468,
+      "matching_before": 3,
+      "matching_after": 5,
+      "score": 8,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "current_line": 560,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wcall16.c",
+      "original_line": 656,
+      "matching_before": 3,
+      "matching_after": 2,
+      "score": 5,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "current_line": 608,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wcall16.c",
+      "original_line": 689,
+      "matching_before": 4,
+      "matching_after": 5,
+      "score": 9,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "current_line": 652,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wcall16.c",
+      "original_line": 763,
+      "matching_before": 4,
+      "matching_after": 4,
+      "score": 8,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "current_line": 664,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wcall16.c",
+      "original_line": 773,
+      "matching_before": 5,
+      "matching_after": 1,
+      "score": 6,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "current_line": 364,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkernel.c",
+      "original_line": 345,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "current_line": 556,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkernel.c",
+      "original_line": 556,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "current_line": 568,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkernel.c",
+      "original_line": 591,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "current_line": 178,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkman.c",
+      "original_line": 158,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "current_line": 525,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkman.c",
+      "original_line": 540,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "current_line": 844,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkman.c",
+      "original_line": 862,
+      "matching_before": 5,
+      "matching_after": 4,
+      "score": 9,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "current_line": 858,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkman.c",
+      "original_line": 874,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "current_line": 1114,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkman.c",
+      "original_line": 1123,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "current_line": 1345,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkman.c",
+      "original_line": 1366,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "current_line": 1386,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkman.c",
+      "original_line": 1409,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "current_line": 1400,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkman.c",
+      "original_line": 1422,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "current_line": 1559,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkman.c",
+      "original_line": 1577,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "current_line": 2426,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkman.c",
+      "original_line": 2451,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "current_line": 4392,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkman.c",
+      "original_line": 4410,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "current_line": 150,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmdisp32.c",
+      "original_line": 136,
+      "matching_before": 4,
+      "matching_after": 5,
+      "score": 9,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "current_line": 234,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmdisp32.c",
+      "original_line": 215,
+      "matching_before": 5,
+      "matching_after": 2,
+      "score": 7,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "current_line": 241,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmdisp32.c",
+      "original_line": 223,
+      "matching_before": 2,
+      "matching_after": 3,
+      "score": 5,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "current_line": 249,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmdisp32.c",
+      "original_line": 232,
+      "matching_before": 3,
+      "matching_after": 4,
+      "score": 7,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "current_line": 608,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.c",
+      "original_line": 611,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "current_line": 666,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.c",
+      "original_line": 726,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "current_line": 734,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.c",
+      "original_line": 818,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "current_line": 1462,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.c",
+      "original_line": 1773,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "current_line": 1511,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.c",
+      "original_line": 1821,
+      "matching_before": 5,
+      "matching_after": 4,
+      "score": 9,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "current_line": 1603,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.c",
+      "original_line": 1918,
+      "matching_before": 2,
+      "matching_after": 5,
+      "score": 7,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowhooks.c",
+      "current_line": 628,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wowhooks.c",
+      "original_line": 617,
+      "matching_before": 0,
+      "matching_after": 5,
+      "score": 5,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowhooks.c",
+      "current_line": 1222,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wowhooks.c",
+      "original_line": 1159,
+      "matching_before": 4,
+      "matching_after": 5,
+      "score": 9,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "current_line": 231,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wparam.c",
+      "original_line": 208,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "current_line": 244,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wparam.c",
+      "original_line": 220,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "current_line": 459,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wparam.c",
+      "original_line": 462,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "current_line": 550,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wparam.c",
+      "original_line": 557,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wudlg.c",
+      "current_line": 99,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wudlg.c",
+      "original_line": 92,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.c",
+      "current_line": 880,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wumsg.c",
+      "original_line": 847,
+      "matching_before": 5,
+      "matching_after": 0,
+      "score": 5,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.c",
+      "current_line": 1181,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wumsg.c",
+      "original_line": 1143,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser31.c",
+      "current_line": 467,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuser31.c",
+      "original_line": 457,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "current_line": 2645,
+      "original": "O:\\repos.external\\OpenNT\\base\\win32\\server\\srvvdm.c",
+      "original_line": 2621,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "current_line": 146,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+      "original_line": 154,
+      "matching_before": 3,
+      "matching_after": 5,
+      "score": 8,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "current_line": 31,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\getset.c",
+      "original_line": 268,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "current_line": 1584,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.c",
+      "original_line": 1910,
+      "matching_before": 5,
+      "matching_after": 2,
+      "score": 7,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+      "current_line": 398,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmenu.c",
+      "original_line": 434,
+      "matching_before": 5,
+      "matching_after": 1,
+      "score": 6,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_line": 272,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_line": 785,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_line": 245,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 802,
+      "matching_before": 5,
+      "matching_after": 5,
+      "score": 10,
+      "limits": "unique best nearby nonempty text score only; not proof of reachability or scope"
+    }
+  ],
+  "still_unmatched": 55,
+  "limits": "manual verification required; nested directives parsed only for enclosing endif"
+}

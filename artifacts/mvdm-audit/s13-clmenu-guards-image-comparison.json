@@ -1,0 +1,15 @@
+{
+  "baseline_sha256": "3b28866bbb77133fab948e934cc9c75317afa54793bd79727c1169498d58820e",
+  "candidate_sha256": "15653b83cac387826361af8189058b21ed5c37d9163552c3ff19f2b0b8f2d85e",
+  "equal_lengths": true,
+  "difference_count": 6,
+  "first_positions": [
+    280,
+    281,
+    282,
+    625412,
+    625413,
+    625414
+  ],
+  "only_verified_timestamp_positions": true
+}

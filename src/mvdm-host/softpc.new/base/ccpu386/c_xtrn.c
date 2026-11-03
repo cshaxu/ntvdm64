@@ -19,9 +19,12 @@ Interface routines used by BIOS code.
 #include <setjmp.h>
 #include <xt.h>
 
+#line 22
 #if 0
+#line 23
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#line 25
 
 #include <c_main.h>
 #include <c_addr.h>

@@ -1,0 +1,24 @@
+{
+  "result": "passed",
+  "controls": [
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "body_line": 531,
+      "continuation_line": 534,
+      "negative_diagnostic_sha256": "48156b19ecc43d558d924d3690169927a993bde287fc013fed32bc5d9e30125a"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wstruc.c",
+      "body_line": 303,
+      "continuation_line": 360,
+      "negative_diagnostic_sha256": "3c16688be4d55864e6e61ad95fd3fc52dd60bee235edd3692b6d1c740d2871b5"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "body_line": 2033,
+      "continuation_line": 2042,
+      "negative_diagnostic_sha256": "818c9d46d9461835b6944a17b8ffd753d1f25c7d468f6fa2b66ce9b53b8cca80"
+    }
+  ],
+  "scope": "extracted actual source, false/true forced guard; not all include contexts"
+}

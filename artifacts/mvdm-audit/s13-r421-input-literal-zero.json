@@ -1,0 +1,20 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+  "before_sha256": "73d731c936bd3085d0c7f9a541440e8db3d54c52f8a5ea3369e7b0bb1e1529c6",
+  "after_sha256": "6cc5f0c6051fee815c09963a3fdc3f64d284366af784e28f09623a5bc4f4d475",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+  "original_sha256": "b7656bca55e892a42ba825be0324211450ad298c40717e1ae5a889d084467529",
+  "original_condition_line": 1409,
+  "original_endif_line": 1430,
+  "original_continuation_line": 1431,
+  "original_owner": "PostInputMessage, omitted from current subset",
+  "placement": "file-scope between retained original-line 247 and 3310 conditional sections; this restores preprocessing structure only, not the omitted function or its C lexical scope",
+  "reason": "literal #if 0 is false in every context; no selected C tokens are added or removed",
+  "verification": {
+    "build": "x86 NTVDM, x64 reference worker, x86 WOW32 passed: build/t473-s13/r421-build.log",
+    "conditions": "x86 build/t473-s13/r423-tests.log and x64 build/t473-s13/r424-x64.log passed, including first-depth literal zero and forced error line 1410",
+    "package": "s13-r421-package-compare.json: 82 files identical to r415; WOW32 differs only in 4 PE/debug timestamp bytes",
+    "queue": "1,110 hashes match; 2,337 excluded arms scanned without detected remnants or stale positions",
+    "limitations": "Preprocessor boundary restored at file scope; original enclosing PostInputMessage function remains omitted. No depth closure or publication claimed."
+  }
+}

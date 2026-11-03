@@ -1,0 +1,5 @@
+{
+  "scope": "original sources with form feed/vertical tab and immediately preceding #line",
+  "guards_examined": 2,
+  "candidate_discrepancies": []
+}

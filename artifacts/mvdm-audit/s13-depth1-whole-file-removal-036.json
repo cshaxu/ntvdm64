@@ -1,0 +1,276 @@
+{
+  "scope": "Unselected host VDD sample source/build declarations and exclusive original VDD service header",
+  "files": [
+    {
+      "path": "src/mvdm-host/vdd/samples/adlibvdd/adlibvdd.def",
+      "sha256": "6924d75f6ebc2ef2134bee5766c1310dedfa403561e96f65229d804abb451041"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/adlibvdd/makefile",
+      "sha256": "7289517c7028ff031a48cc84f6308a437c3abe6e046c93f3132255221842d433"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/adlibvdd/sources",
+      "sha256": "fb7ac5f72991846a4e2061dbe9dbc1d4799cbf3bd2c8efe119b6ebfaad81f40a"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/adlibvdd/vdd.c",
+      "sha256": "1b27306b591b2ea4265e0a4251a8ac2f72c9dbbb8363ed4fc861995362098c32"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/adlibvdd/vdd.h",
+      "sha256": "c2aabbee656f6c95355cc4eb38f056d52f0ffd6b09e3a482f5138d6b1695dc03"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/vsbd/makefile",
+      "sha256": "7289517c7028ff031a48cc84f6308a437c3abe6e046c93f3132255221842d433"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/vsbd/sources",
+      "sha256": "a6eb5de2c66f0464c2a828ecd32f9861116ecd61e8b781a86c413c557ffb9e62"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/vsbd/vdd.c",
+      "sha256": "d4f9b43c5bf1e1b212cace1529730b8b1672dff8e63a2379be4654648a044cba"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/vsbd/vsbd.def",
+      "sha256": "cc3fecf6b05446c133945590709765decfaa11a2acb889eb8407119198a26f98"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/sample1/fax32/fax32.c",
+      "sha256": "47a32dcbbd63b7b4e3b0c8b857cd68319ef4ff7f4bdfe939229eb656bd357693"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/sample1/fax32/fax32.def",
+      "sha256": "8260176505e65e70eb95259d098b9379f82e9dfda2326b15dbdfbacf685377b8"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/sample1/fax32/fax32.h",
+      "sha256": "357e1c2d7220ec180e981610ba0f6a6ef00341b926a4f073f06b10555203b4ac"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/sample1/fax32/makefile",
+      "sha256": "aae22270fd211c6b34fc7d103aee53ed4ed6833a516c46a13420d0dd1ce7240d"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/sample1/fax32/sources",
+      "sha256": "0335082bd051262301738e664bc6e3eab51a5f3d2017837eae9328bef15723ff"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/sample2/vdd/makefile",
+      "sha256": "aae22270fd211c6b34fc7d103aee53ed4ed6833a516c46a13420d0dd1ce7240d"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/sample2/vdd/sources",
+      "sha256": "5d2845cbdd9a9d81cd105fa60728230e27254c69f140d1da6ffb11aafddff2cf"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/sample2/vdd/vdd.c",
+      "sha256": "b107524ddfc0f7ec7f5923982b41689b7ba824a2216d03940c30278232ec05e0"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/sample2/vdd/vdd.def",
+      "sha256": "5945a32c949cc3396772f4cffc85e9bbeb22cb4663cb1e6484a35859a46f3aff"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/sample2/vdd/vdd.h",
+      "sha256": "60ba93203e45c338068dc16d58cd6c1a6bc2859c8d75db174213cebe263ec348"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/mscdex/vdd/makefile",
+      "sha256": "aae22270fd211c6b34fc7d103aee53ed4ed6833a516c46a13420d0dd1ce7240d"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/mscdex/vdd/mscdex.h",
+      "sha256": "939ca30b09c5e6a378486058cb49d665fb758c9f207588583372ec1c7699ec40"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/mscdex/vdd/sources",
+      "sha256": "cf6127a1938424d49d4bc0f857c7140faf2d039188f6a9a36610c88cad3a3aca"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.c",
+      "sha256": "9c317fb2af9b9396dce1d6ef812d118eeab842e356395bfd0753a4b5b07d668c"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.def",
+      "sha256": "7ce128d481e5c9ede8c6b4a6f9e7d882f2275bd19b9ea69883b3d80f8f179429"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.h",
+      "sha256": "bd80cb9c105fc9cd308e839bd9c549312dad5886f25f462656ce6c44cb88223e"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/vddsvc.h",
+      "sha256": "5fa32f985179d9c554500bb242244bf484f75560fdf966cb464ee2e767c039b9"
+    }
+  ],
+  "mirror_sources": [
+    {
+      "path": "src/mvdm-host/vdd/samples/adlibvdd/vdd.c",
+      "current_sha256": "1b27306b591b2ea4265e0a4251a8ac2f72c9dbbb8363ed4fc861995362098c32",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\adlibvdd\\vdd.c",
+      "original_sha256": "13520d81890f84d34c49aea49466e17bb652ef3a841a2a7254e4c1b332f1e70c",
+      "pinned_expected_sha256": "13520d81890f84d34c49aea49466e17bb652ef3a841a2a7254e4c1b332f1e70c",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/adlibvdd/vdd.h",
+      "current_sha256": "c2aabbee656f6c95355cc4eb38f056d52f0ffd6b09e3a482f5138d6b1695dc03",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\adlibvdd\\vdd.h",
+      "original_sha256": "e55d125672ec0bdc8787f6d781c47aa16f91e12d9792833401aeb29a78118fce",
+      "pinned_expected_sha256": "e55d125672ec0bdc8787f6d781c47aa16f91e12d9792833401aeb29a78118fce",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/mscdex/vdd/mscdex.h",
+      "current_sha256": "939ca30b09c5e6a378486058cb49d665fb758c9f207588583372ec1c7699ec40",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\mscdex\\vdd\\mscdex.h",
+      "original_sha256": "eccaf60cc04aa7524c060b88f8863bf77093445e0760212f7db6786e401dd430",
+      "pinned_expected_sha256": "eccaf60cc04aa7524c060b88f8863bf77093445e0760212f7db6786e401dd430",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.c",
+      "current_sha256": "9c317fb2af9b9396dce1d6ef812d118eeab842e356395bfd0753a4b5b07d668c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\mscdex\\vdd\\vcdex.c",
+      "original_sha256": "1e04779ee75de6b1cb294e4b036e68745f84815d73c6037ee577258e97c629ca",
+      "pinned_expected_sha256": "1e04779ee75de6b1cb294e4b036e68745f84815d73c6037ee577258e97c629ca",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.h",
+      "current_sha256": "bd80cb9c105fc9cd308e839bd9c549312dad5886f25f462656ce6c44cb88223e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\mscdex\\vdd\\vcdex.h",
+      "original_sha256": "ef58ff9747b8b14a904a3b2894fb496fea500771aaec462dd8cefed63bc00b5a",
+      "pinned_expected_sha256": "ef58ff9747b8b14a904a3b2894fb496fea500771aaec462dd8cefed63bc00b5a",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/sample1/fax32/fax32.c",
+      "current_sha256": "47a32dcbbd63b7b4e3b0c8b857cd68319ef4ff7f4bdfe939229eb656bd357693",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\sample1\\fax32\\fax32.c",
+      "original_sha256": "9f9aac26cd8254debbfcc6a157aa0ba97b04668041bf0503720ef26fdc6241db",
+      "pinned_expected_sha256": "9f9aac26cd8254debbfcc6a157aa0ba97b04668041bf0503720ef26fdc6241db",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/sample1/fax32/fax32.h",
+      "current_sha256": "357e1c2d7220ec180e981610ba0f6a6ef00341b926a4f073f06b10555203b4ac",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\sample1\\fax32\\fax32.h",
+      "original_sha256": "efdab3d2e2bd986c90192c1e539a739bcff54c39ec8be700101b251f911f177b",
+      "pinned_expected_sha256": "efdab3d2e2bd986c90192c1e539a739bcff54c39ec8be700101b251f911f177b",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/sample2/vdd/vdd.c",
+      "current_sha256": "b107524ddfc0f7ec7f5923982b41689b7ba824a2216d03940c30278232ec05e0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\sample2\\vdd\\vdd.c",
+      "original_sha256": "f8ee71884385fc8a7703da165461735f96ba01d4d0a5c7c33670929c5a821e4c",
+      "pinned_expected_sha256": "f8ee71884385fc8a7703da165461735f96ba01d4d0a5c7c33670929c5a821e4c",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/sample2/vdd/vdd.h",
+      "current_sha256": "60ba93203e45c338068dc16d58cd6c1a6bc2859c8d75db174213cebe263ec348",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\sample2\\vdd\\vdd.h",
+      "original_sha256": "f8d6ef9ab8372f6cdee0b9401f22ccf1a0807c5c1d69f78948dd6415420121ac",
+      "pinned_expected_sha256": "f8d6ef9ab8372f6cdee0b9401f22ccf1a0807c5c1d69f78948dd6415420121ac",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/vsbd/vdd.c",
+      "current_sha256": "d4f9b43c5bf1e1b212cace1529730b8b1672dff8e63a2379be4654648a044cba",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\vsbd\\vdd.c",
+      "original_sha256": "fcf0e4817f2f69d7264754ef8a2ba498380e0b6b1199c93cf0f16ba036580a20",
+      "pinned_expected_sha256": "fcf0e4817f2f69d7264754ef8a2ba498380e0b6b1199c93cf0f16ba036580a20",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/vddsvc.h",
+      "current_sha256": "5fa32f985179d9c554500bb242244bf484f75560fdf966cb464ee2e767c039b9",
+      "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\vddsvc.h",
+      "original_sha256": "70769da0455aa0b610ab046a4000bc108176dabeb8178ff8b649c41f7cd0897d",
+      "pinned_expected_sha256": "70769da0455aa0b610ab046a4000bc108176dabeb8178ff8b649c41f7cd0897d",
+      "original_matches_pinned": true
+    }
+  ],
+  "removed_guard_ledger_entries": [
+    {
+      "path": "src/mvdm-host/vdd/samples/adlibvdd/vdd.c",
+      "macro": "0",
+      "line": 376,
+      "body_end": 412,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\adlibvdd\\vdd.c",
+      "original_sha256": "13520d81890f84d34c49aea49466e17bb652ef3a841a2a7254e4c1b332f1e70c",
+      "local_sha256": "70bc16eaf1cb3d8192b8a32cdd9317326748502dc9a63ce13c04fc831c7d4acd",
+      "removed_body_sha256": "eb81459d24acfede2fb128be3d6c69ebd6a46ffd31775e00afe7b37084fde1d6",
+      "removed_body_lines": 36,
+      "after_sha256": "40ea21c78202fac598fe7c3be9b1d76940ccf3df96abe94e3253c15241992a14",
+      "final_sha256": "1b27306b591b2ea4265e0a4251a8ac2f72c9dbbb8363ed4fc861995362098c32"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/adlibvdd/vdd.c",
+      "macro": "0",
+      "line": 329,
+      "body_end": 330,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\adlibvdd\\vdd.c",
+      "original_sha256": "13520d81890f84d34c49aea49466e17bb652ef3a841a2a7254e4c1b332f1e70c",
+      "local_sha256": "70bc16eaf1cb3d8192b8a32cdd9317326748502dc9a63ce13c04fc831c7d4acd",
+      "removed_body_sha256": "d4fa3aa786e090c908d6f25eb8c6587c67d7c2a00897cce2fc922701811f9834",
+      "removed_body_lines": 1,
+      "after_sha256": "40ea21c78202fac598fe7c3be9b1d76940ccf3df96abe94e3253c15241992a14",
+      "final_sha256": "1b27306b591b2ea4265e0a4251a8ac2f72c9dbbb8363ed4fc861995362098c32"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/adlibvdd/vdd.c",
+      "macro": "0",
+      "line": 318,
+      "body_end": 319,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\adlibvdd\\vdd.c",
+      "original_sha256": "13520d81890f84d34c49aea49466e17bb652ef3a841a2a7254e4c1b332f1e70c",
+      "local_sha256": "70bc16eaf1cb3d8192b8a32cdd9317326748502dc9a63ce13c04fc831c7d4acd",
+      "removed_body_sha256": "fe0ec93a63dc8356dc4a5815e1f0684b18c94fb0f83d35cada4071a47cebc08f",
+      "removed_body_lines": 1,
+      "after_sha256": "40ea21c78202fac598fe7c3be9b1d76940ccf3df96abe94e3253c15241992a14",
+      "final_sha256": "1b27306b591b2ea4265e0a4251a8ac2f72c9dbbb8363ed4fc861995362098c32"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/adlibvdd/vdd.c",
+      "macro": "0",
+      "line": 252,
+      "body_end": 255,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\adlibvdd\\vdd.c",
+      "original_sha256": "13520d81890f84d34c49aea49466e17bb652ef3a841a2a7254e4c1b332f1e70c",
+      "local_sha256": "70bc16eaf1cb3d8192b8a32cdd9317326748502dc9a63ce13c04fc831c7d4acd",
+      "removed_body_sha256": "69af3bd59092f5e5dc3c9749045eefb1dfc103f8e49643b5c3d8bf974f9dca63",
+      "removed_body_lines": 3,
+      "after_sha256": "40ea21c78202fac598fe7c3be9b1d76940ccf3df96abe94e3253c15241992a14",
+      "final_sha256": "1b27306b591b2ea4265e0a4251a8ac2f72c9dbbb8363ed4fc861995362098c32"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/vsbd/vdd.c",
+      "macro": "0",
+      "line": 778,
+      "body_end": 783,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdd\\samples\\vsbd\\vdd.c",
+      "original_sha256": "fcf0e4817f2f69d7264754ef8a2ba498380e0b6b1199c93cf0f16ba036580a20",
+      "local_sha256": "6260f63c2b07b767ac343a3b100b20831635390399dfb67e47faeb5039ed3967",
+      "removed_body_sha256": "e2b9b12ad70e06eb0cda0e67c32693ad74d112b000f4e0d7739a325769c2a978",
+      "removed_body_lines": 5,
+      "after_sha256": "8d3922dd72dc9968e6bd570b66ab6239a92f7bef82e7f1380248a5b02f0c1122",
+      "final_sha256": "d4f9b43c5bf1e1b212cace1529730b8b1672dff8e63a2379be4654648a044cba"
+    }
+  ],
+  "removed_condition_groups": 30,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r143.zip",
+  "evidence": [
+    "Current product/test graph does not compile these host VDD sample sources.",
+    "All current literal includes of original vddsvc.h were in the removed host sample sources.",
+    "Existing VCDEx DLL, resource files and guest sample files were not removed."
+  ],
+  "limitations": [
+    "No claim that historical VDD sample binaries are supported or functional."
+  ]
+}

@@ -49,7 +49,9 @@ LONG SLCreate(
     if (windowStyle & ES_COMBOBOX)
         ped->listboxHwnd = GetDlgItem(lpCreateStruct->hwndParent, CBLISTBOXID);
 
+#line 52
 #ifdef SUPPORT_LPK
+#line 53
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
 #line 56

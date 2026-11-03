@@ -1,0 +1,20 @@
+{
+  "package": "build\\t473-s13\\r477-phase1-package",
+  "rows": [
+    {
+      "test": "mine",
+      "result": "PASS flag/counter, reset, open cell, WM_CLOSE and run16 completion",
+      "inputs_sha256": "6028fcc2bae9ebe53661ee7dfc2270e6ff1a93042af1888cdfe48d2ac09ab3dd",
+      "result_sha256": "c3287d42c4deffb9ac68a6bee28ccf6258f354eeac3ba9bf7a82fd1b643a09f8",
+      "input_count": 4
+    },
+    {
+      "test": "sol",
+      "result": "PASS SOL deal, stock draw, WM_CLOSE and run16 completion",
+      "inputs_sha256": "5a1784bbcce98b1b2d51d8475298af02cdd5933d87c860f33fab8fa06552d70e",
+      "result_sha256": "0219d9830f51b532d1572c05aae835a4bfbeddbd4250707a118ef901fba921b1",
+      "input_count": 11
+    }
+  ],
+  "limits": "Focused gameplay only, not exhaustive functionality."
+}

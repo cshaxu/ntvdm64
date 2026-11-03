@@ -178,7 +178,9 @@ Revision History:
 
 --*/
 
+#line 181
 #if DBG
+#line 182
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif // DBG
-#line 184
+#line 2373

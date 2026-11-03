@@ -1,0 +1,23 @@
+{
+  "scope": "Two unselected headers left unreferenced following prior removal batches; no current source, build, test or active manifest literal references",
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/lsaicli.h",
+      "sha256": "50d7c7d850fd315b0d77bf2b3a3dcfc1cf5dbced036d72e4d823008aaf02a0f9",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\lsaicli.h",
+      "original_sha256": "25cbf9c48bd8587f0585ddfdc0ee36061a8a25c9de4db44cb8f473867193028b"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/lsass.h",
+      "sha256": "42624be75b6a6ebc1004ba61a9a8a8a928fa5dc5d6656adab0a0b3d7405875a4",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\lsass.h",
+      "original_sha256": "2bb766c27ee8129833a55de4aca5a9e52392570ca5c149fd48a73cc9943a13b6"
+    }
+  ],
+  "prior_queue": "s13-bfs-depth1-working-queue-195r108.zip",
+  "removed_condition_groups": 4,
+  "limitations": [
+    "Recorded product graph data predates current edits; current references rescanned.",
+    "No claim about unsupported future configurations."
+  ]
+}

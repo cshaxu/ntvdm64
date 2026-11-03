@@ -19,9 +19,12 @@
  * ============================================================================
  */
 
+#line 22
 #ifdef PC_CONFIG
+#line 23
 #error DIVERGENCE MVDM-HOST-DIV-531: PC_CONFIG branch is not selected; see mirror register.
 #endif
+#line 25
 
 IMPORT	VOID	host_flip_real_floppy_ind IPT2(int, drive, BOOL, active);
 
@@ -56,7 +59,10 @@ IMPORT VOID memset4 IPT3( unsigned int, data, unsigned int *, laddr,
 IMPORT VOID fill_alternate_bytes IPT3( IS8 *, start, IS8 *, end, IS8, value);
 IMPORT VOID fill_both_bytes IPT3( IU16, data, IU16 *, dest, ULONG, len );
 
+#line 55
 #ifdef	SETUID_ROOT
+#line 56
 #error DIVERGENCE MVDM-HOST-DIV-529: SETUID_ROOT platform branch is not selected; see mirror register.
 #endif	/* SETUID_ROOT */
+#line 63
 

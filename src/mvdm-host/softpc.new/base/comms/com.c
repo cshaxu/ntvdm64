@@ -30,9 +30,12 @@
  */
 #include <stdio.h>
 #include <ctype.h>
+#line 33
 #if defined(NTVDM) && defined(MONITOR)
+#line 34
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
+#line 36
 #include TypesH
 #include StringH
 
@@ -55,9 +58,12 @@
 #include "quick_ev.h"
 #include "idetect.h"
 #include "ckmalloc.h"
+#line 58
 #ifdef GISP_CPU
+#line 59
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register.
 #endif /* GISP_CPU */
+#line 61
 
 LOCAL UTINY selectBits[4] = { 0x1f, 0x3f, 0x7f, 0xff } ;
 /*
@@ -236,7 +242,7 @@ unsigned long TX_delay[] =
 #if !defined(PROD) || defined(SHORT_TRACE)
 #error Unsupported excluded original configuration
 #endif /* !PROD || SHORT_TRACE */
-#line 239
+#line 248
 
 #ifdef PS_FLUSHING
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
@@ -439,7 +445,7 @@ static void raise_interrupt IFN1(struct ADAPTER_STATE *, asp)
 #else
 #error Unsupported excluded original configuration
 #endif
-#line 442
+#line 452
 	}
 }
 
@@ -600,7 +606,7 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 #ifndef NTVDM
 #error Excluded unsupported non-NTVDM serial profile
 #endif /* !NTVDM */
-#line 631
+#line 669
 				}
 
 
@@ -822,7 +828,7 @@ void com_outb IFN2(io_addr, port, half_word, value)
 #else
 #error Unsupported excluded original configuration
 #endif /* DELAYED_INTS || NTVDM */
-#line 857
+#line 1056
 #ifdef PS_FLUSHING
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
@@ -1259,9 +1265,12 @@ recv_char IFN1(long, adapt_long)
 	
 	set_recv_char_status(asp);
 	
+#line 1637
 #ifdef DOCUMENTATION
+#line 1638
 #error DIVERGENCE MVDM-HOST-DIV-529: DOCUMENTATION platform branch is not selected; see mirror register.
 #endif
+#line 1659
 }
 #ifdef NTVDM
 static void lsr_change(struct ADAPTER_STATE *asp, unsigned int new_lsr)
@@ -1524,10 +1533,12 @@ static word valid_latches[] =
 	1047, 	1536, 	2304 
 };
 
+#line 1926
 #if !defined(PROD) || defined(IRET_HOOKS)
+#line 1927
 #error Unsupported excluded original configuration
 #endif /* !PROD or IRET_HOOKS*/
-#line 1582
+#line 1950
 
 static word speeds[] =
 { 
@@ -1592,7 +1603,7 @@ static void set_baud_rate IFN1(int, adapter)
         */
         host_com_ioctl(adapter,HOST_COM_BAUD,115200/asp->divisor_latch.all);
 #endif /* NTVDM */
-#line 1663
+#line 2039
 }
 
 static void set_line_control IFN2(int, adapter, int, value)
@@ -2113,14 +2124,15 @@ static void com_reset IFN1(int, adapter)
 #endif /* IRET_HOOKS */
 }
 
+#line 2590
 #ifndef COM3_ADAPTOR
 #error Unsupported excluded original configuration
 #endif
-#line 2186
+#line 2593
 #ifndef COM4_ADAPTOR
 #error Unsupported excluded original configuration
 #endif
-#line 2189
+#line 2596
 
 static int com_adaptor[4] = {COM1_ADAPTOR,COM2_ADAPTOR,
                              COM3_ADAPTOR,COM4_ADAPTOR};

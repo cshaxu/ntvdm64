@@ -15,6 +15,14 @@
  * The including host binding supplies the existing handle-table view;
  * unrelated DDEML allocation, callbacks and manager state are not selected. */
 
+#line 38
+#ifdef TESTING
+#error Excluded unsupported original TESTING handle-table verification
+#else
+#line 60
+#define CheckHandleTable()
+#endif
+#line 293
 DWORD GetFullUserHandle(WORD wHandle)
 {
     DWORD dwHandle;

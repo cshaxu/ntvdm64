@@ -394,3 +394,14 @@ HMENU WINAPI LoadMenuW(
     else
         return NULL;
 }
+
+#ifdef MEMPHIS_MENUS
+#error Excluded unsupported Memphis menu conversion profile
+#endif
+
+#line 676
+#ifdef MEMPHIS_MENU_WATERMARKS
+#line 677
+#error Excluded unsupported Memphis menu watermark profile
+#endif
+#line 755

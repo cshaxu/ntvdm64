@@ -1,0 +1,31 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+  "old_commit": "HEAD exact recorded baseline",
+  "old_sha256": "249991fd20d874ece85ca9fbae411c96a6d883aaa5f9990cf2e75d221e95add9",
+  "current_sha256": "1da660aa8e942172f9eaad5ac4ef280fda58540a7416c0a8f029a62fb8ccdff0",
+  "method": "MSVC /EP, exact Ninja target flags, identical scratch source path; nonblank stripped lines hashed. ntSend.h copied without modification.",
+  "contexts": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-body-dlgmgr2.obj",
+      "old_sha256": "c0809ef1828bb8bae442390ff3183d80b30ecc4f059d6d781a2adb157bc04ba0",
+      "current_sha256": "c0809ef1828bb8bae442390ff3183d80b30ecc4f059d6d781a2adb157bc04ba0",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_dlgmgr2.obj",
+      "old_sha256": "f2b7e0f4bb0c1f5bc4c461a28964056854d1b0e0aa47802ec65befe8356a3c08",
+      "current_sha256": "f2b7e0f4bb0c1f5bc4c461a28964056854d1b0e0aa47802ec65befe8356a3c08",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_keyboard.obj",
+      "old_sha256": "42b7210ff99c3f95ba0399cd74ebd6f29628b4b4d160ce8770f6d9ac6b97f6df",
+      "current_sha256": "42b7210ff99c3f95ba0399cd74ebd6f29628b4b4d160ce8770f6d9ac6b97f6df",
+      "equal": true
+    }
+  ],
+  "limits": "Tests selected preprocessed text only; excludes diagnostics and does not establish other contexts, link or runtime behavior."
+}

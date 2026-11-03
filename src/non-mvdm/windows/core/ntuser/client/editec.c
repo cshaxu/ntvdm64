@@ -501,10 +501,12 @@ UINT ECTabTheTextOut(
 
         fOpaque = (GetBkMode(hdc) == OPAQUE) || (fDraw == ECT_SELECTED);
     }
+#line 508
 #ifdef DEBUG
+#line 509
 #error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
 #endif
-#line 514
+#line 518
 
     // Let us define the Clip rectangle.
     rc.left   = xClipStPos;
@@ -1949,9 +1951,12 @@ void   ECResetTextInfo(PED ped)
         if (!ped->listboxHwnd)
             ECNotifyParent(ped, EN_UPDATE);
     } else {
+#line 1965
 #ifdef BOGUS
+#line 1966
 #error DIVERGENCE OPENNT-HOST-131: BOGUS branch is not selected; see mirror register.
 #endif
+#line 1971
         MLBuildchLines(ped, 0, 0, FALSE, NULL, NULL);
     }
 
@@ -2013,9 +2018,12 @@ BOOL ECSetText(
     } else {
         cchLength = StringLength(lpstr, ped->fAnsi);
 
+#line 2032
 #ifdef NEVER
+#line 2033
 #error DIVERGENCE OPENNT-HOST-131: NEVER branch is not selected; see mirror register.
 #endif
+#line 2042
 
         /*
          * Add the text

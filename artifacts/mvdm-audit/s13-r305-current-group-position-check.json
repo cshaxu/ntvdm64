@@ -1,0 +1,3729 @@
+{
+  "groups": 3458,
+  "stale": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 218,
+      "actual": "    if ((hWOWDll = SafeLoadLibrary(\"WOW32\")) == NULL)",
+      "arms": [
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "line": 218,
+          "status": "already-excluded",
+          "evidence": "actual worker/reference /DPROD with no overrides, original ordered groups plus anchors; direct tests use selected profile; s13-bfs-depth1-prod-extra.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 230,
+      "actual": "    if ((WOWInitEntry = (MYFARPROC)GetProcAddress(hWOWDll, \"W32Init\")) == NULL)",
+      "arms": [
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "line": 230,
+          "status": "already-excluded",
+          "evidence": "Pinned original outer group uniquely anchored, sole #error; x86 worker and reference include chains select PROD: s13-bfs-depth1-prod-batch1.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 245,
+      "actual": "    if ((WOWDispatchEntry = (MYFARPROC)GetProcAddress(hWOWDll, \"W32Dispatch\")) == NULL)",
+      "arms": [
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "line": 245,
+          "status": "already-excluded",
+          "evidence": "actual worker/reference /DPROD with no overrides, original ordered groups plus anchors; direct tests use selected profile; s13-bfs-depth1-prod-extra.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 258,
+      "actual": "    if ((GetCommHandle = (GCHfn) GetProcAddress(hWOWDll, \"GetCommHandle\")) == NULL)",
+      "arms": [
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "line": 258,
+          "status": "already-excluded",
+          "evidence": "Pinned original outer group uniquely anchored, sole #error; x86 worker and reference include chains select PROD: s13-bfs-depth1-prod-batch1.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 268,
+      "actual": "    if ((GetCommShadowMSR = (GCSfn) GetProcAddress(hWOWDll, \"GetCommShadowMSR\")) == NULL)",
+      "arms": [
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "line": 268,
+          "status": "already-excluded",
+          "evidence": "Pinned original outer group uniquely anchored, sole #error; x86 worker and reference include chains select PROD: s13-bfs-depth1-prod-batch1.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 281,
+      "actual": "    if (!pW32HungAppNotifyThread)",
+      "arms": [
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "line": 281,
+          "status": "already-excluded",
+          "evidence": "Pinned original outer group uniquely anchored, sole #error; x86 worker and reference include chains select PROD: s13-bfs-depth1-prod-batch1.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 295,
+      "actual": "    if ((*WOWInitEntry)() == FALSE)",
+      "arms": [
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "line": 295,
+          "status": "already-excluded",
+          "evidence": "actual worker/reference /DPROD with no overrides, original ordered groups plus anchors; direct tests use selected profile; s13-bfs-depth1-prod-extra.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 322,
+      "actual": "    }",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "!defined(CPU_40_STYLE) || defined(CCPU)",
+          "line": 322,
+          "status": "retained-observed",
+          "evidence": "successful preprocessing in product dependency context",
+          "observed_architectures": [
+            "x86"
+          ]
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 326,
+          "status": "already-excluded",
+          "evidence": "Both worker contexts and named standalone test flags checked; existing rejection preserved; see s13-bfs-depth1-existing-host-profile-guards.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 353,
+      "actual": "void MS_bop_int3(void) {",
+      "arms": [
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "line": 353,
+          "status": "already-excluded",
+          "evidence": "Pinned original outer group uniquely anchored, sole #error; x86 worker and reference include chains select PROD: s13-bfs-depth1-prod-batch1.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 413,
+      "actual": "//",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 413,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 415,
+          "status": "retained-observed",
+          "evidence": "successful preprocessing in product dependency context",
+          "observed_architectures": [
+            "x86"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 511,
+      "actual": "        break;",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 511,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 533,
+      "actual": "BOOL LoadVdmRedir() {",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 533,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 548,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 548,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 554,
+      "actual": "        }",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 554,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 560,
+      "actual": "        }",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 560,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 566,
+      "actual": "        }",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 566,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 572,
+      "actual": "        }",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 572,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 578,
+      "actual": "        }",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 578,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 584,
+      "actual": "        }",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 584,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 590,
+      "actual": "        }",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 590,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 596,
+      "actual": "        }",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 596,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 607,
+      "actual": "closeAndReturnError:",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 607,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 713,
+      "actual": "        if (control == 1)",
+      "arms": [
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "line": 713,
+          "status": "already-excluded",
+          "evidence": "Pinned original outer group uniquely anchored, sole #error; x86 worker and reference include chains select PROD: s13-bfs-depth1-prod-batch1.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 747,
+      "actual": "void MS_bop_D(void)",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "MONITOR",
+          "line": 747,
+          "status": "already-excluded",
+          "evidence": "Pinned original outer group uniquely anchored; sole #error; same-hash actual per-source compiler/include contexts and direct event fixture audit: s13-bfs-depth1-host-macro-contexts.json"
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 749,
+          "status": "retained-observed",
+          "evidence": "successful preprocessing in product dependency context",
+          "observed_architectures": [
+            "x86"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 773,
+      "actual": "       }",
+      "arms": [
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "line": 773,
+          "status": "already-excluded",
+          "evidence": "Pinned original outer group uniquely anchored, sole #error; x86 worker and reference include chains select PROD: s13-bfs-depth1-prod-batch1.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 788,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "MONITOR",
+          "line": 788,
+          "status": "already-excluded",
+          "evidence": "Pinned original outer group uniquely anchored; sole #error; same-hash actual per-source compiler/include contexts and direct event fixture audit: s13-bfs-depth1-host-macro-contexts.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 806,
+      "actual": "    host_ica_unlock();",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "MONITOR",
+          "line": 806,
+          "status": "already-excluded",
+          "evidence": "Pinned original outer group uniquely anchored; sole #error; same-hash actual per-source compiler/include contexts and direct event fixture audit: s13-bfs-depth1-host-macro-contexts.json"
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 808,
+          "status": "retained-observed",
+          "evidence": "successful preprocessing in product dependency context",
+          "observed_architectures": [
+            "x86"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 946,
+      "actual": "    Handle = (ULONG)getAX();",
+      "arms": [
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "line": 946,
+          "status": "already-excluded",
+          "evidence": "Pinned original outer group uniquely anchored, sole #error; x86 worker and reference include chains select PROD: s13-bfs-depth1-prod-batch1.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 967,
+      "actual": "    Handle = (ULONG)getAX();",
+      "arms": [
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "line": 967,
+          "status": "already-excluded",
+          "evidence": "Pinned original outer group uniquely anchored, sole #error; x86 worker and reference include chains select PROD: s13-bfs-depth1-prod-batch1.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": 980,
+      "actual": "}",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "i386",
+          "line": 980,
+          "status": "newly-excluded",
+          "evidence": "DIV-601; s13-bfs-depth1-ntbop-i386-batch.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "line": 765,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 765,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "line": 1202,
+      "actual": "                    0",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1202,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "line": 1949,
+      "actual": "        // CCB which we must complete with the same information which completes",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1949,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "line": 3203,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 3203,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 3205,
+          "status": "retained-observed",
+          "evidence": "successful preprocessing in product dependency context",
+          "observed_architectures": [
+            "x86"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "line": 3304,
+      "actual": "    Closes the direct station for this adapter. Uses a CCB in the DOS_ADAPTER",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 3304,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 3306,
+          "status": "retained-observed",
+          "evidence": "successful preprocessing in product dependency context",
+          "observed_architectures": [
+            "x86"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "line": 353,
+      "actual": "        }",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 353,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "line": 454,
+      "actual": "    LLC_STATUS status;",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 454,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "line": 557,
+      "actual": "            WRITE_FAR_POINTER(&pBuffer->pNext, NULL);",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 557,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "line": 637,
+      "actual": "    DPLLC_DOS_BUFFER dpBase;        // DOS pointer",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 637,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "line": 674,
+      "actual": "        //",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 674,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "line": 697,
+      "actual": "        //",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 697,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "line": 839,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 839,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "line": 404,
+      "actual": "    PLLC_CCB cancelledReceive = NULL;",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 404,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "line": 606,
+      "actual": "            }",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 606,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "line": 1159,
+      "actual": "            //",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1159,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 1161,
+          "status": "retained-observed",
+          "evidence": "successful preprocessing in product dependency context",
+          "observed_architectures": [
+            "x86"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "line": 1174,
+      "actual": "            //",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1174,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 1176,
+          "status": "retained-observed",
+          "evidence": "successful preprocessing in product dependency context",
+          "observed_architectures": [
+            "x86"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "line": 1209,
+      "actual": "        //",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1209,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "line": 1864,
+      "actual": "        }",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1864,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 1866,
+          "status": "retained-observed",
+          "evidence": "successful preprocessing in product dependency context",
+          "observed_architectures": [
+            "x86"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "line": 2267,
+      "actual": "    // if there is nothing in the queue for this adapter number/station ID",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2267,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "line": 2282,
+      "actual": "    pLlcCcb = *pQueue;",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2282,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "line": 2490,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2490,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "line": 2538,
+      "actual": "                ) {",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2538,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 2540,
+          "status": "retained-observed",
+          "evidence": "successful preprocessing in product dependency context",
+          "observed_architectures": [
+            "x86"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "line": 3132,
+      "actual": "            }",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 3132,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "line": 3390,
+      "actual": "    None.",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 3390,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "line": 3530,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 3530,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "line": 3717,
+      "actual": "    VOID",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 3717,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "line": 3742,
+      "actual": "#endif",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 3742,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "line": 3769,
+      "actual": "    //",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 3769,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "line": 3802,
+      "actual": "    IN LONG Count",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 3802,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "line": 3827,
+      "actual": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 3827,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "line": 3843,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 3843,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrinit.c",
+      "line": 182,
+      "actual": "{",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 182,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmisc.c",
+      "line": 71,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 71,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmisc.c",
+      "line": 104,
+      "actual": "{",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 104,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 228,
+      "actual": "    Handle16 = getBX();",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 228,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 302,
+      "actual": "    DWORD   MaxMessageSize, NextSize, MessageCount;",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 302,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 376,
+      "actual": "    CHAR    LocalMailslot[LOCAL_MAILSLOT_NAMELEN+1];",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 376,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 399,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 399,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 449,
+      "actual": "    // name or we could have any old garbage. We trust that CreateMailslot",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 449,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 461,
+      "actual": "                                );",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 461,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 469,
+      "actual": "        VrpFreeMailslotStructure(ptr);",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 469,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 499,
+      "actual": "                                NULL            // lpReadTimeout",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 499,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 551,
+      "actual": "    None. Returns values in VDM Ax and Flags registers",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 551,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 591,
+      "actual": "    PVR_MAILSLOT_INFO   ptr;",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 591,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 610,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 610,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 624,
+      "actual": "                            NULL            // not overlapped",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 624,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 647,
+      "actual": "                if (NextSize == MAILSLOT_NO_MESSAGE) {",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 647,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 700,
+      "actual": "    // search for the local mailslot based on the name. If not found assume",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 700,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 706,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 706,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 729,
+      "actual": "                        OPEN_EXISTING,",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 729,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 746,
+      "actual": "        //",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 746,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 759,
+      "actual": "                        (DWORD)getCX(),",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 759,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 765,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 765,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 806,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 806,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 849,
+      "actual": "    BOOL",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 849,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 869,
+      "actual": "                ++CharCount;",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 869,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 887,
+      "actual": "        //",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 887,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 942,
+      "actual": "    None.",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 942,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 1045,
+      "actual": "                previous->Next = ptr->Next;",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1045,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 1091,
+      "actual": "        Success - pointer to located structure",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1091,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 1136,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1136,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both actual TU compile/include contexts; direct-source fixtures inherit production flags; original ordered structure plus anchors; s13-bfs-depth1-dpmi-dem-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 1173,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1173,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 1186,
+      "actual": "    PVR_MAILSLOT_INFO   ptr, previous = NULL, next;",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1186,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 1192,
+      "actual": "    //",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1192,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 1308,
+      "actual": "        // (if there is one, that is)",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1308,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 1320,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1320,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 1363,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1363,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 1369,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1369,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 199,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 199,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 253,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 253,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 286,
+      "actual": "    DWORD   nameLen;",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 286,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 297,
+      "actual": "        if (nameLen > LM20_CNLEN) {",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 297,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 311,
+      "actual": "                setCF(0);",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 311,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 344,
+      "actual": "--*/",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 344,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 348,
+      "actual": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 348,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 380,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 380,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 424,
+      "actual": "    LPBYTE buffer;",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 424,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 485,
+      "actual": "    None. Results returned via VDM registers or in VDM memory, according to",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 485,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 489,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 489,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 535,
+      "actual": "{",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 535,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 559,
+      "actual": "        status = NetpNtStatusToApiStatus(ntstatus);",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 559,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 594,
+      "actual": "    None. Results returned via VDM registers or in VDM memory, according to",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 594,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 650,
+      "actual": "    ApiNumber = (DWORD)getCX();",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 650,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 1066,
+      "actual": "            WRITE_WORD(parameterPointer, 0);",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1066,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 1214,
+      "actual": "    LPSTR domain;",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1214,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 1278,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1278,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 1292,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1292,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 1357,
+      "actual": "                                    bufferOffset,",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1357,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 1421,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1421,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 1481,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1481,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 1554,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1554,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 1606,
+      "actual": "{",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1606,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 1687,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1687,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 1738,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1738,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 1817,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1817,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 1922,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1922,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 1941,
+      "actual": "#endif",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1941,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 1947,
+      "actual": "    structurePointer = (struct NetUseGetInfoStruc*)",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1947,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 1953,
+      "actual": "    //",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1953,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 1959,
+      "actual": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1959,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 1966,
+      "actual": "#endif",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1966,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 1990,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1990,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 2067,
+      "actual": "        AX = error code",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2067,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 2088,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2088,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 2103,
+      "actual": "    default:",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2103,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 2119,
+      "actual": "        SET_ERROR(ERROR_INVALID_PARAMETER);",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2119,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 2146,
+      "actual": "    header.Converter = 0;",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2146,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 2506,
+      "actual": "                    WRITE_FAR_POINTER(&((struct wksta_info_10*)buffer)->wki10_username, NULL);",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2506,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 2519,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2519,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 2550,
+      "actual": "        switch (level) {",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2550,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 2556,
+      "actual": "        case 1:",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2556,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 2583,
+      "actual": "    )",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2583,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 2587,
+      "actual": "Routine Description:",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2587,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 2735,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2735,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 2782,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2782,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 2835,
+      "actual": "            // recalculate the actual pointers as",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2835,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 2849,
+      "actual": "                //",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2849,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 2896,
+      "actual": "            // if entryNumber was not reduced to 0 then check the printers",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2896,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 2910,
+      "actual": "            }",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2910,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 3017,
+      "actual": "    XS_NET_USE_ADD parameters;",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 3017,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 3118,
+      "actual": "        //",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 3118,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 3133,
+      "actual": "    header.ClientMachineName = NULL;",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 3133,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 3203,
+      "actual": "    Function 5F04h",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 3203,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 3298,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 3298,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 3304,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 3304,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 3333,
+      "actual": "    receiveBufferLen = (DWORD)READ_WORD(&transactionPacket->tr_rdlen);",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 3333,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 3341,
+      "actual": "        computerName[0] = computerName[1] = '\\\\';",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 3341,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 3584,
+      "actual": "                LPBYTE_FROM_POINTER(&transactionPacket->tr_rdbuf),",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 3584,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "line": 3647,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 3647,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 248,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 248,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 310,
+      "actual": "    POPEN_NAMED_PIPE_INFO OpenNamedPipeInfo;",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 310,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 379,
+      "actual": "    } else {",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 379,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 386,
+      "actual": "    }",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 386,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 436,
+      "actual": "    BOOL    Ok;",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 436,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 518,
+      "actual": "    DWORD   WinPipeMode;",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 518,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 547,
+      "actual": "                    ? PIPE_READMODE_MESSAGE",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 547,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 600,
+      "actual": "    HANDLE Handle;",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 600,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 648,
+      "actual": "        //",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 648,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 655,
+      "actual": "#endif",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 655,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 719,
+      "actual": "    DWORD BytesRead;",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 719,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 759,
+      "actual": "                               NULL,",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 759,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 781,
+      "actual": "            if (!Ok) {",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 781,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 802,
+      "actual": "            //",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 802,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 812,
+      "actual": "                VrpRemoveOpenNamedPipeInfo(Handle);",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 812,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 878,
+      "actual": "    BOOL Ok;",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 878,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 893,
+      "actual": "                        READ_WORD(&StructurePointer->nOutBufferLen),",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 893,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 901,
+      "actual": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 901,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 948,
+      "actual": "    BOOL Ok;",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 948,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 959,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 959,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1011,
+      "actual": "{",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1011,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1095,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1095,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1253,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1253,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1264,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1264,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1283,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1283,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1308,
+      "actual": "        // we have the \"something to do\" event. Now create the thread",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1308,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1326,
+      "actual": "            return;",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1326,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1351,
+      "actual": "    //",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1351,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1381,
+      "actual": "    //",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1381,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1404,
+      "actual": "    // Q: what happens if the request completes asynchronously before we finish",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1404,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1436,
+      "actual": "    // if we get ERROR_MORE_DATA then treat it as an error. GetOverlappedResult",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1436,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1447,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1447,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1454,
+      "actual": "        mvdm_redirector_async_release(pAsyncInfo);",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1454,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1493,
+      "actual": "                  VDM registers & data areas have been modified to indicate",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1493,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1507,
+      "actual": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1507,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1543,
+      "actual": "        setAL((BYTE)pAsyncInfo->Type2);",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1543,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1581,
+      "actual": "    Cleans out all open named pipe info and pending async named pipe requests",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1581,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1662,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1662,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1684,
+      "actual": "        //",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1684,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1693,
+      "actual": "        //",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1693,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1703,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1703,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1715,
+      "actual": "            //",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1715,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1751,
+      "actual": "    requests which are still not completed (the Completed flag is FALSE).",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1751,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1764,
+      "actual": "{",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1764,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1802,
+      "actual": "    may NOT be located: this might occur when an item was removed from the list",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1802,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1815,
+      "actual": "--*/",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1815,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1865,
+      "actual": "Return Value:",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1865,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1892,
+      "actual": "                             );",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1892,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1904,
+      "actual": "        CloseHandle(pAsyncInfo->Overlapped.hEvent);",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1904,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 1906,
+          "status": "retained-observed",
+          "evidence": "successful preprocessing in product dependency context",
+          "observed_architectures": [
+            "x86"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 1960,
+      "actual": "    )",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 1960,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 2016,
+      "actual": "Routine Description:",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2016,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 2045,
+      "actual": "        } else {",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2045,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 2082,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2082,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 2094,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2094,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 2136,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2136,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 2142,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2142,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 2155,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2155,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 2194,
+      "actual": "    )",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2194,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 2196,
+          "status": "retained-observed",
+          "evidence": "successful preprocessing in product dependency context",
+          "observed_architectures": [
+            "x86"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 2242,
+      "actual": "    Performs ReadFile on a named pipe handle. All named pipes are opened in",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2242,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 2284,
+      "actual": "        return FALSE;",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2284,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 2346,
+      "actual": "        // info in DOS data segment. This is done by demRead",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2346,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 2354,
+      "actual": "        VrpRemoveOpenNamedPipeInfo(Handle);",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2354,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 2405,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2405,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 2452,
+      "actual": "        error = success ? NO_ERROR : GetLastError();",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2452,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 2463,
+      "actual": "            error = WAIT_TIMEOUT;",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2463,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 2518,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2518,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 2538,
+      "actual": "        FALSE   - Name doesn't look like name of pipe",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2538,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 2555,
+      "actual": "                ++Name;",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2555,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 2572,
+      "actual": "            // bump name past next path separator. Note that we don't have to",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2572,
+          "status": "already-excluded",
+          "evidence": "DBG absent in both exact actual TU compile/include contexts; fixture inherits the production compile flags; original ordered structure with independent anchors; s13-bfs-depth1-vdmredir-dbg.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 2581,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2581,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 2715,
+      "actual": "            pipeName = strchr(Name+2, '/');",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2715,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 2793,
+      "actual": "        TRUE    - created a OPEN_NAMED_PIPE_INFO structure and added to list",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2793,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 2820,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2820,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 2898,
+      "actual": "BOOL",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2898,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 2913,
+      "actual": "Arguments:",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2913,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 2925,
+      "actual": "--*/",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 2925,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "line": 3008,
+      "actual": "    )",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 3008,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrputil.c",
+      "line": 73,
+      "actual": "    LastError = GetLastError();",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "VR_DIAGNOSE",
+          "line": 73,
+          "status": "already-excluded",
+          "evidence": "Pinned original outer group uniquely anchored; sole #error; same-hash actual compiler/include contexts and project macro graph audit: s13-bfs-depth1-macro-broad-cohort.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "line": 505,
+      "actual": "            rcv_data_length = (DWORD)SmbGetUshort((LPWORD)parm_ptr);",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "VR_DIAGNOSE",
+          "line": 505,
+          "status": "already-excluded",
+          "evidence": "Pinned original outer group uniquely anchored; sole #error; same-hash actual compiler/include contexts and project macro graph audit: s13-bfs-depth1-macro-broad-cohort.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "line": 516,
+      "actual": "            rcv_data_ptr = LPBYTE_FROM_POINTER(parm_ptr);",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "VR_DIAGNOSE",
+          "line": 516,
+          "status": "already-excluded",
+          "evidence": "Pinned original outer group uniquely anchored; sole #error; same-hash actual compiler/include contexts and project macro graph audit: s13-bfs-depth1-macro-broad-cohort.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "line": 688,
+      "actual": "            }",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "VR_DIAGNOSE",
+          "line": 688,
+          "status": "already-excluded",
+          "evidence": "Pinned original outer group uniquely anchored; sole #error; same-hash actual compiler/include contexts and project macro graph audit: s13-bfs-depth1-macro-broad-cohort.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "line": 705,
+      "actual": "    if (!NT_SUCCESS(ntstatus)) {",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 705,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "line": 713,
+      "actual": "    uncName = uString.Buffer;",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 713,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "line": 737,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "VR_DIAGNOSE",
+          "line": 737,
+          "status": "already-excluded",
+          "evidence": "Pinned original outer group uniquely anchored; sole #error; same-hash actual compiler/include contexts and project macro graph audit: s13-bfs-depth1-macro-broad-cohort.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "line": 1100,
+      "actual": "    case REM_DATE_TIME:",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "VR_DIAGNOSE",
+          "line": 1100,
+          "status": "already-excluded",
+          "evidence": "Pinned original outer group uniquely anchored; sole #error; same-hash actual compiler/include contexts and project macro graph audit: s13-bfs-depth1-macro-broad-cohort.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "line": 1411,
+      "actual": "    for (i = 0; i < numberOfStructureTypes;",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "VR_DIAGNOSE",
+          "line": 1411,
+          "status": "already-excluded",
+          "evidence": "Pinned original outer group uniquely anchored; sole #error; same-hash actual compiler/include contexts and project macro graph audit: s13-bfs-depth1-macro-broad-cohort.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/mapembed.c",
+      "line": 80,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "line": 80,
+          "status": "newly-excluded",
+          "evidence": "DIV-576; s13-bfs-depth1-debug-wow-batch.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcommdlg.c",
+      "line": 481,
+      "actual": "        goto SilentError;",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 481,
+          "status": "already-excluded",
+          "evidence": "Original first-depth group uniquely anchored by following three retained source lines; existing sole #error; full relevant build/fixture DBG traces: s13-bfs-depth1-dbg-following-anchors.json"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.c",
+      "line": 176,
+      "actual": "    }",
+      "arms": [
+        {
+          "kind": "ifndef",
+          "expression": "NTOS_KERNEL_RUNTIME",
+          "line": 176,
+          "status": "newly-excluded",
+          "evidence": "OPENNT-HOST-148; s13-bfs-depth1-rtl-batch.json"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+      "line": 196,
+      "actual": "            //",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "line": 196,
+          "status": "already-excluded",
+          "evidence": "Pinned original group uniquely anchored by preceding or following three source lines; sole #error; actual product and reference include chains have no DBG flag or definition: s13-bfs-depth1-dbg-batch3.json"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "line": 60,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "!defined(MVDM_XACTSRV_PACKSTR_COPY_ONLY)",
+          "line": 60,
+          "status": "newly-excluded",
+          "evidence": "OPENNT-HOST-148; s13-bfs-depth1-packstr-batch.json"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "line": 194,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "!defined(MVDM_XACTSRV_PACKSTR_COPY_ONLY)",
+          "line": 194,
+          "status": "newly-excluded",
+          "evidence": "OPENNT-HOST-148; s13-bfs-depth1-packstr-batch.json"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "line": 200,
+      "actual": "#line 411",
+      "arms": [
+        {
+          "kind": "if",
+          "expression": "!defined(MVDM_XACTSRV_PACKSTR_COPY_ONLY)",
+          "line": 200,
+          "status": "newly-excluded",
+          "evidence": "OPENNT-HOST-148; s13-bfs-depth1-packstr-batch.json"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "line": 863,
+      "actual": "        // If we are Unicode, allocate room for converted buffer.",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "UNICODE",
+          "line": 863,
+          "status": "retained-observed",
+          "evidence": "successful preprocessing in product dependency context",
+          "observed_architectures": [
+            "x86"
+          ]
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 870,
+          "status": "newly-excluded",
+          "evidence": "OPENNT-HOST-148; s13-bfs-depth1-finalists-batch.json"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "line": 885,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "UNICODE",
+          "line": 885,
+          "status": "retained-observed",
+          "evidence": "successful preprocessing in product dependency context",
+          "observed_architectures": [
+            "x86"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "line": 1016,
+      "actual": "    NetApiBufferFree( outBuffer );",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "UNICODE",
+          "line": 1016,
+          "status": "retained-observed",
+          "evidence": "successful preprocessing in product dependency context",
+          "observed_architectures": [
+            "x86"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+      "line": 142,
+      "actual": "",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "UNICODE",
+          "line": 142,
+          "status": "retained-observed",
+          "evidence": "successful preprocessing in product dependency context",
+          "observed_architectures": [
+            "x86"
+          ]
+        }
+      ]
+    }
+  ],
+  "limits": "directive kind only; no reachability or original-identity proof"
+}

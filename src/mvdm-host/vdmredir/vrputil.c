@@ -70,9 +70,12 @@ Return Value:
     DWORD   LastError;
 
     LastError = GetLastError();
+#line 73
 #ifdef VR_DIAGNOSE
+#line 74
 #error DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register.
 #endif
+#line 76
     return VrpMapDosError(LastError);
 }
 

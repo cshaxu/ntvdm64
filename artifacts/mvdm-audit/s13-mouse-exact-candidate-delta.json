@@ -1,0 +1,26 @@
+{
+  "source": "src\\mvdm-host\\softpc.new\\base\\keymouse\\mouse_io.c",
+  "old_snapshot": "build\\t473-s13\\bfs-mouse-original\\mouse_io.c",
+  "old_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f",
+  "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+  "changes": [
+    {
+      "old_line": 1485,
+      "current_line": 1485,
+      "inserted_lines": [
+        "    /* DIVERGENCE MVDM-HOST-DIV-467: video changes bypass mouse BOP dispatch. */\r\n",
+        "    virtual_swap_instance();\r\n"
+      ]
+    },
+    {
+      "old_line": 5013,
+      "current_line": 5015,
+      "inserted_lines": [
+        "    /* DIVERGENCE MVDM-HOST-DIV-467: route changes also bypass mouse BOPs. */\r\n",
+        "    virtual_swap_instance();\r\n"
+      ]
+    }
+  ],
+  "finding": "Exactly two insertions of registered S13 DIV-467 calls; deleting only these insertions reproduces old snapshot byte-for-byte.",
+  "limits": "This verifies provenance of worktree delta only; candidate is unpublished and full multi-VM semantics remain unverified."
+}

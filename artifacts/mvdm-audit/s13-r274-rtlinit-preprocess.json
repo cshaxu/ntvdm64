@@ -1,0 +1,24 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+  "old_commit": "HEAD exact recorded baseline",
+  "old_sha256": "8e6b12e4b7b7b1106c80c9fe1bfaacd16434633e6feb39714cafc3bb56c99610",
+  "current_sha256": "06dad1cd402c2712b21e5b573ea8be67facb0087b5e322b594abe0664caad644",
+  "method": "MSVC /EP, exact Ninja target flags, identical scratch source path; nonblank stripped lines hashed. ntSend.h copied without modification.",
+  "contexts": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/rtlinit.obj",
+      "old_sha256": "d9da79b7a3f35a13362b9cc622fa20d85ed7a913a7d4722ca5e8a62af5658819",
+      "current_sha256": "d9da79b7a3f35a13362b9cc622fa20d85ed7a913a7d4722ca5e8a62af5658819",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-lookaside.obj",
+      "old_sha256": "ba3e49920c20b154a58533bd55cdbd917a2725da2a9c260152120782222a2b8e",
+      "current_sha256": "ba3e49920c20b154a58533bd55cdbd917a2725da2a9c260152120782222a2b8e",
+      "equal": true
+    }
+  ],
+  "limits": "Tests selected preprocessed text only; excludes diagnostics and does not establish other contexts, link or runtime behavior."
+}

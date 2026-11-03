@@ -1,0 +1,96 @@
+{
+  "result": "passed",
+  "controls": [
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "body_line": 1902,
+      "continuation_line": 1904,
+      "negative_diagnostic_sha256": "4e83c6e4a1fb101f45c32621223e28336f7ec30910d9943f77acdeffb1741201"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsubcls.c",
+      "body_line": 473,
+      "continuation_line": 540,
+      "negative_diagnostic_sha256": "efdf36c8599448149eac52bcd75afe5c263654fc878b27a5af1dc5a39c837c76"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "body_line": 1040,
+      "continuation_line": 1043,
+      "negative_diagnostic_sha256": "9b43b274b306b7d79138628b578711c71c10c6ba43082025d98f18ff7045787b"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "body_line": 2975,
+      "continuation_line": 3003,
+      "negative_diagnostic_sha256": "5ecee2190f03e63cb6c3db8a1d2eaa6ab2b8730a034c77791bc27ff963c6a651"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsdisp.c",
+      "body_line": 48,
+      "continuation_line": 56,
+      "negative_diagnostic_sha256": "2f0dd6efd2481b0a02785b92c7266959bf049773a7b927ead8e95202e0196c83"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/environ.c",
+      "body_line": 27,
+      "continuation_line": 33,
+      "negative_diagnostic_sha256": "34c9ed98c36c6c95b5d341907e051b3d845a1ac63cc2d4f04a51d628ef044411"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.c",
+      "body_line": 27,
+      "continuation_line": 29,
+      "negative_diagnostic_sha256": "a347b1d11b7aa08eefad695c745bb57e4639dbb2d6e98644bff583c216a8734a"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "body_line": 2427,
+      "continuation_line": 2453,
+      "negative_diagnostic_sha256": "aadb0a75e53ccf9d2bb5a2337b8826c2c29b86ce151312edc6773b6590b772d2"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "body_line": 72,
+      "continuation_line": 74,
+      "negative_diagnostic_sha256": "955754912d99e6dba0337d88f2cc099dd80bf1aa6585975dd976097367daeab3"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+      "body_line": 197,
+      "continuation_line": 199,
+      "negative_diagnostic_sha256": "01a0d2430e17e1a3c389ae89de0b6b417f2364fbb370c05ebb13d40e74af0fed"
+    },
+    {
+      "path": "src/non-mvdm/private/inc/dlcio.h",
+      "body_line": 471,
+      "continuation_line": 473,
+      "negative_diagnostic_sha256": "0b2d1da42c3085701ed302fb60f4457953c4c4978cf0b9a78f54a64bfb4ac7ea"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+      "body_line": 1507,
+      "continuation_line": 1509,
+      "negative_diagnostic_sha256": "cce3f9a0b051d43195198704a1435091df4b50075cbdf2b8632ee055aa0d80f4"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "body_line": 283,
+      "continuation_line": 287,
+      "negative_diagnostic_sha256": "d82148a39894eb5213e8e0658cde229a5c51600b21a7a4f55d779859ddd3a76d"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+      "body_line": 45,
+      "continuation_line": 47,
+      "negative_diagnostic_sha256": "4b0a8670c99232af55bdda331e22bd6bf270fca09f713227ce54adca5db53954"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+      "body_line": 650,
+      "continuation_line": 654,
+      "negative_diagnostic_sha256": "ffc054ce34b4d779a17c37c4bce8d322a54149b2abdefc1e568434c7728213c1"
+    }
+  ],
+  "scope": "extracted actual source, false/true forced guard; not all include contexts"
+}

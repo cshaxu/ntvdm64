@@ -1,0 +1,106 @@
+{
+  "scope": "20 actual WOW32 compilation units; candidate user.h guard, control-client include order and source-local color/state include order",
+  "rows": [
+    {
+      "target": "obj/opennt-user/control-body-lb1.obj",
+      "candidate": "cand2",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-body-lboxmult.obj",
+      "candidate": "cand2",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-body-lboxctl1.obj",
+      "candidate": "cand2",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-body-lboxctl2.obj",
+      "candidate": "cand2",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-body-lboxctl3.obj",
+      "candidate": "cand2",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-body-lboxvar.obj",
+      "candidate": "cand2",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-body-lboxrare.obj",
+      "candidate": "cand2",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-body-dlgend.obj",
+      "candidate": "cand2",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-body-dlgbegin.obj",
+      "candidate": "cand2",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-body-dlgmgr.obj",
+      "candidate": "cand2",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-body-dlgmgrc.obj",
+      "candidate": "cand2",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-body-dlgmgr2.obj",
+      "candidate": "cand2",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-body-dmmnem.obj",
+      "candidate": "cand2",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-body-winmgrc.obj",
+      "candidate": "cand2",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-body-wow.obj",
+      "candidate": "cand2",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-view-winmgr.obj",
+      "candidate": "cand2",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-view-wow.obj",
+      "candidate": "cand2",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-color.obj",
+      "candidate": "cand5",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-state.obj",
+      "candidate": "cand5",
+      "resolved_section_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-brush-client.obj",
+      "candidate": "cand5",
+      "resolved_section_differences": []
+    }
+  ],
+  "limitations": "COFF section/relocations resolved by symbol name, value, section index, type and storage class; no link, runtime or other TUs tested. Scratch-only source and header changes."
+}

@@ -1,0 +1,126 @@
+{
+  "records": [
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "current": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "5e88f444cf126d17a77b1302f28fd703203809ae51489f1932423aaa719e255a",
+      "original_line": 15,
+      "directive": "#ifndef WOW",
+      "before": [
+        "* 29-DEC-93 NanduriR      shared user32/user16 code.",
+        "\\***************************************************************************/",
+        "",
+        "#include \"precomp.h\""
+      ],
+      "after": [
+        "#pragma hdrstop",
+        "#endif",
+        "",
+        "#ifdef WOW"
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "current": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "5e88f444cf126d17a77b1302f28fd703203809ae51489f1932423aaa719e255a",
+      "original_line": 890,
+      "directive": "#ifndef WOW",
+      "before": [
+        "BOOL  bAnsi;",
+        "DWORD dwHookCurrent;",
+        "PHOOK phk;",
+        "PCLIENTINFO pci;"
+      ],
+      "after": [
+        "DWORD dwHookData;",
+        "DWORD dwFlags;",
+        "#endif",
+        ""
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\inctlpan.c",
+      "original_sha256": "0e3999df8610405c990760ee1a417bf312e3b76744f8f9387bbd94583f9d800d",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+      "current_sha256": "2d3978a4da2b4146f5da2beec1cf829bb06227137f0ec567a6a4acb3b975e587",
+      "original_line": 840,
+      "directive": "#ifndef KOREA",
+      "before": [
+        "cxMenuFontOverhang = tm.tmOverhang;",
+        "",
+        "cyMenuFontExternLeading = tm.tmExternalLeading;",
+        "cyMenuFontAscent = tm.tmAscent;"
+      ],
+      "after": [
+        "/*",
+        "* We only use cyMenuFontAscent in mndraw.c once, and in U.S. we",
+        "* always add on CYBORDER!  So calculate cyMenuFontAscent+CYBORDER",
+        "* once only.  For Korean version, don't add it on; the underline would"
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+      "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+      "current": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "current_sha256": "de77cb392cd6b5890909b75c4202a5998cfbf6b00eb5ac6aeef34dc7d8dc6064",
+      "original_line": 244,
+      "directive": "#ifndef WOW",
+      "before": [
+        "/*",
+        "* The handle validation routines should be optimized for time, not size,",
+        "* since they get called so often.",
+        "*/"
+      ],
+      "after": [
+        "#pragma optimize(\"t\", on)",
+        "#endif",
+        "",
+        "/***************************************************************************\\"
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+      "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+      "current": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "current_sha256": "de77cb392cd6b5890909b75c4202a5998cfbf6b00eb5ac6aeef34dc7d8dc6064",
+      "original_line": 344,
+      "directive": "#ifndef WOW",
+      "before": [
+        "",
+        "/*",
+        "* Switch back to default optimization.",
+        "*/"
+      ],
+      "after": [
+        "#pragma optimize(\"\", on)",
+        "#endif",
+        "",
+        "/***************************************************************************\\"
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+      "current": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "current_sha256": "c914d31db2b32fcd1418c7b987219cbd53ea563f4c211053a7f7706ed5d55848",
+      "original_line": 373,
+      "directive": "#ifndef LATER",
+      "before": [
+        "}",
+        "}",
+        "}",
+        ""
+      ],
+      "after": [
+        "/*",
+        "* If the window has a client side worker proc and has",
+        "* not been subclassed, dispatch the message directly",
+        "* to the worker proc.  Otherwise, dispatch it normally."
+      ]
+    }
+  ],
+  "status": "pending",
+  "reason": "Negative guards may select original content. Three are original compiler pragmas; others are inside omitted functions. Restoring a global #error would change the supported configuration; function/pragma scope and all contexts must be assessed. No source or behavior changed."
+}

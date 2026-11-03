@@ -1,0 +1,14 @@
+{
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+  "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+  "current": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+  "current_sha256": "5da4eb58366fe15bb2e312956c48071b9377361e09b9a40b20f8c4a423be6a48",
+  "original_lines": {
+    "if": 380,
+    "else": 439,
+    "endif": 498
+  },
+  "finding": "Current first-depth shell omits the original else and selected alternative function. Existing original queue records the else as unreviewed; do not count the condition group as completely restored. The selected function is absent from the current subset; a standalone empty else would not recover it or resolve original-position mapping.",
+  "source_change": "None; corrected OPENNT-HOST-159 description in src/non-mvdm/README.md.",
+  "runtime_claim": "None"
+}

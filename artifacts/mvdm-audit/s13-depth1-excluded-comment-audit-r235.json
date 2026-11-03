@@ -1,0 +1,6 @@
+{
+  "arms_checked": 2414,
+  "non_error_line_candidates": [],
+  "stale_or_arity": [],
+  "limitations": "line scan; comment syntax and directives require manual verification; no deletion is implied"
+}

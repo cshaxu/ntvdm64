@@ -1,0 +1,36 @@
+{
+  "scope": "per-file depth one wowfax.h include-context check",
+  "inputs": [
+    {
+      "path": "src/mvdm-host/inc/wowfax.h",
+      "sha256": "97c6c40dc2d0565a21dc1be4112fe24f138b10ddbb55fbd29e55da972a2a2c84"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "sha256": "b6daf4b15721351d241003d49d7ca92b7f40f83a0fd583d98af6748497248eea"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32fax.c",
+      "sha256": "533844f6a1a4d0fe2c6c752de1f82092ceb3a01dca6aa3beff6d41c9d0cf85a7"
+    },
+    {
+      "path": "src/mvdm-guest/wow16/test/shell/wowexfax.c",
+      "sha256": "8382d0cb85a29323cf76657fba40753dce29bb0b4d97db77698aabd602d6fee0"
+    },
+    {
+      "path": "src/mvdm-guest/wow16/test/shell/makefile",
+      "sha256": "3162bb5406c2621e67456e8a5d39dbc3130266f961064d1eb0c0f3853c7c96da"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/wow32/build.ninja",
+      "sha256": "57cc276a409e24a25cd956b822478ff85ae464f25c093b8ac1b921b237c8b87a"
+    }
+  ],
+  "findings": [
+    "Host wkman.c and wow32fax.c include wowfax.h and are present as WOW32 Ninja compilation inputs.",
+    "Guest wow16/test/shell/wowexfax.c defines _WOWFAX16_ before including wowfax.h, and its historical makefile mentions wowexec.exe.",
+    "Historical guest source and makefile are not proof of a currently supported guest build; no guest source or image was changed.",
+    "The guest include is an actual source context that must not be overlooked when deciding whether the _WOWFAX16_ arm may be replaced."
+  ],
+  "decision": "pending: complete supported-build and media authority audit before replacing this arm; no selected or excluded classification inferred from one host build."
+}

@@ -1,0 +1,2172 @@
+{
+  "scope": "current depth-one newly-excluded groups not uniquely mapped by a bounded logical-line search",
+  "items": [
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "line": 440,
+      "logical_line": 440,
+      "directive": "#if (FILE_BEGIN != 0 || FILE_CURRENT != 1 || FILE_END !=2)",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-finalists-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "line": 253,
+      "logical_line": 253,
+      "directive": "#if defined(i386)",
+      "near_matches": [],
+      "evidence": [
+        "Original body matches fixed OpenNT; all observed source/include contexts exclude i386; kernel VDM hardware host path; s13-bfs-depth1-dpmi-hardware-alternatives.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "line": 612,
+      "logical_line": 581,
+      "directive": "#if defined(CPU_40_STYLE)",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-dpmi40-source-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "line": 625,
+      "logical_line": 621,
+      "directive": "#if defined(CPU_40_STYLE)",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-dpmi40-source-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "line": 649,
+      "logical_line": 644,
+      "directive": "#if defined(CPU_40_STYLE)",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-dpmi40-source-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "line": 791,
+      "logical_line": 791,
+      "directive": "#ifdef i386",
+      "near_matches": [],
+      "evidence": [
+        "Pinned original i386 kernel IRET arm; all actual DPMI contexts exclude i386. Both worker preprocessed outputs unchanged; s13-bfs-depth1-dpmi-iret-i386.json."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "line": 880,
+      "logical_line": 904,
+      "directive": "#ifdef i386",
+      "near_matches": [],
+      "evidence": [
+        "Pinned original i386 kernel IRET arm; all actual DPMI contexts exclude i386. Both worker preprocessed outputs unchanged; s13-bfs-depth1-dpmi-iret-i386.json."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "line": 307,
+      "logical_line": 303,
+      "directive": "#ifdef i386",
+      "near_matches": [],
+      "evidence": [
+        "Original body matches fixed OpenNT; all observed source/include contexts exclude i386; kernel VDM hardware host path; s13-bfs-depth1-dpmi-hardware-alternatives.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "line": 206,
+      "logical_line": 206,
+      "directive": "#if defined(i386)",
+      "near_matches": [],
+      "evidence": [
+        "Original body matches fixed OpenNT; all observed source/include contexts exclude i386; kernel VDM hardware host path; s13-bfs-depth1-dpmi-hardware-alternatives.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "line": 278,
+      "logical_line": 121,
+      "directive": "#if defined(i386)",
+      "near_matches": [],
+      "evidence": [
+        "Original body matches fixed OpenNT; all observed source/include contexts exclude i386; kernel VDM hardware host path; s13-bfs-depth1-dpmi-hardware-alternatives.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 292,
+      "logical_line": 290,
+      "directive": "#ifdef NPX",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-finalists-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 300,
+      "logical_line": 313,
+      "directive": "#ifdef FLOPPY_B",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 360,
+      "logical_line": 375,
+      "directive": "#ifndef PROD",
+      "near_matches": [],
+      "evidence": [
+        "DIV-590; s13-bfs-depth1-nonprod-outer-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 621,
+      "logical_line": 756,
+      "directive": "#ifdef IPC",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 688,
+      "logical_line": 877,
+      "directive": "#ifndef NTVDM /* No signon for NTVDM - transparent integration */",
+      "near_matches": [],
+      "evidence": [
+        "DIV-572, source s13-bfs-depth1-ntvdm-reset.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 697,
+      "logical_line": 903,
+      "directive": "#if defined (GEN_DRVR) || defined (CDROM)",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-finalists-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 800,
+      "logical_line": 1004,
+      "directive": "#ifdef HFX",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "line": 208,
+      "logical_line": 192,
+      "directive": "#ifdef PM",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-pm-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "line": 284,
+      "logical_line": 268,
+      "directive": "#ifdef SPC486",
+      "near_matches": [],
+      "evidence": [
+        "DIV-578; s13-bfs-depth1-spc486.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 166,
+      "logical_line": 166,
+      "directive": "#ifdef CPU_486",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 198,
+      "logical_line": 202,
+      "directive": "#ifdef LITTLEND",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-finalists-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 1153,
+      "logical_line": 1158,
+      "directive": "#ifdef SPC486",
+      "near_matches": [],
+      "evidence": [
+        "DIV-578; s13-bfs-depth1-spc486.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 1274,
+      "logical_line": 1283,
+      "directive": "#ifdef SPC486",
+      "near_matches": [],
+      "evidence": [
+        "DIV-578; s13-bfs-depth1-spc486.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 1286,
+      "logical_line": 1297,
+      "directive": "#ifdef SPC486",
+      "near_matches": [],
+      "evidence": [
+        "DIV-578; s13-bfs-depth1-spc486.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 1449,
+      "logical_line": 1462,
+      "directive": "#ifndef FIX_BT_BUG",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 1522,
+      "logical_line": 1534,
+      "directive": "#ifndef FIX_BT_BUG",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 1574,
+      "logical_line": 1585,
+      "directive": "#ifdef SPC486",
+      "near_matches": [],
+      "evidence": [
+        "DIV-578; s13-bfs-depth1-spc486.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 1586,
+      "logical_line": 1603,
+      "directive": "#ifdef SPC486",
+      "near_matches": [],
+      "evidence": [
+        "DIV-578; s13-bfs-depth1-spc486.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 1597,
+      "logical_line": 1632,
+      "directive": "#ifndef FIX_BT_BUG",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 1745,
+      "logical_line": 1783,
+      "directive": "#ifdef SPC486",
+      "near_matches": [],
+      "evidence": [
+        "DIV-578; s13-bfs-depth1-spc486.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 1764,
+      "logical_line": 1822,
+      "directive": "#ifdef SPC486",
+      "near_matches": [],
+      "evidence": [
+        "DIV-578; s13-bfs-depth1-spc486.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 4556,
+      "logical_line": 4715,
+      "directive": "#ifdef SPC486",
+      "near_matches": [],
+      "evidence": [
+        "DIV-578; s13-bfs-depth1-spc486.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 4708,
+      "logical_line": 4773,
+      "directive": "#ifdef NTVDM",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-ntvdm-extra-source-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.h",
+      "line": 209,
+      "logical_line": 209,
+      "directive": "#ifdef DOUBLE_CPU",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-inactive-header-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+      "line": 124,
+      "logical_line": 123,
+      "directive": "#ifdef SPC486",
+      "near_matches": [],
+      "evidence": [
+        "DIV-578; s13-bfs-depth1-spc486.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+      "line": 334,
+      "logical_line": 332,
+      "directive": "#ifdef SPC486",
+      "near_matches": [],
+      "evidence": [
+        "DIV-578; s13-bfs-depth1-spc486.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.c",
+      "line": 375,
+      "logical_line": 373,
+      "directive": "#ifdef SPC486",
+      "near_matches": [],
+      "evidence": [
+        "DIV-578; s13-bfs-depth1-spc486.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "line": 688,
+      "logical_line": 734,
+      "directive": "#ifdef SPC486",
+      "near_matches": [],
+      "evidence": [
+        "DIV-578; s13-bfs-depth1-spc486.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "line": 731,
+      "logical_line": 775,
+      "directive": "#ifdef SPC486",
+      "near_matches": [],
+      "evidence": [
+        "DIV-578; s13-bfs-depth1-spc486.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "line": 50,
+      "logical_line": 50,
+      "directive": "#ifdef ANSI",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "line": 140,
+      "logical_line": 140,
+      "directive": "#ifdef TAKE_REAL_MODE_LIMIT_FAULT",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "line": 304,
+      "logical_line": 306,
+      "directive": "#ifdef TAKE_REAL_MODE_LIMIT_FAULT",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "line": 366,
+      "logical_line": 369,
+      "directive": "#ifdef TAKE_REAL_MODE_LIMIT_FAULT",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "line": 1737,
+      "logical_line": 1736,
+      "directive": "#if (HOST_BIAS >= 16383)",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-finalists-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "line": 4850,
+      "logical_line": 4850,
+      "directive": "#ifdef SPC486",
+      "near_matches": [],
+      "evidence": [
+        "DIV-578; s13-bfs-depth1-spc486.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 236,
+      "logical_line": 236,
+      "directive": "#if !defined(PROD) || defined(SHORT_TRACE)",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-platform-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 437,
+      "logical_line": 436,
+      "directive": "#ifndef DELAYED_INTS",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 600,
+      "logical_line": 599,
+      "directive": "#ifndef NTVDM",
+      "near_matches": [],
+      "evidence": [
+        "DIV-570: NTVDM is unconditionally defined in included host_def.h and all supported product/fixture contexts for this source; current include-chain scan found no later undef"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 820,
+      "logical_line": 847,
+      "directive": "#if defined (DELAYED_INTS) || defined (NTVDM)",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-ntvdm-alternatives-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 1527,
+      "logical_line": 1558,
+      "directive": "#if !defined(PROD) || defined(IRET_HOOKS)",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-finalists-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 1583,
+      "logical_line": 1634,
+      "directive": "#ifndef NTVDM",
+      "near_matches": [],
+      "evidence": [
+        "DIV-570: NTVDM is unconditionally defined in included host_def.h and all supported product/fixture contexts for this source; current include-chain scan found no later undef"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "line": 82,
+      "logical_line": 81,
+      "directive": "#if !defined(PROD) && defined(SPC386)",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-finalists-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "line": 132,
+      "logical_line": 248,
+      "directive": "#if !defined(PROD) || defined(HUNTER)",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-finalists-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "line": 371,
+      "logical_line": 370,
+      "directive": "#ifdef ANSI",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "line": 1008,
+      "logical_line": 1006,
+      "directive": "#ifdef WDCTRL_BOP",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-legacy-source-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "line": 2891,
+      "logical_line": 2891,
+      "directive": "#ifdef FLOPPIES_KEEP_TRYING",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "line": 297,
+      "logical_line": 298,
+      "directive": "#ifdef MSWDVR",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-inactive-header-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "line": 302,
+      "logical_line": 306,
+      "directive": "#ifdef NOVELL_IPX",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-inactive-header-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "line": 307,
+      "logical_line": 312,
+      "directive": "#ifdef NOVELL_TCPIP",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-inactive-header-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "line": 312,
+      "logical_line": 317,
+      "directive": "#ifdef WINSOCK",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-legacy-header-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "line": 321,
+      "logical_line": 325,
+      "directive": "#if defined(SOFTWIN_API) || defined(SWIN_HFX)",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-compound-header-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "line": 334,
+      "logical_line": 338,
+      "directive": "#ifdef ANSI",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-bios-ansi-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "line": 382,
+      "logical_line": 389,
+      "directive": "#if defined(SPC386) && defined(WDCTRL_BOP)",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-compound-header-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cga.h",
+      "line": 84,
+      "logical_line": 84,
+      "directive": "#if !defined(EGG) && !defined(A_VID) && !defined(C_VID)",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-finalists-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "line": 87,
+      "logical_line": 87,
+      "directive": "#if defined(CPU_40_STYLE) && defined(C_VID)",
+      "near_matches": [],
+      "evidence": [
+        "All supported including graph contexts select CPU40/C-VID; original unconditional generic carrier and local adaptation recorded; s13-bfs-depth1-cvid-local-alternatives.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "line": 90,
+      "logical_line": 90,
+      "directive": "#ifdef ANSI",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-finalists-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "line": 99,
+      "logical_line": 100,
+      "directive": "#ifdef MSWDVR",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-inactive-header-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gmi.h",
+      "line": 19,
+      "logical_line": 19,
+      "directive": "#if defined(CPU_40_STYLE) && defined(C_VID)",
+      "near_matches": [],
+      "evidence": [
+        "All supported including graph contexts select CPU40/C-VID; original unconditional generic carrier and local adaptation recorded; s13-bfs-depth1-cvid-local-alternatives.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "line": 102,
+      "logical_line": 100,
+      "directive": "#if defined (NTVDM)",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-ica-header-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "line": 64,
+      "logical_line": 64,
+      "directive": "#ifdef CPU_40_STYLE",
+      "near_matches": [],
+      "evidence": [
+        "Original non-CPU40 SAS interface excluded in all supported contexts; selected branch unchanged; s13-bfs-depth1-sas-outer-exclusion.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 1950,
+      "logical_line": 1950,
+      "directive": "#ifdef NTVDM /* JonLe NTVDM Mod */",
+      "near_matches": [],
+      "evidence": [
+        "DIV-574; s13-bfs-depth1-ntvdm-else-new.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 2532,
+      "logical_line": 2599,
+      "directive": "#ifdef NTVDM /* JonLe NTVDM Mod */",
+      "near_matches": [],
+      "evidence": [
+        "DIV-574; s13-bfs-depth1-ntvdm-else-new.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "line": 512,
+      "logical_line": 512,
+      "directive": "#if defined(NTVDM) || defined(GISP_CPU)",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-ntvdm-alternatives-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "line": 367,
+      "logical_line": 367,
+      "directive": "#ifdef KIPPER",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "line": 2267,
+      "logical_line": 2262,
+      "directive": "#ifndef NTVDM",
+      "near_matches": [],
+      "evidence": [
+        "Pinned original outer selector restored; actual mouse worker contexts define NTVDM. Non-NTVDM arm rejects."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "line": 2580,
+      "logical_line": 2569,
+      "directive": "#ifndef NTVDM",
+      "near_matches": [],
+      "evidence": [
+        "Pinned original outer selector restored; actual mouse worker contexts define NTVDM. Non-NTVDM arm rejects."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "line": 2631,
+      "logical_line": 2614,
+      "directive": "#ifndef NTVDM",
+      "near_matches": [],
+      "evidence": [
+        "Pinned original outer selector restored; actual mouse worker contexts define NTVDM. Non-NTVDM arm rejects."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "line": 2958,
+      "logical_line": 2935,
+      "directive": "#ifndef NTVDM",
+      "near_matches": [],
+      "evidence": [
+        "Pinned original outer selector restored; actual mouse worker contexts define NTVDM. Non-NTVDM arm rejects."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "line": 4792,
+      "logical_line": 4763,
+      "directive": "#ifndef NTVDM",
+      "near_matches": [],
+      "evidence": [
+        "Pinned original outer selector restored; actual mouse worker contexts define NTVDM. Non-NTVDM arm rejects."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "line": 4825,
+      "logical_line": 4790,
+      "directive": "#ifndef NTVDM",
+      "near_matches": [],
+      "evidence": [
+        "Pinned original outer selector restored; actual mouse worker contexts define NTVDM. Non-NTVDM arm rejects."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "line": 4926,
+      "logical_line": 4885,
+      "directive": "#ifndef NTVDM",
+      "near_matches": [],
+      "evidence": [
+        "Pinned original outer selector restored; actual mouse worker contexts define NTVDM. Non-NTVDM arm rejects."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "line": 398,
+      "logical_line": 398,
+      "directive": "#if defined(NTVDM) && defined(MONITOR)",
+      "near_matches": [],
+      "evidence": [
+        "Existing first monitor guard already rejects this effective profile; original body matches and supported worker preprocessor unchanged; s13-bfs-depth1-ios-monitor-outer.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 110,
+      "logical_line": 101,
+      "directive": "#if defined(NTVDM) || defined(host_main)",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-ntvdm-extra-source-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 318,
+      "logical_line": 326,
+      "directive": "#ifdef HFX",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": 180,
+      "logical_line": 204,
+      "directive": "#ifndef NTVDM",
+      "near_matches": [],
+      "evidence": [
+        "DIV-573; s13-bfs-depth1-ntvdm-batch3.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": 299,
+      "logical_line": 327,
+      "directive": "#ifdef XTSFD",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": 192,
+      "logical_line": 192,
+      "directive": "#ifdef NTVDM",
+      "near_matches": [],
+      "evidence": [
+        "DIV-574; s13-bfs-depth1-ntvdm-else-new.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": 1130,
+      "logical_line": 1195,
+      "directive": "#ifndef NTVDM",
+      "near_matches": [],
+      "evidence": [
+        "DIV-591; s13-bfs-depth1-ntvdm-outer-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": 1303,
+      "logical_line": 1315,
+      "directive": "#ifndef NTVDM",
+      "near_matches": [],
+      "evidence": [
+        "DIV-573; s13-bfs-depth1-ntvdm-batch3.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": 1332,
+      "logical_line": 1558,
+      "directive": "#ifdef HOOKED_IRETS",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-legacy-source-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "line": 261,
+      "logical_line": 260,
+      "directive": "#if !defined(NTVDM) || ( defined(NTVDM) && !defined(X86GFX) )",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-platform-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": 392,
+      "logical_line": 392,
+      "directive": "#if defined(NTVDM)",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-ntvdm-extra-source-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": 606,
+      "logical_line": 638,
+      "directive": "#if defined(NTVDM) || defined(GISP_SVGA)",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-ntvdm-alternatives-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": 921,
+      "logical_line": 952,
+      "directive": "#ifndef NTVDM",
+      "near_matches": [],
+      "evidence": [
+        "DIV-570: NTVDM is unconditionally defined in included host_def.h and all supported product/fixture contexts for this source; current include-chain scan found no later undef"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": 1600,
+      "logical_line": 1639,
+      "directive": "#ifndef NTVDM",
+      "near_matches": [],
+      "evidence": [
+        "DIV-570: NTVDM is unconditionally defined in included host_def.h and all supported product/fixture contexts for this source; current include-chain scan found no later undef"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": 1835,
+      "logical_line": 1978,
+      "directive": "#ifndef PROD",
+      "near_matches": [],
+      "evidence": [
+        "DIV-590; s13-bfs-depth1-nonprod-outer-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": 1842,
+      "logical_line": 1998,
+      "directive": "#ifndef PROD",
+      "near_matches": [],
+      "evidence": [
+        "DIV-590; s13-bfs-depth1-nonprod-outer-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": 1848,
+      "logical_line": 2006,
+      "directive": "#ifdef DELAYED_INTS",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": 1878,
+      "logical_line": 2035,
+      "directive": "#ifdef NTVDM",
+      "near_matches": [],
+      "evidence": [
+        "DIV-574; s13-bfs-depth1-ntvdm-else-new.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": 1986,
+      "logical_line": 2241,
+      "directive": "#ifndef NTVDM",
+      "near_matches": [],
+      "evidence": [
+        "DIV-570: NTVDM is unconditionally defined in included host_def.h and all supported product/fixture contexts for this source; current include-chain scan found no later undef"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": 161,
+      "logical_line": 160,
+      "directive": "#ifdef NO_STRING_OPERATIONS",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "line": 324,
+      "logical_line": 323,
+      "directive": "#if !defined(EGG) && !defined(C_VID) && !defined(A_VID)",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-video-source-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "line": 2039,
+      "logical_line": 2029,
+      "directive": "#if ( defined(NTVDM) && defined(MONITOR) ) || defined( GISP_SVGA )",
+      "near_matches": [],
+      "evidence": [
+        "Both actual video compile graphs select NTVDM and MONITOR; unsupported outer else rejects."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": 21,
+      "logical_line": 21,
+      "directive": "#ifdef LITTLEND",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-599; s13-bfs-depth1-cfpu-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": 32,
+      "logical_line": 33,
+      "directive": "#ifdef LITTLEND",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-599; s13-bfs-depth1-cfpu-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": 43,
+      "logical_line": 45,
+      "directive": "#ifdef LITTLEND",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-599; s13-bfs-depth1-cfpu-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": 55,
+      "logical_line": 57,
+      "directive": "#ifdef LITTLEND",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-599; s13-bfs-depth1-cfpu-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": 66,
+      "logical_line": 68,
+      "directive": "#ifdef LITTLEND",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-599; s13-bfs-depth1-cfpu-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": 83,
+      "logical_line": 85,
+      "directive": "#ifdef LITTLEND",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-599; s13-bfs-depth1-cfpu-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": 133,
+      "logical_line": 135,
+      "directive": "#ifdef NTVDM",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-cfpu-ntvdm-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "line": 240,
+      "logical_line": 240,
+      "directive": "#ifdef i386",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-634; x86 BOP probe, 592 product contexts, source/SDK macro scans, and historical test-generator disposition"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_fulsc.h",
+      "line": 181,
+      "logical_line": 181,
+      "directive": "#ifdef X86GFX",
+      "near_matches": [],
+      "evidence": [
+        "all known include contexts refreshed, all flagged product units checked, original group order and unique EOF correspondence; DIV-584 s13-bfs-depth1-ntfulsc-header.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "line": 95,
+      "logical_line": 95,
+      "directive": "#if 0",
+      "near_matches": [],
+      "evidence": [
+        "Original constant-false arm; selected DIV-064 loop remains in the original else arm."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "line": 245,
+      "logical_line": 1385,
+      "directive": "#ifdef PLANEDUMPER",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "line": 1479,
+      "logical_line": 1481,
+      "directive": "#ifdef X86GFX",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-x86gfx-source-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "line": 1509,
+      "logical_line": 1510,
+      "directive": "#ifdef X86GFX",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-x86gfx-source-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "line": 203,
+      "logical_line": 201,
+      "directive": "#ifdef X86GFX",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-x86gfx-source-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "line": 307,
+      "logical_line": 594,
+      "directive": "#ifdef X86GFX",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-x86gfx-source-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "line": 899,
+      "logical_line": 2005,
+      "directive": "#ifdef X86GFX",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-x86gfx-source-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "line": 926,
+      "logical_line": 2010,
+      "directive": "#ifdef X86GFX",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-x86gfx-source-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "line": 943,
+      "logical_line": 2024,
+      "directive": "#ifdef X86GFX",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-x86gfx-source-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "line": 1059,
+      "logical_line": 2410,
+      "directive": "#ifdef X86GFX",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-x86gfx-source-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "line": 87,
+      "logical_line": 87,
+      "directive": "#ifdef V7VGA",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-host-profile-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "line": 742,
+      "logical_line": 830,
+      "directive": "#if defined(CCPU) && defined(X86GFX)",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-x86gfx-source-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "line": 812,
+      "logical_line": 910,
+      "directive": "#if !defined(CCPU) || defined(X86GFX)",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-x86gfx-source-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "line": 2070,
+      "logical_line": 2210,
+      "directive": "#ifdef X86GFX",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-x86gfx-source-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "line": 287,
+      "logical_line": 261,
+      "directive": "#if defined(MVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION)",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-boot-profile-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "line": 229,
+      "logical_line": 229,
+      "directive": "#ifdef EJECT_FLOPPY",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "line": 342,
+      "logical_line": 341,
+      "directive": "#ifdef EJECT_FLOPPY",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "line": 384,
+      "logical_line": 434,
+      "directive": "#ifdef EJECT_FLOPPY",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "line": 324,
+      "logical_line": 324,
+      "directive": "#ifdef NO_LONGER_USED",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "line": 230,
+      "logical_line": 229,
+      "directive": "#ifdef NOT_IN_USE",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "line": 553,
+      "logical_line": 663,
+      "directive": "#if FASTBOPPING",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "line": 560,
+      "logical_line": 667,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "DIV-577; s13-bfs-depth1-debug-wow-special.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "line": 608,
+      "logical_line": 703,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "DIV-577; s13-bfs-depth1-debug-wow-special.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "line": 652,
+      "logical_line": 792,
+      "directive": "#if FASTBOPPING",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "line": 664,
+      "logical_line": 802,
+      "directive": "#if FASTBOPPING",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-wow-extra-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "line": 333,
+      "logical_line": 333,
+      "directive": "#ifdef DBCS",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-finalists-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "line": 364,
+      "logical_line": 365,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "DIV-576; s13-bfs-depth1-debug-wow-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "line": 505,
+      "logical_line": 529,
+      "directive": "#ifdef DBCS",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-finalists-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "line": 556,
+      "logical_line": 581,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "DIV-576; s13-bfs-depth1-debug-wow-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "line": 568,
+      "logical_line": 616,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "DIV-576; s13-bfs-depth1-debug-wow-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 178,
+      "logical_line": 178,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "DIV-575; s13-bfs-depth1-debug-wkman.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 525,
+      "logical_line": 563,
+      "directive": "#if FASTBOPPING",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 844,
+      "logical_line": 888,
+      "directive": "#if FASTBOPPING",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 858,
+      "logical_line": 900,
+      "directive": "#if FASTBOPPING",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 1114,
+      "logical_line": 1155,
+      "directive": "#if FASTBOPPING",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 1345,
+      "logical_line": 1395,
+      "directive": "#if FASTBOPPING",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 1386,
+      "logical_line": 1438,
+      "directive": "#if FASTBOPPING",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 1400,
+      "logical_line": 1451,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "DIV-575; s13-bfs-depth1-debug-wkman.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 1559,
+      "logical_line": 1608,
+      "directive": "#if FASTBOPPING",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 2426,
+      "logical_line": 2487,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "DIV-575; s13-bfs-depth1-debug-wkman.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 4392,
+      "logical_line": 4469,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "DIV-575; s13-bfs-depth1-debug-wkman.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "line": 57,
+      "logical_line": 55,
+      "directive": "#ifdef WOWPROFILE",
+      "near_matches": [],
+      "evidence": [
+        "DIV-585; s13-bfs-depth1-wowprofile-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "line": 150,
+      "logical_line": 147,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "DIV-576; s13-bfs-depth1-debug-wow-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "line": 234,
+      "logical_line": 232,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "DIV-576; s13-bfs-depth1-debug-wow-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "line": 241,
+      "logical_line": 240,
+      "directive": "#ifdef WOWPROFILE",
+      "near_matches": [],
+      "evidence": [
+        "DIV-585; s13-bfs-depth1-wowprofile-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "line": 249,
+      "logical_line": 249,
+      "directive": "#ifdef WOWPROFILE",
+      "near_matches": [],
+      "evidence": [
+        "DIV-585; s13-bfs-depth1-wowprofile-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsg16.c",
+      "line": 226,
+      "logical_line": 265,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "DIV-576; s13-bfs-depth1-debug-wow-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "line": 446,
+      "logical_line": 457,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "DEBUG init branch excluded in actual WOW and fixture release contexts; DIV-595: s13-bfs-depth1-wow-local-debug.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "line": 572,
+      "logical_line": 596,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "DEBUG init branch excluded in actual WOW and fixture release contexts; DIV-595: s13-bfs-depth1-wow-local-debug.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "line": 608,
+      "logical_line": 635,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "DIV-577; s13-bfs-depth1-debug-wow-special.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "line": 666,
+      "logical_line": 751,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "DIV-577; s13-bfs-depth1-debug-wow-special.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "line": 734,
+      "logical_line": 843,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "DIV-577; s13-bfs-depth1-debug-wow-special.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "line": 818,
+      "logical_line": 988,
+      "directive": "#ifdef DEBUG_OR_WOWPROFILE",
+      "near_matches": [],
+      "evidence": [
+        "DIV-586; s13-bfs-depth1-wowprofile2-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "line": 887,
+      "logical_line": 1057,
+      "directive": "#ifdef DEBUG_OR_WOWPROFILE",
+      "near_matches": [],
+      "evidence": [
+        "DIV-586; s13-bfs-depth1-wowprofile2-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "line": 929,
+      "logical_line": 1111,
+      "directive": "#if NO_W32TRYCALL",
+      "near_matches": [],
+      "evidence": [
+        "Selected WOW graph has i386 undefined and NO_W32TRYCALL false at this source position; exact original body and test-entry audit: s13-bfs-depth1-wow-trycall-exclusion.json."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "line": 1462,
+      "logical_line": 1806,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "DIV-577; s13-bfs-depth1-debug-wow-special.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "line": 1511,
+      "logical_line": 1854,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "DIV-577; s13-bfs-depth1-debug-wow-special.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "line": 1574,
+      "logical_line": 1935,
+      "directive": "#if FASTBOPPING",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "line": 1603,
+      "logical_line": 1957,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "DIV-577; s13-bfs-depth1-debug-wow-special.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowhooks.c",
+      "line": 628,
+      "logical_line": 628,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "DIV-576; s13-bfs-depth1-debug-wow-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowhooks.c",
+      "line": 1222,
+      "logical_line": 1226,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "DIV-576; s13-bfs-depth1-debug-wow-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "line": 231,
+      "logical_line": 230,
+      "directive": "#ifdef MAPPARAM_EXTRA",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-finalists-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "line": 244,
+      "logical_line": 242,
+      "directive": "#ifdef MAPPARAM_EXTRA",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-finalists-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "line": 331,
+      "logical_line": 361,
+      "directive": "#ifdef MAPPARAM_EXTRA",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-finalists-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "line": 459,
+      "logical_line": 487,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "DIV-576; s13-bfs-depth1-debug-wow-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "line": 550,
+      "logical_line": 582,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "DIV-576; s13-bfs-depth1-debug-wow-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "line": 267,
+      "logical_line": 271,
+      "directive": "#ifdef WOW_USER_PRIVATE_REDIRECT",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-wowredirect-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "line": 744,
+      "logical_line": 747,
+      "directive": "#ifdef WOW_USER_PRIVATE_REDIRECT",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-wowredirect-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "line": 774,
+      "logical_line": 753,
+      "directive": "#ifdef WOW_USER_PRIVATE_REDIRECT",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-wowredirect-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "line": 1075,
+      "logical_line": 1047,
+      "directive": "#ifdef WOWEDIT",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclip.c",
+      "line": 1292,
+      "logical_line": 1292,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "DIV-576; s13-bfs-depth1-debug-wow-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wudlg.c",
+      "line": 99,
+      "logical_line": 98,
+      "directive": "#ifdef WOWPROFILE",
+      "near_matches": [],
+      "evidence": [
+        "DIV-585; s13-bfs-depth1-wowprofile-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.c",
+      "line": 880,
+      "logical_line": 880,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "DIV-576; s13-bfs-depth1-debug-wow-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.c",
+      "line": 1181,
+      "logical_line": 1182,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "DIV-576; s13-bfs-depth1-debug-wow-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.c",
+      "line": 2003,
+      "logical_line": 2005,
+      "directive": "#ifdef ONLY_API16",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "line": 2987,
+      "logical_line": 3002,
+      "directive": "#ifdef NEVER",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser31.c",
+      "line": 467,
+      "logical_line": 467,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "DIV-576; s13-bfs-depth1-debug-wow-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser31.c",
+      "line": 740,
+      "logical_line": 748,
+      "directive": "#ifdef APRIL15",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-597; s13-bfs-depth1-consolidated-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "line": 1699,
+      "logical_line": 1705,
+      "directive": "#ifdef WOW_USER_PRIVATE_REDIRECT",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-wowredirect-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "line": 2475,
+      "logical_line": 2480,
+      "directive": "#ifdef WOW_USER_PRIVATE_REDIRECT",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-wowredirect-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "line": 2513,
+      "logical_line": 2493,
+      "directive": "#ifdef WOW_USER_PRIVATE_REDIRECT",
+      "near_matches": [],
+      "evidence": [
+        "MVDM-HOST-DIV-598; s13-bfs-depth1-wowredirect-batch.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/time.c",
+      "line": 61,
+      "logical_line": 56,
+      "directive": "#if defined(MVDM_STANDALONE_TIME1970_ONLY)",
+      "near_matches": [],
+      "evidence": [
+        "OPENNT-HOST-148; s13-bfs-depth1-rtl-time-batch.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/basesrv.h",
+      "line": 231,
+      "logical_line": 231,
+      "directive": "#if !defined(OPENNT_BASE_VDM_SERVER)",
+      "near_matches": [],
+      "evidence": [
+        "OPENNT-HOST-148; s13-bfs-depth1-basesrv-header-batch.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "line": 2645,
+      "logical_line": 2644,
+      "directive": "#if DEVL",
+      "near_matches": [],
+      "evidence": [
+        "OPENNT-HOST-148; s13-bfs-depth1-devl-batch.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "line": 194,
+      "logical_line": 285,
+      "directive": "",
+      "near_matches": [
+        280,
+        282,
+        286,
+        287,
+        288
+      ],
+      "evidence": [
+        "OPENNT-HOST-148; s13-bfs-depth1-packstr-batch.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "line": 200,
+      "logical_line": 291,
+      "directive": "#line 411",
+      "near_matches": [],
+      "evidence": [
+        "OPENNT-HOST-148; s13-bfs-depth1-packstr-batch.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "line": 36,
+      "logical_line": 36,
+      "directive": "#ifdef UNICODE",
+      "near_matches": [],
+      "evidence": [
+        "OPENNT-HOST-148; s13-bfs-depth1-finalists-batch.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "line": 290,
+      "logical_line": 290,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "original DEBUG body and actual WOW/call-boundary contexts, OPENNT-HOST-146: s13-bfs-depth1-user-debug.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "line": 616,
+      "logical_line": 617,
+      "directive": "#ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+      "near_matches": [],
+      "evidence": [
+        "OPENNT-HOST-148; s13-bfs-depth1-dialog-profile-batch.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "line": 636,
+      "logical_line": 636,
+      "directive": "#ifndef WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+      "near_matches": [],
+      "evidence": [
+        "OPENNT-HOST-148; s13-bfs-depth1-dialog-profile-batch.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "line": 146,
+      "logical_line": 146,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "original DEBUG body and actual WOW/call-boundary contexts, OPENNT-HOST-146: s13-bfs-depth1-user-debug.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "line": 168,
+      "logical_line": 167,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "original DEBUG body and actual WOW/call-boundary contexts, OPENNT-HOST-146: s13-bfs-depth1-user-debug.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+      "line": 610,
+      "logical_line": 610,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "original DEBUG body and actual WOW/call-boundary contexts, OPENNT-HOST-146: s13-bfs-depth1-user-debug.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "line": 31,
+      "logical_line": 31,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "original DEBUG body and actual WOW/call-boundary contexts, OPENNT-HOST-146: s13-bfs-depth1-user-debug.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 62,
+      "logical_line": 54,
+      "directive": "#ifndef CPU_40_STYLE",
+      "near_matches": [],
+      "evidence": [
+        "DIV-566 restores original first-depth boundary; non-CPU40 unsupported; x86/x64 guard negative controls pass"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "line": 213,
+      "logical_line": 213,
+      "directive": "#ifdef i386",
+      "near_matches": [],
+      "evidence": [
+        "original first-depth XMS guard restored; actual worker/reference contexts select non-i386, DIV-594: s13-bfs-depth1-original-xms.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "line": 5943,
+      "logical_line": 5896,
+      "directive": "#ifdef CPU_30_STYLE",
+      "near_matches": [],
+      "evidence": [
+        "Original unsupported CPU30 callback arm rejected; supported CPU40 worker contexts exclude CPU30; s13-bfs-depth1-mouse-outer-restoration.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "line": 1584,
+      "logical_line": 1944,
+      "directive": "#if FASTBOPPING",
+      "near_matches": [],
+      "evidence": [
+        "Pinned OpenNT selector restored; actual WOW profile defines FASTBOPPING=0 in fastwow.h. See s13-bfs-depth1-fastwow-original-outers.json."
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+      "line": 1203,
+      "logical_line": 1204,
+      "directive": "#ifdef WX86",
+      "near_matches": [],
+      "evidence": [
+        "s13-clglobal-original-guards.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+      "line": 398,
+      "logical_line": 398,
+      "directive": "#ifdef MEMPHIS_MENUS",
+      "near_matches": [],
+      "evidence": [
+        "s13-clmenu-original-guards.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+      "line": 402,
+      "logical_line": 402,
+      "directive": "#ifdef MEMPHIS_MENU_WATERMARKS",
+      "near_matches": [],
+      "evidence": [
+        "s13-clmenu-original-guards.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "line": 40,
+      "logical_line": 40,
+      "directive": "#if 0",
+      "near_matches": [],
+      "evidence": [
+        "s13-handtabl-original-disabled.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "line": 272,
+      "logical_line": 758,
+      "directive": "#ifdef DEBUG",
+      "near_matches": [],
+      "evidence": [
+        "original DEBUG body and actual WOW/call-boundary contexts, OPENNT-HOST-146: s13-bfs-depth1-user-debug.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "line": 245,
+      "logical_line": 745,
+      "directive": "#ifdef UNICODE",
+      "near_matches": [],
+      "evidence": [
+        "OPENNT-HOST-156; entry rejects UNICODE and file does not redefine it"
+      ]
+    }
+  ],
+  "limits": "not evidence of a defect"
+}

@@ -1,0 +1,35 @@
+{
+  "controls": [
+    {
+      "line": 4750,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 4750,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 990,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 990,
+      "arch": "x64",
+      "exit": 2
+    },
+    {
+      "line": 393,
+      "arch": "x86",
+      "exit": 2
+    },
+    {
+      "line": 393,
+      "arch": "x64",
+      "exit": 2
+    }
+  ],
+  "limits": "isolated forced profiles; omitted selected functions not recovered"
+}

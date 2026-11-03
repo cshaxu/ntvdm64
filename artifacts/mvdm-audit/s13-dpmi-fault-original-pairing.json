@@ -1,0 +1,14 @@
+{
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+  "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+  "current": "src/mvdm-host/dpmi32/dpmiint.c",
+  "current_sha256": "38343b287fa0623c1962773af4613d39a6de47a3bfc0f581c38e3124680ec0aa",
+  "original_line": 859,
+  "current_line": 924,
+  "anchor": "DpmiFaultHandler",
+  "original_condition": "#ifndef i386",
+  "current_condition": "#if !defined(i386) || defined(CPU_40_STYLE)",
+  "classification": "registered local adaptation; actual product preprocessing selects function; does not prove semantic equivalence",
+  "registration": "MVDM-HOST-DIV-582",
+  "prior_evidence": "s13-bfs-depth1-original-dpmi-selectors.json"
+}

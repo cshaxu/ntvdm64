@@ -1,0 +1,37 @@
+{
+  "source": "src\\non-mvdm\\windows\\core\\ntuser\\client\\clmsg.c",
+  "old_snapshot_sha256": "b18629e01f8b6f00e5667753b12b1498b821f40adb11e562cb1ab7e9226af52c",
+  "current_sha256": "66efe6002f7731ec1bab0067c31c822db3c9ae70d9f67bc810e51f40e735e973",
+  "contexts": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/default-client.obj",
+      "nonblank_lines": 40390,
+      "old_normalized_sha256": "1eced89f79cb4743c5ef2fe3409f0c7ecde9a9ebd4054eb83669ef58f87c2eda",
+      "current_normalized_sha256": "1eced89f79cb4743c5ef2fe3409f0c7ecde9a9ebd4054eb83669ef58f87c2eda"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/client-callproc.obj",
+      "nonblank_lines": 43193,
+      "old_normalized_sha256": "a46aee13b9c85e03f4fb430bc844cb991706eae2e412615e3177aecda77a8db2",
+      "current_normalized_sha256": "a46aee13b9c85e03f4fb430bc844cb991706eae2e412615e3177aecda77a8db2"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/getset_callproc.obj",
+      "nonblank_lines": 79152,
+      "old_normalized_sha256": "b8de3b4e87f17b235aeec24640247492efcc143d893028106df3a5132fc0bf26",
+      "current_normalized_sha256": "b8de3b4e87f17b235aeec24640247492efcc143d893028106df3a5132fc0bf26"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_default.obj",
+      "nonblank_lines": 79216,
+      "old_normalized_sha256": "a34373c48da42c9820b33cba92f4ff40c831576b51c071f8d846aaec11abca81",
+      "current_normalized_sha256": "a34373c48da42c9820b33cba92f4ff40c831576b51c071f8d846aaec11abca81"
+    }
+  ],
+  "result": "Four real selected contexts produce identical nonblank preprocessed text from old snapshot and current source.",
+  "limits": "Output comparison removes blank lines and surrounding whitespace; verifies observed contexts only, not all possible configurations, linking, callbacks or runtime behavior."
+}

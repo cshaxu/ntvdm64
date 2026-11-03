@@ -1,0 +1,138 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "before_sha256": "cef9324144e13939de32a4bd129b3cd59022417404ab3ed6daec2e9a30c094bf",
+      "after_sha256": "c6f97d510c2423b7ce32fd61f10f73a43f8f5c225d6626b22960a3a1a8d1fd9a",
+      "original_if_line": 2188,
+      "original_endif_line": 2234,
+      "current_marker_line": 1867,
+      "previous": 2025,
+      "corrected": 2235,
+      "verified_exact_original_continuation_lines": 5
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "original_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987",
+      "before_sha256": "73fae31f62a6893cdb7c40fe43d736054e55a2071bf775eb5d540f2404d39c3c",
+      "after_sha256": "4aa83fb78b9b708dc63f4ae875a8457fca52cb46855bc16bb115d38961625fcd",
+      "original_if_line": 186,
+      "original_endif_line": 190,
+      "current_marker_line": 167,
+      "previous": 165,
+      "corrected": 191,
+      "verified_exact_original_continuation_lines": 5
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "original_sha256": "fe3bb4a06759e1cbef74bff327661f9649c92fb2490cdc751bc625a8170d3d4f",
+      "before_sha256": "d8eaff343a384821909e173ec6502583a8cd8aca3cd65c91ce144284fd4e9735",
+      "after_sha256": "1ed79b8fc85e89b0cbd2ed6838b29610106591dd02717cf50ae7dc74dcb1f24e",
+      "original_if_line": 125,
+      "original_endif_line": 199,
+      "current_marker_line": 197,
+      "previous": 210,
+      "corrected": 200,
+      "verified_exact_original_continuation_lines": 5
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "original_sha256": "f2ab1f40420a0928884cf524305a9b87b8c65b0c3440ab97367aa1cbce6417a7",
+      "before_sha256": "e51bb0d18247f51723a1fd28f3f5c2cc24dc291a4d708f2eaebf8ba047fdf0fa",
+      "after_sha256": "8d9cd46a0e899ac4ad263333a4958ba0ccecb26996655adbf551cbe258a8f8e1",
+      "original_if_line": 317,
+      "original_endif_line": 342,
+      "current_marker_line": 327,
+      "previous": 350,
+      "corrected": 343,
+      "verified_exact_original_continuation_lines": 5
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsg16.c",
+      "original_sha256": "eb7b726626232ad95f1ff766004f8bea6fca3d25111124dd5c18e8512c1dbe44",
+      "before_sha256": "0a9463f2f58240e0a7076d76f9f503806d4478c8dada55784706a9fe4938ee7d",
+      "after_sha256": "8abcadbad3b801438824afde5f73da05a300696316277be3cc6aa89115bae946",
+      "original_if_line": 246,
+      "original_endif_line": 250,
+      "current_marker_line": 232,
+      "previous": 270,
+      "corrected": 251,
+      "verified_exact_original_continuation_lines": 5
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
+      "before_sha256": "2abb1dd15c9a97c6c4fb7c0808bfad806d26c6cebd16c69a63d5f4731f42c061",
+      "after_sha256": "437a06ccd96760cf1f391be4525717609d83061f2e0d8221858b8b3d53c0bb19",
+      "original_if_line": 1901,
+      "original_endif_line": 1903,
+      "current_marker_line": 1577,
+      "previous": 1938,
+      "corrected": 1904,
+      "verified_exact_original_continuation_lines": 5
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "original_sha256": "939785d0aee348459e02136efafdcbdac7aa1d7612f4bfcf8c4f21acf677271a",
+      "before_sha256": "68f13401e57c14fee940d322f223d9b66a487bd1d1f873e6783b218acfb5aab7",
+      "after_sha256": "1d4c01eb08eb9386a29f86ee324c87cbfa2f8d45e043c5c2c1793d42f6873370",
+      "original_if_line": 336,
+      "original_endif_line": 340,
+      "current_marker_line": 337,
+      "previous": 366,
+      "corrected": 341,
+      "verified_exact_original_continuation_lines": 5
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.c",
+      "original_sha256": "3404569a45421465a6b916975b978d9ede19ba3ee7f2534b20fad304e91bc7ff",
+      "before_sha256": "4ccb77bb49985efc79140d7dd255022073362942997809b39472f00c632c0b9f",
+      "after_sha256": "cd8ee7ff8299172a39dcd1d4e6b2c964238ffec2a8d32baf79334efdb47a0576",
+      "original_if_line": 1908,
+      "original_endif_line": 1922,
+      "current_marker_line": 2011,
+      "previous": 2020,
+      "corrected": 1923,
+      "verified_exact_original_continuation_lines": 5
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "original_sha256": "ce33e8634d085f9ca27ad331560e5321c3fed2ee8552ce0d00fda25af0a74b62",
+      "before_sha256": "df25b7de07af7acff7639979618da37b743611f937e0611e105c740f3858d4b8",
+      "after_sha256": "6b02610cae35e619e11eb077c71459ca7596956f3143cbecd5ccc9d29cda5ae7",
+      "original_if_line": 2974,
+      "original_endif_line": 3002,
+      "current_marker_line": 2990,
+      "previous": 3031,
+      "corrected": 3003,
+      "verified_exact_original_continuation_lines": 5
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser31.c",
+      "original_sha256": "260237f9fda0013f02bbbcbc94c29ea2069de545043b636f2828c554e55582a4",
+      "before_sha256": "788d5c2ef2f877dcc8084902e93238e9fcbe2c9c5873bdf901a390e9f7e9320d",
+      "after_sha256": "9b3a63c8e0f0567bd751ad2f725008738d6d46dede4ab13b9049e5c775d20082",
+      "original_if_line": 738,
+      "original_endif_line": 748,
+      "current_marker_line": 748,
+      "previous": 759,
+      "corrected": 749,
+      "verified_exact_original_continuation_lines": 5
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "original_sha256": "bad1de87b499d3052e757d858b39437232f5653610dc5560c06afcc5e05fd391",
+      "before_sha256": "0299af7148f217e237a8f094e972da7b7a4d61f534d99d1ccc786e28ab752d5b",
+      "after_sha256": "d3497e87ba1091ab107bad4582220dce4fa6acb7ecb9e0a03616b68217836efd",
+      "original_if_line": 194,
+      "original_endif_line": 208,
+      "current_marker_line": 225,
+      "previous": 220,
+      "corrected": 209,
+      "verified_exact_original_continuation_lines": 5
+    }
+  ],
+  "proof": "unique original group, no prior original #line, and five identical following lines; exact post-write SHA verified",
+  "limits": "actual build and diagnostic verification pending"
+}

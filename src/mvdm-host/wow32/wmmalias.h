@@ -81,7 +81,9 @@ typedef struct _HMAP {      /* hm */
  */
 typedef struct _HINFO {         /* hi */
     PPHMAP  pphmHash;           // address of hash table
+#line 84
 #ifdef NEWALIAS
+#line 85
 #error Unsupported excluded original configuration
 #endif
 #line 89

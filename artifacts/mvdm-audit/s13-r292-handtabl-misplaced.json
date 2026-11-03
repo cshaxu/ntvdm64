@@ -1,0 +1,80 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+  "before_sha256": "e43ddc8e69a7decbcf57bbea20ab1e60c950fe244c23912871e227c7a7db8f55",
+  "after_sha256": "62aa9ba58a341ba57d0bccad3682ae4f3a5cea234f82436d20819cd81c784ff8",
+  "groups": [
+    {
+      "current_old_start": 59,
+      "current_old_end": 64,
+      "original_line": 134,
+      "directive": "#ifdef DEBUG"
+    },
+    {
+      "current_old_start": 65,
+      "current_old_end": 70,
+      "original_line": 585,
+      "directive": "#ifdef DEBUG"
+    },
+    {
+      "current_old_start": 71,
+      "current_old_end": 76,
+      "original_line": 764,
+      "directive": "#ifdef DEBUG"
+    },
+    {
+      "current_old_start": 77,
+      "current_old_end": 82,
+      "original_line": 797,
+      "directive": "#ifdef DEBUG"
+    },
+    {
+      "current_old_start": 95,
+      "current_old_end": 100,
+      "original_line": 1056,
+      "directive": "#ifdef DEBUG"
+    },
+    {
+      "current_old_start": 101,
+      "current_old_end": 106,
+      "original_line": 1084,
+      "directive": "#ifdef DEBUG"
+    },
+    {
+      "current_old_start": 107,
+      "current_old_end": 112,
+      "original_line": 1139,
+      "directive": "#ifdef DEBUG"
+    },
+    {
+      "current_old_start": 139,
+      "current_old_end": 144,
+      "original_line": 1353,
+      "directive": "#ifdef DEBUG"
+    },
+    {
+      "current_old_start": 163,
+      "current_old_end": 168,
+      "original_line": 1886,
+      "directive": "#ifdef DEBUG"
+    },
+    {
+      "current_old_start": 175,
+      "current_old_end": 180,
+      "original_line": 81,
+      "directive": "#ifdef FE_IME"
+    },
+    {
+      "current_old_start": 181,
+      "current_old_end": 186,
+      "original_line": 456,
+      "directive": "#ifdef FE_IME"
+    },
+    {
+      "current_old_start": 187,
+      "current_old_end": 192,
+      "original_line": 1519,
+      "directive": "#ifdef FE_IME"
+    }
+  ],
+  "reason": "original directives lie inside omitted functions or data initializers; file-scope placeholders withdrawn; original groups pending"
+}

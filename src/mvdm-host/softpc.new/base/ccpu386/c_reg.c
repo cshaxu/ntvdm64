@@ -1204,7 +1204,7 @@ c_getVM()
 #ifdef	SPC486
 #error Excluded unsupported SPC486 profile
 #endif	/* SPC486 */
-#line 1256
+#line 1252
 
 GLOBAL IU16
 c_getSTATUS()
@@ -1502,7 +1502,7 @@ IFN1(
 #ifdef	SPC486
 #error Excluded unsupported SPC486 profile
 #endif	/* SPC486 */
-#line 1620
+#line 1616
 
 GLOBAL VOID
 c_setPG

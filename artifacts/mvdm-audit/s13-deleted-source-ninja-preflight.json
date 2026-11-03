@@ -1,0 +1,67 @@
+{
+  "deleted_source_paths_checked": 847,
+  "graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\build.ninja",
+      "sha256": "683019e2f7cd95bdba27ce829ca2ce3880e1a92b08b6f78ba277f81647a0dd8d"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja",
+      "sha256": "94312559ea82a774d8f71974ede03f1c366e2a1df7ea7dbb67eb4d56d8637fe3"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\style-fixtures\\build.ninja",
+      "sha256": "2063ca7d6cfa03f4c62c6d45ab0aff58fe0f97ff8a75b50d17a9989aebdcba1d"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "8c00ccbf0b1b12421e5f9b628eb203ab5ff43540efbb99a2e1ac26a558a8c4f8"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "57cc276a409e24a25cd956b822478ff85ae464f25c093b8ac1b921b237c8b87a"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\build.ninja",
+      "sha256": "d98ce45a0d63ca99f4f438b76f5bef907d983738b9b0db89049c36d35da763ac"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend\\build.ninja",
+      "sha256": "de2e799b4fcf9d4a44b6a85a060933ac18095d69cf6bad88453afd843cb763e3"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\hook\\build.ninja",
+      "sha256": "86957a52bb51b4ca65c75852c180635e63c8604abfe4b2dc300e4ca278f902dd"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\launcher\\build.ninja",
+      "sha256": "b8311977f1dfeeaca03ec46b04947d7e9cb01da7d6e44ce62847b55f050c17fd"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\monitor\\build.ninja",
+      "sha256": "b782dc1993f9f75b3917cfd5739c2308fbba82e22080e58f58e71a36d5d24612"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\observation\\build.ninja",
+      "sha256": "2943da8cd06aa6c9e412f341f31a59f76970b71877c23a0d4ecee799206a2d3f"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service\\build.ninja",
+      "sha256": "1aececf900a17fceafd125c397ded64107cbb0fa3eb062b18adf951db4f04d1a"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\style-fixtures\\build.ninja",
+      "sha256": "b4a1ed748496a2e00dcb140045c317408b07d60ee7fbb03b9f0fff137d29b0fd"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\worker\\build.ninja",
+      "sha256": "a4e284175f22876724160192dde76e338599ac52a2e415b20546dca7da5188e5"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja",
+      "sha256": "88af1765f34b1f312fbb2d5a9bd97140ff17b34aa64a3aebcecceb8cd8539ca8"
+    }
+  ],
+  "literal_full_relative_path_hits": [],
+  "limits": "Literal-path graph preflight only: not proof of missing indirect includes, runtime resources, guest usage, or that deleted source is safe to remove. Current worktree includes uncommitted removals; retain pending the full source and resource audit."
+}

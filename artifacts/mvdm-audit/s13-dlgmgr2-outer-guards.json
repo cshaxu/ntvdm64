@@ -1,0 +1,12 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+  "sha256": "1da660aa8e942172f9eaad5ac4ef280fda58540a7416c0a8f029a62fb8ccdff0",
+  "original_lines": [
+    221,
+    240,
+    281
+  ],
+  "build": "x86 WOW32 compiled; call-boundaries no work",
+  "test": "x86 first-depth guard suite passed",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r193.zip"
+}

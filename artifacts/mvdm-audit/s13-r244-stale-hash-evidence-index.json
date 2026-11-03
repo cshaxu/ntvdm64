@@ -1,0 +1,303 @@
+{
+  "scope": "Evidence documents mentioning current SHA-256 for the 43 stale queue files",
+  "rows": [
+    {
+      "source": "src\\mvdm-host\\dos\\dem\\demhndl.c",
+      "current_sha256": "b5e0e3280d267729af059a5944ac411d7f2519ad3f1339fc8232accf0f439049",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch2.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\dpmi32\\dpmiint.c",
+      "current_sha256": "38343b287fa0623c1962773af4613d39a6de47a3bfc0f581c38e3124680ec0aa",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-dpmi-fault-original-pairing.json",
+        "artifacts\\mvdm-audit\\s13-dpmi-handler-original-guards.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\dpmi32\\dpmiselr.c",
+      "current_sha256": "04a212111012c817062b6045b75dbccd5639936a113c8c47b4606e4b9f674cfb",
+      "evidence_files": []
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\base\\bios\\reset.c",
+      "current_sha256": "1cda785860d29b801b2510a801e0cc60869ceefbcf6a4a5571e6d32696328836",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch2.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\base\\ccpu386\\c_main.c",
+      "current_sha256": "102bdfaab6fea42e19deea0115f82523fdff5d6e486272887139740955a5e224",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch2.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\base\\comms\\com.c",
+      "current_sha256": "106b2ac1f9ba81fb9c735d894176a7f202aeb703f74c8c10965f43d0c5d7e3ed",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-com-adaptor-guard-anchors.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\base\\debug\\trace.c",
+      "current_sha256": "062b9332cfd240d535f10c4e3ea5a205c0c9c2d733f2fdd2fd03b5f31e30e2b4",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch2.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\base\\inc\\bios.h",
+      "current_sha256": "248021f5a5b58067787a92f6c1436de1fc2c72760111998d99c9500121ebc9c9",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch2.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\base\\inc\\emm.h",
+      "current_sha256": "13c51268c07d4486e5a567bea80cebb53177abb3188bbdfa222b0f2bc7f6449d",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch2.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\base\\inc\\gvi.h",
+      "current_sha256": "ac27ac3db4d6f30db6de02f828426e629200e456b8578839a32bb43b742bee67",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch2.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\base\\inc\\ios.h",
+      "current_sha256": "be10431706251e0bf08ffda03662eec595fd39f731bbb6d86aed3d7424c7f995",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch2.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\base\\keymouse\\keyba.c",
+      "current_sha256": "5e3ff6f5ff8346d38b6e1aa3f96f8a6bce42871368c932a9a9e0bb649b4f9de0",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-checkpoint231-pic-keyboard-validation.json",
+        "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch3.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "current_sha256": "ff8a0f5a959d79e21fc928e71bcf3884516542ed9afbc7245d32b9028fd9cfb5",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-depth1-queue-relocation.json",
+        "artifacts\\mvdm-audit\\s13-original-anchored-arm-pairing-fourth.json",
+        "artifacts\\mvdm-audit\\s13-original-ordered-first-depth-pairing-after-relocation.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\base\\support\\get_env.c",
+      "current_sha256": "2b2965c828aaa56c4b52a7da835206e7daf1e65cecaa280e85f6a0da29660f2c",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch3.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\base\\support\\main.c",
+      "current_sha256": "e76b5d42d93b188c2d2d5cdc62b47f18df27d365d247652ec28b2af90f41a871",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch3.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\base\\system\\at_dma.c",
+      "current_sha256": "f51346082abab3ebfe9931b0947f699e9184d69ddb59f9fb3af74aed0db35870",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch3.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\base\\system\\ica.c",
+      "current_sha256": "75122e0bf4e18195896dbf98ab125ed3a867e5264b2a02c5aa9c30d6ec2e0902",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-checkpoint231-pic-keyboard-validation.json",
+        "artifacts\\mvdm-audit\\s13-ica-original-anchors.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\base\\system\\illegalp.c",
+      "current_sha256": "11201c23c76031935d2ed85f90c96a08dc40d954ab2198c3a358b7556064873f",
+      "evidence_files": []
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\base\\system\\timer.c",
+      "current_sha256": "9e78384698a9e7c936a935e7c6895e25b85d9179f4898058e00c9eef8a2e5064",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch3.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\host\\src\\nt_cpu.c",
+      "current_sha256": "95f8281fab486dba3d7cdcda40c432c0675e9ed3431562ab59097a3cdb75d316",
+      "evidence_files": []
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\host\\src\\nt_eoi.c",
+      "current_sha256": "6bfb427c75b1e50decac4c528a86410adc5aba55bbccc74bf049c1b2fef67ab7",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch3.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\host\\src\\nt_event.c",
+      "current_sha256": "517c246720970ad2b6b575c9721c13801910576d094e99d09ad6241224a6e488",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch3.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\host\\src\\nt_fulsc.c",
+      "current_sha256": "67cea7498083e74a51816f501e8887f711e17e7f765973badc327e04f7bbd48b",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-fulsc-cursor-monitor-original-pairing.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\host\\src\\nt_graph.c",
+      "current_sha256": "8a6ac4cbc55e1a10577b52da591406924fac41d8aac5f8beff65fa0d5a4a0c19",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch3.json",
+        "artifacts\\mvdm-audit\\s13-nt-graph-diagnostic-line-check.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\host\\src\\nt_rez.c",
+      "current_sha256": "0511f195c0a8a6c4721c164bd546e866bfd345f48492469e48e70137e2e6102a",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch3.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\host\\src\\nt_rflop.c",
+      "current_sha256": "9ff9228bc8c2b2ef7ba3fd89a76653b0a83d0f5814cb6b88d4c08edbe95afd99",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch3.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\host\\src\\nt_vdd.c",
+      "current_sha256": "ca9802377951a597e98c933395fc9be706757c4d476522d1279e14be8fdf2e41",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch4.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\softpc.new\\host\\src\\stubs.c",
+      "current_sha256": "24a4fb4cdb538af3c2c84fdc3ca5b74e361d8ca3410e4fb0adda568a6e499cdf",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch4.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\wow32\\wcall16.c",
+      "current_sha256": "ce4d684e01c743f83ba46f0314f261e2f3de4d406f556ffa7058fb679f4c3fe8",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch4.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\wow32\\wkfileio.c",
+      "current_sha256": "8f8ddccae0e5a5fec1718a5f52c78b1fc68df97b916c15d8fb536b1959b2c67f",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch4.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\wow32\\wkman.c",
+      "current_sha256": "57708c34a4d5892f5872963e79bdf27aa0410cc468b78019db93ee308024d252",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch4.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\wow32\\wmdisp32.c",
+      "current_sha256": "2da35733ebc7631be67815e16a6e48846097a30dea623d8d104dc52a8f4e74b8",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch4.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\wow32\\wmsgcb.c",
+      "current_sha256": "a949a029b2da94a1c3a831418f7442caccfc80b672e8a25aee69abc0943afdac",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch4.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\wow32\\wow32.c",
+      "current_sha256": "2abb1dd15c9a97c6c4fb7c0808bfad806d26c6cebd16c69a63d5f4731f42c061",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch4.json"
+      ]
+    },
+    {
+      "source": "src\\mvdm-host\\wow32\\wuclass.c",
+      "current_sha256": "1c4c537bdca279cd997e099122f9b54937e92ca030f637c97f81eee93f4a4a56",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch4.json"
+      ]
+    },
+    {
+      "source": "src\\non-mvdm\\base\\ntos\\ex\\probe.c",
+      "current_sha256": "d5a4aa697600bba9c8d8a4be71103e88c548c6f93c7a6951c9c0557b978fd7d3",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-probe-anchor-pairing.json"
+      ]
+    },
+    {
+      "source": "src\\non-mvdm\\ds\\netapi\\xactsrv\\apimsg.c",
+      "current_sha256": "2d820c06c3667fc73fafbcf5ad6324f3542b5d0f4f7018b4a33b5945282f06d7",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-formfeed-unique-anchor-corrections.json"
+      ]
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\client\\clmsg.c",
+      "current_sha256": "66efe6002f7731ec1bab0067c31c822db3c9ae70d9f67bc810e51f40e735e973",
+      "evidence_files": []
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+      "current_sha256": "12c43e3bd8abfd81ab6e61e033c9cbf2a2aa39372fc65ac3110603f6f825d18c",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch5.json"
+      ]
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "current_sha256": "5da4eb58366fe15bb2e312956c48071b9377361e09b9a40b20f8c4a423be6a48",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-debug-followup-batch.json"
+      ]
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\getset.c",
+      "current_sha256": "42a0eaabf60af5f3da3fcfa8e686a1d737a55a8913a07f254f348ae2b6f7c10b",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-debug-followup-batch.json"
+      ]
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "current_sha256": "f86e1cfd44d38827593b5e1f898fab73777315d2e32e0f387856a7bcf64d46ee",
+      "evidence_files": [
+        "artifacts\\mvdm-audit\\s13-user-debug-compound-guards.json"
+      ]
+    },
+    {
+      "source": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\server.c",
+      "current_sha256": "fa1065b07677471fc32e2ee3d3961e2a3365bda04e5899e4ebb55963d1a70c44",
+      "evidence_files": []
+    }
+  ],
+  "limitations": "A hash mention is only an attribution lead; it does not itself prove source semantics, branch classification, or correctness of the associated evidence."
+}

@@ -1,0 +1,28 @@
+{
+  "test_sha256": "17fc08a5f664011b40fe27e698385ddbbce0fdc3a1421f1b6e5c85385cdf3e3d",
+  "architectures": {
+    "x86": {
+      "status": "pass",
+      "pass_lines": 51,
+      "log_sha256": "7b8ef8dc2524fc5421620d1478e4b64c055eea9e39608d91175aa29e7f773fc6",
+      "last_lines": [
+        "PASS original DPMI i386 handler boundary and continuation",
+        "PASS original c_main SFELLOW continuation anchors",
+        "PASS original VDM classifier first-depth guards and continuations",
+        "PASS original chartran later guard continuation anchors"
+      ]
+    },
+    "x64": {
+      "status": "pass",
+      "pass_lines": 51,
+      "log_sha256": "7b8ef8dc2524fc5421620d1478e4b64c055eea9e39608d91175aa29e7f773fc6",
+      "last_lines": [
+        "PASS original DPMI i386 handler boundary and continuation",
+        "PASS original c_main SFELLOW continuation anchors",
+        "PASS original VDM classifier first-depth guards and continuations",
+        "PASS original chartran later guard continuation anchors"
+      ]
+    }
+  },
+  "scope": "guard selection and line diagnostics; not full product runtime"
+}

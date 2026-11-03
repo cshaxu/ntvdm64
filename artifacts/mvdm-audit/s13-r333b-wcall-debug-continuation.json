@@ -1,0 +1,12 @@
+{
+  "source": "src/mvdm-host/wow32/wcall16.c",
+  "before_sha256": "fb75a3e24411be5deba32909e656a50656c80dff0c8629e14cd8aac93fec88c8",
+  "after_sha256": "9fc75103ab86ba9286e3e472e854b4006cada8cdcf8533c2275b3d603a42f70c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wcall16.c",
+  "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0",
+  "original_endif": 755,
+  "old_continuation": 781,
+  "new_continuation": 756,
+  "scope": "line mapping before existing local callback trace; original FREEVDMPTR retained after trace",
+  "validation": "pending"
+}

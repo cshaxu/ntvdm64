@@ -1,0 +1,20 @@
+{
+  "candidate": {
+    "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+    "anchor_line": 174,
+    "old": 172,
+    "new": 180,
+    "following": "_GetChildControl(pwndRoot, pwndParent);",
+    "original_line": 180,
+    "group_line": 168,
+    "depth1_endline": 173,
+    "arm_statuses": [
+      "newly-excluded",
+      "retained-observed"
+    ]
+  },
+  "before_sha256": "59441bf9bbd1e173632198a172f8f14273d417491c0616ee9fbca4c31db0ba43",
+  "after_sha256": "12c43e3bd8abfd81ab6e61e033c9cbf2a2aa39372fc65ac3110603f6f825d18c",
+  "original_sha256": "678d2cd4b79a15a79e6c0257b4bd93ad69fa7be95a513b627565490256cb1afc"
+}

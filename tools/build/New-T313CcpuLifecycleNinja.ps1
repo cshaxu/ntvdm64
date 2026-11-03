@@ -34,7 +34,7 @@ if (!(Test-Path -LiteralPath $NodeExecutable -PathType Leaf)) { throw "Node 22 i
 $ccpuRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/ccpu386'
 $hostRoot = Join-Path $root 'src/mvdm-host/softpc.new/host/src'
 $ccpuFallbackSource = Join-Path $root 'src/ntvdm-exe/softpc/mvdm_ccpu_vector_defaults.c'
-$ccpu = @(Get-OriginalSources (Join-Path $ccpuRoot 'sources') | Where-Object { $_ -ne 'ntstubs.c' })
+$ccpu = @(Get-OriginalSources (Join-Path $ccpuRoot 'sources'))
 $hostSources = @('nt_cpu.c', 'sim32.c', 'nt_mem.c')
 $controllerSources = @('at_dma.c', 'ica.c')
 $supportSources = @('ios.c')

@@ -1,0 +1,413 @@
+{
+  "scope": "67 tracked host/non-MVDM files without recorded current condition groups, product graph context, other literal source/build/test/manifest references, or uncommitted edits",
+  "files": [
+    {
+      "path": "src/mvdm-host/inc/v86def.h",
+      "sha256": "37cf936558c2f094d804a6d4024403a4d51235120e727e7d589799c54bc35a5d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\v86def.h",
+      "original_sha256": "5bc822b487f5f1a236e6be8e107af5832fd680e026cf7231e0ae61e13595937e"
+    },
+    {
+      "path": "src/mvdm-host/inc/wowexp.h",
+      "sha256": "f0c12e7c122f9460e43ed018643e76f6a9dbc9765eeb1ca4d44bb67d81fe304e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowexp.h",
+      "original_sha256": "9808ea87febfaf78ebb5cdfb2da68ac1c9795c6c19dd67c37a0e33ee95d6eb94"
+    },
+    {
+      "path": "src/mvdm-host/inc/wowint.h",
+      "sha256": "186546713d6e47ed5b5363f1fa36b0b37fc7b43c1c659b8c5431484b55b58da2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowint.h",
+      "original_sha256": "33449c2765f597b7ccde3ed61c45f35e72730fbaefc073a065c423a4ff716030"
+    },
+    {
+      "path": "src/mvdm-host/inc/x86def.h",
+      "sha256": "f3f09f4ce825822ef6ac421949c5e673756fc7743204145d3c17524bba48f7e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\x86def.h",
+      "original_sha256": "f5d8ab04433599401682b0e4f7ae45104b8c5195168cb12201d8278f1549f38d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cdrom_fn.h",
+      "sha256": "003442b1c1c31d7a61f7093f5729786c47c428f2f6a0f498f52a19ab9c022b16",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cdrom_fn.h",
+      "original_sha256": "50376ae1cb7e4ff4ddb8ac8bd4af2e74c9ae3c86246c93e3380befb1fb65ea99"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dfa.h",
+      "sha256": "18b3cb8df6460374bbfedbbbf52ca474d279106224d0ff708d9faa2c75de2445",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\dfa.h",
+      "original_sha256": "c34cb343b608e1cb0cbb53f8ea0f5f4f50289d7565dd5bc36bb02fd963b0d309"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/disk_geo.h",
+      "sha256": "cf5d2e94b84bcb3d9495c8cd8d23fdbf8757441b6ea6fcee89443dcae3e48ed8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\disk_geo.h",
+      "original_sha256": "8d750f2d279e825004ac24bab65ed8ea6fe94fe385963835fe479ba8a7956c30"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egatrace.h",
+      "sha256": "c1c63a5cfdb8b7497a5c5cb7d25b4fab8d3d125dd4e8f6a6de6e9457e3975d47",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egatrace.h",
+      "original_sha256": "b7ea3a46cbf438275e2eddb68aaf7d9b744ea2a1b60e123fce833ab85b553e87"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/getptis.h",
+      "sha256": "4b9b00cc4f7d7e0493ffbc85cbf2becc1546ead687063ce6c390f39a4fbee7ae",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\getptis.h",
+      "original_sha256": "e3d1d37fcc3b148e5e27c041ea9c14609a5a5b98d76a23b90d76a0a7a057102c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gfirflop.h",
+      "sha256": "1468ad7afa45afed87de323b4d68948a8e7b776d7c785468c502883260d8a306",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gfirflop.h",
+      "original_sha256": "9e033d9d00afa92aa71b157b043df550f5bb1d62aed97aa8d77e29c46e3372ec"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gfisflop.h",
+      "sha256": "2d56d18f206f96b697f805d3ceaa754084b56cfa4eb260c3bbd741c84cba597c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gfisflop.h",
+      "original_sha256": "43fc7ed066c97d1c0264e08b6bcb1b3a8445f000d5a2132dcc415ebf1b0c88c4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/harness.h",
+      "sha256": "0156f98d853d04356900be83ff337ce6ba6b6b7c877882e5f502c29382de7d4a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\harness.h",
+      "original_sha256": "8f989d1fb417baf5a51a7eae1c1b0f810876bcded3af3ec801ec051f27ad7a77"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/herc.h",
+      "sha256": "0930eee3ae09b767a823727da81e232591627c329cb340cbd8044c45fe5aedd5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\herc.h",
+      "original_sha256": "cbe8cf0aa83fd197e97485c9d102b936a20c50dea2bba1f2292ddd035a26769f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hg_sas.h",
+      "sha256": "fca6c0881991a23198405738f68d662a9ee8c1555f19d4331c5eb14fd2720239",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\hg_sas.h",
+      "original_sha256": "4198ab0c46fca85740de31d45161981a828ea41842f3928d5cf6cc85ac086bbd"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_fio.h",
+      "sha256": "50742019618b2a5ca55966b8901af9b74251815606f868626de2d87e6fe30768",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\host_fio.h",
+      "original_sha256": "28c33ad38e38f45a0b66268b8f4f90c6269f0a0fbf428c78063b6bee2e4af388"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_hun.h",
+      "sha256": "3f2b6765c8e7e5404f54d6f691e50595ed66be091cfe40f14a25c16432ff271f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\host_hun.h",
+      "original_sha256": "b2ef5f35b0828ada5881db818e59d7578dfa080e2321aa98f0bb6f315aef3936"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_pth.h",
+      "sha256": "470597d499de8bcaf00709551828d6aaa4059462eaa6fdc04f62b29d9f11cd31",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\host_pth.h",
+      "original_sha256": "82a1cb3e1d14f3561f048a82967c5129048146778db3bc79881c28a95df98d95"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_str.h",
+      "sha256": "daee55c2c442daa60bc29119632f9b4e660c78febd9b832a92b8ad77c1385b30",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\host_str.h",
+      "original_sha256": "6f4937cffde44e3db9ccf0950fcd13b8a5bcf871cbaca778650853d746294e95"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/jcgensyn.h",
+      "sha256": "406b9efed051df96846bb89b1fb128905a1ed714202767c40947beae3c05b666",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\jcgensyn.h",
+      "original_sha256": "6f207de257898856faa00baf78e381b15303e3ff57900af0ca4f651015cdbe15"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/kybdmtx.h",
+      "sha256": "a9758427100327339ef4f6ad5099df2fcad360e34ad26c26d5b11057861378e5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\kybdmtx.h",
+      "original_sha256": "04a7c5cfcbc08fcaef296feb55edcf779d616ba7fd0ab8fc8110ed2442a03c37"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/lm_code.h",
+      "sha256": "1412974c3e3f680227e069a72a86f68698707c3ecd27d228765cf3fd9ef872da",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\lm_code.h",
+      "original_sha256": "981cee8585698990b8d7c69f3fd256a01219c2033fa81830c4b6887e33545f2f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/loader.h",
+      "sha256": "c7cf7a3abc77eaa1357fd110fbd8e4e73d4e747aad4adccc89cdc7dba109e02a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\loader.h",
+      "original_sha256": "c195ab5835bc1f5fda5d84e4539c9adece36417ffc5663fb5b789f971eb6bae3"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/low_intp.h",
+      "sha256": "1fb7f6aae460a7759191a279093d959e082c9acce0da79970c0007f9bb3c8660",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\low_intp.h",
+      "original_sha256": "71f6bbc11d7020b985a36ae68419ec42f6779b897be564771de00ede350fb644"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/lq2500.h",
+      "sha256": "d951ecaac5783adbe592a0f19b134345f89fda64fc6deb901db06082d1c56ade",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\lq2500.h",
+      "original_sha256": "42758f3a5e16744fac7a14a04fa60d4b77467d8d92d8c1ecaadfc3283b02eb5d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/m_keybdp.h",
+      "sha256": "e0c099e714562215222a58ab660d51e7d9c29fe952f76b3aef052efb00c70d07",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\m_keybdp.h",
+      "original_sha256": "b8d73e0606df03677d2b6ac550bb598e7022085df88ec43d81859b5a3f5f7672"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/mark_ima.h",
+      "sha256": "9143d7131ce8fea63ab391a83a8d20a6e25d4c0199a48d00e39e2bed0965dd8e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\mark_ima.h",
+      "original_sha256": "9af24af31e9c5da70bb8c25fe0aca758815fa186c185282e754535839b6e80f8"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/mda.h",
+      "sha256": "679c0bdbf14062a8becf39ad7bf590a01feb90090cae67b4207ea2d9c97277b7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\mda.h",
+      "original_sha256": "751acb35ec7364ee370077bc909c6a4cf2d4472d18e3259e29f43c7665079a52"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/msw_keyb.h",
+      "sha256": "b610e046e30525a96671025b39ec8c81e5f2e4c212d004d931d55ee449787608",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\msw_keyb.h",
+      "original_sha256": "e39f2af151f2f67f17610d2834254a3cf7063f51ed6faf3e90c25ef799847785"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/smeg.h",
+      "sha256": "674d492118b4b3e6db2b75ad65117e7ef6982e59e273c6e9927de45519823991",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\smeg.h",
+      "original_sha256": "2e0bca83b80f59054c6bec10ebe391dc47cf19573426dc3253494ec427266b7e"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/swinhelp.h",
+      "sha256": "1abb0453bcf03023a0dd174a8aae59aa0a087dfa411a66c36dd79070c41ba55c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\swinhelp.h",
+      "original_sha256": "df7d0d15f908e554d41a119ef947a744861ae5b29fec9b4204eea687f9743717"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/swinmgre.h",
+      "sha256": "159e13d1eac27d20f646234c8e2fa5ec477eea78cafc77510863566f98ed96bc",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\swinmgre.h",
+      "original_sha256": "303ca6566369a686647b246c859b4aa39260acefd9da38ae00cf28396e3e93fe"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/tredltr.h",
+      "sha256": "76f0d230976f6cc82ac0de48f294a885b95b2f03e19e68112a2d95262b431e0e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\tredltr.h",
+      "original_sha256": "0fac7a13402da75950b2f701e3700442cf21a2fc73686301566ed3f9035fc952"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/unix_loc.h",
+      "sha256": "17fcbaa48af1d20c7cf9fe7800a9ab1a9e3a303eea98a547b0c77a47c6fefe40",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\unix_loc.h",
+      "original_sha256": "3bd6197388c1ef0ba79b9c44b5bc8b064d3f105234f8179682d4f41eda9187cd"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/hosttyps.h",
+      "sha256": "dcbca6212ee9b9512cd6833b84777472c0b8220acd5f1d99d7ea93df0dcbf1f2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\hosttyps.h",
+      "original_sha256": "d41a82b33dc8c8dc3056de79f553b334a3d1b905c8da218e1d5ee1465df4e36a"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/hstsystm.h",
+      "sha256": "18ff6b9a740abcca7abcdfb2d16bab1b680db5d5322bdf4d4a62a63a49b94f10",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\hstsystm.h",
+      "original_sha256": "b6d4b43341231d108828f30e22a22c9e3672459693b88e4e2b8b7f2a7a719ad7"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/monsim32.h",
+      "sha256": "89b01fbb17982f5e404d2a851bd0b64cee2e3fbdf5629edd4b3ec03176149746",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\monsim32.h",
+      "original_sha256": "f088d30fc6d00830849912f7c9c1135afa0d21f729d95fe72c9d9a11aca010c6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_conf.h",
+      "sha256": "dae9ff61789f13b05fe53fe3af9780bce626f8e87ba591900d2a5a4b44993bd1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_conf.h",
+      "original_sha256": "42f541dfe879bacae812471b725ec9e1ff12dc5d172f8277e77e5642f15dd848"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_hunt.h",
+      "sha256": "802a95d3b8cda883926d1226b622280a6e92d2c7bc04d6829adf05089970482d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_hunt.h",
+      "original_sha256": "bfe7f5fdad083744001220f808025b2da24d6768d2b242768de9cac9447d9462"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_paint.h",
+      "sha256": "b31f2ba8abd13592fcf442872dd29b3b3aeddcd3466b991ef1dab22fde4ee4e3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_paint.h",
+      "original_sha256": "1a04bb94c25ef5dfe4c890442262d0b3162f0a9e0b7bd89c53df12a63aff506f"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wctlm32.h",
+      "sha256": "6c6627314a80984b4348a0bc4c5ee85c9cab7f16a1a4edd1c5adbc838f5b3ad5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wctlm32.h",
+      "original_sha256": "fdc8d63510adb6ca75d03db984d7812e1711cbddbf23f3f654a3b8d5fbbe253b"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wddetbl2.h",
+      "sha256": "228fe5870de7948e680de499ec21f0f7d6da353b8eb6f31eb96a2c2c8e393a95",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wddetbl2.h",
+      "original_sha256": "ae89a2a82c10ad6ff2b8a41f7e876af2286b9ad48c8441b7726d901483e30148"
+    },
+    {
+      "path": "src/mvdm-host/wow32/winspldl.h",
+      "sha256": "10172f0a45005fa53e04b2d4986df8100925960969b5c39a4b385e3acf41cb46",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\winspldl.h",
+      "original_sha256": "1536afd93c023039e526ef708f405d80a8b1af5683ee9feb6ba16959860a847e"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowdde.h",
+      "sha256": "4ef27862b08b1a268c12a490048018a9820ed917ffb617989e1320a61effbfc6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wowdde.h",
+      "original_sha256": "67124a6d9c12cf8b9aa9285bd81b96edc5011eb964fad14438692007b6fef4c2"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuansi.h",
+      "sha256": "cb0789e1928fce4289720bd2c55942002e00a84f9aa993fd10f084ec0c18dc5b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuansi.h",
+      "original_sha256": "8f2053340a73f78a3b558b8d27e9ae6f7a7d3f5d34a5b085ea84868142638228"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/bootvid.h",
+      "sha256": "9a109155cda4465a42d807fd17d5d664e9f0b1c4abfd91d9dd6fe601be51e62f",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\bootvid.h",
+      "original_sha256": "5d060ca5af67e8d17e05a642f27bada37f7649c5c846c8f732778722dd436e5f"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/msgtext.h",
+      "sha256": "60bbc5f154c6be75fdcbeead4edc5db81cd8ed2b300abc554eb76c658319185b",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\msgtext.h",
+      "original_sha256": "0c3f1ca93c829badbdb22544fe5a8657661f7bd99930e8fa21dcd2406b95045c"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/accessp.h",
+      "sha256": "6715252cb2931467c4938b6c0a2bbfb7c33f189d2f5920785d0ce92ce60f1a42",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\accessp.h",
+      "original_sha256": "61f90f0707ea9081d5ef66a20f0b1154a39d320debefef6fac691b9eb065d75d"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/candata.h",
+      "sha256": "40bcfbaca1caafc47fa8d855cc1e93a995771264d8ada60a6bbb1608112ccae8",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\candata.h",
+      "original_sha256": "bf926f221e8072e114706991aaad25d4cd64851775338050442bc45d24c8db26"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/inames.h",
+      "sha256": "93acb54b1bb518708c51a8142a5147b986b3bbf0b37095d3de5a533ca0ec20f9",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\inames.h",
+      "original_sha256": "37ea984f29916a41a208009bd041012163cbc4fa2bbf18bbe960cdaea40431e0"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/loghours.h",
+      "sha256": "545655d84b34b9e4626c237412c6870a9eecf8d006fe7ddad31f98002d2a52e0",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\loghours.h",
+      "original_sha256": "480cedd1d939dae01a814fd9b7de01f19e9ec136a48c379fb1dbae4fa5e42a94"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/logonp.h",
+      "sha256": "efcb49f0da2fed73609c69dd0fb9c257d04ad579ca14bd6e09490478d09d3576",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\logonp.h",
+      "original_sha256": "1ba9c0998f616859411488b98518184374da8799f1929cb4145a4f3f8e818749"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/lsaimp.h",
+      "sha256": "7a45a34a73ceee595d68d86ed50cfe74260530868a490a6497f0cff66aedb2c5",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\lsaimp.h",
+      "original_sha256": "cc5e6e70456ffd0839df1a53a5d80707ca9b406486d09df94464956a216ebadd"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/luidate.h",
+      "sha256": "ab61c699aa789d9b3a0eca6ba19241aa7b9ffc2a2daafeb178867a58971db7b7",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\luidate.h",
+      "original_sha256": "cf1deffbb2680407834a6e7eb00f701668e5f2685bbbce6000f82c74588dd7db"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/luiint.h",
+      "sha256": "c18083a5b7cc5ad051763045d0863ad9480442173961fa79a4de9c91091adbf4",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\luiint.h",
+      "original_sha256": "358fb0a38675f7b7a0fee83537936919a389a46e63ad08598a0e8dc24cfc57a0"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/luitext.h",
+      "sha256": "477e95d0d18ed4ead7f769958bfb8731e9c1806bffc1577bad8c61e0c54dcd47",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\luitext.h",
+      "original_sha256": "1c1625dbe7a69911caf987b382ca3743db46001c304e2202c2b22dfad44bdbac"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/msgrutil.h",
+      "sha256": "c60a60d1c9a914de16645af74d21b1435f945588a87d82b23100a30ff68f191d",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\msgrutil.h",
+      "original_sha256": "1d7491e655e087c3105e604659ce8d156199ce700d2cd9ebf64f9c0598338e6f"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netcan.h",
+      "sha256": "0a9d1555051731c943a1de17639c848afd38178dfd54c2f5c81657e272484670",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\netcan.h",
+      "original_sha256": "27999e97f7cb4b948e89d3552f92eb385ddab55d176b9cbada7b3d9a5537ed85"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/nlrepl.h",
+      "sha256": "bad6e122fc41296db5bb2a198ab3ff87d4499f712f2792f55ce555bc220ec317",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\nlrepl.h",
+      "original_sha256": "beb527d9ceefc9e5b152c41871abeba2ea859957f6f9965824637c5ae608e710"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxaccess.h",
+      "sha256": "6066e24c5b8dabd6952e780549ade525f294080c87a1a68de85f26d9e13a7ae3",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\rxaccess.h",
+      "original_sha256": "f0c6f04ef4389cab5817bbe77384be1fe592329b762fbe4b4610af81aa023f74"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxcanon.h",
+      "sha256": "7afda4dd30adbec5ac6574ecaf7849cc830da274e05c07d618ac493aec4c072b",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\rxcanon.h",
+      "original_sha256": "15dcffa90b4a3832098461ee0dc00418279b8ca6eaa7c14b6f0e30f510cb2c7d"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxchdev.h",
+      "sha256": "cc9a3f2eab94c66ad0eed2dcf638069c2099848f093b82d6096c3817abed33ec",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\rxchdev.h",
+      "original_sha256": "2dea04accdd30574b1e404bcc33196d657d88f87a40c2937d96e0585af94c713"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxgroup.h",
+      "sha256": "2edc7052aa3dde79da0e5c703c62be3f80e0e4e6caf2d10954f49f5fadd871f5",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\rxgroup.h",
+      "original_sha256": "828ae8d17143257b5fc7f4fd911bd311ec075d677e96e9a577512f42b1ecfbb4"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxlgenum.h",
+      "sha256": "92a75044615873603a53514980e6835e03be979ce2b15c3135c231508929ae26",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\rxlgenum.h",
+      "original_sha256": "b5e689476406b445d3c794a5eb48809863e70c57365a7bceb82d7ef6c1efa6e5"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxmsg.h",
+      "sha256": "922253e2874435b6800bfd772092dc2221f67bb68162246aadcba8784ea2864a",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\rxmsg.h",
+      "original_sha256": "4749f31c4446455155a06868c2ba71d8b37f8442c37c60e3604a3be1acbe66bc"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxshare.h",
+      "sha256": "4f4857e051522885edc4b9855e7bb62929486078e245567b868a29e5f16a218c",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\rxshare.h",
+      "original_sha256": "c80c8dcda679c86e8f363beb8dc72dadaabea68e51aacca5e148dafe260ef521"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxstats.h",
+      "sha256": "7e828afa06e53468647753f9f02c4d2e7a775d72f16e0e0bec61df3e40c6bdad",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\rxstats.h",
+      "original_sha256": "16ca299f742c9fe82eb9958f79c8e252fa0f0fa4e06d8d5f6bb39b31bcf5b696"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/validc.h",
+      "sha256": "43966cfbac521a1fe6cc9aff1f16366ee9b2e60ed503e0767c0891b51cf7180b",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\validc.h",
+      "original_sha256": "b9d47ecf22d8e5b4e9bb6f6ed67417f27e5b04b8534c461eec6659b817cf105e"
+    }
+  ],
+  "prior_queue": "s13-bfs-depth1-working-queue-195r107.zip",
+  "removed_original_condition_groups": 0,
+  "limitations": [
+    "Recorded product graph data predates current edits; no candidate filename appears in changed source or tests.",
+    "No claim about unsupported future configurations."
+  ]
+}

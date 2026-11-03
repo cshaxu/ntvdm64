@@ -1,0 +1,145 @@
+{
+  "leads": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+      "original_line": 859,
+      "original_end": 977,
+      "pre": [
+        856,
+        "DBGTRACE(DPMI_INT_IRET32, 0, 0, 0);"
+      ],
+      "post": [
+        980,
+        "DpmiFaultHandlerIret16("
+      ],
+      "current_pre": 921,
+      "current_post": 1065,
+      "arms": [
+        [
+          "ifndef",
+          "i386"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_line": 77,
+      "original_end": 79,
+      "pre": [
+        76,
+        "GLOBAL BOOL blocked_in_gfx_mode = FALSE;  /* need to force text mode? */"
+      ],
+      "post": [
+        86,
+        "GLOBAL UTINY tempbabymode[] ="
+      ],
+      "current_pre": 76,
+      "current_post": 86,
+      "arms": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\win32\\client\\vdm.c",
+      "original_line": 205,
+      "original_end": 208,
+      "pre": [
+        204,
+        "case STATUS_INVALID_IMAGE_NE_FORMAT:"
+      ],
+      "post": [
+        210,
+        "case STATUS_INVALID_IMAGE_PROTECT:"
+      ],
+      "current_pre": 2210,
+      "current_post": 2216,
+      "arms": [
+        [
+          "ifdef",
+          "_X86_"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\win32\\client\\vdm.c",
+      "original_line": 259,
+      "original_end": 271,
+      "pre": [
+        257,
+        "RtlImageNtHeader(NtCurrentPeb()->ImageBaseAddress)->FileHeader.Machine) {"
+      ],
+      "post": [
+        274,
+        "if ( ImageInformation.SubSystemType != IMAGE_SUBSYSTEM_WINDOWS_GUI &&"
+      ],
+      "current_pre": 2263,
+      "current_post": 2273,
+      "arms": [
+        [
+          "ifdef",
+          "_MIPS_"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+      "original_line": 337,
+      "original_end": 340,
+      "pre": [
+        330,
+        "WORD CodePage = THREAD_CODEPAGE();"
+      ],
+      "post": [
+        342,
+        "case WM_CHARTOITEM:"
+      ],
+      "current_pre": 38,
+      "current_post": 53,
+      "arms": [
+        [
+          "ifdef",
+          "FE_IME"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+      "original_line": 351,
+      "original_end": 364,
+      "pre": [
+        346,
+        "case WM_SYSDEADCHAR:"
+      ],
+      "post": [
+        366,
+        "if (IS_ACP(CodePage)) {"
+      ],
+      "current_pre": 57,
+      "current_post": 62,
+      "arms": [
+        [
+          "ifdef",
+          "FE_SB"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ]
+    }
+  ],
+  "scope": "candidate neighboring lines outside outer branches only; unverified and not a classification"
+}

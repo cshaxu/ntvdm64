@@ -68,9 +68,12 @@ Revision History:
 #include <netdebug.h>   // NetpAssert(), NetpKdPrint(()), FORMAT_ equates.
 #include <netlib.h>     // My prototypes, NetpMoveMemory().
 #include <prefix.h>     // PREFIX_ equates.
+#line 71
 #ifdef CDEBUG
+#line 72
 #error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
 #endif // def CDEBUG
+#line 74
 
 
 // Define memory alloc/realloc flags.  We are NOT using movable or zeroed

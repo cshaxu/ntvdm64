@@ -202,9 +202,12 @@ ULONG LastKbdInt=0;
 
 #define DEFAULT_SCAN_CODE_SET 2
 
+#line 188
 #ifdef REAL_KBD
+#line 189
 #error DIVERGENCE MVDM-HOST-DIV-535: REAL_KBD branch is not selected; see mirror register.
 #endif
+#line 192
 
 /*
  * Globally available function pointers
@@ -2077,7 +2080,7 @@ LOCAL VOID do_q_int(char scancode)
 #else   /* NTVDM */
 #error Excluded unsupported non-NTVDM alternative
 #endif	/* NTVDM */
-#line 2149
+#line 2361
 
 
 LOCAL VOID cmd_to_8042  IFN1(half_word,cmd_code)
@@ -2396,9 +2399,12 @@ else
 return (code);
 } /* end of translate_6805_8042 */
 
+#line 2668
 #ifdef HUNTER
+#line 2669
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
+#line 2708
 
 /*
 ** Returns number of chars in buffer.
@@ -2558,7 +2564,7 @@ GLOBAL VOID kbd_inb IFN2(io_addr,port,half_word *,val)
 #else	/* not NTVDM */
 #error Excluded unsupported non-NTVDM alternative
 #endif	/* NTVDM */
-#line 2692
+#line 2932
 
 	sure_note_trace2(AT_KBD_VERBOSE,"...kbd_inb(%#x) returns %#x", port, *val);
 

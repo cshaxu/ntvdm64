@@ -1,0 +1,40 @@
+{
+  "groups": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "original_line": 4750,
+      "macro": "FE_IME",
+      "original_else_line": 4757,
+      "original_endif_line": 4759,
+      "before_sha256": "66a14d6f4fb27a3eaa51b99fc270d82ea1084ca5d6299f8c9a1e48224bd0c40a",
+      "after_sha256": "d100b5a5063aeb92e4cdbdf68d1ce9a4ea41611e424d8ba4e416f46982a219ce"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 990,
+      "macro": "FE_IME",
+      "original_else_line": 992,
+      "original_endif_line": 994,
+      "before_sha256": "fa1065b07677471fc32e2ee3d3961e2a3365bda04e5899e4ebb55963d1a70c44",
+      "after_sha256": "29aa2f89f4a7947f81fc3aa4f5642376d9c159116af458c4b4d193dc502033f3"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 393,
+      "macro": "FE_SB",
+      "original_else_line": 416,
+      "original_endif_line": 424,
+      "before_sha256": "1ab3609b5d67077654063f32c1be0a38aa9ef5be3aa8e843e48df89da5fc3605",
+      "after_sha256": "582061d61aafbe8efa6b58a5e680aaa5faa2b4fd984639614ee1eb14d8908340"
+    }
+  ],
+  "build": "cached x86 WOW32 and call-boundary string conversion passed",
+  "selected_alternatives": "enclosing original functions are absent; selected arms remain pending",
+  "preprocessing": [
+    "s13-r261-input-preprocess.json",
+    "s13-r261-server-preprocess.json",
+    "s13-r261-chartran-preprocess.json"
+  ],
+  "forced_controls": "s13-r261-batch-controls.json",
+  "limits": "Selected original functions omitted; no runtime, x64 product or layer completion claimed."
+}

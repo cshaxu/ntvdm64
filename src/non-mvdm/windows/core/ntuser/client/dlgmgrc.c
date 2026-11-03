@@ -146,7 +146,7 @@ PWND _NextSibblingOrAncestor (PWND pwndRoot, PWND pwndStart)
 #ifdef DEBUG
 #error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
 #endif
-#line 149
+#line 157
 
     // If there is a sibbling, go for it
     if (pwndStart->spwndNext != NULL) {
@@ -171,7 +171,7 @@ PWND _NextSibblingOrAncestor (PWND pwndRoot, PWND pwndStart)
 #line 170
     return
 #endif
-#line 172
+#line 180
         _GetChildControl(pwndRoot, pwndParent);
 
 #ifdef DEBUG

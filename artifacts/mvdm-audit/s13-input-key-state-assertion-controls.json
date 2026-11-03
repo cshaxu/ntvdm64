@@ -1,0 +1,21 @@
+[
+  {
+    "defines": [],
+    "expected_rejection": false,
+    "exit_code": 0
+  },
+  {
+    "defines": [
+      "/DCBKEYSTATERECENTDOWN=32"
+    ],
+    "expected_rejection": false,
+    "exit_code": 0
+  },
+  {
+    "defines": [
+      "/DCBKEYSTATERECENTDOWN=31"
+    ],
+    "expected_rejection": true,
+    "exit_code": 2
+  }
+]

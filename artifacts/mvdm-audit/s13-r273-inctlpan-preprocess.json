@@ -1,0 +1,24 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+  "old_commit": "HEAD exact recorded baseline",
+  "old_sha256": "d985c94cf553d28e5a7bb2434076c6c55c426798bd9805b113548f7ce99c2b02",
+  "current_sha256": "2d3978a4da2b4146f5da2beec1cf829bb06227137f0ec567a6a4acb3b975e587",
+  "method": "MSVC /EP, exact Ninja target flags, identical scratch source path; nonblank stripped lines hashed. ntSend.h copied without modification.",
+  "contexts": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/button-atlas-table.obj",
+      "old_sha256": "30aad2fecd12764500c33790c8ce954948a1b0e8a0dbd12b97e20e6cc6895572",
+      "current_sha256": "30aad2fecd12764500c33790c8ce954948a1b0e8a0dbd12b97e20e6cc6895572",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/button_resources_table.obj",
+      "old_sha256": "df1fc048e7b80ea9f5b2f45558685eba55e1e3c43cf0b3b4f73ec4cbddee5b79",
+      "current_sha256": "df1fc048e7b80ea9f5b2f45558685eba55e1e3c43cf0b3b4f73ec4cbddee5b79",
+      "equal": true
+    }
+  ],
+  "limits": "Tests selected preprocessed text only; excludes diagnostics and does not establish other contexts, link or runtime behavior."
+}

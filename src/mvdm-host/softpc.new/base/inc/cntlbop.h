@@ -23,9 +23,12 @@
  * Return codes from control bop type functions.
  */
 
+#line 26
 #ifndef SUCCESS
+#line 27
 #error Excluded unsupported missing SUCCESS control-BOP profile
 #endif
+#line 29
 
 #define ERR_NO_FUNCTION		1	/* Function not implemented. */
 #define ERR_WRONG_HOST		2	/* Function call was for a different 
@@ -57,9 +60,12 @@ typedef struct
  */
 #define GENERIC 	1 
 
+#line 60
 #ifndef NULL
+#line 61
 #error Excluded unsupported missing NULL control-BOP profile
 #endif
+#line 63
 /*
  * ============================================================================
  * External declarations and macros
@@ -69,7 +75,9 @@ typedef struct
 extern void control_bop();
 extern control_bop_array host_bop_table[];
 
+#line 72
 #if defined(DUMB_TERMINAL) && !defined(NO_SERIAL_UIF)
+#line 73
 #error Unsupported excluded original configuration
 #endif /* DUMB_TERMINAL && !SERIAL_UIF */
 #line 80

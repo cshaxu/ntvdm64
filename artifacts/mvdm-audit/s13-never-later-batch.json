@@ -1,0 +1,88 @@
+{
+  "pairs": [
+    {
+      "source": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "source_sha256": "3455b2af72d8f207a1bc6cbca6fa22dbbf5a1853d90104c6037075e17a2b65e9",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "original_line": 1405,
+      "current_line": 9,
+      "continuation": 1428
+    },
+    {
+      "source": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "source_sha256": "3455b2af72d8f207a1bc6cbca6fa22dbbf5a1853d90104c6037075e17a2b65e9",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "original_line": 1543,
+      "current_line": 14,
+      "continuation": 1564
+    },
+    {
+      "source": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "source_sha256": "3455b2af72d8f207a1bc6cbca6fa22dbbf5a1853d90104c6037075e17a2b65e9",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "original_line": 1793,
+      "current_line": 19,
+      "continuation": 1816
+    },
+    {
+      "source": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "source_sha256": "548dcf0394c1a2989d5d1b8cfb07c476f9f8a5f7e05746d5c2e56a89dfb67cf1",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_sha256": "b7656bca55e892a42ba825be0324211450ad298c40717e1ae5a889d084467529",
+      "original_line": 2295,
+      "current_line": 23,
+      "continuation": 2310
+    },
+    {
+      "source": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "source_sha256": "a1ac08e1b2105a70055e657f36c8663f82c8c1c8b6326eab99e9cb79e6dbd3aa",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c",
+      "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
+      "original_line": 2640,
+      "current_line": 1075,
+      "continuation": 2668
+    },
+    {
+      "source": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "source_sha256": "265e17be9063e3bec1580c291079d958408cc5eccf4ffee5c56057a0804f7371",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "original_line": 358,
+      "current_line": 299,
+      "continuation": 369
+    },
+    {
+      "source": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "source_sha256": "65c7104ea928c93853721de93dbc85cf73bc51a126449287b308e6613bc1ca89",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+      "original_line": 1622,
+      "current_line": 91,
+      "continuation": 1635
+    },
+    {
+      "source": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "source_sha256": "65c7104ea928c93853721de93dbc85cf73bc51a126449287b308e6613bc1ca89",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+      "original_line": 1673,
+      "current_line": 96,
+      "continuation": 1686
+    },
+    {
+      "source": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+      "source_sha256": "2d3978a4da2b4146f5da2beec1cf829bb06227137f0ec567a6a4acb3b975e587",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\inctlpan.c",
+      "original_sha256": "0e3999df8610405c990760ee1a417bf312e3b76744f8f9387bbd94583f9d800d",
+      "original_line": 101,
+      "current_line": 79,
+      "continuation": 273
+    }
+  ],
+  "macro_evidence": "repository source/build search found no NEVER or LATER definitions; actual x86 WOW32 and call-boundaries builds passed; no claim beyond tested and inventoried contexts",
+  "limitations": "original enclosing functions remain outside selected subsets; no runtime test",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r207.zip"
+}

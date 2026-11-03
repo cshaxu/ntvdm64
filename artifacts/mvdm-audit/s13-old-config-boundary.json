@@ -1,0 +1,29 @@
+{
+  "path": "src/non-mvdm/base/win32/client/vdm.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\win32\\client\\vdm.c",
+  "original_sha256": "3f03d0dbb08e0163f2d9cf415daad0981e42e1b1855f6f48a3b59022b7374173",
+  "before_sha256": "3ca9b5fd37a801a6707bc86861ac296274a50c777a2f0fe414a6a9eba11e8bdf",
+  "after_sha256": "ac428b7dd5601f907c98e51967c741072d24519fd28ecc180b900e56007d52c0",
+  "original_guard": 1084,
+  "original_endif": 1149,
+  "continuation": 1150,
+  "reason": "legacy RtlOpenConfigFile-based implementation absent; actual selected BaseGetVDMKeyword is supplied by service base_config.c; OLD_CFG_BASED absent from current source and build inputs",
+  "limits": "not a claim of equivalence for legacy configuration lookup",
+  "current_guard_line": 2379,
+  "normal_control": "MSVC x86 preprocessor succeeds",
+  "negative_control": "MSVC x86 rejects OLD_CFG_BASED at original line 1085",
+  "builds": [
+    "MSVC x86 worker",
+    "MSVC x64 graph reference x86 worker"
+  ],
+  "comparison": {
+    "prior_sha256": "576aa767feaac5c485670a62eb9617af4b9d4f0fa32bd22af77ac4db66fef036",
+    "current_sha256": "38f3b26011b1d0630627fa93bd696d915225b60bcf1330f5a94d5b7bc82f54d3",
+    "differing_offsets": [
+      288,
+      289,
+      1698412,
+      1698413
+    ]
+  }
+}

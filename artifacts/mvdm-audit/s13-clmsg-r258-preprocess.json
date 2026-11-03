@@ -1,0 +1,38 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+  "old_commit": "build-owned immediate pre-edit snapshot",
+  "old_sha256": "66efe6002f7731ec1bab0067c31c822db3c9ae70d9f67bc810e51f40e735e973",
+  "current_sha256": "0ef86c4286f98a7bf79d1c1a97c41ad9411e3e82b37db9ecf7e23738df33962d",
+  "method": "MSVC /EP, exact Ninja target flags, identical scratch source path; nonblank stripped lines hashed. ntSend.h copied without modification.",
+  "contexts": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/default-client.obj",
+      "old_sha256": "1eced89f79cb4743c5ef2fe3409f0c7ecde9a9ebd4054eb83669ef58f87c2eda",
+      "current_sha256": "1eced89f79cb4743c5ef2fe3409f0c7ecde9a9ebd4054eb83669ef58f87c2eda",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/client-callproc.obj",
+      "old_sha256": "a46aee13b9c85e03f4fb430bc844cb991706eae2e412615e3177aecda77a8db2",
+      "current_sha256": "a46aee13b9c85e03f4fb430bc844cb991706eae2e412615e3177aecda77a8db2",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/getset_callproc.obj",
+      "old_sha256": "b8de3b4e87f17b235aeec24640247492efcc143d893028106df3a5132fc0bf26",
+      "current_sha256": "b8de3b4e87f17b235aeec24640247492efcc143d893028106df3a5132fc0bf26",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_default.obj",
+      "old_sha256": "a34373c48da42c9820b33cba92f4ff40c831576b51c071f8d846aaec11abca81",
+      "current_sha256": "a34373c48da42c9820b33cba92f4ff40c831576b51c071f8d846aaec11abca81",
+      "equal": true
+    }
+  ],
+  "limits": "Tests selected preprocessed text only; excludes diagnostics and does not establish other contexts, link or runtime behavior."
+}

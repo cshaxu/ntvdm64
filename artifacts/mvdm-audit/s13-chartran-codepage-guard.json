@@ -1,0 +1,10 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+  "sha256": "4a4c9cfa0e69d1c7c250b7cc68fe75a45dc6ea9698e6434c6b79d7997b523291",
+  "original_guard": 17,
+  "original_else": 20,
+  "original_continuation": 22,
+  "adaptation": "OPENNT-HOST-119 uses project-owned codepage binding instead of original native CLIENTINFO access; not asserted equivalent",
+  "build": "x86 WOW32 built",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r200.zip"
+}

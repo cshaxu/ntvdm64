@@ -1,0 +1,13 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+  "before_sha256": "847231838a5d7809e6b2553b0239c7c9df572c9675e9d343040a644d2650f09f",
+  "after_sha256": "9ab5966eb93bf8240993ff0e6a855001a7a15bed630574edadb1e389831285a4",
+  "original_groups": [
+    313,
+    1067
+  ],
+  "preprocessing": "s13-clientwow-r267-preprocess.json",
+  "forced_controls": "s13-clientwow-r267-controls.json",
+  "build": "cached x86 WOW32 and call-boundary original_wow passed",
+  "limits": "No guest modification, runtime, x64 product or first-depth completion claimed."
+}

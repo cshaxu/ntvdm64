@@ -1,0 +1,116 @@
+{
+  "groups": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "original_line": 19,
+      "kind": "ifdef",
+      "macro": "WOW",
+      "original_else_line": 119,
+      "original_endif_line": 137,
+      "before_sha256": "4185a1118c6e0cb472f9091a730100a2149b629562371c29964c1b11978560de",
+      "after_sha256": "847231838a5d7809e6b2553b0239c7c9df572c9675e9d343040a644d2650f09f"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "original_line": 304,
+      "kind": "ifdef",
+      "macro": "WOW",
+      "original_else_line": 307,
+      "original_endif_line": 309,
+      "before_sha256": "4185a1118c6e0cb472f9091a730100a2149b629562371c29964c1b11978560de",
+      "after_sha256": "847231838a5d7809e6b2553b0239c7c9df572c9675e9d343040a644d2650f09f"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "original_line": 435,
+      "kind": "ifdef",
+      "macro": "WOW",
+      "original_else_line": 442,
+      "original_endif_line": 460,
+      "before_sha256": "4185a1118c6e0cb472f9091a730100a2149b629562371c29964c1b11978560de",
+      "after_sha256": "847231838a5d7809e6b2553b0239c7c9df572c9675e9d343040a644d2650f09f"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "original_line": 719,
+      "kind": "ifdef",
+      "macro": "WOW",
+      "original_else_line": 726,
+      "original_endif_line": 728,
+      "before_sha256": "4185a1118c6e0cb472f9091a730100a2149b629562371c29964c1b11978560de",
+      "after_sha256": "847231838a5d7809e6b2553b0239c7c9df572c9675e9d343040a644d2650f09f"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "original_line": 776,
+      "kind": "ifdef",
+      "macro": "WOW",
+      "original_else_line": 779,
+      "original_endif_line": 781,
+      "before_sha256": "4185a1118c6e0cb472f9091a730100a2149b629562371c29964c1b11978560de",
+      "after_sha256": "847231838a5d7809e6b2553b0239c7c9df572c9675e9d343040a644d2650f09f"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "original_line": 795,
+      "kind": "ifdef",
+      "macro": "WOW",
+      "original_else_line": 802,
+      "original_endif_line": 804,
+      "before_sha256": "4185a1118c6e0cb472f9091a730100a2149b629562371c29964c1b11978560de",
+      "after_sha256": "847231838a5d7809e6b2553b0239c7c9df572c9675e9d343040a644d2650f09f"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "original_line": 835,
+      "kind": "ifdef",
+      "macro": "WOW",
+      "original_else_line": 837,
+      "original_endif_line": 839,
+      "before_sha256": "4185a1118c6e0cb472f9091a730100a2149b629562371c29964c1b11978560de",
+      "after_sha256": "847231838a5d7809e6b2553b0239c7c9df572c9675e9d343040a644d2650f09f"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "original_line": 911,
+      "kind": "ifdef",
+      "macro": "WOW",
+      "original_else_line": 913,
+      "original_endif_line": 1062,
+      "before_sha256": "4185a1118c6e0cb472f9091a730100a2149b629562371c29964c1b11978560de",
+      "after_sha256": "847231838a5d7809e6b2553b0239c7c9df572c9675e9d343040a644d2650f09f"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "original_line": 15,
+      "kind": "ifdef",
+      "macro": "WOW",
+      "original_else_line": 108,
+      "original_endif_line": 127,
+      "before_sha256": "4d16630695670df2c306303f25beeb3636eb6b4419f553fdd28b8d796e7ed99e",
+      "after_sha256": "0053b665908d6142a181b6fdcc894504b03cd4b811c7b729c2aa348b9362a5cb"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "original_line": 135,
+      "kind": "ifdef",
+      "macro": "WOW",
+      "original_else_line": 144,
+      "original_endif_line": 170,
+      "before_sha256": "4d16630695670df2c306303f25beeb3636eb6b4419f553fdd28b8d796e7ed99e",
+      "after_sha256": "0053b665908d6142a181b6fdcc894504b03cd4b811c7b729c2aa348b9362a5cb"
+    }
+  ],
+  "build": "cached x86 WOW32 and three call-boundary objects passed",
+  "selected_alternatives": "enclosing original functions or globals absent; selected arms remain pending",
+  "limits": "Selected original host content omitted; no guest modification, guest compilation, runtime, x64 product or layer completion claimed.",
+  "preprocessing": [
+    "s13-r266-clientwow-preprocess.json",
+    "s13-r266-rtlwow-preprocess.json"
+  ],
+  "historical_preprocessing": [
+    "s13-r266-clientwow-historical-preprocess.json",
+    "s13-r266-rtlwow-historical-preprocess.json"
+  ],
+  "forced_controls": "s13-r266-wow-controls.json"
+}

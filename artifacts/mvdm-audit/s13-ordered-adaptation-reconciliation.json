@@ -1,0 +1,23 @@
+{
+  "pairs": [
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\mvdm.h",
+      "line": 73,
+      "original_sha256": "9f450f2eb6ee684763f7f9e27ee43c80e7e24d1e5a87ff254fbd7da4fcd1cdb7",
+      "current": "src/mvdm-host/inc/mvdm.h",
+      "current_sha256": "f393dfa40f9066016586353cadce7f6fae2b71661be81e793ce631dfbb0e5386",
+      "current_line": 64,
+      "caveat": "mvdm.h original else contains local nested MSVC x86 adaptation"
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_bop.c",
+      "line": 198,
+      "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+      "current": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "current_sha256": "f8af567557ab2d3f895c93225ceb56b90d1c7e51cbc485212642e08eebd15462",
+      "current_line": 247,
+      "caveat": "third of twelve matching PROD guards in original/current order"
+    }
+  ],
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r188.zip"
+}

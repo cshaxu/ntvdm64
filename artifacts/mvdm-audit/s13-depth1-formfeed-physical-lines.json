@@ -1,0 +1,433 @@
+{
+  "queue": "s13-bfs-depth1-working-queue-195r220.zip",
+  "definition": "physical line number counts only newline characters, not form feed or vertical tab",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "form_feed_count": 1,
+      "vertical_tab_count": 0,
+      "depth1_queue_anchors_not_physical_directive": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/vgaports.h",
+      "form_feed_count": 3,
+      "vertical_tab_count": 0,
+      "depth1_queue_anchors_not_physical_directive": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "form_feed_count": 2,
+      "vertical_tab_count": 0,
+      "depth1_queue_anchors_not_physical_directive": [
+        220,
+        232,
+        247,
+        260,
+        270,
+        283,
+        297,
+        324,
+        355,
+        415,
+        513,
+        535,
+        550,
+        556,
+        562,
+        568,
+        574,
+        580,
+        586,
+        592,
+        598,
+        609,
+        715,
+        749,
+        775,
+        790,
+        808,
+        948,
+        969,
+        982
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "form_feed_count": 28,
+      "vertical_tab_count": 0,
+      "depth1_queue_anchors_not_physical_directive": [
+        766,
+        1206,
+        1955,
+        3220,
+        3323
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "form_feed_count": 8,
+      "vertical_tab_count": 0,
+      "depth1_queue_anchors_not_physical_directive": [
+        355,
+        458,
+        561,
+        642,
+        679,
+        702,
+        845
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "form_feed_count": 24,
+      "vertical_tab_count": 0,
+      "depth1_queue_anchors_not_physical_directive": [
+        406,
+        608,
+        1161,
+        1176,
+        1211,
+        1870,
+        2277,
+        2292,
+        2502,
+        2550,
+        3147,
+        3409,
+        3550,
+        3740,
+        3765,
+        3792,
+        3826,
+        3851,
+        3867
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrinit.c",
+      "form_feed_count": 12,
+      "vertical_tab_count": 0,
+      "depth1_queue_anchors_not_physical_directive": [
+        185
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmisc.c",
+      "form_feed_count": 2,
+      "vertical_tab_count": 0,
+      "depth1_queue_anchors_not_physical_directive": [
+        72,
+        106
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "form_feed_count": 17,
+      "vertical_tab_count": 0,
+      "depth1_queue_anchors_not_physical_directive": [
+        230,
+        305,
+        380,
+        403,
+        453,
+        465,
+        473,
+        503,
+        556,
+        597,
+        616,
+        630,
+        653,
+        707,
+        713,
+        736,
+        753,
+        766,
+        772,
+        814,
+        858,
+        878,
+        905,
+        952,
+        1057,
+        1104,
+        1150,
+        1188,
+        1201,
+        1207,
+        1324,
+        1336,
+        1380,
+        1386
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "form_feed_count": 26,
+      "vertical_tab_count": 0,
+      "depth1_queue_anchors_not_physical_directive": [
+        200,
+        254,
+        288,
+        299,
+        313,
+        347,
+        351,
+        388,
+        429,
+        491,
+        495,
+        542,
+        566,
+        602,
+        659,
+        1075,
+        1225,
+        1289,
+        1303,
+        1368,
+        1433,
+        1493,
+        1567,
+        1620,
+        1701,
+        1753,
+        1833,
+        1939,
+        1958,
+        1964,
+        1970,
+        1976,
+        1983,
+        2007,
+        2085,
+        2106,
+        2121,
+        2137,
+        2164,
+        2524,
+        2537,
+        2568,
+        2574,
+        2602,
+        2606,
+        2757,
+        2804,
+        2857,
+        2871,
+        2918,
+        2932,
+        3040,
+        3141,
+        3156,
+        3227,
+        3323,
+        3329,
+        3358,
+        3366,
+        3609,
+        3673
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "form_feed_count": 35,
+      "vertical_tab_count": 0,
+      "depth1_queue_anchors_not_physical_directive": [
+        249,
+        312,
+        381,
+        388,
+        439,
+        522,
+        551,
+        605,
+        653,
+        660,
+        725,
+        765,
+        787,
+        808,
+        818,
+        885,
+        900,
+        908,
+        956,
+        967,
+        1020,
+        1105,
+        1265,
+        1276,
+        1295,
+        1320,
+        1338,
+        1363,
+        1393,
+        1428,
+        1448,
+        1459,
+        1466,
+        1506,
+        1520,
+        1556,
+        1595,
+        1678,
+        1700,
+        1719,
+        1725,
+        1731,
+        1768,
+        1781,
+        1820,
+        1833,
+        1884,
+        1911,
+        1942,
+        1980,
+        2037,
+        2066,
+        2104,
+        2116,
+        2159,
+        2165,
+        2178,
+        2218,
+        2267,
+        2309,
+        2371,
+        2379,
+        2431,
+        2478,
+        2489,
+        2545,
+        2565,
+        2582,
+        2599,
+        2608,
+        2744,
+        2823,
+        2850,
+        2930,
+        2945,
+        2957,
+        3043
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrputil.c",
+      "form_feed_count": 3,
+      "vertical_tab_count": 0,
+      "depth1_queue_anchors_not_physical_directive": [
+        74
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "form_feed_count": 8,
+      "vertical_tab_count": 0,
+      "depth1_queue_anchors_not_physical_directive": [
+        507,
+        518,
+        690,
+        707,
+        715,
+        739,
+        1105,
+        1419
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/mapembed.c",
+      "form_feed_count": 6,
+      "vertical_tab_count": 0,
+      "depth1_queue_anchors_not_physical_directive": [
+        81
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcommdlg.c",
+      "form_feed_count": 12,
+      "vertical_tab_count": 0,
+      "depth1_queue_anchors_not_physical_directive": [
+        484
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wshell.c",
+      "form_feed_count": 1,
+      "vertical_tab_count": 0,
+      "depth1_queue_anchors_not_physical_directive": []
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.c",
+      "form_feed_count": 2,
+      "vertical_tab_count": 0,
+      "depth1_queue_anchors_not_physical_directive": [
+        178
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+      "form_feed_count": 3,
+      "vertical_tab_count": 0,
+      "depth1_queue_anchors_not_physical_directive": [
+        197
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "form_feed_count": 4,
+      "vertical_tab_count": 0,
+      "depth1_queue_anchors_not_physical_directive": [
+        61,
+        197,
+        204
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "form_feed_count": 4,
+      "vertical_tab_count": 0,
+      "depth1_queue_anchors_not_physical_directive": [
+        867,
+        889,
+        1020
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+      "form_feed_count": 5,
+      "vertical_tab_count": 0,
+      "depth1_queue_anchors_not_physical_directive": [
+        145
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+      "form_feed_count": 26,
+      "vertical_tab_count": 0,
+      "depth1_queue_anchors_not_physical_directive": []
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbmacro.h",
+      "form_feed_count": 2,
+      "vertical_tab_count": 0,
+      "depth1_queue_anchors_not_physical_directive": []
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbtypes.h",
+      "form_feed_count": 4,
+      "vertical_tab_count": 0,
+      "depth1_queue_anchors_not_physical_directive": []
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/crypt.h",
+      "form_feed_count": 7,
+      "vertical_tab_count": 0,
+      "depth1_queue_anchors_not_physical_directive": []
+    }
+  ],
+  "files_with_control_character": 25,
+  "anchors_not_physical_directive": 256,
+  "limits": "Diagnostic only. Existing queue uses Python splitlines coordinates; no classification or original #line mapping is proven wrong solely by this scan. Reconcile source and pinned original physically before modifying coordinates."
+}

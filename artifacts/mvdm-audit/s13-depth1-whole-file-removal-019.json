@@ -1,0 +1,113 @@
+{
+  "scope": "Unselected legacy 386 disassembler and exclusive headers",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/build.c",
+      "sha256": "0ca423e07f925597161be4f6c97b5baa151ca230b093338b7266a47aeab7b22c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/dasm386.c",
+      "sha256": "0df8e6074da26f719a6b0aa72f89e3bf71af2071ac1a7e8bf29b11f8bb795176"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "sha256": "5a8494ecede9f51f185810cd4b632f88157563ce123bfe6c66381e68b3e91cf6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/makefile",
+      "sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/sources",
+      "sha256": "0088a24cc6e0e9a9d05b3667447054e8b53203c387d70d88c1f56125906fde88"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dasm.h",
+      "sha256": "25701d961e72cb47ef84cbfc6efb702de83b7198b837edad8d227ae5ccd5aa68"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/decode.h",
+      "sha256": "c4502f6c9d2439c0764abd0d80eee077888d9902a689e5f7dc854be30826d3d5"
+    }
+  ],
+  "mirror_sources": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/build.c",
+      "current_sha256": "0ca423e07f925597161be4f6c97b5baa151ca230b093338b7266a47aeab7b22c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\dasm386\\build.c",
+      "original_sha256": "2b60e007d7f7fd5efb8d7be5838dfdebc8d623d8ec555239176af93e9b07c68b",
+      "pinned_expected_sha256": "2b60e007d7f7fd5efb8d7be5838dfdebc8d623d8ec555239176af93e9b07c68b",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/dasm386.c",
+      "current_sha256": "0df8e6074da26f719a6b0aa72f89e3bf71af2071ac1a7e8bf29b11f8bb795176",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\dasm386\\dasm386.c",
+      "original_sha256": "13e50a6d575f65068c7b3eade04c4789c9fe587c69624810b69351bb765c4c6c",
+      "pinned_expected_sha256": "13e50a6d575f65068c7b3eade04c4789c9fe587c69624810b69351bb765c4c6c",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "current_sha256": "4839d441cf3b5f15faddab6284b4c948f10c4586a4abe822741b9d409c45bc7e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\dasm386\\decode.c",
+      "original_sha256": "b09a41349966bc7cffc4c4a9975455d6e596fc5abfd230539a507fd4238b4c50",
+      "pinned_expected_sha256": "b09a41349966bc7cffc4c4a9975455d6e596fc5abfd230539a507fd4238b4c50",
+      "original_matches_pinned": true,
+      "working_sha256": "5a8494ecede9f51f185810cd4b632f88157563ce123bfe6c66381e68b3e91cf6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dasm.h",
+      "current_sha256": "25701d961e72cb47ef84cbfc6efb702de83b7198b837edad8d227ae5ccd5aa68",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\dasm.h",
+      "original_sha256": "bb18cfba18fc1f8379feef143161e3e62462354cb101a95ac5e8f6e434c0dbe0",
+      "pinned_expected_sha256": "bb18cfba18fc1f8379feef143161e3e62462354cb101a95ac5e8f6e434c0dbe0",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/decode.h",
+      "current_sha256": "c4502f6c9d2439c0764abd0d80eee077888d9902a689e5f7dc854be30826d3d5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\decode.h",
+      "original_sha256": "d9ecc3cc6097818f6ab37478612778163fc1b647cf76c3159f30978534dab027",
+      "pinned_expected_sha256": "d9ecc3cc6097818f6ab37478612778163fc1b647cf76c3159f30978534dab027",
+      "original_matches_pinned": true
+    }
+  ],
+  "removed_guard_ledger_entries": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/dasm386.c",
+      "macro": "PIG",
+      "line": 43,
+      "body_end": 44,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\dasm386\\dasm386.c",
+      "original_sha256": "13e50a6d575f65068c7b3eade04c4789c9fe587c69624810b69351bb765c4c6c",
+      "local_sha256": "cd61e4f1e845efab34ef39672d4d1a821824027fd4a2e3ea6f3a0e7ee0aadc94",
+      "removed_body_sha256": "f1cd73d4b93ce44dfbb3a6e00207383027c7f3f934d7a1049de11fb2f56f433e",
+      "removed_body_lines": 1,
+      "after_sha256": "0df8e6074da26f719a6b0aa72f89e3bf71af2071ac1a7e8bf29b11f8bb795176",
+      "final_sha256": "0df8e6074da26f719a6b0aa72f89e3bf71af2071ac1a7e8bf29b11f8bb795176"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "macro": "PIG",
+      "line": 660,
+      "body_end": 656,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\dasm386\\decode.c",
+      "original_sha256": "b09a41349966bc7cffc4c4a9975455d6e596fc5abfd230539a507fd4238b4c50",
+      "local_sha256": "88d817aa0472f453d614ba7edd4b2cbbff953df8c42e9c13babc2895691466c0",
+      "removed_body_sha256": "c509dffb0c814c03be181a537ee19b69d7ec4d47e2227181d0e1bd265eab768d",
+      "removed_body_lines": 1,
+      "after_sha256": "4839d441cf3b5f15faddab6284b4c948f10c4586a4abe822741b9d409c45bc7e",
+      "final_sha256": "4839d441cf3b5f15faddab6284b4c948f10c4586a4abe822741b9d409c45bc7e"
+    }
+  ],
+  "removed_condition_groups": 46,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r124.zip",
+  "evidence": [
+    "No active product or test build selects the disassembler; external source references to its headers are limited to each other.",
+    "Five source-only rejection tuples and retired DIV-607 only concerned this package."
+  ],
+  "limitations": [
+    "CCPU instruction decoder and execution paths are not changed."
+  ]
+}

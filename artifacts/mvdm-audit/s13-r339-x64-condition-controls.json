@@ -1,0 +1,11 @@
+{
+  "compiler": "MSVC x64",
+  "tests": [
+    "test_mirror_rejected_conditions.py",
+    "test_bfs_depth1_cpu_guards.py"
+  ],
+  "exit_code": 0,
+  "log": "build/t473-s13/r339-tests.log",
+  "log_sha256": "92f43efb1cbd0d819fd1080f025af9ed862a371cb0dc0d64ea3ee9bc19375e34",
+  "scope": "preprocessor guards and diagnostic line controls; no product runtime"
+}

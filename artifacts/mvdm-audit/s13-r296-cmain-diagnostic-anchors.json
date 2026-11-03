@@ -1,0 +1,10 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+  "before_sha256": "b3e8e9e582286aef7245cc53e4909e59f38e788feaff5b24c154413a3e89084c",
+  "after_sha256": "3a034b6d390524db0e2694a78373e0f4b9f11bf440463d9c4b5a0ea3dca52cd3",
+  "original_if_line": 155,
+  "original_body_line": 156,
+  "original_continuation_line": 163,
+  "reason": "map excluded-arm diagnostic to original body and retained continuation to original line",
+  "limits": "requires actual supported build and forced-condition diagnostic"
+}

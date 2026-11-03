@@ -817,7 +817,9 @@ ULONG FASTCALL WG32SetBoundsRect(PVDMFRAME pFrame)
 }
 
 
+#line 820
 #if 0  // implemented in gdi.exe
+#line 821
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 #line 828

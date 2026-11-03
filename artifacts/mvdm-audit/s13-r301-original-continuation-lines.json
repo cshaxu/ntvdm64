@@ -1,0 +1,435 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "before_sha256": "c59bd4e47ec24b34ae2afad1aeddf3d90008e66d55eebd2d4c1447214f14ed90",
+      "after_sha256": "3f63eeed6b174b52ccb283c1865b6fb8dbe05e71c167879a85996b4af21b477b",
+      "changes": [
+        {
+          "original_if_line": 1097,
+          "original_endif_line": 1107,
+          "current_marker_line": 1161,
+          "previous": 1169,
+          "corrected": 1108,
+          "matched_before": 5,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        },
+        {
+          "original_if_line": 1222,
+          "original_endif_line": 1230,
+          "current_marker_line": 1282,
+          "previous": 1292,
+          "corrected": 1231,
+          "matched_before": 5,
+          "matched_after": 3,
+          "verified_exact_original_continuation_lines": 5
+        },
+        {
+          "original_if_line": 1236,
+          "original_endif_line": 1244,
+          "current_marker_line": 1294,
+          "previous": 1306,
+          "corrected": 1245,
+          "matched_before": 5,
+          "matched_after": 3,
+          "verified_exact_original_continuation_lines": 5
+        },
+        {
+          "original_if_line": 1403,
+          "original_endif_line": 1405,
+          "current_marker_line": 1454,
+          "previous": 1465,
+          "corrected": 1406,
+          "matched_before": 5,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        },
+        {
+          "original_if_line": 1475,
+          "original_endif_line": 1477,
+          "current_marker_line": 1527,
+          "previous": 1537,
+          "corrected": 1478,
+          "matched_before": 5,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        },
+        {
+          "original_if_line": 1526,
+          "original_endif_line": 1538,
+          "current_marker_line": 1582,
+          "previous": 1598,
+          "corrected": 1539,
+          "matched_before": 5,
+          "matched_after": 3,
+          "verified_exact_original_continuation_lines": 5
+        },
+        {
+          "original_if_line": 1544,
+          "original_endif_line": 1568,
+          "current_marker_line": 1594,
+          "previous": 1628,
+          "corrected": 1569,
+          "matched_before": 5,
+          "matched_after": 3,
+          "verified_exact_original_continuation_lines": 5
+        },
+        {
+          "original_if_line": 1724,
+          "original_endif_line": 1750,
+          "current_marker_line": 1753,
+          "previous": 1810,
+          "corrected": 1751,
+          "matched_before": 5,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+      "original_sha256": "6e5f4607f259d50abe7ad27741e48d6110737097da88ea46627fa275903135c9",
+      "before_sha256": "73b84ca8e3350b24a9d36797d5cb50234740bbc72c2219702d3660b9dec46b7b",
+      "after_sha256": "e3f5359a9d03166f2f05e2a747ad41fd3e113903a8fe7c17bb73522f0d3d2dc9",
+      "changes": [
+        {
+          "original_if_line": 116,
+          "original_endif_line": 118,
+          "current_marker_line": 127,
+          "previous": 126,
+          "corrected": 119,
+          "matched_before": 5,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "original_sha256": "a83a7dd3f7e3fbb83723047aacddbd22d4001591c6d444d4bd6d45dd73e38fd8",
+      "before_sha256": "af12181727b1002842d1bbf7b2572d3120de62d8b74d7c5986617dfa45b2e907",
+      "after_sha256": "4d8ff60a02b993a0ecfc8161d3a16bf31c4689020f57f86bda306d44868bb6df",
+      "changes": [
+        {
+          "original_if_line": 762,
+          "original_endif_line": 766,
+          "current_marker_line": 737,
+          "previous": 780,
+          "corrected": 767,
+          "matched_before": 5,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "original_sha256": "ce5f56ea27239d0c85243cee23e01de34b1f82d3ba92eced687e2b3bd90a2a94",
+      "before_sha256": "1cebc140ea6e53e4efa09fc2ddac49711b0f2292298713781036d367d1b2b871",
+      "after_sha256": "461f4fc0dbae7a736ec059b342487ed8ed71fe19d70cec8b2e05c982de28c9ef",
+      "changes": [
+        {
+          "original_if_line": 88,
+          "original_endif_line": 102,
+          "current_marker_line": 152,
+          "previous": 155,
+          "corrected": 103,
+          "matched_before": 5,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        },
+        {
+          "original_if_line": 257,
+          "original_endif_line": 289,
+          "current_marker_line": 335,
+          "previous": 339,
+          "corrected": 290,
+          "matched_before": 5,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        },
+        {
+          "original_if_line": 320,
+          "original_endif_line": 352,
+          "current_marker_line": 397,
+          "previous": 402,
+          "corrected": 353,
+          "matched_before": 5,
+          "matched_after": 4,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "before_sha256": "c327530b200f7fd2d1d22e58d6ff4dd36ff81f196fa1f2417d5eac05f0dd61df",
+      "after_sha256": "2404b56517177b044208ddc406d026f2ec5ab1092a5693fac689b0024a133ac8",
+      "changes": [
+        {
+          "original_if_line": 637,
+          "original_endif_line": 668,
+          "current_marker_line": 603,
+          "previous": 631,
+          "corrected": 669,
+          "matched_before": 5,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        },
+        {
+          "original_if_line": 2002,
+          "original_endif_line": 2038,
+          "current_marker_line": 1595,
+          "previous": 1663,
+          "corrected": 2039,
+          "matched_before": 5,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+      "before_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113",
+      "after_sha256": "16328f9ebb95bab8573f7da84b6fa5b647da19a9bc5c8ef13ec70103304688dc",
+      "changes": [
+        {
+          "original_if_line": 314,
+          "original_endif_line": 316,
+          "current_marker_line": 327,
+          "previous": 326,
+          "corrected": 317,
+          "matched_before": 5,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        },
+        {
+          "original_if_line": 2042,
+          "original_endif_line": 2055,
+          "current_marker_line": 2058,
+          "previous": 2043,
+          "corrected": 2056,
+          "matched_before": 5,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "original_sha256": "22c82627bf993ac4fd072ad1bb7d4f62000b60889e6955e83f5f676ac5bd7a29",
+      "before_sha256": "9ff9228bc8c2b2ef7ba3fd89a76653b0a83d0f5814cb6b88d4c08edbe95afd99",
+      "after_sha256": "d3fa2ac47952a0184c577b30e195465e95550cefa0eda5cb728fbb8e26ee763b",
+      "changes": [
+        {
+          "original_if_line": 468,
+          "original_endif_line": 503,
+          "current_marker_line": 387,
+          "previous": 418,
+          "corrected": 504,
+          "matched_before": 3,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0",
+      "before_sha256": "ce4d684e01c743f83ba46f0314f261e2f3de4d406f556ffa7058fb679f4c3fe8",
+      "after_sha256": "6dccc0bf27ace31e5ea7afa7f1c446523cbebd639bf1052cff826a81b4304b94",
+      "changes": [
+        {
+          "original_if_line": 763,
+          "original_endif_line": 767,
+          "current_marker_line": 658,
+          "previous": 797,
+          "corrected": 768,
+          "matched_before": 4,
+          "matched_after": 4,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "original_sha256": "c07f5e981d65f6911419990292fd3466d487fd79ff52b4819bb9905f808e68bd",
+      "before_sha256": "87e69e92bc5565f4412ba4612734cc69dc5d7f58efa9dac9838b5c54b6fe9daf",
+      "after_sha256": "ba8d49a89324de2c559034d4f443d6e72f17c817aebcdaa4446d38bccffb31af",
+      "changes": [
+        {
+          "original_if_line": 345,
+          "original_endif_line": 371,
+          "current_marker_line": 367,
+          "previous": 392,
+          "corrected": 372,
+          "matched_before": 5,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        },
+        {
+          "original_if_line": 556,
+          "original_endif_line": 582,
+          "current_marker_line": 559,
+          "previous": 608,
+          "corrected": 583,
+          "matched_before": 5,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        },
+        {
+          "original_if_line": 591,
+          "original_endif_line": 634,
+          "current_marker_line": 571,
+          "previous": 660,
+          "corrected": 635,
+          "matched_before": 5,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
+      "before_sha256": "437a06ccd96760cf1f391be4525717609d83061f2e0d8221858b8b3d53c0bb19",
+      "after_sha256": "d223c135a5486d38c61f740af4f1a260dd70ef73d68bafa44103d00e9a7bf06a",
+      "changes": [
+        {
+          "original_if_line": 611,
+          "original_endif_line": 672,
+          "current_marker_line": 611,
+          "previous": 697,
+          "corrected": 673,
+          "matched_before": 5,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        },
+        {
+          "original_if_line": 1773,
+          "original_endif_line": 1775,
+          "current_marker_line": 1465,
+          "previous": 1809,
+          "corrected": 1776,
+          "matched_before": 5,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        },
+        {
+          "original_if_line": 1821,
+          "original_endif_line": 1862,
+          "current_marker_line": 1517,
+          "previous": 1891,
+          "corrected": 1863,
+          "matched_before": 5,
+          "matched_after": 4,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ]
+    }
+  ],
+  "deferred": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "original_sha256": "3aa86f1faf07f68937629f1d6e410eb41f498e17dc6d747647c7d6e5697c80aa",
+      "before_sha256": "f41d9bb223f291e2411f5c47507009c67869d06e5c9af2dea1eb6007f8af63cf",
+      "after_sha256": "40e095eca3238f24cfb842f2fbb67ab111f54e4ceaff6f4c4063dfb9f536352a",
+      "changes": [
+        {
+          "original_if_line": 209,
+          "original_endif_line": 269,
+          "current_marker_line": 268,
+          "previous": 253,
+          "corrected": 270,
+          "matched_before": 4,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ],
+      "reason": "Windows denied write while a user-mapped section is open; owner unknown, no process terminated"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9",
+      "before_sha256": "57708c34a4d5892f5872963e79bdf27aa0410cc468b78019db93ee308024d252",
+      "after_sha256": "ac803f62f27b9a188109de8c2aaf386ff34c952f1b1e2ebd441da043448478f2",
+      "changes": [
+        {
+          "original_if_line": 158,
+          "original_endif_line": 202,
+          "current_marker_line": 184,
+          "previous": 223,
+          "corrected": 203,
+          "matched_before": 5,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        },
+        {
+          "original_if_line": 862,
+          "original_endif_line": 866,
+          "current_marker_line": 850,
+          "previous": 893,
+          "corrected": 867,
+          "matched_before": 5,
+          "matched_after": 4,
+          "verified_exact_original_continuation_lines": 5
+        },
+        {
+          "original_if_line": 874,
+          "original_endif_line": 881,
+          "current_marker_line": 866,
+          "previous": 908,
+          "corrected": 882,
+          "matched_before": 5,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        },
+        {
+          "original_if_line": 1366,
+          "original_endif_line": 1378,
+          "current_marker_line": 1355,
+          "previous": 1408,
+          "corrected": 1379,
+          "matched_before": 5,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        },
+        {
+          "original_if_line": 1409,
+          "original_endif_line": 1415,
+          "current_marker_line": 1393,
+          "previous": 1445,
+          "corrected": 1416,
+          "matched_before": 5,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        },
+        {
+          "original_if_line": 1422,
+          "original_endif_line": 1428,
+          "current_marker_line": 1408,
+          "previous": 1458,
+          "corrected": 1429,
+          "matched_before": 5,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        },
+        {
+          "original_if_line": 2451,
+          "original_endif_line": 2473,
+          "current_marker_line": 2432,
+          "previous": 2510,
+          "corrected": 2474,
+          "matched_before": 5,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 5
+        }
+      ],
+      "reason": "Windows denied write while a user-mapped section is open; owner unknown, no process terminated"
+    }
+  ],
+  "limits": "adjacent-source mapping is a candidate requiring full-context review; builds pending"
+}

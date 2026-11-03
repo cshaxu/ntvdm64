@@ -1,0 +1,139 @@
+{
+  "scope": "Seven files without recorded product/generated-TU context and with no current literal reference except test-only extracted rejection snippets",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
+      "sha256": "80e5021522b0ccf723a402b10e605634d1c2fd162dc26f9fad4e64ff4fe51d35",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cpu2.h",
+      "original_sha256": "7e9cb73f825974421128e93c90a0096ad10518b6f48e47824e4b5d140638d216"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "sha256": "aee92f447164977ef7dd3c01526211de10553c1202210cf21421bbdfb201a7c4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cpu3.h",
+      "original_sha256": "ad167e9ff54476da9bc31c724d284073fb5c8796aa4417c66524aecb9e33bc0a"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/jformate.h",
+      "sha256": "d7e6e2cb071c61df62c50fc8ad9e1b88ff3493fb5ed76b5008e869746bb8a4ce",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\jformate.h",
+      "original_sha256": "a3fa4f16ff4f2e96f9f0d03cf69cf24e404ed3b428dda3a3f8466945a651ca5c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/keycaps.h",
+      "sha256": "22c13314a43c9a8fea65867e1edd0224c4d1bf64e16db3c24b7260a2d31cc403",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\keycaps.h",
+      "original_sha256": "aeeafe559ee28ae484897740af13b51de2105e5b17a1d3bae78a01d7bb6514e2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/lm_attr.h",
+      "sha256": "97a9ca05079ec5e4d51419b93adb22f90597a51968326b441c9ecab5d99fc9e6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\lm_attr.h",
+      "original_sha256": "f0daa6a32aff8415e2921b57012752535e40751ac1a88b1f371a82e1ad4763f6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ms_windo.h",
+      "sha256": "7982b12041ef9e9f17071f09c821ffba45ab6b38036fef2079190d5122b52bfc",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ms_windo.h",
+      "original_sha256": "f76510e61219069b0864434a6920a8639c4f7d2905d0ab9df22e0663ed27e52d"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/token.h",
+      "sha256": "1d2c587664865ce52264f64a3d30b9e85ab16efa94d26d2737ea9c07aa7d87e0",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\token.h",
+      "original_sha256": "77c42ea56f99dbbc324f8d15260f72e0e693e0c639803dcd6144d807c5e1ecb1"
+    }
+  ],
+  "removed_guard_ledger_entries": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "macro": "GISP_CPU",
+      "line": 1177,
+      "body_end": 1179,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cpu3.h",
+      "original_sha256": "ad167e9ff54476da9bc31c724d284073fb5c8796aa4417c66524aecb9e33bc0a",
+      "local_sha256": "6190107cb01714b054435cf1c530ad35ea4c66000795fdd8a7fea27c6492031a",
+      "removed_body_sha256": "bc08835ff9e72ea0023d790c54ec264aaf16e4d9996e96c0a08f0fe60b3395da",
+      "removed_body_lines": 2,
+      "after_sha256": "1c4d2fba8166d1f0e4dd793847ec90c07ab82582f1d4f717130c547d558eceec",
+      "final_sha256": "c711c104e058563c8f247032366ae4424967e8a09592a073bdf5e379e7f21f95",
+      "disposition": "subsumed-by-IRET_HOOKS",
+      "outer_guard_line": 1168
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
+      "macro": "BIGEND",
+      "line": 160,
+      "body_end": 173,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cpu2.h",
+      "original_sha256": "7e9cb73f825974421128e93c90a0096ad10518b6f48e47824e4b5d140638d216",
+      "local_sha256": "4c3e26a3290bfabf2d2adb2aad65ce0427631433940900d5f63c3a6494e96bc3",
+      "removed_body_sha256": "8505619b578c40ba48557d48bd64c2365e8d4bf99d7cc1bc830e73ab182585dc",
+      "removed_body_lines": 12,
+      "after_sha256": "04291b7269e743746990c4ed2d2bfb4924d19aa38ba4c04f6960aa55606467cb",
+      "final_sha256": "04291b7269e743746990c4ed2d2bfb4924d19aa38ba4c04f6960aa55606467cb"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
+      "macro": "BACK_M",
+      "line": 62,
+      "body_end": 78,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cpu2.h",
+      "original_sha256": "7e9cb73f825974421128e93c90a0096ad10518b6f48e47824e4b5d140638d216",
+      "local_sha256": "4c3e26a3290bfabf2d2adb2aad65ce0427631433940900d5f63c3a6494e96bc3",
+      "removed_body_sha256": "87fd37b08748b22fed7ede1a61c1b4ba320362f4d41740417e2034e5497e5fdd",
+      "removed_body_lines": 15,
+      "after_sha256": "04291b7269e743746990c4ed2d2bfb4924d19aa38ba4c04f6960aa55606467cb",
+      "final_sha256": "04291b7269e743746990c4ed2d2bfb4924d19aa38ba4c04f6960aa55606467cb"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "macro": "IRET_HOOKS",
+      "line": 1168,
+      "body_end": 1181,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cpu3.h",
+      "original_sha256": "ad167e9ff54476da9bc31c724d284073fb5c8796aa4417c66524aecb9e33bc0a",
+      "local_sha256": "1c4d2fba8166d1f0e4dd793847ec90c07ab82582f1d4f717130c547d558eceec",
+      "removed_body_sha256": "95dcc56efad57a36391d142cbd8e04e1045e73638bdee329422424ee4a53c0da",
+      "removed_body_lines": 13,
+      "after_sha256": "c711c104e058563c8f247032366ae4424967e8a09592a073bdf5e379e7f21f95",
+      "final_sha256": "c711c104e058563c8f247032366ae4424967e8a09592a073bdf5e379e7f21f95"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "macro": "IRET_HOOKS",
+      "line": 1048,
+      "body_end": 1055,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cpu3.h",
+      "original_sha256": "ad167e9ff54476da9bc31c724d284073fb5c8796aa4417c66524aecb9e33bc0a",
+      "local_sha256": "1c4d2fba8166d1f0e4dd793847ec90c07ab82582f1d4f717130c547d558eceec",
+      "removed_body_sha256": "33165f372e7e992462c62f0a36716c83bca3eb025088b8b0f56d381e19111da9",
+      "removed_body_lines": 7,
+      "after_sha256": "c711c104e058563c8f247032366ae4424967e8a09592a073bdf5e379e7f21f95",
+      "final_sha256": "c711c104e058563c8f247032366ae4424967e8a09592a073bdf5e379e7f21f95"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "macro": "A3CPU",
+      "line": 460,
+      "body_end": 818,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cpu3.h",
+      "original_sha256": "ad167e9ff54476da9bc31c724d284073fb5c8796aa4417c66524aecb9e33bc0a",
+      "local_sha256": "1c4d2fba8166d1f0e4dd793847ec90c07ab82582f1d4f717130c547d558eceec",
+      "removed_body_sha256": "96ca8be7441b4e3e18e7357ed643745c0269304742ececc3d63ef5051a3ee097",
+      "removed_body_lines": 358,
+      "after_sha256": "c711c104e058563c8f247032366ae4424967e8a09592a073bdf5e379e7f21f95",
+      "final_sha256": "c711c104e058563c8f247032366ae4424967e8a09592a073bdf5e379e7f21f95"
+    }
+  ],
+  "removed_snippet_test_tuples": 7,
+  "retired_divergences": [
+    "MVDM-HOST-DIV-602"
+  ],
+  "prior_queue": "s13-bfs-depth1-working-queue-195r111.zip",
+  "removed_condition_groups": 169,
+  "limitations": [
+    "Captured graph data predates current worktree changes; files and current references were verified.",
+    "No claim about unsupported future profiles."
+  ]
+}

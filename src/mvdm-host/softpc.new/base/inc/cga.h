@@ -24,9 +24,12 @@
 #endif
 
 
+#line 27
 #ifdef BIT_ORDER1
+#line 28
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
+#line 45
 
 #ifdef BIT_ORDER2
 typedef union                       /* Template for character attributes     */
@@ -81,7 +84,10 @@ extern	CGA_GLOBS	CGA_GLOBALS;
 #define	get_cga_color_select()		(CGA_GLOBALS.color_select)
 #define	get_cga_colormask()		(CGA_GLOBALS.colormask)
 
+#line 100
 #if !defined(EGG) && !defined(A_VID) && !defined(C_VID)
+#line 101
 #error Unsupported excluded original configuration
 #endif	/* !EGG */
+#line 113
 #line 97

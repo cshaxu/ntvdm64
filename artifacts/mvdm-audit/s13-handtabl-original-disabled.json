@@ -1,0 +1,13 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+  "original_sha256": "f0b56314a93423599f06645d17104391f19a0ca07c3944853b065d8866493f7c",
+  "working_sha256": "d1a7a880eb5ef0444b05609c537518c6c425a4932716b0fe60e34fd05d5a0a6e",
+  "original_line": 544,
+  "condition": "#if 0",
+  "exclusion": "constant false in all contexts",
+  "selected_code": "unchanged; restored guard follows current subset with no later selected line requiring #line",
+  "build": "WOW32 passed",
+  "tests": "x86 and x64 rejection controls passed",
+  "image_comparison": "s13-handtabl-guard-image-comparison.json"
+}

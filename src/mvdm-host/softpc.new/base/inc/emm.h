@@ -181,7 +181,7 @@ extern int		restore_map(short handle_no, unsigned short segment,
 #else /* ANSI */
 #error Unsupported excluded original configuration
 #endif /* ANSI */
-#line 186
+#line 187
 
 IMPORT VOID LIM_b_write   IPT1(sys_addr, intel_addr);
 IMPORT VOID LIM_str_write IPT2(sys_addr, intel_addr, ULONG, length);
@@ -196,9 +196,12 @@ IMPORT short	get_total_open_handles IPT0();
 IMPORT int	reallocate_handle IPT3(short, handle_no,
 				       short, old_page_count,
 				       short, new_page_count);
+#line 201
 #ifndef NTVDM
+#line 202
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 205
 
 
 IMPORT short	get_map_size	IPT0();

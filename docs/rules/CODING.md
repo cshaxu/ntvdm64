@@ -119,6 +119,14 @@ against their defect contract, not presented as performance optimizations.
 
 ## Original mirrors
 
+- Excluding a source file from every supported build does not by itself make
+  independently useful assets disposable. Preserve executable tools, DLLs,
+  fonts, and other independently useful runtime or user-facing resources;
+  preserve guest binaries and media unchanged. Pure build intermediates may be
+  removed after their consumers and ownership are verified. Record any retained
+  prebuilt binary's provenance and distinguish preservation from functional
+  validation.
+
 - An imported mirror file has exactly one classification: byte-exact original;
   true original subset; or same-shaped minimal original/subset modification.
 - Every S closure must compare every selected mirror file against its pinned
@@ -130,6 +138,9 @@ against their defect contract, not presented as performance optimizations.
 - For a deleted original conditional branch body, retain the original
   conditional boundary and replace its body solely with `#error`, never a
   comment placeholder. The directive identifies the unsupported configuration.
+  Conditional depth is local to each file: its outermost group is depth 1,
+  regardless of which file includes it. Includes provide compilation context,
+  not an additional level of conditional nesting.
   Process from the outside inward: remove conditions nested inside a wholly
   excluded body. Preserve selected alternatives and add `#line` where needed to
   retain original diagnostic line numbers. Do not add a divergence comment to

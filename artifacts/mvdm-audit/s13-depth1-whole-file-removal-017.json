@@ -1,0 +1,232 @@
+{
+  "scope": "Unselected legacy IEUVDDEx monitor debugger extension and obsolete source-ledger generator",
+  "files": [
+    {
+      "path": "src/mvdm-host/ieuvddex/alpha/helpp.c",
+      "sha256": "1c04a2c33c929d106d0b069792b8cba39edea03b8fd0b709828e886e1b1b5ab3"
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/alpha/sources",
+      "sha256": "22608420817c420a02d325ff506d429e8401f3e53c2d30cd31fb1a1d68f90a20"
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/data.c",
+      "sha256": "bf11d1ed050e728437b1aa6c57089f35fc9ae0faac9129362eb6f0f4ff1f9eb4"
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/help.c",
+      "sha256": "73a97123180e7e9dc1dca228ae988c03026cd87d538a451dbb88a0af435e4c40"
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/i386/helpp.c",
+      "sha256": "6e85700f95fdf6da095ddb10aed10415bcb1f4a1d9fd34c2ccef072cc7726643"
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/i386/profile.c",
+      "sha256": "099d15ed95dd364f13b1e484fd90794080df252635bc427039a4f23c28b7df4d"
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/i386/reflect.c",
+      "sha256": "2478db89d3780a3e65e84bc3cda0549e48b4198ff9d9a296d1c72e000185144d"
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/i386/regs.c",
+      "sha256": "748f04add1aeb6aef2f2aff71d6e76f8c6a0b796bcbe35593d3ca7d46d4ea589"
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/i386/sources",
+      "sha256": "8490cec3574ae241d421b6a57b0cb3954f10d5505c3f5136dd05c81f97ae3e2c"
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/i386/vdmtib.c",
+      "sha256": "3422f71f3ef7d1d8993ea92cfa5eaaa7e883323113775b3cfe196d95b7e78251"
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/ieuvddex.h",
+      "sha256": "b51a42924fed07a2e2c796951eea38079d5f57e81fa120bfd5b93f1f3970bde5"
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/makefile",
+      "sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70"
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/mips/helpp.c",
+      "sha256": "1c04a2c33c929d106d0b069792b8cba39edea03b8fd0b709828e886e1b1b5ab3"
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/mips/sources",
+      "sha256": "0f7b58443b15c72984641eed8541b1fd4607e0e282219765f4d51b13c6b77ead"
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/ntvdm.def",
+      "sha256": "843dc336765ca8d961cceb64447348d4adee378ccf7de747c92c93a645c668cc"
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/pmode.c",
+      "sha256": "a05fd84c20b672bc35b253302b1a044671e0803d822135b9ca24009e1fa4d644"
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/ppc/helpp.c",
+      "sha256": "1c04a2c33c929d106d0b069792b8cba39edea03b8fd0b709828e886e1b1b5ab3"
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/ppc/sources",
+      "sha256": "97f49fee82010329d4b1b4748a9c15581d871a1bcc6e543e5742243e25e756c8"
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/procdep.c",
+      "sha256": "53168b175334532d20014c54b12591f2d8529de7f8a87535d1cd8e737035c28a"
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/sources",
+      "sha256": "6f150b0ad259c918276b3963119f3ec07d34c582265e25fb204a42486b0da3eb"
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/system.c",
+      "sha256": "fbd3b3eb8b7e3ba7f657b1dc6aee928673d12e4baf29842bd9093519b473c195"
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/trace.c",
+      "sha256": "8e1b0042e3b9fc2188d0a2dd069f68d41b19d0f7bb6596d2baaa437914a6fcea"
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/vdmdll.rc",
+      "sha256": "c9fcaa3028d084fc76efb841c56a9fe6853bea28f3fd5e59386cd1422e31a81d"
+    },
+    {
+      "path": "tools/audit/New-T288S1MonitorSourceLedger.ps1",
+      "sha256": "dc3b2715ec05822887eabb64f687fd1038a061cc29f22abf775ed17db120ea12"
+    }
+  ],
+  "mirror_sources": [
+    {
+      "path": "src/mvdm-host/ieuvddex/alpha/helpp.c",
+      "current_sha256": "1c04a2c33c929d106d0b069792b8cba39edea03b8fd0b709828e886e1b1b5ab3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\ieuvddex\\alpha\\helpp.c",
+      "original_sha256": "987252587bab9b164e668d55d781f79af31118c6724fce27f73bbcd3a69daf87",
+      "pinned_expected_sha256": "987252587bab9b164e668d55d781f79af31118c6724fce27f73bbcd3a69daf87",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/data.c",
+      "current_sha256": "bf11d1ed050e728437b1aa6c57089f35fc9ae0faac9129362eb6f0f4ff1f9eb4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\ieuvddex\\data.c",
+      "original_sha256": "c8545c33806e1cfcfee94971542232e266a8693f0b41c04a2fd77a3d5232680d",
+      "pinned_expected_sha256": "c8545c33806e1cfcfee94971542232e266a8693f0b41c04a2fd77a3d5232680d",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/help.c",
+      "current_sha256": "73a97123180e7e9dc1dca228ae988c03026cd87d538a451dbb88a0af435e4c40",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\ieuvddex\\help.c",
+      "original_sha256": "f27dddee55c29f080a4679bc1653384c28147961d497d04f2a7f85c89f3f13e4",
+      "pinned_expected_sha256": "f27dddee55c29f080a4679bc1653384c28147961d497d04f2a7f85c89f3f13e4",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/i386/helpp.c",
+      "current_sha256": "6e85700f95fdf6da095ddb10aed10415bcb1f4a1d9fd34c2ccef072cc7726643",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\ieuvddex\\i386\\helpp.c",
+      "original_sha256": "abd758fe693d3bbb9debd649e890aa425b96a6a780b4e8d466e7a58d21b60d24",
+      "pinned_expected_sha256": "abd758fe693d3bbb9debd649e890aa425b96a6a780b4e8d466e7a58d21b60d24",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/i386/profile.c",
+      "current_sha256": "099d15ed95dd364f13b1e484fd90794080df252635bc427039a4f23c28b7df4d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\ieuvddex\\i386\\profile.c",
+      "original_sha256": "04ab8d21c213f98829229c0eaadf5bce0a2a48f455075998a7b12cc4793aba6f",
+      "pinned_expected_sha256": "04ab8d21c213f98829229c0eaadf5bce0a2a48f455075998a7b12cc4793aba6f",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/i386/reflect.c",
+      "current_sha256": "2478db89d3780a3e65e84bc3cda0549e48b4198ff9d9a296d1c72e000185144d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\ieuvddex\\i386\\reflect.c",
+      "original_sha256": "ab3d3db2571d39dba5e6df8ea51743ef29ddbcb23265a11c4b3e44a8cd5f72a2",
+      "pinned_expected_sha256": "ab3d3db2571d39dba5e6df8ea51743ef29ddbcb23265a11c4b3e44a8cd5f72a2",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/i386/regs.c",
+      "current_sha256": "748f04add1aeb6aef2f2aff71d6e76f8c6a0b796bcbe35593d3ca7d46d4ea589",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\ieuvddex\\i386\\regs.c",
+      "original_sha256": "49618545c379ec52e42777962062534eabb6086943cca7e208dc6e04d4afce99",
+      "pinned_expected_sha256": "49618545c379ec52e42777962062534eabb6086943cca7e208dc6e04d4afce99",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/i386/vdmtib.c",
+      "current_sha256": "3422f71f3ef7d1d8993ea92cfa5eaaa7e883323113775b3cfe196d95b7e78251",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\ieuvddex\\i386\\vdmtib.c",
+      "original_sha256": "f4fb7e8955cacb599d9e360ab0370a4d987c00da9839b270972dc8a6108e4f07",
+      "pinned_expected_sha256": "f4fb7e8955cacb599d9e360ab0370a4d987c00da9839b270972dc8a6108e4f07",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/ieuvddex.h",
+      "current_sha256": "b51a42924fed07a2e2c796951eea38079d5f57e81fa120bfd5b93f1f3970bde5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\ieuvddex\\ieuvddex.h",
+      "original_sha256": "17257eb303d196b6cd7449a7f2f63ff0d3f865df550c9d760f9d536b17bbcc37",
+      "pinned_expected_sha256": "17257eb303d196b6cd7449a7f2f63ff0d3f865df550c9d760f9d536b17bbcc37",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/mips/helpp.c",
+      "current_sha256": "1c04a2c33c929d106d0b069792b8cba39edea03b8fd0b709828e886e1b1b5ab3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\ieuvddex\\mips\\helpp.c",
+      "original_sha256": "987252587bab9b164e668d55d781f79af31118c6724fce27f73bbcd3a69daf87",
+      "pinned_expected_sha256": "987252587bab9b164e668d55d781f79af31118c6724fce27f73bbcd3a69daf87",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/pmode.c",
+      "current_sha256": "a05fd84c20b672bc35b253302b1a044671e0803d822135b9ca24009e1fa4d644",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\ieuvddex\\pmode.c",
+      "original_sha256": "30187f0832c3ea0bc1933321fb247eec4b6d3d2a4749ad05375dd44409be0349",
+      "pinned_expected_sha256": "30187f0832c3ea0bc1933321fb247eec4b6d3d2a4749ad05375dd44409be0349",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/ppc/helpp.c",
+      "current_sha256": "1c04a2c33c929d106d0b069792b8cba39edea03b8fd0b709828e886e1b1b5ab3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\ieuvddex\\ppc\\helpp.c",
+      "original_sha256": "987252587bab9b164e668d55d781f79af31118c6724fce27f73bbcd3a69daf87",
+      "pinned_expected_sha256": "987252587bab9b164e668d55d781f79af31118c6724fce27f73bbcd3a69daf87",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/procdep.c",
+      "current_sha256": "53168b175334532d20014c54b12591f2d8529de7f8a87535d1cd8e737035c28a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\ieuvddex\\procdep.c",
+      "original_sha256": "33912500d91e1c6a59c7986f19c9e7b251371ee54f675407e1cbd90b8ad7910a",
+      "pinned_expected_sha256": "33912500d91e1c6a59c7986f19c9e7b251371ee54f675407e1cbd90b8ad7910a",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/system.c",
+      "current_sha256": "fbd3b3eb8b7e3ba7f657b1dc6aee928673d12e4baf29842bd9093519b473c195",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\ieuvddex\\system.c",
+      "original_sha256": "92a40ad25c423891b11f9d8ec993b75603cf01ae1c0a8966e1d5cba1c63699dd",
+      "pinned_expected_sha256": "92a40ad25c423891b11f9d8ec993b75603cf01ae1c0a8966e1d5cba1c63699dd",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/trace.c",
+      "current_sha256": "8e1b0042e3b9fc2188d0a2dd069f68d41b19d0f7bb6596d2baaa437914a6fcea",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\ieuvddex\\trace.c",
+      "original_sha256": "b1f435775188a93d9bdd20cfdf4de08e0194d6aa86b695f092336e441a6b9143",
+      "pinned_expected_sha256": "b1f435775188a93d9bdd20cfdf4de08e0194d6aa86b695f092336e441a6b9143",
+      "original_matches_pinned": true
+    }
+  ],
+  "removed_condition_groups": 26,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r122.zip",
+  "evidence": [
+    "Current product/build/test graphs do not select the extension; other references are historical governance records.",
+    "The retired T288 ledger generator has no current callers and refers to source roots already moved or removed."
+  ],
+  "limitations": [
+    "No change to CCPU software V86 or active device behavior."
+  ]
+}

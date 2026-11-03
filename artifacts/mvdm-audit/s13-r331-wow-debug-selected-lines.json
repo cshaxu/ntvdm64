@@ -1,0 +1,22 @@
+{
+  "changes": [
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "original_group": 2451,
+      "physical_line": 2429,
+      "old": 2508,
+      "new": 2472,
+      "next_text_sha256": "0025dcc3b18e1620a1f55853708dcaf16f084e455425f5ae68369c59156c0ad8"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "original_group": 800,
+      "physical_line": 726,
+      "old": 837,
+      "new": 812,
+      "next_text_sha256": "43bbdc187ce60ccbc1349598adb0b09dbaaffa1576345700fa4cf5cf27641240"
+    }
+  ],
+  "method": "unique original first-depth group, original else and byte-identical next selected source line",
+  "validation": "pending"
+}

@@ -1,0 +1,71 @@
+{
+  "input_queue": "artifacts/mvdm-audit/s13-bfs-depth1-working-queue-195r251.zip",
+  "diff_evidence": "artifacts/mvdm-audit/s13-r251-git-snapshot-diffs.json",
+  "method": "Exact Git historical blob and current SHA-256; unified diff contains only #line directives and blank lines. Diagnostic values may differ. No branch disposition changed.",
+  "rows": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "old_commit": "2659616aa279ae75f4c393917fad300dc8d35788",
+      "old_sha256": "fc740728c4fd1d269f9dc787a520e7f557f7f9a9fd795087d729f90e70530c60",
+      "current_sha256": "04a212111012c817062b6045b75dbccd5639936a113c8c47b4606e4b9f674cfb",
+      "changed_lines": [
+        "#line 36",
+        "#line 39"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "old_commit": "0bbea1d597a3622e71de9a6be0833bb023a5d666",
+      "old_sha256": "8913f71c6632f75b745b5061e43cd1d56c6d26208092e606ff0bf5710a8f603c",
+      "current_sha256": "102bdfaab6fea42e19deea0115f82523fdff5d6e486272887139740955a5e224",
+      "changed_lines": [
+        "#line 226",
+        "#line 229",
+        "#line 231",
+        "#line 521",
+        "#line 537",
+        "",
+        "",
+        "",
+        "",
+        "#line 545",
+        "#line 1637",
+        "#line 1578",
+        "#line 1707",
+        "#line 1648",
+        "#line 4402",
+        "#line 4443",
+        "#line 4492",
+        "#line 4407",
+        "#line 4498",
+        "#line 4663",
+        "#line 4777",
+        "#line 4695",
+        "#line 4805"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "old_commit": "2a2f01e8933e39a5fb680c3359d84d20a4522f3d",
+      "old_sha256": "ea0ebad8ee2746d2bd9c52481d4ebf2d61d0e9e02bd77a90d57108391cf5d58c",
+      "current_sha256": "106b2ac1f9ba81fb9c735d894176a7f202aeb703f74c8c10965f43d0c5d7e3ed",
+      "changed_lines": [
+        "#line 2590",
+        "#line 2186",
+        "#line 2593",
+        "#line 2189",
+        "#line 2596"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "old_commit": "0bbea1d597a3622e71de9a6be0833bb023a5d666",
+      "old_sha256": "e09cbd5648b40e7b5de329344093879438e13f9acc4598a0be635dffa00baeac",
+      "current_sha256": "11201c23c76031935d2ed85f90c96a08dc40d954ab2198c3a358b7556064873f",
+      "changed_lines": [
+        "#line 44",
+        "#line 47"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+  "before_sha256": "fa1065b07677471fc32e2ee3d3961e2a3365bda04e5899e4ebb55963d1a70c44",
+  "after_sha256": "da1db0c309b1233b528cbfe920a55c9f5842299ddb4c2f6b2814503c5c0295b2",
+  "groups": [
+    {
+      "current_old_start": 422,
+      "current_old_end": 427,
+      "original_line": 850,
+      "directive": "#ifdef DEBUG"
+    },
+    {
+      "current_old_start": 428,
+      "current_old_end": 433,
+      "original_line": 934,
+      "directive": "#ifdef DEBUG"
+    },
+    {
+      "current_old_start": 434,
+      "current_old_end": 439,
+      "original_line": 1002,
+      "directive": "#ifdef DEBUG"
+    },
+    {
+      "current_old_start": 440,
+      "current_old_end": 445,
+      "original_line": 1163,
+      "directive": "#ifdef DEBUG"
+    },
+    {
+      "current_old_start": 446,
+      "current_old_end": 451,
+      "original_line": 1822,
+      "directive": "#ifdef DEBUG"
+    },
+    {
+      "current_old_start": 458,
+      "current_old_end": 463,
+      "original_line": 583,
+      "directive": "#ifdef FE_IME"
+    },
+    {
+      "current_old_start": 464,
+      "current_old_end": 469,
+      "original_line": 833,
+      "directive": "#ifdef FE_IME"
+    },
+    {
+      "current_old_start": 470,
+      "current_old_end": 475,
+      "original_line": 1054,
+      "directive": "#ifdef FE_IME"
+    },
+    {
+      "current_old_start": 476,
+      "current_old_end": 481,
+      "original_line": 1861,
+      "directive": "#ifdef FE_IME"
+    },
+    {
+      "current_old_start": 482,
+      "current_old_end": 486,
+      "original_line": 1703,
+      "directive": "#ifdef ANDREVA_DBG"
+    }
+  ],
+  "reason": "original directives lie inside omitted functions or data initializers; file-scope placeholders withdrawn; original groups pending"
+}

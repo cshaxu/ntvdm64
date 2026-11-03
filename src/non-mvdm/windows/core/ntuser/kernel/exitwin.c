@@ -70,3 +70,13 @@ BOOL xxxRegisterUserHungAppHandlers(
 
    return bRetVal;
 }
+
+
+#line 134
+#ifndef LATER
+#line 135
+#else
+#line 137
+#error Unsupported LATER original branch
+#endif
+#line 143

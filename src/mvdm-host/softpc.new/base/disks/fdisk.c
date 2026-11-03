@@ -1808,9 +1808,12 @@ GLOBAL VOID fdisk_physattach IFN1(int,driveno)
 	fast_disk_bios_attach(driveno);
 }
 
+#line 1845
 #ifdef macintosh
+#line 1846
 #error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
 #endif /* macintosh */
+#line 1861
 
 GLOBAL VOID fdisk_reset IFN0()
 {

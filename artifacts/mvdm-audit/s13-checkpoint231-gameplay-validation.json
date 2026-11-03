@@ -1,0 +1,22 @@
+{
+  "candidate_manifest_sha256": "025baf2482e9c2525dbfe22007fd1492e0bdb15eeaa8762daf11ebd42d6aa906",
+  "rows": [
+    {
+      "name": "mine-gameplay",
+      "result": "PASS flag/counter, reset, open cell, WM_CLOSE and run16 completion",
+      "probe_output_sha256": "f83e5ff91b98d4841a67c24fdf9f2e1e571dd2f62e2af4733b61e4b091a613ee",
+      "product_inputs_verified": 3
+    },
+    {
+      "name": "sol-gameplay",
+      "result": "PASS SOL deal, stock draw, WM_CLOSE and run16 completion",
+      "probe_output_sha256": "d721a62a87cedbd33fef396d5a11784e7cffab25a347cf07bb3d30fe6b58d3e8",
+      "product_inputs_verified": 10
+    }
+  ],
+  "limitations": [
+    "private-desktop test probe, not manual validation",
+    "Win3.1 modes validated separately",
+    "no publication or closure"
+  ]
+}

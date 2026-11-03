@@ -1,0 +1,208 @@
+{
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+      "before_sha256": "369b8bf29e6c2cb69fe1d3737a610ff32d9ae2dd12267654e193b01385be9bcd",
+      "guards": [
+        {
+          "original_line": 327,
+          "kind": "ifdef",
+          "expression": "FE_IME",
+          "continuation": 331
+        }
+      ],
+      "after_sha256": "bb15118f1d8193d3b4e3a4813e35c479a549aed9607fc10b1bfb422df81abcd9"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "before_sha256": "2d1bbfe6dbd6871cac702380ed61fbb8f301dfbcd8ca4ee015cca306d2ede729",
+      "guards": [
+        {
+          "original_line": 693,
+          "kind": "ifdef",
+          "expression": "FE_SB",
+          "continuation": 702
+        },
+        {
+          "original_line": 797,
+          "kind": "ifdef",
+          "expression": "FE_SB",
+          "continuation": 800
+        }
+      ],
+      "after_sha256": "c0be8bb945fc98e43631961d043c8cdf91df7e7503ebeab76206b328e46e3bfc"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "original_sha256": "f0b56314a93423599f06645d17104391f19a0ca07c3944853b065d8866493f7c",
+      "before_sha256": "5b1eda962e6a419bf356ee3aa59c1c72c9f84a7321d2107831299489ad921d65",
+      "guards": [
+        {
+          "original_line": 81,
+          "kind": "ifdef",
+          "expression": "FE_IME",
+          "continuation": 84
+        },
+        {
+          "original_line": 456,
+          "kind": "ifdef",
+          "expression": "FE_IME",
+          "continuation": 459
+        },
+        {
+          "original_line": 1519,
+          "kind": "ifdef",
+          "expression": "FE_IME",
+          "continuation": 1524
+        }
+      ],
+      "after_sha256": "cd45b12df2e1291f0f9733fb3607e45f5bf783426e75399775b43a1be1024849"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "before_sha256": "1b42c65405d9fc0efc15604f902a815e45e51e9adba98967f0996f8e2a43d866",
+      "guards": [
+        {
+          "original_line": 2747,
+          "kind": "ifdef",
+          "expression": "MEMPHIS_MENUS",
+          "continuation": 2750
+        },
+        {
+          "original_line": 3431,
+          "kind": "ifdef",
+          "expression": "MEMPHIS_MENUS",
+          "continuation": 3434
+        },
+        {
+          "original_line": 3461,
+          "kind": "ifdef",
+          "expression": "MEMPHIS_MENUS",
+          "continuation": 3464
+        },
+        {
+          "original_line": 3486,
+          "kind": "ifdef",
+          "expression": "MEMPHIS_MENUS",
+          "continuation": 3489
+        },
+        {
+          "original_line": 4410,
+          "kind": "ifdef",
+          "expression": "MEMPHIS_MENUS",
+          "continuation": 4413
+        }
+      ],
+      "after_sha256": "e9818b02c52f8efaf2b06ffd83c15d6c635b2a2375557165b2ceeb734e9b835d"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+      "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+      "before_sha256": "c4c8c8d64527913c18026f35f8c7fe0bae8a9a1e8728de8ce4ebc421ac80a2fc",
+      "guards": [
+        {
+          "original_line": 481,
+          "kind": "ifdef",
+          "expression": "FE_IME",
+          "continuation": 499
+        },
+        {
+          "original_line": 583,
+          "kind": "ifdef",
+          "expression": "FE_IME",
+          "continuation": 597
+        },
+        {
+          "original_line": 833,
+          "kind": "ifdef",
+          "expression": "FE_IME",
+          "continuation": 840
+        },
+        {
+          "original_line": 1054,
+          "kind": "ifdef",
+          "expression": "FE_IME",
+          "continuation": 1057
+        },
+        {
+          "original_line": 1861,
+          "kind": "ifdef",
+          "expression": "FE_IME",
+          "continuation": 1864
+        }
+      ],
+      "after_sha256": "484339eb2f998defc958526b7dfb1bf0452050b72090892ea8538236159724f8"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+      "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+      "before_sha256": "64d4f951d3b0b6d7991f8cc1d3b6dd38e6838250fcc66b396e134f033d8ff652",
+      "guards": [
+        {
+          "original_line": 326,
+          "kind": "ifdef",
+          "expression": "FE_SB",
+          "continuation": 329
+        }
+      ],
+      "after_sha256": "8b6820084928efe9cf894656a42b97825fcdf9e794c7b18a585c8b2a24777229"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+      "before_sha256": "586fb661c92e38a871229436cb76e742f6c7de1875af90d8d25ec95be04ae6cb",
+      "guards": [
+        {
+          "original_line": 22,
+          "kind": "ifdef",
+          "expression": "FE_SB",
+          "continuation": 26
+        },
+        {
+          "original_line": 59,
+          "kind": "ifdef",
+          "expression": "FE_SB",
+          "continuation": 641
+        },
+        {
+          "original_line": 677,
+          "kind": "ifdef",
+          "expression": "FE_SB",
+          "continuation": 712
+        },
+        {
+          "original_line": 1213,
+          "kind": "ifdef",
+          "expression": "FE_SB",
+          "continuation": 1216
+        }
+      ],
+      "after_sha256": "419a3bd0ae994a9ef212f744bd8a41af723a8de8b26123a886f3598525baf8bc"
+    }
+  ],
+  "skips": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 2374,
+      "reason": "original line anchor already present"
+    }
+  ],
+  "scope": "single-arm original first-depth FE_IME/FE_SB/MEMPHIS_MENUS; original enclosing functions outside selected subsets",
+  "validation": "x86 WOW32 and call-boundaries builds passed; 21 guard/continuation checks passed",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r212.zip",
+  "existing_anchor_reconciled": {
+    "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+    "original_line": 2374,
+    "current_line": 1117
+  }
+}

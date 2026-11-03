@@ -1,0 +1,26 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+  "working_sha256": "9a4ad9fe9fbf0dc8ed05065646fb2b8355a6518b02aeba706ab64b8e5423f4d3",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmenu.c",
+  "original_sha256": "dee4bdb0c79e58993b25ab65c37eb71cc4cfc9a551a9a0e07b5a2f67eb8461cd",
+  "original_conditions": [
+    {
+      "line": 434,
+      "expression": "#ifdef MEMPHIS_MENUS"
+    },
+    {
+      "line": 676,
+      "expression": "#ifdef MEMPHIS_MENU_WATERMARKS"
+    }
+  ],
+  "discarded_nested_queue_groups": 2,
+  "actual_wow_context": "MEMPHIS_MENUS excluded by existing guard; watermark macro observed undefined after selected source",
+  "preprocessing": "baseline and candidate nonblank output equal",
+  "build": "WOW32 passed",
+  "tests": [
+    "x86 and x64 guard suites",
+    "pinned-original menu thunk/converter extraction"
+  ],
+  "image_comparison": "s13-clmenu-guards-image-comparison.json",
+  "limitation": "No runtime claim for excluded Memphis profiles."
+}

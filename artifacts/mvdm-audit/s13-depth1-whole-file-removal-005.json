@@ -1,0 +1,105 @@
+{
+  "scope": "Eight unselected files whose only active test references extracted guard snippets; captured product graph has no file context",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
+      "sha256": "3197686d47e0b2203a913b2ba93e5c178d73f058a0471786dc0305730e0294f4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\bootstra.c",
+      "original_sha256": "656c7feada15fda95476beb8f099453c79edfe75b75c49b3aadbf23a89ef3f05"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cdrom.h",
+      "sha256": "10c365e6bfb93746f652f61d8bf2b60505444dd1c2d3475b9aadf025584b16fd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cdrom.h",
+      "original_sha256": "9da2a1531ac1eb2e0d2d9b57ec7e85328fd6402a83a3e562494b175f27101569"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gore.h",
+      "sha256": "31363a2f25352891adb3b4a943fedbcffccad04926085bd13fc64298c095bdd9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gore.h",
+      "original_sha256": "ef1880d39bc72f79dae1b4a14103e99765cfb78968304142388a83e0ab3049f2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_msw.h",
+      "sha256": "9830f02bce4462039743553af19876a6f05a041c5359f6fcbda03a76ef003719",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\host_msw.h",
+      "original_sha256": "cf1ec4ebdc5ea03737bb97c8d0f5d82f52158e02927edb65e0e0eee5f9da4636"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/novell.h",
+      "sha256": "08032a5b6d2de9c3181202984fdb7f1bd1b12ba92473672b701f7ce5acbbd081",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\novell.h",
+      "original_sha256": "4fb1d6008cbaea0c3b36985743ec00bbf0441fa3aeea1fbefb17c6a598a0bcbf"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/smeg_hea.h",
+      "sha256": "6a2ea838451c5a4b4b402b00136cee2ba2cbff8887389bf95c83e21d4f96965f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\smeg_hea.h",
+      "original_sha256": "ca784c2c076245462181acb61ad44dd89e92d26beef4227864152a50f9d5a47d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/spc_icon.h",
+      "sha256": "f090f3d6c7839c66af6f757d582b6641a5931f2fc6686771832502fd347544ce",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\spc_icon.h",
+      "original_sha256": "0f49f06c62860a0d5d9b0c645d148cf00416c341c3c82a7ec307349657781eea"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/isnkrnl.h",
+      "sha256": "e04a83a66738498793e8b43a4eafbeee58498aec6565f7cbb94214d2c074ed42",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\isnkrnl.h",
+      "original_sha256": "e2dac477e1c776f8a0ecb0360d1c2ca5a7f8f94eef179cde9ae733262c1a43ca"
+    }
+  ],
+  "removed_guard_ledger_entries": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cdrom.h",
+      "macro": "macintosh",
+      "line": 252,
+      "body_end": 252,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cdrom.h",
+      "original_sha256": "9da2a1531ac1eb2e0d2d9b57ec7e85328fd6402a83a3e562494b175f27101569",
+      "local_sha256": "e64f5a4727b5ca937a6eb3fab8587e112bd3a0c314a709598d8893982179478d",
+      "removed_body_sha256": "d64aac5682c083bc100257af85b81470050a5330baf337fba17f73866456636d",
+      "removed_body_lines": 1,
+      "after_sha256": "91b3626df851097f6d3361f7c0714ef8f0f07598ae59c103b28e174cf5b58926",
+      "final_sha256": "91b3626df851097f6d3361f7c0714ef8f0f07598ae59c103b28e174cf5b58926"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
+      "macro": "SCCSID",
+      "line": 45,
+      "body_end": 46,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\bootstra.c",
+      "original_sha256": "656c7feada15fda95476beb8f099453c79edfe75b75c49b3aadbf23a89ef3f05",
+      "local_sha256": "d2995b0f57e18ee76074b008e9bcc8e852faaf2708e5792363f0771557157ec2",
+      "removed_body_sha256": "65026bbf3cc09b180fdf72004bfc8738e02a2eab2a9fdb182dcf585748a566d5",
+      "removed_body_lines": 1,
+      "after_sha256": "42e2615d0cdc3d7e59104be8feb1d29884c3db7e5db890b24a4043d164940843",
+      "final_sha256": "33ef9bdd2dafe75a2ec3b5b0e82d9fd47efb76b2c6ee0ca444bcaafc2aa119a3"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
+      "macro": "SEGMENTATION",
+      "line": 49,
+      "body_end": 55,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\bootstra.c",
+      "original_sha256": "656c7feada15fda95476beb8f099453c79edfe75b75c49b3aadbf23a89ef3f05",
+      "local_sha256": "42e2615d0cdc3d7e59104be8feb1d29884c3db7e5db890b24a4043d164940843",
+      "removed_body_sha256": "cc455861ce0a4f20d789cd2fece6968d50c1dec9930b5a201e19f222b18460d2",
+      "removed_body_lines": 6,
+      "after_sha256": "33ef9bdd2dafe75a2ec3b5b0e82d9fd47efb76b2c6ee0ca444bcaafc2aa119a3",
+      "final_sha256": "33ef9bdd2dafe75a2ec3b5b0e82d9fd47efb76b2c6ee0ca444bcaafc2aa119a3"
+    }
+  ],
+  "removed_snippet_test_tuples": 9,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r109.zip",
+  "removed_condition_groups": 55,
+  "retired_divergences": [
+    "MVDM-HOST-DIV-606",
+    "OPENNT-HOST-151"
+  ],
+  "limitations": [
+    "Graph evidence predates current worktree changes; candidate files are unchanged relative to current HEAD.",
+    "Unsupported future configurations not proven."
+  ]
+}

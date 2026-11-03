@@ -1,0 +1,96 @@
+{
+  "result": "passed",
+  "controls": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "body_line": 699,
+      "continuation_line": 701,
+      "negative_diagnostic_sha256": "4ca0ca3e36d3ad9ab69857e8eea6d91fd65f7fe64b35b6c484ee7c5954111bdf"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "body_line": 61,
+      "continuation_line": 63,
+      "negative_diagnostic_sha256": "355bc0f9ff45e8d9f70540003fb3a5589f49403c988847316f195eb35b5709b0"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "body_line": 1561,
+      "continuation_line": 1612,
+      "negative_diagnostic_sha256": "3c2b9de9eef42a6074f5e58e13f8e4028a7a21624d32b4ac5720df7b6eb72e3f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sound.c",
+      "body_line": 139,
+      "continuation_line": 141,
+      "negative_diagnostic_sha256": "a2d5e5779e0023e78c8e567c36a483ee3e437841b4e4f78d8fc80e4e47f5b709"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "body_line": 163,
+      "continuation_line": 166,
+      "negative_diagnostic_sha256": "d31ee9f460a072597c5358ec4b424c42338a84175da7b4a36e098c1b511bd101"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "body_line": 97,
+      "continuation_line": 100,
+      "negative_diagnostic_sha256": "613f46d5a52e8974c5a9980a3619c5659ceacf64334aece5556dc249c7534385"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "body_line": 82,
+      "continuation_line": 88,
+      "negative_diagnostic_sha256": "938e173cc63934bd43c085a144046259fec7036bdc120abdb5ec537b7b20493a"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vflop.c",
+      "body_line": 5,
+      "continuation_line": 605,
+      "negative_diagnostic_sha256": "55102827c4c83c8e74c3e467d393c6e005f3dca6b5c345a3628e89c599ed183c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "body_line": 449,
+      "continuation_line": 460,
+      "negative_diagnostic_sha256": "c6f2623eb310d0b5d9739a6a77372c6d80b0e8df06b69f7e0f23e8c61f883a85"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "body_line": 116,
+      "continuation_line": 118,
+      "negative_diagnostic_sha256": "60dc58c5c40fa042358c8cbbde31fafbdd3f15270b17e902c7a68247276499f5"
+    },
+    {
+      "path": "src/mvdm-host/suballoc/suballcp.h",
+      "body_line": 131,
+      "continuation_line": 133,
+      "negative_diagnostic_sha256": "16134c111f1c8ee8d40593c11d1262f531dd707fec2d68f2a37496b13b8eada8"
+    },
+    {
+      "path": "src/mvdm-host/suballoc/suballoc.c",
+      "body_line": 330,
+      "continuation_line": 337,
+      "negative_diagnostic_sha256": "e8d5af6434c5f1127c1c4dde1f34fdef9bfd30dc3f04abd0c0ba0504d587ff85"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdebug.c",
+      "body_line": 182,
+      "continuation_line": 2373,
+      "negative_diagnostic_sha256": "a511c8e61497f9b1b8f73efadf19b40ac3ef509058d6673106fc7e86c8583726"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdisp.c",
+      "body_line": 147,
+      "continuation_line": 150,
+      "negative_diagnostic_sha256": "5f915e7c367e0fe16c3a30cfae3fea6d0f8fc3981b61c81d56dba9b6726171a0"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc.h",
+      "body_line": 982,
+      "continuation_line": 989,
+      "negative_diagnostic_sha256": "bc7d19b141f9cbbef6028728e7714991cda64603e76388712c4e4d30bce7dafb"
+    }
+  ],
+  "scope": "extracted actual source, false/true forced guard; not all include contexts"
+}

@@ -53,7 +53,7 @@ SOURCES=debug.c     \
         vxd.c       \
         xmem.c
 
-i386_SOURCES=i386\dpmi386.c i386\dpmimem.c i386\dpmimisc.c
+i386_SOURCES=i386\dpmi386.c i386\dpmimisc.c
 
 MIPS_SOURCES=dpmimemr.c dpmimscr.c
 PPC_SOURCES=dpmimemr.c dpmimscr.c

@@ -48,7 +48,7 @@ BOOL WINAPI wow_native_class_resolve_procedure(DWORD procedure, DWORD *resolved)
     return TRUE;
 }
 
-#ifndef OPENNT_HOST_NTRTL_SUBSET_H
+#ifndef _NTRTL_
 NTSYSAPI BOOLEAN NTAPI RtlEqualUnicodeString(const UNICODE_STRING *,
     const UNICODE_STRING *, BOOLEAN);
 #endif

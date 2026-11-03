@@ -1,0 +1,15 @@
+{
+  "controls": [
+    {
+      "arch": "x86",
+      "exit": 2,
+      "error_line": 2289
+    },
+    {
+      "arch": "x64",
+      "exit": 2,
+      "error_line": 2289
+    }
+  ],
+  "limits": "isolated forced DEBUG profile; omitted selected function not recovered"
+}

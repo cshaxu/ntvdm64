@@ -1,0 +1,31 @@
+{
+  "source": "src/non-mvdm/base/win32/client/vdm.c",
+  "old_commit": "HEAD exact recorded baseline",
+  "old_sha256": "9eb4b0dd076219c6ad22f2c03da350354119bb6956487241d5bc6ac3634a8b25",
+  "current_sha256": "ac428b7dd5601f907c98e51967c741072d24519fd28ecc180b900e56007d52c0",
+  "method": "MSVC /EP, exact Ninja target flags, identical scratch source path; nonblank stripped lines hashed. ntSend.h copied without modification.",
+  "contexts": [
+    {
+      "graph": "build/.ninja/msvc-x64-release/hook",
+      "output": "unit6.obj",
+      "old_sha256": "ac6c45548a2a8ad60d98da41d191ee5228117f95f521487a85651d70b28a1f9e",
+      "current_sha256": "ac6c45548a2a8ad60d98da41d191ee5228117f95f521487a85651d70b28a1f9e",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/launcher",
+      "output": "obj/opennt-base-client/client.obj",
+      "old_sha256": "9f167253785e377741e6f970511bda6ef34d235ff5f33f8d066daae6c2a2bd2f",
+      "current_sha256": "9f167253785e377741e6f970511bda6ef34d235ff5f33f8d066daae6c2a2bd2f",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/launcher",
+      "output": "obj/opennt-base-client/classifier.obj",
+      "old_sha256": "b7dfd88a49b7df8a64bbb6b83c834ecfe38498a9afbb394da35ec6d276e6c5ab",
+      "current_sha256": "b7dfd88a49b7df8a64bbb6b83c834ecfe38498a9afbb394da35ec6d276e6c5ab",
+      "equal": true
+    }
+  ],
+  "limits": "Tests selected preprocessed text only; excludes diagnostics and does not establish other contexts, link or runtime behavior."
+}

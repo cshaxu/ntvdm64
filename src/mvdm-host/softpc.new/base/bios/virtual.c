@@ -10,17 +10,23 @@
  *
  */
 
+#line 13
 #ifdef SCCSID
+#line 14
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
+#line 16
 
 /*
  *    O/S include files.
  */
 #include <stdio.h>
+#line 21
 #if defined(NTVDM) && defined(MONITOR)
+#line 22
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
+#line 24
 
 #include TypesH
 #include StringH
@@ -413,6 +419,8 @@ LOCAL IBOOL allocate_NIDDB IFN2
 		  host_free(*p);
 	       }
 
+	    /* DIVERGENCE MVDM-HOST-DIV-468: the unpublished table is ours. */
+	    host_free((IHP)instance_ptr);
 	    return FALSE;
 	    }
 	 }
@@ -503,6 +511,7 @@ LOCAL void delete_NIDDB IFN1
    {
    int i;
    IHP *instance_ptr;
+   IU8 previous_virtual_byte = last_virtual_byte;
 
    /* Ensure instance is active (for terminate callback). */
    swap_NIDDB(record_id);
@@ -531,6 +540,30 @@ LOCAL void delete_NIDDB IFN1
    /* Initialise virtual record entry */
    vrecs[record_id].vr_pinst_tbl = (IHP *)0;
    vrecs[record_id].vr_inst_handle = (IU32)0;
+
+   /* DIVERGENCE MVDM-HOST-DIV-467: the termination callback must run with
+      the retiring instance active, but its freed data must not remain in
+      master_ptrs. Restore the previously active instance if it survived. */
+   if (previous_virtual_byte != record_id && previous_virtual_byte < MAX_VMS &&
+       vrecs[previous_virtual_byte].vr_pinst_tbl != (IHP *)0)
+      {
+      swap_NIDDB(previous_virtual_byte);
+      return;
+      }
+   {
+      IU8 selected;
+      sas_load(BIOS_VIRTUALISING_BYTE, &selected);
+      if (selected < MAX_VMS && vrecs[selected].vr_pinst_tbl != (IHP *)0)
+         {
+         swap_NIDDB(selected);
+         return;
+         }
+   }
+   /* A system-exit or reboot notification will unlock allocations after
+      restoring the snapshot. Until then, keep the pointers valid. */
+   for (i = 0; i < MAX_INSTANCES; ++i)
+      master_ptrs[i] = snapshot_ptrs[i];
+   last_virtual_byte = (IU8)0xff;
    }
 
 /* Return true if any data instance is extant */
@@ -827,6 +860,12 @@ virtual_swap_instance IFN0()
 
    /* read virtualising byte and compare with current ID */
    sas_load(BIOS_VIRTUALISING_BYTE, &current_virtual_byte);
+
+   /* A stale or invalid guest identity cannot authorize access to any other
+      instance. Fail before dereferencing its record or executing a device. */
+   if (current_virtual_byte >= MAX_VMS ||
+       vrecs[current_virtual_byte].vr_pinst_tbl == (IHP *)0)
+      mvdm_softpc_invalid_virtual_instance(current_virtual_byte);
 
    if ( current_virtual_byte == last_virtual_byte )
       return;   /* Nothing to do */

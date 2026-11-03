@@ -668,10 +668,13 @@ HBITMAP CreateScreenBitmap(
 
                 dib4Vga.bi.biBitCount = planes * bpp ? planes * bpp : oemInfo.BitCount;
 
+#endif /* WOW_ORIGINAL_DIALOG_TEMPLATE */
+#line 1674
 #if 0 // We use to do the dib-section create, but this breaks icons
 #error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
 #else
-#line 689
+#if !defined(WOW_ORIGINAL_DIALOG_TEMPLATE)
+#line 1692
 
                 dib1Vga.bi.biWidth  = cx;
                 dib1Vga.bi.biHeight = cy;
@@ -683,6 +686,9 @@ HBITMAP CreateScreenBitmap(
                                      (LPBITMAPINFO)&dib1Vga,
                                      DIB_RGB_COLORS);
 #endif
+#endif
+#if !defined(WOW_ORIGINAL_DIALOG_TEMPLATE)
+#line 1703
             }
         }
 
@@ -701,6 +707,7 @@ HBITMAP CreateScreenBitmap(
     return hbm;
 }
 
+#line 2792
 HBITMAP BitmapFromDIB(
     int          cxNew,
     int          cyNew,
@@ -1055,3 +1062,71 @@ HBITMAP WOWLoadBitmapA(
 }
 
 #endif /* WOW_ORIGINAL_DIALOG_TEMPLATE */
+
+#line 1480
+#if 0 //CHRISWIL : oemInfo.fColorCursors doesn't exist on NT.
+#line 1481
+#error Excluded original disabled cursor branch
+#endif
+#line 1484
+
+#line 2298
+#if 0 //CHRISWIL : oemInfo.fColorCursors doesn't exist on NT.
+#line 2299
+#error Excluded original disabled image branch
+#endif
+#line 2302
+
+#line 2624
+#if 0
+#line 2625
+#error Excluded original disabled icon-loading branch
+#else
+#line 2627
+#endif
+#line 2629
+
+#line 3751
+#if 0 //CHRISWIL: Not in Win95
+#line 3752
+#error Excluded original disabled image-matching branch
+#else
+#line 3758
+#endif
+#line 3763
+
+#line 4516
+#if 0 //CHRISWIL : oemInfo.fColorCursors doesn't exist on NT.
+#line 4517
+#error Excluded original disabled image-copy branch
+#endif
+#line 4520
+
+#line 4574
+#if 0 //CHRISWIL : oemInfo.fColorCursors doesn't exist on NT.
+#line 4575
+#error Excluded original disabled directory branch
+#endif
+#line 4578
+
+#line 2640
+#ifdef LATER // SanfordS
+#line 2641
+#error Excluded unsupported original LATER branch
+#endif
+#line 2668
+
+
+#line 881
+#ifdef DEBUG
+#line 882
+#error Unsupported DEBUG original branch
+#endif
+#line 897
+
+#line 3901
+#ifdef DEBUG
+#line 3902
+#error Unsupported DEBUG original branch
+#endif
+#line 3906

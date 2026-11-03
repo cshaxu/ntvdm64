@@ -1,0 +1,69 @@
+{
+  "scope": "Unselected historical STF configuration and terminal source",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
+      "sha256": "9c7aa38b23d293155f80c89eaf87332e0c2372edf3dc608b851f80dd526ef76f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_term.c",
+      "sha256": "3036fcbdcdb5fc3cb922c263773181fefac9de520c0730af02b5282ac581012c"
+    }
+  ],
+  "mirror_sources": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_term.c",
+      "current_sha256": "3036fcbdcdb5fc3cb922c263773181fefac9de520c0730af02b5282ac581012c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_term.c",
+      "original_sha256": "ad5c8c0d28944ea163df5738ed03ca7e19415cca02884083ed69fa98667149be",
+      "pinned_expected_sha256": "ad5c8c0d28944ea163df5738ed03ca7e19415cca02884083ed69fa98667149be",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
+      "current_sha256": "dad77a84105a2390c33191481367002c91d732b69dd730a61357f40b1c895264",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\stf_conf.c",
+      "original_sha256": "dd83e6774b349f81b02abb625df4fdcfe943647144bf054422f9f671d1bf05f4",
+      "pinned_expected_sha256": "dd83e6774b349f81b02abb625df4fdcfe943647144bf054422f9f671d1bf05f4",
+      "original_matches_pinned": true,
+      "working_sha256": "9c7aa38b23d293155f80c89eaf87332e0c2372edf3dc608b851f80dd526ef76f"
+    }
+  ],
+  "removed_guard_ledger_entries": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_term.c",
+      "macro": "HUNTER",
+      "line": 56,
+      "body_end": 58,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_term.c",
+      "original_sha256": "ad5c8c0d28944ea163df5738ed03ca7e19415cca02884083ed69fa98667149be",
+      "local_sha256": "9bf0624e876c40ed9d652fa54f0022d7deab286b9e9d336ae960724b4193839a",
+      "removed_body_sha256": "ca446a4937b833f549e53cebaf5dd2b375b6f43cd4cca01fb173e038a31eafc9",
+      "removed_body_lines": 2,
+      "after_sha256": "3036fcbdcdb5fc3cb922c263773181fefac9de520c0730af02b5282ac581012c",
+      "final_sha256": "3036fcbdcdb5fc3cb922c263773181fefac9de520c0730af02b5282ac581012c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_term.c",
+      "macro": "HUNTER",
+      "line": 22,
+      "body_end": 23,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_term.c",
+      "original_sha256": "ad5c8c0d28944ea163df5738ed03ca7e19415cca02884083ed69fa98667149be",
+      "local_sha256": "9bf0624e876c40ed9d652fa54f0022d7deab286b9e9d336ae960724b4193839a",
+      "removed_body_sha256": "e2964699974f87795063e08b3a33c2ee614ef5cb015a97e3ce99747f7c62777c",
+      "removed_body_lines": 1,
+      "after_sha256": "3036fcbdcdb5fc3cb922c263773181fefac9de520c0730af02b5282ac581012c",
+      "final_sha256": "3036fcbdcdb5fc3cb922c263773181fefac9de520c0730af02b5282ac581012c"
+    }
+  ],
+  "removed_condition_groups": 22,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r127.zip",
+  "evidence": [
+    "No current product or test graph selects either file; external references are historical audit records and one source-only rejection tuple.",
+    "Historical T276 source disposition also identified these as build-unobserved auxiliary files."
+  ],
+  "limitations": [
+    "Does not alter selected host configuration or terminal paths."
+  ]
+}

@@ -31,7 +31,7 @@ DWORD xxxSetWindowLong(
 #ifdef DEBUG
 #error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
 #endif
-#line 36
+#line 273
 
     /*
      * CheckLock(pwnd);  The only case that leaves the critical section is
@@ -84,9 +84,12 @@ DWORD xxxSetWindowLong(
                 case FNID_LISTBOX:
                 case FNID_STATIC:
                 case FNID_EDIT:
+#line 320
 #ifdef FE_IME
+#line 321
 #error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
 #endif
+#line 323
                     /*
                      * Allow the 0 index for controls to be set if it's
                      * still NULL or the window is being destroyed. This
@@ -145,3 +148,33 @@ SetData:
         }
     }
 }
+
+
+#line 749
+#ifdef DEBUG
+#line 750
+#error Excluded unsupported original DEBUG branch
+#endif
+#line 752
+
+#line 759
+#ifdef DEBUG
+#line 760
+#error Excluded unsupported original DEBUG branch
+#endif
+#line 770
+
+#line 776
+#ifdef DEBUG
+#line 777
+#error Excluded unsupported original DEBUG branch
+#endif
+#line 779
+
+#line 781
+#ifdef DEBUG
+#line 782
+#error Excluded unsupported original DEBUG branch
+#endif // DEBUG
+#line 794
+

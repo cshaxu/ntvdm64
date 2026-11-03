@@ -1,0 +1,163 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+  "source_sha256": "9ca86902b86d24ab312087c709290d69704cb87cae41e0c6e94e3a84ed96609b",
+  "baseline": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+  "baseline_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+  "actual_include": "src/non-mvdm/windows/core/ntuser/client/client.c:152",
+  "documented_selected_subset": "src/non-mvdm/README.md OPENNT-HOST-036 and OPENNT-HOST-046",
+  "prior_misplacement": "src/non-mvdm/README.md OPENNT-HOST-201; s13-r284-withdraw-misplaced.json",
+  "original_conditions": [
+    {
+      "original_line": 38,
+      "directive": "#ifndef UNICODE",
+      "original_context_before": [
+        "paccel,",
+        "length);",
+        ""
+      ],
+      "status": "pending; original ANSI path selected; exact restoration scope not yet proven"
+    },
+    {
+      "original_line": 217,
+      "directive": "#ifndef UNICODE",
+      "original_context_before": [
+        "lpszReserve,",
+        "chMaxCount);",
+        ""
+      ],
+      "status": "pending; original ANSI path selected; exact restoration scope not yet proven"
+    },
+    {
+      "original_line": 254,
+      "directive": "#ifndef UNICODE",
+      "original_context_before": [
+        "lpszReserve,",
+        "cchSize);",
+        ""
+      ],
+      "status": "pending; original ANSI path selected; exact restoration scope not yet proven"
+    },
+    {
+      "original_line": 271,
+      "directive": "#ifndef UNICODE",
+      "original_context_before": [
+        "ENDCALL(int);",
+        "}",
+        ""
+      ],
+      "status": "pending; original ANSI path selected; exact restoration scope not yet proven"
+    },
+    {
+      "original_line": 369,
+      "directive": "#ifndef UNICODE",
+      "original_context_before": [
+        "",
+        "retval = (DWORD)NtUserGetKeyboardLayoutName(pstr);",
+        ""
+      ],
+      "status": "pending; original ANSI path selected; exact restoration scope not yet proven"
+    },
+    {
+      "original_line": 395,
+      "directive": "#ifndef UNICODE",
+      "original_context_before": [
+        "(DWORD)NULL,",
+        "FALSE);",
+        ""
+      ],
+      "status": "pending; original ANSI path selected; exact restoration scope not yet proven"
+    },
+    {
+      "original_line": 414,
+      "directive": "#ifndef UNICODE",
+      "original_context_before": [
+        "* 21-Feb-1995 GregoryW    Created",
+        "\\**************************************************************************/",
+        ""
+      ],
+      "status": "pending; original ANSI path selected; exact restoration scope not yet proven"
+    },
+    {
+      "original_line": 431,
+      "directive": "#ifndef UNICODE",
+      "original_context_before": [
+        "(DWORD)hkl,",
+        "TRUE);",
+        ""
+      ],
+      "status": "pending; original ANSI path selected; exact restoration scope not yet proven"
+    },
+    {
+      "original_line": 514,
+      "directive": "#ifndef UNICODE",
+      "original_context_before": [
+        "break;",
+        "}",
+        ""
+      ],
+      "status": "pending; original ANSI path selected; exact restoration scope not yet proven"
+    },
+    {
+      "original_line": 549,
+      "directive": "#ifndef UNICODE",
+      "original_context_before": [
+        "MSGERRORCODE(ERROR_INVALID_PARAMETER);",
+        "}",
+        ""
+      ],
+      "status": "pending; original ANSI path selected; exact restoration scope not yet proven"
+    },
+    {
+      "original_line": 934,
+      "directive": "#ifndef UNICODE",
+      "original_context_before": [
+        "MSGERRORCODE(ERROR_INVALID_PARAMETER);",
+        "}",
+        ""
+      ],
+      "status": "pending; original ANSI path selected; exact restoration scope not yet proven"
+    },
+    {
+      "original_line": 976,
+      "directive": "#ifndef UNICODE",
+      "original_context_before": [
+        "MSGERRORCODE(ERROR_INVALID_PARAMETER);",
+        "}",
+        ""
+      ],
+      "status": "pending; original ANSI path selected; exact restoration scope not yet proven"
+    },
+    {
+      "original_line": 1111,
+      "directive": "#ifndef UNICODE",
+      "original_context_before": [
+        "ENDCALL(SHORT);",
+        "}",
+        ""
+      ],
+      "status": "pending; original ANSI path selected; exact restoration scope not yet proven"
+    },
+    {
+      "original_line": 1295,
+      "directive": "#ifndef UNICODE",
+      "original_context_before": [
+        "dwFlags)));",
+        "if (retval) {",
+        ""
+      ],
+      "status": "pending; original ANSI path selected; exact restoration scope not yet proven"
+    },
+    {
+      "original_line": 1505,
+      "directive": "#ifndef UNICODE",
+      "original_context_before": [
+        "}",
+        "msg = *pmsg;",
+        ""
+      ],
+      "status": "pending; original ANSI path selected; exact restoration scope not yet proven"
+    }
+  ],
+  "decision": "pending, do not place an ANSI-selected #error at file scope; retain no claim that omitted function is excluded in every context",
+  "limitations": "The analysis identifies exact baseline conditions but does not prove their original function or file-scope boundaries or authorize restoring their bodies."
+}

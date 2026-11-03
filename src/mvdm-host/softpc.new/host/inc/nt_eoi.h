@@ -29,9 +29,12 @@ extern ULONG UndelayIrqLine;
 
 extern VDMVIRTUALICA VirtualIca[];
 
+#line 33
 #ifdef MONITOR
+#line 34
 #error Excluded original conditional branch
 #endif
+#line 39
 #line 32
 
 //from base ica.c

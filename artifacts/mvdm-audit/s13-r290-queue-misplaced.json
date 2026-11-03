@@ -1,0 +1,104 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+  "before_sha256": "869df62743b8a17c40934b3bce28afcb14113ab378e9bccf46c27ff6eac9179e",
+  "after_sha256": "fcda38ed8ba3ddb2e5d562c4bb303787b49bc3228dad10006c52ef4b3540a917",
+  "groups": [
+    {
+      "current_old_start": 375,
+      "current_old_end": 380,
+      "original_line": 992,
+      "directive": "#ifdef FE_IME"
+    },
+    {
+      "current_old_start": 381,
+      "current_old_end": 386,
+      "original_line": 1915,
+      "directive": "#ifdef FE_IME"
+    },
+    {
+      "current_old_start": 393,
+      "current_old_end": 398,
+      "original_line": 1518,
+      "directive": "#if DBG"
+    },
+    {
+      "current_old_start": 399,
+      "current_old_end": 404,
+      "original_line": 1555,
+      "directive": "#if DBG"
+    },
+    {
+      "current_old_start": 405,
+      "current_old_end": 410,
+      "original_line": 1598,
+      "directive": "#if DBG"
+    },
+    {
+      "current_old_start": 411,
+      "current_old_end": 416,
+      "original_line": 1784,
+      "directive": "#if DBG"
+    },
+    {
+      "current_old_start": 417,
+      "current_old_end": 422,
+      "original_line": 2275,
+      "directive": "#if DBG"
+    },
+    {
+      "current_old_start": 423,
+      "current_old_end": 428,
+      "original_line": 2282,
+      "directive": "#if DBG"
+    },
+    {
+      "current_old_start": 429,
+      "current_old_end": 434,
+      "original_line": 2322,
+      "directive": "#if DBG"
+    },
+    {
+      "current_old_start": 435,
+      "current_old_end": 440,
+      "original_line": 2355,
+      "directive": "#if DBG"
+    },
+    {
+      "current_old_start": 441,
+      "current_old_end": 446,
+      "original_line": 2375,
+      "directive": "#if DBG"
+    },
+    {
+      "current_old_start": 447,
+      "current_old_end": 452,
+      "original_line": 2385,
+      "directive": "#if DBG"
+    },
+    {
+      "current_old_start": 453,
+      "current_old_end": 458,
+      "original_line": 3705,
+      "directive": "#if DBG"
+    },
+    {
+      "current_old_start": 459,
+      "current_old_end": 464,
+      "original_line": 1480,
+      "directive": "#ifdef DEBUG"
+    },
+    {
+      "current_old_start": 465,
+      "current_old_end": 470,
+      "original_line": 1626,
+      "directive": "#ifdef DEBUG"
+    },
+    {
+      "current_old_start": 471,
+      "current_old_end": 476,
+      "original_line": 2649,
+      "directive": "#ifdef DEBUG"
+    }
+  ],
+  "reason": "original directives lie inside omitted functions; file-scope placeholders withdrawn; original groups pending"
+}

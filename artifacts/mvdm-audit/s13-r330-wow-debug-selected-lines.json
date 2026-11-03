@@ -1,0 +1,46 @@
+{
+  "changes": [
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "original_group": 1422,
+      "physical_line": 1403,
+      "old": 1454,
+      "new": 1425,
+      "next_text_sha256": "9593c8bf2da822b3324c694e60c9867b4f49b3dfd3f49de9e1041993b1a2f460"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsg16.c",
+      "original_group": 246,
+      "physical_line": 229,
+      "old": 268,
+      "new": 249,
+      "next_text_sha256": "bb9c9a0835d8445c4d1f5ccb774576564c44ec0d96e0a5c86336d63b8ea122d1"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "original_group": 1821,
+      "physical_line": 1514,
+      "old": 1889,
+      "new": 1861,
+      "next_text_sha256": "725b2979b622462141cae3af529d3e15df5cc88e64e4f19917de84d4f5a62ae2"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "original_group": 462,
+      "physical_line": 462,
+      "old": 496,
+      "new": 471,
+      "next_text_sha256": "b692e1747f4b08f4b70d1664ae1c7448bcb9ab1f168fc8eff5fa0c4d44697ae3"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "original_group": 557,
+      "physical_line": 553,
+      "old": 607,
+      "new": 582,
+      "next_text_sha256": "b1307052ed8a9dd275355c2817a7dec47269f2c6cd198da152d102a982d6370b"
+    }
+  ],
+  "method": "unique original first-depth group, original else and byte-identical next selected source line; old marker uniquely matched",
+  "validation": "pending"
+}

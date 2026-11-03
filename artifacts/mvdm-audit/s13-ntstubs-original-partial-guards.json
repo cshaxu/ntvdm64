@@ -1,0 +1,27 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+  "sha256": "c8ede9f8aef7837655a8caefc867de787660ff6ff9c318391b222c4bacca0f3a",
+  "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+  "pairs": [
+    {
+      "original_line": 380,
+      "current_line": 299,
+      "expression": "MEMPHIS_MENUS",
+      "original_else_unresolved": true
+    },
+    {
+      "original_line": 500,
+      "current_line": 303,
+      "expression": "MEMPHIS_MENU_WATERMARKS",
+      "original_else_unresolved": false
+    },
+    {
+      "original_line": 1611,
+      "current_line": 307,
+      "expression": "FE_SB",
+      "original_else_unresolved": false
+    }
+  ],
+  "limit": "original MEMPHIS_MENUS else at line 439 is absent from current subset and remains unreviewed; do not treat this group as restored",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r204.zip"
+}

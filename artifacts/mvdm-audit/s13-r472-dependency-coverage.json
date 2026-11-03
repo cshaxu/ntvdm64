@@ -1,0 +1,86 @@
+{
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r375.zip",
+  "graphs": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "ninja_deps_sha256": "b373e83d7603aff4b959a68ef0b3020008b59b8c1dc4aac9d30079626857cc19",
+      "tracked_mirror_or_compat_dependencies": 410,
+      "outside_queue": [
+        "src/compat/include/command_process_compat.h",
+        "src/compat/include/conapi.h",
+        "src/compat/include/console_grid.h",
+        "src/compat/include/console_title.h",
+        "src/compat/include/environapi.h",
+        "src/compat/include/nt.h",
+        "src/compat/include/ntioapi.h",
+        "src/compat/include/ntrtlp.h",
+        "src/compat/include/thread_start_compat.h",
+        "src/compat/include/vdmapi.h",
+        "src/compat/include/winbasep.h",
+        "src/compat/include/winconp.h",
+        "src/compat/include/winuserp.h",
+        "src/compat/include/wow_user_declarations.h",
+        "src/compat/include/xactsrv_wksta_minimal.h",
+        "src/compat/include/zwapi.h"
+      ]
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "ninja_deps_sha256": "9ae2b84cde02884d330f253adc20943b8c7204a0fe5c06f33fec3d26f88ba0f8",
+      "tracked_mirror_or_compat_dependencies": 410,
+      "outside_queue": [
+        "src/compat/include/command_process_compat.h",
+        "src/compat/include/conapi.h",
+        "src/compat/include/console_grid.h",
+        "src/compat/include/console_title.h",
+        "src/compat/include/environapi.h",
+        "src/compat/include/nt.h",
+        "src/compat/include/ntioapi.h",
+        "src/compat/include/ntrtlp.h",
+        "src/compat/include/thread_start_compat.h",
+        "src/compat/include/vdmapi.h",
+        "src/compat/include/winbasep.h",
+        "src/compat/include/winconp.h",
+        "src/compat/include/winuserp.h",
+        "src/compat/include/wow_user_declarations.h",
+        "src/compat/include/xactsrv_wksta_minimal.h",
+        "src/compat/include/zwapi.h"
+      ]
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "ninja_deps_sha256": "a81872937b2af813259acca48b2b3e91ea126d69409af318a107cb7b57f8b0c4",
+      "tracked_mirror_or_compat_dependencies": 165,
+      "outside_queue": [
+        "src/compat/include/nt.h",
+        "src/compat/include/ntioapi.h",
+        "src/compat/include/ntrtl_wow32.h",
+        "src/compat/include/thread_start_compat.h",
+        "src/compat/include/vdmapi.h",
+        "src/compat/include/winuserp.h",
+        "src/compat/include/wow32_provider_private.h",
+        "src/compat/include/wow_char_conversion_abi.h",
+        "src/compat/include/wow_control_message_abi.h",
+        "src/compat/include/wow_control_resource_abi.h",
+        "src/compat/include/wow_user_declarations.h"
+      ]
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "ninja_deps_sha256": "487426c76e11ab1e26e4ef9dfc6e2e84ed3eed604b220781da8d60eb497fc19b",
+      "tracked_mirror_or_compat_dependencies": 18,
+      "outside_queue": [
+        "src/compat/include/nt.h",
+        "src/compat/include/ntioapi.h",
+        "src/compat/include/ntrtl_wow32.h",
+        "src/compat/include/wow32_provider_private.h",
+        "src/compat/include/wow_char_conversion_abi.h",
+        "src/compat/include/wow_control_message_abi.h",
+        "src/compat/include/wow_control_resource_abi.h",
+        "src/compat/include/wow_user_declarations.h"
+      ]
+    }
+  ],
+  "limits": "Ninja deps database contains observed dependencies from the outputs last compiled into each graph. It is not proof that all supported configurations or never-built objects have been covered; paths outside the queue require classification.",
+  "classification": "All paths outside the queue are under src/compat/include and are project-owned declaration adapters/forwarders, not original mirror files. Original headers reached through forwarders are represented by their src/non-mvdm paths when Ninja observed them."
+}

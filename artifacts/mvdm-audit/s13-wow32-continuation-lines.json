@@ -1,0 +1,55 @@
+{
+  "source": "src/mvdm-host/wow32/wow32.c",
+  "sha256": "3fbed80576e926391f80c29b10d404348b15a2fd2cb375115834da1d22d82f1d",
+  "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
+  "pairs": [
+    {
+      "original_line": 78,
+      "current_line": 90
+    },
+    {
+      "original_line": 82,
+      "current_line": 95
+    },
+    {
+      "original_line": 162,
+      "current_line": 166
+    },
+    {
+      "original_line": 463,
+      "current_line": 446
+    },
+    {
+      "original_line": 779,
+      "current_line": 703
+    },
+    {
+      "original_line": 960,
+      "current_line": 818
+    },
+    {
+      "original_line": 964,
+      "current_line": 823
+    },
+    {
+      "original_line": 1028,
+      "current_line": 887
+    },
+    {
+      "original_line": 1032,
+      "current_line": 892
+    }
+  ],
+  "corrected_continuations": [
+    181,
+    468,
+    778,
+    784,
+    963,
+    967,
+    1031
+  ],
+  "build": "x86 WOW32 rebuilt successfully",
+  "guard_suite": "x86 first-depth guard suite passed",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r189.zip"
+}

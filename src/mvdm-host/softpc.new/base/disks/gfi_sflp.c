@@ -15,6 +15,9 @@
 	(c)Copyright Insignia Solutions Ltd., 1990. All rights reserved.
 
 ]*/
+#line 18
 #ifdef SLAVEPC
+#line 19
 #error Excluded unsupported SLAVEPC configuration
 #endif /* SLAVEPC */
+#line 775

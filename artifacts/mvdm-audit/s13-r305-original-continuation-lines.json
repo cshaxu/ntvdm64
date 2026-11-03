@@ -1,0 +1,88 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075",
+      "before_sha256": "75122e0bf4e18195896dbf98ab125ed3a867e5264b2a02c5aa9c30d6ec2e0902",
+      "after_sha256": "2f10f07303c15c4cdc5754c738a8dbf0bef67bc7870ec393d6e5f0909df248dc",
+      "changes": [
+        {
+          "original_if_line": 1530,
+          "original_endif_line": 1760,
+          "current_marker_line": 1306,
+          "previous": 1539,
+          "corrected": 1761,
+          "matched_before": 4,
+          "matched_after": 2,
+          "verified_exact_original_continuation_lines": 5
+        },
+        {
+          "original_if_line": 1813,
+          "original_endif_line": 1990,
+          "current_marker_line": 1335,
+          "previous": 1725,
+          "corrected": 1991,
+          "matched_before": 5,
+          "matched_after": 1,
+          "verified_exact_original_continuation_lines": 3
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "before_sha256": "aba266d9ef51100ab82e7150bcd4594968a320e96261e6e6c27d7dd6c90b71d3",
+      "after_sha256": "3141688b906cb3f8c90b3b56f2913f625a595d56c5477ae6f745b601db2ebca5",
+      "changes": [
+        {
+          "original_if_line": 2245,
+          "original_endif_line": 2451,
+          "current_marker_line": 1982,
+          "previous": 2238,
+          "corrected": 2452,
+          "matched_before": 5,
+          "matched_after": 1,
+          "verified_exact_original_continuation_lines": 4
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "original_sha256": "22c82627bf993ac4fd072ad1bb7d4f62000b60889e6955e83f5f676ac5bd7a29",
+      "before_sha256": "d3fa2ac47952a0184c577b30e195465e95550cefa0eda5cb728fbb8e26ee763b",
+      "after_sha256": "24da4237b8fe6a48eafe6d662d623854efbcbf0fbdff4e1c76de3b7913432d03",
+      "changes": [
+        {
+          "original_if_line": 247,
+          "original_endif_line": 249,
+          "current_marker_line": 232,
+          "previous": 232,
+          "corrected": 250,
+          "matched_before": 0,
+          "matched_after": 5,
+          "verified_exact_original_continuation_lines": 10
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0",
+      "before_sha256": "6dccc0bf27ace31e5ea7afa7f1c446523cbebd639bf1052cff826a81b4304b94",
+      "after_sha256": "0296b2798c2144409becabc277602791654e2c86b46ea5f725026e734ff11da8",
+      "changes": [
+        {
+          "original_if_line": 773,
+          "original_endif_line": 783,
+          "current_marker_line": 681,
+          "previous": 820,
+          "corrected": 784,
+          "matched_before": 5,
+          "matched_after": 1,
+          "verified_exact_original_continuation_lines": 3
+        }
+      ]
+    }
+  ],
+  "deferred": [],
+  "limits": "original full group and immediate surrounding source manually checked; local adaptations remain; builds pending"
+}

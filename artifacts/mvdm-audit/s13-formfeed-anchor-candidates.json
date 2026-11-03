@@ -1,0 +1,95 @@
+{
+  "files": 39,
+  "candidate_discrepancies": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\dos\\emm_mngr.c",
+      "anchor_line": 992,
+      "anchor_value": 990,
+      "current_following": 993,
+      "following": "if(host_map_page(EM_page_no, segment) != SUCCESS)",
+      "expected_original_line": 1191,
+      "candidate_expected_anchor": 1191
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\dos\\emm_mngr.c",
+      "anchor_line": 1047,
+      "anchor_value": 1044,
+      "current_following": 1049,
+      "following": "if(host_unmap_page(segment, EM_page_no) != SUCCESS)",
+      "expected_original_line": 1250,
+      "candidate_expected_anchor": 1249
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\dos\\emm_mngr.c",
+      "anchor_line": 1215,
+      "anchor_value": 1209,
+      "current_following": 1216,
+      "following": "GLOBAL int restore_map (handle_no, segment, offset, pages_out, pages_in)",
+      "expected_original_line": 1414,
+      "candidate_expected_anchor": 1414
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\dos\\emm_mngr.c",
+      "anchor_line": 1259,
+      "anchor_value": 1248,
+      "current_following": 1260,
+      "following": "pages_out[i] = old_page;",
+      "expected_original_line": 1453,
+      "candidate_expected_anchor": 1453
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\dos\\emm_mngr.c",
+      "anchor_line": 1486,
+      "anchor_value": 1472,
+      "current_following": 1488,
+      "following": "GLOBAL short get_total_pages IFN0()",
+      "expected_original_line": 1678,
+      "candidate_expected_anchor": 1677
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\dos\\emm_mngr.c",
+      "anchor_line": 1501,
+      "anchor_value": 1486,
+      "current_following": 1503,
+      "following": "GLOBAL short get_unallocated_pages IFN0()",
+      "expected_original_line": 1692,
+      "candidate_expected_anchor": 1691
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/vgaports.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\vgaports.h",
+      "anchor_line": 1041,
+      "anchor_value": 1034,
+      "current_following": 1042,
+      "following": "IMPORT VOID update_shift_count IPT0();",
+      "expected_original_line": 1996,
+      "candidate_expected_anchor": 1996
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/vgaports.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\vgaports.h",
+      "anchor_line": 1047,
+      "anchor_value": 1039,
+      "current_following": 1048,
+      "following": "IMPORT struct crt_controller\t\tcrt_controller;",
+      "expected_original_line": 2001,
+      "candidate_expected_anchor": 2001
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\xactsrv\\apimsg.c",
+      "anchor_line": 58,
+      "anchor_value": 61,
+      "current_following": 60,
+      "following": "status = NetMessageBufferSend(",
+      "expected_original_line": 114,
+      "candidate_expected_anchor": 113
+    }
+  ]
+}

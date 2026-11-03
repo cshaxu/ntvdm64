@@ -1,0 +1,44 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\mngrayc.c",
+  "original_sha256": "171ef0b7cd668cf51db86d9ae2fea4269cc002f0aba17033bf968d84c10f0f3d",
+  "working_sha256": "0c6f1f6cbb4c28b1d44071d44f7cbdef00135d067d1a54afcf7d8f5cc53151cc",
+  "original_conditions": [
+    209,
+    251
+  ],
+  "original_selected_continuation_lines": [
+    218,
+    258
+  ],
+  "change": "split local selector around original disabled first-depth guards; retain selected statements and original diagnostic lines",
+  "contexts": [
+    {
+      "context": "wow-state",
+      "nonblank_preprocessed_equal": true
+    },
+    {
+      "context": "wow-blit",
+      "nonblank_preprocessed_equal": true
+    },
+    {
+      "context": "fixture-state",
+      "nonblank_preprocessed_equal": true
+    },
+    {
+      "context": "fixture-blit",
+      "nonblank_preprocessed_equal": true
+    },
+    {
+      "context": "fixture-original",
+      "nonblank_preprocessed_equal": true
+    }
+  ],
+  "builds": [
+    "WOW32",
+    "three call-boundary fixture objects"
+  ],
+  "tests": "x86/x64 original depth and line controls passed",
+  "image_compare": "s13-mngrayc-outer-image-comparison.json",
+  "limitation": "nonblank preprocessing comparison; fixture object compilation, not full runtime tests."
+}

@@ -26,6 +26,7 @@
 
 /* DIVERGENCE(OPENNT-HOST-046): also retain the original ANSI GetClassInfo
  * client body. The private server query is supplied by its finite binding. */
+#line 111
 BOOL GetClassInfo(
     HINSTANCE hmod OPTIONAL,
     LPCTSTR pszClassName,
@@ -78,6 +79,7 @@ BOOL GetClassInfo(
 * 03-25-96 GerardoB         Added Header.
 \**************************************************************************/
 #define StringDuplicate TEXT_FN(StringDuplicate)
+#line 578
 LPTSTR StringDuplicate(LPCTSTR ptszDup) {
     LPTSTR ptsz;
     ULONG cb;
@@ -102,14 +104,9 @@ BOOL InitClsMenuName (PCLSMENUNAME pcmn, LPCTSTR lpszMenuName, PIN_STRING pstrMe
      */
     if (HIWORD(lpszMenuName) != 0) {
 #ifdef UNICODE
-        if ((pcmn->pwszClientUnicodeMenuName = StringDuplicate(lpszMenuName)) == NULL) {
-            return FALSE;
-        }
-
-        if (!WCSToMB(lpszMenuName, -1, &(pcmn->pszClientAnsiMenuName), -1, TRUE)) {
-            pcmn->pszClientAnsiMenuName = NULL;
-        }
+#error Excluded unsupported Unicode class-client menu-name profile
 #else
+#line 610
         if ((pcmn->pszClientAnsiMenuName = StringDuplicate(lpszMenuName)) == NULL) {
             return FALSE;
         }
@@ -246,8 +243,9 @@ ATOM TEXT_FN(RegisterClassExWOW)(
         WndClass = *lpWndClass;
 
 #ifdef UNICODE
-        dwFlags = 0;
+#error Excluded unsupported Unicode class-client registration profile
 #else
+#line 805
         dwFlags = CSF_ANSIPROC;
 #endif // UNICODE
 
@@ -291,6 +289,7 @@ BadParameter:
 
 /* DIVERGENCE(OPENNT-HOST-036): unrelated text APIs between class operations
  * are excluded; retain the original unregister/cleanup body. */
+#line 1051
 BOOL UnregisterClass(
     LPCTSTR pszClassName,
     HINSTANCE hModule)
@@ -332,3 +331,117 @@ BOOL UnregisterClass(
 /* DIVERGENCE(OPENNT-HOST-036): remaining text API families are excluded. */
 
 
+
+
+#line 362
+#ifdef UNICODE
+#line 363
+#error Excluded unsupported original UNICODE branch
+#endif
+#line 366
+
+
+#line 206
+#ifdef UNICODE
+#line 207
+#error Excluded unsupported original UNICODE branch
+#else
+#line 209
+#endif
+#line 211
+
+#line 243
+#ifdef UNICODE
+#line 244
+#error Excluded unsupported original UNICODE branch
+#else
+#line 246
+#endif
+#line 248
+
+#line 353
+#ifdef UNICODE
+#line 354
+#error Excluded unsupported original UNICODE branch
+#else
+#line 357
+#endif
+#line 359
+
+#line 992
+#ifdef UNICODE
+#line 993
+#error Excluded unsupported original UNICODE branch
+#else
+#line 996
+#endif
+#line 1002
+
+#line 1096
+#ifdef UNICODE
+#line 1097
+#error Excluded unsupported original UNICODE branch
+#else
+#line 1099
+#endif // UNICODE
+#line 1101
+
+#line 1122
+#ifdef UNICODE
+#line 1123
+#error Excluded unsupported original UNICODE branch
+#else
+#line 1125
+#endif // UNICODE
+#line 1153
+
+#line 1434
+#ifdef UNICODE
+#line 1435
+#error Excluded unsupported original UNICODE branch
+#else
+#line 1450
+#endif
+#line 1469
+
+
+#line 293
+#ifdef FE_SB // GetMessage()
+#line 294
+#error Unsupported FE_SB original branch
+#endif // FE_SB
+#line 302
+
+#line 340
+#ifdef FE_SB // GetMessage()
+#line 341
+#error Unsupported FE_SB original branch
+#endif // FE_SB
+#line 345
+
+#line 310
+#ifndef UNICODE
+#line 311
+#else
+#line 331
+#error Unsupported UNICODE original branch
+#endif // UNICODE
+#line 339
+
+#line 1191
+#ifndef UNICODE
+#line 1192
+#else
+#line 1208
+#error Unsupported UNICODE original branch
+#endif
+#line 1214
+
+#line 1317
+#ifndef UNICODE
+#line 1318
+#else
+#line 1350
+#error Unsupported UNICODE original branch
+#endif
+#line 1355

@@ -286,8 +286,10 @@
       ],
       "all_current_first_depth_lines": [],
       "current_nested_structural_locations_only": [],
-      "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only"
+      "disposition": "retained-registered-local-adaptation",
+      "reason": "Two selected inclusion cohorts require independent guards; a naive original whole-file guard suppresses the EDIT state on the second inclusion.",
+      "evidence": "s13-depth1-usercli-guard-positive-negative.json",
+      "limitation": "Preprocessor evidence only; no proof excludes a future equivalent simpler inclusion architecture."
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",

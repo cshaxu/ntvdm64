@@ -1,0 +1,22 @@
+{
+  "builds": [
+    {
+      "architecture": "x86",
+      "exit": 0,
+      "log": "build/t473-s13/r271-full-x86-build.log",
+      "log_sha256": "1cfc74eab6fc6f571c662d27b542756c6c37189b1f7ee5427c73dfce533c0f06",
+      "end": "ninja: no work to do."
+    },
+    {
+      "architecture": "x64",
+      "exit": 0,
+      "log": "build/t473-s13/r271-full-x64-build.log",
+      "log_sha256": "8a97dfb136c446a542512b9a971f8228899d889ed2fde4dedf6fbc0e3d8c8313",
+      "end": "ninja: no work to do."
+    }
+  ],
+  "comparison": "s13-r271-ten-image-checkpoint-compare.json",
+  "checkpoint": "s13-checkpoint231-full-validation.json",
+  "result": "eight byte-identical, two differ only at previously verified PE/debug timestamp offsets",
+  "limits": "No repeated runtime test because same-identity binaries match except timestamps; previous checkpoint covered listed tests only. No S13 closure, product publication, commit or push claimed. Pending selected-side, original placement and shared-guest-context reviews remain."
+}

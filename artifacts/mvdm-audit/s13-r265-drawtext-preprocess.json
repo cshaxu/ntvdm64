@@ -1,0 +1,38 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+  "old_commit": "build-owned immediate pre-edit snapshot",
+  "old_sha256": "c99aadb1149c2dfa0d9d054ac4d7516758165c520867fbb3677411d6c14403e3",
+  "current_sha256": "16edf6de8f326cc34808a2dcd4cba1dfe54b975070ee58b92fb96e44f7bf222a",
+  "method": "MSVC /EP, exact Ninja target flags, identical scratch source path; nonblank stripped lines hashed. ntSend.h copied without modification.",
+  "contexts": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-text-rtl.obj",
+      "old_sha256": "9a576e4f911face4da79229312e0b878c551a68e3042ee71d57527796140e922",
+      "current_sha256": "9a576e4f911face4da79229312e0b878c551a68e3042ee71d57527796140e922",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/string_prefix.obj",
+      "old_sha256": "5f12c9bbf4f61045b27f0e697186b9fd71f30fc14000077a79415040c2c221f4",
+      "current_sha256": "5f12c9bbf4f61045b27f0e697186b9fd71f30fc14000077a79415040c2c221f4",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/mnemonic_body.obj",
+      "old_sha256": "c3a6d94080a4f06fdebfcadfe666e7ea41bf7a794cae04936902e927d4e29ec2",
+      "current_sha256": "c3a6d94080a4f06fdebfcadfe666e7ea41bf7a794cae04936902e927d4e29ec2",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/state_drawing_text.obj",
+      "old_sha256": "32e16c3b88177df092c214e14248d314c0ae5ea960d67592b5693fe856b5e765",
+      "current_sha256": "32e16c3b88177df092c214e14248d314c0ae5ea960d67592b5693fe856b5e765",
+      "equal": true
+    }
+  ],
+  "limits": "Tests selected preprocessed text only; excludes diagnostics and does not establish other contexts, link or runtime behavior."
+}

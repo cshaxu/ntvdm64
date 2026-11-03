@@ -178,10 +178,10 @@ ULONG FASTCALL WK32KernelTrace(PVDMFRAME pFrame)
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #else
-#line 221
+#line 201
     UNREFERENCED_PARAMETER(pFrame);
 #endif
-#line 223
+#line 203
     return TRUE;
 }
 
@@ -528,7 +528,7 @@ ULONG FASTCALL WK32WOWInitTask(PVDMFRAME pFrame)
 #line 566
     vpStack = VDMSTACK();
 #endif
-#line 568
+#line 545
 
 
     pFrame->wRetID = RET_TASKSTARTED;
@@ -571,7 +571,7 @@ ULONG FASTCALL WK32WOWInitTask(PVDMFRAME pFrame)
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 622
+#line 596
 
     return hThread ? TRUE : FALSE;
 }
@@ -847,7 +847,7 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
 #line 891
             vpStack = VDMSTACK();
 #endif
-#line 893
+#line 867
 
             GETFRAMEPTR(vpStack, pFrame);
 
@@ -863,7 +863,7 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
         host_simulate();
         setIP(SaveIp);
 #endif
-#line 908
+#line 882
 
     }
 
@@ -1352,7 +1352,7 @@ DWORD W32RemoteThread(VOID)
     setCS( (WORD)vcRemote.SegCs );
     vpStack = VDMSTACK();
 #endif
-#line 1408
+#line 1379
 
     //
     // Initialize Per Task Data
@@ -1390,7 +1390,7 @@ DWORD W32RemoteThread(VOID)
     host_simulate();
     setIP((WORD)vcSave.Eip);
 #endif
-#line 1445
+#line 1416
 
     //
     //  We should Never Come Here, an app should get terminated via calling wk32killtask thunk
@@ -1400,12 +1400,12 @@ DWORD W32RemoteThread(VOID)
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #else
-#line 1454
+#line 1425
     if (IsDebuggerAttached() && (flOptions & OPT_DEBUG)) {
         DbgBreakPoint();
     }
 #endif
-#line 1458
+#line 1429
 
     W32DestroyTask(&td);
     host_ExitThread(EXIT_SUCCESS);
@@ -1774,9 +1774,12 @@ ULONG FASTCALL WK32RegisterShellWindowHandle(PVDMFRAME pFrame)
     GETARGPTR(pFrame, sizeof(WOWREGISTERSHELLWINDOWHANDLE16), parg16);
 
 // gwFirstCmdShow is no longer used, and is available.
+#line 1802
 #if 0
+#line 1803
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#line 1805
 
     ghwndShell = HWND32(parg16->hwndShell);
     ghShellTDB = pFrame->wTDB;
@@ -2426,10 +2429,10 @@ ULONG FASTCALL WK32WOWOutputDebugString(PVDMFRAME pFrame)
 #ifdef DEBUG            // So we can intermingle LOGGER output & WOW Logging
 #error Excluded unsupported DEBUG WOW profile
 #else
-#line 2508
+#line 2472
     OutputDebugString(psz1);
 #endif
-#line 2510
+#line 2474
     FREEPSZPTR(psz1);
     FREEARGPTR(parg16);
     RETURN(0);

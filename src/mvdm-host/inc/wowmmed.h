@@ -20,7 +20,9 @@
 
 typedef WORD    MMVER16;      // major (high byte), minor (low byte)
 
+#line 23
 #ifndef _INC_MMSYSTEM
+#line 24
 #error Excluded unsupported missing _INC_MMSYSTEM SDK profile
 #endif
 #line 27

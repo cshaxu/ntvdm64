@@ -1,5 +1,288 @@
 # S13 breadth-first conditional review
 
+### Original gray-drawing disabled conditions at depth one
+
+Split the local state-drawing selector around the original literal-disabled
+conditions at logical lines 209 and 251, restoring their first-depth positions
+and selected continuations at 218 and 258. Five actual production/fixture
+preprocessing contexts matched apart from blank lines. WOW32 and three
+call-boundary objects built, and x86/x64 depth/line/rejection controls passed.
+The sealed WOW32 differs from the earlier Full-tested candidate only at
+verified timestamp positions. Queue `195r173` records the restored guards;
+evidence: `s13-mngrayc-original-outer-guards.json`.
+
+### Shared WOW header actual host contexts
+
+Instrumented scratch copies of `wowfax.h` and `wowinfo.h`, then preprocessed
+all 90 current WOW32 Ninja dependency owners with their actual graph commands.
+All completed: UNALIGNED was defined at 90 inclusion points; both fax owners
+observed DEBUG and _WOWFAX16_ undefined and _DEF_WOW32_ defined. No guest
+was built. Because original guest source/makefile also request these headers
+under different conditions, host observations alone do not establish their
+exclusion: four current arms remain pending. Queue `195r172` links the
+per-owner evidence in `s13-wow-shared-actual-host-contexts.json`.
+
+### Additional pinned-anchor reconciliation
+
+A second pass over the remaining recorded first-depth anchor cohorts paired
+313 original groups (330 previously unreviewed arms) with their current
+counterparts. Both source hashes, unique queue positions and complete arm
+signatures had to match; 666 changed-hash records were not accepted. Queue
+`195r171` and `s13-original-anchored-arm-pairing-second.json` retain the exact
+pairs. This inherits prior anchor and build evidence and is not a new compile.
+
+### Prior anchored original-group evidence reconciled
+
+Reconciled 256 original first-depth groups (270 previously unreviewed arms)
+using four existing unique-anchor cohorts. Each accepted pair has unchanged
+current and pinned-original hashes, a unique queued source location and an
+identical complete arm signature; its previous current-arm build evidence is
+retained. Another 325 records had changed hashes and were not reclassified.
+Queue `195r170` and `s13-original-anchored-arm-pairing.json` record the exact
+pairs. This is reuse of earlier evidence, not a new compilation or completion
+of original reconciliation.
+
+### Byte-identical original/current first-depth arm pairing
+
+Paired the first-depth arms of 95 current files with their hash-verified,
+byte-identical pinned originals, requiring equal directive signatures and
+physical lines. Queue `195r169` carries forward the current-arm evidence:
+536 observed arms, two retained-original assertions and four pending arms.
+This avoids reporting those original arms as wholly unreviewed, while preserving
+the four unknowns and not claiming any new compilation or wider mirror coverage.
+Per-file identities and inherited status counts are in
+`s13-original-exact-arm-pairing.json`.
+
+### Server FE_IME guard returned to original depth
+
+Moved the already-excluded original FE_IME global condition out of the local
+WOW message-table wrapper to first depth, retaining logical lines 53 and 190.
+Actual selected WOW preprocessing matched apart from blank lines; WOW32 and
+the x86/x64 line/rejection guards passed. The sealed WOW32 differs from the
+previous Full-tested candidate only at verified timestamp positions. As an
+explicit boundary, FE_IME now rejects in this source even if the local WOW
+selector is absent; FE_IME is unsupported. Queue `195r168` records the moved
+guard. Evidence: `s13-server-feime-outer.json`.
+
+### Original literal-disabled handle-table guard
+
+Restored the file-scope original `#if 0` around the omitted handle-table check
+in `handtabl.c`, with its body replaced by `#error`; no selected code follows
+and no `#line` adjustment was necessary. WOW32 rebuilt and x86/x64 literal
+guard controls passed. Its sealed image differs from the prior Full-tested
+candidate only at previously verified timestamp positions. Queue `195r167`
+records the restored first-depth guard; evidence is in
+`s13-handtabl-original-disabled.json`.
+
+### Restore original Memphis menu exclusions
+
+Restored the original first-depth Memphis menu-conversion and watermark
+conditions in `clmenu.c` with excluded bodies represented by `#error`. The
+selected WOW preprocessing matched the baseline apart from blank lines; the
+WOW32 build, x86/x64 rejection controls and pinned-original menu thunk/converter
+extraction passed. The sealed WOW32 candidate differs from the earlier
+Full-tested candidate only at previously verified timestamp positions.
+Queue `195r166` adds both first-depth exclusions and removes two nested
+original groups under the excluded parent without inspecting their bodies.
+Evidence: `s13-clmenu-original-guards.json` and
+`s13-clmenu-guards-image-comparison.json`.
+
+### Restore USER global DBG and WX86 exclusions
+
+Restored the two original first-depth `clglobal.c` DBG and WX86 conditions,
+replacing their omitted unsupported global definitions with `#error`. The
+actual WOW graph preprocessing observed DBG false and WX86 undefined; forced
+selection fails at each intended diagnostic, and the retained wheel variable
+maps to original logical line 34. Baseline/candidate preprocessing matched
+apart from blank lines. WOW32 rebuilt, x86/x64 guard tests passed, and the
+sealed WOW32 differs from the prior Full-tested candidate only at previously
+verified timestamp positions (`s13-clglobal-guards-image-comparison.json`).
+Both branches are added to queue `195r165`; no inner branch was inspected.
+
+### Original USER whole-header guard
+
+For the selected `inc/user.h` declaration cohorts, a scratch wrapper using the
+original `_USER_` guard removes CALLPROCDATA, BUTN and BUTNWND from the actual
+`wow_control_extent_bindings.c` preprocessing output. A second selected entry
+did not change. The current independent subset guards are therefore retained
+and registered; this does not prove no simpler equivalent design exists.
+The new multi-cohort positive and single-guard negative controls passed on
+x86 and x64 along with 181 retained guards. No product source changed and no
+runtime/build claim is made. Queue `195r164` records the original-boundary
+disposition; evidence: `s13-user-multicohort-guard.json`.
+
+### Original USERK outer guard restored
+
+Restored `_USERK_` around the registered USER kernel declaration subset.
+Four actual x86 compilation entries (`taskman`, `queue`, `handtabl`, and
+`cleanup`) produced identical nonblank preprocessing lines; the wrapper adds
+only empty output lines. WOW32 rebuilt, x86/x64 guard tests and the task-order
+fixture passed. The sealed WOW32 image differs from the previous Full-tested
+candidate only at previously verified timestamp positions. Queue `195r163`
+records the outer guard and moves its three former conditions to deeper work
+without reviewing them. A flags-only then full inclusion in the same unit is
+not observed and would be suppressed by the original guard; the boundary is
+recorded in `s13-userk-original-guard.json`.
+
+### Original USER globals and RTL include guards
+
+Restored `_GLOBALS_` and `_USERRTL_` in the OPENNT-HOST-075/104 subsets.
+Five selected x86 WOW preprocessing contexts matched byte for byte; WOW32
+rebuilt and x86/x64 guard tests passed. The sealed WOW32 candidate differs
+from the earlier Full-tested image only at previously verified timestamp
+positions (`s13-user-guards-image-comparison.json`). This is not a full
+runtime test or an assertion about future SDK contexts. Queue `195r162`
+records both restored first-depth guards.
+
+### Original NTRTL guard restored
+
+Restored `_NTRTL_` in the OPENNT-HOST-003 subset and updated the WOW class
+binding's guard check. Six representative DOS, redirector, EOI and WOW x86
+preprocessing contexts were byte-identical before and after. Both actual x86
+worker graphs and WOW32 rebuilt, and x86/x64 guard controls passed. Sealed
+NTVDM and WOW32 differ from the prior Full-tested images only at previously
+verified timestamp positions (`s13-ntrtl-guard-image-comparison.json`). The
+existing SDK list-macro compatibility fallback remains; this evidence does not
+prove it unnecessary. Queue `195r161` records the restored first-depth guard.
+
+### Original NTURTL guard restored
+
+Restored the original `_NTURTL_` guard in the OPENNT-HOST-007 subset. Five
+representative DOS, OEM, redirector and WOW x86 preprocessing contexts were
+byte-identical before and after. Both actual x86 worker graphs and WOW32
+rebuilt, and x86/x64 guard controls passed. Sealed NTVDM and WOW32 differ
+from the prior Full-tested images only at previously verified timestamp
+positions; see `s13-nturtl-guard-image-comparison.json`. The evidence is scoped
+to these contexts, not every possible SDK configuration. Queue `195r160`
+records the restored condition; no nested branches were reviewed.
+
+### Original NTREGAPI guard and task-order fixture
+
+Restored `_NTREGAPI_` in the OPENNT-HOST-056 subset; four selected WOW source
+preprocessing comparisons and the task-order fixture source comparison were
+byte-identical. WOW32 rebuilt, x86/x64 condition guards passed, and a sealed
+WOW32 comparison differs from the prior Full-tested candidate only in the
+previously verified timestamp positions. The task-order fixture initially
+exited with STATUS_INVALID_HANDLE when checking a deliberately closed handle;
+a standalone system-API probe reproduced the exception in this environment.
+The fixture now accepts either ERROR_INVALID_HANDLE or that exact exception,
+and verifies a live handle is not misclassified. It passed all task-order
+controls afterward. Evidence: `s13-ntregapi-original-guard.json` and
+`s13-ntregapi-guard-image-comparison.json`. Queue `195r159` records the
+restored guard. This is not a full Win16 runtime or layer-closure claim.
+
+### Original NTEXAPI guard restored
+
+Restored `_NTEXAPI_` in the selected OPENNT-HOST-001 declaration subset and
+removed the obsolete private-guard explanation. Using the actual x86 graph
+flags, baseline and scratch original-guard preprocessing of `nt_eoi.c`,
+`nt_timer.c` and `wkman.c` produced identical bytes. The x86 worker, x64
+configuration's x86 reference worker, and x86 WOW32 were rebuilt; the two
+worker VdmTib checks passed. The x86/x64 guard suites passed their existing
+181 controls and original/predefined NTEXAPI guard controls. With the same
+package identity, NTVDM and WOW32 differ from the earlier Full-tested images
+only at previously observed PE timestamp offsets; recorded in
+`s13-ntexapi-guard-image-comparison.json`. Evidence and supported-context
+limitations: `s13-ntexapi-original-guard.json`. Queue `195r158` records the
+restored original guard; it does not imply full first-depth closure.
+
+### Original timer condition spelling and nested worker builds
+
+Restored the original whitespace in the first-depth `MONITOR && X86GFX`
+condition in `nt_timer.c`; its expression and selected behavior are unchanged.
+After the prior 89-file byte restoration both actual x86 worker graphs rebuilt
+482 edges successfully and passed their VdmTib ownership checks; this corrects
+the narrower earlier top-level Ninja no-work observation. The x86 guard suite
+passed 181 guards plus its controls. After sealing the x86 worker with the
+same package identity, comparison with the previously Full-tested candidate
+found four differences, all within previously verified PE timestamp offsets;
+see `s13-timer-original-spelling-compare.json`. This does not prove the
+remaining layer or unverified NIDDB semantics. Queue `195r157` updates the
+condition spelling and records 15 ordered-signature candidates.
+
+### Changed-input depth-1 queue refresh
+
+The two files skipped by the ordered-signature index, `virtual.c` and
+`c_oprnd.h`, contain current NIDDB and CCPU candidate edits. A fresh lexical
+depth-1 scan found their four and three conditional groups respectively still
+match the captured first-depth directive signatures; both original hashes
+match the pinned inputs. Queue `195r156` refreshes current hashes and actual
+first-depth arm line numbers. Nested groups were not inspected or refreshed.
+The result is a structure candidate, not reachability or behavior proof; see
+`s13-depth1-changed-input-rescan.json`.
+
+### Ordered first-depth directive candidate index
+
+For 500 files with unchanged captured current hashes (or exact original bytes)
+and verified pinned-original hashes, the queued first-depth directive kind
+and expression sequences match in order, covering 2,509 original groups. Queue
+`195r155` marks these only as `ordered-signature-candidate`: repeated conditions
+and local patches still require contextual mapping, and this index proves
+neither reachability nor `#line` correctness. Sixty-two files had different
+sequences and two had changed current hashes; none was auto-classified.
+See `s13-depth1-ordered-structure-match.json`.
+
+### Exact original bytes for normalized-identical files
+
+Among depth-1 original queue entries, 89 existing files differed from their
+hash-verified pinned originals only by CRLF normalization. Restored the exact
+original bytes and verified every file after writing; evidence is in
+`s13-depth1-original-byte-restoration.json`. This establishes structural
+identity for those files, not selected-branch reachability. Both cached
+product configurations reconfigured successfully and Ninja reported no work.
+The raw queue still includes 3,497 original groups marked unreviewed (including
+321 groups in these 89 files), so the separate 14-record lead inventory is
+not an exhaustive count of original reconciliation. Queue `195r154` records
+those 321 groups as structurally identical without changing arm reachability.
+
+### Independent-resource preservation recheck
+
+Compared every member of the HEAD `assets/winnt.zip` to the working archive:
+all 64 original members retain identical content and four executable/library
+members were added. No tracked deletion has an executable, font, ROM, binary
+or driver extension in the checked set. Evidence and limitations are in
+`s13-resource-preservation-recheck.json`; this is not runtime validation or a
+complete semantic classification of extensionless assets.
+
+### Original USER client whole-header guard
+
+The two-cohort positive control and single-guard negative control are now in
+`tests/build/test_mirror_rejected_conditions.py`; x86 and x64 runs passed them
+alongside all 181 retained rejection guards in each profile.
+
+The original `_USERCLI_` whole-header guard cannot be mechanically restored
+around the present two-cohort EDIT subset: MSVC x86 preprocessing confirms
+that the existing inclusion sequence exposes both LOOKASIDE and ED, whereas a
+scratch copy wrapped in that single guard loses ED on the second inclusion.
+The cached production `wow_edit_state_bindings.obj` target reported no work.
+The existing OPENNT-HOST-072/074 adaptation is clarified in the mirror record;
+the original-boundary inventory now records its disposition with evidence in
+`s13-depth1-usercli-guard-positive-negative.json`. This does not establish that
+an alternative inclusion design is impossible or prove runtime behavior.
+
+### Original structural leads rechecked against current files
+
+The current `195r153` queue has four pending depth-1 arms in the shared WOW
+headers. Separately, the last original-boundary inventory has 14 unresolved
+records across retained files: 13 absent-function boundary records and one
+whole-header guard record. A fresh existence and SHA-256 check is recorded in
+`s13-depth1-original-leads-recheck.json`; all corresponding current files
+exist. These are leads, not a complete fresh mirror comparison, and neither a
+missing original function nor a guest source reference proves build selection.
+No next-depth branch was investigated in this recheck.
+
+### Whole-file disposition: unused `srvinit.c`
+
+The cached product build graphs contain no `srvinit.c` compilation entry.
+The actual NTSRV dispatch implementation is `base_dispatch.c`; the ownership
+audit reads its OpenNT original directly. The remaining source reference was
+an artificial guard self-test, removed with the unused source. Four recorded
+first-depth groups, including three pending arms, are removed from working
+queue `195r153`, without interpreting their inner branches. File identity and
+provenance are in `s13-depth1-srvinit-removal.json`. Both cached builds reported
+no work and the x86/x64 guard suites passed 181 retained guards each. These
+checks do not prove the full original-structure reconciliation is complete.
+
 **Owner correction:** work strictly one depth at a time. The earlier deeper
 first-pass figures below are historical exploratory output only, not current
 classification or completion evidence. All 8,549 depth-two-and-deeper arm
@@ -2023,3 +2306,1576 @@ Excluded the original i386 VDM_TIB stack-publication arm in dpmiint.c and remove
 ### Exclude two SOFTPC i386 kernel-VDM arms
 
 Replaced two original i386 kernel-VDM declaration/register arms in softpc.h with #error, retaining both original outer selectors and the selected CCPU cdecl interface. One nested group disappeared with its excluded parent; DIV-294 remains for its still-selected cdecl declarations. Checked all 202 actual include contexts and 723 source/include files; three representative actual preprocessor outputs and selected logical line 540 matched before/after. The two worker targets, WOW32 and rejection suite passed. The independent OEM PIF caller fixture compiled but failed its line-70 assertion with both original and modified header in separate fresh directories; the cause remains unknown and neither run is reported as passing. Six staged images are identical and four differ only in verified PE timestamps; the full-tested release remains. Status: {'unselected-file': 766, 'newly-excluded': 670, 'already-excluded': 1699, 'pending': 52, 'retained-observed': 1874, 'retained-original-assertion': 9}; children: {'retained-observed': 1407, 'pending': 36, 'unselected-file': 1594}. Evidence: `s13-bfs-depth1-softpc-i386.json`, `s13-bfs-depth1-softpc-i386-package-compare.json`; queue: `s13-bfs-depth1-working-queue-195r104.zip`.
+
+### Classify first-depth arms in files without a compiled entry
+
+Reclassified 11 pending arms in eight files as `unselected-file`: the captured
+product graphs did not include those files, and the current source/build/test
+filename search found only the rejection checker, which compiles extracted
+selector snippets rather than including the files. The classification does not
+assert the branch expression is false, and no source body was changed. The
+captured graph predates current uncommitted edits; those edits and the removal
+of the old T279 test entry were separately checked. Status: 777 unselected-file,
+670 newly-excluded, 1699 already-excluded, 41 pending, 1874 retained-observed,
+and 9 retained-original-assertion. No original condition structure was restored
+in this batch. Evidence: `s13-bfs-depth1-no-compiled-entry-r105.json`; queue:
+`s13-bfs-depth1-working-queue-195r105.zip`. No build or product tests were
+needed for this classification-only batch; layer reconciliation remains open.
+
+### Remove first batch of wholly unselected files
+
+Removed 85 unmodified tracked host/non-MVDM mirror files whose recorded
+product contexts did not select them and whose unique basenames had no other
+literal references in current source, build/test scripts or current manifest
+formats. The pinned original paths and pre-removal SHA-256 values are retained
+in `s13-depth1-whole-file-removal-001.json`. Removed their current and original
+condition groups from queue `s13-bfs-depth1-working-queue-195r106.zip` and
+archived three active rejection-ledger records in the removal evidence. No
+guest file was changed. Both x86/x64 cached builds reported no work and the
+x86 rejection suite passed 232 remaining registered guards and its additional
+profile checks. This batch does not prove that every whole-file candidate has
+been found; generated or indirect references and the remaining referenced files
+require further audit. No binary was published in this batch.
+
+### Remove second closed group of wholly unselected files
+
+Removed 14 additional tracked non-MVDM headers whose literal source references
+were confined to the same batch or files removed in batch 001. Captured product
+graphs did not include them and no current manifest references were found.
+Pre-removal identities, internal references and four retired active guard-ledger
+records are in `s13-depth1-whole-file-removal-002.json`; the current queue is
+`s13-bfs-depth1-working-queue-195r107.zip`. Both cached presets reported no
+work. Rejection checks are running separately; neither this batch nor the
+first batch changes guest files or asserts future/unsupported profiles.
+
+### Remove files without captured condition groups
+
+The previous 85+14 whole-file removals were followed by a passing x86
+rejected-condition suite (228 remaining ledger guards and extra controls).
+An independent inventory found 655 current files without captured condition
+groups, 164 of which lacked a recorded product graph context. After scanning
+source, tools, tests, active manifests and existing build graphs for filenames,
+67 tracked unmodified files had no other literal references and were removed.
+Their original and pre-removal identities are in
+`s13-depth1-whole-file-removal-003.json`; queue
+`s13-bfs-depth1-working-queue-195r108.zip` drops their file records. No active
+rejection-ledger entries named them, and both cached presets reported no work.
+Recorded graphs predate the current worktree edits; unsupported/future profiles
+are not proven. This is not a completed whole-tree or first-depth audit.
+
+### Remove newly unreferenced header pair
+
+Rescanned remaining file candidates after batches 001–003. Two non-MVDM
+headers became free of other literal source, test, build and active-manifest
+references and had no recorded product context. Removed them and their four
+current/original queue groups; identities are in
+`s13-depth1-whole-file-removal-004.json`, queue `195r109`. This scan is
+conservative about still-referenced files and does not establish unsupported
+future configurations. No guest or active guard-ledger entries were changed.
+
+### Remove files referenced only by rejection-snippet checks
+
+Removed eight files with no recorded product context and no source, build or
+active test reference except the rejection checker, which extracts guard lines
+into a separate probe. Removed nine now-inapplicable snippet tuples, three
+active guard-ledger entries, and the two divergence entries whose only files
+were removed; adjusted the shared DIV-602 description to retain EGATEST only.
+Original identities and removed records are in
+`s13-depth1-whole-file-removal-005.json`; current queue is `195r110`. The two
+cached presets reported no work. The updated rejection suite is running.
+The first two preparation attempts failed precondition checks before mutation:
+the queue retained older file hashes, and README line endings were mixed; the
+final run required clean tracked files and preserved existing bytes elsewhere.
+The updated x86 rejection suite completed successfully: 225 remaining ledger
+guards and its additional profile controls passed.
+
+### Whole-file inventory boundary
+
+Compared tracked, currently existing `src/mvdm-host` and `src/non-mvdm` files
+with the condition queue's file inventory: 2,110 files exist, 650 are not in
+that inventory, and none of the 650 has a `.c` or `.h` extension. The latter
+include historical `.obj`/`.lib`, build descriptions and runtime resources;
+absence from a compiler dependency alone cannot exclude a runtime-loaded
+resource. The older supplemental-import policy expressly describes some
+historical products as no-build/no-runtime, but those records still require
+per-file matching and current reference checks before removal. Guest remains
+outside this operation. Snapshot: `build/t473-s13/file-exclusion-audit/unindexed-files.json`.
+
+### Remove unreferenced historical library/debug artifacts
+
+Matched unindexed `.obj`/`.lib`/`.pdb`/`.pch` against the historical supplemental
+import manifest and scanned current source, tools, tests, manifests and build
+graphs. Four tracked `.lib`/`.pdb` files had unique names, matching recorded
+hashes, no other literal reference and no local edits; they were removed as
+historical no-build/no-runtime host artifacts. Their identities and provenance
+are in `s13-whole-file-historical-binary-removal-001.json`; the historical import
+manifest remains evidence. No guest image or runtime resource was removed.
+Both cached presets reported no work. Other binary candidates still have
+references or require separate review.
+
+### Remove closed historical object-inventory group
+
+Removed 24 unreferenced historical `_objects.mac` inventories and 18 matching
+historical `.obj` files referenced only by those inventories. All were clean
+tracked host files with verified supplemental original hashes; each `.mac`
+matched its original after line-ending normalization. Current source, tests,
+build generators and graphs had no other literal references to the 18 object
+names or `_objects.mac`. Per-file current/original hashes are recorded in
+`s13-whole-file-historical-binary-removal-002.json`. Both cached presets
+reported no work; no guest image or runtime resource was removed. Remaining
+historical products and possible generated/reference collisions require audit.
+
+### Remove historical objects whose names collide with build outputs
+
+Removed 178 tracked, unmodified host `.obj` files after distinguishing their
+`src/.../obj/i386/` paths from same-basename objects produced under current
+`build/.ninja` graphs. Their only remaining literal basename matches were
+build graph files; none of those contained the candidate's full source path
+or `obj/i386/<name>` suffix. Historical import hashes matched each file.
+Identity and matched graph paths are in
+`s13-whole-file-historical-binary-removal-003.json`. Both cached presets
+reported no work. This does not prove unsupported future builds, and files
+with source/test/tool references remain for review.
+
+### Distinguish tool references to generated object outputs
+
+Removed nine more historical host `.obj` files after inspecting every live
+basename match: build graphs and tools/tests use distinct `obj/<component>/`
+output paths, not the source-tree `obj/i386/` files. Historical manifest hashes
+matched. Evidence and reference files are in
+`s13-whole-file-historical-binary-removal-004.json`. Both cached presets
+reported no work. Ambiguous names and legacy source references remain held.
+
+### Cross-check generated translation units and remove further unused files
+
+Cross-checked all earlier source-file removals against 29 separately captured
+generated-TU contexts; none was included. Extended the file inventory beyond
+the prior all-arms-unselected classification. Of 405 files without a recorded
+product source/include context, nine unmodified host mirror files had no other
+current literal source, test, tool, build or manifest references. Removed the
+nine files and their queue groups; nine active guard records were archived in
+`s13-depth1-whole-file-removal-006.json`. Current queue: `195r111`. Both cached
+presets reported no work; updated rejection checks are running. This does not
+claim the remaining files are selected, or prove unsupported future profiles.
+The updated rejection suite subsequently passed 216 remaining ledger guards and its additional profile controls.
+
+### Remove additional snippet-only, unselected files
+
+Removed seven files with no captured product/generated-TU context and no
+literal current reference except rejection-check snippets. Seven snippet tuples,
+six archived guard-ledger entries and the now-orphaned DIV-602 registration
+were removed; current/original condition groups were removed from queue `195r112`.
+Evidence is `s13-depth1-whole-file-removal-007.json`. Both cached presets
+reported no work; the x86 rejection suite passed 211 remaining registered guards
+and its additional controls. These removals do not establish remaining files'
+selection or unsupported future profiles.
+
+### Remove duplicate-name unselected mirror files
+
+Individually searched 84 duplicate basenames to avoid multi-pattern substring
+shadowing; none appeared in current source, tests, tools, active manifests or
+build graphs. Removed 169 clean tracked host mirror files with those names and
+no recorded product/generated-TU context, and removed their 332 current/original
+condition groups from queue `195r113`. No active guard-ledger entries named
+them. Current and original hashes are in `s13-depth1-whole-file-removal-008.json`.
+Both cached presets reported no work. This confirms the scanned configurations,
+not unsupported future profiles or hidden dynamic references.
+
+### Remove unselected BDE debugger component
+
+Removed the 13-file BDE component, its two test-only rejection snippet tuples,
+three active guard-ledger entries and its current/original queue groups. Captured
+product and generated-TU graphs have no BDE input; current external references
+were limited to those test snippets, while old source/build files referenced one
+another. File hashes and original provenance are in
+`s13-depth1-whole-file-removal-009.json`; current queue is `195r114`. Both
+cached presets reported no work; x86 rejection checks passed 208 remaining
+registered guards and extra controls. No guest or runtime binary changed.
+
+### FAX subtree runtime-boundary review
+
+Captured product graphs did not select the old `src/mvdm-host/fax` provider
+sources. Current build/release/observation scripts found by literal search do
+not name its `printer.inf`, dummy assets or source path. However selected
+`src/mvdm-host/wow32/wow32fax.c` and `inc/wowfax.h` retain WOWFAX driver names,
+and an old governance exporter still traverses the subtree. The former is a
+real dynamic-driver boundary and the latter is a historical source-inventory
+consumer; neither alone proves these specific source resources ship or run.
+The subtree was not removed pending package/runtime ownership reconciliation;
+no guest or original WOW32 fax source was changed.
+
+The reconciliation found that the selected WOW32 bridge names system-directory
+`WOWFAX.DLL` and `WOWFAXUI.DLL`; it does not consume the repository's original
+FAX source directory or its legacy installation resources. The isolated
+candidate package contains neither the provider DLLs nor these resources. The
+23 unbuilt provider source, resource and historical build files were removed;
+the source-inventory exporter now inventories the remaining WOW32 subtree, and
+the standalone rejection snippet for the removed header was removed. The
+selected WOW32 implementation was not changed. The prior system-DLL dependency
+remains: this cleanup does not claim that fax installation or operation works.
+File identities and the 12 removed condition groups are recorded in
+`s13-depth1-whole-file-removal-010.json`; the queue is now `195r115`. Both
+cached product builds reported no work. Unsupported future profiles were not
+established by these checks. The x86 rejection suite passed all 208 retained
+guard checks and its additional controls after removal.
+
+### Remove unselected MIPS and PowerPC host includes
+
+Removed 35 remaining architecture-specific host include files after verifying
+that current supported x86/x64 builds and test/build path references do not
+select either include tree. An archived pre-T260 CMake file names the old MIPS
+tree but is not a current supported build. The whole-file removal also drops
+4,812 current/original condition groups from the task queue without classifying
+their inner conditions. Evidence and file hashes are in
+`s13-depth1-whole-file-removal-011.json`; the queue is now `195r116`.
+Both cached product builds reported no work. No claim is made for unsupported
+MIPS or PowerPC builds.
+
+### Remove unselected serial SIM32 package
+
+The historical `mvdm-host/sim32` package is a separate serial-monitor
+implementation. Supported product builds select the different
+`softpc.new/host/inc/sim32.h` and `softpc.new/host/src/sim32.c` instead.
+Removed the five-file unselected package and its exclusive T288 declaration
+fixture and generator; that generator referred to a fixture path that no longer
+exists and has no current callers. Removed the two obsolete rejection snippets
+and DIV-611, which applied only to the removed package. The unmatched comment
+parse failures from that unselected source no longer belong in the active queue.
+File hashes and provenance are in `s13-depth1-whole-file-removal-012.json`;
+the queue is now `195r117`. Both cached product builds reported no work; the
+x86 rejection suite passed 208 guards and its additional controls. This does
+not alter or prove the active CCPU SIM32 behavior.
+
+### Remove unselected VDM debugger extension
+
+Removed 44 remaining tracked `vdmexts` source, resource and historical build
+product files. Current x86/x64 graphs do not build or reference this extension;
+the remaining references are historical inventory and two exclusive rejection
+snippets. The snippets and three active guard-ledger entries were removed, with
+their original records archived in `s13-depth1-whole-file-removal-013.json`.
+The queue is `195r118`; 62 current/original groups leave the queue with the
+unselected files. Both cached product builds reported no work; the x86
+rejection suite passed 205 remaining guards and additional controls. This does
+not assert availability of a future debugger extension.
+
+### Remove unselected original conapi header
+
+Removed `public/internal/windows/inc/conapi.h`: observed current consumers
+resolve the name through `src/compat/include/conapi.h`, and no current explicit
+reference to the removed original path was found. The selected compatibility
+header remains unchanged. Source identity, inclusion evidence and limitations
+are in `s13-depth1-whole-file-removal-025.json`; queue `195r131` removes 30
+current/original groups. Both cached builds and direct x86 worker Ninja reported
+no work. This is not a claim that the compatibility header contains every
+historical console interface.
+
+### Owner correction: preserve independently useful assets
+
+The owner clarified that excluded source and build intermediates may be removed,
+but independently useful executables, DLLs, fonts, tools and resources must be
+preserved. Restored the historical 32-bit FORCEDOS, WIN and VDMEXTS binaries
+and five tool scripts previously removed during this audit. Added the three
+binaries to `assets/winnt.zip` under `WINNT/SYSTEM32`, after verifying every
+existing archive payload remained byte-identical. Restored four potentially
+useful help, PPD, INF and documentation files. No deleted font files were found.
+This supersedes any earlier whole-directory removal count or statement for
+these restored files. Identities, archive entries and functional limitations are
+recorded in `s13-executable-preservation-correction.json`. Preservation does
+not establish that historical executables or restored scripts work on the
+current system; obsolete script dependencies require separate review.
+The archive manifest was updated for the new archive identity and the three
+native PE records. A fresh extracted copy passed the guest-media check for 62
+immutable files, with configuration excluded; the archive's static NE module
+census reports no missing modules. The old `verify-wow-external-native.ps1`
+pins the prior P13 ZIP hash and is not a current-archive validation.
+The subsequently retained historical VCDEx host DLL was also added to the ZIP
+and manifest. All 65 pre-existing file payloads were checked unchanged during
+that addition; the guest-media check now passes 63 immutable files and the NE
+module census still reports no missing modules. This preserves the binary only;
+its runtime compatibility was not verified.
+
+### Remove unselected network-configuration header closure
+
+Removed six `public/internal/ds/inc` configuration and lock headers. Captured
+supported preprocessing contexts do not resolve to them; the worker dependency
+database resolves its `config.h` to `softpc.new/base/inc/config.h`, and the
+other relevant literal include references are confined to the removed group.
+File identities and boundaries are in `s13-depth1-whole-file-removal-028.json`;
+queue `195r134` removes 34 current/original groups. Both cached builds and the
+direct x86 worker Ninja invocation reported no work. This does not establish
+support for the historical network configuration APIs.
+
+Removed three additional unselected historical LAN Manager protocol and
+application-error headers. No current include directive, explicit build input,
+or captured worker dependency selects them. The similarly named current common
+protocol headers remain untouched. File hashes and limitations are in
+`s13-depth1-whole-file-removal-030.json`; queue `195r136`. Both cached builds
+reported no work.
+
+Removed unselected `inc/vdmtib.h`, `ntddcdrm.h`, and the duplicate network
+`ds/inc/align.h`. No current include uses the first two; actual worker
+dependencies resolve `align.h` to `public/internal/base/inc/align.h`. The
+retired DIV-008 entry applied only to the removed VDM TIB header. Evidence:
+`s13-depth1-whole-file-removal-037.json`; queue `195r145` removes 14
+current/original groups. Cached x86/x64 and direct x86 worker Ninja reported
+no work; selected VDM, disk and network implementations were unchanged.
+
+Removed the unselected original `ntddstor.h` after isolated compilations using
+the actual x86 worker commands at the three current `ntdddisk.h` include sites
+(DEM, `nt_fdisk.c`, `nt_rflop.c`) each reported `_NTDDDISK_H_` already defined.
+The earlier captured product marker set did not observe that guard body, and
+the worker dependency database did not select the storage header. The retained
+disk-header guard and selected disk implementation remain unchanged; no claim
+is made for unsupported configurations. Evidence and probe command identities:
+`s13-depth1-whole-file-removal-038.json`; queue `195r146` removes 12
+current/original groups. Both cached builds and direct x86 worker Ninja reported
+no work.
+
+Removed the unselected `nt_cprgs.c` historical access-table carrier and its
+90 current/original queue groups. The T310 audit tool is preserved, now reads
+the hash-pinned original and explicitly labels its CPU30-era output historical;
+its 62-row output matches an independent run against that same original.
+Retired entries applying only to the removed file were archived, and shared
+entries were narrowed to their remaining files. Evidence:
+`s13-depth1-whole-file-removal-040.json`; queue `195r148`. Both cached builds
+reported no work and the NTVDM input hash matches the previously tested
+candidate. This does not assert that the historical table is a current product
+provider.
+
+Removed the unselected original `winbasep.h` copy and three unused legacy
+network `names.h`, `status.h`, and `thread.h` headers. Current `winbasep.h`
+includes resolve to `src/compat/include/winbasep.h`; no current literal include
+of the other three removed paths was found. Evidence and identities:
+`s13-depth1-whole-file-removal-041.json`; queue `195r149` removes 12
+current/original groups. Cached x86/x64 builds and direct x86 worker Ninja
+reported no work. Selected compatibility and thread implementations are
+unchanged.
+
+Removed the unselected CCPU copy of `evid_c.h`; actual worker dependencies
+resolve the name to the retained `base/cvidc/Evid_c.h` under the selected
+C-VID profile. Source identity and evidence:
+`s13-depth1-whole-file-removal-039.json`; queue `195r147` removes two
+current/original groups. Both cached configurations and direct x86 worker
+Ninja reported no work. C-VID/CCPU binding sources and the selected generated
+header are unchanged.
+
+Removed seven unselected historical session, SMB, language, print, TCP/IP and
+CRT declaration headers. Current source/test/tool include scans and worker
+dependency records do not select them; historical governance comments retain
+only provenance references. File identities and limits are in
+`s13-depth1-whole-file-removal-034.json`; queue `195r142` removes 182
+current/original groups. Both cached builds and direct x86 worker Ninja
+reported no work; selected session, network, print and CRT implementations
+were not changed.
+
+Removed six unselected original remote-print/network-RPC declaration files,
+including two `.x` files verified to contain C declarations rather than
+standalone resources or tools. Their include references are confined to the
+unselected group, and captured worker dependencies do not select them.
+Evidence: `s13-depth1-whole-file-removal-033.json`; queue `195r141` removes
+106 current/original groups. Both cached builds and direct x86 worker Ninja
+reported no work. Current project RPC and printing paths were not modified.
+
+### Remove unselected i386 DPMI memory source
+
+Removed `dpmi32/i386/dpmimem.c` and its filename from the historical source
+manifest. Current CCPU worker graphs compile `dpmimemr.c` instead; the removal
+is recorded as DIV-633. The historical T289 mirror-inventory script remains
+preserved but describes an older inventory and needs separate modernization.
+Evidence: `s13-depth1-whole-file-removal-029.json`; queue `195r135`. Both
+cached builds and direct x86 worker Ninja reported no work; the NTVDM input
+hash remains equal to the previously tested candidate. This does not assert
+the removed historical i386 implementation is semantically interchangeable.
+
+Removed the unselected original `public/internal/windows/inc/winuserp.h` copy;
+current worker dependencies resolve that name through the retained
+`src/compat/include/winuserp.h`. Attribution comments remain historical source
+references, not compile inputs. Evidence and file identity:
+`s13-depth1-whole-file-removal-031.json`; queue `195r138` removes 50
+current/original groups. Both cached configurations and direct x86 worker
+Ninja reported no work. This is not a claim that the compatibility header
+implements the complete NT4 private USER API.
+
+Removed the unselected original SDK `nt.h`, `ntioapi.h`, and `ntseapi.h`
+copies. Captured supported contexts resolve the active umbrella and I/O header
+through `src/compat/include`; the removed umbrella was the only current literal
+include site for the removed original security header. Source identity and
+scope: `s13-depth1-whole-file-removal-032.json`; queue `195r139` removes 52
+current/original groups. Both cached configurations and direct x86 worker and
+WOW32 Ninja invocations reported no work. This does not assert full original
+NT SDK coverage; a historical T280 verifier still names an obsolete path.
+
+### i386/CPU40 boundary classification
+
+Isolated compilations using the actual x86 worker commands report `i386`
+undefined and `CPU_40_STYLE` defined at the DPMI interrupt and `nt_msscs`
+boundaries. The existing rejection suite additionally exercises and accepts
+`i386 + CPU40` while rejecting the legacy non-CPU40 alternative. Both original
+outer boundaries therefore remain as test-observed assertions; the product
+probe alone is not used to exclude the explicit test context. No product source
+or binary changed. Evidence: `s13-bfs-depth1-i386-context.json`; queue
+`195r137`.
+
+The `mvdm.h` and `suballoc.h` original `i386` outer selectors are retained:
+the CPU-guard suite explicitly exercises `i386`, `_M_IX86` and generic
+alternatives and checks output and original line mapping. The suite passed in
+both x86 and x64 MSVC environments after cleanup. This is a test-context
+witness, not a claim that the default worker defines `i386`. Evidence:
+`s13-bfs-depth1-mvdm-header-i386-controls.json`; queue `195r150`.
+
+Four pending ordinary include-guard structures (`ntdddisk.h`, `ntdbg.h`,
+`wownt32.h`, and CCPU `gdpvar.h`) are retained under the coding policy. The
+actual x86 worker or WOW32 Ninja dependency databases include each exact file;
+the prior include-guard inventory verifies each whole-file guard shape. The
+queue explicitly marks inner-body selection as unproven rather than inferring
+it from the dependency. Evidence: `s13-bfs-depth1-included-guards.json`;
+queue `195r140`. No source or binary changed.
+
+The two first-depth CCPU/CPU40 boundaries in `nt_aorc.c` are retained for the
+historical T335 test context: its actual source object compiled with both
+macros defined, and the object identity was rechecked. The complete historical
+T313/T335 link and execution remain unresolved, so this is only a positive
+object-compilation observation, not a passing functional test or product-use
+claim; inner conditions remain unproven. Evidence:
+`s13-bfs-depth1-aorc-test-object.json`; queue `195r151`.
+
+For `host_def.h`'s `i386` SafeLoadLibrary selector, an isolated compile using
+the actual x86 `nt_bop.c` worker command observed `i386` undefined immediately
+before the header. Prior product-context scanning found no explicit `i386`
+flag in 592 matching commands; current project and scanned MSVC/Windows SDK
+headers contain no definition. Some retained historical test generators do
+explicitly define `i386`, however, and their complete inclusion closure and
+current applicability have not been established. The arm remains pending;
+no exclusion follows from the product probe alone. Evidence:
+`s13-bfs-depth1-hostdef-i386-context.json`. No source or binary changed.
+
+The retained T309 dispatcher generator's obsolete i386 profile and old include
+path failed against current source. It now uses the selected CCPU profile and
+current MVDM include path; its x86/x64 object graphs and incremental repeats
+pass, and neither graph includes `host_def.h`. Combined with the prior 592
+product-context scan, SDK macro scan and actual BOP probe, the unsupported
+original i386 host loader arm is now `#error` with original lines 223/225;
+DIV-634 records the mirror subset. The actual x86 NTVDM target rebuilt and its
+VdmTib ownership check passed. The x86/x64 rejection suites each passed 181
+guards plus line controls. Stamping the rebuilt NTVDM with the prior candidate
+identity yielded a same-size image differing only in COFF/debug timestamp
+bytes; no release was made. Evidence:
+`s13-bfs-depth1-hostdef-i386-exclusion.json`; queue `195r152`. Historical
+T313/T335 functional link status remains separate and unresolved.
+
+### Remove unselected historical launcher utilities
+
+Removed the standalone FORCEDOS utility's 12 tracked files and the historical
+host WIN launcher's nine tracked files. Neither is selected by current product
+or test graphs; a prior T276 disposition also classified them as excluded.
+The historical WIN `obj/i386/win.com` was verified as a 32-bit PE host utility,
+not a guest Windows executable. The release guest package contains no
+FORCEDOS.EXE. File identities and the retired WIN guard are recorded in
+`s13-depth1-whole-file-removal-026.json` and `-027.json`; queue `195r133`.
+Both cached builds report no work; the x86 rejection suite passed 186 guards
+and extra controls. Guest images and DOS launcher source are unchanged.
+
+### Class-client Unicode exclusions
+
+The `ntcftxt.h` entry rejects `UNICODE` and the file does not subsequently
+define it. Replaced the bodies of the two later first-depth Unicode arms with
+`#error`, preserving their selectors and ANSI alternatives; added original
+continuation mappings 610 and 805. The original-token fixture now accepts only
+these two enumerated transformations and the already registered cleanup fix.
+That fixture and 207 x86 guard checks with additional controls passed. The
+actual x86 WOW32 nested Ninja graph rebuilt `client.c` and linked successfully.
+The ordinary top-level cached build alone did not notice this nested-header
+change, so it is not sufficient evidence of that rebuild. The initial DLL
+comparison mixed the raw build output with the package-stamped prior candidate.
+Stamping the new image with the same package identity produces identical file
+sizes and only six differing bytes: three in the COFF timestamp and three in
+the IMAGE_DEBUG_DIRECTORY timestamp. All other bytes match the prior candidate.
+No release was made. Evidence: `s13-bfs-depth1-class-unicode.json`; queue:
+`195r119`.
+
+### Remove unselected VDMDBG provider
+
+Removed the seven remaining tracked files of the historical VDMDBG provider;
+its previously removed intermediates remain recorded in their earlier batch.
+Current product and test graphs do not select the provider or its DLL. The
+separate public `vdmdbg.h` ABI header remains, as do historical inventory
+records. Sixteen current/original condition groups leave the queue with the
+unselected files. Evidence: `s13-depth1-whole-file-removal-014.json`; queue:
+`195r120`. The x86/x64 cached builds and direct nested WOW32 incremental build
+reported no work. This does not establish future debugger support.
+
+### Remove explicitly unselected CCPU stub carrier
+
+The existing product generator explicitly filtered `ntstubs.c`: the selected
+`fpu.c` provides the implementation and selecting the stub also duplicates FPU
+and SAS definitions. Removed the unselected source and its sole manifest
+entry, and removed the now-redundant filters from the two generators. The
+manifest comparison verifies that no other entry changed; the active guard
+record is archived with the file identity in
+`s13-depth1-whole-file-removal-015.json`. DIV-129 applied only to the removed
+file and was retired; DIV-632 records the manifest subset. Queue: `195r121`.
+Both x86 and x64 cached configurations regenerated their graphs successfully;
+each generated CCPU graph reports 130 sources and neither references the
+removed file. The direct x86 worker Ninja invocation succeeded, and its NTVDM
+SHA-256 remains `F5A3B4F0B11574E853C4933B613907FB48DB0BD70F39CC30E5B4F05DA681BF07`,
+matching the previously tested candidate input. The x86 rejection suite passed
+206 guards and additional controls.
+
+### Remove unselected dat2obj and IEUVDDEx packages
+
+Removed the three-file `dat2obj` utility and four exclusive rejection-test
+tuples; its DIV-609 applied only to that removed package. Removed 23 files of
+the legacy IEUVDDEx monitor extension and its obsolete, uncalled T288 ledger
+generator, whose source roots already refer to moved or removed packages.
+Current product/test graphs do not select either package. The operations leave
+CCPU software V86 and active device behavior untouched. File identities and
+scope are in `s13-depth1-whole-file-removal-016.json` and `-017.json`; the
+queue is `195r123`. Cached x86/x64 builds reported no work; the x86 rejection
+suite passed 206 guards and additional controls.
+
+### Remove unselected CMOS and quick-event alternatives
+
+Removed `base/system/cmos.c` and `quick_ev.c`; the selected source manifest and
+worker graphs use `cmosnt.c` and `qevnt.c`. Three source-only rejection tuples
+and 13 active guard records for the removed files were retired; the original
+records and file hashes are preserved in `s13-depth1-whole-file-removal-018.json`.
+DIV-612 applied only to the removed CMOS file and was retired; DIV-141 no longer
+lists that file. The queue is `195r124`; both cached builds report no work,
+and the x86 rejection suite passed 193 remaining guards and extra controls.
+
+### Remove unselected legacy disassembler
+
+Removed seven remaining tracked `dasm386` package and exclusive header files;
+the historical object-list deletion was already recorded. Current product and
+test graphs do not select this disassembler. Five source-only rejection tuples,
+two active guard records and DIV-607 applied only to the removed package and
+were retired. File identities and retired guard records are preserved in
+`s13-depth1-whole-file-removal-019.json`; queue `195r125` removes 46
+current/original groups. Both cached builds reported no work; the x86
+rejection suite passed 191 remaining guards and extra controls. CCPU instruction
+decode and execution are unchanged.
+
+### Remove unselected WOW32 source files
+
+Removed `wddeml32.c`, `wkglobal.c`, `wklocal.c`, and `debug.c` from the
+unselected WOW32 source set. Current product/test graphs do not compile these
+files, and a historical package disposition also classified them as excluded.
+Two exclusive API16 rejection tuples and two guard-ledger entries were retired;
+DIV-603 applied only to the removed files. The independent headers remain for
+separate consumer review. Source identities and retired records are in
+`s13-depth1-whole-file-removal-020.json`; queue `195r126` removes 50
+current/original groups. Both cached builds reported no work; the x86 rejection
+suite passed 189 guards and additional controls. This does not claim that the
+removed historical APIs are implemented by another provider.
+
+### Remove unused C-VID SAS generated-header duplicate
+
+Removed the unselected `base/cvidc/sas4gen.h`. The actual worker Ninja
+dependency database resolves this name to the earlier
+`ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h`; the C-VID binding
+generator explicitly reads that selected header. Corrected the generator
+comment and DIV-189 source reference accordingly. File identity and evidence:
+`s13-depth1-whole-file-removal-021.json`; queue `195r127` drops 220
+current/original groups. Current first-depth arm statuses are 1,874 observed
+retained, 1,667 already excluded, 604 newly excluded, 9 retained original
+assertions, 90 in unselected files and 31 pending; these figures do not prove
+the separate original-structure reconciliation complete. The x86 and x64
+cached configurations regenerated successfully, and direct x86 worker Ninja
+reported no work.
+
+### Remove unselected monitor header and classify existing CPU rejection
+
+Removed `host/inc/nt_mon.h`, which has no current include/build/test input;
+the worker dependency database also does not contain it. A diagnostic script
+comment retains it only as historical type context. `base/inc/cpu.h` remains:
+the CCPU fixture includes it, and its existing `NTVDM && MONITOR` arm is solely
+an `#error` tested by the guard suite. Classified that arm as already excluded
+rather than treating an empty preprocessor result as an unused file. Evidence:
+`s13-depth1-whole-file-removal-024.json`; queue `195r130`. Both cached builds
+reported no work and the NTVDM input SHA-256 remains
+`F5A3B4F0B11574E853C4933B613907FB48DB0BD70F39CC30E5B4F05DA681BF07`.
+
+### Remove unselected host auxiliaries and video glue
+
+Removed unselected host `stf_conf.c` and `nt_term.c`, with one exclusive
+rejection tuple and two active guard records; DIV-604 applied only to the
+removed STF source. Removed unselected `base/video/ga_glue.c` and the alternate
+`base/cpu/src/evid/ev_glue.c`. The selected worker instead compiles the distinct
+`base/cvidc/ev_glue.c`; the video manifest mentions `ga_glue.c` only in a
+historical comment. File identities and retired guard records are in
+`s13-depth1-whole-file-removal-022.json` and `-023.json`; queue `195r129`.
+Both cached builds reported no work; the x86 rejection suite passed 187 guards
+and additional controls. No selected video path was changed.
+
+Removed `softpc.new/obj.vdm/c_regs.c`, an unselected historical assembler-CPU
+register glue source; its single active guard record is archived with its hash
+in `s13-depth1-whole-file-removal-035.json`. Selected CCPU register execution
+is unchanged. Queue `195r143` removes nine current/original groups; both cached
+configurations report no work. The changed guard inventory will be verified with
+the next grouped rejection-suite run.
+
+Removed 26 unselected host VDD sample source/build-declaration files and their
+exclusive original `vddsvc.h`; the current product/test graphs select none,
+and all literal users of that header were in the removed host samples. The
+existing VCDEx DLL, resource files and guest sample files remain. Five active
+guard records were retired and archived with the source identities in
+`s13-depth1-whole-file-removal-036.json`; queue `195r144` removes 30
+current/original groups. Both cached builds reported no work. The current queue
+now records eight arms in unselected files and 17 pending arms. The grouped
+x86 rejection suite passed 180 guards and additional controls, including the
+preceding `c_regs.c` ledger change. This is not a claim that original-structure
+reconciliation is complete.
+### Restore four original clmsg outer conditions
+
+Restored original first-depth FE_IME guards at lines 566 and 905 and DEBUG
+guards at lines 572 and 1214, splitting the local default-window selector so
+the original guard depth is preserved. Their excluded bodies now reject with
+`#error`; continuation `#line` markers preserve original source locations.
+Selected nonblank preprocessor output matched for four actual WOW/fixture
+contexts. x86 and x64 guard suites passed, and the cached WOW32 and
+call-boundary Ninja targets reported no work. Evidence is in
+`s13-clmsg-original-outer-guards.json`; queue `195r174` records four restored
+original first-depth groups. Other original clmsg groups remain unreviewed;
+this is not a full-depth or runtime acceptance claim.
+
+### Shared WOW header context check
+
+The four remaining pending current-source first-depth arms are in the shared
+`wowfax.h` and `wowinfo.h` headers. The WOW32 host includes these via
+`precomp.h`, `wkman.c` and `wow32fax.c`; separately the original guest shell
+sources include both headers, define `_WOWFAX16_`, and their makefile specifies
+`-DDEBUG`. `test_mirror_rejected_conditions.py` explicitly protects these
+guest source contexts. This source evidence does not establish a supported
+current guest build, and a lack of host hits alone does not prove these bodies
+globally unreachable. All four remain pending until supported guest-header
+contexts are resolved; no guest image or header body changed in this check.
+The baseline queue also has 3,206 unreviewed original first-depth arms; they
+are distinct from the four pending current arms and are not completed by the
+current-source scan.
+
+### Pinned original first-depth anchors: CCPU and WOW communications
+
+Reconciled six previously unreviewed original first-depth groups in `jmp.c`,
+`mov.c` and `wucomm.c` with their already classified current counterparts.
+For each pair, the original bytes match the pinned SHA-256, the opening falls
+inside an unchanged multi-line anchor, and the complete arm signature matches.
+Queue `195r175` and `s13-original-anchored-arm-pairing-third.json` record the
+exact identities and inherited classification evidence. This does not modify
+selected code or constitute a new build or runtime test.
+
+### Batched pinned original first-depth anchor reconciliation
+
+Queue `195r176` links 2,070 original groups in 370 files to existing current
+first-depth classifications. Each pair has a pinned original SHA-256, matching
+opening within an unchanged multi-line source anchor, identical complete arm
+signature, and already classified current arms. Per-pair original/current
+hashes and anchor extents are in `s13-original-anchored-arm-pairing-fourth.json`.
+The matching only inherits existing current evidence; it does not itself prove
+runtime behavior or conduct a build. The original queue still has 676
+unreviewed first-depth arms and four pending arms. The current queue has four
+pending first-depth arms. Neither count establishes layer completion.
+
+### Complete ordered first-depth structure matches
+
+Queue `195r177` reconciles another 103 original groups across 51 files. For
+each file, every first-depth opening appears in the same order, original and
+current source opening lines match, and every original arm signature matches;
+an additional final `else` is accepted where the current adaptation has one.
+The original SHA-256 is checked against the pinned identity and both file hashes
+are recorded in `s13-original-ordered-first-depth-pairing.json`. Classifications
+inherit their existing current evidence. This is structural reconciliation,
+not a new build or a claim about still-unmatched original groups.
+
+### Original kernel ntstubs disabled full-screen guard
+
+Restored the original first-depth `#if 0` at `kernel/ntstubs.c` logical line
+8377 as an excluded `#error` body, followed by original continuation line
+8412. The retained `NtUserSetWindowFNID` code is unchanged. WOW32's actual
+`control-fnid.obj` and DLL compiled successfully. Queue `195r178` and
+`s13-kernel-ntstubs-disabled-guard.json` record the restored group; other
+original groups in this file remain unreviewed.
+
+### Server and clmsg original disabled first-depth guards
+
+Restored original `server.c` line 461 as a true first-depth `#if 0`, splitting
+the local selector around it; restored the previously missing `clmsg.c` line
+1650 `#if 0` as an excluded guard. Both have original continuation markers.
+The affected x86 WOW32 objects and DLL compiled, and the first-depth guard
+suite passed. Queue `195r179` and `s13-server-clmsg-disabled-outer.json`
+record the changes. This is not a full release or full runtime regression.
+
+### Original clres bitmap guard restored to first depth
+
+Split the local dialog/bitmap selector around the original `#if 0` at line
+1674, preserving the selected bitmap alternative and restoring logical lines
+1692 and 1703. Both actual x86 WOW32 clres objects and the DLL compiled.
+Queue `195r180` and `s13-clres-bitmap-outer.json` record the guard and its
+retained alternative. The x86 first-depth structural suite passed; no runtime acceptance is claimed.
+
+### Repair stale first-depth queue locations
+
+A source-location audit found 322 stale or mismatched first-depth queue
+records across 19 files. Queue `195r182` relocates them only after comparing
+each affected file's complete ordered first-depth condition and arm signatures
+to its actual text; `s13-depth1-queue-relocation.json` records file hashes and
+the changes. Child locations are explicitly marked stale for later-depth
+work and were not audited here. A repeat lexical scan found no stale or arm
+count mismatch and no possible substantive bodies among 2,272 current arms
+classified as excluded. This scan is a consistency check, not proof of all
+supported preprocessor contexts or a substitute for compiler validation.
+
+### Mouse original first-depth structure after queue relocation
+
+After correcting stale current-source locations, all 95 original and current
+first-depth openings in `mouse_io.c` match in complete order and arm signature
+(permitting only an added final local `else`). This allowed 65 previously
+unreviewed original groups to be reconciled with their existing current
+classifications. The pinned original and current source hashes and all pairs
+are recorded in `s13-original-ordered-first-depth-pairing-after-relocation.json`;
+queue `195r183` carries the results. This is source-structure evidence and
+inherits the existing compilation evidence; it is not a new runtime test.
+
+### Reconcile two already-restored original guards
+
+The queue still marked the original `handtabl.c` literal-disabled handle
+check and `server.c` FE_IME guard unreviewed despite their existing restoration
+records. Their pinned original hashes, original lines, unique current outer
+guard signatures, and current `#error` bodies were rechecked. Queue `195r185`
+now links both original arms to the existing build and rejection evidence;
+details: `s13-restored-guard-evidence-reconciliation.json`. No product source
+or runtime behavior changed in this reconciliation.
+
+### Correct original adjacent nt_fulsc line anchors
+
+Reconciled the second original literal-disabled guard at line 926 with its
+existing `#error` in `nt_fulsc.c`. Corrected original logical line anchors
+around the adjacent guards to 902, 925 and 964; selected statements and both
+excluded bodies remain unchanged. The x86 worker rebuilt successfully and
+the first-depth guard suite passed. Queue `195r186` and
+`s13-nt-fulsc-original-zero-line.json` record the work; no runtime regression
+or package delivery is claimed.
+
+### Reconcile two ordered original adaptation guards
+
+Queue `195r188` links the original `mvdm.h` i386/else group and the third
+original `nt_bop.c` PROD guard to their existing current classifications.
+The pinned original hashes and complete outer arm signatures were checked;
+the `nt_bop.c` match also preserves the order of all twelve PROD groups.
+The `mvdm.h` else retains its separately queued MSVC-x86 inner adaptation.
+Details: `s13-ordered-adaptation-reconciliation.json`. No code or runtime
+behavior changed; existing compile evidence is inherited.
+
+### WOW32 original continuation-line corrections
+
+Matched nine original `wow32.c` first-depth guards to their current excluded
+counterparts using original function and condition context. Seven existing
+post-guard `#line` values were corrected to the pinned OpenNT continuations;
+the branch bodies and selected statements are unchanged. The x86 WOW32 DLL
+rebuilt and its first-depth guard suite passed. Queue `195r189` and
+`s13-wow32-continuation-lines.json` record the result under MVDM-HOST-DIV-609.
+This is not a full runtime regression or release.
+
+### Restore rtlinit original first-depth DBG guards
+
+Split the local lookaside selector around the four original first-depth DBG
+guards at lines 319, 326, 349 and 361, retaining their existing `#error`
+bodies and original continuation lines. Restored the already-excluded
+`dlgmgr.c` SYSMODALWINDOWS guard's line 1056 and 1066 anchors. Both actual
+x86 WOW32 configurations, the call-boundaries build and the x86 guard suite
+passed. Queue `195r190` and `s13-rtlinit-dlgmgr-original-outers.json` record
+the five matched original groups. No full runtime regression is claimed.
+
+### Original ntstubs DEBUG and nt_event PROD conditions
+
+Restored original `ntstubs.c` DEBUG conditions at lines 953 and 965 to first
+depth, replacing their previously retained unsupported debug statements with
+`#error`; added original 1493/1496 anchors for the already-excluded
+`nt_event.c` trace. The first selector split failed the WOW32 build because it
+did not preserve the file's `#elif` owner priority. The corrected split
+preserves all 16 selector combinations; x86 worker, WOW32, call-boundaries
+builds and the x86 guard suite passed. Queue `195r192` and
+`s13-ntstubs-debug-original-outers.json` record the result. Full runtime and
+release gates are not claimed.
+
+### Verify ntstubs selected preprocessing across product contexts
+
+Compared the pre-change and current `ntstubs.c` through all five actual WOW32
+Ninja compile contexts. Nonblank preprocessor output matched in every context;
+the temporary comparison source was removed. The recorded result is added to
+`s13-ntstubs-debug-original-outers.json`. This is additional evidence for the
+selector split, not a full runtime or release gate.
+
+### Restore dlgmgr2 original first-depth conditions
+
+Split the local dialog-keyboard selector around original first-depth FE_SB,
+FE_IME and LATER guards at lines 221, 240 and 281. Unsupported arms remain
+`#error`; the selected FE_SB alternative is preserved under the local owner,
+with original logical continuations. The x86 WOW32 DLL compiled and the x86
+guard suite passed; call-boundaries had no work. Queue `195r193` and
+`s13-dlgmgr2-outer-guards.json` record the three restored original groups.
+No full runtime or release gate is claimed.
+
+### Original chartran FE_SB guard locations
+
+Matched the two existing excluded FE_SB guards in the original
+`RtlMBMessageWParamCharToWCS` function at lines 446 and 457; restored the
+original selected/continuation line anchors 450, 497 and 499. Similar text
+in the distinct opposite-direction conversion function was not treated as a
+match. The x86 WOW32 DLL compiled and the guard suite passed. Queue `195r194`
+and `s13-chartran-fesb-lines.json` record the result; runtime was not tested.
+
+### CCPU SFELLOW and machine initialization original guards
+
+Matched the original `c_main.c` SFELLOW group at line 226 and restored its
+original line anchors 226, 229 and 231 without changing the DIV-214 atomic
+event-map adaptation. Matched `nt_msscs.c` original i386 boundary at line 123
+to its existing DIV-039 CPU40 adaptation; the i386 arm is explicitly not
+claimed equivalent to the original hardware path. The x86 worker rebuilt and
+the first-depth guard suite passed. Queue `195r195` and
+`s13-cmain-msscs-original-guards.json` record the result; no runtime or
+release gate is claimed.
+
+### Original DPMI stack-publication boundary
+
+Matched the original `dpmiint.c` i386 kernel-VDM stack-publication guard at
+line 387 to its existing excluded guard and corrected the original continuation
+line to 397. The separately selected DIV-226 CPU40 guest-memory publication
+remains unchanged. The x86 worker built and the first-depth guard suite passed;
+queue `195r196` and `s13-dpmi-stack-original-guard.json` record the result.
+No runtime or release gate is claimed.
+
+### Original DPMI handler guard reconciliation
+
+Matched the original DPMI handler and hook boundaries at lines 88, 1167 and
+1201 to their existing source structures and registered CPU40 adaptations.
+Corrected the original continuation after the first i386 boundary to line 107.
+The x86 worker built and the guard suite passed. Queue `195r197` and
+`s13-dpmi-handler-original-guards.json` document the scope; the original
+hardware kernel path was not reintroduced, and no runtime gate is claimed.
+
+### CCPU remaining SFELLOW first-depth anchors
+
+Matched the original `c_main.c` SFELLOW groups at lines 538, 4402 and 4492
+to their existing selected/excluded counterparts and corrected original line
+anchors. The selected CCPU code remains unchanged. The x86 worker built and
+the first-depth guard suite passed. Queue `195r198` and
+`s13-cmain-sfellow-original-guards.json` record the evidence; deeper locations
+in the changed file are marked stale for later relocation. No runtime or
+release gate is claimed.
+
+### Later original chartran guards
+
+Matched the `_USERK_` and FE_SB first-depth guards at original lines 515 and
+530 within `RtlMBMessageWParamCharToWCS`, retaining the selected alternatives
+and restoring original line anchors. The FE_SB alternative's nested DEBUG
+condition remains queued for the next depth. x86 WOW32 built and the guard
+suite passed. Queue `195r199` and `s13-chartran-later-guards.json` record the
+work; runtime and release gates remain outstanding.
+
+### Original chartran file-scope codepage guard
+
+Matched the original file-scope `_USERK_` guard at line 17 and corrected the
+original else/continuation line anchors to 20 and 22. The selected codepage
+source remains the registered OPENNT-HOST-119 host binding; equivalence to
+the original CLIENTINFO representation is not asserted. x86 WOW32 compiled
+and the focused structure check passed. Queue `195r200` and
+`s13-chartran-codepage-guard.json` record the evidence; no runtime or release
+gate is claimed.
+
+### Restore original VDM classifier first-depth conditions
+
+Split the local classifier selector around original `_X86_` and `_MIPS_`
+guards at lines 205 and 259. The selected OS/2 NE classification and the
+selected MIPS else body remain under the classifier owner; unsupported MIPS
+still rejects. Original continuation lines are restored. The x86 worker and
+x64 hook built, and the x86 first-depth guard suite passed. Queue `195r201`
+and `s13-vdm-classifier-outer-guards.json` record this work; this does not
+claim full runtime or release acceptance.
+
+### Verify VDM classifier selected preprocessing
+
+Compared the pre-change and current classifier using the actual x86 worker
+and x64 hook compiler commands. Nonblank preprocessing output matched in
+both contexts. The temporary comparison source was removed, and the result
+was added to `s13-vdm-classifier-outer-guards.json`. This is not a runtime
+test or a release gate.
+
+### Original drawtext prefix guard lines
+
+Restored original line 811/842 anchors around the already-excluded FE_SB
+guard in the retained `GetPrefixCount` body. x86 WOW32 compiled and the
+focused structure check passed. Queue `195r202` and
+`s13-drawtext-prefix-line.json` record the result; other original drawtext
+groups remain unreviewed, and no runtime or release gate is claimed.
+
+### Original host startup condition anchors
+
+Matched five original `base/support/main.c` first-depth conditions at lines
+54, 69, 140, 167 and 248 to their existing excluded guards and restored
+original condition/continuation anchors. The registered CPU40 startup
+declaration adaptation remains unchanged. The x86 worker built and a focused
+anchor check passed. Queue `195r203` and `s13-main-original-guards.json`
+record the result; this is not runtime or release acceptance.
+
+### Reconcile existing client ntstubs exclusions without hiding missing else
+
+Queue `195r204` links three original excluded arms at lines 380, 500 and 1611
+to their already-present `#error` guards after verifying the pinned original
+hash and current source positions. The original line-380 MEMPHIS_MENUS group
+also has an `#else` at line 439 that the current subset does not contain;
+that arm remains unreviewed and the group is explicitly marked partial. Prior
+evidence of the excluded arm is not proof that the whole original condition
+structure has been restored. See `s13-ntstubs-original-partial-guards.json`.
+No product source or build changed in this reconciliation.
+
+### Five original literal-zero subset guards
+
+Restored original first-depth literal-zero frames in `clres.c` at lines 1480,
+2298, 4516 and 4574, and in `input.c` at line 1409. Their enclosing original
+functions are outside the current selected subsets; only the always-excluded
+frames were restored. The x86 WOW32 DLL compiled and focused guard/line
+checks passed. An interrupted queue update was checked and completed in
+`195r205`; see `s13-literal-zero-subset-guards.json`. No runtime or release
+gate is claimed.
+
+### USER subset excluded-guard batch
+
+Restored 14 original first-depth exclusions across six USER source files:
+five literal-zero arms and nine `NEVER`/`LATER` arms. The original enclosing
+functions were not imported into the selected subsets. The x86 WOW32 and
+call-boundaries builds passed; after relocating one guard to preserve original
+source order, WOW32 rebuilt again. A focused check passed all 14 guard/line
+pairs. The current first-depth queue scan found no stale positions or
+substantive bodies in 2,296 classified excluded arms. Queue `195r207`,
+`s13-literal-zero-subset-guards.json` and `s13-never-later-batch.json` record
+the results. This batch has not undergone a complete release-image comparison
+or runtime gate. Original first-depth classification still has 402 unreviewed
+arms and four pending arms; current first-depth classification has four
+pending arms.
+
+### Nine-file FE_IME / FE_SB first-depth batch
+
+Restored 17 single-arm original FE_IME/FE_SB first-depth guards in nine USER
+source subsets after pinned-original hash and outer-frame checks. These are
+unsupported in the selected contexts; original enclosing functions remain
+outside the current subsets. x86 WOW32 and call-boundaries built and the
+17 focused guard/continuation checks passed. Queue `195r209` and
+`s13-fe-single-arm-batch.json` retain the individual file hashes and original
+locations. A current-queue lexical scan found no stale first-depth positions
+or possible substantive bodies among 2,313 classified excluded arms.
+
+After matching package identity, WOW32 differs from the previously Full-tested
+candidate in six timestamp bytes and two instruction-immediate bytes. The
+non-timestamp difference is an assertion diagnostic line changing from 848 to
+2922: 2922 is its pinned original `clres.c` line, restored by the `BitmapFromDIB`
+anchor under OPENNT-HOST-183. The assertion condition is unchanged, but its
+failure diagnostic is observably different; binary equivalence is not claimed.
+This does not constitute full runtime or release acceptance.
+
+### Ten-file DEBUG/DBG first-depth batch
+
+Restored 57 original single-arm first-depth DEBUG/DBG conditions across ten
+USER source subsets. A body-text overlap candidate was not modified and
+remains unreviewed. Fixed-original hashes, source hashes and per-guard
+continuations are in `s13-debug-single-arm-batch.json`; queue `195r211`
+records the results. The x86 WOW32 and call-boundaries builds passed and all
+57 focused guard/line checks passed. With the same package identity, WOW32
+matches the immediately preceding candidate except four timestamp bytes;
+`s13-debug-batch-image-comparison.json` records the comparison. A lexical
+queue check reports no stale first-depth positions or possible substantive
+bodies among 2,370 classified excluded arms. This does not prove the complete
+original-structure audit or a full runtime/release gate.
+
+Separately removed four stale original queue groups for already-deleted,
+unselected `srvinit.c`, after rechecking its earlier file-disposition evidence,
+fixed-original hash and the current product build graphs. See
+`s13-srvinit-original-queue-retirement.json`.
+
+### USER single-arm feature guard batch
+
+Restored 21 fixed-original first-depth FE_IME, FE_SB and MEMPHIS_MENUS
+single-arm guards across seven USER source subsets; their enclosing original
+functions remain outside the selected subsets. Reconciled one already-restored
+FE_SB header guard using its original line anchor and existing evidence.
+Pinned original/source hashes and per-guard continuations are recorded in
+`s13-feature-single-arm-batch.json`, queue `195r212`. x86 WOW32 and
+call-boundaries compiled, and 21 focused structure checks passed. With the
+same package identity, WOW32 differs from the prior candidate only in four
+timestamp bytes; see `s13-feature-batch-image-comparison.json`. A lexical
+queue check found no stale first-depth positions or possible substantive
+bodies among 2,391 classified excluded arms. No full runtime or release gate
+is claimed.
+
+### DEBUG/PROD first-depth follow-up
+
+Restored nine missing original single-arm DEBUG/DBG guards in four USER source
+subsets, and matched five already-present excluded DEBUG/DBG/PROD guards in
+five source files to their original contexts. Their original line anchors
+were corrected. x86 worker, WOW32 and call-boundaries builds passed; 14
+focused guard checks passed. Queue `195r213` and
+`s13-debug-followup-batch.json` record the work. A first-depth lexical scan
+reported no stale positions or possible substantive bodies among 2,400
+classified excluded arms.
+
+After matching package identity, WOW32 differs from the immediately prior
+candidate in four timestamp bytes. NTVDM differs from the earlier Full-tested
+candidate in four timestamp bytes and four instruction-immediate bytes:
+two error-path line arguments in `nt_event.c` changed from 1606/1616 to
+1517/1522. The latter matches the original resume path line 1522; the former
+is an added DIV-313 host-adaptation diagnostic. See
+`s13-debug-followup-ntvdm-final-compare.json`. The diagnostics are observable
+on failure; byte equivalence, full runtime and release acceptance are not
+claimed.
+
+
+### Follow-up batch: omitted single-arm feature guards
+
+The pinned-original preflight (`build/t473-s13/other-feature-plan.json`) identified eight missing outer single-arm guards across five USER source files. Their original bodies overlap no retained current source text, and the feature macros were not found enabled in the reviewed repository build inputs. Two additional candidates have source-text overlap and remain unclassified; absence of a hit alone is not proof of exclusion. The eight guards were restored with `#error` and original `#line` anchors, under OPENNT-HOST-188. The already-excluded `nt_cpu.c` A2CPU/I286 branches had their original line anchors corrected under MVDM-HOST-DIV-520.
+
+Cached MSVC x86 worker, WOW32 and call-boundaries builds passed. After applying the same package identity, NTVDM and WOW32 differ from the preceding candidate only at the four PE/link timestamp bytes for each image; no new runtime test or publication was performed. Queue r214 reconciles the eight restorations and matches the existing A2CPU exclusion; the preflight is preserved as s13-other-feature-batch-plan.json. The depth-one lexical check examined 2,408 excluded current arms and reported no substantive remnants or stale/arity errors. Original depth-one entries include 278 unreviewed arms and four pending arms; this is not depth closure.
+
+### ICA original line anchors and matching
+
+Queue r215 matches three previously unreviewed original depth-one ICA conditions to existing excluded branches. Corrected original #line anchors for those branches and one previously matched HOOKED_IRETS branch. The cached x86 NTVDM build passed; the identity-stamped executable differs from the preceding candidate only in four link timestamp bytes. Lexical audit of 2,408 excluded current arms reported no substantive remnants or stale/arity errors. See s13-ica-original-anchors.json. Original depth-one arms remain: 275 unreviewed, 4 pending. This is not depth or release closure.
+
+### Original-anchored first-depth pairing
+
+Queues r216–r217 pair eight existing current groups with their pinned original boundaries, including four retained alternatives with matching source text and the existing WOW host_simulate alternative. The profile evidence is recorded in s13-wkman-original-pairing.json and s13-line-anchor-pairing-216.json; no product source was changed by this pairing. Original arms remain 262 unreviewed and 4 pending; this does not close depth one.
+
+### Original probe guard and diagnostic mapping
+
+Queue r218 matches the existing OPENNT-HOST-144 ALLOC_PRAGMA exclusion to original probe.c line 27 and corrects original #line mapping for the retained ProbeForRead body at line 144. The cached MSVC x86 WOW32 build passed. The identity-stamped WOW32 image differs from the previous candidate only in four linker timestamp bytes. The current exclusion audit reports 2,408 examined with no substantive remnants or stale/arity errors. See s13-probe-anchor-pairing.json. Original depth-one arms remain 261 unreviewed and 4 pending; this is not depth closure.
+
+### DPMI fault selector and fullscreen cursor monitor
+
+Queues r219–r220 pair the original DpmiFaultHandler selector with its registered local CPU40 adaptation and the original cursor MONITOR guard with the current excluded branch. The latter receives corrected original #line anchors; the cached MSVC x86 NTVDM build passed, and the identity-stamped binary differs from the prior candidate only in four linker timestamp bytes. The queue audit reports 2,408 excluded current arms with no substantive remnants or stale/arity errors. See s13-dpmi-fault-original-pairing.json and s13-fulsc-cursor-monitor-original-pairing.json. Original depth-one arms remain 259 unreviewed and 4 pending. No release or closure is claimed.
+
+### Rejection test ledger and physical-line audit
+
+The rejected-condition test initially failed on stale source locations. Three guard positions were reconciled against their existing source; the original removed-body hashes and historical end positions remain intact (s13-rejected-ledger-r220-line-reconciliation.json). Re-run under MSVC x86 passed all 181 retained guard positive/negative checks and its additional listed profile controls.
+
+The failure investigation also found that Python splitlines counts form feed and vertical tab as line boundaries. In 25 current source files containing those characters, 256 depth-one queue coordinates do not identify the corresponding directive when interpreted as physical newline-based lines. Existing earlier lexical audits used the same splitlines coordinate convention; they do not prove physical line anchors are correct. The read-only inventory is s13-depth1-formfeed-physical-lines.json. Physical original #line anchors and affected queue coordinates require explicit reconciliation before depth closure. No classifications were changed from this observation.
+
+### Physical-line queue reconciliation
+
+Queue r221 converts 261 current depth-one group coordinates in 25 form-feed/vertical-tab files to physical newline coordinates and adjusts 51 child-parent references, without changing branch classifications. Each group and arm directive kind was checked at its converted physical position. The exclusion audit was rerun using newline-only splitting: 2,408 excluded current arms examined, no substantive remnants or stale/arity errors. The original queue coordinates were already physical and remain unchanged; deeper group coordinates themselves remain in the prior convention until their depth is admitted. Evidence: s13-depth1-physical-coordinate-reconciliation.json. A separate check of two immediately anchored original directives in original files with form feed/vertical tab found no candidate mismatch; this narrow check does not prove all original #line anchors. See s13-depth1-formfeed-direct-anchor-review.json. No product source, release or classification was changed by this reconciliation.
+
+### Original continuation anchors following subset deletions
+
+Corrected nine #line values across emm_mngr.c, vgaports.h and xactsrv/apimsg.c to pinned-original physical line positions of uniquely matched retained statements. No conditional body or classification was changed. Cached MSVC x86 worker build passed and the identity-stamped NTVDM image differs from the preceding candidate only in four timestamp bytes. Physical-coordinate audit still reports 2,408 excluded current arms, zero substantive remnants and zero stale/arity errors. See s13-formfeed-unique-anchor-corrections.json. This candidate-based pass does not establish all anchors are correct.
+
+### First-depth continuation anchors, batches 2–3
+
+Corrected 27 continuation #line anchors following already-classified first-depth exclusions across 20 current files, with pinned-original hashes and uniquely matched retained statements recorded in s13-depth1-unique-anchor-batch2.json and s13-depth1-unique-anchor-batch3.json. Both cached MSVC x86 NTVDM builds passed. After matching package identity batch 2 differs only at four timestamp bytes; batch 3 has two timestamp bytes plus one immediate byte in nt_graph.c: a local DisplayErrorTerm diagnostic line argument changes from 924 to 833 after its surrounding original continuation is remapped. This is observable on failure; identical binary/runtime is not claimed. See s13-depth1-anchor-batches2-3-build-evidence.json. New build artifacts have not been published or runtime-tested. The newline-based queue audit still reports 2,408 excluded current arms with no substantive remnants or stale/arity errors.
+
+### First-depth continuation anchors, batches 4–5
+
+Corrected 17 continuation #line anchors in 11 files following classified depth-one exclusions, matched against uniquely identified pinned original statements. See s13-depth1-unique-anchor-batch4.json and s13-depth1-unique-anchor-batch5.json. Cached x86 NTVDM, WOW32 and call-boundary builds passed; identity-stamped product comparisons for each batch show only PE timestamp bytes. Physical-coordinate queue audit reports 2,408 excluded arms with no substantive remnants or stale/arity errors. See s13-depth1-anchor-batches4-5-build-evidence.json. Earlier batch 3 changed a diagnostic line immediate; no release or runtime equivalence is claimed.
+
+### Diagnostic line verification and original DPMI boundary
+
+An MSVC x86 preprocessor probe of the exact nt_graph.c source slice confirms the changed local DisplayErrorTerm __LINE__ expands to 833 after the pinned original continuation at line 827. This is not a runtime failure test and the diagnostic is project-owned. Evidence: s13-nt-graph-diagnostic-line-check.json. Queue r222 matches the selected original DPMI real-mode SS-cache guard to the registered MVDM-HOST-DIV-230 CPU40 pseudo-descriptor adaptation, without claiming independent semantic equivalence (s13-dpmi-realmode-original-boundary.json). Original depth-one arms remain 258 unreviewed and 4 pending.
+
+### USER feature guard negative controls
+
+The eight restored USER feature guards now have a repeatable source-extraction test. MSVC x86 and x64 each passed normal selection, explicitly enabled rejection, and original #error diagnostic-line checks. Evidence: s13-user-feature-negative-controls.json. This is not a whole-product runtime test or a closure of the unreviewed original groups.
+
+### Original OLD_CFG_BASED boundary
+
+Restored the original depth-one OLD_CFG_BASED guard in base/win32/client/vdm.c with an unsupported-profile #error; its old RtlOpenConfigFile body is absent and the existing service-owned BaseGetVDMKeyword implementation remains unchanged. Queue r224 records the restored boundary. Cached x86 worker and x64 reference-graph x86 worker builds passed; the normal isolated preprocessor control passed and explicitly selecting the legacy profile yielded C1189 at original diagnostic line 1085. The identity-stamped x86 NTVDM comparison differs from the preceding candidate only in four PE timestamp bytes. The physical-coordinate queue audit checked 2,409 excluded arms with no substantive remnants or stale/arity errors. See s13-old-config-boundary.json. Original first-depth arms remain 256 unreviewed and four pending; no release or closure is claimed.
+
+### Original input SYSMODALWINDOWS boundary
+
+Queue r225 restores the first-depth SYSMODALWINDOWS guard around two original unsupported system-modal stubs in ntuser/kernel/input.c. The previous overlap flag was caused by generic shared statements, not either stub being retained. Cached MSVC x86 WOW32 and call-boundaries builds passed; normal preprocessor control passed and the unsupported macro was rejected at original diagnostic line 1155. Identity-stamped WOW32 differs from the previous candidate only at four PE timestamp bytes. The newline-based queue audit examined 2,410 excluded arms with no substantive remnants or stale/arity errors. See s13-input-sysmodal-boundary.json. Original depth-one arms remain 255 unreviewed, four pending; no release or closure is claimed.
+
+### Original USER compound debug conditions
+
+Queue r226 restores two first-depth compound debug guards in the USER handle table and WOW RTL subset, whose original debug-only bodies are absent. Cached MSVC x86 WOW32 and call-boundaries builds passed; seven controls verified OR and AND operands, rejection diagnostics and normal selection. Identity-stamped WOW32 differs from the preceding candidate only in PE timestamp bytes. The newline-based queue audit checked 2,412 excluded arms with no substantive remnants or stale/arity errors. Evidence: s13-user-debug-compound-guards.json, s13-user-debug-compound-controls.json and s13-user-debug-compound-build.json. Original first-depth arms remain 253 unreviewed and four pending; no release or closure is claimed.
+
+### Original class DBG definedness
+
+Restored the original class.c #ifdef DBG around an omitted class-brush diagnostic, using an unsupported-profile #error. Actual preprocessing of all three current WOW32 class object contexts observed DBG undefined. MSVC x86 negative controls confirmed both DBG=0 and DBG=1 reject at original line 1071, while undefined succeeds. Cached WOW32 build passed; identity-stamped output differs from the previous candidate only at four PE timestamp bytes. Queue r227 and s13-class-dbg-boundary.json record the disposition. The physical-coordinate audit examined 2,413 excluded arms with no substantive remnants or stale/arity errors. Original depth-one arms remain 252 unreviewed, four pending; no release or closure is claimed.
+
+### NTUSER kernel stubs architecture context
+
+Actual preprocessing of the selected WOW32 kernel/ntstubs.c control-fnid object shows _X86_ defined (s13-ntstubs-x86-actual-context.json). This establishes that a blanket #error for the x86 arm of the 52 original two-arm _X86_ groups would break the supported profile. Their enclosing original receive-stub functions were largely cropped from the current subset; this single context observation does not establish how to restore each selected body or determine all include contexts. No source or branch classification changed.
+
+### Original recent-key-state compile-time invariant
+
+Queue r228 restores the original input.c (CBKEYSTATERECENTDOWN % 4) assertion at original lines 1764–1765, preserving its original #error rather than inventing a replacement implementation. The original recent-key-state function is absent from the current subset; in this subset an undefined macro preprocesses as zero, while the full original defines it from CVKKEYSTATE. The x86 MSVC controls passed for undefined and 32, and rejected 31 at line 1765; cached WOW32 and call-boundaries builds passed. Identity-stamped WOW32 differs from the previous candidate only at PE timestamp bytes. Evidence: s13-input-key-state-assertion.json and controls. Original depth-one arms remain 251 unreviewed and four pending; no release or closure is claimed.
+
+### Original COM adaptor guard anchors
+
+Corrected first-depth COM3_ADAPTOR and COM4_ADAPTOR guard line anchors to pinned-original lines 2590 and 2593, without changing the excluded branch bodies. Cached MSVC x86 NTVDM passed; three isolated controls verified the selected profile and each negative diagnostic line. Identity-stamped NTVDM differs from the previous candidate only in PE timestamp bytes. Queue r229 and s13-com-adaptor-guard-anchors.json record the correction; the physical-coordinate audit examined 2,413 excluded arms without substantive remnants or stale/arity errors. No release or closure is claimed.
+
+### CPU guard test after line-anchor corrections
+
+The x86 guard suite initially failed because its historical line expectations predated the corrected original #line values. The test now obtains applicable updated lines from the pinned-anchor batch records and the original ICA end boundary, without rewriting historical evidence. The complete suite passed under both MSVC x86 and x64; result and log hashes: s13-cpu-guards-post-anchor-results.json. This is a preprocessor/line suite, not a full runtime or release gate.
+
+### Rejected-condition regression after latest line fixes
+
+The full rejected-condition preprocessor suite passed under MSVC x86 after the first-depth line-anchor and COM guard fixes: 181 retained guard normal/negative cases plus the suite's other 41 PASS lines. Evidence: s13-rejected-conditions-r229-result.json. This is not a runtime or release gate.
+
+The same rejected-condition suite subsequently passed on MSVC x64, including all 181 retained guard normal/negative cases; the result and log hash are in s13-rejected-conditions-r229-result.json.
+
+### MVDM-host whole-C-file literal reference preflight
+
+A fresh literal-name cross-reference scan of the 468 current mvdm-host C files found no source whose basename lacked an occurrence outside itself across src, tools, tests, CMake inputs and existing Ninja graphs. This is only a preliminary filter: a basename can be mentioned in comments or an obsolete graph, and a zero result does not prove every file is selected. No source, asset or queue entry was removed. See s13-mvdm-host-literal-reference-preflight.json.
+
+### Repeatable controls for recent USER and Base guards
+
+The restored OLD_CFG_BASED, SYSMODALWINDOWS, DBG definedness, two compound debug and original key-state assertion guards now have a single repeatable source-extraction test. MSVC x86 and x64 each passed all six guards and 17 positive/negative profile controls, including original diagnostic lines. Evidence: s13-additional-guard-controls.json. This does not replace product runtime tests or resolve the remaining first-depth inventory.
+
+### Original Unicode keyboard-layout conditional
+
+Queue r230 restores the single-arm original ntcftxt.h UNICODE guard for a keyboard-layout body absent from the current ANSI subset. The existing header-wide UNICODE rejection remains authoritative and would trigger before this additional guard in full-header preprocessing. Cached x86 WOW32 and call-boundaries builds passed; seven original guards and 19 isolated profile controls passed on both MSVC x86 and x64, and identity-stamped WOW32 differs from the preceding candidate only in PE timestamp bytes. The newline-based queue audit checked 2,414 excluded arms without substantive remnants or stale/arity errors. See s13-ntcftxt-keyboard-unicode-guard.json and s13-additional-guard-controls.json. Original depth-one arms remain 250 unreviewed and four pending; no release or closure is claimed.
+
+### Depth-one status and child-parent metadata
+
+Recorded first-depth counts and restoration categories in s13-depth1-bfs-status-r231.json. The current queue has 3,535 first-depth groups; the pinned-original inventory has 3,493, with 158 groups recorded as restored, 250 original arms unreviewed and four pending. A child record still pointed to a first-depth parent position predating source shifts; prior queue r153 and unchanged parent selector establish the metadata correction from 687 to 714 (s13-depth1-parent-reference-repair.json). All depth-two parent references now resolve, but child source positions and reachability have not been reviewed; group-level parent counts are not a validated next-depth queue. No source or classification changed, and no release or closure is claimed.
+
+### Cached complete-product build checkpoint
+
+The x86 and x64 outer cached CMake builds completed; because their outer no-work result is insufficient, the inner x86 NTVDM, VDMREDIR, WOW32 and hook targets and the x64 launcher, server, frontend, monitor, native worker and hook targets were also explicitly built. All commands passed. Ten raw output hashes and log hashes are recorded in s13-ten-image-cached-build-check.json. Raw outputs have not been stamped with a common package identity or compared as a release; no runtime test, coherent staging, publication or phase closure is asserted.
+
+### Ten-image comparison against full-tested candidate
+
+Copied the ten freshly built outputs to scratch, applied the same package identity as the retained niddb-rollback-final full-tested package, and compared every byte. Eight images differ only in verified PE/IMAGE_DEBUG_DIRECTORY timestamps (one of these is byte-identical). NTVDM additionally changes three diagnostic line immediates: nt_event 1606→1517 and 1616→1522, and nt_graph 924→833. WOW32 additionally changes the clres.c UserAssert line immediate 848→2922, matching the original clres.c physical line. These non-timestamp differences are observable in failure diagnostics; source and offset evidence is in s13-ten-image-vs-full-tested-candidate.json. The separately published assets/release NTVDM is a different, smaller 2,101,760-byte image than the full-tested reference (2,103,808 bytes); raw shifted offsets against it cannot be treated as independent changed semantics. No runtime tests, staging or publication are claimed for this current candidate.
+
+### Coherent candidate Full verification checkpoint
+
+The current ten freshly built images were staged into a fresh isolated package with the historical working identity. The first Full attempt stopped at guest-media: the older source package lacked four guest resources now required by the current immutable-media manifest. The four were copied byte-for-byte from assets/winnt.zip into the scratch package, with individual SHA-256 verification; the second fresh Full run passed all 17 gates and checked 63 immutable guest files. The ten staged product images were rechecked against their package manifest. WOW frontier output is explicitly launch/window observation, not playable-game acceptance; Win3.1 four-mode and separate gameplay gates are not asserted by Full. No original guest image was modified; no candidate was published or committed. Evidence: s13-checkpoint231-full-validation.json. First-depth audit remains incomplete.
+
+### Win3.1 mode matrix and WOW gameplay checkpoint
+
+The staged checkpoint candidate passed isolated Win3.1 Standard/386 × DOSONLY 0/1: each reached Program Manager in the expected mode and exited normally. Six original guest binaries in the source installation and isolated copy matched their before hashes after the run. The isolated WINMINE flag/counter, reset, cell open and close probe passed; the SOL stock draw, Deal, stock draw and close probe passed. Their observed product input hashes matched the staged package manifest. See s13-checkpoint231-win31-validation.json and s13-checkpoint231-gameplay-validation.json. These checks supplement, but do not replace, the 17 Full gates. No production publication or first-depth closure is claimed.
+
+### PIC and keyboard regression checkpoint
+
+Rebuilt the selected production-linked controller/PIC fixtures. Keyboard/PIC passed 86 assertions and PIC reset passed 24 assertions, including the actual RTC and mouse cancellation callbacks, under controlled fixture seams. After fixture compilation, the selected NTVDM/VDMREDIR link targets were explicitly rebuilt and all ten staged product input hashes were rechecked against the current linked images. Evidence: s13-checkpoint231-pic-keyboard-validation.json. A separate real-guest PIC reset run was not performed at this checkpoint; no publication or first-depth closure is claimed.
+
+### Exact-original formatting batch 1
+
+A pinned-original scan found 430 existing host/non-MVDM mirrors whose contents match after CRLF-to-LF normalization but not bytewise. Restored exact original bytes for the first 12 actual-graph-selected host C files after verifying their current hashes, pinned original hashes and normalized equality. Cached MSVC x86 NTVDM/VDMREDIR and the x64 graph reference x86 worker builds passed; with the same package identity NTVDM differed from the Full-tested checkpoint only at PE timestamp bytes and VDMREDIR was byte-identical. No runtime rerun was made for format-only inputs with no non-timestamp product changes. Evidence: s13-normalized-identical-batch1.json and s13-normalized-identical-batch1-build.json. Remaining candidates require the same checks; this does not complete the first-depth branch audit or publish a package.
+
+### Exact-original formatting batches 2–3
+
+Restored pinned-original bytes for another 30 graph-selected host C files in two 15-file batches, after source/original hash and CRLF-normalized equality preflight. Each batch passed cached MSVC x86 NTVDM/VDMREDIR and x64 graph reference x86 worker builds. After identical package-identity stamping, each NTVDM differs from the Full-tested checkpoint only at PE timestamp bytes and each VDMREDIR is byte-identical; no runtime rerun was needed for format-only edits without non-timestamp product changes. Evidence: s13-normalized-identical-batch2.json, s13-normalized-identical-batch3.json and their build records. In total 42 of the 430 initial format candidates have been restored; this does not classify or inspect their nested branches, finish the first-depth audit, or constitute a publication.
+
+### Original ntstubs x86 outer alternatives
+
+Queue r232 restores 52 original first-depth #if defined(_X86_)/#else shapes from the omitted USER receive-stub region. The non-x86 alternative is rejected with an #error mapped to its original else body; the x86 arm is currently an empty scaffold because its enclosing original function was already absent from the selected subset. All 52 original selected x86 arms remain unreviewed: this is not recovery of those functions or proof of their semantics. Actual selected WOW32 control-fnid preprocessing had _X86_ defined. The x86 WOW32 and call-boundary builds passed; both x86 and x64 MSVC isolated controls passed all 52 selected/rejected configurations and original else diagnostic lines. With the same package identity, WOW32 differs from the Full-tested checkpoint only in PE timestamps. The newline-based audit checked 2,466 excluded current arms without substantive remnants or stale/arity errors. Original depth-one arms remain 198 unreviewed, four pending; no release, next-depth audit, or closure is claimed. Evidence: s13-ntstubs-x86-outer-scaffolds.json.
+
+### Correction: EOF-only original-condition scaffolds
+
+The 52 ntstubs EOF-only scaffolds did not restore original functions or their actual structural positions. They have been removed exactly, verified by the source hash before their insertion; the matching isolated scaffold test and README claim were also removed. Queue r233 restores the r231 classifications: 250 original first-depth arms unreviewed and four pending. Historical r232 evidence is retained but superseded by s13-ntstubs-eof-scaffolds-correction.json. No claim of restored selected bodies, compilation, publication, or phase closure is made by this correction.
+
+The real x86 WOW32 and call-boundaries Ninja sub-builds passed after the correction. An initial attempt named call-boundaries as an outer CMake target; it failed before building because that target exists as a separate sub-build, and was corrected. Build logs and product hashes are recorded in s13-ntstubs-eof-scaffolds-correction.json. No product release or runtime-test claim is made.
+
+### Original WOW client context check
+
+Compared the selected `_GetDlgItem` function in `ntuser/client/wow.c` with the pinned original: the normalized function text matches and the original depth-one WOW group ends before this function. The current WOW32 graph compiles this subset using `control-body-wow.obj`. The command line itself does not explicitly define WOW, but included headers were not exhaustively evaluated, so neither arm of the omitted group was classified and no artificial guard was added. See s13-wow-client-original-context-review.json.
+
+First-depth original inventory r233 is now grouped by original file in s13-depth1-unreviewed-file-priority-r233.json: 250 unreviewed arms in 22 files, including 114 in kernel/ntstubs.c, 35 in inc/ntcftxt.h and 20 in client/wow.c. These are arm counts, not independent files or proof of exclusion; no group was reclassified by this inventory.
+
+The corrected r233 current-source queue was rechecked for excluded-arm remnants: 2,414 first-depth excluded arms were inspected; the scanner found zero substantive remnants and zero stale-position or arity errors. This is a structural check against the queue only, not proof of branch unreachability or original-source completeness. Result: s13-depth1-current-queue-audit-233.json.
+
+Restored original diagnostic entry lines for three retained ntcftxt.h functions (GetClassInfo 111, StringDuplicate 578, UnregisterClass 1051), after comparing their function text with the pinned original. Cached x86 WOW32 and call-boundaries sub-builds passed; same-identity WOW32 differs from checkpoint 231 only in PE timestamps. Queue r234 updates six affected current-group positions; 2,414 excluded arms pass the current-source structural scan. No original arm was newly classified. See s13-ntcftxt-original-function-lines.json and s13-depth1-current-queue-audit-234.json.
+
+Queue r235 moves two original first-depth whole-header guards (_USERCLI_ and _USER_) from unreviewed to pending reconciliation. Existing focused preprocessing evidence shows a naive original single guard suppresses selected declarations in the current multi-cohort inclusion design; this is not a completed restoration or an approval to waive the original structure. Original arms now number 248 unreviewed and six pending. See s13-two-header-guards-pending.json.
+
+Queue r235 excluded-arm audit: all 2,414 classified current first-depth excluded arms contain a literal #error; no nonblank body lines other than #error/#line were found, and no stale positions or arity mismatches were observed. This validates current excluded-body form only, not macro reachability or omitted original structures. See s13-depth1-excluded-comment-audit-r235.json and s13-depth1-missing-error-audit-r235.json.
+
+Queue r236 records 52 original ntstubs non-x86 alternatives as pending rather than unreviewed: the current production control-fnid context observes _X86_ defined and the original file has no local definition or undefinition, but the enclosing original functions are absent. This is not an exclusion proof across every supported context, a restored structure, or completed work. The corresponding 52 x86 arms remain unreviewed. Original counts: 196 unreviewed, 58 pending. See s13-ntstubs-x86-alternatives-pending.json.
+
+Depth-boundary clarification: current source has 12 physical first-depth groups in usercli.h and nine in user.h, but each original header starts with a whole-header first-depth guard. Physical current nesting alone cannot establish original BFS depth until those missing guards and the multi-cohort adaptation are reconciled. Do not treat those 21 groups as independently proven original first-depth work or remove existing code on this basis. See s13-original-vs-current-depth-header-boundary.json.
+
+### Exact-original formatting batch 4
+
+Restored original bytes for 15 selected host C files after exact original hash and normalized-text equality preflight. Both x86 worker and x64 graph reference x86 worker cached builds passed. With common package identity, NTVDM differs from the Full-tested checkpoint only in PE timestamps and VDMREDIR is byte-identical. No runtime rerun was made for this format-only batch. Queue r237 updates source hashes without reclassifying branch arms. See s13-normalized-identical-batch4.json and s13-normalized-identical-batch4-build.json.
+
+Queue r238 restores the original ntuser/client/handles.c first-depth TESTING/else boundary in original order. The rejected branch contains #error and original line mapping; the original selected no-op CheckHandleTable macro is retained before unchanged GetFullUserHandle. The sole current inclusion does not use that macro. Actual WOW32 preprocessing succeeds normally and fails on forced TESTING at original line 39; x86 WOW32 and call-boundaries builds pass. Same-identity WOW32 differs from checkpoint 231 only in PE timestamps. No runtime rerun or first-depth closure is claimed. Evidence: s13-handles-testing-original-guard.json; mirror registration OPENNT-HOST-189.
+
+Queue r239 restores the original ntuser/kernel/ntstubs.c DBG/else condition and retail StubExceptionHandler macro. Actual selected x86 control-FNID preprocessing and x86 WOW32/call-boundaries builds pass; forced DBG in the full translation unit is rejected first by the earlier usercli DBG boundary, while the extracted new guard rejects at original line 150. Same-identity WOW32 differs from checkpoint 231 only in timestamp bytes. Queue structural audit checks 2,416 excluded arms without substantive remnants or stale positions; reusable x86 excluded-profile suite passes 183 guards. OPENNT-HOST-190 and s13-ntstubs-dbg-original-guard.json record the change. No runtime rerun or depth closure claimed.
+
+Queue r240 restores the original ntuser/kernel/queue.c DEBUG/else boundaries for DDE tracing and queue validation, with original retail no-op macros. Selected x86 WOW32 and call-boundaries builds pass; isolated forced DEBUG rejects at original lines 31 and 55; same-identity WOW32 differs from checkpoint 231 only in PE timestamps. Reusable x86 rejection suite passes 185 guards, and current queue check finds no remnants or stale positions among 2,418 excluded arms. OPENNT-HOST-191 and s13-queue-debug-original-guards.json record this candidate. Runtime was not rerun; depth and delivery remain incomplete.
+
+Queue r241 restores two first-depth input.c MARKPATH/else groups in original sequence and retains their original retail no-op macros. Selected x86 WOW32/call-boundaries builds pass; isolated forced MARKPATH rejects at original lines 239 and 3311. Same-identity WOW32 differs from checkpoint 231 only in timestamp bytes. The x86 rejected-profile suite passes 187 guards and the queue scan finds no remnants or stale positions among 2,420 excluded arms. OPENNT-HOST-192 and s13-input-markpath-original-guards.json record the change. No runtime rerun or depth closure is claimed.
+
+Queue r242 restores the original rtl/chartran.c FE_SB/else group and selected NWCH 2 macro. Selected x86 WOW32/call-boundaries builds pass; forced FE_SB rejects at original line 352. Same-identity WOW32 differs from checkpoint 231 only in PE timestamps. The reusable x86 suite passes 188 guards; current queue scan finds no remnants or stale positions among 2,421 excluded arms. OPENNT-HOST-193 and s13-chartran-fe-sb-original-guard.json record the candidate. No runtime rerun or depth closure claimed.
+
+Queue r243 restores original ntstubs.c x86 class-registration alignment condition, selected DATAALIGN/CHARALIGN macros and their original undef lifetime. The enclosing original function remains outside the selected subset. X86 WOW32/call-boundaries builds pass; isolated normal/lifetime and forced non-x86 controls pass on x86 and x64, with non-x86 rejection at original line 7265. Same-identity WOW32 differs from checkpoint 231 only in PE timestamps; queue scan finds no remnants or stale positions among 2,422 excluded arms. OPENNT-HOST-194 and s13-ntstubs-class-alignment-original-guard.json record the change. No runtime rerun or depth closure claimed.
+
+Exact-original formatting batch 5 restores 15 selected host C files after hash and normalized-text equality preflight. Both x86 worker and x64-graph x86 reference worker cached builds pass. Under common package identity, NTVDM differs from Full-tested checkpoint 231 only by PE timestamps and VDMREDIR is byte-identical; no runtime rerun was made for this format-only batch. Queue r244 updates hashes without reclassifying branches. See s13-normalized-identical-batch5.json and s13-normalized-identical-batch5-build.json.
+
+Queue r245 reconciles 23 stale file hashes after reversing the recorded #line-only changes and reproducing each exact prior queue hash; current source hashes and recorded before/after evidence were checked. The previous hashes and evidence reference remain in the queue. No branch disposition or source code changed; 20 hash discrepancies from the r244 audit remain to be investigated. See s13-r244-line-only-hash-chains.json.
+
+Queue r246 reconciles nine additional stale source hashes by comparing exact-SHA-256 old scratch snapshots with current bytes; all changed lines are #line directives or blank lines. Previous hashes and the evidence reference remain in the queue. This is not proof of branch semantics or a claim that diagnostic differences are invisible. Eleven r244 hash discrepancies remain. See s13-r245-snapshot-line-only-verified.json.
+
+Queue r247 reconciles getset.c using an exact old snapshot: the sole byte change is insertion of four previously registered original DEBUG rejection guards and line directives; removing that exact block reproduces the prior hash. No selected body changed in that byte comparison. Ten initial stale-hash cases remain. The non-line mouse_io delta is the separately documented unpublished S13 DIV-467/468 candidate; source presence and approval limits are recorded in s13-mouse-candidate-hash-attribution.json.
+
+Queue r248 updates the mouse_io working hash after byte-exact attribution: the only change relative to its old queue snapshot is two registered DIV-467 virtual_swap_instance insertions. Previous hash and candidate status remain explicit; NIDDB multi-VM semantics remain unverified. No branch disposition changed. See s13-mouse-exact-candidate-delta.json. Nine initial r244 stale-hash cases remain.
+
+Queue r249 reconciles clmsg.c hash against its exact old snapshot. Four actual WOW32 and call-boundary preprocessing contexts produce identical nonblank selected output; the added DEBUG rejection boundaries remain separately registered. This is context-specific evidence, not a complete behavior proof. See s13-clmsg-snapshot-preprocess-equivalence.json. Eight initial r244 hash discrepancies remain.
+
+Queue r250 records three original first-depth groups (six arms) pending original-position reconciliation: probe.c:106 and clres.c:2624,3751 occur in original code absent from the current subset. Two #if 0 exclusions are certain, but placing guard scaffolds outside their omitted functions would misrepresent the original structure. Hashes, marker checks and limits are recorded in s13-omitted-function-depth1-r250.json. No source or branch-selection semantics changed; compilation was not repeated.
+
+Queue r251 reconciles handtabl.c by an unbroken recorded SHA-256 chain through three documented guard batches. Evidence and its limitations are in s13-handtabl-hash-chain-r251.json; seven original r244 hash discrepancies remain. No source, branch disposition or product image changed.
+
+OPENNT-HOST-159 description corrected: the client ntstubs.c MEMPHIS_MENUS shell omits original #else at line 439 and its original alternative function, so it is not complete. The original else remains unreviewed in r251. See s13-memphis-else-incomplete.json. No runtime source or branch status changed.
+
+Queue r252/r253 reconciles five stale source hashes using exact historical Git blobs and current SHA-256: dpmiselr.c, c_main.c, com.c and illegalp.c differ only by #line or blank lines; nt_fulsc.c retains an identical ordered sequence of all nonblank, non-#line lines. These checks do not prove equal diagnostic numbers or branch reachability. The client ntstubs.c has non-line changes and remains unreconciled; server.c was not found in the bounded HEAD history search. Two r244 discrepancies remain. Evidence: s13-r251-git-snapshot-search.json, s13-r251-git-snapshot-diffs.json, s13-r252-four-git-snapshot-reconciliation.json and s13-r253-fulsc-git-snapshot-reconciliation.json. No product source changed.
+
+Queue r254 reconciles client ntstubs.c against its exact historical Git blob in nine actual x86 WOW32 and call-boundary contexts: their nonblank normalized MSVC /EP outputs match. Scratch preprocessing uses identical file paths and current copied ntsend.h. This does not cover unlisted configurations, diagnostics, linking or runtime. The missing MEMPHIS #else remains unreviewed. Evidence: s13-ntstubs-git-preprocess-r253.json. One original r244 working-hash discrepancy remains: server.c.
+
+Queue r255 reconciles server.c using a reconstructed prior snapshot with the exact old SHA-256 (Git 2499f51a5 plus the recorded FE_IME hoist), and an actual WOW32 default-messages MSVC /EP comparison with equal nonblank output. Difference hunks and limitations are documented in s13-server-r254-reconstructed-diff.json and s13-server-preprocess-r254.json. All original 43 r244 hash discrepancies are now attributed; this does not complete original branch auditing or rule out subsequent source changes.
+
+Queue r256 restores the original client ntstubs.c MEMPHIS_MENUS #else and #line boundary. The original alternative function remains absent; the arm is pending, not claimed recovered. Nine actual selected x86 preprocessing contexts match before/after, cached WOW32 and call-boundary builds pass, and the x86 188-guard rejection suite passes. See s13-ntstubs-memphis-else-restored.json and s13-ntstubs-memphis-else-preprocess-r255.json.
+
+The r256 MEMPHIS boundary additionally passed x64 188-guard rejection checks and isolated x86/x64 selected/rejected controls, including original diagnostic line 381. All 22 current client ntstubs queue-arm directive positions match. The first exploratory position checker used a prefix regex that misread ifdef as if; the corrected token-order check passed. See s13-ntstubs-memphis-else-controls-r256.json. The selected original function remains absent.
+
+The r256 first-depth current-source structural rescan inspected 2,422 arms already classified as excluded and found no substantive residual lines and no stale positions or arm-count mismatches. This scans queue-recorded current groups only, not omitted original structures, and it does not prove reachability. See s13-depth1-current-queue-audit-256.json.
+
+Queue r257 restores 15 additional selected host C files to pinned-original bytes after SHA and normalized-content preflight. Cached x86 worker and x64-graph x86 reference worker builds passed. The same-identity NTVDM differs from batch5 only at the previously verified PE and debug timestamp bytes; VDMREDIR is byte-identical. The initial build invocation used an incorrect target case and stopped before compilation; the corrected invocation passed. No runtime rerun, branch classification or release is claimed. See s13-normalized-identical-batch6.json and s13-normalized-identical-batch6-build.json.
+
+For unresolved original first-depth groups, an exact-statement candidate search directly within their top-level arms found no matches in mapped current source. This is only a discovery filter: edited or multiline statements and omitted-function mapping require further investigation; it does not establish exclusion or absence. The r257 current-source structural recheck again found zero residual bodies and zero position/arity mismatches in 2,422 recorded excluded arms. See s13-r257-first-depth-retained-statement-candidates.json and s13-depth1-current-queue-audit-257.json.
+
+Queue r258 restores two clres.c original first-depth literal-false conditional boundaries at 2624 and 3751 with #error and #line. The enclosing selected alternative functions remain absent, and both selected arms stay pending. Two immediate-before WOW32 preprocessing contexts match; historical comparison is identical for dialog-template and changes two diagnostic assertion line numbers for clres, not claimed byte-identical. Isolated x86/x64 forced-rejection diagnostics and cached x86 WOW32 build pass. See s13-clres-r257-original-zero-guards.json.
+
+Queue r259 restores four clmsg.c first-depth FE_SB boundaries with #error and original line anchors. Selected alternatives remain pending because their original functions are outside the subset. Four actual selected x86 preprocessing contexts match, eight x86/x64 forced diagnostic controls pass, and cached WOW32/call-boundary builds pass. See s13-clmsg-r258-original-fe-guards.json.
+
+Queue r260 restores four client ntstubs.c first-depth FE_IME/FE_SB boundaries with #error and original line anchors. Selected alternatives remain pending because their original functions are outside the subset. Nine actual selected x86 preprocessing contexts match, eight x86/x64 forced diagnostic controls pass, and cached WOW32/call-boundary builds pass. See s13-client-ntstubs-r259-original-guards.json.
+
+Queue r261 restores three kernel queue.c first-depth FE_IME boundaries with #error and original line anchors. Selected alternatives remain pending because their original functions are outside the subset. The actual selected x86 preprocessing context matches, six x86/x64 forced diagnostic controls pass, and cached WOW32 build passes. See s13-queue-r260-original-guards.json.
+
+Queue r262 restores first-depth FE_IME/FE_SB boundaries in input.c:4750, server.c:990 and chartran.c:393 with #error and original line anchors. Selected alternatives remain pending because original functions are outside the subset. Four actual x86 preprocessing contexts match, six x86/x64 forced diagnostic controls pass, and cached WOW32/string-conversion builds pass. See s13-r261-batch-guards.json.
+
+Queue r263 restores first-depth FE_SB boundaries in class.c:375 and drawtext.c:719,875,1224 with #error and original line anchors. Selected alternatives remain pending because original functions are outside the subset. Seven actual x86 preprocessing contexts match both immediate and Git historical baselines, eight x86/x64 forced diagnostic controls pass, and cached WOW32/drawing builds pass. See s13-r262-batch-guards.json.
+
+Queue r264 restores ten ntcftxt.h first-depth ANSI/Unicode boundaries with #error and original line anchors. Selected ANSI alternatives remain pending because their original functions are outside the subset. The actual x86 class-client preprocessing context matches; twenty x86/x64 isolated Unicode-rejection controls and cached WOW32 build pass. See s13-ntcftxt-r263-guards.json.
+
+Queue r265 restores four kernel ntstubs.c first-depth MEMPHIS_MENUS boundaries with #error and original line anchors. Selected alternatives remain pending because their original functions are outside the subset. The actual x86 control-fnid preprocessing context matches; eight x86/x64 forced diagnostic controls and cached WOW32 build pass. See s13-kernel-ntstubs-r264-original-guards.json.
+
+Queue r266 restores seven original first-depth condition boundaries in exitwin.c, handtabl.c, draw.c, chartran.c and drawtext.c with #error and original line anchors. Selected alternatives remain pending because original content is outside the subset. Ten actual x86 preprocessing contexts match, fourteen x86/x64 forced diagnostic controls pass, and cached WOW32/call-boundary builds pass. See s13-r265-batch-guards.json.
+
+Queue r267 restores ten first-depth WOW conditions in client and rtl wow.c host subsets. Selected alternatives remain pending because original content is outside the subset. Five actual x86 preprocessing contexts match both immediate and Git historical baselines, twenty x86/x64 forced diagnostic controls pass, and cached WOW32/call-boundary builds pass. No guest source or image changed. See s13-r266-wow-batch.json.
+
+Queue r268 restores two original single-arm client wow.c first-depth WOW boundaries with #error and original line anchors. Two actual x86 preprocessing contexts match, four x86/x64 forced diagnostic controls pass, and cached WOW32/call-boundary builds pass. No guest source or image changed. See s13-clientwow-r267-original-single-guards.json.
+
+Queue r269 restores client.c first-depth DEBUG condition at 2288 with #error and original line anchors. The selected alternative remains pending because its original function is outside the subset. Seven actual x86 preprocessing contexts match both immediate and Git historical baselines, two x86/x64 forced diagnostic controls pass, and cached WOW32/call-boundary builds pass. See s13-client-r268-original-debug-guard.json.
+
+After the r258-r269 USER branch batches, the rebuilt same-identity WOW32 differs from checkpoint231 only at the previously identified PE/debug timestamp offsets 280,281,625412,625413; see s13-r269-wow32-checkpoint-compare.json. This does not establish current hashes or acceptance of the other nine components and is not a release.
+
+The remaining 51 original kernel ntstubs.c first-depth x86 alternatives were inventoried by original line. A fresh marker in the actual control-fnid preprocessor context confirms _X86_ is defined; the pinned original and current source contain no local #define/#undef of it. The selected original functions remain absent, and this observation does not prove original include contexts or restore their conditional positions. Their status remains pending. See s13-kernel-ntstubs-r269-x86-boundary.json and s13-kernel-ntstubs-r269-x86-context.json.
+
+Queue r270 restores probe.c first-depth Alpha condition at 106 with #error and original line anchors. The selected alternative remains pending because ProbeForWrite is outside the subset. One actual x86 preprocessing context matches, two x86/x64 forced diagnostic controls pass, and cached WOW32 build passes. See s13-probe-r269-original-alpha-guard.json.
+
+Queue r271 restores 51 kernel ntstubs.c first-depth x86/non-x86 boundaries in four ranges ordered around retained source anchors, rejecting non-x86 with #error. The original functions remain omitted; the x86 arms and exact function-scope placement remain pending. Actual x86 control-fnid preprocessing matches, 102 x86/x64 forced diagnostics and two selected controls pass, and cached WOW32 build passes. See s13-kernel-ntstubs-r270-x86-guards.json.
+
+Cached full x86 and x64 preset builds passed at r271. The ten same-identity staged components compared with checkpoint231: eight byte-identical and NTVDM/WOW32 different only in previously verified PE/debug timestamp fields. Previous 17-gate Full, Win3.1 matrix and gameplay evidence applies to the same executable bytes apart from those fields; no runtime rerun or publication is claimed. First-depth pending original placements, selected content and shared guest-header contexts remain. See s13-r271-cached-build-checkpoint.json and s13-r271-ten-image-checkpoint-compare.json.
+
+A broader r271 hash check included current_sha256-only entries and found 142 stale records, missed by the earlier working_sha256-only audit. Exact Git HEAD blob comparison proved that 131 differ only by CRLF/LF normalization and current bytes match pinned originals; queue r272 reconciles these without changing branch statuses. Eleven substantive differences remain for review. See s13-r271-all-queue-file-hashes.json and s13-r271-head-blob-reconciliation.json.
+
+Queue r273 reconciles five additional stale HEAD-baseline hashes after exact Git blob diffs proved changes consist only of #line directives or blank lines. These may change diagnostics; no behavioral or branch reachability claim follows. Six substantive structural cases remain. See s13-r272-substantive-git-diffs.json.
+
+Queue r274 reconciles inctlpan.c, profile.c and random.c against exact Git HEAD baselines. Their five actual selected x86 WOW32/call-boundary preprocessing contexts match after nonblank normalization. These are context-specific checks, not proof of other profiles, diagnostics or runtime. Three structural stale-hash cases remain. See s13-r273-inctlpan-preprocess.json, s13-r273-profile-preprocess.json and s13-r273-random-preprocess.json.
+
+Queue r275 reconciles dlgmgr2.c and rtlinit.c against exact Git HEAD baselines. Five actual selected x86 WOW32/call-boundary preprocessing contexts match after nonblank normalization. These are context-specific checks, not proof of other profiles, diagnostics or runtime. One structural stale-hash case remains: vdm.c. See s13-r274-dlgmgr2-preprocess.json and s13-r274-rtlinit-preprocess.json.
+
+Queue r276 reconciles the final structural stale-hash case vdm.c against exact Git HEAD: nine actual x86/x64 product preprocessing contexts match after nonblank normalization. The BaseGetVdmConfigInfo extracted function is also equal after newline normalization. The initial x64 scratch command misparsed an attached quoted /FI option and failed before preprocessing; corrected argument handling passed. This is not proof of other contexts, diagnostics or runtime. See s13-r275-vdm-x86-preprocess.json, s13-r275-vdm-x64-preprocess.json and s13-r275-vdm-config-extraction.json.
+
+The r276 coherent ten-image candidate passed the Full product verification suite with the previously successful short `O:\tmp` TEMP/TMP configuration; see `build/t473-s13/r276-full3-result.json` and `build/t473-s13/r276-full3.out.log`. An earlier attempt using a longer task-local TEMP/TMP failed at WINMINE with a `CONFIG.NT` error and is retained as a failed run (`r276-full2-result.json`); the differing test environment prevents attributing that failure to the candidate. The passing run does not resolve the pending first-depth original placements, selected arms, or shared guest-header contexts, and is not yet publication or S13 closure.
+
+Independent source review withdrew the 51 r271 x86 boundaries: they were outside their original omitted functions, so the range anchors did not meet the unique-placement rule. The source was restored byte-for-byte to its verified r270 preimage; no other source change was overwritten. The 51 boundaries remain pending, and the r276 queue and passing binary candidate predate this correction: their recorded source positions and hash must not be treated as current until reconciled and rebuilt.
+
+Queue r277 restores the 22 current groups and source hash from the verified r270 preimage, and separately records the 51 omitted original groups as pending in s13-r277-withdraw-unanchored.json. Cached x86/x64 preset builds passed; because those outer builds reported no work, the actual WOW32 Ninja graph was also run and rebuilt its control-fnid object and DLL (`build/t473-s13/r277-wow32-build2.log`). A same-package-identity candidate was staged. Compared with the Full-passing r276 package, nine of its ten binaries are byte-identical; WOW32 has four differences at the already identified PE/debug timestamp offsets 280, 281, 625412 and 625413. This is a timestamp-only comparison, not byte identity or a new Full run. The pending original groups and first-depth exclusion phase are not resolved.
+
+Queue r278 withdraws the Alpha guard incorrectly placed at file scope in probe.c although the original belongs inside omitted ProbeForWrite. It also corrects the original-side statuses of the 51 withdrawn ntstubs.c guards; their prior r277 original-side records still said the boundaries were restored and must not be used as current. A first-depth candidate inventory identified 53 current guards in 17 files whose selected original content was omitted; it is a discovery list, not proof that all are misplaced. See s13-r278-withdraw-misplaced.json and s13-r278-missing-owner-candidates.json.
+
+Queue r279 withdraws seven client wow.c WOW guards after verifying that the original directives reside inside seven omitted functions, not at file scope. Original-side groups return to pending and current directive positions and hash are updated; this does not decide the correct treatment of omitted original functions. See s13-r279-wow-misplaced.json. Other candidate placements remain under review. The r277 staged package predates these further changes and is not a verified current-source package.
+
+The actual x86 WOW32 graph rebuilt probe.c and client wow.c and linked successfully after r279 (`build/t473-s13/r279-wow32-build.log`); linker warnings remain in that log. The r279 full queue file-hash check covered 1,110 entries with no missing files or mismatched hashes (`s13-r279-all-queue-file-hashes.json`). Neither a fresh ten-image package nor a new runtime run was produced after this source correction; Full-pass evidence remains tied to r276.
+
+Queue r280 withdraws six more incorrectly file-scoped conditions from clres.c and clmsg.c, each originally inside an omitted function. Both files were restored to the exact SHA-256 verified immediate preimages, original groups were returned to pending, and registrations updated. See s13-r280-withdraw-misplaced.json. The actual affected build has not yet run after this correction.
+
+Queue r281 withdraws four client ntstubs.c and three kernel queue.c conditions that likewise came from omitted function bodies. Both files were restored to SHA-256 verified immediate preimages; original groups and positions reverted to their prior pending records. See s13-r281-withdraw-misplaced.json. The batch remains unpublished and requires the actual affected build.
+
+The actual WOW32 Ninja graph rebuilt the affected clres.c, clmsg.c, client ntstubs.c and kernel queue.c contexts and linked successfully (`build/t473-s13/r281-wow32-build.log`). The r281 same-identity ten-image staged package compares to the r276 Full-passing package with nine byte-identical images and four differences at previously identified WOW32 PE/debug timestamp offsets; see s13-r281-package-compare.json. The current queue's 1,110 file hashes all match with no missing entries; see s13-r281-all-queue-file-hashes.json. Timestamp-only is not byte identity; this is not a fresh Full run, release, or first-depth completion.
+
+Queue r282 withdraws three file-scope FE_IME/FE_SB scaffolds from input.c, server.c and chartran.c after checking the corresponding original function contexts. Current file hashes and positions were reconciled, and the original groups returned to their prior pending status. See s13-r282-withdraw-misplaced.json. The affected build and new candidate have not yet been run.
+
+Queue r283 withdraws four FE_SB scaffolds from class.c and drawtext.c that likewise came from omitted original functions. Each current group and original first-depth record was reconciled independently; see s13-r283-withdraw-misplaced.json. This batch has not yet been rebuilt or released.
+
+After r283 the actual x86 WOW32 Ninja graph compiled the affected contexts and linked successfully (`build/t473-s13/r283-wow32-build.log`). The staged coherent package has nine images byte-identical to the r276 Full-passing package; WOW32 differs at the same four previously identified PE/debug timestamp offsets (s13-r283-package-compare.json). All 1,110 current queue file hashes match (s13-r283-all-queue-file-hashes.json). No new runtime run, publication, commit, or depth closure is claimed.
+
+Queue r284 withdraws ten ntcftxt.h ANSI/Unicode conditions whose original owners are omitted functions but whose scaffolds were misplaced at file scope. The file was restored to its exact verified immediate preimage, and both current and original queue entries restored to their prior state. See s13-r284-withdraw-misplaced.json. This latest change remains unbuilt and unpublished.
+
+The actual x86 WOW32 graph rebuilt the consumer of ntcftxt.h and linked successfully after r284 (`build/t473-s13/r284-wow32-build.log`); 1,110 queue file hashes matched. Queue r285 then withdrew four misplaced kernel ntstubs.c MEMPHIS_MENUS scaffolds using the verified immediate preimage and restored only their original-group records to pending; see s13-r285-withdraw-misplaced.json. The r285 change has not yet been built or released.
+
+Queue r286 withdraws five more scaffolds from exitwin.c, handtabl.c, draw.c, chartran.c and drawtext.c: each original directive lies inside an omitted function, but its empty scaffold was placed at file scope. Two original global conditions in that earlier batch remain under review. Current positions and original pending records were reconciled; see s13-r286-withdraw-misplaced.json. The r285-r286 changes have not yet been rebuilt or released.
+
+After r286 the affected WOW32 Ninja graph rebuilt and linked successfully (`build/t473-s13/r286-wow32-build.log`). The staged coherent package has nine images byte-identical to the r276 Full-passing package; WOW32 differs at the same four previously identified PE/debug timestamp offsets (s13-r286-package-compare.json). All 1,110 current queue file hashes match (s13-r286-all-queue-file-hashes.json). No fresh runtime run, publication, commit, or depth closure is claimed.
+
+Queue r287 withdraws the client.c DEBUG scaffold that was placed at file scope although its original owner is an omitted function. The exact immediate preimage was restored and original group returned to pending; see s13-r287-withdraw-misplaced.json. This change has not yet been built or released.
+
+The actual x86 WOW32 graph rebuilt and linked successfully after r287 (`build/t473-s13/r287-wow32-build.log`). The staged coherent package has nine images byte-identical to the r276 Full-passing package; WOW32 differs at the same four previously identified PE/debug timestamp offsets (s13-r287-package-compare.json). All 1,110 current queue file hashes match (s13-r287-all-queue-file-hashes.json). No fresh runtime run, publication, commit, or depth closure is claimed. The remaining six current selected-arm pending conditions in this reviewed candidate list are original file-level groups and require separate retained-arm review; this does not prove other excluded groups are correctly located.
+
+An independent direct-#line/directive lexical discovery scan examined 771 current first-depth groups containing newly-excluded arms. It found 190 exact original directive-line matches, 95 possible brace-scope mismatches among those matches, and 581 cases not matched or unresolved. This is a heuristic candidate list, not a proof of all 95 mismatches or of correctness of the other groups; macros and alternate branches can affect lexical brace counts. Source review confirmed, for example, that input.c's original line 1409 condition is inside mouse-wheel coalescing while its current scaffold is at file scope; profile.c's original line 68 condition is inside a data initializer while its current scaffold is at file scope. Retained code and selected arms require individual review before any correction. See s13-r287-scope-candidate-scan.json.
+
+Queue r288 withdraws three verified misplaced single-arm scaffolds at input.c original lines 1409 and 2295 and profile.c original line 68. Their original groups return to pending, with exact current source hashes and group positions updated; see s13-r288-withdraw-misplaced.json. These changes have not yet been built or released.
+
+The actual x86 WOW32 graph rebuilt and linked successfully after r288 (`build/t473-s13/r288-wow32-build.log`). The staged coherent package has nine images byte-identical to the r276 Full-passing package; WOW32 differs at the same four previously identified PE/debug timestamp offsets (s13-r288-package-compare.json). All 1,110 current queue file hashes match (s13-r288-all-queue-file-hashes.json). No fresh runtime run, publication, commit, or depth closure is claimed; scope candidates and the unmatched 581 groups require review.
+
+Queue r289 withdraws thirteen input.c single-arm file-scope placeholders after checking their original function contexts and exact directive anchors. These groups return to pending; two original MARKPATH alternatives with selected macros were not altered and require separate assessment. See s13-r289-input-misplaced.json. This batch has not yet been rebuilt or released.
+
+Queue r290 similarly withdraws sixteen queue.c single-arm placeholders whose original directives lie inside omitted functions, and returns their original records to pending. See s13-r290-queue-misplaced.json. Selected macros and retained bodies were not edited. The r289-r290 batch has not yet been rebuilt or released.
+
+Queue r291 withdraws ten server.c single-arm placeholders whose original contexts are omitted functions or data initializers; the original records return to pending. See s13-r291-server-misplaced.json. The r289-r291 batch has not yet been rebuilt or released.
+
+Queue r292 withdraws twelve handtabl.c single-arm placeholders whose original contexts are omitted functions or data initializers; their original groups return to pending. See s13-r292-handtabl-misplaced.json. The r289-r292 batch has not yet been rebuilt or released.
+
+The actual x86 WOW32 graph rebuilt and linked successfully after r292 (`build/t473-s13/r292-wow32-build.log`). The staged coherent package has nine images byte-identical to the r276 Full-passing package; WOW32 differs at the same four previously identified PE/debug timestamp offsets (s13-r292-package-compare.json). All 1,110 current queue file hashes match (s13-r292-all-queue-file-hashes.json). This is not a new Full run, publication, commit, or depth closure.
+
+Queue r293 withdraws 24 single-arm scaffolds in five USER files after checking that their original contexts are omitted functions; the original groups return to pending. See s13-r293-withdraw-misplaced.json. No build, package or runtime verification has yet been run after this batch.
+
+After r293 the affected x86 WOW32 graph rebuilt and linked successfully (`build/t473-s13/r293-wow32-build.log`). The staged coherent package has nine images byte-identical to the r276 Full-passing package; WOW32 differs at the same four previously identified PE/debug timestamp offsets (s13-r293-package-compare.json). All 1,110 current queue file hashes match (s13-r293-all-queue-file-hashes.json). No new Full runtime run, publication, commit, or depth closure is claimed.
+
+Queue r294 withdraws fourteen single-arm file-scope scaffolds across eight USER files after checking their original contexts and omitted function owners. The original groups return to pending, and current positions and hashes are reconciled; see s13-r294-withdraw-misplaced.json. Three remaining candidate groups with selected macro arms are not altered. This batch has not yet been built or released.
+
+After r294 the affected x86 WOW32 graph rebuilt and linked successfully (`build/t473-s13/r294-wow32-build.log`). The staged coherent package has nine images byte-identical to the r276 Full-passing package; WOW32 differs at the same four previously identified PE/debug timestamp offsets (s13-r294-package-compare.json). All 1,110 current queue file hashes match (s13-r294-all-queue-file-hashes.json). No new Full runtime run, publication, commit, or depth closure is claimed.
+
+An expanded first-depth logical-line discovery scan examined 679 current newly-excluded groups: 381 exact line-map matches, 82 unique-near matches, 216 unresolved, and five possible brace-scope mismatches. This is a heuristic, not proof of reachability or matching identity (s13-r294-logical-scope-candidates.json). Manual controls show the nt_bop.c candidate is a false brace-depth result caused by inline assembly, and the keyba.c nearby match is an ambiguous repeated selector; neither was changed. Three earlier USER selected-macro candidates remain deferred to retained-arm review. See s13-r294-two-scope-controls.json.
+
+The 216 unmapped groups are listed in s13-r294-unmapped-groups.json. A first-depth signature comparison found 69 unique candidate counterparts in the tracked original groups, leaving 147 without such a match (s13-r294-unmapped-unique-signatures.json). These are discovery signals only: a unique signature does not prove the original group identity, supported-profile selection, or correct scope. No branch classifications or source were changed by this scan.
+
+Queue r295 corrects an independently verified c_main.c CPU_486 excluded-group continuation anchor from #line 174 to original line 163 (the following retained FIX_BT_BUG definition is original line 164). No selected executable lines changed; compile and diagnostics are still required. See s13-r295-cmain-line-anchor.json.
+
+The x86 worker library and NTVDM target and the x64 configuration's x86 reference worker built after r295; the first orchestration used a wrong reference-directory name and failed after the x86 library build, while the corrected run succeeded (`build/t473-s13/r295-worker-build2.log`). Its same-identity staged package compared with the r276 Full-passing package has eight byte-identical images and NTVDM/WOW32 differences confined to four previously identified PE/debug timestamp bytes each (s13-r295-package-compare.json). Queue r296 adds original #line 155 and 156 anchors before the c_main.c CPU_486 selector and excluded-body #error respectively; continuation remains original line 163. Supported builds and forced-condition diagnostics are required again (s13-r296-cmain-diagnostic-anchors.json).
+
+After r296 both actual x86 worker graphs built and the production NTVDM target linked (`build/t473-s13/r296-worker-build.log`). Extracted-source MSVC controls observed the forced CPU_486 #error at original line 156 and a subsequent injected selected-path diagnostic at line 166; see s13-r296-diagnostic-build-evidence.json. The staged coherent package has eight byte-identical images relative to the r276 Full-passing package and four previously identified PE/debug timestamp differences each in NTVDM and WOW32 (s13-r296-package-compare.json). All 1,110 queue file hashes match (s13-r296-all-queue-file-hashes.json). This is not a new Full runtime run, publication, commit or first-depth closure.
+
+Queue r297 corrects twelve continuation #line markers in eleven host mirror files after matching each original first-depth condition, original #endif, absence of a preceding original #line, and five identical following source lines. See s13-r297-original-continuation-lines.json. These are diagnostic mapping changes; actual builds, forced diagnostics and product-image comparison remain required. No publication or first-depth completion is claimed.
+
+The actual x86 NTVDM graph, x64 configuration's x86 reference worker and x86 WOW32 graph passed after r297 (`build/t473-s13/r297-build.log`). Twelve MSVC source-derived continuation-anchor diagnostic controls passed at their expected original lines (s13-r297-diagnostic-controls.json). Eight staged images are byte-identical to the r276 Full-passing package; NTVDM and WOW32 differ only at their previously identified four PE/debug timestamp bytes each (s13-r297-package-compare.json). All 1,110 queue file hashes match (s13-r297-all-queue-file-hashes.json). These snippet controls do not validate whole-file diagnostic mappings; no fresh Full runtime run, release or first-depth completion is claimed.
+
+Queue r298 corrects eleven further original continuation #line anchors after checking the corresponding original #endif and five retained following lines; see s13-r298-original-continuation-lines.json. Initial direct writing failed before altering timer.c; the subsequent patch operation partially applied, and mixed line endings in xmsblock.c required reconstruction from a SHA-verified exact preimage. All eleven resulting files were then verified against their exact expected post-edit hashes. The batch has not yet been built or released.
+
+After r298 the x86 NTVDM graph, x64 configuration's x86 reference worker and x86 WOW32 graph passed (`build/t473-s13/r298-build.log`). Eleven source-derived MSVC continuation diagnostic controls passed (s13-r298-diagnostic-controls.json). Eight staged images match the r276 Full-passing package byte-for-byte; NTVDM and WOW32 differ only at their previously identified four PE/debug timestamp bytes each (s13-r298-package-compare.json). All 1,110 queue file hashes match (s13-r298-all-queue-file-hashes.json). No fresh Full runtime run, release or first-depth closure is claimed.
+
+Queue r299 corrects 19 further continuation #line markers in 13 host and non-MVDM mirror files. Each maps a unique tracked original group and original #endif, with no preceding original #line and one to three exact immediate retained continuation lines; this shorter match is weaker than r297/r298 and needs further full-context review. Preflight and post-write hashes were verified for every file; see s13-r299-original-continuation-lines.json. Actual builds and diagnostic controls have not yet run; no release is claimed.
+
+After r299 the actual x86 NTVDM graph, x64 configuration's x86 reference worker and x86 WOW32 graph passed (`build/t473-s13/r299-build.log`). Nineteen source-derived MSVC continuation diagnostic controls passed (s13-r299-diagnostic-controls.json). Eight staged images match the r276 Full-passing package byte-for-byte; NTVDM differs at two and WOW32 at four previously identified PE/debug timestamp bytes (s13-r299-package-compare.json). All 1,110 queue file hashes match (s13-r299-all-queue-file-hashes.json). Short-match original identity and whole-file diagnostics still require review; no fresh Full runtime run, release or first-depth closure is claimed.
+
+The five other continuation-marker candidates from the earlier 47-item discovery list have no nonblank tokens following the marker in their current files, so the markers cannot map a subsequent current diagnostic. They were not changed; see s13-r299-eof-continuation-review.json. This does not prove the correctness of other markers or future added code.
+
+Queue r300 reconciles the original-side records for all 191 original groups whose misplaced scaffolds were withdrawn in r277-r294. Older queue snapshots had reverted 127 affected arm statuses to unreviewed; they are now explicitly pending original-scope restoration, not marked excluded. No source or reachability decision changed. See s13-r300-withdrawal-status-reconciliation.json.
+
+The r299 short continuation matches were extended against pinned original text up to the first differing line or 100 lines. In 16 of 19 cases the first difference is the next excluded-body #error; the other three match 9, 100 and 96 lines respectively before a local or later exclusion difference. This strengthens the recorded continuation anchors but is still textual evidence, not whole-function semantic proof (s13-r300-continuation-context-review.json). The r300 queue still matches all 1,110 recorded working file hashes (s13-r300-all-queue-file-hashes.json).
+
+Queue r301 corrects 25 continuation #line anchors across ten host mirror files, matched by original condition signature and adjacent text plus five exact following source lines. Two other files with eight candidate anchors remain unchanged: Windows denied in-place writes because a user-mapped section was open. No process was terminated, and both deferred file hashes still match their original preflight hashes. See s13-r301-original-continuation-lines.json. The applied batch has not yet been built, tested or released; adjacent-source matches still require full-context review.
+
+After r301 the actual x86 NTVDM graph, x64 configuration's x86 reference worker and x86 WOW32 graph passed (`build/t473-s13/r301-build.log`). Twenty-five source-derived MSVC continuation diagnostic controls passed (s13-r301-diagnostic-controls.json). Eight staged images match the r276 Full-passing package byte-for-byte; NTVDM differs at four and WOW32 at two previously identified PE/debug timestamp bytes (s13-r301-package-compare.json). All 1,110 queue file hashes match (s13-r301-all-queue-file-hashes.json). No fresh Full runtime run, release or first-depth closure is claimed.
+
+Queue r302 corrects six more original continuation #line anchors in three MVDM host and three non-MVDM files, using adjacent-source group pairing and five exact following lines; see s13-r302-original-continuation-lines.json. Exact post-write hashes and the task queue were reconciled. These changes have not yet been built or released; the two r301 mapped-file cases remain pending.
+
+After r302 the x86 NTVDM graph, x64 configuration's x86 reference worker and x86 WOW32 graph passed (`build/t473-s13/r302-build.log`). Six source-derived MSVC continuation diagnostic controls passed (s13-r302-diagnostic-controls.json). Eight staged images match the r276 Full-passing package byte-for-byte; NTVDM and WOW32 differ only at their previously identified four PE/debug timestamp bytes each (s13-r302-package-compare.json). All 1,110 queue file hashes match (s13-r302-all-queue-file-hashes.json). No fresh Full runtime run, release or first-depth closure is claimed.
+
+Queue r303 applies the eight r301 anchors previously deferred in tape_io.c and wkman.c using scoped source patches while mapped sections existed, without terminating processes. Both resulting files match the exact independently prepared post-edit SHA-256 values and their queue entries were reconciled; see s13-r303-deferred-continuation-lines.json. This batch has not yet been built or released.
+
+After r303 the x86 NTVDM graph, x64 configuration's x86 reference worker and x86 WOW32 graph passed (`build/t473-s13/r303-build.log`). Eight source-derived MSVC continuation diagnostic controls passed (s13-r303-diagnostic-controls.json). Eight staged images match the r276 Full-passing package byte-for-byte; NTVDM and WOW32 differ only at their previously identified four PE/debug timestamp bytes each (s13-r303-package-compare.json). All 1,110 queue file hashes match (s13-r303-all-queue-file-hashes.json). No fresh Full runtime run, release or first-depth closure is claimed.
+
+Queue r304 corrects eleven further original continuation anchors in seven host files after original-group and adjacent-source review. These include shorter or locally changed neighboring contexts and remain separately qualified in s13-r304-original-continuation-lines.json. Exact preflight and post-write hashes were verified, and queue entries reconciled. Builds and diagnostics have not yet run.
+
+After r304 the x86 NTVDM graph, x64 configuration's x86 reference worker and x86 WOW32 graph passed (`build/t473-s13/r304-build.log`). Eleven source-derived MSVC continuation diagnostic controls passed (s13-r304-diagnostic-controls.json). Eight staged images match the r276 Full-passing package byte-for-byte; NTVDM and WOW32 differ only at their previously identified four PE/debug timestamp bytes each (s13-r304-package-compare.json). All 1,110 queue file hashes match (s13-r304-all-queue-file-hashes.json). The five lower-confidence remaining candidates from this group, other unmapped cases and omitted original scopes remain open. No fresh Full runtime run, release or first-depth closure is claimed.
+
+Queue r305 corrects those five remaining original continuation anchors in four host files after individual inspection of the original group and adjacent source. The wcall16.c and nt_rflop.c contexts include project adaptations, which remain unchanged. See s13-r305-original-continuation-lines.json. Actual builds and diagnostic checks are pending.
+
+After r305 the x86 NTVDM graph, x64 configuration's x86 reference worker and x86 WOW32 graph passed (`build/t473-s13/r305-build.log`). Five source-derived MSVC continuation diagnostic controls passed (s13-r305-diagnostic-controls.json). Eight staged images match the r276 Full-passing package byte-for-byte; NTVDM and WOW32 differ only at their previously identified four PE/debug timestamp bytes each (s13-r305-package-compare.json). All 1,110 queue file hashes match (s13-r305-all-queue-file-hashes.json). No fresh Full runtime run, release or first-depth closure is claimed.
+
+An independent LF-physical-line audit checked all 3,458 current depth-one group directive positions, with zero stale positions (s13-r305-current-group-position-lf-check.json). An earlier Python splitlines-based version reported 256 false stale positions because it treated embedded form-feeds as line breaks; that earlier result is retained and superseded. The same audit checked 97 continuation corrections and found one genuine error: original apimsg.c has a form-feed, so r299's anchor was one line too high. Queue r306 corrects it from 114 to 113, matching original #endif line 112 and next statement line 114; see s13-r305-lf-line-corrections-audit.json and s13-r306-apimsg-lf-fix.json. Actual build and diagnostic validation remain pending.
+
+After r306 the x86 NTVDM graph, x64 configuration's x86 reference worker and x86 WOW32 graph passed (`build/t473-s13/r306-build.log`). An MSVC control constructed from the actual anchor and blank line reports the first retained statement's original line 114 (`build/t473-s13/r306-anchor-controls/anchor00.log`). Eight staged images match the r276 Full-passing package byte-for-byte; NTVDM and WOW32 differ only at their previously identified four PE/debug timestamp bytes each (s13-r306-package-compare.json). All 1,110 queue file hashes match (s13-r306-all-queue-file-hashes.json). No fresh Full runtime run, release or first-depth closure is claimed.
+
+Queue r307 attributes three previously unmapped DPMI CPU40 guards to the registered local interrupt-frame adaptation rather than a nonexistent original conditional. Two immediate retained statements map unambiguously to original LF lines 541 and 562, and their #line anchors were corrected; the intervening adapted `WideFrame` logic and its existing marker remain untouched. See s13-r307-dpmi-line-anchors.json. Actual build and diagnostic controls remain pending.
+
+After r307 the x86 NTVDM graph, x64 configuration's x86 reference worker and x86 WOW32 graph passed (`build/t473-s13/r307-build.log`). Two source-derived MSVC continuation diagnostic controls passed (s13-r307-diagnostic-controls.json). Eight staged images match the r276 Full-passing package byte-for-byte; NTVDM and WOW32 differ only at their previously identified four PE/debug timestamp bytes each (s13-r307-package-compare.json). All 1,110 queue file hashes match (s13-r307-all-queue-file-hashes.json). The local DPMI adaptation is not proven equivalent to the original by these diagnostic controls; no fresh Full runtime run, release or first-depth closure is claimed.
+
+Queue r308 records a pinned-source exact-token check for 26 first-depth groups using five project-specific selector names. None of those exact names occurs in the respective original source files (s13-r307-project-selector-original-search.json). This identifies local selector provenance only: it does not prove their purpose, supported include contexts or any arm disposition, and no source or branch status changed.
+
+The r308 current-queue structural check examined 2,337 recorded excluded arms and found no substantive contents or stale group/arity positions (s13-depth1-current-queue-audit-308.json). This parser-based check is limited to its recorded current-source groups and does not prove exclusion eligibility, original placement or completeness. All 1,110 recorded queue file hashes match (s13-r308-all-queue-file-hashes.json).
+
+Queue r309 attributes six cfpu_def.h LITTLEND struct guards to the registered local little-endian ABI adaptation; the corresponding original structs have no such guards. Six retained closing delimiters now map to their original LF lines; field layouts are unchanged. See s13-r309-cfpu-anchors.json. The actual build, diagnostic controls and package comparison remain pending.
+
+After r309 the x86 NTVDM graph, x64 configuration's x86 reference worker and x86 WOW32 graph passed (`build/t473-s13/r309-build.log`). Six source-derived MSVC continuation diagnostic controls passed (s13-r309-diagnostic-controls.json). Eight staged images match the r276 Full-passing package byte-for-byte; NTVDM and WOW32 differ only at their previously identified four PE/debug timestamp bytes each (s13-r309-package-compare.json). All 1,110 queue file hashes match (s13-r309-all-queue-file-hashes.json). This checks diagnostic mapping and image identity, not the semantic correctness of the local field layout. No fresh Full runtime run, release or first-depth closure is claimed.
+
+Queue r310 maps seven mouse_io.c outer NTVDM guards to pinned original groups by unique preceding-source context and matching group continuations. Their continuation #line directives are corrected to original LF positions; the local selected alternatives, nested conditions and separately pending NIDDB candidate are unchanged. See s13-r309-mouse-original-candidates.json and s13-r310-mouse-continuation-anchors.json. Builds and diagnostic checks remain pending, and this is not an equivalence claim for the mouse adaptation.
+
+After r310 the x86 NTVDM graph, x64 configuration's x86 reference worker and x86 WOW32 graph passed (`build/t473-s13/r310-build.log`). Seven source-derived MSVC continuation diagnostic controls passed (s13-r310-diagnostic-controls.json). Eight staged images match the r276 Full-passing package byte-for-byte; NTVDM and WOW32 differ only at their previously identified four PE/debug timestamp bytes each (s13-r310-package-compare.json). All 1,110 queue file hashes match (s13-r310-all-queue-file-hashes.json). The separately pending NIDDB candidate and original mouse semantics are not thereby proven or approved; no fresh Full runtime run, release or first-depth closure is claimed.
+
+Queue r311 records three nt_fulsc.c X86GFX outer guards paired to original source by unique preceding context and three identical continuation lines. Their continuation #line anchors now use original LF positions (s13-r311-ntfulsc-continuation-anchors.json). Fourteen other X86GFX-related discovery candidates remain unmatched or insufficiently certain; no branch status changed. Builds and diagnostic controls remain pending.
+
+After r311 the actual x86 NTVDM graph, x64 configuration's x86 reference worker and x86 WOW32 graph passed (`build/t473-s13/r311-build.log`); three source-derived continuation diagnostic controls passed (s13-r311-diagnostic-controls.json). Compared with the r276 Full-passing package, NTVDM contains one additional non-timestamp byte difference at file offset 373638. The link map attributes it to `calcScreenParams` in nt_fulsc.obj: the `ErrorExit` macro's embedded line changes from 535 to original line 532 when GetConsoleScreenBufferInfo fails. A full-context extracted preprocessor control also reports line 532. This is an observable error-diagnostic change, not timestamp-only or byte identity; see s13-r311-ntvdm-byte-attribution.json and s13-r311-package-compare.json. A new Full runtime run and injected product error-path validation have not been performed; no publication or first-depth closure is claimed.
+
+Full product verification of the r311 staged package was started in an owned hidden pwsh process, PID 40016, using `build/t473-s13/r311-full.ps1`, the established short TEMP/TMP path and `-Suite Full`; stdout/stderr and result are `build/t473-s13/r311-full.out.log`, `r311-full.err.log`, and `r311-full-result.json`. It is in progress, not a pass. The product failure path for `GetConsoleScreenBufferInfo` remains separately untested.
+
+The owned r311 Full verification completed with exit code 0 (`build/t473-s13/r311-full-result.json` and `r311-full.out.log`). It includes the recorded Win16-window observations, Console/Window handoff, lifecycle and DOS4GW visibility checks; gameplay and rendered DOS4GW pixels are not asserted. It does not inject failure into `GetConsoleScreenBufferInfo`, so the restored 532 error-diagnostic line remains supported by the image attribution and extracted preprocessor control, not a full-product failure-path test. No publication or first-depth closure is claimed.
+
+Queue r312 annotates a pre-existing local X86GFX guard in nt_fulsc.c whose surrounding selected `enableUpdates` condition differs textually from the pinned original. It was already present in HEAD; its reachability and observable consequences have not been proven. The selected code and arm disposition were not changed during exclusion work; see s13-r311-ntfulsc-local-guard-observation.json. This selected-path finding remains for the approved subsequent review and is not a product regression claim.
+
+Queue r313 identifies seven pre-existing local nt_fulsc.c X86GFX guards whose pinned-original sites use a WINDOWED runtime condition rather than an X86GFX conditional. Their selected-path behavioral relationship remains unproven and unchanged; they are not attributed to original compile guards. A brace continuation anchor at one site was corrected from #line 2053 to its original LF line 2025; see s13-r313-ntfulsc-local-guards.json. Build and diagnostic verification are pending.
+
+After r313 the x86 NTVDM graph, x64 configuration's x86 reference worker and x86 WOW32 graph passed (`build/t473-s13/r313-build.log`). An MSVC control reports the corrected original brace line 2025 (`build/t473-s13/r313-anchor-controls/anchor00.log`). Nine staged images match the r311 Full-passing package byte-for-byte; NTVDM differs only at its four previously identified PE/debug timestamp bytes (s13-r313-package-compare.json). All 1,110 queue file hashes match (s13-r313-all-queue-file-hashes.json). This does not resolve the original WINDOWED selected-path difference; no new Full runtime run, release or first-depth closure is claimed.
+
+Queue r314 records source-context mappings for five local X86GFX-related guards in nt_event.c and nt_graph.c. Some correspond to original runtime screen-state decisions, while one combines CCPU with an original X86GFX guard; the selected behavior and equivalence are not established. No source, group status or product changed. See s13-r313-graphics-local-boundaries.json.
+
+Queue r315 attributes the outer CPU40/C-video callback-structure selectors in cpu_vid.h and gmi.h to local adaptations rather than original outer conditions. Their existing continuation anchors match pinned-original LF lines 90 and 26 respectively. Selected callback ABI and nested conditions were not reviewed; no source, arm status or product changed (s13-r314-video-selector-provenance.json).
+
+Queue r316 maps four nt_fulsc.h X86GFX declaration guards to pinned-original LF positions and adds their original condition/body #line anchors. Three original continuations are also mapped; the fourth ends the original file before project-appended declarations and is not assigned a fabricated original continuation. Queue physical positions and file hash were reconciled; see s13-r316-ntfulsc-header-anchors.json. Actual include-context builds and diagnostics are pending.
+
+After r316 the x86 NTVDM graph, x64 configuration's x86 reference worker and x86 WOW32 graph passed (`build/t473-s13/r316-build.log`). Four extracted actual-source X86GFX-forced diagnostic controls reported the expected original body lines (s13-r316-diagnostic-controls.json); an initial control-generation assertion failed on a commented #endif and was corrected before the real run. Nine staged images match the r311 Full-passing package byte-for-byte; NTVDM differs only at four previously identified PE/debug timestamp bytes (s13-r316-package-compare.json). All 1,110 queue file hashes match; the current-group structural scan examined 2,337 excluded arms with zero remnants or stale/arity positions (s13-r316-all-queue-file-hashes.json and s13-depth1-current-queue-audit-316.json). No fresh Full runtime run, publication or first-depth closure is claimed.
+
+Queue r317 adds original condition and excluded-body #line anchors to the three already-paired nt_fulsc.c X86GFX groups; their previously corrected continuations and selected code remain unchanged. Physical group positions and file hash were reconciled (s13-r317-ntfulsc-error-anchors.json). Actual builds and forced diagnostics are pending.
+
+After r317 the x86 NTVDM graph, x64 configuration x86 reference worker and x86 WOW32 graph passed (build/t473-s13/r317-build.log). Three forced excluded-branch MSVC controls reported original body lines 221, 676 and 975 (s13-r317-diagnostic-controls.json). Nine staged images match the r311 Full-passing package byte-for-byte; NTVDM differs at four previously attributed PE/debug timestamp bytes (s13-r317-package-compare.json). All 1,110 queue file hashes match and 2,337 excluded arms have no detected remnants or stale positions (s13-r317-all-queue-file-hashes.json and s13-depth1-current-queue-audit-317.json). The initial diagnostic-result assertion incorrectly expected X86GFX in the error message; it was corrected to check the actual error text and original lines. No new Full runtime run, publication or first-depth closure is claimed.
+
+Queues r318-r319 classify the 21 previously unreviewed original depth-1 arms as pending, not excluded: 15 ntcftxt.h ANSI conditions are in or near omitted original function bodies and six other negative guards include original pragmas or omitted function context. In the selected ANSI class-client context a file-scope #error would break a supported build. Exact restoration scopes and other contexts remain unproven; no branches, retained code or products changed. See s13-r318-ntcftxt-unresolved-ansi.json and s13-r319-original-selected-guards.json. Counts: current 3,458 groups / 4,271 arms, 10 pending; original 3,493 groups / 4,349 arms, 323 pending. No unreviewed original first-depth arms remain in this queue, but pending is not resolved and this does not establish a complete baseline mapping.
+
+Queue r320 adds pinned-original condition/body/continuation diagnostic anchors 544/545/564 to the existing first-depth #if 0 CheckHMTable scaffold in handtabl.c; it changes no selected code (s13-r320-handtabl-line-anchors.json). Actual x86 NTVDM, x64 reference worker and x86 WOW32 builds passed (build/t473-s13/r320-build.log). An actual-source standalone forced-arm control reported original body line 545 (s13-r320-diagnostic-control.json). All 1,110 queued file hashes match; 2,337 excluded arms have no detected remnants or stale positions. Eight staged components match the r311 Full-passing baseline byte-for-byte; NTVDM and WOW32 each differ only at their previously attributed four PE/debug timestamp bytes (s13-r320-package-compare.json). No fresh Full run, publication or first-depth closure is claimed.
+
+Queue r321 withdraws the clres.c #if 0 scaffold for original line 1480: the original lies inside omitted CreateIconFromResourceEx, while the scaffold had been inserted inside a different retained function. The original group is pending; selected code and following #line 1674 are unchanged (s13-r321-withdraw-clres-misplaced.json). Actual x86 NTVDM, x64 reference worker and x86 WOW32 builds passed (build/t473-s13/r321-build.log). All 1,110 queued file hashes match; 2,336 excluded arms have no detected remnants or stale positions. Eight staged components match r311 Full baseline byte-for-byte; NTVDM and WOW32 differ only at previously attributed four PE/debug timestamp bytes apiece (s13-r321-package-compare.json). No fresh Full run, release or depth closure is claimed.
+
+Queue r322 withdraws the chartran.c FE_SB guard falsely restored at file scope for original line 351 inside omitted RtlWCSMessageWParamCharToMB. The selected NWCH 2 macro and its original #line 363 remain unchanged; original guard arms are pending (s13-r322-withdraw-chartran-misplaced.json). An initial preparation assertion failed because the current source uses LF rather than CRLF; no mutation occurred before the corrected run. Actual x86 NTVDM, x64 reference worker and x86 WOW32 builds passed (build/t473-s13/r322-build.log). All 1,110 queued file hashes match; 2,335 excluded arms have no detected remnants or stale positions. Eight staged components match r311 Full baseline byte-for-byte; NTVDM and WOW32 differ only at previously attributed four PE/debug timestamp bytes apiece (s13-r322-package-compare.json). No fresh Full run, release or depth closure is claimed.
+
+Queue r323 corrects original server.c line 583 evidence: the original FE_IME array context is present under the local WOW_ORIGINAL_DEFAULT_MESSAGES outer guard, rather than absent. It is depth 2 in the current file and remains unreviewed; the first-depth original reconciliation remains pending until its local parent has been reviewed. No source or branch disposition changed. See s13-r323-server-original-local-depth.json. A scan of 36 simple pending original single-arm conditions found one unique immediate source-context match; this does not prove absence of other matches or complete any depth.
+
+Focused legacy test_mirror_rejected_conditions.py was run after r320 and failed before its new line-diagnostic control: the first retained ledger entry records c_main.c physical line 519, while the corresponding current SFELLOW rejection is at 521 (build/t473-s13/r324-tests.log and r324-tests.err). The ledger contains repeated same-macro guards, so a nearest-line remap is not proof of identity; the test has not passed and needs source-anchored reconciliation. Its handtabl check now accepts and verifies #line 544/545/564, and its ledger filter explicitly excludes the withdrawn r322 chartran guard; the historical ledger entry records that withdrawal. The r320 source-derived standalone diagnostic control independently passed at line 545, but this does not substitute for the full legacy test. No release or depth completion is claimed.
+
+Queues r326-r334 correct pinned-original diagnostic anchors in timer.c, time_day.c, WOW32 and selected CCPU SPC486 alternatives, with source and registrations in s13-r326-timer-original-continuation.json through s13-r334-spc-diagnostic-lines.json. Original retained C statements were not changed. The legacy rejection ledger was reconciled for three current line positions and the withdrawn chartran guard, preserving historical line values (s13-r325-rejection-ledger-positions.json). test_mirror_rejected_conditions.py passed its 187 guard controls and remaining checks in r326-tests; test_bfs_depth1_cpu_guards.py passed in r337-tests after fixing stale original line expectations and the retained Memphis else scaffold. Earlier failed runs are retained under r324-r336. r334 x86/x64 worker and WOW32 builds passed; 1,110 queue hashes match, 2,335 excluded arms have no structural-scan remnants. Compared with Full-passing r311, eight components are byte-identical, WOW32 differs in four PE/debug timestamp bytes, and NTVDM has four timestamp bytes plus one diagnostic immediate changed from 1855 to original 1851 (s13-r334-package-compare.json, s13-r334-ntvdm-byte-attribution.json). The affected invalid-task-register error path has not been fault-injected. Full product verification of the r334 staged candidate was started in an owned hidden process; it is in progress, not a pass (build/t473-s13/r334-full.out.log and r334-full-result.json). No publication or first-depth closure is claimed.
+
+The owned r334 Full product verification completed with exit code 0; selected product gates and coherent ten-file package passed (s13-r334-full-verification.json; build/t473-s13/r334-full.out.log). Invalid task-register error-path fault injection remains uncovered; DOS4GW gameplay/pixels are not asserted; candidate NIDDB semantics remain unresolved. This is not first-depth completion or publication.
+
+The current-source test_mirror_rejected_conditions.py re-run completed successfully after r334, including all 187 normal/rejected guard controls and original handle-table diagnostic line control (build/t473-s13/r338-tests.log; empty stderr). The current-source test_bfs_depth1_cpu_guards.py completed successfully in r337. Neither expands the r334 Full suite to the untested invalid-task-register fault path. First-depth reconciliation remains open.
+
+Both current-source condition test suites also passed under the MSVC x64 compiler environment (187 normal/rejected guards plus depth-1 line controls); see s13-r339-x64-condition-controls.json. This is a preprocessor control, not a substitute for x64 runtime testing or unresolved original structure.
+
+A focused actual selected CCPU object fixture exercised c_setTR_BASE_LIMIT_AR with zero, valid busy-TSS and invalid 0x01 access rights. Only the invalid case emitted the expected original c_reg.c:1851 diagnostic; map and archive identities identify original-ccpu386:c_reg.obj (s13-r340-task-register-diagnostic.json). The executable uses the existing /force:multiple host fixture seams; it is not full-product guest fault injection. No source or release changed.
+
+The actual x86 WOW32 control-fnid compiler command was reused in preprocess-only mode with a probe including the current ntstubs.c: _X86_ is defined in that context (s13-r341-ntstubs-actual-x86-context.json). This confirms the retained x86-side condition for that translation unit; it does not establish every fixture context or justify adding the 51 omitted-function guards at file scope. No source or product was changed.
+
+Queue r335 links all 51 previously withdrawn ntstubs.c x86 groups to individually reverified pinned-original if/else/endif boundaries (s13-r342-ntstubs-original-51-boundaries.json). The actual control-fnid build selects _X86_, but these groups belong to omitted original functions; exact safe structural recovery and all supported contexts remain pending. No selected code or current branch status changed; no second-depth audit or new binary was produced.
+
+Original first-depth arm text for the 51 ntstubs.c x86 selectors was independently hashed and classified (s13-r343-ntstubs-alignment-semantics.json). Many arms implement distinct probe alignment values; selecting x86 is real original behavior, not a license to replace that arm with an error. Original function-scope recovery remains pending; the scan does not decide nested branches.
+
+The pinned original and current kernel ntstubs.c were checked for _X86_ definitions, undefinitions and subsequent includes: neither changes _X86_ explicitly after its sole initial include (s13-r344-ntstubs-x86-macro-lifetime.json). Together with the actual x86 preprocessing witness this narrows macro-state uncertainty, but does not recreate omitted functions or prove all fixture contexts. No source changed.
+
+Queue r336 anchors fifteen existing excluded first-depth source conditions to pinned original guard, body and continuation lines (s13-r345-depth1-anchor-batch.json), without editing selected statements. Unique original arm matches and three-line following context were checked. Fifteen source-extracted normal/rejected diagnostic controls passed (s13-r345-depth1-anchor-controls.json), x86 NTVDM, x64 reference worker and WOW32 builds passed, and both MSVC x86 and x64 condition suites passed (build/t473-s13/r346-tests.log and r346-x64-tests.log). All 1,110 queue file hashes match and 2,335 excluded arms have no detected remnants or stale positions. Nine r345 components match the r334 Full-passing package exactly; NTVDM differs in four previously attributed PE/debug timestamp bytes only (s13-r345-package-compare.json). No new Full run, publication or layer completion is claimed. An ID collision discovered during registration was corrected by assigning new unique DIV-642 through DIV-652 to the recent r326-r345 diagnostics; pre-existing duplicate headings DIV-597 and DIV-632..634 remain for reconciliation.
+
+Queue r337 anchors fifteen additional existing excluded first-depth guards to pinned original condition, body and continuation lines (s13-r347-depth1-anchor-batch.json); unique group and following three nonblank lines were checked, selected statements were not modified. Fifteen source-extracted selected and rejected diagnostic controls passed (s13-r347-depth1-anchor-controls.json), x86 NTVDM, x64 reference worker and WOW32 cached builds passed, both x86 and x64 condition suites passed (build/t473-s13/r350-mirror.log, r351-depth.log, r351-x64.log). Ledger physical locations were updated using exact insert offsets (s13-r347-rejection-ledger-positions.json), and legacy tests now allow intervening #line directives while still checking guard and rejection. Earlier failed r347-r350 test runs are retained. Queue file hashes match and 2,335 excluded arms have no detected residual code or stale positions. Eight staged components exactly match r345, with four attributed PE/debug timestamp differences in each of NTVDM and WOW32 (s13-r347-package-compare.json); r345 in turn was timestamp-only against r334 Full. No new Full run, release or depth closure is claimed.
+
+Queue r338 anchors fifteen additional existing excluded first-depth guards to pinned original condition, body and continuation lines (s13-r352-depth1-anchor-batch.json), with unique group and three following nonblank lines checked; selected statements are unchanged. Fifteen source-extracted selected and rejected diagnostic controls passed (s13-r352-depth1-anchor-controls.json). x86 NTVDM, x64 reference worker and WOW32 cached builds passed; MSVC x86 and x64 condition suites passed (build/t473-s13/r352-tests.log and r353-x64.log). The reset.c rejection-ledger location was updated by exact insertion offsets. Queue file hashes match and 2,335 excluded arms have no detected residual code or stale positions. Nine staged components exactly match r347, with four attributed PE/debug timestamp bytes differing in NTVDM (s13-r352-package-compare.json); r347 is Full-derived. No new Full run, release or depth closure is claimed.
+
+Queue r339 anchors fifteen additional existing excluded first-depth guards to pinned original condition, body and continuation lines (s13-r354-depth1-anchor-batch.json), with unique group and three following nonblank lines checked; selected statements are unchanged. Fifteen source-extracted selected and rejected diagnostic controls passed (s13-r354-depth1-anchor-controls.json). x86 NTVDM, x64 reference worker and WOW32 cached builds passed; MSVC x86 and x64 condition suites passed (build/t473-s13/r354-tests.log and r353-x64.log). Twelve rejection-ledger locations were updated by exact insertion offsets (s13-r354-rejection-ledger-positions.json). Queue file hashes match and 2,335 excluded arms have no detected residual code or stale positions. Nine staged components exactly match r352, with four attributed PE/debug timestamp bytes differing in NTVDM (s13-r354-package-compare.json); r352 is Full-derived. No new Full run, release or depth closure is claimed.
+
+Queue r340 anchors fifteen additional existing excluded first-depth guards to pinned original condition, body and continuation lines (s13-r356-depth1-anchor-batch.json), with unique group and three following nonblank lines checked; selected statements are unchanged. Fifteen source-extracted selected and rejected diagnostic controls passed (s13-r356-depth1-anchor-controls.json). x86 NTVDM, x64 reference worker and WOW32 cached builds passed; MSVC x86 and x64 condition suites passed (build/t473-s13/r356-tests.log and r357-x64.log). Seventeen rejection-ledger locations were updated by exact insertion offsets (s13-r356-rejection-ledger-positions.json), and rejection controls retain intervening #line directives and assert their actual diagnostic lines. Queue file hashes match and 2,335 excluded arms have no detected residual code or stale positions. Nine staged components exactly match r352, with four attributed PE/debug timestamp bytes differing in NTVDM (s13-r356-package-compare.json); r352 is Full-derived. No new Full run, release or depth closure is claimed.
+
+Queue r341 anchors fifteen additional existing excluded first-depth guards to pinned original condition, body and continuation lines (s13-r358-depth1-anchor-batch.json), with unique group and three following nonblank lines checked; selected statements are unchanged. An initial attempt used stale queue r339 and failed its hash assertion before any mutation; r340 was then used. Fifteen source-extracted selected and rejected diagnostic controls passed (s13-r358-depth1-anchor-controls.json). x86 NTVDM, x64 reference worker and WOW32 cached builds passed; MSVC x86 and x64 condition suites passed (build/t473-s13/r358-tests.log first suite, r360-depth.log and r360-x64.log); the first r358 depth run failed on a stale physical-line assertion, which was corrected to check the actual preprocessed line. Seventeen rejection-ledger locations were updated by exact insertion offsets (s13-r358-rejection-ledger-positions.json). Queue file hashes match and 2,335 excluded arms have no detected residual code or stale positions. Nine staged components exactly match r356, with four attributed PE/debug timestamp bytes differing in NTVDM (s13-r358-package-compare.json); r356 is Full-derived. No new Full run, release or depth closure is claimed.
+
+Queue r342 anchors fifteen additional existing excluded first-depth guards to pinned original condition, body and continuation lines (s13-r361-depth1-anchor-batch.json), with unique group and three following nonblank lines checked; selected statements are unchanged. Fifteen source-extracted selected and rejected diagnostic controls passed (s13-r361-depth1-anchor-controls.json). x86 NTVDM, x64 reference worker and WOW32 cached builds passed; MSVC x86 and x64 condition suites passed (build/t473-s13/r361-tests.log and r362-x64.log). Three rejection-ledger locations were updated by exact insertion offsets (s13-r361-rejection-ledger-positions.json). Queue file hashes match and 2,335 excluded arms have no detected residual code or stale positions. Nine staged components exactly match r356, with four attributed PE/debug timestamp bytes differing in NTVDM (s13-r361-package-compare.json); r356 is Full-derived. No new Full run, release or depth closure is claimed.
+
+Queue r343 anchors fifteen additional existing excluded first-depth guards to pinned original condition, body and continuation lines (s13-r363-depth1-anchor-batch.json), with unique group and three following nonblank lines checked; selected statements are unchanged. Fifteen source-extracted selected and rejected diagnostic controls passed (s13-r363-depth1-anchor-controls.json). x86 NTVDM, x64 reference worker and WOW32 cached builds passed; MSVC x86 and x64 condition suites passed (build/t473-s13/r364-tests.log and r365-x64.log). Six rejection-ledger locations were updated by exact insertion offsets (s13-r363-rejection-ledger-positions.json); a legacy profile control was fixed to accept intervening #line directives. Queue file hashes match and 2,335 excluded arms have no detected residual code or stale positions. Nine staged components exactly match r356, with four attributed PE/debug timestamp bytes differing in NTVDM (s13-r363-package-compare.json); r356 is Full-derived. No new Full run, release or depth closure is claimed.
+
+Queue r345 removes 42 consecutive duplicate #line directives across 35 files; one identical directive remains at every site, preserving the next logical line (s13-r368-remove-duplicate-lines.json). A MSVC control confirmed duplicate and single directives both yield line 4321 (build/t473-s13/r368-line-control.log). x86 NTVDM, x64 reference worker and WOW32 cached builds passed; MSVC x86 and x64 condition suites passed (build/t473-s13/r368-tests.log and r369-x64.log). Queue hashes match and 2,335 excluded arms have no detected remnants or stale positions. Eight staged components exactly match r363; NTVDM and WOW32 each differ only in four attributed PE/debug timestamp bytes (s13-r368-package-compare.json). r363 is Full-derived. No new Full run, release or depth closure is claimed.
+
+Queue r346 anchors fifteen existing excluded first-depth groups to pinned original condition and continuation lines (s13-r370-depth1-anchor-batch.json); identical existing continuation directives are reused. Fifteen selected/rejected diagnostic controls passed, no adjacent duplicate #line was found in the touched files, and x86 NTVDM, x64 reference worker and x86 WOW32 cached builds and x86/x64 condition suites passed. Queue hashes match and the text scan found no residual code or stale positions in 2,335 excluded arms. The staged package matches r368 byte-for-byte except four attributed NTVDM PE/debug timestamp bytes (s13-r370-package-compare.json). No full test repetition, new release or depth closure is claimed.
+
+Queue r347 anchors 15 existing excluded first-depth guards to pinned original lines (s13-r372-depth1-anchor-batch.json). The first condition-suite run failed because config.c retained an old continuation #line 886 despite the pinned original continuing at 1215; the stale directive was removed and the test now validates 1215. Fifteen selected/rejected controls, x86/x64 condition suites, and x86 NTVDM, x64 reference worker and x86 WOW32 cached builds passed after correction. All 1,110 queue hashes match. The staged package has 82 files identical to r370 and four attributed NTVDM timestamp bytes (s13-r374-package-compare.json). No new Full run, publication or depth closure is claimed.
+
+Queue r348 anchors 15 existing excluded first-depth guards to pinned original lines (s13-r376-depth1-anchor-batch.json); three overwritten stale continuation directives were removed. The initial condition suites failed because a test required the nt_bop #ifdef and #error to be adjacent; the updated test additionally validates original diagnostic line 930. Fifteen selected/rejected controls, x86/x64 condition suites, and x86 NTVDM, x64 reference worker and x86 WOW32 cached builds passed. All 1,110 queue hashes match. The staged package has 82 files identical to r374 and four attributed NTVDM timestamp bytes (s13-r376-package-compare.json). No new Full run, publication or depth closure is claimed.
+
+Queue r349 anchors 15 existing excluded first-depth guards to pinned original lines (s13-r380-depth1-anchor-batch.json); two overwritten stale continuation directives were removed. Fifteen selected/rejected controls, x86/x64 condition suites, and x86 NTVDM, x64 reference worker and x86 WOW32 cached builds passed. All 1,110 queue hashes match. The staged package has 82 files identical to r376 and two attributed NTVDM timestamp bytes (s13-r380-package-compare.json). No new Full run, publication or depth closure is claimed.
+
+Queue r350 anchors 15 existing excluded first-depth guards to pinned original lines (s13-r382-depth1-anchor-batch.json); two overwritten stale continuation directives were removed. A stale timer #line affected three selected error diagnostics; an original function-line anchor restores their original values 264/286/291 and a real preprocessor control asserts all three. x86/x64 condition suites and cached builds passed; byte comparison attributed the three corresponding NTVDM immediates and PE/debug timestamps, with only WOW32 timestamp changes elsewhere. Full selected gates passed using modern pwsh (s13-r390-full-verification.json). Initial attempts failed due to short-stage sandbox access and incorrect PowerShell 5 host; neither is a product pass. All 1,110 queue hashes matched. No publication or depth closure is claimed.
+
+Queue r351 anchors 15 existing excluded first-depth guards to pinned original lines (s13-r391-depth1-anchor-batch.json); one overwritten stale continuation was removed. Fifteen selected/rejected controls, x86/x64 condition suites, and x86 NTVDM, x64 reference worker and x86 WOW32 cached builds passed. All 1,110 queue hashes match. The staged package has 81 files identical to r386 and only attributed NTVDM/WOW32 timestamp bytes (s13-r391-package-compare.json); r386 passed Full selected gates. No new Full run, publication or depth closure is claimed.
+
+Queue r352 anchors 15 existing excluded first-depth guards to pinned original lines (s13-r393-depth1-anchor-batch.json). The initial suite failed on hardcoded WOW32 physical positions; the test now uniquely checks the selector, exclusion and original continuation. Fifteen selected/rejected controls, x86/x64 condition suites, and x86 NTVDM, x64 reference worker and x86 WOW32 cached builds passed. All 1,110 queue hashes match. The staged package has 82 files identical to r391 and only attributed WOW32 timestamp bytes (s13-r393-package-compare.json); r391 descends from r386, which passed Full selected gates. No new Full run, publication or depth closure is claimed.
+
+Queue r353 anchors 15 existing excluded first-depth guards to pinned original lines (s13-r398-depth1-anchor-batch.json); three overwritten stale continuation directives were removed. wparam.c and wstruc.c encountered OS write errors and remain pending; failed partial batches were restored to exact queue hashes (s13-r397-write-failure.json). Fifteen selected/rejected controls, x86/x64 condition suites, and x86 NTVDM, x64 reference worker and x86 WOW32 cached builds passed. All 1,110 queue hashes match. The staged package has 81 files identical to r393 and only attributed NTVDM/WOW32 timestamp bytes (s13-r398-package-compare.json). No new Full run, publication or depth closure is claimed.
+
+Queue r354 anchors 15 existing excluded first-depth guards to pinned original lines (s13-r400-depth1-anchor-batch.json); one overwritten stale continuation was removed. Initial tests failed on a DLCIO hardcoded physical position; the corrected test verifies actual guard and original line mappings. Fifteen selected/rejected controls, x86/x64 condition suites, and x86 NTVDM, x64 reference worker and x86 WOW32 cached builds passed. All 1,110 queue hashes match. The staged package has 81 files identical to r398 and only attributed NTVDM/WOW32 timestamp bytes (s13-r400-package-compare.json). wparam.c and wstruc.c OS write errors remain unclassified; no new Full run, publication or depth closure is claimed.
+
+Queue r355 anchors 15 existing excluded first-depth guards to pinned original lines (s13-r404-depth1-anchor-batch.json); one overwritten stale continuation was removed. Initial tests assumed USER guard/error adjacency; updated tests preserve intervening #line and verify both branches. Fifteen selected/rejected controls, x86/x64 condition suites, and x86 NTVDM, x64 reference worker and x86 WOW32 cached builds passed. All 1,110 queue hashes match. The staged package has 81 files identical to r400 and only attributed NTVDM/WOW32 timestamp bytes (s13-r404-package-compare.json). wparam.c and wstruc.c OS write errors remain unclassified; no new Full run, publication or depth closure is claimed.
+
+Queue r356 anchors the final two automatically matched existing excluded first-depth guards to pinned original lines (s13-r408-depth1-anchor-batch.json). Two selected/rejected controls, x86/x64 condition suites, and x86 NTVDM, x64 reference worker and x86 WOW32 cached builds passed. All 1,110 queue hashes match. The staged package has 82 files identical to r404 and only attributed WOW32 timestamp bytes (s13-r408-package-compare.json). wparam.c and wstruc.c OS write errors and original pending groups remain unclassified; no new Full run, publication or depth closure is claimed.
+
+Queue r358 anchors three existing excluded first-depth guards (s13-r411-depth1-anchor-batch.json), including one each in wparam.c and wstruc.c after earlier Python open-for-truncation failures. Scoped patches succeeded and reconstructed preimages matched exact queue hashes. Three selected/rejected controls, x86/x64 condition suites, and x86 NTVDM, x64 reference worker and x86 WOW32 cached builds passed. All 1,110 queue hashes match. The staged package has 82 files identical to r408 and only attributed WOW32 timestamp bytes (s13-r411-package-compare.json). Original pending groups remain unresolved; no new Full run, publication or depth closure is claimed.
+
+Queue r359 restores the original server.c FE_IME message-table condition to file depth one by splitting its local selected wrapper; original #line 583/584/597 and existing excluded body are retained (s13-r415-server-feime-depth1.json). Positive/negative first-depth controls, x86/x64 condition suites, and x86 NTVDM, x64 reference worker and x86 WOW32 cached builds passed. All 1,110 queue hashes match; 2,336 excluded arms scanned without detected remnants or stale positions. The staged package has 82 files identical to r411 and only attributed WOW32 timestamp bytes (s13-r415-package-compare.json). Other original groups remain pending; no new Full run, publication or depth closure is claimed.
+
+Additional r415 verification: actual x86 WOW32 server preprocessor outputs differ in raw bytes, but are exactly identical after removing all-whitespace lines; see s13-r418-server-selected-preprocess.json. This is evidence only for the selected product context, not unobserved configurations.
+
+Queue r360 restores original input.c first-depth literal #if 0 boundary and #line 1409/1410/1431 at a file-scope boundary between retained original-line sections (s13-r421-input-literal-zero.json). The original PostInputMessage C function is omitted; no claim of restored C lexical scope or function. x86/x64 literal-zero controls and condition suites and cached builds passed. All 1,110 queue hashes match; 2,337 excluded arms scanned without detected remnants or stale positions. The staged package has 82 files identical to r415 and only attributed WOW32 timestamp bytes (s13-r421-package-compare.json). No new Full run, publication or depth closure is claimed.
+
+Queue r361 restores six original clres.c first-depth literal #if 0 boundaries at file scope with original diagnostic lines (s13-r425-clres-literal-zero.json); two selected else alternatives remain empty and pending because their original owners are omitted. Existing selected functions are reordered relative to the pinned original, so original C lexical positions are not claimed. x86/x64 positive/negative controls and suites and cached builds passed. All 1,110 queue hashes match; 2,343 excluded arms scanned without detected remnants or stale positions. The staged package has 82 files identical to r421 and only attributed WOW32 timestamp bytes (s13-r425-package-compare.json). No new Full run, publication or depth closure is claimed.
+
+Queue r362 restores 51 original first-depth _X86_ preprocessing frames, rejecting their unsupported non-x86 arms (s13-r427-ntstubs-x86-exclusions.json). These are file-scope frames after the retained subset; original receive-stub functions and C lexical scopes remain omitted and the 51 x86 selected bodies are pending, not restored. The file already rejected non-x86 profiles at its existing original class-registration alignment guard. x86/x64 51 positive and negative diagnostic controls, condition suites, and cached builds passed. All 1,110 queue hashes match; 2,394 excluded arms scanned without detected remnants or stale positions. The staged package has 82 files identical to r425 and only attributed WOW32 timestamp bytes (s13-r427-package-compare.json). No new Full run, publication or depth closure is claimed.
+
+Queue r363 restores 48 original first-depth single-arm conditions across ten source subsets (s13-r429-known-rejected-frames.json). Each condition has an existing first-depth rejection for the same macro, no source macro mutation or later include, and a pinned original; C functions and lexical locations remain omitted. x86/x64 48 positive/negative diagnostic controls, condition suites, and cached builds passed. All 1,110 queue hashes match; 2,442 excluded arms scanned without detected remnants or stale positions. The staged package has 82 files identical to r427 and only attributed WOW32 timestamp bytes (s13-r429-package-compare.json). No new Full run, publication or depth closure is claimed.
+
+Queue r364 restores 28 original first-depth two-arm frames across seven source subsets, rejecting the already-unsupported original first arms (s13-r431-known-else-frames.json). Existing root guards reject the same macros, with no source macro mutation or later includes. Original containing functions, lexical positions and selected else bodies remain omitted and pending. x86/x64 28 positive/negative diagnostic controls, condition suites, and cached builds passed. All 1,110 queue hashes match; 2,470 excluded arms scanned without detected remnants or stale positions. The staged package has 82 files identical to r429 and only attributed WOW32 timestamp bytes (s13-r431-package-compare.json). No new Full run, publication or depth closure is claimed.
+
+Queue r365 restores original probe.c first-depth Alpha exclusion and else frame at file scope (s13-r433-alpha-probe-frame.json); original ProbeForWrite and selected non-Alpha body remain omitted and pending. x86/x64 positive/negative condition controls and suites and cached builds passed. All 1,110 queue hashes match; 2,471 excluded arms scanned without detected remnants or stale positions. The staged package has 82 files identical to r431 and only attributed WOW32 timestamp bytes (s13-r433-package-compare.json). No new Full run, publication or depth closure is claimed.
+
+Queue r366 restores original input.c first-depth NEVER exclusion at file scope (s13-r436-input-never-frame.json); original C owner remains omitted. Actual x86 product and two independent fixture contexts and forced macro controls passed (s13-r435-input-never-context.json). x86/x64 condition suites and cached builds passed. All 1,110 queue hashes match; 2,472 excluded arms scanned without detected remnants or stale positions. The staged package has 82 files identical to r433 and only attributed WOW32 timestamp bytes (s13-r436-package-compare.json). No new Full run, publication or depth closure is claimed.
+
+- r439: eight original first-depth excluded guards restored in six files; one selected else remains pending. File scope frames do not restore omitted original C owners. Twenty actual product/call-boundary contexts and x86/x64 forced controls checked (s13-r438-macro-contexts.json); cached builds linked. Candidate r439 versus r436: 82 of 83 system32 files byte-identical, WOW32 differs only at four PE/debug timestamp bytes (s13-r439-package-compare.json). No release or closure claimed.
+
+- r441: FE_SB / FE_IME context audit covered 15 product and call-boundary compilation targets in five files; actual macro absence and forced-macro controls passed (s13-r441-macro-contexts.json). Original and current files contain no local define/undef of these selectors. Fourteen pending original guards identified; no source replacement made yet, and independent fixture contexts and retained else bodies remain to be checked.
+
+- r442 / queue r368: restored seven original single-arm FE_SB / FE_IME first-depth frames in five files, with original directive text and diagnostic lines. Original C owners remain omitted. Product and call-boundary contexts in r441; independent x86/x64 guard controls and cached build exited 0; scanner reports 2487 excluded arms without remnants or stale positions. Candidate r442 versus r439 has 82 files byte-identical and WOW32 differs only at four PE/debug timestamp bytes. Seven paired else candidates remain pending. No release or layer closure claimed.
+
+- r444 / queue r369: restored seven original first-depth paired FE_SB / FE_IME frames in two files, preserving original else directives; excluded arms only contain error and line directives. Original C owners and seven selected else bodies remain omitted and pending. x86/x64 forced controls and cached build exited 0; 2494 excluded arms scanned without detected remnants or stale positions, 1110 queue hashes match. Candidate r444 versus r442: 82 files byte-identical and WOW32 differs only at two PE/debug timestamp bytes. No release or layer closure claimed.
+
+- r447 / queue r370: restored fourteen original DEBUG / DBG first-depth single-arm frames in eight files after retained subsets; original C owners remain omitted. Twenty-nine actual compile targets and forced controls are recorded in r446; x86/x64 guard controls and cached build exited 0. Scanner: 2508 excluded arms without detected remnants or stale positions; 1110 working hashes match. Candidate r447 versus r444 has 82 files byte-identical and WOW32 differs only at four PE/debug timestamp bytes. Paired DEBUG else remains pending. No release or layer closure claimed.
+
+- r450 / queue r371: restored ten original DEBUG / FE_IME first-depth frames in three files; three selected else bodies and all original C owners remain omitted and pending. Product, independent native-input/lifetime fixtures, call-boundary contexts and forced controls are recorded in r449 and r446; x86/x64 guard controls and cached build exited 0. Scanner: 2518 excluded arms without detected remnants or stale positions; 1110 hashes match. Candidate r450 versus r447 has 82 files byte-identical and WOW32 differs only at four PE/debug timestamp bytes. No release or layer closure claimed.
+
+- r453 / queue r372: restored three first-depth paired FE_SB / LATER / DEBUG frames in three files, with the proven excluded arm replaced by error and diagnostic line directives. Original C owners and selected arm bodies remain omitted and pending. Compile contexts and forced controls are recorded in r452; x86/x64 guard controls and cached build exited 0. Scanner: 2521 excluded arms with no detected remnants or stale positions; 1110 hashes match. Candidate r453 versus r450 has 82 files byte-identical and WOW32 differs only at two PE/debug timestamp bytes. No release or layer closure claimed.
+
+- r457 / queue r373: restored two original DEBUG compound / _USERK_ first-depth frames in two files, preserving the original full expression; C owners and selected else body remain omitted and pending. Compile contexts and forced controls in r455/r456; x86/x64 guard controls and cached build exited 0. Scanner: 2523 excluded arms without detected remnants or stale positions; 1110 hashes match. Candidate r457 versus r453 has 82 files byte-identical and WOW32 differs only at four PE/debug timestamp bytes. No release or layer closure claimed.
+
+- r460: fixed the class-registration original-subset fixture, which failed on eight registered empty excluded Unicode frames and diagnostic #line directives. The fixture strips only those eight structurally empty frames and line directives before comparing retained tokens; positive fixture passed and a deliberate selected-function mutation was rejected. See s13-r460-class-fixture-repair.json. No product or guest code changed.
+
+- r461 / queue r374: restored two original FE_SB first-depth frames in ntcftxt.h after retained subset; GetMessage owner remains omitted. Current header has no FE_SB define/undef or includes; seven client target contexts and forced controls in r459; historical fixture uses separately extracted original header. x86/x64 guard tests, class-fixture positive/negative controls, and cached build exited 0. Scanner: 2525 excluded arms without detected remnants or stale positions; 1110 hashes match. Candidate r461 versus r457 has 82 files byte-identical and WOW32 differs only at four PE/debug timestamp bytes. No release or layer closure claimed.
+
+- r463 / queue r375: restored three original ANSI / Unicode first-depth paired frames in ntcftxt.h after retained subset; selected ANSI bodies and original C owners remain omitted and pending. Existing unconditional header rejection and no later UNICODE define/undef establish the excluded arm in this current translation context. x86/x64 guard tests, class-fixture positive/negative controls, and cached build exited 0. Scanner: 2528 excluded arms without detected remnants or stale positions; 1110 hashes match. Candidate r463 versus r461 has 82 files byte-identical and WOW32 differs only at two PE/debug timestamp bytes. No release or layer closure claimed.
+
+- r469: x86/x64 condition-suite recheck caught three stale test assumptions (frozen physical position, superseded guard text, and missing restored #line); all were corrected without weakening unique-frame, forced-rejection, or diagnostic checks. Fourteen main scripts per architecture passed r466; two additional scripts per architecture passed r469. Failure and log hashes are recorded in s13-r469-condition-suite-repair.json. This is not a full product or NIDDB semantic acceptance.
+
+- r470: current x86 and x64-reference NIDDB selected-object fixtures both exited 0, including three-VM reuse and fixture-seam invalid-identity controls (s13-r470-niddb-recheck.json). The staged r463 package compared directly against the r386 Full-gate package differs only at NTVDM and WOW32 PE/debug timestamp offsets (s13-r470-full-candidate-diff.json). Controlled host fixtures do not establish guest VxD provider ordering or resolve the documented NIDDB semantic limits; candidate remains unshipped.
+
+- r471: compared explicit source paths in the x86 worker, x64 reference worker, WOW32 and call-boundary Ninja graphs against queue r375. All explicit mirror C/C++ paths in these graphs are in the queue; the only two paths outside it are project-owned compat adapters. Graph hashes and exact limitations are in s13-r471-graph-coverage.json. This is not a recursive header or all-config inventory and does not establish layer completion.
+
+- r472: read the actual Ninja dependency databases for x86 worker, x64 reference worker, WOW32 and call-boundary graphs. Every observed mvdm-host/non-mvdm C or H dependency appears in queue r375; observed paths outside the queue are project-owned compat declaration adapters. Exact lists and database hashes are in s13-r472-dependency-coverage.json. Ninja dependency observations cover outputs already compiled in those graphs, not all possible configurations or never-built outputs.
+
+- r473: all 12 currently present stable-cache Ninja graphs containing mirror source were inventoried; no explicit mirror C/C++ source or observed mirror C/H dependency falls outside queue r375 (s13-r473-all-graph-coverage.json). This covers previously built objects, not never-built configurations. Shared wowfax.h / wowinfo.h arms remain preserved: original guest WOWEXEC sources and makefile use the headers, and wowexfax.c defines _WOWFAX16_ before inclusion (s13-r473-shared-headers.json); no guest build or change.
+
+- r474: repaired stale frozen-ledger status assumption in EstimateMirrorDiffRetention.py, preserved pinned original hash checks and moved new output to a separate build directory. Full scan exited 0: 2707 differing present ledger records, of which 1828 text-measured, and 781 absent ledger files; counts do not classify omissions or prove reachability. --help and outside-build output rejection passed. Hashes and limits: s13-r474-retention-tool-recheck.json. No guest or product source change.
+
+- r475: rechecked current asset preservation against HEAD: all 62 prior non-directory ZIP members are byte-identical and four executables/libraries were added; no independently useful executable/font/driver/help/INF/PPD extension appears among 849 unstaged deletions. The 37 extensionless deleted files are makefile, sources or dirs build descriptors; no staged deletion and no guest worktree changes were observed. Hashes, exact lists and limitations are in s13-r475-resource-recheck.json. Archive payload identity is not runtime acceptance.
+
+- r476: ran existing isolated probes against the r463 candidate, without Computer Use. WINMINE flag/counter, reset, open cell, close and Run16 completion passed; SOL deal, stock draw, close and Run16 completion passed. Every probe-recorded input matched the candidate package. Evidence s13-r476-gameplay-gates.json; these do not replace WRITE, DOS17, Win3.1 or complete layer acceptance.
+
+- r476: the four-mode Win3.1 matrix passed std/386 x DOSONLY 0/1 using an isolated copy of O:/w31 and the r463 candidate (s13-r476-win31-gate.json); each case witnessed Program Manager, correct mode and normal exit. Six original guest file hashes were verified against the copy. The verified owned O:/tmp/n3ff stage was removed after all processes exited; no original guest image was modified or rebuilt. This is not interactive app or NIDDB provider-order proof.
+
+- r477: corrected stale x64 internal targets by running the full x86, x86-extra and x64 cached product builds; all returned 0. All ten linked input and staged output hashes match the new package manifest. Seven of 83 staged files differ from r463 only in parsed PE and debug timestamps; all other payload bytes are identical (s13-r477-package-compare.json). Eight core Ninja targets report no incremental work. Identity and limitations: s13-r477-final-package-identity.json. Prior Full, gameplay and four-mode evidence applies under timestamp-only policy, not as exact raw hash equality. No deployment or layer closure claimed.
+
+- r478: after the complete r477 cached product build, rebuilt x87 test fixtures for x86 and x64-reference and ran 8/8 span and 64/64 paging controls for each. Rebuilt the OEM PIF caller fixture and passed both short-start-directory and long-directory rejection/cleanup controls. The x86 NTVDM and WOW32 product links remain incrementally current. See s13-r478-special-regressions.json; these selected-object tests do not establish guest or NIDDB provider semantics.
+
+- r479: documentation governance passed and git diff --check passed. Crosschecked inline divergence identifiers for queued mirror C/H against root registers; two missing historical identifiers were reviewed and registered. DIV-108 source comment claims a mapping, but actual x86 source retains the original DWORD pointer store/fetch; registration explicitly marks the comment stale rather than asserting an unobserved mapping. DIV-303 is a default-off CS-load observer, now described in the register. Source evidence and scope: s13-r479-unregistered-marker-review.json. No product source changed.
+
+- r480: WRITE on the latest r477 candidate passed normal close, clean restart, and second normal close via the existing isolated lifecycle probe; all four recorded inputs matched the candidate (s13-r480-write-gate.json). This does not claim editing or saving.
+
+- r481/r482: the exact r477 ten-component candidate passed all 17 Full gates, including Console-17 and Window-17 (s13-r481-full-verification.json), then passed separate WINMINE and SOL gameplay/close witnesses with matching input hashes (s13-r482-gameplay-gates.json). WRITE two-round lifecycle also passed on the same candidate. Win3.1 four-mode evidence is from r463, whose package differs from r477 only in parsed PE/debug timestamps; it is not byte-identical. These results do not resolve NIDDB provider ordering or historical T313/T335 coverage.
+
+- r483: published the complete r477 ten-component package to assets/release and O:/winnt/system32, after exact-candidate Full 17/17, separate WINMINE/SOL gameplay, WRITE lifecycle and x87/OEM controls. Both destinations and the release manifest match the tested package (s13-r483-publication.json); prior packages are backed up under build/t473-s13/r483-publish-backup. Win3.1 four-mode evidence is from r463, whose package differs from r477 only in parsed PE/debug timestamps; it is not byte-identical. First-depth selected arms and shared header contexts remain pending; NIDDB provider order and historical T313/T335 scope remain unproved.

@@ -528,9 +528,12 @@ void SignalSegmentNotice(WORD  wType,
     *lpstr = '\0';
     dw += 2;
 
+#line 530
 #if DBG
+#line 531
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 537
 
     if (wType == DBG_MODLOAD) {
         ModuleLoad(lpModuleName, ach, wLoadSeg, dwImageLen);

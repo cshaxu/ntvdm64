@@ -1,0 +1,25 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\class.c",
+  "original_sha256": "82528443bc5f6c227e0e14fe8a9dbc928ba735f98cf3891744c20c8e1604939a",
+  "before_sha256": "40dc0a6b96414d7e920c16d1006f53df7bb1dc2e928732bba0961bc2def7cc05",
+  "after_sha256": "674c9eae8d81a27d2389b86c4f2d7e977cdea572e40e1aff3a1933c13b449a98",
+  "guard": 1070,
+  "continuation": 1075,
+  "context_evidence": "s13-class-dbg-actual-context.json",
+  "reason": "the original DestroyClassBrush diagnostic body is absent in current source subset, and DBG is undefined in all three actual WOW32 class compile contexts",
+  "limits": "DBG defined as 0 would select this original #ifdef; unsupported profiles must be rejected",
+  "current_guard_line": 236,
+  "build": "cached MSVC x86 WOW32 build passed",
+  "controls": "s13-class-dbg-controls.json",
+  "comparison": {
+    "previous_sha256": "ef20089eb919f844a8f99cbe743a7552bd650f0c329b60879bbde61b74b35867",
+    "current_sha256": "6eb600c2b1146cef1ebeb521d2edc2c447a4d87a345b14ca08a74a45117b25b0",
+    "differing_offsets": [
+      280,
+      281,
+      625412,
+      625413
+    ]
+  }
+}

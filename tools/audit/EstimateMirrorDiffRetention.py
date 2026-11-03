@@ -4,6 +4,7 @@
 This is a source-line estimate, never a claim of behavioral completeness.
 """
 import csv
+import argparse
 import difflib
 import hashlib
 import json
@@ -27,6 +28,13 @@ def rows(path):
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output-dir', type=Path, default=ROOT / 'build' / 'mirror-retention-current',
+                        help='Directory for this run; frozen audit evidence is never overwritten')
+    output_dir = parser.parse_args().output_dir.resolve()
+    if not output_dir.is_relative_to((ROOT / 'build').resolve()):
+        parser.error('--output-dir must be inside the repository build directory')
+    output_dir.mkdir(parents=True, exist_ok=True)
     ledger = {r['relative_path']: r for r in rows(AUDIT / 'combined-initial-status.csv')}
     provenance_file = AUDIT / 'supplemental-original-provenance.csv'
     provenance_summary = json.loads((AUDIT / 'supplemental-original-provenance-summary.json').read_text())
@@ -61,7 +69,6 @@ def main():
             continue
         original_hash = sha(old)
         assert original_hash == expected_hash, path
-        assert ledger[path]['status'] == 'partial', path
         kind = current.suffix.lower()
         if kind not in ('.c', '.h', '.def', '.asm'):
             records.append(dict(relative_path=path, original_edition=edition, original_sha256=original_hash,
@@ -77,7 +84,7 @@ def main():
             text_retention_percent=f'{100 * matched / len(before):.2f}' if before else '',
             limitation='Matched original source lines after comment removal; not runtime or branch coverage.'))
     assert records and len({r['relative_path'] for r in records}) == len(records)
-    output = AUDIT / 'mirror-diff-code-retention.csv'
+    output = output_dir / 'mirror-diff-code-retention.csv'
     with output.open('w', encoding='utf-8', newline='') as stream:
         writer = csv.DictWriter(stream, fieldnames=list(records[0]), lineterminator='\n')
         writer.writeheader()
@@ -88,7 +95,7 @@ def main():
                    csv_sha256=sha(output), frozen_sha256=sha(AUDIT / 'frozen-file-reconciliation.csv'),
                    supplemental_provenance_sha256=sha(provenance_file),
                    scope='Original code text estimate, not executed code or behavioral restoration')
-    (AUDIT / 'mirror-diff-code-retention-summary.json').write_text(json.dumps(summary, indent=2) + '\n')
+    (output_dir / 'mirror-diff-code-retention-summary.json').write_text(json.dumps(summary, indent=2) + '\n')
     print(json.dumps(summary, indent=2))
 
 

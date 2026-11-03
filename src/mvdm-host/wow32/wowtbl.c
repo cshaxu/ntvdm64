@@ -78,7 +78,9 @@ TABLEOFFSETS tableoffsets;
 #endif
 #line 79
 
+#line 80
 #ifdef WOWPROFILE
+#line 81
 #error Excluded unsupported WOW profiling configuration
 #endif
 #line 83

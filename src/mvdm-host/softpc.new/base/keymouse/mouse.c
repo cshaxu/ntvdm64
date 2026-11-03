@@ -367,7 +367,7 @@ void mouse_init IFN0()
 #ifdef KIPPER
 #error Unsupported excluded original configuration
 #endif
-#line 373
+#line 410
 
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.

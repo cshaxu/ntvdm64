@@ -1,0 +1,304 @@
+{
+  "scope": "24 unreferenced legacy generated object inventories and 18 historical object files referenced only by those inventories; no product graph hit, no active source/test/tool/build reference",
+  "files": [
+    {
+      "path": "src/mvdm-host/dbg/obj/_objects.mac",
+      "sha256": "34fd804ea0759baf0d9e057453012016251977a07a652ae222c5526077c012ec",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dbg\\obj\\_objects.mac",
+      "source_sha256": "57602f88eddfff3c5a4fab653922d3da03ba1b74558bf72c6440501eb6414ca0",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/dos/command/obj/_objects.mac",
+      "sha256": "aeaa2c33ba02e7aeb1c2189985a6a3ade9d3267e6a294dae8ab9c91754d4205c",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\command\\obj\\_objects.mac",
+      "source_sha256": "7d4cdf67f9b16ef71484590bc880dc0fe4427f0d2f4bc194295f30b0c611d128",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/obj/_objects.mac",
+      "sha256": "6f8175cba8445442fdcd7f99970ea6c423a7572f94d1396fe304433ac28997d8",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\dem\\obj\\_objects.mac",
+      "source_sha256": "5b9220c8b2be3a5522a86f2a6372a2c9de041683ada169bcb494f457351b9973",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/obj/_objects.mac",
+      "sha256": "f5695c7436da2ec91bd07305a76cc5bc8c09d4062862296b62f165550f06f672",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dpmi32\\obj\\_objects.mac",
+      "source_sha256": "19f535395e5c7290017e9d9326deb903b0fe2956c95db7d019d387f488da493b",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfax/obj/_objects.mac",
+      "sha256": "72ee04f284ab5aa5e02096586f11cc4a6139b210c24f2b85063a08cb78220a15",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\fax\\wowfax\\obj\\_objects.mac",
+      "source_sha256": "bed781164d58dc02c9143908694bd28f2a1026d6c9ff2dd030d829b95a3da022",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfaxui/obj/_objects.mac",
+      "sha256": "63d886cf367cce0cbf9b2902538d7025b417e3eba6b989ebcafc2e9b8fcf14f9",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\fax\\wowfaxui\\obj\\_objects.mac",
+      "source_sha256": "68ec3f8cff067346cb0167fa82f72cc47dee9879e1590539ca5af82f7e7dbdb9",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/obj/_objects.mac",
+      "sha256": "13c893dd7b42167905344f139c61b968e84991e7e56150469f4db433dcc9fb80",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\bios\\obj\\_objects.mac",
+      "source_sha256": "cd2ac00bc6b6f85cea01d64faf98cb45208591cfa0f5bec7baee118b395de097",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/obj/_objects.mac",
+      "sha256": "36a7bee0adff97407eb2ccc15fcd42e55735b6bf3bb8ccbeb6ec7c775f969cc2",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\comms\\obj\\_objects.mac",
+      "source_sha256": "f5db0ddd033018584d44447ec00fddb7ec62a83b61f954e1d865d9167cbc29c8",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/obj/_objects.mac",
+      "sha256": "5131a9fd66d38f5e68de7c17ad04f8f67176f3825ee1fae68b05a5951cf07d51",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\dasm386\\obj\\_objects.mac",
+      "source_sha256": "47c6feba940271047dd6e1d56e34ac1b3f5cc1b1f5714eba324deeaa34a8a883",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/obj/_objects.mac",
+      "sha256": "6bd1c41fd1711a98655345b03705ec392facbc39d2ccf7e8de25d9db82e73a6b",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\debug\\obj\\_objects.mac",
+      "source_sha256": "34d28924fd3b127a6977236f042b217672ef35ec9a2d6ec117e3cc7a10bd30a8",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/obj/_objects.mac",
+      "sha256": "a6060a6fa8e9ffc98801b1c69b7a955013a36cd58ffc1ac71c33c926dbaeb797",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\disks\\obj\\_objects.mac",
+      "source_sha256": "a58f984735e810fe2d4ff170b2b120f2dc87288b17a96af5e4f8a33eee1bd3ac",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/obj/_objects.mac",
+      "sha256": "de9ed5c4747c723102754337807aeafed0c6ed5cd285d63da954121636a55948",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\dos\\obj\\_objects.mac",
+      "source_sha256": "e0ae95887c409af8481f5948cb28cba4c2c2f56aa57a3e16fc0e20936e7de431",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/obj/_objects.mac",
+      "sha256": "6d4871743494fbdce63ba6df10d61744c8b4d460241689035d0ee0a9de1f07d1",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\keymouse\\obj\\_objects.mac",
+      "source_sha256": "783409912e67176dbb4e74f19062b6116265829d0d7a0038074ee4e1e4a38fdd",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/obj/_objects.mac",
+      "sha256": "28e211e15664a59bf5a6ffec0a1d50be0e3d9f903396704ac2632f118ea322f8",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\support\\obj\\_objects.mac",
+      "source_sha256": "d3629b2c942df8fbe859ecf2586011b9ef77dc64d06ff8d2c0b91fbf545aff26",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/obj/_objects.mac",
+      "sha256": "9103af9bb7d8e005fb3e31048b9dc59a34de2862df3c776995fb3d5c6832fa41",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\system\\obj\\_objects.mac",
+      "source_sha256": "920b948f69faf7ec1ff7ff57d7b8d3ef04dc71402e5c5b8147a08bf62eb5b036",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/obj/_objects.mac",
+      "sha256": "a74e20439185dd86e1633c76cd30378b922cfd9cfe997739cbc45699f1a6682a",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\base\\video\\obj\\_objects.mac",
+      "source_sha256": "638df9b297ad7d22b1e5616027d9afd930efd4c5c3db1c6cf8a06a4d1bf22ff3",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/obj/_objects.mac",
+      "sha256": "dccb608a3ac9d3eb7e72c98c8437598ed1e2b704dc4188b4722d74efdaac3be6",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\host\\src\\obj\\_objects.mac",
+      "source_sha256": "525f2774fc93773db5dbc9d3da2237084079c23c78f3324f1d618a136713eacc",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/obj/_objects.mac",
+      "sha256": "c4afc1382e6c026355e878cbee84211362c13466e5218e0b2b2423a1f685dcd0",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\obj.vdm\\obj\\_objects.mac",
+      "source_sha256": "59de8c64c84dc886e37ce6c3f73c8940ff1339c12c8ce32994c7320767793803",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/mscdex/vdd/obj/_objects.mac",
+      "sha256": "a3922f51ae3da9856261d52d6a110930017e49c6737bd4e9db09fdd6fd6fda8b",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdd\\samples\\mscdex\\vdd\\obj\\_objects.mac",
+      "source_sha256": "eeaa1765db58fd45e39aa35a9dcf4d47e9d3b967e559e9947a2f27d1dd8d3c52",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/vdmdbg/obj/_objects.mac",
+      "sha256": "aabeef466eb72e9c624a3b918c64b29f62ad4f5818c0bb11cd1b33f6405f10a8",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdmdbg\\obj\\_objects.mac",
+      "source_sha256": "3a719b1fac61c301826a876e5e9e9dc767c042febcf7376eb556b04ebb69aea5",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/_objects.mac",
+      "sha256": "5654d072984d4b73d07f78404a425a3f8c421daf26dc960948bb9ffa68ae2de9",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdmexts\\obj\\_objects.mac",
+      "source_sha256": "5dce2748ff034d465dc8f6e72c2ccd2b5b9e83f0c90f75c8fbb10fb0be54f340",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/obj/_objects.mac",
+      "sha256": "f4d85c3c09a1c9ce2eb151f67ad17d79f48f3fcbec98e0cd23c923f58c95b693",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdmredir\\obj\\_objects.mac",
+      "source_sha256": "b44221bc699028662ac4f39428af1fffc412c78288b53266ee8668a0e13d8bf7",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/obj/_objects.mac",
+      "sha256": "8f4889bc31c7fb525f7f8bc6d6ab4fc4a697877370b82e6759eb3b285519f07e",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow32\\obj\\_objects.mac",
+      "source_sha256": "6641459845774ce515deb7439fc1c423b94d4a2758c726d495dfea4495cd3e9c",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/xms.486/obj/_objects.mac",
+      "sha256": "62c8f06e2b4a4f782620e0f371653cb7b322ee4346b7b24dd4a2d3416786ed9a",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\xms.486\\obj\\_objects.mac",
+      "source_sha256": "9eabcc0d952c321916f28cb511e207c5ad010aa26150827ec8bd202551e217bd",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/obj/i386/dpmimem.obj",
+      "sha256": "d6390b942d4022d4930f4023996e85dba30c4e9314a9f81540d57a4bd9fcd6a5",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dpmi32\\obj\\i386\\dpmimem.obj",
+      "source_sha256": "d6390b942d4022d4930f4023996e85dba30c4e9314a9f81540d57a4bd9fcd6a5",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/obj/i386/dpmimisc.obj",
+      "sha256": "b6a5f75c9bba241b1d974fcd1d16ee8d74eac4be2082da5f9bfbd9abbf6ec390",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dpmi32\\obj\\i386\\dpmimisc.obj",
+      "source_sha256": "b6a5f75c9bba241b1d974fcd1d16ee8d74eac4be2082da5f9bfbd9abbf6ec390",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfax/obj/i386/wowfax.obj",
+      "sha256": "b68dd7979aa5a112b11d8773c2e5b325e506e9f7108f452d12fe38315b433358",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\fax\\wowfax\\obj\\i386\\wowfax.obj",
+      "source_sha256": "b68dd7979aa5a112b11d8773c2e5b325e506e9f7108f452d12fe38315b433358",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfaxui/obj/i386/wfhelper.obj",
+      "sha256": "186127466c9e670902f50838321926919cddb6e464e174609661f07f193ef205",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\fax\\wowfaxui\\obj\\i386\\wfhelper.obj",
+      "source_sha256": "186127466c9e670902f50838321926919cddb6e464e174609661f07f193ef205",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfaxui/obj/i386/wfsheets.obj",
+      "sha256": "b36d5c6477a9548af0c7ea72c50ccc72ca2a649b088901422781395526deb8cc",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\fax\\wowfaxui\\obj\\i386\\wfsheets.obj",
+      "source_sha256": "b36d5c6477a9548af0c7ea72c50ccc72ca2a649b088901422781395526deb8cc",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfaxui/obj/i386/wfupgrad.obj",
+      "sha256": "94b138581a262b5b9222b7e33e3970f48c2b000559bf1394782b00d86c7aea25",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\fax\\wowfaxui\\obj\\i386\\wfupgrad.obj",
+      "source_sha256": "94b138581a262b5b9222b7e33e3970f48c2b000559bf1394782b00d86c7aea25",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfaxui/obj/i386/wowfaxui.obj",
+      "sha256": "407faa7a97f2d838fceced041e6df4aa08720f0c6412d28998213c36344548cc",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\fax\\wowfaxui\\obj\\i386\\wowfaxui.obj",
+      "source_sha256": "407faa7a97f2d838fceced041e6df4aa08720f0c6412d28998213c36344548cc",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/obj/i386/ntvdm.obj",
+      "sha256": "5a3820cdde1047a1b87bc16d0e7b01e5502e3f07cb144cc749fcbef73e58512b",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\obj.vdm\\obj\\i386\\ntvdm.obj",
+      "source_sha256": "5a3820cdde1047a1b87bc16d0e7b01e5502e3f07cb144cc749fcbef73e58512b",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/mscdex/vdd/obj/i386/vcdex.obj",
+      "sha256": "3623a2162afb90115619d78646be7bed80449f62cb5730e0c29261a902e1db0e",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdd\\samples\\mscdex\\vdd\\obj\\i386\\vcdex.obj",
+      "source_sha256": "3623a2162afb90115619d78646be7bed80449f62cb5730e0c29261a902e1db0e",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/vdmdbg/obj/i386/vdmdbg.obj",
+      "sha256": "2b27b1595166b6bef7eefee0bf9ad7a550e893424bbe4c67d8025a51e5d0fc31",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdmdbg\\obj\\i386\\vdmdbg.obj",
+      "source_sha256": "2b27b1595166b6bef7eefee0bf9ad7a550e893424bbe4c67d8025a51e5d0fc31",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/i386/platform.obj",
+      "sha256": "0985bc143d63a95de83c846d133d22a08751e21dc5ca4e430fd2d0819f0f52a5",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdmexts\\obj\\i386\\platform.obj",
+      "source_sha256": "0985bc143d63a95de83c846d133d22a08751e21dc5ca4e430fd2d0819f0f52a5",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/i386/reflect.obj",
+      "sha256": "2a97e5b7625fde33092051144992effb829c9e69bc7a5c6b76aa1a90fa9a045a",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdmexts\\obj\\i386\\reflect.obj",
+      "source_sha256": "2a97e5b7625fde33092051144992effb829c9e69bc7a5c6b76aa1a90fa9a045a",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/i386/regs.obj",
+      "sha256": "578cfce3e9d0d37877b3a8ba7c5113d5c70e9dad0ed42f99b63e431ecdc62a91",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdmexts\\obj\\i386\\regs.obj",
+      "source_sha256": "578cfce3e9d0d37877b3a8ba7c5113d5c70e9dad0ed42f99b63e431ecdc62a91",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/i386/vdmtib.obj",
+      "sha256": "5313425fa443bda61c6ddafb7369e0f9e3364b93f96da00282806940f9724598",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdmexts\\obj\\i386\\vdmtib.obj",
+      "source_sha256": "5313425fa443bda61c6ddafb7369e0f9e3364b93f96da00282806940f9724598",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/i386/wowprof.obj",
+      "sha256": "8d804f3ab44b3843bb477f256af9945895a228b4a7ab8f03d5c3e2cac74adf31",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\vdmexts\\obj\\i386\\wowprof.obj",
+      "source_sha256": "8d804f3ab44b3843bb477f256af9945895a228b4a7ab8f03d5c3e2cac74adf31",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/obj/i386/callpr32.obj",
+      "sha256": "e9db45581c81dc79ddcf210bac16d54f921c44e1925afe60b59b371c3709347c",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow32\\obj\\i386\\callpr32.obj",
+      "source_sha256": "e9db45581c81dc79ddcf210bac16d54f921c44e1925afe60b59b371c3709347c",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/obj/i386/fastwow.obj",
+      "sha256": "b456b9fe334fae746b7910c1f63543c6a8525c6dbcfac331be4c74c2cccc68ba",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow32\\obj\\i386\\fastwow.obj",
+      "source_sha256": "b456b9fe334fae746b7910c1f63543c6a8525c6dbcfac331be4c74c2cccc68ba",
+      "normalized_equal": true
+    },
+    {
+      "path": "src/mvdm-host/xms.486/obj/i386/xmsmem86.obj",
+      "sha256": "7ad73a3ce41f06d62f65df4edca018952e242c9d0b49935ee3adb6e2e7f65c3e",
+      "source": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\xms.486\\obj\\i386\\xmsmem86.obj",
+      "source_sha256": "7ad73a3ce41f06d62f65df4edca018952e242c9d0b49935ee3adb6e2e7f65c3e",
+      "normalized_equal": true
+    }
+  ],
+  "source_manifest": "artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t301-s1-opennt-src-2-mvdm-extra-import-manifest.tsv",
+  "limitations": [
+    "Filename scan can conservatively leave other unused files.",
+    "No assertion about unsupported future OpenNT builds."
+  ]
+}

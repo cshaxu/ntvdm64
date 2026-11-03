@@ -1,0 +1,17 @@
+{
+  "source": "src/non-mvdm/base/ntos/ex/probe.c",
+  "old_commit": "build-owned immediate pre-edit snapshot",
+  "old_sha256": "d5a4aa697600bba9c8d8a4be71103e88c548c6f93c7a6951c9c0557b978fd7d3",
+  "current_sha256": "01e82e25e9f06ee036c7781385e05e6090da6cb9e27c225a03fe9ac4efcb8515",
+  "method": "MSVC /EP, exact Ninja target flags, identical scratch source path; nonblank stripped lines hashed. ntSend.h copied without modification.",
+  "contexts": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/probe.obj",
+      "old_sha256": "5862ed1d2fb2bf0ccf376b6f086e8495607828b6888b9ad0fe9cfdcc6a027139",
+      "current_sha256": "5862ed1d2fb2bf0ccf376b6f086e8495607828b6888b9ad0fe9cfdcc6a027139",
+      "equal": true
+    }
+  ],
+  "limits": "Tests selected preprocessed text only; excludes diagnostics and does not establish other contexts, link or runtime behavior."
+}

@@ -1,0 +1,129 @@
+{
+  "scope": "20 more actual x86 WOW32 TUs; candidate _USER_ wrapper and scratch include-order adjustments",
+  "baseline_pass": 20,
+  "candidate_pass": 16,
+  "rows": [
+    {
+      "target": "obj/opennt-user/button-client.obj",
+      "baseline_exit": 0,
+      "candidate_exit": 0,
+      "first_error": null
+    },
+    {
+      "target": "obj/opennt-user/control-client-mngrayc.obj",
+      "baseline_exit": 0,
+      "candidate_exit": 2,
+      "first_error": "error C1189: #error:  Select the shared original control-client bindings explicitly"
+    },
+    {
+      "target": "obj/opennt-user/control-client-draw.obj",
+      "baseline_exit": 0,
+      "candidate_exit": 0,
+      "first_error": null
+    },
+    {
+      "target": "obj/opennt-user/handtabl.obj",
+      "baseline_exit": 0,
+      "candidate_exit": 0,
+      "first_error": null
+    },
+    {
+      "target": "obj/opennt-user/cleanup.obj",
+      "baseline_exit": 0,
+      "candidate_exit": 0,
+      "first_error": null
+    },
+    {
+      "target": "obj/opennt-user/button-atlas-table.obj",
+      "baseline_exit": 0,
+      "candidate_exit": 0,
+      "first_error": null
+    },
+    {
+      "target": "obj/wow32-dll/wow_private_user_compat.obj",
+      "baseline_exit": 0,
+      "candidate_exit": 0,
+      "first_error": null
+    },
+    {
+      "target": "obj/wow32-dll/wow_user_discovery.obj",
+      "baseline_exit": 0,
+      "candidate_exit": 0,
+      "first_error": null
+    },
+    {
+      "target": "obj/wow32-dll/wow_user_object_bindings.obj",
+      "baseline_exit": 0,
+      "candidate_exit": 0,
+      "first_error": null
+    },
+    {
+      "target": "obj/wow32-dll/wow_menu_client_bindings.obj",
+      "baseline_exit": 0,
+      "candidate_exit": 0,
+      "first_error": null
+    },
+    {
+      "target": "obj/wow32-dll/wow_window_words_binding.obj",
+      "baseline_exit": 0,
+      "candidate_exit": 2,
+      "first_error": "error C2065: 'PROCOBJHEAD': undeclared identifier"
+    },
+    {
+      "target": "obj/wow32-dll/wow_menu_native_bindings.obj",
+      "baseline_exit": 0,
+      "candidate_exit": 0,
+      "first_error": null
+    },
+    {
+      "target": "obj/wow32-dll/wow_user_borrow_scope.obj",
+      "baseline_exit": 0,
+      "candidate_exit": 2,
+      "first_error": "error C2065: 'PROCOBJHEAD': undeclared identifier"
+    },
+    {
+      "target": "obj/wow32-dll/wow_cleanup_bindings.obj",
+      "baseline_exit": 0,
+      "candidate_exit": 0,
+      "first_error": null
+    },
+    {
+      "target": "obj/wow32-dll/wow_class_client_bindings.obj",
+      "baseline_exit": 0,
+      "candidate_exit": 0,
+      "first_error": null
+    },
+    {
+      "target": "obj/wow32-dll/wow_user_message_bridge.obj",
+      "baseline_exit": 0,
+      "candidate_exit": 0,
+      "first_error": null
+    },
+    {
+      "target": "obj/wow32-dll/wow_dialog_creation_binding.obj",
+      "baseline_exit": 0,
+      "candidate_exit": 0,
+      "first_error": null
+    },
+    {
+      "target": "obj/wow32-dll/wow_dialog_keyboard_binding.obj",
+      "baseline_exit": 0,
+      "candidate_exit": 0,
+      "first_error": null
+    },
+    {
+      "target": "obj/wow32-dll/wow_dialog_procedure_bindings.obj",
+      "baseline_exit": 0,
+      "candidate_exit": 0,
+      "first_error": null
+    },
+    {
+      "target": "obj/wow32-dll/wow_dialog_call_bindings.obj",
+      "baseline_exit": 0,
+      "candidate_exit": 2,
+      "first_error": "error C2065: 'PROCOBJHEAD': undeclared identifier"
+    }
+  ],
+  "correction": "Candidate target 1 initially used wrong precomp overlay; correcting overlay selection still fails for missing declarations, so none of these failures is attributed to runtime behavior.",
+  "limits": "No object equality comparison or product source changes. Other units and full link/runtime untested."
+}

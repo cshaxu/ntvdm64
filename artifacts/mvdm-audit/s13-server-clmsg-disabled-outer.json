@@ -1,0 +1,22 @@
+{
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "sha256": "e842aafc4d21df0e2e32b3e7e48196d363c6e547945cf49a99aae0e1510e71e1"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "sha256": "3da84f73862ec7953175f626f929b7157a78eca9c8832d1ef08d4e23fefc67df"
+    }
+  ],
+  "original_guard_lines": [
+    461,
+    1650
+  ],
+  "continuation": [
+    464,
+    1677
+  ],
+  "validation": "x86 WOW32 objects and DLL built; x86 first-depth guard suite passed",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r179.zip"
+}

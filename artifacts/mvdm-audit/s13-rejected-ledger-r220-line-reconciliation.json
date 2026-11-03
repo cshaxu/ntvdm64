@@ -1,0 +1,26 @@
+[
+  {
+    "index": 0,
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+    "macro": "SFELLOW",
+    "old_line": 516,
+    "new_line": 519,
+    "guard": "#ifdef SFELLOW"
+  },
+  {
+    "index": 52,
+    "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+    "macro": "A3CPU",
+    "old_line": 154,
+    "new_line": 156,
+    "guard": "#ifdef A3CPU"
+  },
+  {
+    "index": 110,
+    "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+    "macro": "SEGMENTATION",
+    "old_line": 1333,
+    "new_line": 1338,
+    "guard": "#ifdef SEGMENTATION"
+  }
+]

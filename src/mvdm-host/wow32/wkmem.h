@@ -13,7 +13,10 @@
 
 LPVOID FASTCALL WK32VirtualAlloc(PVDMFRAME pFrame);
 BOOL FASTCALL   WK32VirtualFree(PVDMFRAME pFrame);
+#line 16
 #if 0
+#line 17
 #error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#line 20
 VOID FASTCALL   WK32GlobalMemoryStatus(PVDMFRAME pFrame);

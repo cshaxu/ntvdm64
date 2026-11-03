@@ -1,0 +1,26 @@
+{
+  "sources": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "sha256": "c8ede9f8aef7837655a8caefc867de787660ff6ff9c318391b222c4bacca0f3a"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "sha256": "df9e240821b305659a3585439c1a6cae7f3408f7ebcdb0f994fe9f98e781d7e7"
+    }
+  ],
+  "original_lines": {
+    "ntstubs": [
+      953,
+      965
+    ],
+    "nt_event": [
+      1493
+    ]
+  },
+  "build": "x86 worker, WOW32 and call-boundaries passed after correcting initial source-selector split failure",
+  "tests": "x86 first-depth guard suite passed; exhaustive 16 selector combinations preserve original priority",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r192.zip",
+  "selector_priority": "original elif priority preserved, including combinations of selector definitions",
+  "preprocessor": "all five actual WOW32 ntstubs compile contexts match pre-change nonblank output"
+}

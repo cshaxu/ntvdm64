@@ -79,10 +79,12 @@ void get_lar()
 
 #endif
 
+#line 91
 #if !defined(PROD) && defined(SPC386)
+#line 92
 #error Unsupported excluded original configuration
 #endif /* !PROD && SPC386 */
-#line 233
+#line 243
 
 void trace(error_msg, dump_info)
 char *error_msg;
@@ -129,10 +131,12 @@ int  dump_info;
 
 void trace_init()
 {
+#line 468
 #if !defined(PROD) || defined(HUNTER)
+#line 469
 #error Unsupported excluded original configuration
 #endif /* !PROD || HUNTER */
-#line 273
+#line 493
 }
 
 /* Get the code for 4.0 style CPUs */

@@ -1,0 +1,28 @@
+{
+  "scope": "One isolated x86 wow_control_extent_bindings.c translation unit with original _USER_ guard around scratch copy of current subset",
+  "candidate": "build\\t473-s13\\header-hoist-experiment\\control-extent-view-first.obj",
+  "build": "pass",
+  "baseline": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wow32-dll\\wow_control_extent_bindings.obj",
+  "matching_sections": {
+    ".text$mn": {
+      "size": 71,
+      "content_sha256": "95453289bf588ed4aa4a7a83323a83ff4a86e68f43b59c3dd8088a753de73607",
+      "relocations_sha256": "b3b923c9d61e3b963c18d26055379a8084b5b1e09edab384f0f70315d04b4c03",
+      "relocation_count": 3
+    },
+    ".rdata": {
+      "size": 64,
+      "content_sha256": "1410510e577bc48dc2c0c4a8a4ee587585fdd126de74c5fba35bd3723966a75b",
+      "relocations_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "relocation_count": 0
+    },
+    ".drectve": {
+      "size": 47,
+      "content_sha256": "23076615271abf1af5c29214a381c43e30e7a0950c49ba927758c527482e4c63",
+      "relocations_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "relocation_count": 0
+    }
+  },
+  "log_sha256": "e3ecc00d4c4e9bc007c3991129c303417447f64cec1551f54bccb52b9d544fb0",
+  "limitations": "One TU only. Object debug/checksum sections differ, and no link or runtime test was performed. Original usercli guard is not restored by this experiment; all actual user.h consumers still need testing."
+}

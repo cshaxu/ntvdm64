@@ -1,0 +1,7 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/client/client.c",
+  "original_line": 2288,
+  "before_sha256": "48a4740df30344133d86b1c64195dd71c9bf3b3a32aca5ca29a6c4c50dc26acc",
+  "after_sha256": "ea8840b4b7a7aca6bebb6f8a2b57d9dc0ac463f080535db3979fe946e1a5817d",
+  "reason": "directive belongs inside omitted original function, not at file scope; original group pending"
+}

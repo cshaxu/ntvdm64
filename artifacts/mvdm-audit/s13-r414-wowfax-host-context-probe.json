@@ -1,0 +1,19 @@
+{
+  "flags_source": "build/.ninja/msvc-x86-release/wow32/build.ninja cflags plus WOW_ORIGINAL_THUNK_BUILD",
+  "method": "real source preprocessed with checks immediately before original include",
+  "results": [
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\wow32\\wkman.c",
+      "sha256": "b6daf4b15721351d241003d49d7ca92b7f40f83a0fd583d98af6748497248eea",
+      "returncode": 0,
+      "stderr": "wkman.c\r\n"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\wow32\\wow32fax.c",
+      "sha256": "289bc523ff8074bcf77d29b5404a706024ecfca81fdcdaf43f0673e98aac3a4a",
+      "returncode": 0,
+      "stderr": "wow32fax.c\r\n"
+    }
+  ],
+  "limits": "host x86 Release only; not guest or unobserved configs"
+}

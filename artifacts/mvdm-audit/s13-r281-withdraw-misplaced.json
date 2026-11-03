@@ -1,0 +1,31 @@
+{
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "before_sha256": "b630ee7f4794ad88ff8de688599269d0dcd129392ea015b08f59574790144ff2",
+      "after_sha256": "afda4499824b324b85eb2aafd24eeb9bbace2cde2a7a9ab464c548af2aefcb87",
+      "original_lines": [
+        717,
+        753,
+        769,
+        784
+      ],
+      "original_evidence": "artifacts/mvdm-audit/s13-client-ntstubs-r259-original-guards.json",
+      "prior_queue": 259,
+      "reason": "guard in an omitted original function was incorrectly placed at file scope"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "before_sha256": "f24f5cd7c7a4b31626630b33225a3539e03bd7316a1e7dc11e0b69edda124104",
+      "after_sha256": "869df62743b8a17c40934b3bce28afcb14113ab378e9bccf46c27ff6eac9179e",
+      "original_lines": [
+        957,
+        963,
+        1203
+      ],
+      "original_evidence": "artifacts/mvdm-audit/s13-queue-r260-original-guards.json",
+      "prior_queue": 260,
+      "reason": "guard in an omitted original function was incorrectly placed at file scope"
+    }
+  ]
+}

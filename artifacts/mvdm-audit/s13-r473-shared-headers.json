@@ -1,0 +1,17 @@
+{
+  "host_observations": "s13-wow-shared-actual-host-contexts.json",
+  "source_evidence": {
+    "src/mvdm-guest/wow16/test/shell/wowexfax.c": "8382d0cb85a29323cf76657fba40753dce29bb0b4d97db77698aabd602d6fee0",
+    "src/mvdm-guest/wow16/test/shell/wowexec.c": "24081cf36bcd3af7454cb9d0fc073bcfb663f072355e8c68ec14c611313de0a3",
+    "src/mvdm-guest/wow16/test/shell/makefile": "3162bb5406c2621e67456e8a5d39dbc3130266f961064d1eb0c0f3853c7c96da",
+    "src/mvdm-host/inc/wowfax.h": "97c6c40dc2d0565a21dc1be4112fe24f138b10ddbb55fbd29e55da972a2a2c84",
+    "src/mvdm-host/inc/wowinfo.h": "a0a125eedf4138d353fea1f97316331fd5a8acfb82dbd80d7abfe5dedf350026"
+  },
+  "facts": [
+    "wowexfax.c defines _WOWFAX16_ before including wowfax.h",
+    "wowexec.c includes wowinfo.h",
+    "original guest makefile lists both headers as dependencies"
+  ],
+  "decision": "Preserve original shared-header arms; host-only negative observations cannot justify #error for guest source contexts. Guest was neither modified nor compiled.",
+  "limits": "Static source evidence, not evidence that any guest was built or that all historical guest configurations are currently supported."
+}

@@ -1,0 +1,16 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+  "before_sha256": "afda4499824b324b85eb2aafd24eeb9bbace2cde2a7a9ab464c548af2aefcb87",
+  "after_sha256": "b630ee7f4794ad88ff8de688599269d0dcd129392ea015b08f59574790144ff2",
+  "original_groups": [
+    717,
+    753,
+    769,
+    784
+  ],
+  "selected_alternatives": "Enclosing message functions are omitted, selected sides remain pending",
+  "preprocessing": "s13-client-ntstubs-r259-preprocess.json",
+  "forced_controls": "s13-client-ntstubs-r259-controls.json",
+  "build": "cached x86 WOW32 and call-boundary objects passed",
+  "limits": "No runtime, x64 product or original functions restored; not first-depth completion."
+}

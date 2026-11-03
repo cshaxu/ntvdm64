@@ -1,0 +1,93 @@
+{
+  "package": "build\\t473-s13\\r477-phase1-package",
+  "rows": [
+    {
+      "name": "run16.exe",
+      "input": "build\\.ninja\\msvc-x64-release\\launcher\\run16.exe",
+      "input_matches": true,
+      "package_matches": true
+    },
+    {
+      "name": "ntsrv.exe",
+      "input": "build\\.ninja\\msvc-x64-release\\service\\ntsrv.exe",
+      "input_matches": true,
+      "package_matches": true
+    },
+    {
+      "name": "ntcon.exe",
+      "input": "build\\.ninja\\msvc-x64-release\\frontend\\ntcon.exe",
+      "input_matches": true,
+      "package_matches": true
+    },
+    {
+      "name": "ntvdm.exe",
+      "input": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe",
+      "input_matches": true,
+      "package_matches": true
+    },
+    {
+      "name": "ntvwm.exe",
+      "input": "build\\.ninja\\msvc-x64-release\\worker\\ntvwm.exe",
+      "input_matches": true,
+      "package_matches": true
+    },
+    {
+      "name": "ntmon.exe",
+      "input": "build\\.ninja\\msvc-x64-release\\monitor\\ntmon.exe",
+      "input_matches": true,
+      "package_matches": true
+    },
+    {
+      "name": "WOW32.DLL",
+      "input": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+      "input_matches": true,
+      "package_matches": true
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "input": "build\\.ninja\\msvc-x86-release\\worker\\VDMREDIR.DLL",
+      "input_matches": true,
+      "package_matches": true
+    },
+    {
+      "name": "nthook32.dll",
+      "input": "build\\.ninja\\msvc-x86-release\\worker\\nthook32.dll",
+      "input_matches": true,
+      "package_matches": true
+    },
+    {
+      "name": "nthook64.dll",
+      "input": "build\\.ninja\\msvc-x64-release\\hook\\nthook64.dll",
+      "input_matches": true,
+      "package_matches": true
+    }
+  ],
+  "full_build_results": [
+    {
+      "exit": 0,
+      "name": "x86",
+      "end": "2026-11-03T14:57:53.4498935Z",
+      "start": "2026-11-03T14:56:25.6808104Z"
+    },
+    {
+      "exit": 0,
+      "name": "x86-extra",
+      "end": "2026-11-03T14:58:09.0408755Z",
+      "start": "2026-11-03T14:57:53.7183260Z"
+    },
+    {
+      "exit": 0,
+      "name": "x64",
+      "end": "2026-11-03T15:00:17.2449434Z",
+      "start": "2026-11-03T14:58:09.0549469Z"
+    }
+  ],
+  "comparison": "s13-r477-package-compare.json",
+  "incremental": "s13-r477-incremental-dry-run.json",
+  "prior_runtime_evidence": [
+    "s13-r390-full-verification.json",
+    "s13-r476-gameplay-gates.json",
+    "s13-r476-win31-gate.json"
+  ],
+  "limits": "Latest linked ten inputs and staged package match. Reused prior runtime evidence applies only subject to documented PE/debug timestamp-only byte differences; NIDDB and historical test semantic limitations remain."
+}

@@ -1,0 +1,125 @@
+{
+  "controls": [
+    {
+      "line": 206,
+      "arch": "x86",
+      "exit": 2,
+      "error_line": 207
+    },
+    {
+      "line": 206,
+      "arch": "x64",
+      "exit": 2,
+      "error_line": 207
+    },
+    {
+      "line": 243,
+      "arch": "x86",
+      "exit": 2,
+      "error_line": 244
+    },
+    {
+      "line": 243,
+      "arch": "x64",
+      "exit": 2,
+      "error_line": 244
+    },
+    {
+      "line": 310,
+      "arch": "x86",
+      "exit": 2,
+      "error_line": 331
+    },
+    {
+      "line": 310,
+      "arch": "x64",
+      "exit": 2,
+      "error_line": 331
+    },
+    {
+      "line": 353,
+      "arch": "x86",
+      "exit": 2,
+      "error_line": 354
+    },
+    {
+      "line": 353,
+      "arch": "x64",
+      "exit": 2,
+      "error_line": 354
+    },
+    {
+      "line": 992,
+      "arch": "x86",
+      "exit": 2,
+      "error_line": 993
+    },
+    {
+      "line": 992,
+      "arch": "x64",
+      "exit": 2,
+      "error_line": 993
+    },
+    {
+      "line": 1096,
+      "arch": "x86",
+      "exit": 2,
+      "error_line": 1097
+    },
+    {
+      "line": 1096,
+      "arch": "x64",
+      "exit": 2,
+      "error_line": 1097
+    },
+    {
+      "line": 1122,
+      "arch": "x86",
+      "exit": 2,
+      "error_line": 1123
+    },
+    {
+      "line": 1122,
+      "arch": "x64",
+      "exit": 2,
+      "error_line": 1123
+    },
+    {
+      "line": 1191,
+      "arch": "x86",
+      "exit": 2,
+      "error_line": 1208
+    },
+    {
+      "line": 1191,
+      "arch": "x64",
+      "exit": 2,
+      "error_line": 1208
+    },
+    {
+      "line": 1317,
+      "arch": "x86",
+      "exit": 2,
+      "error_line": 1350
+    },
+    {
+      "line": 1317,
+      "arch": "x64",
+      "exit": 2,
+      "error_line": 1350
+    },
+    {
+      "line": 1434,
+      "arch": "x86",
+      "exit": 2,
+      "error_line": 1435
+    },
+    {
+      "line": 1434,
+      "arch": "x64",
+      "exit": 2,
+      "error_line": 1435
+    }
+  ],
+  "limits": "Isolated forced Unicode profiles; omitted selected functions not recovered."
+}

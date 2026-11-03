@@ -1,0 +1,18 @@
+{
+  "scope": "nt_aorc first-depth CCPU and CPU40 conditions",
+  "prior_queue": "s13-bfs-depth1-working-queue-195r150.zip",
+  "source": "src/mvdm-host/softpc.new/host/src/nt_aorc.c",
+  "source_sha256": "14eab307b01841a0d627ee159c7525fcb5f6007f84f5624988e1e46708be8db8",
+  "historical_test_object": "build\\t473-s13\\t335-context\\nt-aorc.obj",
+  "object_sha256": "b538ef264c3418962eb4e3f52483ee396ad84345f46c2852b98cc52b6450fca1",
+  "compile_defines": [
+    "CCPU",
+    "CPU_40_STYLE"
+  ],
+  "evidence": "The actual T335 object compilation completed; no source-level definition or undefinition changes these two macros.",
+  "limitations": [
+    "The complete T313/T335 link and execution have not passed and are not claimed functional.",
+    "The object is not selected by the current product worker.",
+    "This does not establish selection of nested conditions."
+  ]
+}

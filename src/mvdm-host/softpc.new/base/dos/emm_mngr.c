@@ -989,7 +989,7 @@ GLOBAL int map_page IFN2(short, EM_page_no,
 #ifndef NTVDM
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
-#line 990
+#line 1191
 	if(host_map_page(EM_page_no, segment) != SUCCESS)
 		return(FAILURE);
 
@@ -1044,7 +1044,7 @@ GLOBAL int unmap_page IFN1(unsigned char, physical_page_no)
 #ifndef NTVDM
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
-#line 1044
+#line 1249
 
 	if(host_unmap_page(segment, EM_page_no) != SUCCESS)
 		return(FAILURE);
@@ -1212,7 +1212,7 @@ GLOBAL int restore_map (short handle_no,
 			short pages_out[], 
 			short pages_in[])
 #else
-#line 1209
+#line 1414
 GLOBAL int restore_map (handle_no, segment, offset, pages_out, pages_in)
 short handle_no;
 unsigned short segment; 
@@ -1256,7 +1256,7 @@ short pages_in[];
 #line 1246
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
-#line 1248
+#line 1453
 			pages_out[i] = old_page;
 		else
 			pages_out[i] = EMPTY;
@@ -1483,7 +1483,7 @@ DESCRIPTION	:
 
 
 #endif
-#line 1472
+#line 1677
 
 GLOBAL short get_total_pages IFN0()
 {
@@ -1498,7 +1498,7 @@ GLOBAL short get_total_pages IFN0()
 
 
 #endif
-#line 1486
+#line 1691
 
 GLOBAL short get_unallocated_pages IFN0()
 {

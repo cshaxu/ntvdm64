@@ -1901,10 +1901,12 @@ ULONG FASTCALL WU32GrayString(PVDMFRAME pFrame)
 
        GETPSZPTR(vpstr, psz2);
 
+#line 1907
 #ifdef DOESNT_USER_DO_THIS
+#line 1908
 #error Unsupported excluded original configuration
 #endif
-#line 1923
+#line 1918
         ul = GETBOOL16(GrayString(hdc,
                                   HBRUSH32(parg16->f2),
                                   NULL,
@@ -2984,10 +2986,12 @@ ULONG FASTCALL WU32SetSysColors(PVDMFRAME pFrame)
     RETURN(0);
 }
 
+#line 2974
 #ifdef NEVER
+#line 2975
 #error Unsupported excluded original configuration
 #endif // NEVER
-#line 3031
+#line 3003
 
 /*++
     void ShowOwnedPopups(<hwnd>, <fShow>)
@@ -3257,9 +3261,12 @@ ULONG FASTCALL WU32ValidateRgn(PVDMFRAME pFrame)
     called %WinHelp% with <wCommand> set to HELP_QUIT.
 --*/
 
+#line 3272
 #if 0
+#line 3273
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#line 3369
 
 
 #pragma pack(1)

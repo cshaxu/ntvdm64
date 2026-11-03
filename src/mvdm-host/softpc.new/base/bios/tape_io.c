@@ -109,9 +109,12 @@ half_word target_AR;
 	half_word	mask,		/* interrupt mask			*/
 			alarm;		/* value read from alarm register	*/	
 
+#line 100
 #if defined(NTVDM) && defined(MONITOR)
+#line 101
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif /* NTVDM & MONITOR */
+#line 103
         /*
          *	Determine function
          */
@@ -130,9 +133,12 @@ half_word target_AR;
                 break;
 
 	case INT15_EMS_DETERMINE:
+#line 118
 #if 0 /* I'm sure we've all had enough of this one */
+#line 119
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#line 121
 #ifdef PM
                 outb(CMOS_PORT, CMOS_U_M_S_LO);
                 inb(CMOS_DATA, &cmos_u_m_s_lo);
@@ -265,7 +271,7 @@ half_word target_AR;
 #else
 #error Unsupported excluded original configuration
 #endif	/* PM */
-#line 253
+#line 270
                 break;
 
 	case INT15_INTERRUPT_COMPLETE:
@@ -281,10 +287,12 @@ half_word target_AR;
 		setCF( 0 );
 		break;
 
+#line 286
 #ifdef	SPC486
+#line 287
 #error Excluded unsupported SPC486 profile
 #endif	/* SPC486 */
-#line 276
+#line 294
 
 	/* Keyboard intercept 0x4f, wait_event 83, wait 86 are all no longer
 	 * passed through from ROM.
@@ -294,9 +302,12 @@ half_word target_AR;
 		/*
 		 *	All other functions invalid.
 		 */			
+#line 303
 #ifndef	PROD
+#line 304
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif	/* PROD */
+#line 313
 
 		/* Fall through */
 

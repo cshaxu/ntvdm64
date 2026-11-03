@@ -1,0 +1,28 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+  "sha256": "949978a6082447de59d7f58ce06f5232cbe89318ad86df43aac284e67d485615",
+  "original": "O:/repos.external/OpenNT/windows/core/ntuser/client/clmsg.c",
+  "original_lines": [
+    566,
+    572,
+    905,
+    1214
+  ],
+  "classification": "original first-depth FE_IME/DEBUG excluded; existing DEBUG rejection and FE_IME unsupported; original unreviewed branches remain",
+  "selected_preprocessor_nonblank_equal": [
+    "WOW default",
+    "WOW callproc",
+    "fixture default",
+    "fixture callproc"
+  ],
+  "guard_tests": [
+    "x86 passed",
+    "x64 passed"
+  ],
+  "cached_ninja": [
+    "wow32 no work",
+    "call-boundaries no work"
+  ],
+  "runtime": "not independently retested; no release claim",
+  "queue": "artifacts/mvdm-audit/s13-bfs-depth1-working-queue-195r174.zip"
+}

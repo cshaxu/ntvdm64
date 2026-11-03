@@ -1,0 +1,21 @@
+{
+  "previous": "build\\t473-s13\\r457-phase1-package\\system32",
+  "current": "build\\t473-s13\\r461-phase1-package\\system32",
+  "files": 83,
+  "changes": [
+    {
+      "file": "WOW32.DLL",
+      "sizes": [
+        712192,
+        712192
+      ],
+      "count": 4,
+      "offsets": [
+        280,
+        281,
+        625412,
+        625413
+      ]
+    }
+  ]
+}

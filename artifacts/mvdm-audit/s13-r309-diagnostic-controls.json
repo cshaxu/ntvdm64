@@ -1,0 +1,54 @@
+{
+  "cases": [
+    {
+      "name": "anchor00",
+      "expected_line": 22,
+      "source": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "marker_line": 28,
+      "ok": true,
+      "log_sha256": "8060f760c4bccb0232fede6a6021a63f706320ccc7c1aad2e1d1d0f22aa2e0c3"
+    },
+    {
+      "name": "anchor01",
+      "expected_line": 28,
+      "source": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "marker_line": 39,
+      "ok": true,
+      "log_sha256": "5d2ed8d2fd664e1cabc381f4851a178fc8011b5b385fa4526bca899ca3c156e8"
+    },
+    {
+      "name": "anchor02",
+      "expected_line": 33,
+      "source": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "marker_line": 49,
+      "ok": true,
+      "log_sha256": "2a08ddcb06c4b687bc9e63b02734afb1338c2f5ec37f97acd8d9b970575c43ec"
+    },
+    {
+      "name": "anchor03",
+      "expected_line": 40,
+      "source": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "marker_line": 61,
+      "ok": true,
+      "log_sha256": "51f5932de50c46d998f5df57cbfddca967cd4ce3a4be791bdd887efb03765087"
+    },
+    {
+      "name": "anchor04",
+      "expected_line": 46,
+      "source": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "marker_line": 73,
+      "ok": true,
+      "log_sha256": "033c76edeea0d076f394add2c84974ef616ca9d4cbdf34b1834dc5a5b9af7cdf"
+    },
+    {
+      "name": "anchor05",
+      "expected_line": 57,
+      "source": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "marker_line": 89,
+      "ok": true,
+      "log_sha256": "6abefb4e338dfd2b09ed0adb24c91e2cf7ea3c2e7b03a8723ee5362076ccb33e"
+    }
+  ],
+  "failed": [],
+  "limits": "source-derived marker snippets, not full-context runtime proof"
+}

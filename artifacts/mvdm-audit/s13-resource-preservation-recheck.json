@@ -1,0 +1,17 @@
+{
+  "baseline": "HEAD:assets/winnt.zip",
+  "baseline_sha256": "7a0534dec9940b2d8366c8ef71dd536ed94be7817d7c4e1e19bed05f6e60b8f7",
+  "current_sha256": "b79dfb38d99335f59688966d2d13688bd4b8d19af44760d2d68ce5c72a6076e7",
+  "original_entries": 64,
+  "unchanged_entries": 64,
+  "missing": [],
+  "changed": [],
+  "added": [
+    "WINNT/SYSTEM32/FORCEDOS.EXE",
+    "WINNT/SYSTEM32/VCDEX.DLL",
+    "WINNT/SYSTEM32/VDMEXTS.DLL",
+    "WINNT/SYSTEM32/WIN.COM"
+  ],
+  "deleted_useful_extension_candidates": [],
+  "limitations": "Checks tracked deletion names and existing archive bytes, not standalone usefulness or operation of every asset."
+}

@@ -1,0 +1,1488 @@
+{
+  "input_queue": "artifacts/mvdm-audit/s13-bfs-depth1-working-queue-195r250.zip",
+  "input_sha256": "9601269b0756bd5e74c56c2f2d6bfe5c379b5adf149952fd8a78f6c92380d86d",
+  "scope": "unreviewed original depth-one groups with existing mapped files",
+  "method": "exact non-trivial preceding-line text within 12 original lines; candidate discovery only",
+  "limits": "matching text is not proof of original position or branch reachability; no match is not proof of omitted code, particularly with edits, whitespace or macros; does not inspect deeper branches",
+  "groups": [
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\client.c",
+      "original_line": 2288,
+      "original_sha256": "787eda33785a87ce9e71202c97b5913e2857f7106fed5bb97103049b1d5e3472",
+      "current": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "current_sha256": "ea8840b4b7a7aca6bebb6f8a2b57d9dc0ac463f080535db3979fe946e1a5817d",
+      "expressions": [
+        "DEBUG",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "original_line": 331,
+      "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+      "current": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "current_sha256": "66efe6002f7731ec1bab0067c31c822db3c9ae70d9f67bc810e51f40e735e973",
+      "expressions": [
+        "FE_SB",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "original_line": 373,
+      "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+      "current": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "current_sha256": "66efe6002f7731ec1bab0067c31c822db3c9ae70d9f67bc810e51f40e735e973",
+      "expressions": [
+        "LATER"
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "original_line": 453,
+      "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+      "current": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "current_sha256": "66efe6002f7731ec1bab0067c31c822db3c9ae70d9f67bc810e51f40e735e973",
+      "expressions": [
+        "FE_SB",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "original_line": 1777,
+      "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+      "current": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "current_sha256": "66efe6002f7731ec1bab0067c31c822db3c9ae70d9f67bc810e51f40e735e973",
+      "expressions": [
+        "FE_SB",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "original_line": 1803,
+      "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+      "current": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "current_sha256": "66efe6002f7731ec1bab0067c31c822db3c9ae70d9f67bc810e51f40e735e973",
+      "expressions": [
+        "FE_SB",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "original_line": 380,
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "current": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_sha256": "5da4eb58366fe15bb2e312956c48071b9377361e09b9a40b20f8c4a423be6a48",
+      "expressions": [
+        "MEMPHIS_MENUS",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "original_line": 717,
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "current": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_sha256": "5da4eb58366fe15bb2e312956c48071b9377361e09b9a40b20f8c4a423be6a48",
+      "expressions": [
+        "FE_IME",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "original_line": 753,
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "current": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_sha256": "5da4eb58366fe15bb2e312956c48071b9377361e09b9a40b20f8c4a423be6a48",
+      "expressions": [
+        "FE_SB",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "original_line": 769,
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "current": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_sha256": "5da4eb58366fe15bb2e312956c48071b9377361e09b9a40b20f8c4a423be6a48",
+      "expressions": [
+        "FE_SB",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "original_line": 784,
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "current": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_sha256": "5da4eb58366fe15bb2e312956c48071b9377361e09b9a40b20f8c4a423be6a48",
+      "expressions": [
+        "FE_SB",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_line": 15,
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "current": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "4185a1118c6e0cb472f9091a730100a2149b629562371c29964c1b11978560de",
+      "expressions": [
+        "WOW"
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_line": 19,
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "current": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "4185a1118c6e0cb472f9091a730100a2149b629562371c29964c1b11978560de",
+      "expressions": [
+        "WOW",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_line": 304,
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "current": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "4185a1118c6e0cb472f9091a730100a2149b629562371c29964c1b11978560de",
+      "expressions": [
+        "WOW",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_line": 313,
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "current": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "4185a1118c6e0cb472f9091a730100a2149b629562371c29964c1b11978560de",
+      "expressions": [
+        "WOW"
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_line": 435,
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "current": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "4185a1118c6e0cb472f9091a730100a2149b629562371c29964c1b11978560de",
+      "expressions": [
+        "WOW",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_line": 719,
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "current": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "4185a1118c6e0cb472f9091a730100a2149b629562371c29964c1b11978560de",
+      "expressions": [
+        "WOW",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_line": 776,
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "current": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "4185a1118c6e0cb472f9091a730100a2149b629562371c29964c1b11978560de",
+      "expressions": [
+        "WOW",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_line": 795,
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "current": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "4185a1118c6e0cb472f9091a730100a2149b629562371c29964c1b11978560de",
+      "expressions": [
+        "WOW",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_line": 835,
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "current": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "4185a1118c6e0cb472f9091a730100a2149b629562371c29964c1b11978560de",
+      "expressions": [
+        "WOW",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_line": 890,
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "current": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "4185a1118c6e0cb472f9091a730100a2149b629562371c29964c1b11978560de",
+      "expressions": [
+        "WOW"
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_line": 911,
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "current": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "4185a1118c6e0cb472f9091a730100a2149b629562371c29964c1b11978560de",
+      "expressions": [
+        "WOW",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_line": 1067,
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "current": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "4185a1118c6e0cb472f9091a730100a2149b629562371c29964c1b11978560de",
+      "expressions": [
+        "WOW"
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 38,
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+      "expressions": [
+        "UNICODE"
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 206,
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+      "expressions": [
+        "UNICODE",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 217,
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+      "expressions": [
+        "UNICODE"
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 243,
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+      "expressions": [
+        "UNICODE",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 254,
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+      "expressions": [
+        "UNICODE"
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 271,
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+      "expressions": [
+        "UNICODE"
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 310,
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+      "expressions": [
+        "UNICODE",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 353,
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+      "expressions": [
+        "UNICODE",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 369,
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+      "expressions": [
+        "UNICODE"
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 395,
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+      "expressions": [
+        "UNICODE"
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 414,
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+      "expressions": [
+        "UNICODE"
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 431,
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+      "expressions": [
+        "UNICODE"
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 514,
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+      "expressions": [
+        "UNICODE"
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 549,
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+      "expressions": [
+        "UNICODE"
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 934,
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+      "expressions": [
+        "UNICODE"
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 976,
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+      "expressions": [
+        "UNICODE"
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 992,
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+      "expressions": [
+        "UNICODE",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 1096,
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+      "expressions": [
+        "UNICODE",
+        ""
+      ],
+      "nearby_text_matches": [
+        "CLEANUPLPTSTR(strClassName);"
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 1111,
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+      "expressions": [
+        "UNICODE"
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 1122,
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+      "expressions": [
+        "UNICODE",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 1191,
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+      "expressions": [
+        "UNICODE",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 1295,
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+      "expressions": [
+        "UNICODE"
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 1317,
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+      "expressions": [
+        "UNICODE",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 1434,
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+      "expressions": [
+        "UNICODE",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_line": 1505,
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "current": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "00fe311df5ab2b620c84a018ccb864885218298ac41e79e50aec748d5236a37d",
+      "expressions": [
+        "UNICODE"
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\class.c",
+      "original_line": 375,
+      "original_sha256": "82528443bc5f6c227e0e14fe8a9dbc928ba735f98cf3891744c20c8e1604939a",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "current_sha256": "674c9eae8d81a27d2389b86c4f2d7e977cdea572e40e1aff3a1933c13b449a98",
+      "expressions": [
+        "FE_SB",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\exitwin.c",
+      "original_line": 134,
+      "original_sha256": "45b92f7236fba49d58e2c3d912126067c3843ec560c28cdd8a20167c62aaef65",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+      "current_sha256": "db8c589b7c2ea3aa0da53e5097d91d0106495fe447e2c82e31772b2e80d70286",
+      "expressions": [
+        "LATER",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "original_line": 18,
+      "original_sha256": "f0b56314a93423599f06645d17104391f19a0ca07c3944853b065d8866493f7c",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "current_sha256": "f86e1cfd44d38827593b5e1f898fab73777315d2e32e0f387856a7bcf64d46ee",
+      "expressions": [
+        "DEBUG_LOCKS",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "original_line": 594,
+      "original_sha256": "f0b56314a93423599f06645d17104391f19a0ca07c3944853b065d8866493f7c",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "current_sha256": "f86e1cfd44d38827593b5e1f898fab73777315d2e32e0f387856a7bcf64d46ee",
+      "expressions": [
+        "DEBUG",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "original_line": 1321,
+      "original_sha256": "f0b56314a93423599f06645d17104391f19a0ca07c3944853b065d8866493f7c",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "current_sha256": "f86e1cfd44d38827593b5e1f898fab73777315d2e32e0f387856a7bcf64d46ee",
+      "expressions": [
+        "DEBUG",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\inctlpan.c",
+      "original_line": 840,
+      "original_sha256": "0e3999df8610405c990760ee1a417bf312e3b76744f8f9387bbd94583f9d800d",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+      "current_sha256": "2d3978a4da2b4146f5da2beec1cf829bb06227137f0ec567a6a4acb3b975e587",
+      "expressions": [
+        "KOREA"
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_line": 4750,
+      "original_sha256": "b7656bca55e892a42ba825be0324211450ad298c40717e1ae5a889d084467529",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "current_sha256": "66a14d6f4fb27a3eaa51b99fc270d82ea1084ca5d6299f8c9a1e48224bd0c40a",
+      "expressions": [
+        "FE_IME",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 352,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 390,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 563,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 715,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 738,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 964,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 1135,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 1229,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 1312,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 1957,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 2027,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 2112,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 2288,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 2369,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 2723,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 2756,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "MEMPHIS_MENUS",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 3107,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 3158,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 3446,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 3465,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "MEMPHIS_MENUS",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 3476,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "MEMPHIS_MENUS",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 3972,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 4318,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 4420,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "MEMPHIS_MENUS",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 4727,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 5472,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 5506,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 5768,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 5823,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 5986,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 6312,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 6417,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 6689,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 6929,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 6977,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 7026,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 7071,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 7102,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 7131,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 7161,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 7188,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 7333,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 7363,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 7439,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 7917,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 8558,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 8571,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 8687,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 8747,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 9237,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 9303,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 9354,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 9395,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 9435,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_line": 9558,
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+      "expressions": [
+        "defined(_X86_)",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_line": 957,
+      "original_sha256": "0400c034bb5a782e81777e9fd805c07dbcd18d60ec9f1a876cfa67444577e0f8",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_sha256": "869df62743b8a17c40934b3bce28afcb14113ab378e9bccf46c27ff6eac9179e",
+      "expressions": [
+        "FE_IME",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_line": 963,
+      "original_sha256": "0400c034bb5a782e81777e9fd805c07dbcd18d60ec9f1a876cfa67444577e0f8",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_sha256": "869df62743b8a17c40934b3bce28afcb14113ab378e9bccf46c27ff6eac9179e",
+      "expressions": [
+        "FE_IME",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_line": 1203,
+      "original_sha256": "0400c034bb5a782e81777e9fd805c07dbcd18d60ec9f1a876cfa67444577e0f8",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_sha256": "869df62743b8a17c40934b3bce28afcb14113ab378e9bccf46c27ff6eac9179e",
+      "expressions": [
+        "FE_IME",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+      "original_line": 990,
+      "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+      "current": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "current_sha256": "fa1065b07677471fc32e2ee3d3961e2a3365bda04e5899e4ebb55963d1a70c44",
+      "expressions": [
+        "FE_IME",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+      "original_line": 378,
+      "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+      "current": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "current_sha256": "1ab3609b5d67077654063f32c1be0a38aa9ef5be3aa8e843e48df89da5fc3605",
+      "expressions": [
+        "_USERK_",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+      "original_line": 393,
+      "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+      "current": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "current_sha256": "1ab3609b5d67077654063f32c1be0a38aa9ef5be3aa8e843e48df89da5fc3605",
+      "expressions": [
+        "FE_SB",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\draw.c",
+      "original_line": 680,
+      "original_sha256": "7491e5b3331de8cb7a2189b8efbe91f56076f80a08338bf816d793e80a4faf76",
+      "current": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "current_sha256": "eaaac6553c29be08f4c0fe6295106337a4d433b2a95273acc02c5267c3a657d4",
+      "expressions": [
+        "WINDOWS_ME",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "original_line": 719,
+      "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+      "current": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_sha256": "419a3bd0ae994a9ef212f744bd8a41af723a8de8b26123a886f3598525baf8bc",
+      "expressions": [
+        "FE_SB",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "original_line": 875,
+      "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+      "current": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_sha256": "419a3bd0ae994a9ef212f744bd8a41af723a8de8b26123a886f3598525baf8bc",
+      "expressions": [
+        "FE_SB",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "original_line": 1224,
+      "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+      "current": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_sha256": "419a3bd0ae994a9ef212f744bd8a41af723a8de8b26123a886f3598525baf8bc",
+      "expressions": [
+        "FE_SB",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "original_line": 1657,
+      "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+      "current": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_sha256": "419a3bd0ae994a9ef212f744bd8a41af723a8de8b26123a886f3598525baf8bc",
+      "expressions": [
+        "_USERK_",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+      "original_line": 15,
+      "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+      "current": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "current_sha256": "4d16630695670df2c306303f25beeb3636eb6b4419f553fdd28b8d796e7ed99e",
+      "expressions": [
+        "WOW",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+      "original_line": 135,
+      "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+      "current": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "current_sha256": "4d16630695670df2c306303f25beeb3636eb6b4419f553fdd28b8d796e7ed99e",
+      "expressions": [
+        "WOW",
+        ""
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+      "original_line": 244,
+      "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+      "current": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "current_sha256": "4d16630695670df2c306303f25beeb3636eb6b4419f553fdd28b8d796e7ed99e",
+      "expressions": [
+        "WOW"
+      ],
+      "nearby_text_matches": []
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+      "original_line": 344,
+      "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+      "current": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "current_sha256": "4d16630695670df2c306303f25beeb3636eb6b4419f553fdd28b8d796e7ed99e",
+      "expressions": [
+        "WOW"
+      ],
+      "nearby_text_matches": []
+    }
+  ]
+}

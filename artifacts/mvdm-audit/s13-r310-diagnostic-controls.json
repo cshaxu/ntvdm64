@@ -1,0 +1,62 @@
+{
+  "cases": [
+    {
+      "name": "anchor00",
+      "expected_line": 2657,
+      "source": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "marker_line": 2286,
+      "ok": true,
+      "log_sha256": "71e44d9d81daf220aac4c48eb4400020f421be81b8d3190888ceccc211c9319e"
+    },
+    {
+      "name": "anchor01",
+      "expected_line": 2970,
+      "source": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "marker_line": 2603,
+      "ok": true,
+      "log_sha256": "880dee5de4f21ea33ba6c2e78b97f4a7296137595a0478e26a5ed0dcfac128de"
+    },
+    {
+      "name": "anchor02",
+      "expected_line": 3007,
+      "source": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "marker_line": 2645,
+      "ok": true,
+      "log_sha256": "4c973f179bfda8dd59a46a17a1df2844bcfb90433c0b0d4f30ab6da2f3cb0352"
+    },
+    {
+      "name": "anchor03",
+      "expected_line": 3372,
+      "source": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "marker_line": 3023,
+      "ok": true,
+      "log_sha256": "678399e7ec3451ec01cd206758640e154112c3424788e11bc71db41e0296e96a"
+    },
+    {
+      "name": "anchor04",
+      "expected_line": 5243,
+      "source": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "marker_line": 4816,
+      "ok": true,
+      "log_sha256": "8ab7f6a2f37c9588e113e15701c53d4c7197557abd4e6305b0870de160135662"
+    },
+    {
+      "name": "anchor05",
+      "expected_line": 5344,
+      "source": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "marker_line": 4916,
+      "ok": true,
+      "log_sha256": "dd420f26ec244d35d5fd34e3c1190f498b16e9fd977686cf5df407d097bc07e8"
+    },
+    {
+      "name": "anchor06",
+      "expected_line": 5430,
+      "source": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "marker_line": 5005,
+      "ok": true,
+      "log_sha256": "226c5bd7d34ce1b0e8fc182778f7b91d76dfa1a067f55530d1e8def5a327274a"
+    }
+  ],
+  "failed": [],
+  "limits": "source-derived marker snippets, not full-context runtime proof"
+}

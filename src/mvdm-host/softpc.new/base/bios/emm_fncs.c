@@ -1,7 +1,9 @@
 #include "insignia.h"
 #include "host_def.h"
 
+#line 4
 #ifdef	SUN_VA
+#line 5
 #error DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register.
 #endif
 #line 10

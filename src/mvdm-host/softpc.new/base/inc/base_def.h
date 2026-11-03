@@ -47,9 +47,12 @@
 #error Excluded unsupported missing TRUE base profile
 #endif
 
+#line 50
 #ifndef FALSE
+#line 51
 #error Excluded unsupported missing FALSE base profile
 #endif
+#line 53
 
 #define	PRIVATETYPE		/* documents private typedefs local to a source file */
 /*

@@ -1,0 +1,13 @@
+{
+  "tool": "tools/audit/EstimateMirrorDiffRetention.py",
+  "tool_sha256": "40d81db7c5d6649f094b979472c6d7a4c31e978d22e8f6eb87b1bd3edb31f2f1",
+  "result": "pass",
+  "differing_present_records": 2707,
+  "text_measured_records": 1828,
+  "absent_current_files": 781,
+  "changed_from_frozen_snapshot": 2669,
+  "csv_sha256": "4FCE3192CE4646313B3FC709372685A67C3C35374B5581B812E2E49FEBCE99EF",
+  "summary_sha256": "793da301920d9003ac6c8621538c40e07c0e00b5795dd279032f2ab99e79c871",
+  "frozen_ledger_sha256": "F73FFD45DFF44FCA4ECEFC49EF769BEAB5C085542CD04FFE4D6A7B5F942E3196",
+  "scope": "Historical source-line retention estimate for original-baseline files in the frozen ledger; excluded identical files; absent files separately counted. Not compile reachability, runtime correctness, whole repository inventory, or accepted disposition of absent files. Full CSV and summary are temporary build outputs."
+}

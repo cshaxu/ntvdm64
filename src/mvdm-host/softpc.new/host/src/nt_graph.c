@@ -812,7 +812,7 @@ void nt_graphics_tick(void)
 #if !defined(CCPU) || defined(X86GFX)
 #error Unsupported excluded original configuration
 #endif
-#line 918
+#line 827
     if (sc.ScreenState == STREAM_IO) {
 	if (++flush_count == TICKS_PER_FLUSH){
 	    stream_io_update();

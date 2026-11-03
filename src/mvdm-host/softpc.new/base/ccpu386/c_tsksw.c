@@ -560,9 +560,12 @@ IFN5(
 
    /* code ok, load hidden cache */
    load_CS_cache(new_cs, cs_descr, &cs_entry);
+#line 562
 #if 0
+#line 563
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#line 569
 
    /* check new SS and load if ok */
    if ( GET_VM() == 1 )

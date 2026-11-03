@@ -1,0 +1,14 @@
+{
+  "source": "src/mvdm-host/dpmi32/dpmiint.c",
+  "sha256": "38343b287fa0623c1962773af4613d39a6de47a3bfc0f581c38e3124680ec0aa",
+  "original_guards": [
+    88,
+    1167,
+    1201
+  ],
+  "line_88_continuation": 107,
+  "scope": "original outer structures with registered CPU40 adaptations; i386 kernel path not reintroduced",
+  "build": "x86 worker compiled",
+  "test": "x86 first-depth guard suite passed",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r197.zip"
+}

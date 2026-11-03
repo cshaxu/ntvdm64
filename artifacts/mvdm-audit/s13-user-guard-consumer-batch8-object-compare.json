@@ -1,0 +1,71 @@
+{
+  "scope": "16 compiled TUs in fourth candidate batch",
+  "rows": [
+    {
+      "target": "obj/opennt-user/button-client.obj",
+      "resolved_differences": []
+    },
+    {
+      "target": "obj/opennt-user/control-client-draw.obj",
+      "resolved_differences": []
+    },
+    {
+      "target": "obj/opennt-user/handtabl.obj",
+      "resolved_differences": []
+    },
+    {
+      "target": "obj/opennt-user/cleanup.obj",
+      "resolved_differences": [],
+      "explanation": "The apparent .bss difference was a comparator artifact: both objects declare the same 52-byte uninitialized section with zero raw-data offset. Reading bytes from offset zero compared the COFF headers, not section contents."
+    },
+    {
+      "target": "obj/opennt-user/button-atlas-table.obj",
+      "resolved_differences": []
+    },
+    {
+      "target": "obj/wow32-dll/wow_private_user_compat.obj",
+      "resolved_differences": []
+    },
+    {
+      "target": "obj/wow32-dll/wow_user_discovery.obj",
+      "resolved_differences": []
+    },
+    {
+      "target": "obj/wow32-dll/wow_user_object_bindings.obj",
+      "resolved_differences": []
+    },
+    {
+      "target": "obj/wow32-dll/wow_menu_client_bindings.obj",
+      "resolved_differences": []
+    },
+    {
+      "target": "obj/wow32-dll/wow_menu_native_bindings.obj",
+      "resolved_differences": []
+    },
+    {
+      "target": "obj/wow32-dll/wow_cleanup_bindings.obj",
+      "resolved_differences": []
+    },
+    {
+      "target": "obj/wow32-dll/wow_class_client_bindings.obj",
+      "resolved_differences": []
+    },
+    {
+      "target": "obj/wow32-dll/wow_user_message_bridge.obj",
+      "resolved_differences": []
+    },
+    {
+      "target": "obj/wow32-dll/wow_dialog_creation_binding.obj",
+      "resolved_differences": []
+    },
+    {
+      "target": "obj/wow32-dll/wow_dialog_keyboard_binding.obj",
+      "resolved_differences": []
+    },
+    {
+      "target": "obj/wow32-dll/wow_dialog_procedure_bindings.obj",
+      "resolved_differences": []
+    }
+  ],
+  "limits": "16 of 20 TUs compiled; comparator resolves COFF relocations. Four failures were not compared; no linked/runtime verification."
+}

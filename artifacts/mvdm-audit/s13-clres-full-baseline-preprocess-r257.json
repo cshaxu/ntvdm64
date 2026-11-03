@@ -1,0 +1,24 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+  "old_commit": "4e98b75a7",
+  "old_sha256": "0a60d195722d68331e296a72b9713747c9e29717b1c7f321bc22308f7c00ff4a",
+  "current_sha256": "0ebc54f15b39628d9014c1a2179b5ffd53a4cf41d6155ae7a326d2e10a0bc3aa",
+  "method": "MSVC /EP, exact Ninja target flags, identical scratch source path; nonblank stripped lines hashed. ntSend.h copied without modification.",
+  "contexts": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/clres.obj",
+      "old_sha256": "afbae2eb92f7e006cb3bcccdc2384f5b6019e9e4a62af607b51fa586639cd186",
+      "current_sha256": "167cef7d8e02c18d413f8a820c7698ef634a7ff97536de62e380836925453d70",
+      "equal": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/dialog-template.obj",
+      "old_sha256": "d363910a672fc673dbaa7958f7794602d3e9a69a0222a60f7a4b473f549c9352",
+      "current_sha256": "d363910a672fc673dbaa7958f7794602d3e9a69a0222a60f7a4b473f549c9352",
+      "equal": true
+    }
+  ],
+  "limits": "Tests selected preprocessed text only; excludes diagnostics and does not establish other contexts, link or runtime behavior."
+}

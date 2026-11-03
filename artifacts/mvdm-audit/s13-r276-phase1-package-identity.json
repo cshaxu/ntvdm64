@@ -1,0 +1,56 @@
+{
+  "images": [
+    {
+      "name": "run16.exe",
+      "sha256": "738fbe28c5e0592c9ffd83c26e36e4b3c19ea4dea048b47c93e90cfea07a739d",
+      "machine": 34404
+    },
+    {
+      "name": "ntsrv.exe",
+      "sha256": "7960320a7f6dd73fe89afbd19be69cf7f9d74b8aafb63f2d25e725d8dbdc2002",
+      "machine": 34404
+    },
+    {
+      "name": "ntcon.exe",
+      "sha256": "d91412c7708efc3e091ad7a9aacdef104702d728f693ff1d9bb3924a4b1b81d5",
+      "machine": 34404
+    },
+    {
+      "name": "ntvdm.exe",
+      "sha256": "611de5e832e75bb6ca1c2f94b9d369dbafd211ff692dce06d27614cb9ce033d7",
+      "machine": 332
+    },
+    {
+      "name": "ntvwm.exe",
+      "sha256": "ff692e055cc0452bf8189416bc33ffab2a9a434e56ccbbc201c9b67bea496077",
+      "machine": 34404
+    },
+    {
+      "name": "ntmon.exe",
+      "sha256": "4df75031a7d19a6c853b680476d0c3fbd7a200fd60d85a1dce1e96f099f8c345",
+      "machine": 34404
+    },
+    {
+      "name": "WOW32.DLL",
+      "sha256": "09c7195d5a570e5a1ad6399ac5473e04af28aed3693828419701223b54cfc520",
+      "machine": 332
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "sha256": "2c44f9334d9c2f2ecf6dfc0cd71d464006278c087b1cc9c459efdebc73d38d43",
+      "machine": 332
+    },
+    {
+      "name": "nthook32.dll",
+      "sha256": "98aacb0460efa7cf82414cbe5ae2d5a004b45b1982a1482c417a44c026c9f399",
+      "machine": 332
+    },
+    {
+      "name": "nthook64.dll",
+      "sha256": "5e083a11d9826b2550207903eaf4ffe9500ce196ff57ae0001a7921292614d03",
+      "machine": 34404
+    }
+  ],
+  "result": "all staged bytes match r271 candidate",
+  "scope": "staging only; no product publication"
+}

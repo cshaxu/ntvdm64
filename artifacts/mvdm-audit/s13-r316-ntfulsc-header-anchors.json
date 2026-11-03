@@ -1,0 +1,84 @@
+{
+  "source": "src/mvdm-host/softpc.new/host/inc/nt_fulsc.h",
+  "before_sha256": "38a44fc4734566268a2c3e0dff0f72e01b319c80e1b1c2b9cc9f7512c778ec52",
+  "after_sha256": "cb120c6e1dbec19971c420d40cb91215cc08aa27b148bc8b7b6621b0239a0e1d",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_fulsc.h",
+  "original_sha256": "733fe8aaef56e9febc5e2f35ac03057918df2bf75173779870e2b07dc673e1d0",
+  "changes": [
+    {
+      "old_current_if_line": 119,
+      "original_if_line": 137,
+      "original_body_line": 138,
+      "original_endif_line": 141,
+      "continuation": 142
+    },
+    {
+      "old_current_if_line": 136,
+      "original_if_line": 156,
+      "original_body_line": 157,
+      "original_endif_line": 159,
+      "continuation": 160
+    },
+    {
+      "old_current_if_line": 176,
+      "original_if_line": 197,
+      "original_body_line": 198,
+      "original_endif_line": 245,
+      "continuation": 246
+    },
+    {
+      "old_current_if_line": 181,
+      "original_if_line": 248,
+      "original_body_line": 249,
+      "original_endif_line": 253,
+      "continuation": null
+    }
+  ],
+  "insertions": [
+    {
+      "before_old_line": 119,
+      "count": 1
+    },
+    {
+      "before_old_line": 120,
+      "count": 1
+    },
+    {
+      "before_old_line": 122,
+      "count": 1
+    },
+    {
+      "before_old_line": 136,
+      "count": 1
+    },
+    {
+      "before_old_line": 137,
+      "count": 1
+    },
+    {
+      "before_old_line": 139,
+      "count": 1
+    },
+    {
+      "before_old_line": 176,
+      "count": 1
+    },
+    {
+      "before_old_line": 177,
+      "count": 1
+    },
+    {
+      "before_old_line": 179,
+      "count": 1
+    },
+    {
+      "before_old_line": 181,
+      "count": 1
+    },
+    {
+      "before_old_line": 182,
+      "count": 1
+    }
+  ],
+  "limits": "first-depth hardware declarations excluded; local appended declarations not assigned fabricated original line; all supported include contexts and build still require validation"
+}

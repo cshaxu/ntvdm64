@@ -1,0 +1,18 @@
+{
+  "result": "passed",
+  "controls": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "body_line": 1966,
+      "continuation_line": 1971,
+      "negative_diagnostic_sha256": "8469bf483b4e60d490b0ddea169b4fa5b5ab3d1ba5b7a42caa441b3e7af03602"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+      "body_line": 1310,
+      "continuation_line": 1317,
+      "negative_diagnostic_sha256": "dd916f5368699e5cc28986ee400e38c0cba645b8481673ccb5195ee7223054fd"
+    }
+  ],
+  "scope": "extracted actual source, false/true forced guard; not all include contexts"
+}

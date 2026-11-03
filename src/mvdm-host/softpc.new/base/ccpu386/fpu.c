@@ -156,9 +156,12 @@ GLOBAL void getNpxStackRegs IPT1(FPSTACKENTRY *, dumpPtr);
 GLOBAL void setNpxStackRegs IPT1(FPSTACKENTRY *, loadPtr);
 
 /* DEFINED values */
+#line 158
 #ifndef NULL
+#line 159
 #error Unsupported excluded original configuration
 #endif
+#line 161
 #line 162
 #define TAG_NEGATIVE_MASK 1
 #define TAG_ZERO_MASK 2
@@ -259,9 +262,12 @@ GLOBAL BOOL NpxException;
  * FPU-wide variables
 */
 
+#line 260
 #ifdef SUN4
+#line 261
 #error DIVERGENCE MVDM-HOST-DIV-536: SUN4 branch is not selected; see mirror register.
 #endif /* SUN4 */
+#line 263
 
 LOCAL IU32 NpxControl;
 LOCAL IU32 NpxStatus;
@@ -1850,9 +1856,12 @@ LOCAL VOID CalcTagword IFN1(FPSTACKENTRY *, FPPtr)
 		if (FPPtr->fpvalue == 0.0) {
 			/* It's a zero */
 			tagword |= TAG_ZERO_MASK;
+#line 1881
 #if (HOST_BIAS >= 16383)
+#line 1882
 #error Unsupported excluded original configuration
 #endif
+#line 1886
 #line 1867
 		}
 	} else {

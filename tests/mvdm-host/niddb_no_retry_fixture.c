@@ -39,6 +39,10 @@ uint8_t c_sas_hw_at(uint32_t a) { (void)a; return 0; }
 int c_SasRegisterVirtualSelectors(uint16_t a, uint16_t b) { (void)a; (void)b; return 1; }
 void mvdm_softpc_report_virtual_device_control(uint32_t a, uint16_t b, uint16_t c, uint16_t d)
 { (void)a; (void)b; (void)c; (void)d; }
+void mvdm_softpc_invalid_virtual_instance(uint8_t value)
+{ (void)value; abort(); }
+void mvdm_test_invalid_niddb(uint8_t value)
+{ (void)value; abort(); }
 void host_error(int a, int b, const char *c, ...) { (void)a; (void)b; (void)c; ++errors; }
 void ClearInstanceDataMarking(void) { }
 extern int NIDDB_is_active(void);

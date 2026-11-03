@@ -193,9 +193,12 @@ Return Value:
             // Could not map the NT status to anything appropriate.
             // BUGBUG: Write this to the eventlog file
             //
+#line 196
 #if DBG
+#line 197
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #endif
+#line 199
             return NERR_InternalError;
     }
 

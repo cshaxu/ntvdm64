@@ -44,9 +44,11 @@
 #include "mvdm_softpc_termination.h"
 #endif
 
+#line 44
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 47
 
 /* Routine to produce human readable form of where an illegal instruction occured */
 LOCAL VOID where IFN3(CHAR *, string, word, cs, LIN_ADDR, ip)
@@ -64,9 +66,12 @@ LOCAL VOID where IFN3(CHAR *, string, word, cs, LIN_ADDR, ip)
 		sas_hw_at(ea+3),sas_hw_at(ea+4));
 }
 
+#line 64
 #if defined(NTVDM) && defined(MONITOR)
+#line 65
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
+#line 67
 
 
 void illegal_op()

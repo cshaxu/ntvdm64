@@ -364,7 +364,7 @@ ULONG FASTCALL WK32GetProfileString(PVDMFRAME pFrame)
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 392
+#line 372
 
 
 FlushAndReturn:
@@ -556,7 +556,7 @@ ULONG FASTCALL WK32GetPrivateProfileString(PVDMFRAME pFrame)
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 608
+#line 583
 
 
 FlushAndReturn:
@@ -568,7 +568,7 @@ FlushAndReturn:
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif // DEBUG
-#line 660
+#line 635
 
     FREEPSZPTR(pszSection);
     FREEPSZPTR(pszKey);

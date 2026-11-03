@@ -17,7 +17,9 @@
  *      (c)Copyright Insignia Solutions Ltd., 1991. All rights reserved.
  *
 ]*/
+#line 20
 #if defined(BASE_SAS) && defined(HOST_SAS)
+#line 21
 #error Unsupported excluded original configuration
 #endif /* BASE_SAS && HOST_SAS */
 #line 67

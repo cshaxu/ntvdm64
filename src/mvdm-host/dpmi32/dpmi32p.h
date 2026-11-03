@@ -49,7 +49,9 @@ Revision History:
 #endif
 
 
+#line 53
 #ifdef i386
+#line 54
 #error DIVERGENCE MVDM-HOST-DIV-619: unsupported i386 kernel VDM host path
 #endif
 #line 59

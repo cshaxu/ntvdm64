@@ -1,0 +1,27 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+  "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+  "before_sha256": "6b7d26901c1492ed2348cc27c038f1ff584a4e814dee3eeeff1ebf1ecf65c873",
+  "after_sha256": "f0797f835410d5ae3b7460fbd5ad0b718c13250c6b695421d96f81b807b7f055",
+  "original_guard": 362,
+  "original_endif": 365,
+  "continuation": 366,
+  "reason": "original GetKeyboardLayoutName function is omitted from current ANSI class-client subset; its UNICODE-only sub-branch is unsupported",
+  "limits": "existing whole-header UNICODE rejection fires earlier in full header; no claim of complete text API recovery",
+  "current_guard_line": 345,
+  "builds": [
+    "MSVC x86 WOW32",
+    "MSVC x86 call-boundaries"
+  ],
+  "comparison": {
+    "previous_sha256": "10d7078dc355491684ff79c8501d5e5a2a4d80a118a823666fdf2799b7c669cd",
+    "current_sha256": "0b61d694d735cf0be466eeed48462a3108cd53fd9f19c05b58ede91bee971f64",
+    "differing_offsets": [
+      280,
+      281,
+      625412,
+      625413
+    ]
+  }
+}

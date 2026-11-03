@@ -1,0 +1,11 @@
+{
+  "candidate": "build/t473-s13/r334-phase1-package",
+  "suite": "Full selected gates",
+  "result": {
+    "completedUtc": "2026-11-03T11:08:10.2686126Z",
+    "exitCode": 0,
+    "ok": true
+  },
+  "output_sha256": "31b426e468f04bd033184e5a31cc96d57d9d67de175de6e97d258cbf51d65982",
+  "limits": "Invalid task-register diagnostic is not fault-injected; DOS4GW gameplay and rendered pixels not asserted; candidate NIDDB semantics remain unresolved."
+}

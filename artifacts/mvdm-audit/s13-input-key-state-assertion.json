@@ -1,0 +1,26 @@
+{
+  "current": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+  "original_sha256": "b7656bca55e892a42ba825be0324211450ad298c40717e1ae5a889d084467529",
+  "before_sha256": "139844016efa01746330ed1999b24ff4fbfb21767b566272870aece2fa7784da",
+  "after_sha256": "706c52420b76f29d3c54cc3aa58e4a341d289f9997f614c23e4a9005897eda64",
+  "original_line": 1764,
+  "original_error_line": 1765,
+  "continuation": 1767,
+  "reason": "retain original compile-time invariant; original recent-key state function is not part of current subset",
+  "limits": "undefined macro evaluates as zero in the current subset; the original macro in the full USER implementation was derived from CVKKEYSTATE",
+  "current_guard_line": 285,
+  "controls": "s13-input-key-state-assertion-controls.json",
+  "builds": [
+    "MSVC x86 WOW32",
+    "MSVC x86 call-boundaries"
+  ],
+  "binary_comparison": {
+    "prior_sha256": "6eb600c2b1146cef1ebeb521d2edc2c447a4d87a345b14ca08a74a45117b25b0",
+    "current_sha256": "10d7078dc355491684ff79c8501d5e5a2a4d80a118a823666fdf2799b7c669cd",
+    "differing_offsets": [
+      280,
+      625412
+    ]
+  }
+}

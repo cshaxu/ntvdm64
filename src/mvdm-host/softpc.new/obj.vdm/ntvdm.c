@@ -131,9 +131,12 @@ DWORD       dw;
                   sizeof(MyDebugPort),
                   NULL );
      if (!NT_SUCCESS(dw) || MyDebugPort == NULL)  {
+#line 115
 #ifndef PROD
+#line 116
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 118
            return;
           }
 

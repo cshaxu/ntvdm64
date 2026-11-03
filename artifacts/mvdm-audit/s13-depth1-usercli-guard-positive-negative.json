@@ -1,0 +1,21 @@
+{
+  "scope": "original whole-header guard applied naively around existing local two-cohort subset",
+  "method": "MSVC x86 /EP, two includes with declarations-only macro set only during first include; scratch copies only",
+  "rows": [
+    {
+      "variant": "current",
+      "lookaside_present": true,
+      "edit_present": true,
+      "preprocessed_sha256": "c234b72fcd8576d95e162f36d48a1913de5e4addb5ff0234307a532b9eb97b8a"
+    },
+    {
+      "variant": "single",
+      "lookaside_present": true,
+      "edit_present": false,
+      "preprocessed_sha256": "24a64d4882f216db943bd5ed2bada0ebc2336d53d52551918d060bda09870f35"
+    }
+  ],
+  "build": "existing production wow_edit_state_bindings.obj cached target reports no work",
+  "result": "The naive original whole-file guard suppresses selected EDIT state; preserving current two-cohort adaptation is required unless inclusion architecture is redesigned and independently verified.",
+  "limitation": "Preprocessor witness only, not runtime equivalence or proof no alternative simpler design exists."
+}

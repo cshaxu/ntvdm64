@@ -1,0 +1,96 @@
+{
+  "result": "passed",
+  "controls": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "body_line": 1471,
+      "continuation_line": 1482,
+      "negative_diagnostic_sha256": "23d1485bb08a6271570b3d575122870abdd68f2c5c7c5a9f7c9be80d09a70f79"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "body_line": 87,
+      "continuation_line": 101,
+      "negative_diagnostic_sha256": "108c3511e942aad1d5c68f5594392a573a6aa34676abc8b066594e8b1ecd1e0c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "body_line": 242,
+      "continuation_line": 244,
+      "negative_diagnostic_sha256": "bebc76c28eb8d94a5627c1ff960bb452eb70906f09fb5d182b59f1d104828cb2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "body_line": 318,
+      "continuation_line": 343,
+      "negative_diagnostic_sha256": "ba2b2577db5ab71ade94fda597b96d5c50f512c127b0db3d055c0749807f6617"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcdbg.c",
+      "body_line": 88,
+      "continuation_line": 4025,
+      "negative_diagnostic_sha256": "51890e5b2e7f8fc26dc846e21ad0cf5451208b6528a135c2229358bbfb90efd3"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrinit.c",
+      "body_line": 183,
+      "continuation_line": 188,
+      "negative_diagnostic_sha256": "960bf17ca735013cef08b25e253e6de2a224d59b4fd551eba07fe0e32d2d40fc"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrputil.c",
+      "body_line": 74,
+      "continuation_line": 76,
+      "negative_diagnostic_sha256": "ceb33269be1f1e0fa0712d925218d3d992b4a0267a1fe9962eb815e95795eb40"
+    },
+    {
+      "path": "src/mvdm-host/wow32/fastwow.h",
+      "body_line": 49,
+      "continuation_line": 82,
+      "negative_diagnostic_sha256": "f5c0671e7f31c7dfb935a23d2322374ffcf183619a6401c7ac89eda078d427f3"
+    },
+    {
+      "path": "src/mvdm-host/wow32/mapembed.c",
+      "body_line": 81,
+      "continuation_line": 94,
+      "negative_diagnostic_sha256": "530c3539be2a1012fb14a7f07838e439ba23a4b885f3ef8b48df6fbd5948163d"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcommdlg.c",
+      "body_line": 673,
+      "continuation_line": 686,
+      "negative_diagnostic_sha256": "148510d5057a9e90f92cfb84dcc2839c7a0c767c5080e725bcc8eb39e8860b78"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdos.c",
+      "body_line": 741,
+      "continuation_line": 771,
+      "negative_diagnostic_sha256": "c2bfbed4789e045a8cb48145f8891c409cbf19409deebeac1850124a78cfd8a9"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgdi31.c",
+      "body_line": 821,
+      "continuation_line": 828,
+      "negative_diagnostic_sha256": "ecd9b8f89b4ab691327c211637a11ff8c8ee591e68918dfffb736c165e4bb6fb"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgmeta.c",
+      "body_line": 531,
+      "continuation_line": 563,
+      "negative_diagnostic_sha256": "d941740452fdbdaaa4b2123508abf3334f3163f07d9890eea84755b733023b1b"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgprnset.c",
+      "body_line": 544,
+      "continuation_line": 575,
+      "negative_diagnostic_sha256": "a3720d9d585e32ed838acf105c1c87aaf85a87bd4643459896487f12f5d5a8d6"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgtbl.h",
+      "body_line": 22,
+      "continuation_line": 24,
+      "negative_diagnostic_sha256": "8d441b85a891949b98ddddddbbdeaef0b6a63c06edea81575fff389261695215"
+    }
+  ],
+  "scope": "extracted actual source, false/true forced guard; not all include contexts"
+}

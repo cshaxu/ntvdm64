@@ -1,0 +1,13 @@
+{
+  "baseline_sha256": "04c903387e50e25226f5f06b9eacb9827deecbc7684c129f81bb71a5f0ed07da",
+  "candidate_sha256": "e54c2161954910f159cae505cfcc912d01d01aaf151c086872fde7e852b4dcb0",
+  "file_offset": 33869,
+  "rva": "0x904d",
+  "map_owner": "_c_setTR_BASE_LIMIT_AR; original-ccpu386:c_reg.obj",
+  "old_line_immediate": 1855,
+  "new_line_immediate": 1851,
+  "source": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+  "original_line": 1851,
+  "trigger": "invalid nonzero task register access-rights diagnostic",
+  "scope": "error diagnostic changes; full-product fault injection not yet performed"
+}

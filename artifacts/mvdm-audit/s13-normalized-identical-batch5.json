@@ -1,0 +1,126 @@
+{
+  "scope": "selected host C files; original bytes restored only after normalized equality and pinned hash checks",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sahf.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\sahf.c",
+      "before_sha256": "b4a0524429b073b8232a463316d8fe7e62d2197e862fcd9188d4161f72825994",
+      "original_sha256": "fb473e899aaaceef025c2ebf3aba74e7fe5aa9cbffee982443786c53e0fd84f9",
+      "bytes_before": 877,
+      "bytes_original": 926
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sbb.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\sbb.c",
+      "before_sha256": "7aa758508ce4154e2116abadadec9a65855a5e1102b9369264a0b6955ae2dfb3",
+      "original_sha256": "99354b3d7ada08d2aacabbcb44d8e36d9a6d2b5641541d23054cf3c0cc18b63b",
+      "bytes_before": 1932,
+      "bytes_original": 2012
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/setxx.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\setxx.c",
+      "before_sha256": "b1612d26f1eba7d35b4b03aee42a8bbc4b7747b08becb545e578a59d89641279",
+      "original_sha256": "c6c152fa783fc7d54863706ebbb8c969bc851eb24c6587a399a3153f4054aa7f",
+      "bytes_before": 6226,
+      "bytes_original": 6501
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sldt.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\sldt.c",
+      "before_sha256": "9d890dfa20c914307f1d0032de6310987bb31ca4088d2c6a3160c73248a1e0fb",
+      "original_sha256": "5f183fc3800019fd4f4ce0368a49d7d285a2d03c1745eb9e391f1fcdb3ad73d0",
+      "bytes_before": 640,
+      "bytes_original": 685
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/smsw.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\smsw.c",
+      "before_sha256": "3fe2a5f4856050f7628bcc05630b964fc9130393d35b8f5cfa05f1dba2a7d48f",
+      "original_sha256": "7fe73c7e862d37d6294acc23c667b0b3d99d9295c78d80138d5c22902b9a1e30",
+      "bytes_before": 627,
+      "bytes_original": 670
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/stc.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\stc.c",
+      "before_sha256": "379d7064e0cf7ab3f1e845308d4b6cee9b15a9b4bf7996cbd688f3e005f1e242",
+      "original_sha256": "daea4a3de631e0c901f146556fab07444c38c4c0f3781d3c0ad4b9e09bbe341e",
+      "bytes_before": 575,
+      "bytes_original": 614
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/std.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\std.c",
+      "before_sha256": "0eca32fa5d865dedc2dc361530619d045d28df21b87d7a3cf7d67d0f34eb3897",
+      "original_sha256": "0fc14a782e8ecd49bcafb0b8c546ae036ed2fc22bfa58d9d557b42b5c1441d5a",
+      "bytes_before": 575,
+      "bytes_original": 614
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/str.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\str.c",
+      "before_sha256": "8fd9eb1da6c624483048745cba5c74178625edd3296dc6b7af854461fe21d772",
+      "original_sha256": "09f56d9113cdcd647f125999d65669389de9ca626498f9b2a84c330ad8cbede0",
+      "bytes_before": 633,
+      "bytes_original": 678
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/stubs.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\stubs.c",
+      "before_sha256": "e7490d8ae9a55d9be022e90031679b1101ae8c5c4e002a83507113e460d77a36",
+      "original_sha256": "534109ed4bb792f42b8cd8e3020c9464f529d564770a22d87d98739c1138f0d8",
+      "bytes_before": 242,
+      "bytes_original": 263
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sub.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\sub.c",
+      "before_sha256": "6a7281bd316b7c5db13e1986c1ea315ab0881cc87115c7d75f27bc425327611f",
+      "original_sha256": "f89fbd25b2017e4216ce7c1336749d012fc1c71b55708ac1e1aafe283c3b8587",
+      "bytes_before": 1914,
+      "bytes_original": 1994
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/test.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\test.c",
+      "before_sha256": "762a8f9f9020fe0fec5925fbe3269a32902fcbf7d62cf7b3c69383226e09018c",
+      "original_sha256": "c3c97ce3dc828fd8a33e9fb3981e52b184fdc11dd4da1127392688c283e33ea0",
+      "bytes_before": 1184,
+      "bytes_original": 1242
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/verr.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\verr.c",
+      "before_sha256": "cbb859e52cda17d8f13d54e7b32943f02fffb4484167caf24e0929712c0a46bb",
+      "original_sha256": "9a1f7727aa190d47ec138106008481ac77652cdaad96469795ce526fae3e8fb1",
+      "bytes_before": 1954,
+      "bytes_original": 2054
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/verw.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\verw.c",
+      "before_sha256": "77683adb3c25c808c70e23ff7745ed01251739ab3e50c281d39e8636b0a5926d",
+      "original_sha256": "58a4c43cca9eb9c8ab7692fa3708628f556b9ed09b5d0bec7898d5ebbf432bf2",
+      "bytes_before": 1853,
+      "bytes_original": 1949
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/wait.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\wait.c",
+      "before_sha256": "d352dd44efb4482886e686c2c0b5ccedf9a40f55c98ac0dc27a56f5b4d44dc6c",
+      "original_sha256": "26dcda8641eff26a1d23f14e204caaafc17bb06ee9e04e8ac0acf676d8586991",
+      "bytes_before": 567,
+      "bytes_original": 605
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/xchg.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\xchg.c",
+      "before_sha256": "dc09f676d5b3246f9243458c9284ff8d39f5651dea9a2956b179cd9158c291a8",
+      "original_sha256": "e5a2fd36c18fdd3d833eef70b16ab653b49513e9d0767afb1478efca54045f19",
+      "bytes_before": 983,
+      "bytes_original": 1036
+    }
+  ],
+  "note": "format-only; no branch selection or guest image changes"
+}

@@ -19,7 +19,9 @@
 
 /* Common types, not defined in NT/WIN32
  */
+#line 22
 #ifdef H2INC
+#line 23
 #error DIVERGENCE MVDM-HOST-DIV-536: H2INC branch is not selected; see mirror register.
 #endif
 #line 36

@@ -1,0 +1,11 @@
+{
+  "candidate": "build/t473-s13/r386-phase1-package",
+  "suite": "Full selected gates",
+  "result": {
+    "ok": true,
+    "completedUtc": "2026-11-03T12:52:26.4136134Z",
+    "exitCode": 0
+  },
+  "output_sha256": "0a2963c2d8432720ddc9b729af46123f233dbe2ef531affeac5f2785164efa5c",
+  "limits": "DOS4GW gameplay and rendered pixels not asserted; NIDDB candidate semantics remain unresolved; this does not close the depth-one audit."
+}

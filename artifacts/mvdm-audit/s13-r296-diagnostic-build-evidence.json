@@ -1,0 +1,24 @@
+{
+  "artifacts": {
+    "build/t473-s13/r296-anchor-control.c": {
+      "sha256": "fa6d4ea00711b1e1551da552012dc032491189fd8ff3310a3d2d80734d4729ed",
+      "size": 218
+    },
+    "build/t473-s13/r296-anchor-forced.log": {
+      "sha256": "3d624683e2d70c9bb0f47355bacb5b5fcbb762c0e83df8cb65e25e573f2d35c8",
+      "size": 162
+    },
+    "build/t473-s13/r296-anchor-selected.log": {
+      "sha256": "abb617f2473047d76b8b3e2207af1539c88da626c5930fc7f3c3d12e2ce73f67",
+      "size": 142
+    },
+    "build/t473-s13/r296-worker-build.log": {
+      "sha256": "81a9f6958059e247dc1c3f08df6ff7f756787cb4e538ab8e6faaf4303df94c0e",
+      "size": 69053
+    }
+  },
+  "forced": "CPU_486 reaches expected #error at original 156",
+  "selected": "injected next-line #error observed 166, original post-definition continuation",
+  "build": "owned two worker graphs exited 0",
+  "limits": "extracted fragment verifies MSVC line mapping only; runtime not repeated"
+}

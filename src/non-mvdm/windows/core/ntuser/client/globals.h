@@ -2,8 +2,8 @@
  * Original windows/core/ntuser/client/globals.h true subset.
  * DIVERGENCE(OPENNT-HOST-075): retain reached EDIT memory macros only;
  * callback storage is supplied by the existing WOW registration binding. */
-#ifndef OPENNT_GLOBALS_EDIT_MEMORY_SUBSET_H
-#define OPENNT_GLOBALS_EDIT_MEMORY_SUBSET_H
+#ifndef _GLOBALS_
+#define _GLOBALS_
 
 /* OPENNT-HOST-092: original declaration; definition remains in clglobal.c. */
 extern CONST BOOLEAN gabThunkMessage[];

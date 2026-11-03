@@ -1,0 +1,100 @@
+{
+  "scope": "Unselected historical session, SMB, language, print, TCP/IP and CRT declaration headers",
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/sm.h",
+      "sha256": "6c15b5ddef2397a9683955bc3659ccbcbff7ff9e05fabe594abfe415f463f708"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smb.h",
+      "sha256": "5764862a4b7c788462a06edfae5f29177c7c46b78f39930524c65c4aca7a60f9"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbtrans.h",
+      "sha256": "b178014ee0e9c7792eeca75828f7714d8da946ed2681932167c62973833a5f73"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/winnlsp.h",
+      "sha256": "88daca29ee6c84ee4d80884daf2f1539d2b957be4a7e710c2245fcbfa8ce9df3"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/printscan/inc/winddiui.h",
+      "sha256": "27c69996460f207fe4a0077a5ec93320926a3b1bd228779738c4487d0c5e0215"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/tcpip.h",
+      "sha256": "277ec1e518be76b2d08e6d5133d1abdbe583c7cf53a74b1e932a4e1510c8a2c1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/standard.h",
+      "sha256": "8cece7a06f3a9493bcf78474d9b9c9f7c9ab957758ccf31a3e7a14a2ebd5fe2c"
+    }
+  ],
+  "mirror_sources": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/standard.h",
+      "current_sha256": "8cece7a06f3a9493bcf78474d9b9c9f7c9ab957758ccf31a3e7a14a2ebd5fe2c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\standard.h",
+      "original_sha256": "576b4d5683e7801ecfa16643436a993e97d8855b4473a79b59700dbc28996335",
+      "pinned_expected_sha256": "576b4d5683e7801ecfa16643436a993e97d8855b4473a79b59700dbc28996335",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/tcpip.h",
+      "current_sha256": "277ec1e518be76b2d08e6d5133d1abdbe583c7cf53a74b1e932a4e1510c8a2c1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\tcpip.h",
+      "original_sha256": "240f9fbcc78213f7e3dc458013a096a4c2f0768e05d8f34808e5610a7e38bfb1",
+      "pinned_expected_sha256": "240f9fbcc78213f7e3dc458013a096a4c2f0768e05d8f34808e5610a7e38bfb1",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/sm.h",
+      "current_sha256": "6c15b5ddef2397a9683955bc3659ccbcbff7ff9e05fabe594abfe415f463f708",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\sm.h",
+      "original_sha256": "7ae92f25399c402cbbb49a5900768cf44cd81cffed6d00cac6b502a20143edd5",
+      "pinned_expected_sha256": "7ae92f25399c402cbbb49a5900768cf44cd81cffed6d00cac6b502a20143edd5",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smb.h",
+      "current_sha256": "5764862a4b7c788462a06edfae5f29177c7c46b78f39930524c65c4aca7a60f9",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\smb.h",
+      "original_sha256": "45553f23d730aeecc99bfc1ba1b3bdf2b53d882d31115b1d2fb858fa0e40ceb0",
+      "pinned_expected_sha256": "45553f23d730aeecc99bfc1ba1b3bdf2b53d882d31115b1d2fb858fa0e40ceb0",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbtrans.h",
+      "current_sha256": "b178014ee0e9c7792eeca75828f7714d8da946ed2681932167c62973833a5f73",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\smbtrans.h",
+      "original_sha256": "cc7d7ee8d3ec918a8dea5594594dbd801c549c30aff2876e9be57471cfb82261",
+      "pinned_expected_sha256": "cc7d7ee8d3ec918a8dea5594594dbd801c549c30aff2876e9be57471cfb82261",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/winnlsp.h",
+      "current_sha256": "88daca29ee6c84ee4d80884daf2f1539d2b957be4a7e710c2245fcbfa8ce9df3",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\winnlsp.h",
+      "original_sha256": "4eb15a535609541f9b43899733ebeddda7c60415303295228b1e42e8b4d8df9a",
+      "pinned_expected_sha256": "4eb15a535609541f9b43899733ebeddda7c60415303295228b1e42e8b4d8df9a",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/non-mvdm/public/internal/printscan/inc/winddiui.h",
+      "current_sha256": "27c69996460f207fe4a0077a5ec93320926a3b1bd228779738c4487d0c5e0215",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\printscan\\inc\\winddiui.h",
+      "original_sha256": "9d84cbe81b902ac3bc93965f654fd07e9c4adc39783f695c4cd92f988d9d38ee",
+      "pinned_expected_sha256": "9d84cbe81b902ac3bc93965f654fd07e9c4adc39783f695c4cd92f988d9d38ee",
+      "original_matches_pinned": true
+    }
+  ],
+  "removed_condition_groups": 182,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r141.zip",
+  "evidence": [
+    "No current source/test/tool include directive selects these headers; observed worker Ninja dependency records contain none.",
+    "Historical governance scripts mention standard.h only as source attribution, not as an active input."
+  ],
+  "limitations": [
+    "Current session, networking, printing, and CRT implementations remain unchanged."
+  ]
+}

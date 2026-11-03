@@ -1,0 +1,9 @@
+{
+  "suite": "tests/build/test_bfs_depth1_additional_guards.py",
+  "architecture": "MSVC x86",
+  "exit": 0,
+  "result": "7 original guards and 19 controls passed",
+  "log": "build\\t473-s13\\additional-guards-r235.log",
+  "sha256": "822d21ebf8dae261ddd30857c1d13df0d1535e4f5aa4c8122beb231cc0faae84",
+  "limitations": "isolated preprocessor/line controls; not a product runtime or full branch completeness result"
+}

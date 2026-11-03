@@ -1,0 +1,40 @@
+{
+  "scope": "Unselected alternate video glue source files",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ga_glue.c",
+      "sha256": "7cd2f02a150c3a8699938d67962cc969d3f1ddb9ee4c6e3d6b792244f8ef2bf1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cpu/src/evid/ev_glue.c",
+      "sha256": "4780d56d29e6a07dbc623c64bef6dde12054415d92564037a983f51e670959cc"
+    }
+  ],
+  "mirror_sources": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/cpu/src/evid/ev_glue.c",
+      "current_sha256": "4780d56d29e6a07dbc623c64bef6dde12054415d92564037a983f51e670959cc",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cpu\\src\\evid\\ev_glue.c",
+      "original_sha256": "6bd49962ea383cc53b11db3091c3c97874adf9ea0c3a76c0d8165ef6ece21032",
+      "pinned_expected_sha256": "6bd49962ea383cc53b11db3091c3c97874adf9ea0c3a76c0d8165ef6ece21032",
+      "original_matches_pinned": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ga_glue.c",
+      "current_sha256": "7cd2f02a150c3a8699938d67962cc969d3f1ddb9ee4c6e3d6b792244f8ef2bf1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ga_glue.c",
+      "original_sha256": "8bbd170935279a625b5add89e491dd788f914d963788fe007b0ac08c942f5536",
+      "pinned_expected_sha256": "8bbd170935279a625b5add89e491dd788f914d963788fe007b0ac08c942f5536",
+      "original_matches_pinned": true
+    }
+  ],
+  "removed_condition_groups": 48,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r128.zip",
+  "evidence": [
+    "The selected worker graph compiles the distinct base/cvidc/ev_glue.c; no current graph selects base/cpu/src/evid/ev_glue.c.",
+    "The video source manifest lists ga_glue.c only in a comment; no current graph or test references it."
+  ],
+  "limitations": [
+    "Does not alter selected C-VID glue or active video behavior."
+  ]
+}

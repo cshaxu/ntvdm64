@@ -1,0 +1,213 @@
+{
+  "scope": "Reverse recorded original-line-anchor edits and compare exact prior queue hash",
+  "rows": [
+    {
+      "path": "src\\mvdm-host\\dos\\dem\\demhndl.c",
+      "evidence": "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch2.json",
+      "anchors": 1,
+      "reverse_hash": "69b0f73d02b09c6380a1c6b809f95da0621cb13d8b9d6ef0f83ae1f5c7110275",
+      "old_queue_hash": "69b0f73d02b09c6380a1c6b809f95da0621cb13d8b9d6ef0f83ae1f5c7110275",
+      "current_hash": "b5e0e3280d267729af059a5944ac411d7f2519ad3f1339fc8232accf0f439049",
+      "verified": true
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\bios\\reset.c",
+      "evidence": "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch2.json",
+      "anchors": 2,
+      "reverse_hash": "409549cb4a046776e2d710c8325d33fa506ab93fc06090afccd8f87cf373a85e",
+      "old_queue_hash": "409549cb4a046776e2d710c8325d33fa506ab93fc06090afccd8f87cf373a85e",
+      "current_hash": "1cda785860d29b801b2510a801e0cc60869ceefbcf6a4a5571e6d32696328836",
+      "verified": true
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\debug\\trace.c",
+      "evidence": "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch2.json",
+      "anchors": 1,
+      "reverse_hash": "8891c3be38d33538f830f6d21ebb98307aeb9322ff38a4f0ead55cd9ce6eb3e2",
+      "old_queue_hash": "8891c3be38d33538f830f6d21ebb98307aeb9322ff38a4f0ead55cd9ce6eb3e2",
+      "current_hash": "062b9332cfd240d535f10c4e3ea5a205c0c9c2d733f2fdd2fd03b5f31e30e2b4",
+      "verified": true
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\inc\\bios.h",
+      "evidence": "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch2.json",
+      "anchors": 1,
+      "reverse_hash": "eebdb2a775ef3692317ff5b990baf59c6651a67f8795f15e53577978239e50db",
+      "old_queue_hash": "eebdb2a775ef3692317ff5b990baf59c6651a67f8795f15e53577978239e50db",
+      "current_hash": "248021f5a5b58067787a92f6c1436de1fc2c72760111998d99c9500121ebc9c9",
+      "verified": true
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\inc\\emm.h",
+      "evidence": "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch2.json",
+      "anchors": 1,
+      "reverse_hash": "568af7bbf7f5ef24b5b6688dfc9c5e45e9d0f6caa0d92ae7f7f49921ad8962f7",
+      "old_queue_hash": "568af7bbf7f5ef24b5b6688dfc9c5e45e9d0f6caa0d92ae7f7f49921ad8962f7",
+      "current_hash": "13c51268c07d4486e5a567bea80cebb53177abb3188bbdfa222b0f2bc7f6449d",
+      "verified": true
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\inc\\gvi.h",
+      "evidence": "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch2.json",
+      "anchors": 1,
+      "reverse_hash": "8d3d89112a91013848f3cc05e9b065a5a295f7bdc289a5f2958e417678a05573",
+      "old_queue_hash": "8d3d89112a91013848f3cc05e9b065a5a295f7bdc289a5f2958e417678a05573",
+      "current_hash": "ac27ac3db4d6f30db6de02f828426e629200e456b8578839a32bb43b742bee67",
+      "verified": true
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\inc\\ios.h",
+      "evidence": "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch2.json",
+      "anchors": 3,
+      "reverse_hash": "ab2f4af08702de82f4207ea7a93d723009f200fc159d540e13adf14a33764fec",
+      "old_queue_hash": "ab2f4af08702de82f4207ea7a93d723009f200fc159d540e13adf14a33764fec",
+      "current_hash": "be10431706251e0bf08ffda03662eec595fd39f731bbb6d86aed3d7424c7f995",
+      "verified": true
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\keymouse\\keyba.c",
+      "evidence": "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch3.json",
+      "anchors": 2,
+      "reverse_hash": "796cc0e4c0698be1abaebf9728490a36497de9818ae1f4e4c37719328576df9a",
+      "old_queue_hash": "796cc0e4c0698be1abaebf9728490a36497de9818ae1f4e4c37719328576df9a",
+      "current_hash": "5e3ff6f5ff8346d38b6e1aa3f96f8a6bce42871368c932a9a9e0bb649b4f9de0",
+      "verified": true
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\support\\get_env.c",
+      "evidence": "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch3.json",
+      "anchors": 1,
+      "reverse_hash": "82599d9f09b128e2109ed8fc8ae7088987c626b20f06ec4836c51edcb74af1ef",
+      "old_queue_hash": "82599d9f09b128e2109ed8fc8ae7088987c626b20f06ec4836c51edcb74af1ef",
+      "current_hash": "2b2965c828aaa56c4b52a7da835206e7daf1e65cecaa280e85f6a0da29660f2c",
+      "verified": true
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\system\\at_dma.c",
+      "evidence": "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch3.json",
+      "anchors": 1,
+      "reverse_hash": "5118918c1f2f6607d96b31aa6c13a8a0e4c55c198a7bd7e53aea678978665b01",
+      "old_queue_hash": "5118918c1f2f6607d96b31aa6c13a8a0e4c55c198a7bd7e53aea678978665b01",
+      "current_hash": "f51346082abab3ebfe9931b0947f699e9184d69ddb59f9fb3af74aed0db35870",
+      "verified": true
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\system\\timer.c",
+      "evidence": "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch3.json",
+      "anchors": 1,
+      "reverse_hash": "4e2728687508b9c240c56e65fc4ca8e93a557e2ffdeaf61f761775b11d0a0d6b",
+      "old_queue_hash": "4e2728687508b9c240c56e65fc4ca8e93a557e2ffdeaf61f761775b11d0a0d6b",
+      "current_hash": "9e78384698a9e7c936a935e7c6895e25b85d9179f4898058e00c9eef8a2e5064",
+      "verified": true
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\host\\src\\nt_eoi.c",
+      "evidence": "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch3.json",
+      "anchors": 1,
+      "reverse_hash": "793b9989d7e691bd458cd6a6c82f2c7d1bbec78d0c3a35aa5b65c58eb8f07cf4",
+      "old_queue_hash": "793b9989d7e691bd458cd6a6c82f2c7d1bbec78d0c3a35aa5b65c58eb8f07cf4",
+      "current_hash": "6bfb427c75b1e50decac4c528a86410adc5aba55bbccc74bf049c1b2fef67ab7",
+      "verified": true
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\host\\src\\nt_graph.c",
+      "evidence": "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch3.json",
+      "anchors": 1,
+      "reverse_hash": "0f57d1a99ea71c9258a0e7664db08af1699ac15d0b7a6af5333e5fc4078e26e1",
+      "old_queue_hash": "0f57d1a99ea71c9258a0e7664db08af1699ac15d0b7a6af5333e5fc4078e26e1",
+      "current_hash": "8a6ac4cbc55e1a10577b52da591406924fac41d8aac5f8beff65fa0d5a4a0c19",
+      "verified": true
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\host\\src\\nt_rez.c",
+      "evidence": "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch3.json",
+      "anchors": 1,
+      "reverse_hash": "bae57804948438a516ae0cc8e16919d88c4cf9daa8ebce59a78a65393c8398a4",
+      "old_queue_hash": "bae57804948438a516ae0cc8e16919d88c4cf9daa8ebce59a78a65393c8398a4",
+      "current_hash": "0511f195c0a8a6c4721c164bd546e866bfd345f48492469e48e70137e2e6102a",
+      "verified": true
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\host\\src\\nt_rflop.c",
+      "evidence": "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch3.json",
+      "anchors": 1,
+      "reverse_hash": "2c84f2fcd52f333c74e33c3986844f6252e91149215333762bf98be693b07983",
+      "old_queue_hash": "2c84f2fcd52f333c74e33c3986844f6252e91149215333762bf98be693b07983",
+      "current_hash": "9ff9228bc8c2b2ef7ba3fd89a76653b0a83d0f5814cb6b88d4c08edbe95afd99",
+      "verified": true
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\host\\src\\nt_vdd.c",
+      "evidence": "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch4.json",
+      "anchors": 1,
+      "reverse_hash": "724163834f37e7c93231db1a104a6a66bb3c4b4c9649b0fb64ec3e5a35e1612a",
+      "old_queue_hash": "724163834f37e7c93231db1a104a6a66bb3c4b4c9649b0fb64ec3e5a35e1612a",
+      "current_hash": "ca9802377951a597e98c933395fc9be706757c4d476522d1279e14be8fdf2e41",
+      "verified": true
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\host\\src\\stubs.c",
+      "evidence": "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch4.json",
+      "anchors": 1,
+      "reverse_hash": "e2285179cee924a8665c35285dc5580f04ff7f093eb25653ae7812cf4a1254c3",
+      "old_queue_hash": "e2285179cee924a8665c35285dc5580f04ff7f093eb25653ae7812cf4a1254c3",
+      "current_hash": "24a4fb4cdb538af3c2c84fdc3ca5b74e361d8ca3410e4fb0adda568a6e499cdf",
+      "verified": true
+    },
+    {
+      "path": "src\\mvdm-host\\wow32\\wcall16.c",
+      "evidence": "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch4.json",
+      "anchors": 2,
+      "reverse_hash": "51fc0ddeed8481a96b1934e500ecacf0ef2570fdf0ec90d46c8d4fd0d1a20288",
+      "old_queue_hash": "51fc0ddeed8481a96b1934e500ecacf0ef2570fdf0ec90d46c8d4fd0d1a20288",
+      "current_hash": "ce4d684e01c743f83ba46f0314f261e2f3de4d406f556ffa7058fb679f4c3fe8",
+      "verified": true
+    },
+    {
+      "path": "src\\mvdm-host\\wow32\\wkfileio.c",
+      "evidence": "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch4.json",
+      "anchors": 1,
+      "reverse_hash": "1ad271e7c85a9d418f2940958317a4911b6fab3092d13cbe5d7cec4fcb522144",
+      "old_queue_hash": "1ad271e7c85a9d418f2940958317a4911b6fab3092d13cbe5d7cec4fcb522144",
+      "current_hash": "8f8ddccae0e5a5fec1718a5f52c78b1fc68df97b916c15d8fb536b1959b2c67f",
+      "verified": true
+    },
+    {
+      "path": "src\\mvdm-host\\wow32\\wkman.c",
+      "evidence": "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch4.json",
+      "anchors": 2,
+      "reverse_hash": "4da0f527c7b807b2fa94dba88c2cb49201a01d5e5b071b15ef26a29b2975c493",
+      "old_queue_hash": "4da0f527c7b807b2fa94dba88c2cb49201a01d5e5b071b15ef26a29b2975c493",
+      "current_hash": "57708c34a4d5892f5872963e79bdf27aa0410cc468b78019db93ee308024d252",
+      "verified": true
+    },
+    {
+      "path": "src\\mvdm-host\\wow32\\wmdisp32.c",
+      "evidence": "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch4.json",
+      "anchors": 1,
+      "reverse_hash": "67d8e664f8db2aff4bb7138869e237ae450100214747a0a0e0ae95582c54158f",
+      "old_queue_hash": "67d8e664f8db2aff4bb7138869e237ae450100214747a0a0e0ae95582c54158f",
+      "current_hash": "2da35733ebc7631be67815e16a6e48846097a30dea623d8d104dc52a8f4e74b8",
+      "verified": true
+    },
+    {
+      "path": "src\\mvdm-host\\wow32\\wmsgcb.c",
+      "evidence": "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch4.json",
+      "anchors": 1,
+      "reverse_hash": "4dcb2ac3f2e432377b95b16e110ca83c6afc6df85556661c1045332aa9f1f53b",
+      "old_queue_hash": "4dcb2ac3f2e432377b95b16e110ca83c6afc6df85556661c1045332aa9f1f53b",
+      "current_hash": "a949a029b2da94a1c3a831418f7442caccfc80b672e8a25aee69abc0943afdac",
+      "verified": true
+    },
+    {
+      "path": "src\\mvdm-host\\wow32\\wuclass.c",
+      "evidence": "artifacts\\mvdm-audit\\s13-depth1-unique-anchor-batch4.json",
+      "anchors": 2,
+      "reverse_hash": "ea32967cc39a7a400a783d4c1862a34b854ddb227bda951e4e62c91aabfa5155",
+      "old_queue_hash": "ea32967cc39a7a400a783d4c1862a34b854ddb227bda951e4e62c91aabfa5155",
+      "current_hash": "1c4c537bdca279cd997e099122f9b54937e92ca030f637c97f81eee93f4a4a56",
+      "verified": true
+    }
+  ],
+  "limits": "Proves recorded byte changes only, not independent original branch semantics."
+}

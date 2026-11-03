@@ -1,0 +1,25 @@
+{
+  "scope": "Unselected generated CCPU Evid header duplicate",
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/evid_c.h",
+  "sha256": "c8e3925c56ed41cbcc982794eb87e2141df7d5d01059d58e2a017f874074f693",
+  "mirror_sources": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/evid_c.h",
+      "current_sha256": "c8e3925c56ed41cbcc982794eb87e2141df7d5d01059d58e2a017f874074f693",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\evid_c.h",
+      "original_sha256": "c8e3925c56ed41cbcc982794eb87e2141df7d5d01059d58e2a017f874074f693",
+      "pinned_expected_sha256": "c8e3925c56ed41cbcc982794eb87e2141df7d5d01059d58e2a017f874074f693",
+      "original_matches_pinned": true
+    }
+  ],
+  "removed_condition_groups": 2,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r146.zip",
+  "evidence": [
+    "Worker Ninja dependency database resolves Evid_c.h to base/cvidc/Evid_c.h, not base/ccpu386/evid_c.h.",
+    "The selected C-VID build compiles base/cpu/src/evid/vglob.c and base/cvidc/ev_glue.c with the C-VID include profile."
+  ],
+  "limitations": [
+    "The selected C-VID header and CCPU/C-VID vector bindings remain unchanged.",
+    "No unsupported alternative CCPU header profile is asserted."
+  ]
+}

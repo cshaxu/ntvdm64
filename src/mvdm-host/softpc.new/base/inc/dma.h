@@ -304,9 +304,12 @@ typedef	struct
  * of its component parts.
  * It is not used within the DMA emulation
  */
+#line 340
 #ifdef BIGEND
+#line 341
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
+#line 359
 #ifdef LITTLEND
 typedef union
 {

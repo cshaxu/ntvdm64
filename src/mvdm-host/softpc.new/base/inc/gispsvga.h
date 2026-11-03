@@ -20,6 +20,9 @@
  *! (c)Copyright Insignia Solutions Ltd., 1994. All rights reserved.
 ]*/
 
+#line 23
 #ifdef GISP_SVGA
+#line 24
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
+#line 30

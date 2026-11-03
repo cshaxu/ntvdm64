@@ -55,7 +55,9 @@ LPVOID FASTCALL WK32VirtualAlloc(PVDMFRAME pFrame)
     }
 #endif // i386
 
+#line 58
 #ifdef i386
+#line 59
 #error DIVERGENCE MVDM-HOST-DIV-589: historical i386 WOW branch is not selected
 #endif
 #line 87
@@ -95,9 +97,12 @@ BOOL FASTCALL WK32VirtualFree(PVDMFRAME pFrame)
 }
 
 
+#line 123
 #if 0
+#line 124
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#line 156
 
 
 VOID FASTCALL WK32GlobalMemoryStatus(PVDMFRAME pFrame)

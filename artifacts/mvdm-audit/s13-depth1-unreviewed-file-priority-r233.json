@@ -1,0 +1,97 @@
+{
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r233.zip",
+  "queue_sha256": "55aa76bccb7f9e8d572bf0c76a6b3af9cf3cf7cbb03394787182447c1b51973f",
+  "unit": "original depth-one arms, not files or condition groups",
+  "unreviewed_arms": 250,
+  "by_original_file": [
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "arms": 114
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "arms": 35
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "arms": 20
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "arms": 10
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "arms": 9
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "arms": 9
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "arms": 8
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "arms": 6
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "arms": 6
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+      "arms": 6
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+      "arms": 6
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c",
+      "arms": 4
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\ntos\\ex\\probe.c",
+      "arms": 2
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\client.c",
+      "arms": 2
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\handles.c",
+      "arms": 2
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\class.c",
+      "arms": 2
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\exitwin.c",
+      "arms": 2
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+      "arms": 2
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\draw.c",
+      "arms": 2
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\usercli.h",
+      "arms": 1
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\user.h",
+      "arms": 1
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\inctlpan.c",
+      "arms": 1
+    }
+  ],
+  "limitation": "Inventory only; counts do not prove any arm unreachable or imply that an omitted function should be restored."
+}

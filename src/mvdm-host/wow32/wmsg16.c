@@ -68,10 +68,12 @@ LPFNUNTHUNKMSG16 apfnUnThunkMsg16[] = {
 //
 
 
+#line 69
 #ifdef DEBUG
+#line 70
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 114
+#line 112
 
 
 // WARNING: This function may cause 16-bit memory movement, invalidating
@@ -226,10 +228,10 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #else
-#line 268
+#line 249
         GETVDMPTR(lParam, wParam,                          (LPSZ)*plParamNew);
 #endif
-#line 270
+#line 251
         break;
 
     case WM_GETMINMAXINFO:  // 024h, <SLPre,SLPost,LS>,MINMAXINFOSTRUCT

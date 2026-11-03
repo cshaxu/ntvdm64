@@ -255,7 +255,9 @@ flush_tlb()
 	 }
    }
 
+#line 275
 #ifdef SPC486
+#line 276
 #error Excluded unsupported SPC486 profile
 #endif /* SPC486 */
 #line 312
@@ -688,10 +690,10 @@ xtrn2phy_core(LIN_ADDR lin, IUM8 access_request, PHY_ADDR *phy, BOOL cache_only)
 #ifdef SPC486
 #error Excluded unsupported SPC486 profile
 #else
-#line 737
+#line 725
 	 if ( access_check[access][e->mode] )
 #endif /* SPC486 */
-#line 739
+#line 727
 	    {
 	    return cache_only ? -1 : FALSE;
 	    }
@@ -731,10 +733,10 @@ xtrn2phy_core(LIN_ADDR lin, IUM8 access_request, PHY_ADDR *phy, BOOL cache_only)
 #ifdef SPC486
 #error Excluded unsupported SPC486 profile
 #else
-#line 778
+#line 765
    if ( access_check[access][comb] )
 #endif /* SPC486 */
-#line 780
+#line 767
       {
       return FALSE;
       }

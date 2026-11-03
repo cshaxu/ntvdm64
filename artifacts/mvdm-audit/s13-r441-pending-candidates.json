@@ -1,0 +1,252 @@
+{
+  "source_queue": "s13-bfs-depth1-working-queue-195r367.zip",
+  "compile_contexts": "s13-r441-macro-contexts.json",
+  "candidates": [
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\client.c",
+      "line": 3494,
+      "macro": "FE_IME",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "FE_IME",
+          "line": 3494,
+          "status": "pending",
+          "evidence": "Misplaced file-scope placeholder withdrawn; original function omitted. s13-r294-withdraw-misplaced.json"
+        }
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\profile.c",
+      "line": 68,
+      "macro": "FE_SB",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "FE_SB",
+          "line": 68,
+          "status": "pending",
+          "evidence": "Misplaced file-scope placeholder withdrawn; original owner scope omitted. s13-r288-withdraw-misplaced.json"
+        }
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+      "line": 337,
+      "macro": "FE_IME",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "FE_IME",
+          "line": 337,
+          "status": "pending",
+          "evidence": "Misplaced file-scope placeholder withdrawn; original function omitted. s13-r294-withdraw-misplaced.json"
+        }
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "line": 270,
+      "macro": "FE_SB",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "FE_SB",
+          "line": 270,
+          "status": "pending",
+          "evidence": "Misplaced file-scope placeholder withdrawn; original function omitted. s13-r293-withdraw-misplaced.json"
+        }
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "line": 331,
+      "macro": "FE_SB",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "FE_SB",
+          "line": 331,
+          "status": "pending",
+          "evidence": "Original scope not restored; withdrawn misplaced scaffold (r280)."
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 355,
+          "status": "pending",
+          "evidence": "Original scope not restored; withdrawn misplaced scaffold (r280)."
+        }
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "line": 453,
+      "macro": "FE_SB",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "FE_SB",
+          "line": 453,
+          "status": "pending",
+          "evidence": "Original scope not restored; withdrawn misplaced scaffold (r280)."
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 466,
+          "status": "pending",
+          "evidence": "Original scope not restored; withdrawn misplaced scaffold (r280)."
+        }
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "line": 1719,
+      "macro": "FE_SB",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "FE_SB",
+          "line": 1719,
+          "status": "pending",
+          "evidence": "Misplaced file-scope placeholder withdrawn; original function omitted. s13-r293-withdraw-misplaced.json"
+        }
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "line": 1777,
+      "macro": "FE_SB",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "FE_SB",
+          "line": 1777,
+          "status": "pending",
+          "evidence": "Original scope not restored; withdrawn misplaced scaffold (r280)."
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 1789,
+          "status": "pending",
+          "evidence": "Original scope not restored; withdrawn misplaced scaffold (r280)."
+        }
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "line": 1803,
+      "macro": "FE_SB",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "FE_SB",
+          "line": 1803,
+          "status": "pending",
+          "evidence": "Original scope not restored; withdrawn misplaced scaffold (r280)."
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 1840,
+          "status": "pending",
+          "evidence": "Original scope not restored; withdrawn misplaced scaffold (r280)."
+        }
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "line": 957,
+      "macro": "FE_IME",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "FE_IME",
+          "line": 957,
+          "status": "pending",
+          "evidence": "Original scope not restored; withdrawn misplaced scaffold (r281)."
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 959,
+          "status": "pending",
+          "evidence": "Original scope not restored; withdrawn misplaced scaffold (r281)."
+        }
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "line": 963,
+      "macro": "FE_IME",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "FE_IME",
+          "line": 963,
+          "status": "pending",
+          "evidence": "Original scope not restored; withdrawn misplaced scaffold (r281)."
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 965,
+          "status": "pending",
+          "evidence": "Original scope not restored; withdrawn misplaced scaffold (r281)."
+        }
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "line": 992,
+      "macro": "FE_IME",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "FE_IME",
+          "line": 992,
+          "status": "pending",
+          "evidence": "Misplaced file-scope placeholder withdrawn; original function omitted. s13-r290-queue-misplaced.json"
+        }
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "line": 1203,
+      "macro": "FE_IME",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "FE_IME",
+          "line": 1203,
+          "status": "pending",
+          "evidence": "Original scope not restored; withdrawn misplaced scaffold (r281)."
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 1208,
+          "status": "pending",
+          "evidence": "Original scope not restored; withdrawn misplaced scaffold (r281)."
+        }
+      ]
+    },
+    {
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "line": 1915,
+      "macro": "FE_IME",
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "FE_IME",
+          "line": 1915,
+          "status": "pending",
+          "evidence": "Misplaced file-scope placeholder withdrawn; original function omitted. s13-r290-queue-misplaced.json"
+        }
+      ]
+    }
+  ],
+  "scope": "First-level guards per file only; original owners absent; selected else bodies are separately pending. Further fixture-context and insertion safety review required before modification."
+}

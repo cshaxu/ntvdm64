@@ -1,0 +1,9 @@
+{
+  "path": "src/non-mvdm/base/win32/server/srvinit.c",
+  "sha256": "d330230595c68f36574a2af2e875281cffab38d50cfaa340bca7c74eb2e5cb81",
+  "last_source_commit": "fdd873fa26de6861fcea3d6ecabfe3f811169c4f",
+  "basis": "No occurrence in cached build graphs; previous historical frozen comparison removed; only self-guard checked the file. Actual NTSRV dispatch remains base_dispatch.c. Original ownership audit reads pinned external OpenNT.",
+  "removed_groups": 4,
+  "removed_pending_arms": 3,
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r153.zip"
+}

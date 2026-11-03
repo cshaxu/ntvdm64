@@ -1,0 +1,51 @@
+{
+  "source": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+  "before_sha256": "3bcbd4d8a2a54b73b9e24106bd6ce69c177bac579c7664a515426512fe409e0d",
+  "after_sha256": "ef451daedec6626dacf7bc88768ba5d1292ab58bad109579577bcaa79c9caf8d",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+  "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+  "changes": [
+    {
+      "old_current_if_line": 224,
+      "original_if_line": 220,
+      "original_body_line": 221
+    },
+    {
+      "old_current_if_line": 369,
+      "original_if_line": 675,
+      "original_body_line": 676
+    },
+    {
+      "old_current_if_line": 519,
+      "original_if_line": 974,
+      "original_body_line": 975
+    }
+  ],
+  "insertions": [
+    {
+      "before_old_line": 224,
+      "count": 1
+    },
+    {
+      "before_old_line": 225,
+      "count": 1
+    },
+    {
+      "before_old_line": 369,
+      "count": 1
+    },
+    {
+      "before_old_line": 370,
+      "count": 1
+    },
+    {
+      "before_old_line": 519,
+      "count": 1
+    },
+    {
+      "before_old_line": 520,
+      "count": 1
+    }
+  ],
+  "limits": "original guard and body diagnostic positions; existing continuations unchanged; actual build and diagnostics pending"
+}

@@ -1,0 +1,184 @@
+{
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "before_sha256": "14286278fad14fcb21a961aa3108d398593072cc3694e22acc69b6ace1e7e646",
+      "after_sha256": "111536eaa02ec93fe0f73e491d7d6cea0d091c4b2efe0b4b38b05b0036f7a165",
+      "groups": [
+        {
+          "current_old_start": 1070,
+          "current_old_end": 1074,
+          "original_line": 2298,
+          "directive": "#if 0"
+        },
+        {
+          "current_old_start": 1080,
+          "current_old_end": 1084,
+          "original_line": 4516,
+          "directive": "#if 0"
+        },
+        {
+          "current_old_start": 1085,
+          "current_old_end": 1090,
+          "original_line": 4574,
+          "directive": "#if 0"
+        },
+        {
+          "current_old_start": 1075,
+          "current_old_end": 1079,
+          "original_line": 2640,
+          "directive": "#ifdef LATER"
+        },
+        {
+          "current_old_start": 1091,
+          "current_old_end": 1096,
+          "original_line": 881,
+          "directive": "#ifdef DEBUG"
+        },
+        {
+          "current_old_start": 1097,
+          "current_old_end": 1101,
+          "original_line": 3901,
+          "directive": "#ifdef DEBUG"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "before_sha256": "66efe6002f7731ec1bab0067c31c822db3c9ae70d9f67bc810e51f40e735e973",
+      "after_sha256": "c914d31db2b32fcd1418c7b987219cbd53ea563f4c211053a7f7706ed5d55848",
+      "groups": [
+        {
+          "current_old_start": 427,
+          "current_old_end": 432,
+          "original_line": 270,
+          "directive": "#ifdef FE_SB"
+        },
+        {
+          "current_old_start": 433,
+          "current_old_end": 438,
+          "original_line": 1719,
+          "directive": "#ifdef FE_SB"
+        },
+        {
+          "current_old_start": 439,
+          "current_old_end": 443,
+          "original_line": 327,
+          "directive": "#ifdef FE_IME"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "before_sha256": "afda4499824b324b85eb2aafd24eeb9bbace2cde2a7a9ab464c548af2aefcb87",
+      "after_sha256": "55214187ccd6ecd17d781697750ccb63ce17f2f8c23e4eb7e7ad4143f894113e",
+      "groups": [
+        {
+          "current_old_start": 298,
+          "current_old_end": 302,
+          "original_line": 358,
+          "directive": "#ifdef LATER"
+        },
+        {
+          "current_old_start": 318,
+          "current_old_end": 323,
+          "original_line": 77,
+          "directive": "#ifdef FE_IME"
+        },
+        {
+          "current_old_start": 324,
+          "current_old_end": 329,
+          "original_line": 1020,
+          "directive": "#ifdef FE_IME"
+        },
+        {
+          "current_old_start": 330,
+          "current_old_end": 335,
+          "original_line": 693,
+          "directive": "#ifdef FE_SB"
+        },
+        {
+          "current_old_start": 336,
+          "current_old_end": 341,
+          "original_line": 797,
+          "directive": "#ifdef FE_SB"
+        },
+        {
+          "current_old_start": 342,
+          "current_old_end": 346,
+          "original_line": 2204,
+          "directive": "#ifdef DEBUG"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "before_sha256": "535ade8e58a8fc0770ecd5a5c79067cd54545e530b520ab61615c317d81441fa",
+      "after_sha256": "27eb54f99290a33923d9060f7eb8ad7fa6f63d2bf8a8571e2703e23a7a780821",
+      "groups": [
+        {
+          "current_old_start": 90,
+          "current_old_end": 94,
+          "original_line": 1622,
+          "directive": "#ifdef LATER"
+        },
+        {
+          "current_old_start": 95,
+          "current_old_end": 99,
+          "original_line": 1673,
+          "directive": "#ifdef LATER"
+        },
+        {
+          "current_old_start": 205,
+          "current_old_end": 210,
+          "original_line": 1598,
+          "directive": "#ifdef DEBUG"
+        },
+        {
+          "current_old_start": 223,
+          "current_old_end": 228,
+          "original_line": 677,
+          "directive": "#ifdef FE_SB"
+        },
+        {
+          "current_old_start": 229,
+          "current_old_end": 234,
+          "original_line": 1213,
+          "directive": "#ifdef FE_SB"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "before_sha256": "42a0eaabf60af5f3da3fcfa8e686a1d737a55a8913a07f254f348ae2b6f7c10b",
+      "after_sha256": "1f3f8e4f4b56ec6d898bb73f85537cbf7607ce094ea3027f3349f5f197c8cb85",
+      "groups": [
+        {
+          "current_old_start": 149,
+          "current_old_end": 154,
+          "original_line": 749,
+          "directive": "#ifdef DEBUG"
+        },
+        {
+          "current_old_start": 155,
+          "current_old_end": 160,
+          "original_line": 759,
+          "directive": "#ifdef DEBUG"
+        },
+        {
+          "current_old_start": 161,
+          "current_old_end": 166,
+          "original_line": 776,
+          "directive": "#ifdef DEBUG"
+        },
+        {
+          "current_old_start": 167,
+          "current_old_end": 171,
+          "original_line": 781,
+          "directive": "#ifdef DEBUG"
+        }
+      ]
+    }
+  ],
+  "reason": "original directives are inside omitted functions; file-scope placeholders withdrawn; original groups pending"
+}

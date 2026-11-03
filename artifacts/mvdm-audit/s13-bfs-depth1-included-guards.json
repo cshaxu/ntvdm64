@@ -1,0 +1,34 @@
+{
+  "scope": "Ordinary include guards in actual dependency records",
+  "prior_queue": "s13-bfs-depth1-working-queue-195r139.zip",
+  "files": [
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntdddisk.h",
+      "sha256": "660b695c26ffd2e79a9d62d99d8c097fa2af7d1bb5475c89b69703345d4f5081",
+      "graph": "worker"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntdbg.h",
+      "sha256": "33606d8977bdea48f291fccff2f2fe357ac7d018db5cb424508016e6b2073ffe",
+      "graph": "worker"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/wownt32.h",
+      "sha256": "fe726b917229ef7aad3615d001ac32f5d1c4a7237486b68195a3650acde5bcee",
+      "graph": "wow32"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/gdpvar.h",
+      "sha256": "6ca53692e60067bef99950b87e1126de8e8858799cdde86cb6a8f51db9dad54a",
+      "graph": "worker"
+    }
+  ],
+  "evidence": [
+    "Current x86 Ninja dependency databases list these exact paths.",
+    "s13-bfs-depth1-include-guards.json verifies each opening define and final matching endif.",
+    "Coding policy excludes ordinary whole-file include guards from rejected-body substitution."
+  ],
+  "limitations": [
+    "Dependency presence does not prove that a guarded body or any nested condition was selected."
+  ]
+}

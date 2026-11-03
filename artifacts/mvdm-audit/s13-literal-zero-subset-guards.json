@@ -1,0 +1,27 @@
+{
+  "sources": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "sha256": "c73db9643637bd33ad7eaa123db27f2908c62ccabfa1060c124193eb03d3c401"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "sha256": "548dcf0394c1a2989d5d1b8cfb07c476f9f8a5f7e05746d5c2e56a89dfb67cf1"
+    }
+  ],
+  "original_guards": {
+    "clres": [
+      1480,
+      2298,
+      4516,
+      4574
+    ],
+    "input": [
+      1409
+    ]
+  },
+  "placement": "root guards in current selected subset; original enclosing functions omitted; no selected body added",
+  "build": "x86 WOW32 compiled",
+  "test": "focused five-guard structure check passed",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r207.zip"
+}

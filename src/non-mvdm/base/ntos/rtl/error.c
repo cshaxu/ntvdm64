@@ -23,7 +23,9 @@ Revision History:
 #include <winerror.h>
 #include "error.h"
 
+#line 26
 #if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)
+#line 27
 #error Unsupported excluded original configuration
 #endif
 #line 29
@@ -173,7 +175,9 @@ Return Value:
         return ((ULONG)Status & 0xFFFF);
     }
 
+#line 175
 #ifndef NTOS_KERNEL_RUNTIME
+#line 176
 #error Unsupported excluded original configuration
 #endif // NTOS_KERNEL_RUNTIME
 #line 185

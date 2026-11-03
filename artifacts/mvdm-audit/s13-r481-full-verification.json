@@ -1,0 +1,81 @@
+{
+  "candidate": "build/t473-s13/r477-phase1-package",
+  "manifest_sha256": "e81ce84290ac8ee94e69f2e7eb79f79bed7bbe430fddf2040e040c89f11b5c32",
+  "timings_sha256": "d28f580f311bac544efac6b8138bb446f99119435409ef94547a64def1e8b75c",
+  "result": {
+    "completedUtc": "2026-11-03T15:15:47.7269006Z",
+    "exitCode": 0,
+    "ok": true
+  },
+  "gates": [
+    {
+      "name": "guest-media",
+      "passed": true
+    },
+    {
+      "name": "ntvdm-export-ordinals",
+      "passed": true
+    },
+    {
+      "name": "wow-frontiers",
+      "passed": true
+    },
+    {
+      "name": "Console-17",
+      "passed": true
+    },
+    {
+      "name": "Window-17",
+      "passed": true
+    },
+    {
+      "name": "rpc",
+      "passed": true
+    },
+    {
+      "name": "native-gui",
+      "passed": true
+    },
+    {
+      "name": "version-negatives",
+      "passed": true
+    },
+    {
+      "name": "strict-dir",
+      "passed": true
+    },
+    {
+      "name": "modern-edit-return",
+      "passed": true
+    },
+    {
+      "name": "cooked-return",
+      "passed": true
+    },
+    {
+      "name": "rapid-relaunch",
+      "passed": true
+    },
+    {
+      "name": "interactive-relaunch",
+      "passed": true
+    },
+    {
+      "name": "session-isolation",
+      "passed": true
+    },
+    {
+      "name": "retirement-wiring",
+      "passed": true
+    },
+    {
+      "name": "nested-window-handoff",
+      "passed": true
+    },
+    {
+      "name": "dos4gw-nesticle",
+      "passed": true
+    }
+  ],
+  "scope": "Exact ten-component staged candidate; tests include both 17-route matrices. WOW frontier and DOS4GW do not establish all gameplay or pixel behavior."
+}

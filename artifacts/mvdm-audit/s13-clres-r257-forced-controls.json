@@ -1,0 +1,29 @@
+{
+  "controls": [
+    {
+      "line": 2624,
+      "arch": "x86",
+      "exit": 2,
+      "diagnostic": "guard-2624.c\nO:\\repos.hobby\\ntvdm64\\build\\t473-s13\\clres-r257-forced\\guard-2624.c(2625): fatal error C1189: #error:  Excluded unsupported original icon-cache lookup branch"
+    },
+    {
+      "line": 2624,
+      "arch": "x64",
+      "exit": 2,
+      "diagnostic": "guard-2624.c\nO:\\repos.hobby\\ntvdm64\\build\\t473-s13\\clres-r257-forced\\guard-2624.c(2625): fatal error C1189: #error:  Excluded unsupported original icon-cache lookup branch"
+    },
+    {
+      "line": 3751,
+      "arch": "x86",
+      "exit": 2,
+      "diagnostic": "guard-3751.c\nO:\\repos.hobby\\ntvdm64\\build\\t473-s13\\clres-r257-forced\\guard-3751.c(3752): fatal error C1189: #error:  Excluded unsupported original image-match calculation branch"
+    },
+    {
+      "line": 3751,
+      "arch": "x64",
+      "exit": 2,
+      "diagnostic": "guard-3751.c\nO:\\repos.hobby\\ntvdm64\\build\\t473-s13\\clres-r257-forced\\guard-3751.c(3752): fatal error C1189: #error:  Excluded unsupported original image-match calculation branch"
+    }
+  ],
+  "limits": "Original #if 0 is a literal exclusion; scratch-only probes change it to #if 1 to check rejection and diagnostic mapping."
+}

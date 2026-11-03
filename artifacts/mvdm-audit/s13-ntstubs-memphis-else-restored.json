@@ -1,0 +1,17 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+  "original": "O:/repos.external/OpenNT/windows/core/ntuser/client/ntstubs.c",
+  "original_guard_line": 380,
+  "original_else_line": 439,
+  "original_selected_line": 440,
+  "before_sha256": "5da4eb58366fe15bb2e312956c48071b9377361e09b9a40b20f8c4a423be6a48",
+  "after_sha256": "afda4499824b324b85eb2aafd24eeb9bbace2cde2a7a9ab464c548af2aefcb87",
+  "change": "Restore #else and selected diagnostic anchor; original selected function remains omitted, arm pending.",
+  "contexts": "s13-ntstubs-memphis-else-preprocess-r255.json",
+  "build": "cached x86 WOW32 and four call-boundary object targets passed",
+  "negative": "tests/build/test_mirror_rejected_conditions.py passed x86 188 guard checks",
+  "limits": "no separate runtime test; no full selected function recovery or layer completion.",
+  "x64_negative": "tests/build/test_mirror_rejected_conditions.py passed x64 188 guard checks",
+  "isolated_controls": "s13-ntstubs-memphis-else-controls-r256.json: selected/rejected controls passed x86 and x64",
+  "queue_positions": "22 current arms checked against directive kinds; zero mismatches. First exploratory regex incorrectly matched ifdef as if; corrected ordered-token regex passed."
+}

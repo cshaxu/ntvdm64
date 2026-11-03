@@ -1,0 +1,35 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+  "method": "Extract existing first-depth guard; isolated sentinel only in empty selected alternative; MSVC x86/x64 positive and negative preprocessing.",
+  "controls": [
+    {
+      "arch": "x86",
+      "defined": false,
+      "exit": 0,
+      "pass": true,
+      "diagnostic": null
+    },
+    {
+      "arch": "x86",
+      "defined": true,
+      "exit": 2,
+      "pass": true,
+      "diagnostic": "\n\n\nguard.c\nO:\\repos.hobby\\ntvdm64\\build\\t473-s13\\r256-memphis-controls\\guard.c(381): fatal error C1189: #error:  Excluded unsupported MEMPHIS_MENUS client owner\n"
+    },
+    {
+      "arch": "x64",
+      "defined": false,
+      "exit": 0,
+      "pass": true,
+      "diagnostic": null
+    },
+    {
+      "arch": "x64",
+      "defined": true,
+      "exit": 2,
+      "pass": true,
+      "diagnostic": "\n\n\nguard.c\nO:\\repos.hobby\\ntvdm64\\build\\t473-s13\\r256-memphis-controls\\guard.c(381): fatal error C1189: #error:  Excluded unsupported MEMPHIS_MENUS client owner\n"
+    }
+  ],
+  "limits": "Isolated conditional test; sentinel is not production code and does not prove the omitted function is present."
+}

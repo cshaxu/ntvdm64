@@ -1,0 +1,12 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+  "before_sha256": "62aa9ba58a341ba57d0bccad3682ae4f3a5cea234f82436d20819cd81c784ff8",
+  "after_sha256": "d4067235e642e860527accbffcb13d6479b1081a6d6620f28cf089ddec39a5c4",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+  "original_sha256": "f0b56314a93423599f06645d17104391f19a0ca07c3944853b065d8866493f7c",
+  "condition_line": 544,
+  "body_line": 545,
+  "continuation_line": 564,
+  "source_change": "line directives only; excluded condition, error and selected content unchanged",
+  "validation": "pending"
+}

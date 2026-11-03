@@ -161,9 +161,12 @@
 #include "yoda.h"
 #include "debug.h"
 
+#line 166
 #ifdef NOVELL
+#line 167
 #error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register.
 #endif /* NOVELL */
+#line 169
 
 /*
  * ============================================================================
@@ -267,12 +270,12 @@ void
 #else   /* !NTVDM */
 #error Excluded unsupported non-NTVDM alternative
 #endif  /* NTVDM */
-#line 291
+#line 304
 
 #ifdef HOOKED_IRETS		/* iret hook related variables */
 #error Unsupported excluded original configuration
 #endif /* HOOKED_IRETS */
-#line 297
+#line 310
 
 
 /*
@@ -333,11 +336,14 @@ IS32 ica_accept IPT1(IU32, adapter);
 #ifdef HOOKED_IRETS
 #error Unsupported excluded original configuration
 #endif
-#line 357
+#line 370
 
+#line 371
 #if !defined (NTVDM)
+#line 372
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 384
 
 /*
  *	Please note that ica_eoi is called by SUN_VA code and thus needs to
@@ -533,9 +539,12 @@ IS32 ica_accept IFN1(IU32, adapter)
 	 * on line 7, but this is not neccessary and can cause problems
 	 * for some programs (eg DOOM with a mouse)
 	 */
+#line 582
 #if 0
+#line 583
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#line 585
 
 	/* Skip spurious ints. These are any that are caused by clearing an
 	 * int when the cpu has already registered that there is an int to
@@ -551,9 +560,12 @@ IS32 ica_accept IFN1(IU32, adapter)
     {
         line1 &= 0x07;
 
+#line 600
 #if defined(CPU_40_STYLE) && !defined (NTVDM)
+#line 601
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif /* CPU_40_STYLE */
+#line 611
 
         bit = (1 << line1);
         asp->ica_isr |= bit;
@@ -629,9 +641,12 @@ ica_interrupt_cpu IFN2(IU32, adapter, IU32, line)
 
         host_set_hw_int();
 
+#line 698
 #ifdef A2CPU
+#line 699
 #error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
 #endif
+#line 701
 
 #ifdef NTVDM
         /* call wow routine to check for application unable to service ints */
@@ -838,9 +853,11 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 	host_ica_unlock();
 #endif
 
+#line 908
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 912
         return;
     }
 
@@ -1129,9 +1146,11 @@ void SWPIC_hw_interrupt IFN3(IU32, adapter, IU32, line_no, IS32, call_count)
 #endif
 #line 1154
 
+#line 1303
 #if defined (CPU_40_STYLE) && !defined(NTVDM)
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	/* CPU_40_STYLE */
+#line 1322
 
     /*
      * Now scan the IRR to see if we can raise a CPU interrupt.
@@ -1266,9 +1285,12 @@ ica_intack IFN1(IU32 *, hook_address)
     {
 	asp = &adapter_state[ICA_MASTER];	/* also excuse to use asp */
 
+#line 1470
 #if defined(CPU_40_STYLE) &&  !defined(NTVDM)
+#line 1471
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	/* CPU_40_STYLE */
+#line 1482
 
 	int_no = line + asp->ica_base;
     }
@@ -1298,7 +1320,7 @@ ica_intack IFN1(IU32 *, hook_address)
 #ifndef NTVDM
 #error Excluded unsupported non-NTVDM PIC profile
 #endif  /* !NTVDM */
-#line 1539
+#line 1761
 
 
 
@@ -1327,7 +1349,7 @@ ica_iret_hook_called IFN1(IU32, abs_line)
 #ifdef HOOKED_IRETS
 #error Unsupported excluded original configuration
 #endif	/* HOOKED_IRETS */
-#line 1725
+#line 1991
 
 
 #ifdef SEGMENTATION
@@ -1444,7 +1466,10 @@ void ica1_init IFN0()
 }
 
 
+#line 2137
 #if !defined(PROD)
+#line 2138
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
+#line 2244
 

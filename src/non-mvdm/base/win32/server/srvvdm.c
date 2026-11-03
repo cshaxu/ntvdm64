@@ -2469,9 +2469,12 @@ BaseSrvGetWOWTaskId(
 }
 
 
+#line 2426
 #ifdef NOT_NEEDED
+#line 2427
 #error DIVERGENCE OPENNT-HOST-131: NOT_NEEDED branch is not selected; see mirror register.
 #endif
+#line 2453
 
 VOID
 BaseSrvAddConsoleRecord(

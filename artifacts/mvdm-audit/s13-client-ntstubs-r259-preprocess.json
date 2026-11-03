@@ -1,0 +1,73 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+  "old_commit": "build-owned immediate pre-edit snapshot",
+  "old_sha256": "afda4499824b324b85eb2aafd24eeb9bbace2cde2a7a9ab464c548af2aefcb87",
+  "current_sha256": "b630ee7f4794ad88ff8de688599269d0dcd129392ea015b08f59574790144ff2",
+  "method": "MSVC /EP, exact Ninja target flags, identical scratch source path; nonblank stripped lines hashed. ntSend.h copied without modification.",
+  "contexts": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/ntstubs.obj",
+      "old_sha256": "b059a3fec6442f9ecaa194d8d49da83b2f9ae26a9242ed9f9fb7829ca7685308",
+      "current_sha256": "b059a3fec6442f9ecaa194d8d49da83b2f9ae26a9242ed9f9fb7829ca7685308",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-text.obj",
+      "old_sha256": "6065a7e0d8ba8e704d7d639faa910cc1a1621f6f76aa746a0ef6fb4dcb4b1282",
+      "current_sha256": "6065a7e0d8ba8e704d7d639faa910cc1a1621f6f76aa746a0ef6fb4dcb4b1282",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-color.obj",
+      "old_sha256": "d2d403362f6ed73cfac34be78f2e213221fa9989c39b82070f0f68c2e6f8984e",
+      "current_sha256": "d2d403362f6ed73cfac34be78f2e213221fa9989c39b82070f0f68c2e6f8984e",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-brush-client.obj",
+      "old_sha256": "c0aae46a860afc621ed43fe94db1dc594ae7fcc5d62660f5aa857d4a8288558a",
+      "current_sha256": "c0aae46a860afc621ed43fe94db1dc594ae7fcc5d62660f5aa857d4a8288558a",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/private-word-client.obj",
+      "old_sha256": "eae12fd22a2fd024848d76a51ce3b1a7b6833c2506441b6aba510b2b461837b9",
+      "current_sha256": "eae12fd22a2fd024848d76a51ce3b1a7b6833c2506441b6aba510b2b461837b9",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/color_client.obj",
+      "old_sha256": "cf894a9f77004b193e5e43ed2ab82dd2cc7315e98f827e7b4332c2e1ca59f2c4",
+      "current_sha256": "cf894a9f77004b193e5e43ed2ab82dd2cc7315e98f827e7b4332c2e1ca59f2c4",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/brush_client.obj",
+      "old_sha256": "19e372a8d09d3b3d14ff370617001fb168ea1ebf56347a6bb3b43c4f18195b72",
+      "current_sha256": "19e372a8d09d3b3d14ff370617001fb168ea1ebf56347a6bb3b43c4f18195b72",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/getset_client.obj",
+      "old_sha256": "052c346436311effdb8c4dbf5189bb50580ac576a18e24397705499f1b1c0b6f",
+      "current_sha256": "052c346436311effdb8c4dbf5189bb50580ac576a18e24397705499f1b1c0b6f",
+      "equal": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/native_getset_client.obj",
+      "old_sha256": "c828c48405f27846b0259f789983b65dc84d7a97d40bfeeeb0f7be332153b30f",
+      "current_sha256": "c828c48405f27846b0259f789983b65dc84d7a97d40bfeeeb0f7be332153b30f",
+      "equal": true
+    }
+  ],
+  "limits": "Tests selected preprocessed text only; excludes diagnostics and does not establish other contexts, link or runtime behavior."
+}

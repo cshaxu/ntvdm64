@@ -1,0 +1,55 @@
+[
+  {
+    "batch": 2,
+    "previous_sha256": "24a268643b1da2a3725f9bf1550146b0807ddbd0a9efdc39afaf3a1a4a2a5f4e",
+    "current_sha256": "baddc00f76be0e46ce7b75c3753f16c057dd30fb40d252609b6621a798aaa91d",
+    "previous_size": 2103808,
+    "current_size": 2103808,
+    "byte_differences": [
+      {
+        "offset": 288,
+        "before": 214,
+        "after": 70
+      },
+      {
+        "offset": 289,
+        "before": 107,
+        "after": 108
+      },
+      {
+        "offset": 1698412,
+        "before": 214,
+        "after": 70
+      },
+      {
+        "offset": 1698413,
+        "before": 107,
+        "after": 108
+      }
+    ]
+  },
+  {
+    "batch": 3,
+    "previous_sha256": "baddc00f76be0e46ce7b75c3753f16c057dd30fb40d252609b6621a798aaa91d",
+    "current_sha256": "e31dcd73f8b0162ca99f0d38f7a9728c78a92d93af4bfb5348d49927065eb95b",
+    "previous_size": 2103808,
+    "current_size": 2103808,
+    "byte_differences": [
+      {
+        "offset": 288,
+        "before": 70,
+        "after": 102
+      },
+      {
+        "offset": 360839,
+        "before": 156,
+        "after": 65
+      },
+      {
+        "offset": 1698412,
+        "before": 70,
+        "after": 102
+      }
+    ]
+  }
+]

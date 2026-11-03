@@ -1,0 +1,37 @@
+{
+  "source": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+  "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+  "before_sha256": "e42fc1898f12fe0734c4a3abe1fc13eca7cc212bdbe4e6e2050d1c03c9d77f10",
+  "after_sha256": "3170609787aac8e544ff4f23ff06a970cb549cdfcbff0f24f1fae8a1eebf3903",
+  "original_guard_line": 7261,
+  "original_else_line": 7264,
+  "original_undef_lines": [
+    7313,
+    7314
+  ],
+  "selected": "original x86 alignment macros and corresponding undefinitions; enclosing unselected function remains absent",
+  "actual_context_evidence": "s13-ntstubs-x86-actual-context.json",
+  "status": "candidate verified by selected x86 builds and isolated negative/lifetime controls",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r243.zip",
+  "normal_preprocess_exit": 0,
+  "forced_non_x86_exit": 2,
+  "forced_diagnostic_line": 7265,
+  "builds": [
+    "x86 WOW32 passed",
+    "x86 call-boundaries passed"
+  ],
+  "stamped_wow32_diff_offsets": [
+    280,
+    281,
+    625412,
+    625413
+  ],
+  "reusable_regression": {
+    "test": "tests/build/test_bfs_depth1_ntstubs_alignment.py",
+    "x86": "pass",
+    "x64": "pass",
+    "x86_log_sha256": "070eb7b171a2c06ce7a7f00e723b49f51de5c67c402e778854771c538c2f3ae6",
+    "x64_log_sha256": "070eb7b171a2c06ce7a7f00e723b49f51de5c67c402e778854771c538c2f3ae6"
+  }
+}

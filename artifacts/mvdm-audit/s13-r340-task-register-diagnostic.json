@@ -1,0 +1,24 @@
+{
+  "result": "passed",
+  "calls": [
+    {
+      "ar": "0x00",
+      "expected": "no diagnostic"
+    },
+    {
+      "ar": "0x8b",
+      "expected": "no diagnostic"
+    },
+    {
+      "ar": "0x01",
+      "expected": "one invalid AR diagnostic at c_reg.c:1851"
+    }
+  ],
+  "provider": "original-ccpu386:c_reg.obj, linked from current cached archive",
+  "archive_sha256": "8ab51edfa701cd6405d0d8407582f8e299570a227d28000eab4ac4f9bf2b0cc9",
+  "fixture_sha256": "fe156c1413ed91edfd8c8501b266730f2ddb29166288a6a732b1c7682ca16723",
+  "map_sha256": "07b6e94915276da58f8f71d3dd5400ba4f030aa37706242c13c21353d37afecd",
+  "stdout_sha256": "8e49706b2bf55dd8c2809502de836a9a2c8baf3a67b334c63c63b7d418558c6c",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "scope": "host fixture with real selected CCPU function and controlled initialization; fixture link uses existing /force:multiple seams; not full product guest fault injection"
+}

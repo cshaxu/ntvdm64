@@ -2208,10 +2208,17 @@ Return Value:
 
 	    switch (Status) {
                 case STATUS_INVALID_IMAGE_NE_FORMAT:
+#endif /* OPENNT_BASE_CLIENT_CLASSIFIER */
+#line 205
 #ifdef _X86_
+#if defined(OPENNT_BASE_CLIENT_CLASSIFIER)
+#line 206
                     fBinaryType = SCS_OS216_BINARY;
                     break;
+#endif /* OPENNT_BASE_CLIENT_CLASSIFIER */
 #endif
+#if defined(OPENNT_BASE_CLIENT_CLASSIFIER)
+#line 209
 
 		case STATUS_INVALID_IMAGE_PROTECT:
 		    fBinaryType = SCS_DOS_BINARY;
@@ -2262,12 +2269,19 @@ Return Value:
             if (ImageInformation.Machine !=
                     RtlImageNtHeader(NtCurrentPeb()->ImageBaseAddress)->FileHeader.Machine) {
 
+#endif /* OPENNT_BASE_CLIENT_CLASSIFIER */
+#line 259
 #ifdef _MIPS_
 #error DIVERGENCE OPENNT-HOST-136: _MIPS_ branch is not selected; see mirror register.
 #else
+#if defined(OPENNT_BASE_CLIENT_CLASSIFIER)
+#line 269
                 SetLastError(ERROR_BAD_EXE_FORMAT);
                 goto GBTtryexit;
+#endif /* OPENNT_BASE_CLIENT_CLASSIFIER */
 #endif // _MIPS_
+#if defined(OPENNT_BASE_CLIENT_CLASSIFIER)
+#line 272
             }
 
             if ( ImageInformation.SubSystemType != IMAGE_SUBSYSTEM_WINDOWS_GUI &&
@@ -2360,3 +2374,9 @@ Return Value:
     return 0;
 }
 #endif
+
+#line 1084
+#ifdef OLD_CFG_BASED
+#error Excluded unsupported original OLD_CFG_BASED configuration
+#endif
+#line 1150

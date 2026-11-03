@@ -1,0 +1,180 @@
+{
+  "sources_and_objects": {
+    "src/mvdm-host/softpc.new/base/bios/virtual.c": "47632fb821f65ad38a50faa50469f309099c7088a4599f22adc3ab2c154bf5cb",
+    "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c": "ef64e31d7858f4fdb052ede9124a894d9727295c4ea8e1b577b3626202aee507",
+    "src/ntvdm-exe/softpc/mvdm_softpc_termination.c": "ca48182ce7cf321aba1892f3f99c09fa5e3acbd2f339fcaa637be86ef23a3a86",
+    "build/.ninja/msvc-x86-release/worker/obj/bios/virtual.obj": "d8bc91922b97277e51a247541051fb25da2ad847be25caccacf4f2c994d22e5e",
+    "build/.ninja/msvc-x64-release/worker-reference-x86/obj/bios/virtual.obj": "3aa02b65254a27e56d57163f2ef5f57753b3e4de50e2396a5cf117d3d3f84640"
+  },
+  "x86": {
+    "started": "2026-11-03T14:40:02.3413727Z",
+    "owner_pid": 17968,
+    "result": "pass",
+    "contract": "niddb",
+    "scope": "Actual cached original object; controlled host boundaries, no guest or production lifecycle acceptance",
+    "build_root": "O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\r470-niddb-x86",
+    "fixture_path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\r470-niddb-x86\\niddb-object-contract.exe",
+    "inputs": [
+      {
+        "sha256": "BCAF6E7579059E55886485E686CE59A6F9AFEF10E3D22837076577C996CC69DD",
+        "path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-softpc-object-contract.ps1"
+      },
+      {
+        "sha256": "CDD1B91450DC725A2C629F1DDD08705DFC8D57A6BD40F5E8F3BF894D66EC9152",
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd"
+      },
+      {
+        "sha256": "EC88A5244BB05B51818B2945928AC51EB264759E1FFE6D405CD6494ADBE1915F",
+        "path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\niddb_object_contract_fixture.c"
+      },
+      {
+        "sha256": "47632FB821F65AD38A50FAA50469F309099C7088A4599F22ADC3AB2C154BF5CB",
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\bios\\virtual.c"
+      },
+      {
+        "sha256": "D8BC91922B97277E51A247541051FB25DA2AD847BE25CACCACF4F2C994D22E5E",
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\virtual.obj"
+      },
+      {
+        "sha256": "8C00CCBF0B1B12421E5F9B628EB203AB5FF43540EFBB99A2E1AC26A558A8C4F8",
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\build.ninja"
+      },
+      {
+        "sha256": "57AE800CA06293867949F1E7BC6130BA8A93F226C95A111956933BDEFF19A21E",
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\inc\\virtual.h"
+      },
+      {
+        "sha256": "A55258F597DA204288A1338227DF2A44A514D53E4D70DCC118F830597217A9BA",
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\inc\\sas.h"
+      }
+    ],
+    "runs": [
+      {
+        "kind": "build",
+        "pid": 3680,
+        "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /W4 /MT /Od /D_CRT_SECURE_NO_WARNINGS \"O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\niddb_object_contract_fixture.c\" \"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\virtual.obj\" /Fo:\"O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\r470-niddb-x86\\fixture.obj\" /Fe:\"O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\r470-niddb-x86\\niddb-object-contract.exe\" /link kernel32.lib\"",
+        "exit": 0
+      },
+      {
+        "kind": "negative-abi-compile",
+        "pid": 30340,
+        "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /MT /c /DMVDM_NIDDB_EXPECT_POINTER_BYTES=8 \"O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\niddb_object_contract_fixture.c\" /Fo:\"O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\r470-niddb-x86\\negative-abi.obj\"\"",
+        "exit": 2
+      },
+      {
+        "kind": "fixture",
+        "pid": 21164,
+        "diagnostic_budget_ms": 30000,
+        "exit": 0
+      },
+      {
+        "kind": "invalid-stale",
+        "pid": 17004,
+        "exit": "0xC0000420"
+      },
+      {
+        "kind": "invalid-out-of-range",
+        "pid": 19352,
+        "exit": "0xC0000420"
+      },
+      {
+        "kind": "invalid-active-stale",
+        "pid": 37764,
+        "exit": "0xC0000420"
+      }
+    ],
+    "checks": 15,
+    "callbacks": 3,
+    "three_vm_reuse": "pass",
+    "invalid_identity_controls": "pass (fixture termination seam)",
+    "fixture_sha256": "C9B366C34B4F6B6837626178B9A095205F47812C35F78951AF588A8061879CB9",
+    "finished": "2026-11-03T14:40:23.2574485Z"
+  },
+  "x64_reference": {
+    "started": "2026-11-03T14:40:02.3413739Z",
+    "owner_pid": 25688,
+    "result": "pass",
+    "contract": "niddb",
+    "scope": "Actual cached original object; controlled host boundaries, no guest or production lifecycle acceptance",
+    "build_root": "O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\r470-niddb-x64-ref",
+    "fixture_path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\r470-niddb-x64-ref\\niddb-object-contract.exe",
+    "inputs": [
+      {
+        "sha256": "BCAF6E7579059E55886485E686CE59A6F9AFEF10E3D22837076577C996CC69DD",
+        "path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-softpc-object-contract.ps1"
+      },
+      {
+        "sha256": "CDD1B91450DC725A2C629F1DDD08705DFC8D57A6BD40F5E8F3BF894D66EC9152",
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd"
+      },
+      {
+        "sha256": "EC88A5244BB05B51818B2945928AC51EB264759E1FFE6D405CD6494ADBE1915F",
+        "path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\niddb_object_contract_fixture.c"
+      },
+      {
+        "sha256": "47632FB821F65AD38A50FAA50469F309099C7088A4599F22ADC3AB2C154BF5CB",
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\bios\\virtual.c"
+      },
+      {
+        "sha256": "3AA02B65254A27E56D57163F2EF5F57753B3E4DE50E2396A5CF117D3D3F84640",
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\bios\\virtual.obj"
+      },
+      {
+        "sha256": "88AF1765F34B1F312FBB2D5A9BD97140FF17B34AA64A3AEBCECCEB8CD8539CA8",
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja"
+      },
+      {
+        "sha256": "57AE800CA06293867949F1E7BC6130BA8A93F226C95A111956933BDEFF19A21E",
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\inc\\virtual.h"
+      },
+      {
+        "sha256": "A55258F597DA204288A1338227DF2A44A514D53E4D70DCC118F830597217A9BA",
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\inc\\sas.h"
+      }
+    ],
+    "runs": [
+      {
+        "pid": 34448,
+        "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /W4 /MT /Od /D_CRT_SECURE_NO_WARNINGS \"O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\niddb_object_contract_fixture.c\" \"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\bios\\virtual.obj\" /Fo:\"O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\r470-niddb-x64-ref\\fixture.obj\" /Fe:\"O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\r470-niddb-x64-ref\\niddb-object-contract.exe\" /link kernel32.lib\"",
+        "exit": 0,
+        "kind": "build"
+      },
+      {
+        "pid": 17512,
+        "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /MT /c /DMVDM_NIDDB_EXPECT_POINTER_BYTES=8 \"O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\niddb_object_contract_fixture.c\" /Fo:\"O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\r470-niddb-x64-ref\\negative-abi.obj\"\"",
+        "exit": 2,
+        "kind": "negative-abi-compile"
+      },
+      {
+        "pid": 19552,
+        "exit": 0,
+        "diagnostic_budget_ms": 30000,
+        "kind": "fixture"
+      },
+      {
+        "pid": 36056,
+        "exit": "0xC0000420",
+        "kind": "invalid-stale"
+      },
+      {
+        "pid": 15148,
+        "exit": "0xC0000420",
+        "kind": "invalid-out-of-range"
+      },
+      {
+        "pid": 14436,
+        "exit": "0xC0000420",
+        "kind": "invalid-active-stale"
+      }
+    ],
+    "checks": 15,
+    "callbacks": 3,
+    "three_vm_reuse": "pass",
+    "invalid_identity_controls": "pass (fixture termination seam)",
+    "fixture_sha256": "C9B366C34B4F6B6837626178B9A095205F47812C35F78951AF588A8061879CB9",
+    "finished": "2026-11-03T14:40:23.2288623Z"
+  },
+  "full_gate_receipt": "s13-r390-full-verification.json",
+  "staged_binary_comparison": "s13-r470-full-candidate-diff.json",
+  "limits": "Controlled host object tests use fixture boundaries and termination seam; do not establish guest provider ordering or NIDDB stale-identity semantics. Current candidate remains unshipped; no guest changed."
+}

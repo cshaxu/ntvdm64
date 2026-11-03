@@ -273,9 +273,12 @@ void gvi_init IFN1(half_word, v_adapter)
     host_clear_screen();
 #endif	/* !NTVDM | (NTVDM & !X86GFX) */
 
+#line 293
 #ifdef EGA_DUMP
+#line 294
 #error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register.
 #endif
+#line 296
 }
 
 

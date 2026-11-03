@@ -1,0 +1,1029 @@
+{
+  "scope": "unmapped depth-one excluded groups with unique signature in both tracked file group sets",
+  "input_unmapped": 216,
+  "uniquely_matched": 69,
+  "matches": [
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "current_line": 440,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demhndl.c",
+      "original_line": 369,
+      "signature": [
+        [
+          "if",
+          "(FILE_BEGIN != 0 || FILE_CURRENT != 1 || FILE_END !=2)"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "current_line": 253,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmi32.c",
+      "original_line": 247,
+      "signature": [
+        [
+          "if",
+          "defined(i386)"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "current_line": 307,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiselr.c",
+      "original_line": 164,
+      "signature": [
+        [
+          "ifdef",
+          "i386"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_line": 292,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "original_line": 300,
+      "signature": [
+        [
+          "ifdef",
+          "NPX"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_line": 300,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "original_line": 323,
+      "signature": [
+        [
+          "ifdef",
+          "FLOPPY_B"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_line": 360,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "original_line": 385,
+      "signature": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_line": 621,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "original_line": 812,
+      "signature": [
+        [
+          "ifdef",
+          "IPC"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_line": 697,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "original_line": 990,
+      "signature": [
+        [
+          "if",
+          "defined (GEN_DRVR) || defined (CDROM)"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_line": 800,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "original_line": 1093,
+      "signature": [
+        [
+          "ifdef",
+          "HFX"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "current_line": 284,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\tape_io.c",
+      "original_line": 286,
+      "signature": [
+        [
+          "ifdef",
+          "SPC486"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_line": 166,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_line": 155,
+      "signature": [
+        [
+          "ifdef",
+          "CPU_486"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_line": 198,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_line": 191,
+      "signature": [
+        [
+          "ifdef",
+          "LITTLEND"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.h",
+      "current_line": 209,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.h",
+      "original_line": 218,
+      "signature": [
+        [
+          "ifdef",
+          "DOUBLE_CPU"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.c",
+      "current_line": 375,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_stack.c",
+      "original_line": 460,
+      "signature": [
+        [
+          "ifdef",
+          "SPC486"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "current_line": 50,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\call.c",
+      "original_line": 42,
+      "signature": [
+        [
+          "ifdef",
+          "ANSI"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "current_line": 1737,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\fpu.c",
+      "original_line": 1755,
+      "signature": [
+        [
+          "if",
+          "(HOST_BIAS >= 16383)"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "current_line": 4850,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\zfrsrvd.c",
+      "original_line": 4844,
+      "signature": [
+        [
+          "ifdef",
+          "SPC486"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_line": 236,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_line": 245,
+      "signature": [
+        [
+          "if",
+          "!defined(PROD) || defined(SHORT_TRACE)"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_line": 437,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_line": 446,
+      "signature": [
+        [
+          "ifndef",
+          "DELAYED_INTS"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_line": 820,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_line": 1046,
+      "signature": [
+        [
+          "if",
+          "defined (DELAYED_INTS) || defined (NTVDM)"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_line": 1527,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_line": 1926,
+      "signature": [
+        [
+          "if",
+          "!defined(PROD) || defined(IRET_HOOKS)"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "current_line": 82,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\trace.c",
+      "original_line": 91,
+      "signature": [
+        [
+          "if",
+          "!defined(PROD) && defined(SPC386)"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "current_line": 132,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\trace.c",
+      "original_line": 468,
+      "signature": [
+        [
+          "if",
+          "!defined(PROD) || defined(HUNTER)"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "current_line": 371,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\diskbios.c",
+      "original_line": 567,
+      "signature": [
+        [
+          "ifdef",
+          "ANSI"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "current_line": 1008,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\diskbios.c",
+      "original_line": 1245,
+      "signature": [
+        [
+          "ifdef",
+          "WDCTRL_BOP"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "current_line": 2891,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy.c",
+      "original_line": 3020,
+      "signature": [
+        [
+          "ifdef",
+          "FLOPPIES_KEEP_TRYING"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "current_line": 297,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\bios.h",
+      "original_line": 314,
+      "signature": [
+        [
+          "ifdef",
+          "MSWDVR"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "current_line": 302,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\bios.h",
+      "original_line": 322,
+      "signature": [
+        [
+          "ifdef",
+          "NOVELL_IPX"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "current_line": 307,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\bios.h",
+      "original_line": 328,
+      "signature": [
+        [
+          "ifdef",
+          "NOVELL_TCPIP"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "current_line": 312,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\bios.h",
+      "original_line": 333,
+      "signature": [
+        [
+          "ifdef",
+          "WINSOCK"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "current_line": 321,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\bios.h",
+      "original_line": 343,
+      "signature": [
+        [
+          "if",
+          "defined(SOFTWIN_API) || defined(SWIN_HFX)"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "current_line": 382,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\bios.h",
+      "original_line": 407,
+      "signature": [
+        [
+          "if",
+          "defined(SPC386) && defined(WDCTRL_BOP)"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cga.h",
+      "current_line": 84,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cga.h",
+      "original_line": 100,
+      "signature": [
+        [
+          "if",
+          "!defined(EGG) && !defined(A_VID) && !defined(C_VID)"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "current_line": 90,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egavideo.h",
+      "original_line": 97,
+      "signature": [
+        [
+          "ifdef",
+          "ANSI"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "current_line": 99,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egavideo.h",
+      "original_line": 107,
+      "signature": [
+        [
+          "ifdef",
+          "MSWDVR"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "current_line": 102,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ica.h",
+      "original_line": 106,
+      "signature": [
+        [
+          "if",
+          "defined (NTVDM)"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "current_line": 512,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keybd_io.c",
+      "original_line": 528,
+      "signature": [
+        [
+          "if",
+          "defined(NTVDM) || defined(GISP_CPU)"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "current_line": 367,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse.c",
+      "original_line": 404,
+      "signature": [
+        [
+          "ifdef",
+          "KIPPER"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "current_line": 110,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\main.c",
+      "original_line": 94,
+      "signature": [
+        [
+          "if",
+          "defined(NTVDM) || defined(host_main)"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "current_line": 318,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\main.c",
+      "original_line": 335,
+      "signature": [
+        [
+          "ifdef",
+          "HFX"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "current_line": 299,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\time_day.c",
+      "original_line": 377,
+      "signature": [
+        [
+          "ifdef",
+          "XTSFD"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "current_line": 261,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\rom.c",
+      "original_line": 282,
+      "signature": [
+        [
+          "if",
+          "!defined(NTVDM) || ( defined(NTVDM) && !defined(X86GFX) )"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_line": 392,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_line": 409,
+      "signature": [
+        [
+          "if",
+          "defined(NTVDM)"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_line": 606,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_line": 689,
+      "signature": [
+        [
+          "if",
+          "defined(NTVDM) || defined(GISP_SVGA)"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_line": 1848,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_line": 2188,
+      "signature": [
+        [
+          "ifdef",
+          "DELAYED_INTS"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "current_line": 161,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gfx_updt.c",
+      "original_line": 186,
+      "signature": [
+        [
+          "ifdef",
+          "NO_STRING_OPERATIONS"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "current_line": 133,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\cfpu_def.h",
+      "original_line": 125,
+      "signature": [
+        [
+          "ifdef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "current_line": 240,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\host_def.h",
+      "original_line": 220,
+      "signature": [
+        [
+          "ifdef",
+          "i386"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "current_line": 245,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_det.c",
+      "original_line": 1560,
+      "signature": [
+        [
+          "ifdef",
+          "PLANEDUMPER"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "current_line": 324,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_unix.c",
+      "original_line": 317,
+      "signature": [
+        [
+          "ifdef",
+          "NO_LONGER_USED"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "current_line": 230,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\stubs.c",
+      "original_line": 448,
+      "signature": [
+        [
+          "ifdef",
+          "NOT_IN_USE"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsg16.c",
+      "current_line": 226,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsg16.c",
+      "original_line": 246,
+      "signature": [
+        [
+          "ifdef",
+          "DEBUG"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "current_line": 929,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.c",
+      "original_line": 1077,
+      "signature": [
+        [
+          "if",
+          "NO_W32TRYCALL"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "current_line": 1574,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.c",
+      "original_line": 1901,
+      "signature": [
+        [
+          "if",
+          "FASTBOPPING"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "current_line": 331,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wparam.c",
+      "original_line": 336,
+      "signature": [
+        [
+          "ifdef",
+          "MAPPARAM_EXTRA"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "current_line": 1075,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuclass.c",
+      "original_line": 1039,
+      "signature": [
+        [
+          "ifdef",
+          "WOWEDIT"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclip.c",
+      "current_line": 1292,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuclip.c",
+      "original_line": 1215,
+      "signature": [
+        [
+          "ifdef",
+          "DEBUG"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.c",
+      "current_line": 2003,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wumsg.c",
+      "original_line": 1908,
+      "signature": [
+        [
+          "ifdef",
+          "ONLY_API16"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "current_line": 2987,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuser.c",
+      "original_line": 2974,
+      "signature": [
+        [
+          "ifdef",
+          "NEVER"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser31.c",
+      "current_line": 740,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuser31.c",
+      "original_line": 738,
+      "signature": [
+        [
+          "ifdef",
+          "APRIL15"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "current_line": 36,
+      "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\xactsrv\\apimsg.c",
+      "original_line": 89,
+      "signature": [
+        [
+          "ifdef",
+          "UNICODE"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "current_line": 290,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgbegin.c",
+      "original_line": 282,
+      "signature": [
+        [
+          "ifdef",
+          "DEBUG"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "current_line": 168,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgmgrc.c",
+      "original_line": 175,
+      "signature": [
+        [
+          "ifdef",
+          "DEBUG"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+      "current_line": 610,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\edecrare.c",
+      "original_line": 649,
+      "signature": [
+        [
+          "ifdef",
+          "DEBUG"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "current_line": 213,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\xms.486\\xmsblock.c",
+      "original_line": 194,
+      "signature": [
+        [
+          "ifdef",
+          "i386"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_line": 5943,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_line": 6625,
+      "signature": [
+        [
+          "ifdef",
+          "CPU_30_STYLE"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+      "current_line": 1203,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clglobal.c",
+      "original_line": 1309,
+      "signature": [
+        [
+          "ifdef",
+          "WX86"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+      "current_line": 402,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmenu.c",
+      "original_line": 676,
+      "signature": [
+        [
+          "ifdef",
+          "MEMPHIS_MENU_WATERMARKS"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "current_line": 40,
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "original_line": 544,
+      "signature": [
+        [
+          "if",
+          "0"
+        ]
+      ],
+      "limits": "unique first-depth signature in tracked groups; requires source/context verification"
+    }
+  ],
+  "limits": "discovery only; inventory completeness and condition semantics not implied"
+}

@@ -1,0 +1,29 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\user.h",
+  "original_sha256": "adcf0ac89c4779d9b7908610976f4a47d2385403edc37496c8ab004b016cf6c1",
+  "source_sha256": "8a9864877903a69d7bf8a40a8b788b37bf54c83a117acb0e79fb85ed8bdf061b",
+  "original_guard": "_USER_",
+  "selected_compatibility": "separate original declaration cohorts with individual guards",
+  "actual_context_comparisons": [
+    {
+      "source": "wow_control_extent_bindings.c",
+      "baseline_sha256": "f49ef7aebb796b7d39b5afb411d3480ff0352f485a955a1b80f418e32df6ae11",
+      "single_guard_sha256": "3769e8ad73230162bd0eb66a912b203df0f9ef7b10e8707bb67486d8f10a28af",
+      "nonblank_equal": false
+    },
+    {
+      "source": "wow_user_registration_bridge.c",
+      "baseline_sha256": "60537df73b5fa956e473cfe56d8b2aff8c694d7b80b04d426d8678fbfbe9f3ed",
+      "single_guard_sha256": "cd02ca4927dbf516dbb9b51f6d8e38e81211fcf5cc997e936a058f9b77d29d7c",
+      "nonblank_equal": true
+    }
+  ],
+  "observed_missing_in_control_extent": [
+    "CALLPROCDATA",
+    "BUTN",
+    "BUTNWND"
+  ],
+  "guard_suites": "x86 and x64 passed",
+  "limitation": "Naive outer guard proven incompatible in one actual selected entry; not proof that no different correct design exists."
+}

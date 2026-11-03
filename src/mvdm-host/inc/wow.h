@@ -26,7 +26,9 @@
 #endif
 #include <wownt32.h>
 
+#line 29
 #ifdef i386
+#line 30
 #error Excluded unsupported i386 WOW header profile
 #endif
 #line 40

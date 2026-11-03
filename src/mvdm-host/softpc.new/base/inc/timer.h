@@ -99,9 +99,12 @@ extern void host_timer_shutdown IPT0();
 extern void host_timer_event IPT0();
 extern void generic_timer_event IPT0();
 
+#line 101
 #ifdef HUNTER
+#line 102
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
+#line 104
 
 extern int timer_int_enabled;
 extern boolean timer_video_enabled;

@@ -1,0 +1,16 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+  "sha256": "5388bb210c9032b728dc8ebc8dfb7618325ba35d3dc37dfcb6e4fba56b1f6cd0",
+  "original_guards": [
+    446,
+    457
+  ],
+  "continuations": [
+    450,
+    497,
+    499
+  ],
+  "build": "x86 WOW32 compiled; call-boundaries no work",
+  "test": "x86 first-depth guard suite passed",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r194.zip"
+}

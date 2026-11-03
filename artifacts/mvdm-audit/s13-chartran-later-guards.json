@@ -1,0 +1,19 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+  "sha256": "2ed6bb50b21089ad707845cfd0b29adc9c8032e1a10bc602713d68379aa74834",
+  "original_guards": [
+    515,
+    530
+  ],
+  "anchors": [
+    515,
+    520,
+    524,
+    530,
+    537,
+    543
+  ],
+  "build": "x86 WOW32 built",
+  "test": "x86 first-depth guard suite passed",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r199.zip"
+}

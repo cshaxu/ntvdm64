@@ -106,9 +106,12 @@ Return Value:
     mvdm_softpc_report_dpmi_bop(Index, getAX(), getBX(), getCX());
 
     if (Index >= MAX_DPMI_BOP_FUNC) {
+#line 103
 #if DBG
+#line 104
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 106
         return;
     }
 
@@ -250,7 +253,9 @@ Notes:
 
     // Only 1 bit defined in dpmi
     CurrentAppFlags = getAX() & DPMI_32BIT;
+#line 247
 #if defined(i386)
+#line 248
 #error DIVERGENCE MVDM-HOST-DIV-619: unsupported i386 kernel VDM host path
 #endif
 #line 253

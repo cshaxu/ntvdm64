@@ -1,0 +1,25 @@
+{
+  "scope": "Unselected C-VID generated SAS header duplicate",
+  "path": "src/mvdm-host/softpc.new/base/cvidc/sas4gen.h",
+  "sha256": "60449cac0c2d4614a87e91377592a6459821bd025da9a22f2dd519a8bea6dce3",
+  "mirror_sources": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sas4gen.h",
+      "current_sha256": "60449cac0c2d4614a87e91377592a6459821bd025da9a22f2dd519a8bea6dce3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\sas4gen.h",
+      "original_sha256": "ecda9cc4909ec3b945f90441a1ec441adaf807dcf6f419523c80c334e87067a0",
+      "pinned_expected_sha256": "ecda9cc4909ec3b945f90441a1ec441adaf807dcf6f419523c80c334e87067a0",
+      "original_matches_pinned": true
+    }
+  ],
+  "removed_condition_groups": 220,
+  "prior_queue": "s13-bfs-depth1-working-queue-195r126.zip",
+  "evidence": [
+    "The actual worker Ninja dependency database resolves sas4gen.h to src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h.",
+    "The C-VID binding generator explicitly reads that selected generated header.",
+    "Current source references to the removed path are historical descriptions, not include or build inputs."
+  ],
+  "limitations": [
+    "Does not remove or modify the selected generated header or the active C-VID vector."
+  ]
+}

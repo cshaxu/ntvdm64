@@ -1,0 +1,15 @@
+{
+  "baseline_sha256": "3b28866bbb77133fab948e934cc9c75317afa54793bd79727c1169498d58820e",
+  "candidate_sha256": "a398b22d9584c3bef201a1eef1b5b91d857d19887d88b6b0e91ebe8816266da8",
+  "equal_lengths": true,
+  "differences": [
+    280,
+    281,
+    282,
+    625412,
+    625413,
+    625414
+  ],
+  "difference_count": 6,
+  "only_previously_verified_timestamp_offsets": true
+}

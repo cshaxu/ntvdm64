@@ -1,0 +1,6 @@
+{
+  "scope": "first-depth condition start and expression in 43 hash-stale files",
+  "groups_checked": 1069,
+  "issues": [],
+  "limits": "A matching directive does not prove unchanged body, arm boundaries, macro context or other source edits."
+}

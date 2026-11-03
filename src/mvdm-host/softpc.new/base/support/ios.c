@@ -204,9 +204,12 @@ LOCAL void generic_inw IFN2(io_addr, io_address, word *, value)
 	*((half_word *) value + 1) = temp.byte.high;
 #endif				/* LITTLEND */
 
+#line 220
 #ifdef BIGEND
+#line 221
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif				/* BIGEND */
+#line 224
 }
 
 /*

@@ -1,6 +1,8 @@
 /* Copyright (c) Microsoft Corporation. Original USER kernel header subset.
  * DIVERGENCE(OPENNT-HOST-049): retain pseudo-event closure and execution-owner
  * bookkeeping only; no private kernel object structures are imported. */
+#ifndef _USERK_
+#define _USERK_
 /* OPENNT-HOST-063: original object-definition control flags. */
 #define OCF_THREADOWNED      0x0001
 #define OCF_PROCESSOWNED     0x0002
@@ -64,4 +66,5 @@ ExitWowCritSect(
 }
 #endif
 #line 59
+#endif
 #endif

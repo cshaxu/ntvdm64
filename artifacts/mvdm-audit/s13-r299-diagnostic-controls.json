@@ -1,0 +1,158 @@
+{
+  "cases": [
+    {
+      "name": "anchor00",
+      "expected_line": 322,
+      "source": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "marker_line": 298,
+      "ok": true,
+      "log_sha256": "264ed486a351db195452dcd35c9b0d6331b307b729b28da1e251ec6e37feec0d"
+    },
+    {
+      "name": "anchor01",
+      "expected_line": 508,
+      "source": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "marker_line": 363,
+      "ok": true,
+      "log_sha256": "e7c00c13429d2c112176c6211b142c4a083fe500132b583e3f71d3b6ba2cee9a"
+    },
+    {
+      "name": "anchor02",
+      "expected_line": 248,
+      "source": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "marker_line": 239,
+      "ok": true,
+      "log_sha256": "ee3766896037f642eb38311914462b48d9af537282d4518ccb4a41f485b143ae"
+    },
+    {
+      "name": "anchor03",
+      "expected_line": 1056,
+      "source": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "marker_line": 825,
+      "ok": true,
+      "log_sha256": "d2b06c8eb859ab7a3065bfa42d521dcc87aa222e723f089d874778391c234376"
+    },
+    {
+      "name": "anchor04",
+      "expected_line": 493,
+      "source": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "marker_line": 135,
+      "ok": true,
+      "log_sha256": "876d6ed0259fcbc4555631758fd5142f6394ee514d250cf6c11b613c5978be1e"
+    },
+    {
+      "name": "anchor05",
+      "expected_line": 321,
+      "source": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "marker_line": 300,
+      "ok": true,
+      "log_sha256": "6eb0e4138782641a7be1719de2c87bbffeb778dd4b992dc0ef484bd32bb9d78d"
+    },
+    {
+      "name": "anchor06",
+      "expected_line": 327,
+      "source": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "marker_line": 305,
+      "ok": true,
+      "log_sha256": "4f21fb91b48d9e49c6776b46847505a4d284230e2ca326b56696ca47befe7727"
+    },
+    {
+      "name": "anchor07",
+      "expected_line": 332,
+      "source": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "marker_line": 310,
+      "ok": true,
+      "log_sha256": "fa32c7ba86a400ddbc8850eae25d0c6588d1c8b8c33da5af1d8019ddd1509e32"
+    },
+    {
+      "name": "anchor08",
+      "expected_line": 336,
+      "source": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "marker_line": 315,
+      "ok": true,
+      "log_sha256": "ddec500f759c73918d31df5c5a2015fc52fd44d2509ea12ba64c19e1269ab6b1"
+    },
+    {
+      "name": "anchor09",
+      "expected_line": 347,
+      "source": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "marker_line": 324,
+      "ok": true,
+      "log_sha256": "c54a7fe7aa9207d41623dee254f1aa3188be3f0025286843856e9a62df799a71"
+    },
+    {
+      "name": "anchor10",
+      "expected_line": 106,
+      "source": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "marker_line": 97,
+      "ok": true,
+      "log_sha256": "0dc9e616fd76adf14062eb979e195bf420c2299b83b9981f992255a0f0255176"
+    },
+    {
+      "name": "anchor11",
+      "expected_line": 206,
+      "source": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "marker_line": 139,
+      "ok": true,
+      "log_sha256": "da68cde7b45d9fb0884db65e6f32ce0aa78b54cceaba17af805c3cf6853b093a"
+    },
+    {
+      "name": "anchor12",
+      "expected_line": 410,
+      "source": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "marker_line": 370,
+      "ok": true,
+      "log_sha256": "d946f8e927d3c63d5c188a30563a5f027eab5ea9618d05474219db7d4d566634"
+    },
+    {
+      "name": "anchor13",
+      "expected_line": 99,
+      "source": "src/mvdm-host/softpc.new/base/support/main.c",
+      "marker_line": 115,
+      "ok": true,
+      "log_sha256": "df6886d6a09c9960c2bca0159f2818c31cbbe3d1da697773c533c4b29c5b6393"
+    },
+    {
+      "name": "anchor14",
+      "expected_line": 395,
+      "source": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "marker_line": 306,
+      "ok": true,
+      "log_sha256": "265c3870d4908ed8408a9aa0632ecee50efa0c4f65a6525c9a7a1edaa6803e82"
+    },
+    {
+      "name": "anchor15",
+      "expected_line": 475,
+      "source": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "marker_line": 422,
+      "ok": true,
+      "log_sha256": "52ea8efa61e7d49d738d5df16f06f93d0e9ad55eabbf8f48c754d8b42be635dc"
+    },
+    {
+      "name": "anchor16",
+      "expected_line": 114,
+      "source": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "marker_line": 58,
+      "ok": true,
+      "log_sha256": "03279dc290546db0922cfd61cd8b97925599746ef4caf170859a4cf7fa1c0943"
+    },
+    {
+      "name": "anchor17",
+      "expected_line": 287,
+      "source": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "marker_line": 293,
+      "ok": true,
+      "log_sha256": "42963ba2e9f28e74e24aae158dea469fc8af792539ecf64d63057799fd3176cf"
+    },
+    {
+      "name": "anchor18",
+      "expected_line": 654,
+      "source": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+      "marker_line": 613,
+      "ok": true,
+      "log_sha256": "b96bc9901b05b7d70c5beb79274a1f993dd1eccdec211122e2be61fae470f51b"
+    }
+  ],
+  "failed": [],
+  "limits": "source-derived #line directive snippets; selected full-context builds separately recorded"
+}

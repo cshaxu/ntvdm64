@@ -1,0 +1,10 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+  "source_sha256": "8bca229e065c2482a5dd9ca0d0cf3039e2237831264dd3cd1ed2735a9fefed5f",
+  "original_line": 1674,
+  "original_else_line": 1691,
+  "original_else_body": 1692,
+  "original_continuation": 1703,
+  "validation": "x86 WOW32 bitmap and dialog objects and DLL built; x86 first-depth guard suite passed; runtime untested",
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r180.zip"
+}

@@ -141,9 +141,12 @@ HANDLE OpenBeepDevice(void)
                            );
 
     if (!NT_SUCCESS( Status )) {
+#line 138
 #ifndef PROD
+#line 139
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 141
         hBeep = INVALID_HANDLE_VALUE;
     }
 

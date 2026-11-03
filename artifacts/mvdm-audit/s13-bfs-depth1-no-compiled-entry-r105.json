@@ -1,0 +1,75 @@
+{
+  "scope": "11 pending first-depth arms in eight files without recorded product build context or direct source/build/test filename use beyond snippet-only rejection checker; file classification, not excluded branch truth",
+  "prior_queue": "artifacts/mvdm-audit/s13-bfs-depth1-working-queue-195r104.zip",
+  "new_queue": "artifacts/mvdm-audit/s13-bfs-depth1-working-queue-195r105.zip",
+  "new_queue_sha256": "7bc57ec8ecb393262984fd0bcd5fa71e009ecf380a2500c1010bb1d92f4cf6e9",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
+      "line": 109,
+      "sha256": "3197686d47e0b2203a913b2ba93e5c178d73f058a0471786dc0305730e0294f4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cdrom.h",
+      "line": 241,
+      "sha256": "10c365e6bfb93746f652f61d8bf2b60505444dd1c2d3475b9aadf025584b16fd"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cdrom.h",
+      "line": 254,
+      "sha256": "10c365e6bfb93746f652f61d8bf2b60505444dd1c2d3475b9aadf025584b16fd"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gore.h",
+      "line": 28,
+      "sha256": "31363a2f25352891adb3b4a943fedbcffccad04926085bd13fc64298c095bdd9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_msw.h",
+      "line": 32,
+      "sha256": "9830f02bce4462039743553af19876a6f05a041c5359f6fcbda03a76ef003719"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_msw.h",
+      "line": 96,
+      "sha256": "9830f02bce4462039743553af19876a6f05a041c5359f6fcbda03a76ef003719"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/novell.h",
+      "line": 168,
+      "sha256": "08032a5b6d2de9c3181202984fdb7f1bd1b12ba92473672b701f7ce5acbbd081"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/novell.h",
+      "line": 170,
+      "sha256": "08032a5b6d2de9c3181202984fdb7f1bd1b12ba92473672b701f7ce5acbbd081"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/smeg_hea.h",
+      "line": 17,
+      "sha256": "6a2ea838451c5a4b4b402b00136cee2ba2cbff8887389bf95c83e21d4f96965f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/spc_icon.h",
+      "line": 15,
+      "sha256": "f090f3d6c7839c66af6f757d582b6641a5931f2fc6686771832502fd347544ce"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/isnkrnl.h",
+      "line": 40,
+      "sha256": "e04a83a66738498793e8b43a4eafbeee58498aec6565f7cbb94214d2c074ed42"
+    }
+  ],
+  "counts": {
+    "unselected-file": 777,
+    "newly-excluded": 670,
+    "already-excluded": 1699,
+    "pending": 41,
+    "retained-observed": 1874,
+    "retained-original-assertion": 9
+  },
+  "limitations": [
+    "Captured graph data predates current worktree changes; changed product sources and test-entry removal were separately inspected.",
+    "Filename search and existing graph witnesses do not prove behavior in unsupported or future profiles."
+  ]
+}

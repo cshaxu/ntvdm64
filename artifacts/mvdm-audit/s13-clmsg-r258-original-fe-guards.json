@@ -1,0 +1,16 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+  "before_sha256": "66efe6002f7731ec1bab0067c31c822db3c9ae70d9f67bc810e51f40e735e973",
+  "after_sha256": "0ef86c4286f98a7bf79d1c1a97c41ad9411e3e82b37db9ecf7e23738df33962d",
+  "original_groups": [
+    331,
+    453,
+    1777,
+    1803
+  ],
+  "selected_alternatives": "SendMessageWorker and DispatchMessageWorker omitted; selected sides remain pending",
+  "preprocessing": "s13-clmsg-r258-preprocess.json",
+  "forced_controls": "s13-clmsg-r258-controls.json",
+  "build": "cached x86 WOW32 and call-boundary objects passed",
+  "limits": "No runtime, x64 product or original functions restored; not first-depth completion."
+}

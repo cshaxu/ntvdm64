@@ -1,0 +1,10 @@
+{
+  "queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r235.zip",
+  "queue_sha256": "8ccb68b53eff4b8ee4f9a4b0c63afce4361b60e8640d0d0b1c9c60d70a83e604",
+  "current_depth1_groups": 3535,
+  "missing_current_sources": [],
+  "pinned_originals_checked": 1110,
+  "missing_pinned_originals": [],
+  "original_sha256_mismatches": [],
+  "scope": "Checks queue source availability and immutable original hashes; does not prove the queue is complete or classifications correct."
+}

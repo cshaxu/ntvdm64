@@ -1,0 +1,24 @@
+{
+  "controls": [
+    {
+      "original_if_line": 220,
+      "expected_diagnostic_line": 221,
+      "log": "build/t473-s13/r317-anchor-controls/anchor220.log",
+      "sha256": "28f97fda5ca8815d5de53bff54587ade2ec6b919f9c1ae7b11d56dba2b5fd262"
+    },
+    {
+      "original_if_line": 675,
+      "expected_diagnostic_line": 676,
+      "log": "build/t473-s13/r317-anchor-controls/anchor675.log",
+      "sha256": "a04ddcf735d56c46f92848cdc3e52451a9427f64df59813df4d441d0f93d17c9"
+    },
+    {
+      "original_if_line": 974,
+      "expected_diagnostic_line": 975,
+      "log": "build/t473-s13/r317-anchor-controls/anchor974.log",
+      "sha256": "be4944affecb1d17a870eb05cee0d7733ee8595844b8b7083c5c6919198648a5"
+    }
+  ],
+  "result": "passed",
+  "scope": "forced excluded branch diagnostics"
+}

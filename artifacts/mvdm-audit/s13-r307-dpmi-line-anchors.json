@@ -1,0 +1,28 @@
+{
+  "source": "src/mvdm-host/dpmi32/dpmiint.c",
+  "before_sha256": "38343b287fa0623c1962773af4613d39a6de47a3bfc0f581c38e3124680ec0aa",
+  "after_sha256": "304b525ec161305bd3a543897b354600f1ec810037d0c81d5a3c6c740b8e6fb7",
+  "local_groups": [
+    612,
+    625,
+    649
+  ],
+  "original_source": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+  "original_source_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+  "continuations": [
+    {
+      "old": 618,
+      "corrected": 541,
+      "source_statement": "return FALSE;",
+      "original_lf_line": 541
+    },
+    {
+      "old": 656,
+      "corrected": 562,
+      "source_statement": "setCS(Handlers[IntNumber].CsSelector);",
+      "original_lf_line": 562
+    }
+  ],
+  "untouched_marker": 627,
+  "limits": "selected WideFrame project adaptation and 627 marker retain prior behavior; original match does not establish all supported macro contexts; actual build and diagnostics pending"
+}

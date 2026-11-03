@@ -793,6 +793,9 @@ void printer_is_being_closed(int adapter)
 #endif
 
 
+#line 801
 #ifdef PS_FLUSHING
+#line 802
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
+#line 837
