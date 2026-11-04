@@ -1,0 +1,113 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\v7_video.c",
+  "original_sha256": "ce5c8812c1bd5f125f007521b2c1c815739e4969fed1ff2e39600a5a47af0525",
+  "current_sha256": "e41bd3245cf15fcaeed893b23f9a81b79146296c3ab133f3b2c4f188b00c8509",
+  "local_ntvdm_groups": [
+    46,
+    459
+  ],
+  "prior_selection_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+      "line": "26",
+      "directive": "ifdef",
+      "expression": "VGG",
+      "chain_start": "26",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "dadff8e8f4e7b6862e8c9d09e7a948f32ae72426798e650287598aec422a4dbe"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+      "line": "27",
+      "directive": "ifdef",
+      "expression": "V7VGA",
+      "chain_start": "27",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "dadff8e8f4e7b6862e8c9d09e7a948f32ae72426798e650287598aec422a4dbe"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+      "line": "46",
+      "directive": "if",
+      "expression": "defined(NTVDM) && !defined(X86GFX)",
+      "chain_start": "46",
+      "depth": "3",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "dadff8e8f4e7b6862e8c9d09e7a948f32ae72426798e650287598aec422a4dbe"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+      "line": "51",
+      "directive": "ifdef",
+      "expression": "SEGMENTATION",
+      "chain_start": "51",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "dadff8e8f4e7b6862e8c9d09e7a948f32ae72426798e650287598aec422a4dbe"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+      "line": "282",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "282",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "dadff8e8f4e7b6862e8c9d09e7a948f32ae72426798e650287598aec422a4dbe"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+      "line": "450",
+      "directive": "ifdef",
+      "expression": "REAL_VGA",
+      "chain_start": "450",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "dadff8e8f4e7b6862e8c9d09e7a948f32ae72426798e650287598aec422a4dbe"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+      "line": "452",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "450",
+      "depth": "3",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "dadff8e8f4e7b6862e8c9d09e7a948f32ae72426798e650287598aec422a4dbe"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+      "line": "459",
+      "directive": "if",
+      "expression": "defined(NTVDM) && !defined(X86GFX)",
+      "chain_start": "459",
+      "depth": "3",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "dadff8e8f4e7b6862e8c9d09e7a948f32ae72426798e650287598aec422a4dbe"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+      "line": "464",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "464",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "dadff8e8f4e7b6862e8c9d09e7a948f32ae72426798e650287598aec422a4dbe"
+    }
+  ],
+  "review": "Two selected local NTVDM mouse mode binding groups are preserved. Original conditional groups align recursively through retained bodies; existing errors have original physical LF line anchors.",
+  "limitations": "Build, release comparison and final context audit pending; no guest changes."
+}

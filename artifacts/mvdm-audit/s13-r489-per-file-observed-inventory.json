@@ -2,7 +2,7 @@
   "baseline_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r379.zip",
   "graph_inventory": "s13-r473-all-graph-coverage.json",
   "total_observed_files": 1057,
-  "completed_files": 981,
+  "completed_files": 992,
   "records": [
     {
       "path": "src/mvdm-host/dbg/dbg.c",
@@ -6333,15 +6333,15 @@
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keyba.c",
-      "current_sha256": "fa8c007b05acbf50828a3f9ef54c9d75329892dc9606b63313bc9def9388ec1e",
+      "current_sha256": "40d0ed13e0a85b1043d3be2e0b7824b40da7c1a9b2f3f8aa36ef7dce7ee3be23",
       "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "deferred-depth1-original-alignment",
+      "status": "completed-original-conditional-tree-with-local-binding",
       "pending_change": "r522 exclude non-NTVDM ABNT alternatives; full file audit pending",
-      "evidence": "s13-r888-keyba-source-contexts.json"
+      "evidence": "s13-r1173-keyba-full-file.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
@@ -6372,14 +6372,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
-      "current_sha256": "eabb13ddd85ca589036d7fcdb493f1b23da1e4c9d5727b0dbec2de45cca48785",
+      "current_sha256": "7fe09d59e6e7f5698542146fa57f998b1e4411ee3880fc072ac67b48899bb73f",
       "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r889-mouse-source-contexts.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1174-mouse-full-file.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
@@ -6410,26 +6410,26 @@
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\ios.c",
-      "current_sha256": "f5d19c06fafb0c4859390b4cb036e04229fd587401a7bebc3eab3acf8bd8e2ba",
+      "current_sha256": "a79efd4d687d5edc476974f7593c1356c5cd663d9d9e75ccfdaa7fe0b034e4f4",
       "original_sha256": "e4f39908ff9534adde52e46def732a93790ac48f2bb481590622c537c2f3b205",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r890-ios-source-contexts.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1175-ios-full-file.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/main.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\main.c",
-      "current_sha256": "c75520e75664850da20797c947cb11860c6e306a1972ba8c156865a5a6a73c42",
+      "current_sha256": "2174ed07e84b13a3aa32e17d9e9d75dd6115df8a5e08874ccc49777976c2b407",
       "original_sha256": "5dfdca835f1ca6fddf07826f2b4aa9e25f4c8bd0ceef21b2dce9884de721376c",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r891-main-source-contexts.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1176-main-full-file.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
@@ -6508,14 +6508,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/system/ica.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\ica.c",
-      "current_sha256": "0964b0496610f08425ffe2e2dc5cbfd517bcedb6355f91eee5401bae0cbaa21d",
+      "current_sha256": "0788448172506b62241e2820e92e99d090658244c57ac7dec2e5e29bb402266c",
       "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r893-ica-source-contexts.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1177-ica-full-file.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
@@ -6732,14 +6732,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gfx_updt.c",
-      "current_sha256": "224847a5029e289f65effb1ae081402086eead5f26ea3a0a3cc7ffdbf2e7f591",
+      "current_sha256": "c1c852da30ecf12432d8e969f97affc091280cec08023f34b10704612d7f0562",
       "original_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r899-gfx-source-context.json"
+      "status": "completed-original-conditional-tree",
+      "evidence": "s13-r1178-full-file.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/gvi.c",
@@ -6770,26 +6770,26 @@
     {
       "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\v7_video.c",
-      "current_sha256": "0d729432b8dfb7cae12729a44d871dd019ecb47b84e5cd2f8e74e8b417f117c8",
+      "current_sha256": "e41bd3245cf15fcaeed893b23f9a81b79146296c3ab133f3b2c4f188b00c8509",
       "original_sha256": "ce5c8812c1bd5f125f007521b2c1c815739e4969fed1ff2e39600a5a47af0525",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r900-v7-video-context.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1179-v7video-full-file.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\vga_mode.c",
-      "current_sha256": "e82c8591e933a9ce347ac1e1f8cf9aa483796aee1488f561a3ad90c9ed90f7fa",
+      "current_sha256": "2a09c8ec12abd12f6685d2e4c3c47531524a89abaaf93e08d5c4a4d28f7f2c2f",
       "original_sha256": "d0ea64ba445b8a7c8cb4b11963cece808793b0595183f8be7f115c060eb1f0d9",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r901-ordered-positive-witnesses.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1180-vgamode-full-file.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
@@ -6844,14 +6844,14 @@
     {
       "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\cfpu_def.h",
-      "current_sha256": "8f85f7e53939a0e75e97f190d7277deaa7cbb5f7caeb122a26c80cc3de00aad0",
+      "current_sha256": "0e508343f92cef40015fd868d7450c697bc7f4f1f7f871d612d670ac34152b71",
       "original_sha256": "fe3bb4a06759e1cbef74bff327661f9649c92fb2490cdc751bc625a8170d3d4f",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "deferred-depth1-original-alignment",
-      "evidence": "s13-r903-cfpu-structure-review.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1181-cfpu-full-file.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/inc/error.h",
@@ -6897,8 +6897,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r907-hostdef-context.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1182-hostdef-full-file.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/inc/host_emm.h",
@@ -7411,14 +7411,14 @@
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_emm.c",
-      "current_sha256": "3cfe903326dea3c5c501e256bfacf6a713dfe348b876ec324bd277f1ea2adfc1",
+      "current_sha256": "1c63a30338ea0f5e0094ee7acdea95714047af04272886dff6898ed0fbf292d2",
       "original_sha256": "d51310af362e60023feb59c89afb21ff6fae8e1bb74ae8614231f4ec3a001729",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r918-ordered-positive-witnesses.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1183-ntemm-full-file.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",

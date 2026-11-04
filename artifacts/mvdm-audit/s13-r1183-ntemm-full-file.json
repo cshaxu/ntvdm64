@@ -1,0 +1,136 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_emm.c",
+  "original_sha256": "d51310af362e60023feb59c89afb21ff6fae8e1bb74ae8614231f4ec3a001729",
+  "current_sha256": "1c63a30338ea0f5e0094ee7acdea95714047af04272886dff6898ed0fbf292d2",
+  "local_ntvdm_groups": [
+    137,
+    160,
+    186
+  ],
+  "prior_selection_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "line": "45",
+      "directive": "ifdef",
+      "expression": "LIM",
+      "chain_start": "45",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "3cfe903326dea3c5c501e256bfacf6a713dfe348b876ec324bd277f1ea2adfc1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "line": "47",
+      "directive": "ifndef",
+      "expression": "MONITOR",
+      "chain_start": "47",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "3cfe903326dea3c5c501e256bfacf6a713dfe348b876ec324bd277f1ea2adfc1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "line": "110",
+      "directive": "ifdef",
+      "expression": "BACK_M",
+      "chain_start": "110",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "3cfe903326dea3c5c501e256bfacf6a713dfe348b876ec324bd277f1ea2adfc1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "line": "112",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "110",
+      "depth": "3",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "3cfe903326dea3c5c501e256bfacf6a713dfe348b876ec324bd277f1ea2adfc1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "line": "137",
+      "directive": "ifdef",
+      "expression": "BACK_M",
+      "chain_start": "137",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "3cfe903326dea3c5c501e256bfacf6a713dfe348b876ec324bd277f1ea2adfc1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "line": "160",
+      "directive": "ifdef",
+      "expression": "BACK_M",
+      "chain_start": "160",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "3cfe903326dea3c5c501e256bfacf6a713dfe348b876ec324bd277f1ea2adfc1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "line": "186",
+      "directive": "ifdef",
+      "expression": "BACK_M",
+      "chain_start": "186",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "3cfe903326dea3c5c501e256bfacf6a713dfe348b876ec324bd277f1ea2adfc1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "line": "233",
+      "directive": "ifdef",
+      "expression": "EMM_DEBUG",
+      "chain_start": "233",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "3cfe903326dea3c5c501e256bfacf6a713dfe348b876ec324bd277f1ea2adfc1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "line": "238",
+      "directive": "ifdef",
+      "expression": "EMM_DEBUG",
+      "chain_start": "238",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "3cfe903326dea3c5c501e256bfacf6a713dfe348b876ec324bd277f1ea2adfc1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "line": "430",
+      "directive": "ifdef",
+      "expression": "EMM_DEBUG",
+      "chain_start": "430",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "3cfe903326dea3c5c501e256bfacf6a713dfe348b876ec324bd277f1ea2adfc1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "line": "475",
+      "directive": "ifdef",
+      "expression": "EMM_DEBUG",
+      "chain_start": "475",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "3cfe903326dea3c5c501e256bfacf6a713dfe348b876ec324bd277f1ea2adfc1"
+    }
+  ],
+  "review": "Three extra BACK_M guards in local physical mapping adaptations are already explicit errors and remain. Original conditional groups align recursively through retained bodies; existing errors have original physical LF line anchors.",
+  "limitations": "Build, release comparison and final context audit pending; no guest changes."
+}

@@ -1,0 +1,216 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\cfpu_def.h",
+  "original_sha256": "fe3bb4a06759e1cbef74bff327661f9649c92fb2490cdc751bc625a8170d3d4f",
+  "current_sha256": "0e508343f92cef40015fd868d7450c697bc7f4f1f7f871d612d670ac34152b71",
+  "local_ntvdm_groups": [
+    21,
+    32,
+    43,
+    55,
+    66,
+    83
+  ],
+  "prior_selection_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": "15",
+      "directive": "if",
+      "expression": "!defined(HOST_BIAS)",
+      "chain_start": "15",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": "21",
+      "directive": "ifdef",
+      "expression": "LITTLEND",
+      "chain_start": "21",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": "25",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "21",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": "33",
+      "directive": "ifdef",
+      "expression": "LITTLEND",
+      "chain_start": "33",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": "37",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "33",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": "45",
+      "directive": "ifdef",
+      "expression": "LITTLEND",
+      "chain_start": "45",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": "48",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "45",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": "57",
+      "directive": "ifdef",
+      "expression": "LITTLEND",
+      "chain_start": "57",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": "60",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "57",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": "68",
+      "directive": "ifdef",
+      "expression": "LITTLEND",
+      "chain_start": "68",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": "72",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "68",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": "85",
+      "directive": "ifdef",
+      "expression": "LITTLEND",
+      "chain_start": "85",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": "88",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "85",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": "103",
+      "directive": "ifdef",
+      "expression": "BIGEND",
+      "chain_start": "103",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": "107",
+      "directive": "ifdef",
+      "expression": "LITTLEND",
+      "chain_start": "107",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": "135",
+      "directive": "ifdef",
+      "expression": "NTVDM",
+      "chain_start": "135",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": "196",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "135",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": "211",
+      "directive": "ifndef",
+      "expression": "_Fpu_c_h",
+      "chain_start": "211",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae"
+    }
+  ],
+  "review": "Six local little-endian FPU layout guards are selected in the supported product and preserved; their unsupported alternatives are already explicit errors. Original conditional groups align recursively through retained bodies; existing errors have original physical LF line anchors.",
+  "limitations": "Build, release comparison and final context audit pending; no guest changes."
+}

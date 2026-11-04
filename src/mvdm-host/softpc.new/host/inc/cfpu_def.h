@@ -195,6 +195,7 @@ FP80SE	sign_exp;
 #define INV_CUBRTHUGE  1.7718548704178434e-103
 
 #else	/* !NTVDM */
+#line 187
 #error Unsupported excluded original configuration
 #endif	/* !NTVDM */
 #line 200

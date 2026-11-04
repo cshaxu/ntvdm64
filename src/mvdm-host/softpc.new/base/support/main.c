@@ -44,6 +44,7 @@
 #line 44
 #error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register.
 #endif
+#line 46
 #include "gmi.h"
 #include "gfx_upd.h"
 #include "cmos.h"
@@ -67,7 +68,7 @@
 #line 61
 extern void host_start_cpu(void);
 #endif
-#line 62
+#line 57
 extern int InitialiseDosEmulation(int argc, char **argv);
 extern void mouse_driver_initialisation(void);
 
@@ -83,7 +84,7 @@ extern void host_applInit(int argc, char *argv[]);
 #line 66
 #error Unsupported excluded original configuration
 #endif	/* ANSI */
-#line 75
+#line 68
 
 #line 69
 #ifdef REAL_VGA
@@ -101,6 +102,7 @@ extern void host_applInit(int argc, char *argv[]);
 GLOBAL IBOOL Running_SoftWindows = FALSE;
 GLOBAL CHAR *SPC_Product_Name = "SoftPC";
 #endif /* SOFTWINDOWS */
+#line 82
 
 GLOBAL char **pargv;	/* Pointer to argv		*/
 GLOBAL int *pargc;	/* Pointer to argc		*/
@@ -109,7 +111,7 @@ GLOBAL int *pargc;	/* Pointer to argc		*/
 #line 87
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
-#line 98
+#line 91
 
 /* Does this host need to have a different entry point ? */
 
@@ -127,22 +129,25 @@ INT host_main IFN2(INT, argc, CHAR **, argv)
 #line 103
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
+#line 105
 
 #ifdef SECURE
 #line 107
 #error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register.
 #endif
+#line 110
 
 #ifdef	SETUID_ROOT
 #line 112
 #error DIVERGENCE MVDM-HOST-DIV-529: SETUID_ROOT platform branch is not selected; see mirror register.
 #endif	/* SETUID_ROOT */
+#line 117
 
 #if !defined(PROD) || defined(HUNTER)
 #line 119
 #error Unsupported excluded original configuration
 #endif /* !PROD || HUNTER */
-#line 126
+#line 123
 
 /***********************************************************************
  *								       *
@@ -160,7 +165,7 @@ INT host_main IFN2(INT, argc, CHAR **, argv)
 #line 137
 #error Unsupported excluded original configuration
 #endif	/* NTVDM, macintosh, VMS */
-#line 142
+#line 139
 
 #line 140
 #ifndef PROD
@@ -173,11 +178,13 @@ INT host_main IFN2(INT, argc, CHAR **, argv)
 #line 145
 #error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register.
 #endif
+#line 147
 
 #ifndef NTVDM
 #line 149
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
+#line 151
   host_applInit(argc,argv);	/* recommended home is host/xxxx_reset.c */
 
 #ifdef SECURE
@@ -197,6 +204,7 @@ INT host_main IFN2(INT, argc, CHAR **, argv)
 #line 178
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 180
 
   /*
    * Pre-Config Base code initilisation.
@@ -238,7 +246,6 @@ INT host_main IFN2(INT, argc, CHAR **, argv)
 #error Excluded unsupported non-CPU40 profiling startup
 #endif	/*PROFILE*/
 #line 217
-#line 221
 
 #if defined(NTVDM) || defined(macintosh)
 /* Read the cmos from file to emulate data not being
@@ -252,7 +259,7 @@ INT host_main IFN2(INT, argc, CHAR **, argv)
 #line 227
 #error Unsupported excluded original configuration
 #endif
-#line 245
+#line 241
 
 /*
  * initialise the cpu
@@ -291,11 +298,13 @@ INT host_main IFN2(INT, argc, CHAR **, argv)
 #line 282
 #error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif /* GISP_SVGA */
+#line 284
 
 #ifdef REAL_VGA
 #line 286
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #endif /* REAL_VGA */
+#line 289
 
   host_init_screen();
 
@@ -303,6 +312,7 @@ INT host_main IFN2(INT, argc, CHAR **, argv)
 #line 293
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #endif /* REAL_VGA */
+#line 295
 
 #line 296
 #ifdef IPC
@@ -310,7 +320,6 @@ INT host_main IFN2(INT, argc, CHAR **, argv)
 #error Unsupported excluded original configuration
 #endif
 #line 299
-#line 290
 
 #ifdef NTVDM
 /*

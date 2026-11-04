@@ -94,6 +94,7 @@ GLOBALS		  :	describe what exported data objects are
 #line 94
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #endif /* GORE */
+#line 96
 
 #include "ga_mark.h"
 #include "ga_defs.h"
@@ -124,6 +125,7 @@ int terminal_type = TERMINAL_TYPE_DEFAULT;
 #line 116
 #error Excluded unsupported SEGMENTATION configuration
 #endif
+#line 123
 
 #if	defined(PROD) || (!defined(EGG))
 #define	init_dirty_recs()		dirty_next = 0
@@ -131,6 +133,7 @@ int terminal_type = TERMINAL_TYPE_DEFAULT;
 #line 127
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
+#line 130
 
 #define	get_dirty_rec_total()		(dirty_next)
 #ifdef VGG
@@ -143,13 +146,15 @@ int terminal_type = TERMINAL_TYPE_DEFAULT;
 						dirty_next++; \
 					}
 #else
+#line 142
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
+#line 156
 #else /* VGG */
 #line 157
 #error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif /* VGG */
-#line 153
+#line 179
 
 #define	get_dirty_line(ind)	(dirty[(ind)].line_no)
 #define	get_dirty_start(ind)	(dirty[(ind)].start)
@@ -175,6 +180,7 @@ a 4-byte boundary. This macro makes this true and reports if it wasn't. */
 #line 198
 #error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register.
 #endif	/* PROD */
+#line 202
 
 GLOBAL LONG dirty_curs_offs = -1;		/* GLOBAL for JOKER */
 GLOBAL LONG dirty_curs_x;
@@ -192,8 +198,10 @@ GLOBAL LONG dirty_curs_y;
 	boolean	dummy_scroll IPT6(int,dummy1,int,dummy2,int,dummy3,
 			int,dummy4,int,dummy5,int,dummy6);
 #if defined(NTVDM) && defined(MONITOR)
+#line 217
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif /* NTVDM & MONITOR */
+#line 220
 
 	LOCAL VOID save_gfx_update_routines IPT0();
 	LOCAL VOID inhibit_gfx_update_routines IPT0();
@@ -208,16 +216,15 @@ GLOBAL LONG dirty_curs_y;
 
 
 #ifdef	HOST_SCREEN_UPDATES
-
-IMPORT BOOL HostUpdatedVGA IPT0();	/* Called from vga_graph_update() */
-IMPORT BOOL HostUpdatedEGA IPT0();	/* ega_graph_update() */
-
+#line 234
+#error Unsupported excluded original configuration
 #else	/* HOST_SCREEN_UPDATES */
 
 #define	HostUpdatedVGA()	FALSE
 #define	HostUpdatedEGA()	FALSE
 
 #endif	/* HOST_SCREEN_UPDATES */
+#line 244
 
 
 /* -----------------------------------------------------------------------
@@ -232,14 +239,20 @@ byte *video_copy;		/* video_copy is now allocated in host_init_screen()'s */
 #ifdef V7VGA
 static	DIRTY_PARTS	dirty[768];
 #else
+#line 258
 #error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif /* V7VGA */
+#line 260
 #else
+#line 261
 #error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif
+#line 263
 #else
+#line 264
 #error DIVERGENCE MVDM-HOST-DIV-521: macintosh alternative is not selected; see mirror register.
 #endif
+#line 266
 
 IMPORT half_word bg_col_mask;
 static	int	dirty_next=0;
@@ -274,8 +287,10 @@ static	int	search_video_copy IFN3(int, start_line,
 		add_dirty_rec((int)((ptr-vcopy)/quarter_opl)+start_line,
 		              j<<2, (int)(k-ptr+1)<<2, ptr-video_copy-j,0);
 #else
+#line 300
 #error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif /* VGG */
+#line 303
 
 		ptr += quarter_opl - j;
 		/*
@@ -398,8 +413,10 @@ static	int	search_video_copy_aligned IFN3(int, start_line,
 		add_dirty_rec((int)((ptr-vcopy)/quarter_opl)+start_line,
 		              j<<2, (int)(k-ptr+1)<<2, ptr-video_copy-j,0);
 #else
+#line 425
 #error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif /* VGG */
+#line 428
 		ptr += quarter_opl - j;
 		/*
 		 * Don't clear out the marked area in case the plane wraps
@@ -474,8 +491,10 @@ static	void	paint_records IFN2(int, start_rec, int, end_rec)
 			cur_start<<3, first_line, cur_end-cur_start,
 			last_line-first_line+1);
 #else
+#line 502
 #error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif /* VGG */
+#line 507
 	}
 	/* Clear out video copy */
 	for(i = &dirty[start_rec];i<end_ptr;i++)
@@ -485,23 +504,29 @@ static	void	paint_records IFN2(int, start_rec, int, end_rec)
 #ifdef VGG
 		j =  &video_copy[ i->video_copy_offset+(i->start>>2)+i->v7frig];
 #else
+#line 516
 #error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif /* VGG */
+#line 518
 		do *j++ = 0; while(j<end);
 	}
 }
 
 #ifdef BIGEND
+#line 523
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #else
 #define get_char_attr(unsigned_long_ptr)     (((*(unsigned_long_ptr)) & 0xffff))
 #endif
+#line 527
 
 #ifdef EGG
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
+#line 531
 #error Excluded unsupported SEGMENTATION configuration
 #endif
+#line 533
 
 static	int	ega_text_find_dirty_lines IFN5(byte *, vcopy, byte *, planes,
 	int, start_line, int, end_line, int, screen_start)
@@ -538,8 +563,10 @@ static	int	ega_text_find_dirty_lines IFN5(byte *, vcopy, byte *, planes,
 #ifdef VGG
 				add_dirty_rec(cur_y,j<<2,(k<<1)+2,screen_start+(offset<<1),0);
 #else
+#line 569
 #error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif /* VGG */
+#line 571
 				break;	/* onto next line */
 			}
 		}
@@ -578,8 +605,10 @@ static	void	ega_text_paint_dirty_recs IFN2(int, start_rec, int, end_rec)
 #endif /* EGG */
 
 #ifdef SEGMENTATION 			/* See note with first use of this flag */
+#line 609
 #error Excluded unsupported SEGMENTATION configuration
 #endif
+#line 611
 
 #endif /* REAL_VGA */
 
@@ -711,8 +740,10 @@ void	reset_paint_routines IFN0()
 #ifdef EGG
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
+#line 743
 #error Excluded unsupported SEGMENTATION configuration
 #endif
+#line 745
 
 void	ega_wrap_split_text_update IFN0()
 {
@@ -1147,8 +1178,10 @@ void ega_text_update IFN0()
 #endif /* EGG */
 
 #ifdef SEGMENTATION 			/* See note with first use of this flag */
+#line 1179
 #error Excluded unsupported SEGMENTATION configuration
 #endif
+#line 1181
 
 /*
  * Update the window to look like the regen buffer says it should
@@ -1760,8 +1793,10 @@ cga_hi_graph_update IFN0()
 #ifdef EGG
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
+#line 1792
 #error Excluded unsupported SEGMENTATION configuration
 #endif
+#line 1794
 
 void	ega_wrap_split_graph_update IFN0()
 {
@@ -2263,8 +2298,10 @@ void	ega_wrap_graph_update IFN0()
 #endif /* EGG */
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
+#line 2295
 #error Excluded unsupported SEGMENTATION configuration
 #endif
+#line 2297
 
 /*---------------------  Scrolling routines --------------------------*/
 
@@ -2353,8 +2390,10 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,
  */
 
 #ifdef DUMB_TERMINAL
+#line 2385
 #error DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register.
 #endif /* DUMB_TERMINAL */            
+#line 2388
 
 		/* originally dummy was char [2] */
 		/* unfortunately doing (short) *dummy */
@@ -2387,8 +2426,10 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,
 	    }
 	    width = (int)(top_right_ptr - top_left_ptr + 2) << 1;
 #ifdef DUMB_TERMINAL
+#line 2420
 #error DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register.
 #endif /* DUMB_TERMINAL */            
+#line 2422
 
 	/* Do the host stuff */
 
@@ -2465,10 +2506,12 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,
 	/* Fill exposed area of buffer */
 
 #ifdef BIGEND
+#line 2498
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #else
 	data = (attr << 8) | ' ';
 #endif
+#line 2502
 
 	for(i=0;i<lines;i++)
 	{
@@ -2602,10 +2645,12 @@ boolean text_scroll_down IFN6(int, start, int, width, int, height,
 	/* Fill exposed area of buffer */
 
 #ifdef BIGEND
+#line 2635
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #else
 	data = (attr << 8) | ' ';
 #endif
+#line 2639
 
 	for(i=0;i<lines;i++)
 	{
@@ -2676,8 +2721,10 @@ boolean cga_text_scroll_up IFN6(int, start, int, width, int, height,
  */
 
 #ifdef DUMB_TERMINAL
+#line 2709
 #error DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register.
 #endif /* DUMB_TERMINAL */            
+#line 2712
 
 		/* originally dummy was char [2] */
 		/* unfortunately doing (short) *dummy */
@@ -2710,8 +2757,10 @@ boolean cga_text_scroll_up IFN6(int, start, int, width, int, height,
 	    }
 	    width = (int)(top_right_ptr - top_left_ptr + 1) << 1;
 #ifdef DUMB_TERMINAL
+#line 2744
 #error DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register.
 #endif /* DUMB_TERMINAL */            
+#line 2746
 
 	/* do the host stuff */
 	start_offset = start - get_screen_start()*2 - gvi_pc_low_regen;
@@ -3212,13 +3261,10 @@ boolean v7vga_graph_scroll_down IFN6(int, start, int, width, int, height,
 #ifdef EGG
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
+#line 3246
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
+#line 3253
 
 /*ARGSUSED5*/
 boolean ega_graph_scroll_up IFN6(int, start, int, width, int, height,
@@ -3279,8 +3325,10 @@ boolean ega_graph_scroll_down IFN6(int, start, int, width, int, height,
 #endif /* EGG */
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
+#line 3313
 #error Excluded unsupported SEGMENTATION configuration
 #endif
+#line 3315
 
 #endif /* REAL_VGA */
 
@@ -3303,9 +3351,10 @@ boolean	dummy_scroll IFN6(int,dummy1,int,dummy2,int,dummy3,int,
 /*---------------------  End of scrolling routines --------------------------*/
 
 #ifdef GORE
+#line 3337
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #endif /* GORE */
-#line 3304
+#line 3430
 
 #ifdef	EGG
 /*
@@ -3356,12 +3405,15 @@ GLOBAL VOID cga_mark_string IFN2(int, laddr, int, haddr)
 }
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
+#line 3480
 #error Excluded unsupported SEGMENTATION configuration
 #endif
+#line 3482
 
 GLOBAL VOID ega_mark_byte IFN1(int, off_in)
 {
 #ifdef GORE
+#line 3486
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
 	register int offset = off_in>>2;
@@ -3376,11 +3428,13 @@ GLOBAL VOID ega_mark_byte IFN1(int, off_in)
 
 	setVideodirty_total(getVideodirty_total() + 1);
 #endif /* GORE */
+#line 3500
 }
 
 GLOBAL VOID ega_mark_word IFN1(int, addr)
 {
 #ifdef GORE
+#line 3505
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
 
@@ -3398,11 +3452,13 @@ GLOBAL VOID ega_mark_word IFN1(int, addr)
 
 	setVideodirty_total(getVideodirty_total() + 2);
 #endif /* GORE */
+#line 3522
 }
 
 GLOBAL VOID ega_mark_wfill IFN3(int, laddr, int, haddr, int, col)
 {
 #ifdef GORE
+#line 3527
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
 
@@ -3421,11 +3477,13 @@ GLOBAL VOID ega_mark_wfill IFN3(int, laddr, int, haddr, int, col)
 
 	setVideodirty_total(getVideodirty_total() + offset2-offset1+1);
 #endif /* GORE */
+#line 3545
 }
 
 GLOBAL VOID ega_mark_string IFN2(int, laddr, int, haddr)
 {
 #ifdef GORE
+#line 3550
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
 	register	int	offset1 = laddr >> 2;
@@ -3441,38 +3499,44 @@ GLOBAL VOID ega_mark_string IFN2(int, laddr, int, haddr)
 
 	setVideodirty_total(getVideodirty_total() + offset2-offset1+1);
 #endif /* GORE */
+#line 3565
 }
 
 #endif /* EGG */
 #line 3442
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
+#line 3570
 #error Excluded unsupported SEGMENTATION configuration
 #endif
-#line 3446
+#line 3572
 
 GLOBAL VOID screen_refresh_required IFN0()
 {
 
 #ifdef GORE
+#line 3577
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #endif /* GORE */
-#line 3453
+#line 3579
 
 #ifndef CPU_40_STYLE
+#line 3581
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else
 #line 3457
 	setVideodirty_total(1000000L);
 #endif	/* CPU_40_STYLE */
-#line 3459
+#line 3591
 }
 
 #ifdef EGG
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
+#line 3596
 #error Excluded unsupported SEGMENTATION configuration
 #endif
+#line 3598
 
 LOCAL MARKING_TYPE curr_mark_type;
 
@@ -3491,10 +3555,12 @@ set_mark_funcs IFN0()
 			update_alg.mark_string = simple_update;
 
 #ifndef CPU_40_STYLE	/* EVID */
+#line 3616
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else	/* CPU_40_STYLE - EVID */
 			SetMarkPointers(0);
 #endif	/* CPU_40_STYLE - EVID */
+#line 3623
 			break;
 
 		case	CGA_GRAPHICS_MARKING:
@@ -3505,18 +3571,21 @@ set_mark_funcs IFN0()
 			update_alg.mark_string = cga_mark_string;
 
 #ifndef CPU_40_STYLE	/* EVID */
+#line 3633
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else	/* CPU_40_STYLE - EVID */
 			SetMarkPointers(1);
 #endif	/* CPU_40_STYLE - EVID */
+#line 3640
 
 			break;
 
 		case	EGA_GRAPHICS_MARKING:
 #ifdef GORE
+#line 3645
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #endif /* GORE */
-#line 3509
+#line 3654
 
 			update_alg.mark_byte = ega_mark_byte;
 			update_alg.mark_word = ega_mark_word;
@@ -3528,16 +3597,19 @@ set_mark_funcs IFN0()
 			{
 				case UNCHAINED:
 #ifdef GORE
+#line 3665
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
 #line 3522
 #ifndef CPU_40_STYLE	/* EVID */
+#line 3671
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else	/* CPU_40_STYLE - EVID */
 					SetMarkPointers(2);
 #endif	/* CPU_40_STYLE - EVID */
+#line 3678
 #endif /* GORE */
-#line 3528
+#line 3679
 					break;
 
 				case CHAIN2:
@@ -3548,14 +3620,18 @@ set_mark_funcs IFN0()
 #ifdef	VGG
 				case CHAIN4:
 #ifdef GORE
+#line 3689
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
 #ifndef CPU_40_STYLE	/* EVID */
+#line 3695
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else	/* CPU_40_STYLE - EVID */
 					SetMarkPointers(3);
 #endif	/* CPU_40_STYLE - EVID */
+#line 3702
 #endif /* GORE */
+#line 3703
 					break;
 #endif	/* VGG */
 #line 3548
@@ -3572,9 +3648,10 @@ set_mark_funcs IFN0()
 #line 3558
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
+#line 3717
 #error Excluded unsupported SEGMENTATION configuration
 #endif
-#line 3562
+#line 3719
 
 GLOBAL void set_gfx_update_routines IFN3(T_calc_update, update_routine,
 		MARKING_TYPE, marking_type, SCROLL_TYPE, scroll_type)
@@ -3588,13 +3665,14 @@ GLOBAL void set_gfx_update_routines IFN3(T_calc_update, update_routine,
 			break;
 		case	TEXT_SCROLL:
 #if defined(NTVDM) && defined(MONITOR)
+#line 3732
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else
 #line 3577
 			update_alg.scroll_up = text_scroll_up;
 			update_alg.scroll_down = text_scroll_down;
 #endif	/* NTVDM & MONITOR */
-#line 3580
+#line 3738
 			break;
 #if !defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX) )	/* remove unneeded code */
 		case	CGA_GRAPH_SCROLL:
@@ -3657,8 +3735,10 @@ void cursor_changed IFN2(int, x, int, y)
 	
 	setVideodirty_total(getVideodirty_total() + 1);
 #else
+#line 3796
 #error DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register.
 #endif
+#line 3802
 } 
 #endif
 
@@ -3676,14 +3756,18 @@ void base_cursor_shape_changed IFN0()
 
 #ifndef REAL_VGA
 #ifdef HERC
+#line 3819
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif
+#line 4041
 
 #if defined(VGG) || defined(EGG)
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
+#line 4045
 #error Excluded unsupported SEGMENTATION configuration
 #endif
+#line 4047
 
 /* ============================================================================
  * The following routines enable and disable the GFX update routines
@@ -3768,8 +3852,10 @@ GLOBAL void enable_gfx_update_routines IFN0()
 
 #endif /* VGG */
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
+#line 4131
 #error Excluded unsupported SEGMENTATION configuration
 #endif
+#line 4133
 
 #ifdef NTVDM
 
@@ -3781,479 +3867,10 @@ int RectDefined;
 int RectTop, RectBottom, RectLeft, RectRight;
 
 #ifdef MONITOR
-/*
- * Update the window to look like the regen buffer says it should
- * and with no help from dirty_total.
- */
-
-static int now_cur_x = -1, now_cur_y = -1;
-/*
- * Reset the static cursor variables:
- */
-GLOBAL void resetNowCur()
-{
-	now_cur_x = -1;
-	now_cur_y = -1;
-}
-
-void mon_text_update()
-{
-
-    register int i;	/* Loop counters		*/
-    register int j,k;
-    register unsigned long *from,*to;
-    register int ints_per_line = get_offset_per_line()>>2;
-    int lines_per_screen;
-    int	len,x,screen_start;
-    unsigned short *wfrom;
-    unsigned short *wto;
-    int dwords_to_compare;
-
-    /*::::::::::::::::::::::::::::::::::::::::::::::: Is the display disable */
-
-    if(get_display_disabled()) return;
-
-    /*::::::::::::::::::::::::::::::::: get screen size and location details */
-
-    screen_start=get_screen_start()<<1;
-    ALIGN_SCREEN_START(screen_start);
-
-    to = (unsigned long *)&video_copy[screen_start];
-    from = (unsigned long *) get_screen_ptr(screen_start);
-
-    /*::::::::::::::::::::::::::::::::::::::::::: Check for buffer overflows */
-
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif
-
-    /*::::::::::::::::::::::::::::::::::::::::::::::: Has the screen changed */
-
-#ifndef CPU_40_STYLE
-#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-
-
-
-
-
-#else
-#line 3813
-    if(getVideodirty_total() >= 1000000L ){
-#endif
-#line 3815
-
-	/*
-	** screen_refresh_required() has requested a complete screen
-	** repaint by setting the dirtyTotal.
-	**
-	** When switching between display pages video copy and display
-	** memory could be the same so our normal partial update algorithm
-	** gets confused.
-	** This scheme updates video copy and then forces a complete
-	** repaint.
-	** Another option would have been to splat video copy and then go
-	** through the partial update code below, but this is quicker.
-	** 
-	** Tim Jan 93.
-	*/
-	setVideodirty_total(0);
-
-	/*
-	** Copy the screen data to our video copy.
-	*/
-	dwords_to_compare = get_screen_length() / 4;
-	_asm
-	{
-		push esi	//Save orginal values of registers used by the
-		push edi	//complier
-		push ecx
-
-		mov edi,to	//Ptr to video copy
-		mov esi,from	//Ptr to intel video memory
-
-		mov ecx,dwords_to_compare
-		rep movsd	//Move screen data to video copy.
-
-		pop ecx
-		pop edi
-		pop esi
-	}
-
-	/*
-	** Re-paint the whole screen.
-	** Set up rectangle dimension globals here for paint_text_rect(),
-	** instead of calling add_to_rect().
-	*/
-        if (get_offset_per_line() == 0)    /* showing up in stress */
-            lines_per_screen = 25;
-        else
-	    lines_per_screen = get_screen_length()/get_offset_per_line();
-	RectTop = 0;
-	RectLeft = 0;
-	RectBottom = lines_per_screen - 1;
-	RectRight = (ints_per_line<<1) - 1;
-	RectDefined = TRUE;
-	host_start_update();
-	paint_text_rect(screen_start);
-	host_end_update();
-
-    }else{
-
-      /*
-      ** Normal partial screen update.
-      */
-
-      dwords_to_compare = get_screen_length() / 4;
-
-      _asm
-      {
-	push esi	//Save orginal values of registers used by the
-	push edi	//complier
-	push ecx
-
-	mov esi,to	//Ptr to screen copy
-	mov edi,from	//Ptr to intel video memory
-
-	mov ecx,dwords_to_compare
-	repe cmpsd	//Compare screen buffers
-
-	mov dwords_to_compare,ecx
-//	mov to,esi
-//	mov from,edi
-
-	pop ecx
-	pop edi
-	pop esi
-      }
-
-      /*::::::::::::::::::::::: Repaint parts of the screen that have changed */
-
-
-      if (get_offset_per_line() == 0)    /* showing up in stress */
-          lines_per_screen = 25;
-      else
-          lines_per_screen = get_screen_length()/get_offset_per_line();
-
-      if(dwords_to_compare)
-      {
-	   host_start_update();
-	   /* Screen changed, calculate position of first variation */
-
-	   init_text_rect();
-
-	   for(i=0;i<lines_per_screen;i++)
-	   {
-	    for(j=0;j<ints_per_line;j++)
-	    {
-		if(*to++ != *from++)
-		{
-		    to--;from--;
-		    for(k=ints_per_line-1-j;*(to+k)== *(from+k);k--){};
-		    /*
-		     * Note: For text mode there is one char for every word.
-		     * no of bytes into screen=line*bytes_per_line + ints_into_line*4
-		     * x_coord=width_of_one_char*(no_of_ints_into_line*2)
-		     * y_coord=height_of_one_char*2*line
-		     * length=no_of_ints*4+4     the plus 4 is to counteract the k--
-		     * The host y co-ords are doubled
-		     */
-
-		    /* one or more ints of data are now selected 
-		       but refine difference to words (i.e. characters),
-		       to avoid a glitch on the screen when typing in to
- 		       a dumb terminal  */
-
-		    len    = (k<<2) + 4;
-		    x	   = (j<<1);
-
-		    wfrom = (unsigned short *)from;
-		    wto   = (unsigned short *)to;
-		    if (*wfrom == *wto)
-		    {
-			x++;
-			len -= 2;
-		    }
-		    wfrom += (k<<1) + 1;
-		    wto   += (k<<1) + 1;
-		    if (*wfrom == *wto)
-		    {
-			len -= 2;
-		    }
-
-		    add_to_rect(screen_start, x, i, len/2);
-
-		    /*.............................. transfer data painted to video copy */
-
-		    for(k=j;k<ints_per_line;k++)
-			*to++ = *from++;
-
-		    break;	/* onto next line */
-		}
-	    }
-	  }
-
-	  /* End of screen, flush any outstanding text update rectangles */
-	  paint_text_rect(screen_start);
-
-	  host_end_update();
-
-     } /* End of partial screen update */
-
-    } /* End of if dirtyTotal stuff, which selects full or partial repaint */
-
-
-    /*:::::::::::::::::::::::::::::::::::::: Does the cursor need repainting */
-
-    if(is_cursor_visible())
-    {
-	half_word attr;
-
-	dirty_curs_x = get_cur_x();
-	dirty_curs_y = get_cur_y();
-
-	if(dirty_curs_x == now_cur_x && dirty_curs_y == now_cur_y)
-	{
-	    host_end_update();
-	    return;
-	}
-
-	now_cur_x = dirty_curs_x;
-	now_cur_y = dirty_curs_y;
-	dirty_curs_offs = screen_start+dirty_curs_y * get_offset_per_line() + (dirty_curs_x<<1);
-
-	if(dirty_curs_offs < 0x8001)	/* no lookup in possible gap */
-	    attr = *(get_screen_ptr(dirty_curs_offs + 1));
-	else
-	    attr = 0;	/* will be off screen anyway */
-
-	host_paint_cursor(dirty_curs_x, dirty_curs_y, attr);
-    }
-
-}
-
-/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-
-boolean mon_text_scroll_up IFN6(sys_addr, start, int, width, int, height, int, attr, int, lines, int, colour)
-{
-    short blank_word, *ptr, *top_left_ptr,*top_right_ptr, *bottom_right_ptr;
-    unsigned short dummy;
-    unsigned char *p;
-    int words_per_line;
-	int i,tlx,tly;
-	int bpl = 2*get_chars_per_line();
-	long start_offset;
-	register half_word *src,*dest;
-	boolean result;
-
-#if !defined(NTVDM) || (defined(NTVDM) && !defined(MONITOR))
-	if ( getVM() )
-	   return FALSE;   /* Don't optimise in V86 Mode */
-#endif
-#line 4025
-	/*
-	 * The colour we fill with for colour text displays is controlled by
-	 * bits 4-6 of attr, with bit 7 turning on blinking (which we don't support)
-	 */
-	colour = ((half_word)attr>>4) & 7;
-
-/*
- * Reduce the width of the rectangle if any right hand area is completely 
- * blank.
- *
- * Don't reduce the size of the scrolling region for a dumb terminal.
- * Dumb terminal uses line feeds to scroll up, but only if the whole
- * screen is to be scrolled.  Reducing the scroll region causes
- * the whole region to be redrawn.
- */
-
-	/* originally dummy was char [2] */
-	/* unfortunately doing (short) *dummy */
-	/* causes a bus error on M88K */
-	p = (unsigned char *) &dummy;
-	p [0] = ' ';
-	p [1] = attr;
-	blank_word = dummy;
-
-	words_per_line   = get_chars_per_line();
-	top_left_ptr     = (short *) get_screen_ptr(start - gvi_pc_low_regen);
-        top_right_ptr    = top_left_ptr + (width >> 1) - 1;
-	bottom_right_ptr = top_right_ptr + words_per_line * (height - 1);
-	ptr = bottom_right_ptr;
-	if (width > 2) /* dont want to get a zero rectangle for safetys sake */
-	{
-	    while (*ptr == blank_word)
-	    {
-	        if (ptr == top_right_ptr) 	/* reached top of column? */
-	        {
-		    top_right_ptr--;	/* yes go to bottom of next */
-		    bottom_right_ptr--;
-		    if (top_right_ptr == top_left_ptr)
-			break;
-		    ptr = bottom_right_ptr;
-	        }
-	        else
-		    ptr -= words_per_line;
-	    }
-	}
-	width = (int)(top_right_ptr - top_left_ptr + 1) << 1;
-
-	/* do the host stuff */
-	start_offset = start - get_screen_start()*2 - gvi_pc_low_regen;
-	tlx = (int)(start_offset%get_bytes_per_line())*get_pix_char_width()/2;
-	tly = (int)(start_offset/get_bytes_per_line())*get_host_char_height(); 
-	result = host_scroll_up(tlx,tly,tlx+width/2*get_pix_char_width()-1,
-				tly+height*get_host_char_height()-1, lines*get_host_char_height(),colour);
-
-	if(!result)
-		return FALSE;
-
-
-	adjust_cursor( UP, tlx, tly, width >> 1, height, lines, bpl );
-
-	/* Scroll up the video_copy */
-	dest = video_copy + start-gvi_pc_low_regen;
-	src = dest + lines * bpl;
-
-	if(width == bpl)
-	{
-		/* Can do the whole thing in one go */
-		memcpy(dest,src,width*(height-lines));
-		fwd_word_fill( (' '<<8) | (half_word)attr, dest+width*(height-lines),width*lines/2);
-	}
-	else
-	{
-		/* Not scrolling whole width of screen, so do each line seperatly */
-		for(i=0;i<height-lines;i++)
-		{
-			memcpy(dest,src,width);
-			dest += bpl;
-			src += bpl;
-		}
-
-		/* Fill exposed area of video copy */
-
-		for(i=0;i<lines;i++)
-		{
-			fwd_word_fill( (' '<<8) | (half_word)attr, dest,width/2);
-			dest += bpl;
-		}
-	}
-
-	/* Update video buffer */
-
-	dest = get_screen_ptr(start - gvi_pc_low_regen);
-	src = dest + lines * bpl;
-	for(i=0;i<height-lines;i++)
-	{
-		memcpy(dest,src,width);
-		dest += bpl;
-		src += bpl;
-	}
-
-	/* Fill exposed area of buffer */
-
-	for(i=0;i<lines;i++)
-	{
-		fwd_word_fill( (' '<<8) | (half_word)attr, dest,width/2);
-		dest += bpl;
-	}
-
-	host_scroll_complete();
-
-	return TRUE;
-}
-
-boolean mon_text_scroll_down IFN6(sys_addr, start, int, width, int, height, int, attr, int, lines, int, colour)
-{
-	int i,tlx,tly;
-	int bpl = 2*get_chars_per_line();
-	long start_offset;
-	register half_word *src,*dest;
-	boolean result;
-
-#if !defined(NTVDM) || (defined(NTVDM) && !defined(MONITOR))
-	if ( getVM() )
-	   return FALSE;   /* Don't optimise in V86 Mode */
-#endif
-#line 4150
-
-	/*
-	 * The colour we fill with for colour text displays is controlled by
-	 * bits 4-6 of attr, with bit 7 turning on blinking (which we don't support)
-	 */
-	colour = ((half_word)attr>>4) & 7;
-
-
-	/* do the host stuff */
-	start_offset = start - get_screen_start() * 2 - gvi_pc_low_regen;
-	tlx = (int)(start_offset%get_bytes_per_line())*get_pix_char_width()/2;
-	tly = (int)(start_offset/get_bytes_per_line())*get_host_char_height();
-	result = host_scroll_down(tlx,tly,tlx+width/2*get_pix_char_width()-1,
-			tly+height*get_host_char_height()-1, lines*get_host_char_height(),colour);
-
-	if(!result)
-		return FALSE;
-
-	adjust_cursor( DOWN, tlx, tly, width >> 1, height, lines, bpl );
-
-	/* Scroll down the video_copy */
-
-	if(width == bpl)
-	{
-		/* Can do the whole thing in one go */
-		src = video_copy + start - gvi_pc_low_regen;
-		dest = src + lines * bpl;
-		memcpy(dest,src,width*(height-lines));
-		fwd_word_fill( (' '<<8) | (half_word)attr, src,width*lines/2);
-	}
-	else
-	{
-		/* Not scrolling whole width of screen, so do each line seperatly */
-		dest = video_copy + start-gvi_pc_low_regen + (height-1) * bpl;
-		src = dest - lines * bpl;
-		for(i=0;i<height-lines;i++)
-		{
-			memcpy(dest,src,width);
-			dest -= bpl;
-			src -= bpl;
-		}
-
-		/* Fill exposed area of video copy */
-
-		for(i=0;i<lines;i++)
-		{
-			fwd_word_fill( (' '<<8) | (half_word)attr, dest,width/2);
-			dest -= bpl;
-		}
-	}
-
-	/* Update video buffer */
-
-	dest = get_screen_ptr(start - gvi_pc_low_regen) + (height-1) * bpl;
-	src = dest - lines * bpl;
-	for(i=0;i<height-lines;i++)
-	{
-		memcpy(dest,src,width);
-		dest -= bpl;
-		src -= bpl;
-	}
-
-	/* Fill exposed area of buffer */
-
-	for(i=0;i<lines;i++)
-	{
-		fwd_word_fill( (' '<<8) | (half_word)attr, dest,width/2);
-		dest -= bpl;
-	}
-
-	host_scroll_complete();
-
-	return TRUE;
-}
+#line 4144
+#error Unsupported excluded original configuration
 #endif	/* MONITOR */
-#line 4225
+#line 4613
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::: Text handling routines :::::::::::::::::::::::::::*/
@@ -4331,12 +3948,13 @@ void add_to_rect(int screen_start, register int x, register int y, int len)
 void paint_text_rect(int screen_start)
 {
 #ifdef MONITOR
-#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
+#line 4690
+#error Unsupported excluded original configuration
 #else
 #line 4304
     int offset = (RectTop * (get_offset_per_line()<<1)) + (RectLeft<<2);
 #endif
-#line 4306
+#line 4694
 
     /* Is there a rectangled defined */
     if(!RectDefined) return;
@@ -4347,12 +3965,13 @@ void paint_text_rect(int screen_start)
 
     (*paint_screen)(offset + screen_start,			/* Start Offset */
 #ifdef MONITOR
-#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
+#line 4704
+#error Unsupported excluded original configuration
 #else
 #line 4318
 		   RectLeft*get_pix_char_width(),RectTop*get_host_char_height(),
 #endif
-#line 4320
+#line 4708
 		    (RectRight - RectLeft +1)*2,		/* Len */
 		    RectBottom - RectTop +1);			/* Height */
 
@@ -4478,8 +4097,10 @@ void stream_io_update(void)
 {
 
 #ifdef MONITOR
-#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
+#line 4830
+#error Unsupported excluded original configuration
 #endif
+#line 4835
 
     if (*stream_io_dirty_count_ptr) {
         host_start_update();
