@@ -459,3 +459,11 @@ published and verified. Eight match byte-for-byte and NTVDM/WOW32 differ only
 by PE timestamps ([comparison](s13-r1367-build-image-compare.json)); tests were
 not repeated under the owner-approved rule. Counts remain 181 byte-identical /
 730 differing files reviewed / 1,056 total, with 145 differing files pending.
+
+The [r1368 review](s13-r1368-extra-strict.json) pairs original conditional
+groups separately from local added groups in 14 files; selected original
+direct bodies, excluded-arm evidence, recorded local-group states and
+matching-code lines on the observed projection pass. Local behavior and
+unobserved contexts are not certified. No source change was needed. Counts:
+181 byte-identical / 744 differing files reviewed / 1,056 total; 131 differing
+files remain.
