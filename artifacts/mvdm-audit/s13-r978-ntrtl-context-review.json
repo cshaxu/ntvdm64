@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntrtl.h",
+  "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+  "current_sha256": "78472a40ae390301e30df4ad7f3cff032aa3d7b83bc8425c256f244be8d08418",
+  "review": "Original/current guard is _NTRTL_; historical selected observation used OPENNT_HOST_NTRTL_SUBSET_H.",
+  "limitations": "Actual supported guard state requires confirmation; no code changed."
+}

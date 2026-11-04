@@ -1,0 +1,20 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\v7_video.c",
+  "original_sha256": "ce5c8812c1bd5f125f007521b2c1c815739e4969fed1ff2e39600a5a47af0525",
+  "after_sha256": "0d729432b8dfb7cae12729a44d871dd019ecb47b84e5cd2f8e74e8b417f117c8",
+  "first_level_original_current": "ifdef VGG at line 26 in both",
+  "prior_selection_record": {
+    "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+    "line": "26",
+    "directive": "ifdef",
+    "expression": "VGG",
+    "chain_start": "26",
+    "depth": "1",
+    "x86": "selected",
+    "x64": "unobserved",
+    "sha256": "dadff8e8f4e7b6862e8c9d09e7a948f32ae72426798e650287598aec422a4dbe"
+  },
+  "review": "Prior product x86 selected outer arm retained, matching original and current condition. Nested conditions deferred.",
+  "limitations": "Prior observation uses an older source hash; no excluded branch is inferred."
+}

@@ -1,0 +1,13 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.h",
+  "original_sha256": "c900712ad3c01e1e6ea6ee3b3ce597bf67f0ae1392576a8f60413af78a4742b6",
+  "current_sha256": "24d7a95929e1ed4428ec8f749ba1229c91c27e675baf3d8c8ba6c347ba1de68e",
+  "review": "r789 positively witnessed original ifndef DOUBLE_CPU; PIG and DOUBLE_CPU first-level arms were already #error. The full cached supported product builds r861 and r896 completed with those exact error guards present, proving they did not select them in the compiled product contexts. No need to repeat 255 per-inclusion probes.",
+  "evidence": [
+    "s13-r789-cmain-header-contexts.json",
+    "s13-r861-delivery.md",
+    "s13-r896-delivery.md"
+  ],
+  "limitations": "Nested groups remain in later depth; externally unsupported macro profiles are not product configurations."
+}

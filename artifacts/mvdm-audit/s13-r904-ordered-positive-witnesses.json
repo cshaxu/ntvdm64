@@ -1,0 +1,34 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/error.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\error.h",
+      "original_sha256": "40953fbb22a9c6a5bff875414e4dd6822340ec4a2501edec79415573fea16ab3",
+      "current_sha256": "40953fbb22a9c6a5bff875414e4dd6822340ec4a2501edec79415573fea16ab3",
+      "prior_positive_records": [
+        {
+          "path": "src/mvdm-host/softpc.new/host/inc/error.h",
+          "line": "1",
+          "directive": "ifndef",
+          "expression": "_INS_ERROR_H",
+          "chain_start": "1",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "91d0d7fc6c644a8aae898a180129a46bbbb6deaf59cc39f1abf95f2ad93b82dd"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    }
+  ],
+  "next_depth_parents": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/error.h",
+      "parent_line": 1,
+      "parent_kind": "ifndef",
+      "parent_expression": "_INS_ERROR_H",
+      "child_group_count": 3
+    }
+  ]
+}

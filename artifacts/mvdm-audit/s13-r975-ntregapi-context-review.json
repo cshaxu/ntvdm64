@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntregapi.h",
+  "original_sha256": "0fb164317335d8b48c51122182922259c902c7f60afb28111bafa9fb75735a6a",
+  "current_sha256": "58440554432e525dcab5fd7faf9b805ad2dcafe8bae30a6a582eb699b85900a6",
+  "review": "Original/current guard is _NTREGAPI_; historical selected observation used WOW_PROFILE_NTREGAPI_H.",
+  "limitations": "Actual supported guard state requires confirmation; no code changed."
+}

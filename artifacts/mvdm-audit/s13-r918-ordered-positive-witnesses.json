@@ -1,0 +1,34 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_emm.c",
+      "original_sha256": "d51310af362e60023feb59c89afb21ff6fae8e1bb74ae8614231f4ec3a001729",
+      "current_sha256": "3cfe903326dea3c5c501e256bfacf6a713dfe348b876ec324bd277f1ea2adfc1",
+      "prior_positive_records": [
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+          "line": "45",
+          "directive": "ifdef",
+          "expression": "LIM",
+          "chain_start": "45",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "3cfe903326dea3c5c501e256bfacf6a713dfe348b876ec324bd277f1ea2adfc1"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    }
+  ],
+  "next_depth_parents": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "parent_line": 45,
+      "parent_kind": "ifdef",
+      "parent_expression": "LIM",
+      "child_group_count": 1
+    }
+  ]
+}

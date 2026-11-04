@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\usercli.h",
+  "original_sha256": "11edc7c5b3f32ce40114bd0c4026e43381f2b131f036506376e23c8eb1db5bba",
+  "current_sha256": "771fc0fbcce586991c814a40450ce15931ebc13c1d83ee3695b1b4117f9c738f",
+  "review": "Current first-level arms 16, original 10 and prior records 7.",
+  "limitations": "Local/original mapping requires contextual review; no code changed."
+}

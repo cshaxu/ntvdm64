@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+  "original_sha256": "f0b56314a93423599f06645d17104391f19a0ca07c3944853b065d8866493f7c",
+  "current_sha256": "86faf087619bcc9d11af866b7e06ef21e1dba335582fe2871521a52a4826195f",
+  "review": "Original/current first-level arm counts both 31; historical observations cover only one.",
+  "limitations": "Map individual structures and actual context selection before exclusion; no code changed."
+}

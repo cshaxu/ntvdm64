@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+  "original_sha256": "b7656bca55e892a42ba825be0324211450ad298c40717e1ae5a889d084467529",
+  "current_sha256": "e5cd3f9fc3b9f434b3ec953d06603931b5dce364dd069ed7563ffc22e8d2bcb4",
+  "review": "Original and current first-level arm counts both 28; historical depth-one records absent.",
+  "limitations": "Map actual context selection before excluding any arm; no code changed."
+}

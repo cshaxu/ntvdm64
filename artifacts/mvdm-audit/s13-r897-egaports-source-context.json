@@ -1,0 +1,20 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_prts.c",
+  "original_sha256": "1dedadd482f631e9b82a0fde92b84ff74c724faaaac782ae538639e0738e7002",
+  "after_sha256": "1e5e6a48c2338f0a3dc88b54db11e3fd242d2ed21165ee5b1209a50136e75cb7",
+  "first_level_original_current": "ifndef REAL_VGA at line 331 in both",
+  "prior_selection_record": {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+    "line": "331",
+    "directive": "ifndef",
+    "expression": "REAL_VGA",
+    "chain_start": "331",
+    "depth": "1",
+    "x86": "selected",
+    "x64": "unobserved",
+    "sha256": "16de6dee25c2c8406d0a2b7107169e837904a9549ffd9f93f5a7ea3ab4f819e4"
+  },
+  "review": "Previously recorded x86 selected outer arm is retained. The later source hash differs but the first-level directive and location remain identical; nested conditions deferred to next depth.",
+  "limitations": "This is a retained positive witness, not proof of absence in other contexts."
+}

@@ -1,0 +1,43 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\winmgr.c",
+  "original_sha256": "d7e87476cc3e703c94b88d53b9a0761642b284a6776c0152738daf4c74290d2b",
+  "current_sha256": "fc4b115e7bbea367800abbebdeae1a94de478b79b6c12db2fdfb5723431f10db",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+      "line": "8",
+      "directive": "if",
+      "expression": "!defined(WOW_ORIGINAL_DEFAULT_GEOMETRY)",
+      "chain_start": "8",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "fc4b115e7bbea367800abbebdeae1a94de478b79b6c12db2fdfb5723431f10db"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+      "line": "37",
+      "directive": "if",
+      "expression": "defined(WOW_ORIGINAL_DEFAULT_GEOMETRY)",
+      "chain_start": "37",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "fc4b115e7bbea367800abbebdeae1a94de478b79b6c12db2fdfb5723431f10db"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+      "line": "80",
+      "directive": "if",
+      "expression": "!defined(WOW_ORIGINAL_DEFAULT_GEOMETRY)",
+      "chain_start": "80",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "fc4b115e7bbea367800abbebdeae1a94de478b79b6c12db2fdfb5723431f10db"
+    }
+  ],
+  "review": "Original has no top-level conditions. All three local WOW_ORIGINAL_DEFAULT_GEOMETRY arms are registered OPENNT-HOST-091/106/108 and observed selected in product configurations. Retained unchanged.",
+  "limitations": "Registered local build bindings remain mirror differences."
+}

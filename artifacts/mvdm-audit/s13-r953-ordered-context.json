@@ -1,0 +1,55 @@
+{
+  "path": "src/non-mvdm/base/win32/inc/base.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\win32\\inc\\base.h",
+  "original_sha256": "2df61cf7f17123235a340b6e802c4a998889db112cfd15399cec3cd107911cf7",
+  "before_sha256": "1ad50440e5ed8638de2a8426599bb524917444362cbe7e09eb6cb08eb8fd6571",
+  "after_sha256": "1ad50440e5ed8638de2a8426599bb524917444362cbe7e09eb6cb08eb8fd6571",
+  "prior_first_level_records": [
+    {
+      "path": "src/non-mvdm/base/win32/inc/base.h",
+      "line": "23",
+      "directive": "ifndef",
+      "expression": "RC_INVOKED",
+      "chain_start": "23",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "selected",
+      "sha256": "db688148ff7fb55e379d5d2ac120272ae6b73860e7a5f087079b18bc82469961"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/inc/base.h",
+      "line": "38",
+      "directive": "ifndef",
+      "expression": "DBG",
+      "chain_start": "38",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "selected",
+      "sha256": "db688148ff7fb55e379d5d2ac120272ae6b73860e7a5f087079b18bc82469961"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/inc/base.h",
+      "line": "48",
+      "directive": "if",
+      "expression": "DBG",
+      "chain_start": "48",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "not-selected-in-observed-contexts",
+      "sha256": "db688148ff7fb55e379d5d2ac120272ae6b73860e7a5f087079b18bc82469961"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/inc/base.h",
+      "line": "50",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "48",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "selected",
+      "sha256": "db688148ff7fb55e379d5d2ac120272ae6b73860e7a5f087079b18bc82469961"
+    }
+  ],
+  "review": "Original/current first-level arms align. Previously selected arms retained; others were already #error and line anchors normalized. No newly excluded code.",
+  "limitations": "Nested branches deferred; old selection hash may differ; no new exclusion inferred."
+}

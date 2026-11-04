@@ -1,0 +1,64 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\vga_mode.c",
+      "original_sha256": "d0ea64ba445b8a7c8cb4b11963cece808793b0595183f8be7f115c060eb1f0d9",
+      "current_sha256": "e82c8591e933a9ce347ac1e1f8cf9aa483796aee1488f561a3ad90c9ed90f7fa",
+      "first_level_count": 1,
+      "prior_positive_records": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
+          "line": "95",
+          "directive": "ifndef",
+          "expression": "REAL_VGA",
+          "chain_start": "95",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "c7ef306a98756fe2697d43168fd0a0c3aac06a7324a837c613e7404556c56eba"
+        }
+      ],
+      "review": "Every original/current first-level directive matches and has a previously selected product observation at the same directive location; no preceding local definition/undefinition of its expression macros. Retained unchanged.",
+      "limitations": "Prior record may have a different source hash; unchanged condition location and lack of preceding local macro mutation were verified. Nested conditions are not audited here."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\vga_prts.c",
+      "original_sha256": "16305a48051b980b4c9f8aba15dda7bd6801964bb02897b8c2290a1eff04fbbc",
+      "current_sha256": "bea09443124793e235e99548e987bbc36c7b061516bd6de6ef2fca479c0d6a01",
+      "first_level_count": 1,
+      "prior_positive_records": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+          "line": "338",
+          "directive": "ifndef",
+          "expression": "REAL_VGA",
+          "chain_start": "338",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "b984bda19beee10d26c6238fd331904616dc46f94e548495e526a720b3351510"
+        }
+      ],
+      "review": "Every original/current first-level directive matches and has a previously selected product observation at the same directive location; no preceding local definition/undefinition of its expression macros. Retained unchanged.",
+      "limitations": "Prior record may have a different source hash; unchanged condition location and lack of preceding local macro mutation were verified. Nested conditions are not audited here."
+    }
+  ],
+  "next_depth_parents": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
+      "parent_line": 95,
+      "parent_kind": "ifndef",
+      "parent_expression": "REAL_VGA",
+      "child_group_count": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "parent_line": 338,
+      "parent_kind": "ifndef",
+      "parent_expression": "REAL_VGA",
+      "child_group_count": 1
+    }
+  ]
+}

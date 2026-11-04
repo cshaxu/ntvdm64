@@ -1,0 +1,9 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\host_cpu.h",
+  "original_sha256": "e79dd6aa79d24e37ad8390c8879abf3436674ee101037f0e09415148a938ac95",
+  "before_sha256": "e7dc11cd3a445e2f7e37df01650c055ec62a48d384a823bf08c6c599301f3c89",
+  "after_sha256": "0fa01faf650135422c848f9950123294856201a610fa9f5f26f2a54acd1c13f0",
+  "review": "Original and current outer CPU_30_STYLE if/else structure match; CPU30 arm was already #error, its original line anchor is added. CPU40 else retains product-selected content; old marker records its inner CCPU selections before outer structure restoration.",
+  "limitations": "Nested conditions remain for next depth; no new exclusion."
+}

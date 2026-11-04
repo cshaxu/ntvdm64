@@ -1,0 +1,8 @@
+{
+  "path": "src/mvdm-host/xms.486/xmsmemr.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\xms.486\\xmsmemr.c",
+  "original_sha256": "70970ed738101458f8036b5a283f034eb64baf32ead84a59a6b02278b327612c",
+  "current_sha256": "b414e7f1a100e23b42b1022232af5b3d04df01b9784d3536316fb7a43cec9df2",
+  "review": "Current contains three first-level arms, original has none; historical observations match current.",
+  "limitations": "Local versus original group correspondence requires patch-ownership audit; no code changed."
+}

@@ -1,0 +1,8 @@
+{
+  "path": "src/mvdm-host/wow32/precomp.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\precomp.h",
+  "original_sha256": "b4841d516682f6677332fede6ca47187bfdc132a288f71564378a1c87f7bb314",
+  "current_sha256": "ea44381521bce269bb4ef98f2918772d2a9b5597af6e3774b27ff3654186d399",
+  "review": "Current has three first-level conditions, original has none.",
+  "limitations": "Current groups appear local and require explicit patch-ownership audit; no code changed."
+}

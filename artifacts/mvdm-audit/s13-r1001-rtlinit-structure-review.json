@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\rtlinit.c",
+  "original_sha256": "d8841bd2f13e5825a84f670ec7cc60923977bf80618d737cbac2208f94c6523c",
+  "current_sha256": "06dad1cd402c2712b21e5b573ea8be67facb0087b5e322b594abe0664caad644",
+  "review": "Current first-level arms 10, original 4 and prior records 2.",
+  "limitations": "Local/original mapping requires contextual review; no code changed."
+}

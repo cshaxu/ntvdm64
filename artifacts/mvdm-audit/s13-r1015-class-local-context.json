@@ -1,0 +1,43 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\class.c",
+  "original_sha256": "82528443bc5f6c227e0e14fe8a9dbc928ba735f98cf3891744c20c8e1604939a",
+  "current_sha256": "326081a72f994be4e59e3847e77f03980ebdc8f7830d109dfb07e2d3c0395a34",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "line": "19",
+      "directive": "ifdef",
+      "expression": "WOW_ORIGINAL_CLASS_REGISTRATION",
+      "chain_start": "19",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "40dc0a6b96414d7e920c16d1006f53df7bb1dc2e928732bba0961bc2def7cc05"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "line": "77",
+      "directive": "elif",
+      "expression": "defined(WOW_ORIGINAL_CLASS_REMOVAL)",
+      "chain_start": "19",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "40dc0a6b96414d7e920c16d1006f53df7bb1dc2e928732bba0961bc2def7cc05"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "line": "144",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "19",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "40dc0a6b96414d7e920c16d1006f53df7bb1dc2e928732bba0961bc2def7cc05"
+    }
+  ],
+  "review": "Original FE_SB and DBG groups are retained as previously excluded #error with matching original line anchors. Local registered OPENNT-HOST-059/060 dispatch selects one of three arms in actual product contexts; all historically observed.",
+  "limitations": "Nested conditions deferred; no code changed."
+}

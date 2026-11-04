@@ -1,0 +1,21 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\cldib.c",
+  "original_sha256": "e16fb36805f44767b45b597510a6c08d1dbc47271783e5d1f8f09273c0f782fb",
+  "current_sha256": "e3863929df1748b35339f694005acf9f02c1280f21e7be4b2678fa4316d8263c",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+      "line": "12",
+      "directive": "ifndef",
+      "expression": "WOW_BITMAP_FIXTURE_BINDINGS",
+      "chain_start": "12",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "e3863929df1748b35339f694005acf9f02c1280f21e7be4b2678fa4316d8263c"
+    }
+  ],
+  "review": "Original has no first-level conditions. Local WOW_BITMAP_FIXTURE_BINDINGS guard is the registered OPENNT-HOST-035 binding and is observed selected in the product. Retained unchanged.",
+  "limitations": "Registered local build binding remains a mirror difference."
+}

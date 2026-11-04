@@ -1,0 +1,447 @@
+{
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/crypt.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\crypt.h",
+      "original_sha256": "0a325a131b109964594681317389ac7b7e4dce8f05f6dc553c499203f296c3ed",
+      "current_sha256": "0a325a131b109964594681317389ac7b7e4dce8f05f6dc553c499203f296c3ed",
+      "prior_positive_records": [
+        {
+          "path": "src/non-mvdm/public/internal/ds/inc/crypt.h",
+          "line": "23",
+          "directive": "ifndef",
+          "expression": "_NTCRYPT_",
+          "chain_start": "23",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "selected",
+          "sha256": "530561f4b83bba78c99f8ac6010b46660bb15831a007000bbff849f863798398"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/debuglib.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\debuglib.h",
+      "original_sha256": "d3f73f4317c039937ba51ef439cff38a721328e5ae7c0a7bccce290e2031ac51",
+      "current_sha256": "9650c3c246f82bc14c769189cc7f59aa702c8327b28da8e17a6825b7709c8914",
+      "prior_positive_records": [
+        {
+          "path": "src/non-mvdm/public/internal/ds/inc/debuglib.h",
+          "line": "58",
+          "directive": "ifndef",
+          "expression": "_DEBUGLIB_",
+          "chain_start": "58",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "b0bdedfcc205b3cf72f54fc8c0c346738d74a75451eb597be7010d8b55411231"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netdebug.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\netdebug.h",
+      "original_sha256": "6e6acf20d4dcf56f6a51f99152c6792e080ea21db74efc37b6c70f2f5e00ec72",
+      "current_sha256": "ffbe52f3623231e071ca9a10cf5eaaeaaf5a4e7b8a71bf8691c48e1b97614b10",
+      "prior_positive_records": [
+        {
+          "path": "src/non-mvdm/public/internal/ds/inc/netdebug.h",
+          "line": "106",
+          "directive": "ifndef",
+          "expression": "_NETDEBUG_",
+          "chain_start": "106",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "a7cf66c775c8ef1406c7f31039df931533b6dea53474a021eb0f85b589f448dd"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\netlib.h",
+      "original_sha256": "d160c2657ce8bd4cd006af505a5325b311fe27a7f80682518adb01771ab5b7c4",
+      "current_sha256": "cbcc9218ea64a3c5d3a9b8ab55c0a9a65feafe14eda90b43e7d74d35022d9261",
+      "prior_positive_records": [
+        {
+          "path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+          "line": "94",
+          "directive": "ifndef",
+          "expression": "_NETLIB_",
+          "chain_start": "94",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "ae2b6d34cbaed6c601e38ad2a1b5d5982de4729c8342a0662d4980880091d500"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlibnt.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\netlibnt.h",
+      "original_sha256": "8545a4ebfe8156e40405fd6a22d6c49b42aaf3b6df1b6254a52b63c330e11ba8",
+      "current_sha256": "8545a4ebfe8156e40405fd6a22d6c49b42aaf3b6df1b6254a52b63c330e11ba8",
+      "prior_positive_records": [
+        {
+          "path": "src/non-mvdm/public/internal/ds/inc/netlibnt.h",
+          "line": "53",
+          "directive": "ifndef",
+          "expression": "_NETLIBNT_",
+          "chain_start": "53",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "20d74f1e556db7c448589d0b0fce8b243e2c07780c3cca463092cee6034f022e"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rap.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\rap.h",
+      "original_sha256": "f1b132b2ab6d5b848303f27696fbcf4a78d8d937919b46dda004efb0930b9086",
+      "current_sha256": "f1b132b2ab6d5b848303f27696fbcf4a78d8d937919b46dda004efb0930b9086",
+      "prior_positive_records": [
+        {
+          "path": "src/non-mvdm/public/internal/ds/inc/rap.h",
+          "line": "63",
+          "directive": "ifndef",
+          "expression": "_RAP_",
+          "chain_start": "63",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "8014aa01e648991ee8b93e0c109efd1efa26c700761467412be69daa06d9613a"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/timelib.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\timelib.h",
+      "original_sha256": "6f44ad84f7119f62c58646f5c1f9405a8e2b6da7d6dc91503264aa4128bd3dcc",
+      "current_sha256": "6f44ad84f7119f62c58646f5c1f9405a8e2b6da7d6dc91503264aa4128bd3dcc",
+      "prior_positive_records": [
+        {
+          "path": "src/non-mvdm/public/internal/ds/inc/timelib.h",
+          "line": "41",
+          "directive": "ifndef",
+          "expression": "_TIMELIB_",
+          "chain_start": "41",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "e0e7d89d32b80c2bd2bd1feba400005135d91c6f26e3d797b5cbfff243ca23a6"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/xstypes.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\xstypes.h",
+      "original_sha256": "b140254bef8ca8c871c6ca3a94a09c5f858ad9b5560cb687392af22e7c8d8539",
+      "current_sha256": "b140254bef8ca8c871c6ca3a94a09c5f858ad9b5560cb687392af22e7c8d8539",
+      "prior_positive_records": [
+        {
+          "path": "src/non-mvdm/public/internal/ds/inc/xstypes.h",
+          "line": "21",
+          "directive": "ifndef",
+          "expression": "_XSTYPES_",
+          "chain_start": "21",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "933f190be6d76778904de33d817f0b11c0a38b7628f18ecdabeadafffe7a9e1d"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/tstring.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\net\\inc\\tstring.h",
+      "original_sha256": "0dd95258b49d3c4e283d5cf49ca8e309af05d24343a3f7680a94d9769611b517",
+      "current_sha256": "0dd95258b49d3c4e283d5cf49ca8e309af05d24343a3f7680a94d9769611b517",
+      "prior_positive_records": [
+        {
+          "path": "src/non-mvdm/public/internal/net/inc/tstring.h",
+          "line": "75",
+          "directive": "ifndef",
+          "expression": "_TSTRING_H_INCLUDED",
+          "chain_start": "75",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "522f3713d5e33d8957eba5431fbc002b95d25c1dd50e4f82bbdc8e2aea955421"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\windows\\inc\\pif.h",
+      "original_sha256": "224f6bdf5cfa15a37d95f97e24c30d37d947d5f7f5199d50aeab65b39d150c55",
+      "current_sha256": "cba592699266517e0fe2b966d86517ef2a2c569887a740d7eb3d09df6c4c6cdd",
+      "prior_positive_records": [
+        {
+          "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+          "line": "12",
+          "directive": "ifndef",
+          "expression": "_INC_PIF",
+          "chain_start": "12",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "f4bd937938b7c76ed17fabf55bef541ad9521250ebab8547f93609e4b20e15e8"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/winconp.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\windows\\inc\\winconp.h",
+      "original_sha256": "26b1b3cff877ee2802aeff0eeab04f1daf7127e63279bcaa990c8b4f97384f2d",
+      "current_sha256": "26b1b3cff877ee2802aeff0eeab04f1daf7127e63279bcaa990c8b4f97384f2d",
+      "prior_positive_records": [
+        {
+          "path": "src/non-mvdm/public/internal/windows/inc/winconp.h",
+          "line": "1",
+          "directive": "ifndef",
+          "expression": "_WINCONP_",
+          "chain_start": "1",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "76ceafb087e736b272513f2c9eceaef29d7a6378cbaceee45ed3614c1294d6c2"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/winddi.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\windows\\inc\\winddi.h",
+      "original_sha256": "f3ba4a33dbbb58768c2fb8aacc205a017f05d11521ad1650e39a998be5344f4a",
+      "current_sha256": "f3ba4a33dbbb58768c2fb8aacc205a017f05d11521ad1650e39a998be5344f4a",
+      "prior_positive_records": [
+        {
+          "path": "src/non-mvdm/public/internal/windows/inc/winddi.h",
+          "line": "16",
+          "directive": "ifndef",
+          "expression": "_WINDDI_",
+          "chain_start": "16",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "0f3685faeaeac434361412f83c9936f8561e6686ca6022faa09a2a77c1e68e3d"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\windows\\inc\\wingdip.h",
+      "original_sha256": "fc35d359bf23f905916980740c56199d3627eb55b9c223091a75a8e4e606dd4d",
+      "current_sha256": "6514e6866b4f50a6132d71bf2f803103e1c46fec71981d720ce927ffeb83d1ce",
+      "prior_positive_records": [
+        {
+          "path": "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+          "line": "15",
+          "directive": "ifndef",
+          "expression": "_WINGDIP_",
+          "chain_start": "15",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "6514e6866b4f50a6132d71bf2f803103e1c46fec71981d720ce927ffeb83d1ce"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\windows\\inc\\wowuserp.h",
+      "original_sha256": "10ce21b98498ec4170806af9909854429c99929083b4730d370e5a7cc4e479d8",
+      "current_sha256": "10ce21b98498ec4170806af9909854429c99929083b4730d370e5a7cc4e479d8",
+      "prior_positive_records": [
+        {
+          "path": "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+          "line": "166",
+          "directive": "ifndef",
+          "expression": "_WALIAS_",
+          "chain_start": "166",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "fd9395f3d74001454f097d687fa3eeb2bd7d0f29ee27e5dab48ba0216d4036b4"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/dlcapi.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\dlcapi.h",
+      "original_sha256": "c98cae26f503b5285e465b2fd40e0fe1a6344a44d5bb5bd00e876f20dd8c1dda",
+      "current_sha256": "c98cae26f503b5285e465b2fd40e0fe1a6344a44d5bb5bd00e876f20dd8c1dda",
+      "prior_positive_records": [
+        {
+          "path": "src/non-mvdm/public/sdk/inc/dlcapi.h",
+          "line": "17",
+          "directive": "ifndef",
+          "expression": "_DLCAPI_",
+          "chain_start": "17",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "e2fb32ca94c0fe88147fc579111541327bd927e7784955182662d450839c83bf"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntcsrsrv.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntcsrsrv.h",
+      "original_sha256": "9f22e4932d1b51c404c6bdaa6c4ca875ab8c19f1266c31c930985bdf75d1bbf2",
+      "current_sha256": "9f22e4932d1b51c404c6bdaa6c4ca875ab8c19f1266c31c930985bdf75d1bbf2",
+      "prior_positive_records": [
+        {
+          "path": "src/non-mvdm/public/sdk/inc/ntcsrsrv.h",
+          "line": "22",
+          "directive": "ifndef",
+          "expression": "_NTCSRSRVAPI_",
+          "chain_start": "22",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "selected",
+          "sha256": "31b150668bcb0bf0f4c4199f7a612ebf083b5e3be6a8c6fc5e135bcb400ac960"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    }
+  ],
+  "next_depth_parents": [
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/crypt.h",
+      "parent_line": 23,
+      "parent_kind": "ifndef",
+      "parent_expression": "_NTCRYPT_",
+      "child_group_count": 2
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/debuglib.h",
+      "parent_line": 58,
+      "parent_kind": "ifndef",
+      "parent_expression": "_DEBUGLIB_",
+      "child_group_count": 1
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netdebug.h",
+      "parent_line": 106,
+      "parent_kind": "ifndef",
+      "parent_expression": "_NETDEBUG_",
+      "child_group_count": 9
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+      "parent_line": 94,
+      "parent_kind": "ifndef",
+      "parent_expression": "_NETLIB_",
+      "child_group_count": 5
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlibnt.h",
+      "parent_line": 53,
+      "parent_kind": "ifndef",
+      "parent_expression": "_NETLIBNT_",
+      "child_group_count": 2
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rap.h",
+      "parent_line": 63,
+      "parent_kind": "ifndef",
+      "parent_expression": "_RAP_",
+      "child_group_count": 1
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/timelib.h",
+      "parent_line": 41,
+      "parent_kind": "ifndef",
+      "parent_expression": "_TIMELIB_",
+      "child_group_count": 1
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/xstypes.h",
+      "parent_line": 21,
+      "parent_kind": "ifndef",
+      "parent_expression": "_XSTYPES_",
+      "child_group_count": 1
+    },
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/tstring.h",
+      "parent_line": 75,
+      "parent_kind": "ifndef",
+      "parent_expression": "_TSTRING_H_INCLUDED",
+      "child_group_count": 4
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "parent_line": 12,
+      "parent_kind": "ifndef",
+      "parent_expression": "_INC_PIF",
+      "child_group_count": 11
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/winconp.h",
+      "parent_line": 1,
+      "parent_kind": "ifndef",
+      "parent_expression": "_WINCONP_",
+      "child_group_count": 3
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/winddi.h",
+      "parent_line": 16,
+      "parent_kind": "ifndef",
+      "parent_expression": "_WINDDI_",
+      "child_group_count": 1
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+      "parent_line": 15,
+      "parent_kind": "ifndef",
+      "parent_expression": "_WINGDIP_",
+      "child_group_count": 3
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/dlcapi.h",
+      "parent_line": 17,
+      "parent_kind": "ifndef",
+      "parent_expression": "_DLCAPI_",
+      "child_group_count": 2
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntcsrsrv.h",
+      "parent_line": 22,
+      "parent_kind": "ifndef",
+      "parent_expression": "_NTCSRSRVAPI_",
+      "child_group_count": 1
+    }
+  ]
+}

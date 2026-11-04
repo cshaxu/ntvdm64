@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntsend.h",
+  "original_sha256": "b708f1fee46e93735c4c931d556e16daa9679e6352d72620904d18ad21396abf",
+  "current_sha256": "03c24b6505a66d5b9c316b02c05d914a2a4dd4467edada589e42f1e650a8b2ba",
+  "review": "Original/current first-level UNICODE if/else structure matches. Historical depth-one observations absent; actual product dependency contexts include call-boundaries and wow32.",
+  "limitations": "Determine UNICODE state in both actual contexts before excluding either arm; no code changed."
+}

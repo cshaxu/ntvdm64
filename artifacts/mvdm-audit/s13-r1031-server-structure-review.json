@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+  "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+  "current_sha256": "c651893a9b6ba6152fc06dcfa9671816724f997b5d253d6563597b315789d334",
+  "review": "Current first-level arms 19, original 16 and prior records 1.",
+  "limitations": "Original and local patch correspondence needs contextual review; no code changed."
+}

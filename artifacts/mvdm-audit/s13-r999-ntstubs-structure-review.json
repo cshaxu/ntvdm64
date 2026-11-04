@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+  "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+  "current_sha256": "dcb180b4dedb8e6179f533c029c2b3c5d0d20be17f2650714ef8516b96ec4356",
+  "review": "Current first-level arms 26, original 20 and prior records 4.",
+  "limitations": "Local/original mapping requires contextual review; no code changed."
+}

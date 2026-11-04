@@ -1,0 +1,111 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_inc.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\host_inc.h",
+      "original_sha256": "c78271903a7a00e13a8756b47f25a91993ab962c39c5fb89435783ee3d411efe",
+      "current_sha256": "c78271903a7a00e13a8756b47f25a91993ab962c39c5fb89435783ee3d411efe",
+      "prior_positive_records": [
+        {
+          "path": "src/mvdm-host/softpc.new/host/inc/host_inc.h",
+          "line": "16",
+          "directive": "ifndef",
+          "expression": "_HOST_INC_H",
+          "chain_start": "16",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "dffeded7f83a02092fe1e963573097f52c9da37e214a7ec737153cc3e9f6ee21"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_rrr.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\host_rrr.h",
+      "original_sha256": "a849bf3b9c08d83ca3e21a386c6a45042494df82eeb28e4c8d0de3d7f14972ac",
+      "current_sha256": "b48dbb4e7165d7002786542322da2b2f406dd78180ca8e476fd0f7a66509d0ba",
+      "prior_positive_records": [
+        {
+          "path": "src/mvdm-host/softpc.new/host/inc/host_rrr.h",
+          "line": "1",
+          "directive": "ifndef",
+          "expression": "_HOST_ERROR_H",
+          "chain_start": "1",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "09d6b98cf0e8545f6e16196ab7ca0fe4675e1aa556e45511954f3bd25b9f3091"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/insignia.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\insignia.h",
+      "original_sha256": "26ed468f31ea44c8069300f150e5eefef3ba21c12eb2f2f68cca95bcc6f3ba02",
+      "current_sha256": "16008682af1a1770658fa6c70797e7b92bbd041e44d23b8759b05f71a91564eb",
+      "prior_positive_records": [
+        {
+          "path": "src/mvdm-host/softpc.new/host/inc/insignia.h",
+          "line": "1",
+          "directive": "ifndef",
+          "expression": "_INSIGNIA_H",
+          "chain_start": "1",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "16008682af1a1770658fa6c70797e7b92bbd041e44d23b8759b05f71a91564eb"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_com.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_com.h",
+      "original_sha256": "203bf4bcfa6ddd5ff89cad3743fd99251df19838dd9e8bfcbf549a2e23dd4298",
+      "current_sha256": "203bf4bcfa6ddd5ff89cad3743fd99251df19838dd9e8bfcbf549a2e23dd4298",
+      "prior_positive_records": [
+        {
+          "path": "src/mvdm-host/softpc.new/host/inc/nt_com.h",
+          "line": "43",
+          "directive": "ifdef",
+          "expression": "_RS232_H",
+          "chain_start": "43",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "772b66e8a279eea916d1a91769b5017020e0d4c4d0b5eec4ca8371036d4a2cc1"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    }
+  ],
+  "next_depth_parents": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_inc.h",
+      "parent_line": 16,
+      "parent_kind": "ifndef",
+      "parent_expression": "_HOST_INC_H",
+      "child_group_count": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_rrr.h",
+      "parent_line": 1,
+      "parent_kind": "ifndef",
+      "parent_expression": "_HOST_ERROR_H",
+      "child_group_count": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/insignia.h",
+      "parent_line": 1,
+      "parent_kind": "ifndef",
+      "parent_expression": "_INSIGNIA_H",
+      "child_group_count": 9
+    }
+  ]
+}

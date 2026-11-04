@@ -1,0 +1,8 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/video.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+  "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+  "current_sha256": "16328f9ebb95bab8573f7da84b6fa5b647da19a9bc5c8ef13ec70103304688dc",
+  "review": "Original and current first-level condition signatures match. Most prior positive observations align; no unhit arm currently contains real code.",
+  "limitations": "Two prior observation condition expressions included MVDM_STANDALONE_SAS_VIDEO but current original-compatible expressions no longer do, so historical hit records cannot establish their current selection. Deferred for a targeted check; no code changed."
+}

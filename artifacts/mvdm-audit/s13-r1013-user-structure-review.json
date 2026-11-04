@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\user.h",
+  "original_sha256": "adcf0ac89c4779d9b7908610976f4a47d2385403edc37496c8ab004b016cf6c1",
+  "current_sha256": "8a9864877903a69d7bf8a40a8b788b37bf54c83a117acb0e79fb85ed8bdf061b",
+  "review": "Current first-level arms 9, original 1; old observations cover 9.",
+  "limitations": "Local/original mapping requires contextual review; no code changed."
+}

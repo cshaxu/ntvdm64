@@ -2,7 +2,7 @@
   "baseline_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r379.zip",
   "graph_inventory": "s13-r473-all-graph-coverage.json",
   "total_observed_files": 1057,
-  "completed_files": 921,
+  "completed_files": 867,
   "records": [
     {
       "path": "src/mvdm-host/dbg/dbg.c",
@@ -933,16 +933,16 @@
     {
       "path": "src/mvdm-host/inc/vdmredir.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\vdmredir.h",
-      "current_sha256": "e47d8d20bfa1835ee500766753aee23bf887a84c837698ce85629c9225aac5cf",
+      "current_sha256": "3b8ea539ca0989e7b8be3be6cc4098ec0cd1e6940677213992d29933c5cf011a",
       "original_sha256": "2462271dd22683738e60b4154bd891a8dfc679d4c34b9f75b23ecf91523add2d",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-redir-contract\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "completed-original-conditional-tree",
       "partial_evidence": "s13-r645-dbg-guard-lines.json",
-      "evidence": "s13-r773-vdmredir-header-contexts.json"
+      "evidence": "s13-r1052-vdmredir-full-file.json"
     },
     {
       "path": "src/mvdm-host/inc/vint.h",
@@ -1059,7 +1059,7 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r775-wow-header-contexts.json"
     },
     {
@@ -1102,7 +1102,7 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r777-wowcomm-header-context.json"
     },
     {
@@ -1167,7 +1167,7 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r783-wowmmcb-header-context.json"
     },
     {
@@ -1398,7 +1398,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "pending_change": "r503 exclude non-CPU40 reset BOP adjustment; full file audit pending",
       "evidence": "s13-r784-reset-conditions.json"
     },
@@ -1448,7 +1448,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r785-tape-conditions.json"
     },
     {
@@ -1955,7 +1955,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r786-cmain-conditions.json"
     },
     {
@@ -1967,9 +1967,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "deferred-depth1-contexts-unverified",
+      "status": "partial-per-file-outer-reviewed",
       "pending_change": "r495 original diagnostic anchors; broader per-file conditional audit pending",
-      "evidence": "s13-r789-cmain-header-contexts.json"
+      "evidence": "s13-r1051-cmain-context-resolution.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_mem.h",
@@ -2220,7 +2220,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r790-cxcptn-conditions.json"
     },
     {
@@ -2375,7 +2375,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r792-ccpusas4-header-context.json"
     },
     {
@@ -2564,7 +2564,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r794-cpu4gen-header-context.json"
     },
     {
@@ -4499,7 +4499,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "pending_change": "r514 exclude non-MONITOR status arm; other groups pending",
       "evidence": "s13-r795-printer-conditions.json"
     },
@@ -4512,7 +4512,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r796-printeru-conditions.json"
     },
     {
@@ -4585,7 +4585,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r799-cvidc-cpuc-header-context.json"
     },
     {
@@ -4710,7 +4710,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r802-jclang-header-context.json"
     },
     {
@@ -5173,7 +5173,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r803-egadump-conditions.json"
     },
     {
@@ -5210,7 +5210,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r804-trace-conditions.json"
     },
     {
@@ -5222,7 +5222,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "pending_change": "r509 restore original diagnostics after NONPROD_CPU exclusion; file audit pending",
       "evidence": "s13-r805-yoda-conditions.json"
     },
@@ -5365,7 +5365,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "pending_change": "r523 excluded non-NTVDM outer branch; remaining groups pending",
       "evidence": "s13-r806-emm-conditions.json"
     },
@@ -5390,7 +5390,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r811-bios-header-contexts.json"
     },
     {
@@ -5413,7 +5413,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "partial_evidence": "s13-r653-platform-guard-lines.json",
       "evidence": "s13-r813-cga-header-contexts.json"
     },
@@ -5483,7 +5483,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r815-config-header-context.json"
     },
     {
@@ -5507,7 +5507,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r820-cpuvid-header-contexts.json"
     },
     {
@@ -5531,7 +5531,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "partial_evidence": "s13-r653-platform-guard-lines.json",
       "evidence": "s13-r824-dma-header-contexts.json"
     },
@@ -5568,7 +5568,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r827-egacpu-header-contexts.json"
     },
     {
@@ -5580,7 +5580,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r829-egagraph-header-context.json"
     },
     {
@@ -5629,7 +5629,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r833-egavideo-header-contexts.json"
     },
     {
@@ -5641,7 +5641,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "partial_evidence": "s13-r666-guard-line-audit.json",
       "evidence": "s13-r835-emm-header-contexts.json"
     },
@@ -5654,7 +5654,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r837-equip-header-contexts.json"
     },
     {
@@ -5701,7 +5701,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "partial_evidence": "s13-r633-floppy-ansi-lines.json",
       "evidence": "s13-r839-floppy-header-contexts.json"
     },
@@ -5760,7 +5760,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r841-gfi-header-context.json"
     },
     {
@@ -5783,7 +5783,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "partial_evidence": "s13-r656-guard-line-audit.json",
       "evidence": "s13-r843-gfxupd-header-contexts.json"
     },
@@ -5820,7 +5820,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r846-gmi-header-contexts.json"
     },
     {
@@ -5832,7 +5832,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "partial_evidence": "s13-r656-guard-line-audit.json",
       "evidence": "s13-r848-gvi-header-contexts.json"
     },
@@ -5857,7 +5857,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "partial_evidence": "s13-r656-guard-line-audit.json",
       "evidence": "s13-r850-host-header-contexts.json"
     },
@@ -5882,7 +5882,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "partial_evidence": "s13-r666-guard-line-audit.json",
       "evidence": "s13-r852-hostcom-header-context.json"
     },
@@ -5906,7 +5906,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "partial_evidence": "s13-r656-guard-line-audit.json",
       "evidence": "s13-r854-hostlpt-header-context.json"
     },
@@ -5956,7 +5956,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r858-ica-header-contexts.json"
     },
     {
@@ -5981,7 +5981,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r860-ios-header-contexts.json"
     },
     {
@@ -5993,7 +5993,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r863-keyba-header-contexts.json"
     },
     {
@@ -6039,7 +6039,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "partial_evidence": "s13-r658-guard-line-audit.json",
       "evidence": "s13-r866-mouseio-header-contexts.json"
     },
@@ -6064,7 +6064,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "partial_evidence": "s13-r658-guard-line-audit.json",
       "evidence": "s13-r868-printer-header-context.json"
     },
@@ -6115,7 +6115,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r870-rs232-header-context.json"
     },
     {
@@ -6172,7 +6172,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r875-suplib-header-context.json"
     },
     {
@@ -6195,7 +6195,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "partial_evidence": "s13-r658-guard-line-audit.json",
       "evidence": "s13-r877-timer-header-contexts.json"
     },
@@ -6243,7 +6243,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r879-trace-header-context.json"
     },
     {
@@ -6255,7 +6255,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r881-umb-header-context.json"
     },
     {
@@ -6279,7 +6279,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r883-vgaports-header-context.json"
     },
     {
@@ -6291,7 +6291,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r885-video-header-contexts.json"
     },
     {
@@ -6314,7 +6314,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r887-xt-header-context.json"
     },
     {
@@ -6378,7 +6378,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r889-mouse-source-contexts.json"
     },
     {
@@ -6416,7 +6416,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r890-ios-source-contexts.json"
     },
     {
@@ -6428,7 +6428,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r891-main-source-contexts.json"
     },
     {
@@ -6465,7 +6465,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r892-xt-source-contexts.json"
     },
     {
@@ -6514,7 +6514,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r893-ica-source-contexts.json"
     },
     {
@@ -6574,7 +6574,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "completed-original-witnessed-depth1",
+      "status": "partial-per-file-outer-reviewed",
       "evidence": "s13-r895-timer-source-contexts.json"
     },
     {
@@ -6650,7 +6650,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r897-egaports-source-context.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
@@ -6713,7 +6714,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r898-ordered-positive-witnesses.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
@@ -6724,18 +6726,20 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r898-ordered-positive-witnesses.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gfx_updt.c",
-      "current_sha256": "4aa83fb78b9b708dc63f4ae875a8457fca52cb46855bc16bb115d38961625fcd",
+      "current_sha256": "224847a5029e289f65effb1ae081402086eead5f26ea3a0a3cc7ffdbf2e7f591",
       "original_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r899-gfx-source-context.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/gvi.c",
@@ -6772,7 +6776,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r900-v7-video-context.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
@@ -6783,7 +6788,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r901-ordered-positive-witnesses.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
@@ -6794,7 +6800,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r901-ordered-positive-witnesses.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/vga_vide.c",
@@ -6818,7 +6825,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-contexts-unverified",
+      "evidence": "s13-r902-video-source-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video_io.c",
@@ -6842,7 +6850,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r903-cfpu-structure-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/inc/error.h",
@@ -6853,7 +6862,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r904-ordered-positive-witnesses.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/inc/host_bop.h",
@@ -6869,24 +6879,26 @@
     {
       "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\host_cpu.h",
-      "current_sha256": "e7dc11cd3a445e2f7e37df01650c055ec62a48d384a823bf08c6c599301f3c89",
+      "current_sha256": "0fa01faf650135422c848f9950123294856201a610fa9f5f26f2a54acd1c13f0",
       "original_sha256": "e79dd6aa79d24e37ad8390c8879abf3436674ee101037f0e09415148a938ac95",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r905-hostcpu-context.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\host_def.h",
-      "current_sha256": "3fea080b7dbdbbc8d95f882f600e0f153f907e51cfe7754a56078e40b4c84ec1",
+      "current_sha256": "867a81ef546b937a0c86269dcb88762a4b8ea756b4696a9692e406575aca1afc",
       "original_sha256": "480c35aa09b40d75d82fe0e1fe3e6cb0f981e573549ea2e193e8a62be4816d10",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r907-hostdef-context.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/inc/host_emm.h",
@@ -6943,7 +6955,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r908-ordered-positive-witnesses.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/inc/host_qev.h",
@@ -6965,8 +6978,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r658-guard-line-audit.json"
+      "status": "partial-per-file-outer-reviewed",
+      "partial_evidence": "s13-r658-guard-line-audit.json",
+      "evidence": "s13-r908-ordered-positive-witnesses.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/inc/host_trc.h",
@@ -6999,7 +7013,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r908-ordered-positive-witnesses.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/inc/nt_cga.h",
@@ -7032,7 +7047,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r908-ordered-positive-witnesses.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/inc/nt_det.h",
@@ -7088,7 +7104,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r909-ordered-context.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/inc/nt_extra.h",
@@ -7099,7 +7116,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r910-ordered-positive-witnesses.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/inc/nt_fdisk.h",
@@ -7128,14 +7146,15 @@
     {
       "path": "src/mvdm-host/softpc.new/host/inc/nt_graph.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_graph.h",
-      "current_sha256": "65d785e730c06716283d696baa5c287202ce72be4cf13718deab454c9709e9d7",
+      "current_sha256": "2fceeae0ba9896df29af6df7d799a8da6bc8f4938d0078608534b6a5ca511ee3",
       "original_sha256": "f23f9cf86756ca99f3204d505baa1d1197446851065f1849814647f5c4cdc6f3",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r642-guard-line-audit.json"
+      "status": "partial-per-file-outer-reviewed",
+      "partial_evidence": "s13-r642-guard-line-audit.json",
+      "evidence": "s13-r911-ordered-context.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/inc/nt_inthk.h",
@@ -7146,7 +7165,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r912-ordered-positive-witnesses.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/inc/nt_mem.h",
@@ -7253,13 +7273,14 @@
     {
       "path": "src/mvdm-host/softpc.new/host/inc/sim32.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\sim32.h",
-      "current_sha256": "c9061de1c26ba34b9de2abd52831f72d8717c33c1dbc9860733b77d79bb9a680",
+      "current_sha256": "3794ab4aefd108f0f10a47a5fb0ffb1b3723f1e40a2a5f5cd684b3ee178a978a",
       "original_sha256": "eeb9a654e53b5934850a6e7fa86fc67b1576ac9f1b9262d87acb5eed42c2fd98",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r913-ordered-context.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/config.c",
@@ -7270,7 +7291,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-contexts-unverified",
+      "evidence": "s13-r915-config-structure-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
@@ -7357,7 +7379,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r917-ntcpu-structure-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
@@ -7394,7 +7417,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r918-ordered-positive-witnesses.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
@@ -7417,8 +7441,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r663-guard-line-audit.json"
+      "status": "partial-per-file-outer-reviewed",
+      "partial_evidence": "s13-r663-guard-line-audit.json",
+      "evidence": "s13-r919-ordered-context.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
@@ -7429,7 +7454,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r921-ntevent-structure-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_fdisk.c",
@@ -7451,7 +7477,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r923-ntfulsc-structure-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
@@ -7462,7 +7489,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r925-ntgraph-structure-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_hosts.c",
@@ -7498,7 +7526,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r926-ordered-positive-witnesses.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_keycd.c",
@@ -7534,8 +7563,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r664-guard-line-audit.json"
+      "status": "partial-per-file-outer-reviewed",
+      "partial_evidence": "s13-r664-guard-line-audit.json",
+      "evidence": "s13-r926-ordered-positive-witnesses.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
@@ -7559,7 +7589,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r927-ntmsscs-structure-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_munge.c",
@@ -7613,14 +7644,15 @@
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_reset.c",
-      "current_sha256": "6206c0fb26a0c2660a7839ed69178b044b5aea1246644a11eb2ba4bc285ec600",
+      "current_sha256": "224bb7b8b8d508ed52277f710fa14e133b8e3cac4c0ce7778ea6c28d7c9b20b7",
       "original_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "pending_change": "r504 exclude unselected X86GFX idle branch; file audit pending"
+      "status": "partial-per-file-outer-reviewed",
+      "pending_change": "r504 exclude unselected X86GFX idle branch; file audit pending",
+      "evidence": "s13-r929-ntreset-context.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_rez.c",
@@ -7798,20 +7830,22 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "pending_change": "r533 exclude non-CPU40 SIM32 descriptor fallback; file audit pending"
+      "status": "partial-per-file-outer-reviewed",
+      "pending_change": "r533 exclude non-CPU40 SIM32 descriptor fallback; file audit pending",
+      "evidence": "s13-r930-ordered-positive-witnesses.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\stubs.c",
-      "current_sha256": "f992c727a8414c55994cdc1fb2ccac2b01ace24ca4a385a6848477afb8bee164",
+      "current_sha256": "fb62e6f76fcd75529cb39ffef61cda36e7d2dbf1d3ee91ce28c160289f70f460",
       "original_sha256": "c1821a3738bbee78293a47262cb8df14e68043cfd6b4092b7fa56bdb01c6d991",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "pending_change": "r495 original diagnostic anchors; broader per-file conditional audit pending"
+      "status": "partial-per-file-outer-reviewed",
+      "pending_change": "r495 original diagnostic anchors; broader per-file conditional audit pending",
+      "evidence": "s13-r931-ordered-context.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/x86_emm.c",
@@ -7828,13 +7862,14 @@
     {
       "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\obj.vdm\\ntvdm.c",
-      "current_sha256": "ed81a07c7bbcafa43554edecb351828af7c988c047e46fbd9203313f58b30155",
+      "current_sha256": "b4062bb577ca79ae7c66e445fb80ae1bdba5021386d7b8b24688e503659ce915",
       "original_sha256": "693a169cf1e91435c326ee05a17c928e85af10982c2c3bb95a5631ae76415a0a",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r933-ordered-context.json"
     },
     {
       "path": "src/mvdm-host/suballoc/suballcp.h",
@@ -8153,7 +8188,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r934-ordered-positive-witnesses.json"
     },
     {
       "path": "src/mvdm-host/wow32/mapembed.c",
@@ -8185,7 +8221,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r935-precomp-structure-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/waccel.c",
@@ -8759,7 +8796,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r937-wkman-structure-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wkman.h",
@@ -9150,7 +9188,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r939-wow32-structure-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.h",
@@ -9160,8 +9199,9 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review",
-      "pending_change": "r511/r512 exclude DEBUG and native _X86_ alternatives; other groups pending"
+      "status": "partial-per-file-outer-reviewed",
+      "pending_change": "r511/r512 exclude DEBUG and native _X86_ alternatives; other groups pending",
+      "evidence": "s13-r940-ordered-positive-witnesses.json"
     },
     {
       "path": "src/mvdm-host/wow32/wow32fax.c",
@@ -9479,8 +9519,9 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r661-guard-line-audit.json"
+      "status": "partial-per-file-outer-reviewed",
+      "partial_evidence": "s13-r661-guard-line-audit.json",
+      "evidence": "s13-r940-ordered-positive-witnesses.json"
     },
     {
       "path": "src/mvdm-host/wow32/wsubcls.c",
@@ -9572,7 +9613,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r941-wuclass-structure-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wuclass.h",
@@ -9909,7 +9951,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r943-wuwind-structure-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wuwind.h",
@@ -9946,13 +9989,14 @@
     {
       "path": "src/mvdm-host/xms.486/xms.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\xms.486\\xms.h",
-      "current_sha256": "47bcd5eddff214469285066b96f233916d1d8bfcbe3191f303b1c11a1e263ace",
+      "current_sha256": "a898950891095108c9cc822e5f6fd176fd4b7c5dd5a88e411d0a25fe0ca212d5",
       "original_sha256": "0fad52bf1e4c6db87bdc77cf9ec2f35540da2fc4972d2b32e32d57a46776a9fc",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r945-ordered-context.json"
     },
     {
       "path": "src/mvdm-host/xms.486/xmsa20.c",
@@ -10000,7 +10044,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r947-xmsmemr-structure-review.json"
     },
     {
       "path": "src/mvdm-host/xms.486/xmsmisc.c",
@@ -10044,7 +10089,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r949-probe-context.json"
     },
     {
       "path": "src/non-mvdm/base/ntos/rtl/environ.c",
@@ -10114,7 +10160,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r951-vdm-structure-review.json"
     },
     {
       "path": "src/non-mvdm/base/win32/inc/base.h",
@@ -10129,8 +10176,9 @@
         "build\\.ninja\\msvc-x64-release\\worker\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r648-mixed-debug-guards.json"
+      "status": "partial-per-file-outer-reviewed",
+      "partial_evidence": "s13-r648-mixed-debug-guards.json",
+      "evidence": "s13-r953-ordered-context.json"
     },
     {
       "path": "src/non-mvdm/base/win32/inc/basemsg.h",
@@ -10176,7 +10224,8 @@
         "build\\.ninja\\msvc-x64-release\\worker\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r955-basesrv-local-context.json"
     },
     {
       "path": "src/non-mvdm/base/win32/server/srvvdm.c",
@@ -10254,13 +10303,14 @@
     {
       "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
       "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\netlib\\memalloc.c",
-      "current_sha256": "03f8862cb4a03ad83105f137ee8b6639ffa062f0670a98eb0e921e89add8f0f4",
+      "current_sha256": "fff9cbadf2da6d4fd0ecfcc1fc850a2cd52a6f9862b62a53d3486631f56dd186",
       "original_sha256": "45b70c02c0aeb79f674e68a475669d45e2e5e6fab21f20e9bfcfe229d8958525",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r957-ordered-context.json"
     },
     {
       "path": "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
@@ -10284,7 +10334,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r959-packstr-local-context.json"
     },
     {
       "path": "src/non-mvdm/ds/netapi/netlib/svcinfo.c",
@@ -10429,8 +10480,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "pending_change": "r528 original UNICODE conditional diagnostics; final audit and build pending"
+      "status": "partial-per-file-outer-reviewed",
+      "pending_change": "r528 original UNICODE conditional diagnostics; final audit and build pending",
+      "evidence": "s13-r961-ordered-context.json"
     },
     {
       "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
@@ -10562,8 +10614,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review",
-      "pending_change": "r529 exclude ANSI xactsrv conversion branch; build pending"
+      "status": "partial-per-file-outer-reviewed",
+      "pending_change": "r529 exclude ANSI xactsrv conversion branch; build pending",
+      "evidence": "s13-r962-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/private/inc/dlcio.h",
@@ -10599,7 +10652,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r962-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/ddk/inc/ntdddisk.h",
@@ -10610,7 +10664,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-contexts-unverified",
+      "evidence": "s13-r964-ntdddisk-context-review.json"
     },
     {
       "path": "src/non-mvdm/public/ddk/inc/ntdddlc.h",
@@ -10633,7 +10688,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r965-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/ddk/inc/ntddser.h",
@@ -10644,7 +10700,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r965-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
@@ -10655,7 +10712,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r965-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/internal/base/inc/align.h",
@@ -10666,7 +10724,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r965-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/internal/base/inc/conroute.h",
@@ -10692,7 +10751,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r965-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/internal/base/inc/nettypes.h",
@@ -10727,7 +10787,8 @@
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r965-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/internal/base/inc/packon.h",
@@ -10740,7 +10801,8 @@
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r965-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/internal/base/inc/smbgtpt.h",
@@ -10763,7 +10825,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r965-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/internal/base/inc/smbtypes.h",
@@ -10786,7 +10849,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r965-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
@@ -10798,9 +10862,10 @@
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review",
+      "status": "partial-per-file-outer-reviewed",
       "pending_change": "r495 original diagnostic anchors; broader per-file conditional audit pending",
-      "partial_evidence": "s13-r648-mixed-debug-guards.json"
+      "partial_evidence": "s13-r648-mixed-debug-guards.json",
+      "evidence": "s13-r965-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/internal/base/inc/vdmapi.h",
@@ -10816,7 +10881,8 @@
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r966-vdmapi-local-context.json"
     },
     {
       "path": "src/non-mvdm/public/internal/base/inc/winss.h",
@@ -10869,7 +10935,8 @@
         "build\\.ninja\\msvc-x64-release\\worker\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r967-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/internal/ds/inc/debuglib.h",
@@ -10880,8 +10947,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r648-mixed-debug-guards.json"
+      "status": "partial-per-file-outer-reviewed",
+      "partial_evidence": "s13-r648-mixed-debug-guards.json",
+      "evidence": "s13-r967-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/internal/ds/inc/netdebug.h",
@@ -10892,9 +10960,10 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review",
+      "status": "partial-per-file-outer-reviewed",
       "pending_change": "r524/r525 exclude network debug hexdump and visibility branches; other groups pending",
-      "partial_evidence": "s13-r662-guard-line-audit.json"
+      "partial_evidence": "s13-r662-guard-line-audit.json",
+      "evidence": "s13-r967-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
@@ -10905,8 +10974,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r662-guard-line-audit.json"
+      "status": "partial-per-file-outer-reviewed",
+      "partial_evidence": "s13-r662-guard-line-audit.json",
+      "evidence": "s13-r967-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/internal/ds/inc/netlibnt.h",
@@ -10917,7 +10987,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r967-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/internal/ds/inc/prefix.h",
@@ -10939,7 +11010,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r967-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/internal/ds/inc/rapdebug.h",
@@ -11027,7 +11099,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r967-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/internal/ds/inc/xsprocs.h",
@@ -11049,7 +11122,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r967-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/internal/net/inc/tstring.h",
@@ -11060,7 +11134,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r967-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/internal/shell/inc/wowcmndg.h",
@@ -11091,8 +11166,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r662-guard-line-audit.json"
+      "status": "partial-per-file-outer-reviewed",
+      "partial_evidence": "s13-r662-guard-line-audit.json",
+      "evidence": "s13-r967-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/internal/windows/inc/winconp.h",
@@ -11103,7 +11179,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r967-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/internal/windows/inc/winddi.h",
@@ -11113,7 +11190,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r967-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/internal/windows/inc/wingdip.h",
@@ -11124,7 +11202,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r967-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/internal/windows/inc/wowgdip.h",
@@ -11147,7 +11226,8 @@
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r967-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/sdk/inc/devioctl.h",
@@ -11178,7 +11258,8 @@
         "build\\.ninja\\msvc-x86-redir-contract\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r967-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/sdk/inc/nt_vdd.h",
@@ -11231,7 +11312,8 @@
         "build\\.ninja\\msvc-x64-release\\worker\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r967-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/sdk/inc/ntdbg.h",
@@ -11242,7 +11324,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-contexts-unverified",
+      "evidence": "s13-r969-ntdbg-context-review.json"
     },
     {
       "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
@@ -11254,7 +11337,8 @@
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-contexts-unverified",
+      "evidence": "s13-r972-ntexapi-context-review.json"
     },
     {
       "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
@@ -11270,7 +11354,8 @@
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r973-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
@@ -11289,7 +11374,8 @@
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r973-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
@@ -11299,7 +11385,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-contexts-unverified",
+      "evidence": "s13-r975-ntregapi-context-review.json"
     },
     {
       "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
@@ -11318,7 +11405,8 @@
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-contexts-unverified",
+      "evidence": "s13-r978-ntrtl-context-review.json"
     },
     {
       "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
@@ -11359,7 +11447,8 @@
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r979-ordered-positive-witnesses.json"
     },
     {
       "path": "src/non-mvdm/public/sdk/inc/wownt32.h",
@@ -11391,7 +11480,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r980-cldib-local-context.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
@@ -11413,7 +11503,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r982-client-structure-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
@@ -11435,7 +11526,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r984-clmsg-structure-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
@@ -11445,7 +11537,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r986-clres-structure-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
@@ -11490,7 +11583,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r988-dlgbegin-context.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
@@ -11513,7 +11607,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r990-dlgmgr-context.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
@@ -11524,7 +11619,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r992-dlgmgr2-structure-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
@@ -11667,7 +11763,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-contexts-unverified",
+      "evidence": "s13-r995-globals-context-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/handles.c",
@@ -11780,7 +11877,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r997-mngrayc-structure-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
@@ -11791,7 +11889,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r999-ntstubs-structure-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
@@ -11801,7 +11900,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r1001-rtlinit-structure-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
@@ -11812,7 +11912,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r1003-usercli-structure-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
@@ -11823,7 +11924,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r1005-winmgrc-local-context.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
@@ -11834,7 +11936,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r1007-wow-structure-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
@@ -11844,7 +11947,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r1009-ntcftxt-structure-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
@@ -11855,7 +11959,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-contexts-unverified",
+      "evidence": "s13-r1011-ntsend-context-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
@@ -11868,7 +11973,8 @@
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r1013-user-structure-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
@@ -11878,7 +11984,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r1015-class-local-context.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
@@ -11900,7 +12007,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r1017-exitwin-context-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
@@ -11911,7 +12019,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r1019-getset-structure-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
@@ -11921,7 +12030,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-contexts-unverified",
+      "evidence": "s13-r1021-handtabl-context-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
@@ -11932,7 +12042,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r1023-inctlpan-structure-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
@@ -11942,7 +12053,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-contexts-unverified",
+      "evidence": "s13-r1025-input-context-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/miscutil.c",
@@ -11963,7 +12075,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-contexts-unverified",
+      "evidence": "s13-r1027-kntstubs-context-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
@@ -11984,7 +12097,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r1029-queue-context-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/random.c",
@@ -12006,7 +12120,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r1031-server-structure-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/taskman.c",
@@ -12026,7 +12141,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-contexts-unverified",
+      "evidence": "s13-r1034-userk-context-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
@@ -12037,7 +12153,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-contexts-unverified",
+      "evidence": "s13-r1036-chartran-context-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
@@ -12048,7 +12165,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r1038-draw-structure-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
@@ -12059,7 +12177,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r1040-drawtext-structure-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
@@ -12070,7 +12189,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r1042-rtlgetset-structure-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/help.c",
@@ -12125,7 +12245,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-contexts-unverified",
+      "evidence": "s13-r1045-userrtl-context-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
@@ -12136,7 +12257,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "partial-per-file-outer-reviewed",
+      "evidence": "s13-r1047-winmgr-local-context.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
@@ -12147,7 +12269,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r1049-rtlwow-structure-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/server/exports.c",

@@ -1,0 +1,64 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\egawrtm0.c",
+      "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+      "current_sha256": "4bffdfa1a595285dd30b6004071ff743aac622054a505f1996dc2efb3536a305",
+      "first_level_count": 1,
+      "prior_positive_records": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+          "line": "4",
+          "directive": "if",
+          "expression": "!(defined(NTVDM) && defined(MONITOR))",
+          "chain_start": "4",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "c9d9a5e123f4cc05aa7fd40fb3b0b4d3b0acd9f548f0bd94d75fe5ec1677f17b"
+        }
+      ],
+      "review": "Every original/current first-level directive matches and has a previously selected product observation at the same directive location; no preceding local definition/undefinition of its expression macros. Retained unchanged.",
+      "limitations": "Prior record may have a different source hash; unchanged condition location and lack of preceding local macro mutation were verified. Nested conditions are not audited here."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\egwrtm12.c",
+      "original_sha256": "826aa1a6f685f7dc0d8b4362f3eb83899697d8a6e2a555739ff61e2388d254a1",
+      "current_sha256": "f90a97e3ef559d1cc1a7c587d1cd298bfd8f746aa081bfc0c3d3286cc47e2786",
+      "first_level_count": 1,
+      "prior_positive_records": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+          "line": "4",
+          "directive": "if",
+          "expression": "!defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX) )",
+          "chain_start": "4",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "fa276b2a3769431cd3fd7adee43e296bdd96eaf6a539db6a5490fe7dacbd5c23"
+        }
+      ],
+      "review": "Every original/current first-level directive matches and has a previously selected product observation at the same directive location; no preceding local definition/undefinition of its expression macros. Retained unchanged.",
+      "limitations": "Prior record may have a different source hash; unchanged condition location and lack of preceding local macro mutation were verified. Nested conditions are not audited here."
+    }
+  ],
+  "next_depth_parents": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "parent_line": 4,
+      "parent_kind": "if",
+      "parent_expression": "!(defined(NTVDM) && defined(MONITOR))",
+      "child_group_count": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "parent_line": 4,
+      "parent_kind": "if",
+      "parent_expression": "!defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX) )",
+      "child_group_count": 1
+    }
+  ]
+}

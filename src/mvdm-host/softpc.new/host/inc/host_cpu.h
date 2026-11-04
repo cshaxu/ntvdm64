@@ -14,6 +14,7 @@
 
 /* SccsID[]="@(#)host_cpu.h     1.22 4/15/91 Copyright Insignia Solutions Ltd."; */
 #ifdef CPU_30_STYLE
+#line 18
 #error Excluded original conditional branch
 #else /* CPU_30_STYLE */
 #line 113

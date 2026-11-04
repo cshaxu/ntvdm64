@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\mngrayc.c",
+  "original_sha256": "171ef0b7cd668cf51db86d9ae2fea4269cc002f0aba17033bf968d84c10f0f3d",
+  "current_sha256": "0c6f1f6cbb4c28b1d44071d44f7cbdef00135d067d1a54afcf7d8f5cc53151cc",
+  "review": "Current first-level arms 7, original 2 and prior records 3.",
+  "limitations": "Local/original mapping requires contextual review; no code changed."
+}

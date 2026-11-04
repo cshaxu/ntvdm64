@@ -68,9 +68,8 @@ Revision History:
 //
 
 #ifdef UNALIGNED_VDM_POINTERS
-typedef BYTE UNALIGNED * ULPBYTE;
-typedef WORD UNALIGNED * ULPWORD;
-typedef DWORD UNALIGNED * ULPDWORD;
+#line 68
+#error Excluded unsupported UNALIGNED_VDM_POINTERS configuration
 #else
 typedef LPBYTE ULPBYTE;
 typedef LPWORD ULPWORD;
@@ -156,10 +155,12 @@ typedef LPDWORD ULPDWORD;
 // UNALIGNED pointers then the RISC processor can handle non-aligned data
 //
 #ifdef i386
-#define READ_WORD(addr)                 (*((LPWORD)(addr)))
+#line 156
+#error Excluded unsupported i386 configuration
 #else
 #ifdef UNALIGNED_VDM_POINTERS
-#define READ_WORD(addr)                 (*((ULPWORD)(addr)))
+#line 159
+#error Excluded unsupported UNALIGNED_VDM_POINTERS configuration
 #else
 #define READ_WORD(addr)                 (((WORD)READ_BYTE(addr)) | (((WORD)READ_BYTE((LPBYTE)(addr)+1)) << 8))
 #endif  // UNALIGNED_VDM_POINTERS
@@ -172,10 +173,12 @@ typedef LPDWORD ULPDWORD;
 // UNALIGNED pointers then the RISC processor can handle non-aligned data
 //
 #ifdef i386
-#define READ_DWORD(addr)                (*((LPDWORD)(addr)))
+#line 172
+#error Excluded unsupported i386 configuration
 #else
 #ifdef UNALIGNED_VDM_POINTERS
-#define READ_DWORD(addr)                (*((ULPDWORD)(addr)))
+#line 175
+#error Excluded unsupported UNALIGNED_VDM_POINTERS configuration
 #else
 #define READ_DWORD(addr)                (((DWORD)READ_WORD(addr)) | (((DWORD)READ_WORD((LPWORD)(addr)+1)) << 16))
 #endif  // UNALIGNED_VDM_POINTERS
@@ -194,10 +197,12 @@ typedef LPDWORD ULPDWORD;
 // then the MIPS (&other RISCs) can generate code to handle this situation
 //
 #ifdef i386
-#define WRITE_WORD(addr, value)         (*((LPWORD)(addr)) = (WORD)(value))
+#line 194
+#error Excluded unsupported i386 configuration
 #else
 #ifdef UNALIGNED_VDM_POINTERS
-#define WRITE_WORD(addr, value)         (*((ULPWORD)(addr)) = (WORD)(value))
+#line 197
+#error Excluded unsupported UNALIGNED_VDM_POINTERS configuration
 #else
 #define WRITE_WORD(addr, value) \
             {\
@@ -214,10 +219,12 @@ typedef LPDWORD ULPDWORD;
 // then the MIPS (&other RISCs) can generate code to handle this situation
 //
 #ifdef i386
-#define WRITE_DWORD(addr, value)        (*((LPDWORD)(addr)) = (DWORD)(value))
+#line 214
+#error Excluded unsupported i386 configuration
 #else
 #ifdef UNALIGNED_VDM_POINTERS
-#define WRITE_DWORD(addr, value)        (*((ULPDWORD)(addr)) = (DWORD)(value))
+#line 217
+#error Excluded unsupported UNALIGNED_VDM_POINTERS configuration
 #else
 #define WRITE_DWORD(addr, value) \
             { \
@@ -404,15 +411,8 @@ typedef struct _VR_ASYNC_DISPOSITION {
 //
 
 #ifdef i386
-
-__inline LPVOID _inlinePointerFromWords(WORD seg, WORD off) {
-
-    WORD _seg = seg;
-    WORD _off = off;
-
-    return (_seg + _off) ? (LPVOID)GetVDMAddr(_seg, _off) : 0;
-}
-
+#line 404
+#error Excluded unsupported i386 configuration
 #else
 LPVOID _inlinePointerFromWords(WORD seg, WORD off);
 #endif
@@ -426,15 +426,8 @@ LPVOID _inlinePointerFromWords(WORD seg, WORD off);
 #define CONVERT_ADDRESS(seg, off, size, mode) _inlineConvertAddress((WORD)(seg), (WORD)(off), (WORD)(size), (BOOLEAN)(mode))
 
 #ifdef i386
-
-__inline LPVOID _inlineConvertAddress(WORD Seg, WORD Off, WORD Size, BOOLEAN Pm) {
-
-    WORD _seg = Seg;
-    WORD _off = Off;
-
-    return (_seg | _off) ? Sim32GetVDMPointer(((DWORD)_seg << 16) + _off, Size, Pm) : 0;
-}
-
+#line 426
+#error Excluded unsupported i386 configuration
 #else
 extern LPVOID _inlineConvertAddress(WORD Seg, WORD Off, WORD Size, BOOLEAN Pm);
 #endif

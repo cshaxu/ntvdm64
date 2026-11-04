@@ -1,0 +1,37 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_inthk.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_inthk.h",
+      "original_sha256": "463f0daebc4d196dc1e108289cf10a8c3e3580efc1cf96ca880af30acbc4e632",
+      "current_sha256": "73c737cc70121d7b76f09ce8f5c85c14144f864a8d78393f6e0d7b15b80fe4e5",
+      "prior_positive_records": [
+        {
+          "path": "src/mvdm-host/softpc.new/host/inc/nt_inthk.h",
+          "line": "27",
+          "directive": "ifdef",
+          "expression": "CCPU",
+          "chain_start": "27",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "73c737cc70121d7b76f09ce8f5c85c14144f864a8d78393f6e0d7b15b80fe4e5"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/inc/nt_inthk.h",
+          "line": "35",
+          "directive": "ifdef",
+          "expression": "CCPU",
+          "chain_start": "35",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "73c737cc70121d7b76f09ce8f5c85c14144f864a8d78393f6e0d7b15b80fe4e5"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    }
+  ],
+  "next_depth_parents": []
+}

@@ -91,6 +91,7 @@ GLOBALS		  :	describe what exported data objects are
 #endif /* EGG */
 
 #ifdef GORE
+#line 94
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #endif /* GORE */
 
@@ -120,17 +121,14 @@ int terminal_type = TERMINAL_TYPE_DEFAULT;
 
 /* [5.1.1 #DEFINES]							*/
 #ifdef SEGMENTATION
+#line 116
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
 
 #if	defined(PROD) || (!defined(EGG))
 #define	init_dirty_recs()		dirty_next = 0
 #else
+#line 127
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 
@@ -148,6 +146,7 @@ int terminal_type = TERMINAL_TYPE_DEFAULT;
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 #else /* VGG */
+#line 157
 #error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif /* VGG */
 #line 153
@@ -159,6 +158,7 @@ int terminal_type = TERMINAL_TYPE_DEFAULT;
 #define clear_dirty()		{setVideodirty_total(0);setVideodirty_low(0x80001);setVideodirty_high(-1);}
 
 #ifdef	NO_STRING_OPERATIONS
+#line 187
 #error Unsupported excluded original configuration
 #else
 #line 163
@@ -172,6 +172,7 @@ a 4-byte boundary. This macro makes this true and reports if it wasn't. */
 #ifdef PROD
 #define ALIGN_SCREEN_START(start) (start &= ~3L)
 #else
+#line 198
 #error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register.
 #endif	/* PROD */
 

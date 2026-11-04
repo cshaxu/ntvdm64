@@ -1,0 +1,304 @@
+{
+  "files": [
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddkbd.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\ddk\\inc\\ntddkbd.h",
+      "original_sha256": "f3bf258135d2853ebb77d6bc81e12499528c5b7efe1f58ead6f5c1315c5bf5c1",
+      "current_sha256": "f3bf258135d2853ebb77d6bc81e12499528c5b7efe1f58ead6f5c1315c5bf5c1",
+      "prior_positive_records": [
+        {
+          "path": "src/non-mvdm/public/ddk/inc/ntddkbd.h",
+          "line": "22",
+          "directive": "ifndef",
+          "expression": "_NTDDKBD_",
+          "chain_start": "22",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "cb505a7e90d41a4145b436dde5823857256959b98ac6baa888b82ce449d77e11"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddser.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\ddk\\inc\\ntddser.h",
+      "original_sha256": "707287adc6162093ebe5dd9608b6f4e528b4b94cb0e2caa0df930ecffd4d3b46",
+      "current_sha256": "707287adc6162093ebe5dd9608b6f4e528b4b94cb0e2caa0df930ecffd4d3b46",
+      "prior_positive_records": [
+        {
+          "path": "src/non-mvdm/public/ddk/inc/ntddser.h",
+          "line": "32",
+          "directive": "ifdef",
+          "expression": "DEFINE_GUID",
+          "chain_start": "32",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "5205a926bf74673a56e0642febd9303eedae581dece06f009c0a0ebefde650f0"
+        },
+        {
+          "path": "src/non-mvdm/public/ddk/inc/ntddser.h",
+          "line": "50",
+          "directive": "ifndef",
+          "expression": "_NTDDSER_",
+          "chain_start": "50",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "5205a926bf74673a56e0642febd9303eedae581dece06f009c0a0ebefde650f0"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\ddk\\inc\\ntddvdeo.h",
+      "original_sha256": "e81160b69920ee87d603fe593916994f8448a280b2a2adfefd34c190b1b3cb78",
+      "current_sha256": "e81160b69920ee87d603fe593916994f8448a280b2a2adfefd34c190b1b3cb78",
+      "prior_positive_records": [
+        {
+          "path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+          "line": "22",
+          "directive": "ifndef",
+          "expression": "_NTDDVDEO_",
+          "chain_start": "22",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "37a5ac7a2abe2812b8749d9633942aeb751cfcdf8763e4748e46e17876f8a450"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/align.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\align.h",
+      "original_sha256": "b2922ca133bfd608bf86f33595c1dfb2b325cb31a0e83d4bfe18f0d91795e28f",
+      "current_sha256": "b2922ca133bfd608bf86f33595c1dfb2b325cb31a0e83d4bfe18f0d91795e28f",
+      "prior_positive_records": [
+        {
+          "path": "src/non-mvdm/public/internal/base/inc/align.h",
+          "line": "17",
+          "directive": "ifndef",
+          "expression": "_ALIGN_",
+          "chain_start": "17",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "2bad93351b7fe722343b8835d9ea8e5996d1ea13438be24bf2cbe94889308f34"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/debugfmt.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\debugfmt.h",
+      "original_sha256": "679c56f19ab86710f1866e90df828baf6f6ff96630f2ddddd26b35de9aff49e8",
+      "current_sha256": "679c56f19ab86710f1866e90df828baf6f6ff96630f2ddddd26b35de9aff49e8",
+      "prior_positive_records": [
+        {
+          "path": "src/non-mvdm/public/internal/base/inc/debugfmt.h",
+          "line": "33",
+          "directive": "ifndef",
+          "expression": "_DEBUGFMT_",
+          "chain_start": "33",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "027514c5455d7b54a09f706e94cf28ec5a2661abea70f961bdae17e327ce81dd"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/packoff.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\packoff.h",
+      "original_sha256": "245b295120a0096cf8cd379d84b0352fe6fb6b090e61804485badd00e772696e",
+      "current_sha256": "245b295120a0096cf8cd379d84b0352fe6fb6b090e61804485badd00e772696e",
+      "prior_positive_records": [
+        {
+          "path": "src/non-mvdm/public/internal/base/inc/packoff.h",
+          "line": "29",
+          "directive": "if",
+          "expression": "! (defined(lint) || defined(_lint))",
+          "chain_start": "29",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "dbc08b74dccbadd340074396e6e3945c0f37f6a9d9b6550e290a73d4b978327e"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/packon.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\packon.h",
+      "original_sha256": "b6d5e46dc0e41e95265f3de79ebe371f4f77aa3882c087f7a4a95ae2f03cb1a2",
+      "current_sha256": "b6d5e46dc0e41e95265f3de79ebe371f4f77aa3882c087f7a4a95ae2f03cb1a2",
+      "prior_positive_records": [
+        {
+          "path": "src/non-mvdm/public/internal/base/inc/packon.h",
+          "line": "27",
+          "directive": "if",
+          "expression": "! (defined(lint) || defined(_lint))",
+          "chain_start": "27",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "7da0a9d127623cf592a26d7e820aab131313f7a2e73183281312ac8d43690674"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbmacro.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\smbmacro.h",
+      "original_sha256": "e7a4ff096b5e2fdd0a81cd1c080e57253231664f87cb329c17a25c694282d8d1",
+      "current_sha256": "e7a4ff096b5e2fdd0a81cd1c080e57253231664f87cb329c17a25c694282d8d1",
+      "prior_positive_records": [
+        {
+          "path": "src/non-mvdm/public/internal/base/inc/smbmacro.h",
+          "line": "22",
+          "directive": "ifndef",
+          "expression": "_SMBMACRO_",
+          "chain_start": "22",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "de4b66c03110e7fde0a30e355a031bc21e939b0f9bdc199ae424b84c010955b3"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tstr.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\tstr.h",
+      "original_sha256": "dfc0a04bbeb35130d655e20521c972d43df3500efda32d7de6ddcea53be791c6",
+      "current_sha256": "dfc0a04bbeb35130d655e20521c972d43df3500efda32d7de6ddcea53be791c6",
+      "prior_positive_records": [
+        {
+          "path": "src/non-mvdm/public/internal/base/inc/tstr.h",
+          "line": "73",
+          "directive": "ifndef",
+          "expression": "_TSTR_H_INCLUDED",
+          "chain_start": "73",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "189e823c111218594156d2e135bf338158866583d6883fcc35bc37df82b4adf8"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\vdm.h",
+      "original_sha256": "c614c03a004f974c1eef37f1b29d3a8e1d7cfc33d04e7e7304befcbd6faafd18",
+      "current_sha256": "d17e3e384fc4ab9a93d520896375778f2750972a4be8299dcc96de48ddd6ebd5",
+      "prior_positive_records": [
+        {
+          "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+          "line": "21",
+          "directive": "ifndef",
+          "expression": "_VDM_H_",
+          "chain_start": "21",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "e0e35167de38227b06e6d7384043d414295c49100e30904562dc3d945ff022de"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    }
+  ],
+  "next_depth_parents": [
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddkbd.h",
+      "parent_line": 22,
+      "parent_kind": "ifndef",
+      "parent_expression": "_NTDDKBD_",
+      "child_group_count": 4
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddser.h",
+      "parent_line": 32,
+      "parent_kind": "ifdef",
+      "parent_expression": "DEFINE_GUID",
+      "child_group_count": 1
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddser.h",
+      "parent_line": 50,
+      "parent_kind": "ifndef",
+      "parent_expression": "_NTDDSER_",
+      "child_group_count": 2
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+      "parent_line": 22,
+      "parent_kind": "ifndef",
+      "parent_expression": "_NTDDVDEO_",
+      "child_group_count": 4
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/align.h",
+      "parent_line": 17,
+      "parent_kind": "ifndef",
+      "parent_expression": "_ALIGN_",
+      "child_group_count": 1
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/debugfmt.h",
+      "parent_line": 33,
+      "parent_kind": "ifndef",
+      "parent_expression": "_DEBUGFMT_",
+      "child_group_count": 1
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/packoff.h",
+      "parent_line": 29,
+      "parent_kind": "if",
+      "parent_expression": "! (defined(lint) || defined(_lint))",
+      "child_group_count": 1
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/packon.h",
+      "parent_line": 27,
+      "parent_kind": "if",
+      "parent_expression": "! (defined(lint) || defined(_lint))",
+      "child_group_count": 1
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbmacro.h",
+      "parent_line": 22,
+      "parent_kind": "ifndef",
+      "parent_expression": "_SMBMACRO_",
+      "child_group_count": 1
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tstr.h",
+      "parent_line": 73,
+      "parent_kind": "ifndef",
+      "parent_expression": "_TSTR_H_INCLUDED",
+      "child_group_count": 4
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "parent_line": 21,
+      "parent_kind": "ifndef",
+      "parent_expression": "_VDM_H_",
+      "child_group_count": 7
+    }
+  ]
+}

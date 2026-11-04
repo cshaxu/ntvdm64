@@ -116,6 +116,7 @@ typedef struct
 #define MAX_SCALE(value) ((value) << 1)
 
 #else   /* BIGWIN */
+#line 116
 #error Unsupported excluded original configuration
 #endif /* BIGWIN */
 #line 122

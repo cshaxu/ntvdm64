@@ -1,0 +1,21 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\winmgrc.c",
+  "original_sha256": "26f0174e6a0db53d942506cbdc12efbfebc34a943d780170e7bf9d95775514a4",
+  "current_sha256": "fa5b38f11ecaaa885ea92417dc9d3f50a139edbac969264e5593b3e02069652a",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+      "line": "8",
+      "directive": "ifdef",
+      "expression": "WOW_ORIGINAL_EDIT_CLIENT",
+      "chain_start": "8",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "fa5b38f11ecaaa885ea92417dc9d3f50a139edbac969264e5593b3e02069652a"
+    }
+  ],
+  "review": "Original has no top-level conditions. Local WOW_ORIGINAL_EDIT_CLIENT arm is registered OPENNT-HOST-108 and observed selected in product; retained unchanged.",
+  "limitations": "Local selection remains registered mirror difference."
+}

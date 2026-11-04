@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+  "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+  "current_sha256": "e8be318d64cbd2bd6928c0019169473132c97a70ae7fcf26cfa6e97ae4abec77",
+  "review": "Current first-level arms 9, original 11, historical records 4.",
+  "limitations": "Original structure and local patch mapping require review; no code changed."
+}

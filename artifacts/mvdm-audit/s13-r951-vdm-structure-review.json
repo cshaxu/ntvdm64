@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/base/win32/client/vdm.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\win32\\client\\vdm.c",
+  "original_sha256": "3f03d0dbb08e0163f2d9cf415daad0981e42e1b1855f6f48a3b59022b7374173",
+  "current_sha256": "ac428b7dd5601f907c98e51967c741072d24519fd28ecc180b900e56007d52c0",
+  "review": "Current first-level arms 11, original 4, older observation record 5.",
+  "limitations": "Additional local conditions and original correspondence need contextual mapping; no code changed."
+}

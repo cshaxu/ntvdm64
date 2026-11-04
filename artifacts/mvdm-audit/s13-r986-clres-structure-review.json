@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c",
+  "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
+  "current_sha256": "f973b4619123a2c31ea9f0734455f2bf4735f17e6f24aa1179c6104f36a96fd9",
+  "review": "Current first-level arms 16, original 13 and prior records 2.",
+  "limitations": "Local/original mapping requires contextual review; no code changed."
+}

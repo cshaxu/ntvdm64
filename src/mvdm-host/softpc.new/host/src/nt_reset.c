@@ -20,6 +20,7 @@
 #include "host_def.h"
 
 #ifdef X86GFX
+#line 23
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 
@@ -73,6 +74,7 @@ extern char achES[];
 #endif
 #line 71
 #ifdef MONITOR
+#line 71
 #error Excluded unsupported monitor IVT declarations
 #endif
 #line 71
@@ -110,6 +112,7 @@ host_reset()
 {
 
 #ifdef X86GFX
+#line 99
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 
@@ -125,6 +128,7 @@ host_reset()
     }
 
 #ifdef MONITOR
+#line 114
 #error Excluded original conditional branch
 #endif  /* MONITOR */
 #line 119
@@ -136,6 +140,7 @@ host_reset()
     //
     ResumeThread(ThreadInfo.HeartBeat.Handle);
 #ifdef MONITOR
+#line 133
 #error Excluded unsupported monitor ICA initialization wait
 #endif
 #line 126
@@ -144,6 +149,7 @@ host_reset()
     host_ica_unlock();
 
 #ifdef	HUNTER
+#line 139
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #else	/* ! ( HUNTER ) */
 #ifdef X86GFX
@@ -308,6 +314,7 @@ host_applClose(void)
 
   GfxCloseDown();             // ensure video section destroyed
 #ifdef X86GFX
+#line 293
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif // X86GFX
 
@@ -343,6 +350,7 @@ void host_terminate(void)
     mvdm_softpc_report_termination("host-terminate", _ReturnAddress());
 
 #ifdef HUNTER
+#line 325
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
 

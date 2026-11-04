@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\globals.h",
+  "original_sha256": "fd78200232574074f7ec68d2f5b851c27ee9d5024427310d18ebbcb048336e97",
+  "current_sha256": "f6733a61e6a517e6d0072f39803c1ea426fa880ad07a6bb19b92713c19e97344",
+  "review": "Original/current guard is _GLOBALS_; historical selected observation used OPENNT_GLOBALS_EDIT_MEMORY_SUBSET_H.",
+  "limitations": "Actual supported guard state requires confirmation; no code changed."
+}

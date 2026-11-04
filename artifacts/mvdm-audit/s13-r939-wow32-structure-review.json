@@ -1,0 +1,8 @@
+{
+  "path": "src/mvdm-host/wow32/wow32.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.c",
+  "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
+  "current_sha256": "9fc8d81ebc5953ae48666733f4c90006b9817bdcf8a4974f01fe3ce173d7ec2e",
+  "review": "Current first-level arms (46), original (42), historical record (49) differ.",
+  "limitations": "Historic contexts and local/original group correspondence require contextual mapping; no code changed."
+}

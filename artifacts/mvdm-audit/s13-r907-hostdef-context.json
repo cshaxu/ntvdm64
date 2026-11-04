@@ -1,0 +1,132 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\host_def.h",
+  "original_sha256": "480c35aa09b40d75d82fe0e1fe3e6cb0f981e573549ea2e193e8a62be4816d10",
+  "before_sha256": "3fea080b7dbdbbc8d95f882f600e0f153f907e51cfe7754a56078e40b4c84ec1",
+  "after_sha256": "867a81ef546b937a0c86269dcb88762a4b8ea756b4696a9692e406575aca1afc",
+  "prior_first_level_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "line": "29",
+      "directive": "ifndef",
+      "expression": "MONITOR",
+      "chain_start": "29",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "043f6f4f0ba00bc1c77af38a7b31f07ef8460d3ca288d755e225e2a6a29d4115"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "line": "40",
+      "directive": "ifdef",
+      "expression": "MONITOR",
+      "chain_start": "40",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "043f6f4f0ba00bc1c77af38a7b31f07ef8460d3ca288d755e225e2a6a29d4115"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "line": "42",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "40",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "043f6f4f0ba00bc1c77af38a7b31f07ef8460d3ca288d755e225e2a6a29d4115"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "line": "79",
+      "directive": "ifndef",
+      "expression": "CCPU",
+      "chain_start": "79",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "043f6f4f0ba00bc1c77af38a7b31f07ef8460d3ca288d755e225e2a6a29d4115"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "line": "102",
+      "directive": "ifndef",
+      "expression": "EGATEST",
+      "chain_start": "102",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "043f6f4f0ba00bc1c77af38a7b31f07ef8460d3ca288d755e225e2a6a29d4115"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "line": "111",
+      "directive": "ifndef",
+      "expression": "NUM_PARALLEL_PORTS",
+      "chain_start": "111",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "043f6f4f0ba00bc1c77af38a7b31f07ef8460d3ca288d755e225e2a6a29d4115"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "line": "115",
+      "directive": "ifndef",
+      "expression": "NUM_SERIAL_PORTS",
+      "chain_start": "115",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "043f6f4f0ba00bc1c77af38a7b31f07ef8460d3ca288d755e225e2a6a29d4115"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "line": "142",
+      "directive": "ifdef",
+      "expression": "HUNTER",
+      "chain_start": "142",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "043f6f4f0ba00bc1c77af38a7b31f07ef8460d3ca288d755e225e2a6a29d4115"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "line": "160",
+      "directive": "if",
+      "expression": "!defined(MONITOR) && !defined(PROD)",
+      "chain_start": "160",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "043f6f4f0ba00bc1c77af38a7b31f07ef8460d3ca288d755e225e2a6a29d4115"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "line": "236",
+      "directive": "ifdef",
+      "expression": "i386",
+      "chain_start": "236",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "043f6f4f0ba00bc1c77af38a7b31f07ef8460d3ca288d755e225e2a6a29d4115"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "line": "238",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "236",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "043f6f4f0ba00bc1c77af38a7b31f07ef8460d3ca288d755e225e2a6a29d4115"
+    }
+  ],
+  "review": "Original/current first-level arms align. Previously selected arms retained; others were already #error and line anchors normalized. No newly excluded code.",
+  "limitations": "Nested branches deferred; old selection hash may differ; no new exclusion inferred."
+}

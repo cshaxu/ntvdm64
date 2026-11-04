@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\client.c",
+  "original_sha256": "787eda33785a87ce9e71202c97b5913e2857f7106fed5bb97103049b1d5e3472",
+  "current_sha256": "36e250a159f095037fc69404d9a54d917b8bd26e4f26ba28d1f9cebc5287a4ce",
+  "review": "Current first-level arms 9, original 4 and prior records 5.",
+  "limitations": "Local/original mapping requires contextual review; no code changed."
+}

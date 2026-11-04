@@ -1,0 +1,65 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgbegin.c",
+  "original_sha256": "c3df77a2987e97df8872c3dab8f6e7c10a08850c5ebcb439c0ec1dc88b0cdc44",
+  "current_sha256": "2010ed20ec5d8e7de16b669ac79323e243b8288cb7dec4d24a0e74b730a2de51",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "line": "290",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "chain_start": "290",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "b3752244f22acac4aee67409cb1b1d2f568c1c931701135296b3160077b53ef4"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "line": "571",
+      "directive": "ifdef",
+      "expression": "WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+      "chain_start": "571",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "b3752244f22acac4aee67409cb1b1d2f568c1c931701135296b3160077b53ef4"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "line": "617",
+      "directive": "ifdef",
+      "expression": "WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+      "chain_start": "617",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "b3752244f22acac4aee67409cb1b1d2f568c1c931701135296b3160077b53ef4"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "line": "627",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "617",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "b3752244f22acac4aee67409cb1b1d2f568c1c931701135296b3160077b53ef4"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "line": "636",
+      "directive": "ifndef",
+      "expression": "WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+      "chain_start": "636",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "b3752244f22acac4aee67409cb1b1d2f568c1c931701135296b3160077b53ef4"
+    }
+  ],
+  "review": "Original DEBUG branch already has #error and correct original line anchor. Additional local WOW_NATIVE_DIALOG_PROCEDURE_OWNER branches are registered OPENNT-HOST-121; observed selected arms retained and inactive arms already #error. No source change.",
+  "limitations": "Nested conditions deferred; no new exclusion."
+}

@@ -1,0 +1,198 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gfx_updt.c",
+  "original_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987",
+  "before_sha256": "4aa83fb78b9b708dc63f4ae875a8457fca52cb46855bc16bb115d38961625fcd",
+  "after_sha256": "224847a5029e289f65effb1ae081402086eead5f26ea3a0a3cc7ffdbf2e7f591",
+  "prior_first_level_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "86",
+      "directive": "ifdef",
+      "expression": "EGG",
+      "chain_start": "86",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c9ab51e11e442e43ec58f6eff13494312d73f588a3708eb2dfa34ebc4d3bda2b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "93",
+      "directive": "ifdef",
+      "expression": "GORE",
+      "chain_start": "93",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "c9ab51e11e442e43ec58f6eff13494312d73f588a3708eb2dfa34ebc4d3bda2b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "122",
+      "directive": "ifdef",
+      "expression": "SEGMENTATION",
+      "chain_start": "122",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "c9ab51e11e442e43ec58f6eff13494312d73f588a3708eb2dfa34ebc4d3bda2b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "131",
+      "directive": "if",
+      "expression": "defined(PROD) || (!defined(EGG))",
+      "chain_start": "131",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c9ab51e11e442e43ec58f6eff13494312d73f588a3708eb2dfa34ebc4d3bda2b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "133",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "131",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "c9ab51e11e442e43ec58f6eff13494312d73f588a3708eb2dfa34ebc4d3bda2b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "138",
+      "directive": "ifdef",
+      "expression": "VGG",
+      "chain_start": "138",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c9ab51e11e442e43ec58f6eff13494312d73f588a3708eb2dfa34ebc4d3bda2b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "150",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "138",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "c9ab51e11e442e43ec58f6eff13494312d73f588a3708eb2dfa34ebc4d3bda2b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "160",
+      "directive": "ifdef",
+      "expression": "NO_STRING_OPERATIONS",
+      "chain_start": "160",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "c9ab51e11e442e43ec58f6eff13494312d73f588a3708eb2dfa34ebc4d3bda2b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "162",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "160",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c9ab51e11e442e43ec58f6eff13494312d73f588a3708eb2dfa34ebc4d3bda2b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "169",
+      "directive": "ifdef",
+      "expression": "PROD",
+      "chain_start": "169",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c9ab51e11e442e43ec58f6eff13494312d73f588a3708eb2dfa34ebc4d3bda2b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "171",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "169",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "c9ab51e11e442e43ec58f6eff13494312d73f588a3708eb2dfa34ebc4d3bda2b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "179",
+      "directive": "ifndef",
+      "expression": "REAL_VGA",
+      "chain_start": "179",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c9ab51e11e442e43ec58f6eff13494312d73f588a3708eb2dfa34ebc4d3bda2b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "648",
+      "directive": "ifndef",
+      "expression": "REAL_VGA",
+      "chain_start": "648",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c9ab51e11e442e43ec58f6eff13494312d73f588a3708eb2dfa34ebc4d3bda2b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "3297",
+      "directive": "ifndef",
+      "expression": "REAL_VGA",
+      "chain_start": "3297",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c9ab51e11e442e43ec58f6eff13494312d73f588a3708eb2dfa34ebc4d3bda2b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "3629",
+      "directive": "ifndef",
+      "expression": "cursor_changed",
+      "chain_start": "3629",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c9ab51e11e442e43ec58f6eff13494312d73f588a3708eb2dfa34ebc4d3bda2b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "3655",
+      "directive": "ifndef",
+      "expression": "REAL_VGA",
+      "chain_start": "3655",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c9ab51e11e442e43ec58f6eff13494312d73f588a3708eb2dfa34ebc4d3bda2b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "4437",
+      "directive": "ifdef",
+      "expression": "NTVDM",
+      "chain_start": "4437",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c9ab51e11e442e43ec58f6eff13494312d73f588a3708eb2dfa34ebc4d3bda2b"
+    }
+  ],
+  "review": "Original and current first-level arm signatures align in order. Previously selected arms retained; all remaining arms were already #error and line anchors normalized. No newly excluded code.",
+  "limitations": "Nested branches deferred; previous selection records have an older source hash, and no new exclusion is based on them."
+}

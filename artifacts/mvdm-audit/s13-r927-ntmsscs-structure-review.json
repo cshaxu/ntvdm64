@@ -1,0 +1,8 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_msscs.c",
+  "original_sha256": "96ee0fb677da9f35811f9dc1715d583474ce72bba9fa91f5eb2d5f6ab242b0c3",
+  "current_sha256": "1d4e65988002a18893b21312411f24573094591f2f784fac182d6c72bfb3407e",
+  "review": "Current and original first-level arm counts differ (12 versus 10); historic observations match current count.",
+  "limitations": "Local versus original group correspondence requires contextual mapping; no code changed."
+}

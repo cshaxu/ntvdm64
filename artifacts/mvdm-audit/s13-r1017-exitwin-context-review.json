@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\exitwin.c",
+  "original_sha256": "45b92f7236fba49d58e2c3d912126067c3843ec560c28cdd8a20167c62aaef65",
+  "current_sha256": "abdb6793896a0f0da1f7d79d45c4e919cfb50ae0757bbc70e39e9cc40e25b4e2",
+  "review": "Original/current LATER if/else structure matches; prior selection record absent and current non-LATER arm contains only #line although original contains code.",
+  "limitations": "Establish enclosing original function and local subset ownership before treating empty selected branch as complete; no code changed."
+}

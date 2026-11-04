@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/public/sdk/inc/ntdbg.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntdbg.h",
+  "original_sha256": "a5b4a6018a953d66d0e73008ceed9939e4f88917fca9250f6dbf780dcf1c332a",
+  "current_sha256": "33606d8977bdea48f291fccff2f2fe357ac7d018db5cb424508016e6b2073ffe",
+  "review": "Original/current outer include guard matches; historical observation did not hit its content but product dependency graph includes the file.",
+  "limitations": "Verify actual inclusion guard state across contexts; no source removed."
+}

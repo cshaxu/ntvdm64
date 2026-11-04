@@ -1,0 +1,238 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+  "source_sha256": "4b7da2a8130d924151c96254da03b600068b287e888e27a66cfd0beb38675884",
+  "object": "opennt-user/queue",
+  "arms": [
+    {
+      "label": "codex_r688_arm_0000",
+      "line": 21,
+      "kind": "ifdef",
+      "expression": "DEBUG",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0001",
+      "line": 23,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0002",
+      "line": 30,
+      "kind": "ifdef",
+      "expression": "DEBUG",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0003",
+      "line": 32,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0004",
+      "line": 272,
+      "kind": "ifdef",
+      "expression": "DEBUG",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0005",
+      "line": 376,
+      "kind": "if",
+      "expression": "DBG",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0006",
+      "line": 382,
+      "kind": "ifdef",
+      "expression": "LOCK_MOUSE_CODE",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0007",
+      "line": 388,
+      "kind": "ifdef",
+      "expression": "DEBUG",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0008",
+      "line": 395,
+      "kind": "if",
+      "expression": "DBG",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0009",
+      "line": 402,
+      "kind": "if",
+      "expression": "DBG",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0010",
+      "line": 409,
+      "kind": "if",
+      "expression": "DBG",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0011",
+      "line": 416,
+      "kind": "ifdef",
+      "expression": "DEBUG",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0012",
+      "line": 423,
+      "kind": "if",
+      "expression": "DBG",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0013",
+      "line": 430,
+      "kind": "if",
+      "expression": "DBG",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0014",
+      "line": 437,
+      "kind": "if",
+      "expression": "DBG",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0015",
+      "line": 444,
+      "kind": "if",
+      "expression": "DBG",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0016",
+      "line": 451,
+      "kind": "if",
+      "expression": "DBG",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0017",
+      "line": 458,
+      "kind": "if",
+      "expression": "DBG",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0018",
+      "line": 465,
+      "kind": "if",
+      "expression": "DBG",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0019",
+      "line": 472,
+      "kind": "ifdef",
+      "expression": "DEBUG",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0020",
+      "line": 479,
+      "kind": "if",
+      "expression": "DBG",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0021",
+      "line": 487,
+      "kind": "ifdef",
+      "expression": "FE_IME",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0022",
+      "line": 494,
+      "kind": "ifdef",
+      "expression": "FE_IME",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0023",
+      "line": 501,
+      "kind": "ifdef",
+      "expression": "FE_IME",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0024",
+      "line": 504,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0025",
+      "line": 510,
+      "kind": "ifdef",
+      "expression": "FE_IME",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0026",
+      "line": 513,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0027",
+      "line": 519,
+      "kind": "ifdef",
+      "expression": "FE_IME",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0028",
+      "line": 522,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    }
+  ],
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "b00bb31b4be068619f1a094525cf5336a015805d73735657693a222ed31e725f",
+      "hit": [
+        "codex_r688_arm_0001",
+        "codex_r688_arm_0003",
+        "codex_r688_arm_0024",
+        "codex_r688_arm_0026",
+        "codex_r688_arm_0028"
+      ]
+    }
+  ],
+  "include_traces": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 149,
+      "identical": true,
+      "include_trace_sha256": "a6c01fb857fd2dff9b4e603689d1b8045eee44f10aaa199333b0590e88c975a2",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+  "original_sha256": "0400c034bb5a782e81777e9fd805c07dbcd18d60ec9f1a876cfa67444577e0f8",
+  "review": "Actual WOW32 product preprocessing positively identifies five selected arms; other current arms already error. Original/current first-level groups differ in ordering despite equal total count.",
+  "limitations": "Need contextual mapping of original reordered groups before line-anchor cleanup; no code changed."
+}

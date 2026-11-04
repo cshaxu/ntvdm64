@@ -14,10 +14,12 @@
 #include "chkmallc.h"
 
 #ifdef X86GFX
+#line 17
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 
 #ifdef MONITOR
+#line 22
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
 
@@ -37,6 +39,7 @@ double x;
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::: SAS wrapping stubs */
 
 #ifdef MONITOR
+#line 56
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif	//MONITOR
 #line 42
@@ -323,6 +326,7 @@ void DispatchInterrupts()
 }
 
 #else //MONITOR
+#line 556
 #error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif  //MONITOR
 #line 330

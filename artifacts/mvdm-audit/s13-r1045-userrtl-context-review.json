@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\userrtl.h",
+  "original_sha256": "b632fc75232db7c2bc95baf758820c087a23f7e17a61c361e47c4687a4f543d3",
+  "current_sha256": "89746a9d75726978c9ccac667b92c98c72596e1c9c0fcc12bfbbec9548ce2459",
+  "review": "Original/current guard is _USERRTL_; historical selected observation used OPENNT_USERRTL_SAME_ADDRESS_SUBSET_H.",
+  "limitations": "Actual supported guard state requires confirmation; no code changed."
+}

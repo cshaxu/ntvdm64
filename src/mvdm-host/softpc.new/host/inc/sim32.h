@@ -45,6 +45,7 @@ UCHAR *Sim32pGetVDMPointer(ULONG addr, UCHAR pm);
 
 
 #ifdef MONITOR
+#line 48
 #error DIVERGENCE MVDM-HOST-DIV-509: MONITOR branch is not selected for these consumers; see mirror register.
 #else
 /********************************************************/

@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+  "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+  "current_sha256": "7a6c475465b988d8b0b48528994a01701014af7dd61a466e4fe228b356bdc10e",
+  "review": "Current first-level arms 29, original 44 and historical records 4.",
+  "limitations": "Missing original structure and context selection require contextual audit; no code changed."
+}

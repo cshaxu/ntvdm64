@@ -1,0 +1,186 @@
+{
+  "path": "src/mvdm-host/inc/vdmredir.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\vdmredir.h",
+  "original_sha256": "2462271dd22683738e60b4154bd891a8dfc679d4c34b9f75b23ecf91523add2d",
+  "before_sha256": "e47d8d20bfa1835ee500766753aee23bf887a84c837698ce85629c9225aac5cf",
+  "after_sha256": "3b8ea539ca0989e7b8be3be6cc4098ec0cd1e6940677213992d29933c5cf011a",
+  "branches": [
+    {
+      "line": 45,
+      "original_line": 45,
+      "kind": "ifndef",
+      "expression": "_VDMREDIR_",
+      "selected": true
+    },
+    {
+      "line": 55,
+      "original_line": 55,
+      "kind": "if",
+      "expression": "DBG",
+      "selected": false
+    },
+    {
+      "line": 58,
+      "original_line": 57,
+      "kind": "else",
+      "expression": "",
+      "selected": true
+    },
+    {
+      "line": 70,
+      "original_line": 67,
+      "kind": "ifdef",
+      "expression": "UNALIGNED_VDM_POINTERS",
+      "selected": false
+    },
+    {
+      "line": 74,
+      "original_line": 71,
+      "kind": "else",
+      "expression": "",
+      "selected": true
+    },
+    {
+      "line": 158,
+      "original_line": 155,
+      "kind": "ifdef",
+      "expression": "i386",
+      "selected": false
+    },
+    {
+      "line": 160,
+      "original_line": 157,
+      "kind": "else",
+      "expression": "",
+      "selected": true
+    },
+    {
+      "line": 161,
+      "original_line": 158,
+      "kind": "ifdef",
+      "expression": "UNALIGNED_VDM_POINTERS",
+      "selected": false
+    },
+    {
+      "line": 163,
+      "original_line": 160,
+      "kind": "else",
+      "expression": "",
+      "selected": true
+    },
+    {
+      "line": 174,
+      "original_line": 171,
+      "kind": "ifdef",
+      "expression": "i386",
+      "selected": false
+    },
+    {
+      "line": 176,
+      "original_line": 173,
+      "kind": "else",
+      "expression": "",
+      "selected": true
+    },
+    {
+      "line": 177,
+      "original_line": 174,
+      "kind": "ifdef",
+      "expression": "UNALIGNED_VDM_POINTERS",
+      "selected": false
+    },
+    {
+      "line": 179,
+      "original_line": 176,
+      "kind": "else",
+      "expression": "",
+      "selected": true
+    },
+    {
+      "line": 196,
+      "original_line": 193,
+      "kind": "ifdef",
+      "expression": "i386",
+      "selected": false
+    },
+    {
+      "line": 198,
+      "original_line": 195,
+      "kind": "else",
+      "expression": "",
+      "selected": true
+    },
+    {
+      "line": 199,
+      "original_line": 196,
+      "kind": "ifdef",
+      "expression": "UNALIGNED_VDM_POINTERS",
+      "selected": false
+    },
+    {
+      "line": 201,
+      "original_line": 198,
+      "kind": "else",
+      "expression": "",
+      "selected": true
+    },
+    {
+      "line": 216,
+      "original_line": 213,
+      "kind": "ifdef",
+      "expression": "i386",
+      "selected": false
+    },
+    {
+      "line": 218,
+      "original_line": 215,
+      "kind": "else",
+      "expression": "",
+      "selected": true
+    },
+    {
+      "line": 219,
+      "original_line": 216,
+      "kind": "ifdef",
+      "expression": "UNALIGNED_VDM_POINTERS",
+      "selected": false
+    },
+    {
+      "line": 221,
+      "original_line": 218,
+      "kind": "else",
+      "expression": "",
+      "selected": true
+    },
+    {
+      "line": 406,
+      "original_line": 403,
+      "kind": "ifdef",
+      "expression": "i386",
+      "selected": false
+    },
+    {
+      "line": 416,
+      "original_line": 413,
+      "kind": "else",
+      "expression": "",
+      "selected": true
+    },
+    {
+      "line": 428,
+      "original_line": 425,
+      "kind": "ifdef",
+      "expression": "i386",
+      "selected": false
+    },
+    {
+      "line": 438,
+      "original_line": 435,
+      "kind": "else",
+      "expression": "",
+      "selected": true
+    }
+  ],
+  "review": "Full current/original conditional trees and historical product marker signatures match. Previously observed i386 and UNALIGNED_VDM_POINTERS alternatives are absent in actual 24 x86 worker/redirection compile contexts; their compiler /D lists are identical and no project source defines either macro. Replaced eleven unselected arms; selected branches remain.",
+  "limitations": "Build and test proof is pending; external unsupported profiles are not asserted."
+}

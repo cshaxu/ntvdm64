@@ -1,0 +1,8 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+  "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+  "current_sha256": "8a6ac4cbc55e1a10577b52da591406924fac41d8aac5f8beff65fa0d5a4a0c19",
+  "review": "Current and original first-level arm counts differ (48 versus 39); historic observations match current count.",
+  "limitations": "Local versus original group correspondence requires contextual mapping; no code changed."
+}

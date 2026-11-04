@@ -1,0 +1,8 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/config.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
+  "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+  "current_sha256": "e4501b74ba17c479270254ec6e8c3b8f75c12eddcc27a6675d049bf594dbc4ff",
+  "review": "Current and original first-level structure align. Old selection record predates restoration and contains a different i386 expression and lacks MONITOR groups.",
+  "limitations": "Those changed/restored conditions require targeted actual macro-context proof; no code changed."
+}

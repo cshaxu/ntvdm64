@@ -1,0 +1,44 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/nt_event.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_event.h",
+  "original_sha256": "f4353f69708952f3bdc0f0d26db0f667eda34abf04f8694d1af059a649f76969",
+  "before_sha256": "4ccd3c63342e7add3744c21b20569e5bd34979c6e96f2dc659ec94c010704dea",
+  "after_sha256": "4ccd3c63342e7add3744c21b20569e5bd34979c6e96f2dc659ec94c010704dea",
+  "prior_first_level_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_event.h",
+      "line": "18",
+      "directive": "ifdef",
+      "expression": "YODA",
+      "chain_start": "18",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "ee9a95d387682c169212aa5965cf20072b06d280a3dc403d3fe5ec259b0f664a"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_event.h",
+      "line": "21",
+      "directive": "ifndef",
+      "expression": "X86GFX",
+      "chain_start": "21",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "ee9a95d387682c169212aa5965cf20072b06d280a3dc403d3fe5ec259b0f664a"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_event.h",
+      "line": "46",
+      "directive": "ifdef",
+      "expression": "X86GFX",
+      "chain_start": "46",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "ee9a95d387682c169212aa5965cf20072b06d280a3dc403d3fe5ec259b0f664a"
+    }
+  ],
+  "review": "Original/current first-level arms align. Previously selected arms retained; others were already #error and line anchors normalized. No newly excluded code.",
+  "limitations": "Nested branches deferred; old selection hash may differ; no new exclusion inferred."
+}

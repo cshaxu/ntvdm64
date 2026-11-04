@@ -1,0 +1,32 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgmgr.c",
+  "original_sha256": "8e2383f52e4e3f65f656bd492143d7a8ed5d0a2526ad8e6af10d242465ff8d7a",
+  "current_sha256": "10c7fca6959e9c77f047d8acf1eb6f8c593386d4e892fed7970c6a3e50c820cc",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "line": "94",
+      "directive": "ifdef",
+      "expression": "SYSMODALWINDOWS",
+      "chain_start": "94",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "2fbd567b9a4c88db59aca25ce63d4d4e94639daf3d2a1352798a9441af79d345"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "line": "315",
+      "directive": "if",
+      "expression": "defined(WOW_ORIGINAL_DIALOG_MANAGER)",
+      "chain_start": "315",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "2fbd567b9a4c88db59aca25ce63d4d4e94639daf3d2a1352798a9441af79d345"
+    }
+  ],
+  "review": "Original SYSMODALWINDOWS branch already has #error and correct line anchor. Local WOW_ORIGINAL_DIALOG_MANAGER branch is observed selected; retained. No source change.",
+  "limitations": "Nested conditions deferred; no new exclusion."
+}

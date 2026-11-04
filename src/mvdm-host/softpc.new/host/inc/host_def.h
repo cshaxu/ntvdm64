@@ -241,6 +241,7 @@ void *ch_malloc(unsigned int NumBytes);
 
 // from nt_bop.c
 #ifdef i386
+#line 221
 #error Excluded unsupported i386 host library loader
 #else
 #line 223

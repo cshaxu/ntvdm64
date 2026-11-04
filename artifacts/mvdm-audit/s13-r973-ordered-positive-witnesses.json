@@ -1,0 +1,62 @@
+{
+  "files": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntlpcapi.h",
+      "original_sha256": "653097c73182630ce39183526334ae4027b1aef00e2d28812a0e5e84c6164db5",
+      "current_sha256": "b9cc21e2fc62fd35105a7a833f835d5007f6d0bb91795c1d2499a6299ef5eb53",
+      "prior_positive_records": [
+        {
+          "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+          "line": "22",
+          "directive": "ifndef",
+          "expression": "_NTLPCAPI_",
+          "chain_start": "22",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "selected",
+          "sha256": "b9cc21e2fc62fd35105a7a833f835d5007f6d0bb91795c1d2499a6299ef5eb53"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntpsapi.h",
+      "original_sha256": "cafd48b3a9c672c6a18503d4565e7864a284ec029f63ae04ff221c58a2db5148",
+      "current_sha256": "d95211bf3a8bbb67769b03c00ebcaeb1d94d0cde1f0a11d418ba2b239c6803a4",
+      "prior_positive_records": [
+        {
+          "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+          "line": "12",
+          "directive": "ifndef",
+          "expression": "_NTPSAPI_",
+          "chain_start": "12",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "selected",
+          "sha256": "d95211bf3a8bbb67769b03c00ebcaeb1d94d0cde1f0a11d418ba2b239c6803a4"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    }
+  ],
+  "next_depth_parents": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "parent_line": 22,
+      "parent_kind": "ifndef",
+      "parent_expression": "_NTLPCAPI_",
+      "child_group_count": 7
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+      "parent_line": 12,
+      "parent_kind": "ifndef",
+      "parent_expression": "_NTPSAPI_",
+      "child_group_count": 1
+    }
+  ]
+}

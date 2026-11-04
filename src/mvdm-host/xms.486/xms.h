@@ -20,15 +20,18 @@
 */
 
 #ifdef DOS
+#line 23
 #error DIVERGENCE MVDM-HOST-DIV-600: Unsupported original DOS/Win16 host profile
 #endif
 #line 25
 
 #ifdef OS2_16
+#line 27
 #error DIVERGENCE MVDM-HOST-DIV-528: OS2_16 platform branch is not selected; see mirror register.
 #endif
 
 #ifdef OS2_32
+#line 32
 #error DIVERGENCE MVDM-HOST-DIV-528: OS2_32 platform branch is not selected; see mirror register.
 #endif
 
@@ -71,11 +74,13 @@
 #endif
 
 #ifdef SIGNALS
+#line 73
 #error DIVERGENCE MVDM-HOST-DIV-600: Unsupported original DOS/Win16 host profile
 #endif
 #line 74
 
 #ifdef OS2_32
+#line 78
 #error DIVERGENCE MVDM-HOST-DIV-528: OS2_32 platform branch is not selected; see mirror register.
 #endif
 #include <xmsexp.h>

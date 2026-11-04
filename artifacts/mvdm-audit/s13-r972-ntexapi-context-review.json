@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntexapi.h",
+  "original_sha256": "d4bddfbf3eadd81cbf913a60108f1c7cb3362c6c51b042701bba43da6bb8e52a",
+  "current_sha256": "082316384723f6cfce62a5b5370e6cc0812badb71f11a005e03bdd39e3dbac33",
+  "review": "Original/current guard is _NTEXAPI_; historical selected observation used different OPENNT_HOST_NTEXAPI_SUBSET_H guard.",
+  "limitations": "Actual supported guard state requires confirmation; no code changed."
+}

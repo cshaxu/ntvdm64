@@ -1,0 +1,66 @@
+{
+  "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\obj.vdm\\ntvdm.c",
+  "original_sha256": "693a169cf1e91435c326ee05a17c928e85af10982c2c3bb95a5631ae76415a0a",
+  "before_sha256": "b4062bb577ca79ae7c66e445fb80ae1bdba5021386d7b8b24688e503659ce915",
+  "after_sha256": "b4062bb577ca79ae7c66e445fb80ae1bdba5021386d7b8b24688e503659ce915",
+  "prior_first_level_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "line": "29",
+      "directive": "if",
+      "expression": "DBG",
+      "chain_start": "29",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "ba5902276a1e7c96589c7fa6ee49bd04fe67640661fed297fa9927d49ccc8daa"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "line": "134",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "134",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "ba5902276a1e7c96589c7fa6ee49bd04fe67640661fed297fa9927d49ccc8daa"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "line": "262",
+      "directive": "ifndef",
+      "expression": "MONITOR",
+      "chain_start": "262",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "ba5902276a1e7c96589c7fa6ee49bd04fe67640661fed297fa9927d49ccc8daa"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "line": "336",
+      "directive": "if",
+      "expression": "DBG",
+      "chain_start": "336",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "ba5902276a1e7c96589c7fa6ee49bd04fe67640661fed297fa9927d49ccc8daa"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "line": "362",
+      "directive": "if",
+      "expression": "DBG",
+      "chain_start": "362",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "ba5902276a1e7c96589c7fa6ee49bd04fe67640661fed297fa9927d49ccc8daa"
+    }
+  ],
+  "review": "Original/current first-level arms align. Previously selected arms retained; others were already #error and line anchors normalized. No newly excluded code.",
+  "limitations": "Nested branches deferred; old selection hash may differ; no new exclusion inferred."
+}

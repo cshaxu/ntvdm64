@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+  "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+  "current_sha256": "10ed3f2be44d0a66ffe952696f7a579aa5d1a2421e71a5a319eeeab9fa654222",
+  "review": "Current first-level arms 20, original 22 and no prior first-level records.",
+  "limitations": "Original structure restoration and supported-context selection require contextual review; no code changed."
+}

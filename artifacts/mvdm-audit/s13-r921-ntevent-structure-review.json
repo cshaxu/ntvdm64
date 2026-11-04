@@ -1,0 +1,8 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_event.c",
+  "original_sha256": "7f555a87ba029627d6811c0f7b96964bb8a96af90c60c89012975a4ac5442076",
+  "current_sha256": "517c246720970ad2b6b575c9721c13801910576d094e99d09ad6241224a6e488",
+  "review": "Current contains two extra first-level X86GFX groups compared to original; branch observation count matches current.",
+  "limitations": "Additional local groups need patch ownership and behavior mapping before treating this file as complete; no code changed."
+}

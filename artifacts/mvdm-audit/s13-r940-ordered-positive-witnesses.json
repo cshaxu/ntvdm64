@@ -1,0 +1,62 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wow32.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.h",
+      "original_sha256": "06148a93a63faf7fc5480e4c9f80c98ddfe6e2a0a782eafe6a6fd1ccdd46de27",
+      "current_sha256": "fb82ba68fff4be7e834d015e7258b6ec8d23d79598463265b0be680455cb0948",
+      "prior_positive_records": [
+        {
+          "path": "src/mvdm-host/wow32/wow32.h",
+          "line": "15",
+          "directive": "ifndef",
+          "expression": "_DEF_WOW32_",
+          "chain_start": "15",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "0f9b098627b910ebff6c2b4cc19755cfa1f56077cda7292bb8ca0f9c6b345d22"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/mvdm-host/wow32/wstruc.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wstruc.h",
+      "original_sha256": "1e54905079db411f6bc17583a8943e4f8f5c870129ff7d5814f87d8a41be6a7c",
+      "current_sha256": "3ceffb625000f2546954f135cb8c13cb35f2e1a55347ec75cc533a583220f808",
+      "prior_positive_records": [
+        {
+          "path": "src/mvdm-host/wow32/wstruc.h",
+          "line": "15",
+          "directive": "ifndef",
+          "expression": "_DEF_WSTRUC_",
+          "chain_start": "15",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "8944ad4b43faf7fac2c714f3f2b26bd4d79ab13dae2a43a33000c541466045e9"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    }
+  ],
+  "next_depth_parents": [
+    {
+      "path": "src/mvdm-host/wow32/wow32.h",
+      "parent_line": 15,
+      "parent_kind": "ifndef",
+      "parent_expression": "_DEF_WOW32_",
+      "child_group_count": 26
+    },
+    {
+      "path": "src/mvdm-host/wow32/wstruc.h",
+      "parent_line": 15,
+      "parent_kind": "ifndef",
+      "parent_expression": "_DEF_WSTRUC_",
+      "child_group_count": 1
+    }
+  ]
+}

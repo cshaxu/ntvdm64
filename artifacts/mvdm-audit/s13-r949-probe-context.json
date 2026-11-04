@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/base/ntos/ex/probe.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\ntos\\ex\\probe.c",
+  "original_sha256": "0d1cae414b609c624e6bdf04fa28ebd84ff38dbb9687a63d8bc9e840c2f2372b",
+  "current_sha256": "b32dde63fa296acffbf472259792568fcb167c24acb5a8d89d02b6314fd77302",
+  "review": "Current/original first-level group signatures match. Product wow32 x86 build passes while both excluded ALLOC_PRAGMA and _ALPHA_ arms contain #error; else is retained. Existing #line anchors already match original; no code changed.",
+  "limitations": "Proof covers the supported wow32 x86 compilation represented by build graph. Nested conditions deferred."
+}

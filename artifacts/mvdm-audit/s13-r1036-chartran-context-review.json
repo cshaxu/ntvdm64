@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+  "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+  "current_sha256": "426cd27bcfae2ae7bc31626353a97a2da70e4b7fca8a0227e071a6c7ac1ae969",
+  "review": "Original/current arm counts both 22; old depth-one record covers 12.",
+  "limitations": "Missing actual context evidence and exact mapping need review; no code changed."
+}

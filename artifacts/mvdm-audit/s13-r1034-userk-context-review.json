@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\userk.h",
+  "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+  "current_sha256": "46b8db6ffd263fe6d0260b6dc73a2a3d2919f4908c733388cc90bcc757052b19",
+  "review": "Original/current guard is _USERK_; historical selected observation used WOW_USER_OBJECT_FLAGS_ONLY.",
+  "limitations": "Actual supported guard state requires confirmation; no code changed."
+}

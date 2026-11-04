@@ -4,9 +4,9 @@
 
 **Active: M0 T473 S13**
 
-Mirror-condition audit: owner revised execution to complete and register each
-compiled mirror file against its original; build each batch of 10 modified code
-files. Process the pending per-file inventory in its existing order; review
+Mirror-condition audit: compare each compiled mirror file against its original
+and finish all its conditional branches before marking that file complete;
+build each batch of 10 modified code files. The earlier per-depth BFS is superseded. Process the pending per-file inventory in its existing order; review
 and register files even when no source edit is needed. If binaries have no
 substantive change, reuse test evidence for the P; otherwise run Full before
 publication. [Progress](../../artifacts/mvdm-audit/s13-bfs-progress.md);
@@ -95,7 +95,7 @@ Earlier versions remain in [held patches](../../artifacts/mvdm-audit/s11-held-cp
 | Identifier Mode | M0 T473 S13, Ordinary Mode. |
 | Admission And Approval | Owner accepted and closed S12 and admitted S13. [S12 evidence](../../artifacts/mvdm-audit/s12-excluded-branch-errors.md). |
 | Objective | Input handoff; owner adds [mirror conditional reconciliation](../../artifacts/mvdm-audit/s13-mirror-conditional-plan.md). |
-| Delivery State | Handoff published; review active. Ordered audit checkpoint [r896](../../artifacts/mvdm-audit/s13-r896-delivery.md) built and published with timestamp-only or identical image differences; 136 existing C/H entries remain incomplete, including 13 explicit deferred boundaries. Full 16 gates, DOS4GW startup, four Win3.1 modes and synthetic DOS/native three-CAF and Alt+Enter return passed. Physical input and injected handoff failures remain unverified; command output is in TODO. [Compile-branch evidence](../../artifacts/mvdm-audit/compile-branch-selection/README.md). [Evidence](../etc/evidence/m0-t473-s13-input-handoff.md). |
+| Delivery State | Handoff published; review active. Checkpoint [r1052](../../artifacts/mvdm-audit/s13-r1052-delivery.md) was built and published; 190 files remain incomplete, including 130 outer-only reviews. Full 16 gates, DOS4GW startup, four Win3.1 modes and synthetic DOS/native three-CAF and Alt+Enter return passed. Physical input and injected handoff failures remain unverified; command output is in TODO. [Compile-branch evidence](../../artifacts/mvdm-audit/compile-branch-selection/README.md). [Evidence](../etc/evidence/m0-t473-s13-input-handoff.md). |
 | Non-goals | Guest modification or rebuilding; DOS-specific shortcut workarounds; unrelated performance work. |
 | Reference Baseline | Published ten-image package at 1d2ddfb18; [handoff scope and prior observations](../etc/operations/m0-t473-s12-ntcon-input-source-handoff.md). |
 | Files And ABI Surface | NTCON frontend session, keyboard and channel; worker input client and original DOS scan-code handling; tests and evidence. |

@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\draw.c",
+  "original_sha256": "7491e5b3331de8cb7a2189b8efbe91f56076f80a08338bf816d793e80a4faf76",
+  "current_sha256": "2719465cc91f9d173af90ec463d92c3f4bf47996a7aa3cba7b15d9b974506de5",
+  "review": "Current first-level arms 3, original 2, historical record 1.",
+  "limitations": "Original/local structure mapping requires contextual review; no code changed."
+}

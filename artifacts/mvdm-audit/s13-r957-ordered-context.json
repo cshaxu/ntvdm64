@@ -1,0 +1,121 @@
+{
+  "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+  "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\netlib\\memalloc.c",
+  "original_sha256": "45b70c02c0aeb79f674e68a475669d45e2e5e6fab21f20e9bfcfe229d8958525",
+  "before_sha256": "03f8862cb4a03ad83105f137ee8b6639ffa062f0670a98eb0e921e89add8f0f4",
+  "after_sha256": "fff9cbadf2da6d4fd0ecfcc1fc850a2cd52a6f9862b62a53d3486631f56dd186",
+  "prior_first_level_records": [
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "line": "1",
+      "directive": "ifndef",
+      "expression": "CDEBUG",
+      "chain_start": "1",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "16af38bb1667f54938b3284ba81c5b9ebf247f346d2d17ba689aef3cf202e6e7"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "line": "57",
+      "directive": "ifdef",
+      "expression": "WIN32",
+      "chain_start": "57",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "16af38bb1667f54938b3284ba81c5b9ebf247f346d2d17ba689aef3cf202e6e7"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "line": "71",
+      "directive": "ifdef",
+      "expression": "CDEBUG",
+      "chain_start": "71",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "16af38bb1667f54938b3284ba81c5b9ebf247f346d2d17ba689aef3cf202e6e7"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "line": "109",
+      "directive": "ifdef",
+      "expression": "WIN32",
+      "chain_start": "109",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "16af38bb1667f54938b3284ba81c5b9ebf247f346d2d17ba689aef3cf202e6e7"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "line": "117",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "109",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "16af38bb1667f54938b3284ba81c5b9ebf247f346d2d17ba689aef3cf202e6e7"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "line": "159",
+      "directive": "ifdef",
+      "expression": "WIN32",
+      "chain_start": "159",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "16af38bb1667f54938b3284ba81c5b9ebf247f346d2d17ba689aef3cf202e6e7"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "line": "166",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "159",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "16af38bb1667f54938b3284ba81c5b9ebf247f346d2d17ba689aef3cf202e6e7"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "line": "232",
+      "directive": "if",
+      "expression": "defined(WIN32)",
+      "chain_start": "232",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "16af38bb1667f54938b3284ba81c5b9ebf247f346d2d17ba689aef3cf202e6e7"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "line": "255",
+      "directive": "elif",
+      "expression": "!defined(CDEBUG)",
+      "chain_start": "232",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "16af38bb1667f54938b3284ba81c5b9ebf247f346d2d17ba689aef3cf202e6e7"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "line": "281",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "232",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "16af38bb1667f54938b3284ba81c5b9ebf247f346d2d17ba689aef3cf202e6e7"
+    }
+  ],
+  "review": "Original/current first-level arms align. Previously selected arms retained; others were already #error and line anchors normalized. No newly excluded code.",
+  "limitations": "Nested branches deferred; old selection hash may differ; no new exclusion inferred."
+}

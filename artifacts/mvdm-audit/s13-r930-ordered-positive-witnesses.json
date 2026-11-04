@@ -1,0 +1,34 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\sim32.c",
+      "original_sha256": "1f634b9d6c09d0f767a90ec9e577817800a07dc353cffa433ca2e0268d2cd42f",
+      "current_sha256": "89f5fe924f6f99e06f9da1d75addfa204c95f87b9e5f57e280d47665eddb94ee",
+      "prior_positive_records": [
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+          "line": "16",
+          "directive": "ifdef",
+          "expression": "SIM32",
+          "chain_start": "16",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "2fdd374048faf4ba0b34538f01b4a774f29b5e1114017bb44089bf9abcafb7ec"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    }
+  ],
+  "next_depth_parents": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "parent_line": 16,
+      "parent_kind": "ifdef",
+      "parent_expression": "SIM32",
+      "child_group_count": 8
+    }
+  ]
+}

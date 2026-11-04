@@ -1,0 +1,8 @@
+{
+  "path": "src/mvdm-host/wow32/wuclass.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuclass.c",
+  "original_sha256": "12cdd44dfec6b74a426165977f941da86d90bbad7aa9c59a085010d02528629d",
+  "current_sha256": "b774170902ac10f673cf22b1dd963f9f7531c2b80794138140d10698411b4b62",
+  "review": "Current first-level arm count 17, original 6; historical observations match current.",
+  "limitations": "Local versus original group correspondence requires contextual mapping; no code changed."
+}

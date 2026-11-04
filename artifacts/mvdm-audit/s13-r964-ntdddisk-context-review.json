@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/public/ddk/inc/ntdddisk.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\ddk\\inc\\ntdddisk.h",
+  "original_sha256": "ab1a18990f477e823de45110a12a83498e87b0c4ce87c39d89720cce8ed9e455",
+  "current_sha256": "ab1a18990f477e823de45110a12a83498e87b0c4ce87c39d89720cce8ed9e455",
+  "review": "Original/current outer include guard matches; historical observation did not hit its content but file appears in product dependency graphs.",
+  "limitations": "Need confirm whether guard is set before each real inclusion, or whether observation was incomplete; do not delete code based on missing hit."
+}

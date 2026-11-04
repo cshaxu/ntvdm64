@@ -28,44 +28,22 @@ Temporary scratch is `build/t473-s13`, owner S13, with the active packet's
 budgets. Existing shared caches are retained. The working-tree baseline at
 admission is clean `c97d4ee2c`.
 
-The owner subsequently specified a breadth-first conditional review. The
-current uncommitted S13 tree is preserved and frozen separately from the
-pinned upstream identities. At each depth, classify every arm of the current
-group before examining children of an arm still possibly reachable.
-Depth is counted independently in each file: the file itself is depth 0 and
-its outermost conditional groups are depth 1. Including another file does not
-transfer nesting depth; inclusion and macro state remain relevant evidence for
-whether a branch is selected. A proven excluded arm retains its own boundary
-and contains only `#error`; its nested
-groups do not enter the next-depth queue. Unproven reachability is not an
-exclusion. Reconcile missing original structure independently from the current
-tree inventory, including intentional whole-function subsets and local
-adaptations. Actual per-translation-unit compilation and inclusion contexts,
-including fixture profiles, are evidence; a single observed configuration is
-not proof of universal exclusion. Report per-depth group and arm counts,
-decisions, unreviewed work, next-depth groups, parser exceptions, and original
-reconciliation separately. The BFS queue is task-local evidence, not QUEUE.md.
-The owner now requires a two-phase gate at each depth. First prioritize all
-arms demonstrably excluded in every supported actual context, restore their
-required outer frameworks, and replace their bodies with #error and necessary
-#line. After this exclusion phase is complete, run the applicable cached build,
-full publication, tests, commit and push. Then audit the arms that may be
-selected and enqueue their child groups for the next depth; do not decide a
-child at the current depth. Unknown contexts are never treated as exclusions,
-and known but unimplemented exclusions keep the first phase open. Record the
-exclusion delivery separately from depth completion. Finish the retained-arm
-audit and next-depth queue before advancing; report unresolved boundaries
-honestly. The 7f2bb2924 checkpoint preserved earlier mixed-pass work without
-claiming either phase complete.
+Owner correction: the earlier breadth-first and per-depth S sequencing are
+superseded. Work in the existing file order. For each file compare with its
+pinned original and reconcile its complete conditional structure, continuing
+inside retained arms in that same file. A proven excluded arm keeps its own
+framework and contains #error plus necessary #line; its inner groups need no
+review. A product hit retains the arm. Use recorded hits and the file's actual
+supported contexts; investigate only ambiguous or missing evidence. Preserve
+local adaptations and guest immutability. A first-level-only observation is
+partial progress, not completion of the file. Keep uncertain files open.
 
-Owner sequencing clarification: each BFS depth is one sequential S in this T.
-S13 owns depth 1; after its exclusion and retained-arm review, queue handoff,
-cached build, required tests, coherent publication, commit and push, admit the
-next numbered S for depth 2 automatically. Repeat for each nonempty next-depth
-queue. Intermediate P deliveries are progress, not depth or S closure. An
-unproven arm remains explicitly unresolved and is never replaced on that basis.
-
-Owner revision: deliver by complete product-mirror files rather than by an entire depth. Compare each file with its pinned original, review its full conditional structure, register completion, and compile each batch of ten changed code files. If all ten product images have no substantive changes, reuse applicable prior runtime evidence; otherwise run the full applicable tests before delivery. Report identical, reviewed-different and total product-mirror counts after each push. A mirror file with no supported production compilation or inclusion is removed even when a test alone compiles it; prove its disposition against supported contexts, adjust affected test graphs, and report coverage retained or lost. Preserve independent executable tools and useful runtime assets.
+Compile after each ten changed C/H files. If all ten product images have no
+substantive changes, reuse applicable prior runtime evidence; otherwise run
+Full before coherent publication. Commit and push each verified batch. A file
+compiled or included only by tests is removed only after proving no supported
+product role, with affected test graphs and retained coverage recorded. Preserve
+independent executables, tools and useful runtime assets.
 
 Owner reporting clarification: every push also reports the net number of
 deleted mirror C/H files, with its fixed Git baseline and rename-aware

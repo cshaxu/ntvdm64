@@ -1,0 +1,8 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cpu.c",
+  "original_sha256": "3f77f06e497854b00f58acde8bfe7b5e67af7c5e67174deb579cd76e13f5830f",
+  "current_sha256": "877468c17b071687f1d26474b13f719373a46902a7f6b851388dbdd8a7f361c1",
+  "review": "Current original-compatible first-level groups coexist with two local CCPU-related first-level groups; old branch-selection inventory differs in count.",
+  "limitations": "Local group ownership and observations require targeted mapping before treating this file as complete; no code changed."
+}

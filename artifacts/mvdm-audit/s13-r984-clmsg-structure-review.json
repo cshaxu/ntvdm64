@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+  "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+  "current_sha256": "1e00998921b5acab87b5b059ba9565128c2ad4303dbbc083bc20df0d5670d1f2",
+  "review": "Current first-level arms 22, original 18 and prior records 2.",
+  "limitations": "Local/original mapping requires contextual review; no code changed."
+}

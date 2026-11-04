@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+  "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+  "current_sha256": "fb330c396a31f8b7e30f470197f7f7327972edba787e2286c4d8089e7223a9db",
+  "review": "Current first-level arms 17, original 16, historical records 2.",
+  "limitations": "Original/local structure mapping and context selection require review; no code changed."
+}

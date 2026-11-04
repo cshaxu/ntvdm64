@@ -1,0 +1,62 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_inthk.c",
+      "original_sha256": "a3465d006a88549ce5fd52ac3f8d9c0dcf1f2b2c6825f35db3d2dc683fbc7abe",
+      "current_sha256": "5b60766bdf653349207ab6e9c0e6310b12bc4960dd0cac37659ef846187fa0d5",
+      "prior_positive_records": [
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+          "line": "23",
+          "directive": "ifdef",
+          "expression": "CPU_40_STYLE",
+          "chain_start": "23",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "5b60766bdf653349207ab6e9c0e6310b12bc4960dd0cac37659ef846187fa0d5"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mem.c",
+      "original_sha256": "55832ee249e18683e6d80c582ac8dff47318a5d467d1b1017777fc961bdccf5e",
+      "current_sha256": "3638b934cccf38db32a51a63e4efc1c91dd2052d4d9eaeff112ce993fa9c881a",
+      "prior_positive_records": [
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+          "line": "22",
+          "directive": "ifdef",
+          "expression": "CPU_40_STYLE",
+          "chain_start": "22",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "878826d14e6bbc3de3ea5015a6212dd5c5aa24a5d2278600b978a7437288242f"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    }
+  ],
+  "next_depth_parents": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "parent_line": 23,
+      "parent_kind": "ifdef",
+      "parent_expression": "CPU_40_STYLE",
+      "child_group_count": 9
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "parent_line": 22,
+      "parent_kind": "ifdef",
+      "parent_expression": "CPU_40_STYLE",
+      "child_group_count": 26
+    }
+  ]
+}

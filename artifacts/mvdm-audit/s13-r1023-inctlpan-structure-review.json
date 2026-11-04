@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\inctlpan.c",
+  "original_sha256": "0e3999df8610405c990760ee1a417bf312e3b76744f8f9387bbd94583f9d800d",
+  "current_sha256": "2d3978a4da2b4146f5da2beec1cf829bb06227137f0ec567a6a4acb3b975e587",
+  "review": "Current first-level arms 1, original 2, no prior records.",
+  "limitations": "Original structure restoration and context require review; no code changed."
+}

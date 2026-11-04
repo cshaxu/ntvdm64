@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+  "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+  "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+  "review": "Original/current first-level arm counts both 130; historical depth-one records absent.",
+  "limitations": "Map actual context selection before excluding arms; no code changed."
+}

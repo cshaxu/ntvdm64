@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\getset.c",
+  "original_sha256": "f0d22e4285e8b33b873854913a11587c67d78e50e1f5db28ec89ef8b6ff06d3d",
+  "current_sha256": "2978205bd98d2e21ebd679444ff33bf195b33637d049a15eb232c797c6aa4e2a",
+  "review": "Current first-level arms 8, original 6 and prior records 4.",
+  "limitations": "Original and local patch correspondence needs contextual review; no code changed."
+}

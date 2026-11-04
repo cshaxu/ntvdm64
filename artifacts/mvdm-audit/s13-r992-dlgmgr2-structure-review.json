@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgmgr2.c",
+  "original_sha256": "a3e9286c40e4e11ec872fd9b2d7b23cba640f09fb4840c4e6130e301d5277b9e",
+  "current_sha256": "1da660aa8e942172f9eaad5ac4ef280fda58540a7416c0a8f029a62fb8ccdff0",
+  "review": "Current first-level arms 8, original 4 and historical observations 1.",
+  "limitations": "Local/original group correspondence requires contextual review; no code changed."
+}

@@ -1,0 +1,34 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_extra.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_extra.h",
+      "original_sha256": "a422d528074b6a16b5a09e2b2df2d83f3f8ba4c5729e368cd0acc64c0bebbd96",
+      "current_sha256": "a422d528074b6a16b5a09e2b2df2d83f3f8ba4c5729e368cd0acc64c0bebbd96",
+      "prior_positive_records": [
+        {
+          "path": "src/mvdm-host/softpc.new/host/inc/nt_extra.h",
+          "line": "16",
+          "directive": "ifndef",
+          "expression": "_NT_EXTRA_H",
+          "chain_start": "16",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "8660e7b1ae9b31dd4f85b717a7e40194fdbf159a4c5533a03653488940796daf"
+        }
+      ],
+      "review": "Original/current first-level directives match historical selected product observations at the same locations, with no preceding local mutation of expression macros. Retained.",
+      "limitations": "Prior hash may differ. No exclusion inferred; nested conditions are future work."
+    }
+  ],
+  "next_depth_parents": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_extra.h",
+      "parent_line": 16,
+      "parent_kind": "ifndef",
+      "parent_expression": "_NT_EXTRA_H",
+      "child_group_count": 1
+    }
+  ]
+}

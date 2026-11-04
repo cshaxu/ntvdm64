@@ -1,0 +1,33 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/sim32.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\sim32.h",
+  "original_sha256": "eeb9a654e53b5934850a6e7fa86fc67b1576ac9f1b9262d87acb5eed42c2fd98",
+  "before_sha256": "c9061de1c26ba34b9de2abd52831f72d8717c33c1dbc9860733b77d79bb9a680",
+  "after_sha256": "3794ab4aefd108f0f10a47a5fb0ffb1b3723f1e40a2a5f5cd684b3ee178a978a",
+  "prior_first_level_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/sim32.h",
+      "line": "47",
+      "directive": "ifdef",
+      "expression": "MONITOR",
+      "chain_start": "47",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "c9061de1c26ba34b9de2abd52831f72d8717c33c1dbc9860733b77d79bb9a680"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/sim32.h",
+      "line": "49",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "47",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c9061de1c26ba34b9de2abd52831f72d8717c33c1dbc9860733b77d79bb9a680"
+    }
+  ],
+  "review": "Original/current first-level arms align. Previously selected arms retained; others were already #error and line anchors normalized. No newly excluded code.",
+  "limitations": "Nested branches deferred; old selection hash may differ; no new exclusion inferred."
+}

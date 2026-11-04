@@ -1,0 +1,174 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_reset.c",
+  "original_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47",
+  "before_sha256": "6206c0fb26a0c2660a7839ed69178b044b5aea1246644a11eb2ba4bc285ec600",
+  "after_sha256": "224bb7b8b8d508ed52277f710fa14e133b8e3cac4c0ce7778ea6c28d7c9b20b7",
+  "mapping": [
+    {
+      "line": 22,
+      "kind": "ifdef",
+      "expression": "X86GFX",
+      "selected": false,
+      "reason": "Historical product selection; excluded arm already error."
+    },
+    {
+      "line": 69,
+      "kind": "ifndef",
+      "expression": "MONITOR",
+      "selected": true,
+      "reason": "Product compilation excludes already-error MONITOR arms; matching ifndef is selected."
+    },
+    {
+      "line": 75,
+      "kind": "ifdef",
+      "expression": "MONITOR",
+      "selected": false,
+      "reason": "Product compilation excludes already-error MONITOR arms; matching ifndef is selected."
+    },
+    {
+      "line": 112,
+      "kind": "ifdef",
+      "expression": "X86GFX",
+      "selected": false,
+      "reason": "Historical product selection; excluded arm already error."
+    },
+    {
+      "line": 127,
+      "kind": "ifdef",
+      "expression": "MONITOR",
+      "selected": false,
+      "reason": "Product compilation excludes already-error MONITOR arms; matching ifndef is selected."
+    },
+    {
+      "line": 138,
+      "kind": "ifdef",
+      "expression": "MONITOR",
+      "selected": false,
+      "reason": "Product compilation excludes already-error MONITOR arms; matching ifndef is selected."
+    },
+    {
+      "line": 146,
+      "kind": "ifdef",
+      "expression": "HUNTER",
+      "selected": false,
+      "reason": "Historical product selection; excluded arm already error."
+    },
+    {
+      "line": 148,
+      "kind": "else",
+      "expression": "",
+      "selected": true,
+      "reason": "Historical product selection; excluded arm already error."
+    },
+    {
+      "line": 215,
+      "kind": "ifndef",
+      "expression": "MONITOR",
+      "selected": true,
+      "reason": "Product compilation excludes already-error MONITOR arms; matching ifndef is selected."
+    },
+    {
+      "line": 310,
+      "kind": "ifdef",
+      "expression": "X86GFX",
+      "selected": false,
+      "reason": "Historical product selection; excluded arm already error."
+    },
+    {
+      "line": 345,
+      "kind": "ifdef",
+      "expression": "HUNTER",
+      "selected": false,
+      "reason": "Historical product selection; excluded arm already error."
+    },
+    {
+      "line": 382,
+      "kind": "ifdef",
+      "expression": "NOTUSEDNOTUSED",
+      "selected": false,
+      "reason": "Historical product selection; excluded arm already error."
+    }
+  ],
+  "prior_first_level_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "line": "22",
+      "directive": "ifdef",
+      "expression": "X86GFX",
+      "chain_start": "22",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "e06db78d93bf98b5d08d7349c3e8871ca95c7b0016df4c5d0afef157fc398555"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "line": "104",
+      "directive": "ifdef",
+      "expression": "X86GFX",
+      "chain_start": "104",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "e06db78d93bf98b5d08d7349c3e8871ca95c7b0016df4c5d0afef157fc398555"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "line": "130",
+      "directive": "ifdef",
+      "expression": "HUNTER",
+      "chain_start": "130",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "e06db78d93bf98b5d08d7349c3e8871ca95c7b0016df4c5d0afef157fc398555"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "line": "132",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "130",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "e06db78d93bf98b5d08d7349c3e8871ca95c7b0016df4c5d0afef157fc398555"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "line": "291",
+      "directive": "ifdef",
+      "expression": "X86GFX",
+      "chain_start": "291",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "e06db78d93bf98b5d08d7349c3e8871ca95c7b0016df4c5d0afef157fc398555"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "line": "326",
+      "directive": "ifdef",
+      "expression": "HUNTER",
+      "chain_start": "326",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "e06db78d93bf98b5d08d7349c3e8871ca95c7b0016df4c5d0afef157fc398555"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "line": "362",
+      "directive": "ifdef",
+      "expression": "NOTUSEDNOTUSED",
+      "chain_start": "362",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "e06db78d93bf98b5d08d7349c3e8871ca95c7b0016df4c5d0afef157fc398555"
+    }
+  ],
+  "review": "Original and current first-level groups align. Prior positive observations and successful product compilation prove selected arms; others were already #error. No newly excluded code.",
+  "limitations": "Nested branches deferred."
+}
