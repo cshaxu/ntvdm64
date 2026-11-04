@@ -77,6 +77,7 @@ extern void host_timer2_waveform IPT5(unsigned int, a, unsigned long, b,
 #ifdef NTVDM
 void HostPpiState(half_word);
 #else
+#line 80
 #error Unsupported excluded original configuration
 #endif
 #line 83

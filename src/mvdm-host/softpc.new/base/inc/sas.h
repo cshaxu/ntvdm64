@@ -43,6 +43,7 @@ typedef enum  {
 #define SAS_MAX_TYPE		SAS_DANGEROUS
 
 #else /* CPU_40_STYLE */
+#line 46
 #error DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register.
 #endif /* CPU_40_STYLE else */
 
@@ -104,6 +105,7 @@ extern IU8 *NtGetPtrToLinAddrByte IPT1(IU32, lin_addr);
 extern host_addr Start_of_M_area;       /* host addr (char *) of start of M */
 extern  PHY_ADDR Length_of_M_area;       /* offset of end of M */
 #else /* CPU_40_STYLE */
+#line 111
 #error DIVERGENCE MVDM-HOST-DIV-616: unsupported non-CPU40 SAS interface
 #endif /* ! CPU_40_STYLE */
 #line 272
@@ -132,10 +134,8 @@ extern  PHY_ADDR Length_of_M_area;       /* offset of end of M */
 /* Memory bounds for the colour graphics adaptor */
 
 #ifdef BACK_M
+#line 297
 #error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
-
-
-
 #else
 #line 289
 
@@ -205,6 +205,7 @@ extern  PHY_ADDR Length_of_M_area;       /* offset of end of M */
 #ifndef GISP_SVGA
 #define VIDEO_IO_OFFSET		0xF065
 #else		/* GISP_SVGA */
+#line 371
 #error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif		/* GISP_SVGA  */
 #define VIDEO_IO_RE_ENTRY	0xF06C
@@ -295,6 +296,7 @@ extern  PHY_ADDR Length_of_M_area;       /* offset of end of M */
 #ifndef GISP_SVGA 
 #define EGA_ENTRY_OFF	0x0898
 #else	 	/* GISP_SVGA */
+#line 462
 #error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif		/* GISP_SVGA */
 
@@ -564,6 +566,7 @@ extern  PHY_ADDR Length_of_M_area;       /* offset of end of M */
 
 
 #else		/* GISP_SVGA */
+#line 731
 #error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif /* GISP_SVGA */
 #line 716
@@ -614,23 +617,8 @@ extern  PHY_ADDR Length_of_M_area;       /* offset of end of M */
 
 /* Union for accessing an entry in the Interrupt Vector table */
 #ifdef BACK_M
+#line 1032
 #error Excluded unsupported BACK_M configuration
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #else /* BACK_M */
 
 #ifdef BIGEND

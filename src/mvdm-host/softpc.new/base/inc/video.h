@@ -72,6 +72,7 @@
 #ifdef EGG
 #define vd_rows_on_screen 0x484
 #else
+#line 75
 #error Unsupported excluded original configuration
 #endif
 #line 77
@@ -137,6 +138,7 @@ IMPORT void vga_int_1C IPT0();
 #ifdef VGG
 #define EGA_FUNC_SIZE	0x1D
 #else
+#line 139
 #error Unsupported excluded original configuration
 #endif
 #line 141
@@ -181,6 +183,7 @@ IMPORT MODE_ENTRY vd_ext_graph_table[];
 #ifdef V7VGA
 #define VD_MAX_MODE	0x69
 #else
+#line 182
 #error Unsupported excluded original configuration
 #endif
 #line 184
@@ -240,6 +243,7 @@ IMPORT unsigned char	valid_modes[];
 #ifdef V7VGA
 #define is_v7vga_mode(nm)	((nm >= 0x40 && nm <= 0x45) || (nm >= 0x60 && nm <= 0x69))
 #else
+#line 240
 #error Unsupported excluded original configuration
 #endif /* V7VGA */
 #line 242

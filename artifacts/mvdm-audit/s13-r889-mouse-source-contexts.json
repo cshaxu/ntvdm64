@@ -1,0 +1,990 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "source_sha256": "ef64e31d7858f4fdb052ede9124a894d9727295c4ea8e1b577b3626202aee507",
+  "object": "keymouse/mouse_io",
+  "arms": [
+    {
+      "label": "codex_r688_arm_0000",
+      "line": 59,
+      "kind": "ifdef",
+      "expression": "SEGMENTATION",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0001",
+      "line": 89,
+      "kind": "ifdef",
+      "expression": "EGG",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0002",
+      "line": 106,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0003",
+      "line": 131,
+      "kind": "ifdef",
+      "expression": "MOUSE_16_BIT",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0004",
+      "line": 140,
+      "kind": "ifdef",
+      "expression": "CPU_40_STYLE",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0005",
+      "line": 145,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0006",
+      "line": 165,
+      "kind": "ifdef",
+      "expression": "EGG",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0007",
+      "line": 418,
+      "kind": "ifdef",
+      "expression": "EGG",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0008",
+      "line": 425,
+      "kind": "ifdef",
+      "expression": "HERC",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0009",
+      "line": 558,
+      "kind": "ifdef",
+      "expression": "EGG",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0010",
+      "line": 569,
+      "kind": "ifdef",
+      "expression": "VGG",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0011",
+      "line": 575,
+      "kind": "ifdef",
+      "expression": "V7VGA",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0012",
+      "line": 611,
+      "kind": "ifdef",
+      "expression": "EGG",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0013",
+      "line": 622,
+      "kind": "ifdef",
+      "expression": "VGG",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0014",
+      "line": 628,
+      "kind": "ifdef",
+      "expression": "V7VGA",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0015",
+      "line": 888,
+      "kind": "ifdef",
+      "expression": "HERC",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0016",
+      "line": 924,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0017",
+      "line": 932,
+      "kind": "ifdef",
+      "expression": "MONITOR",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0018",
+      "line": 950,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0019",
+      "line": 955,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0020",
+      "line": 976,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0021",
+      "line": 979,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0022",
+      "line": 983,
+      "kind": "ifdef",
+      "expression": "MOUSE_16_BIT",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0023",
+      "line": 987,
+      "kind": "if",
+      "expression": "!defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX))",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0024",
+      "line": 1021,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0025",
+      "line": 1034,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0026",
+      "line": 1038,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0027",
+      "line": 1067,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0028",
+      "line": 1071,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0029",
+      "line": 1089,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0030",
+      "line": 1103,
+      "kind": "ifdef",
+      "expression": "EGG",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0031",
+      "line": 1212,
+      "kind": "ifdef",
+      "expression": "MOUSE_16_BIT",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0032",
+      "line": 1218,
+      "kind": "ifdef",
+      "expression": "HERC",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0033",
+      "line": 1322,
+      "kind": "ifdef",
+      "expression": "EGG",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0034",
+      "line": 1537,
+      "kind": "ifdef",
+      "expression": "EGG",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0035",
+      "line": 1542,
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0036",
+      "line": 1546,
+      "kind": "ifdef",
+      "expression": "V7VGA",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0037",
+      "line": 1548,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0038",
+      "line": 1557,
+      "kind": "ifdef",
+      "expression": "V7VGA",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0039",
+      "line": 1564,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0040",
+      "line": 1569,
+      "kind": "ifdef",
+      "expression": "V7VGA",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0041",
+      "line": 1576,
+      "kind": "ifdef",
+      "expression": "EGG",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0042",
+      "line": 1588,
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0043",
+      "line": 1596,
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0044",
+      "line": 1600,
+      "kind": "ifdef",
+      "expression": "MOUSE_16_BIT",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0045",
+      "line": 1638,
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0046",
+      "line": 1647,
+      "kind": "ifdef",
+      "expression": "EGG",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0047",
+      "line": 1947,
+      "kind": "if",
+      "expression": "!defined(NTVDM) || !defined(MONITOR)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0048",
+      "line": 1968,
+      "kind": "ifndef",
+      "expression": "X86GFX",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0049",
+      "line": 1996,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0050",
+      "line": 2000,
+      "kind": "ifdef",
+      "expression": "GISP_SVGA",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0051",
+      "line": 2006,
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0052",
+      "line": 2116,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0053",
+      "line": 2118,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0054",
+      "line": 2126,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0055",
+      "line": 2205,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0056",
+      "line": 2237,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0057",
+      "line": 2239,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0058",
+      "line": 2270,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0059",
+      "line": 2272,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0060",
+      "line": 2303,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0061",
+      "line": 2324,
+      "kind": "ifdef",
+      "expression": "MOUSE_16_BIT",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0062",
+      "line": 2341,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0063",
+      "line": 2439,
+      "kind": "if",
+      "expression": "defined(MONITOR) && defined(NTVDM)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0064",
+      "line": 2448,
+      "kind": "if",
+      "expression": "!defined(NTVDM) || (defined(NTVDM) && defined(V7VGA))",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0065",
+      "line": 2522,
+      "kind": "if",
+      "expression": "defined(MONITOR) && defined(NTVDM)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0066",
+      "line": 2583,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0067",
+      "line": 2585,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0068",
+      "line": 2608,
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(X86GFX)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0069",
+      "line": 2634,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0070",
+      "line": 2636,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0071",
+      "line": 2649,
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(X86GFX)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0072",
+      "line": 2694,
+      "kind": "if",
+      "expression": "defined(NTVDM)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0073",
+      "line": 2836,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0074",
+      "line": 2885,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0075",
+      "line": 2961,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0076",
+      "line": 2963,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0077",
+      "line": 3044,
+      "kind": "ifndef",
+      "expression": "PROD",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0078",
+      "line": 3056,
+      "kind": "ifdef",
+      "expression": "EGG",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0079",
+      "line": 3289,
+      "kind": "ifdef",
+      "expression": "MOUSE_16_BIT",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0080",
+      "line": 3297,
+      "kind": "if",
+      "expression": "defined (NTVDM) && defined(MONITOR)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0081",
+      "line": 3340,
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0082",
+      "line": 3348,
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0083",
+      "line": 3372,
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0084",
+      "line": 3429,
+      "kind": "ifdef",
+      "expression": "EGG",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0085",
+      "line": 3432,
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0086",
+      "line": 3440,
+      "kind": "ifndef",
+      "expression": "PROD",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0087",
+      "line": 3651,
+      "kind": "ifndef",
+      "expression": "PROD",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0088",
+      "line": 3683,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0089",
+      "line": 3685,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0090",
+      "line": 3696,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0091",
+      "line": 3701,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0092",
+      "line": 3719,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0093",
+      "line": 3722,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0094",
+      "line": 3770,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0095",
+      "line": 3775,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0096",
+      "line": 3793,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0097",
+      "line": 3877,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0098",
+      "line": 3883,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0099",
+      "line": 3890,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0100",
+      "line": 3983,
+      "kind": "ifdef",
+      "expression": "MOUSE_16_BIT",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0101",
+      "line": 4656,
+      "kind": "ifndef",
+      "expression": "PROD",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0102",
+      "line": 4658,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0103",
+      "line": 4753,
+      "kind": "ifdef",
+      "expression": "HERC",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0104",
+      "line": 4769,
+      "kind": "ifdef",
+      "expression": "V7VGA",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0105",
+      "line": 4798,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0106",
+      "line": 4800,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0107",
+      "line": 4831,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0108",
+      "line": 4833,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0109",
+      "line": 4932,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0110",
+      "line": 4934,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0111",
+      "line": 5034,
+      "kind": "ifdef",
+      "expression": "V7VGA",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0112",
+      "line": 5192,
+      "kind": "ifdef",
+      "expression": "EGG",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0113",
+      "line": 5465,
+      "kind": "ifdef",
+      "expression": "VGG",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0114",
+      "line": 5746,
+      "kind": "ifdef",
+      "expression": "HERC",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0115",
+      "line": 5855,
+      "kind": "ifdef",
+      "expression": "HERC",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0116",
+      "line": 5949,
+      "kind": "ifdef",
+      "expression": "CPU_30_STYLE",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0117",
+      "line": 5951,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    }
+  ],
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "3b59578ddd9138f2c2abc2d422a49fc4299027acf09f29b5b6fe1c46a7b646d1",
+      "hit": [
+        "codex_r688_arm_0001",
+        "codex_r688_arm_0002",
+        "codex_r688_arm_0004",
+        "codex_r688_arm_0006",
+        "codex_r688_arm_0007",
+        "codex_r688_arm_0009",
+        "codex_r688_arm_0010",
+        "codex_r688_arm_0011",
+        "codex_r688_arm_0012",
+        "codex_r688_arm_0013",
+        "codex_r688_arm_0014",
+        "codex_r688_arm_0016",
+        "codex_r688_arm_0018",
+        "codex_r688_arm_0020",
+        "codex_r688_arm_0023",
+        "codex_r688_arm_0025",
+        "codex_r688_arm_0026",
+        "codex_r688_arm_0027",
+        "codex_r688_arm_0028",
+        "codex_r688_arm_0029",
+        "codex_r688_arm_0030",
+        "codex_r688_arm_0033",
+        "codex_r688_arm_0034",
+        "codex_r688_arm_0036",
+        "codex_r688_arm_0038",
+        "codex_r688_arm_0040",
+        "codex_r688_arm_0041",
+        "codex_r688_arm_0046",
+        "codex_r688_arm_0047",
+        "codex_r688_arm_0048",
+        "codex_r688_arm_0053",
+        "codex_r688_arm_0054",
+        "codex_r688_arm_0057",
+        "codex_r688_arm_0059",
+        "codex_r688_arm_0062",
+        "codex_r688_arm_0064",
+        "codex_r688_arm_0067",
+        "codex_r688_arm_0070",
+        "codex_r688_arm_0072",
+        "codex_r688_arm_0073",
+        "codex_r688_arm_0074",
+        "codex_r688_arm_0076",
+        "codex_r688_arm_0078",
+        "codex_r688_arm_0084",
+        "codex_r688_arm_0088",
+        "codex_r688_arm_0090",
+        "codex_r688_arm_0092",
+        "codex_r688_arm_0094",
+        "codex_r688_arm_0097",
+        "codex_r688_arm_0098",
+        "codex_r688_arm_0102",
+        "codex_r688_arm_0104",
+        "codex_r688_arm_0106",
+        "codex_r688_arm_0108",
+        "codex_r688_arm_0110",
+        "codex_r688_arm_0111",
+        "codex_r688_arm_0112",
+        "codex_r688_arm_0113",
+        "codex_r688_arm_0117"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "3b59578ddd9138f2c2abc2d422a49fc4299027acf09f29b5b6fe1c46a7b646d1",
+      "hit": [
+        "codex_r688_arm_0001",
+        "codex_r688_arm_0002",
+        "codex_r688_arm_0004",
+        "codex_r688_arm_0006",
+        "codex_r688_arm_0007",
+        "codex_r688_arm_0009",
+        "codex_r688_arm_0010",
+        "codex_r688_arm_0011",
+        "codex_r688_arm_0012",
+        "codex_r688_arm_0013",
+        "codex_r688_arm_0014",
+        "codex_r688_arm_0016",
+        "codex_r688_arm_0018",
+        "codex_r688_arm_0020",
+        "codex_r688_arm_0023",
+        "codex_r688_arm_0025",
+        "codex_r688_arm_0026",
+        "codex_r688_arm_0027",
+        "codex_r688_arm_0028",
+        "codex_r688_arm_0029",
+        "codex_r688_arm_0030",
+        "codex_r688_arm_0033",
+        "codex_r688_arm_0034",
+        "codex_r688_arm_0036",
+        "codex_r688_arm_0038",
+        "codex_r688_arm_0040",
+        "codex_r688_arm_0041",
+        "codex_r688_arm_0046",
+        "codex_r688_arm_0047",
+        "codex_r688_arm_0048",
+        "codex_r688_arm_0053",
+        "codex_r688_arm_0054",
+        "codex_r688_arm_0057",
+        "codex_r688_arm_0059",
+        "codex_r688_arm_0062",
+        "codex_r688_arm_0064",
+        "codex_r688_arm_0067",
+        "codex_r688_arm_0070",
+        "codex_r688_arm_0072",
+        "codex_r688_arm_0073",
+        "codex_r688_arm_0074",
+        "codex_r688_arm_0076",
+        "codex_r688_arm_0078",
+        "codex_r688_arm_0084",
+        "codex_r688_arm_0088",
+        "codex_r688_arm_0090",
+        "codex_r688_arm_0092",
+        "codex_r688_arm_0094",
+        "codex_r688_arm_0097",
+        "codex_r688_arm_0098",
+        "codex_r688_arm_0102",
+        "codex_r688_arm_0104",
+        "codex_r688_arm_0106",
+        "codex_r688_arm_0108",
+        "codex_r688_arm_0110",
+        "codex_r688_arm_0111",
+        "codex_r688_arm_0112",
+        "codex_r688_arm_0113",
+        "codex_r688_arm_0117"
+      ]
+    }
+  ],
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 203,
+      "identical": true,
+      "include_trace_sha256": "0d65ce5c0bc205a215087dfbb2d1a14328ed90e8ca1cd7917792a93ea5ceb431",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 203,
+      "identical": true,
+      "include_trace_sha256": "0d65ce5c0bc205a215087dfbb2d1a14328ed90e8ca1cd7917792a93ea5ceb431",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+  "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+  "after_sha256": "eabb13ddd85ca589036d7fcdb493f1b23da1e4c9d5727b0dbec2de45cca48785",
+  "review": "All first-level original group conditions aligned; selected branches witnessed in both product contexts. Existing excluded #error arms normalized to original line markers. No newly excluded behavior.",
+  "limitations": "Conditional groups within retained arms remain for later depth."
+}

@@ -1,0 +1,34 @@
+{
+  "header_sha256": "0e1c69f4fac9fea83b4bc29f020a39b9362aa4397e243865bc84c59c181eee8a",
+  "arms": [
+    {
+      "line": 1,
+      "label": "codex_traceh_h_arm_0000",
+      "kind": "ifndef",
+      "expression": "_TRACE_H"
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/bios/reset.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/reset.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_traceh_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/softpc.new/base/inc/trace.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\trace.h",
+  "original_sha256": "d70092a47d833c0ec3d859ebe7963feb374f5f0abb9288a03f9ffea7198b275f",
+  "after_sha256": "0e1c69f4fac9fea83b4bc29f020a39b9362aa4397e243865bc84c59c181eee8a",
+  "review": "Original outer include guard positively selected in actual product context and retained. Nested groups are for later depth. No source change.",
+  "limitations": "Positive witness establishes outer selection only."
+}

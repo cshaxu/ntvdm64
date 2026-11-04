@@ -1,0 +1,49 @@
+{
+  "header_sha256": "2461d7f74c3317a98d1456c238ad2f14bcdb2cbcd189d39836f24a353893e4b3",
+  "arms": [
+    {
+      "line": 29,
+      "label": "codex_umb_h_arm_0000",
+      "kind": "ifndef",
+      "expression": "DWORD"
+    },
+    {
+      "line": 32,
+      "label": "codex_umb_h_arm_0001",
+      "kind": "ifndef",
+      "expression": "WORD"
+    },
+    {
+      "line": 35,
+      "label": "codex_umb_h_arm_0002",
+      "kind": "ifndef",
+      "expression": "PVOID"
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/xms/xms.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486/xms.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_umb_h_arm_0000",
+        "codex_umb_h_arm_0001",
+        "codex_umb_h_arm_0002"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/softpc.new/base/inc/umb.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\umb.h",
+  "original_sha256": "2461d7f74c3317a98d1456c238ad2f14bcdb2cbcd189d39836f24a353893e4b3",
+  "after_sha256": "2461d7f74c3317a98d1456c238ad2f14bcdb2cbcd189d39836f24a353893e4b3",
+  "review": "All three first-level branches positively selected in product context; retained unchanged.",
+  "limitations": "Positive witness establishes first-level selection only."
+}

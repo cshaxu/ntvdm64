@@ -1,0 +1,380 @@
+{
+  "scope": "selected current first-level arms with nested condition groups, without inspecting nested details",
+  "parents": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/mouse_io.h",
+      "parent_line": 249,
+      "parent_kind": "ifdef",
+      "parent_expression": "EGG",
+      "child_group_count": 1,
+      "evidence": "s13-r866-mouseio-header-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/mouse_io.h",
+      "parent_line": 798,
+      "parent_kind": "ifdef",
+      "parent_expression": "NTVDM",
+      "child_group_count": 1,
+      "evidence": "s13-r866-mouseio-header-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/mouse_io.h",
+      "parent_line": 975,
+      "parent_kind": "ifdef",
+      "parent_expression": "EGG",
+      "child_group_count": 1,
+      "evidence": "s13-r866-mouseio-header-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/mouse_io.h",
+      "parent_line": 1111,
+      "parent_kind": "ifdef",
+      "parent_expression": "EGG",
+      "child_group_count": 1,
+      "evidence": "s13-r866-mouseio-header-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/printer.h",
+      "parent_line": 1,
+      "parent_kind": "ifdef",
+      "parent_expression": "PRINTER",
+      "child_group_count": 3,
+      "evidence": "s13-r868-printer-header-context.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/rs232.h",
+      "parent_line": 1,
+      "parent_kind": "ifndef",
+      "parent_expression": "_RS232_H",
+      "child_group_count": 26,
+      "evidence": "s13-r870-rs232-header-context.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/suplib.h",
+      "parent_line": 19,
+      "parent_kind": "ifndef",
+      "parent_expression": "_SUPLIB_H",
+      "child_group_count": 1,
+      "evidence": "s13-r875-suplib-header-context.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/trace.h",
+      "parent_line": 1,
+      "parent_kind": "ifndef",
+      "parent_expression": "_TRACE_H",
+      "child_group_count": 2,
+      "evidence": "s13-r879-trace-header-context.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/vgaports.h",
+      "parent_line": 1,
+      "parent_kind": "ifdef",
+      "parent_expression": "VGG",
+      "child_group_count": 9,
+      "evidence": "s13-r883-vgaports-header-context.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "parent_line": 197,
+      "parent_kind": "ifdef",
+      "parent_expression": "EGG",
+      "child_group_count": 1,
+      "evidence": "s13-r885-video-header-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "parent_line": 209,
+      "parent_kind": "ifdef",
+      "parent_expression": "VGG",
+      "child_group_count": 1,
+      "evidence": "s13-r885-video-header-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "parent_line": 270,
+      "parent_kind": "ifdef",
+      "parent_expression": "NTVDM",
+      "child_group_count": 1,
+      "evidence": "s13-r885-video-header-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/xt.h",
+      "parent_line": 1,
+      "parent_kind": "ifndef",
+      "parent_expression": "_XT_H",
+      "child_group_count": 11,
+      "evidence": "s13-r887-xt-header-context.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "parent_line": 102,
+      "parent_kind": "ifdef",
+      "parent_expression": "NTVDM",
+      "child_group_count": 1,
+      "evidence": "s13-r889-mouse-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "parent_line": 990,
+      "parent_kind": "if",
+      "parent_expression": "!defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX))",
+      "child_group_count": 2,
+      "evidence": "s13-r889-mouse-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "parent_line": 1328,
+      "parent_kind": "ifdef",
+      "parent_expression": "EGG",
+      "child_group_count": 4,
+      "evidence": "s13-r889-mouse-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "parent_line": 1660,
+      "parent_kind": "ifdef",
+      "parent_expression": "EGG",
+      "child_group_count": 3,
+      "evidence": "s13-r889-mouse-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "parent_line": 1960,
+      "parent_kind": "if",
+      "parent_expression": "!defined(NTVDM) || !defined(MONITOR)",
+      "child_group_count": 2,
+      "evidence": "s13-r889-mouse-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "parent_line": 1981,
+      "parent_kind": "ifndef",
+      "parent_expression": "X86GFX",
+      "child_group_count": 1,
+      "evidence": "s13-r889-mouse-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "parent_line": 2292,
+      "parent_kind": "else",
+      "parent_expression": "",
+      "child_group_count": 1,
+      "evidence": "s13-r889-mouse-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "parent_line": 2610,
+      "parent_kind": "else",
+      "parent_expression": "",
+      "child_group_count": 1,
+      "evidence": "s13-r889-mouse-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "parent_line": 2663,
+      "parent_kind": "else",
+      "parent_expression": "",
+      "child_group_count": 1,
+      "evidence": "s13-r889-mouse-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "parent_line": 2722,
+      "parent_kind": "if",
+      "parent_expression": "defined(NTVDM)",
+      "child_group_count": 1,
+      "evidence": "s13-r889-mouse-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "parent_line": 2992,
+      "parent_kind": "else",
+      "parent_expression": "",
+      "child_group_count": 1,
+      "evidence": "s13-r889-mouse-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "parent_line": 4847,
+      "parent_kind": "else",
+      "parent_expression": "",
+      "child_group_count": 1,
+      "evidence": "s13-r889-mouse-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "parent_line": 4881,
+      "parent_kind": "else",
+      "parent_expression": "",
+      "child_group_count": 1,
+      "evidence": "s13-r889-mouse-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "parent_line": 4983,
+      "parent_kind": "else",
+      "parent_expression": "",
+      "child_group_count": 1,
+      "evidence": "s13-r889-mouse-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "parent_line": 5241,
+      "parent_kind": "ifdef",
+      "parent_expression": "EGG",
+      "child_group_count": 2,
+      "evidence": "s13-r889-mouse-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "parent_line": 5514,
+      "parent_kind": "ifdef",
+      "parent_expression": "VGG",
+      "child_group_count": 2,
+      "evidence": "s13-r889-mouse-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "parent_line": 6003,
+      "parent_kind": "else",
+      "parent_expression": "",
+      "child_group_count": 1,
+      "evidence": "s13-r889-mouse-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "parent_line": 236,
+      "parent_kind": "ifdef",
+      "parent_expression": "SPC386",
+      "child_group_count": 2,
+      "evidence": "s13-r890-ios-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "parent_line": 405,
+      "parent_kind": "else",
+      "parent_expression": "",
+      "child_group_count": 1,
+      "evidence": "s13-r890-ios-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "parent_line": 474,
+      "parent_kind": "ifdef",
+      "parent_expression": "VIRTUALISATION",
+      "child_group_count": 1,
+      "evidence": "s13-r890-ios-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "parent_line": 552,
+      "parent_kind": "ifdef",
+      "parent_expression": "VIRTUALISATION",
+      "child_group_count": 1,
+      "evidence": "s13-r890-ios-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "parent_line": 608,
+      "parent_kind": "ifdef",
+      "parent_expression": "SPC386",
+      "child_group_count": 2,
+      "evidence": "s13-r890-ios-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "parent_line": 974,
+      "parent_kind": "ifdef",
+      "parent_expression": "NTVDM",
+      "child_group_count": 2,
+      "evidence": "s13-r890-ios-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "parent_line": 83,
+      "parent_kind": "if",
+      "parent_expression": "defined(CCPU) && !defined(CPU_30_STYLE)",
+      "child_group_count": 1,
+      "evidence": "s13-r892-xt-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "parent_line": 118,
+      "parent_kind": "if",
+      "parent_expression": "!defined(MAC_LIKE) && !defined(CPU_30_STYLE)",
+      "child_group_count": 1,
+      "evidence": "s13-r892-xt-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "parent_line": 195,
+      "parent_kind": "ifdef",
+      "parent_expression": "NTVDM",
+      "child_group_count": 1,
+      "evidence": "s13-r893-ica-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "parent_line": 446,
+      "parent_kind": "if",
+      "parent_expression": "defined (NTVDM)",
+      "child_group_count": 1,
+      "evidence": "s13-r893-ica-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "parent_line": 1345,
+      "parent_kind": "if",
+      "parent_expression": "defined (NTVDM)",
+      "child_group_count": 1,
+      "evidence": "s13-r893-ica-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "parent_line": 1375,
+      "parent_kind": "if",
+      "parent_expression": "defined(NTVDM)",
+      "child_group_count": 1,
+      "evidence": "s13-r893-ica-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "parent_line": 400,
+      "parent_kind": "if",
+      "parent_expression": "defined(NTVDM)",
+      "child_group_count": 1,
+      "evidence": "s13-r895-timer-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "parent_line": 626,
+      "parent_kind": "if",
+      "parent_expression": "defined(NTVDM) || defined(GISP_SVGA)",
+      "child_group_count": 1,
+      "evidence": "s13-r895-timer-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "parent_line": 1712,
+      "parent_kind": "else",
+      "parent_expression": "",
+      "child_group_count": 1,
+      "evidence": "s13-r895-timer-source-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "parent_line": 1899,
+      "parent_kind": "else",
+      "parent_expression": "",
+      "child_group_count": 1,
+      "evidence": "s13-r895-timer-source-contexts.json"
+    }
+  ],
+  "parent_count": 46,
+  "child_group_count": 104,
+  "excluded_deferred": [
+    "sas.h",
+    "keyba.c",
+    "illegalp.c"
+  ]
+}

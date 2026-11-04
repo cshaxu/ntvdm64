@@ -41,6 +41,7 @@
 #include "host.h"
 #include "trace.h"
 #ifdef SECURE
+#line 44
 #error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register.
 #endif
 #include "gmi.h"
@@ -60,6 +61,7 @@
  * their exact existing contracts without changing startup order. */
 #line 54
 #ifndef CPU_40_STYLE
+#line 55
 #error Excluded unsupported non-CPU40 host startup profile
 #else
 #line 61
@@ -78,12 +80,14 @@ IMPORT void setup_vga_globals IPT0();
 #ifdef ANSI
 extern void host_applInit(int argc, char *argv[]);
 #else
+#line 66
 #error Unsupported excluded original configuration
 #endif	/* ANSI */
 #line 75
 
 #line 69
 #ifdef REAL_VGA
+#line 70
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #endif
 #line 72
@@ -91,6 +95,7 @@ extern void host_applInit(int argc, char *argv[]);
 /* Have global variables defined here to indicate what product to run as. */
 
 #ifdef SOFTWINDOWS
+#line 76
 #error DIVERGENCE MVDM-HOST-DIV-529: SOFTWINDOWS platform branch is not selected; see mirror register.
 #else
 GLOBAL IBOOL Running_SoftWindows = FALSE;
@@ -101,6 +106,7 @@ GLOBAL char **pargv;	/* Pointer to argv		*/
 GLOBAL int *pargc;	/* Pointer to argc		*/
 
 #ifndef NTVDM
+#line 87
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
 #line 98
@@ -110,6 +116,7 @@ GLOBAL int *pargc;	/* Pointer to argc		*/
 #if defined(NTVDM) || defined(host_main)
 INT host_main IFN2(INT, argc, CHAR **, argv)
 #else   /* host_main */
+#line 97
 #error Unsupported excluded original configuration
 #endif  /* host_main */
 #line 99
@@ -117,18 +124,22 @@ INT host_main IFN2(INT, argc, CHAR **, argv)
   IMPORT ULONG setup_global_data_ptr();
 
 #ifndef	CPU_40_STYLE
+#line 103
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
 
 #ifdef SECURE
+#line 107
 #error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register.
 #endif
 
 #ifdef	SETUID_ROOT
+#line 112
 #error DIVERGENCE MVDM-HOST-DIV-529: SETUID_ROOT platform branch is not selected; see mirror register.
 #endif	/* SETUID_ROOT */
 
 #if !defined(PROD) || defined(HUNTER)
+#line 119
 #error Unsupported excluded original configuration
 #endif /* !PROD || HUNTER */
 #line 126
@@ -146,30 +157,36 @@ INT host_main IFN2(INT, argc, CHAR **, argv)
   pargv = argv;
 
 #if !defined(NTVDM) && !defined(macintosh) && !defined(VMS)
+#line 137
 #error Unsupported excluded original configuration
 #endif	/* NTVDM, macintosh, VMS */
 #line 142
 
 #line 140
 #ifndef PROD
+#line 141
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* !PROD */
 #line 143
 
 #ifdef SECURE
+#line 145
 #error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register.
 #endif
 
 #ifndef NTVDM
+#line 149
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
   host_applInit(argc,argv);	/* recommended home is host/xxxx_reset.c */
 
 #ifdef SECURE
+#line 154
 #error Unsupported excluded original configuration
 #endif
 #line 167
 #if defined(CPU_40_STYLE) && !defined(CCPU)
+#line 168
 #error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
 #endif /* assembler 4.0 cpu */
 #line 174
@@ -177,6 +194,7 @@ INT host_main IFN2(INT, argc, CHAR **, argv)
   verbose = FALSE;
 
 #ifndef PROD
+#line 178
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
@@ -231,6 +249,7 @@ INT host_main IFN2(INT, argc, CHAR **, argv)
 #endif	/* defined(NTVDM) || defined(macintosh) */
 
 #if !defined(PROD) || defined(HUNTER)
+#line 227
 #error Unsupported excluded original configuration
 #endif
 #line 245
@@ -245,6 +264,7 @@ INT host_main IFN2(INT, argc, CHAR **, argv)
 
 #line 248
 #ifndef PROD
+#line 249
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
 #line 263
@@ -268,16 +288,19 @@ INT host_main IFN2(INT, argc, CHAR **, argv)
 #ifndef GISP_SVGA
 	setup_vga_globals();
 #else /* GISP_SVGA */
+#line 282
 #error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif /* GISP_SVGA */
 
 #ifdef REAL_VGA
+#line 286
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #endif /* REAL_VGA */
 
   host_init_screen();
 
 #ifdef REAL_VGA
+#line 293
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #endif /* REAL_VGA */
 

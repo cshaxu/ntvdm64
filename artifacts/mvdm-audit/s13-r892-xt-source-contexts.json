@@ -1,0 +1,87 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+  "source_sha256": "e46f449895e2cce351cb8907b32867a5b2a531200904021eb02152361acd9927",
+  "object": "support/xt",
+  "arms": [
+    {
+      "label": "codex_r688_arm_0000",
+      "line": 83,
+      "kind": "if",
+      "expression": "defined(CCPU) && !defined(CPU_30_STYLE)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0001",
+      "line": 103,
+      "kind": "ifdef",
+      "expression": "CPU_30_STYLE",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0002",
+      "line": 118,
+      "kind": "if",
+      "expression": "!defined(MAC_LIKE) && !defined(CPU_30_STYLE)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0003",
+      "line": 147,
+      "kind": "ifdef",
+      "expression": "SPC386",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0004",
+      "line": 166,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    }
+  ],
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "72297a96d49e797b79acb32d764adcfbf2f7f6bf8d1cde9501a3a21994327b49",
+      "hit": [
+        "codex_r688_arm_0000",
+        "codex_r688_arm_0002",
+        "codex_r688_arm_0003"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "72297a96d49e797b79acb32d764adcfbf2f7f6bf8d1cde9501a3a21994327b49",
+      "hit": [
+        "codex_r688_arm_0000",
+        "codex_r688_arm_0002",
+        "codex_r688_arm_0003"
+      ]
+    }
+  ],
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 170,
+      "identical": true,
+      "include_trace_sha256": "b404fbbaa97713192e26a789e68a8e199039f1a0ec0d14ec1148be3e2ccb9a0d",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 170,
+      "identical": true,
+      "include_trace_sha256": "b404fbbaa97713192e26a789e68a8e199039f1a0ec0d14ec1148be3e2ccb9a0d",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\xt.c",
+  "original_sha256": "a95cda1054b1840df73dbcec6e23cacbee1ddf2fd1ed071318c8c9252f21c0cc",
+  "after_sha256": "e0f3547c1d58b42c24e38310b5157a187e2719b4e70590f0633183b6b96af474",
+  "review": "Original first-level group conditions aligned; selected branches witnessed in both product contexts. Existing excluded #error arms normalized to original diagnostic line markers. No newly excluded behavior.",
+  "limitations": "Conditional groups within retained arms remain for later depth."
+}

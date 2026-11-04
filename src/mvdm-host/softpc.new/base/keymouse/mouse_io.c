@@ -57,12 +57,8 @@
 
 
 #ifdef SEGMENTATION
+#line 60
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
 
 
@@ -129,6 +125,7 @@ LOCAL word              saved_int71_offset;
 #include "host_gfx.h"
 
 #ifdef MOUSE_16_BIT
+#line 176
 #error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register.
 #endif 		/* MOUSE_16_BIT */
 
@@ -143,6 +140,7 @@ LOCAL word              saved_int71_offset;
 #define OUTB(port, val) outb(port, val)
 
 #else
+#line 192
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
 
@@ -423,6 +421,7 @@ LOCAL EGA_graphics_cursor_display IPT0();
 #endif
 
 #ifdef HERC
+#line 475
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif /* HERC */
 
@@ -886,6 +885,7 @@ GLOBAL void mouse_driver_initialisation IFN0()
    black_hole_default.bottom_right.y = -MOUSE_VIRTUAL_SCREEN_DEPTH;
 
 #ifdef HERC
+#line 939
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif /* HERC */
 
@@ -953,6 +953,7 @@ void mouse_install1()
         sas_storew(int_addr(0x71), MOUSE_INT1_OFFSET);
         sas_storew(int_addr(0x71) + 2, MOUSE_INT1_SEGMENT);
 #else
+#line 1059
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif NTVDM
 
@@ -977,10 +978,12 @@ void mouse_install1()
 	sas_storew(int_addr(0x33), MOUSE_IO_INTERRUPT_OFFSET);
 	sas_storew(int_addr(0x33) + 2, MOUSE_IO_INTERRUPT_SEGMENT);
 #else
+#line 1087
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
 
 #ifdef MOUSE_16_BIT
+#line 1095
 #error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register.
 #endif
 
@@ -1019,6 +1022,7 @@ void mouse_install1()
 #endif		/* MOUSE_16_BIT */
 
 #else
+#line 1136
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	    /* if NTVDM && !X86GFX */
 
@@ -1210,12 +1214,14 @@ void mouse_io_language()
 }
 
 #ifdef	MOUSE_16_BIT
+#line 1327
 #error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register.
 #endif	/* MOUSE_16_BIT */
 
 LOCAL void get_screen_size IFN0()
 {
 #ifdef HERC
+#line 1372
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif /* HERC */
 	switch(current_video_mode)
@@ -1540,12 +1546,14 @@ void mouse_video_io()
 	IS32 mouse_video_function = getAH();
 
 #if defined(NTVDM) && defined(MONITOR)
+#line 1760
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 
 #ifdef V7VGA
 	if (mouse_video_function == MOUSE_VIDEO_SET_MODE || getAX() == MOUSE_V7_VIDEO_SET_MODE)
 #else
+#line 1766
 #error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif /* V7VGA */
 	{
@@ -1562,6 +1570,7 @@ void mouse_video_io()
 
 		if (is_bad_vid_mode(current_video_mode) && !is_v7vga_mode(current_video_mode))
 #else
+#line 1782
 #error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif /* V7VGA */
 		{
@@ -1586,6 +1595,7 @@ void mouse_video_io()
 		cursor_flag = MOUSE_CURSOR_DEFAULT;
 
 #if defined(NTVDM) && defined(MONITOR)
+#line 1806
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 		/*
@@ -1594,10 +1604,12 @@ void mouse_video_io()
 		cursor_mode_change(current_video_mode);
 
 #if defined(NTVDM) && defined(MONITOR)
+#line 1814
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 
 #ifdef	MOUSE_16_BIT
+#line 1818
 #error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register.
 #endif	/* MOUSE_16_BIT */
 
@@ -1636,6 +1648,7 @@ void mouse_video_io()
 		return;
 	}
 #if defined(NTVDM) && defined(MONITOR)
+#line 1860
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif /* NTVDM && MONITOR */
 
@@ -1994,16 +2007,19 @@ the application OUTBs the necessary data.
                                 setIP(saved_int10_offset);
                         }
 #else
+#line 2229
 #error DIVERGENCE MVDM-HOST-DIV-511: X86GFX alternative is not selected for this source; see mirror register.
 #endif	/* !X86GFX */
         }
 #ifdef GISP_SVGA
+#line 2233
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
 
 }
 
 #if defined(NTVDM) && defined(MONITOR)
+#line 2239
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif /* NTVDM && MONITOR */
 
@@ -2114,6 +2130,7 @@ void mouse_int1()
 	 *	The bus mouse hardware interrupt handler
 	 */
 #ifndef NTVDM
+#line 2351
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else
     MOUSE_VECTOR mouse_counter = { 0, 0 };
@@ -2203,6 +2220,7 @@ The old fashioned stuff
 ==================================================================*/
 
 #else /* use the SoftPC emulation */
+#line 2438
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM*/ 
 
@@ -2235,6 +2253,7 @@ LOCAL void mouse_update IFN1(MOUSE_CALL_MASK, condition_mask)
 	}
 
 #ifndef NTVDM
+#line 2590
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else   /* NTVDM */
 
@@ -2268,6 +2287,7 @@ outb(ICA0_PORT_0, END_INTERRUPT);
 
 /* DIVERGENCE(MVDM-HOST-DIV-318): non-MONITOR cursor_display is route-gated. */
 #ifndef NTVDM
+#line 2642
 #error Excluded unsupported non-NTVDM mouse profile
 #else
 #if !defined(MONITOR)
@@ -2301,6 +2321,7 @@ void mouse_int2()
 	note_trace0(MOUSE_VERBOSE, "mouse_int2:");
 
 #ifndef NTVDM
+#line 2671
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
@@ -2322,6 +2343,7 @@ void mouse_int2()
 		if (cursor_flag == MOUSE_CURSOR_DISPLAYED)
 		{
 #ifdef	MOUSE_16_BIT
+#line 2692
 #error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register.
 #endif	/* MOUSE_16_BIT */
 			{
@@ -2437,6 +2459,7 @@ LOCAL void mouse_reset IFN4(word *,installed_ptr,word *,nbuttons_ptr,word *,junk
 	cursor_flag = MOUSE_CURSOR_DEFAULT;
 
 #if defined(MONITOR) && defined(NTVDM)
+#line 2809
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 
@@ -2520,6 +2543,7 @@ LOCAL void mouse_reset IFN4(word *,installed_ptr,word *,nbuttons_ptr,word *,junk
 	area_copy(&black_hole_default, &black_hole);
 
 #if defined(MONITOR) && defined(NTVDM)
+#line 2892
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 
@@ -2581,6 +2605,7 @@ LOCAL void mouse_show_cursor IFN4(word *,junk1,word *,junk2,word *,junk3,word *,
 /* DIVERGENCE(MVDM-HOST-DIV-318): CCPU ROM BOP BD does not maintain a
    guest show count; retain the original C owner without MONITOR. */
 #ifndef NTVDM
+#line 2951
 #error Excluded unsupported non-NTVDM mouse profile
 #else
 #if !defined(MONITOR)
@@ -2606,6 +2631,7 @@ LOCAL void mouse_show_cursor IFN4(word *,junk1,word *,junk2,word *,junk3,word *,
 #line 2970
 
 #if defined(NTVDM) && defined(X86GFX)
+#line 2972
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 
@@ -2632,6 +2658,7 @@ LOCAL void mouse_hide_cursor IFN4(word *,junk1,word *,junk2,word *,junk3,word *,
 	note_trace0(MOUSE_VERBOSE, "mouse_io:hide_cursor()");
 /* DIVERGENCE(MVDM-HOST-DIV-318): pair the non-MONITOR C-owned show count. */
 #ifndef NTVDM
+#line 2997
 #error Excluded unsupported non-NTVDM mouse profile
 #else
 #if !defined(MONITOR)
@@ -2647,6 +2674,7 @@ LOCAL void mouse_hide_cursor IFN4(word *,junk1,word *,junk2,word *,junk3,word *,
 #endif
 #line 3007
 #if defined(NTVDM) && defined(X86GFX)
+#line 3008
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 
@@ -2959,6 +2987,7 @@ LOCAL void mouse_set_graphics IFN4(word *,junk1,MOUSE_SCALAR *,hot_spot_x_ptr,MO
 
 /* DIVERGENCE(MVDM-HOST-DIV-318): retain shape even before Window selection. */
 #ifndef NTVDM
+#line 3311
 #error Excluded unsupported non-NTVDM mouse profile
 #else
 #if !defined(MONITOR)
@@ -3042,6 +3071,7 @@ LOCAL void mouse_set_text IFN4(word *,junk1,MOUSE_STATE *,text_cursor_type_ptr,M
 	UNUSED(junk1);
 	
 #ifndef PROD
+#line 3390
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
@@ -3287,6 +3317,7 @@ LOCAL void mouse_conditional_off IFN4(word *,junk1,word *,junk2,MOUSE_SCALAR *,u
 	 *	conditional off area into account
 	 */
 #ifdef	MOUSE_16_BIT
+#line 3645
 #error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register.
 #endif	/* MOUSE_16_BIT */
 	{
@@ -3338,6 +3369,7 @@ LOCAL void mouse_save_state IFN4(word *,m1,word *,m2,word *,m3,word *,m4)
 	IS32			cs = 0;
 	IS32			i;
 #if defined(NTVDM) && defined(MONITOR)
+#line 3703
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 
@@ -3346,6 +3378,7 @@ LOCAL void mouse_save_state IFN4(word *,m1,word *,m2,word *,m3,word *,m4)
 	UNUSED(m3);
 	
 #if defined(NTVDM) && defined(MONITOR)
+#line 3715
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 	note_trace0(MOUSE_VERBOSE, "mouse_io: mouse_save_state()");
@@ -3370,6 +3403,7 @@ LOCAL void mouse_save_state IFN4(word *,m1,word *,m2,word *,m3,word *,m4)
 	sas_store (dest, (byte)(cs & 0xFF));
 
 #if defined(NTVDM) && defined(MONITOR)
+#line 3734
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 }
@@ -3430,6 +3464,7 @@ LOCAL void mouse_restore_state IFN4(word *,m1,word *,m2,word *,m3,word *,m4)
 		mouse_ega_mode (sas_hw_at(vd_video_mode));
 #endif
 #if defined(NTVDM) && defined(MONITOR)
+#line 3794
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 		if (cursor_flag == MOUSE_CURSOR_DISPLAYED){
@@ -3438,6 +3473,7 @@ LOCAL void mouse_restore_state IFN4(word *,m1,word *,m2,word *,m3,word *,m4)
 	}else{
 		/* Something failed.... ignore the call */
 #ifndef PROD
+#line 3805
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 	}
@@ -3649,6 +3685,7 @@ LOCAL void mouse_set_pointer_page IFN4(word *,m1,word *,m2,word *,m3,word *,m4)
 		}
 	}else{
 #ifndef PROD
+#line 4016
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 	}
@@ -3683,6 +3720,7 @@ LOCAL void mouse_driver_disable IFN4(word *,m1,word *,m2,word *,m3,word *,m4)
 #ifdef NTVDM
     word        current_int71_offset, current_int71_segment;
 #else
+#line 4050
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 	half_word	interrupt_mask_register;
@@ -3699,6 +3737,7 @@ LOCAL void mouse_driver_disable IFN4(word *,m1,word *,m2,word *,m3,word *,m4)
         failed = current_int71_offset  != MOUSE_INT1_OFFSET ||
                  current_int71_segment != MOUSE_INT1_SEGMENT;
 #else
+#line 4067
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 	}
@@ -3720,6 +3759,7 @@ LOCAL void mouse_driver_disable IFN4(word *,m1,word *,m2,word *,m3,word *,m4)
 		sas_storew (int_addr(0x71) + 0, saved_int71_offset);
 		sas_storew (int_addr(0x71) + 2, saved_int71_segment);
 #else
+#line 4095
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 		/*
@@ -3773,6 +3813,7 @@ LOCAL void mouse_driver_enable IFN4(word *,m1,word *,m2,word *,m3,word *,m4)
     sas_storew(int_addr(0x71), MOUSE_INT1_OFFSET);
     sas_storew(int_addr(0x71) + 2, MOUSE_INT1_SEGMENT);
 #else
+#line 4151
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
@@ -3791,6 +3832,7 @@ LOCAL void mouse_driver_enable IFN4(word *,m1,word *,m2,word *,m3,word *,m4)
 	 */
 
 #ifndef NTVDM
+#line 4172
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
 }
@@ -3888,6 +3930,7 @@ IMPORT word VirtualX, VirtualY;
 	*m2 = mouse_driver_disabled;
 
 #ifndef NTVDM
+#line 4281
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 }
@@ -3981,6 +4024,7 @@ LOCAL void mouse_set_video_mode IFN4
       cursor_mode_change(current_video_mode);
 
 #ifdef MOUSE_16_BIT
+#line 4376
 #error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register.
 #endif /* MOUSE_16_BIT */
 
@@ -4654,6 +4698,7 @@ LOCAL void mouse_unrecognised IFN4(word *,m1,word *,m2,word *,m3,word *,m4)
 	 *	number is found
 	 */
 #ifndef PROD
+#line 5051
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #else
 	UNUSED(m1);
@@ -4751,6 +4796,7 @@ LOCAL MOUSE_BIT_ADDRESS point_as_graphics_cell_address IFN1(MOUSE_POINT *,point_
 }
 
 #ifdef HERC
+#line 5155
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif /* HERC */
 
@@ -4796,6 +4842,7 @@ LOCAL void cursor_update IFN0()
 {
 /* DIVERGENCE(MVDM-HOST-DIV-318): restore original geometry only for Window. */
 #ifndef NTVDM
+#line 5228
 #error Excluded unsupported non-NTVDM mouse profile
 #else
 #if !defined(MONITOR)
@@ -4829,6 +4876,7 @@ LOCAL void cursor_display IFN0()
 {
 /* DIVERGENCE(MVDM-HOST-DIV-318): original software painter for Window only. */
 #ifndef NTVDM
+#line 5251
 #error Excluded unsupported non-NTVDM mouse profile
 #else
 #if !defined(MONITOR)
@@ -4930,6 +4978,7 @@ LOCAL void cursor_undisplay IFN0()
 /* DIVERGENCE(MVDM-HOST-DIV-318): erase saved guest pixels even after route
    retirement; Console has no save area unless Window drew one. */
 #ifndef NTVDM
+#line 5352
 #error Excluded unsupported non-NTVDM mouse profile
 #else
 #if !defined(MONITOR)
@@ -5744,6 +5793,7 @@ LOCAL void graphics_cursor_display IFN0()
 
 
 #ifdef HERC
+#line 6158
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif /* HERC */
 
@@ -5853,6 +5903,7 @@ LOCAL void graphics_cursor_undisplay IFN0()
 }
 
 #ifdef HERC
+#line 6417
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif /* HERC */
 
@@ -5947,6 +5998,7 @@ LOCAL void jump_to_user_subroutine IFN3(MOUSE_CALL_MASK,condition_mask,word,segm
 	/* Set CS:IP to the registered user subroutine. */
 	setCS(segment);
 #ifdef CPU_30_STYLE
+#line 6626
 #error Excluded unsupported original CPU30 mouse callback
 #else /* !CPU_30_STYLE */
 #if defined(CPU_40_STYLE)

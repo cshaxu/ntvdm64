@@ -253,6 +253,7 @@
 #define	MOUSE_VIDEO_MODE_MAXIMUM	0x11	
 #endif /* VGG */
 #else
+#line 256
 #error Unsupported excluded original configuration
 #endif
 #line 258
@@ -789,6 +790,7 @@ IMPORT HOSTMOUSEFUNCS	*working_mouse_funcs;
 	(working_mouse_funcs->cursor_mode_change)()
 	
 #else	/* HOST_MOUSE */
+#line 791
 #error Unsupported excluded original configuration
 #endif	/* HOST_MOUSE */
 #line 813

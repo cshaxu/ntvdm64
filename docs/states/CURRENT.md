@@ -88,14 +88,14 @@ Earlier versions remain in [held patches](../../artifacts/mvdm-audit/s11-held-cp
 
 ## Active Packet
 
-### M0 T473 S13 — NTCON input-source handoff
+### M0 T473 S13 â€” NTCON input-source handoff
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T473 S13, Ordinary Mode. |
 | Admission And Approval | Owner accepted and closed S12 and admitted S13. [S12 evidence](../../artifacts/mvdm-audit/s12-excluded-branch-errors.md). |
 | Objective | Input handoff; owner adds [mirror conditional reconciliation](../../artifacts/mvdm-audit/s13-mirror-conditional-plan.md). |
-| Delivery State | Handoff published; review active. Ordered audit checkpoint [r861](../../artifacts/mvdm-audit/s13-r861-delivery.md) built and published with timestamp-only or identical image differences; 153 existing C/H entries remain incomplete, including ten explicit deferred boundaries. Full 16 gates, DOS4GW startup, four Win3.1 modes and synthetic DOS/native three-CAF and Alt+Enter return passed. Physical input and injected handoff failures remain unverified; command output is in TODO. [Compile-branch evidence](../../artifacts/mvdm-audit/compile-branch-selection/README.md). [Evidence](../etc/evidence/m0-t473-s13-input-handoff.md). |
+| Delivery State | Handoff published; review active. Ordered audit checkpoint [r896](../../artifacts/mvdm-audit/s13-r896-delivery.md) built and published with timestamp-only or identical image differences; 136 existing C/H entries remain incomplete, including 13 explicit deferred boundaries. Full 16 gates, DOS4GW startup, four Win3.1 modes and synthetic DOS/native three-CAF and Alt+Enter return passed. Physical input and injected handoff failures remain unverified; command output is in TODO. [Compile-branch evidence](../../artifacts/mvdm-audit/compile-branch-selection/README.md). [Evidence](../etc/evidence/m0-t473-s13-input-handoff.md). |
 | Non-goals | Guest modification or rebuilding; DOS-specific shortcut workarounds; unrelated performance work. |
 | Reference Baseline | Published ten-image package at 1d2ddfb18; [handoff scope and prior observations](../etc/operations/m0-t473-s12-ntcon-input-source-handoff.md). |
 | Files And ABI Surface | NTCON frontend session, keyboard and channel; worker input client and original DOS scan-code handling; tests and evidence. |
@@ -121,7 +121,7 @@ The [S11 compilation-condition closure](../etc/evidence/m0-t473-s11-condition-cl
 
 ## S10 Closure Record
 
-The [S10 audit](../etc/evidence/m0-t473-s10-closure.md) records bounded source-role decisions and S11–S19 handoff.
+The [S10 audit](../etc/evidence/m0-t473-s10-closure.md) records bounded source-role decisions and S11â€“S19 handoff.
 
 ## T471 Closure Record
 
@@ -248,16 +248,10 @@ T462 and T463 disposable evidence remains under their `build/t462-s1` and
 
 T457's closed-stage evidence is indexed in its [closure](../history/m0-t457-closure.md).
 
-T454 may use only declared `build/t454-s1`, `build/t454-s2`, `build/t454-s3`
-and `build/t454-s4` roots for disposable evidence; stable `.ninja` and
-`.ccache` remain reusable caches. Retain durable results before exact-target
-cleanup; never use a task root as a build cache.
-
-`build/M0-T451`, `build/t451-s3`, `build/t451-s4` and `build/t451-s5` remain
-temporary evidence, not reusable caches. Process inventory access was denied
-during closure; deletion requires verified quiescence and the existing
-exact-target ownership checks. Durable results are linked from the closure.
-Stable `.ninja` and `.ccache` caches remain untouched.
+T454 and T451 task build roots are disposable evidence, not shared caches.
+Retain durable evidence and verify ownership and quiescence before cleanup;
+T451 process inventory was denied at closure. See their linked closure records.
+The shared `.ninja` and `.ccache` caches remain reusable.
 
 T456 S1/S2 disposable evidence uses `build/t456-s1` and `build/t456-s2`.
 

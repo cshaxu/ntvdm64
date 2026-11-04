@@ -1,0 +1,638 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "source_sha256": "fa8c007b05acbf50828a3f9ef54c9d75329892dc9606b63313bc9def9388ec1e",
+  "object": "keymouse/keyba",
+  "arms": [
+    {
+      "label": "codex_r688_arm_0000",
+      "line": 46,
+      "kind": "ifdef",
+      "expression": "SCCSID",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0001",
+      "line": 50,
+      "kind": "ifdef",
+      "expression": "SEGMENTATION",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0002",
+      "line": 83,
+      "kind": "ifdef",
+      "expression": "macintosh",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0003",
+      "line": 89,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0004",
+      "line": 107,
+      "kind": "ifndef",
+      "expression": "KBD_CONT_DELAY",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0005",
+      "line": 112,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0006",
+      "line": 206,
+      "kind": "ifdef",
+      "expression": "REAL_KBD",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0007",
+      "line": 218,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0008",
+      "line": 262,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0009",
+      "line": 266,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0010",
+      "line": 270,
+      "kind": "ifndef",
+      "expression": "macintosh",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0011",
+      "line": 272,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0012",
+      "line": 277,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0013",
+      "line": 284,
+      "kind": "if",
+      "expression": "defined(IRET_HOOKS) && defined(GISP_CPU)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0014",
+      "line": 309,
+      "kind": "ifndef",
+      "expression": "macintosh",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0015",
+      "line": 327,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0016",
+      "line": 342,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0017",
+      "line": 346,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0018",
+      "line": 360,
+      "kind": "ifdef",
+      "expression": "PM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0019",
+      "line": 367,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0020",
+      "line": 373,
+      "kind": "ifdef",
+      "expression": "macintosh",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0021",
+      "line": 375,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0022",
+      "line": 733,
+      "kind": "ifdef",
+      "expression": "SECURE",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0023",
+      "line": 744,
+      "kind": "ifndef",
+      "expression": "HUNTER",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0024",
+      "line": 748,
+      "kind": "ifdef",
+      "expression": "SECURE",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0025",
+      "line": 797,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0026",
+      "line": 805,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0027",
+      "line": 814,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0028",
+      "line": 826,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0029",
+      "line": 838,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0030",
+      "line": 851,
+      "kind": "ifdef",
+      "expression": "macintosh",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0031",
+      "line": 858,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0032",
+      "line": 870,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0033",
+      "line": 1075,
+      "kind": "ifndef",
+      "expression": "REAL_KBD",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0034",
+      "line": 1707,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0035",
+      "line": 1721,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0036",
+      "line": 1733,
+      "kind": "ifndef",
+      "expression": "REAL_KBD",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0037",
+      "line": 1806,
+      "kind": "ifndef",
+      "expression": "REAL_KBD",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0038",
+      "line": 1854,
+      "kind": "ifndef",
+      "expression": "REAL_KBD",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0039",
+      "line": 1945,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0040",
+      "line": 1949,
+      "kind": "ifndef",
+      "expression": "REAL_KBD",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0041",
+      "line": 1951,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0042",
+      "line": 1955,
+      "kind": "ifndef",
+      "expression": "REAL_KBD",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0043",
+      "line": 1983,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0044",
+      "line": 1991,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0045",
+      "line": 2118,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0046",
+      "line": 2174,
+      "kind": "ifndef",
+      "expression": "JOKER",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0047",
+      "line": 2218,
+      "kind": "ifdef",
+      "expression": "PM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0048",
+      "line": 2220,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0049",
+      "line": 2292,
+      "kind": "ifndef",
+      "expression": "JOKER",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0050",
+      "line": 2363,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0051",
+      "line": 2377,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0052",
+      "line": 2416,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0053",
+      "line": 2441,
+      "kind": "ifdef",
+      "expression": "HUNTER",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0054",
+      "line": 2452,
+      "kind": "ifdef",
+      "expression": "HUNTER",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0055",
+      "line": 2454,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0056",
+      "line": 2483,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0057",
+      "line": 2494,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0058",
+      "line": 2511,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0059",
+      "line": 2519,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0060",
+      "line": 2543,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0061",
+      "line": 2551,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0062",
+      "line": 2576,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0063",
+      "line": 2602,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0064",
+      "line": 2617,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0065",
+      "line": 2643,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0066",
+      "line": 2645,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0067",
+      "line": 2658,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0068",
+      "line": 2662,
+      "kind": "ifdef",
+      "expression": "SEGMENTATION",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0069",
+      "line": 2675,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0070",
+      "line": 2680,
+      "kind": "if",
+      "expression": "defined(IRET_HOOKS) && defined(GISP_CPU)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0071",
+      "line": 2722,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0072",
+      "line": 2724,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    }
+  ],
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "35a4ff7a5d8b832b75a6b4aabfebc280d59eaf2a1aaa252cbdd9cdef842d9202",
+      "hit": [
+        "codex_r688_arm_0003",
+        "codex_r688_arm_0004",
+        "codex_r688_arm_0005",
+        "codex_r688_arm_0008",
+        "codex_r688_arm_0010",
+        "codex_r688_arm_0012",
+        "codex_r688_arm_0014",
+        "codex_r688_arm_0016",
+        "codex_r688_arm_0018",
+        "codex_r688_arm_0021",
+        "codex_r688_arm_0023",
+        "codex_r688_arm_0025",
+        "codex_r688_arm_0026",
+        "codex_r688_arm_0027",
+        "codex_r688_arm_0028",
+        "codex_r688_arm_0029",
+        "codex_r688_arm_0031",
+        "codex_r688_arm_0032",
+        "codex_r688_arm_0033",
+        "codex_r688_arm_0034",
+        "codex_r688_arm_0036",
+        "codex_r688_arm_0037",
+        "codex_r688_arm_0038",
+        "codex_r688_arm_0040",
+        "codex_r688_arm_0042",
+        "codex_r688_arm_0044",
+        "codex_r688_arm_0046",
+        "codex_r688_arm_0047",
+        "codex_r688_arm_0049",
+        "codex_r688_arm_0050",
+        "codex_r688_arm_0052",
+        "codex_r688_arm_0055",
+        "codex_r688_arm_0056",
+        "codex_r688_arm_0057",
+        "codex_r688_arm_0058",
+        "codex_r688_arm_0059",
+        "codex_r688_arm_0061",
+        "codex_r688_arm_0062",
+        "codex_r688_arm_0064",
+        "codex_r688_arm_0066",
+        "codex_r688_arm_0072"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "35a4ff7a5d8b832b75a6b4aabfebc280d59eaf2a1aaa252cbdd9cdef842d9202",
+      "hit": [
+        "codex_r688_arm_0003",
+        "codex_r688_arm_0004",
+        "codex_r688_arm_0005",
+        "codex_r688_arm_0008",
+        "codex_r688_arm_0010",
+        "codex_r688_arm_0012",
+        "codex_r688_arm_0014",
+        "codex_r688_arm_0016",
+        "codex_r688_arm_0018",
+        "codex_r688_arm_0021",
+        "codex_r688_arm_0023",
+        "codex_r688_arm_0025",
+        "codex_r688_arm_0026",
+        "codex_r688_arm_0027",
+        "codex_r688_arm_0028",
+        "codex_r688_arm_0029",
+        "codex_r688_arm_0031",
+        "codex_r688_arm_0032",
+        "codex_r688_arm_0033",
+        "codex_r688_arm_0034",
+        "codex_r688_arm_0036",
+        "codex_r688_arm_0037",
+        "codex_r688_arm_0038",
+        "codex_r688_arm_0040",
+        "codex_r688_arm_0042",
+        "codex_r688_arm_0044",
+        "codex_r688_arm_0046",
+        "codex_r688_arm_0047",
+        "codex_r688_arm_0049",
+        "codex_r688_arm_0050",
+        "codex_r688_arm_0052",
+        "codex_r688_arm_0055",
+        "codex_r688_arm_0056",
+        "codex_r688_arm_0057",
+        "codex_r688_arm_0058",
+        "codex_r688_arm_0059",
+        "codex_r688_arm_0061",
+        "codex_r688_arm_0062",
+        "codex_r688_arm_0064",
+        "codex_r688_arm_0066",
+        "codex_r688_arm_0072"
+      ]
+    }
+  ],
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 202,
+      "identical": true,
+      "include_trace_sha256": "c95aff7b6476abd5955a33155d748fc029e0b3e8aa7ad95d11f824e74865b367",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 202,
+      "identical": true,
+      "include_trace_sha256": "c95aff7b6476abd5955a33155d748fc029e0b3e8aa7ad95d11f824e74865b367",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keyba.c",
+  "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+  "review": "All first-level arms sampled in two product configurations; every unhit current arm was already #error. No source changed.",
+  "limitations": "Original/current first-level group signatures have multiple possible alignments; original structure correspondence requires further analysis. Not counted complete."
+}

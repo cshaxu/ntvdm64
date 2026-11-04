@@ -1,0 +1,478 @@
+{
+  "header_sha256": "adeeb2ea37931dd7ebca540fe6b16e6ec8c8294490fca4ef8ea2e8f524ac584e",
+  "arms": [
+    {
+      "line": 237,
+      "label": "codex_mouseio_h_arm_0000",
+      "kind": "ifdef",
+      "expression": "V7VGA"
+    },
+    {
+      "line": 249,
+      "label": "codex_mouseio_h_arm_0001",
+      "kind": "ifdef",
+      "expression": "EGG"
+    },
+    {
+      "line": 255,
+      "label": "codex_mouseio_h_arm_0002",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 757,
+      "label": "codex_mouseio_h_arm_0003",
+      "kind": "if",
+      "expression": "defined(HOST_MOUSE) || defined(NTVDM)"
+    },
+    {
+      "line": 791,
+      "label": "codex_mouseio_h_arm_0004",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 796,
+      "label": "codex_mouseio_h_arm_0005",
+      "kind": "ifdef",
+      "expression": "NTVDM"
+    },
+    {
+      "line": 820,
+      "label": "codex_mouseio_h_arm_0006",
+      "kind": "ifndef",
+      "expression": "EGA_PARMS_SEQ_SIZE"
+    },
+    {
+      "line": 824,
+      "label": "codex_mouseio_h_arm_0007",
+      "kind": "ifndef",
+      "expression": "EGA_PARMS_CRTC_SIZE"
+    },
+    {
+      "line": 828,
+      "label": "codex_mouseio_h_arm_0008",
+      "kind": "ifndef",
+      "expression": "EGA_PARMS_ATTR_SIZE"
+    },
+    {
+      "line": 832,
+      "label": "codex_mouseio_h_arm_0009",
+      "kind": "ifndef",
+      "expression": "EGA_PARMS_GRAPH_SIZE"
+    },
+    {
+      "line": 967,
+      "label": "codex_mouseio_h_arm_0010",
+      "kind": "ifdef",
+      "expression": "MOUSE_16_BIT"
+    },
+    {
+      "line": 973,
+      "label": "codex_mouseio_h_arm_0011",
+      "kind": "ifdef",
+      "expression": "EGG"
+    },
+    {
+      "line": 997,
+      "label": "codex_mouseio_h_arm_0012",
+      "kind": "ifdef",
+      "expression": "HERC"
+    },
+    {
+      "line": 1103,
+      "label": "codex_mouseio_h_arm_0013",
+      "kind": "ifdef",
+      "expression": "MOUSE_16_BIT"
+    },
+    {
+      "line": 1109,
+      "label": "codex_mouseio_h_arm_0014",
+      "kind": "ifdef",
+      "expression": "EGG"
+    },
+    {
+      "line": 1132,
+      "label": "codex_mouseio_h_arm_0015",
+      "kind": "ifdef",
+      "expression": "HERC"
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/bios/reset.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/reset.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mouseio_h_arm_0000",
+        "codex_mouseio_h_arm_0001",
+        "codex_mouseio_h_arm_0003",
+        "codex_mouseio_h_arm_0005",
+        "codex_mouseio_h_arm_0006",
+        "codex_mouseio_h_arm_0007",
+        "codex_mouseio_h_arm_0008",
+        "codex_mouseio_h_arm_0009",
+        "codex_mouseio_h_arm_0011",
+        "codex_mouseio_h_arm_0014"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/host/nt_event.obj",
+      "probe_index": 5,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mouseio_h_arm_0000",
+        "codex_mouseio_h_arm_0001",
+        "codex_mouseio_h_arm_0003",
+        "codex_mouseio_h_arm_0005",
+        "codex_mouseio_h_arm_0006",
+        "codex_mouseio_h_arm_0007",
+        "codex_mouseio_h_arm_0008",
+        "codex_mouseio_h_arm_0009",
+        "codex_mouseio_h_arm_0011",
+        "codex_mouseio_h_arm_0014"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/keymouse/mouse_io.obj",
+      "probe_index": 2,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mouseio_h_arm_0000",
+        "codex_mouseio_h_arm_0001",
+        "codex_mouseio_h_arm_0003",
+        "codex_mouseio_h_arm_0005",
+        "codex_mouseio_h_arm_0011",
+        "codex_mouseio_h_arm_0014"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/v7_video.obj",
+      "probe_index": 3,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/v7_video.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mouseio_h_arm_0000",
+        "codex_mouseio_h_arm_0001",
+        "codex_mouseio_h_arm_0003",
+        "codex_mouseio_h_arm_0005",
+        "codex_mouseio_h_arm_0011",
+        "codex_mouseio_h_arm_0014"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/keymouse/mouse.obj",
+      "probe_index": 1,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mouseio_h_arm_0000",
+        "codex_mouseio_h_arm_0001",
+        "codex_mouseio_h_arm_0003",
+        "codex_mouseio_h_arm_0005",
+        "codex_mouseio_h_arm_0006",
+        "codex_mouseio_h_arm_0007",
+        "codex_mouseio_h_arm_0008",
+        "codex_mouseio_h_arm_0009",
+        "codex_mouseio_h_arm_0011",
+        "codex_mouseio_h_arm_0014"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/host/nt_mouse.obj",
+      "probe_index": 4,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mouseio_h_arm_0000",
+        "codex_mouseio_h_arm_0001",
+        "codex_mouseio_h_arm_0003",
+        "codex_mouseio_h_arm_0005",
+        "codex_mouseio_h_arm_0006",
+        "codex_mouseio_h_arm_0007",
+        "codex_mouseio_h_arm_0008",
+        "codex_mouseio_h_arm_0009",
+        "codex_mouseio_h_arm_0011",
+        "codex_mouseio_h_arm_0014"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/v7_video.obj",
+      "probe_index": 11,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/v7_video.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mouseio_h_arm_0000",
+        "codex_mouseio_h_arm_0001",
+        "codex_mouseio_h_arm_0003",
+        "codex_mouseio_h_arm_0005",
+        "codex_mouseio_h_arm_0011",
+        "codex_mouseio_h_arm_0014"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/bios/reset.obj",
+      "probe_index": 8,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/reset.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mouseio_h_arm_0000",
+        "codex_mouseio_h_arm_0001",
+        "codex_mouseio_h_arm_0003",
+        "codex_mouseio_h_arm_0005",
+        "codex_mouseio_h_arm_0006",
+        "codex_mouseio_h_arm_0007",
+        "codex_mouseio_h_arm_0008",
+        "codex_mouseio_h_arm_0009",
+        "codex_mouseio_h_arm_0011",
+        "codex_mouseio_h_arm_0014"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/keymouse/mouse_io.obj",
+      "probe_index": 10,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mouseio_h_arm_0000",
+        "codex_mouseio_h_arm_0001",
+        "codex_mouseio_h_arm_0003",
+        "codex_mouseio_h_arm_0005",
+        "codex_mouseio_h_arm_0011",
+        "codex_mouseio_h_arm_0014"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/keymouse/mouse.obj",
+      "probe_index": 9,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mouseio_h_arm_0000",
+        "codex_mouseio_h_arm_0001",
+        "codex_mouseio_h_arm_0003",
+        "codex_mouseio_h_arm_0005",
+        "codex_mouseio_h_arm_0006",
+        "codex_mouseio_h_arm_0007",
+        "codex_mouseio_h_arm_0008",
+        "codex_mouseio_h_arm_0009",
+        "codex_mouseio_h_arm_0011",
+        "codex_mouseio_h_arm_0014"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/host/nt_reset.obj",
+      "probe_index": 6,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mouseio_h_arm_0000",
+        "codex_mouseio_h_arm_0001",
+        "codex_mouseio_h_arm_0003",
+        "codex_mouseio_h_arm_0005",
+        "codex_mouseio_h_arm_0006",
+        "codex_mouseio_h_arm_0007",
+        "codex_mouseio_h_arm_0008",
+        "codex_mouseio_h_arm_0009",
+        "codex_mouseio_h_arm_0011",
+        "codex_mouseio_h_arm_0014"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/host/nt_mouse.obj",
+      "probe_index": 12,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mouseio_h_arm_0000",
+        "codex_mouseio_h_arm_0001",
+        "codex_mouseio_h_arm_0003",
+        "codex_mouseio_h_arm_0005",
+        "codex_mouseio_h_arm_0006",
+        "codex_mouseio_h_arm_0007",
+        "codex_mouseio_h_arm_0008",
+        "codex_mouseio_h_arm_0009",
+        "codex_mouseio_h_arm_0011",
+        "codex_mouseio_h_arm_0014"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/host/nt_reset.obj",
+      "probe_index": 14,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mouseio_h_arm_0000",
+        "codex_mouseio_h_arm_0001",
+        "codex_mouseio_h_arm_0003",
+        "codex_mouseio_h_arm_0005",
+        "codex_mouseio_h_arm_0006",
+        "codex_mouseio_h_arm_0007",
+        "codex_mouseio_h_arm_0008",
+        "codex_mouseio_h_arm_0009",
+        "codex_mouseio_h_arm_0011",
+        "codex_mouseio_h_arm_0014"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/host/nt_event.obj",
+      "probe_index": 13,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mouseio_h_arm_0000",
+        "codex_mouseio_h_arm_0001",
+        "codex_mouseio_h_arm_0003",
+        "codex_mouseio_h_arm_0005",
+        "codex_mouseio_h_arm_0006",
+        "codex_mouseio_h_arm_0007",
+        "codex_mouseio_h_arm_0008",
+        "codex_mouseio_h_arm_0009",
+        "codex_mouseio_h_arm_0011",
+        "codex_mouseio_h_arm_0014"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/adapter-softpc/mvdm_softpc_mouse_guest.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_mouse_guest.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mouseio_h_arm_0001",
+        "codex_mouseio_h_arm_0003",
+        "codex_mouseio_h_arm_0005",
+        "codex_mouseio_h_arm_0006",
+        "codex_mouseio_h_arm_0007",
+        "codex_mouseio_h_arm_0008",
+        "codex_mouseio_h_arm_0009",
+        "codex_mouseio_h_arm_0011",
+        "codex_mouseio_h_arm_0014"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/adapter-softpc/mvdm_softpc_mouse_guest.obj",
+      "probe_index": 1,
+      "source": "O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_mouse_guest.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mouseio_h_arm_0001",
+        "codex_mouseio_h_arm_0003",
+        "codex_mouseio_h_arm_0005",
+        "codex_mouseio_h_arm_0006",
+        "codex_mouseio_h_arm_0007",
+        "codex_mouseio_h_arm_0008",
+        "codex_mouseio_h_arm_0009",
+        "codex_mouseio_h_arm_0011",
+        "codex_mouseio_h_arm_0014"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/softpc.new/base/inc/mouse_io.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\mouse_io.h",
+  "original_sha256": "6387d3317faaa0ab35c3652abc52283601a996bcb0f3019234a2cdb246a6662a",
+  "after_sha256": "31679a1edf2c0d37feecad2200ca659a94407a070f5a09b5cf7dbdd39cf38a0a",
+  "first_level_changes": [
+    "Fourteen original groups align. Normalize two already excluded alternatives to original #line and #error; ten arms selected across different contexts retained. No original outer condition restored.",
+    "Two mouse guest adapter witnesses rerun with original source include directory; both match baseline include order."
+  ],
+  "limitations": "Observed product graph contexts only; no runtime behavior asserted."
+}

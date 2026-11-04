@@ -1,0 +1,146 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+  "source_sha256": "10a5bc573037eebf5467470b2ff8ca79f4a9f47085eedf51dc977d22bf3d30da",
+  "object": "system/illegalp",
+  "arms": [
+    {
+      "label": "codex_r688_arm_0000",
+      "line": 16,
+      "kind": "ifdef",
+      "expression": "SEGMENTATION",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0001",
+      "line": 43,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0002",
+      "line": 48,
+      "kind": "ifndef",
+      "expression": "PROD",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0003",
+      "line": 59,
+      "kind": "ifdef",
+      "expression": "PROD",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0004",
+      "line": 61,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0005",
+      "line": 70,
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0006",
+      "line": 79,
+      "kind": "ifndef",
+      "expression": "PROD",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0007",
+      "line": 89,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0008",
+      "line": 102,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0009",
+      "line": 110,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0010",
+      "line": 112,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0011",
+      "line": 147,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0012",
+      "line": 153,
+      "kind": "ifndef",
+      "expression": "PROD",
+      "error_only": true
+    }
+  ],
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "7090148c9b51413a4541ae173a8b2ff59df47fec709707a58e7bee567de35475",
+      "hit": [
+        "codex_r688_arm_0001",
+        "codex_r688_arm_0003",
+        "codex_r688_arm_0007",
+        "codex_r688_arm_0008",
+        "codex_r688_arm_0010"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "7090148c9b51413a4541ae173a8b2ff59df47fec709707a58e7bee567de35475",
+      "hit": [
+        "codex_r688_arm_0001",
+        "codex_r688_arm_0003",
+        "codex_r688_arm_0007",
+        "codex_r688_arm_0008",
+        "codex_r688_arm_0010"
+      ]
+    }
+  ],
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 179,
+      "identical": true,
+      "include_trace_sha256": "628a306f7cd60cc756e27ae259694c8930f47b8f83715d0b670f74645f8104fd",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 179,
+      "identical": true,
+      "include_trace_sha256": "628a306f7cd60cc756e27ae259694c8930f47b8f83715d0b670f74645f8104fd",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\illegalp.c",
+  "original_sha256": "94f049032a9298802cab09afc61651469dcbf1fec80ab36444e5c2fed2f681ad",
+  "review": "First-level arms sampled in two product configurations; every unhit current arm was already #error. No source changed.",
+  "limitations": "Original/current group signatures have multiple possible alignments; original structure correspondence requires further analysis. Not counted complete."
+}

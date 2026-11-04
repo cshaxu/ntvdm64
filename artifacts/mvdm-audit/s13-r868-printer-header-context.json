@@ -1,0 +1,34 @@
+{
+  "header_sha256": "0e9d274fec56e50fd2da4cc8179dcf2174f72568a483317694313dfffe566282",
+  "arms": [
+    {
+      "line": 1,
+      "label": "codex_printerh_h_arm_0000",
+      "kind": "ifdef",
+      "expression": "PRINTER"
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/bios/reset.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/reset.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_printerh_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/softpc.new/base/inc/printer.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\printer.h",
+  "original_sha256": "c4c064dd442805e2942a799d8c90b46d6f26e4fbe5bba58799f53bbbebb42092",
+  "after_sha256": "0e9d274fec56e50fd2da4cc8179dcf2174f72568a483317694313dfffe566282",
+  "review": "Original outer PRINTER group positively selected in actual product context and retained. Nested groups are for later depth. No source change.",
+  "limitations": "Positive witness establishes outer selection only."
+}

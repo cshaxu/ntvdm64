@@ -1,0 +1,35 @@
+{
+  "header_sha256": "0b512707b37f96da171338744879481897fc5257f660a2e4d8de4dbd22a72e8b",
+  "arms": [
+    {
+      "line": 1,
+      "label": "codex_xt_h_arm_0000",
+      "kind": "ifndef",
+      "expression": "_XT_H"
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/ccpu/adc.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/adc.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_xt_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/softpc.new/base/inc/xt.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\xt.h",
+  "original_sha256": "c5b376f59d45ddb6ca36aa66e96e095203a261b125bd6a34247d6c88e98cb111",
+  "after_sha256": "0b512707b37f96da171338744879481897fc5257f660a2e4d8de4dbd22a72e8b",
+  "review": "Original outer include guard positively selected in actual product context; retained unchanged.",
+  "limitations": "Positive witness establishes first-level selection only."
+}

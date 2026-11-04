@@ -16,12 +16,8 @@
 ]*/
 
 #ifdef SEGMENTATION
+#line 19
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
 
 #include <stdio.h>
@@ -66,12 +62,14 @@
  *	only the IO_READ flag set, the other with only the IO_WRITE flag set.
  */
 #ifdef	MAC68K
+#line 69
 #error DIVERGENCE MVDM-HOST-DIV-529: MAC68K platform branch is not selected; see mirror register.
 #else
 GLOBAL char	Ios_in_adapter_table[PC_IO_MEM_SIZE];
 GLOBAL char	Ios_out_adapter_table[PC_IO_MEM_SIZE];
 #endif	/* MAC68K */
 #ifndef PROD
+#line 76
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
 
@@ -158,6 +156,7 @@ LOCAL void io_empty_inb IFN2(io_addr, io_address, half_word *, value)
 	UNUSED(io_address);
 
 #else
+#line 163
 #error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register.
 #endif /* PROD */
 	*value = IO_EMPTY_PORT_BYTE_VALUE;
@@ -177,6 +176,7 @@ LOCAL void io_empty_outb IFN2(io_addr, io_address, half_word, value)
 #ifdef PROD
 	UNUSED(io_address);
 #else
+#line 187
 #error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register.
 #endif /* PROD */
 	/* Do nothing! */
@@ -294,6 +294,7 @@ LOCAL void generic_outd IFN2(io_addr, io_address, double_word, value)
 
 /* MS NT monitor uses these string routines {in,out}s{b,w} string io support */
 #if defined(NTVDM) && defined(MONITOR)
+#line 309
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	/* NTVDM & MONITOR */
 
@@ -399,6 +400,7 @@ LOCAL VOID generic_outsd IFN3(io_addr, io_address, double_word *, valarray, word
 /* ensure any more LOCAL routines remain LOCAL */
 /* DIVERGENCE(MVDM-HOST-DIV-477): CPU40 reuses the original monitor IOS entries. */
 #if defined(NTVDM) && defined(MONITOR)
+#line 414
 #error Excluded unsupported monitor IOS carrier
 #else
 #if defined(NTVDM) && defined(CCPU)
@@ -465,6 +467,7 @@ GLOBAL void	inb IFN2(io_addr, io_address, half_word *, value)
 #endif /* VIRTUALISATION */
 
 #ifdef EGA_DUMP
+#line 474
 #error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register.
 #endif
 
@@ -505,6 +508,7 @@ GLOBAL void	outb IFN2(io_addr, io_address, half_word, value)
 #endif /* VIRTUALISATION */
 
 #ifdef EGA_DUMP
+#line 515
 #error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register.
 #endif
 
@@ -541,6 +545,7 @@ GLOBAL void	inw IFN2(io_addr, io_address, word *, value)
 #endif /* VIRTUALISATION */
 
 #ifdef EGA_DUMP
+#line 552
 #error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register.
 #endif
 
@@ -580,6 +585,7 @@ GLOBAL void	outw IFN2(io_addr, io_address, word, value)
 #endif /* VIRTUALISATION */
 
 #ifdef EGA_DUMP
+#line 592
 #error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register.
 #endif
 
@@ -682,6 +688,7 @@ GLOBAL void
 io_define_inb(half_word adapter,
 	void (*func) IPT2(io_addr, io_address, half_word *, value))
 #else
+#line 695
 #error Unsupported excluded original configuration
 #endif	/* ANSI */
 #line 680
@@ -866,6 +873,7 @@ GLOBAL BOOL	io_connect_port IFN3(io_addr, io_address, half_word, adapter,
 	return TRUE;
 }
 #else
+#line 880
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
@@ -891,6 +899,7 @@ GLOBAL void     io_disconnect_port IFN2(io_addr, io_address, half_word, adapter)
         Ios_out_adapter_table[io_address & (PC_IO_MEM_SIZE-1)] = EMPTY_ADAPTOR;
 }
 #else
+#line 914
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif	/* NTVDM */
 
@@ -922,12 +931,8 @@ GLOBAL IOS_FUNC_OUTB *get_outb_ptr IFN1(io_addr, io_address)
 }
 
 #ifdef SEGMENTATION
+#line 950
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
 
 /*(
@@ -950,10 +955,12 @@ GLOBAL void	io_init IFN0()
 	io_define_outb(EMPTY_ADAPTOR, io_empty_outb);
 
 #ifdef	MAC68K
+#line 978
 #error DIVERGENCE MVDM-HOST-DIV-529: MAC68K platform branch is not selected; see mirror register.
 #endif	/* MAC68K */
 
 #ifndef PROD
+#line 985
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
 

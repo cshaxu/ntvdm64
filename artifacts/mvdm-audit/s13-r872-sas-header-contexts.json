@@ -1,0 +1,149 @@
+{
+  "header_sha256": "a55258f597da204288a1338227df2a44a514d53e4d70dcc118f830597217a9ba",
+  "arms": [
+    {
+      "line": 30,
+      "label": "codex_sas_h_arm_0000",
+      "kind": "ifdef",
+      "expression": "CPU_40_STYLE"
+    },
+    {
+      "line": 45,
+      "label": "codex_sas_h_arm_0001",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 64,
+      "label": "codex_sas_h_arm_0002",
+      "kind": "ifdef",
+      "expression": "CPU_40_STYLE"
+    },
+    {
+      "line": 106,
+      "label": "codex_sas_h_arm_0003",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 134,
+      "label": "codex_sas_h_arm_0004",
+      "kind": "ifdef",
+      "expression": "BACK_M"
+    },
+    {
+      "line": 139,
+      "label": "codex_sas_h_arm_0005",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 205,
+      "label": "codex_sas_h_arm_0006",
+      "kind": "ifndef",
+      "expression": "GISP_SVGA"
+    },
+    {
+      "line": 207,
+      "label": "codex_sas_h_arm_0007",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 226,
+      "label": "codex_sas_h_arm_0008",
+      "kind": "if",
+      "expression": "defined(NTVDM) && !defined(X86GFX)"
+    },
+    {
+      "line": 295,
+      "label": "codex_sas_h_arm_0009",
+      "kind": "ifndef",
+      "expression": "GISP_SVGA"
+    },
+    {
+      "line": 297,
+      "label": "codex_sas_h_arm_0010",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 316,
+      "label": "codex_sas_h_arm_0011",
+      "kind": "ifndef",
+      "expression": "GISP_SVGA"
+    },
+    {
+      "line": 566,
+      "label": "codex_sas_h_arm_0012",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 616,
+      "label": "codex_sas_h_arm_0013",
+      "kind": "ifdef",
+      "expression": "BACK_M"
+    },
+    {
+      "line": 634,
+      "label": "codex_sas_h_arm_0014",
+      "kind": "else",
+      "expression": ""
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/ccpu/c_main.obj",
+      "probe_index": 1,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_sas_h_arm_0000",
+        "codex_sas_h_arm_0002",
+        "codex_sas_h_arm_0005",
+        "codex_sas_h_arm_0006",
+        "codex_sas_h_arm_0008",
+        "codex_sas_h_arm_0009",
+        "codex_sas_h_arm_0011",
+        "codex_sas_h_arm_0014"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/ccpu/c_main.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_sas_h_arm_0000",
+        "codex_sas_h_arm_0002",
+        "codex_sas_h_arm_0005",
+        "codex_sas_h_arm_0006",
+        "codex_sas_h_arm_0008",
+        "codex_sas_h_arm_0009",
+        "codex_sas_h_arm_0011",
+        "codex_sas_h_arm_0014"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\sas.h",
+  "original_sha256": "63832958d3a6b9ef2f9f209e5ada4af8067fab3b5cdb6f317c5663cbd2b5f2ef",
+  "after_sha256": "f84e6fdbda6aca9327a3b7cb07c2c76d8ad703333ec01aeb0e811f33de9e1fa2",
+  "change": "Normalize original line anchors in seven existing #error arms; no new exclusion or selected SAS logic changed.",
+  "review": "Two CCPU product contexts select eight arms; header appears in 183 observed contexts. Remaining macro contexts not individually validated.",
+  "disposition": "deferred-depth1-contexts-unverified",
+  "limitations": "Two positive samples do not classify all 183 contexts; preserve uncertain arms."
+}

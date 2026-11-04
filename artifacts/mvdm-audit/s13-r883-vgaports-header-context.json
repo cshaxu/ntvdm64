@@ -1,0 +1,35 @@
+{
+  "header_sha256": "8fb2101973becd8f592ff53effa40460e0679e1f510b5a0913228452c0f06f33",
+  "arms": [
+    {
+      "line": 1,
+      "label": "codex_vgaports_h_arm_0000",
+      "kind": "ifdef",
+      "expression": "VGG"
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/keymouse/mouse_io.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_vgaports_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/softpc.new/base/inc/vgaports.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\vgaports.h",
+  "original_sha256": "7d2c9ceadd144ea014757549ab83e8ff8e28b6e92c11f0cd379119d07c0bd2f2",
+  "after_sha256": "8fb2101973becd8f592ff53effa40460e0679e1f510b5a0913228452c0f06f33",
+  "review": "Original outer VGG branch positively selected in actual product context; retained unchanged.",
+  "limitations": "Positive witness establishes first-level selection only."
+}

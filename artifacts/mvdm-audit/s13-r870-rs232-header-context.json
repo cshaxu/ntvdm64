@@ -1,0 +1,34 @@
+{
+  "header_sha256": "f4d5fbbf36c4adeb29620ce52cefc5ac0961a7833e5a222898e83e98b35e3ac6",
+  "arms": [
+    {
+      "line": 1,
+      "label": "codex_rs232_h_arm_0000",
+      "kind": "ifndef",
+      "expression": "_RS232_H"
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/bios/reset.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/reset.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_rs232_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/softpc.new/base/inc/rs232.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\rs232.h",
+  "original_sha256": "80ddf84cdde4d7e5544210a489a103b2850a38f9f3a285199eb07ac8de4e7779",
+  "after_sha256": "f4d5fbbf36c4adeb29620ce52cefc5ac0961a7833e5a222898e83e98b35e3ac6",
+  "review": "Original outer include guard positively selected in actual product context and retained. Nested groups are for later depth. No source change.",
+  "limitations": "Positive witness establishes outer selection only."
+}

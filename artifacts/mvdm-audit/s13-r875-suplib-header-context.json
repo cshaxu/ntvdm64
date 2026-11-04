@@ -1,0 +1,19 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/suplib.h",
+  "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/sasCdef.c",
+  "context": {
+    "preset": "msvc-x86-release",
+    "graph": "worker",
+    "object": "obj/ccpu/sasCdef.obj"
+  },
+  "include_count": 191,
+  "same_include_order_normalized": true,
+  "hit": [
+    "codex_suplib_h_arm_0000"
+  ],
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\suplib.h",
+  "original_sha256": "012bcdd28b9d105a6d4bf9c01bbdfa8ccf855910cb00119ba7b1c45884237f7f",
+  "after_sha256": "f18169d36292ba3a9f290794df184cbe719c454d398b35122a2c97d7afe68af0",
+  "review": "Original outer include guard positively selected in actual product context using sibling source probe that preserves include order. Nested groups are for later depth. No source change.",
+  "limitations": "Positive witness establishes outer selection only; initial r874 probe changed include resolution and is invalid."
+}

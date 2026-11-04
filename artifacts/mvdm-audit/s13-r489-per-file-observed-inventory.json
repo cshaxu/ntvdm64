@@ -2,7 +2,7 @@
   "baseline_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r379.zip",
   "graph_inventory": "s13-r473-all-graph-coverage.json",
   "total_observed_files": 1057,
-  "completed_files": 904,
+  "completed_files": 921,
   "records": [
     {
       "path": "src/mvdm-host/dbg/dbg.c",
@@ -5993,7 +5993,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-depth1",
+      "evidence": "s13-r863-keyba-header-contexts.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/keyboard.h",
@@ -6032,14 +6033,15 @@
     {
       "path": "src/mvdm-host/softpc.new/base/inc/mouse_io.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\mouse_io.h",
-      "current_sha256": "adeeb2ea37931dd7ebca540fe6b16e6ec8c8294490fca4ef8ea2e8f524ac584e",
+      "current_sha256": "31679a1edf2c0d37feecad2200ca659a94407a070f5a09b5cf7dbdd39cf38a0a",
       "original_sha256": "6387d3317faaa0ab35c3652abc52283601a996bcb0f3019234a2cdb246a6662a",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r658-guard-line-audit.json"
+      "status": "completed-original-witnessed-depth1",
+      "partial_evidence": "s13-r658-guard-line-audit.json",
+      "evidence": "s13-r866-mouseio-header-contexts.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/ppi.h",
@@ -6062,8 +6064,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r658-guard-line-audit.json"
+      "status": "completed-original-witnessed-depth1",
+      "partial_evidence": "s13-r658-guard-line-audit.json",
+      "evidence": "s13-r868-printer-header-context.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/profile.h",
@@ -6112,7 +6115,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-depth1",
+      "evidence": "s13-r870-rs232-header-context.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/rtc_bios.h",
@@ -6128,13 +6132,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\sas.h",
-      "current_sha256": "a55258f597da204288a1338227df2a44a514d53e4d70dcc118f830597217a9ba",
+      "current_sha256": "f84e6fdbda6aca9327a3b7cb07c2c76d8ad703333ec01aeb0e811f33de9e1fa2",
       "original_sha256": "63832958d3a6b9ef2f9f209e5ada4af8067fab3b5cdb6f317c5663cbd2b5f2ef",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-contexts-unverified",
+      "evidence": "s13-r872-sas-header-contexts.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/sasp.h",
@@ -6167,7 +6172,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-depth1",
+      "evidence": "s13-r875-suplib-header-context.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/tape_io.h",
@@ -6183,14 +6189,15 @@
     {
       "path": "src/mvdm-host/softpc.new/base/inc/timer.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\timer.h",
-      "current_sha256": "2e6cad2ecadfa8d4343b0989767005726b4f9e6a5421a46d1c1faed9cb4f9728",
+      "current_sha256": "be96008c5c926a7c4847ac4edd9275b324484c81b0884743c82220581f24a351",
       "original_sha256": "b5704cc3ec76cd4dc010eeecc07e4c78ff76428266f6719cf34a65c9dd4b1f2d",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r658-guard-line-audit.json"
+      "status": "completed-original-witnessed-depth1",
+      "partial_evidence": "s13-r658-guard-line-audit.json",
+      "evidence": "s13-r877-timer-header-contexts.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/timestmp.h",
@@ -6236,7 +6243,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-depth1",
+      "evidence": "s13-r879-trace-header-context.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/umb.h",
@@ -6247,7 +6255,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-depth1",
+      "evidence": "s13-r881-umb-header-context.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/vga_dac.h",
@@ -6270,18 +6279,20 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-depth1",
+      "evidence": "s13-r883-vgaports-header-context.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/video.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\video.h",
-      "current_sha256": "a9ee57cba9ba7813d1aa15df7d4287bc4b17b93ecb07a13540c512ae3b788664",
+      "current_sha256": "5d8da64174e2f96752e82113ba1bf63226c2856b940ea537c882ad1c64455db8",
       "original_sha256": "3e701855e34a3ba9834c84ab39da5350ff375195aacea0d79692fba24e2b1059",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-depth1",
+      "evidence": "s13-r885-video-header-contexts.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/virtual.h",
@@ -6303,7 +6314,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-depth1",
+      "evidence": "s13-r887-xt-header-context.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/yoda.h",
@@ -6327,8 +6339,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "pending_change": "r522 exclude non-NTVDM ABNT alternatives; full file audit pending"
+      "status": "deferred-depth1-original-alignment",
+      "pending_change": "r522 exclude non-NTVDM ABNT alternatives; full file audit pending",
+      "evidence": "s13-r888-keyba-source-contexts.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
@@ -6359,13 +6372,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
-      "current_sha256": "ef64e31d7858f4fdb052ede9124a894d9727295c4ea8e1b577b3626202aee507",
+      "current_sha256": "eabb13ddd85ca589036d7fcdb493f1b23da1e4c9d5727b0dbec2de45cca48785",
       "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-depth1",
+      "evidence": "s13-r889-mouse-source-contexts.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
@@ -6396,24 +6410,26 @@
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\ios.c",
-      "current_sha256": "bc896e1ffbb997415593a259a7203e0db3c2c9dd318c6f08d629da4e007ecb93",
+      "current_sha256": "f5d19c06fafb0c4859390b4cb036e04229fd587401a7bebc3eab3acf8bd8e2ba",
       "original_sha256": "e4f39908ff9534adde52e46def732a93790ac48f2bb481590622c537c2f3b205",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-depth1",
+      "evidence": "s13-r890-ios-source-contexts.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/main.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\main.c",
-      "current_sha256": "2b86e3c2e3f200ba8e877047d1101726265e1111cec8db864f9d48416aaf424b",
+      "current_sha256": "c75520e75664850da20797c947cb11860c6e306a1972ba8c156865a5a6a73c42",
       "original_sha256": "5dfdca835f1ca6fddf07826f2b4aa9e25f4c8bd0ceef21b2dce9884de721376c",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-depth1",
+      "evidence": "s13-r891-main-source-contexts.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
@@ -6443,13 +6459,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/support/xt.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\xt.c",
-      "current_sha256": "e46f449895e2cce351cb8907b32867a5b2a531200904021eb02152361acd9927",
+      "current_sha256": "e0f3547c1d58b42c24e38310b5157a187e2719b4e70590f0633183b6b96af474",
       "original_sha256": "a95cda1054b1840df73dbcec6e23cacbee1ddf2fd1ed071318c8c9252f21c0cc",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-depth1",
+      "evidence": "s13-r892-xt-source-contexts.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
@@ -6491,13 +6508,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/system/ica.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\ica.c",
-      "current_sha256": "2a5d35b21cbba316f4e75614cafaf198079ddd6840afba1423dbb8e74e771389",
+      "current_sha256": "0964b0496610f08425ffe2e2dc5cbfd517bcedb6355f91eee5401bae0cbaa21d",
       "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-depth1",
+      "evidence": "s13-r893-ica-source-contexts.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
@@ -6520,7 +6538,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "deferred-depth1-original-alignment",
+      "evidence": "s13-r894-illegalp-source-contexts.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
@@ -6549,13 +6568,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/system/timer.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
-      "current_sha256": "ca071db94415a2ec65bdf0c3e3d3ea08002d78f9c00bdfd2a1e6ce5070fede00",
+      "current_sha256": "43b849cf93541430256baab262a9616ae1ee889381974dd78e828900cacdb7a4",
       "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-depth1",
+      "evidence": "s13-r895-timer-source-contexts.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/timestrb.c",
