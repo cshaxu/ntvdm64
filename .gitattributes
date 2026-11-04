@@ -31,6 +31,14 @@ src/lib-nxvm/kvm-window/** -text
 src/lib-nxvm/LICENSE.nxvm -text
 src/lib-nxvm/LICENSE.libvterm -text
 src/lib-nxvm/libvterm-0.3.3.tar.gz -text
+# Owner-supplied win16style process-hook slice retains byte-exact source.
+src/lib-win32/process-hook/helper.[ch] -text
+src/lib-win32/process-hook/late_guard.[ch] -text
+src/lib-win32/process-hook/late_patch.[ch] -text
+src/lib-win32/process-hook/staging.[ch] -text
+src/lib-win32/process-hook/startup_hooks.[ch] -text
+src/lib-win32/process-hook/minhook/** -text
+src/lib-win32/process-hook/LICENSE.win16style -text whitespace=cr-at-eol
 # Pinned MIT Detours slice retains the registered upstream byte hashes.
 src/lib-win32/process-hook/detours/** -text
 src/opennt-softpc/bios/** -text -whitespace

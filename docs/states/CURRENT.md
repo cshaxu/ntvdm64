@@ -2,106 +2,44 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T475 S4 is locally concluded after P4; its
-local commits await the owner-directed later cherry-pick. Main-runtime
-publication and push remain deferred for this worktree.
+**Active: M0 T475 S5 — pure C process-hook replacement**, Ordinary Mode.
+The owner admits importing win16style's `lib-win32/process-hook` unchanged,
+removing C++ and Detours throughout the codebase, and preserving product
+behavior. Worktree-local builds, tests, asset publication and commits remain
+the delivery policy; no push or main-runtime publication.
 
-Rebased onto main `09b58f5c6`; rebuilt and locally published package
-`5ab28665-fddd-4348-8ba7-6158ee56d015`. Product build, focused checks,
-Control and ten release hashes passed; Full and DOS4GW/NESticle were not run.
-See [S4 evidence](../etc/evidence/m0-t475-s4-nthook-dependency-cleanup.md).
-
-The owner reopens S4 for P4: the x64 Run16 and Hook64 classifier compilation
-reaches the NTHook-private `legacy_classifier_arch.h` through a forced include.
-Move this shared classifier-specific compatibility contract to common, retain
-the original OS/2 NE classification and translation-unit-local `_X86_` scope,
-and verify actual compiler closures and behavior. The three earlier local P
-commits remain unchanged; main-runtime publication and push remain deferred.
-
-The owner accepts the latest local audit and admits S4 to remove the private
-NTHook source/header/static-link dependencies of Run16, NTVDM and NTVWM. The
-same audit found that NTHook32 and VDMREDIR reach NTVDM's private SoftPC symbol
-shim through actually linked shared/mirror objects; include that related
-build-boundary defect in S4. S3's earlier header-closure claim was incomplete.
-The owner directs worktree-local build, tests, asset publication and commits,
-with later cherry-pick and no push or main-runtime publication.
-
-## T475 S4 Local Closure Record
+## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T475 S4, Ordinary Mode; locally concluded after P4. |
-| Admission And Approval | Owner closes the local audit and admits a new NTHook-dependency cleanup task. |
-| Objective | Remove remaining NTHook-private classifier header dependency without changing original NE classification or native compilation scope. |
-| Non-goals | Change hook interception policy, packet identity, session authority, guest media, the allowed Worker Base edges, or separately queued NTVDM runtime imports. |
-| Reference Baseline | Local commit 9b339696d, release package 8b055e88-0703-4652-a14d-720d2d9f61e6; prior S3 and S2 evidence. |
-| Files And ABI Surface | NTHook, Run16, NTVDM, NTVWM, common, build graph, compiler-selected headers, hook packet and process injection boundaries. |
-| Applicable Rules | Shared product policy belongs in common; generic Win32 mechanism belongs in lib-win32; preserve packet identity, widths, process ownership, failure and cleanup semantics. |
-| Verification | Per production P: affected x86/x64 builds, targeted positive/negative/lifecycle tests, all selected Control gates, ten-image local publication and hash checks, governance and diff review. |
-| Expected Markers | Other products select no NTHook-owned source or private header; NTHook32 and VDMREDIR selected closures do not reach the NTVDM-private forced header; actual linkage and runtime behavior verified. |
-| Asset Needs | Existing toolchain, fixtures and local package; no new external source or guest media. |
-| Reporting Requirements | Identify each removed edge and remaining runtime boundaries, ownership, tests and local publication limitations. |
-| Stop Conditions | Required semantic concession, duplicate state authority, incompatible ABI or missing required evidence. |
-| Exit Criteria | Admitted dependencies locally remediated and audited; production Ps built, tested, locally published and committed; main integration deferred per owner. |
-| Original Owner Request | Close the current S and admit a new task to clean up NTHook dependencies. |
-| Similar-Issue Sweep | Run16, NTVDM, NTVWM, Hook32/64, worker and generic-library actual link selections and compiler-recorded transitive headers. |
-| Temporary Evidence | Worktree-local build/t475-s4 with owned compiler and test processes. |
+| Identifier Mode | M0 T475 S5, Ordinary Mode. |
+| Admission And Approval | Owner directs verbatim import and complete C++/Detours removal with equivalent product behavior. |
+| Objective | Use the unchanged shared pure-C library and remove C++ and Detours from product, tests and build selection without changing functional contracts. |
+| Non-goals | Change guest media, worker authority, NTVDM runtime import boundary, main worktree or system32. |
+| Reference Baseline | Local 900c20484; main baseline 09b58f5c6; ten-image package 5ab28665-fddd-4348-8ba7-6158ee56d015; S4 evidence below. |
+| Files And ABI Surface | lib-win32/process-hook, common/native-hook, NTHook, Run16, both workers, tests, build graphs, helper ordinal, payload and hook ABI. |
+| Applicable Rules | Preserve product/third-party provenance and licenses, shared library identity, process rights, handles, target state, x86/x64 ABI and failures. |
+| Verification | Inventory and identity-check import; x86/x64 compile; four width pairs, payload-only, normal/negative/rollback/cleanup and real guest tests; scan complete codebase and graph; Control, local package/hash and documentation gates per production P. |
+| Expected Markers | Original library matches pinned source; no C++ source or Detours dependency in scope; unchanged caller semantics and verified package. |
+| Asset Needs | Owner-supplied adjacent win16style library and existing immutable guest/test fixtures; no external fetch. |
+| Reporting Requirements | Exact source hashes and license, P evidence, tested paths, omissions and discovered incompatibilities. |
+| Stop Conditions | Required semantic change, unavailable source/license, unsupported cross-width path, failure to retain equivalent behavior or original guest constraint. |
+| Exit Criteria | Each admitted P built, tested, locally published and committed; full codebase audit and behavior comparison complete. |
+| Original Owner Request | Add an S to import win16style process-hook verbatim and completely eliminate C++ and Detours while keeping product functionality identical. |
+| Similar-Issue Sweep | Product and test-only C++/Detours, scripts, generated graphs, archives, helper and diagnostic fixtures. |
 
-Planned P boundaries: P1 shares the hook context and payload contract used by
-Run16 and NTHook; P2 shares the installer orchestration used by both workers
-and NTHook; P3 removes the private forced-header reach from selected non-worker
-closures and audits the complete link and compiler dependency graph. Adjust a
-boundary if it cannot build independently without an unsafe temporary state.
-P1 passed the x86/x64 build, launcher boundary negative control, 118 x86 and
-118 x64 Hook checks, 168 cross-width checks and 12 Control gates. Local package
-`563bc615-556c-49e6-869e-6d7ea0004396` has ten verified release hashes; see
-[S4 evidence](../etc/evidence/m0-t475-s4-nthook-dependency-cleanup.md). Full
-and DOS4GW/NESticle were not run. P2 moves the shared installer to common;
-both worker boundary checks, 118 x86, 118 x64, 168 cross-width assertions and
-12 Control gates passed. Local package `3f1e35fd-7d71-4e0b-96be-9ff23b1257cd`
-has ten verified hashes. P3 removed private forced headers from the complete
-non-worker archive closures; 98 closure objects and a negative control, all
-12 Control gates, real DOS async/NetAPI and x86/x64/cross-width Hook tests
-passed. Local package `eedc8134-05c6-449d-b799-c036d739e909` has ten verified
-hashes. Full and DOS4GW/NESticle were not run. Runtime NTVDM imports remain in
-the separately queued task.
-P4 moves the byte-identical classifier architecture adapter into common. The
-complete Run16 compiler closure, two classifier bindings and a negative control,
-the x86/x64 build, 118 x86, 118 x64 and 168 cross-width Hook assertions, 12
-Control gates and four WRITE startup snapshots passed. Local package
-`8adf96a8-42b3-4273-8f48-27b58b07df1d` has ten verified hashes. OS/2 NE runtime,
-WRITE editing and exit, Full and DOS4GW/NESticle were not tested.
+P1 imports 23 byte-pinned library files and independent x86/x64 MSVC link and
+payload fixtures; local package `8ab5e971-e071-41f7-bf24-c5e694fcbbff`
+passed Control and ten hash checks. The existing Detours product path remains.
+Full and DOS4GW/NESticle were not run. [S5 evidence](../etc/evidence/m0-t475-s5-process-hook-import.md).
 
-The owner closes the [S2 dependency inventory](../etc/evidence/m0-t475-s2-component-dependency-inventory.md)
-and admits S3 to address the illegal Worker Base and NTVDM dependencies through
-common and libraries. The [S3 design](../etc/operations/m0-t475-s3-worker-ntvdm-dependency-plan.md)
-now assigns Redir-only logic to Redir, shared product contracts to common, and
-generic Win32 mechanisms to lib. Seven P deliveries are sequential. The owner
-separately queues removal of the remaining NTVDM PE runtime imports.
-S3 produced seven locally tested and published commits, ending at package
-`8b055e88-0703-4652-a14d-720d2d9f61e6`; its [evidence](../etc/evidence/m0-t475-s3-worker-ntvdm-remediation.md)
-records verification and the subsequent header-boundary correction above.
-T475 S1 separated NXVM and Win32 library ownership. Its final four local P
-commits extracted object-handle comparison, overlapped pipe-pair creation,
-parent-process observation and file identity. Their local packages each
-passed the selected Control suite; final package
-`2b1325bd-17fb-4435-b2be-55995de325f6` has ten verified release hashes.
-Full was not run and the optional DOS4GW/NESticle fixture was absent. The
-four commits remain local for later cherry-pick. See the
-[T475 S1 evidence](../etc/evidence/m0-t475-s1-win32-rpc.md).
-
-Earlier independent-worktree shared ownership stages locally closed Run16 and
-NTSRV source edges; [T474 S2 evidence](../etc/evidence/m0-t474-s2-basesrv-shared-ownership.md)
-and [T474 S3 evidence](../etc/evidence/m0-t474-s3-generic-libraries.md)
-retain the decisions, rebase and publication limits. Main-worktree integration
-and full product verification remain pending. No push or main-runtime
-publication is authorized by the local workflow.
-
-## T475 S3 Local Closure Record
-
-S3 local delivery and its later audit correction are recorded in the
-[S3 evidence](../etc/evidence/m0-t475-s3-worker-ntvdm-remediation.md) and
-[S4 evidence](../etc/evidence/m0-t475-s4-nthook-dependency-cleanup.md).
+The adjacent library's same-width payload-only mechanism, non-Detours payload
+format, helper ordinal and startup-only transaction require compatibility proof;
+no untested semantic equivalence is assumed. Prior [S4 evidence](../etc/evidence/m0-t475-s4-nthook-dependency-cleanup.md),
+[S3 evidence](../etc/evidence/m0-t475-s3-worker-ntvdm-remediation.md),
+[S2 inventory](../etc/evidence/m0-t475-s2-component-dependency-inventory.md),
+and [S1 evidence](../etc/evidence/m0-t475-s1-win32-rpc.md) retain the preceding
+local closures. NTVDM PE runtime imports remain separately queued.
 
 ## S12 Closure Record
 
