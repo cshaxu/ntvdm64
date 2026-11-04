@@ -523,3 +523,5 @@ The [r1394 printer review](s13-r1394-printer-review.json) checks 25 historically
 The [r1395 local-group review](s13-r1395-local-groups-review.json) checks four files, records retained direct diffs and complete local-group bodies, and links their registrations. Counts: 181 identical / 808 differing files reviewed / 1,056 total; 67 differing files pending. Evidence is source-derived and historical.
 
 The [r1396 local-group review](s13-r1396-local-groups-review.json) checks three files and records direct diffs and local-group bodies. The previously unlisted V7 stride/wrap change is registered as DIV-841 with its introducing commit and verification boundary. Counts: 181 identical / 811 differing files reviewed / 1,056 total; 64 differing files pending. Evidence is source-derived and historical.
+
+The [r1397 local-group review](s13-r1397-local-groups-review.json) checks two host CPU and EMS files and records direct diffs and local-group bodies against existing registrations. Counts: 181 identical / 813 differing files reviewed / 1,056 total; 62 differing files pending. Evidence is source-derived and historical.

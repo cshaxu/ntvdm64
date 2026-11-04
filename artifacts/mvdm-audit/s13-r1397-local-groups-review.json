@@ -1,0 +1,388 @@
+{
+  "method": "Compare reachable original trees and retained direct diffs; local groups retain recorded states and complete bodies are recorded. Matching original lines use selected source projection.",
+  "limits": "Source-derived projection and historical hit records, not new compiler or runtime tests; registration does not establish behavior equivalence.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "current_sha256": "8f88648e48aa473c9fbae93717b5a98c0630fb1b37480147f9ba8a5bc3fd260a",
+      "original_sha256": "3f77f06e497854b00f58acde8bfe7b5e67af7c5e67174deb579cd76e13f5830f",
+      "matched_lines": 197,
+      "groups": {
+        "selected": 6,
+        "original_groups": 14,
+        "local_groups": 2,
+        "excluded": 10
+      },
+      "local_groups": [
+        {
+          "line": 54,
+          "signature": [
+            [
+              "ifndef",
+              "CCPU"
+            ]
+          ]
+        },
+        {
+          "line": 126,
+          "signature": [
+            [
+              "ifdef",
+              "CCPU"
+            ]
+          ]
+        }
+      ],
+      "direct_diffs": [
+        {
+          "branch_line": 35,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -1 +1,6 @@",
+            " #include \"cpu_c.h\"",
+            "+/* DIVERGENCE(MVDM-HOST-DIV-048): fm_c.h is",
+            "+* the selected generated definition of CleanedREC, which this host carrier",
+            "+* needs to name the original EIP member rather than treating the record as",
+            "+* an untyped 32-bit word. */",
+            "+#include \"fm_c.h\""
+          ]
+        },
+        {
+          "branch_line": 186,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -46,3 +46,2 @@",
+            " {",
+            "-BOOL *gdp_bool;",
+            " /* Variables for deciding what mode we're in, and hence where the */",
+            "@@ -50,6 +49,13 @@",
+            " /* Horrible hack, part 1. InNanoCpu is a BOOL, so GLOBAL_InNanoCpu */",
+            "-/* is not an l-value, hence we can't take its address. */",
+            "-nt_cpu_info.universe = &GLOBAL_CurrentUniverse;",
+            "+/* DIVERGENCE(MVDM-HOST-DIV-048): the historical non-PROD assertion",
+            "+* compared against GdpOffsetFromName(), an undeclared NT4 packed-GDP",
+            "+* debug helper.  The selected GDP is now a generated native-width",
+            "+* carrier, so that numeric packed-offset comparison has no valid target.",
+            "+* The source-named field above is the single checked representation. */",
+            "+/* DIVERGENCE(MVDM-HOST-DIV-048): these CCPU control/register cells are",
+            "+* fixed 32-bit Intel values.  The original IUH spelling happened to be",
+            "+* identical to IU32 on NT4; state that source contract explicitly. */",
+            "+nt_cpu_info.universe = (IU32 *)&GLOBAL_CurrentUniverse;",
+            " /* Variables needed to get the value SP or ESP. */",
+            "-/* Horrible hack, part 2: as for InNanoCpu, so for stackIsBig. */",
+            "+/* DIVERGENCE(MVDM-HOST-DIV-048): see the InNanoCpu note above. */",
+            " nt_cpu_info.nano_esp = &GLOBAL_nanoEsp;",
+            "@@ -66,24 +72,24 @@",
+            " /* EIP & flags, neither of which are likely to be very reliable. */",
+            "-nt_cpu_info.eip = &GLOBAL_CleanedRec;",
+            "-nt_cpu_info.flags = &GLOBAL_EFLAGS;",
+            "-nt_cpu_info.cr0 = &GLOBAL_R_CR0;",
+            "+nt_cpu_info.eip = &GLOBAL_CleanedRec.EIP;",
+            "+nt_cpu_info.flags = (IU32 *)&GLOBAL_EFLAGS;",
+            "+nt_cpu_info.cr0 = (IU32 *)&GLOBAL_R_CR0;",
+            " /* General purpose registers. */",
+            "-initNtCpuRegInfo(&nt_cpu_info.eax, &GLOBAL_nanoEax, &GLOBAL_R_EAX,",
+            "-&GLOBAL_EAXsaved, 1 << ConstraintRAL_LS8,",
+            "+initNtCpuRegInfo(&nt_cpu_info.eax, &GLOBAL_nanoEax, (IU32 *)&GLOBAL_R_EAX,",
+            "+(IU32 *)&GLOBAL_EAXsaved, 1 << ConstraintRAL_LS8,",
+            " 1 << ConstraintRAX_LS16);",
+            "-initNtCpuRegInfo(&nt_cpu_info.ebx, &GLOBAL_nanoEbx, &GLOBAL_R_EBX,",
+            "-&GLOBAL_EBXsaved, 1 << ConstraintRBL_LS8,",
+            "+initNtCpuRegInfo(&nt_cpu_info.ebx, &GLOBAL_nanoEbx, (IU32 *)&GLOBAL_R_EBX,",
+            "+(IU32 *)&GLOBAL_EBXsaved, 1 << ConstraintRBL_LS8,",
+            " 1 << ConstraintRBX_LS16);",
+            "-initNtCpuRegInfo(&nt_cpu_info.ecx, &GLOBAL_nanoEcx, &GLOBAL_R_ECX,",
+            "-&GLOBAL_ECXsaved, 1 << ConstraintRCL_LS8,",
+            "+initNtCpuRegInfo(&nt_cpu_info.ecx, &GLOBAL_nanoEcx, (IU32 *)&GLOBAL_R_ECX,",
+            "+(IU32 *)&GLOBAL_ECXsaved, 1 << ConstraintRCL_LS8,",
+            " 1 << ConstraintRCX_LS16);",
+            "-initNtCpuRegInfo(&nt_cpu_info.edx, &GLOBAL_nanoEdx, &GLOBAL_R_EDX,",
+            "-&GLOBAL_EDXsaved, 1 << ConstraintRDL_LS8,",
+            "+initNtCpuRegInfo(&nt_cpu_info.edx, &GLOBAL_nanoEdx, (IU32 *)&GLOBAL_R_EDX,",
+            "+(IU32 *)&GLOBAL_EDXsaved, 1 << ConstraintRDL_LS8,",
+            " 1 << ConstraintRDX_LS16);",
+            "-initNtCpuRegInfo(&nt_cpu_info.esi, &GLOBAL_nanoEsi, &GLOBAL_R_ESI,",
+            "-&GLOBAL_ESIsaved, 0, 1 << ConstraintRSI_LS16);",
+            "-initNtCpuRegInfo(&nt_cpu_info.edi, &GLOBAL_nanoEdi, &GLOBAL_R_EDI,",
+            "-&GLOBAL_EDIsaved, 0, 1 << ConstraintRDI_LS16);",
+            "-initNtCpuRegInfo(&nt_cpu_info.ebp, &GLOBAL_nanoEbp, &GLOBAL_R_EBP,",
+            "-&GLOBAL_EBPsaved, 0, 1 << ConstraintRBP_LS16);",
+            "+initNtCpuRegInfo(&nt_cpu_info.esi, &GLOBAL_nanoEsi, (IU32 *)&GLOBAL_R_ESI,",
+            "+(IU32 *)&GLOBAL_ESIsaved, 0, 1 << ConstraintRSI_LS16);",
+            "+initNtCpuRegInfo(&nt_cpu_info.edi, &GLOBAL_nanoEdi, (IU32 *)&GLOBAL_R_EDI,",
+            "+(IU32 *)&GLOBAL_EDIsaved, 0, 1 << ConstraintRDI_LS16);",
+            "+initNtCpuRegInfo(&nt_cpu_info.ebp, &GLOBAL_nanoEbp, (IU32 *)&GLOBAL_R_EBP,",
+            "+(IU32 *)&GLOBAL_EBPsaved, 0, 1 << ConstraintRBP_LS16);",
+            " }"
+          ]
+        },
+        {
+          "branch_line": 253,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -1 +1,3 @@",
+            "-nt_cpu_info.in_nano_cpu = (BOOL *) ((IHPE) GDP_PTR + 631);",
+            "+/* DIVERGENCE(MVDM-HOST-DIV-048): the generated field is an lvalue in the",
+            "+* private GDP carrier; avoid a historical hard-coded native offset. */",
+            "+nt_cpu_info.in_nano_cpu = (BOOL *)&GLOBAL_InNanoCpu;"
+          ]
+        },
+        {
+          "branch_line": 281,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -1 +1,3 @@",
+            "-nt_cpu_info.stack_is_big = (BOOL *) ((IHPE) GDP_PTR + 4355);",
+            "+/* DIVERGENCE(MVDM-HOST-DIV-048): use the generated source field rather",
+            "+* than an architecture-specific byte offset into the old packed GDP. */",
+            "+nt_cpu_info.stack_is_big = (BOOL *)&GLOBAL_stackIsBig;"
+          ]
+        }
+      ],
+      "issues": [],
+      "registered_differences": [
+        "MVDM-HOST-DIV-048"
+      ],
+      "local_group_bodies": [
+        {
+          "line": 54,
+          "arms": [
+            {
+              "directive": "ifndef",
+              "expression": "CCPU",
+              "body": [
+                "#line 40",
+                "#error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register."
+              ]
+            }
+          ]
+        },
+        {
+          "line": 126,
+          "arms": [
+            {
+              "directive": "ifdef",
+              "expression": "CCPU",
+              "body": [
+                "extern void c_cpu_unsimulate(void);",
+                "void host_unsimulate()",
+                "{",
+                "    c_cpu_unsimulate();",
+                "#line 105",
+                "}"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "current_sha256": "55c586fc69221068293a1db55c21b569ce34cef1526bb93e34cc8044b045ad5f",
+      "original_sha256": "d51310af362e60023feb59c89afb21ff6fae8e1bb74ae8614231f4ec3a001729",
+      "matched_lines": 776,
+      "groups": {
+        "excluded": 5,
+        "selected": 3,
+        "original_groups": 7,
+        "local_groups": 3
+      },
+      "local_groups": [
+        {
+          "line": 141,
+          "signature": [
+            [
+              "ifdef",
+              "BACK_M"
+            ]
+          ]
+        },
+        {
+          "line": 165,
+          "signature": [
+            [
+              "ifdef",
+              "BACK_M"
+            ]
+          ]
+        },
+        {
+          "line": 192,
+          "signature": [
+            [
+              "ifdef",
+              "BACK_M"
+            ]
+          ]
+        }
+      ],
+      "direct_diffs": [
+        {
+          "branch_line": 47,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -11,2 +11,11 @@",
+            " #include \"nt_mem.h\"",
+            "+/* DIVERGENCE(MVDM-HOST-DIV-096): the original calls NT4 kernel-VDM page",
+            "+* alias services.  Keep those exact public calls and page-number ABI, but",
+            "+* bind their user-mode replacement through the selected SoftPC adapter. */",
+            "+#include \"mvdm_softpc_physical_mapping.h\"",
+            "+/* DIVERGENCE(MVDM-HOST-DIV-267): kernel VDM supplied contiguous host aliases",
+            "+* for EMS windows. CCPU40 resolves every guest byte but intentionally does",
+            "+* not publish a span pointer. Keep the original fast macros for ordinary RAM;",
+            "+* the smallest bounded lease binding covers only an alias-backed span. */",
+            "+#include \"mvdm_softpc_guest_memory.h\"",
+            " /*\tGlobal Variables\t\t*/",
+            "@@ -40,2 +49,55 @@",
+            " #define EM_PAGE_ADDRESS(page_no)    (EM_base_address + page_no * EMM_PAGE_SIZE)",
+            "+static int em_loads(sys_addr from, unsigned char *to, int length)",
+            "+{",
+            "+uint32_t count;",
+            "+sys_addr guest_from;",
+            "+int result;",
+            "+if (length < 0) return FAILURE;",
+            "+count = (uint32_t)length;",
+            "+guest_from = from;",
+            "+if (!mvdm_softpc_physical_mapping_span_is_aliased(guest_from, count)) {",
+            "+EM_loads(from, to, length);",
+            "+return SUCCESS;",
+            "+}",
+            "+result = mvdm_softpc_guest_memory_copy_from(guest_from, to, count) ?",
+            "+SUCCESS : FAILURE;",
+            "+return result;",
+            "+}",
+            "+static int em_stores(sys_addr to, unsigned char *from, int length)",
+            "+{",
+            "+uint32_t count;",
+            "+sys_addr guest_to;",
+            "+int result;",
+            "+if (length < 0) return FAILURE;",
+            "+count = (uint32_t)length;",
+            "+guest_to = to;",
+            "+if (!mvdm_softpc_physical_mapping_span_is_aliased(guest_to, count)) {",
+            "+EM_stores(to, from, length);",
+            "+return SUCCESS;",
+            "+}",
+            "+sas_overwrite_memory(guest_to, count);",
+            "+result = mvdm_softpc_guest_memory_copy_to(guest_to, from, count) ?",
+            "+SUCCESS : FAILURE;",
+            "+return result;",
+            "+}",
+            "+static int em_moves(sys_addr from, sys_addr to, int length)",
+            "+{",
+            "+uint32_t count;",
+            "+sys_addr guest_from;",
+            "+sys_addr guest_to;",
+            "+int result;",
+            "+if (length < 0) return FAILURE;",
+            "+count = (uint32_t)length;",
+            "+guest_from = from;",
+            "+guest_to = to;",
+            "+if (!mvdm_softpc_physical_mapping_span_is_aliased(guest_from, count) &&",
+            "+!mvdm_softpc_physical_mapping_span_is_aliased(guest_to, count)) {",
+            "+EM_moves(from, to, length);",
+            "+return SUCCESS;",
+            "+}",
+            "+sas_overwrite_memory(guest_to, count);",
+            "+result = mvdm_softpc_guest_memory_move(guest_to, guest_from, count) ?",
+            "+SUCCESS : FAILURE;",
+            "+return result;",
+            "+}",
+            " /*",
+            "@@ -345,3 +407,4 @@",
+            " to = effective_addr(dst_seg, dst_off);",
+            "-EM_moves(from, to, length);",
+            "+if (em_moves(from, to, length) != SUCCESS)",
+            "+return(FAILURE);",
+            " return(SUCCESS);",
+            "@@ -363,3 +426,4 @@",
+            " to = EM_host_address(dst_page * EMM_PAGE_SIZE + dst_off);",
+            "-EM_loads(from, to, length);",
+            "+if (em_loads(from, to, length) != SUCCESS)",
+            "+return(FAILURE);",
+            " return(SUCCESS);",
+            "@@ -381,3 +445,4 @@",
+            " to = effective_addr(dst_seg, dst_off);",
+            "-EM_stores(to, from, length);",
+            "+if (em_stores(to, from, length) != SUCCESS)",
+            "+return(FAILURE);",
+            " return(SUCCESS);",
+            "@@ -432,5 +497,8 @@",
+            " to = effective_addr(dst_seg, dst_off);",
+            "-EM_loads(from, pointer, length);    /* source -> temp */",
+            "-EM_moves(to, from, length);\t    /* dst -> source */",
+            "-EM_stores(to, pointer, length);     /* temp -> dst */",
+            "+if (em_loads(from, pointer, length) != SUCCESS ||    /* source -> temp */",
+            "+em_moves(to, from, length) != SUCCESS ||\t    /* dst -> source */",
+            "+em_stores(to, pointer, length) != SUCCESS) {     /* temp -> dst */",
+            "+free(temp);",
+            "+return(FAILURE);",
+            "+}",
+            " free(temp);",
+            "@@ -456,4 +524,7 @@",
+            " to = EM_host_address(dst_page * EMM_PAGE_SIZE + dst_off);",
+            "-EM_loads(from, pointer, length);",
+            "-EM_stores(from, to, length);",
+            "+if (em_loads(from, pointer, length) != SUCCESS ||",
+            "+em_stores(from, to, length) != SUCCESS) {",
+            "+free(temp);",
+            "+return(FAILURE);",
+            "+}",
+            " EM_memcpy(to, pointer, length);"
+          ]
+        }
+      ],
+      "issues": [],
+      "registered_differences": [
+        "MVDM-HOST-DIV-096",
+        "MVDM-HOST-DIV-267"
+      ],
+      "local_group_bodies": [
+        {
+          "line": 141,
+          "arms": [
+            {
+              "directive": "ifdef",
+              "expression": "BACK_M",
+              "body": [
+                "#line 103",
+                "#error DIVERGENCE MVDM-HOST-DIV-526: BACK_M branch is not selected; see mirror register."
+              ]
+            }
+          ]
+        },
+        {
+          "line": 165,
+          "arms": [
+            {
+              "directive": "ifdef",
+              "expression": "BACK_M",
+              "body": [
+                "#line 104",
+                "#error DIVERGENCE MVDM-HOST-DIV-526: BACK_M branch is not selected; see mirror register."
+              ]
+            }
+          ]
+        },
+        {
+          "line": 192,
+          "arms": [
+            {
+              "directive": "ifdef",
+              "expression": "BACK_M",
+              "body": [
+                "#line 107",
+                "#error DIVERGENCE MVDM-HOST-DIV-526: BACK_M branch is not selected; see mirror register."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
