@@ -34,6 +34,7 @@ Exception Handling Support.
 /*
    Allow print out of exceptions or disallow it.
  */
+#line 36
 GLOBAL BOOL show_exceptions = FALSE;
 GLOBAL BOOL trap_exceptions = FALSE;
 LOCAL  BOOL first_exception = TRUE;
@@ -49,6 +50,7 @@ LOCAL  BOOL first_exception = TRUE;
 #error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register.
 #endif
 
+#line 56
 IMPORT FILE *trace_file;
 IMPORT IBOOL took_absolute_toc;
 
@@ -160,6 +162,7 @@ LOCAL VOID check_for_shutdown IFN1(IU16, xcode)
 #endif	/* PIG */
 
       /* then carry on */
+#line 169
       c_cpu_continue();   /* DOES NOT RETURN */
       }
    }
@@ -200,6 +203,7 @@ IFN3(
 #line 206
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
+#line 208
    if (show_exceptions){
 	fprintf(trace_file, "(%04x:%08x)Exception:- %d.\n",
 		       GET_CS_SELECTOR(), GET_EIP(), nmbr);
@@ -246,9 +250,11 @@ IFN3(
 
 	/* DIVERGENCE: MVDM-HOST-DIV-268: NTVDMx64 handled-hook scope. */
 	if(GET_PE() && host_exint_hook((IS32) nmbr, (IS32)error_code)) {
+#line 253
         doing_contributory = FALSE;
 	    c_cpu_continue();	    /* DOES NOT RETURN */
 	}
+#line 255
     }
 #endif
 
@@ -263,6 +269,7 @@ IFN3(
 #line 266
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
+#line 268
    if (show_exceptions){
 	fprintf(trace_file, "(%04x:%08x)Exception:- %d(%04x).\n",
 		       GET_CS_SELECTOR(), GET_EIP(), nmbr, error_code);
@@ -309,9 +316,11 @@ IFN3(
 
 	  /* DIVERGENCE: MVDM-HOST-DIV-268: NTVDMx64 handled-hook scope. */
 	  if(GET_PE() && host_exint_hook((IS32) nmbr, (IS32)error_code)) {
+#line 313
           doing_contributory = FALSE;
 	      c_cpu_continue();	/* DOES NOT RETURN */
 	  }
+#line 315
       }
 #endif
 
@@ -326,6 +335,7 @@ IFN3(
 #line 326
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
+#line 328
    if (show_exceptions){
 	if ( GET_IDT_LIMIT() != 0 ){
            fprintf(trace_file, "(%04x:%08x)Exception:- %d(%04x).\n",
@@ -373,9 +383,11 @@ IFN1(
 
 	  /* DIVERGENCE: MVDM-HOST-DIV-268: NTVDMx64 handled-hook scope. */
 	  if(GET_PE() && host_exint_hook((IS32) DF_INT_NR, (IS32)NULL_ERROR_CODE)) {
+#line 374
             doing_double_fault = FALSE;
 		    c_cpu_continue(); /* DOES NOT RETURN */
 	  }
+#line 376
       }
 #endif
 
@@ -390,6 +402,7 @@ IFN1(
 #line 387
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
+#line 389
    if (show_exceptions){
         if ( GET_IDT_LIMIT() != 0 ){
            fprintf(trace_file, "(%04x:%08x)Exception:- %d.\n",
@@ -440,10 +453,12 @@ GLOBAL VOID Int0 IFN0 ()
 
 	  /* DIVERGENCE: MVDM-HOST-DIV-268: NTVDMx64 handled-hook scope. */
 	  if(GET_PE() && host_exint_hook((IS32) I0_INT_NR, (IS32)NULL_ERROR_CODE)) {
+#line 438
           doing_fault = FALSE;
           doing_contributory = FALSE;
 	      c_cpu_continue(); /* DOES NOT RETURN */
 	  }
+#line 441
       }
 #endif
 
@@ -459,6 +474,7 @@ GLOBAL VOID Int0 IFN0 ()
 #line 453
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
+#line 455
    if (show_exceptions){
         fprintf(trace_file, "(%04x:%08x)Exception:- %d.\n",
 		       GET_CS_SELECTOR(), GET_EIP(), I0_INT_NR);
@@ -589,10 +605,12 @@ IFN2(
 
 	  /* DIVERGENCE: MVDM-HOST-DIV-268: NTVDMx64 handled-hook scope. */
 	  if(GET_PE() && host_exint_hook((IS32) PF_INT_NR, (IS32)page_error)) {
+#line 584
           doing_fault = FALSE;
           doing_page_fault = FALSE;
 	      c_cpu_continue(); /* DOES NOT RETURN */
 	  }
+#line 587
       }
 #endif
 
@@ -606,6 +624,7 @@ IFN2(
 #line 597
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
+#line 599
    if (show_exceptions){
 	fprintf(trace_file, "(%04x:%08x)Exception:- %d(%04x) CR2=%08x.\n",
            GET_CS_SELECTOR(), GET_EIP(), PF_INT_NR, page_error, GET_CR(CR_PFLA));

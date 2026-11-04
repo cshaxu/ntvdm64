@@ -335,6 +335,7 @@ DISPLAY_MODE	mode;
 #line 355
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
+#line 360
 			if (get_256_colour_mode())
 			    set_gfx_update_routines( vga_graph_update, EGA_GRAPHICS_MARKING, VGA_GRAPH_SCROLL );
 			else
@@ -417,6 +418,7 @@ DISPLAY_MODE	mode;
 #line 429
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
+#line 431
 			set_gfx_update_routines( ega_graph_update, EGA_GRAPHICS_MARKING, NO_SCROLL );
 #endif /* GORE */
 #line 433
@@ -470,6 +472,7 @@ boolean	choose_vga_display_mode()
 		|| (get_256_colour_mode() && get_seq_chain4_mode())
 #endif
 	)
+#line 474
 	{
 		set_offset_per_line_recal(get_actual_offset_per_line() << 2);
 	}

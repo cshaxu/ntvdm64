@@ -23,6 +23,7 @@ typedef union
 #line 23
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #else
+#line 52
 	struct
 	{
 		unsigned pe:1;
@@ -94,6 +95,7 @@ typedef struct
 struct VGAGLOBALSETTINGS;
 #endif
 
+#line 119
 extern struct EGA_CPU_GLOBALS
 {
 #ifndef	HOST_VGA_GLOBALS
@@ -108,6 +110,7 @@ extern struct EGA_CPU_GLOBALS
 #error Excluded unsupported non-C_VID globals profile
 #endif
 #endif
+#line 124
 	ULONG		saved_state;		/* Last value of EGA_CPU.ega_state.state */
 	ULONG		saved_mode_chain;		/* Last value of mode/chain combined */
 	MAGIC		ega_state;
@@ -281,6 +284,7 @@ extern IU32 latchval;	/* used for following latch macros */
  * macro to do the logical operations on cpu data and the latch values
  */
 
+#line 395
 #define do_logicals(val,latch)  (((latch) & ((val & getVideodata_and_mask()) \
 		^ getVideodata_xor_mask())) | (val & ((latch) ^ getVideolatch_xor_mask())))
 

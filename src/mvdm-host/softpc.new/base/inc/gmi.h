@@ -63,6 +63,7 @@ IMPORT	void	gmi_define_mem IPT2(mem_type, type, MEM_HANDLERS *, handlers);
  * defines for direction argument of gmi_x_move().
  * Has the same meaning as the INtel direction flag.
  */
+#line 62
 #define FORWARDS 0
 #define BACKWARDS 1
 
@@ -70,6 +71,7 @@ IMPORT	void	gmi_define_mem IPT2(mem_type, type, MEM_HANDLERS *, handlers);
 #line 66
 #error DIVERGENCE MVDM-HOST-DIV-529: EGATEST platform branch is not selected; see mirror register.
 #else
+#line 76
 #define gmi_redefine_mem(type,handlers) \
 b_write_ptrs[(int)type] = handlers.b_write; \
 w_write_ptrs[(int)type] = handlers.w_write; \

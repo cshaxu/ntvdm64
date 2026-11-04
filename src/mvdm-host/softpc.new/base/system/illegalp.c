@@ -107,6 +107,7 @@ void illegal_op_int()
 	mvdm_softpc_report_setup_illegal_opcode(cs, ip, getSS(), getESP(), getEFLAGS());
 #endif
 
+#line 97
 	where(string, cs, ip);
 
 #ifndef NTVDM
@@ -119,6 +120,7 @@ void illegal_op_int()
 #line 110
 #error Unsupported excluded original configuration
 #else
+#line 112
         ea = effective_addr(cs, ip);
         opcode = sas_hw_at(ea);
         if (opcode == 0x66 || opcode == 0x67)

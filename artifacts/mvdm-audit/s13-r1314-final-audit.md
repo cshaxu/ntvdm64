@@ -441,3 +441,12 @@ files pending. Cached x86 root, NTVDM, WOW32 and x64 builds passed; ten images
 were published and verified. Eight match byte-for-byte and NTVDM/WOW32 differ
 only by PE timestamps ([comparison](s13-r1365-build-image-compare.json));
 per owner instruction tests were not repeated.
+
+The [r1366 batch](s13-r1366-batch.json) aligns matching source lines in ten
+files with additional local conditional groups; [observed context recheck]
+(s13-r1366-extra-group-recheck.json) passes. These files remain pending complete
+tree review. Cached x86 root, NTVDM, WOW32 and x64 builds passed; ten images
+published and verified. Nine match byte-for-byte and NTVDM differs only by PE
+timestamp ([comparison](s13-r1366-build-image-compare.json)); tests were not
+repeated under the owner-approved rule. Counts remain 181 byte-identical /
+730 differing files reviewed / 1,056 total, with 145 differing files pending.

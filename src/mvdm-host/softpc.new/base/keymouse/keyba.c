@@ -106,6 +106,7 @@ extern void mvdm_keyboard_reset_pending_irq(void); /* DIVERGENCE(MVDM-HOST-DIV-3
 */
 
 #ifndef	KBD_CONT_DELAY
+#line 101
 #define	KBD_CONT_DELAY	7000		/* microseconds */
 #endif	/* KBD_CONT_DELAY */
 
@@ -116,6 +117,7 @@ extern void mvdm_keyboard_reset_pending_irq(void); /* DIVERGENCE(MVDM-HOST-DIV-3
 #include "xms.h"
 
 /* exported for NT host event code */
+#line 110
 GLOBAL VOID KbdResume(VOID);
 GLOBAL BOOL bPifFastPaste=TRUE;
 
@@ -153,6 +155,7 @@ BOOL bForceDelayInts = FALSE;
  */
 LOCAL BOOL kbd_output_data_read = FALSE;
 LOCAL BOOL kbd_output_irq_acknowledged = FALSE;
+#line 138
 ULONG LastKbdInt=0;
 
 // The Brazilian ABNT keyboard has 104 keys, 2 more than 'usual'
@@ -389,6 +392,7 @@ half_word current_light_pattern;
 #error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
 #else
 
+#line 386
 half_word scan_codes_temp_area[300];
 
 #ifndef REAL_KBD
@@ -817,6 +821,7 @@ LOCAL VOID add_to_6805_buff IFN2(half_word,code,int, immediate)
 #ifdef NTVDM
          nt_keyboard_history.device[buff_6805_out_ptr]=0; /* DIV-317: response, not user input. */
 #endif
+#line 951
 	 buff_6805[buff_6805_out_ptr]=code;
 	 }
       else
@@ -825,6 +830,7 @@ LOCAL VOID add_to_6805_buff IFN2(half_word,code,int, immediate)
 #ifdef NTVDM
         nt_keyboard_history.device[buff_6805_in_ptr]=nt_keyboard_history.active; /* DIV-317 */
 #endif
+#line 956
 	buff_6805[buff_6805_in_ptr]=code;
 	buff_6805_in_ptr = (buff_6805_in_ptr + 1) & BUFF_6805_PMASK;
 	}
@@ -846,6 +852,7 @@ ch=buff_6805[buff_6805_out_ptr];
 #ifdef NTVDM
 	nt_keyboard_history.translated=nt_keyboard_history.device[buff_6805_out_ptr]; /* DIV-317 */
 	nt_keyboard_history.device[buff_6805_out_ptr]=0;
+#line 975
 	key_marker_buffer[buff_6805_out_ptr]=0;
 #endif
 
@@ -882,6 +889,7 @@ LOCAL VOID clear_buff_6805 IFN0()
 
     /* Clear key marker buffer */
     mvdm_keyboard_history_clear_ring(&nt_keyboard_history); /* DIV-317 */
+#line 1010
     {
 	register int loop = sizeof(key_marker_buffer) / sizeof(unsigned char);
 	while(--loop >= 0) key_marker_buffer[loop] = 0;
@@ -955,13 +963,16 @@ GLOBAL int keys_in_6805_buff(int *part_key_transferred)
 	    /* DIVERGENCE: MVDM-HOST-DIV-315: a complete single-byte key
 	     * counts independently of any preceding partial multibyte key. */
 	    if(last_marker == 0 || (key_marker_buffer[tmp_6805_out_ptr] & ONECHARCODEMASK))
+#line 1081
 	    {
 		if(last_marker) *part_key_transferred = TRUE;
 		last_marker = 0;
 		/* start of key seq found */
+#line 1083
 		if(key_marker_buffer[tmp_6805_out_ptr] & ONECHARCODEMASK)
 		    keys_in_buffer++; /* one byte seq */
 		else
+#line 1085
 		    last_marker = key_marker_buffer[tmp_6805_out_ptr];
 	    }
 	    else
@@ -1004,6 +1015,7 @@ GLOBAL unsigned PendingKeyboardHistory(void)
         output_full,pending_8042,waiting_for_upcode);
 }
 
+#line 1119
 void Reset6805and8042(void)
 {
     int key;
@@ -1012,6 +1024,7 @@ void Reset6805and8042(void)
 
     /* Reset 6805 */
 
+#line 1125
     buff_6805_out_ptr=0;
     clear_buff_6805();
     current_light_pattern=0;
@@ -1045,6 +1058,7 @@ void Reset6805and8042(void)
     pending_8042 = output_full = in_anomalous_state = FALSE;
     kbd_output_data_read = FALSE;
     kbd_output_irq_acknowledged = FALSE;
+#line 1156
     int_enabled = translating = TRUE;
     scanning_discontinued = FALSE;
     held_event_count = 0;
@@ -1233,6 +1247,7 @@ if (scanning_discontinued)
 #ifdef NTVDM
         nt_keyboard_history.held[held_event_count]=nt_keyboard_history.active; /* DIV-317 */
 #endif
+#line 1356
 	held_event_key[held_event_count++]=key;
 
 	/* check for held event buffer overflow (SHOULD never happen) */
@@ -1275,6 +1290,7 @@ if (scanning_discontinued)
 #ifdef NTVDM
         nt_keyboard_history.held[held_event_count]=nt_keyboard_history.active; /* DIV-317 */
 #endif
+#line 1411
 	held_event_key[held_event_count++]=key;
 
 	/* check for held event buffer overflow (SHOULD never happen) */
@@ -1526,6 +1542,7 @@ if (!keyboard_disabled)
 #line 1662
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else
+#line 1672
 		mark_key_codes_6805_buff(FALSE);
 #endif	/* NTVDM */
 #line 1674
@@ -1758,6 +1775,7 @@ LOCAL VOID AddTo6805BuffImm IFN1(half_word,code)
   kbd_output_data_read = FALSE;
   kbd_output_irq_acknowledged = FALSE;
   nt_keyboard_history.output=0; /* DIV-317: original port replacement. */
+#line 1895
   KbdData = -1;
 }
 #else
@@ -1827,6 +1845,7 @@ if (waiting_for_next_code)
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else	/* NTVDM */
 
+#line 1973
 			if ((cmd_code & 0x80)==0)
 			{
                         AddTo6805BuffImm(ACK_CODE);
@@ -1997,6 +2016,7 @@ if (waiting_for_next_code)
 #line 2133
 #error DIVERGENCE MVDM-HOST-DIV-531: JOKER branch is not selected; see mirror register.
 #else	/* JOKER */
+#line 2135
 		AddTo6805BuffImm(RESEND_CODE);
 #endif	/* JOKER */
 #line 2137
@@ -2026,6 +2046,7 @@ if (scanning_discontinued && !waiting_for_next_code)
 #ifdef NTVDM
                         nt_keyboard_history.active=nt_keyboard_history.held[i]; /* DIV-317 */
 #endif
+#line 2158
 			switch (held_event_type[i])
 				{
 				case KEY_DOWN_EVENT:
@@ -2040,6 +2061,7 @@ if (scanning_discontinued && !waiting_for_next_code)
 #ifdef NTVDM
         nt_keyboard_history.active=0; /* DIV-317: later internal actions have no raw origin. */
 #endif
+#line 2169
 	scanning_discontinued=FALSE;
 	}
 #endif
@@ -2073,6 +2095,7 @@ LOCAL VOID KbdIntDelay(VOID)
        // before invoking the next interrupt.
        //
    if (bKbdEoiPending || kbd_output_irq_acknowledged)
+#line 2205
        return;
 
 
@@ -2118,6 +2141,7 @@ LOCAL VOID KbdIntDelay(VOID)
 //This function is called by the ICA with the ica lock
 void KbdEOIHook(int IrqLine, int CallCount)
 {
+#line 2251
    if (!bKbdEoiPending)  // sanity
        return;
 
@@ -2145,12 +2169,14 @@ void KbdEOIHook(int IrqLine, int CallCount)
        return;
    }
 
+#line 2259
    bKbdIntHooked = KbdInt09Off != *(word *)(Start_of_M_area+0x09*4) ||
                    KbdInt09Seg != *(word *)(Start_of_M_area+0x09*4+2);
 
    bBiosBufferSpace = bBiosOwnsKbdHdw &&
                       (bios_buffer_size() < (bPifFastPaste ? 8 : 2));
 
+#line 2266
    bKbdEoiPending = FALSE;
    kbd_output_irq_acknowledged = TRUE;
 
@@ -2162,6 +2188,7 @@ void KbdEOIHook(int IrqLine, int CallCount)
        bForceDelayInts = FALSE;
    }
 
+#line 2272
    if (!bBiosOwnsKbdHdw)
         HostReleaseKbd();
 }
@@ -2175,6 +2202,7 @@ LOCAL VOID do_q_int(char scancode)
    nt_keyboard_history.translated=0;
    kbd_output_data_read = FALSE;
    kbd_output_irq_acknowledged = FALSE;
+#line 2281
    output_full = TRUE;
    output_contents = scancode;
 
@@ -2345,6 +2373,7 @@ if (!waiting_for_next_8042_code)
 			/* Read Input Port */
 			/* But don't cause an interrupt */
 			code_to_send=input_port_val; /* DIVERGENCE(MVDM-HOST-DIV-359) */
+#line 2511
 			code_to_send_valid=TRUE;
 			break;
 		case 0xd0:
@@ -2452,6 +2481,7 @@ if (code_to_send_valid)
         output_full = FALSE;
         kbd_output_data_read = FALSE;
         kbd_output_irq_acknowledged = FALSE;
+#line 2601
         KbdData = -1;
         nt_keyboard_history.output=0; /* DIV-317: direct controller response replaces scan output. */
         /* DIV-359: expose the controller reply through port 60/status,
@@ -2502,6 +2532,7 @@ if (translating)
 #ifdef NTVDM
                         nt_keyboard_history.prefix=nt_keyboard_history.translated; /* DIV-317 */
 #endif
+#line 2647
 			}
 		}
 	else
@@ -2539,6 +2570,7 @@ return (code);
 #line 2715
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #else
+#line 2717
 LOCAL INT
 #endif
 #line 2719
@@ -2583,6 +2615,7 @@ if(!output_full)
                 nt_keyboard_history.translated=nt_keyboard_history.pending; /* DIV-317 */
                 nt_keyboard_history.pending=0;
 #endif
+#line 2756
                 do_q_int(pending_8042_value);
 		}
 	else
@@ -2619,6 +2652,7 @@ GLOBAL VOID KbdResume(VOID)
     bKbdEoiPending = FALSE;
     kbd_output_data_read = FALSE;
     kbd_output_irq_acknowledged = FALSE;
+#line 2790
     bKbdIntHooked = FALSE;
     bBiosBufferSpace = TRUE;
     if (!keyboard_interface_disabled && output_full)
@@ -2678,6 +2712,7 @@ GLOBAL VOID kbd_inb IFN2(io_addr,port,half_word *,val)
             continue_output();
             bForceDelayInts = FALSE;
         }
+#line 2854
         sure_note_trace1(AT_KBD_VERBOSE,"scan code read:0x%x",*val);
 
 
@@ -2736,6 +2771,7 @@ GLOBAL VOID kbd_outb IFN2(io_addr,port,half_word,val)
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else   /* NTVDM */
 
+#line 2976
     bForceDelayInts = TRUE;
 	continue_output();
     bForceDelayInts = FALSE;
@@ -2803,6 +2839,7 @@ GLOBAL VOID AT_kbd_init()
 
        kbd_output_data_read = FALSE;
        kbd_output_irq_acknowledged = FALSE;
+#line 3222
        int_enabled = translating = TRUE;
 
        io_define_inb(AT_KEYB_ADAPTOR, kbd_inb);

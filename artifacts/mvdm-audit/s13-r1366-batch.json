@@ -1,0 +1,226 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+      "before_sha256": "3baa74e227bb10ef682d7acd930bf3ef2e4399c30a29297825b8ca5a55b563c5",
+      "original_sha256": "e1f8f19a1f513402a10dc13eaf3b43d45a208fd71a72692f690f808a7e7762b2",
+      "anchors": {
+        "36": 36,
+        "51": 56,
+        "162": 169,
+        "202": 208,
+        "248": 253,
+        "251": 255,
+        "265": 268,
+        "311": 313,
+        "314": 315,
+        "328": 328,
+        "375": 374,
+        "378": 376,
+        "392": 389,
+        "442": 438,
+        "446": 441,
+        "461": 455,
+        "591": 584,
+        "595": 587,
+        "608": 599
+      },
+      "matched_lines": 586,
+      "extra_group_lines": [
+        41
+      ],
+      "after_sha256": "bd2899fb2c68a293ad2e951d4042d3ac2c397c786161e755d83430d11674bf8c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/evidgen.h",
+      "before_sha256": "fdb5437bda1e496b87852333ef3729ecf2d54915976333cba735f8cf1ffdc0a3",
+      "original_sha256": "867a2c65cbc1b0980ac6a07002072fcfb638e4c24ebe8e513f4c93f3d1c6fe6c",
+      "anchors": {
+        "97": 94,
+        "136": 132,
+        "138": 133,
+        "177": 171
+      },
+      "matched_lines": 177,
+      "extra_group_lines": [
+        97,
+        138
+      ],
+      "after_sha256": "6b50b143d551840f9faadda9d1717e1eec1ca38cb80c8e4b108d3bed5c17c10d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+      "before_sha256": "a8615a9fa373cbd500c46abdedbc27f7e58f3532f823c5f71c324a0917ad235c",
+      "original_sha256": "4a53a9d1c7fb984deb2c5b0fd629442ee8a35272ad90323624d55daa65886194",
+      "anchors": {
+        "25": 52,
+        "96": 119,
+        "110": 124,
+        "283": 395
+      },
+      "matched_lines": 319,
+      "extra_group_lines": [
+        93,
+        104
+      ],
+      "after_sha256": "ff732fd6c05bf24832a7099bb74e2fd96f7b3acb8032377726925b5dc080d25b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gmi.h",
+      "before_sha256": "5d33a2aedb0ccb6e959fdb10a78d91be362cee722c4b7fdf58eeb68a59948cdf",
+      "original_sha256": "828d5e4399c5cc396367373e96c4d6785ac0026f50467176f30a977afe01919a",
+      "anchors": {
+        "65": 62,
+        "72": 76
+      },
+      "matched_lines": 56,
+      "extra_group_lines": [
+        19
+      ],
+      "after_sha256": "630653599afa008bc62d877b7eadb346b5e47b2ffdf80148dd4b0f5a24ee3e45"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "before_sha256": "be11f5abaa0e17d62ef2fae1c6e2f5557b05ee24640bb867d490ba626b7c6d90",
+      "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+      "anchors": {
+        "108": 101,
+        "118": 110,
+        "155": 138,
+        "391": 386,
+        "819": 951,
+        "827": 956,
+        "848": 975,
+        "884": 1010,
+        "957": 1081,
+        "961": 1083,
+        "964": 1085,
+        "1006": 1119,
+        "1014": 1125,
+        "1047": 1156,
+        "1235": 1356,
+        "1277": 1411,
+        "1528": 1672,
+        "1760": 1895,
+        "1829": 1973,
+        "1999": 2135,
+        "2028": 2158,
+        "2042": 2169,
+        "2075": 2205,
+        "2120": 2251,
+        "2147": 2259,
+        "2153": 2266,
+        "2164": 2272,
+        "2177": 2281,
+        "2347": 2511,
+        "2454": 2601,
+        "2504": 2647,
+        "2541": 2717,
+        "2585": 2756,
+        "2621": 2790,
+        "2680": 2854,
+        "2738": 2976,
+        "2805": 3222
+      },
+      "matched_lines": 2233,
+      "extra_group_lines": [
+        90,
+        846,
+        858,
+        1233,
+        1275,
+        2026,
+        2040,
+        2502,
+        2571
+      ],
+      "after_sha256": "cad3bb755126c1b7f6970b065d6f4db258e081a32b83acdbf800d9eacaf63bef"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "before_sha256": "26f429bce4f0adc1555bfbb76e1792f225bbe4ab1f9a20f57d67c148b4d0d191",
+      "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075",
+      "anchors": {
+        "845": 873,
+        "871": 891,
+        "1434": 1803
+      },
+      "matched_lines": 1162,
+      "extra_group_lines": [
+        838,
+        868,
+        889
+      ],
+      "after_sha256": "6b7473b479944ec6abda115fcd306b2b0c3c839f728d20e3039a88e7c4917e61"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "before_sha256": "1ff067e179ac7aa383720f154df6384d6c5ff4b9582001b835190b7f294db38f",
+      "original_sha256": "94f049032a9298802cab09afc61651469dcbf1fec80ab36444e5c2fed2f681ad",
+      "anchors": {
+        "109": 97,
+        "121": 112
+      },
+      "matched_lines": 101,
+      "extra_group_lines": [
+        40,
+        104
+      ],
+      "after_sha256": "704d408866fc2be8f0ba21e80d06032c18f2cf26a918b69ddb49f77eeff4a23e"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+      "before_sha256": "e41bd3245cf15fcaeed893b23f9a81b79146296c3ab133f3b2c4f188b00c8509",
+      "original_sha256": "ce5c8812c1bd5f125f007521b2c1c815739e4969fed1ff2e39600a5a47af0525",
+      "anchors": {
+        "290": 286,
+        "299": 297
+      },
+      "matched_lines": 499,
+      "extra_group_lines": [
+        46,
+        460
+      ],
+      "after_sha256": "7552e67cd37b75c0935ac054faf7076740d9231201a2944659e9cd7c047843b9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
+      "before_sha256": "2a09c8ec12abd12f6685d2e4c3c47531524a89abaaf93e08d5c4a4d28f7f2c2f",
+      "original_sha256": "d0ea64ba445b8a7c8cb4b11963cece808793b0595183f8be7f115c060eb1f0d9",
+      "anchors": {
+        "337": 360,
+        "419": 431,
+        "472": 474
+      },
+      "matched_lines": 426,
+      "extra_group_lines": [
+        495
+      ],
+      "after_sha256": "6024b359037fb812ddde5c63783fc534ea0b937b35d56ac06e872a89d0d45bd3"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "before_sha256": "ccbe6cab51709af3d62a1beca5b439662edf4ab2bb7598683738d10e8d9d7206",
+      "original_sha256": "fe3bb4a06759e1cbef74bff327661f9649c92fb2490cdc751bc625a8170d3d4f",
+      "anchors": {
+        "19": 18,
+        "23": 19,
+        "34": 26,
+        "46": 31,
+        "59": 38,
+        "72": 44,
+        "89": 55
+      },
+      "matched_lines": 155,
+      "extra_group_lines": [
+        21,
+        33,
+        45,
+        58,
+        70,
+        88
+      ],
+      "after_sha256": "776905df4ae482b3920efdf4a568ac0c736036b6a247dcf129317a1297e1e748"
+    }
+  ]
+}

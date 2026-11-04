@@ -843,6 +843,7 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
      * First check the validity of the port
      */
 
+#line 873
     if ((port & 0xfffe) != ICA_PORT_0)
     {
 #ifndef PROD
@@ -869,6 +870,7 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 	host_ica_lock();
 	canceled = asp->ica_irr | asp->ica_isr;
 #endif
+#line 891
         asp->ica_irr  = 0;	/* Clear all pending interrupts		*/
         asp->ica_isr  = 0;	/* Clear all in-progress interrupts	*/
         asp->ica_imr  = 0;	/* Clear the mask register		*/
@@ -1432,6 +1434,7 @@ ica_intack IFN1(IU32 *, hook_address)
  *  obsolete, to be removed... but the current ntvdm emulator libs ref
  * */
 
+#line 1803
 GLOBAL void
 ica_iret_hook_called IFN1(IU32, abs_line)
 {

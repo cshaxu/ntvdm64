@@ -288,6 +288,7 @@ v7vga_extended_set_mode()
 	 * not BL's preserve-memory flag; retain that flag for screen clearing. */
 	video_mode = getBL() & 0x7F; /* get rid of top bit - indicates clear or not */
 	if (is_bad_vid_mode(video_mode) && !is_v7vga_mode(video_mode))
+#line 286
 		return;
 
 	/*
@@ -297,6 +298,7 @@ v7vga_extended_set_mode()
 	 * If it is a graphics mode then store (mode - 4C) in the mode variable.
 	 */
 
+#line 297
 	if (video_mode < 0x40)
 	{
 		sas_store_no_check(vd_video_mode, video_mode);

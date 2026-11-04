@@ -95,6 +95,7 @@ extern	struct	VideoVector	Video;
  * direct vglob.c accessors. Keep the full C-VID latch/table layout, but do
  * not replace those typed calls with the older generated scratch users. */
 #ifndef CPU_40_STYLE
+#line 94
 #define	getVideorplane()	(*(Video.GetVideorplane))()
 #define	getVideowplane()	(*(Video.GetVideowplane))()
 #define	getVideoscratch()	(*(Video.GetVideoscratch))()
@@ -134,8 +135,10 @@ extern	struct	VideoVector	Video;
 #define	getVideochain()	(*(Video.GetVideochain))()
 #define	getVideowrstate()	(*(Video.GetVideowrstate))()
 #endif
+#line 132
 #define	setVideolatches(value)	(*(Video.SetVideolatches))(value)
 #ifndef CPU_40_STYLE
+#line 133
 #define	setVideorplane(value)	(*(Video.SetVideorplane))(value)
 #define	setVideowplane(value)	(*(Video.SetVideowplane))(value)
 #define	setVideoscratch(value)	(*(Video.SetVideoscratch))(value)
@@ -175,6 +178,7 @@ extern	struct	VideoVector	Video;
 #define	setVideochain(value)	(*(Video.SetVideochain))(value)
 #define	setVideowrstate(value)	(*(Video.SetVideowrstate))(value)
 #endif
+#line 171
 #define	SetWritePointers()	(*(Video.setWritePointers))()
 #define	SetReadPointers(readset)	(*(Video.setReadPointers))(readset)
 #define	SetMarkPointers(markset)	(*(Video.setMarkPointers))(markset)

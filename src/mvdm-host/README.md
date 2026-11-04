@@ -3134,3 +3134,5 @@ MVDM-HOST-DIV-828: restore the original ANR field logical line in vrnmpipe.h fol
 MVDM-HOST-DIV-829: restore the original DPMI data.c continuation source line after the local CPU40 descriptor group. Evidence: artifacts/mvdm-audit/s13-r1364-dpmi-data-line.json. Cached batch build and ten-image publication passed.
 
 MVDM-HOST-DIV-830: restore original logical source positions for matching code on observed selected paths in five files with additional local condition groups. Evidence: artifacts/mvdm-audit/s13-r1365-batch.json and s13-r1365-extra-group-recheck.json. Other contexts remain under review.
+
+MVDM-HOST-DIV-831: restore original logical source positions for matching code on observed selected paths in ten files with additional local condition groups. Evidence: artifacts/mvdm-audit/s13-r1366-batch.json and s13-r1366-extra-group-recheck.json. Other contexts remain under review.
