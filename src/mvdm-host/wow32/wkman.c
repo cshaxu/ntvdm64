@@ -1430,7 +1430,7 @@ DWORD W32RemoteThread(VOID)
         DbgBreakPoint();
     }
 #endif
-#line 1429
+#line 1428
 
     W32DestroyTask(&td);
     host_ExitThread(EXIT_SUCCESS);

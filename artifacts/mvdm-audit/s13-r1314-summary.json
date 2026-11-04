@@ -51,5 +51,7 @@
   "batch_r1328_anchor_files_partially_corrected": 10,
   "batch_r1328_context_matched_anchors_corrected": 20,
   "batch_r1329_anchor_files_partially_corrected": 10,
-  "batch_r1329_context_matched_anchors_corrected": 12
+  "batch_r1329_context_matched_anchors_corrected": 12,
+  "batch_r1330_anchor_files_partially_corrected": 10,
+  "batch_r1330_context_matched_anchors_corrected": 12
 }

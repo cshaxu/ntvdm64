@@ -567,7 +567,7 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
 #line 657
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 659
+#line 645
 
 
     WOW32ASSERT(iRetID != RET_RETURN && iRetID != RET_DEBUGRETURN);
@@ -677,7 +677,7 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
 #line 774
 #error Unsupported excluded original configuration
 #else
-#line 778
+#line 771
     // Time to get the IEU running task-time code again
     SaveIp = getIP();
     /* DIVERGENCE(MVDM-HOST-DIV-304): default-off witness after the original
@@ -691,7 +691,7 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
     setIP(SaveIp);
     ptd->vpStack = VDMSTACK();
 #endif
-#line 784
+#line 779
 
     // after return from callback ptd->vpStack will point to PCBVDMFRAME
 

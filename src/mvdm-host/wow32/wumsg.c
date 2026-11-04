@@ -882,7 +882,7 @@ get_next_dde_message:
 #line 848
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 852
+#line 846
 
     { /* DIVERGENCE(MVDM-HOST-DIV-350): GetMessage consumed its own queue item. */
         BOOL savedThunkDDE = fThunkDDEmsg;

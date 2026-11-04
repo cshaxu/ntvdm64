@@ -282,7 +282,7 @@ PVOID ParamMapUpdateNode(DWORD dwPtr, UINT fMode, VOID* lpNode)
 #line 285
 #error Unsupported excluded original configuration
 #endif
-#line 290
+#line 287
 
 
     /* DIVERGENCE(MVDM-HOST-DIV-347): failed refresh must not publish NULL. */

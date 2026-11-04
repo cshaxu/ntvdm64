@@ -10,7 +10,7 @@
 #line 31
 #error Excluded unsupported C++ NT executive declaration context
 #endif
-#line 34
+#line 605
 
 /*
  * DIVERGENCE(OPENNT-HOST-001): This is the selected true subset of the

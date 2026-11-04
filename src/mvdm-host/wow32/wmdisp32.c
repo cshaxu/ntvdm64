@@ -61,7 +61,7 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
 #line 47
 #error Excluded unsupported WOW profiling configuration
 #endif
-#line 49
+#line 48
 
     ptd = CURRENTPTD();
 

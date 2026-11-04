@@ -1,0 +1,1240 @@
+{
+  "method": "Nine files: each existing anchor maps at least two unique exact original statements with consistent offset and surrounding context. The RTL wow.c anchor uses one unique statement with six matching context lines. Only #line values change; other branches remain under audit.",
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wcall16.c",
+      "before_sha256": "b7c6bf2791015c552e1b1ac46fdaedc60bf3fef72c14ebfaf60670a6fb9ff0c0",
+      "after_sha256": "3a7a4c007d5382dfed07699ccae7e8598545ef27347604a0418ad0b66d01f0f3",
+      "fixes": [
+        {
+          "physical": 570,
+          "old": 659,
+          "new": 645,
+          "matches": [
+            {
+              "physical": 595,
+              "original": 669,
+              "target": 645,
+              "text": "WOW32ASSERT((pFrame->wTDB == ptd->htask16) ||",
+              "context": 6
+            },
+            {
+              "physical": 596,
+              "original": 670,
+              "target": 645,
+              "text": "(ptd->dwFlags & TDF_IGNOREINPUT) ||",
+              "context": 6
+            },
+            {
+              "physical": 597,
+              "original": 671,
+              "target": 645,
+              "text": "(ptd->htask16 == 0));",
+              "context": 7
+            },
+            {
+              "physical": 602,
+              "original": 676,
+              "target": 645,
+              "text": "if (ptd->dwFlags & TDF_INITCALLBACKSTACK) {",
+              "context": 9
+            },
+            {
+              "physical": 603,
+              "original": 677,
+              "target": 645,
+              "text": "ptd->vpCBStack = (ptd->vpStack - sizeof(CBVDMFRAME)) & (~0x1);",
+              "context": 8
+            },
+            {
+              "physical": 605,
+              "original": 679,
+              "target": 645,
+              "text": "else {",
+              "context": 8
+            },
+            {
+              "physical": 606,
+              "original": 680,
+              "target": 645,
+              "text": "ptd->dwFlags |= TDF_INITCALLBACKSTACK;",
+              "context": 8
+            },
+            {
+              "physical": 607,
+              "original": 681,
+              "target": 645,
+              "text": "ptd->vpCBStack = (ptd->vpCBStack - sizeof(CBVDMFRAME)) & (~0x1);",
+              "context": 9
+            },
+            {
+              "physical": 610,
+              "original": 684,
+              "target": 645,
+              "text": "pCBFrame->vpStack = ptd->vpStack;",
+              "context": 8
+            },
+            {
+              "physical": 611,
+              "original": 685,
+              "target": 645,
+              "text": "pCBFrame->wRetID = (WORD)iRetID;",
+              "context": 7
+            },
+            {
+              "physical": 612,
+              "original": 686,
+              "target": 645,
+              "text": "pCBFrame->wTDB       = pFrame->wTDB;",
+              "context": 6
+            },
+            {
+              "physical": 613,
+              "original": 687,
+              "target": 645,
+              "text": "pCBFrame->wLocalBP   = pFrame->wLocalBP;",
+              "context": 5
+            }
+          ]
+        },
+        {
+          "physical": 680,
+          "old": 778,
+          "new": 771,
+          "matches": [
+            {
+              "physical": 691,
+              "original": 781,
+              "target": 771,
+              "text": "setIP(SaveIp);",
+              "context": 4
+            },
+            {
+              "physical": 692,
+              "original": 782,
+              "target": 771,
+              "text": "ptd->vpStack = VDMSTACK();",
+              "context": 4
+            }
+          ]
+        },
+        {
+          "physical": 694,
+          "old": 784,
+          "new": 779,
+          "matches": [
+            {
+              "physical": 704,
+              "original": 788,
+              "target": 779,
+              "text": "WOW32ASSERT(ptd->vpStack == vpCBStackT);",
+              "context": 4
+            },
+            {
+              "physical": 706,
+              "original": 790,
+              "target": 779,
+              "text": "ptd->vpCBStack = ptd->vpStack;",
+              "context": 5
+            },
+            {
+              "physical": 711,
+              "original": 795,
+              "target": 779,
+              "text": "WOW32ASSERT((pCBFrame->wTDB == ptd->htask16) ||",
+              "context": 7
+            },
+            {
+              "physical": 712,
+              "original": 796,
+              "target": 779,
+              "text": "(ptd->htask16 == 0));",
+              "context": 7
+            },
+            {
+              "physical": 714,
+              "original": 798,
+              "target": 779,
+              "text": "if (pvpReturn) {",
+              "context": 8
+            },
+            {
+              "physical": 715,
+              "original": 799,
+              "target": 779,
+              "text": "LOW(*pvpReturn) = pCBFrame->wAX;",
+              "context": 8
+            },
+            {
+              "physical": 716,
+              "original": 800,
+              "target": 779,
+              "text": "HIW(*pvpReturn) = pCBFrame->wDX;",
+              "context": 8
+            },
+            {
+              "physical": 719,
+              "original": 803,
+              "target": 779,
+              "text": "LOGDEBUG(9,(\"%04X          WIN16 %s returning: %lx\\n\",",
+              "context": 9
+            },
+            {
+              "physical": 720,
+              "original": 804,
+              "target": 779,
+              "text": "pCBFrame->wTDB, apszCallBacks[iRetID], (pvpReturn) ? *pvpReturn : 0));",
+              "context": 9
+            },
+            {
+              "physical": 728,
+              "original": 812,
+              "target": 779,
+              "text": "WOW32ASSERT(pCBFrame->vpStack == vpStackT);",
+              "context": 7
+            },
+            {
+              "physical": 730,
+              "original": 814,
+              "target": 779,
+              "text": "ptd->vpStack = pCBFrame->vpStack;",
+              "context": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkman.c",
+      "before_sha256": "3d7dc16c2901576be435addce37911830a3f4941021290a8e188735200f2fbeb",
+      "after_sha256": "b38a9636f28836084b4c1dfe540242918a91295bfc7124014ab24567ff27f6fc",
+      "fixes": [
+        {
+          "physical": 1433,
+          "old": 1429,
+          "new": 1428,
+          "matches": [
+            {
+              "physical": 1457,
+              "original": 1451,
+              "target": 1428,
+              "text": "PWOAINST pWOA, pWOANext;",
+              "context": 7
+            },
+            {
+              "physical": 1459,
+              "original": 1453,
+              "target": 1428,
+              "text": "nWOWTasks--;",
+              "context": 5
+            },
+            {
+              "physical": 1461,
+              "original": 1455,
+              "target": 1428,
+              "text": "if (nWOWTasks < 2)",
+              "context": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmdisp32.c",
+      "before_sha256": "5b251213a2f582b25f26a7ead7006b62e7fbadb40a20b919fe0aa67a50521d4e",
+      "after_sha256": "7c6bbbc74ee9810eb586f63149a0ff32f726c0bbb7f7d14d14b8426095d1385b",
+      "fixes": [
+        {
+          "physical": 64,
+          "old": 49,
+          "new": 48,
+          "matches": [
+            {
+              "physical": 69,
+              "original": 52,
+              "target": 48,
+              "text": "vpWndProc16 &= WNDPROC_MASK;",
+              "context": 5
+            },
+            {
+              "physical": 76,
+              "original": 59,
+              "target": 48,
+              "text": "if (!((DWORD)vpWndProc16 & WOWCLASS_VIRTUAL_NOT_BIT31)) {",
+              "context": 8
+            },
+            {
+              "physical": 77,
+              "original": 60,
+              "target": 48,
+              "text": "vpWndProc16 |= (WNDPROC_WOW | WOWCLASS_VIRTUAL_NOT_BIT31);",
+              "context": 9
+            },
+            {
+              "physical": 84,
+              "original": 67,
+              "target": 48,
+              "text": "if (ptd->dwFlags & TDF_IGNOREINPUT) {",
+              "context": 9
+            },
+            {
+              "physical": 85,
+              "original": 68,
+              "target": 48,
+              "text": "LOGDEBUG(6,(\"    W32Win16WndProc Ignoring Input Messsage %04X\\n\",uMsg));",
+              "context": 10
+            },
+            {
+              "physical": 86,
+              "original": 69,
+              "target": 48,
+              "text": "WOW32ASSERTMSG(!gfIgnoreInputAssertGiven,",
+              "context": 10
+            },
+            {
+              "physical": 87,
+              "original": 70,
+              "target": 48,
+              "text": "\"WCD32CommonDialogProc: TDF_IGNOREINPUT hack was used, shouldn't be, \"",
+              "context": 10
+            },
+            {
+              "physical": 88,
+              "original": 71,
+              "target": 48,
+              "text": "\"please email DaveHart with repro instructions.  Hit 'g' to ignore this \"",
+              "context": 9
+            },
+            {
+              "physical": 89,
+              "original": 72,
+              "target": 48,
+              "text": "\"and suppress this assertion from now on.\\n\");",
+              "context": 10
+            },
+            {
+              "physical": 90,
+              "original": 73,
+              "target": 48,
+              "text": "gfIgnoreInputAssertGiven = TRUE;",
+              "context": 10
+            },
+            {
+              "physical": 98,
+              "original": 81,
+              "target": 48,
+              "text": "if (!pww) {",
+              "context": 7
+            },
+            {
+              "physical": 99,
+              "original": 82,
+              "target": 48,
+              "text": "if (!(pww = (PWW) GetWindowLong(hwnd, GWL_WOWWORDS))) {",
+              "context": 7
+            },
+            {
+              "physical": 100,
+              "original": 83,
+              "target": 48,
+              "text": "LOGDEBUG(LOG_ALWAYS,(\"WOW :: W32Win16WndProc ERROR: GetWindowLong(0x%x, GWL_WOWWORDS) fails\\n\", hwnd));",
+              "context": 8
+            },
+            {
+              "physical": 106,
+              "original": 89,
+              "target": 48,
+              "text": "if (pwc = FindPWC(hwnd)) {",
+              "context": 8
+            },
+            {
+              "physical": 107,
+              "original": 90,
+              "target": 48,
+              "text": "SETWL(hwnd, GWL_WOWvpfnWndProc, pwc->vpfnWndProc);",
+              "context": 8
+            },
+            {
+              "physical": 108,
+              "original": 91,
+              "target": 48,
+              "text": "SETWL(hwnd, GWL_WOWiClassAndflState,",
+              "context": 8
+            },
+            {
+              "physical": 109,
+              "original": 92,
+              "target": 48,
+              "text": "MAKECLASSANDSTATE(WOWCLASS_WIN16, pww->flState | WWSTATE_ICLASSISSET));",
+              "context": 9
+            },
+            {
+              "physical": 111,
+              "original": 94,
+              "target": 48,
+              "text": "LOGDEBUG(7,(\"Grovelled Class Name = %s\\n\",",
+              "context": 9
+            },
+            {
+              "physical": 112,
+              "original": 95,
+              "target": 48,
+              "text": "(GetClassName(hwnd, szClassName, sizeof(szClassName)) ? szClassName : \"Unknown\")));",
+              "context": 8
+            },
+            {
+              "physical": 115,
+              "original": 98,
+              "target": 48,
+              "text": "LOGDEBUG(LOG_ALWAYS,(\"WOW :: W32Win16WndProc : FindPWC(0x%8.8x) fails\\n\", hwnd));",
+              "context": 7
+            },
+            {
+              "physical": 120,
+              "original": 103,
+              "target": 48,
+              "text": "LOGDEBUG(LOG_ALWAYS,(\"WOW :: W32Win16WndProc ERROR: cannot find 16-bit class for window %08lx\\n\", hwnd));",
+              "context": 7
+            },
+            {
+              "physical": 132,
+              "original": 115,
+              "target": 48,
+              "text": "if (uMsg == EM_SCROLLCARET) {",
+              "context": 9
+            },
+            {
+              "physical": 133,
+              "original": 116,
+              "target": 48,
+              "text": "WNDPROC EditWndProc;",
+              "context": 8
+            },
+            {
+              "physical": 139,
+              "original": 122,
+              "target": 48,
+              "text": "EditWndProc = (WNDPROC)GetStdClassWndProc(WOWCLASS_EDIT);",
+              "context": 8
+            },
+            {
+              "physical": 141,
+              "original": 124,
+              "target": 48,
+              "text": "if (EditWndProc) {",
+              "context": 8
+            },
+            {
+              "physical": 142,
+              "original": 125,
+              "target": 48,
+              "text": "CallWindowProc(EditWndProc, hwnd, EM_SCROLLCARET, 0, 0);",
+              "context": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wparam.c",
+      "before_sha256": "137e82bbd2f5dcf08761115ee1af0b3c9942c9c46a35edc77adf7e0c310b8a0d",
+      "after_sha256": "d452ecb26b7e0976cd1ceb56768ef2fe776e1837363dbfe3b111fba5398abf8a",
+      "fixes": [
+        {
+          "physical": 285,
+          "old": 290,
+          "new": 287,
+          "matches": [
+            {
+              "physical": 291,
+              "original": 292,
+              "target": 287,
+              "text": "if (lpn->nAliasCount < ARRAYCOUNT(lpn->rgdwAlias)) {",
+              "context": 5
+            },
+            {
+              "physical": 293,
+              "original": 294,
+              "target": 287,
+              "text": "lpn->rgdwAlias[lpn->nAliasCount++] = lpn->dwPtr32;",
+              "context": 7
+            },
+            {
+              "physical": 296,
+              "original": 297,
+              "target": 287,
+              "text": "WOW32ASSERTMSG(FALSE, (\"WOW:AddParamMap is out of alias space\\n\"));",
+              "context": 8
+            },
+            {
+              "physical": 299,
+              "original": 300,
+              "target": 287,
+              "text": "lpn->rgdwAlias[0] = lpn->dwPtr32;",
+              "context": 8
+            },
+            {
+              "physical": 302,
+              "original": 303,
+              "target": 287,
+              "text": "lpn->dwPtr32 = (DWORD)pv; // new pointer here",
+              "context": 6
+            },
+            {
+              "physical": 304,
+              "original": 305,
+              "target": 287,
+              "text": "return pv;",
+              "context": 6
+            },
+            {
+              "physical": 317,
+              "original": 318,
+              "target": 287,
+              "text": "BOOL DeleteParamMap(DWORD lParam, UINT fMode, BOOL* pfFreePtr)",
+              "context": 8
+            },
+            {
+              "physical": 320,
+              "original": 321,
+              "target": 287,
+              "text": "LPPARAMNODE lpn = NULL;",
+              "context": 7
+            },
+            {
+              "physical": 322,
+              "original": 323,
+              "target": 287,
+              "text": "if (FindParamMap(&fp, lParam, fMode)) {",
+              "context": 8
+            },
+            {
+              "physical": 325,
+              "original": 326,
+              "target": 287,
+              "text": "if (!--lpn->dwRefCount) {",
+              "context": 8
+            },
+            {
+              "physical": 327,
+              "original": 328,
+              "target": 287,
+              "text": "if (NULL != fp.lpLast) {",
+              "context": 8
+            },
+            {
+              "physical": 328,
+              "original": 329,
+              "target": 287,
+              "text": "fp.lpLast->pNext = lpn->pNext;",
+              "context": 7
+            },
+            {
+              "physical": 331,
+              "original": 332,
+              "target": 287,
+              "text": "gParamMap.pHead = lpn->pNext;",
+              "context": 6
+            },
+            {
+              "physical": 334,
+              "original": 335,
+              "target": 287,
+              "text": "if (NULL != pfFreePtr) {",
+              "context": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wumsg.c",
+      "before_sha256": "2f194c7f952fc43f06e523f0db2934c17783df349046d005ba84f3dbab607fc4",
+      "after_sha256": "5f9fe049ac6f324bdf36a1f23040e9650bdcdb4f1e6fdd34a858ac18a296f2ba",
+      "fixes": [
+        {
+          "physical": 885,
+          "old": 852,
+          "new": 846,
+          "matches": [
+            {
+              "physical": 897,
+              "original": 857,
+              "target": 846,
+              "text": "if (((t1.message == WM_DDE_DATA) || (t1.message == WM_DDE_POKE)) && (!ulReturn)) {",
+              "context": 7
+            },
+            {
+              "physical": 899,
+              "original": 859,
+              "target": 846,
+              "text": "DDEDATA *lpMem32;",
+              "context": 9
+            },
+            {
+              "physical": 900,
+              "original": 860,
+              "target": 846,
+              "text": "WORD Status;",
+              "context": 9
+            },
+            {
+              "physical": 901,
+              "original": 861,
+              "target": 846,
+              "text": "UINT dd;",
+              "context": 9
+            },
+            {
+              "physical": 902,
+              "original": 862,
+              "target": 846,
+              "text": "WORD ww;",
+              "context": 9
+            },
+            {
+              "physical": 903,
+              "original": 863,
+              "target": 846,
+              "text": "char szMsgBoxText[1024];",
+              "context": 9
+            },
+            {
+              "physical": 904,
+              "original": 864,
+              "target": 846,
+              "text": "char szCaption[256];",
+              "context": 9
+            },
+            {
+              "physical": 906,
+              "original": 866,
+              "target": 846,
+              "text": "GETVDMPTR(vpMsg, sizeof(MSG16), pmsg16);",
+              "context": 8
+            },
+            {
+              "physical": 908,
+              "original": 868,
+              "target": 846,
+              "text": "dd = FETCHDWORD(pmsg16->lParam);",
+              "context": 8
+            },
+            {
+              "physical": 909,
+              "original": 869,
+              "target": 846,
+              "text": "ww = FETCHWORD(pmsg16->wParam);",
+              "context": 7
+            },
+            {
+              "physical": 911,
+              "original": 871,
+              "target": 846,
+              "text": "lpMem32 = GlobalLock((HGLOBAL)dd);",
+              "context": 7
+            },
+            {
+              "physical": 912,
+              "original": 872,
+              "target": 846,
+              "text": "Status = (*((PWORD) lpMem32));",
+              "context": 7
+            },
+            {
+              "physical": 913,
+              "original": 873,
+              "target": 846,
+              "text": "GlobalUnlock((HGLOBAL)dd);",
+              "context": 7
+            },
+            {
+              "physical": 915,
+              "original": 875,
+              "target": 846,
+              "text": "(pfnOut.pfnFreeDDEData)((HANDLE)dd, TRUE, TRUE);",
+              "context": 7
+            },
+            {
+              "physical": 917,
+              "original": 877,
+              "target": 846,
+              "text": "GlobalDeleteAtom (ww);",
+              "context": 8
+            },
+            {
+              "physical": 919,
+              "original": 879,
+              "target": 846,
+              "text": "if ((Status & fAckReq) || (t1.message == WM_DDE_POKE)) {",
+              "context": 8
+            },
+            {
+              "physical": 920,
+              "original": 880,
+              "target": 846,
+              "text": "LoadString(hmodWOW32, iszOLEMemAllocFailedFatal, szMsgBoxText, sizeof szMsgBoxText);",
+              "context": 9
+            },
+            {
+              "physical": 923,
+              "original": 883,
+              "target": 846,
+              "text": "PostMessage((HWND) t1.wParam, WM_DDE_TERMINATE, (WPARAM)FULLHWND32((WORD)t1.hwnd), (LPARAM)0l);",
+              "context": 8
+            },
+            {
+              "physical": 926,
+              "original": 886,
+              "target": 846,
+              "text": "LoadString(hmodWOW32, iszOLEMemAllocFailed, szMsgBoxText, sizeof szMsgBoxText);",
+              "context": 7
+            },
+            {
+              "physical": 934,
+              "original": 894,
+              "target": 846,
+              "text": "GETFRAMEPTR(((PTD)CURRENTPTD())->vpStack, pFrame);",
+              "context": 6
+            },
+            {
+              "physical": 936,
+              "original": 896,
+              "target": 846,
+              "text": "goto get_next_dde_message;",
+              "context": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntexapi.h",
+      "before_sha256": "fb680e3b681ffb64a594ef794a0301a3e5d842a765594a381b5a914cd633c178",
+      "after_sha256": "3a527fdf6274b858201f4f8729c74867cfad1b40799b50e29e937b89e6cdb1ab",
+      "fixes": [
+        {
+          "physical": 13,
+          "old": 34,
+          "new": 605,
+          "matches": [
+            {
+              "physical": 31,
+              "original": 622,
+              "target": 605,
+              "text": "NtQueryPerformanceCounter (",
+              "context": 7
+            },
+            {
+              "physical": 32,
+              "original": 623,
+              "target": 605,
+              "text": "OUT PLARGE_INTEGER PerformanceCounter,",
+              "context": 7
+            },
+            {
+              "physical": 33,
+              "original": 624,
+              "target": 605,
+              "text": "OUT PLARGE_INTEGER PerformanceFrequency OPTIONAL",
+              "context": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\btnctl.c",
+      "before_sha256": "fa5f23fbd9059f2a023c89532bfd53df0b18e39217c3fea5ebfe8b468eed2b93",
+      "after_sha256": "bd511d14258795850ecb94c50f4e4ead5f953c6c4fb29f1f68094d354ef66531",
+      "fixes": [
+        {
+          "physical": 310,
+          "old": 299,
+          "new": 298,
+          "matches": [
+            {
+              "physical": 326,
+              "original": 313,
+              "target": 298,
+              "text": "void xxxBNOwnerDraw(",
+              "context": 10
+            },
+            {
+              "physical": 329,
+              "original": 316,
+              "target": 298,
+              "text": "UINT itemAction,",
+              "context": 9
+            },
+            {
+              "physical": 330,
+              "original": 317,
+              "target": 298,
+              "text": "UINT itemState)",
+              "context": 9
+            },
+            {
+              "physical": 332,
+              "original": 319,
+              "target": 298,
+              "text": "DRAWITEMSTRUCT drawItemStruct;",
+              "context": 9
+            },
+            {
+              "physical": 338,
+              "original": 325,
+              "target": 298,
+              "text": "itemState |= ODS_DISABLED;",
+              "context": 8
+            },
+            {
+              "physical": 340,
+              "original": 327,
+              "target": 298,
+              "text": "drawItemStruct.CtlType = ODT_BUTTON;",
+              "context": 9
+            },
+            {
+              "physical": 341,
+              "original": 328,
+              "target": 298,
+              "text": "drawItemStruct.CtlID = (UINT)pwnd->spmenu;",
+              "context": 9
+            },
+            {
+              "physical": 342,
+              "original": 329,
+              "target": 298,
+              "text": "drawItemStruct.itemAction = itemAction;",
+              "context": 10
+            },
+            {
+              "physical": 343,
+              "original": 330,
+              "target": 298,
+              "text": "drawItemStruct.itemState = itemState;",
+              "context": 9
+            },
+            {
+              "physical": 344,
+              "original": 331,
+              "target": 298,
+              "text": "drawItemStruct.hwndItem = HWq(pwnd);",
+              "context": 9
+            },
+            {
+              "physical": 345,
+              "original": 332,
+              "target": 298,
+              "text": "drawItemStruct.hDC = hdc;",
+              "context": 10
+            },
+            {
+              "physical": 346,
+              "original": 333,
+              "target": 298,
+              "text": "_GetClientRect(pwnd, &drawItemStruct.rcItem);",
+              "context": 10
+            },
+            {
+              "physical": 347,
+              "original": 334,
+              "target": 298,
+              "text": "drawItemStruct.itemData = 0L;",
+              "context": 10
+            },
+            {
+              "physical": 353,
+              "original": 340,
+              "target": 298,
+              "text": "ThreadLock(REBASEPWND(pwnd, spwndParent), &tlpwndParent);",
+              "context": 9
+            },
+            {
+              "physical": 354,
+              "original": 341,
+              "target": 298,
+              "text": "SendMessage(HW(REBASEPWND(pwnd, spwndParent)), WM_DRAWITEM, (DWORD)pwnd->spmenu,",
+              "context": 9
+            },
+            {
+              "physical": 355,
+              "original": 342,
+              "target": 298,
+              "text": "(LONG)&drawItemStruct);",
+              "context": 9
+            },
+            {
+              "physical": 366,
+              "original": 353,
+              "target": 298,
+              "text": "void BNCalcRect(",
+              "context": 10
+            },
+            {
+              "physical": 369,
+              "original": 356,
+              "target": 298,
+              "text": "LPRECT lprc,",
+              "context": 10
+            },
+            {
+              "physical": 370,
+              "original": 357,
+              "target": 298,
+              "text": "int code,",
+              "context": 10
+            },
+            {
+              "physical": 371,
+              "original": 358,
+              "target": 298,
+              "text": "UINT pbfFlags)",
+              "context": 11
+            },
+            {
+              "physical": 373,
+              "original": 360,
+              "target": 298,
+              "text": "int cch;",
+              "context": 10
+            },
+            {
+              "physical": 374,
+              "original": 361,
+              "target": 298,
+              "text": "SIZE extent;",
+              "context": 10
+            },
+            {
+              "physical": 375,
+              "original": 362,
+              "target": 298,
+              "text": "int dy;",
+              "context": 9
+            },
+            {
+              "physical": 376,
+              "original": 363,
+              "target": 298,
+              "text": "LPWSTR lpName;",
+              "context": 9
+            },
+            {
+              "physical": 377,
+              "original": 364,
+              "target": 298,
+              "text": "UINT align;",
+              "context": 8
+            },
+            {
+              "physical": 379,
+              "original": 366,
+              "target": 298,
+              "text": "_GetClientRect(pwnd, lprc);",
+              "context": 8
+            },
+            {
+              "physical": 381,
+              "original": 368,
+              "target": 298,
+              "text": "align = GetAlignment(pwnd);",
+              "context": 8
+            },
+            {
+              "physical": 383,
+              "original": 370,
+              "target": 298,
+              "text": "switch (code) {",
+              "context": 7
+            },
+            {
+              "physical": 384,
+              "original": 371,
+              "target": 298,
+              "text": "case CBR_PUSHBUTTON:",
+              "context": 8
+            },
+            {
+              "physical": 386,
+              "original": 373,
+              "target": 298,
+              "text": "InflateRect(lprc, -SYSMET(CXEDGE), -SYSMET(CYEDGE));",
+              "context": 8
+            },
+            {
+              "physical": 388,
+              "original": 375,
+              "target": 298,
+              "text": "if (pbfFlags & PBF_DEFAULT)",
+              "context": 9
+            },
+            {
+              "physical": 389,
+              "original": 376,
+              "target": 298,
+              "text": "InflateRect(lprc, -SYSMET(CXBORDER), -SYSMET(CYBORDER));",
+              "context": 9
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgmgr2.c",
+      "before_sha256": "f48ce8562cdea6f1a37467eabab000ff052802ff3efef33f5d754be468555ccf",
+      "after_sha256": "49702b12312820f0d62604dadcd8f0ffdd7428ae7ef8219e41e9574e4e52aa2f",
+      "fixes": [
+        {
+          "physical": 271,
+          "old": 244,
+          "new": 243,
+          "matches": [
+            {
+              "physical": 283,
+              "original": 254,
+              "target": 243,
+              "text": "return bRet;",
+              "context": 6
+            },
+            {
+              "physical": 286,
+              "original": 257,
+              "target": 243,
+              "text": "BOOL IsDialogMessageW(",
+              "context": 9
+            },
+            {
+              "physical": 288,
+              "original": 259,
+              "target": 243,
+              "text": "LPMSG lpMsg)",
+              "context": 10
+            },
+            {
+              "physical": 290,
+              "original": 261,
+              "target": 243,
+              "text": "PWND pwndDlg;",
+              "context": 10
+            },
+            {
+              "physical": 292,
+              "original": 263,
+              "target": 243,
+              "text": "PWND pwnd2;",
+              "context": 11
+            },
+            {
+              "physical": 293,
+              "original": 264,
+              "target": 243,
+              "text": "HWND hwnd2;",
+              "context": 11
+            },
+            {
+              "physical": 294,
+              "original": 265,
+              "target": 243,
+              "text": "HWND hwndFocus;",
+              "context": 11
+            },
+            {
+              "physical": 295,
+              "original": 266,
+              "target": 243,
+              "text": "int iOK;",
+              "context": 11
+            },
+            {
+              "physical": 296,
+              "original": 267,
+              "target": 243,
+              "text": "BOOL fBack;",
+              "context": 11
+            },
+            {
+              "physical": 300,
+              "original": 271,
+              "target": 243,
+              "text": "TL tlpwndDlg;",
+              "context": 10
+            },
+            {
+              "physical": 301,
+              "original": 272,
+              "target": 243,
+              "text": "BOOL fLockDlg = FALSE;",
+              "context": 10
+            },
+            {
+              "physical": 302,
+              "original": 273,
+              "target": 243,
+              "text": "TL tlpwnd2;",
+              "context": 9
+            },
+            {
+              "physical": 304,
+              "original": 275,
+              "target": 243,
+              "text": "if ((pwndDlg = ValidateHwndNoRip(hwndDlg)) == NULL) {",
+              "context": 8
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+      "before_sha256": "351fc45e0c0e6b2590fd5a901ca99bfad937b8411a4b337f6b8c18c584c3e028",
+      "after_sha256": "170c4933ba983fa3fe941ddf91dbbf2b8483830b1cccdf80798e020c5aa6b3cb",
+      "fixes": [
+        {
+          "physical": 396,
+          "old": 597,
+          "new": 893,
+          "matches": [
+            {
+              "physical": 400,
+              "original": 896,
+              "target": 893,
+              "text": "VOID InitWindowMsgTable(",
+              "context": 6
+            },
+            {
+              "physical": 401,
+              "original": 897,
+              "target": 893,
+              "text": "PBYTE      *ppbyte,",
+              "context": 7
+            },
+            {
+              "physical": 402,
+              "original": 898,
+              "target": 893,
+              "text": "PUINT      pmax,",
+              "context": 8
+            },
+            {
+              "physical": 403,
+              "original": 899,
+              "target": 893,
+              "text": "CONST WORD *pw)",
+              "context": 8
+            },
+            {
+              "physical": 406,
+              "original": 902,
+              "target": 893,
+              "text": "WORD msg;",
+              "context": 10
+            },
+            {
+              "physical": 407,
+              "original": 903,
+              "target": 893,
+              "text": "UINT cbTable;",
+              "context": 10
+            },
+            {
+              "physical": 409,
+              "original": 905,
+              "target": 893,
+              "text": "*pmax = 0;",
+              "context": 9
+            },
+            {
+              "physical": 410,
+              "original": 906,
+              "target": 893,
+              "text": "for (i = 0; (msg = pw[i]) != 0; i++) {",
+              "context": 9
+            },
+            {
+              "physical": 411,
+              "original": 907,
+              "target": 893,
+              "text": "if (msg > *pmax)",
+              "context": 9
+            },
+            {
+              "physical": 412,
+              "original": 908,
+              "target": 893,
+              "text": "*pmax = msg;",
+              "context": 9
+            },
+            {
+              "physical": 415,
+              "original": 911,
+              "target": 893,
+              "text": "cbTable = *pmax / 8 + 1;",
+              "context": 9
+            },
+            {
+              "physical": 416,
+              "original": 912,
+              "target": 893,
+              "text": "*ppbyte = SharedAlloc(cbTable);",
+              "context": 8
+            },
+            {
+              "physical": 417,
+              "original": 913,
+              "target": 893,
+              "text": "RtlZeroMemory(*ppbyte, cbTable);",
+              "context": 7
+            },
+            {
+              "physical": 419,
+              "original": 915,
+              "target": 893,
+              "text": "for (i = 0; (msg = pw[i]) != 0; i++)",
+              "context": 6
+            },
+            {
+              "physical": 420,
+              "original": 916,
+              "target": 893,
+              "text": "(*ppbyte)[msg / 8] |= (BYTE)(1 << (msg & 7));",
+              "context": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+      "before_sha256": "cacfbf60110955d56472ea67424911a522d3ea19fc3415ea75ad1a22527aab11",
+      "after_sha256": "4e06f734b802a1ee662448a0606deb97e358529219af700c75cb9153925fe925",
+      "fixes": [
+        {
+          "physical": 32,
+          "old": 171,
+          "new": 679,
+          "matches": [
+            {
+              "physical": 36,
+              "original": 682,
+              "target": 679,
+              "text": "BOOL _IsChild(",
+              "context": 6
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,5 +1,9 @@
 # non-mvdm original OpenNT sources
 
+OPENNT-HOST-175: correct original diagnostic anchors in five SDK and USER
+sources after matching original statements and context; only `#line` values
+change. Evidence: `../../artifacts/mvdm-audit/s13-r1330-line-batch.json`.
+
 OPENNT-HOST-174: correct original diagnostic anchors in three condition-bearing
 USER files; statement and surrounding context were checked and only `#line`
 values change. Evidence: `../../artifacts/mvdm-audit/s13-r1326-line-batch.json`.

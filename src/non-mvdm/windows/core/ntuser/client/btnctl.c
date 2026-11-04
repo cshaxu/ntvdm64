@@ -307,7 +307,7 @@ void BNReleaseDC(
 #line 296
 #error DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register.
 #endif
-#line 299
+#line 298
 
     if (pbutn->hFont) {
         SelectObject(hdc, ghFontSys);

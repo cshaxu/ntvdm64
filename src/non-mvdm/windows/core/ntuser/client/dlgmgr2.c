@@ -268,7 +268,7 @@ BOOL IsDialogMessageA(
 #error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
 #endif // FE_IME
 #ifdef WOW_ORIGINAL_DIALOG_KEYBOARD
-#line 244
+#line 243
 
         RtlMBMessageWParamCharToWCS(lpmsg->message, (PDWORD)&lpmsg->wParam);
     }

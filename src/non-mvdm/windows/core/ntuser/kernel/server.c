@@ -393,7 +393,7 @@ CONST WORD gawDefWindowSpecMsgs[] = {
 #error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
 #endif
 #if defined(WOW_ORIGINAL_DEFAULT_MESSAGES)
-#line 597
+#line 893
     0
 };
 

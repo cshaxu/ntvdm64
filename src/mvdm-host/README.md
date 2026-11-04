@@ -1,5 +1,9 @@
 # mvdm
 
+MVDM-HOST-DIV-647: correct seven original diagnostic anchors in five WOW
+sources after matching original statements and context; only `#line` values
+change. Evidence: `../../artifacts/mvdm-audit/s13-r1330-line-batch.json`.
+
 MVDM-HOST-DIV-646: correct twelve original diagnostic anchors in ten host and
 VDM redirector sources, using multiple exact original statements and context.
 Only `#line` values change. Evidence:
