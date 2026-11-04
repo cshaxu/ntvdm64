@@ -1,0 +1,117 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+  "source_sha256": "7458752870244f406d223ce57babdd7e6605f92ed3b630c378152e79b87bfd24",
+  "object": "base-debug/trace",
+  "arms": [
+    {
+      "label": "codex_r688_arm_0000",
+      "line": 22,
+      "kind": "ifdef",
+      "expression": "SEGMENTATION",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0001",
+      "line": 49,
+      "kind": "ifdef",
+      "expression": "CPU_40_STYLE",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0002",
+      "line": 59,
+      "kind": "ifndef",
+      "expression": "PROD",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0003",
+      "line": 69,
+      "kind": "ifdef",
+      "expression": "RDCHK",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0004",
+      "line": 83,
+      "kind": "if",
+      "expression": "!defined(PROD) && defined(SPC386)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0005",
+      "line": 93,
+      "kind": "ifndef",
+      "expression": "PROD",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0006",
+      "line": 124,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0007",
+      "line": 135,
+      "kind": "if",
+      "expression": "!defined(PROD) || defined(HUNTER)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0008",
+      "line": 143,
+      "kind": "ifndef",
+      "expression": "PROD",
+      "error_only": true
+    }
+  ],
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "d506a15810c2b17ccf3fe4164b3e210d95c61511af3200f82b5eefc8d206cce0",
+      "hit": [
+        "codex_r688_arm_0001",
+        "codex_r688_arm_0003",
+        "codex_r688_arm_0006"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "d506a15810c2b17ccf3fe4164b3e210d95c61511af3200f82b5eefc8d206cce0",
+      "hit": [
+        "codex_r688_arm_0001",
+        "codex_r688_arm_0003",
+        "codex_r688_arm_0006"
+      ]
+    }
+  ],
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\trace.c",
+  "original_sha256": "b776bec19f7c7c615684711b915c7c7d1c56a124d37e14fc30a575681c83b2e3",
+  "after_sha256": "d49b0d3b564533b552dc684d7ec1f5c688839653dce2acba3117fdf3fcf7e063",
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 174,
+      "identical": true,
+      "include_trace_sha256": "2911521398656ae7f8d175656185c1f0bd55057944f32ff6c4266421b277a0da",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 174,
+      "identical": true,
+      "include_trace_sha256": "2911521398656ae7f8d175656185c1f0bd55057944f32ff6c4266421b277a0da",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "first_level_changes": [
+    "Original and current first-level structures match. Normalize four previously excluded arms to original #line and existing #error; selected CPU40 and RDCHK arms retained. No original outer condition restored."
+  ],
+  "limitations": "Observed release product graphs only; no runtime semantics asserted."
+}

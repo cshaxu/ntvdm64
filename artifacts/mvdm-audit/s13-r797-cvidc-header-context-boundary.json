@@ -1,0 +1,8 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/cpu4gen.h",
+  "depth1_groups": 212,
+  "observed_dependency_contexts": 33,
+  "same_name_header": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+  "relative_consumer": "src/mvdm-host/softpc.new/base/ccpu386/localfm.c includes ../cvidc/cpu4gen.h",
+  "disposition": "deferred: no safe matching preprocessor evidence yet; preserve all branches and do not claim completion"
+}

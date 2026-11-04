@@ -1,0 +1,231 @@
+{
+  "scope": "Second-depth work intake for selected first-depth arms in r809 batch; parent references only, no child branch classification. Deferred files remain in main inventory.",
+  "parents": [
+    {
+      "path": "src/mvdm-host/inc/suballoc.h",
+      "parent_line": 36,
+      "parent_kind": "else",
+      "parent_expression": "",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r771-suballoc-header-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/inc/vdmredir.h",
+      "parent_line": 45,
+      "parent_kind": "ifndef",
+      "parent_expression": "_VDMREDIR_",
+      "next_depth_group_count": 8,
+      "positive_evidence": "s13-r773-vdmredir-header-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/inc/wowcomm.h",
+      "parent_line": 14,
+      "parent_kind": "ifndef",
+      "parent_expression": "__WOWCOMM__",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r777-wowcomm-header-context.json"
+    },
+    {
+      "path": "src/mvdm-host/inc/wowmmcb.h",
+      "parent_line": 13,
+      "parent_kind": "ifndef",
+      "parent_expression": "WOWMMCB_H",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r783-wowmmcb-header-context.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "parent_line": 335,
+      "parent_kind": "ifdef",
+      "parent_expression": "EGG",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r784-reset-conditions.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "parent_line": 393,
+      "parent_kind": "ifdef",
+      "parent_expression": "PM",
+      "next_depth_group_count": 5,
+      "positive_evidence": "s13-r784-reset-conditions.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "parent_line": 619,
+      "parent_kind": "ifndef",
+      "parent_expression": "HostProcessClipData",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r784-reset-conditions.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "parent_line": 783,
+      "parent_kind": "ifdef",
+      "parent_expression": "LIM",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r784-reset-conditions.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "parent_line": 73,
+      "parent_kind": "ifdef",
+      "parent_expression": "PM",
+      "next_depth_group_count": 3,
+      "positive_evidence": "s13-r785-tape-conditions.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "parent_line": 152,
+      "parent_kind": "ifdef",
+      "parent_expression": "PM",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r785-tape-conditions.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "parent_line": 504,
+      "parent_kind": "ifndef",
+      "parent_expression": "SFELLOW",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r786-cmain-conditions.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "parent_line": 651,
+      "parent_kind": "else",
+      "parent_expression": "",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r786-cmain-conditions.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "parent_line": 3275,
+      "parent_kind": "else",
+      "parent_expression": "",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r786-cmain-conditions.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "parent_line": 3901,
+      "parent_kind": "ifndef",
+      "parent_expression": "PIG",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r786-cmain-conditions.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "parent_line": 4327,
+      "parent_kind": "ifndef",
+      "parent_expression": "SFELLOW",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r786-cmain-conditions.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "parent_line": 4545,
+      "parent_kind": "else",
+      "parent_expression": "",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r786-cmain-conditions.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.h",
+      "parent_line": 28,
+      "parent_kind": "if",
+      "parent_expression": "!defined(PIG)",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r792-ccpusas4-header-context.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "parent_line": 6,
+      "parent_kind": "ifndef",
+      "parent_expression": "_CPU4GEN_H_",
+      "next_depth_group_count": 218,
+      "positive_evidence": "s13-r794-cpu4gen-header-context.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "parent_line": 3,
+      "parent_kind": "ifdef",
+      "parent_expression": "PRINTER",
+      "next_depth_group_count": 31,
+      "positive_evidence": "s13-r795-printer-conditions.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "parent_line": 785,
+      "parent_kind": "ifdef",
+      "parent_expression": "NTVDM",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r795-printer-conditions.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "parent_line": 37,
+      "parent_kind": "ifdef",
+      "parent_expression": "PRINTER",
+      "next_depth_group_count": 3,
+      "positive_evidence": "s13-r796-printeru-conditions.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "parent_line": 105,
+      "parent_kind": "ifdef",
+      "parent_expression": "PRINTER",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r796-printeru-conditions.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "parent_line": 211,
+      "parent_kind": "if",
+      "parent_expression": "defined(NTVDM)",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r796-printeru-conditions.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/ega_dump.c",
+      "parent_line": 33,
+      "parent_kind": "ifdef",
+      "parent_expression": "EGG",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r803-egadump-conditions.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "parent_line": 66,
+      "parent_kind": "ifdef",
+      "parent_expression": "RDCHK",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r804-trace-conditions.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "parent_line": 44,
+      "parent_kind": "ifdef",
+      "parent_expression": "PROD",
+      "next_depth_group_count": 3,
+      "positive_evidence": "s13-r805-yoda-conditions.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "parent_line": 64,
+      "parent_kind": "ifdef",
+      "parent_expression": "LIM",
+      "next_depth_group_count": 26,
+      "positive_evidence": "s13-r806-emm-conditions.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/cpu_c.h",
+      "parent_line": 1,
+      "parent_kind": "ifndef",
+      "parent_expression": "_Cpu_c_h",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r799-cvidc-cpuc-header-context.json"
+    }
+  ],
+  "parent_count": 28,
+  "next_depth_group_count": 317
+}

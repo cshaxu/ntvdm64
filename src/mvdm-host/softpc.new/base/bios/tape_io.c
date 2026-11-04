@@ -17,12 +17,8 @@
 
 
 #ifdef SEGMENTATION
+#line 20
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
 
 /*
@@ -147,6 +143,7 @@ half_word target_AR;
                 setAH(cmos_u_m_s_hi);
                 setAL(cmos_u_m_s_lo);
 #else
+#line 129
 #error Unsupported excluded original configuration
 #endif /* PM */
 #line 131
@@ -204,6 +201,7 @@ half_word target_AR;
 		setZF(1);
 		setIF(1);
 #else
+#line 202
 #error Unsupported excluded original configuration
 #endif
 #line 188
@@ -269,6 +267,7 @@ half_word target_AR;
 		setDS(getES());
 
 #else
+#line 267
 #error Unsupported excluded original configuration
 #endif	/* PM */
 #line 270
@@ -278,6 +277,7 @@ half_word target_AR;
 		break;
 	case INT15_CONFIGURATION:
 #if defined(NTVDM) && defined(MONITOR)
+#line 276
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else
 		setES( getCS() );

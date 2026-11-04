@@ -1,0 +1,78 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+  "source_sha256": "709c0f0b306c7f0b5ee87cb11023965193b54a552b55b917f8303768739a641e",
+  "object": "base-debug/yoda",
+  "arms": [
+    {
+      "label": "codex_r688_arm_0000",
+      "line": 27,
+      "kind": "ifdef",
+      "expression": "SEGMENTATION",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0001",
+      "line": 37,
+      "kind": "ifdef",
+      "expression": "SCCSID",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0002",
+      "line": 48,
+      "kind": "ifdef",
+      "expression": "PROD",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0003",
+      "line": 71,
+      "kind": "ifdef",
+      "expression": "YODA",
+      "error_only": true
+    }
+  ],
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "04932e3d075a8398695e9f87ecb2285b90d9794c57d769d3745296c3f3e6b35a",
+      "hit": [
+        "codex_r688_arm_0002"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "04932e3d075a8398695e9f87ecb2285b90d9794c57d769d3745296c3f3e6b35a",
+      "hit": [
+        "codex_r688_arm_0002"
+      ]
+    }
+  ],
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\yoda.c",
+  "original_sha256": "444f1350d7c50b270652d7b062a375536e327952ebb5ba83937fba090db3c817",
+  "after_sha256": "63a124fa998713ec685185459fb0d99816a26f36cbfaa263a44226075265901a",
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 162,
+      "identical": true,
+      "include_trace_sha256": "8b6f77c3d934be414e2af143d2a0c77f8071688b4de7a49006b9c4abcb27afac",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 162,
+      "identical": true,
+      "include_trace_sha256": "8b6f77c3d934be414e2af143d2a0c77f8071688b4de7a49006b9c4abcb27afac",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "first_level_changes": [
+    "Original and current first-level structures match. Normalize one previously excluded SEGMENTATION arm to original #line and existing #error; selected PROD arm untouched. No original outer condition restored."
+  ],
+  "limitations": "Observed release product graphs only; no runtime semantics asserted."
+}

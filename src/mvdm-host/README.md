@@ -1948,7 +1948,7 @@ runtime-discovery inputs.  The complete per-file provenance is in
 | MVDM-SUPPORT-DIV-001 | Model `DEMEXTERR.ExtendedErrorPointer` as a 32-bit field in the packed DOS data record. | The original x86 `PUCHAR` happens to be 32 bits; on x64 it widens and changes the guest ABI. | Preserve the source record's nine-byte packed layout by storing the guest pointer numerically as `ULONG`. | `inc/dossvc.h` |
 | MVDM-SUPPORT-DIV-005 | Declare the internal MVDM hardware/software/fault interrupt registration callbacks. | The original public declarations carried function pointers as `PVOID`, relying on an invalid function/data-pointer conversion that has no safe C ABI meaning. | Retain the original registration entrypoint names and callback parameters/results, but publish three named `int`-returning function-pointer types. | `inc/intapi.h`; `softpc.new/host/inc/nt_inthk.h`; `softpc.new/host/src/nt_inthk.c` |
 | MVDM-SUPPORT-DIV-006 | Select original fetch/store macros. | MSVC defines _M_IX86 rather than the historical i386 spelling. | Reject the unselected historical i386 arm and select the same x86 access macros for MSVC inside the original non-i386 alternative. | `inc/mvdm.h` |
-| MVDM-SUPPORT-DIV-007 | Select original suballocation granularity. | MSVC defines _M_IX86 rather than i386. | Preserve both original alternatives and select the same 4096-byte granularity for MSVC inside the original non-i386 alternative. | `inc/suballoc.h` |
+| MVDM-SUPPORT-DIV-007 | Select original suballocation granularity. | MSVC defines _M_IX86 rather than i386. | Reject the unselected historical i386 arm and select the same 4096-byte granularity for MSVC inside the original non-i386 alternative. | `inc/suballoc.h` |
 
 ### Existing MVDM host divergences
 

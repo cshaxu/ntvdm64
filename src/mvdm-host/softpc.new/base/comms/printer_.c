@@ -21,16 +21,13 @@
  */
 
 #ifdef SCCSID
+#line 24
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 
 #ifdef SEGMENTATION
+#line 28
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
 
 
@@ -85,6 +82,7 @@ static sys_addr timeout_address[] = {
 #endif /* PRINTER */
 
 #if defined(NTVDM) && defined(MONITOR)
+#line 87
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 /*
@@ -205,6 +203,7 @@ void printer_io()
 }
 
 #if defined(NTVDM) && defined(MONITOR)
+#line 201
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 #line 210

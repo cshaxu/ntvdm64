@@ -1,0 +1,75 @@
+{
+  "header_sha256": "97c6c40dc2d0565a21dc1be4112fe24f138b10ddbb55fbd29e55da972a2a2c84",
+  "arms": [
+    {
+      "line": 37,
+      "label": "codex_wowfax_h_arm_0000",
+      "kind": "ifdef",
+      "expression": "DEBUG"
+    },
+    {
+      "line": 76,
+      "label": "codex_wowfax_h_arm_0001",
+      "kind": "if",
+      "expression": "defined(_WOWFAX16_)"
+    },
+    {
+      "line": 161,
+      "label": "codex_wowfax_h_arm_0002",
+      "kind": "ifndef",
+      "expression": "_DEF_WOW32_"
+    },
+    {
+      "line": 220,
+      "label": "codex_wowfax_h_arm_0003",
+      "kind": "ifndef",
+      "expression": "_WOWFAX16_"
+    },
+    {
+      "line": 273,
+      "label": "codex_wowfax_h_arm_0004",
+      "kind": "ifdef",
+      "expression": "WOWFAX_INC_COMMON_CODE"
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wow32fax.obj",
+      "probe_index": 1,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wow32fax.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_wowfax_h_arm_0003",
+        "codex_wowfax_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wkman.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkman.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_wowfax_h_arm_0003"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/inc/wowfax.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowfax.h",
+  "original_sha256": "97c6c40dc2d0565a21dc1be4112fe24f138b10ddbb55fbd29e55da972a2a2c84",
+  "after_sha256": "97c6c40dc2d0565a21dc1be4112fe24f138b10ddbb55fbd29e55da972a2a2c84",
+  "review": "Product WOW32 has two observed include contexts. The host-unhit _WOWFAX16_ branch is explicitly referenced by mvdm-guest/wow16/test/shell/wowexfax.c, so host-only evidence cannot prove every intended consumer excludes it; no source change.",
+  "disposition": "deferred-depth1-needs-guest-context",
+  "limitations": "Guest builds are prohibited and shared header ownership/guest build support has not been proved. Preserve unknown arms rather than deleting."
+}

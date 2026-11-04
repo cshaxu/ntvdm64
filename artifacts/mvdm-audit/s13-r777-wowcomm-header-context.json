@@ -1,0 +1,34 @@
+{
+  "header_sha256": "4817961493d33932a98f5ee2222c0f2e20a43fd4900430910b81e5c70c5f1c85",
+  "arms": [
+    {
+      "line": 14,
+      "label": "codex_wowcomm_h_arm_0000",
+      "kind": "ifndef",
+      "expression": "__WOWCOMM__"
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wres32.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wres32.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_wowcomm_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/inc/wowcomm.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowcomm.h",
+  "original_sha256": "4817961493d33932a98f5ee2222c0f2e20a43fd4900430910b81e5c70c5f1c85",
+  "after_sha256": "4817961493d33932a98f5ee2222c0f2e20a43fd4900430910b81e5c70c5f1c85",
+  "review": "Original identical outer include guard witnessed selected in one actual product compile context; retain it. Any nested condition groups are for later depth.",
+  "limitations": "A positive witness suffices to retain this arm, but is not evidence about all contexts or runtime semantics."
+}

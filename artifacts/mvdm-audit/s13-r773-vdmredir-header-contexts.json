@@ -1,0 +1,394 @@
+{
+  "header_sha256": "e47d8d20bfa1835ee500766753aee23bf887a84c837698ce85629c9225aac5cf",
+  "arms": [
+    {
+      "line": 45,
+      "label": "codex_vdmredir_h_arm_0000",
+      "kind": "ifndef",
+      "expression": "_VDMREDIR_"
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/redir/vrmslot.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrmslot.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_vdmredir_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/redir/vrdisp.obj",
+      "probe_index": 2,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrdisp.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_vdmredir_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/redir/vrmisc.obj",
+      "probe_index": 4,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrmisc.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_vdmredir_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/redir/vrnmpipe.obj",
+      "probe_index": 1,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrnmpipe.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_vdmredir_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/redir/vrputil.obj",
+      "probe_index": 5,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrputil.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_vdmredir_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/redir/vrinit.obj",
+      "probe_index": 3,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrinit.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_vdmredir_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/redir/vrremote.obj",
+      "probe_index": 7,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrremote.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_vdmredir_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/redir/vrnetb.obj",
+      "probe_index": 6,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrnetb.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_vdmredir_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/redir/vrdlcpst.obj",
+      "probe_index": 10,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrdlcpst.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_vdmredir_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/redir/vrdlcbuf.obj",
+      "probe_index": 11,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_vdmredir_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/redir/vrdlc5c.obj",
+      "probe_index": 9,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrdlc5c.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_vdmredir_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/redir/vrnetapi.obj",
+      "probe_index": 8,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrnetapi.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_vdmredir_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/redir/vrmslot.obj",
+      "probe_index": 12,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrmslot.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_vdmredir_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/redir/vrinit.obj",
+      "probe_index": 14,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrinit.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_vdmredir_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/redir/vrnmpipe.obj",
+      "probe_index": 13,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrnmpipe.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_vdmredir_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/redir/vrdisp.obj",
+      "probe_index": 15,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrdisp.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_vdmredir_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/redir/vrmisc.obj",
+      "probe_index": 16,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrmisc.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_vdmredir_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/redir/vrputil.obj",
+      "probe_index": 17,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrputil.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_vdmredir_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/redir/vrnetb.obj",
+      "probe_index": 18,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrnetb.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_vdmredir_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/redir/vrremote.obj",
+      "probe_index": 19,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrremote.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_vdmredir_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/redir/vrnetapi.obj",
+      "probe_index": 20,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrnetapi.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_vdmredir_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/redir/vrdlcbuf.obj",
+      "probe_index": 21,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_vdmredir_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/redir/vrdlc5c.obj",
+      "probe_index": 22,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrdlc5c.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_vdmredir_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/redir/vrdlcpst.obj",
+      "probe_index": 23,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrdlcpst.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_vdmredir_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-redir-contract",
+      "graph": "",
+      "object": "obj/vrdisp.obj",
+      "probe_index": 24,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrdisp.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_vdmredir_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/inc/vdmredir.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\vdmredir.h",
+  "original_sha256": "2462271dd22683738e60b4154bd891a8dfc679d4c34b9f75b23ecf91523add2d",
+  "after_sha256": "e47d8d20bfa1835ee500766753aee23bf887a84c837698ce85629c9225aac5cf",
+  "review": "Original outer include guard selected in all observed contexts and retained; no source change. Inner DBG is recorded for the next depth.",
+  "limitations": "Observed product and contract graph contexts only; no runtime behavior asserted."
+}

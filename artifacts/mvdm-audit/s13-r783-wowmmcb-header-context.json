@@ -1,0 +1,34 @@
+{
+  "header_sha256": "792d12c29a5913ee4dd9d46f3173f4e7ac8f1cd88cfa91272268bd8bcafb8e8c",
+  "arms": [
+    {
+      "line": 13,
+      "label": "codex_wowmmcb_h_arm_0000",
+      "kind": "ifndef",
+      "expression": "WOWMMCB_H"
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wres32.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wres32.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_wowmmcb_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/inc/wowmmcb.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowmmcb.h",
+  "original_sha256": "c4135b71b57c210150d6083b6eb179ac256e164a1b58a475b4c4f9395dc3cf89",
+  "after_sha256": "792d12c29a5913ee4dd9d46f3173f4e7ac8f1cd88cfa91272268bd8bcafb8e8c",
+  "review": "Outer include guard witnessed selected in actual product context and preserved; DIV-294 calling convention adaptation remains. Nested conditions are for later depth. No source change.",
+  "limitations": "A positive witness suffices to retain this arm; no general runtime claim."
+}

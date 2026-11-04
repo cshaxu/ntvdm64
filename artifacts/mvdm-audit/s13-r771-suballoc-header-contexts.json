@@ -1,0 +1,387 @@
+{
+  "header_sha256": "8cdfab30f7a842253ea673935a9654ba526b3011f2d7c7a3cae3980a25c45477",
+  "arms": [
+    {
+      "line": 33,
+      "label": "codex_suballoc_h_arm_0000",
+      "kind": "ifdef",
+      "expression": "i386"
+    },
+    {
+      "line": 36,
+      "label": "codex_suballoc_h_arm_0001",
+      "kind": "else",
+      "expression": ""
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/bios/tape_io.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_suballoc_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/xms/xmsdisp.obj",
+      "probe_index": 3,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486/xmsdisp.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_suballoc_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/xms/xms.obj",
+      "probe_index": 2,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486/xms.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_suballoc_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/keymouse/keyba.obj",
+      "probe_index": 1,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_suballoc_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/xms/xmsa20.obj",
+      "probe_index": 5,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486/xmsa20.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_suballoc_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/xms/xmsblock.obj",
+      "probe_index": 4,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486/xmsblock.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_suballoc_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/dpmimemr.obj",
+      "probe_index": 9,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmimemr.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_suballoc_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/xms/xmsumb.obj",
+      "probe_index": 7,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486/xmsumb.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_suballoc_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/xms/xmsmisc.obj",
+      "probe_index": 6,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486/xmsmisc.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_suballoc_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/xms/xmsmemr.obj",
+      "probe_index": 8,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486/xmsmemr.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_suballoc_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/adapter-softpc/mvdm_xms_memory.obj",
+      "probe_index": 11,
+      "source": "O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_xms_memory.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_suballoc_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/suballoc/suballoc.obj",
+      "probe_index": 10,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/suballoc/suballoc.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_suballoc_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/xms/xms.obj",
+      "probe_index": 14,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486/xms.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_suballoc_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/xms/xmsa20.obj",
+      "probe_index": 15,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486/xmsa20.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_suballoc_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/bios/tape_io.obj",
+      "probe_index": 12,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_suballoc_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/xms/xmsblock.obj",
+      "probe_index": 16,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486/xmsblock.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_suballoc_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/xms/xmsdisp.obj",
+      "probe_index": 17,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486/xmsdisp.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_suballoc_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/keymouse/keyba.obj",
+      "probe_index": 13,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_suballoc_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/xms/xmsmisc.obj",
+      "probe_index": 18,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486/xmsmisc.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_suballoc_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/suballoc/suballoc.obj",
+      "probe_index": 22,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/suballoc/suballoc.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_suballoc_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/dpmimemr.obj",
+      "probe_index": 21,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmimemr.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_suballoc_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/xms/xmsmemr.obj",
+      "probe_index": 19,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486/xmsmemr.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_suballoc_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/xms/xmsumb.obj",
+      "probe_index": 20,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486/xmsumb.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_suballoc_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/adapter-softpc/mvdm_xms_memory.obj",
+      "probe_index": 23,
+      "source": "O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_xms_memory.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_suballoc_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/inc/suballoc.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\suballoc.h",
+  "original_sha256": "98263eed4c261650c4b9c9b23f09f2ef19b31a0b1eb5c805d4c672ee85ded85c",
+  "after_sha256": "8327513e33bc64eb41fdbbf797adfea0580b6180e7bce584b9e4ac4e082f5c2f",
+  "first_level_changes": [
+    "Replace unselected historical i386 branch with #error. Preserve original else branch and its internal MSVC adaptation for later depth."
+  ],
+  "limitations": "Observed release graph contexts only; no runtime behavior asserted."
+}

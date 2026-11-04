@@ -1,0 +1,156 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+  "source_sha256": "68a26100c166645e21c36c9cc46c264b13490ddeca1c1c52372c1f0e08222c63",
+  "object": "bios/tape_io",
+  "arms": [
+    {
+      "label": "codex_r688_arm_0000",
+      "line": 19,
+      "kind": "ifdef",
+      "expression": "SEGMENTATION",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0001",
+      "line": 77,
+      "kind": "ifdef",
+      "expression": "PM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0002",
+      "line": 113,
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0003",
+      "line": 137,
+      "kind": "if",
+      "expression": "0",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0004",
+      "line": 142,
+      "kind": "ifdef",
+      "expression": "PM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0005",
+      "line": 149,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0006",
+      "line": 155,
+      "kind": "ifdef",
+      "expression": "PM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0007",
+      "line": 206,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0008",
+      "line": 214,
+      "kind": "ifdef",
+      "expression": "PM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0009",
+      "line": 271,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0010",
+      "line": 280,
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0011",
+      "line": 282,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0012",
+      "line": 291,
+      "kind": "ifdef",
+      "expression": "SPC486",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0013",
+      "line": 306,
+      "kind": "ifndef",
+      "expression": "PROD",
+      "error_only": true
+    }
+  ],
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "e9b39e671337eb63dd50bf43f0e54392cd99bfb90098c97a87ad66a832a99b40",
+      "hit": [
+        "codex_r688_arm_0001",
+        "codex_r688_arm_0004",
+        "codex_r688_arm_0006",
+        "codex_r688_arm_0008",
+        "codex_r688_arm_0011"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "e9b39e671337eb63dd50bf43f0e54392cd99bfb90098c97a87ad66a832a99b40",
+      "hit": [
+        "codex_r688_arm_0001",
+        "codex_r688_arm_0004",
+        "codex_r688_arm_0006",
+        "codex_r688_arm_0008",
+        "codex_r688_arm_0011"
+      ]
+    }
+  ],
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\tape_io.c",
+  "original_sha256": "3aa86f1faf07f68937629f1d6e410eb41f498e17dc6d747647c7d6e5697c80aa",
+  "after_sha256": "b07b00252359ee706c07b58f457a952ea7277c40880c40f9d4ab6a0bc105194b",
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 194,
+      "identical": true,
+      "include_trace_sha256": "33c504e7601cf3906d65b94f1aca75a447be3bd42840c312489ca386af8637b6",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 194,
+      "identical": true,
+      "include_trace_sha256": "33c504e7601cf3906d65b94f1aca75a447be3bd42840c312489ca386af8637b6",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "first_level_changes": [
+    "Original and current have matching 10 first-level groups. Normalize 5 previously excluded arms to original #line and existing #error; 5 selected arms untouched. No original outer condition restored."
+  ],
+  "limitations": "Observed product release graphs only; no runtime equivalence assertion."
+}

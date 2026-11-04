@@ -44,6 +44,7 @@
 #endif	/* ANSI */
 
 #ifndef TRUE
+#line 47
 #error Excluded unsupported missing TRUE base profile
 #endif
 

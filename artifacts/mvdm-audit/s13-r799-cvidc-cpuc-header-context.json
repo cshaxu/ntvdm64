@@ -1,0 +1,34 @@
+{
+  "header_sha256": "8cd25a965f1866a6d8e64621712c00d2c5cb83f47c053c7aac8cb72ce6620f15",
+  "arms": [
+    {
+      "line": 1,
+      "label": "codex_cpuc_h_arm_0000",
+      "kind": "ifndef",
+      "expression": "_Cpu_c_h"
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/host/nt_cpu.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_cpuc_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/softpc.new/base/cvidc/cpu_c.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\cpu_c.h",
+  "original_sha256": "8cd25a965f1866a6d8e64621712c00d2c5cb83f47c053c7aac8cb72ce6620f15",
+  "after_sha256": "8cd25a965f1866a6d8e64621712c00d2c5cb83f47c053c7aac8cb72ce6620f15",
+  "review": "Original identical outer include guard positively selected in product context. Nested groups, if any, are for later depth. No source change.",
+  "limitations": "Positive product witness establishes outer selection only."
+}

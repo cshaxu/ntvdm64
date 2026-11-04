@@ -1,0 +1,91 @@
+{
+  "header_sha256": "20bc20587ceab9fd792cbb75204f8e5c6a0da95583e4e8e3b07dc846c7089c4d",
+  "arms": [
+    {
+      "line": 22,
+      "label": "codex_basedef_h_arm_0000",
+      "kind": "ifndef",
+      "expression": "UNUSED"
+    },
+    {
+      "line": 37,
+      "label": "codex_basedef_h_arm_0001",
+      "kind": "ifdef",
+      "expression": "ANSI"
+    },
+    {
+      "line": 40,
+      "label": "codex_basedef_h_arm_0002",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 46,
+      "label": "codex_basedef_h_arm_0003",
+      "kind": "ifndef",
+      "expression": "TRUE"
+    },
+    {
+      "line": 51,
+      "label": "codex_basedef_h_arm_0004",
+      "kind": "ifndef",
+      "expression": "FALSE"
+    },
+    {
+      "line": 119,
+      "label": "codex_basedef_h_arm_0005",
+      "kind": "ifdef",
+      "expression": "ANSI"
+    },
+    {
+      "line": 181,
+      "label": "codex_basedef_h_arm_0006",
+      "kind": "else",
+      "expression": ""
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/ccpu/c_main.obj",
+      "probe_index": 1,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_basedef_h_arm_0000",
+        "codex_basedef_h_arm_0001",
+        "codex_basedef_h_arm_0005"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/ccpu/c_main.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_basedef_h_arm_0000",
+        "codex_basedef_h_arm_0001",
+        "codex_basedef_h_arm_0005"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/softpc.new/base/inc/base_def.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\base_def.h",
+  "original_sha256": "084991cfc23dc79529cc67a43488ec114be882fb62a9f95b879e1b6995f7afae",
+  "after_sha256": "ce51ed2f44c5ef170abcee0c3d9c901c24b07c28f4583c101fbdc6358cb8d54f",
+  "change": "Add original #line 47 to previously excluded TRUE fallback; no new branch excluded.",
+  "review": "Two CCPU product contexts positively hit ANSI and !UNUSED. Header appears in 630 dependency contexts. ANSI else alternatives retained pending full context evidence.",
+  "disposition": "deferred-depth1-contexts-unverified",
+  "limitations": "Two witnesses cannot prove all 630 contexts; preserve alternatives; runtime not verified."
+}

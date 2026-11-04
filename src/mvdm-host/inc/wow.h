@@ -50,18 +50,23 @@
 #define CLOSELOG()  if (hfLog != (HANDLE)-1) {CloseHandle(hfLog); hfLog=(HANDLE)-1;}
 
 #undef  LOG
+#line 58
 #ifdef  NOLOG
+#line 59
 #error DIVERGENCE MVDM-HOST-DIV-536: NOLOG branch is not selected; see mirror register.
 #else
+#line 62
 #define SETREQLOG(l) iReqLogLevel = (l)
 #define LOG(l,args)  {SETREQLOG(l) ; logprintf args;}
 #endif
 #define MODNAME(module)
 
+#line 67
 #ifdef  DEBUG
+#line 68
 #error DIVERGENCE MVDM-HOST-DIV-596: DEBUG header profile is not selected
 #else
-#line 73
+#line 74
 #define STATIC static
 #define INT3()
 #define IFDEBUG(f)
@@ -1203,8 +1208,10 @@ typedef VPVOID VPOLDCURSORICONRESOURCE16;
  */
 #line 1212
 #ifndef WM_USER
+#line 1213
 #error Excluded unsupported missing WM_USER SDK profile
 #endif
+#line 1215
 
 #define OLDEM_GETSEL            (WM_USER+0)
 #define OLDEM_SETSEL            (WM_USER+1)
@@ -1234,9 +1241,10 @@ typedef VPVOID VPOLDCURSORICONRESOURCE16;
 #define OLDEM_SETPASSWORDCHAR       (WM_USER+28)
 #define OLDEM_EMPTYUNDOBUFFER       (WM_USER+29)
 #ifndef WIN31
+#line 1244
 #error Unsupported excluded original configuration
 #else
-#line 1245
+#line 1246
 #define OLDEM_GETFIRSTVISIBLELINE (WM_USER+30)
 #define OLDEM_SETREADONLY       (WM_USER+31)
 #define OLDEM_SETWORDBREAKPROC  (WM_USER+32)
@@ -1272,9 +1280,10 @@ typedef VPVOID VPOLDCURSORICONRESOURCE16;
 #define OLDCB_SETITEMDATA       (WM_USER+17)
 #define OLDCB_GETDROPPEDCONTROLRECT (WM_USER+18)
 #ifndef WIN31
+#line 1280
 #error Unsupported excluded original configuration
 #else
-#line 1281
+#line 1282
 #define OLDCB_SETITEMHEIGHT     (WM_USER+19)
 #define OLDCB_GETITEMHEIGHT     (WM_USER+20)
 #define OLDCB_SETEXTENDEDUI     (WM_USER+21)
@@ -1317,9 +1326,10 @@ typedef VPVOID VPOLDCURSORICONRESOURCE16;
 #define OLDLB_SETANCHORINDEX        (WM_USER+29)    /* ;Internal */
 #define OLDLB_GETANCHORINDEX        (WM_USER+30)    /* ;Internal */
 #ifndef WIN31
+#line 1323
 #error Unsupported excluded original configuration
 #else
-#line 1324
+#line 1325
 #define OLDLB_SETCARETINDEX     (WM_USER+31)
 #define OLDLB_GETCARETINDEX     (WM_USER+32)
 #define OLDLB_SETITEMHEIGHT     (WM_USER+33)

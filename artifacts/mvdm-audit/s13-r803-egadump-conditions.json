@@ -1,0 +1,55 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/debug/ega_dump.c",
+  "source_sha256": "12d474c226564a2cb01279bae5e4b24d62f4718f296e365df4fb47a1fbe5d782",
+  "object": "base-debug/ega_dump",
+  "arms": [
+    {
+      "label": "codex_r688_arm_0000",
+      "line": 33,
+      "kind": "ifdef",
+      "expression": "EGG",
+      "error_only": false
+    }
+  ],
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "a4f732c2ce9d27d6132f242eae71a220cee16363ad46c747eaff55c02e6ac696",
+      "hit": [
+        "codex_r688_arm_0000"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "a4f732c2ce9d27d6132f242eae71a220cee16363ad46c747eaff55c02e6ac696",
+      "hit": [
+        "codex_r688_arm_0000"
+      ]
+    }
+  ],
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\ega_dump.c",
+  "original_sha256": "18c7205169a62e40e80122deba5645f1cd7ce0d760ea71d95e9688a5a1da98aa",
+  "after_sha256": "12d474c226564a2cb01279bae5e4b24d62f4718f296e365df4fb47a1fbe5d782",
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/ega_dump.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 161,
+      "identical": true,
+      "include_trace_sha256": "02fd62af117e1bce68d98ad69c9a92227c6168a4161d204092072d3acb1f0a9b",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/ega_dump.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 161,
+      "identical": true,
+      "include_trace_sha256": "02fd62af117e1bce68d98ad69c9a92227c6168a4161d204092072d3acb1f0a9b",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "review": "Original EGG outer group selected in both product contexts and preserved; inner groups are for later depth. No source change.",
+  "limitations": "Positive product witnesses establish outer selection, not nested branch or runtime behavior."
+}

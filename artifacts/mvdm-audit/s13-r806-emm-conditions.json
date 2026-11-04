@@ -1,0 +1,55 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+  "source_sha256": "0715b9fc61830273e592b926d0b38a1aaa907c4b2048270508a44c94334848eb",
+  "object": "dos/emm_mngr",
+  "arms": [
+    {
+      "label": "codex_r688_arm_0000",
+      "line": 64,
+      "kind": "ifdef",
+      "expression": "LIM",
+      "error_only": false
+    }
+  ],
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "4e28bc110329a5e34c418f2c0a9d5817a21a621217841fe0284130315badb076",
+      "hit": [
+        "codex_r688_arm_0000"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "4e28bc110329a5e34c418f2c0a9d5817a21a621217841fe0284130315badb076",
+      "hit": [
+        "codex_r688_arm_0000"
+      ]
+    }
+  ],
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\dos\\emm_mngr.c",
+  "original_sha256": "fd73ce7181f7dfb61432d63466c7641c3d010ca0c60bf446666b6c0118ddb8a9",
+  "after_sha256": "0715b9fc61830273e592b926d0b38a1aaa907c4b2048270508a44c94334848eb",
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 177,
+      "identical": true,
+      "include_trace_sha256": "3a46af0f152f3c5dfaa75762de7abae0add266878a7186e7b068619ede5c27b1",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 177,
+      "identical": true,
+      "include_trace_sha256": "3a46af0f152f3c5dfaa75762de7abae0add266878a7186e7b068619ede5c27b1",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "review": "Original LIM outer group selected in both product contexts and retained; inner groups are for later depth. No source change.",
+  "limitations": "Positive product witnesses establish outer selection, not nested branch or runtime behavior."
+}

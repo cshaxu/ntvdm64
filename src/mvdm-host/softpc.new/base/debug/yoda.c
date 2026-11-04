@@ -25,12 +25,8 @@
 #define BREAKPOINTS
 
 #ifdef SEGMENTATION
+#line 28
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
 
 #line 36

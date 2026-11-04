@@ -1,0 +1,71 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+  "source_sha256": "2a744e82cae78d64641e336b4495a956f35bb890c0f276f00a24b2d7ebd65dec",
+  "object": "comms/printer",
+  "arms": [
+    {
+      "label": "codex_r688_arm_0000",
+      "line": 3,
+      "kind": "ifdef",
+      "expression": "PRINTER",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0001",
+      "line": 785,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0002",
+      "line": 801,
+      "kind": "ifdef",
+      "expression": "PS_FLUSHING",
+      "error_only": true
+    }
+  ],
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "9f60f78c110c6f638e8d9b819d6d34d8b46ad7b4b09b0a3c070138cc79eb8357",
+      "hit": [
+        "codex_r688_arm_0000",
+        "codex_r688_arm_0001"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "9f60f78c110c6f638e8d9b819d6d34d8b46ad7b4b09b0a3c070138cc79eb8357",
+      "hit": [
+        "codex_r688_arm_0000",
+        "codex_r688_arm_0001"
+      ]
+    }
+  ],
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\printer.c",
+  "original_sha256": "b1456dcbc0dc6b4d1fd5d101bfaa6bdc9a4cd5d970c14215f3ae62a173f17ccb",
+  "after_sha256": "2a744e82cae78d64641e336b4495a956f35bb890c0f276f00a24b2d7ebd65dec",
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 185,
+      "identical": true,
+      "include_trace_sha256": "b0bb42056359ca3a6d8440a48e2ef6411d3ff3e1efe340ad01ab3ce91585e78e",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 185,
+      "identical": true,
+      "include_trace_sha256": "b0bb42056359ca3a6d8440a48e2ef6411d3ff3e1efe340ad01ab3ce91585e78e",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "review": "Three original first-level groups match; PRINTER and NTVDM positively selected in both product contexts. PS_FLUSHING is already excluded by #error with original line anchors. Nested conditions remain queued for next depth. No source change.",
+  "limitations": "Observed release product graphs only; no runtime behavior asserted."
+}

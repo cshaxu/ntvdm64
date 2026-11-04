@@ -1,0 +1,62 @@
+{
+  "header_sha256": "24d7a95929e1ed4428ec8f749ba1229c91c27e675baf3d8c8ba6c347ba1de68e",
+  "arms": [
+    {
+      "line": 129,
+      "label": "codex_cmain_h_arm_0000",
+      "kind": "ifdef",
+      "expression": "PIG"
+    },
+    {
+      "line": 143,
+      "label": "codex_cmain_h_arm_0001",
+      "kind": "ifndef",
+      "expression": "DOUBLE_CPU"
+    },
+    {
+      "line": 216,
+      "label": "codex_cmain_h_arm_0002",
+      "kind": "ifdef",
+      "expression": "DOUBLE_CPU"
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/ccpu/c_main.obj",
+      "probe_index": 1,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_cmain_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/ccpu/c_main.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_cmain_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.h",
+  "original_sha256": "c900712ad3c01e1e6ea6ee3b3ce597bf67f0ae1392576a8f60413af78a4742b6",
+  "after_sha256": "24d7a95929e1ed4428ec8f749ba1229c91c27e675baf3d8c8ba6c347ba1de68e",
+  "review": "The original outer !DOUBLE_CPU arm is positively selected in both c_main.c product graphs and retained; outer PIG and DOUBLE_CPU arms were already #error. The header has 255 observed dependency contexts; their complete macro states were not audited in this pass, and no source change is made.",
+  "disposition": "deferred-depth1-contexts-unverified",
+  "limitations": "Two positive product witnesses do not prove all 255 contexts; preserve and record uncertainty. Initial r788 probe changed include search order and is invalid; r789 removes the interfering path and matches the baseline."
+}

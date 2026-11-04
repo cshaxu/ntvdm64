@@ -32,7 +32,7 @@ Revision History:
 /* DIVERGENCE(MVDM-SUPPORT-DIV-007): recognize MSVC's x86 target macro. */
 #ifdef i386
 #line 33
-#define COMMIT_GRANULARITY 4096
+#error Excluded unsupported historical i386 profile
 #else
 #if defined(_M_IX86)
 #line 33

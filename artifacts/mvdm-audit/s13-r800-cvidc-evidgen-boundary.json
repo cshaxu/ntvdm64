@@ -1,0 +1,9 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/evidgen.h",
+  "original_first_depth_groups": 0,
+  "current_first_depth_groups": 2,
+  "observed_dependency_contexts": 45,
+  "same_name_header": "src/mvdm-host/softpc.new/base/ccpu386/evidgen.h",
+  "relative_consumer": "src/mvdm-host/softpc.new/base/ccpu386/localfm.c includes ../cvidc/evidgen.h",
+  "disposition": "deferred: same-name and relative include context needs exact overlay evidence; no arm removed"
+}

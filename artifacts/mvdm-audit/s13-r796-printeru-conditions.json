@@ -1,0 +1,103 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+  "source_sha256": "b104e4d3f599d97ba05998b2bd9c918ea1fb718fbcdffc1c548fd570b9a7f674",
+  "object": "comms/printer_",
+  "arms": [
+    {
+      "label": "codex_r688_arm_0000",
+      "line": 23,
+      "kind": "ifdef",
+      "expression": "SCCSID",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0001",
+      "line": 27,
+      "kind": "ifdef",
+      "expression": "SEGMENTATION",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0002",
+      "line": 40,
+      "kind": "ifdef",
+      "expression": "PRINTER",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0003",
+      "line": 87,
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0004",
+      "line": 107,
+      "kind": "ifdef",
+      "expression": "PRINTER",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0005",
+      "line": 207,
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0006",
+      "line": 212,
+      "kind": "if",
+      "expression": "defined(NTVDM)",
+      "error_only": false
+    }
+  ],
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "7ad7eccbfae019165a4053ad9ea9d38e577b28ad5a9750455cdacdc5597789a1",
+      "hit": [
+        "codex_r688_arm_0002",
+        "codex_r688_arm_0004",
+        "codex_r688_arm_0006"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "7ad7eccbfae019165a4053ad9ea9d38e577b28ad5a9750455cdacdc5597789a1",
+      "hit": [
+        "codex_r688_arm_0002",
+        "codex_r688_arm_0004",
+        "codex_r688_arm_0006"
+      ]
+    }
+  ],
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\printer_.c",
+  "original_sha256": "53edfe9fb4bb9d965acb8a7cc5f33d14cdf0694957dadfa912e0175488dbcf81",
+  "after_sha256": "d05bd83b27e3ae7a3807f452a88bfc0d669f2eaab1a1535c7b6c74985e4c7649",
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 182,
+      "identical": true,
+      "include_trace_sha256": "8582e6dbecf14880bed9d5b86e1f40913068876373df8536a77ec9060c3af98e",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 182,
+      "identical": true,
+      "include_trace_sha256": "8582e6dbecf14880bed9d5b86e1f40913068876373df8536a77ec9060c3af98e",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "first_level_changes": [
+    "Original and current first-level structures match. Normalize four previously excluded arms to original #line and existing #error; three selected arms untouched. No original outer condition restored."
+  ],
+  "limitations": "Observed release product graphs only; no runtime semantics asserted."
+}

@@ -154,6 +154,7 @@ LOCAL VOID check_for_shutdown IFN1(IU16, xcode)
       c_cpu_reset();
 
 #ifdef	PIG
+#line 162
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
 
@@ -195,6 +196,7 @@ IFN3(
    EXT = source;
    check_exception_env();
 #ifdef	PIG
+#line 206
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
    if (show_exceptions){
@@ -257,6 +259,7 @@ IFN3(
    EXT = INTERNAL;
    check_exception_env();
 #ifdef	PIG
+#line 266
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
    if (show_exceptions){
@@ -319,6 +322,7 @@ IFN3(
    EXT = INTERNAL;
    check_exception_env();
 #ifdef	PIG
+#line 326
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
    if (show_exceptions){
@@ -382,6 +386,7 @@ IFN1(
    EXT = INTERNAL;
    check_exception_env();
 #ifdef	PIG
+#line 387
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
    if (show_exceptions){
@@ -450,6 +455,7 @@ GLOBAL VOID Int0 IFN0 ()
 
    check_exception_env();
 #ifdef	PIG
+#line 453
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
    if (show_exceptions){
@@ -596,6 +602,7 @@ IFN2(
 
    check_exception_env();
 #ifdef	PIG
+#line 597
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
    if (show_exceptions){
