@@ -1,4 +1,4 @@
-#include "hook.h"
+#include "common/native-hook/installer.h"
 #include "lib-win32/handle/duplicate.h"
 #include "lib-win32/file/identity.h"
 #include "lib-win32/process-hook/install.h"

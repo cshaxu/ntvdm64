@@ -4,7 +4,7 @@
 #include "console_client.h"
 #include "common/protocol/console_io.h"
 #include "common/system_root.h"
-#include "nthook32-dll/hook.h"
+#include "common/native-hook/installer.h"
 
 #include <stdio.h>
 #include <string.h>

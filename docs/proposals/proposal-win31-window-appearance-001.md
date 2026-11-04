@@ -49,7 +49,7 @@ runtime appearance acceptance:
   calls host `CreateDialogIndirectParamA/W`. Dialog HWNDs must also reach the
   shared appearance installation path.
 - [Native execution](../../src/ntvwm-exe/execution.c) installs nthook before
-  resuming the native target. The [installer](../../src/nthook32-dll/installer.cpp)
+  resuming the native target. The [installer](../../src/common/native-hook/installer.cpp)
   selects `nthook32.dll` or `nthook64.dll` from the target's actual machine
   type. [Child creation interception](../../src/nthook32-dll/create_process.cpp)
   also installs hooks in native GUI children, without requiring text frontend

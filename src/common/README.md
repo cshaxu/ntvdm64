@@ -10,6 +10,10 @@ entries. The generic calling-convention mechanism is in `lib-win32/thread`.
 `redirector/` declares the shared asynchronous request boundary; the worker
 retains the one session-owned staging and completion provider.
 
+`native-hook/` owns the shared hook payload context and suspended-child
+installation coordination. Hook-specific interception remains in NTHook;
+the generic process injection mechanism remains in `lib-win32/process-hook`.
+
 `guest-memory/` owns the copied-value access and redirector declarations used
 across worker and DLL source boundaries. The existing worker session remains
 the only guest-memory and lease-context authority; no state is allocated here.

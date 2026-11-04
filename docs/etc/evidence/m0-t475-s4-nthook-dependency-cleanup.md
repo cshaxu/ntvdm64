@@ -25,3 +25,21 @@ failed; a fresh directory with that prerequisite passed. Local package
 Full was not run; DOS4GW/NESticle was absent. Logs, candidate and prior asset
 backup are under `build/t475-s4-p1`. Main integration and push remain deferred
 by the owner.
+
+## P2: shared installation orchestration
+
+The existing suspended-child installation orchestration and public contract
+now belong to `common/native-hook`; NTVDM, NTVWM and NTHook consume the same
+implementation. NTHook retains its interception entry and policy; generic
+injection remains in `lib-win32/process-hook`. Packet construction, handle
+transfer, suspended-child ownership and failure rollback are unchanged.
+Production graph and compiler dependency checks passed for both workers,
+including injected private-header negative controls.
+
+The x86/x64 product build, 63 guest files, 274 export ordinals and 12 selected
+Control gates passed. Actual x86 and x64 Hook fixtures each passed 118 checks;
+the alternating-width fixture passed 168, covering real child launches,
+payload and handle transfer, invalid inputs and cleanup. Local package
+`3f1e35fd-7d71-4e0b-96be-9ff23b1257cd` has ten matching release hashes. Full
+was not run and DOS4GW/NESticle was absent. Logs and previous release backup
+are under `build/t475-s4-p2`.

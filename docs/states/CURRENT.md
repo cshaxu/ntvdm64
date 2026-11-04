@@ -42,7 +42,10 @@ P1 passed the x86/x64 build, launcher boundary negative control, 118 x86 and
 118 x64 Hook checks, 168 cross-width checks and 12 Control gates. Local package
 `563bc615-556c-49e6-869e-6d7ea0004396` has ten verified release hashes; see
 [S4 evidence](../etc/evidence/m0-t475-s4-nthook-dependency-cleanup.md). Full
-and DOS4GW/NESticle were not run. P2 and P3 remain active.
+and DOS4GW/NESticle were not run. P2 moves the shared installer to common;
+both worker boundary checks, 118 x86, 118 x64, 168 cross-width assertions and
+12 Control gates passed. Local package `3f1e35fd-7d71-4e0b-96be-9ff23b1257cd`
+has ten verified hashes. P3 remains active.
 
 The owner closes the [S2 dependency inventory](../etc/evidence/m0-t475-s2-component-dependency-inventory.md)
 and admits S3 to address the illegal Worker Base and NTVDM dependencies through

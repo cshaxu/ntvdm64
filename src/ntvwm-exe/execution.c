@@ -6,7 +6,7 @@
 #include "common/native_process.h"
 #include "common/protocol/frontend_protocol.h"
 #include "worker-base/connection.h"
-#include "nthook32-dll/hook.h"
+#include "common/native-hook/installer.h"
 struct ntvwm_executions {
     CRITICAL_SECTION lock;
     HANDLE stop,idle,broker_failed;
