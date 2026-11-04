@@ -1,0 +1,1299 @@
+{
+  "scope": "Previously no per-file evidence pointer: original sole include guards and selected CCPU flag/NTVDM branches",
+  "single_guard_count": 36,
+  "selected_ccpu_count": 11,
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpuint_c.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "b171b9bb51bf810c5e9f839a88a79a6f1eb66c37c4128069fe3e7972da849ede",
+      "original_sha256": "b171b9bb51bf810c5e9f839a88a79a6f1eb66c37c4128069fe3e7972da849ede",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/evidgen.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "7e429987c49ec9e87ca45394eeddc87c73877e5f95aed73e1bc1d7224d308772",
+      "original_sha256": "7e429987c49ec9e87ca45394eeddc87c73877e5f95aed73e1bc1d7224d308772",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu_c.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "0f1d67436ed417b6726f958cfd97ece40ddedd05997369449be5861a47b7b912",
+      "original_sha256": "0f1d67436ed417b6726f958cfd97ece40ddedd05997369449be5861a47b7b912",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/gdpvar.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "a8fc9f81af3c06eb4263cc5acb3005a41f849677cba4d09ae171ab450f7fb3ec",
+      "original_sha256": "a8fc9f81af3c06eb4263cc5acb3005a41f849677cba4d09ae171ab450f7fb3ec",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/pigger_c.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "f8abfab1a7001e498a6ddb782c8b0831db138e8daad8f52ccfccdd4e2a7c297e",
+      "original_sha256": "f8abfab1a7001e498a6ddb782c8b0831db138e8daad8f52ccfccdd4e2a7c297e",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/univer_c.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "72655450d96db6f58f2dbd8887334222647014e38f8386fad58791502dcd52cd",
+      "original_sha256": "72655450d96db6f58f2dbd8887334222647014e38f8386fad58791502dcd52cd",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/cpuint_c.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "814357a9371e97b0db7f39943b0e55c9b76507371440614802ed7745e9d9f67b",
+      "original_sha256": "814357a9371e97b0db7f39943b0e55c9b76507371440614802ed7745e9d9f67b",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/evid_c.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "efd4bbf01556bb661a47131c75f05e321a41c00e407ec6177b66e80718df8710",
+      "original_sha256": "efd4bbf01556bb661a47131c75f05e321a41c00e407ec6177b66e80718df8710",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/fm_c.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "e8f877260ef1f968714a8ecaa3684b2fa4d041c0ff7dc1c9e7b564ba1036486d",
+      "original_sha256": "e8f877260ef1f968714a8ecaa3684b2fa4d041c0ff7dc1c9e7b564ba1036486d",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/fpu_c.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "4a3f2226e9d1ca9fa2e0a806d1d40719e94f97e98b6f22936147240f568ab244",
+      "original_sha256": "4a3f2226e9d1ca9fa2e0a806d1d40719e94f97e98b6f22936147240f568ab244",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/gdpvar.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "557c5d1d0effd1f8b1a18e0df5415924d63773edbc7ee762a624720229c24042",
+      "original_sha256": "557c5d1d0effd1f8b1a18e0df5415924d63773edbc7ee762a624720229c24042",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/pigger_c.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "61c86d668bddaf998101a0da469115325ad822f751d4b964dcaad35ea4e7de9f",
+      "original_sha256": "61c86d668bddaf998101a0da469115325ad822f751d4b964dcaad35ea4e7de9f",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/univer_c.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "95963b89f5b99a06fe1c3ea85a0916500bc582881ad5bf2db508f75bcb07638e",
+      "original_sha256": "95963b89f5b99a06fe1c3ea85a0916500bc582881ad5bf2db508f75bcb07638e",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dterm.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "1a31bf16bf46b520110fd0d5e3562034f2c0d1f5e474ea030f98148c1c686924",
+      "original_sha256": "1a31bf16bf46b520110fd0d5e3562034f2c0d1f5e474ea030f98148c1c686924",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rpcxlate/apiworke.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "805d632a97f750e4b15544d67fc0cc2e36070cbcbb44dd4600a031a528f85c75",
+      "original_sha256": "805d632a97f750e4b15544d67fc0cc2e36070cbcbb44dd4600a031a528f85c75",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsconst.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "dd594532c0618ab4acdc637baddf131c0ff0b95bc736cfbc821408c4317e2b9d",
+      "original_sha256": "ca80cdb6c115f513166145531225e4eb6710b9d4e87e5a99655d0fb5bef779e8",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsdata.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "c3a93b3c394b2adb6ae7e8198f6eb5bfe93c73414a85d9dca6e44ef5e7635aff",
+      "original_sha256": "a671c7fb4d1e9c5bbdb71d6fc4afe0324081038053392d599942c95813ce6d5c",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsdef16.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "56133720faa919da85c129aa1f3c601ee504b8005f5a523b93440cbbc1426bbf",
+      "original_sha256": "8198c378c9df3f318aff2914e95a530ef90c6fca92d1939714c851628b069743",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsparm16.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "8daf8b94feade0b0518b66d4f477901d3b02274d657f78103ca9be6fd07eaa6b",
+      "original_sha256": "c6179ce7662c012a345aed4278b94b59c50ceaf396eceb7f768b62ce454f2b7c",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsprocsp.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "85aa47902c2ab59bd5ba00dbcee169a2c11dc9c408034a5e0333322b76172c81",
+      "original_sha256": "f9f997ec6f9fbdc8160c775718c605bcaa5aa374d94ac5c94387ccd7fb4e7465",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/non-mvdm/private/windows/inc/pmvdm.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "d9bc8a4e975f9d2bc1aef89d8e8854f2dc8ad8fac53b49d6f4998bccafd4afc8",
+      "original_sha256": "d9bc8a4e975f9d2bc1aef89d8e8854f2dc8ad8fac53b49d6f4998bccafd4afc8",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/nettypes.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "19a93583be57f9972c150af4c482f7fa1a2bfaf9769abb31de02cd8678064bb6",
+      "original_sha256": "19a93583be57f9972c150af4c482f7fa1a2bfaf9769abb31de02cd8678064bb6",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/apiparam.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "f5d8f906f3af10302f9e877091661dd3e2ba7d1f6760ce3c8dfb3bffc8e9e462",
+      "original_sha256": "f5d8f906f3af10302f9e877091661dd3e2ba7d1f6760ce3c8dfb3bffc8e9e462",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/prefix.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "f37544194f395b67176d4e99067e605a4c79269fd6a34a2353b9244d42d32e71",
+      "original_sha256": "f37544194f395b67176d4e99067e605a4c79269fd6a34a2353b9244d42d32e71",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rapgtpt.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "b77a81c76ebf5a82bddbc4812a94f9fc4281f4e01612380d843f16b47878b8e4",
+      "original_sha256": "b77a81c76ebf5a82bddbc4812a94f9fc4281f4e01612380d843f16b47878b8e4",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/remtypes.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "53c776fa1300bc533fb616bb6dadb0fcb1ca9721b82b229e08fabbdb00e9c4e7",
+      "original_sha256": "53c776fa1300bc533fb616bb6dadb0fcb1ca9721b82b229e08fabbdb00e9c4e7",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxp.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "a9872ea30eaf56286b6306885a577198190724ff68c4bc6d387a426a23d2442e",
+      "original_sha256": "a9872ea30eaf56286b6306885a577198190724ff68c4bc6d387a426a23d2442e",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/strucinf.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "5dffd99e3a625c86176c8b68e67ad89672a8e4f0727eaa3ca707e7aaf72c352d",
+      "original_sha256": "5dffd99e3a625c86176c8b68e67ad89672a8e4f0727eaa3ca707e7aaf72c352d",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/xsprocs.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "92f877f06d37706c1f1acabab1784e826be365f637c8fb40a82357b66d8b866f",
+      "original_sha256": "92f877f06d37706c1f1acabab1784e826be365f637c8fb40a82357b66d8b866f",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/shell/inc/wowcmndg.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "92c3ad8d3b8113edd7b4e8282294f5d1269a6ce25c98a50602422cf116666424",
+      "original_sha256": "ce25c125139070ba30b2a99d670bdac09ff614c14a08ce5ef0cce2d99b43a52c",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/devioctl.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "87098d18c8afaf1265522380b682662125c59af17d775f9ab062e5b1e17db33b",
+      "original_sha256": "87098d18c8afaf1265522380b682662125c59af17d775f9ab062e5b1e17db33b",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nt_vdd.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "7e89fd4420381a54bc89e9807e54ccfe138a0767996ab7c74712e5e96aeb6609",
+      "original_sha256": "7e89fd4420381a54bc89e9807e54ccfe138a0767996ab7c74712e5e96aeb6609",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntcsrdll.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "ed1f1868eaca9e9d2a781bb57bd5e35538c0f5755f508438a6b804816655d7e8",
+      "original_sha256": "ed1f1868eaca9e9d2a781bb57bd5e35538c0f5755f508438a6b804816655d7e8",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntcsrmsg.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "0eaafd5d95c8a49d9464a9f31afe6525f03c8b7d93e532c4df66fc77886e7e64",
+      "original_sha256": "896d25bb240d105c64f96ab06f97bee8e013ad7c4e679a0292b07c5e594c6fc7",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "02dfdb43c3d3db9380546a98fcf07d916059c0f4e001b5fe3c06cce19e811c03",
+      "original_sha256": "c6b7844e2e1248ac38ee90dd8173f95ab0f7997d7a7cfbafda851cc07cc80921",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/wownt32.h",
+      "status": "completed-single-original-include-guard",
+      "current_sha256": "fe726b917229ef7aad3615d001ac32f5d1c4a7237486b68195a3650acde5bcee",
+      "original_sha256": "7b3077a7da4144abd73494311d85f34d46ecd483d2e14afd6619693891143cb7",
+      "check": "Both files have exactly one top-level group, matching guard directive/expression, no nested groups."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/aaa.c",
+      "status": "completed-selected-original-undefined-flags",
+      "current_sha256": "43583535e19a181d7a4c665c5fba5c00109eb1079b65d462f2b8a3d92ce2c052",
+      "original_sha256": "43583535e19a181d7a4c665c5fba5c00109eb1079b65d462f2b8a3d92ce2c052",
+      "observed_branch": {
+        "expression": "SET_UNDEFINED_FLAG",
+        "x86": "selected",
+        "x64": "unobserved"
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/aad.c",
+      "status": "completed-selected-original-undefined-flags",
+      "current_sha256": "7f6216d39411838509402cc45a93741ee4e0142c1fc36a0dc7682f126c447cde",
+      "original_sha256": "7f6216d39411838509402cc45a93741ee4e0142c1fc36a0dc7682f126c447cde",
+      "observed_branch": {
+        "expression": "SET_UNDEFINED_FLAG",
+        "x86": "selected",
+        "x64": "unobserved"
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/aam.c",
+      "status": "completed-selected-original-undefined-flags",
+      "current_sha256": "fda0622e61bc039dad01cf0594389af7e9ffdc678719b107f90a5e1607d893ee",
+      "original_sha256": "fda0622e61bc039dad01cf0594389af7e9ffdc678719b107f90a5e1607d893ee",
+      "observed_branch": {
+        "expression": "SET_UNDEFINED_FLAG",
+        "x86": "selected",
+        "x64": "unobserved"
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/aas.c",
+      "status": "completed-selected-original-undefined-flags",
+      "current_sha256": "f58060b5f0732ca174b1124b2622aaafa9d7341774cd71427509f2548ace4672",
+      "original_sha256": "f58060b5f0732ca174b1124b2622aaafa9d7341774cd71427509f2548ace4672",
+      "observed_branch": {
+        "expression": "SET_UNDEFINED_FLAG",
+        "x86": "selected",
+        "x64": "unobserved"
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/daa.c",
+      "status": "completed-selected-original-undefined-flags",
+      "current_sha256": "5cd3ba3ee4989fb02c85a07e020f9a67a1939e8333fe5b83b7c16b3a828c9817",
+      "original_sha256": "5cd3ba3ee4989fb02c85a07e020f9a67a1939e8333fe5b83b7c16b3a828c9817",
+      "observed_branch": {
+        "expression": "SET_UNDEFINED_FLAG",
+        "x86": "selected",
+        "x64": "unobserved"
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/das.c",
+      "status": "completed-selected-original-undefined-flags",
+      "current_sha256": "31aea3f55537c576caa4403de3d250220d15016a8936be5c4402d623c2cd1fdd",
+      "original_sha256": "31aea3f55537c576caa4403de3d250220d15016a8936be5c4402d623c2cd1fdd",
+      "observed_branch": {
+        "expression": "SET_UNDEFINED_FLAG",
+        "x86": "selected",
+        "x64": "unobserved"
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/into.c",
+      "status": "completed-original-ntvdm-selected",
+      "current_sha256": "fbe4dfe731c9d367c0270675c679bbf6acf1a45cf0b4d4548b54e5d2080c74c3",
+      "original_sha256": "fbe4dfe731c9d367c0270675c679bbf6acf1a45cf0b4d4548b54e5d2080c74c3",
+      "observed_branch": {
+        "expression": "NTVDM",
+        "x86": "selected",
+        "x64": "unobserved"
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/intx.c",
+      "status": "completed-original-ntvdm-selected",
+      "current_sha256": "544a08aec10dff46968f48b3aa83243fac5bf78ef04d189c7b46518c242907e1",
+      "original_sha256": "544a08aec10dff46968f48b3aa83243fac5bf78ef04d189c7b46518c242907e1",
+      "observed_branch": {
+        "expression": "NTVDM",
+        "x86": "selected",
+        "x64": "unobserved"
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sar.c",
+      "status": "completed-selected-original-undefined-flags",
+      "current_sha256": "4ff881f97ffd7b6b0188f6a95f671b308f06f8da2dfcb4e9c7be3a51ec673011",
+      "original_sha256": "4ff881f97ffd7b6b0188f6a95f671b308f06f8da2dfcb4e9c7be3a51ec673011",
+      "observed_branch": {
+        "expression": "SET_UNDEFINED_FLAG",
+        "x86": "selected",
+        "x64": "unobserved"
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/shl.c",
+      "status": "completed-selected-original-undefined-flags",
+      "current_sha256": "03354bdb3d04e84d2e569273e38952300ddbd1d0f2924c6363c63b2f9064c8c1",
+      "original_sha256": "03354bdb3d04e84d2e569273e38952300ddbd1d0f2924c6363c63b2f9064c8c1",
+      "observed_branch": {
+        "expression": "SET_UNDEFINED_FLAG",
+        "x86": "selected",
+        "x64": "unobserved"
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/shr.c",
+      "status": "completed-selected-original-undefined-flags",
+      "current_sha256": "423ddf4206e009deb3eab3b17feab5cd4db1c9745643da5809ade351e26d1b70",
+      "original_sha256": "423ddf4206e009deb3eab3b17feab5cd4db1c9745643da5809ade351e26d1b70",
+      "observed_branch": {
+        "expression": "SET_UNDEFINED_FLAG",
+        "x86": "selected",
+        "x64": "unobserved"
+      }
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/savestat.c",
+      "status": "completed-original-literal-false",
+      "current_sha256": "59efaecefb32f3c1bd839cbf602587f0fb65ffd360c5e12ea807a255b06781de",
+      "original_sha256": "76864b5f6c852820722d123395e49da43fd206f2420dd38d00d1ce911b1d7e42",
+      "check": "Excluded literal-false or unsupported segmentation arm has direct #error, with explicit #line or unchanged original physical position."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+      "status": "completed-original-segmentation-excluded",
+      "current_sha256": "0bbcf3d6eafb9bf1c3f10e190721cd0062db7614549d28f9363c65afe791f582",
+      "original_sha256": "08b798882c49443b2641ebf091adf07959059d46bc703467d860ab22659f2967",
+      "check": "Excluded literal-false or unsupported segmentation arm has direct #error, with explicit #line or unchanged original physical position."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/rom_basc.c",
+      "status": "completed-original-segmentation-excluded",
+      "current_sha256": "5b03ffa5ba2ecb77f60c7f01d61a6ca96029c838d2b92ffcfba5cf00ee098c87",
+      "original_sha256": "2e6f1783fcb3695443ab0a3a6fcb5dbf2bd3e2e7905217cd61021e031a8a709a",
+      "check": "Excluded literal-false or unsupported segmentation arm has direct #error, with explicit #line or unchanged original physical position."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xtrn.c",
+      "status": "completed-original-literal-false",
+      "current_sha256": "30b30971217251b147d46f54e63441dd0717f7bb21338bf20ae60d0d13818de7",
+      "original_sha256": "e114d6d858f5eafe2d7a4e8af560831d95f190ecf07209d91255f1140680943e",
+      "check": "Excluded literal-false or unsupported segmentation arm has direct #error, with explicit #line or unchanged original physical position."
+    },
+    {
+      "path": "src/mvdm-host/suballoc/suballoc.c",
+      "status": "completed-original-literal-false",
+      "current_sha256": "dde9cb4e50aca817922649a8d6a7816f53b1c331a0fa7ed6055be23202871b32",
+      "original_sha256": "b06496e16d551f2bbac37d896b61857c6569eda8c98fb3d26dbf574e594148e0",
+      "check": "Excluded literal-false or unsupported segmentation arm has direct #error, with explicit #line or unchanged original physical position."
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdos.c",
+      "status": "completed-original-literal-false",
+      "current_sha256": "bac958832def568b86ff8966b8f7b7f52d8079d2d7ea0b48176aabf9f1077065",
+      "original_sha256": "e87b5cb3825ed937266c3badd287efd03cec3af0c26acb32ccc86d71fa47f314",
+      "check": "Excluded literal-false or unsupported segmentation arm has direct #error, with explicit #line or unchanged original physical position."
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkmem.h",
+      "status": "completed-original-literal-false",
+      "current_sha256": "b5dfa8bba416e5be06599b09e21e4be922ffe00666b9e678ce298a719c7648d2",
+      "original_sha256": "313bd585b854ddfa21d8029814d78a5560aef3564179cef82e5819fbf64da524",
+      "check": "Excluded literal-false or unsupported segmentation arm has direct #error, with explicit #line or unchanged original physical position."
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.h",
+      "status": "completed-profile-excluded-original-structure",
+      "current_sha256": "33116c4aa3b24505d63bc55c6de35ea1eb7abecdcb43cd6ad6b447fb64ccf5d5",
+      "original_sha256": "4102d319dbaf7dc0ed6759efbdcec83e2882af708cd7f70c97cacc50cd0e0057",
+      "historical_compile_observations": [
+        {
+          "line": 14,
+          "directive": "ifndef",
+          "expression": "_DEF_WMDISP32_",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 55,
+          "directive": "ifdef",
+          "expression": "DEBUG_OR_WOWPROFILE",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+      "status": "completed-original-unicode-selected",
+      "current_sha256": "65a0ae3d65923ad5292213cf2c0f84bae48d91daebc6e087462bad42ed73c266",
+      "original_sha256": "2bb7b7a8d86742123d3e246a940d22b2f0448c0afdce6a26204e78dd4a50ecc7",
+      "historical_compile_observations": [
+        {
+          "line": 142,
+          "directive": "ifdef",
+          "expression": "UNICODE",
+          "x86": "selected",
+          "x64": "unobserved"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbgtpt.h",
+      "status": "completed-original-structure-profile-audit",
+      "current_sha256": "4b22eca70addbdfb0472e71ed0adfcfccfe846891af8863d3bb151c476716736",
+      "original_sha256": "d2ab723bc1f95cb53ae6970f950f5ce50d4b0d177ba31c8b7d7c8d83a5262d75",
+      "historical_compile_observations": [
+        {
+          "line": 27,
+          "directive": "ifndef",
+          "expression": "_SMBGTPT_",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 45,
+          "directive": "if",
+          "expression": "!SMBDBG",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 78,
+          "directive": "if",
+          "expression": "!SMBDBG",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 80,
+          "directive": "if",
+          "expression": "!SMBDBG1",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 81,
+          "directive": "if",
+          "expression": "SMB_USE_UNALIGNED",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 83,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 89,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 96,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 128,
+          "directive": "if",
+          "expression": "!SMBDBG",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 130,
+          "directive": "if",
+          "expression": "!SMBDBG1",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 132,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 136,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 172,
+          "directive": "if",
+          "expression": "!SMBDBG",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 174,
+          "directive": "if",
+          "expression": "!SMBDBG1",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 175,
+          "directive": "if",
+          "expression": "SMB_USE_UNALIGNED",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 178,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 184,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 191,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 229,
+          "directive": "if",
+          "expression": "!SMBDBG",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 231,
+          "directive": "if",
+          "expression": "!SMBDBG1",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 233,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 237,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 273,
+          "directive": "if",
+          "expression": "!SMBDBG",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 275,
+          "directive": "if",
+          "expression": "!SMBDBG1",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 276,
+          "directive": "if",
+          "expression": "SMB_USE_UNALIGNED",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 279,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 285,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 292,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 324,
+          "directive": "if",
+          "expression": "!SMBDBG",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 326,
+          "directive": "if",
+          "expression": "!SMBDBG1",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 327,
+          "directive": "if",
+          "expression": "SMB_USE_UNALIGNED",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 329,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 337,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 346,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 378,
+          "directive": "if",
+          "expression": "!SMBDBG",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 380,
+          "directive": "if",
+          "expression": "!SMBDBG1",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 382,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 386,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 421,
+          "directive": "if",
+          "expression": "!SMBDBG",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 423,
+          "directive": "if",
+          "expression": "!SMBDBG1",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 424,
+          "directive": "if",
+          "expression": "SMB_USE_UNALIGNED",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 426,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 434,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 443,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 481,
+          "directive": "if",
+          "expression": "!SMBDBG",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 483,
+          "directive": "if",
+          "expression": "!SMBDBG1",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 485,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 489,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 525,
+          "directive": "if",
+          "expression": "!SMBDBG",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 527,
+          "directive": "if",
+          "expression": "!SMBDBG1",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 528,
+          "directive": "if",
+          "expression": "SMB_USE_UNALIGNED",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 531,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 539,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 548,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 586,
+          "directive": "if",
+          "expression": "!SMBDBG",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 588,
+          "directive": "if",
+          "expression": "SMB_USE_UNALIGNED",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 590,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 597,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 639,
+          "directive": "if",
+          "expression": "!SMBDBG",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 641,
+          "directive": "if",
+          "expression": "SMB_USE_UNALIGNED",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 644,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 651,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 682,
+          "directive": "if",
+          "expression": "!SMBDBG",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 684,
+          "directive": "if",
+          "expression": "SMB_USE_UNALIGNED",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 686,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 693,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 723,
+          "directive": "if",
+          "expression": "!SMBDBG",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 727,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 764,
+          "directive": "if",
+          "expression": "!SMBDBG",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 766,
+          "directive": "if",
+          "expression": "SMB_USE_UNALIGNED",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 768,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 775,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 817,
+          "directive": "if",
+          "expression": "!SMBDBG",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 819,
+          "directive": "if",
+          "expression": "SMB_USE_UNALIGNED",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 822,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 829,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 860,
+          "directive": "if",
+          "expression": "!SMBDBG",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 862,
+          "directive": "if",
+          "expression": "SMB_USE_UNALIGNED",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 864,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 871,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 902,
+          "directive": "if",
+          "expression": "!SMBDBG",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 906,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbtypes.h",
+      "status": "completed-original-structure-profile-audit",
+      "current_sha256": "8e8d555ed6877abe8aeb6e5e41e0061420764996617d372812d083e8508ffd12",
+      "original_sha256": "f04a563368f33bb6d8ba50a50e68d68f081aecce94ecc37b6d787cc6f38ea622",
+      "historical_compile_observations": [
+        {
+          "line": 21,
+          "directive": "ifndef",
+          "expression": "_SMBTYPES_",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 32,
+          "directive": "ifndef",
+          "expression": "SMBDBG",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 43,
+          "directive": "ifndef",
+          "expression": "SMBDBG1",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 47,
+          "directive": "if",
+          "expression": "SMBDBG && SMBDBG1",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 69,
+          "directive": "ifndef",
+          "expression": "SMB_NO_UNALIGNED",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 73,
+          "directive": "ifndef",
+          "expression": "SMB_USE_UNALIGNED",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 74,
+          "directive": "if",
+          "expression": "SMB_NO_UNALIGNED",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 76,
+          "directive": "else",
+          "expression": "",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 89,
+          "directive": "if",
+          "expression": "SMB_USE_UNALIGNED",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 91,
+          "directive": "else",
+          "expression": "",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 107,
+          "directive": "if",
+          "expression": "SMBDBG1",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 112,
+          "directive": "else",
+          "expression": "",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 123,
+          "directive": "ifndef",
+          "expression": "NO_PACKING",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 366,
+          "directive": "ifndef",
+          "expression": "NO_PACKING",
+          "x86": "selected",
+          "x64": "unobserved"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rapdebug.h",
+      "status": "completed-original-structure-profile-audit",
+      "current_sha256": "e75948dc2d8a6f94016c0aa3d2656f1a5eee774c97049ea7cee6466a8961e341",
+      "original_sha256": "ffc0d0378b56e4ef1a7b4356f7c00749f6cc4ef459df4a59af2d3bcf64728003",
+      "historical_compile_observations": [
+        {
+          "line": 28,
+          "directive": "ifndef",
+          "expression": "_RAPDEBUG_",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 52,
+          "directive": "if",
+          "expression": "DBG",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved"
+        },
+        {
+          "line": 54,
+          "directive": "else",
+          "expression": "",
+          "x86": "selected",
+          "x64": "unobserved"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/remdef.h",
+      "status": "complete-identical-both-unicode-contexts-observed",
+      "current_sha256": "bf4341d5c9fea49d79a5fd074c19e7ceebd2b9b17e8ad2085fff5d3f4969c7ed",
+      "original_sha256": "bf4341d5c9fea49d79a5fd074c19e7ceebd2b9b17e8ad2085fff5d3f4969c7ed",
+      "historical_compile_observations": [
+        {
+          "line": 91,
+          "directive": "ifndef",
+          "expression": "_REMDEF_",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 531,
+          "directive": "ifndef",
+          "expression": "UNICODE",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 533,
+          "directive": "else",
+          "expression": "",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 539,
+          "directive": "ifndef",
+          "expression": "UNICODE",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 541,
+          "directive": "else",
+          "expression": "",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 557,
+          "directive": "ifndef",
+          "expression": "UNICODE",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 559,
+          "directive": "else",
+          "expression": "",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 605,
+          "directive": "ifndef",
+          "expression": "UNICODE",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 607,
+          "directive": "else",
+          "expression": "",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 651,
+          "directive": "ifndef",
+          "expression": "UNICODE",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 653,
+          "directive": "else",
+          "expression": "",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 659,
+          "directive": "ifndef",
+          "expression": "UNICODE",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 661,
+          "directive": "else",
+          "expression": "",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 742,
+          "directive": "ifndef",
+          "expression": "UNICODE",
+          "x86": "selected",
+          "x64": "unobserved"
+        },
+        {
+          "line": 744,
+          "directive": "else",
+          "expression": "",
+          "x86": "selected",
+          "x64": "unobserved"
+        }
+      ]
+    }
+  ],
+  "limits": "CCPU branch observations use the x86 product build; x64 observations are unobserved because CCPU is x86. The CCPU SET_UNDEFINED_FLAG macro is defined in c_main.h and selected code is intentionally retained. Historical preprocessor observations are evidence of hits in recorded contexts, not proof that every other context is unavailable.",
+  "excluded_count": 7,
+  "profile_context_count": 6
+}
