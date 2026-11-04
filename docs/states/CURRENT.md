@@ -2,21 +2,13 @@
 
 ## Current Work
 
-**Active: M0 T475 S2 — cross-component implementation ownership audit**
+**Active: M0 T475 S3 — Worker Base and NTVDM dependency removal**
 
-The owner closes T475 S1 locally and directs a project-wide inventory of illegal
-dependencies among non-public, non-mirror components. Audit every production
-consumer and provider, distinguishing source, static and private-header edges
-from explicit runtime protocols and test-only selections; allow the two workers'
-dependency on worker-base. Present actual use and dispositions before repair.
-
-The owner-requested inventory is recorded in the [S2 dependency audit](../etc/evidence/m0-t475-s2-component-dependency-inventory.md).
-It identifies live Hook-owned source in Run16 and both workers, NTVDM-private
-sources and headers in WOW32/VDMREDIR, and an unused VDMREDIR Worker Base link
-input. Actual NTVDM runtime ABI imports are recorded separately. Review and
-implementation of the proposed dispositions remain pending; no source fix is
-claimed by this inventory.
-
+The owner closes the [S2 dependency inventory](../etc/evidence/m0-t475-s2-component-dependency-inventory.md)
+and admits S3 to address the illegal Worker Base and NTVDM dependencies through
+common and libraries. The [S3 design](../etc/operations/m0-t475-s3-worker-ntvdm-dependency-plan.md)
+proposes sequential deliveries; implementation has not started. The separate
+question of removing the NTVDM PE runtime imports is pending owner clarification.
 T475 S1 separated NXVM and Win32 library ownership. Its final four local P
 commits extracted object-handle comparison, overlapped pipe-pair creation,
 parent-process observation and file identity. Their local packages each
@@ -37,23 +29,22 @@ publication is authorized by the local workflow.
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T475 S2, Ordinary Mode. |
-| Admission And Approval | Owner expands S2 to inventory illegal dependencies among all non-public, non-mirror components. |
-| Objective | Inventory actual production cross-component source, link and private-header dependencies and classify violations under the owner rule. |
-| Non-goals | No blanket Console rewrite, broker import, guest modifications, main-worktree changes or moving NTVDM policy into generic libraries. |
-| Reference Baseline | T475 S1 local package 2b1325bd-17fb-4435-b2be-55995de325f6; T474 Run16 and NTSRV ownership evidence above. |
-| Files And ABI Surface | Production component sources and headers, x86/x64 build and link closures, test-only selections and shared-owner boundaries. |
-| Applicable Rules | Preserve original source provenance, runtime protocol and lifecycle; component-private sources cannot be production dependencies of sibling components. Worker-base exception applies only to its two workers. Local release and commits only. |
-| Verification | Inventory all real production consumers in x86 and x64 graph selections; distinguish test-only and runtime edges; focused positive, negative and lifecycle checks; relevant builds, coherent local package, Control, hash checks and governance for implementation. |
-| Expected Markers | Each component pair, actual use, allowed exception or illegal dependency is evidenced, with disposition and uncertainty stated. |
-| Asset Needs | Existing toolchain, production build graphs and local release package; no new import. |
-| Reporting Requirements | Consumer, symbol, actual use, ownership decision, moved or retained code, verification and remaining limitations. |
-| Stop Conditions | Required semantic concession, missing provenance or a proposed dependency inconsistent with the owner direction. |
-| Exit Criteria | Complete inventory and reviewable dispositions; production fixes, if separately directed, require build, tests, local publication and commit. |
-| Original Owner Request | Inventory all illegal interdependencies among non-public, non-mirror components. |
-| Similar-Issue Sweep | All product owners, private includes, static archives, x86/x64 production graphs, test-only consumers, common protocol and Worker Base exception. |
-| Temporary Evidence | build/t475-s2, ordinary worktree-local evidence with recorded owned test processes. |
-
+| Identifier Mode | M0 T475 S3, Ordinary Mode. |
+| Admission And Approval | Owner admits an S to address illegal dependencies on Worker Base and NTVDM and requests a design. |
+| Objective | Remove prohibited source, header and static-link dependencies through common and platform libraries; resolve runtime-import scope before dependent implementation. |
+| Non-goals | Alter the allowed two-worker Worker Base dependency, NTHook ownership, guest media, original ABI semantics or main worktree. |
+| Reference Baseline | S2 inventory commit 5bc6eb897 and local package 2b1325bd-17fb-4435-b2be-55995de325f6. |
+| Files And ABI Surface | VDMREDIR, WOW32, NTVDM, common and lib-win32 source/headers, source/link graph, module interfaces, tests and documentation. |
+| Applicable Rules | Preserve mirror provenance, original behavior, one session/page-domain authority, callback lifetime and calling conventions; generic libraries cannot depend on common or private product code. |
+| Verification | Per production P: affected x86/x64 builds, real positive/negative/lifecycle fixtures, Control, ten-image local publication and hash checks, governance and diff review. |
+| Expected Markers | Non-worker components select no Worker Base input and no NTVDM-private implementation/header; required runtime contracts and state ownership remain verified. |
+| Asset Needs | Existing toolchain, fixtures and local package; no external source import. |
+| Reporting Requirements | Per consumer/provider, actual use, removed edge, shared owner, preserved state, verification and runtime-ABI disposition. |
+| Stop Conditions | Required semantic concession, missing provenance, duplicate state owner or unresolved scope of the runtime-import change. |
+| Exit Criteria | All admitted dependencies resolved, production Ps built, tested, locally published and committed; runtime-import treatment matches clarified scope. |
+| Original Owner Request | Admit one S to address Worker Base and NTVDM dependencies by placing suitable code into common and lib; provide a design. |
+| Similar-Issue Sweep | VDMREDIR and WOW32 source, private headers, selected archive members, forced includes, NTVDM module ABI and all Worker Base consumers. |
+| Temporary Evidence | build/t475-s3, worktree-local evidence with owned test processes. |
 ## S12 Closure Record
 
 The owner accepted [S12 source layout and compile-time boundaries](../etc/evidence/m0-t473-s12-source-layout-closure.md).

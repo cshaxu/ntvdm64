@@ -1,5 +1,7 @@
 # Supporting Material
 
+[T475 S3 dependency removal design](operations/m0-t475-s3-worker-ntvdm-dependency-plan.md) records the proposed ownership and P sequence.
+
 [T475 S2 component dependency inventory](evidence/m0-t475-s2-component-dependency-inventory.md) records cross-component production edges, actual use and dispositions.
 
 [T475 S2 NTCON ownership](evidence/m0-t475-s2-ntcon-ownership.md) records the admitted review and initial graph inventory.
