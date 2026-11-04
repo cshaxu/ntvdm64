@@ -16,6 +16,7 @@
 
 
 
+#line 16
 void CpuEnvInit(void);
 
 typedef struct _CpuEnvironmentVariable {
@@ -56,6 +57,7 @@ _CRTAPI1 main(int argc, CHAR ** argv)
      *  so that we can always suspend the heartbeat when an exception
      *  occurs.
      */
+#line 42
     TimerInit();
 
 
@@ -79,6 +81,7 @@ _CRTAPI1 main(int argc, CHAR ** argv)
 
 finish:
     return mvdm_standalone_worker_finish(ret);
+#line 64
 }
 
 
@@ -96,6 +99,7 @@ finish:
  * all its debugger/no-debugger branches, but spell the same public calling
  * convention so the x86 declaration and definition agree. */
 VOID NTAPI
+#line 77
 DbgBreakPoint(
     VOID
     )

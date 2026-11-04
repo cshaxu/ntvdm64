@@ -85,6 +85,7 @@ Revision History:
 #include "vrputil.h"    // VrpMapDosError()
 #include "vrdebug.h"    // VrDebugFlags etc
 #include "mvdm_redirector_guest_copy.h"
+#line 87
 #include "dlstruct.h"   // down-level structures
 #include <rxuser.h>     // RxNetUser...
 #include <lmaccess.h>   // USER_PASSWORD_PARMNUM
@@ -187,6 +188,7 @@ Return Value:
 --*/
 
 {
+#line 199
     LPWSTR infoString;
     NET_API_STATUS rc1;
     NET_API_STATUS rc2;
@@ -197,6 +199,7 @@ Return Value:
     CHAR computerBuf[LM20_CNLEN+1];
     CHAR primaryDomainBuf[LM20_CNLEN+1];
     CHAR logonDomainBuf[LM20_CNLEN+1];
+#line 207
     NTSTATUS status;
     register DWORD len;
 
@@ -206,6 +209,7 @@ Return Value:
 #endif
 #line 236
 
+#line 219
     rc1 = NetWkstaGetInfo(NULL, 100, (LPBYTE*)&wkstaInfo);
     rc2 = NetWkstaUserGetInfo(0, 1, (LPBYTE*)&userInfo);
 
@@ -213,6 +217,7 @@ Return Value:
     RtlZeroMemory(primaryDomainBuf, sizeof(primaryDomainBuf));
     RtlZeroMemory(logonDomainBuf, sizeof(logonDomainBuf));
     ansiString.MaximumLength = sizeof(computerBuf);
+#line 223
     ansiString.Length = 0;
     ansiString.Buffer = computerBuf;
     if (rc1 == NERR_Success) {
@@ -230,6 +235,7 @@ Return Value:
             RtlInitUnicodeString(&unicodeString, infoString);
             status = RtlUnicodeStringToAnsiString(&ansiString, &unicodeString, FALSE);
             if (NT_SUCCESS(status)) _strupr(primaryDomainBuf);
+#line 242
         }
     }
     if (rc2 == NERR_Success) {
@@ -240,6 +246,7 @@ Return Value:
             RtlInitUnicodeString(&unicodeString, infoString);
             status = RtlUnicodeStringToAnsiString(&ansiString, &unicodeString, FALSE);
             if (NT_SUCCESS(status)) _strupr(logonDomainBuf);
+#line 259
         }
     }
     /* DIVERGENCE(MVDM-HOST-DIV-176): I_CDNames is a packed trio of 16:16
@@ -249,6 +256,7 @@ Return Value:
     mvdm_redirector_write_cd_names(getES(), getDI(), computerBuf,
         primaryDomainBuf, logonDomainBuf);
 
+#line 280
     if (wkstaInfo) {
         NetApiBufferFree((LPVOID)wkstaInfo);
     }
@@ -456,10 +464,12 @@ Return Value:
          * exposes the returned user name as Unicode even though this source
          * is compiled without the historical global UNICODE switch. */
         len = (DWORD)wcslen(pInfo->wkui0_username);
+#line 496
         if (getBX()) {
             /* DIVERGENCE(MVDM-HOST-DIV-361): zero capacity cannot hold
              * even the terminating byte; do not let CX-1 underflow. */
             itFits = getCX() != 0 && (len) <= (DWORD)getCX()-1;
+#line 498
             if (itFits) {
                 SET_SUCCESS();
             } else {
@@ -475,6 +485,7 @@ Return Value:
             status = mvdm_redirector_copy_wide_to_guest(getES(), getDI(),
                 pInfo->wkui0_username, getBX() && getCX() ? getCX() : UINT32_MAX);
             if (status != NERR_Success) SET_ERROR((WORD)status);
+#line 508
         }
         NetApiBufferFree(buffer);
     } else {

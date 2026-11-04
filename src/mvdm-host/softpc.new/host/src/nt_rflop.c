@@ -35,6 +35,7 @@
 #include <mvdm_command_guest_state.h>
 
 
+#line 36
 #include <stdio.h>
 #include <errno.h>
 #include <sys\types.h>
@@ -415,6 +416,7 @@ GLOBAL void host_flpy_heart_beat(void)
     /* DIVERGENCE MVDM-HOST-DIV-111: read the SCS counter through a fresh
      * session lease instead of dereferencing a retained guest alias. */
     if (mvdm_command_guest_state_read_fd_access(&fd_access) && fd_access) {
+#line 516
 	if (floppy_open_count) {
 	    for (drive = 0; drive < number_of_floppy; drive++) {
 		flp = & floppy_data[drive];
@@ -620,6 +622,7 @@ ULONG nt_floppy_read(BYTE drive, ULONG Offset, ULONG Size, PBYTE Buffer)
 	return 0;
     fd = get_drive_handle(drive, currentPdb, FALSE);
 
+#line 718
     if (fd == INVALID_HANDLE_VALUE)
 	return 0;
     large_integer.LowPart = Offset;
@@ -638,6 +641,7 @@ ULONG nt_floppy_write(BYTE drive, ULONG Offset, ULONG Size, PBYTE Buffer)
     if (!nt_rflop_current_pdb(&currentPdb))
 	return 0;
     fd = get_drive_handle(drive, currentPdb, TRUE);
+#line 733
     if (fd == INVALID_HANDLE_VALUE)
 	return 0;
 
@@ -656,6 +660,7 @@ BOOL nt_floppy_format(BYTE drive, WORD Cylinder, WORD Head, MEDIA_TYPE Media)
     BOOL    result;
     USHORT currentPdb;
 
+#line 750
     result = FALSE;
     fmt.MediaType = Media;
     fmt.StartHeadNumber = fmt.EndHeadNumber = Head;
@@ -663,6 +668,7 @@ BOOL nt_floppy_format(BYTE drive, WORD Cylinder, WORD Head, MEDIA_TYPE Media)
     if (!nt_rflop_current_pdb(&currentPdb))
 	return FALSE;
     fd = get_drive_handle(drive, currentPdb,TRUE);
+#line 755
     if (fd == INVALID_HANDLE_VALUE)
 	return FALSE;
     result = DeviceIoControl(fd,
@@ -688,6 +694,7 @@ BOOL nt_floppy_verify(BYTE drive, DWORD Offset, DWORD Size)
     if (!nt_rflop_current_pdb(&currentPdb))
 	return FALSE;
     fd = get_drive_handle(drive, currentPdb, FALSE);
+#line 777
     if (fd != INVALID_HANDLE_VALUE) {
 	large_integer.LowPart = Offset;
 	large_integer.HighPart = 0;
@@ -763,6 +770,7 @@ HANDLE get_drive_handle(UTINY drive, USHORT pdb, BOOL auto_lock)
 			return INVALID_HANDLE_VALUE;
 		    }
 		    break;
+#line 843
 	}
 	if (auto_lock && GetLastError() == ERROR_SHARING_VIOLATION &&
 	    DiskOpenRetry((char)(drive + (UTINY)'A')) == RMB_RETRY)
@@ -809,6 +817,7 @@ BOOL nt_floppy_close(UTINY drive)
 #endif
 #line 885
 
+#line 889
     if (flp->diskette_fd != INVALID_HANDLE_VALUE) {
 	CloseHandle(flp->diskette_fd);
 	flp->diskette_fd = INVALID_HANDLE_VALUE;
@@ -816,6 +825,7 @@ BOOL nt_floppy_close(UTINY drive)
 	 * the registered scalar rather than a durable process pointer. */
 	if (!mvdm_command_guest_state_add_fd_access(UINT16_MAX))
 	    return FALSE;
+#line 893
 	flp->auto_locked = FALSE;
 	flp->owner_pdb = 0;
 	floppy_open_count--;
@@ -915,6 +925,7 @@ nt_rflop_command
 	USHORT currentPdb;
 
 
+#line 991
 	note_trace1 (GFI_VERBOSE, "FDC: %s command",
 		cmd_name [get_type_cmd (command_block)]);
 
@@ -964,6 +975,7 @@ nt_rflop_command
 		if (!nt_rflop_current_pdb(&currentPdb))
 		    return FAILURE;
 		get_drive_handle(drive, currentPdb, auto_lock);
+#line 1038
 		if (!nt_floppy_media_check(drive)) {
 		    fdc_parms.auto_lock = auto_lock;
 		    fdc_parms.command_block = command_block;
@@ -1217,6 +1229,7 @@ nt_rflop_change IFN1(UTINY, drive)
 {
 	FLP flp = &floppy_data[drive];
 	USHORT currentPdb;
+#line 1339
 	note_trace1 (GFI_VERBOSE, "FDC: change_line %c",
 		flp->change_line_state? 'T':'F');
 
@@ -1232,6 +1245,7 @@ nt_rflop_change IFN1(UTINY, drive)
 	if (!nt_rflop_current_pdb(&currentPdb))
 	    return TRUE;
 	get_drive_handle(drive, currentPdb, FALSE);
+#line 1352
 	flp->change_line_state = !nt_floppy_media_check(drive);
 
 #ifndef PROD

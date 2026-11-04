@@ -32,6 +32,7 @@
 #include "nt_com.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 
+#line 34
 #include <math.h>
 #include <malloc.h>
 #include <stdlib.h>
@@ -346,6 +347,7 @@ GLOBAL CPU int host_com_open(int adapter)
     config_inquire((UTINY)(C_COM1_NAME + adapter),
 		   &ComConfigValues);
     mvdm_softpc_report_setup_hardware_probe("com-open-enter", (unsigned long)adapter, 0ul);
+#line 346
     current->handle = CreateFile(ComConfigValues.string,
 				 GENERIC_READ | GENERIC_WRITE, 0, NULL,
 				 OPEN_EXISTING,
@@ -356,6 +358,7 @@ GLOBAL CPU int host_com_open(int adapter)
 
     mvdm_softpc_report_setup_hardware_probe("com-open-leave", (unsigned long)adapter,
         current->handle == (HANDLE)-1 ? GetLastError() : ERROR_SUCCESS);
+#line 354
     if(current->handle == (HANDLE) -1)
     {
 	always_trace1("Cannot open comms port '%s'\n",
@@ -1061,6 +1064,7 @@ GLOBAL RXCPU void host_com_ioctl IFN3(int, adapter, int, request, long, arg)
 	    DWORD baud_rate = (DWORD)arg;
 
 	    if (!FastCommSetBaudRate(current->handle, baud_rate))
+#line 1083
 	    {
 		sprintf(BaudRateStr, "(%lu)", baud_rate);
 		host_error(EHS_UNSUPPORTED_BAUD, ERR_CONT, BaudRateStr);
@@ -1073,6 +1077,7 @@ GLOBAL RXCPU void host_com_ioctl IFN3(int, adapter, int, request, long, arg)
 
 	/*:::::::::::::::::::::::::::::::::::::::: Process DTR line requests */
 
+#line 1094
 	case HOST_COM_SDTR:                 /* Set DTR line */
 	    //printf("Set DTR\n");
 	    sub_note_trace0(HOST_COM_VERBOSE, "set DTR");

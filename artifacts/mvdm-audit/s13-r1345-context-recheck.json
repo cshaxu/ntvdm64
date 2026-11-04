@@ -1,0 +1,82 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+    "current_sha256": "230f41939cd9567887dfbe5764eb8f566c18850812e261f87807155881f8c881",
+    "original_sha256": "56d39e89f2e077350ad07b77651224a0162314fced5abb498279b486f35afb32",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 2103
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+    "current_sha256": "8481e0f36525676af18759ed14785092ba64740f5fcab44b05c59d0ec52f850f",
+    "original_sha256": "3305eaabac76e039dfe80aa0f2e15c48433edd95a74615e5db55b97d2b393228",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 1143
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_rez.c",
+    "current_sha256": "c94e1b9631e79306d4570470870de71b76df8f4e22646fc9e0ea16619ae32d15",
+    "original_sha256": "12a6486b8cf81e2469b1acd7f9e9d03cada6b4690fad03ea171941802f0945fc",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 169
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+    "current_sha256": "71456b963fb5b56472e8b3011a5e1cccae005374fd26992b9b114d50202becae",
+    "original_sha256": "22c82627bf993ac4fd072ad1bb7d4f62000b60889e6955e83f5f676ac5bd7a29",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 1656
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_thred.c",
+    "current_sha256": "4bc1a569804cff7202e33a699cca49b55dea43c46eb10477929c6056fc1cbf58",
+    "original_sha256": "776330ea072cfd005ea05968dc676634385d1c9f349bd71ba1667ecd3be68438",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 153
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+    "current_sha256": "e3cd9c2880c18439f2e8a7b9dd10d9e42d25fa287490561509bbf356e86df2d8",
+    "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 865
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+    "current_sha256": "ff11bc91ba70eb795f68c0e501588b9860f9677683d9c7a53e3915ff00292015",
+    "original_sha256": "693a169cf1e91435c326ee05a17c928e85af10982c2c3bb95a5631ae76415a0a",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 333
+  },
+  {
+    "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+    "current_sha256": "5b023bde04c9ccfb35252523f9d7d6c0b3400d3a6eabb87d1a12f0abbd58e528",
+    "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 3397
+  },
+  {
+    "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+    "current_sha256": "9e12012c03e69c7ef7ba50d2cfb4918bfd21fe1b58e1593714fb10bf964e3d79",
+    "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 2703
+  },
+  {
+    "path": "src/mvdm-host/wow32/walias.c",
+    "current_sha256": "13297f6adb9a720d9600e124e014b0102b352ddabbc063d7e6de28b9efd8f2c6",
+    "original_sha256": "6118b6837c7ed291cc9d70446b7d691699d49c9ef6f2be60d8e0fac478d93b65",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 522
+  }
+]

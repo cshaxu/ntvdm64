@@ -90,6 +90,7 @@ int WowErrorDialogEvents(ERRORDIALOGINFO *pedgi);
  * exactly. The SoftPC BOOL macro does not match WNDENUMPROC. */
 INT_PTR CALLBACK ErrorDialogEvents(HWND hDlg, UINT wMsg, WPARAM wParam,
                                    LPARAM lParam);
+#line 89
 void SwpButtons(HWND hDlg, DWORD dwOptions);
 void SwpDosDialogs(HWND hDlg, HWND hWndCon,HWND SwpInsert, UINT SwpFlags);
 DWORD OemMessageToAnsiMessage(CHAR *, CHAR *);
@@ -502,6 +503,7 @@ DWORD OemMessageToAnsiMessage(CHAR *pBuff, CHAR *pMsg)
 /* The SoftPC host headers redefine BOOL as UINT.  WNDENUMPROC, however,
  * retains the public Win32 signed BOOL return representation. */
 int __stdcall GetThreadTopLevelWindow(HWND hWnd, LPARAM lParam)
+#line 495
 {
    PDWORD pdw = (PDWORD)lParam;
 
@@ -657,6 +659,7 @@ int ErrorDialogBox(char *message, char *pEdit, DWORD dwOptions)
  */
 /* DIVERGENCE(MVDM-SOFTPC-PATCH-003): see the source-shaped declaration above. */
 DWORD WINAPI ErrorDialogBoxThread(VOID *pv)
+#line 649
 {
     int    i;
     ERRORDIALOGINFO *pedgi = pv;
@@ -719,6 +722,7 @@ DWORD WINAPI ErrorDialogBoxThread(VOID *pv)
 
 INT_PTR CALLBACK ErrorDialogEvents(HWND hDlg, UINT wMsg, WPARAM wParam,
                                    LPARAM lParam)
+#line 710
 {
     ERRORDIALOGINFO *pedgi;
     CHAR  szBuff[MAX_PATH];

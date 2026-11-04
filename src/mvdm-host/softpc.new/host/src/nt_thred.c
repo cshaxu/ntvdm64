@@ -32,6 +32,7 @@ Revision History:
 void ccpu386newthread(void);
 void ccpu386exitthread(void);
 
+#line 29
 typedef struct _ThreadStartUpParameters {
         LPTHREAD_START_ROUTINE lpStartAddress;
         LPVOID                 lpParameter;

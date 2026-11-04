@@ -187,6 +187,7 @@ ERROR RECOVERY    :     errors are ignored
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::: INTERMODULE EXPORTS */
 
+#line 184
 IMPORT void ReinitIdealTime(struct host_timeval *);
 THREAD_DATA ThreadInfo;
 CRITICAL_SECTION TimerTickCS;
@@ -512,6 +513,7 @@ VOID host_init_bda_timer(void)
 #endif
 #line 488
 
+#line 500
 }
 
 
@@ -532,6 +534,7 @@ void host_GetSysTime(struct host_timeval *time)
     ULONG remainder;
 
         // Don't call kernel unless we have to.
+#line 519
     if (bDoingTicInterrupt) {
         liTime = RtlExtendedLargeIntegerDivide(
                                         CurrHeartBeat,
@@ -541,6 +544,7 @@ void host_GetSysTime(struct host_timeval *time)
          * signed IS32 while the preserved NTDLL ABI requires PULONG.  The
          * remainder is strictly below the positive divisor. */
         time->tv_usec = (IS32)remainder;
+#line 524
         time->tv_sec = liTime.LowPart;
         }
     else {

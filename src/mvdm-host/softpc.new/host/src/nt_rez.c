@@ -73,6 +73,7 @@ long host_read_resource(int type, char *name, byte *addr, int maxsize, int displ
         if (type == ROMS_REZ_ID)
             return maxsize <= 0 ? 0 : mvdm_softpc_firmware_read_embedded_rom(
                 name, addr, (uint32_t)maxsize);
+#line 69
         type = 0; // To stop unreferenced formal parameter errors
 
 #ifdef DELTA            //STF - make change to 8.3 compatible name
@@ -114,6 +115,7 @@ long size;              /* Quantity of data to write */
         char *hff_ret;
         extern char *host_find_file(char *name, char *path, int disp_err);
 
+#line 112
         host_block_timer ();
 
 #ifdef DELTA            //STF - make change to 8.3 compatible name
@@ -147,6 +149,7 @@ long size;              /* Quantity of data to write */
                          * but retain the path returned by host_find_file. */
                         file_fd = _open(hff_ret,O_RDWR|O_CREAT,S_IREAD|S_IWRITE);
 
+#line 140
                         if (file_fd != -1)
                         {
                                 _write (file_fd, addr, size);
