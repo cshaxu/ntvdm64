@@ -1,5 +1,5 @@
 #include "worker_spawn.h"
-#include "lib-win32/process/attributes.h"
+#include "lib-win32/process-attributes/attributes.h"
 
 /* Project-added startup transaction recovered from run16_worker_prepare.
  * The transient Job protects only unaccepted startup, not target lifetime.

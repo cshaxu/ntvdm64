@@ -17,8 +17,9 @@ does not change their source provenance, executable ownership or ABI.
 
 `src/lib-win32/rpc` carries local RPC binding and async completion mechanics;
 `src/lib-win32/io` carries checked overlapped pipe transfer, Console membership
-sampling and final native file-path resolution. `src/lib-win32/process` owns process
-attribute-list mechanics and `src/lib-win32/handle` owns explicit-process handle
+sampling and final native file-path resolution. `src/lib-win32/process-attributes` owns process
+attribute-list mechanics; `src/lib-win32/process-observation` owns generic process
+identity and exit-wait mechanisms; `src/lib-win32/handle` owns explicit-process handle
 duplication and remote cleanup. Their product-independent contracts depend only on native platform
 APIs. Product wire formats, RPC operations, frontend codecs and lifecycle
 policy stay in `common` or their executable owners. Generic libraries never
@@ -147,7 +148,7 @@ src/
   compat/
   common/{protocol,codec,console}/
   lib-nxvm/{types,base,kvm-base,kvm-window}/
-  lib-win32/{rpc,io}/
+  lib-win32/{rpc,io,handle,process-attributes,process-observation,process-hook}/
   worker-base/
   run16-exe/
   ntsrv-exe/

@@ -1,4 +1,4 @@
-#include "lib-win32/process/attributes.h"
+#include "lib-win32/process-attributes/attributes.h"
 /* NTSRV-private frontend registry; project adaptation,
  * not an original OpenNT mirror. Physical separation only: existing function
  * bodies, state authority and lock/resource contracts are preserved. */

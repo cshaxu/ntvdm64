@@ -115,3 +115,35 @@ and then all 12 selected Control gates in a complete repeat. The optional
 DOS4GW/NESticle external fixture was absent and skipped; Full was not run.
 Package `4d73890b-33b8-4edf-8ee7-0856c8b61761` was published only to this
 worktree's `assets/release`; all ten release hashes matched.
+
+## Follow-up P: process observation
+
+The owner directs `process-attributes`, `process-observation` and
+`process-hook` as separate siblings. The former `process` attribute provider
+was renamed and its archive and consumers updated. `process-observation` owns
+retaining a query/synchronize handle, obtaining process ID, creation time and
+image path, and one-shot exit-wait registration and synchronous callback
+drain. NTSRV retains task identity, parent/admission policy, insertion order,
+callback meaning, fail-fast decision and handle close. Its production
+observation path selects the library. Generic code never depends on common or
+private components.
+
+The initial real lifecycle fixture passed an invalid handle into Windows
+thread-pool wait registration and terminated with 0xC000070A. That is a test
+input/runner failure, not product evidence. The fixture was corrected to use
+valid owned wait objects; failure injection now tests registration and drain
+errors without submitting an invalid kernel wait to the thread pool.
+`tests/app/win32_process_observation_test.c` passed 16 checks including blocked
+callback drain; the injected-failure fixture passed three; the renamed process
+attributes fixture passed 36 and process-hook seven. The x86 and x64 production
+`native-observation-fixture.exe` and `dos-observation-fixture.exe` each passed
+identity, parent/replay, exit, rejection and cleanup cases. Build graph
+ownership and negative controls passed. Build/test commands, PID, time, exit
+status and output are retained under `build/t475-observation-p`.
+
+The x86/x64 product builds succeeded. Ten fresh input hashes and package hashes,
+63 immutable guest files and 274 NTVDM export ordinals passed. All 12 selected
+Control gates passed with identical ten-image package. The optional external
+DOS4GW/NESticle fixture was absent and skipped; Full was not run. Package
+`9e98af44-2d1d-4862-8795-5cabfff112c3` was published only in this worktree's
+`assets/release`, and all ten release hashes matched.
