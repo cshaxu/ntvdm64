@@ -671,6 +671,7 @@ HBITMAP CreateScreenBitmap(
 #endif /* WOW_ORIGINAL_DIALOG_TEMPLATE */
 #line 1674
 #if 0 // We use to do the dib-section create, but this breaks icons
+#line 1675
 #error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
 #else
 #if !defined(WOW_ORIGINAL_DIALOG_TEMPLATE)

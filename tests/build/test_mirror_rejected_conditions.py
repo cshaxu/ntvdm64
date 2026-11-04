@@ -122,7 +122,7 @@ for entry, block in zip(entries, blocks):
 print(f'PASS {len(entries)} retained guards: normal selection and rejected profiles ({os.environ.get("VSCMD_ARG_TGT_ARCH", "unknown")})')
 
 host_def = (repo / 'src/mvdm-host/softpc.new/host/inc/host_def.h').read_text(encoding='latin1')
-host_block = ('#ifdef i386\n#error Excluded unsupported i386 host library loader\n'
+host_block = ('#ifdef i386\n#line 221\n#error Excluded unsupported i386 host library loader\n'
               '#else\n#line 223\n#define SafeLoadLibrary(name) LoadLibrary(name)\n'
               '#endif\n#line 225\n')
 if host_def.count(host_block) != 1:
@@ -142,15 +142,14 @@ positions = [i for i, line in enumerate(dpmi) if marker in line]
 if len(positions) != 1:
     raise SystemExit('missing unique DPMI rejection')
 i = positions[0]
-if not (re.match(r'^\s*#\s*ifdef\s+i386\b', dpmi[i-2]) and
-        re.match(r'^\s*#\s*ifndef\s+CPU_40_STYLE\b', dpmi[i-1])):
-    raise SystemExit('DPMI rejection lost its i386/CPU40 boundary')
-probe.write_text('\n'.join(dpmi[i-2:i+1] + ['#endif', '#endif']) + '\n', encoding='ascii')
-allowed = subprocess.run(base[:-1] + ['/Di386', '/DCPU_40_STYLE'] + base[-1:], capture_output=True, text=True, errors='replace')
+if not (re.match(r'^\s*#\s*ifdef\s+i386\b', dpmi[i-2]) and dpmi[i-1].strip() == '#line 89'):
+    raise SystemExit('DPMI rejection lost its original i386 boundary')
+probe.write_text('\n'.join(dpmi[i-2:i+1] + ['#endif']) + '\n', encoding='ascii')
+allowed = subprocess.run(base[:-1] + ['/Ui386', '/DCPU_40_STYLE'] + base[-1:], capture_output=True, text=True, errors='replace')
 rejected = subprocess.run(base[:-1] + ['/Di386'] + base[-1:], capture_output=True, text=True, errors='replace')
 if allowed.returncode or not rejected.returncode or marker not in rejected.stdout + rejected.stderr:
     raise SystemExit('DPMI i386/CPU40 control failed: ' + allowed.stderr + rejected.stderr)
-print('PASS DPMI i386 with CPU40 accepted; legacy kernel path rejected')
+print('PASS DPMI software CPU40 accepted; i386 kernel path rejected')
 
 send_header = (repo / 'src/non-mvdm/windows/core/ntuser/inc/ntsend.h').as_posix()
 probe.write_text(f'#include "{send_header}"\nCOPYLPTSTRID(p,s)\nCLEANUPLPTSTR(x)\n', encoding='ascii')
@@ -187,7 +186,7 @@ print('PASS original ntrtl MIDL_PASS inline selection')
 
 virtual_state = (repo / 'src/mvdm-host/softpc.new/host/src/nt_msscs.c').read_text(encoding='latin1').split('\n')
 selected = [i for i, line in enumerate(virtual_state) if 'fVirtualInt |= MIPS_BIT_MASK;' in line]
-if len(selected) != 2:
+if len(selected) != 1:
     raise SystemExit('missing CPU40 virtual interrupt state in an original outer alternative')
 i = selected[0]
 if virtual_state[i-1].strip() != '#ifdef CPU_40_STYLE' or virtual_state[i+1].strip() != '#else':
@@ -199,15 +198,15 @@ if allowed.returncode or not rejected.returncode or 'Excluded unsupported non-CP
     raise SystemExit('virtual interrupt state CPU40 selection failed: ' + allowed.stderr + rejected.stderr)
 print('PASS CPU40 virtual interrupt state; unsupported hardware-monitor alternative rejected')
 
-if virtual_state[i-2].strip() != '#ifndef i386' or virtual_state[i+4].strip() != '#else' or virtual_state[i+10].strip() != '#endif /* i386 */':
+if virtual_state[i-2].strip() != '#ifndef i386' or virtual_state[i+4].strip() != '#else' or virtual_state[i+7].strip() != '#endif /* i386 */':
     raise SystemExit('virtual interrupt state lost original i386 outer boundary')
-probe.write_text('\n'.join(virtual_state[i-2:i+11]) + '\n', encoding='ascii')
+probe.write_text('\n'.join(virtual_state[i-2:i+8]) + '\n', encoding='ascii')
 allowed = subprocess.run(base[:-1] + ['/DCPU_40_STYLE'] + base[-1:], capture_output=True, text=True, errors='replace')
 combined = subprocess.run(base[:-1] + ['/DCPU_40_STYLE', '/Di386'] + base[-1:], capture_output=True, text=True, errors='replace')
 rejected = subprocess.run(base[:-1] + ['/Di386'] + base[-1:], capture_output=True, text=True, errors='replace')
-if allowed.returncode or combined.returncode or 'fVirtualInt |= MIPS_BIT_MASK;' not in combined.stdout or not rejected.returncode or 'Excluded unsupported non-CPU40 virtual interrupt state' not in rejected.stdout + rejected.stderr:
+if allowed.returncode or not combined.returncode or not rejected.returncode or 'Unsupported excluded original configuration' not in combined.stdout + combined.stderr or 'Unsupported excluded original configuration' not in rejected.stdout + rejected.stderr:
     raise SystemExit('original i386 virtual interrupt boundary failed: ' + allowed.stderr + rejected.stderr)
-print('PASS original i386 boundary with CPU40 behavior preserved in either arm')
+print('PASS original i386 boundary: CPU40 software path retained and hardware-monitor path rejected')
 
 mouse = (repo / 'src/mvdm-host/softpc.new/base/keymouse/mouse_io.c').read_text(encoding='latin1')
 mouse = mouse[mouse.index('LOCAL void jump_to_user_subroutine IFN3'):]
@@ -222,8 +221,13 @@ print('PASS original mouse CPU30 boundary and selected CPU40 callback')
 
 sas = (repo / 'src/mvdm-host/softpc.new/base/inc/sas.h').read_text(encoding='latin1').splitlines()
 hits = [i for i, line in enumerate(sas) if 'unsupported non-CPU40 SAS interface' in line]
-if len(hits) != 1 or not sas[hits[0] - 1].strip().startswith('#else'):
+if len(hits) != 1:
     raise SystemExit('missing original SAS non-CPU40 alternative rejection')
+cut = hits[0] - 1
+while cut >= 0 and re.match(r'^\s*#\s*line\b', sas[cut]):
+    cut -= 1
+if cut < 0 or not sas[cut].strip().startswith('#else'):
+    raise SystemExit('missing original SAS non-CPU40 alternative boundary')
 probe.write_text('#ifdef CPU_40_STYLE\n#else\n' + sas[hits[0]] + '\n#endif\n', encoding='ascii')
 allowed = subprocess.run(base[:-1] + ['/DCPU_40_STYLE'] + base[-1:], capture_output=True, text=True, errors='replace')
 rejected = subprocess.run(base, capture_output=True, text=True, errors='replace')
@@ -323,7 +327,7 @@ print('PASS selected WOW thunks and excluded host PMODE32 profile')
 
 # Original WOW outer selectors reject the unselected fast-monitor profile.
 fastwow = (repo / 'src/mvdm-host/wow32/wow32.c').read_text(encoding='latin1')
-pattern = r'(?m)^#if FASTBOPPING\s*\n#error Excluded unsupported FASTBOPPING host profile\s*$'
+pattern = r'(?m)^#if FASTBOPPING[ \t]*\n(?:#line\s+\d+[ \t]*\n)?#error Excluded unsupported FASTBOPPING host profile[ \t]*$'
 if len(re.findall(pattern, fastwow)) != 3:
     raise SystemExit('missing one of the three original FASTBOPPING outer guards')
 probe.write_text('#if FASTBOPPING\n#error Excluded unsupported FASTBOPPING host profile\n#endif\n', encoding='ascii')
@@ -359,7 +363,7 @@ print('PASS original video selectors and non-monitor rejection')
 
 # Original mouse NTVDM outer guards must reject unsupported host profiles.
 mouse = (repo / 'src/mvdm-host/softpc.new/base/keymouse/mouse_io.c').read_text(encoding='latin1')
-pattern = r'(?m)^#ifndef NTVDM\s*\n#error Excluded unsupported non-NTVDM mouse profile\s*$'
+pattern = r'(?m)^#ifndef NTVDM[ \t]*\n(?:#line\s+\d+[ \t]*\n)?#error Excluded unsupported non-NTVDM mouse profile[ \t]*$'
 if len(re.findall(pattern, mouse)) != 7:
     raise SystemExit('seven original mouse NTVDM outer guards not restored')
 probe.write_text('#ifndef NTVDM\n#error Excluded unsupported non-NTVDM mouse profile\n#endif\n', encoding='ascii')
@@ -412,7 +416,7 @@ print('PASS original RTL time selector and both operands')
 # DPMI kernel-VDM state is not available in the selected CCPU worker.
 dpmi_data = (repo / 'src/mvdm-host/dpmi32/dpmidata.h').read_text(encoding='latin1')
 marker = '#error Excluded unsupported i386 kernel VDM DPMI state'
-if '#ifdef i386\n' + marker not in dpmi_data:
+if not re.search(r'(?m)^#ifdef i386[ \t]*\n(?:#line\s+\d+[ \t]*\n)?' + re.escape(marker) + r'[ \t]*$', dpmi_data):
     raise SystemExit('DPMI original i386 exclusion missing')
 probe.write_text('#ifdef i386\n' + marker + '\n#endif\n', encoding='ascii')
 allowed = subprocess.run(base[:-1] + ['/Ui386'] + base[-1:], capture_output=True, text=True, errors='replace')
@@ -424,7 +428,7 @@ print('PASS DPMI i386 kernel state exclusion')
 # Two original i386-only fast IRET arms cannot run in the CCPU worker.
 dpmi = (repo / 'src/mvdm-host/dpmi32/dpmiint.c').read_text(encoding='latin1')
 marker = '#error Excluded unsupported i386 kernel VDM interrupt return'
-if len(re.findall(r'(?m)^#ifdef i386\s*\n' + re.escape(marker) + r'\s*$', dpmi)) != 2:
+if len(re.findall(r'(?m)^#ifdef i386[ \t]*\n(?:#line\s+\d+[ \t]*\n)?' + re.escape(marker) + r'[ \t]*$', dpmi)) != 2:
     raise SystemExit('original i386 IRET guards missing')
 probe.write_text('#ifdef i386\n' + marker + '\n#endif\n', encoding='ascii')
 allowed = subprocess.run(base[:-1] + ['/Ui386'] + base[-1:], capture_output=True, text=True, errors='replace')

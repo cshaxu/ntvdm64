@@ -1,0 +1,32 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+  "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+  "current_sha256": "c44237e4e365437f8bb6cc6a233737e8b8c12dadc7ee9402be78d86e72655821",
+  "prior_selection_records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "line": "65",
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "chain_start": "65",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "59b57920a816fbc1e46413c6c9747468b2f27149f46c7af27f69aa06e680211a"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "line": "88",
+      "directive": "ifdef",
+      "expression": "WOW_ORIGINAL_MNEMONIC_DRAWING",
+      "chain_start": "88",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "59b57920a816fbc1e46413c6c9747468b2f27149f46c7af27f69aa06e680211a"
+    }
+  ],
+  "review": "Mapped original top-level groups using original physical line anchors despite reordered subset bodies. Original 59-640 FE_SB branch is excluded as a whole, so its nested _USERK_ groups correctly do not remain. Added missing original anchors for excluded original groups at 22, 59 and 811. Existing project-owned mnemonic-drawing selector and selected rendering logic remain.",
+  "limitations": "Build and image comparison pending; no assertion for unsupported FE_SB, _USERK_ and DEBUG contexts."
+}

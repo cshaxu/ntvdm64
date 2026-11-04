@@ -114,8 +114,10 @@ WORD   BWVKey = 0;
 char   achES[]="EyeStrain";
 #endif
 #ifdef YODA
+#line 97
 #error Excluded unsupported YODA configuration
 #endif
+#line 99
 BOOL   stdoutRedirected=FALSE;
 ULONG  CntrlHandlerState=0;
 
@@ -202,8 +204,10 @@ ULONG event_thread_blocked_reason = 0xFFFFFFFF;
 
 HCURSOR cur_cursor = NULL;     /* Current cursor handle */
 #ifdef X86GFX
+#line 179
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
+#line 181
 
 
 /*@ACW========================================================================
@@ -641,8 +645,10 @@ void nt_process_focus(PFOCUS_EVENT_RECORD FocusEvent)
         MouseOutOfFocus();      /* turn off mouse 'attachment' */
 
 #ifndef PROD
+#line 595
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 597
     }
 
 
@@ -932,12 +938,10 @@ VOID nt_process_keys(PKEY_EVENT_RECORD KeyEvent)
 
         switch(KeyEvent->wVirtualKeyCode) {
 #ifdef YODA
+#line 886
 #error Excluded unsupported YODA configuration
-
-
-
-
 #endif
+#line 892
 
         case VK_SHIFT:
             fake_shift = *KeyEvent;
@@ -1064,8 +1068,10 @@ void nt_process_mouse(PMOUSE_EVENT_RECORD MouseEvent)
      * mouse interrupt handler code.
      */
 #ifdef X86GFX
+#line 1015
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
+#line 1017
     {
     ULONG maxWidth = sc.PC_W_Width,
           maxHeight = sc.PC_W_Height;
@@ -1263,38 +1269,10 @@ GLOBAL void GetScaleEvent(void)
 
 
 #ifdef YODA
+#line 1210
 #error Excluded unsupported YODA configuration
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #endif
+#line 1242
 
 
 // Host funcs to support base keyboard Mods. (Prevents Windows calls from
@@ -1381,6 +1359,7 @@ BOOL CntrlHandler(ULONG CtrlType)
        case CTRL_LOGOFF_EVENT:
        case CTRL_SHUTDOWN_EVENT:
 #ifndef PROD
+#line 1328
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1333
@@ -1405,9 +1384,10 @@ BOOL CntrlHandler(ULONG CtrlType)
             break;
 
 #ifndef PROD
+#line 1349
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 1413
+#line 1352
        }
     return TRUE;
 }
@@ -1501,8 +1481,10 @@ BOOL CntrlHandler(ULONG CtrlType)
 	       ;
 
 #ifdef MONITOR
+#line 1423
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
+#line 1425
 
 	    /* If keeping window open when exiting and fullscreen, return to desktop */
 	    /* Transition made simple as VDM de-registered from console */
@@ -1577,6 +1559,7 @@ BOOL CntrlHandler(ULONG CtrlType)
         DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);
 #line 1493
 #ifndef PROD
+#line 1494
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1496
@@ -1616,16 +1599,20 @@ void nt_resume_event_thread(void)
 
 	enable_stream_io();
 #ifdef X86GFX
+#line 1526
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
+#line 1529
 
     }
     nt_init_event_thread();  // does nothing if init already
 
     CntrlHandlerState &= ~CNTRL_VDMBLOCKED;
 #ifndef PROD
+#line 1535
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 1537
 
     // Setup Console modes
     SetupConsoleMode();

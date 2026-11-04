@@ -28,9 +28,10 @@ Revision History:
 #include "wow_user_probe_bindings.h"
 #line 27
 #if defined(ALLOC_PRAGMA)
+#line 28
 #error DIVERGENCE OPENNT-HOST-144: kernel allocation pragma profile is not selected
 #endif
-#line 143
+#line 31
 
 #undef ProbeForRead
 NTKERNELAPI

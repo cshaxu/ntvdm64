@@ -1,0 +1,186 @@
+{
+  "ntdddisk": [
+    {
+      "tree": "build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/dem/dem.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/dem/demfcb.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/dem/demdata.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/dem/demdir.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/dem/demdisp.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/dem/demerror.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/dem/demfile.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/dem/demgset.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/dem/demioctl.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/dem/demhndl.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/dem/demlock.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/dem/demmisc.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/dem/demlabel.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/dem/demdasd.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/dem/demsrch.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/host/nt_fdisk.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/host/nt_rflop.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x64-release\\worker-reference-x86",
+      "object": "obj/dem/dem.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x64-release\\worker-reference-x86",
+      "object": "obj/dem/demfcb.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x64-release\\worker-reference-x86",
+      "object": "obj/dem/demdata.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x64-release\\worker-reference-x86",
+      "object": "obj/dem/demdir.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x64-release\\worker-reference-x86",
+      "object": "obj/dem/demdisp.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x64-release\\worker-reference-x86",
+      "object": "obj/dem/demerror.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x64-release\\worker-reference-x86",
+      "object": "obj/dem/demhndl.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x64-release\\worker-reference-x86",
+      "object": "obj/dem/demfile.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x64-release\\worker-reference-x86",
+      "object": "obj/dem/demgset.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x64-release\\worker-reference-x86",
+      "object": "obj/dem/demioctl.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x64-release\\worker-reference-x86",
+      "object": "obj/dem/demlock.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x64-release\\worker-reference-x86",
+      "object": "obj/dem/demmisc.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x64-release\\worker-reference-x86",
+      "object": "obj/dem/demlabel.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x64-release\\worker-reference-x86",
+      "object": "obj/dem/demsrch.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x64-release\\worker-reference-x86",
+      "object": "obj/dem/demdasd.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x64-release\\worker-reference-x86",
+      "object": "obj/host/nt_fdisk.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x64-release\\worker-reference-x86",
+      "object": "obj/host/nt_rflop.obj",
+      "dependency": "../../../../src/non-mvdm/public/ddk/inc/ntdddisk.h"
+    }
+  ],
+  "ntdbg": [
+    {
+      "tree": "build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/mvdm-debugger/dbg.obj",
+      "dependency": "../../../../src/non-mvdm/public/sdk/inc/ntdbg.h"
+    },
+    {
+      "tree": "build\\.ninja\\msvc-x64-release\\worker-reference-x86",
+      "object": "obj/mvdm-debugger/dbg.obj",
+      "dependency": "../../../../src/non-mvdm/public/sdk/inc/ntdbg.h"
+    }
+  ]
+}

@@ -1,0 +1,212 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_event.c",
+  "original_sha256": "7f555a87ba029627d6811c0f7b96964bb8a96af90c60c89012975a4ac5442076",
+  "current_sha256": "9b53e1118f3e91bbbf625aac7d73e684884429d554d0f5af0e3fb128a9af86c6",
+  "local_ntvdm_groups": [
+    1479,
+    1509
+  ],
+  "prior_selection_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "line": "112",
+      "directive": "ifndef",
+      "expression": "MONITOR",
+      "chain_start": "112",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "46e6f32212d4631acda77625b8195eacd4ba5924f1c0fc1aa46693266bbdd8fc"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "line": "116",
+      "directive": "ifdef",
+      "expression": "YODA",
+      "chain_start": "116",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "46e6f32212d4631acda77625b8195eacd4ba5924f1c0fc1aa46693266bbdd8fc"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "line": "204",
+      "directive": "ifdef",
+      "expression": "X86GFX",
+      "chain_start": "204",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "46e6f32212d4631acda77625b8195eacd4ba5924f1c0fc1aa46693266bbdd8fc"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "line": "631",
+      "directive": "ifndef",
+      "expression": "MONITOR",
+      "chain_start": "631",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "46e6f32212d4631acda77625b8195eacd4ba5924f1c0fc1aa46693266bbdd8fc"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "line": "643",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "643",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "46e6f32212d4631acda77625b8195eacd4ba5924f1c0fc1aa46693266bbdd8fc"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "line": "922",
+      "directive": "ifndef",
+      "expression": "MONITOR",
+      "chain_start": "922",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "46e6f32212d4631acda77625b8195eacd4ba5924f1c0fc1aa46693266bbdd8fc"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "line": "934",
+      "directive": "ifdef",
+      "expression": "YODA",
+      "chain_start": "934",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "46e6f32212d4631acda77625b8195eacd4ba5924f1c0fc1aa46693266bbdd8fc"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "line": "1066",
+      "directive": "ifdef",
+      "expression": "X86GFX",
+      "chain_start": "1066",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "46e6f32212d4631acda77625b8195eacd4ba5924f1c0fc1aa46693266bbdd8fc"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "line": "1222",
+      "directive": "ifndef",
+      "expression": "X86GFX",
+      "chain_start": "1222",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "46e6f32212d4631acda77625b8195eacd4ba5924f1c0fc1aa46693266bbdd8fc"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "line": "1265",
+      "directive": "ifdef",
+      "expression": "YODA",
+      "chain_start": "1265",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "46e6f32212d4631acda77625b8195eacd4ba5924f1c0fc1aa46693266bbdd8fc"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "line": "1383",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "1383",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "46e6f32212d4631acda77625b8195eacd4ba5924f1c0fc1aa46693266bbdd8fc"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "line": "1407",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "1407",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "46e6f32212d4631acda77625b8195eacd4ba5924f1c0fc1aa46693266bbdd8fc"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "line": "1479",
+      "directive": "ifdef",
+      "expression": "X86GFX",
+      "chain_start": "1479",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "46e6f32212d4631acda77625b8195eacd4ba5924f1c0fc1aa46693266bbdd8fc"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "line": "1502",
+      "directive": "ifdef",
+      "expression": "MONITOR",
+      "chain_start": "1502",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "46e6f32212d4631acda77625b8195eacd4ba5924f1c0fc1aa46693266bbdd8fc"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "line": "1508",
+      "directive": "ifdef",
+      "expression": "X86GFX",
+      "chain_start": "1508",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "46e6f32212d4631acda77625b8195eacd4ba5924f1c0fc1aa46693266bbdd8fc"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "line": "1580",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "1580",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "46e6f32212d4631acda77625b8195eacd4ba5924f1c0fc1aa46693266bbdd8fc"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "line": "1617",
+      "directive": "ifdef",
+      "expression": "X86GFX",
+      "chain_start": "1617",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "46e6f32212d4631acda77625b8195eacd4ba5924f1c0fc1aa46693266bbdd8fc"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "line": "1625",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "1625",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "46e6f32212d4631acda77625b8195eacd4ba5924f1c0fc1aa46693266bbdd8fc"
+    }
+  ],
+  "review": "Two local X86GFX guards are already explicit errors; the actual nt_event.obj compiler command omits X86GFX. Selected software presentation and event handling are unchanged. Original conditional groups align recursively through retained bodies; existing errors have original physical LF line anchors.",
+  "limitations": "Build, release comparison and final context audit pending; no guest changes."
+}

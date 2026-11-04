@@ -1,0 +1,76 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c",
+  "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
+  "current_sha256": "6509290c8c66b7cdab375d7957cb20df326e2074e0cd7de7e8942dd018a1b41e",
+  "prior_selection_records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "line": "14",
+      "directive": "if",
+      "expression": "defined(WOW_ORIGINAL_DIALOG_TEMPLATE)",
+      "chain_start": "14",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "0cf78b4c34038aafce573f73380ce19ef118490cae2023dcea386eb65bda3b6f"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "line": "180",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "14",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "0cf78b4c34038aafce573f73380ce19ef118490cae2023dcea386eb65bda3b6f"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "line": "184",
+      "directive": "ifndef",
+      "expression": "WOW_BITMAP_FIXTURE_BINDINGS",
+      "chain_start": "184",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "0cf78b4c34038aafce573f73380ce19ef118490cae2023dcea386eb65bda3b6f"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "line": "190",
+      "directive": "ifndef",
+      "expression": "WOW_BITMAP_FIXTURE_BINDINGS",
+      "chain_start": "190",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "0cf78b4c34038aafce573f73380ce19ef118490cae2023dcea386eb65bda3b6f"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "line": "671",
+      "directive": "if",
+      "expression": "0",
+      "chain_start": "671",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "0cf78b4c34038aafce573f73380ce19ef118490cae2023dcea386eb65bda3b6f"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "line": "673",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "671",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "0cf78b4c34038aafce573f73380ce19ef118490cae2023dcea386eb65bda3b6f"
+    }
+  ],
+  "review": "Mapped all original top-level conditional groups by physical original line despite their reordered subset placement. Added missing #line 1675 to the original literal-disabled branch. Retained all original selected subset and local dialog-template/bitmap-fixture selectors, including the currently used selected side of the original #if 0/#else. Other original DEBUG, LATER and literal-disabled groups are already rejected.",
+  "limitations": "Build and binary comparison pending; no assertion about unsupported debug or alternate platform builds."
+}

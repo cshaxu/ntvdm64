@@ -1,0 +1,212 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\illegalp.c",
+  "original_sha256": "94f049032a9298802cab09afc61651469dcbf1fec80ab36444e5c2fed2f681ad",
+  "current_sha256": "1ff067e179ac7aa383720f154df6384d6c5ff4b9582001b835190b7f294db38f",
+  "local_ntvdm_groups": [
+    43,
+    102
+  ],
+  "prior_selection_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "line": "16",
+      "directive": "ifdef",
+      "expression": "SEGMENTATION",
+      "chain_start": "16",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "8318b388cdd23844d6e62b9a09ffcd9f2051be3c294db4b32a3c63dcdf294ba6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "line": "43",
+      "directive": "ifdef",
+      "expression": "NTVDM",
+      "chain_start": "43",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "8318b388cdd23844d6e62b9a09ffcd9f2051be3c294db4b32a3c63dcdf294ba6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "line": "47",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "47",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "8318b388cdd23844d6e62b9a09ffcd9f2051be3c294db4b32a3c63dcdf294ba6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "line": "57",
+      "directive": "ifdef",
+      "expression": "PROD",
+      "chain_start": "57",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "8318b388cdd23844d6e62b9a09ffcd9f2051be3c294db4b32a3c63dcdf294ba6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "line": "59",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "57",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "8318b388cdd23844d6e62b9a09ffcd9f2051be3c294db4b32a3c63dcdf294ba6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "line": "67",
+      "directive": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "chain_start": "67",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "8318b388cdd23844d6e62b9a09ffcd9f2051be3c294db4b32a3c63dcdf294ba6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "line": "74",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "74",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "8318b388cdd23844d6e62b9a09ffcd9f2051be3c294db4b32a3c63dcdf294ba6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "line": "84",
+      "directive": "ifdef",
+      "expression": "NTVDM",
+      "chain_start": "84",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "8318b388cdd23844d6e62b9a09ffcd9f2051be3c294db4b32a3c63dcdf294ba6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "line": "97",
+      "directive": "ifdef",
+      "expression": "NTVDM",
+      "chain_start": "97",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "8318b388cdd23844d6e62b9a09ffcd9f2051be3c294db4b32a3c63dcdf294ba6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "line": "105",
+      "directive": "ifndef",
+      "expression": "NTVDM",
+      "chain_start": "105",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "8318b388cdd23844d6e62b9a09ffcd9f2051be3c294db4b32a3c63dcdf294ba6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "line": "106",
+      "directive": "ifdef",
+      "expression": "PROD",
+      "chain_start": "106",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "8318b388cdd23844d6e62b9a09ffcd9f2051be3c294db4b32a3c63dcdf294ba6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "line": "108",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "106",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "8318b388cdd23844d6e62b9a09ffcd9f2051be3c294db4b32a3c63dcdf294ba6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "line": "112",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "105",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "8318b388cdd23844d6e62b9a09ffcd9f2051be3c294db4b32a3c63dcdf294ba6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "line": "113",
+      "directive": "ifdef",
+      "expression": "PROD",
+      "chain_start": "113",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "8318b388cdd23844d6e62b9a09ffcd9f2051be3c294db4b32a3c63dcdf294ba6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "line": "114",
+      "directive": "if",
+      "expression": "define(MONITOR) || define(CPU_40_STYLE)",
+      "chain_start": "114",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "8318b388cdd23844d6e62b9a09ffcd9f2051be3c294db4b32a3c63dcdf294ba6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "line": "116",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "114",
+      "depth": "3",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "8318b388cdd23844d6e62b9a09ffcd9f2051be3c294db4b32a3c63dcdf294ba6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "line": "145",
+      "directive": "ifndef",
+      "expression": "NTVDM",
+      "chain_start": "145",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "8318b388cdd23844d6e62b9a09ffcd9f2051be3c294db4b32a3c63dcdf294ba6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "line": "151",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "151",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "8318b388cdd23844d6e62b9a09ffcd9f2051be3c294db4b32a3c63dcdf294ba6"
+    }
+  ],
+  "review": "Excluded the unselected original define(MONITOR) conditional arm. The existing MSVC build logs C4067 for this original expression and previous selection witnesses select its else; the selected alternative remains. Two local NTVDM diagnostic bindings are preserved. Original conditional groups align recursively through retained bodies; existing errors have original physical LF line anchors.",
+  "limitations": "Build, release comparison and final context audit pending; no guest changes."
+}

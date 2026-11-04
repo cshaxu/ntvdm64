@@ -1,0 +1,168 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cpu.c",
+  "original_sha256": "3f77f06e497854b00f58acde8bfe7b5e67af7c5e67174deb579cd76e13f5830f",
+  "current_sha256": "2180948f5660f3b1b46548f398c4e73926b4c2797316f35850fc66da17a5076b",
+  "local_ntvdm_groups": [
+    53,
+    121
+  ],
+  "prior_selection_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "line": "35",
+      "directive": "ifdef",
+      "expression": "CPU_40_STYLE",
+      "chain_start": "35",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "eb7e6b5cafa6089968f7209ed63ff4ead2c1df9cc29cbd3686b765ef03597d6c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "line": "53",
+      "directive": "ifndef",
+      "expression": "CCPU",
+      "chain_start": "53",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "eb7e6b5cafa6089968f7209ed63ff4ead2c1df9cc29cbd3686b765ef03597d6c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "line": "56",
+      "directive": "ifdef",
+      "expression": "A2CPU",
+      "chain_start": "56",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "eb7e6b5cafa6089968f7209ed63ff4ead2c1df9cc29cbd3686b765ef03597d6c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "line": "60",
+      "directive": "ifdef",
+      "expression": "I286",
+      "chain_start": "60",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "eb7e6b5cafa6089968f7209ed63ff4ead2c1df9cc29cbd3686b765ef03597d6c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "line": "72",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "72",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "eb7e6b5cafa6089968f7209ed63ff4ead2c1df9cc29cbd3686b765ef03597d6c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "line": "103",
+      "directive": "ifdef",
+      "expression": "CCPU",
+      "chain_start": "103",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "eb7e6b5cafa6089968f7209ed63ff4ead2c1df9cc29cbd3686b765ef03597d6c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "line": "110",
+      "directive": "ifdef",
+      "expression": "_ALPHA_",
+      "chain_start": "110",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "eb7e6b5cafa6089968f7209ed63ff4ead2c1df9cc29cbd3686b765ef03597d6c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "line": "135",
+      "directive": "ifdef",
+      "expression": "CCPU",
+      "chain_start": "135",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "eb7e6b5cafa6089968f7209ed63ff4ead2c1df9cc29cbd3686b765ef03597d6c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "line": "159",
+      "directive": "ifndef",
+      "expression": "MONITOR",
+      "chain_start": "159",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "eb7e6b5cafa6089968f7209ed63ff4ead2c1df9cc29cbd3686b765ef03597d6c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "line": "162",
+      "directive": "ifndef",
+      "expression": "CCPU",
+      "chain_start": "162",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "eb7e6b5cafa6089968f7209ed63ff4ead2c1df9cc29cbd3686b765ef03597d6c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "line": "169",
+      "directive": "ifdef",
+      "expression": "CCPU",
+      "chain_start": "169",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "eb7e6b5cafa6089968f7209ed63ff4ead2c1df9cc29cbd3686b765ef03597d6c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "line": "175",
+      "directive": "ifdef",
+      "expression": "A3CPU",
+      "chain_start": "175",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "eb7e6b5cafa6089968f7209ed63ff4ead2c1df9cc29cbd3686b765ef03597d6c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "line": "220",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "220",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "eb7e6b5cafa6089968f7209ed63ff4ead2c1df9cc29cbd3686b765ef03597d6c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "line": "235",
+      "directive": "ifdef",
+      "expression": "CPU_40_STYLE",
+      "chain_start": "235",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "eb7e6b5cafa6089968f7209ed63ff4ead2c1df9cc29cbd3686b765ef03597d6c"
+    }
+  ],
+  "review": "Restored two original ALPHA/else frames and two non-PROD guards around the preserved GDP field adaptations. Actual nt_cpu.obj commands select CCPU and PROD and do not define ALPHA. Two local CCPU binding guards are retained. Original conditional groups align recursively through retained bodies; existing errors have original physical LF line anchors.",
+  "limitations": "Build, release comparison and final context audit pending; no guest changes."
+}

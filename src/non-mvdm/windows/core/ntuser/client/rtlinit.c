@@ -189,8 +189,10 @@ PVOID AllocLookasideEntry(
 #endif /* WOW_ORIGINAL_EDIT_LOOKASIDE */
 #line 319
 #if DBG
+#line 320
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #endif // DBG
+#line 322
 #if defined(WOW_ORIGINAL_EDIT_LOOKASIDE)
 #line 322
         if ((pEntry = UserLocalAlloc(0, pla->EntrySize)) == NULL)
@@ -200,8 +202,10 @@ PVOID AllocLookasideEntry(
 #endif /* WOW_ORIGINAL_EDIT_LOOKASIDE */
 #line 326
 #if DBG
+#line 327
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #endif // DBG
+#line 333
 #if defined(WOW_ORIGINAL_EDIT_LOOKASIDE)
 #line 333
 
@@ -223,8 +227,10 @@ void FreeLookasideEntry(
 #endif /* WOW_ORIGINAL_EDIT_LOOKASIDE */
 #line 349
 #if DBG
+#line 350
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #endif // DBG
+#line 352
 #if defined(WOW_ORIGINAL_EDIT_LOOKASIDE)
 #line 352
 
@@ -239,8 +245,10 @@ void FreeLookasideEntry(
 #endif /* WOW_ORIGINAL_EDIT_LOOKASIDE */
 #line 361
 #if DBG
+#line 362
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #endif // DBG
+#line 364
 #if defined(WOW_ORIGINAL_EDIT_LOOKASIDE)
 #line 364
         UserLocalFree(pEntry);

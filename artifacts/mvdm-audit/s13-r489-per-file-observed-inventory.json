@@ -2,7 +2,7 @@
   "baseline_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r379.zip",
   "graph_inventory": "s13-r473-all-graph-coverage.json",
   "total_observed_files": 1057,
-  "completed_files": 1005,
+  "completed_files": 1017,
   "records": [
     {
       "path": "src/mvdm-host/dbg/dbg.c",
@@ -5378,8 +5378,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "completed-original-conditional-tree",
-      "evidence": "s13-r1073-basedef-full-file.json"
+      "status": "deferred-original-selected-line-incorrect",
+      "evidence": "s13-r1220-base-def-line-reopen.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
@@ -6532,14 +6532,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\illegalp.c",
-      "current_sha256": "10a5bc573037eebf5467470b2ff8ca79f4a9f47085eedf51dc977d22bf3d30da",
+      "current_sha256": "1ff067e179ac7aa383720f154df6384d6c5ff4b9582001b835190b7f294db38f",
       "original_sha256": "94f049032a9298802cab09afc61651469dcbf1fec80ab36444e5c2fed2f681ad",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "deferred-depth1-original-alignment",
-      "evidence": "s13-r894-illegalp-source-contexts.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1197-illegalp-full-file.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
@@ -6574,8 +6574,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "completed-original-conditional-tree",
-      "evidence": "s13-r1111-full-file.json"
+      "status": "deferred-original-selected-line-incorrect",
+      "evidence": "s13-r1219-timer-line-reopen.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/timestrb.c",
@@ -7373,14 +7373,14 @@
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cpu.c",
-      "current_sha256": "877468c17b071687f1d26474b13f719373a46902a7f6b851388dbdd8a7f361c1",
+      "current_sha256": "2180948f5660f3b1b46548f398c4e73926b4c2797316f35850fc66da17a5076b",
       "original_sha256": "3f77f06e497854b00f58acde8bfe7b5e67af7c5e67174deb579cd76e13f5830f",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "deferred-depth1-original-alignment",
-      "evidence": "s13-r917-ntcpu-structure-review.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1204-ntcpu-full-file.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
@@ -7448,14 +7448,14 @@
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_event.c",
-      "current_sha256": "517c246720970ad2b6b575c9721c13801910576d094e99d09ad6241224a6e488",
+      "current_sha256": "9b53e1118f3e91bbbf625aac7d73e684884429d554d0f5af0e3fb128a9af86c6",
       "original_sha256": "7f555a87ba029627d6811c0f7b96964bb8a96af90c60c89012975a4ac5442076",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "deferred-depth1-original-alignment",
-      "evidence": "s13-r921-ntevent-structure-review.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1205-ntevent-full-file.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_fdisk.c",
@@ -10084,13 +10084,13 @@
     {
       "path": "src/non-mvdm/base/ntos/ex/probe.c",
       "original": "O:\\repos.external\\OpenNT\\base\\ntos\\ex\\probe.c",
-      "current_sha256": "b32dde63fa296acffbf472259792568fcb167c24acb5a8d89d02b6314fd77302",
+      "current_sha256": "ed5e799b4e8b7595b44f1b6162b1d438e7826716b87202779265291673553ed2",
       "original_sha256": "0d1cae414b609c624e6bdf04fa28ebd84ff38dbb9687a63d8bc9e840c2f2372b",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r949-probe-context.json"
+      "status": "completed-original-conditional-tree",
+      "evidence": "s13-r1202-full-file.json"
     },
     {
       "path": "src/non-mvdm/base/ntos/rtl/environ.c",
@@ -10334,8 +10334,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r959-packstr-local-context.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1198-local-full-file.json"
     },
     {
       "path": "src/non-mvdm/ds/netapi/netlib/svcinfo.c",
@@ -10487,13 +10487,14 @@
     {
       "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
       "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\xactsrv\\apisvc.c",
-      "current_sha256": "d321412ac340d83d55d034a9daf89e0fd594b1815fdbedecac9f749871cc83d2",
+      "current_sha256": "631162e50772f92b2526660245630bc178a3bb501cb6a92bb58f7605e76add83",
       "original_sha256": "7a0681e0d01f173edd31afac52c0a35cf7e2fc6711abcb4e224de06f116bdaf8",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "completed-original-unicode-selected"
+      "status": "completed-original-conditional-tree",
+      "evidence": "s13-r1201-full-file.json"
     },
     {
       "path": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
@@ -11532,13 +11533,13 @@
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
       "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c",
-      "current_sha256": "f973b4619123a2c31ea9f0734455f2bf4735f17e6f24aa1179c6104f36a96fd9",
+      "current_sha256": "6509290c8c66b7cdab375d7957cb20df326e2074e0cd7de7e8942dd018a1b41e",
       "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "deferred-depth1-original-alignment",
-      "evidence": "s13-r986-clres-structure-review.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1211-clres-full-file.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
@@ -11895,13 +11896,13 @@
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
       "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\rtlinit.c",
-      "current_sha256": "06dad1cd402c2712b21e5b573ea8be67facb0087b5e322b594abe0664caad644",
+      "current_sha256": "d0bc4d295bd417374ad1173e1ba35c7897d696faded785584ab17431e43efc77",
       "original_sha256": "d8841bd2f13e5825a84f670ec7cc60923977bf80618d737cbac2208f94c6523c",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "deferred-depth1-original-alignment",
-      "evidence": "s13-r1001-rtlinit-structure-review.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1208-rtlinit-full-file.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
@@ -11930,14 +11931,14 @@
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
       "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
-      "current_sha256": "10ed3f2be44d0a66ffe952696f7a579aa5d1a2421e71a5a319eeeab9fa654222",
+      "current_sha256": "45836325a4ba50893a6aa4f7f98b4655451592ce2643e9cbeb12b1973ffae5bb",
       "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "deferred-depth1-original-alignment",
-      "evidence": "s13-r1007-wow-structure-review.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1210-wowclient-full-file.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
@@ -12007,20 +12008,20 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "deferred-depth1-original-alignment",
-      "evidence": "s13-r1017-exitwin-context-review.json"
+      "status": "completed-original-conditional-tree",
+      "evidence": "s13-r1217-full-file.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
       "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\getset.c",
-      "current_sha256": "2978205bd98d2e21ebd679444ff33bf195b33637d049a15eb232c797c6aa4e2a",
+      "current_sha256": "e1db390362e665fe9091c9a57c6cb8d532061460e1abeb401b8b844143d5123d",
       "original_sha256": "f0d22e4285e8b33b873854913a11587c67d78e50e1f5db28ec89ef8b6ff06d3d",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "deferred-depth1-original-alignment",
-      "evidence": "s13-r1019-getset-structure-review.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1215-kernel-getset-full-file.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
@@ -12147,14 +12148,14 @@
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
       "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
-      "current_sha256": "426cd27bcfae2ae7bc31626353a97a2da70e4b7fca8a0227e071a6c7ac1ae969",
+      "current_sha256": "bb666cabd52037ac4a82b7cde6d139d779680b1e554bddcb841e0c18cacb07a5",
       "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "deferred-depth1-contexts-unverified",
-      "evidence": "s13-r1036-chartran-context-review.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1207-chartran-full-file.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
@@ -12165,20 +12166,20 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "deferred-depth1-original-alignment",
-      "evidence": "s13-r1038-draw-structure-review.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1209-draw-full-file.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
       "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
-      "current_sha256": "fb330c396a31f8b7e30f470197f7f7327972edba787e2286c4d8089e7223a9db",
+      "current_sha256": "c44237e4e365437f8bb6cc6a233737e8b8c12dadc7ee9402be78d86e72655821",
       "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "deferred-depth1-original-alignment",
-      "evidence": "s13-r1040-drawtext-structure-review.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1214-drawtext-full-file.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
@@ -12189,8 +12190,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "deferred-depth1-original-alignment",
-      "evidence": "s13-r1042-rtlgetset-structure-review.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1216-rtl-getset-full-file.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/help.c",

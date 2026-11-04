@@ -1,0 +1,11 @@
+{
+  "path": "src/non-mvdm/base/ntos/ex/probe.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\ntos\\ex\\probe.c",
+  "original_sha256": "0d1cae414b609c624e6bdf04fa28ebd84ff38dbb9687a63d8bc9e840c2f2372b",
+  "before_sha256": "44053c4322b7dca6585e214285c7a5af6c1daee976b5a7f8b362bb979074209e",
+  "after_sha256": "ed5e799b4e8b7595b44f1b6162b1d438e7826716b87202779265291673553ed2",
+  "prior_records": [],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "subset_boundary": "The original non-Alpha arm is within ProbeForWrite, which this existing local subset does not provide; its conditional framework is retained with an empty selected arm. This review does not claim that ProbeForWrite is implemented."
+}

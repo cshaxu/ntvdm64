@@ -868,6 +868,7 @@ Return Value:
         }
         srcBuffer = (LPSTR)SmbGetUlong( &parameters->RcvBuffer );
 #else
+#line 871
 #error Unsupported excluded original configuration
 #endif
 #line 873

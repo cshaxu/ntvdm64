@@ -1,0 +1,55 @@
+{
+  "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+  "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\xactsrv\\apisvc.c",
+  "original_sha256": "7a0681e0d01f173edd31afac52c0a35cf7e2fc6711abcb4e224de06f116bdaf8",
+  "before_sha256": "631162e50772f92b2526660245630bc178a3bb501cb6a92bb58f7605e76add83",
+  "after_sha256": "631162e50772f92b2526660245630bc178a3bb501cb6a92bb58f7605e76add83",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "line": "863",
+      "directive": "ifdef",
+      "expression": "UNICODE",
+      "chain_start": "863",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "5aba39b2ff30af6f22fb0c002c07aa581d58a1e96d9f3b6ec4d4abdf417b3acb"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "line": "870",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "863",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "5aba39b2ff30af6f22fb0c002c07aa581d58a1e96d9f3b6ec4d4abdf417b3acb"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "line": "884",
+      "directive": "ifdef",
+      "expression": "UNICODE",
+      "chain_start": "884",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "5aba39b2ff30af6f22fb0c002c07aa581d58a1e96d9f3b6ec4d4abdf417b3acb"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "line": "1015",
+      "directive": "ifdef",
+      "expression": "UNICODE",
+      "chain_start": "1015",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "5aba39b2ff30af6f22fb0c002c07aa581d58a1e96d9f3b6ec4d4abdf417b3acb"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}

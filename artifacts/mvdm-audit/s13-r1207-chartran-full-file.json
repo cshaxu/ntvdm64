@@ -1,0 +1,153 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+  "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+  "current_sha256": "bb666cabd52037ac4a82b7cde6d139d779680b1e554bddcb841e0c18cacb07a5",
+  "prior_selection_records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "line": "26",
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "chain_start": "26",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "73892cd8ad385daace236c7b0e2f6bc904db26ecb933068767d1fdd88ac1a4ae"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "line": "36",
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "chain_start": "36",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "73892cd8ad385daace236c7b0e2f6bc904db26ecb933068767d1fdd88ac1a4ae"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "line": "38",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "36",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "73892cd8ad385daace236c7b0e2f6bc904db26ecb933068767d1fdd88ac1a4ae"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "line": "57",
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "chain_start": "57",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "73892cd8ad385daace236c7b0e2f6bc904db26ecb933068767d1fdd88ac1a4ae"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "line": "59",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "57",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "73892cd8ad385daace236c7b0e2f6bc904db26ecb933068767d1fdd88ac1a4ae"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "line": "70",
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "chain_start": "70",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "73892cd8ad385daace236c7b0e2f6bc904db26ecb933068767d1fdd88ac1a4ae"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "line": "72",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "70",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "73892cd8ad385daace236c7b0e2f6bc904db26ecb933068767d1fdd88ac1a4ae"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "line": "73",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "chain_start": "73",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "73892cd8ad385daace236c7b0e2f6bc904db26ecb933068767d1fdd88ac1a4ae"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "line": "162",
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "chain_start": "162",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "73892cd8ad385daace236c7b0e2f6bc904db26ecb933068767d1fdd88ac1a4ae"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "line": "249",
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "chain_start": "249",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "73892cd8ad385daace236c7b0e2f6bc904db26ecb933068767d1fdd88ac1a4ae"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "line": "251",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "249",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "73892cd8ad385daace236c7b0e2f6bc904db26ecb933068767d1fdd88ac1a4ae"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "line": "356",
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "chain_start": "356",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "73892cd8ad385daace236c7b0e2f6bc904db26ecb933068767d1fdd88ac1a4ae"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "line": "358",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "356",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "73892cd8ad385daace236c7b0e2f6bc904db26ecb933068767d1fdd88ac1a4ae"
+    }
+  ],
+  "review": "Matched original conditional directives by original physical line and retained function identity rather than textual order, because the product subset reorders the original functions and keeps skeletons for omitted functions. Restored original DEBUG group at physical lines 418-422, excluded DEBUG bodies at original lines 419 and 538, and restored three missing FE_SB error anchors. Product WOW32 and call-boundary compiler commands have no DEBUG define; original DEBUG was not observed selected. Retained all actually selected conversion code and local ABI binding.",
+  "limitations": "Compilation and binary comparison pending. Other optional unsupported configurations are not claimed tested."
+}

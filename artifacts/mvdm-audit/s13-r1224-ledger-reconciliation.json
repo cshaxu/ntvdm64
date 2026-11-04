@@ -1,0 +1,971 @@
+{
+  "method": "Existing positions with moved source are reconciled against the git snapshot associated with each previous witness and unchanged guard/error text; three files without a usable recorded position use exact marker and same-file ordinal across the initial ledger snapshot, after verifying equal counts. No excluded-profile assertion is removed.",
+  "records": [
+    {
+      "index": 0,
+      "path": "src\\mvdm-host\\softpc.new\\base\\ccpu386\\c_main.c",
+      "old": 521,
+      "commit": "c32d28b749e69c06a539c0b49911703924a6b63d",
+      "guard": "#ifdef SFELLOW",
+      "error": "#error Excluded unsupported SFELLOW configuration",
+      "candidates": [
+        529
+      ],
+      "mapping": 529,
+      "resolved": 529
+    },
+    {
+      "index": 2,
+      "path": "src\\mvdm-host\\softpc.new\\base\\bios\\emm_fncs.c",
+      "old": 366,
+      "commit": "c32d28b749e69c06a539c0b49911703924a6b63d",
+      "guard": "#if defined(A2CPU) && defined(DELTA)",
+      "error": "#error Excluded unsupported A2CPU configuration",
+      "candidates": [
+        119,
+        390
+      ],
+      "mapping": 390,
+      "resolved": 390
+    },
+    {
+      "index": 3,
+      "path": "src\\mvdm-host\\softpc.new\\base\\bios\\emm_fncs.c",
+      "old": 113,
+      "commit": "c32d28b749e69c06a539c0b49911703924a6b63d",
+      "guard": "#if defined(A2CPU) && defined(DELTA)",
+      "error": "#error Excluded unsupported A2CPU configuration",
+      "candidates": [
+        119,
+        390
+      ],
+      "mapping": 119,
+      "resolved": 119
+    },
+    {
+      "index": 4,
+      "path": "src\\mvdm-host\\softpc.new\\base\\bios\\reset.c",
+      "old": 748,
+      "commit": "2d7d13007a3e7c7162ddfed3ed9abe67543bacfe",
+      "guard": "#if\tdefined(DELTA) && defined(A2CPU)",
+      "error": "#error Excluded unsupported A2CPU configuration",
+      "candidates": [
+        123,
+        768
+      ],
+      "mapping": 768,
+      "resolved": 768
+    },
+    {
+      "index": 5,
+      "path": "src\\mvdm-host\\softpc.new\\base\\bios\\reset.c",
+      "old": 121,
+      "commit": "c32d28b749e69c06a539c0b49911703924a6b63d",
+      "guard": "#if\tdefined(DELTA) && defined(A2CPU)",
+      "error": "#error Excluded unsupported A2CPU configuration",
+      "candidates": [
+        123,
+        768
+      ],
+      "mapping": 123,
+      "resolved": 123
+    },
+    {
+      "index": 6,
+      "path": "src\\mvdm-host\\softpc.new\\base\\ccpu386\\c_main.c",
+      "old": 669,
+      "commit": "c32d28b749e69c06a539c0b49911703924a6b63d",
+      "guard": "#if defined(PIG) && defined(SFELLOW)",
+      "error": "#error Excluded unsupported PIG configuration",
+      "candidates": [
+        679
+      ],
+      "mapping": 679,
+      "resolved": 679
+    },
+    {
+      "index": 8,
+      "path": "src\\mvdm-host\\softpc.new\\base\\keymouse\\keyba.c",
+      "old": 2680,
+      "commit": "2d7d13007a3e7c7162ddfed3ed9abe67543bacfe",
+      "guard": "#if defined(IRET_HOOKS) && defined(GISP_CPU)",
+      "error": "#error Excluded unsupported GISP_CPU configuration",
+      "candidates": [
+        291,
+        2773
+      ],
+      "mapping": 2773,
+      "resolved": 2773
+    },
+    {
+      "index": 10,
+      "path": "src\\mvdm-host\\softpc.new\\base\\keymouse\\keyba.c",
+      "old": 284,
+      "commit": "c32d28b749e69c06a539c0b49911703924a6b63d",
+      "guard": "#if defined(IRET_HOOKS) && defined(GISP_CPU)",
+      "error": "#error Excluded unsupported GISP_CPU configuration",
+      "candidates": [
+        291,
+        2773
+      ],
+      "mapping": 291,
+      "resolved": 291
+    },
+    {
+      "index": 11,
+      "path": "src\\mvdm-host\\softpc.new\\base\\keymouse\\keybd_io.c",
+      "old": 744,
+      "commit": "e3810e180daa45829c81c4cb30443e680c4a4a5d",
+      "guard": "#if defined(IRET_HOOKS)  && defined(GISP_CPU)",
+      "error": "#error Excluded unsupported GISP_CPU configuration",
+      "candidates": [
+        751
+      ],
+      "mapping": 751,
+      "resolved": 751
+    },
+    {
+      "index": 12,
+      "path": "src\\mvdm-host\\softpc.new\\base\\keymouse\\keybd_io.c",
+      "old": 178,
+      "commit": "e3810e180daa45829c81c4cb30443e680c4a4a5d",
+      "guard": "#if defined(IRET_HOOKS) && defined(GISP_CPU)",
+      "error": "#error Excluded unsupported GISP_CPU configuration",
+      "candidates": [
+        180
+      ],
+      "mapping": 180,
+      "resolved": 180
+    },
+    {
+      "index": 13,
+      "path": "src\\mvdm-host\\softpc.new\\base\\system\\rom.c",
+      "old": 343,
+      "commit": "c32d28b749e69c06a539c0b49911703924a6b63d",
+      "guard": "#if defined(macintosh) && defined(A2CPU)",
+      "error": "#error Excluded unsupported A2CPU configuration",
+      "candidates": [
+        112,
+        350,
+        371
+      ],
+      "mapping": 371,
+      "resolved": 371
+    },
+    {
+      "index": 14,
+      "path": "src\\mvdm-host\\softpc.new\\base\\system\\rom.c",
+      "old": 325,
+      "commit": "c32d28b749e69c06a539c0b49911703924a6b63d",
+      "guard": "#if defined(macintosh) && defined(A2CPU)",
+      "error": "#error Excluded unsupported A2CPU configuration",
+      "candidates": [
+        112,
+        350,
+        371
+      ],
+      "mapping": 350,
+      "resolved": 350
+    },
+    {
+      "index": 15,
+      "path": "src\\mvdm-host\\softpc.new\\base\\system\\rom.c",
+      "old": 281,
+      "commit": "c32d28b749e69c06a539c0b49911703924a6b63d",
+      "guard": "#if\tdefined(macintosh) && defined(A2CPU)",
+      "error": "#error Excluded unsupported A2CPU configuration",
+      "candidates": [
+        298
+      ],
+      "mapping": 298,
+      "resolved": 298
+    },
+    {
+      "index": 16,
+      "path": "src\\mvdm-host\\softpc.new\\base\\system\\rom.c",
+      "old": 108,
+      "commit": "c32d28b749e69c06a539c0b49911703924a6b63d",
+      "guard": "#if defined(macintosh) && defined(A2CPU)",
+      "error": "#error Excluded unsupported A2CPU configuration",
+      "candidates": [
+        112,
+        350,
+        371
+      ],
+      "mapping": 112,
+      "resolved": 112
+    },
+    {
+      "index": 37,
+      "path": "src\\mvdm-host\\softpc.new\\base\\inc\\cpu4.h",
+      "old": 86,
+      "commit": "7f2bb292467358db26e41e262be4df2e88872429",
+      "guard": "#ifdef IRET_HOOKS",
+      "error": "#error Excluded unsupported IRET_HOOKS configuration",
+      "candidates": [
+        89
+      ],
+      "mapping": 89,
+      "resolved": 89
+    },
+    {
+      "index": 39,
+      "path": "src\\mvdm-host\\softpc.new\\base\\inc\\rs232.h",
+      "old": 293,
+      "commit": "7f2bb292467358db26e41e262be4df2e88872429",
+      "guard": "#if defined(NTVDM) && defined(FIFO_ON)",
+      "error": "#error Excluded unsupported FIFO_ON configuration",
+      "candidates": [
+        59,
+        133,
+        171,
+        182,
+        204,
+        216,
+        268
+      ],
+      "mapping": 268,
+      "resolved": 268
+    },
+    {
+      "index": 40,
+      "path": "src\\mvdm-host\\softpc.new\\base\\inc\\rs232.h",
+      "old": 240,
+      "commit": "7f2bb292467358db26e41e262be4df2e88872429",
+      "guard": "#if defined(NTVDM) && defined(FIFO_ON)",
+      "error": "#error Excluded unsupported FIFO_ON configuration",
+      "candidates": [
+        59,
+        133,
+        171,
+        182,
+        204,
+        216,
+        268
+      ],
+      "mapping": 216,
+      "resolved": 216
+    },
+    {
+      "index": 41,
+      "path": "src\\mvdm-host\\softpc.new\\base\\inc\\rs232.h",
+      "old": 219,
+      "commit": "7f2bb292467358db26e41e262be4df2e88872429",
+      "guard": "#if defined(NTVDM) && defined(FIFO_ON)",
+      "error": "#error Excluded unsupported FIFO_ON configuration",
+      "candidates": [
+        59,
+        133,
+        171,
+        182,
+        204,
+        216,
+        268
+      ],
+      "mapping": 204,
+      "resolved": 204
+    },
+    {
+      "index": 42,
+      "path": "src\\mvdm-host\\softpc.new\\base\\inc\\rs232.h",
+      "old": 198,
+      "commit": "7f2bb292467358db26e41e262be4df2e88872429",
+      "guard": "#if defined(NTVDM) && defined(FIFO_ON)",
+      "error": "#error Excluded unsupported FIFO_ON configuration",
+      "candidates": [
+        59,
+        133,
+        171,
+        182,
+        204,
+        216,
+        268
+      ],
+      "mapping": 182,
+      "resolved": 182
+    },
+    {
+      "index": 43,
+      "path": "src\\mvdm-host\\softpc.new\\base\\inc\\rs232.h",
+      "old": 168,
+      "commit": "7f2bb292467358db26e41e262be4df2e88872429",
+      "guard": "#if defined(NTVDM) && defined(FIFO_ON)",
+      "error": "#error Excluded unsupported FIFO_ON configuration",
+      "candidates": [
+        59,
+        133,
+        171,
+        182,
+        204,
+        216,
+        268
+      ],
+      "mapping": 171,
+      "resolved": 171
+    },
+    {
+      "index": 44,
+      "path": "src\\mvdm-host\\softpc.new\\base\\inc\\rs232.h",
+      "old": 134,
+      "commit": "7f2bb292467358db26e41e262be4df2e88872429",
+      "guard": "#if defined(NTVDM) && defined(FIFO_ON)",
+      "error": "#error Excluded unsupported FIFO_ON configuration",
+      "candidates": [
+        59,
+        133,
+        171,
+        182,
+        204,
+        216,
+        268
+      ],
+      "mapping": 133,
+      "resolved": 133
+    },
+    {
+      "index": 45,
+      "path": "src\\mvdm-host\\softpc.new\\base\\inc\\rs232.h",
+      "old": 55,
+      "commit": "7f2bb292467358db26e41e262be4df2e88872429",
+      "guard": "#if defined(NTVDM) && defined(FIFO_ON)",
+      "error": "#error Excluded unsupported FIFO_ON configuration",
+      "candidates": [
+        59,
+        133,
+        171,
+        182,
+        204,
+        216,
+        268
+      ],
+      "mapping": 59,
+      "resolved": 59
+    },
+    {
+      "index": 46,
+      "path": "src\\mvdm-host\\softpc.new\\base\\inc\\sas.h",
+      "old": 616,
+      "commit": "7f2bb2924",
+      "resolved": 626,
+      "method": "same file, macro, exact marker and ordinal across original ledger snapshot and current source; counts identical"
+    },
+    {
+      "index": 47,
+      "path": "src\\mvdm-host\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "old": 5554,
+      "commit": "c32d28b749e69c06a539c0b49911703924a6b63d",
+      "guard": "#ifdef REAL_VGA",
+      "error": "#error Excluded unsupported REAL_VGA configuration",
+      "candidates": [
+        5316,
+        5506,
+        5588,
+        5674
+      ],
+      "mapping": 5674,
+      "resolved": 5674
+    },
+    {
+      "index": 48,
+      "path": "src\\mvdm-host\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "old": 5468,
+      "commit": "c32d28b749e69c06a539c0b49911703924a6b63d",
+      "guard": "#ifdef REAL_VGA",
+      "error": "#error Excluded unsupported REAL_VGA configuration",
+      "candidates": [
+        5316,
+        5506,
+        5588,
+        5674
+      ],
+      "mapping": 5588,
+      "resolved": 5588
+    },
+    {
+      "index": 49,
+      "path": "src\\mvdm-host\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "old": 5386,
+      "commit": "c32d28b749e69c06a539c0b49911703924a6b63d",
+      "guard": "#ifdef REAL_VGA",
+      "error": "#error Excluded unsupported REAL_VGA configuration",
+      "candidates": [
+        5316,
+        5506,
+        5588,
+        5674
+      ],
+      "mapping": 5506,
+      "resolved": 5506
+    },
+    {
+      "index": 50,
+      "path": "src\\mvdm-host\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "old": 5196,
+      "commit": "c32d28b749e69c06a539c0b49911703924a6b63d",
+      "guard": "#ifdef REAL_VGA",
+      "error": "#error Excluded unsupported REAL_VGA configuration",
+      "candidates": [
+        5316,
+        5506,
+        5588,
+        5674
+      ],
+      "mapping": 5316,
+      "resolved": 5316
+    },
+    {
+      "index": 52,
+      "path": "src\\mvdm-host\\softpc.new\\host\\src\\nt_cpu.c",
+      "old": 163,
+      "commit": "c32d28b749e69c06a539c0b49911703924a6b63d",
+      "guard": "#ifdef A3CPU",
+      "error": "#error Excluded unsupported A3CPU configuration",
+      "candidates": [
+        165
+      ],
+      "mapping": 165,
+      "resolved": 165
+    },
+    {
+      "index": 54,
+      "path": "src\\mvdm-host\\softpc.new\\base\\debug\\yoda.c",
+      "old": 71,
+      "commit": "2d7d13007a3e7c7162ddfed3ed9abe67543bacfe",
+      "guard": "#ifdef\tYODA",
+      "error": "#error Excluded unsupported YODA debugger profile",
+      "candidates": [
+        68
+      ],
+      "mapping": 68,
+      "resolved": 68
+    },
+    {
+      "index": 55,
+      "path": "src\\mvdm-host\\softpc.new\\base\\bios\\bios.c",
+      "old": 23,
+      "commit": "7f2bb292467358db26e41e262be4df2e88872429",
+      "guard": "#ifdef SEGMENTATION",
+      "error": "#error Excluded unsupported SEGMENTATION configuration",
+      "candidates": [
+        25
+      ],
+      "mapping": 25,
+      "resolved": 25
+    },
+    {
+      "index": 58,
+      "path": "src\\mvdm-host\\softpc.new\\base\\bios\\emm_fncs.c",
+      "old": 375,
+      "commit": "c32d28b749e69c06a539c0b49911703924a6b63d",
+      "guard": "#ifdef SEGMENTATION",
+      "error": "#error Excluded unsupported SEGMENTATION configuration",
+      "candidates": [
+        70,
+        300,
+        400
+      ],
+      "mapping": 400,
+      "resolved": 400
+    },
+    {
+      "index": 59,
+      "path": "src\\mvdm-host\\softpc.new\\base\\bios\\emm_fncs.c",
+      "old": 280,
+      "commit": "c32d28b749e69c06a539c0b49911703924a6b63d",
+      "guard": "#ifdef SEGMENTATION",
+      "error": "#error Excluded unsupported SEGMENTATION configuration",
+      "candidates": [
+        70,
+        300,
+        400
+      ],
+      "mapping": 300,
+      "resolved": 300
+    },
+    {
+      "index": 73,
+      "path": "src\\mvdm-host\\softpc.new\\base\\comms\\printer_.c",
+      "old": 27,
+      "commit": "7f2bb292467358db26e41e262be4df2e88872429",
+      "guard": "#ifdef SEGMENTATION",
+      "error": "#error Excluded unsupported SEGMENTATION configuration",
+      "candidates": [
+        28
+      ],
+      "mapping": 28,
+      "resolved": 28
+    },
+    {
+      "index": 90,
+      "path": "src\\mvdm-host\\softpc.new\\base\\dos\\emm_mngr.c",
+      "old": 1461,
+      "commit": "2d7d13007a3e7c7162ddfed3ed9abe67543bacfe",
+      "guard": "#ifdef SEGMENTATION",
+      "error": "#error Excluded unsupported SEGMENTATION configuration",
+      "candidates": [
+        66,
+        1456,
+        1467
+      ],
+      "mapping": 1467,
+      "resolved": 1467
+    },
+    {
+      "index": 91,
+      "path": "src\\mvdm-host\\softpc.new\\base\\dos\\emm_mngr.c",
+      "old": 1446,
+      "commit": "2d7d13007a3e7c7162ddfed3ed9abe67543bacfe",
+      "guard": "#ifdef SEGMENTATION",
+      "error": "#error Excluded unsupported SEGMENTATION configuration",
+      "candidates": [
+        66,
+        1456,
+        1467
+      ],
+      "mapping": 1456,
+      "resolved": 1456
+    },
+    {
+      "index": 93,
+      "path": "src\\mvdm-host\\softpc.new\\base\\keymouse\\keyba.c",
+      "old": 2662,
+      "commit": "2d7d13007a3e7c7162ddfed3ed9abe67543bacfe",
+      "guard": "#ifdef SEGMENTATION",
+      "error": "#error Excluded unsupported SEGMENTATION configuration",
+      "candidates": [
+        52,
+        2756
+      ],
+      "mapping": 2756,
+      "resolved": 2756
+    },
+    {
+      "index": 94,
+      "path": "src\\mvdm-host\\softpc.new\\base\\keymouse\\keyba.c",
+      "old": 50,
+      "commit": "7f2bb292467358db26e41e262be4df2e88872429",
+      "guard": "#ifdef SEGMENTATION",
+      "error": "#error Excluded unsupported SEGMENTATION configuration",
+      "candidates": [
+        52,
+        2756
+      ],
+      "mapping": 52,
+      "resolved": 52
+    },
+    {
+      "index": 95,
+      "path": "src\\mvdm-host\\softpc.new\\base\\keymouse\\keybd_io.c",
+      "old": 1485,
+      "commit": "e3810e180daa45829c81c4cb30443e680c4a4a5d",
+      "guard": "#ifdef SEGMENTATION",
+      "error": "#error Excluded unsupported SEGMENTATION configuration",
+      "candidates": [
+        55,
+        1494
+      ],
+      "mapping": 1494,
+      "resolved": 1494
+    },
+    {
+      "index": 103,
+      "path": "src\\mvdm-host\\softpc.new\\base\\support\\ios.c",
+      "old": 924,
+      "commit": "c32d28b749e69c06a539c0b49911703924a6b63d",
+      "guard": "#ifdef SEGMENTATION",
+      "error": "#error Excluded unsupported SEGMENTATION configuration",
+      "candidates": [
+        18,
+        953
+      ],
+      "mapping": 953,
+      "resolved": 953
+    },
+    {
+      "index": 106,
+      "path": "src\\mvdm-host\\softpc.new\\base\\support\\time_day.c",
+      "old": 45,
+      "commit": "7f2bb292467358db26e41e262be4df2e88872429",
+      "guard": "#ifdef SEGMENTATION",
+      "error": "#error Excluded unsupported SEGMENTATION configuration",
+      "candidates": [
+        47
+      ],
+      "mapping": 47,
+      "resolved": 47
+    },
+    {
+      "index": 107,
+      "path": "src\\mvdm-host\\softpc.new\\base\\system\\at_dma.c",
+      "old": 854,
+      "commit": "7f2bb2924",
+      "resolved": 858,
+      "method": "same file, macro, exact marker and ordinal across original ledger snapshot and current source; counts identical"
+    },
+    {
+      "index": 110,
+      "path": "src\\mvdm-host\\softpc.new\\base\\system\\ica.c",
+      "old": 1355,
+      "commit": "c32d28b749e69c06a539c0b49911703924a6b63d",
+      "guard": "#ifdef SEGMENTATION",
+      "error": "#error Excluded unsupported SEGMENTATION configuration",
+      "candidates": [
+        138,
+        1453
+      ],
+      "mapping": 1453,
+      "resolved": 1453
+    },
+    {
+      "index": 111,
+      "path": "src\\mvdm-host\\softpc.new\\base\\system\\ica.c",
+      "old": 136,
+      "commit": "7f2bb292467358db26e41e262be4df2e88872429",
+      "guard": "#ifdef SEGMENTATION",
+      "error": "#error Excluded unsupported SEGMENTATION configuration",
+      "candidates": [
+        138,
+        1453
+      ],
+      "mapping": 138,
+      "resolved": 138
+    },
+    {
+      "index": 113,
+      "path": "src\\mvdm-host\\softpc.new\\base\\system\\timer.c",
+      "old": 2095,
+      "commit": "c32d28b749e69c06a539c0b49911703924a6b63d",
+      "guard": "#ifdef SEGMENTATION",
+      "error": "#error Excluded unsupported SEGMENTATION configuration",
+      "candidates": [
+        40,
+        2192
+      ],
+      "mapping": 2192,
+      "resolved": 2192
+    },
+    {
+      "index": 114,
+      "path": "src\\mvdm-host\\softpc.new\\base\\system\\timer.c",
+      "old": 38,
+      "commit": "7f2bb292467358db26e41e262be4df2e88872429",
+      "guard": "#ifdef SEGMENTATION",
+      "error": "#error Excluded unsupported SEGMENTATION configuration",
+      "candidates": [
+        40,
+        2192
+      ],
+      "mapping": 40,
+      "resolved": 40
+    },
+    {
+      "index": 117,
+      "path": "src\\mvdm-host\\softpc.new\\base\\video\\cga.c",
+      "old": 1313,
+      "commit": "7f2bb292467358db26e41e262be4df2e88872429",
+      "guard": "#ifdef SEGMENTATION",
+      "error": "#error Excluded unsupported SEGMENTATION configuration",
+      "candidates": [
+        53,
+        1146
+      ],
+      "mapping": 1146,
+      "resolved": 1146
+    },
+    {
+      "index": 121,
+      "path": "src\\mvdm-host\\softpc.new\\base\\video\\ega_prts.c",
+      "old": 393,
+      "commit": "7f2bb292467358db26e41e262be4df2e88872429",
+      "guard": "#ifdef SEGMENTATION",
+      "error": "#error Excluded unsupported SEGMENTATION configuration",
+      "candidates": [
+        395
+      ],
+      "mapping": 395,
+      "resolved": 395
+    },
+    {
+      "index": 122,
+      "path": "src\\mvdm-host\\softpc.new\\base\\video\\ega_read.c",
+      "old": 576,
+      "commit": "2d7d13007a3e7c7162ddfed3ed9abe67543bacfe",
+      "guard": "#ifdef SEGMENTATION",
+      "error": "#error Excluded unsupported SEGMENTATION configuration",
+      "candidates": [
+        153,
+        565,
+        590
+      ],
+      "mapping": 590,
+      "resolved": 590
+    },
+    {
+      "index": 123,
+      "path": "src\\mvdm-host\\softpc.new\\base\\video\\ega_read.c",
+      "old": 552,
+      "commit": "7f2bb292467358db26e41e262be4df2e88872429",
+      "guard": "#ifdef SEGMENTATION",
+      "error": "#error Excluded unsupported SEGMENTATION configuration",
+      "candidates": [
+        153,
+        565,
+        590
+      ],
+      "mapping": 565,
+      "resolved": 565
+    },
+    {
+      "index": 125,
+      "path": "src\\mvdm-host\\softpc.new\\base\\video\\ega_vide.c",
+      "old": 293,
+      "commit": "7f2bb292467358db26e41e262be4df2e88872429",
+      "guard": "#ifdef SEGMENTATION",
+      "error": "#error Excluded unsupported SEGMENTATION configuration",
+      "candidates": [
+        261
+      ],
+      "mapping": 261,
+      "resolved": 261
+    },
+    {
+      "index": 126,
+      "path": "src\\mvdm-host\\softpc.new\\base\\video\\ega_writ.c",
+      "old": 236,
+      "commit": "2d7d13007a3e7c7162ddfed3ed9abe67543bacfe",
+      "guard": "#ifdef SEGMENTATION",
+      "error": "#error Excluded unsupported SEGMENTATION configuration",
+      "candidates": [
+        76,
+        219,
+        245
+      ],
+      "mapping": 245,
+      "resolved": 245
+    },
+    {
+      "index": 127,
+      "path": "src\\mvdm-host\\softpc.new\\base\\video\\ega_writ.c",
+      "old": 211,
+      "commit": "7f2bb292467358db26e41e262be4df2e88872429",
+      "guard": "#ifdef SEGMENTATION",
+      "error": "#error Excluded unsupported SEGMENTATION configuration",
+      "candidates": [
+        76,
+        219,
+        245
+      ],
+      "mapping": 219,
+      "resolved": 219
+    },
+    {
+      "index": 128,
+      "path": "src\\mvdm-host\\softpc.new\\base\\video\\ega_writ.c",
+      "old": 74,
+      "commit": "7f2bb292467358db26e41e262be4df2e88872429",
+      "guard": "#ifdef SEGMENTATION",
+      "error": "#error Excluded unsupported SEGMENTATION configuration",
+      "candidates": [
+        76,
+        219,
+        245
+      ],
+      "mapping": 76,
+      "resolved": 76
+    },
+    {
+      "index": 132,
+      "path": "src\\mvdm-host\\softpc.new\\base\\video\\gfx_updt.c",
+      "old": 3769,
+      "commit": "7f2bb2924",
+      "resolved": 3854,
+      "method": "same file, macro, exact marker and ordinal across original ledger snapshot and current source; counts identical"
+    },
+    {
+      "index": 133,
+      "path": "src\\mvdm-host\\softpc.new\\base\\video\\gfx_updt.c",
+      "old": 3683,
+      "commit": "7f2bb2924",
+      "resolved": 3766,
+      "method": "same file, macro, exact marker and ordinal across original ledger snapshot and current source; counts identical"
+    },
+    {
+      "index": 134,
+      "path": "src\\mvdm-host\\softpc.new\\base\\video\\gfx_updt.c",
+      "old": 3573,
+      "commit": "7f2bb2924",
+      "resolved": 3650,
+      "method": "same file, macro, exact marker and ordinal across original ledger snapshot and current source; counts identical"
+    },
+    {
+      "index": 135,
+      "path": "src\\mvdm-host\\softpc.new\\base\\video\\gfx_updt.c",
+      "old": 3472,
+      "commit": "7f2bb2924",
+      "resolved": 3535,
+      "method": "same file, macro, exact marker and ordinal across original ledger snapshot and current source; counts identical"
+    },
+    {
+      "index": 136,
+      "path": "src\\mvdm-host\\softpc.new\\base\\video\\gfx_updt.c",
+      "old": 3448,
+      "commit": "7f2bb2924",
+      "resolved": 3508,
+      "method": "same file, macro, exact marker and ordinal across original ledger snapshot and current source; counts identical"
+    },
+    {
+      "index": 137,
+      "path": "src\\mvdm-host\\softpc.new\\base\\video\\gfx_updt.c",
+      "old": 3357,
+      "commit": "7f2bb2924",
+      "resolved": 3407,
+      "method": "same file, macro, exact marker and ordinal across original ledger snapshot and current source; counts identical"
+    },
+    {
+      "index": 138,
+      "path": "src\\mvdm-host\\softpc.new\\base\\video\\gfx_updt.c",
+      "old": 3280,
+      "commit": "7f2bb2924",
+      "resolved": 3327,
+      "method": "same file, macro, exact marker and ordinal across original ledger snapshot and current source; counts identical"
+    },
+    {
+      "index": 139,
+      "path": "src\\mvdm-host\\softpc.new\\base\\video\\gfx_updt.c",
+      "old": 3213,
+      "commit": "7f2bb2924",
+      "resolved": 3263,
+      "method": "same file, macro, exact marker and ordinal across original ledger snapshot and current source; counts identical"
+    },
+    {
+      "index": 140,
+      "path": "src\\mvdm-host\\softpc.new\\base\\video\\gfx_updt.c",
+      "old": 2264,
+      "commit": "7f2bb2924",
+      "resolved": 2300,
+      "method": "same file, macro, exact marker and ordinal across original ledger snapshot and current source; counts identical"
+    },
+    {
+      "index": 141,
+      "path": "src\\mvdm-host\\softpc.new\\base\\video\\gfx_updt.c",
+      "old": 1761,
+      "commit": "7f2bb2924",
+      "resolved": 1795,
+      "method": "same file, macro, exact marker and ordinal across original ledger snapshot and current source; counts identical"
+    },
+    {
+      "index": 142,
+      "path": "src\\mvdm-host\\softpc.new\\base\\video\\gfx_updt.c",
+      "old": 1148,
+      "commit": "7f2bb2924",
+      "resolved": 1180,
+      "method": "same file, macro, exact marker and ordinal across original ledger snapshot and current source; counts identical"
+    },
+    {
+      "index": 143,
+      "path": "src\\mvdm-host\\softpc.new\\base\\video\\gfx_updt.c",
+      "old": 712,
+      "commit": "7f2bb2924",
+      "resolved": 742,
+      "method": "same file, macro, exact marker and ordinal across original ledger snapshot and current source; counts identical"
+    },
+    {
+      "index": 144,
+      "path": "src\\mvdm-host\\softpc.new\\base\\video\\gfx_updt.c",
+      "old": 579,
+      "commit": "7f2bb2924",
+      "resolved": 607,
+      "method": "same file, macro, exact marker and ordinal across original ledger snapshot and current source; counts identical"
+    },
+    {
+      "index": 145,
+      "path": "src\\mvdm-host\\softpc.new\\base\\video\\gfx_updt.c",
+      "old": 501,
+      "commit": "7f2bb2924",
+      "resolved": 525,
+      "method": "same file, macro, exact marker and ordinal across original ledger snapshot and current source; counts identical"
+    },
+    {
+      "index": 146,
+      "path": "src\\mvdm-host\\softpc.new\\base\\video\\gfx_updt.c",
+      "old": 122,
+      "commit": "7f2bb292467358db26e41e262be4df2e88872429",
+      "guard": "#ifdef SEGMENTATION",
+      "error": "#error Excluded unsupported SEGMENTATION configuration",
+      "candidates": [
+        124
+      ],
+      "mapping": 124,
+      "resolved": 124
+    },
+    {
+      "index": 151,
+      "path": "src\\mvdm-host\\softpc.new\\base\\video\\vga_mode.c",
+      "old": 133,
+      "commit": "7f2bb292467358db26e41e262be4df2e88872429",
+      "guard": "#ifdef SEGMENTATION",
+      "error": "#error Excluded unsupported SEGMENTATION configuration",
+      "candidates": [
+        137
+      ],
+      "mapping": 137,
+      "resolved": 137
+    },
+    {
+      "index": 152,
+      "path": "src\\mvdm-host\\softpc.new\\base\\video\\vga_prts.c",
+      "old": 388,
+      "commit": "7f2bb292467358db26e41e262be4df2e88872429",
+      "guard": "#ifdef SEGMENTATION",
+      "error": "#error Excluded unsupported SEGMENTATION configuration",
+      "candidates": [
+        390
+      ],
+      "mapping": 390,
+      "resolved": 390
+    },
+    {
+      "index": 161,
+      "path": "src\\mvdm-host\\softpc.new\\host\\src\\nt_event.c",
+      "old": 1265,
+      "commit": "7f2bb292467358db26e41e262be4df2e88872429",
+      "guard": "#ifdef YODA",
+      "error": "#error Excluded unsupported YODA configuration",
+      "candidates": [
+        116,
+        940,
+        1271
+      ],
+      "mapping": 1271,
+      "resolved": 1271
+    },
+    {
+      "index": 162,
+      "path": "src\\mvdm-host\\softpc.new\\host\\src\\nt_event.c",
+      "old": 934,
+      "commit": "7f2bb292467358db26e41e262be4df2e88872429",
+      "guard": "#ifdef YODA",
+      "error": "#error Excluded unsupported YODA configuration",
+      "candidates": [
+        116,
+        940,
+        1271
+      ],
+      "mapping": 940,
+      "resolved": 940
+    },
+    {
+      "index": 168,
+      "path": "src\\mvdm-host\\softpc.new\\base\\bios\\bios.c",
+      "old": 654,
+      "commit": "2d7d13007a3e7c7162ddfed3ed9abe67543bacfe",
+      "guard": "#else",
+      "error": "#error Excluded unsupported LDBIOS or CPU30 BIOS continuation",
+      "candidates": [
+        707
+      ],
+      "mapping": 707,
+      "resolved": 707
+    }
+  ]
+}

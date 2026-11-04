@@ -1,0 +1,7 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+  "source_sha256": "647ff4d9df48731992fbc53c7cb1392bc452cd7f07476d040e1238076ca7c126",
+  "finding": "The pre-existing NTVDM branch around original line 1852 resumes with #line 1816, but original #else is physical line 1949 and the selected body resumes at 1950. Original #endif and its existing continuation 2093 are correct. The source was not changed in the current ten-file batch.",
+  "status": "reopened for next source batch; do not treat complete until corrected, built and verified",
+  "evidence": "pinned OpenNT base/mvdm/softpc.new/base/system/timer.c, physical LF lines 1852, 1949 and 2092"
+}

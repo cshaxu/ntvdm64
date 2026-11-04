@@ -36,6 +36,7 @@ BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
     NTSTATUS Status;
 #line 446
 #ifdef FE_SB // RtlMBMessageWParamCharToWCS()
+#line 447
 #error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
 #endif // FE_SB
 #line 450
@@ -48,6 +49,7 @@ BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
     switch(msg) {
 #line 457
 #ifdef FE_SB // RtlMBMessageWParamCharToWCS()
+#line 458
 #error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
 #else
 #line 497
@@ -89,14 +91,15 @@ BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
 
 #line 530
 #ifdef FE_SB // RtlMBMessageWParamCharToWCS
+#line 531
 #error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
 #else
 #line 537
 #ifdef DEBUG
-        if ((dwUni == 0) || (dwUni > 0xFF)) {
-            RIPMSG1(RIP_VERBOSE, "msgA -> msgW: wchar = 0x%lX\n", dwUni);
-        }
+#line 538
+#error Excluded unsupported original DEBUG branch
 #endif
+#line 542
 #endif // FE_SB
 #line 543
         *pWParam = dwUni;
@@ -446,7 +449,12 @@ int MBToWCSEx(
 #line 394
 #error Excluded unsupported original FE_SB branch
 #else
-#line 417
+#line 418
+#ifdef DEBUG
+#line 419
+#error Excluded unsupported original DEBUG branch
+#endif
+#line 423
 #endif // FE_SB
 #line 425
 

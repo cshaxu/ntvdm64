@@ -17,8 +17,18 @@ scratch.mkdir(parents=True, exist_ok=True)
 
 
 def unique_sequence(lines, expected, label):
-    matches = [i for i in range(len(lines) - len(expected) + 1)
-               if [line.strip() for line in lines[i:i + len(expected)]] == expected]
+    matches = []
+    for i in range(len(lines)):
+        j = i
+        for item in expected:
+            if item.startswith('#error '):
+                while j < len(lines) and re.match(r'^\s*#\s*line\b', lines[j]):
+                    j += 1
+            if j >= len(lines) or lines[j].strip() != item:
+                break
+            j += 1
+        else:
+            matches.append(i)
     if len(matches) != 1:
         raise SystemExit(f'{label}: expected one matching guard, found {len(matches)}')
     return matches[0]
@@ -86,25 +96,29 @@ for arm in ntvdm_arms:
     source = (repo / arm['path']).read_text(encoding='latin1').split('\n')
     marker = '#error ' + arm['error_marker']
     boundary = '#else' if arm['retained_sibling'] else '#endif'
-    matches = [j for j in range(len(source) - 3)
-               if source[j].strip() == '#ifndef NTVDM'
-               and source[j + 1].strip() == marker
-               and re.match(r'^\s*#\s*' + boundary[1:] + r'\b', source[j + 2])
-               and source[j + 3].strip() == '#line ' + str(arm['continuation_line'])]
+    matches = []
+    for j in range(len(source) - 3):
+        if source[j].strip() != '#ifndef NTVDM':
+            continue
+        error = guard_error_index(source, j)
+        if (error + 2 < len(source) and source[error].strip() == marker
+                and re.match(r'^\s*#\s*' + boundary[1:] + r'\b', source[error + 1])
+                and source[error + 2].strip() == '#line ' + str(arm['continuation_line'])):
+            matches.append((j, error))
     if len(matches) != 1:
         raise SystemExit('NTVDM guard is missing or ambiguous: ' + arm['path'])
-    i = matches[0]
-    if source[i].strip() != '#ifndef NTVDM' or source[i + 1].strip() != marker:
+    i, error = matches[0]
+    if source[i].strip() != '#ifndef NTVDM' or source[error].strip() != marker:
         raise SystemExit('NTVDM guard differs: ' + arm['path'])
     if arm['retained_sibling']:
-        if not re.match(r'^\s*#\s*else\b', source[i + 2]) or source[i + 3].strip() != '#line ' + str(arm['continuation_line']):
+        if not re.match(r'^\s*#\s*else\b', source[error + 1]) or source[error + 2].strip() != '#line ' + str(arm['continuation_line']):
             raise SystemExit('NTVDM selected sibling differs: ' + arm['path'])
-        snippet = ['#ifndef NTVDM', marker, '#else', source[i + 3],
+        snippet = ['#ifndef NTVDM', marker, '#else', source[error + 2],
                    'int selected_line = __LINE__;', '#endif']
     else:
-        if not re.match(r'^\s*#\s*endif\b', source[i + 2]) or source[i + 3].strip() != '#line ' + str(arm['continuation_line']):
+        if not re.match(r'^\s*#\s*endif\b', source[error + 1]) or source[error + 2].strip() != '#line ' + str(arm['continuation_line']):
             raise SystemExit('NTVDM continuation differs: ' + arm['path'])
-        snippet = ['#ifndef NTVDM', marker, '#endif', source[i + 3],
+        snippet = ['#ifndef NTVDM', marker, '#endif', source[error + 2],
                    'int selected_line = __LINE__;']
     probe = scratch / 'ntvdm-guard.c'
     probe.write_text('\n'.join(snippet) + '\n', encoding='ascii')
@@ -118,19 +132,28 @@ for arm in ntvdm_arms:
         raise SystemExit('non-NTVDM guard failed: ' + arm['path'])
 print('PASS six NTVDM root guards, selected lines, and rejected profiles')
 timer = (repo / 'src/mvdm-host/softpc.new/base/system/timer.c').read_text(encoding='latin1').split('\n')
-timer_start = unique_sequence(timer, ['#ifndef NTVDM', '#error Excluded unsupported non-NTVDM timer profile',
-                                     '#else   /* NTVDM */', '#line 1816'], 'timer NTVDM guard')
-timer_end = unique_sequence(timer, ['#endif /* NTVDM */', '#line 1959'], 'timer NTVDM end')
+timer_matches = []
+for i, line in enumerate(timer):
+    if line.strip() != '#ifndef NTVDM':
+        continue
+    j = guard_error_index(timer, i)
+    if (j + 2 < len(timer) and timer[j].strip() == '#error Excluded unsupported non-NTVDM timer profile'
+            and timer[j + 1].strip() == '#else   /* NTVDM */' and timer[j + 2].strip() == '#line 1816'):
+        timer_matches.append((i, j))
+if len(timer_matches) != 1:
+    raise SystemExit('timer NTVDM guard missing or ambiguous')
+timer_start, timer_error = timer_matches[0]
+timer_end = unique_sequence(timer, ['#endif /* NTVDM */', '#line 2093'], 'timer NTVDM end')
 if timer_end <= timer_start:
     raise SystemExit('timer NTVDM end precedes its guard')
 probe = scratch / 'ntvdm-timer2-guard.c'
-probe.write_text('\n'.join(timer[timer_start:timer_start + 4] + ['int selected_line = __LINE__;',
-                 '#endif', '#line 1959', 'int following_line = __LINE__;']) + '\n', encoding='ascii')
+probe.write_text('\n'.join(timer[timer_start:timer_error + 3] + ['int selected_line = __LINE__;',
+                 '#endif', '#line 2093', 'int following_line = __LINE__;']) + '\n', encoding='ascii')
 base = ['cl.exe', '/nologo', '/EP', '/TC']
 selected = subprocess.run(base + ['/DNTVDM', str(probe)], capture_output=True, text=True, errors='replace')
 excluded = subprocess.run(base + [str(probe)], capture_output=True, text=True, errors='replace')
 if (selected.returncode or not re.search(r'int\s+selected_line\s*=\s*1816\s*;', selected.stdout)
-        or not re.search(r'int\s+following_line\s*=\s*1959\s*;', selected.stdout)):
+        or not re.search(r'int\s+following_line\s*=\s*2093\s*;', selected.stdout)):
     raise SystemExit('timer NTVDM selected lines failed: ' + selected.stderr)
 if not excluded.returncode or 'Excluded unsupported non-NTVDM timer profile' not in excluded.stdout + excluded.stderr:
     raise SystemExit('timer non-NTVDM guard failed')
@@ -171,20 +194,24 @@ for arm in batch3:
     arm['following_line'] = arm['original_arm_lines'][1] + 1
     source = (repo / arm['path']).read_text(encoding='latin1').split('\n')
     marker = '#error Excluded unsupported non-NTVDM ' + ('time service' if arm['path'].endswith('/time_day.c') else 'PIC') + ' profile'
-    matches = [j for j in range(len(source) - 3)
-               if source[j].strip() == '#ifndef NTVDM'
-               and source[j + 1].strip() == marker
-               and re.match(r'^\s*#\s*endif\b', source[j + 2])
-               and source[j + 3].strip() == '#line ' + str(arm['following_line'])]
+    matches = []
+    for j, line in enumerate(source):
+        if line.strip() != '#ifndef NTVDM':
+            continue
+        error = guard_error_index(source, j)
+        if (error + 2 < len(source) and source[error].strip() == marker
+                and re.match(r'^\s*#\s*endif\b', source[error + 1])
+                and source[error + 2].strip() == '#line ' + str(arm['following_line'])):
+            matches.append((j, error))
     if len(matches) != 1:
         raise SystemExit('NTVDM time/PIC guard is missing or ambiguous: ' + arm['path'])
-    i = matches[0]
-    if (source[i].strip() != '#ifndef NTVDM' or source[i + 1].strip() != marker
-            or not re.match(r'^\s*#\s*endif\b', source[i + 2])
-            or source[i + 3].strip() != '#line ' + str(arm['following_line'])):
+    i, error = matches[0]
+    if (source[i].strip() != '#ifndef NTVDM' or source[error].strip() != marker
+            or not re.match(r'^\s*#\s*endif\b', source[error + 1])
+            or source[error + 2].strip() != '#line ' + str(arm['following_line'])):
         raise SystemExit('NTVDM time/PIC guard differs: ' + arm['path'])
     probe = scratch / 'ntvdm-batch3-guard.c'
-    probe.write_text('\n'.join(['#ifndef NTVDM', marker, '#endif', source[i + 3],
+    probe.write_text('\n'.join(['#ifndef NTVDM', marker, '#endif', source[error + 2],
                                'int following_line = __LINE__;']) + '\n', encoding='ascii')
     selected = subprocess.run(base + ['/DNTVDM', str(probe)], capture_output=True, text=True, errors='replace')
     excluded = subprocess.run(base + [str(probe)], capture_output=True, text=True, errors='replace')
@@ -199,14 +226,18 @@ for arm in else_arms:
     arm['following_line'] = arm['original_end'] + 1
     source = (repo / arm['path']).read_text(encoding='latin1').split('\n')
     marker = '#error Excluded unsupported non-NTVDM alternative'
-    matches = [j for j in range(len(source) - 3)
-               if re.match(r'^\s*#\s*else\b', source[j])
-               and source[j + 1].strip() == marker
-               and re.match(r'^\s*#\s*endif\b', source[j + 2])
-               and source[j + 3].strip() == '#line ' + str(arm['following_line'])]
+    matches = []
+    for j, line in enumerate(source):
+        if not re.match(r'^\s*#\s*else\b', line):
+            continue
+        error = guard_error_index(source, j)
+        if (error + 2 < len(source) and source[error].strip() == marker
+                and re.match(r'^\s*#\s*endif\b', source[error + 1])
+                and source[error + 2].strip() == '#line ' + str(arm['following_line'])):
+            matches.append((j, error))
     if len(matches) != 1:
         raise SystemExit('NTVDM alternative is missing or ambiguous: ' + arm['path'])
-    i = matches[0]
+    i, error = matches[0]
     stack = []
     for line in source[:i]:
         directive = re.match(r'^\s*#\s*(if|ifdef|ifndef|endif)\b', line)
@@ -219,7 +250,7 @@ for arm in else_arms:
         raise SystemExit('NTVDM alternative parent differs: ' + arm['path'])
     probe = scratch / 'ntvdm-else-guard.c'
     probe.write_text('\n'.join(['#ifdef NTVDM', 'int selected = 1;', '#else', marker,
-                               '#endif', source[i + 3].strip(), 'int following_line = __LINE__;']) + '\n', encoding='ascii')
+                               '#endif', source[error + 2].strip(), 'int following_line = __LINE__;']) + '\n', encoding='ascii')
     selected = subprocess.run(base + ['/DNTVDM', str(probe)], capture_output=True, text=True, errors='replace')
     excluded = subprocess.run(base + [str(probe)], capture_output=True, text=True, errors='replace')
     if selected.returncode or not re.search(r'int\s+following_line\s*=\s*' + str(arm['following_line']) + r'\s*;', selected.stdout):
@@ -305,9 +336,12 @@ if len(matches) != 1:
     raise SystemExit('missing unique startup guard')
 i = matches[0]
 expected = ['#ifndef CPU_40_STYLE', marker, '#else', '#line 61',
-            'extern void host_start_cpu(void);', '#endif', '#line 62',
+            'extern void host_start_cpu(void);', '#endif', '#line 57',
             'extern int InitialiseDosEmulation(int argc, char **argv);']
-if [line.strip() for line in lines[i-1:i+7]] != expected:
+start = i - 1
+while start >= 0 and re.match(r'^\s*#\s*line\b', lines[start]):
+    start -= 1
+if guard_error_index(lines, start) != i or [lines[start].strip()] + [line.strip() for line in lines[i:i+7]] != expected:
     raise SystemExit('startup guard, selected declaration or line controls changed')
 
 probe = scratch / 'startup-guard.c'
@@ -320,7 +354,7 @@ selected = subprocess.run(base + ['/DCPU_40_STYLE', str(probe)],
 excluded = subprocess.run(base + [str(probe)], capture_output=True,
                           text=True, errors='replace')
 if (selected.returncode or not re.search(r'int\s+selected_line\s*=\s*61\s*;', selected.stdout)
-        or not re.search(r'int\s+following_line\s*=\s*62\s*;', selected.stdout)):
+        or not re.search(r'int\s+following_line\s*=\s*57\s*;', selected.stdout)):
     raise SystemExit('CPU40 guard or diagnostic line mapping failed: ' + selected.stderr)
 if not excluded.returncode or marker[7:] not in excluded.stdout + excluded.stderr:
     raise SystemExit('unsupported non-CPU40 path did not fail at the restored guard')
@@ -364,14 +398,14 @@ following_index = error_index + 2
 while following_index + 1 < len(lines) and lines[following_index + 1].strip().startswith('#line '):
     following_index += 1
 if (lines[error_index].strip() != marker or not re.match(r'^\s*#\s*endif\b', lines[error_index+1])
-        or lines[following_index].strip() != '#line 221'):
+        or lines[following_index].strip() != '#line 217'):
     raise SystemExit('profiling startup guard or line control changed')
 probe.write_text('\n'.join(lines[i:following_index+1] + ['int following_line = __LINE__;']) + '\n',
                  encoding='ascii')
 for defines in (['/DCPU_40_STYLE', '/DPROFILE'], []):
     selected = subprocess.run(base + defines + [str(probe)], capture_output=True,
                               text=True, errors='replace')
-    if selected.returncode or not re.search(r'int\s+following_line\s*=\s*221\s*;', selected.stdout):
+    if selected.returncode or not re.search(r'int\s+following_line\s*=\s*217\s*;', selected.stdout):
         raise SystemExit('profiling conjunction or line mapping failed: ' + selected.stderr)
 excluded = subprocess.run(base + ['/DPROFILE', str(probe)], capture_output=True,
                           text=True, errors='replace')
@@ -504,10 +538,10 @@ for header, continuation, payload in (
     adapted, rest = rest.split('\n#else\n', 1)
     generic, tail = rest.split('\n#endif\n#endif\n', 1)
     direct = outer.split('\n', 1)[1]
-    if direct != adapted or tail.strip() != f'#line {continuation}':
+    if '#error Excluded unsupported historical i386' not in direct or tail.strip() != f'#line {continuation}':
         raise SystemExit(f'{header}: original i386 boundary or MSVC selection changed')
-    baseline = '#if defined(i386) || defined(_M_IX86)\n' + direct + '\n#else\n' + generic + '\n#endif\n'
-    profiles = (['/Di386'], ['/U_M_IX86', '/D_M_IX86=600'], ['/U_M_IX86', '/Ui386'])
+    baseline = '#if defined(_M_IX86)\n' + adapted + '\n#else\n' + generic + '\n#endif\n'
+    profiles = (['/U_M_IX86', '/D_M_IX86=600'], ['/U_M_IX86', '/Ui386'])
     for defines in profiles:
         outputs = []
         for content in (baseline, group):
@@ -519,12 +553,17 @@ for header, continuation, payload in (
             outputs.append('\n'.join(line for line in result.stdout.splitlines() if line.strip()))
         if outputs[0] != outputs[1]:
             raise SystemExit(f'{header}: original selector changed macro output')
+    probe.write_text(group + payload + '\n', encoding='ascii')
+    rejected = subprocess.run(base + ['/Di386', str(probe)], capture_output=True,
+                              text=True, errors='replace')
+    if not rejected.returncode or 'Excluded unsupported historical i386' not in rejected.stdout + rejected.stderr:
+        raise SystemExit(f'{header}: unsupported historical i386 profile did not fail')
     probe.write_text(group + 'int after_outer = __LINE__;\n', encoding='ascii')
     line = subprocess.run(base + [str(probe)], capture_output=True, text=True, errors='replace')
     if line.returncode or not re.search(r'int\s+after_outer\s*=\s*' + str(continuation) + r'\s*;', line.stdout):
         raise SystemExit(f'{header}: original continuation line changed')
     first_line, other_line = ((74, 79) if header == 'mvdm.h' else (33, 35))
-    occurrences = [(first_line, 0), (first_line, 1), (other_line, 0)]
+    occurrences = [(first_line, 1), (other_line, 0)]
     for defines, (expected_line, occurrence) in zip(profiles, occurrences):
         marker = f'#line {expected_line}\n'
         parts = group.split(marker)
@@ -566,10 +605,15 @@ print('PASS three scoped WOW try-call exclusions and original line mappings')
 wdib_marker = '#error Excluded unsupported i386 WOW DIB profile'
 wdib_lines = (repo / 'src/mvdm-host/wow32/wdib.c').read_text(encoding='latin1').split('\n')
 for following in (322, 667):
-    matches = [i for i, line in enumerate(wdib_lines) if line.strip() == wdib_marker
-               and i > 0 and wdib_lines[i - 1].strip() == '#else'
-               and wdib_lines[i + 1].strip() == '#endif'
-               and wdib_lines[i + 2].strip() == '#line ' + str(following)]
+    matches = []
+    for i, line in enumerate(wdib_lines):
+        if line.strip() != '#else':
+            continue
+        error = guard_error_index(wdib_lines, i)
+        if (error + 2 < len(wdib_lines) and wdib_lines[error].strip() == wdib_marker
+                and wdib_lines[error + 1].strip() == '#endif'
+                and wdib_lines[error + 2].strip() == '#line ' + str(following)):
+            matches.append(error)
     if len(matches) != 1:
         raise SystemExit('WOW DIB guard or line mapping missing')
     end = matches[0] + 1
@@ -598,7 +642,7 @@ for path, continuation, has_else in (
     start = starts[0]
     error_index = guard_error_index(lines, start)
     if has_else:
-        if [x.strip() for x in lines[error_index + 1:error_index + 4]] != ['#else', '#define SafeLoadLibrary(name) LoadLibrary(name)', '#endif']:
+        if [x.strip() for x in lines[error_index + 1:error_index + 5]] != ['#else', '#line 62', '#define SafeLoadLibrary(name) LoadLibrary(name)', '#endif']:
             raise SystemExit('WOW spool selected alternative changed')
         snippet = ['#ifdef i386', header_marker, '#else', 'int selected = 1;', '#endif', '#line 64', 'int following_line = __LINE__;']
     else:
@@ -616,52 +660,50 @@ print('PASS two scoped WOW i386 header guards and original continuation lines')
 
 dpmi_header = (repo / 'src/mvdm-host/dpmi32/dpmiint.h').read_text(encoding='latin1')
 outer, tail = dpmi_header.split('#ifndef i386\n', 1)
-first, tail = tail.split('\n#else\n#if defined(CPU_40_STYLE)\n', 1)
-second, tail = tail.split('\n#else\n#error Unsupported excluded original configuration\n#endif\n#endif // i386\n#line 46\n', 1)
-if first != second or not first.startswith('#line 24\n'):
-    raise SystemExit('DPMI original outer selector or CPU40 carrier differs')
-for defines in ([], ['/DCPU_40_STYLE'], ['/Di386', '/DCPU_40_STYLE']):
-    probe.write_text('#ifndef i386\n' + first + '\n#else\n#if defined(CPU_40_STYLE)\n' + second +
-                     '\n#else\n#error Unsupported excluded original configuration\n#endif\n#endif\n#line 46\nint after_dpmi = __LINE__;\n', encoding='ascii')
+body, tail = tail.split('\n#else\n', 1)
+rejected, tail = tail.split('\n#endif // i386\n#line 46\n', 1)
+if not body.startswith('#line 24\n') or '#error Excluded unsupported i386 kernel VDM handler carrier' not in rejected:
+    raise SystemExit('DPMI original outer selector or software carrier differs')
+probe.write_text('#ifndef i386\n' + body + '\n#else\n' + rejected +
+                 '\n#endif\n#line 46\nint after_dpmi = __LINE__;\n', encoding='ascii')
+for defines in ([], ['/DCPU_40_STYLE']):
     selected = subprocess.run(base + defines + [str(probe)], capture_output=True, text=True, errors='replace')
     if selected.returncode or not re.search(r'int\s+after_dpmi\s*=\s*46\s*;', selected.stdout):
         raise SystemExit('DPMI selected selector or original line failed: ' + selected.stderr)
 excluded = subprocess.run(base + ['/Di386', str(probe)], capture_output=True, text=True, errors='replace')
-if not excluded.returncode or 'Unsupported excluded original configuration' not in excluded.stdout + excluded.stderr:
-    raise SystemExit('DPMI unsupported non-CPU40 profile did not fail')
-print('PASS original DPMI outer condition, CPU40 carrier and continuation')
+if not excluded.returncode or 'Excluded unsupported i386 kernel VDM handler carrier' not in excluded.stdout + excluded.stderr:
+    raise SystemExit('DPMI unsupported hardware-monitor profile did not fail')
+print('PASS original DPMI outer condition, software carrier and continuation')
 
 hook_lines = (repo / 'src/mvdm-host/dpmi32/dpmiint.c').read_text(encoding='latin1').splitlines()
 for field, original_body_line, continuation in (('fDpmiHookInts', 1168, 1175), ('fDpmiIntsHaveBeenHooked', 1202, 1209)):
     marker = '    if (' + field + ') {'
     instances = [i for i, line in enumerate(hook_lines) if line == marker]
-    if len(instances) != 2:
+    if len(instances) != 1:
         raise SystemExit('DPMI hook carrier count differs: ' + field)
-    first, second = instances
+    first = instances[0]
     if (hook_lines[first - 2].strip() != '#ifndef i386' or
-            hook_lines[first - 1].strip() != '#line ' + str(original_body_line) or
-            [x.strip() for x in hook_lines[second - 3:second]] !=
-            ['#else', '#if defined(CPU_40_STYLE)', '#line ' + str(original_body_line)]):
+            hook_lines[first - 1].strip() != '#line ' + str(original_body_line)):
         raise SystemExit('DPMI hook selector differs: ' + field)
-    first_body = hook_lines[first:second - 3]
-    second_end = next(i for i in range(second, len(hook_lines)) if hook_lines[i].strip() == '#endif')
-    second_body = hook_lines[second:second_end]
-    if first_body != second_body or hook_lines[second_end + 1].strip() != '#endif // i386' or hook_lines[second_end + 2].strip() != '#line ' + str(continuation):
-        raise SystemExit('DPMI hook body or continuation differs: ' + field)
-    snippet = ['#ifndef i386', '#line ' + str(original_body_line)] + first_body + ['#else', '#if defined(CPU_40_STYLE)', '#line ' + str(original_body_line)] + second_body + ['#endif', '#endif', '#line ' + str(continuation), 'int after_hook = __LINE__;']
+    cut = next(i for i in range(first, len(hook_lines)) if hook_lines[i].strip() == '#else')
+    end = next(i for i in range(cut, len(hook_lines)) if hook_lines[i].strip() == '#endif // i386')
+    error = guard_error_index(hook_lines, cut)
+    if (hook_lines[error].strip() != '#error Excluded unsupported i386 kernel VDM interrupt hook path'
+            or end != error + 1 or hook_lines[end + 1].strip() != '#line ' + str(continuation)):
+        raise SystemExit('DPMI hook rejection or continuation differs: ' + field)
+    snippet = hook_lines[first - 2:end + 2] + ['int after_hook = __LINE__;']
     probe.write_text('\n'.join(snippet) + '\n', encoding='ascii')
-    outputs = []
-    for defines in ([], ['/DCPU_40_STYLE'], ['/Di386', '/DCPU_40_STYLE'], ['/Di386']):
+    for defines in ([], ['/DCPU_40_STYLE']):
         result = subprocess.run(base + defines + [str(probe)], capture_output=True, text=True, errors='replace')
         if result.returncode or not re.search(r'int\s+after_hook\s*=\s*' + str(continuation) + r'\s*;', result.stdout):
-            raise SystemExit('DPMI hook profile failed: ' + field + result.stderr)
-        outputs.append('\n'.join(line for line in result.stdout.splitlines() if line.strip()))
-    if not (outputs[0] == outputs[1] == outputs[2]) or marker.strip() in outputs[3]:
-        raise SystemExit('DPMI hook selection changed: ' + field)
-print('PASS original DPMI hook selectors and four profiles')
+            raise SystemExit('DPMI hook selected profile failed: ' + field + result.stderr)
+    rejected = subprocess.run(base + ['/Di386', str(probe)], capture_output=True, text=True, errors='replace')
+    if not rejected.returncode or 'Excluded unsupported i386 kernel VDM interrupt hook path' not in rejected.stdout + rejected.stderr:
+        raise SystemExit('DPMI hardware-monitor hook was not rejected: ' + field)
+print('PASS original DPMI hook selectors, software profile and hardware rejection')
 
 host_cpu = (repo / 'src/mvdm-host/softpc.new/host/inc/host_cpu.h').read_text(encoding='latin1')
-if '#ifdef CPU_30_STYLE\n#error Excluded original conditional branch\n#else /* CPU_30_STYLE */\n#line 113\n' not in host_cpu or not host_cpu.rstrip().endswith('#line 507'):
+if '#ifdef CPU_30_STYLE\n#line 18\n#error Excluded original conditional branch\n#else /* CPU_30_STYLE */\n#line 113\n' not in host_cpu or not host_cpu.rstrip().endswith('#line 507'):
     raise SystemExit('host_cpu original outer selector or line mapping missing')
 probe.write_text(host_cpu + 'int after_host_cpu = __LINE__;\n', encoding='ascii')
 selected = subprocess.run(base + ['/DLITTLEND', str(probe)], capture_output=True, text=True, errors='replace')
@@ -678,7 +720,10 @@ indices = [i for i, line in enumerate(ios_lines) if line.strip() == ios_marker]
 if len(indices) != 1:
     raise SystemExit('IOS original monitor guard missing')
 i = indices[0]
-if ([x.strip() for x in ios_lines[i - 1:i + 4]] !=
+guard_start = i - 1
+while guard_start >= 0 and re.match(r'^\s*#\s*line\b', ios_lines[guard_start]):
+    guard_start -= 1
+if ([ios_lines[guard_start].strip()] + [x.strip() for x in ios_lines[i:i + 4]] !=
         ['#if defined(NTVDM) && defined(MONITOR)', ios_marker, '#else', '#if defined(NTVDM) && defined(CCPU)', '#line 414']):
     raise SystemExit('IOS outer condition or CCPU alternative changed')
 end = next(j for j in range(i + 4, len(ios_lines)) if ios_lines[j].strip() == '#endif')
@@ -730,16 +775,18 @@ for path, macro, original_line in (
 ):
     source = (repo / path).read_text(encoding='latin1').splitlines()
     marker = '#error Excluded unsupported missing ' + macro + ' SDK profile'
-    matches = [i for i, line in enumerate(source) if line.strip() == '#ifndef ' + macro
-               and source[i + 1].strip() == marker and source[i + 2].strip() == '#endif']
+    matches = [(i, guard_error_index(source, i)) for i, line in enumerate(source)
+               if line.strip() == '#ifndef ' + macro
+               and source[guard_error_index(source, i)].strip() == marker
+               and source[guard_error_index(source, i) + 1].strip() == '#endif']
     if len(matches) != 1:
         raise SystemExit('SDK provider guard missing: ' + path)
-    i = matches[0]
+    i, error = matches[0]
     preceding = [(j, re.match(r'^\s*#\s*line\s+(\d+)', line)) for j, line in enumerate(source[:i])]
     j, line_directive = [(j, match) for j, match in preceding if match][-1]
     if int(line_directive.group(1)) + (i - j - 1) != original_line:
         raise SystemExit('SDK guard original logical line changed: ' + path)
-    probe.write_text('\n'.join(['#line ' + str(original_line)] + source[i:i + 3] + ['int after_sdk = __LINE__;']) + '\n', encoding='ascii')
+    probe.write_text('\n'.join(['#line ' + str(original_line)] + source[i:error + 3] + ['int after_sdk = __LINE__;']) + '\n', encoding='ascii')
     selected = subprocess.run(base + ['/D' + macro, str(probe)], capture_output=True, text=True, errors='replace')
     rejected = subprocess.run(base + ['/U' + macro, str(probe)], capture_output=True, text=True, errors='replace')
     if selected.returncode or not re.search(r'int\s+after_sdk\s*=\s*' + str(original_line + 3) + r'\s*;', selected.stdout):
@@ -762,7 +809,7 @@ for macro, original_line in (('SUCCESS', 26), ('NULL', 60)):
     if start > 0 and source[start - 1].strip().startswith('#line ') and source[start - 1].strip() != '#line ' + str(original_line):
         raise SystemExit('control-BOP original guard line changed: ' + macro)
     snippet = ['#line ' + str(original_line)] + source[start:error_index + 2]
-    following = original_line + 3
+    following = original_line + (error_index + 2 - start)
     if error_index + 2 < len(source) and source[error_index + 2].strip().startswith('#line '):
         snippet.append(source[error_index + 2])
         following = int(source[error_index + 2].strip().split()[1])
@@ -789,7 +836,7 @@ for macro, original_line in (('TRUE', 46), ('FALSE', 50)):
     if start > 0 and source[start - 1].strip().startswith('#line ') and source[start - 1].strip() != '#line ' + str(original_line):
         raise SystemExit('base Boolean original guard line changed: ' + macro)
     snippet = ['#line ' + str(original_line)] + source[start:error_index + 2]
-    following = original_line + 3
+    following = original_line + (error_index + 2 - start)
     if error_index + 2 < len(source) and source[error_index + 2].strip().startswith('#line '):
         snippet.append(source[error_index + 2])
         following = int(source[error_index + 2].strip().split()[1])
@@ -1035,9 +1082,12 @@ for macro, name, original_line, selected_line, end_line in (('DBG', 'HANDLE_WARN
     if len(matches) != 1:
         raise SystemExit('original fixup guard missing: ' + name)
     i = matches[0]; end = next(j for j in range(i+1, len(source)) if source[j].strip() == '#endif')
-    if source[i-2].strip() != '#line ' + str(original_line) or source[i-1].strip() != '#if ' + macro or source[i+1].strip() != '#else' or source[i+2].strip() != '#line ' + str(selected_line):
+    start = i - 1
+    while start >= 0 and re.match(r'^\s*#\s*line\b', source[start]):
+        start -= 1
+    if source[start-1].strip() != '#line ' + str(original_line) or source[start].strip() != '#if ' + macro or source[i+1].strip() != '#else' or source[i+2].strip() != '#line ' + str(selected_line):
         raise SystemExit('original fixup selector/selected line missing: ' + name)
-    probe.write_text('\n'.join(source[i-2:end+1] + ['int after_fixup_guard = __LINE__;']) + '\n', encoding='ascii')
+    probe.write_text('\n'.join(source[start-1:end+1] + ['int after_fixup_guard = __LINE__;']) + '\n', encoding='ascii')
     selected = subprocess.run(base + ['/U' + macro, str(probe)], capture_output=True, text=True, errors='replace')
     rejected = subprocess.run(base + ['/D' + macro + '=1', str(probe)], capture_output=True, text=True, errors='replace')
     if selected.returncode or not re.search(r'int\s+after_fixup_guard\s*=\s*' + str(end_line+1) + r'\s*;', selected.stdout):
@@ -1052,9 +1102,13 @@ matches = [i for i, line in enumerate(source) if line.strip() == marker]
 if len(matches) != 1:
     raise SystemExit('cleanup x86 guard missing')
 i = matches[0]
-if source[i-4].strip() != '#line 229' or source[i-3].strip() != '#if defined(_X86_)' or source[i-1].strip() != '#else' or source[i+1].strip() != '#endif' or source[i+2].strip() != '#line 234':
+cut = i - 1
+while cut >= 0 and re.match(r'^\s*#\s*line\b', source[cut]):
+    cut -= 1
+start = cut - 3
+if source[start].strip() != '#line 229' or source[start+1].strip() != '#if defined(_X86_)' or source[cut].strip() != '#else' or source[i+1].strip() != '#endif' or source[i+2].strip() != '#line 234':
     raise SystemExit('cleanup original selector or line anchors missing')
-probe.write_text('\n'.join(source[i-4:i+3] + ['int cleanup_after = __LINE__;']) + '\n', encoding='ascii')
+probe.write_text('\n'.join(source[start:i+3] + ['int cleanup_after = __LINE__;']) + '\n', encoding='ascii')
 selected = subprocess.run(base + ['/D_X86_=1', str(probe)], capture_output=True, text=True, errors='replace')
 rejected = subprocess.run(base + ['/U_X86_', str(probe)], capture_output=True, text=True, errors='replace')
 if selected.returncode or 'sizeof(BYTE)' not in selected.stdout or not re.search(r'int\s+cleanup_after\s*=\s*234\s*;', selected.stdout):
@@ -1070,10 +1124,12 @@ for original, continuation in ((209, 218), (251, 258)):
     if len(matches) != 1:
         raise SystemExit('original gray-drawing guard line missing')
     i = matches[0]
+    error = guard_error_index(source, i + 1)
     if (source[i-1].strip() != '#endif /* WOW_ORIGINAL_STATE_DRAWING */' or
-            not source[i+1].strip().startswith('#if 0') or source[i+2].strip() != marker or
-            source[i+3].strip() != '#endif' or source[i+4].strip() != '#ifdef WOW_ORIGINAL_STATE_DRAWING' or
-            source[i+5].strip() != '#line ' + str(continuation) or source[i+6].strip() != 'break;'):
+            not source[i+1].strip().startswith('#if 0') or source[error].strip() != marker or
+            source[error+1].strip() != '#endif' or source[error+2].strip() != '#line ' + str(continuation) or
+            source[error+3].strip() != '#ifdef WOW_ORIGINAL_STATE_DRAWING' or
+            source[error+4].strip() != '#line ' + str(continuation) or source[error+5].strip() != 'break;'):
         raise SystemExit('gray-drawing original depth or continuation changed')
     probe.write_text('\n'.join(['#line ' + str(original), '#if 0', marker, '#endif',
                                  '#line ' + str(continuation), 'int gray_after = __LINE__;']) + '\n', encoding='ascii')
@@ -1154,7 +1210,8 @@ for line in lines[:i]:
     directive = re.match(r'^\s*#\s*(if|ifdef|ifndef|endif)\b', line)
     if directive:
         depth += -1 if directive.group(1) == 'endif' else 1
-if depth or not lines[i + 1].startswith('#if 0') or not lines[i + 2].startswith('#error '):
+j = guard_error_index(lines, i + 1)
+if depth or not lines[i + 1].startswith('#if 0') or not lines[j].startswith('#error '):
     raise SystemExit('clres bitmap original first-depth disabled guard missing')
 if '#line 1692' not in lines[i:i + 10] or '#line 1703' not in lines[i:i + 25]:
     raise SystemExit('clres original bitmap continuation lines missing')
@@ -1199,11 +1256,15 @@ for original, continuation in ((319, 322), (326, 333), (349, 352), (361, 364)):
         directive = re.match(r'^\s*#\s*(if|ifdef|ifndef|endif)\b', line)
         if directive:
             depth += -1 if directive.group(1) == 'endif' else 1
-    if depth or lines[i + 1] != '#if DBG' or not lines[i + 2].startswith('#error ') or lines[i + 5] != '#line ' + str(continuation):
+    j = guard_error_index(lines, i + 1)
+    if (depth or lines[i + 1] != '#if DBG' or not lines[j].startswith('#error ')
+            or not lines[j + 1].startswith('#endif')
+            or '#line ' + str(continuation) not in lines[j + 2:j + 5]):
         raise SystemExit('rtlinit original DBG guard or continuation mismatch at ' + str(original))
 lines = (repo / 'src/non-mvdm/windows/core/ntuser/client/dlgmgr.c').read_text(encoding='latin1').splitlines()
 i = lines.index('#line 1056')
-if lines[i + 1] != '#ifdef SYSMODALWINDOWS' or not lines[i + 2].startswith('#error ') or lines[i + 4] != '#line 1066':
+j = guard_error_index(lines, i + 1)
+if lines[i + 1] != '#ifdef SYSMODALWINDOWS' or not lines[j].startswith('#error ') or lines[j + 2] != '#line 1066':
     raise SystemExit('dlgmgr original SYSMODALWINDOWS guard or continuation mismatch')
 print('PASS original rtlinit DBG guards and dlmgr original continuations')
 
@@ -1219,7 +1280,9 @@ for original, continuation in ((953, 956), (965, 970)):
         raise SystemExit('ntstubs original DEBUG guard or continuation mismatch at ' + str(original))
 lines = (repo / 'src/mvdm-host/softpc.new/host/src/nt_event.c').read_text(encoding='latin1').splitlines()
 i = lines.index('#line 1493')
-if lines[i + 1] != '#ifndef PROD' or not lines[i + 2].startswith('#error ') or lines[i + 4] != '#line 1496':
+j = guard_error_index(lines, i + 1)
+if (lines[i + 1] != '#ifndef PROD' or not lines[j].startswith('#error ')
+        or not lines[j + 1].startswith('#endif') or lines[j + 2] != '#line 1496'):
     raise SystemExit('nt_event original PROD guard or continuation mismatch')
 print('PASS original ntstubs DEBUG and nt_event PROD outer guards')
 
@@ -1240,7 +1303,8 @@ print('PASS original dlgmgr2 first-depth guards and continuations')
 lines = (repo / 'src/non-mvdm/windows/core/ntuser/rtl/chartran.c').read_text(encoding='latin1').splitlines()
 for original, continuation in ((446, 450), (457, 499)):
     i = lines.index('#line ' + str(original))
-    if not lines[i + 1].startswith('#ifdef FE_SB') or not lines[i + 2].startswith('#error '):
+    j = guard_error_index(lines, i + 1)
+    if not lines[i + 1].startswith('#ifdef FE_SB') or not lines[j].startswith('#error '):
         raise SystemExit('chartran original FE_SB guard missing at ' + str(original))
     if '#line ' + str(continuation) not in lines[i:i + 12]:
         raise SystemExit('chartran original FE_SB continuation missing at ' + str(original))
@@ -1250,7 +1314,8 @@ print('PASS original chartran FE_SB guard continuations')
 
 lines = (repo / 'src/mvdm-host/softpc.new/base/ccpu386/c_main.c').read_text(encoding='latin1').splitlines()
 i = lines.index('#line 226')
-if lines[i + 1] != '#if defined(SFELLOW)' or not lines[i + 2].startswith('#error ') or lines[i + 3] != '#else' or lines[i + 4] != '#line 229' or '#line 231' not in lines[i + 5:i + 9]:
+j = guard_error_index(lines, i + 1)
+if lines[i + 1] != '#if defined(SFELLOW)' or not lines[j].startswith('#error ') or lines[j + 1] != '#else' or lines[j + 2] != '#line 229' or '#line 231' not in lines[j + 3:j + 7]:
     raise SystemExit('c_main original SFELLOW condition or continuation missing')
 print('PASS original c_main SFELLOW condition and continuations')
 

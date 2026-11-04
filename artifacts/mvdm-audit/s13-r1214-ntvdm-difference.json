@@ -1,0 +1,116 @@
+{
+  "non_timestamp_changed_bytes": 27,
+  "source": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+  "method": "Every non-timestamp difference is part of an x86 push immediate immediately followed by an unchanged push of the nt_event.c source-file path.",
+  "diagnostic_sites": [
+    {
+      "offset": "0x4fc76",
+      "old_line": 1327,
+      "new_line": 1271,
+      "changed_bytes": 2
+    },
+    {
+      "offset": "0x4fd0a",
+      "old_line": 1327,
+      "new_line": 1271,
+      "changed_bytes": 2
+    },
+    {
+      "offset": "0x4fd7a",
+      "old_line": 1327,
+      "new_line": 1271,
+      "changed_bytes": 2
+    },
+    {
+      "offset": "0x4fdea",
+      "old_line": 1327,
+      "new_line": 1271,
+      "changed_bytes": 2
+    },
+    {
+      "offset": "0x508d9",
+      "old_line": 1327,
+      "new_line": 1271,
+      "changed_bytes": 2
+    },
+    {
+      "offset": "0x509a0",
+      "old_line": 1463,
+      "new_line": 1402,
+      "changed_bytes": 1
+    },
+    {
+      "offset": "0x50dec",
+      "old_line": 537,
+      "new_line": 511,
+      "changed_bytes": 2
+    },
+    {
+      "offset": "0x50ef7",
+      "old_line": 1327,
+      "new_line": 1271,
+      "changed_bytes": 2
+    },
+    {
+      "offset": "0x50f65",
+      "old_line": 1327,
+      "new_line": 1271,
+      "changed_bytes": 2
+    },
+    {
+      "offset": "0x50f96",
+      "old_line": 484,
+      "new_line": 458,
+      "changed_bytes": 1
+    },
+    {
+      "offset": "0x51253",
+      "old_line": 424,
+      "new_line": 398,
+      "changed_bytes": 1
+    },
+    {
+      "offset": "0x51263",
+      "old_line": 443,
+      "new_line": 417,
+      "changed_bytes": 1
+    },
+    {
+      "offset": "0x515fc",
+      "old_line": 267,
+      "new_line": 241,
+      "changed_bytes": 2
+    },
+    {
+      "offset": "0x51634",
+      "old_line": 283,
+      "new_line": 257,
+      "changed_bytes": 1
+    },
+    {
+      "offset": "0x51679",
+      "old_line": 293,
+      "new_line": 267,
+      "changed_bytes": 1
+    },
+    {
+      "offset": "0x516ad",
+      "old_line": 296,
+      "new_line": 270,
+      "changed_bytes": 1
+    },
+    {
+      "offset": "0x516da",
+      "old_line": 299,
+      "new_line": 273,
+      "changed_bytes": 1
+    },
+    {
+      "offset": "0x51708",
+      "old_line": 302,
+      "new_line": 276,
+      "changed_bytes": 1
+    }
+  ],
+  "limitation": "Byte classification does not prove failure behavior; full verification is running."
+}

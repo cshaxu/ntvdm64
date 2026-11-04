@@ -1,0 +1,401 @@
+{
+  "scope": "All inventoried existing files with form feeds in current or original; LF physical line mapping, no source mutation. Local tree differences require separate review.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "status": "completed-original-conditional-tree",
+      "current_ff": 1,
+      "original_ff": 2,
+      "current_sha256": "07775984ef3fe7e1e362423caa18ee91cb71e46a28021be27680933718f98436",
+      "original_sha256": "fd73ce7181f7dfb61432d63466c7641c3d010ca0c60bf446666b6c0118ddb8a9",
+      "result": "requires-local-review",
+      "reason": "local/original conditional trees differ",
+      "local_review_note": "The retained LIM writeback condition is intentionally broadened by the local MVDM_SOFTPC_RECOVER_LIM_WRITEBACK binding; that flag is in the actual worker graph. The existing reviewed record identifies this local selection difference."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/vgaports.h",
+      "status": "completed-original-conditional-tree",
+      "current_ff": 3,
+      "original_ff": 6,
+      "current_sha256": "83ffcb2146dcd032043ffd0344548f55984fe3f564c1db8b384de5fd0fa1c549",
+      "original_sha256": "7d2c9ceadd144ea014757549ab83e8ff8e28b6e92c11f0cd379119d07c0bd2f2",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "status": "completed-original-witnessed-condition-tree",
+      "current_ff": 2,
+      "original_ff": 2,
+      "current_sha256": "053ea94ae0d2b2fb19b8effee4aeda88151f8317629e9d5cd8894eb92b4c26bb",
+      "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "status": "completed-original-dbg-only-conditions",
+      "current_ff": 28,
+      "original_ff": 28,
+      "current_sha256": "268ba26a93f969ab08bb73668c165eeecfeed5e8dbe98e4f09c8d3c26f375022",
+      "original_sha256": "850f2f1a746eee3610f06ebf489cb662bcd628f556299e445daac7fdd24e9bbf",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "status": "completed-original-debug-only-existing-guards",
+      "current_ff": 8,
+      "original_ff": 8,
+      "current_sha256": "0af68a587ff958e76ab5e0ae139c6e233aca39dfedbfeffcc1fd7ae35a6600da",
+      "original_sha256": "90e6dc8f5625c371c8c14a2a111c3403d0f4b24597eacce8549049138f5721a6",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "status": "completed-original-debug-only-conditions",
+      "current_ff": 24,
+      "original_ff": 24,
+      "current_sha256": "dc48bd6f0ade800b1b8387cce259c1da41ae573d6214014fce72480157b674a3",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrinit.c",
+      "status": "completed-original-simple-excluded",
+      "current_ff": 12,
+      "original_ff": 12,
+      "current_sha256": "a2e4878558786715e56bda92357c5e1db94cef2949c1b0879bed44f1e7807866",
+      "original_sha256": "088ecff80459ed358ebf4f7dd291821748475a8fbdccaf27a1ee1df2b6648273",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmisc.c",
+      "status": "completed-original-debug-only-existing-guards",
+      "current_ff": 2,
+      "original_ff": 2,
+      "current_sha256": "e5e3e14c680375918a790dc39f2a42ebcc3a3a1c85170629f1fd46607b9098c1",
+      "original_sha256": "1af57aba3be6a1425eb18187a73c579f56619a2593bce3b2c20be8cf67216b6d",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "status": "completed-original-conditional-tree",
+      "current_ff": 17,
+      "original_ff": 17,
+      "current_sha256": "2c1b2079e410da6fe9950d6046a261a7d6920ebd57a86388866361cbb9fe6bc1",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "status": "completed-original-debug-only-conditions",
+      "current_ff": 26,
+      "original_ff": 26,
+      "current_sha256": "5c451467a56fc59cad34150b8716c1a8ac31cbbebfa3648d0291f05a4e3a632a",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "status": "completed-original-debug-only-conditions",
+      "current_ff": 35,
+      "original_ff": 35,
+      "current_sha256": "a4de409e7d4d9e7925d455a8f0fc95f3a2f57655edae0f5beb32bdcc49df514c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrputil.c",
+      "status": "completed-original-flat-excluded-guards",
+      "current_ff": 3,
+      "original_ff": 3,
+      "current_sha256": "ca92d822cc6626218ae76b957dac963711e9895c36072781a4c691e53c0b91a8",
+      "original_sha256": "1440cd1379dee1bbe65b0a1e6f6a637a3de48765da85cfd94153e8876a66fe16",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "status": "completed-original-flat-excluded-guards",
+      "current_ff": 8,
+      "original_ff": 8,
+      "current_sha256": "57f839a4ae5ecb800af66578f5e7e89e0af1dd986a4c84f06cac10101cf14586",
+      "original_sha256": "f75d2984624cee1a77b6f5bf6a18fe4a7f38a059d32b0e711edb97d03a08c9b8",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/mvdm-host/wow32/mapembed.c",
+      "status": "completed-original-debug-only-existing-guards",
+      "current_ff": 6,
+      "original_ff": 6,
+      "current_sha256": "21e5b1811d8be25289c87c4934edcb6738315049dae15a974daa6a6a8f0a8381",
+      "original_sha256": "55c13643489f5bcc9419ce0341accb284f946d8d75352527a3b9181dfeb4a385",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcommdlg.c",
+      "status": "completed-original-dbg-only-conditions",
+      "current_ff": 12,
+      "original_ff": 12,
+      "current_sha256": "1b27283580d9a560f44076e4f618cfea589afe08f926dd3599c5f4f9c189f339",
+      "original_sha256": "01ce83329ae37a3e987971398115b8c7b5d9dcbc3320bdffaaa595244740a7d0",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsdata.c",
+      "status": "completed-no-conditional-directives-in-either-version",
+      "current_ff": 14,
+      "original_ff": 11,
+      "current_sha256": "5f37abc01127d62858970b7021fc9ed2b9213e9b81cb4c12122abdadf64bda8e",
+      "original_sha256": "f8f95c4cb6ec3aca607e66d615900129497738617b9a6a192880dc66beb5e63b",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsext.c",
+      "status": "completed-no-conditional-directives-in-either-version",
+      "current_ff": 4,
+      "original_ff": 4,
+      "current_sha256": "62e2390f9ec198c09384dc1b18110b25fcba0cfedc189da3e3effba9653cac14",
+      "original_sha256": "13a04aa32c045b6dfde4a12099d06c99ce2ec84362f30f296d677f7c47b200f7",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wshell.c",
+      "status": "completed-original-witnessed-condition-tree",
+      "current_ff": 1,
+      "original_ff": 1,
+      "current_sha256": "1daa7860c95a0e374566b900d2da01e7459e7b88c0dfbe8e84b23f68bdf3ad40",
+      "original_sha256": "1daa7860c95a0e374566b900d2da01e7459e7b88c0dfbe8e84b23f68bdf3ad40",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/ex/probe.c",
+      "status": "completed-original-conditional-tree",
+      "current_ff": 0,
+      "original_ff": 2,
+      "current_sha256": "ed5e799b4e8b7595b44f1b6162b1d438e7826716b87202779265291673553ed2",
+      "original_sha256": "0d1cae414b609c624e6bdf04fa28ebd84ff38dbb9687a63d8bc9e840c2f2372b",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.c",
+      "status": "completed-original-conditional-tree",
+      "current_ff": 2,
+      "original_ff": 2,
+      "current_sha256": "1bbed0c19ef908b0e2a3145f8b47e8936597d39e06ed9282bd0058499d75f439",
+      "original_sha256": "88bf09ab98778e0ca58d9d232d3b7aba6115223f43eddf981f6e06b786e77e48",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/time.c",
+      "status": "completed-original-rtl-condition-and-local-subset",
+      "current_ff": 0,
+      "original_ff": 13,
+      "current_sha256": "3cdcd7e87ffa65c0d5bd2e1cb4e39f63b38087605918859d55950aa6b71bcf11",
+      "original_sha256": "ac422e072432aff83c17b03c2127a80d067e801170eba9216ab86d2520767d40",
+      "result": "requires-local-review",
+      "reason": "local/original conditional trees differ",
+      "local_review_note": "The standalone Time1970 condition is a local subset binding; original groups require review through that wrapper."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/api/apibuff.c",
+      "status": "completed-no-conditional-directives-in-either-version",
+      "current_ff": 0,
+      "original_ff": 2,
+      "current_sha256": "182096c659b17ad8e7b4adf38ef36eb49d2734cbbb58779ee4a3997145c70d02",
+      "original_sha256": "420a2973fd10924de9d6f709a88a79ef05bad74c61eaea1ea5b678b181c31161",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+      "status": "completed-original-debug-only-existing-guards",
+      "current_ff": 3,
+      "original_ff": 3,
+      "current_sha256": "a07a7fd2127ca6068ccdc31c9c079e1a0208d703eee6d5524a9416923750ede9",
+      "original_sha256": "3db640c6cdc48e0835cc6a54c69bd12196245fba3feeb486a79e45a7c9abbf86",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "current_ff": 4,
+      "original_ff": 4,
+      "current_sha256": "85a6e322a46388a1cceb9403f4fdb20670be38d6e8c1482a135b75625d57f0fc",
+      "original_sha256": "552ab1d7c2b5de620609312a6c500afa504d22b3852bebb3582eafb524c6c115",
+      "result": "requires-local-review",
+      "reason": "local/original conditional trees differ",
+      "local_review_note": "Original has no conditional groups. Three local copy-only exclusion guards are recorded in s13-r1198-local-full-file.json."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/time.c",
+      "status": "completed-no-conditional-directives-in-either-version",
+      "current_ff": 12,
+      "original_ff": 12,
+      "current_sha256": "3bb6a749645e12987155abf762c3e9e5a22c42732f535069de6e12dfed572ddd",
+      "original_sha256": "9ffc9d6f042f5c2d58069e2d53b4bbe8bb73c08888f79edfd532ab679ddbdf82",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "status": "completed-original-conditional-tree",
+      "current_ff": 0,
+      "original_ff": 5,
+      "current_sha256": "ac4490e2810adb728cea80a303fa86d67a93949a429c1b155cd84b1e80c11926",
+      "original_sha256": "1ed708dee1236ea6424610d2274830b651062ba602d4b2cfa60e49e33de4c186",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "status": "completed-original-conditional-tree",
+      "current_ff": 4,
+      "original_ff": 4,
+      "current_sha256": "631162e50772f92b2526660245630bc178a3bb501cb6a92bb58f7605e76add83",
+      "original_sha256": "7a0681e0d01f173edd31afac52c0a35cf7e2fc6711abcb4e224de06f116bdaf8",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
+      "status": "completed-no-conditional-directives-in-either-version",
+      "current_ff": 5,
+      "original_ff": 5,
+      "current_sha256": "b00e9457e9eb18a9a9b688783d5f8ffd3aae3eb88c92880ae6927297d293036d",
+      "original_sha256": "93d368f24f2b8fdf82e7f3459dbd53d028ccf6059db5e0f7fb621826135e96c4",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apiwksta.c",
+      "status": "completed-no-conditional-directives-in-either-version",
+      "current_ff": 3,
+      "original_ff": 3,
+      "current_sha256": "c298b92adae3e807e006b3fa279da957f511fd2ee24d0a0c497d1ee47cc27752",
+      "original_sha256": "8e0dbc5c1759aef57765c63ca8942550370bb260bfcd67d97f8b2e67281cd664",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xssubs.c",
+      "status": "completed-no-conditional-directives-in-either-version",
+      "current_ff": 13,
+      "original_ff": 13,
+      "current_sha256": "271c3f9eda9f43493a98cef1f113bd65d3512f13d62e232b567d6e16d695e525",
+      "original_sha256": "b3f3831e4a3a1eee6624b28fadaa48742465e1c51a093d6a75ffd9fefaecdd95",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+      "status": "completed-original-unicode-selected",
+      "current_ff": 5,
+      "original_ff": 5,
+      "current_sha256": "65a0ae3d65923ad5292213cf2c0f84bae48d91daebc6e087462bad42ed73c266",
+      "original_sha256": "2bb7b7a8d86742123d3e246a940d22b2f0448c0afdce6a26204e78dd4a50ecc7",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+      "status": "completed-original-conditional-tree",
+      "current_ff": 26,
+      "original_ff": 26,
+      "current_sha256": "d44312ef1b0a3200051fc9fc27b3e1ded47b47eae8a6b2cff9baa126bb18f36a",
+      "original_sha256": "e81160b69920ee87d603fe593916994f8448a280b2a2adfefd34c190b1b3cb78",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbmacro.h",
+      "status": "completed-original-conditional-tree",
+      "current_ff": 2,
+      "original_ff": 2,
+      "current_sha256": "b8d477fc44cba472316e1bc9fe06dddc366960b5aa896d888bd0344792e30157",
+      "original_sha256": "e7a4ff096b5e2fdd0a81cd1c080e57253231664f87cb329c17a25c694282d8d1",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbtypes.h",
+      "status": "completed-original-structure-profile-audit",
+      "current_ff": 4,
+      "original_ff": 4,
+      "current_sha256": "8e8d555ed6877abe8aeb6e5e41e0061420764996617d372812d083e8508ffd12",
+      "original_sha256": "f04a563368f33bb6d8ba50a50e68d68f081aecce94ecc37b6d787cc6f38ea622",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/crypt.h",
+      "status": "completed-original-conditional-tree",
+      "current_ff": 7,
+      "original_ff": 7,
+      "current_sha256": "0a325a131b109964594681317389ac7b7e4dce8f05f6dc553c499203f296c3ed",
+      "original_sha256": "0a325a131b109964594681317389ac7b7e4dce8f05f6dc553c499203f296c3ed",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "status": "deferred-depth1-contexts-unverified",
+      "current_ff": 0,
+      "original_ff": 15,
+      "current_sha256": "082316384723f6cfce62a5b5370e6cc0812badb71f11a005e03bdd39e3dbac33",
+      "original_sha256": "d4bddfbf3eadd81cbf913a60108f1c7cb3362c6c51b042701bba43da6bb8e52a",
+      "result": "requires-local-review",
+      "reason": "local/original conditional trees differ",
+      "local_review_note": "Pending subset/context review."
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+      "status": "deferred-depth1-contexts-unverified",
+      "current_ff": 0,
+      "original_ff": 1,
+      "current_sha256": "58440554432e525dcab5fd7faf9b805ad2dcafe8bae30a6a582eb699b85900a6",
+      "original_sha256": "0fb164317335d8b48c51122182922259c902c7f60afb28111bafa9fb75735a6a",
+      "result": "requires-local-review",
+      "reason": "local/original conditional trees differ",
+      "local_review_note": "Pending subset/context review."
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "deferred-depth1-contexts-unverified",
+      "current_ff": 0,
+      "original_ff": 6,
+      "current_sha256": "78472a40ae390301e30df4ad7f3cff032aa3d7b83bc8425c256f244be8d08418",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "result": "requires-local-review",
+      "reason": "local/original conditional trees differ",
+      "local_review_note": "Pending subset/context review."
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+      "status": "completed-single-original-include-guard",
+      "current_ff": 0,
+      "original_ff": 2,
+      "current_sha256": "02dfdb43c3d3db9380546a98fcf07d916059c0f4e001b5fe3c06cce19e811c03",
+      "original_sha256": "c6b7844e2e1248ac38ee90dd8173f95ab0f7997d7a7cfbafda851cc07cc80921",
+      "anchor_mismatches": [],
+      "result": "matched-tree-anchors"
+    }
+  ]
+}

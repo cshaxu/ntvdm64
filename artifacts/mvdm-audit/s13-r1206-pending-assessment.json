@@ -1,0 +1,28 @@
+{
+  "scope": "read-only triage; pending files are not declared complete",
+  "screen": "build/t473-s13/r1169-pending-screen.json",
+  "findings": [
+    {
+      "paths": [
+        "src/mvdm-host/inc/wowcomm.h",
+        "src/mvdm-host/inc/wowmmcb.h"
+      ],
+      "finding": "The UNALIGNED fallback is explicitly documented for 16-bit consumers; source includes from guest tree exist. Preserve pending complete supported-context audit; host marker absence alone does not establish it is safe to replace."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "finding": "Local standalone test selects a MONITOR configuration absent from ordinary production. Distinguish product exclusion from test-only configurations and preserve local selected behavior until each original/local condition is mapped."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "finding": "Current source contains local WOW feature-selection wrapper and original subset. Flat conditional-tree comparison cannot prove corresponding original branches or safe changes; map retained functions individually."
+    },
+    {
+      "paths": [
+        "src/non-mvdm/public/ddk/inc/ntdddisk.h",
+        "src/non-mvdm/public/sdk/inc/ntdbg.h"
+      ],
+      "finding": "Unobserved include guards and nested conditions are not proof the headers are unused; check production include closures before deletion or replacement."
+    }
+  ]
+}

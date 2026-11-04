@@ -1,0 +1,83 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\rtlinit.c",
+  "original_sha256": "d8841bd2f13e5825a84f670ec7cc60923977bf80618d737cbac2208f94c6523c",
+  "current_sha256": "d0bc4d295bd417374ad1173e1ba35c7897d696faded785584ab17431e43efc77",
+  "local_lookaside_groups": [
+    14,
+    194,
+    205,
+    228,
+    244
+  ],
+  "prior_selection_records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "line": "14",
+      "directive": "if",
+      "expression": "defined(WOW_ORIGINAL_EDIT_LOOKASIDE)",
+      "chain_start": "14",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "8e6b12e4b7b7b1106c80c9fe1bfaacd16434633e6feb39714cafc3bb56c99610"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "line": "189",
+      "directive": "if",
+      "expression": "DBG",
+      "chain_start": "189",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "8e6b12e4b7b7b1106c80c9fe1bfaacd16434633e6feb39714cafc3bb56c99610"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "line": "196",
+      "directive": "if",
+      "expression": "DBG",
+      "chain_start": "196",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "8e6b12e4b7b7b1106c80c9fe1bfaacd16434633e6feb39714cafc3bb56c99610"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "line": "215",
+      "directive": "if",
+      "expression": "DBG",
+      "chain_start": "215",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "8e6b12e4b7b7b1106c80c9fe1bfaacd16434633e6feb39714cafc3bb56c99610"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "line": "227",
+      "directive": "if",
+      "expression": "DBG",
+      "chain_start": "227",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "8e6b12e4b7b7b1106c80c9fe1bfaacd16434633e6feb39714cafc3bb56c99610"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "line": "234",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "14",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "8e6b12e4b7b7b1106c80c9fe1bfaacd16434633e6feb39714cafc3bb56c99610"
+    }
+  ],
+  "review": "Matched all original groups recursively against the pinned original. Five extra project-owned lookaside selection groups contain no nested conditional groups and remain intact; normalized original excluded DBG branch anchors.",
+  "limitations": "Build and byte comparison pending; no claim for unsupported debug builds."
+}

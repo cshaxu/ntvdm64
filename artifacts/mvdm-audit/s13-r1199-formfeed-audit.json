@@ -1,0 +1,114 @@
+{
+  "review": "Python bytes.splitlines preserves form feeds; parser indexes LF-delimited physical lines. Checked every original-matched error arm for exact LF-based original anchor in the five affected recent files. str.splitlines does split form feeds and is unsafe as an index into that parser.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/vgaports.h",
+      "current_ff": 3,
+      "original_ff": 6,
+      "current_sha256": "83ffcb2146dcd032043ffd0344548f55984fe3f564c1db8b384de5fd0fa1c549",
+      "original_sha256": "7d2c9ceadd144ea014757549ab83e8ff8e28b6e92c11f0cd379119d07c0bd2f2",
+      "excluded_arms_checked": [
+        {
+          "current": 16,
+          "original": 16,
+          "anchor": 17
+        },
+        {
+          "current": 396,
+          "original": 768,
+          "anchor": 769
+        },
+        {
+          "current": 418,
+          "original": 1369,
+          "anchor": 1370
+        },
+        {
+          "current": 453,
+          "original": 1412,
+          "anchor": 1413
+        },
+        {
+          "current": 616,
+          "original": 1583,
+          "anchor": 1584
+        },
+        {
+          "current": 641,
+          "original": 1634,
+          "anchor": 1635
+        },
+        {
+          "current": 961,
+          "original": 1966,
+          "anchor": 1967
+        },
+        {
+          "current": 969,
+          "original": 1976,
+          "anchor": 1977
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "current_ff": 0,
+      "original_ff": 5,
+      "current_sha256": "ac4490e2810adb728cea80a303fa86d67a93949a429c1b155cd84b1e80c11926",
+      "original_sha256": "1ed708dee1236ea6424610d2274830b651062ba602d4b2cfa60e49e33de4c186",
+      "excluded_arms_checked": [
+        {
+          "current": 56,
+          "original": 107,
+          "anchor": 108
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+      "current_ff": 26,
+      "original_ff": 26,
+      "current_sha256": "d44312ef1b0a3200051fc9fc27b3e1ded47b47eae8a6b2cff9baa126bb18f36a",
+      "original_sha256": "e81160b69920ee87d603fe593916994f8448a280b2a2adfefd34c190b1b3cb78",
+      "excluded_arms_checked": [
+        {
+          "current": 29,
+          "original": 29,
+          "anchor": 30
+        },
+        {
+          "current": 1520,
+          "original": 1518,
+          "anchor": 1519
+        },
+        {
+          "current": 1625,
+          "original": 1681,
+          "anchor": 1682
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbmacro.h",
+      "current_ff": 2,
+      "original_ff": 2,
+      "current_sha256": "b8d477fc44cba472316e1bc9fe06dddc366960b5aa896d888bd0344792e30157",
+      "original_sha256": "e7a4ff096b5e2fdd0a81cd1c080e57253231664f87cb329c17a25c694282d8d1",
+      "excluded_arms_checked": [
+        {
+          "current": 93,
+          "original": 93,
+          "anchor": 94
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/crypt.h",
+      "current_ff": 7,
+      "original_ff": 7,
+      "current_sha256": "0a325a131b109964594681317389ac7b7e4dce8f05f6dc553c499203f296c3ed",
+      "original_sha256": "0a325a131b109964594681317389ac7b7e4dce8f05f6dc553c499203f296c3ed",
+      "excluded_arms_checked": []
+    }
+  ]
+}

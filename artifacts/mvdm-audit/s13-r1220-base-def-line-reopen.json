@@ -1,0 +1,6 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/base_def.h",
+  "source_sha256": "a8b6961eb1cd3d78d98a284ee436db7ef009c9d638723b6aebddb6e6692909f5",
+  "finding": "The pre-existing TRUE and FALSE excluded arms each add a #line inside the inactive branch but do not restore original continuation after #endif. Selected profiles therefore advance one logical line past the original (continuations 49 and 53). Source remains unchanged in this 10-file batch.",
+  "status": "reopened for next source batch; correct and verify before declaring complete"
+}

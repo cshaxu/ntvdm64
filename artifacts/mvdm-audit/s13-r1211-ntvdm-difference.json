@@ -1,0 +1,169 @@
+{
+  "scope": "NTVDM PE byte differences outside parsed timestamps",
+  "non_timestamp_changed_bytes": 33,
+  "method": "Every changed byte is in the immediate of a push followed by an unchanged push of the matching source-file path; parsed x86 line immediates.",
+  "diagnostic_sites": [
+    {
+      "instruction_offset": "0x4fc76",
+      "source": "nt_event.c",
+      "old_line": 1327,
+      "new_line": 1271,
+      "changed_bytes": 2
+    },
+    {
+      "instruction_offset": "0x4fd0a",
+      "source": "nt_event.c",
+      "old_line": 1327,
+      "new_line": 1271,
+      "changed_bytes": 2
+    },
+    {
+      "instruction_offset": "0x4fd7a",
+      "source": "nt_event.c",
+      "old_line": 1327,
+      "new_line": 1271,
+      "changed_bytes": 2
+    },
+    {
+      "instruction_offset": "0x4fdea",
+      "source": "nt_event.c",
+      "old_line": 1327,
+      "new_line": 1271,
+      "changed_bytes": 2
+    },
+    {
+      "instruction_offset": "0x508d9",
+      "source": "nt_event.c",
+      "old_line": 1327,
+      "new_line": 1271,
+      "changed_bytes": 2
+    },
+    {
+      "instruction_offset": "0x509a0",
+      "source": "nt_event.c",
+      "old_line": 1463,
+      "new_line": 1402,
+      "changed_bytes": 1
+    },
+    {
+      "instruction_offset": "0x50dec",
+      "source": "nt_event.c",
+      "old_line": 537,
+      "new_line": 511,
+      "changed_bytes": 2
+    },
+    {
+      "instruction_offset": "0x50ef7",
+      "source": "nt_event.c",
+      "old_line": 1327,
+      "new_line": 1271,
+      "changed_bytes": 2
+    },
+    {
+      "instruction_offset": "0x50f65",
+      "source": "nt_event.c",
+      "old_line": 1327,
+      "new_line": 1271,
+      "changed_bytes": 2
+    },
+    {
+      "instruction_offset": "0x50f96",
+      "source": "nt_event.c",
+      "old_line": 484,
+      "new_line": 458,
+      "changed_bytes": 1
+    },
+    {
+      "instruction_offset": "0x51253",
+      "source": "nt_event.c",
+      "old_line": 424,
+      "new_line": 398,
+      "changed_bytes": 1
+    },
+    {
+      "instruction_offset": "0x51263",
+      "source": "nt_event.c",
+      "old_line": 443,
+      "new_line": 417,
+      "changed_bytes": 1
+    },
+    {
+      "instruction_offset": "0x515fc",
+      "source": "nt_event.c",
+      "old_line": 267,
+      "new_line": 241,
+      "changed_bytes": 2
+    },
+    {
+      "instruction_offset": "0x51634",
+      "source": "nt_event.c",
+      "old_line": 283,
+      "new_line": 257,
+      "changed_bytes": 1
+    },
+    {
+      "instruction_offset": "0x51679",
+      "source": "nt_event.c",
+      "old_line": 293,
+      "new_line": 267,
+      "changed_bytes": 1
+    },
+    {
+      "instruction_offset": "0x516ad",
+      "source": "nt_event.c",
+      "old_line": 296,
+      "new_line": 270,
+      "changed_bytes": 1
+    },
+    {
+      "instruction_offset": "0x516da",
+      "source": "nt_event.c",
+      "old_line": 299,
+      "new_line": 273,
+      "changed_bytes": 1
+    },
+    {
+      "instruction_offset": "0x51708",
+      "source": "nt_event.c",
+      "old_line": 302,
+      "new_line": 276,
+      "changed_bytes": 1
+    },
+    {
+      "instruction_offset": "0x5b162",
+      "source": "nt_fulsc.c",
+      "old_line": 1599,
+      "new_line": 1580,
+      "changed_bytes": 1
+    },
+    {
+      "instruction_offset": "0x5b1a7",
+      "source": "nt_fulsc.c",
+      "old_line": 1623,
+      "new_line": 1604,
+      "changed_bytes": 1
+    },
+    {
+      "instruction_offset": "0x5b32e",
+      "source": "nt_fulsc.c",
+      "old_line": 1963,
+      "new_line": 1944,
+      "changed_bytes": 1
+    },
+    {
+      "instruction_offset": "0x5b385",
+      "source": "nt_fulsc.c",
+      "old_line": 532,
+      "new_line": 166,
+      "changed_bytes": 2
+    },
+    {
+      "instruction_offset": "0x5b7e6",
+      "source": "nt_fulsc.c",
+      "old_line": 1997,
+      "new_line": 1978,
+      "changed_bytes": 1
+    }
+  ],
+  "limitation": "This proves the byte classification, not runtime fault behavior; Full is required."
+}

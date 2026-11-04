@@ -64,6 +64,7 @@ LONG GetPrefixCount(
             }
 #line 811
 #ifdef FE_SB // GetPrefixCount()
+#line 812
 #error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
 #endif // FE_SB
 #line 842
@@ -194,12 +195,14 @@ void PSMTextOut(
 
 #line 22
 #ifdef FE_SB
+#line 23
 #error Excluded unsupported original FE_SB branch
 #endif
 #line 26
 
 #line 59
 #ifdef FE_SB
+#line 60
 #error Excluded unsupported original FE_SB branch
 #endif
 #line 641

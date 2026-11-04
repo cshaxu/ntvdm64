@@ -5,8 +5,15 @@
  * Standalone precomp supplies the retained, same-address WND graph. */
 #include "precomp.h"
 
+#line 15
+#ifndef WOW
+#line 16
+#endif
+#line 18
+
 #line 19
 #ifdef WOW
+#line 20
 #error Excluded unsupported original 16-bit WOW source branch
 #else // WOW
 #line 120
@@ -32,12 +39,14 @@ PWND _GetDlgItem(
 
 #line 313
 #ifdef WOW
+#line 314
 #error Excluded unsupported original 16-bit WOW source branch
 #endif
 #line 323
 
 #line 1067
 #ifdef WOW
+#line 1068
 #error Excluded unsupported original 16-bit WOW source branch
 #endif
 #line 1077
@@ -96,6 +105,12 @@ PWND _GetDlgItem(
 #line 838
 #endif
 #line 840
+
+#line 890
+#ifndef WOW
+#line 891
+#endif
+#line 894
 
 #line 911
 #ifdef WOW

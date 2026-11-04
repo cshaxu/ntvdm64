@@ -1,0 +1,7 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+  "status": "deferred; batch-local edits reverted to HEAD, no unrelated changes overwritten",
+  "source_sha256": "ef451daedec6626dacf7bc88768ba5d1292ab58bad109579577bcaa79c9caf8d",
+  "finding": "Automatic matching by repeated X86GFX directive signatures paired current original branch at physical 220 with upstream physical 142, and another with upstream 159. Context-aligned source shows earlier 142 and 159 are separate branches. The original 1214-1464 X86GFX region also contains getNtScreenState, deliberately extracted as a retained project binding, so a flat-tree match cannot prove full alignment.",
+  "next": "Map original directives using original physical anchors and neighboring retained code, distinguish local gates from upstream groups, and resolve extracted function ownership before marking complete. No claim that the rejected candidate build is deliverable."
+}

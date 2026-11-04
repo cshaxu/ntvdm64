@@ -1,0 +1,24 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\draw.c",
+  "original_sha256": "7491e5b3331de8cb7a2189b8efbe91f56076f80a08338bf816d793e80a4faf76",
+  "current_sha256": "2719465cc91f9d173af90ec463d92c3f4bf47996a7aa3cba7b15d9b974506de5",
+  "local_button_groups": [
+    10
+  ],
+  "prior_selection_records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "line": "10",
+      "directive": "ifdef",
+      "expression": "WOW_ORIGINAL_BUTTON_DRAWING",
+      "chain_start": "10",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "eaaac6553c29be08f4c0fe6295106337a4d433b2a95273acc02c5267c3a657d4"
+    }
+  ],
+  "review": "Matched all original groups recursively against the pinned original. The additional project-owned button drawing selector contains no nested conditional groups and remains intact; normalized the original excluded WINDOWS_ME branch anchors.",
+  "limitations": "Build and byte comparison pending; no claim for unsupported WINDOWS_ME builds."
+}

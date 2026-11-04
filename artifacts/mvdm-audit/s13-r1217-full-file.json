@@ -1,0 +1,10 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\exitwin.c",
+  "original_sha256": "45b92f7236fba49d58e2c3d912126067c3843ec560c28cdd8a20167c62aaef65",
+  "before_sha256": "abdb6793896a0f0da1f7d79d45c4e919cfb50ae0757bbc70e39e9cc40e25b4e2",
+  "after_sha256": "abdb6793896a0f0da1f7d79d45c4e919cfb50ae0757bbc70e39e9cc40e25b4e2",
+  "prior_records": [],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}

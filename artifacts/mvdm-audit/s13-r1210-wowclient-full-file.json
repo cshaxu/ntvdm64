@@ -1,0 +1,9 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+  "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+  "current_sha256": "45836325a4ba50893a6aa4f7f98b4655451592ce2643e9cbeb12b1973ffae5bb",
+  "prior_selection_records": [],
+  "review": "Matched original top-level conditions by physical original line despite reordered subset skeletons; restored missing #ifndef WOW groups at 15 and 890 as empty retained subset frames, without restoring omitted hdrstop pragma or the absent CallNextHookEx function body. Added missing original line anchors in excluded WOW arms at 19, 313 and 1067. The selected _GetDlgItem body and its host binding remain unchanged.",
+  "limitations": "Binary comparison and complete build pending. WOW-defined guest USER16 profile is rejected, not compiled as a host context."
+}

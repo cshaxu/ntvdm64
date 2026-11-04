@@ -14,13 +14,10 @@
 ]*/
 
 #ifdef SEGMENTATION
+#line 17
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
+#line 24
 
 
 /*
@@ -46,6 +43,7 @@
 
 #line 44
 #ifndef PROD
+#line 45
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 47
@@ -59,8 +57,10 @@ LOCAL VOID where IFN3(CHAR *, string, word, cs, LIN_ADDR, ip)
 #ifdef	PROD
 		"CS:%04x IP:%04x OP:%02x %02x %02x %02x %02x",
 #else	/* PROD */
+#line 57
 #error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register.
 #endif	/* PROD */
+#line 59
 		cs, ip,
 		sas_hw_at(ea), sas_hw_at(ea+1), sas_hw_at(ea+2),
 		sas_hw_at(ea+3),sas_hw_at(ea+4));
@@ -77,8 +77,10 @@ LOCAL VOID where IFN3(CHAR *, string, word, cs, LIN_ADDR, ip)
 void illegal_op()
 {
 #ifndef	PROD
+#line 72
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 77
 }
 
 void illegal_op_int()
@@ -108,12 +110,14 @@ void illegal_op_int()
 	where(string, cs, ip);
 
 #ifndef NTVDM
+#line 100
 #error DIVERGENCE MVDM-HOST-DIV-591: non-NTVDM branch is not selected
 #else /* NTVDM */
 #line 113
 #ifdef PROD
 #if define(MONITOR) || define(CPU_40_STYLE)
-        host_error(EG_BAD_OP, ERR_QU_CO_RE, string);
+#line 110
+#error Unsupported excluded original configuration
 #else
         ea = effective_addr(cs, ip);
         opcode = sas_hw_at(ea);
@@ -122,6 +126,7 @@ void illegal_op_int()
         else
             host_error(EG_BAD_OP, ERR_QU_CO_RE, string);
 #endif /* MONITOR */
+#line 119
 #endif /* PROD */
 #endif /* NTVDM */
 #line 121
@@ -145,12 +150,15 @@ void illegal_op_int()
 void illegal_dvr_bop IFN0()
 {
 #ifndef NTVDM
+#line 141
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* ! NTVDM */
+#line 187
 }
 
 
 #ifndef PROD
+#line 191
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* ! PROD */
-#line 154
+#line 396

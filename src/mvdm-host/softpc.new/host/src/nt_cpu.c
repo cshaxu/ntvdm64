@@ -55,6 +55,7 @@ GLOBAL	quick_event_delays	host_delays;
 #endif
 #line 42
 #ifdef A2CPU
+#line 43
 #error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
 #endif
 #line 47
@@ -146,9 +147,10 @@ void	host_set_hw_int()
 void	host_clear_hw_int()
 {
 #ifndef CCPU
+#line 127
 #error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register.
 #endif /* not CCPU */
-#line 165
+#line 136
 }
 #endif
 #line 167
@@ -161,55 +163,10 @@ void host_cpu_init() {}
 #endif
 
 #ifdef A3CPU
+#line 147
 #error Excluded unsupported A3CPU configuration
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #endif /* A3CPU */
+#line 197
 
 void host_cpu_reset()
 {
@@ -284,9 +241,21 @@ GLOBAL void InitNtCpuInfo IFN0()
     /* register values are kept. */
 
     /* Horrible hack, part 1. InNanoCpu is a BOOL, so GLOBAL_InNanoCpu */
+#ifdef ALPHA
+#line 275
+#error Unsupported excluded original configuration
+#else /* ALPHA */
+#line 277
     /* DIVERGENCE(MVDM-HOST-DIV-048): the generated field is an lvalue in the
      * private GDP carrier; avoid a historical hard-coded native offset. */
     nt_cpu_info.in_nano_cpu = (BOOL *)&GLOBAL_InNanoCpu;
+#endif /* ALPHA */
+#line 279
+#ifndef PROD
+#line 280
+#error Unsupported excluded original configuration
+#endif
+#line 286
     /* DIVERGENCE(MVDM-HOST-DIV-048): the historical non-PROD assertion
      * compared against GdpOffsetFromName(), an undeclared NT4 packed-GDP
      * debug helper.  The selected GDP is now a generated native-width
@@ -300,9 +269,21 @@ GLOBAL void InitNtCpuInfo IFN0()
 
     /* Variables needed to get the value SP or ESP. */
 
+#ifdef ALPHA
+#line 293
+#error Unsupported excluded original configuration
+#else /* ALPHA */
+#line 295
     /* DIVERGENCE(MVDM-HOST-DIV-048): use the generated source field rather
      * than an architecture-specific byte offset into the old packed GDP. */
     nt_cpu_info.stack_is_big = (BOOL *)&GLOBAL_stackIsBig;
+#endif /* ALPHA */
+#line 297
+#ifndef PROD
+#line 298
+#error Unsupported excluded original configuration
+#endif
+#line 304
     /* DIVERGENCE(MVDM-HOST-DIV-048): see the InNanoCpu note above. */
 
     nt_cpu_info.nano_esp = &GLOBAL_nanoEsp;

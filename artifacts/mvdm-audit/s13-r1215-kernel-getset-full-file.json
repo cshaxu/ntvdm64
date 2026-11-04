@@ -1,0 +1,57 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\getset.c",
+  "original_sha256": "f0d22e4285e8b33b873854913a11587c67d78e50e1f5db28ec89ef8b6ff06d3d",
+  "current_sha256": "e1db390362e665fe9091c9a57c6cb8d532061460e1abeb401b8b844143d5123d",
+  "local_dialog_owner_groups": [
+    58
+  ],
+  "prior_selection_records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "line": "31",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "chain_start": "31",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "41b6fe5548fc76c1cfb99027fe7833f25ccadfbc1a57b09a50cebf042691cf38"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "line": "57",
+      "directive": "ifdef",
+      "expression": "WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+      "chain_start": "57",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "41b6fe5548fc76c1cfb99027fe7833f25ccadfbc1a57b09a50cebf042691cf38"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "line": "60",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "57",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "41b6fe5548fc76c1cfb99027fe7833f25ccadfbc1a57b09a50cebf042691cf38"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "line": "88",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "chain_start": "88",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "41b6fe5548fc76c1cfb99027fe7833f25ccadfbc1a57b09a50cebf042691cf38"
+    }
+  ],
+  "review": "Matched all original groups recursively against the pinned original. The additional project-owned dialog-procedure-owner selector contains no nested conditional groups and both its host and fixture semantics remain intact; all original error anchors already matched.",
+  "limitations": "No source change; optional unsupported DEBUG and FE_IME builds not claimed."
+}

@@ -1,0 +1,10 @@
+{
+  "script_sha256": "28C6CC3999D73EB17835FA37AA7A3EB645E2C0FE8952F5C2391B60D4BA0606E2",
+  "command": "O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\r1214-full-body.ps1",
+  "ended": "2026-11-04T01:27:18.3246245-08:00",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\r1214-full.stderr.log",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\r1214-full.log",
+  "pid": 21356,
+  "exit_code": 0,
+  "started": "2026-11-04T01:20:47.3879634-08:00"
+}

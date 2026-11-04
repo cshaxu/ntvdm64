@@ -1,0 +1,43 @@
+{
+  "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+  "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\netlib\\packstr.c",
+  "original_sha256": "552ab1d7c2b5de620609312a6c500afa504d22b3852bebb3582eafb524c6c115",
+  "current_sha256": "85a6e322a46388a1cceb9403f4fdb20670be38d6e8c1482a135b75625d57f0fc",
+  "selected_local_conditions": [
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "line": "60",
+      "directive": "if",
+      "expression": "!defined(MVDM_XACTSRV_PACKSTR_COPY_ONLY)",
+      "chain_start": "60",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "d0a538fa12c6f512c480ab199f1b122752efddeaf9e9d2b7caf1f760ede06f9e"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "line": "288",
+      "directive": "if",
+      "expression": "!defined(MVDM_XACTSRV_PACKSTR_COPY_ONLY)",
+      "chain_start": "288",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "d0a538fa12c6f512c480ab199f1b122752efddeaf9e9d2b7caf1f760ede06f9e"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "line": "413",
+      "directive": "if",
+      "expression": "!defined(MVDM_XACTSRV_PACKSTR_COPY_ONLY)",
+      "chain_start": "413",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "d0a538fa12c6f512c480ab199f1b122752efddeaf9e9d2b7caf1f760ede06f9e"
+    }
+  ],
+  "review": "Original has no conditional groups. Current product-binding selectors are observed selected or already explicitly excluded. No source edit.",
+  "limitations": "Selection witness and source comparison only; no runtime behavior claim."
+}
