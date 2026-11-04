@@ -1,0 +1,803 @@
+{
+  "scope": "60 files in which the recursive original selector sequence fits the current selector sequence, ignoring nested groups wholly pruned to #error; local selectors may remain",
+  "files": 60,
+  "registered_id_search_roots": [
+    "src\\mvdm-host\\README.md",
+    "src\\non-mvdm\\README.md",
+    "docs\\etc\\evidence\\m0-t473-original-abi-provenance.md"
+  ],
+  "limits": [
+    "Matching selectors alone does not prove arm reachability, project-local behavior, or supported-context completeness.",
+    "Identifier search checks presence in registers, not whether each individual diff is assigned the right entry.",
+    "Untagged differences still require inspection against referenced per-file evidence."
+  ],
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/data.c",
+      "current_sha256": "fa77262578ebef876e292dfc6d9b43f6cb64662a85f0a8679b89675d69625cd2",
+      "original_sha256": "fa3b44b0f6a5ea6165063bae35fe66063e23e518dad8c0cdf3de16d353c54cde",
+      "existing_evidence": "s13-r700-dpmi-data-review.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-516"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "current_sha256": "b9d1b7803f22f12e1d4c8ea474a391fff0e0cd3fa1aff29ba4130c983e5466af",
+      "original_sha256": "c271daf86bdfa846c9602f74bd2a4059b98c2ad1f12676e966bcfd427ba93dca",
+      "existing_evidence": "s13-r753-dpmi32-conditions.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-516",
+        "MVDM-HOST-DIV-619"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "current_sha256": "4980f5f7d98599e98f3a32c2b51542d93fa99f9984ccd982b519f873258d5a41",
+      "original_sha256": "c5734d7842c34ae436cd12a5b52ad76d4fab88940a64f3af7e5fdc6fbc92e4a9",
+      "existing_evidence": "s13-r755-dpmi32p-contexts.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-516",
+        "MVDM-HOST-DIV-619"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmidata.h",
+      "current_sha256": "f6c1ad552fb6a1782f897d82dc1ee6926132c053835f7a688d8e49d4d6389d4d",
+      "original_sha256": "f9772482513601c2e316e097a92485864557af77010e77285d725d903a0fd7b2",
+      "existing_evidence": "s13-r757-dpmidata-contexts.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-139",
+        "MVDM-HOST-DIV-281",
+        "MVDM-HOST-DIV-516"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmimemr.c",
+      "current_sha256": "8c4d1a0ad9b2cbf86be4c5f44a18661196bf2caff4cb14c382ba529861e43c33",
+      "original_sha256": "a21e43830622d5d04bfcd018c6751cdc7a3de54c166621731494363c8d5a60ae",
+      "existing_evidence": "s13-r761-dpmimemr-conditions.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-224",
+        "MVDM-HOST-DIV-513"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "current_sha256": "4166f23fd74cafc0aacd9cab592c0d218bcabc9b0e600338883c1bf45f708ffe",
+      "original_sha256": "9bdd58d63029de9438633a62934af2b2b868206cb7f06cc868f537e030fbd234",
+      "existing_evidence": "s13-r762-dpmiselr-conditions.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-516",
+        "MVDM-HOST-DIV-619"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
+      "current_sha256": "36aa9653d2da9c2b0e3487cfb58064aa1c850618cddcfb912d18c0636ae6eaa3",
+      "original_sha256": "e47bd6f7a1f48ba94022c9d5ed78714c269f751737f8f69711fc44c06523f8f0",
+      "existing_evidence": "s13-r763-dpmi386-conditions.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-281",
+        "MVDM-HOST-DIV-513"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "current_sha256": "178f7b6d8d71d56401f2b614daa17f6188d883c146b76531b7a2d18b4c96ef70",
+      "original_sha256": "aa7157e2a39fead41e42e87f87e332e9464bf69a668671de976c69637ce06a67",
+      "existing_evidence": "s13-r764-modesw-conditions.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-222",
+        "MVDM-HOST-DIV-229",
+        "MVDM-HOST-DIV-230",
+        "MVDM-HOST-DIV-242",
+        "MVDM-HOST-DIV-243",
+        "MVDM-HOST-DIV-310",
+        "MVDM-HOST-DIV-619"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/inc/mvdm.h",
+      "current_sha256": "da42c5bffd3cb0b567024fc59d006f523e456d292735bf014f792b602aa6fd77",
+      "original_sha256": "9f450f2eb6ee684763f7f9e27ee43c80e7e24d1e5a87ff254fbd7da4fcd1cdb7",
+      "existing_evidence": "s13-r766-mvdm-header-contexts.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-536",
+        "MVDM-SUPPORT-DIV-006"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/inc/suballoc.h",
+      "current_sha256": "8327513e33bc64eb41fdbbf797adfea0580b6180e7bce584b9e4ac4e082f5c2f",
+      "original_sha256": "98263eed4c261650c4b9c9b23f09f2ef19b31a0b1eb5c805d4c672ee85ded85c",
+      "existing_evidence": "s13-r771-suballoc-header-contexts.json",
+      "recorded_ids": [
+        "MVDM-SUPPORT-DIV-007"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_sha256": "2e563c3d998e8bb65df31233f8c1fa1884ab436ebb7b975219ac25a65c7f7d12",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "existing_evidence": "s13-r1287-continuation-batch.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-498",
+        "MVDM-HOST-DIV-519",
+        "MVDM-HOST-DIV-522",
+        "MVDM-HOST-DIV-528",
+        "MVDM-HOST-DIV-531",
+        "MVDM-HOST-DIV-537",
+        "MVDM-HOST-DIV-590"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_sha256": "f32e22dffe5313e0873e6f3082cfdb2cdd664ff6412a5e6ffd8596032a25486d",
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "existing_evidence": "s13-r1287-continuation-batch.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-072",
+        "MVDM-HOST-DIV-073",
+        "MVDM-HOST-DIV-214",
+        "MVDM-HOST-DIV-221",
+        "MVDM-HOST-DIV-282",
+        "MVDM-HOST-DIV-325",
+        "MVDM-HOST-DIV-330",
+        "MVDM-HOST-DIV-348",
+        "MVDM-HOST-DIV-475",
+        "MVDM-HOST-DIV-476",
+        "MVDM-HOST-DIV-478",
+        "MVDM-HOST-DIV-498",
+        "MVDM-HOST-DIV-499",
+        "MVDM-HOST-DIV-502",
+        "MVDM-HOST-DIV-520",
+        "MVDM-HOST-DIV-521",
+        "MVDM-HOST-DIV-525",
+        "MVDM-HOST-DIV-537"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+      "current_sha256": "83364138700518be33f08250a120200661b3f670d1cb14626a1dc1d6841ea392",
+      "original_sha256": "6e5f4607f259d50abe7ad27741e48d6110737097da88ea46627fa275903135c9",
+      "existing_evidence": "s13-r569-reviewed-files.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-227",
+        "MVDM-HOST-DIV-303"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+      "current_sha256": "0ef2365f967dcf6a0289055665398dc24bcb0c686c1588ebca2ee3d39f793a29",
+      "original_sha256": "e1f8f19a1f513402a10dc13eaf3b43d45a208fd71a72692f690f808a7e7762b2",
+      "existing_evidence": "s13-r1060-cxcptn-full-file.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-268",
+        "MVDM-HOST-DIV-271",
+        "MVDM-HOST-DIV-498",
+        "MVDM-HOST-DIV-503"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/evidgen.h",
+      "current_sha256": "fdb5437bda1e496b87852333ef3729ecf2d54915976333cba735f8cf1ffdc0a3",
+      "original_sha256": "867a2c65cbc1b0980ac6a07002072fcfb638e4c24ebe8e513f4c93f3d1c6fe6c",
+      "existing_evidence": "s13-r1067-cvidevidgen-full-file.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-156"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "current_sha256": "92504e20557e45019b76df8493f633fcda55c226805e2793173649058d638550",
+      "original_sha256": "f7b5efebebd8bf8c6ad5c56adb74c8217490b2b92f113b1e850401fd5f029500",
+      "existing_evidence": "s13-r1288-continuation-batch.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-089",
+        "MVDM-HOST-DIV-514",
+        "MVDM-HOST-DIV-618"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+      "current_sha256": "9dc9a5b32884ce9388ba06522ca48854951964f66a62652a30b979428016fe47",
+      "original_sha256": "4a53a9d1c7fb984deb2c5b0fd629442ee8a35272ad90323624d55daa65886194",
+      "existing_evidence": "s13-r1287-continuation-batch.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-062",
+        "MVDM-HOST-DIV-514",
+        "MVDM-HOST-DIV-524"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gmi.h",
+      "current_sha256": "5d33a2aedb0ccb6e959fdb10a78d91be362cee722c4b7fdf58eeb68a59948cdf",
+      "original_sha256": "828d5e4399c5cc396367373e96c4d6785ac0026f50467176f30a977afe01919a",
+      "existing_evidence": "s13-r1090-gmi-full-file.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-506",
+        "MVDM-HOST-DIV-529",
+        "MVDM-HOST-DIV-618"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "current_sha256": "b525284d28990da14a61ea02d11f3b6b7f3e94726bef7b33db03c9dd8ff6841e",
+      "original_sha256": "21109fa7e6b8d6a8ecfe8e733a16805829560e218be11e46e5a33dac28820316",
+      "existing_evidence": "s13-r1289-continuation-batch.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-146",
+        "MVDM-HOST-DIV-506",
+        "MVDM-HOST-DIV-522",
+        "MVDM-HOST-DIV-528",
+        "MVDM-HOST-DIV-537"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "current_sha256": "40d0ed13e0a85b1043d3be2e0b7824b40da7c1a9b2f3f8aa36ef7dce7ee3be23",
+      "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+      "existing_evidence": "s13-r1173-keyba-full-file.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-146",
+        "MVDM-HOST-DIV-315",
+        "MVDM-HOST-DIV-317",
+        "MVDM-HOST-DIV-321",
+        "MVDM-HOST-DIV-359",
+        "MVDM-HOST-DIV-461",
+        "MVDM-HOST-DIV-500",
+        "MVDM-HOST-DIV-518",
+        "MVDM-HOST-DIV-519",
+        "MVDM-HOST-DIV-520",
+        "MVDM-HOST-DIV-521",
+        "MVDM-HOST-DIV-530",
+        "MVDM-HOST-DIV-531",
+        "MVDM-HOST-DIV-535",
+        "MVDM-HOST-DIV-537",
+        "MVDM-HOST-DIV-591"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "current_sha256": "0788448172506b62241e2820e92e99d090658244c57ac7dec2e5e29bb402266c",
+      "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075",
+      "existing_evidence": "s13-r1177-ica-full-file.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-460",
+        "MVDM-HOST-DIV-496",
+        "MVDM-HOST-DIV-500",
+        "MVDM-HOST-DIV-513",
+        "MVDM-HOST-DIV-518",
+        "MVDM-HOST-DIV-520",
+        "MVDM-HOST-DIV-528",
+        "MVDM-HOST-DIV-537",
+        "MVDM-HOST-DIV-541",
+        "MVDM-HOST-DIV-591"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "current_sha256": "1ff067e179ac7aa383720f154df6384d6c5ff4b9582001b835190b7f294db38f",
+      "original_sha256": "94f049032a9298802cab09afc61651469dcbf1fec80ab36444e5c2fed2f681ad",
+      "existing_evidence": "s13-r1197-illegalp-full-file.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-328",
+        "MVDM-HOST-DIV-500",
+        "MVDM-HOST-DIV-503",
+        "MVDM-HOST-DIV-537",
+        "MVDM-HOST-DIV-541",
+        "MVDM-HOST-DIV-591"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+      "current_sha256": "e41bd3245cf15fcaeed893b23f9a81b79146296c3ab133f3b2c4f188b00c8509",
+      "original_sha256": "ce5c8812c1bd5f125f007521b2c1c815739e4969fed1ff2e39600a5a47af0525",
+      "existing_evidence": "s13-r1179-v7video-full-file.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-500",
+        "MVDM-HOST-DIV-525"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
+      "current_sha256": "2a09c8ec12abd12f6685d2e4c3c47531524a89abaaf93e08d5c4a4d28f7f2c2f",
+      "original_sha256": "d0ea64ba445b8a7c8cb4b11963cece808793b0595183f8be7f115c060eb1f0d9",
+      "existing_evidence": "s13-r1180-vgamode-full-file.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-522",
+        "MVDM-HOST-DIV-525",
+        "MVDM-HOST-DIV-538",
+        "MVDM-HOST-DIV-541"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "current_sha256": "0e508343f92cef40015fd868d7450c697bc7f4f1f7f871d612d670ac34152b71",
+      "original_sha256": "fe3bb4a06759e1cbef74bff327661f9649c92fb2490cdc751bc625a8170d3d4f",
+      "existing_evidence": "s13-r1181-cfpu-full-file.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-524"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "current_sha256": "85a88d775ffb0ae1044169f99c2fae76a9001066b92e51ee7f0706b7873ee714",
+      "original_sha256": "e79dd6aa79d24e37ad8390c8879abf3436674ee101037f0e09415148a938ac95",
+      "existing_evidence": "s13-r1252-hostcpu-review.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-620"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "current_sha256": "867a81ef546b937a0c86269dcb88762a4b8ea756b4696a9692e406575aca1afc",
+      "original_sha256": "480c35aa09b40d75d82fe0e1fe3e6cb0f981e573549ea2e193e8a62be4816d10",
+      "existing_evidence": "s13-r1182-hostdef-full-file.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-044",
+        "MVDM-HOST-DIV-057",
+        "MVDM-HOST-DIV-519",
+        "MVDM-HOST-DIV-551"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "current_sha256": "69f9880338d76d521d28b12158e3fb58ea56eaea27780a4900e94666f4173308",
+      "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+      "existing_evidence": "s13-r1250-config-review.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-056",
+        "MVDM-HOST-DIV-500",
+        "MVDM-HOST-DIV-510",
+        "MVDM-HOST-DIV-519"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "current_sha256": "8b69aa6b172a228c7a35ef63e07bbe958b2b50ef56070d671aeac36d099b5f3e",
+      "original_sha256": "3f77f06e497854b00f58acde8bfe7b5e67af7c5e67174deb579cd76e13f5830f",
+      "existing_evidence": "s13-r1288-continuation-batch.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-030",
+        "MVDM-HOST-DIV-048",
+        "MVDM-HOST-DIV-153",
+        "MVDM-HOST-DIV-356",
+        "MVDM-HOST-DIV-500",
+        "MVDM-HOST-DIV-505",
+        "MVDM-HOST-DIV-520"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "current_sha256": "1c63a30338ea0f5e0094ee7acdea95714047af04272886dff6898ed0fbf292d2",
+      "original_sha256": "d51310af362e60023feb59c89afb21ff6fae8e1bb74ae8614231f4ec3a001729",
+      "existing_evidence": "s13-r1183-ntemm-full-file.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-096",
+        "MVDM-HOST-DIV-267",
+        "MVDM-HOST-DIV-525",
+        "MVDM-HOST-DIV-526",
+        "MVDM-HOST-DIV-527"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "current_sha256": "6475d6001f0b0819d619eacd70593d84eef66123f04cb138ae7c1aee7e439592",
+      "original_sha256": "7f555a87ba029627d6811c0f7b96964bb8a96af90c60c89012975a4ac5442076",
+      "existing_evidence": "s13-r1287-continuation-batch.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-206",
+        "MVDM-HOST-DIV-211",
+        "MVDM-HOST-DIV-311",
+        "MVDM-HOST-DIV-312",
+        "MVDM-HOST-DIV-313",
+        "MVDM-HOST-DIV-316",
+        "MVDM-HOST-DIV-317",
+        "MVDM-HOST-DIV-318",
+        "MVDM-HOST-DIV-322",
+        "MVDM-HOST-DIV-326",
+        "MVDM-HOST-DIV-355",
+        "MVDM-HOST-DIV-501",
+        "MVDM-HOST-DIV-507",
+        "MVDM-HOST-DIV-510"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "current_sha256": "7a7f43d4a57ef02953a628a6f82a23f305da8145e6a626b08b22c5b9c23e4d28",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "existing_evidence": "s13-r1251-ntfulsc-contextual-review.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-497",
+        "MVDM-HOST-DIV-501",
+        "MVDM-HOST-DIV-507",
+        "MVDM-HOST-DIV-510",
+        "MVDM-HOST-DIV-511"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "current_sha256": "2abcecbc17591528671f275a9fe270079006abebf1d425d2b8623a6ac3b4e0cf",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "existing_evidence": "s13-r1288-continuation-batch.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-314",
+        "MVDM-HOST-DIV-318",
+        "MVDM-HOST-DIV-322",
+        "MVDM-HOST-DIV-326",
+        "MVDM-HOST-DIV-501",
+        "MVDM-HOST-DIV-507",
+        "MVDM-HOST-DIV-510",
+        "MVDM-HOST-DIV-580"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "current_sha256": "af6fb9b8b2d4da4279b74cba68a133718299d5507aab5f77e2a7d1e2a4c6c9ea",
+      "original_sha256": "a3465d006a88549ce5fd52ac3f8d9c0dcf1f2b2c6825f35db3d2dc683fbc7abe",
+      "existing_evidence": "s13-r1184-inthk-full-file.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-307",
+        "MVDM-HOST-DIV-308",
+        "MVDM-HOST-DIV-309",
+        "MVDM-HOST-DIV-473",
+        "MVDM-HOST-DIV-480",
+        "MVDM-HOST-DIV-500",
+        "MVDM-HOST-DIV-505",
+        "MVDM-HOST-DIV-544"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "current_sha256": "5f5af06255f2d66d9bc44da5aef441d4d6f22173d5014f548fc26c25d46755ca",
+      "original_sha256": "96ee0fb677da9f35811f9dc1715d583474ce72bba9fa91f5eb2d5f6ab242b0c3",
+      "existing_evidence": "s13-r1185-msscs-full-file.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-038",
+        "MVDM-HOST-DIV-039",
+        "MVDM-HOST-DIV-084",
+        "MVDM-HOST-DIV-134",
+        "MVDM-HOST-DIV-148",
+        "MVDM-HOST-DIV-278",
+        "MVDM-HOST-DIV-500",
+        "MVDM-HOST-DIV-510",
+        "MVDM-HOST-DIV-527"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "current_sha256": "4637d1dd86db3eab2baa1a2cd09029f38f34667d4912ce83e58f007ffad5dbc2",
+      "original_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47",
+      "existing_evidence": "s13-r1288-continuation-batch.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-147",
+        "MVDM-HOST-DIV-356",
+        "MVDM-HOST-DIV-510",
+        "MVDM-HOST-DIV-519"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/precomp.h",
+      "current_sha256": "ea44381521bce269bb4ef98f2918772d2a9b5597af6e3774b27ff3654186d399",
+      "original_sha256": "b4841d516682f6677332fede6ca47187bfdc132a288f71564378a1c87f7bb314",
+      "existing_evidence": "s13-r1187-local-full-file.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-179",
+        "MVDM-HOST-DIV-180",
+        "MVDM-HOST-DIV-181",
+        "MVDM-HOST-DIV-297",
+        "MVDM-HOST-DIV-298",
+        "MVDM-HOST-DIV-542"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "current_sha256": "3d7dc16c2901576be435addce37911830a3f4941021290a8e188735200f2fbeb",
+      "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9",
+      "existing_evidence": "s13-r1189-wkman-full-file.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-319",
+        "MVDM-HOST-DIV-334",
+        "MVDM-HOST-DIV-336",
+        "MVDM-HOST-DIV-338",
+        "MVDM-HOST-DIV-356",
+        "MVDM-HOST-DIV-449",
+        "MVDM-HOST-DIV-496",
+        "MVDM-HOST-DIV-516"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/wole2.c",
+      "current_sha256": "f827c3cd91b760fe5f8bff86f4d7375dff6c7293cea105d9f18f6c5c3da43f43",
+      "original_sha256": "85fab0277735cff414d0f339557f110bf1501cbbe0f933dcf95232d9a61fd5e9",
+      "existing_evidence": "s13-r569-reviewed-files.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-450",
+        "MVDM-HOST-DIV-516"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "current_sha256": "4552d867b3d6d9bf5da5053ac337b5d5df53b1efd737899f1d691f2af0df7ef7",
+      "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
+      "existing_evidence": "s13-r1295-continuation-batch.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-259",
+        "MVDM-HOST-DIV-296",
+        "MVDM-HOST-DIV-337",
+        "MVDM-HOST-DIV-348",
+        "MVDM-HOST-DIV-356",
+        "MVDM-HOST-DIV-513",
+        "MVDM-HOST-DIV-589",
+        "MVDM-HOST-DIV-595"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "current_sha256": "4b6b8ff9bf6b1dae173b7e86b9de2283fe317bbde4e3a93861ae9e1c5256bcd0",
+      "original_sha256": "12cdd44dfec6b74a426165977f941da86d90bbad7aa9c59a085010d02528629d",
+      "existing_evidence": "s13-r1190-wuclass-full-file.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-339"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "current_sha256": "be552dd9426c07ea19f390869b596307f70affcfd63015d206807882ccbdcf52",
+      "original_sha256": "ab270e2669cfd383da4baac471bb63e7c9c603581f4f7592ad447e8a783953dc",
+      "existing_evidence": "s13-r1191-wuwind-full-file.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-339",
+        "MVDM-HOST-DIV-347",
+        "MVDM-HOST-DIV-455"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsmemr.c",
+      "current_sha256": "b414e7f1a100e23b42b1022232af5b3d04df01b9784d3536316fb7a43cec9df2",
+      "original_sha256": "70970ed738101458f8036b5a283f034eb64baf32ead84a59a6b02278b327612c",
+      "existing_evidence": "s13-r1192-local-full-file.json",
+      "recorded_ids": [
+        "MVDM-HOST-DIV-271",
+        "MVDM-HOST-DIV-513"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/time.c",
+      "current_sha256": "3cdcd7e87ffa65c0d5bd2e1cb4e39f63b38087605918859d55950aa6b71bcf11",
+      "original_sha256": "ac422e072432aff83c17b03c2127a80d067e801170eba9216ab86d2520767d40",
+      "existing_evidence": "s13-r596-rtl-time-conditions.json",
+      "recorded_ids": [],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "current_sha256": "d2d91e25dfb5c16f7795f3439040a42e1e015ba33f4b75c066716a540a9620bb",
+      "original_sha256": "3f03d0dbb08e0163f2d9cf415daad0981e42e1b1855f6f48a3b59022b7374173",
+      "existing_evidence": "s13-r1246-vdm-client-review.json",
+      "recorded_ids": [
+        "OPENNT-HOST-014",
+        "OPENNT-HOST-065",
+        "OPENNT-HOST-136"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/basesrv.h",
+      "current_sha256": "3483fd51434edb16a1e09aa5793a8ef23f651870113462f2419816e6a468df96",
+      "original_sha256": "a6863d6360830149e0b4895423f3d0f8a8e13326d784821d88b433ff849f3e31",
+      "existing_evidence": "s13-r1168-local-full-file.json",
+      "recorded_ids": [
+        "OPENNT-HOST-028"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "current_sha256": "85a6e322a46388a1cceb9403f4fdb20670be38d6e8c1482a135b75625d57f0fc",
+      "original_sha256": "552ab1d7c2b5de620609312a6c500afa504d22b3852bebb3582eafb524c6c115",
+      "existing_evidence": "s13-r1198-local-full-file.json",
+      "recorded_ids": [],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdmapi.h",
+      "current_sha256": "594129af180c88f785a43fbaef9e1eee0d694abb182a468127888f56dfd3235a",
+      "original_sha256": "b942656ba8761ddb9325a7eea7997394562d2e57797c923ff5688d7be86426de",
+      "existing_evidence": "s13-r1167-local-full-file.json",
+      "recorded_ids": [
+        "OPENNT-ABI-001"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+      "current_sha256": "51e043c613163927f1edd896032ab18693276f936a741410f42e71b526d8f045",
+      "original_sha256": "cafd48b3a9c672c6a18503d4565e7864a284ec029f63ae04ff221c58a2db5148",
+      "existing_evidence": "s13-r1258-ntpsapi-review.json",
+      "recorded_ids": [
+        "OPENNT-HOST-002",
+        "OPENNT-HOST-008"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+      "current_sha256": "e3863929df1748b35339f694005acf9f02c1280f21e7be4b2678fa4316d8263c",
+      "original_sha256": "e16fb36805f44767b45b597510a6c08d1dbc47271783e5d1f8f09273c0f782fb",
+      "existing_evidence": "s13-r1162-cldib-full-file.json",
+      "recorded_ids": [
+        "OPENNT-HOST-035"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "current_sha256": "1faec32a09f50d1ad97d71bf57872c75a419910c72aadc017ad132fe70d0d0db",
+      "original_sha256": "c3df77a2987e97df8872c3dab8f6e7c10a08850c5ebcb439c0ec1dc88b0cdc44",
+      "existing_evidence": "s13-r1295-continuation-batch.json",
+      "recorded_ids": [
+        "OPENNT-HOST-081",
+        "OPENNT-HOST-121",
+        "OPENNT-HOST-146"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "current_sha256": "a0f66436974af49a2c42562ae334ee6816a43db0eea8f2a1ef7907909e1e0c79",
+      "original_sha256": "8e2383f52e4e3f65f656bd492143d7a8ed5d0a2526ad8e6af10d242465ff8d7a",
+      "existing_evidence": "s13-r1289-continuation-batch.json",
+      "recorded_ids": [
+        "OPENNT-HOST-080",
+        "OPENNT-HOST-081",
+        "OPENNT-HOST-119",
+        "OPENNT-HOST-121",
+        "OPENNT-HOST-133"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "current_sha256": "f48ce8562cdea6f1a37467eabab000ff052802ff3efef33f5d754be468555ccf",
+      "original_sha256": "a3e9286c40e4e11ec872fd9b2d7b23cba640f09fb4840c4e6130e301d5277b9e",
+      "existing_evidence": "s13-r1236-dlgmgr2-full-review.json",
+      "recorded_ids": [
+        "OPENNT-HOST-108",
+        "OPENNT-HOST-119",
+        "OPENNT-HOST-131",
+        "OPENNT-HOST-132"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "current_sha256": "fe9a83fff74597c0799da733cf4e9a620163161c7bd65a61eab5da2ecf9b23bb",
+      "original_sha256": "171ef0b7cd668cf51db86d9ae2fea4269cc002f0aba17033bf968d84c10f0f3d",
+      "existing_evidence": "s13-r1195-mngrayc-full-file.json",
+      "recorded_ids": [
+        "OPENNT-HOST-114",
+        "OPENNT-HOST-116",
+        "OPENNT-HOST-117",
+        "OPENNT-HOST-128"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "current_sha256": "d0bc4d295bd417374ad1173e1ba35c7897d696faded785584ab17431e43efc77",
+      "original_sha256": "d8841bd2f13e5825a84f670ec7cc60923977bf80618d737cbac2208f94c6523c",
+      "existing_evidence": "s13-r1208-rtlinit-full-file.json",
+      "recorded_ids": [
+        "OPENNT-HOST-040",
+        "OPENNT-HOST-074",
+        "OPENNT-HOST-130"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+      "current_sha256": "fa5b38f11ecaaa885ea92417dc9d3f50a139edbac969264e5593b3e02069652a",
+      "original_sha256": "26f0174e6a0db53d942506cbdc12efbfebc34a943d780170e7bf9d95775514a4",
+      "existing_evidence": "s13-r1165-local-full-file.json",
+      "recorded_ids": [
+        "OPENNT-HOST-078",
+        "OPENNT-HOST-108"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "current_sha256": "e1db390362e665fe9091c9a57c6cb8d532061460e1abeb401b8b844143d5123d",
+      "original_sha256": "f0d22e4285e8b33b873854913a11587c67d78e50e1f5db28ec89ef8b6ff06d3d",
+      "existing_evidence": "s13-r1215-kernel-getset-full-file.json",
+      "recorded_ids": [
+        "OPENNT-HOST-086",
+        "OPENNT-HOST-121",
+        "OPENNT-HOST-132",
+        "OPENNT-HOST-146"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "current_sha256": "2719465cc91f9d173af90ec463d92c3f4bf47996a7aa3cba7b15d9b974506de5",
+      "original_sha256": "7491e5b3331de8cb7a2189b8efbe91f56076f80a08338bf816d793e80a4faf76",
+      "existing_evidence": "s13-r1209-draw-full-file.json",
+      "recorded_ids": [
+        "OPENNT-HOST-077",
+        "OPENNT-HOST-111"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "current_sha256": "ce6287365d6d44fb89cbcafe728c5d8af5d97a99fed52a0fbd3d8b01e1f88c69",
+      "original_sha256": "4a2cb2067f5dd776676d7f808f40f6468082db018e16bcf9a77daf00bddb34c9",
+      "existing_evidence": "s13-r1216-rtl-getset-full-file.json",
+      "recorded_ids": [
+        "OPENNT-HOST-085",
+        "OPENNT-HOST-121"
+      ],
+      "ids_not_found_in_checked_registers": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+      "current_sha256": "fc4b115e7bbea367800abbebdeae1a94de478b79b6c12db2fdfb5723431f10db",
+      "original_sha256": "d7e87476cc3e703c94b88d53b9a0761642b284a6776c0152738daf4c74290d2b",
+      "existing_evidence": "s13-r1166-local-full-file.json",
+      "recorded_ids": [
+        "OPENNT-HOST-078",
+        "OPENNT-HOST-091",
+        "OPENNT-HOST-106",
+        "OPENNT-HOST-108"
+      ],
+      "ids_not_found_in_checked_registers": []
+    }
+  ]
+}
