@@ -117,6 +117,10 @@ P1 shared handle comparison passed x86/x64 builds, 16 handle checks, all 12
 selected Control gates and ten local release hashes for package
 `c7cf5920-8f98-48c6-badd-24ba9e1a35e8`. Full was not run; the optional
 DOS4GW/NESticle fixture was absent. Details are in the S1 evidence record.
+P2 local overlapped pipe-pair extraction passed x86/x64 builds, 13 focused
+checks, all 12 selected Control gates and ten release hashes for package
+`5b5a0256-66cf-43af-9f8f-ec2e9a6d0040`; Full was not run and the optional
+DOS4GW/NESticle fixture was absent.
 
 | Field | Record |
 | --- | --- |

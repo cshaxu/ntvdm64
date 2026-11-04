@@ -1517,7 +1517,12 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build worker-shutdown-test.exe: base_rpc_test_link obj/tests/worker_shutdown.obj worker-base.lib frontend-client.lib obj/run16/support.obj base-rpc-client-core.lib base-rpc-client-launch.lib obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib common-base-srv-bindings.lib broker-transport.lib common-base-srv-transport.lib original-opennt-rtl-x86.lib')
     $graph.Add('build obj/lib-win32/io/pipe_transfer.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/io/pipe_transfer.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build lib-io.lib: lib obj/lib-win32/io/pipe_transfer.obj obj/lib-win32/io/console_members.obj obj/lib-win32/io/native_path.obj')
+    $graph.Add('build obj/lib-win32/io/pipe_pair.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/io/pipe_pair.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build lib-io.lib: lib obj/lib-win32/io/pipe_transfer.obj obj/lib-win32/io/pipe_pair.obj obj/lib-win32/io/console_members.obj obj/lib-win32/io/native_path.obj')
+    $graph.Add('build obj/tests/win32_pipe_pair.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/win32_pipe_pair_test.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build win32-pipe-pair-test.exe: broker_test_link obj/tests/win32_pipe_pair.obj lib-io.lib')
     $graph.Add('build obj/common/system_root.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/system_root.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build common-root.lib: lib obj/common/system_root.obj obj/common/guest_environment.obj')
@@ -2308,7 +2313,7 @@ if ($objectOutputDirectories.Count -gt 0) {
         target = 'lib-io.lib'
         selected = ($Architecture -eq 'x86')
         disposition = 'bounded pipe transfer and Console membership mechanics; no product protocol or task policy'
-        sources = @('src/lib-win32/io/pipe_transfer.c', 'src/lib-win32/io/pipe_transfer.h', 'src/lib-win32/io/console_members.c', 'src/lib-win32/io/console_members.h', 'src/lib-win32/io/native_path.c', 'src/lib-win32/io/native_path.h' | ForEach-Object {
+        sources = @('src/lib-win32/io/pipe_transfer.c', 'src/lib-win32/io/pipe_transfer.h', 'src/lib-win32/io/pipe_pair.c', 'src/lib-win32/io/pipe_pair.h', 'src/lib-win32/io/console_members.c', 'src/lib-win32/io/console_members.h', 'src/lib-win32/io/native_path.c', 'src/lib-win32/io/native_path.h' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
     }

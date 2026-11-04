@@ -210,7 +210,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
     if(@(Compare-Object @('codec/native_launch.c') @(Get-FrontendSources 'common-codec.lib' 'common')).Count) {
         throw 'Common native packet codec must have exactly one provider'
     }
-    if(@(Compare-Object @('io/pipe_transfer.c','io/console_members.c','io/native_path.c') @(Get-FrontendSources 'lib-io.lib' 'lib-win32')).Count) {
+    if(@(Compare-Object @('io/pipe_transfer.c','io/pipe_pair.c','io/console_members.c','io/native_path.c') @(Get-FrontendSources 'lib-io.lib' 'lib-win32')).Count) {
         throw 'Generic I/O mechanisms must have exactly one provider'
     }
     if(@(Compare-Object @('console/client.c') @(Get-FrontendSources 'common-console.lib' 'common')).Count) {

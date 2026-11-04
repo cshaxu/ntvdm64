@@ -1,6 +1,7 @@
 #include "console_channel.h"
 #include "console_frontend.h"
 #include "lib-win32/io/pipe_transfer.h"
+#include "lib-win32/io/pipe_pair.h"
 #include "common/protocol/frontend_lifecycle.h"
 #include "common/base_srv/base_rpc_client.h"
 #include <stddef.h>
@@ -464,7 +465,6 @@ DWORD frontend_io_channel_start_request(DWORD request,HANDLE worker,frontend_ses
     frontend_io_channel *channel;
     HANDLE server=INVALID_HANDLE_VALUE;
     WCHAR name[96];
-    OVERLAPPED connect={0};
     DWORD error,client_pid=0,generation=0;
     static LONG serial;
     if (!output || !request || !root || !worker || worker==INVALID_HANDLE_VALUE) {
@@ -505,22 +505,8 @@ DWORD frontend_io_channel_start_request(DWORD request,HANDLE worker,frontend_ses
     if(error)goto fail;
     swprintf_s(name,96,L"\\\\.\\pipe\\ntvdm-console-%lu-%lu",GetCurrentProcessId(),
         (DWORD)InterlockedIncrement(&serial));
-    server=CreateNamedPipeW(name,PIPE_ACCESS_DUPLEX|FILE_FLAG_OVERLAPPED|FILE_FLAG_FIRST_PIPE_INSTANCE,
-        PIPE_TYPE_BYTE|PIPE_WAIT|PIPE_REJECT_REMOTE_CLIENTS,1,32768,32768,0,NULL);
-    if (server==INVALID_HANDLE_VALUE) { error=GetLastError();goto fail; }
-    channel->pipe=CreateFileW(name,GENERIC_READ|GENERIC_WRITE,0,NULL,OPEN_EXISTING,
-        FILE_FLAG_OVERLAPPED|SECURITY_SQOS_PRESENT|SECURITY_IDENTIFICATION,NULL);
-    if (channel->pipe==INVALID_HANDLE_VALUE) { error=GetLastError();goto fail; }
-    connect.hEvent=channel->io_event;
-    if (!ConnectNamedPipe(server,&connect) && GetLastError()!=ERROR_PIPE_CONNECTED) {
-        DWORD ignored;
-        error=GetLastError();
-        if (error==ERROR_IO_PENDING) {
-            CancelIoEx(server,&connect);
-            (void)GetOverlappedResult(server,&connect,&ignored,TRUE);
-        }
-        goto fail;
-    }
+    error=win32_pipe_pair_create(name,channel->io_event,&server,&channel->pipe);
+    if(error)goto fail;
     if (!GetNamedPipeClientProcessId(server,&client_pid) || client_pid!=GetCurrentProcessId()) {
         error=ERROR_ACCESS_DENIED;goto fail;
     }

@@ -170,3 +170,20 @@ version-negative helper could not find generated service.h. The full repeat
 used OPENNT_BROKER_PRODUCT_BUILD pointing at the actual service build and
 passed. Commands, owned PIDs, times, exit codes and logs are in
 build/t475-handle-compare-p. No main-runtime publication or push was made.
+
+## Follow-up P: local overlapped pipe pair
+
+P2 moves local byte-mode overlapped duplex named-pipe pair creation and
+failure cleanup to lib-win32/io. NTCON retains naming, client PID validation,
+authorization, protocol, activation and endpoint ownership. The real-pipe
+fixture exercises creation, same-name rejection, validation and data transfer.
+It passed 13 checks. An initial fixture incorrectly supplied a pseudo process
+handle rejected by the transfer interface; it was changed to an owned process
+handle and the complete build and fixture repeated successfully.
+
+The x86/x64 builds and dependency checks passed. Stage checked 63 immutable
+guest files and 274 NTVDM exports. All 12 selected Control gates passed for
+package 5b5a0256-66cf-43af-9f8f-ec2e9a6d0040 and all ten local release
+hashes matched. Full was not run; optional DOS4GW/NESticle was absent.
+Commands, PIDs, results and logs are under build/t475-pipe-pair-p; no main
+runtime publication or push occurred.
