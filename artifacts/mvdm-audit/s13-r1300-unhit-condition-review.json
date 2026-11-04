@@ -1,0 +1,103 @@
+{
+  "scope": "Six unique original-snapshot unhit selectors matched to current sources; candidate identification only, not automatic exclusions",
+  "snapshot": "artifacts/mvdm-audit/compile-branch-selection/branches.csv",
+  "probe": {
+    "source": "#include <windows.h>\\n#ifdef WINNT\\n#pragma message(\"PIF_PROFILE_WINNT_DEFINED\")\\n#else\\n#pragma message(\"PIF_PROFILE_WINNT_UNDEFINED\")\\n#endif",
+    "command": "msvc-x86.cmd cl.exe /nologo /EP <probe.c>",
+    "result": "PIF_PROFILE_WINNT_UNDEFINED",
+    "scope": "Default x86 MSVC environment and current SDK, with no project flags; not a fixture build"
+  },
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmidata.h",
+      "current_line": 62,
+      "old_line": 71,
+      "directive": "if",
+      "expression": "!defined(_WINNT_)",
+      "old_x86": "not-selected-in-observed-contexts",
+      "old_x64": "unobserved",
+      "first_lines": [
+        "typedef struct _LDT_ENTRY {",
+        "WORD    LimitLow;"
+      ],
+      "current_sha256": "f6c1ad552fb6a1782f897d82dc1ee6926132c053835f7a688d8e49d4d6389d4d",
+      "disposition": "retain pending full include-context proof; SDK fallback or locally different compilation contexts"
+    },
+    {
+      "path": "src/mvdm-host/inc/wowcomm.h",
+      "current_line": 17,
+      "old_line": 17,
+      "directive": "ifndef",
+      "expression": "UNALIGNED",
+      "old_x86": "not-selected-in-observed-contexts",
+      "old_x64": "unobserved",
+      "first_lines": [
+        "#define UNALIGNED    // and invisible to 16-bit stuff"
+      ],
+      "current_sha256": "4817961493d33932a98f5ee2222c0f2e20a43fd4900430910b81e5c70c5f1c85",
+      "disposition": "retain pending full include-context proof; SDK fallback or locally different compilation contexts"
+    },
+    {
+      "path": "src/mvdm-host/inc/wowfax.h",
+      "current_line": 38,
+      "old_line": 38,
+      "directive": "ifdef",
+      "expression": "DEFINE_DDRV_DEBUG_STRINGS",
+      "old_x86": "not-selected-in-observed-contexts",
+      "old_x64": "unobserved",
+      "first_lines": [
+        "char *szWmDdrvDebugStrings[] =",
+        "{"
+      ],
+      "current_sha256": "6ad84c0b88cca63576bfaaaf3009c46aec2f672149a2116bd062983b092808d0",
+      "disposition": "retain: ancestor DEBUG is not selected in host snapshot; original guest DEBUG consumer statically documented in s13-r1256-wow-shared-review.json"
+    },
+    {
+      "path": "src/mvdm-host/inc/wowmmcb.h",
+      "current_line": 24,
+      "old_line": 24,
+      "directive": "ifndef",
+      "expression": "UNALIGNED",
+      "old_x86": "not-selected-in-observed-contexts",
+      "old_x64": "unobserved",
+      "first_lines": [
+        "#define UNALIGNED"
+      ],
+      "current_sha256": "792d12c29a5913ee4dd9d46f3173f4e7ac8f1cd88cfa91272268bd8bcafb8e8c",
+      "disposition": "retain pending full include-context proof; SDK fallback or locally different compilation contexts"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_line": 874,
+      "old_line": 865,
+      "directive": "if",
+      "expression": "defined(NTVDM) && defined(MVDM_CCPU_DECODE_DIAGNOSTICS)",
+      "old_x86": "not-selected-in-observed-contexts",
+      "old_x64": "unobserved",
+      "first_lines": [
+        "mvdm_softpc_report_nt_transition(getCS(), getEIP(), getEFLAGS(),",
+        "getSS(), getESP());"
+      ],
+      "current_sha256": "f32e22dffe5313e0873e6f3082cfdb2cdd664ff6412a5e6ffd8596032a25486d",
+      "disposition": "retain: tests/observation/verify-decode-diagnostics.ps1 explicitly builds MVDM_CCPU_DECODE_DIAGNOSTICS variant"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "current_line": 473,
+      "old_line": 521,
+      "directive": "ifndef",
+      "expression": "WINNT",
+      "old_x86": "not-selected-in-observed-contexts",
+      "old_x64": "unobserved",
+      "first_lines": [
+        "#define MAX_VALID_GROUP         GROUP_ENV"
+      ],
+      "current_sha256": "df90cc35dba852c44cab80539bb19b8e7c4fec38e29bfcd5b2078e7cc6f78318",
+      "disposition": "pending: product and addon define WINNT; legacy test fixtures include windows.h without local WINNT; direct x86 MSVC preprocessor shows windows.h alone leaves WINNT undefined; supported status of legacy fixtures not yet established"
+    }
+  ],
+  "limitations": [
+    "Matching by unique selector in a file is not proof of identical ancestors or current branch reachability.",
+    "Legacy tests and all transitive include contexts require individual supported-status verification."
+  ]
+}
