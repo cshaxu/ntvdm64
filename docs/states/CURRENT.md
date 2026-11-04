@@ -7,7 +7,9 @@
 The owner closes the [S2 dependency inventory](../etc/evidence/m0-t475-s2-component-dependency-inventory.md)
 and admits S3 to address the illegal Worker Base and NTVDM dependencies through
 common and libraries. The [S3 design](../etc/operations/m0-t475-s3-worker-ntvdm-dependency-plan.md)
-proposes sequential deliveries; implementation has not started. The separate
+now assigns Redir-only logic to Redir, shared product contracts to common, and
+generic Win32 mechanisms to lib. Seven proposed P deliveries are sequential;
+implementation has not started. The separate
 question of removing the NTVDM PE runtime imports is pending owner clarification.
 T475 S1 separated NXVM and Win32 library ownership. Its final four local P
 commits extracted object-handle comparison, overlapped pipe-pair creation,

@@ -8,8 +8,11 @@ The two workers' dependency on worker-base remains the owner's explicit
 exception. NTHook dependencies are outside this S. Source baseline `5bc6eb897`
 and local package `2b1325bd-17fb-4435-b2be-55995de325f6` retain the current
 ABI, guest behavior and ten-image release. No guest media or mirrors are to be
-rewritten. Common code is project-specific shared substrate; lib-win32 contains
-mechanisms with no common or executable-private dependency.
+rewritten. Redir-only conversion and redirector decisions belong in VDMREDIR. Common code
+contains project-specific mechanisms and contracts actually shared by multiple
+components; lib-win32 contains independent Win32 mechanisms with no common or
+executable-private dependency. A consumer must never require another private
+component as a result of the move.
 
 WOW32's and VDMREDIR's PE images currently import the NTVDM executable ABI.
 Whether this S also removes that runtime import is a pending scope decision;
@@ -19,62 +22,68 @@ runtime-scope decision as permission to weaken a requested no-dependency goal.
 
 ## Target ownership and invariants
 
-| Mechanism | Proposed owner | Boundary and retained authority |
+| Mechanism | Target owner | Boundary |
 | --- | --- | --- |
-| VDMREDIR's unused `worker-base.lib` input | No new owner | Delete only after direct negative-link and runtime checks. NTVDM and NTVWM retain their allowed Worker Base selection. |
-| Historical CRT spelling/UCRT adapter currently in NTVDM | `lib-win32/crt-compat` | Shared source owns the ABI adapter; original `sprintf`, `sscanf`, `_swprintf`, calling convention, link selection and legacy unbounded semantics are unchanged. Avoid duplicate symbols/CRT instances. Verify actual callers and the x86 WOW graph. |
-| Guest-memory lease contract and generic bounded lease mechanic | `common/guest-memory` for the product contract; assess product-independent allocation/lease mechanics for lib only if genuinely separable | The shared contract exposes a borrowed opaque lease, access flags and checked operations. The single guest mapping, lease context, generation, commit and teardown remain tied to the existing worker session. Do not compile a second authoritative session or leak native backing memory. |
-| WOW page-domain, USER/GDI and guest-copy interfaces | Bounded contracts under `common/vdm-memory`, `common/wow` and `common/vdm-redir` (final names subject to existing-owner inspection) | Split consumer-facing declarations from worker-private initialization, session structures and implementation. Keep the actual worker's one page-domain, native object lifetimes, guest-copy authority, calling conventions and ordinals. Delete cross-component private include paths, including indirect and forced includes. |
-| Historical thread-start calling-convention bridge | `lib-win32/thread` for generic Win32 thunk; `common` for explicitly supplied product thread/session hooks | Generic code must not include session or Worker Base. The sole existing session authority supplies bind/unbind/exit callbacks; design initialization and cross-DLL sharing before implementation so static copies cannot create separate state. Preserve cdecl/WINAPI stack behavior, TLS binding, normal return, `ExitThread`, SEH cleanup and fail-fast rules. |
+| Redir-specific network/result conversion and copy workflow | `vdmredir-dll` | Keep Redir's data interpretation, ordering, API results and errors with Redir. Assess the current NTVDM `mvdm_redirector_worker_copy_from/to` bodies and move only the Redir-specific orchestration that can operate through the shared guest-memory contract. Do not make the worker depend on Redir. |
+| Guest address validation, bounded read/write and lease contract used by NTVDM, WOW32 and Redir | `common/guest-memory` (working name) | Shared product contract, not a Redir interface. Preserve one existing worker-owned guest address space, lease context, generation and lifetime; do not duplicate session state or expose native backing pointers. Put an implementation in common only when its production consumers and ownership justify it. |
+| NTVDM session, guest mapping and WOW page-domain state | Existing worker-owned instance | Consumers receive bounded access through common contracts. The provider remains singular even if source code or declarations are reorganized; preserve calling conventions, ordinal compatibility, teardown, callback and error ordering. |
+| Generic Windows CRT compatibility adapter | `lib-win32/crt-compat` | Shared mechanism without Redir, common or worker-private policy. Preserve legacy `sprintf`, `sscanf`, `_swprintf` and ABI/link behavior. |
+| Historical thread-start calling-convention bridge | `lib-win32/thread` for generic thunk; common for product session hooks | Redir and the worker consume the generic mechanism. The worker owns actual session binding; avoid per-module copies of session state and retain cdecl/WINAPI, TLS, SEH, `ExitThread` and fail-fast semantics. |
+| WOW USER/GDI/page-domain consumer contracts | Bounded `common/wow` contract (working name) | Shared only where consumed across component boundaries; leave WOW32-specific logic in WOW32 and worker-private lifecycle in the worker. Split declarations rather than mechanically relocating the entire session or page-domain header. |
+| Unused VDMREDIR `worker-base.lib` input | None | Remove after proving the real production link and required behavior. The two workers retain their explicitly authorized dependency. |
 
-Public header extraction is not a mechanical directory move: split the eight
-currently reached NTVDM headers along actual consumer use, remove the WOW32
-need for `session.h`, and verify transitive dependencies using the compiler's
-dependency database. Preserve the original mirror and registered divergences.
-Where a provider remains genuinely NTVDM execution state, define a narrow
-shared contract and one authoritative provider; do not create a common copy of
-the state or move guest execution policy into a platform library.
+These are ownership decisions, not permission to create a new copy of guest,
+session or page-domain state. Names are working names; inspect current owners
+before adding interfaces. Runtime exports required by existing original callers
+remain until their consumers and compatibility are fully accounted for.
 
 ## Dependency-ordered P deliveries
 
-1. **P1 — remove unused Worker Base link input.** Eliminate it from VDMREDIR,
-   prove a real link without that archive, verify no actual members previously
-   entered the DLL, and exercise redirector startup, thread behavior and guest
-   network paths with available fixtures. Check other non-worker links for the
-   same archive; preserve the two authorized worker links.
-2. **P2 — shared CRT adapter.** Relocate the proven common CRT compatibility
-   provider into `lib-win32/crt-compat`, change WOW32/NTVDM build selection,
-   and verify symbol resolution, calling convention, failure and formatting
-   behavior without adding duplicate exports.
-3. **P3 — shared guest-memory and redirector contracts.** Split consumer-only
-   lease/copy declarations into common; remove private NTVDM includes from
-   VDMREDIR and WOW32. Preserve synchronous copy order, aliasing, failure and
-   lease commit/release. Put the generic lease mechanism in a shared owner only
-   if it preserves the existing single owning context and failure semantics.
-4. **P4 — WOW/USER/GDI boundary.** Split the page-domain, GDI alias, user
-   runtime and session-binding headers into shared consumed contracts and
-   worker-private interfaces. Update all 40 affected object dependencies and
-   prove there is no NTVDM-private header in the WOW32 production closure.
-   Preserve page publication, callbacks, borrowing, retire, aliases and cleanup.
-5. **P5 — thread ABI and session integration.** Separate generic native thread
-   call conversion into lib from product session binding in common using an
-   explicit, lifetime-safe hook interface. Demonstrate actual VDMREDIR no
-   longer selects the NTVDM-private thread object, and retain one worker
-   session owner. Check normal, cancellation, exception and thread-exit paths.
-6. **P6 — full cross-configuration closure.** Audit all supported source,
-   private-header, archive-member and binary-import graphs and reconcile each
-   original S2 violation. Include a runtime-ABI removal design and delivery
-   here only if it is part of the owner's chosen scope. A no-code P6 can be
-   evidence-only; an implementation P remains subject to the full local gate.
+1. **P1 — remove Redir's unused Worker Base link.** Remove the explicit
+   `worker-base.lib` input from the VDMREDIR production closure, verify no
+   actual member was supplying a symbol, then build and exercise the real
+   redirector including startup and available network/thread fixtures. Confirm
+   NTVDM and NTVWM still select Worker Base.
+2. **P2 — shared guest-memory contract.** Extract the minimum bounded guest
+   address, read/write and lease contract genuinely shared by the worker,
+   WOW32 and Redir into common. Separate consumer-facing declarations from
+   `session.h` and other worker-private interfaces. Verify bounds, aliasing,
+   lease ownership, commit, failure, teardown and single-session behavior.
+3. **P3 — return Redir-only copy logic to Redir.** Inspect the two current
+   worker-side redirector copy functions and move only Redir-specific conversion
+   and orchestration into `vdmredir-dll`, using P2's shared contract for guest
+   access. Keep worker execution state with its existing owner; account for
+   existing NTVDM exports and do not create a worker-to-Redir dependency.
+   Verify segment/offset addressing, sequential aliased fields, copy failures,
+   error mapping and actual network redirector behavior.
+4. **P4 — extract shared CRT compatibility.** Move the common Win32/UCRT
+   spelling adapter into `lib-win32/crt-compat`, update both NTVDM and WOW32
+   source selections, and prove symbol/ABI and formatting behavior, including
+   missing and duplicate provider negative checks.
+5. **P5 — separate WOW/USER/GDI contracts.** Split common-consumed declarations
+   from eight reached NTVDM-private headers; keep WOW-specific logic in WOW32
+   and worker state/lifecycle with the worker. Verify the 40 affected WOW32
+   objects and transitive/forced includes, page publication, callback, borrow,
+   retirement, aliases and cleanup on the actual production path.
+6. **P6 — extract thread mechanism and bind session once.** Place generic
+   Win32 thread/calling-convention mechanics in `lib-win32/thread`; use common
+   contracts for the product-specific binding. Replace VDMREDIR's selection
+   of NTVDM-private `thread_start_compat.c` without moving session state into
+   Redir or creating a second owner. Verify x86 stack, current-thread binding,
+   normal exit, explicit `ExitThread`, exceptions, cancellation and cleanup.
+7. **P7 — final dependency closure.** Re-audit all component source, link and
+   compiler-recorded header closures, actual archive selection and runtime
+   imports. Verify each S2 Worker Base/NTVDM finding is resolved under the
+   owner's chosen runtime-ABI scope. An evidence-only closure needs no build;
+   a production change retains the full gate.
 
-The P boundaries can be combined or reordered if a complete dependency chain
-requires it, but a P must not leave a broken build or a second state owner.
-For every production P: build affected x86/x64 products, run focused positive,
-negative and lifecycle fixtures plus all selected Control gates, stage the
-coherent ten-image package, publish to this worktree's `assets/release`, verify
-all hashes, record evidence and commit locally. No push or main-worktree
-runtime deployment is part of the established workflow.
-
+These are sequential reviewable P boundaries. If analysis shows a boundary
+cannot build safely on its own, revise the order or combine the inseparable
+parts and record why; never introduce a temporary duplicate authority. Each
+production P requires the affected x86/x64 build, focused positive, negative
+and lifecycle tests, all selected Control gates, coherent local ten-image
+publication and hash checks, evidence and a separate local commit. No push or
+main-worktree runtime publication is part of this workflow.
 ## Runtime ABI decision
 
 The current WOW32 and VDMREDIR binary imports are 184 and 38 NTVDM thunks in
