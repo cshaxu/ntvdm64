@@ -5884,11 +5884,11 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "sha256": "0cd2c6fe1eaf184e94293635e484e987f6aeb63e7032636240440b02a6b926f5",
+      "sha256": "e28bf75c25e5c0c5ffdd3f436725c68c76b7fe03fb8d562856c4172550841bba",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "completed-original-conditional-tree-with-local-binding",
-      "additional_evidence": "s13-r1254-video-review.json",
+      "additional_evidence": "s13-r1276-video-diagnostic-lines.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
       "original_candidate_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31"
     },

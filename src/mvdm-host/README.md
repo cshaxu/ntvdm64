@@ -2992,3 +2992,5 @@ MVDM-HOST-DIV-802: in base/video/video.c reject the original monitor/GISP direct
 MVDM-HOST-DIV-803: restore each original A_VID writer-table condition in egawrtm0.c and egwrtm12.c. Reject unselected A_VID and non-CPU40 profiles; retain the existing CPU40 EVID-table projection, including its selected declarations. The former non-CPU40 legacy table bodies and their nested conditions are excluded as a whole. Evidence: artifacts/mvdm-audit/s13-r1255-egawrtm-review.json.
 
 MVDM-HOST-DIV-804: reject only the original MIPS/Alpha UNALIGNED fallback in shared wowfax.h and wowinfo.h; preserve the x86 guest fallback, WOW16 branches and DEBUG declarations. These shared headers remain guest-source dependencies and no guest was compiled or modified. Evidence: artifacts/mvdm-audit/s13-r1256-wow-shared-review.json.
+
+MVDM-HOST-DIV-805: correct original diagnostic lines within three already-excluded video.c conditions; selected code is unchanged. Evidence: artifacts/mvdm-audit/s13-r1276-video-diagnostic-lines.json.

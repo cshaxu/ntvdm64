@@ -1,0 +1,402 @@
+{
+  "counts": {
+    "unique_original_arm": 3759,
+    "no_exact_signature": 26
+  },
+  "not_exactly_matched": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "guard_line": 492,
+      "diagnostic": 620,
+      "signature": [
+        [
+          "if",
+          "!defined(CPU_40_STYLE)"
+        ]
+      ],
+      "evidence": "s13-r1056-reset-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "guard_line": 563,
+      "diagnostic": 684,
+      "signature": [
+        [
+          "if",
+          "!defined(CPU_40_STYLE)"
+        ]
+      ],
+      "evidence": "s13-r1056-reset-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "guard_line": 4353,
+      "diagnostic": 4413,
+      "signature": [
+        [
+          "ifdef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "evidence": "s13-r1058-cmain-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "guard_line": 255,
+      "diagnostic": 250,
+      "signature": [
+        [
+          "if",
+          "defined(NTVDM)&&defined(MONITOR)"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "evidence": "s13-r1063-printer-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "guard_line": 295,
+      "diagnostic": 288,
+      "signature": [
+        [
+          "if",
+          "defined(NTVDM)&&defined(MONITOR)"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "evidence": "s13-r1063-printer-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "guard_line": 101,
+      "diagnostic": 102,
+      "signature": [
+        [
+          "if",
+          "defined(CPU_40_STYLE)&&defined(C_VID)"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "evidence": "s13-r1078-cpuvid-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+      "guard_line": 106,
+      "diagnostic": 122,
+      "signature": [
+        [
+          "ifdef",
+          "C_VID"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "evidence": "s13-r1081-egacpu-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gmi.h",
+      "guard_line": 28,
+      "diagnostic": 19,
+      "signature": [
+        [
+          "if",
+          "defined(CPU_40_STYLE)&&defined(C_VID)"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "evidence": "s13-r1090-gmi-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "guard_line": 89,
+      "diagnostic": 79,
+      "signature": [
+        [
+          "if",
+          "!defined(CCPU)"
+        ]
+      ],
+      "evidence": "s13-r1096-ica-header-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "guard_line": 2337,
+      "diagnostic": 2642,
+      "signature": [
+        [
+          "ifndef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "evidence": "s13-r1174-mouse-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "guard_line": 2659,
+      "diagnostic": 2951,
+      "signature": [
+        [
+          "ifndef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "evidence": "s13-r1174-mouse-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "guard_line": 2713,
+      "diagnostic": 2997,
+      "signature": [
+        [
+          "ifndef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "evidence": "s13-r1174-mouse-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "guard_line": 3043,
+      "diagnostic": 3311,
+      "signature": [
+        [
+          "ifndef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "evidence": "s13-r1174-mouse-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "guard_line": 4915,
+      "diagnostic": 5228,
+      "signature": [
+        [
+          "ifndef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "evidence": "s13-r1174-mouse-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "guard_line": 4949,
+      "diagnostic": 5251,
+      "signature": [
+        [
+          "ifndef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "evidence": "s13-r1174-mouse-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "guard_line": 5051,
+      "diagnostic": 5352,
+      "signature": [
+        [
+          "ifndef",
+          "NTVDM"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "evidence": "s13-r1174-mouse-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "guard_line": 410,
+      "diagnostic": 414,
+      "signature": [
+        [
+          "if",
+          "defined(NTVDM)&&defined(MONITOR)"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "evidence": "s13-r1175-ios-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "guard_line": 64,
+      "diagnostic": 55,
+      "signature": [
+        [
+          "ifndef",
+          "CPU_40_STYLE"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "evidence": "s13-r1176-main-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "guard_line": 1512,
+      "diagnostic": 1512,
+      "signature": [
+        [
+          "if",
+          "(defined(NTVDM)&&defined(MONITOR)&&!defined(MVDM_STANDALONE_SAS_VIDEO))||defined(GISP_SVGA)"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "evidence": "s13-r1276-video-diagnostic-lines.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "guard_line": 581,
+      "diagnostic": 1415,
+      "signature": [
+        [
+          "ifdef",
+          "X86GFX"
+        ]
+      ],
+      "evidence": "s13-r1251-ntfulsc-contextual-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "guard_line": 157,
+      "diagnostic": 141,
+      "signature": [
+        [
+          "ifdef",
+          "X86GFX"
+        ]
+      ],
+      "evidence": "s13-r1186-ntreset-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "guard_line": 267,
+      "diagnostic": 239,
+      "signature": [
+        [
+          "ifdef",
+          "CPU_40_STYLE"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "evidence": "s13-r1235-sim32-full-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "guard_line": 517,
+      "diagnostic": 474,
+      "signature": [
+        [
+          "ifdef",
+          "WOW_NATIVE_DIALOG_PROCEDURE_OWNER"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "evidence": "s13-r1194-dlgmgr-full-file.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "guard_line": 532,
+      "diagnostic": 482,
+      "signature": [
+        [
+          "ifdef",
+          "WOW_NATIVE_DIALOG_PROCEDURE_OWNER"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "evidence": "s13-r1194-dlgmgr-full-file.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "guard_line": 946,
+      "diagnostic": 884,
+      "signature": [
+        [
+          "ifndef",
+          "WOW_NATIVE_DIALOG_PROCEDURE_OWNER"
+        ]
+      ],
+      "evidence": "s13-r1194-dlgmgr-full-file.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "guard_line": 1004,
+      "diagnostic": 937,
+      "signature": [
+        [
+          "ifdef",
+          "WOW_NATIVE_DIALOG_PROCEDURE_OWNER"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "evidence": "s13-r1194-dlgmgr-full-file.json"
+    }
+  ],
+  "source_inventory_sha256": "bf62b8d2f5d44b7907c363d6c470543347b2c800f87da14cbdd9236d6d33a403",
+  "scope": "Current error arms containing exactly #line/#error, reverse matched to original arm by full conditional-group signature, arm index and original physical branch line. Unmatched records may have local selectors, changed expressions or branch projections; their linked reviews provide context. This check does not infer a bug or verify the other unanchored arms."
+}

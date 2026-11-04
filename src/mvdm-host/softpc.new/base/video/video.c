@@ -322,6 +322,7 @@ simple_bios_word_wrt IFN2(ULONG, ch_attr, ULONG, ch_addr)
 	*(IU8 *)(getVideoscreen_ptr() + ch_addr) = (UTINY)ch_attr;
 	*(IU8 *)(getVideoscreen_ptr() + ch_addr + 1) = (UTINY)(ch_attr >> 8);
 #if !defined(EGG) && !defined(C_VID) && !defined(A_VID)
+#line 315
 #error Unsupported excluded original configuration
 #endif	/* not EGG or C_VID or A_VID */
 #line 317
@@ -1893,6 +1894,7 @@ GLOBAL void vd_read_dot IFN0()
 #define OUTB(port, val) outb(port, val)
 
 #else
+#line 1887
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
 #line 1896
@@ -2057,6 +2059,7 @@ GLOBAL void vd_write_teletype IFN0()
 #error DIVERGENCE MVDM-HOST-DIV-581: standalone SAS excludes direct video memory writes
 #endif
 #else
+#line 2045
 #error Excluded unsupported non-monitor video profile
 #endif
 #line 2056

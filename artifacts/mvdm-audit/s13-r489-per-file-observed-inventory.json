@@ -7167,14 +7167,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
-      "current_sha256": "0cd2c6fe1eaf184e94293635e484e987f6aeb63e7032636240440b02a6b926f5",
+      "current_sha256": "e28bf75c25e5c0c5ffdd3f436725c68c76b7fe03fb8d562856c4172550841bba",
       "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
       "status": "completed-original-conditional-tree-with-local-binding",
-      "evidence": "s13-r1254-video-review.json"
+      "evidence": "s13-r1276-video-diagnostic-lines.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video_io.c",

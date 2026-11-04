@@ -1,0 +1,16 @@
+{
+  "test": "test_bfs_depth1_additional_guards.py",
+  "architecture": "x86",
+  "exit_code": 0,
+  "sha256": "576781559c2b3995a82456a4cd1ccd9435fbf7722727fe7eb9dcb0333e4abfe7",
+  "pass_lines": [
+    "PASS 21 original guards and 47 profile controls",
+    "PASS three original clmsg nested FE_SB guards and line controls",
+    "PASS video standalone SAS and excluded monitor/GISP pointer profiles",
+    "PASS original A_VID frames and selected CPU40 table carriers",
+    "PASS shared x86 UNALIGNED fallback and excluded MIPS/Alpha profiles",
+    "PASS ntregapi original C++ boundary and diagnostic lines",
+    "PASS ntexapi original executive profile guards and diagnostic lines",
+    "PASS video original excluded diagnostic lines and selected profiles"
+  ]
+}

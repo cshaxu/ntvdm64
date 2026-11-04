@@ -1,0 +1,26 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/video.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+  "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+  "before_sha256": "0cd2c6fe1eaf184e94293635e484e987f6aeb63e7032636240440b02a6b926f5",
+  "after_sha256": "e28bf75c25e5c0c5ffdd3f436725c68c76b7fe03fb8d562856c4172550841bba",
+  "changes": [
+    {
+      "original_guard": 314,
+      "error_line": 315,
+      "reason": "excluded non-EGG/non-C_VID/non-A_VID dirty tracking arm"
+    },
+    {
+      "original_guard": 1886,
+      "error_line": 1887,
+      "reason": "excluded non-CPU40 alternative"
+    },
+    {
+      "original_guard": 2044,
+      "error_line": 2045,
+      "reason": "excluded original non-monitor alternative in SAS-video projection"
+    }
+  ],
+  "method": "Matched conditional-group signatures and explicit original continuation anchors; verified original physical lines by source and added #line only inside already-excluded arms. Selected code and conditions remain unchanged.",
+  "limits": "Cached x86/x64 product builds and selected/rejected preprocessing tests passed. Ten-image comparison shows no non-timestamp differences; r1259 Full is reused. Guest was not changed."
+}

@@ -220,3 +220,35 @@ for original, diagnostic, macro in ((30, 31, '__cplusplus'), (1063, 1064, 'DEVL'
         if bool(result.returncode) != reject or (reject and f'({diagnostic})' not in result.stdout + result.stderr):
             raise SystemExit(f'ntexapi original rejected guard failed at {original}')
 print('PASS ntexapi original executive profile guards and diagnostic lines')
+
+# Three video paths previously lacked an original diagnostic line.
+source = (repo / 'src/mvdm-host/softpc.new/base/video/video.c').read_text(encoding='latin1').split('\n')
+for diagnostic, marker, selected_defines, rejected_defines in (
+    (315, 'Unsupported excluded original configuration', ['C_VID=1'], []),
+    (1887, 'DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.', ['CPU_40_STYLE=1'], []),
+    (2045, 'Excluded unsupported non-monitor video profile', ['NTVDM=1', 'MONITOR=1', 'MVDM_STANDALONE_SAS_VIDEO=1'], []),
+):
+    target = next(i for i in range(len(source) - 1) if source[i].strip() == f'#line {diagnostic}' and source[i + 1].strip() == '#error ' + marker)
+    stack = []
+    frame = None
+    for i, line in enumerate(source):
+        directive = re.match(r'^\s*#\s*(if|ifdef|ifndef|endif)\b', line)
+        if directive:
+            if directive.group(1) == 'endif':
+                start = stack.pop()
+                if frame == start:
+                    end = i
+                    break
+            else:
+                stack.append(i)
+        if i == target:
+            frame = stack[-1]
+    if frame is None:
+        raise SystemExit(f'video diagnostic frame not found: {diagnostic}')
+    probe = scratch / 'video-original-error-line.c'
+    probe.write_text('\n'.join(source[frame:end + 1]) + '\n', encoding='ascii')
+    for defines, reject in ((selected_defines, False), (rejected_defines, True)):
+        result = subprocess.run(['cl.exe', '/nologo', '/EP', '/TC'] + [f'/D{x}' for x in defines] + [str(probe)], capture_output=True, text=True, errors='replace')
+        if bool(result.returncode) != reject or (reject and (f'({diagnostic})' not in result.stdout + result.stderr or marker not in result.stdout + result.stderr)):
+            raise SystemExit(f'video original line check failed {diagnostic}: {result.stderr}')
+print('PASS video original excluded diagnostic lines and selected profiles')
