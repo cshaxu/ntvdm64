@@ -18,14 +18,14 @@ regressions and dependency negative controls passed. Local ten-image release
 changed images were freshly built and seven unchanged baseline images reused.
 Full integration and publication to the main runtime remain pending.
 
-S2 implementation and ten-image local staging are under review. Shared
-clients, scope and transport now belong to common/base_srv; service policy
-remains NTSRV-owned. Product builds, graph boundaries, focused tests and 11
-of 12 Control gates pass. Nested-window input times out for the candidate and
-the S1 baseline; window-owned-console also times out. Root cause and the gate
-remain unresolved. Candidate package e34caccf-13d8-4999-9be2-183ba247b6ee
-is locally published to this worktree's assets/release with matching hashes;
-S2 verification and acceptance remain open.
+S2 local implementation, publication and Control verification are complete;
+review remains active. Shared clients, scope and transport belong to
+common/base_srv; service policy remains NTSRV-owned. Candidate package
+e34caccf-13d8-4999-9be2-183ba247b6ee is published locally with ten matching
+hashes. The complete Control suite passed all 12 selected gates with the
+matching-width observer and an explicitly bounded test-only PATH for nested
+window handoff. The optional DOS4GW/NESticle fixture was absent and skipped;
+Full was not run. The original guest long-PATH issue remains unresolved.
 [Evidence](../etc/evidence/m0-t474-s2-basesrv-shared-ownership.md).
 
 ## Active Packet
