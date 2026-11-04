@@ -7,7 +7,7 @@
   "observation": "Original non-CPU30 path contains CCPU-guarded function-pointer declarations/macros; current host_cpu.h retains CCPU guards with empty bodies. cpu4.h includes host_cpu.h then cpu4gen.h, whose macros bind getAX/setAX/getCPL/setCPL directly to c_* functions.",
   "search": "rg over src found no getAX_func, getCPL_func or host_simulate_func references. This is a selected sample, not proof for every original vector name.",
   "risk": "Restoring original get/set macros verbatim could conflict with cpu4gen.h definitions and change call binding. No source restoration or exclusion was performed.",
-  "next": "Establish whether original vector body may be classified as excluded in the selected include contexts or requires a safe structure-preserving replacement; direct restoration may redefine active cpu4gen.h macros.",
+  "next": "Trace all actual reg consumers and original layout/selection; decide whether the 2-to-4 byte change is an intentional necessary adaptation or can be reverted without changing supported behavior. Full build and behavior gates are required for a layout change.",
   "status": "open; file remains not-fully-certified",
   "complete_original_pointer_vector_search": {
     "symbols": [
@@ -117,5 +117,47 @@
     "generated_scope": "build/.ninja/msvc-x86-release and msvc-x64-release, same source extensions",
     "result": "No matching vector pointer symbol in either scope (rg exit 1).",
     "limits": "Textual search, not whole-program dynamic symbol proof; external libraries and non-source build products not searched."
+  },
+  "original_profile_evidence": [
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ccpudefs.inc",
+      "sha256": "5aeaaa72f958ef891628c267ee4849a0203c25af0fbe67b3fdc890b75dfb3fd8"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\ccpudefs.inc",
+      "sha256": "de75d67c7168f04ae82715b4dd56663093589d3fdd36bd828c6267bd6d041a6d"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\host_def.h",
+      "sha256": "480c35aa09b40d75d82fe0e1fe3e6cb0f981e573549ea2e193e8a62be4816d10"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cpu4.h",
+      "sha256": "c1296168c866527a931bfa4b7cefe21f54acc96a6f242b0a60d6cdba4cdba725"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+      "sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+    }
+  ],
+  "original_profile_findings": [
+    "Original ccpudefs.inc in both CCPU and CVIDC defines CPU_30_STYLE, CPU_40_STYLE and CCPU together; original NT host_def.h also defines CPU_30_STYLE.",
+    "Original cpu4.h includes host_cpu.h first and cpu4gen.h later; with original flags host_cpu.h selects the CPU_30_STYLE arm and does not expose the legacy pointer-vector else arm.",
+    "Original cpu4gen.h supplies direct c_getAX/c_getCPL macros under CCPU; current cpu4gen.h preserves the direct-binding scheme.",
+    "Current CPU40 configuration deliberately removes CPU_30_STYLE, selecting the original else shell but suppressing its obsolete pointer-vector contents. The branch hit in current context is therefore not proof that the old vector was selected in the original CCPU context.",
+    "Original selected little-endian reg union and current adapted non-CPU30 union have different declarations; layout and any need for local adaptation remain a separate review item."
+  ],
+  "original_profile_layout_fixture": {
+    "method": "Extract original little-endian CPU_30_STYLE reg union and current reg union verbatim into an isolated MSVC x86 fixture; define word as unsigned short and half_word as unsigned char, matching insignia.h and base_def.h.",
+    "fixture_sha256": "ada09fb790c62c33ba33ba4ecd2e775414134de062d0326fd76fb1833138ad00",
+    "result": {
+      "original_size": 2,
+      "current_size": 4,
+      "original_low_offset": 0,
+      "original_high_offset": 1,
+      "current_low_offset": 0,
+      "current_high_offset": 1
+    },
+    "limits": "Standalone extracted union, not full product behavior or external ABI test. Current source contains reg users in ios.c, floppy.c, ega_prts.c, vga_prts.c and cga.c; no sizeof(reg) or explicit bit/nibble member use was found by the recorded textual search. This does not prove all possible indirect consumers absent."
   }
 }
