@@ -1,0 +1,207 @@
+{
+  "method": "Compare original and current condition trees, retained-arm direct content, recorded arm hit states, excluded body shape, and source-derived logical positions. Natural line alignment accepted after projection check.",
+  "limits": "Historical hits are mapped evidence; matching-code projection is source-derived. No new compiler diagnostic test. Differences outside retained arms are not asserted semantically equivalent.",
+  "records": [
+    {
+      "path": "src/mvdm-host/inc/vdmredir.h",
+      "current_sha256": "63b125295473d5ff442ae62afdc700460455b3eff0dc53872d6135983891d8a2",
+      "original_sha256": "2462271dd22683738e60b4154bd891a8dfc679d4c34b9f75b23ecf91523add2d",
+      "matched_lines": 372,
+      "strict_tree": {
+        "retained": 13,
+        "excluded": 12,
+        "groups": 13,
+        "implicit_continuation": 11,
+        "implicit_retained_anchor": 4
+      },
+      "arm_states": {
+        "historical-hit": 13,
+        "excluded-error": 12
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/debug.h",
+      "current_sha256": "9de0bb6700c06fa12f84ede05f0eeb54c30995c33981340a18232cfd74d46c33",
+      "original_sha256": "59246b3c18bf6dfcd79b4e61bf961bc0382800deb4d968c198ceb415c284f21b",
+      "matched_lines": 106,
+      "strict_tree": {
+        "retained": 3,
+        "groups": 4,
+        "excluded": 3,
+        "implicit_retained_anchor": 1
+      },
+      "arm_states": {
+        "historical-hit": 3,
+        "excluded-error": 3
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
+      "current_sha256": "9b08e08ba77b3c8dfaffeec3efe8f1923b1495d30e79678e198cd52509643dd8",
+      "original_sha256": "ae58169de7aa969000f7cf4374d3d850b55d352c3d4c6edcf52dec0e985620a4",
+      "matched_lines": 466,
+      "strict_tree": {
+        "retained": 17,
+        "excluded": 10,
+        "groups": 22,
+        "implicit_retained_anchor": 1
+      },
+      "arm_states": {
+        "historical-hit": 17,
+        "excluded-error": 10
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/rs232.h",
+      "current_sha256": "26b15b12d4ca1162af6ca5881385e2435c81241bbcd868bd0e1755fa46786ba9",
+      "original_sha256": "80ddf84cdde4d7e5544210a489a103b2850a38f9f3a285199eb07ac8de4e7779",
+      "matched_lines": 215,
+      "strict_tree": {
+        "retained": 16,
+        "groups": 31,
+        "excluded": 21,
+        "implicit_retained_anchor": 2
+      },
+      "arm_states": {
+        "historical-hit": 16,
+        "excluded-error": 21
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "current_sha256": "df855fb85642e28effdde1b3c742e7b73e277b02edc89957df3f32d23907ce1c",
+      "original_sha256": "3e0d97d17bcc4c107b5173bf38868c79ab68d3042d29472a1a7259364da2947c",
+      "matched_lines": 577,
+      "strict_tree": {
+        "retained": 6,
+        "excluded": 3,
+        "groups": 8,
+        "implicit_retained_anchor": 1
+      },
+      "arm_states": {
+        "current-hit": 6,
+        "excluded-error": 3
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_sha256": "5d3c9f6443dbda483a0d44c097d8ff0676fc50e461d3b800aa6c5899b4bf8fce",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "matched_lines": 1946,
+      "strict_tree": {
+        "excluded": 67,
+        "groups": 73,
+        "retained": 27,
+        "implicit_retained_anchor": 3
+      },
+      "arm_states": {
+        "excluded-error": 67,
+        "historical-hit": 27
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/sim32.h",
+      "current_sha256": "55bb0fb88eace961f768c45a6717cf06caeda5322a657154c4c44ec5c25aad0e",
+      "original_sha256": "eeb9a654e53b5934850a6e7fa86fc67b1576ac9f1b9262d87acb5eed42c2fd98",
+      "matched_lines": 74,
+      "strict_tree": {
+        "excluded": 2,
+        "implicit_retained_anchor": 1,
+        "retained": 2,
+        "groups": 2
+      },
+      "arm_states": {
+        "excluded-error": 2,
+        "historical-hit": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "current_sha256": "6c2cce038ce1e64a581fa93bc5d7cc625568658602e310762b3ed281750688ab",
+      "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
+      "matched_lines": 430,
+      "strict_tree": {
+        "excluded": 8,
+        "groups": 12,
+        "retained": 7,
+        "implicit_retained_anchor": 1
+      },
+      "arm_states": {
+        "excluded-error": 8,
+        "current-hit": 7
+      }
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "current_sha256": "46cde6f9ec047b4f5614fa8645ca009b7c038baaa0b639ed428c441c3e5abee8",
+      "original_sha256": "c614c03a004f974c1eef37f1b29d3a8e1d7cfc33d04e7e7304befcbd6faafd18",
+      "matched_lines": 424,
+      "strict_tree": {
+        "retained": 9,
+        "groups": 10,
+        "excluded": 5,
+        "implicit_retained_anchor": 1
+      },
+      "arm_states": {
+        "historical-hit": 9,
+        "excluded-error": 5
+      }
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "current_sha256": "1633d18b84205a1dd96a1730017261ca141b4f669fade1356ca575f90eeea122",
+      "original_sha256": "224f6bdf5cfa15a37d95f97e24c30d37d947d5f7f5199d50aeab65b39d150c55",
+      "matched_lines": 894,
+      "strict_tree": {
+        "retained": 9,
+        "groups": 15,
+        "excluded": 7,
+        "implicit_retained_anchor": 1
+      },
+      "arm_states": {
+        "historical-hit": 8,
+        "excluded-error": 7,
+        "current-hit": 1
+      }
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/winddi.h",
+      "current_sha256": "9572d77cf8c9b94cd999b18d20e0a77597e1b3dd13285864bb05328f0a0fab9f",
+      "original_sha256": "f3ba4a33dbbb58768c2fb8aacc205a017f05d11521ad1650e39a998be5344f4a",
+      "matched_lines": 2505,
+      "strict_tree": {
+        "retained": 2,
+        "excluded": 1,
+        "implicit_retained_anchor": 1,
+        "groups": 2
+      },
+      "arm_states": {
+        "historical-hit": 2,
+        "excluded-error": 1
+      }
+    }
+  ],
+  "held": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+      "issues": [
+        "direct difference 332"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "issues": [
+        "direct difference 191",
+        "direct difference 687",
+        "direct difference 3555",
+        "direct difference 3782"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "issues": [
+        "direct difference 339"
+      ]
+    }
+  ]
+}

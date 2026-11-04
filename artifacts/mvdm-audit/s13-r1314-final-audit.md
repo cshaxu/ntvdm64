@@ -507,3 +507,5 @@ The [r1385 ROM BASIC audit](s13-r1385-rom-basc-review.json) verifies the exclude
 The [r1386 equipment audit](s13-r1386-equipmnt-review.json) verifies the excluded SEGMENTATION body, registered local observer and original logical positions of the unchanged nonblank lines. Counts: 181 identical / 771 differing files reviewed / 1,056 total; 104 differing files pending. This is source-derived evidence, not a new compiler diagnostic test.
 
 The [r1387 int21map review](s13-r1387-int21map-review.json) checks the original tree, 14 excluded arms, one retained arm and 2,987 source-matched lines. Counts: 181 identical / 772 differing files reviewed / 1,056 total; 103 differing files pending. This is source-derived and historical compilation evidence.
+
+The [r1389 natural-line review](s13-r1389-natural-line-review.json) verifies 11 condition trees and their selected direct bodies and line projections; three other candidates remain held for local differences. Counts: 181 identical / 783 differing files reviewed / 1,056 total; 92 differing files pending. This is source-derived and historical compilation evidence, not a fresh compiler diagnostic test.
