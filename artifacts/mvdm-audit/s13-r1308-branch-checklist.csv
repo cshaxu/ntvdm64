@@ -1650,10 +1650,10 @@ src/mvdm-host/softpc.new/base/comms/printer_.c,220,1,if,defined(NTVDM),historica
 src/mvdm-host/softpc.new/base/comms/printer_.c,223,2,ifdef,PRINTER,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/comms/rs232_io.c,14,1,ifdef,SCCSID,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/comms/rs232_io.c,20,1,ifdef,SEGMENTATION,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/comms/rs232_io.c,49,1,if,defined(IP32) || defined(TK43) || defined(macintosh),excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/comms/rs232_io.c,52,1,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/comms/rs232_io.c,75,1,ifdef,BIT_ORDER2,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/comms/rs232_io.c,87,1,ifdef,BIT_ORDER1,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/comms/rs232_io.c,50,1,if,defined(IP32) || defined(TK43) || defined(macintosh),excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/comms/rs232_io.c,53,1,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/comms/rs232_io.c,76,1,ifdef,BIT_ORDER2,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/comms/rs232_io.c,89,1,ifdef,BIT_ORDER1,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/cvidc/accessfn.c,6,1,ifndef,PROD,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/cvidc/cpu4gen.h,8,1,ifdef,CPU_PRIVATE,historical-hit,matching-complete-condition-sequence,not-applicable
 src/mvdm-host/softpc.new/base/cvidc/cpu4gen.h,10,1,else,,historical-hit,matching-complete-condition-sequence,not-applicable
@@ -2501,10 +2501,10 @@ src/mvdm-host/softpc.new/base/cvidc/cpu_c.h,1,1,ifndef,_Cpu_c_h,historical-hit,u
 src/mvdm-host/softpc.new/base/cvidc/cpu_c.h,104,2,ifndef,SWAPPED_M,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/cvidc/cpuint_c.h,1,1,ifndef,_CpuInt_c_h,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/cvidc/ev_glue.c,22,1,ifdef,CCPU,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/cvidc/ev_glue.c,54,1,ifdef,CCPU,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/cvidc/ev_glue.c,64,1,ifdef,C_VID,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/cvidc/ev_glue.c,756,2,ifdef,CCPU,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/cvidc/ev_glue.c,782,3,ifndef,PROD,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/cvidc/ev_glue.c,56,1,ifdef,CCPU,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/cvidc/ev_glue.c,66,1,ifdef,C_VID,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/cvidc/ev_glue.c,759,2,ifdef,CCPU,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/cvidc/ev_glue.c,786,3,ifndef,PROD,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/cvidc/evid_c.h,1,1,ifndef,_Evid_c_h,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/cvidc/evidgen.h,97,1,ifndef,CPU_40_STYLE,historical-hit,snapshot-byte-identical,not-applicable
 src/mvdm-host/softpc.new/base/cvidc/evidgen.h,138,1,ifndef,CPU_40_STYLE,historical-hit,snapshot-byte-identical,not-applicable
@@ -2512,7 +2512,7 @@ src/mvdm-host/softpc.new/base/cvidc/fm_c.h,1,1,ifndef,_Fm_c_h,historical-hit,uni
 src/mvdm-host/softpc.new/base/cvidc/fpu_c.h,1,1,ifndef,_Fpu_c_h,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/cvidc/gdpvar.h,1,1,ifndef,_gdpvar_h,historical-hit,snapshot-byte-identical,not-applicable
 src/mvdm-host/softpc.new/base/cvidc/j_c_lang.h,37,1,ifdef,LITTLEND,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/cvidc/j_c_lang.h,45,1,ifdef,BIGEND,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/cvidc/j_c_lang.h,46,1,ifdef,BIGEND,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/cvidc/pigger_c.h,1,1,ifndef,_Pigger_c_h,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/cvidc/univer_c.h,1,1,ifndef,_Univer_c_h,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/debug/btrace.c,16,1,ifdef,SCCSID,excluded-error,unique-structure-historical,error-anchor-match
@@ -2779,21 +2779,21 @@ src/mvdm-host/softpc.new/base/inc/config.h,1,1,ifndef,_CONFIG_H,historical-hit,u
 src/mvdm-host/softpc.new/base/inc/config.h,30,2,ifndef,_INS_ERROR_H,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/inc/config.h,83,2,ifdef,macintosh,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/inc/config.h,86,2,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/inc/config.h,269,2,if,!defined(NTVDM) && !defined(macintosh),excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/inc/config.h,275,2,if,defined(NTVDM),historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/inc/config.h,370,2,if,!defined(NTVDM) || (defined(NTVDM) && !defined(MONITOR)),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/inc/config.h,392,2,if,!defined(NTVDM) || (defined(NTVDM) && !defined(MONITOR)),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/inc/config.h,406,2,ifndef,host_expand_environment_vars,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/inc/config.h,412,2,ifdef,SWITCHNPX,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/inc/config.h,270,2,if,!defined(NTVDM) && !defined(macintosh),excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/inc/config.h,276,2,if,defined(NTVDM),historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/inc/config.h,371,2,if,!defined(NTVDM) || (defined(NTVDM) && !defined(MONITOR)),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/inc/config.h,393,2,if,!defined(NTVDM) || (defined(NTVDM) && !defined(MONITOR)),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/inc/config.h,407,2,ifndef,host_expand_environment_vars,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/inc/config.h,413,2,ifdef,SWITCHNPX,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/inc/cpu4.h,49,1,ifdef,CPU_PRIVATE,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/inc/cpu4.h,66,1,ifdef,IRET_HOOKS,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/base/inc/cpu4.h,79,1,ifdef,GISP_CPU,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/inc/cpu4.h,82,1,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/inc/cpu4.h,89,1,ifdef,IRET_HOOKS,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/inc/cpu4.h,103,1,if,!defined(CCPU) && !defined(PROD),historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/inc/cpu4.h,107,1,ifndef,CCPU,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/inc/cpu4.h,111,2,ifndef,PROD,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/inc/cpu4.h,118,2,ifdef,PIG,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/inc/cpu4.h,90,1,ifdef,IRET_HOOKS,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/inc/cpu4.h,104,1,if,!defined(CCPU) && !defined(PROD),historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/inc/cpu4.h,108,1,ifndef,CCPU,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/inc/cpu4.h,112,2,ifndef,PROD,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/inc/cpu4.h,119,2,ifdef,PIG,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/inc/cpu_vid.h,32,1,ifndef,NO_STRING_OPERATIONS,historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/softpc.new/base/inc/cpu_vid.h,70,1,ifdef,VGG,historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/softpc.new/base/inc/cpu_vid.h,78,1,ifdef,VGG,historical-hit,unchanged-directive-git-line-map,not-applicable
@@ -3056,35 +3056,35 @@ src/mvdm-host/softpc.new/base/inc/rs232.h,53,2,ifdef,BIT_ORDER1,excluded-error,n
 src/mvdm-host/softpc.new/base/inc/rs232.h,59,2,if,defined(NTVDM) && defined(FIFO_ON),excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/inc/rs232.h,62,2,else,,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/inc/rs232.h,64,3,ifdef,BIT_ORDER2,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/inc/rs232.h,74,3,ifdef,BIT_ORDER1,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/inc/rs232.h,83,2,ifdef,BIT_ORDER2,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/inc/rs232.h,97,2,ifdef,BIT_ORDER1,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/inc/rs232.h,103,2,ifdef,BIT_ORDER2,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/inc/rs232.h,116,2,ifdef,BIT_ORDER1,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/inc/rs232.h,122,2,ifdef,BIT_ORDER2,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/inc/rs232.h,133,3,if,defined(NTVDM) && defined(FIFO_ON),excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/inc/rs232.h,136,3,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/inc/rs232.h,143,2,ifdef,BIT_ORDER1,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/inc/rs232.h,149,2,ifdef,BIT_ORDER2,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/inc/rs232.h,165,2,ifdef,BIT_ORDER1,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/inc/rs232.h,171,2,if,defined(NTVDM) && defined(FIFO_ON),excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/inc/rs232.h,182,2,if,defined(NTVDM) && defined(FIFO_ON),excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/inc/rs232.h,204,2,if,defined(NTVDM) && defined(FIFO_ON),excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/inc/rs232.h,216,2,if,defined(NTVDM) && defined(FIFO_ON),excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/inc/rs232.h,236,2,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/inc/rs232.h,240,2,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/inc/rs232.h,246,2,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/inc/rs232.h,250,2,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/inc/rs232.h,262,2,if,(NUM_SERIAL_PORTS > 2),historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/inc/rs232.h,268,2,if,defined(NTVDM) && defined(FIFO_ON),excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/inc/rs232.h,294,2,ifdef,PS_FLUSHING,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/inc/rs232.h,300,2,ifdef,NTVDM,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/inc/rs232.h,309,2,if,(NUM_SERIAL_PORTS > 2),historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/inc/rs232.h,322,2,else,,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/inc/rs232.h,316,3,ifdef,SHORT_TRACE,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/inc/rs232.h,328,2,ifdef,IRET_HOOKS,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/inc/rs232.h,338,2,ifdef,SVID3_TCGET,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/inc/rs232.h,341,2,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/inc/rs232.h,75,3,ifdef,BIT_ORDER1,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/inc/rs232.h,84,2,ifdef,BIT_ORDER2,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/inc/rs232.h,98,2,ifdef,BIT_ORDER1,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/inc/rs232.h,104,2,ifdef,BIT_ORDER2,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/inc/rs232.h,117,2,ifdef,BIT_ORDER1,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/inc/rs232.h,123,2,ifdef,BIT_ORDER2,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/inc/rs232.h,134,3,if,defined(NTVDM) && defined(FIFO_ON),excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/inc/rs232.h,137,3,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/inc/rs232.h,145,2,ifdef,BIT_ORDER1,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/inc/rs232.h,151,2,ifdef,BIT_ORDER2,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/inc/rs232.h,167,2,ifdef,BIT_ORDER1,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/inc/rs232.h,173,2,if,defined(NTVDM) && defined(FIFO_ON),excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/inc/rs232.h,184,2,if,defined(NTVDM) && defined(FIFO_ON),excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/inc/rs232.h,206,2,if,defined(NTVDM) && defined(FIFO_ON),excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/inc/rs232.h,218,2,if,defined(NTVDM) && defined(FIFO_ON),excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/inc/rs232.h,238,2,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/inc/rs232.h,242,2,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/inc/rs232.h,248,2,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/inc/rs232.h,252,2,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/inc/rs232.h,264,2,if,(NUM_SERIAL_PORTS > 2),historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/inc/rs232.h,270,2,if,defined(NTVDM) && defined(FIFO_ON),excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/inc/rs232.h,296,2,ifdef,PS_FLUSHING,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/inc/rs232.h,302,2,ifdef,NTVDM,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/inc/rs232.h,311,2,if,(NUM_SERIAL_PORTS > 2),historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/inc/rs232.h,325,2,else,,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/inc/rs232.h,319,3,ifdef,SHORT_TRACE,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/inc/rs232.h,331,2,ifdef,IRET_HOOKS,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/inc/rs232.h,341,2,ifdef,SVID3_TCGET,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/inc/rs232.h,344,2,else,,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/inc/sas.h,30,1,ifdef,CPU_40_STYLE,historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/softpc.new/base/inc/sas.h,45,1,else,,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/base/inc/sas.h,66,1,ifdef,CPU_40_STYLE,historical-hit,unchanged-directive-git-line-map,not-applicable
@@ -3357,52 +3357,52 @@ src/mvdm-host/softpc.new/base/keymouse/keyba.c,2783,1,else,,historical-hit,uncha
 src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,49,1,ifdef,SCCSID,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,55,1,ifdef,SEGMENTATION,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,83,1,ifndef,PROD,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,150,1,if,defined(NTVDM) && defined(LOCAL),historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,158,1,ifndef,GISP_SVGA,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,173,1,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,180,1,if,defined(IRET_HOOKS) && defined(GISP_CPU),excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,186,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,233,1,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,243,1,ifndef,GISP_SVGA,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,249,1,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,258,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,265,1,if,defined(NTVDM) && defined(MONITOR),historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,522,1,if,defined(NTVDM) || defined(GISP_CPU),historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,547,1,else,,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,538,2,ifdef,NTVDM,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,542,2,ifdef,GISP_CPU,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,607,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,610,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,620,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,623,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,657,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,660,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,707,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,720,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,723,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,751,1,if,defined(IRET_HOOKS)  && defined(GISP_CPU),excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,758,1,if,defined(NTVDM),historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,773,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,784,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,803,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,814,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,821,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,829,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,836,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,1041,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,1123,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,1126,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,1435,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,1488,1,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,1454,2,ifndef,NTVDM,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,1494,1,ifdef,SEGMENTATION,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,1538,1,if,defined(CPU_40_STYLE) && !defined (NTVDM),excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,1547,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,1556,2,if,defined(MONITOR),historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,1586,2,if,defined(MONITOR),historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,1664,2,else,,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,1656,3,ifndef,PROD,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,1694,2,ifndef,PROD,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,151,1,if,defined(NTVDM) && defined(LOCAL),historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,159,1,ifndef,GISP_SVGA,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,174,1,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,181,1,if,defined(IRET_HOOKS) && defined(GISP_CPU),excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,187,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,234,1,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,244,1,ifndef,GISP_SVGA,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,250,1,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,259,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,266,1,if,defined(NTVDM) && defined(MONITOR),historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,523,1,if,defined(NTVDM) || defined(GISP_CPU),historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,548,1,else,,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,539,2,ifdef,NTVDM,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,543,2,ifdef,GISP_CPU,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,608,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,611,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,621,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,624,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,658,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,661,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,709,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,722,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,725,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,753,1,if,defined(IRET_HOOKS)  && defined(GISP_CPU),excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,760,1,if,defined(NTVDM),historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,775,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,786,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,805,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,816,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,823,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,831,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,838,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,1043,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,1125,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,1128,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,1437,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,1493,1,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,1457,2,ifndef,NTVDM,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,1499,1,ifdef,SEGMENTATION,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,1543,1,if,defined(CPU_40_STYLE) && !defined (NTVDM),excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,1552,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,1561,2,if,defined(MONITOR),historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,1592,2,if,defined(MONITOR),historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,1672,2,else,,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,1664,3,ifndef,PROD,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,1702,2,ifndef,PROD,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/keymouse/mouse.c,30,1,ifdef,SCCSID,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/keymouse/mouse.c,36,1,ifdef,SEGMENTATION,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/base/keymouse/mouse.c,80,1,ifndef,PROD,excluded-error,none,error-anchor-match
@@ -4003,85 +4003,85 @@ src/mvdm-host/softpc.new/base/system/timer.c,374,1,else,,excluded-error,none,err
 src/mvdm-host/softpc.new/base/system/timer.c,385,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/base/system/timer.c,390,1,ifdef,SYNCH_TIMERS,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/base/system/timer.c,393,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/system/timer.c,399,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,407,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,413,1,if,defined(NTVDM),historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/system/timer.c,442,1,else,,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,428,2,ifndef,PROD,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,448,1,ifndef,PROD,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,454,1,if,!defined(NTVDM),excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,493,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,507,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,518,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,565,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/system/timer.c,567,1,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,574,1,ifndef,PROD,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,580,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/system/timer.c,582,1,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,592,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/system/timer.c,594,1,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,633,1,ifndef,PROD,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,638,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/system/timer.c,640,1,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,651,1,if,defined(NTVDM) || defined(GISP_SVGA),historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/system/timer.c,657,1,else,,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,654,2,ifdef,NTVDM,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/system/timer.c,668,1,ifndef,PROD,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,674,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/system/timer.c,676,1,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,691,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,697,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/system/timer.c,732,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,875,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,942,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,975,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/system/timer.c,979,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,988,1,if,defined(NTVDM) && !defined(PROD),excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,1003,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/system/timer.c,1014,1,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,1231,1,ifdef,DOCUMENTATION,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,1248,1,ifdef,DOCUMENTATION,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,1260,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/system/timer.c,1265,1,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,1588,1,ifdef,DOCUMENTATION,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,1672,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,1681,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,1695,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/system/timer.c,1697,1,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,1711,1,ifdef,HUNTER,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,1724,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/system/timer.c,1726,1,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,1735,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/system/timer.c,1740,1,ifdef,HUNTER,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,1750,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,1753,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/system/timer.c,1784,2,ifndef,MONITOR,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/system/timer.c,1902,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,1913,1,ifndef,PROD,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,1919,1,ifdef,PIG,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,1925,1,ifndef,PROD,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,1933,1,ifndef,PROD,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,1940,1,ifdef,DELAYED_INTS,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,1943,1,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/system/timer.c,1946,2,ifdef,NTVDM,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/system/timer.c,1956,2,else,,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,1973,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/system/timer.c,2074,1,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,2082,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,2167,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,2181,1,ifndef,PROD,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,2192,1,ifdef,SEGMENTATION,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,2198,1,ifdef,SYNCH_TIMERS,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,2201,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/system/timer.c,2210,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,2222,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/system/timer.c,2226,1,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,2237,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,2245,1,if,!defined (NTVDM),excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,2274,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,2277,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/system/timer.c,2288,1,if,!defined(NTVDM),excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/timer.c,2314,1,ifdef,DOCUMENTATION,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,400,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,408,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,414,1,if,defined(NTVDM),historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/system/timer.c,443,1,else,,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,429,2,ifndef,PROD,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,449,1,ifndef,PROD,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,455,1,if,!defined(NTVDM),excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,494,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,508,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,519,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,566,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/system/timer.c,568,1,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,575,1,ifndef,PROD,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,581,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/system/timer.c,583,1,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,593,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/system/timer.c,595,1,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,634,1,ifndef,PROD,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,639,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/system/timer.c,641,1,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,652,1,if,defined(NTVDM) || defined(GISP_SVGA),historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/system/timer.c,658,1,else,,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,655,2,ifdef,NTVDM,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/system/timer.c,669,1,ifndef,PROD,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,675,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/system/timer.c,677,1,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,692,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,698,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/system/timer.c,733,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,876,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,943,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,976,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/system/timer.c,980,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,989,1,if,defined(NTVDM) && !defined(PROD),excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,1004,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/system/timer.c,1015,1,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,1232,1,ifdef,DOCUMENTATION,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,1249,1,ifdef,DOCUMENTATION,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,1261,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/system/timer.c,1266,1,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,1589,1,ifdef,DOCUMENTATION,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,1673,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,1682,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,1696,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/system/timer.c,1698,1,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,1712,1,ifdef,HUNTER,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,1725,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/system/timer.c,1727,1,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,1736,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/system/timer.c,1741,1,ifdef,HUNTER,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,1751,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,1754,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/system/timer.c,1785,2,ifndef,MONITOR,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/system/timer.c,1903,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,1914,1,ifndef,PROD,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,1920,1,ifdef,PIG,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,1926,1,ifndef,PROD,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,1934,1,ifndef,PROD,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,1941,1,ifdef,DELAYED_INTS,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,1944,1,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/system/timer.c,1947,2,ifdef,NTVDM,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/system/timer.c,1958,2,else,,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,1975,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/system/timer.c,2076,1,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,2084,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,2169,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,2183,1,ifndef,PROD,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,2194,1,ifdef,SEGMENTATION,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,2200,1,ifdef,SYNCH_TIMERS,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,2203,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/system/timer.c,2213,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,2225,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/system/timer.c,2229,1,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,2240,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,2248,1,if,!defined (NTVDM),excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,2277,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,2280,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/system/timer.c,2291,1,if,!defined(NTVDM),excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/timer.c,2317,1,ifdef,DOCUMENTATION,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/base/system/timestrb.c,31,1,ifdef,SEGMENTATION,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/system/timestrb.c,58,1,ifdef,HUNTER,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/base/system/timestrb.c,80,1,if,!defined(REAL_TIMER) && !defined(NTVDM),excluded-error,unique-structure-historical,error-anchor-match
@@ -4093,32 +4093,32 @@ src/mvdm-host/softpc.new/base/system/unexp_nt.c,23,1,ifdef,SEGMENTATION,excluded
 src/mvdm-host/softpc.new/base/video/cga.c,4,1,if,!defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX) ),historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/video/cga.c,53,2,ifdef,SEGMENTATION,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/base/video/cga.c,95,2,ifdef,EGG,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/video/cga.c,101,2,ifdef,REAL_VGA,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/video/cga.c,104,2,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/video/cga.c,129,2,ifdef,HUNTER,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/video/cga.c,181,2,ifdef,A3CPU,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/video/cga.c,184,2,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/video/cga.c,194,2,ifdef,A2CPU,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/video/cga.c,420,2,ifdef,HUNTER,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/video/cga.c,620,2,ifdef,REAL_VGA,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/video/cga.c,633,2,ifdef,REAL_VGA,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/video/cga.c,657,2,ifdef,REAL_VGA,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/video/cga.c,676,2,ifdef,REAL_VGA,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/video/cga.c,744,2,ifdef,HUNTER,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/video/cga.c,1140,2,if,!defined(EGG) && !defined(A3CPU) && !defined(A2CPU) && !defined(C_VID) && !defined(A_VID),excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/video/cga.c,1146,2,ifdef,SEGMENTATION,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/video/cga.c,1164,2,ifdef,HUNTER,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/video/cga.c,1193,2,ifndef,GISP_CPU,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/video/cga.c,1196,3,ifdef,JOKER,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/video/cga.c,1199,3,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/video/cga.c,1203,4,ifdef,A3CPU,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/video/cga.c,1211,4,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/video/cga.c,1213,5,ifdef,A2CPU,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/video/cga.c,1216,5,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/video/cga.c,1218,6,if,!defined(EGG) && !defined(C_VID) && !defined(A_VID),excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/video/cga.c,1221,6,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/video/cga.c,1239,2,ifdef,CPU_40_STYLE,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/video/cga.c,1299,2,if,!defined(EGG) && !defined(C_VID) && !defined(A_VID),excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/video/cga.c,102,2,ifdef,REAL_VGA,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/video/cga.c,105,2,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/video/cga.c,130,2,ifdef,HUNTER,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/video/cga.c,182,2,ifdef,A3CPU,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/video/cga.c,185,2,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/video/cga.c,195,2,ifdef,A2CPU,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/video/cga.c,421,2,ifdef,HUNTER,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/video/cga.c,621,2,ifdef,REAL_VGA,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/video/cga.c,634,2,ifdef,REAL_VGA,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/video/cga.c,658,2,ifdef,REAL_VGA,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/video/cga.c,677,2,ifdef,REAL_VGA,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/video/cga.c,745,2,ifdef,HUNTER,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/video/cga.c,1141,2,if,!defined(EGG) && !defined(A3CPU) && !defined(A2CPU) && !defined(C_VID) && !defined(A_VID),excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/video/cga.c,1147,2,ifdef,SEGMENTATION,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/video/cga.c,1165,2,ifdef,HUNTER,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/video/cga.c,1194,2,ifndef,GISP_CPU,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/video/cga.c,1197,3,ifdef,JOKER,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/video/cga.c,1200,3,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/video/cga.c,1204,4,ifdef,A3CPU,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/video/cga.c,1212,4,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/video/cga.c,1214,5,ifdef,A2CPU,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/video/cga.c,1217,5,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/video/cga.c,1219,6,if,!defined(EGG) && !defined(C_VID) && !defined(A_VID),excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/video/cga.c,1222,6,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/video/cga.c,1240,2,ifdef,CPU_40_STYLE,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/video/cga.c,1300,2,if,!defined(EGG) && !defined(C_VID) && !defined(A_VID),excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/video/ega_dmmy.c,4,1,if,!defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX) ),historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/video/ega_dmmy.c,11,2,ifdef,EGG,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/video/ega_dmmy.c,26,3,ifdef,SEGMENTATION,excluded-error,unique-structure-historical,error-anchor-match
@@ -4131,67 +4131,67 @@ src/mvdm-host/softpc.new/base/video/ega_prts.c,331,1,ifndef,REAL_VGA,historical-
 src/mvdm-host/softpc.new/base/video/ega_prts.c,332,2,ifdef,EGG,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/video/ega_prts.c,354,3,ifdef,GORE,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/base/video/ega_prts.c,374,3,ifndef,cursor_changed,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,395,3,ifdef,SEGMENTATION,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/video/ega_prts.c,410,3,ifdef,BIT_ORDER1,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/video/ega_prts.c,415,3,ifdef,BIT_ORDER2,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,753,3,ifdef,BIT_ORDER1,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/video/ega_prts.c,759,3,ifdef,BIT_ORDER2,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,1018,3,ifndef,A2CPU,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,1121,3,ifdef,VGG,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,1193,3,ifdef,VGG,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,1291,3,ifdef,PIG,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/video/ega_prts.c,1297,3,ifdef,V7VGA,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,1308,3,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/video/ega_prts.c,1314,3,ifdef,PIG,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/video/ega_prts.c,1322,3,ifdef,VGG,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,1329,3,ifdef,GORE,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/video/ega_prts.c,1341,3,ifdef,V7VGA,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,1343,3,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/video/ega_prts.c,1361,3,if,!defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX)),historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,1362,4,ifndef,CPU_40_STYLE,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/video/ega_prts.c,1365,4,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,1405,3,ifndef,CPU_40_STYLE,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/video/ega_prts.c,1413,3,ifndef,A2CPU,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,1611,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,1622,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,1643,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,1669,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,1693,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,1721,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,1801,3,ifdef,VGG,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,1810,3,else,,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2052,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2099,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2147,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2166,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2187,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2206,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2230,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2244,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2294,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2356,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2402,3,ifdef,V7VGA,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2415,3,ifdef,V7VGA,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2429,3,ifdef,A3CPU,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2432,3,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2434,4,if,!(defined(NTVDM) && defined(MONITOR)),historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2453,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2471,3,ifndef,USE_OLD_MASK_CODE,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2473,3,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2482,3,ifndef,CPU_40_STYLE,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2490,3,ifndef,CPU_40_STYLE,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2503,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2521,3,ifndef,USE_OLD_MASK_CODE,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2523,3,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2532,3,ifndef,CPU_40_STYLE,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2540,3,ifndef,CPU_40_STYLE,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2550,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2565,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2681,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2729,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2740,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2817,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/ega_prts.c,2914,3,ifdef,HUNTER,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/video/ega_prts.c,396,3,ifdef,SEGMENTATION,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/video/ega_prts.c,411,3,ifdef,BIT_ORDER1,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/video/ega_prts.c,416,3,ifdef,BIT_ORDER2,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,754,3,ifdef,BIT_ORDER1,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/video/ega_prts.c,760,3,ifdef,BIT_ORDER2,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,1019,3,ifndef,A2CPU,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,1122,3,ifdef,VGG,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,1194,3,ifdef,VGG,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,1292,3,ifdef,PIG,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/video/ega_prts.c,1298,3,ifdef,V7VGA,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,1309,3,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/video/ega_prts.c,1315,3,ifdef,PIG,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/video/ega_prts.c,1323,3,ifdef,VGG,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,1330,3,ifdef,GORE,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/video/ega_prts.c,1342,3,ifdef,V7VGA,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,1344,3,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/video/ega_prts.c,1362,3,if,!defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX)),historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,1363,4,ifndef,CPU_40_STYLE,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/video/ega_prts.c,1366,4,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,1407,3,ifndef,CPU_40_STYLE,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/video/ega_prts.c,1415,3,ifndef,A2CPU,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,1613,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,1624,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,1645,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,1671,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,1695,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,1723,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,1803,3,ifdef,VGG,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,1812,3,else,,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2054,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2101,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2149,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2168,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2189,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2208,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2232,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2246,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2296,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2358,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2405,3,ifdef,V7VGA,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2418,3,ifdef,V7VGA,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2432,3,ifdef,A3CPU,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2435,3,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2437,4,if,!(defined(NTVDM) && defined(MONITOR)),historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2457,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2475,3,ifndef,USE_OLD_MASK_CODE,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2477,3,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2486,3,ifndef,CPU_40_STYLE,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2494,3,ifndef,CPU_40_STYLE,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2507,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2525,3,ifndef,USE_OLD_MASK_CODE,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2527,3,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2536,3,ifndef,CPU_40_STYLE,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2544,3,ifndef,CPU_40_STYLE,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2554,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2569,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2685,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2733,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2744,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2821,3,ifdef,PROD,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/video/ega_prts.c,2918,3,ifdef,HUNTER,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/video/ega_read.c,4,1,if,!(defined(NTVDM) && defined(MONITOR)),historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/video/ega_read.c,123,2,ifdef,EGG,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/video/ega_read.c,153,3,ifdef,SEGMENTATION,excluded-error,unique-structure-historical,error-anchor-match

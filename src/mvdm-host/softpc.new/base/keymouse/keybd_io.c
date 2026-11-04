@@ -106,6 +106,7 @@
  * ============================================================================
  */
 
+#line 104
 #define SHIFT_KEY_SIZE 8
 #define ALT_TABLE_SIZE 36
 
@@ -688,6 +689,7 @@ void NtPutInBuffer(half_word s, half_word v)
                  * commit.  It cannot affect delivery, ownership or IRQs. */
                 mvdm_softpc_report_setup_hardware_probe("keyboard-buffer-put",
                     (unsigned long)s, (unsigned long)v);
+#line 756
                 setAX(0x9102);
                 INT15();
       K26();
@@ -1444,6 +1446,7 @@ void keyboard_io()
    /* DIVERGENCE(MVDM-HOST-DIV-325): register-only diagnostics. */
    mvdm_softpc_report_setup_hardware_probe("keyboard-bop-enter",
        (unsigned long)getAH(), (unsigned long)getAL());
+#line 1496
    switch (getAH()) {
            /*
             * The 16 bit thread has not reached idle status yet
@@ -1471,9 +1474,11 @@ void keyboard_io()
      case 2:
        mvdm_softpc_report_setup_hardware_probe("keyboard-waitio-enter",
            (unsigned long)getAH(), (unsigned long)getAL());
+#line 1522
        IDLE_waitio();
        mvdm_softpc_report_setup_hardware_probe("keyboard-waitio-leave",
            (unsigned long)getAH(), (unsigned long)getAL());
+#line 1523
        break;
 
             /*
@@ -1579,6 +1584,7 @@ void kb_setup_vectors(void)
 
       /* IDLE variables */
     sas_loadw((sys_addr)(phy_base + 12 * sizeof(word)), &w);
+#line 1923
     pICounter		  = (word *) (Start_of_M_area + ((KbdSeg<<4)+w));
     pCharPollsPerTick	  = (word *) (Start_of_M_area + ((KbdSeg<<4)+w+4));
     pMinConsecutiveTicks = (word *)  (Start_of_M_area + ((KbdSeg<<4)+w+8));
@@ -1624,6 +1630,7 @@ void kb_setup_vectors(void)
    ** version only has two entries; for 40 column text mode and 80
    ** column text mode.
    */
+#line 1969
    useHostInt10  = *pkio_table++;
    sas_store_no_check((sys_addr)(phy_base + useHostInt10), getNtScreenState());
    babyModeTable = (int10_seg << 4) + *pkio_table++;
@@ -1652,6 +1659,7 @@ void kb_setup_vectors(void)
         effective_addr(*pkio_table++, 0));
     stream_io_dirty_count_ptr = (word *)(Start_of_M_area +
         effective_addr(KbdSeg, *pkio_table++));
+#line 1995
    stream_io_bios_busy_sysaddr = effective_addr(KbdSeg, *pkio_table++);
 #ifndef PROD
 #line 1997

@@ -80,6 +80,7 @@ IMPORT void		cpuEnableInterrupts IPT1(IBOOL, yes_or_no);
 #line 84
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register.
 #else
+#line 86
 #define GetInstructionPointer getEIP
 #endif
 #line 88

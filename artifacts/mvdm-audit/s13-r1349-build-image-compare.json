@@ -1,0 +1,165 @@
+{
+  "scope": "Ten product images; PE and debug directory timestamps parsed independently in both images",
+  "records": [
+    {
+      "name": "run16.exe",
+      "classification": "identical",
+      "old_sha256": "1349f82c2d5c977cbc1e70b9db973b2a308405cb493f0df98e7b855c3d1cc4e7",
+      "new_sha256": "1349f82c2d5c977cbc1e70b9db973b2a308405cb493f0df98e7b855c3d1cc4e7",
+      "different_bytes": 0,
+      "old_timestamp_offsets": [
+        264,
+        209524
+      ],
+      "new_timestamp_offsets": [
+        264,
+        209524
+      ],
+      "outside_timestamps": 0
+    },
+    {
+      "name": "ntsrv.exe",
+      "classification": "identical",
+      "old_sha256": "da610c3aa4a4f3d1efd6d14863e16eeaeb2c843ee6b176b0429620250965165e",
+      "new_sha256": "da610c3aa4a4f3d1efd6d14863e16eeaeb2c843ee6b176b0429620250965165e",
+      "different_bytes": 0,
+      "old_timestamp_offsets": [
+        256,
+        289428
+      ],
+      "new_timestamp_offsets": [
+        256,
+        289428
+      ],
+      "outside_timestamps": 0
+    },
+    {
+      "name": "ntcon.exe",
+      "classification": "identical",
+      "old_sha256": "3fa0653e4c333e92980aa6892503b6adfe76b018bf544b1ab8f877eaedecacc9",
+      "new_sha256": "3fa0653e4c333e92980aa6892503b6adfe76b018bf544b1ab8f877eaedecacc9",
+      "different_bytes": 0,
+      "old_timestamp_offsets": [
+        248,
+        246004
+      ],
+      "new_timestamp_offsets": [
+        248,
+        246004
+      ],
+      "outside_timestamps": 0
+    },
+    {
+      "name": "ntvdm.exe",
+      "classification": "timestamp-only",
+      "old_sha256": "88b860df1c59aaf51f0cf960d17a5df60c9cd31a99f2cda12e6ca05ee0df960e",
+      "new_sha256": "f4a7ed46bd7fda66e134a9eafdff82d2f2d333881afd8e95fd50f276aa1c5727",
+      "different_bytes": 4,
+      "old_timestamp_offsets": [
+        288,
+        1698412
+      ],
+      "new_timestamp_offsets": [
+        288,
+        1698412
+      ],
+      "outside_timestamps": 0
+    },
+    {
+      "name": "ntvwm.exe",
+      "classification": "identical",
+      "old_sha256": "062d0652522f8d04cb783e96ec17dcf2b23fdfcf700a6397e87fc065ffb2745a",
+      "new_sha256": "062d0652522f8d04cb783e96ec17dcf2b23fdfcf700a6397e87fc065ffb2745a",
+      "different_bytes": 0,
+      "old_timestamp_offsets": [
+        264,
+        229060
+      ],
+      "new_timestamp_offsets": [
+        264,
+        229060
+      ],
+      "outside_timestamps": 0
+    },
+    {
+      "name": "ntmon.exe",
+      "classification": "identical",
+      "old_sha256": "4df75031a7d19a6c853b680476d0c3fbd7a200fd60d85a1dce1e96f099f8c345",
+      "new_sha256": "4df75031a7d19a6c853b680476d0c3fbd7a200fd60d85a1dce1e96f099f8c345",
+      "different_bytes": 0,
+      "old_timestamp_offsets": [
+        264,
+        146260
+      ],
+      "new_timestamp_offsets": [
+        264,
+        146260
+      ],
+      "outside_timestamps": 0
+    },
+    {
+      "name": "WOW32.DLL",
+      "classification": "identical",
+      "old_sha256": "64350c70821bf7e67e6a62812668d34f86a0998e99e1766daaba3754edf125c1",
+      "new_sha256": "64350c70821bf7e67e6a62812668d34f86a0998e99e1766daaba3754edf125c1",
+      "different_bytes": 0,
+      "old_timestamp_offsets": [
+        280,
+        625412
+      ],
+      "new_timestamp_offsets": [
+        280,
+        625412
+      ],
+      "outside_timestamps": 0
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "classification": "identical",
+      "old_sha256": "3ea1c593b9ef8e7c857f38e63504a51069f72500cab93ea289a0f230804b6433",
+      "new_sha256": "3ea1c593b9ef8e7c857f38e63504a51069f72500cab93ea289a0f230804b6433",
+      "different_bytes": 0,
+      "old_timestamp_offsets": [
+        280,
+        123572
+      ],
+      "new_timestamp_offsets": [
+        280,
+        123572
+      ],
+      "outside_timestamps": 0
+    },
+    {
+      "name": "nthook32.dll",
+      "classification": "identical",
+      "old_sha256": "d22617d096beaee7ada627b75f8458b12b5091581530c31b6cc3d04c012450d1",
+      "new_sha256": "d22617d096beaee7ada627b75f8458b12b5091581530c31b6cc3d04c012450d1",
+      "different_bytes": 0,
+      "old_timestamp_offsets": [
+        280,
+        133156
+      ],
+      "new_timestamp_offsets": [
+        280,
+        133156
+      ],
+      "outside_timestamps": 0
+    },
+    {
+      "name": "nthook64.dll",
+      "classification": "identical",
+      "old_sha256": "189808ac8fe2f3ae2e7c6f17e0b99c936bc13f2752077dbfc415153c84ea4881",
+      "new_sha256": "189808ac8fe2f3ae2e7c6f17e0b99c936bc13f2752077dbfc415153c84ea4881",
+      "different_bytes": 0,
+      "old_timestamp_offsets": [
+        272,
+        167348
+      ],
+      "new_timestamp_offsets": [
+        272,
+        167348
+      ],
+      "outside_timestamps": 0
+    }
+  ]
+}

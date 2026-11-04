@@ -374,3 +374,13 @@ changes were needed. This does not prove unobserved contexts or runtime
 semantics of local adaptations. Counts: 182 byte-identical / 689 differing
 files with condition and matching-code review / 1,056 total; 185 differing
 files remain.
+
+The [r1349 batch](s13-r1349-batch.json) aligns matching source lines on
+observed selected paths in ten files; [context recheck](s13-r1349-context-recheck.json)
+passes. Five additionally passed [strict tree review](s13-r1349-strict-review.json);
+the other five remain pending. Current count: 182 byte-identical / 694 differing
+files reviewed / 1,056 total; 180 differing files pending. Cached x86 root,
+NTVDM, WOW32 and x64 builds passed; ten images published and verified. Nine
+match byte-for-byte and NTVDM differs only by PE timestamp
+([comparison](s13-r1349-build-image-compare.json)); tests were not repeated
+under the owner-approved unchanged-image rule.

@@ -1,0 +1,65 @@
+{
+  "method": "Same strict original-tree and observed selected-projection review as r1348; unobserved contexts and local runtime behavior are not certified.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+      "before_sha256": "adc71a1f2f236f6fe0a478a2d7ac1f91d18c4e9aa70647c5ce3106b56ec65417",
+      "original_sha256": "534f7058f657be386f25950d5e1750a4f5017f67e4890201983fbbb3d74f379f",
+      "anchors": {},
+      "matched_lines": 266,
+      "strict_tree": {
+        "excluded": 4,
+        "groups": 5,
+        "retained": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/j_c_lang.h",
+      "before_sha256": "f1fc8c6dbf5df7731ea2e28756dbfb16e504d58b81d8df4de4124d842f67eb3c",
+      "original_sha256": "24f207c966e47150f1b1be512ed73a4ff8c331009a212e4ceda76b822944dda1",
+      "anchors": {},
+      "matched_lines": 41,
+      "strict_tree": {
+        "retained": 1,
+        "groups": 2,
+        "excluded": 1
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/config.h",
+      "before_sha256": "1167d3a042b9c2692d09d96bdd947ce88ebecca9b13958a2fac22e4e281c6a74",
+      "original_sha256": "6c12b5c1bd7102c46d3e5b86795dcce8610e7b9adaead907ba031e9f9bf40034",
+      "anchors": {},
+      "matched_lines": 396,
+      "strict_tree": {
+        "retained": 7,
+        "groups": 9,
+        "excluded": 3
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu4.h",
+      "before_sha256": "6c6b5f99d2e19ec21b2987646d6a22c4daed3896597c5cbce7a99442a1342427",
+      "original_sha256": "c1296168c866527a931bfa4b7cefe21f54acc96a6f242b0a60d6cdba4cdba725",
+      "anchors": {},
+      "matched_lines": 95,
+      "strict_tree": {
+        "retained": 5,
+        "groups": 8,
+        "excluded": 4
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+      "before_sha256": "0a0ccb97bd0c9f55f01ce3dc7b0aaee8a9e15c42c9bb38a9c841670bd807810d",
+      "original_sha256": "8591c1b0e178f4b8791ed289588d3ed8a06ef514f8bdfca4797a190eb51e2777",
+      "anchors": {},
+      "matched_lines": 1167,
+      "strict_tree": {
+        "retained": 10,
+        "excluded": 19,
+        "groups": 23
+      }
+    }
+  ]
+}

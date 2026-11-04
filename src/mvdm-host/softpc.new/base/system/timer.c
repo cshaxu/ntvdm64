@@ -391,6 +391,7 @@ LOCAL void issueIREQ0 IPT1(unsigned int, n);
 #line 384
 #error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register.
 #else
+#line 386
 LOCAL void IdealTimeInit IPT0();
 #endif
 #line 388
@@ -1944,6 +1945,7 @@ LOCAL void issueIREQ0 IFN1(unsigned int, n)
 #line 2010
 
 #ifdef NTVDM
+#line 2194
 			if (n > 0)
                             timer_delay_size= HOST_IDEAL_ALARM/(n+1);
 
@@ -2200,6 +2202,7 @@ void	axe_ticks IFN1(int, ticks)
 #error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register.
 #else
 
+#line 2690
 LOCAL void IdealTimeInit IFN0()
 {
     idealInterval = HOST_IDEAL_ALARM;

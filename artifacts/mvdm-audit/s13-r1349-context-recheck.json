@@ -1,0 +1,82 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+    "current_sha256": "adc71a1f2f236f6fe0a478a2d7ac1f91d18c4e9aa70647c5ce3106b56ec65417",
+    "original_sha256": "534f7058f657be386f25950d5e1750a4f5017f67e4890201983fbbb3d74f379f",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 266
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c",
+    "current_sha256": "12af7726b0d966887aeb9b216a521f38dccbba86cfeee1e7186386f36f187ce3",
+    "original_sha256": "a12ddfd55dbd3b4426ff20075c46a665c6a30c6a955f24f6ab4872fb4895e935",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 791
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/cvidc/j_c_lang.h",
+    "current_sha256": "f1fc8c6dbf5df7731ea2e28756dbfb16e504d58b81d8df4de4124d842f67eb3c",
+    "original_sha256": "24f207c966e47150f1b1be512ed73a4ff8c331009a212e4ceda76b822944dda1",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 41
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/config.h",
+    "current_sha256": "1167d3a042b9c2692d09d96bdd947ce88ebecca9b13958a2fac22e4e281c6a74",
+    "original_sha256": "6c12b5c1bd7102c46d3e5b86795dcce8610e7b9adaead907ba031e9f9bf40034",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 396
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/cpu4.h",
+    "current_sha256": "6c6b5f99d2e19ec21b2987646d6a22c4daed3896597c5cbce7a99442a1342427",
+    "original_sha256": "c1296168c866527a931bfa4b7cefe21f54acc96a6f242b0a60d6cdba4cdba725",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 95
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/rs232.h",
+    "current_sha256": "26b15b12d4ca1162af6ca5881385e2435c81241bbcd868bd0e1755fa46786ba9",
+    "original_sha256": "80ddf84cdde4d7e5544210a489a103b2850a38f9f3a285199eb07ac8de4e7779",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 215
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+    "current_sha256": "235dccd77e38abd5397cc6b064ad297d7f0cc1406a6676801590b0bba739f510",
+    "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 1605
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+    "current_sha256": "5d3c9f6443dbda483a0d44c097d8ff0676fc50e461d3b800aa6c5899b4bf8fce",
+    "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 1946
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+    "current_sha256": "0a0ccb97bd0c9f55f01ce3dc7b0aaee8a9e15c42c9bb38a9c841670bd807810d",
+    "original_sha256": "8591c1b0e178f4b8791ed289588d3ed8a06ef514f8bdfca4797a190eb51e2777",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 1167
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+    "current_sha256": "0f4e3a5e2d008ed1c4f5c85697bed569064845819d5fab62703cd266416196eb",
+    "original_sha256": "1dedadd482f631e9b82a0fde92b84ff74c724faaaac782ae538639e0738e7002",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 2723
+  }
+]

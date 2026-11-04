@@ -372,6 +372,7 @@ IMPORT void v7_get_banks IPT2(UTINY *, rd_bank, UTINY *, wrt_bank );
  * their actual same-package declarations; NT4 accepted their implicit forms. */
 IMPORT void setMarkPointers IPT1(IUH, markset);
 #ifndef cursor_changed
+#line 370
 IMPORT void cursor_changed IPT2(int, x, int, y);
 #endif /* cursor_changed */
 IMPORT void update_shift_count IPT0();
@@ -1363,6 +1364,7 @@ init_vga_globals IFN0()
 #line 1878
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else
+#line 1882
 	SetMarkPointers(0);
 #endif	/* CPU_40_STYLE - EVID */
 #line 1884
@@ -2394,6 +2396,7 @@ register int colour_dont_care;
 #include	"cpu_vid.h"
 IMPORT VOID Glue_set_vid_wrt_ptrs IPT1(WRT_POINTERS *, handler);
 
+#line 2908
 GLOBAL VOID ega_mask_register_changed IFN1(BOOL, gotBitProtection)
 {
 	ULONG				state;
@@ -2432,6 +2435,7 @@ GLOBAL VOID ega_mask_register_changed IFN1(BOOL, gotBitProtection)
 #else
 #line 2413
 #if !(defined(NTVDM) && defined(MONITOR))
+#line 2948
 	Glue_set_vid_wrt_ptrs(&mode_chain_handler_table[EGA_CPU.saved_mode_chain][state]);
 #endif /* !(NTVDM && MONITOR) */
 #endif /* A3CPU */

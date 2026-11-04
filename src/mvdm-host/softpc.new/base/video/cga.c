@@ -93,6 +93,7 @@
 IMPORT void setWritePointers IPT0();
 IMPORT void setReadPointers IPT1(IUH, readset);
 #ifdef	EGG
+#line 90
 #include "egacpu.h"
 #endif	/* EGG */
 #include "video.h"

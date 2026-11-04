@@ -20,6 +20,7 @@
 #include <stdio.h>
 
 #ifdef CCPU
+#line 21
 #include "gmi.h"
 #endif
 
@@ -34,6 +35,7 @@
  * replacement at this original C-VID setup point. */
 #include <mvdm_cvidc_vector_binding.h>
 
+#line 31
 #undef FORWARDS		/* all these redefined in EDL code */
 #undef BACKWARDS
 #undef UNCHAINED
@@ -62,6 +64,7 @@ IHP Gdp = (IHP)0;
 #endif
 
 #ifdef C_VID
+#line 55
 IHPE modeLookup;	/* CEvid extern */
 IHPE EvidPortFuncs;	/* CEvid extern */
 IHPE AdapCOutb;		/* CEvid extern */
@@ -773,6 +776,7 @@ GLOBAL void
 setup_vga_globals IFN0()
 {
 	mvdm_cvidc_bind_vectors();
+#line 765
 	EGA_CPU.globals = &(GLOBAL_VGAGlobals);
         GLOBAL_SubrRingLowIncl = &SubrRingBuffer[0];
         GLOBAL_SubrRingHighIncl = GLOBAL_SubrRingLowIncl + (SUBRRINGBUFFERSIZE-1

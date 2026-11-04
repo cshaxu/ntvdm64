@@ -84,6 +84,7 @@ WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING
 #line 84
 #error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
 #else	/* macintosh */
+#line 88
 #define C_DEVICE_DEFAULT	1
 #endif	/* macintosh */
 #line 90

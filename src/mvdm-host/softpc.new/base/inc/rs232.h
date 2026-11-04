@@ -62,6 +62,7 @@ typedef union {
 #else   /* NTVDM */
 
 #ifdef BIT_ORDER2
+#line 96
 typedef union {
  	half_word all;
 	struct {
@@ -134,6 +135,7 @@ typedef union {
 #line 186
 #error Excluded unsupported FIFO_ON configuration
 #else
+#line 188
 		 HALF_WORD_BIT_FIELD pad:1;
 #endif
 #line 190
@@ -307,6 +309,7 @@ extern void tx_holding_register_empty(int adapter);
 #line 319
 
 #if (NUM_SERIAL_PORTS > 2)
+#line 410
 #define	adapter_for_port(port) \
 	(((port & 0x300) == 0x300) ? \
 		(((port & 0xf8) == 0xf8) ? COM1 : COM3) \
@@ -340,6 +343,7 @@ extern void tx_holding_register_empty(int adapter);
 #error DIVERGENCE MVDM-HOST-DIV-536: SVID3_TCGET branch is not selected; see mirror register.
 #else
 #line 352
+#line 448
 #define	TCGET TCGETA
 #define	TCSET TCSETA
 #define	TCSETF TCSETAF

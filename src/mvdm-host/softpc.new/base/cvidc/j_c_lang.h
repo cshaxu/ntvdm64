@@ -35,6 +35,7 @@ extern IUH rolb IPT2(IUH, src, IUH, rots);
 IMPORT void CrulesRuntimeError IPT1(char *, message);
 
 #ifdef LITTLEND
+#line 36
 #define	UOFF_15_8(a)	(((IU8 *)(a))+1)
 #define	SOFF_15_8(a)	(((IS8 *)(a))+1)
 #define	REGBYTE		0
