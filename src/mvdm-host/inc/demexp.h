@@ -15,6 +15,7 @@
  *  Created.
 --*/
 
+#line 15
 BOOL DemInit (int argc, char *argv[]);
 BOOL DemDispatch(ULONG iSvc);
 VOID demCloseAllPSPRecords (VOID);

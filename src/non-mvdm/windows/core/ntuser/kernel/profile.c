@@ -17,11 +17,13 @@ UINT FastGetProfileIntW(
     UINT    idSection,
     LPCWSTR lpKeyName,
     UINT    nDefault)
+#line 94
 {
     WCHAR          ValueBuf[40];
     UNICODE_STRING Value;
     UINT           ReturnValue;
 
+#line 104
     UserAssert(idSection <= PMAP_LAST);
 
     Value.Length        = 0;
@@ -35,6 +37,7 @@ UINT FastGetProfileIntW(
                                Value.Buffer,
                                sizeof(ValueBuf) / sizeof(WCHAR))) {
         return nDefault;
+#line 390
     }
 
     /*
@@ -44,8 +47,10 @@ UINT FastGetProfileIntW(
     RtlUnicodeStringToInteger(&Value, 10, &ReturnValue);
 
     return ReturnValue;
+#line 429
 }
 
+#line 444
 DWORD FastGetProfileStringW(
     UINT    idSection,
     LPCWSTR lpKeyName,

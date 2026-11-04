@@ -24,8 +24,10 @@ Transfer of Control Support.
 #include <c_reg.h>
 #include <c_xfer.h>
 #include "mvdm_softpc_termination.h"
+#line 26
 #include <c_page.h>
 #include <c_tlb.h>
+#line 27
 #include <fault.h>
 
 /*
@@ -211,6 +213,7 @@ IFN6(
        (unsigned long)cs_descr_addr, (unsigned long)AR,
        (unsigned long)GET_CPL());
    /* validate possible types of target */
+#line 218
    switch ( super = descriptor_super_type((IU16)AR) )
       {
    case CONFORM_NOREAD_CODE:

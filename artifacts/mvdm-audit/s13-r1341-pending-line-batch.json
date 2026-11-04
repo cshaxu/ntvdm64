@@ -1,0 +1,117 @@
+{
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+      "before_sha256": "9d284e986a3f1ac3126dafed2fda2fdc5137c08ac44fbccdae46e77531898af6",
+      "after_sha256": "6aac8d470176783b6ffaf1eff1e4af5a83d7b5aa265488b9733ded05165e9cc1",
+      "original_sha256": "8ecbb58954eca0fece4ab180bb56a3953b8b4408400d3c7aa01d50b62caaa531",
+      "anchors": {
+        "19": 94,
+        "24": 104,
+        "37": 390,
+        "46": 429,
+        "48": 444
+      }
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/random.c",
+      "before_sha256": "d3a8cce8e3ab19a55c6f9eb5ebdff0c484dd683a214134c22e964f43ff92a949",
+      "after_sha256": "7ed9b09c117a0f703e3cd4d80ba36ddb0219930e1b74765f289333942b2b2291",
+      "original_sha256": "b3ed1082041c1c600c92487b45ff0c4750a50456e5ba7ea14a3ec8ef83a1f9cd",
+      "anchors": {
+        "7": 208
+      }
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/server/exports.c",
+      "before_sha256": "5e2f93eab023c614e1a88fd45fcf39e15b5f75da5ed04332a065598190e45bad",
+      "after_sha256": "d97433a478d69f07677b4bf33fec6e5158f3453fa94630805e277ae30ed5c2f5",
+      "original_sha256": "dbeb0ad48349bf5887a1333f21b427d8e0fdd3cb226977a9dc786373e961c71f",
+      "anchors": {
+        "7": 102
+      }
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "before_sha256": "cdeea4a75536e75887f395d9d8e9f20e43ee42e9f23445250e1c71f3ab707488",
+      "after_sha256": "fa407b77a11dddfecfbeb780140e679553f2fe8706c16adc13b25f82c1bb43e8",
+      "original_sha256": "13e3aa26649c7b21a49a3f3114a73bc06fdfc6472b782663bb10879cabc0ddb6",
+      "anchors": {
+        "2894": 2906
+      },
+      "reason": "Anchor before local replacement call preserves original continuation argument at line 2907 and closing brace at line 2908; avoids inserting within expression."
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "before_sha256": "983a366f8be8f98a7c534588fe3f08b6c20af3333df21d0b2b7dd936f289896b",
+      "original_sha256": "ea707e7955198462f93a0e795ae1751d83749578e93653e9b0baf4594d069711",
+      "anchors": {
+        "131": 122,
+        "184": 177,
+        "240": 234,
+        "244": 239,
+        "283": 280
+      },
+      "matched_lines": 244,
+      "after_sha256": "94c1dced55b52c582322558cce2d72cae2a069fd437c72e48beb90caa5893cde"
+    },
+    {
+      "path": "src/mvdm-host/inc/demexp.h",
+      "before_sha256": "91da9c6f6de3b84c672f8cace6c83b2f74e70f0132d46e040c566127dec2141d",
+      "original_sha256": "dfb912ee16a360e36d149bca01592a61ec11ff0f1d1b148edcffb42fda52d5c4",
+      "anchors": {
+        "17": 15
+      },
+      "matched_lines": 33,
+      "after_sha256": "24662e12d46253915b351a80c37749fc48da212f6b219a782c84271a0145bf9b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+      "before_sha256": "0bbcf3d6eafb9bf1c3f10e190721cd0062db7614549d28f9363c65afe791f582",
+      "original_sha256": "08b798882c49443b2641ebf091adf07959059d46bc703467d860ab22659f2967",
+      "anchors": {
+        "48": 48,
+        "57": 53
+      },
+      "matched_lines": 47,
+      "after_sha256": "8b281254ad6b9aa1478070e4209dd76e859c70f5494c4a55c02cbdbc369f44a9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "before_sha256": "13f1e34e2e0d242a2b3757990338887e2d55780d0f5dcec0ee7bd5f771a6eaac",
+      "original_sha256": "a83a7dd3f7e3fbb83723047aacddbd22d4001591c6d444d4bd6d45dd73e38fd8",
+      "anchors": {
+        "629": 658,
+        "648": 671,
+        "721": 739
+      },
+      "matched_lines": 746,
+      "after_sha256": "3fb8e1146b4bb74be98a60120e51d7929a77c8fd066699274258208c893f5808"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
+      "before_sha256": "dfd91df988c50aa1323bab51a9108575be682a95b547af549033d9d0c5e03012",
+      "original_sha256": "5f730f08b36a3a19cd1c682e080816d21e633b0f1b07f929b08e1d7e06ef4037",
+      "anchors": {
+        "26": 26,
+        "28": 27,
+        "213": 218
+      },
+      "matched_lines": 392,
+      "after_sha256": "b893efbe26b944614bce4cb5a5991d21b37fde1c92e564defc447347d27f87d9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "before_sha256": "3d7ea02d982f66d315818c5ebe109e4f086c5ac7ebb44760da0013b41a39c13e",
+      "original_sha256": "ce5f56ea27239d0c85243cee23e01de34b1f82d3ba92eced687e2b3bd90a2a94",
+      "anchors": {
+        "47": 40,
+        "87": 78,
+        "133": 81,
+        "268": 220
+      },
+      "matched_lines": 309,
+      "after_sha256": "4200e6d474e51b9e4c37234c4b6605d6c8118ba234f06199b73ef1997e7343f9"
+    }
+  ]
+}

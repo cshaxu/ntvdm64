@@ -45,6 +45,7 @@ IMPORT ISM32 in_C;
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /* Process far calls.                                                 */
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+#line 40
 GLOBAL VOID
 CALLF
 #ifdef ANSI
@@ -85,6 +86,7 @@ CALLF
    ISM32 fast_bop_kind;
 
    /* get destination (correctly typed) */
+#line 78
    new_cs = op1[1];
    new_ip = op1[0];
 
@@ -131,6 +133,7 @@ CALLF
                                            (unsigned long)GET_LDT_BASE(),
                                            (unsigned long)GET_LDT_LIMIT());
 
+#line 81
    if ( GET_PE() == 0 || GET_VM() == 1 )
       {
       /* Real Mode or V86 Mode */
@@ -266,6 +269,7 @@ CALLF
 	  */
 
 	 /* push old stack values */
+#line 220
 	 spush16(old_ss);
 	 spush(old_sp);
 

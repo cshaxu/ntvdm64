@@ -46,6 +46,7 @@
 #include "equip.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 
+#line 48
 void equipment()
 {
     EQUIPMENT_WORD equip_flag;
@@ -55,5 +56,6 @@ void equipment()
      * already-read machine declaration while investigating retail Setup. */
     mvdm_softpc_report_setup_hardware_probe("int11-equipment",
         (unsigned long)equip_flag.all, 0);
+#line 53
     setAX(equip_flag.all);
 }

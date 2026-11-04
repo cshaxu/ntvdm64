@@ -129,6 +129,7 @@ typedef struct _STD_HANDLES {
  * native host-private allocations and must retain their platform alignment. */
 #pragma pack()
 
+#line 122
 #define PIPE_INPUT_BUFFER_SIZE	512
 #define PIPE_OUTPUT_BUFFER_SIZE PIPE_INPUT_BUFFER_SIZE
 #define PIPE_INPUT_TIMEOUT		55
@@ -182,6 +183,7 @@ typedef struct	_VDMENVBLK {
 /** Command Function Prototypes */
 
 
+#line 177
 VOID   cmdComSpec		    (VOID);
 VOID   cmdGetEnv		    (VOID);
 VOID   cmdGetNextCmd                (VOID);
@@ -238,10 +240,12 @@ extern BOOL	IsRepeatCall;
 extern BOOL	IsFirstWOWCheckBinary;
 extern BOOL	IsFirstVDMInSystem;
 extern BOOL	SaveWorldCreated;
+#line 234
 extern BOOL	fBlock;
 extern PCHAR	pCommand32;
 extern PCHAR	pEnv32;
 extern DWORD	dwExitCode32;
+#line 239
 extern HANDLE	hFileStdOut;
 extern HANDLE	hFileStdOutDup;
 extern HANDLE	hFileStdErr;
@@ -281,6 +285,7 @@ extern CHAR	*lpszzInitEnvironment;
 extern WORD	cchInitEnvironment;
 extern CHAR	*lpszzCurrentDirectories;
 extern DWORD	cchCurrentDirectories;
+#line 280
 extern CHAR	*lpszzcmdEnv16;
 extern BOOL	DosEnvCreated;
 extern BOOL	IsFirstVDM;

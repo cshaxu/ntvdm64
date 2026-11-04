@@ -2501,3 +2501,5 @@ OPENNT-HOST-254: restore an original dialog diagnostic continuation anchor; sele
 OPENNT-HOST-255: reject the original non-WINNT PIF fallback in supported product and addon configurations, retaining its guard and diagnostic mapping. Evidence: artifacts/mvdm-audit/s13-r1302-condition-batch.json.
 
 OPENNT-HOST-256: restore original logical source positions for matching code in four host mirror files while preserving local adaptations. Evidence: artifacts/mvdm-audit/s13-r1337-line-batch.json and s13-r1337-tree-recheck.json.
+
+OPENNT-HOST-257: restore original logical source positions in the S13 host-mirror line batch, preserving selected tokens and local adaptations. Evidence: artifacts/mvdm-audit/s13-r1341-pending-line-batch.json and s13-r1341-pending-tree-recheck.json. Cached x86/x64 builds and complete package publication passed.

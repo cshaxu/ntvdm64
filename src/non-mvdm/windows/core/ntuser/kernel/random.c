@@ -5,6 +5,7 @@
 #define WOW_ORIGINAL_CONTROL_BRUSH
 #include "wow_control_brush_bindings.h"
 
+#line 208
 HBRUSH xxxGetControlBrush(
     PWND pwnd,
     HDC hdc,

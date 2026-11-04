@@ -5,6 +5,7 @@
  * bound to the admitted standalone interactive logon scope. */
 #include <base_interactive.h>
 
+#line 102
 NTSTATUS
 _UserTestTokenForInteractive(
     HANDLE Token,

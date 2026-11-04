@@ -627,6 +627,7 @@ ccpu_monitor_cached_access IFN3(LIN_ADDR, lin, IUM8, access, PHY_ADDR *, phy)
 /* Does not take #PF and does not alter contents of TLB.              */
 /* Returns TRUE if mapping done, else FALSE.                          */
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+#line 658
 GLOBAL IBOOL
 xtrn2phy IFN3
    (
@@ -646,6 +647,7 @@ xtrn2phy IFN3
 
 static IS32
 xtrn2phy_core(LIN_ADDR lin, IUM8 access_request, PHY_ADDR *phy, BOOL cache_only)
+#line 671
    {
    IU32 pde_addr;	/* Address of PDE */
    IU32 pte_addr;	/* Address of PTE */
@@ -719,6 +721,7 @@ xtrn2phy_core(LIN_ADDR lin, IUM8 access_request, PHY_ADDR *phy, BOOL cache_only)
    if (cache_only) return 0;
 
    /* check that pde is present */
+#line 739
    pde_addr = (GET_CR(CR_PDBR) & PE_PFA_MASK) +
 	     ((lin >> DIR_SHIFT & DIR_MASK) << 2);
    pde = phy_read_dword(pde_addr);

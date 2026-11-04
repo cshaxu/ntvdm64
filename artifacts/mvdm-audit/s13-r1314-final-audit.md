@@ -303,3 +303,16 @@ provide exact original/current differences for the 55 differing leaf arms in
 25 files. Inline divergence identifiers and ledger filename matches are
 recorded as leads only; they are not proof that the full change or its
 behavior has been reviewed. No file-completion status is changed.
+
+The r1341 ten-file line batch fixes original matching-code positions; four
+excluded-only files passed their direct tree recheck. Six files with selected
+branches passed only an observed-context matching-line check, so remain
+pending full review. The inventory is 182 byte-identical, 515 differing files
+with condition/matching-code review and 359 differing files pending, of 1,056.
+The [batch](s13-r1341-pending-line-batch.json),
+[excluded recheck](s13-r1341-pending-tree-recheck.json), and
+[observed-context recheck](s13-r1342-context-recheck.json) have the details.
+Cached x86, NTVDM, WOW32 and x64 builds passed; all ten images were published
+and verified. Eight match the previous package byte-for-byte; NTVDM and WOW32
+differ only in PE timestamps ([comparison](s13-r1341-build-image-compare.json)).
+Per owner instruction no unchanged-image runtime tests were repeated.

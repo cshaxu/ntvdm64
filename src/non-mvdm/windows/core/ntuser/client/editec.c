@@ -2892,6 +2892,7 @@ HBRUSH ECGetControlBrush(
 
     if (PtiCurrent() != GETPTI(pwndSend)) {
         /* DIVERGENCE(OPENNT-HOST-103): bounded host-default color adapter. */
+#line 2906
         return (HBRUSH)wow_edit_default_control_color(pwndSend, message,
                 (DWORD)hdc, (LONG)pwndEdit, ped->fAnsi);
     }

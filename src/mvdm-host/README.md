@@ -3104,3 +3104,5 @@ MVDM-HOST-DIV-813: reject unselected DPMI and non-NTVDM LIM alternatives and cor
 MVDM-HOST-DIV-814: correct original error and continuation line anchors for the excluded non-EGG video branch. Evidence: artifacts/mvdm-audit/s13-r1306-final-anchor-review.json.
 
 MVDM-HOST-DIV-815: restore original logical source positions for matching code in six WOW32 mirror files while preserving local adaptations. Evidence: artifacts/mvdm-audit/s13-r1337-line-batch.json and s13-r1337-tree-recheck.json.
+
+MVDM-HOST-DIV-816: restore original logical source positions for matching code on the observed selected branch in six mirror files; retained code and conditional selectors are unchanged. Evidence: artifacts/mvdm-audit/s13-r1341-pending-line-batch.json and s13-r1342-context-recheck.json. Other contexts require separate review.
