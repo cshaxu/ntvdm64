@@ -24,13 +24,13 @@ src/mvdm-guest/** -text -whitespace
 src/non-mvdm/** -text -whitespace
 # Pinned nxvm presentation inputs retain their upstream byte identity.
 src/frontend-exe/lib/** -text
-src/lib/base/** -text
-src/lib/types/** -text
-src/lib/kvm-base/** -text
-src/lib/kvm-window/** -text
-src/lib/LICENSE.nxvm -text
-src/lib/LICENSE.libvterm -text
-src/lib/libvterm-0.3.3.tar.gz -text
+src/lib-nxvm/base/** -text
+src/lib-nxvm/types/** -text
+src/lib-nxvm/kvm-base/** -text
+src/lib-nxvm/kvm-window/** -text
+src/lib-nxvm/LICENSE.nxvm -text
+src/lib-nxvm/LICENSE.libvterm -text
+src/lib-nxvm/libvterm-0.3.3.tar.gz -text
 # Pinned MIT Detours slice retains the registered upstream byte hashes.
 src/nthook32-dll/detours/** -text
 src/opennt-softpc/bios/** -text -whitespace

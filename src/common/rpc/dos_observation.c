@@ -1,5 +1,5 @@
 #include "dos_observation.h"
-#include "lib/rpc/async_call.h"
+#include "lib-win32/rpc/async_call.h"
 #include "common/protocol/version.h"
 #include <string.h>
 DWORD common_rpc_observe_dos_event(const common_rpc_connection *state,

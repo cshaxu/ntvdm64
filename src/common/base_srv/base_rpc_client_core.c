@@ -11,13 +11,13 @@
 #include "common/protocol/version.h" /* Shared metadata, no product behavior. */
 #include "common/protocol/frontend_lifecycle.h"
 #include "common/protocol/frontend_protocol.h"
-#include "lib/io/console_members.h"
-#include "lib/rpc/local_binding.h"
+#include "lib-win32/io/console_members.h"
+#include "lib-win32/rpc/local_binding.h"
 #include "common/rpc/native_command.h"
 #include "common/rpc/frontend_control.h"
 #include "common/rpc/worker_control.h"
 #include "common/rpc/dos_observation.h"
-#include "lib/rpc/async_call.h"
+#include "lib-win32/rpc/async_call.h"
 #include "common/rpc/interface_query.h"
 #include "common/base_srv/base_rpc_client_internal.h"
 

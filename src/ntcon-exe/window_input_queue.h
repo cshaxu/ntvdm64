@@ -2,7 +2,7 @@
 #define FRONTEND_WINDOW_INPUT_QUEUE_H
 
 #include <windows.h>
-#include "lib/kvm-base/event_interface.h"
+#include "lib-nxvm/kvm-base/event_interface.h"
 
 #define FRONTEND_WINDOW_INPUT_CAPACITY 256u
 

@@ -1,6 +1,6 @@
 #include "intercept.h"
 #include "detours/detours.h"
-#include "lib/rpc/local_binding.h"
+#include "lib-win32/rpc/local_binding.h"
 #include "common/rpc/management.h"
 #include "common/base_srv/scope.h"
 #include <wchar.h>

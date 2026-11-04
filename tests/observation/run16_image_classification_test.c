@@ -1,6 +1,6 @@
 #include "run16-exe/image_classification.h"
 #include "common/native_image.h"
-#include "lib/io/native_path.h"
+#include "lib-win32/io/native_path.h"
 #include <stdio.h>
 
 static unsigned checks,failures;

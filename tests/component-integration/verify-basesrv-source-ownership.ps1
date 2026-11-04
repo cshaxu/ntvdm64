@@ -43,7 +43,7 @@ foreach($extra in @(@('hook64','nthook64.dll'),@('wow32','wow32.dll'))){
     }
     Assert-NoServiceSources $extra[1] $other
 }
-foreach($owner in @('lib','common','worker-base','run16-exe','ntcon-exe','ntvdm-exe','ntvwm-exe','ntmon-exe','nthook32-dll','wow32-dll','vdmredir-dll')){
+foreach($owner in @('lib-nxvm','lib-win32','common','worker-base','run16-exe','ntcon-exe','ntvdm-exe','ntvwm-exe','ntmon-exe','nthook32-dll','wow32-dll','vdmredir-dll')){
     foreach($file in Get-ChildItem (Join-Path $repo "src/$owner") -File -Recurse | Where-Object Extension -in '.c','.h','.cpp'){
         if((Get-Content $file.FullName -Raw) -match '#include\s*[<"]ntsrv-exe/'){
             throw "NTSRV-private include in $($file.FullName)"

@@ -1,7 +1,7 @@
 /* Existing project management exchanges, not original VDM record policy. */
 #include "management.h"
 #include "common/protocol/version.h"
-#include "lib/rpc/async_call.h"
+#include "lib-win32/rpc/async_call.h"
 #include "common/protocol/frontend_lifecycle.h"
 
 static const unsigned char app_version[APP_VERSION_BYTES]=APP_VERSION;

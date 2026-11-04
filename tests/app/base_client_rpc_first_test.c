@@ -17,7 +17,7 @@
 #include "common/protocol/management.h"
 #include "common/base_srv/base_rpc_client_internal.h"
 #include "common/base_srv/base_rpc_client_launch.h"
-#include "lib/rpc/async_call.h"
+#include "lib-win32/rpc/async_call.h"
 #include <stddef.h>
 
 /* BaseCheckForVDM shares its original client translation unit with

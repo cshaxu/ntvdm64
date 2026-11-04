@@ -1,4 +1,4 @@
-#include "lib/rpc/local_binding.h"
+#include "lib-win32/rpc/local_binding.h"
 #include <stdio.h>
 
 static unsigned checks,failures,step,string_live,binding_live,failing_step;
@@ -43,7 +43,7 @@ static RPC_STATUS free_string(RPC_WSTR *text)
 #define RpcBindingSetAuthInfoW authenticate
 #define RpcBindingFree free_binding
 #define RpcStringFreeW free_string
-#include "lib/rpc/local_binding.c"
+#include "lib-win32/rpc/local_binding.c"
 
 int main(void)
 {

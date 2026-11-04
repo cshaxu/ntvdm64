@@ -5,7 +5,7 @@
 #include "window_mouse.h"
 #include "window_frame.h"
 #include "common/protocol/frontend_lifecycle.h"
-#include "lib/kvm-window/render.h"
+#include "lib-nxvm/kvm-window/render.h"
 #include "compat/include/console_grid.h"
 #include <stdint.h>
 

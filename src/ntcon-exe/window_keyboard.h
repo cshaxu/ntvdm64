@@ -2,7 +2,7 @@
 #define FRONTEND_WINDOW_KEYBOARD_H
 
 #include <windows.h>
-#include "lib/kvm-base/event_interface.h"
+#include "lib-nxvm/kvm-base/event_interface.h"
 #include "window_input_queue.h"
 
 /* Format conversion only. Call on the frontend input owner, passing its

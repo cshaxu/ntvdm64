@@ -25,7 +25,7 @@ foreach($owner in @('ntcon-exe','ntsrv-exe','ntvwm-exe')) {
         }
     }
 }
-foreach($file in Get-ChildItem (Join-Path $repo 'src/lib') -File -Recurse | Where-Object Extension -in '.c','.h','.cpp') {
+foreach($file in Get-ChildItem (Join-Path $repo 'src/lib-win32'),(Join-Path $repo 'src/lib-nxvm') -File -Recurse | Where-Object Extension -in '.c','.h','.cpp') {
     if((Get-Content $file.FullName -Raw) -match '#include\s*[<"](?:common|worker-base|ntsrv-exe|run16-exe|ntcon-exe|ntvdm-exe|ntvwm-exe|ntmon-exe|nthook32-dll)/') {
         throw "Generic library depends on product code: $($file.FullName)"
     }
@@ -210,20 +210,20 @@ function Assert-FrontendOwnership([string[]]$Lines) {
     if(@(Compare-Object @('codec/native_launch.c') @(Get-FrontendSources 'common-codec.lib' 'common')).Count) {
         throw 'Common native packet codec must have exactly one provider'
     }
-    if(@(Compare-Object @('io/pipe_transfer.c','io/console_members.c','io/native_path.c') @(Get-FrontendSources 'lib-io.lib' 'lib')).Count) {
+    if(@(Compare-Object @('io/pipe_transfer.c','io/console_members.c','io/native_path.c') @(Get-FrontendSources 'lib-io.lib' 'lib-win32')).Count) {
         throw 'Generic I/O mechanisms must have exactly one provider'
     }
     if(@(Compare-Object @('console/client.c') @(Get-FrontendSources 'common-console.lib' 'common')).Count) {
         throw 'Common Console client must have exactly one provider'
     }
-    if(@(Compare-Object @('rpc/local_binding.c') @(Get-FrontendSources 'lib-rpc.lib' 'lib')).Count) {
+    if(@(Compare-Object @('rpc/local_binding.c','rpc/peer.c') @(Get-FrontendSources 'lib-rpc.lib' 'lib-win32')).Count) {
         throw 'Generic RPC binding must have exactly one provider'
     }
     if(@(Compare-Object @('rpc/native_command.c','rpc/frontend_control.c','rpc/worker_control.c','rpc/management.c','rpc/dos_observation.c','rpc/interface_query.c') @(Get-FrontendSources 'common-rpc.lib' 'common')).Count) {
         throw 'Common RPC protocol clients must each have exactly one provider'
     }
     foreach($target in @('run16.exe','ntvdm.exe','ntvwm.exe','ntcon.exe','ntmon.exe')) {
-        if('rpc/local_binding.c' -notin @(Get-FrontendSources $target 'lib')) {
+        if('rpc/local_binding.c' -notin @(Get-FrontendSources $target 'lib-win32')) {
             throw "$target omits shared local RPC binding"
         }
     }
@@ -231,7 +231,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
         if('codec/native_launch.c' -notin @(Get-FrontendSources $target 'common')) {
             throw "$target omits the common native packet codec"
         }
-        if('io/console_members.c' -notin @(Get-FrontendSources $target 'lib')) {
+        if('io/console_members.c' -notin @(Get-FrontendSources $target 'lib-win32')) {
             throw "$target omits the common Console snapshot implementation"
         }
     }
@@ -262,7 +262,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
     }
     # Current product composition does not select KVM in other executables.
     foreach ($target in @('run16.exe','ntsrv.exe','ntvdm.exe','ntvwm.exe','ntmon.exe')) {
-        if (@(Get-FrontendSources $target 'lib' | Where-Object { $_ -like 'kvm-*/*' }).Count) { throw "$target unexpectedly links the frontend window implementation" }
+        if (@(Get-FrontendSources $target 'lib-nxvm' | Where-Object { $_ -like 'kvm-*/*' }).Count) { throw "$target unexpectedly links the frontend window implementation" }
     }
     $service = @(Get-FrontendSources 'ntcon.exe')
     if ('native_console_host.c' -in $service) { throw 'Retired helper entered ntcon.exe' }
@@ -277,7 +277,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
             'window_keyboard.c', 'window_input_queue.c')) {
         if ($required -notin $service) { throw "ntcon.exe omits $required" }
     }
-    if ('kvm-window/win32/component.c' -notin @(Get-FrontendSources 'ntcon.exe' 'lib')) { throw 'ntcon.exe omits shared window implementation' }
+    if ('kvm-window/win32/component.c' -notin @(Get-FrontendSources 'ntcon.exe' 'lib-nxvm')) { throw 'ntcon.exe omits shared window implementation' }
 }
 
 Assert-FrontendOwnership $graph
@@ -363,7 +363,7 @@ foreach ($leakInput in @('frontend-window.lib', 'frontend-terminal.lib', 'ntcon-
             $_ -replace ': (\S+) ', (': $1 ' + $leakInput + ' ')
         } else { $_ }
     })
-    $mutated += 'build obj/ownership-leak.obj: cc O$:/repo/src/lib/kvm-window/win32/component.c'
+    $mutated += 'build obj/ownership-leak.obj: cc O$:/repo/src/lib-nxvm/kvm-window/win32/component.c'
     $rejected = $false
     try { Assert-FrontendOwnership $mutated } catch { $rejected = $true }
     if (!$rejected) { throw "Window ownership negative control did not reject $leakInput" }

@@ -15,8 +15,8 @@ does not change their source provenance, executable ownership or ABI.
 
 ## Generic integration libraries — T474 S3
 
-`src/lib/rpc` carries local RPC binding and async completion mechanics;
-`src/lib/io` carries checked overlapped pipe transfer, Console membership
+`src/lib-win32/rpc` carries local RPC binding and async completion mechanics;
+`src/lib-win32/io` carries checked overlapped pipe transfer, Console membership
 sampling and final native file-path resolution. Their product-independent contracts depend only on native platform
 APIs. Product wire formats, RPC operations, frontend codecs and lifecycle
 policy stay in `common` or their executable owners. Generic libraries never
@@ -144,7 +144,8 @@ src/
   non-mvdm/
   compat/
   common/{protocol,codec,console}/
-  lib/{rpc,io}/
+  lib-nxvm/{types,base,kvm-base,kvm-window}/
+  lib-win32/{rpc,io}/
   worker-base/
   run16-exe/
   ntsrv-exe/

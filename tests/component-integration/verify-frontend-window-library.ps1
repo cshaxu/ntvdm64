@@ -9,12 +9,12 @@ if (!$output.StartsWith($buildPrefix, [StringComparison]::OrdinalIgnoreCase)) {
 if ($env:VSCMD_ARG_TGT_ARCH -ne 'x86') { throw 'Run from the MSVC x86 developer environment' }
 $owner = Join-Path $repo 'src/ntcon-exe'
 $manifest = Get-Content (Join-Path $owner 'nxvm-import.json') -Raw | ConvertFrom-Json
-if ((Get-FileHash (Join-Path $repo 'src/lib/LICENSE.nxvm') -Algorithm SHA256).Hash -ne $manifest.licenseSha256) {
+if ((Get-FileHash (Join-Path $repo 'src/lib-nxvm/LICENSE.nxvm') -Algorithm SHA256).Hash -ne $manifest.licenseSha256) {
     throw 'Imported license differs from pinned nxvm'
 }
 $sources = @()
 foreach ($row in $manifest.files) {
-    if ($row.path -notmatch '^lib/(types|base|kvm-base|kvm-window)/[A-Za-z0-9_./-]+$' -or
+    if ($row.path -notmatch '^lib-nxvm/(types|base|kvm-base|kvm-window)/[A-Za-z0-9_./-]+$' -or
         $row.path.Contains('..')) { throw "Invalid imported path: $($row.path)" }
     $file = Join-Path (Join-Path $repo 'src') $row.path
     if ((Get-FileHash -LiteralPath $file -Algorithm SHA256).Hash -ne $row.sha256) {
