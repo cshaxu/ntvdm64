@@ -1,0 +1,16 @@
+{
+  "method": "Compare original groups, selected direct bodies, excluded body shape and selected-source logical positions. Local conditional groups have recorded states.",
+  "review": {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+    "current_sha256": "63ce829ae4040ddea069a40bbc5b4ca31351ea1d6e7b138b4a2f40d5d8625cb3",
+    "original_sha256": "7f555a87ba029627d6811c0f7b96964bb8a96af90c60c89012975a4ac5442076",
+    "matched_lines": 1792,
+    "groups": {
+      "selected": 4,
+      "original_groups": 16,
+      "excluded": 12,
+      "local_groups": 2
+    }
+  },
+  "limits": "Selected source projection and mapped historical hits; local changes outside branches retain existing separate registrations. No new runtime or compiler diagnostic test."
+}
