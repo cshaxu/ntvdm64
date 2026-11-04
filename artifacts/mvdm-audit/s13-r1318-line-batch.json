@@ -1,0 +1,165 @@
+{
+  "method": "Compared all equal line blocks against original; neither file has conditional directives; new lines are #line directives only. Local modifications have no corresponding original line.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_bsic.h",
+      "before_sha256": "9f95d903cb5e3ce7f7361e9223d8a204a37332821ab54a6fb313f715e61a545a",
+      "after_sha256": "a645bafef7279059c8657d6650d421073d0dede1e07415cdc8b5800bfb0b6c29",
+      "original_sha256": "5a7e4cefa28c674ad3047741cf8f78c9882f3c2362af09ae3a3dc0df336eed17",
+      "anchors": [
+        {
+          "before_physical_line": 101,
+          "original_line": 99
+        }
+      ],
+      "original_matched_lines": 138,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_debug.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_debug.h",
+      "before_sha256": "a3c422f0cee7a0b50e54a7ee3a02b5624e506cd7d29eb6e9e367033e6e5d4e7d",
+      "after_sha256": "e364c078c6bd4ecc16780795bcd8eedfa02ff479ed977b5d39089687a2d71871",
+      "original_sha256": "aa692f4f8680b717ab51489055c0c7578d0498f8af0702d17c4a0c56b165a88e",
+      "anchors": [
+        {
+          "before_physical_line": 20,
+          "original_line": 18
+        }
+      ],
+      "original_matched_lines": 45,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sascdef.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\sascdef.c",
+      "before_sha256": "08f8173bb04f1cd5d1d0ee21938112f802e4a7f9f766f3ce606534e49b94f46b",
+      "after_sha256": "65d4463dee377d22a2f4aad5db849e27a60e88a2fe5ae0e597dea92f0c89ce9d",
+      "original_sha256": "b8b7832d02bd8f4161e1f71df2968051609da065f4da8287a65e6b14b38a749c",
+      "anchors": [
+        {
+          "before_physical_line": 136,
+          "original_line": 132
+        }
+      ],
+      "original_matched_lines": 141,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/evidfunc.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\evidfunc.h",
+      "before_sha256": "a734ddeef82f30b376a858e3903859056c375474b25f69e06fe7178b0a51570a",
+      "after_sha256": "c701f04ba695104c18d969e34474d38b61221db12e45a4f84e3efe104104dc13",
+      "original_sha256": "887703f1d48d16ed578ffc33789cf126697b206a62219f5ca41aef795c414ecb",
+      "anchors": [
+        {
+          "before_physical_line": 654,
+          "original_line": 658
+        }
+      ],
+      "original_matched_lines": 698,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/j_c_lang.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\j_c_lang.c",
+      "before_sha256": "400e1afb68c8949d54dc18fdaee099078208111a118481b11218cd181a1c6fd7",
+      "after_sha256": "edc62d53627bd206341910d43b7345c5c72a44018002e97a9aae79cd44dc7096",
+      "original_sha256": "a6e112c6cf3250e2b7f5e75551cec34e2b0e9f1c9f268f05ce1a8f41b60e5923",
+      "anchors": [
+        {
+          "before_physical_line": 5,
+          "original_line": 3
+        }
+      ],
+      "original_matched_lines": 210,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ckmalloc.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ckmalloc.h",
+      "before_sha256": "6095bd5405a74759ba66a1f7d94c1138810b06193541cf40d3561c04fe96e99a",
+      "after_sha256": "c1bd3ef5697fe2c07433170407a2141b287168f5b7c4e7bd22fcd5bf0623f9d1",
+      "original_sha256": "49d55eba11bc663e678544a40536d1a799261c1cf67eb25b779a8c23465c81e3",
+      "anchors": [
+        {
+          "before_physical_line": 26,
+          "original_line": 22
+        }
+      ],
+      "original_matched_lines": 50,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowhooks.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wowhooks.h",
+      "before_sha256": "458ad85d06eb1dc084f996c2aee04e4fbb81563730a825480836aa24e8395a2e",
+      "after_sha256": "24163a7b3a5ee861b1ed3c79724eabcfa694ea8945f8b74ee153be4c617afa6d",
+      "original_sha256": "82e539d3278858b018a742c1890862471bca2f2e7166c663fbebba0c02e20dc3",
+      "anchors": [
+        {
+          "before_physical_line": 40,
+          "original_line": 36
+        }
+      ],
+      "original_matched_lines": 185,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wreldc.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wreldc.h",
+      "before_sha256": "7b61baf8414269e3095713a3b2cfd910e6acef8268efd4e7eb8e9ca2996574c9",
+      "after_sha256": "7c9d170156bcb06f240b2268d369f7b7f75998411fe35fe88ad1de8049ea9fe7",
+      "original_sha256": "63fb72740460f367cb75fb014562f7c278b515b73689ee0c981481f96d5961c1",
+      "anchors": [
+        {
+          "before_physical_line": 40,
+          "original_line": 39
+        }
+      ],
+      "original_matched_lines": 40,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wumsg.h",
+      "before_sha256": "75fbfb01f3d649187d7ede9545118553e718b5b8aa422eb9d0863d3e85066bc9",
+      "after_sha256": "950f8b060f56a1d42131d5b4cb35ae16d1cea043f50cda83c890bd015f88b52f",
+      "original_sha256": "1f18e9770131f758947986de78dcb6c974730bcbaad3137e3c69a615f0f79324",
+      "anchors": [
+        {
+          "before_physical_line": 18,
+          "original_line": 17
+        }
+      ],
+      "original_matched_lines": 42,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wutmr.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wutmr.c",
+      "before_sha256": "1a02209de52cc0bbabf47ff2133289ac6dbe6ab197ddbfbffb72a4e4e29464a5",
+      "after_sha256": "2dc58f85d74c4b8a9594d70b5447427a5839d4e878b63f67b95be1c3643bfaff",
+      "original_sha256": "e42bc0c7e9dc199ae19414461d65ecf86b7acc55c6d7523792812d73f158bef5",
+      "anchors": [
+        {
+          "before_physical_line": 221,
+          "original_line": 220
+        }
+      ],
+      "original_matched_lines": 685,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    }
+  ]
+}

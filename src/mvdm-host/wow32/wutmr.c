@@ -218,6 +218,7 @@ VOID DestroyTimers16(HTASK16 htask16)
 
 /* DIVERGENCE(MVDM-HOST-DIV-333): original stubs enter the scoped host wrapper. */
 VOID WowOriginalTimerFunc(UINT index, HWND hwnd, UINT idEvent, DWORD dwTime)
+#line 220
 {
     PARM16 Parm16;
     register PTMR ptmr;

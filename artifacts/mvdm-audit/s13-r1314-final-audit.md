@@ -78,3 +78,11 @@ package was published and verified at both destinations. Eight images are
 identical to the previous package and NTVDM and WOW32 differ only in PE
 timestamps ([comparison](s13-r1317-build-image-compare.json)); per owner
 instruction, this does not require a repeated runtime test.
+
+The [second ten-file batch](s13-r1318-line-batch.json) restores matching
+original line positions in another ten files, leaving 38 files from this scan
+with observed differences. The cached x86 root, NTVDM worker, WOW32 and x64
+builds passed, and the complete package was published and hash-verified at
+both destinations. Eight images are identical and NTVDM/WOW32 differ only in
+PE timestamps ([comparison](s13-r1318-build-image-compare.json)); owner policy
+therefore permits reusing the previous runtime-test evidence.

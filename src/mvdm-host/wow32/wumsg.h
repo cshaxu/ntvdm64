@@ -15,6 +15,7 @@
 
 /* DIVERGENCE(MVDM-HOST-DIV-344): matches the private native-thread mode. */
 extern __declspec(thread) BOOL fWhoCalled;
+#line 17
 
 ULONG FASTCALL   WU32CallMsgFilter(PVDMFRAME pFrame);
 ULONG FASTCALL   WU32CallWindowProc(PVDMFRAME pFrame);

@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-637: restore original diagnostic positions in ten condition-free
+CCPU, video and WOW source files. Only `#line` directives were added; matched
+original blocks and byte identities are recorded in
+`../../artifacts/mvdm-audit/s13-r1318-line-batch.json`.
+
 MVDM-HOST-DIV-636: restore original line positions after local edits in ten
 condition-free DOS, CCPU, host and WOW source files. Only `#line` directives
 were added; matching original blocks and source identities are recorded in

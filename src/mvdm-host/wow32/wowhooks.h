@@ -37,6 +37,7 @@ typedef struct {
 /* DIVERGENCE(MVDM-HOST-DIV-344): original private context, scoped by entry. */
 extern __declspec(thread) HOOKPARAMS vHookParams;
 extern __declspec(thread) INT viCurrentHookStateDataIndex;
+#line 36
 
 #define PUTMSGFILTER16(pMsg16,lpMsg) {\
         STOREWORD(pMsg16->hwnd, GETHWND16((lpMsg)->hwnd));\

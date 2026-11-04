@@ -2,6 +2,7 @@
 #include "host_def.h"
 /* DIVERGENCE(MVDM-HOST-DIV-076): preserve the native C varargs ABI. */
 #include <stdio.h>
+#line 3
 
 /*[
  *      Name:           j_c_lang.c
