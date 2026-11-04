@@ -5021,7 +5021,7 @@ src/mvdm-host/softpc.new/host/inc/insignia.h,109,3,else,,historical-hit,unique-s
 src/mvdm-host/softpc.new/host/inc/insignia.h,148,2,ifdef,ANSI,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/host/inc/insignia.h,182,2,else,,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/host/inc/nt_com.h,43,1,ifdef,_RS232_H,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/host/inc/nt_eoi.h,33,1,ifdef,MONITOR,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/inc/nt_eoi.h,34,1,ifdef,MONITOR,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/host/inc/nt_event.h,19,1,ifdef,YODA,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/host/inc/nt_event.h,24,1,ifndef,X86GFX,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/host/inc/nt_event.h,50,1,ifdef,X86GFX,excluded-error,unique-structure-historical,error-anchor-match
@@ -5359,8 +5359,8 @@ src/mvdm-host/softpc.new/host/src/nt_graph.c,2320,1,ifndef,PROD,excluded-error,n
 src/mvdm-host/softpc.new/host/src/nt_graph.c,2330,1,ifndef,PROD,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_hosts.c,28,1,ifdef,HUNTER,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_hosts.c,64,1,ifdef,HUNTER,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_hosts.c,252,1,ifdef,HUNTER,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_hosts.c,327,1,ifdef,HUNTER,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_hosts.c,257,1,ifdef,HUNTER,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_hosts.c,332,1,ifdef,HUNTER,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_input.c,60,1,if,NOTUSEDNOTUSED,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_inthk.c,23,1,ifdef,CPU_40_STYLE,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/host/src/nt_inthk.c,41,2,ifdef,CCPU,historical-hit,unique-structure-historical,not-applicable
@@ -5429,23 +5429,23 @@ src/mvdm-host/softpc.new/host/src/nt_mem.c,1380,2,ifndef,PROD,excluded-error,non
 src/mvdm-host/softpc.new/host/src/nt_mem.c,1397,2,ifdef,PIG,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_mem.c,1400,2,else,,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/host/src/nt_mem.c,1442,2,ifdef,DEBUG_MEM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_mouse.c,68,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_mouse.c,132,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_mouse.c,339,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_mouse.c,359,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_mouse.c,386,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_mouse.c,408,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_mouse.c,426,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_mouse.c,440,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_mouse.c,486,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_mouse.c,498,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_mouse.c,515,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_mouse.c,650,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_mouse.c,1355,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_mouse.c,1372,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_mouse.c,1779,1,ifdef,MONITOR,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_mouse.c,1886,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_mouse.c,1902,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_mouse.c,69,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_mouse.c,134,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_mouse.c,341,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_mouse.c,361,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_mouse.c,390,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_mouse.c,412,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_mouse.c,430,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_mouse.c,445,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_mouse.c,493,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_mouse.c,505,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_mouse.c,522,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_mouse.c,657,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_mouse.c,1362,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_mouse.c,1379,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_mouse.c,1786,1,ifdef,MONITOR,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_mouse.c,1893,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_mouse.c,1909,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_msscs.c,96,1,ifndef,PROD,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_msscs.c,120,1,ifdef,LIM,historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/softpc.new/host/src/nt_msscs.c,142,1,ifndef,i386,current-hit,r1311-current-equivalent-preprocessing,not-applicable
@@ -5535,7 +5535,7 @@ src/mvdm-host/softpc.new/host/src/nt_sas.c,28,1,ifdef,SUN_VA,excluded-error,none
 src/mvdm-host/softpc.new/host/src/nt_sas.c,35,1,ifdef,HOST_SAS,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_sas.c,53,1,ifdef,SUN_VA,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_sec.c,117,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_sound.c,145,1,ifndef,PROD,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_sound.c,146,1,ifndef,PROD,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_thred.c,100,1,if,defined(CCPU) || defined(PIG),historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/softpc.new/host/src/nt_thred.c,104,1,ifdef,MONITOR,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_thred.c,162,1,if,defined(CCPU) || defined(PIG),historical-hit,unchanged-directive-git-line-map,not-applicable
@@ -5896,14 +5896,14 @@ src/mvdm-host/vdmredir/vrnmpipe.c,3069,1,if,DBG,excluded-error,none,error-anchor
 src/mvdm-host/vdmredir/vrnmpipe.c,3083,1,if,DBG,excluded-error,none,error-anchor-match
 src/mvdm-host/vdmredir/vrnmpipe.c,3168,1,if,DBG,excluded-error,none,error-anchor-match
 src/mvdm-host/vdmredir/vrputil.c,74,1,ifdef,VR_DIAGNOSE,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/vdmredir/vrremote.c,505,1,ifdef,VR_DIAGNOSE,excluded-error,none,error-anchor-match
-src/mvdm-host/vdmredir/vrremote.c,518,1,ifdef,VR_DIAGNOSE,excluded-error,none,error-anchor-match
-src/mvdm-host/vdmredir/vrremote.c,692,1,ifdef,VR_DIAGNOSE,excluded-error,none,error-anchor-match
-src/mvdm-host/vdmredir/vrremote.c,712,1,if,DBG,excluded-error,none,error-anchor-match
-src/mvdm-host/vdmredir/vrremote.c,723,1,if,DBG,excluded-error,none,error-anchor-match
-src/mvdm-host/vdmredir/vrremote.c,749,1,ifdef,VR_DIAGNOSE,excluded-error,none,error-anchor-match
-src/mvdm-host/vdmredir/vrremote.c,1114,1,ifdef,VR_DIAGNOSE,excluded-error,none,error-anchor-match
-src/mvdm-host/vdmredir/vrremote.c,1427,1,ifdef,VR_DIAGNOSE,excluded-error,none,error-anchor-match
+src/mvdm-host/vdmredir/vrremote.c,506,1,ifdef,VR_DIAGNOSE,excluded-error,none,error-anchor-match
+src/mvdm-host/vdmredir/vrremote.c,519,1,ifdef,VR_DIAGNOSE,excluded-error,none,error-anchor-match
+src/mvdm-host/vdmredir/vrremote.c,695,1,ifdef,VR_DIAGNOSE,excluded-error,none,error-anchor-match
+src/mvdm-host/vdmredir/vrremote.c,715,1,if,DBG,excluded-error,none,error-anchor-match
+src/mvdm-host/vdmredir/vrremote.c,726,1,if,DBG,excluded-error,none,error-anchor-match
+src/mvdm-host/vdmredir/vrremote.c,752,1,ifdef,VR_DIAGNOSE,excluded-error,none,error-anchor-match
+src/mvdm-host/vdmredir/vrremote.c,1117,1,ifdef,VR_DIAGNOSE,excluded-error,none,error-anchor-match
+src/mvdm-host/vdmredir/vrremote.c,1430,1,ifdef,VR_DIAGNOSE,excluded-error,none,error-anchor-match
 src/mvdm-host/wow32/fastwow.h,14,1,if,defined(i386) && !defined(DEBUG_OR_WOWPROFILE),excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/wow32/fastwow.h,17,1,else,,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/wow32/fastwow.h,25,1,if,FASTBOPPING,excluded-error,none,error-anchor-match
@@ -5952,7 +5952,7 @@ src/mvdm-host/wow32/wdib.c,694,1,ifndef,i386,historical-hit,unchanged-directive-
 src/mvdm-host/wow32/wdib.c,716,1,ifndef,i386,historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/wow32/wdib.c,741,1,ifndef,i386,historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/wow32/wdib.c,841,1,ifndef,i386,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wdos.c,742,1,if,0,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/wow32/wdos.c,743,1,if,0,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/wow32/wgdi.c,702,1,if,0,excluded-error,none,error-anchor-match
 src/mvdm-host/wow32/wgdi.c,709,1,if,0,excluded-error,none,error-anchor-match
 src/mvdm-host/wow32/wgdi.c,2044,1,if,0,excluded-error,none,error-anchor-match
@@ -5967,14 +5967,14 @@ src/mvdm-host/wow32/wgprnset.c,544,1,ifdef,i386,excluded-error,unique-structure-
 src/mvdm-host/wow32/wgtbl.h,22,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/wow32/wheap.c,36,1,ifdef,DEBUG,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/wow32/wkbtbl.h,22,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/wow32/wkernel.c,333,1,ifdef,DBCS,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wkernel.c,366,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wkernel.c,508,1,ifdef,DBCS,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wkernel.c,561,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wkernel.c,575,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wkfileio.c,41,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wkfileio.c,560,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wkfileio.c,858,1,if,(FILE_BEGIN != 0 || FILE_CURRENT != 1 || FILE_END !=2),excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/wow32/wkernel.c,337,1,ifdef,DBCS,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wkernel.c,370,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wkernel.c,515,1,ifdef,DBCS,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wkernel.c,568,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wkernel.c,582,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wkfileio.c,42,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wkfileio.c,561,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wkfileio.c,859,1,if,(FILE_BEGIN != 0 || FILE_CURRENT != 1 || FILE_END !=2),excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/wow32/wkgthunk.c,27,1,ifdef,i386,excluded-error,none,error-anchor-match
 src/mvdm-host/wow32/wkgthunk.c,46,1,ifdef,i386,excluded-error,none,error-anchor-match
 src/mvdm-host/wow32/wkgthunk.c,168,1,ifdef,i386,excluded-error,unique-structure-historical,error-anchor-match
@@ -6085,7 +6085,7 @@ src/mvdm-host/wow32/wmsg16.h,25,1,ifdef,DEBUG,excluded-error,none,error-anchor-m
 src/mvdm-host/wow32/wmsg16.h,35,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
 src/mvdm-host/wow32/wmsgbm.c,22,1,ifdef,DEBUG,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/wow32/wmsgbm.h,26,1,ifndef,BM_CLICK,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/wow32/wmsgcb.c,23,1,ifdef,DEBUG,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/wow32/wmsgcb.c,24,1,ifdef,DEBUG,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/wow32/wmsgem.c,25,1,ifdef,DEBUG,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/wow32/wmsglb.c,22,1,ifdef,DEBUG,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/wow32/wmsgsbm.c,22,1,ifdef,DEBUG,excluded-error,unique-structure-historical,error-anchor-match

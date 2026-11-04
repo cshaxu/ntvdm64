@@ -20,6 +20,7 @@ BOOL host_DelayHwInterrupt(int IrqLine, int CallCount, ULONG Delay);
 void host_ica_lock(void);
 void host_ica_unlock(void);
 void InitializeIcaLock(void);
+#line 24
 VOID ica_RestartInterrupts(ULONG IrqLine);
 BOOL ica_restart_interrupts(int adapter);
 

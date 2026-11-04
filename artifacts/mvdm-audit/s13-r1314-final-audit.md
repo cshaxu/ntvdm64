@@ -95,6 +95,18 @@ images are identical and NTVDM/WOW32 differ only in PE timestamps
 ([comparison](s13-r1319-build-image-compare.json)); runtime tests were not
 repeated under owner instruction.
 
+The [r1336 batch](s13-r1336-line-batch.json) restores matching selected-code
+locations in another ten files. Their original excluded-only conditional
+trees and matching code positions were independently rechecked in the
+[tree record](s13-r1336-tree-recheck.json), retaining their existing local
+adaptations. The condition/matching-code count is now 501 differing files,
+with 373 still pending. Cached x86 root, NTVDM worker, WOW32 and x64 builds
+passed; the full package was verified at both destinations. Eight images are
+identical and WOW32 differs only in PE timestamp. NTVDM's twelve additional
+changed bytes are diagnostic `__LINE__` immediates traced to eight error
+calls ([proof](s13-r1336-diagnostic-line-proof.json)); runtime tests were not
+repeated under owner-approved line-only policy.
+
 The [r1333 batch](s13-r1333-line-batch.json) records references for the final
 25 entries classified as ambiguous excluded anchors in the current branch
 checklist, and corrects selected-source and continuation positions in the

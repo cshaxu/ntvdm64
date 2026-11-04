@@ -1,0 +1,85 @@
+{
+  "method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xtrn.c",
+      "status": "pass",
+      "current_sha256": "643b6f1f66588c8560815906507424e68de59178f82ca164e4546a9f228ac889",
+      "original_sha256": "e114d6d858f5eafe2d7a4e8af560831d95f190ecf07209d91255f1140680943e",
+      "excluded_arms": 1,
+      "matching_code_lines": 61
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_eoi.h",
+      "status": "pass",
+      "current_sha256": "3bc140cb9a26bfc6aba200b33c50e576f28fdca9811f8336fd6963a5e7bb0181",
+      "original_sha256": "57ae39f20535e93b451e83a0e54e6e45f43512e12d99ae3ffc6a58e4f1ada8e3",
+      "excluded_arms": 1,
+      "matching_code_lines": 21
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_hosts.c",
+      "status": "pass",
+      "current_sha256": "9fde43cfebd448ff03be94b44ffef71fc039567e665524d40c1e144e8a282c1c",
+      "original_sha256": "9840cb53a0298fdf7f9d27ade387c57659e3c57afbe587cfdf63fbdbafe8c41d",
+      "excluded_arms": 4,
+      "matching_code_lines": 143
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "status": "pass",
+      "current_sha256": "4f493beeb6fe3ef9f2094269d50897daab0221fdd564fb16814045f51f2ace4c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "excluded_arms": 17,
+      "matching_code_lines": 1027
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sound.c",
+      "status": "pass",
+      "current_sha256": "b46824e044662437f8db7fd500cc09ce9be53dbac285d98523a3a3c3ed70dbbc",
+      "original_sha256": "19e602c67a87241daf66e8613f4897d632acc7c6765f74c2b1eb09cf080e53f6",
+      "excluded_arms": 1,
+      "matching_code_lines": 260
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "status": "pass",
+      "current_sha256": "f59963b1f71a67b65896d7d9af38c507e2bbca8da2d059defd76a6d6cb7ff3a2",
+      "original_sha256": "f75d2984624cee1a77b6f5bf6a18fe4a7f38a059d32b0e711edb97d03a08c9b8",
+      "excluded_arms": 8,
+      "matching_code_lines": 678
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdos.c",
+      "status": "pass",
+      "current_sha256": "84f2c81add639d10c4b7274271b24e15508e65231872b508d0c774c696dd2219",
+      "original_sha256": "e87b5cb3825ed937266c3badd287efd03cec3af0c26acb32ccc86d71fa47f314",
+      "excluded_arms": 1,
+      "matching_code_lines": 370
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "status": "pass",
+      "current_sha256": "dc7083ca45c5d1f4f94ee7c07b2d87532e541dd2c0a259fd3cbf4dab9628aa2e",
+      "original_sha256": "c07f5e981d65f6911419990292fd3466d487fd79ff52b4819bb9905f808e68bd",
+      "excluded_arms": 5,
+      "matching_code_lines": 425
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkfileio.c",
+      "status": "pass",
+      "current_sha256": "98ea817ace9cfa89418364c3935127ac6187ac1f6f8a8cb3d4f6ca2e1df93c12",
+      "original_sha256": "3437d0886ec49109668f09a46f5cf8b533ccfbd08f78ef441cbf71853482a8ad",
+      "excluded_arms": 3,
+      "matching_code_lines": 1241
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgcb.c",
+      "status": "pass",
+      "current_sha256": "ddf674c72fe21108b2114e18b8a490901b67cd1743c7e37dae5971c285d3f346",
+      "original_sha256": "ca644a033b4ed5974f70fad75615ef18c80466f3ed6d987554ce031cacab1e13",
+      "excluded_arms": 1,
+      "matching_code_lines": 83
+    }
+  ]
+}

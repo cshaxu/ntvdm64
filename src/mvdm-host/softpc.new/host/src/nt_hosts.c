@@ -121,6 +121,7 @@ void SetupConsoleMode(void)
 
     /*.............................................. Set new console mode */
 
+#line 114
     if(!SetConsoleMode(sc.InputHandle,mode))
 	DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);
     /*::::::::::::::::::::::::::::::::::::::::::: Set console output mode */
@@ -169,6 +170,7 @@ HANDLE inherited_error;
 
     /*::::::::::::::::::::::::::::::::::::::::::: Get console output handle */
 
+#line 159
     if((sc.OutputHandle = GetStdHandle(STD_OUTPUT_HANDLE)) == INVALID_HANDLE_VALUE)
 	DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
     //
@@ -195,6 +197,7 @@ HANDLE inherited_error;
        its separately duplicated input/output streams. */
     if(GetFileType(sc.InputHandle) != FILE_TYPE_CHAR ||
        !GetConsoleMode(sc.InputHandle, &console_mode))
+#line 177
     {
        sa.nLength = sizeof (SECURITY_ATTRIBUTES);
        sa.lpSecurityDescriptor = NULL;
@@ -216,6 +219,7 @@ HANDLE inherited_error;
     {
        inherited_handle = sc.OutputHandle;
        inherited_error = GetStdHandle(STD_ERROR_HANDLE);
+#line 196
        stdoutRedirected = TRUE;
        sa.nLength = sizeof (SECURITY_ATTRIBUTES);
        sa.lpSecurityDescriptor = NULL;
@@ -237,6 +241,7 @@ HANDLE inherited_error;
           if (inherited_error != inherited_handle &&
               inherited_error != NULL && inherited_error != INVALID_HANDLE_VALUE)
              CloseHandle(inherited_error);
+#line 209
        }
     }
 

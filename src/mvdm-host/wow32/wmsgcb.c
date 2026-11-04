@@ -16,6 +16,7 @@
 #pragma hdrstop
 #include "wow_message_lifetime.h" /* DIVERGENCE(MVDM-HOST-DIV-347) */
 
+#line 18
 MODNAME(wmsgcb.c);
 
 
@@ -101,13 +102,16 @@ BOOL FASTCALL ThunkCBMsg16(LPMSGPARAMEX lpmpex)
             case CB_DIR:
                 /* DIVERGENCE(MVDM-HOST-DIV-347): optional map acquisition. */
                 lpmpex->MsgBuffer->text.flags = 0;
+#line 137
                 GETPSZPTR(lpmpex->Parm16.WndProc.lParam, (LPSZ)lpmpex->lParam);
                 lpmpex->MsgBuffer->text.native = lpmpex->lParam;
                 if (lpmpex->lParam) lpmpex->MsgBuffer->text.flags = WOW_TEXT_ACTIVE;
 
+#line 139
                 if (W32CheckThunkParamFlag()) {
                     if (AddParamMap(lpmpex->lParam, lpmpex->Parm16.WndProc.lParam))
                         lpmpex->MsgBuffer->text.flags |= WOW_TEXT_MAPPED;
+#line 141
                 }
                 break;
 
@@ -131,6 +135,7 @@ VOID FASTCALL UnThunkCBMsg16(LPMSGPARAMEX lpmpex)
         if (owned & WOW_TEXT_ACTIVE) FREEPSZPTR((LPSZ)lpmpex->MsgBuffer->text.native);
         return;
     }
+#line 155
     switch(lpmpex->uMsg) {
 
         case CB_GETLBTEXT:
@@ -160,6 +165,7 @@ VOID FASTCALL UnThunkCBMsg16(LPMSGPARAMEX lpmpex)
             FREEPSZPTR((LPSZ)lpmpex->lParam);
             break;
 
+#line 192
         case CB_GETDROPPEDCONTROLRECT:
             if (lpmpex->lParam) {
                 putrect16((VPRECT16)lpmpex->Parm16.WndProc.lParam, (LPRECT)lpmpex->lParam);

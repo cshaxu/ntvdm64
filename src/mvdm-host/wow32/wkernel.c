@@ -32,6 +32,7 @@ static PSZ W32PrivateProfileFileName(PSZ filename, CHAR path[MAX_PATH])
     return filename;
 }
 
+#line 20
 ULONG FASTCALL WK32RegOpenKey32(PVDMFRAME pFrame)
 {
     HKEY  hKey, hKeyTmp;
@@ -142,11 +143,13 @@ ULONG FASTCALL WK32WritePrivateProfileString(PVDMFRAME pFrame)
     PSZ pszValue;
     PSZ pszFilename;
     PSZ pszProfileFilename;
+#line 129
     register PWRITEPRIVATEPROFILESTRING16 parg16;
     BOOL fIsWinIni;
     CHAR szLowercase[MAX_PATH];
     CHAR szPackageProfile[MAX_PATH];
 
+#line 133
     GETARGPTR(pFrame, sizeof(WRITEPRIVATEPROFILESTRING16), parg16);
     GETPSZPTR(parg16->f1, pszSection);
     GETPSZPTR(parg16->f2, pszKey);
@@ -156,6 +159,7 @@ ULONG FASTCALL WK32WritePrivateProfileString(PVDMFRAME pFrame)
     pszProfileFilename = W32PrivateProfileFileName(pszFilename,
         szPackageProfile);
 
+#line 139
     UpdateDosCurrentDirectory(DIR_DOS_TO_NT);
 
     strcpy(szLowercase, pszProfileFilename);
@@ -390,12 +394,14 @@ ULONG FASTCALL WK32GetPrivateProfileString(PVDMFRAME pFrame)
     PSZ pszReturnBuffer;
     PSZ pszFilename;
     PSZ pszProfileFilename;
+#line 393
     DWORD cFlagsEx;
     UINT cchMax;
     register PGETPRIVATEPROFILESTRING16 parg16;
     CHAR szLowercase[MAX_PATH];
     CHAR szPackageProfile[MAX_PATH];
 
+#line 398
     GETARGPTR(pFrame, sizeof(GETPRIVATEPROFILESTRING16), parg16);
     GETPSZPTR(parg16->f1, pszSection);
     GETPSZPTR(parg16->f2, pszKey);
@@ -422,6 +428,7 @@ ULONG FASTCALL WK32GetPrivateProfileString(PVDMFRAME pFrame)
     //                                (offset of returnbuffer);
     //                                                           - nanduri
 
+#line 421
     if (!(cchMax = INT32(parg16->f5))) {
         if (pszKey == (PSZ)NULL) {
             if (pszReturnBuffer != (PSZ)NULL) {
@@ -661,6 +668,7 @@ ULONG FASTCALL WK32GetPrivateProfileInt(PVDMFRAME pFrame)
     PSZ psz4;
     PSZ pszProfileFilename;
     CHAR szPackageProfile[MAX_PATH];
+#line 717
     register PGETPRIVATEPROFILEINT16 parg16;
 
     GETARGPTR(pFrame, sizeof(GETPRIVATEPROFILEINT16), parg16);
@@ -671,6 +679,7 @@ ULONG FASTCALL WK32GetPrivateProfileInt(PVDMFRAME pFrame)
     pszProfileFilename = W32PrivateProfileFileName(psz4,
         szPackageProfile);
 
+#line 724
     UpdateDosCurrentDirectory(DIR_DOS_TO_NT);
 
     ul = GETWORD16(GetPrivateProfileInt(
@@ -697,6 +706,7 @@ ULONG FASTCALL WK32GetModuleFileName(PVDMFRAME pFrame)
     HANDLE hT;
     INT cch;
 
+#line 749
     GETARGPTR(pFrame, sizeof(GETMODULEFILENAME16), parg16);
     cch = INT32(parg16->f3);
 
@@ -712,6 +722,7 @@ ULONG FASTCALL WK32GetModuleFileName(PVDMFRAME pFrame)
     ALLOCVDMPTR(parg16->f2, cch, psz2);
     psz2[0] = '\0';
 
+#line 752
     if ( ISTASKALIAS(parg16->f1) ) {
         ul = GetHtaskAliasProcessName(parg16->f1, psz2, cch);
     } else {

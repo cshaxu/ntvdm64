@@ -353,6 +353,7 @@ Return Value:
     // Clear the internal error flag
     //
 
+#line 355
     remapi_err_flag = 0;
 
     //
@@ -681,6 +682,7 @@ Return Value:
                 ((LPWKSTA_INFO_100)wkstaInfo)->wki100_computername, -1,
                 computerName + 2, (int)(sizeof(computerName) - 2u), NULL,
                 NULL);
+#line 678
             NetApiBufferFree(wkstaInfo);
             if (computerNameBytes == 0) {
                 if (alloc_flag) {
@@ -688,6 +690,7 @@ Return Value:
                 }
                 return ERROR_INVALID_DATA;
             }
+#line 679
             serverName = computerName;
 #ifdef VR_DIAGNOSE
 #line 681

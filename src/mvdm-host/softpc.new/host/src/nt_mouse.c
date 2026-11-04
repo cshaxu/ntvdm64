@@ -42,6 +42,7 @@
 extern int mvdm_softpc_wow_page_domain_publish_cursor(long, long);
 
 
+#line 35
 #define TEXT_MODE          1
 #define GRAPHICS_MODE      2
 #define NOTHING            0xff
@@ -123,6 +124,7 @@ FORWARD void   host_m2p_ratio(word *,word *,word *,word *);
  * contract shared with mouse_io.c; width, order and behavior are unchanged. */
 FORWARD void   host_x_range(word *,word *,MOUSE_SCALAR *,MOUSE_SCALAR *);
 FORWARD void   host_y_range(word *,word *,MOUSE_SCALAR *,MOUSE_SCALAR *);
+#line 121
 FORWARD void   EmulateCoordinates(half_word,IS16,IS16,IS16 *,IS16 *);
 FORWARD void   AssembleCallMask(MOUSE_CALL_MASK *);
 FORWARD void   FullscTextPtr(int, int);
@@ -374,10 +376,12 @@ GLOBAL void mouse_set_position IFN2(USHORT, newx, USHORT, newy)
 /* DIVERGENCE(MVDM-HOST-DIV-318): Window relative input shares the original
  * counter-position update; it does not warp a host Console pointer. */
 if((sc.ScreenState == WINDOWED && bPointerOff) || mvdm_softpc_mouse_route_active())
+#line 414
    {
    /* DIVERGENCE(MVDM-HOST-DIV-318): INT33/4 supersedes an unconsumed
       Window reset; otherwise the first movement is spent consuming both. */
    if(mvdm_softpc_mouse_route_active()) bFunctionZeroReset = FALSE;
+#line 415
    newF4x = (IS16)newx;
    newF4y = (IS16)newy;
    bFunctionFour = TRUE;
@@ -435,6 +439,7 @@ host_ica_lock(); // synch with the event thread
 if(!mvdm_softpc_mouse_apply(mcs,counter,&old_x,&old_y,&bPointerInSamePlace,
                           bFunctionZeroReset,&bFunctionFour,&newF4x,&newF4y))
 {
+#line 547
 GetNextMouseEvent();
 
 #ifdef X86GFX
@@ -456,6 +461,7 @@ GetNextMouseEvent();
 // by the application.
 //
 
+#line 566
 AssembleCallMask(call_mask);
 
 //
@@ -463,6 +469,7 @@ AssembleCallMask(call_mask);
 //
 
 mcs->button_status=os_pointer_data.button_l | os_pointer_data.button_r<<1;
+#line 574
 host_ica_unlock();  // synch with the event thread
 
 

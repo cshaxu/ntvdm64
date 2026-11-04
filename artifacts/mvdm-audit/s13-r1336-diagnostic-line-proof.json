@@ -1,0 +1,227 @@
+{
+  "classification": "diagnostic-line-immediates-only plus PE/debug timestamps",
+  "old_sha256": "c3b389e1a23f72fa2e5f76a895e92bac571c4a03ec310e5d8729065511a6466d",
+  "new_sha256": "70b8e8cd61f44ae6ce5d7f47571bdd78b7f8a8a624044418c86d6937521ebd12",
+  "source": "src/mvdm-host/softpc.new/host/src/nt_hosts.c",
+  "source_pointer": "0x59be40",
+  "cases": [
+    {
+      "offset": "0x5ab90",
+      "width": 4,
+      "old_line": 169,
+      "new_line": 160,
+      "source_call": {
+        "old": {
+          "physical": 173,
+          "line": 169,
+          "code": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);"
+        },
+        "new": {
+          "physical": 175,
+          "line": 160,
+          "code": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);"
+        }
+      }
+    },
+    {
+      "offset": "0x5abcc",
+      "width": 4,
+      "old_line": 181,
+      "new_line": 172,
+      "source_call": {
+        "old": {
+          "physical": 185,
+          "line": 181,
+          "code": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);"
+        },
+        "new": {
+          "physical": 187,
+          "line": 172,
+          "code": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);"
+        }
+      }
+    },
+    {
+      "offset": "0x5ac4f",
+      "width": 4,
+      "old_line": 203,
+      "new_line": 186,
+      "source_call": {
+        "old": {
+          "physical": 207,
+          "line": 203,
+          "code": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);"
+        },
+        "new": {
+          "physical": 210,
+          "line": 186,
+          "code": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);"
+        }
+      }
+    },
+    {
+      "offset": "0x5acd9",
+      "width": 4,
+      "old_line": 224,
+      "new_line": 205,
+      "source_call": {
+        "old": {
+          "physical": 228,
+          "line": 224,
+          "code": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);"
+        },
+        "new": {
+          "physical": 232,
+          "line": 205,
+          "code": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);"
+        }
+      }
+    },
+    {
+      "offset": "0x5ad8c",
+      "width": 1,
+      "old_line": 121,
+      "new_line": 115,
+      "source_call": {
+        "old": {
+          "physical": 125,
+          "line": 121,
+          "code": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);"
+        },
+        "new": {
+          "physical": 126,
+          "line": 115,
+          "code": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);"
+        }
+      }
+    },
+    {
+      "offset": "0x5adb7",
+      "width": 1,
+      "old_line": 125,
+      "new_line": 119,
+      "source_call": {
+        "old": {
+          "physical": 129,
+          "line": 125,
+          "code": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);"
+        },
+        "new": {
+          "physical": 130,
+          "line": 119,
+          "code": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);"
+        }
+      }
+    },
+    {
+      "offset": "0x5adf8",
+      "width": 4,
+      "old_line": 135,
+      "new_line": 129,
+      "source_call": {
+        "old": {
+          "physical": 139,
+          "line": 135,
+          "code": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);"
+        },
+        "new": {
+          "physical": 140,
+          "line": 129,
+          "code": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);"
+        }
+      }
+    },
+    {
+      "offset": "0x5ae4e",
+      "width": 4,
+      "old_line": 146,
+      "new_line": 140,
+      "source_call": {
+        "old": {
+          "physical": 150,
+          "line": 146,
+          "code": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);"
+        },
+        "new": {
+          "physical": 151,
+          "line": 140,
+          "code": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);"
+        }
+      }
+    },
+    {
+      "offset": "0x5aeff",
+      "width": 1,
+      "old_line": 121,
+      "new_line": 115,
+      "source_call": {
+        "old": {
+          "physical": 125,
+          "line": 121,
+          "code": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);"
+        },
+        "new": {
+          "physical": 126,
+          "line": 115,
+          "code": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);"
+        }
+      }
+    },
+    {
+      "offset": "0x5af2a",
+      "width": 1,
+      "old_line": 125,
+      "new_line": 119,
+      "source_call": {
+        "old": {
+          "physical": 129,
+          "line": 125,
+          "code": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);"
+        },
+        "new": {
+          "physical": 130,
+          "line": 119,
+          "code": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);"
+        }
+      }
+    },
+    {
+      "offset": "0x5af6b",
+      "width": 4,
+      "old_line": 135,
+      "new_line": 129,
+      "source_call": {
+        "old": {
+          "physical": 139,
+          "line": 135,
+          "code": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);"
+        },
+        "new": {
+          "physical": 140,
+          "line": 129,
+          "code": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);"
+        }
+      }
+    },
+    {
+      "offset": "0x5afc1",
+      "width": 4,
+      "old_line": 146,
+      "new_line": 140,
+      "source_call": {
+        "old": {
+          "physical": 150,
+          "line": 146,
+          "code": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);"
+        },
+        "new": {
+          "physical": 151,
+          "line": 140,
+          "code": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);"
+        }
+      }
+    }
+  ],
+  "note": "Each changed instruction pushes a line immediate followed by the same source-file string pointer; values match original/new #line arithmetic at DisplayErrorTerm call sites. Duplicates arise in compiled code.",
+  "binary_source_string": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_hosts.c"
+}

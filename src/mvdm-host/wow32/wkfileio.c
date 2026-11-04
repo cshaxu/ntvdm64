@@ -16,6 +16,7 @@
 #include "precomp.h"
 /* DIVERGENCE(MVDM-HOST-DIV-340): owned observation declarations only. */
 #include "wow_user_thunk_scope.h"
+#line 17
 #pragma hdrstop
 #include "dossvc.h"
 #include "demexp.h"
@@ -1518,6 +1519,7 @@ ULONG FASTCALL WK32FileOpen(PVDMFRAME pFrame)
         /* DIVERGENCE(MVDM-HOST-DIV-340): preserve the selected open failure. */
         wow_user_trace_file_open_failure(pszPath, lpFileName, wAccess,
             GetLastError());
+#line 1511
         LOGDEBUG(fileoclevel,("WK32FileOpen: %s  mode:%02X failed error %d\n",pszPath, wAccess, GetLastError()));
         FREEARGPTR(parg16);
         if (ItsANamedPipe) {
@@ -1915,6 +1917,7 @@ ULONG FASTCALL WK32FileSetAttributes(PVDMFRAME pFrame)
      * the skipped cleanup ownership explicit rather than reading/freeing
      * indeterminate stack data. */
     PSTR                    pszPath, lpFileName = NULL;
+#line 1903
     ULONG                   attributes, l, dwReturn;
     BOOL                    ItsANamedPipe = FALSE;
 

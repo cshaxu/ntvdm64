@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-652: restore selected-code diagnostic positions in ten CCPU,
+host, redirector and WOW files with excluded-only original conditional trees.
+Only `#line` directives were added. Evidence:
+`../../artifacts/mvdm-audit/s13-r1336-tree-recheck.json`.
+
 MVDM-HOST-DIV-651: restore original selected-code diagnostic positions in ten
 DOS, DPMI, OEM and CCPU files whose original conditional branches are all
 excluded. Only `#line` directives were added. Original condition-tree and

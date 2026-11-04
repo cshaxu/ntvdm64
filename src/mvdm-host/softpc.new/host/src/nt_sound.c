@@ -30,6 +30,7 @@ void host_ica_unlock(void);
  * Notes	: 
  */
 
+#line 27
 #include "xt.h"
 #include "config.h"
 #include "debug.h"

@@ -58,6 +58,7 @@ call_cpu_function IFN4(CALL_CPU *, func, ISM32, type, ISM32, arg1, IU16, arg2)
    {
    /* DIVERGENCE(MVDM-HOST-DIV-348): native SEH also leaves this interface. */
    __try {
+#line 56
    if ( setjmp(interface_abort) == 0 )
       {
       interface_active = TRUE;
@@ -84,6 +85,7 @@ call_cpu_function IFN4(CALL_CPU *, func, ISM32, type, ISM32, arg1, IU16, arg2)
       interface_active = FALSE;
    }
 
+#line 80
    return interface_error;
    }
 

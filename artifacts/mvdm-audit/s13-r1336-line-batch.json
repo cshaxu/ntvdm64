@@ -1,0 +1,255 @@
+{
+  "method": "Original/current excluded-only trees directly compared; #line inserted outside excluded arms at safe code boundaries to align original matching code positions. Original local edits retained; other runtime semantics are not inferred.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xtrn.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_xtrn.c",
+      "before_sha256": "30b30971217251b147d46f54e63441dd0717f7bb21338bf20ae60d0d13818de7",
+      "after_sha256": "643b6f1f66588c8560815906507424e68de59178f82ca164e4546a9f228ac889",
+      "original_sha256": "e114d6d858f5eafe2d7a4e8af560831d95f190ecf07209d91255f1140680943e",
+      "anchors": [
+        {
+          "before_physical_line": 61,
+          "original_line": 56
+        },
+        {
+          "before_physical_line": 87,
+          "original_line": 80
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_eoi.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_eoi.h",
+      "before_sha256": "ca72a8fd68e85a5b7a3b004dc2c04a1d2e825fa3987615a8fcdbfacae16912b8",
+      "after_sha256": "3bc140cb9a26bfc6aba200b33c50e576f28fdca9811f8336fd6963a5e7bb0181",
+      "original_sha256": "57ae39f20535e93b451e83a0e54e6e45f43512e12d99ae3ffc6a58e4f1ada8e3",
+      "anchors": [
+        {
+          "before_physical_line": 23,
+          "original_line": 24
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_hosts.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_hosts.c",
+      "before_sha256": "ed7ff1108d479c6e1a5d2a82482914f7f4cf7c39d0470d72013c9fcee5981fdf",
+      "after_sha256": "9fde43cfebd448ff03be94b44ffef71fc039567e665524d40c1e144e8a282c1c",
+      "original_sha256": "9840cb53a0298fdf7f9d27ade387c57659e3c57afbe587cfdf63fbdbafe8c41d",
+      "anchors": [
+        {
+          "before_physical_line": 124,
+          "original_line": 114
+        },
+        {
+          "before_physical_line": 172,
+          "original_line": 159
+        },
+        {
+          "before_physical_line": 198,
+          "original_line": 177
+        },
+        {
+          "before_physical_line": 219,
+          "original_line": 196
+        },
+        {
+          "before_physical_line": 240,
+          "original_line": 209
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "before_sha256": "e735360bfa73b9a681fd8c7fe84cf790009013f275b67aed72cbcff7bd4b27ee",
+      "after_sha256": "4f493beeb6fe3ef9f2094269d50897daab0221fdd564fb16814045f51f2ace4c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "anchors": [
+        {
+          "before_physical_line": 45,
+          "original_line": 35
+        },
+        {
+          "before_physical_line": 126,
+          "original_line": 121
+        },
+        {
+          "before_physical_line": 377,
+          "original_line": 414
+        },
+        {
+          "before_physical_line": 381,
+          "original_line": 415
+        },
+        {
+          "before_physical_line": 438,
+          "original_line": 547
+        },
+        {
+          "before_physical_line": 459,
+          "original_line": 566
+        },
+        {
+          "before_physical_line": 466,
+          "original_line": 574
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sound.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_sound.c",
+      "before_sha256": "30d4a1c48f653760260a3cc3e9c2f56bddd6c90b3ebd64d44ebfb0d9cc3af1cc",
+      "after_sha256": "b46824e044662437f8db7fd500cc09ce9be53dbac285d98523a3a3c3ed70dbbc",
+      "original_sha256": "19e602c67a87241daf66e8613f4897d632acc7c6765f74c2b1eb09cf080e53f6",
+      "anchors": [
+        {
+          "before_physical_line": 33,
+          "original_line": 27
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrremote.c",
+      "before_sha256": "57f839a4ae5ecb800af66578f5e7e89e0af1dd986a4c84f06cac10101cf14586",
+      "after_sha256": "f59963b1f71a67b65896d7d9af38c507e2bbca8da2d059defd76a6d6cb7ff3a2",
+      "original_sha256": "f75d2984624cee1a77b6f5bf6a18fe4a7f38a059d32b0e711edb97d03a08c9b8",
+      "anchors": [
+        {
+          "before_physical_line": 356,
+          "original_line": 355
+        },
+        {
+          "before_physical_line": 684,
+          "original_line": 678
+        },
+        {
+          "before_physical_line": 691,
+          "original_line": 679
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdos.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wdos.c",
+      "before_sha256": "bac958832def568b86ff8966b8f7b7f52d8079d2d7ea0b48176aabf9f1077065",
+      "after_sha256": "84f2c81add639d10c4b7274271b24e15508e65231872b508d0c774c696dd2219",
+      "original_sha256": "e87b5cb3825ed937266c3badd287efd03cec3af0c26acb32ccc86d71fa47f314",
+      "anchors": [
+        {
+          "before_physical_line": 18,
+          "original_line": 17
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkernel.c",
+      "before_sha256": "1a99b43c912a95c9b7793faa331042040d0af1f9e67e967e12c53e6a5b728207",
+      "after_sha256": "dc7083ca45c5d1f4f94ee7c07b2d87532e541dd2c0a259fd3cbf4dab9628aa2e",
+      "original_sha256": "c07f5e981d65f6911419990292fd3466d487fd79ff52b4819bb9905f808e68bd",
+      "anchors": [
+        {
+          "before_physical_line": 35,
+          "original_line": 20
+        },
+        {
+          "before_physical_line": 145,
+          "original_line": 129
+        },
+        {
+          "before_physical_line": 150,
+          "original_line": 133
+        },
+        {
+          "before_physical_line": 159,
+          "original_line": 139
+        },
+        {
+          "before_physical_line": 393,
+          "original_line": 393
+        },
+        {
+          "before_physical_line": 399,
+          "original_line": 398
+        },
+        {
+          "before_physical_line": 425,
+          "original_line": 421
+        },
+        {
+          "before_physical_line": 664,
+          "original_line": 717
+        },
+        {
+          "before_physical_line": 674,
+          "original_line": 724
+        },
+        {
+          "before_physical_line": 700,
+          "original_line": 749
+        },
+        {
+          "before_physical_line": 715,
+          "original_line": 752
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkfileio.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkfileio.c",
+      "before_sha256": "1831a9aba0e796bc0034d021f3c17d6d8ab978f0c8bed0874bc00909e05e1372",
+      "after_sha256": "98ea817ace9cfa89418364c3935127ac6187ac1f6f8a8cb3d4f6ca2e1df93c12",
+      "original_sha256": "3437d0886ec49109668f09a46f5cf8b533ccfbd08f78ef441cbf71853482a8ad",
+      "anchors": [
+        {
+          "before_physical_line": 19,
+          "original_line": 17
+        },
+        {
+          "before_physical_line": 1521,
+          "original_line": 1511
+        },
+        {
+          "before_physical_line": 1918,
+          "original_line": 1903
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgcb.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsgcb.c",
+      "before_sha256": "8e36711983a637e6dbd318e1a8afe3268e9b5737c1c03c261c1a76dd42ede03b",
+      "after_sha256": "ddf674c72fe21108b2114e18b8a490901b67cd1743c7e37dae5971c285d3f346",
+      "original_sha256": "ca644a033b4ed5974f70fad75615ef18c80466f3ed6d987554ce031cacab1e13",
+      "anchors": [
+        {
+          "before_physical_line": 19,
+          "original_line": 18
+        },
+        {
+          "before_physical_line": 104,
+          "original_line": 137
+        },
+        {
+          "before_physical_line": 108,
+          "original_line": 139
+        },
+        {
+          "before_physical_line": 111,
+          "original_line": 141
+        },
+        {
+          "before_physical_line": 134,
+          "original_line": 155
+        },
+        {
+          "before_physical_line": 163,
+          "original_line": 192
+        }
+      ]
+    }
+  ]
+}
