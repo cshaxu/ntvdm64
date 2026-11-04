@@ -24,8 +24,8 @@ const commands = [
     'cl.exe /nologo /MT /W4 /I . /c resource_attachment_s.c /Foserver-stub.obj',
     `cl.exe /nologo /MT /W4 /I . ${securityInclude} /c "${source}" /Foclient.obj`,
     'cl.exe /nologo /MT /W4 /I . /c resource_attachment_c.c /Foclient-stub.obj',
-    `link.exe /nologo /opt:ref /out:resource-server.exe /map:resource-server.map server.obj registration.obj "${ownerBuild}/obj/run16/support.obj" "${ownerBuild}/broker-transport.lib" "${ownerBuild}/lib-rpc.lib" "${ownerBuild}/common-base-srv-transport.lib" "${ownerBuild}/opennt-base-server.lib" "${ownerBuild}/opennt-base-bindings.lib" "${ownerBuild}/common-base-srv-bindings.lib" "${ownerBuild}/original-opennt-rtl-x86.lib" server-stub.obj client-stub.obj rpcrt4.lib advapi32.lib kernel32.lib ntdll.lib user32.lib legacy_stdio_definitions.lib`,
-    `link.exe /nologo /out:resource-client.exe client.obj client-stub.obj "${ownerBuild}/broker-transport.lib" "${ownerBuild}/lib-rpc.lib" "${ownerBuild}/common-base-srv-transport.lib" rpcrt4.lib advapi32.lib kernel32.lib`,
+    `link.exe /nologo /opt:ref /out:resource-server.exe /map:resource-server.map server.obj registration.obj "${ownerBuild}/obj/run16/support.obj" "${ownerBuild}/broker-transport.lib" "${ownerBuild}/lib-rpc.lib" "${ownerBuild}/lib-process.lib" "${ownerBuild}/common-base-srv-transport.lib" "${ownerBuild}/opennt-base-server.lib" "${ownerBuild}/opennt-base-bindings.lib" "${ownerBuild}/common-base-srv-bindings.lib" "${ownerBuild}/original-opennt-rtl-x86.lib" server-stub.obj client-stub.obj rpcrt4.lib advapi32.lib kernel32.lib ntdll.lib user32.lib legacy_stdio_definitions.lib`,
+    `link.exe /nologo /out:resource-client.exe client.obj client-stub.obj "${ownerBuild}/broker-transport.lib" "${ownerBuild}/lib-rpc.lib" "${ownerBuild}/lib-process.lib" "${ownerBuild}/common-base-srv-transport.lib" rpcrt4.lib advapi32.lib kernel32.lib`,
 ];
 for (const command of commands) {
     const result = spawnSync('cmd.exe', ['/d', '/c', `call "${environment}" ${command}`],

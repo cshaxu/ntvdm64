@@ -1531,6 +1531,12 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/lib-win32/rpc/peer.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/rpc/peer.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build lib-rpc.lib: lib obj/lib-win32/rpc/local_binding.obj obj/lib-win32/rpc/peer.obj')
+    $graph.Add('build obj/lib-win32/process/attributes.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/process/attributes.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build lib-process.lib: lib obj/lib-win32/process/attributes.obj')
+    $graph.Add('build obj/tests/win32_process_attributes.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/win32_process_attributes_test.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build win32-process-attributes-test.exe: broker_test_link obj/tests/win32_process_attributes.obj')
     $graph.Add('build obj/tests/win32_rpc_peer.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/win32_rpc_peer_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build win32-rpc-peer-test.exe: broker_test_link obj/tests/win32_rpc_peer.obj')
@@ -2111,6 +2117,14 @@ for ($commonIndex = 0; $commonIndex -lt $graph.Count; ++$commonIndex) {
         if ($commonBoundary -ge 0) {
             $graph[$commonIndex] = $commonEdge.Insert($commonBoundary, ' lib-io.lib common-codec.lib common-console.lib')
         } else { $graph[$commonIndex] = $commonEdge + ' lib-io.lib common-codec.lib common-console.lib' }
+    }
+}
+if ($Architecture -eq 'x86') {
+    for($i=0;$i -lt $graph.Count;$i++) {
+        if($graph[$i] -match '^build .*: \S*link ' -and $graph[$i].Contains('broker-transport.lib')) {
+            $barrier=$graph[$i].IndexOf(' |')
+            if($barrier -ge 0){$graph[$i]=$graph[$i].Insert($barrier,' lib-process.lib')}else{$graph[$i]+=' lib-process.lib'}
+        }
     }
 }
 # Keep the audited source recipe available for the architecture-local native

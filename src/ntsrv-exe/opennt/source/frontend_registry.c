@@ -1,3 +1,4 @@
+#include "lib-win32/process/attributes.h"
 /* NTSRV-private frontend registry; project adaptation,
  * not an original OpenNT mirror. Physical separation only: existing function
  * bodies, state authority and lock/resource contracts are preserved. */
@@ -633,9 +634,9 @@ DWORD OpenNtBaseServiceStartFrontend(OPENNT_BASE_CONNECTION *caller,DWORD pid,
     HANDLE inherited[4],unused_retire=NULL;
     SECURITY_ATTRIBUTES security={sizeof(security),NULL,TRUE};
     STARTUPINFOEXW startup={0};PROCESS_INFORMATION process={0};
-    SIZE_T bytes=0;
+    win32_process_attributes attributes={0};
     DWORD error,create=0,root_generation=0;
-    BOOL attributes=FALSE,accepted=FALSE;
+    BOOL accepted=FALSE;
     if(!caller || borrowed>1 || !root || !capability || !restored)
         return ERROR_INVALID_PARAMETER;
     *root=*capability=*restored=NULL;
@@ -666,16 +667,12 @@ DWORD OpenNtBaseServiceStartFrontend(OPENNT_BASE_CONNECTION *caller,DWORD pid,
     ack=CreateEventW(&security,TRUE,FALSE,NULL);
     event=CreateEventW(NULL,TRUE,FALSE,NULL);
     if(!notification || !retire || !ack || !event){error=GetLastError();goto done;}
-    InitializeProcThreadAttributeList(NULL,1,0,&bytes);
-    startup.lpAttributeList=HeapAlloc(GetProcessHeap(),0,bytes);
-    if(!startup.lpAttributeList){error=ERROR_NOT_ENOUGH_MEMORY;goto done;}
-    if(!InitializeProcThreadAttributeList(startup.lpAttributeList,1,0,&bytes))
-        {error=GetLastError();goto done;}
-    attributes=TRUE;
     inherited[0]=creator;inherited[1]=notification;
     inherited[2]=retire;inherited[3]=ack;
-    if(!UpdateProcThreadAttribute(startup.lpAttributeList,0,PROC_THREAD_ATTRIBUTE_HANDLE_LIST,
-        inherited,sizeof(inherited),NULL,NULL)){error=GetLastError();goto done;}
+    error=win32_process_attributes_init(&attributes,PROC_THREAD_ATTRIBUTE_HANDLE_LIST,
+        inherited,sizeof(inherited));
+    if(error)goto done;
+    startup.lpAttributeList=attributes.list;
     startup.StartupInfo.cb=sizeof(startup);
     if(swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" --session %Ix %Ix %Ix %Ix %u %I64x",
         image,(UINT_PTR)creator,(UINT_PTR)notification,(UINT_PTR)retire,
@@ -727,8 +724,7 @@ done:
     if(verified)CloseHandle(verified);if(creator)CloseHandle(creator);
     if(notification)CloseHandle(notification);if(retire)CloseHandle(retire);if(ack)CloseHandle(ack);
     if(event)CloseHandle(event);
-    if(attributes)DeleteProcThreadAttributeList(startup.lpAttributeList);
-    if(startup.lpAttributeList)HeapFree(GetProcessHeap(),0,startup.lpAttributeList);
+    win32_process_attributes_destroy(&attributes);
     return error;
 }
 
