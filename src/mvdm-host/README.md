@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-648: give fourteen excluded local-profile guards their original
+statement or enclosing-branch diagnostic positions in ten MVDM host files.
+Only `#line` directives are added; mappings and retained boundaries are in
+`../../artifacts/mvdm-audit/s13-r1331-line-batch.json`.
+
 MVDM-HOST-DIV-647: correct seven original diagnostic anchors in five WOW
 sources after matching original statements and context; only `#line` values
 change. Evidence: `../../artifacts/mvdm-audit/s13-r1330-line-batch.json`.

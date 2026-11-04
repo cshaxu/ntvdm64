@@ -432,6 +432,7 @@ GLOBAL VOID config( VOID )
 #error Unsupported i386 kernel VDM memory-size profile
 #else
 #if defined(_M_IX86) && !defined(CPU_40_STYLE)
+#line 510
 #error Excluded unsupported non-CPU40 i386 memory-size profile
 #else
 #line 510

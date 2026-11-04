@@ -72,6 +72,7 @@ Return Value:
     RegisterPointer = mvdm_debugger_read_debug_registers(getDS(), getSI(),
         DebugRegisters) ? (PCHAR)DebugRegisters : NULL;
 #else
+#line 369
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 

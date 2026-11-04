@@ -239,6 +239,7 @@ GLOBAL sys_addr sim32_effective_addr IFN2(double_word, addr, BOOL, pm)
 {
     word seg, off;
 #ifndef CPU_40_STYLE
+#line 230
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 

@@ -41,6 +41,7 @@
 #if defined(CPU_40_STYLE) /* DIVERGENCE(MVDM-HOST-DIV-551) */
 #define CpuH "cpu4.h"
 #else
+#line 40
 #error Excluded non-CPU40 MONITOR CPU interface
 #endif
 #else

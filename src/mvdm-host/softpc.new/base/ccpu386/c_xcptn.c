@@ -45,6 +45,7 @@ LOCAL  BOOL first_exception = TRUE;
  * externally supplied CCPU_SHOW_EXCEPTIONS value into fprintf(NULL,...). */
 #define check_exception_env()
 #else
+#line 40
 #error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register.
 #endif
 

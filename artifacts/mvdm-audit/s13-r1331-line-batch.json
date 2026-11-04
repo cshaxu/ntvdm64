@@ -1,0 +1,155 @@
+{
+  "method": "Original statements replaced by project-local excluded-profile guards were individually identified; #line points to the first replaced original statement or enclosing original branch. Only #line directives added; other branches remain under audit.",
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmimemr.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmimemr.c",
+      "before_sha256": "8c4d1a0ad9b2cbf86be4c5f44a18661196bf2caff4cb14c382ba529861e43c33",
+      "after_sha256": "c4e304998c16bb9b42e8b9895544089603d538bdd1f2cabe1442060139294fad",
+      "anchors": [
+        {
+          "old_directive_line": 265,
+          "original_line": 237,
+          "original_text": "Status = VdmQueryFreeVirtualMemory("
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\i386\\dpmi386.c",
+      "before_sha256": "36aa9653d2da9c2b0e3487cfb58064aa1c850618cddcfb912d18c0636ae6eaa3",
+      "after_sha256": "9879f2403e9519ab1d6559227aff7fcae8f8dcf87c4aa549ad666948480d502a",
+      "anchors": [
+        {
+          "old_directive_line": 74,
+          "original_line": 369,
+          "original_text": "RegisterPointer = Sim32GetVDMPointer("
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_xcptn.c",
+      "before_sha256": "0ef2365f967dcf6a0289055665398dc24bcb0c686c1588ebca2ee3d39f793a29",
+      "after_sha256": "3baa74e227bb10ef682d7acd930bf3ef2e4399c30a29297825b8ca5a55b563c5",
+      "anchors": [
+        {
+          "old_directive_line": 47,
+          "original_line": 40,
+          "original_text": "#define check_exception_env()"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\xt.c",
+      "before_sha256": "e0f3547c1d58b42c24e38310b5157a187e2719b4e70590f0633183b6b96af474",
+      "after_sha256": "fbd2aaa1741bccc78af08334310f01a4563a7fd452f64142488703cdc529973b",
+      "anchors": [
+        {
+          "old_directive_line": 84,
+          "original_line": 76,
+          "original_text": "#ifndef MAC_LIKE"
+        },
+        {
+          "old_directive_line": 119,
+          "original_line": 347,
+          "original_text": ""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\host_def.h",
+      "before_sha256": "867a81ef546b937a0c86269dcb88762a4b8ea756b4696a9692e406575aca1afc",
+      "after_sha256": "656133a9ab945d59086b5ba9035d772fb4b1334cd88781543e04f16507f62f8a",
+      "anchors": [
+        {
+          "old_directive_line": 43,
+          "original_line": 40,
+          "original_text": "#define CpuH \"cpu.h\""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
+      "before_sha256": "a0ec120b075d579685e0b8abf463545b2063a7d456f0aa7b235cf2439d415633",
+      "after_sha256": "da4cac9f26f2a3e8c2bdf44275f4463275079afcc409966d1498a5f8540e3192",
+      "anchors": [
+        {
+          "old_directive_line": 434,
+          "original_line": 510,
+          "original_text": "vdmMemorySize = GetVDMSize(VDMForWOW);"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cpu.c",
+      "before_sha256": "8b69aa6b172a228c7a35ef63e07bbe958b2b50ef56070d671aeac36d099b5f3e",
+      "after_sha256": "2104ea336bb95c051aa2c9a3d4fad767a602c270bed068c8ea353c0992f0ec82",
+      "anchors": [
+        {
+          "old_directive_line": 53,
+          "original_line": 40,
+          "original_text": "GLOBAL\thost_addr Start_of_M_area;"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\sim32.c",
+      "before_sha256": "675f1d654972d1858d973563a1214d72a523f5e29aec6db3963f23496b4d893c",
+      "after_sha256": "dc26178793fbe85a2044eff465b26399ffddc0299b9f1c65e5a3ef13ba82a2f5",
+      "anchors": [
+        {
+          "old_directive_line": 241,
+          "original_line": 230,
+          "original_text": "DESCR entry;"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsmemr.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\xms.486\\xmsmemr.c",
+      "before_sha256": "b414e7f1a100e23b42b1022232af5b3d04df01b9784d3536316fb7a43cec9df2",
+      "after_sha256": "38cd6fcb4728c29218b85365bbea2337ee6ce97250877081b9ca9653d1e78de9",
+      "anchors": [
+        {
+          "old_directive_line": 151,
+          "original_line": 150,
+          "original_text": "SoftpcBase = (ULONG) GetVDMAddr(0,0);"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\egawrtm0.c",
+      "before_sha256": "618442468ff3a82dc803e2593289787e7fdb8e70a49f0de59a7f40c738aac198",
+      "after_sha256": "0ad1b8ee801d57eff179ba24e22d31f3e36a7c1cb827b87f79a479c8ba66b82c",
+      "anchors": [
+        {
+          "old_directive_line": 246,
+          "original_line": 228,
+          "original_text": "WRT_POINTERS mode0_copy_handlers ="
+        },
+        {
+          "old_directive_line": 249,
+          "original_line": 264,
+          "original_text": "VOID  ega_copy_b_write();"
+        },
+        {
+          "old_directive_line": 407,
+          "original_line": 467,
+          "original_text": "LOCAL VOID"
+        },
+        {
+          "old_directive_line": 891,
+          "original_line": 1085,
+          "original_text": "LOCAL VOID"
+        }
+      ]
+    }
+  ]
+}

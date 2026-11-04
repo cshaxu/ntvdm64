@@ -244,9 +244,11 @@ IMPORT VOID	_ch2_mode0_chn_word_move_glue();
 WRT_POINTERS mode0_copy_handlers;
 WRT_POINTERS mode0_gen_handlers;
 #else
+#line 228
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
 #else
+#line 264
 #error Excluded unsupported non-CPU40 writer-table profile
 #endif
 #endif /* A_VID */
@@ -405,6 +407,7 @@ ega_copy_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
  * CPU_40 uses EVID_WRT_POINTERS, which keeps guest offsets and native source
  * pointers in separately typed slots. */
 #ifndef CPU_40_STYLE
+#line 467
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
 
@@ -889,6 +892,7 @@ ega_mode0_chn_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 
 /* DIVERGENCE MVDM-HOST-DIV-079: non-CPU_40 direct-pointer string path. */
 #ifndef CPU_40_STYLE
+#line 1085
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
 

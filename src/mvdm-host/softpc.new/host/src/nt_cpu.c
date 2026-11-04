@@ -51,6 +51,7 @@ GLOBAL	quick_event_delays	host_delays;
  * definitions are unused by the selected CCPU path and collide at a modern
  * static link. The unselected non-CCPU body is now marked by DIV-505. */
 #ifndef CCPU
+#line 40
 #error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register.
 #endif
 #line 42

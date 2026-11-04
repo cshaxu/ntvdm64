@@ -82,6 +82,7 @@ half_word ica_lock;
  */
 #if defined(CCPU) && !defined(CPU_30_STYLE)
 #if defined(CCPU) && !defined(CPU_40_STYLE)
+#line 76
 #error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
 #endif /* defined(CCPU) && !defined(CPU_40_STYLE) */
 #endif /* defined(CCPU) && !defined(CPU_30_STYLE) */
@@ -117,6 +118,7 @@ int verbose;			/* TRUE => trace instructions   */
  */
 #if !defined(MAC_LIKE) && !defined(CPU_30_STYLE)
 #if !defined(MAC_LIKE) && !defined(CPU_40_STYLE)
+#line 347
 #error Excluded unsupported non-CPU40 parity-table profile
 #endif /* !defined(MAC_LIKE) && !defined(CPU_40_STYLE) */
 #endif /* !defined(MAC_LIKE) && !defined(CPU_30_STYLE) */
