@@ -1,0 +1,32 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+  "review": {
+    "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+    "before_sha256": "84e4c94857da2af248a4f570385c9c2290cc21042ed03e9c86be52ee4b970e31",
+    "original_sha256": "3aa86f1faf07f68937629f1d6e410eb41f498e17dc6d747647c7d6e5697c80aa",
+    "anchors": {},
+    "matched_lines": 243,
+    "strict_tree": {
+      "excluded": 12,
+      "implicit_continuation": 3,
+      "groups": 15,
+      "retained": 10,
+      "natural_error_anchor": 1,
+      "implicit_retained_anchor": 1
+    }
+  },
+  "natural_excluded_anchor": {
+    "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+    "current_sha256": "84e4c94857da2af248a4f570385c9c2290cc21042ed03e9c86be52ee4b970e31",
+    "original_sha256": "3aa86f1faf07f68937629f1d6e410eb41f498e17dc6d747647c7d6e5697c80aa",
+    "preceding_line_directive_physical": 178,
+    "preceding_line_target": 163,
+    "current_guard_line": 203,
+    "current_error_line": 204,
+    "original_guard_line": 187,
+    "original_body_line": 188,
+    "reason": "The preceding #line 163 remains active through both NTVDM outcomes; the current #error naturally maps to original line 188. An additional #line is unnecessary."
+  },
+  "retained_direct_bodies": "All ten observed retained arms match original direct content, accounting for nested groups; twelve excluded arms contain only #error and optional #line.",
+  "limits": "Source-derived selected projection and historical mapped hits; no new compiler diagnostic or runtime test."
+}
