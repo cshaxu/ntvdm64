@@ -274,9 +274,10 @@ ULONG FASTCALL WU32GetClassLong(PVDMFRAME pFrame)
                 /* DIVERGENCE(MVDM-HOST-DIV-339): decoded entry is not a native CPD. */
                 dwProc32 = wow_user_get_procedure(hwnd, TRUE, &procedureIsGuest);
 #else
+#line 272
 #error Unsupported excluded original configuration
 #endif
-#line 279
+#line 273
 
                 if ( (dwProc32 & WNDPROC_WOW)
 #ifdef WOW_USER_PRIVATE_REDIRECT
@@ -754,6 +755,7 @@ ULONG FASTCALL WU32SetClassLong(PVDMFRAME pFrame)
                     dwWndProc32Old = wow_user_set_procedure(HWND32(parg16->f1), TRUE, dwWndProc32New, FALSE, &previousIsGuest);
                     if (!dwWndProc32Old) break;
 #else
+#line 730
 #error Unsupported excluded original configuration
 #endif
 #line 731
@@ -784,6 +786,7 @@ ULONG FASTCALL WU32SetClassLong(PVDMFRAME pFrame)
                     dwWndProc32Old = wow_user_set_procedure(HWND32(parg16->f1), TRUE, l | WNDPROC_WOW, TRUE, &previousIsGuest);
                     if (!dwWndProc32Old) break;
 #else
+#line 753
 #error Unsupported excluded original configuration
 #endif
 #line 754

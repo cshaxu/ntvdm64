@@ -58,6 +58,7 @@ Revision History:
 
 
 #if !defined(MVDM_XACTSRV_PACKSTR_COPY_ONLY)
+#line 60
 #error Unsupported excluded original configuration
 #endif
 #line 156
@@ -192,12 +193,14 @@ Return Value:
 
 
 #if !defined(MVDM_XACTSRV_PACKSTR_COPY_ONLY)
+#line 286
 #error Unsupported excluded original configuration
 #endif
-#line 411
+#line 408
 
 
 #if !defined(MVDM_XACTSRV_PACKSTR_COPY_ONLY)
+#line 409
 #error Unsupported excluded original configuration
 #endif
-#line 675
+#line 670

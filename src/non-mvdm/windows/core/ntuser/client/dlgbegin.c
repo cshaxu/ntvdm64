@@ -626,6 +626,7 @@ DeleteFontAndMenuAndFail:
         goto DeleteFontAndMenuAndFail;
     }
 #else
+#line 600
 #error Unsupported excluded original configuration
 #endif
 #line 601
@@ -636,9 +637,10 @@ DeleteFontAndMenuAndFail:
      * Need to remember Unicode status.
      */
 #ifndef WOW_NATIVE_DIALOG_PROCEDURE_OWNER
+#line 607
 #error Unsupported excluded original configuration
 #endif
-#line 640
+#line 609
 
     /*
      * Time to lock pwnd so it doesn't go away while we're calling back.

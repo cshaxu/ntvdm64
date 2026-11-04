@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-649: anchor excluded local profiles to their replaced original
+statements in eight MVDM device and WOW files, and correct original
+continuations where required. Only `#line` directives change. Evidence:
+`../../artifacts/mvdm-audit/s13-r1332-line-batch.json`.
+
 MVDM-HOST-DIV-648: give fourteen excluded local-profile guards their original
 statement or enclosing-branch diagnostic positions in ten MVDM host files.
 Only `#line` directives are added; mappings and retained boundaries are in

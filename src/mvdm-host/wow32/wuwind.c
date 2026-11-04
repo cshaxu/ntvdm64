@@ -1706,9 +1706,10 @@ ULONG FASTCALL WU32GetWindowLong(PVDMFRAME pFrame)
                 /* DIVERGENCE(MVDM-HOST-DIV-339): keep explicit decoded-entry origin. */
                 dwWndProc32Cur = wow_user_get_procedure(HWND32(parg16->f1), FALSE, &procedureIsGuest);
 #else
+#line 1704
 #error Unsupported excluded original configuration
 #endif
-#line 1713
+#line 1705
 
                 if ( (dwWndProc32Cur & WNDPROC_WOW)
 #ifdef WOW_USER_PRIVATE_REDIRECT
@@ -2484,6 +2485,7 @@ ULONG FASTCALL WU32SetWindowLong(PVDMFRAME pFrame)
                 /* DIVERGENCE(MVDM-HOST-DIV-339): explicit native origin. */
                 dwWndProc32Old = wow_user_set_procedure(HWND32(parg16->f1), FALSE, dwWndProc32New, FALSE, &previousIsGuest);
 #else
+#line 2461
 #error Unsupported excluded original configuration
 #endif
 #line 2462
@@ -2522,9 +2524,10 @@ ULONG FASTCALL WU32SetWindowLong(PVDMFRAME pFrame)
                 /* DIVERGENCE(MVDM-HOST-DIV-339): explicit guest origin. */
                 dwWndProc32Old = wow_user_set_procedure(HWND32(parg16->f1), FALSE, l | WNDPROC_WOW, TRUE, &previousIsGuest);
 #else
+#line 2493
 #error Unsupported excluded original configuration
 #endif
-#line 2523
+#line 2494
 
                 // If the 32 bit set failed, perhaps because its another process,
                 // then we want to fail too

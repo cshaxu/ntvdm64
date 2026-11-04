@@ -143,6 +143,7 @@ InitialiseDosEmulation(int argc, char **argv)
 #ifdef CPU_40_STYLE
     fVirtualInt |= MIPS_BIT_MASK;
 #else
+#line 124
 #error Excluded unsupported non-CPU40 virtual interrupt state
 #endif
 #else
@@ -297,9 +298,10 @@ void AddSystemFiles(void)
     * disposition; the original source body remains below as mirror evidence. */
    mvdm_softpc_prepare_system_file_compatibility();
 #else
+#line 260
 #error Unsupported excluded original configuration
 #endif
-#line 340
+#line 313
 }
 
 

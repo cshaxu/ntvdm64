@@ -1,0 +1,299 @@
+{
+  "method": "Mapped local excluded guards to the replaced original statement, original branch or original BACK_M macro; continuation corrections map to original code or original EOF. Only #line directives changed. Other branches remain under audit.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\egwrtm12.c",
+      "before_sha256": "843bd6201984ab5e1da142ee5aea3b5d6d4a6446f459ea1763ec0926c5b86152",
+      "after_sha256": "87ff01577dd9513f5a54bb2d3b2328db9676034b2b0a2f171701baae6e4d4670",
+      "anchors": [
+        {
+          "old_directive_line": 182,
+          "original_line": 164,
+          "original_text": "WRT_POINTERS mode1_handlers ="
+        },
+        {
+          "old_directive_line": 185,
+          "original_line": 205,
+          "original_text": "VOID\tega_mode1_chn_b_write();"
+        },
+        {
+          "old_directive_line": 352,
+          "original_line": 414,
+          "original_text": "LOCAL VOID"
+        },
+        {
+          "old_directive_line": 731,
+          "original_line": 1028,
+          "original_text": "LOCAL VOID"
+        }
+      ],
+      "continuations": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+      "before_sha256": "697b2da90d81b4e5ab75ecf92defca26b3d2e59fb2cd641e269fccfa0ee00bfb",
+      "after_sha256": "104787f7f5127b4a500fe51b60e28a8f3f4c02129af7f2b02eb96f03e90caf08",
+      "anchors": [
+        {
+          "old_directive_line": 1632,
+          "original_line": 1580,
+          "original_text": "video_pc_low_regen + cpos"
+        },
+        {
+          "old_directive_line": 2098,
+          "original_line": 2043,
+          "original_text": "video_pc_low_regen + ch_addr"
+        }
+      ],
+      "continuations": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_emm.c",
+      "before_sha256": "1c63a30338ea0f5e0094ee7acdea95714047af04272886dff6898ed0fbf292d2",
+      "after_sha256": "cac028dde68004e5e1a7e5df31df0f43f6ca5d8f718ea6b40f6f0bf6d0087849",
+      "anchors": [
+        {
+          "old_directive_line": 139,
+          "original_line": 103,
+          "original_text": "#define\tEM_loads("
+        },
+        {
+          "old_directive_line": 162,
+          "original_line": 104,
+          "original_text": "#define\tEM_stores("
+        },
+        {
+          "old_directive_line": 188,
+          "original_line": 107,
+          "original_text": "#define\tEM_moves("
+        }
+      ],
+      "continuations": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_event.c",
+      "before_sha256": "7da075bc99beb8991d4f79a5c3eb35b717699f6c0712581d7725ec71d177dbfd",
+      "after_sha256": "4445ff2d564fbe0b30fe65ff6408555017c33b48a4f30bf8426c82fdea861a9a",
+      "anchors": [
+        {
+          "old_directive_line": 1459,
+          "original_line": 1413,
+          "original_text": "sc.ScreenState != FULLSCREEN"
+        }
+      ],
+      "continuations": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "before_sha256": "7a7f43d4a57ef02953a628a6f82a23f305da8145e6a626b08b22c5b9c23e4d28",
+      "after_sha256": "983699b824ffb930968626b8a6155988310a3ffc79e7e3d4124094a81793eb4f",
+      "anchors": [
+        {
+          "old_directive_line": 211,
+          "original_line": 202,
+          "original_text": "sc.ScreenState == WINDOWED"
+        },
+        {
+          "old_directive_line": 262,
+          "original_line": 535,
+          "original_text": "sc.ScreenState == WINDOWED"
+        },
+        {
+          "old_directive_line": 318,
+          "original_line": 594,
+          "original_text": "sc.ScreenState == WINDOWED"
+        },
+        {
+          "old_directive_line": 940,
+          "original_line": 1986,
+          "original_text": "sc.ScreenState == WINDOWED"
+        },
+        {
+          "old_directive_line": 967,
+          "original_line": 2010,
+          "original_text": "sc.ScreenState == WINDOWED"
+        },
+        {
+          "old_directive_line": 984,
+          "original_line": 2024,
+          "original_text": "sc.ScreenState == WINDOWED"
+        },
+        {
+          "old_directive_line": 1102,
+          "original_line": 2410,
+          "original_text": "sc.ScreenState == WINDOWED"
+        }
+      ],
+      "continuations": [
+        {
+          "physical": 1105,
+          "old": 2431,
+          "new": 2411,
+          "kind": "original continuation"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_msscs.c",
+      "before_sha256": "5f5af06255f2d66d9bc44da5aef441d4d6f22173d5014f548fc26c25d46755ca",
+      "after_sha256": "a1f533073593cb5515943118def40fb1795e0a2fd132958bea5f78db3124645b",
+      "anchors": [
+        {
+          "old_directive_line": 145,
+          "original_line": 124,
+          "original_text": "fVirtualInt |=  MIPS_BIT_MASK;"
+        },
+        {
+          "old_directive_line": 299,
+          "original_line": 260,
+          "original_text": "HANDLE hFile, hFind;"
+        }
+      ],
+      "continuations": [
+        {
+          "physical": 302,
+          "old": 340,
+          "new": 313,
+          "kind": "original continuation"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuclass.c",
+      "before_sha256": "4b6b8ff9bf6b1dae173b7e86b9de2283fe317bbde4e3a93861ae9e1c5256bcd0",
+      "after_sha256": "753064068d565c89eb55be874d155d9536c05427f9670a03a91174f07b66cc9d",
+      "anchors": [
+        {
+          "old_directive_line": 276,
+          "original_line": 272,
+          "original_text": "dwProc32 = GetClassLong(hwnd, iOffset);"
+        },
+        {
+          "old_directive_line": 756,
+          "original_line": 730,
+          "original_text": "dwWndProc32Old = SetClassLong("
+        },
+        {
+          "old_directive_line": 786,
+          "original_line": 753,
+          "original_text": "dwWndProc32Old = SetClassLong("
+        }
+      ],
+      "continuations": [
+        {
+          "physical": 279,
+          "old": 279,
+          "new": 273,
+          "kind": "original continuation"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuwind.c",
+      "before_sha256": "be552dd9426c07ea19f390869b596307f70affcfd63015d206807882ccbdcf52",
+      "after_sha256": "51631ed69045e0e147c36bfa820d0184d5ed100883cc5211b43ebf92e04873db",
+      "anchors": [
+        {
+          "old_directive_line": 1708,
+          "original_line": 1704,
+          "original_text": "dwWndProc32Cur = GetWindowLong("
+        },
+        {
+          "old_directive_line": 2486,
+          "original_line": 2461,
+          "original_text": "dwWndProc32Old = SetWindowLong("
+        },
+        {
+          "old_directive_line": 2524,
+          "original_line": 2493,
+          "original_text": "dwWndProc32Old = SetWindowLong("
+        }
+      ],
+      "continuations": [
+        {
+          "physical": 1711,
+          "old": 1713,
+          "new": 1705,
+          "kind": "original continuation"
+        },
+        {
+          "physical": 2527,
+          "old": 2523,
+          "new": 2494,
+          "kind": "original continuation"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\netlib\\packstr.c",
+      "before_sha256": "85a6e322a46388a1cceb9403f4fdb20670be38d6e8c1482a135b75625d57f0fc",
+      "after_sha256": "8f793e4ef97e20cd9ed0e1ef35c39a94ef2745e4cf0122af182d56a61cf2baad",
+      "anchors": [
+        {
+          "old_directive_line": 60,
+          "original_line": 60,
+          "original_text": "DWORD"
+        },
+        {
+          "old_directive_line": 194,
+          "original_line": 286,
+          "original_text": "BOOL"
+        },
+        {
+          "old_directive_line": 200,
+          "original_line": 409,
+          "original_text": "NET_API_STATUS"
+        }
+      ],
+      "continuations": [
+        {
+          "physical": 197,
+          "old": 411,
+          "new": 408,
+          "kind": "original continuation"
+        },
+        {
+          "physical": 203,
+          "old": 675,
+          "new": 670,
+          "kind": "original continuation"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgbegin.c",
+      "before_sha256": "1faec32a09f50d1ad97d71bf57872c75a419910c72aadc017ad132fe70d0d0db",
+      "after_sha256": "9607437bf459322d732205bd4db2f991e15c7f33fc6e9cad3356156f3810420c",
+      "anchors": [
+        {
+          "old_directive_line": 628,
+          "original_line": 600,
+          "original_text": "PDLG(pwnd)->lpfnDlg = lpfnDialog;"
+        },
+        {
+          "old_directive_line": 638,
+          "original_line": 607,
+          "original_text": "if (fSCDLGFlags & SCDLG_ANSI)"
+        }
+      ],
+      "continuations": [
+        {
+          "physical": 641,
+          "old": 640,
+          "new": 609,
+          "kind": "original continuation"
+        }
+      ]
+    }
+  ]
+}

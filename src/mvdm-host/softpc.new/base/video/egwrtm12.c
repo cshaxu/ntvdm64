@@ -180,9 +180,11 @@ IMPORT VOID	_ch2_mode1_chn_word_move_glue();
 WRT_POINTERS mode1_handlers;
 WRT_POINTERS mode2_handlers;
 #else
+#line 164
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
 #else
+#line 205
 #error Excluded unsupported non-CPU40 writer-table profile
 #endif
 #endif /* A_VID */
@@ -350,6 +352,7 @@ ega_mode1_chn_w_write IFN2(ULONG, value, ULONG, offset )
  * helpers carry native pointers through legacy ULONG fields and are not
  * installed by the CPU_40_STYLE selection path. */
 #ifndef CPU_40_STYLE
+#line 414
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
 
@@ -729,6 +732,7 @@ ega_mode2_chn_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 
 /* DIVERGENCE MVDM-HOST-DIV-143: the CPU_40 EVID path owns string moves. */
 #ifndef CPU_40_STYLE
+#line 1028
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
 

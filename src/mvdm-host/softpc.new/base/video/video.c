@@ -1630,6 +1630,7 @@ GLOBAL void vd_write_char IFN0()
 #endif	/* EGG */
 				(*bios_ch2_byte_wrt_fn)( getAL(), cpos );
 #else
+#line 1580
 #error DIVERGENCE MVDM-HOST-DIV-581: standalone SAS excludes direct video memory writes
 #endif
 #else
@@ -2096,6 +2097,7 @@ GLOBAL void vd_write_teletype IFN0()
 #endif	/* EGG */
 				(*bios_ch2_byte_wrt_fn)( ch, ch_addr );
 #else
+#line 2043
 #error DIVERGENCE MVDM-HOST-DIV-581: standalone SAS excludes direct video memory writes
 #endif
 #else

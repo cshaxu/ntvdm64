@@ -1457,6 +1457,7 @@ BOOL CntrlHandler(ULONG CtrlType)
 	    }
 	else {
 #ifdef X86GFX
+#line 1413
 #error Unsupported excluded original configuration
 #endif
 #line 1402

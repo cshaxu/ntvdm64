@@ -1,5 +1,10 @@
 # non-mvdm original OpenNT sources
 
+OPENNT-HOST-176: anchor excluded local profiles in `packstr.c` and
+`dlgbegin.c` to their original statements and correct their original
+continuations. Only `#line` directives change. Evidence:
+`../../artifacts/mvdm-audit/s13-r1332-line-batch.json`.
+
 OPENNT-HOST-175: correct original diagnostic anchors in five SDK and USER
 sources after matching original statements and context; only `#line` values
 change. Evidence: `../../artifacts/mvdm-audit/s13-r1330-line-batch.json`.

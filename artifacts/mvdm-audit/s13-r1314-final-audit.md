@@ -95,6 +95,16 @@ images are identical and NTVDM/WOW32 differ only in PE timestamps
 ([comparison](s13-r1319-build-image-compare.json)); runtime tests were not
 repeated under owner instruction.
 
+The [r1332 excluded-anchor batch](s13-r1332-line-batch.json) maps 30
+additional local-profile guards to original statements, branch entries or
+the corresponding original `BACK_M` macro, and corrects eight continuation
+positions. This leaves 25 ambiguous excluded anchors across five files;
+other condition and line audits remain open. Cached x86 root, NTVDM worker,
+WOW32 and x64 builds passed; the complete package was verified at both
+destinations. Eight images are identical and NTVDM/WOW32 differ only in PE
+timestamps ([comparison](s13-r1332-build-image-compare.json)); runtime tests
+were not repeated under owner instruction.
+
 The [r1331 excluded-anchor batch](s13-r1331-line-batch.json) records fourteen
 original statement or branch-entry locations for excluded local-profile
 guards in ten files. The remaining ambiguous excluded-anchor count is 55;
