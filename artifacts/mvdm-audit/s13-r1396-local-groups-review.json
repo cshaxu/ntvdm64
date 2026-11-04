@@ -1,0 +1,256 @@
+{
+  "method": "Compare reachable original trees and retained direct diffs; local groups retain recorded states and complete bodies are recorded. Matching original lines use selected source projection.",
+  "limits": "Source-derived projection and historical hit records, not new compiler or runtime tests; registration does not establish behavior equivalence.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
+      "current_sha256": "6024b359037fb812ddde5c63783fc534ea0b937b35d56ac06e872a89d0d45bd3",
+      "original_sha256": "d0ea64ba445b8a7c8cb4b11963cece808793b0595183f8be7f115c060eb1f0d9",
+      "matched_lines": 426,
+      "groups": {
+        "excluded": 26,
+        "original_groups": 29,
+        "selected": 10,
+        "local_groups": 1
+      },
+      "local_groups": [
+        {
+          "line": 498,
+          "signature": [
+            [
+              "ifdef",
+              "V7VGA"
+            ]
+          ]
+        }
+      ],
+      "direct_diffs": [
+        {
+          "branch_line": 96,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -188,3 +188,5 @@",
+            " */",
+            "-if( get_chain4_mode() )",
+            "+/* Packed V7 scanout keeps byte units when CPU chain4 is disabled. */",
+            "+if( get_chain4_mode()",
+            "+)",
+            " {",
+            "@@ -193,3 +195,3 @@",
+            " else",
+            "-if( get_memory_chained() )",
+            "+if( get_memory_chained() && !get_256_colour_mode() )",
+            " {",
+            "@@ -215,3 +217,3 @@",
+            " else",
+            "-if ( get_memory_chained() )",
+            "+if ( get_memory_chained() && !get_256_colour_mode() )",
+            " {"
+          ]
+        },
+        {
+          "branch_line": 471,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -1 +1 @@",
+            "-if( !( get_seq_chain4_mode() || get_seq_chain_mode() ))",
+            "+|| (get_256_colour_mode() && get_seq_chain4_mode())"
+          ]
+        }
+      ],
+      "issues": [],
+      "registered_differences": [
+        "MVDM-HOST-DIV-841"
+      ],
+      "local_group_bodies": [
+        {
+          "line": 498,
+          "arms": [
+            {
+              "directive": "ifdef",
+              "expression": "V7VGA",
+              "body": [
+                "\tif( !( get_seq_chain4_mode() || get_seq_chain_mode() ))"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "current_sha256": "394b6fdc6f9268345f3fc204f15c73dbc81a846d4d6b136fbde975d9e13d3c87",
+      "original_sha256": "96ee0fb677da9f35811f9dc1715d583474ce72bba9fa91f5eb2d5f6ab242b0c3",
+      "matched_lines": 1276,
+      "groups": {
+        "excluded": 9,
+        "original_groups": 12,
+        "selected": 4,
+        "local_groups": 2
+      },
+      "local_groups": [
+        {
+          "line": 145,
+          "signature": [
+            [
+              "ifdef",
+              "CPU_40_STYLE"
+            ],
+            [
+              "else",
+              ""
+            ]
+          ]
+        },
+        {
+          "line": 298,
+          "signature": [
+            [
+              "if",
+              "defined(MVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION)"
+            ],
+            [
+              "else",
+              ""
+            ]
+          ]
+        }
+      ],
+      "direct_diffs": [
+        {
+          "branch_line": 144,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -1 +0,0 @@",
+            "-fVirtualInt |=  MIPS_BIT_MASK;"
+          ]
+        },
+        {
+          "branch_line": 313,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -26,3 +26,4 @@",
+            " {",
+            "-char config_sys_pathname[MAX_PATH];",
+            "+/* DIVERGENCE(MVDM-HOST-DIV-278): match GetPIFConfigFiles' output contract. */",
+            "+char config_sys_pathname[MAX_PATH+12];",
+            " HANDLE  handle;"
+          ]
+        }
+      ],
+      "issues": [],
+      "registered_differences": [
+        "MVDM-HOST-DIV-039",
+        "MVDM-HOST-DIV-134",
+        "MVDM-HOST-DIV-278"
+      ],
+      "local_group_bodies": [
+        {
+          "line": 145,
+          "arms": [
+            {
+              "directive": "ifdef",
+              "expression": "CPU_40_STYLE",
+              "body": [
+                "    fVirtualInt |= MIPS_BIT_MASK;"
+              ]
+            },
+            {
+              "directive": "else",
+              "expression": "",
+              "body": [
+                "#line 124",
+                "#error Excluded unsupported non-CPU40 virtual interrupt state"
+              ]
+            }
+          ]
+        },
+        {
+          "line": 298,
+          "arms": [
+            {
+              "directive": "if",
+              "expression": "defined(MVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION)",
+              "body": [
+                "   /* DIVERGENCE(MVDM-HOST-DIV-134): preserve the original first-session",
+                "    * call site and void completion contract, but do not create Brief's",
+                "    * installation-only C:\\\\MSDOS.SYS/C:\\\\IO.SYS placeholders on an admitted",
+                "    * real host drive. The selected adapter records this explicit product",
+                "    * disposition; the original source body remains below as mirror evidence. */",
+                "   mvdm_softpc_prepare_system_file_compatibility();"
+              ]
+            },
+            {
+              "directive": "else",
+              "expression": "",
+              "body": [
+                "#line 260",
+                "#error Unsupported excluded original configuration"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "current_sha256": "c345a04590804d528a75f7a300c09cd2dfe4178ba5a86adc5bf36fce4810a631",
+      "original_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47",
+      "matched_lines": 310,
+      "groups": {
+        "excluded": 9,
+        "original_groups": 11,
+        "selected": 3,
+        "local_groups": 1
+      },
+      "local_groups": [
+        {
+          "line": 157,
+          "signature": [
+            [
+              "ifdef",
+              "X86GFX"
+            ]
+          ]
+        }
+      ],
+      "direct_diffs": [
+        {
+          "branch_line": 156,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -1,4 +1 @@",
+            "-if (sc.ScreenState == FULLSCREEN)\t// initialised in ConsoleInit()",
+            "-IDLE_ctl(FALSE);",
+            "-else",
+            " IDLE_ctl(TRUE);\t\t// can't idle detect fullscreen"
+          ]
+        }
+      ],
+      "issues": [],
+      "registered_differences": [
+        "MVDM-HOST-DIV-703"
+      ],
+      "local_group_bodies": [
+        {
+          "line": 157,
+          "arms": [
+            {
+              "directive": "ifdef",
+              "expression": "X86GFX",
+              "body": [
+                "#line 141",
+                "#error X86GFX fullscreen idle path is not supported"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
