@@ -9,14 +9,14 @@ if (!$output.StartsWith($buildPrefix, [StringComparison]::OrdinalIgnoreCase)) {
 if ($env:VSCMD_ARG_TGT_ARCH -ne 'x86') { throw 'Run from the MSVC x86 developer environment' }
 $owner = Join-Path $repo 'src/ntcon-exe'
 $manifest = Get-Content (Join-Path $owner 'nxvm-import.json') -Raw | ConvertFrom-Json
-if ((Get-FileHash (Join-Path $owner 'lib/LICENSE.nxvm') -Algorithm SHA256).Hash -ne $manifest.licenseSha256) {
+if ((Get-FileHash (Join-Path $repo 'src/lib/LICENSE.nxvm') -Algorithm SHA256).Hash -ne $manifest.licenseSha256) {
     throw 'Imported license differs from pinned nxvm'
 }
 $sources = @()
 foreach ($row in $manifest.files) {
     if ($row.path -notmatch '^lib/(types|base|kvm-base|kvm-window)/[A-Za-z0-9_./-]+$' -or
         $row.path.Contains('..')) { throw "Invalid imported path: $($row.path)" }
-    $file = Join-Path $owner $row.path
+    $file = Join-Path (Join-Path $repo 'src') $row.path
     if ((Get-FileHash -LiteralPath $file -Algorithm SHA256).Hash -ne $row.sha256) {
         throw "Imported file differs from pinned nxvm: $($row.path)"
     }
@@ -46,9 +46,9 @@ if ($LASTEXITCODE) { throw 'Window library assertions failed' }
 Write-Output 'Retired ConPTY controller fixture is not built here; actual Window input/return is gated by Verify-CommandExitStatus Window17.'
 $keyboardObject = Join-Path $output 'window-keyboard.obj'
 $keyboardTestObject = Join-Path $output 'keyboard-test.obj'
-& cl.exe /nologo /c /MT /std:c11 /W4 /D_WIN32_WINNT=0x0601 "/I$owner" "/Fo$keyboardObject" (Join-Path $owner 'window_keyboard.c')
+& cl.exe /nologo /c /MT /std:c11 /W4 /D_WIN32_WINNT=0x0601 "/I$owner" "/I$repo/src" "/Fo$keyboardObject" (Join-Path $owner 'window_keyboard.c')
 if ($LASTEXITCODE) { throw 'Window keyboard compilation failed' }
-& cl.exe /nologo /c /MT /std:c11 /W4 /D_WIN32_WINNT=0x0601 "/I$owner" "/Fo$keyboardTestObject" (Join-Path $PSScriptRoot 'frontend_window_keyboard_test.c')
+& cl.exe /nologo /c /MT /std:c11 /W4 /D_WIN32_WINNT=0x0601 "/I$owner" "/I$repo/src" "/Fo$keyboardTestObject" (Join-Path $PSScriptRoot 'frontend_window_keyboard_test.c')
 if ($LASTEXITCODE) { throw 'Window keyboard fixture compilation failed' }
 $keyboardExe = Join-Path $output 'frontend-window-keyboard-test.exe'
 & link.exe /nologo /machine:x86 "/out:$keyboardExe" $keyboardObject $keyboardTestObject user32.lib

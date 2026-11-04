@@ -1,9 +1,9 @@
 {
   "source": "softpc (shared nxvm four-component library)",
   "revision": "7d3b711d0113992984cb7eeed613097ebf750168",
-  "license": "MIT; Copyright (c) 2026 Neko; see lib/LICENSE.nxvm",
+  "license": "MIT; Copyright (c) 2026 Neko; see ../lib/LICENSE.nxvm",
   "licenseSha256": "BF37952D329B48CEE37B42D90B96D30DC049940902E42D69338A19CF72003543",
-  "destination": "src/ntcon-exe",
+  "destination": "src",
   "profile": "MSVC Win32/x64 /MT /std:c11 production; x86/x64 library verification; frontend-only",
   "files": [
     {

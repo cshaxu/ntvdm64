@@ -34,6 +34,15 @@ in common. Fresh local package e05f16a8-e865-40e1-8a6e-d86bc5d25809 passed
 all 12 selected Control gates and ten release hash checks. Full was not run;
 the optional DOS4GW/NESticle fixture was unavailable. The original guest
 long-PATH issue remains. [S3 evidence](../etc/evidence/m0-t474-s3-generic-libraries.md).
+Owner adds an S3 P to relocate the complete NTCON lib tree to src/lib,
+including its pinned SoftPC and terminal assets. Preserve source bytes and
+import provenance; update all consumers, build graphs and tests, then build,
+test, publish locally and commit. The ten-image local package
+e719bbee-ba87-42c4-8438-80f0d62fdd0a passed all 12 selected Control gates;
+Full was not run, and the optional DOS4GW/NESticle fixture was absent.
+[S3 P evidence](../etc/evidence/m0-t474-s3-generic-libraries.md).
+Temporary evidence: build/t474-s3-p2.
+
 ## Active Packet
 
 | Field | Record |
@@ -43,7 +52,7 @@ long-PATH issue remains. [S3 evidence](../etc/evidence/m0-t474-s3-generic-librar
 | Objective | Place NTVDM64-independent low-level RPC and I/O mechanisms in lib/rpc and lib/io; product-specific protocols remain in common. |
 | Non-goals | Alter wire behavior, authentication policy, resource lifetime, guest media, or main worktree. |
 | Reference Baseline | S2 local release e34caccf-13d8-4999-9be2-183ba247b6ee; [S2 evidence](../etc/evidence/m0-t474-s2-basesrv-shared-ownership.md). |
-| Files And ABI Surface | Shared RPC and pipe implementations, new src/lib submodules, consumers, production build graphs, tests and authority documents. |
+| Files And ABI Surface | Shared RPC and pipe implementations, complete NTCON lib tree and import assets, src/lib submodules, consumers, production build graphs, tests and authority documents. |
 | Applicable Rules | Owner directs lib extraction; original source provenance, current RPC/pipe contracts, behavior and lifecycle remain binding. |
 | Verification | Audit all common mechanisms and production consumers, verify dependency direction, build affected products, focused success/failure/lifecycle tests, local package, Control, governance and relative links. |
 | Expected Markers | Generic lib has no NTVDM64 protocol or component dependency; shared business protocol remains common; behavior unchanged. |

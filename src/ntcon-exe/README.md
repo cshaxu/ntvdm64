@@ -56,12 +56,12 @@ permission to replace the published runtime package.
 base, kvm-base and kvm-window from SoftPC revision
 0d9f1803ee04bd89bd6150306912a3e8674d0a83, admitted in T448 S8. All52 selected
 files are byte-exact, including the upstream removal of destroy deadlines.
-The MIT notice remains unchanged. Every normal destroy return consumes the
+The shared imported library lives in `src/lib`; the MIT notice remains unchanged. Every normal destroy return consumes the
 object, including post-join cleanup errors. Failure to establish thread
 quiescence takes the library's immediate process-fatal path; there is no
 application fatal callback or recoverable half-object. Ordinary errors still
-flow through existing NTCON/NTSRV failure coordination. Only frontend presentation may consume this
-library; launcher clients and worker objects must not acquire a link edge.
+flow through existing NTCON/NTSRV failure coordination. The current build selects this library for frontend presentation; launcher
+clients and worker objects do not acquire a link edge.
 The upstream repository is not a build or runtime dependency. Its test library,
 Console broker, application and Linux implementations are not imported.
 
