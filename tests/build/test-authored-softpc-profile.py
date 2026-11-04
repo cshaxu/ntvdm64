@@ -46,7 +46,7 @@ def main():
                 leaked.append("OPENNT_ADAPTER_NT_ALERT_THREAD")
             if leaked:
                 failures.append(f"{architecture}/{tree}: {source}: {', '.join(leaked)}")
-            if relative and relative not in scanned_sources and "/detours/" not in relative:
+            if relative and relative not in scanned_sources:
                 scanned_sources.add(relative)
                 source_text = (ROOT / "src" / relative).read_text(encoding="utf-8", errors="replace")
                 for line_number, line in enumerate(source_text.splitlines(), 1):

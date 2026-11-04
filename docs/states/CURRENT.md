@@ -80,6 +80,12 @@ acknowledgment and guest completion passed; four-process call/error/lifetime
 and protection-failure rollback tests passed. Product build and Control passed;
 local package `0abcb77d-13e9-43f6-8049-37fb5636fa3f` has ten verified hashes.
 The late backend does not exclude new-thread races or implement removal.
+P10 removes the unreferenced vendored Detours sources and the profile-checker
+exception. Product builds, diagnostic rebuilds, product link-map checks and
+Control passed; local package `1347cbbf-7cc8-4db4-b3d7-4a68910c8575` has ten
+verified hashes. An adapted optional SoftPC profile audit reported existing
+x86 flags on three lib-win32 sources; see P10 evidence. Historical C++ files
+remain open in S5.
 The adjacent library's same-width payload-only mechanism, non-Detours payload
 format, helper ordinal and startup-only transaction require compatibility proof;
 no untested semantic equivalence is assumed. Prior [S4 evidence](../etc/evidence/m0-t475-s4-nthook-dependency-cleanup.md),

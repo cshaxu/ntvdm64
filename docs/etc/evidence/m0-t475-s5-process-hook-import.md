@@ -326,3 +326,36 @@ Control passed (`p9/control.process`); ten local release image hashes and the
 license match package `0abcb77d-13e9-43f6-8049-37fb5636fa3f`. Full and
 DOS4GW/NESticle were not run. Vendored Detours and historical C++ fixtures
 remain open in S5.
+
+## P10 — retire vendored Detours
+
+The unreferenced Detours source, header and license were removed from the
+working tree, along with the authored-profile checker's Detours exclusion.
+The complete historical source and license remain retrievable from this
+repository's commit `bd891f96262e5553765be659e616bc33a93b66d9`, under
+`src/lib-win32/process-hook/detours/`; the license blob is
+`e6a4c563056daedce20576a96a4d77b02a7dc8b6`. Current product and diagnostic
+build sources contain no Detours dependency; the product-map verifier retains
+an intentional negative-control string.
+
+After removal, the NTCON C observer, both startup traces and both restricted
+write guards built and passed their focused tests (`p10/diagnostics.process`,
+exit 0); the NTVDM guard diagnostic also relinked without Detours
+(`p10/guard-relink.process`, exit 0). Five current product link maps passed
+required-provider and Detours-negative checks (`p10/product-maps.process`,
+exit 0). Product builds and focused checks passed (`p10/build.process`);
+staging verified 63 immutable guest files and 274 ordinal exports
+(`p10/stage.process`); Control passed (`p10/control.process`). Ten release
+image hashes and the license match package
+`1347cbbf-7cc8-4db4-b3d7-4a68910c8575`.
+
+An additional local adaptation of the authored SoftPC profile checker to the
+existing combined build root failed (`p10/profile-final.process`, exit 1). Its graph
+shows the SoftPC flags on `lib-win32/rpc/local_binding.c`,
+`lib-win32/io/native_path.c`, and `lib-win32/crt-compat/crt_compat.c`; it also
+flags the generated configuration path and the deliberate WOW thunk boundary
+fixture, which require separate classification for this build layout. The
+standard check's default release-cache roots are absent in this worktree; this
+adapted result is not a passing gate and the pre-existing flag issue is not
+caused or resolved by the Detours removal. Full and DOS4GW/NESticle were not
+run. Historical C++ fixtures and audit evidence remain open in S5.
