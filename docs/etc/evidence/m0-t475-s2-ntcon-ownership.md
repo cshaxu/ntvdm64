@@ -1,5 +1,8 @@
 # T475 S2 — NTCON implementation ownership
 
+The owner subsequently expanded S2 to all product components; see the
+[component dependency inventory](m0-t475-s2-component-dependency-inventory.md).
+
 ## Admission and initial inventory
 
 The owner closes T475 S1 locally and directs the next startup-order component

@@ -1,5 +1,7 @@
 # Supporting Material
 
+[T475 S2 component dependency inventory](evidence/m0-t475-s2-component-dependency-inventory.md) records cross-component production edges, actual use and dispositions.
+
 [T475 S2 NTCON ownership](evidence/m0-t475-s2-ntcon-ownership.md) records the admitted review and initial graph inventory.
 
 [T475 S1 NXVM and Win32 RPC](evidence/m0-t475-s1-win32-rpc.md) records the library split and verification.
