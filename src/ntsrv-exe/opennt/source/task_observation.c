@@ -2,6 +2,7 @@
  * Console membership, Job objects or process termination belongs here. */
 #include <service_internal.h>
 #include "common/native_image.h"
+#include "lib-win32/process-observation/observation.h"
 #include <wchar.h>
 
 typedef struct SERVICE_OBSERVATION {
@@ -47,7 +48,7 @@ static VOID CALLBACK observation_exit(void *context,BOOLEAN timed_out)
 static void observation_delete(SERVICE_OBSERVATION *node)
 {
     RemoveEntryList(&node->link);--node->service->observation_count;
-    if(node->wait && !UnregisterWaitEx(node->wait,INVALID_HANDLE_VALUE))
+    if(node->wait && !win32_process_observation_drain(node->wait))
         RaiseFailFastException(NULL,NULL,0);
     if(node->process)CloseHandle(node->process);
     HeapFree(GetProcessHeap(),0,node);
@@ -90,7 +91,7 @@ static DWORD observation_add(OPENNT_BASE_SERVICE *service,DWORD generation,
     DWORD direct_request,HANDLE process,uint64_t parent,DWORD flags,SERVICE_OBSERVATION **out)
 {
     SERVICE_OBSERVATION *node;
-    DWORD machine=0,subsystem=0,chars=260,error;
+    DWORD machine=0,subsystem=0,error;
     LIST_ENTRY *link;uint32_t per_worker=0;
     *out=NULL;
     if(service->observation_count>=SERVICE_OBSERVATION_MAX || service->next_observation==UINT32_MAX)
@@ -100,19 +101,19 @@ static DWORD observation_add(OPENNT_BASE_SERVICE *service,DWORD generation,
     if(per_worker==TASK_TRACE_MAX_NODES)return ERROR_NOT_ENOUGH_QUOTA;
     node=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*node));
     if(!node)return ERROR_NOT_ENOUGH_MEMORY;
-    if(!DuplicateHandle(GetCurrentProcess(),process,GetCurrentProcess(),&node->process,
-        SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION,FALSE,0)) {
+    if(!win32_process_observation_retain(process,&node->process)) {
         error=GetLastError();HeapFree(GetProcessHeap(),0,node);return error;
     }
     node->service=service;node->generation=generation;node->direct_request=direct_request;
     node->row.node=(UINT64_C(1)<<32)|++service->next_observation;
     node->row.entered_order=service->next_observation;
     {
-        FILETIME created,exited,kernel,user;
-        if(GetProcessTimes(node->process,&created,&exited,&kernel,&user))
-            node->row.created_filetime=((uint64_t)created.dwHighDateTime<<32)|created.dwLowDateTime;
+        FILETIME created; DWORD pid;
+        win32_process_observation_identity(node->process,&pid,&created);
+        node->row.created_filetime=((uint64_t)created.dwHighDateTime<<32)|created.dwLowDateTime;
+        node->row.process_id=pid;
     }
-    node->row.parent=parent;node->row.process_id=GetProcessId(node->process);
+    node->row.parent=parent;
     node->row.task=direct_request;
     node->row.relation=direct_request ? TASK_TRACE_DIRECT : TASK_TRACE_OBSERVED;
     node->row.source=direct_request ? TASK_TRACE_SOURCE_RECORD : TASK_TRACE_SOURCE_HOOK;
@@ -122,13 +123,12 @@ static DWORD observation_add(OPENNT_BASE_SERVICE *service,DWORD generation,
     error=common_native_process_image(node->process,&machine,&subsystem);
     if(!error)node->row.kind=machine==IMAGE_FILE_MACHINE_AMD64 ? MANAGEMENT_KIND_WIN64 : MANAGEMENT_KIND_WIN32;
     else node->row.state=TASK_TRACE_UNCERTAIN; /* Missing image is not launch failure. */
-    if(!QueryFullProcessImageNameW(node->process,0,node->row.image,&chars))
+    if(!win32_process_observation_image(node->process,node->row.image,260))
         lstrcpyW(node->row.image,L"<UNKNOWN>");
     /* Insert CREATE under the lock before a signalled-process callback may
      * run. Failed registration has no callback and rolls back only this fact. */
     InsertTailList(&service->observations,&node->link);++service->observation_count;
-    if(!RegisterWaitForSingleObject(&node->wait,node->process,observation_exit,service,
-        INFINITE,WT_EXECUTEONLYONCE)) {
+    if(!win32_process_observation_watch(&node->wait,node->process,observation_exit,service)) {
         error=GetLastError();RemoveEntryList(&node->link);--service->observation_count;
         CloseHandle(node->process);HeapFree(GetProcessHeap(),0,node);return error;
     }
@@ -397,7 +397,7 @@ void service_observation_stop(OPENNT_BASE_SERVICE *service)
     while(!IsListEmpty(&service->observations)) {
         LIST_ENTRY *entry=RemoveHeadList(&service->observations);
         SERVICE_OBSERVATION *node=CONTAINING_RECORD(entry,SERVICE_OBSERVATION,link);
-        if(node->wait && !UnregisterWaitEx(node->wait,INVALID_HANDLE_VALUE))
+        if(node->wait && !win32_process_observation_drain(node->wait))
             RaiseFailFastException(NULL,NULL,0);
         if(node->process)CloseHandle(node->process);
         HeapFree(GetProcessHeap(),0,node);

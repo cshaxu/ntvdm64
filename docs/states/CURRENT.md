@@ -92,13 +92,25 @@ Control handoff observer failure, focused pass and full repeat are recorded in
 the optional DOS4GW/NESticle fixture was absent. Temporary evidence:
 build/t475-hook-p.
 
+Owner admits a further T475 S1 P: rename `lib-win32/process` to
+`process-attributes` and extract generic retained-process information and
+exit-watch registration/drain into `process-observation`. Preserve NTSRV
+task identity, admission, callback ordering, error and cleanup policies.
+Build, test, publish assets/release and commit locally; no push. Temporary
+evidence: build/t475-observation-p. The 16 lifecycle and three controlled
+failure checks, x86/x64 native and DOS production observation fixtures, 12
+selected Control gates and ten release hashes passed for local package
+9e98af44-2d1d-4862-8795-5cabfff112c3. The initial invalid-wait test failure is
+recorded in [S1 evidence](../etc/evidence/m0-t475-s1-win32-rpc.md). Full was
+not run; the optional DOS4GW/NESticle fixture was absent.
+
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T475 S1, Ordinary Mode. |
 | Admission And Approval | Owner requests a new T to separate NXVM and project Win32 libraries, starting with RPC. |
-| Objective | Rename the NXVM library owner to src/lib-nxvm, introduce src/lib-win32, and place generic RPC, process attributes and shared handle mechanisms and generic process-hook installation there. |
+| Objective | Rename the NXVM library owner to src/lib-nxvm, introduce src/lib-win32, and place generic RPC, process attributes and shared handle mechanisms, process-hook and process-observation there. |
 | Non-goals | Change RPC behavior, guest media, main worktree, or alter process admission, resume, hook propagation or rollback semantics. |
 | Reference Baseline | T474 S3 local release 9f45db63-8a83-44c4-84b7-f4a45fd9297a; [evidence](../etc/evidence/m0-t474-s3-generic-libraries.md). |
 | Files And ABI Surface | Library trees, include paths, imported manifest and Git attributes, build graphs, tests and architecture authorities. |

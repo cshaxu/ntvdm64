@@ -5,7 +5,7 @@ transfers, Console process-list sampling and final native path resolution.
 These libraries do not depend on common, worker-base or product components.
 Protocol and authorization policy remain with their respective owners.
 
-`process/` owns Win32 process attribute-list allocation and cleanup; callers
+`process-attributes/` owns Win32 process attribute-list allocation and cleanup; callers
 retain attribute values and all process creation, admission and lifetime policy.
 
 `handle/` provides explicit-process same-access duplication and best-effort
@@ -15,3 +15,7 @@ remain outside the library.
 `process-hook/` owns suspended-child payload transfer and same-/cross-width
 Detours installation; the caller retains process ownership and rollback.
 The pinned Detours source and license are carried under this subcomponent.
+
+`process-observation/` retains an observation handle, reads process identity
+and image information, and registers/drains a one-shot exit wait; callbacks,
+process ownership, task identity and decisions remain caller-owned.

@@ -24,7 +24,7 @@ static DWORD fake_error(void) { return error_code; }
 #define HeapAlloc fake_alloc
 #define HeapFree fake_free
 #define GetLastError fake_error
-#include "lib-win32/process/attributes.c"
+#include "lib-win32/process-attributes/attributes.c"
 #define CHECK(x) do{if(!(x)){fprintf(stderr,"process attributes failed line %d\n",__LINE__);return 1;}++checks;}while(0)
 int main(void)
 {
