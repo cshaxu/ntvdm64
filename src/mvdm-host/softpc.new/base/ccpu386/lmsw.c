@@ -24,6 +24,7 @@ LMSW CPU functions.
 #include	<c_reg.h>
 #include <lmsw.h>
 #include "mvdm_softpc_termination.h"
+#line 26
 
 
 /*
@@ -55,6 +56,7 @@ IFN1(
    mvdm_softpc_report_setup_mode_switch("lmsw-before", op1,
        GET_CR(CR_STAT));
 
+#line 51
    /* retain bits which can not be cleared */
    temp = GET_CR(CR_STAT) & no_clear;
 
@@ -63,4 +65,5 @@ IFN1(
 
    mvdm_softpc_report_setup_mode_switch("lmsw-after", op1,
        GET_CR(CR_STAT));
+#line 56
    }

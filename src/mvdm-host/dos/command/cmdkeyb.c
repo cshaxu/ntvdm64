@@ -16,6 +16,7 @@
 #include "cmdkeyb.h"
 #include "ntvdm-exe/softpc/include/mvdm_shadow_registry.h"
 #include "mvdm_softpc_firmware.h"
+#line 17
 
 CHAR szPrev[5] = "US";
 INT  iPrevCP = 437;
@@ -165,6 +166,7 @@ VOID cmdGetKbdLayout( VOID )
     }
 
     iSaveSize = iSize = NtvdmGetSystemDirectoryA(szDir, MAX_PATH);
+#line 166
 
     if (iSize > MAX_PATH) {
         goto NoInstallkb16;

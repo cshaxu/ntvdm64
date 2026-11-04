@@ -15,6 +15,7 @@ POPF CPU Functions.
 #include <host_def.h>
 /* DIVERGENCE(MVDM-HOST-DIV-076): preserve the native C varargs ABI. */
 #include <stdio.h>
+#line 16
 #include <xt.h>
 #include CpuH
 #include <c_main.h>

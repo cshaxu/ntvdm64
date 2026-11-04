@@ -47,6 +47,7 @@ BYTE	    FirstAccess;		// 0xFF if this DPB is first accessed
  * guest far value.  NT4's x86 pointer spelling happened to occupy the same
  * four bytes; retain the packet's fixed guest layout on both host widths. */
 DWORD       Next;			// next DPB (16:16 guest far value)
+#line 47
 WORD	    FreeCluster;		// cluster # of the last allocated
 WORD	    FreeClusters;		// number of free clusters, 0xFFFF
 					// if unknown

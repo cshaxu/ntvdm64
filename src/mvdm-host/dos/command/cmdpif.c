@@ -18,6 +18,7 @@
 #include <oemuni.h>
 #include "nt_pif.h"
 #include "ntvdm-exe/command/include/mvdm_command_guest_state.h"
+#line 20
 
 VOID cmdCheckForPIF (PVDMINFO pvi)
 {
@@ -265,6 +266,7 @@ CHAR	AppFullPathName[MAX_PATH + 1];
 	 * a session lease instead of the historical retained host alias. */
 	if (!mvdm_command_guest_state_write_is_dos_binary(UINT8_C(0)))
 	    pvi->ErrorCode = ERROR_INVALID_ADDRESS;
+#line 264
 
     if (pfdata.WinTitle)
 	SetConsoleTitle(pfdata.WinTitle);

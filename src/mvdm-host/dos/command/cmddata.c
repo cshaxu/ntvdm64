@@ -16,6 +16,7 @@ BOOL	 IsRepeatCall = FALSE;
 BOOL	 IsFirstWOWCheckBinary = TRUE;
 BOOL	 IsFirstVDMInSystem = FALSE;
 BOOL	 SaveWorldCreated;
+#line 21
 BOOL	 fBlock = FALSE;
 PCHAR	 pCommand32;
 PCHAR	 pEnv32;
@@ -42,6 +43,7 @@ CHAR	 *lpszzInitEnvironment = NULL;
 WORD	 cchInitEnvironment = 0;
 CHAR	 *lpszzCurrentDirectories = NULL;
 DWORD	 cchCurrentDirectories = 0;
+#line 48
 CHAR	 *lpszzcmdEnv16 = NULL;
 CHAR	 *lpszzVDMEnv32 = NULL;
 DWORD	 cchVDMEnv32;

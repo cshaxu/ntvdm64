@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-636: restore original line positions after local edits in ten
+condition-free DOS, CCPU, host and WOW source files. Only `#line` directives
+were added; matching original blocks and source identities are recorded in
+`../../artifacts/mvdm-audit/s13-r1317-line-batch.json`.
+
 MVDM-HOST-DIV-635: reject the unobserved i386 kernel-VDM memory-size arm in
 `host/src/config.c` and the non-x86 host-access alternative in `inc/mvdm.h`;
 restore original diagnostic line anchors in `c_main.c`, `mouse_io.c`,

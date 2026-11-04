@@ -68,3 +68,13 @@ failure. Nor does the absence of a unique-line mismatch certify every line.
 The per-file checklist includes these two counts. The remaining files with
 conditions require checks using the actual selected preprocessing contexts;
 this zero-branch scan does not cover them.
+
+The first [ten-file line batch](s13-r1317-line-batch.json) subsequently
+restores original positions for every unchanged line block in those files;
+all non-`#line` bytes are identical to the previous source. This reduces the
+58 flagged files to 48. Local additions have no original line equivalent.
+The cached x86 root, NTVDM worker, WOW32 and x64 builds passed; the ten-image
+package was published and verified at both destinations. Eight images are
+identical to the previous package and NTVDM and WOW32 differ only in PE
+timestamps ([comparison](s13-r1317-build-image-compare.json)); per owner
+instruction, this does not require a repeated runtime test.

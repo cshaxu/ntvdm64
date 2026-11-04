@@ -22,6 +22,7 @@
 */
 /* DIVERGENCE(MVDM-HOST-DIV-342): match wmmedia.c's explicit APIENTRY ABI. */
 LPVOID APIENTRY
+#line 24
 WOW32ResolveMemory(
     VPVOID  vp
     );

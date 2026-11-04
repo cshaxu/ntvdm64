@@ -1,0 +1,189 @@
+{
+  "method": "Compared all equal line blocks against original; no conditional directives in either file; new lines are #line directives only. Local modifications have no corresponding original line and are not claimed to have one.",
+  "records": [
+    {
+      "path": "src/mvdm-host/dos/command/cmd.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmd.c",
+      "before_sha256": "7ba0e9fe6d25f04419f931de2aa6d51c3a4fefb4699cdc35bc6412ccf2602807",
+      "after_sha256": "ecd43471f699e3172f50b08a871d94256841651799e37fe1e0eb0454e5de5253",
+      "original_sha256": "9d0a773fcc8d7765b0fe3fe3750b5c9a29a596362f78a221161318fd83cc0262",
+      "anchors": [
+        {
+          "before_physical_line": 10,
+          "original_line": 9
+        },
+        {
+          "before_physical_line": 32,
+          "original_line": 31
+        }
+      ],
+      "original_matched_lines": 33,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmddata.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmddata.c",
+      "before_sha256": "5cbc229764aceb417000a7fbce75a016cfcccc2546eea726670cd008a50a2e37",
+      "after_sha256": "68dae0c1d1197b299cbb54a882df828af3a50ab9f4b60f7a0748dfe93aee06b8",
+      "original_sha256": "937c134e46b5c714b9106d85fd0250b88fca5958e69a1e60fdeab558d4f4f8d2",
+      "anchors": [
+        {
+          "before_physical_line": 19,
+          "original_line": 21
+        },
+        {
+          "before_physical_line": 45,
+          "original_line": 48
+        }
+      ],
+      "original_matched_lines": 48,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdkeyb.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdkeyb.c",
+      "before_sha256": "c3f318fd75df9302a782594a5777cf60f401ff1e6997a118ae3d9299705cdd6c",
+      "after_sha256": "d32313ee4993bf12135d62241eb2261188bd0696bf15846db73f80285fa0758a",
+      "original_sha256": "b945cd4a072b592211f6427ee526b2ca47be05ac6bef9a33956105749d899eba",
+      "anchors": [
+        {
+          "before_physical_line": 19,
+          "original_line": 17
+        },
+        {
+          "before_physical_line": 168,
+          "original_line": 166
+        }
+      ],
+      "original_matched_lines": 250,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdpif.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdpif.c",
+      "before_sha256": "2228973dbe7db1900b234c2fe84be90acf446f4a4911ab98099ca4a92dc4d6f6",
+      "after_sha256": "8177313a6c831a3499dd9caff7cf2347a734447553f4154293105968a16db09c",
+      "original_sha256": "6d3aac795c1c6275695e0b4b72dcbdbf7206456f27e07a11bc28bf5ce3438a9b",
+      "anchors": [
+        {
+          "before_physical_line": 21,
+          "original_line": 20
+        },
+        {
+          "before_physical_line": 268,
+          "original_line": 264
+        }
+      ],
+      "original_matched_lines": 288,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demdasd.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demdasd.h",
+      "before_sha256": "d7994766f3bd4e0895a8c146f35eafd9df4686a69eca56a4b257344cdf912d3f",
+      "after_sha256": "0c4bf7f6944b778b0ea1b1126a16f81b8d71edcd078098b857dae6ba41b6035c",
+      "original_sha256": "de5bd5e437c17a34af71999e6e6e7c0e749d9d9da61bc5cc8420c0406e1a2c35",
+      "anchors": [
+        {
+          "before_physical_line": 50,
+          "original_line": 47
+        }
+      ],
+      "original_matched_lines": 300,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lmsw.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\lmsw.c",
+      "before_sha256": "1b802987e70e5074ea5d777f76bcf5c12a41290d58d172173d44005eb5d2b8bc",
+      "after_sha256": "b2692006499b2faf741da6faf057e77c759c89317ec86052fc9927a1b3b844c3",
+      "original_sha256": "8bc5bad26249b91c1cc9b3be756575c081b2da322bb8dcc7e9f554d4f68a4e96",
+      "anchors": [
+        {
+          "before_physical_line": 27,
+          "original_line": 26
+        },
+        {
+          "before_physical_line": 58,
+          "original_line": 51
+        },
+        {
+          "before_physical_line": 66,
+          "original_line": 56
+        }
+      ],
+      "original_matched_lines": 56,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/popf.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\popf.c",
+      "before_sha256": "c1ca0f0273bb6b41051cd25c4ac39a85e1967d6b0db9ef8ece246c71f0294f72",
+      "after_sha256": "5968ca934ab21697961e7ccf0ea06c57ca8a7307b89e55de8677c0e135795470",
+      "original_sha256": "66c4fcaf0f3329dc6d7021a0ad8ba910fa775e84d63ad35404ee2a3134dd46c3",
+      "anchors": [
+        {
+          "before_physical_line": 18,
+          "original_line": 16
+        }
+      ],
+      "original_matched_lines": 67,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ntthread.h",
+      "before_sha256": "ce275bba258868706593990d9000bfd9e9219faf846c9e92d647501cc1c3890e",
+      "after_sha256": "47bcf3e007623dd2445f5f433a4b2d261b29fea090422a2df05312914f8dc74b",
+      "original_sha256": "a30d41e57c90bc0b27366debdaa1e6a23c214cc07d757e9f46c7b43fa636328e",
+      "anchors": [
+        {
+          "before_physical_line": 9,
+          "original_line": 7
+        }
+      ],
+      "original_matched_lines": 9,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_fdisk.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_fdisk.h",
+      "before_sha256": "e44d450d10b649a183ae70c068010f84b2d0eb3b5f3cd0137e9a6cb22a100e3e",
+      "after_sha256": "fe830c74945f250bc59bca2804fa094a74121ce544edd3bd523041bef5ac2d10",
+      "original_sha256": "d681eb7fc45dedcc5501cb43516a8e9d1c7d94d6f70ebbf72517364134fe1c87",
+      "anchors": [
+        {
+          "before_physical_line": 6,
+          "original_line": 7
+        }
+      ],
+      "original_matched_lines": 16,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/isvwow.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\isvwow.h",
+      "before_sha256": "476dce640711c1d05db167e9dc137670aad1dd96b6f99aac65f040bca869891f",
+      "after_sha256": "ff7e6abefe7899bd250a9e03fea75d203dcdc41232c5fd4324675111365263c2",
+      "original_sha256": "3b8357d8fa20cfbebcf5307d0abf0471ad93d1c74cd2c9bbe2ea42e9d2f4e132",
+      "anchors": [
+        {
+          "before_physical_line": 25,
+          "original_line": 24
+        }
+      ],
+      "original_matched_lines": 84,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    }
+  ]
+}
