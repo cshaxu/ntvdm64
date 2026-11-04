@@ -1,0 +1,436 @@
+{
+  "method": "Compare reachable original condition trees and recorded retained-arm states; inspect direct diffs and nine local conditional group bodies against existing registrations. Matching original lines use selected source projection.",
+  "limits": "No new runtime or compiler diagnostic test. Event ordering and CPU40 monitor behavior have independently documented semantic differences and open validation; their presence in this structural audit is not functional certification.",
+  "registered_differences": [
+    "MVDM-HOST-DIV-073",
+    "MVDM-HOST-DIV-214",
+    "MVDM-HOST-DIV-221",
+    "MVDM-HOST-DIV-330",
+    "MVDM-HOST-DIV-348",
+    "MVDM-HOST-DIV-476",
+    "MVDM-HOST-DIV-325"
+  ],
+  "review": {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+    "current_sha256": "a85cc75f5b51cc8bdd84c17bbbaea770aaace2cfb64882a1b173051a4abf82d7",
+    "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+    "matched_lines": 4182,
+    "groups": {
+      "excluded": 75,
+      "original_groups": 81,
+      "selected": 37,
+      "local_groups": 9
+    },
+    "local_groups": [
+      {
+        "line": 240,
+        "signature": [
+          [
+            "ifdef",
+            "NTVDM"
+          ]
+        ]
+      },
+      {
+        "line": 545,
+        "signature": [
+          [
+            "if",
+            "defined(NTVDM)&&!defined(SFELLOW)"
+          ]
+        ]
+      },
+      {
+        "line": 890,
+        "signature": [
+          [
+            "if",
+            "defined(NTVDM)&&defined(MVDM_CCPU_DECODE_DIAGNOSTICS)"
+          ]
+        ]
+      },
+      {
+        "line": 4313,
+        "signature": [
+          [
+            "if",
+            "defined(NTVDM)&&!defined(SFELLOW)"
+          ]
+        ]
+      },
+      {
+        "line": 4405,
+        "signature": [
+          [
+            "ifdef",
+            "NTVDM"
+          ],
+          [
+            "else",
+            ""
+          ]
+        ]
+      },
+      {
+        "line": 4430,
+        "signature": [
+          [
+            "if",
+            "defined(NTVDM)&&!defined(SFELLOW)"
+          ]
+        ]
+      },
+      {
+        "line": 4732,
+        "signature": [
+          [
+            "if",
+            "defined(NTVDM)&&!defined(SFELLOW)"
+          ]
+        ]
+      },
+      {
+        "line": 4793,
+        "signature": [
+          [
+            "ifdef",
+            "NTVDM"
+          ]
+        ]
+      },
+      {
+        "line": 4815,
+        "signature": [
+          [
+            "ifdef",
+            "NTVDM"
+          ]
+        ]
+      }
+    ],
+    "direct_diffs": [
+      {
+        "branch_line": 249,
+        "diff": [
+          "--- ",
+          "+++ ",
+          "@@ -1 +1 @@",
+          "-LOCAL IUM32\tcpu_interrupt_map = 0;",
+          "+LOCAL volatile IUM32\tcpu_interrupt_map = 0;"
+        ]
+      },
+      {
+        "branch_line": 828,
+        "diff": [
+          "--- ",
+          "+++ ",
+          "@@ -1 +1,3 @@",
+          "-setjmp(ccpu386ThrdExptnPtr());",
+          "+/* DIVERGENCE(MVDM-HOST-DIV-073): the helper returns jmp_buf *, while",
+          "+* modern setjmp requires the referred-to jmp_buf array object. */",
+          "+setjmp(*ccpu386ThrdExptnPtr());"
+        ]
+      },
+      {
+        "branch_line": 3941,
+        "diff": [
+          "--- ",
+          "+++ ",
+          "@@ -3,11 +3,12 @@",
+          " /* RESET ends the halt state. */",
+          "-if ( cpu_interrupt_map & CPU_RESET_EXCEPTION_MASK )",
+          "+/* DIVERGENCE(MVDM-HOST-DIV-214): atomically observe only, as in",
+          "+* the original HALT path; the normal RESET handler consumes it. */",
+          "+if ( c_cpu_event_snapshot() & CPU_RESET_EXCEPTION_MASK )",
+          " break;",
+          " /* An enabled INTR ends the halt state. */",
+          "-if ( GET_IF() && cpu_interrupt_map & CPU_HW_INT_MASK )",
+          "+if ( GET_IF() && (c_cpu_event_snapshot() & CPU_HW_INT_MASK) )",
+          " break;",
+          " /* As time goes by. */",
+          "-if (cpu_interrupt_map & CPU_SIGALRM_EXCEPTION_MASK)",
+          "+if (c_cpu_take_event(CPU_SIGALRM_EXCEPTION_MASK))",
+          " {",
+          "-cpu_interrupt_map &= ~CPU_SIGALRM_EXCEPTION_MASK;",
+          " host_timer_event();",
+          "@@ -16,2 +17,9 @@",
+          " QUICK_EVENT_TICK();",
+          "+/* DIVERGENCE(MVDM-HOST-DIV-330): original CCPU leaves a ring-0 HLT",
+          "+* in a pure host polling loop.  The standalone host already raises the",
+          "+* original CCPU event bits for timer, PIC, reset and host-I/O work; its",
+          "+* process-local carrier retains one wake until this HLT waiter arrives.",
+          "+* Do not replace the event map, interrupt ordering or quick-event work. */",
+          "+if (c_cpu_event_snapshot() == 0 && c_cpu_q_ev_get_count() == 0)",
+          "+mvdm_softpc_ccpu_wait_for_event();",
+          " }"
+        ]
+      },
+      {
+        "branch_line": 4381,
+        "diff": [
+          "--- ",
+          "+++ ",
+          "@@ -1,2 +1,2 @@",
+          "-if (GET_IF() && (cpu_interrupt_map & CPU_HW_INT_MASK))",
+          "+if (GET_IF() && c_cpu_take_event(CPU_HW_INT_MASK))",
+          " {",
+          "@@ -7,8 +7,16 @@",
+          " IU32 hook_address;",
+          "-cpu_hw_interrupt_number = ica_intack(&hook_address);",
+          "-cpu_interrupt_map &= ~CPU_HW_INT_MASK;",
+          "-EXT = EXTERNAL;",
+          "-SYNCH_TICK();",
+          "-do_intrupt(cpu_hw_interrupt_number, FALSE, FALSE, (IU16)0);",
+          "-CCPU_save_EIP = GET_EIP();   /* to reflect IP change */",
+          "+IS32 acknowledged_interrupt;",
+          "+acknowledged_interrupt = ica_intack(&hook_address);",
+          "+/* DIVERGENCE(MVDM-HOST-DIV-221): the source PIC explicitly returns -1",
+          "+* when a host-thread notification becomes stale before CCPU accepts it.",
+          "+* The historical x86 monitor prevented that race outside this CCPU body;",
+          "+* a modern user-mode session can reach it.  Preserve the original",
+          "+* acknowledge and all real-interrupt mechanics, but do not narrow its",
+          "+* signed rejection sentinel into the original IU16 vector and dispatch",
+          "+* a fabricated INT FF. */",
+          "+if (acknowledged_interrupt != -1)",
+          "+{",
+          "+/* The host monitor and normal CPU path share this accepted-IRQ",
+          "+* tail, including callback and saved-instruction bookkeeping. */",
+          " }",
+          "+}"
+        ]
+      },
+      {
+        "branch_line": 4802,
+        "diff": [
+          "--- ",
+          "+++ ",
+          "@@ -1 +1,3 @@",
+          "-if ( setjmp(ccpu386SimulatePtr()) == 0)",
+          "+frame = ccpu386SimulatePtr();",
+          "+__try {",
+          "+if ( setjmp(*frame) == 0)"
+        ]
+      }
+    ],
+    "issues": []
+  },
+  "local_group_bodies": [
+    {
+      "line": 240,
+      "arms": [
+        {
+          "directive": "ifdef",
+          "expression": "NTVDM",
+          "body": [
+            "#include \"ntvdm-exe/softpc/include/mvdm_softpc_termination.h\"",
+            "/* DIVERGENCE: MVDM-HOST-DIV-325. Coarse worker diagnostics remain available;",
+            " * per-instruction attribution is selected only by the diagnostic build. */"
+          ]
+        }
+      ]
+    },
+    {
+      "line": 545,
+      "arms": [
+        {
+          "directive": "if",
+          "expression": "defined(NTVDM) && !defined(SFELLOW)",
+          "body": [
+            "static BOOL debug_context_resume_check;",
+            "/* DIVERGENCE(MVDM-HOST-DIV-476): a monitor-emulated debug-register write",
+            " * must leave fast execution just as CPU40's original MOV DR instruction does. */",
+            "GLOBAL VOID ccpu_monitor_write_dr IFN2(IU32, index, IU32, value)",
+            "{",
+            "   MOV_DR(index, value);",
+            "   quick_mode = FALSE;",
+            "   /* Handled exceptions resume at NEXT_INST, after the usual inter-",
+            "    * instruction check. Check the newly armed execution breakpoint now. */",
+            "   CCPU_save_EIP = GET_EIP();",
+            "   if (nr_inst_break && GET_RF() == 0) {",
+            "      check_for_inst_exception(GET_CS_BASE() + GET_EIP());",
+            "      if (debug_exception_pending) {",
+            "         doing_contributory = FALSE;",
+            "         Int1_f();",
+            "      }",
+            "   }",
+            "}",
+            "",
+            "/* DIVERGENCE(MVDM-HOST-DIV-478): update the shared execution bank through",
+            " * CPU40's debug provider and leave the fast instruction path. */",
+            "GLOBAL VOID ccpu_apply_debug_context IFN1(const IU32 *, registers)",
+            "{",
+            "   IU32 index;",
+            "   for (index = 0; index != 4; ++index) MOV_DR(index, registers[index]);",
+            "   MOV_DR(6, registers[4]);",
+            "   MOV_DR(7, registers[5]);",
+            "   quick_mode = FALSE;",
+            "}",
+            "",
+            "/* A task restore resumes at NEXT_INST, after the normal boundary checks. */",
+            "GLOBAL VOID ccpu_restore_debug_context IFN2(const IU32 *, registers, BOOL, pending)",
+            "{",
+            "   ccpu_apply_debug_context(registers);",
+            "   debug_exception_pending = pending;",
+            "   debug_context_resume_check = TRUE;",
+            "}",
+            "",
+            "static VOID ccpu_dispatch_accepted_irq IFN1(IS32, vector)",
+            "{",
+            "   extern BOOL host_hwint_hook IPT1(IS32, int_no);",
+            "   cpu_hw_interrupt_number = (IU16)vector;",
+            "   EXT = EXTERNAL;",
+            "   SYNCH_TICK();",
+            "   if (!host_hwint_hook(vector))",
+            "      do_intrupt(cpu_hw_interrupt_number, FALSE, FALSE, (IU16)0);",
+            "   CCPU_save_EIP = GET_EIP();",
+            "}",
+            "",
+            "/* DIVERGENCE(MVDM-HOST-DIV-475): a handled protected STI completes its",
+            " * fault before delivering the same CPU-owned external interrupt path. */",
+            "GLOBAL VOID ccpu_monitor_dispatch_irq IFN0()",
+            "{",
+            "   IU32 hook_address = 0;",
+            "   IS32 vector;",
+            "   if (!c_cpu_take_event(CPU_HW_INT_MASK)) return;",
+            "   vector = ica_intack(&hook_address);",
+            "   if (vector == -1) return;",
+            "   doing_contributory = FALSE;",
+            "   /* Normal NEXT_INST saves the completed instruction before dispatch; a",
+            "    * fault while constructing the interrupt frame must see the same EIP. */",
+            "   CCPU_save_EIP = GET_EIP();",
+            "   ccpu_dispatch_accepted_irq(vector);",
+            "}"
+          ]
+        }
+      ]
+    },
+    {
+      "line": 890,
+      "arms": [
+        {
+          "directive": "if",
+          "expression": "defined(NTVDM) && defined(MVDM_CCPU_DECODE_DIAGNOSTICS)",
+          "body": [
+            "   mvdm_softpc_report_nt_transition(getCS(), getEIP(), getEFLAGS(),",
+            "      getSS(), getESP());",
+            "   if (getCS() == 0x00c7u && getEIP() >= 0x4f6au &&",
+            "       getEIP() < 0x4f88u)",
+            "      mvdm_softpc_report_wow_allocsel_instruction(getCS(), getEIP(),",
+            "         getAX(), getBX(), getCX(), getDX(), getBP(), getEFLAGS());",
+            "   if ((getCS() == 0x00c7u && getEIP() >= 0x4f88u &&",
+            "       getEIP() < 0x4fa4u) ||",
+            "       (getCS() == 0x01c7u && getEIP() >= 0x3947u &&",
+            "       getEIP() < 0x3a60u))",
+            "      mvdm_softpc_report_wow_setdescriptor_instruction(getCS(), getEIP(),",
+            "         getAX(), getBX(), getCX(), getDX(), getBP(), getEFLAGS());",
+            "   if (getCS() == 0x021fu && (getEIP() == 0x2c26u ||",
+            "       getEIP() == 0x2d3du))",
+            "      mvdm_softpc_report_wow_getsel_instruction(getCS(), getEIP(), getAX(),",
+            "         getCX(), getSI(), getDS(), getEFLAGS());",
+            "   if (getCS() == 0x021fu && getEIP() >= 0x3482u &&",
+            "       getEIP() < 0x3492u)",
+            "      mvdm_softpc_report_wow_longptradd_instruction(getCS(), getEIP(),",
+            "         getAX(), getBX(), getCX(), getDX(), getSS(), getESP());"
+          ]
+        }
+      ]
+    },
+    {
+      "line": 4313,
+      "arms": [
+        {
+          "directive": "if",
+          "expression": "defined(NTVDM) && !defined(SFELLOW)",
+          "body": [
+            "CPU_RESTORED_RESET:"
+          ]
+        }
+      ]
+    },
+    {
+      "line": 4405,
+      "arms": [
+        {
+          "directive": "ifdef",
+          "expression": "NTVDM",
+          "body": [
+            "\t     ccpu_dispatch_accepted_irq(acknowledged_interrupt);"
+          ]
+        },
+        {
+          "directive": "else",
+          "expression": "",
+          "body": [
+            "#line 4413",
+            "#error Excluded unsupported non-NTVDM CCPU interrupt dispatch"
+          ]
+        }
+      ]
+    },
+    {
+      "line": 4430,
+      "arms": [
+        {
+          "directive": "if",
+          "expression": "defined(NTVDM) && !defined(SFELLOW)",
+          "body": [
+            "   /* A restored task enters here without the normal inter-instruction",
+            "    * checks. Deliver its pending trap or execution breakpoint before it",
+            "    * executes, using the same CPU-owned checks as that path. */",
+            "   if (debug_context_resume_check) {",
+            "      /* RESET has priority over debug delivery in the normal boundary. */",
+            "      if (c_cpu_take_event(CPU_RESET_EXCEPTION_MASK))",
+            "         goto CPU_RESTORED_RESET;",
+            "      debug_context_resume_check = FALSE;",
+            "      if (debug_exception_pending)",
+            "         Int1_t();",
+            "      if (nr_inst_break && GET_RF() == 0) {",
+            "         check_for_inst_exception(GET_CS_BASE() + GET_EIP());",
+            "         if (debug_exception_pending)",
+            "            Int1_f();",
+            "      }",
+            "   }"
+          ]
+        }
+      ]
+    },
+    {
+      "line": 4732,
+      "arms": [
+        {
+          "directive": "if",
+          "expression": "defined(NTVDM) && !defined(SFELLOW)",
+          "body": [
+            "      debug_context_resume_check = FALSE;"
+          ]
+        }
+      ]
+    },
+    {
+      "line": 4793,
+      "arms": [
+        {
+          "directive": "ifdef",
+          "expression": "NTVDM",
+          "body": [
+            "      jmp_buf *frame; /* DIVERGENCE(MVDM-HOST-DIV-348): native frame identity. */"
+          ]
+        }
+      ]
+    },
+    {
+      "line": 4815,
+      "arms": [
+        {
+          "directive": "ifdef",
+          "expression": "NTVDM",
+          "body": [
+            "      } __finally {",
+            "         if (AbnormalTermination()) ccpu386AbandonSimulate(frame);",
+            "      }"
+          ]
+        }
+      ]
+    }
+  ]
+}

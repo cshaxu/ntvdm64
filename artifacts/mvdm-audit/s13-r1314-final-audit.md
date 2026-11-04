@@ -529,3 +529,5 @@ The [r1397 local-group review](s13-r1397-local-groups-review.json) checks two ho
 The [r1398 local-group review](s13-r1398-local-groups-review.json) checks x87 layout and host interrupt-hook conditional structures and retains full local-group bodies. Counts: 181 identical / 815 differing files reviewed / 1,056 total; 60 differing files pending. CPU40 protected-monitor behavior remains partial under DIV-473; this condition audit is not functional certification.
 
 The [r1399 WOW32 review](s13-r1399-wow32-review.json) checks original condition trees, selected matching-source positions and five registered local groups. Counts: 181 identical / 816 differing files reviewed / 1,056 total; 59 differing files pending. This is not fast-BOP or callback functional certification.
+
+The [r1400 CCPU review](s13-r1400-cmain-review.json) checks original condition trees, selected matching-source positions and nine registered local groups. Counts: 181 identical / 817 differing files reviewed / 1,056 total; 58 differing files pending. CPU40 event ordering and monitor behavior remain subject to existing separate validation boundaries.
