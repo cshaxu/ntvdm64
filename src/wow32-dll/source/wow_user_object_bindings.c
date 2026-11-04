@@ -2,10 +2,10 @@
 #include <dde.h>
 #include "wow_window_dispatch_bindings.h"
 #include "wow_class_lookup_bindings.h"
-#include "wow_user_runtime.h"
+#include "common/wow/user_runtime.h"
 #include "wow_task_order_bindings.h"
 #include "wow_window_words_binding.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+#include "common/wow/page_domain.h"
 
 /* Original query reads shared publication, never the cleanup ownership table.
  * One copied metadata row suffices; no native pointer, table-sized copy or

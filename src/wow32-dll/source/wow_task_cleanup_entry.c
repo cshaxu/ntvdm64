@@ -1,6 +1,6 @@
 #include "precomp.h"
 #include "wow_task_cleanup_entry.h"
-#include "wow_user_runtime.h"
+#include "common/wow/user_runtime.h"
 #include "wow_task_order_bindings.h"
 
 extern PTD gptdTaskHead;

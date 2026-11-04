@@ -33,6 +33,12 @@ WOW32 now select that owner. The x86/x64 build, symbol-provider and formatting
 fixtures, 12 Control gates and four real WRITE startup snapshots passed. Local
 package `187112da-6183-4b8e-b482-ee73d022a604` has ten verified release hashes.
 WRITE editing and normal exit were not tested; Full was not run.
+P5 separates WOW USER, GDI, page, path, FastBOP and registry consumer
+contracts into `common/wow` while retaining worker-owned state. Compiler
+dependencies for 147 selected WOW objects contain no NTVDM-private headers;
+focused lifecycle/callback tests, 12 Control gates and four WRITE startup
+snapshots passed. Local package `fd657e29-7249-493c-a67f-3e74d689d861` has
+ten verified hashes. WRITE editing and normal exit and Full were not tested.
 T475 S1 separated NXVM and Win32 library ownership. Its final four local P
 commits extracted object-handle comparison, overlapped pipe-pair creation,
 parent-process observation and file identity. Their local packages each

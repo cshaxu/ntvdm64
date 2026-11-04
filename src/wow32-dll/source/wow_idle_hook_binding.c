@@ -1,6 +1,6 @@
 #include "precomp.h"
 #include "wow_idle_hook_binding.h"
-#include "wow_user_runtime.h"
+#include "common/wow/user_runtime.h"
 #include "wow_task_order_bindings.h"
 #include "wow_user_borrow_scope.h"
 

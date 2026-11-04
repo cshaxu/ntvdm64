@@ -1,4 +1,4 @@
-#include "wow_user_runtime.h"
+#include "common/wow/user_runtime.h"
 #include "wow_user_registered_callbacks.h"
 #include "wow_window_creation_binding.h"
 #include "wow_dialog_creation_binding.h"
@@ -14,7 +14,7 @@
 #include "wow_user_private_access.h"
 #include "wow_user_borrow_scope.h"
 #include "wow_menu_native_bindings.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+#include "common/wow/page_domain.h"
 
 #include <stdio.h>
 #include "nt.h"

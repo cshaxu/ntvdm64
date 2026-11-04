@@ -94,6 +94,14 @@ if (!$compilerEnvironment.ContainsKey('VCToolsInstallDir')) { throw 'Missing com
     ConvertTo-Json | Set-Content "$out/compiler-environment.json"
 function Invoke-CompilerCommand([string]$directory,[string]$command,[switch]$Capture) {
     $originalEnvironment = [Environment]::GetEnvironmentVariables('Process')
+    $originalCommand = $command
+    $script:compilerCommandNumber++
+    $prefix = "$out/compiler-command-$($script:compilerCommandNumber)"
+    if ($command.Length -gt 7000 -and $command -match '^(link(?:\.exe)?)\s+(.+)$') {
+        $link = $Matches[1]
+        $Matches[2] | Set-Content "$prefix.rsp" -Encoding ASCII
+        $command = $link + ' @"' + $prefix + '.rsp"'
+    }
     $info = New-Object Diagnostics.ProcessStartInfo
     $info.FileName = 'cmd.exe'
     $info.Arguments = '/d /s /c "'+$command+'"'
@@ -105,13 +113,11 @@ function Invoke-CompilerCommand([string]$directory,[string]$command,[switch]$Cap
     foreach ($name in $compilerEnvironment.Keys) { $info.Environment[$name] = $compilerEnvironment[$name] }
     $process = New-Object Diagnostics.Process
     $process.StartInfo = $info
-    $script:compilerCommandNumber++
-    $prefix = "$out/compiler-command-$($script:compilerCommandNumber)"
     try {
         if (!$process.Start()) { throw 'Compiler command start failed' }
         $null = $process.Handle
         @{pid=$process.Id;start=$process.StartTime.ToUniversalTime().ToString('o');
-            directory=$directory;command=$command;timeoutSeconds=1200} |
+            directory=$directory;command=$command;originalCommand=$originalCommand;timeoutSeconds=1200} |
             ConvertTo-Json | Set-Content "$prefix.process.json"
         $stdout = $process.StandardOutput.ReadToEndAsync()
         $stderr = $process.StandardError.ReadToEndAsync()
@@ -182,6 +188,7 @@ foreach ($object in $fixtureSupportObjects) {
 $fixtureLibraries = @(
     'worker-base.lib', 'common-root.lib', 'common-rpc.lib', 'lib-rpc.lib',
     'nthook-installer.lib', 'nthook-context.lib', 'lib-process-hook.lib', 'lib-handle.lib',
+    'lib-file.lib', 'lib-crt-compat.lib',
     'lib-io.lib', 'common-codec.lib', 'common-console.lib',
     'opennt-base-client.lib', 'opennt-base-bindings.lib', 'common-base-srv-bindings.lib', 'broker-transport.lib', 'common-base-srv-transport.lib',
     'worker-shell.lib', 'worker-command-bindings.lib',

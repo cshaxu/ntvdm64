@@ -1,7 +1,7 @@
 #include "wow_class_client_bindings.h"
 #include "wow_window_words_binding.h"
 #include "wow_window_creation_binding.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+#include "common/wow/page_domain.h"
 #include <stdio.h>
 
 ATOM WINAPI wow_original_register_class(WNDCLASSA *, DWORD *);

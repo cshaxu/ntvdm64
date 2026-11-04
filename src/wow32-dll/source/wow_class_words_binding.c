@@ -7,7 +7,7 @@
 #include "wow_dialog_state_bindings.h"
 #include "wow_user_client_view_layout.h"
 #include "non-mvdm/windows/core/ntuser/inc/user.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+#include "common/wow/page_domain.h"
 
 #include <stdio.h>
 

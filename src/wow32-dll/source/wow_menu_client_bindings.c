@@ -1,6 +1,6 @@
 #include "wow_menu_client_bindings.h"
 #include "wow_cleanup_bindings.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+#include "common/wow/page_domain.h"
 
 /* Original cleanup.c reads hTaskWow through the adapted PROCOBJHEAD first
  * member. The original process-owned scan remains the destruction policy;

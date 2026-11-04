@@ -8,12 +8,12 @@
 #include "wow_user_client_view_layout.h"
 #include "wow_user_borrow_scope.h"
 #include "wow_user_task_lifecycle.h"
-#include "wow_user_runtime.h"
+#include "common/wow/user_runtime.h"
 #include "wow_class_client_bindings.h"
 #include "wow_user_object_bindings.h"
 #include "wow_task_order_bindings.h"
 #include "wow_menu_native_bindings.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+#include "common/wow/page_domain.h"
 
 #include <stdio.h>
 

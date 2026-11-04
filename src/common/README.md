@@ -1,5 +1,9 @@
 # Common cross-component mechanisms
 
+`wow/` holds contracts shared by WOW32 and the worker for USER, GDI, guest
+page projections, package paths, FastBOP offsets and registry reads. The
+worker remains the sole owner of the underlying state and its lifecycle.
+
 `guest-memory/` owns the copied-value access and redirector declarations used
 across worker and DLL source boundaries. The existing worker session remains
 the only guest-memory and lease-context authority; no state is allocated here.

@@ -1,6 +1,6 @@
 #include "wow_user_message_bridge.h"
 #include "wow_task_order_bindings.h"
-#include "wow_user_runtime.h"
+#include "common/wow/user_runtime.h"
 #include "wow_user_task_lifecycle.h"
 
 /* ADAPTER-WOW-050: ssend.c MAKECALL releases the USER data lock across a

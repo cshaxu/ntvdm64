@@ -2,6 +2,7 @@
 #define MVDM_SOFTPC_FAST_BOP_H
 
 #include <stdint.h>
+#include "common/wow/fast_bop.h"
 
 /* CCPU carrier for the original x86 FastBOP far-call ABI.  The returned
  * selector/offset names the native monitor endpoint; it is recognized before
@@ -12,7 +13,5 @@ void mvdm_softpc_fast_bop_sync_mode(void);
 #define MVDM_FAST_BOP_INLINE 1
 #define MVDM_FAST_BOP_WOW 2
 #define MVDM_FAST_BOP_RETURN 3
-uint32_t mvdm_softpc_fast_bop_dispatch_offset(void);
-uint32_t mvdm_softpc_fast_bop_callback_offset(void);
 
 #endif

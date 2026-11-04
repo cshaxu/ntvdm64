@@ -46,7 +46,7 @@ extern DWORD WINAPI NtvdmAuthorizeExit(DWORD exit_code);
 #include "wow_idle_hook_binding.h"
 /* Keep this completed registry-reader family isolated from the uncompleted
  * original registry writer families selected for their later owner packets. */
-#include <mvdm_shadow_registry.h>
+#include <common/wow/registry.h>
 /* Keep thread-handle teardown on the original NT close call. */
 #undef NtOpenKey
 #undef NtEnumerateValueKey

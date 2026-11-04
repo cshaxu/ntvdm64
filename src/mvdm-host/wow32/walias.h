@@ -18,7 +18,7 @@ typedef HANDLE HAND32;
 #include "wspool.h"
 #include "wowuserp.h"
 /* DIVERGENCE(MVDM-HOST-DIV-341): original GDI table's existing carrier. */
-#include "ntvdm-exe/wow/include/wow_gdi_alias.h"
+#include "common/wow/gdi_alias.h"
 
 
 /* WOW class/handle type identifiers (see WARNING below)

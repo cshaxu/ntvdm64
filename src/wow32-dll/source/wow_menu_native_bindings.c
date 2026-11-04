@@ -1,8 +1,8 @@
 #include "wow_menu_native_bindings.h"
 #include "wow_menu_client_bindings.h"
-#include "wow_user_runtime.h"
+#include "common/wow/user_runtime.h"
 #include "wow_user_task_lifecycle.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+#include "common/wow/page_domain.h"
 
 static wow_user_runtime_thread *menu_context(void)
 {

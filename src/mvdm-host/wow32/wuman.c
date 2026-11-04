@@ -13,7 +13,7 @@
 
 
 #include "precomp.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+#include "common/wow/page_domain.h"
 #line 16
 #pragma hdrstop
 

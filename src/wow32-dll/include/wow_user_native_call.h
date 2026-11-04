@@ -1,6 +1,6 @@
 #ifndef WOW_USER_NATIVE_CALL_H
 #define WOW_USER_NATIVE_CALL_H
-#include "wow_user_runtime.h"
+#include "common/wow/user_runtime.h"
 #include "wow_task_order_bindings.h"
 
 /* Borrowed call edge only. Native USER owns the operation and its result;

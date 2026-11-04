@@ -1,6 +1,6 @@
 #include "wow_user_private_access.h"
 #include "wow_user_object_bindings.h"
-#include "wow_user_runtime.h"
+#include "common/wow/user_runtime.h"
 #include "wow_user_task_lifecycle.h"
 
 /* Native USER owns discovery; original WOW owns conversion and callback

@@ -39,11 +39,11 @@
 #include <ntcsrdll.h>
 #define SHAREWOW_MAIN
 #include <sharewow.h>
-#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_fast_bop.h"
+#include "common/wow/page_domain.h"
+#include "common/wow/fast_bop.h"
 /* This selected original read path retains its query/fallback body while
  * using the worker-local NTVDM.REG/system snapshot facade. */
-#include <mvdm_shadow_registry.h>
+#include <common/wow/registry.h>
 /* This TU needs only the Win32 registry-reader redirection. */
 #undef NtOpenKey
 #undef NtEnumerateValueKey

@@ -3,7 +3,7 @@
 #include "wow_edit_entry_bindings.h"
 #include "wow_dialog_state_bindings.h"
 #include "wow_class_client_bindings.h"
-#include "wow_user_runtime.h"
+#include "common/wow/user_runtime.h"
 #include "wow_user_task_lifecycle.h"
 #include "wow_user_private_access.h"
 #include "wow_user_borrow_scope.h"

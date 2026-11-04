@@ -84,3 +84,24 @@ wrong window-reader executable and failed; the corrected run passed. The local
 ten-image package `187112da-6183-4b8e-b482-ee73d022a604` has matching hashes.
 Full was not run; DOS4GW/NESticle was absent. Commands, logs, failed attempt
 and previous release backup are under `build/t475-s3-p4`.
+
+## P5: WOW consumer contracts
+
+Shared `common/wow` contracts now cover the WOW32 consumer's USER runtime,
+GDI aliases, page-domain operations, package paths, FastBOP offsets, active
+worker query and read-only registry facade. The worker retains its session,
+USER and page state, registry projection and FastBOP implementation. Of 55
+page-domain operations, 37 consumed by WOW32 are shared and 18 worker-only
+operations remain private. Existing project-added mirror includes were
+retargeted without changing original execution; the mirror ledger records it.
+
+Compiler dependency records for 147 WOW objects show no NTVDM-private header;
+ten forbidden-header negative controls passed. The x86/x64 build, real CCPU
+page-domain, task lifecycle, process retirement and window-borrow fixtures,
+session binding, original callback and GDI alias tests passed. All 12 selected
+Control gates and four real WRITE startup window samples passed. The local
+ten-image package `fd657e29-7249-493c-a67f-3e74d689d861` has matching hashes.
+WRITE editing and normal exit and Full were not tested; DOS4GW/NESticle was
+absent. Initial fixture attempts exposed command-line length and stale library
+inputs, which were corrected before the final rerun. Logs, both candidates
+and prior release backup are under `build/t475-s3-p5`.

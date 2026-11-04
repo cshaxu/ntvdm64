@@ -6,7 +6,7 @@
 #include "wow_task_init_bindings.h"
 #include "wow_cleanup_bindings.h"
 #include "wow_user_message_bridge.h"
-#include "wow_user_runtime.h"
+#include "common/wow/user_runtime.h"
 #include "wow_user_native_call.h"
 #include "wow_task_cleanup_entry.h"
 #include "wow_class_client_bindings.h"

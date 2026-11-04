@@ -3,7 +3,7 @@
 #include "wow_user_borrow_scope.h"
 #include "wow_user_object_bindings.h"
 #include "wow_window_creation_binding.h"
-#include "wow_user_runtime.h"
+#include "common/wow/user_runtime.h"
 #include "wow_menu_native_bindings.h"
 
 /* Original wowhooks.c owns hook identity, conversion, guest-stack allocation

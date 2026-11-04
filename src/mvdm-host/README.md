@@ -3103,6 +3103,7 @@ MVDM-HOST-DIV-813: reject unselected DPMI and non-NTVDM LIM alternatives and cor
 
 MVDM-HOST-DIV-814: correct original error and continuation line anchors for the excluded non-EGG video branch. Evidence: artifacts/mvdm-audit/s13-r1306-final-anchor-review.json.
 
+
 MVDM-HOST-DIV-815: restore original logical source positions for matching code in six WOW32 mirror files while preserving local adaptations. Evidence: artifacts/mvdm-audit/s13-r1337-line-batch.json and s13-r1337-tree-recheck.json.
 
 MVDM-HOST-DIV-816: restore original logical source positions for matching code on the observed selected branch in six mirror files; retained code and conditional selectors are unchanged. Evidence: artifacts/mvdm-audit/s13-r1341-pending-line-batch.json and s13-r1342-context-recheck.json. Other contexts require separate review.
@@ -3163,3 +3164,8 @@ MVDM-HOST-DIV-846: restore original logical positions of eight uniquely matched 
 MVDM-HOST-DIV-847: dpmi32/dpmidata.h binds the selected CPU40 protected-mode switch to the existing DpmiCpu40SwitchToProtectedMode provider rather than the original non-i386 illegal-function placeholder. This is the declaration and dispatch edge for the existing DIV-222 mode-switch adaptation; no independent behavior equivalence is claimed. Structural evidence: artifacts/mvdm-audit/s13-r1416-dpmidata-review.json.
 MVDM-HOST-DIV-848: restore the original logical position of the PM definition and following selected declarations in softpc.new/host/inc/host_def.h. Evidence: artifacts/mvdm-audit/s13-r1419-hostdef-pm.json. Remaining paths under review; cached x86/x64 build passed; ten images published, eight identical and two timestamp-only.
 MVDM-HOST-DIV-849: restore original logical positions of retained function entries. Evidence: artifacts/mvdm-audit/s13-r1420-function-lines.json. Remaining paths under review; cached x86/x64 build passed; ten images published, eight identical and two timestamp-only.
+
+T475 S3 P5 retargets existing project-added includes in WOW32 `precomp.h`,
+`walias.h`, `wow32.c`, `wuman.c` and `wkman.c` to shared WOW contracts.
+Original execution and the worker-owned providers are unchanged; this only
+changes the location of declarations at the existing adaptation boundaries.
