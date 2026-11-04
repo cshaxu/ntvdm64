@@ -282,3 +282,11 @@ ten-image package was published and verified at both destinations. Eight
 images are byte-identical to the prior package and NTVDM/WOW32 differ only
 in PE timestamps ([comparison](s13-r1337-build-image-compare.json)); runtime
 tests were not repeated under the owner-approved unchanged-image rule.
+
+The [r1338 pending-file tree survey](s13-r1338-pending-tree-survey.json)
+compares all 363 remaining differing files against their recorded original
+hashes. It finds 274 with matching conditional-tree shape and 89 with at least
+one shape difference. These categories are triage only: neither establishes
+retained-body correctness, actual hit coverage, nor original logical line
+mapping. Four pending files have recorded unobserved retained arms. No file is
+marked complete based on this survey.
