@@ -359,3 +359,37 @@ standard check's default release-cache roots are absent in this worktree; this
 adapted result is not a passing gate and the pre-existing flag issue is not
 caused or resolved by the Detours removal. Full and DOS4GW/NESticle were not
 run. Historical C++ fixtures and audit evidence remain open in S5.
+
+## P11 — enforce C native graphs and repair profile leakage
+
+The active native generator now accepts C source edges only; it no longer
+selects C++ compilation. Three independent modified reference graphs with
+`.cpp`, `.cc` and `.cxx` target inputs were rejected for the intended reason
+(`p11/negative-graph-r2.process`, exit 0). The first negative-test attempt
+used a directory outside the required Ninja tree and did not reach that check.
+Eight selected product graphs exposed 971 compiler commands, none selecting
+C++ (`p11/selected-c-commands.process`, exit 0).
+
+The P10 profile issue was traced to missing per-edge flags for x86 local RPC
+and native path, and inherited WOW32 original-profile flags for the CRT bridge.
+Those edges now use their existing authored-code flags while retaining the
+WOW32 x86 calling convention. The checker accepts an explicit combined build
+root and classifies the generated original VDM carrier and the deliberately
+original-profile WOW boundary fixture according to their actual roles. Before
+rebuilding, the same checker rejected the three unintended lib-win32 edges
+(`p11/profile-before.process`, exit 1); afterward it passed 443 selected
+authored/generated compile commands (`p11/profile-after.process`, exit 0).
+This is a selected-graph audit, not proof about every possible configuration.
+
+The x86/x64 product build passed (`p11/build.process`), staging verified 63
+immutable guest files and 274 ordinal exports (`p11/stage.process`), and
+Control passed (`p11/control.process`). Real Win16 WRITE startup reached its
+main/document/page-info windows in four isolated snapshots
+(`p11/wow-r2.process`); editing, saving and normal exit were not tested. The
+first WRITE attempt ran concurrently with Control and missed the first sample;
+the other three samples contained all three windows. That attempt failed and
+is not passing evidence; parallel load is a possible cause, not a proven one.
+Ten local release image hashes and the license match package
+`2edc8463-29b6-49b2-a9e6-c369ecd28ac8`. Full and DOS4GW/NESticle were not
+run. Historical C++ artifacts and the late-hook concurrency boundary remain
+open in S5.

@@ -86,6 +86,12 @@ Control passed; local package `1347cbbf-7cc8-4db4-b3d7-4a68910c8575` has ten
 verified hashes. An adapted optional SoftPC profile audit reported existing
 x86 flags on three lib-win32 sources; see P10 evidence. Historical C++ files
 remain open in S5.
+P11 rejects C++ inputs in the active native graph and fixes the x86/WOW32
+lib-win32 macro leakage found in P10. The graph audit passed 443 authored
+commands, 971 selected compiler commands were C-only, and three C++ extension
+negative cases were rejected. Product build and Control passed; local package
+`2edc8463-29b6-49b2-a9e6-c369ecd28ac8` has ten verified hashes. Historical
+sources and late-hook concurrency limits remain open.
 The adjacent library's same-width payload-only mechanism, non-Detours payload
 format, helper ordinal and startup-only transaction require compatibility proof;
 no untested semantic equivalence is assumed. Prior [S4 evidence](../etc/evidence/m0-t475-s4-nthook-dependency-cleanup.md),

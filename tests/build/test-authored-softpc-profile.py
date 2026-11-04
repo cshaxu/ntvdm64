@@ -1,4 +1,5 @@
 """Check actual product compiler commands for SoftPC profile leakage."""
+import argparse
 from pathlib import Path
 import re
 import subprocess
@@ -11,6 +12,10 @@ ORIGINAL_ROOTS = ("src/mvdm-host/", "src/non-mvdm/")
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--candidate-root', type=Path,
+                        help='combined worker/native build root')
+    args = parser.parse_args()
     checked = 0
     failures = []
     scanned_sources = set()
@@ -21,7 +26,13 @@ def main():
                  ("monitor", "ntmon.exe"), ("launcher", "run16.exe"),
                  ("service", "ntsrv.exe"), ("hook", "nthook64.dll"))]
     for architecture, tree, target in targets:
-        build = ROOT / "build/.ninja" / architecture / tree
+        if args.candidate_root:
+            candidate_tree = ("worker-x86" if architecture == "msvc-x86-release" and tree == "worker"
+                              else "worker-native" if architecture == "msvc-x64-release" and tree == "worker"
+                              else "hook64" if tree == "hook" else tree)
+            build = args.candidate_root / candidate_tree
+        else:
+            build = ROOT / "build/.ninja" / architecture / tree
         output = subprocess.run(["ninja", "-C", str(build), "-t", "commands", target],
                                 check=True, capture_output=True, text=True).stdout
         for command in output.splitlines():
@@ -34,7 +45,13 @@ def main():
             source = match.group(1).strip('"').replace("\\", "/").lower()
             relative = source.split("/src/", 1)[-1] if "/src/" in source else ""
             original = bool(relative) and ("src/" + relative).startswith(ORIGINAL_ROOTS)
-            original |= source.endswith("/worker/generated/base_vdm_config.c")
+            original |= source.endswith(("/worker/generated/base_vdm_config.c",
+                                         "/worker-x86/generated/base_vdm_config.c"))
+            # This one test is deliberately compiled twice: the original
+            # thunk configuration must retain its private macro profile.
+            original |= (architecture == "msvc-x86-release" and tree == "wow32"
+                         and source.endswith("/tests/build/wow_thunk_macro_boundary.c")
+                         and "/DWOW_ORIGINAL_THUNK_BUILD" in command)
             if original:
                 continue
             checked += 1

@@ -677,7 +677,8 @@ foreach ($source in $providerSupportSources) {
     $supportObjects.Add($object)
     $ninja.Add('build ' + $object + ': cc ' + (ConvertTo-NinjaPath $source))
     if ($source.StartsWith($adapterWow, [StringComparison]::OrdinalIgnoreCase) -or
-        $source.StartsWith((Join-Path $root 'src/ntvdm-exe'), [StringComparison]::OrdinalIgnoreCase)) {
+        $source.StartsWith((Join-Path $root 'src/ntvdm-exe'), [StringComparison]::OrdinalIgnoreCase) -or
+        $source.StartsWith((Join-Path $root 'src/lib-win32'), [StringComparison]::OrdinalIgnoreCase)) {
         $ninja.Add('  cflags = $adapter_cflags')
     }
 }

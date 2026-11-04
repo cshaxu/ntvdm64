@@ -129,7 +129,7 @@ function Add-Edge([string]$target) {
   [IO.File]::WriteAllText($configCarrier,$preamble+$helper[0].Value+"`r`n"+$function[0].Value+"`r`n",[Text.UTF8Encoding]::new($false))
   $source=NP $configCarrier
  }
- if($source -notmatch '\.(c|cpp)$'){throw "Not a source: $source"}
+ if($source -notmatch '\.c$'){throw "Native graph requires C source: $source"}
  if($source -notmatch '^O\$:/'){
   if($source -notin @('obj/basesrv/service_c.c','obj/basesrv/service_s.c','obj/basesrv/rpc_management_c.c')){throw "Unknown generated source: $source"}
  }
@@ -169,10 +169,6 @@ function Add-Edge([string]$target) {
   # This existing client imports historical local Base message declarations.
   # Keep its source-facing ABI header, without injecting it into UI/worker TUs.
   $flags+=' /FI "'+(NP (Join-Path $root 'src/compat/include/nt.h'))+'"'
- }
- if($source -match '\.cpp$'){
-  $flags=$flags.Replace('/FI "'+(NP (Join-Path $root 'src/compat/include/nt.h'))+'"','')
-  $flags+=' /TP /std:c++14'
  }
  if($target -like 'obj/ntvwm/*'){$flags+=' /I frontend-font'}
  $graph.Add('  cflags = '+$flags)
