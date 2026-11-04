@@ -31,6 +31,7 @@
 #include "nt_event.h"
 #include "nt_reset.h"
 #include "nt_pif.h"
+#line 33
 #include "config.h"
 #include <nt_vdd.h>   // DO NOT USE vddsvc.h
 #include <nt_vddp.h>
@@ -48,6 +49,7 @@
  * function and its EMS page-frame behavior remain in the original package. */
 extern boolean lim_page_frame_init(PLIM_CONFIG_DATA lim_config_data);
 
+#line 41
 PMEM_HOOK_DATA MemHookHead = NULL;
 PVDD_USER_HANDLERS UserHookHead= NULL;
 
@@ -199,10 +201,13 @@ InitialiseDosEmulation(int argc, char **argv)
       * and CS:IP sequence unchanged. */
      if (!mvdm_softpc_system_find_file("ntio.sys", buffer, sizeof(buffer))) {
          host_error(EG_OWNUP, ERR_QUIT, "ntio.sys");
+#line 172
          TerminateVDM();
          return (-1);
+#line 173
          }
 
+#line 177
      hFile = CreateFile(buffer,
                         GENERIC_READ,
                         FILE_SHARE_READ,
@@ -337,6 +342,7 @@ boolean init_lim_configuration_data(PLIM_CONFIG_DATA lim_data)
 {
     /* DIVERGENCE(MVDM-HOST-DIV-278): match GetPIFConfigFiles' output contract. */
     char config_sys_pathname[MAX_PATH+12];
+#line 347
     HANDLE  handle;
     DWORD   file_size, bytes_read, size;
     char    *buffer, *ptr;
@@ -647,6 +653,7 @@ PCHAR  pKeyName = "SYSTEM\\CurrentControlSet\\Control\\VirtualDeviceDrivers";
     if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, pKeyName, 0, KEY_READ, &VDDKey) !=
         ERROR_SUCCESS) return;
 
+#line 658
     pszName = "VDD";
 
         // get size of VDD value

@@ -1,0 +1,131 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "current_sha256": "9974d509790f6b8185dd09242967298f34d8e93cc95b9e65ace1f9dd58f467ce",
+      "original_sha256": "e79dd6aa79d24e37ad8390c8879abf3436674ee101037f0e09415148a938ac95",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 72,
+      "extra_group_lines": [
+        40
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "current_sha256": "941078c44c2d12aec016392615e2348676a23e540f18d2cb023ca9fb27004282",
+      "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 864,
+      "extra_group_lines": [
+        435
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "current_sha256": "8f88648e48aa473c9fbae93717b5a98c0630fb1b37480147f9ba8a5bc3fd260a",
+      "original_sha256": "3f77f06e497854b00f58acde8bfe7b5e67af7c5e67174deb579cd76e13f5830f",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 197,
+      "extra_group_lines": [
+        54,
+        126
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "current_sha256": "55c586fc69221068293a1db55c21b569ce34cef1526bb93e34cc8044b045ad5f",
+      "original_sha256": "d51310af362e60023feb59c89afb21ff6fae8e1bb74ae8614231f4ec3a001729",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 776,
+      "extra_group_lines": [
+        141,
+        165,
+        192
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "current_sha256": "6a2f2d4c8d38144418ddd9d4cdc002e862d198c9ba5dfc9fa60ad2f5e6777c63",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 898,
+      "extra_group_lines": [
+        149,
+        168,
+        212,
+        585,
+        944,
+        972,
+        990,
+        1110
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "current_sha256": "af1f7a46666b40366ef536931ea0d03c9c89e33420b3f059fff08681ef84951a",
+      "original_sha256": "a3465d006a88549ce5fd52ac3f8d9c0dcf1f2b2c6825f35db3d2dc683fbc7abe",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 208,
+      "extra_group_lines": [
+        42,
+        239,
+        423
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "current_sha256": "394b6fdc6f9268345f3fc204f15c73dbc81a846d4d6b136fbde975d9e13d3c87",
+      "original_sha256": "96ee0fb677da9f35811f9dc1715d583474ce72bba9fa91f5eb2d5f6ab242b0c3",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 1276,
+      "extra_group_lines": [
+        145,
+        298
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "current_sha256": "c345a04590804d528a75f7a300c09cd2dfe4178ba5a86adc5bf36fce4810a631",
+      "original_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 310,
+      "extra_group_lines": [
+        157
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/precomp.h",
+      "current_sha256": "9cf0b8b262202e0d50b5d6b05234f5c301d461099d3d988a3ecbbcc52155112f",
+      "original_sha256": "b4841d516682f6677332fede6ca47187bfdc132a288f71564378a1c87f7bb314",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 116,
+      "extra_group_lines": [
+        24,
+        46,
+        146
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "current_sha256": "1ce2e889b62d48130d99ac4e2ef80caa372efb82f71f2a107c799963e810ed2a",
+      "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 4689,
+      "extra_group_lines": [
+        33,
+        39
+      ]
+    }
+  ],
+  "held": {}
+}

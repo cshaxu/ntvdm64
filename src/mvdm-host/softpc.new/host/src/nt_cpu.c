@@ -44,6 +44,7 @@ static char SccsID[]="@(#)sun4_a3cpu.c	1.2 5/24/91 Copyright Insignia Solutions 
 /* The original CCPU40 disk/FDC controller uses this independent timing
  * table.  It is not a SAS-memory global and therefore remains available in
  * the CCPU profile. */
+#line 39
 GLOBAL	quick_event_delays	host_delays;
 
 /* DIVERGENCE(MVDM-HOST-DIV-030): CCPU SAS owns Start_of_M_area and
@@ -89,9 +90,11 @@ GLOBAL	quick_event_delays	host_delays;
 /* DIVERGENCE(MVDM-HOST-DIV-356): original host initialization is complete;
  * only now may service instructions enter its original cleanup callbacks. */
 extern void NtvdmActivateLifecycle(void);
+#line 72
 void	host_start_cpu()
 {
   NtvdmActivateLifecycle();
+#line 74
   cpu_simulate ();
 }
 
@@ -125,6 +128,7 @@ extern void c_cpu_unsimulate(void);
 void host_unsimulate()
 {
     c_cpu_unsimulate();
+#line 105
 }
 #endif /* CCPU */
 
@@ -133,6 +137,7 @@ void host_unsimulate()
 	Host_set_hw_int: Cause a hardware interrupt to be generated. For
 	software cpu this just means setting a bit in cpu_interrupt_map.
 */
+#line 112
 void	host_set_hw_int()
 {
 	cpu_interrupt(CPU_HW_INT, 0);

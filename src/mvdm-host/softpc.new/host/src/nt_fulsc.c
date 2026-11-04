@@ -31,6 +31,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "mvdm_softpc_firmware.h"
+#line 31
 #include "conapi.h"
 
 #include "xt.h"
@@ -1006,6 +1007,7 @@ VOID waitForInputFocus()
 {
     if (WaitForSingleObject(sc.FocusEvent, INFINITE))
 	ErrorExit();
+#line 2048
 }
 
 /***************************************************************************

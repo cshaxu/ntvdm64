@@ -24,6 +24,7 @@
 #include "error.h"
 #include "config.h"
 #include "ntvdm-exe/softpc/include/mvdm_shadow_registry.h"
+#line 26
 #include "sas.h"
 
 #include "spcfile.h"
@@ -464,6 +465,7 @@ GLOBAL VOID config( VOID )
         /* sas_init has initialised Gdp, so now we can set up the pointers */
         /* to the Gdp variables that hold register values. This is to */
         /* allow NTSD debugger extensions to display those values. */
+#line 539
         InitNtCpuInfo();
 
 #endif

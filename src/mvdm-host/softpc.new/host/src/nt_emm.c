@@ -76,6 +76,7 @@ The Following Routines are defined:
 
 /*	Local Variables			*/
 
+#line 70
 UTINY	*EM_pagemap_address = 0; /* address of start of pagemap	*/
 sys_addr    EM_base_address;	/* EM base intel address */
 host_addr   EM_host_base_address = 0;	/* EM base host address */
@@ -111,6 +112,7 @@ Defines are:
 #line 102
 #error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #else
+#line 114
 #define	EM_host_address(offset) (EM_host_base_address + offset)
 #define	EM_loads(from, to, length) memcpy(to, get_byte_addr(from), length)
 #define	EM_stores(to, from, length) \
@@ -223,6 +225,7 @@ DESCRIPTION	:
 
 =========================================================================
 */
+#line 148
 int host_initialise_EM(short size)
 
 /*   IN   short	size		 size of area required in megabytes	*/
@@ -671,6 +674,7 @@ unsigned short	src_seg 	source segment address
 	if (em_moves(from, to, length) != SUCCESS)
 		return(FAILURE);
 
+#line 590
 	return(SUCCESS);
 }
 
@@ -696,6 +700,7 @@ unsigned short	src_seg 	source segment address
 	if (em_loads(from, to, length) != SUCCESS)
 		return(FAILURE);
 
+#line 614
 	return(SUCCESS);
 }
 
@@ -721,6 +726,7 @@ unsigned short	src_page 	source page number
 	if (em_stores(to, from, length) != SUCCESS)
 		return(FAILURE);
 
+#line 638
 	return(SUCCESS);
 }
 
@@ -798,6 +804,7 @@ unsigned short	src_seg		 source segment address
 		return(FAILURE);
 	}
 
+#line 712
 	free(temp);
 
 	return(SUCCESS);
@@ -832,6 +839,7 @@ unsigned short	src_seg 	source segment address
 		free(temp);
 		return(FAILURE);
 	}
+#line 743
 	EM_memcpy(to, pointer, length);
 
 	free(temp);

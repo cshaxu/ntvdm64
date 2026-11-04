@@ -1,0 +1,207 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "before_sha256": "6695fe98bb3a757a10f143e2c1d33a669ed8e1bc8f1ea1369db0dd26b09a1be9",
+      "original_sha256": "e79dd6aa79d24e37ad8390c8879abf3436674ee101037f0e09415148a938ac95",
+      "anchors": {
+        "32": 124,
+        "40": 129
+      },
+      "matched_lines": 72,
+      "extra_group_lines": [
+        39
+      ],
+      "after_sha256": "9974d509790f6b8185dd09242967298f34d8e93cc95b9e65ace1f9dd58f467ce"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "before_sha256": "da4cac9f26f2a3e8c2bdf44275f4463275079afcc409966d1498a5f8540e3192",
+      "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+      "anchors": {
+        "26": 26,
+        "466": 539
+      },
+      "matched_lines": 864,
+      "extra_group_lines": [
+        434
+      ],
+      "after_sha256": "941078c44c2d12aec016392615e2348676a23e540f18d2cb023ca9fb27004282"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "before_sha256": "2104ea336bb95c051aa2c9a3d4fad767a602c270bed068c8ea353c0992f0ec82",
+      "original_sha256": "3f77f06e497854b00f58acde8bfe7b5e67af7c5e67174deb579cd76e13f5830f",
+      "anchors": {
+        "46": 39,
+        "91": 72,
+        "94": 74,
+        "127": 105,
+        "135": 112
+      },
+      "matched_lines": 197,
+      "extra_group_lines": [
+        53,
+        123
+      ],
+      "after_sha256": "8f88648e48aa473c9fbae93717b5a98c0630fb1b37480147f9ba8a5bc3fd260a"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "before_sha256": "cac028dde68004e5e1a7e5df31df0f43f6ca5d8f718ea6b40f6f0bf6d0087849",
+      "original_sha256": "d51310af362e60023feb59c89afb21ff6fae8e1bb74ae8614231f4ec3a001729",
+      "anchors": {
+        "78": 70,
+        "113": 114,
+        "225": 148,
+        "673": 590,
+        "698": 614,
+        "723": 638,
+        "800": 712,
+        "834": 743
+      },
+      "matched_lines": 776,
+      "extra_group_lines": [
+        139,
+        163,
+        190
+      ],
+      "after_sha256": "55c586fc69221068293a1db55c21b569ce34cef1526bb93e34cc8044b045ad5f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "before_sha256": "983699b824ffb930968626b8a6155988310a3ffc79e7e3d4124094a81793eb4f",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "anchors": {
+        "33": 31,
+        "1008": 2048
+      },
+      "matched_lines": 898,
+      "extra_group_lines": [
+        148,
+        167,
+        211,
+        584,
+        943,
+        971,
+        989,
+        1108
+      ],
+      "after_sha256": "6a2f2d4c8d38144418ddd9d4cdc002e862d198c9ba5dfc9fa60ad2f5e6777c63"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "before_sha256": "af6fb9b8b2d4da4279b74cba68a133718299d5507aab5f77e2a7d1e2a4c6c9ea",
+      "original_sha256": "a3465d006a88549ce5fd52ac3f8d9c0dcf1f2b2c6825f35db3d2dc683fbc7abe",
+      "anchors": {
+        "34": 34,
+        "176": 145,
+        "415": 204,
+        "549": 209,
+        "566": 221
+      },
+      "matched_lines": 208,
+      "extra_group_lines": [
+        41,
+        237,
+        420
+      ],
+      "after_sha256": "af1f7a46666b40366ef536931ea0d03c9c89e33420b3f059fff08681ef84951a"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "before_sha256": "a1f533073593cb5515943118def40fb1795e0a2fd132958bea5f78db3124645b",
+      "original_sha256": "96ee0fb677da9f35811f9dc1715d583474ce72bba9fa91f5eb2d5f6ab242b0c3",
+      "anchors": {
+        "33": 33,
+        "50": 41,
+        "201": 172,
+        "203": 173,
+        "205": 177,
+        "339": 347,
+        "649": 658
+      },
+      "matched_lines": 1276,
+      "extra_group_lines": [
+        143,
+        293
+      ],
+      "after_sha256": "394b6fdc6f9268345f3fc204f15c73dbc81a846d4d6b136fbde975d9e13d3c87"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "before_sha256": "c9e619ef5c65c337ecb9f9e979fbd41aac6f197d769dfeed78c2a5537f7d1f2c",
+      "original_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47",
+      "anchors": {
+        "56": 51,
+        "109": 94,
+        "195": 175,
+        "274": 253,
+        "281": 261,
+        "283": 264,
+        "311": 287,
+        "384": 352
+      },
+      "matched_lines": 310,
+      "extra_group_lines": [
+        155
+      ],
+      "after_sha256": "c345a04590804d528a75f7a300c09cd2dfe4178ba5a86adc5bf36fce4810a631"
+    },
+    {
+      "path": "src/mvdm-host/wow32/precomp.h",
+      "before_sha256": "ea44381521bce269bb4ef98f2918772d2a9b5597af6e3774b27ff3654186d399",
+      "original_sha256": "b4841d516682f6677332fede6ca47187bfdc132a288f71564378a1c87f7bb314",
+      "anchors": {
+        "26": 21,
+        "47": 22
+      },
+      "matched_lines": 116,
+      "extra_group_lines": [
+        24,
+        45,
+        144
+      ],
+      "after_sha256": "9cf0b8b262202e0d50b5d6b05234f5c301d461099d3d988a3ecbbcc52155112f"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "before_sha256": "2354423e23f8c3c6dcaca62a6f77bc2f7100b06a4a514c8cc435517630fefe1e",
+      "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9",
+      "anchors": {
+        "25": 25,
+        "28": 26,
+        "34": 28,
+        "39": 30,
+        "51": 32,
+        "315": 330,
+        "530": 543,
+        "549": 560,
+        "554": 563,
+        "698": 716,
+        "750": 769,
+        "867": 878,
+        "1078": 1082,
+        "1124": 1126,
+        "1434": 1430,
+        "1455": 1450,
+        "1519": 1513,
+        "1724": 1723,
+        "2902": 2910,
+        "2972": 2977,
+        "2983": 2984,
+        "2994": 2992,
+        "4355": 4352,
+        "4369": 4362,
+        "4391": 4383,
+        "4408": 4396
+      },
+      "matched_lines": 4689,
+      "extra_group_lines": [
+        31,
+        36
+      ],
+      "after_sha256": "1ce2e889b62d48130d99ac4e2ef80caa372efb82f71f2a107c799963e810ed2a"
+    }
+  ]
+}

@@ -54,6 +54,7 @@
 /* DIVERGENCE(MVDM-HOST-DIV-356): authorization also covers direct host close. */
 extern void ntvdm_worker_lifecycle_authorize_exit(void);
 #include <intrin.h>
+#line 51
 #include "nt_event.h"
 #include "nt_fulsc.h"
 #include "nt_eoi.h"
@@ -107,6 +108,7 @@ static BOOL HostApplicationStarted = FALSE;
  * =
  */
 
+#line 94
 void
 host_reset()
 {
@@ -193,6 +195,7 @@ void  host_applInit(int argc,char *argv[])
     /* A fresh original host start owns a fresh close cohort. */
     HostApplicationClosed = FALSE;
     HostApplicationStarted = TRUE;
+#line 175
     char         **temp_argv = argv;
     BOOL         bSwitchF = FALSE;
 
@@ -272,6 +275,7 @@ void  host_applInit(int argc,char *argv[])
      * Get a handle to the main thread so it can be suspended during
      * hand-shaking.
      */
+#line 253
     DuplicateHandle(GetCurrentProcess(),
 		    GetCurrentThread(),
 		    GetCurrentProcess(),
@@ -279,8 +283,10 @@ void  host_applInit(int argc,char *argv[])
 		    (DWORD) 0,
 		    FALSE,
 		    (DWORD) DUPLICATE_SAME_ACCESS);
+#line 261
     InitializeIcaLock();
     host_ica_lock();
+#line 264
     init_host_uis();    /* console setup */
     nt_start_event_thread();      /* Start event processing thread */
 }
@@ -309,6 +315,7 @@ host_applClose(void)
   if (!HostApplicationStarted || HostApplicationClosed)
       return;
   HostApplicationClosed = TRUE;
+#line 287
   nt_remove_event_thread();
   InitSound(FALSE);
   TerminateHeartBeat();
@@ -382,6 +389,7 @@ VOID TerminateVDM(void)
      *  NOTE: terminate will call host_applClose and host_terminate
      *        after doing base cleanup
      */
+#line 352
     terminate();
 }
 

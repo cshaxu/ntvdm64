@@ -23,20 +23,24 @@
 
 #include "precomp.h"
 #include "wow_task_termination.h"
+#line 25
 #pragma hdrstop
 /* DIVERGENCE(MVDM-HOST-DIV-356): parent authorizes whole-worker cleanup. */
 extern DWORD WINAPI NtvdmAuthorizeExit(DWORD exit_code);
+#line 26
 #include <ntexapi.h>
 #include <sharewow.h>
 #if !defined(_X86_)
 #define MVDM_WOW32_RESTORE_X86_FOR_VDMDBG
 #define _X86_
 #endif
+#line 28
 #include <vdmdbg.h>
 #ifdef MVDM_WOW32_RESTORE_X86_FOR_VDMDBG
 #undef _X86_
 #undef MVDM_WOW32_RESTORE_X86_FOR_VDMDBG
 #endif
+#line 30
 #include "wowfax.h"
 /* DIVERGENCE(MVDM-HOST-DIV-338): lifecycle-owned thread idle observer. */
 #include "wow_idle_hook_binding.h"
@@ -49,6 +53,7 @@ extern DWORD WINAPI NtvdmAuthorizeExit(DWORD exit_code);
 #undef NtQueryValueKey
 #undef NtClose
 
+#line 32
 extern void UnloadNetworkFonts( UINT id );
 
 MODNAME(wkman.c);
@@ -313,6 +318,7 @@ SkipWowExec:
             /* DIVERGENCE(MVDM-HOST-DIV-319): acknowledge the original no-op,
              * distinct from a failed task which never reached InitTask. */
             wow_user_notify_startup_noop(VDMInfo.iTask);
+#line 330
             ExitVDM(WOWVDM, VDMInfo.iTask);
             goto SkipWowExec;
         }
@@ -528,6 +534,7 @@ ULONG FASTCALL WK32WOWInitTask(PVDMFRAME pFrame)
 #error Unsupported excluded original configuration
 #else
 #line 566
+#line 543
     vpStack = VDMSTACK();
 #endif
 #line 545
@@ -547,11 +554,13 @@ ULONG FASTCALL WK32WOWInitTask(PVDMFRAME pFrame)
 
     if (fBoot) {
         DWORD exit_code;
+#line 560
         W32Thread((LPVOID)vpStack);    // SHOULD NEVER RETURN
 
         WOW32ASSERTMSG(FALSE, "\nWOW32: WK32WOWInitTask ERROR - Main Thread Returning - Contact DaveHart\n");
         /* DIVERGENCE(MVDM-HOST-DIV-356): before original task-record retirement. */
         exit_code = NtvdmAuthorizeExit(EXIT_FAILURE);
+#line 563
         ExitVDM(WOWVDM, ALL_TASKS);
         ExitProcess(exit_code);
     }
@@ -696,6 +705,7 @@ ULONG FASTCALL WK32OldYield(PVDMFRAME pFrame)
 
 /* DIVERGENCE(MVDM-HOST-DIV-336): scope native idle entry before guest access. */
 LRESULT CALLBACK WowOriginalForegroundIdleHook(int code, WPARAM wParam, LPARAM lParam)
+#line 716
 {
     PARM16  Parm16;
 
@@ -748,6 +758,7 @@ ULONG FASTCALL WK32WowSetIdleHook(PVDMFRAME pFrame)
          * this TD borrows its observer as the original registration intent. */
         ptd->hIdleHook = wow_user_idle_hook_for_current();
 
+#line 769
         if (ptd->hIdleHook == NULL) {
             OutputDebugString("\nWK32WowSetIdleHook : ERROR failed to Set Idle Hook Proc\n\n");
         }
@@ -865,6 +876,7 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
 #error Unsupported excluded original configuration
 #else
 #line 904
+#line 878
         SaveIp = getIP();
         host_simulate();
         setIP(SaveIp);
@@ -1076,6 +1088,7 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
         if (td.VDMInfoiTaskID != (UINT)-1 && td.VDMInfoiTaskID != 0)
             (void)wow_task_termination_bind(td.VDMInfoiTaskID,td.htask16);
 
+#line 1082
         dwLastHotkey = 0;
         dwLastX = dwLastY = dwLastXSize = dwLastYSize = (DWORD) CW_USEDEFAULT;
 
@@ -1122,6 +1135,7 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
 #error Unsupported excluded original configuration
 #else
 #line 1158
+#line 1126
     SETVDMSTACK(vpInitialSSSP);
 #endif
 #line 1128
@@ -1432,6 +1446,7 @@ DWORD W32RemoteThread(VOID)
 #endif
 #line 1428
 
+#line 1430
     W32DestroyTask(&td);
     host_ExitThread(EXIT_SUCCESS);
     return 0;
@@ -1453,6 +1468,7 @@ DWORD W32RemoteThread(VOID)
  */
 /* DIVERGENCE(MVDM-HOST-DIV-334): retire native windows before resource cleanup. */
 VOID WowOriginalFreeTask( PTD ptd )
+#line 1450
 {
     PWOAINST pWOA, pWOANext;
 
@@ -1517,6 +1533,7 @@ VOID WowOriginalFreeTask( PTD ptd )
     if (ptd->hIdleHook != NULL) {
         /* DIVERGENCE(MVDM-HOST-DIV-338): lifecycle retires the borrowed
          * observer; this original branch withdraws only the task's intent. */
+#line 1513
         ptd->hIdleHook = NULL;
     }
 
@@ -1722,6 +1739,7 @@ VOID W32DestroyTask( PTD ptd)
 
     // Remove this task from the linked list of tasks
 
+#line 1723
     WK32DeleteTask(ptd);
 
     // Close This Apps Thread Handle
@@ -2900,6 +2918,7 @@ DWORD W32HungAppNotifyThread(UINT htaskKill)
                  /* DIVERGENCE(MVDM-HOST-DIV-449): original user cancellation
                   * leaves this exact task live; reopen only its ticket. */
                  wow_task_termination_fail((USHORT)htaskKill);
+#line 2910
                  ExitThread(0);
             }
         }
@@ -2970,6 +2989,7 @@ DWORD W32HungAppNotifyThread(UINT htaskKill)
                  /* DIVERGENCE(MVDM-HOST-DIV-449): the original task remains
                   * live after cancel, so an explicit later close may retry. */
                  wow_task_termination_fail((USHORT)htaskKill);
+#line 2977
                  ExitThread(0);
             }
 
@@ -2981,6 +3001,7 @@ DWORD W32HungAppNotifyThread(UINT htaskKill)
                 ExitVDM(WOWVDM, ALL_TASKS);
                 ExitProcess(exit_code);
             }
+#line 2984
         }
 
         LOGDEBUG(LOG_ALWAYS,("W32HungAppNotifyThread: Success with Keyboard Interrupt\n"));
@@ -2992,6 +3013,7 @@ DWORD W32HungAppNotifyThread(UINT htaskKill)
          * still-published binding on this path. Reopen only that ticket. */
         wow_task_termination_fail((USHORT)htaskKill);
 
+#line 2992
     }
 
     ExitThread(EXIT_SUCCESS);
@@ -4353,6 +4375,7 @@ ULONG FASTCALL WK32ExitKernel(PVDMFRAME pFrame)
     PEXITKERNEL16 parg16;
     DWORD exit_code;
 
+#line 4352
     GETARGPTR(pFrame, sizeof(*parg16), parg16);
 
     WOW32ASSERTMSG(
@@ -4367,6 +4390,7 @@ ULONG FASTCALL WK32ExitKernel(PVDMFRAME pFrame)
     exit_code = parg16->wExitCode;
     FREEARGPTR(parg16);
     exit_code = NtvdmAuthorizeExit(exit_code);
+#line 4362
     ExitVDM(WOWVDM, ALL_TASKS);
     ExitProcess(exit_code);
 
@@ -4389,6 +4413,7 @@ ULONG FASTCALL WK32FatalExit(PVDMFRAME pFrame)
     PFATALEXIT16 parg16;
     DWORD exit_code;
 
+#line 4383
     GETARGPTR(pFrame, sizeof(*parg16), parg16);
 
     WOW32ASSERTMSGF(
@@ -4406,6 +4431,7 @@ ULONG FASTCALL WK32FatalExit(PVDMFRAME pFrame)
     exit_code = parg16->f1;
     FREEARGPTR(parg16);
     exit_code = NtvdmAuthorizeExit(exit_code);
+#line 4396
     ExitVDM(WOWVDM, ALL_TASKS);
     ExitProcess(exit_code);
 

@@ -32,6 +32,7 @@
 #include "host_def.h"
 #include CpuH
 
+#line 34
 #include "gdpvar.h"
 #include "nt_inthk.h"
 #include "debug.h"
@@ -174,6 +175,7 @@ GLOBAL BOOL host_swint_hook IFN1(IS32, int_no)
     }
 
     /* software interrupt handler defined ? */
+#line 145
     if(SWIntHandler)
     {
 	returnStatus = (SWIntHandler)((ULONG) int_no);
@@ -413,6 +415,7 @@ string_unhandled:
     return FALSE;
 }
 #endif
+#line 204
 GLOBAL BOOL host_exint_hook IFN2(IS32, exp_no, IS32, error_code)
 {
     BOOL returnStatus = FALSE;
@@ -547,6 +550,7 @@ candidate_unhandled:
 
 
     /* exception interrupt handler defined ? */
+#line 209
     if(EXIntHandler)
     {
 	returnStatus = (EXIntHandler)((ULONG) exp_no, (ULONG) error_code);
@@ -564,6 +568,7 @@ candidate_unhandled:
     mvdm_softpc_report_wow_exception_hook((ULONG)exp_no, (ULONG)error_code,
         (ULONG)handlerInstalled, (ULONG)returnStatus);
 
+#line 221
     return( returnStatus );
 }
 #endif /* CCPU */

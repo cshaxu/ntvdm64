@@ -24,6 +24,7 @@
 #ifndef _WOWNT32_
 #define _WOWNT32_
 #endif
+#line 21
 #include <nt.h>
 /* DIVERGENCE(MVDM-HOST-DIV-179): the original build's private include-root
  * made these declaration carriers implicit.  The split mirror uses the
@@ -45,6 +46,7 @@
 #ifdef _X86_
 #undef _X86_
 #endif
+#line 22
 #include "wow32.h"
 #include "wowtbl.h"
 #include "doswow.h"

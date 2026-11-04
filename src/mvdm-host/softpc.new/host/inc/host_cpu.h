@@ -30,6 +30,7 @@
  * Union representing different ways of accessing a register
  */
 
+#line 124
 typedef union
     {
         word    X;
@@ -38,6 +39,7 @@ typedef union
         /* DIVERGENCE: word port I/O overlays X with these host-order bytes. */
 #ifdef LITTLEND
         half_word low;
+#line 129
         half_word high;
 #else
 #line 129
