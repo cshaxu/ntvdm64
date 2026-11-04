@@ -1,0 +1,1753 @@
+{
+  "checked": 1055,
+  "structurally_exact_ordered": 966,
+  "flagged": [
+    {
+      "path": "src/mvdm-host/dpmi32/data.c",
+      "status": "completed-original-witnessed-condition-tree",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            139,
+            "defined(CPU_40_STYLE)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r700-dpmi-data-review.json"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "status": "completed-original-witnessed-condition-tree",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            305,
+            "defined(CPU_40_STYLE)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r753-dpmi32-conditions.json"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "status": "completed-original-witnessed-condition-tree",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            121,
+            "defined(CPU_40_STYLE)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r755-dpmi32p-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmidata.h",
+      "status": "completed-original-witnessed-condition-tree",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            37,
+            "defined(CPU_40_STYLE)"
+          ],
+          [
+            45,
+            "!defined(CPU_40_STYLE)"
+          ],
+          [
+            62,
+            "!defined(_WINNT_)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r757-dpmidata-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "status": "completed-original-witnessed-condition-tree",
+      "count": 6,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            44,
+            "defined(CPU_40_STYLE)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r758-dpmiint-conditions.json"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmimemr.c",
+      "status": "completed-original-witnessed-condition-tree",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            64,
+            "defined(CPU_40_STYLE)"
+          ],
+          [
+            123,
+            "defined(CPU_40_STYLE)"
+          ],
+          [
+            181,
+            "defined(CPU_40_STYLE)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r761-dpmimemr-conditions.json"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "status": "completed-original-witnessed-condition-tree",
+      "count": 2,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            241,
+            "defined(CPU_40_STYLE)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r762-dpmiselr-conditions.json"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
+      "status": "completed-original-witnessed-condition-tree",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            30,
+            "defined(CPU_40_STYLE)"
+          ],
+          [
+            64,
+            "defined(CPU_40_STYLE)"
+          ],
+          [
+            70,
+            "defined(CPU_40_STYLE)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r763-dpmi386-conditions.json"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "status": "completed-original-witnessed-condition-tree",
+      "count": 2,
+      "first": [
+        "delete",
+        [
+          [
+            49,
+            "defined(i386)"
+          ]
+        ],
+        []
+      ],
+      "evidence": "s13-r764-modesw-conditions.json"
+    },
+    {
+      "path": "src/mvdm-host/inc/mvdm.h",
+      "status": "completed-original-witnessed-condition-tree",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            73,
+            "defined(_M_IX86)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r766-mvdm-header-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/inc/suballoc.h",
+      "status": "completed-original-witnessed-condition-tree",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            37,
+            "defined(_M_IX86)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r771-suballoc-header-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "status": "completed-original-conditional-tree",
+      "count": 2,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            492,
+            "!defined(CPU_40_STYLE)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1056-reset-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "status": "completed-original-conditional-tree",
+      "count": 9,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            235,
+            "NTVDM"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1058-cmain-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+      "status": "completed-original-guard-lines-and-local-condition",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            259,
+            "defined(CPU_40_STYLE)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r569-reviewed-files.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+      "status": "completed-original-conditional-tree",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            41,
+            "PROD"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1060-cxcptn-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/evidgen.h",
+      "status": "completed-original-conditional-tree",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            97,
+            "CPU_40_STYLE"
+          ],
+          [
+            138,
+            "CPU_40_STYLE"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1067-cvidevidgen-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "status": "completed-original-conditional-tree",
+      "count": 1,
+      "first": [
+        "replace",
+        [
+          [
+            1883,
+            "NTVDM"
+          ]
+        ],
+        [
+          [
+            1655,
+            "!defined(NTVDM) || defined(MVDM_SOFTPC_RECOVER_LIM_WRITEBACK)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1072-emm-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "status": "completed-original-conditional-tree",
+      "count": 2,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            87,
+            "defined(CPU_40_STYLE) && defined(C_VID)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1078-cpuvid-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+      "status": "completed-original-conditional-tree",
+      "count": 2,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            93,
+            "C_VID"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1081-egacpu-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gmi.h",
+      "status": "completed-original-conditional-tree",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            19,
+            "defined(CPU_40_STYLE) && defined(C_VID)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1090-gmi-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "status": "completed-original-conditional-tree",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            89,
+            "!defined(CCPU)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1096-ica-header-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 7,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            90,
+            "NTVDM"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1173-keyba-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 6,
+      "first": [
+        "replace",
+        [
+          [
+            2641,
+            "NTVDM"
+          ]
+        ],
+        [
+          [
+            2337,
+            "NTVDM"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1174-mouse-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 1,
+      "first": [
+        "replace",
+        [
+          [
+            413,
+            "defined(NTVDM) && defined(MONITOR)"
+          ]
+        ],
+        [
+          [
+            410,
+            "defined(NTVDM) && defined(MONITOR)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1175-ios-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 1,
+      "first": [
+        "replace",
+        [
+          [
+            54,
+            "CPU_40_STYLE"
+          ]
+        ],
+        [
+          [
+            64,
+            "CPU_40_STYLE"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1176-main-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 2,
+      "first": [
+        "replace",
+        [
+          [
+            76,
+            "MAC_LIKE"
+          ]
+        ],
+        [
+          [
+            84,
+            "defined(CCPU) && !defined(CPU_40_STYLE)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1253-xt-condition-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 2,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            838,
+            "NTVDM"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1177-ica-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 2,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            40,
+            "NTVDM"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1197-illegalp-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 2,
+      "first": [
+        "replace",
+        [
+          [
+            289,
+            "NO_STRING_OPERATIONS"
+          ],
+          [
+            306,
+            "NO_STRING_OPERATIONS"
+          ]
+        ],
+        [
+          [
+            217,
+            "defined(CPU_40_STYLE)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1255-egawrtm-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 2,
+      "first": [
+        "replace",
+        [
+          [
+            226,
+            "NO_STRING_OPERATIONS"
+          ],
+          [
+            244,
+            "NO_STRING_OPERATIONS"
+          ]
+        ],
+        [
+          [
+            165,
+            "defined(CPU_40_STYLE)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1255-egawrtm-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 2,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            46,
+            "defined(NTVDM) && !defined(X86GFX)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1179-v7video-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            495,
+            "V7VGA"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1180-vgamode-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 3,
+      "first": [
+        "replace",
+        [
+          [
+            1511,
+            "( defined(NTVDM) && defined(MONITOR) ) || defined(GISP_SVGA)"
+          ]
+        ],
+        [
+          [
+            1511,
+            "( defined(NTVDM) && defined(MONITOR) && !defined(MVDM_STANDALONE_SAS_VIDEO) ) || defined(GISP_SVGA)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1254-video-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            21,
+            "LITTLEND"
+          ],
+          [
+            32,
+            "LITTLEND"
+          ],
+          [
+            43,
+            "LITTLEND"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1181-cfpu-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            39,
+            "LITTLEND"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1252-hostcpu-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            41,
+            "defined(CPU_40_STYLE)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1182-hostdef-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 2,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            431,
+            "defined(CPU_40_STYLE)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1250-config-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 2,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            53,
+            "CCPU"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1204-ntcpu-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            139,
+            "BACK_M"
+          ],
+          [
+            162,
+            "BACK_M"
+          ],
+          [
+            188,
+            "BACK_M"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1183-ntemm-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 2,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            1459,
+            "X86GFX"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1205-ntevent-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 4,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            148,
+            "X86GFX"
+          ],
+          [
+            167,
+            "X86GFX"
+          ],
+          [
+            211,
+            "X86GFX"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1251-ntfulsc-contextual-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 7,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            89,
+            "V7VGA"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1196-ntgraph-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 2,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            41,
+            "CCPU"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1184-inthk-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 2,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            143,
+            "CPU_40_STYLE"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1185-msscs-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            157,
+            "X86GFX"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1186-ntreset-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 2,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            18,
+            "CPU_40_STYLE"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1235-sim32-full-review.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/precomp.h",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            24,
+            "_WOWNT32_"
+          ],
+          [
+            45,
+            "_X86_"
+          ],
+          [
+            144,
+            "WOW_ORIGINAL_THUNK_BUILD"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1187-local-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            31,
+            "!defined(_X86_)"
+          ],
+          [
+            36,
+            "MVDM_WOW32_RESTORE_X86_FOR_VDMDBG"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1189-wkman-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wole2.c",
+      "status": "completed-original-guard-lines-and-local-condition",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            19,
+            "STATUS_INFO_LENGTH_MISMATCH"
+          ]
+        ]
+      ],
+      "evidence": "s13-r569-reviewed-files.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 4,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            582,
+            "DEBUG"
+          ],
+          [
+            597,
+            "DEBUG"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1188-wow32-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 2,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            271,
+            "WOW_USER_PRIVATE_REDIRECT"
+          ],
+          [
+            282,
+            "WOW_USER_PRIVATE_REDIRECT"
+          ],
+          [
+            287,
+            "WOW_USER_PRIVATE_REDIRECT"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1190-wuclass-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 2,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            1703,
+            "WOW_USER_PRIVATE_REDIRECT"
+          ],
+          [
+            1714,
+            "WOW_USER_PRIVATE_REDIRECT"
+          ],
+          [
+            1719,
+            "WOW_USER_PRIVATE_REDIRECT"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1191-wuwind-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsmemr.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            25,
+            "CPU_40_STYLE"
+          ],
+          [
+            149,
+            "CPU_40_STYLE"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1192-local-full-file.json"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/time.c",
+      "status": "completed-original-rtl-condition-and-local-subset",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            62,
+            "defined(MVDM_STANDALONE_TIME1970_ONLY)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r596-rtl-time-conditions.json"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 5,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            35,
+            "(!defined(OPENNT_BASE_CLIENT_VDM_COMMANDS) && !defined(OPENNT_BASE_CLIENT_CLASSIFIER)) || defined(OPENNT_BASE_CLIENT_VDM_ENVIRONMENT)"
+          ],
+          [
+            178,
+            "defined(OPENNT_BASE_CLIENT_VDM_COMMANDS)"
+          ],
+          [
+            1835,
+            "defined(OPENNT_BASE_CLIENT_VDM_COMMANDS)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1246-vdm-client-review.json"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/basesrv.h",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            30,
+            "defined(OPENNT_BASE_VDM_SERVER)"
+          ],
+          [
+            231,
+            "!defined(OPENNT_BASE_VDM_SERVER)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1168-local-full-file.json"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            60,
+            "!defined(MVDM_XACTSRV_PACKSTR_COPY_ONLY)"
+          ],
+          [
+            194,
+            "!defined(MVDM_XACTSRV_PACKSTR_COPY_ONLY)"
+          ],
+          [
+            200,
+            "!defined(MVDM_XACTSRV_PACKSTR_COPY_ONLY)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1198-local-full-file.json"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdmapi.h",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            5,
+            "MVDM_OPENNT_VDMAPI_H"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1167-local-full-file.json"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            15,
+            "defined(OPENNT_ADAPTER_NT_ALERT_THREAD)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1258-ntpsapi-review.json"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "completed-structural-review",
+      "count": 5,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            15,
+            "__cplusplus"
+          ],
+          [
+            84,
+            "OPENNT_SUPPORT_TIME_FIELDS_DECLARED"
+          ],
+          [
+            122,
+            "NtCurrentProcess"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1265-ntrtl-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            12,
+            "WOW_BITMAP_FIXTURE_BINDINGS"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1162-cldib-full-file.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 2,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            16,
+            "defined(WOW_ORIGINAL_DEF_WINDOW_BITS)"
+          ],
+          [
+            203,
+            "FE_IME"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1244-client-full-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 6,
+      "first": [
+        "replace",
+        [
+          [
+            270,
+            "FE_SB"
+          ],
+          [
+            327,
+            "FE_IME"
+          ],
+          [
+            331,
+            "FE_SB"
+          ]
+        ],
+        [
+          [
+            20,
+            "defined(WOW_ORIGINAL_CLIENT_CPD)"
+          ],
+          [
+            43,
+            "defined(WOW_ORIGINAL_DEFAULT_WINDOW)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1242-clmsg-full-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 4,
+      "first": [
+        "replace",
+        [
+          [
+            881,
+            "DEBUG"
+          ]
+        ],
+        [
+          [
+            14,
+            "defined(WOW_ORIGINAL_DIALOG_TEMPLATE)"
+          ],
+          [
+            673,
+            "0"
+          ],
+          [
+            691,
+            "!defined(WOW_ORIGINAL_DIALOG_TEMPLATE)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1211-clres-full-file.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            572,
+            "WOW_NATIVE_DIALOG_PROCEDURE_OWNER"
+          ],
+          [
+            618,
+            "WOW_NATIVE_DIALOG_PROCEDURE_OWNER"
+          ],
+          [
+            638,
+            "WOW_NATIVE_DIALOG_PROCEDURE_OWNER"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1193-dlgbegin-full-file.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            318,
+            "defined(WOW_ORIGINAL_DIALOG_MANAGER)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1194-dlgmgr-full-file.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 5,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            236,
+            "WOW_ORIGINAL_DIALOG_KEYBOARD"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1236-dlgmgr2-full-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 3,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            7,
+            "WOW_ORIGINAL_STATE_DRAWING"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1195-mngrayc-full-file.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 4,
+      "first": [
+        "replace",
+        [
+          [
+            77,
+            "FE_IME"
+          ],
+          [
+            358,
+            "LATER"
+          ]
+        ],
+        [
+          [
+            2,
+            "defined(WOW_ORIGINAL_CONTROL_TEXT)"
+          ],
+          [
+            216,
+            "DEBUG"
+          ],
+          [
+            220,
+            "defined(WOW_ORIGINAL_DIALOG_GETSET) && !defined(WOW_ORIGINAL_CONTROL_TEXT) && !defined(WOW_ORIGINAL_CONTROL_COLOR) && !defined(WOW_ORIGINAL_CONTROL_BRUSH_CLIENT)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1237-ntstubs-full-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 5,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            14,
+            "defined(WOW_ORIGINAL_EDIT_LOOKASIDE)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1208-rtlinit-full-file.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "status": "completed-structural-review-projection",
+      "count": 2,
+      "first": [
+        "replace",
+        [
+          [
+            15,
+            "_USERCLI_"
+          ]
+        ],
+        [
+          [
+            8,
+            "OPENNT_USERCLI_LOOKASIDE_SUBSET_H"
+          ],
+          [
+            96,
+            "WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY"
+          ],
+          [
+            528,
+            "defined(WOW_ORIGINAL_COMBO_STATE_LAYOUT) && !defined(OPENNT_COMBO_STATE_LAYOUT_H)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1267-usercli-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            8,
+            "WOW_ORIGINAL_EDIT_CLIENT"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1165-local-full-file.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 4,
+      "first": [
+        "replace",
+        [
+          [
+            304,
+            "WOW"
+          ]
+        ],
+        [
+          [
+            41,
+            "WOW"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1210-wowclient-full-file.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "status": "completed-structural-review",
+      "count": 16,
+      "first": [
+        "delete",
+        [
+          [
+            38,
+            "UNICODE"
+          ]
+        ],
+        []
+      ],
+      "evidence": "s13-r1264-ntcftxt-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "status": "completed-structural-review-projection",
+      "count": 1,
+      "first": [
+        "replace",
+        [
+          [
+            15,
+            "_USER_"
+          ]
+        ],
+        [
+          [
+            5,
+            "OPENNT_USER_OBJECT_TYPES_SUBSET_H"
+          ],
+          [
+            153,
+            "(defined(WOW_ORIGINAL_LARGE_STRING_LAYOUT) || defined(WOW_ORIGINAL_CLIENT_VIEW_LAYOUT)) && !defined(OPENNT_USER_LARGE_STRING_LAYOUT_H)"
+          ],
+          [
+            184,
+            "defined(WOW_ORIGINAL_CLIENT_VIEW_LAYOUT) && !defined(OPENNT_USER_CLIENT_VIEW_LAYOUT_H)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1268-user-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 2,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            19,
+            "WOW_ORIGINAL_CLASS_REGISTRATION"
+          ],
+          [
+            237,
+            "DBG"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1240-kernel-class-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            58,
+            "WOW_NATIVE_DIALOG_PROCEDURE_OWNER"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1215-kernel-getset-full-file.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 4,
+      "first": [
+        "delete",
+        [
+          [
+            18,
+            "DEBUG_LOCKS"
+          ],
+          [
+            56,
+            "FE_IME"
+          ],
+          [
+            81,
+            "FE_IME"
+          ]
+        ],
+        []
+      ],
+      "evidence": "s13-r1241-handtabl-full-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 8,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            18,
+            "MARKPATH"
+          ],
+          [
+            28,
+            "0"
+          ],
+          [
+            34,
+            "NEVER"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1247-input-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "status": "completed-structural-review",
+      "count": 8,
+      "first": [
+        "delete",
+        [
+          [
+            268,
+            "FE_IME"
+          ],
+          [
+            282,
+            "DBG"
+          ],
+          [
+            352,
+            "defined(_X86_)"
+          ]
+        ],
+        []
+      ],
+      "evidence": "s13-r1263-ntstubs-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 5,
+      "first": [
+        "delete",
+        [
+          [
+            43,
+            "DBG"
+          ]
+        ],
+        []
+      ],
+      "evidence": "s13-r1248-queue-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 7,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            9,
+            "defined(WOW_ORIGINAL_DEFAULT_MESSAGES)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1243-server-full-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "status": "completed-structural-review",
+      "count": 2,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            12,
+            "WOW_USER_OBJECT_FLAGS_ONLY"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1266-userk-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 3,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            38,
+            "FE_SB"
+          ],
+          [
+            51,
+            "FE_SB"
+          ],
+          [
+            76,
+            "_USERK_"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1207-chartran-full-file.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            10,
+            "WOW_ORIGINAL_BUTTON_DRAWING"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1209-draw-full-file.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 6,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            66,
+            "FE_SB"
+          ],
+          [
+            91,
+            "WOW_ORIGINAL_MNEMONIC_DRAWING"
+          ],
+          [
+            197,
+            "FE_SB"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1214-drawtext-full-file.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 2,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            51,
+            "WOW_NATIVE_DIALOG_PROCEDURE_OWNER"
+          ],
+          [
+            90,
+            "WOW_NATIVE_DIALOG_PROCEDURE_OWNER"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1216-rtl-getset-full-file.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 1,
+      "first": [
+        "insert",
+        [],
+        [
+          [
+            8,
+            "!defined(WOW_ORIGINAL_DEFAULT_GEOMETRY)"
+          ],
+          [
+            37,
+            "defined(WOW_ORIGINAL_DEFAULT_GEOMETRY)"
+          ],
+          [
+            80,
+            "!defined(WOW_ORIGINAL_DEFAULT_GEOMETRY)"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1166-local-full-file.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "count": 2,
+      "first": [
+        "replace",
+        [
+          [
+            244,
+            "WOW"
+          ]
+        ],
+        [
+          [
+            111,
+            "WOW"
+          ],
+          [
+            126,
+            "WOW"
+          ]
+        ]
+      ],
+      "evidence": "s13-r1245-rtl-wow-review.json"
+    }
+  ],
+  "unparsed": [],
+  "limits": "Candidate detection only: local subset projections, reordered independent groups, aliases, and source additions create false positives; no deletion or completion inference.",
+  "inventory_sha256": "6ab5baf88c949c0f490c7a073856ce7199506cee7cdfe9693a80bb2e92fc7a1a",
+  "note": "Ordered-tree comparison is intentionally conservative. All 89 candidates have linked existing per-file evidence, but this report alone does not adjudicate semantic correctness. See each linked review; original 2 USER whole-file-guard projections are explicit exceptions."
+}
