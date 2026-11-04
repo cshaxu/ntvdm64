@@ -17,7 +17,9 @@ does not change their source provenance, executable ownership or ABI.
 
 `src/lib-win32/rpc` carries local RPC binding and async completion mechanics;
 `src/lib-win32/io` carries checked overlapped pipe transfer, Console membership
-sampling and final native file-path resolution. Their product-independent contracts depend only on native platform
+sampling and final native file-path resolution. `src/lib-win32/process` owns process
+attribute-list mechanics and `src/lib-win32/handle` owns explicit-process handle
+duplication and remote cleanup. Their product-independent contracts depend only on native platform
 APIs. Product wire formats, RPC operations, frontend codecs and lifecycle
 policy stay in `common` or their executable owners. Generic libraries never
 depend on common, worker-base or private executable components.

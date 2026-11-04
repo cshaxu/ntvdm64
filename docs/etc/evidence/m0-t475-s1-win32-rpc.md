@@ -53,3 +53,29 @@ the optional DOS4GW/NESticle external fixture was absent and skipped. Full was
 not run and the known original guest long-PATH limitation remains. Package
 `f3161950-6ff1-4558-9080-9686bd37cb98` was published to this worktree's
 `assets/release`, with all ten release hashes verified.
+
+## Shared Win32 handle P
+
+The owner admitted a further P to share same-access handle duplication between
+NTSRV's RPC output export and NTHOOK's child attachment. `lib-win32/handle`
+accepts explicit source and target process handles; its remote cleanup duplicates
+the target-owned handle back with `DUPLICATE_CLOSE_SOURCE`, then closes the
+local duplicate. NTSRV retains MIDL allocation, output cleanup and RPC transfer
+ownership; NTHOOK retains payload, adoption and rollback decisions.
+
+The fresh ten-image build passed frontend and BaseSrv ownership checks. The
+new handle fixture passed 13 checks with an actual child process, including
+local duplication, remote duplication, remote release and stale-handle
+rejection. The x64 Hook installer regression passed 118 assertions. An initial
+link graph generation inserted an input before a multi-output separator; it was
+corrected. A later build script combined test executable names; separately
+invoked fixtures passed. Build, fixture, staging and Control commands, PIDs,
+times and outputs are retained under `build/t475-handle-p`. Ten fresh package
+inputs and outputs matched their hashes, 63 immutable guest files and 274 NTVDM
+export ordinals passed verification.
+
+Control passed all 12 selected gates on this identical package. The optional
+external DOS4GW/NESticle fixture was unavailable and skipped; Full was not
+run, and the original guest long-PATH limitation remains. Package
+`9baf506d-436a-411a-aeda-cf70fcfea4a0` was published to this worktree's
+`assets/release`, with all ten release hashes verified.

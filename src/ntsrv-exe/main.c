@@ -1,6 +1,7 @@
 /* Standalone BaseSrv composition. S3 integration in progress: the current
  * endpoint offers registration/first-VDM and typed stream receipts, not DOS launch.
  * It is build-only until command/resource/worker and idle gates are complete. */
+#include "lib-win32/handle/duplicate.h"
 #include <windows.h>
 #include <rpc.h>
 #include <rpcasync.h>
@@ -388,9 +389,8 @@ static DWORD export_handles(const HANDLE *source,ULONG count,HANDLE **output)
     for (index=0;index<count;++index) {
         (*output)[index]=NULL;
         if (!source[index]) continue;
-        if (!DuplicateHandle(GetCurrentProcess(),source[index],GetCurrentProcess(),
-                &(*output)[index],0,FALSE,DUPLICATE_SAME_ACCESS)) {
-            error=GetLastError();
+        error=win32_handle_duplicate(GetCurrentProcess(),source[index],GetCurrentProcess(),&(*output)[index]);
+        if (error) {
             while (index) { --index; if ((*output)[index]) CloseHandle((*output)[index]); }
             MIDL_user_free(*output); *output=NULL;
             return error;
