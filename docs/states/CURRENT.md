@@ -64,6 +64,11 @@ original-call and LastError checks; a test-only NTVDM relink reached Win16
 WRITE main/document/page-info in four snapshots. Local package
 `b5eceac1-5472-4266-8287-75ff14854f64` passed Control and hash verification.
 WRITE editing and exit, Full and DOS4GW/NESticle were not verified.
+P7 removes the obsolete Detours mechanism wrapper and replaces its mock-only
+C++ test with C tests of the selected direct-payload implementation. x86/x64
+checks passed, as did the product build and Control. Local package
+`392e6339-d0e6-4e4c-a602-3c48f24cde5a` has ten verified hashes. Other
+C++/Detours diagnostics and legacy fixtures remain open.
 The adjacent library's same-width payload-only mechanism, non-Detours payload
 format, helper ordinal and startup-only transaction require compatibility proof;
 no untested semantic equivalence is assumed. Prior [S4 evidence](../etc/evidence/m0-t475-s4-nthook-dependency-cleanup.md),

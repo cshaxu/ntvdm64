@@ -1730,7 +1730,6 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/common/native_image.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/native_image.c')))
     $graph.Add('  cflags = ' + $baseAdapterFlags)
     # One worker; actual child machine selects the reviewed matching Hook installer.
-    $hookFlags = '/nologo /TP /c /MT /O2 /Gy /W4 /showIncludes /std:c++14 /DWIN32_LEAN_AND_MEAN /D_WIN32_WINNT=0x0A00 /I obj/basesrv /I "' + (NinjaPath (Join-Path $root 'src')) + '"'
     $hookCFlags = '/nologo /TC /c /MT /O2 /Gy /W4 /we4013 /showIncludes /std:c11 /DWIN32_LEAN_AND_MEAN /D_WIN32_WINNT=0x0A00 /I obj/basesrv /I "' + (NinjaPath (Join-Path $root 'src')) + '"'
     $hookObjects = @()
     foreach ($name in @('staging','helper','payload','startup_hooks','minhook/src/buffer','minhook/src/trampoline','minhook/src/hde/hde32')) {
@@ -1754,9 +1753,9 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/nthook32/classification.obj: cc ' + (NinjaPath (Join-Path $root 'src/nthook32-dll/hook_classification.c')))
     $graph.Add('  cflags = ' + $baseAdapterFlags + ' /Gy')
     $graph.Add('build lib-process-hook.lib: lib ' + ($hookObjects -join ' '))
-    $graph.Add('build obj/tests/win32_process_hook.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/win32_process_hook_test.cpp')))
-    $graph.Add('  cflags = ' + $hookFlags)
-    $graph.Add('build win32-process-hook-test.exe: broker_test_link obj/tests/win32_process_hook.obj')
+    $graph.Add('build obj/tests/win32_process_hook.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/win32_process_hook_test.c')))
+    $graph.Add('  cflags = ' + $hookCFlags)
+    $graph.Add('build win32-process-hook-test.exe: broker_test_link obj/tests/win32_process_hook.obj lib-process-hook.lib')
     $graph.Add('build common-native-hook-context.lib: lib obj/common/native-hook/context.obj obj/common/native-hook/packet.obj')
     $graph.Add('build common-native-hook-installer.lib: lib obj/common/native-hook/installer.obj obj/common/native_image.obj')
     $graph.Add('rule nthook_dll_link')

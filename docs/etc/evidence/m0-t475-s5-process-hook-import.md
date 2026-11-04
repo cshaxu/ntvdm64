@@ -241,3 +241,22 @@ passed (`p6/control.process`), and ten local release image hashes and the
 license match package `b5eceac1-5472-4266-8287-75ff14854f64`. Full and
 DOS4GW/NESticle were not run. Remaining diagnostic and legacy C++/Detours
 sources remain open in S5.
+
+## P7 — retire obsolete Detours mechanism wrapper
+
+The unused `win32_process_hook_apply` wrapper and its Detours-based mock test
+were removed. The build target now uses a C test against the selected direct
+payload implementation. The controlled self-process fixture checks invalid
+arguments, no payload, actual write, duplicate rejection, failed-consumer retry,
+actual successful consumption and absence after release: ten checks on both
+x86 (`p7/build.process`) and x64 (`p7/test-x64-r2.process`). The first x64
+attempt failed to invoke its command script due to Windows path parsing and is
+not passing evidence. The previous four-width actual product and Hook failure
+integration coverage remains recorded under P3.
+
+The x86/x64 product build and focused checks passed (`p7/build.process`);
+staging checked 63 immutable guest files and 274 exports (`p7/stage.process`).
+Control passed (`p7/control.process`); ten local release image hashes and the
+license match package `392e6339-d0e6-4e4c-a602-3c48f24cde5a`. Full and
+DOS4GW/NESticle were not run. Other diagnostics and legacy C++/Detours remain
+open in S5.
