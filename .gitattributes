@@ -39,6 +39,8 @@ src/lib-win32/process-hook/staging.[ch] -text
 src/lib-win32/process-hook/startup_hooks.[ch] -text
 src/lib-win32/process-hook/minhook/** -text
 src/lib-win32/process-hook/LICENSE.win16style -text whitespace=cr-at-eol
+# New shared payload extension uses the upstream project C source line endings.
+src/lib-win32/process-hook/payload.[ch] text eol=lf
 # Pinned MIT Detours slice retains the registered upstream byte hashes.
 src/lib-win32/process-hook/detours/** -text
 src/opennt-softpc/bios/** -text -whitespace

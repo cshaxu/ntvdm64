@@ -1,0 +1,3 @@
+LIBRARY cross_helper
+EXPORTS
+    Finish @1 NONAME

@@ -33,6 +33,13 @@ payload fixtures; local package `8ab5e971-e071-41f7-bf24-c5e694fcbbff`
 passed Control and ten hash checks. The existing Detours product path remains.
 Full and DOS4GW/NESticle were not run. [S5 evidence](../etc/evidence/m0-t475-s5-process-hook-import.md).
 
+P2 moves native Hook packet validation to selected C code and adds an isolated,
+helper-free cross-width direct-payload candidate. MSVC and MinGW four-pair,
+error, retry and release tests passed; the original Hook regressions and Control
+passed with local package `b8fbc836-9f8c-482d-80c7-7861110808ed`. The new
+payload API is not yet used by product code or synchronized upstream; the
+adjacent worktree has another active S. Full and DOS4GW/NESticle were not run.
+
 The adjacent library's same-width payload-only mechanism, non-Detours payload
 format, helper ordinal and startup-only transaction require compatibility proof;
 no untested semantic equivalence is assumed. Prior [S4 evidence](../etc/evidence/m0-t475-s4-nthook-dependency-cleanup.md),

@@ -43,7 +43,7 @@ $graph.Add('rule idl')
 $graph.Add('  command = midl.exe /nologo /env x64 /target NT100 /prefix client Client_ /prefix server Server_ /acf "'+(NP (Join-Path $root 'src/common/protocol/service.acf'))+'" /out obj/basesrv /h service.h /cstub service_c.c /sstub service_s.c "'+(NP (Join-Path $root 'src/common/protocol/service.idl'))+'"')
 $graph.Add('build obj/basesrv/service.h obj/basesrv/service_c.c obj/basesrv/service_s.c: idl '+(NP (Join-Path $root 'src/common/protocol/service.idl'))+' | '+(NP (Join-Path $root 'src/common/protocol/service.acf')))
 $graph.Add('build observation-stub.obj: cc obj/basesrv/service_c.c | obj/basesrv/service.h')
-$sources=@('src/nthook32-dll/entry.cpp','src/common/native-hook/context.cpp',
+$sources=@('src/nthook32-dll/entry.cpp','src/common/native-hook/context.cpp','src/common/native-hook/packet.c',
     'src/common/native-hook/installer.cpp','src/nthook32-dll/create_process.cpp',
     'src/lib-win32/process-hook/install.cpp',
     'src/common/native_image.c','src/lib-win32/handle/duplicate.c','src/lib-win32/file/identity.c',

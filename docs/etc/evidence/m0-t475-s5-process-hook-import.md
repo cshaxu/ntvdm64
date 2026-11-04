@@ -91,3 +91,48 @@ hash-verified images. Full and external DOS4GW/NESticle were not run. P1
 only imports and independently tests the library: existing Detours production
 selection remains, and product migration is not complete. Main publication
 and push remain deferred per owner.
+
+## P2 — C packet parser and cross-width payload mechanism
+
+`tests/lib-win32/process-hook/verify-cross-payload.ps1` builds isolated x86
+and x64 targets and same-width helper DLLs using the unchanged imported C
+library. Run `build/t475-s5/cross-payload-r3.process` exited 0: x86-to-x86,
+x86-to-x64, x64-to-x86 and x64-to-x64 payloads were delivered, read and
+restored without loading the helper DLL into the target. Both cross-width
+helpers rejected corrupted packets while their targets remained alive; each
+fixture then cleaned up its own suspended child. The draft product C packet
+parser accepted a valid packet and rejected ten malformed cases on both widths.
+These tests establish a candidate mechanism, not equivalence of the product
+launcher, actual hook installation, all failures or production lifecycle.
+The product now selects the C packet parser, while the pre-existing Detours
+transport remains active.
+
+An earlier helper-based product draft made pure payloads depend on the matching
+Hook DLL, unlike the old path. It was not selected or published. The direct
+payload candidate below addresses that specific dependency; product-level
+equivalence and missing-DLL tests remain open.
+
+P2 adds a generic direct-payload API that allocates an opaque, bounded payload
+in a low-address private region of the suspended target; the receiver validates,
+copies and frees it. It does not patch the PE import directory, inject a DLL,
+or start a helper. The API requires a single non-concurrent payload and leaves
+a rejected consumer's allocation for a retry. `verify-direct-payload.ps1`
+under MSVC (`build/t475-s5/direct-payload-r7.process`) and
+`verify-direct-mingw.ps1` with explicit GCC toolchains
+(`build/t475-s5/direct-mingw-r8.process`) each passed all four x86/x64 pairs.
+The fixtures verify exact bytes, absent helper DLL, unchanged PE imports,
+duplicate refusal, restricted-handle failures, write-failure recovery, damaged
+header rejection, consumer-failure retry and released allocation. The API is
+not yet selected by the product and its candidate source has not yet been
+synchronized to win16style; that other worktree is executing S29 with local
+changes. The 23 earlier imported upstream files remain byte-exact.
+
+The selected product C packet parser retained its previous Detours transport.
+The x86/x64 product build and existing ownership tests passed
+(`p2/build.process`, exit 0); original Hook fixtures passed 118 x86, 118 x64
+and 168 cross-width assertions (`p2/hooks-wrapper.process`, exit 0). Staging
+verified 63 immutable guest files and 274 ordinals; Control passed
+(`p2/stage.process`, `p2/control.process`, exit 0). Local release package
+`b8fbc836-9f8c-482d-80c7-7861110808ed` has ten verified hashes. Full and
+DOS4GW/NESticle were not run. Product replacement, helper identity, startup
+transaction, and both projects' integrated acceptance remain open.

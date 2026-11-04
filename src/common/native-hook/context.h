@@ -11,6 +11,7 @@ typedef struct nthook_context {
     HANDLE frontend,execution;
     WCHAR launcher[MAX_PATH],hook[MAX_PATH],hook64[MAX_PATH];
 } nthook_context;
+DWORD nthook_context_parse(nthook_context *context,const void *packet,DWORD bytes,DWORD machine);
 DWORD nthook_context_read(nthook_context *context,BOOL *found);
 DWORD nthook_context_paths(nthook_context *context);
 #ifdef __cplusplus
