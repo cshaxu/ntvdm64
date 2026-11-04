@@ -20,5 +20,5 @@ Detours installation; the caller retains process ownership and rollback.
 The pinned Detours source and license are carried under this subcomponent.
 
 `process-observation/` retains an observation handle, reads process identity
-and image information, and registers/drains a one-shot exit wait; callbacks,
+and image information, queries inherited parent identity, and registers/drains a one-shot exit wait; callbacks,
 process ownership, task identity and decisions remain caller-owned.

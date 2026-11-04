@@ -12,10 +12,26 @@ static VOID CALLBACK on_exit(void *context,BOOLEAN timed_out)
 }
 static DWORD WINAPI drain_thread(void *value)
 {return win32_process_observation_drain((HANDLE)value) ? 0 : GetLastError();}
+static BOOL child_parent_test(void)
+{
+    STARTUPINFOW startup={0};PROCESS_INFORMATION child={0};
+    WCHAR command[]=L"cmd.exe /c exit 0";ULONG_PTR parent=0;BOOL ok=FALSE;
+    startup.cb=sizeof(startup);
+    if(!CreateProcessW(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
+        NULL,NULL,&startup,&child))return FALSE;
+    if(win32_process_observation_parent(child.hProcess,&parent)==ERROR_SUCCESS &&
+        parent==(ULONG_PTR)GetCurrentProcessId() && ResumeThread(child.hThread)!=(DWORD)-1 &&
+        WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0)ok=TRUE;
+    if(!ok) { TerminateProcess(child.hProcess,1);WaitForSingleObject(child.hProcess,5000); }
+    CloseHandle(child.hThread);CloseHandle(child.hProcess);return ok;
+}
 #define CHECK(x) do{if(!(x)){fprintf(stderr,"process observation failed line %d error=%lu\n",__LINE__,GetLastError());return 1;}++checks;}while(0)
 int main(void)
 {
-    int checks=0;HANDLE retained=NULL,signal=NULL,wait=NULL,drainer=NULL;DWORD pid=0;FILETIME created={0};WCHAR image[32768];
+    int checks=0;HANDLE retained=NULL,signal=NULL,wait=NULL,drainer=NULL;DWORD pid=0;FILETIME created={0};WCHAR image[32768];ULONG_PTR parent=123;
+    CHECK(child_parent_test());
+    CHECK(win32_process_observation_parent((HANDLE)(ULONG_PTR)0x7fffffff,&parent)==ERROR_NOT_SUPPORTED && !parent);
+    CHECK(win32_process_observation_parent(GetCurrentProcess(),NULL)==ERROR_INVALID_PARAMETER);
     CHECK(win32_process_observation_retain(GetCurrentProcess(),&retained));
     CHECK(retained!=NULL && GetProcessId(retained)==GetCurrentProcessId());
     win32_process_observation_identity(retained,&pid,&created);

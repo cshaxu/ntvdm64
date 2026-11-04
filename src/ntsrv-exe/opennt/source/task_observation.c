@@ -15,15 +15,6 @@ typedef struct SERVICE_OBSERVATION {
     common_task_trace_node row;
 } SERVICE_OBSERVATION;
 
-/* Documented native-width ProcessBasicInformation layout, queried only for
- * inherited parent identity. No PEB dereference or remote-memory read.
- * https://learn.microsoft.com/windows/win32/api/winternl/nf-winternl-ntqueryinformationprocess */
-typedef struct OBSERVATION_BASIC_INFORMATION {
-    LONG exit_status;PVOID peb;ULONG_PTR affinity;LONG priority;
-    ULONG_PTR pid,parent;
-} OBSERVATION_BASIC_INFORMATION;
-typedef LONG (NTAPI *OBSERVATION_QUERY)(HANDLE,ULONG,PVOID,ULONG,PULONG);
-
 static SERVICE_OBSERVATION *observation_process(OPENNT_BASE_SERVICE *service,HANDLE process)
 {
     LIST_ENTRY *link;
@@ -149,18 +140,17 @@ DWORD OpenNtBaseServiceObserveNativeCreation(OPENNT_BASE_SERVICE *service,HANDLE
     HANDLE child,DWORD flags,uint64_t *identity)
 {
     SERVICE_OBSERVATION *parent,*node;
-    OBSERVATION_BASIC_INFORMATION basic={0};ULONG bytes=0;
-    OBSERVATION_QUERY query=(OBSERVATION_QUERY)GetProcAddress(GetModuleHandleW(L"ntdll.dll"),
-        "NtQueryInformationProcess");
+    ULONG_PTR parent_pid=0;
     DWORD error=ERROR_ACCESS_DENIED;
     if(!identity)return ERROR_INVALID_PARAMETER;
     *identity=0;
     if(!service || !reporter || !child)return ERROR_INVALID_PARAMETER;
-    if(!query)return ERROR_CALL_NOT_IMPLEMENTED;
-    if(query(child,0,&basic,sizeof(basic),&bytes)<0 || bytes!=sizeof(basic))return ERROR_NOT_SUPPORTED;
+    error=win32_process_observation_parent(child,&parent_pid);
+    if(error)return error;
+    error=ERROR_ACCESS_DENIED;
     /* Parent overrides/unsupported ancestry remain gaps. A known reporter
      * cannot nominate some unrelated same-user process as its own child. */
-    if(basic.parent!=(ULONG_PTR)GetProcessId(reporter))return ERROR_NOT_SUPPORTED;
+    if(parent_pid!=(ULONG_PTR)GetProcessId(reporter))return ERROR_NOT_SUPPORTED;
     EnterCriticalSection(&service->lock);
     service_observation_prune(service);
     parent=observation_process(service,reporter);

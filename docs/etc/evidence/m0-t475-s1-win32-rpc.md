@@ -187,3 +187,16 @@ package 5b5a0256-66cf-43af-9f8f-ec2e9a6d0040 and all ten local release
 hashes matched. Full was not run; optional DOS4GW/NESticle was absent.
 Commands, PIDs, results and logs are under build/t475-pipe-pair-p; no main
 runtime publication or push occurred.
+
+## Follow-up P: parent process observation
+
+P3 moves the native ProcessBasicInformation parent identity query into
+lib-win32/process-observation. NTSRV retains parent/reporter authorization,
+observation records and their lifetime. The x86/x64 builds, 19 observation
+checks including an actual suspended child and invalid inputs, and native and
+DOS production observation fixtures on both architectures passed. Stage
+verified 63 immutable guest files and 274 NTVDM exports. All 12 selected
+Control gates passed for package f8ee2662-b573-41c1-955e-ed7ca0555884;
+ten local release hashes matched. Full was not run; optional DOS4GW/NESticle
+was absent. Commands, PIDs, results and logs are in
+build/t475-parent-observation-p. No main runtime publication or push occurred.

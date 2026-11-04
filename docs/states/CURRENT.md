@@ -121,6 +121,10 @@ P2 local overlapped pipe-pair extraction passed x86/x64 builds, 13 focused
 checks, all 12 selected Control gates and ten release hashes for package
 `5b5a0256-66cf-43af-9f8f-ec2e9a6d0040`; Full was not run and the optional
 DOS4GW/NESticle fixture was absent.
+P3 parent-process observation passed x86/x64 builds, 19 focused checks,
+native and DOS observation fixtures on both architectures, 12 Control gates
+and ten local release hashes for package `f8ee2662-b573-41c1-955e-ed7ca0555884`.
+Full was not run and the optional DOS4GW/NESticle fixture was absent.
 
 | Field | Record |
 | --- | --- |
