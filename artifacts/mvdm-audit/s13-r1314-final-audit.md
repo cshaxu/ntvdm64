@@ -316,3 +316,11 @@ Cached x86, NTVDM, WOW32 and x64 builds passed; all ten images were published
 and verified. Eight match the previous package byte-for-byte; NTVDM and WOW32
 differ only in PE timestamps ([comparison](s13-r1341-build-image-compare.json)).
 Per owner instruction no unchanged-image runtime tests were repeated.
+
+The [r1343 strict review](s13-r1343-strict-ready.json) records 57 additional
+files whose original conditional trees, excluded-arm anchors, retained leaves
+and matching-code logical lines on the observed selected projection pass.
+No source changes were needed. This is not a runtime proof for local code or
+for unobserved configurations. The inventory is 182 byte-identical / 572
+differing files with this structural and matching-code review / 1,056 total;
+302 differing files remain.

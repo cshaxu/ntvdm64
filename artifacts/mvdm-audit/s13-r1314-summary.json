@@ -22,7 +22,7 @@
   },
   "files_with_unobserved_retained": 6,
   "files_with_ambiguous_error_line": 0,
-  "different_files_selected_lines_not_fully_certified": 359,
+  "different_files_selected_lines_not_fully_certified": 302,
   "limitation": "Marker hits are observed compile contexts, not proof of every supported configuration. A hit requires retention; no hit is not proof of exclusion. Selected-line mapping for differing files is not completely certified.",
   "zero_branch_differing_files_scanned": 373,
   "zero_branch_files_with_unique_line_mismatches": 0,
@@ -59,10 +59,11 @@
   "batch_r1333_error_anchors_verified": 25,
   "differing_condition_tree_and_selected_projection_audited": 108,
   "r1334_tree_only_local_difference_pending": 1,
-  "differing_files_condition_and_matching_code_audited_total": 515,
+  "differing_files_condition_and_matching_code_audited_total": 572,
   "r1335_original_tree_and_matching_code_audited": 10,
   "r1336_original_tree_and_matching_code_audited": 10,
   "r1337_original_tree_and_matching_code_audited": 10,
   "r1341_original_excluded_tree_and_matching_code_audited": 4,
-  "r1341_observed_context_line_mapping_only": 6
+  "r1341_observed_context_line_mapping_only": 6,
+  "r1343_original_tree_and_observed_matching_code_audited": 57
 }
