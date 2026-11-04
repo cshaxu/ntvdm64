@@ -1,0 +1,1094 @@
+{
+  "scope": "Original-line diagnostic correction for unanchored excluded arms; ten-file batch",
+  "method": "Matched full original/current group signature and a unique bracket of retained substantive source lines in monotonic original/current token alignment. Each mapped original guard is unique within its original source bounds. Added only #line inside already-excluded arms; separately corrected misaligned original printer alternatives and DPMI IRET routine line mappings. Existing selected code, conditions and guest remain unchanged.",
+  "files": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+      "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+      "before_sha256": "0185fbdf3aff83e0af8ef87d85d251629e49e9d3f4bf0588118ab07d10d12e4c",
+      "after_sha256": "463f04b438a089dcbea31a4d17e2cd4254ef6fcc82bcab9ca851a2718ba71482",
+      "arms": [
+        {
+          "path": "src/mvdm-host/dpmi32/dpmiint.c",
+          "guard_line": 1068,
+          "error_line": 1069,
+          "expected_error": 964,
+          "original_guard": 963,
+          "original_bounds": [
+            961,
+            973
+          ],
+          "evidence": "s13-r1279-dpmiint-diagnostic-lines.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "before_sha256": "b90f4695d347b53ec336f38c2e583213a36c91e47366f01d96233c5f8d35258a",
+      "after_sha256": "235487efc69086b61e3d9530c1a70d7626f9dd318b6967d4c6cc9926639333f5",
+      "arms": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+          "guard_line": 800,
+          "error_line": 801,
+          "expected_error": 1047,
+          "original_guard": 1046,
+          "original_bounds": [
+            1034,
+            1049
+          ],
+          "evidence": "s13-r1056-reset-full-file.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+          "guard_line": 813,
+          "error_line": 814,
+          "expected_error": 1060,
+          "original_guard": 1059,
+          "original_bounds": [
+            1057,
+            1075
+          ],
+          "evidence": "s13-r1056-reset-full-file.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\tape_io.c",
+      "original_sha256": "3aa86f1faf07f68937629f1d6e410eb41f498e17dc6d747647c7d6e5697c80aa",
+      "before_sha256": "ecd58f9518d7c331853188d270ca9fea5bfba18ea182a359fb0514d2cee63517",
+      "after_sha256": "55d5153055718b7e12cf3fc6a3ba0a1f1a5f8b300cf95225be2fe84384fb6ac9",
+      "arms": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+          "guard_line": 94,
+          "error_line": 95,
+          "expected_error": 89,
+          "original_guard": 88,
+          "original_bounds": [
+            87,
+            97
+          ],
+          "evidence": "s13-r1057-tape-full-file.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "before_sha256": "a579153525f6f6b3a4b7d3d68ff4270cc016c44f65080e1b29195520b480c02c",
+      "after_sha256": "6cf6ae2cbab4c337d0c499942cd837da80f5392f7720482605d5afc25a059674",
+      "arms": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+          "guard_line": 653,
+          "error_line": 654,
+          "expected_error": 600,
+          "original_guard": 599,
+          "original_bounds": [
+            598,
+            616
+          ],
+          "evidence": "s13-r1058-cmain-full-file.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+          "guard_line": 3281,
+          "error_line": 3282,
+          "expected_error": 3330,
+          "original_guard": 3329,
+          "original_bounds": [
+            3325,
+            3341
+          ],
+          "evidence": "s13-r1058-cmain-full-file.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+          "guard_line": 3921,
+          "error_line": 3922,
+          "expected_error": 4002,
+          "original_guard": 4001,
+          "original_bounds": [
+            3998,
+            4010
+          ],
+          "evidence": "s13-r1058-cmain-full-file.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+          "guard_line": 4543,
+          "error_line": 4544,
+          "expected_error": 4642,
+          "original_guard": 4641,
+          "original_bounds": [
+            4635,
+            4653
+          ],
+          "evidence": "s13-r1058-cmain-full-file.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\printer.c",
+      "original_sha256": "b1456dcbc0dc6b4d1fd5d101bfaa6bdc9a4cd5d970c14215f3ae62a173f17ccb",
+      "before_sha256": "04d3c8c9dafa6cb9d38c4e3c073ac7a4f8787dc3fbc260ef10d82fb6fd33c4b9",
+      "after_sha256": "2be78798f0f3c05b03e4ad32e793d5d3ede22eb03a4310321c767d41533faee0",
+      "arms": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+          "guard_line": 215,
+          "error_line": 216,
+          "expected_error": 213,
+          "original_guard": 212,
+          "original_bounds": [
+            177,
+            237
+          ],
+          "evidence": "s13-r1278-printer-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+          "guard_line": 399,
+          "error_line": 400,
+          "expected_error": 409,
+          "original_guard": 408,
+          "original_bounds": [
+            407,
+            418
+          ],
+          "evidence": "s13-r1278-printer-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+          "guard_line": 486,
+          "error_line": 487,
+          "expected_error": 494,
+          "original_guard": 493,
+          "original_bounds": [
+            492,
+            503
+          ],
+          "evidence": "s13-r1278-printer-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+          "guard_line": 514,
+          "error_line": 515,
+          "expected_error": 522,
+          "original_guard": 521,
+          "original_bounds": [
+            517,
+            535
+          ],
+          "evidence": "s13-r1278-printer-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+          "guard_line": 533,
+          "error_line": 534,
+          "expected_error": 547,
+          "original_guard": 546,
+          "original_bounds": [
+            545,
+            552
+          ],
+          "evidence": "s13-r1278-printer-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+          "guard_line": 547,
+          "error_line": 548,
+          "expected_error": 558,
+          "original_guard": 557,
+          "original_bounds": [
+            554,
+            561
+          ],
+          "evidence": "s13-r1278-printer-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+          "guard_line": 580,
+          "error_line": 581,
+          "expected_error": 589,
+          "original_guard": 588,
+          "original_bounds": [
+            583,
+            597
+          ],
+          "evidence": "s13-r1278-printer-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+          "guard_line": 642,
+          "error_line": 643,
+          "expected_error": 651,
+          "original_guard": 650,
+          "original_bounds": [
+            648,
+            661
+          ],
+          "evidence": "s13-r1278-printer-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+          "guard_line": 650,
+          "error_line": 651,
+          "expected_error": 657,
+          "original_guard": 656,
+          "original_bounds": [
+            653,
+            661
+          ],
+          "evidence": "s13-r1278-printer-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+          "guard_line": 661,
+          "error_line": 662,
+          "expected_error": 668,
+          "original_guard": 667,
+          "original_bounds": [
+            663,
+            679
+          ],
+          "evidence": "s13-r1278-printer-diagnostic-lines.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "before_sha256": "7fe09d59e6e7f5698542146fa57f998b1e4411ee3880fc072ac67b48899bb73f",
+      "after_sha256": "6290f6b3fba8c64d6cdc6e22fa3b60614ff39e9b297e51bfaf74ebb083ae6a2e",
+      "arms": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+          "guard_line": 2349,
+          "error_line": 2350,
+          "expected_error": 2649,
+          "original_guard": 2648,
+          "original_bounds": [
+            2647,
+            2654
+          ],
+          "evidence": "s13-r1174-mouse-full-file.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+          "guard_line": 2675,
+          "error_line": 2676,
+          "expected_error": 2962,
+          "original_guard": 2961,
+          "original_bounds": [
+            2960,
+            2967
+          ],
+          "evidence": "s13-r1174-mouse-full-file.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+          "guard_line": 2720,
+          "error_line": 2721,
+          "expected_error": 2999,
+          "original_guard": 2998,
+          "original_bounds": [
+            2997,
+            3004
+          ],
+          "evidence": "s13-r1174-mouse-full-file.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+          "guard_line": 3050,
+          "error_line": 3051,
+          "expected_error": 3313,
+          "original_guard": 3312,
+          "original_bounds": [
+            3308,
+            3375
+          ],
+          "evidence": "s13-r1174-mouse-full-file.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+          "guard_line": 4971,
+          "error_line": 4972,
+          "expected_error": 5265,
+          "original_guard": 5264,
+          "original_bounds": [
+            5262,
+            5273
+          ],
+          "evidence": "s13-r1174-mouse-full-file.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+          "guard_line": 5004,
+          "error_line": 5005,
+          "expected_error": 5299,
+          "original_guard": 5298,
+          "original_bounds": [
+            5293,
+            5342
+          ],
+          "evidence": "s13-r1174-mouse-full-file.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+          "guard_line": 5019,
+          "error_line": 5020,
+          "expected_error": 5322,
+          "original_guard": 5321,
+          "original_bounds": [
+            5314,
+            5332
+          ],
+          "evidence": "s13-r1174-mouse-full-file.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+          "guard_line": 5025,
+          "error_line": 5026,
+          "expected_error": 5328,
+          "original_guard": 5327,
+          "original_bounds": [
+            5320,
+            5332
+          ],
+          "evidence": "s13-r1174-mouse-full-file.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+          "guard_line": 5065,
+          "error_line": 5066,
+          "expected_error": 5361,
+          "original_guard": 5360,
+          "original_bounds": [
+            5358,
+            5376
+          ],
+          "evidence": "s13-r1174-mouse-full-file.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+          "guard_line": 5104,
+          "error_line": 5105,
+          "expected_error": 5403,
+          "original_guard": 5402,
+          "original_bounds": [
+            5397,
+            5435
+          ],
+          "evidence": "s13-r1174-mouse-full-file.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+          "guard_line": 5115,
+          "error_line": 5116,
+          "expected_error": 5414,
+          "original_guard": 5413,
+          "original_bounds": [
+            5406,
+            5424
+          ],
+          "evidence": "s13-r1174-mouse-full-file.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+          "guard_line": 5121,
+          "error_line": 5122,
+          "expected_error": 5420,
+          "original_guard": 5419,
+          "original_bounds": [
+            5412,
+            5424
+          ],
+          "evidence": "s13-r1174-mouse-full-file.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\egawrtm0.c",
+      "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+      "before_sha256": "db9c142660680fc80fbb43b0f11be401df8385d470231ec48b48c86a081d3fcf",
+      "after_sha256": "2c0db8351f49fd223d4a63201f20747af23016c6db5ad490d09db649a58560fb",
+      "arms": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+          "guard_line": 344,
+          "error_line": 345,
+          "expected_error": 411,
+          "original_guard": 410,
+          "original_bounds": [
+            405,
+            419
+          ],
+          "evidence": "s13-r1255-egawrtm-review.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+          "guard_line": 359,
+          "error_line": 360,
+          "expected_error": 427,
+          "original_guard": 426,
+          "original_bounds": [
+            424,
+            433
+          ],
+          "evidence": "s13-r1255-egawrtm-review.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\egwrtm12.c",
+      "original_sha256": "826aa1a6f685f7dc0d8b4362f3eb83899697d8a6e2a555739ff61e2388d254a1",
+      "before_sha256": "1286acebd1f10259c265899df132015240987ff89933a746a8e55ad6e91f732a",
+      "after_sha256": "c56c433af9612aa4df5eea80952a4a0731bec84d7a167fee91edd6ae7e6aacf8",
+      "arms": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+          "guard_line": 211,
+          "error_line": 212,
+          "expected_error": 281,
+          "original_guard": 280,
+          "original_bounds": [
+            276,
+            289
+          ],
+          "evidence": "s13-r1255-egawrtm-review.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+          "guard_line": 223,
+          "error_line": 224,
+          "expected_error": 294,
+          "original_guard": 293,
+          "original_bounds": [
+            291,
+            297
+          ],
+          "evidence": "s13-r1255-egawrtm-review.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+          "guard_line": 246,
+          "error_line": 247,
+          "expected_error": 317,
+          "original_guard": 316,
+          "original_bounds": [
+            314,
+            337
+          ],
+          "evidence": "s13-r1255-egawrtm-review.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+          "guard_line": 257,
+          "error_line": 258,
+          "expected_error": 328,
+          "original_guard": 327,
+          "original_bounds": [
+            314,
+            337
+          ],
+          "evidence": "s13-r1255-egawrtm-review.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+      "before_sha256": "e28bf75c25e5c0c5ffdd3f436725c68c76b7fe03fb8d562856c4172550841bba",
+      "after_sha256": "0da54f857fe715e1946247ec1dad2669e4374904f2a31861405db42caa56c68e",
+      "arms": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 154,
+          "error_line": 155,
+          "expected_error": 143,
+          "original_guard": 142,
+          "original_bounds": [
+            140,
+            148
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 176,
+          "error_line": 177,
+          "expected_error": 167,
+          "original_guard": 166,
+          "original_bounds": [
+            163,
+            173
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 192,
+          "error_line": 193,
+          "expected_error": 184,
+          "original_guard": 183,
+          "original_bounds": [
+            173,
+            189
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 313,
+          "error_line": 314,
+          "expected_error": 305,
+          "original_guard": 304,
+          "original_bounds": [
+            301,
+            310
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 357,
+          "error_line": 358,
+          "expected_error": 346,
+          "original_guard": 345,
+          "original_bounds": [
+            344,
+            350
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 382,
+          "error_line": 383,
+          "expected_error": 371,
+          "original_guard": 370,
+          "original_bounds": [
+            357,
+            383
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 434,
+          "error_line": 435,
+          "expected_error": 425,
+          "original_guard": 424,
+          "original_bounds": [
+            420,
+            435
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 591,
+          "error_line": 592,
+          "expected_error": 583,
+          "original_guard": 582,
+          "original_bounds": [
+            581,
+            589
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 765,
+          "error_line": 766,
+          "expected_error": 757,
+          "original_guard": 756,
+          "original_bounds": [
+            755,
+            763
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 812,
+          "error_line": 813,
+          "expected_error": 805,
+          "original_guard": 804,
+          "original_bounds": [
+            802,
+            812
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 828,
+          "error_line": 829,
+          "expected_error": 821,
+          "original_guard": 820,
+          "original_bounds": [
+            818,
+            826
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 884,
+          "error_line": 885,
+          "expected_error": 877,
+          "original_guard": 876,
+          "original_bounds": [
+            874,
+            887
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 892,
+          "error_line": 893,
+          "expected_error": 885,
+          "original_guard": 884,
+          "original_bounds": [
+            879,
+            889
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 905,
+          "error_line": 906,
+          "expected_error": 898,
+          "original_guard": 897,
+          "original_bounds": [
+            895,
+            904
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 953,
+          "error_line": 954,
+          "expected_error": 947,
+          "original_guard": 946,
+          "original_bounds": [
+            941,
+            952
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 972,
+          "error_line": 973,
+          "expected_error": 966,
+          "original_guard": 965,
+          "original_bounds": [
+            964,
+            971
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 984,
+          "error_line": 985,
+          "expected_error": 978,
+          "original_guard": 977,
+          "original_bounds": [
+            976,
+            988
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 992,
+          "error_line": 993,
+          "expected_error": 986,
+          "original_guard": 985,
+          "original_bounds": [
+            980,
+            990
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 1010,
+          "error_line": 1011,
+          "expected_error": 1004,
+          "original_guard": 1003,
+          "original_bounds": [
+            1001,
+            1008
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 1021,
+          "error_line": 1022,
+          "expected_error": 1015,
+          "original_guard": 1014,
+          "original_bounds": [
+            1013,
+            1021
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 1115,
+          "error_line": 1116,
+          "expected_error": 1110,
+          "original_guard": 1109,
+          "original_bounds": [
+            1108,
+            1116
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 1152,
+          "error_line": 1153,
+          "expected_error": 1148,
+          "original_guard": 1147,
+          "original_bounds": [
+            1145,
+            1153
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 1166,
+          "error_line": 1167,
+          "expected_error": 1162,
+          "original_guard": 1161,
+          "original_bounds": [
+            1159,
+            1167
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 1219,
+          "error_line": 1220,
+          "expected_error": 1215,
+          "original_guard": 1214,
+          "original_bounds": [
+            1208,
+            1221
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 1233,
+          "error_line": 1234,
+          "expected_error": 1230,
+          "original_guard": 1229,
+          "original_bounds": [
+            1227,
+            1236
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 1273,
+          "error_line": 1274,
+          "expected_error": 1271,
+          "original_guard": 1270,
+          "original_bounds": [
+            1266,
+            1277
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 1290,
+          "error_line": 1291,
+          "expected_error": 1288,
+          "original_guard": 1287,
+          "original_bounds": [
+            1286,
+            1292
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 1301,
+          "error_line": 1302,
+          "expected_error": 1299,
+          "original_guard": 1298,
+          "original_bounds": [
+            1297,
+            1309
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 1309,
+          "error_line": 1310,
+          "expected_error": 1307,
+          "original_guard": 1306,
+          "original_bounds": [
+            1301,
+            1311
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 1323,
+          "error_line": 1324,
+          "expected_error": 1321,
+          "original_guard": 1320,
+          "original_bounds": [
+            1319,
+            1325
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 1334,
+          "error_line": 1335,
+          "expected_error": 1332,
+          "original_guard": 1331,
+          "original_bounds": [
+            1330,
+            1338
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 1376,
+          "error_line": 1377,
+          "expected_error": 1375,
+          "original_guard": 1374,
+          "original_bounds": [
+            1372,
+            1381
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 1599,
+          "error_line": 1600,
+          "expected_error": 1582,
+          "original_guard": 1581,
+          "original_bounds": [
+            1577,
+            1605
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 1922,
+          "error_line": 1923,
+          "expected_error": 1918,
+          "original_guard": 1917,
+          "original_bounds": [
+            1914,
+            1921
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 1956,
+          "error_line": 1957,
+          "expected_error": 1951,
+          "original_guard": 1950,
+          "original_bounds": [
+            1938,
+            1954
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 2022,
+          "error_line": 2023,
+          "expected_error": 2017,
+          "original_guard": 2016,
+          "original_bounds": [
+            2003,
+            2026
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 2114,
+          "error_line": 2115,
+          "expected_error": 2105,
+          "original_guard": 2104,
+          "original_bounds": [
+            2102,
+            2191
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 2140,
+          "error_line": 2141,
+          "expected_error": 2144,
+          "original_guard": 2143,
+          "original_bounds": [
+            2131,
+            2154
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 2195,
+          "error_line": 2196,
+          "expected_error": 2202,
+          "original_guard": 2201,
+          "original_bounds": [
+            2200,
+            2209
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 2216,
+          "error_line": 2217,
+          "expected_error": 2225,
+          "original_guard": 2224,
+          "original_bounds": [
+            2222,
+            2233
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 2475,
+          "error_line": 2476,
+          "expected_error": 2486,
+          "original_guard": 2485,
+          "original_bounds": [
+            2483,
+            2491
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 2597,
+          "error_line": 2598,
+          "expected_error": 2608,
+          "original_guard": 2607,
+          "original_bounds": [
+            2603,
+            2644
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 2601,
+          "error_line": 2602,
+          "expected_error": 2636,
+          "original_guard": 2635,
+          "original_bounds": [
+            2603,
+            2644
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 2615,
+          "error_line": 2616,
+          "expected_error": 2650,
+          "original_guard": 2649,
+          "original_bounds": [
+            2647,
+            2658
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 2634,
+          "error_line": 2635,
+          "expected_error": 2669,
+          "original_guard": 2668,
+          "original_bounds": [
+            2666,
+            2686
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard_line": 2667,
+          "error_line": 2668,
+          "expected_error": 2713,
+          "original_guard": 2712,
+          "original_bounds": [
+            2709,
+            2832
+          ],
+          "evidence": "s13-r1276-video-diagnostic-lines.json"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\sim32.c",
+      "original_sha256": "1f634b9d6c09d0f767a90ec9e577817800a07dc353cffa433ca2e0268d2cd42f",
+      "before_sha256": "89f5fe924f6f99e06f9da1d75addfa204c95f87b9e5f57e280d47665eddb94ee",
+      "after_sha256": "675f1d654972d1858d973563a1214d72a523f5e29aec6db3963f23496b4d893c",
+      "arms": [
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+          "guard_line": 351,
+          "error_line": 352,
+          "expected_error": 434,
+          "original_guard": 433,
+          "original_bounds": [
+            430,
+            440
+          ],
+          "evidence": "s13-r1235-sim32-full-review.json"
+        }
+      ]
+    }
+  ],
+  "arm_count": 83,
+  "limits": "Original group/source-context matches are recorded per arm. x86 and x64 builds, targeted selected/rejected tests and ten-image comparison passed. The previous Full suite is reused because only timestamps differ; no guest was modified."
+}

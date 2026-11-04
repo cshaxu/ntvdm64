@@ -342,6 +342,7 @@ ega_copy_b_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 }
 
 #ifdef  BIGEND
+#line 411
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #else
 #define first_half(wd)      ((wd) & 0xff)
@@ -357,6 +358,7 @@ ega_copy_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 	note_entrance0("ega_copy_w_fill");
 
 #ifdef BIGEND
+#line 427
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
 

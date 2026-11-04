@@ -213,6 +213,7 @@ sys_addr lp16BitPrtBusy;
  */
 
 #ifdef PS_FLUSHING
+#line 213
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
 #line 213
@@ -253,10 +254,10 @@ static sys_addr state_addr;
 #define set_state(adap,val)	(sas_store_no_check(state_addr+(adap),(val)))
 
 #else /* NTVDM && MONITOR */
-#line 250
+#line 253
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif /* NTVDM && MONITOR */
-#line 252
+#line 264
 
 static void printer_inb IPT2(io_addr, port, half_word *, value);
 static void printer_outb IPT2(io_addr, port, half_word, value);
@@ -293,10 +294,10 @@ static void lpr_state_out_event IFN1(long,adapter)
 } 
 
 #else	/* NTVDM && MONITOR */
-#line 288
+#line 300
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	/* NTVDM && MONITOR */
-#line 290
+#line 314
 
 static void printer_inb IFN2(io_addr,port, half_word *,value)
 {
@@ -397,6 +398,7 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 	int	adapter, i;
 	half_word old_control;
 #ifdef PC_CONFIG
+#line 409
 #error DIVERGENCE MVDM-HOST-DIV-531: PC_CONFIG branch is not selected; see mirror register.
 #endif
 #line 387
@@ -484,6 +486,7 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 			set_control(adapter, value);
 			if (low_high(old_control, value, INIT_P))
 #ifdef PC_CONFIG
+#line 494
 #error DIVERGENCE MVDM-HOST-DIV-531: PC_CONFIG branch is not selected; see mirror register.
 #else
 #line 467
@@ -512,6 +515,7 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 #line 488
 
 #ifdef PS_FLUSHING
+#line 522
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
 #line 492
@@ -531,6 +535,7 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
                                     		/* clear ERROR condition */
                                     		set_status(adapter, get_status(adapter) | ERROR);
 #if defined(NTVDM) && !defined(MONITOR)
+#line 547
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else /* NTVDM && !MONITOR */
 #line 510
@@ -545,6 +550,7 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 #line 517
 					}
 #ifdef PS_FLUSHING
+#line 558
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
 #line 521
@@ -578,6 +584,7 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 #line 548
 
 #ifndef	PROD
+#line 589
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 552
@@ -640,6 +647,7 @@ static void notbusy_check IFN1(int,adapter)
 	     &&	!(host_lpt_status(adapter) & HOST_LPT_BUSY))
 	{
 #if defined(NTVDM) && !defined(MONITOR)
+#line 651
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else /* NTVDM && !MONITOR */
 #line 612
@@ -648,6 +656,7 @@ static void notbusy_check IFN1(int,adapter)
 #line 614
 
 #ifndef	PROD
+#line 657
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 618
@@ -659,6 +668,7 @@ static void notbusy_check IFN1(int,adapter)
 	}
 }
 #ifdef SEGMENTATION
+#line 668
 #error Excluded unsupported SEGMENTATION configuration
 
 

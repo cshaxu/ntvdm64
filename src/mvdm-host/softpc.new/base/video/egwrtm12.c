@@ -209,6 +209,7 @@ fill_alternate_bytes IFN3(byte *, start, byte *, end, byte, value )
 }
 
 #ifdef  BIGEND
+#line 281
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #else
 #define first_half(wd)      (wd & 0xff)
@@ -221,6 +222,7 @@ fill_both_bytes IFN3(USHORT, data, USHORT *, dest, ULONG, len )
 	USHORT swapped;
 
 #ifdef BIGEND
+#line 294
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
 
@@ -244,6 +246,7 @@ fill_both_bytes IFN3(USHORT, data, USHORT *, dest, ULONG, len )
 		while( len-- )
 		{
 #ifdef BIGEND
+#line 317
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #else
 			*dest = data;
@@ -255,6 +258,7 @@ fill_both_bytes IFN3(USHORT, data, USHORT *, dest, ULONG, len )
 
 
 #ifdef SEGMENTATION
+#line 328
 #error Excluded unsupported SEGMENTATION configuration
 
 

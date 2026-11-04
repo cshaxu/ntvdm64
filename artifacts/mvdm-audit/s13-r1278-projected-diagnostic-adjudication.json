@@ -1,0 +1,245 @@
+{
+  "scope": "Adjudication of 26 unmatched exact-signature reverse diagnostic records. Original and current source context inspected; source-specific review remains authoritative.",
+  "counts": {
+    "local_selector_or_projected_original_body": 15,
+    "misaligned_original_alternative_corrected": 2,
+    "same_original_first_arm_with_local_alternative": 9
+  },
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "reviewed_source_sha256": "b90f4695d347b53ec336f38c2e583213a36c91e47366f01d96233c5f8d35258a",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "original_reference_line": 620,
+      "original_previous_line": "#ifndef CPU_30_STYLE",
+      "category": "local_selector_or_projected_original_body",
+      "evidence": "s13-r1056-reset-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "reviewed_source_sha256": "b90f4695d347b53ec336f38c2e583213a36c91e47366f01d96233c5f8d35258a",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "original_reference_line": 684,
+      "original_previous_line": "#ifndef CPU_30_STYLE",
+      "category": "local_selector_or_projected_original_body",
+      "evidence": "s13-r1056-reset-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "reviewed_source_sha256": "a579153525f6f6b3a4b7d3d68ff4270cc016c44f65080e1b29195520b480c02c",
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "original_reference_line": 4413,
+      "original_previous_line": "",
+      "category": "local_selector_or_projected_original_body",
+      "evidence": "s13-r1058-cmain-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "reviewed_source_sha256": "e524eabfc7c8d9688f5b75201d8b2865f75d6fa7b6f00aa53abd2cd88ed42ac5",
+      "original_sha256": "b1456dcbc0dc6b4d1fd5d101bfaa6bdc9a4cd5d970c14215f3ae62a173f17ccb",
+      "original_reference_line": 250,
+      "original_previous_line": "#define get_state(adap)\t\t(sas_hw_at_no_check(state_addr+(adap)))",
+      "category": "misaligned_original_alternative_corrected",
+      "evidence": "s13-r1278-printer-diagnostic-lines.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "reviewed_source_sha256": "e524eabfc7c8d9688f5b75201d8b2865f75d6fa7b6f00aa53abd2cd88ed42ac5",
+      "original_sha256": "b1456dcbc0dc6b4d1fd5d101bfaa6bdc9a4cd5d970c14215f3ae62a173f17ccb",
+      "original_reference_line": 288,
+      "original_previous_line": "{",
+      "category": "misaligned_original_alternative_corrected",
+      "evidence": "s13-r1278-printer-diagnostic-lines.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "reviewed_source_sha256": "3919579040d6d06e4f224d5367cd175da9490da65e1b0c256f70fcac84419c47",
+      "original_sha256": "f7b5efebebd8bf8c6ad5c56adb74c8217490b2b92f113b1e850401fd5f029500",
+      "original_reference_line": 102,
+      "original_previous_line": "void (*str_fwd_read) IPT3(IU8 *, dest, IU32, eaOff, IU32, count);",
+      "category": "local_selector_or_projected_original_body",
+      "evidence": "s13-r1078-cpuvid-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+      "reviewed_source_sha256": "63896c8784a0bda540fae112f3d2c3b1849cceea6c5b83b1f1b792a45e5479e2",
+      "original_sha256": "4a53a9d1c7fb984deb2c5b0fd629442ee8a35272ad90323624d55daa65886194",
+      "original_reference_line": 122,
+      "original_previous_line": "#ifndef\tHOST_VGA_GLOBALS",
+      "category": "local_selector_or_projected_original_body",
+      "evidence": "s13-r1081-egacpu-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gmi.h",
+      "reviewed_source_sha256": "5d33a2aedb0ccb6e959fdb10a78d91be362cee722c4b7fdf58eeb68a59948cdf",
+      "original_sha256": "828d5e4399c5cc396367373e96c4d6785ac0026f50467176f30a977afe01919a",
+      "original_reference_line": 19,
+      "original_previous_line": "{",
+      "category": "local_selector_or_projected_original_body",
+      "evidence": "s13-r1090-gmi-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "reviewed_source_sha256": "b9664c37d6eb659e4fe0d126b8ecb28ff2d909d92e544cfc9ae8f1a669b08037",
+      "original_sha256": "21109fa7e6b8d6a8ecfe8e733a16805829560e218be11e46e5a33dac28820316",
+      "original_reference_line": 79,
+      "original_previous_line": "#ifndef CPU_30_STYLE",
+      "category": "local_selector_or_projected_original_body",
+      "evidence": "s13-r1096-ica-header-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "reviewed_source_sha256": "7fe09d59e6e7f5698542146fa57f998b1e4411ee3880fc072ac67b48899bb73f",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_reference_line": 2642,
+      "original_previous_line": "#ifndef NTVDM",
+      "category": "same_original_first_arm_with_local_alternative",
+      "evidence": "s13-r1174-mouse-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "reviewed_source_sha256": "7fe09d59e6e7f5698542146fa57f998b1e4411ee3880fc072ac67b48899bb73f",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_reference_line": 2951,
+      "original_previous_line": "#ifndef NTVDM",
+      "category": "same_original_first_arm_with_local_alternative",
+      "evidence": "s13-r1174-mouse-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "reviewed_source_sha256": "7fe09d59e6e7f5698542146fa57f998b1e4411ee3880fc072ac67b48899bb73f",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_reference_line": 2997,
+      "original_previous_line": "#ifndef NTVDM",
+      "category": "same_original_first_arm_with_local_alternative",
+      "evidence": "s13-r1174-mouse-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "reviewed_source_sha256": "7fe09d59e6e7f5698542146fa57f998b1e4411ee3880fc072ac67b48899bb73f",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_reference_line": 3311,
+      "original_previous_line": "#ifndef NTVDM",
+      "category": "same_original_first_arm_with_local_alternative",
+      "evidence": "s13-r1174-mouse-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "reviewed_source_sha256": "7fe09d59e6e7f5698542146fa57f998b1e4411ee3880fc072ac67b48899bb73f",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_reference_line": 5228,
+      "original_previous_line": "#ifndef NTVDM",
+      "category": "same_original_first_arm_with_local_alternative",
+      "evidence": "s13-r1174-mouse-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "reviewed_source_sha256": "7fe09d59e6e7f5698542146fa57f998b1e4411ee3880fc072ac67b48899bb73f",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_reference_line": 5251,
+      "original_previous_line": "#ifndef NTVDM",
+      "category": "same_original_first_arm_with_local_alternative",
+      "evidence": "s13-r1174-mouse-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "reviewed_source_sha256": "7fe09d59e6e7f5698542146fa57f998b1e4411ee3880fc072ac67b48899bb73f",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "original_reference_line": 5352,
+      "original_previous_line": "#ifndef NTVDM",
+      "category": "same_original_first_arm_with_local_alternative",
+      "evidence": "s13-r1174-mouse-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "reviewed_source_sha256": "a79efd4d687d5edc476974f7593c1356c5cd663d9d9e75ccfdaa7fe0b034e4f4",
+      "original_sha256": "e4f39908ff9534adde52e46def732a93790ac48f2bb481590622c537c2f3b205",
+      "original_reference_line": 414,
+      "original_previous_line": "#if defined(NTVDM) && defined(MONITOR)",
+      "category": "same_original_first_arm_with_local_alternative",
+      "evidence": "s13-r1175-ios-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "reviewed_source_sha256": "2174ed07e84b13a3aa32e17d9e9d75dd6115df8a5e08874ccc49777976c2b407",
+      "original_sha256": "5dfdca835f1ca6fddf07826f2b4aa9e25f4c8bd0ceef21b2dce9884de721376c",
+      "original_reference_line": 55,
+      "original_previous_line": "#ifndef CPU_40_STYLE\t/* defined in CpuH */",
+      "category": "same_original_first_arm_with_local_alternative",
+      "evidence": "s13-r1176-main-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "reviewed_source_sha256": "e28bf75c25e5c0c5ffdd3f436725c68c76b7fe03fb8d562856c4172550841bba",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+      "original_reference_line": 1512,
+      "original_previous_line": "#if ( defined(NTVDM) && defined(MONITOR) ) || defined(GISP_SVGA)/* No Ega planes... */",
+      "category": "local_selector_or_projected_original_body",
+      "evidence": "s13-r1276-video-diagnostic-lines.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "reviewed_source_sha256": "7a7f43d4a57ef02953a628a6f82a23f305da8145e6a626b08b22c5b9c23e4d28",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "original_reference_line": 1415,
+      "original_previous_line": "",
+      "category": "local_selector_or_projected_original_body",
+      "evidence": "s13-r1251-ntfulsc-contextual-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "reviewed_source_sha256": "c785a743a5f7fdcf847dc629566f61f24e811a9b6e825e4a918daaa801048955",
+      "original_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47",
+      "original_reference_line": 141,
+      "original_previous_line": "#else\t/* ! ( HUNTER ) */",
+      "category": "local_selector_or_projected_original_body",
+      "evidence": "s13-r1186-ntreset-full-file.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "reviewed_source_sha256": "89f5fe924f6f99e06f9da1d75addfa204c95f87b9e5f57e280d47665eddb94ee",
+      "original_sha256": "1f634b9d6c09d0f767a90ec9e577817800a07dc353cffa433ca2e0268d2cd42f",
+      "original_reference_line": 239,
+      "original_previous_line": "}",
+      "category": "local_selector_or_projected_original_body",
+      "evidence": "s13-r1235-sim32-full-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "reviewed_source_sha256": "b3b9b914a4609ae4e2ca471e929c220f5be3abc0ae5e3b63448fbe9a4b86a1d6",
+      "original_sha256": "8e2383f52e4e3f65f656bd492143d7a8ed5d0a2526ad8e6af10d242465ff8d7a",
+      "original_reference_line": 474,
+      "original_previous_line": "",
+      "category": "local_selector_or_projected_original_body",
+      "evidence": "s13-r1194-dlgmgr-full-file.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "reviewed_source_sha256": "b3b9b914a4609ae4e2ca471e929c220f5be3abc0ae5e3b63448fbe9a4b86a1d6",
+      "original_sha256": "8e2383f52e4e3f65f656bd492143d7a8ed5d0a2526ad8e6af10d242465ff8d7a",
+      "original_reference_line": 482,
+      "original_previous_line": "",
+      "category": "local_selector_or_projected_original_body",
+      "evidence": "s13-r1194-dlgmgr-full-file.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "reviewed_source_sha256": "b3b9b914a4609ae4e2ca471e929c220f5be3abc0ae5e3b63448fbe9a4b86a1d6",
+      "original_sha256": "8e2383f52e4e3f65f656bd492143d7a8ed5d0a2526ad8e6af10d242465ff8d7a",
+      "original_reference_line": 884,
+      "original_previous_line": "case WM_NOTIFYFORMAT:",
+      "category": "local_selector_or_projected_original_body",
+      "evidence": "s13-r1194-dlgmgr-full-file.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "reviewed_source_sha256": "b3b9b914a4609ae4e2ca471e929c220f5be3abc0ae5e3b63448fbe9a4b86a1d6",
+      "original_sha256": "8e2383f52e4e3f65f656bd492143d7a8ed5d0a2526ad8e6af10d242465ff8d7a",
+      "original_reference_line": 937,
+      "original_previous_line": "if (TestWF(pwnd, WFDIALOGWINDOW))",
+      "category": "local_selector_or_projected_original_body",
+      "evidence": "s13-r1194-dlgmgr-full-file.json"
+    }
+  ],
+  "limits": "The 15 projected records have no identical original branch signature; each line points into an original body or an existing source projection and is not asserted to be an original branch-entry diagnostic. The two printer corrections are included in and verified by s13-r1280-context-line-batch.json; their per-record source hash is the intermediate snapshot prior to that batch."
+}

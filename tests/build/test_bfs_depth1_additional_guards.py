@@ -252,3 +252,56 @@ for diagnostic, marker, selected_defines, rejected_defines in (
         if bool(result.returncode) != reject or (reject and (f'({diagnostic})' not in result.stdout + result.stderr or marker not in result.stdout + result.stderr)):
             raise SystemExit(f'video original line check failed {diagnostic}: {result.stderr}')
 print('PASS video original excluded diagnostic lines and selected profiles')
+
+# Original diagnostics for four context-matched excluded arms.
+for relative, diagnostic, macro in (
+    ('src/mvdm-host/softpc.new/base/video/video.c', 143, 'HERC'),
+    ('src/mvdm-host/softpc.new/base/comms/printer.c', 213, 'PS_FLUSHING'),
+    ('src/mvdm-host/softpc.new/base/bios/reset.c', 1047, 'GISP_SVGA'),
+    ('src/mvdm-host/softpc.new/base/keymouse/mouse_io.c', 2649, 'MOUSE_16_BIT'),
+):
+    source = (repo / relative).read_text(encoding='latin1').split('\n')
+    anchor = f'#line {diagnostic}'
+    hits = [i for i in range(1, len(source) - 2) if source[i].strip() == anchor and re.fullmatch(r'#\s*ifdef\s+' + re.escape(macro), source[i - 1].strip()) and source[i + 1].lstrip().startswith('#error') and source[i + 2].lstrip().startswith('#endif')]
+    if len(hits) != 1:
+        raise SystemExit(f'original error frame missing or ambiguous: {relative} {diagnostic}')
+    i = hits[0]
+    probe = scratch / 'context-original-error-line.c'
+    probe.write_text('\n'.join(source[i - 1:i + 3]) + '\n', encoding='ascii')
+    for defines, reject in (([], False), ([macro + '=1'], True)):
+        result = subprocess.run(['cl.exe', '/nologo', '/EP', '/TC'] + [f'/D{x}' for x in defines] + [str(probe)], capture_output=True, text=True, errors='replace')
+        if bool(result.returncode) != reject or (reject and f'({diagnostic})' not in result.stdout + result.stderr):
+            raise SystemExit(f'context original error line check failed {relative} {diagnostic}: {result.stderr}')
+print('PASS context-matched original diagnostics and selected profiles')
+
+# Original DPMI IRET and printer alternate-arm diagnostics.
+for relative, diagnostic, selected_args, rejected_args in (
+    ('src/mvdm-host/dpmi32/dpmiint.c', 690, ['/Ui386'], ['/Di386=1']),
+    ('src/mvdm-host/dpmi32/dpmiint.c', 799, ['/Ui386'], ['/Di386=1']),
+    ('src/mvdm-host/softpc.new/base/comms/printer.c', 253, ['/DNTVDM=1', '/DMONITOR=1'], []),
+    ('src/mvdm-host/softpc.new/base/comms/printer.c', 300, ['/DNTVDM=1', '/DMONITOR=1'], []),
+):
+    source = (repo / relative).read_text(encoding='latin1').split('\n')
+    targets = [i for i in range(len(source) - 1) if source[i].strip() == f'#line {diagnostic}' and source[i + 1].lstrip().startswith('#error')]
+    if len(targets) != 1:
+        raise SystemExit(f'alternate error anchor missing or ambiguous: {relative} {diagnostic}')
+    target = targets[0]
+    start = next(i for i in range(target - 1, -1, -1) if re.match(r'^\s*#\s*(if|ifdef|ifndef)\b', source[i]))
+    depth = 0
+    end = None
+    for i in range(start, len(source)):
+        m = re.match(r'^\s*#\s*(if|ifdef|ifndef|endif)\b', source[i])
+        if m:
+            depth += -1 if m.group(1) == 'endif' else 1
+            if depth == 0:
+                end = i
+                break
+    if end is None or not start < target < end:
+        raise SystemExit(f'alternate error group malformed: {relative} {diagnostic}')
+    probe = scratch / 'alternate-original-error-line.c'
+    probe.write_text('\n'.join(source[start:end + 1]) + '\n', encoding='ascii')
+    for defines, reject in ((selected_args, False), (rejected_args, True)):
+        result = subprocess.run(['cl.exe', '/nologo', '/EP', '/TC'] + defines + [str(probe)], capture_output=True, text=True, errors='replace')
+        if bool(result.returncode) != reject or (reject and f'({diagnostic})' not in result.stdout + result.stderr):
+            raise SystemExit(f'alternate original line check failed {relative} {diagnostic}: {result.stderr}')
+print('PASS original DPMI IRET and printer alternate diagnostic lines')

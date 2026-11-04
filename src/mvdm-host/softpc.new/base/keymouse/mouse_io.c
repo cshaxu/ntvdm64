@@ -2347,6 +2347,7 @@ outb(ICA0_PORT_0, END_INTERRUPT);
 	if (condition_mask & MOUSE_CALL_MASK_POSITION_BIT)
 		if (cursor_flag == MOUSE_CURSOR_DISPLAYED)
 #ifdef	MOUSE_16_BIT
+#line 2649
 #error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register.
 #endif	/* MOUSE_16_BIT */
 			{
@@ -2673,6 +2674,7 @@ LOCAL void mouse_show_cursor IFN4(word *,junk1,word *,junk2,word *,junk3,word *,
 	if (cursor_flag != MOUSE_CURSOR_DISPLAYED)
 		if (++cursor_flag == MOUSE_CURSOR_DISPLAYED)
 #ifdef	MOUSE_16_BIT
+#line 2962
 #error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register.
 #endif	/* MOUSE_16_BIT */
 			{
@@ -2718,6 +2720,7 @@ LOCAL void mouse_hide_cursor IFN4(word *,junk1,word *,junk2,word *,junk3,word *,
 #line 2615
 	if (cursor_flag-- == MOUSE_CURSOR_DISPLAYED)
 #ifdef	MOUSE_16_BIT
+#line 2999
 #error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register.
 #endif	/* MOUSE_16_BIT */
 		{
@@ -3048,6 +3051,7 @@ LOCAL void mouse_set_graphics IFN4(word *,junk1,MOUSE_SCALAR *,hot_spot_x_ptr,MO
 #line 2936
 	
 #ifdef MOUSE_16_BIT
+#line 3313
 #error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register.
 #else		/* MOUSE_16_BIT */
 
@@ -4969,6 +4973,7 @@ LOCAL void cursor_display IFN0()
 	v_mode = sas_hw_at(vd_video_mode);
 
 #ifdef	MOUSE_16_BIT
+#line 5265
 #error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register.
 #endif	/* MOUSE_16_BIT */
 
@@ -5002,6 +5007,7 @@ LOCAL void cursor_display IFN0()
 	else
 	{
 #ifdef MOUSE_16_BIT
+#line 5299
 #error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register.
 #else /* MOUSE_16_BIT */
 #ifndef NTVDM /* DIVERGENCE(MVDM-HOST-DIV-318): bypass the Console host arrow. */
@@ -5017,12 +5023,14 @@ LOCAL void cursor_display IFN0()
 				else
 					VGA_graphics_cursor_display();
 #else
+#line 5322
 #error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif /* VGG */
 			}
 			else
 #endif
 #ifdef HERC
+#line 5328
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif /* HERC */
 				graphics_cursor_display();
@@ -5063,6 +5071,7 @@ LOCAL void cursor_undisplay IFN0()
 	v_mode = sas_hw_at(vd_video_mode);
 
 #ifdef	MOUSE_16_BIT
+#line 5361
 #error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register.
 #endif	/* MOUSE_16_BIT */
 
@@ -5102,6 +5111,7 @@ LOCAL void cursor_undisplay IFN0()
 			else
 			{
 #ifdef MOUSE_16_BIT
+#line 5403
 #error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register.
 #else /* MOUSE_16_BIT */
 #ifdef EGG
@@ -5113,12 +5123,14 @@ LOCAL void cursor_undisplay IFN0()
 			  	else
 					VGA_graphics_cursor_undisplay();
 #else
+#line 5414
 #error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif
 			}
 			else
 #endif
 #ifdef HERC
+#line 5420
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif /* HERC */
 			    graphics_cursor_undisplay();

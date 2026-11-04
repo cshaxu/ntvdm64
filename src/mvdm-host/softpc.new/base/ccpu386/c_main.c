@@ -651,6 +651,7 @@ GLOBAL	PHY_ADDR	SasWrapMask = 0xfffff;
 #else /* !PIG */
 GLOBAL UTINY *CCPU_M;
 #ifdef BACK_M
+#line 600
 #error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #else
 #define SETUP_HOST_IP(x)							\
@@ -3279,6 +3280,7 @@ TYPEC4:
 		  switch(immed)
 		  {
 #if defined(SFELLOW)
+#line 3330
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #endif /* SFELLOW */
 	  case 0xfe:
@@ -3919,6 +3921,7 @@ TYPEE8:
 	    }
 
 #ifndef	PROD
+#line 4002
 #error DIVERGENCE MVDM-HOST-DIV-502: non-PROD debug branch is not selected; see mirror register.
 #endif	/* PROD */
 
@@ -4541,6 +4544,7 @@ LOCAL VOID
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #else /* PIG */
 #ifdef BACK_M
+#line 4642
 #error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #else
       return *(*q)++;

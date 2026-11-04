@@ -92,6 +92,7 @@ word      target_limit;
 sys_addr  target_base;
 sys_addr byte_count;   /* Max size is 0x8000 * 2 = 10000 */
 #ifdef CPU_30_STYLE
+#line 89
 #error Excluded unsupported CPU30 descriptor path
 #else
 #line 90

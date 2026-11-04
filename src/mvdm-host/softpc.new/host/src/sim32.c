@@ -349,6 +349,7 @@ GLOBAL UTINY *host_sas_init IFN1(sys_addr, size)
     {
 	/* Initialise function failed, exit */
 #ifndef PROD
+#line 434
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 

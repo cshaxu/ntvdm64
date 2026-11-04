@@ -798,6 +798,7 @@ void reset()
 	 */
 
 #ifdef GISP_SVGA
+#line 1047
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /*GISP_SVGA */
 	if (soft_reset)			/* if LIM already initialised */
@@ -811,6 +812,7 @@ void reset()
 			host_error(EG_EXPANDED_MEM_FAILURE, ERR_QU_CO, NULL);
 		}
 #ifdef GISP_SVGA
+#line 1060
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /*GISP_SVGA */
 #endif /* !SUN_VA & !NTVDM */

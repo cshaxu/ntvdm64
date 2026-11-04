@@ -2994,3 +2994,9 @@ MVDM-HOST-DIV-803: restore each original A_VID writer-table condition in egawrtm
 MVDM-HOST-DIV-804: reject only the original MIPS/Alpha UNALIGNED fallback in shared wowfax.h and wowinfo.h; preserve the x86 guest fallback, WOW16 branches and DEBUG declarations. These shared headers remain guest-source dependencies and no guest was compiled or modified. Evidence: artifacts/mvdm-audit/s13-r1256-wow-shared-review.json.
 
 MVDM-HOST-DIV-805: correct original diagnostic lines within three already-excluded video.c conditions; selected code is unchanged. Evidence: artifacts/mvdm-audit/s13-r1276-video-diagnostic-lines.json.
+
+MVDM-HOST-DIV-806: correct original error and continuation line mappings for two printer.c NTVDM/MONITOR conditional groups; selected conditions and statements are unchanged. Evidence: artifacts/mvdm-audit/s13-r1278-printer-diagnostic-lines.json.
+
+MVDM-HOST-DIV-807: correct original diagnostic and continuation mappings for the 16-bit and 32-bit DPMI IRET groups while retaining the selected software CPU implementation. Evidence: artifacts/mvdm-audit/s13-r1279-dpmiint-diagnostic-lines.json.
+
+MVDM-HOST-DIV-808: restore original diagnostic lines in existing excluded branches across ten source files, using original group and retained-code context; selected behavior remains unchanged. Evidence: artifacts/mvdm-audit/s13-r1280-context-line-batch.json.

@@ -1,0 +1,32 @@
+{
+  "path": "src/mvdm-host/dpmi32/dpmiint.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+  "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+  "before_sha256": "0185fbdf3aff83e0af8ef87d85d251629e49e9d3f4bf0588118ab07d10d12e4c",
+  "after_sha256": "fa81cf0940cc6b1688718119db0fd25c76063caebe8279b1fb2fa83eb6e944ad",
+  "changes": [
+    {
+      "function": "DpmiIntHandlerIret16",
+      "original_if": 689,
+      "error_line": 690,
+      "selected_line": 717,
+      "debug_if": 732,
+      "debug_error": 733,
+      "debug_continuation": 735,
+      "original_trace": 763
+    },
+    {
+      "function": "DpmiIntHandlerIret32",
+      "original_if": 798,
+      "error_line": 799,
+      "selected_line": 822,
+      "debug_if": 831,
+      "debug_error": 832,
+      "debug_continuation": 834,
+      "original_trace": 856
+    }
+  ],
+  "reason": "Previously the two selected IRET arms were mapped to lines belonging to the following original routines. Match function names and original guard/else statements; preserve local host IRET instrumentation and executable statements.",
+  "status": "Corrected in source and included in the r1280 batch; see final build, tests and image comparison.",
+  "superseded_by": "s13-r1280-context-line-batch.json"
+}

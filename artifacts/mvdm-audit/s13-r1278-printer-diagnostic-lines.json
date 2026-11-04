@@ -1,0 +1,24 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\printer.c",
+  "original_sha256": "b1456dcbc0dc6b4d1fd5d101bfaa6bdc9a4cd5d970c14215f3ae62a173f17ccb",
+  "before_sha256": "04d3c8c9dafa6cb9d38c4e3c073ac7a4f8787dc3fbc260ef10d82fb6fd33c4b9",
+  "after_sha256": "e524eabfc7c8d9688f5b75201d8b2865f75d6fa7b6f00aa53abd2cd88ed42ac5",
+  "changes": [
+    {
+      "original_else": 252,
+      "error_line": 253,
+      "original_endif": 263,
+      "continuation_line": 264
+    },
+    {
+      "original_else": 299,
+      "error_line": 300,
+      "original_endif": 313,
+      "continuation_line": 314
+    }
+  ],
+  "reason": "The existing original NTVDM/MONITOR groups had error and continuation line mappings pointing into their retained first arms; restore both to the actual original else and endif locations. Conditions and executable statements are unchanged.",
+  "status": "Corrected in source and included in the r1280 batch; see final build, tests and image comparison.",
+  "superseded_by": "s13-r1280-context-line-batch.json"
+}

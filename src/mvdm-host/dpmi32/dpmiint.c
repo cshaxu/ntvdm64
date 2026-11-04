@@ -790,10 +790,12 @@ Routine Description:
     //
     // Fast iret (without executing final 16-bit iret)
     //
+#line 689
 #ifdef i386
+#line 690
 #error Excluded unsupported i386 kernel VDM interrupt return
 #else
-#line 819
+#line 717
     if (EndUseLockedPMStack()) {
         ULONG NewEIP, NewEFLAGS, NewCS;
 
@@ -809,9 +811,12 @@ Routine Description:
         // Pass 6 to BuildStackFrame since 6 words = 3 dwords
         //
         if (!BuildStackFrame(6, &VdmStackPointer, &NewSP)) {
+#line 732
 #if DBG
+#line 733
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 735
             DpmiFaultHandler(STACK_FAULT, 0);
             return;
         }
@@ -843,6 +848,7 @@ Routine Description:
     mvdm_softpc_report_dpmi_iret16(16u, ServiceAX, getAX(), getBX(),
         getCS(), getEIP(), getEFLAGS());
 
+    #line 763
     DBGTRACE(DPMI_INT_IRET16, 0, 0, 0);
 }
 
@@ -879,10 +885,12 @@ Routine Description:
         VdmStackPointer += getSP();
     }
 
+#line 798
 #ifdef i386
+#line 799
 #error Excluded unsupported i386 kernel VDM interrupt return
 #else
-#line 928
+#line 822
     if (EndUseLockedPMStack()) {
         ULONG NewEIP, NewCS, NewEFLAGS;
 
@@ -892,9 +900,12 @@ Routine Description:
 
 
         if (!BuildStackFrame(3, &VdmStackPointer, &NewSP)) {
+#line 831
 #if DBG
+#line 832
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 834
             DpmiFaultHandler(STACK_FAULT, 0);
             return;
         }
@@ -920,6 +931,7 @@ Routine Description:
     mvdm_softpc_report_dpmi_iret16(32u, ServiceAX, getAX(), getBX(),
         getCS(), getEIP(), getEFLAGS());
 
+    #line 856
     DBGTRACE(DPMI_INT_IRET32, 0, 0, 0);
 }
 
@@ -1054,6 +1066,7 @@ Return Value:
         SaveEIP);
 
 #if DBG
+#line 964
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 

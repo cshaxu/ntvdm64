@@ -414,11 +414,11 @@
     },
     {
       "path": "src/mvdm-host/dpmi32/dpmiint.c",
-      "sha256": "0185fbdf3aff83e0af8ef87d85d251629e49e9d3f4bf0588118ab07d10d12e4c",
+      "sha256": "463f04b438a089dcbea31a4d17e2cd4254ef6fcc82bcab9ca851a2718ba71482",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "completed-original-witnessed-condition-tree",
-      "additional_evidence": "s13-r758-dpmiint-conditions.json",
+      "additional_evidence": "s13-r1280-context-line-batch.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
       "original_candidate_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa"
     },
@@ -1204,11 +1204,11 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
-      "sha256": "b90f4695d347b53ec336f38c2e583213a36c91e47366f01d96233c5f8d35258a",
+      "sha256": "235487efc69086b61e3d9530c1a70d7626f9dd318b6967d4c6cc9926639333f5",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "completed-original-conditional-tree",
-      "additional_evidence": "s13-r1056-reset-full-file.json",
+      "additional_evidence": "s13-r1280-context-line-batch.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
       "original_candidate_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b"
     },
@@ -1244,11 +1244,11 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
-      "sha256": "ecd58f9518d7c331853188d270ca9fea5bfba18ea182a359fb0514d2cee63517",
+      "sha256": "55d5153055718b7e12cf3fc6a3ba0a1f1a5f8b300cf95225be2fe84384fb6ac9",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "completed-original-conditional-tree",
-      "additional_evidence": "s13-r1057-tape-full-file.json",
+      "additional_evidence": "s13-r1280-context-line-batch.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\tape_io.c",
       "original_candidate_sha256": "3aa86f1faf07f68937629f1d6e410eb41f498e17dc6d747647c7d6e5697c80aa"
     },
@@ -1694,11 +1694,11 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
-      "sha256": "a579153525f6f6b3a4b7d3d68ff4270cc016c44f65080e1b29195520b480c02c",
+      "sha256": "6cf6ae2cbab4c337d0c499942cd837da80f5392f7720482605d5afc25a059674",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "completed-original-conditional-tree",
-      "additional_evidence": "s13-r1058-cmain-full-file.json",
+      "additional_evidence": "s13-r1280-context-line-batch.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
       "original_candidate_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700"
     },
@@ -3934,11 +3934,11 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
-      "sha256": "04d3c8c9dafa6cb9d38c4e3c073ac7a4f8787dc3fbc260ef10d82fb6fd33c4b9",
+      "sha256": "2be78798f0f3c05b03e4ad32e793d5d3ede22eb03a4310321c767d41533faee0",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "completed-original-conditional-tree",
-      "additional_evidence": "s13-r1063-printer-full-file.json",
+      "additional_evidence": "s13-r1280-context-line-batch.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\printer.c",
       "original_candidate_sha256": "b1456dcbc0dc6b4d1fd5d101bfaa6bdc9a4cd5d970c14215f3ae62a173f17ccb"
     },
@@ -5524,11 +5524,11 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "sha256": "7fe09d59e6e7f5698542146fa57f998b1e4411ee3880fc072ac67b48899bb73f",
+      "sha256": "6290f6b3fba8c64d6cdc6e22fa3b60614ff39e9b297e51bfaf74ebb083ae6a2e",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "completed-original-conditional-tree-with-local-binding",
-      "additional_evidence": "s13-r1174-mouse-full-file.json",
+      "additional_evidence": "s13-r1280-context-line-batch.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
       "original_candidate_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439"
     },
@@ -5794,21 +5794,21 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
-      "sha256": "db9c142660680fc80fbb43b0f11be401df8385d470231ec48b48c86a081d3fcf",
+      "sha256": "2c0db8351f49fd223d4a63201f20747af23016c6db5ad490d09db649a58560fb",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "completed-original-conditional-tree-with-local-binding",
-      "additional_evidence": "s13-r1255-egawrtm-review.json",
+      "additional_evidence": "s13-r1280-context-line-batch.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\egawrtm0.c",
       "original_candidate_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
-      "sha256": "1286acebd1f10259c265899df132015240987ff89933a746a8e55ad6e91f732a",
+      "sha256": "c56c433af9612aa4df5eea80952a4a0731bec84d7a167fee91edd6ae7e6aacf8",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "completed-original-conditional-tree-with-local-binding",
-      "additional_evidence": "s13-r1255-egawrtm-review.json",
+      "additional_evidence": "s13-r1280-context-line-batch.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\egwrtm12.c",
       "original_candidate_sha256": "826aa1a6f685f7dc0d8b4362f3eb83899697d8a6e2a555739ff61e2388d254a1"
     },
@@ -5884,11 +5884,11 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "sha256": "e28bf75c25e5c0c5ffdd3f436725c68c76b7fe03fb8d562856c4172550841bba",
+      "sha256": "0da54f857fe715e1946247ec1dad2669e4374904f2a31861405db42caa56c68e",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "completed-original-conditional-tree-with-local-binding",
-      "additional_evidence": "s13-r1276-video-diagnostic-lines.json",
+      "additional_evidence": "s13-r1280-context-line-batch.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
       "original_candidate_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31"
     },
@@ -6716,11 +6716,11 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
-      "sha256": "89f5fe924f6f99e06f9da1d75addfa204c95f87b9e5f57e280d47665eddb94ee",
+      "sha256": "675f1d654972d1858d973563a1214d72a523f5e29aec6db3963f23496b4d893c",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "completed-original-conditional-tree-with-local-binding",
-      "additional_evidence": "s13-r1235-sim32-full-review.json",
+      "additional_evidence": "s13-r1280-context-line-batch.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\sim32.c",
       "original_candidate_sha256": "1f634b9d6c09d0f767a90ec9e577817800a07dc353cffa433ca2e0268d2cd42f"
     },
