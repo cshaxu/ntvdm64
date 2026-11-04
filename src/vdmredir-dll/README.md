@@ -7,12 +7,12 @@ Original source, resource, definition and export ownership remain in
 `source/` contains three finite bindings:
 
 - the x86 stdcall loader entry to original `VrDllInitialize`;
-- bounded numeric guest copy calls imported from the one `ntvdm.exe` worker;
+- bounded guest copy orchestration using the worker's shared address and lease contracts;
 - the source-proven unavailable private RAP transport imports.
 
 It does not own a session, TLS, CCPU executor, guest-memory lease, BaseSrv
-state or any original VDMREDIR algorithm.  Worker-local copy and asynchronous
-completion bindings remain in `src/ntvdm-exe/redir/`.
+state or any original VDMREDIR algorithm. Compatibility copy exports and
+asynchronous completion bindings remain in `src/ntvdm-exe/redir/`.
 
 The OEM copy boundary accepts capacity in encoded bytes including NUL and
 returns the existing LAN buffer-too-small status before any guest write. Its

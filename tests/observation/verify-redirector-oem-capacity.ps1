@@ -25,7 +25,7 @@ $inputs = $sources | ForEach-Object { Join-Path $root $_ }
 $objects = $sources | ForEach-Object {
     Join-Path $out ([IO.Path]::GetFileNameWithoutExtension($_) + '.obj')
 }
-& $wrapper cl /nologo /TC /c /MT /W4 /DNTVDM /DCPU_40_STYLE /DCCPU /DWIN_32 /DVDMREDIR_DLL "/I$root/src" "/I$root/src/vdmredir-dll/include" "/I$root/src/ntvdm-exe/redir/include" "/I$root/src/ntvdm-exe/softpc/include" "/FI$root/tests/mvdm-host/vdmredir/redirector_oem_fixture_binding.h" "/Fo$out/" @inputs 2>&1 |
+& $wrapper cl /nologo /TC /c /MT /W4 /DNTVDM /DCPU_40_STYLE /DCCPU /DWIN_32 /DVDMREDIR_DLL /DMVDM_GUEST_MEMORY_FIXTURE "/I$root/src" "/I$root/src/vdmredir-dll/include" "/I$root/src/ntvdm-exe/redir/include" "/I$root/src/ntvdm-exe/softpc/include" "/FI$root/tests/mvdm-host/vdmredir/redirector_oem_fixture_binding.h" "/Fo$out/" @inputs 2>&1 |
     Tee-Object -FilePath (Join-Path $out 'build.txt')
 if ($LASTEXITCODE -ne 0) { throw 'Compile failed.' }
 if ($OriginalProviders) {
@@ -71,7 +71,8 @@ if ($OriginalProviders) {
         @('original-mvdm-redir.lib','original-opennt-netlib.lib',
         'original-opennt-netapi-api.lib','original-opennt-xactsrv.lib',
         'common-root.lib','common-rpc.lib', 'lib-rpc.lib','lib-io.lib',
-        'common-codec.lib','common-console.lib')
+        'common-codec.lib','common-console.lib','lib-handle.lib','lib-file.lib',
+        'lib-process-hook.lib')
     $libraries = $dependencies | ForEach-Object {
         $path = Join-Path (Join-Path $root $BuildCache) $_
         if (!(Test-Path $path)) { throw "Missing fixture dependency: $_" }
@@ -81,7 +82,12 @@ if ($OriginalProviders) {
     # keep their existing controlled host/register seams, never unresolved forcing.
     $extraFlags = @('/force:multiple','/alternatename:_call_ica_hw_interrupt=_ica_hw_interrupt')
 }
-& $wrapper link /nologo /OPT:REF @extraFlags "/OUT:$exe" "/MAP:$exe.map" @objects @libraries kernel32.lib ntdll.lib netapi32.lib user32.lib gdi32.lib advapi32.lib rpcrt4.lib shell32.lib legacy_stdio_definitions.lib 2>&1 |
+$linkResponse = Join-Path $out 'link.rsp'
+$linkArgs = @('/nologo','/OPT:REF') + $extraFlags + @("/OUT:$exe","/MAP:$exe.map") +
+    $objects + $libraries + @('kernel32.lib','ntdll.lib','netapi32.lib','user32.lib',
+    'gdi32.lib','advapi32.lib','rpcrt4.lib','shell32.lib','legacy_stdio_definitions.lib')
+$linkArgs | ForEach-Object { '"' + $_ + '"' } | Set-Content $linkResponse -Encoding ASCII
+& $wrapper link "@$linkResponse" 2>&1 |
     Tee-Object -FilePath (Join-Path $out 'build.txt') -Append
 if ($LASTEXITCODE -ne 0) { throw 'Link failed.' }
 if ($OriginalProviders) {
@@ -109,7 +115,7 @@ try {
         })
     } | ConvertTo-Json -Depth 4 | Set-Content (Join-Path $out 'result.json')
     Write-Output $text
-    $count = if ($OriginalProviders) { 12 } else { 15 }
+    $count = if ($OriginalProviders) { 12 } else { 17 }
     if ($p.ExitCode -ne 0 -or $text -notmatch "assertions=$count failures=0") {
         throw 'OEM/CD assertions failed.'
     }

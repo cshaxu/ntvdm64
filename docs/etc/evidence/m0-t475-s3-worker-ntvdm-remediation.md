@@ -44,3 +44,25 @@ files and 274 NTVDM export ordinals. Local package
 `8ac27d1f-ff63-4b10-b8f8-2afd5f83d39b` was published with ten matching hashes.
 Full was not run; the optional DOS4GW/NESticle fixture was absent. Logs and
 the previous release backup are under `build/t475-s3-p2`.
+
+## P3: Redir copy orchestration
+
+VDMREDIR now resolves segment/offset addresses and performs its bounded copy
+workflow through the common address and lease contracts. The existing worker
+retains its session, memory and compatibility copy exports. The original 4 KiB
+chunk size, commit order and partial-failure behavior are preserved. Explicit
+imports prevent the DLL link from selecting the worker's private memory object.
+The candidate DLL's import table has shared provider ordinals 145, 148 and 149,
+but no longer imports redirector-copy ordinals 143 or 144. This does not remove
+the remaining NTVDM runtime import, whose scope is still open.
+
+The x86/x64 build, compiler dependency and three negative controls, 45 lease
+checks, 17 OEM/alias/chunk checks, 24 async checks, and 12 tests of the actual
+original NetAPI entry points passed. All 12 selected Control gates and real DOS
+async-read, async-write and NetAPI probes passed. The local ten-image package
+`0bcc0986-5646-4a04-8002-0bf6c3d65656` has matching release hashes. Full was
+not run; DOS4GW/NESticle was absent. The original-provider fixture required a
+stale header path and public library list to be updated and a linker response
+file to avoid the Windows command-line length limit. Logs, failed attempts,
+the guest test's bounded PATH and prior release backup are under
+`build/t475-s3-p3`.

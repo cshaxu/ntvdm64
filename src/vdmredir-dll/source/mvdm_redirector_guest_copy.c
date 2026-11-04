@@ -4,18 +4,47 @@
 #include <lmerr.h>
 #include <string.h>
 
-#include "common/guest-memory/redirector.h"
+#ifndef MVDM_GUEST_MEMORY_FIXTURE
+#define COMMON_GUEST_MEMORY_IMPORTS
+#endif
+#include "common/guest-memory/access.h"
+#include "common/guest-memory/address.h"
+
+/* The worker owns the address space; Redir owns this bounded copy workflow.
+ * Preserve the worker adapter's 4 KiB commit and partial-failure boundaries. */
+static int transfer_guest(uint16_t segment, uint16_t offset, uint8_t *bytes,
+    uint32_t byte_count, int write)
+{
+    uint32_t address, done = 0u;
+    if (bytes == NULL || byte_count == 0u ||
+        !mvdm_softpc_effective_address(segment, offset, &address) ||
+        byte_count > UINT32_MAX - address) return 0;
+    while (done < byte_count) {
+        guest_memory_lease *lease;
+        uint8_t *guest_bytes;
+        uint32_t chunk = byte_count - done;
+        if (chunk > 4096u) chunk = 4096u;
+        if (!mvdm_softpc_guest_memory_acquire(address + done, chunk,
+            write ? GUEST_MEMORY_ACCESS_WRITE : GUEST_MEMORY_ACCESS_READ,
+            &lease, &guest_bytes)) return 0;
+        if (write) memcpy(guest_bytes, bytes + done, chunk);
+        else memcpy(bytes + done, guest_bytes, chunk);
+        if (!mvdm_softpc_guest_memory_release(lease, write)) return 0;
+        done += chunk;
+    }
+    return 1;
+}
 
 static int copy_guest(uint16_t segment, uint16_t offset, uint8_t const *bytes,
     uint32_t byte_count)
 {
-    return mvdm_redirector_worker_copy_to(segment, offset, bytes, byte_count);
+    return transfer_guest(segment, offset, (uint8_t *)bytes, byte_count, 1);
 }
 
 static int read_guest(uint16_t segment, uint16_t offset, uint8_t *bytes,
     uint32_t byte_count)
 {
-    return mvdm_redirector_worker_copy_from(segment, offset, bytes, byte_count);
+    return transfer_guest(segment, offset, bytes, byte_count, 0);
 }
 
 int mvdm_redirector_copy_ansi_to_guest(uint16_t segment, uint16_t offset,

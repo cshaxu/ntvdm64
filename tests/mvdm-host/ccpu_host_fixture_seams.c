@@ -8,7 +8,7 @@
  */
 #include <windows.h>
 #include <vdmapi.h>
-#include "ntsrv-exe/opennt/include/base_rpc_client.h"
+#include "common/base_srv/base_rpc_client.h"
 
 /* CPU-only fixtures cannot reach a broker or frontend. Keep new adapter
  * imports fail-closed, just like ExitVDM below; do not connect real products. */

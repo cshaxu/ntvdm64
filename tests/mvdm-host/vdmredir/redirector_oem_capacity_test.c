@@ -6,8 +6,8 @@
 #include <string.h>
 #undef WideCharToMultiByte
 
-static uint8_t memory[2048];
-static unsigned assertions, failures, writes;
+static uint8_t memory[12000];
+static unsigned assertions, failures, writes, fail_write;
 static void check(int ok, char const *name)
 {
     ++assertions; if (!ok) ++failures;
@@ -31,27 +31,28 @@ static int write_memory(void *context, uint32_t address, uint8_t const *bytes,
 {
     (void)context;
     if (address > sizeof(memory) || count > sizeof(memory) - address) return 0;
-    ++writes; memcpy(memory + address, bytes, count); return 1;
+    ++writes;
+    if (writes == fail_write) return 0;
+    memcpy(memory + address, bytes, count); return 1;
 }
 /* Controlled real-mode addressing boundary, not a test of the production
  * CCPU protected-mode selector resolver. All copy/lease logic remains real. */
-int mvdm_redirector_worker_copy_to(uint16_t segment, uint16_t offset,
-    uint8_t const *bytes, uint32_t count)
+int __cdecl mvdm_softpc_effective_address(uint16_t segment, uint32_t offset,
+    uint32_t *address_out)
 {
-    mvdm_guest_location location;
-    return mvdm_guest_location_set_real_mode(&location, segment, offset) &&
-        mvdm_guest_location_copy_to_guest(&location, bytes, count);
+    if (address_out == NULL) return 0;
+    *address_out = ((uint32_t)segment << 4) + offset;
+    return 1;
 }
-int mvdm_redirector_worker_copy_from(uint16_t segment, uint16_t offset,
-    uint8_t *bytes, uint32_t count)
+int __cdecl mvdm_softpc_guest_memory_acquire(uint32_t address, uint32_t count,
+    uint32_t access, guest_memory_lease **lease, uint8_t **bytes)
 {
-    mvdm_guest_location location;
-    mvdm_guest_location_lease lease;
-    if (!mvdm_guest_location_set_real_mode(&location, segment, offset) ||
-        !mvdm_guest_location_acquire(&location, count, GUEST_MEMORY_ACCESS_READ,
-            &lease)) return 0;
-    memcpy(bytes, lease.bytes, count);
-    return mvdm_guest_location_release(&lease, 0);
+    return session_guest_memory_acquire(session_thread_current(), address, count,
+        access, lease, bytes);
+}
+int __cdecl mvdm_softpc_guest_memory_release(guest_memory_lease *lease, int commit)
+{
+    return session_guest_memory_release(session_thread_current(), lease, commit);
 }
 static void put32(unsigned address, uint32_t value)
 {
@@ -64,6 +65,7 @@ int main(void)
 {
     session s;
     char encoded[8];
+    char large[5000];
     int count;
     session_initialize(&s, 1);
     if (!session_activate(&s) || !session_guest_memory_begin(&s, NULL,
@@ -88,7 +90,7 @@ int main(void)
         memory[0x60] == 0, "empty string fits one byte");
     check(mvdm_redirector_copy_wide_to_guest(0, 0x70, L"user", UINT32_MAX) == 0,
         "caller-selected original unchecked capacity retained");
-    check(mvdm_redirector_copy_wide_to_guest(0, 2047, L"user", 5) ==
+    check(mvdm_redirector_copy_wide_to_guest(0, 11999, L"user", 5) ==
         ERROR_INVALID_ADDRESS, "out-of-memory-span copy fails");
     check(mvdm_redirector_copy_wide_to_guest(0, 0x80, NULL, 5) ==
         ERROR_INVALID_ADDRESS, "null source fails");
@@ -103,6 +105,18 @@ int main(void)
     check(mvdm_redirector_write_cd_names(0, 0x100, "", "DOM", NULL) &&
         !strcmp((char *)memory + 0x400, "DOM"),
         "CD destination alias preserves sequential far-field read");
+    memset(large, 'z', sizeof(large));
+    writes = 0; fail_write = 0;
+    check(mvdm_redirector_copy_ansi_to_guest(0, 0x800, large, sizeof(large)) &&
+        writes == 2 && !memcmp(memory + 0x800, large, sizeof(large)),
+        "large copy commits in two bounded chunks");
+    memset(memory + 0x800, 0xa5, sizeof(large));
+    writes = 0; fail_write = 2;
+    check(!mvdm_redirector_copy_ansi_to_guest(0, 0x800, large, sizeof(large)) &&
+        writes == 2 && !memcmp(memory + 0x800, large, 4096) &&
+        memory[0x800 + 4096] == 0xa5,
+        "second chunk failure retains first commit and rejects completion");
+    fail_write = 0;
     session_guest_memory_end(&s);
     check(mvdm_redirector_copy_wide_to_guest(0, 0x70, L"user", 5) ==
         ERROR_INVALID_ADDRESS, "dead guest memory fails");

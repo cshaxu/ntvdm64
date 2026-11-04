@@ -22,6 +22,12 @@ focused lease, callback and redirector tests, three real DOS redirector probes,
 and all 12 selected Control gates passed. Local package
 `8ac27d1f-ff63-4b10-b8f8-2afd5f83d39b` has ten verified release hashes;
 details and test limits are in the [S3 evidence](../etc/evidence/m0-t475-s3-worker-ntvdm-remediation.md).
+P3 moves Redir copy orchestration into VDMREDIR while retaining the worker's
+compatibility exports and single guest-memory authority. The x86/x64 build,
+focused and original NetAPI fixtures, three real DOS probes, and all 12 selected
+Control gates passed. Local package `0bcc0986-5646-4a04-8002-0bf6c3d65656`
+has ten verified release hashes. Full and the optional DOS4GW/NESticle fixture
+were not run. PE runtime-import scope remains open.
 T475 S1 separated NXVM and Win32 library ownership. Its final four local P
 commits extracted object-handle comparison, overlapped pipe-pair creation,
 parent-process observation and file identity. Their local packages each

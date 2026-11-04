@@ -62,23 +62,22 @@ static int write_memory(void *context, uint32_t address, uint8_t const *bytes,
     if (address > sizeof(memory) || n > sizeof(memory) - address) return 0;
     memcpy(memory + address, bytes, n); return 1;
 }
-int mvdm_redirector_worker_copy_to(uint16_t segment, uint16_t offset,
-    uint8_t const *bytes, uint32_t n)
+int __cdecl mvdm_softpc_effective_address(uint16_t segment, uint32_t offset,
+    uint32_t *address_out)
 {
-    mvdm_guest_location location;
-    return mvdm_guest_location_set_real_mode(&location, segment, offset) &&
-        mvdm_guest_location_copy_to_guest(&location, bytes, n);
+    if (address_out == NULL) return 0;
+    *address_out = ((uint32_t)segment << 4) + offset;
+    return 1;
 }
-int mvdm_redirector_worker_copy_from(uint16_t segment, uint16_t offset,
-    uint8_t *bytes, uint32_t n)
+int __cdecl mvdm_softpc_guest_memory_acquire(uint32_t address, uint32_t count,
+    uint32_t access, guest_memory_lease **lease, uint8_t **bytes)
 {
-    mvdm_guest_location location;
-    mvdm_guest_location_lease lease;
-    if (!mvdm_guest_location_set_real_mode(&location, segment, offset) ||
-        !mvdm_guest_location_acquire(&location, n, GUEST_MEMORY_ACCESS_READ,
-            &lease)) return 0;
-    memcpy(bytes, lease.bytes, n);
-    return mvdm_guest_location_release(&lease, 0);
+    return session_guest_memory_acquire(session_thread_current(), address, count,
+        access, lease, bytes);
+}
+int __cdecl mvdm_softpc_guest_memory_release(guest_memory_lease *lease, int commit)
+{
+    return session_guest_memory_release(session_thread_current(), lease, commit);
 }
 static void check(int ok, char const *name)
 {
