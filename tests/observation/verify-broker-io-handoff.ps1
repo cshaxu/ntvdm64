@@ -4,7 +4,8 @@ param(
     [Parameter(Mandatory)][string]$ReportPrefix,
     [ValidateSet('native','nested-console','nested-window')][string]$Case='nested-window',
     [ValidateSet('I386','AMD64')][string]$NativeMachine='I386',
-    [switch]$WindowOwnedConsole
+    [switch]$WindowOwnedConsole,
+    [string]$GuestPath
 )
 $ErrorActionPreference='Stop'
 $runtime=(Resolve-Path $RuntimeRoot).Path
@@ -32,6 +33,15 @@ $cmd=Join-Path $env:WINDIR $(if($NativeMachine -eq 'AMD64'){'System32\cmd.exe'}e
 $image=[IO.File]::ReadAllBytes($cmd)
 $machine=[BitConverter]::ToUInt16($image,[BitConverter]::ToInt32($image,60)+4)
 if($machine -ne $(if($NativeMachine -eq 'AMD64'){0x8664}else{0x14c})) {throw 'Native CMD machine mismatch'}
+# The Window frame observer reads process-local pointers; the test cannot
+# interpret a foreign-width NTCON frame safely. Fail before starting a guest.
+if($Case -eq 'nested-window') {
+    $observerBytes=[IO.File]::ReadAllBytes($observerPath)
+    $frontendBytes=[IO.File]::ReadAllBytes((Join-Path $binary 'ntcon.exe'))
+    $observerMachine=[BitConverter]::ToUInt16($observerBytes,[BitConverter]::ToInt32($observerBytes,60)+4)
+    $frontendMachine=[BitConverter]::ToUInt16($frontendBytes,[BitConverter]::ToInt32($frontendBytes,60)+4)
+    if($observerMachine -ne $frontendMachine) {throw 'Window observer and NTCON must have the same PE machine'}
+}
 # Only an x86 launcher needs the WOW64 alias. Pin the actual launcher ABI.
 $launcherImage=[IO.File]::ReadAllBytes((Join-Path $binary 'run16.exe'))
 $launcherPe=[BitConverter]::ToInt32($launcherImage,60)
@@ -44,10 +54,13 @@ $identity=@($names | ForEach-Object {
 $identity | ConvertTo-Json | Set-Content "$prefix.package.json" -Encoding UTF8
 $environmentNames='MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_WINDOW_INPUT','MVDM_OBSERVER_MILESTONE_INPUT',
     'MVDM_OBSERVER_SHORT_HISTORY','MVDM_OBSERVER_CAF_OWNED_CONSOLE','MVDM_OBSERVER_CAF_OUTER_COMMAND',
-    'NTVDM_BOOTSTRAP_TRACE','NTVWM_GEOMETRY_ERROR_LOG'
+    'NTVDM_BOOTSTRAP_TRACE','NTVWM_GEOMETRY_ERROR_LOG','PATH'
 $saved=@{}
 foreach($name in $environmentNames) {$saved[$name]=[Environment]::GetEnvironmentVariable($name,'Process')}
 try {
+    # Only the test-owned process environment is bounded; preserve long-PATH
+    # behavior for separate explicit guest compatibility tests.
+    if($GuestPath) {[Environment]::SetEnvironmentVariable('PATH',$GuestPath,'Process')}
     $stage=New-PhysicalRuntimeStage $runtime
     $testScope=New-IsolatedPackageScope $stage
     $binary=Get-PackageBinaryRoot $stage
