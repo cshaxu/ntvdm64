@@ -15,6 +15,9 @@ remote handle close; caller-owned allocation, authorization, and transfer policy
 remain outside the library. It also resolves Windows object-handle comparison;
 callers decide how an unavailable function or unequal objects affect policy.
 
+`file/` compares existing file identity using volume and file indices; callers
+own the decision attached to a match and the supplied path policy.
+
 `process-hook/` owns suspended-child payload transfer and same-/cross-width
 Detours installation; the caller retains process ownership and rollback.
 The pinned Detours source and license are carried under this subcomponent.

@@ -113,6 +113,9 @@ For each P preserve caller policy and error semantics, run affected builds,
 focused tests and Control, publish the complete package to this worktree's
 assets/release and commit locally. No main-runtime publication or push is
 requested. Each subsequent P begins only after the preceding P is committed.
+Status temporarily exceeds the normal 16 KiB target while retaining this
+active packet and prior closure context; compact that context into indexed
+evidence when the owner closes or replans the active packet.
 P1 shared handle comparison passed x86/x64 builds, 16 handle checks, all 12
 selected Control gates and ten local release hashes for package
 `c7cf5920-8f98-48c6-badd-24ba9e1a35e8`. Full was not run; the optional
@@ -125,12 +128,16 @@ P3 parent-process observation passed x86/x64 builds, 19 focused checks,
 native and DOS observation fixtures on both architectures, 12 Control gates
 and ten local release hashes for package `f8ee2662-b573-41c1-955e-ed7ca0555884`.
 Full was not run and the optional DOS4GW/NESticle fixture was absent.
+P4 `lib-win32/file` identity comparison passed x86/x64 builds, 14 file checks,
+118 NTHook assertions on each architecture, 12 Control gates and ten local
+release hashes for package `2b1325bd-17fb-4435-b2be-55995de325f6`. Full was
+not run and the optional DOS4GW/NESticle fixture was absent.
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T475 S1, Ordinary Mode. |
 | Admission And Approval | Owner requests a new T to separate NXVM and project Win32 libraries, starting with RPC. |
-| Objective | Rename the NXVM library owner to src/lib-nxvm, introduce src/lib-win32, and place generic RPC, process attributes and shared handle mechanisms, process-hook and process-observation there. |
+| Objective | Separate NXVM and Win32 library ownership, including generic RPC, I/O, file identity, process attributes and observation, handle and process-hook mechanisms. |
 | Non-goals | Change RPC behavior, guest media, main worktree, or alter process admission, resume, hook propagation or rollback semantics. |
 | Reference Baseline | T474 S3 local release 9f45db63-8a83-44c4-84b7-f4a45fd9297a; [evidence](../etc/evidence/m0-t474-s3-generic-libraries.md). |
 | Files And ABI Surface | Library trees, include paths, imported manifest and Git attributes, build graphs, tests and architecture authorities. |

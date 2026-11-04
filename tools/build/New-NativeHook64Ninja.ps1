@@ -46,7 +46,7 @@ $graph.Add('build observation-stub.obj: cc obj/basesrv/service_c.c | obj/basesrv
 $sources=@('src/nthook32-dll/entry.cpp','src/nthook32-dll/context.cpp',
     'src/nthook32-dll/installer.cpp','src/nthook32-dll/create_process.cpp',
     'src/lib-win32/process-hook/install.cpp',
-    'src/common/native_image.c','src/lib-win32/handle/duplicate.c',
+    'src/common/native_image.c','src/lib-win32/handle/duplicate.c','src/lib-win32/file/identity.c',
     'src/nthook32-dll/hook_classification.c',
     'src/non-mvdm/base/win32/client/vdm.c',
     'src/common/base_srv/base_classifier_path.c',

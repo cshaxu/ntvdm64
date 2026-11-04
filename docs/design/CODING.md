@@ -16,11 +16,12 @@ does not change their source provenance, executable ownership or ABI.
 ## Generic integration libraries — T474 S3
 
 `src/lib-win32/rpc` carries local RPC binding and async completion mechanics;
-`src/lib-win32/io` carries checked overlapped pipe transfer, Console membership
-sampling and final native file-path resolution. `src/lib-win32/process-attributes` owns process
+`src/lib-win32/io` carries overlapped pipe-pair creation and checked transfer, Console membership
+sampling and final native file-path resolution. `src/lib-win32/file` owns file identity comparison.
+`src/lib-win32/process-attributes` owns process
 attribute-list mechanics; `src/lib-win32/process-observation` owns generic process
-identity and exit-wait mechanisms; `src/lib-win32/handle` owns explicit-process handle
-duplication and remote cleanup. Their product-independent contracts depend only on native platform
+identity, parent query and exit-wait mechanisms; `src/lib-win32/handle` owns explicit-process handle
+duplication, object comparison lookup and remote cleanup. Their product-independent contracts depend only on native platform
 APIs. Product wire formats, RPC operations, frontend codecs and lifecycle
 policy stay in `common` or their executable owners. Generic libraries never
 depend on common, worker-base or private executable components.
@@ -148,7 +149,7 @@ src/
   compat/
   common/{protocol,codec,console}/
   lib-nxvm/{types,base,kvm-base,kvm-window}/
-  lib-win32/{rpc,io,handle,process-attributes,process-observation,process-hook}/
+  lib-win32/{rpc,io,file,handle,process-attributes,process-observation,process-hook}/
   worker-base/
   run16-exe/
   ntsrv-exe/

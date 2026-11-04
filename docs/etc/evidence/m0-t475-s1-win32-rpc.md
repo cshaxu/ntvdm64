@@ -200,3 +200,17 @@ Control gates passed for package f8ee2662-b573-41c1-955e-ed7ca0555884;
 ten local release hashes matched. Full was not run; optional DOS4GW/NESticle
 was absent. Commands, PIDs, results and logs are in
 build/t475-parent-observation-p. No main runtime publication or push occurred.
+
+## Follow-up P: Win32 file identity
+
+P4 creates lib-win32/file and moves the existing volume-serial and file-index
+comparison from NTHook into it. File-open attributes, share mode, identity
+fields, cleanup and errors are preserved; NTHook retains launcher selection.
+The x86/x64 builds and ownership checks passed. The file fixture passed 14
+checks including same path, hard link, different files and invalid inputs.
+The x86 and x64 NTHook installer fixtures each passed 118 assertions. Stage
+verified 63 immutable guest files and 274 NTVDM exports. All 12 selected
+Control gates passed for package 2b1325bd-17fb-4435-b2be-55995de325f6;
+ten local release hashes matched. Full was not run; optional DOS4GW/NESticle
+was absent. Commands, PIDs, results and logs are in build/t475-file-identity-p.
+No main-runtime publication or push occurred.

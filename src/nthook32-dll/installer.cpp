@@ -1,5 +1,6 @@
 #include "hook.h"
 #include "lib-win32/handle/duplicate.h"
+#include "lib-win32/file/identity.h"
 #include "lib-win32/process-hook/install.h"
 #include "common/native_image.h"
 #include <wchar.h>
@@ -7,23 +8,11 @@ extern const GUID nthook_payload_guid;
 DWORD nthook_launcher_target(HANDLE child,const nthook_context *context,BOOL *launcher)
 {
     WCHAR actual[MAX_PATH+32];DWORD error=ERROR_SUCCESS;
-    HANDLE files[2]={INVALID_HANDLE_VALUE,INVALID_HANDLE_VALUE};BY_HANDLE_FILE_INFORMATION info[2];
     if(!child || !context || !launcher)return ERROR_INVALID_PARAMETER;
     *launcher=FALSE;
     error=common_native_process_path(child,actual,MAX_PATH+32);
     if(error)return error;
-    PCWSTR names[2]={actual,context->launcher};
-    for(unsigned i=0;i<2;++i) {
-        files[i]=CreateFileW(names[i],FILE_READ_ATTRIBUTES,FILE_SHARE_READ|FILE_SHARE_DELETE,
-            NULL,OPEN_EXISTING,0,NULL);
-        if(files[i]==INVALID_HANDLE_VALUE || !GetFileInformationByHandle(files[i],&info[i])) {
-            error=GetLastError();break;
-        }
-    }
-    if(!error)*launcher=info[0].dwVolumeSerialNumber==info[1].dwVolumeSerialNumber &&
-        info[0].nFileIndexHigh==info[1].nFileIndexHigh && info[0].nFileIndexLow==info[1].nFileIndexLow;
-    for(unsigned i=0;i<2;++i)if(files[i]!=INVALID_HANDLE_VALUE)CloseHandle(files[i]);
-    return error;
+    return win32_file_same(actual,context->launcher,launcher);
 }
 DWORD nthook_install(HANDLE child,const nthook_context *context,DWORD mode)
 {
