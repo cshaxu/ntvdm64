@@ -52,6 +52,7 @@ BOOL WI32DDEAddInitiator (HAND16 Initiator)
 
         LOGDEBUG(12, ("WOW::WI32DDEInitiator(): thunking -- adding an Initiator %04lX\n", Initiator));
         return (TRUE);
+#line 54
     }
     else {
 
@@ -62,6 +63,7 @@ BOOL WI32DDEAddInitiator (HAND16 Initiator)
         LOGDEBUG(12, ("WOW::WI32DDEInitiator(): thunking -- Couldn't allocate memory\n"));
         WOW32ASSERT (FALSE);
         return (FALSE);
+#line 63
     }
 }
 
@@ -243,6 +245,7 @@ HAND16 DDECopyhData16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE h32, PDDEINFO pDd
     DDEDATA16 *lpMem16;
     int cb;
     BOOL fFailed = FALSE;
+#line 243
 
     //
     // NULL handle ?
@@ -333,6 +336,7 @@ HAND16 DDECopyhData16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE h32, PDDEINFO pDd
                         if (hDib16) GlobalUnlockFree16(GlobalLock16(hDib16, NULL));
                         fFailed = TRUE;
                     }
+#line 329
 
                 }
 
@@ -393,6 +397,7 @@ HAND16 DDECopyhData16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE h32, PDDEINFO pDd
                                 if (hMF16) GlobalUnlockFree16(GlobalLock16(hMF16, NULL));
                                 fFailed = TRUE;
                             }
+#line 385
                         }
 
                         GETMISCPTR(vp1, lpMem16);
@@ -421,6 +426,7 @@ HAND16 DDECopyhData16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE h32, PDDEINFO pDd
                                 GlobalUnlockFree16(GlobalLock16(hMeta16, NULL));
                                 fFailed = TRUE;
                             }
+#line 409
                             hMF32 = lpMemMeta32->hMF;
                             if (!fFailed && hMF32) {
                                 hMF16 = WinMetaFileFromHMF(hMF32, FALSE);
@@ -430,6 +436,7 @@ HAND16 DDECopyhData16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE h32, PDDEINFO pDd
                                     if (hMF16) GlobalUnlockFree16(GlobalLock16(hMF16, NULL));
                                     fFailed = TRUE;
                                 }
+#line 414
                             }
 
                             GETMISCPTR(vp2, lpMemMeta16);
@@ -440,6 +447,7 @@ HAND16 DDECopyhData16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE h32, PDDEINFO pDd
                         }
                         else {
                             fFailed = TRUE;
+#line 421
                         }
                         GlobalUnlock(hMeta32);
                     }
@@ -463,6 +471,7 @@ HAND16 DDECopyhData16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE h32, PDDEINFO pDd
         return (0);
     }
 
+#line 438
     return (h16);
 }
 
@@ -482,6 +491,7 @@ HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pD
     DDEDATA *lpMem16;
     DDEDATA32 *lpMem32;
     BOOL fFailed = FALSE;
+#line 456
 
     //
     // AmiPro passes a NULL handle.
@@ -566,6 +576,7 @@ HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pD
                         if (hDib32) GlobalFree(hDib32);
                         fFailed = TRUE;
                     }
+#line 536
 
                     GlobalUnlock16(hDib16);
                     FREEMISCPTR(lpMemDib16);
@@ -619,6 +630,7 @@ HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pD
                             /* The mark callback below may reenter guest code.  Do
                              * not dereference this flat guest view after it. */
                             hMF16 = FETCHWORD(lpMemMeta16->hMF);
+#line 586
                             pDdeInfo->Format = lpMem16->cfFormat;
                             pDdeInfo->Flags = 0;
                             pDdeInfo->h16 = 0;
@@ -627,8 +639,10 @@ HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pD
                                 GlobalFree(hMeta32);
                                 fFailed = TRUE;
                             }
+#line 590
 
                             if (!fFailed && hMF16) {
+#line 594
                                 hMF32 = (HMETAFILE) HMFFromWinMetaFile(hMF16, FALSE);
                                 pDdeInfo->Flags = DDE_METAFILE;
                                 if (!hMF32 || !DDETrackhandle(pConversion, To_hwnd, From_hwnd,
@@ -636,11 +650,13 @@ HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pD
                                     if (hMF32) DeleteMetaFile(hMF32);
                                     fFailed = TRUE;
                                 }
+#line 597
                             }
 
                             if (!fFailed) {
                                 lpMemMeta32->hMF = (HMETAFILE) hMF32;
                             }
+#line 600
                             GlobalUnlock(hMeta32);
                         }
                         GlobalUnlock16(hMeta16);
@@ -662,6 +678,7 @@ HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pD
         if (h32) GlobalFree(h32);
         return (NULL);
     }
+#line 616
     return (h32);
 }
 
@@ -704,6 +721,7 @@ BOOL DDEAddhandle(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 hMem16, HANDLE hMem32
                 DDEDeletehandle(hMem16, hMem32);
                 return (FALSE);
             }
+#line 654
 
             return (TRUE);
         }
@@ -793,6 +811,7 @@ VOID DDERollback32(PDDECONVERSION pConversion, HAND16 To_hwnd, HAND16 From_hwnd)
 }
 
 
+#line 668
 //  This routine deletes the given h16-h32 pair from the list and frees up
 //   the memory.
 //
@@ -804,6 +823,7 @@ BOOL DDEDeletehandle(HAND16 h16, HANDLE h32)
     phTemp1 = phDDEFirst;
     /* DIVERGENCE(MVDM-HOST-DIV-351): the absent pair also includes an empty list. */
     if (!phTemp1) return (FALSE);
+#line 677
 
     if ((phTemp1->hMem16 == h16) && (phTemp1->hMem32 == h32)) {  // first node
         phDDEFirst = phTemp1->pDDENext;
@@ -1116,6 +1136,7 @@ VPVOID CopyDataFindData16 (HWND16 To_hwnd, HWND16 From_hwnd, DWORD Mem)
         if ((pTemp->To_hwnd == To_hwnd) &&
             (pTemp->From_hwnd == From_hwnd) &&
             (pTemp->Flags & COPYDATA_HEADER) && /* DIV-344: not an embedded payload. */
+#line 988
             (pTemp->Mem32 == Mem)) {
                 return (pTemp->Mem16);
         }
@@ -1137,6 +1158,7 @@ PCPDATA CopyDataFindData32 (HWND16 To_hwnd, HWND16 From_hwnd, DWORD Mem)
         if ((pTemp->To_hwnd == To_hwnd) &&
             (pTemp->From_hwnd == From_hwnd) &&
             (pTemp->Flags & COPYDATA_HEADER) && /* DIV-344: same original list. */
+#line 1008
             (pTemp->Mem16 == Mem)) {
                 return (pTemp);
         }
@@ -1161,6 +1183,7 @@ BOOL CopyDataDeleteNode (HWND16 To_hwnd, HWND16 From_hwnd, DWORD Mem)
 
     /* DIVERGENCE(MVDM-HOST-DIV-344): rollback may have no published node. */
     if (!pTemp1) return FALSE;
+#line 1029
 
     if ((pTemp1->To_hwnd == To_hwnd) &&
         (pTemp1->From_hwnd == From_hwnd) &&

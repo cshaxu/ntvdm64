@@ -1,5 +1,9 @@
 # non-mvdm original OpenNT sources
 
+OPENNT-HOST-173: restore original matching code positions in three
+condition-free USER source files; only `#line` was added. Evidence:
+`../../artifacts/mvdm-audit/s13-r1322-line-batch.json`.
+
 OPENNT-HOST-172: restore original diagnostic positions for matching code in
 five condition-free NTDLL, NetAPI and USER sources; only `#line` was added.
 Evidence: `../../artifacts/mvdm-audit/s13-r1321-line-batch.json`.

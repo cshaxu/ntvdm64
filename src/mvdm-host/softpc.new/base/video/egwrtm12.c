@@ -121,6 +121,7 @@ SIGNALS ISSUED	  :	NONE
 /* [5.1.1 #DEFINES]							*/
 
 #ifdef SEGMENTATION
+#line 124
 #error Excluded unsupported SEGMENTATION configuration
 
 
@@ -132,6 +133,7 @@ SIGNALS ISSUED	  :	NONE
 
 
 #endif
+#line 135
 
 /* [5.1.2 TYPEDEF, STRUCTURE, ENUM DECLARATIONS]			*/
 

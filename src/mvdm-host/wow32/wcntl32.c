@@ -15,6 +15,7 @@
 #include "precomp.h"
 #pragma hdrstop
 #include "wow_message_lifetime.h" /* DIVERGENCE(MVDM-HOST-DIV-347) */
+#line 17
 
 MODNAME(wcntl32.c);
 
@@ -107,6 +108,7 @@ BOOL FASTCALL WM32EMGetRect (LPWM32MSGPARAMEX lpwm32mpex)
         lpwm32mpex->Parm16.WndProc.wMsg = (WORD) (WM_USER + (lpwm32mpex->uMsg - EM_GETSEL));
         /* DIVERGENCE(MVDM-HOST-DIV-349): capture before copying/callback. */
         lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(sizeof(RECT16)));
+#line 108
         if (!(lpwm32mpex->Parm16.WndProc.lParam))
             return FALSE;
     } else {
@@ -132,6 +134,7 @@ BOOL FASTCALL WM32EMSetRect (LPWM32MSGPARAMEX lpwm32mpex)
         lpwm32mpex->Parm16.WndProc.wMsg = (WORD) (WM_USER + (lpwm32mpex->uMsg - EM_GETSEL));
         /* DIVERGENCE(MVDM-HOST-DIV-349): capture before copying/callback. */
         lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(sizeof(RECT16)));
+#line 132
         if (!(lpwm32mpex->Parm16.WndProc.lParam))
             return FALSE;
         PUTRECT16( lpwm32mpex->Parm16.WndProc.lParam, (LPRECT)lpwm32mpex->lParam );
@@ -184,6 +187,7 @@ BOOL FASTCALL WM32EMReplaceSel (LPWM32MSGPARAMEX lpwm32mpex)
             } else {
                 /* DIVERGENCE(MVDM-HOST-DIV-349): capture before copying/callback. */
                 lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(cb));
+#line 183
             }
 
             if (!(lpwm32mpex->Parm16.WndProc.lParam))
@@ -235,6 +239,7 @@ BOOL FASTCALL WM32EMGetLine (LPWM32MSGPARAMEX lpwm32mpex)
             cb = *(UNALIGNED WORD *)(lpwm32mpex->lParam);
             /* DIVERGENCE(MVDM-HOST-DIV-349): capture before copying/callback. */
             lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(cb));
+#line 233
             if (!(lpwm32mpex->Parm16.WndProc.lParam))
                 return FALSE;
             ALLOCVDMPTR(lpwm32mpex->Parm16.WndProc.lParam,2,lp);
@@ -324,6 +329,7 @@ BOOL FASTCALL WM32EMSetTabStops (LPWM32MSGPARAMEX lpwm32mpex)
         if (lpwm32mpex->uParam != 0) {
             /* DIVERGENCE(MVDM-HOST-DIV-349): capture before copying/callback. */
             lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(lpwm32mpex->uParam * sizeof(WORD)));
+#line 321
             if (!(lpwm32mpex->Parm16.WndProc.lParam))
                 return FALSE;
             putintarray16((VPINT16)lpwm32mpex->Parm16.WndProc.lParam, (INT)lpwm32mpex->uParam, (LPINT)lpwm32mpex->lParam);
@@ -414,6 +420,7 @@ BOOL FASTCALL  WM32CBAddString (LPWM32MSGPARAMEX lpwm32mpex)
                 cb = strlen((LPSZ)lpwm32mpex->lParam)+1;
                 /* DIVERGENCE(MVDM-HOST-DIV-349): capture before copying/callback. */
                 lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(cb));
+#line 410
                 if (!(lpwm32mpex->Parm16.WndProc.lParam))
                     return FALSE;
                 putstr16((VPSZ)lpwm32mpex->Parm16.WndProc.lParam, (LPSZ)lpwm32mpex->lParam, cb);
@@ -452,9 +459,11 @@ BOOL FASTCALL  WM32CBAddString (LPWM32MSGPARAMEX lpwm32mpex)
 BOOL FASTCALL  WM32CBDir (LPWM32MSGPARAMEX lpwm32mpex)
 {
     DWORD owned; /* DIVERGENCE(MVDM-HOST-DIV-347): actual acquisition mode. */
+#line 447
     if (lpwm32mpex->fThunk) {
         lpwm32mpex->dwParam = 0;
         lpwm32mpex->Parm16.WndProc.lParam = 0;
+#line 448
         lpwm32mpex->Parm16.WndProc.wMsg = (WORD) (WM_USER + (lpwm32mpex->uMsg - CB_GETEDITSEL));
         if (lpwm32mpex->lParam) {
             INT cb;
@@ -464,6 +473,7 @@ BOOL FASTCALL  WM32CBDir (LPWM32MSGPARAMEX lpwm32mpex)
                 if (lParam) {
                     lpwm32mpex->Parm16.WndProc.lParam = lParam;
                     lpwm32mpex->dwParam = WOW_TEXT_ACTIVE | WOW_TEXT_MAPPED;
+#line 456
                     return (TRUE);
                 }
             }
@@ -473,6 +483,7 @@ BOOL FASTCALL  WM32CBDir (LPWM32MSGPARAMEX lpwm32mpex)
             if (!(lpwm32mpex->Parm16.WndProc.lParam))
                 return FALSE;
             lpwm32mpex->dwParam = WOW_TEXT_ACTIVE;
+#line 464
             putstr16((VPSZ)lpwm32mpex->Parm16.WndProc.lParam, (LPSZ)lpwm32mpex->lParam, cb);
         }
     } else {
@@ -481,8 +492,10 @@ BOOL FASTCALL  WM32CBDir (LPWM32MSGPARAMEX lpwm32mpex)
         if (owned & WOW_TEXT_MAPPED) {
             DeleteParamMap(lpwm32mpex->Parm16.WndProc.lParam, PARAM_16, NULL);
             return TRUE;
+#line 471
         }
         if (!(owned & WOW_TEXT_ACTIVE)) return TRUE;
+#line 472
         if (lpwm32mpex->Parm16.WndProc.lParam)
             free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);
     }
@@ -567,6 +580,7 @@ BOOL FASTCALL WM32CBGetLBText (LPWM32MSGPARAMEX lpwm32mpex)
 
             /* DIVERGENCE(MVDM-HOST-DIV-349): capture before copying/callback. */
             lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(cb));
+#line 555
             if (!(lpwm32mpex->Parm16.WndProc.lParam))
                 return FALSE;
             GETVDMPTR((lpwm32mpex->Parm16.WndProc.lParam), sizeof(BYTE), lpT);
@@ -607,6 +621,7 @@ BOOL FASTCALL WM32CBGetDropDownControlRect (LPWM32MSGPARAMEX lpwm32mpex)
         lpwm32mpex->Parm16.WndProc.wMsg = (WORD) (WM_USER + (lpwm32mpex->uMsg - CB_GETEDITSEL));
         /* DIVERGENCE(MVDM-HOST-DIV-349): capture before copying/callback. */
         lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(sizeof(RECT16)));
+#line 594
         if (!(lpwm32mpex->Parm16.WndProc.lParam))
             return FALSE;
     } else {
@@ -742,6 +757,7 @@ BOOL FASTCALL WM32LBGetText (LPWM32MSGPARAMEX lpwm32mpex)
 
             /* DIVERGENCE(MVDM-HOST-DIV-349): capture before copying/callback. */
             lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(cb));
+#line 728
             if (!(lpwm32mpex->Parm16.WndProc.lParam))
                 return FALSE;
 
@@ -831,6 +847,7 @@ BOOL FASTCALL WM32LBDir (LPWM32MSGPARAMEX lpwm32mpex)
             cb = strlen((LPSTR)lpwm32mpex->lParam)+1;
             /* DIVERGENCE(MVDM-HOST-DIV-349): before putstr16 can escape. */
             if (!(vp = wow_message_heap32(lpwm32mpex, malloc16(cb)))) {
+#line 816
                 LOGDEBUG(0,(" WOW32.DLL : WM32LBDir() :: Could not allocate memory for string, ChandanC\n"));
                 WOW32ASSERT(vp);
                 return FALSE;
@@ -863,6 +880,7 @@ BOOL FASTCALL WM32LBGetSelItems (LPWM32MSGPARAMEX lpwm32mpex)
             cb = lpwm32mpex->uParam * sizeof(WORD);
             /* DIVERGENCE(MVDM-HOST-DIV-349): capture before copying/callback. */
             lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(cb));
+#line 847
             if (!(lpwm32mpex->Parm16.WndProc.lParam))
                 return FALSE;
 
@@ -889,6 +907,7 @@ BOOL FASTCALL WM32LBSetTabStops (LPWM32MSGPARAMEX lpwm32mpex)
         if (lpwm32mpex->uParam != 0) {
             /* DIVERGENCE(MVDM-HOST-DIV-349): capture before copying/callback. */
             lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(lpwm32mpex->uParam * sizeof(WORD)));
+#line 872
             if (!(lpwm32mpex->Parm16.WndProc.lParam))
                 return FALSE;
             putintarray16((VPRECT16)lpwm32mpex->Parm16.WndProc.lParam, (INT)lpwm32mpex->uParam, (LPINT)lpwm32mpex->lParam);
@@ -912,6 +931,7 @@ BOOL FASTCALL WM32LBGetItemRect (LPWM32MSGPARAMEX lpwm32mpex)
         lpwm32mpex->Parm16.WndProc.wMsg = (WORD) (WM_USER + (lpwm32mpex->uMsg - LB_ADDSTRING + 1));
         /* DIVERGENCE(MVDM-HOST-DIV-349): capture before copying/callback. */
         lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(sizeof(RECT16)));
+#line 894
         if (!(lpwm32mpex->Parm16.WndProc.lParam))
             return FALSE;
     } else {
@@ -973,6 +993,7 @@ BOOL FASTCALL WM32LBAddString (LPWM32MSGPARAMEX lpwm32mpex)
                 cb = strlen((LPSZ)lpwm32mpex->lParam)+1;
                 /* DIVERGENCE(MVDM-HOST-DIV-349): capture before copying/callback. */
                 lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(cb));
+#line 954
                 if (!(lpwm32mpex->Parm16.WndProc.lParam))
                     return FALSE;
                 putstr16((VPSZ)lpwm32mpex->Parm16.WndProc.lParam, (LPSZ)lpwm32mpex->lParam, cb);

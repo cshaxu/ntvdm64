@@ -18,7 +18,9 @@
 #define WOW_ORIGINAL_TASK_ORDER
 #include "wow_task_order_bindings.h"
 #include "userk.h"
+#line 17
 
+#line 29
 VOID
 WakeWowTask(
    PTHREADINFO pti
@@ -34,6 +36,7 @@ WakeWowTask(
 
 
 
+#line 574
 
 VOID DirectedScheduleTask(
      PTHREADINFO ptiOld,
@@ -525,6 +528,7 @@ rescan:
 
 
 
+#line 665
 /***************************************************************************\
 * xxxUserYield
 *
@@ -533,6 +537,7 @@ rescan:
 * History:
 * 10-19-92 Scottlu      Created.
 \***************************************************************************/
+#line 671
 
 BOOL xxxUserYield(
     PTHREADINFO pti)
@@ -587,9 +592,11 @@ BOOL xxxUserYield(
  * thread lookup remains a required host operation under the USER lock. */
 #undef gpsi
 #define gpsi (ptiOld->ppi->shared)
+#line 672
 void xxxDirectedYield(
     DWORD dwThreadId,
     PTHREADINFO currentThread)
+#line 674
 {
     PTHREADINFO ptiOld;
     PTHREADINFO ptiNew;
@@ -639,10 +646,13 @@ void InsertTask(
     PTDB ptdb;
     int nPriority;
     PWOWPROCESSINFO pwpi = ppi->pwpi;
+#line 715
 
     CheckCritIn();
+#line 732
 
     UserAssert(pwpi != NULL);
+#line 735
 
     pptdb = &pwpi->ptdbHead;
     nPriority = ptdbNew->nPriority;
@@ -683,6 +693,7 @@ void InsertTask(
         }
 
         pptdb = &(ptdb->ptdbNext);
+#line 741
     }
 
     /*
@@ -690,4 +701,5 @@ void InsertTask(
      */
     ptdbNew->ptdbNext = *pptdb;
     *pptdb = ptdbNew;
+#line 744
 }

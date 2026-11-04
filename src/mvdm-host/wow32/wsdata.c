@@ -336,6 +336,7 @@ ULONG FASTCALL WWS32WSAAsyncGetHostByAddr(PVDMFRAME pFrame)
     context->vBuffer16 = parg16->Buffer;
     context->Buffer16Length = parg16->BufferLength;
     context->ThreadSerialNumber = WWS32ThreadSerialNumber;
+#line 338
 
     //
     // Enter a critical section to synchronize access to the context block
@@ -441,6 +442,7 @@ ULONG FASTCALL WWS32WSAAsyncGetHostByName(PVDMFRAME pFrame)
     context->vBuffer16 = parg16->Buffer;
     context->Buffer16Length = parg16->BufferLength;
     context->ThreadSerialNumber = WWS32ThreadSerialNumber;
+#line 442
 
     //
     // Enter a critical section to synchronize access to the context block
@@ -518,6 +520,7 @@ WWS32PostAsyncGetHost (
         // provider is therefore stale and must not touch freed guest memory.
         return TRUE;
     }
+#line 514
 
     //
     // If the call was successful, copy the 32-bit buffer to the
@@ -907,6 +910,7 @@ ULONG FASTCALL WWS32WSAAsyncGetProtoByName(PVDMFRAME pFrame)
     context->vBuffer16 = parg16->Buffer;
     context->Buffer16Length = parg16->BufferLength;
     context->ThreadSerialNumber = WWS32ThreadSerialNumber;
+#line 902
 
     //
     // Enter a critical section to synchronize access to the context block
@@ -1009,6 +1013,7 @@ ULONG FASTCALL WWS32WSAAsyncGetProtoByNumber(PVDMFRAME pFrame)
     context->vBuffer16 = parg16->Buffer;
     context->Buffer16Length = parg16->BufferLength;
     context->ThreadSerialNumber = WWS32ThreadSerialNumber;
+#line 1003
 
     //
     // Enter a critical section to synchronize access to the context block
@@ -1082,6 +1087,7 @@ WWS32PostAsyncGetProto (
     if ( context == NULL ) {
         return TRUE;
     }
+#line 1074
 
     //
     // If the call was successful, copy the 32-bit buffer to the
@@ -1406,6 +1412,7 @@ ULONG FASTCALL WWS32WSAAsyncGetServByPort(PVDMFRAME pFrame)
     context->vBuffer16 = parg16->Buffer;
     context->Buffer16Length = parg16->BufferLength;
     context->ThreadSerialNumber = WWS32ThreadSerialNumber;
+#line 1397
 
     //
     // Enter a critical section to synchronize access to the context block
@@ -1513,6 +1520,7 @@ ULONG FASTCALL WWS32WSAAsyncGetServByName(PVDMFRAME pFrame)
     context->vBuffer16 = parg16->Buffer;
     context->Buffer16Length = parg16->BufferLength;
     context->ThreadSerialNumber = WWS32ThreadSerialNumber;
+#line 1503
 
     //
     // Enter a critical section to synchronize access to the context block
@@ -1589,6 +1597,7 @@ WWS32PostAsyncGetServ (
     if ( context == NULL ) {
         return TRUE;
     }
+#line 1577
 
     //
     // If the call was successful, copy the 32-bit buffer to the
@@ -1790,11 +1799,13 @@ ULONG FASTCALL WWS32WSACancelAsyncRequest(PVDMFRAME pFrame)
     /* DIVERGENCE(MVDM-HOST-DIV-463): the selected source leaves this
        mapped WINSOCK operation as WSAEINVAL, although it already owns the
        native request identity in the existing async-context list. */
+#line 1775
     ULONG ul;
     register PWSACANCELASYNCREQUEST16 parg16;
     HANDLE asyncTaskHandle32;
     HAND16 asyncTaskHandle16;
     PWINSOCK_ASYNC_CONTEXT_BLOCK context;
+#line 1777
 
     if ( !WWS32IsThreadInitialized ) {
         SetLastError( WSANOTINITIALISED );
@@ -1803,6 +1814,7 @@ ULONG FASTCALL WWS32WSACancelAsyncRequest(PVDMFRAME pFrame)
 
     GETARGPTR(pFrame, sizeof(WSACANCELASYNCREQUEST16), parg16);
     asyncTaskHandle16 = GETWORD16( parg16->hAsyncTaskHandle );
+#line 1784
 
     if ( !WWS32FindAsyncTaskHandle32(
               asyncTaskHandle16,
@@ -1818,6 +1830,7 @@ ULONG FASTCALL WWS32WSACancelAsyncRequest(PVDMFRAME pFrame)
     ul = GETWORD16((*wsockapis[WOW_WSACANCELASYNCREQUEST].lpfn)(
                         asyncTaskHandle32
                         ));
+#line 1787
 
     FREEARGPTR(parg16);
 
@@ -1834,6 +1847,7 @@ ULONG FASTCALL WWS32WSACancelAsyncRequest(PVDMFRAME pFrame)
             free_w( (PVOID)context );
         }
     }
+#line 1792
 
     RETURN(ul);
 
@@ -1969,6 +1983,7 @@ WWS32CancelAsyncRequestsForTask(
     }
 
 } // WWS32CancelAsyncRequestsForTask
+#line 1796
 
 
 PWINSOCK_ASYNC_CONTEXT_BLOCK

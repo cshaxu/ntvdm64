@@ -1,0 +1,573 @@
+{
+  "method": "Eight condition-free files: original matching code mapped by actual newline counts with safe directive placement; two original excluded branches: original error and selected continuation positions anchored. Only #line directives were added. Matching comment-only locations are not certified.",
+  "condition_free": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdexec.c",
+      "before_sha256": "a1f10a19a902da1234f011609f7b0a6437a5d773194f618c599c42cf52531534",
+      "after_sha256": "f5273622f7a14219f7da6eff692e4ae54d7b46a2a220bdc6d8abfda3b960a1ca",
+      "original_sha256": "98a941095d47ae73ef9731d389a433203c7184b0a016b62e24b202bb89f829d0",
+      "anchors": [
+        {
+          "before_physical_line": 17,
+          "original_line": 16
+        },
+        {
+          "before_physical_line": 50,
+          "original_line": 18
+        },
+        {
+          "before_physical_line": 120,
+          "original_line": 83
+        },
+        {
+          "before_physical_line": 185,
+          "original_line": 146
+        },
+        {
+          "before_physical_line": 230,
+          "original_line": 187
+        },
+        {
+          "before_physical_line": 249,
+          "original_line": 203
+        },
+        {
+          "before_physical_line": 303,
+          "original_line": 249
+        },
+        {
+          "before_physical_line": 313,
+          "original_line": 254
+        },
+        {
+          "before_physical_line": 315,
+          "original_line": 257
+        },
+        {
+          "before_physical_line": 353,
+          "original_line": 291
+        },
+        {
+          "before_physical_line": 363,
+          "original_line": 296
+        },
+        {
+          "before_physical_line": 365,
+          "original_line": 299
+        },
+        {
+          "before_physical_line": 371,
+          "original_line": 300
+        },
+        {
+          "before_physical_line": 390,
+          "original_line": 318
+        },
+        {
+          "before_physical_line": 396,
+          "original_line": 323
+        },
+        {
+          "before_physical_line": 401,
+          "original_line": 324
+        },
+        {
+          "before_physical_line": 425,
+          "original_line": 345
+        },
+        {
+          "before_physical_line": 432,
+          "original_line": 351
+        },
+        {
+          "before_physical_line": 446,
+          "original_line": 371
+        },
+        {
+          "before_physical_line": 458,
+          "original_line": 376
+        },
+        {
+          "before_physical_line": 481,
+          "original_line": 377
+        },
+        {
+          "before_physical_line": 485,
+          "original_line": 380
+        },
+        {
+          "before_physical_line": 509,
+          "original_line": 397
+        },
+        {
+          "before_physical_line": 523,
+          "original_line": 410
+        },
+        {
+          "before_physical_line": 549,
+          "original_line": 434
+        },
+        {
+          "before_physical_line": 558,
+          "original_line": 437
+        },
+        {
+          "before_physical_line": 562,
+          "original_line": 440
+        },
+        {
+          "before_physical_line": 568,
+          "original_line": 445
+        },
+        {
+          "before_physical_line": 580,
+          "original_line": 456
+        },
+        {
+          "before_physical_line": 654,
+          "original_line": 517
+        },
+        {
+          "before_physical_line": 678,
+          "original_line": 542
+        },
+        {
+          "before_physical_line": 689,
+          "original_line": 554
+        },
+        {
+          "before_physical_line": 694,
+          "original_line": 557
+        },
+        {
+          "before_physical_line": 709,
+          "original_line": 571
+        },
+        {
+          "before_physical_line": 716,
+          "original_line": 577
+        },
+        {
+          "before_physical_line": 738,
+          "original_line": 584
+        }
+      ],
+      "matching_code_line_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdredir.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdredir.c",
+      "before_sha256": "c583c3872a532df9f679ee35012624a636cc3d345cd0c07c7700c3966d065fe3",
+      "after_sha256": "418423e0da31b95b08031883f70842fd5f5b4ea1b928d6c40b4ab33a03da1da5",
+      "original_sha256": "a403f15ba9ec33af85ab38aaa7c4fea301016c4bb09a1ccbd3adee71a07dcc49",
+      "anchors": [
+        {
+          "before_physical_line": 27,
+          "original_line": 15
+        }
+      ],
+      "matching_code_line_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcntl32.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wcntl32.c",
+      "before_sha256": "48408feef986365b459c7e973d7b92964f139b4879278325b0eb370634f38c81",
+      "after_sha256": "f5b546392d4eae7d19896cf1d4ba9720e5cf55c61453d134ef2b08313b8f9f03",
+      "original_sha256": "36c8cb9a46f13998d0459bc4869dc6dd4191423c0429a7335ebd26f68c804b59",
+      "anchors": [
+        {
+          "before_physical_line": 18,
+          "original_line": 17
+        },
+        {
+          "before_physical_line": 110,
+          "original_line": 108
+        },
+        {
+          "before_physical_line": 135,
+          "original_line": 132
+        },
+        {
+          "before_physical_line": 187,
+          "original_line": 183
+        },
+        {
+          "before_physical_line": 238,
+          "original_line": 233
+        },
+        {
+          "before_physical_line": 327,
+          "original_line": 321
+        },
+        {
+          "before_physical_line": 417,
+          "original_line": 410
+        },
+        {
+          "before_physical_line": 455,
+          "original_line": 447
+        },
+        {
+          "before_physical_line": 458,
+          "original_line": 448
+        },
+        {
+          "before_physical_line": 467,
+          "original_line": 456
+        },
+        {
+          "before_physical_line": 476,
+          "original_line": 464
+        },
+        {
+          "before_physical_line": 484,
+          "original_line": 471
+        },
+        {
+          "before_physical_line": 486,
+          "original_line": 472
+        },
+        {
+          "before_physical_line": 570,
+          "original_line": 555
+        },
+        {
+          "before_physical_line": 610,
+          "original_line": 594
+        },
+        {
+          "before_physical_line": 745,
+          "original_line": 728
+        },
+        {
+          "before_physical_line": 834,
+          "original_line": 816
+        },
+        {
+          "before_physical_line": 866,
+          "original_line": 847
+        },
+        {
+          "before_physical_line": 892,
+          "original_line": 872
+        },
+        {
+          "before_physical_line": 915,
+          "original_line": 894
+        },
+        {
+          "before_physical_line": 976,
+          "original_line": 954
+        }
+      ],
+      "matching_code_line_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdde.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wdde.c",
+      "before_sha256": "2662e6a99ee1f03a9c42d2e9f3ab1e3f3dc71b58965de7a721140b16e53b26c0",
+      "after_sha256": "bf8661c53d2cdd631a665931d63072bb8733c8fe26ef86bea508bb9267f709c4",
+      "original_sha256": "859efd3356f46b646af8373112297212de2016de9a2587af580d6d99b64df6aa",
+      "anchors": [
+        {
+          "before_physical_line": 55,
+          "original_line": 54
+        },
+        {
+          "before_physical_line": 65,
+          "original_line": 63
+        },
+        {
+          "before_physical_line": 246,
+          "original_line": 243
+        },
+        {
+          "before_physical_line": 336,
+          "original_line": 329
+        },
+        {
+          "before_physical_line": 396,
+          "original_line": 385
+        },
+        {
+          "before_physical_line": 424,
+          "original_line": 409
+        },
+        {
+          "before_physical_line": 433,
+          "original_line": 414
+        },
+        {
+          "before_physical_line": 443,
+          "original_line": 421
+        },
+        {
+          "before_physical_line": 466,
+          "original_line": 438
+        },
+        {
+          "before_physical_line": 485,
+          "original_line": 456
+        },
+        {
+          "before_physical_line": 569,
+          "original_line": 536
+        },
+        {
+          "before_physical_line": 622,
+          "original_line": 586
+        },
+        {
+          "before_physical_line": 630,
+          "original_line": 590
+        },
+        {
+          "before_physical_line": 632,
+          "original_line": 594
+        },
+        {
+          "before_physical_line": 639,
+          "original_line": 597
+        },
+        {
+          "before_physical_line": 644,
+          "original_line": 600
+        },
+        {
+          "before_physical_line": 665,
+          "original_line": 616
+        },
+        {
+          "before_physical_line": 707,
+          "original_line": 654
+        },
+        {
+          "before_physical_line": 796,
+          "original_line": 668
+        },
+        {
+          "before_physical_line": 807,
+          "original_line": 677
+        },
+        {
+          "before_physical_line": 1119,
+          "original_line": 988
+        },
+        {
+          "before_physical_line": 1140,
+          "original_line": 1008
+        },
+        {
+          "before_physical_line": 1164,
+          "original_line": 1029
+        }
+      ],
+      "matching_code_line_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsdata.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wsdata.c",
+      "before_sha256": "5f37abc01127d62858970b7021fc9ed2b9213e9b81cb4c12122abdadf64bda8e",
+      "after_sha256": "3ae3ad7992ba726c8a3988a8cb3aebba07fa7c7c2a63f21c69026462683f93a0",
+      "original_sha256": "f8f95c4cb6ec3aca607e66d615900129497738617b9a6a192880dc66beb5e63b",
+      "anchors": [
+        {
+          "before_physical_line": 339,
+          "original_line": 338
+        },
+        {
+          "before_physical_line": 444,
+          "original_line": 442
+        },
+        {
+          "before_physical_line": 521,
+          "original_line": 514
+        },
+        {
+          "before_physical_line": 910,
+          "original_line": 902
+        },
+        {
+          "before_physical_line": 1012,
+          "original_line": 1003
+        },
+        {
+          "before_physical_line": 1085,
+          "original_line": 1074
+        },
+        {
+          "before_physical_line": 1409,
+          "original_line": 1397
+        },
+        {
+          "before_physical_line": 1516,
+          "original_line": 1503
+        },
+        {
+          "before_physical_line": 1592,
+          "original_line": 1577
+        },
+        {
+          "before_physical_line": 1793,
+          "original_line": 1775
+        },
+        {
+          "before_physical_line": 1798,
+          "original_line": 1777
+        },
+        {
+          "before_physical_line": 1806,
+          "original_line": 1784
+        },
+        {
+          "before_physical_line": 1821,
+          "original_line": 1787
+        },
+        {
+          "before_physical_line": 1837,
+          "original_line": 1792
+        },
+        {
+          "before_physical_line": 1972,
+          "original_line": 1796
+        }
+      ],
+      "matching_code_line_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/taskman.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\taskman.c",
+      "before_sha256": "fccab963dcde796091aae9972c86b874c899b81d2f91727b7081a3acfd5a1898",
+      "after_sha256": "ea93a97ab34276e744476a6f6218483ebec88a50c14eed6d1d7f7667a6ef6496",
+      "original_sha256": "e37f4d724650d5758ee05c54e181771aa584aead15f5a1376b322ecb7016e64e",
+      "anchors": [
+        {
+          "before_physical_line": 21,
+          "original_line": 17
+        },
+        {
+          "before_physical_line": 22,
+          "original_line": 29
+        },
+        {
+          "before_physical_line": 37,
+          "original_line": 574
+        },
+        {
+          "before_physical_line": 528,
+          "original_line": 665
+        },
+        {
+          "before_physical_line": 536,
+          "original_line": 671
+        },
+        {
+          "before_physical_line": 590,
+          "original_line": 672
+        },
+        {
+          "before_physical_line": 593,
+          "original_line": 674
+        },
+        {
+          "before_physical_line": 642,
+          "original_line": 715
+        },
+        {
+          "before_physical_line": 644,
+          "original_line": 732
+        },
+        {
+          "before_physical_line": 646,
+          "original_line": 735
+        },
+        {
+          "before_physical_line": 686,
+          "original_line": 741
+        },
+        {
+          "before_physical_line": 693,
+          "original_line": 744
+        }
+      ],
+      "matching_code_line_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/random.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\random.c",
+      "before_sha256": "359d04f11866fc7a2d31039e3063ada061b208933ef370ac5e0c84241f3f4878",
+      "after_sha256": "b7518719c84cab4727b02005dd3960cedb84a47ed30e7bb0c5e99bb91d81fd8f",
+      "original_sha256": "5147fce6825d1f7e8d69298e4da617f0fe414150963cff391ee53c856a0f5b2a",
+      "anchors": [
+        {
+          "before_physical_line": 16,
+          "original_line": 79
+        },
+        {
+          "before_physical_line": 29,
+          "original_line": 107
+        },
+        {
+          "before_physical_line": 44,
+          "original_line": 146
+        }
+      ],
+      "matching_code_line_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/text.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\text.c",
+      "before_sha256": "2b06dcc0a7d40a608d3b770949b92c69b152f1febe47331d4b6dc1781eaa79be",
+      "after_sha256": "b6539c0df34096ed6a3a2935f2d905ff01acb0d02586218c97c40f764a33ef53",
+      "original_sha256": "d2dae26e4766c2567225cb6bfc8147b4e80955b4ca49dcaf97b6193e7067a8e2",
+      "anchors": [
+        {
+          "before_physical_line": 7,
+          "original_line": 27
+        },
+        {
+          "before_physical_line": 17,
+          "original_line": 36
+        },
+        {
+          "before_physical_line": 34,
+          "original_line": 38
+        },
+        {
+          "before_physical_line": 45,
+          "original_line": 48
+        }
+      ],
+      "matching_code_line_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    }
+  ],
+  "condition_branches": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "before_sha256": "2c0db8351f49fd223d4a63201f20747af23016c6db5ad490d09db649a58560fb",
+      "after_sha256": "618442468ff3a82dc803e2593289787e7fdb8e70a49f0de59a7f40c738aac198",
+      "original_lines": [
+        180,
+        183
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "before_sha256": "c56c433af9612aa4df5eea80952a4a0731bec84d7a167fee91edd6ae7e6aacf8",
+      "after_sha256": "843bd6201984ab5e1da142ee5aea3b5d6d4a6446f459ea1763ec0926c5b86152",
+      "original_lines": [
+        124,
+        135
+      ]
+    }
+  ]
+}

@@ -95,6 +95,17 @@ images are identical and NTVDM/WOW32 differ only in PE timestamps
 ([comparison](s13-r1319-build-image-compare.json)); runtime tests were not
 repeated under owner instruction.
 
+The [sixth batch](s13-r1322-line-batch.json) aligns matching code in the
+remaining eight condition-free files previously flagged by the scan and
+restores two excluded video-branch anchors. Original comment-only line
+positions remain uncertified for 18 of these condition-free files; the
+condition-bearing files have separate remaining audit work. Build and
+publication passed for cached x86 root, NTVDM worker, WOW32 and x64 builds;
+the complete ten-image package was verified at both destinations. Eight
+images are identical and NTVDM/WOW32 differ only in PE timestamps
+([comparison](s13-r1322-build-image-compare.json)). Runtime tests were not
+repeated under owner instruction.
+
 The [fifth ten-file batch](s13-r1321-line-batch.json) restores original
 positions for matching code lines in another ten files. The batch uses newline
 boundaries rather than treating form-feed characters as line breaks, and

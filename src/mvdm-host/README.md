@@ -1,5 +1,11 @@
 # mvdm
 
+MVDM-HOST-DIV-641: restore matching original code positions in five
+condition-free COMMAND and WOW sources and restore two original video
+excluded-branch diagnostic anchors and their continuations. Only `#line`
+directives were added. Evidence:
+`../../artifacts/mvdm-audit/s13-r1322-line-batch.json`.
+
 MVDM-HOST-DIV-640: restore original diagnostic positions for matching code
 in five condition-free DOS, OEM and WOW sources; only `#line` was added.
 Evidence: `../../artifacts/mvdm-audit/s13-r1321-line-batch.json`.

@@ -177,8 +177,10 @@ typedef	union {
 	unsigned short	as_word;
 	struct {
 #ifdef	BIGEND
+#line 180
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #else
+#line 183
 		unsigned char	lo_byte;
 		unsigned char	hi_byte;
 #endif

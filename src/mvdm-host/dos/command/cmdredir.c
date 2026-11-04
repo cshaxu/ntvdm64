@@ -24,6 +24,7 @@
     opennt_create_void_cdecl_parameter_thread_named((attributes), (stack_bytes), \
         (OPENNT_VOID_CDECL_PARAMETER_THREAD_START_ROUTINE)(start_routine), \
         (parameter), (flags), (thread_id), #start_routine)
+#line 15
 
 #define CMDREDIR_DEBUG	1
 

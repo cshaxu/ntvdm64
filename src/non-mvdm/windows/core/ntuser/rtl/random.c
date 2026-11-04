@@ -13,6 +13,7 @@
 #define WOW_ORIGINAL_LARGE_STRING_LAYOUT
 #include "../inc/user.h"
 #undef WOW_ORIGINAL_LARGE_STRING_LAYOUT
+#line 79
 
 DWORD FindCharPosition(
     LPWSTR lpString,
@@ -26,6 +27,7 @@ DWORD FindCharPosition(
     }
     return dwPos;
 }
+#line 107
 
 UINT TextCopy(
     PLARGE_UNICODE_STRING pstr,
@@ -41,6 +43,7 @@ UINT TextCopy(
     return cchMax;
 }
 
+#line 146
 DWORD wcsncpycch (
         LPWSTR dest,
         LPCWSTR source,

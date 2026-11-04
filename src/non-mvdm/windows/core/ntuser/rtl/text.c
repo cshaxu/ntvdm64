@@ -4,6 +4,7 @@
  * capacity using the sibling PSMTextOut allocation pattern and finally free.
  * Full provenance and pending acceptance are in the S3 source ledger. */
 #include "precomp.h"
+#line 27
 
 BOOL PSMGetTextExtent(
     HDC hdc,
@@ -14,6 +15,7 @@ BOOL PSMGetTextExtent(
     int result;
     WCHAR szTemp[255];
     WCHAR *pchOut = szTemp;
+#line 36
 
     if (!psize || !lpstr || cch < 0 ||
             (SIZE_T)cch > ((SIZE_T)-1) / sizeof(WCHAR) - 1) {
@@ -31,6 +33,7 @@ BOOL PSMGetTextExtent(
     }
     __try {
         result = HIWORD(GetPrefixCount(lpstr, cch, pchOut, cch));
+#line 38
 
         if (!result)
             UserGetTextExtentPointW(hdc, lpstr, cch, psize);
@@ -42,5 +45,6 @@ BOOL PSMGetTextExtent(
         SetLastError(error);
     }
     /* Original callers and return contract do not propagate GDI's BOOL. */
+#line 48
     return TRUE;
 }

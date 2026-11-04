@@ -14,6 +14,7 @@
 #include <mvdm.h>
 #include <ctype.h>
 #include <stddef.h>
+#line 16
 #include <oemuni.h>
 #include <wowcmpat.h>
 /* DIVERGENCE(MVDM-HOST-DIV-111): retain the original SCSINFO layout and
@@ -47,6 +48,7 @@
  * Win3.1 DOSX-to-KRNL286 compatibility branch.  The observer consumes only
  * already-classified scalars and does not affect DOS EXEC classification. */
 #include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
+#line 18
 
 //*****************************************************************************
 // IsWowAppRunnable
@@ -117,6 +119,7 @@ BOOL IsWowAppRunnable(LPSTR lpAppName)
      * required its data argument to be an LPBYTE.  State that ABI exactly
      * on both host widths instead of relying on the old x86 char-array
      * compatibility. */
+#line 83
     lError = RegQueryValueEx( hKey,
                               szModName,
                               0,
@@ -182,6 +185,7 @@ VOID cmdCheckBinary (VOID)
     USHORT CommandTailOff,CommandTailSeg,usTemp;
     mvdm_guest_location_lease scs_lease;
     PSCSINFO pSCSInfo;
+#line 146
     NTSTATUS       Status;
     UNICODE_STRING Unicode;
     OEM_STRING     OemString;
@@ -227,6 +231,7 @@ VOID cmdCheckBinary (VOID)
         (unsigned long)VDMForWOW, (unsigned long)IsFirstWOWCheckBinary,
         (unsigned long)IsFirstCall);
 
+#line 187
 
     if (BinaryType == SCS_DOS_BINARY) {
         setCF(0);
@@ -246,6 +251,7 @@ VOID cmdCheckBinary (VOID)
         mvdm_softpc_report_setup_command_classification("first-wow-pass",
             BinaryType, (unsigned long)VDMForWOW,
             (unsigned long)IsFirstWOWCheckBinary, (unsigned long)IsFirstCall);
+#line 203
         IsFirstWOWCheckBinary = FALSE;
         setCF(0);
         return;         // Special Hack for krnl286.exe
@@ -300,6 +306,7 @@ VOID cmdCheckBinary (VOID)
     }
     pSCSInfo = (PSCSINFO)scs_lease.bytes;
 
+#line 249
     // copy the stub command.com name
     strcpy ((PCHAR)&pSCSInfo->SCS_ComSpec,lpszComSpec+8);
     if (!mvdm_command_guest_state_scs_field(
@@ -310,8 +317,10 @@ VOID cmdCheckBinary (VOID)
         setAX((USHORT)ERROR_INVALID_ADDRESS);
         return;
     }
+#line 254
     setDS(usTemp);
     setDX(CommandTailOff);
+#line 257
 
     // Form the command tail, first "3" is for "/z "
     pSCSInfo->SCS_CmdTail [0] = (UCHAR)(3 +
@@ -350,6 +359,7 @@ VOID cmdCheckBinary (VOID)
         return;
     }
     STOREWORD(pSCSInfo->SCS_ParamBlock.OffCmdTail,CommandTailOff);
+#line 291
     STOREWORD(pSCSInfo->SCS_ParamBlock.SegCmdTail,usTemp);
 
     if (!mvdm_command_guest_state_scs_field(
@@ -360,14 +370,17 @@ VOID cmdCheckBinary (VOID)
         setAX((USHORT)ERROR_INVALID_ADDRESS);
         return;
     }
+#line 296
     setES (usTemp);
     setBX (CommandTailOff);
+#line 299
 
     if (!mvdm_command_guest_state_release_scs(&scs_lease, 1)) {
         setCF(1);
         setAX((USHORT)ERROR_INVALID_ADDRESS);
         return;
     }
+#line 300
     setCF(0);
     return;
 }
@@ -387,17 +400,20 @@ VOID cmdCreateProcess ( VOID )
     DWORD dwRet;
     BOOL  Status;
     BOOL  StdHandlesValid = TRUE;
+#line 318
     NTSTATUS NtStatus;
     UNICODE_STRING Unicode;
     OEM_STRING	   OemString;
     LPVOID lpNewEnv=NULL;
     PSTD_HANDLES pStdHandles;
     ULONG SnapshotStdHandles[3];
+#line 323
     ANSI_STRING Env_A;
 
     /* Default-off phase evidence only: preserve the original worker body and
      * establish whether execution reaches its first source statement. */
 
+#line 324
 
     // we have one more 32 executable active
     Exe32ActiveCount++;
@@ -422,6 +438,7 @@ VOID cmdCreateProcess ( VOID )
     else {
         if ((hStd16In = (HANDLE)FETCHDWORD(pStdHandles->hStdIn)) != (HANDLE)-1)
             SetStdHandle (STD_INPUT_HANDLE, hStd16In);
+#line 345
 
         if ((hStd16Out = (HANDLE)FETCHDWORD(pStdHandles->hStdOut)) != (HANDLE)-1)
             SetStdHandle (STD_OUTPUT_HANDLE, hStd16Out);
@@ -429,6 +446,7 @@ VOID cmdCreateProcess ( VOID )
         if ((hStd16Err = (HANDLE)FETCHDWORD(pStdHandles->hStdErr)) != (HANDLE)-1)
             SetStdHandle (STD_ERROR_HANDLE, hStd16Err);
     }
+#line 351
 
     /*
      *  Warning, pEnv32 currently points to an ansi environment.
@@ -443,6 +461,7 @@ VOID cmdCreateProcess ( VOID )
 
     if (!StdHandlesValid) {
         SetLastError(ERROR_INVALID_HANDLE);
+#line 371
         Status = FALSE;
     }
     else {
@@ -455,6 +474,7 @@ VOID cmdCreateProcess ( VOID )
 	}
         if (!NT_SUCCESS(NtStatus)) {
             SetLastError(RtlNtStatusToDosError(NtStatus));
+#line 376
 	    Status = FALSE;
 	}
 	else if (pEnv32 != NULL) {
@@ -478,10 +498,12 @@ VOID cmdCreateProcess ( VOID )
                                 &StartupInfo,
                                &ProcessInformation);
             }
+#line 377
 	}
 	else {
 
 
+#line 380
 	    Status = CreateProcess (
                             NULL,
                            (LPTSTR)pCommand32,
@@ -506,6 +528,7 @@ VOID cmdCreateProcess ( VOID )
      * the singleton capture until child exit rejects original nested EXEC. */
     mvdm_command_native_child_finish();
 
+#line 397
     if (hStd16In != (HANDLE)-1)
         SetStdHandle (STD_INPUT_HANDLE, SCS_hStdIn);
 
@@ -520,6 +543,7 @@ VOID cmdCreateProcess ( VOID )
         WaitForSingleObject(ProcessInformation.hProcess, (DWORD)-1);
         GetExitCodeProcess (ProcessInformation.hProcess, &dwExitCode32);
 
+#line 410
         CloseHandle (ProcessInformation.hProcess);
         CloseHandle (ProcessInformation.hThread);
     }
@@ -546,6 +570,7 @@ VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
     HANDLE hThread;
     const char *capturedCommand;
     const char *capturedEnvironment;
+#line 434
 
     if (!mvdm_command_native_child_activate(pCmd32, pEnv,
             &capturedCommand, &capturedEnvironment)) {
@@ -555,16 +580,19 @@ VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
     }
     pCommand32 = (PCHAR)capturedCommand;
     pEnv32 = (PCHAR)capturedEnvironment;
+#line 437
 
     CntrlHandlerState = (CntrlHandlerState & ~CNTRL_SHELLCOUNT) |
                          (((WORD)(CntrlHandlerState & CNTRL_SHELLCOUNT))+1);
 
+#line 440
 
     nt_block_event_thread(0);
     fSoftpcRedirectionOnShellOut = fSoftpcRedirection;
     fBlock = TRUE;
 
 
+#line 445
     if((hThread = CreateThread (NULL,
                      0,
                      cmdCreateProcess,
@@ -577,6 +605,7 @@ VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
         nt_std_handle_notification(fSoftpcRedirectionOnShellOut);
         fBlock = FALSE;
         mvdm_command_native_child_abort();
+#line 456
         CntrlHandlerState = (CntrlHandlerState & ~CNTRL_SHELLCOUNT) |
                          (((WORD)(CntrlHandlerState & CNTRL_SHELLCOUNT))-1);
         return;
@@ -651,6 +680,7 @@ VOID cmdExecComspec32 (VOID)
         return;
     }
     pEnv = (PCHAR)mvdm_command_native_child_environment();
+#line 517
 
     chDefaultDrive = (CHAR)(getAL() + 'A');
 
@@ -675,6 +705,7 @@ VOID cmdExecComspec32 (VOID)
 VOID cmdExec (VOID)
 {
 
+#line 542
     DWORD   dwRet;
     PCHAR   pCommandTail;
     PCHAR   pEnv;
@@ -686,11 +717,13 @@ VOID cmdExec (VOID)
         setCF(0);
         setAL((UCHAR)ERROR_INVALID_ADDRESS);
         return;
+#line 554
     }
     pCommandTail = (PCHAR)mvdm_command_native_child_command();
     pEnv = (PCHAR)mvdm_command_native_child_environment();
     if (pCommandTail == NULL || pEnv == NULL) {
         mvdm_command_native_child_abort();
+#line 557
         setCF(0);
         setAL((UCHAR)ERROR_BAD_FORMAT);
         return;
@@ -706,6 +739,7 @@ VOID cmdExec (VOID)
 
         if (dwRet == 0 || dwRet >= MAX_PATH){
             mvdm_command_native_child_abort();
+#line 571
             setCF(0);
             setAL((UCHAR)ERROR_BAD_ENVIRONMENT);
             return;
@@ -713,6 +747,7 @@ VOID cmdExec (VOID)
 
         if ((dwRet + 4 + strlen(pCommandTail)) > MAX_PATH) {
             mvdm_command_native_child_abort();
+#line 577
             setCF(0);
             setAL((UCHAR)ERROR_BAD_ENVIRONMENT);
             return;
@@ -735,6 +770,7 @@ VOID cmdExec (VOID)
             setAL((UCHAR)ERROR_BAD_FORMAT);
             return;
         }
+#line 584
         cmdExec32 (Buffer,pEnv);
     }
 
