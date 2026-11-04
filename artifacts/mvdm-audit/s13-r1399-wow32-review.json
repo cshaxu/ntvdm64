@@ -1,0 +1,279 @@
+{
+  "method": "Compare reachable original condition trees and recorded retained-arm states, inspect direct diffs against registered adaptations, record all five local conditional groups and selected matching-code line projection.",
+  "limits": "No new runtime or compiler diagnostic test; DIV-583 explicitly does not establish complete callback or fast-BOP semantics.",
+  "registered_differences": [
+    "MVDM-HOST-DIV-291",
+    "MVDM-HOST-DIV-296",
+    "MVDM-HOST-DIV-583",
+    "MVDM-HOST-DIV-595",
+    "MVDM-HOST-DIV-513"
+  ],
+  "review": {
+    "path": "src/mvdm-host/wow32/wow32.c",
+    "current_sha256": "582f3a8ea5599cc9c0866fbdc6b6dcc0fbf8f9ce574f14d3feeda9f5ab95c5da",
+    "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
+    "matched_lines": 1447,
+    "groups": {
+      "excluded": 34,
+      "original_groups": 36,
+      "selected": 8,
+      "local_groups": 5
+    },
+    "local_groups": [
+      {
+        "line": 588,
+        "signature": [
+          [
+            "ifdef",
+            "DEBUG"
+          ],
+          [
+            "else",
+            ""
+          ]
+        ]
+      },
+      {
+        "line": 605,
+        "signature": [
+          [
+            "ifdef",
+            "DEBUG"
+          ],
+          [
+            "else",
+            ""
+          ]
+        ]
+      },
+      {
+        "line": 1575,
+        "signature": [
+          [
+            "if",
+            "defined(CPU_40_STYLE)"
+          ],
+          [
+            "elif",
+            "FASTBOPPING"
+          ],
+          [
+            "else",
+            ""
+          ]
+        ]
+      },
+      {
+        "line": 1596,
+        "signature": [
+          [
+            "if",
+            "defined(CPU_40_STYLE)"
+          ],
+          [
+            "elif",
+            "FASTBOPPING"
+          ],
+          [
+            "else",
+            ""
+          ]
+        ]
+      },
+      {
+        "line": 1642,
+        "signature": [
+          [
+            "if",
+            "defined(CPU_40_STYLE)"
+          ],
+          [
+            "elif",
+            "FASTBOPPING"
+          ],
+          [
+            "else",
+            ""
+          ]
+        ]
+      }
+    ],
+    "direct_diffs": [
+      {
+        "branch_line": 971,
+        "diff": [
+          "--- ",
+          "+++ ",
+          "@@ -15,3 +15,3 @@",
+          " }",
+          "-ulReturn = (*lpfnW32)(pFrame);      // Dispatch to Thunk",
+          "+ulReturn = wow_user_invoke_thunk(lpfnW32, pFrame); // DIV-296",
+          " } except (W32Exception(GetExceptionCode(), GetExceptionInformation())) {"
+        ]
+      },
+      {
+        "branch_line": 1573,
+        "diff": [
+          "--- ",
+          "+++ ",
+          "@@ -1 +0,0 @@",
+          "-return 0;"
+        ]
+      },
+      {
+        "branch_line": 1594,
+        "diff": [
+          "--- ",
+          "+++ ",
+          "@@ -1 +0,0 @@",
+          "-return( 0L );"
+        ]
+      },
+      {
+        "branch_line": 1640,
+        "diff": [
+          "--- ",
+          "+++ ",
+          "@@ -1 +0,0 @@",
+          "-return 0;"
+        ]
+      }
+    ],
+    "issues": []
+  },
+  "local_group_bodies": [
+    {
+      "line": 588,
+      "arms": [
+        {
+          "directive": "ifdef",
+          "expression": "DEBUG",
+          "body": [
+            "#line 582",
+            "#error DIVERGENCE MVDM-HOST-DIV-595: DEBUG initialization profile is not selected"
+          ]
+        },
+        {
+          "directive": "else",
+          "expression": "",
+          "body": [
+            "#line 600",
+            "        /* An absent section denotes the original empty-KnownDLL configuration.",
+            "         * The worker-local facade never creates or mutates host state. */",
+            "        WowKey = NULL;"
+          ]
+        }
+      ]
+    },
+    {
+      "line": 605,
+      "arms": [
+        {
+          "directive": "ifdef",
+          "expression": "DEBUG",
+          "body": [
+            "#line 590",
+            "#error DIVERGENCE MVDM-HOST-DIV-595: DEBUG initialization profile is not selected"
+          ]
+        },
+        {
+          "directive": "else",
+          "expression": "",
+          "body": [
+            "#line 619",
+            "    {"
+          ]
+        }
+      ]
+    },
+    {
+      "line": 1575,
+      "arms": [
+        {
+          "directive": "if",
+          "expression": "defined(CPU_40_STYLE)",
+          "body": [
+            "    UNREFERENCED_PARAMETER(pFrame);",
+            "    return mvdm_softpc_fast_bop_dispatch_offset();"
+          ]
+        },
+        {
+          "directive": "elif",
+          "expression": "FASTBOPPING",
+          "body": [
+            "#line 1871",
+            "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+          ]
+        },
+        {
+          "directive": "else",
+          "expression": "",
+          "body": [
+            "#line 1873",
+            "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+          ]
+        }
+      ]
+    },
+    {
+      "line": 1596,
+      "arms": [
+        {
+          "directive": "if",
+          "expression": "defined(CPU_40_STYLE)",
+          "body": [
+            "    UNREFERENCED_PARAMETER(pFrame);",
+            "    return mvdm_softpc_fast_bop_callback_offset();"
+          ]
+        },
+        {
+          "directive": "elif",
+          "expression": "FASTBOPPING",
+          "body": [
+            "#line 1880",
+            "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+          ]
+        },
+        {
+          "directive": "else",
+          "expression": "",
+          "body": [
+            "#line 1882",
+            "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+          ]
+        }
+      ]
+    },
+    {
+      "line": 1642,
+      "arms": [
+        {
+          "directive": "if",
+          "expression": "defined(CPU_40_STYLE)",
+          "body": [
+            "    /* Original PMODE32 KRNL386 asks for this table before taking its",
+            "     * WOW-specific selector publication path.  Return the same table shape,",
+            "     * but in worker guest memory rather than leaking a host array address. */",
+            "    return mvdm_softpc_wow_page_domain_flat_address_array(FlatAddress);"
+          ]
+        },
+        {
+          "directive": "elif",
+          "expression": "FASTBOPPING",
+          "body": [
+            "#line 1911",
+            "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+          ]
+        },
+        {
+          "directive": "else",
+          "expression": "",
+          "body": [
+            "#line 1913",
+            "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+          ]
+        }
+      ]
+    }
+  ]
+}

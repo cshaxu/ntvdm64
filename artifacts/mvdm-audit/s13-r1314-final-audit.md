@@ -527,3 +527,5 @@ The [r1396 local-group review](s13-r1396-local-groups-review.json) checks three 
 The [r1397 local-group review](s13-r1397-local-groups-review.json) checks two host CPU and EMS files and records direct diffs and local-group bodies against existing registrations. Counts: 181 identical / 813 differing files reviewed / 1,056 total; 62 differing files pending. Evidence is source-derived and historical.
 
 The [r1398 local-group review](s13-r1398-local-groups-review.json) checks x87 layout and host interrupt-hook conditional structures and retains full local-group bodies. Counts: 181 identical / 815 differing files reviewed / 1,056 total; 60 differing files pending. CPU40 protected-monitor behavior remains partial under DIV-473; this condition audit is not functional certification.
+
+The [r1399 WOW32 review](s13-r1399-wow32-review.json) checks original condition trees, selected matching-source positions and five registered local groups. Counts: 181 identical / 816 differing files reviewed / 1,056 total; 59 differing files pending. This is not fast-BOP or callback functional certification.
