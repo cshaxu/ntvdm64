@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntrtl.h",
+  "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+  "current_sha256": "17b73ddd07b0131fcedb491f22c0d2a8985c0002c85df241a322da0fadde5981",
+  "review": "Reconciled all 33 original conditional groups by original physical anchors and parent/arm identities; all are present, with three additional project subset selectors. Restored 22 original root frames around omitted RTL declarations while retaining selected C/C++ declaration wrappers and adopted local selectors. Rejected DBG, MIPS/Alpha, C++ GUID-alignment and old-compiler bodies where the specific supported profiles exclude them; both branches remain possible for architecture-, Unicode-, or SDK-dependent selectors. All seven emitted excluded arms contain only #error with original diagnostic mapping. Corrected RtlConvertLongToLuid original branch and body anchors from 132 to 4938/4940.",
+  "limitations": "Selected empty frames represent the existing omitted declarations, not restored NT4 functionality. Real x86/x64 builds, profile guard checks and image comparison pending."
+}

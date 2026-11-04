@@ -11309,15 +11309,15 @@
     {
       "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
       "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntexapi.h",
-      "current_sha256": "082316384723f6cfce62a5b5370e6cc0812badb71f11a005e03bdd39e3dbac33",
+      "current_sha256": "fb680e3b681ffb64a594ef794a0301a3e5d842a765594a381b5a914cd633c178",
       "original_sha256": "d4bddfbf3eadd81cbf913a60108f1c7cb3362c6c51b042701bba43da6bb8e52a",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "deferred-depth1-contexts-unverified",
-      "evidence": "s13-r972-ntexapi-context-review.json"
+      "status": "completed-structural-review",
+      "evidence": "s13-r1261-ntexapi-review.json"
     },
     {
       "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
@@ -11359,18 +11359,18 @@
     {
       "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
       "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntregapi.h",
-      "current_sha256": "58440554432e525dcab5fd7faf9b805ad2dcafe8bae30a6a582eb699b85900a6",
+      "current_sha256": "d25bb8f24789c19a6d4499fc0f7c84d3adac70413ef9ca8ed47ee92da215250f",
       "original_sha256": "0fb164317335d8b48c51122182922259c902c7f60afb28111bafa9fb75735a6a",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "deferred-depth1-contexts-unverified",
-      "evidence": "s13-r975-ntregapi-context-review.json"
+      "status": "completed-structural-review",
+      "evidence": "s13-r1260-ntregapi-review.json"
     },
     {
       "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
       "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntrtl.h",
-      "current_sha256": "78472a40ae390301e30df4ad7f3cff032aa3d7b83bc8425c256f244be8d08418",
+      "current_sha256": "17b73ddd07b0131fcedb491f22c0d2a8985c0002c85df241a322da0fadde5981",
       "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\frontend\\build.ninja:deps",
@@ -11384,8 +11384,8 @@
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "deferred-depth1-contexts-unverified",
-      "evidence": "s13-r978-ntrtl-context-review.json"
+      "status": "completed-structural-review",
+      "evidence": "s13-r1265-ntrtl-review.json"
     },
     {
       "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
@@ -11885,14 +11885,14 @@
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
       "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\usercli.h",
-      "current_sha256": "771fc0fbcce586991c814a40450ce15931ebc13c1d83ee3695b1b4117f9c738f",
+      "current_sha256": "ca1d6db964ed3ab92b0c92845072126c821f5a95fd9cee24264289307adf6cd1",
       "original_sha256": "11edc7c5b3f32ce40114bd0c4026e43381f2b131f036506376e23c8eb1db5bba",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "deferred-depth1-original-alignment",
-      "evidence": "s13-r1003-usercli-structure-review.json"
+      "status": "completed-structural-review-projection",
+      "evidence": "s13-r1267-usercli-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
@@ -11921,13 +11921,13 @@
     {
       "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
       "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
-      "current_sha256": "7a6c475465b988d8b0b48528994a01701014af7dd61a466e4fe228b356bdc10e",
+      "current_sha256": "af265fc49e2fe5d9663560ef8a53a7474f18f0dac150bf6a4ee1b6141527e3cd",
       "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "deferred-depth1-original-alignment",
-      "evidence": "s13-r1009-ntcftxt-structure-review.json"
+      "status": "completed-structural-review",
+      "evidence": "s13-r1264-ntcftxt-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
@@ -11944,7 +11944,7 @@
     {
       "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
       "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\user.h",
-      "current_sha256": "8a9864877903a69d7bf8a40a8b788b37bf54c83a117acb0e79fb85ed8bdf061b",
+      "current_sha256": "50a5a5b647f6fc7c56371bfee5b7248327a7ecbf753a921c68ec32b3ffcf553f",
       "original_sha256": "adcf0ac89c4779d9b7908610976f4a47d2385403edc37496c8ab004b016cf6c1",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
@@ -11952,8 +11952,8 @@
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "deferred-depth1-original-alignment",
-      "evidence": "s13-r1013-user-structure-review.json"
+      "status": "completed-structural-review-projection",
+      "evidence": "s13-r1268-user-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
@@ -12054,8 +12054,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "deferred-depth1-contexts-unverified",
-      "evidence": "s13-r1027-kntstubs-context-review.json"
+      "status": "completed-structural-review",
+      "evidence": "s13-r1263-ntstubs-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
@@ -12115,13 +12115,13 @@
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
       "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\userk.h",
-      "current_sha256": "46b8db6ffd263fe6d0260b6dc73a2a3d2919f4908c733388cc90bcc757052b19",
+      "current_sha256": "cd42111cedcc41c994c465fa4abfc9f2c7d83a283464dd98a561787e9353d0a1",
       "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "deferred-depth1-contexts-unverified",
-      "evidence": "s13-r1034-userk-context-review.json"
+      "status": "completed-structural-review",
+      "evidence": "s13-r1266-userk-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",

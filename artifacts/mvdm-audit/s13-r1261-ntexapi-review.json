@@ -1,0 +1,36 @@
+{
+  "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntexapi.h",
+  "original_sha256": "d4bddfbf3eadd81cbf913a60108f1c7cb3362c6c51b042701bba43da6bb8e52a",
+  "current_sha256": "fb680e3b681ffb64a594ef794a0301a3e5d842a765594a381b5a914cd633c178",
+  "original_condition_groups": [
+    23,
+    26,
+    30,
+    1063,
+    1409,
+    1411,
+    1415,
+    1419,
+    1423,
+    1439,
+    1459,
+    1467,
+    1480,
+    1573,
+    1602,
+    1842
+  ],
+  "review": "Original condition frames restored around the NtQueryPerformanceCounter/NtGetTickCount subset; original tick declaration is retained in the USER_SHARED_DATA else. Actual nt_eoi and wkman source-context preprocessor probes observed USER_SHARED_DATA undefined, DEVL false, _MAC and REMOTE_BOOT undefined. An instrumented earlier-header-path probe across all six worker dependency entries reported actual inclusion only for nt_eoi; direct source search finds wkman as the other consumer. All observed build trees for this header use x86 compiler targets, including worker-reference-x86. Private NT executive and KUSER_SHARED_DATA declarations remain absent. Original outer include-guard diagnostic anchor was also restored.",
+  "limitations": "Preprocessing observations cover actual current build inputs; future include contexts are not inferred. Build, negative guards and image comparison pending.",
+  "probe_log_sha256": {
+    "build\\t473-s13\\r1261-nt-eoi-probe.log": "3848766327e1c2e1337a448e6bf0dec6325273ff64b13e1d1d47c5dc7c24dde1",
+    "build\\t473-s13\\r1261-wkman-probe.log": "e934e11d2f8f4b769531801a42ca616a0652983fc98ea4e6b76f6b7017917634",
+    "build\\t473-s13\\r1261-context\\0.log": "e7c6def580e439ac4d42f841d19983beb32a8c4e609bf4c02b421120ba50efaa",
+    "build\\t473-s13\\r1261-context\\1.log": "bf1b3455f45a3b98955dde42f5896e4503acbea26a8d4d610af1b0d0e7a61831",
+    "build\\t473-s13\\r1261-context\\2.log": "f8aff673e1f9e4f860d0d3a67360b5fdbc5ba6951c9702dba35da980cf7d96a8",
+    "build\\t473-s13\\r1261-context\\3.log": "ca974ca10fc4a90b94ff5b9d3d95d877d72926acbc94717f8ce680c4d040d581",
+    "build\\t473-s13\\r1261-context\\4.log": "92382a4a6722f2d69d73f5d0bdce29d9611aa9ef4ee5fa72c97af3d7ceea089a",
+    "build\\t473-s13\\r1261-context\\5.log": "d5cad279e9f296ebef087941fd130afaed9a7197cc44628cf5e9231db38c2a08"
+  }
+}

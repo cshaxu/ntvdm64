@@ -2436,3 +2436,20 @@ three sources after recursive condition-tree comparison. Evidence:
 OPENNT-HOST-243: in public/sdk/inc/ntpsapi.h restore original condition frames around the existing NtAlertThread-only subset. Unsupported IA64 and DBG original bodies reject; retained CLIENT_ID64 and architecture frames contain no unimported NT4 private declarations. Evidence: artifacts/mvdm-audit/s13-r1258-ntpsapi-review.json.
 
 OPENNT-HOST-244: restore original condition frames in windows/core/ntuser/rtl/userrtl.h while retaining the existing same-address REBASE subset. Unimported USER declarations remain absent; unsupported DBG and FE_SB bodies and the original literal-disabled rebase branch reject. Evidence: artifacts/mvdm-audit/s13-r1259-userrtl-review.json.
+
+OPENNT-HOST-245: restore the original ntregapi.h compiler and C++ condition frames around the retained registry query subset. MSVC keeps its original pragma; unsupported C++ original wrappers reject. Evidence: artifacts/mvdm-audit/s13-r1260-ntregapi-review.json.
+
+
+OPENNT-HOST-246: restore original ntexapi.h condition frames around the existing executive API subset. Unsupported NT4 shared-data, remote-boot, DEVL, Mac, 64-bit shared-data and C++ bodies reject; missing declarations remain absent. Evidence: artifacts/mvdm-audit/s13-r1261-ntexapi-review.json.
+
+OPENNT-HOST-247: correct selected userk.h pseudo-event and WOW critical-section diagnostic anchors to the original physical source lines; structural review remains open. Evidence: artifacts/mvdm-audit/s13-r1262-userk-anchor.json.
+
+OPENNT-HOST-248: restore original condition frames and diagnostic anchors in the ANSI class-client ntcftxt.h subset; original functions outside the adopted subset remain absent. Evidence: artifacts/mvdm-audit/s13-r1264-ntcftxt-review.json.
+
+OPENNT-HOST-249: restore original RTL condition frames and the original LUID inline line anchors around the existing shared RTL subset; omitted declarations remain absent. Evidence: artifacts/mvdm-audit/s13-r1265-ntrtl-review.json.
+
+OPENNT-HOST-250: reconcile userk.h original condition frames and unify the original MSDWP guard while retaining project flags-only inclusion and pseudo-event visibility. Evidence: artifacts/mvdm-audit/s13-r1266-userk-review.json.
+
+OPENNT-HOST-251: reconcile USER client condition frames around the selected declaration cohorts. The original whole-file _USERCLI_ guard cannot be reinstated unchanged because it suppresses the second required inclusion; cohort projection is retained and tested. Evidence: artifacts/mvdm-audit/s13-r1267-usercli-review.json.
+
+OPENNT-HOST-252: reconcile USER shared-header condition frames around existing cohorts; retain cohort guards instead of the original whole-file _USER_ guard, which would suppress required later inclusions. Evidence: artifacts/mvdm-audit/s13-r1268-user-review.json.

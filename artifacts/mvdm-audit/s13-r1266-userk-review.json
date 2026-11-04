@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\userk.h",
+  "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+  "current_sha256": "cd42111cedcc41c994c465fa4abfc9f2c7d83a283464dd98a561787e9353d0a1",
+  "review": "Reconciled all 45 original conditional groups by original physical anchor and arm signature; 44 match parent identity exactly. Original MSDWP group 3935 remains beneath the existing project WOW_USER_OBJECT_FLAGS_ONLY projection for legitimate multi-cohort inclusion; this is the single parent projection. Two previously separate local MSDWP guards for EnterWowCritSect and ExitWowCritSect were merged into the original 3935 group. Pseudo-event definitions were moved ahead of it so they remain visible independent of MSDWP. The 37 newly rejected arms contain only #error with original diagnostic lines. Original pseudo-event and selected WOW routine line anchors were corrected; unsupported omitted code was not restored.",
+  "limitations": "Selected bodies outside the adopted USER kernel subset remain absent; real x86/x64 build, multi-cohort tests and binary comparison pending."
+}

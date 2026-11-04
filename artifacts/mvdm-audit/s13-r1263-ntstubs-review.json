@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+  "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+  "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+  "review": "Compared all original groups by original physical #line anchor, directive and full parent/arm signature rather than source order: 73 original and 73 current groups, none missing, none extra, none with selector, arm, or parent mismatch. The cropped subset groups independent omitted bodies by family. 73 excluded arms contain only #error (ignoring #line), all map to original branch diagnostic line; 55 selected arms are empty because their original bodies were outside the selected subset; two selected arms retain definitions. Existing selected NtUserSetWindowFNID remains unchanged.",
+  "limits": "This is a structural comparison and selected subset audit, not proof of the semantics of functions omitted from this file. Existing supported build and r1259 Full remain the runtime evidence."
+}

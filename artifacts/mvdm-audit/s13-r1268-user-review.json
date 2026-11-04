@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\user.h",
+  "original_sha256": "adcf0ac89c4779d9b7908610976f4a47d2385403edc37496c8ab004b016cf6c1",
+  "current_sha256": "50a5a5b647f6fc7c56371bfee5b7248327a7ecbf753a921c68ec32b3ffcf553f",
+  "review": "Matched all 32 original inner selector groups by original physical anchor and arm signatures. Restored 24 frames around omitted USER declarations and corrected original anchors for selected object and menu structures. Original UTCHAR and CHARSTOBYTES conditions were separated to their original groups (43 and 116) without changing either selected definition. The original whole-file _USER_ guard at line 15 remains replaced by existing cohort selectors: multi-cohort test demonstrates the original single guard would suppress selected declarations on later inclusion. Original branches are projected around existing cohorts rather than misrepresented as a functional whole-file guard. Empty selected frames do not import omitted original USER APIs.",
+  "limitations": "Full original parent relation differs because the established multi-cohort compatibility design is retained. Real x86/x64 builds, guard and multi-cohort tests and image comparison pending."
+}

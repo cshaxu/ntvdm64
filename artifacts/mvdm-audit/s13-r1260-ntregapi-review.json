@@ -1,0 +1,14 @@
+{
+  "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntregapi.h",
+  "original_sha256": "0fb164317335d8b48c51122182922259c902c7f60afb28111bafa9fb75735a6a",
+  "current_sha256": "d25bb8f24789c19a6d4499fc0f7c84d3adac70413ef9ca8ed47ee92da215250f",
+  "original_condition_groups": [
+    22,
+    25,
+    29,
+    520
+  ],
+  "review": "Restored compiler and C++ original condition frames around the existing registry query ABI subset. MSVC selects original pragma once; both unsupported C++ wrapper bodies reject and retain original diagnostic line numbers. Included by WOW x86 C source through wow_task_profile_bindings.h; no guest source was modified. Original outer include-guard diagnostic anchor was also restored.",
+  "limitations": "Build, guard test and resulting product image comparison pending. The retained subset does not import the omitted registry services."
+}

@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\usercli.h",
+  "original_sha256": "11edc7c5b3f32ce40114bd0c4026e43381f2b131f036506376e23c8eb1db5bba",
+  "current_sha256": "ca1d6db964ed3ab92b0c92845072126c821f5a95fd9cee24264289307adf6cd1",
+  "review": "Matched all 22 original inner selectors by original physical anchors and arm signatures, restoring 14 frames for omitted declarations. Original USEREXTS guards at 186 and 346 now enclose the corresponding existing validation macros and TL definition. Original whole-file _USERCLI_ guard at 15 is deliberately not installed: the existing two-cohort inclusion test proves that it suppresses the state-bearing second include. Independent original frames are projected alongside existing cohort selectors rather than falsely wrapping actual code in a nonfunctional placeholder. The five original post-guard branches remain in their existing locations. Unsupported feature-only bodies reject; unknown or potentially selected branch bodies are left empty because those original declarations are outside the accepted subset.",
+  "limits": "Whole-file parent projection is a registered deviation, not byte-exact original structure. Build, original USEREXTS controls, multi-cohort test and image comparison pending."
+}

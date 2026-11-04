@@ -17,7 +17,7 @@
 #define IS_ANSI TRUE
 #undef _UNICODE
 #endif
-#line 14
+#line 23
 /* DIVERGENCE(OPENNT-HOST-036): retain the complete ANSI class client
  * closure: duplication, menu capture, registration and unregistration.
  * Other text APIs and the private USER precompiled environment are cropped.
@@ -103,7 +103,9 @@ BOOL InitClsMenuName (PCLSMENUNAME pcmn, LPCTSTR lpszMenuName, PIN_STRING pstrMe
      * We check the high-word because this may be a resource-ID.
      */
     if (HIWORD(lpszMenuName) != 0) {
+#line 601
 #ifdef UNICODE
+#line 602
 #error Excluded unsupported Unicode class-client menu-name profile
 #else
 #line 610
@@ -115,6 +117,7 @@ BOOL InitClsMenuName (PCLSMENUNAME pcmn, LPCTSTR lpszMenuName, PIN_STRING pstrMe
             pcmn->pwszClientUnicodeMenuName = NULL;
         }
 #endif // UNICODE
+#line 618
     } else {
         /* Copy the ID */
         pcmn->pszClientAnsiMenuName = (LPSTR)lpszMenuName;
@@ -242,12 +245,15 @@ ATOM TEXT_FN(RegisterClassExWOW)(
 
         WndClass = *lpWndClass;
 
+#line 802
 #ifdef UNICODE
+#line 803
 #error Excluded unsupported Unicode class-client registration profile
 #else
 #line 805
         dwFlags = CSF_ANSIPROC;
 #endif // UNICODE
+#line 807
 
         COPYLPTSTRID(&strClassName, (LPTSTR)lpWndClass->lpszClassName);
 
@@ -422,6 +428,14 @@ BOOL UnregisterClass(
 #line 310
 #ifndef UNICODE
 #line 311
+#line 315
+#ifdef FE_SB // GetMessage()
+#line 316
+#error Excluded unsupported original text-client condition
+#else
+#line 326
+#endif
+#line 330
 #else
 #line 331
 #error Unsupported UNICODE original branch
@@ -445,3 +459,117 @@ BOOL UnregisterClass(
 #error Unsupported UNICODE original branch
 #endif
 #line 1355
+
+#line 38
+#ifndef UNICODE
+#line 39
+#endif
+#line 65
+#line 217
+#ifndef UNICODE
+#line 218
+#endif
+#line 229
+#line 254
+#ifndef UNICODE
+#line 255
+#endif
+#line 266
+#line 271
+#ifndef UNICODE
+#line 272
+#endif
+#line 275
+#line 369
+#ifndef UNICODE
+#line 370
+#endif
+#line 378
+#line 395
+#ifndef UNICODE
+#line 396
+#endif
+#line 403
+#line 414
+#ifndef UNICODE
+#line 415
+#endif
+#line 418
+#line 431
+#ifndef UNICODE
+#line 432
+#endif
+#line 466
+#line 514
+#ifndef UNICODE
+#line 515
+#line 515
+#ifdef FE_SB // PostMessage()
+#line 516
+#error Excluded unsupported original text-client condition
+#endif
+#line 521
+#endif
+#line 524
+#line 549
+#ifndef UNICODE
+#line 550
+#line 550
+#ifdef FE_SB // PostThreadMessage()
+#line 551
+#error Excluded unsupported original text-client condition
+#endif
+#line 557
+#endif
+#line 560
+#line 934
+#ifndef UNICODE
+#line 935
+#line 935
+#ifdef FE_SB // SendMessageCallBack()
+#line 936
+#error Excluded unsupported original text-client condition
+#endif
+#line 941
+#endif
+#line 944
+#line 976
+#ifndef UNICODE
+#line 977
+#line 977
+#ifdef FE_SB // SendNotifyMessage()
+#line 978
+#error Excluded unsupported original text-client condition
+#endif
+#line 983
+#endif
+#line 986
+#line 1111
+#ifndef UNICODE
+#line 1112
+#endif
+#line 1115
+#line 1295
+#ifndef UNICODE
+#line 1296
+#endif
+#line 1298
+#line 1505
+#ifndef UNICODE
+#line 1506
+#line 1507
+#ifdef FE_SB // CallMsgFilter()
+#line 1508
+#error Excluded unsupported original text-client condition
+#else
+#line 1518
+#endif
+#line 1521
+#line 1526
+#ifdef FE_IME // CallMsgFilter()
+#line 1527
+#error Excluded unsupported original text-client condition
+#endif
+#line 1530
+#endif
+#line 1535

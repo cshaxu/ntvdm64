@@ -485,14 +485,17 @@ print('PASS USER client two-cohort inclusion and single-guard negative control')
 
 # The selected NT declaration subset now keeps its original include guard.
 ntexapi = (repo / 'src/non-mvdm/public/sdk/inc/ntexapi.h').read_text(encoding='latin1')
-if not ntexapi.startswith('#ifndef _NTEXAPI_\n#define _NTEXAPI_\n'):
+if not ntexapi.startswith('#line 23\n#ifndef _NTEXAPI_\n#define _NTEXAPI_\n'):
     raise SystemExit('original NTEXAPI include guard missing')
 (scratch / 'ntexapi-guard.h').write_text(ntexapi, encoding='latin1')
 for predefine in (False, True):
     probe.write_text(('#define _NTEXAPI_\n' if predefine else '') +
                      '#include "ntexapi-guard.h"\n#include "ntexapi-guard.h"\n',
                      encoding='ascii')
-    result = subprocess.run(base, capture_output=True, text=True, errors='replace')
+    # This header belongs to the x86 worker/WOW targets, including the x86
+    # reference worker in the x64 tree. Test that actual inclusion profile
+    # even when this guard suite itself runs under an x64 MSVC environment.
+    result = subprocess.run(base[:-1] + ['/U_WIN64'] + base[-1:], capture_output=True, text=True, errors='replace')
     count = result.stdout.count('NtQueryPerformanceCounter')
     if result.returncode or count != (0 if predefine else 1):
         raise SystemExit('NTEXAPI original guard control failed: ' + result.stderr)

@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+  "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+  "current_sha256": "af265fc49e2fe5d9663560ef8a53a7474f18f0dac150bf6a4ee1b6141527e3cd",
+  "review": "Reconciled all 42 original condition groups by original physical anchors and full parent/arm identity. Four nested groups lie under excluded ancestor arms and are intentionally absent; 38 reachable structural groups match with none missing. Restored 15 previously absent outer groups for omitted text APIs, and original nested FE_SB group at line 315 within selected ANSI arm; unsupported bodies are #error. Corrected original continuation/diagnostic lines for selected class-client guards at lines 601 and 802 and the original top guard. All 23 current excluded arms contain only #error and map to the original branch line. Actual retained ANSI class client statements are unchanged. Empty selected frames represent omitted APIs, not implemented functions. Existing mixed line endings were preserved after review.",
+  "limitations": "Cached builds, guard checks and product-image comparison pending; no claim that omitted original API functions were restored."
+}

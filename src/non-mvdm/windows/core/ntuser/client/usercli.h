@@ -38,11 +38,13 @@
 #define Lock(ppobj, pobj) (*ppobj = pobj)
 #define Unlock(ppobj) (*ppobj = NULL)
 
+#line 346
 #ifndef USEREXTS
 typedef struct _TL {
     int iBogus;
 } TL;
 #endif
+#line 351
 #endif
 
 /* DIVERGENCE(OPENNT-HOST-075): original native heap and retail global
@@ -101,6 +103,9 @@ void FreeLookasideEntry(PLOOKASIDE pla, PVOID pEntry);
  * Checking the BUTTON is for Mavis Beacon.
  */
 
+#line 186
+#ifndef USEREXTS
+#line 196
 #define VALIDATECLASSANDSIZE(pwnd, inFNID)                                      \
     switch ((pwnd)->fnid) {                                                     \
     case inFNID:                                                                \
@@ -164,6 +169,9 @@ void FreeLookasideEntry(PLOOKASIDE pla, PVOID pEntry);
             return FALSE;                                                   \
         }                                                                   \
     }
+
+#endif
+#line 261
 
 typedef LRESULT (cdecl *EDITCHARSETPROC)(struct tagED *, UINT, ...);
 
@@ -1124,3 +1132,86 @@ typedef struct tagMDIWND {
 #ifdef FE_SB // DBCS Messaging macros for client side.
 #error Excluded unsupported FE_SB client messaging macros
 #endif // FE_SB
+
+#line 22
+#if DBG
+#line 23
+#error Excluded unsupported original USER client condition
+#endif
+#line 25
+#line 26
+#ifdef RIP_COMPONENT
+#line 27
+#endif
+#line 29
+#line 44
+#ifndef WOW
+#line 45
+#endif
+#line 47
+#line 47
+#ifdef FE_IME
+#line 48
+#error Excluded unsupported original USER client condition
+#endif
+#line 51
+#line 70
+#ifdef DEBUG
+#line 71
+#error Excluded unsupported original USER client condition
+#else
+#line 104
+#endif
+#line 109
+#line 563
+#ifdef WINDOWS_PE
+#line 564
+#error Excluded unsupported original USER client condition
+#endif
+#line 569
+#line 1164
+#ifndef _USERK_
+#line 1165
+#endif
+#line 1171
+#line 1296
+#ifndef _USERK_
+#line 1297
+#endif
+#line 1304
+#line 1339
+#ifdef FE_SB // fnGETTEXTLENGTHS()
+#line 1340
+#error Excluded unsupported original USER client condition
+#endif
+#line 1342
+#line 1390
+#ifdef FE_SB // fnINWPARAMDBCSCHAR()
+#line 1391
+#error Excluded unsupported original USER client condition
+#endif
+#line 1393
+#line 1453
+#ifdef FE_IME
+#line 1454
+#error Excluded unsupported original USER client condition
+#endif
+#line 1457
+#line 1492
+#ifdef FE_IME
+#line 1493
+#error Excluded unsupported original USER client condition
+#endif
+#line 1496
+#line 2179
+#ifdef MEMPHIS_MENUS
+#line 2180
+#error Excluded unsupported original USER client condition
+#endif
+#line 2205
+#line 2205
+#ifdef MEMPHIS_MENU_WATERMARKS
+#line 2206
+#error Excluded unsupported original USER client condition
+#endif
+#line 2211

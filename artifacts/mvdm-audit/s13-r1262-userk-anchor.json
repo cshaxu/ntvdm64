@@ -1,0 +1,9 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\userk.h",
+  "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+  "current_sha256": "bfb22715b05756e6ad83a4ce4e5799d9056ab740eb32db6e33e16a1f813e8ebf",
+  "review": "Corrected selected code line anchors by original physical source: EnterWowCritSect 3989, pseudo event off 2119, CLOSE_PSEUDO_EVENT 2138 and ExitWowCritSect 4010. The conditional-tree comparison remains pending; no claim of complete file review.",
+  "limitations": "Full original condition group mapping, guard verification, builds and product image comparison pending.",
+  "superseded_by": "s13-r1266-userk-review.json"
+}

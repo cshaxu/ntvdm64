@@ -5,14 +5,17 @@
  * file preserves only declarations reached by imported MVDM/OpenNT sources;
  * adapter-mvdm-host-out owns any modern implementation binding.
  */
+#line 31
 #ifndef _NTRTL_
 #define _NTRTL_
 
 #include <nt.h>
 
+#line 56
 #ifdef __cplusplus
 extern "C" {
 #endif
+#line 59
 
 PVOID NTAPI RtlProcessHeap(VOID);
 PVOID NTAPI RtlAllocateHeap(PVOID HeapHandle, ULONG Flags, SIZE_T Size);
@@ -129,8 +132,9 @@ NTSTATUS NTAPI NtTerminateProcess(HANDLE ProcessHandle, NTSTATUS ExitStatus);
 
 /* DIVERGENCE(OPENNT-HOST-029): original header inline required by BaseSrv's
  * IsClientSystem; retain its body rather than generating a test-only copy. */
+#line 4938
 #if !defined(MIDL_PASS)
-#line 132
+#line 4940
 __inline LUID
 NTAPI
 RtlConvertLongToLuid(
@@ -147,10 +151,195 @@ RtlConvertLongToLuid(
     return TempLuid;
 }
 #endif
-#line 147
+#line 4970
 
+#line 34
+#if defined (_MSC_VER)
+#line 35
+#line 35
+#if ( _MSC_VER >= 800 )
+#line 36
+#line 37
+#if _MSC_VER >= 1200
+#line 38
+#endif
+#line 40
+#endif
+#line 44
+#line 44
+#if (_MSC_VER > 1020)
+#line 45
+#endif
+#line 47
+#endif
+#line 48
+#line 67
+#if DBG
+#line 68
+#error Excluded unsupported original NT RTL configuration
+#else
+#line 87
+#endif
+#line 90
+#line 1032
+#if defined(_M_MRX000) || defined(_M_ALPHA)
+#line 1033
+#error Excluded unsupported original NT RTL configuration
+#else
+#line 1046
+#endif
+#line 1056
+#line 1575
+#ifdef _WIN64
+#line 1576
+#else
+#line 1578
+#endif
+#line 1580
+#line 1594
+#ifdef _NTSYSTEM_
+#line 1595
+#else
+#line 1600
+#endif
+#line 1605
+#line 2234
+#ifndef DEFINE_GUIDEX
+#line 2235
+#endif
+#line 2237
+#line 2238
+#ifndef STATICGUIDOF
+#line 2239
+#endif
+#line 2241
+#line 2242
+#ifndef __IID_ALIGNED__
+#line 2243
+#line 2244
+#ifdef __cplusplus
+#line 2245
+#error Excluded unsupported original NT RTL configuration
+#else // !__cplusplus
+#line 2250
+#endif
+#line 2253
+#endif
+#line 2254
+#line 2814
+#if defined(_WIN64)
+#line 2815
+#endif
+#line 2863
+#line 2864
+#if defined(_X86_)
+#line 2865
+#endif
+#line 2913
+#line 3052
+#if !defined(MIDL_PASS)
+#line 3053
+#line 3078
+#ifndef _MAC
+#line 3079
+#endif
+#line 3094
+#endif
+#line 3097
+#line 3126
+#if defined(_WIN64)
+#line 3127
+#else
+#line 3136
+#endif
+#line 3138
+#line 3164
+#if defined(_M_IX86) || defined(_M_MRX000) || defined(_M_ALPHA)
+#line 3165
+#line 3166
+#if defined(_M_MRX000)
+#line 3167
+#error Excluded unsupported original NT RTL configuration
+#else
+#line 3177
+#endif
+#line 3179
+#else // _M_PPC
+#line 3186
+#endif
+#line 3240
+#line 3251
+#if defined(_M_ALPHA)
+#line 3252
+#error Excluded unsupported original NT RTL configuration
+#else
+#line 3292
+#endif
+#line 3298
+#line 3422
+#if DBG
+#line 3423
+#error Excluded unsupported original NT RTL configuration
+#else
+#line 3429
+#endif
+#line 3435
+#line 3436
+#ifndef _DBGNT_
+#line 3437
+#endif
+#line 3452
+#line 3486
+#if defined(MIDL_PASS) || defined(__cplusplus) || !defined(_M_IX86)
+#line 3487
+#else
+#line 3562
+#endif
+#line 3684
+#line 3751
+#if defined(MIDL_PASS) || defined(__cplusplus) || !defined(_M_IX86)
+#line 3752
+#else
+#line 3805
+#endif
+#line 3933
+#line 5691
+#if defined(_WIN64)
+#line 5692
+#endif
+#line 5694
+#line 6166
+#ifdef UNICODE
+#line 6167
+#else
+#line 6171
+#endif
+#line 6175
+#line 6203
+#ifdef UNICODE
+#line 6204
+#else
+#line 6208
+#endif
+#line 6212
+#line 6337
+#if defined (_MSC_VER) && ( _MSC_VER >= 800 )
+#line 6338
+#line 6338
+#if _MSC_VER >= 1200
+#line 6339
+#else
+#line 6341
+#error Excluded unsupported original NT RTL configuration
+#endif
+#line 6345
+#endif
+#line 6346
+#line 6333
 #ifdef __cplusplus
 }
 #endif
+#line 6336
 
+#line 6347
 #endif

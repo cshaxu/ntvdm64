@@ -25,13 +25,24 @@
 #define YPixFromYDU(y, cyChar)       MultDiv(y, cyChar, 8)
 #define MaskWF(flag)         ((WORD)( (HIBYTE(flag) & 1) ? LOBYTE(flag) << 8 : LOBYTE(flag)))
 /* OPENNT-HOST-105: original template-character selection. */
+#line 43
 #ifdef UNICODE
+#line 44
 #define UTCHAR WCHAR
+#else
+#line 46
+#define UTCHAR UCHAR
+#endif
+#line 48
+#line 116
+#ifdef UNICODE
+#line 118
 #define CHARSTOBYTES(cch) ((cch) * sizeof(TCHAR))
 #else
-#define UTCHAR UCHAR
+#line 121
 #define CHARSTOBYTES(cch) (cch)
 #endif
+#line 123
 /* OPENNT-HOST-090: unchanged message bitmap descriptor. */
 typedef struct _WNDMSG {
     UINT maxMsgs;
@@ -83,11 +94,15 @@ typedef ICH *LPICH;
 #define TYPE_ZOMBIE         13
 #define TYPE_KBDLAYOUT      14          // Keyboard Layout handle (HKL) object.
 #define TYPE_KBDFILE        15          // Keyboard Layout file object.
+#line 793
 #ifdef FE_IME
+#line 794
 #error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
 #else
+#line 797
 #define TYPE_CTYPES         16          // Count of TYPEs; Must be LAST + 1
 #endif
+#line 799
 #define TYPE_GENERIC        255         // used for generic handle validation
 /* Original FNID subset for the admitted standard-class client view.
  * Declaration-only extension from this same original user.h owner. */
@@ -268,9 +283,12 @@ typedef struct tagITEM {
     struct tagMENU *spSubMenu;  /* Handle to a popup */
     HANDLE  hbmpChecked;    /* Bitmap for an on  check */
     HANDLE  hbmpUnchecked;   /* Bitmap for an off check */
+#line 1965
 #ifdef MEMPHIS_MENUS
+#line 1966
 #error DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register.
 #endif // MEMPHIS_MENUS
+#line 1968
     HANDLE  hTypeData;     // if ownerdraw, MAKELONG(width, height)
                             // if bitmap,    hBitmap
                             // if separator, 0L
@@ -285,9 +303,12 @@ typedef struct tagITEM {
     DWORD   dxTab;
     DWORD   ulX;                /* String: Underline start */
     DWORD   ulWidth;            /* String: underline width */
+#line 1982
 #ifdef MEMPHIS_MENUS
+#line 1983
 #error DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register.
 #endif // MEMPHIS_MENUS
+#line 1987
 } ITEM, *PITEM, *LPITEM;
 
 typedef struct tagMENU {
@@ -305,9 +326,12 @@ typedef struct tagMENU {
     struct tagWND *spwndNotify;     /* The owner hwnd of this menu */
     PITEM           rgItems;        /* The list of items in this menu */
     DWORD           dwContextHelpId;// Context help Id for the whole menu
+#line 2007
 #ifdef MEMPHIS_MENU_WATERMARKS
+#line 2008
 #error DIVERGENCE OPENNT-HOST-133: MEMPHIS_MENU_WATERMARKS branch is not selected; see mirror register.
 #endif // MEMPHIS_MENU_WATERMARKS
+#line 2010
 
 } MENU, *PMENU;
 
@@ -352,9 +376,12 @@ typedef struct tagWND {          // wnd
     HDC           hdcOwn;
     HRGN          hrgnClip;     // Clipping region for this window
     int           iHungRedraw;  // Index into hung redraw table
+#line 1429
 #ifdef FE_IME
+#line 1430
 #error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
 #endif
+#line 1432
 
     WW;         // WOW-USER common fields. Defined in wowuserp.h
                 //  The position of this structure is assumed by
@@ -553,3 +580,158 @@ typedef struct tagOEMBITMAPINFO
 #define HW(pwnd)    ((HWND)PtoH(pwnd))
 #define HWq(pwnd)   ((HWND)PtoHq(pwnd))
 #endif
+
+#line 30
+#ifndef RC_INVOKED       // RC can't handle #pragmas
+#line 31
+#endif
+#line 33
+#line 35
+#if !defined(FASTCALL)
+#line 36
+#line 36
+#if defined(_X86_)
+#line 37
+#else
+#line 39
+#endif
+#line 41
+#endif
+#line 42
+#line 110
+#ifdef UNICODE
+#line 111
+#else
+#line 113
+#endif
+#line 115
+#line 198
+#ifdef FE_IME
+#line 199
+#error Excluded unsupported original USER condition
+#else
+#line 202
+#endif
+#line 204
+#line 227
+#ifdef DBG
+#line 228
+#else
+#line 231
+#endif
+#line 233
+#line 309
+#ifdef _NTCSRMSG_
+#line 310
+#endif
+#line 329
+#line 395
+#ifdef FE_SB // _CLIENTINFO
+#line 396
+#error Excluded unsupported original USER condition
+#endif
+#line 403
+#line 412
+#ifndef _USERK_
+#line 413
+#endif
+#line 415
+#line 416
+#ifdef FE_SB // WMCR_IR_DBCSCHAR and DBCS Macros
+#line 417
+#error Excluded unsupported original USER condition
+#endif
+#line 441
+#line 483
+#ifdef MEMPHIS_MENUS
+#line 484
+#error Excluded unsupported original USER condition
+#endif
+#line 486
+#line 495
+#ifdef MEMPHIS_MENUS
+#line 496
+#error Excluded unsupported original USER condition
+#endif
+#line 506
+#line 663
+#ifdef FE_IME
+#line 664
+#error Excluded unsupported original USER condition
+#else
+#line 675
+#endif
+#line 686
+#line 705
+#if (FNID_END - FNID_START + 1) > FNID_ARRAY_SIZE
+#line 706
+#error Excluded unsupported original USER condition
+#endif
+#line 708
+#line 743
+#ifdef FE_IME
+#line 744
+#error Excluded unsupported original USER condition
+#endif
+#line 746
+#line 1171
+#ifdef DEBUG
+#line 1172
+#error Excluded unsupported original USER condition
+#endif
+#line 1174
+#line 1196
+#ifdef DEBUG
+#line 1197
+#error Excluded unsupported original USER condition
+#endif
+#line 1207
+#line 1217
+#ifdef DEBUG
+#line 1218
+#error Excluded unsupported original USER condition
+#else
+#line 1220
+#endif
+#line 1222
+#line 1270
+#ifdef FE_IME
+#line 1271
+#error Excluded unsupported original USER condition
+#endif
+#line 1273
+#line 1454
+#ifdef FE_IME
+#line 1455
+#error Excluded unsupported original USER condition
+#endif
+#line 1465
+#line 1479
+#ifdef HOOKBATCH
+#line 1480
+#error Excluded unsupported original USER condition
+#endif
+#line 1485
+#line 1916
+#ifdef LOBYTE
+#line 1917
+#endif
+#line 1919
+#line 2200
+#ifdef FE_IME
+#line 2201
+#error Excluded unsupported original USER condition
+#endif
+#line 2203
+#line 2203
+#ifdef FE_SB // TIF_INGETTEXTLENGTH
+#line 2204
+#error Excluded unsupported original USER condition
+#endif
+#line 2206
+#line 2408
+#ifdef FE_IME
+#line 2409
+#error Excluded unsupported original USER condition
+#endif
+#line 2433

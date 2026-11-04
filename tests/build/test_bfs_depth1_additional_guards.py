@@ -73,6 +73,15 @@ cases = [
     ('src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h', 362,
      '#ifdef UNICODE', 'Excluded unsupported original UNICODE branch',
      [([], False), (['UNICODE=1'], True)]),
+    ('src/non-mvdm/windows/core/ntuser/client/usercli.h', 47,
+     '#ifdef FE_IME', 'Excluded unsupported original USER client condition',
+     [([], False), (['FE_IME=1'], True)]),
+    ('src/non-mvdm/windows/core/ntuser/inc/user.h', 743,
+     '#ifdef FE_IME', 'Excluded unsupported original USER condition',
+     [([], False), (['FE_IME=1'], True)]),
+    ('src/non-mvdm/windows/core/ntuser/kernel/userk.h', 1875,
+     '#ifdef MEMPHIS_MENUS', 'Excluded unsupported original USER kernel condition',
+     [([], False), (['MEMPHIS_MENUS=1'], True)]),
 ]
 checked = 0
 for path, line, guard, error, controls in cases:
@@ -176,3 +185,38 @@ for filename, rejected_line, selected_line in (('wowfax.h', 93, 95), ('wowinfo.h
         if bool(result.returncode) != reject or (reject and f'({rejected_line})' not in result.stdout + result.stderr):
             raise SystemExit(f'{filename}: shared fallback profile failed for {defines}')
 print('PASS shared x86 UNALIGNED fallback and excluded MIPS/Alpha profiles')
+
+# ntregapi.h is shared with the C WOW registry binding.
+source = (repo / 'src/non-mvdm/public/sdk/inc/ntregapi.h').read_text(encoding='latin1').split('\n')
+for original, diagnostic in ((29, 30), (520, 521)):
+    start = source.index(f'#line {original}')
+    expected = [f'#line {original}', '#ifdef __cplusplus', f'#line {diagnostic}',
+                '#error Excluded unsupported C++ NT registry declaration context', '#endif']
+    if [line.strip() for line in source[start:start + len(expected)]] != expected:
+        raise SystemExit(f'ntregapi original C++ guard differs at {original}')
+    probe = scratch / 'ntregapi-cxx-guard.c'
+    probe.write_text('\n'.join(expected + ['int selected_c = 1;']) + '\n', encoding='ascii')
+    for defines, reject in (([], False), (['__cplusplus=1'], True)):
+        result = subprocess.run(['cl.exe', '/nologo', '/EP', '/TC'] + [f'/D{x}' for x in defines] + [str(probe)],
+                                capture_output=True, text=True, errors='replace')
+        if bool(result.returncode) != reject or (reject and f'({diagnostic})' not in result.stdout + result.stderr):
+            raise SystemExit(f'ntregapi original C++ guard failed at {original}')
+print('PASS ntregapi original C++ boundary and diagnostic lines')
+
+# The shared executive header is currently consumed by x86 C product targets.
+source = (repo / 'src/non-mvdm/public/sdk/inc/ntexapi.h').read_text(encoding='latin1').split('\n')
+for original, diagnostic, macro in ((30, 31, '__cplusplus'), (1063, 1064, 'DEVL'),
+                                    (1439, 1440, '_MAC'), (1459, 1460, '_WIN64'),
+                                    (1480, 1481, '_WIN64'), (1573, 1574, 'REMOTE_BOOT')):
+    start = source.index(f'#line {original}')
+    end = next(i for i in range(start + 1, len(source)) if source[i].strip().startswith('#endif'))
+    group = source[start:end + 1]
+    if f'#line {diagnostic}' not in group or not any(line.startswith('#error Excluded unsupported') for line in group):
+        raise SystemExit(f'ntexapi original rejected guard differs at {original}')
+    probe = scratch / 'ntexapi-guard.c'
+    probe.write_text('\n'.join(group + ['int selected_c = 1;']) + '\n', encoding='ascii')
+    for defines, reject in (([], False), ([macro + '=1'], True)):
+        result = subprocess.run(['cl.exe', '/nologo', '/EP', '/TC'] + [f'/D{x}' for x in defines] + [str(probe)], capture_output=True, text=True, errors='replace')
+        if bool(result.returncode) != reject or (reject and f'({diagnostic})' not in result.stdout + result.stderr):
+            raise SystemExit(f'ntexapi original rejected guard failed at {original}')
+print('PASS ntexapi original executive profile guards and diagnostic lines')
