@@ -70,18 +70,28 @@ Control gates, 36 process unit checks and release hash checks. Full was not
 run; the optional DOS4GW/NESticle fixture was absent. [Evidence](../etc/evidence/m0-t475-s1-win32-rpc.md).
 Temporary evidence: build/t475-process-p; no push or main-runtime publication.
 
+Owner admits a further T475 S1 P for `lib-win32/handle`, shared by NTSRV RPC
+handle export and NTHOOK child-process handle delivery. Preserve each caller's
+allocation, ownership, rollback and error rules; test local and remote handle
+cleanup. Local build, tests, assets/release and commit; no push or main runtime
+change. The 13-check local/remote handle test, 118 Hook assertions, all 12
+selected Control gates and ten release hash checks passed for local package
+9baf506d-436a-411a-aeda-cf70fcfea4a0. Full was not run; the optional
+DOS4GW/NESticle fixture was absent. [Evidence](../etc/evidence/m0-t475-s1-win32-rpc.md).
+Temporary evidence: build/t475-handle-p.
+
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T475 S1, Ordinary Mode. |
 | Admission And Approval | Owner requests a new T to separate NXVM and project Win32 libraries, starting with RPC. |
-| Objective | Rename the NXVM library owner to src/lib-nxvm, introduce src/lib-win32, and place generic RPC and process attribute mechanics there. |
+| Objective | Rename the NXVM library owner to src/lib-nxvm, introduce src/lib-win32, and place generic RPC, process attributes and shared handle mechanisms there. |
 | Non-goals | Change RPC behavior, guest media, main worktree, or alter process admission, resume or rollback semantics. |
 | Reference Baseline | T474 S3 local release 9f45db63-8a83-44c4-84b7-f4a45fd9297a; [evidence](../etc/evidence/m0-t474-s3-generic-libraries.md). |
 | Files And ABI Surface | Library trees, include paths, imported manifest and Git attributes, build graphs, tests and architecture authorities. |
 | Applicable Rules | Preserve NXVM provenance and functionality; no product dependency in low-level libraries. Owner directs local release and commit without push. |
-| Verification | Import identity and dependency checks, affected builds, RPC, process and NXVM focused tests, local package, Control, governance and relative links. |
+| Verification | Import identity and dependency checks, affected builds, RPC, process, handle and NXVM focused tests, local package, Control, governance and relative links. |
 | Expected Markers | NXVM and Win32 ownership distinct; generic RPC clients use lib-win32/rpc; product protocol stays common. |
 | Asset Needs | Existing toolchain and local package; no new source import. |
 | Reporting Requirements | Relocation, behavior, test results and Full/fixture limits. |

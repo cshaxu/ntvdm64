@@ -2,8 +2,8 @@
 
 ## Generic integration libraries — T474 S3
 
-`lib-win32/rpc` and `lib-win32/io` provide product-independent local RPC binding, async
-completion, pipe transfer, Console membership and native file-path mechanics. They depend only
+`lib-win32/rpc`, `lib-win32/io`, `lib-win32/process` and `lib-win32/handle` provide product-independent local RPC binding, async
+completion, pipe transfer, Console membership, native file paths, process attributes and explicit-process handle mechanics. They depend only
 on platform APIs. `common` and product components may select them; the generic
 libraries do not depend on product protocols, worker-base or executable code.
 BaseSrv RPC operation semantics and NTCON-worker frames remain in common.

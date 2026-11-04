@@ -7,3 +7,7 @@ Protocol and authorization policy remain with their respective owners.
 
 `process/` owns Win32 process attribute-list allocation and cleanup; callers
 retain attribute values and all process creation, admission and lifetime policy.
+
+`handle/` provides explicit-process same-access duplication and best-effort
+remote handle close; caller-owned allocation, authorization, and transfer policy
+remain outside the library.

@@ -1,4 +1,5 @@
 #include "hook.h"
+#include "lib-win32/handle/duplicate.h"
 #include "detours/detours.h"
 #include "common/native_image.h"
 #include <wchar.h>
@@ -23,12 +24,6 @@ DWORD nthook_launcher_target(HANDLE child,const nthook_context *context,BOOL *la
         info[0].nFileIndexHigh==info[1].nFileIndexHigh && info[0].nFileIndexLow==info[1].nFileIndexLow;
     for(unsigned i=0;i<2;++i)if(files[i]!=INVALID_HANDLE_VALUE)CloseHandle(files[i]);
     return error;
-}
-static void undo_attachment(HANDLE child,HANDLE value)
-{
-    HANDLE local=NULL;
-    if(value && DuplicateHandle(child,value,GetCurrentProcess(),&local,0,FALSE,
-        DUPLICATE_CLOSE_SOURCE|DUPLICATE_SAME_ACCESS))CloseHandle(local);
 }
 DWORD nthook_install(HANDLE child,const nthook_context *context,DWORD mode)
 {
@@ -64,8 +59,7 @@ DWORD nthook_install(HANDLE child,const nthook_context *context,DWORD mode)
     }
     for(DWORD i=0;i<2;++i) {
         HANDLE source=i?context->execution:context->frontend;
-        if(source && !DuplicateHandle(GetCurrentProcess(),source,child,&attached[i],
-            0,FALSE,DUPLICATE_SAME_ACCESS)){error=GetLastError();goto failed;}
+        if(source && (error=win32_handle_duplicate(GetCurrentProcess(),source,child,&attached[i])))goto failed;
     }
     header->version=NATIVE_HOOK_VERSION;header->mode=mode;header->machine=machine;
     header->flags=context->creation_flags;
@@ -92,6 +86,6 @@ DWORD nthook_install(HANDLE child,const nthook_context *context,DWORD mode)
     }
     return ERROR_SUCCESS;
 failed:
-    for(DWORD i=0;i<2;++i)undo_attachment(child,attached[i]);
+    for(DWORD i=0;i<2;++i)win32_handle_close_remote(child,attached[i]);
     return error?error:ERROR_DLL_INIT_FAILED;
 }
