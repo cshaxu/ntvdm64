@@ -1749,5 +1749,11 @@
   "unparsed": [],
   "limits": "Candidate detection only: local subset projections, reordered independent groups, aliases, and source additions create false positives; no deletion or completion inference.",
   "inventory_sha256": "6ab5baf88c949c0f490c7a073856ce7199506cee7cdfe9693a80bb2e92fc7a1a",
-  "note": "Ordered-tree comparison is intentionally conservative. All 89 candidates have linked existing per-file evidence, but this report alone does not adjudicate semantic correctness. See each linked review; original 2 USER whole-file-guard projections are explicit exceptions."
+  "note": "Ordered-tree comparison is intentionally conservative. All 89 candidates have linked existing per-file evidence, but this report alone does not adjudicate semantic correctness. See each linked review; original 2 USER whole-file-guard projections are explicit exceptions.",
+  "evidence_current_hash_check": {
+    "files": 89,
+    "matched": 89,
+    "missing": [],
+    "method": "SHA-256 current source bytes matched a value in each linked per-file review; this links evidence, not a fresh semantic proof."
+  }
 }
