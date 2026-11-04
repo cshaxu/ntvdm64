@@ -1,0 +1,12 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cpu_vid.h",
+  "original_sha256": "f7b5efebebd8bf8c6ad5c56adb74c8217490b2b92f113b1e850401fd5f029500",
+  "before_sha256": "efa6c67ecb4c3137053667168e61fe68f25d9b1060a7c397cdcf3eced716b773",
+  "after_sha256": "3919579040d6d06e4f224d5367cd175da9490da65e1b0c256f70fcac84419c47",
+  "review": "All original conditional groups align through retained paths. Two added CPU40/C_VID condition groups implement registered MVDM-HOST-DIV-089 typed callbacks. The parent string-operation condition is selected in all 23 observed actual contexts, overriding stale older unhit records; all 23 compile commands define CPU_40_STYLE and C_VID. Their unsupported generic nested else becomes #error; selected typed callback remains.",
+  "evidence": [
+    "s13-r820-cpuvid-header-contexts.json"
+  ],
+  "limitations": "Build and image comparison pending."
+}

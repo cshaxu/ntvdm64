@@ -81,10 +81,12 @@ WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING
 
 #define C_FILE_DEFAULT		0
 #ifdef macintosh
+#line 84
 #error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
 #else	/* macintosh */
 #define C_DEVICE_DEFAULT	1
 #endif	/* macintosh */
+#line 90
 #define C_PIPE_DEFAULT		3
 #define C_DRIVE_MAX_SIZE	5
 
@@ -265,8 +267,10 @@ WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING
 
 
 #if !defined(NTVDM) && !defined(macintosh)
-#define C_CMOS			135
+#line 270
+#error Excluded unsupported non-NTVDM or SWITCHNPX profile
 #endif
+#line 272
 
 #if defined(NTVDM)
 #define C_VDMLPT1_NAME		140
@@ -406,8 +410,10 @@ extern CHAR *host_expand_environment_vars IPT1(const char *, string);
 extern CHAR ptr_to_empty[];
 
 #ifdef SWITCHNPX
-extern IS32 Npx_enabled;
+#line 411
+#error Excluded unsupported non-NTVDM or SWITCHNPX profile
 #endif /* SWITCHNPX */
+#line 413
 
 /* Dumb Terminal UIF Flag */
 extern IBOOL Config_has_been_edited;

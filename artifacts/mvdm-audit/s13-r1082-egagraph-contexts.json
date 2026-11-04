@@ -1,0 +1,221 @@
+{
+  "records": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/keymouse/mouse_io.obj",
+      "V7VGA": true,
+      "command_sha256": "7ba6cade9bd1b4fc0dc01fc82cd424e883af3710f207aa771b1fd25a5807d5a2"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/ega_mode.obj",
+      "V7VGA": true,
+      "command_sha256": "aaa11424a85d0394ef88a486bf07d99e3eafd735b9114322cb58f980f5a4f05a"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/ega_prts.obj",
+      "V7VGA": true,
+      "command_sha256": "c2aacb44efe926aeea102635dff3bce12b6b668d0018429516264151e0cd4598"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/ega_vide.obj",
+      "V7VGA": true,
+      "command_sha256": "b640eb6933e6a061ef3905247dc3a68c5e088db7a36ede5756764159ee9219f6"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/gfx_updt.obj",
+      "V7VGA": true,
+      "command_sha256": "474160d4c96e2423b50d46840538e6c445b223ede3e641e690043ec30b39bbe0"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/gvi.obj",
+      "V7VGA": true,
+      "command_sha256": "f15e1f695e7ad1aa5f0bbb0148e7dd8902ca390db92702070f175de5fea6abbf"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/v7_ports.obj",
+      "V7VGA": true,
+      "command_sha256": "b1cdf29326eeea41c9f41f6fca61fd35bb51e6f1befe969c4497f02671c46385"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/v7_video.obj",
+      "V7VGA": true,
+      "command_sha256": "99d97c96fc01462a43a0d4cb8823e72003c82e7741d254614f43f7b62e6265e5"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/vga_mode.obj",
+      "V7VGA": true,
+      "command_sha256": "d0f25020cf3c2509de5061f48598895ae431d263a4ee18b75e359270faf728ee"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/vga_prts.obj",
+      "V7VGA": true,
+      "command_sha256": "a9a010cfc0f3bcaaba8ea8b6a42756de2eaa79fa3f9d28c9bc47d1eaa3990b72"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/vga_vide.obj",
+      "V7VGA": true,
+      "command_sha256": "09ce5cde2a1ca1cad651c779b2b15c660e480e9d11d786e2a1fed54f9f2e1c30"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/ega_dmmy.obj",
+      "V7VGA": true,
+      "command_sha256": "21dc527dc5510624ab568689d067947e3110bce0cacade7457451157026a3da4"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_ega.obj",
+      "V7VGA": true,
+      "command_sha256": "a01d89cd5551874f51f68963e31a40ab86567312ae6cd10507a50c6935b13e46"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_vga.obj",
+      "V7VGA": true,
+      "command_sha256": "5dad6db15f698d15b90978c191a2915d3397af3a61b55fa509971bc51102a18f"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_graph.obj",
+      "V7VGA": true,
+      "command_sha256": "70e5732c249689c20754089975fbda18688474974ad549f30568cf8395ef3981"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_munge.obj",
+      "V7VGA": true,
+      "command_sha256": "9b0d7ffecc17f7123eb37ef7ba7d95d5821f72d2cd537245b4010a438e5d4691"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_fulsc.obj",
+      "V7VGA": true,
+      "command_sha256": "a17f31648e705a77b63e47f19462c70f83bfe70160247b714fd2847df55de623"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_det.obj",
+      "V7VGA": true,
+      "command_sha256": "2bd09938f23a69bea20b24875fb98d44e11093e4629077309a3c678e0329bd5b"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/keymouse/mouse_io.obj",
+      "V7VGA": true,
+      "command_sha256": "7ba6cade9bd1b4fc0dc01fc82cd424e883af3710f207aa771b1fd25a5807d5a2"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/ega_mode.obj",
+      "V7VGA": true,
+      "command_sha256": "d0378347b456b143bd1ad49b086aba29ca9f61447966f2d7fb2a1e9efa3d4375"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/ega_prts.obj",
+      "V7VGA": true,
+      "command_sha256": "29464ceb0d8f9ed1ddd18120bc708ba7070b5da1205b18a85a89bab2f2293f28"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/ega_vide.obj",
+      "V7VGA": true,
+      "command_sha256": "8ad5b9e904df910317becec7c641a0c393d47c1745d78d1402c38eba136a44fb"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/gvi.obj",
+      "V7VGA": true,
+      "command_sha256": "281b088912b45d743f5e13b151db9c7ca85d6c863b72112e05c0025c25a22fa4"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/gfx_updt.obj",
+      "V7VGA": true,
+      "command_sha256": "92e881a5b9d6cc0a9fef052d1a00338c54ad21dfcd2fafcf4fbfa75ad469a7f9"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/v7_ports.obj",
+      "V7VGA": true,
+      "command_sha256": "5f0421aa57330eda4408914ec940aaa57b94a398b01e6b892f9073a49da89cb7"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/v7_video.obj",
+      "V7VGA": true,
+      "command_sha256": "4c824ab175b0a1c5136816531c0a7a9d4bf45e63bee7301de0b4731feae31750"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/vga_mode.obj",
+      "V7VGA": true,
+      "command_sha256": "d70f21bc01726836a522d70706191f214db966cabd596cec3d44d3f4ad26d35a"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/vga_prts.obj",
+      "V7VGA": true,
+      "command_sha256": "8630f051c0a842f6b5652a3f671b8628adf920bda13323743d31ab127ea89d31"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/vga_vide.obj",
+      "V7VGA": true,
+      "command_sha256": "671b0f399b9188e20e17ca03c68258ec0e2186e38358f70dd86fdf202aadb502"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/ega_dmmy.obj",
+      "V7VGA": true,
+      "command_sha256": "99054c751e106b697fc45880054b76d64cc0b75a10999aad441b0ab0bc61998d"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_ega.obj",
+      "V7VGA": true,
+      "command_sha256": "a01d89cd5551874f51f68963e31a40ab86567312ae6cd10507a50c6935b13e46"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_vga.obj",
+      "V7VGA": true,
+      "command_sha256": "5dad6db15f698d15b90978c191a2915d3397af3a61b55fa509971bc51102a18f"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_graph.obj",
+      "V7VGA": true,
+      "command_sha256": "70e5732c249689c20754089975fbda18688474974ad549f30568cf8395ef3981"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_munge.obj",
+      "V7VGA": true,
+      "command_sha256": "9b0d7ffecc17f7123eb37ef7ba7d95d5821f72d2cd537245b4010a438e5d4691"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_fulsc.obj",
+      "V7VGA": true,
+      "command_sha256": "a17f31648e705a77b63e47f19462c70f83bfe70160247b714fd2847df55de623"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_det.obj",
+      "V7VGA": true,
+      "command_sha256": "2bd09938f23a69bea20b24875fb98d44e11093e4629077309a3c678e0329bd5b"
+    }
+  ],
+  "limitations": "Project host_def also defines BIT_ORDER2 and VGG; source search found no undefinitions."
+}

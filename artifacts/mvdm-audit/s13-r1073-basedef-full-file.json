@@ -1,0 +1,114 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/base_def.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\base_def.h",
+  "original_sha256": "084991cfc23dc79529cc67a43488ec114be882fb62a9f95b879e1b6995f7afae",
+  "before_sha256": "ce51ed2f44c5ef170abcee0c3d9c901c24b07c28f4583c101fbdc6358cb8d54f",
+  "after_sha256": "a8b6961eb1cd3d78d98a284ee436db7ef009c9d638723b6aebddb6e6692909f5",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/base_def.h",
+      "line": "22",
+      "directive": "ifndef",
+      "expression": "UNUSED",
+      "chain_start": "22",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "abd9b6682731d5452193222e4e5ced6d9b6cbec8416129eb46876e2b6ae1f2b9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/base_def.h",
+      "line": "23",
+      "directive": "ifdef",
+      "expression": "lint",
+      "chain_start": "23",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "abd9b6682731d5452193222e4e5ced6d9b6cbec8416129eb46876e2b6ae1f2b9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/base_def.h",
+      "line": "25",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "23",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "abd9b6682731d5452193222e4e5ced6d9b6cbec8416129eb46876e2b6ae1f2b9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/base_def.h",
+      "line": "37",
+      "directive": "ifdef",
+      "expression": "ANSI",
+      "chain_start": "37",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "abd9b6682731d5452193222e4e5ced6d9b6cbec8416129eb46876e2b6ae1f2b9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/base_def.h",
+      "line": "40",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "37",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "abd9b6682731d5452193222e4e5ced6d9b6cbec8416129eb46876e2b6ae1f2b9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/base_def.h",
+      "line": "46",
+      "directive": "ifndef",
+      "expression": "TRUE",
+      "chain_start": "46",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "abd9b6682731d5452193222e4e5ced6d9b6cbec8416129eb46876e2b6ae1f2b9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/base_def.h",
+      "line": "50",
+      "directive": "ifndef",
+      "expression": "FALSE",
+      "chain_start": "50",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "abd9b6682731d5452193222e4e5ced6d9b6cbec8416129eb46876e2b6ae1f2b9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/base_def.h",
+      "line": "116",
+      "directive": "ifdef",
+      "expression": "ANSI",
+      "chain_start": "116",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "abd9b6682731d5452193222e4e5ced6d9b6cbec8416129eb46876e2b6ae1f2b9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/base_def.h",
+      "line": "178",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "116",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "abd9b6682731d5452193222e4e5ced6d9b6cbec8416129eb46876e2b6ae1f2b9"
+    }
+  ],
+  "review": "Complete original/current conditional tree matches. Both ANSI alternatives have product observations and are retained; lint, missing TRUE and missing FALSE arms already contain #error. Supported product builds succeeded with these guards. Added original line anchors 24 and 26 in lint if/else.",
+  "evidence": [
+    "s13-r808-basedef-header-contexts.json",
+    "s13-r1070-delivery.md"
+  ],
+  "limitations": "Build and byte comparison pending. No new exclusion."
+}

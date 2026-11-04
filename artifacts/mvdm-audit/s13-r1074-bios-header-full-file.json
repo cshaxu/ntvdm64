@@ -1,0 +1,12 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\bios.h",
+  "original_sha256": "a181e9ddddf9cbeeff03b63f733d282455b2f21b578c6c9cf772bf726b41d064",
+  "before_sha256": "ad8c596d2a19d4f760fc62132e6f774690a5fd0352a76ba8b2aa71321c684579",
+  "after_sha256": "0afbf13726fcd1bbb2dfeac33ac3465f465c327227e5cdeef771d9e89c982c53",
+  "review": "Complete original/current conditional trees align through selected arms, including nested !NTVDM within ANSI. Product observations cover 82 dependency contexts; every unhit retained root was already #error. Existing product builds validate nested non-NTVDM error. Corrected error and continuation line anchors; no new exclusions.",
+  "evidence": [
+    "s13-r811-bios-header-contexts.json"
+  ],
+  "limitations": "Build and byte comparison pending."
+}

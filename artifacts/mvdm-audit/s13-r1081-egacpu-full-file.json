@@ -1,0 +1,14 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egacpu.h",
+  "original_sha256": "4a53a9d1c7fb984deb2c5b0fd629442ee8a35272ad90323624d55daa65886194",
+  "before_sha256": "0f80e29a49a4e13ddb52db1f69ef976a19816c7a1e6343f99b8fa857dbd6211a",
+  "after_sha256": "63896c8784a0bda540fae112f3d2c3b1849cceea6c5b83b1f1b792a45e5479e2",
+  "removed_body_sha256": "a75ed8db097ea9a832f188036678bddacdb6094b7ff7b62b52303805331867db",
+  "review": "Full original tree aligns through retained arms. Two local C_VID groups implement registered MVDM-HOST-DIV-062 typed carrier; product selected C_VID path retained. All 53 actual header dependency compilation commands define C_VID and CPU_40_STYLE and product sources do not undefine C_VID. Nested unselected non-C_VID carrier is replaced by #error and original #line 122; other unsupported branches were already errors.",
+  "evidence": [
+    "s13-r827-egacpu-header-contexts.json",
+    "compile-branch-selection/branches.csv"
+  ],
+  "limitations": "Build and image comparison pending; unsupported profiles not claimed."
+}

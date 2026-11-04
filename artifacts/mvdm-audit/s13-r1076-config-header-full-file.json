@@ -1,0 +1,25 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/config.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\config.h",
+  "original_sha256": "6c12b5c1bd7102c46d3e5b86795dcce8610e7b9adaead907ba031e9f9bf40034",
+  "before_sha256": "8aece1f1a7700cf0b40ff2c55f12be2c3dba5d7af5dcc6737d39d0585081886e",
+  "after_sha256": "fca19c4a3d541986016fb09962d8b4bcb2f43d7d49654e36eb7dc707ec4c3542",
+  "removed_arms": [
+    {
+      "expression": "!defined(NTVDM) && !defined(macintosh)",
+      "original_line": 269,
+      "removed_sha256": "b5ab3cda7e3ade8c97af4ec2e06add0521f4ed4203e2a6c4cb9e461d797d58e5"
+    },
+    {
+      "expression": "SWITCHNPX",
+      "original_line": 410,
+      "removed_sha256": "8280d0c5213a744dc349500bd4fb3717562c989a8c106e45422a3badd44e1e46"
+    }
+  ],
+  "review": "Complete conditional trees align. Historical selected markers retained. Two unhit non-NTVDM and SWITCHNPX arms excluded: all 110 observed dependency compilation commands define NTVDM and omit SWITCHNPX, and product sources do not undefine NTVDM or define SWITCHNPX. Original physical LF diagnostic anchors corrected.",
+  "evidence": [
+    "s13-r815-config-header-context.json",
+    "compile-branch-selection/branches.csv"
+  ],
+  "limitations": "Build and byte comparison pending; non-product profiles not claimed."
+}

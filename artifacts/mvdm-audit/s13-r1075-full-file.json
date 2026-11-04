@@ -1,0 +1,66 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/cga.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cga.h",
+  "original_sha256": "683848966f4b5cb5667b9ae0ae140d9e08adcb62060bc77695db844c34b71b0b",
+  "before_sha256": "7a23149277449ecf629db3cf8596662938ed80f450b82dffb130bb577f48ed82",
+  "after_sha256": "7a23149277449ecf629db3cf8596662938ed80f450b82dffb130bb577f48ed82",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cga.h",
+      "line": "22",
+      "directive": "ifdef",
+      "expression": "HUNTER",
+      "chain_start": "22",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "78eaaf259d3976d772e3b72d3f75678a9350793ffd2f6c6e843efba5ab17538c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cga.h",
+      "line": "27",
+      "directive": "ifdef",
+      "expression": "BIT_ORDER1",
+      "chain_start": "27",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "78eaaf259d3976d772e3b72d3f75678a9350793ffd2f6c6e843efba5ab17538c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cga.h",
+      "line": "31",
+      "directive": "ifdef",
+      "expression": "BIT_ORDER2",
+      "chain_start": "31",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "78eaaf259d3976d772e3b72d3f75678a9350793ffd2f6c6e843efba5ab17538c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cga.h",
+      "line": "56",
+      "directive": "ifdef",
+      "expression": "HUNTER",
+      "chain_start": "56",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "78eaaf259d3976d772e3b72d3f75678a9350793ffd2f6c6e843efba5ab17538c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cga.h",
+      "line": "84",
+      "directive": "if",
+      "expression": "!defined(EGG) && !defined(A_VID) && !defined(C_VID)",
+      "chain_start": "84",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "78eaaf259d3976d772e3b72d3f75678a9350793ffd2f6c6e843efba5ab17538c"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}

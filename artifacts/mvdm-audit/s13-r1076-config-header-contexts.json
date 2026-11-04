@@ -1,0 +1,775 @@
+{
+  "records": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/ccpu/c_main.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "3187f7f824ed9aa838e02ff463a679fb5d270011264c3d6fdf535b38618f8ab7"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/ccpu/mov.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "9a2216e3e7be4beb196aa7e2cc29da876a0a946c5942b28ab26c9726d7f46650"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/ccpu/popf.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "b0732184a429d42798398b9439d1c53f2c38e098cb5016432193e4bbc54f9114"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/bios/emm_fncs.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "905a798dbf817d5d2667b10927565f6e0f5f74020e326a26cdfd1237f4a389b1"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/bios/reset.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "4d77c09b0996dcbfe36daf0de3248569249d255bb66c43d80c996fc3727010a8"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/keymouse/keyba.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "3dfd0bd7693e24c03a1adf4f70a5e6c44c609ee418bb32ff31f1b949fae5d354"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/keymouse/mouse_io.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "7ba6cade9bd1b4fc0dc01fc82cd424e883af3710f207aa771b1fd25a5807d5a2"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/system/cmosnt.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "7df83942a380bbddd280d6d46c64f107b34f4280977eebd3abf1303dccba3d21"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/system/illegalp.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "1b5d1130f615889269140f5422241258661f357992312c41b0297c5a67ede5b4"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/system/qevnt.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "1d25989c0c2227d9c505961787e7bdf87c576688421b37b15c43dabc1e22adbf"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/system/rom.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "69420f1b7f409fd0feae05d4157ae3da039e13c5631b33861b2a48465da812aa"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/disks/diskbios.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "87088b7e51ca07a1f4e768a6a3eb2db7a194480c4ad551dc826cb76b6dc45f8e"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/disks/floppy_i.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "544fcb96bb5cd53479b6a3c94d64be95216991ff630835801aed0ca5a9b90058"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/disks/floppy.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "5fc7f8825d81575de1ddcc16c995f818a331ede9e78ad0933521830bef9d847d"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/disks/fla.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "4ea6974f9482adf0c443ac15b539cece9513c080b37a1f8a82ec1b3aec4c6034"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/disks/fdisk.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "304c8d46603224497e6743a80f49eb98bd487874880af683052bf07c1b14c369"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/disks/gfi_mpty.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "4859ede1844ac9d3bee0350501bd21ec40a1d58a92325372fc019d71fe6383a8"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/disks/gfi.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "2f700ed6bb186ab083e0865ed8686f844eda1ecc9ce7e1729d3535d072222582"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/support/terminat.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "2d4665979630e90b321a2ac23f4f32cfa0c35498d5159a5b1d8d83851b81431f"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/support/main.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "11f61562dc9f9484dc06a577519faf528d874a3c98687a061ff64570795e5eba"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/support/get_env.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "d4bcf15f22ba6dc9f3dd3dd3b97061b4c7f9a3be730ceea05543a99c6b12636c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/ega_mode.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "aaa11424a85d0394ef88a486bf07d99e3eafd735b9114322cb58f980f5a4f05a"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/ega_prts.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "c2aacb44efe926aeea102635dff3bce12b6b668d0018429516264151e0cd4598"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/ega_vide.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "b640eb6933e6a061ef3905247dc3a68c5e088db7a36ede5756764159ee9219f6"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/gfx_updt.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "474160d4c96e2423b50d46840538e6c445b223ede3e641e690043ec30b39bbe0"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/video.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "8cf297df02d6aebd0693483970b1f6395c7d0457bf911af96a78e21ac9246807"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/gvi.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "f15e1f695e7ad1aa5f0bbb0148e7dd8902ca390db92702070f175de5fea6abbf"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/v7_video.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "99d97c96fc01462a43a0d4cb8823e72003c82e7741d254614f43f7b62e6265e5"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/vga_mode.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "d0f25020cf3c2509de5061f48598895ae431d263a4ee18b75e359270faf728ee"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/vga_prts.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "a9a010cfc0f3bcaaba8ea8b6a42756de2eaa79fa3f9d28c9bc47d1eaa3990b72"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/vga_vide.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "09ce5cde2a1ca1cad651c779b2b15c660e480e9d11d786e2a1fed54f9f2e1c30"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/cga.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "cc37223fa49aad09fe8825170c1e0b1e532c79c38eda7424e84524c6b70db12b"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/comms/printer.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "517bd0ac3d14020582050fcca1f8629735c955bd18dfa4c78cc755eeaa602313"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/comms/printer_.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "b12fac56e4bc003ffbbcff28d4fa9da09fb21c18fcff7038193bacd9afaa7e69"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/comms/com.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "8e5eea5ee9685a5c8ee2e9eeae9d72f4addf9bd8030d6d078754371fa24ab200"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_msscs.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "64272b542d5c2d929e976fc87acb52f4a6307b402e947f7307991e6bf027a88c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_error.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "2a3f33170d2c94f01cd9f8f27d722b0184e9aa0d2f52534d1d39d0d95d8a2f6a"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_cga.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "268c790f85939c9f9c3f07e3f3c9dcd6a5ea187782a17a72917fedc378a91bc5"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_input.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "62caed980da9f70977df3b8597f2e81af24f1d9a6260e08bab34a558e51a63c8"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_sound.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "14a8212329884fee4c71ff9965595052af861bce9eb5be401b5187a591c3a7de"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_graph.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "70e5732c249689c20754089975fbda18688474974ad549f30568cf8395ef3981"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_bop.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "4c3a0b812a50af25ad72c051578315aa4cdc61d6f07662c0d9403ad834de4cb7"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_com.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "4c14ae52f20714ed61745ada1f63a7157d1bc1b64fe44cca01adfda3a421a405"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_wcom.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "c5a4ca6d528d92f68b5ac190e0a4b038c4e56b17be63a8d0375009b213e4f16e"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_fdisk.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "9a5172ac93ceab555a04ae403238e6409802d22cbb5417005ca9b0c8c9a81bb2"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_lpt.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "580309693d35ed7de98b4fbb39a15dde0a9bebde529d0f3fa1c14aa850a9e478"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_mouse.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "ddabfd236fb904c172e74f2462da0c73bc6b454da7f6a84e64a8e8d9b30e1568"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_event.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "a4497f7808aa48a4d79b40e9d1cff9497426649e26e98eb1c8d9308cefdac250"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/config.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "053aaad06aaa96869f2664d3a1d3776e5655c6a02dac272fe64974efff9ff952"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/stubs.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "a578bcf4b131a28489462911369b347ef0e6e41475c55881851bd043450fefa5"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_fulsc.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "a17f31648e705a77b63e47f19462c70f83bfe70160247b714fd2847df55de623"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_vdd.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "166ded22dc6dd25879424870bdaa301736d00418392fb3ab767bbacb7e9c3766"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_det.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "2bd09938f23a69bea20b24875fb98d44e11093e4629077309a3c678e0329bd5b"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_rflop.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "ee03fa93f9d9157c3c03e6cbebc1fc8c0cc6f59c447767ec0f1484409ee4a80e"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_reset.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "a5b95146d94c029f82f0860a0b11d2c13b5ae8f904a1519221f239b1ab028dc8"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/ccpu/c_main.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "3187f7f824ed9aa838e02ff463a679fb5d270011264c3d6fdf535b38618f8ab7"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/ccpu/mov.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "9a2216e3e7be4beb196aa7e2cc29da876a0a946c5942b28ab26c9726d7f46650"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/ccpu/popf.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "b0732184a429d42798398b9439d1c53f2c38e098cb5016432193e4bbc54f9114"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/bios/emm_fncs.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "905a798dbf817d5d2667b10927565f6e0f5f74020e326a26cdfd1237f4a389b1"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/bios/reset.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "4d77c09b0996dcbfe36daf0de3248569249d255bb66c43d80c996fc3727010a8"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/keymouse/keyba.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "3dfd0bd7693e24c03a1adf4f70a5e6c44c609ee418bb32ff31f1b949fae5d354"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/keymouse/mouse_io.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "7ba6cade9bd1b4fc0dc01fc82cd424e883af3710f207aa771b1fd25a5807d5a2"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/system/illegalp.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "1b5d1130f615889269140f5422241258661f357992312c41b0297c5a67ede5b4"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/system/cmosnt.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "7df83942a380bbddd280d6d46c64f107b34f4280977eebd3abf1303dccba3d21"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/system/qevnt.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "1d25989c0c2227d9c505961787e7bdf87c576688421b37b15c43dabc1e22adbf"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/system/rom.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "69420f1b7f409fd0feae05d4157ae3da039e13c5631b33861b2a48465da812aa"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/disks/floppy.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "5fc7f8825d81575de1ddcc16c995f818a331ede9e78ad0933521830bef9d847d"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/disks/floppy_i.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "544fcb96bb5cd53479b6a3c94d64be95216991ff630835801aed0ca5a9b90058"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/disks/diskbios.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "87088b7e51ca07a1f4e768a6a3eb2db7a194480c4ad551dc826cb76b6dc45f8e"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/disks/fdisk.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "304c8d46603224497e6743a80f49eb98bd487874880af683052bf07c1b14c369"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/disks/gfi.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "2f700ed6bb186ab083e0865ed8686f844eda1ecc9ce7e1729d3535d072222582"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/disks/fla.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "4ea6974f9482adf0c443ac15b539cece9513c080b37a1f8a82ec1b3aec4c6034"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/disks/gfi_mpty.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "4859ede1844ac9d3bee0350501bd21ec40a1d58a92325372fc019d71fe6383a8"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/support/terminat.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "2d4665979630e90b321a2ac23f4f32cfa0c35498d5159a5b1d8d83851b81431f"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/support/main.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "11f61562dc9f9484dc06a577519faf528d874a3c98687a061ff64570795e5eba"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/support/get_env.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "d4bcf15f22ba6dc9f3dd3dd3b97061b4c7f9a3be730ceea05543a99c6b12636c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/ega_mode.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "d0378347b456b143bd1ad49b086aba29ca9f61447966f2d7fb2a1e9efa3d4375"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/ega_prts.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "29464ceb0d8f9ed1ddd18120bc708ba7070b5da1205b18a85a89bab2f2293f28"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/ega_vide.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "8ad5b9e904df910317becec7c641a0c393d47c1745d78d1402c38eba136a44fb"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/gvi.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "281b088912b45d743f5e13b151db9c7ca85d6c863b72112e05c0025c25a22fa4"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/gfx_updt.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "92e881a5b9d6cc0a9fef052d1a00338c54ad21dfcd2fafcf4fbfa75ad469a7f9"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/video.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "79b550574e8b1d1a85ee97771df516034d31c8b805c594c07dd6c0143b11cd9a"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/v7_video.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "4c824ab175b0a1c5136816531c0a7a9d4bf45e63bee7301de0b4731feae31750"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/vga_mode.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "d70f21bc01726836a522d70706191f214db966cabd596cec3d44d3f4ad26d35a"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/vga_prts.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "8630f051c0a842f6b5652a3f671b8628adf920bda13323743d31ab127ea89d31"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/vga_vide.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "671b0f399b9188e20e17ca03c68258ec0e2186e38358f70dd86fdf202aadb502"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/cga.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "4a7dbf01a151368ea6b0dabbf9a9ec009552d4abf9aab3046edfc5b5f61a830c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/comms/com.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "8e5eea5ee9685a5c8ee2e9eeae9d72f4addf9bd8030d6d078754371fa24ab200"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/comms/printer.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "517bd0ac3d14020582050fcca1f8629735c955bd18dfa4c78cc755eeaa602313"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/comms/printer_.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "b12fac56e4bc003ffbbcff28d4fa9da09fb21c18fcff7038193bacd9afaa7e69"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_msscs.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "64272b542d5c2d929e976fc87acb52f4a6307b402e947f7307991e6bf027a88c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_error.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "2a3f33170d2c94f01cd9f8f27d722b0184e9aa0d2f52534d1d39d0d95d8a2f6a"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_cga.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "268c790f85939c9f9c3f07e3f3c9dcd6a5ea187782a17a72917fedc378a91bc5"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_input.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "62caed980da9f70977df3b8597f2e81af24f1d9a6260e08bab34a558e51a63c8"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_graph.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "70e5732c249689c20754089975fbda18688474974ad549f30568cf8395ef3981"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_sound.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "14a8212329884fee4c71ff9965595052af861bce9eb5be401b5187a591c3a7de"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_bop.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "4c3a0b812a50af25ad72c051578315aa4cdc61d6f07662c0d9403ad834de4cb7"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_wcom.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "c5a4ca6d528d92f68b5ac190e0a4b038c4e56b17be63a8d0375009b213e4f16e"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_com.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "4c14ae52f20714ed61745ada1f63a7157d1bc1b64fe44cca01adfda3a421a405"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_fdisk.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "9a5172ac93ceab555a04ae403238e6409802d22cbb5417005ca9b0c8c9a81bb2"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_lpt.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "580309693d35ed7de98b4fbb39a15dde0a9bebde529d0f3fa1c14aa850a9e478"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_mouse.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "ddabfd236fb904c172e74f2462da0c73bc6b454da7f6a84e64a8e8d9b30e1568"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_event.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "a4497f7808aa48a4d79b40e9d1cff9497426649e26e98eb1c8d9308cefdac250"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/config.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "053aaad06aaa96869f2664d3a1d3776e5655c6a02dac272fe64974efff9ff952"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/stubs.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "a578bcf4b131a28489462911369b347ef0e6e41475c55881851bd043450fefa5"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_fulsc.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "a17f31648e705a77b63e47f19462c70f83bfe70160247b714fd2847df55de623"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_vdd.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "166ded22dc6dd25879424870bdaa301736d00418392fb3ab767bbacb7e9c3766"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_det.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "2bd09938f23a69bea20b24875fb98d44e11093e4629077309a3c678e0329bd5b"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_rflop.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "ee03fa93f9d9157c3c03e6cbebc1fc8c0cc6f59c447767ec0f1484409ee4a80e"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_reset.obj",
+      "NTVDM": true,
+      "SWITCHNPX": false,
+      "command_sha256": "a5b95146d94c029f82f0860a0b11d2c13b5ae8f904a1519221f239b1ab028dc8"
+    }
+  ],
+  "limitations": "Source search also verified no NTVDM undefinition or SWITCHNPX definition."
+}

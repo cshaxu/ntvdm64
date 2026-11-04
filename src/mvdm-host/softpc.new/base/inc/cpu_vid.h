@@ -100,7 +100,7 @@ typedef struct
 	void (*str_read) IPT3(IU8 *, dest, IU32, eaOff, IU32, count);
 #else
 #line 102
-	void (*str_read) IPT3(IU8 *, dest, ULONG, offset, ULONG, count);
+#error Excluded unsupported generic string video callback profile
 #endif
 #endif	/* NO_STRING_OPERATIONS */
 #line 105

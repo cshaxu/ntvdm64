@@ -1,0 +1,77 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/debug.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\debug.h",
+  "original_sha256": "59246b3c18bf6dfcd79b4e61bf961bc0382800deb4d968c198ceb415c284f21b",
+  "before_sha256": "99a51a7a1b26a61cc01920bbe47cd03591bcf33b21ec37b61749c21cec20e33e",
+  "after_sha256": "9de0bb6700c06fa12f84ede05f0eeb54c30995c33981340a18232cfd74d46c33",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/debug.h",
+      "line": "14",
+      "directive": "ifndef",
+      "expression": "YES",
+      "chain_start": "14",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "82941af3e3c988ac6b6a22ed54a3da81cb8ee7a75d05890fa19c0f1b8b9c9b87"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/debug.h",
+      "line": "19",
+      "directive": "ifdef",
+      "expression": "PROD",
+      "chain_start": "19",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "82941af3e3c988ac6b6a22ed54a3da81cb8ee7a75d05890fa19c0f1b8b9c9b87"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/debug.h",
+      "line": "22",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "19",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "82941af3e3c988ac6b6a22ed54a3da81cb8ee7a75d05890fa19c0f1b8b9c9b87"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/debug.h",
+      "line": "27",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "27",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "82941af3e3c988ac6b6a22ed54a3da81cb8ee7a75d05890fa19c0f1b8b9c9b87"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/debug.h",
+      "line": "29",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "27",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "82941af3e3c988ac6b6a22ed54a3da81cb8ee7a75d05890fa19c0f1b8b9c9b87"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/debug.h",
+      "line": "31",
+      "directive": "ifdef",
+      "expression": "HUNTER",
+      "chain_start": "31",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "82941af3e3c988ac6b6a22ed54a3da81cb8ee7a75d05890fa19c0f1b8b9c9b87"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}

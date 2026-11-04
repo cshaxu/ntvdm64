@@ -1,0 +1,13 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\yoda.c",
+  "original_sha256": "444f1350d7c50b270652d7b062a375536e327952ebb5ba83937fba090db3c817",
+  "before_sha256": "63a124fa998713ec685185459fb0d99816a26f36cbfaa263a44226075265901a",
+  "after_sha256": "b5915770a1bdae5f8afc8aaad950f07b064156e08f1b05601d8e125cca972497",
+  "review": "Complete original/current tree matches through product-selected arms. Existing marker records select PROD, force_yoda and DELTA; retained. Four excluded arms already contain #error; original line/continuation anchors corrected, including removal of obsolete conflicting terminal #line. Original nested debugger conditions beneath excluded YODA body remain excluded.",
+  "evidence": [
+    "s13-r805-yoda-conditions.json",
+    "compile-branch-selection/branches.csv"
+  ],
+  "limitations": "Build and byte comparison pending."
+}

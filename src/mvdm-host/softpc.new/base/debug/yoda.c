@@ -28,6 +28,7 @@
 #line 28
 #error Excluded unsupported SEGMENTATION configuration
 #endif
+#line 35
 
 #line 36
 #ifdef SCCSID
@@ -69,4 +70,3 @@ void delta_check_I()
 #error Excluded unsupported YODA debugger profile
 #endif /* YODA */
 #line 9519
-#line 8938

@@ -1,0 +1,380 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+  "source_sha256": "0715b9fc61830273e592b926d0b38a1aaa907c4b2048270508a44c94334848eb",
+  "object": "dos/emm_mngr",
+  "arms": [
+    {
+      "label": "codex_r688_arm_0000",
+      "line": 64,
+      "kind": "ifdef",
+      "expression": "LIM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0001",
+      "line": 66,
+      "kind": "ifdef",
+      "expression": "SEGMENTATION",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0002",
+      "line": 84,
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0003",
+      "line": 97,
+      "kind": "ifndef",
+      "expression": "PROD",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0004",
+      "line": 102,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0005",
+      "line": 114,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0006",
+      "line": 200,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0007",
+      "line": 247,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0008",
+      "line": 253,
+      "kind": "ifdef",
+      "expression": "macintosh",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0009",
+      "line": 259,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0010",
+      "line": 261,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0011",
+      "line": 273,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0012",
+      "line": 289,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0013",
+      "line": 306,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0014",
+      "line": 313,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0015",
+      "line": 520,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0016",
+      "line": 525,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0017",
+      "line": 898,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0018",
+      "line": 951,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0019",
+      "line": 957,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0020",
+      "line": 1012,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0021",
+      "line": 1116,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0022",
+      "line": 1118,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0023",
+      "line": 1176,
+      "kind": "ifdef",
+      "expression": "ANSI",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0024",
+      "line": 1182,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0025",
+      "line": 1205,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0026",
+      "line": 1207,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0027",
+      "line": 1221,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0028",
+      "line": 1223,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0029",
+      "line": 1232,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0030",
+      "line": 1234,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0031",
+      "line": 1446,
+      "kind": "ifdef",
+      "expression": "SEGMENTATION",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0032",
+      "line": 1461,
+      "kind": "ifdef",
+      "expression": "SEGMENTATION",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0033",
+      "line": 1478,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0034",
+      "line": 1480,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0035",
+      "line": 1512,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0036",
+      "line": 1515,
+      "kind": "if",
+      "expression": "defined(LARGE_FRAME) && !defined(MONITOR)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0037",
+      "line": 1521,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0038",
+      "line": 1543,
+      "kind": "if",
+      "expression": "defined (NTVDM) && defined(MONITOR) && !defined(PROD)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0039",
+      "line": 1653,
+      "kind": "if",
+      "expression": "!defined(NTVDM) || defined(MVDM_SOFTPC_RECOVER_LIM_WRITEBACK)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0040",
+      "line": 1846,
+      "kind": "ifndef",
+      "expression": "PROD",
+      "error_only": true
+    }
+  ],
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "d4ba45abc2105629f2a9310d058389c6c420787ce32be129452ec27c087f15ad",
+      "hit": [
+        "codex_r688_arm_0000",
+        "codex_r688_arm_0004",
+        "codex_r688_arm_0005",
+        "codex_r688_arm_0007",
+        "codex_r688_arm_0010",
+        "codex_r688_arm_0011",
+        "codex_r688_arm_0013",
+        "codex_r688_arm_0015",
+        "codex_r688_arm_0021",
+        "codex_r688_arm_0023",
+        "codex_r688_arm_0025",
+        "codex_r688_arm_0027",
+        "codex_r688_arm_0029",
+        "codex_r688_arm_0033",
+        "codex_r688_arm_0035",
+        "codex_r688_arm_0037",
+        "codex_r688_arm_0039"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "d4ba45abc2105629f2a9310d058389c6c420787ce32be129452ec27c087f15ad",
+      "hit": [
+        "codex_r688_arm_0000",
+        "codex_r688_arm_0004",
+        "codex_r688_arm_0005",
+        "codex_r688_arm_0007",
+        "codex_r688_arm_0010",
+        "codex_r688_arm_0011",
+        "codex_r688_arm_0013",
+        "codex_r688_arm_0015",
+        "codex_r688_arm_0021",
+        "codex_r688_arm_0023",
+        "codex_r688_arm_0025",
+        "codex_r688_arm_0027",
+        "codex_r688_arm_0029",
+        "codex_r688_arm_0033",
+        "codex_r688_arm_0035",
+        "codex_r688_arm_0037",
+        "codex_r688_arm_0039"
+      ]
+    }
+  ],
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\dos\\emm_mngr.c",
+  "original_sha256": "fd73ce7181f7dfb61432d63466c7641c3d010ca0c60bf446666b6c0118ddb8a9",
+  "before_sha256": "0715b9fc61830273e592b926d0b38a1aaa907c4b2048270508a44c94334848eb",
+  "after_sha256": "07775984ef3fe7e1e362423caa18ee91cb71e46a28021be27680933718f98436",
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 177,
+      "identical": true,
+      "include_trace_sha256": "3a46af0f152f3c5dfaa75762de7abae0add266878a7186e7b068619ede5c27b1",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 177,
+      "identical": true,
+      "include_trace_sha256": "3a46af0f152f3c5dfaa75762de7abae0add266878a7186e7b068619ede5c27b1",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "excluded_arms": [
+    {
+      "source_line": 1182,
+      "original_line": 1413,
+      "removed_sha256": "bd63b89c7d033a3add6f6734489fbb5d89cfd6e741cf081fc9023a3620f1f738"
+    },
+    {
+      "source_line": 1515,
+      "original_line": 1734,
+      "removed_sha256": "9081863b6bc8bf92bb77affca88642a93750704d65a3d0e7d96b7865a5c73aae"
+    }
+  ],
+  "review": "Full original/current conditional tree matches through selected arms, except existing product LIM writeback adaptation controlled by MVDM_SOFTPC_RECOVER_LIM_WRITEBACK. Two actual product contexts confirm unhit non-ANSI and LARGE_FRAME alternatives; both excluded. Corrected original diagnostics using physical LF line counts, not Python splitlines indices; original contains two form feeds.",
+  "limitations": "Build and byte comparison pending; guest unchanged."
+}

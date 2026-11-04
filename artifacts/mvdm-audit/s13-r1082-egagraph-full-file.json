@@ -1,0 +1,27 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/egagraph.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egagraph.h",
+  "original_sha256": "20c58d8fb126135214410b44cda85a9fb57c7644088e820ce979ad37e7681a39",
+  "before_sha256": "20c58d8fb126135214410b44cda85a9fb57c7644088e820ce979ad37e7681a39",
+  "after_sha256": "5b8c4c54ee5ba5432180cd66ff2cfc74ab14baa9a65876d4039e0f506bf88f5d",
+  "removed_arms": [
+    {
+      "original_else_line": 19,
+      "removed_sha256": "8cdfc8a9c3389fa1db79acb08906109a40078a1fbc6b0a71fd8f66098872dc3e"
+    },
+    {
+      "original_else_line": 45,
+      "removed_sha256": "c48143243575820626db8e16903196dd6ceca7e3e23f8fc26379d2c3cdf90636"
+    },
+    {
+      "original_else_line": 94,
+      "removed_sha256": "f5fc51eaf9bfb25652d646d69141b828d6666114f0948bd45785bb2f26be5d07"
+    }
+  ],
+  "review": "Entire conditional structure aligned to byte-identical original. All selected arms preserved. Three unhit BIT_ORDER2/VGG/V7VGA alternatives excluded: product host_def defines BIT_ORDER2 and VGG with no source undefinitions, and all 36 real dependency compilation commands define V7VGA. Existing marker evidence agrees.",
+  "evidence": [
+    "s13-r829-egagraph-header-context.json",
+    "compile-branch-selection/branches.csv"
+  ],
+  "limitations": "Build and image comparison pending; no guest changes."
+}

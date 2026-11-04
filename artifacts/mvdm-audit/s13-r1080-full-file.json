@@ -1,0 +1,110 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/dma.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\dma.h",
+  "original_sha256": "d69831cddb3de18bebe1532c659608b404686374324b3eeebed5607e15a774e4",
+  "before_sha256": "3b3c32d5746eb485ac6f0739214f6dfa1b098b698ca567478af0bfb4420dd996",
+  "after_sha256": "3b3c32d5746eb485ac6f0739214f6dfa1b098b698ca567478af0bfb4420dd996",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dma.h",
+      "line": "138",
+      "directive": "ifdef",
+      "expression": "BIT_ORDER1",
+      "chain_start": "138",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "1bd227f7ecaaa315551191e1f1d0d7ff6036dc0427e3c09f53262b3aeb036c52"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dma.h",
+      "line": "141",
+      "directive": "ifdef",
+      "expression": "BIT_ORDER2",
+      "chain_start": "141",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "1bd227f7ecaaa315551191e1f1d0d7ff6036dc0427e3c09f53262b3aeb036c52"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dma.h",
+      "line": "160",
+      "directive": "ifdef",
+      "expression": "BIT_ORDER1",
+      "chain_start": "160",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "1bd227f7ecaaa315551191e1f1d0d7ff6036dc0427e3c09f53262b3aeb036c52"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dma.h",
+      "line": "163",
+      "directive": "ifdef",
+      "expression": "BIT_ORDER2",
+      "chain_start": "163",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "1bd227f7ecaaa315551191e1f1d0d7ff6036dc0427e3c09f53262b3aeb036c52"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dma.h",
+      "line": "191",
+      "directive": "ifdef",
+      "expression": "BIT_ORDER1",
+      "chain_start": "191",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "1bd227f7ecaaa315551191e1f1d0d7ff6036dc0427e3c09f53262b3aeb036c52"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dma.h",
+      "line": "194",
+      "directive": "ifdef",
+      "expression": "BIT_ORDER2",
+      "chain_start": "194",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "1bd227f7ecaaa315551191e1f1d0d7ff6036dc0427e3c09f53262b3aeb036c52"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dma.h",
+      "line": "307",
+      "directive": "ifdef",
+      "expression": "BIGEND",
+      "chain_start": "307",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "1bd227f7ecaaa315551191e1f1d0d7ff6036dc0427e3c09f53262b3aeb036c52"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dma.h",
+      "line": "310",
+      "directive": "ifdef",
+      "expression": "LITTLEND",
+      "chain_start": "310",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "1bd227f7ecaaa315551191e1f1d0d7ff6036dc0427e3c09f53262b3aeb036c52"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dma.h",
+      "line": "468",
+      "directive": "ifdef",
+      "expression": "NTVDM",
+      "chain_start": "468",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "1bd227f7ecaaa315551191e1f1d0d7ff6036dc0427e3c09f53262b3aeb036c52"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}

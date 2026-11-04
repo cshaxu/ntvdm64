@@ -303,7 +303,7 @@ extern void bootstrap3();
 #line 295
 #error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register.
 #endif
-#line 297
+#line 313
 
 #ifdef	MSWDVR
 #line 315
@@ -333,6 +333,7 @@ extern void bootstrap3();
 #line 338
 #error DIVERGENCE MVDM-HOST-DIV-529: SWINAPI platform branch is not selected; see mirror register.
 #endif /* SWINAPI */
+#line 342
 
 #if	defined(SOFTWIN_API) || defined(SWIN_HFX)
 #line 344
@@ -344,6 +345,7 @@ extern void bootstrap3();
 #line 349
 #error DIVERGENCE MVDM-HOST-DIV-528: SOFTWIN_API platform branch is not selected; see mirror register.
 #endif	/* SOFTWIN_API */
+#line 351
 
 #line 352
 #ifdef SWIN_HAW
@@ -355,8 +357,10 @@ extern void bootstrap3();
 #ifdef ANSI
 extern void host_reset(void);
 #ifndef NTVDM
+#line 359
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* ! NTVDM */
+#line 361
 extern void display_string(char *);
 extern void clear_string(void);
 #else
@@ -391,17 +395,19 @@ extern void switch_to_real_mode(void);
 #line 394
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register.
 #endif	/* GISP_CPU */
+#line 396
 
 #ifdef HFX
 #line 398
 #error Unsupported excluded original configuration
 #endif /* HFX */
-#line 382
+#line 400
 
 #ifdef DOS_APP_LIC
 #line 402
 #error DIVERGENCE MVDM-HOST-DIV-531: DOS_APP_LIC branch is not selected; see mirror register.
 #endif
+#line 404
 
 IMPORT int soft_reset;
 
@@ -411,4 +417,3 @@ IMPORT int soft_reset;
 #error Unsupported excluded original configuration
 #endif	/* SPC386 && WDCTRL_BOP */
 #line 410
-#line 392

@@ -1,0 +1,121 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/cpu4.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cpu4.h",
+  "original_sha256": "c1296168c866527a931bfa4b7cefe21f54acc96a6f242b0a60d6cdba4cdba725",
+  "before_sha256": "cbf57be356f8c69dbe92bf77767177efa547965b2d878590876e7baf55f20227",
+  "after_sha256": "596010a931f1bbc42cf21c0fcf3fc1bfd73fa8743173eb981a43f4cd4631191c",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu4.h",
+      "line": "49",
+      "directive": "ifdef",
+      "expression": "CPU_PRIVATE",
+      "chain_start": "49",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c584c790f042a2b4a36c77ca6f76bdea1256cf28e916a55fc7b2a1a8f0f29f5e"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu4.h",
+      "line": "66",
+      "directive": "ifdef",
+      "expression": "IRET_HOOKS",
+      "chain_start": "66",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "c584c790f042a2b4a36c77ca6f76bdea1256cf28e916a55fc7b2a1a8f0f29f5e"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu4.h",
+      "line": "77",
+      "directive": "ifdef",
+      "expression": "GISP_CPU",
+      "chain_start": "77",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "c584c790f042a2b4a36c77ca6f76bdea1256cf28e916a55fc7b2a1a8f0f29f5e"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu4.h",
+      "line": "79",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "77",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c584c790f042a2b4a36c77ca6f76bdea1256cf28e916a55fc7b2a1a8f0f29f5e"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu4.h",
+      "line": "85",
+      "directive": "ifdef",
+      "expression": "IRET_HOOKS",
+      "chain_start": "85",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "c584c790f042a2b4a36c77ca6f76bdea1256cf28e916a55fc7b2a1a8f0f29f5e"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu4.h",
+      "line": "94",
+      "directive": "ifdef",
+      "expression": "GISP_CPU",
+      "chain_start": "94",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "c584c790f042a2b4a36c77ca6f76bdea1256cf28e916a55fc7b2a1a8f0f29f5e"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu4.h",
+      "line": "108",
+      "directive": "if",
+      "expression": "!defined(CCPU) && !defined(PROD)",
+      "chain_start": "108",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c584c790f042a2b4a36c77ca6f76bdea1256cf28e916a55fc7b2a1a8f0f29f5e"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu4.h",
+      "line": "112",
+      "directive": "ifndef",
+      "expression": "CCPU",
+      "chain_start": "112",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c584c790f042a2b4a36c77ca6f76bdea1256cf28e916a55fc7b2a1a8f0f29f5e"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu4.h",
+      "line": "116",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "116",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c584c790f042a2b4a36c77ca6f76bdea1256cf28e916a55fc7b2a1a8f0f29f5e"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu4.h",
+      "line": "123",
+      "directive": "ifdef",
+      "expression": "PIG",
+      "chain_start": "123",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "c584c790f042a2b4a36c77ca6f76bdea1256cf28e916a55fc7b2a1a8f0f29f5e"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}

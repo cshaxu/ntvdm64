@@ -104,7 +104,8 @@ extern struct EGA_CPU_GLOBALS
 #ifdef C_VID
 	struct VGAGLOBALSETTINGS	*globals;
 #else
-	VGA_GLOBALS	*globals;
+#line 122
+#error Excluded unsupported non-C_VID globals profile
 #endif
 #endif
 	ULONG		saved_state;		/* Last value of EGA_CPU.ega_state.state */

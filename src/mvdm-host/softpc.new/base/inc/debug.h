@@ -32,8 +32,10 @@
 #line 30
 
 #ifdef HUNTER
+#line 297
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
+#line 300
 
 #define	init_debugging()
 #define	note_entrance0(str)
@@ -120,4 +122,4 @@
 #define	assert8_do(test,str,p1,p2,p3,p4,p5,p6,p7,p8,do)
 
 #endif /* PROD */
-#line 120
+#line 386

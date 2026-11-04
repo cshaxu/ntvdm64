@@ -17,15 +17,10 @@ typedef	union {
 		unsigned chained : 1;
 		unsigned text_mode : 1;
 #else
-		unsigned text_mode : 1;
-		unsigned chained : 1;
-		unsigned cga_mem_bank : 1;
-		unsigned graph_shift_reg : 1;
-		unsigned double_pix_wid : 1;
-		unsigned ht_of_200_scan_lines : 1;
-		unsigned split_screen_used : 1;
-		unsigned screen_can_wrap : 1;
+#line 20
+#error Excluded unsupported non-VGA endian or video profile
 #endif
+#line 29
 	} as_bfld;
 } DISPLAY_STATE;
 
@@ -43,8 +38,10 @@ extern	struct	EGA_GLOBALS {
 	half_word		palette_ind[EGA_PALETTE_SIZE];
 	boolean		multiply_vert_by_two;
 #else
-	_9_BITS			screen_split;
+#line 46
+#error Excluded unsupported non-VGA endian or video profile
 #endif
+#line 48
 	int			colours_used;
 	PC_palette		palette[EGA_PALETTE_SIZE];
 	byte			border[3];
@@ -92,8 +89,10 @@ extern PC_palette *DAC;			/* Size is `VGA_DAC_SIZE' */
 #ifdef V7VGA
 #define	get_screen_split()		(((EGA_GRAPH.screen_split.as_word)+1)<<EGA_GRAPH.multiply_vert_by_two)
 #else
-#define	get_screen_split()		((EGA_GRAPH.screen_split.as_word)+1)
+#line 95
+#error Excluded unsupported non-VGA endian or video profile
 #endif /* V7VGA */
+#line 97
 #define	get_prim_font_index()		(EGA_GRAPH.prim_font_index)
 #define	get_sec_font_index()		(EGA_GRAPH.sec_font_index)
 #define	get_underline_start()		(EGA_GRAPH.underline_start)

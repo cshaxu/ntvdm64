@@ -21,8 +21,10 @@
  */
 #ifndef UNUSED
 #ifdef lint
+#line 24
 #error DIVERGENCE MVDM-HOST-DIV-536: lint branch is not selected; see mirror register.
 #else	/* !lint */
+#line 26
 #define UNUSED(x)
 #endif	/* lint */
 #endif	/* UNUSED */
