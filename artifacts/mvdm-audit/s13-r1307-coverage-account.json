@@ -1,0 +1,22 @@
+{
+  "scope": "What current per-file evidence proves, rather than treating prior completed labels as a complete line-by-line certification",
+  "total_files": 1056,
+  "byte_identical_original": 182,
+  "different_from_original": 874,
+  "observed_inventory": 1055,
+  "separate_generator_input": 1,
+  "condition_tree_evidence": {
+    "exact_recursive_selector_sequence": 966,
+    "original_sequence_with_local_conditions": 60,
+    "remaining_reordered_or_projected": 29,
+    "source": "s13-r1291-structural-triage.json; s13-r1296-local-condition-evidence.json; s13-r1294-projection-evidence.json",
+    "limits": "Structural matching does not by itself prove selection or every line anchor; 29 have prior manual review of varying scope."
+  },
+  "line_evidence": {
+    "fully_original_identical_files": 182,
+    "different_files_without_full_line_certification": 874,
+    "limits": "Some of the 874 have partial or focused line evidence; lack of a full-file certification is not proof that they have incorrect lines. Error-arm candidate scan covered matching scopes, not all original/current line directives."
+  },
+  "last_five_file_review": "s13-r1306-final-anchor-review.json",
+  "product_closure": "s13-r1304-product-source-closure.json"
+}

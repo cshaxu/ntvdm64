@@ -10,3 +10,5 @@
 - [r1304](s13-r1304-product-source-closure.json): current product-object dependency closure.
 
 These records provide different evidence, not an assertion that every unsupported configuration or selected runtime behavior was tested.
+
+- [r1306](s13-r1306-final-anchor-review.json): five candidate files reviewed; one line-anchor correction delivered in r1307.

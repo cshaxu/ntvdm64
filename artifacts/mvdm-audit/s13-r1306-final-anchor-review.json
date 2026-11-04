@@ -1,0 +1,43 @@
+{
+  "scope": "Owner-requested review of five candidate files and eight original excluded-arm diagnostic anchors",
+  "candidates": 8,
+  "files": 5,
+  "already_correct": 7,
+  "corrected": 1,
+  "cases": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+      "original_error_line": 24,
+      "result": "already correct by natural physical line"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/rom_basc.c",
+      "original_error_line": 17,
+      "result": "already correct by natural physical line"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "original_error_line": 188,
+      "result": "already correct via preceding active #line 163"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "original_error_lines": [
+        70,
+        74
+      ],
+      "result": "already correct by natural physical lines"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "original_error_lines": [
+        45,
+        87,
+        97
+      ],
+      "result": "first two naturally correct; third corrected with #line 97, continuation #line 99"
+    }
+  ],
+  "limits": "Does not revisit files already reviewed; no new global audit.",
+  "delivery": "s13-r1307-delivery.md"
+}

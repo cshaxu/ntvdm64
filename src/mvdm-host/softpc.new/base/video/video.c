@@ -97,8 +97,10 @@ IMPORT void ega_read_dot IPT3(int, page, int, col, int, row);
 #ifdef	EGG
 #define	VD_ROWS_ON_SCREEN	sas_hw_at_no_check(vd_rows_on_screen)
 #else
+#line 97
 #error DIVERGENCE MVDM-HOST-DIV-540: non-EGG branch is not selected; see mirror register.
 #endif	/* EGG */
+#line 99
 
 
 #ifdef NTVDM
