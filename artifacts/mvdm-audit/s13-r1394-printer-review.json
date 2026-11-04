@@ -1,0 +1,20 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+  "review": {
+    "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+    "before_sha256": "ec6956b197159f60ca825f50e10931d3994e47e603674d91318f1ff9e6bc55b7",
+    "original_sha256": "b1456dcbc0dc6b4d1fd5d101bfaa6bdc9a4cd5d970c14215f3ae62a173f17ccb",
+    "anchors": {},
+    "matched_lines": 642,
+    "strict_tree": {
+      "retained": 25,
+      "natural_error_anchor": 2,
+      "excluded": 22,
+      "implicit_continuation": 6,
+      "groups": 37
+    }
+  },
+  "retained_direct_bodies": "All 25 historical-hit arms match original direct content, accounting for nested groups; 22 excluded arms contain only #error and optional #line.",
+  "natural_error_anchor_evidence": "s13-r1362-natural-error-lines.json",
+  "limits": "Source-derived selected projection and historical mapped hits; no new compiler diagnostic or behavior test."
+}
