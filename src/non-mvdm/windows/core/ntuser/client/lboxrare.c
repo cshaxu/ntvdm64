@@ -699,6 +699,7 @@ BOOL LBSetTabStops(
         if (plb->iTabPixelPositions != NULL) {
             /* DIVERGENCE(OPENNT-HOST-125): HeapFree returns TRUE on success. */
             if (UserLocalFree((HANDLE)plb->iTabPixelPositions))
+#line 698
                 plb->iTabPixelPositions = NULL;
         }
     }

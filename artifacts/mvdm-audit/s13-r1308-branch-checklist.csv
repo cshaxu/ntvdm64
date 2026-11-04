@@ -6193,8 +6193,8 @@ src/mvdm-host/wow32/wow32.h,644,2,ifdef,DEBUG,excluded-error,none,error-anchor-m
 src/mvdm-host/wow32/wow32.h,647,2,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/wow32/wow32fax.c,221,1,ifdef,DEBUG,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/wow32/wow32fax.c,960,1,ifdef,DBG,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/wow32/wowhooks.c,628,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wowhooks.c,1223,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wowhooks.c,635,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wowhooks.c,1243,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
 src/mvdm-host/wow32/wowtbl.c,76,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
 src/mvdm-host/wow32/wowtbl.c,83,1,ifdef,WOWPROFILE,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/wow32/wowtbl.c,120,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
@@ -6248,18 +6248,18 @@ src/mvdm-host/wow32/wuclass.c,797,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-h
 src/mvdm-host/wow32/wuclass.c,802,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/wow32/wuclass.c,957,1,if,(GCL_HBRBACKGROUND != (-10) || GCL_HCURSOR != (-12) || GCL_HICON != (-14) || GCL_CBWNDEXTRA != (-18) || GCL_CBCLSEXTRA != (-20) || GCL_STYLE != (-26)),excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/wow32/wuclass.c,1089,1,ifdef,WOWEDIT,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/wow32/wuclip.c,1293,1,ifdef,DEBUG,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/wow32/wuclip.c,1309,1,ifdef,DEBUG,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/wow32/wucomm.c,1701,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
 src/mvdm-host/wow32/wucomm.c,2532,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
 src/mvdm-host/wow32/wucomm.h,256,1,ifdef,DEBUG,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/wow32/wucomm.h,259,1,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/wow32/wudlg.c,37,1,ifdef,WOWPROFILE,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wudlg.c,82,1,ifdef,WOWPROFILE,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wudlg.c,101,1,ifdef,WOWPROFILE,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wudlg.c,127,1,ifdef,WOWPROFILE,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wudlg.c,151,1,ifdef,WOWPROFILE,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wuman.c,100,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wuman.c,149,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wudlg.c,39,1,ifdef,WOWPROFILE,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wudlg.c,84,1,ifdef,WOWPROFILE,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wudlg.c,104,1,ifdef,WOWPROFILE,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wudlg.c,130,1,ifdef,WOWPROFILE,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wudlg.c,154,1,ifdef,WOWPROFILE,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wuman.c,102,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wuman.c,152,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
 src/mvdm-host/wow32/wumsg.c,881,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
 src/mvdm-host/wow32/wumsg.c,1184,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
 src/mvdm-host/wow32/wumsg.c,2007,1,ifdef,ONLY_API16,excluded-error,unique-structure-historical,error-anchor-match
@@ -6331,8 +6331,8 @@ src/mvdm-host/xms.486/xmsmemr.c,151,1,else,,excluded-error,snapshot-byte-identic
 src/non-mvdm/base/ntos/ex/probe.c,30,1,if,defined(ALLOC_PRAGMA),excluded-error,none,error-anchor-match
 src/non-mvdm/base/ntos/ex/probe.c,88,1,if,defined(_ALPHA_),excluded-error,none,error-anchor-match
 src/non-mvdm/base/ntos/ex/probe.c,91,1,else,,empty-or-structural,no-direct-code-after-comment-and-directive-filter,not-applicable
-src/non-mvdm/base/ntos/rtl/environ.c,28,1,if,defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME),excluded-error,unique-structure-historical,error-anchor-match
-src/non-mvdm/base/ntos/rtl/environ.c,289,1,if,DBG,excluded-error,unique-structure-historical,error-anchor-match
+src/non-mvdm/base/ntos/rtl/environ.c,29,1,if,defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME),excluded-error,unique-structure-historical,error-anchor-match
+src/non-mvdm/base/ntos/rtl/environ.c,290,1,if,DBG,excluded-error,unique-structure-historical,error-anchor-match
 src/non-mvdm/base/ntos/rtl/error.c,27,1,if,defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME),excluded-error,unique-structure-historical,error-anchor-match
 src/non-mvdm/base/ntos/rtl/error.c,38,1,if,ERROR_SUCCESS != 0 || NO_ERROR != 0,excluded-error,unique-structure-historical,error-anchor-match
 src/non-mvdm/base/ntos/rtl/error.c,181,1,ifndef,NTOS_KERNEL_RUNTIME,excluded-error,unique-structure-historical,error-anchor-match
@@ -6358,9 +6358,9 @@ src/non-mvdm/base/win32/inc/base.h,48,1,if,DBG,excluded-error,unique-structure-h
 src/non-mvdm/base/win32/inc/base.h,51,1,else,,historical-hit,unique-structure-historical,not-applicable
 src/non-mvdm/base/win32/server/basesrv.h,30,1,if,defined(OPENNT_BASE_VDM_SERVER),historical-hit,unique-structure-historical,not-applicable
 src/non-mvdm/base/win32/server/basesrv.h,231,1,if,!defined(OPENNT_BASE_VDM_SERVER),excluded-error,unique-structure-historical,error-original-reference-verified
-src/non-mvdm/base/win32/server/srvvdm.c,2473,1,ifdef,NOT_NEEDED,excluded-error,unique-structure-historical,error-anchor-match
-src/non-mvdm/base/win32/server/srvvdm.c,2629,1,if,DEVL,excluded-error,none,error-anchor-match
-src/non-mvdm/base/win32/server/srvvdm.c,2649,1,if,DEVL,excluded-error,none,error-anchor-match
+src/non-mvdm/base/win32/server/srvvdm.c,2478,1,ifdef,NOT_NEEDED,excluded-error,unique-structure-historical,error-anchor-match
+src/non-mvdm/base/win32/server/srvvdm.c,2635,1,if,DEVL,excluded-error,none,error-anchor-match
+src/non-mvdm/base/win32/server/srvvdm.c,2655,1,if,DEVL,excluded-error,none,error-anchor-match
 src/non-mvdm/ds/netapi/netlib/memalloc.c,1,1,ifndef,CDEBUG,historical-hit,unique-structure-historical,not-applicable
 src/non-mvdm/ds/netapi/netlib/memalloc.c,2,2,ifndef,WIN32,excluded-error,unique-structure-historical,error-anchor-match
 src/non-mvdm/ds/netapi/netlib/memalloc.c,59,1,ifdef,WIN32,historical-hit,unique-structure-historical,not-applicable
@@ -6875,9 +6875,9 @@ src/non-mvdm/windows/core/ntuser/client/dlgbegin.c,572,1,ifdef,WOW_NATIVE_DIALOG
 src/non-mvdm/windows/core/ntuser/client/dlgbegin.c,618,1,ifdef,WOW_NATIVE_DIALOG_PROCEDURE_OWNER,historical-hit,unique-structure-historical,not-applicable
 src/non-mvdm/windows/core/ntuser/client/dlgbegin.c,628,1,else,,excluded-error,unique-structure-historical,error-original-reference-verified
 src/non-mvdm/windows/core/ntuser/client/dlgbegin.c,639,1,ifndef,WOW_NATIVE_DIALOG_PROCEDURE_OWNER,excluded-error,unique-structure-historical,error-original-reference-verified
-src/non-mvdm/windows/core/ntuser/client/dlgend.c,25,1,ifdef,SYSMODALWINDOWS,excluded-error,none,error-anchor-match
-src/non-mvdm/windows/core/ntuser/client/dlgend.c,107,1,ifdef,SYSMODALWINDOWS,excluded-error,none,error-anchor-match
-src/non-mvdm/windows/core/ntuser/client/dlgend.c,140,1,ifdef,SYSMODALWINDOWS,excluded-error,none,error-anchor-match
+src/non-mvdm/windows/core/ntuser/client/dlgend.c,27,1,ifdef,SYSMODALWINDOWS,excluded-error,none,error-anchor-match
+src/non-mvdm/windows/core/ntuser/client/dlgend.c,112,1,ifdef,SYSMODALWINDOWS,excluded-error,none,error-anchor-match
+src/non-mvdm/windows/core/ntuser/client/dlgend.c,145,1,ifdef,SYSMODALWINDOWS,excluded-error,none,error-anchor-match
 src/non-mvdm/windows/core/ntuser/client/dlgmgr.c,95,1,ifdef,SYSMODALWINDOWS,excluded-error,unique-structure-historical,error-anchor-match
 src/non-mvdm/windows/core/ntuser/client/dlgmgr.c,318,1,if,defined(WOW_ORIGINAL_DIALOG_MANAGER),historical-hit,unique-structure-historical,not-applicable
 src/non-mvdm/windows/core/ntuser/client/dlgmgr.c,451,2,ifdef,WOW_NATIVE_DIALOG_PROCEDURE_OWNER,historical-hit,unique-structure-historical,not-applicable

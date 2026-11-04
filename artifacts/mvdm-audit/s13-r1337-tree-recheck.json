@@ -1,0 +1,85 @@
+{
+  "method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior.",
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/wmsgem.c",
+      "status": "pass",
+      "current_sha256": "4369133404e654d8fd80c8fd1a293c5d230cb9471345da47974a40cebe966ff1",
+      "original_sha256": "88d05e4770453621472704e90edcefd6ad18b618528b4166da3a9ba1ea1a3619",
+      "excluded_arms": 1,
+      "matching_code_lines": 144
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsglb.c",
+      "status": "pass",
+      "current_sha256": "410569f80665c3eea87bba3cde6a8265647f9fc123ace234596f6e396c3c64e2",
+      "original_sha256": "5e1a7dd4140ae6538d4e728ca869013e8cd00d06d5339ee5682319d5ff4bf26e",
+      "excluded_arms": 1,
+      "matching_code_lines": 110
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowhooks.c",
+      "status": "pass",
+      "current_sha256": "b401f6ce0464288e139ef3420f7a368ec02c9f5aa8fa77b6cf23eae3aa4465fb",
+      "original_sha256": "345220990242cde0890884f478bef8622c2fc537c9e6200fa9b289145be0cc67",
+      "excluded_arms": 2,
+      "matching_code_lines": 1062
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclip.c",
+      "status": "pass",
+      "current_sha256": "2d4b1ea2d876fcf1f2d3e26d7464814ead9c9b49a27b0a6cccf01fcebdbb5a94",
+      "original_sha256": "c386af38376945cb4fd141d878bca8ef5140b15dccc9695a0adcb0941fbb0083",
+      "excluded_arms": 1,
+      "matching_code_lines": 559
+    },
+    {
+      "path": "src/mvdm-host/wow32/wudlg.c",
+      "status": "pass",
+      "current_sha256": "4e662a804b0ce6df9c11a30f6d510f8f50b7292321ca1d6c983d003c84a3711f",
+      "original_sha256": "8a0dfcb7cbfea232c491fd9249c10048946f9f0d0e0b4120227dccd6ab37109e",
+      "excluded_arms": 5,
+      "matching_code_lines": 431
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuman.c",
+      "status": "pass",
+      "current_sha256": "21f9af0dc34e639011eb90833e9d001e8dc3affe35ed31ca9e0d7303059eaadf",
+      "original_sha256": "d96fc214141973b12045669ae2a0d21cf4040ab928be1a309ad687456b473698",
+      "excluded_arms": 2,
+      "matching_code_lines": 141
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/environ.c",
+      "status": "pass",
+      "current_sha256": "ea3a19b4cda1177297e2ec5d60d03bdc737aa38773698e81ed8755f6d5c67cf1",
+      "original_sha256": "6c67b0c09c40e9186ce28a735221634bade1d9402be085d965223092aa7d4f00",
+      "excluded_arms": 2,
+      "matching_code_lines": 464
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "status": "pass",
+      "current_sha256": "7b37eb1ac88922a8ba0ff6106cb71f8d31697c04db95a38fef61f98140985cac",
+      "original_sha256": "c1e2177c6c00679d85cfa475f620841f6736b0e56d8dbf790b71afe33e1ed80b",
+      "excluded_arms": 3,
+      "matching_code_lines": 2132
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+      "status": "pass",
+      "current_sha256": "47d85ea9aa338c8bba1c0bab0346fdd3de12ae123d08e0d5ec60f2173c2952c1",
+      "original_sha256": "191c9ce7dce323873f5ef40f74141950940f6723e14d48b5fa09ca5517dde6cd",
+      "excluded_arms": 3,
+      "matching_code_lines": 46
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxrare.c",
+      "status": "pass",
+      "current_sha256": "4386d23269e920e2e883cd86f8136a495e8de79a9e6cb8b0f7faa36b82ce3796",
+      "original_sha256": "e8914f4761ade70a1a7357b5dc8c17744ce1bc49379d03a99470f815ef85f64d",
+      "excluded_arms": 1,
+      "matching_code_lines": 381
+    }
+  ]
+}

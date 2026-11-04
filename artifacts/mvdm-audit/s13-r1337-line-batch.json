@@ -1,0 +1,419 @@
+{
+  "method": "Original/current excluded-only trees directly compared; #line inserted outside excluded arms at safe code boundaries to align original matching code positions. Original local edits retained. An EDIT file with one unresolved expression is deferred.",
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/wmsgem.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsgem.c",
+      "before_sha256": "b583aaeb9dc4dbedaf14b7d074cbbf7d0c3091f547db8aaf42016066977923ed",
+      "after_sha256": "4369133404e654d8fd80c8fd1a293c5d230cb9471345da47974a40cebe966ff1",
+      "original_sha256": "88d05e4770453621472704e90edcefd6ad18b618528b4166da3a9ba1ea1a3619",
+      "anchors": [
+        {
+          "before_physical_line": 96,
+          "original_line": 138
+        },
+        {
+          "before_physical_line": 118,
+          "original_line": 158
+        },
+        {
+          "before_physical_line": 205,
+          "original_line": 244
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsglb.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsglb.c",
+      "before_sha256": "63f67da6a7c8fd6299aef036c71cd6656109a16103d18e15f00f8e3d5f414047",
+      "after_sha256": "410569f80665c3eea87bba3cde6a8265647f9fc123ace234596f6e396c3c64e2",
+      "original_sha256": "5e1a7dd4140ae6538d4e728ca869013e8cd00d06d5339ee5682319d5ff4bf26e",
+      "anchors": [
+        {
+          "before_physical_line": 113,
+          "original_line": 158
+        },
+        {
+          "before_physical_line": 135,
+          "original_line": 178
+        },
+        {
+          "before_physical_line": 197,
+          "original_line": 239
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowhooks.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wowhooks.c",
+      "before_sha256": "bff4df2c0d3b190db42bda06eb2f8d28904a33e126889644a09e8ccfc5586d2c",
+      "after_sha256": "b401f6ce0464288e139ef3420f7a368ec02c9f5aa8fa77b6cf23eae3aa4465fb",
+      "original_sha256": "345220990242cde0890884f478bef8622c2fc537c9e6200fa9b289145be0cc67",
+      "anchors": [
+        {
+          "before_physical_line": 15,
+          "original_line": 13
+        },
+        {
+          "before_physical_line": 98,
+          "original_line": 95
+        },
+        {
+          "before_physical_line": 463,
+          "original_line": 459
+        },
+        {
+          "before_physical_line": 582,
+          "original_line": 574
+        },
+        {
+          "before_physical_line": 602,
+          "original_line": 593
+        },
+        {
+          "before_physical_line": 606,
+          "original_line": 596
+        },
+        {
+          "before_physical_line": 612,
+          "original_line": 601
+        },
+        {
+          "before_physical_line": 644,
+          "original_line": 634
+        },
+        {
+          "before_physical_line": 651,
+          "original_line": 635
+        },
+        {
+          "before_physical_line": 680,
+          "original_line": 660
+        },
+        {
+          "before_physical_line": 725,
+          "original_line": 704
+        },
+        {
+          "before_physical_line": 859,
+          "original_line": 837
+        },
+        {
+          "before_physical_line": 865,
+          "original_line": 838
+        },
+        {
+          "before_physical_line": 918,
+          "original_line": 889
+        },
+        {
+          "before_physical_line": 933,
+          "original_line": 896
+        },
+        {
+          "before_physical_line": 964,
+          "original_line": 926
+        },
+        {
+          "before_physical_line": 1106,
+          "original_line": 1064
+        },
+        {
+          "before_physical_line": 1145,
+          "original_line": 1102
+        },
+        {
+          "before_physical_line": 1163,
+          "original_line": 1103
+        },
+        {
+          "before_physical_line": 1188,
+          "original_line": 1124
+        },
+        {
+          "before_physical_line": 1246,
+          "original_line": 1181
+        },
+        {
+          "before_physical_line": 1248,
+          "original_line": 1182
+        },
+        {
+          "before_physical_line": 1301,
+          "original_line": 1231
+        },
+        {
+          "before_physical_line": 1320,
+          "original_line": 1249
+        },
+        {
+          "before_physical_line": 1322,
+          "original_line": 1250
+        },
+        {
+          "before_physical_line": 1514,
+          "original_line": 1441
+        },
+        {
+          "before_physical_line": 1527,
+          "original_line": 1453
+        },
+        {
+          "before_physical_line": 1545,
+          "original_line": 1468
+        },
+        {
+          "before_physical_line": 1565,
+          "original_line": 1487
+        },
+        {
+          "before_physical_line": 1634,
+          "original_line": 1555
+        },
+        {
+          "before_physical_line": 1764,
+          "original_line": 1682
+        },
+        {
+          "before_physical_line": 1812,
+          "original_line": 1728
+        },
+        {
+          "before_physical_line": 1832,
+          "original_line": 1747
+        },
+        {
+          "before_physical_line": 1870,
+          "original_line": 1781
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclip.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuclip.c",
+      "before_sha256": "3d1a652f49d5f5505867dbc97834fef5ab57c3811e5176d814591821e3ce968c",
+      "after_sha256": "2d4b1ea2d876fcf1f2d3e26d7464814ead9c9b49a27b0a6cccf01fcebdbb5a94",
+      "original_sha256": "c386af38376945cb4fd141d878bca8ef5140b15dccc9695a0adcb0941fbb0083",
+      "anchors": [
+        {
+          "before_physical_line": 18,
+          "original_line": 17
+        },
+        {
+          "before_physical_line": 89,
+          "original_line": 57
+        },
+        {
+          "before_physical_line": 93,
+          "original_line": 60
+        },
+        {
+          "before_physical_line": 104,
+          "original_line": 69
+        },
+        {
+          "before_physical_line": 137,
+          "original_line": 95
+        },
+        {
+          "before_physical_line": 510,
+          "original_line": 467
+        },
+        {
+          "before_physical_line": 535,
+          "original_line": 491
+        },
+        {
+          "before_physical_line": 676,
+          "original_line": 631
+        },
+        {
+          "before_physical_line": 686,
+          "original_line": 639
+        },
+        {
+          "before_physical_line": 925,
+          "original_line": 869
+        },
+        {
+          "before_physical_line": 987,
+          "original_line": 928
+        },
+        {
+          "before_physical_line": 1023,
+          "original_line": 963
+        },
+        {
+          "before_physical_line": 1033,
+          "original_line": 969
+        },
+        {
+          "before_physical_line": 1136,
+          "original_line": 1071
+        },
+        {
+          "before_physical_line": 1152,
+          "original_line": 1080
+        },
+        {
+          "before_physical_line": 1266,
+          "original_line": 1189
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wudlg.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wudlg.c",
+      "before_sha256": "93693b96157c85a47b7fc087366a1358675888aa2d46e1e3e883ac9187c10540",
+      "after_sha256": "4e662a804b0ce6df9c11a30f6d510f8f50b7292321ca1d6c983d003c84a3711f",
+      "original_sha256": "8a0dfcb7cbfea232c491fd9249c10048946f9f0d0e0b4120227dccd6ab37109e",
+      "anchors": [
+        {
+          "before_physical_line": 18,
+          "original_line": 16
+        },
+        {
+          "before_physical_line": 35,
+          "original_line": 30
+        },
+        {
+          "before_physical_line": 95,
+          "original_line": 86
+        },
+        {
+          "before_physical_line": 163,
+          "original_line": 152
+        },
+        {
+          "before_physical_line": 177,
+          "original_line": 161
+        },
+        {
+          "before_physical_line": 1095,
+          "original_line": 1078
+        },
+        {
+          "before_physical_line": 1109,
+          "original_line": 1091
+        },
+        {
+          "before_physical_line": 1137,
+          "original_line": 1116
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuman.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuman.c",
+      "before_sha256": "bed96ab51ec7fbf0324718277f74336115f2506df10d300084d8773b3e8ca28a",
+      "after_sha256": "21f9af0dc34e639011eb90833e9d001e8dc3affe35ed31ca9e0d7303059eaadf",
+      "original_sha256": "d96fc214141973b12045669ae2a0d21cf4040ab928be1a309ad687456b473698",
+      "anchors": [
+        {
+          "before_physical_line": 17,
+          "original_line": 16
+        },
+        {
+          "before_physical_line": 95,
+          "original_line": 95
+        },
+        {
+          "before_physical_line": 133,
+          "original_line": 130
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/environ.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\ntos\\rtl\\environ.c",
+      "before_sha256": "362411d48bddc4db273725ed7c988de21214538189b1e7bbb531bf1a1d84d1dc",
+      "after_sha256": "ea3a19b4cda1177297e2ec5d60d03bdc737aa38773698e81ed8755f6d5c67cf1",
+      "original_sha256": "6c67b0c09c40e9186ce28a735221634bade1d9402be085d965223092aa7d4f00",
+      "anchors": [
+        {
+          "before_physical_line": 24,
+          "original_line": 23
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\win32\\server\\srvvdm.c",
+      "before_sha256": "8c6190c43404c7f3a2b2e3b9c668306f63e4cdf7d00629d753ddc142309677d7",
+      "after_sha256": "7b37eb1ac88922a8ba0ff6106cb71f8d31697c04db95a38fef61f98140985cac",
+      "original_sha256": "c1e2177c6c00679d85cfa475f620841f6736b0e56d8dbf790b71afe33e1ed80b",
+      "anchors": [
+        {
+          "before_physical_line": 40,
+          "original_line": 35
+        },
+        {
+          "before_physical_line": 280,
+          "original_line": 273
+        },
+        {
+          "before_physical_line": 282,
+          "original_line": 274
+        },
+        {
+          "before_physical_line": 1314,
+          "original_line": 1269
+        },
+        {
+          "before_physical_line": 2225,
+          "original_line": 2179
+        },
+        {
+          "before_physical_line": 2577,
+          "original_line": 2551
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgend.c",
+      "before_sha256": "4d37686b8c767ce4a1dc4e13e0ec011aba566c1e91e3f0febfede5ad2de53ba2",
+      "after_sha256": "47d85ea9aa338c8bba1c0bab0346fdd3de12ae123d08e0d5ec60f2173c2952c1",
+      "original_sha256": "191c9ce7dce323873f5ef40f74141950940f6723e14d48b5fa09ca5517dde6cd",
+      "anchors": [
+        {
+          "before_physical_line": 14,
+          "original_line": 11
+        },
+        {
+          "before_physical_line": 16,
+          "original_line": 22
+        },
+        {
+          "before_physical_line": 47,
+          "original_line": 46
+        },
+        {
+          "before_physical_line": 76,
+          "original_line": 72
+        },
+        {
+          "before_physical_line": 98,
+          "original_line": 91
+        },
+        {
+          "before_physical_line": 157,
+          "original_line": 171
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxrare.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\lboxrare.c",
+      "before_sha256": "3ef93c58260e4af79cb0e2d3491fffce0fb451cf3f8924d7df71f727e5c4b1cf",
+      "after_sha256": "4386d23269e920e2e883cd86f8136a495e8de79a9e6cb8b0f7faa36b82ce3796",
+      "original_sha256": "e8914f4761ade70a1a7357b5dc8c17744ce1bc49379d03a99470f815ef85f64d",
+      "anchors": [
+        {
+          "before_physical_line": 702,
+          "original_line": 698
+        }
+      ]
+    }
+  ]
+}

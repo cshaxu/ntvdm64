@@ -21,6 +21,7 @@ Revision History:
 #include "ntrtlp.h"
 #include "environapi.h"
 #include "zwapi.h"
+#line 23
 #include <nturtl.h>
 #include <string.h>
 

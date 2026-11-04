@@ -15,6 +15,7 @@
 
 #include "precomp.h"
 #include "wow_user_object_bindings.h"
+#line 17
 #pragma hdrstop
 
 struct _CBFORMATS  ClipboardFormats;
@@ -86,10 +87,12 @@ static HWND WU32GuestClipboardWindow(HWND hwnd)
     the window is found and removed. Otherwise, it is FALSE.
 --*/
 
+#line 57
 ULONG FASTCALL WU32ChangeClipboardChain(PVDMFRAME pFrame)
 {
     ULONG ul;
     HWND hwnd, hwndNext;
+#line 60
     register PCHANGECLIPBOARDCHAIN16 parg16;
 
     GETARGPTR(pFrame, sizeof(CHANGECLIPBOARDCHAIN16), parg16);
@@ -101,6 +104,7 @@ ULONG FASTCALL WU32ChangeClipboardChain(PVDMFRAME pFrame)
     else
         ul = GETBOOL16(ChangeClipboardChain(hwnd, hwndNext));
 
+#line 69
     FREEARGPTR(parg16);
     RETURN(ul);
 }
@@ -134,6 +138,7 @@ ULONG FASTCALL WU32CloseClipboard(PVDMFRAME pFrame)
         wow_clipboard_epoch_note_current();
     }
 
+#line 95
     RETURN(ul);
 }
 
@@ -507,6 +512,7 @@ ULONG FASTCALL WU32GetClipboardOwner(PVDMFRAME pFrame)
     /* DIVERGENCE(MVDM-HOST-DIV-454): see WU32GuestClipboardWindow above. */
     ul = GETHWND16(WU32GuestClipboardWindow(GetClipboardOwner()));
 
+#line 467
     RETURN(ul);
 }
 
@@ -532,6 +538,7 @@ ULONG FASTCALL WU32GetClipboardViewer(PVDMFRAME pFrame)
     /* DIVERGENCE(MVDM-HOST-DIV-454): see WU32GuestClipboardWindow above. */
     ul = GETHWND16(WU32GuestClipboardWindow(GetClipboardViewer()));
 
+#line 491
     RETURN(ul);
 }
 
@@ -673,6 +680,7 @@ ULONG FASTCALL WU32OpenClipboard(PVDMFRAME pFrame)
 {
     ULONG ul;
     HWND hwnd;
+#line 631
     register POPENCLIPBOARD16 parg16;
 
     GETARGPTR(pFrame, sizeof(OPENCLIPBOARD16), parg16);
@@ -683,6 +691,7 @@ ULONG FASTCALL WU32OpenClipboard(PVDMFRAME pFrame)
     else
         ul = GETBOOL16(OpenClipboard(hwnd));
 
+#line 639
     FREEARGPTR(parg16);
     RETURN(ul);
 }
@@ -922,6 +931,7 @@ ULONG FASTCALL WU32SetClipboardData(PVDMFRAME pFrame)
             else if (hMem32) {
                 GlobalFree(hMem32);
             }
+#line 869
             break;
 
         case CF_HDROP:
@@ -984,6 +994,7 @@ ULONG FASTCALL WU32SetClipboardData(PVDMFRAME pFrame)
      * public Clipboard accepted it. The zero result is the original API's
      * observable rejection result, not a cache-backed false success. */
     if (parg16->f2 && ul) {
+#line 928
         ul = parg16->f2;
     }
 
@@ -1020,6 +1031,7 @@ ULONG FASTCALL WU32SetClipboardViewer(PVDMFRAME pFrame)
 {
     ULONG ul;
     HWND hwnd;
+#line 963
     register PSETCLIPBOARDVIEWER16 parg16;
 
     GETARGPTR(pFrame, sizeof(SETCLIPBOARDVIEWER16), parg16);
@@ -1030,6 +1042,7 @@ ULONG FASTCALL WU32SetClipboardViewer(PVDMFRAME pFrame)
     else
         ul = GETHWND16(WU32GuestClipboardWindow(SetClipboardViewer(hwnd)));
 
+#line 969
     FREEARGPTR(parg16);
     RETURN(ul);
 }
@@ -1133,6 +1146,7 @@ VOID WU32ICBStoreHandle(WORD wFormat, HMEM16 hMem16)
         }
     }
 
+#line 1071
 }
 
 
@@ -1149,6 +1163,7 @@ HMEM16 WU32ICBGetHandle(WORD wFormat)
         W32EmptyClipboard();
     }
 
+#line 1080
     if ((wFormat >= CF_TEXT) && (wFormat <= CF_WAVE)) {
         hMem16 = ClipboardFormats.Pre1[wFormat];
     }
@@ -1263,6 +1278,7 @@ VOID W32EmptyClipboard ()
      * it; no independent clipboard state survives this boundary. */
     wow_clipboard_epoch_reset();
 
+#line 1189
 }
 
 

@@ -15,6 +15,7 @@
 #include "precomp.h"
 /* DIVERGENCE(MVDM-HOST-DIV-344): original conversion finalizers. */
 #include "wow_message_lifetime.h"
+#line 16
 #pragma hdrstop
 
 MODNAME(wudlg.c);
@@ -32,6 +33,7 @@ LONG W32DialogFunc(HWND hdlg, UINT uMsg, DWORD uParam, LPARAM lParam)
     wow_message_stack stack; /* DIVERGENCE(MVDM-HOST-DIV-349): before construction. */
     wow_message_stack_enter(&stack);
     __try {
+#line 30
     BOOL   fMessageNeedsThunking;
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
@@ -92,6 +94,7 @@ LONG W32DialogFunc(HWND hdlg, UINT uMsg, DWORD uParam, LPARAM lParam)
         wm32mpex.lParam = lParam;
         wm32mpex.pww = pww;
         wm32mpex.fFree = TRUE; /* DIV-344: same synchronous contract as WndProc. */
+#line 86
         wm32mpex.lpfnM32 = aw32Msg[uMsg].lpfnM32;
         if (!(wm32mpex.lpfnM32)(&wm32mpex)) {
                 LOGDEBUG(LOG_ERROR,("    W32DialogFunc ERROR: cannot thunk 32-bit message %04x\n", uMsg));
@@ -160,6 +163,7 @@ LONG W32DialogFunc(HWND hdlg, UINT uMsg, DWORD uParam, LPARAM lParam)
         goto Error;
 
     stack.completed = TRUE; /* DIV-349: not the shared failure-return label. */
+#line 152
 Done:
 
     return wm32mpex.lReturn;
@@ -174,6 +178,7 @@ SilentError:
         __try { wow_message_unwind32(&wm32mpex); }
         __finally { wow_message_stack_leave(&stack, abnormal || AbnormalTermination()); }
     }
+#line 161
 }
 
 
@@ -1092,6 +1097,7 @@ ULONG FASTCALL WU32IsDialogMessage(PVDMFRAME pFrame)
     register PISDIALOGMESSAGE16 parg16;
     MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
     __try {
+#line 1078
     PMSG16 pMsg16;
 
     GETARGPTR(pFrame, sizeof(ISDIALOGMESSAGE16), parg16);
@@ -1106,6 +1112,7 @@ ULONG FASTCALL WU32IsDialogMessage(PVDMFRAME pFrame)
     ThunkMsg16(&mpex);
     if (!mpex.fThunkSucceeded) { FREEARGPTR(parg16); RETURN(0); }
 
+#line 1091
     GETFRAMEPTR(((PTD)CURRENTPTD())->vpStack, pFrame);
     GETARGPTR(pFrame, sizeof(ISDIALOGMESSAGE16), parg16);
 
@@ -1134,6 +1141,7 @@ ULONG FASTCALL WU32IsDialogMessage(PVDMFRAME pFrame)
     } __finally {
         wow_message_unwind16(&mpex);
     }
+#line 1116
 }
 
 

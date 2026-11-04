@@ -11,8 +11,10 @@
 /* DIVERGENCE(OPENNT-HOST-080): complete original EndDialog body.
  * Same dialog state/owner as the original creator and modal manager;
  * private precomp is supplied by the consuming group. Not yet selected. */
+#line 11
 #include "precomp.h"
 
+#line 22
 BOOL EndDialog(
     HWND hwnd,
     int result)
@@ -44,6 +46,7 @@ BOOL EndDialog(
     if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS))
         return FALSE;
 
+#line 46
     if (SAMEWOWHANDLE(hwnd, GetActiveWindow())) {
         fWasActive = TRUE;
     }
@@ -73,6 +76,7 @@ BOOL EndDialog(
     /* DIVERGENCE(OPENNT-HOST-080): owner-enable can release this PDLG. */
     if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS))
         return FALSE;
+#line 72
     PDLG(pwnd)->fEnd = TRUE;
     PDLG(pwnd)->result = result;
 
@@ -95,6 +99,7 @@ BOOL EndDialog(
     /* DIVERGENCE(OPENNT-HOST-080): end committed; do not hide a reused HWND. */
     if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS))
         return TRUE;
+#line 91
     NtUserSetWindowPos(hwnd, NULL, 0, 0, 0, 0,
                        SWP_HIDEWINDOW | SWP_NOACTIVATE | SWP_NOMOVE |
                        SWP_NOSIZE | SWP_NOZORDER);
@@ -154,6 +159,7 @@ BOOL EndDialog(
     /* DIVERGENCE(OPENNT-HOST-080): activation may retire the exact dialog. */
     if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS))
         return TRUE;
+#line 171
     PostMessage(hwnd, WM_NULL, 0, 0);
 
     return TRUE;

@@ -266,3 +266,19 @@ and the complete package was published to both destinations. Eight images are
 identical and NTVDM/WOW32 differ only in PE timestamps
 ([comparison](s13-r1320-build-image-compare.json)); runtime tests were not
 repeated under owner instruction.
+
+The r1337 batch aligns original matching-code logical positions in ten more
+files and rechecks their excluded-only condition trees. The current inventory
+is 182 byte-identical files, 511 differing files with condition and matching-code
+review, and 363 differing files still requiring that review, out of 1,056.
+These results do not prove runtime behavior of local adaptations, nor that
+every supported configuration has been exercised. Two identical files retain
+branches without an observed host hit and require separate context review.
+Evidence: [batch](s13-r1337-line-batch.json),
+[tree recheck](s13-r1337-tree-recheck.json).
+
+Cached x86 root, NTVDM worker, WOW32 and x64 builds passed. The complete
+ten-image package was published and verified at both destinations. Eight
+images are byte-identical to the prior package and NTVDM/WOW32 differ only
+in PE timestamps ([comparison](s13-r1337-build-image-compare.json)); runtime
+tests were not repeated under the owner-approved unchanged-image rule.

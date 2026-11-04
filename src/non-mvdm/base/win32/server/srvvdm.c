@@ -37,6 +37,7 @@ Revision History:
 // match any legitimately logged on user.
 //
 
+#line 35
 LUID WowAuthId={0xFFFFFFFF,-1};
 
 
@@ -277,8 +278,10 @@ BaseSrvGetNextVDMCommand(
                 /* DIVERGENCE(OPENNT-HOST-064): retain early native completion across the command wait reset. */
                 (b->VDMState & RETURN_ON_NO_COMMAND &&
                  (b->VDMState & ASKING_FOR_SECOND_TIME || pConsoleRecord->ReenterCompletionPending)))
+#line 273
               {
                 pConsoleRecord->ReenterCompletionPending = FALSE;
+#line 274
                 b->WaitObjectForVDM = 0;
                 RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
                 return ((ULONG)STATUS_NO_MEMORY);
@@ -1311,6 +1314,7 @@ BaseSrvDOSWorkerWaitPending(
 }
 
 
+#line 1269
 BOOL
 BaseSrvCopyCommand(
     PBASE_CHECKVDM_MSG b,
@@ -2222,6 +2226,7 @@ PCONSOLERECORD BaseSrvAllocateConsoleRecord (
     pConsoleRecord->hWaitForVDMDup = 0;
     pConsoleRecord->nReEntrancy = 0;
     pConsoleRecord->ReenterCompletionPending = FALSE; // DIVERGENCE(OPENNT-HOST-064): record-local notification lifetime.
+#line 2179
     pConsoleRecord->Next = NULL;
     pConsoleRecord->cchCurDirs = 0;
     pConsoleRecord->lpszzCurDirs = NULL;
@@ -2574,6 +2579,7 @@ BaseSrvSetReenterCount (
     else {
         pConsoleRecord->nReEntrancy--;
         pConsoleRecord->ReenterCompletionPending = TRUE; // DIVERGENCE(OPENNT-HOST-064): the next eligible Get consumes this notification.
+#line 2551
         if(pConsoleRecord->hWaitForVDMDup)
            NtSetEvent (pConsoleRecord->hWaitForVDMDup,NULL);
         }

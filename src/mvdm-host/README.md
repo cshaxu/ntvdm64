@@ -3102,3 +3102,5 @@ MVDM-HOST-DIV-812: restore original diagnostic continuation anchors in nine host
 MVDM-HOST-DIV-813: reject unselected DPMI and non-NTVDM LIM alternatives and correct original continuation anchors. The LIM exclusion subsumes two inner GISP_SVGA exclusions under DIV-522. Evidence: artifacts/mvdm-audit/s13-r1302-condition-batch.json.
 
 MVDM-HOST-DIV-814: correct original error and continuation line anchors for the excluded non-EGG video branch. Evidence: artifacts/mvdm-audit/s13-r1306-final-anchor-review.json.
+
+MVDM-HOST-DIV-815: restore original logical source positions for matching code in six WOW32 mirror files while preserving local adaptations. Evidence: artifacts/mvdm-audit/s13-r1337-line-batch.json and s13-r1337-tree-recheck.json.
