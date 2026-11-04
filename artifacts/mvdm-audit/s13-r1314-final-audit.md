@@ -290,3 +290,10 @@ one shape difference. These categories are triage only: neither establishes
 retained-body correctness, actual hit coverage, nor original logical line
 mapping. Four pending files have recorded unobserved retained arms. No file is
 marked complete based on this survey.
+
+The [r1339 arm detail](s13-r1339-matched-tree-arms.json) expands the 274
+pending files whose tree shape matches: 4,720 branch arms are associated with
+the existing checklist; 1,822 retained leaf bodies match the original ignoring
+line directives, while 55 differ. These comparisons do not validate local
+patches or effective logical lines under each compilation context and do not
+change any file completion status.
