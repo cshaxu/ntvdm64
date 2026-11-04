@@ -156,7 +156,14 @@ SIGNALS ISSUED	  :	NONE
 /* DIVERGENCE(MVDM-HOST-DIV-143): retain the original mode-1/mode-2 table
  * carrier for the selected CCPU40 C-VID profile instead of selecting legacy
  * A_VID movers that have no selected CCPU40 implementation. */
-#if defined(A_VID) || defined(CPU_40_STYLE)
+#line 156
+#ifdef A_VID
+#line 157
+#error Excluded unsupported original A_VID writer-table profile
+#else
+#line 205
+#if defined(CPU_40_STYLE)
+#line 157
 IMPORT VOID	_ch2_mode1_chn_byte_write_glue();
 IMPORT VOID	_ch2_mode1_chn_word_write_glue();
 IMPORT VOID	_ch2_mode1_chn_byte_fill_glue();
@@ -174,60 +181,10 @@ WRT_POINTERS mode2_handlers;
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
 #else
-/* DIVERGENCE(MVDM-HOST-DIV-136): these local table providers retain their
- * original bodies but expose their later original IFN parameter contracts. */
-VOID ega_mode1_chn_b_write IPT2(ULONG, value, ULONG, offset);
-VOID ega_mode1_chn_w_write IPT2(ULONG, value, ULONG, offset);
-VOID ega_mode1_chn_b_fill IPT3(ULONG, value, ULONG, offset, ULONG, count);
-VOID ega_mode1_chn_w_fill IPT3(ULONG, value, ULONG, offset, ULONG, count);
-VOID ega_mode1_chn_b_move IPT4(ULONG, ead, ULONG, eas, ULONG, count, ULONG, src_flag);
-VOID ega_mode1_chn_w_move IPT4(ULONG, ead, ULONG, eas, ULONG, count, ULONG, src_flag);
-
-VOID ega_mode2_chn_b_write IPT2(ULONG, value, ULONG, offset);
-VOID ega_mode2_chn_w_write IPT2(ULONG, value, ULONG, offset);
-VOID ega_mode2_chn_b_fill IPT3(ULONG, value, ULONG, offset, ULONG, count);
-VOID ega_mode2_chn_w_fill IPT3(ULONG, value, ULONG, offset, ULONG, count);
-VOID	ega_mode2_chn_b_move IPT4(ULONG, ead, ULONG, eas,
-				 ULONG, count, ULONG, src_flag);
-VOID	ega_mode2_chn_w_move IPT4(ULONG, ead, ULONG, eas,
-				 ULONG, count, ULONG, src_flag);
-
-WRT_POINTERS mode1_handlers =
-{
-      ega_mode1_chn_b_write,
-      ega_mode1_chn_w_write
-
-#ifndef	NO_STRING_OPERATIONS
-	  ,
-      ega_mode1_chn_b_fill,
-      ega_mode1_chn_w_fill,
-      ega_mode1_chn_b_move,
-      ega_mode1_chn_b_move,
-      ega_mode1_chn_w_move,
-      ega_mode1_chn_w_move,
-
-#endif	/* NO_STRING_OPERATIONS */
-
-};
- 
-WRT_POINTERS mode2_handlers =
-{
-      ega_mode2_chn_b_write,
-      ega_mode2_chn_w_write
-
-#ifndef	NO_STRING_OPERATIONS
-	  ,
-      ega_mode2_chn_b_fill,
-      ega_mode2_chn_w_fill,
-      ega_mode2_chn_b_move,
-      ega_mode2_chn_b_move,
-      ega_mode2_chn_w_move,
-      ega_mode2_chn_w_move,
-
-#endif	/* NO_STRING_OPERATIONS */
-
-};
-#endif /* A_VID || CPU_40_STYLE */
+#error Excluded unsupported non-CPU40 writer-table profile
+#endif
+#endif /* A_VID */
+#line 257
 
 
 GLOBAL VOID

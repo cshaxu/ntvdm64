@@ -1961,6 +1961,7 @@
     "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
     "macro": "SEGMENTATION",
     "line": 300,
+    "current_line": 257,
     "body_end": 306,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\egwrtm12.c",
     "original_sha256": "826aa1a6f685f7dc0d8b4362f3eb83899697d8a6e2a555739ff61e2388d254a1",
@@ -2315,6 +2316,7 @@
     "path": "src/mvdm-host/softpc.new/base/video/video.c",
     "macro": "SEGMENTATION",
     "line": 2594,
+    "current_line": 2598,
     "body_end": 2600,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
     "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
@@ -2592,6 +2594,7 @@
     "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
     "macro": "DEBUG",
     "line": 30,
+    "current_line": 31,
     "body_end": 31,
     "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
     "original_sha256": "0400c034bb5a782e81777e9fd805c07dbcd18d60ec9f1a876cfa67444577e0f8",
@@ -2623,7 +2626,7 @@
     "removed_body_lines": 9,
     "final_sha256": "66a14d6f4fb27a3eaa51b99fc270d82ea1084ca5d6299f8c9a1e48224bd0c40a",
     "selection_scope": "OPENNT-HOST-192: original MARKPATH/else boundary and retail no-op macros restored.",
-    "current_line": 39,
+    "current_line": 40,
     "current_line_evidence": "artifacts/mvdm-audit/s13-r436-input-never-frame.json"
   },
   {

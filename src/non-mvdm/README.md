@@ -2432,3 +2432,7 @@ excluded DEVL arms in BaseSrv. Other conditions remain under review. Evidence:
 OPENNT-HOST-242: restore original diagnostic and continuation mappings in
 three sources after recursive condition-tree comparison. Evidence:
 ../../artifacts/mvdm-audit/s13-r671-tree-anchor-batch.json.
+
+OPENNT-HOST-243: in public/sdk/inc/ntpsapi.h restore original condition frames around the existing NtAlertThread-only subset. Unsupported IA64 and DBG original bodies reject; retained CLIENT_ID64 and architecture frames contain no unimported NT4 private declarations. Evidence: artifacts/mvdm-audit/s13-r1258-ntpsapi-review.json.
+
+OPENNT-HOST-244: restore original condition frames in windows/core/ntuser/rtl/userrtl.h while retaining the existing same-address REBASE subset. Unimported USER declarations remain absent; unsupported DBG and FE_SB bodies and the original literal-disabled rebase branch reject. Evidence: artifacts/mvdm-audit/s13-r1259-userrtl-review.json.

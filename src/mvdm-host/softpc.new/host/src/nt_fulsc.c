@@ -23,8 +23,10 @@
  * ==========================================================================
  */
 #ifdef X86GFX
+#line 26
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
+#line 28
 #include <vdm.h>
 #include <stdlib.h>
 #include <string.h>
@@ -70,12 +72,14 @@
 GLOBAL BOOL	ConsoleInitialised = FALSE;
 GLOBAL BOOL	ConsoleNoUpdates = FALSE;
 #ifdef X86GFX
+#line 72
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
 #line 76
 GLOBAL BOOL blocked_in_gfx_mode = FALSE;  /* need to force text mode? */
 #line 77
 #ifndef PROD
+#line 78
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
 #line 80
@@ -142,8 +146,10 @@ IMPORT VOID recalc_text(int);
 IMPORT VOID enable_gfx_update_routines(VOID);
 IMPORT VOID disable_gfx_update_routines(VOID);
 #ifdef X86GFX
+#line 143
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
+#line 145
 
 
 /*
@@ -159,8 +165,10 @@ VOID setVDMCursorPosition(UTINY, PCOORD);
 VOID waitForInputFocus(VOID);
 GLOBAL int getModeType(VOID);
 #ifdef X86GFX
+#line 160
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
+#line 163
 
 /*
  * ==========================================================================
@@ -262,6 +270,7 @@ GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )
 			ConsBufferInfo.srWindow.Top + 1;
     }
 #ifdef X86GFX
+#line 543
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 #line 553
@@ -332,11 +341,14 @@ GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )
         if (vgaHeight == 25)
             sas_storew_no_check(VID_LEN, 0x1000);
 #ifdef X86GFX
+#line 617
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif	/* X86GFX */
+#line 619
 
     }
 #ifdef X86GFX
+#line 622
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
 #line 647
@@ -387,9 +399,10 @@ GLOBAL VOID ConsoleInit(VOID)
 				NULL);
 
 #ifdef X86GFX
+#line 700
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
-#line 714
+#line 705
 
     /*
      * We don't want to call paint routines until config.sys processed or if
@@ -404,6 +417,7 @@ GLOBAL VOID ConsoleInit(VOID)
 
     StartupCharHeight = charHeight;
 #ifdef X86GFX
+#line 719
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif //X86GFX
 #line 751
@@ -446,9 +460,10 @@ GLOBAL VOID ConsoleInit(VOID)
 GLOBAL VOID GfxReset(VOID)
 {
 #ifdef X86GFX
+#line 790
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
-#line 825
+#line 816
 }
 
 /***************************************************************************
@@ -470,13 +485,15 @@ GLOBAL VOID GfxReset(VOID)
 GLOBAL VOID ResetConsoleState(VOID)
 {
 #ifdef X86GFX
+#line 837
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
-#line 884
+#line 875
     SMALL_RECT	newWin;
     BOOL itfailed = FALSE;
 
 #ifdef X86GFX
+#line 879
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
 #line 882
@@ -502,11 +519,13 @@ GLOBAL VOID ResetConsoleState(VOID)
 	*/                                                                      
 #line 902
 #if 0                                                                           
+#line 903
 #error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif	//Zero
 #line 925
 
 #if 0
+#line 927
 #error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 #line 964
@@ -536,10 +555,10 @@ GLOBAL VOID ResetConsoleState(VOID)
 
 
 #ifdef X86GFX
+#line 1215
 #error Unsupported excluded original configuration
 #endif /* X86GFX */
-#line 1402
-#line 1414
+#line 1404
 
 /*
 ***************************************************************************
@@ -553,15 +572,17 @@ GLOBAL VOID ResetConsoleState(VOID)
 ** private-console fullscreen transition path.  Keep the original function
 ** body and publish it outside that unavailable product shell.
 */
+#line 1410
 GLOBAL UTINY getNtScreenState IFN0()
 {
 	return( (UTINY) sc.ScreenState );
 }
 
 #ifdef X86GFX
+#line 1415
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
-#line 1484
+#line 1465
 
 /***************************************************************************
  * Function:								   *
@@ -588,29 +609,36 @@ GLOBAL VOID DoFullScreenResume(VOID)
 #endif
 
 #ifdef X86GFX
+#line 1491
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
-#line 1573
+#line 1554
 
     // re-register with console for fullscreen switching.
     if( !RegisterConsoleVDM( VDMForWOW ?
                                 CONSOLE_REGISTER_WOW : CONSOLE_REGISTER_VDM,
 #ifdef X86GFX
+#line 1559
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #else
-#line 1581
+#line 1562
 			     NULL,
 			     NULL,
 #endif
+#line 1565
 
                              NULL,            // sectionname no longer used
                              0,               // sectionname no longer used
 			     &stateLength,
+#line 1569
 #ifndef X86GFX
+#line 1570
 			     &pDummy,
 #else
+#line 1572
 #error DIVERGENCE MVDM-HOST-DIV-511: X86GFX alternative is not selected for this source; see mirror register.
 #endif
+#line 1574
                              NULL,            // sectionname no longer used
                              0,               // sectionname no longer used
 			     textBufferSize,
@@ -620,15 +648,17 @@ GLOBAL VOID DoFullScreenResume(VOID)
 	ErrorExit();
 
 #ifdef X86GFX
+#line 1583
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #else
-#line 1607
+#line 1588
 	/*
 	** Create graphics buffer if we need one. Tim Oct 92.
 	*/
 	if( sc.ModeType==GRAPHICS )
 		graphicsResize();
 #endif
+#line 1594
 	/*
 	** Tim September 92.
 	** If window size is not suitable for a DOS app, snap-to-fit
@@ -695,9 +725,10 @@ GLOBAL VOID GfxCloseDown(VOID)
 }
 
 #ifdef X86GFX
+#line 1660
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
-#line 1784
+#line 1765
 
 
 /*
@@ -776,6 +807,7 @@ VOID copyConsoleToRegen(SHORT startCol, SHORT startLine, SHORT width,
 
     register half_word	*to;
 #ifdef X86GFX
+#line 1843
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 #line 1846
@@ -804,7 +836,9 @@ VOID copyConsoleToRegen(SHORT startCol, SHORT startLine, SHORT width,
     /* Copy the console data to the regen buffer. */
     from = consoleBuffer;
 
+#line 1871
 #ifndef X86GFX	// on MIPS we actually want to write to the VGA bitplanes.
+#line 1872
     to = EGA_planes;
     while(nChars--)
     {
@@ -815,9 +849,10 @@ VOID copyConsoleToRegen(SHORT startCol, SHORT startLine, SHORT width,
     }
     host_mark_screen_refresh();
 #else
+#line 1882
 #error DIVERGENCE MVDM-HOST-DIV-511: X86GFX alternative is not selected for this source; see mirror register.
 #endif
-#line 1921
+#line 1902
 }
 
 /***************************************************************************
@@ -953,6 +988,7 @@ VOID setVDMCursorPosition(UTINY height, PCOORD cursorPos)
     {
 #line 2026
 #ifdef MONITOR
+#line 2027
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
 #line 2029
@@ -1011,6 +1047,7 @@ int getModeType(VOID)
 }
 
 #ifdef X86GFX
+#line 2095
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
 #line 2362

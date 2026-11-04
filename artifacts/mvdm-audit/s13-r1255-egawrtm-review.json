@@ -1,0 +1,437 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\egawrtm0.c",
+      "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+      "current_sha256": "db9c142660680fc80fbb43b0f11be401df8385d470231ec48b48c86a081d3fcf",
+      "original_group": [
+        209,
+        317
+      ],
+      "prior_selection_records": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+          "line": "4",
+          "directive": "if",
+          "expression": "!(defined(NTVDM) && defined(MONITOR))",
+          "chain_start": "4",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "c9d9a5e123f4cc05aa7fd40fb3b0b4d3b0acd9f548f0bd94d75fe5ec1677f17b"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+          "line": "136",
+          "directive": "ifdef",
+          "expression": "EGG",
+          "chain_start": "136",
+          "depth": "2",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "c9d9a5e123f4cc05aa7fd40fb3b0b4d3b0acd9f548f0bd94d75fe5ec1677f17b"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+          "line": "161",
+          "directive": "ifdef",
+          "expression": "SEGMENTATION",
+          "chain_start": "161",
+          "depth": "3",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "c9d9a5e123f4cc05aa7fd40fb3b0b4d3b0acd9f548f0bd94d75fe5ec1677f17b"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+          "line": "167",
+          "directive": "ifdef",
+          "expression": "PROD",
+          "chain_start": "167",
+          "depth": "4",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "c9d9a5e123f4cc05aa7fd40fb3b0b4d3b0acd9f548f0bd94d75fe5ec1677f17b"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+          "line": "169",
+          "directive": "else",
+          "expression": "",
+          "chain_start": "167",
+          "depth": "4",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "c9d9a5e123f4cc05aa7fd40fb3b0b4d3b0acd9f548f0bd94d75fe5ec1677f17b"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+          "line": "179",
+          "directive": "ifdef",
+          "expression": "BIGEND",
+          "chain_start": "179",
+          "depth": "3",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "c9d9a5e123f4cc05aa7fd40fb3b0b4d3b0acd9f548f0bd94d75fe5ec1677f17b"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+          "line": "181",
+          "directive": "else",
+          "expression": "",
+          "chain_start": "179",
+          "depth": "3",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "c9d9a5e123f4cc05aa7fd40fb3b0b4d3b0acd9f548f0bd94d75fe5ec1677f17b"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+          "line": "211",
+          "directive": "if",
+          "expression": "defined(A_VID) || defined(CPU_40_STYLE)",
+          "chain_start": "211",
+          "depth": "3",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "c9d9a5e123f4cc05aa7fd40fb3b0b4d3b0acd9f548f0bd94d75fe5ec1677f17b"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+          "line": "230",
+          "directive": "ifdef",
+          "expression": "CPU_40_STYLE",
+          "chain_start": "230",
+          "depth": "4",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "c9d9a5e123f4cc05aa7fd40fb3b0b4d3b0acd9f548f0bd94d75fe5ec1677f17b"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+          "line": "237",
+          "directive": "else",
+          "expression": "",
+          "chain_start": "230",
+          "depth": "4",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "c9d9a5e123f4cc05aa7fd40fb3b0b4d3b0acd9f548f0bd94d75fe5ec1677f17b"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+          "line": "240",
+          "directive": "else",
+          "expression": "",
+          "chain_start": "211",
+          "depth": "3",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "c9d9a5e123f4cc05aa7fd40fb3b0b4d3b0acd9f548f0bd94d75fe5ec1677f17b"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+          "line": "268",
+          "directive": "ifndef",
+          "expression": "NO_STRING_OPERATIONS",
+          "chain_start": "268",
+          "depth": "4",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "c9d9a5e123f4cc05aa7fd40fb3b0b4d3b0acd9f548f0bd94d75fe5ec1677f17b"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+          "line": "285",
+          "directive": "ifndef",
+          "expression": "NO_STRING_OPERATIONS",
+          "chain_start": "285",
+          "depth": "4",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "c9d9a5e123f4cc05aa7fd40fb3b0b4d3b0acd9f548f0bd94d75fe5ec1677f17b"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+          "line": "389",
+          "directive": "ifdef",
+          "expression": "BIGEND",
+          "chain_start": "389",
+          "depth": "3",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "c9d9a5e123f4cc05aa7fd40fb3b0b4d3b0acd9f548f0bd94d75fe5ec1677f17b"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+          "line": "391",
+          "directive": "else",
+          "expression": "",
+          "chain_start": "389",
+          "depth": "3",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "c9d9a5e123f4cc05aa7fd40fb3b0b4d3b0acd9f548f0bd94d75fe5ec1677f17b"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+          "line": "404",
+          "directive": "ifdef",
+          "expression": "BIGEND",
+          "chain_start": "404",
+          "depth": "3",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "c9d9a5e123f4cc05aa7fd40fb3b0b4d3b0acd9f548f0bd94d75fe5ec1677f17b"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+          "line": "448",
+          "directive": "ifndef",
+          "expression": "CPU_40_STYLE",
+          "chain_start": "448",
+          "depth": "3",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "c9d9a5e123f4cc05aa7fd40fb3b0b4d3b0acd9f548f0bd94d75fe5ec1677f17b"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+          "line": "932",
+          "directive": "ifndef",
+          "expression": "CPU_40_STYLE",
+          "chain_start": "932",
+          "depth": "3",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "c9d9a5e123f4cc05aa7fd40fb3b0b4d3b0acd9f548f0bd94d75fe5ec1677f17b"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\egwrtm12.c",
+      "original_sha256": "826aa1a6f685f7dc0d8b4362f3eb83899697d8a6e2a555739ff61e2388d254a1",
+      "current_sha256": "1286acebd1f10259c265899df132015240987ff89933a746a8e55ad6e91f732a",
+      "original_group": [
+        156,
+        256
+      ],
+      "prior_selection_records": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+          "line": "4",
+          "directive": "if",
+          "expression": "!defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX) )",
+          "chain_start": "4",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "fa276b2a3769431cd3fd7adee43e296bdd96eaf6a539db6a5490fe7dacbd5c23"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+          "line": "97",
+          "directive": "ifdef",
+          "expression": "EGG",
+          "chain_start": "97",
+          "depth": "2",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "fa276b2a3769431cd3fd7adee43e296bdd96eaf6a539db6a5490fe7dacbd5c23"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+          "line": "123",
+          "directive": "ifdef",
+          "expression": "SEGMENTATION",
+          "chain_start": "123",
+          "depth": "3",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "fa276b2a3769431cd3fd7adee43e296bdd96eaf6a539db6a5490fe7dacbd5c23"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+          "line": "129",
+          "directive": "ifdef",
+          "expression": "PROD",
+          "chain_start": "129",
+          "depth": "4",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "fa276b2a3769431cd3fd7adee43e296bdd96eaf6a539db6a5490fe7dacbd5c23"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+          "line": "131",
+          "directive": "else",
+          "expression": "",
+          "chain_start": "129",
+          "depth": "4",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "fa276b2a3769431cd3fd7adee43e296bdd96eaf6a539db6a5490fe7dacbd5c23"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+          "line": "159",
+          "directive": "if",
+          "expression": "defined(A_VID) || defined(CPU_40_STYLE)",
+          "chain_start": "159",
+          "depth": "3",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "fa276b2a3769431cd3fd7adee43e296bdd96eaf6a539db6a5490fe7dacbd5c23"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+          "line": "167",
+          "directive": "ifdef",
+          "expression": "CPU_40_STYLE",
+          "chain_start": "167",
+          "depth": "4",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "fa276b2a3769431cd3fd7adee43e296bdd96eaf6a539db6a5490fe7dacbd5c23"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+          "line": "173",
+          "directive": "else",
+          "expression": "",
+          "chain_start": "167",
+          "depth": "4",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "fa276b2a3769431cd3fd7adee43e296bdd96eaf6a539db6a5490fe7dacbd5c23"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+          "line": "176",
+          "directive": "else",
+          "expression": "",
+          "chain_start": "159",
+          "depth": "3",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "fa276b2a3769431cd3fd7adee43e296bdd96eaf6a539db6a5490fe7dacbd5c23"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+          "line": "200",
+          "directive": "ifndef",
+          "expression": "NO_STRING_OPERATIONS",
+          "chain_start": "200",
+          "depth": "4",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "fa276b2a3769431cd3fd7adee43e296bdd96eaf6a539db6a5490fe7dacbd5c23"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+          "line": "218",
+          "directive": "ifndef",
+          "expression": "NO_STRING_OPERATIONS",
+          "chain_start": "218",
+          "depth": "4",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "fa276b2a3769431cd3fd7adee43e296bdd96eaf6a539db6a5490fe7dacbd5c23"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+          "line": "254",
+          "directive": "ifdef",
+          "expression": "BIGEND",
+          "chain_start": "254",
+          "depth": "3",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "fa276b2a3769431cd3fd7adee43e296bdd96eaf6a539db6a5490fe7dacbd5c23"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+          "line": "256",
+          "directive": "else",
+          "expression": "",
+          "chain_start": "254",
+          "depth": "3",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "fa276b2a3769431cd3fd7adee43e296bdd96eaf6a539db6a5490fe7dacbd5c23"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+          "line": "266",
+          "directive": "ifdef",
+          "expression": "BIGEND",
+          "chain_start": "266",
+          "depth": "3",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "fa276b2a3769431cd3fd7adee43e296bdd96eaf6a539db6a5490fe7dacbd5c23"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+          "line": "289",
+          "directive": "ifdef",
+          "expression": "BIGEND",
+          "chain_start": "289",
+          "depth": "3",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "fa276b2a3769431cd3fd7adee43e296bdd96eaf6a539db6a5490fe7dacbd5c23"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+          "line": "291",
+          "directive": "else",
+          "expression": "",
+          "chain_start": "289",
+          "depth": "3",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "fa276b2a3769431cd3fd7adee43e296bdd96eaf6a539db6a5490fe7dacbd5c23"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+          "line": "300",
+          "directive": "ifdef",
+          "expression": "SEGMENTATION",
+          "chain_start": "300",
+          "depth": "3",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "fa276b2a3769431cd3fd7adee43e296bdd96eaf6a539db6a5490fe7dacbd5c23"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+          "line": "389",
+          "directive": "ifndef",
+          "expression": "CPU_40_STYLE",
+          "chain_start": "389",
+          "depth": "3",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "fa276b2a3769431cd3fd7adee43e296bdd96eaf6a539db6a5490fe7dacbd5c23"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+          "line": "768",
+          "directive": "ifndef",
+          "expression": "CPU_40_STYLE",
+          "chain_start": "768",
+          "depth": "3",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "fa276b2a3769431cd3fd7adee43e296bdd96eaf6a539db6a5490fe7dacbd5c23"
+        }
+      ]
+    }
+  ],
+  "review": "Restored each original A_VID outer selector rather than replacing it with a combined A_VID/CPU40 expression. The original unsupported A_VID arm is explicitly rejected. Its existing project-selected CPU40 EVID-table projection is retained in the original alternative under a local CPU40 gate; the unsupported non-CPU40 legacy table body, and nested NO_STRING_OPERATIONS/BACK_M groups within it, are excluded as a whole. Selected CPU40 declarations and table storage are unchanged.",
+  "limitations": "Product build, comparison and profile tests pending; unsupported A_VID/non-CPU40 paths are intentionally not claimed."
+}

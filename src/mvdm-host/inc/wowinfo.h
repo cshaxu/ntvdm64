@@ -20,12 +20,16 @@
 #ifndef UNALIGNED
 
 #if defined(MIPS) || defined(_ALPHA_) // winnt
-#define UNALIGNED __unaligned // winnt
+#line 23
+#error Excluded unsupported original MIPS/Alpha UNALIGNED fallback
 #else                         // winnt
+#line 25
 #define UNALIGNED             // winnt
 #endif                        // winnt
+#line 27
 
 #endif
+#line 29
 
 /* XLATOFF */
 #pragma pack(2)

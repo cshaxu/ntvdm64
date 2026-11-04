@@ -1,0 +1,208 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\host_cpu.h",
+  "original_sha256": "e79dd6aa79d24e37ad8390c8879abf3436674ee101037f0e09415148a938ac95",
+  "current_sha256": "85a88d775ffb0ae1044169f99c2fae76a9001066b92e51ee7f0706b7873ee714",
+  "prior_selection_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "line": "34",
+      "directive": "ifdef",
+      "expression": "LITTLEND",
+      "chain_start": "34",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "bc4882cf190665b3e964e105995ded7fa0322c275b19a2560eb73759c990eb02"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "line": "37",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "34",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "bc4882cf190665b3e964e105995ded7fa0322c275b19a2560eb73759c990eb02"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "line": "73",
+      "directive": "ifdef",
+      "expression": "A2CPU",
+      "chain_start": "73",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "bc4882cf190665b3e964e105995ded7fa0322c275b19a2560eb73759c990eb02"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "line": "84",
+      "directive": "ifndef",
+      "expression": "EGATEST",
+      "chain_start": "84",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "bc4882cf190665b3e964e105995ded7fa0322c275b19a2560eb73759c990eb02"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "line": "85",
+      "directive": "ifdef",
+      "expression": "A2CPU",
+      "chain_start": "85",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "bc4882cf190665b3e964e105995ded7fa0322c275b19a2560eb73759c990eb02"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "line": "123",
+      "directive": "ifdef",
+      "expression": "CCPU",
+      "chain_start": "123",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "bc4882cf190665b3e964e105995ded7fa0322c275b19a2560eb73759c990eb02"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "line": "142",
+      "directive": "ifdef",
+      "expression": "A2CPU",
+      "chain_start": "142",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "bc4882cf190665b3e964e105995ded7fa0322c275b19a2560eb73759c990eb02"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "line": "179",
+      "directive": "ifdef",
+      "expression": "CCPU",
+      "chain_start": "179",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "bc4882cf190665b3e964e105995ded7fa0322c275b19a2560eb73759c990eb02"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "line": "197",
+      "directive": "ifdef",
+      "expression": "A2CPU",
+      "chain_start": "197",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "bc4882cf190665b3e964e105995ded7fa0322c275b19a2560eb73759c990eb02"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "line": "209",
+      "directive": "ifdef",
+      "expression": "CCPU",
+      "chain_start": "209",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "bc4882cf190665b3e964e105995ded7fa0322c275b19a2560eb73759c990eb02"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "line": "225",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "209",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "bc4882cf190665b3e964e105995ded7fa0322c275b19a2560eb73759c990eb02"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "line": "260",
+      "directive": "ifdef",
+      "expression": "CCPU",
+      "chain_start": "260",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "bc4882cf190665b3e964e105995ded7fa0322c275b19a2560eb73759c990eb02"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "line": "281",
+      "directive": "ifdef",
+      "expression": "A2CPU",
+      "chain_start": "281",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "bc4882cf190665b3e964e105995ded7fa0322c275b19a2560eb73759c990eb02"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "line": "288",
+      "directive": "ifdef",
+      "expression": "CCPU",
+      "chain_start": "288",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "bc4882cf190665b3e964e105995ded7fa0322c275b19a2560eb73759c990eb02"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "line": "301",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "288",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "bc4882cf190665b3e964e105995ded7fa0322c275b19a2560eb73759c990eb02"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "line": "313",
+      "directive": "ifdef",
+      "expression": "CCPU",
+      "chain_start": "313",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "bc4882cf190665b3e964e105995ded7fa0322c275b19a2560eb73759c990eb02"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "line": "331",
+      "directive": "ifdef",
+      "expression": "A2CPU",
+      "chain_start": "331",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "bc4882cf190665b3e964e105995ded7fa0322c275b19a2560eb73759c990eb02"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "line": "346",
+      "directive": "ifdef",
+      "expression": "A2CPU",
+      "chain_start": "346",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "bc4882cf190665b3e964e105995ded7fa0322c275b19a2560eb73759c990eb02"
+    }
+  ],
+  "review": "Original CPU30 outer arm stays rejected. In the selected outer alternative, restored original A2CPU, EGATEST and CCPU condition frames at their physical source lines; unsupported A2CPU bodies reject. The selected CCPU and non-EGATEST skeletons remain empty because the original legacy register accessor declarations were not part of the previously adopted host_cpu subset. The selected CPU40 reg union and its existing little-endian owner binding are unchanged. Nested groups inside the rejected CPU30 arm remain omitted.",
+  "limitations": "Build, binary comparison and positive/negative profile tests pending; omitted legacy accessor declarations are not claimed implemented."
+}

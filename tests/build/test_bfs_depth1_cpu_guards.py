@@ -1236,7 +1236,8 @@ print('PASS clres first-depth original bitmap guard and continuations')
 
 lines = (repo / 'src/mvdm-host/softpc.new/host/src/nt_fulsc.c').read_text(encoding='latin1').splitlines()
 i = lines.index('#line 902')
-if not lines[i + 1].lstrip().startswith('#if 0') or not lines[i + 2].lstrip().startswith('#error '):
+j = guard_error_index(lines, i + 1)
+if not lines[i + 1].lstrip().startswith('#if 0') or not lines[j].lstrip().startswith('#error '):
     raise SystemExit('nt_fulsc first disabled original guard missing')
 if '#line 925' not in lines[i:i + 6] or '#line 964' not in lines[i:i + 12]:
     raise SystemExit('nt_fulsc original continuation lines missing')

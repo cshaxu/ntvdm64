@@ -54,8 +54,10 @@
 #include "pmvdm.h"
 
 #ifdef HUNTER
+#line 56
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif  //HUNTER
+#line 60
 
 
 /*================================================================
@@ -65,8 +67,10 @@ IMPORT SHORT gfi_floppy_active (UTINY hostID, BOOL active, CHAR *err);
 IMPORT ULONG xmsMemorySize;
 
 #ifdef HUNTER
+#line 69
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
+#line 112
 
 
 PIF_DATA pfdata; /* data structure for holding all the relavent information
@@ -146,8 +150,10 @@ VOID host_fdisk_valid
 VOID process_pif_exe (char *PifName)
 {
 #ifdef X86GFX
+#line 191
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
+#line 194
 
     GetPIFData(&pfdata, PifName);
 
@@ -190,9 +196,10 @@ VOID process_pif_exe (char *PifName)
     else
 	IdleDisabledFromPIF = TRUE;
 #ifdef X86GFX
+#line 236
 #error Unsupported excluded original configuration
 #endif  /* X86GFX */
-#line 235
+#line 278
 
 }
 
@@ -235,8 +242,10 @@ GLOBAL VOID config( VOID )
     ULONG dpmiMemorySize, vdmMemorySize;
 
 #ifdef HUNTER
+#line 320
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
+#line 331
 
          /*
           *  Set the window title to a unique string, to get
@@ -458,8 +467,10 @@ GLOBAL VOID config( VOID )
 #line 523
 
 #ifndef PROD
+#line 525
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 530
 
 	sas_init(vdmMemorySize*ONEKB);
 #ifdef CPU_40_STYLE
@@ -473,8 +484,10 @@ GLOBAL VOID config( VOID )
 
 
 #ifdef X86GFX
+#line 545
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
+#line 549
 
            //  Now see if we can get the console window handle
         if (!VDMForWOW)  {
@@ -487,8 +500,10 @@ GLOBAL VOID config( VOID )
             if (!hWndConsole) {
                 hWndConsole = HWND_DESKTOP;
 #ifndef PROD
+#line 561
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 563
                 }
             }
 
@@ -634,8 +649,10 @@ config_inquire(UTINY hostID, ConfigValues *values)
 
 
 #ifdef HUNTER
+#line 708
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
+#line 738
 
 		case C_COM_SYNCWRITE:
 		    values->index = (short)read_profile_int(PROFILE_COM_SYNCWRITE);
@@ -718,12 +735,13 @@ struct
 void host_runtime_init()
 {
 #ifdef MONITOR
+#line 820
 #error Excluded unsupported monitor floating-point status
 #else
-#line 738
+#line 844
     runtime_status.npx_enabled = TRUE;
 #endif
-#line 739
+#line 846
 }
 
 short host_runtime_inquire IFN1(UTINY, what)
@@ -738,8 +756,10 @@ short host_runtime_inquire IFN1(UTINY, what)
                         return (runtime_status.sound_on);
                 default:
 #ifndef PROD
+#line 860
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 862
                         ;
         }
 }
@@ -759,8 +779,10 @@ void host_runtime_set IFN2(UTINY, what, SHORT, val)
                         break;
                 default:
 #ifndef PROD
+#line 881
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 883
                         ;
         }
 }
@@ -768,8 +790,10 @@ void host_runtime_set IFN2(UTINY, what, SHORT, val)
 
 
 #ifdef HUNTER
+#line 890
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
+#line 971
 
 /*
  * ===========================================================================
@@ -778,8 +802,10 @@ void host_runtime_set IFN2(UTINY, what, SHORT, val)
  */
 
 #ifdef HUNTER
+#line 979
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
+#line 1103
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::::::: Read auto close time ::::::::::::::::::::::::::::*/

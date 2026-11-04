@@ -90,12 +90,16 @@ char *szWmDdrvDebugStrings[] =
 #ifndef UNALIGNED
 
 #if defined(MIPS) || defined(_ALPHA_) // winnt
-#define UNALIGNED __unaligned         // winnt
+#line 93
+#error Excluded unsupported original MIPS/Alpha UNALIGNED fallback
 #else                                 // winnt
+#line 95
 #define UNALIGNED                     // winnt
 #endif                                // winnt
+#line 97
 
 #endif
+#line 99
 
 
 #endif       // defined(wowfax16)

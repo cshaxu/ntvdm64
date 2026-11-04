@@ -1,0 +1,14 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\xt.c",
+  "original_sha256": "a95cda1054b1840df73dbcec6e23cacbee1ddf2fd1ed071318c8c9252f21c0cc",
+  "current_sha256": "e0f3547c1d58b42c24e38310b5157a187e2719b4e70590f0633183b6b96af474",
+  "review": "The original CCPU&&!CPU_30_STYLE state-carrier and !MAC_LIKE&&!CPU_30_STYLE parity-table outer selectors are retained. Existing local CPU40 exclusions MVDM-HOST-DIV-147/155 remove the obsolete separate register carrier and duplicate parity owner; the original nested MAC_LIKE group in the excluded local state-carrier region does not survive the #error. Original CPU30 branch remains rejected. Actual selected x86 objects contain pf_table in CCPU c_main.obj, not xt.obj; all 256 parity entries match the pinned original table exactly. No source change.",
+  "symbol_evidence": {
+    "xt_sha256": "cc405106f02e66b2de59063d9814dd479cf80362276f5ba2ea0ded78f1a56ef9",
+    "cmain_sha256": "f2c845078b6687240b937877ea0a3e6755695715ee6b3786315466c42c8e0b11",
+    "parity_entries": 256,
+    "parity_equal": true
+  },
+  "limitations": "Static symbol ownership and table equality do not independently prove every register transition or exception semantic; the present review is conditional structure, not CPU behavioral certification."
+}

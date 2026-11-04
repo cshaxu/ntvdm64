@@ -1507,9 +1507,12 @@ GLOBAL void vd_write_char_attrib IFN0()
 #else
 		for(i = 0; i < getCX(); i++)
 		{
+#line 1511
 #if ( defined(NTVDM) && defined(MONITOR) && !defined(MVDM_STANDALONE_SAS_VIDEO) ) || defined(GISP_SVGA)/* No Ega planes... */
-                        *((unsigned short *)( video_pc_low_regen + cpos)) = (getBL() << 8) | getAL();
+#line 1512
+#error Excluded unsupported original monitor or GISP video pointer
 #else
+#line 1514
 #ifdef	EGG
 			if ( ( (video_adapter != CGA) && (EGA_CPU.chain != CHAIN2) )
 #ifdef CPU_40_STYLE
@@ -1521,6 +1524,7 @@ GLOBAL void vd_write_char_attrib IFN0()
 #endif	/* EGG */
 				(*bios_ch2_word_wrt_fn)( (getBL() << 8) | getAL(), cpos );
 #endif	/* NTVDM & MONITOR */
+#line 1525
 			cpos += 2;
 		}
 #endif
@@ -2663,33 +2667,34 @@ GLOBAL void video_init IFN0()
 #line 2647
 
 #ifdef NTVDM
+#line 2832
 void enable_stream_io(void)
 {
 #ifdef MONITOR
+#line 2835
 /* for non RISC machine the buffer is from 16bits code bop from spckbd.asm */
     host_enable_stream_io();
     stream_io_enabled = TRUE;
 #else
-    stream_io_buffer = (half_word *)malloc(STREAM_IO_BUFFER_SIZE_32);
-    if (stream_io_buffer != NULL) {
-	host_enable_stream_io();
-	stream_io_dirty_count_ptr = &stream_io_dirty_count_32;
-	stream_io_buffer_size = STREAM_IO_BUFFER_SIZE_32;
-	stream_io_enabled = TRUE;
-	*stream_io_dirty_count_ptr = 0;
-    }
+#line 2839
+#error Excluded unsupported original non-MONITOR stream buffer allocation
 #endif
+#line 2848
 
 }
 
+#line 2851
 void disable_stream_io(void)
 {
 
     stream_io_update();
     stream_io_enabled = FALSE;
     host_disable_stream_io();
+#line 2857
 #ifndef MONITOR
-    free(stream_io_buffer);
+#line 2858
+#error Excluded unsupported original non-MONITOR stream buffer release
 #endif
+#line 2860
 }
 #endif

@@ -208,7 +208,14 @@ typedef	union {
 /* DIVERGENCE(MVDM-HOST-DIV-079): the selected CCPU40 C-VID profile needs
  * this original writer-table declaration block.  The legacy A_VID-only
  * condition otherwise selects an obsolete mover table with no CCPU40 body. */
-#if defined(A_VID) || defined(CPU_40_STYLE)
+#line 209
+#ifdef A_VID
+#line 210
+#error Excluded unsupported original A_VID writer-table profile
+#else
+#line 264
+#if defined(CPU_40_STYLE)
+#line 210
 IMPORT VOID	_ch2_copy_byte_write();
 IMPORT VOID	_ch2_copy_word_write();
 IMPORT VOID	_ch2_copy_byte_fill_glue();
@@ -238,62 +245,10 @@ WRT_POINTERS mode0_gen_handlers;
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
 #else
-/* DIVERGENCE(MVDM-HOST-DIV-136): these local table providers retain their
- * original bodies but expose their later original IFN parameter contracts. */
-VOID ega_copy_b_write IPT2(ULONG, value, ULONG, offset);
-VOID ega_copy_w_write IPT2(ULONG, value, ULONG, offset);
-VOID ega_copy_b_fill IPT3(ULONG, value, ULONG, offset, ULONG, count);
-VOID ega_copy_w_fill IPT3(ULONG, value, ULONG, offset, ULONG, count);
-VOID  ega_copy_b_move_fwd   IPT4(ULONG,  offset, ULONG, eas, ULONG, count, ULONG, src_flag );
-VOID  ega_copy_b_move_bwd   IPT4(ULONG,  offset, ULONG, eas, ULONG, count, ULONG, src_flag );
-VOID  ega_copy_w_move_fwd   IPT4(ULONG,  offset, ULONG, eas, ULONG, count, ULONG, src_flag );
-VOID  ega_copy_w_move_bwd   IPT4(ULONG,  offset, ULONG, eas, ULONG, count, ULONG, src_flag );
-			 
-
-VOID ega_mode0_chn_b_write IPT2(ULONG, value, ULONG, offset);
-VOID ega_mode0_chn_w_write IPT2(ULONG, value, ULONG, offset);
-VOID ega_mode0_chn_b_fill IPT3(ULONG, value, ULONG, offset, ULONG, count);
-VOID ega_mode0_chn_w_fill IPT3(ULONG, value, ULONG, offset, ULONG, count);
-VOID  ega_mode0_chn_b_move_fwd   IPT4(ULONG, ead, ULONG, eas, ULONG, count, ULONG, src_flag );
-VOID  ega_mode0_chn_b_move_bwd   IPT4(ULONG, ead, ULONG, eas, ULONG, count, ULONG, src_flag );
-VOID  ega_mode0_chn_w_move_fwd   IPT4(ULONG, ead, ULONG, eas, ULONG, count, ULONG, src_flag );
-VOID  ega_mode0_chn_w_move_bwd   IPT4(ULONG, ead, ULONG, eas, ULONG, count, ULONG, src_flag );
-
-
-WRT_POINTERS mode0_copy_handlers =
-{
-      ega_copy_b_write,
-      ega_copy_w_write
-
-#ifndef	NO_STRING_OPERATIONS
-	  ,
-      ega_copy_b_fill,
-      ega_copy_w_fill,
-      ega_copy_b_move_fwd,
-      ega_copy_b_move_bwd,
-      ega_copy_w_move_fwd,
-      ega_copy_w_move_bwd,
-
-#endif	/* NO_STRING_OPERATIONS */
-};
-
-WRT_POINTERS mode0_gen_handlers =
-{
-      ega_mode0_chn_b_write,
-      ega_mode0_chn_w_write
-
-#ifndef	NO_STRING_OPERATIONS
-	  ,
-      ega_mode0_chn_b_fill,
-      ega_mode0_chn_w_fill,
-      ega_mode0_chn_b_move_fwd,
-      ega_mode0_chn_b_move_bwd,
-      ega_mode0_chn_w_move_fwd,
-      ega_mode0_chn_w_move_bwd,
-
-#endif	/* NO_STRING_OPERATIONS */
-};
-#endif /* A_VID || CPU_40_STYLE */
+#error Excluded unsupported non-CPU40 writer-table profile
+#endif
+#endif /* A_VID */
+#line 318
 
 /*
 [7.2 INTERMODULE PROCEDURE DEFINITIONS]				*/

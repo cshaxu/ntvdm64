@@ -2,7 +2,7 @@
   "baseline_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r379.zip",
   "graph_inventory": "s13-r473-all-graph-coverage.json",
   "total_observed_files": 1055,
-  "completed_files": 1034,
+  "completed_files": 1047,
   "records": [
     {
       "path": "src/mvdm-host/dbg/dbg.c",
@@ -1103,19 +1103,19 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "deferred-depth1-needs-guest-context",
-      "evidence": "s13-r1054-wowcomm-shared-context.json"
+      "status": "completed-original-conditional-tree-with-guest-shared-binding",
+      "evidence": "s13-r1257-wowcomm-mmcb-shared-review.json"
     },
     {
       "path": "src/mvdm-host/inc/wowfax.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowfax.h",
-      "current_sha256": "97c6c40dc2d0565a21dc1be4112fe24f138b10ddbb55fbd29e55da972a2a2c84",
+      "current_sha256": "6ad84c0b88cca63576bfaaaf3009c46aec2f672149a2116bd062983b092808d0",
       "original_sha256": "97c6c40dc2d0565a21dc1be4112fe24f138b10ddbb55fbd29e55da972a2a2c84",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "deferred-depth1-needs-guest-context",
-      "evidence": "s13-r779-wowfax-header-contexts.json"
+      "status": "completed-original-conditional-tree-with-guest-shared-binding",
+      "evidence": "s13-r1256-wow-shared-review.json"
     },
     {
       "path": "src/mvdm-host/inc/wowgdi.h",
@@ -1130,13 +1130,13 @@
     {
       "path": "src/mvdm-host/inc/wowinfo.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowinfo.h",
-      "current_sha256": "a0a125eedf4138d353fea1f97316331fd5a8acfb82dbd80d7abfe5dedf350026",
+      "current_sha256": "e7b736e5b8b74c7e87601f9fba745436cd3bbb3610de6ccf8a348ec267e88940",
       "original_sha256": "a0a125eedf4138d353fea1f97316331fd5a8acfb82dbd80d7abfe5dedf350026",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "deferred-depth1-needs-guest-context",
-      "evidence": "s13-r781-wowinfo-header-contexts.json"
+      "status": "completed-original-conditional-tree-with-guest-shared-binding",
+      "evidence": "s13-r1256-wow-shared-review.json"
     },
     {
       "path": "src/mvdm-host/inc/wowkbd.h",
@@ -1168,8 +1168,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "deferred-depth1-needs-guest-context",
-      "evidence": "s13-r1055-wowmmcb-shared-context.json"
+      "status": "completed-original-conditional-tree-with-guest-shared-binding",
+      "evidence": "s13-r1257-wowcomm-mmcb-shared-review.json"
     },
     {
       "path": "src/mvdm-host/inc/wowmmed.h",
@@ -6466,8 +6466,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r892-xt-source-contexts.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1253-xt-condition-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
@@ -6709,26 +6709,26 @@
     {
       "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\egawrtm0.c",
-      "current_sha256": "4bffdfa1a595285dd30b6004071ff743aac622054a505f1996dc2efb3536a305",
+      "current_sha256": "db9c142660680fc80fbb43b0f11be401df8385d470231ec48b48c86a081d3fcf",
       "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r898-ordered-positive-witnesses.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1255-egawrtm-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\egwrtm12.c",
-      "current_sha256": "f90a97e3ef559d1cc1a7c587d1cd298bfd8f746aa081bfc0c3d3286cc47e2786",
+      "current_sha256": "1286acebd1f10259c265899df132015240987ff89933a746a8e55ad6e91f732a",
       "original_sha256": "826aa1a6f685f7dc0d8b4362f3eb83899697d8a6e2a555739ff61e2388d254a1",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r898-ordered-positive-witnesses.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1255-egawrtm-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
@@ -6820,14 +6820,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
-      "current_sha256": "16328f9ebb95bab8573f7da84b6fa5b647da19a9bc5c8ef13ec70103304688dc",
+      "current_sha256": "0cd2c6fe1eaf184e94293635e484e987f6aeb63e7032636240440b02a6b926f5",
       "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "deferred-depth1-contexts-unverified",
-      "evidence": "s13-r902-video-source-review.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1254-video-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video_io.c",
@@ -6880,14 +6880,14 @@
     {
       "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\host_cpu.h",
-      "current_sha256": "0fa01faf650135422c848f9950123294856201a610fa9f5f26f2a54acd1c13f0",
+      "current_sha256": "85a88d775ffb0ae1044169f99c2fae76a9001066b92e51ee7f0706b7873ee714",
       "original_sha256": "e79dd6aa79d24e37ad8390c8879abf3436674ee101037f0e09415148a938ac95",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r905-hostcpu-context.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1252-hostcpu-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
@@ -7286,14 +7286,14 @@
     {
       "path": "src/mvdm-host/softpc.new/host/src/config.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
-      "current_sha256": "e4501b74ba17c479270254ec6e8c3b8f75c12eddcc27a6675d049bf594dbc4ff",
+      "current_sha256": "69f9880338d76d521d28b12158e3fb58ea56eaea27780a4900e94666f4173308",
       "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "deferred-depth1-contexts-unverified",
-      "evidence": "s13-r915-config-structure-review.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1250-config-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
@@ -7473,14 +7473,14 @@
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
-      "current_sha256": "ef451daedec6626dacf7bc88768ba5d1292ab58bad109579577bcaa79c9caf8d",
+      "current_sha256": "7a7f43d4a57ef02953a628a6f82a23f305da8145e6a626b08b22c5b9c23e4d28",
       "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "deferred-depth1-original-alignment",
-      "evidence": "s13-r923-ntfulsc-structure-review.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1251-ntfulsc-contextual-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
@@ -11339,7 +11339,7 @@
     {
       "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
       "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntpsapi.h",
-      "current_sha256": "d95211bf3a8bbb67769b03c00ebcaeb1d94d0cde1f0a11d418ba2b239c6803a4",
+      "current_sha256": "51e043c613163927f1edd896032ab18693276f936a741410f42e71b526d8f045",
       "original_sha256": "cafd48b3a9c672c6a18503d4565e7864a284ec029f63ae04ff221c58a2db5148",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\frontend\\build.ninja:deps",
@@ -11353,8 +11353,8 @@
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r973-ordered-positive-witnesses.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1258-ntpsapi-review.json"
     },
     {
       "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
@@ -12218,14 +12218,14 @@
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
       "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\userrtl.h",
-      "current_sha256": "89746a9d75726978c9ccac667b92c98c72596e1c9c0fcc12bfbbec9548ce2459",
+      "current_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
       "original_sha256": "b632fc75232db7c2bc95baf758820c087a23f7e17a61c361e47c4687a4f543d3",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "deferred-depth1-contexts-unverified",
-      "evidence": "s13-r1045-userrtl-context-review.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1259-userrtl-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",

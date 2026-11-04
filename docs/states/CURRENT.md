@@ -11,7 +11,7 @@ and register files even when no source edit is needed. If binaries have no
 substantive change, reuse test evidence for the P; otherwise run Full before
 publication. [Progress](../../artifacts/mvdm-audit/s13-bfs-progress.md);
 [observed per-file inventory](../../artifacts/mvdm-audit/s13-r489-per-file-observed-inventory.json).
-Latest checkpoint: [r1249](../../artifacts/mvdm-audit/s13-r1249-delivery.md).
+Latest checkpoint: [r1259](../../artifacts/mvdm-audit/s13-r1259-delivery.md).
 The 1,056-file [census](../../artifacts/mvdm-audit/s13-r624-current-file-census.json)
 includes one product-generator input; supported-context verification remains open.
 

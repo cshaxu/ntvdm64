@@ -2986,3 +2986,9 @@ other observed paths. Evidence: ../../artifacts/mvdm-audit/s13-r752-dem-header-b
 MVDM-HOST-DIV-800: remove the dbg.c include of the historical ntdbg.h whose entire body was suppressed by the sole product debugger compile's _NTDBG_ definition; remove that unused header and the now-unnecessary compiler define. Other debugger bindings remain unchanged. Evidence: artifacts/mvdm-audit/s13-r1227-ntdbg-unselected.json.
 
 MVDM-HOST-DIV-801: remove three inactive includes of the historical ntdddisk.h; its original body is guarded out before every product include and the selected SDK definitions remain. Seventeen actual x86 object preprocessors and matching x64 reference commands are recorded in artifacts/mvdm-audit/s13-r1233-ntdddisk-preprocess.json. The unselected mirror header is removed.
+
+MVDM-HOST-DIV-802: in base/video/video.c reject the original monitor/GISP direct video-pointer arm and the non-MONITOR stream-buffer allocation/release arms. The actual video object uses the standalone SAS-video selector with MONITOR defined, retaining its original selected SAS video and stream path; no hardware monitor is introduced. Evidence: artifacts/mvdm-audit/s13-r1254-video-review.json.
+
+MVDM-HOST-DIV-803: restore each original A_VID writer-table condition in egawrtm0.c and egwrtm12.c. Reject unselected A_VID and non-CPU40 profiles; retain the existing CPU40 EVID-table projection, including its selected declarations. The former non-CPU40 legacy table bodies and their nested conditions are excluded as a whole. Evidence: artifacts/mvdm-audit/s13-r1255-egawrtm-review.json.
+
+MVDM-HOST-DIV-804: reject only the original MIPS/Alpha UNALIGNED fallback in shared wowfax.h and wowinfo.h; preserve the x86 guest fallback, WOW16 branches and DEBUG declarations. These shared headers remain guest-source dependencies and no guest was compiled or modified. Evidence: artifacts/mvdm-audit/s13-r1256-wow-shared-review.json.

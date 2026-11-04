@@ -1,0 +1,156 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/inc/wowfax.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowfax.h",
+      "original_sha256": "97c6c40dc2d0565a21dc1be4112fe24f138b10ddbb55fbd29e55da972a2a2c84",
+      "current_sha256": "6ad84c0b88cca63576bfaaaf3009c46aec2f672149a2116bd062983b092808d0",
+      "original_mips_alpha_selector": 92,
+      "prior_selection_records": [
+        {
+          "path": "src/mvdm-host/inc/wowfax.h",
+          "line": "37",
+          "directive": "ifdef",
+          "expression": "DEBUG",
+          "chain_start": "37",
+          "depth": "1",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "96d4925f0fc2019cbed210fc6209b7215f3ae32e8bbcb2cef88c5b08c83f505e"
+        },
+        {
+          "path": "src/mvdm-host/inc/wowfax.h",
+          "line": "38",
+          "directive": "ifdef",
+          "expression": "DEFINE_DDRV_DEBUG_STRINGS",
+          "chain_start": "38",
+          "depth": "2",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "96d4925f0fc2019cbed210fc6209b7215f3ae32e8bbcb2cef88c5b08c83f505e"
+        },
+        {
+          "path": "src/mvdm-host/inc/wowfax.h",
+          "line": "76",
+          "directive": "if",
+          "expression": "defined(_WOWFAX16_)",
+          "chain_start": "76",
+          "depth": "1",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "96d4925f0fc2019cbed210fc6209b7215f3ae32e8bbcb2cef88c5b08c83f505e"
+        },
+        {
+          "path": "src/mvdm-host/inc/wowfax.h",
+          "line": "90",
+          "directive": "ifndef",
+          "expression": "UNALIGNED",
+          "chain_start": "90",
+          "depth": "2",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "96d4925f0fc2019cbed210fc6209b7215f3ae32e8bbcb2cef88c5b08c83f505e"
+        },
+        {
+          "path": "src/mvdm-host/inc/wowfax.h",
+          "line": "92",
+          "directive": "if",
+          "expression": "defined(MIPS) || defined(_ALPHA_)",
+          "chain_start": "92",
+          "depth": "3",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "96d4925f0fc2019cbed210fc6209b7215f3ae32e8bbcb2cef88c5b08c83f505e"
+        },
+        {
+          "path": "src/mvdm-host/inc/wowfax.h",
+          "line": "94",
+          "directive": "else",
+          "expression": "",
+          "chain_start": "92",
+          "depth": "3",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "96d4925f0fc2019cbed210fc6209b7215f3ae32e8bbcb2cef88c5b08c83f505e"
+        },
+        {
+          "path": "src/mvdm-host/inc/wowfax.h",
+          "line": "161",
+          "directive": "ifndef",
+          "expression": "_DEF_WOW32_",
+          "chain_start": "161",
+          "depth": "1",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "96d4925f0fc2019cbed210fc6209b7215f3ae32e8bbcb2cef88c5b08c83f505e"
+        },
+        {
+          "path": "src/mvdm-host/inc/wowfax.h",
+          "line": "220",
+          "directive": "ifndef",
+          "expression": "_WOWFAX16_",
+          "chain_start": "220",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "96d4925f0fc2019cbed210fc6209b7215f3ae32e8bbcb2cef88c5b08c83f505e"
+        },
+        {
+          "path": "src/mvdm-host/inc/wowfax.h",
+          "line": "273",
+          "directive": "ifdef",
+          "expression": "WOWFAX_INC_COMMON_CODE",
+          "chain_start": "273",
+          "depth": "1",
+          "x86": "selected",
+          "x64": "unobserved",
+          "sha256": "96d4925f0fc2019cbed210fc6209b7215f3ae32e8bbcb2cef88c5b08c83f505e"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/wowinfo.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowinfo.h",
+      "original_sha256": "a0a125eedf4138d353fea1f97316331fd5a8acfb82dbd80d7abfe5dedf350026",
+      "current_sha256": "e7b736e5b8b74c7e87601f9fba745436cd3bbb3610de6ccf8a348ec267e88940",
+      "original_mips_alpha_selector": 22,
+      "prior_selection_records": [
+        {
+          "path": "src/mvdm-host/inc/wowinfo.h",
+          "line": "20",
+          "directive": "ifndef",
+          "expression": "UNALIGNED",
+          "chain_start": "20",
+          "depth": "1",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "9d93877c7253d3c5f90eba3e72d554d6534fc25b4b78624a8281eaaef89c79e5"
+        },
+        {
+          "path": "src/mvdm-host/inc/wowinfo.h",
+          "line": "22",
+          "directive": "if",
+          "expression": "defined(MIPS) || defined(_ALPHA_)",
+          "chain_start": "22",
+          "depth": "2",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "9d93877c7253d3c5f90eba3e72d554d6534fc25b4b78624a8281eaaef89c79e5"
+        },
+        {
+          "path": "src/mvdm-host/inc/wowinfo.h",
+          "line": "24",
+          "directive": "else",
+          "expression": "",
+          "chain_start": "22",
+          "depth": "2",
+          "x86": "not-selected-in-observed-contexts",
+          "x64": "unobserved",
+          "sha256": "9d93877c7253d3c5f90eba3e72d554d6534fc25b4b78624a8281eaaef89c79e5"
+        }
+      ]
+    }
+  ],
+  "review": "Original condition trees remain. Preserved WOW16 selector, both DEBUG/DEFINE_DDRV_DEBUG_STRINGS branches and _DEF_WOW32_ fallback because guest wowexfax.c explicitly defines _WOWFAX16_ and DEFINE_DDRV_DEBUG_STRINGS and the guest makefile supports DEBUG; preserved the UNALIGNED fallback needed by x86 guest source. Only the unselected MIPS/Alpha UNALIGNED definitions were replaced with original-anchored errors; both current host WOW32 and original 16-bit guest consumers target x86.",
+  "limitations": "Guest sources and images were not changed or built; guest compatibility of retained source is a static source finding, not an executed guest-build claim. Product build and preprocessor controls pending."
+}

@@ -74,5 +74,79 @@ typedef union
         word pad;
         } bit;
     } reg;
+
+#line 163
+#ifdef A2CPU
+#line 164
+#error Excluded unsupported original A2CPU register carrier
+#endif
+#line 179
+
+#line 187
+#ifndef EGATEST
+#line 188
+#line 188
+#ifdef A2CPU
+#line 189
+#error Excluded unsupported original A2CPU register carrier
+#endif
+#line 194
+#line 229
+#ifdef CCPU
+#line 230
+#endif
+#line 247
+#line 248
+#ifdef A2CPU
+#line 249
+#error Excluded unsupported original A2CPU register carrier
+#endif
+#line 256
+#line 290
+#ifdef CCPU
+#line 291
+#endif
+#line 307
+#line 308
+#ifdef A2CPU
+#line 309
+#error Excluded unsupported original A2CPU register carrier
+#endif
+#line 315
+#endif /* EGATEST */
+#line 316
+
+#line 357
+#ifdef CCPU
+#line 358
+#endif
+#line 374
+
+#line 375
+#ifdef A2CPU
+#line 376
+#error Excluded unsupported original A2CPU register carrier
+#endif
+#line 383
+
+#line 419
+#ifdef CCPU
+#line 420
+#endif
+#line 436
+
+#line 437
+#ifdef A2CPU
+#line 438
+#error Excluded unsupported original A2CPU register carrier
+#endif
+#line 444
+
+#line 456
+#ifdef A2CPU
+#line 457
+#error Excluded unsupported original A2CPU register carrier
+#endif
+#line 505
 #endif /* CPU_30_STYLE */
 #line 507

@@ -1,0 +1,17 @@
+{
+  "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntpsapi.h",
+  "original_sha256": "cafd48b3a9c672c6a18503d4565e7864a284ec029f63ae04ff221c58a2db5148",
+  "current_sha256": "51e043c613163927f1edd896032ab18693276f936a741410f42e71b526d8f045",
+  "original_condition_groups": [
+    138,
+    386,
+    396,
+    463,
+    799,
+    825,
+    832
+  ],
+  "review": "Restored all original inner condition frames inside the original _NTPSAPI_ guard, in original order. IA64 and DBG-only bodies reject in the supported release profiles; both _X86_ alternatives and the CLIENT_ID64_DEFINED frame remain empty because the corresponding NT4 private types were outside the existing NtAlertThread-only subset. The project-owned OPENNT_ADAPTER_NT_ALERT_THREAD selector and selected NtAlertThread declaration are unchanged.",
+  "limitations": "Build, supported-profile controls and binary comparison pending. The empty frames do not implement the omitted NT4 process API types."
+}

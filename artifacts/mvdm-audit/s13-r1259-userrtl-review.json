@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\userrtl.h",
+  "original_sha256": "b632fc75232db7c2bc95baf758820c087a23f7e17a61c361e47c4687a4f543d3",
+  "current_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+  "review": "Restored original _USERK_, DBG, RIP_COMPONENT, WOW and FE_SB frames inside the retained _USERRTL_ guard, including the original literal-disabled nested rebase branch. DBG/FE_SB unsupported arms and the literal-disabled arm reject with original line anchors. The existing same-address REBASE macros remain outside these frames as the documented OPENNT-HOST-104 local projection so both actual caller contexts keep their current behavior. Omitted original kernel/client USER declarations remain omitted.",
+  "limitations": "Product build, byte comparison and profile tests pending. Empty retained frames do not implement omitted declarations."
+}

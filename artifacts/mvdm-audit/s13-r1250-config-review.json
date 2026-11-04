@@ -1,0 +1,252 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/config.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
+  "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+  "current_sha256": "69f9880338d76d521d28b12158e3fb58ea56eaea27780a4900e94666f4173308",
+  "prior_selection_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "line": "48",
+      "directive": "ifdef",
+      "expression": "LIM",
+      "chain_start": "48",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "ce1eeea9e2f48cabecca5c2a2688b5c4381b95817e223de282915e297fd0ee70"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "line": "56",
+      "directive": "ifdef",
+      "expression": "HUNTER",
+      "chain_start": "56",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "ce1eeea9e2f48cabecca5c2a2688b5c4381b95817e223de282915e297fd0ee70"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "line": "67",
+      "directive": "ifdef",
+      "expression": "HUNTER",
+      "chain_start": "67",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "ce1eeea9e2f48cabecca5c2a2688b5c4381b95817e223de282915e297fd0ee70"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "line": "79",
+      "directive": "ifdef",
+      "expression": "LIM",
+      "chain_start": "79",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "ce1eeea9e2f48cabecca5c2a2688b5c4381b95817e223de282915e297fd0ee70"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "line": "148",
+      "directive": "ifdef",
+      "expression": "X86GFX",
+      "chain_start": "148",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "ce1eeea9e2f48cabecca5c2a2688b5c4381b95817e223de282915e297fd0ee70"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "line": "192",
+      "directive": "ifdef",
+      "expression": "X86GFX",
+      "chain_start": "192",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "ce1eeea9e2f48cabecca5c2a2688b5c4381b95817e223de282915e297fd0ee70"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "line": "204",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "204",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "ce1eeea9e2f48cabecca5c2a2688b5c4381b95817e223de282915e297fd0ee70"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "line": "217",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "217",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "ce1eeea9e2f48cabecca5c2a2688b5c4381b95817e223de282915e297fd0ee70"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "line": "276",
+      "directive": "ifdef",
+      "expression": "HUNTER",
+      "chain_start": "276",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "ce1eeea9e2f48cabecca5c2a2688b5c4381b95817e223de282915e297fd0ee70"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "line": "439",
+      "directive": "ifdef",
+      "expression": "LIM",
+      "chain_start": "439",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "ce1eeea9e2f48cabecca5c2a2688b5c4381b95817e223de282915e297fd0ee70"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "line": "460",
+      "directive": "if",
+      "expression": "(defined(i386) || defined(_M_IX86)) && !defined(CPU_40_STYLE)",
+      "chain_start": "460",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "ce1eeea9e2f48cabecca5c2a2688b5c4381b95817e223de282915e297fd0ee70"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "line": "463",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "460",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "ce1eeea9e2f48cabecca5c2a2688b5c4381b95817e223de282915e297fd0ee70"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "line": "478",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "478",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "ce1eeea9e2f48cabecca5c2a2688b5c4381b95817e223de282915e297fd0ee70"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "line": "483",
+      "directive": "ifdef",
+      "expression": "CPU_40_STYLE",
+      "chain_start": "483",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "ce1eeea9e2f48cabecca5c2a2688b5c4381b95817e223de282915e297fd0ee70"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "line": "493",
+      "directive": "ifdef",
+      "expression": "X86GFX",
+      "chain_start": "493",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "ce1eeea9e2f48cabecca5c2a2688b5c4381b95817e223de282915e297fd0ee70"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "line": "507",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "507",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "ce1eeea9e2f48cabecca5c2a2688b5c4381b95817e223de282915e297fd0ee70"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "line": "654",
+      "directive": "ifdef",
+      "expression": "HUNTER",
+      "chain_start": "654",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "ce1eeea9e2f48cabecca5c2a2688b5c4381b95817e223de282915e297fd0ee70"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "line": "752",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "752",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "ce1eeea9e2f48cabecca5c2a2688b5c4381b95817e223de282915e297fd0ee70"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "line": "773",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "773",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "ce1eeea9e2f48cabecca5c2a2688b5c4381b95817e223de282915e297fd0ee70"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "line": "782",
+      "directive": "ifdef",
+      "expression": "HUNTER",
+      "chain_start": "782",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "ce1eeea9e2f48cabecca5c2a2688b5c4381b95817e223de282915e297fd0ee70"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "line": "792",
+      "directive": "ifdef",
+      "expression": "HUNTER",
+      "chain_start": "792",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "ce1eeea9e2f48cabecca5c2a2688b5c4381b95817e223de282915e297fd0ee70"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "line": "873",
+      "directive": "ifdef",
+      "expression": "LIM",
+      "chain_start": "873",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "ce1eeea9e2f48cabecca5c2a2688b5c4381b95817e223de282915e297fd0ee70"
+    }
+  ],
+  "review": "Mapped the pinned original retained and excluded conditions using adjacent original function and statement context rather than repeated directive names. Corrected the monitor floating-point group to original 819/843/845 and X86GFX continuation to original 278, and added original error/continuation anchors to the other excluded arms. The existing MVDM-HOST-DIV-056 CPU40 memory-size projection retains both local i386 and _M_IX86 selector variants. Nested original groups in rejected X86GFX/MONITOR/HUNTER arms remain excluded as a whole.",
+  "limitations": "Build, image comparison and tests pending; unsupported kernel-V86 monitor profiles are not claimed."
+}

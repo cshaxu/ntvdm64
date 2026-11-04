@@ -35,4 +35,54 @@ NtAlertThread(
 
 #undef OPENNT_NT_ALERT_THREAD_API
 
+#line 138
+#ifndef CLIENT_ID64_DEFINED
+#line 139
 #endif
+#line 150
+
+#line 386
+#ifdef _IA64_
+#line 387
+#error Excluded unsupported original IA64 process API profile
+#endif
+#line 390
+
+#line 396
+#if !defined(_X86_)
+#line 397
+#else
+#line 420
+#endif
+#line 422
+
+#line 463
+#if DBG
+#line 464
+#error Excluded unsupported original DBG process API profile
+#endif
+#line 477
+
+#line 799
+#ifdef _IA64_
+#line 800
+#error Excluded unsupported original IA64 process API profile
+#endif
+#line 802
+
+#line 825
+#ifdef _IA64_
+#line 826
+#error Excluded unsupported original IA64 process API profile
+#endif
+#line 829
+
+#line 832
+#ifdef _IA64_
+#line 833
+#error Excluded unsupported original IA64 process API profile
+#endif
+#line 836
+
+#endif
+#line 1294

@@ -36,6 +36,27 @@ cases = [
     ('src/non-mvdm/windows/core/ntuser/client/globals.h', 135,
      '#ifdef WX86', 'Excluded unsupported original WX86 globals',
      [([], False), (['WX86=1'], True)]),
+    ('src/mvdm-host/softpc.new/host/inc/host_cpu.h', 163,
+     '#ifdef A2CPU', 'Excluded unsupported original A2CPU register carrier',
+     [([], False), (['A2CPU=1'], True)]),
+    ('src/mvdm-host/softpc.new/host/inc/host_cpu.h', 188,
+     '#ifdef A2CPU', 'Excluded unsupported original A2CPU register carrier',
+     [([], False), (['A2CPU=1'], True)]),
+    ('src/mvdm-host/softpc.new/base/video/video.c', 2857,
+     '#ifndef MONITOR', 'Excluded unsupported original non-MONITOR stream buffer release',
+     [([], True), (['MONITOR=1'], False)]),
+    ('src/non-mvdm/public/sdk/inc/ntpsapi.h', 386,
+     '#ifdef _IA64_', 'Excluded unsupported original IA64 process API profile',
+     [([], False), (['_IA64_=1'], True)]),
+    ('src/non-mvdm/public/sdk/inc/ntpsapi.h', 463,
+     '#if DBG', 'Excluded unsupported original DBG process API profile',
+     [([], False), (['DBG=1'], True)]),
+    ('src/non-mvdm/windows/core/ntuser/rtl/userrtl.h', 42,
+     '#if DBG', 'Excluded unsupported original DBG user RTL profile',
+     [([], False), (['DBG=1'], True)]),
+    ('src/non-mvdm/windows/core/ntuser/rtl/userrtl.h', 118,
+     '#ifdef FE_SB', 'Excluded unsupported original FE_SB user RTL profile',
+     [([], False), (['FE_SB=1'], True)]),
     ('src/non-mvdm/windows/core/ntuser/kernel/handtabl.c', 600,
      '#ifdef FE_IME', 'Unsupported FE_IME original branch',
      [([], False), (['FE_IME=1'], True)]),
@@ -99,3 +120,59 @@ for original, selected_line, continuation in ((400, 413, 415), (416, 429, 431), 
             or not rejected.returncode or 'Excluded unsupported original FE_SB branch' not in rejected.stdout + rejected.stderr):
         raise SystemExit(f'clmsg nested profile controls failed at {original}')
 print('PASS three original clmsg nested FE_SB guards and line controls')
+
+source = (repo / 'src/mvdm-host/softpc.new/base/video/video.c').read_text(encoding='latin1').split('\n')
+start = source.index('#line 1511')
+expected = ['#line 1511',
+            '#if ( defined(NTVDM) && defined(MONITOR) && !defined(MVDM_STANDALONE_SAS_VIDEO) ) || defined(GISP_SVGA)/* No Ega planes... */',
+            '#line 1512', '#error Excluded unsupported original monitor or GISP video pointer',
+            '#else', '#line 1514']
+if [line.strip() for line in source[start:start + len(expected)]] != expected:
+    raise SystemExit('video original pointer boundary differs')
+probe = scratch / 'video-pointer-guard.c'
+probe.write_text('\n'.join(expected + ['int selected = 1;', '#endif']) + '\n', encoding='ascii')
+for defines, reject in ((['NTVDM=1', 'MONITOR=1', 'MVDM_STANDALONE_SAS_VIDEO=1'], False),
+                        (['NTVDM=1', 'MONITOR=1'], True), (['GISP_SVGA=1'], True)):
+    result = subprocess.run(['cl.exe', '/nologo', '/EP', '/TC'] + [f'/D{x}' for x in defines] + [str(probe)],
+                            capture_output=True, text=True, errors='replace')
+    if bool(result.returncode) != reject or (reject and 'Excluded unsupported original monitor or GISP video pointer' not in result.stdout + result.stderr):
+        raise SystemExit(f'video pointer profile failed: {defines}')
+print('PASS video standalone SAS and excluded monitor/GISP pointer profiles')
+
+for filename, original, continuation, carrier in (
+    ('egawrtm0.c', 209, 318, 'mode0_copy_handlers'),
+    ('egwrtm12.c', 156, 257, 'mode1_handlers'),
+):
+    source = (repo / 'src/mvdm-host/softpc.new/base/video' / filename).read_text(encoding='latin1').split('\n')
+    start = source.index(f'#line {original}')
+    end = next(i for i in range(start, len(source)) if source[i].strip() == '#endif /* A_VID */')
+    if source[start + 1].strip() != '#ifdef A_VID' or source[end + 1].strip() != f'#line {continuation}':
+        raise SystemExit(f'{filename}: original A_VID frame differs')
+    probe = scratch / 'video-table-guard.c'
+    probe.write_text('\n'.join(source[start:end + 2] + ['int after_table = __LINE__;']) + '\n', encoding='ascii')
+    for defines, reject, marker in ((['CPU_40_STYLE=1'], False, carrier),
+                                    (['A_VID=1', 'CPU_40_STYLE=1'], True, 'Excluded unsupported original A_VID writer-table profile'),
+                                    ([], True, 'Excluded unsupported non-CPU40 writer-table profile')):
+        result = subprocess.run(['cl.exe', '/nologo', '/EP', '/TC'] + [f'/D{x}' for x in defines] + [str(probe)],
+                                capture_output=True, text=True, errors='replace')
+        if (bool(result.returncode) != reject or marker not in result.stdout + result.stderr
+                or (not reject and not re.search(r'int\s+after_table\s*=\s*' + str(continuation) + r'\s*;', result.stdout))):
+            raise SystemExit(f'{filename}: writer-table profile failed for {defines}')
+print('PASS original A_VID frames and selected CPU40 table carriers')
+
+for filename, rejected_line, selected_line in (('wowfax.h', 93, 95), ('wowinfo.h', 23, 25)):
+    source = (repo / 'src/mvdm-host/inc' / filename).read_text(encoding='latin1').split('\n')
+    start = next(i for i, line in enumerate(source) if line.startswith('#if defined(MIPS) || defined(_ALPHA_)'))
+    end = next(i for i in range(start, len(source)) if source[i].startswith('#endif'))
+    group = source[start:end + 1]
+    if (f'#line {rejected_line}' not in group or f'#line {selected_line}' not in group
+            or '#error Excluded unsupported original MIPS/Alpha UNALIGNED fallback' not in group):
+        raise SystemExit(f'{filename}: shared fallback boundary differs')
+    probe = scratch / 'shared-unaligned-guard.c'
+    probe.write_text('\n'.join(group + ['int selected = 1;']) + '\n', encoding='ascii')
+    for defines, reject in (([], False), (['MIPS=1'], True), (['_ALPHA_=1'], True)):
+        result = subprocess.run(['cl.exe', '/nologo', '/EP', '/TC'] + [f'/D{x}' for x in defines] + [str(probe)],
+                                capture_output=True, text=True, errors='replace')
+        if bool(result.returncode) != reject or (reject and f'({rejected_line})' not in result.stdout + result.stderr):
+            raise SystemExit(f'{filename}: shared fallback profile failed for {defines}')
+print('PASS shared x86 UNALIGNED fallback and excluded MIPS/Alpha profiles')

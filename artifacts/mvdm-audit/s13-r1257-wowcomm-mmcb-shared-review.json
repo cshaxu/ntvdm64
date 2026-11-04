@@ -1,0 +1,22 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/inc/wowcomm.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowcomm.h",
+      "original_sha256": "4817961493d33932a98f5ee2222c0f2e20a43fd4900430910b81e5c70c5f1c85",
+      "current_sha256": "4817961493d33932a98f5ee2222c0f2e20a43fd4900430910b81e5c70c5f1c85",
+      "guest_source_consumer": "src/mvdm-guest/wow16/user/wowcomm.c",
+      "prior_evidence": "s13-r1054-wowcomm-shared-context.json"
+    },
+    {
+      "path": "src/mvdm-host/inc/wowmmcb.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowmmcb.h",
+      "original_sha256": "c4135b71b57c210150d6083b6eb179ac256e164a1b58a475b4c4f9395dc3cf89",
+      "current_sha256": "792d12c29a5913ee4dd9d46f3173f4e7ac8f1cd88cfa91272268bd8bcafb8e8c",
+      "guest_source_consumer": "src/mvdm-guest/wow16/mmsystem/thunks.h",
+      "prior_evidence": "s13-r1055-wowmmcb-shared-context.json"
+    }
+  ],
+  "review": "Each current conditional tree matches the pinned original. The UNALIGNED fallback, although unselected by current host WOW32, has an explicit direct original guest-source consumer and is retained to respect the no-guest-modification boundary. wowcomm.h is byte-identical to the original; wowmmcb.h retains its documented host calling-convention binding. No source change.",
+  "limitations": "The guest was not rebuilt; guest-source compatibility is statically evidenced, not an executed guest build. Future unsupported architectures are not claimed."
+}
