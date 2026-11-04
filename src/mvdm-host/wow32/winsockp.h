@@ -74,6 +74,7 @@ typedef struct _WINSOCK_ASYNC_CONTEXT_BLOCK {
     HANDLE AsyncTaskHandle32;
     HAND16 AsyncTaskHandle16;
     DWORD ThreadSerialNumber;
+#line 76
     VPVOID vBuffer16;
     DWORD Buffer16Length;
     PVOID Buffer32;
@@ -180,6 +181,7 @@ WWS32CancelAsyncRequestsForTask(
     IN DWORD ThreadSerialNumber
     );
 
+#line 164
 HAND16
 WWS32GetAsyncTaskHandle16 (
     VOID

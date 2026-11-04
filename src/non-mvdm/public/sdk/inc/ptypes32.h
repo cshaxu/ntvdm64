@@ -52,7 +52,9 @@ typedef    MCATCHBUF    *LPMCATCHBUF   ;
 #define WF_SMALLFRAME   0x0200
 #define WF_80x87        0x0400
 
+#line 56
 /* DEFINITIONS */
+#line 58
 
 #define TF_FORCEDRIVE       (BYTE)0x80
 #define DLLMEM_MOVEABLE     0

@@ -1,5 +1,9 @@
 # non-mvdm original OpenNT sources
 
+OPENNT-HOST-170: restore original diagnostic positions in condition-free
+`srvvdm.h` and `ptypes32.h`; only `#line` was added. Evidence:
+`../../artifacts/mvdm-audit/s13-r1319-line-batch.json`.
+
 OPENNT-HOST-169: reject the unobserved C++ linkage alternatives in the NT4
 RTL subset `public/sdk/inc/ntrtl.h`; current host inclusion is C, while
 other C++ components remain unchanged. See

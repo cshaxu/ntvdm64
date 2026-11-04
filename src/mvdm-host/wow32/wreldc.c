@@ -168,6 +168,7 @@ BOOL FreeCachedDCs(HAND16 htask16)
 //*****************************************************************************
 
 BOOL StoreDC(HAND16 htask16, HAND16 hwnd16, HAND16 hdc16, HWND hwnd32)
+#line 171
 {
     HAND16 hdcTemp = (HAND16)NULL;
     LPDCCACHE lpT, lpNew;
@@ -226,6 +227,7 @@ BOOL StoreDC(HAND16 htask16, HAND16 hwnd16, HAND16 hdc16, HWND hwnd32)
         lpT->hdc16 = hdc16;
         /* DIVERGENCE(MVDM-HOST-DIV-455): retain acquisition generation. */
         lpT->hwnd32 = hwnd32;
+#line 228
         LOGDEBUG(6, ("StoreDC: Added hdc %04x\n",hdc16));
         return TRUE;
     }

@@ -24,6 +24,7 @@ Revision History:
 #include "softpc.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_fast_bop.h"
+#line 25
 
 VOID
 DpmiGetFastBopEntry(
@@ -56,6 +57,7 @@ Return Value:
             mvdm_softpc_report_dpmi_fast_bop_result(getBX(), getDX(), getES());
             return;
         }
+#line 47
         //
         // krnl286 does a DPMIBOP GetFastBopAddress even on
         // risc, so just fail the call since fast-bopping
@@ -66,6 +68,7 @@ Return Value:
         setDX(0);
         setES(0);
         mvdm_softpc_report_dpmi_fast_bop_result(getBX(), getDX(), getES());
+#line 56
 }
 
 VOID

@@ -8,8 +8,11 @@
 typedef enum CPU_INT_TYPE CPU_INT_TYPE;
 #include "../cvidc/cpu4gen.h"
 #include "../cvidc/evidgen.h"
+#line 5
 
 /* C-VID's ev_glue.c allocates and owns GDP. */
 extern IHP Gdp;
+#line 7
 struct CpuVector Cpu;
+#line 9
 struct VideoVector Video;

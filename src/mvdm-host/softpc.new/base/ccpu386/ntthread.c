@@ -200,6 +200,7 @@ void ccpu386AbandonSimulate(jmp_buf *frame)
     SetLastError(error);
 }
 
+#line 187
 void ccpu386Unsimulate()
 {
     ThreadSimBufPtr simstack;
@@ -241,6 +242,7 @@ jmp_buf *ccpu386ThrdExptnPtr()
          * same-package ccpu386SimulatePtr failure contract: retain the
          * diagnostic and failure branch, but return a typed null jmp frame. */
         return ((jmp_buf *)0);
+#line 224
     }
     simstack = (ThreadSimBufPtr)TlsGetValue(ccpuSimId);
     if (simstack == (ThreadSimBufPtr)0)
@@ -248,6 +250,7 @@ jmp_buf *ccpu386ThrdExptnPtr()
         fprintf(stderr, "ccpu386ThrdExptnPtr id:%#x TlsGetValue failed (err:%#x)\n", GetCurrentThreadId(), GetLastError());
         /* DIVERGENCE(MVDM-HOST-DIV-128): see the BADID failure branch above. */
         return ((jmp_buf *)0);
+#line 230
     }
     
     return(&simstack->excepts[simstack->level - 1]);

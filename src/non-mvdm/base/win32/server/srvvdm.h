@@ -35,6 +35,7 @@ typedef struct _CONSOLERECORD {
     HANDLE  hWaitForVDMDup;	    // Handle on which server will wake up the VDM (Its a dup of previous one)
     ULONG   nReEntrancy;	    // Re-entrancy count
     BOOL    ReenterCompletionPending; // DIVERGENCE(OPENNT-HOST-064): coalesced native return, independent of command-event reset.
+#line 37
     ULONG   SequenceNumber;         // Sequencenumber from PCSR_PROCESS
     ULONG   DosSesId;               // Temp Session ID for no-console
     ULONG   cchCurDirs;		    // Length of NTVDM current directory in bytes
@@ -95,6 +96,7 @@ ULONG BaseSrvCheckDOS(PBASE_CHECKVDM_MSG);
 /* READY is a record state, not proof the worker is inside GetNextVDMCommand.
  * The standalone broker asks this original owner before reusing a Console. */
 BOOL  BaseSrvDOSWorkerWaitPending(HANDLE,PBOOL);
+#line 94
 BOOL  BaseSrvCopyCommand(PBASE_CHECKVDM_MSG,PINFORECORD);
 ULONG BaseSrvUpdateWOWEntry(PBASE_UPDATE_VDM_ENTRY_MSG);
 ULONG BaseSrvUpdateDOSEntry(PBASE_UPDATE_VDM_ENTRY_MSG);

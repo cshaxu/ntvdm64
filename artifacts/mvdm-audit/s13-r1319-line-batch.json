@@ -1,0 +1,233 @@
+{
+  "method": "All equal line blocks compared against original; no conditional directives in either file; new lines are #line directives only. Local additions have no original-line equivalent.",
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmimscr.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmimscr.c",
+      "before_sha256": "19119d532486f2fa6d19129bfde7ee703f63bdd101953f8dcb6112b8210fe035",
+      "after_sha256": "2aa7fbd0e80148afe38753c5078f0911c823120b96064416c3e89657f9314bbd",
+      "original_sha256": "41494b9f44e53863d31527ca082dfc286f34e2b4cace556baf501274d3eba061",
+      "anchors": [
+        {
+          "before_physical_line": 27,
+          "original_line": 25
+        },
+        {
+          "before_physical_line": 59,
+          "original_line": 47
+        },
+        {
+          "before_physical_line": 69,
+          "original_line": 56
+        }
+      ],
+      "original_matched_lines": 110,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/inc/dbgexp.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\dbgexp.h",
+      "before_sha256": "0c9633af33b60909993b967971466c9207dbc7da3637dee28639d066f43792ec",
+      "after_sha256": "b523619de8441c1f51361e848c4bbf5a76e0bec6464b28a11c8241788f328a47",
+      "original_sha256": "a915256a7a3796424ba8eb7ea2a257864a3986633752c870fe34762f3737ce95",
+      "anchors": [
+        {
+          "before_physical_line": 4,
+          "original_line": 1
+        }
+      ],
+      "original_matched_lines": 16,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_debug.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_debug.c",
+      "before_sha256": "4e39100587d5d94ed39321bba8335f4db6b82ca8dcad477a4b6f011cec778a3c",
+      "after_sha256": "fcfb7f8aec931a9e2d93dded7bb0357de58e2a1e433266ad711ce118551f1d6f",
+      "original_sha256": "56cf805a5a78fe257f4337f94b55aec634f6d7d6139296993623fa08a0655e91",
+      "anchors": [
+        {
+          "before_physical_line": 76,
+          "original_line": 74
+        },
+        {
+          "before_physical_line": 273,
+          "original_line": 270
+        },
+        {
+          "before_physical_line": 347,
+          "original_line": 343
+        }
+      ],
+      "original_matched_lines": 386,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/localfm.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\localfm.c",
+      "before_sha256": "585950b3b7d40a90c91eef924c8b493c6caf3fb09c3455dab302a8645e2eca0a",
+      "after_sha256": "0017f737c6e2cce042aeb4f6b95c9a69201e1908d4cae6a9af5de14998a87180",
+      "original_sha256": "5dbb2bd74e82d5b87910db81f1411610c84a2d57a553e8cb78080871d19835df",
+      "anchors": [
+        {
+          "before_physical_line": 11,
+          "original_line": 5
+        },
+        {
+          "before_physical_line": 14,
+          "original_line": 7
+        },
+        {
+          "before_physical_line": 15,
+          "original_line": 9
+        }
+      ],
+      "original_matched_lines": 6,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ntthread.c",
+      "before_sha256": "dcae84898221ae9aaaea99688874752b1fb56ed6e13beb420a8177211e648747",
+      "after_sha256": "af9d3c1f0a0e617dafdac75a1075e49e4dacd88c0a64f64a10f8800c8a6b62ab",
+      "original_sha256": "3fd33dc3055ac59e0958a8335c9f3d3155d36d76ac1e178c7dd1e4232deb5528",
+      "anchors": [
+        {
+          "before_physical_line": 203,
+          "original_line": 187
+        },
+        {
+          "before_physical_line": 244,
+          "original_line": 224
+        },
+        {
+          "before_physical_line": 251,
+          "original_line": 230
+        }
+      ],
+      "original_matched_lines": 251,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/winsockp.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\winsockp.h",
+      "before_sha256": "0f7f1a8237d5222bade5dd950078159c2af83b0921a2f9eb64c1248740b84652",
+      "after_sha256": "53f7d3967d4260bdcd875de792e67f7eab7a1baa7e7328986d7d6521d71d0de7",
+      "original_sha256": "08e825ba1ce4b4226bf46045ffb2c0dad08e38a6a9bbb18653215c64a05086d1",
+      "anchors": [
+        {
+          "before_physical_line": 77,
+          "original_line": 76
+        },
+        {
+          "before_physical_line": 183,
+          "original_line": 164
+        }
+      ],
+      "original_matched_lines": 195,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wreldc.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wreldc.c",
+      "before_sha256": "712130d7f2ef32ba1a48a187c700895f31c7698274a8669aba7a154f73c1285c",
+      "after_sha256": "3c6a944e5052c2d65950f7512a7c2796277ec1ee5c6b14c3dfe25a81c07c55f2",
+      "original_sha256": "f4ede08ef2d6bc949cd2500c75af546ec68c0e017abecc1a6c624f7c1b5a0d20",
+      "anchors": [
+        {
+          "before_physical_line": 171,
+          "original_line": 171
+        },
+        {
+          "before_physical_line": 229,
+          "original_line": 228
+        }
+      ],
+      "original_matched_lines": 287,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/inc/memapi.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\memapi.h",
+      "before_sha256": "cd8404712fb3293f612be38de095e66d7a5b99cb265ee86ad0fc2015fe38439b",
+      "after_sha256": "ac1802fea4b33b75d8276b387244abd1ada7b045f3f4ae51cd6fd23a54726a2d",
+      "original_sha256": "0e72109252dbec2a9c79b54d28d0c2bda0967644dd9d1d1d2d789e8fd8aa8c99",
+      "anchors": [
+        {
+          "before_physical_line": 4,
+          "original_line": 1
+        },
+        {
+          "before_physical_line": 31,
+          "original_line": 28
+        },
+        {
+          "before_physical_line": 38,
+          "original_line": 35
+        },
+        {
+          "before_physical_line": 68,
+          "original_line": 65
+        },
+        {
+          "before_physical_line": 75,
+          "original_line": 72
+        },
+        {
+          "before_physical_line": 81,
+          "original_line": 78
+        }
+      ],
+      "original_matched_lines": 77,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\win32\\server\\srvvdm.h",
+      "before_sha256": "d91068828e911aae54369a4fdf514da57a0f543c079ff8a57ff823675f9b7a8d",
+      "after_sha256": "a848c8dda53bfe0d9c739358b6f345bd842f8dba2590db28764b3151d2ace966",
+      "original_sha256": "f590ef866f87ce80671c4b6f4e3bbe94347342e6b723bc062ed6f044fbb3820f",
+      "anchors": [
+        {
+          "before_physical_line": 38,
+          "original_line": 37
+        },
+        {
+          "before_physical_line": 98,
+          "original_line": 94
+        }
+      ],
+      "original_matched_lines": 135,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ptypes32.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ptypes32.h",
+      "before_sha256": "f17dc51acc90fb1ca85900f33128c729385d844c22e23471f55e224a4466c6ca",
+      "after_sha256": "7147074cf41f0fec51f5203a2d8b5e2bc7de28c2e9ab531c8cb94cd3c1f7312b",
+      "original_sha256": "fbc65366df6b091aadbdc0ce12eb842bbd48691ccb1b9ce34c6d503226a7139b",
+      "anchors": [
+        {
+          "before_physical_line": 55,
+          "original_line": 56
+        },
+        {
+          "before_physical_line": 56,
+          "original_line": 58
+        }
+      ],
+      "original_matched_lines": 60,
+      "matching_line_mapping_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    }
+  ]
+}
