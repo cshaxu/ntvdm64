@@ -46,8 +46,8 @@ for (const file of ['base_rpc_client_core.c', 'base_rpc_client_launch.c'])
   assert(launcherSources.some(s => s.endsWith('/' + file)), `Launcher missing ${file}`);
 const launcherMap = fs.readFileSync(path.join(launcher, 'run16.exe.map'), 'utf8');
 assert(/OpenNtBaseClientCallServer\b/.test(launcherMap), 'Launcher execution facade not linked');
-for (const file of ['src/ntsrv-exe/opennt/source/base_rpc_client_core.c',
-  'src/ntsrv-exe/opennt/source/base_rpc_client_launch.c', 'tools/build/New-NativeWorkerNinja.ps1']) {
+for (const file of ['src/common/base_srv/base_rpc_client_core.c',
+  'src/common/base_srv/base_rpc_client_launch.c', 'tools/build/New-NativeWorkerNinja.ps1']) {
   assert(!fs.readFileSync(file, 'utf8').includes('OPENNT_BASE_RPC_FRONTEND_ONLY'), `Conditional remains: ${file}`);
 }
 console.log(JSON.stringify({result:'PASS', frontendSources:frontendSources.length,

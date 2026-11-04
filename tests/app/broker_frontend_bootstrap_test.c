@@ -4,7 +4,7 @@
 #include <tlhelp32.h>
 #include <stdio.h>
 #include "run16-exe/native_request_client.h"
-#include "ntsrv-exe/opennt/include/base_rpc_client.h"
+#include "common/base_srv/base_rpc_client.h"
 #include "common/codec/native_launch.h"
 
 PVOID CsrPortHeap;

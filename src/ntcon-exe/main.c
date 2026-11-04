@@ -2,7 +2,7 @@
 #include "session_arguments.h"
 #include "common/protocol/frontend_protocol.h"
 #include "common/protocol/frontend_lifecycle.h"
-#include "ntsrv-exe/opennt/include/base_rpc_client.h"
+#include "common/base_srv/base_rpc_client.h"
 #include <shellapi.h>
 #include <stdio.h>
 #include <stdlib.h>

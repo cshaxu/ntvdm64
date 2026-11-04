@@ -1,6 +1,11 @@
 /* Compose copied original command fields at the unavailable CSR transport
  * boundary. No selection, retry, resource duplication or record policy. */
-#include "basesrv.h"
+#include <base.h>
+#include <ntlpcapi.h>
+#include <ntcsrmsg.h>
+#include <basemsg.h>
+#include <basevdm.h>
+#include <vdmapi.h>
 #include <base_command.h>
 #include <base_payload.h>
 #include <base_values.h>

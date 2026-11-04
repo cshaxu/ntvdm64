@@ -1,6 +1,6 @@
 #include "ntvdm_dos_observer.h"
 #include "mvdm_guest_location.h"
-#include "ntsrv-exe/opennt/include/base_rpc_client.h"
+#include "common/base_srv/base_rpc_client.h"
 #include <nt_vdd.h>
 #include <string.h>
 /* Original callback ABI has no context parameter. Bind one explicit owner

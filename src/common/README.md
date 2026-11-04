@@ -1,5 +1,10 @@
 # Common cross-component mechanisms
 
+`base_srv/` owns shared BaseSrv client, identity-scope and copied transport
+mechanisms. NTSRV retains server-side authorization, task and lifecycle
+policy. `rpc/` remains a separate sibling; a future general-purpose library
+extraction requires a function-by-function boundary audit.
+
 T431 S2 owner correction shares application_search.[ch] between run16 and
 nthook32. This is run16's unchanged CWD/PATH directory-first COM/EXE/BAT/PIF
 discovery, with exact explicit paths and no product-root search injection.

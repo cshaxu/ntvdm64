@@ -1,7 +1,7 @@
 /* Finite copied-buffer binding for Base VDM messages. Original CSR capture
  * pointers cannot cross standalone IPC; original copy/capacity policy remains
  * in non-mvdm/base/win32/{client/vdm.c,server/srvvdm.c}. */
-#include "vdm_payload.h"
+#include "common/base_srv/vdm_payload.h"
 #include <string.h>
 
 typedef char span_layout_must_be_16_bytes[(sizeof(broker_vdm_payload_span)==16)?1:-1];

@@ -3,7 +3,7 @@
 #include "worker-base/connection.h"
 #include "worker-base/input_watch.h"
 #include "common/protocol/frontend_lifecycle.h"
-#include "ntsrv-exe/opennt/include/base_rpc_client.h"
+#include "common/base_srv/base_rpc_client.h"
 
 extern BOOL CntrlHandler(ULONG type);
 extern VOID TerminateVDM(VOID);

@@ -4,10 +4,10 @@
  * submission and broker receipt waits. NTSRV owns worker creation/rollback. */
 #include <nt.h>
 #include <base_classifier.h>
-#include "ntsrv-exe/opennt/include/base_capture.h"
-#include "ntsrv-exe/opennt/include/base_client.h"
-#include "ntsrv-exe/opennt/include/base_config.h"
-#include "ntsrv-exe/opennt/include/base_rpc_client.h"
+#include "common/base_srv/base_capture.h"
+#include "common/base_srv/base_client.h"
+#include "common/base_srv/base_config.h"
+#include "common/base_srv/base_rpc_client.h"
 #include "frontend_scope.h"
 #include "launch_options.h"
 #include "image_classification.h"

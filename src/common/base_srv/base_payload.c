@@ -1,7 +1,11 @@
 /* Native-field binding for original basemsg.h BASE_CHECKVDM_MSG. Original
  * capture/copy policy stays in vdm.c/srvvdm.c; only unavailable CSR address
  * translation is replaced by explicitly copied, lifetime-bounded bytes. */
-#include "basesrv.h"
+#include <base.h>
+#include <ntlpcapi.h>
+#include <ntcsrmsg.h>
+#include <basemsg.h>
+#include <basevdm.h>
 #include <base_payload.h>
 #include <string.h>
 #define CHECK_FIELDS(X) \

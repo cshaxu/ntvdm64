@@ -75,7 +75,7 @@ if(ownerBuild) {
     commands=[
         `cl.exe ${flags} ${includes} /Fo"${build}/fixture.obj" "${root}/tests/broker/original_server_lifecycle.c"`,
         `cl.exe ${rtlFlags} /Fo"${build}/error.obj" "${root}/src/non-mvdm/base/ntos/rtl/error.c"`,
-        `link.exe /nologo /opt:ref /out:original-lifecycle.exe /map:original-lifecycle.map fixture.obj "${ownerBuild}/opennt-base-server.lib" "${ownerBuild}/opennt-base-client.lib" "${ownerBuild}/opennt-base-bindings.lib" "${ownerBuild}/original-opennt-rtl-x86.lib" error.obj ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`
+        `link.exe /nologo /opt:ref /out:original-lifecycle.exe /map:original-lifecycle.map fixture.obj "${ownerBuild}/opennt-base-server.lib" "${ownerBuild}/opennt-base-client.lib" "${ownerBuild}/opennt-base-bindings.lib" "${ownerBuild}/common-base-srv-bindings.lib" "${ownerBuild}/original-opennt-rtl-x86.lib" error.obj ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`
     ];
 }
 if(!ownerBuild) {
@@ -85,7 +85,7 @@ if(!ownerBuild) {
 commands.unshift(`cl.exe ${flags} /Gy /Fo"${build}/support.obj" "${root}/src/compat/opennt_support_rtl.c"`);
 const transportBuild=ownerBuild || path.resolve('build/M0-T412/S3/product');
 assert(fs.existsSync(path.join(transportBuild,'broker-transport.lib')),'Build the formal transport archive first');
-commands=commands.map(command=>command.startsWith('link.exe ')?command.replace(' fixture.obj ', ` fixture.obj support.obj "${transportBuild}/broker-transport.lib" ${ownerBuild?'':'waits.obj streams.obj registry.obj resources.obj dispatch.obj startup.obj payload.obj values.obj command.obj '}`):command);
+commands=commands.map(command=>command.startsWith('link.exe ')?command.replace(' fixture.obj ', ` fixture.obj support.obj "${transportBuild}/broker-transport.lib" "${transportBuild}/common-base-srv-transport.lib" ${ownerBuild?'':'waits.obj streams.obj registry.obj resources.obj dispatch.obj startup.obj payload.obj values.obj command.obj '}`):command);
 const log=fs.openSync(path.join(build,'build.log'),'w');
 for(const command of commands) {
     const result=spawnSync('cmd.exe',['/d','/c',`call "${env}" ${command}`],{cwd:build,windowsHide:true,windowsVerbatimArguments:true,stdio:['ignore',log,log],timeout:60000});

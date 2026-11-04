@@ -2,49 +2,52 @@
 
 ## Current Work
 
-**Active: M0 T474 S1 — Run16 shared implementation ownership**
+**Active: M0 T474 S2 — NTSRV shared implementation ownership**
 
-Owner directs independent work on the shared-ownership branch from the main
-worktree's committed baseline. The earlier main-worktree packet continues
-independently and is not this branch's active work. Review Run16 production
-consumers and extract genuinely shared mechanics into common. Retain component
-policy and original source ownership. The owner directs local publication to this worktree's assets/release and
-local commits for later cherry-pick; no push or main-worktree publication.
+The owner directs local build, test, publication to this worktree's
+assets/release and local commits for later cherry-pick; no push or publication
+to the main worktree runtime. Audit other components' dependencies on
+NTSRV-owned implementation, extract appropriate shared mechanics to common,
+and keep service policy and state in NTSRV.
 
-S1 local verification: Hook-specific classification moved from Run16 to the
-Hook owner; NTCON no longer links the launcher client archive and Hook32 no
-longer links Run16 image classification. Run16-specific client and image
-classification remain local. Fresh Hook32, Hook64, NTCON and Run16 builds
-passed; the x64 Hook install fixture passed 118 assertions, the x86 image
-classification fixture passed 227 checks, the x64 frontend argument fixture
-passed 52 checks, and the isolated Console frontend fixture passed. The
-frontend link ownership gate and its negative controls passed. The ten-image
-package was locally published to assets/release with package identity
-4249ef52-c3d3-4954-bfe9-c375ef046e1f; all ten published hashes match its
-manifest. NTCON and both Hooks are newly built; the seven unaffected images
-were reused from the hash-verified branch baseline. Full product integration
-and publication to the main runtime remain pending.
+S1 local closure: Run16-owned implementation no longer enters the inspected
+other-product source/link closures. Hook-specific classification belongs to
+Hook; NTCON and Hook32 dropped unused Run16 link inputs. Builds, focused
+regressions and dependency negative controls passed. Local ten-image release
+4249ef52-c3d3-4954-bfe9-c375ef046e1f was hash-verified and committed; three
+changed images were freshly built and seven unchanged baseline images reused.
+Full integration and publication to the main runtime remain pending.
+
+S2 implementation and ten-image local staging are under review. Shared
+clients, scope and transport now belong to common/base_srv; service policy
+remains NTSRV-owned. Product builds, graph boundaries, focused tests and 11
+of 12 Control gates pass. Nested-window input times out for the candidate and
+the S1 baseline; window-owned-console also times out. Root cause and the gate
+remain unresolved. Candidate package e34caccf-13d8-4999-9be2-183ba247b6ee
+is locally published to this worktree's assets/release with matching hashes;
+S2 verification and acceptance remain open.
+[Evidence](../etc/evidence/m0-t474-s2-basesrv-shared-ownership.md).
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T474 S1, Ordinary Mode. |
-| Admission And Approval | Owner directs this branch to start the shared-ownership task at S1. |
-| Objective | Remove production cross-component dependence on Run16-owned implementation by placing shared mechanics in common. |
-| Non-goals | Change runtime behavior, guest media, other component ownership stages, or main worktree. |
-| Reference Baseline | Branch starts at 32396a9ea. |
-| Files And ABI Surface | Run16 shared source and headers, common, production build graphs, focused tests and documentation. |
-| Applicable Rules | Original source provenance, existing ABI and lifecycle, and owner-directed dependency boundaries. |
-| Verification | Review real consumer graphs; run focused build and tests, documentation governance and relative-link checks; inspect diff. |
-| Expected Markers | Other product components do not select Run16-private implementation; unchanged observable behavior. |
-| Asset Needs | Existing compiler, build tools and focused test fixtures where available. |
-| Reporting Requirements | Actual consumers, moved and retained ownership, validation and limitations. |
-| Stop Conditions | Required semantic change, guest modification, or inability to preserve original source boundaries. |
-| Exit Criteria | Local assets/release publication and verification committed for later cherry-pick; no push. Full integration and main runtime publication remain pending. |
-| Original Owner Request | Start S1 independently; extract Run16 implementation shared by other components into common. |
-| Similar-Issue Sweep | Frontend clients, classification, headers, all production build selections and supported Hook widths. |
-| Temporary Evidence | build/t474-s1, owner S1, 60-minute phase, 3-GiB and 10-minute no-progress budget; stable caches retained. |
+| Identifier Mode | M0 T474 S2, Ordinary Mode. |
+| Admission And Approval | Owner directs S2 after S1 local release and closure. |
+| Objective | Audit and remove cross-component use of NTSRV-private implementation, placing shared mechanics in common and retaining service policy. |
+| Non-goals | Change runtime semantics, guest media, worker-base ownership or the main worktree. |
+| Reference Baseline | S1 local commits 54b2eefea and e52b00dd5; local release above. |
+| Files And ABI Surface | NTSRV client, transport, classification, authentication, common, production build graphs and focused fixtures. |
+| Applicable Rules | Owner-directed dependency boundary, source provenance, unchanged RPC, resource lifecycle and service authority. |
+| Verification | Inventory real production sources and linked symbols; focused builds and tests, local package, governance and relative-link checks; inspect diff. |
+| Expected Markers | Other components select neutral shared source instead of NTSRV-private implementation while behavior and service authority remain unchanged. |
+| Asset Needs | Existing compiler, build tools, local release baseline and focused fixtures. |
+| Reporting Requirements | Consumers, actual use, ownership decisions, validation and limitations. |
+| Stop Conditions | Required semantic change, guest modification, or inability to preserve source and ownership boundaries. |
+| Exit Criteria | Reviewed S2 local build, tests, assets/release publication and local commit; no push. |
+| Original Owner Request | Start NTSRV S2 after the local S1 release, extracting shared implementation to common and removing component cross-dependencies. |
+| Similar-Issue Sweep | Base RPC client slices, broker transport, classification, authentication, public headers and all production architectures. |
+| Temporary Evidence | build/t474-s2, owner S2, 60-minute phase, 3-GiB and 10-minute no-progress budget; stable caches retained. |
 
 ## S12 Closure Record
 

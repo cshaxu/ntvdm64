@@ -1,6 +1,6 @@
 #ifndef OPENNT_BASE_COMMAND_H
 #define OPENNT_BASE_COMMAND_H
-#include "ntsrv-exe/transport/vdm_message.h"
+#include "common/base_srv/vdm_message.h"
 #include "common/protocol/dos_observation.h"
 /* Decoded CheckVDM ConsoleHandle carries only one of these service-local
  * semantic sentinels.  A native Console handle is never serialized. */

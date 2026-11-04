@@ -39,6 +39,9 @@ RTL subset `public/sdk/inc/ntrtl.h`; current host inclusion is C, while
 other C++ components remain unchanged. See
 `../../artifacts/mvdm-audit/s13-r1314-final-audit.md` for context evidence
 and limits.
+OPENNT-HOST-243: `base/win32/client/vdm.c` selects the unchanged BaseClient
+binding declaration from its shared `common/base_srv` owner. This is an include
+path relocation only; original caller behavior and selected source remain unchanged.
 
 OPENNT-HOST-168 splits the local state-drawing selector around the two original
 literal-disabled `mngrayc.c` conditions, restoring their first-depth

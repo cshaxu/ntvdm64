@@ -5,7 +5,7 @@
 #include "service.h"
 #include <base_client.h>
 #include <base_command.h>
-#include <base_rpc_client.h>
+#include "common/base_srv/base_rpc_client.h"
 static void note(const char *stage,DWORD result,ULONG a,ULONG b,ULONG c)
 {
     DWORD saved=GetLastError(),written;HANDLE file;char path[MAX_PATH],line[256];
@@ -46,8 +46,8 @@ static BOOL traced_apply(const void *data,uint32_t bytes,uint32_t generation,
 #define Client_Get traced_get
 #define OpenNtBaseApplyGetCommand traced_apply
 #define OpenNtBaseClientSetCommandBinding diagnostic_actual_binding
-#include "../../src/ntsrv-exe/opennt/source/base_rpc_client_core.c"
-#include "../../src/ntsrv-exe/opennt/source/base_rpc_client_launch.c"
+#include "../../src/common/base_srv/base_rpc_client_core.c"
+#include "../../src/common/base_srv/base_rpc_client_launch.c"
 #undef Client_Get
 #undef OpenNtBaseApplyGetCommand
 #undef OpenNtBaseClientSetCommandBinding

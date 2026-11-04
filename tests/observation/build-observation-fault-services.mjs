@@ -21,7 +21,7 @@ try{
   // in Direct launch/completion or worker control. No retry-to-success.
   fs.writeFileSync(path.join(build,`${name}.c`),source.replace(marker,replacement));
   run(`cl.exe /nologo /c /MT /W4 /we4013 /I "${service}/obj/basesrv" /I "${root}/src" ${name}.c /Fo${name}.obj`);
-  run(`link.exe /nologo /opt:ref /out:${name}.exe ${name}.obj "${service}/obj/basesrv/stub.obj" "${service}/obj/run16/support.obj" "${service}/opennt-base-server.lib" "${service}/opennt-base-bindings.lib" "${service}/broker-transport.lib" "${service}/original-opennt-rtl-native.lib" "${service}/common-root.lib" "${service}/common-rpc.lib" "${service}/common-transport.lib" "${service}/common-codec.lib" "${service}/common-console.lib" rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`);
+  run(`link.exe /nologo /opt:ref /out:${name}.exe ${name}.obj "${service}/obj/basesrv/stub.obj" "${service}/obj/run16/support.obj" "${service}/opennt-base-server.lib" "${service}/opennt-base-bindings.lib" "${service}/common-base-srv-bindings.lib" "${service}/broker-transport.lib" "${service}/common-base-srv-transport.lib" "${service}/original-opennt-rtl-native.lib" "${service}/common-root.lib" "${service}/common-rpc.lib" "${service}/common-transport.lib" "${service}/common-codec.lib" "${service}/common-console.lib" rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`);
  }
 }finally{fs.closeSync(logfile);}
 assert.equal(fs.readFileSync('src/ntsrv-exe/main.c','utf8'),source);

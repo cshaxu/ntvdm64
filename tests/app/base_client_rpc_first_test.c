@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <wchar.h>
 #include "ntsrv-exe/opennt/include/base_client.h"
-#include "ntsrv-exe/opennt/include/base_rpc_client.h"
+#include "common/base_srv/base_rpc_client.h"
 #include "worker-base/connection.h"
 #include "ntvwm-exe/next_command.h"
 #include "run16-exe/native_request_client.h"
@@ -15,8 +15,8 @@
 #include "common/protocol/frontend_lifecycle.h"
 #include "common/rpc/management.h"
 #include "common/protocol/management.h"
-#include <base_rpc_client_internal.h>
-#include <base_rpc_client_launch.h>
+#include "common/base_srv/base_rpc_client_internal.h"
+#include "common/base_srv/base_rpc_client_launch.h"
 #include "common/rpc/async_call.h"
 #include <stddef.h>
 

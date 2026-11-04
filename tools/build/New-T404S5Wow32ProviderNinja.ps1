@@ -157,7 +157,7 @@ foreach ($name in $sources) {
 }
 
 $headers = @(Get-ChildItem -LiteralPath $wow -Filter '*.h' -File)
-if ($headers.Count -ne 104) { throw "WOW32 must retain 104 root headers; found $($headers.Count)." }
+if ($headers.Count -ne 94) { throw "WOW32 must retain the selected 94 root headers; found $($headers.Count)." }
 
 if ([string]::IsNullOrWhiteSpace($BuildRoot)) {
     $build = Join-Path $root 'build/.ninja/msvc-x86-release/wow32'

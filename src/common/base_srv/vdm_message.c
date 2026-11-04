@@ -1,6 +1,6 @@
 /* Finite transport envelope replacing excluded CSR port metadata, not its
  * dispatch, task or replay policy. Original Base VDM owners remain unchanged. */
-#include "vdm_message.h"
+#include "common/base_srv/vdm_message.h"
 #include <string.h>
 typedef char message_header_size[(sizeof(broker_vdm_message_header)==32)?1:-1];
 int broker_vdm_message_read(const void *message, uint32_t bytes,

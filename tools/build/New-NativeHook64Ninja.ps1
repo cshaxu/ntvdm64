@@ -48,13 +48,13 @@ $sources=@('src/nthook32-dll/entry.cpp','src/nthook32-dll/context.cpp',
     'src/common/native_image.c',
     'src/nthook32-dll/hook_classification.c',
     'src/non-mvdm/base/win32/client/vdm.c',
-    'src/ntsrv-exe/opennt/source/base_classifier_path.c',
+    'src/common/base_srv/base_classifier_path.c',
     'src/compat/opennt_support_rtl.c',
     'src/non-mvdm/base/ntos/rtl/error.c')
 foreach($name in @('detours','modules','disasm','image','creatwth')) {
     $sources += 'src/nthook32-dll/detours/'+$name+'.cpp'
 }
-$sources+=@('src/common/rpc/local_binding.c','src/common/rpc/management.c','src/ntsrv-exe/transport/rpc_security.c')
+$sources+=@('src/common/rpc/local_binding.c','src/common/rpc/management.c','src/common/base_srv/scope.c')
 $objects=@();$manifest=@();$i=0
 foreach($source in $sources) {
     $object='unit'+$i+'.obj';++$i;$objects+=$object

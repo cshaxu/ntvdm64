@@ -180,7 +180,8 @@ UINT BaseGetEnvNameType_U(WCHAR *Name, DWORD NameLength)
 #endif
 
 #if defined(OPENNT_BASE_CLIENT_VDM_COMMANDS)
-#include "ntsrv-exe/opennt/include/base_client.h"
+/* DIVERGENCE(OPENNT-HOST-243): bind the shared BaseClient declaration at its common owner. */
+#include "common/base_srv/base_client.h"
 
 #line 338
 BOOL

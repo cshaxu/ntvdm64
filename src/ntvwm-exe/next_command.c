@@ -1,5 +1,5 @@
 #include "next_command.h"
-#include "ntsrv-exe/opennt/include/base_rpc_client.h"
+#include "common/base_srv/base_rpc_client.h"
 #include "common/codec/native_launch.h"
 
 DWORD ntvwm_get_next_command(ntvwm_next_command *command)
