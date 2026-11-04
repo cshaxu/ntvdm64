@@ -1,0 +1,199 @@
+{
+  "scope": "Reconcile stale per-file inventory hashes against current bytes and previously recorded evidence",
+  "records": [
+    {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "prior_inventory_sha256": "804b5b9aa717a7209e31419285f8204f6843574c607de38f349e05a1c4449b10",
+      "current_sha256": "983a366f8be8f98a7c534588fe3f08b6c20af3333df21d0b2b7dd936f289896b",
+      "supporting_evidence": "s13-r749-cmd-header-branches.json"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demdasd.c",
+      "prior_inventory_sha256": "20a9b79c1afeb7c1573dca44d1a3b714dff18df2d3eecc24707ce6f7af9597e7",
+      "current_sha256": "81e1557a4e8b6065d17ef557df07b264b89340deb82fdb18df57f2a9fab49cf7",
+      "supporting_evidence": "s13-r680-witnessed-review.json"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/data.c",
+      "prior_inventory_sha256": "3bbb25431211d762d91e6edb52646fb550d0ea7d1142bb0aaccb2d3253c0c07e",
+      "current_sha256": "fa77262578ebef876e292dfc6d9b43f6cb64662a85f0a8679b89675d69625cd2",
+      "supporting_evidence": "s13-r700-dpmi-data-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "prior_inventory_sha256": "b17c9e6c7adb3f6ba6026a6ffd597e49b77e2ad13e0f2ce2dddb461e03f5ede9",
+      "current_sha256": "7eb2be47cc61b5d2a97ef67ddf1ade53507401b0002d357015788985cb3a5973",
+      "supporting_evidence": "s13-r726-witnessed-anchor-batch.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "prior_inventory_sha256": "8ad0d0437bcbfded709722f374fdca2396ee4c943d7b25e3881f20aa0033e225",
+      "current_sha256": "a71bb18612e61661afc905c71711aaf5cfe37efbd6a5c191a916927819123e37",
+      "supporting_evidence": "s13-r719-witnessed-anchor-batch.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "prior_inventory_sha256": "82e5bae3413740ce3172df64a85405ce17cbab54b0cdb607d67596b5d988240d",
+      "current_sha256": "105f6260fa8fb1812e2a1fcc25de69886f56996d36ffa70186ed088612b6e098",
+      "supporting_evidence": "s13-r704-fpu-anchor-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lldt.c",
+      "prior_inventory_sha256": "12a7f0857e64884f3b8d069076b5005ccab12a1cde6e698c322c14935b183adc",
+      "current_sha256": "f7c791af8bda2ca0ce231a68555f0f18840fc28b3245732e569d9aea01d26f2a",
+      "supporting_evidence": "s13-r691-batch-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "prior_inventory_sha256": "fc9820e325c72ec491564cc4ae6499089e109dae3c2721cb075aff31042a25c7",
+      "current_sha256": "acb5eada1a872bc2a4be06cb726e50bffa6e596756b78fa7e929fedef42aa36f",
+      "supporting_evidence": "s13-r680-witnessed-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "prior_inventory_sha256": "df21bf74bc2d964341250f47914104af1b03c30762cbdc07cac1877cd529c607",
+      "current_sha256": "a40e0f8d68dc969eddaa6762df9142e089a8fac5e478aca38bfe4c4e893410b3",
+      "supporting_evidence": "s13-r729-keyboard-anchor-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "prior_inventory_sha256": "00bc52ffb3faa922ddf5bdd7b0bb88b9605c4ca83fcc1d9f2c1de1662487bca0",
+      "current_sha256": "469d7f498f27e70dcfd04b2e7596e7f7bbda69cdc94ca401a4716544d453a385",
+      "supporting_evidence": "s13-r691-batch-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+      "prior_inventory_sha256": "f51346082abab3ebfe9931b0947f699e9184d69ddb59f9fb3af74aed0db35870",
+      "current_sha256": "a9752b272d2c089e4a2e5bd256f8e9f7dcdc08a93e310ec85635c2bc636f3d0f",
+      "supporting_evidence": "s13-r691-batch-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+      "prior_inventory_sha256": "3a56b6db24cc51b624d853a91489209b5875c83009f6950f8b50f62bf98b75f9",
+      "current_sha256": "15f7c04de7479ba122b2516c499f59ae01d598931881902a4b042c2ae649b398",
+      "supporting_evidence": "s13-r707-idetect-anchor-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "prior_inventory_sha256": "da8cc74b8451863fdc370ee86789fcd5026d186bfd231742135d1329df553795",
+      "current_sha256": "ff5c3e21663c521586a49006c1a9dbe68655db976bb6822c57418a52c9b7e8a3",
+      "supporting_evidence": "s13-r708-qevnt-anchor-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "prior_inventory_sha256": "d9b99fa1f691dae52e7042f960d776a972a885f2893261e7b200605b877d2d1d",
+      "current_sha256": "85413fb1b67bc42c3846eea19a617883e4074ddc75fdd009167780028819f1c6",
+      "supporting_evidence": "s13-r691-batch-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+      "prior_inventory_sha256": "03dc934cf49f60fd176c2605fce3237cba4e88a96ff9e74dc416537abad7f95b",
+      "current_sha256": "f54a920671280678d4c7e4881e3788653eddd9a0405b0abdafe12633dd18b046",
+      "supporting_evidence": "s13-r731-witnessed-anchor-batch.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_mode.c",
+      "prior_inventory_sha256": "7a1f442ae2f2371fdecff75cd95c824676e1ca20f5b388f66476ce416c1ba99c",
+      "current_sha256": "c5ba228930bfe1e4dba970f4735b00041769592aacff4f224c836863e99f7c0c",
+      "supporting_evidence": "s13-r733-egamode-condition-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "prior_inventory_sha256": "1c29adc7890344ac638702e8fd5d9a7f3bfe45bc09865996475f573b628edfbf",
+      "current_sha256": "0f17eacc388fdc85c5c77e6c9555e5e56fb5c63647561d43c5737e7b425d3ae7",
+      "supporting_evidence": "s13-r736-egaread-anchor-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+      "prior_inventory_sha256": "15cf7b18958fc6719cd6393b64250471f60a80ba83094235f2721c0fa8b7eda5",
+      "current_sha256": "4707df970954edcae73ba0e47f9c46e76405bc7bb6271a24d359f2bd2af0024d",
+      "supporting_evidence": "s13-r741-egavide-anchor-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "prior_inventory_sha256": "e18353c24a4121f7ef8823f226e1fa515e205a7ede4d1d3614f0e441bbae4376",
+      "current_sha256": "f3a601450ac4d3ee7aee5701d659bcc26456dc9b16fb2d4db18f8362859dcd4f",
+      "supporting_evidence": "s13-r744-egawrit-anchor-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_vide.c",
+      "prior_inventory_sha256": "ba085c8680f3f30cc36956b5fd9249b9c7539d8f92e245fe50a6b0a8d9f00d19",
+      "current_sha256": "9935aa8c68acf42cafc96a7a46403bcb015f347509b25780b7f56920d11756c3",
+      "supporting_evidence": "s13-r691-batch-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "prior_inventory_sha256": "c6bf44879cd48ee597ba17afa563a5abd9ed2886485e3dfc84cd5753b499b8f5",
+      "current_sha256": "053ea94ae0d2b2fb19b8effee4aeda88151f8317629e9d5cd8894eb92b4c26bb",
+      "supporting_evidence": "s13-r711-ntbop-anchor-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+      "prior_inventory_sha256": "699de0d85b7f2e9a5ca1e2d07308e174ddafd398f2d92fa95809c39c85dffcaf",
+      "current_sha256": "bda105ceefe9983e991553d9ce3b73e766b78770d9b6941f95d2476e981672c9",
+      "supporting_evidence": "s13-r691-batch-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "prior_inventory_sha256": "ae0f136083cea6a811800c65a5f38012a9161fb71bd1f65d90b0fcc36fad1579",
+      "current_sha256": "5feadea155ef7603be29f4ffa497a3e4397bd9923e5140bc0d24aabd7dab60f5",
+      "supporting_evidence": "s13-r710-nteoi-anchor-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/x86_emm.c",
+      "prior_inventory_sha256": "baab03e2f20d7a4e33ba87df317cb732d1c2927a55f228796ed7472754ac9f1d",
+      "current_sha256": "9846af750733fcd2b736ab3f95fe0e3e9ae3446e212592f7366b8bfddcef0fac",
+      "supporting_evidence": "s13-r691-batch-review.json"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdisp.c",
+      "prior_inventory_sha256": "c447b517e3efbde64db538a1d02bc695728cc3cfaf76361061cc5bbf67d2b944",
+      "current_sha256": "ace77f81f45586b2700d5ce16149e8f791d88c8bc6b43e891423394a1f770c97",
+      "supporting_evidence": "s13-r691-batch-review.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/walias.c",
+      "prior_inventory_sha256": "d60192f0ff6d97f3852174956c55913c9931734f85c86b5a60eaded6f957278c",
+      "current_sha256": "ed1f93ee396d432f1f398b29a1fb6261ec07a425fc8630ba99d38355da7c49e8",
+      "supporting_evidence": "s13-r701-wow-context-review.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdib.c",
+      "prior_inventory_sha256": "775c2dd258f15e0a3f86665a4c0ed95a759e70e89333b6d5b4336a519a1269fc",
+      "current_sha256": "88ba7a3bbbd31154db9a509bf8b221eafc2d92af5417d0400ba8432387596942",
+      "supporting_evidence": "s13-r691-batch-review.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "prior_inventory_sha256": "81fa78f1393a763148155cbd7f97a2a52198ad4515681c776dc2e5e889678e6c",
+      "current_sha256": "5b62144e8c93a794f7f64015517aff6d4654e020467a29132ad291a06b6a800f",
+      "supporting_evidence": "s13-r692-witnessed-anchor-batch.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wusercli.c",
+      "prior_inventory_sha256": "d7fbfdface0a54ab86328659037f4ef4ff6fcc5815c90493828d2b71acf0cabb",
+      "current_sha256": "265db11048df58488afa75b2d352355b1e6077841ab5bd0a8906ee63dcc7dfe9",
+      "supporting_evidence": "s13-r692-witnessed-anchor-batch.json"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "prior_inventory_sha256": "d3497e87ba1091ab107bad4582220dce4fa6acb7ecb9e0a03616b68217836efd",
+      "current_sha256": "a54ee860821ba760cdfe8da3bd36e3d56fa337e1b8cf283b90d0af34467e2d65",
+      "supporting_evidence": "s13-r712-xmsblock-anchor-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+      "prior_inventory_sha256": "2f41bd9397108a71c3e217cb7969dfe15742e5e2d382dc8d840694f95c9fb87e",
+      "current_sha256": "f3660a8248a7f118f8443b1667e4e39d747e33da1d2291ca954f4720c30544b9",
+      "supporting_evidence": "s13-r667-tree-review.json"
+    }
+  ],
+  "limits": "Hash reconciliation does not independently prove all supported compilation contexts or re-audit selected semantics; corresponding source evidence remains authoritative.",
+  "additional_check": {
+    "scope": "records marked no conditional directives in either version",
+    "files": 483,
+    "both_current_and_original_lexical_scans": "no conditional directives",
+    "contradictions": 0,
+    "method": "project lexical_directives scanner, original and current text; this is a lexical check, not proof of compilation-context coverage"
+  }
+}
