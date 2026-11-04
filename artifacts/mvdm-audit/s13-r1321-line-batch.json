@@ -1,0 +1,289 @@
+{
+  "method": "Matched original blocks, inserting #line only outside comments, continuations and parenthesized expressions; matched active code lines checked. Line boundaries split on newline so original form feeds are preserved. Non-code comments may retain different logical positions.",
+  "records": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdenv.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdenv.c",
+      "before_sha256": "128d0b8f6aba63e92fe3aed51a5daa77c8ec74c8a1735ba9f2e80ff9d99b3f40",
+      "after_sha256": "fa608e4f3f5b9379f2b38b6a03a193aca8ee5ce4edbf151c148967cba6406fc1",
+      "original_sha256": "afc71d306491fe6a7f8cd7356b8682176a33a05f3652bae735be079b3cd0a32b",
+      "anchors": [
+        {
+          "before_physical_line": 25,
+          "original_line": 19
+        },
+        {
+          "before_physical_line": 198,
+          "original_line": 190
+        },
+        {
+          "before_physical_line": 317,
+          "original_line": 310
+        },
+        {
+          "before_physical_line": 333,
+          "original_line": 316
+        },
+        {
+          "before_physical_line": 352,
+          "original_line": 329
+        }
+      ],
+      "matching_lines": 693,
+      "matching_code_line_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demfcb.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demfcb.c",
+      "before_sha256": "f8c6b1f633756a9d9088a3200ccb7a5215275ff1117d495c64d762be9e9e2f74",
+      "after_sha256": "913254770d7756f72fc46079d689698e74a313076f2a0c9230d69038b84871f6",
+      "original_sha256": "2705fe134a825c3fbcb11594cf1aa23e858438a43d1de0c03e010930f921c670",
+      "anchors": [
+        {
+          "before_physical_line": 453,
+          "original_line": 451
+        },
+        {
+          "before_physical_line": 477,
+          "original_line": 465
+        },
+        {
+          "before_physical_line": 490,
+          "original_line": 480
+        },
+        {
+          "before_physical_line": 504,
+          "original_line": 492
+        },
+        {
+          "before_physical_line": 524,
+          "original_line": 506
+        }
+      ],
+      "matching_lines": 762,
+      "matching_code_line_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demgset.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demgset.c",
+      "before_sha256": "1ef781412422ce7048fe2e40b0d8b067d4acccd83c35b8b29a7fb8a5d1551d7d",
+      "after_sha256": "a538249984b8ec506747c59707c515e250d40e71c596e9d5b00c9a86dc47c9e0",
+      "original_sha256": "19c5999308a479cc9c0fcb30d23e8301d9a835408417aa965b85523dfb8a1653",
+      "anchors": [
+        {
+          "before_physical_line": 29,
+          "original_line": 28
+        },
+        {
+          "before_physical_line": 41,
+          "original_line": 42
+        },
+        {
+          "before_physical_line": 563,
+          "original_line": 562
+        },
+        {
+          "before_physical_line": 575,
+          "original_line": 566
+        },
+        {
+          "before_physical_line": 592,
+          "original_line": 569
+        },
+        {
+          "before_physical_line": 683,
+          "original_line": 659
+        }
+      ],
+      "matching_lines": 1002,
+      "matching_code_line_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/oemuni/file.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\oemuni\\file.c",
+      "before_sha256": "83cdb96808ad79df98c608be95cdd16f7229b2e4946b86e6a473edae8f2407ce",
+      "after_sha256": "b2b4904eb00d0a641c5d858c57dde41477243172b1ad71893dc92fd63856b091",
+      "original_sha256": "a3184eb571d6822577b52849e2da3955689899ecc6dfd9df100ff3f3636be5df",
+      "anchors": [
+        {
+          "before_physical_line": 522,
+          "original_line": 519
+        },
+        {
+          "before_physical_line": 562,
+          "original_line": 550
+        },
+        {
+          "before_physical_line": 577,
+          "original_line": 564
+        },
+        {
+          "before_physical_line": 627,
+          "original_line": 612
+        },
+        {
+          "before_physical_line": 892,
+          "original_line": 875
+        },
+        {
+          "before_physical_line": 917,
+          "original_line": 899
+        },
+        {
+          "before_physical_line": 920,
+          "original_line": 901
+        },
+        {
+          "before_physical_line": 1087,
+          "original_line": 1064
+        },
+        {
+          "before_physical_line": 1129,
+          "original_line": 1098
+        }
+      ],
+      "matching_lines": 1126,
+      "matching_code_line_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsext.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wsext.c",
+      "before_sha256": "62e2390f9ec198c09384dc1b18110b25fcba0cfedc189da3e3effba9653cac14",
+      "after_sha256": "95bccb99783197dc6c3188820b964a20fa9ee7d0a5915f7a581e8097ac0ff07d",
+      "original_sha256": "13a04aa32c045b6dfde4a12099d06c99ce2ec84362f30f296d677f7c47b200f7",
+      "anchors": [
+        {
+          "before_physical_line": 244,
+          "original_line": 240
+        },
+        {
+          "before_physical_line": 628,
+          "original_line": 616
+        }
+      ],
+      "matching_lines": 893,
+      "matching_code_line_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/non-mvdm/base/ntdll/csrutil.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\ntdll\\csrutil.c",
+      "before_sha256": "c1e8ef791ca6b4467674df90e644c51771c71191fa82de0938b8ad8a9b7c3054",
+      "after_sha256": "d0e4dc5e4b9b33ab7f9b838565b9a8bd629fff79e2cde00e3bcf0b7c199dac6f",
+      "original_sha256": "7a176482498e1aca00e9651c326a9b62a8ba2ada0aa7f90f8b585acd1a376e6a",
+      "anchors": [
+        {
+          "before_physical_line": 7,
+          "original_line": 265
+        },
+        {
+          "before_physical_line": 70,
+          "original_line": 327
+        },
+        {
+          "before_physical_line": 105,
+          "original_line": 361
+        },
+        {
+          "before_physical_line": 221,
+          "original_line": 476
+        }
+      ],
+      "matching_lines": 232,
+      "matching_code_line_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/api/apibuff.c",
+      "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\api\\apibuff.c",
+      "before_sha256": "182096c659b17ad8e7b4adf38ef36eb49d2734cbbb58779ee4a3997145c70d02",
+      "after_sha256": "6e60356dc9395c548ed7487a4c16dbdc95915fee15220f60af08f996a576360a",
+      "original_sha256": "420a2973fd10924de9d6f709a88a79ef05bad74c61eaea1ea5b678b181c31161",
+      "anchors": [
+        {
+          "before_physical_line": 15,
+          "original_line": 48
+        },
+        {
+          "before_physical_line": 21,
+          "original_line": 50
+        },
+        {
+          "before_physical_line": 26,
+          "original_line": 231
+        }
+      ],
+      "matching_lines": 44,
+      "matching_code_line_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/strucsiz.c",
+      "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\rap\\strucsiz.c",
+      "before_sha256": "0645bfdfda23004d8d06e72c19a726a1d911d496b7d618dac95efc5e94e7701b",
+      "after_sha256": "f99d37f08cd34c9527c4279f33eeb893ecd4b4cf8e3e7498775de4f3029ad095",
+      "original_sha256": "b8a2677d4140e82eb197a1d16076603bf34ba661a7006fa8ac23fa1c0618e6e6",
+      "anchors": [
+        {
+          "before_physical_line": 15,
+          "original_line": 37
+        },
+        {
+          "before_physical_line": 19,
+          "original_line": 46
+        },
+        {
+          "before_physical_line": 26,
+          "original_line": 77
+        },
+        {
+          "before_physical_line": 43,
+          "original_line": 93
+        }
+      ],
+      "matching_lines": 38,
+      "matching_code_line_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
+      "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\xactsrv\\apiuse.c",
+      "before_sha256": "b00e9457e9eb18a9a9b688783d5f8ffd3aae3eb88c92880ae6927297d293036d",
+      "after_sha256": "4cf4b9f7f29f423310e2012a5f5ddafc901a683a1cb834862777c9ad105bea29",
+      "original_sha256": "93d368f24f2b8fdf82e7f3459dbd53d028ccf6059db5e0f7fb621826135e96c4",
+      "anchors": [
+        {
+          "before_physical_line": 39,
+          "original_line": 38
+        }
+      ],
+      "matching_lines": 739,
+      "matching_code_line_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/hdata.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\hdata.c",
+      "before_sha256": "eb8300abc2b50b503315b2426c619c34e7c1cdd2e3aafa9492bd49ba90699cc7",
+      "after_sha256": "00a301aee092b9e191de116445c9b3fd21a059893b2ee0e99a963dd7ea24c008",
+      "original_sha256": "3bec21c4bb3caef0798208693a89012df6005c6a330f0f670f974a1ce821fca2",
+      "anchors": [
+        {
+          "before_physical_line": 14,
+          "original_line": 453
+        },
+        {
+          "before_physical_line": 129,
+          "original_line": 567
+        }
+      ],
+      "matching_lines": 125,
+      "matching_code_line_mismatches": 0,
+      "non_line_bytes_equal_previous": true
+    }
+  ]
+}

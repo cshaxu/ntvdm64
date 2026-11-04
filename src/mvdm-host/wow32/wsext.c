@@ -241,6 +241,7 @@ ULONG FASTCALL WWS32WSAUnhookBlockingHook(PVDMFRAME pFrame)
        provider can never unhook.  Preserve the original provider predicate
        and only reject an actual blocking call. */
     if ( (*wsockapis[WOW_WSAISBLOCKING].lpfn)( ) ) {
+#line 240
         SetLastError( WSAEINPROGRESS );
         RETURN((ULONG)SOCKET_ERROR);
     }
@@ -625,6 +626,7 @@ WWS32TaskCleanup(
     WWS32CancelAsyncRequestsForTask( data->ThreadSerialNumber );
 
     //
+#line 616
     // Free thread data user for the database calls.
     //
 

@@ -11,6 +11,7 @@
  * owner; DDEML instance/transaction/copy APIs require the excluded USER
  * subsystem. Its finite declarations and public API macros are adapter-owned. */
 #include "wow_dde_data_bindings.h"
+#line 453
 
 /***************************************************************************\
 * FreeDDEData
@@ -126,4 +127,5 @@ BOOL fFreeTruelyGlobalObjects)
 }
 
 /* DIVERGENCE(OPENNT-HOST-032): remaining original DDEML APIs omitted. */
+#line 567
 

@@ -519,6 +519,7 @@ Routine Description:
        after a successful conversion; initialize the local sentinel so an
        unusual provider result cannot publish an uninitialized host pointer. */
     PWSTR FilePart = NULL;
+#line 519
     PWSTR *FilePartPtr;
 
     if ( ARGUMENT_PRESENT(lpFilePart) ) {
@@ -559,6 +560,7 @@ Routine Description:
     else {
         UnicodeLength = 0;
         }
+#line 550
     if ( UnicodeLength && UnicodeLength < nBufferLength ) {
         RtlInitUnicodeString(&UnicodeResult,Ubuff);
         Status = RtlUnicodeStringToOemString(&OemResult,&UnicodeResult,TRUE);
@@ -574,6 +576,7 @@ Routine Description:
                     /* DIVERGENCE MVDM-HOST-DIV-274: OEM prefix bytes. */
                     UnicodeResult.Length = (USHORT)((FilePart - Ubuff)*sizeof(WCHAR));
                     *lpFilePart = lpBuffer + RtlUnicodeStringToOemSize(&UnicodeResult)-1;
+#line 564
                     }
                 }
             }
@@ -624,6 +627,7 @@ Routine Description:
     /* DIVERGENCE MVDM-HOST-DIV-275: original BaseClient DBCS sizing,
        using OEM bytes and the caller's actual capacity. */
     if ( nBufferLength >= RtlUnicodeStringToOemSize(Unicode) ) {
+#line 612
         OemString.Buffer = lpBuffer;
         OemString.MaximumLength = (USHORT)min(nBufferLength,65535);
         Status = RtlUnicodeStringToOemString(&OemString,Unicode,FALSE);
@@ -889,6 +893,7 @@ Routine Description:
     /* DIVERGENCE MVDM-HOST-DIV-269: retain the original false failure
        contract when an allocation/SEH cleanup path reaches the final return. */
     BOOL ReturnValue = FALSE;
+#line 875
 
     Unicode = &NtCurrentTeb()->StaticUnicodeString;
     InitOemString(
@@ -914,9 +919,11 @@ Routine Description:
     OemVolumeName.Buffer = lpVolumeNameBuffer;
     /* DIVERGENCE MVDM-HOST-DIV-275: no extra byte beyond caller capacity. */
     OemVolumeName.MaximumLength = (USHORT)nVolumeNameSize;
+#line 899
     OemFileSystemName.Buffer = lpFileSystemNameBuffer;
     /* DIVERGENCE MVDM-HOST-DIV-275: same bound for the second output. */
     OemFileSystemName.MaximumLength = (USHORT)nFileSystemNameSize;
+#line 901
 
     try {
         if ( ARGUMENT_PRESENT(lpVolumeNameBuffer) ) {
@@ -1084,6 +1091,7 @@ Routine Description:
        name independently of the caller's OEM capacity. */
     DWORD UnicodeCapacity = MAX_COMPUTERNAME_LENGTH+1;
     NTSTATUS Status;
+#line 1064
 
     //
     // Work buffer needs to be twice the size of the user's buffer
@@ -1126,6 +1134,7 @@ Routine Description:
         SetLastError(Status == STATUS_BUFFER_OVERFLOW ? ERROR_BUFFER_OVERFLOW : RtlNtStatusToDosError(Status));
         return FALSE;
     }
+#line 1098
 
     *nSize = OemString.Length;
     RtlFreeHeap(RtlProcessHeap(), 0, UnicodeBuffer);

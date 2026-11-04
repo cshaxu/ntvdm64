@@ -12,10 +12,12 @@ Abstract:
     are shared between XactSrv and RpcXlate.
 
 --*/
+#line 37
 
 #include <windef.h>
 #include <lmcons.h>
 #include <rap.h>
+#line 46
 
 DWORD
 RapStructureSize (
@@ -23,6 +25,7 @@ RapStructureSize (
     IN RAP_TRANSMISSION_MODE TransmissionMode,
     IN BOOL Native
     )
+#line 77
 {
     DWORD structureSize;
 
@@ -40,3 +43,4 @@ RapStructureSize (
 
     return structureSize;
 }
+#line 93

@@ -4,6 +4,7 @@
  * transport, pointer rebasing and every other runtime function are excluded.
  * The owning process supplies a local capture heap; no shared port section. */
 #include <base_capture.h>
+#line 265
 
 PCSR_CAPTURE_HEADER
 CsrAllocateCaptureBuffer(
@@ -67,6 +68,7 @@ Return Value:
     Size += sizeof( CSR_CAPTURE_HEADER ) + (CountPointers * sizeof( PVOID ));
     /* DIVERGENCE(OPENNT-HOST-066): native pointer alignment; x86 remains4. */
     Size = (Size + ((sizeof(PVOID)-1) * (CountPointers+1))) & ~(sizeof(PVOID)-1);
+#line 327
 
     //
     // Allocate the capture buffer from the Port Memory Heap.
@@ -102,6 +104,7 @@ Return Value:
     if (CountPointers != 0) {
         /* DIVERGENCE(OPENNT-HOST-066): retain complete local pointer values. */
         CaptureBuffer->MessagePointerOffsets = (PULONG_PTR)(CaptureBuffer + 1);
+#line 361
 
         CaptureBuffer->CapturePointerOffsets =
             CaptureBuffer->MessagePointerOffsets + CountMessagePointers;
@@ -218,6 +221,7 @@ Return Value:
 
         /* DIVERGENCE(OPENNT-HOST-066): x86's original four-byte result remains. */
         Length = (Length + sizeof(PVOID)-1) & ~(sizeof(PVOID)-1);
+#line 476
 
         //
         // Update the free space pointer to point to the next available byte

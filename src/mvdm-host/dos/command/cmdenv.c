@@ -22,6 +22,7 @@
  * was a process-address alias.  Preserve the original byte order and BX
  * paragraph contract through one synchronous write lease instead. */
 #include "mvdm_guest_location.h"
+#line 19
 
 #define VDM_ENV_INC_SIZE    512
 
@@ -195,6 +196,7 @@ VOID cmdGetInitEnvironment(VOID)
     BOOL fVarIsWindir = FALSE;
     mvdm_guest_location environment_location;
     mvdm_guest_location_lease environment_lease;
+#line 190
 
     // if not during the initialization return nothing
     if (!IsFirstCall) {
@@ -314,6 +316,7 @@ VOID cmdGetInitEnvironment(VOID)
 	    cchInitEnvironment = 0;
 	}
     }
+#line 310
     cchEnvBuffer =  (WORD)getBX() << 4;
     if (cchEnvBuffer < cchInitEnvironment + cbComSpec) {
 	setBX((USHORT)((cchInitEnvironment + cbComSpec + 15) >> 4));
@@ -330,6 +333,7 @@ VOID cmdGetInitEnvironment(VOID)
 	    return;
 	}
 	lpszzEnvBuffer = (CHAR *)environment_lease.bytes;
+#line 316
 	strncpy(lpszzEnvBuffer, lpszComSpec, cbComSpec);
 	lpszzEnvBuffer += cbComSpec;
     }
@@ -349,6 +353,7 @@ VOID cmdGetInitEnvironment(VOID)
 	setAX((USHORT)ERROR_INVALID_ADDRESS);
 	return;
     }
+#line 329
 
     return;
 }

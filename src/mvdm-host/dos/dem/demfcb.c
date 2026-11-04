@@ -450,6 +450,7 @@ DWORD	dwSize,dwSizeHigh;
 DWORD	dwErrCode;
 mvdm_guest_location_lease dtaLease;
 BOOL dtaWrite;
+#line 451
 
     hFile = GETHANDLE (getAX(),getBP());
     CurOffset = (((ULONG)getDI()) << 16) + (ULONG)getDX();
@@ -474,6 +475,7 @@ BOOL dtaWrite;
         return;
     }
     pBuf = dtaLease.bytes;
+#line 465
 
     if(getBX()) {	// Read Operation
 	if (ReadFile (hFile,
@@ -487,6 +489,7 @@ BOOL dtaWrite;
             demClientError(hFile, (CHAR)-1);
             return ;
 	}
+#line 480
     }
     else {
 	if (WriteFile (hFile,
@@ -501,6 +504,7 @@ BOOL dtaWrite;
 	    dwErrCode = GetLastError();
 
             (void)mvdm_guest_location_release(&dtaLease, FALSE);
+#line 492
 	    if(dwErrCode == ERROR_DISK_FULL) {
 
 		setCX( (USHORT) dwBytesIO);
@@ -521,6 +525,7 @@ BOOL dtaWrite;
         SetLastError(ERROR_INVALID_ADDRESS);
         demClientError(hFile, (CHAR)-1);
         return;
+#line 506
     }
 
     // Get File Size

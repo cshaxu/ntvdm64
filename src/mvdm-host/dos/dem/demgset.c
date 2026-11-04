@@ -26,6 +26,7 @@
 #include <winbase.h>
 #include "demdasd.h"
 #include "ntvdm-exe/softpc/include/mvdm_shadow_registry.h"
+#line 28
 
 #define BOOTDRIVE_PATH "Software\\Microsoft\\Windows\\CurrentVersion\\Setup"
 #define BOOTDRIVE_VALUE "BootDir"
@@ -38,6 +39,7 @@ BYTE demGetDpbI(BYTE Drive, DPB UNALIGNED *pDpb);
 
 
 UCHAR PhysicalDriveTypes[26]={0};
+#line 42
 
 USHORT  nDrives = 0;
 CHAR    IsAPresent = TRUE;
@@ -560,6 +562,7 @@ VOID demSetDTALocation (VOID)
     mvdm_guest_location dos_wow_data_location;
     mvdm_guest_location_lease dos_wow_data_lease;
     ULONG sft_offset;
+#line 562
 
     /* DIVERGENCE MVDM-HOST-DIV-005: retain DS:AX numerically; consumers read
      * this far-address cell under a fresh bounded lease. */
@@ -572,6 +575,7 @@ VOID demSetDTALocation (VOID)
      * native pointer returned by GetVDMAddr. */
     mvdm_guest_location_set_real_mode(&extended_error_location, getDS(),
         getCX());
+#line 566
 
     /* DIVERGENCE MVDM-HOST-DIV-007: `lpSftAddr` is source numeric data in
      * DOSWOWDATA.  Read it under one short lease, then retain DS:offset;
@@ -589,6 +593,7 @@ VOID demSetDTALocation (VOID)
     } else {
         memset(&sft_head_location, 0, sizeof(sft_head_location));
     }
+#line 569
     return;
 }
 
@@ -680,6 +685,7 @@ DWORD   adwVolumeSerial[2],i;
 
     strncpy(pVolInfo->FileSystemType,achFileSystemType,FILESYS_NAME_SIZE);
     /* DIVERGENCE(MVDM-HOST-DIV-279): pad the filesystem field, not VolumeID. */
+#line 659
     for(i=0;i<FILESYS_NAME_SIZE;i++) {
         if (pVolInfo->FileSystemType[i] == '\0')
             pVolInfo->FileSystemType[i] = '\x020';
