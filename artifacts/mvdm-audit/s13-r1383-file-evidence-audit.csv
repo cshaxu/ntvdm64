@@ -76,7 +76,7 @@ src/mvdm-host/inc/rdrexp.h,O:\repos.external\OpenNT\base\mvdm\inc\rdrexp.h,false
 src/mvdm-host/inc/rdrsvc.h,O:\repos.external\OpenNT\base\mvdm\inc\rdrsvc.h,false,true,true,0,0,0,0,0,0,condition-free-original-code-aligned,0,s13-r1269-inventory-reconciliation.json;s13-r1327-condition-free-code-review.json,
 src/mvdm-host/inc/sharewow.h,O:\repos.external\OpenNT\base\mvdm\inc\sharewow.h,true,true,true,2,0,2,0,0,0,original-identity,0,s13-r615-shared-header-arms.json,
 src/mvdm-host/inc/softpc.h,O:\repos.external\OpenNT\base\mvdm\inc\softpc.h,false,true,true,3,0,1,2,0,0,not-fully-certified,0,s13-r768-softpc-header-contexts.json;s13-r1347-batch.json;s13-r1347-context-recheck.json,
-src/mvdm-host/inc/suballoc.h,O:\repos.external\OpenNT\base\mvdm\inc\suballoc.h,false,true,true,4,3,0,1,0,0,not-fully-certified,0,s13-r771-suballoc-header-contexts.json,
+src/mvdm-host/inc/suballoc.h,O:\repos.external\OpenNT\base\mvdm\inc\suballoc.h,false,true,true,4,3,0,1,0,0,original-excluded-tree-and-projection-aligned,0,s13-r771-suballoc-header-contexts.json;s13-r1384-suballoc-review.json,
 src/mvdm-host/inc/tdb16.h,O:\repos.external\OpenNT\base\mvdm\inc\tdb16.h,false,true,true,0,0,0,0,0,0,condition-free-original-code-aligned,0,s13-r1269-inventory-reconciliation.json;s13-r1327-condition-free-code-review.json,
 src/mvdm-host/inc/vdmredir.h,O:\repos.external\OpenNT\base\mvdm\inc\vdmredir.h,false,true,true,25,0,13,12,0,0,not-fully-certified,0,s13-r1052-vdmredir-full-file.json;s13-r1347-batch.json;s13-r1347-context-recheck.json,
 src/mvdm-host/inc/vint.h,O:\repos.external\OpenNT\base\mvdm\inc\vint.h,false,true,true,0,0,0,0,0,0,condition-free-original-code-aligned,0,s13-r1269-inventory-reconciliation.json;s13-r1327-condition-free-code-review.json,

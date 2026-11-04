@@ -1,0 +1,19 @@
+{
+  "path": "src/mvdm-host/inc/suballoc.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\suballoc.h",
+  "current_sha256": "8327513e33bc64eb41fdbbf797adfea0580b6180e7bce584b9e4ac4e082f5c2f",
+  "original_sha256": "98263eed4c261650c4b9c9b23f09f2ef19b31a0b1eb5c805d4c672ee85ded85c",
+  "original_branch": "i386",
+  "excluded_branch": "i386, body contains #line 33 and #error",
+  "local_branch": "_M_IX86, both alternatives recorded hit",
+  "directives_and_selected_content": "Original condition shell retained; local adaptation selects original 4096 and 65536 definitions. MVDM-SUPPORT-DIV-007 records the adaptation.",
+  "line_positions": "Two retained branch projections compared; no matching-code logical line mismatches.",
+  "limitations": "Projection comparison is source-derived rather than an independent compiler __LINE__ observation; recorded probes cover actual selected branches.",
+  "projection": {
+    "path": "src/mvdm-host/inc/suballoc.h",
+    "sha256": "8327513e33bc64eb41fdbbf797adfea0580b6180e7bce584b9e4ac4e082f5c2f",
+    "projections": 2,
+    "mismatches": []
+  },
+  "hit_evidence": "s13-r1308-branch-checklist.csv; s13-r771-suballoc-header-contexts.json"
+}
