@@ -72,7 +72,7 @@ if ($OriginalProviders) {
         'original-opennt-netapi-api.lib','original-opennt-xactsrv.lib',
         'common-root.lib','common-rpc.lib', 'lib-rpc.lib','lib-io.lib',
         'common-codec.lib','common-console.lib','lib-handle.lib','lib-file.lib',
-        'lib-process-hook.lib','lib-crt-compat.lib')
+        'lib-process-hook.lib','lib-crt-compat.lib','common-worker-thread.lib','lib-thread.lib')
     $libraries = $dependencies | ForEach-Object {
         $path = Join-Path (Join-Path $root $BuildCache) $_
         if (!(Test-Path $path)) { throw "Missing fixture dependency: $_" }

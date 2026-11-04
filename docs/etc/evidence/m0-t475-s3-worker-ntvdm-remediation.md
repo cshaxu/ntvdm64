@@ -105,3 +105,26 @@ WRITE editing and normal exit and Full were not tested; DOS4GW/NESticle was
 absent. Initial fixture attempts exposed command-line length and stale library
 inputs, which were corrected before the final rerun. Logs, both candidates
 and prior release backup are under `build/t475-s3-p5`.
+
+## P6: thread mechanism and worker binding
+
+The x86-compatible entry thunk, allocation and thread creation mechanism now
+belong to `lib-win32/thread`. `common/worker-thread` supplies the existing
+worker session capture, bind and fail-fast terminal cleanup callbacks without
+creating a second session or TLS authority. VDMREDIR selects both shared
+libraries instead of the former NTVDM-private thread implementation. The
+generic library's forbidden-product-dependency negative control passed.
+
+The x86/x64 build, session bind rollback, all four start forms, explicit exit,
+exception and terminal cleanup fixture passed. Redirector async publication
+(24 checks), actual original NetAPI entry points (12 checks), 12 Control gates
+and real DOS async-read, async-write and NetAPI probes passed. The local
+ten-image package `d240771a-26b9-4f8c-bccd-d05a90b697f7` has matching hashes.
+Full was not run; DOS4GW/NESticle was absent. Logs and prior release backup are
+under `build/t475-s3-p6`.
+
+P7's compiler-dependency sweep also found VDMREDIR reaching the async request
+contract and the forced SoftPC symbol-compatibility header in NTVDM-private
+paths. They are not resolved by P6 and require explicit disposition before
+source-boundary closure. NTVDM PE runtime imports remain a separate pending
+scope decision.

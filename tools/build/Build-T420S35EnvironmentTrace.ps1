@@ -35,8 +35,8 @@ if ($Boundary -eq 'command-dispatch') {
     $traceSource = 'command_dispatch_trace.c'
 }
 if ($Boundary -eq 'thread-exit') {
-    $memberName = 'obj/adapter-win32/thread_start_compat.obj'
-    $libraryName = 'softpc-win32-bindings.lib'
+    $memberName = 'obj/common/worker-thread/bridge.obj'
+    $libraryName = 'common-worker-thread.lib'
     $traceSource = 'wow_thread_exit_trace.c'
 }
 if ($Boundary -in @('dpmi','pm-allocation-failure','dpmi-pointer','dpmi-ioctl','dpmi-xmem-failure')) {

@@ -4,6 +4,9 @@
 page projections, package paths, FastBOP offsets and registry reads. The
 worker remains the sole owner of the underlying state and its lifecycle.
 
+`worker-thread/` binds the existing worker session around original thread
+entries. The generic calling-convention mechanism is in `lib-win32/thread`.
+
 `guest-memory/` owns the copied-value access and redirector declarations used
 across worker and DLL source boundaries. The existing worker session remains
 the only guest-memory and lease-context authority; no state is allocated here.

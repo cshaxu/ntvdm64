@@ -39,6 +39,13 @@ dependencies for 147 selected WOW objects contain no NTVDM-private headers;
 focused lifecycle/callback tests, 12 Control gates and four WRITE startup
 snapshots passed. Local package `fd657e29-7249-493c-a67f-3e74d689d861` has
 ten verified hashes. WRITE editing and normal exit and Full were not tested.
+P6 places generic thread entry/calling-convention handling in `lib-win32/thread`
+and session binding in `common/worker-thread`, retaining the one worker-owned
+session. The x86/x64 build, thread lifecycle, redirector fixtures, 12 Control
+gates and three real DOS probes passed. Local package
+`d240771a-26b9-4f8c-bccd-d05a90b697f7` has ten verified hashes. Full was not
+run. P7 must address two additionally reached VDMREDIR private headers and
+resolve the still-pending NTVDM runtime-import scope.
 T475 S1 separated NXVM and Win32 library ownership. Its final four local P
 commits extracted object-handle comparison, overlapped pipe-pair creation,
 parent-process observation and file identity. Their local packages each

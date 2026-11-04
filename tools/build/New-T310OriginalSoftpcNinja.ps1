@@ -256,7 +256,7 @@ if (!(Test-Path -LiteralPath $hostEntryResourceSource)) { throw "Original SoftPC
 if (!(Test-Path -LiteralPath $hostExportDefinition)) { throw "Original SoftPC export definition missing: $hostExportDefinition" }
 if (!(Test-Path -LiteralPath $redirResourceSource)) { throw "Original Redirector resource missing: $redirResourceSource" }
 if (!(Test-Path -LiteralPath $redirExportDefinition)) { throw "Original Redirector export definition missing: $redirExportDefinition" }
-$adapterWin32Names = @('ntioapi_facade.c', 'thread_start_compat.c', 'ccpu_thread_exit_compat.c',
+$adapterWin32Names = @('ntioapi_facade.c', 'ccpu_thread_exit_compat.c',
                           'nt_thread_alert_compat.c',
                           'console_compat.c', 'console_client.c', 'worker_lifecycle.c', 'console_bitmap.c', 'console_graphics.c', 'console_text.c',
                            'command_process_compat.c', 'wow_private_unavailable.c',
@@ -1150,6 +1150,14 @@ $crtCompatObject = 'obj/lib-win32/crt-compat/crt_compat.obj'
 $graph.Add('build ' + $crtCompatObject + ': cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/crt-compat/crt_compat.c')))
 $graph.Add('  cflags = ' + $authoredSoftpcFlags)
 $graph.Add('build lib-crt-compat.lib: lib ' + $crtCompatObject)
+$threadObject = 'obj/lib-win32/thread/thread.obj'
+$graph.Add('build ' + $threadObject + ': cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/thread/thread.c')))
+$graph.Add('  cflags = ' + $authoredSoftpcFlags)
+$graph.Add('build lib-thread.lib: lib ' + $threadObject)
+$threadBridgeObject = 'obj/common/worker-thread/bridge.obj'
+$graph.Add('build ' + $threadBridgeObject + ': cc ' + (NinjaPath (Join-Path $root 'src/common/worker-thread/bridge.c')))
+$graph.Add('  cflags = ' + $authoredSoftpcFlags)
+$graph.Add('build common-worker-thread.lib: lib ' + $threadBridgeObject)
 $adapterBaseSrvObjects = foreach ($name in $adapterBaseSrvNames) {
     $object = 'obj/adapter-basesrv/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterBaseSrvRoot $name)))
@@ -2171,7 +2179,7 @@ if ($Architecture -eq 'x86') {
     for($i=0;$i -lt $graph.Count;$i++) {
         if($graph[$i] -match '^build .*: \S*link ' -and $graph[$i].Contains('softpc-win32-bindings.lib')) {
             $barrier=$graph[$i].IndexOf(' |',$graph[$i].IndexOf(':')+1)
-            if($barrier -ge 0){$graph[$i]=$graph[$i].Insert($barrier,' lib-crt-compat.lib')}else{$graph[$i]+=' lib-crt-compat.lib'}
+            if($barrier -ge 0){$graph[$i]=$graph[$i].Insert($barrier,' lib-crt-compat.lib common-worker-thread.lib lib-thread.lib')}else{$graph[$i]+=' lib-crt-compat.lib common-worker-thread.lib lib-thread.lib'}
         }
         if($graph[$i] -match '^build .*: \S*link ' -and ($graph[$i].Contains('nthook-installer.lib') -or $graph[$i].Contains('nthook-context.lib'))) {
             $barrier=$graph[$i].IndexOf(' |',$graph[$i].IndexOf(':')+1)

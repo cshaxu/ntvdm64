@@ -24,7 +24,8 @@ function Run-Owned([string]$name,[string]$file,[string]$arguments,[int]$seconds)
 try {
     $sources=@('src/ntvdm-exe/session/guest_memory_lease.c',
         'src/ntvdm-exe/session/session.c',
-        'src/ntvdm-exe/win32/thread_start_compat.c',
+        'src/common/worker-thread/bridge.c',
+        'src/lib-win32/thread/thread.c',
         'src/ntvdm-exe/win32/ccpu_thread_exit_compat.c',
         'tests/adapter-mvdm-host-out/thread_start_session_fixture.c')
     $objects=@()

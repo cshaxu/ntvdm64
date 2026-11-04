@@ -44,11 +44,7 @@ enum session_dispose_reason {
 
 /* Source-owned categories for the existing per-thread session binding.  They
  * are host-local diagnostics only, never guest/MVDM values. */
-enum session_thread_binding_owner {
-    SESSION_THREAD_BINDING_UNSPECIFIED = 0u,
-    SESSION_THREAD_BINDING_SOFTPC_ENTRY = 1u,
-    SESSION_THREAD_BINDING_ORIGINAL_WORKER = 2u
-};
+#include "common/worker-thread/session.h"
 
 #define SESSION_WORKER_SOURCE_MAX 64u
 

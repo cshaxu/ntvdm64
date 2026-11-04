@@ -67,7 +67,7 @@ build obj/ntstatus.obj: cc `$root/src/non-mvdm/ds/netapi/netlib/ntstatus.c
 build obj/async.obj: cc `$root/src/ntvdm-exe/redir/mvdm_redirector_async.c
 build obj/guest-copy.obj: cc `$root/src/vdmredir-dll/source/mvdm_redirector_guest_copy.c
 build obj/location.obj: cc `$root/src/ntvdm-exe/softpc/mvdm_guest_location.c
-build obj/thread.obj: cc `$root/src/ntvdm-exe/win32/thread_start_compat.c
+build obj/thread.obj: cc `$root/src/common/worker-thread/bridge.c
 build obj/session.obj: cc `$root/src/ntvdm-exe/session/session.c
 build obj/lease.obj: cc `$root/src/ntvdm-exe/session/guest_memory_lease.c
 build obj/fixture.obj: cc `$root/tests/mvdm-host/vdmredir/redirector_async_contract_fixture.c

@@ -25,6 +25,9 @@ The pinned Detours source and license are carried under this subcomponent.
 `crt-compat/` provides historical unbounded CRT formatting and scanning entry
 points for callers that require those spellings, using the modern UCRT ABI.
 
+`thread/` provides the generic x86-compatible thread entry and optional
+per-thread lifecycle callbacks; it owns no product session or policy.
+
 `process-observation/` retains an observation handle, reads process identity
 and image information, queries inherited parent identity, and registers/drains a one-shot exit wait; callbacks,
 process ownership, task identity and decisions remain caller-owned.

@@ -1,6 +1,6 @@
 /* Diagnostic-only build substitution; no guest writes or exit-policy changes. */
 #define opennt_exit_thread observed_original_exit_thread
-#include "../../src/ntvdm-exe/win32/thread_start_compat.c"
+#include "../../src/common/worker-thread/bridge.c"
 #undef opennt_exit_thread
 #include <stdio.h>
 
