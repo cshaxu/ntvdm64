@@ -594,6 +594,7 @@ Return Value:
     //BUGBUG turn off task bits
     SaveEFLAGS &= ~0x4000;
 #if !defined(CPU_40_STYLE)
+#line 529
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 
@@ -616,6 +617,7 @@ Return Value:
         BOOL WideFrame = (Handlers[IntNumber].Flags & VDM_INT_32) != 0;
         if (!BuildStackFrameWithWidth(3, WideFrame, TRUE, &VdmStackPointer, &NewSP)) {
 #else
+#line 540
 #error Unsupported excluded original configuration
 #endif
 #line 541
@@ -626,9 +628,10 @@ Return Value:
         /* A rejected frame does not commit the monitor's flag updates. */
         setEFLAGS(SaveEFLAGS & ~EFLAGS_TF_MASK);
 #else
+#line 529
 #error Unsupported excluded original configuration
 #endif
-#line 627
+#line 544
         if (WideFrame) {
 
             *(PDWORD16)(VdmStackPointer-4) =  SaveEFLAGS;
@@ -636,6 +639,7 @@ Return Value:
             /* PushInt changes DX after loading the return EIP into EDX. */
             *(PDWORD16)(VdmStackPointer-8) = (getEIP() & 0xffff0000UL) | getCS();
 #else
+#line 547
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
             *(PDWORD16)(VdmStackPointer-12) = getEIP();
@@ -650,6 +654,7 @@ Return Value:
         setEIP(Handlers[IntNumber].Eip);
         setESP(NewSP);
 #else
+#line 549
 #error Unsupported excluded original configuration
 #endif
 #line 562
@@ -1171,6 +1176,7 @@ BuildStackFrameWithWidth(
     BOOL WideFrame,
     BOOL NativePushInt,
 #else
+#line 1058
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
     PUCHAR *pVdmStackPointer,
@@ -1240,6 +1246,7 @@ Notes:
     #if defined(CPU_40_STYLE)
     if (WideFrame) {
     #else
+#line 1121
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
     #endif
         StackOffset = StackUnits*sizeof(DWORD);
@@ -1324,6 +1331,7 @@ Return Value:
         fDpmiIntsHaveBeenHooked = TRUE;
     }
 #else
+#line 1174
 #error Excluded unsupported i386 kernel VDM interrupt hook path
 #endif // i386
 #line 1175
@@ -1362,6 +1370,7 @@ Return Value:
         fDpmiIntsHaveBeenHooked = FALSE;
     }
 #else
+#line 1208
 #error Excluded unsupported i386 kernel VDM interrupt hook path
 #endif // i386
 #line 1209
@@ -1471,6 +1480,7 @@ Return Value:
 #if defined(CPU_40_STYLE) && defined(CCPU)
     pCode = Sim32pGetVDMPointerWithLinear(SegCS<<16, TRUE, &CodeBase);
 #else
+#line 1268
 #error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
 #endif
 

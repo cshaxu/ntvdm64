@@ -13,15 +13,15 @@
   "line_checks": {
     "error-anchor-match": 3859,
     "not-applicable": 3597,
-    "error-original-mapping-ambiguous": 25,
+    "error-original-mapping-ambiguous": 0,
     "error-preceding-line-anchor-verified": 8,
-    "error-original-reference-verified": 75,
+    "error-original-reference-verified": 100,
     "error-natural-match": 8,
     "error-prior-full-file-original-review": 28,
     "error-original-guard-line-verified": 2
   },
   "files_with_unobserved_retained": 6,
-  "files_with_ambiguous_error_line": 5,
+  "files_with_ambiguous_error_line": 0,
   "different_files_selected_lines_not_fully_certified": 501,
   "limitation": "Marker hits are observed compile contexts, not proof of every supported configuration. A hit requires retention; no hit is not proof of exclusion. Selected-line mapping for differing files is not completely certified.",
   "zero_branch_differing_files_scanned": 373,
@@ -55,5 +55,6 @@
   "batch_r1330_anchor_files_partially_corrected": 10,
   "batch_r1330_context_matched_anchors_corrected": 12,
   "batch_r1331_error_anchors_verified": 14,
-  "batch_r1332_error_anchors_verified": 30
+  "batch_r1332_error_anchors_verified": 30,
+  "batch_r1333_error_anchors_verified": 25
 }

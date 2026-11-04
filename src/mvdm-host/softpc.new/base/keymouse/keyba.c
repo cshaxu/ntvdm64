@@ -2417,6 +2417,7 @@ if (!waiting_for_next_8042_code)
 				 * original bitmap update and clears quick mode for the
 				 * selected single-session executor.
 				 */
+#line 2569
 				cpu_interrupt(CPU_HW_RESET, 0);
 #endif /* CPU_30_STYLE */
 #line 2572

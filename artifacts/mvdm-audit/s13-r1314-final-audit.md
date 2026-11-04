@@ -95,6 +95,19 @@ images are identical and NTVDM/WOW32 differ only in PE timestamps
 ([comparison](s13-r1319-build-image-compare.json)); runtime tests were not
 repeated under owner instruction.
 
+The [r1333 batch](s13-r1333-line-batch.json) records references for the final
+25 entries classified as ambiguous excluded anchors in the current branch
+checklist, and corrects selected-source and continuation positions in the
+same ten files. A local-only guard at original EOF is labelled as such; it
+does not imply an original excluded arm existed. This resolves that specific
+checklist category, not the full condition-tree or selected-line audit. Build
+passed for cached x86 root, NTVDM worker, WOW32 and x64; the full package was
+verified at both destinations. Eight images are byte-identical, WOW32 differs
+only by timestamp, and NTVDM differs by one diagnostic `__LINE__` byte plus
+timestamps. The [binary/source proof](s13-r1333-diagnostic-line-proof.json)
+traces the immediate from 1414 to 1419 at the original-owner error call.
+Runtime tests were not repeated under the owner-approved line-only policy.
+
 The [r1332 excluded-anchor batch](s13-r1332-line-batch.json) maps 30
 additional local-profile guards to original statements, branch entries or
 the corresponding original `BACK_M` macro, and corrects eight continuation

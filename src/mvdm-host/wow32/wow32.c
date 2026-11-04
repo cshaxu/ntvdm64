@@ -580,6 +580,7 @@ BOOL W32Init(VOID)
                &WowKey
              ) != 0) {
 #ifdef DEBUG
+#line 582
 #error DIVERGENCE MVDM-HOST-DIV-595: DEBUG initialization profile is not selected
 #else
 #line 600
@@ -595,12 +596,13 @@ BOOL W32Init(VOID)
     //
 
 #ifdef DEBUG
+#line 590
 #error DIVERGENCE MVDM-HOST-DIV-595: DEBUG initialization profile is not selected
 #else
 #line 619
     {
 #endif
-#line 621
+#line 597
 
         //
         // Didn't find the registry value or it's the wrong type,
@@ -1562,8 +1564,10 @@ ULONG FASTCALL W32GetFastAddress( PVDMFRAME pFrame )
     UNREFERENCED_PARAMETER(pFrame);
     return mvdm_softpc_fast_bop_dispatch_offset();
 #elif FASTBOPPING
+#line 1871
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else
+#line 1873
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 #endif
@@ -1581,8 +1585,10 @@ ULONG FASTCALL W32GetFastCbRetAddress( PVDMFRAME pFrame )
     UNREFERENCED_PARAMETER(pFrame);
     return mvdm_softpc_fast_bop_callback_offset();
 #elif FASTBOPPING
+#line 1880
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else
+#line 1882
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 #endif
@@ -1627,8 +1633,10 @@ ULONG FASTCALL W32GetFlatAddressArray( PVDMFRAME pFrame )
      * but in worker guest memory rather than leaking a host array address. */
     return mvdm_softpc_wow_page_domain_flat_address_array(FlatAddress);
 #elif FASTBOPPING
+#line 1911
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else
+#line 1913
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 #endif

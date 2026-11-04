@@ -1,0 +1,293 @@
+{
+  "method": "Mapped all remaining excluded-profile guards to replaced original statements or original branch/EOF; local-only guards use the nearest original context and are identified as such. Selected anchors map to original code or the equivalent CPU40 adapter. Only #line directives changed. Other branches remain under audit.",
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+      "before_sha256": "e057126ff706a0df937168efbd1b9218c47d863fab820d3b2ea281a2c70d127b",
+      "after_sha256": "002777f850aeeed9e170bb2e4196a12f66fa9df58ac5597c76a6d9a02035d4d2",
+      "anchors": [
+        {
+          "old_directive_line": 596,
+          "original_line": 529,
+          "original_text": "setEFLAGS(SaveEFLAGS & ~EFLAGS_TF_MASK);"
+        },
+        {
+          "old_directive_line": 618,
+          "original_line": 540,
+          "original_text": "if (!BuildStackFrame("
+        },
+        {
+          "old_directive_line": 628,
+          "original_line": 529,
+          "original_text": "setEFLAGS(SaveEFLAGS & ~EFLAGS_TF_MASK);"
+        },
+        {
+          "old_directive_line": 638,
+          "original_line": 547,
+          "original_text": "getCS();"
+        },
+        {
+          "old_directive_line": 652,
+          "original_line": 549,
+          "original_text": "setEIP("
+        },
+        {
+          "old_directive_line": 1173,
+          "original_line": 1058,
+          "original_text": "BuildStackFrame("
+        },
+        {
+          "old_directive_line": 1242,
+          "original_line": 1121,
+          "original_text": "if (CurrentAppFlags)"
+        },
+        {
+          "old_directive_line": 1326,
+          "original_line": 1174,
+          "original_text": "#endif // i386"
+        },
+        {
+          "old_directive_line": 1364,
+          "original_line": 1208,
+          "original_text": "#endif // i386"
+        },
+        {
+          "old_directive_line": 1473,
+          "original_line": 1268,
+          "original_text": "Sim32GetVDMPointer("
+        }
+      ],
+      "selected_or_continuation_fixes": [
+        {
+          "physical": 631,
+          "old": 627,
+          "new": 544,
+          "kind": "original continuation"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keyba.c",
+      "before_sha256": "b839bb67b8d622ead7120127aa9adb82fe70a48f256ccd2574a7e126a81c3836",
+      "after_sha256": "be11f5abaa0e17d62ef2fae1c6e2f5557b05ee24640bb867d490ba626b7c6d90",
+      "anchors": [],
+      "selected_or_continuation_fixes": [
+        {
+          "physical": 2420,
+          "new": 2569,
+          "kind": "selected original or equivalent adapter statement"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\ica.c",
+      "before_sha256": "9cd9b54860ba48fa9cfcebcd52979e81fda64f15266ce29266760e06685cc62b",
+      "after_sha256": "26f429bce4f0adc1555bfbb76e1792f225bbe4ab1f9a20f57d67c148b4d0d191",
+      "anchors": [],
+      "selected_or_continuation_fixes": [
+        {
+          "physical": 1397,
+          "old": 1302,
+          "new": 1495,
+          "kind": "selected original continuation"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_event.c",
+      "before_sha256": "4445ff2d564fbe0b30fe65ff6408555017c33b48a4f30bf8426c82fdea861a9a",
+      "after_sha256": "2956ce4bdd68f97c63bf0526a23b0b7da37c7b746c6225487e254c708db235ca",
+      "anchors": [],
+      "selected_or_continuation_fixes": [
+        {
+          "physical": 1471,
+          "new": 1414,
+          "kind": "selected original or equivalent adapter statement"
+        },
+        {
+          "physical": 1477,
+          "new": 1415,
+          "kind": "selected original or equivalent adapter statement"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "before_sha256": "f8ba4d962d36cb7aa93e083d261769ecfe9d7569b6ac7a0c5df53ff1dfb26c5e",
+      "after_sha256": "85099e336c118e599d238f71d632757971a76407246682b2f7e22f70033f80e6",
+      "anchors": [
+        {
+          "old_directive_line": 92,
+          "original_line": 80,
+          "original_text": ""
+        },
+        {
+          "old_directive_line": 703,
+          "original_line": 761,
+          "original_text": "sc.ScreenState == FULLSCREEN"
+        },
+        {
+          "old_directive_line": 754,
+          "original_line": 803,
+          "original_text": "sc.ScreenState == WINDOWED"
+        },
+        {
+          "old_directive_line": 826,
+          "original_line": 827,
+          "original_text": "sc.ScreenState == STREAM_IO"
+        },
+        {
+          "old_directive_line": 2100,
+          "original_line": 2067,
+          "original_text": "sc.ScreenState == FULLSCREEN"
+        }
+      ],
+      "selected_or_continuation_fixes": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkman.c",
+      "before_sha256": "b38a9636f28836084b4c1dfe540242918a91295bfc7124014ab24567ff27f6fc",
+      "after_sha256": "2354423e23f8c3c6dcaca62a6f77bc2f7100b06a4a514c8cc435517630fefe1e",
+      "anchors": [],
+      "selected_or_continuation_fixes": [
+        {
+          "physical": 809,
+          "old": 851,
+          "new": 825,
+          "kind": "selected original continuation"
+        },
+        {
+          "physical": 852,
+          "old": 891,
+          "new": 865,
+          "kind": "selected original continuation"
+        },
+        {
+          "physical": 1413,
+          "old": 1442,
+          "new": 1413,
+          "kind": "selected original continuation"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.c",
+      "before_sha256": "4552d867b3d6d9bf5da5053ac337b5d5df53b1efd737899f1d691f2af0df7ef7",
+      "after_sha256": "1c611941c0ea5c5f39b14962b10b4ef0be0af2bd8493df3481e00ae986e5b1f5",
+      "anchors": [
+        {
+          "old_directive_line": 582,
+          "original_line": 582,
+          "original_text": "Registry Opening failed"
+        },
+        {
+          "old_directive_line": 597,
+          "original_line": 590,
+          "original_text": "cb = sizeof(fThunkStrRtns);"
+        },
+        {
+          "old_directive_line": 1564,
+          "original_line": 1871,
+          "original_text": "return (ULONG)WOWBopEntry;"
+        },
+        {
+          "old_directive_line": 1566,
+          "original_line": 1873,
+          "original_text": "return 0;"
+        },
+        {
+          "old_directive_line": 1583,
+          "original_line": 1880,
+          "original_text": "return (ULONG)FastWOWCallbackRet;"
+        },
+        {
+          "old_directive_line": 1585,
+          "original_line": 1882,
+          "original_text": "return( 0L );"
+        },
+        {
+          "old_directive_line": 1629,
+          "original_line": 1911,
+          "original_text": "return (ULONG)FlatAddress;"
+        },
+        {
+          "old_directive_line": 1631,
+          "original_line": 1913,
+          "original_text": "return 0;"
+        }
+      ],
+      "selected_or_continuation_fixes": [
+        {
+          "physical": 603,
+          "old": 621,
+          "new": 597,
+          "kind": "original continuation"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/time.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\ntos\\rtl\\time.c",
+      "before_sha256": "3cdcd7e87ffa65c0d5bd2e1cb4e39f63b38087605918859d55950aa6b71bcf11",
+      "after_sha256": "ba48412841735074f144973e25f3b3b789cb7617b80b1852c27b60c18c845b8a",
+      "anchors": [
+        {
+          "old_directive_line": 79,
+          "original_line": 54,
+          "original_text": ""
+        }
+      ],
+      "selected_or_continuation_fixes": [
+        {
+          "physical": 82,
+          "old": 1359,
+          "new": 1333,
+          "kind": "original continuation"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/basesrv.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\win32\\server\\basesrv.h",
+      "before_sha256": "3483fd51434edb16a1e09aa5793a8ef23f651870113462f2419816e6a468df96",
+      "after_sha256": "5a54a3ce1031083bf5cd2e881b9bc6b55fe2729dc46405b9408b5f601b4cea33",
+      "anchors": [
+        {
+          "old_directive_line": 231,
+          "original_line": 227,
+          "original_text": ""
+        }
+      ],
+      "selected_or_continuation_fixes": [
+        {
+          "physical": 234,
+          "old": 234,
+          "new": 227,
+          "kind": "original continuation"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\usercli.h",
+      "before_sha256": "ca1d6db964ed3ab92b0c92845072126c821f5a95fd9cee24264289307adf6cd1",
+      "after_sha256": "8cfe506634485fc2c11620f397c848450f9be7e45ca81afc58e79965ed6c7891",
+      "anchors": [],
+      "selected_or_continuation_fixes": [
+        {
+          "physical": 174,
+          "old": 261,
+          "new": 360,
+          "kind": "selected original continuation"
+        }
+      ]
+    }
+  ]
+}

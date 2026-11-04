@@ -1468,12 +1468,14 @@ BOOL CntrlHandler(ULONG CtrlType)
                  * settle path, never guest time or CPU interrupts. */
                 for (dw = 0; dw < EGA_TICK_DELAY && get_mode_change_required(); ++dw)
                     host_graphics_tick();
+#line 1414
 		(*update_alg.calc_update)();
             }
             /* DIVERGENCE(MVDM-HOST-DIV-322): acknowledge final cells and VGA
                cursor before ResetConsoleState and ownership release. */
             if (sc.ModeType == TEXT && !NtvdmConsoleUpdateText(sc.ColPalette))
                 DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
+#line 1415
 	    // Put Console back the way it was when we started up
 	    ResetConsoleState();
 

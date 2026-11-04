@@ -154,51 +154,51 @@ src/mvdm-host/dpmi32/dpmiint.c,381,1,if,defined(CPU_40_STYLE),historical-hit,unc
 src/mvdm-host/dpmi32/dpmiint.c,424,1,ifdef,i386,excluded-error,none,error-preceding-line-anchor-verified
 src/mvdm-host/dpmi32/dpmiint.c,525,1,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/dpmi32/dpmiint.c,568,1,if,defined(CPU_40_STYLE) && defined(CCPU),historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,596,1,if,!defined(CPU_40_STYLE),excluded-error,unique-structure-historical,error-original-mapping-ambiguous
-src/mvdm-host/dpmi32/dpmiint.c,602,1,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,612,1,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,618,1,else,,excluded-error,none,error-original-mapping-ambiguous
-src/mvdm-host/dpmi32/dpmiint.c,625,1,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,628,1,else,,excluded-error,none,error-original-mapping-ambiguous
-src/mvdm-host/dpmi32/dpmiint.c,635,1,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,638,1,else,,excluded-error,none,error-original-mapping-ambiguous
-src/mvdm-host/dpmi32/dpmiint.c,649,1,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,652,1,else,,excluded-error,none,error-original-mapping-ambiguous
-src/mvdm-host/dpmi32/dpmiint.c,659,1,if,DBG,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/dpmi32/dpmiint.c,795,1,ifdef,i386,excluded-error,none,error-anchor-match
-src/mvdm-host/dpmi32/dpmiint.c,798,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,816,2,if,DBG,excluded-error,none,error-anchor-match
-src/mvdm-host/dpmi32/dpmiint.c,890,1,ifdef,i386,excluded-error,none,error-anchor-match
-src/mvdm-host/dpmi32/dpmiint.c,893,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,905,2,if,DBG,excluded-error,none,error-anchor-match
-src/mvdm-host/dpmi32/dpmiint.c,939,1,if,!defined(i386) || defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,994,2,if,defined(CPU_40_STYLE) && defined(CCPU),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,1022,2,if,defined(CPU_40_STYLE) && defined(CCPU),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,1069,2,if,DBG,excluded-error,none,error-anchor-match
-src/mvdm-host/dpmi32/dpmiint.c,1167,1,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,1173,1,else,,excluded-error,none,error-original-mapping-ambiguous
-src/mvdm-host/dpmi32/dpmiint.c,1225,1,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,1240,1,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,1242,1,else,,excluded-error,none,error-original-mapping-ambiguous
-src/mvdm-host/dpmi32/dpmiint.c,1252,1,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,1271,1,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,1287,1,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,1318,1,ifndef,i386,current-hit,r1311-current-equivalent-preprocessing,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,1326,1,else,,excluded-error,none,error-original-mapping-ambiguous
-src/mvdm-host/dpmi32/dpmiint.c,1356,1,ifndef,i386,current-hit,r1311-current-equivalent-preprocessing,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,1364,1,else,,excluded-error,none,error-original-mapping-ambiguous
-src/mvdm-host/dpmi32/dpmiint.c,1396,1,ifndef,i386,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,1397,2,if,defined(CPU_40_STYLE) && defined(CCPU),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,1460,2,if,defined(CPU_40_STYLE),historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,1462,3,if,defined(CCPU),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,1471,2,if,defined(CPU_40_STYLE) && defined(CCPU),historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,1473,2,else,,excluded-error,unique-structure-historical,error-original-mapping-ambiguous
-src/mvdm-host/dpmi32/dpmiint.c,1486,2,if,defined(CPU_40_STYLE),historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,1501,2,else,,excluded-error,unique-structure-historical,error-original-reference-verified
-src/mvdm-host/dpmi32/dpmiint.c,1496,3,if,defined(CCPU),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,1511,2,if,defined(CPU_40_STYLE) && defined(CCPU),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,1529,2,if,defined(CPU_40_STYLE) && defined(CCPU),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,1560,2,if,defined(CPU_40_STYLE) && defined(CCPU),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dpmi32/dpmiint.c,596,1,if,!defined(CPU_40_STYLE),excluded-error,unique-structure-historical,error-original-reference-verified
+src/mvdm-host/dpmi32/dpmiint.c,603,1,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dpmi32/dpmiint.c,613,1,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dpmi32/dpmiint.c,619,1,else,,excluded-error,none,error-original-reference-verified
+src/mvdm-host/dpmi32/dpmiint.c,627,1,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dpmi32/dpmiint.c,630,1,else,,excluded-error,none,error-original-reference-verified
+src/mvdm-host/dpmi32/dpmiint.c,638,1,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dpmi32/dpmiint.c,641,1,else,,excluded-error,none,error-original-reference-verified
+src/mvdm-host/dpmi32/dpmiint.c,653,1,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dpmi32/dpmiint.c,656,1,else,,excluded-error,none,error-original-reference-verified
+src/mvdm-host/dpmi32/dpmiint.c,664,1,if,DBG,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/dpmi32/dpmiint.c,800,1,ifdef,i386,excluded-error,none,error-anchor-match
+src/mvdm-host/dpmi32/dpmiint.c,803,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dpmi32/dpmiint.c,821,2,if,DBG,excluded-error,none,error-anchor-match
+src/mvdm-host/dpmi32/dpmiint.c,895,1,ifdef,i386,excluded-error,none,error-anchor-match
+src/mvdm-host/dpmi32/dpmiint.c,898,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dpmi32/dpmiint.c,910,2,if,DBG,excluded-error,none,error-anchor-match
+src/mvdm-host/dpmi32/dpmiint.c,944,1,if,!defined(i386) || defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dpmi32/dpmiint.c,999,2,if,defined(CPU_40_STYLE) && defined(CCPU),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dpmi32/dpmiint.c,1027,2,if,defined(CPU_40_STYLE) && defined(CCPU),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dpmi32/dpmiint.c,1074,2,if,DBG,excluded-error,none,error-anchor-match
+src/mvdm-host/dpmi32/dpmiint.c,1172,1,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dpmi32/dpmiint.c,1178,1,else,,excluded-error,none,error-original-reference-verified
+src/mvdm-host/dpmi32/dpmiint.c,1231,1,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dpmi32/dpmiint.c,1246,1,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dpmi32/dpmiint.c,1248,1,else,,excluded-error,none,error-original-reference-verified
+src/mvdm-host/dpmi32/dpmiint.c,1259,1,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dpmi32/dpmiint.c,1278,1,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dpmi32/dpmiint.c,1294,1,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dpmi32/dpmiint.c,1325,1,ifndef,i386,current-hit,r1311-current-equivalent-preprocessing,not-applicable
+src/mvdm-host/dpmi32/dpmiint.c,1333,1,else,,excluded-error,none,error-original-reference-verified
+src/mvdm-host/dpmi32/dpmiint.c,1364,1,ifndef,i386,current-hit,r1311-current-equivalent-preprocessing,not-applicable
+src/mvdm-host/dpmi32/dpmiint.c,1372,1,else,,excluded-error,none,error-original-reference-verified
+src/mvdm-host/dpmi32/dpmiint.c,1405,1,ifndef,i386,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/dpmi32/dpmiint.c,1406,2,if,defined(CPU_40_STYLE) && defined(CCPU),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dpmi32/dpmiint.c,1469,2,if,defined(CPU_40_STYLE),historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/dpmi32/dpmiint.c,1471,3,if,defined(CCPU),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dpmi32/dpmiint.c,1480,2,if,defined(CPU_40_STYLE) && defined(CCPU),historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/dpmi32/dpmiint.c,1482,2,else,,excluded-error,unique-structure-historical,error-original-reference-verified
+src/mvdm-host/dpmi32/dpmiint.c,1496,2,if,defined(CPU_40_STYLE),historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/dpmi32/dpmiint.c,1511,2,else,,excluded-error,unique-structure-historical,error-original-reference-verified
+src/mvdm-host/dpmi32/dpmiint.c,1506,3,if,defined(CCPU),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dpmi32/dpmiint.c,1521,2,if,defined(CPU_40_STYLE) && defined(CCPU),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dpmi32/dpmiint.c,1539,2,if,defined(CPU_40_STYLE) && defined(CCPU),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dpmi32/dpmiint.c,1570,2,if,defined(CPU_40_STYLE) && defined(CCPU),historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/dpmi32/dpmiint.h,26,1,ifndef,i386,current-hit,r1311-current-equivalent-preprocessing,not-applicable
 src/mvdm-host/dpmi32/dpmiint.h,43,1,else,,excluded-error,unique-arm-historical,error-anchor-match
 src/mvdm-host/dpmi32/dpmimemr.c,64,1,if,defined(CPU_40_STYLE),historical-hit,snapshot-byte-identical,not-applicable
@@ -3331,29 +3331,29 @@ src/mvdm-host/softpc.new/base/keymouse/keyba.c,2399,3,ifdef,PM,historical-hit,un
 src/mvdm-host/softpc.new/base/keymouse/keyba.c,2400,4,ifndef,NTVDM,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/keymouse/keyba.c,2405,4,ifdef,CPU_30_STYLE,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/base/keymouse/keyba.c,2408,4,else,,current-hit,r1311-current-equivalent-preprocessing,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keyba.c,2446,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keyba.c,2460,1,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keyba.c,2501,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keyba.c,2526,1,ifdef,HUNTER,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keyba.c,2537,1,ifdef,HUNTER,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keyba.c,2540,1,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keyba.c,2570,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keyba.c,2581,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keyba.c,2598,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keyba.c,2606,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keyba.c,2630,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keyba.c,2640,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keyba.c,2665,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keyba.c,2691,1,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keyba.c,2707,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keyba.c,2733,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keyba.c,2736,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/keymouse/keyba.c,2750,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keyba.c,2756,1,ifdef,SEGMENTATION,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keyba.c,2766,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keyba.c,2773,1,if,defined(IRET_HOOKS) && defined(GISP_CPU),excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keyba.c,2779,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/keymouse/keyba.c,2782,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keyba.c,2447,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keyba.c,2461,1,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keyba.c,2502,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keyba.c,2527,1,ifdef,HUNTER,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keyba.c,2538,1,ifdef,HUNTER,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keyba.c,2541,1,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keyba.c,2571,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keyba.c,2582,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keyba.c,2599,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keyba.c,2607,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keyba.c,2631,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keyba.c,2641,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keyba.c,2666,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keyba.c,2692,1,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keyba.c,2708,1,ifdef,NTVDM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keyba.c,2734,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keyba.c,2737,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/keymouse/keyba.c,2751,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keyba.c,2757,1,ifdef,SEGMENTATION,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keyba.c,2767,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keyba.c,2774,1,if,defined(IRET_HOOKS) && defined(GISP_CPU),excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keyba.c,2780,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/keymouse/keyba.c,2783,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,49,1,ifdef,SCCSID,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,55,1,ifdef,SEGMENTATION,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,83,1,ifndef,PROD,excluded-error,unique-structure-historical,error-anchor-match
@@ -5261,11 +5261,11 @@ src/mvdm-host/softpc.new/host/src/nt_event.c,1271,1,ifdef,YODA,excluded-error,no
 src/mvdm-host/softpc.new/host/src/nt_event.c,1361,1,ifndef,PROD,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_event.c,1386,1,ifndef,PROD,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_event.c,1459,1,ifdef,X86GFX,excluded-error,none,error-original-reference-verified
-src/mvdm-host/softpc.new/host/src/nt_event.c,1484,1,ifdef,MONITOR,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_event.c,1492,1,ifdef,X86GFX,excluded-error,none,error-original-reference-verified
-src/mvdm-host/softpc.new/host/src/nt_event.c,1563,1,ifndef,PROD,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_event.c,1603,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_event.c,1613,1,ifndef,PROD,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_event.c,1486,1,ifdef,MONITOR,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_event.c,1494,1,ifdef,X86GFX,excluded-error,none,error-original-reference-verified
+src/mvdm-host/softpc.new/host/src/nt_event.c,1565,1,ifndef,PROD,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_event.c,1605,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_event.c,1615,1,ifndef,PROD,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_fulsc.c,25,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_fulsc.c,74,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_fulsc.c,81,1,ifndef,PROD,excluded-error,unique-structure-historical,error-anchor-match
@@ -5310,53 +5310,53 @@ src/mvdm-host/softpc.new/host/src/nt_fulsc.c,1108,1,ifdef,X86GFX,excluded-error,
 src/mvdm-host/softpc.new/host/src/nt_graph.c,30,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_graph.c,85,1,ifdef,EGG,historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/softpc.new/host/src/nt_graph.c,89,1,ifdef,V7VGA,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/host/src/nt_graph.c,92,1,else,,excluded-error,unique-structure-historical,error-original-mapping-ambiguous
-src/mvdm-host/softpc.new/host/src/nt_graph.c,113,1,ifdef,BIGWIN,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/host/src/nt_graph.c,142,1,ifdef,V7VGA,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/host/src/nt_graph.c,159,1,ifdef,V7VGA,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/host/src/nt_graph.c,176,1,ifdef,V7VGA,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/host/src/nt_graph.c,193,1,ifdef,V7VGA,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/host/src/nt_graph.c,210,1,ifdef,V7VGA,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/host/src/nt_graph.c,227,1,ifdef,V7VGA,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/host/src/nt_graph.c,232,1,ifdef,MONITOR,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_graph.c,262,1,ifdef,MONITOR,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_graph.c,347,1,ifdef,BIGWIN,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/host/src/nt_graph.c,456,1,ifdef,BIGWIN,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/host/src/nt_graph.c,515,1,ifndef,MONITOR,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/host/src/nt_graph.c,526,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_graph.c,555,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_graph.c,571,1,ifdef,BIGWIN,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/host/src/nt_graph.c,578,1,ifdef,MONITOR,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_graph.c,581,1,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/host/src/nt_graph.c,623,1,ifdef,MONITOR,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_graph.c,702,1,ifndef,X86GFX,empty-or-structural,no-direct-code-after-comment-and-directive-filter,not-applicable
-src/mvdm-host/softpc.new/host/src/nt_graph.c,703,2,if,!defined(X86GFX) && !defined(CCPU),excluded-error,none,error-original-mapping-ambiguous
-src/mvdm-host/softpc.new/host/src/nt_graph.c,726,1,ifdef,MONITOR,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_graph.c,754,1,if,defined(CCPU) && defined(X86GFX),excluded-error,unique-structure-historical,error-original-mapping-ambiguous
-src/mvdm-host/softpc.new/host/src/nt_graph.c,759,1,if,defined(CCPU) && !defined(X86GFX),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/host/src/nt_graph.c,780,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_graph.c,813,1,if,defined(CCPU) && !defined(X86GFX),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/host/src/nt_graph.c,826,1,if,!defined(CCPU) || defined(X86GFX),excluded-error,unique-structure-historical,error-original-mapping-ambiguous
-src/mvdm-host/softpc.new/host/src/nt_graph.c,842,1,ifdef,EGG,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/host/src/nt_graph.c,882,2,ifdef,X86GFX,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_graph.c,914,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_graph.c,953,1,ifdef,V7VGA,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/host/src/nt_graph.c,987,1,ifdef,BIGWIN,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/host/src/nt_graph.c,1060,1,ifdef,BIGWIN,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/host/src/nt_graph.c,1322,1,ifdef,V7VGA,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/host/src/nt_graph.c,1333,1,ifdef,MONITOR,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_graph.c,1387,1,ifdef,X86GFX,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_graph.c,1390,1,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/host/src/nt_graph.c,1399,1,ifdef,BIGWIN,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/host/src/nt_graph.c,1499,1,ifdef,MONITOR,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_graph.c,1587,1,ifdef,V7VGA,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/host/src/nt_graph.c,1919,1,ifndef,PROD,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_graph.c,1941,1,ifndef,PROD,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_graph.c,1997,1,ifndef,PROD,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_graph.c,2023,1,ifndef,PROD,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_graph.c,2100,1,ifdef,X86GFX,excluded-error,none,error-original-mapping-ambiguous
-src/mvdm-host/softpc.new/host/src/nt_graph.c,2315,1,ifndef,PROD,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_graph.c,2325,1,ifndef,PROD,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_graph.c,92,1,else,,excluded-error,unique-structure-historical,error-original-reference-verified
+src/mvdm-host/softpc.new/host/src/nt_graph.c,114,1,ifdef,BIGWIN,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/host/src/nt_graph.c,143,1,ifdef,V7VGA,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/host/src/nt_graph.c,160,1,ifdef,V7VGA,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/host/src/nt_graph.c,177,1,ifdef,V7VGA,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/host/src/nt_graph.c,194,1,ifdef,V7VGA,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/host/src/nt_graph.c,211,1,ifdef,V7VGA,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/host/src/nt_graph.c,228,1,ifdef,V7VGA,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/host/src/nt_graph.c,233,1,ifdef,MONITOR,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_graph.c,263,1,ifdef,MONITOR,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_graph.c,348,1,ifdef,BIGWIN,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/host/src/nt_graph.c,457,1,ifdef,BIGWIN,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/host/src/nt_graph.c,516,1,ifndef,MONITOR,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/host/src/nt_graph.c,527,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_graph.c,556,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_graph.c,572,1,ifdef,BIGWIN,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/host/src/nt_graph.c,579,1,ifdef,MONITOR,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_graph.c,582,1,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/host/src/nt_graph.c,624,1,ifdef,MONITOR,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_graph.c,703,1,ifndef,X86GFX,empty-or-structural,no-direct-code-after-comment-and-directive-filter,not-applicable
+src/mvdm-host/softpc.new/host/src/nt_graph.c,704,2,if,!defined(X86GFX) && !defined(CCPU),excluded-error,none,error-original-reference-verified
+src/mvdm-host/softpc.new/host/src/nt_graph.c,728,1,ifdef,MONITOR,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_graph.c,756,1,if,defined(CCPU) && defined(X86GFX),excluded-error,unique-structure-historical,error-original-reference-verified
+src/mvdm-host/softpc.new/host/src/nt_graph.c,762,1,if,defined(CCPU) && !defined(X86GFX),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/host/src/nt_graph.c,783,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_graph.c,816,1,if,defined(CCPU) && !defined(X86GFX),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/host/src/nt_graph.c,829,1,if,!defined(CCPU) || defined(X86GFX),excluded-error,unique-structure-historical,error-original-reference-verified
+src/mvdm-host/softpc.new/host/src/nt_graph.c,846,1,ifdef,EGG,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/host/src/nt_graph.c,886,2,ifdef,X86GFX,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_graph.c,918,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_graph.c,957,1,ifdef,V7VGA,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/host/src/nt_graph.c,991,1,ifdef,BIGWIN,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/host/src/nt_graph.c,1064,1,ifdef,BIGWIN,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/host/src/nt_graph.c,1326,1,ifdef,V7VGA,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/host/src/nt_graph.c,1337,1,ifdef,MONITOR,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_graph.c,1391,1,ifdef,X86GFX,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_graph.c,1394,1,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/host/src/nt_graph.c,1403,1,ifdef,BIGWIN,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/host/src/nt_graph.c,1503,1,ifdef,MONITOR,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_graph.c,1591,1,ifdef,V7VGA,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/host/src/nt_graph.c,1923,1,ifndef,PROD,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_graph.c,1945,1,ifndef,PROD,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_graph.c,2001,1,ifndef,PROD,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_graph.c,2027,1,ifndef,PROD,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_graph.c,2104,1,ifdef,X86GFX,excluded-error,none,error-original-reference-verified
+src/mvdm-host/softpc.new/host/src/nt_graph.c,2320,1,ifndef,PROD,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/host/src/nt_graph.c,2330,1,ifndef,PROD,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_hosts.c,28,1,ifdef,HUNTER,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_hosts.c,64,1,ifdef,HUNTER,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_hosts.c,252,1,ifdef,HUNTER,excluded-error,none,error-anchor-match
@@ -6106,51 +6106,51 @@ src/mvdm-host/wow32/wow32.c,172,1,if,defined (_X86_),excluded-error,unique-struc
 src/mvdm-host/wow32/wow32.c,453,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
 src/mvdm-host/wow32/wow32.c,462,1,ifdef,_X86_,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/wow32/wow32.c,468,1,ifndef,_X86_,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wow32.c,582,1,ifdef,DEBUG,excluded-error,none,error-original-mapping-ambiguous
-src/mvdm-host/wow32/wow32.c,584,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wow32.c,597,1,ifdef,DEBUG,excluded-error,none,error-original-mapping-ambiguous
-src/mvdm-host/wow32/wow32.c,599,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wow32.c,619,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,678,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,711,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,717,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,738,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,741,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wow32.c,750,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,763,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,836,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,842,1,ifdef,WOWPROFILE,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,878,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,886,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,897,1,ifdef,WOWPROFILE,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,910,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,916,1,ifdef,WOWPROFILE,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,929,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,955,1,if,NO_W32TRYCALL,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/wow32/wow32.c,958,1,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/wow32/wow32.c,1351,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,1468,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,1491,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,1541,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,1544,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wow32.c,1556,1,if,FASTBOPPING,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,1559,1,else,,current-hit,r1311-current-equivalent-preprocessing,not-applicable
-src/mvdm-host/wow32/wow32.c,1561,2,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wow32.c,1564,2,elif,FASTBOPPING,excluded-error,none,error-original-mapping-ambiguous
-src/mvdm-host/wow32/wow32.c,1566,2,else,,excluded-error,none,error-original-mapping-ambiguous
-src/mvdm-host/wow32/wow32.c,1575,1,if,FASTBOPPING,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,1578,1,else,,current-hit,r1311-current-equivalent-preprocessing,not-applicable
-src/mvdm-host/wow32/wow32.c,1580,2,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wow32.c,1583,2,elif,FASTBOPPING,excluded-error,none,error-original-mapping-ambiguous
-src/mvdm-host/wow32/wow32.c,1585,2,else,,excluded-error,none,error-original-mapping-ambiguous
-src/mvdm-host/wow32/wow32.c,1608,1,if,FASTBOPPING,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/wow32/wow32.c,1619,1,if,FASTBOPPING,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,1622,1,else,,current-hit,r1311-current-equivalent-preprocessing,not-applicable
-src/mvdm-host/wow32/wow32.c,1624,2,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wow32.c,1629,2,elif,FASTBOPPING,excluded-error,none,error-original-mapping-ambiguous
-src/mvdm-host/wow32/wow32.c,1631,2,else,,excluded-error,none,error-original-mapping-ambiguous
-src/mvdm-host/wow32/wow32.c,1639,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,1725,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,582,1,ifdef,DEBUG,excluded-error,none,error-original-reference-verified
+src/mvdm-host/wow32/wow32.c,585,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wow32.c,598,1,ifdef,DEBUG,excluded-error,none,error-original-reference-verified
+src/mvdm-host/wow32/wow32.c,601,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wow32.c,621,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,680,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,713,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,719,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,740,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,743,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wow32.c,752,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,765,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,838,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,844,1,ifdef,WOWPROFILE,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,880,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,888,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,899,1,ifdef,WOWPROFILE,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,912,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,918,1,ifdef,WOWPROFILE,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,931,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,957,1,if,NO_W32TRYCALL,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/wow32/wow32.c,960,1,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/wow32/wow32.c,1353,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,1470,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,1493,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,1543,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,1546,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wow32.c,1558,1,if,FASTBOPPING,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,1561,1,else,,current-hit,r1311-current-equivalent-preprocessing,not-applicable
+src/mvdm-host/wow32/wow32.c,1563,2,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wow32.c,1566,2,elif,FASTBOPPING,excluded-error,none,error-original-reference-verified
+src/mvdm-host/wow32/wow32.c,1569,2,else,,excluded-error,none,error-original-reference-verified
+src/mvdm-host/wow32/wow32.c,1579,1,if,FASTBOPPING,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,1582,1,else,,current-hit,r1311-current-equivalent-preprocessing,not-applicable
+src/mvdm-host/wow32/wow32.c,1584,2,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wow32.c,1587,2,elif,FASTBOPPING,excluded-error,none,error-original-reference-verified
+src/mvdm-host/wow32/wow32.c,1590,2,else,,excluded-error,none,error-original-reference-verified
+src/mvdm-host/wow32/wow32.c,1614,1,if,FASTBOPPING,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/wow32/wow32.c,1625,1,if,FASTBOPPING,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,1628,1,else,,current-hit,r1311-current-equivalent-preprocessing,not-applicable
+src/mvdm-host/wow32/wow32.c,1630,2,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wow32.c,1635,2,elif,FASTBOPPING,excluded-error,none,error-original-reference-verified
+src/mvdm-host/wow32/wow32.c,1638,2,else,,excluded-error,none,error-original-reference-verified
+src/mvdm-host/wow32/wow32.c,1647,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,1733,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
 src/mvdm-host/wow32/wow32.h,15,1,ifndef,_DEF_WOW32_,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/wow32/wow32.h,22,2,if,DBG,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/wow32/wow32.h,29,2,ifdef,i386,excluded-error,unique-structure-historical,error-anchor-match
@@ -6338,7 +6338,7 @@ src/non-mvdm/base/ntos/rtl/error.c,38,1,if,ERROR_SUCCESS != 0 || NO_ERROR != 0,e
 src/non-mvdm/base/ntos/rtl/error.c,181,1,ifndef,NTOS_KERNEL_RUNTIME,excluded-error,unique-structure-historical,error-anchor-match
 src/non-mvdm/base/ntos/rtl/time.c,50,1,if,defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME),excluded-error,none,error-anchor-match
 src/non-mvdm/base/ntos/rtl/time.c,62,1,if,defined(MVDM_STANDALONE_TIME1970_ONLY),historical-hit,unique-structure-historical,not-applicable
-src/non-mvdm/base/ntos/rtl/time.c,79,1,else,,excluded-error,unique-structure-historical,error-original-mapping-ambiguous
+src/non-mvdm/base/ntos/rtl/time.c,79,1,else,,excluded-error,unique-structure-historical,error-original-reference-verified
 src/non-mvdm/base/win32/client/vdm.c,35,1,if,(!defined(OPENNT_BASE_CLIENT_VDM_COMMANDS) && !defined(OPENNT_BASE_CLIENT_CLASSIFIER)) || defined(OPENNT_BASE_CLIENT_VDM_ENVIRONMENT),historical-hit,unique-structure-historical,not-applicable
 src/non-mvdm/base/win32/client/vdm.c,178,1,if,defined(OPENNT_BASE_CLIENT_VDM_COMMANDS),historical-hit,unchanged-directive-git-line-map,not-applicable
 src/non-mvdm/base/win32/client/vdm.c,1835,1,if,defined(OPENNT_BASE_CLIENT_VDM_COMMANDS),historical-hit,unchanged-directive-git-line-map,not-applicable
@@ -6357,7 +6357,7 @@ src/non-mvdm/base/win32/inc/base.h,38,1,ifndef,DBG,historical-hit,unique-structu
 src/non-mvdm/base/win32/inc/base.h,48,1,if,DBG,excluded-error,unique-structure-historical,error-anchor-match
 src/non-mvdm/base/win32/inc/base.h,51,1,else,,historical-hit,unique-structure-historical,not-applicable
 src/non-mvdm/base/win32/server/basesrv.h,30,1,if,defined(OPENNT_BASE_VDM_SERVER),historical-hit,unique-structure-historical,not-applicable
-src/non-mvdm/base/win32/server/basesrv.h,231,1,if,!defined(OPENNT_BASE_VDM_SERVER),excluded-error,unique-structure-historical,error-original-mapping-ambiguous
+src/non-mvdm/base/win32/server/basesrv.h,231,1,if,!defined(OPENNT_BASE_VDM_SERVER),excluded-error,unique-structure-historical,error-original-reference-verified
 src/non-mvdm/base/win32/server/srvvdm.c,2473,1,ifdef,NOT_NEEDED,excluded-error,unique-structure-historical,error-anchor-match
 src/non-mvdm/base/win32/server/srvvdm.c,2629,1,if,DEVL,excluded-error,none,error-anchor-match
 src/non-mvdm/base/win32/server/srvvdm.c,2649,1,if,DEVL,excluded-error,none,error-anchor-match

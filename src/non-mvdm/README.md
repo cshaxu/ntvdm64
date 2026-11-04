@@ -1,5 +1,10 @@
 # non-mvdm original OpenNT sources
 
+OPENNT-HOST-177: anchor excluded local profiles and selected continuations in
+`time.c`, `basesrv.h` and `usercli.h` to original statement or EOF positions.
+Only `#line` directives change. Evidence:
+`../../artifacts/mvdm-audit/s13-r1333-line-batch.json`.
+
 OPENNT-HOST-176: anchor excluded local profiles in `packstr.c` and
 `dlgbegin.c` to their original statements and correct their original
 continuations. Only `#line` directives change. Evidence:

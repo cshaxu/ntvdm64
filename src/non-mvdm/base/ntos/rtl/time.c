@@ -77,7 +77,8 @@ RtlSecondsSince1970ToTime (
 }
 
 #else
+#line 54
 #error Unsupported excluded original configuration
 #endif /* MVDM_STANDALONE_TIME1970_ONLY */
-#line 1359
+#line 1333
 

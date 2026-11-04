@@ -171,7 +171,7 @@ void FreeLookasideEntry(PLOOKASIDE pla, PVOID pEntry);
     }
 
 #endif
-#line 261
+#line 360
 
 typedef LRESULT (cdecl *EDITCHARSETPROC)(struct tagED *, UINT, ...);
 

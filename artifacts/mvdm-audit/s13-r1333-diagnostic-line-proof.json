@@ -1,0 +1,28 @@
+{
+  "classification": "diagnostic-line-immediate-only plus PE/debug timestamps",
+  "old_sha256": "0a5d9ea0a7f2c0c13970ae576b273f55b882aa5cb74e5f3d793caa727e1f946a",
+  "new_sha256": "c539bedff3a1129a1baef0893b121d94dc8702cc3001d52c3ba73f45d522f5ae",
+  "differing_offsets": [
+    288,
+    289,
+    330268,
+    1698412,
+    1698413
+  ],
+  "source": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+  "call": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);",
+  "old": {
+    "anchor_line": 1463,
+    "anchor": 1402,
+    "call_physical": 1476,
+    "computed": 1414
+  },
+  "new": {
+    "anchor_line": 1471,
+    "anchor": 1414,
+    "call_physical": 1477,
+    "computed": 1419
+  },
+  "binary_source_string_pointer": "0x59b880",
+  "line_immediate_offset": "0x50a1c"
+}

@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-650: anchor excluded local profiles and selected original
+continuations in seven MVDM files using original statement positions. Only
+`#line` directives change. Evidence:
+`../../artifacts/mvdm-audit/s13-r1333-line-batch.json`.
+
 MVDM-HOST-DIV-649: anchor excluded local profiles to their replaced original
 statements in eight MVDM device and WOW files, and correct original
 continuations where required. Only `#line` directives change. Evidence:

@@ -806,7 +806,7 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
 #line 824
 #error Unsupported excluded original configuration
 #else
-#line 851
+#line 825
     USHORT SaveIp;
 #endif
 #line 827
@@ -849,7 +849,7 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
 #line 863
 #error Unsupported excluded original configuration
 #else
-#line 891
+#line 865
             vpStack = VDMSTACK();
 #endif
 #line 867
@@ -1410,7 +1410,7 @@ DWORD W32RemoteThread(VOID)
 #line 1410
 #error Unsupported excluded original configuration
 #else
-#line 1442
+#line 1413
     host_simulate();
     setIP((WORD)vcSave.Eip);
 #endif

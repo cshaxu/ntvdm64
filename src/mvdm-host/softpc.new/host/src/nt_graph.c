@@ -90,6 +90,7 @@ extern int  ega_int_enable;
 /* DIVERGENCE(VIDEO7-DAC-WIDTH): SoftPC selects 6- or 8-bit DAC components. */
 extern int DAC_data_bits;
 #else
+#line 80
 #error Unsupported excluded original configuration
 #endif
 #line 80
@@ -701,6 +702,7 @@ void nt_clear_screen(void)
 
 #ifndef X86GFX
 #if !defined(X86GFX) && !defined(CCPU)
+#line 761
 #error DIVERGENCE MVDM-HOST-DIV-580: non-CCPU non-X86GFX display branch is not selected
 #endif
 #endif /* !X86GFX */
@@ -752,6 +754,7 @@ void nt_flush_screen(void)
 
 
 #if defined(CCPU) && defined(X86GFX)
+#line 803
 #error Unsupported excluded original configuration
 #endif
 #line 844
@@ -824,6 +827,7 @@ void nt_graphics_tick(void)
     /* DIVERGENCE(MVDM-HOST-DIV-314): retain the original stream-to-video
        transition; a separate frontend cannot render stream-only VGA state. */
 #if !defined(CCPU) || defined(X86GFX)
+#line 827
 #error Unsupported excluded original configuration
 #endif
 #line 827
@@ -2098,6 +2102,7 @@ void graphicsResize(void)
         LPBITMAPINFO     infoStructPtr;
 
 #ifdef X86GFX
+#line 2067
 #error Unsupported excluded original configuration
 #endif
 #line 2069

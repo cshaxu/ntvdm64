@@ -1394,7 +1394,7 @@ ica_intack IFN1(IU32 *, hook_address)
 #line 1490
 #error Excluded unsupported monitor PIC IRET address
 #else
-#line 1302
+#line 1495
     *hook_address = 0;
 #endif
 #line 1497
