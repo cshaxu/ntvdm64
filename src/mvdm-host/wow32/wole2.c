@@ -49,6 +49,7 @@ MODNAME(wole.c);
 **
 */
 
+#line 48
 #define MAP_SLOT_HTASK(slot)    ((HTASK16)((WORD)0xffe0 - (8 * (slot))))
 #define MAP_HTASK_SLOT(htask)   ((UINT)(((WORD)0xffe0 - (htask16))/8))
 
@@ -317,6 +318,7 @@ UINT GetHtaskAliasProcessName(
     PSYSTEM_PROCESS_INFORMATION ProcessInfo;
     PVOID   ProcessBuffer;
     ULONG   ProcessBufferSize;
+#line 310
     NTSTATUS status;
     ANSI_STRING pname;
     ULONG TotalOffset;
@@ -332,6 +334,7 @@ UINT GetHtaskAliasProcessName(
 
     lpNameBuffer[0] = '\0';
 
+#line 314
     dwThreadID32 = GetHtaskAlias(htask16, &dwProcessID32);
     if (  dwThreadID32 == 0 ) {
         return( 0 );
@@ -356,6 +359,7 @@ UINT GetHtaskAliasProcessName(
     ProcessBuffer = malloc_w(ProcessBufferSize);
     if (ProcessBuffer == NULL) {
         return(0);
+#line 321
     }
 
     status = NtQuerySystemInformation(
@@ -368,6 +372,7 @@ UINT GetHtaskAliasProcessName(
     if ( !NT_SUCCESS(status) ) {
         free_w(ProcessBuffer);
         return(0);
+#line 332
     }
 
     //
@@ -382,6 +387,7 @@ UINT GetHtaskAliasProcessName(
             TotalOffset > ProcessBufferSize - sizeof(*ProcessInfo)) {
             break;
         }
+#line 342
         if ( (DWORD)ProcessInfo->UniqueProcessId == dwProcessID32 ) {
             pname.Buffer = NULL;
             if ( ProcessInfo->ImageName.Buffer ) {
@@ -398,20 +404,24 @@ UINT GetHtaskAliasProcessName(
                     free_w(ProcessBuffer);
                     return(cch);
                 }
+#line 357
             } else {
                 //
                 // Don't let them get the name of a system process
                 //
                 free_w(ProcessBuffer);
                 return(0);
+#line 362
             }
 
             free_w(ProcessBuffer);
             return(0);
+#line 363
         }
         NextEntryOffset = ProcessInfo->NextEntryOffset;
         if (NextEntryOffset == 0 ||
             NextEntryOffset > ProcessBufferSize - TotalOffset) {
+#line 365
             break;
         }
         TotalOffset += NextEntryOffset;
@@ -419,4 +429,5 @@ UINT GetHtaskAliasProcessName(
     }
     free_w(ProcessBuffer);
     return(0);
+#line 371
 }

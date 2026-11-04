@@ -6094,63 +6094,63 @@ src/mvdm-host/wow32/wmtbl32.h,25,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,uniq
 src/mvdm-host/wow32/wmtbl32.h,32,1,ifdef,DEBUG,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/wow32/wmtbl32.h,35,1,else,,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/wow32/wole2.c,19,1,ifndef,STATUS_INFO_LENGTH_MISMATCH,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/wow32/wole2.c,95,1,if,DBG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wole2.c,123,1,if,DBG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,67,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,80,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,88,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,93,1,ifdef,i386,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/wow32/wow32.c,99,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,134,1,ifndef,_X86_,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wow32.c,172,1,if,defined (_X86_),excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/wow32/wow32.c,453,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,462,1,ifdef,_X86_,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/wow32/wow32.c,468,1,ifndef,_X86_,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wow32.c,582,1,ifdef,DEBUG,excluded-error,none,error-original-reference-verified
-src/mvdm-host/wow32/wow32.c,585,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wow32.c,598,1,ifdef,DEBUG,excluded-error,none,error-original-reference-verified
-src/mvdm-host/wow32/wow32.c,601,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wow32.c,621,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,680,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,713,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,719,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,740,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,743,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wow32.c,752,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,765,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,838,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,844,1,ifdef,WOWPROFILE,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,880,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,888,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,899,1,ifdef,WOWPROFILE,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,912,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,918,1,ifdef,WOWPROFILE,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,931,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,957,1,if,NO_W32TRYCALL,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/wow32/wow32.c,960,1,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/wow32/wow32.c,1353,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,1470,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,1493,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,1543,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,1546,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wow32.c,1558,1,if,FASTBOPPING,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,1561,1,else,,current-hit,r1311-current-equivalent-preprocessing,not-applicable
-src/mvdm-host/wow32/wow32.c,1563,2,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wow32.c,1566,2,elif,FASTBOPPING,excluded-error,none,error-original-reference-verified
-src/mvdm-host/wow32/wow32.c,1569,2,else,,excluded-error,none,error-original-reference-verified
-src/mvdm-host/wow32/wow32.c,1579,1,if,FASTBOPPING,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,1582,1,else,,current-hit,r1311-current-equivalent-preprocessing,not-applicable
-src/mvdm-host/wow32/wow32.c,1584,2,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wow32.c,1587,2,elif,FASTBOPPING,excluded-error,none,error-original-reference-verified
-src/mvdm-host/wow32/wow32.c,1590,2,else,,excluded-error,none,error-original-reference-verified
-src/mvdm-host/wow32/wow32.c,1614,1,if,FASTBOPPING,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/wow32/wow32.c,1625,1,if,FASTBOPPING,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,1628,1,else,,current-hit,r1311-current-equivalent-preprocessing,not-applicable
-src/mvdm-host/wow32/wow32.c,1630,2,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wow32.c,1635,2,elif,FASTBOPPING,excluded-error,none,error-original-reference-verified
-src/mvdm-host/wow32/wow32.c,1638,2,else,,excluded-error,none,error-original-reference-verified
-src/mvdm-host/wow32/wow32.c,1647,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wow32.c,1733,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wole2.c,96,1,if,DBG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wole2.c,124,1,if,DBG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,70,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,83,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,91,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,96,1,ifdef,i386,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/wow32/wow32.c,102,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,137,1,ifndef,_X86_,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wow32.c,175,1,if,defined (_X86_),excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/wow32/wow32.c,457,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,466,1,ifdef,_X86_,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/wow32/wow32.c,472,1,ifndef,_X86_,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wow32.c,588,1,ifdef,DEBUG,excluded-error,none,error-original-reference-verified
+src/mvdm-host/wow32/wow32.c,591,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wow32.c,605,1,ifdef,DEBUG,excluded-error,none,error-original-reference-verified
+src/mvdm-host/wow32/wow32.c,608,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wow32.c,628,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,688,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,721,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,727,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,748,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,751,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wow32.c,760,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,773,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,847,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,853,1,ifdef,WOWPROFILE,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,890,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,898,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,909,1,ifdef,WOWPROFILE,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,922,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,928,1,ifdef,WOWPROFILE,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,941,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,968,1,if,NO_W32TRYCALL,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/wow32/wow32.c,971,1,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/wow32/wow32.c,1365,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,1482,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,1505,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,1555,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,1558,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wow32.c,1570,1,if,FASTBOPPING,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,1573,1,else,,current-hit,r1311-current-equivalent-preprocessing,not-applicable
+src/mvdm-host/wow32/wow32.c,1575,2,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wow32.c,1578,2,elif,FASTBOPPING,excluded-error,none,error-original-reference-verified
+src/mvdm-host/wow32/wow32.c,1581,2,else,,excluded-error,none,error-original-reference-verified
+src/mvdm-host/wow32/wow32.c,1591,1,if,FASTBOPPING,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,1594,1,else,,current-hit,r1311-current-equivalent-preprocessing,not-applicable
+src/mvdm-host/wow32/wow32.c,1596,2,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wow32.c,1599,2,elif,FASTBOPPING,excluded-error,none,error-original-reference-verified
+src/mvdm-host/wow32/wow32.c,1602,2,else,,excluded-error,none,error-original-reference-verified
+src/mvdm-host/wow32/wow32.c,1626,1,if,FASTBOPPING,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/wow32/wow32.c,1637,1,if,FASTBOPPING,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,1640,1,else,,current-hit,r1311-current-equivalent-preprocessing,not-applicable
+src/mvdm-host/wow32/wow32.c,1642,2,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wow32.c,1647,2,elif,FASTBOPPING,excluded-error,none,error-original-reference-verified
+src/mvdm-host/wow32/wow32.c,1650,2,else,,excluded-error,none,error-original-reference-verified
+src/mvdm-host/wow32/wow32.c,1659,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wow32.c,1747,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,none,error-anchor-match
 src/mvdm-host/wow32/wow32.h,15,1,ifndef,_DEF_WOW32_,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/wow32/wow32.h,22,2,if,DBG,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/wow32/wow32.h,29,2,ifdef,i386,excluded-error,unique-structure-historical,error-anchor-match
@@ -6237,17 +6237,17 @@ src/mvdm-host/wow32/wuclass.c,271,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-h
 src/mvdm-host/wow32/wuclass.c,276,1,else,,excluded-error,none,error-original-reference-verified
 src/mvdm-host/wow32/wuclass.c,283,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/wow32/wuclass.c,288,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wuclass.c,435,1,if,(GCL_HBRBACKGROUND != (-10) || GCL_HCURSOR != (-12) || GCL_HICON != (-14) || GCL_HMODULE != (-16) || GCL_CBWNDEXTRA != (-18) || GCL_CBCLSEXTRA != (-20) || GCL_STYLE != (-26)),excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/wow32/wuclass.c,718,1,if,(GCL_MENUNAME != (-8) || GCL_WNDPROC != (-24)),excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/wow32/wuclass.c,740,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wuclass.c,753,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wuclass.c,757,1,else,,excluded-error,none,error-original-reference-verified
-src/mvdm-host/wow32/wuclass.c,784,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wuclass.c,788,1,else,,excluded-error,none,error-original-reference-verified
-src/mvdm-host/wow32/wuclass.c,797,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wuclass.c,802,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wuclass.c,957,1,if,(GCL_HBRBACKGROUND != (-10) || GCL_HCURSOR != (-12) || GCL_HICON != (-14) || GCL_CBWNDEXTRA != (-18) || GCL_CBCLSEXTRA != (-20) || GCL_STYLE != (-26)),excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/wow32/wuclass.c,1089,1,ifdef,WOWEDIT,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/wow32/wuclass.c,436,1,if,(GCL_HBRBACKGROUND != (-10) || GCL_HCURSOR != (-12) || GCL_HICON != (-14) || GCL_HMODULE != (-16) || GCL_CBWNDEXTRA != (-18) || GCL_CBCLSEXTRA != (-20) || GCL_STYLE != (-26)),excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/wow32/wuclass.c,719,1,if,(GCL_MENUNAME != (-8) || GCL_WNDPROC != (-24)),excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/wow32/wuclass.c,741,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wuclass.c,755,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wuclass.c,759,1,else,,excluded-error,none,error-original-reference-verified
+src/mvdm-host/wow32/wuclass.c,786,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wuclass.c,790,1,else,,excluded-error,none,error-original-reference-verified
+src/mvdm-host/wow32/wuclass.c,799,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wuclass.c,804,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wuclass.c,960,1,if,(GCL_HBRBACKGROUND != (-10) || GCL_HCURSOR != (-12) || GCL_HICON != (-14) || GCL_CBWNDEXTRA != (-18) || GCL_CBCLSEXTRA != (-20) || GCL_STYLE != (-26)),excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/wow32/wuclass.c,1092,1,ifdef,WOWEDIT,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/wow32/wuclip.c,1309,1,ifdef,DEBUG,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/wow32/wucomm.c,1701,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
 src/mvdm-host/wow32/wucomm.c,2532,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
@@ -6289,22 +6289,22 @@ src/mvdm-host/wow32/wusercli.h,12,1,ifdef,PMODE32,excluded-error,unique-structur
 src/mvdm-host/wow32/wusercli.h,15,1,else,,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/wow32/wutbl.h,23,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/wow32/wuwind.c,889,1,ifdef,DEBUG,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/wow32/wuwind.c,1641,1,if,(GWL_WNDPROC != (-4) || GWL_STYLE != (-16) || GWL_EXSTYLE != (-20)),excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wuwind.c,1647,1,ifndef,WIN16_GWW_HINSTANCE,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/wow32/wuwind.c,1703,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wuwind.c,1708,1,else,,excluded-error,none,error-original-reference-verified
-src/mvdm-host/wow32/wuwind.c,1715,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wuwind.c,1720,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wuwind.c,2003,1,if,(GWL_HINSTANCE != (-6) || GWL_HWNDPARENT != (-8) || GWL_ID != (-12)),excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wuwind.c,2452,1,if,(GWL_WNDPROC != (-4) || GWL_STYLE != (-16) || GWL_EXSTYLE != (-20)),excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wuwind.c,2471,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wuwind.c,2484,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wuwind.c,2487,1,else,,excluded-error,none,error-original-reference-verified
-src/mvdm-host/wow32/wuwind.c,2523,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wuwind.c,2526,1,else,,excluded-error,none,error-original-reference-verified
-src/mvdm-host/wow32/wuwind.c,2541,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wuwind.c,2546,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wuwind.c,2863,1,if,(GWL_HINSTANCE != (-6) || GWL_HWNDPARENT != (-8) || GWL_ID != (-12)),excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wuwind.c,1643,1,if,(GWL_WNDPROC != (-4) || GWL_STYLE != (-16) || GWL_EXSTYLE != (-20)),excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wuwind.c,1649,1,ifndef,WIN16_GWW_HINSTANCE,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/wow32/wuwind.c,1705,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wuwind.c,1710,1,else,,excluded-error,none,error-original-reference-verified
+src/mvdm-host/wow32/wuwind.c,1717,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wuwind.c,1722,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wuwind.c,2006,1,if,(GWL_HINSTANCE != (-6) || GWL_HWNDPARENT != (-8) || GWL_ID != (-12)),excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wuwind.c,2455,1,if,(GWL_WNDPROC != (-4) || GWL_STYLE != (-16) || GWL_EXSTYLE != (-20)),excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wuwind.c,2474,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wuwind.c,2488,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wuwind.c,2491,1,else,,excluded-error,none,error-original-reference-verified
+src/mvdm-host/wow32/wuwind.c,2527,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wuwind.c,2530,1,else,,excluded-error,none,error-original-reference-verified
+src/mvdm-host/wow32/wuwind.c,2545,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wuwind.c,2550,1,ifdef,WOW_USER_PRIVATE_REDIRECT,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wuwind.c,2872,1,if,(GWL_HINSTANCE != (-6) || GWL_HWNDPARENT != (-8) || GWL_ID != (-12)),excluded-error,none,error-anchor-match
 src/mvdm-host/xms.486/xms.c,47,1,ifndef,i386,historical-hit,snapshot-byte-identical,not-applicable
 src/mvdm-host/xms.486/xms.c,67,1,ifndef,i386,historical-hit,snapshot-byte-identical,not-applicable
 src/mvdm-host/xms.486/xms.h,22,1,ifdef,DOS,excluded-error,unique-structure-historical,error-anchor-match
@@ -6326,8 +6326,8 @@ src/mvdm-host/xms.486/xmsblock.c,216,1,ifdef,i386,excluded-error,none,error-anch
 src/mvdm-host/xms.486/xmsblock.c,219,1,else,,current-hit,r1311-current-equivalent-preprocessing,not-applicable
 src/mvdm-host/xms.486/xmsdisp.c,48,1,if,DBG,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/xms.486/xmsmemr.c,25,1,ifdef,CPU_40_STYLE,historical-hit,snapshot-byte-identical,not-applicable
-src/mvdm-host/xms.486/xmsmemr.c,149,1,ifdef,CPU_40_STYLE,historical-hit,snapshot-byte-identical,not-applicable
-src/mvdm-host/xms.486/xmsmemr.c,151,1,else,,excluded-error,snapshot-byte-identical,error-original-reference-verified
+src/mvdm-host/xms.486/xmsmemr.c,150,1,ifdef,CPU_40_STYLE,historical-hit,snapshot-byte-identical,not-applicable
+src/mvdm-host/xms.486/xmsmemr.c,152,1,else,,excluded-error,snapshot-byte-identical,error-original-reference-verified
 src/non-mvdm/base/ntos/ex/probe.c,30,1,if,defined(ALLOC_PRAGMA),excluded-error,none,error-anchor-match
 src/non-mvdm/base/ntos/ex/probe.c,88,1,if,defined(_ALPHA_),excluded-error,none,error-anchor-match
 src/non-mvdm/base/ntos/ex/probe.c,91,1,else,,empty-or-structural,no-direct-code-after-comment-and-directive-filter,not-applicable
@@ -6338,7 +6338,7 @@ src/non-mvdm/base/ntos/rtl/error.c,38,1,if,ERROR_SUCCESS != 0 || NO_ERROR != 0,e
 src/non-mvdm/base/ntos/rtl/error.c,181,1,ifndef,NTOS_KERNEL_RUNTIME,excluded-error,unique-structure-historical,error-anchor-match
 src/non-mvdm/base/ntos/rtl/time.c,50,1,if,defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME),excluded-error,none,error-anchor-match
 src/non-mvdm/base/ntos/rtl/time.c,62,1,if,defined(MVDM_STANDALONE_TIME1970_ONLY),historical-hit,unique-structure-historical,not-applicable
-src/non-mvdm/base/ntos/rtl/time.c,79,1,else,,excluded-error,unique-structure-historical,error-original-reference-verified
+src/non-mvdm/base/ntos/rtl/time.c,82,1,else,,excluded-error,unique-structure-historical,error-original-reference-verified
 src/non-mvdm/base/win32/client/vdm.c,35,1,if,(!defined(OPENNT_BASE_CLIENT_VDM_COMMANDS) && !defined(OPENNT_BASE_CLIENT_CLASSIFIER)) || defined(OPENNT_BASE_CLIENT_VDM_ENVIRONMENT),historical-hit,unique-structure-historical,not-applicable
 src/non-mvdm/base/win32/client/vdm.c,178,1,if,defined(OPENNT_BASE_CLIENT_VDM_COMMANDS),historical-hit,unchanged-directive-git-line-map,not-applicable
 src/non-mvdm/base/win32/client/vdm.c,1835,1,if,defined(OPENNT_BASE_CLIENT_VDM_COMMANDS),historical-hit,unchanged-directive-git-line-map,not-applicable
@@ -6357,7 +6357,7 @@ src/non-mvdm/base/win32/inc/base.h,38,1,ifndef,DBG,historical-hit,unique-structu
 src/non-mvdm/base/win32/inc/base.h,48,1,if,DBG,excluded-error,unique-structure-historical,error-anchor-match
 src/non-mvdm/base/win32/inc/base.h,51,1,else,,historical-hit,unique-structure-historical,not-applicable
 src/non-mvdm/base/win32/server/basesrv.h,30,1,if,defined(OPENNT_BASE_VDM_SERVER),historical-hit,unique-structure-historical,not-applicable
-src/non-mvdm/base/win32/server/basesrv.h,231,1,if,!defined(OPENNT_BASE_VDM_SERVER),excluded-error,unique-structure-historical,error-original-reference-verified
+src/non-mvdm/base/win32/server/basesrv.h,232,1,if,!defined(OPENNT_BASE_VDM_SERVER),excluded-error,unique-structure-historical,error-original-reference-verified
 src/non-mvdm/base/win32/server/srvvdm.c,2478,1,ifdef,NOT_NEEDED,excluded-error,unique-structure-historical,error-anchor-match
 src/non-mvdm/base/win32/server/srvvdm.c,2635,1,if,DEVL,excluded-error,none,error-anchor-match
 src/non-mvdm/base/win32/server/srvvdm.c,2655,1,if,DEVL,excluded-error,none,error-anchor-match
@@ -6870,11 +6870,11 @@ src/non-mvdm/windows/core/ntuser/client/clres.c,1122,1,ifdef,DEBUG,excluded-erro
 src/non-mvdm/windows/core/ntuser/client/clres.c,1129,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
 src/non-mvdm/windows/core/ntuser/client/combo.c,1507,1,if,0,excluded-error,unique-structure-historical,error-anchor-match
 src/non-mvdm/windows/core/ntuser/client/combo.c,1752,1,ifdef,LATER,excluded-error,unique-structure-historical,error-anchor-match
-src/non-mvdm/windows/core/ntuser/client/dlgbegin.c,291,1,ifdef,DEBUG,excluded-error,unique-structure-historical,error-anchor-match
-src/non-mvdm/windows/core/ntuser/client/dlgbegin.c,572,1,ifdef,WOW_NATIVE_DIALOG_PROCEDURE_OWNER,historical-hit,unique-structure-historical,not-applicable
-src/non-mvdm/windows/core/ntuser/client/dlgbegin.c,618,1,ifdef,WOW_NATIVE_DIALOG_PROCEDURE_OWNER,historical-hit,unique-structure-historical,not-applicable
-src/non-mvdm/windows/core/ntuser/client/dlgbegin.c,628,1,else,,excluded-error,unique-structure-historical,error-original-reference-verified
-src/non-mvdm/windows/core/ntuser/client/dlgbegin.c,639,1,ifndef,WOW_NATIVE_DIALOG_PROCEDURE_OWNER,excluded-error,unique-structure-historical,error-original-reference-verified
+src/non-mvdm/windows/core/ntuser/client/dlgbegin.c,294,1,ifdef,DEBUG,excluded-error,unique-structure-historical,error-anchor-match
+src/non-mvdm/windows/core/ntuser/client/dlgbegin.c,575,1,ifdef,WOW_NATIVE_DIALOG_PROCEDURE_OWNER,historical-hit,unique-structure-historical,not-applicable
+src/non-mvdm/windows/core/ntuser/client/dlgbegin.c,623,1,ifdef,WOW_NATIVE_DIALOG_PROCEDURE_OWNER,historical-hit,unique-structure-historical,not-applicable
+src/non-mvdm/windows/core/ntuser/client/dlgbegin.c,633,1,else,,excluded-error,unique-structure-historical,error-original-reference-verified
+src/non-mvdm/windows/core/ntuser/client/dlgbegin.c,644,1,ifndef,WOW_NATIVE_DIALOG_PROCEDURE_OWNER,excluded-error,unique-structure-historical,error-original-reference-verified
 src/non-mvdm/windows/core/ntuser/client/dlgend.c,27,1,ifdef,SYSMODALWINDOWS,excluded-error,none,error-anchor-match
 src/non-mvdm/windows/core/ntuser/client/dlgend.c,112,1,ifdef,SYSMODALWINDOWS,excluded-error,none,error-anchor-match
 src/non-mvdm/windows/core/ntuser/client/dlgend.c,145,1,ifdef,SYSMODALWINDOWS,excluded-error,none,error-anchor-match

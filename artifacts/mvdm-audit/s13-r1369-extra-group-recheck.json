@@ -1,0 +1,137 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/wole2.c",
+      "current_sha256": "54366e8dd55e18486094245d4d46fbc686a1a67c3f53e03aa3ac291278f9f146",
+      "original_sha256": "85fab0277735cff414d0f339557f110bf1501cbbe0f933dcf95232d9a61fd5e9",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 342,
+      "extra_group_lines": [
+        19
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "current_sha256": "582f3a8ea5599cc9c0866fbdc6b6dcc0fbf8f9ce574f14d3feeda9f5ab95c5da",
+      "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 1447,
+      "extra_group_lines": [
+        588,
+        605,
+        1575,
+        1596,
+        1642
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "current_sha256": "25165d4311060229d4792ff598b1bc66971b9f369777df28df0131117f4736ce",
+      "original_sha256": "12cdd44dfec6b74a426165977f941da86d90bbad7aa9c59a085010d02528629d",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 1022,
+      "extra_group_lines": [
+        271,
+        283,
+        288,
+        741,
+        755,
+        786,
+        799,
+        804
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "current_sha256": "a745afa2eb4179290b1db7c60c401f4874abf4b8de42bd0ffbcc18912aedf66c",
+      "original_sha256": "ab270e2669cfd383da4baac471bb63e7c9c603581f4f7592ad447e8a783953dc",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 3051,
+      "extra_group_lines": [
+        1705,
+        1717,
+        1722,
+        2474,
+        2488,
+        2527,
+        2545,
+        2550
+      ]
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsmemr.c",
+      "current_sha256": "aa83a34124d03d20a7979a79f7729a4d3c452ab9f4fb423b0e76ba3e56d37a44",
+      "original_sha256": "70970ed738101458f8036b5a283f034eb64baf32ead84a59a6b02278b327612c",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 147,
+      "extra_group_lines": [
+        25,
+        150
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/time.c",
+      "current_sha256": "8f14556a857abafc09bb1f56a02f018e04d1dee44b941444a8e5f3c4bd7dee6b",
+      "original_sha256": "ac422e072432aff83c17b03c2127a80d067e801170eba9216ab86d2520767d40",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 64,
+      "extra_group_lines": [
+        62
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/basesrv.h",
+      "current_sha256": "2f45f0da601a5fef3f73c8f7808b3c1bdb147501b205545dd1cc272306675625",
+      "original_sha256": "a6863d6360830149e0b4895423f3d0f8a8e13326d784821d88b433ff849f3e31",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 225,
+      "extra_group_lines": [
+        30,
+        232
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdmapi.h",
+      "current_sha256": "a177edfb7bfa754e95c09d992870ccfa57e9a606a10995a30eb4206116643118",
+      "original_sha256": "b942656ba8761ddb9325a7eea7997394562d2e57797c923ff5688d7be86426de",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 141,
+      "extra_group_lines": [
+        5
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+      "current_sha256": "1a2c9db520aef67ade59a6a3e0b0627e5e22b8ccf584f24cdc73b815eebb5576",
+      "original_sha256": "e16fb36805f44767b45b597510a6c08d1dbc47271783e5d1f8f09273c0f782fb",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 645,
+      "extra_group_lines": [
+        12
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "current_sha256": "09ee1d52d500e352b027f57cb585cd91077c0693614a1259287986c710878ee8",
+      "original_sha256": "c3df77a2987e97df8872c3dab8f6e7c10a08850c5ebcb439c0ec1dc88b0cdc44",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 937,
+      "extra_group_lines": [
+        575,
+        623,
+        644
+      ]
+    }
+  ],
+  "held": {}
+}

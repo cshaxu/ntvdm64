@@ -1,0 +1,51 @@
+{
+  "classification": "diagnostic-line-immediates-only plus PE/debug timestamps",
+  "old_sha256": "4869515cc856c4466aabde9bd1adff2db7418245b0fbcfe630ce6f15263f661b",
+  "new_sha256": "fde39a9ece5f7516c9d08bb37bddce8712c7c904dc4ea8b598bf7233c63fb327",
+  "source": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+  "source_file_pointer": "0x10091a80",
+  "source_file_string": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/cldib.c",
+  "cases": [
+    {
+      "offset": "0x4d202",
+      "old": {
+        "physical": 112,
+        "logical": 112,
+        "code": "UserAssert(rop == SRCCOPY);"
+      },
+      "new": {
+        "physical": 113,
+        "logical": 109,
+        "code": "UserAssert(rop == SRCCOPY);"
+      }
+    },
+    {
+      "offset": "0x4d21c",
+      "old": {
+        "physical": 113,
+        "logical": 113,
+        "code": "UserAssert(wUsage == DIB_RGB_COLORS);"
+      },
+      "new": {
+        "physical": 114,
+        "logical": 110,
+        "code": "UserAssert(wUsage == DIB_RGB_COLORS);"
+      }
+    },
+    {
+      "offset": "0x4d23c",
+      "old": {
+        "physical": 114,
+        "logical": 114,
+        "code": "UserAssert(xS == 0 && yS == 0);"
+      },
+      "new": {
+        "physical": 115,
+        "logical": 111,
+        "code": "UserAssert(xS == 0 && yS == 0);"
+      }
+    }
+  ],
+  "exhaustive_non_timestamp_bytes": 3,
+  "explanation": "Each changed byte is the push-immediate line argument immediately followed by the unchanged push of the same source-file pointer; the unchanged neighboring expression strings and matching source assertions identify the diagnostic sites."
+}

@@ -294,6 +294,7 @@ ULONG FASTCALL WU32GetClassLong(PVDMFRAME pFrame)
                         // to a proc.  This happens when there is some
                         // unicode to ansi transition or vice versa.
                         //
+#line 281
                         pww = FindPWW( hwnd, WOWCLASS_UNKNOWN);
                         if ( pww == NULL ) {
                             ul = 0;
@@ -742,6 +743,7 @@ ULONG FASTCALL WU32SetClassLong(PVDMFRAME pFrame)
 #endif
 
                 // Look to see if the new 16:16 proc is a thunk for a 32-bit proc.
+#line 722
                 dwWndProc32New = IsThunkWindowProc(LONG32(parg16->f3), NULL );
 
                 if ( dwWndProc32New != 0 ) {
@@ -806,6 +808,7 @@ ULONG FASTCALL WU32SetClassLong(PVDMFRAME pFrame)
                         //
                         // If the return value is a handle, then just thunk it.
                         //
+#line 762
                         pww = FindPWW(HWND32(parg16->f1), WOWCLASS_UNKNOWN);
                         if ( pww == NULL ) {
                             ul = 0;

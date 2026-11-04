@@ -16,6 +16,7 @@
 /*
  * Constants.
  */
+#line 16
 #define FX1  65536   // 1.0 in fixed point
 
 

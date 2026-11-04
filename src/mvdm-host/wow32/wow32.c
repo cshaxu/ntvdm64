@@ -22,6 +22,7 @@
 /* DIVERGENCE(MVDM-HOST-DIV-296): native private USER aliases retain their
  * storage across original thunk calls, including reentry and exception unwind. */
 #include "wow_user_thunk_scope.h"
+#line 22
 #pragma hdrstop
 #include "wktbl.h"
 #include "wutbl.h"
@@ -34,6 +35,7 @@
 #include "wthtbl.h"
 #include <stdarg.h>
 #include <ntlpcapi.h>
+#line 33
 #include <ntcsrdll.h>
 #define SHAREWOW_MAIN
 #include <sharewow.h>
@@ -50,6 +52,7 @@
 
 
 /* Function Prototypes */
+#line 39
 DWORD   W32SysErrorBoxThread2(PTDB pTDB);
 VOID    StartDebuggerForWow(VOID);
 BOOLEAN LoadCriticalStringResources(void);
@@ -243,6 +246,7 @@ Return Value:
                        "Win16 subsystem load failure", MB_ICONEXCLAMATION | MB_OK);
         }
 
+#line 256
         W32EWExecer();
 
         InitializeListHead(&TimerList);
@@ -499,6 +503,7 @@ BOOL W32Init(VOID)
         if (!NtvdmGetSystemDirectoryA(szBuf, sizeof szBuf)) {
             return FALSE;
         }
+#line 504
         GetShortPathName(szBuf, szBuf, sizeof szBuf);
         cb = strlen(szBuf) + 1;
         pszSystemDirectory = malloc_w_or_die(cb);
@@ -507,6 +512,7 @@ BOOL W32Init(VOID)
         if (!NtvdmGetWindowsDirectoryA(szBuf, sizeof szBuf)) {
             return FALSE;
         }
+#line 510
         GetShortPathName(szBuf, szBuf, sizeof szBuf);
         cb = strlen(szBuf) + 1;
         pszWindowsDirectory = malloc_w_or_die(cb);
@@ -589,6 +595,7 @@ BOOL W32Init(VOID)
         WowKey = NULL;
 #endif
 #line 604
+#line 584
     }
 
     //
@@ -639,6 +646,7 @@ BOOL W32Init(VOID)
     //
     //
 
+#line 688
     W32InitWOWSetupNames();
 
     //
@@ -834,6 +842,7 @@ VOID W32Dispatch()
     BOOL fStackEstablished = FALSE;
     VPVOID vpCurrentStack = 0; // DIV-348: filter arguments precede setup too
     register PTD ptd = NULL;
+#line 959
     register PVDMFRAME pFrame;
 #ifdef DEBUG_OR_WOWPROFILE
 #line 961
@@ -872,6 +881,7 @@ VOID W32Dispatch()
         ptd->vpStack = vpCurrentStack;              // Save 16 bit ss:sp
         fStackEstablished = TRUE;                 // DIV-337
 
+#line 992
         WOW32ASSERT( FIELD_OFFSET(TD,vpStack) == 0 );
         WOW32ASSERT( FIELD_OFFSET(TEB,WOW32Reserved) == 0xC0 );
 
@@ -945,6 +955,7 @@ VOID W32Dispatch()
             ptd->vpStack = vpCurrentStack;
             SETVDMSTACK(ptd->vpStack);
         }
+#line 1068
     }
     //
     // WARNING: DO NOT ADD ANYTHING TO THIS FUNCTION UNLESS YOU ADD THE SAME
@@ -1020,6 +1031,7 @@ INT W32Exception(DWORD dwException, PEXCEPTION_POINTERS pexi)
     BOOL AeAutoDebug;
     WORD wDebugButton;
 
+#line 1186
     if (!gfDebugExceptions) {
 
         //
@@ -1713,6 +1725,7 @@ PVOID WOWStartupFailed(VOID)
     /* DIVERGENCE(MVDM-HOST-DIV-356): parent owns whole-worker exit permission. */
     extern DWORD WINAPI NtvdmAuthorizeExit(DWORD exit_code);
 
+#line 2312
     LoadString(hmodWOW32, iszStartupFailed, szMsgBoxText, sizeof szMsgBoxText);
     LoadString(hmodWOW32, iszSystemError, szCaption, sizeof szCaption);
 
@@ -1723,6 +1736,7 @@ PVOID WOWStartupFailed(VOID)
 
     /* DIVERGENCE(MVDM-HOST-DIV-356): before original task-record retirement. */
     exit_code = NtvdmAuthorizeExit(EXIT_FAILURE);
+#line 2320
     ExitVDM(WOWVDM, ALL_TASKS);         // Tell Win32 All Tasks are gone.
     ExitProcess(exit_code);
     return (PVOID)NULL;

@@ -27,6 +27,7 @@ Revision History:
 
 --*/
 
+#line 23
 #define MAXIMUM_VDM_COMMAND_LENGTH	128
 #define MAXIMUM_VDM_ENVIORNMENT 	32*1024
 #define MAXIMUM_VDM_CURRENT_DIR 	64

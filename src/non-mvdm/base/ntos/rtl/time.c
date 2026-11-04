@@ -67,13 +67,16 @@ RtlSecondsSince1970ToTime (
     IN ULONG ElapsedSeconds,
     OUT PLARGE_INTEGER Time
     )
+#line 1248
 {
     LARGE_INTEGER Seconds;
 
+#line 1255
     Seconds.LowPart = ElapsedSeconds;
     Seconds.HighPart = 0;
     Seconds.QuadPart = Seconds.QuadPart + 0x00000002b6109100i64;
     Time->QuadPart = Seconds.QuadPart * 10000000i64;
+#line 1275
 }
 
 #else

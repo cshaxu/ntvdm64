@@ -467,3 +467,14 @@ matching-code lines on the observed projection pass. Local behavior and
 unobserved contexts are not certified. No source change was needed. Counts:
 181 byte-identical / 744 differing files reviewed / 1,056 total; 131 differing
 files remain.
+
+The [r1369 batch](s13-r1369-batch.json) aligns matching source lines in ten
+files with additional local conditional groups; [observed context recheck]
+(s13-r1369-extra-group-recheck.json) passes. Nine additionally passed the
+[strict tree review](s13-r1369-extra-strict.json); one remains pending.
+Cached x86 root, NTVDM, WOW32 and x64 builds passed; ten images published
+and verified. Eight match byte-for-byte, NTVDM differs only by PE timestamp,
+and WOW32 has three changed assertion-line immediate bytes plus timestamps,
+independently attributed in [proof](s13-r1369-diagnostic-line-proof.json).
+Per owner instruction tests were not repeated. Counts: 181 byte-identical /
+753 differing files reviewed / 1,056 total; 122 differing files pending.

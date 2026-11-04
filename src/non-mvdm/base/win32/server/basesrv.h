@@ -35,6 +35,7 @@ Revision History:
 // Include server definitions for CSR
 //
 
+#line 32
 #include "ntcsrsrv.h"
 
 //

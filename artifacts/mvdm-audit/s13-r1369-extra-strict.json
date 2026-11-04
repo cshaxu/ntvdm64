@@ -1,0 +1,100 @@
+{
+  "method": "Same original/local condition-group pairing and observed selected-projection review as r1368. Unobserved contexts and runtime behavior are not certified.",
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/wole2.c",
+      "current_sha256": "54366e8dd55e18486094245d4d46fbc686a1a67c3f53e03aa3ac291278f9f146",
+      "original_sha256": "85fab0277735cff414d0f339557f110bf1501cbbe0f933dcf95232d9a61fd5e9",
+      "matched_lines": 342,
+      "groups": {
+        "local_groups": 1,
+        "excluded": 2,
+        "original_groups": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "current_sha256": "25165d4311060229d4792ff598b1bc66971b9f369777df28df0131117f4736ce",
+      "original_sha256": "12cdd44dfec6b74a426165977f941da86d90bbad7aa9c59a085010d02528629d",
+      "matched_lines": 1022,
+      "groups": {
+        "excluded": 6,
+        "original_groups": 6,
+        "local_groups": 8
+      }
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "current_sha256": "a745afa2eb4179290b1db7c60c401f4874abf4b8de42bd0ffbcc18912aedf66c",
+      "original_sha256": "ab270e2669cfd383da4baac471bb63e7c9c603581f4f7592ad447e8a783953dc",
+      "matched_lines": 3051,
+      "groups": {
+        "excluded": 5,
+        "original_groups": 6,
+        "selected": 1,
+        "local_groups": 8
+      }
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsmemr.c",
+      "current_sha256": "aa83a34124d03d20a7979a79f7729a4d3c452ab9f4fb423b0e76ba3e56d37a44",
+      "original_sha256": "70970ed738101458f8036b5a283f034eb64baf32ead84a59a6b02278b327612c",
+      "matched_lines": 147,
+      "groups": {
+        "local_groups": 2
+      }
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/time.c",
+      "current_sha256": "8f14556a857abafc09bb1f56a02f018e04d1dee44b941444a8e5f3c4bd7dee6b",
+      "original_sha256": "ac422e072432aff83c17b03c2127a80d067e801170eba9216ab86d2520767d40",
+      "matched_lines": 64,
+      "groups": {
+        "excluded": 1,
+        "original_groups": 1,
+        "local_groups": 1
+      }
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/basesrv.h",
+      "current_sha256": "2f45f0da601a5fef3f73c8f7808b3c1bdb147501b205545dd1cc272306675625",
+      "original_sha256": "a6863d6360830149e0b4895423f3d0f8a8e13326d784821d88b433ff849f3e31",
+      "matched_lines": 225,
+      "groups": {
+        "local_groups": 2
+      }
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdmapi.h",
+      "current_sha256": "a177edfb7bfa754e95c09d992870ccfa57e9a606a10995a30eb4206116643118",
+      "original_sha256": "b942656ba8761ddb9325a7eea7997394562d2e57797c923ff5688d7be86426de",
+      "matched_lines": 141,
+      "groups": {
+        "local_groups": 1
+      }
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+      "current_sha256": "1a2c9db520aef67ade59a6a3e0b0627e5e22b8ccf584f24cdc73b815eebb5576",
+      "original_sha256": "e16fb36805f44767b45b597510a6c08d1dbc47271783e5d1f8f09273c0f782fb",
+      "matched_lines": 645,
+      "groups": {
+        "local_groups": 1
+      }
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "current_sha256": "09ee1d52d500e352b027f57cb585cd91077c0693614a1259287986c710878ee8",
+      "original_sha256": "c3df77a2987e97df8872c3dab8f6e7c10a08850c5ebcb439c0ec1dc88b0cdc44",
+      "matched_lines": 937,
+      "groups": {
+        "excluded": 1,
+        "original_groups": 1,
+        "local_groups": 3
+      }
+    }
+  ],
+  "held_reasons": {
+    "selected direct body differs": 16
+  }
+}

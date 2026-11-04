@@ -27,6 +27,7 @@ Revision History:
 #include "mvdm_xms_memory.h"
 #endif
 
+#line 26
 NTSTATUS
 xmsCommitBlock(
     ULONG BaseAddress,
@@ -153,4 +154,5 @@ Return Value:
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 
+#line 167
 }

@@ -1576,6 +1576,7 @@ ULONG FASTCALL WU32GetWindowDC(PVDMFRAME pFrame)
 {
     ULONG ul;
     HWND hwnd32;
+#line 1582
     register PGETWINDOWDC16 parg16;
     HAND16 htask16 = pFrame->wTDB;
 
@@ -1588,6 +1589,7 @@ ULONG FASTCALL WU32GetWindowDC(PVDMFRAME pFrame)
     if (parg16->f1 && !hwnd32) { FREEARGPTR(parg16); RETURN(0); }
     ul = GETHDC16(wow_native_GetWindowDC(hwnd32));
 
+#line 1593
     if (ul)
         StoreDC(htask16, parg16->f1, (HAND16)ul, hwnd32);
 
@@ -1726,6 +1728,7 @@ ULONG FASTCALL WU32GetWindowLong(PVDMFRAME pFrame)
                         ** (if it needs a 32-bit Ansi-Unicode transition, or
                         ** vice versa.)
                         */
+#line 1713
                         ul = GetThunkWindowProc( dwWndProc32Cur, NULL, pww, HWND32(parg16->f1) );
                     } else {
                         /*
@@ -2473,6 +2476,7 @@ ULONG FASTCALL WU32SetWindowLong(PVDMFRAME pFrame)
 #endif
 
             // Look to see if the new 16:16 proc is a thunk for a 32-bit proc.
+#line 2453
             dwWndProc32New = IsThunkWindowProc(LONG32(parg16->f3), &iClass );
 
             if ( dwWndProc32New != 0 ) {
@@ -2552,6 +2556,7 @@ ULONG FASTCALL WU32SetWindowLong(PVDMFRAME pFrame)
                     // the need for unicode-ansi transitions, or vice versa)
                     // then treat it as a 32-bit thunk.
                     //
+#line 2510
                     ul = GetThunkWindowProc(dwWndProc32Old, NULL, pww, HWND32(parg16->f1));
                 } else {
                     //
@@ -2786,9 +2791,11 @@ ULONG FASTCALL WU32SetWindowText(PVDMFRAME pFrame)
     DWORD text16, error;
     BOOL mapped = FALSE;
 
+#line 2741
     GETARGPTR(pFrame, sizeof(SETWINDOWTEXT16), parg16);
     text16 = FETCHDWORD(parg16->f2);
     __try {
+#line 2742
     GETPSZPTR(parg16->f2, psz2);
     handle = HWND32(parg16->f1);
 
@@ -2813,7 +2820,9 @@ ULONG FASTCALL WU32SetWindowText(PVDMFRAME pFrame)
         FREEPSZPTR(psz2);
         FREEARGPTR(parg16);
         SetLastError(error);
+#line 2762
     }
+#line 2766
     RETURN(0);
 }
 

@@ -3138,3 +3138,5 @@ MVDM-HOST-DIV-830: restore original logical source positions for matching code o
 MVDM-HOST-DIV-831: restore original logical source positions for matching code on observed selected paths in ten files with additional local condition groups. Evidence: artifacts/mvdm-audit/s13-r1366-batch.json and s13-r1366-extra-group-recheck.json. Other contexts remain under review.
 
 MVDM-HOST-DIV-832: restore original logical source positions for matching code on observed selected paths in ten files with additional local condition groups. Evidence: artifacts/mvdm-audit/s13-r1367-batch.json and s13-r1367-extra-group-recheck.json. Other contexts remain under review.
+
+MVDM-HOST-DIV-833: restore original logical source positions for matching code on observed selected paths with local conditional groups. Evidence: artifacts/mvdm-audit/s13-r1369-batch.json and s13-r1369-extra-group-recheck.json. Other contexts remain under review.
