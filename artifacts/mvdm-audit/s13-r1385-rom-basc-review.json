@@ -1,0 +1,14 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/bios/rom_basc.c",
+  "current_sha256": "5b03ffa5ba2ecb77f60c7f01d61a6ca96029c838d2b92ffcfba5cf00ee098c87",
+  "original_sha256": "2e6f1783fcb3695443ab0a3a6fcb5dbf2bd3e2e7905217cd61021e031a8a709a",
+  "original_conditional": "#ifdef SEGMENTATION at line 16; original body lines 17-22",
+  "current_conditional": "same guard and closing endif; body only #error and whitespace",
+  "all_other_lines": "byte text identical after line-ending normalization, at identical physical/logical line numbers; no #line directives in original or current",
+  "arm_status": "excluded-error, unique-structure-historical",
+  "evidence": [
+    "s13-r1271-simple-condition-audit.json",
+    "s13-r1362-natural-error-lines.json"
+  ],
+  "scope": "Source comparison and historical compile evidence; no new runtime test."
+}
