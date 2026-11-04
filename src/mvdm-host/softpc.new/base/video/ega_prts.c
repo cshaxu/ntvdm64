@@ -2551,7 +2551,7 @@ LOCAL void	ega_index_invalid IFN2(io_addr, port, half_word, value)
 	UNUSED(port);
 	UNUSED(value);
 #endif
-#line 2522
+#line 3062
 	note_entrance2("ega_index_invalid(%x,%x)", port, value);
 	assert1(NO,"Invalid index %d",graphics_controller.address.as_bfld.index);
 }
@@ -2565,7 +2565,7 @@ LOCAL void	ega_ac_outb IFN2(io_addr, port, half_word, value)
 #ifdef PROD
 	UNUSED(port);
 #endif
-#line 2535
+#line 3075
 	note_entrance2("ega_ac_outb(%x,%x)", port, value);
 	assert1( port == EGA_AC_INDEX_DATA || port == EGA_AC_SECRET, "Bad port %x", port);
 	new.value = value;
@@ -2681,7 +2681,7 @@ MISC_OUTPUT_REG new;
 #ifdef PROD
 	UNUSED(port);
 #endif
-#line 2650
+#line 3190
 	note_entrance2("ega_misc_outb(%x,%x)", port, value);
 	assert1(port==EGA_MISC_REG,"Bad port %x",port);
 	new.as.abyte = value;
@@ -2730,7 +2730,7 @@ LOCAL void	ega_feat_outb IFN2(io_addr, port, half_word, value)
 	UNUSED(port);
 	UNUSED(value);
 #endif
-#line 2698
+#line 3238
 	note_entrance2("ega_feat_outb(%x,%x)", port, value);
 	NON_PROD(feature_control_register.as.abyte = value);
 }
@@ -2740,7 +2740,7 @@ LOCAL void	ega_ipstat0_inb IFN2(io_addr, port, half_word *, value)
 #ifdef PROD
 	UNUSED(port);
 #endif
-#line 2707
+#line 3247
 	note_entrance1("ega_ipstat0_inb(%x)", port);
 	input_status_register_zero.as_bfld.switch_sense = 
 	
@@ -2817,7 +2817,7 @@ LOCAL void	ega_ipstat1_inb IFN2(io_addr, port, half_word *, value)
 #ifdef PROD
 	UNUSED(port);
 #endif
-#line 2783
+#line 3323
 	note_entrance1("ega_ipstat1_inb(%x)", port);
     note_entrance2("ega_ipstat1_inb(%x,%x)", port, value);
 

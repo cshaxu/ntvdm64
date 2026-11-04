@@ -69,7 +69,7 @@ extern KEYBDFUNCS nt_keybd_funcs;
 extern HOSTMOUSEFUNCS the_mouse_funcs;
 
 #ifndef MONITOR
-#line 69
+#line 66
 extern WORD BWVKey;
 extern char achES[];
 #endif
@@ -237,7 +237,7 @@ void  host_applInit(int argc,char *argv[])
             }
             else
 #endif
-#line 215
+#line 218
             if(tolower(*psz) == 'w'){
                 VDMForWOW = TRUE;
                 if (bSwitchF)

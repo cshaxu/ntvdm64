@@ -3524,7 +3524,7 @@ GLOBAL VOID screen_refresh_required IFN0()
 #line 3581
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else
-#line 3457
+#line 3589
 	setVideodirty_total(1000000L);
 #endif	/* CPU_40_STYLE */
 #line 3591
@@ -3669,7 +3669,7 @@ GLOBAL void set_gfx_update_routines IFN3(T_calc_update, update_routine,
 #line 3732
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else
-#line 3577
+#line 3735
 			update_alg.scroll_up = text_scroll_up;
 			update_alg.scroll_down = text_scroll_down;
 #endif	/* NTVDM & MONITOR */
@@ -3952,7 +3952,7 @@ void paint_text_rect(int screen_start)
 #line 4690
 #error Unsupported excluded original configuration
 #else
-#line 4304
+#line 4692
     int offset = (RectTop * (get_offset_per_line()<<1)) + (RectLeft<<2);
 #endif
 #line 4694
@@ -3969,7 +3969,7 @@ void paint_text_rect(int screen_start)
 #line 4704
 #error Unsupported excluded original configuration
 #else
-#line 4318
+#line 4706
 		   RectLeft*get_pix_char_width(),RectTop*get_host_char_height(),
 #endif
 #line 4708

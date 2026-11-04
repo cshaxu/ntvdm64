@@ -499,7 +499,7 @@ ega_write_routines_update IFN1(CHANGE_TYPE, reason )
 				 */
 				SetWritePointers();
 #endif
-#line 448
+#line 687
 				always_trace3("Possible unsupported data rotate mode %d chain %d rotate by %d",
 				               EGA_CPU.write_mode,
 					       EGA_CPU.chain, getVideorotate());
@@ -569,7 +569,7 @@ ega_write_routines_update IFN1(CHANGE_TYPE, reason )
 #ifdef CPU_40_STYLE
 						setVideowrmode(4);	/* indicate 'copy case' */
 #endif	/* CPU_40_STYLE */
-#line 513
+#line 752
 						bios_ch2_byte_wrt_fn = ega_copy_b_write;
 						bios_ch2_word_wrt_fn = ega_copy_w_write;
 					}
@@ -630,7 +630,7 @@ ega_write_routines_update IFN1(CHANGE_TYPE, reason )
 			}
 			else
 #endif	/* V7VGA */
-#line 573
+#line 812
 				setVideodither(0);	/* disable Evid dither fns */
 
 				handler = &mode_chain_handler_table[mode_and_chain][state];

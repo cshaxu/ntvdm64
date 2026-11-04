@@ -1,0 +1,309 @@
+{
+  "method": "Each anchor corrected against a unique exact original source line; only #line values change. Other branches in these files remain separately audited.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\trace.c",
+      "before_sha256": "4c7adf902ed8846452b3c4cb46453860107d0c06d5c3bbdf5b2360f681f700fd",
+      "after_sha256": "ce6df65f98751c65d9f1e662c3b065b22903548e9a8331b900102d80fc81ca60",
+      "fixes": [
+        {
+          "physical": 97,
+          "old": 241,
+          "new": 461,
+          "matched_original_line": 461,
+          "source": "UNUSED(error_msg);"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_prts.c",
+      "before_sha256": "5d0ed6e645d1e239c488727243b8ac52e2e58a2a7b01b6ea4f16d6f375d726df",
+      "after_sha256": "bb1a704b8fc1e48c3b659c18821a0025498b28aed63641ed12bfdffb7e370006",
+      "fixes": [
+        {
+          "physical": 2554,
+          "old": 2522,
+          "new": 3062,
+          "matched_original_line": 3062,
+          "source": "note_entrance2(\"ega_index_invalid(%x,%x)\", port, value);"
+        },
+        {
+          "physical": 2568,
+          "old": 2535,
+          "new": 3075,
+          "matched_original_line": 3075,
+          "source": "note_entrance2(\"ega_ac_outb(%x,%x)\", port, value);"
+        },
+        {
+          "physical": 2684,
+          "old": 2650,
+          "new": 3190,
+          "matched_original_line": 3190,
+          "source": "note_entrance2(\"ega_misc_outb(%x,%x)\", port, value);"
+        },
+        {
+          "physical": 2733,
+          "old": 2698,
+          "new": 3238,
+          "matched_original_line": 3238,
+          "source": "note_entrance2(\"ega_feat_outb(%x,%x)\", port, value);"
+        },
+        {
+          "physical": 2743,
+          "old": 2707,
+          "new": 3247,
+          "matched_original_line": 3247,
+          "source": "note_entrance1(\"ega_ipstat0_inb(%x)\", port);"
+        },
+        {
+          "physical": 2820,
+          "old": 2783,
+          "new": 3323,
+          "matched_original_line": 3323,
+          "source": "note_entrance1(\"ega_ipstat1_inb(%x)\", port);"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_read.c",
+      "before_sha256": "efef39a8d4b48bd7cce29ed78882956fec15522f5943fddd2dc9678abf0590ab",
+      "after_sha256": "c5269aec79514350b46134e17762902023354fb2abc80d414d771611431f153c",
+      "fixes": [
+        {
+          "physical": 497,
+          "old": 402,
+          "new": 579,
+          "matched_original_line": 579,
+          "source": "return( temp1 );"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_writ.c",
+      "before_sha256": "f3a601450ac4d3ee7aee5701d659bcc26456dc9b16fb2d4db18f8362859dcd4f",
+      "after_sha256": "20e6d484f4f205feb024c1f32e1e3b5679369b4e2349758bc9a73bd3d16fcb7a",
+      "fixes": [
+        {
+          "physical": 502,
+          "old": 448,
+          "new": 687,
+          "matched_original_line": 687,
+          "source": "always_trace3(\"Possible unsupported data rotate mode %d chain %d rotate by %d\","
+        },
+        {
+          "physical": 572,
+          "old": 513,
+          "new": 752,
+          "matched_original_line": 752,
+          "source": "bios_ch2_byte_wrt_fn = ega_copy_b_write;"
+        },
+        {
+          "physical": 633,
+          "old": 573,
+          "new": 812,
+          "matched_original_line": 812,
+          "source": "setVideodither(0);\t/* disable Evid dither fns */"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gfx_updt.c",
+      "before_sha256": "e5b1246be824ec9dc136311783e4ed680d48c259a28287c1b7ba355655a5624d",
+      "after_sha256": "7fbd263ceaa51a57c01739a79f717fed0a341340e1005f3a4bee20bb0539580e",
+      "fixes": [
+        {
+          "physical": 3527,
+          "old": 3457,
+          "new": 3589,
+          "matched_original_line": 3589,
+          "source": "setVideodirty_total(1000000L);"
+        },
+        {
+          "physical": 3672,
+          "old": 3577,
+          "new": 3735,
+          "matched_original_line": 3735,
+          "source": "update_alg.scroll_up = text_scroll_up;"
+        },
+        {
+          "physical": 3955,
+          "old": 4304,
+          "new": 4692,
+          "matched_original_line": 4692,
+          "source": "int offset = (RectTop * (get_offset_per_line()<<1)) + (RectLeft<<2);"
+        },
+        {
+          "physical": 3972,
+          "old": 4318,
+          "new": 4706,
+          "matched_original_line": 4706,
+          "source": "RectLeft*get_pix_char_width(),RectTop*get_host_char_height(),"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\vga_prts.c",
+      "before_sha256": "b97e7741e7f1bc7b1d17b54bd951b79cfd6d75273b7d1187cbada1b33c0ad6c3",
+      "after_sha256": "12e7169720adcc8a31487d47f20c9c344bc58d02a9fb463a242c865ac1ad4be7",
+      "fixes": [
+        {
+          "physical": 2304,
+          "old": 2268,
+          "new": 2281,
+          "matched_original_line": 2281,
+          "source": "NON_PROD(if(io_verbose & EGA_PORTS_VERBOSE)fprintf(trace_file,\"seq(2,%x)\\n\",value);)"
+        },
+        {
+          "physical": 2527,
+          "old": 2577,
+          "new": 2616,
+          "matched_original_line": 2617,
+          "source": "note_entrance2(\"vga_ac_outb(%x,%x)\", port, value);"
+        },
+        {
+          "physical": 2725,
+          "old": 2770,
+          "new": 2809,
+          "matched_original_line": 2810,
+          "source": "NON_PROD(if(io_verbose & EGA_PORTS_VERBOSE)fprintf(trace_file,\"misc %#x\\n\",value);)"
+        },
+        {
+          "physical": 2748,
+          "old": 2792,
+          "new": 2831,
+          "matched_original_line": 2831,
+          "source": "EGA_CPU.ram_enabled = new.as_bfld.enable_ram;"
+        },
+        {
+          "physical": 2764,
+          "old": 2807,
+          "new": 2846,
+          "matched_original_line": 2846,
+          "source": "assert1(port==VGA_MISC_READ_REG,\"Bad port %x\",port);"
+        },
+        {
+          "physical": 2774,
+          "old": 2816,
+          "new": 2855,
+          "matched_original_line": 2855,
+          "source": "note_entrance1(\"vga_ipstat0_inb(%x)\", port);"
+        },
+        {
+          "physical": 2785,
+          "old": 2826,
+          "new": 2865,
+          "matched_original_line": 2865,
+          "source": "note_entrance2(\"ega_feat_outb(%x,%x)\", port, value);"
+        },
+        {
+          "physical": 2836,
+          "old": 2876,
+          "new": 2915,
+          "matched_original_line": 2916,
+          "source": "note_entrance1(\"vga_dac_data_outb %#x\",port);"
+        },
+        {
+          "physical": 2896,
+          "old": 2935,
+          "new": 2974,
+          "matched_original_line": 2974,
+          "source": "note_entrance1(\"vga_dac_data_inb %#x\",port);"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\copy_fnc.c",
+      "before_sha256": "59174912de6b5be66e6a7d3832cf14f728adbb5a9be5f2bf5ccf19ccb74c112f",
+      "after_sha256": "6ff9c209a14ccc0e89a63d3379be6b3f86111e595a35dac267d2af86578fa2c0",
+      "fixes": [
+        {
+          "physical": 105,
+          "old": 119,
+          "new": 116,
+          "matched_original_line": 116,
+          "source": "do *l_addr4++ = data4; while (h_addr4 > l_addr4);"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_eoi.c",
+      "before_sha256": "4df62a5eade5971e6798661f9f10c68df3ee83079b733a626c3d01f617446997",
+      "after_sha256": "06bbeddb0a31f4f203f6c22f328def3be4c27943364f828a8e2d58d9b63b1079",
+      "fixes": [
+        {
+          "physical": 63,
+          "old": 57,
+          "new": 67,
+          "matched_original_line": 67,
+          "source": "void DelayIrqQuickEvent(long param);"
+        },
+        {
+          "physical": 100,
+          "old": 90,
+          "new": 102,
+          "matched_original_line": 102,
+          "source": "BlockTime = CurrHeartBeat;"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_reset.c",
+      "before_sha256": "4637d1dd86db3eab2baa1a2cd09029f38f34667d4912ce83e58f007ffad5dbc2",
+      "after_sha256": "d6ba0fdeb5492eaffdf2d5685fcd2df294e58bbc1c489054e1925f4c467dc34f",
+      "fixes": [
+        {
+          "physical": 72,
+          "old": 69,
+          "new": 66,
+          "matched_original_line": 66,
+          "source": "extern WORD BWVKey;"
+        },
+        {
+          "physical": 240,
+          "old": 215,
+          "new": 218,
+          "matched_original_line": 218,
+          "source": "if(tolower(*psz) == 'w'){"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_timer.c",
+      "before_sha256": "206ec4b694fd39c0971b29397379d0cfac74c4453974de0e9a0aef1f78272ce9",
+      "after_sha256": "3d43baf8e5b5835172141aef3b518eb9134973149689062efdaaed4a5b66e573",
+      "fixes": [
+        {
+          "physical": 210,
+          "old": 207,
+          "new": 204,
+          "matched_original_line": 204,
+          "source": "void quick_tick_recalibrate(void);"
+        },
+        {
+          "physical": 430,
+          "old": 414,
+          "new": 422,
+          "matched_original_line": 422,
+          "source": "quick_tick_recalibrate();"
+        },
+        {
+          "physical": 510,
+          "old": 487,
+          "new": 497,
+          "matched_original_line": 497,
+          "source": "q_event_init();"
+        }
+      ]
+    }
+  ]
+}

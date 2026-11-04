@@ -60,7 +60,7 @@ static EOIHOOKPROC EoiHooks[16]={NULL};  // must be init to NULL
 
 
 #ifndef MONITOR
-#line 57
+#line 67
 void DelayIrqQuickEvent(long param);
 q_ev_handle DelayHandle[16];
 #define pNtVDMState ((PULONG)(Start_of_M_area + FIXED_NTVDMSTATE_LINEAR))
@@ -97,7 +97,7 @@ BlockWOWIdle(
        *pNtVDMState |= VDM_WOWBLOCKED;
 
 #ifndef MONITOR
-#line 90
+#line 102
        BlockTime = CurrHeartBeat;
 #endif
 #line 91

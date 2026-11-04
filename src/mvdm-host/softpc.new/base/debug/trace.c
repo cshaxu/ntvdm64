@@ -94,7 +94,7 @@ int  dump_info;
 #line 249
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #else	/* PROD */
-#line 241
+#line 461
 	UNUSED(error_msg);
 	UNUSED(dump_info);
 #endif	/* PROD */

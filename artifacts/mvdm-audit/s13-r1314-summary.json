@@ -39,5 +39,7 @@
   "batch_r1322_error_anchors_verified": 2,
   "zero_branch_unique_line_mapping_note": "Comment-only matched lines are not certified in 18 code-aligned files; prior raw count is superseded.",
   "batch_r1323_existing_original_anchors_verified": 16,
-  "batch_r1324_anchor_files_partially_corrected": 10
+  "batch_r1324_anchor_files_partially_corrected": 10,
+  "batch_r1325_anchor_files_partially_corrected": 10,
+  "batch_r1325_unique_statement_anchors_corrected": 32
 }

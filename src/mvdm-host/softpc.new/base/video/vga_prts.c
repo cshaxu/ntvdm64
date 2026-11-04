@@ -2301,7 +2301,7 @@ GLOBAL VOID	vga_seq_map_mask IFN2(io_addr,port,half_word,value)
 #ifdef PROD
 	UNUSED(port);
 #endif
-#line 2268
+#line 2281
 	NON_PROD(if(io_verbose & EGA_PORTS_VERBOSE)fprintf(trace_file,"seq(2,%x)\n",value);)
 	note_entrance2("vga_seq_map_mask(%x,%x)", port, value);
 
@@ -2524,7 +2524,7 @@ GLOBAL VOID	vga_ac_outb IFN2(io_addr,port,half_word,value)
 #ifdef PROD
 	UNUSED(port);
 #endif
-#line 2577
+#line 2616
 
 	note_entrance2("vga_ac_outb(%x,%x)", port, value);
 	assert1( port == EGA_AC_INDEX_DATA, "Bad port %x", port);
@@ -2722,7 +2722,7 @@ MISC_OUTPUT_REG new;
 #ifdef PROD
 	UNUSED(port);
 #endif
-#line 2770
+#line 2809
 
 	NON_PROD(if(io_verbose & EGA_PORTS_VERBOSE)fprintf(trace_file,"misc %#x\n",value);)
 
@@ -2745,7 +2745,7 @@ MISC_OUTPUT_REG new;
 		else
 			sas_disconnect_memory(gvi_pc_low_regen,gvi_pc_high_regen);
 #endif		/* GISP_SVGA */
-#line 2792
+#line 2831
 		EGA_CPU.ram_enabled = new.as_bfld.enable_ram;
 		ega_read_routines_update();
 		ega_write_routines_update(RAM_ENABLED);
@@ -2761,7 +2761,7 @@ GLOBAL VOID	vga_misc_inb IFN2(io_addr,port,half_word *, value)
 #ifdef PROD
 	UNUSED(port);
 #endif
-#line 2807
+#line 2846
 	assert1(port==VGA_MISC_READ_REG,"Bad port %x",port);
 	*value = miscellaneous_output_register.as.abyte;
 }
@@ -2771,7 +2771,7 @@ GLOBAL VOID	vga_ipstat0_inb IFN2(io_addr,port,half_word *, value)
 #ifdef PROD
 	UNUSED(port);
 #endif
-#line 2816
+#line 2855
 	note_entrance1("vga_ipstat0_inb(%x)", port);
 	*value = input_status_register_zero.as.abyte;
 	note_entrance1("returning %x",*value);
@@ -2782,7 +2782,7 @@ GLOBAL VOID	vga_feat_outb IFN2(io_addr,port,half_word,value)
 #ifdef PROD
 	UNUSED(port);
 #endif
-#line 2826
+#line 2865
 	note_entrance2("ega_feat_outb(%x,%x)", port, value);
 	feature_control_register.as.abyte = value;
 }
@@ -2833,7 +2833,7 @@ GLOBAL VOID	vga_dac_data_outb IFN2(io_addr,port,half_word,value)
 #ifdef PROD
 	UNUSED(port);
 #endif
-#line 2876
+#line 2915
 
     note_entrance1("vga_dac_data_outb %#x",port);
     switch(DAC_rgb_state) {
@@ -2893,7 +2893,7 @@ GLOBAL VOID	vga_dac_data_inb IFN2(io_addr,port,half_word *,value)
 #ifdef PROD
 	UNUSED(port);
 #endif
-#line 2935
+#line 2974
 	note_entrance1("vga_dac_data_inb %#x",port);
     switch(DAC_rgb_state) {
 

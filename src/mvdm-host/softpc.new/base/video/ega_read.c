@@ -494,7 +494,7 @@ rdm1_word_ch2 IFN1(ULONG, offset )		/* used to correct writes to M when in mode 
 #ifdef C_VID
 	EasVal = temp1;
 #endif
-#line 402
+#line 579
 	return( temp1 );
 }
 

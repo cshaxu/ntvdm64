@@ -102,7 +102,7 @@ fwd_word_fill(
 #line 116
 #error Excluded unsupported original constant-false fill branch
 #else
-#line 119
+#line 116
                 do *l_addr4++ = data4; while (h_addr4 > l_addr4);
                 l_addr = (unsigned char *)l_addr4;
 #endif

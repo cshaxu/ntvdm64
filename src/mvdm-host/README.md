@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-643: correct 32 original-source diagnostic anchors in ten
+condition-bearing trace, video and host files. Only `#line` values change;
+the exact source matches are recorded in
+`../../artifacts/mvdm-audit/s13-r1325-line-batch.json`.
+
 MVDM-HOST-DIV-642: correct existing original-line anchors in ten BIOS, CCPU,
 device and video sources, including the generic `READ_POINTERS` field
 positions. Only `#line` directives change. Original-line comparisons and

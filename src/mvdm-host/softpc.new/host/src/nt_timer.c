@@ -207,7 +207,7 @@ void CreepAdjust(LARGE_INTEGER DiffTime);
 void DemHeartBeat(void);
 
 #ifndef MONITOR
-#line 207
+#line 204
 void quick_tick_recalibrate(void);
 #endif
 #line 206
@@ -427,7 +427,7 @@ void host_timer_event()
         }
 
 #ifndef MONITOR
-#line 414
+#line 422
    quick_tick_recalibrate();
 #endif
 #line 415
@@ -507,7 +507,7 @@ VOID host_init_bda_timer(void)
     rtc_init();
 
 #ifndef MONITOR
-#line 487
+#line 497
     q_event_init();
 #endif
 #line 488
