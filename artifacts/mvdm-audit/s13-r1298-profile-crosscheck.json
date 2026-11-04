@@ -1,0 +1,31 @@
+{
+  "scope": "Recheck simple non-CPU40/CPU30 guard candidates against real object-specific flags and prior branch witnesses",
+  "build_graph": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+  "build_graph_sha256": "83d1f77c7a7fc7227ddf4e21265d551f265dc841c55abd1735210a7cdc272bab",
+  "non_error_candidates": 3,
+  "disposition": "Retain all three: selected in actual product compilation contexts. No new source exclusion.",
+  "objects": [
+    {
+      "object": "obj/adapter-softpc/mvdm_softpc_fast_bop.obj",
+      "build_ninja_line": 601,
+      "header": "src/mvdm-host/dpmi32/dpmidata.h",
+      "header_sha256": "f6c1ad552fb6a1782f897d82dc1ee6926132c053835f7a688d8e49d4d6389d4d",
+      "object_flags_sha256": "cb36fdd18a51e479319cd364a30740cdb05e3fa1245239a00802b31b2c4c71f1",
+      "object_flags_contain_define": false,
+      "prior_branch_witness": "s13-r757-dpmidata-contexts.json"
+    },
+    {
+      "object": "obj/cvidc/mvdm_cvidc_vector_binding.obj",
+      "build_ninja_line": 314,
+      "header": "src/mvdm-host/softpc.new/base/cvidc/evidgen.h",
+      "header_sha256": "fdb5437bda1e496b87852333ef3729ecf2d54915976333cba735f8cf1ffdc0a3",
+      "object_flags_sha256": "b7fbf92d8bbee0cad963820d990d0219d297ab9874da0adf217d039991e86685",
+      "object_flags_contain_define": false,
+      "prior_branch_witness": "s13-r1067-cvidevidgen-full-file.json"
+    }
+  ],
+  "limits": [
+    "Only exact simple CPU_30_STYLE and non-CPU40 selectors in the observed inventory were scanned.",
+    "Flags are not a replacement for preprocessing witnesses; referenced historical evidence includes actual selected-branch observations."
+  ]
+}
