@@ -213,7 +213,7 @@ half_word target_AR;
 #line 202
 #error Unsupported excluded original configuration
 #endif
-#line 188
+#line 205
 		break;
 
         case INT15_VIRTUAL_MODE:

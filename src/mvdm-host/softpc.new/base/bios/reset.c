@@ -750,7 +750,7 @@ void reset()
 #line 1001
 #error Unsupported excluded original configuration
 #endif
-#line 916
+#line 1003
 	dma_init();
 	dma_post();
 	fla_init();

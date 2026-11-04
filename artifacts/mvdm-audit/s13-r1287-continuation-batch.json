@@ -1,0 +1,367 @@
+{
+  "scope": "Ten-file correction of original diagnostic and continuation lines",
+  "method": "Seventeen continuation anchors match original condition signatures, original error-arm diagnostic and the immediately following original source including intervening lines. Four additional files have original condition or source context verified in s13-r1286-pending-lines.json; gfx_updt.c EGG/REAL_VGA end lines were confirmed around original cursor_changed. Only #line directives changed; selected program statements and conditions are unchanged.",
+  "files": [
+    {
+      "path": "src/mvdm-host/inc/wow.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wow.h",
+      "original_sha256": "64663c13abaefccd99533352e08fb28efc66032c94a1780bff73be4f4cdbf70b",
+      "before_sha256": "fd337675f4ff221ec2627d6fdad8f8d0a00c4015b18b46166ac7361e1efeb613",
+      "after_sha256": "8d94aef51ffdf5f5eeca6724981488113fb205fb949ba8f8264db55f0879784b",
+      "matched_continuations": [
+        {
+          "path": "src/mvdm-host/inc/wow.h",
+          "guard": 65,
+          "line_directive": 76,
+          "current": 79,
+          "expected": 80,
+          "original_end": 79,
+          "current_next": [
+            87,
+            "typedef WORD HAND16;"
+          ],
+          "original_next": [
+            90,
+            "typedef WORD HAND16;"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "before_sha256": "235487efc69086b61e3d9530c1a70d7626f9dd318b6967d4c6cc9926639333f5",
+      "after_sha256": "2e563c3d998e8bb65df31233f8c1fa1884ab436ebb7b975219ac25a65c7f7d12",
+      "matched_continuations": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+          "guard": 749,
+          "line_directive": 753,
+          "current": 916,
+          "expected": 1003,
+          "original_end": 1002,
+          "current_next": [
+            757,
+            "mouse_init();"
+          ],
+          "original_next": [
+            1006,
+            "mouse_init();"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\tape_io.c",
+      "original_sha256": "3aa86f1faf07f68937629f1d6e410eb41f498e17dc6d747647c7d6e5697c80aa",
+      "before_sha256": "55d5153055718b7e12cf3fc6a3ba0a1f1a5f8b300cf95225be2fe84384fb6ac9",
+      "after_sha256": "3925d3a06c54d3779b68e325b2c64801c9fa5b3e6c59739d8289fa049151fa69",
+      "matched_continuations": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+          "guard": 212,
+          "line_directive": 216,
+          "current": 188,
+          "expected": 205,
+          "original_end": 204,
+          "current_next": [
+            219,
+            "case INT15_VIRTUAL_MODE:"
+          ],
+          "original_next": [
+            207,
+            "case INT15_VIRTUAL_MODE:"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "before_sha256": "6cf6ae2cbab4c337d0c499942cd837da80f5392f7720482605d5afc25a059674",
+      "after_sha256": "f32e22dffe5313e0873e6f3082cfdb2cdd664ff6412a5e6ffd8596032a25486d",
+      "matched_continuations": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+          "guard": 2351,
+          "line_directive": 2355,
+          "current": 2385,
+          "expected": 2387,
+          "original_end": 2386,
+          "current_next": [
+            2358,
+            "case 0x71: /* T2 JNO Jb */ inst32 = JNO; goto TYPE70;"
+          ],
+          "original_next": [
+            2389,
+            "case 0x71: /* T2 JNO Jb */ inst32 = JNO; goto TYPE70;"
+          ]
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+          "guard": 3639,
+          "line_directive": 3643,
+          "current": 3666,
+          "expected": 3724,
+          "original_end": 3723,
+          "current_next": [
+            3646,
+            "case 0xe1: /* T2 LOOPE Jb */"
+          ],
+          "original_next": [
+            3726,
+            "case 0xe1: /* T2 LOOPE Jb */"
+          ]
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+          "guard": 4795,
+          "line_directive": 4799,
+          "current": 4795,
+          "expected": 4922,
+          "original_end": 4921,
+          "current_next": [
+            4806,
+            "c_cpu_EOA_hook IFN0()"
+          ],
+          "original_next": [
+            4928,
+            "c_cpu_EOA_hook IFN0()"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\printer.c",
+      "original_sha256": "b1456dcbc0dc6b4d1fd5d101bfaa6bdc9a4cd5d970c14215f3ae62a173f17ccb",
+      "before_sha256": "2be78798f0f3c05b03e4ad32e793d5d3ede22eb03a4310321c767d41533faee0",
+      "after_sha256": "6d324b77fc8c84f6992689385e664a54ff40d509ca53487a0ee399705d829699",
+      "matched_continuations": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+          "guard": 402,
+          "line_directive": 406,
+          "current": 387,
+          "expected": 416,
+          "original_end": 415,
+          "current_next": [
+            409,
+            "note_trace2(PRINTER_VERBOSE,\"outb to printer port %#x with value %#x\","
+          ],
+          "original_next": [
+            418,
+            "note_trace2(PRINTER_VERBOSE,\"outb to printer port %#x with value %#x\","
+          ]
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+          "guard": 490,
+          "line_directive": 498,
+          "current": 470,
+          "expected": 502,
+          "original_end": 501,
+          "current_next": [
+            500,
+            "if (toggled(old_control, value, AUTO_FEED))"
+          ],
+          "original_next": [
+            503,
+            "if (toggled(old_control, value, AUTO_FEED))"
+          ]
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+          "guard": 519,
+          "line_directive": 523,
+          "current": 492,
+          "expected": 531,
+          "original_end": 530,
+          "current_next": [
+            528,
+            "if(host_print_byte(adapter,output_reg[adapter]) == FALSE)"
+          ],
+          "original_next": [
+            535,
+            "if(host_print_byte(adapter,output_reg[adapter]) == FALSE)"
+          ]
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+          "guard": 539,
+          "line_directive": 547,
+          "current": 513,
+          "expected": 552,
+          "original_end": 551,
+          "current_next": [
+            548,
+            "set_state(adapter, STATE_OUT);"
+          ],
+          "original_next": [
+            552,
+            "set_state(adapter, STATE_OUT);"
+          ]
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+          "guard": 554,
+          "line_directive": 558,
+          "current": 521,
+          "expected": 560,
+          "original_end": 559,
+          "current_next": [
+            560,
+            "else if (high_low(old_control, value, STROBE)"
+          ],
+          "original_next": [
+            561,
+            "else if (high_low(old_control, value, STROBE)"
+          ]
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+          "guard": 588,
+          "line_directive": 592,
+          "current": 552,
+          "expected": 593,
+          "original_end": 592,
+          "current_next": [
+            597,
+            "note_trace1(PRINTER_VERBOSE, \"<poutb() - unknown state %x>\","
+          ],
+          "original_next": [
+            597,
+            "note_trace1(PRINTER_VERBOSE, \"<poutb() - unknown state %x>\","
+          ]
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+          "guard": 660,
+          "line_directive": 664,
+          "current": 618,
+          "expected": 660,
+          "original_end": 659,
+          "current_next": [
+            666,
+            "if (get_control(adapter) & IRQ)"
+          ],
+          "original_next": [
+            661,
+            "if (get_control(adapter) & IRQ)"
+          ]
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+          "guard": 672,
+          "line_directive": 681,
+          "current": 633,
+          "expected": 675,
+          "original_end": 674,
+          "current_next": [
+            686,
+            "void printer_init IFN1(int,adapter)"
+          ],
+          "original_next": [
+            679,
+            "void printer_init IFN1(int,adapter)"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\printer_.c",
+      "original_sha256": "53edfe9fb4bb9d965acb8a7cc5f33d14cdf0694957dadfa912e0175488dbcf81",
+      "before_sha256": "8a28da0071d6dfa1399fc9373f34129f8fe318ff80cce7f314457ac58b6b3b18",
+      "after_sha256": "bc09e35d2c249e5eb5b77eefcc2e5f46a28bbaaa9bba13d92b03c72cf0bd6908",
+      "matched_continuations": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egacpu.h",
+      "original_sha256": "4a53a9d1c7fb984deb2c5b0fd629442ee8a35272ad90323624d55daa65886194",
+      "before_sha256": "63896c8784a0bda540fae112f3d2c3b1849cceea6c5b83b1f1b792a45e5479e2",
+      "after_sha256": "9dc9a5b32884ce9388ba06522ca48854951964f66a62652a30b979428016fe47",
+      "matched_continuations": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+          "guard": 136,
+          "line_directive": 236,
+          "current": 232,
+          "expected": 333,
+          "original_end": 332,
+          "current_next": [
+            244,
+            "IMPORT ULONG sr_lookup[16];"
+          ],
+          "original_next": [
+            340,
+            "IMPORT ULONG sr_lookup[16];"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gfx_updt.c",
+      "original_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987",
+      "before_sha256": "c1c852da30ecf12432d8e969f97affc091280cec08023f34b10704612d7f0562",
+      "after_sha256": "e89219537e83fd099b98f3090959d2182098e409ad24cc20b9ada5855960f71c",
+      "matched_continuations": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+      "before_sha256": "0da54f857fe715e1946247ec1dad2669e4374904f2a31861405db42caa56c68e",
+      "after_sha256": "16d531a00717b0324368685c15955bff9825530a7aa2ef2c77263eb95e698006",
+      "matched_continuations": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard": 316,
+          "line_directive": 320,
+          "current": 316,
+          "expected": 307,
+          "original_end": 306,
+          "current_next": [
+            324,
+            "simple_bios_word_wrt IFN2(ULONG, ch_attr, ULONG, ch_addr)"
+          ],
+          "original_next": [
+            310,
+            "simple_bios_word_wrt IFN2(ULONG, ch_attr, ULONG, ch_addr)"
+          ]
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "guard": 1957,
+          "line_directive": 1961,
+          "current": 1910,
+          "expected": 1920,
+          "original_end": 1919,
+          "current_next": [
+            1963,
+            "void (** hack)(io_addr address, half_word value);"
+          ],
+          "original_next": [
+            1921,
+            "void (** hack)(io_addr address, half_word value);"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_event.c",
+      "original_sha256": "7f555a87ba029627d6811c0f7b96964bb8a96af90c60c89012975a4ac5442076",
+      "before_sha256": "9b53e1118f3e91bbbf625aac7d73e684884429d554d0f5af0e3fb128a9af86c6",
+      "after_sha256": "6475d6001f0b0819d619eacd70593d84eef66123f04cb138ae7c1aee7e439592",
+      "matched_continuations": []
+    }
+  ],
+  "status": "Cached x86/x64 builds, targeted line tests and Full suite passed; candidate image comparison recorded before publication.",
+  "limits": "Matched original condition signature, source context and diagnostic line where recorded; local project-only selector cases remain scoped projections. User has authorized reusing tests for subsequently verified diagnostic-line-only binary changes."
+}

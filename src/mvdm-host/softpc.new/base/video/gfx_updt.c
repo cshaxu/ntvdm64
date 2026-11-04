@@ -3721,10 +3721,10 @@ GLOBAL void set_gfx_update_routines IFN3(T_calc_update, update_routine,
 		inhibit_gfx_update_routines();
 }
 #endif /* EGG */
-#line 3626
+#line 3784
 
 #endif /* REAL_VGA */
-#line 3628
+#line 3786
 
 #ifndef cursor_changed
 void cursor_changed IFN2(int, x, int, y)

@@ -2352,7 +2352,7 @@ TYPE70:
 #line 2366
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
-#line 2385
+#line 2387
       break;
 
    case 0x71:   /* T2 JNO  Jb */   inst32 = JNO;    goto TYPE70;
@@ -3640,7 +3640,7 @@ TYPEE0:
 #line 3703
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
-#line 3666
+#line 3724
       break;
 
    case 0xe1:   /* T2 LOOPE  Jb */
@@ -4796,7 +4796,7 @@ LOCAL VOID
 #line 4890
 #error DIVERGENCE MVDM-HOST-DIV-499: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
-#line 4795
+#line 4922
 
 
    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

@@ -87,9 +87,10 @@
 #include TypesH
 #include TimeH
 #ifdef SYSTEMV
+#line 90
 #error DIVERGENCE MVDM-HOST-DIV-529: SYSTEMV platform branch is not selected; see mirror register.
 #endif
-#line 92
+#line 94
 
 /*
  * SoftPC include files
@@ -108,9 +109,10 @@
 
 #include "debug.h"
 #ifndef PROD
+#line 112
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 112
+#line 114
 
 
 /*
@@ -401,7 +403,7 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 #line 409
 #error DIVERGENCE MVDM-HOST-DIV-531: PC_CONFIG branch is not selected; see mirror register.
 #endif
-#line 387
+#line 416
 
 
 	note_trace2(PRINTER_VERBOSE,"outb to printer port %#x with value %#x",
@@ -493,7 +495,7 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 				/* this was a call to host_print_doc - <chrisP 28Aug91> */
 				host_reset_print(adapter);
 #endif
-#line 470
+#line 502
 
 			if (toggled(old_control, value, AUTO_FEED))
 				host_print_auto_feed(adapter,
@@ -518,7 +520,7 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 #line 522
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
-#line 492
+#line 531
 				       /*
 				 	* Send the stored internal buffer to
 				 	* the printer
@@ -542,7 +544,7 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 				    		set_status(adapter,
 					       	get_status(adapter) & ~NOTBUSY);
 #endif /* NTVDM && !MONITOR */
-#line 513
+#line 552
 				    		set_state(adapter, STATE_OUT);
 #ifndef DELAYED_INTS
 				    		handle_for_out_event[adapter]=add_q_event_t(lpr_state_out_event,HOST_PRINTER_DELAY,adapter);
@@ -553,7 +555,7 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 #line 558
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
-#line 521
+#line 560
 			}
 			else if (high_low(old_control, value, STROBE)
 				 	&& get_state(adapter) == STATE_OUT)
@@ -587,7 +589,7 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 #line 589
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 552
+#line 593
 			break;
 		}
 		break;
@@ -659,7 +661,7 @@ static void notbusy_check IFN1(int,adapter)
 #line 657
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 618
+#line 660
 
 		if (get_control(adapter) & IRQ)
                 {
@@ -676,7 +678,7 @@ static void notbusy_check IFN1(int,adapter)
 
 
 #endif
-#line 633
+#line 675
 
 /*
 ** Initialise the printer port required.

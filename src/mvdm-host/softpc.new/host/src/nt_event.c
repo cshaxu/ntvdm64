@@ -1489,9 +1489,10 @@ BOOL CntrlHandler(ULONG CtrlType)
 	    /* If keeping window open when exiting and fullscreen, return to desktop */
 	    /* Transition made simple as VDM de-registered from console */
 #ifdef X86GFX
+#line 1428
 #error Unsupported excluded original configuration
 #endif
-#line 1517
+#line 1432
 	}
 
         // Turn off PIF Reserved & ShortCut Keys

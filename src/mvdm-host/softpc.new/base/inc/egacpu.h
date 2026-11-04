@@ -233,7 +233,7 @@ extern struct VideoVector C_Video;	/* in (generated) vglfunc.c */
 #define SetMarkPointers	setMarkPointers
 #endif	/* C_VID */
 #endif	/* CPU_40_STYLE */
-#line 232
+#line 333
 
 #define write_state EGA_CPU.ega_state.state
 

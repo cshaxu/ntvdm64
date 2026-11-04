@@ -1,0 +1,44 @@
+{
+  "scope": "Source-proven original diagnostic and continuation mappings; current in-progress batch",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+      "before_sha256": "0da54f857fe715e1946247ec1dad2669e4374904f2a31861405db42caa56c68e",
+      "after_sha256": "bc2989bfd17317ac6b7e2d1530a07ac2cff67282858ad2f66ea9ca819b6646e4",
+      "reason": "Original EGG else at 1436 and REAL_VGA guard at 1506; restored error lines 1437 and 1507.",
+      "previous_evidence": "s13-r1280-context-line-batch.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\printer.c",
+      "original_sha256": "b1456dcbc0dc6b4d1fd5d101bfaa6bdc9a4cd5d970c14215f3ae62a173f17ccb",
+      "before_sha256": "2be78798f0f3c05b03e4ad32e793d5d3ede22eb03a4310321c767d41533faee0",
+      "after_sha256": "3b59b3fecedc4442cbd99a6de6d2e297bf58f09031d2dd693d99b0b2f424331f",
+      "reason": "Original SYSTEMV and PROD guards/errors/end continuations are 89/90/94 and 111/112/114; corrected error/continuation mapping.",
+      "previous_evidence": "s13-r1280-context-line-batch.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\printer_.c",
+      "original_sha256": "53edfe9fb4bb9d965acb8a7cc5f33d14cdf0694957dadfa912e0175488dbcf81",
+      "before_sha256": "8a28da0071d6dfa1399fc9373f34129f8fe318ff80cce7f314457ac58b6b3b18",
+      "after_sha256": "bc09e35d2c249e5eb5b77eefcc2e5f46a28bbaaa9bba13d92b03c72cf0bd6908",
+      "reason": "Original SYSTEMV 45/46/48 and NTVDM MONITOR 64/65/67; original continuation after group 86 is 89 and after group 200 is 224.",
+      "previous_evidence": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_event.c",
+      "original_sha256": "7f555a87ba029627d6811c0f7b96964bb8a96af90c60c89012975a4ac5442076",
+      "before_sha256": "9b53e1118f3e91bbbf625aac7d73e684884429d554d0f5af0e3fb128a9af86c6",
+      "after_sha256": "6475d6001f0b0819d619eacd70593d84eef66123f04cb138ae7c1aee7e439592",
+      "reason": "The local X86GFX projection excludes the original fullscreen condition at 1428; the original outer closing brace is 1432.",
+      "previous_evidence": null
+    }
+  ],
+  "status": "Pending remaining batch, build, relevant tests, ten-image comparison, release and push.",
+  "limits": "No inference for unanchored project-owned selectors without an original condition.",
+  "superseded_by": "s13-r1287-continuation-batch.json"
+}

@@ -3000,3 +3000,5 @@ MVDM-HOST-DIV-806: correct original error and continuation line mappings for two
 MVDM-HOST-DIV-807: correct original diagnostic and continuation mappings for the 16-bit and 32-bit DPMI IRET groups while retaining the selected software CPU implementation. Evidence: artifacts/mvdm-audit/s13-r1279-dpmiint-diagnostic-lines.json.
 
 MVDM-HOST-DIV-808: restore original diagnostic lines in existing excluded branches across ten source files, using original group and retained-code context; selected behavior remains unchanged. Evidence: artifacts/mvdm-audit/s13-r1280-context-line-batch.json.
+
+MVDM-HOST-DIV-809: correct original diagnostic and continuation anchors in existing video, printer and NTCON event projections. Evidence: artifacts/mvdm-audit/s13-r1287-continuation-batch.json.

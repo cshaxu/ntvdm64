@@ -317,7 +317,7 @@ simple_bios_byte_wrt IFN2(ULONG, ch, ULONG, ch_addr)
 #line 305
 #error Unsupported excluded original configuration
 #endif	/* not EGG or C_VID or A_VID */
-#line 316
+#line 307
 }
 
 GLOBAL VOID
@@ -1466,6 +1466,7 @@ GLOBAL void vd_read_attrib_char IFN0()
 	else
 	    cgen = CHAR_GEN_ADDR;			/* match in char generator */
 #else
+#line 1437
 #error DIVERGENCE MVDM-HOST-DIV-540: non-EGG branch is not selected; see mirror register.
 #endif
 	if (cgen != 0)
@@ -1536,6 +1537,7 @@ GLOBAL void vd_write_char_attrib IFN0()
 		/* place in memory */
 
 #ifdef REAL_VGA
+#line 1507
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
 		for(i = 0; i < getCX(); i++)
@@ -1956,7 +1958,7 @@ GLOBAL void vd_write_teletype IFN0()
 #line 1918
 #error Unsupported excluded original configuration
 #endif
-#line 1910
+#line 1920
 #ifdef NTVDM
      void (** hack)(io_addr address, half_word value);
 #endif

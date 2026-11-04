@@ -305,3 +305,35 @@ for relative, diagnostic, selected_args, rejected_args in (
         if bool(result.returncode) != reject or (reject and f'({diagnostic})' not in result.stdout + result.stderr):
             raise SystemExit(f'alternate original line check failed {relative} {diagnostic}: {result.stderr}')
 print('PASS original DPMI IRET and printer alternate diagnostic lines')
+
+# Continuation mappings matched to original source after excluded groups.
+for relative, anchor, needle, expected in (
+    ('src/mvdm-host/inc/wow.h', 80, 'typedef WORD HAND16;', 90),
+    ('src/mvdm-host/softpc.new/base/bios/reset.c', 1003, 'mouse_init();', 1006),
+    ('src/mvdm-host/softpc.new/base/ccpu386/c_main.c', 3724, 'case 0xe1: /* T2 LOOPE Jb */', 3726),
+    ('src/mvdm-host/softpc.new/base/comms/printer.c', 416, 'note_trace2(PRINTER_VERBOSE,', 418),
+):
+    source = (repo / relative).read_text(encoding='latin1').split('\n')
+    starts = [i for i, line in enumerate(source) if line.strip() == f'#line {anchor}']
+    matches = [(i, j) for i in starts for j in range(i + 1, min(len(source), i + 12)) if needle in re.sub(r'\s+', ' ', source[j].strip())]
+    if len(matches) != 1:
+        raise SystemExit(f'continuation anchor missing or ambiguous: {relative} {anchor}')
+    i, j = matches[0]
+    probe = scratch / 'original-continuation-line.c'
+    probe.write_text('\n'.join(source[i:j] + ['int original_line = __LINE__;']) + '\n', encoding='ascii')
+    result = subprocess.run(['cl.exe', '/nologo', '/EP', '/TC', str(probe)], capture_output=True, text=True, errors='replace')
+    if result.returncode or not re.search(r'int\s+original_line\s*=\s*' + str(expected) + r'\s*;', result.stdout):
+        raise SystemExit(f'continuation line failed: {relative} {anchor}: {result.stderr} {result.stdout}')
+print('PASS original continuation lines at retained code')
+
+source = (repo / 'src/mvdm-host/softpc.new/host/src/nt_event.c').read_text(encoding='latin1').split('\n')
+idx = source.index('#line 1428')
+if source[idx - 1].strip() != '#ifdef X86GFX' or not source[idx + 1].startswith('#error') or source[idx + 2].strip() != '#endif' or source[idx + 3].strip() != '#line 1432':
+    raise SystemExit('event fullscreen projected frame does not match original lines')
+probe = scratch / 'event-original-line.c'
+probe.write_text('\n'.join(source[idx - 1:idx + 4] + ['int original_line = __LINE__;']) + '\n', encoding='ascii')
+for defines, reject in (([], False), (['X86GFX=1'], True)):
+    result = subprocess.run(['cl.exe', '/nologo', '/EP', '/TC'] + [f'/D{x}' for x in defines] + [str(probe)], capture_output=True, text=True, errors='replace')
+    if bool(result.returncode) != reject or (reject and '(1428)' not in result.stdout + result.stderr) or (not reject and not re.search(r'int\s+original_line\s*=\s*1432\s*;', result.stdout)):
+        raise SystemExit(f'event projected original line failed: {result.stderr} {result.stdout}')
+print('PASS event projected error and continuation lines')

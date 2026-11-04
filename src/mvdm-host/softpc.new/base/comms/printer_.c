@@ -39,9 +39,12 @@
 
 #include TypesH
 
+#line 45
 #ifdef SYSTEMV
+#line 46
 #error DIVERGENCE MVDM-HOST-DIV-529: SYSTEMV platform branch is not selected; see mirror register.
 #endif
+#line 48
 
 /*
  * SoftPC include files
@@ -59,9 +62,12 @@
 #include "idetect.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 
+#line 64
 #if defined(NTVDM) && defined(MONITOR)
+#line 65
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
+#line 67
 
 #if defined(NTVDM)
 void    printer_bop_openclose (int);
@@ -85,6 +91,7 @@ static sys_addr timeout_address[] = {
 #line 87
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
+#line 89
 /*
  * The printer bios consists of three functions:
  *
@@ -203,7 +210,7 @@ void printer_io()
 #line 201
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
-#line 210
+#line 224
 
 #if defined(NTVDM)
 void printer_bop_openclose(int func)
