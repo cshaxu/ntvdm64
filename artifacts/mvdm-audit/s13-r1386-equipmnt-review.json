@@ -1,0 +1,9 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+  "current_sha256": "8b281254ad6b9aa1478070e4209dd76e859c70f5494c4a55c02cbdbc369f44a9",
+  "original_sha256": "08b798882c49443b2641ebf091adf07959059d46bc703467d860ab22659f2967",
+  "excluded": "Original SEGMENTATION guard preserved; sole body is #error and whitespace at original guard/body positions.",
+  "local_change": "Include and conditional diagnostic observer, MVDM-HOST-DIV-325; registration corrected in previous checkpoint.",
+  "line_positions": "All 40 nonblank unchanged lines have original logical positions; local observer has no original counterpart.",
+  "scope": "Source-derived comparison and existing branch evidence; no new runtime test."
+}
