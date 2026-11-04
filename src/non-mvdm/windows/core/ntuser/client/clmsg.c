@@ -10,6 +10,7 @@
 
 #line 23
 #ifdef DEBUG
+#line 24
 #error Unsupported original DEBUG branch
 #endif
 #line 26
@@ -58,11 +59,13 @@ LONG DefWindowProcWorker(
 #endif /* WOW_ORIGINAL_DEFAULT_WINDOW */
 #line 566
 #ifdef FE_IME
+#line 567
 #error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
 #endif
 
 #line 572
 #ifdef DEBUG
+#line 573
 #error Excluded unsupported original DEBUG default-window path
 #endif
 
@@ -399,6 +402,7 @@ LONG DefWindowProcWorker(
 #endif /* WOW_ORIGINAL_DEFAULT_WINDOW */
 #line 905
 #if defined(FE_IME) // DefWindowProcWorker()
+#line 906
 #error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
 #endif
 
@@ -411,6 +415,7 @@ LONG DefWindowProcWorker(
 #endif /* WOW_ORIGINAL_DEFAULT_WINDOW */
 #line 1214
 #ifdef DEBUG
+#line 1215
 #error Excluded unsupported original DEBUG default-window close
 #endif
 #if defined(WOW_ORIGINAL_DEFAULT_WINDOW)
@@ -420,6 +425,7 @@ LONG DefWindowProcWorker(
 
 #line 1650
 #if 0
+#line 1651
 #error Excluded original disabled WMCTLCOLOR handler
 #endif
 #line 1677
@@ -482,3 +488,34 @@ LONG DefWindowProcWorker(
 #line 1841
 #endif // FE_SB
 #line 1853
+
+#line 373
+#ifndef LATER
+#line 374
+#line 400
+#ifdef FE_SB // SendMessageWorker()
+#line 401
+#error Excluded unsupported original FE_SB branch
+#else
+#line 413
+#endif // FE_SB
+#line 415
+#line 416
+#ifdef FE_SB // SendMessageWorker()
+#line 417
+#error Excluded unsupported original FE_SB branch
+#else
+#line 429
+#endif // FE_SB
+#line 431
+#line 433
+#ifdef FE_SB // SendMessageWorker()
+#line 434
+#error Excluded unsupported original FE_SB branch
+#else
+#line 447
+#endif // FE_SB
+#line 449
+#endif /* !LATER */
+#line 452
+

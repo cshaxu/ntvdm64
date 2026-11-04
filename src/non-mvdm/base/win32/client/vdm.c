@@ -2272,6 +2272,7 @@ Return Value:
 #endif /* OPENNT_BASE_CLIENT_CLASSIFIER */
 #line 259
 #ifdef _MIPS_
+#line 260
 #error DIVERGENCE OPENNT-HOST-136: _MIPS_ branch is not selected; see mirror register.
 #else
 #if defined(OPENNT_BASE_CLIENT_CLASSIFIER)
@@ -2377,6 +2378,7 @@ Return Value:
 
 #line 1084
 #ifdef OLD_CFG_BASED
+#line 1085
 #error Excluded unsupported original OLD_CFG_BASED configuration
 #endif
 #line 1150

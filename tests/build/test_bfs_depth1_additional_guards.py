@@ -2,6 +2,7 @@
 
 import argparse
 from pathlib import Path
+import re
 import subprocess
 
 repo = Path(__file__).resolve().parents[2]
@@ -26,6 +27,18 @@ cases = [
     ('src/non-mvdm/windows/core/ntuser/kernel/handtabl.c', 286,
      '#if (DBG || TRACE_OBJECT_ALLOCS)', 'Excluded unsupported original TRACE_OBJECT_ALLOCS branch',
      [([], False), (['DBG=1'], True), (['TRACE_OBJECT_ALLOCS=1'], True)]),
+    ('src/non-mvdm/windows/core/ntuser/kernel/queue.c', 785,
+     '#ifdef DEBUG', 'DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected',
+     [([], False), (['DEBUG=1'], True)]),
+    ('src/non-mvdm/windows/core/ntuser/client/globals.h', 18,
+     '#if DBG', 'Excluded unsupported original DBG globals',
+     [([], False), (['DBG=1'], True)]),
+    ('src/non-mvdm/windows/core/ntuser/client/globals.h', 135,
+     '#ifdef WX86', 'Excluded unsupported original WX86 globals',
+     [([], False), (['WX86=1'], True)]),
+    ('src/non-mvdm/windows/core/ntuser/kernel/handtabl.c', 600,
+     '#ifdef FE_IME', 'Unsupported FE_IME original branch',
+     [([], False), (['FE_IME=1'], True)]),
     ('src/non-mvdm/windows/core/ntuser/rtl/wow.c', 262,
      '#if defined(DEBUG) && !defined(_USERK_) && !defined(WOW)',
      'Unsupported DEBUG original branch',
@@ -67,3 +80,22 @@ for path, line, guard, error, controls in cases:
             raise SystemExit(f'wrong diagnostic: {path} {defines}: {diagnostic}')
         checked += 1
 print(f'PASS {len(cases)} original guards and {checked} profile controls')
+
+source = (repo / 'src/non-mvdm/windows/core/ntuser/client/clmsg.c').read_text(encoding='latin1').split('\n')
+for original, selected_line, continuation in ((400, 413, 415), (416, 429, 431), (433, 447, 449)):
+    start = source.index(f'#line {original}')
+    expected = [f'#line {original}', '#ifdef FE_SB // SendMessageWorker()', f'#line {original + 1}',
+                '#error Excluded unsupported original FE_SB branch', '#else', f'#line {selected_line}',
+                '#endif // FE_SB', f'#line {continuation}']
+    if [line.strip() for line in source[start:start + len(expected)]] != expected:
+        raise SystemExit(f'clmsg original nested guard differs at {original}')
+    probe = scratch / 'clmsg-nested-guard.c'
+    probe.write_text('\n'.join(expected[:6] + ['int selected_line = __LINE__;'] + expected[6:] +
+                               ['int after_guard = __LINE__;']) + '\n', encoding='ascii')
+    selected = subprocess.run(['cl.exe', '/nologo', '/EP', '/TC', str(probe)], capture_output=True, text=True, errors='replace')
+    rejected = subprocess.run(['cl.exe', '/nologo', '/EP', '/TC', '/DFE_SB=1', str(probe)], capture_output=True, text=True, errors='replace')
+    if (selected.returncode or not re.search(r'int\s+selected_line\s*=\s*' + str(selected_line) + r'\s*;', selected.stdout)
+            or not re.search(r'int\s+after_guard\s*=\s*' + str(continuation) + r'\s*;', selected.stdout)
+            or not rejected.returncode or 'Excluded unsupported original FE_SB branch' not in rejected.stdout + rejected.stderr):
+        raise SystemExit(f'clmsg nested profile controls failed at {original}')
+print('PASS three original clmsg nested FE_SB guards and line controls')

@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\class.c",
+  "original_sha256": "82528443bc5f6c227e0e14fe8a9dbc928ba735f98cf3891744c20c8e1604939a",
+  "current_sha256": "326081a72f994be4e59e3847e77f03980ebdc8f7830d109dfb07e2d3c0395a34",
+  "review": "The pinned original has two groups: FE_SB at physical 375-379 and DBG at 1070-1074. Both are present in the current subset with correct original line anchors; FE_SB rejected arm and DBG body are explicitly excluded. They follow the separately documented WOW_ORIGINAL_CLASS_REGISTRATION / CLASS_REMOVAL selector in a different order because the source is an adopted subset. All owner variants are preserved. No source edit was required.",
+  "limitations": "This reviews condition structure and existing profile choices, not complete class subsystem behavior."
+}

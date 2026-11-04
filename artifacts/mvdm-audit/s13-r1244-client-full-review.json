@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\client.c",
+  "original_sha256": "787eda33785a87ce9e71202c97b5913e2857f7106fed5bb97103049b1d5e3472",
+  "current_sha256": "36e250a159f095037fc69404d9a54d917b8bd26e4f26ba28d1f9cebc5287a4ce",
+  "review": "The original has three top-level groups: DEBUG 642-644, DEBUG 2288-2292 and FE_IME 3494-3502. All three are present in the adopted source with correctly anchored excluded arms and alternatives, reordered after the local owner-selection wrapper. Existing default-window, control-state, dialog-edit, class-client and fallback owner selectors are preserved. No source edit.",
+  "limitations": "This reviews conditional structure, not unimported original client functions."
+}

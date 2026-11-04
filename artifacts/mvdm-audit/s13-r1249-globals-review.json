@@ -1,0 +1,21 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\globals.h",
+  "original_sha256": "fd78200232574074f7ec68d2f5b851c27ee9d5024427310d18ebbcb048336e97",
+  "current_sha256": "1a4b7cc3c92e9d2b8b60dae6147e95174542cfae3c7babe918c8a13fca9be5af",
+  "prior_selection_records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+      "line": "5",
+      "directive": "ifndef",
+      "expression": "OPENNT_GLOBALS_EDIT_MEMORY_SUBSET_H",
+      "chain_start": "5",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "5a3bdbef7a1b52bed2a3efd61a9f9972509ee998e56860c92fe8cc50f7b2ae2c"
+    }
+  ],
+  "review": "Inside the preserved original _GLOBALS_ include guard, restored the three missing original condition groups: DBG at physical line 18, RC_INVOKED at 85 and WX86 at 135. The unsupported DBG/WX86 bodies are rejected with original diagnostic anchors; the selected RC_INVOKED frame is empty because its original global LMHtoP/LHND macro changes were not part of the adopted EDIT-memory subset. Existing selected original LOCAL* and callback bindings remain unchanged.",
+  "limitations": "Build and targeted profile tests pending. The omitted globals and macros are not claimed implemented."
+}

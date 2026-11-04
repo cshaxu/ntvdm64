@@ -1,0 +1,21 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+  "original_sha256": "0400c034bb5a782e81777e9fd805c07dbcd18d60ec9f1a876cfa67444577e0f8",
+  "current_sha256": "df24a51494f20cbd23a359e4f3c01067ca50987b0ebb6b642eccd7402b87640f",
+  "prior_selection_records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "line": "252",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "chain_start": "252",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "e1eaea491db6e7c3670d4e3a0cb4626a0d26c8b2024684a0a9495adb07cbe8d5"
+    }
+  ],
+  "review": "Mapped original top-level condition groups by physical line to the queue-owner subset and reordered rejected skeletons. Added original line anchors for the actual DEBUG check at 785 and four existing exclusions at 30, 43, 54 and 2962. All other original DEBUG, DBG and FE_IME groups are retained as the existing excluded frames; adopted queue code remains.",
+  "limitations": "Build, binary comparison and tests pending; omitted original USER queue functionality is not asserted present."
+}

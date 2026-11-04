@@ -32,9 +32,12 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
     OCF_PROCESSOWNED,                                   /* zombie */
     OCF_PROCESSOWNED,                                   /* keyboard layout */
     OCF_PROCESSOWNED,                                   /* keyboard file */
+#line 56
 #ifdef FE_IME
+#line 57
 #error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
 #endif
+#line 59
 };
 
 #line 544
@@ -47,6 +50,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 
 #line 18
 #ifdef DEBUG_LOCKS
+#line 19
 #error Excluded unsupported original DEBUG_LOCKS branch
 #else
 #line 21
@@ -55,42 +59,49 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 
 #line 86
 #ifdef DEBUG
+#line 87
 #error Excluded unsupported original DEBUG branch
 #endif
 #line 99
 
 #line 852
 #ifdef DEBUG
+#line 853
 #error Excluded unsupported original DEBUG branch
 #endif
 #line 953
 
 #line 963
 #ifdef DEBUG
+#line 964
 #error Excluded unsupported original DEBUG branch
 #endif
 #line 995
 
 #line 1169
 #ifdef DEBUG
+#line 1170
 #error Excluded unsupported original DEBUG branch
 #endif
 #line 1189
 
 #line 1198
 #ifdef DEBUG
+#line 1199
 #error Excluded unsupported original DEBUG branch
 #endif
 #line 1240
 
 #line 1250
 #ifdef DEBUG
+#line 1251
 #error Excluded unsupported original DEBUG branch
 #endif
 #line 1302
 
 #line 1321
 #ifdef DEBUG
+#line 1322
 #error Excluded unsupported original DEBUG branch
 #else
 #line 1326
@@ -99,30 +110,35 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 
 #line 1394
 #ifdef DEBUG
+#line 1395
 #error Excluded unsupported original DEBUG branch
 #endif
 #line 1424
 
 #line 1691
 #ifdef DEBUG
+#line 1692
 #error Excluded unsupported original DEBUG branch
 #endif
 #line 1713
 
 #line 1714
 #ifdef DEBUG
+#line 1715
 #error Excluded unsupported original DEBUG branch
 #endif
 #line 1795
 
 #line 1933
 #ifdef DEBUG
+#line 1934
 #error Excluded unsupported original DEBUG branch
 #endif
 #line 2014
 
 #line 286
 #if (DBG || TRACE_OBJECT_ALLOCS)
+#line 287
 #error Excluded unsupported original TRACE_OBJECT_ALLOCS branch
 #endif
 #line 303
@@ -215,6 +231,12 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #line 594
 #ifndef DEBUG
 #line 595
+#line 600
+#ifdef FE_IME
+#line 601
+#error Unsupported FE_IME original branch
+#endif
+#line 603
 #else // DEBUG
 #line 623
 #error Unsupported DEBUG original branch

@@ -81,3 +81,9 @@ CONST WORD sysBmpStyles[OBI_COUNT][2] = {
 #error Excluded original unsupported USER control-panel code
 #endif
 #line 273
+
+#line 840
+#ifndef KOREA
+#line 841
+#endif
+#line 849

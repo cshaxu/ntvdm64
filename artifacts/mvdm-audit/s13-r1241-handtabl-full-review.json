@@ -1,0 +1,21 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+  "original_sha256": "f0b56314a93423599f06645d17104391f19a0ca07c3944853b065d8866493f7c",
+  "current_sha256": "1d3e06a8bbd902687e5aa4231e85bfb99eaebe0dc0a07b54e0eb33fb784cae9a",
+  "prior_selection_records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "line": "35",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "chain_start": "35",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "4a22ca2c6f0cb55055d5a1deb4de47cdab46831a4bb8bb8624ded874faed330a"
+    }
+  ],
+  "review": "Mapped original condition groups by physical line to the owner-only subset and original condition skeletons. Added missing rejected-arm line anchors, including original FE_IME at line 56. Restored FE_IME group at original line 600 within the selected non-DEBUG alternative; the nested original groups inside excluded DEBUG or FE_IME bodies are intentionally not retained. Original unimported handle-management function bodies remain outside the adopted OPENNT-HOST-063 table subset.",
+  "limitations": "Build, binary comparison and tests pending; this does not assert the full USER handle manager has been imported."
+}

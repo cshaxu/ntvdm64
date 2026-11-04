@@ -2,6 +2,7 @@
  * omit the unrelated USER server. SharedAlloc binds their local storage. */
 #line 53
 #ifdef FE_IME
+#line 54
 #error Excluded unsupported FE_IME server global
 #endif
 
@@ -284,6 +285,7 @@ CONST WORD gawEditWndProc[] = {
 #endif /* WOW_ORIGINAL_DEFAULT_MESSAGES */
 #line 461
 #if 0
+#line 462
 #error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 #if defined(WOW_ORIGINAL_DEFAULT_MESSAGES)
@@ -426,6 +428,7 @@ VOID InitWindowMsgTable(
 
 #line 481
 #ifdef FE_IME
+#line 482
 #error Excluded unsupported original FE_IME branch
 #endif
 #line 499

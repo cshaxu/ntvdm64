@@ -873,16 +873,19 @@ print('PASS DLCIO SDK MAX_PATH guard and original lines')
 
 source = (repo / 'src/non-mvdm/windows/core/ntuser/kernel/server.c').read_text(encoding='latin1').splitlines()
 marker = '#error Excluded unsupported FE_IME server global'
-matches = [i for i, line in enumerate(source) if line.strip() == '#ifdef FE_IME' and source[i+1].strip() == marker and source[i+2].strip() == '#endif']
+matches = [i for i, line in enumerate(source) if line.strip() == '#ifdef FE_IME'
+           and source[guard_error_index(source, i)].strip() == marker
+           and source[guard_error_index(source, i)+1].strip() == '#endif']
 if len(matches) != 1:
     raise SystemExit('restored original FE_IME server guard missing')
 i = matches[0]
-line190 = source.index('#line 190', i + 3)
+j = guard_error_index(source, i)
+line190 = source.index('#line 190', j + 2)
 selector = source.index('#if defined(WOW_ORIGINAL_DEFAULT_MESSAGES)')
 if (source[i-1].strip() != '#line 53' or selector <= i or line190 <= selector or
         not source[line190+2].startswith('CONST WORD gawButtonWndProc')):
     raise SystemExit('restored server original line anchors changed')
-probe.write_text('\n'.join(source[i-1:i+3] + ['#line 190',
+probe.write_text('\n'.join(source[i-1:j+2] + ['#line 190',
                       '/* selected original table */', 'int retained_line = __LINE__;']) + '\n', encoding='ascii')
 selected = subprocess.run(base + ['/UFE_IME', str(probe)], capture_output=True, text=True, errors='replace')
 rejected = subprocess.run(base + ['/DFE_IME', str(probe)], capture_output=True, text=True, errors='replace')
@@ -1173,7 +1176,8 @@ for original, condition, marker, definition, continuation in (
     (1214, '#ifdef DEBUG', 'Excluded unsupported original DEBUG default-window close', '/DDEBUG', 1217),
 ):
     i = source.index('#line ' + str(original))
-    if [line.strip() for line in source[i+1:i+4]] != [condition, '#error ' + marker, '#endif']:
+    j = guard_error_index(source, i + 1)
+    if source[i+1].strip() != condition or source[j].strip() != '#error ' + marker or source[j+1].strip() != '#endif':
         raise SystemExit('default-window original guard missing at ' + str(original))
     probe.write_text('\n'.join(['#line ' + str(original), condition, '#error ' + marker,
                                  '#endif', '#line ' + str(continuation),
@@ -1209,9 +1213,10 @@ for path, original, continuation, marker in (
         if directive:
             depth += -1 if directive.group(1) == 'endif' else 1
     i = lines.index('#line ' + str(original))
-    if [line.strip() for line in lines[i+1:i+4]] != ['#if 0', '#error ' + marker, '#endif']:
+    j = guard_error_index(lines, i + 1)
+    if lines[i+1].strip() != '#if 0' or lines[j].strip() != '#error ' + marker or lines[j+1].strip() != '#endif':
         raise SystemExit(path + ' original disabled guard missing')
-    if '#line ' + str(continuation) not in lines[i+4:i+7]:
+    if '#line ' + str(continuation) not in lines[j+2:j+5]:
         raise SystemExit(path + ' original continuation missing')
 print('PASS original server and clmsg first-depth disabled guards')
 

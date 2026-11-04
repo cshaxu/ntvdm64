@@ -33,4 +33,25 @@ extern WCHAR szOneChar[];
 #define LOCALFREE(hMem, hInstance)                      \
                             (*pfnLocalFree)(hMem, hInstance)
 
+#line 18
+#if DBG
+#line 19
+#error Excluded unsupported original DBG globals
 #endif
+#line 21
+
+#line 85
+#ifndef RC_INVOKED
+#line 86
+#endif
+#line 92
+
+#line 135
+#ifdef WX86
+#line 136
+#error Excluded unsupported original WX86 globals
+#endif
+#line 142
+
+#endif
+#line 145

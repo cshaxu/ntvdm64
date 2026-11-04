@@ -62,18 +62,23 @@ cleanup:
     }
 #define CLEANUPLPWSTR(instr)
 
+#line 254
 #ifdef UNICODE
-#line 52
+#line 257
 #define COPYLPTSTRID                COPYLPWSTRID
+#line 261
 #define FIRSTCOPYLPTSTRID           COPYLPWSTRID
+#line 268
 #define CLEANUPLPTSTR               CLEANUPLPWSTR
 #else
-#line 52
+#line 273
 #define COPYLPTSTRID                COPYLPSTRIDW
+#line 277
 #define FIRSTCOPYLPTSTRID           COPYLPSTRIDW
+#line 284
 #define CLEANUPLPTSTR               CLEANUPLPSTRW
 #endif
-#line 55
+#line 287
 
 #define FIRSTCOPYLPSTRW(pinstr, psz) \
     if (!RtlCaptureAnsiString((pinstr), (LPCSTR)(psz), FALSE))    \

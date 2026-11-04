@@ -16,6 +16,7 @@
 
 #line 238
 #ifdef MARKPATH
+#line 239
 #error Excluded unsupported original MARKPATH get-message instrumentation
 #else
 #line 244
@@ -37,6 +38,7 @@
 #line 2310
 #line 3310
 #ifdef MARKPATH
+#line 3311
 #error Excluded unsupported original MARKPATH system-queue instrumentation
 #else
 #line 3321
@@ -192,42 +194,49 @@ void RecalcThreadAttachment(PTHREADINFO ptiCurrent)
 
 #line 58
 #if DBG
+#line 59
 #error Excluded unsupported original DBG branch
 #endif
 #line 85
 
 #line 91
 #if DBG
+#line 92
 #error Excluded unsupported original DBG branch
 #endif
 #line 98
 
 #line 3188
 #if DBG
+#line 3189
 #error Excluded unsupported original DBG branch
 #endif
 #line 3231
 
 #line 17
 #ifdef MARKPATH
+#line 18
 #error Excluded unsupported original MARKPATH branch
 #endif
 #line 20
 
 #line 22
 #ifdef TRACESYSPEEK
+#line 23
 #error Excluded unsupported original TRACESYSPEEK branch
 #endif
 #line 57
 
 #line 1154
 #ifdef SYSMODALWINDOWS
+#line 1155
 #error Excluded unsupported original SYSMODALWINDOWS branch
 #endif
 #line 1182
 
 #line 1764
 #if (CBKEYSTATERECENTDOWN % 4) != 0
+#line 1765
 #error "CBKEYSTATERECENTDOWN assumed to be an integral number of DWORDs"
 #endif
 #line 1767

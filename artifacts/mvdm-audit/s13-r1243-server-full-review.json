@@ -1,0 +1,43 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+  "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+  "current_sha256": "351fc45e0c0e6b2590fd5a901ca99bfad937b8411a4b337f6b8c18c584c3e028",
+  "prior_selection_records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "line": "3",
+      "directive": "if",
+      "expression": "defined(WOW_ORIGINAL_DEFAULT_MESSAGES)",
+      "chain_start": "3",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "56a86be8d684bf829ca3171137ca457fa7369f3fb7f7971d4a97659e7113c5ae"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "line": "278",
+      "directive": "if",
+      "expression": "0",
+      "chain_start": "278",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "56a86be8d684bf829ca3171137ca457fa7369f3fb7f7971d4a97659e7113c5ae"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "line": "377",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "chain_start": "377",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "56a86be8d684bf829ca3171137ca457fa7369f3fb7f7971d4a97659e7113c5ae"
+    }
+  ],
+  "review": "Mapped the pinned original condition groups by physical original line to the existing default-message owner subset and reordered skeletons. Added missing rejected-arm #line anchors at 53, 461 and 481. The nested FE_SB group inside the rejected original DEBUG arm at 850 is intentionally omitted. Original PAGE_SIZE fallback and locally selected default-message bindings remain unchanged.",
+  "limitations": "Build, binary comparison and tests pending; omitted server functions are not claimed implemented."
+}

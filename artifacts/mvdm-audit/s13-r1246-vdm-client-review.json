@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/base/win32/client/vdm.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\win32\\client\\vdm.c",
+  "original_sha256": "3f03d0dbb08e0163f2d9cf415daad0981e42e1b1855f6f48a3b59022b7374173",
+  "current_sha256": "d2d91e25dfb5c16f7795f3439040a42e1e015ba33f4b75c066716a540a9620bb",
+  "review": "The pinned original has three condition groups at lines 205, 259 and 1084. All are retained; added missing excluded-arm anchors 260 and 1085. Project-owned VDM command, environment and classifier source selectors remain intact, including their nested selected source regions. No original selected logic changed.",
+  "limitations": "Build and binary comparison pending; profile coverage remains bounded to supported compiler targets."
+}

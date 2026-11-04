@@ -1,0 +1,76 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+  "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+  "current_sha256": "65031fc65032c9013a858b1f04d0e7082dada639b05130ed03ddceeb5b7914aa",
+  "prior_selection_records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "line": "13",
+      "directive": "if",
+      "expression": "defined(WOW_ORIGINAL_CLIENT_CPD)",
+      "chain_start": "13",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "d8b600211f11aa74498cf0264fa867adf6e2fd190377cb3f42ddf49c67668797"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "line": "36",
+      "directive": "if",
+      "expression": "defined(WOW_ORIGINAL_DEFAULT_WINDOW)",
+      "chain_start": "36",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "d8b600211f11aa74498cf0264fa867adf6e2fd190377cb3f42ddf49c67668797"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "line": "52",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "chain_start": "52",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "d8b600211f11aa74498cf0264fa867adf6e2fd190377cb3f42ddf49c67668797"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "line": "56",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "chain_start": "56",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "d8b600211f11aa74498cf0264fa867adf6e2fd190377cb3f42ddf49c67668797"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "line": "392",
+      "directive": "if",
+      "expression": "defined(FE_IME)",
+      "chain_start": "392",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "d8b600211f11aa74498cf0264fa867adf6e2fd190377cb3f42ddf49c67668797"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "line": "400",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "chain_start": "400",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "d8b600211f11aa74498cf0264fa867adf6e2fd190377cb3f42ddf49c67668797"
+    }
+  ],
+  "review": "Mapped original condition groups by physical lines despite reordering into existing owner subsets. Restored the missing original #ifndef LATER frame at 373 and its three nested FE_SB selector frames at 400, 416 and 433, with excluded FE_SB bodies and original anchors. SendMessageWorker itself remains outside the adopted client subset. Added missing error anchors to the already-restored original groups at 23, 566, 572, 905, 1214 and 1650. Existing WOW_ORIGINAL owner selectors and selected code remain.",
+  "limitations": "Build, binary comparison and tests pending; full SendMessageWorker functionality is not claimed."
+}

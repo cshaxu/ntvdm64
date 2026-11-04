@@ -19,6 +19,7 @@
 
 #line 30
 #ifdef DEBUG
+#line 31
 #error Excluded unsupported original DEBUG DDE tracing
 #else
 #line 37
@@ -28,6 +29,7 @@
 
 #line 54
 #ifdef DEBUG
+#line 55
 #error Excluded unsupported original DEBUG queue validation
 #else
 #line 115
@@ -269,7 +271,9 @@ NTSTATUS xxxInitTask(
                     break;
                 }
             }
+#line 785
 #ifdef DEBUG
+#line 786
 #error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
 #endif
 #line 790
@@ -374,12 +378,14 @@ void _ShowStartGlass(
 
 #line 43
 #if DBG
+#line 44
 #error Excluded unsupported original DBG branch
 #endif
 #line 50
 
 #line 2962
 #ifdef LOCK_MOUSE_CODE
+#line 2963
 #error Excluded unsupported original LOCK_MOUSE_CODE branch
 #endif
 #line 2965

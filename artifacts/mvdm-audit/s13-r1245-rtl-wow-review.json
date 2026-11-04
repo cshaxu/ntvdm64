@@ -1,0 +1,54 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+  "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+  "current_sha256": "cacfbf60110955d56472ea67424911a522d3ea19fc3415ea75ad1a22527aab11",
+  "prior_selection_records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "line": "83",
+      "directive": "ifdef",
+      "expression": "WOW",
+      "chain_start": "83",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "413fc6e2209039169fd1b72c4272e22df1df6c9a2d4bbd1a8b8ab3b2eeaf7820"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "line": "85",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "83",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "413fc6e2209039169fd1b72c4272e22df1df6c9a2d4bbd1a8b8ab3b2eeaf7820"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "line": "94",
+      "directive": "ifdef",
+      "expression": "WOW",
+      "chain_start": "94",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "413fc6e2209039169fd1b72c4272e22df1df6c9a2d4bbd1a8b8ab3b2eeaf7820"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "line": "96",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "94",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "413fc6e2209039169fd1b72c4272e22df1df6c9a2d4bbd1a8b8ab3b2eeaf7820"
+    }
+  ],
+  "review": "Restored original _USERK_ inner selector at line 146 under the selected non-WOW desktop-validation subset, and the two original #ifndef WOW frames at 244 and 344 around omitted optimizer pragmas. Preserved existing selected rectangle implementation and added original line anchors for its two WOW alternatives at 781 and 794. Existing non-WOW original/host bindings remain; removed functions and DESKTOPVALIDATE macro are not newly imported.",
+  "limitations": "Unsupported _USERK_ and WOW paths remain rejected; build and tests pending."
+}

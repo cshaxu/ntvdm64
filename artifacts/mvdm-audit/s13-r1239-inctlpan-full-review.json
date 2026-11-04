@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\inctlpan.c",
+  "original_sha256": "0e3999df8610405c990760ee1a417bf312e3b76744f8f9387bbd94583f9d800d",
+  "current_sha256": "a4f04cdfa139c78bc761b5e78b39c727a128549b2702e9a7098d22b07dd38aeb",
+  "review": "The pinned original has two top-level groups: the previously excluded LATER group at original 101 and the KOREA selector at 840. Restored the KOREA frame and original line anchors without introducing the omitted system-settings function: this mirror subset only exports sysBmpStyles, as documented in OPENNT-HOST-113. Both KOREA outcomes of the restored empty subset frame remain compilable; no selected product code was altered.",
+  "limitations": "The original function surrounding KOREA is outside the existing adopted subset; it is not represented or claimed implemented. Build and comparison pending."
+}

@@ -1,0 +1,9 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+  "original_sha256": "b7656bca55e892a42ba825be0324211450ad298c40717e1ae5a889d084467529",
+  "current_sha256": "6be9e92da0209bbaeae041d25b584ed42ee52ff492ba0b1b378c3a856ae64a6f",
+  "prior_selection_records": [],
+  "review": "Mapped original condition groups using original physical lines, ignoring omitted nested groups only where their containing branch is already rejected. The retained original CBKEYSTATERECENTDOWN compile-time validity check is preserved. Added missing #line anchors to nine pre-existing rejected/diagnostic arms. Local input-state subset and selected MARKPATH alternatives are unchanged.",
+  "limitations": "Build, binary comparison and tests pending; absent original USER input routines are not asserted implemented."
+}

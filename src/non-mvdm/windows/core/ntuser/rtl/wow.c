@@ -7,6 +7,7 @@
 
 #line 15
 #ifdef WOW
+#line 16
 #error Excluded unsupported original 16-bit WOW source branch
 #else
 #line 109
@@ -15,9 +16,18 @@
 
 #line 135
 #ifdef WOW
+#line 136
 #error Excluded unsupported original 16-bit WOW source branch
 #else
 #line 145
+#line 146
+#ifdef _USERK_
+#line 147
+#error Excluded unsupported original _USERK_ desktop validation
+#else
+#line 151
+#endif
+#line 170
 #endif
 #line 171
 
@@ -97,23 +107,31 @@ BOOL _GetClientRect(
      */
     if (TestWF(pwnd, WFMINIMIZED) && !TestWF(pwnd, WFWIN40COMPAT)) {
 
+#line 781
 #ifdef WOW
+#line 782
 #error DIVERGENCE OPENNT-HOST-135: 16-bit WOW rectangle layout is not selected here; see mirror register.
 #else
+#line 786
         prc->left   = 0;
         prc->top    = 0;
         prc->right  = SYSMET(CXMINIMIZED);
         prc->bottom = SYSMET(CYMINIMIZED);
 #endif
+#line 791
 
     } else {
 
+#line 794
 #ifdef WOW
+#line 795
 #error DIVERGENCE OPENNT-HOST-135: 16-bit WOW rectangle layout is not selected here; see mirror register.
 #else
+#line 799
         *prc = pwnd->rcClient;
         OffsetRect(prc, -pwnd->rcClient.left, -pwnd->rcClient.top);
 #endif
+#line 802
 
     }
 
@@ -128,3 +146,16 @@ BOOL _GetClientRect(
 #error Unsupported DEBUG original branch
 #endif
 #line 275
+
+#line 244
+#ifndef WOW
+#line 245
+#endif
+#line 247
+
+#line 344
+#ifndef WOW
+#line 345
+#endif
+#line 347
+
