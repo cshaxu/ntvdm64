@@ -1,0 +1,243 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\video.h",
+  "original_sha256": "3e701855e34a3ba9834c84ab39da5350ff375195aacea0d79692fba24e2b1059",
+  "before_sha256": "35951268eeb57a80853248fad0a1286aa04b2808f638b15aa80919802b0b550c",
+  "after_sha256": "148d566184091358be4b40f6438dcc1f80965f2e571a8c86fabd02c1fc40d16e",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "line": "72",
+      "directive": "ifdef",
+      "expression": "EGG",
+      "chain_start": "72",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "line": "74",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "72",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "line": "125",
+      "directive": "ifdef",
+      "expression": "VGG",
+      "chain_start": "125",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "line": "129",
+      "directive": "ifdef",
+      "expression": "VGG",
+      "chain_start": "129",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "line": "136",
+      "directive": "ifdef",
+      "expression": "VGG",
+      "chain_start": "136",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "line": "138",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "136",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "line": "144",
+      "directive": "ifdef",
+      "expression": "EGG",
+      "chain_start": "144",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "line": "174",
+      "directive": "ifdef",
+      "expression": "V7VGA",
+      "chain_start": "174",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "line": "179",
+      "directive": "ifdef",
+      "expression": "V7VGA",
+      "chain_start": "179",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "line": "181",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "179",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "line": "191",
+      "directive": "ifdef",
+      "expression": "EGG",
+      "chain_start": "191",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "line": "192",
+      "directive": "ifdef",
+      "expression": "V7VGA",
+      "chain_start": "192",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "line": "197",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "192",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "line": "203",
+      "directive": "ifdef",
+      "expression": "VGG",
+      "chain_start": "203",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "line": "204",
+      "directive": "ifdef",
+      "expression": "V7VGA",
+      "chain_start": "204",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "line": "206",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "204",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "line": "237",
+      "directive": "ifdef",
+      "expression": "V7VGA",
+      "chain_start": "237",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "line": "239",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "237",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "line": "249",
+      "directive": "ifdef",
+      "expression": "VGG",
+      "chain_start": "249",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "line": "262",
+      "directive": "ifdef",
+      "expression": "NTVDM",
+      "chain_start": "262",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "line": "274",
+      "directive": "ifdef",
+      "expression": "MONITOR",
+      "chain_start": "274",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "Excluded two non-V7VGA video-mode alternatives. The supported worker graphs define V7VGA and no source-level undef was found."
+}

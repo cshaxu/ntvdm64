@@ -67,8 +67,9 @@
 #include <nt_extra.h>
 
 #else   /* !NTVDM */
-
-#include <sys/param.h>
+#line 70
+#error Unsupported excluded original configuration
 #endif   /* !NTVDM */
+#line 73
 
 #endif  /* _HOST_INC_H */

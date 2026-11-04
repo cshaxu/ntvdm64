@@ -1,0 +1,166 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/xt.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\xt.h",
+  "original_sha256": "c5b376f59d45ddb6ca36aa66e96e095203a261b125bd6a34247d6c88e98cb111",
+  "before_sha256": "0e81b724574426a70588c4d5e9f9780bbf878533ae5c55dafaa439d22e59da87",
+  "after_sha256": "4ff5d360619174392b5c3d9a352a0ecd8c79f156a6f6dcf86d2af1847de28eaa",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/xt.h",
+      "line": "1",
+      "directive": "ifndef",
+      "expression": "_XT_H",
+      "chain_start": "1",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f29c303996d8d339c30ffa7bd04d210f9ba0d4f1ba4a14dff9704646bfe5a477"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/xt.h",
+      "line": "31",
+      "directive": "ifndef",
+      "expression": "TRUE",
+      "chain_start": "31",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "f29c303996d8d339c30ffa7bd04d210f9ba0d4f1ba4a14dff9704646bfe5a477"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/xt.h",
+      "line": "41",
+      "directive": "ifndef",
+      "expression": "NULL",
+      "chain_start": "41",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "f29c303996d8d339c30ffa7bd04d210f9ba0d4f1ba4a14dff9704646bfe5a477"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/xt.h",
+      "line": "45",
+      "directive": "ifndef",
+      "expression": "NULL_STRING",
+      "chain_start": "45",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f29c303996d8d339c30ffa7bd04d210f9ba0d4f1ba4a14dff9704646bfe5a477"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/xt.h",
+      "line": "49",
+      "directive": "ifdef",
+      "expression": "SOFTWINDOWS",
+      "chain_start": "49",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "f29c303996d8d339c30ffa7bd04d210f9ba0d4f1ba4a14dff9704646bfe5a477"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/xt.h",
+      "line": "51",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "49",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f29c303996d8d339c30ffa7bd04d210f9ba0d4f1ba4a14dff9704646bfe5a477"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/xt.h",
+      "line": "64",
+      "directive": "ifndef",
+      "expression": "MAXPATHLEN",
+      "chain_start": "64",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f29c303996d8d339c30ffa7bd04d210f9ba0d4f1ba4a14dff9704646bfe5a477"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/xt.h",
+      "line": "75",
+      "directive": "ifdef",
+      "expression": "A2CPU",
+      "chain_start": "75",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "f29c303996d8d339c30ffa7bd04d210f9ba0d4f1ba4a14dff9704646bfe5a477"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/xt.h",
+      "line": "79",
+      "directive": "ifdef",
+      "expression": "CCPU",
+      "chain_start": "79",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f29c303996d8d339c30ffa7bd04d210f9ba0d4f1ba4a14dff9704646bfe5a477"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/xt.h",
+      "line": "86",
+      "directive": "ifdef",
+      "expression": "CCPU",
+      "chain_start": "86",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f29c303996d8d339c30ffa7bd04d210f9ba0d4f1ba4a14dff9704646bfe5a477"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/xt.h",
+      "line": "91",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "86",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f29c303996d8d339c30ffa7bd04d210f9ba0d4f1ba4a14dff9704646bfe5a477"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/xt.h",
+      "line": "118",
+      "directive": "ifdef",
+      "expression": "ANSI",
+      "chain_start": "118",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f29c303996d8d339c30ffa7bd04d210f9ba0d4f1ba4a14dff9704646bfe5a477"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/xt.h",
+      "line": "123",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "118",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f29c303996d8d339c30ffa7bd04d210f9ba0d4f1ba4a14dff9704646bfe5a477"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/xt.h",
+      "line": "130",
+      "directive": "ifdef",
+      "expression": "SPC386",
+      "chain_start": "130",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f29c303996d8d339c30ffa7bd04d210f9ba0d4f1ba4a14dff9704646bfe5a477"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "Restored the original CPU_30_STYLE outer if/else framework around the CCPU declarations while excluding its unselected CPU30 arm. TRUE and NULL fallback definitions are also excluded: product builds force-include the Windows compatibility header; existing observations select neither fallback. Both observed CCPU arms and both observed ANSI arms remain."
+}

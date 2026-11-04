@@ -258,18 +258,10 @@ SHORT host_error(int error_num, int options, char *extra_char);
 #define host_error_conf(config_panel, error_num,options,extra_char)  \
         host_error(int error_num, int options, char *extra_char)
 #else
-
-IMPORT ERRORFUNCS *working_error_funcs;
-
-#define host_error_conf(panel, num, opts, extra)\
-		(*working_error_funcs->error_conf)(panel, num, opts, extra)
-
-#define host_error(num, opts, extra)\
-		(*working_error_funcs->error)(num, opts, extra)
-
-#define host_error_ext(num, opts, data)\
-		(*working_error_funcs->error_ext)(num, opts, data)
+#line 261
+#error Unsupported excluded original configuration
 #endif
+#line 273
 
 
    // ntvdm specific error message services
@@ -308,8 +300,10 @@ VOID RcErrorBoxPrintf(UINT wId, CHAR *szMsg);
 int RcMessageBox(UINT wId, CHAR *msg1, CHAR *msg2, ULONG dwOptions);
 
 #ifndef PROD
-void HostDebugBreak(void);
+#line 311
+#error Unsupported excluded original configuration
 #endif
+#line 313
 
 
 

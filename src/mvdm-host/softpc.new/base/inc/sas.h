@@ -46,6 +46,7 @@ typedef enum  {
 #line 46
 #error DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register.
 #endif /* CPU_40_STYLE else */
+#line 58
 
 #define SAS_TYPE_TO_STRING(type) (\
 		((type) == SAS_RAM)? "RAM" :\
@@ -146,7 +147,7 @@ extern  PHY_ADDR Length_of_M_area;       /* offset of end of M */
 #endif /* HERC_REGEN_BUFF */
 
 #endif /* BACK_M */
-#line 297
+#line 313
 
 #define CGA_REGEN_START	0xB8000L
 #define CGA_REGEN_END		0xBBFFFL
@@ -208,6 +209,7 @@ extern  PHY_ADDR Length_of_M_area;       /* offset of end of M */
 #line 371
 #error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif		/* GISP_SVGA  */
+#line 374
 #define VIDEO_IO_RE_ENTRY	0xF06C
 #define MEMORY_SIZE_OFFSET	0xF841
 #define EQUIPMENT_OFFSET	0xF84D
@@ -299,6 +301,7 @@ extern  PHY_ADDR Length_of_M_area;       /* offset of end of M */
 #line 462
 #error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif		/* GISP_SVGA */
+#line 464
 
 /* Off set info for EGA character tables */
 #define EGA_CGMN_OFF	0x2230
@@ -541,14 +544,18 @@ extern  PHY_ADDR Length_of_M_area;       /* offset of end of M */
 #ifdef EGG
 #define EGA_ROM_START		0xC0000L	/* start of EGA BIOS ROM */
 #ifdef STINGER
-#define EGA_ROM_END		0xC4A00L	/* end of EGA BIOS ROM +1 */
+#line 706
+#error Unsupported excluded original configuration
 #else		/* ~STINGER */
 #ifdef V7VGA
 #define EGA_ROM_END		0xC5000L	/* end of EGA BIOS ROM +1 */
 #else
-#define EGA_ROM_END		0xC4000L	/* end of EGA BIOS ROM +1 */
+#line 711
+#error Unsupported excluded original configuration
 #endif /* V7VGA */
+#line 713
 #endif		/* STINGER */
+#line 714
 #endif		/* EGG */
 
 #ifdef EGG
@@ -569,7 +576,7 @@ extern  PHY_ADDR Length_of_M_area;       /* offset of end of M */
 #line 731
 #error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif /* GISP_SVGA */
-#line 716
+#line 985
 
 /*
  * Offsets for a set of instructions that are used in virtualisation
@@ -622,8 +629,10 @@ extern  PHY_ADDR Length_of_M_area;       /* offset of end of M */
 #else /* BACK_M */
 
 #ifdef BIGEND
+#line 1060
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
+#line 1070
 
 #ifdef LITTLEND
 typedef union   {
@@ -637,3 +646,4 @@ typedef union   {
 		} IVT_ENTRY;
 #endif
 #endif /* BACK_M */
+#line 1083

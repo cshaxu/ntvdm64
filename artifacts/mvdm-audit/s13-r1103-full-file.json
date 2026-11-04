@@ -1,0 +1,67 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/suplib.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\suplib.h",
+  "original_sha256": "012bcdd28b9d105a6d4bf9c01bbdfa8ccf855910cb00119ba7b1c45884237f7f",
+  "before_sha256": "76768c3550b0462ab6607df9c54687ca2d31725767565bc9fd266ae0ba77b8cf",
+  "after_sha256": "75392cd3538f20f0651e2e8bbd5c18942745f080cf035c6f7efefcdef8623f3d",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/suplib.h",
+      "line": "19",
+      "directive": "ifndef",
+      "expression": "_SUPLIB_H",
+      "chain_start": "19",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f18169d36292ba3a9f290794df184cbe719c454d398b35122a2c97d7afe68af0"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/suplib.h",
+      "line": "26",
+      "directive": "ifndef",
+      "expression": "PATHSEP_CHAR",
+      "chain_start": "26",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f18169d36292ba3a9f290794df184cbe719c454d398b35122a2c97d7afe68af0"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/suplib.h",
+      "line": "28",
+      "directive": "ifdef",
+      "expression": "macintosh",
+      "chain_start": "28",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "f18169d36292ba3a9f290794df184cbe719c454d398b35122a2c97d7afe68af0"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/suplib.h",
+      "line": "32",
+      "directive": "ifdef",
+      "expression": "NTVDM",
+      "chain_start": "32",
+      "depth": "3",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f18169d36292ba3a9f290794df184cbe719c454d398b35122a2c97d7afe68af0"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/suplib.h",
+      "line": "36",
+      "directive": "ifndef",
+      "expression": "PATHSEP_CHAR",
+      "chain_start": "36",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "f18169d36292ba3a9f290794df184cbe719c454d398b35122a2c97d7afe68af0"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "Under NTVDM, the preceding selected arm defines PATHSEP_CHAR when needed; the Unix fallback cannot be reached. The two worker graphs each list four product consumers and no source-level NTVDM undef was found."
+}

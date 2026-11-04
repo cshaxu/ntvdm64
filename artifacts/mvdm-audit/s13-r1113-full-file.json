@@ -1,0 +1,89 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/error.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\error.h",
+  "original_sha256": "40953fbb22a9c6a5bff875414e4dd6822340ec4a2501edec79415573fea16ab3",
+  "before_sha256": "9ab24d497d3f3cb114e5011239ff1ab69c43139d6a2ef7780ad6ab67749aa66f",
+  "after_sha256": "e1f50719a32e302c9d2e91a49c651669407f4dcc731e625cafde2671b918ed87",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/error.h",
+      "line": "1",
+      "directive": "ifndef",
+      "expression": "_INS_ERROR_H",
+      "chain_start": "1",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "91d0d7fc6c644a8aae898a180129a46bbbb6deaf59cc39f1abf95f2ad93b82dd"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/error.h",
+      "line": "222",
+      "directive": "ifndef",
+      "expression": "MONITOR",
+      "chain_start": "222",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "91d0d7fc6c644a8aae898a180129a46bbbb6deaf59cc39f1abf95f2ad93b82dd"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/error.h",
+      "line": "223",
+      "directive": "ifdef",
+      "expression": "ANSI",
+      "chain_start": "223",
+      "depth": "3",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "91d0d7fc6c644a8aae898a180129a46bbbb6deaf59cc39f1abf95f2ad93b82dd"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/error.h",
+      "line": "243",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "223",
+      "depth": "3",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "91d0d7fc6c644a8aae898a180129a46bbbb6deaf59cc39f1abf95f2ad93b82dd"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/error.h",
+      "line": "256",
+      "directive": "if",
+      "expression": "!defined(BUILDING_CPU_TOOL)",
+      "chain_start": "256",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "91d0d7fc6c644a8aae898a180129a46bbbb6deaf59cc39f1abf95f2ad93b82dd"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/error.h",
+      "line": "260",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "256",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "91d0d7fc6c644a8aae898a180129a46bbbb6deaf59cc39f1abf95f2ad93b82dd"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/error.h",
+      "line": "310",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "310",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "91d0d7fc6c644a8aae898a180129a46bbbb6deaf59cc39f1abf95f2ad93b82dd"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "Excluded the BUILDING_CPU_TOOL branch and non-PROD diagnostic declaration. No BUILDING_CPU_TOOL definition or product graph override was found; supported worker graphs select PROD."
+}

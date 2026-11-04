@@ -1,0 +1,44 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/umb.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\umb.h",
+  "original_sha256": "2461d7f74c3317a98d1456c238ad2f14bcdb2cbcd189d39836f24a353893e4b3",
+  "before_sha256": "2461d7f74c3317a98d1456c238ad2f14bcdb2cbcd189d39836f24a353893e4b3",
+  "after_sha256": "2461d7f74c3317a98d1456c238ad2f14bcdb2cbcd189d39836f24a353893e4b3",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/umb.h",
+      "line": "29",
+      "directive": "ifndef",
+      "expression": "DWORD",
+      "chain_start": "29",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c59d1f35512a9e58009abf5bf398903eec16a04d3ce646bccf89d113e629484d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/umb.h",
+      "line": "32",
+      "directive": "ifndef",
+      "expression": "WORD",
+      "chain_start": "32",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c59d1f35512a9e58009abf5bf398903eec16a04d3ce646bccf89d113e629484d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/umb.h",
+      "line": "35",
+      "directive": "ifndef",
+      "expression": "PVOID",
+      "chain_start": "35",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c59d1f35512a9e58009abf5bf398903eec16a04d3ce646bccf89d113e629484d"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}

@@ -1,0 +1,67 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/host_inc.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\host_inc.h",
+  "original_sha256": "c78271903a7a00e13a8756b47f25a91993ab962c39c5fb89435783ee3d411efe",
+  "before_sha256": "5527fe435ae8465b22ba112ea5111bf5648f4f96b10c0f0083aaccf3d882002d",
+  "after_sha256": "d731e0f766148d434fc90c408d539a06247c733193269281c73422e671054616",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_inc.h",
+      "line": "16",
+      "directive": "ifndef",
+      "expression": "_HOST_INC_H",
+      "chain_start": "16",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "dffeded7f83a02092fe1e963573097f52c9da37e214a7ec737153cc3e9f6ee21"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_inc.h",
+      "line": "27",
+      "directive": "ifdef",
+      "expression": "NTVDM",
+      "chain_start": "27",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "dffeded7f83a02092fe1e963573097f52c9da37e214a7ec737153cc3e9f6ee21"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_inc.h",
+      "line": "36",
+      "directive": "ifdef",
+      "expression": "ULONG",
+      "chain_start": "36",
+      "depth": "3",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "dffeded7f83a02092fe1e963573097f52c9da37e214a7ec737153cc3e9f6ee21"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_inc.h",
+      "line": "39",
+      "directive": "ifdef",
+      "expression": "USHORT",
+      "chain_start": "39",
+      "depth": "3",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "dffeded7f83a02092fe1e963573097f52c9da37e214a7ec737153cc3e9f6ee21"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_inc.h",
+      "line": "69",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "27",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "dffeded7f83a02092fe1e963573097f52c9da37e214a7ec737153cc3e9f6ee21"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "Excluded the non-NTVDM host include alternative. Both product worker graphs use NTVDM and no source-level NTVDM undef was found."
+}

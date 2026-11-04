@@ -14,9 +14,10 @@
 ]*/
 
 #ifdef BIT_ORDER1
+#line 17
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif /* BIT_ORDER1 */
-#line 19
+#line 394
 
 #ifdef BIT_ORDER2
 /* CRTC Mode Control Register. Index 0x17 */
@@ -393,9 +394,10 @@ typedef	union
 
 /* The Sequencer Registers */
 #ifdef BIT_ORDER1
+#line 769
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif /* BIT_ORDER1 */
-#line 396
+#line 1352
 
 #ifdef BIT_ORDER2
 struct sequencer
@@ -414,18 +416,10 @@ struct sequencer
 		} as_bfld;
 	} address;
 #else
-	union
-	{
-		struct {
-			unsigned abyte : 8;
-		} as;
-		struct {
-			unsigned
-			index                       : 3,
-			not_used                    : 5;
-		} as_bfld;
-	} address;
+#line 1370
+#error Unsupported excluded original configuration
 #endif /* V7VGA */
+#line 1382
 
 	SEQ_RESET           reset;
 	CLOCKING_MODE       clocking_mode;
@@ -457,18 +451,10 @@ struct crt_controller
 		} as_bfld;
 	} address;
 #else
-	union
-	{
-		struct {
-			unsigned abyte : 8;
-		} as;
-		struct {
-			unsigned
-			index       : 5,
-			not_used    : 3;
-		} as_bfld;
-	} address;
+#line 1413
+#error Unsupported excluded original configuration
 #endif /* V7VGA */
+#line 1425
 												 
 	byte horizontal_total;				/* NO - screen trash if wrong value	*/
 	byte horizontal_display_end;			/* YES - defines line length!!		*/
@@ -628,36 +614,10 @@ struct attribute_controller
 		} as_bfld;
 	} palette[EGA_PALETTE_SIZE];
 #else  
-	union
-	{
-		struct {
-			unsigned abyte : 8;
-		} as;
-		struct {
-			unsigned
-			index                           : 5,
-			palette_address_source		: 1,
-			unused                          : 2;
-		} as_bfld;
-	} address;
-
-	union
-	{
-		struct {
-			unsigned abyte : 8;
-		} as;
-		struct {
-			unsigned
-			blue                               : 1,    /* YES  */
-			green                              : 1,    /* YES  */
-			red                                : 1,    /* YES  */
-			secondary_blue                     : 1,    /* YES  */
-			secondary_green                    : 1,    /* YES  */
-			secondary_red                      : 1,    /* YES  */
-			not_used                           : 2;    /* YES  */
-		} as_bfld;
-	} palette[EGA_PALETTE_SIZE];
+#line 1584
+#error Unsupported excluded original configuration
 #endif /* V7VGA */
+#line 1614
 
 	AC_MODE_CONTROL	mode_control;
 
@@ -679,23 +639,10 @@ struct attribute_controller
 		} as_bfld;
 	} overscan_color;
 #else  
-	union
-	{
-		struct {
-			unsigned abyte : 8;
-		} as;
-		struct {
-			unsigned
-			blue_border                     : 1,    /* YES  */
-			green_border                    : 1,    /* YES  */
-			red_border                      : 1,    /* YES  */
-			secondary_blue_border           : 1,    /* YES  */
-			secondary_green_border          : 1,    /* YES  */
-			secondary_red_border            : 1,    /* YES  */
-			not_used                        : 2;
-		} as_bfld;
-	} overscan_color;
+#line 1635
+#error Unsupported excluded original configuration
 #endif /* V7VGA */
+#line 1652
 
 	COLOR_PLANE_ENABLE	color_plane_enable;
 
@@ -1012,16 +959,18 @@ struct extensions_controller
 extern void set_v7_fg_latch_byte IPT2(IU8, index, IU8, value);
 #define SET_FG_LATCH(n, val)	set_v7_fg_latch_byte(n, val)
 #else
+#line 1967
 #error DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 1013
+#line 1974
 #endif /* V7VGA */
 #line 1014
 
 #ifdef GISP_SVGA
+#line 1977
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif		/* GISP_SVGA */
-#line 1018
+#line 1980
  
 /* Global data structures to import into modules
  */

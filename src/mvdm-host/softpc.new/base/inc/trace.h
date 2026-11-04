@@ -69,8 +69,10 @@
 #define PTY_VERBOSE		0x2000000L /* Print Pesudo-terminal messages */
 #define GEN_DRVR_VERBOSE	0x4000000L /* Generic driver messages */
 #ifdef HERC
+#line 72
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif
+#line 74
 #define IPC_VERBOSE		0x10000000L /* Interproc communication debug */
 #define LIM_VERBOSE		0x20000000L /* LIM messages */
 #define HFX_VERBOSE		0x40000000L /* severity of HFX messages */
@@ -131,15 +133,10 @@ extern void print_back_trace(void);
 #endif /* DELTA */
 
 #else
-extern void trace();
-extern void trace_init();
-
-#ifdef DELTA
-extern void file_back_trace();
-extern void print_back_trace();
-#endif /* DELTA */
-
+#line 134
+#error Unsupported excluded original configuration
 #endif /* ANSI */
+#line 143
 extern FILE *trace_file;
 
 IMPORT IU32 sub_io_verbose;

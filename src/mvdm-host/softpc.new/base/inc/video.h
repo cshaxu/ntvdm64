@@ -201,17 +201,20 @@ IMPORT MODE_ENTRY vd_ext_graph_table[];
 	((sas_hw_at_no_check(vd_video_mode) >= 0x14) && \
 	(sas_hw_at_no_check(vd_video_mode) < 0x1a)))
 #else
-#define ega_mode()	((sas_hw_at_no_check(vd_video_mode) > 7) && \
-	(sas_hw_at_no_check(vd_video_mode) < 19))
+#line 198
+#error Unsupported excluded original configuration
 #endif /* V7VGA */
+#line 201
 #endif
 
 #ifdef VGG
 #ifdef V7VGA
 #define vga_256_mode()		(sas_hw_at_no_check(vd_video_mode) == 19 || (sas_hw_at_no_check(vd_video_mode) > 0x19 && sas_hw_at_no_check(vd_video_mode) < 0x1e))
 #else
-#define vga_256_mode()		(sas_hw_at_no_check(vd_video_mode) == 19)
+#line 207
+#error Unsupported excluded original configuration
 #endif /* V7VGA */
+#line 209
 #endif /* VGG */
 
 /*

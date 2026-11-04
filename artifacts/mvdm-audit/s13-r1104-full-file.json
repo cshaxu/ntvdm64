@@ -1,0 +1,78 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/trace.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\trace.h",
+  "original_sha256": "d70092a47d833c0ec3d859ebe7963feb374f5f0abb9288a03f9ffea7198b275f",
+  "before_sha256": "c5ce83a2c82a7a4298489c06ea996616b7e858a44a5b95079fe01dac3ce4596a",
+  "after_sha256": "b62754aef01e5b60bf1f284f94021d7f457b641e26e35d44c1dcac7bc574803a",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/trace.h",
+      "line": "1",
+      "directive": "ifndef",
+      "expression": "_TRACE_H",
+      "chain_start": "1",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "0e1c69f4fac9fea83b4bc29f020a39b9362aa4397e243865bc84c59c181eee8a"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/trace.h",
+      "line": "71",
+      "directive": "ifdef",
+      "expression": "HERC",
+      "chain_start": "71",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "0e1c69f4fac9fea83b4bc29f020a39b9362aa4397e243865bc84c59c181eee8a"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/trace.h",
+      "line": "124",
+      "directive": "ifdef",
+      "expression": "ANSI",
+      "chain_start": "124",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "0e1c69f4fac9fea83b4bc29f020a39b9362aa4397e243865bc84c59c181eee8a"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/trace.h",
+      "line": "128",
+      "directive": "ifdef",
+      "expression": "DELTA",
+      "chain_start": "128",
+      "depth": "3",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "0e1c69f4fac9fea83b4bc29f020a39b9362aa4397e243865bc84c59c181eee8a"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/trace.h",
+      "line": "133",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "124",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "0e1c69f4fac9fea83b4bc29f020a39b9362aa4397e243865bc84c59c181eee8a"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/trace.h",
+      "line": "137",
+      "directive": "ifdef",
+      "expression": "DELTA",
+      "chain_start": "137",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "0e1c69f4fac9fea83b4bc29f020a39b9362aa4397e243865bc84c59c181eee8a"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "Excluded the non-ANSI trace prototypes. Each worker graph has 41 header consumers and no consumer is stubs.c, the only source-level ANSI undef found. The product graphs define ANSI."
+}

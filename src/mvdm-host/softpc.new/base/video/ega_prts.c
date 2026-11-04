@@ -352,8 +352,10 @@ ERROR RECOVERY	  :	none.
 #include	"egaports.h"
 
 #ifdef GORE
+#line 355
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #endif /* GORE */
+#line 357
 
 #include  "ga_mark.h"
 #include  "ga_defs.h"
@@ -391,13 +393,10 @@ LOCAL void	ega_ipstat1_inb IPT2(io_addr, port, half_word *, value);
 
 /* [5.1.1 #DEFINES]							*/
 #ifdef SEGMENTATION
+#line 391
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
+#line 398
 
 GLOBAL VOID ega_gc_outw IPT2(io_addr, port, word, outval);
 
@@ -409,8 +408,10 @@ GLOBAL VOID ega_gc_outw IPT2(io_addr, port, word, outval);
 
 /* [5.1.2 TYPEDEF, STRUCTURE, ENUM DECLARATIONS]			*/
 #ifdef BIT_ORDER1
+#line 409
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
+#line 721
 #ifdef BIT_ORDER2
 typedef	union
 {
@@ -750,8 +751,10 @@ static	INPUT_STAT_REG1	input_status_register_one;
 
 /* The Sequencer Registers */
 #ifdef BIT_ORDER1
+#line 1060
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
+#line 1280
 
 #ifdef BIT_ORDER2
 static struct
@@ -1286,8 +1289,10 @@ set_banking IFN2(UTINY, rd_bank, UTINY, wrt_bank)
 {
 	ULONG roffs, woffs;
 #ifdef PIG
+#line 1814
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
+#line 1816
 
 #ifdef V7VGA
 	if( get_seq_chain4_mode() && get_chain4_mode() )
@@ -1301,12 +1306,16 @@ set_banking IFN2(UTINY, rd_bank, UTINY, wrt_bank)
 		woffs = (ULONG)wrt_bank << 18;
 	}
 #else
+#line 1829
 #error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif
+#line 1834
 
 #ifdef PIG
+#line 1836
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
+#line 1838
 	setVideorplane(EGA_planes + roffs);
 	setVideowplane(EGA_planes + woffs);
 
@@ -1318,8 +1327,10 @@ set_banking IFN2(UTINY, rd_bank, UTINY, wrt_bank)
 		setVideov7_bank_vid_copy_off(woffs >> 4);
 
 #ifdef GORE
+#line 1849
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #endif /* GORE */
+#line 1851
 }
 
 GLOBAL void
@@ -1330,8 +1341,10 @@ update_banking IFN0()
 #ifdef V7VGA
 	v7_get_banks( &rd_bank, &wrt_bank );
 #else
+#line 1861
 #error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif
+#line 1863
 
 	set_banking( rd_bank, wrt_bank );
 }
@@ -1347,10 +1360,12 @@ init_vga_globals IFN0()
 	setVideorotate(0);
 #if !defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX))
 #ifndef CPU_40_STYLE	/* EVID */
+#line 1878
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else
 	SetMarkPointers(0);
 #endif	/* CPU_40_STYLE - EVID */
+#line 1884
 #endif
 
 
@@ -1388,8 +1403,10 @@ void	ega_init IFN0()
 	io_define_out_routines(EGA_GC_ADAP_INDEX, ega_gc_outb_index, ega_gc_outw, NULL, NULL);
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
+#line 1921
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
+#line 1923
 
 	io_define_outb(EGA_GC_ADAP_DATA,ega_gc_set_reset);
 	Cpu_define_outb(EGA_GC_ADAP_DATA,NULL);
@@ -1791,8 +1808,10 @@ LOCAL void	ega_crtc_outb IFN2(io_addr, port, half_word, value)
 						set_screen_height_med_recal(
 							((CRTC_OVERFLOW*)&new)->as_bfld.vertical_display_enab_end_bit_8 );
 #else
+#line 2324
 #error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif
+#line 2327
 						flag_mode_change_required();
 					}
 					if (crt_controller.crtc_overflow.as_bfld.line_compare_bit_8 != 
@@ -2408,19 +2427,15 @@ GLOBAL VOID ega_mask_register_changed IFN1(BOOL, gotBitProtection)
 	state = EGA_CPU.ega_state.mode_0.lookup & masks[EGA_CPU.write_mode];
 
 #ifdef A3CPU
+#line 2941
 #error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
-
-
-
-
-
 #else
 #line 2413
 #if !(defined(NTVDM) && defined(MONITOR))
 	Glue_set_vid_wrt_ptrs(&mode_chain_handler_table[EGA_CPU.saved_mode_chain][state]);
 #endif /* !(NTVDM && MONITOR) */
 #endif /* A3CPU */
-#line 2417
+#line 2951
 
 	EGA_CPU.saved_state = state;
 }
@@ -2465,16 +2480,18 @@ LOCAL void	ega_gc_mask IFN2(io_addr, port, half_word, value)
 		ega_gc_regs[8] = ega_gc_mask_ff;
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
+#line 2994
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
-#line 2462
+#line 2999
 
 		io_redefine_outb(EGA_GC_ADAP_DATA,ega_gc_mask_ff);
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
+#line 3003
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
-#line 2468
+#line 3005
 	}
 }
 
@@ -2513,16 +2530,18 @@ void	ega_gc_mask_ff IFN2(io_addr, port, half_word, value)
 		ega_gc_regs[8] = ega_gc_mask;
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
+#line 3042
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
-#line 2507
+#line 3047
 
 		io_redefine_outb(EGA_GC_ADAP_DATA,ega_gc_mask);
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
+#line 3051
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
-#line 2513
+#line 3053
 	}
 }
 
@@ -2893,9 +2912,10 @@ LOCAL	void	vote_ega_mode IFN0()
 }
 
 #ifdef HUNTER
+#line 3417
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
-#line 2879
+#line 3458
 #endif /* EGG */
 #line 2880
 #endif /* REAL_VGA */
