@@ -336,7 +336,7 @@ static void printer_inb IFN2(io_addr,port, half_word *,value)
 		case STATE_DATA:
 
 #endif
-#line 326
+#line 350
 
 		case STATE_READY:
 			notbusy_check(adapter);
@@ -464,7 +464,7 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 
 	// fall through
 #endif
-#line 443
+#line 472
 	case STATE_OUT:
 	case STATE_OUTA:
 	case STATE_READY:
@@ -540,7 +540,7 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 #line 547
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else /* NTVDM && !MONITOR */
-#line 510
+#line 549
 				    		set_status(adapter,
 					       	get_status(adapter) & ~NOTBUSY);
 #endif /* NTVDM && !MONITOR */
@@ -643,7 +643,7 @@ static void notbusy_check IFN1(int,adapter)
 #if defined(NTVDM)
 		  get_state(adapter) == STATE_DATA ||
 #endif
-#line 605
+#line 646
 		  get_state(adapter) == STATE_OUTA)
 	     &&	!(get_status(adapter) & NOTBUSY)
 	     &&	!(host_lpt_status(adapter) & HOST_LPT_BUSY))
@@ -652,7 +652,7 @@ static void notbusy_check IFN1(int,adapter)
 #line 651
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else /* NTVDM && !MONITOR */
-#line 612
+#line 653
 		set_status(adapter, get_status(adapter) | NOTBUSY);
 #endif /* NTVDM && !MONITOR */
 #line 614
@@ -729,7 +729,7 @@ void printer_init IFN1(int,adapter)
 	    set_state(adapter, STATE_READY);
 	else
 #endif /* NTVDM && MONITOR */
-#line 682
+#line 724
 	    state[adapter] = STATE_READY;
 
 } /* end of printer_init() */

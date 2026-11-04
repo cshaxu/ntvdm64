@@ -316,7 +316,6 @@ void (*BIOS[])() = {
 #error Unsupported excluded original DPMI BIOS configuration
 #else
 #line 280
-#line 256
 			illegal_bop,	/* BOP 49 */
 			illegal_bop,	/* BOP 4A */
 			illegal_bop,	/* BOP 4B */

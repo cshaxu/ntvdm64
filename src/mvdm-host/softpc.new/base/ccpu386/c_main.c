@@ -1627,7 +1627,7 @@ TYPE0FAB:
 #line 1574
 #error Unsupported excluded original configuration
 #else
-#line 1635
+#line 1576
       case  0xb3:   /* T5 BTR Ev Gv */   instp32328 = BTR;   goto TYPE0FAB;
 #endif
 #line 1578
@@ -1700,7 +1700,7 @@ TYPE0FAB:
 #line 1644
 #error Unsupported excluded original configuration
 #else
-#line 1705
+#line 1646
 	 goto TYPE0FAB;
 #endif
 #line 1648
@@ -4715,7 +4715,7 @@ LOCAL VOID
 #error Unsupported excluded original configuration
 #endif	/* SWITCHNPX */
 #line 4816
-#line 4706
+#line 4816
 
       if ( disableNpx )
 	 SET_ET(0);

@@ -137,7 +137,7 @@ extern struct EGA_CPU_GLOBALS
 #line 150
 #error DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register.
 #else	/* CPU_40_STYLE */
-#line 137
+#line 238
 
 extern void setVideorplane IPT1(IU8 *, value);
 extern IU8 * getVideorplane IPT0();

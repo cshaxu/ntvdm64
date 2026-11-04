@@ -456,7 +456,7 @@ ica_scan_irr IFN1(IU32, adapter)
 #line 486
 #error Excluded unsupported monitor PIC interrupt ownership
 #else
-#line 458
+#line 488
     iret_hook_mask = (IU8)(DelayIrqLine >> (adapter << 3));
 #endif
 #line 490

@@ -2717,7 +2717,7 @@ LOCAL void mouse_hide_cursor IFN4(word *,junk1,word *,junk2,word *,junk3,word *,
 #error Excluded unsupported non-NTVDM mouse profile
 #else
 #if !defined(MONITOR)
-#line 2615
+#line 2997
 	if (cursor_flag-- == MOUSE_CURSOR_DISPLAYED)
 #ifdef	MOUSE_16_BIT
 #line 2999

@@ -112,7 +112,15 @@ entry they represent, including project-local selector cases. The remaining
 ambiguous error-anchor count is 71. It also found an actual mismatch in
 `cpu_vid.h`: both the selected and excluded generic `str_read` mappings need
 to refer to original line 91 rather than unrelated original lines 95/102;
-that source correction is still pending and is not represented as complete.
+that source correction was included in the subsequent
+[r1324 batch](s13-r1324-line-batch.json), together with other directly
+matched anchor corrections. Other conditions in those files remain subject
+to the per-file audit; changing one anchor does not certify a whole file.
+Cached x86 root, NTVDM worker, WOW32 and x64 builds passed; the complete
+package was published at both destinations. Nine images are byte-identical
+and NTVDM differs only by PE timestamp
+([comparison](s13-r1324-build-image-compare.json)); runtime tests were not
+repeated under owner instruction.
 
 The [fifth ten-file batch](s13-r1321-line-batch.json) restores original
 positions for matching code lines in another ten files. The batch uses newline

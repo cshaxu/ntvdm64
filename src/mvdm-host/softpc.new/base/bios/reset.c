@@ -301,7 +301,7 @@ half_word *low, *high;
 #line 301
 #error Unsupported excluded original configuration
 #else
-#line 310
+#line 320
 	low_switches |= (RAM_256KB | PPI_CO_PROCESSOR_NOT_PRESENT | NO_LOOP_ON_POST);
 #endif
 #line 322
@@ -310,7 +310,7 @@ half_word *low, *high;
 #line 324
 #error Unsupported excluded original configuration
 #else
-#line 320
+#line 330
 	high_switches |= (PPI_ONE_DRIVE);
 #endif
 #line 332

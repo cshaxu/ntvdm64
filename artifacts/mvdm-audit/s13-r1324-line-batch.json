@@ -1,0 +1,199 @@
+{
+  "method": "Each selected code anchor is mapped to a unique exact original line; cpu_vid generic fields mapped to original declarations. Source changes are solely #line directives.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\bios.c",
+      "before_sha256": "7eb2be47cc61b5d2a97ef67ddf1ade53507401b0002d357015788985cb3a5973",
+      "after_sha256": "ef9629e07f4ecd78ede30985f1b8fa4dc31c0e6981a9b2f3fe54afcdfeb76987",
+      "fixes": [
+        {
+          "physical": 319,
+          "old": 256,
+          "new": "removed duplicate incorrect anchor",
+          "matched_original_line": 280
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "before_sha256": "c6bd0666c084f7233a8cb1d75bfe3887fd0a0ab624295864ff9d5bfa35b4e0b9",
+      "after_sha256": "0316e2c9c4dd60ab2807c334cffad352cbbe688b0056091364039663af6c1776",
+      "fixes": [
+        {
+          "physical": 304,
+          "old": 310,
+          "new": 320,
+          "matched_original_line": 320
+        },
+        {
+          "physical": 313,
+          "old": 320,
+          "new": 330,
+          "matched_original_line": 330
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "before_sha256": "406644c6ae0e746050d108aa23bf58e8412a8cd55d41b6f11531ba1aa8f0334a",
+      "after_sha256": "c9ea7e5b78dad12f2144824c4a3ba828715d6c1d07b9270edbb2e23177b01a3e",
+      "fixes": [
+        {
+          "physical": 1630,
+          "old": 1635,
+          "new": 1576,
+          "matched_original_line": 1576
+        },
+        {
+          "physical": 1703,
+          "old": 1705,
+          "new": 1646,
+          "matched_original_line": 1646
+        },
+        {
+          "physical": 4718,
+          "old": 4706,
+          "new": 4816,
+          "matched_original_line": 4817
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\printer.c",
+      "before_sha256": "56eea64461d995c773dcb2ce68479850de4ec897f4170647d4231c0674c539e5",
+      "after_sha256": "eae8403732861a3d705a99d487c019b4dbdd66339ad0ad8bc88cba715425d9e4",
+      "fixes": [
+        {
+          "physical": 339,
+          "old": 326,
+          "new": 350,
+          "matched_original_line": 351
+        },
+        {
+          "physical": 467,
+          "old": 443,
+          "new": 472,
+          "matched_original_line": 472
+        },
+        {
+          "physical": 543,
+          "old": 510,
+          "new": 549,
+          "matched_original_line": 549
+        },
+        {
+          "physical": 646,
+          "old": 605,
+          "new": 646,
+          "matched_original_line": 646
+        },
+        {
+          "physical": 655,
+          "old": 612,
+          "new": 653,
+          "matched_original_line": 653
+        },
+        {
+          "physical": 732,
+          "old": 682,
+          "new": 724,
+          "matched_original_line": 724
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egacpu.h",
+      "before_sha256": "9dc9a5b32884ce9388ba06522ca48854951964f66a62652a30b979428016fe47",
+      "after_sha256": "a8615a9fa373cbd500c46abdedbc27f7e58f3532f823c5f71c324a0917ad235c",
+      "fixes": [
+        {
+          "physical": 140,
+          "old": 137,
+          "new": 238,
+          "matched_original_line": 239
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keyba.c",
+      "before_sha256": "40d0ed13e0a85b1043d3be2e0b7824b40da7c1a9b2f3f8aa36ef7dce7ee3be23",
+      "after_sha256": "b839bb67b8d622ead7120127aa9adb82fe70a48f256ccd2574a7e126a81c3836",
+      "fixes": [
+        {
+          "physical": 2783,
+          "old": 2902,
+          "new": 3203,
+          "matched_original_line": 3204
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "before_sha256": "095352f82a83d6831ac31fc5aba59f8a23f48e95a02a1c088ed1ed89f3bd9f4a",
+      "after_sha256": "8da8c96ea838dd3ff5abdf1b82c5ffcbb098c4ad148531364acd57f4f9bb08ce",
+      "fixes": [
+        {
+          "physical": 2720,
+          "old": 2615,
+          "new": 2997,
+          "matched_original_line": 2997
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\ica.c",
+      "before_sha256": "0788448172506b62241e2820e92e99d090658244c57ac7dec2e5e29bb402266c",
+      "after_sha256": "9cd9b54860ba48fa9cfcebcd52979e81fda64f15266ce29266760e06685cc62b",
+      "fixes": [
+        {
+          "physical": 459,
+          "old": 458,
+          "new": 488,
+          "matched_original_line": 488
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\qevnt.c",
+      "before_sha256": "a9c74bd012c90949bfb2d547aab7c89aa60e8678093431c82885dab34b15df40",
+      "after_sha256": "8632d93fe877d6569231aecffd39bfe6987e8aaca336bc159b5ed6ecc3101ff5",
+      "fixes": [
+        {
+          "physical": 107,
+          "old": 106,
+          "new": 107,
+          "matched_original_line": 107
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cpu_vid.h",
+      "before_sha256": "92504e20557e45019b76df8493f633fcda55c226805e2793173649058d638550",
+      "after_sha256": "951d12ec9c14056c9269e5d10a773f2be3d4de1c7e646ce68cc7311887856b3d",
+      "fixes": [
+        {
+          "source": "b_read and generic branch",
+          "new": 87
+        },
+        {
+          "source": "str_read and generic branch",
+          "old": [
+            95,
+            102
+          ],
+          "new": 91
+        }
+      ]
+    }
+  ]
+}

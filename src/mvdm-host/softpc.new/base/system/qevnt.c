@@ -104,7 +104,7 @@ q_event_init(
       )
 {
 #ifndef MONITOR
-#line 106
+#line 107
      PLIST_ENTRY Next;
      PQEV_ENTRY pqevEntry;
 

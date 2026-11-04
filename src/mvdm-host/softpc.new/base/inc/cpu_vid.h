@@ -88,18 +88,20 @@ typedef struct
 	/* DIVERGENCE MVDM-HOST-DIV-089: selected C-video EVID glue uses the
 	 * exact IU32 offset/count contract below.  The historical ULONG carrier
 	 * only matched it by 32-bit typedef coincidence. */
+#line 87
 	IU32 (*b_read) IPT1(IU32, eaOff);
 	IU32 (*w_read) IPT1(IU32, eaOff);
 #else
+#line 87
 #error DIVERGENCE MVDM-HOST-DIV-618: unsupported generic video callback profile
 #endif
 #line 90
 #ifndef	NO_STRING_OPERATIONS
 #if defined(CPU_40_STYLE) && defined(C_VID)
-#line 95
+#line 91
 	void (*str_read) IPT3(IU8 *, dest, IU32, eaOff, IU32, count);
 #else
-#line 102
+#line 91
 #error Excluded unsupported generic string video callback profile
 #endif
 #endif	/* NO_STRING_OPERATIONS */

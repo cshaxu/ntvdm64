@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-642: correct existing original-line anchors in ten BIOS, CCPU,
+device and video sources, including the generic `READ_POINTERS` field
+positions. Only `#line` directives change. Original-line comparisons and
+remaining audit boundaries: `../../artifacts/mvdm-audit/s13-r1324-line-batch.json`.
+
 MVDM-HOST-DIV-641: restore matching original code positions in five
 condition-free COMMAND and WOW sources and restore two original video
 excluded-branch diagnostic anchors and their continuations. Only `#line`

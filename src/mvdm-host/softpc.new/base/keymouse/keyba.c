@@ -2780,7 +2780,7 @@ GLOBAL VOID AT_kbd_post IFN0()
 #line 3098
 #error DIVERGENCE MVDM-HOST-DIV-591: non-NTVDM branch is not selected
 #else	/* NTVDM */
-#line 2902
+#line 3203
 
 GLOBAL VOID AT_kbd_init()
 {
