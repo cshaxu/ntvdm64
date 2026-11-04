@@ -28,8 +28,10 @@
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: Include files */
 
 #ifdef X86GFX
+#line 31
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
+#line 33
 #include <sys\types.h>
 
 #include "xt.h"
@@ -228,6 +230,7 @@ static PAINTFUNCS huge_colour_paint_funcs =
 };
 
 #ifdef MONITOR
+#line 214
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif /* MONITOR */
 #line 265
@@ -257,9 +260,10 @@ static INITFUNCS colour_init_funcs =
 };
 
 #ifdef MONITOR
+#line 291
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif /* MONITOR */
-#line 319
+#line 303
 
 /*::::::::::::::::::::::::::::::::::::::::::::::: Adaptor function protocol */
 
@@ -520,8 +524,10 @@ GLOBAL VOID closeGraphicsBuffer IFN0()
                 CloseHandle(sc.ConsoleBufInfo.hMutex);
                 sc.ConsoleBufInfo.hMutex = 0;
 #ifdef X86GFX
+#line 563
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
+#line 571
 	}
 } /* end of closeGraphicsBuffer() */
 
@@ -547,8 +553,10 @@ void nt_init_screen(void)
     static boolean  already_called = FALSE;
 
 #ifdef X86GFX
+#line 596
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
+#line 598
     sub_note_trace0(ALL_ADAPT_VERBOSE, "nt_init_screen\n");
 
     /* If an error occurs before the user interface has been initialised then
@@ -568,10 +576,12 @@ void nt_init_screen(void)
     /*:::::::::::::::::::::::::::::::::::::::::: Allocate video copy buffer */
 
 #ifdef MONITOR
+#line 617
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #else
     if(!video_copy) video_copy = (byte *) host_malloc(0x20000);
 #endif
+#line 621
 
     /*::::::::::::::::::::::::::::::::: Allocate DAC and EGA planes buffers */
 
@@ -611,9 +621,10 @@ void nt_init_screen(void)
 }
 
 #ifdef MONITOR
+#line 660
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif /* MONITOR */
-#line 702
+#line 686
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::::::::::: Initialise adaptor ::::::::::::::::::::::::::::*/
@@ -713,9 +724,10 @@ void nt_clear_screen(void)
                               ScreenInfo.dwSize.X * ScreenInfo.dwSize.Y,
                               coord,&nCharWritten);
 #ifdef MONITOR
+#line 783
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
-#line 807
+#line 790
 }
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -766,8 +778,10 @@ void nt_flush_screen(void)
     if (ConsoleInitialised == TRUE && ConsoleNoUpdates == FALSE &&
 	!get_mode_change_required())
 #ifdef X86GFX
+#line 803
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
+#line 805
         {
             (void)(*update_alg.calc_update)();
             /* DIVERGENCE(MVDM-HOST-DIV-314): preserve the notification until
@@ -866,8 +880,10 @@ void nt_graphics_tick(void)
 
                 if (ConsoleInitialised == TRUE && ConsoleNoUpdates == FALSE)
 #ifdef X86GFX
+#line 876
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
+#line 878
                     {
                         (void)(*update_alg.calc_update)();
                     }
@@ -896,8 +912,10 @@ void nt_graphics_tick(void)
 
             if (ConsoleInitialised == TRUE && ConsoleNoUpdates == FALSE)
 #ifdef X86GFX
+#line 903
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
+#line 905
                 {
                     (void)(*update_alg.calc_update)();
                 }
@@ -1313,9 +1331,10 @@ void nt_set_paint_routine(DISPLAY_MODE mode, int height)
                     if (get_chain4_mode())
                     {
 #ifdef MONITOR
+#line 1288
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif /* MONITOR */
-#line 1425
+#line 1295
                             paint_screen = nt_paint_funcs->vga_graph;
                     }
                     else
@@ -1366,12 +1385,14 @@ void nt_set_paint_routine(DISPLAY_MODE mode, int height)
     }
 
 #ifdef X86GFX
+#line 1345
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #else
 
     /*................................................... Apply mode change */
     check_win_size(height);
 #endif  /* X86GFX */
+#line 1376
     current_mode = mode;
 }
 
@@ -1476,9 +1497,10 @@ static void select_paint_routines(void)
 }
 
 #ifdef MONITOR
+#line 1480
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif /* MONITOR */
-#line 1622
+#line 1492
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::::::::::::: Prepare surface :::::::::::::::::::::::::::::*/
@@ -1895,8 +1917,10 @@ VOID windowSize IFN4( int, w, int, h, int, top, int, left )
 	WinSize.Right  = left + w - 1;
 
 #ifndef	PROD
+#line 1892
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 1894
 	if( !SetConsoleWindowInfo( sc.OutputHandle, TRUE, &WinSize ) )
 		assert3( NO, "VDM: SetConsoleWindowInfo() w=%d h=%d failed:%#x",
 			w, h, GetLastError() );
@@ -1915,8 +1939,10 @@ VOID bufferSize IFN2( int, w, int, h )
 	ScrSize.X = w;
 	ScrSize.Y = h;
 #ifndef	PROD
+#line 1912
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 1914
 	if( !SetConsoleScreenBufferSize( sc.OutputHandle, ScrSize ) )
 		assert3( NO, "VDM: SetCons...BufferSize() w=%d h=%d failed:%#x",
 			w, h, GetLastError() );
@@ -1969,8 +1995,10 @@ VOID resizeWindow IFN2( int, w, int, h )
 	oldW.Y  = bufferInfo.srWindow.Bottom - bufferInfo.srWindow.Top  + 1;
 	oldB    = bufferInfo.dwSize;
 #ifndef	PROD
+#line 1966
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 1971
 	/*
 	 * Reduce window width and height as necessary:
 	 */
@@ -1993,8 +2021,10 @@ VOID resizeWindow IFN2( int, w, int, h )
 			assert1( NO, "VDM: GetConsoleScreenBufferInfo() failed:%#x",
 				GetLastError() );
 #ifndef	PROD
+#line 1993
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 1995
 	}
 	/*
 	** Clip requested values to Window maximum and
@@ -2283,16 +2313,20 @@ void nt_mode_select_changed(int dummy)
 {
     UNUSED(dummy);
 #ifndef PROD
+#line 2281
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 2283
 }
 
 void nt_color_select_changed(int dummy)
 {
     UNUSED(dummy);
 #ifndef PROD
+#line 2289
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 2291
 }
 
 void nt_screen_address_changed(int lo, int hi)

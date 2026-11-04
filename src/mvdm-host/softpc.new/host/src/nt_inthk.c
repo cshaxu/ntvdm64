@@ -45,8 +45,10 @@
 
 /* Make local symbols visible if debugging. */
 #ifndef PROD
+#line 40
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* not PROD */
+#line 42
 
 /* Macros and typedefs. */
 
@@ -92,8 +94,10 @@ GLOBAL BOOL host_hwint_hook IFN1(IS32, int_no)
 	returnStatus = (HWIntHandler)((ULONG) int_no);
 
 #ifndef PROD
+#line 87
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
+#line 91
     }
 
     return( returnStatus );
@@ -120,8 +124,10 @@ GLOBAL NTSTATUS	VdmInstallHardwareIntHandler IFN1(PVOID, HardwareIntHandler)
 #ifdef CCPU
     HWIntHandler = HardwareIntHandler;
 #else
+#line 117
 #error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register.
 #endif
+#line 119
     return(STATUS_SUCCESS);
 }
 
@@ -173,8 +179,10 @@ GLOBAL BOOL host_swint_hook IFN1(IS32, int_no)
 	returnStatus = (SWIntHandler)((ULONG) int_no);
 
 #ifndef PROD
+#line 150
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
+#line 155
     }
 
     return( returnStatus );
@@ -200,8 +208,10 @@ GLOBAL NTSTATUS	VdmInstallSoftwareIntHandler IFN1(PVOID, SoftwareIntHandler)
 #ifdef CCPU
     SWIntHandler = SoftwareIntHandler;
 #else
+#line 180
 #error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register.
 #endif
+#line 182
     return(STATUS_SUCCESS);
 }
 
@@ -542,8 +552,10 @@ candidate_unhandled:
 	returnStatus = (EXIntHandler)((ULONG) exp_no, (ULONG) error_code);
 
 #ifndef PROD
+#line 214
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
+#line 219
     }
 
     /* DIVERGENCE(MVDM-HOST-DIV-308): default-off observation of the
@@ -575,8 +587,10 @@ GLOBAL NTSTATUS	VdmInstallFaultHandler IFN1(PVOID, FaultHandler)
 #ifdef CCPU
     EXIntHandler = FaultHandler;
 #else
+#line 244
 #error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register.
 #endif
+#line 246
     return(STATUS_SUCCESS);
 }
 

@@ -1,0 +1,43 @@
+{
+  "path": "src/mvdm-host/xms.486/xmsmemr.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\xms.486\\xmsmemr.c",
+  "original_sha256": "70970ed738101458f8036b5a283f034eb64baf32ead84a59a6b02278b327612c",
+  "current_sha256": "b414e7f1a100e23b42b1022232af5b3d04df01b9784d3536316fb7a43cec9df2",
+  "selected_local_conditions": [
+    {
+      "path": "src/mvdm-host/xms.486/xmsmemr.c",
+      "line": "25",
+      "directive": "ifdef",
+      "expression": "CPU_40_STYLE",
+      "chain_start": "25",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "b414e7f1a100e23b42b1022232af5b3d04df01b9784d3536316fb7a43cec9df2"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsmemr.c",
+      "line": "149",
+      "directive": "ifdef",
+      "expression": "CPU_40_STYLE",
+      "chain_start": "149",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "b414e7f1a100e23b42b1022232af5b3d04df01b9784d3536316fb7a43cec9df2"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsmemr.c",
+      "line": "151",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "149",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "b414e7f1a100e23b42b1022232af5b3d04df01b9784d3536316fb7a43cec9df2"
+    }
+  ],
+  "review": "Original has no conditional groups. Current product-binding selectors are observed selected or already explicitly excluded. No source edit.",
+  "limitations": "Selection witness and source comparison only; no runtime behavior claim."
+}

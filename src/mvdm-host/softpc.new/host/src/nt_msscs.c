@@ -94,8 +94,10 @@ void scs_init(int argc, char **argv)
 
     if(!DBGInit (argc,argv)) {
 #ifndef PROD
+#line 87
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 90
         TerminateVDM();
     }
 }
@@ -144,11 +146,8 @@ InitialiseDosEmulation(int argc, char **argv)
 #error Excluded unsupported non-CPU40 virtual interrupt state
 #endif
 #else
-#ifdef CPU_40_STYLE
-    fVirtualInt |= MIPS_BIT_MASK;
-#else
-#error Excluded unsupported non-CPU40 virtual interrupt state
-#endif
+#line 126
+#error Unsupported excluded original configuration
 #endif /* i386 */
 #line 128
     sas_storedw((ULONG)FIXED_NTVDMSTATE_LINEAR,fVirtualInt);
@@ -162,8 +161,10 @@ InitialiseDosEmulation(int argc, char **argv)
     //
     TlsDirectError = TlsAlloc();
 #ifndef PROD
+#line 139
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 142
 
 
     // SetupInstallableVDD ();
@@ -214,8 +215,10 @@ InitialiseDosEmulation(int argc, char **argv)
          BytesRead )
         {
 #ifndef PROD
+#line 190
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 192
          host_error(EG_SYS_MISSING_FILE, ERR_QUIT, buffer);
          if (hFile != INVALID_HANDLE_VALUE) {
              CloseHandle(hFile);
@@ -231,8 +234,10 @@ InitialiseDosEmulation(int argc, char **argv)
         {
 
 #ifndef PROD
+#line 207
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 209
           host_error(EG_SYS_MISSING_FILE, ERR_QUIT, buffer);
           CloseHandle(hFile);
           return (-1);
@@ -536,8 +541,10 @@ boolean init_lim_configuration_data(PLIM_CONFIG_DATA lim_data)
     lim_data->use_all_umb = !ram_flag_found;
 
 #ifdef EMM_DEBUG
+#line 553
 #error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register.
 #endif
+#line 556
 
     return TRUE;
 }
@@ -576,8 +583,10 @@ unsigned short get_lim_page_frames(USHORT * page_table,
     }
     if (!reserve_umb_status) {
 #ifdef EMM_DEBUG
+#line 594
 #error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register.
 #endif
+#line 596
 	return FALSE;
     }
     page_table[0] = (short)(page_frame / 16);
@@ -609,8 +618,10 @@ unsigned short get_lim_page_frames(USHORT * page_table,
     }
 
 #ifdef EMM_DEBUG
+#line 627
 #error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register.
 #endif
+#line 631
     return total_phys_pages;
 }
 #endif	/* LIM */

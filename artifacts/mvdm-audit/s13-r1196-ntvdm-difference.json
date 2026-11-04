@@ -1,0 +1,11 @@
+{
+  "previous_release": "assets/release/ntvdm.exe at ba63e5c2f",
+  "candidate": "r1196-phase1-package/system32/ntvdm.exe",
+  "comparison": "The two non-timestamp bytes are immediate operands in NTVDM .text, in nt_graph.obj. PE offsets map through the current link map to nt_graphics_tick and publish_text_update.",
+  "changes": [
+    {"pe_offset": "0x58139", "function": "nt_graphics_tick", "field": "DisplayErrorTerm __LINE__", "old": 906, "new": 842},
+    {"pe_offset": "0x58c5f", "function": "publish_text_update", "field": "DisplayErrorTerm __LINE__", "old": 821, "new": 804}
+  ],
+  "cause": "Original-anchored #line normalization in nt_graph.c changes the diagnostic line arguments of locally added error-report calls; their branch conditions and operations did not change.",
+  "acceptance": "Substantive diagnostic bytes differ, so Full verification is required before publication."
+}

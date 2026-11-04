@@ -1,0 +1,213 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_inthk.c",
+  "original_sha256": "a3465d006a88549ce5fd52ac3f8d9c0dcf1f2b2c6825f35db3d2dc683fbc7abe",
+  "current_sha256": "af6fb9b8b2d4da4279b74cba68a133718299d5507aab5f77e2a7d1e2a4c6c9ea",
+  "local_ntvdm_groups": [
+    41,
+    227,
+    410
+  ],
+  "prior_selection_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "line": "23",
+      "directive": "ifdef",
+      "expression": "CPU_40_STYLE",
+      "chain_start": "23",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "5b60766bdf653349207ab6e9c0e6310b12bc4960dd0cac37659ef846187fa0d5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "line": "41",
+      "directive": "ifdef",
+      "expression": "CCPU",
+      "chain_start": "41",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "5b60766bdf653349207ab6e9c0e6310b12bc4960dd0cac37659ef846187fa0d5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "line": "47",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "47",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "5b60766bdf653349207ab6e9c0e6310b12bc4960dd0cac37659ef846187fa0d5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "line": "57",
+      "directive": "if",
+      "expression": "defined(CCPU) || !defined(PROD)",
+      "chain_start": "57",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "5b60766bdf653349207ab6e9c0e6310b12bc4960dd0cac37659ef846187fa0d5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "line": "84",
+      "directive": "if",
+      "expression": "defined(CCPU) || !defined(PROD)",
+      "chain_start": "84",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "5b60766bdf653349207ab6e9c0e6310b12bc4960dd0cac37659ef846187fa0d5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "line": "94",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "94",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "5b60766bdf653349207ab6e9c0e6310b12bc4960dd0cac37659ef846187fa0d5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "line": "120",
+      "directive": "ifdef",
+      "expression": "CCPU",
+      "chain_start": "120",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "5b60766bdf653349207ab6e9c0e6310b12bc4960dd0cac37659ef846187fa0d5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "line": "122",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "120",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "5b60766bdf653349207ab6e9c0e6310b12bc4960dd0cac37659ef846187fa0d5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "line": "145",
+      "directive": "if",
+      "expression": "defined(CCPU) || !defined(PROD)",
+      "chain_start": "145",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "5b60766bdf653349207ab6e9c0e6310b12bc4960dd0cac37659ef846187fa0d5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "line": "175",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "175",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "5b60766bdf653349207ab6e9c0e6310b12bc4960dd0cac37659ef846187fa0d5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "line": "200",
+      "directive": "ifdef",
+      "expression": "CCPU",
+      "chain_start": "200",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "5b60766bdf653349207ab6e9c0e6310b12bc4960dd0cac37659ef846187fa0d5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "line": "202",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "200",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "5b60766bdf653349207ab6e9c0e6310b12bc4960dd0cac37659ef846187fa0d5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "line": "226",
+      "directive": "if",
+      "expression": "defined(CCPU) || !defined(PROD)",
+      "chain_start": "226",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "5b60766bdf653349207ab6e9c0e6310b12bc4960dd0cac37659ef846187fa0d5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "line": "227",
+      "directive": "ifdef",
+      "expression": "CCPU",
+      "chain_start": "227",
+      "depth": "3",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "5b60766bdf653349207ab6e9c0e6310b12bc4960dd0cac37659ef846187fa0d5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "line": "410",
+      "directive": "ifdef",
+      "expression": "CCPU",
+      "chain_start": "410",
+      "depth": "3",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "5b60766bdf653349207ab6e9c0e6310b12bc4960dd0cac37659ef846187fa0d5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "line": "544",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "544",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "5b60766bdf653349207ab6e9c0e6310b12bc4960dd0cac37659ef846187fa0d5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "line": "575",
+      "directive": "ifdef",
+      "expression": "CCPU",
+      "chain_start": "575",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "5b60766bdf653349207ab6e9c0e6310b12bc4960dd0cac37659ef846187fa0d5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "line": "577",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "575",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "5b60766bdf653349207ab6e9c0e6310b12bc4960dd0cac37659ef846187fa0d5"
+    }
+  ],
+  "review": "Three product-selected local CCPU host bindings are preserved. No interrupt or monitor behavior was added or changed. Original conditional groups align recursively through retained bodies; existing errors have original physical LF line anchors.",
+  "limitations": "Build, release comparison and final context audit pending; no guest changes."
+}

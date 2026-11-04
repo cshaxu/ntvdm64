@@ -6443,11 +6443,11 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "sha256": "8a6ac4cbc55e1a10577b52da591406924fac41d8aac5f8beff65fa0d5a4a0c19",
+      "sha256": "bf32db30e7b29aca44a32ddc5d562b72b0016cf7e1bcb1f374b821c82e911b85",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "deferred-depth1-original-alignment",
-      "additional_evidence": "s13-r925-ntgraph-structure-review.json",
+      "review_status": "completed-original-conditional-tree-with-local-binding",
+      "additional_evidence": "s13-r1196-ntgraph-full-file.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
       "original_candidate_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9"
     },
@@ -6473,11 +6473,11 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
-      "sha256": "5b60766bdf653349207ab6e9c0e6310b12bc4960dd0cac37659ef846187fa0d5",
+      "sha256": "af6fb9b8b2d4da4279b74cba68a133718299d5507aab5f77e2a7d1e2a4c6c9ea",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "partial-per-file-outer-reviewed",
-      "additional_evidence": "s13-r926-ordered-positive-witnesses.json",
+      "review_status": "completed-original-conditional-tree-with-local-binding",
+      "additional_evidence": "s13-r1184-inthk-full-file.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_inthk.c",
       "original_candidate_sha256": "a3465d006a88549ce5fd52ac3f8d9c0dcf1f2b2c6825f35db3d2dc683fbc7abe"
     },
@@ -6523,11 +6523,11 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
-      "sha256": "1d4e65988002a18893b21312411f24573094591f2f784fac182d6c72bfb3407e",
+      "sha256": "5f5af06255f2d66d9bc44da5aef441d4d6f22173d5014f548fc26c25d46755ca",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "deferred-depth1-original-alignment",
-      "additional_evidence": "s13-r927-ntmsscs-structure-review.json",
+      "review_status": "completed-original-conditional-tree-with-local-binding",
+      "additional_evidence": "s13-r1185-msscs-full-file.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_msscs.c",
       "original_candidate_sha256": "96ee0fb677da9f35811f9dc1715d583474ce72bba9fa91f5eb2d5f6ab242b0c3"
     },
@@ -6573,11 +6573,11 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
-      "sha256": "224bb7b8b8d508ed52277f710fa14e133b8e3cac4c0ce7778ea6c28d7c9b20b7",
+      "sha256": "c785a743a5f7fdcf847dc629566f61f24e811a9b6e825e4a918daaa801048955",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "partial-per-file-outer-reviewed",
-      "additional_evidence": "s13-r929-ntreset-context.json",
+      "review_status": "completed-original-conditional-tree-with-local-binding",
+      "additional_evidence": "s13-r1186-ntreset-full-file.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_reset.c",
       "original_candidate_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47"
     },
@@ -7036,8 +7036,8 @@
       "sha256": "ea44381521bce269bb4ef98f2918772d2a9b5597af6e3774b27ff3654186d399",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "deferred-depth1-original-alignment",
-      "additional_evidence": "s13-r935-precomp-structure-review.json",
+      "review_status": "completed-original-conditional-tree-with-local-binding",
+      "additional_evidence": "s13-r1187-local-full-file.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\precomp.h",
       "original_candidate_sha256": "b4841d516682f6677332fede6ca47187bfdc132a288f71564378a1c87f7bb314"
     },
@@ -7583,11 +7583,11 @@
     },
     {
       "path": "src/mvdm-host/wow32/wkman.c",
-      "sha256": "782cc4d0ec0f02cabdd28cd36b0884a5800e60c8404556ac3e823b9909674a78",
+      "sha256": "3d7dc16c2901576be435addce37911830a3f4941021290a8e188735200f2fbeb",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "deferred-depth1-original-alignment",
-      "additional_evidence": "s13-r937-wkman-structure-review.json",
+      "review_status": "completed-original-conditional-tree-with-local-binding",
+      "additional_evidence": "s13-r1189-wkman-full-file.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkman.c",
       "original_candidate_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
@@ -7943,11 +7943,11 @@
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
-      "sha256": "9fc8d81ebc5953ae48666733f4c90006b9817bdcf8a4974f01fe3ce173d7ec2e",
+      "sha256": "5ff08949ec04a28cfe9fff1e10f0af02c6f86c285d4e7ed8b55697cdc91ec99c",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "deferred-depth1-original-alignment",
-      "additional_evidence": "s13-r939-wow32-structure-review.json",
+      "review_status": "completed-original-conditional-tree-with-local-binding",
+      "additional_evidence": "s13-r1188-wow32-full-file.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.c",
       "original_candidate_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
@@ -8343,11 +8343,11 @@
     },
     {
       "path": "src/mvdm-host/wow32/wuclass.c",
-      "sha256": "b774170902ac10f673cf22b1dd963f9f7531c2b80794138140d10698411b4b62",
+      "sha256": "4b6b8ff9bf6b1dae173b7e86b9de2283fe317bbde4e3a93861ae9e1c5256bcd0",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "deferred-depth1-original-alignment",
-      "additional_evidence": "s13-r941-wuclass-structure-review.json",
+      "review_status": "completed-original-conditional-tree-with-local-binding",
+      "additional_evidence": "s13-r1190-wuclass-full-file.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuclass.c",
       "original_candidate_sha256": "12cdd44dfec6b74a426165977f941da86d90bbad7aa9c59a085010d02528629d"
     },
@@ -8663,11 +8663,11 @@
     },
     {
       "path": "src/mvdm-host/wow32/wuwind.c",
-      "sha256": "8ddc9c7718a6466ca26122bdd133f6b16d5500fabc87a107832870d23e56e70c",
+      "sha256": "be552dd9426c07ea19f390869b596307f70affcfd63015d206807882ccbdcf52",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "deferred-depth1-original-alignment",
-      "additional_evidence": "s13-r943-wuwind-structure-review.json",
+      "review_status": "completed-original-conditional-tree-with-local-binding",
+      "additional_evidence": "s13-r1191-wuwind-full-file.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuwind.c",
       "original_candidate_sha256": "ab270e2669cfd383da4baac471bb63e7c9c603581f4f7592ad447e8a783953dc"
     },
@@ -8746,8 +8746,8 @@
       "sha256": "b414e7f1a100e23b42b1022232af5b3d04df01b9784d3536316fb7a43cec9df2",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "deferred-depth1-original-alignment",
-      "additional_evidence": "s13-r947-xmsmemr-structure-review.json",
+      "review_status": "completed-original-conditional-tree-with-local-binding",
+      "additional_evidence": "s13-r1192-local-full-file.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\xms.486\\xmsmemr.c",
       "original_candidate_sha256": "70970ed738101458f8036b5a283f034eb64baf32ead84a59a6b02278b327612c"
     },
@@ -9986,8 +9986,8 @@
       "sha256": "2010ed20ec5d8e7de16b669ac79323e243b8288cb7dec4d24a0e74b730a2de51",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "partial-per-file-outer-reviewed",
-      "additional_evidence": "s13-r988-dlgbegin-context.json",
+      "review_status": "completed-original-conditional-tree-with-local-binding",
+      "additional_evidence": "s13-r1193-dlgbegin-full-file.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgbegin.c",
       "original_candidate_sha256": "c3df77a2987e97df8872c3dab8f6e7c10a08850c5ebcb439c0ec1dc88b0cdc44"
     },
@@ -10003,11 +10003,11 @@
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
-      "sha256": "9773be462ca938c80c9491aa56c55bec01d2f0ea1b1063a14d5a8c2852bcd8f2",
+      "sha256": "b3b9b914a4609ae4e2ca471e929c220f5be3abc0ae5e3b63448fbe9a4b86a1d6",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "partial-per-file-outer-reviewed",
-      "additional_evidence": "s13-r990-dlgmgr-context.json",
+      "review_status": "completed-original-conditional-tree-with-local-binding",
+      "additional_evidence": "s13-r1194-dlgmgr-full-file.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgmgr.c",
       "original_candidate_sha256": "8e2383f52e4e3f65f656bd492143d7a8ed5d0a2526ad8e6af10d242465ff8d7a"
     },
@@ -10233,11 +10233,11 @@
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
-      "sha256": "52c57b595b684deb80a3220d49f23a529558834fc4d711139bafbc940ac066e1",
+      "sha256": "fe9a83fff74597c0799da733cf4e9a620163161c7bd65a61eab5da2ecf9b23bb",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "deferred-depth1-original-alignment",
-      "additional_evidence": "s13-r997-mngrayc-structure-review.json",
+      "review_status": "completed-original-conditional-tree-with-local-binding",
+      "additional_evidence": "s13-r1195-mngrayc-full-file.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\mngrayc.c",
       "original_candidate_sha256": "171ef0b7cd668cf51db86d9ae2fea4269cc002f0aba17033bf968d84c10f0f3d"
     },

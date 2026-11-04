@@ -1,0 +1,207 @@
+{
+  "path": "src/mvdm-host/wow32/wuwind.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuwind.c",
+  "original_sha256": "ab270e2669cfd383da4baac471bb63e7c9c603581f4f7592ad447e8a783953dc",
+  "current_sha256": "be552dd9426c07ea19f390869b596307f70affcfd63015d206807882ccbdcf52",
+  "local_ntvdm_groups": [
+    1701,
+    1712,
+    1717,
+    2464,
+    2477,
+    2515,
+    2532,
+    2537
+  ],
+  "prior_selection_records": [
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "line": "888",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "chain_start": "888",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "7833fa05f1c91129f88c6d625bb4c104801901806bf9b0b4ee40ded820a45cef"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "line": "1645",
+      "directive": "if",
+      "expression": "(GWL_WNDPROC != (-4) || GWL_STYLE != (-16) || GWL_EXSTYLE != (-20))",
+      "chain_start": "1645",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "7833fa05f1c91129f88c6d625bb4c104801901806bf9b0b4ee40ded820a45cef"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "line": "1649",
+      "directive": "ifndef",
+      "expression": "WIN16_GWW_HINSTANCE",
+      "chain_start": "1649",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "7833fa05f1c91129f88c6d625bb4c104801901806bf9b0b4ee40ded820a45cef"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "line": "1705",
+      "directive": "ifdef",
+      "expression": "WOW_USER_PRIVATE_REDIRECT",
+      "chain_start": "1705",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "7833fa05f1c91129f88c6d625bb4c104801901806bf9b0b4ee40ded820a45cef"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "line": "1710",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "1705",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "7833fa05f1c91129f88c6d625bb4c104801901806bf9b0b4ee40ded820a45cef"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "line": "1715",
+      "directive": "ifdef",
+      "expression": "WOW_USER_PRIVATE_REDIRECT",
+      "chain_start": "1715",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "7833fa05f1c91129f88c6d625bb4c104801901806bf9b0b4ee40ded820a45cef"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "line": "1720",
+      "directive": "ifdef",
+      "expression": "WOW_USER_PRIVATE_REDIRECT",
+      "chain_start": "1720",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "7833fa05f1c91129f88c6d625bb4c104801901806bf9b0b4ee40ded820a45cef"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "line": "2003",
+      "directive": "if",
+      "expression": "(GWL_HINSTANCE != (-6) || GWL_HWNDPARENT != (-8) || GWL_ID != (-12))",
+      "chain_start": "2003",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "7833fa05f1c91129f88c6d625bb4c104801901806bf9b0b4ee40ded820a45cef"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "line": "2450",
+      "directive": "if",
+      "expression": "(GWL_WNDPROC != (-4) || GWL_STYLE != (-16) || GWL_EXSTYLE != (-20))",
+      "chain_start": "2450",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "7833fa05f1c91129f88c6d625bb4c104801901806bf9b0b4ee40ded820a45cef"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "line": "2467",
+      "directive": "ifdef",
+      "expression": "WOW_USER_PRIVATE_REDIRECT",
+      "chain_start": "2467",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "7833fa05f1c91129f88c6d625bb4c104801901806bf9b0b4ee40ded820a45cef"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "line": "2480",
+      "directive": "ifdef",
+      "expression": "WOW_USER_PRIVATE_REDIRECT",
+      "chain_start": "2480",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "7833fa05f1c91129f88c6d625bb4c104801901806bf9b0b4ee40ded820a45cef"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "line": "2483",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "2480",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "7833fa05f1c91129f88c6d625bb4c104801901806bf9b0b4ee40ded820a45cef"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "line": "2517",
+      "directive": "ifdef",
+      "expression": "WOW_USER_PRIVATE_REDIRECT",
+      "chain_start": "2517",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "7833fa05f1c91129f88c6d625bb4c104801901806bf9b0b4ee40ded820a45cef"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "line": "2520",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "2517",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "7833fa05f1c91129f88c6d625bb4c104801901806bf9b0b4ee40ded820a45cef"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "line": "2533",
+      "directive": "ifdef",
+      "expression": "WOW_USER_PRIVATE_REDIRECT",
+      "chain_start": "2533",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "7833fa05f1c91129f88c6d625bb4c104801901806bf9b0b4ee40ded820a45cef"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "line": "2538",
+      "directive": "ifdef",
+      "expression": "WOW_USER_PRIVATE_REDIRECT",
+      "chain_start": "2538",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "7833fa05f1c91129f88c6d625bb4c104801901806bf9b0b4ee40ded820a45cef"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "line": "2855",
+      "directive": "if",
+      "expression": "(GWL_HINSTANCE != (-6) || GWL_HWNDPARENT != (-8) || GWL_ID != (-12))",
+      "chain_start": "2855",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "7833fa05f1c91129f88c6d625bb4c104801901806bf9b0b4ee40ded820a45cef"
+    }
+  ],
+  "review": "Eight observed selected local USER private-procedure bindings are retained; their unselected alternatives already contain explicit errors. Original conditional groups align recursively through retained bodies; existing errors have original physical LF line anchors.",
+  "limitations": "Build, release comparison and final context audit pending; no guest changes."
+}

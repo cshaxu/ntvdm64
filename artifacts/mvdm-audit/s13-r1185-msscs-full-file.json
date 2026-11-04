@@ -1,0 +1,179 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_msscs.c",
+  "original_sha256": "96ee0fb677da9f35811f9dc1715d583474ce72bba9fa91f5eb2d5f6ab242b0c3",
+  "current_sha256": "5f5af06255f2d66d9bc44da5aef441d4d6f22173d5014f548fc26c25d46755ca",
+  "local_ntvdm_groups": [
+    141,
+    284
+  ],
+  "prior_selection_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "line": "96",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "96",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "96cb3b9de596a3c7ec9ace3693167329e8306c7c7400ea5ed45105a34c8c4719"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "line": "118",
+      "directive": "ifdef",
+      "expression": "LIM",
+      "chain_start": "118",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "96cb3b9de596a3c7ec9ace3693167329e8306c7c7400ea5ed45105a34c8c4719"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "line": "140",
+      "directive": "ifdef",
+      "expression": "CPU_40_STYLE",
+      "chain_start": "140",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "96cb3b9de596a3c7ec9ace3693167329e8306c7c7400ea5ed45105a34c8c4719"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "line": "142",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "140",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "96cb3b9de596a3c7ec9ace3693167329e8306c7c7400ea5ed45105a34c8c4719"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "line": "155",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "155",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "96cb3b9de596a3c7ec9ace3693167329e8306c7c7400ea5ed45105a34c8c4719"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "line": "171",
+      "directive": "ifdef",
+      "expression": "LIM",
+      "chain_start": "171",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "96cb3b9de596a3c7ec9ace3693167329e8306c7c7400ea5ed45105a34c8c4719"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "line": "207",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "207",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "96cb3b9de596a3c7ec9ace3693167329e8306c7c7400ea5ed45105a34c8c4719"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "line": "224",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "224",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "96cb3b9de596a3c7ec9ace3693167329e8306c7c7400ea5ed45105a34c8c4719"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "line": "278",
+      "directive": "if",
+      "expression": "defined(MVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION)",
+      "chain_start": "278",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "96cb3b9de596a3c7ec9ace3693167329e8306c7c7400ea5ed45105a34c8c4719"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "line": "285",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "278",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "96cb3b9de596a3c7ec9ace3693167329e8306c7c7400ea5ed45105a34c8c4719"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "line": "343",
+      "directive": "ifdef",
+      "expression": "LIM",
+      "chain_start": "343",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "96cb3b9de596a3c7ec9ace3693167329e8306c7c7400ea5ed45105a34c8c4719"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "line": "580",
+      "directive": "ifdef",
+      "expression": "EMM_DEBUG",
+      "chain_start": "580",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "96cb3b9de596a3c7ec9ace3693167329e8306c7c7400ea5ed45105a34c8c4719"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "line": "620",
+      "directive": "ifdef",
+      "expression": "EMM_DEBUG",
+      "chain_start": "620",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "96cb3b9de596a3c7ec9ace3693167329e8306c7c7400ea5ed45105a34c8c4719"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "line": "653",
+      "directive": "ifdef",
+      "expression": "EMM_DEBUG",
+      "chain_start": "653",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "96cb3b9de596a3c7ec9ace3693167329e8306c7c7400ea5ed45105a34c8c4719"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "line": "1096",
+      "directive": "ifdef",
+      "expression": "X86GFX",
+      "chain_start": "1096",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "96cb3b9de596a3c7ec9ace3693167329e8306c7c7400ea5ed45105a34c8c4719"
+    }
+  ],
+  "review": "Excluded the original i386 alternative as a whole: both actual nt_msscs.obj commands omit i386, select CPU40 and retain the non-i386 original state path. Two local CPU40 and boot-file-mutation guards remain. Original conditional groups align recursively through retained bodies; existing errors have original physical LF line anchors.",
+  "limitations": "Build, release comparison and final context audit pending; no guest changes."
+}

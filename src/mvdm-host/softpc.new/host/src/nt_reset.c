@@ -23,6 +23,7 @@
 #line 23
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
+#line 25
 
 #include <sys\types.h>
 #include "xt.h"
@@ -77,7 +78,7 @@ extern char achES[];
 #line 71
 #error Excluded unsupported monitor IVT declarations
 #endif
-#line 71
+#line 73
 
 
 extern IU8 lcifo[];
@@ -115,6 +116,7 @@ host_reset()
 #line 99
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
+#line 101
 
     if (host_stream_io_enabled) {
 	sc.ScreenState = STREAM_IO;
@@ -131,7 +133,7 @@ host_reset()
 #line 114
 #error Excluded original conditional branch
 #endif  /* MONITOR */
-#line 119
+#line 124
 
 
     //
@@ -143,7 +145,7 @@ host_reset()
 #line 133
 #error Excluded unsupported monitor ICA initialization wait
 #endif
-#line 126
+#line 135
 
 
     host_ica_unlock();
@@ -161,6 +163,7 @@ host_reset()
 
     host_idle_init();		// host sleep event creation
 #endif  /* HUNTER */
+#line 148
 
 
 }
@@ -317,6 +320,7 @@ host_applClose(void)
 #line 293
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif // X86GFX
+#line 296
 
 
 
@@ -353,6 +357,7 @@ void host_terminate(void)
 #line 325
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
+#line 328
 
     if(VDMForWOW)
         ExitVDM(VDMForWOW,(ULONG)-1);    /* Kill everything for WOW VDM */

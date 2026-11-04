@@ -1,0 +1,11 @@
+{
+  "ended": "2026-11-04T00:33:59.5895298-08:00",
+  "pid": 34512,
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\r1196-full.log",
+  "exit_code": 0,
+  "script_sha256": "A71DDC9DB087A8FA973C8BF382E8AF3597769CF65A7F838F8B467AB2ADB27035",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\r1196-full.stderr.log",
+  "started": "2026-11-04T00:27:31.0874821-08:00",
+  "command": "pwsh -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\r1196-full-body.ps1",
+  "workdir": "O:\\repos.hobby\\ntvdm64"
+}

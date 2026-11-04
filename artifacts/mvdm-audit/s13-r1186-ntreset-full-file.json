@@ -1,0 +1,112 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_reset.c",
+  "original_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47",
+  "current_sha256": "c785a743a5f7fdcf847dc629566f61f24e811a9b6e825e4a918daaa801048955",
+  "local_ntvdm_groups": [
+    155
+  ],
+  "prior_selection_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "line": "22",
+      "directive": "ifdef",
+      "expression": "X86GFX",
+      "chain_start": "22",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "e06db78d93bf98b5d08d7349c3e8871ca95c7b0016df4c5d0afef157fc398555"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "line": "104",
+      "directive": "ifdef",
+      "expression": "X86GFX",
+      "chain_start": "104",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "e06db78d93bf98b5d08d7349c3e8871ca95c7b0016df4c5d0afef157fc398555"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "line": "130",
+      "directive": "ifdef",
+      "expression": "HUNTER",
+      "chain_start": "130",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "e06db78d93bf98b5d08d7349c3e8871ca95c7b0016df4c5d0afef157fc398555"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "line": "132",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "130",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "e06db78d93bf98b5d08d7349c3e8871ca95c7b0016df4c5d0afef157fc398555"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "line": "133",
+      "directive": "ifdef",
+      "expression": "X86GFX",
+      "chain_start": "133",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "e06db78d93bf98b5d08d7349c3e8871ca95c7b0016df4c5d0afef157fc398555"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "line": "291",
+      "directive": "ifdef",
+      "expression": "X86GFX",
+      "chain_start": "291",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "e06db78d93bf98b5d08d7349c3e8871ca95c7b0016df4c5d0afef157fc398555"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "line": "326",
+      "directive": "ifdef",
+      "expression": "HUNTER",
+      "chain_start": "326",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "e06db78d93bf98b5d08d7349c3e8871ca95c7b0016df4c5d0afef157fc398555"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "line": "362",
+      "directive": "ifdef",
+      "expression": "NOTUSEDNOTUSED",
+      "chain_start": "362",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "e06db78d93bf98b5d08d7349c3e8871ca95c7b0016df4c5d0afef157fc398555"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "line": "371",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "371",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "e06db78d93bf98b5d08d7349c3e8871ca95c7b0016df4c5d0afef157fc398555"
+    }
+  ],
+  "review": "One local X86GFX guard already rejects the unsupported graphics path. Actual nt_reset.obj commands omit MONITOR and X86GFX; selected non-monitor code remains. Original conditional groups align recursively through retained bodies; existing errors have original physical LF line anchors.",
+  "limitations": "Build, release comparison and final context audit pending; no guest changes."
+}

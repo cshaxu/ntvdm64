@@ -176,6 +176,7 @@ ULONG FASTCALL WK32WaitEvent(PVDMFRAME pFrame)
 ULONG FASTCALL WK32KernelTrace(PVDMFRAME pFrame)
 {
 #ifdef DEBUG
+#line 159
 #error Excluded unsupported DEBUG WOW profile
 #else
 #line 201
@@ -523,6 +524,7 @@ ULONG FASTCALL WK32WOWInitTask(PVDMFRAME pFrame)
     HANDLE hThread;
 
 #if FASTBOPPING
+#line 541
 #error Unsupported excluded original configuration
 #else
 #line 566
@@ -569,6 +571,7 @@ ULONG FASTCALL WK32WOWInitTask(PVDMFRAME pFrame)
     }
 
 #ifdef DEBUG
+#line 582
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 596
@@ -800,12 +803,13 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
     PWOWINITTASK16 pArg16;
     PTDB     ptdb;
 #if FASTBOPPING
+#line 824
 #error Unsupported excluded original configuration
 #else
 #line 851
     USHORT SaveIp;
 #endif
-#line 853
+#line 827
 
     td.hThread = NULL;
 
@@ -842,6 +846,7 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
             VPVOID vpStack;
 
 #if FASTBOPPING
+#line 863
 #error Unsupported excluded original configuration
 #else
 #line 891
@@ -856,6 +861,7 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
         }
 
 #if FASTBOPPING
+#line 875
 #error Unsupported excluded original configuration
 #else
 #line 904
@@ -1112,6 +1118,7 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
     WOW32ASSERT(pFrame->wTDB == td.htask16);
 
 #if FASTBOPPING
+#line 1124
 #error Unsupported excluded original configuration
 #else
 #line 1158
@@ -1151,15 +1158,18 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
     BlockWOWIdle(FALSE);
 
 #ifdef DEBUG
+#line 1161
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 1172
 
 #if NO_W32TRYCALL
+#line 1174
 #error Excluded unsupported NO_W32TRYCALL WOW profile
 #endif
 #line 1179
 #if FASTBOPPING
+#line 1180
 #error Unsupported excluded original configuration
 #else
 #line 1183
@@ -1169,6 +1179,7 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
 #endif
 #line 1187
 #if NO_W32TRYCALL
+#line 1188
 #error Excluded unsupported NO_W32TRYCALL WOW profile
 #endif
 #line 1192
@@ -1178,6 +1189,7 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
     //
 
 #ifdef DEBUG
+#line 1198
 #error Excluded unsupported DEBUG WOW profile
 #else
 #line 1200
@@ -1330,9 +1342,10 @@ DWORD W32RemoteThread(VOID)
     vcSave.Eip   = getIP();
     vcSave.Esp   = getSP();
 #if FASTBOPPING
+#line 1342
 #error Unsupported excluded original configuration
 #endif
-#line 1377
+#line 1348
 
     wPrevTDB = *pCurTDB;
 
@@ -1352,6 +1365,7 @@ DWORD W32RemoteThread(VOID)
     setDI( (WORD)vcRemote.Edi );
     setBP( (WORD)vcRemote.Ebp );
 #if FASTBOPPING
+#line 1367
 #error Unsupported excluded original configuration
 #else
 #line 1373
@@ -1393,6 +1407,7 @@ DWORD W32RemoteThread(VOID)
     //   Start Callback
     //
 #if FASTBOPPING
+#line 1410
 #error Unsupported excluded original configuration
 #else
 #line 1442
@@ -1407,6 +1422,7 @@ DWORD W32RemoteThread(VOID)
     //
 
 #ifdef DEBUG
+#line 1423
 #error Excluded unsupported DEBUG WOW profile
 #else
 #line 1425
@@ -1566,6 +1582,7 @@ VOID FASTCALL WK32KillRemoteTask(PVDMFRAME pFrame)
     vcRemote.Edi   = getDI();
     vcRemote.Ebp   = getBP();
 #if FASTBOPPING
+#line 1578
 #error Unsupported excluded original configuration
 #else
 #line 1591
@@ -1610,9 +1627,10 @@ VOID FASTCALL WK32KillRemoteTask(PVDMFRAME pFrame)
         setIP( (WORD)vcSave.Eip );
         setSP( (WORD)vcSave.Esp );
 #if FASTBOPPING
+#line 1631
 #error Unsupported excluded original configuration
 #endif
-#line 1668
+#line 1637
     } else {
         //
         // Decrement the count of 16-bit tasks so that the last one,
@@ -2436,6 +2454,7 @@ ULONG FASTCALL WK32WOWOutputDebugString(PVDMFRAME pFrame)
     GETPSZPTRNOLOG(parg16->vpString, psz1);
 
 #ifdef DEBUG            // So we can intermingle LOGGER output & WOW Logging
+#line 2452
 #error Excluded unsupported DEBUG WOW profile
 #else
 #line 2472
@@ -4402,6 +4421,7 @@ ULONG FASTCALL WK32FatalExit(PVDMFRAME pFrame)
 //
 
 #ifdef DEBUG
+#line 4411
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 4479

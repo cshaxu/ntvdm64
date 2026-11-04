@@ -1,0 +1,72 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\mngrayc.c",
+  "original_sha256": "171ef0b7cd668cf51db86d9ae2fea4269cc002f0aba17033bf968d84c10f0f3d",
+  "current_sha256": "fe9a83fff74597c0799da733cf4e9a620163161c7bd65a61eab5da2ecf9b23bb",
+  "local_ntvdm_groups": [
+    7,
+    153,
+    194,
+    439,
+    449
+  ],
+  "prior_selection_records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "line": "7",
+      "directive": "ifdef",
+      "expression": "WOW_ORIGINAL_STATE_DRAWING",
+      "chain_start": "7",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "08cae4b34614eaaed41bdadd27c6f92d6161164ff787ef95cf72ccf22bde982a"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "line": "147",
+      "directive": "if",
+      "expression": "0",
+      "chain_start": "147",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "08cae4b34614eaaed41bdadd27c6f92d6161164ff787ef95cf72ccf22bde982a"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "line": "183",
+      "directive": "if",
+      "expression": "0",
+      "chain_start": "183",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "08cae4b34614eaaed41bdadd27c6f92d6161164ff787ef95cf72ccf22bde982a"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "line": "429",
+      "directive": "ifdef",
+      "expression": "WOW_ORIGINAL_BUTTON_ATLAS",
+      "chain_start": "429",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "08cae4b34614eaaed41bdadd27c6f92d6161164ff787ef95cf72ccf22bde982a"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "line": "439",
+      "directive": "ifndef",
+      "expression": "WOW_ORIGINAL_BUTTON_BLIT_ONLY",
+      "chain_start": "439",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "08cae4b34614eaaed41bdadd27c6f92d6161164ff787ef95cf72ccf22bde982a"
+    }
+  ],
+  "review": "Five selected local original-state drawing and button binding groups are preserved. Original literal false branches remain explicit errors. Original conditional groups align recursively through retained bodies; existing errors have original physical LF line anchors.",
+  "limitations": "Build, release comparison and final context audit pending; no guest changes."
+}

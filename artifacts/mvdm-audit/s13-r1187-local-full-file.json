@@ -1,0 +1,43 @@
+{
+  "path": "src/mvdm-host/wow32/precomp.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\precomp.h",
+  "original_sha256": "b4841d516682f6677332fede6ca47187bfdc132a288f71564378a1c87f7bb314",
+  "current_sha256": "ea44381521bce269bb4ef98f2918772d2a9b5597af6e3774b27ff3654186d399",
+  "selected_local_conditions": [
+    {
+      "path": "src/mvdm-host/wow32/precomp.h",
+      "line": "24",
+      "directive": "ifndef",
+      "expression": "_WOWNT32_",
+      "chain_start": "24",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "ea44381521bce269bb4ef98f2918772d2a9b5597af6e3774b27ff3654186d399"
+    },
+    {
+      "path": "src/mvdm-host/wow32/precomp.h",
+      "line": "45",
+      "directive": "ifdef",
+      "expression": "_X86_",
+      "chain_start": "45",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "ea44381521bce269bb4ef98f2918772d2a9b5597af6e3774b27ff3654186d399"
+    },
+    {
+      "path": "src/mvdm-host/wow32/precomp.h",
+      "line": "144",
+      "directive": "ifdef",
+      "expression": "WOW_ORIGINAL_THUNK_BUILD",
+      "chain_start": "144",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "ea44381521bce269bb4ef98f2918772d2a9b5597af6e3774b27ff3654186d399"
+    }
+  ],
+  "review": "Original has no conditional groups. Current product-binding selectors are observed selected or already explicitly excluded. No source edit.",
+  "limitations": "Selection witness and source comparison only; no runtime behavior claim."
+}

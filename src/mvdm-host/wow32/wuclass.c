@@ -250,8 +250,10 @@ ULONG FASTCALL WU32GetClassLong(PVDMFRAME pFrame)
     // Make sure Win32 didn't change offsets for GCL constants
 
 #if (GCL_WNDPROC != (-24) || GCL_MENUNAME != (-8))
+#line 255
 #error Win16/Win32 GCL constants differ
 #endif
+#line 257
 
     // Make sure the 16-bit app is requesting allowable offsets
 
@@ -430,8 +432,10 @@ ULONG FASTCALL WU32GetClassWord(PVDMFRAME pFrame)
     // Make sure Win32 didn't change offsets
 
 #if (GCL_HBRBACKGROUND != (-10) || GCL_HCURSOR != (-12) || GCL_HICON != (-14) || GCL_HMODULE != (-16) || GCL_CBWNDEXTRA != (-18) || GCL_CBCLSEXTRA != (-20) || GCL_STYLE != (-26))
+#line 420
 #error Win16/Win32 class-word constants differ
 #endif
+#line 422
 
     // Make sure the 16-bit app is requesting allowable offsets
     // (It's just assertion code, so it doesn't have to be pretty! -JTP)
@@ -711,8 +715,10 @@ ULONG FASTCALL WU32SetClassLong(PVDMFRAME pFrame)
     // Make sure Win32 didn't change offsets for GCL constants
 
 #if (GCL_MENUNAME != (-8) || GCL_WNDPROC != (-24))
+#line 701
 #error Win16/Win32 GCL constants differ
 #endif
+#line 703
 
     // Make sure the 16-bit app is requesting allowable offsets
 
@@ -946,8 +952,10 @@ ULONG FASTCALL WU32SetClassWord(PVDMFRAME pFrame)
     // Make sure Win32 didn't change offsets
 
 #if (GCL_HBRBACKGROUND != (-10) || GCL_HCURSOR != (-12) || GCL_HICON != (-14) || GCL_CBWNDEXTRA != (-18) || GCL_CBCLSEXTRA != (-20) || GCL_STYLE != (-26))
+#line 911
 #error Win16/Win32 GCW constants differ
 #endif
+#line 913
 
     // Make sure the 16-bit app is requesting allowable offsets
     // (It's just assertion code, so it doesn't have to be pretty! -JTP)

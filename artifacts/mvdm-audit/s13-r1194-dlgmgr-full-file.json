@@ -1,0 +1,123 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgmgr.c",
+  "original_sha256": "8e2383f52e4e3f65f656bd492143d7a8ed5d0a2526ad8e6af10d242465ff8d7a",
+  "current_sha256": "b3b9b914a4609ae4e2ca471e929c220f5be3abc0ae5e3b63448fbe9a4b86a1d6",
+  "local_ntvdm_groups": [
+    318
+  ],
+  "prior_selection_records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "line": "94",
+      "directive": "ifdef",
+      "expression": "SYSMODALWINDOWS",
+      "chain_start": "94",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "2fbd567b9a4c88db59aca25ce63d4d4e94639daf3d2a1352798a9441af79d345"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "line": "315",
+      "directive": "if",
+      "expression": "defined(WOW_ORIGINAL_DIALOG_MANAGER)",
+      "chain_start": "315",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "2fbd567b9a4c88db59aca25ce63d4d4e94639daf3d2a1352798a9441af79d345"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "line": "448",
+      "directive": "ifdef",
+      "expression": "WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+      "chain_start": "448",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "2fbd567b9a4c88db59aca25ce63d4d4e94639daf3d2a1352798a9441af79d345"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "line": "509",
+      "directive": "ifdef",
+      "expression": "WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+      "chain_start": "509",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "2fbd567b9a4c88db59aca25ce63d4d4e94639daf3d2a1352798a9441af79d345"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "line": "514",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "509",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "2fbd567b9a4c88db59aca25ce63d4d4e94639daf3d2a1352798a9441af79d345"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "line": "524",
+      "directive": "ifdef",
+      "expression": "WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+      "chain_start": "524",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "2fbd567b9a4c88db59aca25ce63d4d4e94639daf3d2a1352798a9441af79d345"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "line": "527",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "524",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "2fbd567b9a4c88db59aca25ce63d4d4e94639daf3d2a1352798a9441af79d345"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "line": "940",
+      "directive": "ifndef",
+      "expression": "WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+      "chain_start": "940",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "2fbd567b9a4c88db59aca25ce63d4d4e94639daf3d2a1352798a9441af79d345"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "line": "995",
+      "directive": "ifdef",
+      "expression": "WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+      "chain_start": "995",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "2fbd567b9a4c88db59aca25ce63d4d4e94639daf3d2a1352798a9441af79d345"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "line": "997",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "995",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "2fbd567b9a4c88db59aca25ce63d4d4e94639daf3d2a1352798a9441af79d345"
+    }
+  ],
+  "review": "One selected local dialog-manager group is preserved. Within it, four unselected native-dialog-owner alternatives were replaced with errors and mapped to original lines 474, 482, 884 and 937; the selected owner is defined by product precomp and the call-boundary fixture flags. Original conditional groups align recursively through retained bodies; existing errors have original physical LF line anchors.",
+  "limitations": "Build, release comparison and final context audit pending; no guest changes."
+}

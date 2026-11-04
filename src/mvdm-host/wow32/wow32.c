@@ -65,6 +65,7 @@ MODNAME(wow32.c);
 
 // for logging iloglevel to a file
 #ifdef DEBUG
+#line 54
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 59
@@ -77,6 +78,7 @@ MODNAME(wow32.c);
  */
 INT     flOptions = 0;           // command line optin
 #ifdef DEBUG
+#line 68
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 71
@@ -84,15 +86,18 @@ INT     flOptions = 0;           // command line optin
 HANDLE  hmodWOW32;
 HANDLE  hHostInstance = 0;
 #ifdef DEBUG
+#line 75
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 78
 #ifdef i386
+#line 79
 #error DIVERGENCE MVDM-HOST-DIV-589: historical i386 WOW branch is not selected
 #endif
 #line 81
 
 #ifdef DEBUG
+#line 83
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 92
@@ -446,6 +451,7 @@ BOOL W32Init(VOID)
 {
     HKEY  WowKey = NULL;
 #ifdef DEBUG
+#line 464
 #error DIVERGENCE MVDM-HOST-DIV-595: DEBUG initialization profile is not selected
 #endif
 #line 468
@@ -610,6 +616,7 @@ BOOL W32Init(VOID)
     }
 
 #ifdef DEBUG
+#line 612
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 673
@@ -668,6 +675,7 @@ BOOL W32Init(VOID)
     ghProcess = NtCurrentProcess();
 
 #ifdef DEBUG
+#line 727
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 745
@@ -700,11 +708,13 @@ BOOL W32Init(VOID)
  *
  */
 #ifdef DEBUG_OR_WOWPROFILE
+#line 774
 #error Excluded unsupported WOW profiling configuration
 #endif
 #line 778
 
 #ifdef DEBUG_OR_WOWPROFILE // define symbols for API profiling only (debugger extension)
+#line 780
 #error Excluded unsupported WOW profiling configuration
 #endif // WOWPROFILE
 #line 784
@@ -725,6 +735,7 @@ BOOL W32Init(VOID)
 ULONG FASTCALL WOW32UnimplementedAPI(PVDMFRAME pFrame)
 {
 #ifdef DEBUG
+#line 801
 #error Excluded unsupported DEBUG WOW profile
 #else
 #line 812
@@ -736,6 +747,7 @@ ULONG FASTCALL WOW32UnimplementedAPI(PVDMFRAME pFrame)
 
 
 #ifdef DEBUG
+#line 819
 #error Excluded unsupported DEBUG WOW profile
 #endif // DEBUG
 #line 871
@@ -748,9 +760,10 @@ LPFNW32 FASTCALL W32PatchCodeWithLpfnw32(PVDMFRAME pFrame , INT iFun )
     LPBYTE lpCode;
 
 #ifdef DEBUG_OR_WOWPROFILE
+#line 880
 #error Excluded unsupported WOW profiling configuration
 #endif
-#line 920
+#line 895
 
     //
     // just return the thunk function if called in real mode
@@ -820,11 +833,13 @@ VOID W32Dispatch()
     register PTD ptd = NULL;
     register PVDMFRAME pFrame;
 #ifdef DEBUG_OR_WOWPROFILE
+#line 961
 #error Excluded unsupported WOW profiling configuration
 #endif
 #line 963
 
 #ifdef  WOWPROFILE
+#line 965
 #error Excluded unsupported WOW profiling configuration
 #endif
 #line 967
@@ -860,6 +875,7 @@ VOID W32Dispatch()
         iFun = pFrame->wCallID;
 
 #ifdef DEBUG_OR_WOWPROFILE
+#line 998
 #error Excluded unsupported WOW profiling configuration
 #endif
 #line 1001
@@ -867,6 +883,7 @@ VOID W32Dispatch()
 
         if (ISFUNCID(iFun)) {
 #ifdef DEBUG
+#line 1005
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 1011
@@ -877,9 +894,10 @@ VOID W32Dispatch()
         LOGARGS(3,pFrame);                              // Perform Function Logging
 
 #ifdef WOWPROFILE // For API profiling only (debugger extension)
+#line 1018
 #error Excluded unsupported WOW profiling configuration
 #endif // WOWPROFILE
-#line 1049
+#line 1020
 
         //
         // WARNING: DO NOT ADD ANYTHING TO THIS FUNCTION UNLESS YOU ADD THE SAME
@@ -889,11 +907,13 @@ VOID W32Dispatch()
         ulReturn = wow_user_invoke_thunk((LPFNW32)iFun, pFrame); // DIV-296
 
 #ifdef DEBUG_OR_WOWPROFILE
+#line 1029
 #error Excluded unsupported WOW profiling configuration
 #endif
 #line 1031
 
 #ifdef WOWPROFILE // For API profiling only (debugger extension)
+#line 1033
 #error Excluded unsupported WOW profiling configuration
 #endif // WOWPROFILE
 #line 1039
@@ -906,6 +926,7 @@ VOID W32Dispatch()
         pFrame->wDX = HIW(ulReturn);
 
 #ifdef DEBUG
+#line 1048
 #error Excluded unsupported DEBUG WOW profile
 #endif // DEBUG
 #line 1061
@@ -931,6 +952,7 @@ VOID W32Dispatch()
 
 
 #if NO_W32TRYCALL
+#line 1078
 #error Excluded unsupported NO_W32TRYCALL WOW profile
 #else
 #line 1125
@@ -1326,6 +1348,7 @@ KillTask:
 
 
 #ifdef DEBUG
+#line 1517
 #error Excluded unsupported DEBUG WOW profile
 #endif // DEBUG
 #line 1640
@@ -1442,6 +1465,7 @@ PVOID FASTCALL
 GetPModeVDMPointerAssert(
     DWORD Address
 #ifdef DEBUG
+#line 1753
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 1755
@@ -1464,6 +1488,7 @@ Return Value:
 
 {
 #ifdef DEBUG
+#line 1774
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 1776
@@ -1513,6 +1538,7 @@ Return Value:
 
 
 #ifdef DEBUG
+#line 1822
 #error Excluded unsupported DEBUG WOW profile
 #else
 #line 1861
@@ -1527,6 +1553,7 @@ Return Value:
 ULONG FASTCALL W32GetFastAddress( PVDMFRAME pFrame )
 {
 #if FASTBOPPING
+#line 1871
 #error Excluded unsupported FASTBOPPING host profile
 #else
 #line 1898
@@ -1539,12 +1566,13 @@ ULONG FASTCALL W32GetFastAddress( PVDMFRAME pFrame )
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 #endif
-#line 1906
+#line 1875
 }
 
 ULONG FASTCALL W32GetFastCbRetAddress( PVDMFRAME pFrame )
 {
 #if FASTBOPPING
+#line 1880
 #error Excluded unsupported FASTBOPPING host profile
 #else
 #line 1910
@@ -1557,7 +1585,7 @@ ULONG FASTCALL W32GetFastCbRetAddress( PVDMFRAME pFrame )
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 #endif
-#line 1918
+#line 1884
 }
 
 ULONG FASTCALL W32GetTableOffsets( PVDMFRAME pFrame )
@@ -1588,6 +1616,7 @@ ULONG FASTCALL W32GetTableOffsets( PVDMFRAME pFrame )
 ULONG FASTCALL W32GetFlatAddressArray( PVDMFRAME pFrame )
 {
 #if FASTBOPPING
+#line 1911
 #error Excluded unsupported FASTBOPPING host profile
 #else
 #line 1944
@@ -1607,6 +1636,7 @@ ULONG FASTCALL W32GetFlatAddressArray( PVDMFRAME pFrame )
 
 
 #ifdef DEBUG
+#line 1919
 #error Excluded unsupported DEBUG WOW profile
 #endif // DEBUG
 #line 2251
@@ -1692,6 +1722,7 @@ PVOID WOWStartupFailed(VOID)
 
 //****************************************************************************
 #ifdef DEBUG_OR_WOWPROFILE
+#line 2328
 #error Excluded unsupported WOW profiling configuration
 #endif  // DEBUG_OR_WOWPROFILE
-#line 2421
+#line 2377

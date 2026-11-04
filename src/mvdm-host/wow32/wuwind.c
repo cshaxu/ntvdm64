@@ -1639,8 +1639,10 @@ ULONG FASTCALL WU32GetWindowLong(PVDMFRAME pFrame)
     // Make sure Win32 didn't change offsets for GWL constants
 
 #if (GWL_WNDPROC != (-4) || GWL_STYLE != (-16) || GWL_EXSTYLE != (-20))
+#line 1644
 #error Win16/Win32 GWL constants differ
 #endif
+#line 1646
 
 #ifndef WIN16_GWW_HINSTANCE
 #define WIN16_GWW_HINSTANCE     (-6)
@@ -1998,8 +2000,10 @@ ULONG FASTCALL WU32GetWindowWord(PVDMFRAME pFrame)
     // Make sure Win32 didn't change offsets
 
 #if (GWL_HINSTANCE != (-6) || GWL_HWNDPARENT != (-8) || GWL_ID != (-12))
+#line 1988
 #error Win16/Win32 window-word constants differ
 #endif
+#line 1990
 
     // Make sure the 16-bit app is requesting allowable offsets
 
@@ -2445,8 +2449,10 @@ ULONG FASTCALL WU32SetWindowLong(PVDMFRAME pFrame)
     // Make sure Win32 didn't change offsets for GWL constants
 
 #if (GWL_WNDPROC != (-4) || GWL_STYLE != (-16) || GWL_EXSTYLE != (-20))
+#line 2435
 #error Win16/Win32 GWL constants differ
 #endif
+#line 2437
 
     // Make sure the 16-bit app is requesting allowable offsets
 
@@ -2852,8 +2858,10 @@ ULONG FASTCALL WU32SetWindowWord(PVDMFRAME pFrame)
     // Make sure Win32 didn't change offsets
 
 #if (GWL_HINSTANCE != (-6) || GWL_HWNDPARENT != (-8) || GWL_ID != (-12))
+#line 2813
 #error Win16/Win32 window-word constants differ
 #endif
+#line 2815
 
     // Make sure the 16-bit app is requesting allowable offsets
 

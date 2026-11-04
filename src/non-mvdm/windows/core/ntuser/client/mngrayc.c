@@ -150,6 +150,7 @@ BOOL ClientDrawState(
 #line 210
 #error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#line 218
 #ifdef WOW_ORIGINAL_STATE_DRAWING
 #line 218
             break;
@@ -191,6 +192,7 @@ BOOL ClientDrawState(
 #line 252
 #error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#line 258
 #ifdef WOW_ORIGINAL_STATE_DRAWING
 #line 258
             break;

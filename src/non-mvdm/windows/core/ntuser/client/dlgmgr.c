@@ -515,8 +515,10 @@ LONG DefDlgProcWorker(
     if (message != WM_FINALDESTROY &&
             wow_dialog_host_get(hwnd, DWL_MSGRESULT, fAnsi) != 0)
 #else
-    if (((PDIALOG)pwnd)->resultWP != 0)
+#line 474
+#error Unsupported excluded original configuration
 #endif
+#line 475
         NtUserSetWindowLong(hwnd, DWL_MSGRESULT, 0, FALSE);
     result = 0;   // no dialog proc
 
@@ -528,9 +530,10 @@ LONG DefDlgProcWorker(
     if (wow_dialog_host_get(hwnd, DWL_DLGPROC, fAnsi) != 0) {
         result = wow_dialog_host_call(hwnd, message, wParam, lParam, fAnsi);
 #else
-    if (PDLG(pwnd)->lpfnDlg != NULL) {
-        result = (PDLG(pwnd)->lpfnDlg)(hwnd, message, wParam, lParam);
+#line 482
+#error Unsupported excluded original configuration
 #endif
+#line 484
 
         /*
          * Get out if the window was destroyed in the dialog proc.
@@ -941,9 +944,10 @@ DoCleanup:
 
         case WM_NOTIFYFORMAT:
 #ifndef WOW_NATIVE_DIALOG_PROCEDURE_OWNER
-            if (lParam == NF_QUERY)
-                return((PDLG(pwnd)->flags & DLGF_ANSI ) ? NFR_ANSI : NFR_UNICODE);
+#line 884
+#error Unsupported excluded original configuration
 #endif
+#line 886
             return result;
 
         default:
@@ -998,8 +1002,10 @@ CallDWP:
 #ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER
         return wow_dialog_host_get(hwnd, DWL_MSGRESULT, fAnsi);
 #else
-        return ((PDIALOG)pwnd)->resultWP;
+#line 937
+#error Unsupported excluded original configuration
 #endif
+#line 938
     else
         return result;
 }
