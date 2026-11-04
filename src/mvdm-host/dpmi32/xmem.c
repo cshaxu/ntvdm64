@@ -215,6 +215,7 @@ Return Value:
 
     /* DIVERGENCE MVDM-HOST-DIV-272: this provider returns BOOL, not NTSTATUS. */
     if (!Status) {
+#line 211
         setCF(1);
 #line 212
 #if DBG

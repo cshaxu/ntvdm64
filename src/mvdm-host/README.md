@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-651: restore original selected-code diagnostic positions in ten
+DOS, DPMI, OEM and CCPU files whose original conditional branches are all
+excluded. Only `#line` directives were added. Original condition-tree and
+matching-code checks: `../../artifacts/mvdm-audit/s13-r1335-tree-recheck.json`.
+
 MVDM-HOST-DIV-650: anchor excluded local profiles and selected original
 continuations in seven MVDM files using original statement positions. Only
 `#line` directives change. Evidence:

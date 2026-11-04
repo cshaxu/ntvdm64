@@ -1,0 +1,543 @@
+{
+  "method": "Original/current excluded-only trees directly compared; #line inserted outside excluded arms at safe code boundaries to align original matching code positions. Original local edits retained. Other runtime semantics are not inferred.",
+  "records": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdconf.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdconf.c",
+      "before_sha256": "8f418290e80ed33bb5fbcbbbe0e11d06498098730b89885355eebd54f11ceaa6",
+      "after_sha256": "69d346b5665d6755eb63d2e012027d3861894bd39b4f18dfb217959532491e76",
+      "original_sha256": "32892c8c489bed9e4be8faed12e1bafbc6c580ba81a509425e8493de1e6ffc0a",
+      "anchors": [
+        {
+          "before_physical_line": 13,
+          "original_line": 12
+        },
+        {
+          "before_physical_line": 224,
+          "original_line": 210
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdmisc.c",
+      "before_sha256": "9d6e609d830e31b2bf69608c9659c410905efc5eecfb33b179577ed42d901468",
+      "after_sha256": "15fd9ee90357a2ba89708e4315d41a23fcf5fb912b4e45b89b5fd2faeed466c6",
+      "original_sha256": "1ca036932368a0d0bf1848b078cc80cd66e67a4cc46ad26a0c1b236fe40f4281",
+      "anchors": [
+        {
+          "before_physical_line": 18,
+          "original_line": 11
+        },
+        {
+          "before_physical_line": 35,
+          "original_line": 22
+        },
+        {
+          "before_physical_line": 53,
+          "original_line": 29
+        },
+        {
+          "before_physical_line": 65,
+          "original_line": 35
+        },
+        {
+          "before_physical_line": 73,
+          "original_line": 41
+        },
+        {
+          "before_physical_line": 95,
+          "original_line": 49
+        },
+        {
+          "before_physical_line": 314,
+          "original_line": 257
+        },
+        {
+          "before_physical_line": 365,
+          "original_line": 285
+        },
+        {
+          "before_physical_line": 383,
+          "original_line": 294
+        },
+        {
+          "before_physical_line": 429,
+          "original_line": 334
+        },
+        {
+          "before_physical_line": 439,
+          "original_line": 340
+        },
+        {
+          "before_physical_line": 471,
+          "original_line": 362
+        },
+        {
+          "before_physical_line": 524,
+          "original_line": 411
+        },
+        {
+          "before_physical_line": 558,
+          "original_line": 419
+        },
+        {
+          "before_physical_line": 606,
+          "original_line": 462
+        },
+        {
+          "before_physical_line": 656,
+          "original_line": 506
+        },
+        {
+          "before_physical_line": 665,
+          "original_line": 511
+        },
+        {
+          "before_physical_line": 688,
+          "original_line": 533
+        },
+        {
+          "before_physical_line": 703,
+          "original_line": 541
+        },
+        {
+          "before_physical_line": 735,
+          "original_line": 565
+        },
+        {
+          "before_physical_line": 751,
+          "original_line": 575
+        },
+        {
+          "before_physical_line": 781,
+          "original_line": 601
+        },
+        {
+          "before_physical_line": 828,
+          "original_line": 640
+        },
+        {
+          "before_physical_line": 841,
+          "original_line": 644
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/dem.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\dem.c",
+      "before_sha256": "d9e31fef11a4a96004e473c82445cc6c42c4f5bbddd114f85a81d81bebd7d18c",
+      "after_sha256": "7f2f34ff27f71dd14fd6f9c8d0811b4c0a149be9c9ec48c80f4db00c339098b8",
+      "original_sha256": "2573da2dbf964c5e75102145b031766113cfc4e914dc00f0d80fdc6d98f5a2de",
+      "anchors": [
+        {
+          "before_physical_line": 22,
+          "original_line": 21
+        },
+        {
+          "before_physical_line": 52,
+          "original_line": 43
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demfile.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demfile.c",
+      "before_sha256": "6c83ea4c82951b9888d342c2d3816b712b44eb23fc21dbca2f0e3a0c23abfa13",
+      "after_sha256": "ded7c3b4eb49c18fb4e947a1cfb005f61c8494fb0a09c9dd2d4f2975787897b6",
+      "original_sha256": "701c7ce94b6317f23d73d847c681338ddb522d0216cf6373713e542c34236620",
+      "anchors": [
+        {
+          "before_physical_line": 24,
+          "original_line": 25
+        },
+        {
+          "before_physical_line": 55,
+          "original_line": 29
+        },
+        {
+          "before_physical_line": 188,
+          "original_line": 159
+        },
+        {
+          "before_physical_line": 639,
+          "original_line": 600
+        },
+        {
+          "before_physical_line": 655,
+          "original_line": 605
+        },
+        {
+          "before_physical_line": 959,
+          "original_line": 910
+        },
+        {
+          "before_physical_line": 970,
+          "original_line": 922
+        },
+        {
+          "before_physical_line": 997,
+          "original_line": 948
+        },
+        {
+          "before_physical_line": 1092,
+          "original_line": 1043
+        },
+        {
+          "before_physical_line": 1162,
+          "original_line": 1114
+        },
+        {
+          "before_physical_line": 1184,
+          "original_line": 1134
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demhndl.c",
+      "before_sha256": "b1bb40a4479abc1e2628033f982b7202927f43c70720c2495c122d0a54d9deb4",
+      "after_sha256": "e0c9e9eba2017053fd2530fc07a2d9bba3e45c6edc97b744ff7940e30c64f7eb",
+      "original_sha256": "5e951e14d7c88357dc25933b602cb756fbaf4cf47125a46d740135491b4eb958",
+      "anchors": [
+        {
+          "before_physical_line": 66,
+          "original_line": 45
+        },
+        {
+          "before_physical_line": 75,
+          "original_line": 53
+        },
+        {
+          "before_physical_line": 149,
+          "original_line": 124
+        },
+        {
+          "before_physical_line": 171,
+          "original_line": 135
+        },
+        {
+          "before_physical_line": 209,
+          "original_line": 175
+        },
+        {
+          "before_physical_line": 226,
+          "original_line": 190
+        },
+        {
+          "before_physical_line": 267,
+          "original_line": 227
+        },
+        {
+          "before_physical_line": 305,
+          "original_line": 262
+        },
+        {
+          "before_physical_line": 331,
+          "original_line": 272
+        },
+        {
+          "before_physical_line": 351,
+          "original_line": 290
+        },
+        {
+          "before_physical_line": 358,
+          "original_line": 298
+        },
+        {
+          "before_physical_line": 366,
+          "original_line": 307
+        },
+        {
+          "before_physical_line": 385,
+          "original_line": 322
+        },
+        {
+          "before_physical_line": 397,
+          "original_line": 330
+        },
+        {
+          "before_physical_line": 406,
+          "original_line": 335
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demsrch.c",
+      "before_sha256": "9b77500723895b7a0d6a3c7712f85883fa58b29d7608b2f75c3ba02f6d2b0352",
+      "after_sha256": "cb60c06af4075c049d66639ee42c6ea9c57d7019c5651f3f3f97fc8bb5890241",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "anchors": [
+        {
+          "before_physical_line": 24,
+          "original_line": 23
+        },
+        {
+          "before_physical_line": 63,
+          "original_line": 59
+        },
+        {
+          "before_physical_line": 256,
+          "original_line": 240
+        },
+        {
+          "before_physical_line": 263,
+          "original_line": 246
+        },
+        {
+          "before_physical_line": 272,
+          "original_line": 251
+        },
+        {
+          "before_physical_line": 279,
+          "original_line": 253
+        },
+        {
+          "before_physical_line": 436,
+          "original_line": 414
+        },
+        {
+          "before_physical_line": 441,
+          "original_line": 416
+        },
+        {
+          "before_physical_line": 1225,
+          "original_line": 1199
+        },
+        {
+          "before_physical_line": 1227,
+          "original_line": 1200
+        },
+        {
+          "before_physical_line": 2231,
+          "original_line": 2199
+        },
+        {
+          "before_physical_line": 2240,
+          "original_line": 2206
+        },
+        {
+          "before_physical_line": 2379,
+          "original_line": 2342
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/xmem.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\xmem.c",
+      "before_sha256": "a52cd0952aa18345d07c7584da8e045d63a6da1569a3ff7b68e17b65bfb9a932",
+      "after_sha256": "14d221508789b51e026bd93e2b75669424d4eef0866fd8cea76b4c68d88d2220",
+      "original_sha256": "50babb31bcd739318e189e88567ed27d6c89af908b8b590bbeb3e8f1377d13d5",
+      "anchors": [
+        {
+          "before_physical_line": 218,
+          "original_line": 211
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/oemuni/process.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\oemuni\\process.c",
+      "before_sha256": "6015dc16aebc3fa9fccf8057ad5583ca01967f0be009b3037748d5cd7d4d3408",
+      "after_sha256": "179c07c8e1542ed304baebecdbd975431818fc1b7ea4494c22d35a433ed1f8e9",
+      "original_sha256": "38c9125f9f3c43f32f696616e565e63b8f056da7ec264d980a5e5278cc640468",
+      "anchors": [
+        {
+          "before_physical_line": 15,
+          "original_line": 14
+        },
+        {
+          "before_physical_line": 41,
+          "original_line": 35
+        },
+        {
+          "before_physical_line": 53,
+          "original_line": 49
+        },
+        {
+          "before_physical_line": 56,
+          "original_line": 51
+        },
+        {
+          "before_physical_line": 58,
+          "original_line": 52
+        },
+        {
+          "before_physical_line": 66,
+          "original_line": 54
+        },
+        {
+          "before_physical_line": 102,
+          "original_line": 86
+        },
+        {
+          "before_physical_line": 114,
+          "original_line": 100
+        },
+        {
+          "before_physical_line": 117,
+          "original_line": 102
+        },
+        {
+          "before_physical_line": 119,
+          "original_line": 103
+        },
+        {
+          "before_physical_line": 127,
+          "original_line": 105
+        },
+        {
+          "before_physical_line": 167,
+          "original_line": 141
+        },
+        {
+          "before_physical_line": 227,
+          "original_line": 196
+        },
+        {
+          "before_physical_line": 242,
+          "original_line": 209
+        },
+        {
+          "before_physical_line": 249,
+          "original_line": 211
+        },
+        {
+          "before_physical_line": 258,
+          "original_line": 218
+        },
+        {
+          "before_physical_line": 266,
+          "original_line": 225
+        },
+        {
+          "before_physical_line": 276,
+          "original_line": 230
+        },
+        {
+          "before_physical_line": 314,
+          "original_line": 264
+        },
+        {
+          "before_physical_line": 324,
+          "original_line": 277
+        },
+        {
+          "before_physical_line": 327,
+          "original_line": 279
+        },
+        {
+          "before_physical_line": 329,
+          "original_line": 280
+        },
+        {
+          "before_physical_line": 337,
+          "original_line": 282
+        },
+        {
+          "before_physical_line": 486,
+          "original_line": 606
+        },
+        {
+          "before_physical_line": 491,
+          "original_line": 610
+        },
+        {
+          "before_physical_line": 495,
+          "original_line": 613
+        },
+        {
+          "before_physical_line": 505,
+          "original_line": 617
+        },
+        {
+          "before_physical_line": 516,
+          "original_line": 626
+        },
+        {
+          "before_physical_line": 523,
+          "original_line": 630
+        },
+        {
+          "before_physical_line": 536,
+          "original_line": 635
+        },
+        {
+          "before_physical_line": 707,
+          "original_line": 804
+        },
+        {
+          "before_physical_line": 712,
+          "original_line": 806
+        },
+        {
+          "before_physical_line": 733,
+          "original_line": 821
+        },
+        {
+          "before_physical_line": 778,
+          "original_line": 863
+        },
+        {
+          "before_physical_line": 795,
+          "original_line": 878
+        },
+        {
+          "before_physical_line": 802,
+          "original_line": 890
+        },
+        {
+          "before_physical_line": 811,
+          "original_line": 896
+        },
+        {
+          "before_physical_line": 813,
+          "original_line": 900
+        },
+        {
+          "before_physical_line": 820,
+          "original_line": 906
+        },
+        {
+          "before_physical_line": 823,
+          "original_line": 908
+        },
+        {
+          "before_physical_line": 829,
+          "original_line": 910
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_page.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_page.c",
+      "before_sha256": "075650e81791a8c27f5b1d48366080ca16bbe04855fedea70752017014a617c6",
+      "after_sha256": "0de7a3fe2180d77441f127bd3462cadc3feffdd52249c8b0f3e98b2fe5cfe80e",
+      "original_sha256": "f29e441f3940002924413f3bea791d12e96d65baa3931330e92878e5e71a97ee",
+      "anchors": [
+        {
+          "before_physical_line": 68,
+          "original_line": 64
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_tsksw.c",
+      "before_sha256": "9336a63db3de4e18ef3a93227e4858beb6b14f5437df5be16bdbda20d7a3467e",
+      "after_sha256": "91fee998cf775d7aa16ff36921d0711485dc9a3a26a578b5ac59374106e5c8c7",
+      "original_sha256": "5713c9351942c0c4dddb00d9ef337abf2974d3236e9aea169117d0a38fe0ad49",
+      "anchors": [
+        {
+          "before_physical_line": 31,
+          "original_line": 29
+        },
+        {
+          "before_physical_line": 511,
+          "original_line": 506
+        }
+      ]
+    }
+  ]
+}

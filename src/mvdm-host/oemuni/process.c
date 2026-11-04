@@ -12,6 +12,7 @@
 #include "oem.h"
 #include <vdmapi.h>
 #include "mvdm_softpc_firmware.h"
+#line 14
 UINT
 APIENTRY
 GetSystemDirectoryOem(
@@ -38,6 +39,7 @@ Routine Description:
     if ( !UnicodeCapacity ) return 0;
     if ( UnicodeCapacity > 32767 ) { BaseSetLastNTError(STATUS_BUFFER_OVERFLOW); return 0; }
     Unicode.MaximumLength = (USHORT)(UnicodeCapacity*sizeof(WCHAR));
+#line 35
     Unicode.Buffer = RtlAllocateHeap(
                                 RtlProcessHeap(), 0,
                                 Unicode.MaximumLength
@@ -50,11 +52,14 @@ Routine Description:
     UnicodeCapacity = NtvdmGetSystemDirectoryW(Unicode.Buffer,UnicodeCapacity);
 
     if ( !UnicodeCapacity || UnicodeCapacity >= Unicode.MaximumLength/sizeof(WCHAR) ) {
+#line 49
         RtlFreeHeap(RtlProcessHeap(), 0,Unicode.Buffer);
         if ( UnicodeCapacity ) BaseSetLastNTError(STATUS_BUFFER_OVERFLOW);
         return 0;
+#line 51
         }
     Unicode.Length = (USHORT)(UnicodeCapacity*sizeof(WCHAR));
+#line 52
     OemString.Buffer = lpBuffer;
     /* DIVERGENCE MVDM-HOST-DIV-275: OEM required bytes include NUL. */
     OemString.MaximumLength = (USHORT)min(uSize,65535);
@@ -63,6 +68,7 @@ Routine Description:
         RtlFreeHeap(RtlProcessHeap(), 0,Unicode.Buffer);
         return uSize;
         }
+#line 54
     Status = RtlUnicodeStringToOemString(&OemString,&Unicode,FALSE);
     RtlFreeHeap(RtlProcessHeap(), 0,Unicode.Buffer);
     if ( !NT_SUCCESS(Status) ) {
@@ -99,6 +105,7 @@ Routine Description:
     if ( !UnicodeCapacity ) return 0;
     if ( UnicodeCapacity > 32767 ) { BaseSetLastNTError(STATUS_BUFFER_OVERFLOW); return 0; }
     Unicode.MaximumLength = (USHORT)(UnicodeCapacity*sizeof(WCHAR));
+#line 86
     Unicode.Buffer = RtlAllocateHeap(
                                 RtlProcessHeap(), 0,
                                 Unicode.MaximumLength
@@ -111,11 +118,14 @@ Routine Description:
     UnicodeCapacity = NtvdmGetWindowsDirectoryW(Unicode.Buffer,UnicodeCapacity);
 
     if ( !UnicodeCapacity || UnicodeCapacity >= Unicode.MaximumLength/sizeof(WCHAR) ) {
+#line 100
         RtlFreeHeap(RtlProcessHeap(), 0,Unicode.Buffer);
         if ( UnicodeCapacity ) BaseSetLastNTError(STATUS_BUFFER_OVERFLOW);
         return 0;
+#line 102
         }
     Unicode.Length = (USHORT)(UnicodeCapacity*sizeof(WCHAR));
+#line 103
     OemString.Buffer = lpBuffer;
     /* DIVERGENCE MVDM-HOST-DIV-275: OEM required bytes include NUL. */
     OemString.MaximumLength = (USHORT)min(uSize,65535);
@@ -124,6 +134,7 @@ Routine Description:
         RtlFreeHeap(RtlProcessHeap(), 0,Unicode.Buffer);
         return uSize;
         }
+#line 105
     Status = RtlUnicodeStringToOemString(&OemString,&Unicode,FALSE);
     RtlFreeHeap(RtlProcessHeap(), 0,Unicode.Buffer);
     if ( !NT_SUCCESS(Status) ) {
@@ -164,6 +175,7 @@ Routine Description:
     /* DIVERGENCE MVDM-HOST-DIV-269: preserve zero as the original SearchPath
        failure result if the local Unicode buffer cannot be allocated. */
     DWORD ReturnValue = 0;
+#line 141
     OEM_STRING OemString;
     UNICODE_STRING UnicodeString;
     NTSTATUS Status;
@@ -224,6 +236,7 @@ Routine Description:
     if ( !UnicodeCapacity ) goto bail0;
     if ( UnicodeCapacity > 32767 ) { BaseSetLastNTError(STATUS_BUFFER_OVERFLOW); goto bail0; }
     xlpBuffer = RtlAllocateHeap(RtlProcessHeap(), 0,UnicodeCapacity*sizeof(WCHAR));
+#line 196
     if ( !xlpBuffer ) {
         BaseSetLastNTError(STATUS_NO_MEMORY);
         goto bail0;
@@ -239,6 +252,7 @@ Routine Description:
     /* DIVERGENCE MVDM-HOST-DIV-275: equality is a required-size result,
        not an initialized Unicode path. OEM size may exceed WCHAR count. */
     if (ReturnValue && ReturnValue < UnicodeCapacity ) {
+#line 209
         RtlInitUnicodeString(&UnicodeString,xlpBuffer);
         ReturnValue = RtlUnicodeStringToOemSize(&UnicodeString);
         if ( ReturnValue > nBufferLength ) {
@@ -246,6 +260,7 @@ Routine Description:
             goto bail0;
             }
         OemString.MaximumLength = (USHORT)min(nBufferLength,65535);
+#line 211
         OemString.Buffer = lpBuffer;
         Status = RtlUnicodeStringToOemString(&OemString,&UnicodeString,FALSE);
         if ( !NT_SUCCESS(Status) ) {
@@ -255,6 +270,7 @@ Routine Description:
         else {
             /* DIVERGENCE MVDM-HOST-DIV-275: converted byte count. */
             ReturnValue = OemString.Length;
+#line 218
             if ( ARGUMENT_PRESENT(lpFilePart) ) {
                 if ( FilePart == NULL ) {
                     *lpFilePart = NULL;
@@ -263,6 +279,7 @@ Routine Description:
                     /* DIVERGENCE MVDM-HOST-DIV-275: encoded prefix. */
                     UnicodeString.Length = (USHORT)((FilePart - xlpBuffer)*sizeof(WCHAR));
                     *lpFilePart = lpBuffer + RtlUnicodeStringToOemSize(&UnicodeString)-1;
+#line 225
                     }
                 }
             }
@@ -273,6 +290,7 @@ Routine Description:
         BaseSetLastNTError(STATUS_BUFFER_OVERFLOW);
         ReturnValue = 0;
         }
+#line 230
     RtlFreeHeap(RtlProcessHeap(), 0,xlpBuffer);
 bail0:
     if ( ARGUMENT_PRESENT(lpExtension) ) {
@@ -311,6 +329,7 @@ Routine Description:
     if ( !UnicodeCapacity ) return 0;
     if ( UnicodeCapacity > 32767 ) { BaseSetLastNTError(STATUS_BUFFER_OVERFLOW); return 0; }
     UnicodeString.MaximumLength = (USHORT)(UnicodeCapacity*sizeof(WCHAR));
+#line 264
     UnicodeString.Buffer = RtlAllocateHeap(
                                 RtlProcessHeap(), 0,
                                 UnicodeString.MaximumLength
@@ -321,11 +340,14 @@ Routine Description:
         }
     UnicodeCapacity = GetTempPathW(UnicodeCapacity,UnicodeString.Buffer);
     if ( !UnicodeCapacity || UnicodeCapacity >= UnicodeString.MaximumLength/sizeof(WCHAR) ) {
+#line 277
         RtlFreeHeap(RtlProcessHeap(), 0,UnicodeString.Buffer);
         if ( UnicodeCapacity ) BaseSetLastNTError(STATUS_BUFFER_OVERFLOW);
         return 0;
+#line 279
         }
     UnicodeString.Length = (USHORT)(UnicodeCapacity*sizeof(WCHAR));
+#line 280
     OemString.Buffer = lpBuffer;
     /* DIVERGENCE MVDM-HOST-DIV-275: preserve capacity and required size. */
     OemString.MaximumLength = (USHORT)min(nBufferLength,65535);
@@ -334,6 +356,7 @@ Routine Description:
         RtlFreeHeap(RtlProcessHeap(), 0,UnicodeString.Buffer);
         return nBufferLength;
         }
+#line 282
     Status = RtlUnicodeStringToOemString(&OemString,&UnicodeString,FALSE);
     RtlFreeHeap(RtlProcessHeap(), 0,UnicodeString.Buffer);
     if ( !NT_SUCCESS(Status) ) {
@@ -483,15 +506,18 @@ GetEnvironmentVariableOem(
             goto try_exit;
             }
         Buffer.MaximumLength = (USHORT)ReturnValue;
+#line 606
         Buffer.Buffer = (PCHAR)
             RtlAllocateHeap( RtlProcessHeap(), 0, Buffer.MaximumLength );
         if (Buffer.Buffer == NULL) {
             BaseSetLastNTError( STATUS_NO_MEMORY );
             ReturnValue = 0;
+#line 610
             goto try_exit;
             }
 
         SetLastError(ERROR_SUCCESS);
+#line 613
         ReturnValue = GetEnvironmentVariableA( Name.Buffer,
                                                Buffer.Buffer,
                                                Buffer.MaximumLength
@@ -502,6 +528,7 @@ GetEnvironmentVariableOem(
             else ReturnValue = 1;
             goto try_exit;
             }
+#line 617
         if (ReturnValue != 0) {
             if ( ReturnValue < Buffer.MaximumLength ) {
                 Buffer.Length = (USHORT)ReturnValue;
@@ -513,6 +540,7 @@ GetEnvironmentVariableOem(
                     ReturnValue = 0;
                     // DIVERGENCE: MVDM-HOST-DIV-277 keeps the first failure.
                     goto try_exit;
+#line 626
                     }
 
                 OemString.Buffer        = lpBuffer;
@@ -520,6 +548,7 @@ GetEnvironmentVariableOem(
                 ReturnValue = RtlUnicodeStringToOemSize(&Unicode);
                 if (ReturnValue > nSize)
                     goto try_exit;
+#line 630
                 Status = RtlUnicodeStringToOemString( &OemString, &Unicode, FALSE );
                 if (!NT_SUCCESS( Status )) {
                     BaseSetLastNTError( Status );
@@ -533,6 +562,7 @@ GetEnvironmentVariableOem(
                 // DIVERGENCE: MVDM-HOST-DIV-277 rejects growth before conversion.
                 BaseSetLastNTError(STATUS_BUFFER_OVERFLOW);
                 ReturnValue = 0;
+#line 635
                 }
             }
 try_exit:;
@@ -704,11 +734,13 @@ ExpandEnvironmentStringsOem(
 	if (ReturnValue != 0 && ReturnValue <= cchDst) {
 	    /* DIV-273: conversion failure must not retain ANSI success length. */
 	    ReturnValue = 0;
+#line 804
 	    RtlInitString(&Value, lpDst);
 	    Status = RtlAnsiStringToUnicodeString(&Unicode, &Value, TRUE);
             /* DIVERGENCE MVDM-HOST-DIV-273: Value borrowed lpDst; only the
                later OEM allocation belongs to this routine's cleanup. */
             Value.Buffer = NULL;
+#line 806
             if ( !NT_SUCCESS(Status) ) {
                 if ( Status == STATUS_BUFFER_OVERFLOW ) {
                     SetLastError(ERROR_FILENAME_EXCED_RANGE);
@@ -730,6 +762,7 @@ ExpandEnvironmentStringsOem(
             if (ReturnValue <= cchDst)
                 RtlMoveMemory(lpDst, Value.Buffer, ReturnValue);
 
+#line 821
             }
 try_exit:;
         }
@@ -775,6 +808,7 @@ GetShortPathNameOem(
     /* DIVERGENCE MVDM-HOST-DIV-276: Unicode and OEM capacities differ. */
     DWORD UnicodeCapacity;
 
+#line 863
     if (lpSrc == NULL) {
 	SetLastError(ERROR_INVALID_PARAMETER);
 	return 0;
@@ -792,6 +826,7 @@ GetShortPathNameOem(
 	UnicodeCapacity = GetShortPathNameW(UString.Buffer,NULL,0);
     if (!UnicodeCapacity) return 0;
     if (UnicodeCapacity > 32767) { BaseSetLastNTError(STATUS_BUFFER_OVERFLOW); return 0; }
+#line 878
 	    lpDstW = RtlAllocateHeap(RtlProcessHeap(), 0,
 					UnicodeCapacity * sizeof(WCHAR)
 					);
@@ -799,6 +834,7 @@ GetShortPathNameOem(
 		SetLastError(ERROR_NOT_ENOUGH_MEMORY);
 		return 0;
 		}
+#line 890
 	ReturnValue = GetShortPathNameW(UString.Buffer,
 					lpDstW,
 					UnicodeCapacity
@@ -808,8 +844,10 @@ GetShortPathNameOem(
         RtlInitUnicodeString(&UStringRet,lpDstW);
         ReturnValue = RtlUnicodeStringToOemSize(&UStringRet);
 	    if (ARGUMENT_PRESENT(lpDst) && ReturnValue <= cchDst) {
+#line 896
 		OemString.Buffer = lpDst;
 		OemString.MaximumLength = (USHORT)min(cchDst,65535);
+#line 900
 		Status = RtlUnicodeStringToOemString(&OemString,
 						     &UStringRet,
 						     FALSE
@@ -817,15 +855,18 @@ GetShortPathNameOem(
 		if (!NT_SUCCESS(Status)) {
 		    BaseSetLastNTError(Status);
 		    ReturnValue = 0;
+#line 906
 		    return 0;
 		    }
         ReturnValue = OemString.Length;
+#line 908
 		}
 	    }
     else if (ReturnValue) {
         BaseSetLastNTError(STATUS_BUFFER_OVERFLOW);
         ReturnValue = 0;
         }
+#line 910
 	}
     finally {
 	    RtlFreeUnicodeString(&UString);

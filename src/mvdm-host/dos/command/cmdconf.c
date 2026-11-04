@@ -10,6 +10,7 @@
 #include <demexp.h>
 #include <softpc.h>
 #include "mvdm_softpc_firmware.h"
+#line 12
 #include <mvdm.h>
 #include <ctype.h>
 #include <oemuni.h>
@@ -221,6 +222,7 @@ void ExpandConfigFiles(BOOLEAN bConfig)
     * error direction. */
    dw = mvdm_softpc_system_copy_root(achRawFile, sizeof(achRawFile))
        ? (DWORD)strlen(achRawFile) : 0;
+#line 210
    dwLenSysRoot = GetShortPathNameA(achRawFile, achSysRoot, sizeof(achSysRoot));
    if (dwLenSysRoot >= sizeof(achSysRoot)) {
 	dwLenSysRoot = 0;

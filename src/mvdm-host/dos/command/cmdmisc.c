@@ -15,6 +15,7 @@
  * obtain session-mapped guest leases only at the original access points. */
 #include "ntvdm-exe/command/include/mvdm_command_guest_state.h"
 
+#line 11
 #include <cmdsvc.h>
 #include <demexp.h>
 #include <softpc.h>
@@ -32,6 +33,7 @@
  * original record allocation, use and free ordering remain in cmdredir.c. */
 
 
+#line 22
 VOID GetWowKernelCmdLine(VOID);
 extern ULONG fSeparateWow;
 
@@ -50,6 +52,7 @@ mvdm_guest_location environment_location;
 mvdm_guest_location execpath_location;
 mvdm_guest_location_lease command_lease;
 mvdm_guest_location_lease execpath_lease;
+#line 29
 ULONG   cb;
 PREDIRCOMPLETE_INFO pRdrInfo;
 VDMINFO MyVDMInfo;
@@ -62,6 +65,7 @@ char    *pSrc, *pDst;
  * SetCurrentDirectory semantics, but make the receiving host buffer match
  * the stated ABI capacity. */
 char    achCurDirectory[MAX_PATH + 1];
+#line 35
 char    CmdLine[MAX_PATH];
 /* COMMAND.COM's original EXECPATHLEN is MAX_PATH + 13 (comequ.asm). */
 char    AppName[MAX_PATH + 13];
@@ -70,6 +74,7 @@ char    AppName[MAX_PATH + 13];
     // This routine is called once for WOW VDMs, to retrieve the
     // "krnl386" command line.
     //                                         5
+#line 41
     if (VDMForWOW) {
         GetWowKernelCmdLine();
         return;
@@ -92,6 +97,7 @@ char    AppName[MAX_PATH + 13];
     }
     pCMDInfo = &CmdInfo;
 
+#line 49
     VDMInfo.ErrorCode = FETCHWORD(pCMDInfo->ReturnCode);
     VDMInfo.CmdSize = sizeof(CmdLine);
     VDMInfo.CmdLine = CmdLine;
@@ -311,6 +317,7 @@ char    AppName[MAX_PATH + 13];
     // It now uses a bit in CreateProcess (dwCreationFlags).
     //
 
+#line 257
     DontCheckDosBinaryType = (VDMInfo.dwCreationFlags & CREATE_FORCEDOS) != 0;
 
 
@@ -362,6 +369,7 @@ char    AppName[MAX_PATH + 13];
     }
 
     // tell command.com the length of the app full path name.
+#line 285
     STOREWORD(pCMDInfo->ExecPathSize, VDMInfo.AppLen);
 
     //
@@ -380,6 +388,7 @@ char    AppName[MAX_PATH + 13];
     lpszCmd = (LPSTR)command_lease.bytes;
 
     // Copy filepart of AppName excluding extension to ccom's buffer
+#line 294
     pSrc = strrchr(VDMInfo.AppName, '\\');
     if (!pSrc) {
          pSrc = VDMInfo.AppName;
@@ -426,6 +435,7 @@ char    AppName[MAX_PATH + 13];
 
 
 
+#line 334
     if (DosEnvCreated) {
 	if (!mvdm_guest_location_set_real_mode(&environment_location,
 		FETCHWORD(pCMDInfo->EnvSeg), 0) ||
@@ -436,6 +446,7 @@ char    AppName[MAX_PATH + 13];
 	    setAX((USHORT)ERROR_INVALID_ADDRESS);
 	    return;
 	}
+#line 340
 	STOREWORD(pCMDInfo->EnvSize,cmdVDMEnvBlk.cchEnv);
 	free(cmdVDMEnvBlk.lpszzEnv);
 	DosEnvCreated = FALSE;
@@ -468,6 +479,7 @@ char    AppName[MAX_PATH + 13];
         setAX((USHORT)ERROR_INVALID_ADDRESS);
         return;
     }
+#line 362
     setCF(0);
 
     return;
@@ -521,6 +533,7 @@ LPSTR    pszCmdLine;
     if (!cmdCreateVDMEnvironment(&cmdVDMEnvBlk) ||
         !mvdm_softpc_project_wow_initial_environment(
             &cmdVDMEnvBlk.lpszzEnv, &cmdVDMEnvBlk.cchEnv)) {
+#line 411
         RcErrorDialogBox(EG_ENVIRONMENT_ERR, NULL, NULL);
         TerminateVDM();
     }
@@ -555,6 +568,7 @@ LPSTR    pszCmdLine;
         return;
     }
 
+#line 419
     pch = (PVOID)GetVDMAddr(FETCHWORD(pCMDInfo->EnvSeg),0);
     RtlMoveMemory(pch,
                   cmdVDMEnvBlk.lpszzEnv,
@@ -603,6 +617,7 @@ LPSTR    pszCmdLine;
         }
         else {
             pszCmdLine = NULL;
+#line 462
         }
     }
 
@@ -653,6 +668,7 @@ LPSTR    pszCmdLine;
         setAX((USHORT)ERROR_INVALID_ADDRESS);
         return;
     }
+#line 506
     IsRepeatCall = FALSE;
     IsFirstCall = FALSE;
 
@@ -662,6 +678,7 @@ LPSTR    pszCmdLine;
         setAX((USHORT)ERROR_INVALID_ADDRESS);
         return;
     }
+#line 511
     setCF(0);
 
     return;
@@ -685,6 +702,7 @@ VOID cmdGetCurrentDir (VOID)
 {
 CHAR  CurDir[MAXIMUM_VDM_CURRENT_DIR + 3];
 mvdm_guest_location CurDirLocation;
+#line 533
 UCHAR chDrive;
 CHAR  EnvVar[] = "=?:";
 CHAR  RootName[] = "?:\\";
@@ -700,6 +718,7 @@ UINT  DriveType;
         setAX(0);
         return;
     }
+#line 541
     chDrive = getAL();
     EnvVar[1] = chDrive + 'A';
     RootName[0] = chDrive + 'A';
@@ -732,6 +751,7 @@ UINT  DriveType;
             setAX(0);
             return;
         }
+#line 565
         SetEnvironmentVariableOem (EnvVar,RootName);
 	setCF(0);
 	return;
@@ -748,6 +768,7 @@ UINT  DriveType;
             return;
         }
 	setCF(0);
+#line 575
     }
     return;
 }
@@ -778,6 +799,7 @@ VOID cmdSetInfo (VOID)
         return;
     }
 
+#line 601
     return;
 }
 
@@ -825,6 +847,7 @@ CHAR    achComSpec[MAX_PATH];
 uint32_t cbGuestComSpec;
 
 
+#line 640
     if(IsFirstCall == FALSE)
         return;
 
@@ -838,6 +861,7 @@ uint32_t cbGuestComSpec;
         return;
     }
     lpszCS = achComSpec;
+#line 644
     strcpy(lpszComSpec,"COMSPEC=");
     strcpy(lpszComSpec+8,lpszCS);
     cbComSpec = strlen(lpszComSpec) +1;

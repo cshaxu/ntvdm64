@@ -63,6 +63,7 @@ static BOOL demStoreExtendedError(UCHAR locus, USHORT error, UCHAR action,
  *
  */
 
+#line 45
 VOID demClose (VOID)
 {
 HANDLE  hFile;
@@ -72,6 +73,7 @@ USHORT  usDX,usCX;
 
     hFile = GETHANDLE(getAX(), getBP());
 
+#line 53
     if (hFile == 0) {
     setCF (0);
     return;
@@ -146,6 +148,7 @@ mvdm_guest_location bufferLocation;
 mvdm_guest_location_lease bufferLease;
 BOOL    bufferLeaseActive;
 
+#line 124
     hFile = GETHANDLE (getAX(),getBP());
     usDS = getDS();
     usDX = getDX();
@@ -168,6 +171,7 @@ BOOL    bufferLeaseActive;
     // even though we're still doing synchronous read
     //
 
+#line 135
     if (IsVdmRedirLoaded()) {
         if (VrIsNamedPipeHandle(hFile)) {
 
@@ -206,6 +210,7 @@ BOOL    bufferLeaseActive;
             }
             if (!demStoreExtendedError(locus, (WORD)dwReadError, action,
                 class)) goto readFailureExit;
+#line 175
             if (ok) {
                 goto readSuccessExit;
             } else {
@@ -223,6 +228,7 @@ BOOL    bufferLeaseActive;
         /* DIVERGENCE MVDM-HOST-DIV-105: the public SetFilePointer high-offset
          * parameter is signed LONG; NT4 accepted ULONG by same-width coincidence. */
         LONG    Zero = 0;
+#line 190
         lLoc  = (LONG)((((int)getBX()) << 16) + (int)getSI());
         if ((SetFilePointer (hFile,
                             lLoc,
@@ -264,6 +270,7 @@ readSuccessExit:
         }
         bufferLeaseActive = FALSE;
     }
+#line 227
     setCF(0);
     setAX((USHORT)dwBytesRead);
     return;
@@ -302,6 +309,7 @@ mvdm_guest_location bufferLocation;
 mvdm_guest_location_lease bufferLease;
 BOOL    bufferLeaseActive;
 
+#line 262
     hFile = GETHANDLE (getAX(),getBP());
     bufferLeaseActive = FALSE;
     lpBuf = NULL;
@@ -328,6 +336,7 @@ BOOL    bufferLeaseActive;
     // even though we're still doing synchronous write
     //
 
+#line 272
     if (IsVdmRedirLoaded()) {
         if (VrIsNamedPipeHandle(hFile)) {
             if (VrWriteNamedPipe(hFile, lpBuf, (DWORD)getCX(), &dwBytesWritten)) {
@@ -348,6 +357,7 @@ BOOL    bufferLeaseActive;
         /* DIVERGENCE MVDM-HOST-DIV-105: the public SetFilePointer high-offset
          * parameter is signed LONG; NT4 accepted ULONG by same-width coincidence. */
         LONG    Zero = 0;
+#line 290
         lLoc  = (LONG)((((int)getBX()) << 16) + (int)getSI());
         if ((SetFilePointer (hFile,
                             lLoc,
@@ -355,6 +365,7 @@ BOOL    bufferLeaseActive;
                             FILE_BEGIN) == -1L) &&
             (GetLastError() != NO_ERROR)) {
             goto writeFailureExit;
+#line 298
         }
 
     }
@@ -363,6 +374,7 @@ BOOL    bufferLeaseActive;
     if (getCX() == 0){
         if (SetEndOfFile(hFile) == FALSE){
             goto writeFailureExit;
+#line 307
         }
         setCF (0);
         return;
@@ -382,6 +394,7 @@ BOOL    bufferLeaseActive;
 	        (void)mvdm_guest_location_release(&bufferLease, FALSE);
 	        bufferLeaseActive = FALSE;
 	    }
+#line 322
 	    setCF(0);
 	    setAX(0);
 	    return;
@@ -394,6 +407,7 @@ writeFailureExit:
         (void)mvdm_guest_location_release(&bufferLease, FALSE);
         bufferLeaseActive = FALSE;
     }
+#line 330
 	demClientError(hFile, (CHAR)-1);
 	return ;
     }
@@ -403,6 +417,7 @@ writeSuccessExit:
         (void)mvdm_guest_location_release(&bufferLease, FALSE);
         bufferLeaseActive = FALSE;
     }
+#line 335
     setCF(0);
     setAX((USHORT)dwBytesWritten);
     return;

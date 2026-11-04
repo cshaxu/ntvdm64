@@ -65,6 +65,7 @@ Paging Support.
 
 ]*/
 
+#line 64
 #define LAST_DWORD_ON_PAGE 0xffc
 #define LAST_WORD_ON_PAGE  0xffe
 

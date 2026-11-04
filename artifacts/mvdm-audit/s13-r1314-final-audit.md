@@ -196,6 +196,18 @@ files now have this condition/line review. The review does not establish the
 behavior of local edits or certify comment-only line positions. The other 501
 differing files contain conditional groups and remain under separate review.
 
+The [r1335 batch](s13-r1335-line-batch.json) restores selected-code logical
+positions in ten files with registered local differences. Their
+[original condition trees and matching code](s13-r1335-tree-recheck.json) were
+rechecked after editing; each current condition is an excluded error. Local
+edits are retained and this source-position audit is not a runtime-behavior
+proof. The condition/matching-code count is now 491 differing files, with 383
+still pending. Cached x86 root, NTVDM worker, WOW32 and x64 builds passed; the
+full package was verified at both destinations. Nine images are identical
+and NTVDM differs only in PE timestamp
+([comparison](s13-r1335-build-image-compare.json)); runtime tests were not
+repeated under owner instruction.
+
 The [r1334 original-tree review](s13-r1334-excluded-only-review.json)
 examined all 501 condition-bearing differing files with a conservative
 criterion: the original and current condition trees must match, every current

@@ -28,6 +28,7 @@ Task Switch Support.
 #include <c_tsksw.h>
 /* DIVERGENCE: MVDM-HOST-DIV-282: publish the original T-bit event once. */
 #include <c_debug.h>
+#line 29
 #include <c_page.h>
 #include <mov.h>
 #include <fault.h>
@@ -508,6 +509,7 @@ IFN5(
       {
       SET_DR(DR_DSR, GET_DR(DR_DSR) | DSR_BT_MASK);
       debug_exception_pending = TRUE; /* MVDM-HOST-DIV-282 */
+#line 506
       }
 
    /* ERROR CHECKING */

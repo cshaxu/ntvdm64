@@ -21,6 +21,7 @@
 #include <nt_vdd.h>
 #include "../../../ntvdm-exe/session/dem_restart_hint.h"
 
+#line 23
 extern BOOL IsFirstCall;
 
 
@@ -60,6 +61,7 @@ typedef struct _FILEFINDLIST {
     /* DIVERGENCE(MVDM-HOST-DIV-362): bounded restart hint when a buffered
      * successor survives reclamation but the remembered entry is deleted. */
     DEM_RESTART_HINT RestartHint;
+#line 59
     USHORT         usSrchAttr;
     BOOLEAN        SupportReset;
     UNICODE_STRING PathName;
@@ -253,6 +255,7 @@ static BOOL demAcquireSearchDta(mvdm_guest_location_lease *lease)
             GUEST_MEMORY_ACCESS_READ | GUEST_MEMORY_ACCESS_WRITE, lease);
 }
 
+#line 240
 VOID demFindFirst (VOID)
 {
     DWORD dwRet;
@@ -260,6 +263,7 @@ VOID demFindFirst (VOID)
     mvdm_guest_location_lease dtaLease;
 
 
+#line 246
     LPSTR lpFile = (LPSTR) GetVDMAddr (getDS(),getDX());
 
     if (!demAcquireSearchDta(&dtaLease)) {
@@ -269,6 +273,7 @@ VOID demFindFirst (VOID)
     }
     pDta = dtaLease.bytes;
 
+#line 251
     dwRet = demFileFindFirst (pDta, lpFile, getCX());
 
     if (!mvdm_guest_location_release(&dtaLease, TRUE)) {
@@ -276,6 +281,7 @@ VOID demFindFirst (VOID)
         dwRet = (DWORD)-1;
     }
 
+#line 253
     if (dwRet == -1) {
         dwRet = GetLastError();
         demClientError(INVALID_HANDLE_VALUE, *lpFile);
@@ -433,11 +439,13 @@ VOID demFindNext (VOID)
     }
     pDta = dtaLease.bytes;
 
+#line 414
     dwRet = demFileFindNext (pDta);
 
     if (!mvdm_guest_location_release(&dtaLease, TRUE))
         dwRet = ERROR_INVALID_ADDRESS;
 
+#line 416
     if (dwRet != 0) {
         setAX((USHORT) dwRet);
         setCF (1);
@@ -1222,8 +1230,10 @@ FileFindClose(
     }
     /* DIVERGENCE(MVDM-HOST-DIV-362): retain only the first unconsumed
      * directory entry, not the discarded buffer or directory handle. */
+#line 1199
     if (pFFindEntry->FindBufferBase) {
         DemCaptureRestartHint(&pFFindEntry->RestartHint, pFFindEntry->FindBufferNext);
+#line 1200
         RtlFreeHeap(RtlProcessHeap(), 0, pFFindEntry->FindBufferBase);
         --NumFindBuffer;
         }
@@ -2228,6 +2238,7 @@ DemHeartBeat(void)
    PFFINDLIST  pFFindEntry;
    USHORT currentPdb;
 
+#line 2199
    if (!NumFindBuffer ||
        NextFindFileTics.QuadPart > ++FindFileTics.QuadPart)
      {
@@ -2237,6 +2248,7 @@ DemHeartBeat(void)
    if (!mvdm_guest_location_read_u16(&current_pdb_location, &currentPdb))
        return;
    pPspFFindEntry = GetPspFFindList(currentPdb);
+#line 2206
    if (!pPspFFindEntry) {
        return;
        }
@@ -2376,6 +2388,7 @@ AddFFindEntry(
         // if a Psp entry doesn't exist
         //    Allocate one, initialize it and insert it into the list
         //
+#line 2342
     if (!pPspFFindEntry) {
         pPspFFindEntry = (PPSP_FFINDLIST) malloc(sizeof(PSP_FFINDLIST));
         if (!pPspFFindEntry)

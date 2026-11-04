@@ -1,0 +1,85 @@
+{
+  "method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior.",
+  "records": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdconf.c",
+      "status": "pass",
+      "current_sha256": "69d346b5665d6755eb63d2e012027d3861894bd39b4f18dfb217959532491e76",
+      "original_sha256": "32892c8c489bed9e4be8faed12e1bafbc6c580ba81a509425e8493de1e6ffc0a",
+      "excluded_arms": 2,
+      "matching_code_lines": 389
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "status": "pass",
+      "current_sha256": "15fd9ee90357a2ba89708e4315d41a23fcf5fb912b4e45b89b5fd2faeed466c6",
+      "original_sha256": "1ca036932368a0d0bf1848b078cc80cd66e67a4cc46ad26a0c1b236fe40f4281",
+      "excluded_arms": 1,
+      "matching_code_lines": 493
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/dem.c",
+      "status": "pass",
+      "current_sha256": "7f2f34ff27f71dd14fd6f9c8d0811b4c0a149be9c9ec48c80f4db00c339098b8",
+      "original_sha256": "2573da2dbf964c5e75102145b031766113cfc4e914dc00f0d80fdc6d98f5a2de",
+      "excluded_arms": 2,
+      "matching_code_lines": 30
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demfile.c",
+      "status": "pass",
+      "current_sha256": "ded7c3b4eb49c18fb4e947a1cfb005f61c8494fb0a09c9dd2d4f2975787897b6",
+      "original_sha256": "701c7ce94b6317f23d73d847c681338ddb522d0216cf6373713e542c34236620",
+      "excluded_arms": 6,
+      "matching_code_lines": 517
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "status": "pass",
+      "current_sha256": "e0c9e9eba2017053fd2530fc07a2d9bba3e45c6edc97b744ff7940e30c64f7eb",
+      "original_sha256": "5e951e14d7c88357dc25933b602cb756fbaf4cf47125a46d740135491b4eb958",
+      "excluded_arms": 2,
+      "matching_code_lines": 276
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "status": "pass",
+      "current_sha256": "cb60c06af4075c049d66639ee42c6ea9c57d7019c5651f3f3f97fc8bb5890241",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "excluded_arms": 11,
+      "matching_code_lines": 1431
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/xmem.c",
+      "status": "pass",
+      "current_sha256": "14d221508789b51e026bd93e2b75669424d4eef0866fd8cea76b4c68d88d2220",
+      "original_sha256": "50babb31bcd739318e189e88567ed27d6c89af908b8b590bbeb3e8f1377d13d5",
+      "excluded_arms": 5,
+      "matching_code_lines": 162
+    },
+    {
+      "path": "src/mvdm-host/oemuni/process.c",
+      "status": "pass",
+      "current_sha256": "179c07c8e1542ed304baebecdbd975431818fc1b7ea4494c22d35a433ed1f8e9",
+      "original_sha256": "38c9125f9f3c43f32f696616e565e63b8f056da7ec264d980a5e5278cc640468",
+      "excluded_arms": 1,
+      "matching_code_lines": 529
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_page.c",
+      "status": "pass",
+      "current_sha256": "0de7a3fe2180d77441f127bd3462cadc3feffdd52249c8b0f3e98b2fe5cfe80e",
+      "original_sha256": "f29e441f3940002924413f3bea791d12e96d65baa3931330e92878e5e71a97ee",
+      "excluded_arms": 2,
+      "matching_code_lines": 428
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.c",
+      "status": "pass",
+      "current_sha256": "91fee998cf775d7aa16ff36921d0711485dc9a3a26a578b5ac59374106e5c8c7",
+      "original_sha256": "5713c9351942c0c4dddb00d9ef337abf2974d3236e9aea169117d0a38fe0ad49",
+      "excluded_arms": 3,
+      "matching_code_lines": 335
+    }
+  ]
+}

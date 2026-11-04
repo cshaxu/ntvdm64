@@ -19,6 +19,7 @@
  *	None
  */
 
+#line 21
 PSZ pszDefaultDOSDirectory;
 
 extern VOID	TerminateVDM(VOID);
@@ -49,6 +50,7 @@ BOOL DemInit (int argc, char *argv[])
      * the original caller-owned directory buffer and every later DEM path
      * operation; obtain only its initial directory through the established
      * session media binding. */
+#line 43
     if (!pszDefaultDOSDirectory ||
         !(dw = NtvdmGetSystemDirectoryA(pszDefaultDOSDirectory, MAX_PATH)) ||
         dw >= MAX_PATH )

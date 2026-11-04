@@ -21,6 +21,7 @@
 #include <nt_vdd.h>
 
 
+#line 25
 BOOL (*VrInitialized)(VOID);  // POINTER TO FUNCTION
 extern BOOL LoadVdmRedir(VOID);
 extern BOOL IsVdmRedirLoaded(VOID);
@@ -52,6 +53,7 @@ static PDOSSF demSftHeadPointer(VOID)
     return (PDOSSF)Sim32GetVDMPointer(sftHead, 0, 0);
 }
 
+#line 29
 BOOL
 IsNamedPipeName(
     IN LPSTR Name
@@ -185,6 +187,7 @@ CHAR    fileName[MAX_PATH];
 ULONG   fileNameBytes;
 mvdm_guest_location fileNameLocation;
 
+#line 159
     if (getAL()){
         demPrintMsg (MSG_EAS);
         return;
@@ -636,6 +639,7 @@ CHAR    cFOTName[MAX_PATH];
 CHAR    fileName[MAX_PATH];
 ULONG   fileNameBytes;
 mvdm_guest_location fileNameLocation;
+#line 600
 BOOL    ttfOnce,IsFirst;
 DWORD   dwLastError;
 
@@ -652,6 +656,7 @@ DWORD   dwLastError;
         return;
     }
     lpFileName = fileName;
+#line 605
     dwAttr = (DWORD)getCX();
 
     if ((dwAttr & 0xff) == 0)
@@ -956,6 +961,7 @@ PDOSPDB pPDBFlat;
 PBYTE   pJFT;
 PDOSSFT pSFT;
 PDOSSF  pSFTHead;
+#line 910
 USHORT  usSFN;
 WORD    JFTLength;
 SHORT   hDosHandle;
@@ -967,6 +973,7 @@ SHORT   hDosHandle;
     // Get the JFT.
     //
 
+#line 922
     pPDBFlat = (PDOSPDB) Sim32GetVDMPointer (pPDB, 0, 0);
     pJFT     = (PBYTE)   Sim32GetVDMPointer (pPDBFlat->PDB_JFN_Pointer, 0, 0);
 
@@ -994,6 +1001,7 @@ SHORT   hDosHandle;
 
     if (!(pSFTHead = demSftHeadPointer()) ||
         !(pSFT = GetFreeSftEntry(pSFTHead, &usSFN))) {
+#line 948
         return (- ERROR_TOO_MANY_OPEN_FILES);
     }
 
@@ -1089,6 +1097,7 @@ HANDLE  ntHandle;
     if (!pPDB && !demCurrentPdbAddress(&pPDB))
         return FALSE;
 
+#line 1043
     ntHandle = VDDRetrieveNtHandle(pPDB,hFile,(PVOID *)&pSFT,&pJFT);
     if (!ntHandle) {
         return(FALSE);
@@ -1159,6 +1168,7 @@ ULONG   ulSFLink;
         return 0;
 
     // Get flat pointer to PDB
+#line 1114
     pPDBFlat = (PDOSPDB) Sim32GetVDMPointer(pPDB, 0, 0);
 
     // Check that handle is within JFT
@@ -1181,6 +1191,7 @@ ULONG   ulSFLink;
     }
 
     // Find the right SFT group
+#line 1134
     while (usSFN >= (usSFTCount = pSfFlat->SFCount)){
         usSFN = usSFN - usSFTCount;
         ulSFLink = pSfFlat->SFLink;
