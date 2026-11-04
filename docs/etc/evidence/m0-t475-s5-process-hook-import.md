@@ -123,9 +123,9 @@ under MSVC (`build/t475-s5/direct-payload-r7.process`) and
 The fixtures verify exact bytes, absent helper DLL, unchanged PE imports,
 duplicate refusal, restricted-handle failures, write-failure recovery, damaged
 header rejection, consumer-failure retry and released allocation. The API is
-not yet selected by the product and its candidate source has not yet been
-synchronized to win16style; that other worktree is executing S29 with local
-changes. The 23 earlier imported upstream files remain byte-exact.
+not yet selected by the product. Per the owner, other repositories and
+worktrees are outside this task; no synchronization is performed. The 23
+earlier imported upstream files remain byte-exact.
 
 The selected product C packet parser retained its previous Detours transport.
 The x86/x64 product build and existing ownership tests passed
@@ -136,3 +136,47 @@ verified 63 immutable guest files and 274 ordinals; Control passed
 `b8fbc836-9f8c-482d-80c7-7861110808ed` has ten verified hashes. Full and
 DOS4GW/NESticle were not run. Product replacement, helper identity, startup
 transaction, and both projects' integrated acceptance remain open.
+
+## P3 — product hook and direct payload migration
+
+The product now selects the C context reader, installer and CreateProcess Hook;
+the original C++ provider files were removed. Run16-only context uses the
+direct payload API without a Hook DLL or cross-width helper. Hook installation
+uses shared import staging and startup trampolines; opposite-width Hook
+installation uses the bounded helper. Actual product link maps for Run16, both
+workers and Hook widths contain the new providers and no Detours symbol
+(`tests/lib-win32/process-hook/verify-product-maps.py`, `p3f/product-maps.process`).
+Some diagnostics and their old C++/Detours sources remain and are not product
+closure; S5 remains active.
+
+A real propagation failure exposed MSVC C static `dllimport` initializer
+thunks; resolving both function addresses at installation time fixed the
+actual shared system entry. A real helper timeout test then exposed asynchronous
+helper termination being followed by a zero-deadline wait. `helper.c` now waits
+up to five seconds for the owned helper before freeing its target allocation;
+if it cannot join, it leaves that allocation to the required target abort. This
+is one documented local change to the 23-file original import; upstream hash
+remains in `upstream-sha256.txt`, and `downstream-sha256.txt` pins the fix.
+The identity test confirms 22 original blobs plus that one recorded difference.
+No other repository or worktree was modified.
+
+The direct payload implementation also permits a native 64-bit high-address
+allocation when low space is exhausted, and retains the actual process-query
+error. MSVC and GCC runs (`direct-payload-r10.process`, `direct-mingw-r10.process`)
+passed all four width pairs, invalid input/rights, malformed header, failed
+write cleanup, consumer retry, actual allocation release, unchanged import
+table, absent DLL and a low-address exhaustion/high-address test. These are
+controlled fixtures, not all possible memory layouts. The actual product
+installer was tested in four width pairs with both Hook DLLs absent
+(`tests/lib-win32/process-hook/verify-missing-dll.ps1`, `p3f/missing.process`).
+Original Hook regressions passed 118 x86, 118 x64, 168 cross-width assertions,
+including helper creation failure, timeout and target death (`p3f/hooks-wrapper.process`).
+
+The x86/x64 product build and ownership tests passed (`p3f/build.process`);
+staging verified 63 immutable guest files and 274 NTVDM ordinal exports
+(`p3f/stage.process`). The selected Control suite passed (`p3f/control.process`),
+and real Win16 WRITE startup reached main/document/page-info in four snapshots
+(`p3f/wow.process`); WRITE editing and exit were not verified. Package
+`144d08b7-5c28-49ba-b41f-85d58908098a` has ten worktree-release hashes and
+the installed MIT/MinHook notices verified. Full, OS/2 NE and external
+DOS4GW/NESticle were not run.

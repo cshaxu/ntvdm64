@@ -23,4 +23,7 @@ foreach ($from in @('x86','x64')) { foreach ($to in @('x86','x64')) {
  Invoke-Owned $source @('"'+$target+'"') (Join-Path $build $from) "$from-to-$to"
  if ((Get-Content -Raw (Join-Path $build "$from-to-$to.stdout")) -notmatch 'DIRECT_PAYLOAD_PASS') {throw 'missing direct payload marker'}
 } }
+$source=Join-Path $build 'x64/payload-direct.exe'
+Invoke-Owned $source @('"'+$source+'"','--exhaust-low') (Join-Path $build 'x64') 'x64-low-exhausted'
+if((Get-Content -Raw (Join-Path $build 'x64-low-exhausted.stdout')) -notmatch 'DIRECT_PAYLOAD_PASS'){throw 'missing low-exhaustion marker'}
 'PASS helper-free payload-only staging across all four x86/x64 pairs'

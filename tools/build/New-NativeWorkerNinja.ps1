@@ -89,6 +89,7 @@ function Add-Edge([string]$target) {
  $edge=$edges[$target];$done[$target]=$true
  $output=$target.Replace('original-opennt-rtl-x86.lib','original-opennt-rtl-native.lib')
  $inputs=@($edge.Inputs)
+ if($target -eq 'obj/lib-win32/process-hook/minhook/src/hde/hde32.obj'){ $inputs=@($inputs | ForEach-Object { $_.Replace('/hde32.c','/hde64.c') }) }
  if($Component -ne 'Launcher'){$inputs=@($inputs|Where-Object {$_ -ne 'opennt-base-client.lib'})}
  if($Component -notin @('Worker','Launcher','Service')){$inputs=@($inputs|Where-Object {$_ -ne 'original-opennt-rtl-x86.lib'})}
  if($target -eq 'opennt-base-bindings.lib'){
@@ -160,6 +161,7 @@ function Add-Edge([string]$target) {
    if($define.Value -notmatch '^/D(_X86_|CPU_[A-Z0-9_]+|NEW_CPU|CCPU|C_VID|SPC386|SIM32|V7VGA|NTVDM|ANSI|PROD|WIN32|WINNT|OPENNT_ADAPTER_NT_ALERT_THREAD|MVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION|_NO_CRT_STDIO_INLINE|_WIN32_WINNT)($|=)'){$flags+=' '+$define.Value}
   }
  }
+ if($target -eq 'obj/lib-win32/process-hook/startup_hooks.obj'){$flags+=' /FI "'+(NP (Join-Path $root 'src/compat/include/process_hook_msvc.h'))+'"'}
  if($target -in @('obj/opennt-rtl/error.obj','obj/opennt-rtl/environ.obj')){$flags+=' /DNTOS_KERNEL_RUNTIME'}
  if($target -eq 'obj/tests/rtl_x86_fixture.obj'){$flags+=' /DOPENNT_ENVIRONMENT_ONLY'}
  if($target -eq 'obj/opennt-base-client/classifier.obj'){$flags+=' /FI "'+(NP (Join-Path $root 'src/common/base_srv/legacy_classifier_arch.h'))+'"'}

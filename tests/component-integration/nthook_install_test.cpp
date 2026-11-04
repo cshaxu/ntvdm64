@@ -1,11 +1,13 @@
 #include "nthook32-dll/hook.h"
-#include "lib-win32/process-hook/detours/detours.h"
+extern "C" {
+#include "lib-win32/process-hook/helper.h"
+#include "lib-win32/process-hook/payload.h"
+}
 #include <stdio.h>
 #include <wchar.h>
 static unsigned assertions;
 static HANDLE fault_target,fault_helper;
 static unsigned helper_fault;
-extern const GUID nthook_payload_guid;
 static void check(BOOL condition,PCSTR message)
 {
     ++assertions;
@@ -18,14 +20,19 @@ static DWORD child(PCWSTR mode,PCWSTR next=NULL,PCWSTR final=NULL)
         if(!never)return 31;
         WaitForSingleObject(never,INFINITE);CloseHandle(never);return 32;
     }
-    nthook_context context;BOOL found=FALSE;
-    DWORD context_error=nthook_context_read(&context,&found);
+    nthook_context context={0};BOOL found=FALSE;DWORD context_error=0;
+    HMODULE hook=GetModuleHandleW(sizeof(void *)==8 ? L"nthook64.dll" : L"nthook32.dll");
+    if(hook) {
+        auto flags=(DWORD (WINAPI *)(void))GetProcAddress(hook,"NthookContextFlags");
+        if(!flags)return 10;
+        DWORD value=flags();context.mode=value&0xffu;
+        context.frontend=(value&0x100u)?(HANDLE)(ULONG_PTR)1:NULL;found=TRUE;
+    } else context_error=nthook_context_read(&context,&found);
     if(!wcscmp(mode,L"invalid"))return found && context_error==ERROR_INVALID_DATA ? 0 : 28;
-    if(context_error || !found)return 10;
+    if(context_error || !found){fprintf(stderr,"context missing mode=%ls hook=%p error=%lu found=%d\n",mode,hook,context_error,found);return 10;}
     if(!wcscmp(mode,L"separate-context"))
         return context.mode==NATIVE_HOOK_LAUNCHER &&
             context.creation_flags==CREATE_SEPARATE_WOW_VDM ? 0 : 29;
-    HMODULE hook=GetModuleHandleW(sizeof(void *)==8 ? L"nthook64.dll" : L"nthook32.dll");
     if(!wcscmp(mode,L"context")) {
         if(hook || context.mode!=NATIVE_HOOK_LAUNCHER)return 11;
         DWORD flags;
@@ -303,9 +310,9 @@ static BOOL WINAPI helper_create(LPCWSTR,LPWSTR,LPSECURITY_ATTRIBUTES pa,
 }
 static void helper_failures(PCWSTR image,const nthook_context *context)
 {
-    char dll[MAX_PATH*2];LPCSTR imports[1]={dll};
-    check(WideCharToMultiByte(CP_ACP,0,sizeof(void *)==8 ? context->hook : context->hook64,
-        -1,dll,sizeof(dll),NULL,NULL),"encode opposite-width installer path");
+    PCWSTR dll=sizeof(void *)==8 ? context->hook : context->hook64;
+    const BYTE packet[8]={0,1,2,3,4,5,6,7};
+    check(dll && *dll,"select opposite-width installer path");
     for(helper_fault=0;helper_fault<3;++helper_fault) {
         STARTUPINFOW startup={sizeof(startup)};PROCESS_INFORMATION target={0};
         WCHAR command[MAX_PATH+32];swprintf_s(command,L"\"%ls\" grandchild",image);
@@ -313,9 +320,9 @@ static void helper_failures(PCWSTR image,const nthook_context *context)
             "create exact suspended target for installer failure");
         fault_target=target.hProcess;fault_helper=NULL;
         ULONGLONG started=GetTickCount64();
-        check(!DetourProcessViaHelperDllsW(target.dwProcessId,1,imports,helper_create),
-            "installer create/timeout/dead-target must fail");
-        DWORD error=GetLastError();ULONGLONG elapsed=GetTickCount64()-started;
+        DWORD error=process_hook_install_helper(target.hProcess,dll,packet,sizeof(packet),helper_create);
+        check(error!=ERROR_SUCCESS,"installer create/timeout/dead-target must fail");
+        ULONGLONG elapsed=GetTickCount64()-started;
         check(error==(helper_fault==0 ? ERROR_ACCESS_DENIED :
             helper_fault==1 ? ERROR_TIMEOUT : ERROR_PROCESS_ABORTED),"preserve concrete installer failure");
         if(helper_fault==1)check(elapsed>=9900 && elapsed<15000,"real ten-second finite installer deadline");
@@ -365,7 +372,7 @@ static void malformed(PCWSTR image,const nthook_context *context,unsigned mutati
     WCHAR command[2*MAX_PATH];STARTUPINFOW startup={sizeof(startup)};PROCESS_INFORMATION process={0};
     swprintf_s(command,L"\"%ls\" invalid",image);
     check(CreateProcessW(image,command,NULL,NULL,FALSE,CREATE_SUSPENDED,NULL,NULL,&startup,&process),"malformed context isolated suspended child");
-    check(DetourCopyPayloadToProcess(process.hProcess,nthook_payload_guid,data,bytes),"copy malformed fixture payload");
+    check(process_hook_payload_write(process.hProcess,data,bytes)==ERROR_SUCCESS,"copy malformed fixture payload");
     check(ResumeThread(process.hThread)==1,"resume malformed fixture");
     DWORD wait=WaitForSingleObject(process.hProcess,10000),result=MAXDWORD;
     if(wait!=WAIT_OBJECT_0)TerminateProcess(process.hProcess,ERROR_TIMEOUT);
@@ -392,6 +399,22 @@ int wmain(int argc,WCHAR **argv)
             }
             return 57;
         }
+    }
+    if(argc==3 && !wcscmp(argv[1],L"missing-dll")) {
+        nthook_context context={0};
+        if(nthook_context_paths(&context))return 70;
+        if(GetFileAttributesW(context.hook)!=INVALID_FILE_ATTRIBUTES ||
+           GetFileAttributesW(context.hook64)!=INVALID_FILE_ATTRIBUTES)return 71;
+        context.frontend=CreateEventW(NULL,TRUE,FALSE,NULL);
+        context.execution=CreateEventW(NULL,TRUE,FALSE,NULL);
+        if(!context.frontend || !context.execution)return 72;
+        DWORD result=run(argv[2],L"context",&context,NATIVE_HOOK_LAUNCHER);
+        BOOL passed=!result && WaitForSingleObject(context.frontend,0)==WAIT_OBJECT_0 &&
+            WaitForSingleObject(context.execution,0)==WAIT_OBJECT_0;
+        CloseHandle(context.frontend);CloseHandle(context.execution);
+        if(!passed)return 73;
+        printf("MISSING_HOOK_DLL_PAYLOAD_PASS source=%u\n",(unsigned)(sizeof(void *)*8));
+        return 0;
     }
     if(argc==4 && !wcscmp(argv[1],L"alternate"))return (int)child(argv[1],argv[2],argv[3]);
     if(argc==3 && !wcscmp(argv[1],L"alternate-leaf"))return (int)child(argv[1],argv[2]);

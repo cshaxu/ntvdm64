@@ -15,43 +15,15 @@ whether a DOS/Win16 redirect applies. A redirect carries that selected image
 and the OpenNT `BaseCheckVDM` tail shape to Run16. Native calls retain their
 original A/W application, command, attributes and parameter tail.
 
-`../lib-win32/process-hook/detours/` is the pinned MIT-licensed Microsoft Detours v4.0.1 slice,
-commit e4bfd6b03e50de46b47abfbd1e46b384f0c5f833. Its LICENSE.md is retained.
-Selected translation units: detours.cpp, modules.cpp, disasm.cpp, image.cpp,
-creatwth.cpp; the latter includes uimports.cpp. No examples/helper are selected.
-Same-width installation uses direct DetourUpdateProcessWithDll. Opposite-width
-installation uses only the freshly reviewed finite W helper routine; never the
-DetourCreateProcessWithDll wrappers or the unbounded A helper. The existing
-Windows rundll32 is an installer, not a guest/worker/frontend or resident helper.
-
-T432-DETOURS-DIV-001 changes only DetourProcessViaHelperDllsW: actual host
-Windows directory, exact caller-selected DLL names after the allocator's
-caller-width heuristic, target-death-first10-second wait, one helper resume,
-concrete errors and exact owned-helper cleanup. Original import update,
-payload layout/restoration and all other imported bodies remain unchanged.
-See the [fresh S6 register](../../docs/etc/operations/t432-detours-helper-adaptation.md#s6-fresh-individual-review).
-
-The installer never resumes or closes borrowed creation handles. Installation
-failure may leave import/payload allocations in an unpublished suspended
-child: its creator must abort that child and close its creation handles.
-No partially modified child is resumed or returned, and no previously handed
-off process or descendant is terminated by this mechanism.
-
-## Pinned source SHA-256
-
-| File | SHA-256 |
-| --- | --- |
-| creatwth.cpp | 062533627BFA775246948FAD92F9F3C0EF7841CC1A83C15DB9178BE12F2DBF4F |
-| detours.cpp | DF415E05F985AFE88F4B03BA34D6F5ABCE47EDDA11CD66D4F72902B801113EB7 |
-| detours.h | 7B498657D8DB4CFF2D488B1E65CFEEB5B1305DE7F32D23588B1FA86AAA46FCF7 |
-| disasm.cpp | 6C44283AC6987D77D92ACA93A6A8E9F0DC1F7CAF8A2B310E4B374853E9136236 |
-| image.cpp | 8E7C94B335237565F3DCE14B6DFD9DD88876CF10FB55B9C910F12AE9C38BD190 |
-| LICENSE.md | B301808B732CFAA60DF2B4B422D78CD97D2A15058B207E7E33F0535BA5170DD6 |
-| modules.cpp | 4A3F970EB539A4379996EB17E14BD75902FE4F34D566CFD19682FF19315CBC6F |
-| uimports.cpp | 2B2D92DF4C5412906D7E6830A7C2836D78E368A6BEF509BE028566CBD921E83B |
+The Hook uses the shared pure-C `lib-win32/process-hook`: startup-time MinHook
+trampolines intercept CreateProcess, same-width suspended-child staging inserts
+the Hook import, and the opposite-width helper uses Windows rundll32. Run16's
+context-only payload is written directly without loading a Hook DLL or helper.
+The bundled MIT and MinHook notices accompany the local release. The copied
+library's helper has a documented local cleanup correction; original source
+hashes and the difference are recorded in the S5 evidence.
 
 The copied payload is private bootstrap data, not RPC or authorization.
 Existing NTSRV object authentication remains authoritative. No broker call,
-wait, process creation or session lookup is permitted in DllMain. The official
-DetourIsHelperProcess payload check bypasses target interception for the
-installer process; ordinal1 invokes the existing DetourFinishHelperProcess.
+wait, process creation or session lookup is permitted in DllMain. The ordinal 1 helper entry is accepted only for the bounded system rundll32
+handoff and validates its packet before staging the target.

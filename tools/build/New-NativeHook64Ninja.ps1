@@ -43,23 +43,24 @@ $graph.Add('rule idl')
 $graph.Add('  command = midl.exe /nologo /env x64 /target NT100 /prefix client Client_ /prefix server Server_ /acf "'+(NP (Join-Path $root 'src/common/protocol/service.acf'))+'" /out obj/basesrv /h service.h /cstub service_c.c /sstub service_s.c "'+(NP (Join-Path $root 'src/common/protocol/service.idl'))+'"')
 $graph.Add('build obj/basesrv/service.h obj/basesrv/service_c.c obj/basesrv/service_s.c: idl '+(NP (Join-Path $root 'src/common/protocol/service.idl'))+' | '+(NP (Join-Path $root 'src/common/protocol/service.acf')))
 $graph.Add('build observation-stub.obj: cc obj/basesrv/service_c.c | obj/basesrv/service.h')
-$sources=@('src/nthook32-dll/entry.cpp','src/common/native-hook/context.cpp','src/common/native-hook/packet.c',
-    'src/common/native-hook/installer.cpp','src/nthook32-dll/create_process.cpp',
-    'src/lib-win32/process-hook/install.cpp',
+$sources=@('src/nthook32-dll/entry.c','src/common/native-hook/context.c','src/common/native-hook/packet.c',
+    'src/common/native-hook/installer.c','src/nthook32-dll/create_process.c',
+    'src/lib-win32/process-hook/staging.c','src/lib-win32/process-hook/helper.c','src/lib-win32/process-hook/payload.c',
+    'src/lib-win32/process-hook/startup_hooks.c','src/lib-win32/process-hook/minhook/src/buffer.c',
+    'src/lib-win32/process-hook/minhook/src/trampoline.c','src/lib-win32/process-hook/minhook/src/hde/hde64.c',
     'src/common/native_image.c','src/lib-win32/handle/duplicate.c','src/lib-win32/file/identity.c',
     'src/nthook32-dll/hook_classification.c',
     'src/non-mvdm/base/win32/client/vdm.c',
     'src/common/base_srv/base_classifier_path.c',
     'src/compat/opennt_support_rtl.c',
     'src/non-mvdm/base/ntos/rtl/error.c')
-foreach($name in @('detours','modules','disasm','image','creatwth')) {
-    $sources += 'src/lib-win32/process-hook/detours/'+$name+'.cpp'
-}
 $sources+=@('src/lib-win32/rpc/local_binding.c','src/common/rpc/management.c','src/common/base_srv/scope.c')
 $objects=@();$manifest=@();$i=0
 foreach($source in $sources) {
     $object='unit'+$i+'.obj';++$i;$objects+=$object
     $graph.Add('build '+$object+': cc '+(NP (Join-Path $root $source))+' | obj/basesrv/service.h')
+    if($source -in @('src/lib-win32/process-hook/staging.c','src/lib-win32/process-hook/helper.c','src/lib-win32/process-hook/payload.c')) { $graph.Add('  cflags = $cflags /std:c11') }
+    if($source -eq 'src/lib-win32/process-hook/startup_hooks.c') { $graph.Add('  cflags = $cflags /std:c11 /FI"'+(NP (Join-Path $root 'src/compat/include/process_hook_msvc.h'))+'"') }
     if($source -eq 'src/non-mvdm/base/win32/client/vdm.c') {
         $graph.Add('  cflags = $cflags /DOPENNT_BASE_CLIENT_CLASSIFIER /FI"'+(NP (Join-Path $root 'src/common/base_srv/legacy_classifier_arch.h'))+'"')
     }

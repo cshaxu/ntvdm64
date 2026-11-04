@@ -37,8 +37,17 @@ P2 moves native Hook packet validation to selected C code and adds an isolated,
 helper-free cross-width direct-payload candidate. MSVC and MinGW four-pair,
 error, retry and release tests passed; the original Hook regressions and Control
 passed with local package `b8fbc836-9f8c-482d-80c7-7861110808ed`. The new
-payload API is not yet used by product code or synchronized upstream; the
-adjacent worktree has another active S. Full and DOS4GW/NESticle were not run.
+payload API is not yet used by product code. The owner directs changes only
+in this worktree; other repositories and worktrees are out of scope. Full and
+DOS4GW/NESticle were not run.
+
+P3 selects pure C native Hook/context/installer and direct payload transport;
+product link maps contain no Detours. Four actual missing-DLL width pairs,
+118 x86, 118 x64 and 168 cross-width Hook assertions, Control and real WRITE
+startup snapshots passed. Local package `144d08b7-5c28-49ba-b41f-85d58908098a`
+has ten verified hashes. One imported helper has a recorded local cleanup fix;
+remaining diagnostic/test C++ and Detours, Full, OS/2 NE and WRITE editing/exit
+remain open or unverified. See [S5 evidence](../etc/evidence/m0-t475-s5-process-hook-import.md).
 
 The adjacent library's same-width payload-only mechanism, non-Detours payload
 format, helper ordinal and startup-only transaction require compatibility proof;

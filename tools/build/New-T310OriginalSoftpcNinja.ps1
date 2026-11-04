@@ -1731,28 +1731,29 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $baseAdapterFlags)
     # One worker; actual child machine selects the reviewed matching Hook installer.
     $hookFlags = '/nologo /TP /c /MT /O2 /Gy /W4 /showIncludes /std:c++14 /DWIN32_LEAN_AND_MEAN /D_WIN32_WINNT=0x0A00 /I obj/basesrv /I "' + (NinjaPath (Join-Path $root 'src')) + '"'
-    $hookDetoursObjects = @()
-    foreach ($name in @('detours','modules','disasm','image','creatwth')) {
-        $object = 'obj/nthook32/detours-' + $name + '.obj'
-        $hookDetoursObjects += $object
-        $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $root ('src/lib-win32/process-hook/detours/' + $name + '.cpp'))))
-        $graph.Add('  cflags = ' + $hookFlags)
+    $hookCFlags = '/nologo /TC /c /MT /O2 /Gy /W4 /we4013 /showIncludes /std:c11 /DWIN32_LEAN_AND_MEAN /D_WIN32_WINNT=0x0A00 /I obj/basesrv /I "' + (NinjaPath (Join-Path $root 'src')) + '"'
+    $hookObjects = @()
+    foreach ($name in @('staging','helper','payload','startup_hooks','minhook/src/buffer','minhook/src/trampoline','minhook/src/hde/hde32')) {
+        $object = 'obj/lib-win32/process-hook/' + $name + '.obj'
+        $hookObjects += $object
+        $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $root ('src/lib-win32/process-hook/' + $name + '.c'))))
+        if($name -eq 'startup_hooks') {
+            $graph.Add('  cflags = ' + $hookCFlags + ' /FI "' + (NinjaPath (Join-Path $root 'src/compat/include/process_hook_msvc.h')) + '"')
+        } else { $graph.Add('  cflags = ' + $hookCFlags) }
     }
     $graph.Add('build obj/common/native-hook/packet.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/native-hook/packet.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build obj/common/native-hook/context.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/native-hook/context.cpp')) + ' | obj/basesrv/service.h')
-    $graph.Add('  cflags = ' + $hookFlags)
-    $graph.Add('build obj/common/native-hook/installer.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/native-hook/installer.cpp')) + ' | obj/basesrv/service.h')
-    $graph.Add('  cflags = ' + $hookFlags)
+    $graph.Add('build obj/common/native-hook/context.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/native-hook/context.c')) + ' | obj/basesrv/service.h')
+    $graph.Add('  cflags = ' + $hookCFlags)
+    $graph.Add('build obj/common/native-hook/installer.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/native-hook/installer.c')) + ' | obj/basesrv/service.h')
+    $graph.Add('  cflags = ' + $hookCFlags)
     foreach ($name in @('entry','create_process')) {
-        $graph.Add('build obj/nthook32/' + $name + '.obj: cc ' + (NinjaPath (Join-Path $root ('src/nthook32-dll/' + $name + '.cpp'))) + ' | obj/basesrv/service.h')
-        $graph.Add('  cflags = ' + $hookFlags)
+        $graph.Add('build obj/nthook32/' + $name + '.obj: cc ' + (NinjaPath (Join-Path $root ('src/nthook32-dll/' + $name + '.c'))) + ' | obj/basesrv/service.h')
+        $graph.Add('  cflags = ' + $hookCFlags)
     }
     $graph.Add('build obj/nthook32/classification.obj: cc ' + (NinjaPath (Join-Path $root 'src/nthook32-dll/hook_classification.c')))
     $graph.Add('  cflags = ' + $baseAdapterFlags + ' /Gy')
-    $graph.Add('build obj/lib-win32/process-hook/install.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/process-hook/install.cpp')))
-    $graph.Add('  cflags = ' + $hookFlags)
-    $graph.Add('build lib-process-hook.lib: lib obj/lib-win32/process-hook/install.obj ' + ($hookDetoursObjects -join ' '))
+    $graph.Add('build lib-process-hook.lib: lib ' + ($hookObjects -join ' '))
     $graph.Add('build obj/tests/win32_process_hook.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/win32_process_hook_test.cpp')))
     $graph.Add('  cflags = ' + $hookFlags)
     $graph.Add('build win32-process-hook-test.exe: broker_test_link obj/tests/win32_process_hook.obj')
@@ -2408,7 +2409,7 @@ if ($objectOutputDirectories.Count -gt 0) {
         selected = ($Architecture -eq 'x86')
         consumers = @('ntvwm.exe','run16.exe')
         disposition = 'owner-admitted x86 installer/context and native CUI/GUI propagation; no helper/cross-width or mirror changes'
-sources = @('src/common/protocol/native_hook.h', 'src/nthook32-dll/hook.h', 'src/nthook32-dll/intercept.h', 'src/common/native-hook/context.cpp', 'src/common/native-hook/packet.c', 'src/common/native-hook/installer.cpp', 'src/nthook32-dll/create_process.cpp', 'src/nthook32-dll/entry.cpp', 'src/nthook32-dll/nthook32.def', 'src/nthook32-dll/hook_classification.c', 'src/lib-win32/process-hook/detours/detours.cpp', 'src/lib-win32/process-hook/detours/modules.cpp', 'src/lib-win32/process-hook/detours/disasm.cpp', 'src/lib-win32/process-hook/detours/image.cpp', 'src/lib-win32/process-hook/detours/creatwth.cpp', 'src/lib-win32/process-hook/detours/uimports.cpp', 'src/lib-win32/process-hook/detours/detours.h', 'src/lib-win32/process-hook/detours/LICENSE.md' | ForEach-Object {
+sources = @('src/common/protocol/native_hook.h', 'src/nthook32-dll/hook.h', 'src/nthook32-dll/intercept.h', 'src/common/native-hook/context.c', 'src/common/native-hook/packet.c', 'src/common/native-hook/installer.c', 'src/nthook32-dll/create_process.c', 'src/nthook32-dll/entry.c', 'src/nthook32-dll/nthook32.def', 'src/nthook32-dll/hook_classification.c', 'src/lib-win32/process-hook/staging.c', 'src/lib-win32/process-hook/helper.c', 'src/lib-win32/process-hook/payload.c', 'src/lib-win32/process-hook/startup_hooks.c', 'src/lib-win32/process-hook/minhook/src/buffer.c', 'src/lib-win32/process-hook/minhook/src/trampoline.c', 'src/lib-win32/process-hook/minhook/src/hde/hde32.c', 'src/lib-win32/process-hook/minhook/LICENSE.txt' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
     }

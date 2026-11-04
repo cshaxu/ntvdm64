@@ -2,7 +2,7 @@
 param([Parameter(Mandatory)][string]$LauncherBuildRoot)
 $ErrorActionPreference='Stop'
 $graph=Get-Content (Join-Path $LauncherBuildRoot 'build.ninja') -Raw
-if($graph -notmatch 'src/common/native-hook/context\.cpp' -or
+if($graph -notmatch 'src/common/native-hook/context\.c' -or
    $graph -match 'src/nthook32-dll/context\.cpp') {
     throw 'Launcher context provider is not common-owned'
 }

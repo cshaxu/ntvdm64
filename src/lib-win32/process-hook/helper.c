@@ -85,7 +85,17 @@ DWORD process_hook_install_helper(HANDLE child,PCWSTR dll,const void *packet,DWO
 done:
     if(helper.hProcess){
         if(WaitForSingleObject(helper.hProcess,0)==WAIT_TIMEOUT){
-            TerminateProcess(helper.hProcess,ERROR_CANCELLED);WaitForSingleObject(helper.hProcess,remaining(deadline));
+            DWORD joined;
+            TerminateProcess(helper.hProcess,ERROR_CANCELLED);
+            /* The deadline may already be exhausted. Termination is async;
+             * join before releasing the target memory the helper can read. */
+            joined=WaitForSingleObject(helper.hProcess,5000);
+            if(joined!=WAIT_OBJECT_0){
+                /* The creator must abort this uncommitted target. Keep its
+                 * transfer allocation until then if the helper may still run. */
+                remote=NULL;
+                if(!error)error=joined==WAIT_TIMEOUT?ERROR_TIMEOUT:GetLastError();
+            }
         }
         CloseHandle(helper.hProcess);
     }

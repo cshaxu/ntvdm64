@@ -1,18 +1,23 @@
 #include "common/native-hook/context.h"
-#include "lib-win32/process-hook/detours/detours.h"
+#include "lib-win32/process-hook/staging.h"
+#include "lib-win32/process-hook/payload.h"
 #include <wchar.h>
-/* Private copied-payload identity, not a discoverable authorization token. */
-extern const GUID nthook_payload_guid={0x62430757,0xd5a2,0x46e8,{0x81,0xbe,0xb3,0x72,0x4f,0x63,0x89,0x11}};
+static DWORD consume_packet(const void *packet,DWORD bytes,DWORD machine,void *context)
+{return nthook_context_parse((nthook_context *)context,packet,bytes,machine);}
+static DWORD consume_direct(const void *packet,DWORD bytes,void *context)
+{
+    DWORD machine=sizeof(void *)==8?IMAGE_FILE_MACHINE_AMD64:IMAGE_FILE_MACHINE_I386;
+    return nthook_context_parse((nthook_context *)context,packet,bytes,machine);
+}
 DWORD nthook_context_read(nthook_context *context,BOOL *found)
 {
-    DWORD bytes=0;const BYTE *data;
+    DWORD error;
     if(!context || !found)return ERROR_INVALID_PARAMETER;
     ZeroMemory(context,sizeof(*context));*found=FALSE;
-    data=(const BYTE *)DetourFindPayloadEx(nthook_payload_guid,&bytes);
-    if(!data)return ERROR_SUCCESS;
-    *found=TRUE;
-    return nthook_context_parse(context,data,bytes,
-        sizeof(void *)==8 ? IMAGE_FILE_MACHINE_AMD64 : IMAGE_FILE_MACHINE_I386);
+    error=process_hook_stage_read(consume_packet,context,found);
+    if(error)return error;
+    if(*found)return process_hook_stage_restore();
+    return process_hook_payload_take(consume_direct,context,found);
 }
 DWORD nthook_context_paths(nthook_context *context)
 {

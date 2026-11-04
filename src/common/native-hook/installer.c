@@ -1,10 +1,11 @@
 #include "common/native-hook/installer.h"
 #include "lib-win32/handle/duplicate.h"
 #include "lib-win32/file/identity.h"
-#include "lib-win32/process-hook/install.h"
+#include "lib-win32/process-hook/staging.h"
+#include "lib-win32/process-hook/payload.h"
+#include "lib-win32/process-hook/helper.h"
 #include "common/native_image.h"
 #include <wchar.h>
-extern const GUID nthook_payload_guid;
 DWORD nthook_launcher_target(HANDLE child,const nthook_context *context,BOOL *launcher)
 {
     WCHAR actual[MAX_PATH+32];DWORD error=ERROR_SUCCESS;
@@ -13,6 +14,22 @@ DWORD nthook_launcher_target(HANDLE child,const nthook_context *context,BOOL *la
     error=common_native_process_path(child,actual,MAX_PATH+32);
     if(error)return error;
     return win32_file_same(actual,context->launcher,launcher);
+}
+/* Runs inside the target-width helper. The process handle is borrowed from the
+ * generic handoff and must already identify the still-suspended child. */
+DWORD nthook_helper_apply(HANDLE child,const void *packet,DWORD bytes,PCWSTR dll,void *unused)
+{
+    nthook_context context;DWORD machine=0,subsystem=0,error;char path[MAX_PATH*2];BOOL lossy=FALSE;
+    PCWSTR expected;(void)unused;
+    error=common_native_process_image(child,&machine,&subsystem);if(error)return error;
+    if(machine!=(sizeof(void *)==8?IMAGE_FILE_MACHINE_AMD64:IMAGE_FILE_MACHINE_I386))return ERROR_BAD_EXE_FORMAT;
+    error=nthook_context_parse(&context,packet,bytes,machine);if(error)return error;
+    expected=machine==IMAGE_FILE_MACHINE_AMD64?context.hook64:context.hook;
+    if(!dll || _wcsicmp(expected,dll))return ERROR_INVALID_NAME;
+    if(context.mode!=NATIVE_HOOK_INTERCEPT)return ERROR_INVALID_DATA;
+    if(!WideCharToMultiByte(CP_ACP,WC_NO_BEST_FIT_CHARS,expected,-1,path,sizeof(path),NULL,&lossy) || lossy)
+        return ERROR_NO_UNICODE_TRANSLATION;
+    return process_hook_stage_process(child,path,packet,bytes);
 }
 DWORD nthook_install(HANDLE child,const nthook_context *context,DWORD mode)
 {
@@ -63,8 +80,12 @@ DWORD nthook_install(HANDLE child,const nthook_context *context,DWORD mode)
     memcpy(data+header->launcher_offset,context->launcher,header->launcher_bytes);
     memcpy(data+header->hook_offset,context->hook,header->hook_bytes);
     memcpy(data+header->hook64_offset,context->hook64,header->hook64_bytes);
-    error=win32_process_hook_apply(child,machine,&nthook_payload_guid,data,header->bytes,
-        mode==NATIVE_HOOK_INTERCEPT ? dll : NULL);
+    if(mode==NATIVE_HOOK_LAUNCHER)
+        error=process_hook_payload_write(child,data,header->bytes);
+    else if(machine==(sizeof(void *)==8?IMAGE_FILE_MACHINE_AMD64:IMAGE_FILE_MACHINE_I386))
+        error=process_hook_stage_process(child,dll,data,header->bytes);
+    else
+        error=process_hook_install_helper(child,hook,data,header->bytes,CreateProcessW);
     if(error)goto failed;
     return ERROR_SUCCESS;
 failed:

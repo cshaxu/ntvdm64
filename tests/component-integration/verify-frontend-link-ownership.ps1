@@ -216,7 +216,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
     if(@(Compare-Object @('console/client.c') @(Get-FrontendSources 'common-console.lib' 'common')).Count) {
         throw 'Common Console client must have exactly one provider'
     }
-    if ('process-hook/install.cpp' -notin @(Get-FrontendSources 'lib-process-hook.lib' 'lib-win32')) { throw 'Win32 process-hook installer missing' }
+    if ('process-hook/payload.c' -notin @(Get-FrontendSources 'lib-process-hook.lib' 'lib-win32')) { throw 'Win32 process-hook payload provider missing' }
     if(@(Compare-Object @('handle/duplicate.c') @(Get-FrontendSources 'lib-handle.lib' 'lib-win32')).Count) { throw 'Win32 handle library must own the duplication implementation' }
     if(@(Compare-Object @('file/identity.c') @(Get-FrontendSources 'lib-file.lib' 'lib-win32')).Count) { throw 'Win32 file library must own file identity' }
     if(@(Compare-Object @('process-observation/observation.c') @(Get-FrontendSources 'lib-process-observation.lib' 'lib-win32')).Count) { throw 'Win32 process observation provider missing' }

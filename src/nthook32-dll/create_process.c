@@ -1,11 +1,14 @@
 #include "intercept.h"
-#include "lib-win32/process-hook/detours/detours.h"
+#include "lib-win32/process-hook/startup_hooks.h"
+#include "lib-win32/process-hook/helper.h"
 #include "lib-win32/rpc/local_binding.h"
 #include "common/rpc/management.h"
 #include "common/base_srv/scope.h"
 #include <wchar.h>
-static decltype(&CreateProcessW) create_w=CreateProcessW;
-static decltype(&CreateProcessA) create_a=CreateProcessA;
+typedef BOOL (WINAPI *create_process_a_fn)(LPCSTR,LPSTR,LPSECURITY_ATTRIBUTES,
+    LPSECURITY_ATTRIBUTES,BOOL,DWORD,LPVOID,LPCSTR,LPSTARTUPINFOA,LPPROCESS_INFORMATION);
+static process_hook_create_w create_w;
+static create_process_a_fn create_a;
 static __declspec(thread) unsigned entering;
 #define NTHOOK_COMMAND_CAPACITY 32768u
 /* Called only from the successful creation transaction, never DllMain.
@@ -270,10 +273,13 @@ static BOOL WINAPI hooked_a(LPCSTR application,LPSTR command,
 }
 LONG nthook_attach(void)
 {
-    LONG error=DetourTransactionBegin();
-    if(!error)error=DetourUpdateThread(GetCurrentThread());
-    if(!error)error=DetourAttach(&(PVOID &)create_w,hooked_w);
-    if(!error)error=DetourAttach(&(PVOID &)create_a,hooked_a);
-    if(error){DetourTransactionAbort();return error;}
-    return DetourTransactionCommit();
+    DWORD error;
+    /* Resolve dllimport pointers at runtime: a C static initializer may use
+     * an image-local import thunk instead of the shared system entry. */
+    create_w=CreateProcessW;create_a=CreateProcessA;
+    error=process_hook_startup_begin();
+    if(!error)error=process_hook_startup_attach(&create_w,(void *)hooked_w);
+    if(!error)error=process_hook_startup_attach(&create_a,(void *)hooked_a);
+    if(error){process_hook_startup_abort();return (LONG)error;}
+    return (LONG)process_hook_startup_commit();
 }

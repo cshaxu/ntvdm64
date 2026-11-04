@@ -13,9 +13,12 @@ typedef struct payload_header {
 _Static_assert(sizeof(payload_header)==40,"cross-width payload header");
 static DWORD find_payload(HANDLE process,void **address,payload_header *header,BOOL *found)
 {
-    uintptr_t cursor=0x10000;MEMORY_BASIC_INFORMATION region;
+    uintptr_t cursor=0x10000,limit=PAYLOAD_LOW_LIMIT;MEMORY_BASIC_INFORMATION region;
+#ifdef _WIN64
+    SYSTEM_INFO info;GetSystemInfo(&info);limit=(uintptr_t)info.lpMaximumApplicationAddress;
+#endif
     *found=FALSE;*address=NULL;
-    while(cursor<PAYLOAD_LOW_LIMIT) {
+    while(cursor<limit) {
         SIZE_T queried=VirtualQueryEx(process,(void *)cursor,&region,sizeof(region));
         if(!queried) {
             DWORD error=GetLastError();
@@ -58,6 +61,18 @@ static void *allocate_low(HANDLE process,SIZE_T bytes)
         if(end>=PAYLOAD_LOW_LIMIT)break;
         cursor=(end+info.dwAllocationGranularity-1u)&~((uintptr_t)info.dwAllocationGranularity-1u);
     }
+#ifdef _WIN64
+    /* A native 64-bit target need not fit the allocation into the low half.
+     * WOW64 targets and 32-bit callers still require an address they can use. */
+    { BOOL wow=TRUE;
+      if(!IsWow64Process(process,&wow))return NULL;
+      if(!wow) {
+          void *p=VirtualAllocEx(process,NULL,bytes,MEM_RESERVE|MEM_COMMIT,PAGE_READWRITE);
+          if(p)return p;
+          return NULL;
+      }
+    }
+#endif
     SetLastError(ERROR_NOT_ENOUGH_MEMORY);return NULL;
 }
 DWORD process_hook_payload_write(HANDLE child,const void *payload,DWORD bytes)

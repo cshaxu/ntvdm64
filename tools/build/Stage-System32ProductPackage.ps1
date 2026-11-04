@@ -95,7 +95,9 @@ if(Test-Path -LiteralPath $flatRegistry){
     }else{Move-Item -LiteralPath $flatRegistry -Destination $registry}
 }
 if($NativeHook){
-    Copy-Item -LiteralPath "$PSScriptRoot/../../src/lib-win32/process-hook/detours/LICENSE.md" -Destination (Join-Path $system 'nthook32-LICENSE.txt')
+    $hookLicense=[IO.File]::ReadAllText("$PSScriptRoot/../../src/lib-win32/process-hook/LICENSE.win16style")
+    $minhookLicense=[IO.File]::ReadAllText("$PSScriptRoot/../../src/lib-win32/process-hook/minhook/LICENSE.txt")
+    [IO.File]::WriteAllText((Join-Path $system 'nthook32-LICENSE.txt'),$hookLicense+"`r`n"+$minhookLicense,[Text.UTF8Encoding]::new($false))
 }
 # Publish the completion manifest only after every required staging operation.
 $manifest|ConvertTo-Json|Set-Content -LiteralPath $manifestTemporary

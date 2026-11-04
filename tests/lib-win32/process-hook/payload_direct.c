@@ -15,8 +15,11 @@ static DWORD reject(const void *data,DWORD bytes,void *context)
 {(void)data;(void)bytes;(void)context;return ERROR_CANCELLED;}
 static void *find_payload_allocation(void)
 {
-    uintptr_t cursor=0x10000;MEMORY_BASIC_INFORMATION region;
-    while(cursor<(uintptr_t)0x80000000u && VirtualQuery((void *)cursor,&region,sizeof(region))) {
+    uintptr_t cursor=0x10000,limit=(uintptr_t)0x80000000u;MEMORY_BASIC_INFORMATION region;
+#ifdef _WIN64
+    SYSTEM_INFO info;GetSystemInfo(&info);limit=(uintptr_t)info.lpMaximumApplicationAddress;
+#endif
+    while(cursor<limit && VirtualQuery((void *)cursor,&region,sizeof(region))) {
         uintptr_t end=(uintptr_t)region.BaseAddress+region.RegionSize;
         if(end<=cursor)break;
         if(region.State==MEM_COMMIT && region.Type==MEM_PRIVATE &&
@@ -54,11 +57,32 @@ done:
     if(file!=INVALID_HANDLE_VALUE)CloseHandle(file);
     return result;
 }
+#ifdef _WIN64
+static BOOL reserve_low_regions(HANDLE process)
+{
+    uintptr_t cursor=0x10000;MEMORY_BASIC_INFORMATION region;SYSTEM_INFO info;
+    GetSystemInfo(&info);
+    while(cursor<(uintptr_t)0x80000000u && VirtualQueryEx(process,(void *)cursor,&region,sizeof(region))) {
+        uintptr_t end=(uintptr_t)region.BaseAddress+region.RegionSize;
+        if(end<=cursor)return FALSE;
+        if(end>(uintptr_t)0x80000000u)end=(uintptr_t)0x80000000u;
+        if(region.State==MEM_FREE && end>cursor) {
+            SIZE_T length=(SIZE_T)(end-cursor);
+            length&=~((SIZE_T)info.dwAllocationGranularity-1u);
+            if(length && !VirtualAllocEx(process,(void *)cursor,length,MEM_RESERVE,PAGE_NOACCESS))return FALSE;
+        }
+        if(end>=(uintptr_t)0x80000000u)break;
+        cursor=(end+info.dwAllocationGranularity-1u)&~((uintptr_t)info.dwAllocationGranularity-1u);
+    }
+    return TRUE;
+}
+#endif
 int wmain(int argc,wchar_t **argv)
 {
-    if(argc==2 && !wcscmp(argv[1],L"--child")) {
+    if((argc==2 || argc==3) && !wcscmp(argv[1],L"--child")) {
         BOOL found=FALSE,matched=FALSE;MEMORY_BASIC_INFORMATION allocation;
         void *address=find_payload_allocation();if(!address)return 15;
+        if(argc==3 && (!wcscmp(argv[2],L"--expect-high")) && (uintptr_t)address<(uintptr_t)0x80000000u)return 18;
         if(GetModuleHandleW(L"cross-helper.dll") || !original_import_unchanged())return 10;
         /* A damaged matched header must be rejected and never consumed. */
         DWORD *version=(DWORD *)((BYTE *)address+24),saved=*version;
@@ -74,12 +98,19 @@ int wmain(int argc,wchar_t **argv)
         if(!original_import_unchanged())return 13;
         return 42;
     }
-    if(argc!=2)return 2;
+    if(argc!=2 && argc!=3)return 2;
     WCHAR line[32768];STARTUPINFOW si={0};PROCESS_INFORMATION pi={0};HANDLE limited=NULL;
     DWORD error=0,code=0;
-    if(swprintf_s(line,32768,L"\"%ls\" --child",argv[1])<0)return 3;
+    if(swprintf_s(line,32768,L"\"%ls\" --child%ls",argv[1],argc==3?L" --expect-high":L"")<0)return 3;
     si.cb=sizeof(si);
     if(!CreateProcessW(argv[1],line,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,NULL,NULL,&si,&pi))return 4;
+    if(argc==3) {
+#ifdef _WIN64
+        if(wcscmp(argv[2],L"--exhaust-low") || !reserve_low_regions(pi.hProcess)){error=9;goto done;}
+#else
+        error=9;goto done;
+#endif
+    }
     if(process_hook_payload_write(NULL,payload,sizeof(payload))!=ERROR_INVALID_PARAMETER ||
        process_hook_payload_write(pi.hProcess,payload,0)!=ERROR_INVALID_PARAMETER ||
        process_hook_payload_write(pi.hProcess,payload,65537)!=ERROR_INVALID_PARAMETER) {error=1;goto done;}
