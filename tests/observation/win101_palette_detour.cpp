@@ -1,7 +1,7 @@
 // Test-only observation; no result substitution or guest mutation.
 #include <windows.h>
 #include <stdio.h>
-#include "../../src/nthook32-dll/detours/detours.h"
+#include "../../src/lib-win32/process-hook/detours/detours.h"
 extern "C" BOOL ntvdm_console_text_palette(PALETTEENTRY colours[16]);
 extern "C" BOOL WINAPI GetNextVDMCommand(void *info);
 extern "C" DWORD ntcon_worker_call(void *client,void *request,void *reply);

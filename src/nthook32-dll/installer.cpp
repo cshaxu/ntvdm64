@@ -1,6 +1,6 @@
 #include "hook.h"
 #include "lib-win32/handle/duplicate.h"
-#include "detours/detours.h"
+#include "lib-win32/process-hook/install.h"
 #include "common/native_image.h"
 #include <wchar.h>
 extern const GUID nthook_payload_guid;
@@ -74,16 +74,9 @@ DWORD nthook_install(HANDLE child,const nthook_context *context,DWORD mode)
     memcpy(data+header->launcher_offset,context->launcher,header->launcher_bytes);
     memcpy(data+header->hook_offset,context->hook,header->hook_bytes);
     memcpy(data+header->hook64_offset,context->hook64,header->hook64_bytes);
-    if(!DetourCopyPayloadToProcess(child,nthook_payload_guid,data,header->bytes)) {error=GetLastError();goto failed;}
-    if(mode==NATIVE_HOOK_INTERCEPT) {
-        LPCSTR imports[1]={dll};
-        /* Never replace the creator's actual child or resume it. Opposite
-         * width uses only the reviewed finite official installer transaction. */
-        BOOL installed=machine==(sizeof(void *)==8 ? IMAGE_FILE_MACHINE_AMD64 : IMAGE_FILE_MACHINE_I386) ?
-            DetourUpdateProcessWithDll(child,imports,1) :
-            DetourProcessViaHelperDllsW(GetProcessId(child),1,imports,CreateProcessW);
-        if(!installed){error=GetLastError();goto failed;}
-    }
+    error=win32_process_hook_apply(child,machine,&nthook_payload_guid,data,header->bytes,
+        mode==NATIVE_HOOK_INTERCEPT ? dll : NULL);
+    if(error)goto failed;
     return ERROR_SUCCESS;
 failed:
     for(DWORD i=0;i<2;++i)win32_handle_close_remote(child,attached[i]);

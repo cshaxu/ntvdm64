@@ -8,7 +8,7 @@ if(!$root.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIg
 New-Item -ItemType Directory -Path $root|Out-Null
 $commands=@('@echo off','call "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvars64.bat" >nul','if errorlevel 1 exit /b %errorlevel%')
 $sources=@("$PSScriptRoot/win31_console_api_trace.cpp")
-foreach($name in @('detours','disasm','image','modules','creatwth')){$sources+="$repo/src/nthook32-dll/detours/$name.cpp"}
+foreach($name in @('detours','disasm','image','modules','creatwth')){$sources+="$repo/src/lib-win32/process-hook/detours/$name.cpp"}
 $objects=@()
 foreach($source in $sources) {
     $obj="$root/$([IO.Path]::GetFileNameWithoutExtension($source)).obj"

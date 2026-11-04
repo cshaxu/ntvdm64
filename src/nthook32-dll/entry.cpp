@@ -1,5 +1,5 @@
 #include "intercept.h"
-#include "detours/detours.h"
+#include "lib-win32/process-hook/detours/detours.h"
 #include <rpc.h>
 /* RPC allocation is local and has no initialization/loader-lock activity. */
 extern "C" void *__RPC_USER MIDL_user_allocate(size_t bytes)

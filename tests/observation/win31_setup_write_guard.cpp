@@ -4,7 +4,7 @@
 #include <windows.h>
 #include <winternl.h>
 #include <string>
-#include "../../src/nthook32-dll/detours/detours.h"
+#include "../../src/lib-win32/process-hook/detours/detours.h"
 typedef NTSTATUS (NTAPI *CreateFn)(PHANDLE,ACCESS_MASK,POBJECT_ATTRIBUTES,PIO_STATUS_BLOCK,PLARGE_INTEGER,ULONG,ULONG,ULONG,ULONG,PVOID,ULONG);
 typedef NTSTATUS (NTAPI *OpenFn)(PHANDLE,ACCESS_MASK,POBJECT_ATTRIBUTES,PIO_STATUS_BLOCK,ULONG,ULONG);
 typedef NTSTATUS (NTAPI *WriteFn)(HANDLE,HANDLE,PVOID,PVOID,PIO_STATUS_BLOCK,PVOID,ULONG,PLARGE_INTEGER,PULONG);

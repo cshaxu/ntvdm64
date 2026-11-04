@@ -95,7 +95,7 @@ if(Test-Path -LiteralPath $flatRegistry){
     }else{Move-Item -LiteralPath $flatRegistry -Destination $registry}
 }
 if($NativeHook){
-    Copy-Item -LiteralPath "$PSScriptRoot/../../src/nthook32-dll/detours/LICENSE.md" -Destination (Join-Path $system 'nthook32-LICENSE.txt')
+    Copy-Item -LiteralPath "$PSScriptRoot/../../src/lib-win32/process-hook/detours/LICENSE.md" -Destination (Join-Path $system 'nthook32-LICENSE.txt')
 }
 # Publish the completion manifest only after every required staging operation.
 $manifest|ConvertTo-Json|Set-Content -LiteralPath $manifestTemporary

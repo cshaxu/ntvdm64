@@ -30,7 +30,7 @@ $ProbeSource=(Resolve-Path $ProbeSource).Path
 if(!$ProbeSource.StartsWith((Join-Path $repo 'tests')+'\',[StringComparison]::OrdinalIgnoreCase)){throw 'Test-owned probe source required'}
 $sources=@($ProbeSource)
 foreach($name in @('detours','disasm','image','modules','creatwth')) {
-    $sources+=Join-Path $repo "src/nthook32-dll/detours/$name.cpp"
+    $sources+=Join-Path $repo "src/lib-win32/process-hook/detours/$name.cpp"
 }
 $commands=@('@echo off',
     'call "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul',
