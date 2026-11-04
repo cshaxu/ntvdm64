@@ -141,7 +141,7 @@ $providerSupportSources = @(
     (Join-Path $adapterWow 'wow_public_user_facade.c'),
     # This is the already-admitted narrow historical CRT spelling bridge.  It
     # has no parent-machine state, so the late-loaded DLL may own its copy.
-    (Join-Path $root 'src/ntvdm-exe/win32/crt_compat.c')
+    (Join-Path $root 'src/lib-win32/crt-compat/crt_compat.c')
 )
 foreach ($path in $providerSupportSources) {
     if (!(Test-Path -LiteralPath $path -PathType Leaf)) {

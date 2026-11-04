@@ -22,6 +22,9 @@ own the decision attached to a match and the supplied path policy.
 Detours installation; the caller retains process ownership and rollback.
 The pinned Detours source and license are carried under this subcomponent.
 
+`crt-compat/` provides historical unbounded CRT formatting and scanning entry
+points for callers that require those spellings, using the modern UCRT ABI.
+
 `process-observation/` retains an observation handle, reads process identity
 and image information, queries inherited parent identity, and registers/drains a one-shot exit wait; callbacks,
 process ownership, task identity and decisions remain caller-owned.

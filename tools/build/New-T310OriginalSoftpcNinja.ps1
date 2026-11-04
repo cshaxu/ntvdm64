@@ -258,7 +258,7 @@ if (!(Test-Path -LiteralPath $redirResourceSource)) { throw "Original Redirector
 if (!(Test-Path -LiteralPath $redirExportDefinition)) { throw "Original Redirector export definition missing: $redirExportDefinition" }
 $adapterWin32Names = @('ntioapi_facade.c', 'thread_start_compat.c', 'ccpu_thread_exit_compat.c',
                           'nt_thread_alert_compat.c',
-                          'console_compat.c', 'console_client.c', 'worker_lifecycle.c', 'console_bitmap.c', 'console_graphics.c', 'console_text.c', 'crt_compat.c',
+                          'console_compat.c', 'console_client.c', 'worker_lifecycle.c', 'console_bitmap.c', 'console_graphics.c', 'console_text.c',
                            'command_process_compat.c', 'wow_private_unavailable.c',
                            'wow_hard_error_dialog.c', 'wow_hard_error_decoder.c',
                            'mvdm_base_vdm_environment.c')
@@ -1146,6 +1146,10 @@ $consoleGridObject = 'obj/opennt-abi-host-compat/console_grid.obj'
 $graph.Add('build ' + $consoleGridObject + ': cc ' + (NinjaPath (Join-Path $root 'src/compat/console_grid.c')))
 $graph.Add('  cflags = /nologo /c /MT /W4 /we4013 /showIncludes')
 $adapterWin32Objects += $consoleGridObject
+$crtCompatObject = 'obj/lib-win32/crt-compat/crt_compat.obj'
+$graph.Add('build ' + $crtCompatObject + ': cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/crt-compat/crt_compat.c')))
+$graph.Add('  cflags = ' + $authoredSoftpcFlags)
+$graph.Add('build lib-crt-compat.lib: lib ' + $crtCompatObject)
 $adapterBaseSrvObjects = foreach ($name in $adapterBaseSrvNames) {
     $object = 'obj/adapter-basesrv/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterBaseSrvRoot $name)))
@@ -2165,6 +2169,10 @@ if ($Architecture -eq 'x86') {
 }
 if ($Architecture -eq 'x86') {
     for($i=0;$i -lt $graph.Count;$i++) {
+        if($graph[$i] -match '^build .*: \S*link ' -and $graph[$i].Contains('softpc-win32-bindings.lib')) {
+            $barrier=$graph[$i].IndexOf(' |',$graph[$i].IndexOf(':')+1)
+            if($barrier -ge 0){$graph[$i]=$graph[$i].Insert($barrier,' lib-crt-compat.lib')}else{$graph[$i]+=' lib-crt-compat.lib'}
+        }
         if($graph[$i] -match '^build .*: \S*link ' -and ($graph[$i].Contains('nthook-installer.lib') -or $graph[$i].Contains('nthook-context.lib'))) {
             $barrier=$graph[$i].IndexOf(' |',$graph[$i].IndexOf(':')+1)
             if($barrier -ge 0){$graph[$i]=$graph[$i].Insert($barrier,' lib-process-hook.lib lib-file.lib')}else{$graph[$i]+=' lib-process-hook.lib lib-file.lib'}

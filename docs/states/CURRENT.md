@@ -28,6 +28,11 @@ focused and original NetAPI fixtures, three real DOS probes, and all 12 selected
 Control gates passed. Local package `0bcc0986-5646-4a04-8002-0bf6c3d65656`
 has ten verified release hashes. Full and the optional DOS4GW/NESticle fixture
 were not run. PE runtime-import scope remains open.
+P4 moves the historical CRT adapter to `lib-win32/crt-compat`; NTVDM and
+WOW32 now select that owner. The x86/x64 build, symbol-provider and formatting
+fixtures, 12 Control gates and four real WRITE startup snapshots passed. Local
+package `187112da-6183-4b8e-b482-ee73d022a604` has ten verified release hashes.
+WRITE editing and normal exit were not tested; Full was not run.
 T475 S1 separated NXVM and Win32 library ownership. Its final four local P
 commits extracted object-handle comparison, overlapped pipe-pair creation,
 parent-process observation and file identity. Their local packages each

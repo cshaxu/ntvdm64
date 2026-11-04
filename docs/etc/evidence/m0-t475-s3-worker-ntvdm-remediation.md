@@ -66,3 +66,21 @@ stale header path and public library list to be updated and a linker response
 file to avoid the Windows command-line length limit. Logs, failed attempts,
 the guest test's bounded PATH and prior release backup are under
 `build/t475-s3-p3`.
+
+## P4: CRT compatibility library
+
+The unchanged historical `sprintf`, `sscanf` and `_swprintf` UCRT adapters
+now belong to `lib-win32/crt-compat`. The NTVDM graph links the independent
+`lib-crt-compat` archive; WOW32 compiles the same public source into its own
+module. Production link maps select the new provider for NTVDM `sprintf` and
+`sscanf` and WOW32 `sprintf`. The targeted x86 fixture verified formatting,
+scanning, a failed conversion, and missing and duplicate provider rejection.
+
+The x86/x64 product build, 63 immutable guest files, 274 export ordinals and
+12 selected Control gates passed. A real WRITE application on a fresh physical
+package displayed its main, document and page-info windows in four samples;
+editing and normal exit were not tested. An initial observation used the
+wrong window-reader executable and failed; the corrected run passed. The local
+ten-image package `187112da-6183-4b8e-b482-ee73d022a604` has matching hashes.
+Full was not run; DOS4GW/NESticle was absent. Commands, logs, failed attempt
+and previous release backup are under `build/t475-s3-p4`.
