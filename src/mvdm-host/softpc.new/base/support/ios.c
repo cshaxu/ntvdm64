@@ -66,6 +66,7 @@
 #line 69
 #error DIVERGENCE MVDM-HOST-DIV-529: MAC68K platform branch is not selected; see mirror register.
 #else
+#line 72
 GLOBAL char	Ios_in_adapter_table[PC_IO_MEM_SIZE];
 GLOBAL char	Ios_out_adapter_table[PC_IO_MEM_SIZE];
 #endif	/* MAC68K */

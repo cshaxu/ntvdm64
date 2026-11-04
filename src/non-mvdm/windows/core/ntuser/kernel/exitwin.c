@@ -19,6 +19,7 @@
 #define ObReferenceObjectByHandle(handle, access, type, mode, out, info) \
     (wow_task_reference_event(handle, out) ? (NTSTATUS)0 : (NTSTATUS)0xC0000001)
 
+#line 508
 BOOL xxxRegisterUserHungAppHandlers(
     PFNW32ET pfnW32EndTask,
     HANDLE   hEventWowExec,

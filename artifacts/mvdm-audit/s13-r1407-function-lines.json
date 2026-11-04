@@ -1,0 +1,130 @@
+{
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "before_sha256": "326081a72f994be4e59e3847e77f03980ebdc8f7830d109dfb07e2d3c0395a34",
+      "after_sha256": "48228ae52600fd1b777a6100254c70c6f6dfbcb31b0c91d34dd72bc55c3e2add",
+      "original_sha256": "82528443bc5f6c227e0e14fe8a9dbc928ba735f98cf3891744c20c8e1604939a",
+      "anchors": [
+        {
+          "text": "BOOL _UnregisterClass(",
+          "original_line": 500
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+      "before_sha256": "abdb6793896a0f0da1f7d79d45c4e919cfb50ae0757bbc70e39e9cc40e25b4e2",
+      "after_sha256": "85faf2effa8c00a0fad977e23974d581e942a3ec510f77424a2c5eefad2e1464",
+      "original_sha256": "45b92f7236fba49d58e2c3d912126067c3843ec560c28cdd8a20167c62aaef65",
+      "anchors": [
+        {
+          "text": "BOOL xxxRegisterUserHungAppHandlers(",
+          "original_line": 508
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "before_sha256": "65031fc65032c9013a858b1f04d0e7082dada639b05130ed03ddceeb5b7914aa",
+      "after_sha256": "a5bbfa44603c510760d005baeba2525daef972d7a9380a5e2fa3cdb1121a3e3e",
+      "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+      "anchors": [
+        {
+          "text": "DWORD GetCPD(",
+          "original_line": 1916
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "before_sha256": "95883fb4761c3748b3757457c9a8bbb096be140184a5bb8f0ae509c00694fba4",
+      "after_sha256": "de94ce38c9cd095af7535c3c957ab30a49acc56b5b5500dad592d250ebc02c9d",
+      "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+      "anchors": [
+        {
+          "text": "VOID RtlInitLargeUnicodeString(",
+          "original_line": 587
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "before_sha256": "c44237e4e365437f8bb6cc6a233737e8b8c12dadc7ee9402be78d86e72655821",
+      "after_sha256": "607f45d960e69da00470820ed0f2bd8337a17caab0815776d00cd4852e488eae",
+      "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+      "anchors": [
+        {
+          "text": "BOOL IsSysFontAndDefaultMode(HDC hdc)",
+          "original_line": 1971
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "before_sha256": "4e06f734b802a1ee662448a0606deb97e358529219af700c75cb9153925fe925",
+      "after_sha256": "8c677e6104dee8b06268c77688f0286e1095caccceb1e04d58c6d0fe4323b033",
+      "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+      "anchors": [
+        {
+          "text": "BOOL _ClientToScreen(",
+          "original_line": 749
+        },
+        {
+          "text": "BOOL _ScreenToClient(",
+          "original_line": 836
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "before_sha256": "07fd07eb487b5fc52f0e64164a6e33d1e61a903b31d7a851c9ad1df41e5df83a",
+      "after_sha256": "bfd2af514bb86619de9c20af416898b65e52ce4a8db8885135d7d4f9fb3a2b94",
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "anchors": [
+        {
+          "text": "#include \"precomp.h\"",
+          "original_line": 14
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+      "before_sha256": "1a4b7cc3c92e9d2b8b60dae6147e95174542cfae3c7babe918c8a13fca9be5af",
+      "after_sha256": "cf5b2b70ab27fecbdb7ff787e39a53c1982a01d2d25f45e351fe87d0cbc43995",
+      "original_sha256": "fd78200232574074f7ec68d2f5b851c27ee9d5024427310d18ebbcb048336e97",
+      "anchors": [
+        {
+          "text": "extern CONST BOOLEAN gabThunkMessage[];",
+          "original_line": 43
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "before_sha256": "dc26178793fbe85a2044eff465b26399ffddc0299b9f1c65e5a3ef13ba82a2f5",
+      "after_sha256": "e60e708ba0b2900aa052153adf1e78d3f71d27d24e665cf1d77feac33bab1769",
+      "original_sha256": "1f634b9d6c09d0f767a90ec9e577817800a07dc353cffa433ca2e0268d2cd42f",
+      "anchors": [
+        {
+          "text": "#include \"sas.h\"",
+          "original_line": 32
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "before_sha256": "a79efd4d687d5edc476974f7593c1356c5cd663d9d9e75ccfdaa7fe0b034e4f4",
+      "after_sha256": "632ca3bb954bf38a7537051f46590e73dd8479a17dfb3b8cf6be887d3f944add",
+      "original_sha256": "e4f39908ff9534adde52e46def732a93790ac48f2bb481590622c537c2f3b205",
+      "anchors": [
+        {
+          "text": "GLOBAL char\tIos_in_adapter_table[PC_IO_MEM_SIZE];",
+          "original_line": 72
+        }
+      ]
+    }
+  ],
+  "scope": "Only #line directives; exact original physical positions checked. Other branch and line paths remain under review; batch build passed.",
+  "batch_verification": "Cached x86 root, NTVDM, WOW32 and x64 builds passed; ten images published and verified; eight byte-identical and two PE timestamp-only. See s13-r1407-build-image-compare.json. No runtime retest per owner instruction."
+}

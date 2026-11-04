@@ -30,6 +30,7 @@
 * 11-15-94 JimA         Created.
 \***********************************************************************/
 
+#line 1916
 DWORD GetCPD(
     PVOID pWndOrCls,
     DWORD options,

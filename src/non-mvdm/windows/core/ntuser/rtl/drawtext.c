@@ -5,6 +5,7 @@
  */
 #include "precomp.h"
 
+#line 1971
 BOOL IsSysFontAndDefaultMode(HDC hdc)
 {
     return((UserGetHFONT(hdc) == ghFontSys) && (UserGetMapMode(hdc) == MM_TEXT));

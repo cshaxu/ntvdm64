@@ -52,6 +52,7 @@ BOOL _IsChild(
     return FALSE;
 }
 
+#line 749
 BOOL _ClientToScreen(
     PWND pwnd,
     PPOINT ppt)
@@ -62,6 +63,7 @@ BOOL _ClientToScreen(
     return TRUE;
 }
 
+#line 836
 BOOL _ScreenToClient(
     PWND pwnd,
     PPOINT ppt)

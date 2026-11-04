@@ -3,6 +3,7 @@
  * DIVERGENCE(OPENNT-HOST-108): retain only the unchanged _GetDlgItem
  * direct-child lookup. Other WOW client services have separate owners.
  * Standalone precomp supplies the retained, same-address WND graph. */
+#line 14
 #include "precomp.h"
 
 #line 15

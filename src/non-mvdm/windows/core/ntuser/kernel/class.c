@@ -79,6 +79,7 @@ ATOM _RegisterClassEx(
  * and native destruction failure propagation. */
 #include "wow_class_remove_bindings.h"
 
+#line 500
 BOOL _UnregisterClass(
     LPWSTR lpszClassName,
     HANDLE hModule,

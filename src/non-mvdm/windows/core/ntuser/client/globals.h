@@ -6,6 +6,7 @@
 #define _GLOBALS_
 
 /* OPENNT-HOST-092: original declaration; definition remains in clglobal.c. */
+#line 43
 extern CONST BOOLEAN gabThunkMessage[];
 /* OPENNT-HOST-117: original clglobal.c owns the sizing exemplar. */
 extern WCHAR szOneChar[];

@@ -132,6 +132,7 @@ VOID RtlInitLargeAnsiString(
 
 /* DIVERGENCE(OPENNT-HOST-105): restore this complete original leaf from
  * the same source unit; the previously selected conversion subset omitted it. */
+#line 587
 VOID RtlInitLargeUnicodeString(
     PLARGE_UNICODE_STRING plstr,
     LPCWSTR psz,

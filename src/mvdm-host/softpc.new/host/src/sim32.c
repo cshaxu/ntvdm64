@@ -30,6 +30,7 @@
 #include "xt.h"
 #include "sim32.h"
 #include "mvdm_softpc_termination.h"
+#line 32
 #include "sas.h"
 #include "gmi.h"
 #include "ckmalloc.h"
