@@ -704,8 +704,8 @@ VOID getmsg16(VPMSG16 vpmsg16, LPMSG lpmsg, LPMSGPARAMEX lpmpex)
             lParam = ptmr->dwTimerProc32;   // 32-bit proc or NULL
         }
 
-    } else if (message == WM_SYSCOMMAND || message == WM_COMMAND || message == WM_DROPFILES ||
-                  message == WM_COPYDATA || /* DIVERGENCE(MVDM-HOST-DIV-344). */
+#line 761
+    } else if (message == WM_SYSCOMMAND || message == WM_COMMAND || message == WM_DROPFILES || message == WM_COPYDATA || /* DIVERGENCE(MVDM-HOST-DIV-344). */
                   ( message >= WM_DDE_FIRST && message <= WM_DDE_LAST )) {
         HWND hwnd32;
 
@@ -729,6 +729,7 @@ VOID getmsg16(VPMSG16 vpmsg16, LPMSG lpmsg, LPMSGPARAMEX lpmpex)
             LOGDEBUG(LOG_ALWAYS,("WOW::getmsg16:*** ERROR: saw WM_DDE_INITIATE message %04x\n", message));
             /* DIVERGENCE(MVDM-HOST-DIV-353): consume only ThunkMsg16's token. */
             UnThunkWMMsg16(lpmpex);
+#line 784
         }
         goto finish_up;
 
@@ -739,6 +740,7 @@ VOID getmsg16(VPMSG16 vpmsg16, LPMSG lpmsg, LPMSGPARAMEX lpmpex)
     lpmsg->wParam    = uParam;
     /* DIVERGENCE(MVDM-HOST-DIV-344): no converter was required on this path. */
     lpmpex->fThunkSucceeded = TRUE;
+#line 792
 finish_up:
     lpmsg->lParam    = lParam;
     lpmsg->time      = FETCHLONG(pmsg16->time);

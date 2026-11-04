@@ -404,3 +404,14 @@ NTVDM, WOW32 and x64 builds passed; ten images published and verified. Eight
 match byte-for-byte and NTVDM/WOW32 differ only by PE timestamps
 ([comparison](s13-r1351-build-image-compare.json)); tests were not repeated
 under the owner-approved unchanged-image rule.
+
+The [r1352 batch](s13-r1352-batch.json) aligns matching source lines on
+observed selected paths in ten files; [context recheck](s13-r1352-context-recheck.json)
+passes. Eight additionally passed [strict tree review](s13-r1352-strict-review.json);
+the other two remain pending. The separately held cpucstbs empty projection
+was [reviewed](s13-r1352-cpucstbs-review.json). Current count: 182 byte-identical /
+709 differing files reviewed / 1,056 total; 165 differing files pending. Cached
+x86 root, NTVDM, WOW32 and x64 builds passed; ten images published and verified.
+Eight match byte-for-byte and NTVDM/WOW32 differ only by PE timestamps
+([comparison](s13-r1352-build-image-compare.json)); tests were not repeated
+under the owner-approved unchanged-image rule.

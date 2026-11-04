@@ -2369,6 +2369,7 @@ EngEscape(
 
     // any platform that has support for floats in the kernel
 
+#line 2410
     typedef FLOAT FLOATOBJ;
     typedef FLOAT *PFLOATOBJ;
 

@@ -141,6 +141,7 @@ PWND xxxGNM_FindNextMnem(
             ThreadUnlock(&tlpwndStart);
             return NULL;
         }
+#line 138
         if (!(dwDlgCode & DLGC_WANTCHARS) &&
                 (!(dwDlgCode & DLGC_STATIC) || !(pwndT->style & SS_NOPREFIX))) {
             GetWindowText(HWq(pwndT), rgchText, sizeof(rgchText)/sizeof(WCHAR));
@@ -149,6 +150,7 @@ PWND xxxGNM_FindNextMnem(
                 ThreadUnlock(&tlpwndStart);
                 return NULL;
             }
+#line 141
             if (FindMnemChar(rgchText, ch, FALSE, TRUE) != 0) {
                 ThreadUnlock(&tlpwndStart);
                 return pwndT;
@@ -181,6 +183,7 @@ PWND xxxGNM_FindNextMnem(
             ThreadUnlock(&tlpwnd);
             return NULL;
         }
+#line 168
         if (!(dwDlgCode & DLGC_WANTCHARS) &&
                 (!(dwDlgCode & DLGC_STATIC) || !(pwnd->style & SS_NOPREFIX))) {
             GetWindowText(HW(pwnd), rgchText, sizeof(rgchText)/sizeof(WCHAR));
@@ -189,6 +192,7 @@ PWND xxxGNM_FindNextMnem(
                 ThreadUnlock(&tlpwnd);
                 return NULL;
             }
+#line 171
             if (FindMnemChar(rgchText, ch, FALSE, TRUE) != 0)
                 break;
         }
@@ -253,6 +257,7 @@ PWND xxxGotoNextMnem(
         /*
          * If a non-disabled static item, then jump ahead to nearest tabstop.
          */
+#line 230
         if (code & DLGC_STATIC && !TestWF(pwnd, WFDISABLED)) {
             pwndT = _GetNextDlgTabItem(pwndDlg, pwnd, FALSE);
 
@@ -279,6 +284,7 @@ PWND xxxGotoNextMnem(
                 ThreadUnlock(&tlpwnd);
                 return NULL;
             }
+#line 251
         }
 
         if (!TestWF(pwnd, WFDISABLED)) {
@@ -297,6 +303,7 @@ PWND xxxGotoNextMnem(
                     ThreadUnlock(&tlpwnd);
                     return NULL;
                 }
+#line 264
             } else {
 
                 /*
@@ -340,6 +347,7 @@ PWND xxxGotoNextMnem(
                     /*
                      * Send the WM_COMMAND message.
                      */
+#line 296
                     pwndT = REBASEPWND(pwnd, spwndParent);
                     SendMessage(HW(pwndT), WM_COMMAND,
                             MAKELONG(pwnd->spmenu, BN_CLICKED), (LONG)hwnd);
@@ -358,9 +366,11 @@ PWND xxxGotoNextMnem(
                     /* DIVERGENCE(OPENNT-HOST-119): focus can destroy BUTN. */
                     wow_button_scope buttonScope;
 
+#line 312
                     fIsNTButton = (pwnd->fnid == FNID_BUTTON);
                     if (fIsNTButton) wow_button_scope_enter(&buttonScope, pwnd);
                     __try {
+#line 313
                     if (fIsNTButton) {
                       pbutn = ((PBUTNWND)pwnd)->pbutn;
                       BUTTONSTATE(pbutn) |= BST_DONTCLICK;
@@ -371,6 +381,7 @@ PWND xxxGotoNextMnem(
                     DlgSetFocus(hwnd);
                     /* DIVERGENCE(OPENNT-HOST-119): restore before releasing BUTN. */
                     } __finally {
+#line 322
                     if (fIsNTButton) {
                       BUTTONSTATE(pbutn) &= ~BST_DONTCLICK;
                     }
@@ -379,6 +390,7 @@ PWND xxxGotoNextMnem(
                     if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) {
                         ThreadUnlock(&tlpwnd);
                         return NULL;
+#line 324
                     }
 
                     /*
@@ -393,6 +405,7 @@ PWND xxxGotoNextMnem(
             ThreadUnlock(&tlpwnd);
             /* DIVERGENCE(OPENNT-HOST-119): click may destroy before returning. */
             return (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) ? NULL : pwnd;
+#line 337
         } else {
 
             /*
@@ -414,5 +427,6 @@ PWND xxxGotoNextMnem(
     ThreadUnlock(&tlpwnd);
     /* DIVERGENCE(OPENNT-HOST-119): exhausted search previously returned garbage. */
     return NULL;
+#line 356
 }
 

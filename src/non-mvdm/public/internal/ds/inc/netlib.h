@@ -390,6 +390,7 @@ NetpMemoryReallocate(
 #line 394
 #error Unsupported excluded original configuration
 #else
+#line 396
 #define UNUSED(x)               { (void) (x); }
 #endif
 #line 398

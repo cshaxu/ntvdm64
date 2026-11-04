@@ -1,0 +1,17 @@
+{
+  "reason": "Original selected !MONITOR arm contains only the nested A3CPU conditional; A3CPU is recorded excluded-error, with original branch and continuation anchors. No original executable code survives that projection, explaining the single matching line.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/cpucstbs.c",
+      "before_sha256": "9c5da3266f1f8729ed3dd80bfc74e748e28b23852372390385f399540abd45a7",
+      "original_sha256": "0e114c6368a616dc87cdf4311aff19d50283e38a51b3f0e3301cbc45487ddaeb",
+      "anchors": {},
+      "matched_lines": 1,
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 1,
+        "groups": 2
+      }
+    }
+  ]
+}

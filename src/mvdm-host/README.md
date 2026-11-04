@@ -3120,3 +3120,5 @@ MVDM-HOST-DIV-821: restore original logical source positions for matching code o
 MVDM-HOST-DIV-822: restore original logical source positions for matching code on observed selected paths in ten mirror files, retaining conditions and local adaptations. Evidence: artifacts/mvdm-audit/s13-r1350-batch.json and s13-r1350-context-recheck.json; other contexts remain under review.
 
 MVDM-HOST-DIV-823: restore original logical source positions for matching code on observed selected paths, retaining conditions and local adaptations. Evidence: artifacts/mvdm-audit/s13-r1351-batch.json and s13-r1351-context-recheck.json; other contexts remain under review.
+
+MVDM-HOST-DIV-824: restore original logical source positions in observed selected paths of the S13 batch; keep the existing WM_COPYDATA condition while consolidating a continued expression onto its first line. Evidence: artifacts/mvdm-audit/s13-r1352-batch.json and s13-r1352-context-recheck.json.

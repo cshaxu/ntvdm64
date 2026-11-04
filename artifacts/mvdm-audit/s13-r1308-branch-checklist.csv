@@ -5940,9 +5940,9 @@ src/mvdm-host/wow32/wcall16.c,687,1,else,,historical-hit,unchanged-directive-git
 src/mvdm-host/wow32/wcall32.c,44,1,if,!defined(i386),historical-hit,matching-complete-condition-sequence,not-applicable
 src/mvdm-host/wow32/wcall32.c,74,1,if,!defined(i386),historical-hit,matching-complete-condition-sequence,not-applicable
 src/mvdm-host/wow32/wcall32.c,151,1,if,!defined(i386),historical-hit,matching-complete-condition-sequence,not-applicable
-src/mvdm-host/wow32/wcommdlg.c,35,1,if,DBG,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/wow32/wcommdlg.c,38,1,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/wow32/wcommdlg.c,485,1,if,DBG,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/wow32/wcommdlg.c,36,1,if,DBG,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/wow32/wcommdlg.c,39,1,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/wow32/wcommdlg.c,491,1,if,DBG,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/wow32/wdib.c,298,1,ifndef,i386,historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/wow32/wdib.c,319,1,else,,excluded-error,none,error-anchor-match
 src/mvdm-host/wow32/wdib.c,425,1,ifndef,i386,historical-hit,unchanged-directive-git-line-map,not-applicable
@@ -6223,9 +6223,9 @@ src/mvdm-host/wow32/wstbl.h,22,1,ifdef,DEBUG_OR_WOWPROFILE,excluded-error,unique
 src/mvdm-host/wow32/wstruc.c,303,1,ifdef,NOTUSED,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/wow32/wstruc.c,378,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
 src/mvdm-host/wow32/wstruc.c,684,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wstruc.c,905,1,if,0,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/wow32/wstruc.c,908,1,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/wow32/wstruc.c,911,2,if,(LF_FACESIZE != 32),excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/wow32/wstruc.c,907,1,if,0,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/wow32/wstruc.c,910,1,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/wow32/wstruc.c,913,2,if,(LF_FACESIZE != 32),excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/wow32/wstruc.h,15,1,ifndef,_DEF_WSTRUC_,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/wow32/wstruc.h,295,2,ifdef,NOTUSED,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/wow32/wsubcls.c,21,1,ifdef,OLD_SUBCLASS_STUFF,excluded-error,unique-structure-historical,error-anchor-match
@@ -6270,18 +6270,18 @@ src/mvdm-host/wow32/wuser.c,1909,1,ifdef,DOESNT_USER_DO_THIS,excluded-error,uniq
 src/mvdm-host/wow32/wuser.c,2963,1,ifndef,i386,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/wow32/wuser.c,2999,1,ifdef,NEVER,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/wow32/wuser.c,3274,1,if,0,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/wow32/wuser31.c,258,1,ifndef,_X86_,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wuser31.c,332,1,ifndef,_X86_,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wuser31.c,355,1,ifndef,_X86_,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wuser31.c,468,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wuser31.c,579,1,ifndef,_X86_,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wuser31.c,599,1,ifndef,_X86_,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wuser31.c,672,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/mvdm-host/wow32/wuser31.c,680,1,ifndef,_X86_,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/wow32/wuser31.c,744,1,ifdef,APRIL15,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/wow32/wuser31.c,747,1,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/wow32/wuser31.c,765,1,if,0,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/wow32/wuser31.c,768,1,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/wow32/wuser31.c,262,1,ifndef,_X86_,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wuser31.c,336,1,ifndef,_X86_,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wuser31.c,359,1,ifndef,_X86_,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wuser31.c,472,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wuser31.c,583,1,ifndef,_X86_,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wuser31.c,603,1,ifndef,_X86_,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wuser31.c,676,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/mvdm-host/wow32/wuser31.c,684,1,ifndef,_X86_,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/wow32/wuser31.c,748,1,ifdef,APRIL15,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/wow32/wuser31.c,751,1,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/wow32/wuser31.c,769,1,if,0,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/wow32/wuser31.c,772,1,else,,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/wow32/wusercli.c,15,1,ifndef,PMODE32,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/wow32/wusercli.c,698,1,ifdef,HACK32,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/wow32/wusercli.c,702,1,else,,excluded-error,unique-structure-historical,error-anchor-match
@@ -6605,7 +6605,7 @@ src/non-mvdm/public/internal/ds/inc/netlib.h,204,2,ifdef,CDEBUG,excluded-error,u
 src/non-mvdm/public/internal/ds/inc/netlib.h,207,2,else,,historical-hit,unique-structure-historical,not-applicable
 src/non-mvdm/public/internal/ds/inc/netlib.h,389,2,if,defined(lint) || defined(_lint),excluded-error,unique-structure-historical,error-anchor-match
 src/non-mvdm/public/internal/ds/inc/netlib.h,392,2,else,,historical-hit,unique-structure-historical,not-applicable
-src/non-mvdm/public/internal/ds/inc/netlib.h,557,2,ifdef,__cplusplus,excluded-error,none,error-anchor-match
+src/non-mvdm/public/internal/ds/inc/netlib.h,558,2,ifdef,__cplusplus,excluded-error,none,error-anchor-match
 src/non-mvdm/public/internal/ds/inc/netlibnt.h,53,1,ifndef,_NETLIBNT_,historical-hit,unique-structure-historical,not-applicable
 src/non-mvdm/public/internal/ds/inc/netlibnt.h,56,2,ifdef,__cplusplus,excluded-error,none,error-anchor-match
 src/non-mvdm/public/internal/ds/inc/netlibnt.h,114,2,ifdef,__cplusplus,excluded-error,none,error-anchor-match
@@ -6669,7 +6669,7 @@ src/non-mvdm/public/internal/windows/inc/winconp.h,1,1,ifndef,_WINCONP_,historic
 src/non-mvdm/public/internal/windows/inc/winconp.h,4,2,ifdef,__cplusplus,excluded-error,none,error-anchor-match
 src/non-mvdm/public/internal/windows/inc/winconp.h,21,2,ifdef,UNICODE,excluded-error,unique-structure-historical,error-anchor-match
 src/non-mvdm/public/internal/windows/inc/winconp.h,24,2,else,,historical-hit,unique-structure-historical,not-applicable
-src/non-mvdm/public/internal/windows/inc/winconp.h,91,2,ifdef,__cplusplus,excluded-error,none,error-anchor-match
+src/non-mvdm/public/internal/windows/inc/winconp.h,92,2,ifdef,__cplusplus,excluded-error,none,error-anchor-match
 src/non-mvdm/public/internal/windows/inc/winddi.h,16,1,ifndef,_WINDDI_,historical-hit,unique-structure-historical,not-applicable
 src/non-mvdm/public/internal/windows/inc/winddi.h,2365,2,ifdef,_X86_,excluded-error,unique-structure-historical,error-anchor-match
 src/non-mvdm/public/internal/windows/inc/winddi.h,2368,2,else,,historical-hit,unique-structure-historical,not-applicable
@@ -6897,15 +6897,15 @@ src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c,266,1,ifdef,FE_IME,excluded-er
 src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c,270,1,ifdef,WOW_ORIGINAL_DIALOG_KEYBOARD,current-hit,r1311-current-equivalent-preprocessing,not-applicable
 src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c,312,1,ifdef,LATER,excluded-error,none,error-anchor-match
 src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c,316,1,ifdef,WOW_ORIGINAL_DIALOG_KEYBOARD,current-hit,r1311-current-equivalent-preprocessing,not-applicable
-src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c,147,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
-src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c,171,1,ifdef,DEBUG,excluded-error,unique-structure-historical,error-anchor-match
-src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c,174,1,else,,historical-hit,unique-structure-historical,not-applicable
-src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c,182,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c,153,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
+src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c,177,1,ifdef,DEBUG,excluded-error,unique-structure-historical,error-anchor-match
+src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c,180,1,else,,historical-hit,unique-structure-historical,not-applicable
+src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c,188,1,ifdef,DEBUG,excluded-error,none,error-anchor-match
 src/non-mvdm/windows/core/ntuser/client/dmmnem.c,45,1,ifdef,KANJI,excluded-error,unique-structure-historical,error-anchor-match
 src/non-mvdm/windows/core/ntuser/client/dmmnem.c,59,1,ifdef,KANJI,excluded-error,unique-structure-historical,error-anchor-match
 src/non-mvdm/windows/core/ntuser/client/dmmnem.c,62,1,else,,historical-hit,unique-structure-historical,not-applicable
-src/non-mvdm/windows/core/ntuser/client/dmmnem.c,321,1,ifdef,LATER,excluded-error,unique-structure-historical,error-anchor-match
-src/non-mvdm/windows/core/ntuser/client/dmmnem.c,324,1,else,,historical-hit,unique-structure-historical,not-applicable
+src/non-mvdm/windows/core/ntuser/client/dmmnem.c,328,1,ifdef,LATER,excluded-error,unique-structure-historical,error-anchor-match
+src/non-mvdm/windows/core/ntuser/client/dmmnem.c,331,1,else,,historical-hit,unique-structure-historical,not-applicable
 src/non-mvdm/windows/core/ntuser/client/edecrare.c,23,1,ifdef,SUPPORT_LPK,excluded-error,none,error-anchor-match
 src/non-mvdm/windows/core/ntuser/client/edecrare.c,287,1,ifdef,SUPPORT_LPK,excluded-error,none,error-anchor-match
 src/non-mvdm/windows/core/ntuser/client/edecrare.c,345,1,ifdef,SUPPORT_LPK,excluded-error,none,error-anchor-match
@@ -7196,8 +7196,8 @@ src/non-mvdm/windows/core/ntuser/kernel/class.c,144,1,else,,historical-hit,uniqu
 src/non-mvdm/windows/core/ntuser/kernel/class.c,237,1,ifdef,DBG,excluded-error,none,error-anchor-match
 src/non-mvdm/windows/core/ntuser/kernel/class.c,244,1,ifdef,FE_SB,excluded-error,none,error-anchor-match
 src/non-mvdm/windows/core/ntuser/kernel/class.c,247,1,else,,empty-or-structural,no-direct-code-after-comment-and-directive-filter,not-applicable
-src/non-mvdm/windows/core/ntuser/kernel/cleanup.c,212,1,if,defined(_X86_),historical-hit,unique-structure-historical,not-applicable
-src/non-mvdm/windows/core/ntuser/kernel/cleanup.c,214,1,else,,excluded-error,unique-structure-historical,error-anchor-match
+src/non-mvdm/windows/core/ntuser/kernel/cleanup.c,215,1,if,defined(_X86_),historical-hit,unique-structure-historical,not-applicable
+src/non-mvdm/windows/core/ntuser/kernel/cleanup.c,217,1,else,,excluded-error,unique-structure-historical,error-anchor-match
 src/non-mvdm/windows/core/ntuser/kernel/exitwin.c,76,1,ifndef,LATER,empty-or-structural,no-direct-code-after-comment-and-directive-filter,not-applicable
 src/non-mvdm/windows/core/ntuser/kernel/exitwin.c,78,1,else,,excluded-error,none,error-anchor-match
 src/non-mvdm/windows/core/ntuser/kernel/getset.c,32,1,ifdef,DEBUG,excluded-error,none,error-anchor-match

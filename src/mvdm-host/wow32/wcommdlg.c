@@ -22,6 +22,7 @@ Revision History:
 --*/
 #include "precomp.h"
 #include "wow_message_lifetime.h" /* DIVERGENCE(MVDM-HOST-DIV-349): call-owned share message. */
+#line 24
 #pragma hdrstop
 #include <cderr.h>
 #include <dlgs.h>
@@ -353,6 +354,7 @@ BOOL FASTCALL WM32msgCHOOSEFONTGETLOGFONT(LPWM32MSGPARAMEX lpwm32mpex)
 
 UINT APIENTRY
 /* DIVERGENCE(MVDM-HOST-DIV-335): scoped native callback entrance. */
+#line 548
 WowOriginalDialogProc(
     HWND hdlg,
     UINT uMsg,
@@ -371,6 +373,7 @@ Routine Description:
 
 --*/
 
+#line 566
 {
     PCOMMDLGTD Td;
 
@@ -386,6 +389,7 @@ Routine Description:
 
 UINT APIENTRY
 /* DIVERGENCE(MVDM-HOST-DIV-335): scoped native callback entrance. */
+#line 580
 WowOriginalPrintSetupDialogProc(
     HWND hdlg,
     UINT uMsg,
@@ -406,6 +410,7 @@ Routine Description:
 
 --*/
 
+#line 600
 {
     PCOMMDLGTD Td;
 
@@ -471,6 +476,7 @@ Routine Description:
     // Uncomment to receive messages on entrance
     // LOGDEBUG(10, ("CommonDialogProc In: %lX %X %X %lX (%lX)\n", (DWORD)hdlg, uMsg, uParam, lParam
 
+#line 662
     if (CURRENTPTD()->dwFlags & TDF_IGNOREINPUT) {
         LOGDEBUG(6,("    WCD32OpenFileDialog Ignoring Input Messsage %04X\n",uMsg));
         WOW32ASSERTMSG(!gfIgnoreInputAssertGiven,
@@ -572,6 +578,7 @@ Routine Description:
                 // no wow app will expect this, so don't send it.
                 //
                 stack.completed = TRUE; /* DIV-349: intentionally filtered, not failed. */
+#line 770
                 return(FALSE);
             } else {
                 pfnThunkMsg = WM32NoThunking;
@@ -592,6 +599,7 @@ Routine Description:
         wm32mpex.lpfnM32 = pfnThunkMsg;
         wm32mpex.fFree = TRUE; /* DIV-349: synchronous callback, not a DDE transfer. */
 
+#line 789
         if (!(pfnThunkMsg)(&wm32mpex)) {
             LOGDEBUG(LOG_ERROR,("    WCD32OpenFileDialog ERROR: cannot thunk 32-bit message %04x\n", uMsg));
             goto Error;
@@ -638,6 +646,7 @@ Routine Description:
         goto Error;
 
     stack.completed = TRUE; /* DIV-349: after original callback/output conversion. */
+#line 834
 Done:
     // Uncomment to receive message on exit
     // LOGDEBUG(10, ("CommonDialogProc Out: Return %lX\n", wm32mpex.lReturn));
@@ -654,6 +663,7 @@ SilentError:
         __try { wow_message_unwind32(&wm32mpex); }
         __finally { wow_message_stack_leave(&stack, abnormal || AbnormalTermination()); }
     }
+#line 845
 }
 
 ULONG FASTCALL WCD32ChooseColor( PVDMFRAME pFrame )
@@ -2189,6 +2199,7 @@ Error:
 
 UINT APIENTRY
 /* DIVERGENCE(MVDM-HOST-DIV-335): preserve original resource-only destroy branch. */
+#line 2379
 WowOriginalFindReplaceDialogProc(
     HWND hdlg,
     UINT uMsg,
@@ -2205,6 +2216,7 @@ Routine Description:
 
 --*/
 
+#line 2395
 {
     PFINDREPLACE16 FindReplace16;
     VPFINDREPLACE vpfr;

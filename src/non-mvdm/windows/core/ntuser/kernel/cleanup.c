@@ -20,6 +20,7 @@
 /*
  * Determines if a Wow wndproc is in a selector list
  */
+#line 43
 BOOL
 WowWndProcInSelList(
    WNDPROC_PWND lpfnWndProc,
@@ -84,6 +85,7 @@ VOID PseudoDestroyClassWindows(PWND pwndParent, PCLS pcls, wow_cleanup_context *
             if (!TestWF(pwnd, WFSERVERSIDEPROC)) {
                 /* DIVERGENCE(OPENNT-HOST-122): actual native procedure slot. */
                 wow_cleanup_set_window_procedure(context, pwnd, (WNDPROC_PWND)gpsi->apfnClientA.pfnDefWindowProc);
+#line 106
             }
         }
 
@@ -166,6 +168,7 @@ BOOL _WOWCleanup(
     PNEMODULESEG SelList,
     DWORD nSel,
     wow_cleanup_context *context)
+#line 187
 {
     PNEMODULESEG SelListOrg = SelList;
     PPROCESSINFO ppi = PpiCurrent();
@@ -248,6 +251,7 @@ static BOOL sbFirstCall = TRUE;
                     PWND pwnd = (PWND) pheT->phead;
 
                     /* DIVERGENCE(OPENNT-HOST-122): a native CPD is not a guest selector. */
+#line 265
                     if (pwnd->procedure_is_guest && (WNDPROC_WOW & (ULONG)pwnd->lpfnWndProc) &&
                         ((PTHREADINFO)pheT->pOwner)->ppi == ppi &&
                         WowWndProcInSelList(pwnd->lpfnWndProc, SelListTemp))
@@ -256,6 +260,7 @@ static BOOL sbFirstCall = TRUE;
                             "USER: Wow Window not destroyed: %lX", pwnd);
                         /* DIVERGENCE(OPENNT-HOST-122): actual native procedure slot. */
                         wow_cleanup_set_window_procedure(context, pwnd, (WNDPROC_PWND)gpsi->apfnClientA.pfnDefWindowProc);
+#line 272
                     }
                 }
             }
@@ -295,6 +300,7 @@ static BOOL sbFirstCall = TRUE;
                          * DestroyClass does *ppcls = pcls->pclsNext;
                          * so we just want continue here
                          */
+#line 310
                     } else {
 
                         /*
@@ -329,12 +335,14 @@ static BOOL sbFirstCall = TRUE;
                         if (atom == gpsi->atomSysClass[iSel]) {
                             /* DIVERGENCE(OPENNT-HOST-122): original CLS storage owner. */
                             wow_cleanup_set_class_procedure(*ppcls, (WNDPROC_PWND)spfnwp[iSel]);
+#line 343
                             break;
                         }
                     }
                     if (iSel == sizeof(spfnwp) / sizeof(spfnwp[0]))
                         /* DIVERGENCE(OPENNT-HOST-122): original CLS storage owner. */
                         wow_cleanup_set_class_procedure(*ppcls, (WNDPROC_PWND)gpsi->apfnClientW.pfnDefWindowProc);
+#line 348
                 }
 
                 ppcls = &((*ppcls)->pclsNext);
@@ -374,6 +382,7 @@ static BOOL sbFirstCall = TRUE;
                 if (!TestWF(pwnd, WFSERVERSIDEPROC)) {
                     /* DIVERGENCE(OPENNT-HOST-122): actual native procedure slot. */
                     wow_cleanup_set_window_procedure(context, pwnd, (WNDPROC_PWND)gpsi->apfnClientA.pfnDefWindowProc);
+#line 386
                 }
             }
         }
@@ -398,6 +407,7 @@ static BOOL sbFirstCall = TRUE;
                 if ((*ppcls)->cWndReferenceCount == 0) {
                     if (!DestroyClass(ppcls))
                             return FALSE;
+#line 409
                 } else {
                     RIPMSG0(RIP_ERROR, "Windows remain for a WOW class marked for destruction");
                     ppcls = &((*ppcls)->pclsNext);
@@ -447,6 +457,7 @@ static BOOL sbFirstCall = TRUE;
         HMDestroyUnlockedObject(pheT);
     }
     return TRUE;
+#line 457
 }
 
 

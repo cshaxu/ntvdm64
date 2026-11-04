@@ -13,6 +13,7 @@
 
 #include "precomp.h"
 #include "wow_user_object_bindings.h"
+#line 15
 #pragma hdrstop
 
 MODNAME(wuser31.c);
@@ -114,6 +115,7 @@ ULONG FASTCALL WU32GetDCEx(PVDMFRAME pFrame)
 {
     ULONG ul;
     HWND hwnd32;
+#line 115
     register PGETDCEX16 parg16;
     HAND16 htask16 = pFrame->wTDB;
 
@@ -122,6 +124,7 @@ ULONG FASTCALL WU32GetDCEx(PVDMFRAME pFrame)
     /* DIVERGENCE(MVDM-HOST-DIV-455): acquire and cache the same HWND. */
     hwnd32 = wow_user_window_native_handle(HWND32(parg16->f1));
     if (parg16->f1 && !hwnd32) { FREEARGPTR(parg16); RETURN(0); }
+#line 120
     ul = GETHDC16(wow_native_GetDCEx(hwnd32,
                           HRGN32(parg16->f2),
                           DWORD32(parg16->f3)));
@@ -158,6 +161,7 @@ ULONG FASTCALL WU32GetOpenClipboardWindow(PVDMFRAME pFrame)
     ul = GETHWND16(wow_user_window_public_guest_handle(
             GetOpenClipboardWindow()));
 
+#line 151
     RETURN (ul);
 }
 

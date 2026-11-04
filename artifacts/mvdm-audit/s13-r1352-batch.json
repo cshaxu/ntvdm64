@@ -1,0 +1,281 @@
+{
+  "records": [
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+      "before_sha256": "67a11a43361b66ba76be7ad8b0dc8638de102948ab0ff3a9b1e345c5ca604833",
+      "original_sha256": "d160c2657ce8bd4cd006af505a5325b311fe27a7f80682518adb01771ab5b7c4",
+      "anchors": {
+        "392": 396
+      },
+      "matched_lines": 534,
+      "after_sha256": "81e29a78112c13ea9fe9d285a9c03025cf876e076e98160c074dc01025f5dd71"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/winconp.h",
+      "before_sha256": "72ed509243278f92911e482bafbcfd6eb6a77dbfc72334afc52896ab671ac2e3",
+      "original_sha256": "26b1b3cff877ee2802aeff0eeab04f1daf7127e63279bcaa990c8b4f97384f2d",
+      "anchors": {
+        "24": 22
+      },
+      "matched_lines": 80,
+      "after_sha256": "9541cdd461cf1417749f18633965b2086bb59b21851a50aef84aef72054bb9f9"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/winddi.h",
+      "before_sha256": "61f7f357475e63478c6efeb79f86dca7c67910ebd19e394a7c9884056efa0446",
+      "original_sha256": "f3ba4a33dbbb58768c2fb8aacc205a017f05d11521ad1650e39a998be5344f4a",
+      "anchors": {
+        "2371": 2410
+      },
+      "matched_lines": 2505,
+      "after_sha256": "9572d77cf8c9b94cd999b18d20e0a77597e1b3dd13285864bb05328f0a0fab9f"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntcsrmsg.h",
+      "before_sha256": "0eaafd5d95c8a49d9464a9f31afe6525f03c8b7d93e532c4df66fc77886e7e64",
+      "original_sha256": "896d25bb240d105c64f96ab06f97bee8e013ad7c4e679a0292b07c5e594c6fc7",
+      "anchors": {
+        "103": 102
+      },
+      "matched_lines": 138,
+      "after_sha256": "edafef9f825bbcc4000195c3fcbd63d6dd65d753271770bf6e5480a83b7879b1"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "before_sha256": "23f6eaea977732b5b7ce7e3c783b82a6c7aaa09314d07a01a8c28026fdb79dd3",
+      "original_sha256": "678d2cd4b79a15a79e6c0257b4bd93ad69fa7be95a513b627565490256cb1afc",
+      "anchors": {
+        "15": 12,
+        "20": 22,
+        "41": 50,
+        "89": 78,
+        "128": 125,
+        "142": 151,
+        "281": 336
+      },
+      "matched_lines": 281,
+      "after_sha256": "e9c3dc8ac2f6453d970869ef2e5007a50d914652cc615177110ccfe3ac90ab98"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+      "before_sha256": "285b97ea1a8f6e6328b4d251e8c5a2d7936eeea9e01d979d9c471373f949da4f",
+      "original_sha256": "638efc31ffd622ba31e16672d1418291c3e1291b6d0c57f31d08c32d45fa1720",
+      "anchors": {
+        "143": 138,
+        "151": 141,
+        "183": 168,
+        "191": 171,
+        "255": 230,
+        "281": 251,
+        "299": 264,
+        "342": 296,
+        "360": 312,
+        "363": 313,
+        "373": 322,
+        "381": 324,
+        "395": 337,
+        "416": 356
+      },
+      "matched_lines": 335,
+      "after_sha256": "67c9d0b3e2c68d3144db9953ef89d548808a240eaf88c21e65e5cbe6cab614f4"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcommdlg.c",
+      "before_sha256": "1b27283580d9a560f44076e4f618cfea589afe08f926dd3599c5f4f9c189f339",
+      "original_sha256": "01ce83329ae37a3e987971398115b8c7b5d9dcbc3320bdffaaa595244740a7d0",
+      "anchors": {
+        "24": 24,
+        "373": 566,
+        "408": 600,
+        "473": 662,
+        "574": 770,
+        "594": 789,
+        "640": 834,
+        "656": 845,
+        "2207": 2395,
+        "355": 548,
+        "388": 580,
+        "2191": 2379
+      },
+      "unresolved": [
+        [
+          357,
+          549,
+          550,
+          "    HWND hdlg,"
+        ],
+        [
+          358,
+          550,
+          551,
+          "    UINT uMsg,"
+        ],
+        [
+          359,
+          551,
+          552,
+          "    WPARAM uParam,"
+        ],
+        [
+          360,
+          552,
+          553,
+          "    LPARAM lParam"
+        ],
+        [
+          361,
+          553,
+          554,
+          "    )"
+        ],
+        [
+          390,
+          581,
+          582,
+          "    HWND hdlg,"
+        ],
+        [
+          391,
+          582,
+          583,
+          "    UINT uMsg,"
+        ],
+        [
+          392,
+          583,
+          584,
+          "    WPARAM uParam,"
+        ],
+        [
+          393,
+          584,
+          585,
+          "    LPARAM lParam"
+        ],
+        [
+          394,
+          585,
+          586,
+          "    )"
+        ],
+        [
+          2193,
+          2380,
+          2381,
+          "    HWND hdlg,"
+        ],
+        [
+          2194,
+          2381,
+          2382,
+          "    UINT uMsg,"
+        ],
+        [
+          2195,
+          2382,
+          2383,
+          "    WPARAM uParam,"
+        ],
+        [
+          2196,
+          2383,
+          2384,
+          "    LPARAM lParam"
+        ],
+        [
+          2197,
+          2384,
+          2385,
+          "    )"
+        ]
+      ],
+      "matched_lines": 2269,
+      "after_sha256": "2ee34b92c91450d654f867e68ba792cc8ad3f9981850579b5e305381eaf533b0"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wstruc.c",
+      "before_sha256": "548be73b4091a3ff5fbfa93d8ddec0894c6c424c2bab7a5154bd545df9a1d704",
+      "original_sha256": "04aa31f76dbb3e683c1f96101b07de006a79ca0d3b49e0a16986166349f3abb3",
+      "anchors": {
+        "731": 784,
+        "741": 792,
+        "706": 761
+      },
+      "unresolved": [
+        [
+          709,
+          762,
+          763,
+          "                  ( message >= WM_DDE_FIRST && message <= WM_DDE_LAST )) {"
+        ]
+      ],
+      "matched_lines": 1592,
+      "after_sha256": "de82d10775e90274f9fd2fa0aec330f564c65b730abb892ab97a23b947091ffc",
+      "removed_physical_indices": [
+        707
+      ],
+      "reason": "Keep local WM_COPYDATA term but place it on the first line of the continued expression so both original lines preserve their diagnostic positions."
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser31.c",
+      "before_sha256": "822e57351b7f0264397979150ded05ec036e24da0a754d6688fd2415c8edb123",
+      "original_sha256": "260237f9fda0013f02bbbcbc94c29ea2069de545043b636f2828c554e55582a4",
+      "anchors": {
+        "15": 15,
+        "116": 115,
+        "160": 151,
+        "124": 120
+      },
+      "unresolved": [
+        [
+          126,
+          121,
+          124,
+          "                          HRGN32(parg16->f2),"
+        ],
+        [
+          127,
+          122,
+          125,
+          "                          DWORD32(parg16->f3)));"
+        ]
+      ],
+      "matched_lines": 887,
+      "after_sha256": "7f709e732b386efe708a28fcf705f429a137ccff2968d786a0efe9d72748a6dc"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+      "before_sha256": "43135fd26751438fc8847bbbe046a6ebc9c7e80c55efb9d8866b52858d6fe218",
+      "original_sha256": "dfb0fb8d81afeb555b3631adc5456f4ceb13142f2e954a6f2b22631c49142e5c",
+      "anchors": {
+        "22": 43,
+        "86": 106,
+        "168": 187,
+        "258": 272,
+        "297": 310,
+        "331": 343,
+        "337": 348,
+        "376": 386,
+        "400": 409,
+        "449": 457,
+        "250": 265
+      },
+      "unresolved": [
+        [
+          252,
+          266,
+          267,
+          "                        ((PTHREADINFO)pheT->pOwner)->ppi == ppi &&"
+        ],
+        [
+          253,
+          267,
+          268,
+          "                        WowWndProcInSelList(pwnd->lpfnWndProc, SelListTemp))"
+        ]
+      ],
+      "matched_lines": 409,
+      "after_sha256": "f233bda073e53e44e91c1eeae4c78b4afe0e238e17f476ab3f79f985b241ce40"
+    }
+  ]
+}

@@ -2507,3 +2507,5 @@ OPENNT-HOST-257: restore original logical source positions in the S13 host-mirro
 OPENNT-HOST-258: restore original logical source positions for matching code on observed selected paths, retaining conditions and local adaptations. Evidence: artifacts/mvdm-audit/s13-r1346-batch.json and s13-r1346-context-recheck.json; other contexts remain under review.
 
 OPENNT-HOST-259: restore original logical source positions for matching code on observed selected paths, retaining conditions and local adaptations. Evidence: artifacts/mvdm-audit/s13-r1351-batch.json and s13-r1351-context-recheck.json; other contexts remain under review.
+
+OPENNT-HOST-260: restore original logical source positions for matching code on observed selected paths in the pending S13 batch, retaining conditions and local adaptations. Evidence: artifacts/mvdm-audit/s13-r1352-batch.json and s13-r1352-context-recheck.json; other contexts remain under review.

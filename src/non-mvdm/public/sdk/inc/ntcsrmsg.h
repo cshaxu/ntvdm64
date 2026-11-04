@@ -101,6 +101,7 @@ typedef struct _CSR_CAPTURE_HEADER {
      * ULONG_PTR is the identical original ULONG carrier in x86 builds. */
     PULONG_PTR MessagePointerOffsets; // Offsets within CSR_API_MSG of pointers
     PULONG_PTR CapturePointerOffsets; // Offsets within CaptureBuffer of pointers
+#line 102
     PCHAR FreeSpace;
 } CSR_CAPTURE_HEADER, *PCSR_CAPTURE_HEADER;
 

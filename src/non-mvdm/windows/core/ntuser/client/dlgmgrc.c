@@ -13,11 +13,13 @@
  * Original algorithms unchanged; standalone client precomp and retained
  * same-address WND graph supply the private data boundary. No host navigation
  * API substitution. Not selected in production until graph closure. */
+#line 12
 #include "precomp.h"
 
 /* DIVERGENCE(OPENNT-HOST-109): restore the original group-navigation
  * collaborators required by IsDialogMessage/xxxGotoNextMnem. Bodies are
  * unchanged; their graph comes from the same retained observation owner. */
+#line 22
 PWND UT_PrevGroupItem(
     PWND pwndDlg,
     PWND pwndCurrent)
@@ -39,6 +41,7 @@ PWND UT_PrevGroupItem(
     }
 }
 
+#line 50
 PWND UT_NextGroupItem(
     PWND pwndDlg,
     PWND pwndCurrent)
@@ -87,6 +90,7 @@ PWND _GetNextDlgGroupItem(
     return pwnd;
 }
 
+#line 78
 PWND _PrevControl(
     PWND pwndRoot,
     PWND pwndStart,
@@ -126,6 +130,7 @@ PWND _PrevControl(
     return pwnd;
 }
 
+#line 125
 PWND  _GetChildControl(PWND pwndRoot, PWND pwndChild) {
     PWND    pwndControl = NULL;
 
@@ -140,6 +145,7 @@ PWND  _GetChildControl(PWND pwndRoot, PWND pwndChild) {
     return(pwndControl);
 }
 
+#line 151
 PWND _NextSibblingOrAncestor (PWND pwndRoot, PWND pwndStart)
 {
     PWND pwndParent;
@@ -279,6 +285,7 @@ TryNextOne:
     return pwndRoot;
 }
 
+#line 336
 PWND _GetNextDlgTabItem(
     PWND pwndDlg,
     PWND pwnd,

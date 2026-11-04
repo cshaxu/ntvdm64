@@ -1,0 +1,82 @@
+[
+  {
+    "path": "src/mvdm-host/wow32/wcommdlg.c",
+    "current_sha256": "2ee34b92c91450d654f867e68ba792cc8ad3f9981850579b5e305381eaf533b0",
+    "original_sha256": "01ce83329ae37a3e987971398115b8c7b5d9dcbc3320bdffaaa595244740a7d0",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 2269
+  },
+  {
+    "path": "src/mvdm-host/wow32/wstruc.c",
+    "current_sha256": "de82d10775e90274f9fd2fa0aec330f564c65b730abb892ab97a23b947091ffc",
+    "original_sha256": "04aa31f76dbb3e683c1f96101b07de006a79ca0d3b49e0a16986166349f3abb3",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 1591
+  },
+  {
+    "path": "src/mvdm-host/wow32/wuser31.c",
+    "current_sha256": "7f709e732b386efe708a28fcf705f429a137ccff2968d786a0efe9d72748a6dc",
+    "original_sha256": "260237f9fda0013f02bbbcbc94c29ea2069de545043b636f2828c554e55582a4",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 887
+  },
+  {
+    "path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+    "current_sha256": "81e29a78112c13ea9fe9d285a9c03025cf876e076e98160c074dc01025f5dd71",
+    "original_sha256": "d160c2657ce8bd4cd006af505a5325b311fe27a7f80682518adb01771ab5b7c4",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 534
+  },
+  {
+    "path": "src/non-mvdm/public/internal/windows/inc/winconp.h",
+    "current_sha256": "9541cdd461cf1417749f18633965b2086bb59b21851a50aef84aef72054bb9f9",
+    "original_sha256": "26b1b3cff877ee2802aeff0eeab04f1daf7127e63279bcaa990c8b4f97384f2d",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 80
+  },
+  {
+    "path": "src/non-mvdm/public/internal/windows/inc/winddi.h",
+    "current_sha256": "9572d77cf8c9b94cd999b18d20e0a77597e1b3dd13285864bb05328f0a0fab9f",
+    "original_sha256": "f3ba4a33dbbb58768c2fb8aacc205a017f05d11521ad1650e39a998be5344f4a",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 2505
+  },
+  {
+    "path": "src/non-mvdm/public/sdk/inc/ntcsrmsg.h",
+    "current_sha256": "edafef9f825bbcc4000195c3fcbd63d6dd65d753271770bf6e5480a83b7879b1",
+    "original_sha256": "896d25bb240d105c64f96ab06f97bee8e013ad7c4e679a0292b07c5e594c6fc7",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 138
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+    "current_sha256": "e9c3dc8ac2f6453d970869ef2e5007a50d914652cc615177110ccfe3ac90ab98",
+    "original_sha256": "678d2cd4b79a15a79e6c0257b4bd93ad69fa7be95a513b627565490256cb1afc",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 281
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+    "current_sha256": "67c9d0b3e2c68d3144db9953ef89d548808a240eaf88c21e65e5cbe6cab614f4",
+    "original_sha256": "638efc31ffd622ba31e16672d1418291c3e1291b6d0c57f31d08c32d45fa1720",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 335
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+    "current_sha256": "f233bda073e53e44e91c1eeae4c78b4afe0e238e17f476ab3f79f985b241ce40",
+    "original_sha256": "dfb0fb8d81afeb555b3631adc5456f4ceb13142f2e954a6f2b22631c49142e5c",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 409
+  }
+]

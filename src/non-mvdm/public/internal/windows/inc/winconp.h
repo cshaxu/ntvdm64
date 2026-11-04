@@ -22,6 +22,7 @@ GetConsoleKeyboardLayoutNameW( LPWSTR );
 #line 20
 #error Unsupported excluded original configuration
 #else
+#line 22
 #define GetConsoleKeyboardLayoutName  GetConsoleKeyboardLayoutNameA
 #endif // !UNICODE
 #line 24
