@@ -1,5 +1,7 @@
 # Supporting Material
 
+[T475 S2 NTCON ownership](evidence/m0-t475-s2-ntcon-ownership.md) records the admitted review and initial graph inventory.
+
 [T475 S1 NXVM and Win32 RPC](evidence/m0-t475-s1-win32-rpc.md) records the library split and verification.
 
 [T474 S3 generic libraries](evidence/m0-t474-s3-generic-libraries.md)

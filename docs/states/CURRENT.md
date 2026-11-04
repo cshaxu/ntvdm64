@@ -2,155 +2,49 @@
 
 ## Current Work
 
-**Active: M0 T475 S1 — NXVM and Win32 library separation; RPC**
+**Active: M0 T475 S2 — NTCON shared implementation ownership**
 
-The owner directs local build, test, publication to this worktree's
-assets/release and local commits for later cherry-pick; no push or publication
-to the main worktree runtime. The owner closes S2 locally and admits S3 to
-extract product-independent RPC and I/O mechanisms from common to lib/rpc
-and lib/io while retaining NTVDM64 protocol and policy in common.
+The owner closes T475 S1 locally and directs continuation of the component
+ownership review. Audit NTCON production consumers, distinguish static/source
+dependencies from explicit runtime protocols and test-only selections, and
+move genuinely shared implementations to their proper common or library owner.
 
-S1 local closure: Run16-owned implementation no longer enters the inspected
-other-product source/link closures. Hook-specific classification belongs to
-Hook; NTCON and Hook32 dropped unused Run16 link inputs. Builds, focused
-regressions and dependency negative controls passed. Local ten-image release
-4249ef52-c3d3-4954-bfe9-c375ef046e1f was hash-verified and committed; three
-changed images were freshly built and seven unchanged baseline images reused.
-Full integration and publication to the main runtime remain pending.
+T475 S1 separated NXVM and Win32 library ownership. Its final four local P
+commits extracted object-handle comparison, overlapped pipe-pair creation,
+parent-process observation and file identity. Their local packages each
+passed the selected Control suite; final package
+`2b1325bd-17fb-4435-b2be-55995de325f6` has ten verified release hashes.
+Full was not run and the optional DOS4GW/NESticle fixture was absent. The
+four commits remain local for later cherry-pick. See the
+[T475 S1 evidence](../etc/evidence/m0-t475-s1-win32-rpc.md).
 
-S2 is owner-closed locally after implementation, publication and Control verification;
-main integration and Full product verification remain pending. Shared clients, scope and transport belong to
-common/base_srv; service policy remains NTSRV-owned. Candidate package
-e34caccf-13d8-4999-9be2-183ba247b6ee is published locally with ten matching
-hashes. The complete Control suite passed all 12 selected gates with the
-matching-width observer and an explicitly bounded test-only PATH for nested
-window handoff. The optional DOS4GW/NESticle fixture was absent and skipped;
-Full was not run. The original guest long-PATH issue remains unresolved.
-[Evidence](../etc/evidence/m0-t474-s2-basesrv-shared-ownership.md).
-
-S3 implementation and local publication are ready for owner review. Generic
-RPC and I/O mechanics now reside in lib; product protocol and policy remain
-in common. Fresh local package e05f16a8-e865-40e1-8a6e-d86bc5d25809 passed
-all 12 selected Control gates and ten release hash checks. Full was not run;
-the optional DOS4GW/NESticle fixture was unavailable. The original guest
-long-PATH issue remains. [S3 evidence](../etc/evidence/m0-t474-s3-generic-libraries.md).
-Owner adds an S3 P to relocate the complete NTCON lib tree to src/lib,
-including its pinned SoftPC and terminal assets. Preserve source bytes and
-import provenance; update all consumers, build graphs and tests, then build,
-test, publish locally and commit. The ten-image local package
-e719bbee-ba87-42c4-8438-80f0d62fdd0a passed all 12 selected Control gates;
-Full was not run, and the optional DOS4GW/NESticle fixture was absent.
-[S3 P evidence](../etc/evidence/m0-t474-s3-generic-libraries.md).
-Temporary evidence: build/t474-s3-p2.
-
-Owner directs rebasing this worktree onto main commit b919dd182 and rebuilding
-all release assets from the combined committed sources. Retain this worktree's
-active packet on status conflicts; never treat either pre-rebase binary package
-as the final combined release. Main's uncommitted S13 changes are not included.
-Fresh combined package 9f45db63-8a83-44c4-84b7-f4a45fd9297a is published to
-this worktree; ten new build inputs, release hashes and all 12 selected Control
-gates passed. Full was not run; the optional DOS4GW/NESticle fixture was absent.
-The S3 evidence records the Git byte-preservation correction and build runs.
-Temporary evidence: build/t474-s3-rebase.
-
-T475 S1 is locally implemented and ready for owner review. NXVM and Win32
-source ownership is separated, and Win32 RPC includes the extracted local
-peer-process mechanism while NTSRV retains authentication and policy. Local
-package b08813cb-cf4a-48d5-8ec8-cd0590a35f47 passed all 12 selected Control
-gates and ten release hash checks. Full was not run; the optional external
-DOS4GW/NESticle fixture was absent. [Evidence](../etc/evidence/m0-t475-s1-win32-rpc.md).
-
-Owner admits a further T475 S1 P to extract generic Win32 process attribute
-list allocation, initialization, update and cleanup from the service's Worker
-and frontend startup paths into `lib-win32/process`. Preserve admission, resume,
-rollback, handle ownership and caller-specific attributes. Verify x86/x64 build,
-focused positive/failure/lifecycle tests, product Control and local publication.
-Local package f3161950-6ff1-4558-9080-9686bd37cb98 passed all 12 selected
-Control gates, 36 process unit checks and release hash checks. Full was not
-run; the optional DOS4GW/NESticle fixture was absent. [Evidence](../etc/evidence/m0-t475-s1-win32-rpc.md).
-Temporary evidence: build/t475-process-p; no push or main-runtime publication.
-
-Owner admits a further T475 S1 P for `lib-win32/handle`, shared by NTSRV RPC
-handle export and NTHOOK child-process handle delivery. Preserve each caller's
-allocation, ownership, rollback and error rules; test local and remote handle
-cleanup. Local build, tests, assets/release and commit; no push or main runtime
-change. The 13-check local/remote handle test, 118 Hook assertions, all 12
-selected Control gates and ten release hash checks passed for local package
-9baf506d-436a-411a-aeda-cf70fcfea4a0. Full was not run; the optional
-DOS4GW/NESticle fixture was absent. [Evidence](../etc/evidence/m0-t475-s1-win32-rpc.md).
-Temporary evidence: build/t475-handle-p.
-
-Owner admits a further T475 S1 P for `lib-win32/process-hook`: extract generic
-suspended-child payload and same-/cross-width hook installation from NTHOOK;
-preserve product payload, routing, caller-owned rollback, Detours provenance
-and helper behavior. Build and test locally, publish only this worktree's
-assets/release and commit; no push. The seven mechanism checks, 118 Hook
-assertions on each architecture, repeated Control 12/12 and ten release hash
-checks passed for package 4d73890b-33b8-4edf-8ee7-0856c8b61761. The initial
-Control handoff observer failure, focused pass and full repeat are recorded in
-[S1 evidence](../etc/evidence/m0-t475-s1-win32-rpc.md); Full was not run and
-the optional DOS4GW/NESticle fixture was absent. Temporary evidence:
-build/t475-hook-p.
-
-Owner admits a further T475 S1 P: rename `lib-win32/process` to
-`process-attributes` and extract generic retained-process information and
-exit-watch registration/drain into `process-observation`. Preserve NTSRV
-task identity, admission, callback ordering, error and cleanup policies.
-Build, test, publish assets/release and commit locally; no push. Temporary
-evidence: build/t475-observation-p. The 16 lifecycle and three controlled
-failure checks, x86/x64 native and DOS production observation fixtures, 12
-selected Control gates and ten release hashes passed for local package
-9e98af44-2d1d-4862-8795-5cabfff112c3. The initial invalid-wait test failure is
-recorded in [S1 evidence](../etc/evidence/m0-t475-s1-win32-rpc.md). Full was
-not run; the optional DOS4GW/NESticle fixture was absent.
+Earlier independent-worktree shared ownership stages locally closed Run16 and
+NTSRV source edges; [T474 S2 evidence](../etc/evidence/m0-t474-s2-basesrv-shared-ownership.md)
+and [T474 S3 evidence](../etc/evidence/m0-t474-s3-generic-libraries.md)
+retain the decisions, rebase and publication limits. Main-worktree integration
+and full product verification remain pending. No push or main-runtime
+publication is authorized by the local workflow.
 
 ## Active Packet
 
-Owner admits four sequential T475 S1 P deliveries: (1) shared Win32 object
-handle comparison, (2) local overlapped pipe-pair creation, (3) parent-process
-identity observation, and (4) file identity comparison in lib-win32/file.
-For each P preserve caller policy and error semantics, run affected builds,
-focused tests and Control, publish the complete package to this worktree's
-assets/release and commit locally. No main-runtime publication or push is
-requested. Each subsequent P begins only after the preceding P is committed.
-Status temporarily exceeds the normal 16 KiB target while retaining this
-active packet and prior closure context; compact that context into indexed
-evidence when the owner closes or replans the active packet.
-P1 shared handle comparison passed x86/x64 builds, 16 handle checks, all 12
-selected Control gates and ten local release hashes for package
-`c7cf5920-8f98-48c6-badd-24ba9e1a35e8`. Full was not run; the optional
-DOS4GW/NESticle fixture was absent. Details are in the S1 evidence record.
-P2 local overlapped pipe-pair extraction passed x86/x64 builds, 13 focused
-checks, all 12 selected Control gates and ten release hashes for package
-`5b5a0256-66cf-43af-9f8f-ec2e9a6d0040`; Full was not run and the optional
-DOS4GW/NESticle fixture was absent.
-P3 parent-process observation passed x86/x64 builds, 19 focused checks,
-native and DOS observation fixtures on both architectures, 12 Control gates
-and ten local release hashes for package `f8ee2662-b573-41c1-955e-ed7ca0555884`.
-Full was not run and the optional DOS4GW/NESticle fixture was absent.
-P4 `lib-win32/file` identity comparison passed x86/x64 builds, 14 file checks,
-118 NTHook assertions on each architecture, 12 Control gates and ten local
-release hashes for package `2b1325bd-17fb-4435-b2be-55995de325f6`. Full was
-not run and the optional DOS4GW/NESticle fixture was absent.
-
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T475 S1, Ordinary Mode. |
-| Admission And Approval | Owner requests a new T to separate NXVM and project Win32 libraries, starting with RPC. |
-| Objective | Separate NXVM and Win32 library ownership, including generic RPC, I/O, file identity, process attributes and observation, handle and process-hook mechanisms. |
-| Non-goals | Change RPC behavior, guest media, main worktree, or alter process admission, resume, hook propagation or rollback semantics. |
-| Reference Baseline | T474 S3 local release 9f45db63-8a83-44c4-84b7-f4a45fd9297a; [evidence](../etc/evidence/m0-t474-s3-generic-libraries.md). |
-| Files And ABI Surface | Library trees, include paths, imported manifest and Git attributes, build graphs, tests and architecture authorities. |
-| Applicable Rules | Preserve NXVM provenance and functionality; no product dependency in low-level libraries. Owner directs local release and commit without push. |
-| Verification | Import identity and dependency checks, affected builds, RPC, process, handle and NXVM focused tests, local package, Control, governance and relative links. |
-| Expected Markers | NXVM and Win32 ownership distinct; generic RPC clients use lib-win32/rpc; product protocol stays common. |
-| Asset Needs | Existing toolchain and local package; no new source import. |
-| Reporting Requirements | Relocation, behavior, test results and Full/fixture limits. |
-| Stop Conditions | Required semantic change or inability to preserve imported-source provenance. |
-| Exit Criteria | Local build, test, assets/release publication and local commit; no push. |
-| Original Owner Request | Rename current lib as lib-nxvm, create lib-win32 for project common capabilities, first establish lib-win32/rpc. |
-| Similar-Issue Sweep | Existing generic lib/io placement and all lib path references. |
-| Temporary Evidence | build/t475-s1, owner T475 S1, 60-minute phase, 3-GiB and 10-minute no-progress budget. |
+| Identifier Mode | M0 T475 S2, Ordinary Mode. |
+| Admission And Approval | Owner closes S1 and directs the next startup-order component ownership review. |
+| Objective | Audit NTCON-owned production implementation and remove unauthorized dependencies from other product components while preserving behavior. |
+| Non-goals | No blanket Console rewrite, broker import, guest modifications, main-worktree changes or moving NTVDM policy into generic libraries. |
+| Reference Baseline | T475 S1 local package 2b1325bd-17fb-4435-b2be-55995de325f6; T474 Run16 and NTSRV ownership evidence above. |
+| Files And ABI Surface | NTCON sources and headers, other production source/link closures, appropriate common or library owners, build graphs, focused tests and evidence. |
+| Applicable Rules | Preserve original source provenance, runtime protocol and lifecycle; component-private sources cannot be production dependencies of sibling components. Worker-base exception applies only to its two workers. Local release and commits only. |
+| Verification | Inventory all real production consumers in x86 and x64 graph selections; distinguish test-only and runtime edges; focused positive, negative and lifecycle checks; relevant builds, coherent local package, Control, hash checks and governance for implementation. |
+| Expected Markers | Each NTCON-private production dependency is removed or explicitly justified under the owner rule, and actual use and disposition are evidenced. |
+| Asset Needs | Existing toolchain, production build graphs and local release package; no new import. |
+| Reporting Requirements | Consumer, symbol, actual use, ownership decision, moved or retained code, verification and remaining limitations. |
+| Stop Conditions | Required semantic concession, missing provenance or a proposed dependency inconsistent with the owner direction. |
+| Exit Criteria | Ownership audit complete and any necessary corrections built, tested, locally published and committed; no push or main-runtime publication. |
+| Original Owner Request | Continue startup-order shared implementation ownership review after closing the current S. |
+| Similar-Issue Sweep | NTCON sources, public/private includes, static archives, native/x86 production graphs, test-only consumers, common protocol and Worker Base boundaries. |
+| Temporary Evidence | build/t475-s2, ordinary worktree-local evidence with recorded owned test processes. |
 
 ## S12 Closure Record
 
