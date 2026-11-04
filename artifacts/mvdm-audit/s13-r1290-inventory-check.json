@@ -1,0 +1,15 @@
+{
+  "scope": "Current recorded observed inventory and separately confirmed generator input; file identity and evidence link audit",
+  "observed_records": 1055,
+  "generator_inputs": 1,
+  "completed_record_statuses": 1055,
+  "byte_identical_to_recorded_original": 182,
+  "byte_different_from_recorded_original": 874,
+  "current_and_original_hash_mismatches": 0,
+  "limitations": [
+    "Status and evidence link existence do not independently prove every condition or every supported build context.",
+    "Graph census depends on previously observed product configurations; supported-context completeness requires independent verification."
+  ],
+  "generator_evidence": "s13-r626-cvidc-generator-input.json",
+  "last_batch_evidence": "s13-r1289-continuation-batch.json"
+}
