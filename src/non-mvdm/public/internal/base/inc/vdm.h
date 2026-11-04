@@ -94,6 +94,7 @@ typedef struct _VdmVirtualIca{
 #line 94
 #error Unsupported excluded original configuration
 #else
+#line 98
 #define VDM_PM_IRETBOPSEG  0xd3
 #define VDM_PM_IRETBOPOFF  0x0
 #define VDM_PM_IRETBOPSIZE 4
@@ -116,6 +117,7 @@ typedef struct _VdmVirtualIca{
 #line 118
 #error DIVERGENCE OPENNT-HOST-136: _PC98_ branch is not selected; see mirror register.
 #else  // !_PC98_
+#line 120
 #define  FIXED_NTVDMSTATE_SEGMENT   0x70
 #endif // _PC98_
 #line 122

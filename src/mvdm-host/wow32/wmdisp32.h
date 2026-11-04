@@ -46,6 +46,7 @@ typedef struct _WM32MSGPARAMEX {
     /* DIVERGENCE(MVDM-HOST-DIV-349): otherwise slot1 captures heap ownership;
      * COPYDATA retains its original separate progress/slot contract. */
     DWORD dwTmp[4];
+#line 46
 } WM32MSGPARAMEX;
 
 /* Dispatch table entry
@@ -63,6 +64,7 @@ typedef struct _M32 {   /* w32 */
 /* DIVERGENCE(MVDM-HOST-DIV-344): matches the operation-private TLS owner. */
 extern  __declspec(thread) BOOL fThunkDDEmsg;
 
+#line 61
 #define WIN31_MM_CALCSCROLL  0x10AC   // WM_USER+0xCAC
 
 /* Function prototypes

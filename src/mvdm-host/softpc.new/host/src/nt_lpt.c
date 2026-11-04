@@ -381,6 +381,7 @@ GLOBAL UCHAR host_read_printer_status_port(int adapter)
 
 
     mvdm_softpc_report_setup_hardware_probe("lpt-status-enter", (unsigned long)adapter, 0ul);
+#line 372
     if(!lpt->active)
     {
 	/*:::::::::::::::::::::::::::: Port inactive, attempt to reopen it */
@@ -399,6 +400,7 @@ GLOBAL UCHAR host_read_printer_status_port(int adapter)
     if (lpt->bytesInBuffer)
 	flushBuffer(adapter);
     mvdm_softpc_report_setup_hardware_probe("lpt-status-ioctl-enter", (unsigned long)adapter, 0ul);
+#line 387
     if (!DeviceIoControl(lpt->handle,
 		     IOCTL_VDM_PAR_READ_STATUS_PORT,
 		     NULL,		    // no input buffer
@@ -414,10 +416,12 @@ GLOBAL UCHAR host_read_printer_status_port(int adapter)
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 401
+#line 403
         PrinterStatus = 0;
     }
     mvdm_softpc_report_setup_hardware_probe("lpt-status-ioctl-leave", (unsigned long)adapter,
         (unsigned long)PrinterStatus);
+#line 405
     return(PrinterStatus);
 }
 

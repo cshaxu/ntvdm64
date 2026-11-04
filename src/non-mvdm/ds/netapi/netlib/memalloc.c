@@ -232,6 +232,7 @@ Return Value:
 #line 239
 #error DIVERGENCE OPENNT-HOST-136: notdef branch is not selected; see mirror register.
 #else
+#line 241
         hOldMem = (HANDLE) OldAddress;
 #endif // notdef
 #line 243

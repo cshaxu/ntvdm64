@@ -310,11 +310,13 @@ getIntelRegistersPointer()
 #endif
 #line 543
 
+#line 546
 int FlatAddress[1];
 int Ldt[1];
 /* DIVERGENCE(MVDM-HOST-DIV-VDM-TIB-STORAGE): the selected printer carrier
  * uses the complete original VDM_TIB. Its storage belongs to the monitor
  * binding; a four-byte non-MONITOR placeholder must not satisfy that symbol. */
+#line 549
 int VdmTibStruct;
 
 void DispatchInterrupts()

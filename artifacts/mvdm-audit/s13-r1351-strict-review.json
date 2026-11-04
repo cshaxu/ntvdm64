@@ -1,0 +1,53 @@
+{
+  "method": "Same strict original-tree and observed selected-projection review as r1348; unobserved contexts and local runtime behavior are not certified.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "before_sha256": "c2bf90ae275ee14e0f07435ed58a6df737d93a82cbd488c3a3b9e73e7a879156",
+      "original_sha256": "f2ab1f40420a0928884cf524305a9b87b8c65b0c3440ab97367aa1cbce6417a7",
+      "anchors": {},
+      "matched_lines": 378,
+      "strict_tree": {
+        "excluded": 2,
+        "groups": 5,
+        "retained": 3
+      }
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.h",
+      "before_sha256": "6652508bea431d3a115a5e68ad7e7d749089df58ba631f3a0e4482980cfbe187",
+      "original_sha256": "4102d319dbaf7dc0ed6759efbdcec83e2882af708cd7f70c97cacc50cd0e0057",
+      "anchors": {},
+      "matched_lines": 122,
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 1,
+        "groups": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "before_sha256": "5974aa25b4052803af37efee3fab2a0a3c9f32ce8e3baa3fbfd1492c5bd23353",
+      "original_sha256": "ce33e8634d085f9ca27ad331560e5321c3fed2ee8552ce0d00fda25af0a74b62",
+      "anchors": {},
+      "matched_lines": 3397,
+      "strict_tree": {
+        "excluded": 4,
+        "retained": 2,
+        "groups": 5
+      }
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "before_sha256": "62bf79c38fef56c60916ae36d4ea719b06a06873c88ea7cc361d41143cb0fcc0",
+      "original_sha256": "45b70c02c0aeb79f674e68a475669d45e2e5e6fab21f20e9bfcfe229d8958525",
+      "anchors": {},
+      "matched_lines": 230,
+      "strict_tree": {
+        "retained": 6,
+        "excluded": 7,
+        "groups": 8
+      }
+    }
+  ]
+}

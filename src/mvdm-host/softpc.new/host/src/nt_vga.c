@@ -1356,6 +1356,7 @@ void nt_v7vga_hi_graph_std(int offset, int screen_x, int screen_y,
     if (width <= 0 || height <= 0 || screen_x < 0 || screen_y < 0 ||
         screen_x >= sc.PC_W_Width || screen_y >= sc.PC_W_Height ||
         offset < 0 || offset >= 4 * EGA_PLANE_SIZE || get_offset_per_line() <= 0){
+#line 1351
         assert2( NO, "VDM: nt_v7vga_hi_graph_std() w=%d h=%d", width, height );
         return;
     }
@@ -1365,6 +1366,7 @@ void nt_v7vga_hi_graph_std(int offset, int screen_x, int screen_y,
     width = min(width, 4 * EGA_PLANE_SIZE - offset);
     height = min(height, 1 + (4 * EGA_PLANE_SIZE - offset - width) /
         get_offset_per_line());
+#line 1355
     local_height = height;
     bytes_per_line = BYTES_PER_SCANLINE(sc.ConsoleBufInfo.lpBitMapInfo);
     ref_data_ptr = &EGA_plane0123[offset];

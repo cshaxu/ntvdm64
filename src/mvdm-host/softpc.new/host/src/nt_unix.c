@@ -14,6 +14,7 @@
 #include <windows.h>
 #include "host_def.h"
 #include "mvdm_softpc_firmware.h"
+#line 16
 #include "insignia.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -42,6 +43,7 @@
 /****    externally visible global variable declarations                 ****/
 
 /* Exported Data */
+#line 48
 GLOBAL BOOL ExternalWaitRequest = FALSE;
 
 
@@ -74,6 +76,7 @@ if (message != NULL)
 sprintf(buf, "System error %d occurred in %s (line %d)",
 	 error, filename, line);
 return(buf);
+#line 78
 }
 
 
@@ -181,6 +184,7 @@ void HostIdleNoActivity(void)
      * until the CPU reaches its next original WaitForSingleObject call. */
     if (IdleEvent != NULL)
 	SetEvent(IdleEvent);
+#line 175
 }
 
 
@@ -196,6 +200,7 @@ void host_release_timeslice(void)
     //
     // If there is counter idle activity no idling so return immediatly
     //
+#line 189
     if (!IdleNoActivity || IdleDisabledFromPIF) {
 	return;
     }
@@ -226,11 +231,13 @@ void host_release_timeslice(void)
     NowWaiting = TRUE;
     wait_result = WaitForSingleObject(IdleEvent, idletime);
     if (wait_result == WAIT_FAILED) {
+#line 218
         idletime = 0;
 	Sleep(0);
         }
     NowWaiting = FALSE;
 #ifndef MONITOR
+#line 224
     if (idletime) {
         ActivityCheckAfterTimeSlice();
         }
@@ -370,6 +377,7 @@ int display_error;
         return(full_path);
 
     /* Haven't managed to find the file. Oh dear... */
+#line 406
     switch( display_error )
     {
 	case SILENT:

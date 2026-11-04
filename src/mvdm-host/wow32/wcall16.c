@@ -16,6 +16,7 @@
 #include "precomp.h"
 /* DIVERGENCE(MVDM-HOST-DIV-304): default-off callback observation only. */
 #include "wow_callback_frame_lease.h"
+#line 17
 #pragma hdrstop
 
 
@@ -489,6 +490,7 @@ DWORD WOWCallback16(DWORD vpFn, DWORD dwParam)
     if (!CallBack16(RET_WOWCALLBACK16, &Parm16, (VPPROC)vpFn, &vp))
         return 0;
 
+#line 517
     return (DWORD)vp;
 }
 
@@ -539,6 +541,7 @@ BOOL WOWCallback16Ex(
 /* DIVERGENCE(MVDM-HOST-DIV-343): admit execution before original frame access;
  * keep same-unit callers on the public-shaped entry and this body intact. */
 BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVOID pvpReturn)
+#line 582
 {
 #line 583
 #ifdef DEBUG
@@ -550,6 +553,7 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
     register PVDMFRAME pFrame;
     register PCBVDMFRAME pCBFrame;
     VDMFRAME callerFrame;
+#line 651
     WORD wAX;
     /* DIVERGENCE(MVDM-HOST-DIV-348): progress of this original frame only. */
     VPVOID callerStack, callerCallbackStack;
@@ -570,6 +574,7 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
 #line 645
 
 
+#line 661
     WOW32ASSERT(iRetID != RET_RETURN && iRetID != RET_DEBUGRETURN);
 
     ptd = CURRENTPTD();
@@ -580,6 +585,7 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
     callerInit = ptd->dwFlags & TDF_INITCALLBACKSTACK;
     wow_callback_control_capture(&control);
     __try {
+#line 665
     GETFRAMEPTR(ptd->vpStack, pFrame);
     /* DIVERGENCE(MVDM-HOST-DIV-178): snapshot the only caller fields used
      * below before the second original resolution can fault in a segment.
@@ -592,6 +598,7 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
 
     // Just making sure that this thread matches the current 16-bit task
 
+#line 669
     WOW32ASSERT((pFrame->wTDB == ptd->htask16) ||
                 (ptd->dwFlags & TDF_IGNOREINPUT) ||
                 (ptd->htask16 == 0));
@@ -654,6 +661,7 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
         ptd->vpCBStack, 0, pFrame->wTDB,
         (DWORD)vpfnProc, pParm16 ? pParm16->WndProc.wMsg : 0,
         pParm16 ? pParm16->WndProc.lParam : 0);
+#line 757
     FREEVDMPTR(pFrame);
     FLUSHVDMPTR(ptd->vpCBStack, sizeof(CBVDMFRAME), pCBFrame);
     FREEVDMPTR(pCBFrame);
@@ -679,6 +687,7 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
 #else
 #line 771
     // Time to get the IEU running task-time code again
+#line 779
     SaveIp = getIP();
     /* DIVERGENCE(MVDM-HOST-DIV-304): default-off witness after the original
      * stack selection and before the original CCPU reentry.  It copies no
@@ -687,6 +696,7 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
         ptd->vpCBStack, 0, ptd->htask16, (DWORD)vpfnProc,
         pParm16 ? pParm16->WndProc.wMsg : 0,
         pParm16 ? pParm16->WndProc.lParam : 0);
+#line 780
     host_simulate();
     setIP(SaveIp);
     ptd->vpStack = VDMSTACK();
@@ -744,5 +754,6 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
             SetLastError(error);
         }
     }
+#line 818
     return TRUE;
 }

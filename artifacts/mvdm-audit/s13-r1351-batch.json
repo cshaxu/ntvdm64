@@ -1,0 +1,138 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_lpt.c",
+      "before_sha256": "bb24a879db9f769ec6eea46eab09a08af7a206c9539a1d91de88a64cdd4358ed",
+      "original_sha256": "fba617ebdccda8f0cfae4541338d463352e7de3a3e97c3dcf7804fa7eed67ae8",
+      "anchors": {
+        "383": 372,
+        "401": 387,
+        "416": 403,
+        "420": 405
+      },
+      "matched_lines": 635,
+      "after_sha256": "31d6e8c24e099ba16b2bc20b64e4bf3ce976f11a713177b3ba3fe3a790c2c73f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "before_sha256": "c4eee23b81dee6622c77d42f1855b18ce4c77b0aa928a44bb4ef425a47e69726",
+      "original_sha256": "55832ee249e18683e6d80c582ac8dff47318a5d467d1b1017777fc961bdccf5e",
+      "anchors": {
+        "47": 42,
+        "270": 256,
+        "989": 958,
+        "994": 962
+      },
+      "matched_lines": 1296,
+      "after_sha256": "8f4ccdd0447f4c9d10d9a7752ca67c3a6a977a791b296289034ff4a30e910a77"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "before_sha256": "e1fe9da44bda13828db816917e1b9cdc52a8d7a2a50801df339092d9db187db1",
+      "original_sha256": "f2ab1f40420a0928884cf524305a9b87b8c65b0c3440ab97367aa1cbce6417a7",
+      "anchors": {
+        "16": 16,
+        "44": 48,
+        "76": 78,
+        "183": 175,
+        "198": 189,
+        "228": 218,
+        "233": 224,
+        "372": 406
+      },
+      "matched_lines": 378,
+      "after_sha256": "c2bf90ae275ee14e0f07435ed58a6df737d93a82cbd488c3a3b9e73e7a879156"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vga.c",
+      "before_sha256": "f3b8a7972fe2f1c2b86e311fe9e9c8594c427d3583422698cf6a9b5414411409",
+      "original_sha256": "81db9f2e415e58c21b0a10110d03d0f16532c2150aba84feb2cab8f74627ee6d",
+      "anchors": {
+        "1358": 1351,
+        "1367": 1355
+      },
+      "matched_lines": 1622,
+      "after_sha256": "1ebdafaf6e9ed6afc128b64d305233ca8f8b12c5dd77aa12052d8a57283f99af"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "before_sha256": "d9b800e05b8df940b20ba08d7937e4b909cb75362e110d5888a8d2840dcfc925",
+      "original_sha256": "c1821a3738bbee78293a47262cb8df14e68043cfd6b4092b7fa56bdb01c6d991",
+      "anchors": {
+        "312": 546,
+        "317": 549
+      },
+      "matched_lines": 315,
+      "after_sha256": "036a3d66d5f0965e3e9e5f6fc8cf9fd2b1c7daa3c2cfc9002a6a6b75e3cff6dc"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "before_sha256": "3a7a4c007d5382dfed07699ccae7e8598545ef27347604a0418ad0b66d01f0f3",
+      "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0",
+      "anchors": {
+        "18": 17,
+        "491": 517,
+        "541": 582,
+        "552": 651,
+        "572": 661,
+        "582": 665,
+        "594": 669,
+        "656": 757,
+        "681": 779,
+        "689": 780,
+        "746": 818
+      },
+      "matched_lines": 629,
+      "after_sha256": "e5234fca6a99ea1e66e9a2ab663c9020ff039e9a3fd170b802fd4861037e015e"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.h",
+      "before_sha256": "33116c4aa3b24505d63bc55c6de35ea1eb7abecdcb43cd6ad6b447fb64ccf5d5",
+      "original_sha256": "4102d319dbaf7dc0ed6759efbdcec83e2882af708cd7f70c97cacc50cd0e0057",
+      "anchors": {
+        "48": 46,
+        "65": 61
+      },
+      "matched_lines": 122,
+      "after_sha256": "6652508bea431d3a115a5e68ad7e7d749089df58ba631f3a0e4482980cfbe187"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "before_sha256": "1d4935e9c44725b1b3ca6c4ded1ecf6a58cbbbdf8e3de9d78b7416126fe25f75",
+      "original_sha256": "ce33e8634d085f9ca27ad331560e5321c3fed2ee8552ce0d00fda25af0a74b62",
+      "anchors": {
+        "23": 21,
+        "1054": 1058,
+        "1070": 1073,
+        "2104": 2111,
+        "2113": 2115,
+        "2120": 2120,
+        "2931": 2923,
+        "2956": 2941
+      },
+      "matched_lines": 3397,
+      "after_sha256": "5974aa25b4052803af37efee3fab2a0a3c9f32ce8e3baa3fbfd1492c5bd23353"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "before_sha256": "fa3c16126b23ee3aab038ca751922bd932bba138443c7e6d1200e6aa86861f5e",
+      "original_sha256": "45b70c02c0aeb79f674e68a475669d45e2e5e6fab21f20e9bfcfe229d8958525",
+      "anchors": {
+        "234": 241
+      },
+      "matched_lines": 230,
+      "after_sha256": "62bf79c38fef56c60916ae36d4ea719b06a06873c88ea7cc361d41143cb0fcc0"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "before_sha256": "1b5fd4b9250ba4639c84907e6e2d1b0bddd0cc206f42ca889cb461ba9ec26baa",
+      "original_sha256": "c614c03a004f974c1eef37f1b29d3a8e1d7cfc33d04e7e7304befcbd6faafd18",
+      "anchors": {
+        "96": 98,
+        "118": 120
+      },
+      "matched_lines": 424,
+      "after_sha256": "46cde6f9ec047b4f5614fa8645ca009b7c038baaa0b639ed428c441c3e5abee8"
+    }
+  ]
+}

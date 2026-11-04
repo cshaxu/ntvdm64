@@ -45,6 +45,7 @@
 #include "nt_mem.h"
 #include "mvdm_softpc_physical_mapping.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
+#line 42
 #include "debug.h"
 #include "sas.h"
 
@@ -268,6 +269,7 @@ GLOBAL IU8 *InitIntelMemory IFN1(IU32, MaxIntelMemorySize)
      * Initialise linked list with pointers to initial 1M and remaining free
      * space and store initial size of free space.
      */
+#line 256
     entryPtr = addHeaderEntry((SECTION_HEADER *) NULL, (SECTION_HEADER *) NULL,
 			      SECT_ALLOC, intelMem, initialCommitSize);
 
@@ -987,11 +989,13 @@ GLOBAL NTSTATUS VdmAddVirtualMemory IFN3(ULONG, HostAddress,
     status = VdmAllocateVirtualMemory(IntelAddress,Size,FALSE);
     if (status != STATUS_SUCCESS) {
         mvdm_softpc_report_virtual_memory_failure((unsigned long)status);
+#line 958
         return (STATUS_NO_MEMORY);
     }
 
     /* step 2 - flush the caches */
 
+#line 962
     sas_overwrite_memory(*IntelAddress, Size);
 
     /* step 3 - replace the PhysicalPageREC.translation entries */

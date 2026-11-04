@@ -21,6 +21,7 @@
 #include "wow_callback_frame_lease.h"
 
 
+#line 21
 MODNAME(wuser.c);
 
 extern HANDLE hmodWOW32;
@@ -1052,6 +1053,7 @@ ULONG FASTCALL WU32GetDC(PVDMFRAME pFrame)
 {
     ULONG ul;
     HWND hwnd32;
+#line 1058
     register PGETDC16 parg16;
     HAND16 htask16 = pFrame->wTDB;
 
@@ -1068,6 +1070,7 @@ ULONG FASTCALL WU32GetDC(PVDMFRAME pFrame)
     if (parg16->f1 && !hwnd32) { FREEARGPTR(parg16); RETURN(0); }
     ul = GETHDC16(wow_native_GetDC(hwnd32));
 
+#line 1073
     if (ul) {
 // Some apps such as MSWORKS and MS PUBLISHER use some wizard code that accepts
 // a hDC or a hWnd as a parameter and attempt to figure out what type of handle
@@ -2102,6 +2105,7 @@ ULONG FASTCALL WU32LoadBitmap(PVDMFRAME pFrame)
     LPBYTE pResData = NULL;
     wow_callback_frame_lease resource = {0};
 
+#line 2111
     GETARGPTR(pFrame, sizeof(LOADBITMAP16), parg16);
     GETPSZIDPTR(parg16->f2, psz2);
     GETMISCPTR(parg16->f3, pResData);
@@ -2111,6 +2115,7 @@ ULONG FASTCALL WU32LoadBitmap(PVDMFRAME pFrame)
         FETCHDWORD(parg16->f3), FETCHDWORD(parg16->f4),
         GUEST_MEMORY_ACCESS_READ, &resource)) goto bitmap_cleanup;
 
+#line 2115
     ul = GETHBITMAP16((pfnOut.pfnWOWLoadBitmapA)(HINSTRES32(parg16->f1),
                                      psz2,
                                      pResData ? resource.bytes : NULL,
@@ -2118,6 +2123,7 @@ ULONG FASTCALL WU32LoadBitmap(PVDMFRAME pFrame)
 
 bitmap_cleanup:
     if (resource.lease) wow_callback_frame_release(&resource, 0);
+#line 2120
     FREEMISCPTR(pResData);
     FREEPSZIDPTR(psz2);
     FREEARGPTR(parg16);
@@ -2929,6 +2935,7 @@ ULONG FASTCALL WU32SetScrollRange(PVDMFRAME pFrame)
 extern int __cdecl mvdm_softpc_wow_page_domain_publish_system_color(
     unsigned long, unsigned long);
 
+#line 2923
 ULONG FASTCALL WU32SetSysColors(PVDMFRAME pFrame)
 {
     PINT p2;
@@ -2954,6 +2961,7 @@ ULONG FASTCALL WU32SetSysColors(PVDMFRAME pFrame)
         }
     } else {
 #ifndef i386
+#line 2941
     PDWORD p4;
     ULONG   BufRGB [SSC_BUF_SIZE];
 

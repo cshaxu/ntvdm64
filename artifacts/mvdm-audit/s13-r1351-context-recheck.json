@@ -1,0 +1,82 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_lpt.c",
+    "current_sha256": "31d6e8c24e099ba16b2bc20b64e4bf3ce976f11a713177b3ba3fe3a790c2c73f",
+    "original_sha256": "fba617ebdccda8f0cfae4541338d463352e7de3a3e97c3dcf7804fa7eed67ae8",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 635
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+    "current_sha256": "8f4ccdd0447f4c9d10d9a7752ca67c3a6a977a791b296289034ff4a30e910a77",
+    "original_sha256": "55832ee249e18683e6d80c582ac8dff47318a5d467d1b1017777fc961bdccf5e",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 1296
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+    "current_sha256": "c2bf90ae275ee14e0f07435ed58a6df737d93a82cbd488c3a3b9e73e7a879156",
+    "original_sha256": "f2ab1f40420a0928884cf524305a9b87b8c65b0c3440ab97367aa1cbce6417a7",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 378
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_vga.c",
+    "current_sha256": "1ebdafaf6e9ed6afc128b64d305233ca8f8b12c5dd77aa12052d8a57283f99af",
+    "original_sha256": "81db9f2e415e58c21b0a10110d03d0f16532c2150aba84feb2cab8f74627ee6d",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 1622
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+    "current_sha256": "036a3d66d5f0965e3e9e5f6fc8cf9fd2b1c7daa3c2cfc9002a6a6b75e3cff6dc",
+    "original_sha256": "c1821a3738bbee78293a47262cb8df14e68043cfd6b4092b7fa56bdb01c6d991",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 315
+  },
+  {
+    "path": "src/mvdm-host/wow32/wcall16.c",
+    "current_sha256": "e5234fca6a99ea1e66e9a2ab663c9020ff039e9a3fd170b802fd4861037e015e",
+    "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 629
+  },
+  {
+    "path": "src/mvdm-host/wow32/wmdisp32.h",
+    "current_sha256": "6652508bea431d3a115a5e68ad7e7d749089df58ba631f3a0e4482980cfbe187",
+    "original_sha256": "4102d319dbaf7dc0ed6759efbdcec83e2882af708cd7f70c97cacc50cd0e0057",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 122
+  },
+  {
+    "path": "src/mvdm-host/wow32/wuser.c",
+    "current_sha256": "5974aa25b4052803af37efee3fab2a0a3c9f32ce8e3baa3fbfd1492c5bd23353",
+    "original_sha256": "ce33e8634d085f9ca27ad331560e5321c3fed2ee8552ce0d00fda25af0a74b62",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 3397
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+    "current_sha256": "62bf79c38fef56c60916ae36d4ea719b06a06873c88ea7cc361d41143cb0fcc0",
+    "original_sha256": "45b70c02c0aeb79f674e68a475669d45e2e5e6fab21f20e9bfcfe229d8958525",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 230
+  },
+  {
+    "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+    "current_sha256": "46cde6f9ec047b4f5614fa8645ca009b7c038baaa0b639ed428c441c3e5abee8",
+    "original_sha256": "c614c03a004f974c1eef37f1b29d3a8e1d7cfc33d04e7e7304befcbd6faafd18",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 424
+  }
+]
