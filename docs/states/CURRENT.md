@@ -2,9 +2,16 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T475 S4 is locally concluded; its three local
-P commits await the owner-directed later cherry-pick. Main-runtime publication
-and push remain deferred for this worktree.
+**No active M/T/S packet.** M0 T475 S4 is locally concluded after P4; its
+local commits await the owner-directed later cherry-pick. Main-runtime
+publication and push remain deferred for this worktree.
+
+The owner reopens S4 for P4: the x64 Run16 and Hook64 classifier compilation
+reaches the NTHook-private `legacy_classifier_arch.h` through a forced include.
+Move this shared classifier-specific compatibility contract to common, retain
+the original OS/2 NE classification and translation-unit-local `_X86_` scope,
+and verify actual compiler closures and behavior. The three earlier local P
+commits remain unchanged; main-runtime publication and push remain deferred.
 
 The owner accepts the latest local audit and admits S4 to remove the private
 NTHook source/header/static-link dependencies of Run16, NTVDM and NTVWM. The
@@ -18,9 +25,9 @@ with later cherry-pick and no push or main-runtime publication.
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T475 S4, Ordinary Mode; locally concluded. |
+| Identifier Mode | M0 T475 S4, Ordinary Mode; locally concluded after P4. |
 | Admission And Approval | Owner closes the local audit and admits a new NTHook-dependency cleanup task. |
-| Objective | Remove private NTHook dependencies from other components and the reached private SoftPC forced-header dependencies without altering hook behavior. |
+| Objective | Remove remaining NTHook-private classifier header dependency without changing original NE classification or native compilation scope. |
 | Non-goals | Change hook interception policy, packet identity, session authority, guest media, the allowed Worker Base edges, or separately queued NTVDM runtime imports. |
 | Reference Baseline | Local commit 9b339696d, release package 8b055e88-0703-4652-a14d-720d2d9f61e6; prior S3 and S2 evidence. |
 | Files And ABI Surface | NTHook, Run16, NTVDM, NTVWM, common, build graph, compiler-selected headers, hook packet and process injection boundaries. |
@@ -53,6 +60,12 @@ non-worker archive closures; 98 closure objects and a negative control, all
 passed. Local package `eedc8134-05c6-449d-b799-c036d739e909` has ten verified
 hashes. Full and DOS4GW/NESticle were not run. Runtime NTVDM imports remain in
 the separately queued task.
+P4 moves the byte-identical classifier architecture adapter into common. The
+complete Run16 compiler closure, two classifier bindings and a negative control,
+the x86/x64 build, 118 x86, 118 x64 and 168 cross-width Hook assertions, 12
+Control gates and four WRITE startup snapshots passed. Local package
+`8adf96a8-42b3-4273-8f48-27b58b07df1d` has ten verified hashes. OS/2 NE runtime,
+WRITE editing and exit, Full and DOS4GW/NESticle were not tested.
 
 The owner closes the [S2 dependency inventory](../etc/evidence/m0-t475-s2-component-dependency-inventory.md)
 and admits S3 to address the illegal Worker Base and NTVDM dependencies through
@@ -81,24 +94,10 @@ publication is authorized by the local workflow.
 
 ## T475 S3 Local Closure Record
 
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T475 S3, Ordinary Mode; locally concluded. |
-| Admission And Approval | Owner admits the S and seven P deliveries; source, header and static-link scope is confirmed, with runtime-import removal separately queued. |
-| Objective | Remove prohibited Worker Base and NTVDM source, header and static-link dependencies through common and platform libraries. |
-| Non-goals | Alter the allowed two-worker Worker Base dependency, NTHook ownership, guest media, original ABI semantics or main worktree. |
-| Reference Baseline | S2 inventory commit 5bc6eb897 and local package 2b1325bd-17fb-4435-b2be-55995de325f6. |
-| Files And ABI Surface | VDMREDIR, WOW32, NTVDM, common and lib-win32 source/headers, source/link graph, module interfaces, tests and documentation. |
-| Applicable Rules | Preserve mirror provenance, original behavior, one session/page-domain authority, callback lifetime and calling conventions; generic libraries cannot depend on common or private product code. |
-| Verification | Per production P: affected x86/x64 builds, real positive/negative/lifecycle fixtures, Control, ten-image local publication and hash checks, governance and diff review. |
-| Expected Markers | Non-worker components select no Worker Base input and no NTVDM-private implementation/header; required runtime contracts and state ownership remain verified. |
-| Asset Needs | Existing toolchain, fixtures and local package; no external source import. |
-| Reporting Requirements | Per consumer/provider, actual use, removed edge, shared owner, preserved state, verification and runtime-ABI disposition. |
-| Stop Conditions | Required semantic concession, missing provenance or duplicate state owner; none accepted for the local closure. |
-| Exit Criteria | Source, header and static-link scope locally verified and committed; runtime-import removal separately queued per owner. Main-worktree integration, system32 publication and push remain owner-directed deferrals. |
-| Original Owner Request | Admit one S to address Worker Base and NTVDM dependencies by placing suitable code into common and lib; provide a design. |
-| Similar-Issue Sweep | VDMREDIR and WOW32 source, private headers, selected archive members, forced includes, NTVDM module ABI and all Worker Base consumers. |
-| Temporary Evidence | build/t475-s3, worktree-local evidence with owned test processes. |
+S3 local delivery and its later audit correction are recorded in the
+[S3 evidence](../etc/evidence/m0-t475-s3-worker-ntvdm-remediation.md) and
+[S4 evidence](../etc/evidence/m0-t475-s4-nthook-dependency-cleanup.md).
+
 ## S12 Closure Record
 
 The owner accepted [S12 source layout and compile-time boundaries](../etc/evidence/m0-t473-s12-source-layout-closure.md).

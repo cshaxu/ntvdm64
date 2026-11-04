@@ -61,7 +61,7 @@ foreach($source in $sources) {
     $object='unit'+$i+'.obj';++$i;$objects+=$object
     $graph.Add('build '+$object+': cc '+(NP (Join-Path $root $source))+' | obj/basesrv/service.h')
     if($source -eq 'src/non-mvdm/base/win32/client/vdm.c') {
-        $graph.Add('  cflags = $cflags /DOPENNT_BASE_CLIENT_CLASSIFIER /FI"'+(NP (Join-Path $root 'src/nthook32-dll/legacy_classifier_arch.h'))+'"')
+        $graph.Add('  cflags = $cflags /DOPENNT_BASE_CLIENT_CLASSIFIER /FI"'+(NP (Join-Path $root 'src/common/base_srv/legacy_classifier_arch.h'))+'"')
     }
     if($source -eq 'src/non-mvdm/base/ntos/rtl/error.c') {
         $graph.Add('  cflags = $cflags /DNTOS_KERNEL_RUNTIME')

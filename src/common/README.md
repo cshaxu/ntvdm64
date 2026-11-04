@@ -19,7 +19,9 @@ across worker and DLL source boundaries. The existing worker session remains
 the only guest-memory and lease-context authority; no state is allocated here.
 
 `base_srv/` owns shared BaseSrv client, identity-scope and copied transport
-mechanisms. NTSRV retains server-side authorization, task and lifecycle
+mechanisms. Its classifier-local architecture adapter preserves the original
+OS/2 NE rule for native consumers without changing other translation units.
+NTSRV retains server-side authorization, task and lifecycle
 policy. `rpc/` remains a separate sibling for product-specific RPC calls. Generic
 local RPC and I/O mechanics are owned by `src/lib-win32/rpc` and `src/lib-win32/io`,
 including final native file-path resolution.

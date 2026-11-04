@@ -69,3 +69,23 @@ was not run and DOS4GW/NESticle was absent. Logs and prior release backup are
 under `build/t475-s4-p3`. Main worktree integration, system32 publication and
 push remain deferred by the owner; NTVDM PE runtime imports remain a separate
 queued task.
+
+## P4: native classifier composition boundary
+
+The owner reopens S4 after an audit found that Run16's selected x64 OpenNT
+classifier forced an NTHook-private `legacy_classifier_arch.h`; Hook64 uses
+the same classifier composition. The byte-identical project-owned header now
+resides in `common/base_srv`, and both native build rules select it only for
+the original classifier translation unit. The original `_X86_` conditional
+and retained OS/2 NE classification branch are unchanged. The full Run16
+compiler closure contains no NTHook-private header; an injected old-path
+negative control was rejected. No independent OS/2 NE guest sample was run.
+
+The x86/x64 product build, 63 immutable guest files, 274 export ordinals,
+118 x86 and 118 x64 Hook checks, 168 cross-width Hook checks, and 12 selected
+Control gates passed. A real Win16 WRITE startup retained its main, document
+and page-info windows across four snapshots; editing and normal exit were not
+tested. Local package `8adf96a8-42b3-4273-8f48-27b58b07df1d` has ten matching
+release hashes. Full was not run; DOS4GW/NESticle was absent. Logs and the
+prior release backup are under `build/t475-s4-p4`. Main integration, runtime
+publication and push remain deferred by the owner.
