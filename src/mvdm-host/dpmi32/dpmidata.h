@@ -40,6 +40,7 @@ Revision History:
  * exist in this software-emulation profile. */
 #define switch_to_protected_mode        DpmiCpu40SwitchToProtectedMode
 #else
+#line 46
 #define switch_to_protected_mode        DpmiIllegalFunction
 #endif
 #if !defined(CPU_40_STYLE)

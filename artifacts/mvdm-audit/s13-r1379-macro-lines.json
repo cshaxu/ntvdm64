@@ -1,0 +1,37 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "before_sha256": "d39454a3945972f63df743e8f4ade5e7b2984ffe96bcbaade483aed42e2e5294",
+      "after_sha256": "f2bc102075e0624cfe95a040c0608d97df5a8a198a0c0d08bf0271a71207b93a",
+      "original_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb",
+      "insert_before_current_line": 570,
+      "original_line": 779,
+      "matching_line": "#define\tsetCS(val)\tc_setCS(val)",
+      "second_anchor": {
+        "insert_before_intermediate_line": 1222,
+        "original_line": 1715
+      }
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+      "before_sha256": "3bd58d87d5ec461e392d6eda9557563c4352d72682901423ceef0248fd5cd5f2",
+      "after_sha256": "9b84840699856115faeee87618c4c79ccdb0ae45463619aab79882a5d5aec138",
+      "original_sha256": "b708f1fee46e93735c4c931d556e16daa9679e6352d72620904d18ad21396abf",
+      "insert_before_current_line": 15,
+      "original_line": 27,
+      "matching_line": "#define BEGINCALL()       \\",
+      "named_macro_anchors": {
+        "20": 35,
+        "28": 47,
+        "32": 55,
+        "34": 56,
+        "38": 91,
+        "53": 196,
+        "63": 249,
+        "83": 136,
+        "87": 184
+      }
+    }
+  ]
+}

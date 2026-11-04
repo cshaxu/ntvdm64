@@ -107,6 +107,7 @@ typedef unsigned int         IUH;	    /* Host register sized unsigned quantity *
 #line 105
 #error Unsupported excluded original configuration
 #else
+#line 109
 #define BOOL UINT
 #endif
 #line 111

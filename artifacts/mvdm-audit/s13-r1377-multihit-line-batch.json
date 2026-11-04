@@ -1,0 +1,69 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "before_sha256": "42fb66184faeb6c49060b61f0a14f06960c3f7665ec7adec044c89048b1b7dad",
+      "after_sha256": "a5d3eef0bc9c43bcb20b1b38990f76f7fa4384c04ce981cea605a00108eae376",
+      "original_sha256": "63832958d3a6b9ef2f9f209e5ada4af8067fab3b5cdb6f317c5663cbd2b5f2ef",
+      "insert_before_current_line": 95,
+      "original_line": 97,
+      "matching_line": "extern IU8 *c_GetLinAdd IPT1(IU32, lin_addr);",
+      "second_anchor": {
+        "insert_before_intermediate_line": 145,
+        "original_line": 307
+      },
+      "third_anchor": {
+        "insert_before_intermediate_line": 553,
+        "original_line": 709
+      },
+      "fourth_anchor": {
+        "insert_before_intermediate_line": 99,
+        "original_line": 100
+      },
+      "fifth_anchor": {
+        "insert_before_intermediate_line": 108,
+        "original_line": 108
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/xt.h",
+      "before_sha256": "2f1299c8bc486a8243505e57273aef9edc08e4c2683a15ab1a5d863bc3c9becd",
+      "after_sha256": "0c1bcb583a9899032ad16be357447660a25a1ca7b8875b65f21ef5a7110d8f85",
+      "original_sha256": "c5b376f59d45ddb6ca36aa66e96e095203a261b125bd6a34247d6c88e98cb111",
+      "insert_before_current_line": 126,
+      "original_line": 139,
+      "matching_line": "extern half_word pf_table[]; /* shouldn't this be in host_cpu.h ? */",
+      "second_anchor": {
+        "insert_before_intermediate_line": 135,
+        "original_line": 148
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/insignia.h",
+      "before_sha256": "9a4253309872363da8ecc74b23dc4a814254c726b294b9fca96cf8260373bfa8",
+      "after_sha256": "09bfda220052104997a13eb52354a39b7cd12684792da9e9dbe5e0ab7e755da4",
+      "original_sha256": "26ed468f31ea44c8069300f150e5eefef3ba21c12eb2f2f68cca95bcc6f3ba02",
+      "insert_before_current_line": 110,
+      "original_line": 109,
+      "matching_line": "#define BOOL UINT"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tstr.h",
+      "before_sha256": "613cd5135d5219f2f8812717bb3b9d987dbd419647483a26e7c9058ec61893ab",
+      "after_sha256": "e60bcda62151ea735f3d18d731a2d6da3be70c06fcb4c8c849943fa68f75292c",
+      "original_sha256": "dfc0a04bbeb35130d655e20521c972d43df3500efda32d7de6ddcea53be791c6",
+      "insert_before_current_line": 104,
+      "original_line": 101,
+      "matching_line": "#define MAKE_STR_FUNCTION(s)    s"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "before_sha256": "2b0d2c272e760c77a8182ff65f58d38f1a204f9936c4b4aa380d1bff585c5d86",
+      "after_sha256": "58b390e7ecc062b2a01bc76a7c3abd570a82f44787dad1ceb55ba5eb1f4a9c5c",
+      "original_sha256": "653097c73182630ce39183526334ae4027b1aef00e2d28812a0e5e84c6164db5",
+      "insert_before_current_line": 50,
+      "original_line": 49,
+      "matching_line": "#define LPC_CLIENT_ID CLIENT_ID"
+    }
+  ]
+}

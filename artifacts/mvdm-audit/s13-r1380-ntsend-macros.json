@@ -1,0 +1,110 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+  "current_sha256": "9b84840699856115faeee87618c4c79ccdb0ae45463619aab79882a5d5aec138",
+  "original_sha256": "b708f1fee46e93735c4c931d556e16daa9679e6352d72620904d18ad21396abf",
+  "method": "Each retained macro is matched by name, original body and original definition line; its immediate #line restores that line. Both UNICODE alternatives have recorded current hits. Omitted original macro families are the registered OPENNT-HOST-042/140 subset.",
+  "macros": [
+    {
+      "name": "BEGINCALL",
+      "current_line": 16,
+      "original_line": 27
+    },
+    {
+      "name": "ERRORTRAP",
+      "current_line": 22,
+      "original_line": 35
+    },
+    {
+      "name": "ENDCALL",
+      "current_line": 31,
+      "original_line": 47
+    },
+    {
+      "name": "MSGERROR",
+      "current_line": 36,
+      "original_line": 55
+    },
+    {
+      "name": "MSGERRORCODE",
+      "current_line": 39,
+      "original_line": 56
+    },
+    {
+      "name": "COPYLPSTRIDW",
+      "current_line": 44,
+      "original_line": 91
+    },
+    {
+      "name": "COPYLPWSTRID",
+      "current_line": 60,
+      "original_line": 196
+    },
+    {
+      "name": "CLEANUPLPWSTR",
+      "current_line": 71,
+      "original_line": 249
+    },
+    {
+      "name": "COPYLPTSTRID",
+      "current_line": 76,
+      "original_line": 257
+    },
+    {
+      "name": "FIRSTCOPYLPTSTRID",
+      "current_line": 78,
+      "original_line": 261
+    },
+    {
+      "name": "CLEANUPLPTSTR",
+      "current_line": 80,
+      "original_line": 268
+    },
+    {
+      "name": "COPYLPTSTRID",
+      "current_line": 83,
+      "original_line": 273
+    },
+    {
+      "name": "FIRSTCOPYLPTSTRID",
+      "current_line": 85,
+      "original_line": 277
+    },
+    {
+      "name": "CLEANUPLPTSTR",
+      "current_line": 87,
+      "original_line": 284
+    },
+    {
+      "name": "FIRSTCOPYLPSTRW",
+      "current_line": 92,
+      "original_line": 136
+    },
+    {
+      "name": "CLEANUPLPSTRW",
+      "current_line": 97,
+      "original_line": 184
+    }
+  ],
+  "branches": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+      "line": "74",
+      "depth": "1",
+      "directive": "ifdef",
+      "expression": "UNICODE",
+      "state": "current-hit",
+      "marker_basis": "r1311-current-equivalent-preprocessing",
+      "line_check": "not-applicable"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+      "line": "81",
+      "depth": "1",
+      "directive": "else",
+      "expression": "",
+      "state": "current-hit",
+      "marker_basis": "r1311-current-equivalent-preprocessing",
+      "line_check": "not-applicable"
+    }
+  ]
+}

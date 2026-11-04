@@ -1,0 +1,334 @@
+{
+  "method": "Original conditional tree and excluded states checked across eight combinations of recorded hit arms. All 13 retained leaf differences are the registered MVDM-HOST-DIV-046 CCPU register/flag return-type contract corrections; observed matching-code logical positions match. Runtime equivalence and unobserved contexts are not certified.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "current_sha256": "f2bc102075e0624cfe95a040c0608d97df5a8a198a0c0d08bf0271a71207b93a",
+      "original_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb",
+      "multi_hit_groups": [
+        [
+          12,
+          [
+            0,
+            1
+          ]
+        ],
+        [
+          17,
+          [
+            0,
+            1
+          ]
+        ],
+        [
+          22,
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      "projections_checked": 8,
+      "tree": {
+        "retained": 222,
+        "groups": 219,
+        "excluded": 215,
+        "local_leaf_differences": 13
+      }
+    }
+  ],
+  "registered_leaf_differences": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "current_line": 565,
+      "original_line": 777,
+      "state": "historical-hit",
+      "selector": "CCPU",
+      "diff": [
+        "--- original",
+        "+++ current",
+        "@@ -1,2 +1,5 @@",
+        "-IMPORT\tIUH\tc_setCS\tIPT1(IU16, val);",
+        "+/* DIVERGENCE: c_reg.c defines the selected CCPU segment loaders as",
+        "+ * ISM32(IU16).  Preserve the generated function shape with its actual",
+        "+ * source return carrier so callers and the host selection table agree. */",
+        "+IMPORT\tISM32\tc_setCS\tIPT1(IU16, val);",
+        " #define\tsetCS(val)\tc_setCS(val)"
+      ],
+      "inline_registration_ids": [],
+      "ledger_candidates": [
+        "| MVDM-HOST-DIV-506 | Mark unselected non-CCPU alternatives in selected original host headers. | All observed current product object consumers of the three headers define `CCPU`; the owner requires preserved conditionals with numbered exclusion reasons. | Preserve CCPU and software V86 paths and selected `cpu4gen.h` interfaces. Update DIV-146 note; original branch hashes and consumer graph counts: `../../artifacts/mvdm-audit/s12-nonccpu-header-subsets.jsonl`. | Three selected MVDM headers in the ledger. |",
+        "| MVDM-HOST-DIV-046 | Declare the selected CCPU flag-read and segment-load callbacks consistently. | The generated header incorrectly uses `IBOOL`/`IUH` where `c_reg.c` defines `ISM32`. | Retain the original callback names and correct the selected generated declarations to their actual `ISM32` contracts. | `softpc.new/base/ccpu386/cpu4gen.h` |",
+        "| MVDM-HOST-DIV-048 | Bind the selected CCPU control fields through their generated GDP names. | The historical non-PROD `GdpOffsetFromName` assertion is unavailable in the selected source set, and hard-coded packed offsets obscure the original field contract. | Retain the original x86 64 KiB contiguous GDP allocation and generated macro layout; `nt_cpu.c` names the selected generated fields directly and omits only the unavailable assertion. GDP is private SoftPC state and does not use the session mapping manager. | `softpc.new/base/ccpu386/cpu4gen.h`, `softpc.new/base/cvidc/{ev_glue.c,gdpvar.h}`, `softpc.new/host/src/nt_cpu.c` |"
+      ],
+      "verdict": "needs human review; ledger filename matches are leads only"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "current_line": 577,
+      "original_line": 790,
+      "state": "historical-hit",
+      "selector": "CCPU",
+      "diff": [
+        "--- original",
+        "+++ current",
+        "@@ -1,2 +1,2 @@",
+        "-IMPORT\tIUH\tc_setSS\tIPT1(IU16, val);",
+        "+IMPORT\tISM32\tc_setSS\tIPT1(IU16, val);",
+        " #define\tsetSS(val)\tc_setSS(val)"
+      ],
+      "inline_registration_ids": [],
+      "ledger_candidates": [
+        "| MVDM-HOST-DIV-506 | Mark unselected non-CCPU alternatives in selected original host headers. | All observed current product object consumers of the three headers define `CCPU`; the owner requires preserved conditionals with numbered exclusion reasons. | Preserve CCPU and software V86 paths and selected `cpu4gen.h` interfaces. Update DIV-146 note; original branch hashes and consumer graph counts: `../../artifacts/mvdm-audit/s12-nonccpu-header-subsets.jsonl`. | Three selected MVDM headers in the ledger. |",
+        "| MVDM-HOST-DIV-046 | Declare the selected CCPU flag-read and segment-load callbacks consistently. | The generated header incorrectly uses `IBOOL`/`IUH` where `c_reg.c` defines `ISM32`. | Retain the original callback names and correct the selected generated declarations to their actual `ISM32` contracts. | `softpc.new/base/ccpu386/cpu4gen.h` |",
+        "| MVDM-HOST-DIV-048 | Bind the selected CCPU control fields through their generated GDP names. | The historical non-PROD `GdpOffsetFromName` assertion is unavailable in the selected source set, and hard-coded packed offsets obscure the original field contract. | Retain the original x86 64 KiB contiguous GDP allocation and generated macro layout; `nt_cpu.c` names the selected generated fields directly and omits only the unavailable assertion. GDP is private SoftPC state and does not use the session mapping manager. | `softpc.new/base/ccpu386/cpu4gen.h`, `softpc.new/base/cvidc/{ev_glue.c,gdpvar.h}`, `softpc.new/host/src/nt_cpu.c` |"
+      ],
+      "verdict": "needs human review; ledger filename matches are leads only"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "current_line": 586,
+      "original_line": 803,
+      "state": "historical-hit",
+      "selector": "CCPU",
+      "diff": [
+        "--- original",
+        "+++ current",
+        "@@ -1,2 +1,2 @@",
+        "-IMPORT\tIUH\tc_setDS\tIPT1(IU16, val);",
+        "+IMPORT\tISM32\tc_setDS\tIPT1(IU16, val);",
+        " #define\tsetDS(val)\tc_setDS(val)"
+      ],
+      "inline_registration_ids": [],
+      "ledger_candidates": [
+        "| MVDM-HOST-DIV-506 | Mark unselected non-CCPU alternatives in selected original host headers. | All observed current product object consumers of the three headers define `CCPU`; the owner requires preserved conditionals with numbered exclusion reasons. | Preserve CCPU and software V86 paths and selected `cpu4gen.h` interfaces. Update DIV-146 note; original branch hashes and consumer graph counts: `../../artifacts/mvdm-audit/s12-nonccpu-header-subsets.jsonl`. | Three selected MVDM headers in the ledger. |",
+        "| MVDM-HOST-DIV-046 | Declare the selected CCPU flag-read and segment-load callbacks consistently. | The generated header incorrectly uses `IBOOL`/`IUH` where `c_reg.c` defines `ISM32`. | Retain the original callback names and correct the selected generated declarations to their actual `ISM32` contracts. | `softpc.new/base/ccpu386/cpu4gen.h` |",
+        "| MVDM-HOST-DIV-048 | Bind the selected CCPU control fields through their generated GDP names. | The historical non-PROD `GdpOffsetFromName` assertion is unavailable in the selected source set, and hard-coded packed offsets obscure the original field contract. | Retain the original x86 64 KiB contiguous GDP allocation and generated macro layout; `nt_cpu.c` names the selected generated fields directly and omits only the unavailable assertion. GDP is private SoftPC state and does not use the session mapping manager. | `softpc.new/base/ccpu386/cpu4gen.h`, `softpc.new/base/cvidc/{ev_glue.c,gdpvar.h}`, `softpc.new/host/src/nt_cpu.c` |"
+      ],
+      "verdict": "needs human review; ledger filename matches are leads only"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "current_line": 595,
+      "original_line": 816,
+      "state": "historical-hit",
+      "selector": "CCPU",
+      "diff": [
+        "--- original",
+        "+++ current",
+        "@@ -1,2 +1,2 @@",
+        "-IMPORT\tIUH\tc_setES\tIPT1(IU16, val);",
+        "+IMPORT\tISM32\tc_setES\tIPT1(IU16, val);",
+        " #define\tsetES(val)\tc_setES(val)"
+      ],
+      "inline_registration_ids": [],
+      "ledger_candidates": [
+        "| MVDM-HOST-DIV-506 | Mark unselected non-CCPU alternatives in selected original host headers. | All observed current product object consumers of the three headers define `CCPU`; the owner requires preserved conditionals with numbered exclusion reasons. | Preserve CCPU and software V86 paths and selected `cpu4gen.h` interfaces. Update DIV-146 note; original branch hashes and consumer graph counts: `../../artifacts/mvdm-audit/s12-nonccpu-header-subsets.jsonl`. | Three selected MVDM headers in the ledger. |",
+        "| MVDM-HOST-DIV-046 | Declare the selected CCPU flag-read and segment-load callbacks consistently. | The generated header incorrectly uses `IBOOL`/`IUH` where `c_reg.c` defines `ISM32`. | Retain the original callback names and correct the selected generated declarations to their actual `ISM32` contracts. | `softpc.new/base/ccpu386/cpu4gen.h` |",
+        "| MVDM-HOST-DIV-048 | Bind the selected CCPU control fields through their generated GDP names. | The historical non-PROD `GdpOffsetFromName` assertion is unavailable in the selected source set, and hard-coded packed offsets obscure the original field contract. | Retain the original x86 64 KiB contiguous GDP allocation and generated macro layout; `nt_cpu.c` names the selected generated fields directly and omits only the unavailable assertion. GDP is private SoftPC state and does not use the session mapping manager. | `softpc.new/base/ccpu386/cpu4gen.h`, `softpc.new/base/cvidc/{ev_glue.c,gdpvar.h}`, `softpc.new/host/src/nt_cpu.c` |"
+      ],
+      "verdict": "needs human review; ledger filename matches are leads only"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "current_line": 1216,
+      "original_line": 1713,
+      "state": "historical-hit",
+      "selector": "CCPU",
+      "diff": [
+        "--- original",
+        "+++ current",
+        "@@ -1,2 +1,5 @@",
+        "-IMPORT\tIBOOL\tc_getCF\tIPT0();",
+        "+/* DIVERGENCE: c_reg.c defines all CCPU flag getters as ISM32.  Use that",
+        "+ * original implementation carrier rather than the incompatible generated",
+        "+ * IBOOL declarations. */",
+        "+IMPORT\tISM32\tc_getCF\tIPT0();",
+        " #define\tgetCF()\tc_getCF()"
+      ],
+      "inline_registration_ids": [],
+      "ledger_candidates": [
+        "| MVDM-HOST-DIV-506 | Mark unselected non-CCPU alternatives in selected original host headers. | All observed current product object consumers of the three headers define `CCPU`; the owner requires preserved conditionals with numbered exclusion reasons. | Preserve CCPU and software V86 paths and selected `cpu4gen.h` interfaces. Update DIV-146 note; original branch hashes and consumer graph counts: `../../artifacts/mvdm-audit/s12-nonccpu-header-subsets.jsonl`. | Three selected MVDM headers in the ledger. |",
+        "| MVDM-HOST-DIV-046 | Declare the selected CCPU flag-read and segment-load callbacks consistently. | The generated header incorrectly uses `IBOOL`/`IUH` where `c_reg.c` defines `ISM32`. | Retain the original callback names and correct the selected generated declarations to their actual `ISM32` contracts. | `softpc.new/base/ccpu386/cpu4gen.h` |",
+        "| MVDM-HOST-DIV-048 | Bind the selected CCPU control fields through their generated GDP names. | The historical non-PROD `GdpOffsetFromName` assertion is unavailable in the selected source set, and hard-coded packed offsets obscure the original field contract. | Retain the original x86 64 KiB contiguous GDP allocation and generated macro layout; `nt_cpu.c` names the selected generated fields directly and omits only the unavailable assertion. GDP is private SoftPC state and does not use the session mapping manager. | `softpc.new/base/ccpu386/cpu4gen.h`, `softpc.new/base/cvidc/{ev_glue.c,gdpvar.h}`, `softpc.new/host/src/nt_cpu.c` |"
+      ],
+      "verdict": "needs human review; ledger filename matches are leads only"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "current_line": 1228,
+      "original_line": 1726,
+      "state": "historical-hit",
+      "selector": "CCPU",
+      "diff": [
+        "--- original",
+        "+++ current",
+        "@@ -1,2 +1,2 @@",
+        "-IMPORT\tIBOOL\tc_getPF\tIPT0();",
+        "+IMPORT\tISM32\tc_getPF\tIPT0();",
+        " #define\tgetPF()\tc_getPF()"
+      ],
+      "inline_registration_ids": [],
+      "ledger_candidates": [
+        "| MVDM-HOST-DIV-506 | Mark unselected non-CCPU alternatives in selected original host headers. | All observed current product object consumers of the three headers define `CCPU`; the owner requires preserved conditionals with numbered exclusion reasons. | Preserve CCPU and software V86 paths and selected `cpu4gen.h` interfaces. Update DIV-146 note; original branch hashes and consumer graph counts: `../../artifacts/mvdm-audit/s12-nonccpu-header-subsets.jsonl`. | Three selected MVDM headers in the ledger. |",
+        "| MVDM-HOST-DIV-046 | Declare the selected CCPU flag-read and segment-load callbacks consistently. | The generated header incorrectly uses `IBOOL`/`IUH` where `c_reg.c` defines `ISM32`. | Retain the original callback names and correct the selected generated declarations to their actual `ISM32` contracts. | `softpc.new/base/ccpu386/cpu4gen.h` |",
+        "| MVDM-HOST-DIV-048 | Bind the selected CCPU control fields through their generated GDP names. | The historical non-PROD `GdpOffsetFromName` assertion is unavailable in the selected source set, and hard-coded packed offsets obscure the original field contract. | Retain the original x86 64 KiB contiguous GDP allocation and generated macro layout; `nt_cpu.c` names the selected generated fields directly and omits only the unavailable assertion. GDP is private SoftPC state and does not use the session mapping manager. | `softpc.new/base/ccpu386/cpu4gen.h`, `softpc.new/base/cvidc/{ev_glue.c,gdpvar.h}`, `softpc.new/host/src/nt_cpu.c` |"
+      ],
+      "verdict": "needs human review; ledger filename matches are leads only"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "current_line": 1237,
+      "original_line": 1739,
+      "state": "historical-hit",
+      "selector": "CCPU",
+      "diff": [
+        "--- original",
+        "+++ current",
+        "@@ -1,2 +1,2 @@",
+        "-IMPORT\tIBOOL\tc_getAF\tIPT0();",
+        "+IMPORT\tISM32\tc_getAF\tIPT0();",
+        " #define\tgetAF()\tc_getAF()"
+      ],
+      "inline_registration_ids": [],
+      "ledger_candidates": [
+        "| MVDM-HOST-DIV-506 | Mark unselected non-CCPU alternatives in selected original host headers. | All observed current product object consumers of the three headers define `CCPU`; the owner requires preserved conditionals with numbered exclusion reasons. | Preserve CCPU and software V86 paths and selected `cpu4gen.h` interfaces. Update DIV-146 note; original branch hashes and consumer graph counts: `../../artifacts/mvdm-audit/s12-nonccpu-header-subsets.jsonl`. | Three selected MVDM headers in the ledger. |",
+        "| MVDM-HOST-DIV-046 | Declare the selected CCPU flag-read and segment-load callbacks consistently. | The generated header incorrectly uses `IBOOL`/`IUH` where `c_reg.c` defines `ISM32`. | Retain the original callback names and correct the selected generated declarations to their actual `ISM32` contracts. | `softpc.new/base/ccpu386/cpu4gen.h` |",
+        "| MVDM-HOST-DIV-048 | Bind the selected CCPU control fields through their generated GDP names. | The historical non-PROD `GdpOffsetFromName` assertion is unavailable in the selected source set, and hard-coded packed offsets obscure the original field contract. | Retain the original x86 64 KiB contiguous GDP allocation and generated macro layout; `nt_cpu.c` names the selected generated fields directly and omits only the unavailable assertion. GDP is private SoftPC state and does not use the session mapping manager. | `softpc.new/base/ccpu386/cpu4gen.h`, `softpc.new/base/cvidc/{ev_glue.c,gdpvar.h}`, `softpc.new/host/src/nt_cpu.c` |"
+      ],
+      "verdict": "needs human review; ledger filename matches are leads only"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "current_line": 1246,
+      "original_line": 1752,
+      "state": "historical-hit",
+      "selector": "CCPU",
+      "diff": [
+        "--- original",
+        "+++ current",
+        "@@ -1,2 +1,2 @@",
+        "-IMPORT\tIBOOL\tc_getZF\tIPT0();",
+        "+IMPORT\tISM32\tc_getZF\tIPT0();",
+        " #define\tgetZF()\tc_getZF()"
+      ],
+      "inline_registration_ids": [],
+      "ledger_candidates": [
+        "| MVDM-HOST-DIV-506 | Mark unselected non-CCPU alternatives in selected original host headers. | All observed current product object consumers of the three headers define `CCPU`; the owner requires preserved conditionals with numbered exclusion reasons. | Preserve CCPU and software V86 paths and selected `cpu4gen.h` interfaces. Update DIV-146 note; original branch hashes and consumer graph counts: `../../artifacts/mvdm-audit/s12-nonccpu-header-subsets.jsonl`. | Three selected MVDM headers in the ledger. |",
+        "| MVDM-HOST-DIV-046 | Declare the selected CCPU flag-read and segment-load callbacks consistently. | The generated header incorrectly uses `IBOOL`/`IUH` where `c_reg.c` defines `ISM32`. | Retain the original callback names and correct the selected generated declarations to their actual `ISM32` contracts. | `softpc.new/base/ccpu386/cpu4gen.h` |",
+        "| MVDM-HOST-DIV-048 | Bind the selected CCPU control fields through their generated GDP names. | The historical non-PROD `GdpOffsetFromName` assertion is unavailable in the selected source set, and hard-coded packed offsets obscure the original field contract. | Retain the original x86 64 KiB contiguous GDP allocation and generated macro layout; `nt_cpu.c` names the selected generated fields directly and omits only the unavailable assertion. GDP is private SoftPC state and does not use the session mapping manager. | `softpc.new/base/ccpu386/cpu4gen.h`, `softpc.new/base/cvidc/{ev_glue.c,gdpvar.h}`, `softpc.new/host/src/nt_cpu.c` |"
+      ],
+      "verdict": "needs human review; ledger filename matches are leads only"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "current_line": 1255,
+      "original_line": 1765,
+      "state": "historical-hit",
+      "selector": "CCPU",
+      "diff": [
+        "--- original",
+        "+++ current",
+        "@@ -1,2 +1,2 @@",
+        "-IMPORT\tIBOOL\tc_getSF\tIPT0();",
+        "+IMPORT\tISM32\tc_getSF\tIPT0();",
+        " #define\tgetSF()\tc_getSF()"
+      ],
+      "inline_registration_ids": [],
+      "ledger_candidates": [
+        "| MVDM-HOST-DIV-506 | Mark unselected non-CCPU alternatives in selected original host headers. | All observed current product object consumers of the three headers define `CCPU`; the owner requires preserved conditionals with numbered exclusion reasons. | Preserve CCPU and software V86 paths and selected `cpu4gen.h` interfaces. Update DIV-146 note; original branch hashes and consumer graph counts: `../../artifacts/mvdm-audit/s12-nonccpu-header-subsets.jsonl`. | Three selected MVDM headers in the ledger. |",
+        "| MVDM-HOST-DIV-046 | Declare the selected CCPU flag-read and segment-load callbacks consistently. | The generated header incorrectly uses `IBOOL`/`IUH` where `c_reg.c` defines `ISM32`. | Retain the original callback names and correct the selected generated declarations to their actual `ISM32` contracts. | `softpc.new/base/ccpu386/cpu4gen.h` |",
+        "| MVDM-HOST-DIV-048 | Bind the selected CCPU control fields through their generated GDP names. | The historical non-PROD `GdpOffsetFromName` assertion is unavailable in the selected source set, and hard-coded packed offsets obscure the original field contract. | Retain the original x86 64 KiB contiguous GDP allocation and generated macro layout; `nt_cpu.c` names the selected generated fields directly and omits only the unavailable assertion. GDP is private SoftPC state and does not use the session mapping manager. | `softpc.new/base/ccpu386/cpu4gen.h`, `softpc.new/base/cvidc/{ev_glue.c,gdpvar.h}`, `softpc.new/host/src/nt_cpu.c` |"
+      ],
+      "verdict": "needs human review; ledger filename matches are leads only"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "current_line": 1264,
+      "original_line": 1778,
+      "state": "historical-hit",
+      "selector": "CCPU",
+      "diff": [
+        "--- original",
+        "+++ current",
+        "@@ -1,2 +1,2 @@",
+        "-IMPORT\tIBOOL\tc_getTF\tIPT0();",
+        "+IMPORT\tISM32\tc_getTF\tIPT0();",
+        " #define\tgetTF()\tc_getTF()"
+      ],
+      "inline_registration_ids": [],
+      "ledger_candidates": [
+        "| MVDM-HOST-DIV-506 | Mark unselected non-CCPU alternatives in selected original host headers. | All observed current product object consumers of the three headers define `CCPU`; the owner requires preserved conditionals with numbered exclusion reasons. | Preserve CCPU and software V86 paths and selected `cpu4gen.h` interfaces. Update DIV-146 note; original branch hashes and consumer graph counts: `../../artifacts/mvdm-audit/s12-nonccpu-header-subsets.jsonl`. | Three selected MVDM headers in the ledger. |",
+        "| MVDM-HOST-DIV-046 | Declare the selected CCPU flag-read and segment-load callbacks consistently. | The generated header incorrectly uses `IBOOL`/`IUH` where `c_reg.c` defines `ISM32`. | Retain the original callback names and correct the selected generated declarations to their actual `ISM32` contracts. | `softpc.new/base/ccpu386/cpu4gen.h` |",
+        "| MVDM-HOST-DIV-048 | Bind the selected CCPU control fields through their generated GDP names. | The historical non-PROD `GdpOffsetFromName` assertion is unavailable in the selected source set, and hard-coded packed offsets obscure the original field contract. | Retain the original x86 64 KiB contiguous GDP allocation and generated macro layout; `nt_cpu.c` names the selected generated fields directly and omits only the unavailable assertion. GDP is private SoftPC state and does not use the session mapping manager. | `softpc.new/base/ccpu386/cpu4gen.h`, `softpc.new/base/cvidc/{ev_glue.c,gdpvar.h}`, `softpc.new/host/src/nt_cpu.c` |"
+      ],
+      "verdict": "needs human review; ledger filename matches are leads only"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "current_line": 1273,
+      "original_line": 1791,
+      "state": "historical-hit",
+      "selector": "CCPU",
+      "diff": [
+        "--- original",
+        "+++ current",
+        "@@ -1,2 +1,2 @@",
+        "-IMPORT\tIBOOL\tc_getIF\tIPT0();",
+        "+IMPORT\tISM32\tc_getIF\tIPT0();",
+        " #define\tgetIF()\tc_getIF()"
+      ],
+      "inline_registration_ids": [],
+      "ledger_candidates": [
+        "| MVDM-HOST-DIV-506 | Mark unselected non-CCPU alternatives in selected original host headers. | All observed current product object consumers of the three headers define `CCPU`; the owner requires preserved conditionals with numbered exclusion reasons. | Preserve CCPU and software V86 paths and selected `cpu4gen.h` interfaces. Update DIV-146 note; original branch hashes and consumer graph counts: `../../artifacts/mvdm-audit/s12-nonccpu-header-subsets.jsonl`. | Three selected MVDM headers in the ledger. |",
+        "| MVDM-HOST-DIV-046 | Declare the selected CCPU flag-read and segment-load callbacks consistently. | The generated header incorrectly uses `IBOOL`/`IUH` where `c_reg.c` defines `ISM32`. | Retain the original callback names and correct the selected generated declarations to their actual `ISM32` contracts. | `softpc.new/base/ccpu386/cpu4gen.h` |",
+        "| MVDM-HOST-DIV-048 | Bind the selected CCPU control fields through their generated GDP names. | The historical non-PROD `GdpOffsetFromName` assertion is unavailable in the selected source set, and hard-coded packed offsets obscure the original field contract. | Retain the original x86 64 KiB contiguous GDP allocation and generated macro layout; `nt_cpu.c` names the selected generated fields directly and omits only the unavailable assertion. GDP is private SoftPC state and does not use the session mapping manager. | `softpc.new/base/ccpu386/cpu4gen.h`, `softpc.new/base/cvidc/{ev_glue.c,gdpvar.h}`, `softpc.new/host/src/nt_cpu.c` |"
+      ],
+      "verdict": "needs human review; ledger filename matches are leads only"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "current_line": 1282,
+      "original_line": 1804,
+      "state": "historical-hit",
+      "selector": "CCPU",
+      "diff": [
+        "--- original",
+        "+++ current",
+        "@@ -1,2 +1,2 @@",
+        "-IMPORT\tIBOOL\tc_getDF\tIPT0();",
+        "+IMPORT\tISM32\tc_getDF\tIPT0();",
+        " #define\tgetDF()\tc_getDF()"
+      ],
+      "inline_registration_ids": [],
+      "ledger_candidates": [
+        "| MVDM-HOST-DIV-506 | Mark unselected non-CCPU alternatives in selected original host headers. | All observed current product object consumers of the three headers define `CCPU`; the owner requires preserved conditionals with numbered exclusion reasons. | Preserve CCPU and software V86 paths and selected `cpu4gen.h` interfaces. Update DIV-146 note; original branch hashes and consumer graph counts: `../../artifacts/mvdm-audit/s12-nonccpu-header-subsets.jsonl`. | Three selected MVDM headers in the ledger. |",
+        "| MVDM-HOST-DIV-046 | Declare the selected CCPU flag-read and segment-load callbacks consistently. | The generated header incorrectly uses `IBOOL`/`IUH` where `c_reg.c` defines `ISM32`. | Retain the original callback names and correct the selected generated declarations to their actual `ISM32` contracts. | `softpc.new/base/ccpu386/cpu4gen.h` |",
+        "| MVDM-HOST-DIV-048 | Bind the selected CCPU control fields through their generated GDP names. | The historical non-PROD `GdpOffsetFromName` assertion is unavailable in the selected source set, and hard-coded packed offsets obscure the original field contract. | Retain the original x86 64 KiB contiguous GDP allocation and generated macro layout; `nt_cpu.c` names the selected generated fields directly and omits only the unavailable assertion. GDP is private SoftPC state and does not use the session mapping manager. | `softpc.new/base/ccpu386/cpu4gen.h`, `softpc.new/base/cvidc/{ev_glue.c,gdpvar.h}`, `softpc.new/host/src/nt_cpu.c` |"
+      ],
+      "verdict": "needs human review; ledger filename matches are leads only"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "current_line": 1291,
+      "original_line": 1817,
+      "state": "historical-hit",
+      "selector": "CCPU",
+      "diff": [
+        "--- original",
+        "+++ current",
+        "@@ -1,2 +1,2 @@",
+        "-IMPORT\tIBOOL\tc_getOF\tIPT0();",
+        "+IMPORT\tISM32\tc_getOF\tIPT0();",
+        " #define\tgetOF()\tc_getOF()"
+      ],
+      "inline_registration_ids": [],
+      "ledger_candidates": [
+        "| MVDM-HOST-DIV-506 | Mark unselected non-CCPU alternatives in selected original host headers. | All observed current product object consumers of the three headers define `CCPU`; the owner requires preserved conditionals with numbered exclusion reasons. | Preserve CCPU and software V86 paths and selected `cpu4gen.h` interfaces. Update DIV-146 note; original branch hashes and consumer graph counts: `../../artifacts/mvdm-audit/s12-nonccpu-header-subsets.jsonl`. | Three selected MVDM headers in the ledger. |",
+        "| MVDM-HOST-DIV-046 | Declare the selected CCPU flag-read and segment-load callbacks consistently. | The generated header incorrectly uses `IBOOL`/`IUH` where `c_reg.c` defines `ISM32`. | Retain the original callback names and correct the selected generated declarations to their actual `ISM32` contracts. | `softpc.new/base/ccpu386/cpu4gen.h` |",
+        "| MVDM-HOST-DIV-048 | Bind the selected CCPU control fields through their generated GDP names. | The historical non-PROD `GdpOffsetFromName` assertion is unavailable in the selected source set, and hard-coded packed offsets obscure the original field contract. | Retain the original x86 64 KiB contiguous GDP allocation and generated macro layout; `nt_cpu.c` names the selected generated fields directly and omits only the unavailable assertion. GDP is private SoftPC state and does not use the session mapping manager. | `softpc.new/base/ccpu386/cpu4gen.h`, `softpc.new/base/cvidc/{ev_glue.c,gdpvar.h}`, `softpc.new/host/src/nt_cpu.c` |"
+      ],
+      "verdict": "needs human review; ledger filename matches are leads only"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmidata.h",
+      "before_sha256": "023e38a8c0488f1f6b2aef266ec7d0f72fd14c66d7eb587aa68eeca9e1436ba5",
+      "after_sha256": "b280eb7dcb2fc49c9af50c0678313a10edc719e30ebcb04b0960eb52b66760b0",
+      "original_sha256": "f9772482513601c2e316e097a92485864557af77010e77285d725d903a0fd7b2",
+      "anchors": [
+        {
+          "before_line": 43,
+          "original_line": 46
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "before_sha256": "656133a9ab945d59086b5ba9035d772fb4b1334cd88781543e04f16507f62f8a",
+      "after_sha256": "bc14d5c9b0d217b0bd0488045872156df177126dc1e67a554e2e92d4c8c1ebd5",
+      "original_sha256": "480c35aa09b40d75d82fe0e1fe3e6cb0f981e573549ea2e193e8a62be4816d10",
+      "anchors": [
+        {
+          "before_line": 20,
+          "original_line": 19
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "before_sha256": "d0bc4d295bd417374ad1173e1ba35c7897d696faded785584ab17431e43efc77",
+      "after_sha256": "a8bcf27d5d4649436b3d14cf32e78f320cd0157a807e8fa4414cb2e4cfc945e4",
+      "original_sha256": "d8841bd2f13e5825a84f670ec7cc60923977bf80618d737cbac2208f94c6523c",
+      "anchors": [
+        {
+          "before_line": 42,
+          "original_line": 172
+        }
+      ]
+    }
+  ]
+}

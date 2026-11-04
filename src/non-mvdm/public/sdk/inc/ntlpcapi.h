@@ -47,6 +47,7 @@ Revision History:
 #line 45
 #error Unsupported excluded original configuration
 #else
+#line 49
 #define LPC_CLIENT_ID CLIENT_ID
 #define LPC_SIZE_T SIZE_T
 #define LPC_PVOID PVOID

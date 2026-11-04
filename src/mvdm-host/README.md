@@ -3148,3 +3148,9 @@ MVDM-HOST-DIV-835: restore original logical line positions for matching code in 
 MVDM-HOST-DIV-836: restore original logical line positions in selected dpmi32p.h declarations while excluding a false match between unrelated declaration terminators. Evidence: artifacts/mvdm-audit/s13-r1374-dpmiheader.json and s13-r1374-dpmiheader-recheck.json. Cached batch build and ten-image publication passed.
 
 MVDM-HOST-DIV-837: restore the original line for the selected SoftPC product-name define in xt.h. Evidence: artifacts/mvdm-audit/s13-r1376-xt-line.json. Cached batch build and ten-image publication passed.
+
+MVDM-HOST-DIV-838: restore original logical line positions for matching declarations on observed selected paths. Evidence: artifacts/mvdm-audit/s13-r1377-multihit-line-batch.json. Cached x86/x64 build passed; ten images published, eight identical and two timestamp-only.
+
+MVDM-HOST-DIV-839: restore original logical position of a selected macro definition. Evidence: artifacts/mvdm-audit/s13-r1379-macro-lines.json. Cached x86/x64 build passed; ten images published, eight identical and two timestamp-only.
+
+MVDM-HOST-DIV-840: restore original logical source positions for matching declarations in multi-hit local-group files. Evidence: artifacts/mvdm-audit/s13-r1382-extra-multihit-lines.json. Remaining paths under review; cached x86/x64 build passed; ten images published, eight identical and two timestamp-only.

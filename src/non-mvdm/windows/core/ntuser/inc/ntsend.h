@@ -12,11 +12,13 @@
  * capture/cleanup macros reached by GetClassWOWWords and ANSI class clients. Other call families
  * and thread-connection macros are excluded. */
 
+#line 27
 #define BEGINCALL()       \
     {                     \
     DWORD retval;         \
     {
 
+#line 35
 #define ERRORTRAP(error) \
        goto cleanup;        \
     }                       \
@@ -25,16 +27,20 @@ errorexit:                  \
     retval = (DWORD)error;  \
 cleanup:
 
+#line 47
 #define ENDCALL(type)     \
     return (type)retval;  \
     }
 
+#line 55
 #define MSGERROR() goto errorexit
 
+#line 56
 #define MSGERRORCODE(code) { \
     RIPERR0(code, RIP_WARNING, "Unspecified error"); \
     goto errorexit; }
 
+#line 91
 #define COPYLPSTRIDW(pinstr, psz) \
     if (HIWORD(psz)) {                                      \
         if (!RtlCaptureAnsiString((pinstr), (LPCSTR)(psz), TRUE))   \
@@ -50,6 +56,7 @@ cleanup:
 
 /* DIVERGENCE(OPENNT-HOST-140): retain the original text-width selection and
  * only the capture aliases used by the admitted client closures. */
+#line 196
 #define COPYLPWSTRID(pinstr, psz) \
     (pinstr)->fAllocated = FALSE;                           \
     (pinstr)->pstr = &(pinstr)->strCapture;                 \
@@ -60,6 +67,7 @@ cleanup:
                 (pinstr)->strCapture.MaximumLength = 0;     \
         (pinstr)->strCapture.Buffer = (LPWSTR)(psz);        \
     }
+#line 249
 #define CLEANUPLPWSTR(instr)
 
 #line 254
@@ -80,10 +88,12 @@ cleanup:
 #endif
 #line 287
 
+#line 136
 #define FIRSTCOPYLPSTRW(pinstr, psz) \
     if (!RtlCaptureAnsiString((pinstr), (LPCSTR)(psz), FALSE))    \
         MSGERROR();
 
+#line 184
 #define CLEANUPLPSTRW(instr) \
     if (instr.fAllocated)                     \
         RtlFreeHeap(RtlProcessHeap(), 0, instr.strCapture.Buffer);

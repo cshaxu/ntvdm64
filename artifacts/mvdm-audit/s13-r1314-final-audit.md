@@ -497,3 +497,5 @@ diagnostic line immediate bytes plus timestamps, attributed in
 [proof](s13-r1376-diagnostic-line-proof.json). Per owner instruction tests
 were not repeated. Counts: 181 byte-identical / 760 differing files reviewed /
 1,056 total; 115 differing files pending.
+
+The r1382 batch aligns diagnostic positions in ten files. Cached x86 root, NTVDM, WOW32 and x64 builds passed; the ten-image package was published and verified. Eight images are byte-identical to the preceding package and NTVDM and WOW32 differ only by PE timestamp ([comparison](s13-r1382-build-image-compare.json)); per owner instruction runtime tests were not repeated. Current recorded totals: 181 byte-identical, 768 differing files with condition and observed matching-code review, and 107 differing files still pending further review, out of 1,056. Identical bytes alone do not prove every retained arm was hit; five files have 11 retained arms without observed host hits.

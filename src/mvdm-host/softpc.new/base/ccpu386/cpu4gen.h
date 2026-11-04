@@ -567,6 +567,7 @@ IMPORT	void	c_setEIP	IPT1(IU32, val);
  * ISM32(IU16).  Preserve the generated function shape with its actual
  * source return carrier so callers and the host selection table agree. */
 IMPORT	ISM32	c_setCS	IPT1(IU16, val);
+#line 779
 #define	setCS(val)	c_setCS(val)
 #else	/* CCPU */
 #line 781
@@ -1218,6 +1219,7 @@ IMPORT	IU32	c_getCR3	IPT0();
  * original implementation carrier rather than the incompatible generated
  * IBOOL declarations. */
 IMPORT	ISM32	c_getCF	IPT0();
+#line 1715
 #define	getCF()	c_getCF()
 #else	/* CCPU */
 #line 1717

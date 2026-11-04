@@ -17,6 +17,7 @@
 
 /* put the invariant #defines for your host here, eg:*/
 
+#line 19
 #define BIT_ORDER2
 #define LITTLEND
 

@@ -39,6 +39,7 @@
 /***************************************************************************\
 \***************************************************************************/
 
+#line 172
 #define AllocateFromZone(Zone) \
     (PVOID)((Zone)->FreeList.Next); \
     if ( (Zone)->FreeList.Next ) (Zone)->FreeList.Next = (Zone)->FreeList.Next->Next

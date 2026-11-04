@@ -101,6 +101,7 @@ wtol (
 #line 99
 #error Unsupported excluded original configuration
 #else
+#line 101
 #define MAKE_STR_FUNCTION(s)    s
 #endif
 #line 103

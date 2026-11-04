@@ -92,9 +92,11 @@ extern void sas_overwrite_memory IPT2(PHY_ADDR, addr, PHY_ADDR, len);
 
 #ifdef NTVDM
 #ifdef CCPU
+#line 97
 extern IU8 *c_GetLinAdd IPT1(IU32, lin_addr);
 #define NtGetPtrToLinAddrByte(x) c_GetLinAdd(x)
 #else /* !CCPU */
+#line 100
 extern IU8 *NtGetPtrToLinAddrByte IPT1(IU32, lin_addr);
 #endif /* CCPU */
 #endif /* NTVDM */
@@ -103,6 +105,7 @@ extern IU8 *NtGetPtrToLinAddrByte IPT1(IU32, lin_addr);
  * TEMPORARY FOR NT!!!!!
  */
 
+#line 108
 extern host_addr Start_of_M_area;       /* host addr (char *) of start of M */
 extern  PHY_ADDR Length_of_M_area;       /* offset of end of M */
 #else /* CPU_40_STYLE */
@@ -141,6 +144,7 @@ extern  PHY_ADDR Length_of_M_area;       /* offset of end of M */
 #line 289
 
 #ifndef HERC_REGEN_BUFF
+#line 307
 #define CGA_REGEN_BUFF	0xB8000L
 #define MDA_REGEN_BUFF	0xB0000L
 #define HERC_REGEN_BUFF	0xB0000L
@@ -548,6 +552,7 @@ extern  PHY_ADDR Length_of_M_area;       /* offset of end of M */
 #error Unsupported excluded original configuration
 #else		/* ~STINGER */
 #ifdef V7VGA
+#line 709
 #define EGA_ROM_END		0xC5000L	/* end of EGA BIOS ROM +1 */
 #else
 #line 711

@@ -1,0 +1,65 @@
+{
+  "method": "Compare original/current conditional trees and leaf bodies; when retained-branch anchors are not adjacent, validate matching original code line positions in all combinations of observed hit branches. Excluded error anchors require explicit original line or an identical natural physical position without preceding line directives. Unobserved contexts and runtime behavior are not certified.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/insignia.h",
+      "current_sha256": "09bfda220052104997a13eb52354a39b7cd12684792da9e9dbe5e0ab7e755da4",
+      "original_sha256": "26ed468f31ea44c8069300f150e5eefef3ba21c12eb2f2f68cca95bcc6f3ba02",
+      "multi_hit_groups": [
+        [
+          149,
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      "projections_checked": 2,
+      "tree": {
+        "retained": 6,
+        "groups": 11,
+        "excluded": 7
+      }
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tstr.h",
+      "current_sha256": "e60bcda62151ea735f3d18d731a2d6da3be70c06fcb4c8c849943fa68f75292c",
+      "original_sha256": "dfc0a04bbeb35130d655e20521c972d43df3500efda32d7de6ddcea53be791c6",
+      "multi_hit_groups": [
+        [
+          110,
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      "projections_checked": 2,
+      "tree": {
+        "retained": 4,
+        "excluded": 3,
+        "groups": 5
+      }
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "current_sha256": "58b390e7ecc062b2a01bc76a7c3abd570a82f44787dad1ceb55ba5eb1f4a9c5c",
+      "original_sha256": "653097c73182630ce39183526334ae4027b1aef00e2d28812a0e5e84c6164db5",
+      "multi_hit_groups": [
+        [
+          127,
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      "projections_checked": 2,
+      "tree": {
+        "retained": 5,
+        "groups": 8,
+        "excluded": 5
+      }
+    }
+  ]
+}

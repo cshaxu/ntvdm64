@@ -1,0 +1,33 @@
+{
+  "method": "Both ANSI conditional groups are checked across all four recorded-hit combinations. The non-adjacent outer continuation follows the selected nested #line 26, one definition and two endif lines, preserving the original position; recorded parent #ifndef UNUSED is selected. Excluded TRUE/FALSE/lint arms retain verified anchors. Runtime behavior and unobserved contexts are not claimed.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/base_def.h",
+      "current_sha256": "8145696480049e7aba5e79045a59a76bbf6042d35da109bb405e827394ca0953",
+      "original_sha256": "084991cfc23dc79529cc67a43488ec114be882fb62a9f95b879e1b6995f7afae",
+      "multi_hit_groups": [
+        [
+          39,
+          [
+            0,
+            1
+          ]
+        ],
+        [
+          123,
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      "projections_checked": 4,
+      "tree": {
+        "retained": 6,
+        "excluded": 3,
+        "implicit_continuation": 1,
+        "groups": 6
+      }
+    }
+  ]
+}

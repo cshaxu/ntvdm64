@@ -1,0 +1,53 @@
+{
+  "method": "Same multi-hit original-tree and selected-projection matching-code line review as r1377; unobserved contexts and local runtime behavior are not certified.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "current_sha256": "a5d3eef0bc9c43bcb20b1b38990f76f7fa4384c04ce981cea605a00108eae376",
+      "original_sha256": "63832958d3a6b9ef2f9f209e5ada4af8067fab3b5cdb6f317c5663cbd2b5f2ef",
+      "multi_hit_groups": [
+        [
+          94,
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      "projections_checked": 2,
+      "tree": {
+        "retained": 22,
+        "excluded": 10,
+        "groups": 22,
+        "deferred_retained_anchor": 3
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/xt.h",
+      "current_sha256": "0c1bcb583a9899032ad16be357447660a25a1ca7b8875b65f21ef5a7110d8f85",
+      "original_sha256": "c5b376f59d45ddb6ca36aa66e96e095203a261b125bd6a34247d6c88e98cb111",
+      "multi_hit_groups": [
+        [
+          101,
+          [
+            0,
+            1
+          ]
+        ],
+        [
+          134,
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      "projections_checked": 4,
+      "tree": {
+        "retained": 12,
+        "excluded": 5,
+        "groups": 13
+      }
+    }
+  ]
+}
