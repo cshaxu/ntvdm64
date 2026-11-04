@@ -6,6 +6,11 @@
 local commits await the owner-directed later cherry-pick. Main-runtime
 publication and push remain deferred for this worktree.
 
+Rebased onto main `8049d0c04`; rebuilt and locally published package
+`248c03f9-c456-4590-8c7c-b4db11252106`. Product build, focused checks,
+Control and ten release hashes passed; Full and DOS4GW/NESticle were not run.
+See [S4 evidence](../etc/evidence/m0-t475-s4-nthook-dependency-cleanup.md).
+
 The owner reopens S4 for P4: the x64 Run16 and Hook64 classifier compilation
 reaches the NTHook-private `legacy_classifier_arch.h` through a forced include.
 Move this shared classifier-specific compatibility contract to common, retain

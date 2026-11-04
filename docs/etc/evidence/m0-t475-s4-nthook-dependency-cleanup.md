@@ -89,3 +89,26 @@ tested. Local package `8adf96a8-42b3-4273-8f48-27b58b07df1d` has ten matching
 release hashes. Full was not run; DOS4GW/NESticle was absent. Logs and the
 prior release backup are under `build/t475-s4-p4`. Main integration, runtime
 publication and push remain deferred by the owner.
+
+## Local rebase onto main 8049d0c04
+
+The owner directed the independent worktree's 31 commits to be replayed on
+main `8049d0c04`, with worktree-local publication. The status document followed
+the local worktree; conflicting mirror README entries were preserved from both
+branches. Historical release binaries were temporary during replay and replaced
+by a fresh coherent package built from the rebased tree.
+
+The x86/x64 product build and focused ownership and lifecycle checks passed
+(`build/rebase-main-8049-verify/build.process` and `build.stdout`, exit 0).
+The independent rerun followed overlapping initial build launches; their mixed
+logs are not used as passing evidence. The package staging verified 63 immutable
+guest files and 274 NTVDM ordinals (`build/rebase-main-8049/stage.process`,
+exit 0). Control passed on the rebased package (`control2.process` and
+`control2.stdout`, exit 0), including version/protocol negative peers, real
+DOS/native transitions, relaunch and frontend-loss checks. An initial Control run
+failed because its fresh test cache lacked generated service headers; the rerun
+pointed the negative-peer builder at the actual native service build directory.
+DOS4GW/NESticle was skipped because external fixtures were not supplied; Full
+was not run. Local release package `248c03f9-c456-4590-8c7c-b4db11252106`
+contains ten hash-verified images. Main-runtime publication and push remain
+deferred.
