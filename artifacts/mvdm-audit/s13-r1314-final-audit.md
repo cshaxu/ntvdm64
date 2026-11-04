@@ -126,6 +126,16 @@ images are identical and NTVDM/WOW32 differ only in PE timestamps
 ([comparison](s13-r1322-build-image-compare.json)). Runtime tests were not
 repeated under owner instruction.
 
+The [r1327 condition-free review](s13-r1327-condition-free-code-review.json)
+then checked all exact matching code blocks in the remaining 315 differing
+files from that scan. The original and current versions have no conditional
+groups; 312 have matched code and no observed logical-line mismatch, and three
+contain only comments. Their includes remain referenced by project sources.
+Together with the prior 58 corrected files, all 373 differing condition-free
+files now have this condition/line review. The review does not establish the
+behavior of local edits or certify comment-only line positions. The other 501
+differing files contain conditional groups and remain under separate review.
+
 The [r1323 anchor review](s13-r1323-anchor-review.json) additionally checks
 16 existing `#line` anchors against the specific original statement or branch
 entry they represent, including project-local selector cases. The remaining
