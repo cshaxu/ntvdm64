@@ -2,14 +2,16 @@
 
 ## Current Work
 
-**Active: M0 T475 S3 — Worker Base and NTVDM dependency removal**
+**No active M/T/S packet.** M0 T475 S3 is locally concluded; its seven local
+P commits await the owner-directed later cherry-pick to the main worktree. The
+owner explicitly defers main-runtime publication and push for this worktree.
 
 The owner closes the [S2 dependency inventory](../etc/evidence/m0-t475-s2-component-dependency-inventory.md)
 and admits S3 to address the illegal Worker Base and NTVDM dependencies through
 common and libraries. The [S3 design](../etc/operations/m0-t475-s3-worker-ntvdm-dependency-plan.md)
 now assigns Redir-only logic to Redir, shared product contracts to common, and
-generic Win32 mechanisms to lib. Seven proposed P deliveries are sequential;
-the separate question of removing the NTVDM PE runtime imports remains pending.
+generic Win32 mechanisms to lib. Seven P deliveries are sequential. The owner
+separately queues removal of the remaining NTVDM PE runtime imports.
 P1 removes VDMREDIR's unused Worker Base input. The dependency negative control,
 x86/x64 build, focused redirector checks, three real DOS redirector probes and
 all 12 Control gates passed. Local package `fd19d65e-2eec-4bb8-a76a-697b9841c4d3`
@@ -27,7 +29,7 @@ compatibility exports and single guest-memory authority. The x86/x64 build,
 focused and original NetAPI fixtures, three real DOS probes, and all 12 selected
 Control gates passed. Local package `0bcc0986-5646-4a04-8002-0bf6c3d65656`
 has ten verified release hashes. Full and the optional DOS4GW/NESticle fixture
-were not run. PE runtime-import scope remains open.
+were not run. PE runtime-import removal is separately queued.
 P4 moves the historical CRT adapter to `lib-win32/crt-compat`; NTVDM and
 WOW32 now select that owner. The x86/x64 build, symbol-provider and formatting
 fixtures, 12 Control gates and four real WRITE startup snapshots passed. Local
@@ -44,8 +46,12 @@ and session binding in `common/worker-thread`, retaining the one worker-owned
 session. The x86/x64 build, thread lifecycle, redirector fixtures, 12 Control
 gates and three real DOS probes passed. Local package
 `d240771a-26b9-4f8c-bccd-d05a90b697f7` has ten verified hashes. Full was not
-run. P7 must address two additionally reached VDMREDIR private headers and
-resolve the still-pending NTVDM runtime-import scope.
+run. P7 addresses the additionally reached VDMREDIR private headers and
+private archive inputs; runtime-import removal is separately queued.
+P7 removes the remaining Redir private headers and static archive inputs. The
+x86/x64 build, dependency audits, focused tests, 12 Control gates and three
+real DOS probes passed. Local package `8b055e88-0703-4652-a14d-720d2d9f61e6`
+has ten verified hashes. Runtime PE imports remain and are queued separately.
 T475 S1 separated NXVM and Win32 library ownership. Its final four local P
 commits extracted object-handle comparison, overlapped pipe-pair creation,
 parent-process observation and file identity. Their local packages each
@@ -62,13 +68,13 @@ retain the decisions, rebase and publication limits. Main-worktree integration
 and full product verification remain pending. No push or main-runtime
 publication is authorized by the local workflow.
 
-## Active Packet
+## T475 S3 Local Closure Record
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T475 S3, Ordinary Mode. |
-| Admission And Approval | Owner admits an S to address illegal dependencies on Worker Base and NTVDM and requests a design. |
-| Objective | Remove prohibited source, header and static-link dependencies through common and platform libraries; resolve runtime-import scope before dependent implementation. |
+| Identifier Mode | M0 T475 S3, Ordinary Mode; locally concluded. |
+| Admission And Approval | Owner admits the S and seven P deliveries; source, header and static-link scope is confirmed, with runtime-import removal separately queued. |
+| Objective | Remove prohibited Worker Base and NTVDM source, header and static-link dependencies through common and platform libraries. |
 | Non-goals | Alter the allowed two-worker Worker Base dependency, NTHook ownership, guest media, original ABI semantics or main worktree. |
 | Reference Baseline | S2 inventory commit 5bc6eb897 and local package 2b1325bd-17fb-4435-b2be-55995de325f6. |
 | Files And ABI Surface | VDMREDIR, WOW32, NTVDM, common and lib-win32 source/headers, source/link graph, module interfaces, tests and documentation. |
@@ -77,8 +83,8 @@ publication is authorized by the local workflow.
 | Expected Markers | Non-worker components select no Worker Base input and no NTVDM-private implementation/header; required runtime contracts and state ownership remain verified. |
 | Asset Needs | Existing toolchain, fixtures and local package; no external source import. |
 | Reporting Requirements | Per consumer/provider, actual use, removed edge, shared owner, preserved state, verification and runtime-ABI disposition. |
-| Stop Conditions | Required semantic concession, missing provenance, duplicate state owner or unresolved scope of the runtime-import change. |
-| Exit Criteria | All admitted dependencies resolved, production Ps built, tested, locally published and committed; runtime-import treatment matches clarified scope. |
+| Stop Conditions | Required semantic concession, missing provenance or duplicate state owner; none accepted for the local closure. |
+| Exit Criteria | Source, header and static-link scope locally verified and committed; runtime-import removal separately queued per owner. Main-worktree integration, system32 publication and push remain owner-directed deferrals. |
 | Original Owner Request | Admit one S to address Worker Base and NTVDM dependencies by placing suitable code into common and lib; provide a design. |
 | Similar-Issue Sweep | VDMREDIR and WOW32 source, private headers, selected archive members, forced includes, NTVDM module ABI and all Worker Base consumers. |
 | Temporary Evidence | build/t475-s3, worktree-local evidence with owned test processes. |

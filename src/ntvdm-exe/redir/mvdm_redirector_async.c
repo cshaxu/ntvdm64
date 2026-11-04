@@ -1,5 +1,5 @@
 #define MVDM_REDIRECTOR_WORKER_EXPORTS
-#include "mvdm_redirector_async.h"
+#include "common/redirector/async.h"
 
 #include <stdlib.h>
 #include <string.h>

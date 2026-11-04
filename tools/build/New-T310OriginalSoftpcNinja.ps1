@@ -780,6 +780,9 @@ $baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE 
     '/FI "' + (NinjaPath $softpcSymbolCompat) + '" ' +
     ''
 $baseFlags = $baseCommonFlags + ($softpcIncludeRoots -join ' ')
+# VDMREDIR does not use SoftPC's private `terminate` symbol. Keep the
+# namespace shim only on the SoftPC compilation units that actually need it.
+$redirBaseFlags = $baseFlags.Replace('/FI "' + (NinjaPath $softpcSymbolCompat) + '" ', '')
 # Authored adapters consume the selected interfaces, not the SoftPC profile.
 $authoredCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/compat/include/nt.h')) + '" '
@@ -1032,7 +1035,7 @@ $redirObjects = foreach ($name in $redirNames) {
     # Preserve original redirector source spelling.  Two original DLC/pipe
     # entries use the historical cdecl CreateThread callback contract; this
     # translation-unit-local forced facade is the finite modern ABI boundary.
-    $redirFlags = $baseFlags + ' /DWIN_32 /DVDMREDIR_DLL /FI "' + $redirThreadCompat + '"'
+    $redirFlags = $redirBaseFlags + ' /DWIN_32 /DVDMREDIR_DLL /FI "' + $redirThreadCompat + '"'
     $graph.Add('  cflags = ' + $redirFlags)
     $object
 }
@@ -1142,6 +1145,7 @@ $hostCompatObject = 'obj/opennt-abi-host-compat/opennt_support_rtl.obj'
 $graph.Add('build ' + $hostCompatObject + ': cc ' + (NinjaPath $hostCompatSource))
 $graph.Add('  cflags = ' + $authoredSoftpcFlags)
 $adapterWin32Objects += $hostCompatObject
+$graph.Add('build common-opennt-compat.lib: lib ' + $hostCompatObject)
 $consoleGridObject = 'obj/opennt-abi-host-compat/console_grid.obj'
 $graph.Add('build ' + $consoleGridObject + ': cc ' + (NinjaPath (Join-Path $root 'src/compat/console_grid.c')))
 $graph.Add('  cflags = /nologo /c /MT /W4 /we4013 /showIncludes')
@@ -1192,6 +1196,7 @@ $adapterSoftpcObjects = foreach ($name in $adapterSoftpcNames) {
 $adapterRedirObjects = foreach ($name in $adapterRedirNames) {
     $object = 'obj/vdmredir-dll/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $redirDllBindingRoot $name)))
+    $graph.Add('  cflags = ' + $redirBaseFlags)
     $object
 }
 $adapterRedirWorkerObjects = foreach ($name in $adapterRedirWorkerNames) {
@@ -2135,7 +2140,7 @@ $graph.Add('  cflags = /nologo /c /MT /W3 /showIncludes /I "' + (NinjaPath (Join
 $graph.Add('build wow-user-client-view-layout-test.exe: memory_test_link obj/tests/wow_user_client_view_layout_fixture.obj')
 $graph.Add('build cvidc-vector-binding-fixture.exe: memory_test_link ' + $cvidcVectorBindingFixtureObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $graph.Add('build x87-layout-fixture.exe: rtl_fixture_link ' + $x87LayoutFixtureObject)
-$graph.Add('build VDMREDIR.dll | VDMREDIR.dll.lib: redir_dll_link ' + (($redirObjects + @($redirResourceObject)) -join ' ') + ' ntvdm.lib vdmredir-dll-bindings.lib original-opennt-netlib.lib original-opennt-netapi-api.lib original-opennt-xactsrv.lib original-opennt-rtl-x86.lib softpc-bindings.lib softpc-win32-bindings.lib')
+$graph.Add('build VDMREDIR.dll | VDMREDIR.dll.lib: redir_dll_link ' + (($redirObjects + @($redirResourceObject)) -join ' ') + ' ntvdm.lib vdmredir-dll-bindings.lib original-opennt-netlib.lib original-opennt-netapi-api.lib original-opennt-xactsrv.lib original-opennt-rtl-x86.lib common-worker-thread.lib lib-thread.lib common-opennt-compat.lib')
 $graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib softpc-bindings.lib worker-shell.lib worker-command-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib')
 $graph.Add('default original-softpc-candidate')
 # Select neutral archives only through explicit provider dependencies. Do not

@@ -127,4 +127,43 @@ P7's compiler-dependency sweep also found VDMREDIR reaching the async request
 contract and the forced SoftPC symbol-compatibility header in NTVDM-private
 paths. They are not resolved by P6 and require explicit disposition before
 source-boundary closure. NTVDM PE runtime imports remain a separate pending
-scope decision.
+scope decision at the time of P6; the owner subsequently directed runtime
+import removal to a separate task.
+
+## P7: final source and static-link closure
+
+The Redir/worker asynchronous request contract now belongs to
+`common/redirector`; worker-owned request/session state is unchanged. The
+SoftPC `terminate` namespace shim was a forced header in 18 Redir objects but
+is not used by their sources, so their compile rules no longer include it.
+The final compiler dependency records contain no NTVDM- or Worker Base-private
+headers for those 18 Redir objects or for 147 WOW objects. Negative controls
+for the prohibited boundaries passed; the production ownership checker also
+retains both authorized Worker Base consumers and rejects non-worker inputs.
+
+The final Redir link no longer lists `worker-base.lib`, `softpc-bindings.lib`
+or `softpc-win32-bindings.lib`. Removing the latter two first revealed three
+crypt, one heap and one TEB compatibility symbol selected from the existing
+shared `src/compat/opennt_support_rtl.c` object. The final graph gives that same
+object an explicit shared `common-opennt-compat.lib` archive. It does not copy
+the implementation or add a new state instance; it preserves the object that
+was already selected into the Redir module. A first link without this archive
+failed and is retained in the logs. An earlier Control run was deliberately
+stopped when this additional archive input was discovered; only the final
+candidate's complete run counts.
+
+The final x86/x64 build, async publication (24 checks), original NetAPI
+fixtures (12 checks), all 12 selected Control gates, and actual DOS async-read,
+async-write and NetAPI probes passed. Staging checked 63 immutable guest files
+and 274 NTVDM export ordinals. Local package
+`8b055e88-0703-4652-a14d-720d2d9f61e6` was published with ten matching hashes.
+Full was not run and the optional DOS4GW/NESticle fixture was absent. Logs,
+candidate identities and prior release backup are under `build/t475-s3-p7`.
+
+The owner confirmed that S3 covers source, headers and static links, with PE
+runtime import removal as a separate task. Final candidate PE inspection finds
+45 VDMREDIR and 153 WOW32 imports by ordinal from NTVDM; these runtime edges
+remain, and their [queued proposal](../../proposals/proposal-worker-runtime-import-boundary-001.md)
+does not claim their removal. NTHook relationships remain outside S3. This is
+a worktree-local closure: the owner directs later cherry-pick and explicitly
+defers main-worktree integration, system32 publication and push.

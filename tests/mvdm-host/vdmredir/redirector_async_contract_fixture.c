@@ -2,7 +2,7 @@
 
 #include "ntvdm-exe/session/session.h"
 #include "vrnmpipe.h"
-#include "mvdm_redirector_async.h"
+#include "common/redirector/async.h"
 #include "mvdm_redirector_guest_copy.h"
 
 typedef struct fixture_memory {

@@ -15,10 +15,9 @@ executable-private dependency. A consumer must never require another private
 component as a result of the move.
 
 WOW32's and VDMREDIR's PE images currently import the NTVDM executable ABI.
-Whether this S also removes that runtime import is a pending scope decision;
-the design and P sequence below first address the independently proved source,
-header and static-link violations. No implementation should treat an unresolved
-runtime-scope decision as permission to weaken a requested no-dependency goal.
+The owner has clarified that this S removes source, header and static-link
+violations; eliminating the runtime import is a separate queued task. Runtime
+imports remain explicit in this S's evidence and are not counted as removed.
 
 ## Target ownership and invariants
 
@@ -88,8 +87,9 @@ main-worktree runtime publication is part of this workflow.
 
 The current WOW32 and VDMREDIR binary imports are 184 and 38 NTVDM thunks in
 the audited profile. Relocating source and declarations into common does not
-remove those PE import-table dependencies. If the owner requires no runtime
-import either, first design a common-owned provider/binding with one runtime
+remove those PE import-table dependencies. The owner directs that runtime
+import removal be handled in a separate queued task. That task should first
+design a common-owned provider/binding with one runtime
 state instance and an initialization path that works before any imported
 function or DLL initialization is reached. Compare a shared runtime module
 with an explicitly passed function table: include loader/CRT initialization,

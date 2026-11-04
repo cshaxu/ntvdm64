@@ -1,8 +1,8 @@
 #ifndef MVDM_REDIRECTOR_ASYNC_H
 #define MVDM_REDIRECTOR_ASYNC_H
 
-/* Private to mvdm-host/vdmredir.  It intentionally has no adapter or product
- * ABI: the matching mirror calls it at its original async request boundaries. */
+/* Shared redirector/worker boundary. The worker retains the session-owned
+ * request state; the original redirector calls it at its async boundaries. */
 #include <windows.h>
 
 typedef struct _DOS_ASYNC_NAMED_PIPE_INFO DOS_ASYNC_NAMED_PIPE_INFO;
