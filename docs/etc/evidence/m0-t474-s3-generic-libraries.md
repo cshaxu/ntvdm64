@@ -66,3 +66,33 @@ handoff. The external DOS4GW/NESticle fixture was unavailable and skipped;
 Full was not run. Package `e719bbee-ba87-42c4-8438-80f0d62fdd0a` is
 published only to this worktree's `assets/release`, with all ten output hashes
 verified. The previous original guest long-PATH limitation remains.
+
+## Rebase onto main
+
+Owner directed rebase onto main commit `b919dd182`, retaining this worktree's
+status record in conflicts and replacing both pre-rebase release packages with
+a fresh build of the combined committed sources. Main's uncommitted work is
+not included. The six local commits were replayed and the active S3 retained.
+
+Rebase exposed an old-path `.gitattributes` entry: Git converted line endings
+of the moved nxvm sources and the manifest hash gate rejected the first graph
+generation. The exact Git blobs were restored and attributes now preserve the
+new imported paths on future checkouts. All 55 imported files remain byte-exact.
+The first orchestration attempt also misclassified already-exited processes as
+failures; a corrected owned-process wait verified all six native exits as zero.
+An x86 target spelling mismatch was corrected before compilation. Full run
+records, commands, start times, process IDs and exit codes are retained under
+`build/t474-s3-rebase`.
+
+Fresh x64 worker, frontend, monitor, launcher, service and Hook64, plus x86
+NTVDM, VDMREDIR, Hook32 and WOW32 were built from the rebased sources. Frontend
+and BaseSrv ownership gates, their negative controls and the window library
+fixture passed. All ten stage input and output hashes match the fresh build;
+63 immutable guest files and all 274 NTVDM exported ordinals passed checks.
+
+Control passed all 12 selected gates on this exact ten-image package, including
+actual DOS and native command interaction, worker loss and nested-window
+handoff. The optional DOS4GW/NESticle fixture was unavailable and skipped;
+Full was not run. The original guest long-PATH limitation remains. Fresh
+package `9f45db63-8a83-44c4-84b7-f4a45fd9297a` was published to this
+worktree's `assets/release`; all ten release hashes matched the manifest.

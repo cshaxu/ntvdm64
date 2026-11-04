@@ -43,6 +43,16 @@ Full was not run, and the optional DOS4GW/NESticle fixture was absent.
 [S3 P evidence](../etc/evidence/m0-t474-s3-generic-libraries.md).
 Temporary evidence: build/t474-s3-p2.
 
+Owner directs rebasing this worktree onto main commit b919dd182 and rebuilding
+all release assets from the combined committed sources. Retain this worktree's
+active packet on status conflicts; never treat either pre-rebase binary package
+as the final combined release. Main's uncommitted S13 changes are not included.
+Fresh combined package 9f45db63-8a83-44c4-84b7-f4a45fd9297a is published to
+this worktree; ten new build inputs, release hashes and all 12 selected Control
+gates passed. Full was not run; the optional DOS4GW/NESticle fixture was absent.
+The S3 evidence records the Git byte-preservation correction and build runs.
+Temporary evidence: build/t474-s3-rebase.
+
 ## Active Packet
 
 | Field | Record |
