@@ -14,6 +14,7 @@
 #include "wow_user_client_view_layout.h"
 #include "wow_window_client_state_bindings.h"
 #include "userrtl.h"
+#line 19
 
 /***************************************************************************\
 * GetContextHelpId()
@@ -31,6 +32,7 @@ DWORD GetContextHelpId(
     /* DIVERGENCE(OPENNT-HOST-107): only the private property read changes;
      * use the pinned observation, never re-resolve a possibly reused HWND. */
     while (!(dwContextId = wow_window_client_context_help(pwnd))) {
+#line 35
         pwnd = (TestwndChild(pwnd) ?
                 REBASEPWND(pwnd, spwndParent) :
                 REBASEPWND(pwnd, spwndOwner));

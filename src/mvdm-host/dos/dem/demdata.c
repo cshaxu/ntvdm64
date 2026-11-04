@@ -9,6 +9,7 @@
 /* DIVERGENCE MVDM-HOST-DIV-005: numeric location of the four-byte DTA
  * address cell in NTDOS; never a retained native GetVDMAddr pointer. */
 mvdm_guest_location dta_location;
+#line 10
 
 
 /** VDM's Current PDB **/
@@ -16,6 +17,7 @@ mvdm_guest_location dta_location;
 /* DIVERGENCE MVDM-HOST-DIV-006: numeric location of the current two-byte
  * PDB segment in NTDOS, not a retained native GetVDMAddr pointer. */
 mvdm_guest_location current_pdb_location;
+#line 15
 
 /** SFT Chain Head **/
 
@@ -23,6 +25,7 @@ mvdm_guest_location current_pdb_location;
  * GetVDMAddr.  The adapter reconstructs bounded SFT/JFT shadows from this
  * original numeric location for each VDD operation. */
 mvdm_guest_location sft_head_location;
+#line 19
 
 //
 // address of extended error information in DOS data segment

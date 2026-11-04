@@ -3,7 +3,9 @@
  * DIVERGENCE(OPENNT-HOST-097): unrelated text engines excluded;
  * selected function body unchanged. See the S3 source ledger.
  */
+#line 12
 #include "precomp.h"
+#line 170
 
 LONG TabTextOut(
     HDC hdc,

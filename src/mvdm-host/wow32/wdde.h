@@ -56,6 +56,7 @@ typedef struct _DDECONVERSION {
     WORD Count;
 } DDECONVERSION, *PDDECONVERSION;
 
+#line 46
 
 typedef struct _CPDATA {
     struct _CPDATA *Next;      // pointer to next CopyData alias
@@ -83,6 +84,7 @@ typedef struct _CPDATA {
 #define COPYDATA_16             0x0001
 /* DIVERGENCE(MVDM-HOST-DIV-344): distinguish header from payload provenance. */
 #define COPYDATA_HEADER         0x0002
+#line 71
 
 /*----------------------------------------------------------------------------
 |       DDEDATA structure
@@ -107,9 +109,11 @@ typedef struct {
 
 
 BOOL    WI32DDEAddInitiator (HAND16 Initiator);
+#line 95
 VOID    WI32DDEDeleteInitiator(HAND16 Initiator);
 BOOL    WI32DDEInitiate(HAND16 Initiator);
 #define WOW_DDE_INITIATE_ACTIVE 0x00000001
+#line 97
 BOOL    DDEDeletehandle(HAND16 h16, HANDLE h32);
 HANDLE  DDEFind32(HAND16 h16);
 HAND16  DDEFind16(HANDLE h32);
@@ -121,6 +125,7 @@ VOID    DDERollback32(PDDECONVERSION pConversion, HAND16 To_hwnd, HAND16 From_hw
 HAND16  DDECopyhData16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE h32, PDDEINFO pDdeInfo, PDDECONVERSION pConversion);
 HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pDdeInfo, PDDECONVERSION pConversion);
 BOOL    W32MarkDDEHandle (HAND16 hMem16);
+#line 104
 VOID    W32UnMarkDDEHandle (HAND16 hMem16);
 HANDLE  DDEFindPair32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 hMem16);
 HAND16  DDEFindPair16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE hMem32);

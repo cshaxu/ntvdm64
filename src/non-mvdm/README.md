@@ -1,5 +1,9 @@
 # non-mvdm original OpenNT sources
 
+OPENNT-HOST-171: restore original diagnostic positions in five condition-free
+USER source files using only `#line` directives. Evidence:
+`../../artifacts/mvdm-audit/s13-r1320-line-batch.json`.
+
 OPENNT-HOST-170: restore original diagnostic positions in condition-free
 `srvvdm.h` and `ptypes32.h`; only `#line` was added. Evidence:
 `../../artifacts/mvdm-audit/s13-r1319-line-batch.json`.

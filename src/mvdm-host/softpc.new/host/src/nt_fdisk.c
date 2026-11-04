@@ -4,11 +4,13 @@
 #include <ntrtl.h>
 #include <nturtl.h>
 
+#line 7
 #include <windows.h>
 #include "insignia.h"
 #include "host_def.h"
 #include <mvdm_guest_location.h>
 #include <mvdm_command_guest_state.h>
+#line 10
 
 /*
  * [ Product:        SoftPC-AT Revision 3.0
@@ -235,11 +237,13 @@ WORD	    fdisk_open_count = 0;
 /* DIVERGENCE MVDM-HOST-DIV-006: original code retained a native pointer to
  * the DOS current-PDB value.  Read that scalar through the session lease. */
 extern mvdm_guest_location current_pdb_location;
+#line 234
 
 static BOOL nt_fdisk_current_pdb(PUSHORT currentPdb)
 {
     return mvdm_guest_location_read_u16(&current_pdb_location, currentPdb);
 }
+#line 236
 
 extern	    int     DiskOpenRetry(CHAR);
 
@@ -407,12 +411,14 @@ ULONG nt_fdisk_read(
     PFDISKDATA fdisk_data;
     ULONG   size_returned = 0;
     USHORT  currentPdb;
+#line 402
 
     if ((fdisk_data = get_fdisk_data(drive)) == NULL)
 	return 0;
     if (!nt_fdisk_current_pdb(&currentPdb))
 	return 0;
     if (get_fdisk_handle(fdisk_data, currentPdb, FALSE))
+#line 406
 	return(disk_read(fdisk_data->fdisk_fd,
 			 offset,
 			 size,
@@ -430,6 +436,7 @@ ULONG nt_fdisk_write(
     PFDISKDATA fdisk_data;
     ULONG   size_returned = 0;
     USHORT  currentPdb;
+#line 422
 
     if ((fdisk_data = get_fdisk_data(drive)) == NULL)
 	return 0;
@@ -437,6 +444,7 @@ ULONG nt_fdisk_write(
     if (!nt_fdisk_current_pdb(&currentPdb))
 	return 0;
     if (get_fdisk_handle(fdisk_data, currentPdb, TRUE)) {
+#line 427
 	// must lock the drive. This is very important.
 	size_returned = disk_write(fdisk_data->fdisk_fd,
 				   offset,
@@ -458,6 +466,7 @@ BOOL nt_fdisk_verify(
     ULONG   size_returned = 0;
     VERIFY_INFORMATION verify_info;
     USHORT currentPdb;
+#line 447
 
     if ((fdisk_data = get_fdisk_data(drive)) == NULL)
 	return FALSE;
@@ -465,6 +474,7 @@ BOOL nt_fdisk_verify(
     if (!nt_fdisk_current_pdb(&currentPdb))
 	return FALSE;
     if (get_fdisk_handle(fdisk_data, currentPdb, FALSE)) {
+#line 452
 	verify_info.StartingOffset = *offset;
 	verify_info.Length = size;
 	return(DeviceIoControl(fdisk_data->fdisk_fd,
@@ -503,6 +513,7 @@ BOOL close_fdisk(PFDISKDATA fdisk_data)
 	 * session-owned numeric location, preserving unsigned 16-bit wrap. */
 	if (!mvdm_command_guest_state_add_fd_access(UINT16_MAX))
 	    return FALSE;
+#line 487
 	fdisk_open_count--;
     }
     return TRUE;
@@ -563,6 +574,7 @@ BOOL get_fdisk_handle(PFDISKDATA fdisk_data, USHORT pdb, BOOL auto_lock)
 			return FALSE;
 		    }
 		    break;
+#line 538
 	}
 	else {
 	    last_error = GetLastError();

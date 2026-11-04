@@ -24,6 +24,7 @@ This line causes this file to be build with a checkin of NT_PIF.H
 #include <oemuni.h>
 #include "error.h"
 #include "mvdm_softpc_firmware.h"
+#line 26
 
 
  //
@@ -78,17 +79,20 @@ VOID GetPIFConfigFiles(BOOL bConfig, char *pchFileName)
                bConfig ? achConfigNT : achAutoexecNT,
                pchFileName, MAX_PATH + 12))
            *pchFileName = '\0';
+#line 73
        }
    else {
        dw = ExpandEnvironmentStringsOem(*ppch, pchFileName, MAX_PATH+12);
        /* DIVERGENCE(MVDM-HOST-DIV-278): configuration consumers use ANSI. */
        if (!dw || dw > MAX_PATH+12 ||
            !mvdm_softpc_config_path_to_ansi(pchFileName, MAX_PATH+12)) {
+#line 77
            *pchFileName = '\0';
            }
        /* DIVERGENCE(MVDM-HOST-DIV-157): CCPU LIM initialization and DOS
         * boot both read this path. Retain it until the next PIF selection
         * (or process exit), rather than consuming it on the first read. */
+#line 81
        }
 }
 
@@ -143,6 +147,7 @@ BOOL GetPIFData(PIF_DATA * pd, char *PifName)
     if (!*PifName) {
         dw = NtvdmGetWindowsDirectoryA(pathBuff,
             sizeof(pathBuff) - sizeof(achDef));
+#line 134
         if (!dw || dw > sizeof(pathBuff) - sizeof(achDef)) {
             return FALSE;            // give it up... use default settings
             }
@@ -285,6 +290,7 @@ if (!strcmp(exthdr.extsig, STDHDRSIG))
 		/* DIVERGENCE(MVDM-HOST-DIV-157): replace the retained paths. */
 		free(pchConfigFile);
 		free(pchAutoexecFile);
+#line 273
 		pchConfigFile = ch_malloc(PIFDEFPATHSIZE);
 		extWNT.nt31Prop.achConfigFile[PIFDEFPATHSIZE-1] = '\0';
 		if (pchConfigFile) {

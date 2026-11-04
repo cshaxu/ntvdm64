@@ -4,6 +4,7 @@
  * target-private precomp replaces the unavailable original build environment.
  * Unselected until the complete original EDIT dependency group is wired. */
 #include "precomp.h"
+#line 45
 
 BOOL APIENTRY CopyInflateRect(
     LPRECT prcDst,

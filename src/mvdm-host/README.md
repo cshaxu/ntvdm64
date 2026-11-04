@@ -1,5 +1,9 @@
 # mvdm
 
+MVDM-HOST-DIV-639: restore original diagnostic positions in five
+condition-free DEM, host and WOW source files using only `#line` directives.
+Evidence: `../../artifacts/mvdm-audit/s13-r1320-line-batch.json`.
+
 MVDM-HOST-DIV-638: restore original diagnostic positions in eight
 condition-free DPMI, CCPU and WOW source files; only `#line` was added.
 Matched original blocks and byte identities are recorded in

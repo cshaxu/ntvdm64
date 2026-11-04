@@ -1,7 +1,9 @@
 /* Copyright (c) 1985-91, Microsoft Corporation.
  * DIVERGENCE(OPENNT-HOST-114): original function subset; bodies unchanged.
  * See the T447 S3 source ledger for resource/call boundary ownership. */
+#line 13
 #include "precomp.h"
+#line 24
 
 BOOL PaintRect(
     HWND hwndBrush,
