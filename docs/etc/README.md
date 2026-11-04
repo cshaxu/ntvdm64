@@ -1,5 +1,7 @@
 # Supporting Material
 
+[T475 S3 dependency remediation evidence](evidence/m0-t475-s3-worker-ntvdm-remediation.md) records the local P deliveries and verification.
+
 [T475 S3 dependency removal design](operations/m0-t475-s3-worker-ntvdm-dependency-plan.md) records the proposed ownership and P sequence.
 
 [T475 S2 component dependency inventory](evidence/m0-t475-s2-component-dependency-inventory.md) records cross-component production edges, actual use and dispositions.

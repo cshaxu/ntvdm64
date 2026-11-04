@@ -260,7 +260,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
     if('next_command.c' -in $ntvdmNative -or 'next_command.c' -notin $ntconNative) {
         throw 'NTVWM-only native GetNext wrapper must not enter NTVDM or worker-base'
     }
-    foreach($target in @('run16.exe','ntsrv.exe','ntcon.exe','ntmon.exe')) {
+    foreach($target in @('run16.exe','ntsrv.exe','ntcon.exe','ntmon.exe','nthook32.dll','VDMREDIR.dll')) {
         if(@(Get-FrontendSources $target 'worker-base').Count) {
             throw "$target must not acquire worker-side mechanisms"
         }
@@ -360,6 +360,16 @@ foreach ($target in @('run16.exe', 'frontend-client.lib', 'ntvdm.exe','worker-ba
     try { Assert-FrontendOwnership $mutated } catch { $rejected = $true }
     if (!$rejected) { throw "Ownership negative control did not reject $target" }
 }
+# A non-worker must not even select the worker archive. Check a deliberate
+# VDMREDIR link-edge regression, not only currently resolved symbols.
+$mutated=@($graph | ForEach-Object {
+    if($_ -match '^build VDMREDIR\.dll(?: |:)') {
+        $_ -replace ': (\S+) ', ': $1 worker-base.lib '
+    } else { $_ }
+})
+$rejected=$false
+try { Assert-FrontendOwnership $mutated } catch { $rejected=$true }
+if(!$rejected){throw 'VDMREDIR Worker Base negative control was accepted'}
 # Window libraries contain nested source paths, not only owner-root C files.
 # Reject both full-archive leakage and a library-only leaf object leakage.
 foreach ($leakInput in @('frontend-window.lib', 'frontend-terminal.lib', 'ntcon-worker-client.lib', 'obj/ownership-leak.obj')) {

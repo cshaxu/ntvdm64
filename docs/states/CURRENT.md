@@ -9,8 +9,13 @@ and admits S3 to address the illegal Worker Base and NTVDM dependencies through
 common and libraries. The [S3 design](../etc/operations/m0-t475-s3-worker-ntvdm-dependency-plan.md)
 now assigns Redir-only logic to Redir, shared product contracts to common, and
 generic Win32 mechanisms to lib. Seven proposed P deliveries are sequential;
-implementation has not started. The separate
-question of removing the NTVDM PE runtime imports is pending owner clarification.
+the separate question of removing the NTVDM PE runtime imports remains pending.
+P1 removes VDMREDIR's unused Worker Base input. The dependency negative control,
+x86/x64 build, focused redirector checks, three real DOS redirector probes and
+all 12 Control gates passed. Local package `fd19d65e-2eec-4bb8-a76a-697b9841c4d3`
+matches all ten release hashes; [P1 evidence](../etc/evidence/m0-t475-s3-worker-ntvdm-remediation.md)
+records the initial long-PATH test failure and baseline. Full was not run; the
+optional DOS4GW/NESticle fixture was absent.
 T475 S1 separated NXVM and Win32 library ownership. Its final four local P
 commits extracted object-handle comparison, overlapped pipe-pair creation,
 parent-process observation and file identity. Their local packages each
