@@ -1,7 +1,7 @@
 /* Project-owned worker client of the copied NTCON protocol, shared by both backends.
  * Resource ownership and backend-specific handoff remain with each caller. */
 #include "common/console/client.h"
-#include "common/transport/pipe_transfer.h"
+#include "lib/io/pipe_transfer.h"
 #include <stddef.h>
 #include <limits.h>
 #include <string.h>

@@ -1,5 +1,5 @@
 #include "interface_query.h"
-#include "async_call.h"
+#include "lib/rpc/async_call.h"
 #include "rpc_management.h"
 
 DWORD common_rpc_classify_interface(RPC_BINDING_HANDLE binding,

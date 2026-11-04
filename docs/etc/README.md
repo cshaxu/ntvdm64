@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T474 S3 generic libraries](evidence/m0-t474-s3-generic-libraries.md)
+records the generic/product boundary and verification.
+
 [T474 S2 BaseSrv ownership](evidence/m0-t474-s2-basesrv-shared-ownership.md)
 records the shared source boundary and local verification.
 

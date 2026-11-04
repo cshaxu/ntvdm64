@@ -2,8 +2,9 @@
 
 `base_srv/` owns shared BaseSrv client, identity-scope and copied transport
 mechanisms. NTSRV retains server-side authorization, task and lifecycle
-policy. `rpc/` remains a separate sibling; a future general-purpose library
-extraction requires a function-by-function boundary audit.
+policy. `rpc/` remains a separate sibling for product-specific RPC calls. Generic
+local RPC and I/O mechanics are owned by `src/lib/rpc` and `src/lib/io`,
+including final native file-path resolution.
 
 T431 S2 owner correction shares application_search.[ch] between run16 and
 nthook32. This is run16's unchanged CWD/PATH directory-first COM/EXE/BAT/PIF
@@ -50,12 +51,12 @@ It depends only on common protocol/pipe mechanics and Win32, not worker-base.
 Common-console.lib is the sole selected provider, shared by NTVDM/NTVWM and
 their fixtures; private worker archives do not embed another copy.
 
-`rpc/local_binding` owns the identical project-added BaseClient/NTMON
+`lib/rpc/local_binding` owns the identical project-added BaseClient/NTMON
 ncalrpc binding/auth-parameter/rollback mechanism. It takes explicit output
 state, retains no global instance, returns precise RPC errors and releases
 all partial bindings/strings on failure. A successful binding is caller-owned.
 Endpoint selection, logon scope, application/version checks, peer validation
-and broker-loss policy stay with the caller. common-rpc.lib is its sole provider.
+and broker-loss policy stay with the caller. lib-rpc.lib is its sole provider.
 
 `rpc/native_command` owns the project-added GetNextNativeCommand,
 NativeStartupResult, CompleteWorkerChannel, SubmitNativeRequest and
@@ -106,7 +107,7 @@ snapshot allocations are freed; successful copied records belong to the caller.
 NTMON retains reconnect, selection, confirmation, UI and resource lifetime.
 NTSRV remains snapshot and termination authority; common never enumerates tasks.
 
-`console/members` shares allocation, bounded capacity growth, current-Console
+`lib/io/console_members` shares allocation, bounded capacity growth, current-Console
 sampling and release only. The caller explicitly supplies its initial/maximum
 capacity and API-read ceiling. A failure exposes neither partial data nor an
 allocation. Growth retries are immediate size negotiation, not timer polling.
@@ -115,7 +116,7 @@ checks retain 4096, native quiescence/launcher resume retain 65536. Authenticati
 member liveness, join acceptance, resume and quiescence remain local policies.
 Single-member launcher cleanup remains its local stack-buffer query.
 
-`transport/pipe_transfer` is project-added byte transport, not a third message
+`lib/io/pipe_transfer` is project-added byte transport, not a third message
 protocol. It is shared by the worker frontend client, frontend channel and
 transport fixtures. The native command/startup control pipes and their reply
 DTOs are removed; these operations use authenticated NTSRV RPC.

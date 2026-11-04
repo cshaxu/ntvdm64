@@ -1,5 +1,13 @@
 # System Architecture
 
+## Generic integration libraries — T474 S3
+
+`lib/rpc` and `lib/io` provide product-independent local RPC binding, async
+completion, pipe transfer, Console membership and native file-path mechanics. They depend only
+on platform APIs. `common` and product components may select them; the generic
+libraries do not depend on product protocols, worker-base or executable code.
+BaseSrv RPC operation semantics and NTCON-worker frames remain in common.
+
 ## Approved lifecycle target boundary
 
 [T448 lifecycle design](../proposals/proposal-ntsrv-lifecycle-authority-001.md)

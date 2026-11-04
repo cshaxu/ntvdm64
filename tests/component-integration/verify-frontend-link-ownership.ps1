@@ -25,6 +25,11 @@ foreach($owner in @('ntcon-exe','ntsrv-exe','ntvwm-exe')) {
         }
     }
 }
+foreach($file in Get-ChildItem (Join-Path $repo 'src/lib') -File -Recurse | Where-Object Extension -in '.c','.h','.cpp') {
+    if((Get-Content $file.FullName -Raw) -match '#include\s*[<"](?:common|worker-base|ntsrv-exe|run16-exe|ntcon-exe|ntvdm-exe|ntvwm-exe|ntmon-exe|nthook32-dll)/') {
+        throw "Generic library depends on product code: $($file.FullName)"
+    }
+}
 function Assert-FrontendPrivateNames([string]$Source) {
     if($Source -match '\b(?:run16_native_frontend|run16_console_(?:channel|frontend|video|dispatch|prepare_text)|frontend_native_keyboard|FRONTEND_NATIVE_KEY_RECORDS)(?:\b|_)|\bnative_console_frontend\.h\b') {
         throw 'Retired launcher/worker-owned spelling in frontend-private API'
@@ -183,9 +188,6 @@ function Assert-FrontendOwnership([string[]]$Lines) {
     # Do not silently admit another common provider (especially process creation).
     foreach($archive in @('frontend-client.lib','opennt-base-bindings.lib','worker-base.lib')) {
         $neutral=@(Get-FrontendSources $archive 'common')
-        if($archive -eq 'frontend-client.lib') {
-            $neutral=@($neutral | Where-Object { $_ -ne 'native_path.c' })
-        }
         if($archive -eq 'opennt-base-bindings.lib') {
             $neutral=@($neutral | Where-Object { $_ -ne 'native_image.c' })
         }
@@ -193,27 +195,35 @@ function Assert-FrontendOwnership([string[]]$Lines) {
             throw "$archive must not embed neutral common providers"
         }
     }
-    foreach($archive in @('common-codec.lib','common-transport.lib','common-console.lib','common-rpc.lib')) {
+    foreach($archive in @('common-codec.lib','lib-io.lib','lib-rpc.lib','common-console.lib','common-rpc.lib')) {
         foreach($owner in @('run16-exe','ntsrv-exe','ntcon-exe','ntvwm-exe','ntvdm-exe','worker-base')) {
             if(@(Get-FrontendSources $archive $owner).Count) {
                 throw "$archive reverse-depends on $owner"
             }
         }
     }
+    foreach($archive in @('lib-rpc.lib','lib-io.lib')) {
+        if(@(Get-FrontendSources $archive 'common').Count) {
+            throw "$archive must not depend on product common sources"
+        }
+    }
     if(@(Compare-Object @('codec/native_launch.c') @(Get-FrontendSources 'common-codec.lib' 'common')).Count) {
         throw 'Common native packet codec must have exactly one provider'
     }
-    if(@(Compare-Object @('transport/pipe_transfer.c') @(Get-FrontendSources 'common-transport.lib' 'common')).Count) {
-        throw 'Common pipe mechanics must have exactly one provider'
+    if(@(Compare-Object @('io/pipe_transfer.c','io/console_members.c','io/native_path.c') @(Get-FrontendSources 'lib-io.lib' 'lib')).Count) {
+        throw 'Generic I/O mechanisms must have exactly one provider'
     }
-    if(@(Compare-Object @('console/members.c','console/client.c') @(Get-FrontendSources 'common-console.lib' 'common')).Count) {
-        throw 'Common Console snapshot/client must have exactly one provider'
+    if(@(Compare-Object @('console/client.c') @(Get-FrontendSources 'common-console.lib' 'common')).Count) {
+        throw 'Common Console client must have exactly one provider'
     }
-    if(@(Compare-Object @('rpc/local_binding.c','rpc/native_command.c','rpc/frontend_control.c','rpc/worker_control.c','rpc/management.c','rpc/dos_observation.c','rpc/interface_query.c') @(Get-FrontendSources 'common-rpc.lib' 'common')).Count) {
-        throw 'Common RPC binding/native-command/frontend-control/worker-control clients must each have exactly one provider'
+    if(@(Compare-Object @('rpc/local_binding.c') @(Get-FrontendSources 'lib-rpc.lib' 'lib')).Count) {
+        throw 'Generic RPC binding must have exactly one provider'
+    }
+    if(@(Compare-Object @('rpc/native_command.c','rpc/frontend_control.c','rpc/worker_control.c','rpc/management.c','rpc/dos_observation.c','rpc/interface_query.c') @(Get-FrontendSources 'common-rpc.lib' 'common')).Count) {
+        throw 'Common RPC protocol clients must each have exactly one provider'
     }
     foreach($target in @('run16.exe','ntvdm.exe','ntvwm.exe','ntcon.exe','ntmon.exe')) {
-        if('rpc/local_binding.c' -notin @(Get-FrontendSources $target 'common')) {
+        if('rpc/local_binding.c' -notin @(Get-FrontendSources $target 'lib')) {
             throw "$target omits shared local RPC binding"
         }
     }
@@ -221,7 +231,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
         if('codec/native_launch.c' -notin @(Get-FrontendSources $target 'common')) {
             throw "$target omits the common native packet codec"
         }
-        if('console/members.c' -notin @(Get-FrontendSources $target 'common')) {
+        if('io/console_members.c' -notin @(Get-FrontendSources $target 'lib')) {
             throw "$target omits the common Console snapshot implementation"
         }
     }
@@ -302,7 +312,7 @@ foreach($archive in @('frontend-client.lib','opennt-base-bindings.lib','worker-b
     try { Assert-FrontendOwnership $mutated } catch { $rejected=$true }
     if(!$rejected){throw "Common provider embedding accepted: $archive"}
 }
-foreach($archive in @('common-codec.lib','common-transport.lib','common-console.lib','common-rpc.lib')) {
+foreach($archive in @('common-codec.lib','lib-io.lib','lib-rpc.lib','common-console.lib','common-rpc.lib')) {
     $mutated=@($graph | ForEach-Object {
         if($_ -match ('^build '+[regex]::Escape($archive)+':')) {
             $_ -replace ': (\S+) ', ': $1 obj/run16/frontend_scope.obj '
