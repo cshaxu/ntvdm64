@@ -3140,3 +3140,11 @@ MVDM-HOST-DIV-831: restore original logical source positions for matching code o
 MVDM-HOST-DIV-832: restore original logical source positions for matching code on observed selected paths in ten files with additional local condition groups. Evidence: artifacts/mvdm-audit/s13-r1367-batch.json and s13-r1367-extra-group-recheck.json. Other contexts remain under review.
 
 MVDM-HOST-DIV-833: restore original logical source positions for matching code on observed selected paths with local conditional groups. Evidence: artifacts/mvdm-audit/s13-r1369-batch.json and s13-r1369-extra-group-recheck.json. Other contexts remain under review.
+
+MVDM-HOST-DIV-834: restore original logical source lines in observed selected CCPU c_main.c paths without changing selected tokens. Evidence: artifacts/mvdm-audit/s13-r1372-cmain.json and s13-r1372-cmain-recheck.json. Cached batch build and ten-image publication passed.
+
+MVDM-HOST-DIV-835: restore original logical line positions for matching code in the selected nt_event.c projection, including the key-history loop, without changing selected tokens. Evidence: artifacts/mvdm-audit/s13-r1373-ntevent.json and s13-r1373-ntevent-recheck.json. Cached batch build and ten-image publication passed.
+
+MVDM-HOST-DIV-836: restore original logical line positions in selected dpmi32p.h declarations while excluding a false match between unrelated declaration terminators. Evidence: artifacts/mvdm-audit/s13-r1374-dpmiheader.json and s13-r1374-dpmiheader-recheck.json. Cached batch build and ten-image publication passed.
+
+MVDM-HOST-DIV-837: restore the original line for the selected SoftPC product-name define in xt.h. Evidence: artifacts/mvdm-audit/s13-r1376-xt-line.json. Cached batch build and ten-image publication passed.

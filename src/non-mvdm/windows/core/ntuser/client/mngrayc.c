@@ -6,6 +6,7 @@
 
 #ifdef WOW_ORIGINAL_STATE_DRAWING
 #define PATOR 0x00FA0089L
+#line 73
 BOOL ClientDrawState(
     HDC             hdcDraw,
     HBRUSH          hbrFore,
@@ -36,6 +37,7 @@ BOOL ClientDrawState(
      *
      * Enforce monochrome: embossed doesn't look great with 2 color displays
      */
+#line 101
     if ((uFlags & DSS_DISABLED) &&
         (oemInfo.BitCount == 1 || SYSMET(SLOWMACHINE))) {
 
@@ -238,6 +240,7 @@ BOOL ClientDrawState(
                     fResult = FALSE;
                     goto CDS_Leave;
                 }
+#line 295
                 DeleteObject(hbmGray);
 
                 gcxGray = max(gcxGray, cx + 1);
@@ -434,6 +437,7 @@ CDS_Leave:
         RtlLeaveCriticalSection(&gcsHdc);
     }
 
+#line 489
     return fResult;
 }
 #endif
@@ -443,12 +447,14 @@ BOOL FAR BitBltSysBmp(HDC hdc, int x, int y, UINT i)
 {
     POEMBITMAPINFO pOem = oemInfo.bm + i;
     return(NtUserBitBltSysBmp(hdc, x, y, pOem->cx, pOem->cy, pOem->x, pOem->y, SRCCOPY));
+#line 501
 }
 #endif
 
 /* DIVERGENCE(OPENNT-HOST-117): Button-only object reuses the helper above;
  * the existing drawing object remains the sole BltColor definition. */
 #ifndef WOW_ORIGINAL_BUTTON_BLIT_ONLY
+#line 536
 void BltColor(
     HDC hdc,
     HBRUSH hbr,

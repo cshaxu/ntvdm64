@@ -1,0 +1,75 @@
+{
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "current_sha256": "933243dec8d169d707b1c4d7bd314f309fd035d922797fcd65475a4a4c00c79a",
+      "original_sha256": "8e2383f52e4e3f65f656bd492143d7a8ed5d0a2526ad8e6af10d242465ff8d7a",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 738,
+      "extra_group_lines": [
+        320,
+        463,
+        526,
+        543,
+        963,
+        1019
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "current_sha256": "4e4e2bcc90ff33aa6b8abc02f4f04f355945899d42a48156a0d1adbf1f0c87d0",
+      "original_sha256": "a3e9286c40e4e11ec872fd9b2d7b23cba640f09fb4840c4e6130e301d5277b9e",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 587,
+      "extra_group_lines": [
+        249,
+        265,
+        271,
+        284,
+        332
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "current_sha256": "9b2713753efec2cd80c7d9cb25a283702169c66ea5c42b2837be8530964a3de2",
+      "original_sha256": "171ef0b7cd668cf51db86d9ae2fea4269cc002f0aba17033bf968d84c10f0f3d",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 457,
+      "extra_group_lines": [
+        7,
+        156,
+        198,
+        445,
+        456
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+      "current_sha256": "95d079adb6003257491878a40822c0c52a994217d5e21dce11b93f4ba838430c",
+      "original_sha256": "26f0174e6a0db53d942506cbdc12efbfebc34a943d780170e7bf9d95775514a4",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 54,
+      "extra_group_lines": [
+        8
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+      "current_sha256": "b33e839ce75cb2aabf205d786097de36c693b9f09e497899b8dc71880d2acea0",
+      "original_sha256": "d7e87476cc3e703c94b88d53b9a0761642b284a6776c0152738daf4c74290d2b",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 58,
+      "extra_group_lines": [
+        8,
+        38,
+        82
+      ]
+    }
+  ],
+  "held": {}
+}

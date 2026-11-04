@@ -1,0 +1,68 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "before_sha256": "2956ce4bdd68f97c63bf0526a23b0b7da37c7b746c6225487e254c708db235ca",
+      "original_sha256": "7f555a87ba029627d6811c0f7b96964bb8a96af90c60c89012975a4ac5442076",
+      "anchors": {
+        "46": 46,
+        "60": 57,
+        "68": 58,
+        "104": 85,
+        "136": 112,
+        "163": 136,
+        "324": 294,
+        "331": 296,
+        "395": 358,
+        "462": 421,
+        "488": 444,
+        "491": 446,
+        "521": 478,
+        "541": 495,
+        "578": 528,
+        "607": 555,
+        "999": 946,
+        "1015": 961,
+        "1032": 977,
+        "1166": 1107,
+        "1204": 1143,
+        "1365": 1333,
+        "1371": 1334,
+        "1453": 1410,
+        "1455": 1411,
+        "1457": 1412,
+        "1641": 1557,
+        "1821": 1731,
+        "1825": 1734,
+        "1921": 1826,
+        "1953": 1856,
+        "1969": 1867,
+        "1972": 1868,
+        "1996": 1903,
+        "2013": 1918,
+        "1958": 1858
+      },
+      "unresolved": [
+        [
+          1961,
+          1860,
+          1863,
+          "        GetHistoryKeyEvent(&InputRecords[KeyInx].Event.KeyEvent,KeyToRtn);"
+        ],
+        [
+          1962,
+          1861,
+          1864,
+          "        KeyToRtn++,KeyInx--)"
+        ]
+      ],
+      "matched_lines": 1792,
+      "extra_group_lines": [
+        1459,
+        1494
+      ],
+      "after_sha256": "63ce829ae4040ddea069a40bbc5b4ca31351ea1d6e7b138b4a2f40d5d8625cb3",
+      "reason": "Anchor before the adapted original key-history for loop preserves original continuation lines without changing any selected code."
+    }
+  ]
+}

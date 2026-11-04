@@ -1,0 +1,24 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_sha256": "a85cc75f5b51cc8bdd84c17bbbaea770aaace2cfb64882a1b173051a4abf82d7",
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 4182,
+      "extra_group_lines": [
+        240,
+        545,
+        890,
+        4313,
+        4405,
+        4430,
+        4732,
+        4793,
+        4815
+      ]
+    }
+  ],
+  "held": {}
+}

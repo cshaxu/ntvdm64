@@ -53,6 +53,7 @@ typedef enum {EIGHT_BIT, SIXTEEN_BIT, THIRTY_TWO_BIT} SIZE_SPECIFIER;
 #line 50
 #error DIVERGENCE MVDM-HOST-DIV-529: SOFTWINDOWS platform branch is not selected; see mirror register.
 #else
+#line 52
 #define SPC_PRODUCT_NAME "SoftPC"
 #endif
 #line 54

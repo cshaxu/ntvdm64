@@ -485,3 +485,15 @@ direct difference to its exact existing registration. Matching original-code
 line positions use the recorded observed projection. No runtime equivalence
 or unobserved context is claimed. Counts: 181 byte-identical / 756 differing
 files reviewed / 1,056 total; 119 differing files remain.
+
+The r1376 ten-file batch includes the [USER group batch](s13-r1371-batch.json),
+[c_main](s13-r1372-cmain.json), [nt_event](s13-r1373-ntevent.json),
+[DPMI header](s13-r1374-dpmiheader.json), [VDM client](s13-r1375-vdm.json),
+and [xt.h](s13-r1376-xt-line.json). Four USER files passed strict tree review;
+the other files remain pending complete review. Cached x86 root, NTVDM, WOW32
+and x64 builds passed; ten images were published and verified. Eight match
+byte-for-byte, WOW32 differs only by timestamp, and NTVDM has four changed
+diagnostic line immediate bytes plus timestamps, attributed in
+[proof](s13-r1376-diagnostic-line-proof.json). Per owner instruction tests
+were not repeated. Counts: 181 byte-identical / 760 differing files reviewed /
+1,056 total; 115 differing files pending.

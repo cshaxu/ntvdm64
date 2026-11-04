@@ -2511,3 +2511,7 @@ OPENNT-HOST-259: restore original logical source positions for matching code on 
 OPENNT-HOST-260: restore original logical source positions for matching code on observed selected paths in the pending S13 batch, retaining conditions and local adaptations. Evidence: artifacts/mvdm-audit/s13-r1352-batch.json and s13-r1352-context-recheck.json; other contexts remain under review.
 
 OPENNT-HOST-261: restore original logical source positions for matching code on observed selected paths with local conditional groups. Evidence: artifacts/mvdm-audit/s13-r1369-batch.json and s13-r1369-extra-group-recheck.json. Other contexts remain under review.
+
+OPENNT-HOST-262: restore original logical source positions for matching code on observed selected paths in the pending S13 USER mirror batch with local condition groups. Evidence: artifacts/mvdm-audit/s13-r1371-batch.json and s13-r1371-extra-group-recheck.json. Pending build.
+
+OPENNT-HOST-263: restore original logical source lines in the selected vdm.c projection, retaining its existing startup adaptation and excluding a false match between unrelated declaration terminators. Evidence: artifacts/mvdm-audit/s13-r1375-vdm.json, s13-r1375-vdm-recheck.json and s13-r1375-vdm-token-proof.json. Cached batch build and ten-image publication passed.

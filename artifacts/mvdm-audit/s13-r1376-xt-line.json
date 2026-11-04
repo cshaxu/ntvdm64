@@ -1,0 +1,9 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/xt.h",
+  "before_sha256": "4ff5d360619174392b5c3d9a352a0ecd8c79f156a6f6dcf86d2af1847de28eaa",
+  "after_sha256": "2f1299c8bc486a8243505e57273aef9edc08e4c2683a15ab1a5d863bc3c9becd",
+  "original_sha256": "c5b376f59d45ddb6ca36aa66e96e095203a261b125bd6a34247d6c88e98cb111",
+  "insert_before_current_line": 56,
+  "original_line": 52,
+  "reason": "The SOFTWINDOWS alternative is excluded; the selected SoftPC define originally starts at line 52."
+}

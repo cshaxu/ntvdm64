@@ -1,0 +1,27 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "before_sha256": "ce27e2cae0ded642be772388832e546d85cc66e1bbafcdfd524784699cf6cc88",
+      "original_sha256": "c5734d7842c34ae436cd12a5b52ad76d4fab88940a64f3af7e5fdc6fbc92e4a9",
+      "anchors": {
+        "132": 121,
+        "156": 138
+      },
+      "unresolved": [
+        [
+          155,
+          136,
+          143,
+          "    );"
+        ]
+      ],
+      "matched_lines": 233,
+      "extra_group_lines": [
+        115
+      ],
+      "after_sha256": "3f0dd6648c072517cc51e552c4357d0558112c891b6961ca24bab8aeb5859b9e",
+      "reason": "Restore two established line anchors; the unmatched closing token belongs to a different local declaration and is not mapped to the original unrelated declaration."
+    }
+  ]
+}

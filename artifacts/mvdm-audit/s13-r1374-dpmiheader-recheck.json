@@ -1,0 +1,16 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "current_sha256": "3f0dd6648c072517cc51e552c4357d0558112c891b6961ca24bab8aeb5859b9e",
+      "original_sha256": "c5734d7842c34ae436cd12a5b52ad76d4fab88940a64f3af7e5fdc6fbc92e4a9",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 232,
+      "extra_group_lines": [
+        115
+      ]
+    }
+  ],
+  "held": {}
+}

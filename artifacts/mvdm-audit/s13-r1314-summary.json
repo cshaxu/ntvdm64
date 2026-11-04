@@ -22,7 +22,7 @@
   },
   "files_with_unobserved_retained": 5,
   "files_with_ambiguous_error_line": 0,
-  "different_files_selected_lines_not_fully_certified": 119,
+  "different_files_selected_lines_not_fully_certified": 115,
   "limitation": "Marker hits are observed compile contexts, not proof of every supported configuration. A hit requires retention; no hit is not proof of exclusion. Selected-line mapping for differing files is not completely certified.",
   "zero_branch_differing_files_scanned": 373,
   "zero_branch_files_with_unique_line_mismatches": 0,
@@ -59,7 +59,7 @@
   "batch_r1333_error_anchors_verified": 25,
   "differing_condition_tree_and_selected_projection_audited": 108,
   "r1334_tree_only_local_difference_pending": 1,
-  "differing_files_condition_and_matching_code_audited_total": 756,
+  "differing_files_condition_and_matching_code_audited_total": 760,
   "r1335_original_tree_and_matching_code_audited": 10,
   "r1336_original_tree_and_matching_code_audited": 10,
   "r1337_original_tree_and_matching_code_audited": 10,
@@ -81,5 +81,6 @@
   "r1365_shadowed_gdp_guard_reviewed": 1,
   "r1368_extra_group_tree_reviewed": 14,
   "r1369_extra_group_tree_reviewed": 9,
-  "r1370_registered_group_reviewed": 3
+  "r1370_registered_group_reviewed": 3,
+  "r1371_extra_group_tree_reviewed": 4
 }

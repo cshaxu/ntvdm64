@@ -129,6 +129,7 @@ BOOL BaseCreateVDMEnvironment(
                     if (dw > Length) dwRemain -= dw - Length;
                 }
                 *pDst++ = *pEnv++;
+#line 68
             }
         }
         *pDst++ = UNICODE_NULL;
@@ -169,8 +170,10 @@ UINT BaseGetEnvNameType_U(WCHAR *Name, DWORD NameLength)
             NameType = EnvInfoTable[i].NameType;
             break;
         }
+#line 85
     }
     return NameType;
+#line 88
 }
 
 #endif
@@ -178,6 +181,7 @@ UINT BaseGetEnvNameType_U(WCHAR *Name, DWORD NameLength)
 #if defined(OPENNT_BASE_CLIENT_VDM_COMMANDS)
 #include "ntsrv-exe/opennt/include/base_client.h"
 
+#line 338
 BOOL
 APIENTRY
 GetNextVDMCommand(
@@ -890,6 +894,7 @@ Return Value:
     return;
 }
 
+#line 1274
 BOOL
 BaseCheckVDM(
     IN	ULONG BinaryType,
@@ -1409,14 +1414,16 @@ Return Value:
                                                  );
             if (lpAllocatedReserved) {
 
-                swprintf(lpAllocatedReserved,
-                         L"hotkey.%u %s",
                          /* DIVERGENCE(OPENNT-HOST-065): STARTF_USEHOTKEY
                           * carries a DWORD number, not a process handle. */
+#line 1793
+                swprintf(lpAllocatedReserved,
+                         L"hotkey.%u %s",
                          (DWORD)(ULONG_PTR) lpStartupInfo->hStdInput,
                          lpStartupInfo->lpReserved ? lpStartupInfo->lpReserved : L""
                          );
 
+#line 1799
                 lpStartupInfo->dwFlags &= ~STARTF_USEHOTKEY;
                 lpStartupInfo->hStdInput = 0;
                 lpStartupInfo->lpReserved = lpAllocatedReserved;
@@ -1785,6 +1792,7 @@ BaseUpdateVDMEntry(
 	case UPDATE_VDM_UNDO_CREATION:
     	/* DIVERGENCE(OPENNT-HOST-065): this branch carries a numeric task ID. */
     	c->iTask = (ULONG)(ULONG_PTR)*WaitHandle;
+#line 2166
 	    c->VDMCreationState = (USHORT)IndexInfo;
 	    break;
 	case UPDATE_VDM_PROCESS_HANDLE:
@@ -1834,6 +1842,7 @@ BaseUpdateVDMEntry(
  * the original argument construction and all remaining body text are kept. */
 #if defined(OPENNT_BASE_CLIENT_VDM_COMMANDS)
 #include <base_config.h>
+#line 2275
 BOOL
 BaseGetVdmConfigInfo(
     IN  LPCWSTR CommandLine,
@@ -2026,6 +2035,7 @@ Notes:
         /* DIVERGENCE(OPENNT-HOST-065): retain byte-count arithmetic in this
          * selected translation unit without narrowing either address. */
         Len = MAX_PATH + MAX_VDM_CFG_LINE - (ULONG)(pWowKernel - NewCmdLine) -1;
+#line 2465
         dw = GetShortPathNameA(pWowKernel, pWowKernel, Len);
         if (dw > Len) {
             RtlFreeHeap(RtlProcessHeap(), 0, NewCmdLine);
@@ -2049,6 +2059,7 @@ Notes:
 
 /* DIVERGENCE(OPENNT-HOST-014): original launcher task-exit query. */
 #if defined(OPENNT_BASE_CLIENT_VDM_COMMANDS)
+#line 2489
 BOOL
 BaseCheckForVDM(
     IN HANDLE hProcess,
@@ -2183,6 +2194,7 @@ Return Value:
                     FILE_SYNCHRONOUS_IO_NONALERT | FILE_NON_DIRECTORY_FILE
                     );
         if (!NT_SUCCESS(Status) ) {
+#line 2557
             BaseSetLastNTError(Status);
             goto GBTtryexit;
             }
@@ -2233,6 +2245,7 @@ Return Value:
                     if (!fBinaryType){
                         BaseSetLastNTError(Status);
                         goto GBTtryexit;
+#line 2592
 		    }
 		    fBinaryType = (fBinaryType	== BINARY_TYPE_DOS_PIF) ?
 				  SCS_PIF_BINARY : SCS_DOS_BINARY;
@@ -2295,6 +2308,7 @@ Return Value:
             }
 
 
+#line 2596
         }
 
 	*lpBinaryType = fBinaryType;
@@ -2303,6 +2317,7 @@ Return Value:
 
 GBTtryexit:;
 	}
+#line 2598
     finally {
 
         if (SectionHandle)
@@ -2312,6 +2327,7 @@ GBTtryexit:;
             RtlFreeHeap(RtlProcessHeap(), 0,FreeBuffer);
     }
     return bReturn;
+#line 2604
 }
 
 ULONG
@@ -2373,6 +2389,7 @@ Return Value:
 	return BINARY_TYPE_DOS_EXE;
 
     return 0;
+#line 2892
 }
 #endif
 

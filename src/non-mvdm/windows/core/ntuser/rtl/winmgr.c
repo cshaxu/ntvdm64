@@ -27,6 +27,7 @@ BOOL NeedsWindowEdge(DWORD dwStyle, DWORD dwExStyle, BOOL fNewApp)
 
         case WS_CAPTION:
             fGetsWindowEdge = fNewApp;
+#line 482
             break;
     }
 
@@ -38,6 +39,7 @@ BOOL NeedsWindowEdge(DWORD dwStyle, DWORD dwExStyle, BOOL fNewApp)
 /* OPENNT-HOST-091: unchanged original border arithmetic. */
 #include "wow_default_window_bindings.h"
 #define gpsi (&wow_default_current->server)
+#line 501
 int GetWindowBorders(LONG lStyle, DWORD dwExStyle, BOOL fWindow, BOOL fClient)
 {
     int cBorders = 0;
@@ -79,6 +81,7 @@ int GetWindowBorders(LONG lStyle, DWORD dwExStyle, BOOL fWindow, BOOL fClient)
 
 #if !defined(WOW_ORIGINAL_DEFAULT_GEOMETRY)
 /* OPENNT-HOST-106: original traversal, no fresh HWND sampling. */
+#line 703
 PWND GetTopLevelWindow(
     PWND pwnd)
 {

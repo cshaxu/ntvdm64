@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/base/win32/client/vdm.c",
+  "method": "Compare lexical tokens after preprocessing line splices and removing whitespace, C comments and #line directives; preserve literals.",
+  "before_sha256": "d2d91e25dfb5c16f7795f3439040a42e1e015ba33f4b75c066716a540a9620bb",
+  "after_sha256": "9a369f51a4fc57196e8c758a87d10e36f051eb3439aba2d0d2ead7daee5462d6",
+  "token_count": 9187,
+  "equal": true
+}

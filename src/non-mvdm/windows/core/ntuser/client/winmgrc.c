@@ -7,6 +7,7 @@
 
 #ifdef WOW_ORIGINAL_EDIT_CLIENT
 /* OPENNT-HOST-108: original dialog geometry, unchanged. */
+#line 550
 BOOL _AdjustWindowRectEx(
     LPRECT lprc,
     LONG style,

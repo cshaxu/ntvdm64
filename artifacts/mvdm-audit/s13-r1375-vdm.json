@@ -1,0 +1,62 @@
+{
+  "records": [
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "before_sha256": "d2d91e25dfb5c16f7795f3439040a42e1e015ba33f4b75c066716a540a9620bb",
+      "original_sha256": "3f03d0dbb08e0163f2d9cf415daad0981e42e1b1855f6f48a3b59022b7374173",
+      "anchors": {
+        "131": 68,
+        "171": 85,
+        "173": 88,
+        "180": 338,
+        "892": 1274,
+        "1419": 1799,
+        "1787": 2166,
+        "1836": 2275,
+        "2028": 2465,
+        "2051": 2489,
+        "2185": 2557,
+        "2235": 2592,
+        "2297": 2596,
+        "2305": 2598,
+        "2314": 2604,
+        "2375": 2892,
+        "1413": 1793
+      },
+      "unresolved": [
+        [
+          42,
+          32,
+          42,
+          "    )"
+        ],
+        [
+          1417,
+          1796,
+          1798,
+          "                         lpStartupInfo->lpReserved ? lpStartupInfo->lpReserved : L\"\""
+        ],
+        [
+          1418,
+          1797,
+          1799,
+          "                         );"
+        ]
+      ],
+      "matched_lines": 1944,
+      "extra_group_lines": [
+        35,
+        178,
+        1835,
+        2051,
+        2095,
+        2214,
+        2220,
+        2278,
+        2284
+      ],
+      "after_sha256": "9a369f51a4fc57196e8c758a87d10e36f051eb3439aba2d0d2ead7daee5462d6",
+      "reason": "Move the existing local comment before the original swprintf call and align its argument lines; disregard closing parenthesis matched to a different function."
+    }
+  ]
+}

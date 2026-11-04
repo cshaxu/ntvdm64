@@ -1,0 +1,24 @@
+{
+  "records": [
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "current_sha256": "9a369f51a4fc57196e8c758a87d10e36f051eb3439aba2d0d2ead7daee5462d6",
+      "original_sha256": "3f03d0dbb08e0163f2d9cf415daad0981e42e1b1855f6f48a3b59022b7374173",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 1943,
+      "extra_group_lines": [
+        35,
+        181,
+        1843,
+        2061,
+        2106,
+        2226,
+        2232,
+        2291,
+        2297
+      ]
+    }
+  ],
+  "held": {}
+}

@@ -13,8 +13,10 @@
  * The group private precomp binds window identity/state, creation, navigation
  * and native leaves. Other manager families are not selected by this slice.
  * This staged unit is not yet part of the production graph. */
+#line 12
 #include "precomp.h"
 
+#line 22
 #define IsInForegroundQueue(hwnd) \
     ((BOOL)NtUserQueryWindow(hwnd, WindowIsForegroundThread))
 #define IsCurrentThreadForeground() \
@@ -318,6 +320,7 @@ int InternalDialogBox(
 #if defined(WOW_ORIGINAL_DIALOG_MANAGER)
 LOOKASIDE DialogLookaside;
 
+#line 41
 PWND GetParentDialog(PWND pwndDialog)
 {
     PWND    pwndParent;
@@ -351,6 +354,7 @@ PWND GetParentDialog(PWND pwndDialog)
     return(pwndParent);
 }
 
+#line 81
 BOOL xxxSaveDlgFocus(
     PWND pwnd)
 {
@@ -367,6 +371,7 @@ BOOL xxxSaveDlgFocus(
     return FALSE;
 }
 
+#line 108
 BOOL xxxRestoreDlgFocus(
     PWND pwnd)
 {
@@ -374,6 +379,7 @@ BOOL xxxRestoreDlgFocus(
     HWND hwndFocusSave;
     /* DIVERGENCE(OPENNT-HOST-119): retain the saved target across callbacks. */
     PWND pwndFocusSave;
+#line 113
     BOOL fRestored = FALSE;
 
     CheckLock(pwnd);
@@ -395,6 +401,7 @@ BOOL xxxRestoreDlgFocus(
                     if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return fRestored;
                 }
             }
+#line 125
         }
 
         PDLG(pwnd)->hwndFocusSave = NULL;
@@ -403,22 +410,27 @@ BOOL xxxRestoreDlgFocus(
     return fRestored;
 }
 
+#line 140
 void DlgSetFocus(
     HWND hwnd)
 {
     /* DIVERGENCE(OPENNT-HOST-119): pin exact identity before native callbacks. */
     PWND pwnd = ValidateHwnd(hwnd);
     if (!pwnd) return;
+#line 143
     if (((UINT)SendMessage(hwnd, WM_GETDLGCODE, 0, 0)) & DLGC_HASSETSEL) {
         /* DIVERGENCE(OPENNT-HOST-119): query may destroy/reuse its HWND. */
         if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return;
+#line 144
         SendMessage(hwnd, EM_SETSEL, 0, MAXLONG);
     }
     /* DIVERGENCE(OPENNT-HOST-119): selection may also destroy the target. */
     if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return;
+#line 147
     NtUserSetFocus(hwnd);
 }
 
+#line 180
 BOOL ValidateDialogPwnd(
     PWND pwnd)
 {
@@ -454,6 +466,7 @@ BOOL ValidateDialogPwnd(
     if (!wow_dialog_host_initialize(HW(pwnd)))
         return FALSE;
 #endif
+#line 209
     if (sfInit) {
         if (!NT_SUCCESS(InitLookaside(&DialogLookaside, sizeof(DLG), 2))) {
             return FALSE;
@@ -481,6 +494,7 @@ BOOL ValidateDialogPwnd(
     return TRUE;
 }
 
+#line 446
 LONG DefDlgProcWorker(
     PWND pwnd,
     UINT message,
@@ -701,6 +715,7 @@ LONG DefDlgProcWorker(
                 /* DIVERGENCE(OPENNT-HOST-119): failure may mean nested destruction. */
                 if (TestWF(pwndT1, WFDESTROYED) || (pwndT1->fnid & FNID_STATUS_BITS)) break;
 
+#line 648
                 pwndT = _GetNextDlgTabItem(pwndT1, NULL, FALSE);
                 DlgSetFocus(HW(pwndT));
             }
@@ -794,6 +809,7 @@ DoCleanup:
 //                if (PDLG(pwnd)->spwndFocusSave) {
 //                    Lock(&(PDLG(pwnd)->spwndFocusSave), pwndT2);
 //                }
+#line 739
             }
             ThreadUnlock(&tlpwndT1);
             return TRUE;
@@ -872,6 +888,7 @@ DoCleanup:
                     !TestWF(pwndT2, WFDESTROYED) && !(pwndT2->fnid & FNID_STATUS_BITS))
                 xxxCheckDefPushButton(pwndTop, HW(pwndT2), HW(pwndT1));
 
+#line 813
             ThreadUnlock(&tlpwndT2);
             ThreadUnlock(&tlpwndT1);
             ThreadUnlock(&tlpwndTop);
@@ -1041,6 +1058,7 @@ LONG WINAPI DefDlgProcA(
     return DefDlgProcWorker(pwnd, message, wParam, lParam, TRUE);
 }
 
+#line 1293
 void RepositionRect(LPRECT lprc, DWORD dwStyle, DWORD dwExStyle)
 {
     LPRECT lprcClip;
@@ -1081,6 +1099,7 @@ UseScreenRect:
         OffsetRect(lprc, lprcClip->left - lprc->left, 0);
 }
 
+#line 1339
 BOOL MapDialogRect(
     HWND hwnd,
     LPRECT lprc)

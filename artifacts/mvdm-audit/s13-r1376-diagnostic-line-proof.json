@@ -1,0 +1,64 @@
+{
+  "classification": "diagnostic-line-immediates-only plus PE/debug timestamps",
+  "old_sha256": "da567caec57499b2bd328e6b2e863c422944be92e9c31b51967ac6cd1be3db51",
+  "new_sha256": "55ccfb3231acac1d36d648b8bf6cb7555e4d43d1faced87d6ba73dcc52d4ad2c",
+  "source": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+  "source_file_pointer": "0x59b880",
+  "source_file_string": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_event.c",
+  "cases": [
+    {
+      "offset": "0x50ded",
+      "old": {
+        "physical": 541,
+        "logical": 511,
+        "code": "DisplayErrorTerm(EHS_FUNC_FAILED,ERROR_ARITHMETIC_OVERFLOW,__FILE__,__LINE__);"
+      },
+      "new": {
+        "physical": 554,
+        "logical": 497,
+        "code": "DisplayErrorTerm(EHS_FUNC_FAILED,ERROR_ARITHMETIC_OVERFLOW,__FILE__,__LINE__);"
+      }
+    },
+    {
+      "offset": "0x50f97",
+      "old": {
+        "physical": 488,
+        "logical": 458,
+        "code": "DisplayErrorTerm(EHS_FUNC_FAILED,ERROR_INVALID_DATA,__FILE__,__LINE__);"
+      },
+      "new": {
+        "physical": 498,
+        "logical": 446,
+        "code": "DisplayErrorTerm(EHS_FUNC_FAILED,ERROR_INVALID_DATA,__FILE__,__LINE__);"
+      }
+    },
+    {
+      "offset": "0x51254",
+      "old": {
+        "physical": 428,
+        "logical": 398,
+        "code": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);"
+      },
+      "new": {
+        "physical": 437,
+        "logical": 390,
+        "code": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);"
+      }
+    },
+    {
+      "offset": "0x51264",
+      "old": {
+        "physical": 447,
+        "logical": 417,
+        "code": "DisplayErrorTerm(EHS_FUNC_FAILED,status,__FILE__,__LINE__);"
+      },
+      "new": {
+        "physical": 456,
+        "logical": 409,
+        "code": "DisplayErrorTerm(EHS_FUNC_FAILED,status,__FILE__,__LINE__);"
+      }
+    }
+  ],
+  "exhaustive_non_timestamp_bytes": 4,
+  "explanation": "Each changed byte is part of a push-immediate line argument immediately followed by the same source-file pointer and identifies an unchanged DisplayErrorTerm call."
+}

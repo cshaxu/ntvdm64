@@ -130,6 +130,7 @@ DpmiCpu40GetDosxIdtDescriptor(
 
 #endif
 #endif
+#line 121
 extern ULONG DosxIret;
 extern ULONG DosxIretd;
 
@@ -154,6 +155,7 @@ DpmiSetWowLdtEntry(
     ULONG EntryHigh
     );
 
+#line 138
 VOID
 DpmiGetFastBopEntry(
     VOID

@@ -1,0 +1,140 @@
+{
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "before_sha256": "a0f66436974af49a2c42562ae334ee6816a43db0eea8f2a1ef7907909e1e0c79",
+      "original_sha256": "8e2383f52e4e3f65f656bd492143d7a8ed5d0a2526ad8e6af10d242465ff8d7a",
+      "anchors": {
+        "15": 12,
+        "17": 22,
+        "320": 41,
+        "353": 81,
+        "369": 108,
+        "376": 113,
+        "397": 125,
+        "405": 140,
+        "411": 143,
+        "414": 144,
+        "418": 147,
+        "421": 180,
+        "456": 209,
+        "483": 446,
+        "703": 648,
+        "796": 739,
+        "874": 813,
+        "1043": 1293,
+        "1083": 1339
+      },
+      "matched_lines": 738,
+      "extra_group_lines": [
+        318,
+        451,
+        512,
+        529,
+        946,
+        1002
+      ],
+      "after_sha256": "933243dec8d169d707b1c4d7bd314f309fd035d922797fcd65475a4a4c00c79a"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "before_sha256": "49702b12312820f0d62604dadcd8f0ffdd7428ae7ef8219e41e9574e4e52aa2f",
+      "original_sha256": "a3e9286c40e4e11ec872fd9b2d7b23cba640f09fb4840c4e6130e301d5277b9e",
+      "anchors": {
+        "13": 11,
+        "15": 24,
+        "46": 49,
+        "55": 53,
+        "108": 103,
+        "134": 126,
+        "147": 136,
+        "158": 144,
+        "173": 156,
+        "183": 163,
+        "198": 176,
+        "204": 180,
+        "227": 200,
+        "236": 213,
+        "272": 245,
+        "282": 254,
+        "325": 313,
+        "339": 325,
+        "432": 413,
+        "508": 485,
+        "525": 499,
+        "573": 538,
+        "580": 541,
+        "587": 546,
+        "595": 550,
+        "612": 559,
+        "621": 565,
+        "643": 584,
+        "649": 586,
+        "663": 597,
+        "685": 618,
+        "704": 645
+      },
+      "matched_lines": 587,
+      "extra_group_lines": [
+        236,
+        251,
+        257,
+        270,
+        316
+      ],
+      "after_sha256": "4e4e2bcc90ff33aa6b8abc02f4f04f355945899d42a48156a0d1adbf1f0c87d0"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "before_sha256": "fe9a83fff74597c0799da733cf4e9a620163161c7bd65a61eab5da2ecf9b23bb",
+      "original_sha256": "171ef0b7cd668cf51db86d9ae2fea4269cc002f0aba17033bf968d84c10f0f3d",
+      "anchors": {
+        "8": 73,
+        "38": 101,
+        "240": 295,
+        "436": 489,
+        "445": 501,
+        "451": 536
+      },
+      "matched_lines": 457,
+      "extra_group_lines": [
+        7,
+        154,
+        196,
+        441,
+        451
+      ],
+      "after_sha256": "9b2713753efec2cd80c7d9cb25a283702169c66ea5c42b2837be8530964a3de2"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+      "before_sha256": "fa5b38f11ecaaa885ea92417dc9d3f50a139edbac969264e5593b3e02069652a",
+      "original_sha256": "26f0174e6a0db53d942506cbdc12efbfebc34a943d780170e7bf9d95775514a4",
+      "anchors": {
+        "9": 550
+      },
+      "matched_lines": 54,
+      "extra_group_lines": [
+        8
+      ],
+      "after_sha256": "95d079adb6003257491878a40822c0c52a994217d5e21dce11b93f4ba838430c"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+      "before_sha256": "fc4b115e7bbea367800abbebdeae1a94de478b79b6c12db2fdfb5723431f10db",
+      "original_sha256": "d7e87476cc3e703c94b88d53b9a0761642b284a6776c0152738daf4c74290d2b",
+      "anchors": {
+        "29": 482,
+        "40": 501,
+        "81": 703
+      },
+      "matched_lines": 58,
+      "extra_group_lines": [
+        8,
+        37,
+        80
+      ],
+      "after_sha256": "b33e839ce75cb2aabf205d786097de36c693b9f09e497899b8dc71880d2acea0"
+    }
+  ]
+}

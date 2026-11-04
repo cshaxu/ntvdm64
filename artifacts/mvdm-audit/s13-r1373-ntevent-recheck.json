@@ -1,0 +1,17 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "current_sha256": "63ce829ae4040ddea069a40bbc5b4ca31351ea1d6e7b138b4a2f40d5d8625cb3",
+      "original_sha256": "7f555a87ba029627d6811c0f7b96964bb8a96af90c60c89012975a4ac5442076",
+      "anchors": {},
+      "unresolved": [],
+      "matched_lines": 1792,
+      "extra_group_lines": [
+        1485,
+        1520
+      ]
+    }
+  ],
+  "held": {}
+}
