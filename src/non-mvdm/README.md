@@ -1,5 +1,11 @@
 # non-mvdm original OpenNT sources
 
+OPENNT-HOST-169: reject the unobserved C++ linkage alternatives in the NT4
+RTL subset `public/sdk/inc/ntrtl.h`; current host inclusion is C, while
+other C++ components remain unchanged. See
+`../../artifacts/mvdm-audit/s13-r1314-final-audit.md` for context evidence
+and limits.
+
 OPENNT-HOST-168 splits the local state-drawing selector around the two original
 literal-disabled `mngrayc.c` conditions, restoring their first-depth
 positions and logical continuations. Their excluded bodies remain `#error`;

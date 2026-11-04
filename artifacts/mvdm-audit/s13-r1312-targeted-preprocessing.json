@@ -1,0 +1,423 @@
+{
+  "scope": "Previously historically-unhit branches; current product plus call-boundary fixtures and standalone PIF addon",
+  "target_files": 16,
+  "contexts": 22,
+  "equivalent": 22,
+  "counts": {
+    "current-hit": 10,
+    "current-no-hit": 17
+  },
+  "results": [
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkman.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/wkman.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "e1df8cfb7e8027a5a59301ea9aef59e4059ee58c1126495e5a61101a2afe101c",
+      "probe_sha256": "e1df8cfb7e8027a5a59301ea9aef59e4059ee58c1126495e5a61101a2afe101c",
+      "marks": [
+        258
+      ],
+      "files": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        10,
+        11
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/ntstubs.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "b059a3fec6442f9ecaa194d8d49da83b2f9ae26a9242ed9f9fb7829ca7685308",
+      "probe_sha256": "b059a3fec6442f9ecaa194d8d49da83b2f9ae26a9242ed9f9fb7829ca7685308",
+      "marks": [],
+      "files": [
+        10,
+        12
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/control-text.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "6065a7e0d8ba8e704d7d639faa910cc1a1621f6f76aa746a0ef6fb4dcb4b1282",
+      "probe_sha256": "6065a7e0d8ba8e704d7d639faa910cc1a1621f6f76aa746a0ef6fb4dcb4b1282",
+      "marks": [],
+      "files": [
+        10,
+        12,
+        13
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/control-color.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "d2d403362f6ed73cfac34be78f2e213221fa9989c39b82070f0f68c2e6f8984e",
+      "probe_sha256": "d2d403362f6ed73cfac34be78f2e213221fa9989c39b82070f0f68c2e6f8984e",
+      "marks": [],
+      "files": [
+        10,
+        12
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/control-brush-client.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "c0aae46a860afc621ed43fe94db1dc594ae7fcc5d62660f5aa857d4a8288558a",
+      "probe_sha256": "c0aae46a860afc621ed43fe94db1dc594ae7fcc5d62660f5aa857d4a8288558a",
+      "marks": [],
+      "files": [
+        10,
+        12
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/private-word-client.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "eae12fd22a2fd024848d76a51ce3b1a7b6833c2506441b6aba510b2b461837b9",
+      "probe_sha256": "eae12fd22a2fd024848d76a51ce3b1a7b6833c2506441b6aba510b2b461837b9",
+      "marks": [],
+      "files": [
+        10,
+        12,
+        13
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/ccpu/c_main.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "b8a5400e97567223c9e0df7bd3bd7bf833067d6384d736ed1e84c1913c9f7bb1",
+      "probe_sha256": "b8a5400e97567223c9e0df7bd3bd7bf833067d6384d736ed1e84c1913c9f7bb1",
+      "marks": [],
+      "files": [
+        6,
+        10
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/sasCdef.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/ccpu/sasCdef.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "7bc8dd03f34b027e6222fce36f1e5bfd63afe9401a01478aff5a5092a27a469e",
+      "probe_sha256": "7bc8dd03f34b027e6222fce36f1e5bfd63afe9401a01478aff5a5092a27a469e",
+      "marks": [],
+      "files": [
+        7,
+        10
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/bios/tape_io.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "a910f81bb0f87c30e1c8362f76ea5dc59e1fb56c3101961fced2a3cc065cf516",
+      "probe_sha256": "a910f81bb0f87c30e1c8362f76ea5dc59e1fb56c3101961fced2a3cc065cf516",
+      "marks": [
+        267
+      ],
+      "files": [
+        1,
+        10
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdpif.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/command/cmdpif.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "771ec91ad1d46f7cfcf8e607c1e9cba1a27bd6a60d5ed54cde84f7b728778715",
+      "probe_sha256": "771ec91ad1d46f7cfcf8e607c1e9cba1a27bd6a60d5ed54cde84f7b728778715",
+      "marks": [
+        258
+      ],
+      "files": [
+        0,
+        9,
+        10
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/host/copy_fnc.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "3a3dc0ef893daa82fd4979669b996029f0db8059faf37b72ac7f8534163c15a0",
+      "probe_sha256": "3a3dc0ef893daa82fd4979669b996029f0db8059faf37b72ac7f8534163c15a0",
+      "marks": [
+        5091
+      ],
+      "files": [
+        8,
+        10
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/private-word-reader.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "f8078289859a956edd632c209dd07a72b7f9cd99ee6aac3e894a03da890cf7cb",
+      "probe_sha256": "f8078289859a956edd632c209dd07a72b7f9cd99ee6aac3e894a03da890cf7cb",
+      "marks": [],
+      "files": [
+        10,
+        13,
+        15
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/private-word-setter.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "5d596b3d4a0805583fa55d38a1388dd5a4b0532353e6352440e870828e3e9c23",
+      "probe_sha256": "5d596b3d4a0805583fa55d38a1388dd5a4b0532353e6352440e870828e3e9c23",
+      "marks": [],
+      "files": [
+        10,
+        13,
+        14
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\call-boundaries",
+      "object": "obj/color_client.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "cf894a9f77004b193e5e43ed2ab82dd2cc7315e98f827e7b4332c2e1ca59f2c4",
+      "probe_sha256": "cf894a9f77004b193e5e43ed2ab82dd2cc7315e98f827e7b4332c2e1ca59f2c4",
+      "marks": [],
+      "files": [
+        12
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\call-boundaries",
+      "object": "obj/brush_client.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "19e372a8d09d3b3d14ff370617001fb168ea1ebf56347a6bb3b43c4f18195b72",
+      "probe_sha256": "19e372a8d09d3b3d14ff370617001fb168ea1ebf56347a6bb3b43c4f18195b72",
+      "marks": [],
+      "files": [
+        12
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\call-boundaries",
+      "object": "obj/getset_reader.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "59e2f0751ce68ec96087988f88540d07b7136e106c4fc82601259b66077e6d5b",
+      "probe_sha256": "59e2f0751ce68ec96087988f88540d07b7136e106c4fc82601259b66077e6d5b",
+      "marks": [
+        7034,
+        7562,
+        7564,
+        7567
+      ],
+      "files": [
+        13,
+        15
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\call-boundaries",
+      "object": "obj/getset_client.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "052c346436311effdb8c4dbf5189bb50580ac576a18e24397705499f1b1c0b6f",
+      "probe_sha256": "052c346436311effdb8c4dbf5189bb50580ac576a18e24397705499f1b1c0b6f",
+      "marks": [
+        6990,
+        7034
+      ],
+      "files": [
+        12,
+        13
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\call-boundaries",
+      "object": "obj/getset_server.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "424d20f8c79a17bb07ec559a2ac6c5e6a6f7a426935d1788f68d2a9e99bfe8d8",
+      "probe_sha256": "424d20f8c79a17bb07ec559a2ac6c5e6a6f7a426935d1788f68d2a9e99bfe8d8",
+      "marks": [
+        7034,
+        7204
+      ],
+      "files": [
+        13,
+        14
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\call-boundaries",
+      "object": "obj/native_getset_reader.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "af30bd8a3a5acd938f63b6e7527a57ab7829eeee0dca2e949a846491aeb4e53b",
+      "probe_sha256": "af30bd8a3a5acd938f63b6e7527a57ab7829eeee0dca2e949a846491aeb4e53b",
+      "marks": [
+        7034
+      ],
+      "files": [
+        13,
+        15
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\call-boundaries",
+      "object": "obj/native_getset_client.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "c828c48405f27846b0259f789983b65dc84d7a97d40bfeeeb0f7be332153b30f",
+      "probe_sha256": "c828c48405f27846b0259f789983b65dc84d7a97d40bfeeeb0f7be332153b30f",
+      "marks": [
+        7034
+      ],
+      "files": [
+        12,
+        13
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\call-boundaries",
+      "object": "obj/native_getset_server.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "7e158a3bedefa32bfe81a6fc678a13be4fe91db78a32dbc0eb31ee8e24334d83",
+      "probe_sha256": "7e158a3bedefa32bfe81a6fc678a13be4fe91db78a32dbc0eb31ee8e24334d83",
+      "marks": [
+        7034
+      ],
+      "files": [
+        13,
+        14
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/addon/pif/pif.c",
+      "directory": "O:\\repos.hobby\\ntvdm64",
+      "object": "pif-audit-only",
+      "arch": "x64",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "1b6594cb7a62c1ad09fedd3cd93df3424325d801b538ab3207004d7e29c473b8",
+      "probe_sha256": "1b6594cb7a62c1ad09fedd3cd93df3424325d801b538ab3207004d7e29c473b8",
+      "marks": [
+        6664
+      ],
+      "files": [
+        9
+      ],
+      "error": ""
+    }
+  ],
+  "limits": [
+    "Unhit in these selected contexts is not proof of exclusion from all supported configurations or guest usage."
+  ]
+}

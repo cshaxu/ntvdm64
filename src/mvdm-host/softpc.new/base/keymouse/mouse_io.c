@@ -6094,6 +6094,7 @@ LOCAL void jump_to_user_subroutine IFN3(MOUSE_CALL_MASK,condition_mask,word,segm
 	 * that entry.  Keep HOST_BOP_IP_FUDGE for its other, actual BOP callers. */
 	setIP(offset);
 #else
+#line 6628
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 #endif /* !CPU_30_STYLE */

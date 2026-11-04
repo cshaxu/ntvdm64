@@ -23,6 +23,7 @@ IU32	mant:23;
 IU32	exp:8;
 IU32	sign:1;
 #else
+#line 19
 #error Unsupported excluded original configuration
 #endif
 #line 22
@@ -34,6 +35,7 @@ IU32	mant_hi:20;
 IU32	exp:11;
 IU32	sign:1;
 #else
+#line 25
 #error Unsupported excluded original configuration
 #endif
 #line 28
@@ -44,6 +46,7 @@ typedef struct {
 IU16	exp:15;
 IU16	sign:1;
 #else
+#line 31
 #error Unsupported excluded original configuration
 #endif
 #line 33
@@ -56,6 +59,7 @@ typedef struct {
 IU32	mant_lo;
 FP64HI	hiword;
 #else
+#line 38
 #error Unsupported excluded original configuration
 #endif
 #line 40
@@ -68,6 +72,7 @@ typedef struct {
 IU32 low_word;
 IS32 high_word;
 #else
+#line 44
 #error Unsupported excluded original configuration
 #endif
 #line 46
@@ -84,6 +89,7 @@ typedef struct {
 IU32	mant_lo;
 IU32	mant_hi;
 #else
+#line 55
 #error Unsupported excluded original configuration
 #endif
 #line 57

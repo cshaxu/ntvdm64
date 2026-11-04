@@ -1,0 +1,48 @@
+{
+  "x64_fixture": [
+    {
+      "source": "tests/adapter-mvdm-host-out/softpc/xms_mapped_memory_fixture.c",
+      "baseline_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "marks": [
+        267,
+        269
+      ],
+      "files": [
+        1,
+        10
+      ],
+      "error": ""
+    },
+    {
+      "source": "src/mvdm-host/xms.486/xmsmemr.c",
+      "baseline_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "marks": [
+        267,
+        269
+      ],
+      "files": [
+        1,
+        10
+      ],
+      "error": ""
+    }
+  ],
+  "diagnostic_context": {
+    "object": "obj/ccpu/c_main.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+    "flag": "/DMVDM_CCPU_DECODE_DIAGNOSTICS",
+    "baseline_exit": 0,
+    "probe_exit": 0,
+    "equivalent": true,
+    "marks": [
+      702
+    ],
+    "baseline_sha256": "cbc503ac99861efdb32821993a7cc18518f2bdb92d50d9ff3baff3f766c561ef",
+    "probe_sha256": "cbc503ac99861efdb32821993a7cc18518f2bdb92d50d9ff3baff3f766c561ef"
+  },
+  "limits": "Instrumented and uninstrumented preprocessor output matched. This is preprocessing evidence, not runtime execution."
+}

@@ -13,7 +13,8 @@
 
 #line 56
 #ifdef __cplusplus
-extern "C" {
+#line 57
+#error Unsupported C++ inclusion of the NT4 RTL subset
 #endif
 #line 59
 
@@ -337,7 +338,8 @@ RtlConvertLongToLuid(
 #line 6346
 #line 6333
 #ifdef __cplusplus
-}
+#line 6334
+#error Unsupported C++ inclusion of the NT4 RTL subset
 #endif
 #line 6336
 

@@ -503,8 +503,10 @@ IMPORT VOID dispatch_q_event();
 
 #ifndef SFELLOW
 #ifdef SYNCH_TIMERS
+#line 474
 #error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register.
 #else	/* !SYNCH_TIMERS */
+#line 497
 
 #define SYNCH_TICK()	/* Nothing */
 

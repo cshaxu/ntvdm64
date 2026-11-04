@@ -1,5 +1,12 @@
 # mvdm
 
+MVDM-HOST-DIV-635: reject the unobserved i386 kernel-VDM memory-size arm in
+`host/src/config.c` and the non-x86 host-access alternative in `inc/mvdm.h`;
+restore original diagnostic line anchors in `c_main.c`, `mouse_io.c`,
+`cfpu_def.h`, and `host_cpu.h`. The current selected CCPU paths are retained.
+Observed preprocessing and remaining audit limits are recorded in
+`../../artifacts/mvdm-audit/s13-r1314-final-audit.md`.
+
 MVDM-HOST-DIV-634: preserve the original `i386` host library-loader selector
 while rejecting the unsupported kernel-V86 alternative. The selected
 `LoadLibrary` mapping and original continuation lines are retained. Evidence:

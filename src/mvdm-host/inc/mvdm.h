@@ -78,10 +78,7 @@ typedef DWORD UNALIGNED *PDWORD16;
 #define STOREDWORD(d,s) (DWORD)d=(DWORD)s
 #else
 #line 79
-#define FETCHWORD(s)  (*(UNALIGNED WORD *)&(s))
-#define FETCHDWORD(s) (*(UNALIGNED DWORD *)&(s))
-#define STOREWORD(d,s)  *(UNALIGNED WORD *)&(d)=(WORD)s
-#define STOREDWORD(d,s) *(UNALIGNED DWORD *)&(d)=(DWORD)s
+#error Unsupported non-x86 MVDM host access profile
 #endif
 #endif
 #line 84

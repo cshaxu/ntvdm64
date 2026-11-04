@@ -1,0 +1,1463 @@
+{
+  "scope": "Targeted current equivalent preprocessing for previously unmapped nonempty branch conditions",
+  "target_files": 54,
+  "target_branches": 134,
+  "contexts": 52,
+  "equivalent": 52,
+  "current_hits": 132,
+  "unhit_original_i386_outer_and_inner": 2,
+  "disposition": "The old i386 outer arm is replaced by #error; inner condition is subsumed. One comment-spanning marker was re-run after moving the marker beyond the comment; baseline and instrumented output match.",
+  "contexts_evidence": [
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/host/nt_timer.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "cc4efb6566f694755e9243d88b0d2130b0ca9dfb4e5a289f191689aa71591a12",
+      "probe_sha256": "cc4efb6566f694755e9243d88b0d2130b0ca9dfb4e5a289f191689aa71591a12",
+      "marks": [
+        3195,
+        3200,
+        4969,
+        5544,
+        5548,
+        5550,
+        5559,
+        6691,
+        6692,
+        6707,
+        6734,
+        6739,
+        6785
+      ],
+      "files": [
+        7,
+        19,
+        20,
+        27,
+        31,
+        33,
+        34
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/control-body-dlgmgr2.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "c0809ef1828bb8bae442390ff3183d80b30ecc4f059d6d781a2adb157bc04ba0",
+      "probe_sha256": "c0809ef1828bb8bae442390ff3183d80b30ecc4f059d6d781a2adb157bc04ba0",
+      "marks": [
+        6734,
+        6739,
+        6894,
+        6895,
+        6897,
+        6899,
+        6964,
+        7032,
+        7041,
+        7043,
+        7045,
+        7047,
+        7145,
+        7569
+      ],
+      "files": [
+        33,
+        37,
+        38,
+        43,
+        46,
+        53
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmiint.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/dpmi/dpmiint.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "7795898e879633796e1b4fe2803f4afa472b917d3f4b251f7b074bebcfd13a81",
+      "probe_sha256": "7795898e879633796e1b4fe2803f4afa472b917d3f4b251f7b074bebcfd13a81",
+      "marks": [
+        184,
+        186,
+        200,
+        259,
+        6734,
+        6739,
+        6785
+      ],
+      "files": [
+        0,
+        1,
+        2,
+        33,
+        34
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/bios/tape_io.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "a910f81bb0f87c30e1c8362f76ea5dc59e1fb56c3101961fced2a3cc065cf516",
+      "probe_sha256": "a910f81bb0f87c30e1c8362f76ea5dc59e1fb56c3101961fced2a3cc065cf516",
+      "marks": [
+        268,
+        615,
+        616,
+        618,
+        626,
+        3195,
+        3200,
+        4969,
+        6734,
+        6739
+      ],
+      "files": [
+        3,
+        5,
+        7,
+        19,
+        20,
+        33
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/video.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/video/video.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "6e2c6b64b8f73581793611ae9116ff04d07d473437c4b977df8688d39b2c81bb",
+      "probe_sha256": "6e2c6b64b8f73581793611ae9116ff04d07d473437c4b977df8688d39b2c81bb",
+      "marks": [
+        2801,
+        3195,
+        3200,
+        4882,
+        4884,
+        4909,
+        4911,
+        4969,
+        4987,
+        6734,
+        6739
+      ],
+      "files": [
+        6,
+        7,
+        18,
+        19,
+        20,
+        33
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/queue.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "c0677329c61a31baee811824e784eda9cd74c05b75065dae16ebbd8065fced6f",
+      "probe_sha256": "c0677329c61a31baee811824e784eda9cd74c05b75065dae16ebbd8065fced6f",
+      "marks": [
+        6734,
+        6739,
+        7407,
+        7409,
+        7455,
+        7457
+      ],
+      "files": [
+        33,
+        49,
+        51
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/bios.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/bios/bios.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "394488075f4f83587673092a1f4ee0125b1084659b799fd83f20b755f37b8da5",
+      "probe_sha256": "394488075f4f83587673092a1f4ee0125b1084659b799fd83f20b755f37b8da5",
+      "marks": [
+        500,
+        3195,
+        3200,
+        4969,
+        4987,
+        6734,
+        6739
+      ],
+      "files": [
+        4,
+        7,
+        19,
+        20,
+        33
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/keymouse/keyba.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "b7e129a9bd5cbffa989b238301fae8baf56e6f534b09f07f0ec7c9a0a0990e0c",
+      "probe_sha256": "b7e129a9bd5cbffa989b238301fae8baf56e6f534b09f07f0ec7c9a0a0990e0c",
+      "marks": [
+        268,
+        3195,
+        3200,
+        3331,
+        4969,
+        6734,
+        6739
+      ],
+      "files": [
+        3,
+        7,
+        8,
+        19,
+        20,
+        33
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/keymouse/mouse_io.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "0ffaf6017495fd2755c18647edd98e612ed61d0c6c6f6d43c135d6bac8a40141",
+      "probe_sha256": "0ffaf6017495fd2755c18647edd98e612ed61d0c6c6f6d43c135d6bac8a40141",
+      "marks": [
+        3195,
+        3200,
+        3505,
+        3506,
+        3515,
+        3516,
+        3520,
+        3521,
+        3529,
+        3530,
+        3563,
+        3564,
+        3568,
+        3569,
+        3581,
+        3582,
+        3608,
+        4969,
+        6734,
+        6739
+      ],
+      "files": [
+        7,
+        9,
+        19,
+        20,
+        33
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/system/ica.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/system/ica.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "6cd6fe820431623629c82bac71a8c88f333c05770f8c4626555f30a95506d21a",
+      "probe_sha256": "6cd6fe820431623629c82bac71a8c88f333c05770f8c4626555f30a95506d21a",
+      "marks": [
+        3195,
+        3200,
+        3807,
+        3865,
+        3869,
+        4969,
+        6734,
+        6739
+      ],
+      "files": [
+        7,
+        12,
+        19,
+        20,
+        33
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/system/qevnt.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "fa30a73be8cd1c4e045284cdecab0eb28095675fead083f092d37b472fcb63fa",
+      "probe_sha256": "fa30a73be8cd1c4e045284cdecab0eb28095675fead083f092d37b472fcb63fa",
+      "marks": [
+        3195,
+        3200,
+        3921,
+        3923,
+        3925,
+        3926,
+        3927,
+        3928,
+        4969,
+        6734,
+        6739,
+        6785
+      ],
+      "files": [
+        7,
+        13,
+        19,
+        20,
+        33,
+        34
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/system/rom.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/system/rom.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "54e5712ca397dcfbf7df1598af6575e36450ae744705ed6cad33bb1e1ffa8498",
+      "probe_sha256": "54e5712ca397dcfbf7df1598af6575e36450ae744705ed6cad33bb1e1ffa8498",
+      "marks": [
+        3195,
+        3200,
+        3959,
+        4969,
+        6734,
+        6739
+      ],
+      "files": [
+        7,
+        14,
+        19,
+        20,
+        33
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/support/ios.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/support/ios.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "b2406c1fb2695b20dcd690534d6b1f3efdb8e0b121c84b175ad23460dd628d28",
+      "probe_sha256": "b2406c1fb2695b20dcd690534d6b1f3efdb8e0b121c84b175ad23460dd628d28",
+      "marks": [
+        3195,
+        3200,
+        3656,
+        3657,
+        4969,
+        6734,
+        6739
+      ],
+      "files": [
+        7,
+        10,
+        19,
+        20,
+        33
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/support/main.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/support/main.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "6349c06406969f84fe00c651c2a067d5a9374c0dfe78ea2d7d49597a67666c5a",
+      "probe_sha256": "6349c06406969f84fe00c651c2a067d5a9374c0dfe78ea2d7d49597a67666c5a",
+      "marks": [
+        3195,
+        3200,
+        3696,
+        4969,
+        6734,
+        6739
+      ],
+      "files": [
+        7,
+        11,
+        19,
+        20,
+        33
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_vide.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/video/ega_vide.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "f6b58f13aee98462066dd77b05c8c8a73a2480860dfeffee15644d5bb2e196f7",
+      "probe_sha256": "f6b58f13aee98462066dd77b05c8c8a73a2480860dfeffee15644d5bb2e196f7",
+      "marks": [
+        3195,
+        3200,
+        4969,
+        6734,
+        6739
+      ],
+      "files": [
+        7,
+        15,
+        19,
+        20,
+        33
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/video/egawrtm0.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "cff4f151984dbcfa10b39042e14809614cf339f91ef5a7611f401516cc1d321e",
+      "probe_sha256": "cff4f151984dbcfa10b39042e14809614cf339f91ef5a7611f401516cc1d321e",
+      "marks": [
+        2801,
+        3195,
+        3200,
+        4405,
+        4406,
+        4969,
+        6734,
+        6739
+      ],
+      "files": [
+        6,
+        7,
+        16,
+        19,
+        20,
+        33
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/video/egwrtm12.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "6c3fde75d72c746ae60b8e4c7a3db490bfdb8cfab6ef91581f3f91bf94fcffb3",
+      "probe_sha256": "6c3fde75d72c746ae60b8e4c7a3db490bfdb8cfab6ef91581f3f91bf94fcffb3",
+      "marks": [
+        2801,
+        3195,
+        3200,
+        4419,
+        4420,
+        4969,
+        6734,
+        6739
+      ],
+      "files": [
+        6,
+        7,
+        17,
+        19,
+        20,
+        33
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/host/nt_msscs.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "f56ca2db5437d34a74145c695525df8e931dcc61f3cc952b12174d44b85ca907",
+      "probe_sha256": "f56ca2db5437d34a74145c695525df8e931dcc61f3cc952b12174d44b85ca907",
+      "marks": [
+        3195,
+        3200,
+        4969,
+        5451,
+        6734,
+        6739,
+        6785
+      ],
+      "files": [
+        7,
+        19,
+        20,
+        25,
+        33,
+        34
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/host/nt_bop.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "f67fb8cbb59ae7f59323ee978e9cb4c85530e07af019bcdc4aeff34ee95658b2",
+      "probe_sha256": "f67fb8cbb59ae7f59323ee978e9cb4c85530e07af019bcdc4aeff34ee95658b2",
+      "marks": [
+        3195,
+        3200,
+        4969,
+        5105,
+        5132,
+        5136,
+        6734,
+        6739,
+        6785
+      ],
+      "files": [
+        7,
+        19,
+        20,
+        22,
+        33,
+        34
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/host/nt_cpu.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "48392029794c110b51d3a3937686bd2456bdfa04eb156c6fda90b0db40c0b127",
+      "probe_sha256": "48392029794c110b51d3a3937686bd2456bdfa04eb156c6fda90b0db40c0b127",
+      "marks": [
+        3195,
+        3200,
+        4969,
+        5178,
+        5181,
+        6734,
+        6739,
+        6785
+      ],
+      "files": [
+        7,
+        19,
+        20,
+        23,
+        33,
+        34
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/config.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/host/config.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "4ee20db542eac4639ce69233a8cd20d617deaf909143e86e4ba54a4031af633c",
+      "probe_sha256": "4ee20db542eac4639ce69233a8cd20d617deaf909143e86e4ba54a4031af633c",
+      "marks": [
+        3195,
+        3200,
+        5073,
+        5080,
+        6734,
+        6739,
+        6785
+      ],
+      "files": [
+        7,
+        20,
+        21,
+        33,
+        34
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/host/nt_eoi.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "6cc21562ff4ca8e846a53311f401c9358678871259063432b39996563ab43b42",
+      "probe_sha256": "6cc21562ff4ca8e846a53311f401c9358678871259063432b39996563ab43b42",
+      "marks": [
+        3195,
+        3200,
+        4969,
+        5229,
+        5230,
+        5231,
+        5234,
+        5236,
+        5237,
+        5241,
+        6691,
+        6692,
+        6707,
+        6734,
+        6739,
+        6785
+      ],
+      "files": [
+        7,
+        19,
+        20,
+        24,
+        31,
+        33,
+        34
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/host/nt_reset.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "9797a96eccc623d8e15255b8471d4d3f4ff4d946bfd562506289fe6210bdbe80",
+      "probe_sha256": "9797a96eccc623d8e15255b8471d4d3f4ff4d946bfd562506289fe6210bdbe80",
+      "marks": [
+        3195,
+        3200,
+        4969,
+        5480,
+        5488,
+        6734,
+        6739,
+        6785
+      ],
+      "files": [
+        7,
+        19,
+        20,
+        26,
+        33,
+        34
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/base/win32/client/vdm.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/opennt-base-vdm/vdm.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "74b050e8b19e3f3b25e86fb3f85f92e243c92c9ad52dd218b5738fba748ab7d9",
+      "probe_sha256": "74b050e8b19e3f3b25e86fb3f85f92e243c92c9ad52dd218b5738fba748ab7d9",
+      "marks": [
+        6734,
+        6739
+      ],
+      "files": [
+        30,
+        33
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/base/win32/client/vdm.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/opennt-base-client/client.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "0151c97acfce0d49c94fae1aa211f720af3f6d1a28239985a40e96648ac6b6c6",
+      "probe_sha256": "0151c97acfce0d49c94fae1aa211f720af3f6d1a28239985a40e96648ac6b6c6",
+      "marks": [
+        6734,
+        6739
+      ],
+      "files": [
+        30,
+        33
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/base/win32/client/vdm.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/opennt-base-client/classifier.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "8030e1c3e8b12ec12c40eed88f750fdc3a5c3f3d3b8efb673bbabd1b85a5d285",
+      "probe_sha256": "8030e1c3e8b12ec12c40eed88f750fdc3a5c3f3d3b8efb673bbabd1b85a5d285",
+      "marks": [
+        6348,
+        6349,
+        6352,
+        6353,
+        6734,
+        6739,
+        6785
+      ],
+      "files": [
+        30,
+        33,
+        34
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wow32.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/wow32.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "755b6765fdab9e5744d0aaa467a654c78ba856715a132f1e573aed54fb828850",
+      "probe_sha256": "755b6765fdab9e5744d0aaa467a654c78ba856715a132f1e573aed54fb828850",
+      "marks": [
+        259,
+        6137,
+        6142,
+        6148,
+        6734,
+        6739,
+        6785
+      ],
+      "files": [
+        2,
+        28,
+        33,
+        34
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/clres.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "f354fb318ac8ba743286cebcef819ab71211249b3d6e9046729031f2174e9c3f",
+      "probe_sha256": "f354fb318ac8ba743286cebcef819ab71211249b3d6e9046729031f2174e9c3f",
+      "marks": [
+        6734,
+        6739,
+        6858,
+        6859
+      ],
+      "files": [
+        33,
+        36
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/dialog-template.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "d363910a672fc673dbaa7958f7794602d3e9a69a0222a60f7a4b473f549c9352",
+      "probe_sha256": "d363910a672fc673dbaa7958f7794602d3e9a69a0222a60f7a4b473f549c9352",
+      "marks": [
+        6734,
+        6739,
+        6964,
+        7032,
+        7041,
+        7043,
+        7045,
+        7047,
+        7145,
+        7569
+      ],
+      "files": [
+        33,
+        36,
+        38,
+        43,
+        46,
+        53
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/rtlinit.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "d9da79b7a3f35a13362b9cc622fa20d85ed7a913a7d4722ca5e8a62af5658819",
+      "probe_sha256": "d9da79b7a3f35a13362b9cc622fa20d85ed7a913a7d4722ca5e8a62af5658819",
+      "marks": [
+        6734,
+        6739
+      ],
+      "files": [
+        33,
+        42
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/control-lookaside.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "ba3e49920c20b154a58533bd55cdbd917a2725da2a9c260152120782222a2b8e",
+      "probe_sha256": "ba3e49920c20b154a58533bd55cdbd917a2725da2a9c260152120782222a2b8e",
+      "marks": [
+        6734,
+        6739,
+        7018,
+        7020,
+        7022,
+        7041,
+        7043,
+        7045,
+        7047
+      ],
+      "files": [
+        33,
+        42,
+        43
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/ntstubs.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "b059a3fec6442f9ecaa194d8d49da83b2f9ae26a9242ed9f9fb7829ca7685308",
+      "probe_sha256": "b059a3fec6442f9ecaa194d8d49da83b2f9ae26a9242ed9f9fb7829ca7685308",
+      "marks": [
+        6734,
+        6739,
+        6996,
+        7141
+      ],
+      "files": [
+        33,
+        41,
+        45
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/control-text.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "6065a7e0d8ba8e704d7d639faa910cc1a1621f6f76aa746a0ef6fb4dcb4b1282",
+      "probe_sha256": "6065a7e0d8ba8e704d7d639faa910cc1a1621f6f76aa746a0ef6fb4dcb4b1282",
+      "marks": [
+        6734,
+        6739,
+        6964,
+        7032,
+        7041,
+        7043,
+        7045,
+        7047,
+        7140,
+        7145,
+        7569
+      ],
+      "files": [
+        33,
+        38,
+        41,
+        43,
+        45,
+        46,
+        53
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/control-color.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "d2d403362f6ed73cfac34be78f2e213221fa9989c39b82070f0f68c2e6f8984e",
+      "probe_sha256": "d2d403362f6ed73cfac34be78f2e213221fa9989c39b82070f0f68c2e6f8984e",
+      "marks": [
+        6734,
+        6739,
+        7140,
+        7145
+      ],
+      "files": [
+        33,
+        41,
+        45,
+        46
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/control-brush-client.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "c0aae46a860afc621ed43fe94db1dc594ae7fcc5d62660f5aa857d4a8288558a",
+      "probe_sha256": "c0aae46a860afc621ed43fe94db1dc594ae7fcc5d62660f5aa857d4a8288558a",
+      "marks": [
+        6734,
+        6739,
+        7140,
+        7145
+      ],
+      "files": [
+        33,
+        41,
+        45,
+        46
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/private-word-client.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "eae12fd22a2fd024848d76a51ce3b1a7b6833c2506441b6aba510b2b461837b9",
+      "probe_sha256": "eae12fd22a2fd024848d76a51ce3b1a7b6833c2506441b6aba510b2b461837b9",
+      "marks": [
+        6734,
+        6739,
+        6964,
+        6993,
+        6995,
+        7032,
+        7041,
+        7043,
+        7045,
+        7047,
+        7140,
+        7145,
+        7569
+      ],
+      "files": [
+        33,
+        38,
+        41,
+        43,
+        45,
+        46,
+        53
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/default-client.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "1eced89f79cb4743c5ef2fe3409f0c7ecde9a9ebd4054eb83669ef58f87c2eda",
+      "probe_sha256": "1eced89f79cb4743c5ef2fe3409f0c7ecde9a9ebd4054eb83669ef58f87c2eda",
+      "marks": [
+        6734,
+        6739,
+        6828,
+        6830,
+        6832,
+        7041,
+        7043,
+        7045,
+        7047,
+        7145,
+        7569
+      ],
+      "files": [
+        33,
+        35,
+        43,
+        46,
+        53
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/client-callproc.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "a46aee13b9c85e03f4fb430bc844cb991706eae2e412615e3177aecda77a8db2",
+      "probe_sha256": "a46aee13b9c85e03f4fb430bc844cb991706eae2e412615e3177aecda77a8db2",
+      "marks": [
+        6734,
+        6739,
+        6964,
+        7032,
+        7041,
+        7043,
+        7045,
+        7047,
+        7145,
+        7569
+      ],
+      "files": [
+        33,
+        35,
+        38,
+        43,
+        46,
+        53
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/default-messages.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "95bca5f134d28306ba218f97afb58951ed1371a6399d4a6635f58f4a9941bdac",
+      "probe_sha256": "95bca5f134d28306ba218f97afb58951ed1371a6399d4a6635f58f4a9941bdac",
+      "marks": [
+        6734,
+        6739,
+        7145,
+        7439,
+        7441,
+        7442
+      ],
+      "files": [
+        33,
+        46,
+        50
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/control-client-mngrayc.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "87fb5c301109bdbe84ec80cfb8c2b8874e6ca1d31deb75dfdd481cd3bc9bb61d",
+      "probe_sha256": "87fb5c301109bdbe84ec80cfb8c2b8874e6ca1d31deb75dfdd481cd3bc9bb61d",
+      "marks": [
+        6734,
+        6739,
+        6980,
+        6982,
+        7145
+      ],
+      "files": [
+        33,
+        40,
+        46
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/button-blit.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "cf23e54a4aa84965ea1aab142437a9389a5e70ada69acafd2903a7792d1f3cfc",
+      "probe_sha256": "cf23e54a4aa84965ea1aab142437a9389a5e70ada69acafd2903a7792d1f3cfc",
+      "marks": [
+        6734,
+        6739,
+        7041,
+        7043,
+        7045,
+        7047,
+        7145
+      ],
+      "files": [
+        33,
+        40,
+        43,
+        46
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/profile.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "1d696a16f7a26c403e192f059948c0b70d137f963d13833f33140257d3affbe9",
+      "probe_sha256": "1d696a16f7a26c403e192f059948c0b70d137f963d13833f33140257d3affbe9",
+      "marks": [
+        6730,
+        6731,
+        6734,
+        6739
+      ],
+      "files": [
+        32,
+        33
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/client.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/client.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "c4cdd88869a6f22b2c0cf017617f421712127fe29fde609745175715dc21bb13",
+      "probe_sha256": "c4cdd88869a6f22b2c0cf017617f421712127fe29fde609745175715dc21bb13",
+      "marks": [
+        6734,
+        6739
+      ],
+      "files": [
+        33
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/client.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/dialog-memory.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "e831cc120200b98bbdce68a10941ee25e1ea118f57288eb32c0d9d98a6f396c1",
+      "probe_sha256": "e831cc120200b98bbdce68a10941ee25e1ea118f57288eb32c0d9d98a6f396c1",
+      "marks": [
+        6734,
+        6739,
+        6964,
+        7145
+      ],
+      "files": [
+        33,
+        38,
+        46
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/client.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/control-state.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "b4a20cd849746c207950b9440bc2e4a4d0d69b43e7ddf6a1849a8a9d9e890878",
+      "probe_sha256": "b4a20cd849746c207950b9440bc2e4a4d0d69b43e7ddf6a1849a8a9d9e890878",
+      "marks": [
+        6734,
+        6739,
+        7145
+      ],
+      "files": [
+        33,
+        46
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/client.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/default-window-bits.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "2679ce6ecca982906f8782b7ad95f698015f6144bdf3ccc395ec2cc6f63400b9",
+      "probe_sha256": "2679ce6ecca982906f8782b7ad95f698015f6144bdf3ccc395ec2cc6f63400b9",
+      "marks": [
+        6734,
+        6739,
+        7145
+      ],
+      "files": [
+        33,
+        46
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/client.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/class-client.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "19453a4e2ac6e8bdb11f9218eab559cf7e7c9eb2076449fbdacdf7591ff05585",
+      "probe_sha256": "19453a4e2ac6e8bdb11f9218eab559cf7e7c9eb2076449fbdacdf7591ff05585",
+      "marks": [
+        6734,
+        6739,
+        7088,
+        7141
+      ],
+      "files": [
+        33,
+        44,
+        45
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/adapter-win32/chartran.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "b280c98c3276d145e9ff408865bc147f10a6bd3aa995842a6ca185eeeef2d617",
+      "probe_sha256": "b280c98c3276d145e9ff408865bc147f10a6bd3aa995842a6ca185eeeef2d617",
+      "marks": [
+        6734,
+        6739,
+        7146,
+        7519
+      ],
+      "files": [
+        33,
+        46,
+        52
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486/xmsblock.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/xms/xmsblock.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "f9369848a78cbbbab001cfde686eb646a9e96025dc9e4c62e9ec919de7f8255d",
+      "probe_sha256": "f9369848a78cbbbab001cfde686eb646a9e96025dc9e4c62e9ec919de7f8255d",
+      "marks": [
+        259,
+        268,
+        6326,
+        6734,
+        6739,
+        6785
+      ],
+      "files": [
+        2,
+        3,
+        29,
+        33,
+        34
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_user_object_bindings.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/wow32-dll/wow_user_object_bindings.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "b74f8b6a6d0752c069bdaff10497b42b57fa050ab77c7eb9e3e079555067e253",
+      "probe_sha256": "b74f8b6a6d0752c069bdaff10497b42b57fa050ab77c7eb9e3e079555067e253",
+      "marks": [
+        6734,
+        6739,
+        6969,
+        7146
+      ],
+      "files": [
+        33,
+        39,
+        46
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/input.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "17741ed5cf4ff06c14d81a8758231c54a920ceb90d070cd6c77ce717bc85a139",
+      "probe_sha256": "17741ed5cf4ff06c14d81a8758231c54a920ceb90d070cd6c77ce717bc85a139",
+      "marks": [
+        6734,
+        6739,
+        7246,
+        7250
+      ],
+      "files": [
+        33,
+        47
+      ],
+      "error": ""
+    },
+    {
+      "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/opennt-user/control-fnid.obj",
+      "arch": "x86",
+      "original_exit": 0,
+      "probe_exit": 0,
+      "equivalent": true,
+      "original_sha256": "e7794d1cf8e13125e2506578d15fdc46c4c527c5cfe5ea905f9c3508d537ab51",
+      "probe_sha256": "e7794d1cf8e13125e2506578d15fdc46c4c527c5cfe5ea905f9c3508d537ab51",
+      "marks": [
+        6734,
+        6739,
+        6964,
+        7032,
+        7041,
+        7043,
+        7045,
+        7047,
+        7145,
+        7274,
+        7278
+      ],
+      "files": [
+        33,
+        38,
+        43,
+        46,
+        48
+      ],
+      "error": ""
+    }
+  ],
+  "comment_fix": {
+    "object": "obj/video/ega_vide.obj",
+    "original_exit": 0,
+    "probe_exit": 0,
+    "equivalent": true,
+    "marker_hit": true,
+    "baseline_sha256": "f6b58f13aee98462066dd77b05c8c8a73a2480860dfeffee15644d5bb2e196f7",
+    "probe_sha256": "f6b58f13aee98462066dd77b05c8c8a73a2480860dfeffee15644d5bb2e196f7"
+  },
+  "limits": [
+    "One selected context per file demonstrates positive hits only. Non-hit alone does not prove exclusion across all contexts.",
+    "Historical hits are separately classified and are not current marker observations."
+  ]
+}

@@ -428,23 +428,8 @@ GLOBAL VOID config( VOID )
  * such allocator: its SAS is the entire standalone machine, so retain the
  * original non-i386 DPMI-headroom calculation for this one backend. */
 #ifdef i386
-#if defined(CPU_40_STYLE)
-#line 510
-	 vdmMemorySize = GetVDMSize(VDMForWOW);
-
-	 // Extend the vdm size if the user asks for it through a .PIF.
-	 // Also make sure we have at least appropriate size of dpmi
-	 // memory.
-	 //
-	 if ((xmsMemorySize + emsMemorySize +  1024 + dpmiMemorySize) >
-	      vdmMemorySize)
-	 {
-	    vdmMemorySize = xmsMemorySize + emsMemorySize + 1024 +
-			    dpmiMemorySize;
-	 }
-#else
-#error Excluded unsupported non-CPU40 i386 memory-size profile
-#endif
+#line 507
+#error Unsupported i386 kernel VDM memory-size profile
 #else
 #if defined(_M_IX86) && !defined(CPU_40_STYLE)
 #error Excluded unsupported non-CPU40 i386 memory-size profile

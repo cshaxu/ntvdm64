@@ -10,6 +10,7 @@ build each batch of 10 modified code files. The earlier per-depth BFS is superse
 and register files even when no source edit is needed. If binary differences are limited to timestamps or verified diagnostic line-number constants, reuse prior test evidence; otherwise run Full before publication. [Progress](../../artifacts/mvdm-audit/s13-bfs-progress.md);
 [observed per-file inventory](../../artifacts/mvdm-audit/s13-r489-per-file-observed-inventory.json).
 Latest checkpoint: [r1307](../../artifacts/mvdm-audit/s13-r1307-delivery.md).
+[Global audit checkpoint](../../artifacts/mvdm-audit/s13-r1314-final-audit.md): unobserved arms and unresolved lines remain open.
 [Inventory and condition cross-check index](../../artifacts/mvdm-audit/s13-r1305-evidence-index.md).
 The 1,056-file [census](../../artifacts/mvdm-audit/s13-r624-current-file-census.json)
 includes one product-generator input; supported-context verification remains open. Current product-object dependency closure: [r1304](../../artifacts/mvdm-audit/s13-r1304-product-source-closure.json).
@@ -86,7 +87,7 @@ Earlier versions remain in [held patches](../../artifacts/mvdm-audit/s11-held-cp
 
 ## Active Packet
 
-### M0 T473 S13 â€” NTCON input-source handoff
+### M0 T473 S13 — NTCON input-source handoff
 
 | Field | Record |
 | --- | --- |
@@ -119,7 +120,7 @@ The [S11 compilation-condition closure](../etc/evidence/m0-t473-s11-condition-cl
 
 ## S10 Closure Record
 
-The [S10 audit](../etc/evidence/m0-t473-s10-closure.md) records bounded source-role decisions and S11â€“S19 handoff.
+The [S10 audit](../etc/evidence/m0-t473-s10-closure.md) records bounded source-role decisions and S11–S19 handoff.
 
 ## T471 Closure Record
 

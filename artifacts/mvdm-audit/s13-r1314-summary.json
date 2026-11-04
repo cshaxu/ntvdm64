@@ -1,0 +1,27 @@
+{
+  "files": 1056,
+  "identical": 182,
+  "different": 874,
+  "arms": 7602,
+  "states": {
+    "excluded-error": 4005,
+    "historical-hit": 3199,
+    "current-hit": 144,
+    "current-context-no-hit": 12,
+    "empty-or-structural": 242
+  },
+  "line_checks": {
+    "error-anchor-match": 3859,
+    "not-applicable": 3597,
+    "error-original-mapping-ambiguous": 89,
+    "error-preceding-line-anchor-verified": 8,
+    "error-original-reference-verified": 11,
+    "error-natural-match": 8,
+    "error-prior-full-file-original-review": 28,
+    "error-original-guard-line-verified": 2
+  },
+  "files_with_unobserved_retained": 6,
+  "files_with_ambiguous_error_line": 33,
+  "different_files_selected_lines_not_fully_certified": 874,
+  "limitation": "Marker hits are observed compile contexts, not proof of every supported configuration. A hit requires retention; no hit is not proof of exclusion. Selected-line mapping for differing files is not completely certified."
+}
