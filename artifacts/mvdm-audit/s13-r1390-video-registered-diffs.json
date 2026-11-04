@@ -1,0 +1,235 @@
+{
+  "method": "Review every direct retained-arm difference against registered local changes after branch-tree and source-projection checks in r1389. Full direct diffs retained below.",
+  "limits": "Source-derived matching-line projection and historical hit evidence; no new compiler diagnostic or behavior test. Local adaptations remain distinct from original behavior.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+      "current_sha256": "0f4e3a5e2d008ed1c4f5c85697bed569064845819d5fab62703cd266416196eb",
+      "original_sha256": "1dedadd482f631e9b82a0fde92b84ff74c724faaaac782ae538639e0738e7002",
+      "matched_lines": 2723,
+      "strict_tree": {
+        "retained": 45,
+        "excluded": 20,
+        "groups": 58,
+        "implicit_retained_anchor": 1
+      },
+      "registered_differences": [
+        "MVDM-HOST-DIV-067"
+      ],
+      "retained_arm_direct_differences": [
+        {
+          "branch_line": 332,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -25,2 +25,5 @@",
+            " IMPORT void v7_get_banks IPT2(UTINY *, rd_bank, UTINY *, wrt_bank );",
+            "+/* DIVERGENCE(MVDM-HOST-DIV-067): retain the original cross-video calls with",
+            "+* their actual same-package declarations; NT4 accepted their implicit forms. */",
+            "+IMPORT void setMarkPointers IPT1(IUH, markset);",
+            " IMPORT void update_shift_count IPT0();",
+            "@@ -1109,2 +1112,3 @@",
+            " #include\t\"cpu_vid.h\"",
+            "+IMPORT VOID Glue_set_vid_wrt_ptrs IPT1(WRT_POINTERS *, handler);",
+            " GLOBAL VOID ega_mask_register_changed IFN1(BOOL, gotBitProtection)"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "current_sha256": "6343a51453f9df79db724e70cf09e82bcf6d738b9df7a650d40c36db1a134a08",
+      "original_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987",
+      "matched_lines": 3629,
+      "strict_tree": {
+        "retained": 83,
+        "groups": 110,
+        "excluded": 59,
+        "implicit_retained_anchor": 6
+      },
+      "registered_differences": [
+        "MVDM-HOST-DIV-135"
+      ],
+      "retained_arm_direct_differences": [
+        {
+          "branch_line": 191,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -2,3 +2,5 @@",
+            " /* [5.1.3 PROCEDURE() DECLARATIONS]\t\t\t\t\t*/",
+            "-LOCAL boolean simple_update IPT0();",
+            "+/* DIVERGENCE(MVDM-HOST-DIV-135): selected marking dispatch is void; see",
+            "+* gfx_upd.h.  Original callers use only its dirty-state side effect. */",
+            "+LOCAL VOID simple_update IPT0();",
+            " boolean\tdummy_scroll IPT6(int,dummy1,int,dummy2,int,dummy3,"
+          ]
+        },
+        {
+          "branch_line": 687,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -17,7 +17,7 @@",
+            " set_mode_change_required(YES);",
+            "-update_alg.mark_byte = (T_mark_byte)simple_update;",
+            "-update_alg.mark_word = (T_mark_word)simple_update;",
+            "-update_alg.mark_fill = (T_mark_fill)simple_update;",
+            "-update_alg.mark_wfill = (T_mark_wfill)simple_update;",
+            "-update_alg.mark_string = (T_mark_string)simple_update;",
+            "+update_alg.mark_byte = simple_update;",
+            "+update_alg.mark_word = simple_update;",
+            "+update_alg.mark_fill = simple_update;",
+            "+update_alg.mark_wfill = simple_update;",
+            "+update_alg.mark_string = simple_update;",
+            " update_alg.scroll_up = dummy_scroll;"
+          ]
+        },
+        {
+          "branch_line": 3555,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -6,21 +6,21 @@",
+            " case\tSIMPLE_MARKING:",
+            "-update_alg.mark_byte = (T_mark_byte)simple_update;",
+            "-update_alg.mark_word = (T_mark_word)simple_update;",
+            "-update_alg.mark_fill = (T_mark_fill)simple_update;",
+            "-update_alg.mark_wfill = (T_mark_wfill)simple_update;",
+            "-update_alg.mark_string = (T_mark_string)simple_update;",
+            "+update_alg.mark_byte = simple_update;",
+            "+update_alg.mark_word = simple_update;",
+            "+update_alg.mark_fill = simple_update;",
+            "+update_alg.mark_wfill = simple_update;",
+            "+update_alg.mark_string = simple_update;",
+            " break;",
+            " case\tCGA_GRAPHICS_MARKING:",
+            "-update_alg.mark_byte = (boolean(*)())cga_mark_byte;",
+            "-update_alg.mark_word = (boolean(*)())cga_mark_word;",
+            "-update_alg.mark_fill = (boolean(*)())cga_mark_string;",
+            "-update_alg.mark_wfill = (boolean(*)())cga_mark_string;",
+            "-update_alg.mark_string = (boolean(*)())cga_mark_string;",
+            "+update_alg.mark_byte = cga_mark_byte;",
+            "+update_alg.mark_word = cga_mark_word;",
+            "+update_alg.mark_fill = cga_mark_string;",
+            "+update_alg.mark_wfill = cga_mark_string;",
+            "+update_alg.mark_string = cga_mark_string;",
+            " break;",
+            " case\tEGA_GRAPHICS_MARKING:",
+            "-update_alg.mark_byte = (boolean(*)())ega_mark_byte;",
+            "-update_alg.mark_word = (boolean(*)())ega_mark_word;",
+            "-update_alg.mark_fill = (boolean(*)())ega_mark_string;",
+            "-update_alg.mark_wfill = (boolean(*)())ega_mark_wfill;",
+            "-update_alg.mark_string = (boolean(*)())ega_mark_string;",
+            "+update_alg.mark_byte = ega_mark_byte;",
+            "+update_alg.mark_word = ega_mark_word;",
+            "+update_alg.mark_fill = ega_mark_string;",
+            "+update_alg.mark_wfill = ega_mark_wfill;",
+            "+update_alg.mark_string = ega_mark_string;",
+            " switch( EGA_CPU.chain )"
+          ]
+        },
+        {
+          "branch_line": 3782,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -31,7 +31,7 @@",
+            " gfx_update_routines_inhibited = TRUE;",
+            "-update_alg.mark_byte \t= (T_mark_byte)simple_update;",
+            "-update_alg.mark_word\t= (T_mark_word)simple_update;",
+            "-update_alg.mark_fill \t= (T_mark_fill)simple_update;",
+            "-update_alg.mark_wfill \t= (T_mark_wfill)simple_update;",
+            "-update_alg.mark_string \t= (T_mark_string)simple_update;",
+            "+update_alg.mark_byte \t= simple_update;",
+            "+update_alg.mark_word\t= simple_update;",
+            "+update_alg.mark_fill \t= simple_update;",
+            "+update_alg.mark_wfill \t= simple_update;",
+            "+update_alg.mark_string \t= simple_update;",
+            " update_alg.calc_update \t= dummy_calc;"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "current_sha256": "b53e53a6cfa3991a6ddcb830906eb6aa342cd74e8380ed426c9249ee385c8f2c",
+      "original_sha256": "16305a48051b980b4c9f8aba15dda7bd6801964bb02897b8c2290a1eff04fbbc",
+      "matched_lines": 2659,
+      "strict_tree": {
+        "retained": 78,
+        "excluded": 34,
+        "groups": 91,
+        "implicit_retained_anchor": 1
+      },
+      "registered_differences": [
+        "MVDM-HOST-DIV-067",
+        "MVDM-HOST-DIV-358"
+      ],
+      "retained_arm_direct_differences": [
+        {
+          "branch_line": 339,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -25,2 +25,6 @@",
+            " #include\t\"egaports.h\"",
+            "+/* DIVERGENCE(MVDM-HOST-DIV-067): declare original same-package EGA helpers",
+            "+* at their consumers; historical C accepted implicit declarations. */",
+            "+IMPORT void set_index_state IPT0();",
+            "+IMPORT boolean in_index_state IPT0();",
+            " /*",
+            "@@ -165,3 +169,3 @@",
+            " set_cursor_visible(TRUE);",
+            "-host_cursor_size_changed(crt_controller.cursor_start.as_bfld.cursor_start,",
+            "+host_cursor_size_changed(crt_controller.cursor_start.as.abyte & 0x3f,",
+            " crt_controller.cursor_end.as_bfld.cursor_end);",
+            "@@ -175,3 +179,3 @@",
+            " set_cursor_visible(TRUE);",
+            "-host_cursor_size_changed(crt_controller.cursor_start.as_bfld.cursor_start,",
+            "+host_cursor_size_changed(crt_controller.cursor_start.as.abyte & 0x3f,",
+            " crt_controller.cursor_end.as_bfld.cursor_end);",
+            "@@ -185,3 +189,3 @@",
+            " set_cursor_visible(TRUE);",
+            "-host_cursor_size_changed(crt_controller.cursor_start.as_bfld.cursor_start,",
+            "+host_cursor_size_changed(crt_controller.cursor_start.as.abyte & 0x3f,",
+            " crt_controller.cursor_end.as_bfld.cursor_end);",
+            "@@ -195,3 +199,3 @@",
+            " set_cursor_visible(TRUE);",
+            "-host_cursor_size_changed(crt_controller.cursor_start.as_bfld.cursor_start,",
+            "+host_cursor_size_changed(crt_controller.cursor_start.as.abyte & 0x3f,",
+            " crt_controller.cursor_end.as_bfld.cursor_end);",
+            "@@ -209,5 +213,9 @@",
+            " set_cursor_visible(TRUE);",
+            "-host_cursor_size_changed(crt_controller.cursor_start.as_bfld.cursor_start,",
+            "+host_cursor_size_changed(crt_controller.cursor_start.as.abyte & 0x3f,",
+            " crt_controller.cursor_end.as_bfld.cursor_end);",
+            " }",
+            "+/* DIVERGENCE(MVDM-HOST-DIV-358): VGA CRTC bit 5 disables the cursor",
+            "+* independently of its scan-line geometry. */",
+            "+if (crt_controller.cursor_start.as_bfld.cursor_off)",
+            "+set_cursor_visible(FALSE);",
+            " if(( get_cur_y() < 0 ) ||",
+            "@@ -738,11 +746,4 @@",
+            " new.value = value;",
+            "-if (crt_controller.cursor_start.as_bfld.cursor_off)",
+            "-set_cursor_visible(FALSE);",
+            "-else",
+            "-set_cursor_visible(TRUE);",
+            "-if (crt_controller.cursor_start.as_bfld.cursor_start !=",
+            "-((CURSOR_START*)&new)->as_bfld.cursor_start)",
+            "-{",
+            "+/* DIV-358: retain bit-only writes as well as geometry. */",
+            " crt_controller.cursor_start.as.abyte = value;",
+            "-}",
+            " do_new_cursor();",
+            "@@ -1293,2 +1294,3 @@",
+            " #include\t\"cpu_vid.h\"",
+            "+IMPORT VOID Glue_set_vid_wrt_ptrs IPT1(WRT_POINTERS *, handler);",
+            " GLOBAL VOID vga_mask_register_changed IFN1(BOOL, gotBitProtection)"
+          ]
+        }
+      ]
+    }
+  ]
+}
