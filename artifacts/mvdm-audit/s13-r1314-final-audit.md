@@ -415,3 +415,11 @@ x86 root, NTVDM, WOW32 and x64 builds passed; ten images published and verified.
 Eight match byte-for-byte and NTVDM/WOW32 differ only by PE timestamps
 ([comparison](s13-r1352-build-image-compare.json)); tests were not repeated
 under the owner-approved unchanged-image rule.
+
+The [r1353 continuation review](s13-r1353-continuation-proof.json) verifies
+14 additional files without a physically adjacent continuation #line: each
+selected continuation has a later matching code line at its original logical
+position. Three cases lacking such a match remain pending. No source change
+was made. This is not proof of unobserved contexts or local runtime behavior.
+Counts: 182 byte-identical / 723 differing files reviewed / 1,056 total; 151
+differing files remain.
