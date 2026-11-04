@@ -1,5 +1,7 @@
 # Supporting Material
 
+[T475 S4 NTHook dependency cleanup](evidence/m0-t475-s4-nthook-dependency-cleanup.md) records admission, ownership decisions and local P evidence.
+
 [T475 S3 dependency remediation evidence](evidence/m0-t475-s3-worker-ntvdm-remediation.md) records the local P deliveries and verification.
 
 [T475 S3 dependency removal design](operations/m0-t475-s3-worker-ntvdm-dependency-plan.md) records the proposed ownership and P sequence.

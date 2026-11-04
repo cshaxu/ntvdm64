@@ -1,23 +1,14 @@
 #ifndef NTHOOK32_H
 #define NTHOOK32_H
-#include <windows.h>
-#include "common/protocol/native_hook.h"
+#include "common/native-hook/context.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
-typedef struct nthook_context {
-    DWORD mode;
-    DWORD creation_flags; /* One redirected launch, never descendant policy. */
-    HANDLE frontend,execution;
-    WCHAR launcher[MAX_PATH],hook[MAX_PATH],hook64[MAX_PATH];
-} nthook_context;
 /* Installer borrows an actual, newly created suspended child. Never resumes
  * or closes its handles; it may wait for a finite cross-width installer only.
  * On failure the creator MUST abort this
  * uncommitted child; it must not resume a partially modified image. */
 DWORD nthook_install(HANDLE child,const nthook_context *context,DWORD mode);
-DWORD nthook_context_read(nthook_context *context,BOOL *found);
-DWORD nthook_context_paths(nthook_context *context);
 DWORD nthook_launcher_target(HANDLE child,const nthook_context *context,BOOL *launcher);
 DWORD nthook_legacy_type(PCWSTR application,DWORD *type);
 DWORD nthook_native_subsystem(HANDLE child,DWORD *subsystem);

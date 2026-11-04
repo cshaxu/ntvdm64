@@ -10,7 +10,7 @@ $null=New-Item -ItemType Directory -Force "$out/system32"
 call "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul
 if errorlevel 1 exit /b %errorlevel%
 cd /d "$out/system32"
-cl /nologo /MT /O2 /W4 /I"$repo/src" "$repo/tests/component-integration/dos_style_relay_test.c" /Ferun16.exe /link "$worker/softpc-win32-bindings.lib" "$worker/nthook-installer.lib" "$worker/nthook-context.lib" "$worker/lib-process-hook.lib" "$worker/lib-handle.lib" "$worker/common-root.lib" "$worker/original-opennt-rtl-x86.lib" ntdll.lib kernel32.lib user32.lib advapi32.lib
+cl /nologo /MT /O2 /W4 /I"$repo/src" "$repo/tests/component-integration/dos_style_relay_test.c" /Ferun16.exe /link "$worker/softpc-win32-bindings.lib" "$worker/nthook-installer.lib" "$worker/common-native-hook-context.lib" "$worker/lib-process-hook.lib" "$worker/lib-handle.lib" "$worker/common-root.lib" "$worker/original-opennt-rtl-x86.lib" ntdll.lib kernel32.lib user32.lib advapi32.lib
 if errorlevel 1 exit /b %errorlevel%
 run16.exe
 "@ | Set-Content "$out/run.cmd" -Encoding ascii

@@ -1,4 +1,4 @@
-#include "hook.h"
+#include "common/native-hook/context.h"
 #include "lib-win32/process-hook/detours/detours.h"
 #include <wchar.h>
 /* Private copied-payload identity, not a discoverable authorization token. */

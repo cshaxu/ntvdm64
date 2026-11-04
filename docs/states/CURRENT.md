@@ -2,9 +2,47 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T475 S3 is locally concluded; its seven local
-P commits await the owner-directed later cherry-pick to the main worktree. The
-owner explicitly defers main-runtime publication and push for this worktree.
+**Active: M0 T475 S4 — NTHook dependency cleanup**
+
+The owner accepts the latest local audit and admits S4 to remove the private
+NTHook source/header/static-link dependencies of Run16, NTVDM and NTVWM. The
+same audit found that NTHook32 and VDMREDIR reach NTVDM's private SoftPC symbol
+shim through actually linked shared/mirror objects; include that related
+build-boundary defect in S4. S3's earlier header-closure claim was incomplete.
+The owner directs worktree-local build, tests, asset publication and commits,
+with later cherry-pick and no push or main-runtime publication.
+
+## Active Packet
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T475 S4, Ordinary Mode. |
+| Admission And Approval | Owner closes the local audit and admits a new NTHook-dependency cleanup task. |
+| Objective | Remove private NTHook dependencies from other components and the reached private SoftPC forced-header dependencies without altering hook behavior. |
+| Non-goals | Change hook interception policy, packet identity, session authority, guest media, the allowed Worker Base edges, or separately queued NTVDM runtime imports. |
+| Reference Baseline | Local commit 9b339696d, release package 8b055e88-0703-4652-a14d-720d2d9f61e6; prior S3 and S2 evidence. |
+| Files And ABI Surface | NTHook, Run16, NTVDM, NTVWM, common, build graph, compiler-selected headers, hook packet and process injection boundaries. |
+| Applicable Rules | Shared product policy belongs in common; generic Win32 mechanism belongs in lib-win32; preserve packet identity, widths, process ownership, failure and cleanup semantics. |
+| Verification | Per production P: affected x86/x64 builds, targeted positive/negative/lifecycle tests, all selected Control gates, ten-image local publication and hash checks, governance and diff review. |
+| Expected Markers | Other products select no NTHook-owned source or private header; NTHook32 and VDMREDIR selected closures do not reach the NTVDM-private forced header; actual linkage and runtime behavior verified. |
+| Asset Needs | Existing toolchain, fixtures and local package; no new external source or guest media. |
+| Reporting Requirements | Identify each removed edge and remaining runtime boundaries, ownership, tests and local publication limitations. |
+| Stop Conditions | Required semantic concession, duplicate state authority, incompatible ABI or missing required evidence. |
+| Exit Criteria | All admitted dependencies remediated and audited; every production P built, tested, published locally and committed; main integration deferred per owner. |
+| Original Owner Request | Close the current S and admit a new task to clean up NTHook dependencies. |
+| Similar-Issue Sweep | Run16, NTVDM, NTVWM, Hook32/64, worker and generic-library actual link selections and compiler-recorded transitive headers. |
+| Temporary Evidence | Worktree-local build/t475-s4 with owned compiler and test processes. |
+
+Planned P boundaries: P1 shares the hook context and payload contract used by
+Run16 and NTHook; P2 shares the installer orchestration used by both workers
+and NTHook; P3 removes the private forced-header reach from selected non-worker
+closures and audits the complete link and compiler dependency graph. Adjust a
+boundary if it cannot build independently without an unsafe temporary state.
+P1 passed the x86/x64 build, launcher boundary negative control, 118 x86 and
+118 x64 Hook checks, 168 cross-width checks and 12 Control gates. Local package
+`563bc615-556c-49e6-869e-6d7ea0004396` has ten verified release hashes; see
+[S4 evidence](../etc/evidence/m0-t475-s4-nthook-dependency-cleanup.md). Full
+and DOS4GW/NESticle were not run. P2 and P3 remain active.
 
 The owner closes the [S2 dependency inventory](../etc/evidence/m0-t475-s2-component-dependency-inventory.md)
 and admits S3 to address the illegal Worker Base and NTVDM dependencies through
@@ -12,46 +50,9 @@ common and libraries. The [S3 design](../etc/operations/m0-t475-s3-worker-ntvdm-
 now assigns Redir-only logic to Redir, shared product contracts to common, and
 generic Win32 mechanisms to lib. Seven P deliveries are sequential. The owner
 separately queues removal of the remaining NTVDM PE runtime imports.
-P1 removes VDMREDIR's unused Worker Base input. The dependency negative control,
-x86/x64 build, focused redirector checks, three real DOS redirector probes and
-all 12 Control gates passed. Local package `fd19d65e-2eec-4bb8-a76a-697b9841c4d3`
-matches all ten release hashes; [P1 evidence](../etc/evidence/m0-t475-s3-worker-ntvdm-remediation.md)
-records the initial long-PATH test failure and baseline. Full was not run; the
-optional DOS4GW/NESticle fixture was absent.
-P2 separates consumer-visible guest-memory and redirector copy contracts into
-common while retaining the single worker-owned provider. The x86/x64 build,
-focused lease, callback and redirector tests, three real DOS redirector probes,
-and all 12 selected Control gates passed. Local package
-`8ac27d1f-ff63-4b10-b8f8-2afd5f83d39b` has ten verified release hashes;
-details and test limits are in the [S3 evidence](../etc/evidence/m0-t475-s3-worker-ntvdm-remediation.md).
-P3 moves Redir copy orchestration into VDMREDIR while retaining the worker's
-compatibility exports and single guest-memory authority. The x86/x64 build,
-focused and original NetAPI fixtures, three real DOS probes, and all 12 selected
-Control gates passed. Local package `0bcc0986-5646-4a04-8002-0bf6c3d65656`
-has ten verified release hashes. Full and the optional DOS4GW/NESticle fixture
-were not run. PE runtime-import removal is separately queued.
-P4 moves the historical CRT adapter to `lib-win32/crt-compat`; NTVDM and
-WOW32 now select that owner. The x86/x64 build, symbol-provider and formatting
-fixtures, 12 Control gates and four real WRITE startup snapshots passed. Local
-package `187112da-6183-4b8e-b482-ee73d022a604` has ten verified release hashes.
-WRITE editing and normal exit were not tested; Full was not run.
-P5 separates WOW USER, GDI, page, path, FastBOP and registry consumer
-contracts into `common/wow` while retaining worker-owned state. Compiler
-dependencies for 147 selected WOW objects contain no NTVDM-private headers;
-focused lifecycle/callback tests, 12 Control gates and four WRITE startup
-snapshots passed. Local package `fd657e29-7249-493c-a67f-3e74d689d861` has
-ten verified hashes. WRITE editing and normal exit and Full were not tested.
-P6 places generic thread entry/calling-convention handling in `lib-win32/thread`
-and session binding in `common/worker-thread`, retaining the one worker-owned
-session. The x86/x64 build, thread lifecycle, redirector fixtures, 12 Control
-gates and three real DOS probes passed. Local package
-`d240771a-26b9-4f8c-bccd-d05a90b697f7` has ten verified hashes. Full was not
-run. P7 addresses the additionally reached VDMREDIR private headers and
-private archive inputs; runtime-import removal is separately queued.
-P7 removes the remaining Redir private headers and static archive inputs. The
-x86/x64 build, dependency audits, focused tests, 12 Control gates and three
-real DOS probes passed. Local package `8b055e88-0703-4652-a14d-720d2d9f61e6`
-has ten verified hashes. Runtime PE imports remain and are queued separately.
+S3 produced seven locally tested and published commits, ending at package
+`8b055e88-0703-4652-a14d-720d2d9f61e6`; its [evidence](../etc/evidence/m0-t475-s3-worker-ntvdm-remediation.md)
+records verification and the subsequent header-boundary correction above.
 T475 S1 separated NXVM and Win32 library ownership. Its final four local P
 commits extracted object-handle comparison, overlapped pipe-pair creation,
 parent-process observation and file identity. Their local packages each
