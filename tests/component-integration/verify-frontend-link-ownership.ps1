@@ -117,7 +117,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
                 if ($input -in @('frontend-terminal.lib','ntcon-worker-client.lib')) {
                     throw 'Retired frontend archive re-entered a production link'
                 }
-                if ($input -match ('/'+[regex]::Escape($Root)+'/'+[regex]::Escape($Owner)+'/(.+\.c)$')) {
+                if ($input -match ('/'+[regex]::Escape($Root)+'/'+[regex]::Escape($Owner)+'/(.+\.(?:c|cpp))$')) {
                     [void]$sources.Add($Matches[1])
                 } elseif ($input -match '\.(obj|lib)$' -and $edges.ContainsKey($input)) {
                     $pending.Push($input)
@@ -195,14 +195,14 @@ function Assert-FrontendOwnership([string[]]$Lines) {
             throw "$archive must not embed neutral common providers"
         }
     }
-    foreach($archive in @('common-codec.lib','lib-io.lib','lib-rpc.lib','lib-process.lib','lib-handle.lib','common-console.lib','common-rpc.lib')) {
+    foreach($archive in @('common-codec.lib','lib-io.lib','lib-rpc.lib','lib-process.lib','lib-handle.lib','lib-process-hook.lib','common-console.lib','common-rpc.lib')) {
         foreach($owner in @('run16-exe','ntsrv-exe','ntcon-exe','ntvwm-exe','ntvdm-exe','worker-base')) {
             if(@(Get-FrontendSources $archive $owner).Count) {
                 throw "$archive reverse-depends on $owner"
             }
         }
     }
-    foreach($archive in @('lib-rpc.lib','lib-io.lib','lib-process.lib','lib-handle.lib')) {
+    foreach($archive in @('lib-rpc.lib','lib-io.lib','lib-process.lib','lib-handle.lib','lib-process-hook.lib')) {
         if(@(Get-FrontendSources $archive 'common').Count) {
             throw "$archive must not depend on product common sources"
         }
@@ -216,6 +216,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
     if(@(Compare-Object @('console/client.c') @(Get-FrontendSources 'common-console.lib' 'common')).Count) {
         throw 'Common Console client must have exactly one provider'
     }
+    if ('process-hook/install.cpp' -notin @(Get-FrontendSources 'lib-process-hook.lib' 'lib-win32')) { throw 'Win32 process-hook installer missing' }
     if(@(Compare-Object @('handle/duplicate.c') @(Get-FrontendSources 'lib-handle.lib' 'lib-win32')).Count) { throw 'Win32 handle library must own the duplication implementation' }
     if(@(Compare-Object @('process/attributes.c') @(Get-FrontendSources 'lib-process.lib' 'lib-win32')).Count) { throw 'Win32 process library must own the attribute-list implementation' }
     if(@(Compare-Object @('rpc/local_binding.c','rpc/peer.c') @(Get-FrontendSources 'lib-rpc.lib' 'lib-win32')).Count) {
@@ -318,7 +319,7 @@ foreach($archive in @('frontend-client.lib','opennt-base-bindings.lib','worker-b
     try { Assert-FrontendOwnership $mutated } catch { $rejected=$true }
     if(!$rejected){throw "Common provider embedding accepted: $archive"}
 }
-foreach($archive in @('common-codec.lib','lib-io.lib','lib-rpc.lib','lib-process.lib','lib-handle.lib','common-console.lib','common-rpc.lib')) {
+foreach($archive in @('common-codec.lib','lib-io.lib','lib-rpc.lib','lib-process.lib','lib-handle.lib','lib-process-hook.lib','common-console.lib','common-rpc.lib')) {
     $mutated=@($graph | ForEach-Object {
         if($_ -match ('^build '+[regex]::Escape($archive)+':')) {
             $_ -replace ': (\S+) ', ': $1 obj/run16/frontend_scope.obj '

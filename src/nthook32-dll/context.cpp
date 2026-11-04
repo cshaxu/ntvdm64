@@ -1,5 +1,5 @@
 #include "hook.h"
-#include "detours/detours.h"
+#include "lib-win32/process-hook/detours/detours.h"
 #include <wchar.h>
 /* Private copied-payload identity, not a discoverable authorization token. */
 extern const GUID nthook_payload_guid={0x62430757,0xd5a2,0x46e8,{0x81,0xbe,0xb3,0x72,0x4f,0x63,0x89,0x11}};

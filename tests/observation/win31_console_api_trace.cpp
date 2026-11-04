@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <intrin.h>
-#include "../../src/nthook32-dll/detours/detours.h"
+#include "../../src/lib-win32/process-hook/detours/detours.h"
 static HANDLE output=INVALID_HANDLE_VALUE;
 static CRITICAL_SECTION lock;
 static decltype(&SetConsoleWindowInfo) window_call=SetConsoleWindowInfo;

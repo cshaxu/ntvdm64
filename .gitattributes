@@ -32,7 +32,7 @@ src/lib-nxvm/LICENSE.nxvm -text
 src/lib-nxvm/LICENSE.libvterm -text
 src/lib-nxvm/libvterm-0.3.3.tar.gz -text
 # Pinned MIT Detours slice retains the registered upstream byte hashes.
-src/nthook32-dll/detours/** -text
+src/lib-win32/process-hook/detours/** -text
 src/opennt-softpc/bios/** -text -whitespace
 src/opennt-guest/wow16/fonts/** -text -whitespace
 docs/etc/legacy_code/opennt-bop/original/** -text -whitespace

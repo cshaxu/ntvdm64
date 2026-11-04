@@ -15,7 +15,7 @@ whether a DOS/Win16 redirect applies. A redirect carries that selected image
 and the OpenNT `BaseCheckVDM` tail shape to Run16. Native calls retain their
 original A/W application, command, attributes and parameter tail.
 
-`detours/` is the pinned MIT-licensed Microsoft Detours v4.0.1 slice,
+`../lib-win32/process-hook/detours/` is the pinned MIT-licensed Microsoft Detours v4.0.1 slice,
 commit e4bfd6b03e50de46b47abfbd1e46b384f0c5f833. Its LICENSE.md is retained.
 Selected translation units: detours.cpp, modules.cpp, disasm.cpp, image.cpp,
 creatwth.cpp; the latter includes uimports.cpp. No examples/helper are selected.

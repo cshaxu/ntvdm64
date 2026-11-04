@@ -1,5 +1,5 @@
 #include "nthook32-dll/hook.h"
-#include "nthook32-dll/detours/detours.h"
+#include "lib-win32/process-hook/detours/detours.h"
 #include <stdio.h>
 #include <wchar.h>
 static unsigned assertions;

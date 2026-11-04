@@ -1678,7 +1678,7 @@ if ($Architecture -eq 'x86') {
     $nativeBinding = ' obj/run16/support.obj base-rpc-client-core.lib obj/run16/stub.obj opennt-base-client.lib common-base-srv-bindings.lib common-base-srv-transport.lib original-opennt-rtl-x86.lib'
     # One declared source closure, consumed by the isolated native builder.
     # The x86 product graph must never silently link another worker carrier.
-    $graph.Add('build ntvwm-source-closure: phony worker-base.lib obj/ntvwm/next_command.obj obj/ntvwm/main.obj obj/ntvwm/presentation.obj obj/ntvwm/text_frame.obj obj/ntvwm/console_state.obj obj/ntvwm/execution.obj obj/common/native_process.obj nthook-installer.lib nthook-context.lib lib-handle.lib' + $nativeBinding + ' common-root.lib common-rpc.lib lib-rpc.lib lib-io.lib common-codec.lib common-console.lib')
+    $graph.Add('build ntvwm-source-closure: phony worker-base.lib obj/ntvwm/next_command.obj obj/ntvwm/main.obj obj/ntvwm/presentation.obj obj/ntvwm/text_frame.obj obj/ntvwm/console_state.obj obj/ntvwm/execution.obj obj/common/native_process.obj nthook-installer.lib nthook-context.lib lib-process-hook.lib lib-handle.lib' + $nativeBinding + ' common-root.lib common-rpc.lib lib-rpc.lib lib-io.lib common-codec.lib common-console.lib')
     $graph.Add('rule native_worker_import')
     if($NativeWorker){
         $nativeWorkerInput=(Resolve-Path -LiteralPath $NativeWorker).Path
@@ -1698,7 +1698,7 @@ if ($Architecture -eq 'x86') {
     foreach ($name in @('detours','modules','disasm','image','creatwth')) {
         $object = 'obj/nthook32/detours-' + $name + '.obj'
         $hookDetoursObjects += $object
-        $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $root ('src/nthook32-dll/detours/' + $name + '.cpp'))))
+        $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $root ('src/lib-win32/process-hook/detours/' + $name + '.cpp'))))
         $graph.Add('  cflags = ' + $hookFlags)
     }
     foreach ($name in @('context','installer','entry','create_process')) {
@@ -1707,7 +1707,13 @@ if ($Architecture -eq 'x86') {
     }
     $graph.Add('build obj/nthook32/classification.obj: cc ' + (NinjaPath (Join-Path $root 'src/nthook32-dll/hook_classification.c')))
     $graph.Add('  cflags = ' + $baseAdapterFlags + ' /Gy')
-    $graph.Add('build nthook-context.lib: lib obj/nthook32/context.obj ' + ($hookDetoursObjects -join ' '))
+    $graph.Add('build obj/lib-win32/process-hook/install.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/process-hook/install.cpp')))
+    $graph.Add('  cflags = ' + $hookFlags)
+    $graph.Add('build lib-process-hook.lib: lib obj/lib-win32/process-hook/install.obj ' + ($hookDetoursObjects -join ' '))
+    $graph.Add('build obj/tests/win32_process_hook.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/win32_process_hook_test.cpp')))
+    $graph.Add('  cflags = ' + $hookFlags)
+    $graph.Add('build win32-process-hook-test.exe: broker_test_link obj/tests/win32_process_hook.obj')
+    $graph.Add('build nthook-context.lib: lib obj/nthook32/context.obj')
     $graph.Add('build nthook-installer.lib: lib obj/nthook32/installer.obj obj/common/native_image.obj')
     $graph.Add('rule nthook_dll_link')
     $graph.Add('  command = link.exe /nologo /dll /opt:ref /out:$out /map:$out.map /implib:nthook32-import.lib /def:"' + (NinjaPath (Join-Path $root 'src/nthook32-dll/nthook32.def')) + '" $in kernel32.lib user32.lib uxtheme.lib ntdll.lib advapi32.lib rpcrt4.lib legacy_stdio_definitions.lib')
@@ -2135,6 +2141,10 @@ if ($Architecture -eq 'x86') {
 }
 if ($Architecture -eq 'x86') {
     for($i=0;$i -lt $graph.Count;$i++) {
+        if($graph[$i] -match '^build .*: \S*link ' -and ($graph[$i].Contains('nthook-installer.lib') -or $graph[$i].Contains('nthook-context.lib'))) {
+            $barrier=$graph[$i].IndexOf(' |',$graph[$i].IndexOf(':')+1)
+            if($barrier -ge 0){$graph[$i]=$graph[$i].Insert($barrier,' lib-process-hook.lib')}else{$graph[$i]+=' lib-process-hook.lib'}
+        }
         if($graph[$i] -match '^build .*: \S*link ' -and ($graph[$i].Contains('nthook-installer.lib') -or $graph[$i].Contains('broker-transport.lib'))) {
             $barrier=$graph[$i].IndexOf(' |',$graph[$i].IndexOf(':')+1)
             if($barrier -ge 0){$graph[$i]=$graph[$i].Insert($barrier,' lib-handle.lib')}else{$graph[$i]+=' lib-handle.lib'}
@@ -2329,7 +2339,7 @@ if ($objectOutputDirectories.Count -gt 0) {
         selected = ($Architecture -eq 'x86')
         consumers = @('ntvwm.exe','run16.exe')
         disposition = 'owner-admitted x86 installer/context and native CUI/GUI propagation; no helper/cross-width or mirror changes'
-sources = @('src/common/protocol/native_hook.h', 'src/nthook32-dll/hook.h', 'src/nthook32-dll/intercept.h', 'src/nthook32-dll/context.cpp', 'src/nthook32-dll/installer.cpp', 'src/nthook32-dll/create_process.cpp', 'src/nthook32-dll/entry.cpp', 'src/nthook32-dll/nthook32.def', 'src/nthook32-dll/hook_classification.c', 'src/nthook32-dll/detours/detours.cpp', 'src/nthook32-dll/detours/modules.cpp', 'src/nthook32-dll/detours/disasm.cpp', 'src/nthook32-dll/detours/image.cpp', 'src/nthook32-dll/detours/creatwth.cpp', 'src/nthook32-dll/detours/uimports.cpp', 'src/nthook32-dll/detours/detours.h', 'src/nthook32-dll/detours/LICENSE.md' | ForEach-Object {
+sources = @('src/common/protocol/native_hook.h', 'src/nthook32-dll/hook.h', 'src/nthook32-dll/intercept.h', 'src/nthook32-dll/context.cpp', 'src/nthook32-dll/installer.cpp', 'src/nthook32-dll/create_process.cpp', 'src/nthook32-dll/entry.cpp', 'src/nthook32-dll/nthook32.def', 'src/nthook32-dll/hook_classification.c', 'src/lib-win32/process-hook/detours/detours.cpp', 'src/lib-win32/process-hook/detours/modules.cpp', 'src/lib-win32/process-hook/detours/disasm.cpp', 'src/lib-win32/process-hook/detours/image.cpp', 'src/lib-win32/process-hook/detours/creatwth.cpp', 'src/lib-win32/process-hook/detours/uimports.cpp', 'src/lib-win32/process-hook/detours/detours.h', 'src/lib-win32/process-hook/detours/LICENSE.md' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
     }

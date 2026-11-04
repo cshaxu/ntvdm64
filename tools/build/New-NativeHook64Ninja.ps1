@@ -45,6 +45,7 @@ $graph.Add('build obj/basesrv/service.h obj/basesrv/service_c.c obj/basesrv/serv
 $graph.Add('build observation-stub.obj: cc obj/basesrv/service_c.c | obj/basesrv/service.h')
 $sources=@('src/nthook32-dll/entry.cpp','src/nthook32-dll/context.cpp',
     'src/nthook32-dll/installer.cpp','src/nthook32-dll/create_process.cpp',
+    'src/lib-win32/process-hook/install.cpp',
     'src/common/native_image.c','src/lib-win32/handle/duplicate.c',
     'src/nthook32-dll/hook_classification.c',
     'src/non-mvdm/base/win32/client/vdm.c',
@@ -52,7 +53,7 @@ $sources=@('src/nthook32-dll/entry.cpp','src/nthook32-dll/context.cpp',
     'src/compat/opennt_support_rtl.c',
     'src/non-mvdm/base/ntos/rtl/error.c')
 foreach($name in @('detours','modules','disasm','image','creatwth')) {
-    $sources += 'src/nthook32-dll/detours/'+$name+'.cpp'
+    $sources += 'src/lib-win32/process-hook/detours/'+$name+'.cpp'
 }
 $sources+=@('src/lib-win32/rpc/local_binding.c','src/common/rpc/management.c','src/common/base_srv/scope.c')
 $objects=@();$manifest=@();$i=0

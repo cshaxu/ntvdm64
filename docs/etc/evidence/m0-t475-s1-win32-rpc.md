@@ -79,3 +79,39 @@ external DOS4GW/NESticle fixture was unavailable and skipped; Full was not
 run, and the original guest long-PATH limitation remains. Package
 `9baf506d-436a-411a-aeda-cf70fcfea4a0` was published to this worktree's
 `assets/release`, with all ten release hashes verified.
+
+## Follow-up P: process-hook
+
+The owner directs generic suspended-child hook propagation into
+`src/lib-win32/process-hook`. Its provider owns payload copy and selection of
+same-width Detours update versus bounded opposite-width helper installation.
+The caller supplies the child, architecture, payload identity and bytes, and
+optional DLL; it retains child lifetime and rollback. NTHOOK keeps packet
+serialization, target classification, launcher exception, capability delivery
+and whether injection is required. Failure still closes duplicated remote
+handles; callers must terminate an uncommitted partially modified child.
+
+The registered Detours 4.0.1 source, bounded helper adaptation and MIT license
+are relocated under process-hook without byte changes; all eight files match
+the previous commit. `lib-process-hook.lib` is independently selected;
+`nthook-context.lib` no longer embeds Detours. The x64 hook graph selects
+the same source closure. Product builds and dependency negative controls pass.
+`tests/app/win32_process_hook_test.cpp` passed seven payload-only, native-width,
+cross-width, error and zero-error cases. The x86 and x64
+`tests/component-integration/nthook_install_test.cpp` fixtures each passed 118
+assertions including nested propagation and rollback. Fresh x86/x64 product
+builds succeeded; all ten staged inputs/outputs matched, the 63 guest files
+and 274 NTVDM exports passed. Background command, PID, timing, exit and logs
+are recorded under `build/t475-hook-p`. Initial graph generation failed because
+the dependency insertion encountered a multi-output edge; corrected generation
+and all subsequent builds passed.
+
+The first Control run failed the nested-window handoff observer's input-delivery
+marker even though the final command appeared on screen and the observed direct
+exit was 23. The observer waits for a fresh prompt after Enter, which can race
+the final command's process exit; this is a diagnostic inference, not a
+product pass for that run. The same package passed a focused handoff repeat
+and then all 12 selected Control gates in a complete repeat. The optional
+DOS4GW/NESticle external fixture was absent and skipped; Full was not run.
+Package `4d73890b-33b8-4edf-8ee7-0856c8b61761` was published only to this
+worktree's `assets/release`; all ten release hashes matched.

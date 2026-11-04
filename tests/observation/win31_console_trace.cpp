@@ -2,7 +2,7 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <stdio.h>
-#include "../../src/nthook32-dll/detours/detours.h"
+#include "../../src/lib-win32/process-hook/detours/detours.h"
 extern "C" BOOL WINAPI MvdmWriteConsoleA(HANDLE,const VOID*,DWORD,LPDWORD,LPVOID);
 typedef BOOL (WINAPI *WriteFn)(HANDLE,const VOID*,DWORD,LPDWORD,LPVOID);
 static WriteFn original_write=MvdmWriteConsoleA;

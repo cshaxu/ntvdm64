@@ -11,3 +11,7 @@ retain attribute values and all process creation, admission and lifetime policy.
 `handle/` provides explicit-process same-access duplication and best-effort
 remote handle close; caller-owned allocation, authorization, and transfer policy
 remain outside the library.
+
+`process-hook/` owns suspended-child payload transfer and same-/cross-width
+Detours installation; the caller retains process ownership and rollback.
+The pinned Detours source and license are carried under this subcomponent.

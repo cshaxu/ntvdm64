@@ -80,14 +80,26 @@ selected Control gates and ten release hash checks passed for local package
 DOS4GW/NESticle fixture was absent. [Evidence](../etc/evidence/m0-t475-s1-win32-rpc.md).
 Temporary evidence: build/t475-handle-p.
 
+Owner admits a further T475 S1 P for `lib-win32/process-hook`: extract generic
+suspended-child payload and same-/cross-width hook installation from NTHOOK;
+preserve product payload, routing, caller-owned rollback, Detours provenance
+and helper behavior. Build and test locally, publish only this worktree's
+assets/release and commit; no push. The seven mechanism checks, 118 Hook
+assertions on each architecture, repeated Control 12/12 and ten release hash
+checks passed for package 4d73890b-33b8-4edf-8ee7-0856c8b61761. The initial
+Control handoff observer failure, focused pass and full repeat are recorded in
+[S1 evidence](../etc/evidence/m0-t475-s1-win32-rpc.md); Full was not run and
+the optional DOS4GW/NESticle fixture was absent. Temporary evidence:
+build/t475-hook-p.
+
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T475 S1, Ordinary Mode. |
 | Admission And Approval | Owner requests a new T to separate NXVM and project Win32 libraries, starting with RPC. |
-| Objective | Rename the NXVM library owner to src/lib-nxvm, introduce src/lib-win32, and place generic RPC, process attributes and shared handle mechanisms there. |
-| Non-goals | Change RPC behavior, guest media, main worktree, or alter process admission, resume or rollback semantics. |
+| Objective | Rename the NXVM library owner to src/lib-nxvm, introduce src/lib-win32, and place generic RPC, process attributes and shared handle mechanisms and generic process-hook installation there. |
+| Non-goals | Change RPC behavior, guest media, main worktree, or alter process admission, resume, hook propagation or rollback semantics. |
 | Reference Baseline | T474 S3 local release 9f45db63-8a83-44c4-84b7-f4a45fd9297a; [evidence](../etc/evidence/m0-t474-s3-generic-libraries.md). |
 | Files And ABI Surface | Library trees, include paths, imported manifest and Git attributes, build graphs, tests and architecture authorities. |
 | Applicable Rules | Preserve NXVM provenance and functionality; no product dependency in low-level libraries. Owner directs local release and commit without push. |
