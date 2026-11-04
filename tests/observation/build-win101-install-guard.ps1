@@ -25,19 +25,13 @@ $inputs=@($match.Groups['inputs'].Value.Trim() -split '\s+' | ForEach-Object {
     '"'+$path+'"'
 })
 New-Item -ItemType Directory -Path $build | Out-Null
-if(!$ProbeSource){$ProbeSource="$PSScriptRoot/win101_install_write_guard.cpp"}
+if(!$ProbeSource){$ProbeSource="$PSScriptRoot/win101_install_write_guard.c"}
 $ProbeSource=(Resolve-Path $ProbeSource).Path
 if(!$ProbeSource.StartsWith((Join-Path $repo 'tests')+'\',[StringComparison]::OrdinalIgnoreCase)){throw 'Test-owned probe source required'}
 $sources=@($ProbeSource)
-$sharedHook=[IO.Path]::GetExtension($ProbeSource) -ieq '.c'
-if($sharedHook){
-    foreach($name in @('startup_hooks.c','minhook/src/buffer.c','minhook/src/trampoline.c','minhook/src/hde/hde32.c')){
-        $sources+=Join-Path $repo "src/lib-win32/process-hook/$name"
-    }
-}else{
-    foreach($name in @('detours','disasm','image','modules','creatwth')) {
-        $sources+=Join-Path $repo "src/lib-win32/process-hook/detours/$name.cpp"
-    }
+if([IO.Path]::GetExtension($ProbeSource) -ine '.c'){throw 'C diagnostic source required'}
+foreach($name in @('startup_hooks.c','minhook/src/buffer.c','minhook/src/trampoline.c','minhook/src/hde/hde32.c')){
+    $sources+=Join-Path $repo "src/lib-win32/process-hook/$name"
 }
 $commands=@('@echo off',
     'call "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul',
@@ -45,7 +39,7 @@ $commands=@('@echo off',
 $objects=@()
 foreach($source in $sources) {
     $obj=Join-Path $build ([IO.Path]::GetFileNameWithoutExtension($source)+'.obj')
-    $flags=if($sharedHook){'/std:c11 /FI"'+$repo+'/src/compat/include/process_hook_msvc.h"'}else{'/EHsc /std:c++14'}
+    $flags='/std:c11 /FI"'+$repo+'/src/compat/include/process_hook_msvc.h"'
     $commands+='cl.exe /nologo /MT '+$flags+' /c /Fo"'+$obj+'" "'+$source+'"'
     $commands+='if errorlevel 1 exit /b %errorlevel%'
     $objects+='"'+$obj+'"'
@@ -67,6 +61,7 @@ if ($LASTEXITCODE) { throw "Guard build failed; inspect $build/build.log" }
     baselineSha256=(Get-FileHash $baselinePath).Hash
     formalCache=$cache
     sources=@($sources | ForEach-Object { @{path=$_;sha256=(Get-FileHash $_).Hash} })
+    includedGuardSha256=$(if([IO.Path]::GetFileName($ProbeSource) -ieq 'win31_setup_write_guard.c'){(Get-FileHash "$PSScriptRoot/win101_install_write_guard.c").Hash}else{$null})
     executableSha256=(Get-FileHash "$build/ntvdm.exe").Hash
     unchangedLinkInputs=@($inputs)
 } | ConvertTo-Json -Depth 6 | Set-Content "$build/build.json"

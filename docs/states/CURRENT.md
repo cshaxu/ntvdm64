@@ -69,6 +69,11 @@ C++ test with C tests of the selected direct-payload implementation. x86/x64
 checks passed, as did the product build and Control. Local package
 `392e6339-d0e6-4e4c-a602-3c48f24cde5a` has ten verified hashes. Other
 C++/Detours diagnostics and legacy fixtures remain open.
+P8 converts both test-only installation write guards to C and removes their
+Detours build path. Restricted file operations, unapproved target rejection,
+two actual NTVDM relinks and both real WRITE startup frontiers passed. Product
+build and Control passed; local package `454dd50e-b64b-42ed-bed7-453ae71bfd00`
+has ten verified hashes. WRITE editing, save and exit were not verified.
 The adjacent library's same-width payload-only mechanism, non-Detours payload
 format, helper ordinal and startup-only transaction require compatibility proof;
 no untested semantic equivalence is assumed. Prior [S4 evidence](../etc/evidence/m0-t475-s4-nthook-dependency-cleanup.md),

@@ -260,3 +260,32 @@ Control passed (`p7/control.process`); ten local release image hashes and the
 license match package `392e6339-d0e6-4e4c-a602-3c48f24cde5a`. Full and
 DOS4GW/NESticle were not run. Other diagnostics and legacy C++/Detours remain
 open in S5.
+
+## P8 — C restricted-write installation guards
+
+Both test-only installation guards use the C startup hook transaction and a
+shared path-check implementation; the Win101 and Win31 target and media
+allowlists remain distinct. The Detours diagnostic build branch and the two
+C++ guard sources were removed. `verify-install-guard-c.ps1` exercises both
+x86 configurations against actual file operations (`p8/guard-r6.process`,
+exit 0): owned writes and devices succeed; outside writes, deletion, a sibling
+with a matching path prefix and cross-boundary renames are denied; read-only
+OPEN_IF preserves existing files and does not create missing ones; unapproved
+target configuration exits 127. External fixture contents were checked.
+These cases are not an exhaustive filesystem security proof.
+
+Both guards linked with the actual product object archive into unpublished
+NTVDM images (`p8/relink-r2.process`, exit 0). Both isolated real Win16 WRITE
+startups reached the main/document/page-info windows in four snapshots
+(`p8/live-r3.process`, exit 0). This does not establish editing, saving or
+normal exit. The first live attempt failed because its default temporary
+folder lay outside the guard boundary; its stage was preserved. The successful
+run directed TEMP and TMP to the already-authorized isolated stage rather than
+widening the guard.
+
+The x86/x64 product build and focused checks passed (`p8/build.process`);
+staging checked 63 immutable guest files and 274 exports (`p8/stage.process`).
+Control passed (`p8/control.process`); ten local release image hashes and the
+license match package `454dd50e-b64b-42ed-bed7-453ae71bfd00`. Full and
+DOS4GW/NESticle were not run. The running-process console observer, Detours
+vendor sources and historical C++ fixtures remain open in S5.
