@@ -297,3 +297,9 @@ the existing checklist; 1,822 retained leaf bodies match the original ignoring
 line directives, while 55 differ. These comparisons do not validate local
 patches or effective logical lines under each compilation context and do not
 change any file completion status.
+
+The [r1340 retained leaf diffs](s13-r1340-retained-leaf-differences.json)
+provide exact original/current differences for the 55 differing leaf arms in
+25 files. Inline divergence identifiers and ledger filename matches are
+recorded as leads only; they are not proof that the full change or its
+behavior has been reviewed. No file-completion status is changed.
