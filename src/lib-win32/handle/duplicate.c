@@ -1,4 +1,8 @@
 #include "duplicate.h"
+win32_handle_compare_fn win32_handle_compare_provider(void)
+{
+    return (win32_handle_compare_fn)GetProcAddress(GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
+}
 DWORD win32_handle_duplicate(HANDLE source_process,HANDLE source,HANDLE target_process,HANDLE *output)
 {
     if(!output)return ERROR_INVALID_PARAMETER;

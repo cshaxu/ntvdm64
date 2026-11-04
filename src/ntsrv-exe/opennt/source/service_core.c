@@ -2,6 +2,7 @@
  * not an original OpenNT mirror. Physical separation only: existing function
  * bodies, state authority and lock/resource contracts are preserved. */
 #include <service_internal.h>
+#include "lib-win32/handle/duplicate.h"
 
 /* Original guarded USER notification hook remains unavailable. */
 PFNNOTIFYPROCESSCREATE UserNotifyProcessCreate=NULL;
@@ -15,8 +16,7 @@ OPENNT_BASE_SERVICE *OpenNtBaseServiceStart(void)
     OPENNT_BASE_SERVICE *service=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*service));
     FILETIME now;
     if (!service) return NULL;
-    service->compare_handles=(SERVICE_COMPARE_HANDLES)GetProcAddress(
-        GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
+    service->compare_handles=win32_handle_compare_provider();
     if(!service->compare_handles) {
         SetLastError(ERROR_CALL_NOT_IMPLEMENTED);HeapFree(GetProcessHeap(),0,service);return NULL;
     }

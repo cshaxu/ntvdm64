@@ -2,6 +2,7 @@
  * connection; no inherited frontend-private pipe or helper role is accepted. */
 #define _WIN32_WINNT 0x0A00
 #include "execution.h"
+#include "lib-win32/handle/duplicate.h"
 #include "console_state.h"
 #include "presentation.h"
 #include "worker-base/connection.h"
@@ -369,7 +370,7 @@ static DWORD membership_initialize(native_membership *state)
 static DWORD membership_bind(native_membership *state,HANDLE frontend)
 {
     typedef BOOL (WINAPI *compare_handles)(HANDLE,HANDLE);
-    compare_handles compare=(compare_handles)GetProcAddress(GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
+    compare_handles compare=win32_handle_compare_provider();
     DWORD error;
     if(!compare)return ERROR_CALL_NOT_IMPLEMENTED;
     if(state->capability) {
@@ -486,7 +487,7 @@ int wmain(int argc,WCHAR **argv)
          * worker nor cancels other requests or already running targets. */
         {
             typedef BOOL (WINAPI *compare_handles)(HANDLE,HANDLE);
-            compare_handles compare=(compare_handles)GetProcAddress(GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
+            compare_handles compare=win32_handle_compare_provider();
             /* A GUI command has no frontend attachment. Do not replace an
              * existing text membership when the same carrier starts a GUI. */
             DWORD binding=command.frontend ?

@@ -147,3 +147,26 @@ Control gates passed with identical ten-image package. The optional external
 DOS4GW/NESticle fixture was absent and skipped; Full was not run. Package
 `9e98af44-2d1d-4862-8795-5cabfff112c3` was published only in this worktree's
 `assets/release`, and all ten release hashes matched.
+
+## Follow-up P: Win32 object handle comparison
+
+The owner admitted four sequential library P deliveries. P1 centralizes the
+Windows CompareObjectHandles provider lookup in lib-win32/handle. NTSRV,
+NTVWM and NTVDM retain their existing provider-unavailable and mismatch
+policies. No new source import or guest behavior change is intended.
+
+The x86 and x64 production builds and ownership checks passed. The handle
+fixture passed 16 checks including identical duplicated objects, distinct
+objects and remote cleanup. Stage verified 63 immutable guest files and 274
+NTVDM exports. Control passed all 12 selected gates for package
+c7cf5920-8f98-48c6-badd-24ba9e1a35e8; ten local release hashes matched.
+Full was not run; optional DOS4GW/NESticle was absent.
+
+Initial background launches exited before completion and one had a malformed
+PowerShell argument. A supervised Windows PowerShell build then failed to
+resolve Get-FileHash; the previously recorded pwsh build path succeeded.
+The first Control attempt used a staged binary-only service path and its
+version-negative helper could not find generated service.h. The full repeat
+used OPENNT_BROKER_PRODUCT_BUILD pointing at the actual service build and
+passed. Commands, owned PIDs, times, exit codes and logs are in
+build/t475-handle-compare-p. No main-runtime publication or push was made.

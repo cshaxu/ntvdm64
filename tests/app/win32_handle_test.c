@@ -10,14 +10,18 @@ int main(int argc,char **argv)
     HANDLE stop=NULL,source=NULL,local=NULL,remote=NULL,readback=NULL;
     PROCESS_INFORMATION child={0};STARTUPINFOW startup={0};SECURITY_ATTRIBUTES sa={sizeof(sa),NULL,TRUE};
     WCHAR image[MAX_PATH],command[MAX_PATH+80];int checks=0,result=0;
+    win32_handle_compare_fn compare=win32_handle_compare_provider();
     if(argc==3){HANDLE gate=(HANDLE)(UINT_PTR)_strtoui64(argv[2],NULL,10);return WaitForSingleObject(gate,20000)==WAIT_OBJECT_0?0:2;}
     CHECK(win32_handle_duplicate(GetCurrentProcess(),NULL,GetCurrentProcess(),NULL)==ERROR_INVALID_PARAMETER);
     source=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(source!=NULL);
     CHECK(win32_handle_duplicate(GetCurrentProcess(),source,GetCurrentProcess(),&local)==ERROR_SUCCESS && local!=NULL);
+    CHECK(compare!=NULL);
+    CHECK(compare(source,local));
+    stop=CreateEventW(&sa,TRUE,FALSE,NULL);CHECK(stop!=NULL);
+    CHECK(!compare(source,stop));
     CHECK(SetEvent(local) && WaitForSingleObject(source,0)==WAIT_OBJECT_0);
     CloseHandle(local);local=NULL;
     CHECK(win32_handle_duplicate(GetCurrentProcess(),NULL,GetCurrentProcess(),&local)!=ERROR_SUCCESS && local==NULL);
-    stop=CreateEventW(&sa,TRUE,FALSE,NULL);CHECK(stop!=NULL);
     CHECK(GetModuleFileNameW(NULL,image,MAX_PATH)>0);
     CHECK(swprintf_s(command,_countof(command),L"\"%ls\" child %llu",image,(unsigned long long)(UINT_PTR)stop)>0);
     startup.cb=sizeof(startup);

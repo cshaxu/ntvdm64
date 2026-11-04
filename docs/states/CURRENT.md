@@ -106,6 +106,18 @@ not run; the optional DOS4GW/NESticle fixture was absent.
 
 ## Active Packet
 
+Owner admits four sequential T475 S1 P deliveries: (1) shared Win32 object
+handle comparison, (2) local overlapped pipe-pair creation, (3) parent-process
+identity observation, and (4) file identity comparison in lib-win32/file.
+For each P preserve caller policy and error semantics, run affected builds,
+focused tests and Control, publish the complete package to this worktree's
+assets/release and commit locally. No main-runtime publication or push is
+requested. Each subsequent P begins only after the preceding P is committed.
+P1 shared handle comparison passed x86/x64 builds, 16 handle checks, all 12
+selected Control gates and ten local release hashes for package
+`c7cf5920-8f98-48c6-badd-24ba9e1a35e8`. Full was not run; the optional
+DOS4GW/NESticle fixture was absent. Details are in the S1 evidence record.
+
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T475 S1, Ordinary Mode. |

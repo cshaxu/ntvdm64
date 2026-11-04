@@ -1,5 +1,6 @@
 /* Worker-local transport only. No native Console presentation or guest policy. */
 #include "console_client.h"
+#include "lib-win32/handle/duplicate.h"
 #include "worker_lifecycle.h"
 #include "console_text.h"
 #include "console_geometry.h"
@@ -111,7 +112,7 @@ DWORD ntvdm_console_handle_kind(HANDLE handle)
     console_client *client=owner ? owner->console_client : NULL;
     COMPARE compare;
     if(!client || !handle || handle==INVALID_HANDLE_VALUE)return 0;
-    compare=(COMPARE)GetProcAddress(GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
+    compare=win32_handle_compare_provider();
     if(!compare)return 0;
     if(client->input_identity && compare(handle,client->input_identity))return 1;
     if(client->output_identity && compare(handle,client->output_identity))return 2;
