@@ -4,7 +4,7 @@
 
 Shared BaseSrv clients, scope and copied transport live in common/base_srv;
 service-private authorization and state remain in NTSRV. Product-specific common/rpc is a sibling, not a parent. Owner admits
-independent generic RPC and I/O mechanisms under src/lib/rpc and src/lib/io;
+independent generic RPC and I/O mechanisms under src/lib-win32/rpc and src/lib-win32/io;
 lib must not depend on product common or executable-owned code. This owner direction supersedes older NTSRV-client ownership
 statements below without altering protocol or execution behavior.
 

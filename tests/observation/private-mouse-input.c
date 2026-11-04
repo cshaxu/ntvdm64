@@ -4,7 +4,7 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <stdio.h>
-#include "lib/kvm-window/window.h"
+#include "lib-nxvm/kvm-window/window.h"
 
 static unsigned accepted;
 

@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <wchar.h>
-#include "lib/kvm-window/frame_interface.h"
+#include "lib-nxvm/kvm-window/frame_interface.h"
 static HANDLE read_pipe, write_pipe, raw_log;
 static HANDLE host_resize_seen;
 static HANDLE s34_dir_complete_seen;

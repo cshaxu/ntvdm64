@@ -1422,11 +1422,11 @@ if ($Architecture -eq 'x86') {
     $windowManifest = Get-Content (Join-Path $frontendRoot 'nxvm-import.json') -Raw | ConvertFrom-Json
     $fontBuild = Join-Path $build 'frontend-font'
     & (Join-Path $root 'tools/build/Generate-FrontendFont.ps1') -OutputFile (Join-Path $fontBuild 'native_pc_font.h')
-    if ((Get-NodeSha256 (Join-Path $root 'src/lib/LICENSE.nxvm')) -ne $windowManifest.licenseSha256) {
+    if ((Get-NodeSha256 (Join-Path $root 'src/lib-nxvm/LICENSE.nxvm')) -ne $windowManifest.licenseSha256) {
         throw 'Frontend nxvm license hash mismatch'
     }
     foreach ($row in $windowManifest.files) {
-        if ($row.path -notmatch '^lib/(types|base|kvm-base|kvm-window)/[A-Za-z0-9_./-]+$' -or $row.path.Contains('..')) {
+        if ($row.path -notmatch '^lib-nxvm/(types|base|kvm-base|kvm-window)/[A-Za-z0-9_./-]+$' -or $row.path.Contains('..')) {
             throw "Invalid frontend nxvm path: $($row.path)"
         }
         if ((Get-NodeSha256 (Join-Path (Join-Path $root 'src') $row.path)) -ne $row.sha256) {
@@ -1515,20 +1515,25 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/tests/worker_shutdown.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/worker_shutdown_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build worker-shutdown-test.exe: base_rpc_test_link obj/tests/worker_shutdown.obj worker-base.lib frontend-client.lib obj/run16/support.obj base-rpc-client-core.lib base-rpc-client-launch.lib obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib common-base-srv-bindings.lib broker-transport.lib common-base-srv-transport.lib original-opennt-rtl-x86.lib')
-    $graph.Add('build obj/lib/io/pipe_transfer.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib/io/pipe_transfer.c')))
+    $graph.Add('build obj/lib-win32/io/pipe_transfer.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/io/pipe_transfer.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build lib-io.lib: lib obj/lib/io/pipe_transfer.obj obj/lib/io/console_members.obj obj/lib/io/native_path.obj')
+    $graph.Add('build lib-io.lib: lib obj/lib-win32/io/pipe_transfer.obj obj/lib-win32/io/console_members.obj obj/lib-win32/io/native_path.obj')
     $graph.Add('build obj/common/system_root.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/system_root.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build common-root.lib: lib obj/common/system_root.obj obj/common/guest_environment.obj')
     $graph.Add('build obj/tests/common_system_root.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/common_system_root_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build common-system-root-test.exe: broker_test_link obj/tests/common_system_root.obj common-root.lib')
-    $graph.Add('build obj/lib/io/console_members.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib/io/console_members.c')))
+    $graph.Add('build obj/lib-win32/io/console_members.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/io/console_members.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build common-console.lib: lib obj/common/console_client.obj')
-    $graph.Add('build obj/lib/rpc/local_binding.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib/rpc/local_binding.c')))
-    $graph.Add('build lib-rpc.lib: lib obj/lib/rpc/local_binding.obj')
+    $graph.Add('build obj/lib-win32/rpc/local_binding.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/rpc/local_binding.c')))
+    $graph.Add('build obj/lib-win32/rpc/peer.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/rpc/peer.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build lib-rpc.lib: lib obj/lib-win32/rpc/local_binding.obj obj/lib-win32/rpc/peer.obj')
+    $graph.Add('build obj/tests/win32_rpc_peer.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/win32_rpc_peer_test.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build win32-rpc-peer-test.exe: broker_test_link obj/tests/win32_rpc_peer.obj')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/common/native_command.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/rpc/native_command.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
@@ -1644,7 +1649,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build control-transfer-test.exe: console_test_link obj/tests/control_transfer.obj')
     $graph.Add('build obj/common/console_client.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/console/client.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build obj/lib/io/native_path.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib/io/native_path.c')))
+    $graph.Add('build obj/lib-win32/io/native_path.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/io/native_path.c')))
     $graph.Add('build frontend-client.lib: lib obj/frontend/native_request_client.obj obj/frontend/bootstrap_client.obj')
     $graph.Add('rule frontend_link')
     $graph.Add('  command = link.exe /nologo /subsystem:console /entry:wmainCRTStartup /opt:ref /out:$out /map:$out.map $in rpcrt4.lib ntdll.lib kernel32.lib shell32.lib user32.lib gdi32.lib advapi32.lib legacy_stdio_definitions.lib')
@@ -2252,7 +2257,7 @@ if ($objectOutputDirectories.Count -gt 0) {
         target = 'lib-io.lib'
         selected = ($Architecture -eq 'x86')
         disposition = 'bounded pipe transfer and Console membership mechanics; no product protocol or task policy'
-        sources = @('src/lib/io/pipe_transfer.c', 'src/lib/io/pipe_transfer.h', 'src/lib/io/console_members.c', 'src/lib/io/console_members.h', 'src/lib/io/native_path.c', 'src/lib/io/native_path.h' | ForEach-Object {
+        sources = @('src/lib-win32/io/pipe_transfer.c', 'src/lib-win32/io/pipe_transfer.h', 'src/lib-win32/io/console_members.c', 'src/lib-win32/io/console_members.h', 'src/lib-win32/io/native_path.c', 'src/lib-win32/io/native_path.h' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
     }
@@ -2276,7 +2281,7 @@ if ($objectOutputDirectories.Count -gt 0) {
         target = 'lib-rpc.lib'
         selected = ($Architecture -eq 'x86')
         disposition = 'local RPC binding and async lifetime mechanics; no product protocol or service policy'
-        sources = @('src/lib/rpc/local_binding.c', 'src/lib/rpc/local_binding.h', 'src/lib/rpc/async_call.h' | ForEach-Object {
+        sources = @('src/lib-win32/rpc/local_binding.c', 'src/lib-win32/rpc/local_binding.h', 'src/lib-win32/rpc/async_call.h', 'src/lib-win32/rpc/peer.c', 'src/lib-win32/rpc/peer.h' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
     }

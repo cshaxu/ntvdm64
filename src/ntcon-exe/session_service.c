@@ -1,5 +1,5 @@
 #include "session_service.h"
-#include "lib/io/console_members.h"
+#include "lib-win32/io/console_members.h"
 #include "console_channel.h"
 #include "common/protocol/frontend_lifecycle.h"
 #include "common/base_srv/base_rpc_client.h"

@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "lib/kvm-window/window.h"
+#include "lib-nxvm/kvm-window/window.h"
 typedef struct context_prefix {
     kvm_window *component;
     const kvm_window_frame *frame;

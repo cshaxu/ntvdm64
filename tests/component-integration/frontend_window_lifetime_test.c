@@ -1,4 +1,4 @@
-/* MIT, Copyright (c) 2026 Neko. Narrowed from SoftPC test/lib/kvm-window/
+/* MIT, Copyright (c) 2026 Neko. Narrowed from SoftPC test/lib-nxvm/kvm-window/
  * win32/kvm_window_capture_contract_smoke.c lifetime cases. Exercise the real
  * imported startup/join/dispose code, substituting only OS failure boundaries
  * and a non-UI worker. No product fatal callback or timeout is introduced. */
@@ -6,9 +6,9 @@
 #include <windows.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "lib/types/win32/scalar.h"
-#include "lib/types/win32/sync.h"
-#include "lib/kvm-window/window.h"
+#include "lib-nxvm/types/win32/scalar.h"
+#include "lib-nxvm/types/win32/sync.h"
+#include "lib-nxvm/kvm-window/window.h"
 
 static unsigned fault,closed;
 static lib_win32_dword LIB_WIN32_WINAPI idle_worker(void *opaque);
@@ -54,7 +54,7 @@ static void idle_wait(lib_win32_handle stop)
 #define lib_win32_wait_for_single_object terminal_wait
 #undef lib_win32_close_handle
 #define lib_win32_close_handle close_handle
-#include "lib/kvm-window/win32/component.c"
+#include "lib-nxvm/kvm-window/win32/component.c"
 
 static lib_win32_dword LIB_WIN32_WINAPI idle_worker(void *opaque)
 {

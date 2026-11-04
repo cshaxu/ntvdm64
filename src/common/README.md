@@ -3,7 +3,7 @@
 `base_srv/` owns shared BaseSrv client, identity-scope and copied transport
 mechanisms. NTSRV retains server-side authorization, task and lifecycle
 policy. `rpc/` remains a separate sibling for product-specific RPC calls. Generic
-local RPC and I/O mechanics are owned by `src/lib/rpc` and `src/lib/io`,
+local RPC and I/O mechanics are owned by `src/lib-win32/rpc` and `src/lib-win32/io`,
 including final native file-path resolution.
 
 T431 S2 owner correction shares application_search.[ch] between run16 and
@@ -51,7 +51,7 @@ It depends only on common protocol/pipe mechanics and Win32, not worker-base.
 Common-console.lib is the sole selected provider, shared by NTVDM/NTVWM and
 their fixtures; private worker archives do not embed another copy.
 
-`lib/rpc/local_binding` owns the identical project-added BaseClient/NTMON
+`lib-win32/rpc/local_binding` owns the identical project-added BaseClient/NTMON
 ncalrpc binding/auth-parameter/rollback mechanism. It takes explicit output
 state, retains no global instance, returns precise RPC errors and releases
 all partial bindings/strings on failure. A successful binding is caller-owned.
@@ -107,7 +107,7 @@ snapshot allocations are freed; successful copied records belong to the caller.
 NTMON retains reconnect, selection, confirmation, UI and resource lifetime.
 NTSRV remains snapshot and termination authority; common never enumerates tasks.
 
-`lib/io/console_members` shares allocation, bounded capacity growth, current-Console
+`lib-win32/io/console_members` shares allocation, bounded capacity growth, current-Console
 sampling and release only. The caller explicitly supplies its initial/maximum
 capacity and API-read ceiling. A failure exposes neither partial data nor an
 allocation. Growth retries are immediate size negotiation, not timer polling.
@@ -116,7 +116,7 @@ checks retain 4096, native quiescence/launcher resume retain 65536. Authenticati
 member liveness, join acceptance, resume and quiescence remain local policies.
 Single-member launcher cleanup remains its local stack-buffer query.
 
-`lib/io/pipe_transfer` is project-added byte transport, not a third message
+`lib-win32/io/pipe_transfer` is project-added byte transport, not a third message
 protocol. It is shared by the worker frontend client, frontend channel and
 transport fixtures. The native command/startup control pipes and their reply
 DTOs are removed; these operations use authenticated NTSRV RPC.

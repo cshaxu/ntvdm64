@@ -54,7 +54,7 @@ $sources=@('src/nthook32-dll/entry.cpp','src/nthook32-dll/context.cpp',
 foreach($name in @('detours','modules','disasm','image','creatwth')) {
     $sources += 'src/nthook32-dll/detours/'+$name+'.cpp'
 }
-$sources+=@('src/lib/rpc/local_binding.c','src/common/rpc/management.c','src/common/base_srv/scope.c')
+$sources+=@('src/lib-win32/rpc/local_binding.c','src/common/rpc/management.c','src/common/base_srv/scope.c')
 $objects=@();$manifest=@();$i=0
 foreach($source in $sources) {
     $object='unit'+$i+'.obj';++$i;$objects+=$object

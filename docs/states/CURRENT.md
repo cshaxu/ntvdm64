@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T474 S3 — generic RPC and I/O library ownership**
+**Active: M0 T475 S1 — NXVM and Win32 library separation; RPC**
 
 The owner directs local build, test, publication to this worktree's
 assets/release and local commits for later cherry-pick; no push or publication
@@ -53,26 +53,33 @@ gates passed. Full was not run; the optional DOS4GW/NESticle fixture was absent.
 The S3 evidence records the Git byte-preservation correction and build runs.
 Temporary evidence: build/t474-s3-rebase.
 
+T475 S1 is locally implemented and ready for owner review. NXVM and Win32
+source ownership is separated, and Win32 RPC includes the extracted local
+peer-process mechanism while NTSRV retains authentication and policy. Local
+package b08813cb-cf4a-48d5-8ec8-cd0590a35f47 passed all 12 selected Control
+gates and ten release hash checks. Full was not run; the optional external
+DOS4GW/NESticle fixture was absent. [Evidence](../etc/evidence/m0-t475-s1-win32-rpc.md).
+
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T474 S3, Ordinary Mode. |
-| Admission And Approval | Owner closes S2 locally and inserts S3 for generic RPC and I/O extraction. |
-| Objective | Place NTVDM64-independent low-level RPC and I/O mechanisms in lib/rpc and lib/io; product-specific protocols remain in common. |
-| Non-goals | Alter wire behavior, authentication policy, resource lifetime, guest media, or main worktree. |
-| Reference Baseline | S2 local release e34caccf-13d8-4999-9be2-183ba247b6ee; [S2 evidence](../etc/evidence/m0-t474-s2-basesrv-shared-ownership.md). |
-| Files And ABI Surface | Shared RPC and pipe implementations, complete NTCON lib tree and import assets, src/lib submodules, consumers, production build graphs, tests and authority documents. |
-| Applicable Rules | Owner directs lib extraction; original source provenance, current RPC/pipe contracts, behavior and lifecycle remain binding. |
-| Verification | Audit all common mechanisms and production consumers, verify dependency direction, build affected products, focused success/failure/lifecycle tests, local package, Control, governance and relative links. |
-| Expected Markers | Generic lib has no NTVDM64 protocol or component dependency; shared business protocol remains common; behavior unchanged. |
-| Asset Needs | Existing compiler, local release baseline and isolated fixtures. |
-| Reporting Requirements | Moved and retained mechanisms, actual dependencies, verification and Full/guest limits. |
-| Stop Conditions | Required observable semantic change, guest modification, or inability to separate generic mechanics safely. |
-| Exit Criteria | Reviewed local build, tests, assets/release publication and local commit; no push. |
-| Original Owner Request | Insert S3 to move context-independent low-level integration from common into lib, including lib/rpc and NTCON-worker transport into lib/io. |
-| Similar-Issue Sweep | RPC binding and async, named-pipe transfer, protocol codecs, Console client, shared process and filesystem mechanisms. |
-| Temporary Evidence | build/t474-s3, owner S3, 60-minute phase, 3-GiB and 10-minute no-progress budget; stable caches retained. |
+| Identifier Mode | M0 T475 S1, Ordinary Mode. |
+| Admission And Approval | Owner requests a new T to separate NXVM and project Win32 libraries, starting with RPC. |
+| Objective | Rename the NXVM library owner to src/lib-nxvm, introduce src/lib-win32, and place generic RPC there. |
+| Non-goals | Change RPC behavior, guest media, main worktree, or undertake further extraction beyond RPC. |
+| Reference Baseline | T474 S3 local release 9f45db63-8a83-44c4-84b7-f4a45fd9297a; [evidence](../etc/evidence/m0-t474-s3-generic-libraries.md). |
+| Files And ABI Surface | Library trees, include paths, imported manifest and Git attributes, build graphs, tests and architecture authorities. |
+| Applicable Rules | Preserve NXVM provenance and functionality; no product dependency in low-level libraries. Owner directs local release and commit without push. |
+| Verification | Import identity and dependency checks, affected builds, RPC and NXVM focused tests, local package, Control, governance and relative links. |
+| Expected Markers | NXVM and Win32 ownership distinct; generic RPC clients use lib-win32/rpc; product protocol stays common. |
+| Asset Needs | Existing toolchain and local package; no new source import. |
+| Reporting Requirements | Relocation, behavior, test results and Full/fixture limits. |
+| Stop Conditions | Required semantic change or inability to preserve imported-source provenance. |
+| Exit Criteria | Local build, test, assets/release publication and local commit; no push. |
+| Original Owner Request | Rename current lib as lib-nxvm, create lib-win32 for project common capabilities, first establish lib-win32/rpc. |
+| Similar-Issue Sweep | Existing generic lib/io placement and all lib path references. |
+| Temporary Evidence | build/t475-s1, owner T475 S1, 60-minute phase, 3-GiB and 10-minute no-progress budget. |
 
 ## S12 Closure Record
 

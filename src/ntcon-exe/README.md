@@ -54,9 +54,9 @@ permission to replace the published runtime package.
 
 `nxvm-import.json` pins the exact Win32 dependency closure of the shared types,
 base, kvm-base and kvm-window from SoftPC revision
-0d9f1803ee04bd89bd6150306912a3e8674d0a83, admitted in T448 S8. All52 selected
-files are byte-exact, including the upstream removal of destroy deadlines.
-The shared imported library lives in `src/lib`; the MIT notice remains unchanged. Every normal destroy return consumes the
+0d9f1803ee04bd89bd6150306912a3e8674d0a83, admitted in T448 S8. The 52 selected
+files retain pinned provenance; mechanical include path adaptations are recorded in the manifest, including the upstream removal of destroy deadlines.
+The shared imported library lives in `src/lib-nxvm`; the MIT notice remains unchanged. Every normal destroy return consumes the
 object, including post-join cleanup errors. Failure to establish thread
 quiescence takes the library's immediate process-fatal path; there is no
 application fatal callback or recoverable half-object. Ordinary errors still

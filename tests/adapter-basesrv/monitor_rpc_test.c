@@ -16,7 +16,7 @@
 #include "common/rpc/frontend_control.h"
 #include "common/protocol/management.h"
 #include <rpcasync.h>
-#include "lib/rpc/async_call.h"
+#include "lib-win32/rpc/async_call.h"
 
 #define CHECK(value) do { if (!(value)) { fprintf(stderr,"FAIL %d: %lu\n",__LINE__,(unsigned long)GetLastError()); return 1; } } while (0)
 

@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "lib/kvm-window/window_interface.h"
-#include "lib/kvm-window/render.h"
+#include "lib-nxvm/kvm-window/window_interface.h"
+#include "lib-nxvm/kvm-window/render.h"
 #include "window_frame.h"
 
 #include "ntvwm-exe/text_frame.h"

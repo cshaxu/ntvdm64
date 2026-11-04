@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
-#include "lib/kvm-window/render.h"
+#include "lib-nxvm/kvm-window/render.h"
 
 #define SAMPLES 240u
 #define CHECK(x) do { if(!(x)){fprintf(stderr,"FAIL line %u error %lu\n",__LINE__,GetLastError());return 1;} } while(0)

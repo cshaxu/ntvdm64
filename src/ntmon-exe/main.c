@@ -8,7 +8,7 @@
 #include "service.h"
 #include "common/base_srv/scope.h"
 #include "common/protocol/version.h"
-#include "lib/rpc/local_binding.h"
+#include "lib-win32/rpc/local_binding.h"
 #include "common/rpc/management.h"
 #include "common/protocol/management.h"
 #include "trace_view.h"
