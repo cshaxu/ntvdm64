@@ -36,11 +36,13 @@ int gcWheelDelta;
 
 /* OPENNT-HOST-092: original directory-list operands. Keep one process
  * definition in the original global owner, not per-adapter copies. */
+#line 36
 WCHAR awchSlashStar[] = L"\\*";
 CHAR achSlashStar[] = "\\*";
 WCHAR szOneChar[] = TEXT("0");
 WCHAR szSLASHSTARDOTSTAR[] = TEXT("\\*");
 
+#line 148
 CONST BOOLEAN gabThunkMessage[] = {
     FALSE,    // WM_NULL             0x0000
     TRUE,     // WM_CREATE           0x0001

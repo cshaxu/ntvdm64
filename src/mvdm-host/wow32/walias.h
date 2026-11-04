@@ -23,6 +23,7 @@ typedef HANDLE HAND32;
 
 /* WOW class/handle type identifiers (see WARNING below)
  */
+#line 24
 #define WOWCLASS_UNKNOWN    0   // here begin our "window handle" classes
 #define WOWCLASS_WIN16      1
 #define WOWCLASS_BUTTON     2
@@ -182,6 +183,7 @@ typedef struct _HDW {
 #define GDI32(h16)                 mvdm_wow_gdi_handle_to_native((HAND16)(h16))
 #define GDI16(h32)                 ((HAND16)mvdm_wow_gdi_handle_from_native((HANDLE)(h32)))
 
+#line 192
 #define HGDI16(hobj32)             GDI16((HAND32)(hobj32))
 
 #define HDC32(hdc16)               GDI32((HAND16)(hdc16))
@@ -339,6 +341,7 @@ typedef union _MSGTHUNKBUFFER {
     struct { DWORD flags, native; } text;
     /* DIVERGENCE(MVDM-HOST-DIV-353): original INITIATE node publication. */
     struct { DWORD active, initiator; } ddeinit;
+#line 343
 } MSGTHUNKBUFFER, *LPMSGTHUNKBUFFER;
 
 typedef struct _MSGPARAMEX *LPMSGPARAMEX;
@@ -362,6 +365,7 @@ typedef struct _MSGPARAMEX {
     /* DIV-363: optional owner supplied only by WU32PostMessage. */
     PVOID ddePostConversion;
     BOOL ddePostPacked;
+#line 361
 } MSGPARAMEX;
 
 #define MSG16NEEDSTHUNKING(lpmpex) ((lpmpex)->iClass != WOWCLASS_NOTHUNK)

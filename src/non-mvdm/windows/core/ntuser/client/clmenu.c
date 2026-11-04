@@ -19,10 +19,12 @@
 /* DIVERGENCE(OPENNT-HOST-045): original menu parsers. The original
  * TIF_16BIT predicate is an explicit invocation parameter, not fabricated
  * private TEB state. Recursion carries the same value. */
+#line 29
 LPBYTE MenuLoadWinTemplates(
     LPBYTE lpMenuTemplate,
     HMENU *phMenu,
     BOOL wow16)
+#line 32
 {
     HMENU hMenu;
     UINT menuFlags = 0;
@@ -325,6 +327,7 @@ memoryerror:
 HMENU CreateMenuFromResource(
     LPBYTE lpMenuTemplate,
     BOOL wow16)
+#line 321
 {
     HMENU hMenu = NULL;
     UINT menuTemplateVersion;
@@ -337,12 +340,14 @@ HMENU CreateMenuFromResource(
     /* DIVERGENCE(OPENNT-HOST-045): modern C pointer advancement. */
     menuTemplateVersion = *(WORD *)lpMenuTemplate;
     lpMenuTemplate += sizeof(WORD);
+#line 331
     if (menuTemplateVersion > 1) {
         RIPMSG0(RIP_WARNING, "Menu Version number > 1");
         return NULL;
     }
     menuTemplateHeaderSize = *(WORD *)lpMenuTemplate;
     lpMenuTemplate += sizeof(WORD);
+#line 336
     lpMenuTemplate += menuTemplateHeaderSize;
     switch (menuTemplateVersion) {
     case 0:
@@ -356,6 +361,7 @@ HMENU CreateMenuFromResource(
     return hMenu;
 }
 
+#line 378
 HMENU CommonLoadMenu(
     HINSTANCE hmod,
     HANDLE hResInfo
@@ -372,6 +378,7 @@ HMENU CommonLoadMenu(
             /* DIVERGENCE(OPENNT-HOST-045): WOW-only resource client. */
             hMenu = CreateMenuFromResource(p, TRUE);
 
+#line 393
             UNLOCKRESOURCE(h, hmod);
         }
         /*

@@ -96,6 +96,7 @@ DWORD FindParamMap(VOID* lpFindParam, DWORD lParam, UINT fMode)
     /* DIVERGENCE(MVDM-HOST-DIV-347): NULL is never a mapped input. */
     if (!lParam) return 0;
 
+#line 94
     switch(fMode) {
 
          case PARAM_16:
@@ -200,6 +201,7 @@ PVOID AddParamMap(DWORD dwPtr32, DWORD dwPtr16)
     if (!dwPtr32 || !dwPtr16) return NULL;
 
      // see if it's there already
+#line 194
     if (FindParamMap(&fp, dwPtr16, PARAM_16)) {
 
         lpn = fp.lpNode; // a bit faster ref
@@ -222,6 +224,7 @@ PVOID AddParamMap(DWORD dwPtr32, DWORD dwPtr16)
             SetLastError(error);
             return NULL;
         }
+#line 201
     }
     else { 
         if (NULL != (lpn = CacheBlockAllocate(&gParamMap.blkCache, sizeof(*lpn)))) {

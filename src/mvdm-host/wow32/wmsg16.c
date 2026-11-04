@@ -18,6 +18,7 @@
 /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned rollback through original unthunk. */
 #include "wow_message_lifetime.h"
 
+#line 19
 MODNAME(wmsg16.c);
 
 #define WIN30_STM_SETICON  0x400
@@ -88,6 +89,7 @@ HWND FASTCALL ThunkMsg16(LPMSGPARAMEX lpmpex)
     /* DIVERGENCE(MVDM-HOST-DIV-344): distinguish failure from thread HWND0. */
     lpmpex->fThunkSucceeded = FALSE;
 
+#line 123
     lpmpex->uMsg = wMsg;
     lpmpex->uParam = INT32(lpmpex->Parm16.WndProc.wParam);  // Sign extend
     lpmpex->lParam =lpmpex->Parm16.WndProc.lParam;
@@ -124,6 +126,7 @@ HWND FASTCALL ThunkMsg16(LPMSGPARAMEX lpmpex)
 
     lpmpex->fThunkSucceeded = f;
 
+#line 157
     return (f) ? lpmpex->hwnd : (HWND)NULL;
 
 }
@@ -189,6 +192,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
 
             /* DIVERGENCE(MVDM-HOST-DIV-347): retain this call's acquisition. */
             lpmpex->MsgBuffer->text.flags = 0;
+#line 220
             GETPSZPTR(lParam, (LPSZ)lParamMap);
             *plParamNew = lParamMap;
             lpmpex->MsgBuffer->text.native = lParamMap;
@@ -201,6 +205,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
                 lpmpex->MsgBuffer->text.native = mapped;
                 lpmpex->MsgBuffer->text.flags |= WOW_TEXT_MAPPED;
             }
+#line 222
             if (lParamMap != *plParamNew) {
                 FREEPSZPTR((LPSZ)lParamMap);
             }
@@ -305,6 +310,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
                                                 malloc_w(*lpT) : lpmpex->MsgBuffer);
                 /* DIVERGENCE(MVDM-HOST-DIV-346): preserve conversion failure. */
                 if (!*plParamNew) { FREEVDMPTR(lpT); return FALSE; }
+#line 321
                 if (*plParamNew) {
                     RtlCopyMemory((PVOID)*plParamNew, lpT, *lpT);
                 }
@@ -708,6 +714,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
         lpmpex->MsgBuffer->ddeinit.initiator = wParam;
         lpmpex->MsgBuffer->ddeinit.active =
             WI32DDEAddInitiator((HAND16) wParam) ? WOW_DDE_INITIATE_ACTIVE : 0;
+#line 721
         break;
 
     case WM_DDE_ACK:
@@ -732,6 +739,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
                     }
                     if (lpmpex->ddePostConversion && *plParamNew)
                         lpmpex->ddePostPacked = TRUE; /* DIV-363 */
+#line 743
                 }
                 else {
                     if (fThunkDDEmsg) {
@@ -758,6 +766,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
         DDECONVERSION Conversion;
         PDDECONVERSION pConversion = lpmpex->ddePostConversion ?
             (PDDECONVERSION)lpmpex->ddePostConversion : &Conversion; /* DIV-363 */
+#line 766
         HWND16 hwnd16 = lpmpex->Parm16.WndProc.hwnd;
         WORD wMsg     = lpmpex->Parm16.WndProc.wMsg;
 
@@ -765,6 +774,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
 
         if (fWhoCalled == WOWDDE_POSTMESSAGE) {
             DDEBeginConversion(pConversion);
+#line 772
             if (h32 = DDEFindPair32(hwnd16, wParam, (HAND16) LOWORD(lParam))) {
                 DDEDeletehandle(LOWORD(lParam), h32);
                 GlobalFree(h32);
@@ -773,6 +783,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
             h32 = DDECopyhData32(hwnd16, wParam, (HAND16) LOWORD(lParam), &DdeInfo, pConversion);
 	    // WARNING: 16-bit memory may have moved
             if (!h32) return FALSE;
+#line 779
             DdeInfo.Flags = DDE_PACKET;
             DdeInfo.h16 = 0;
             if (!DDETrackhandle(pConversion, hwnd16, wParam,
@@ -781,12 +792,14 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
                 GlobalFree(h32);
                 return FALSE;
             }
+#line 782
             *plParamNew = PackDDElParam(wMsg, (LONG) h32, (LONG) HIWORD(lParam));
             if (!*plParamNew) {
                 DDERollback32(pConversion, hwnd16, wParam);
                 return FALSE;
             }
             if (lpmpex->ddePostConversion) lpmpex->ddePostPacked = TRUE;
+#line 783
         }
         else {
             if (fThunkDDEmsg) {
@@ -811,6 +824,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
         DDECONVERSION Conversion;
         PDDECONVERSION pConversion = lpmpex->ddePostConversion ?
             (PDDECONVERSION)lpmpex->ddePostConversion : &Conversion; /* DIV-363 */
+#line 804
         INT cb;
         VPVOID  vp;
         LPBYTE  lpMem16;
@@ -822,6 +836,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
 
         if (fWhoCalled == WOWDDE_POSTMESSAGE) {
             DDEBeginConversion(pConversion);
+#line 814
             if (h32 = DDEFindPair32(hwnd16, wParam, (HAND16) LOWORD(lParam))) {
                 DDEDeletehandle(LOWORD(lParam), h32);
                 GlobalFree(h32);
@@ -846,12 +861,14 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
                 GlobalFree(h32);
                 return FALSE;
             }
+#line 834
             *plParamNew = PackDDElParam(wMsg, (LONG) h32, (LONG) HIWORD(lParam));
             if (!*plParamNew) {
                 DDERollback32(pConversion, hwnd16, wParam);
                 return FALSE;
             }
             if (lpmpex->ddePostConversion) lpmpex->ddePostPacked = TRUE;
+#line 835
         }
         else {
             if (fThunkDDEmsg) {
@@ -874,6 +891,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
         DDECONVERSION Conversion;
         PDDECONVERSION pConversion = lpmpex->ddePostConversion ?
             (PDDECONVERSION)lpmpex->ddePostConversion : &Conversion; /* DIV-363 */
+#line 854
         HWND16 hwnd16 = lpmpex->Parm16.WndProc.hwnd;
         WORD wMsg     = lpmpex->Parm16.WndProc.wMsg;
 
@@ -881,6 +899,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
 
         if (fWhoCalled == WOWDDE_POSTMESSAGE) {
             DDEBeginConversion(pConversion);
+#line 860
             if (h32 = DDEFindPair32(hwnd16, wParam, (HAND16) LOWORD(lParam))) {
                 DDEDeletehandle(LOWORD(lParam), h32);
                 GlobalFree(h32);
@@ -894,6 +913,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
                 h32 = DDECopyhData32(hwnd16, wParam, (HAND16) LOWORD(lParam), &DdeInfo, pConversion);
 		// WARNING: 16-bit memory may have moved
                 if (!h32) return FALSE;
+#line 872
                 DdeInfo.Flags = DDE_PACKET;
                 DdeInfo.h16 = 0;
                 if (!DDETrackhandle(pConversion, hwnd16, wParam,
@@ -902,6 +922,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
                     GlobalFree(h32);
                     return FALSE;
                 }
+#line 875
             }
 
             *plParamNew = PackDDElParam(wMsg, (LONG) h32, (LONG) HIWORD(lParam));
@@ -910,6 +931,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
                 return FALSE;
             }
             if (lpmpex->ddePostConversion) lpmpex->ddePostPacked = TRUE;
+#line 878
         }
         else {
             if (fThunkDDEmsg) {
@@ -938,6 +960,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
         DDECONVERSION Conversion;
         PDDECONVERSION pConversion = lpmpex->ddePostConversion ?
             (PDDECONVERSION)lpmpex->ddePostConversion : &Conversion; /* DIV-363 */
+#line 903
         INT     cb;
         VPVOID  vp;
         VPVOID  vp1;
@@ -950,11 +973,13 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
 
         if (fWhoCalled == WOWDDE_POSTMESSAGE) {
             DDEBeginConversion(pConversion);
+#line 914
             vp = GlobalLock16(HIWORD(lParam), &cb);
             if (vp) {
                 GETMISCPTR(vp, lpMem16);
                 h32 = GlobalAlloc(GMEM_DDESHARE, cb);
             }
+#line 918
             if (h32) {
                 lpMem32 = GlobalLock(h32);
                 RtlCopyMemory(lpMem32, lpMem16, cb);
@@ -991,11 +1016,13 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
                             GlobalFree(h32);
                             h32 = NULL;
                         }
+#line 950
                     }
                     else {
                         LOGDEBUG (0, ("WOW::WMSG16: WM_DDE_EXECUTE : Can't allocate h16 !\n"));
                         GlobalFree(h32);
                         h32 = NULL;
+#line 953
                     }
                 }
                 else {
@@ -1008,11 +1035,13 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
                         GlobalFree(h32);
                         h32 = NULL;
                     }
+#line 961
                 }
             }
             if (vp) {
                 GlobalUnlock16(HIWORD(lParam));
             }
+#line 967
         }
         else {
             if (!(h32 = DDEFindPair32(hwnd16, wParam, (HAND16) HIWORD(lParam)))) {
@@ -1022,6 +1051,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
 
         *plParamNew = (ULONG)h32;
         if (fWhoCalled == WOWDDE_POSTMESSAGE && !h32) return FALSE;
+#line 975
         }
         break;
 
@@ -1042,6 +1072,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
         ZeroMemory(&lpmpex->MsgBuffer->copydata, sizeof(lpmpex->MsgBuffer->copydata));
         if (!hwnd16 || !lParam) return FALSE;
 
+#line 989
         lpmpex->uParam = (LONG) HWND32(wParam);
 
         pTemp = CopyDataFindData32(hwnd16, wParam, lParam);
@@ -1050,17 +1081,20 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
         }
         else {
           __try {
+#line 992
             GETMISCPTR(lParam, lpCDS16);
             if (!lpCDS16) goto CopyData16Failed;
             dwData = lpCDS16->dwData;
             cbData = lpCDS16->cbData;
             data16 = lpCDS16->lpData;
             FREEMISCPTR(lpCDS16);
+#line 993
             if (lpCDS32 = (PCOPYDATASTRUCT) malloc_w(sizeof(COPYDATASTRUCT))) {
                 lpmpex->MsgBuffer->copydata.header = (DWORD)lpCDS32;
                 lpmpex->MsgBuffer->copydata.flags = WOW_COPY_HEADER;
                 lpCDS32->dwData = dwData;
                 if (lpCDS32->cbData = cbData) {
+#line 996
                     if (lpMem32 = malloc_w(lpCDS32->cbData)) {
                         lpmpex->MsgBuffer->copydata.data = (DWORD)lpMem32;
                         lpmpex->MsgBuffer->copydata.flags |= WOW_COPY_DATA;
@@ -1068,16 +1102,21 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
                         GETMISCPTR(data16, lpMem16);
                       __try {
                         if (!lpMem16) goto CopyData16Failed;
+#line 998
                         if (lpMem16) {
                             RtlCopyMemory(lpMem32, lpMem16, lpCDS32->cbData);
                             if (!CopyDataAddNode (hwnd16, wParam, data16, (DWORD) lpMem32, COPYDATA_16)) goto CopyData16Failed;
                             lpmpex->MsgBuffer->copydata.flags |= WOW_COPY_DATA_NODE;
+#line 1001
                         }
                       } __finally {
+#line 1002
                         FREEMISCPTR(lpMem16);
                       }
+#line 1003
                     }
                     else goto CopyData16Failed;
+#line 1004
                     lpCDS32->lpData = lpMem32;
                 }
                 else {
@@ -1090,6 +1129,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
           } __finally {
             if (AbnormalTermination()) wow_message_unwind16(lpmpex);
           }
+#line 1018
         }
 
         *plParamNew = (LONG)lpCDS32;
@@ -1098,6 +1138,7 @@ CopyData16Failed:
         wow_message_unwind16(lpmpex);
         SetLastError(ERROR_NOT_ENOUGH_MEMORY);
         return FALSE;
+#line 1021
         }
         break;
 
@@ -1254,6 +1295,7 @@ VOID FASTCALL UnThunkWMMsg16(LPMSGPARAMEX lpmpex)
             if (!(owned & WOW_TEXT_ACTIVE)) break;
             if (owned & WOW_TEXT_MAPPED)
                 DeleteParamMap(lpmpex->Parm16.WndProc.lParam, PARAM_16, &fFreePtr);
+#line 1172
             if (fFreePtr) {
                 FREEPSZPTR((LPSZ)lpmpex->MsgBuffer->text.native);
             }
@@ -1389,6 +1431,7 @@ VOID FASTCALL UnThunkWMMsg16(LPMSGPARAMEX lpmpex)
             lpmpex->MsgBuffer->ddeinit.active = 0;
             WI32DDEDeleteInitiator(initiator);
         }
+#line 1302
         break;
 
     case WM_NEXTMENU:
@@ -1413,6 +1456,7 @@ VOID FASTCALL UnThunkWMMsg16(LPMSGPARAMEX lpmpex)
             if (owned & WOW_COPY_HEADER_NODE) CopyDataDeleteNode(hwnd16, wParam, header);
             if (owned & WOW_COPY_DATA) free_w((PVOID)data);
             if (owned & WOW_COPY_HEADER) free_w((PVOID)header);
+#line 1330
         }
         break;
 

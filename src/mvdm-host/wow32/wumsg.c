@@ -15,6 +15,7 @@
 #include "precomp.h"
 /* DIVERGENCE(MVDM-HOST-DIV-344): original conversion finalizers. */
 #include "wow_message_lifetime.h"
+#line 16
 #pragma hdrstop
 
 
@@ -33,6 +34,7 @@ __declspec(thread) BOOL fWhoCalled = FALSE;
 
 // DDE bit used in GetMessage and PeekMessage
 
+#line 33
 #define fAckReq 0x8000
 #define fRelease 0x2000
 
@@ -78,6 +80,7 @@ ULONG FASTCALL WU32CallMsgFilter(PVDMFRAME pFrame)
     MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
     __try {
 
+#line 77
     GETARGPTR(pFrame, sizeof(CALLMSGFILTER16), parg16);
 
     vpf1 = (VPMSG16)(parg16->f1);
@@ -87,6 +90,7 @@ ULONG FASTCALL WU32CallMsgFilter(PVDMFRAME pFrame)
     if (!mpex.fThunkSucceeded) { FREEARGPTR(parg16); RETURN(0); }
 
     // Note: getmsg16 may have caused 16-bit memory movement
+#line 85
     FREEARGPTR(pFrame);
     FREEARGPTR(parg16);
 
@@ -120,6 +124,7 @@ ULONG FASTCALL WU32CallMsgFilter(PVDMFRAME pFrame)
     } __finally {
         wow_message_unwind16(&mpex);
     }
+#line 115
 }
 
 
@@ -204,6 +209,7 @@ ULONG FASTCALL WU32CallWindowProc(PVDMFRAME pFrame)
         MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
     __try {
 
+#line 198
         mpex.Parm16.WndProc.hwnd   = f2;
         mpex.Parm16.WndProc.wMsg   = f3;
         mpex.Parm16.WndProc.wParam = f4;
@@ -247,8 +253,10 @@ ULONG FASTCALL WU32CallWindowProc(PVDMFRAME pFrame)
         }
         } __finally {
         wow_message_unwind16(&mpex);
+#line 239
     }
 }
+#line 240
     else {
         Parm16.WndProc.hwnd   = f2;
         Parm16.WndProc.wMsg   = f3;
@@ -332,6 +340,7 @@ ULONG FASTCALL WU32DefDlgProc(PVDMFRAME pFrame)
     HWND hdlg;
     MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
     __try {
+#line 322
     register PDEFDLGPROC16 parg16;
 
     GETARGPTR(pFrame, sizeof(DEFDLGPROC16), parg16);
@@ -365,6 +374,7 @@ ULONG FASTCALL WU32DefDlgProc(PVDMFRAME pFrame)
     } __finally {
         wow_message_unwind16(&mpex);
     }
+#line 352
 }
 
 
@@ -446,6 +456,7 @@ ULONG FASTCALL WU32DefFrameProc(PVDMFRAME pFrame)
     
     MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
     __try {
+#line 432
     register PDEFFRAMEPROC16 parg16;
 
     GETARGPTR(pFrame, sizeof(DEFFRAMEPROC16), parg16);
@@ -508,6 +519,7 @@ ULONG FASTCALL WU32DefFrameProc(PVDMFRAME pFrame)
     } __finally {
         wow_message_unwind16(&mpex);
     }
+#line 491
 }
 
 
@@ -593,6 +605,7 @@ ULONG FASTCALL WU32DefMDIChildProc(PVDMFRAME pFrame)
     MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
     __try {
 
+#line 575
     GETARGPTR(pFrame, sizeof(DEFMDICHILDPROC16), parg16);
 
     mpex.lReturn = 0;
@@ -623,6 +636,7 @@ ULONG FASTCALL WU32DefMDIChildProc(PVDMFRAME pFrame)
     } __finally {
         wow_message_unwind16(&mpex);
     }
+#line 602
 }
 
 
@@ -670,6 +684,7 @@ ULONG FASTCALL WU32DefWindowProc(PVDMFRAME pFrame)
     MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
     __try {
 
+#line 648
     GETARGPTR(pFrame, sizeof(DEFWINDOWPROC16), parg16);
 
     mpex.lReturn = 0;
@@ -699,6 +714,7 @@ ULONG FASTCALL WU32DefWindowProc(PVDMFRAME pFrame)
     } __finally {
         wow_message_unwind16(&mpex);
     }
+#line 674
 }
 
 
@@ -741,6 +757,7 @@ ULONG FASTCALL WU32DispatchMessage(PVDMFRAME pFrame)
     MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
     __try {
 
+#line 715
     GETARGPTR(pFrame, sizeof(DISPATCHMESSAGE16), parg16);
 
     wTDB = pFrame->wTDB;
@@ -749,6 +766,7 @@ ULONG FASTCALL WU32DispatchMessage(PVDMFRAME pFrame)
     if (!mpex.fThunkSucceeded) { FREEARGPTR(parg16); RETURN(0); }
 
     // Note: getmsg16 may have caused 16-bit memory movement
+#line 722
     FREEARGPTR(pFrame);
     FREEARGPTR(parg16);
 
@@ -771,6 +789,7 @@ ULONG FASTCALL WU32DispatchMessage(PVDMFRAME pFrame)
     } __finally {
         wow_message_unwind16(&mpex);
     }
+#line 741
 }
 
 
@@ -1201,6 +1220,7 @@ get_next_dde_message:
         /* DIVERGENCE(MVDM-HOST-DIV-350): only this conversion owns the selector. */
         BOOL savedThunkDDE = fThunkDDEmsg;
         __try {
+#line 1160
         fThunkDDEmsg = (BOOL) (f5 & PM_REMOVE);
         ulReturn = putmsg16(vpf1, &t1);
 
@@ -1350,6 +1370,7 @@ ULONG FASTCALL WU32PostAppMessage(PVDMFRAME pFrame)
     MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
     __try {
 
+#line 1308
     GETARGPTR(pFrame, sizeof(POSTAPPMESSAGE16), parg16);
 
     mpex.lReturn = 0;
@@ -1369,6 +1390,7 @@ ULONG FASTCALL WU32PostAppMessage(PVDMFRAME pFrame)
 
     /* DIV-344: a successful thread conversion legitimately has HWND0. */
     if (!mpex.fThunkSucceeded) RETURN(0);
+#line 1325
     mpex.lReturn = PostThreadMessage(f1, mpex.uMsg, mpex.uParam, mpex.lParam);
 
     if (MSG16NEEDSTHUNKING(&mpex)) {
@@ -1380,6 +1402,7 @@ ULONG FASTCALL WU32PostAppMessage(PVDMFRAME pFrame)
     } __finally {
         wow_message_unwind16(&mpex);
     }
+#line 1333
 }
 
 
@@ -1462,6 +1485,7 @@ static VOID W32CancelDDEPost(LPMSGPARAMEX mpex, PDDECONVERSION conversion)
     }
 }
 
+#line 1396
 ULONG FASTCALL WU32PostMessage(PVDMFRAME pFrame)
 {
     LONG l;
@@ -1474,10 +1498,12 @@ ULONG FASTCALL WU32PostMessage(PVDMFRAME pFrame)
     DDECONVERSION postConversion = {0}; /* DIV-363: post-result ownership. */
     BOOL savedWhoCalled = fWhoCalled; /* DIVERGENCE(MVDM-HOST-DIV-350): caller scope. */
     __try {
+#line 1405
     DWORD err = NO_ERROR;
 
     mpex.ddePostConversion = &postConversion;
 
+#line 1407
     GETARGPTR(pFrame, sizeof(POSTMESSAGE16), parg16);
 
     // Apps should never use PostMessage to post messages that have
@@ -1545,6 +1571,7 @@ ULONG FASTCALL WU32PostMessage(PVDMFRAME pFrame)
             W32CancelDDEPost(&mpex, &postConversion);
         }
 
+#line 1466
         mpex.lReturn = l;
         if (MSG16NEEDSTHUNKING(&mpex)) {
             (mpex.lpfnUnThunk16)(&mpex);
@@ -1578,6 +1605,7 @@ ULONG FASTCALL WU32PostMessage(PVDMFRAME pFrame)
         }
         __finally { fWhoCalled = savedWhoCalled; } /* DIV-350 */
     }
+#line 1492
 }
 
 
@@ -1780,6 +1808,7 @@ ULONG FASTCALL WU32SendDlgItemMessage(PVDMFRAME pFrame)
     MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
     __try {
 
+#line 1693
 static HWND  hwndCached = NULL ;
 static DWORD dwCachedItem = 0L ;
 
@@ -1853,6 +1882,7 @@ static DWORD dwCachedItem = 0L ;
     } __finally {
         wow_message_unwind16(&mpex);
     }
+#line 1763
 }
 
 
@@ -1902,6 +1932,7 @@ ULONG FASTCALL WU32SendMessage(PVDMFRAME pFrame)
     MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
     BOOL savedWhoCalled = fWhoCalled; /* DIVERGENCE(MVDM-HOST-DIV-350): caller scope. */
     __try {
+#line 1810
     HWND16 hwndOld;
     UINT uMsgOld;
     UINT uParamOld;
@@ -1969,6 +2000,7 @@ ULONG FASTCALL WU32SendMessage(PVDMFRAME pFrame)
         __try { wow_message_unwind16(&mpex); }
         __finally { fWhoCalled = savedWhoCalled; } /* DIV-350 */
     }
+#line 1873
 }
 
 

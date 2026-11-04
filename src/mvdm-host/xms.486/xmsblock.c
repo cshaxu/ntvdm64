@@ -14,6 +14,7 @@
 #include "xms.h"
 #include "mvdm_xms_memory.h"
 #include "mvdm_softpc_guest_memory.h"
+#line 15
 #include <memory.h>
 #include <string.h>
 #include <xmssvc.h>
@@ -196,6 +197,7 @@ ULONG MoveInfoAddress;
     }
 
     pExtMoveInfo = MoveInfo + sizeof(MoveInfo);
+#line 183
     (ULONG)pExtMoveInfo = (ULONG)pExtMoveInfo -4;
     cbTransfer = (FETCHDWORD(*(PULONG)pExtMoveInfo));
     if (cbTransfer > ((ULONG)-1) / 2u) {
@@ -203,6 +205,7 @@ ULONG MoveInfoAddress;
         return;
     }
     cbTransfer *= 2;                    // Get in bytes
+#line 186
     (ULONG)pExtMoveInfo = (ULONG)pExtMoveInfo -4;
     (DWORD)pSrc = FETCHDWORD(*(PULONG)pExtMoveInfo);
     (ULONG)pExtMoveInfo = (ULONG)pExtMoveInfo -4;

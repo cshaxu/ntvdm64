@@ -14,10 +14,12 @@ Abstract:
 
 #include "xactsrv_wksta_minimal.h"
 
+#line 36
 NTSTATUS
 XsNetMessageBufferSend (
     API_HANDLER_PARAMETERS
     )
+#line 58
 {
     NET_API_STATUS status;
 
@@ -28,6 +30,7 @@ XsNetMessageBufferSend (
 
     API_HANDLER_PARAMETERS_REFERENCE;
 
+#line 79
     XsConvertTextParameter(
         nativeRecipient,
         (LPSTR)SmbGetUlong( &parameters->Recipient )
@@ -67,6 +70,7 @@ XsNetMessageBufferSend (
                  nativeBufLen
                  );
 
+#line 129
 cleanup:
 
     NetpMemoryFree( nativeRecipient );
@@ -77,6 +81,7 @@ cleanup:
 #endif // def UNICODE
 #line 136
 
+#line 141
     Header->Status = (WORD)status;
 
     return STATUS_SUCCESS;

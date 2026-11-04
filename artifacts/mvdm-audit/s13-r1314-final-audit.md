@@ -344,3 +344,13 @@ Eight images match byte-for-byte and NTVDM/WOW32 differ only by PE timestamps
 repeated under the owner-approved unchanged-image rule. Counts remain 182
 byte-identical / 573 differing files reviewed / 1,056 total, with 301
 differing files pending.
+
+The [r1346 batch](s13-r1346-batch.json) aligns matching source lines on
+observed selected paths in ten files; [context recheck](s13-r1346-context-recheck.json)
+passes. Four additionally passed [strict tree review](s13-r1346-strict-review.json);
+the other six remain pending. Current count: 182 byte-identical / 577 differing
+files reviewed / 1,056 total; 297 differing files pending. Cached x86 root,
+NTVDM, WOW32 and x64 builds passed; ten images published and verified. Eight
+match byte-for-byte and NTVDM/WOW32 differ only by PE timestamps
+([comparison](s13-r1346-build-image-compare.json)); tests were not repeated
+under the owner-approved unchanged-image rule.

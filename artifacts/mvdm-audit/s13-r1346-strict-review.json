@@ -1,0 +1,53 @@
+{
+  "method": "Same strict original-tree and observed selected-projection review as r1343; this does not certify unobserved contexts or local code runtime behavior.",
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/walias.h",
+      "before_sha256": "2782af53c411b739cc921b625b3a439df8b5bd33fb10fecf1ab23cc267f9462f",
+      "original_sha256": "c87ae2f07b48f09276d205e2236d97f084f75f21706c524cb27734a3e36001cc",
+      "anchors": {},
+      "matched_lines": 389,
+      "strict_tree": {
+        "excluded": 1,
+        "retained": 1,
+        "groups": 1
+      }
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsg16.c",
+      "before_sha256": "fd125d80a62ad1307a9fa5f723c6bb4cf1b57cba35b1aaa80c67b62e81effda5",
+      "original_sha256": "eb7b726626232ad95f1ff766004f8bea6fca3d25111124dd5c18e8512c1dbe44",
+      "anchors": {},
+      "matched_lines": 1432,
+      "strict_tree": {
+        "excluded": 3,
+        "groups": 3,
+        "retained": 2
+      }
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+      "before_sha256": "99fa1a275ea559b9630ed0798423ab9fddc739af121c7685bab01f8470ca1ecf",
+      "original_sha256": "d8fe5a80d5848f2951843d7ba94752cb3223945a48630350835422389cd1da6f",
+      "anchors": {},
+      "matched_lines": 1179,
+      "strict_tree": {
+        "excluded": 5,
+        "groups": 5,
+        "retained": 3
+      }
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+      "before_sha256": "092c8a21de74f7998a269811a66f1064f4bf8ce8eac5123a2b33dc305456f79f",
+      "original_sha256": "dee4bdb0c79e58993b25ab65c37eb71cc4cfc9a551a9a0e07b5a2f67eb8461cd",
+      "anchors": {},
+      "matched_lines": 360,
+      "strict_tree": {
+        "excluded": 7,
+        "retained": 3,
+        "groups": 7
+      }
+    }
+  ]
+}
