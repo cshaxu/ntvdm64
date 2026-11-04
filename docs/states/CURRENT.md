@@ -2,7 +2,9 @@
 
 ## Current Work
 
-**Active: M0 T475 S4 — NTHook dependency cleanup**
+**No active M/T/S packet.** M0 T475 S4 is locally concluded; its three local
+P commits await the owner-directed later cherry-pick. Main-runtime publication
+and push remain deferred for this worktree.
 
 The owner accepts the latest local audit and admits S4 to remove the private
 NTHook source/header/static-link dependencies of Run16, NTVDM and NTVWM. The
@@ -12,11 +14,11 @@ build-boundary defect in S4. S3's earlier header-closure claim was incomplete.
 The owner directs worktree-local build, tests, asset publication and commits,
 with later cherry-pick and no push or main-runtime publication.
 
-## Active Packet
+## T475 S4 Local Closure Record
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T475 S4, Ordinary Mode. |
+| Identifier Mode | M0 T475 S4, Ordinary Mode; locally concluded. |
 | Admission And Approval | Owner closes the local audit and admits a new NTHook-dependency cleanup task. |
 | Objective | Remove private NTHook dependencies from other components and the reached private SoftPC forced-header dependencies without altering hook behavior. |
 | Non-goals | Change hook interception policy, packet identity, session authority, guest media, the allowed Worker Base edges, or separately queued NTVDM runtime imports. |
@@ -28,7 +30,7 @@ with later cherry-pick and no push or main-runtime publication.
 | Asset Needs | Existing toolchain, fixtures and local package; no new external source or guest media. |
 | Reporting Requirements | Identify each removed edge and remaining runtime boundaries, ownership, tests and local publication limitations. |
 | Stop Conditions | Required semantic concession, duplicate state authority, incompatible ABI or missing required evidence. |
-| Exit Criteria | All admitted dependencies remediated and audited; every production P built, tested, published locally and committed; main integration deferred per owner. |
+| Exit Criteria | Admitted dependencies locally remediated and audited; production Ps built, tested, locally published and committed; main integration deferred per owner. |
 | Original Owner Request | Close the current S and admit a new task to clean up NTHook dependencies. |
 | Similar-Issue Sweep | Run16, NTVDM, NTVWM, Hook32/64, worker and generic-library actual link selections and compiler-recorded transitive headers. |
 | Temporary Evidence | Worktree-local build/t475-s4 with owned compiler and test processes. |
@@ -45,7 +47,12 @@ P1 passed the x86/x64 build, launcher boundary negative control, 118 x86 and
 and DOS4GW/NESticle were not run. P2 moves the shared installer to common;
 both worker boundary checks, 118 x86, 118 x64, 168 cross-width assertions and
 12 Control gates passed. Local package `3f1e35fd-7d71-4e0b-96be-9ff23b1257cd`
-has ten verified hashes. P3 remains active.
+has ten verified hashes. P3 removed private forced headers from the complete
+non-worker archive closures; 98 closure objects and a negative control, all
+12 Control gates, real DOS async/NetAPI and x86/x64/cross-width Hook tests
+passed. Local package `eedc8134-05c6-449d-b799-c036d739e909` has ten verified
+hashes. Full and DOS4GW/NESticle were not run. Runtime NTVDM imports remain in
+the separately queued task.
 
 The owner closes the [S2 dependency inventory](../etc/evidence/m0-t475-s2-component-dependency-inventory.md)
 and admits S3 to address the illegal Worker Base and NTVDM dependencies through

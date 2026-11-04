@@ -2228,6 +2228,24 @@ if($Architecture -eq 'x86') {
         }
     }
 }
+# The SoftPC terminate namespace shim belongs to worker-specific compilation.
+# Shared and non-MVDM objects can be selected by other products, so do not
+# force that private header into their compiler dependency closures. Preserve
+# each object's remaining flags, including any explicit per-file bindings.
+$privateSymbolForce = '/FI "' + (NinjaPath $softpcSymbolCompat) + '" '
+for ($index = 0; $index -lt $graph.Count; ++$index) {
+    if ($graph[$index] -match '^build obj/[^:]+\.obj: cc(?:_rtl)? [^\r\n]*src/(?:common|compat|lib-win32|lib-nxvm|non-mvdm)/') {
+        if ($index + 1 -lt $graph.Count -and $graph[$index + 1] -match '^  (?:rtl_)?cflags = ') {
+            $graph[$index + 1] = $graph[$index + 1].Replace($privateSymbolForce, '')
+        } else {
+            $binding = if ($graph[$index] -match ': cc_rtl ') {
+                '  rtl_cflags = ' + $redirBaseFlags + ' /Gz'
+            } else { '  cflags = ' + $redirBaseFlags }
+            $graph.Insert($index + 1, $binding)
+            ++$index
+        }
+    }
+}
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'), (($graph -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
 
 # Some product objects live below a component-local namespace (for example

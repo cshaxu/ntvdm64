@@ -43,3 +43,29 @@ payload and handle transfer, invalid inputs and cleanup. Local package
 `3f1e35fd-7d71-4e0b-96be-9ff23b1257cd` has ten matching release hashes. Full
 was not run and DOS4GW/NESticle was absent. Logs and previous release backup
 are under `build/t475-s4-p2`.
+
+## P3: complete selected-archive header boundary
+
+The x86 graph now removes the SoftPC `terminate` namespace forced header
+from common, compatibility, lib and non-MVDM source objects while preserving
+their existing remaining flags and worker-specific uses. Both ordinary `cc`
+and `cc_rtl` bindings, including the RTL default `/Gz`, are handled. The first
+two attempts failed the new complete-closure check because explicit and then
+default RTL bindings were missed; those failures are retained in the logs.
+
+The production graph and compiler dependency check recursively traverses all
+archive candidates for Hook32 and VDMREDIR, not just each component's own
+objects. It verified 98 closure objects and rejected an injected private header;
+the NTVDM import library is treated as the owner-deferred PE runtime boundary.
+Launcher, both workers and WOW compiler ownership checks passed. The actual
+link maps show the context and installer selected from the common archives.
+
+The x86/x64 product build, 63 guest files, 274 export ordinals, 118 x86 and
+118 x64 Hook assertions, 168 cross-width assertions, 24 redirector async
+checks, 12 original NetAPI checks and 12 selected Control gates passed. Actual
+DOS async-read, async-write and NetAPI probes passed. Local package
+`eedc8134-05c6-449d-b799-c036d739e909` has ten matching release hashes. Full
+was not run and DOS4GW/NESticle was absent. Logs and prior release backup are
+under `build/t475-s4-p3`. Main worktree integration, system32 publication and
+push remain deferred by the owner; NTVDM PE runtime imports remain a separate
+queued task.
