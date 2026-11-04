@@ -1,0 +1,105 @@
+{
+  "scope": "Current Ninja transitive product-target source and object dependency evidence for the recorded host/non-MVDM inventory",
+  "inventory": {
+    "c_files": 537,
+    "product_direct_c_inputs": 536,
+    "product_included_c_inputs": 1,
+    "headers": 518,
+    "headers_in_product_object_deps": 518,
+    "separately_confirmed_generator_input": 1,
+    "total": 1056
+  },
+  "indirect_c": {
+    "path": "src/non-mvdm/windows/core/ntuser/client/handles.c",
+    "including_product_source": "src/wow32-dll/source/wow_user_object_bindings.c",
+    "including_source_sha256": "67199e11012232197a2b8bdc3f7878f3393d3b36d6dc8ca917dc677dfd248f28"
+  },
+  "graphs": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "objects": 530,
+      "object_dep_records": 528,
+      "missing_dep_records": 2
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "objects": 231,
+      "object_dep_records": 231,
+      "missing_dep_records": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker",
+      "objects": 48,
+      "object_dep_records": 48,
+      "missing_dep_records": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/frontend",
+      "objects": 61,
+      "object_dep_records": 61,
+      "missing_dep_records": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/monitor",
+      "objects": 16,
+      "object_dep_records": 16,
+      "missing_dep_records": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/launcher",
+      "objects": 50,
+      "object_dep_records": 50,
+      "missing_dep_records": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/service",
+      "objects": 49,
+      "object_dep_records": 49,
+      "missing_dep_records": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/hook",
+      "objects": 19,
+      "object_dep_records": 19,
+      "missing_dep_records": 0
+    }
+  ],
+  "product_targets": {
+    "build/.ninja/msvc-x86-release/worker": [
+      "ntvdm.exe",
+      "VDMREDIR.dll",
+      "nthook32.dll"
+    ],
+    "build/.ninja/msvc-x86-release/wow32": [
+      "wow32.dll"
+    ],
+    "build/.ninja/msvc-x64-release/worker": [
+      "ntvwm.exe"
+    ],
+    "build/.ninja/msvc-x64-release/frontend": [
+      "ntcon.exe"
+    ],
+    "build/.ninja/msvc-x64-release/monitor": [
+      "ntmon.exe"
+    ],
+    "build/.ninja/msvc-x64-release/launcher": [
+      "run16.exe"
+    ],
+    "build/.ninja/msvc-x64-release/service": [
+      "ntsrv.exe"
+    ],
+    "build/.ninja/msvc-x64-release/hook": [
+      "nthook64.dll"
+    ]
+  },
+  "objects_without_deps": [
+    "obj/opennt-rtl-x86/largeint.obj",
+    "obj/opennt-rtl-x86/movemem.obj"
+  ],
+  "objects_without_deps_reason": "Both are x86 assembler objects, not C or header compilation.",
+  "generator_evidence": "s13-r626-cvidc-generator-input.json",
+  "limitations": [
+    "Ninja dependency records show inclusion in a product build, not that every conditional arm in an included file is selected.",
+    "No claim about sources outside this enumerated inventory, runtime behavior, or unsupported configurations."
+  ]
+}
