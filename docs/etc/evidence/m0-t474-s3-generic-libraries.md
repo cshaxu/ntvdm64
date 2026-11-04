@@ -34,3 +34,35 @@ as did the Base RPC client split checks. The complete Control suite passed all
 NTCON/worker communication and lifecycle scenarios. The optional external
 DOS4GW/NESticle fixture was unavailable and skipped. Full product verification
 was not run; the previously documented original guest long-PATH issue remains.
+
+## Follow-up P — relocate the NTCON library tree
+
+The owner directed the whole `src/ntcon-exe/lib` tree to `src/lib` without
+a new suitability audit. All 55 tracked files, including the four SoftPC
+modules, both license notices and the libvterm archive, match their previous
+Git blob IDs byte for byte. The nxvm import manifest retains every source hash;
+the libvterm manifest points to the relocated archive and notice. NTCON's
+product-specific wrappers and import manifests remain in its component.
+
+The x86 reference graph was regenerated using
+`tools/build/New-T310OriginalSoftpcNinja.ps1`; the x64 frontend graph was
+derived using `tools/build/New-NativeWorkerNinja.ps1 -Component Frontend`.
+The x64 `ntcon.exe` linked successfully. The initial wrapper then failed because
+it named the x86 Ninja script `run-ninja.cmd` rather than
+`run-ninja-parallel.cmd`; the corrected invocation built and passed the six
+`frontend-window-{library,controller,keyboard,mouse,lifetime,payload}-test.exe`
+fixtures and `tests/component-integration/verify-frontend-link-ownership.ps1`
+including its negative controls. Earlier diagnostic graph generation with x64
+as the reference failed because that generator expects x86; no product failure
+was inferred. Run logs, PIDs, times and exit codes are in `build/t474-s3-p2`.
+
+The candidate package uses the newly built NTCON and nine S3 build outputs;
+each manifest input and stamped output hash was verified. The 63 immutable guest
+files and 274 NTVDM export ordinals passed their existing checks.
+
+The complete Control suite passed all 12 selected gates on the same ten-image
+package, including real Console input, window, worker failure and nested
+handoff. The external DOS4GW/NESticle fixture was unavailable and skipped;
+Full was not run. Package `e719bbee-ba87-42c4-8438-80f0d62fdd0a` is
+published only to this worktree's `assets/release`, with all ten output hashes
+verified. The previous original guest long-PATH limitation remains.

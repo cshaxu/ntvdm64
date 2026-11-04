@@ -260,6 +260,10 @@ function Assert-FrontendOwnership([string[]]$Lines) {
             throw "$target must not acquire worker-side mechanisms"
         }
     }
+    # Current product composition does not select KVM in other executables.
+    foreach ($target in @('run16.exe','ntsrv.exe','ntvdm.exe','ntvwm.exe','ntmon.exe')) {
+        if (@(Get-FrontendSources $target 'lib' | Where-Object { $_ -like 'kvm-*/*' }).Count) { throw "$target unexpectedly links the frontend window implementation" }
+    }
     $service = @(Get-FrontendSources 'ntcon.exe')
     if ('native_console_host.c' -in $service) { throw 'Retired helper entered ntcon.exe' }
     if ('native_console_request.c' -in $service) { throw 'Native execution receiver entered presentation-only ntcon.exe' }
@@ -270,10 +274,10 @@ function Assert-FrontendOwnership([string[]]$Lines) {
     foreach ($required in @('main.c', 'session_service.c', 'console_channel.c',
             'console_frontend.c', 'console_video.c', 'frontend_session.c',
             'window_controller.c', 'window_frame.c',
-            'window_keyboard.c', 'window_input_queue.c',
-            'lib/kvm-window/win32/component.c')) {
+            'window_keyboard.c', 'window_input_queue.c')) {
         if ($required -notin $service) { throw "ntcon.exe omits $required" }
     }
+    if ('kvm-window/win32/component.c' -notin @(Get-FrontendSources 'ntcon.exe' 'lib')) { throw 'ntcon.exe omits shared window implementation' }
 }
 
 Assert-FrontendOwnership $graph
@@ -359,7 +363,7 @@ foreach ($leakInput in @('frontend-window.lib', 'frontend-terminal.lib', 'ntcon-
             $_ -replace ': (\S+) ', (': $1 ' + $leakInput + ' ')
         } else { $_ }
     })
-    $mutated += 'build obj/ownership-leak.obj: cc O$:/repo/src/ntcon-exe/lib/kvm-window/win32/component.c'
+    $mutated += 'build obj/ownership-leak.obj: cc O$:/repo/src/lib/kvm-window/win32/component.c'
     $rejected = $false
     try { Assert-FrontendOwnership $mutated } catch { $rejected = $true }
     if (!$rejected) { throw "Window ownership negative control did not reject $leakInput" }

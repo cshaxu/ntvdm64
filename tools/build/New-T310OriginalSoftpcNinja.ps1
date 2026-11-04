@@ -1422,23 +1422,23 @@ if ($Architecture -eq 'x86') {
     $windowManifest = Get-Content (Join-Path $frontendRoot 'nxvm-import.json') -Raw | ConvertFrom-Json
     $fontBuild = Join-Path $build 'frontend-font'
     & (Join-Path $root 'tools/build/Generate-FrontendFont.ps1') -OutputFile (Join-Path $fontBuild 'native_pc_font.h')
-    if ((Get-NodeSha256 (Join-Path $frontendRoot 'lib/LICENSE.nxvm')) -ne $windowManifest.licenseSha256) {
+    if ((Get-NodeSha256 (Join-Path $root 'src/lib/LICENSE.nxvm')) -ne $windowManifest.licenseSha256) {
         throw 'Frontend nxvm license hash mismatch'
     }
     foreach ($row in $windowManifest.files) {
         if ($row.path -notmatch '^lib/(types|base|kvm-base|kvm-window)/[A-Za-z0-9_./-]+$' -or $row.path.Contains('..')) {
             throw "Invalid frontend nxvm path: $($row.path)"
         }
-        if ((Get-NodeSha256 (Join-Path $frontendRoot $row.path)) -ne $row.sha256) {
+        if ((Get-NodeSha256 (Join-Path (Join-Path $root 'src') $row.path)) -ne $row.sha256) {
             throw "Frontend nxvm source hash mismatch: $($row.path)"
         }
-        if ($row.compile) { $frontendWindowSources += 'src/ntcon-exe/' + $row.path }
+        if ($row.compile) { $frontendWindowSources += 'src/' + $row.path }
     }
     $frontendWindowSources += @('window_frame.c','window_controller.c','window_input_queue.c','window_keyboard.c','window_mouse.c') |
         ForEach-Object { 'src/ntcon-exe/' + $_ }
     $windowObjects = @()
     foreach ($source in $frontendWindowSources) {
-        $object = 'obj/frontend/window/' + $source.Substring('src/ntcon-exe/'.Length).Replace('.c','.obj')
+        $object = 'obj/frontend/window/' + ($source -replace '^src/(ntcon-exe/)?','').Replace('.c','.obj')
         $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $root $source)))
         $graph.Add('  cflags = ' + $nativeServiceFlags + ' /std:c11 /DWIN32_LEAN_AND_MEAN /D_WIN32_WINNT=0x0601 /I "' + (NinjaPath $frontendRoot) + '" /I "' + (NinjaPath $fontBuild) + '"')
         $windowObjects += $object
