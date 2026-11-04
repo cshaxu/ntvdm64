@@ -220,3 +220,24 @@ passed (`p5/stage.process`, `p5/control.process`, exit 0). Ten local release
 hashes and the license match package `f49f5403-2030-433e-87b3-77b5858a2b35`.
 Full and DOS4GW/NESticle were not run. Remaining C++/Detours diagnostics and
 legacy test sources remain open in S5.
+
+## P6 — C startup palette trace
+
+The Win101 palette observation now uses the shared C startup hook transaction;
+the four original calls, their results and LastError remain intact. The
+controlled x86/x64 fixture exercised all four real hooks, original calls,
+errors and log records (`palette-trace.process`, exit 0). The diagnostic
+builder relinked the actual product object archive (`p6-palette-relink-r2.process`,
+exit 0); a separately staged private diagnostic package reached Win16 WRITE
+main, document and page-info in four snapshots and recorded real palette calls
+(`p6-palette-live-r2.process`, exit 0). WRITE editing and exit were not tested.
+The first live attempt reached those observations but failed stage cleanup due
+to modifying its package after staging; its stage is preserved and does not
+count as a clean pass.
+
+The x86/x64 product build passed (`p6/build.process`); staging verified 63
+immutable guest files and 274 ordinal exports (`p6/stage.process`). Control
+passed (`p6/control.process`), and ten local release image hashes and the
+license match package `b5eceac1-5472-4266-8287-75ff14854f64`. Full and
+DOS4GW/NESticle were not run. Remaining diagnostic and legacy C++/Detours
+sources remain open in S5.

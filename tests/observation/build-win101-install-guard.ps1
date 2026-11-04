@@ -3,7 +3,7 @@ param(
     [string]$FormalCache='build/M0-T434/S3/r001-formal',
     [string]$Baseline='build/M0-T434/S5/r037-runtime/system32/ntvdm.exe',
     [string]$ProbeSource='',
-    [ValidateSet('win101_guard_entry','win31_console_trace_entry')][string]$EntrySymbol='win101_guard_entry'
+    [ValidateSet('win101_guard_entry','win31_console_trace_entry','win101_palette_trace_entry')][string]$EntrySymbol='win101_guard_entry'
 )
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
@@ -63,7 +63,7 @@ $commands+='if errorlevel 1 exit /b %errorlevel%'
 & "$build/build.cmd" *> "$build/build.log"
 if ($LASTEXITCODE) { throw "Guard build failed; inspect $build/build.log" }
 [ordered]@{
-    role=$(if($EntrySymbol -eq 'win101_guard_entry'){'test-only-restricted-write-relink-not-product'}else{'test-only-console-trace-relink-not-product'})
+    role=$(if($EntrySymbol -eq 'win101_guard_entry'){'test-only-restricted-write-relink-not-product'}elseif($EntrySymbol -eq 'win101_palette_trace_entry'){'test-only-palette-trace-relink-not-product'}else{'test-only-console-trace-relink-not-product'})
     baselineSha256=(Get-FileHash $baselinePath).Hash
     formalCache=$cache
     sources=@($sources | ForEach-Object { @{path=$_;sha256=(Get-FileHash $_).Hash} })

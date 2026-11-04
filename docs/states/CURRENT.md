@@ -59,6 +59,11 @@ call and LastError checks, an actual NTVDM diagnostic relink, product build and
 Control passed. Local package `f49f5403-2030-433e-87b3-77b5858a2b35` has ten
 verified hashes. The diagnostic relink was not run with a real guest.
 
+P6 converts the startup palette trace to C. Both widths passed actual hook,
+original-call and LastError checks; a test-only NTVDM relink reached Win16
+WRITE main/document/page-info in four snapshots. Local package
+`b5eceac1-5472-4266-8287-75ff14854f64` passed Control and hash verification.
+WRITE editing and exit, Full and DOS4GW/NESticle were not verified.
 The adjacent library's same-width payload-only mechanism, non-Detours payload
 format, helper ordinal and startup-only transaction require compatibility proof;
 no untested semantic equivalence is assumed. Prior [S4 evidence](../etc/evidence/m0-t475-s4-nthook-dependency-cleanup.md),
