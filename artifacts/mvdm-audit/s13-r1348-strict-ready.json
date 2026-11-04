@@ -1,0 +1,1340 @@
+{
+  "method": "Original/current recursive conditional selector comparison. Each excluded arm must contain only #error with original branch and continuation anchors; retained leaves match original ignoring #line. Groups with no excluded arm are accepted only when recorded branch states select at most one alternative and all remaining alternatives are excluded. Matching code logical positions checked on observed selected projection. Hashes verified. Local code outside matched lines and unobserved configurations are not runtime certified. One file with only one matching line is held for review.",
+  "records": [
+    {
+      "path": "src/mvdm-host/dos/dem/demdasd.c",
+      "before_sha256": "81e1557a4e8b6065d17ef557df07b264b89340deb82fdb18df57f2a9fab49cf7",
+      "original_sha256": "7438f5d4df1803664e66f16b7464d719c8e4341d1d9c2e7721ce7184bdf08942",
+      "anchors": {},
+      "matched_lines": 708,
+      "strict_tree": {
+        "excluded": 4,
+        "groups": 5,
+        "retained": 1
+      }
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demmisc.c",
+      "before_sha256": "d5f98246059f0707a1e539d26cad8309e639dbb707accf3088d5742e0e4ba9ba",
+      "original_sha256": "19676fa5995555ec0b16c2923953b4e6236467dc42bf36cc7e746f45d0fcf912",
+      "anchors": {},
+      "matched_lines": 627,
+      "strict_tree": {
+        "retained": 4,
+        "groups": 5,
+        "excluded": 1
+      }
+    },
+    {
+      "path": "src/mvdm-host/inc/demexp.h",
+      "before_sha256": "24662e12d46253915b351a80c37749fc48da212f6b219a782c84271a0145bf9b",
+      "original_sha256": "dfb912ee16a360e36d149bca01592a61ec11ff0f1d1b148edcffb42fda52d5c4",
+      "anchors": {},
+      "matched_lines": 33,
+      "strict_tree": {
+        "retained": 1,
+        "groups": 1
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "before_sha256": "ef9629e07f4ecd78ede30985f1b8fa4dc31c0e6981a9b2f3fe54afcdfeb76987",
+      "original_sha256": "a8345e88db25332bdf008bdc730ffa15bdc6110ecf1a6c54ed7e59c95ca7085b",
+      "anchors": {},
+      "matched_lines": 357,
+      "strict_tree": {
+        "excluded": 55,
+        "groups": 59,
+        "retained": 48
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "before_sha256": "35f65b92c0724addb70410895a21a87aa110450446fb4c39707b55f5be4523de",
+      "original_sha256": "2ffb142bb4ad67958493668e06bec3d81936790497965cdc5ca8a2ac0e142722",
+      "anchors": {},
+      "matched_lines": 2493,
+      "strict_tree": {
+        "excluded": 23,
+        "groups": 27,
+        "retained": 6
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+      "before_sha256": "6bd14417070148d1bea9febad34cc2e229c14cd513138c6cdea8b1a21208f354",
+      "original_sha256": "bc5e3a66a552e293ae1ec9653205f8432867b4290e3d4ecad6ae5cd1ccab4cb6",
+      "anchors": {},
+      "matched_lines": 131,
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 1,
+        "groups": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+      "before_sha256": "9469b54a27735977116dca86d54389eedb20f30cd795029a63167d531764a0d1",
+      "original_sha256": "346e2186fe608c318a25796c7d6a35bbc8de6f21c255b212c2ddfc2bc3c89f40",
+      "anchors": {},
+      "matched_lines": 832,
+      "strict_tree": {
+        "excluded": 3,
+        "groups": 5,
+        "retained": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.h",
+      "before_sha256": "24d7a95929e1ed4428ec8f749ba1229c91c27e675baf3d8c8ba6c347ba1de68e",
+      "original_sha256": "c900712ad3c01e1e6ea6ee3b3ce597bf67f0ae1392576a8f60413af78a4742b6",
+      "anchors": {},
+      "matched_lines": 202,
+      "strict_tree": {
+        "excluded": 3,
+        "groups": 4,
+        "retained": 1
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "before_sha256": "3fb8e1146b4bb74be98a60120e51d7929a77c8fd066699274258208c893f5808",
+      "original_sha256": "a83a7dd3f7e3fbb83723047aacddbd22d4001591c6d444d4bd6d45dd73e38fd8",
+      "anchors": {},
+      "matched_lines": 746,
+      "strict_tree": {
+        "retained": 12,
+        "groups": 18,
+        "excluded": 11
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "before_sha256": "cdadad02799c68fbbb16516145ac7dfba31dbf53319eae10267d2052bcd24b42",
+      "original_sha256": "2802840ef84106ae0f99c6f17af370da66c9381a1355570f5998039fbb33534e",
+      "anchors": {},
+      "matched_lines": 1873,
+      "strict_tree": {
+        "retained": 11,
+        "excluded": 10,
+        "groups": 17
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/in.c",
+      "before_sha256": "21e9496ff93586b7f696bad8a6015027dcc2592a09e8d38b4abedb76a4e6aa72",
+      "original_sha256": "5a6cb5699c84e6a25fc984aa9c5a4ee50cb22d4408ba3df57cd0cd95e41f23b0",
+      "anchors": {},
+      "matched_lines": 89,
+      "strict_tree": {
+        "retained": 4,
+        "groups": 4,
+        "excluded": 1
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/jmp.c",
+      "before_sha256": "1c5660ad0dbb88ccb808f155093b3821fbd91816a71d11f3de8e46d8ae2d05f6",
+      "original_sha256": "470889ec4ca8311980f1b700e56d028009fc459c47eb484e1451a799ac7feb87",
+      "anchors": {},
+      "matched_lines": 173,
+      "strict_tree": {
+        "retained": 4,
+        "excluded": 3,
+        "groups": 4
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lldt.c",
+      "before_sha256": "f7c791af8bda2ca0ce231a68555f0f18840fc28b3245732e569d9aea01d26f2a",
+      "original_sha256": "9b0077be47d4bb3f75e8f521a9db907ec42199c57ab59226e56d6b8013dfe6c6",
+      "anchors": {},
+      "matched_lines": 82,
+      "strict_tree": {
+        "retained": 2,
+        "excluded": 1,
+        "groups": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/out.c",
+      "before_sha256": "6ea2193496697fda3b7206759306dd1e333d7a9eb098a66f7fcef4507e10116e",
+      "original_sha256": "520bdebe72dcb263bf2a8312ec543b0414a0456e07959891bddb7d083b52b91b",
+      "anchors": {},
+      "matched_lines": 80,
+      "strict_tree": {
+        "retained": 4,
+        "groups": 4,
+        "excluded": 1
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ret.c",
+      "before_sha256": "e1e43eba1db580fd62d1e5b979559a93349691153c90659dfcc4144dc2c82ae4",
+      "original_sha256": "9531f24ac58029b3a7eb768a49b8e99242b6e9d9fbc5825b6982ae53687688f5",
+      "anchors": {},
+      "matched_lines": 257,
+      "strict_tree": {
+        "excluded": 1,
+        "retained": 2,
+        "groups": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/shld.c",
+      "before_sha256": "90ba81b32ef32db13b347cead10479129f32fee68d42c68eed65574ae9977730",
+      "original_sha256": "0454f3a15e286a17a61cd6d4ad8cc0ec42267e2cb50624b366b136962e3f855e",
+      "anchors": {},
+      "matched_lines": 120,
+      "strict_tree": {
+        "retained": 2,
+        "excluded": 1,
+        "groups": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/shrd.c",
+      "before_sha256": "cbdd6cf16eedcd56132f4a8b353dc0a93143786e5cc0f3ee55ef2b4278f3fdcd",
+      "original_sha256": "2d3351d8d4920d4691fd4035d6db11b97ab5ea3d15d10b0cac1403e68f9212cd",
+      "anchors": {},
+      "matched_lines": 122,
+      "strict_tree": {
+        "retained": 2,
+        "excluded": 1,
+        "groups": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "before_sha256": "2feb3af8dc8fdf3d4ce7aa262c121b0fb80357a69bb266f8d1e1006709bac29b",
+      "original_sha256": "3beaf1ec7ca8ac2092bb88de4597a19de8aecdd564fa2b55ccb1a4009041e961",
+      "anchors": {},
+      "matched_lines": 4849,
+      "strict_tree": {
+        "excluded": 2,
+        "groups": 3,
+        "retained": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "before_sha256": "6979afbd90dda9b56a997412165f63dc8c6edc12e96048535016703a8db84823",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "anchors": {},
+      "matched_lines": 1780,
+      "strict_tree": {
+        "excluded": 87,
+        "groups": 110,
+        "retained": 41
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/ega_dump.c",
+      "before_sha256": "a1562069aaf6a9ff00bb6f8a7890dc00a58367a23407162d344f261252772f14",
+      "original_sha256": "18c7205169a62e40e80122deba5645f1cd7ce0d760ea71d95e9688a5a1da98aa",
+      "anchors": {},
+      "matched_lines": 33,
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 1,
+        "groups": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "before_sha256": "ce6df65f98751c65d9f1e662c3b065b22903548e9a8331b900102d80fc81ca60",
+      "original_sha256": "b776bec19f7c7c615684711b915c7c7d1c56a124d37e14fc30a575681c83b2e3",
+      "anchors": {},
+      "matched_lines": 78,
+      "strict_tree": {
+        "excluded": 7,
+        "groups": 9,
+        "retained": 3
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "before_sha256": "b5915770a1bdae5f8afc8aaad950f07b064156e08f1b05601d8e125cca972497",
+      "original_sha256": "444f1350d7c50b270652d7b062a375536e327952ebb5ba83937fba090db3c817",
+      "anchors": {},
+      "matched_lines": 45,
+      "strict_tree": {
+        "excluded": 4,
+        "groups": 7,
+        "retained": 3
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "before_sha256": "5c7b58e229a4c6f40dc0f3b8e3e4164118d92ae9e642a3417d8af55308f15992",
+      "original_sha256": "d05908d6199675e65ebcf0f2b2c864169e80276639fb8de25b007c5e66751cdc",
+      "anchors": {},
+      "matched_lines": 965,
+      "strict_tree": {
+        "excluded": 10,
+        "groups": 14,
+        "retained": 5
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
+      "before_sha256": "aa27cf44088c5331ebc5ab5f40254920cbfb321c10482bc024b289a9dd2a3412",
+      "original_sha256": "f95a9a26a9ef201e9552f2459a6ba85080e17fb8ccae3fb6280c63eb2fa78607",
+      "anchors": {},
+      "matched_lines": 1797,
+      "strict_tree": {
+        "excluded": 20,
+        "groups": 23,
+        "retained": 7
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "before_sha256": "d076c39d5566c369dc2cdbec2718d2ef52523898dca2892e0daad1aef23ff63c",
+      "original_sha256": "b8c5f0420eac7f14f662799b995b37e86d14dc252271b7bf4ae309ba6650fb5d",
+      "anchors": {},
+      "matched_lines": 1048,
+      "strict_tree": {
+        "excluded": 8,
+        "groups": 9,
+        "retained": 3
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "before_sha256": "d9c57d64cd85cd50b0386fb65ac7988cdaf15c9906527486bfc6c3e40773971f",
+      "original_sha256": "35efd26857a3f5c7960b0890a6ec3fd778dfde7dc8e74959fd3a8e3d41db424c",
+      "anchors": {},
+      "matched_lines": 3063,
+      "strict_tree": {
+        "excluded": 22,
+        "groups": 27,
+        "retained": 21
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "before_sha256": "6543253ff7d404cd775969d1fae543ae4179074d1f2d4a43980e1a4fb28f573b",
+      "original_sha256": "22b503047688d4d1f2d4b99ffba29e71612a165bbc9069976ce7a8b8d62ba042",
+      "anchors": {},
+      "matched_lines": 208,
+      "strict_tree": {
+        "excluded": 9,
+        "groups": 12,
+        "retained": 5
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "before_sha256": "ea802079d1aac9b702cf73e0bbaa3387d6bf72a4cfd438fc8accae2d3d32033b",
+      "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
+      "anchors": {},
+      "matched_lines": 237,
+      "strict_tree": {
+        "excluded": 12,
+        "groups": 17,
+        "retained": 5
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "before_sha256": "0afbf13726fcd1bbb2dfeac33ac3465f465c327227e5cdeef771d9e89c982c53",
+      "original_sha256": "a181e9ddddf9cbeeff03b63f733d282455b2f21b578c6c9cf772bf726b41d064",
+      "anchors": {},
+      "matched_lines": 294,
+      "strict_tree": {
+        "retained": 6,
+        "groups": 26,
+        "excluded": 22
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cga.h",
+      "before_sha256": "7a23149277449ecf629db3cf8596662938ed80f450b82dffb130bb577f48ed82",
+      "original_sha256": "683848966f4b5cb5667b9ae0ae140d9e08adcb62060bc77695db844c34b71b0b",
+      "anchors": {},
+      "matched_lines": 73,
+      "strict_tree": {
+        "excluded": 4,
+        "groups": 5,
+        "retained": 1
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dma.h",
+      "before_sha256": "3b3c32d5746eb485ac6f0739214f6dfa1b098b698ca567478af0bfb4420dd996",
+      "original_sha256": "d69831cddb3de18bebe1532c659608b404686374324b3eeebed5607e15a774e4",
+      "anchors": {},
+      "matched_lines": 458,
+      "strict_tree": {
+        "excluded": 4,
+        "groups": 9,
+        "retained": 5
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egagraph.h",
+      "before_sha256": "5b8c4c54ee5ba5432180cd66ff2cfc74ab14baa9a65876d4039e0f506bf88f5d",
+      "original_sha256": "20c58d8fb126135214410b44cda85a9fb57c7644088e820ce979ad37e7681a39",
+      "anchors": {},
+      "matched_lines": 191,
+      "strict_tree": {
+        "retained": 8,
+        "excluded": 3,
+        "groups": 8
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egaports.h",
+      "before_sha256": "4a7fc8597739224b19d4d33e422b77ee4efcfac5e7b13f0c1f97fcabcdde7b1b",
+      "original_sha256": "9258473bc4f8c375852c51ea8d7eb71a0163e503bd371f779b78eeb6227146af",
+      "anchors": {},
+      "matched_lines": 60,
+      "strict_tree": {
+        "retained": 4,
+        "excluded": 3,
+        "groups": 5
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "before_sha256": "9abd53e6feb5145c8b6e300ce1a28deac7f568c71c9c8603e574b67fe124d619",
+      "original_sha256": "5b47f5e3566927332de3c3f9474ba3595151758c0a8ff8fd6c9cc860f2f8e6cd",
+      "anchors": {},
+      "matched_lines": 111,
+      "strict_tree": {
+        "excluded": 3,
+        "groups": 7,
+        "retained": 5
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "before_sha256": "3bcc3def41acf384273bc507564e6ab3efddb020fb3dccb8c76d7265e8b3c0b6",
+      "original_sha256": "d92cc144f50e60de5042f76c67574a3fdc22b0ad38411d92d1459d4a02b17789",
+      "anchors": {},
+      "matched_lines": 269,
+      "strict_tree": {
+        "retained": 8,
+        "excluded": 6,
+        "groups": 10
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/equip.h",
+      "before_sha256": "d983a6294001ed8409399b04ca735da2cdf1bc64223584500b5b2ff13a64e72f",
+      "original_sha256": "9530d21a819d9e3ff63d9fd8173f2c0df049cc48aa9ee49a740bad6db921e8aa",
+      "anchors": {},
+      "matched_lines": 53,
+      "strict_tree": {
+        "excluded": 2,
+        "groups": 4,
+        "retained": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "before_sha256": "81c5978ffac33f187680f3e876e8409913491197da9c36b60b35f13f005550cf",
+      "original_sha256": "500e1a6e48950dc2c184a70c39b9606723133c6ab06affac898da89e24fbaca8",
+      "anchors": {},
+      "matched_lines": 540,
+      "strict_tree": {
+        "retained": 6,
+        "excluded": 5,
+        "groups": 6
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
+      "before_sha256": "53b5da70251b70542c40a601edb354705559353ed3b3d05947c8de22fff5add8",
+      "original_sha256": "a8577d81b26da6831e8d5dd496e41ebd40a947c3d641c39c77304d509ba2be61",
+      "anchors": {},
+      "matched_lines": 247,
+      "strict_tree": {
+        "retained": 10,
+        "groups": 13,
+        "excluded": 3
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+      "before_sha256": "9fd29126c9a54b492937193a58593a7c7fc8bd467eb73fdb9986bfc8075b32fa",
+      "original_sha256": "c4dfbf2bb2d6e8d79e9fd607f6ab50b149a5edb2768b25d2475002e2e9940716",
+      "anchors": {},
+      "matched_lines": 245,
+      "strict_tree": {
+        "retained": 12,
+        "excluded": 6,
+        "groups": 13
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_com.h",
+      "before_sha256": "de187a1c80e136c77379bbce1cc9afda8d41e4f72605990ea7c91bdc987be6f1",
+      "original_sha256": "d7085b215a923dc8df3a9dd44bdc3739d3035ac2fe8978f282b6a3cafd97b68b",
+      "anchors": {},
+      "matched_lines": 257,
+      "strict_tree": {
+        "retained": 5,
+        "excluded": 2,
+        "groups": 7
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_lpt.h",
+      "before_sha256": "2a2dba16e6be9cc6264e13702c6c9c04b64182d14b3ff9825be68fbfa3135bd2",
+      "original_sha256": "8fdfe8fbd8e8dd4a9746a50851410a051f640365e3d59d9ed8024dfb397da820",
+      "anchors": {},
+      "matched_lines": 156,
+      "strict_tree": {
+        "retained": 4,
+        "groups": 5,
+        "excluded": 1
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/keyba.h",
+      "before_sha256": "75ca6d2140e8457aad992d8e52dd2b9241dbf3720a3f13186306feef6261f43c",
+      "original_sha256": "619a9be301eb3a4ca8632d2f2459413e8285c4796e3de35e20aba2488aa7a0b9",
+      "anchors": {},
+      "matched_lines": 33,
+      "strict_tree": {
+        "retained": 1,
+        "groups": 2,
+        "excluded": 1
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/mouse_io.h",
+      "before_sha256": "ad9fdf545b0fc2ce581b4f4b9c7555eb5af0c2739cbcb03135c8d5b3b3b2e729",
+      "original_sha256": "6387d3317faaa0ab35c3652abc52283601a996bcb0f3019234a2cdb246a6662a",
+      "anchors": {},
+      "matched_lines": 1074,
+      "strict_tree": {
+        "retained": 16,
+        "groups": 20,
+        "excluded": 8
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/printer.h",
+      "before_sha256": "2c822ac8f45912075a6ff869a5bee0ca62b0ebc6b6902408eff0af59dea6dd24",
+      "original_sha256": "c4c064dd442805e2942a799d8c90b46d6f26e4fbe5bba58799f53bbbebb42092",
+      "anchors": {},
+      "matched_lines": 52,
+      "strict_tree": {
+        "retained": 3,
+        "excluded": 2,
+        "groups": 4
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/suplib.h",
+      "before_sha256": "75392cd3538f20f0651e2e8bbd5c18942745f080cf035c6f7efefcdef8623f3d",
+      "original_sha256": "012bcdd28b9d105a6d4bf9c01bbdfa8ccf855910cb00119ba7b1c45884237f7f",
+      "anchors": {},
+      "matched_lines": 59,
+      "strict_tree": {
+        "retained": 3,
+        "excluded": 2,
+        "groups": 5
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timer.h",
+      "before_sha256": "be96008c5c926a7c4847ac4edd9275b324484c81b0884743c82220581f24a351",
+      "original_sha256": "b5704cc3ec76cd4dc010eeecc07e4c78ff76428266f6719cf34a65c9dd4b1f2d",
+      "anchors": {},
+      "matched_lines": 106,
+      "strict_tree": {
+        "retained": 5,
+        "groups": 6,
+        "excluded": 3
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/trace.h",
+      "before_sha256": "b62754aef01e5b60bf1f284f94021d7f457b641e26e35d44c1dcac7bc574803a",
+      "original_sha256": "d70092a47d833c0ec3d859ebe7963feb374f5f0abb9288a03f9ffea7198b275f",
+      "anchors": {},
+      "matched_lines": 130,
+      "strict_tree": {
+        "retained": 3,
+        "excluded": 2,
+        "groups": 4
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/vgaports.h",
+      "before_sha256": "aa41c19b16d4d94a34acdbaaec5e6ba1583bf782ac7b3ee2e4a4ff2096b26d66",
+      "original_sha256": "7d2c9ceadd144ea014757549ab83e8ff8e28b6e92c11f0cd379119d07c0bd2f2",
+      "anchors": {},
+      "matched_lines": 945,
+      "strict_tree": {
+        "retained": 15,
+        "excluded": 8,
+        "groups": 18
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "before_sha256": "148d566184091358be4b40f6438dcc1f80965f2e571a8c86fabd02c1fc40d16e",
+      "original_sha256": "3e701855e34a3ba9834c84ab39da5350ff375195aacea0d79692fba24e2b1059",
+      "anchors": {},
+      "matched_lines": 236,
+      "strict_tree": {
+        "retained": 15,
+        "excluded": 6,
+        "groups": 15
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
+      "before_sha256": "1abc1fbba8149dc19343b5971f6b3db5cbab1c9c12eb32cdaabe210a2dc1c359",
+      "original_sha256": "367cceaa88345e16b2e138faef9addd441da2cd39f95ea3ab6c359651bd8ebf5",
+      "anchors": {},
+      "matched_lines": 159,
+      "strict_tree": {
+        "excluded": 6,
+        "groups": 8,
+        "retained": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+      "before_sha256": "06045ffc85cffd259181e785b4efaf984ea56d8d08a854aad0d5c77cbaf5572f",
+      "original_sha256": "7e0fc5e63e423a6bfc0f29e871d55c60d95cc1319f621571317b8f5a73433a2f",
+      "anchors": {},
+      "matched_lines": 91,
+      "strict_tree": {
+        "retained": 3,
+        "groups": 12,
+        "excluded": 11
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "before_sha256": "0b55f0aec8c42f623f329b985533a71c615cf6a493eddb32fa941b7ed679c869",
+      "original_sha256": "b085166424614a154a41f794bf3505f50a77a2ea60338bcefcb845be8e092e53",
+      "anchors": {},
+      "matched_lines": 89,
+      "strict_tree": {
+        "excluded": 14,
+        "groups": 15,
+        "retained": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "before_sha256": "469d7f498f27e70dcfd04b2e7596e7f7bbda69cdc94ca401a4716544d453a385",
+      "original_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2",
+      "anchors": {},
+      "matched_lines": 301,
+      "strict_tree": {
+        "excluded": 18,
+        "groups": 19,
+        "retained": 5
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+      "before_sha256": "a9752b272d2c089e4a2e5bd256f8e9f7dcdc08a93e310ec85635c2bc636f3d0f",
+      "original_sha256": "4867e3e03e0a5f49066963a37a957d231ec9addbc203789beed42bcf510f3f01",
+      "anchors": {},
+      "matched_lines": 861,
+      "strict_tree": {
+        "excluded": 4,
+        "groups": 9,
+        "retained": 5
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "before_sha256": "bacb75c018512cc2d70c3dde370aeb2e2057180b26162ab94560eaf5e9fa8cab",
+      "original_sha256": "947f9fc49dbffad48b2d1668548d63e8d26197a35d72fd4c26e7ce1e4c96af6f",
+      "anchors": {},
+      "matched_lines": 500,
+      "strict_tree": {
+        "excluded": 22,
+        "groups": 43,
+        "retained": 37
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_dmmy.c",
+      "before_sha256": "93c6a1d8ea22ce7db09710b570f1856333e7ab4b56c292fac79103732c3e0909",
+      "original_sha256": "4f7aaa63fb26f4fb556ea90183149cee7dfd048b954922ae335e17ae3cafc40d",
+      "anchors": {},
+      "matched_lines": 36,
+      "strict_tree": {
+        "retained": 2,
+        "excluded": 1,
+        "groups": 3
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_mode.c",
+      "before_sha256": "c5ba228930bfe1e4dba970f4735b00041769592aacff4f224c836863e99f7c0c",
+      "original_sha256": "1b73d0bdea339dc2a42f9674e04fd14575400070e8436149a84a2ac5510a057d",
+      "anchors": {},
+      "matched_lines": 659,
+      "strict_tree": {
+        "retained": 2,
+        "excluded": 3,
+        "groups": 5
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_trcr.c",
+      "before_sha256": "45dd02a03795260a248ac62ec522a7199f339f070483eea23ea7dbbfbf5050be",
+      "original_sha256": "f69389e877975d277405c21af95b5fea6fe2794b5ac7928d8634efbbbd432e9c",
+      "anchors": {},
+      "matched_lines": 14,
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 1,
+        "groups": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "before_sha256": "fde48eaad3255332867c1560cf5a38e8f7f23df3e009691d93b93f870c893d68",
+      "original_sha256": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80",
+      "anchors": {},
+      "matched_lines": 227,
+      "strict_tree": {
+        "excluded": 19,
+        "groups": 32,
+        "retained": 13
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_vide.c",
+      "before_sha256": "9935aa8c68acf42cafc96a7a46403bcb015f347509b25780b7f56920d11756c3",
+      "original_sha256": "3d0159b8bd4d1bcc3448bc61fb90f5b1c34c09099bba49187fe4573354ccc89d",
+      "anchors": {},
+      "matched_lines": 878,
+      "strict_tree": {
+        "retained": 11,
+        "excluded": 15,
+        "groups": 17
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video_io.c",
+      "before_sha256": "aec73147e8fb5112ff538409ae1d319c4b58294eea436fcd365f0c5a444ba913",
+      "original_sha256": "92680ac402633dd5dd52bbccfff55f41a65a1485dc2736666a9da45b7ea6bf86",
+      "anchors": {},
+      "matched_lines": 61,
+      "strict_tree": {
+        "excluded": 1,
+        "groups": 2,
+        "retained": 1
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_inc.h",
+      "before_sha256": "d731e0f766148d434fc90c408d539a06247c733193269281c73422e671054616",
+      "original_sha256": "c78271903a7a00e13a8756b47f25a91993ab962c39c5fb89435783ee3d411efe",
+      "anchors": {},
+      "matched_lines": 64,
+      "strict_tree": {
+        "retained": 4,
+        "groups": 4,
+        "excluded": 1
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_rrr.h",
+      "before_sha256": "b48dbb4e7165d7002786542322da2b2f406dd78180ca8e476fd0f7a66509d0ba",
+      "original_sha256": "a849bf3b9c08d83ca3e21a386c6a45042494df82eeb28e4c8d0de3d7f14972ac",
+      "anchors": {},
+      "matched_lines": 44,
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 1,
+        "groups": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_event.h",
+      "before_sha256": "c240ca9190ba7c14ac0e5e75e1c8e0a63cfee93221a9f7f601740316aa0878e5",
+      "original_sha256": "f4353f69708952f3bdc0f0d26db0f667eda34abf04f8694d1af059a649f76969",
+      "anchors": {},
+      "matched_lines": 51,
+      "strict_tree": {
+        "excluded": 2,
+        "groups": 3,
+        "retained": 1
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_graph.h",
+      "before_sha256": "2fceeae0ba9896df29af6df7d799a8da6bc8f4938d0078608534b6a5ca511ee3",
+      "original_sha256": "f23f9cf86756ca99f3204d505baa1d1197446851065f1849814647f5c4cdc6f3",
+      "anchors": {},
+      "matched_lines": 431,
+      "strict_tree": {
+        "excluded": 4,
+        "groups": 11,
+        "retained": 8
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_inthk.h",
+      "before_sha256": "b42e8bd8cd7177d60b67d1c26394d8e6c853f10e223fec3d91d71b96713c245b",
+      "original_sha256": "463f0daebc4d196dc1e108289cf10a8c3e3580efc1cf96ca880af30acbc4e632",
+      "anchors": {},
+      "matched_lines": 34,
+      "strict_tree": {
+        "retained": 2,
+        "groups": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/fprt.c",
+      "before_sha256": "7fbbcb04f579717b581c4153e88caa82190b98f4e894af9f9720998561f6e282",
+      "original_sha256": "f7918f49be621c55f53c51c9ae6db756ff239768bb886b84fcfe39eeedb65424",
+      "anchors": {},
+      "matched_lines": 106,
+      "strict_tree": {
+        "excluded": 7,
+        "groups": 8,
+        "retained": 1
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "before_sha256": "230f41939cd9567887dfbe5764eb8f566c18850812e261f87807155881f8c881",
+      "original_sha256": "56d39e89f2e077350ad07b77651224a0162314fced5abb498279b486f35afb32",
+      "anchors": {},
+      "matched_lines": 2103,
+      "strict_tree": {
+        "excluded": 9,
+        "groups": 10,
+        "retained": 1
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ega.c",
+      "before_sha256": "641961895f5a9ec88fb2e122dd16006d96687195b06c91df3f91e449cf4211f4",
+      "original_sha256": "ebc58583cec7e257a997185a1ab83f3284dbd1efe6e06c99f680bcce93dca695",
+      "anchors": {},
+      "matched_lines": 1581,
+      "strict_tree": {
+        "excluded": 7,
+        "groups": 24,
+        "retained": 17
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "before_sha256": "8481e0f36525676af18759ed14785092ba64740f5fcab44b05c59d0ec52f850f",
+      "original_sha256": "3305eaabac76e039dfe80aa0f2e15c48433edd95a74615e5db55b97d2b393228",
+      "anchors": {},
+      "matched_lines": 1143,
+      "strict_tree": {
+        "retained": 2,
+        "excluded": 6,
+        "groups": 8
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rez.c",
+      "before_sha256": "c94e1b9631e79306d4570470870de71b76df8f4e22646fc9e0ea16619ae32d15",
+      "original_sha256": "12a6486b8cf81e2469b1acd7f9e9d03cada6b4690fad03ea171941802f0945fc",
+      "anchors": {},
+      "matched_lines": 169,
+      "strict_tree": {
+        "excluded": 1,
+        "groups": 7,
+        "retained": 6
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_thred.c",
+      "before_sha256": "4bc1a569804cff7202e33a699cca49b55dea43c46eb10477929c6056fc1cbf58",
+      "original_sha256": "776330ea072cfd005ea05968dc676634385d1c9f349bd71ba1667ecd3be68438",
+      "anchors": {},
+      "matched_lines": 153,
+      "strict_tree": {
+        "retained": 2,
+        "groups": 4,
+        "excluded": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/x86_emm.c",
+      "before_sha256": "9846af750733fcd2b736ab3f95fe0e3e9ae3446e212592f7366b8bfddcef0fac",
+      "original_sha256": "117d119314787e09b853e05de0e35bb6935fb2d763f4fec7eef6b1d804e3d189",
+      "anchors": {},
+      "matched_lines": 48,
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 1,
+        "groups": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "before_sha256": "ff11bc91ba70eb795f68c0e501588b9860f9677683d9c7a53e3915ff00292015",
+      "original_sha256": "693a169cf1e91435c326ee05a17c928e85af10982c2c3bb95a5631ae76415a0a",
+      "anchors": {},
+      "matched_lines": 333,
+      "strict_tree": {
+        "excluded": 4,
+        "groups": 5,
+        "retained": 1
+      }
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdisp.c",
+      "before_sha256": "ace77f81f45586b2700d5ce16149e8f791d88c8bc6b43e891423394a1f770c97",
+      "original_sha256": "030a3a2f2baaeb36bb58eb459cc91a0f6bf15bfdec777fc2998e3c3d69b2a389",
+      "anchors": {},
+      "matched_lines": 166,
+      "strict_tree": {
+        "excluded": 2,
+        "groups": 3,
+        "retained": 1
+      }
+    },
+    {
+      "path": "src/mvdm-host/wow32/walias.c",
+      "before_sha256": "13297f6adb9a720d9600e124e014b0102b352ddabbc063d7e6de28b9efd8f2c6",
+      "original_sha256": "6118b6837c7ed291cc9d70446b7d691699d49c9ef6f2be60d8e0fac478d93b65",
+      "anchors": {},
+      "matched_lines": 522,
+      "strict_tree": {
+        "retained": 1,
+        "groups": 3,
+        "excluded": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdib.c",
+      "before_sha256": "88ba7a3bbbd31154db9a509bf8b221eafc2d92af5417d0400ba8432387596942",
+      "original_sha256": "d0bd4f9cb7bba0dc5e977a8c096337df0830e3804ef6aeb8759cf979176dd910",
+      "anchors": {},
+      "matched_lines": 842,
+      "strict_tree": {
+        "retained": 7,
+        "excluded": 2,
+        "groups": 7
+      }
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgmeta.c",
+      "before_sha256": "5612e2444464131427cfa33d6417a4057c099ab5ac0e684fef26f9527b296cf8",
+      "original_sha256": "213b4aa2f1f7a11ac310d7152027da2da0ea804b9efeb6fefc0cf609ce3d5260",
+      "anchors": {},
+      "matched_lines": 521,
+      "strict_tree": {
+        "retained": 3,
+        "groups": 4,
+        "excluded": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkmem.c",
+      "before_sha256": "4bbefbadaf423cfca5429b98fbb541fb9c84c6996b3e5c54b002d8c0adf96087",
+      "original_sha256": "9d0fae5e7719398d5d9776602664d5f9a0dd4bdd81e79616ad848035007d4722",
+      "anchors": {},
+      "matched_lines": 97,
+      "strict_tree": {
+        "retained": 6,
+        "groups": 8,
+        "excluded": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "before_sha256": "5b62144e8c93a794f7f64015517aff6d4654e020467a29132ad291a06b6a800f",
+      "original_sha256": "d4949206f261d22f80f96e769388aee94037b27092c69c68ec058619f843f4fb",
+      "anchors": {},
+      "matched_lines": 236,
+      "strict_tree": {
+        "excluded": 10,
+        "groups": 18,
+        "retained": 11
+      }
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.h",
+      "before_sha256": "e160f50f8405d6302decec1ff46ff03c4a59f3a39cac8bce5a7d05e2581527cc",
+      "original_sha256": "06148a93a63faf7fc5480e4c9f80c98ddfe6e2a0a782eafe6a6fd1ccdd46de27",
+      "anchors": {},
+      "matched_lines": 483,
+      "strict_tree": {
+        "retained": 15,
+        "excluded": 25,
+        "groups": 29
+      }
+    },
+    {
+      "path": "src/mvdm-host/wow32/wstruc.h",
+      "before_sha256": "3ceffb625000f2546954f135cb8c13cb35f2e1a55347ec75cc533a583220f808",
+      "original_sha256": "1e54905079db411f6bc17583a8943e4f8f5c870129ff7d5814f87d8a41be6a7c",
+      "anchors": {},
+      "matched_lines": 309,
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 1,
+        "groups": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/wow32/wusercli.c",
+      "before_sha256": "265db11048df58488afa75b2d352355b1e6077841ab5bd0a8906ee63dcc7dfe9",
+      "original_sha256": "96b363ee882839a61d232dfbe145346d6e4d7ec7bfbaa4c97c4e0500a39b51ed",
+      "anchors": {},
+      "matched_lines": 706,
+      "strict_tree": {
+        "retained": 2,
+        "groups": 2,
+        "excluded": 1
+      }
+    },
+    {
+      "path": "src/non-mvdm/base/win32/inc/base.h",
+      "before_sha256": "1ad50440e5ed8638de2a8426599bb524917444362cbe7e09eb6cb08eb8fd6571",
+      "original_sha256": "2df61cf7f17123235a340b6e802c4a998889db112cfd15399cec3cd107911cf7",
+      "anchors": {},
+      "matched_lines": 170,
+      "strict_tree": {
+        "retained": 3,
+        "groups": 3,
+        "excluded": 1
+      }
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "before_sha256": "43b6bc88920ff1a71046b42827065b25b45c277af010f903a13a4b393a9ed82d",
+      "original_sha256": "1ed708dee1236ea6424610d2274830b651062ba602d4b2cfa60e49e33de4c186",
+      "anchors": {},
+      "matched_lines": 69,
+      "strict_tree": {
+        "retained": 2,
+        "excluded": 1,
+        "groups": 2
+      }
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "before_sha256": "631162e50772f92b2526660245630bc178a3bb501cb6a92bb58f7605e76add83",
+      "original_sha256": "7a0681e0d01f173edd31afac52c0a35cf7e2fc6711abcb4e224de06f116bdaf8",
+      "anchors": {},
+      "matched_lines": 1013,
+      "strict_tree": {
+        "retained": 3,
+        "excluded": 1,
+        "groups": 3
+      }
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsconst.h",
+      "before_sha256": "dd594532c0618ab4acdc637baddf131c0ff0b95bc736cfbc821408c4317e2b9d",
+      "original_sha256": "ca80cdb6c115f513166145531225e4eb6710b9d4e87e5a99655d0fb5bef779e8",
+      "anchors": {},
+      "matched_lines": 79,
+      "strict_tree": {
+        "retained": 1,
+        "groups": 1
+      }
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsdata.h",
+      "before_sha256": "c3a93b3c394b2adb6ae7e8198f6eb5bfe93c73414a85d9dca6e44ef5e7635aff",
+      "original_sha256": "a671c7fb4d1e9c5bbdb71d6fc4afe0324081038053392d599942c95813ce6d5c",
+      "anchors": {},
+      "matched_lines": 76,
+      "strict_tree": {
+        "retained": 1,
+        "groups": 1
+      }
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsdef16.h",
+      "before_sha256": "56133720faa919da85c129aa1f3c601ee504b8005f5a523b93440cbbc1426bbf",
+      "original_sha256": "8198c378c9df3f318aff2914e95a530ef90c6fca92d1939714c851628b069743",
+      "anchors": {},
+      "matched_lines": 408,
+      "strict_tree": {
+        "retained": 1,
+        "groups": 1
+      }
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsparm16.h",
+      "before_sha256": "8daf8b94feade0b0518b66d4f477901d3b02274d657f78103ca9be6fd07eaa6b",
+      "original_sha256": "c6179ce7662c012a345aed4278b94b59c50ceaf396eceb7f768b62ce454f2b7c",
+      "anchors": {},
+      "matched_lines": 128,
+      "strict_tree": {
+        "retained": 1,
+        "groups": 1
+      }
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsprocsp.h",
+      "before_sha256": "85aa47902c2ab59bd5ba00dbcee169a2c11dc9c408034a5e0333322b76172c81",
+      "original_sha256": "f9f997ec6f9fbdc8160c775718c605bcaa5aa374d94ac5c94387ccd7fb4e7465",
+      "anchors": {},
+      "matched_lines": 345,
+      "strict_tree": {
+        "retained": 1,
+        "groups": 1
+      }
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+      "before_sha256": "65a0ae3d65923ad5292213cf2c0f84bae48d91daebc6e087462bad42ed73c266",
+      "original_sha256": "2bb7b7a8d86742123d3e246a940d22b2f0448c0afdce6a26204e78dd4a50ecc7",
+      "anchors": {},
+      "matched_lines": 266,
+      "strict_tree": {
+        "retained": 1,
+        "groups": 1
+      }
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.h",
+      "before_sha256": "6cc4032705392183a1c5d38756b09dd70a3088fef421140f9ae3d26a7afe9867",
+      "original_sha256": "9c9f23b07297d1292cbc1e3da1ed05956f767f684977a825fc4eb08bcba5295f",
+      "anchors": {},
+      "matched_lines": 110,
+      "strict_tree": {
+        "retained": 2,
+        "excluded": 1,
+        "groups": 2
+      }
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddbeep.h",
+      "before_sha256": "614f80ea9f69baecd162d7c727fe85054774974f13610dc94f7ea16d2d990ed5",
+      "original_sha256": "4e9e17a77c0e173166ab528de3a68d0c53883f513d55a998329d14f207e4272a",
+      "anchors": {},
+      "matched_lines": 62,
+      "strict_tree": {
+        "retained": 2,
+        "groups": 4,
+        "excluded": 2
+      }
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddkbd.h",
+      "before_sha256": "b395238663867747ea1032f19fcdb7ae919c7a859fd827c814abb70f2e1ee472",
+      "original_sha256": "f3bf258135d2853ebb77d6bc81e12499528c5b7efe1f58ead6f5c1315c5bf5c1",
+      "anchors": {},
+      "matched_lines": 344,
+      "strict_tree": {
+        "retained": 2,
+        "groups": 5,
+        "excluded": 3
+      }
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddser.h",
+      "before_sha256": "d993fbfce54cfc3cf05fff55e59ce9331499491fe04035e7d6317a4be3f67735",
+      "original_sha256": "707287adc6162093ebe5dd9608b6f4e528b4b94cb0e2caa0df930ecffd4d3b46",
+      "anchors": {},
+      "matched_lines": 675,
+      "strict_tree": {
+        "retained": 2,
+        "excluded": 3,
+        "groups": 5
+      }
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+      "before_sha256": "d44312ef1b0a3200051fc9fc27b3e1ded47b47eae8a6b2cff9baa126bb18f36a",
+      "original_sha256": "e81160b69920ee87d603fe593916994f8448a280b2a2adfefd34c190b1b3cb78",
+      "anchors": {},
+      "matched_lines": 1614,
+      "strict_tree": {
+        "retained": 2,
+        "groups": 5,
+        "excluded": 3
+      }
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/align.h",
+      "before_sha256": "ab9c4ec4eb93424ca48ec557c13c66eb607a169260a0d4ca5efc1bb546e399f3",
+      "original_sha256": "b2922ca133bfd608bf86f33595c1dfb2b325cb31a0e83d4bfe18f0d91795e28f",
+      "anchors": {},
+      "matched_lines": 97,
+      "strict_tree": {
+        "retained": 2,
+        "excluded": 2,
+        "groups": 2
+      }
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbgtpt.h",
+      "before_sha256": "4b22eca70addbdfb0472e71ed0adfcfccfe846891af8863d3bb151c476716736",
+      "original_sha256": "d2ab723bc1f95cb53ae6970f950f5ce50d4b0d177ba31c8b7d7c8d83a5262d75",
+      "anchors": {},
+      "matched_lines": 586,
+      "strict_tree": {
+        "retained": 42,
+        "groups": 42,
+        "excluded": 40
+      }
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbmacro.h",
+      "before_sha256": "b8d477fc44cba472316e1bc9fe06dddc366960b5aa896d888bd0344792e30157",
+      "original_sha256": "e7a4ff096b5e2fdd0a81cd1c080e57253231664f87cb329c17a25c694282d8d1",
+      "anchors": {},
+      "matched_lines": 231,
+      "strict_tree": {
+        "retained": 2,
+        "excluded": 1,
+        "groups": 2
+      }
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbtypes.h",
+      "before_sha256": "8e8d555ed6877abe8aeb6e5e41e0061420764996617d372812d083e8508ffd12",
+      "original_sha256": "f04a563368f33bb6d8ba50a50e68d68f081aecce94ecc37b6d787cc6f38ea622",
+      "anchors": {},
+      "matched_lines": 339,
+      "strict_tree": {
+        "retained": 10,
+        "groups": 11,
+        "excluded": 4
+      }
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/debuglib.h",
+      "before_sha256": "9650c3c246f82bc14c769189cc7f59aa702c8327b28da8e17a6825b7709c8914",
+      "original_sha256": "d3f73f4317c039937ba51ef439cff38a721328e5ae7c0a7bccce290e2031ac51",
+      "anchors": {},
+      "matched_lines": 150,
+      "strict_tree": {
+        "retained": 2,
+        "excluded": 1,
+        "groups": 2
+      }
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netdebug.h",
+      "before_sha256": "fa8fbaa548b0bc86126ac8b612bb0239f5d9be1f7ddf0cef0b853dd8cb149725",
+      "original_sha256": "6e6acf20d4dcf56f6a51f99152c6792e080ea21db74efc37b6c70f2f5e00ec72",
+      "anchors": {},
+      "matched_lines": 269,
+      "strict_tree": {
+        "retained": 12,
+        "excluded": 13,
+        "groups": 14
+      }
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlibnt.h",
+      "before_sha256": "d3b325d11e1deb0963efb3722c3add63a335452a227183b1187d9802692cc9c9",
+      "original_sha256": "8545a4ebfe8156e40405fd6a22d6c49b42aaf3b6df1b6254a52b63c330e11ba8",
+      "anchors": {},
+      "matched_lines": 109,
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 2,
+        "groups": 3
+      }
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rap.h",
+      "before_sha256": "4c54f51c544841e51b1b16781d7ab6fd156b156d98b9e947a6ab80ba7c7c2426",
+      "original_sha256": "f1b132b2ab6d5b848303f27696fbcf4a78d8d937919b46dda004efb0930b9086",
+      "anchors": {},
+      "matched_lines": 342,
+      "strict_tree": {
+        "retained": 2,
+        "excluded": 1,
+        "groups": 2
+      }
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rapdebug.h",
+      "before_sha256": "e75948dc2d8a6f94016c0aa3d2656f1a5eee774c97049ea7cee6466a8961e341",
+      "original_sha256": "ffc0d0378b56e4ef1a7b4356f7c00749f6cc4ef459df4a59af2d3bcf64728003",
+      "anchors": {},
+      "matched_lines": 57,
+      "strict_tree": {
+        "retained": 2,
+        "excluded": 1,
+        "groups": 2
+      }
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/timelib.h",
+      "before_sha256": "2fd1270833ea0b825ab7443799b5cd86620d5146fed8034566dc5b2febddc059",
+      "original_sha256": "6f44ad84f7119f62c58646f5c1f9405a8e2b6da7d6dc91503264aa4128bd3dcc",
+      "anchors": {},
+      "matched_lines": 127,
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 1,
+        "groups": 2
+      }
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/xstypes.h",
+      "before_sha256": "12e60822cae0d06af26bb740113d0020111cdad4adf194f504a9640213723cf9",
+      "original_sha256": "b140254bef8ca8c871c6ca3a94a09c5f858ad9b5560cb687392af22e7c8d8539",
+      "anchors": {},
+      "matched_lines": 168,
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 1,
+        "groups": 2
+      }
+    },
+    {
+      "path": "src/non-mvdm/public/internal/shell/inc/wowcmndg.h",
+      "before_sha256": "92c3ad8d3b8113edd7b4e8282294f5d1269a6ce25c98a50602422cf116666424",
+      "original_sha256": "ce25c125139070ba30b2a99d670bdac09ff614c14a08ce5ef0cce2d99b43a52c",
+      "anchors": {},
+      "matched_lines": 29,
+      "strict_tree": {
+        "retained": 1,
+        "groups": 1
+      }
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+      "before_sha256": "71f027cf03fdc00b246770d8a5ee16f8bf7b2603d4807f41bc55688b9a4a0328",
+      "original_sha256": "fc35d359bf23f905916980740c56199d3627eb55b9c223091a75a8e4e606dd4d",
+      "anchors": {},
+      "matched_lines": 417,
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 3,
+        "groups": 4
+      }
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/dlcapi.h",
+      "before_sha256": "46626c141240eb45934df272e3c174e3173e32412f4c19891056acdb2d33a716",
+      "original_sha256": "c98cae26f503b5285e465b2fd40e0fe1a6344a44d5bb5bd00e876f20dd8c1dda",
+      "anchors": {},
+      "matched_lines": 901,
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 2,
+        "groups": 3
+      }
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+      "before_sha256": "49a5c12ac3f61bfd59d8f8d4dffaf50e5cf2fb8c8a3325c084b2fced9cc3971c",
+      "original_sha256": "a3048cbcaa26e32ae542a73aae59356e9fa2eb85af00932a027ff4e8e47f225c",
+      "anchors": {},
+      "matched_lines": 382,
+      "strict_tree": {
+        "retained": 3,
+        "excluded": 3,
+        "groups": 5
+      }
+    }
+  ]
+}

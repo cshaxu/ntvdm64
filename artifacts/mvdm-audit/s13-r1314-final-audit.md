@@ -364,3 +364,13 @@ and WOW32 differ only by PE timestamps
 ([comparison](s13-r1347-build-image-compare.json)); runtime tests were not
 repeated under the owner-approved rule. Counts remain 182 byte-identical /
 577 differing files reviewed / 1,056 total, with 297 differing files pending.
+
+The [r1348 strict review](s13-r1348-strict-ready.json) records 112 more
+files whose conditional trees, excluded-arm anchors, retained leaf contents,
+and matching-code lines in the observed selected projection pass. Groups with
+no excluded arm were admitted only with recorded selected-branch evidence.
+One candidate with only one matching code line remains under review. No source
+changes were needed. This does not prove unobserved contexts or runtime
+semantics of local adaptations. Counts: 182 byte-identical / 689 differing
+files with condition and matching-code review / 1,056 total; 185 differing
+files remain.
