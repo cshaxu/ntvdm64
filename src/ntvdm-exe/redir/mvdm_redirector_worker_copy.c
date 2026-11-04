@@ -1,4 +1,4 @@
-#include "mvdm_redirector_worker_copy.h"
+#include "common/guest-memory/redirector.h"
 
 #include "ntvdm-exe/softpc/include/mvdm_softpc_effective_address.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h"

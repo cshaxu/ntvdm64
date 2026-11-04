@@ -16,6 +16,12 @@ all 12 Control gates passed. Local package `fd19d65e-2eec-4bb8-a76a-697b9841c4d3
 matches all ten release hashes; [P1 evidence](../etc/evidence/m0-t475-s3-worker-ntvdm-remediation.md)
 records the initial long-PATH test failure and baseline. Full was not run; the
 optional DOS4GW/NESticle fixture was absent.
+P2 separates consumer-visible guest-memory and redirector copy contracts into
+common while retaining the single worker-owned provider. The x86/x64 build,
+focused lease, callback and redirector tests, three real DOS redirector probes,
+and all 12 selected Control gates passed. Local package
+`8ac27d1f-ff63-4b10-b8f8-2afd5f83d39b` has ten verified release hashes;
+details and test limits are in the [S3 evidence](../etc/evidence/m0-t475-s3-worker-ntvdm-remediation.md).
 T475 S1 separated NXVM and Win32 library ownership. Its final four local P
 commits extracted object-handle comparison, overlapped pipe-pair creation,
 parent-process observation and file identity. Their local packages each

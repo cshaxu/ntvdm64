@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h"
+#include "common/guest-memory/access.h"
 #include "wow_task_order_bindings.h"
 
 /* This is the fixed-width source contract exported by the SoftPC adapter.

@@ -1,5 +1,9 @@
 # Common cross-component mechanisms
 
+`guest-memory/` owns the copied-value access and redirector declarations used
+across worker and DLL source boundaries. The existing worker session remains
+the only guest-memory and lease-context authority; no state is allocated here.
+
 `base_srv/` owns shared BaseSrv client, identity-scope and copied transport
 mechanisms. NTSRV retains server-side authorization, task and lifecycle
 policy. `rpc/` remains a separate sibling for product-specific RPC calls. Generic

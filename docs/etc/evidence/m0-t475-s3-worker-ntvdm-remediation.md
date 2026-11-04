@@ -27,3 +27,20 @@ bounded test PATH. This is a controlled result consistent with the known
 long-PATH issue, not a claim that its product root cause was repaired.
 Logs, commands, start/end times, owned PIDs, hashes and prior release backup
 are under `build/t475-s3-p1`. No main-runtime deployment or push occurred.
+
+## P2: shared guest-memory contracts
+
+The guest-memory lease API and redirector copy declarations now reside in
+`common/guest-memory`. WOW32 and VDMREDIR consume those declarations without
+including the former NTVDM-private headers. The worker retains its single
+session-owned memory provider and the existing export ordinals. Compiler-recorded
+dependency checks passed, including injected private-header negative controls.
+
+The x86/x64 build, guest-memory lease tests, original WOW callback-frame fixture,
+redirector OEM and async fixtures, and 12 selected Control gates passed. Actual
+DOS async-read, async-write and NetAPI probes passed in a freshly identified
+physical stage with the bounded test PATH. Staging checked 63 immutable guest
+files and 274 NTVDM export ordinals. Local package
+`8ac27d1f-ff63-4b10-b8f8-2afd5f83d39b` was published with ten matching hashes.
+Full was not run; the optional DOS4GW/NESticle fixture was absent. Logs and
+the previous release backup are under `build/t475-s3-p2`.

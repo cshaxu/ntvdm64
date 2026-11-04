@@ -4,7 +4,7 @@
 #include <lmerr.h>
 #include <string.h>
 
-#include "ntvdm-exe/redir/include/mvdm_redirector_worker_copy.h"
+#include "common/guest-memory/redirector.h"
 
 static int copy_guest(uint16_t segment, uint16_t offset, uint8_t const *bytes,
     uint32_t byte_count)

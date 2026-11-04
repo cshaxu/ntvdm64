@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-#include "ntvdm-exe/session/guest_memory_lease.h"
+#include "common/guest-memory/access.h"
 
 /*
  * Bounded copied memory for the remaining resource and task-parent callers.
