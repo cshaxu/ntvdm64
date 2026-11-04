@@ -1,0 +1,99 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/timer.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\timer.h",
+  "original_sha256": "b5704cc3ec76cd4dc010eeecc07e4c78ff76428266f6719cf34a65c9dd4b1f2d",
+  "before_sha256": "be96008c5c926a7c4847ac4edd9275b324484c81b0884743c82220581f24a351",
+  "after_sha256": "be96008c5c926a7c4847ac4edd9275b324484c81b0884743c82220581f24a351",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timer.h",
+      "line": "67",
+      "directive": "ifndef",
+      "expression": "host_block_timer",
+      "chain_start": "67",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "d33e302d37db7fd87664f8b71b7f7829c6c3b935edcc1e000ddda54668e7be79"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timer.h",
+      "line": "71",
+      "directive": "ifndef",
+      "expression": "host_release_timer",
+      "chain_start": "71",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "d33e302d37db7fd87664f8b71b7f7829c6c3b935edcc1e000ddda54668e7be79"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timer.h",
+      "line": "77",
+      "directive": "ifdef",
+      "expression": "NTVDM",
+      "chain_start": "77",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "d33e302d37db7fd87664f8b71b7f7829c6c3b935edcc1e000ddda54668e7be79"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timer.h",
+      "line": "79",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "77",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "d33e302d37db7fd87664f8b71b7f7829c6c3b935edcc1e000ddda54668e7be79"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timer.h",
+      "line": "90",
+      "directive": "ifdef",
+      "expression": "SWIN_MOUSE_OPTS",
+      "chain_start": "90",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "d33e302d37db7fd87664f8b71b7f7829c6c3b935edcc1e000ddda54668e7be79"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timer.h",
+      "line": "93",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "90",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "d33e302d37db7fd87664f8b71b7f7829c6c3b935edcc1e000ddda54668e7be79"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timer.h",
+      "line": "101",
+      "directive": "ifdef",
+      "expression": "HUNTER",
+      "chain_start": "101",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "d33e302d37db7fd87664f8b71b7f7829c6c3b935edcc1e000ddda54668e7be79"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timer.h",
+      "line": "122",
+      "directive": "ifdef",
+      "expression": "NTVDM",
+      "chain_start": "122",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "d33e302d37db7fd87664f8b71b7f7829c6c3b935edcc1e000ddda54668e7be79"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}

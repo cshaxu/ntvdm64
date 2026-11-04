@@ -1,0 +1,88 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/host_com.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\host_com.h",
+  "original_sha256": "d7085b215a923dc8df3a9dd44bdc3739d3035ac2fe8978f282b6a3cafd97b68b",
+  "before_sha256": "de187a1c80e136c77379bbce1cc9afda8d41e4f72605990ea7c91bdc987be6f1",
+  "after_sha256": "de187a1c80e136c77379bbce1cc9afda8d41e4f72605990ea7c91bdc987be6f1",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_com.h",
+      "line": "1",
+      "directive": "ifndef",
+      "expression": "_HOST_COM_H",
+      "chain_start": "1",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "0bdcdbfda2c357034d8f392f685ac8561a7aeb6314b1f41fba3dfa4b44ca4f4c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_com.h",
+      "line": "190",
+      "directive": "if",
+      "expression": "defined(NTVDM) && defined(FIFO_ON)",
+      "chain_start": "190",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "0bdcdbfda2c357034d8f392f685ac8561a7aeb6314b1f41fba3dfa4b44ca4f4c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_com.h",
+      "line": "199",
+      "directive": "ifdef",
+      "expression": "NTVDM",
+      "chain_start": "199",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "0bdcdbfda2c357034d8f392f685ac8561a7aeb6314b1f41fba3dfa4b44ca4f4c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_com.h",
+      "line": "209",
+      "directive": "ifdef",
+      "expression": "PS_FLUSHING",
+      "chain_start": "209",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "0bdcdbfda2c357034d8f392f685ac8561a7aeb6314b1f41fba3dfa4b44ca4f4c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_com.h",
+      "line": "213",
+      "directive": "ifndef",
+      "expression": "macintosh",
+      "chain_start": "213",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "0bdcdbfda2c357034d8f392f685ac8561a7aeb6314b1f41fba3dfa4b44ca4f4c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_com.h",
+      "line": "231",
+      "directive": "ifdef",
+      "expression": "NTVDM",
+      "chain_start": "231",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "0bdcdbfda2c357034d8f392f685ac8561a7aeb6314b1f41fba3dfa4b44ca4f4c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_com.h",
+      "line": "240",
+      "directive": "ifdef",
+      "expression": "NTVDM",
+      "chain_start": "240",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "0bdcdbfda2c357034d8f392f685ac8561a7aeb6314b1f41fba3dfa4b44ca4f4c"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}

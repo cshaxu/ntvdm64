@@ -250,8 +250,10 @@
 #ifdef VGG
 #define	MOUSE_VIDEO_MODE_MAXIMUM	0x14
 #else
-#define	MOUSE_VIDEO_MODE_MAXIMUM	0x11	
+#line 253
+#error Unsupported excluded original configuration
 #endif /* VGG */
+#line 255
 #else
 #line 256
 #error Unsupported excluded original configuration

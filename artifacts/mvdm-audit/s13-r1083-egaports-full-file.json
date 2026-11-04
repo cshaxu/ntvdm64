@@ -1,0 +1,15 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/egaports.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egaports.h",
+  "original_sha256": "9258473bc4f8c375852c51ea8d7eb71a0163e503bd371f779b78eeb6227146af",
+  "before_sha256": "cf50851c94022247b05468b5df5dcc5ad88f2dbfaa0a010a8c215908b83163a5",
+  "after_sha256": "4a7fc8597739224b19d4d33e422b77ee4efcfac5e7b13f0c1f97fcabcdde7b1b",
+  "removed_body_sha256": "f22cdc9ced001238f7ef32baf1f871fe906c82b8c4fb085ab13cefb302341f82",
+  "review": "Full original conditional tree aligns through retained arms. EGG, V7VGA and C_VID branches observed selected; all 42 actual dependency commands specify V7VGA and C_VID. Removed unselected non-V7VGA else as #error and normalized existing error/continuation anchors. Original nested ANSI group inside excluded C_VID/A2CPU else is not restored.",
+  "evidence": [
+    "s13-r831-egaports-header-context.json",
+    "s13-r1083-egaports-contexts.json",
+    "compile-branch-selection/branches.csv"
+  ],
+  "limitations": "Build and image comparison pending."
+}

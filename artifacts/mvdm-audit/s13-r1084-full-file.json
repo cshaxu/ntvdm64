@@ -1,0 +1,99 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egavideo.h",
+  "original_sha256": "5b47f5e3566927332de3c3f9474ba3595151758c0a8ff8fd6c9cc860f2f8e6cd",
+  "before_sha256": "9abd53e6feb5145c8b6e300ce1a28deac7f568c71c9c8603e574b67fe124d619",
+  "after_sha256": "9abd53e6feb5145c8b6e300ce1a28deac7f568c71c9c8603e574b67fe124d619",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "line": "52",
+      "directive": "if",
+      "expression": "0",
+      "chain_start": "52",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "dea92c3d4b4445d5f077f24ea209e5f3744a572faec423806ae1d0f899813253"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "line": "56",
+      "directive": "ifdef",
+      "expression": "VGG",
+      "chain_start": "56",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "dea92c3d4b4445d5f077f24ea209e5f3744a572faec423806ae1d0f899813253"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "line": "90",
+      "directive": "ifdef",
+      "expression": "ANSI",
+      "chain_start": "90",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "dea92c3d4b4445d5f077f24ea209e5f3744a572faec423806ae1d0f899813253"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "line": "94",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "90",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "dea92c3d4b4445d5f077f24ea209e5f3744a572faec423806ae1d0f899813253"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "line": "100",
+      "directive": "ifdef",
+      "expression": "MSWDVR",
+      "chain_start": "100",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "dea92c3d4b4445d5f077f24ea209e5f3744a572faec423806ae1d0f899813253"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "line": "104",
+      "directive": "ifdef",
+      "expression": "V7VGA",
+      "chain_start": "104",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "dea92c3d4b4445d5f077f24ea209e5f3744a572faec423806ae1d0f899813253"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "line": "109",
+      "directive": "ifdef",
+      "expression": "VGG",
+      "chain_start": "109",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "dea92c3d4b4445d5f077f24ea209e5f3744a572faec423806ae1d0f899813253"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "line": "115",
+      "directive": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "chain_start": "115",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "dea92c3d4b4445d5f077f24ea209e5f3744a572faec423806ae1d0f899813253"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}

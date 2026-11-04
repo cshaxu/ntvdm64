@@ -11,10 +11,9 @@ and register files even when no source edit is needed. If binaries have no
 substantive change, reuse test evidence for the P; otherwise run Full before
 publication. [Progress](../../artifacts/mvdm-audit/s13-bfs-progress.md);
 [observed per-file inventory](../../artifacts/mvdm-audit/s13-r489-per-file-observed-inventory.json).
-The current census has 1058 present C/H after the latest delivery: 1057
-in the observed build/dependency inventory and one product-generator input.
-The observed inventory still needs complete supported-context verification.
-See [census](../../artifacts/mvdm-audit/s13-r624-current-file-census.json).
+Latest checkpoint: [r1102](../../artifacts/mvdm-audit/s13-r1102-delivery.md).
+The 1,058-file [census](../../artifacts/mvdm-audit/s13-r624-current-file-census.json)
+includes one product-generator input; supported-context verification remains open.
 
 Prior owner-approved delivery: restore the four MVDM ANSI-profile files changed
 by MVDM-HOST-DIV-479, preserving authored build boundaries; verify actual

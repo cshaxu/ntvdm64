@@ -56,8 +56,10 @@
 #ifdef VGG
 #define MAX_NUM_FONTS	8	/* VGA support 8 fonts */
 #else
-#define MAX_NUM_FONTS	4	/* EGA support 4 fonts */
+#line 59
+#error Excluded unsupported non-VGA font profile
 #endif  /* VGG */
+#line 61
 #endif  /* EGG */
 
 
@@ -263,7 +265,7 @@ extern	DISPLAY_GLOBS	PCDisplay;
 #line 282
 #error Unsupported excluded original configuration
 #endif /* VGG */
-#line 254
+#line 284
 #define get_screen_height_lo()          (PCDisplay.screen_height.as_bfld.low_byte)
 #define get_screen_height_hi()          (PCDisplay.screen_height.as_bfld.top_bit)
 #define	get_screen_end()		(get_screen_start() + get_screen_length() + gvi_pc_low_regen)

@@ -1,0 +1,66 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/host.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\host.h",
+  "original_sha256": "7777d03c1ab2be0f278941a5d0085847c209da5b7984e05fdbcb8aa2885a495b",
+  "before_sha256": "2a1b02381aa507a48c9ab930acd40db1a183f33596db2f505c9a6f8abd43924a",
+  "after_sha256": "2a1b02381aa507a48c9ab930acd40db1a183f33596db2f505c9a6f8abd43924a",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host.h",
+      "line": "22",
+      "directive": "ifdef",
+      "expression": "PC_CONFIG",
+      "chain_start": "22",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "74e554fee6d9008fe59882301bfa07e300d810c66b7559e42afa3fb35c64bc00"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host.h",
+      "line": "38",
+      "directive": "ifndef",
+      "expression": "host_memset",
+      "chain_start": "38",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "74e554fee6d9008fe59882301bfa07e300d810c66b7559e42afa3fb35c64bc00"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host.h",
+      "line": "46",
+      "directive": "ifdef",
+      "expression": "SUSPEND",
+      "chain_start": "46",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "74e554fee6d9008fe59882301bfa07e300d810c66b7559e42afa3fb35c64bc00"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host.h",
+      "line": "49",
+      "directive": "ifndef",
+      "expression": "REAL_VGA",
+      "chain_start": "49",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "74e554fee6d9008fe59882301bfa07e300d810c66b7559e42afa3fb35c64bc00"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host.h",
+      "line": "58",
+      "directive": "ifdef",
+      "expression": "SETUID_ROOT",
+      "chain_start": "58",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "74e554fee6d9008fe59882301bfa07e300d810c66b7559e42afa3fb35c64bc00"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}

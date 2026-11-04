@@ -69,6 +69,7 @@
 #line 67
 #error DIVERGENCE MVDM-HOST-DIV-528: SWIN_HAW platform branch is not selected; see mirror register.
 #endif
+#line 69
 
 #line 70
 #if defined (ASPI)
@@ -86,8 +87,10 @@
  * bit-number macro from replacing the CCPU interrupt enum.  CPU30 is retired
  * in this product; the unselected non-CCPU body is now marked by DIV-506. */
 #if !defined(CCPU)
+#line 79
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif /* 3.0 CPU or CCPU */
+#line 80
 #endif /* CPU_30_STYLE */
 #define DIVIDE_OVERFLOW_INT     0
 
@@ -148,7 +151,7 @@ extern VDMVIRTUALICA VirtualIca[];
 #line 209
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* !NTVDM */
-#line 205
+#line 242
 
 #line 243
 #ifdef GISP_CPU

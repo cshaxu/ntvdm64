@@ -1,0 +1,14 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gvi.h",
+  "original_sha256": "c4dfbf2bb2d6e8d79e9fd607f6ab50b149a5edb2768b25d2475002e2e9940716",
+  "before_sha256": "08cc7e89dd5ed283657784df061ab20a1da0aa7a20a2de561c6cfd4adc9cacf9",
+  "after_sha256": "9fd29126c9a54b492937193a58593a7c7fc8bd467eb73fdb9986bfc8075b32fa",
+  "removed_body_sha256": "2cafa328a749e9ae1534c96039e5428267c29d69f14e25c71f12fe0f8f453ff1",
+  "review": "Complete original/current conditional trees align through retained arms. Nested non-VGG font-count alternative was unhit in historic markers; 66 product header witnesses select VGG at other unchanged positions and host_def defines VGG with no product source undefinition. Replaced the unsupported else with #error and original line anchor; normalized existing excluded-arm anchors.",
+  "evidence": [
+    "s13-r848-gvi-header-contexts.json",
+    "compile-branch-selection/branches.csv"
+  ],
+  "limitations": "Build and image comparison pending."
+}

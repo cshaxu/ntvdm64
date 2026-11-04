@@ -1,0 +1,13 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ica.h",
+  "original_sha256": "21109fa7e6b8d6a8ecfe8e733a16805829560e218be11e46e5a33dac28820316",
+  "before_sha256": "662d151687b34128bb40aaeae69d072bfa7e2aa8b6e3418790d4e7a0eb9b980d",
+  "after_sha256": "b9664c37d6eb659e4fe0d126b8ecb28ff2d909d92e544cfc9ae8f1a669b08037",
+  "review": "Complete original/current conditional tree aligns through selected arms. The sole additional local !CCPU guard under CPU30 exclusion is registered MVDM-HOST-DIV-146/506 and already #error; original body line anchor restored. Both NTVDM/MONITOR selected declarations remain; product witnesses select retained arms. Existing unsupported bodies stay #error with corrected original continuation lines.",
+  "evidence": [
+    "s13-r858-ica-header-contexts.json",
+    "compile-branch-selection/branches.csv"
+  ],
+  "limitations": "Build and image comparison pending. No new branch exclusion."
+}

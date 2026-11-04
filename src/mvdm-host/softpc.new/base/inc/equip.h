@@ -28,8 +28,10 @@
 
 #ifdef	LITTLEND
 #ifdef	BIT_ORDER1
+#line 66
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
+#line 84
 #ifdef	BIT_ORDER2
 typedef union 
 {

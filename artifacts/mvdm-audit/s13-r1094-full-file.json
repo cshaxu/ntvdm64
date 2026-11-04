@@ -1,0 +1,66 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/host_lpt.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\host_lpt.h",
+  "original_sha256": "8fdfe8fbd8e8dd4a9746a50851410a051f640365e3d59d9ed8024dfb397da820",
+  "before_sha256": "2a2dba16e6be9cc6264e13702c6c9c04b64182d14b3ff9825be68fbfa3135bd2",
+  "after_sha256": "2a2dba16e6be9cc6264e13702c6c9c04b64182d14b3ff9825be68fbfa3135bd2",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_lpt.h",
+      "line": "1",
+      "directive": "ifdef",
+      "expression": "PRINTER",
+      "chain_start": "1",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "22c6d2b2f19d962f5790f4bd2e633d8ab4f6999bb305497d8a8ede95d048856f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_lpt.h",
+      "line": "3",
+      "directive": "ifndef",
+      "expression": "_HOST_LPT_H",
+      "chain_start": "3",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "22c6d2b2f19d962f5790f4bd2e633d8ab4f6999bb305497d8a8ede95d048856f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_lpt.h",
+      "line": "136",
+      "directive": "if",
+      "expression": "defined(NTVDM)",
+      "chain_start": "136",
+      "depth": "3",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "22c6d2b2f19d962f5790f4bd2e633d8ab4f6999bb305497d8a8ede95d048856f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_lpt.h",
+      "line": "141",
+      "directive": "ifdef",
+      "expression": "PS_FLUSHING",
+      "chain_start": "141",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "22c6d2b2f19d962f5790f4bd2e633d8ab4f6999bb305497d8a8ede95d048856f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_lpt.h",
+      "line": "145",
+      "directive": "if",
+      "expression": "defined (NTVDM) && defined(MONITOR)",
+      "chain_start": "145",
+      "depth": "3",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "22c6d2b2f19d962f5790f4bd2e633d8ab4f6999bb305497d8a8ede95d048856f"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}

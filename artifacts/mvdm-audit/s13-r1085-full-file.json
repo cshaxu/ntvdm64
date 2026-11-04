@@ -1,0 +1,165 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\emm.h",
+  "original_sha256": "d92cc144f50e60de5042f76c67574a3fdc22b0ad38411d92d1459d4a02b17789",
+  "before_sha256": "3bcc3def41acf384273bc507564e6ab3efddb020fb3dccb8c76d7265e8b3c0b6",
+  "after_sha256": "3bcc3def41acf384273bc507564e6ab3efddb020fb3dccb8c76d7265e8b3c0b6",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "line": "24",
+      "directive": "ifdef",
+      "expression": "NTVDM",
+      "chain_start": "24",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "cbcb905c9c3a0b073597c2c9e150b64b8841017146be2a2af7ec113a1feb6183"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "line": "40",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "24",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "cbcb905c9c3a0b073597c2c9e150b64b8841017146be2a2af7ec113a1feb6183"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "line": "48",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "48",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "cbcb905c9c3a0b073597c2c9e150b64b8841017146be2a2af7ec113a1feb6183"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "line": "50",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "48",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "cbcb905c9c3a0b073597c2c9e150b64b8841017146be2a2af7ec113a1feb6183"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "line": "77",
+      "directive": "ifdef",
+      "expression": "NTVDM",
+      "chain_start": "77",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "cbcb905c9c3a0b073597c2c9e150b64b8841017146be2a2af7ec113a1feb6183"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "line": "100",
+      "directive": "ifdef",
+      "expression": "NTVDM",
+      "chain_start": "100",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "cbcb905c9c3a0b073597c2c9e150b64b8841017146be2a2af7ec113a1feb6183"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "line": "114",
+      "directive": "ifdef",
+      "expression": "NTVDM",
+      "chain_start": "114",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "cbcb905c9c3a0b073597c2c9e150b64b8841017146be2a2af7ec113a1feb6183"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "line": "135",
+      "directive": "if",
+      "expression": "defined(MONITOR) && !defined(PROD)",
+      "chain_start": "135",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "cbcb905c9c3a0b073597c2c9e150b64b8841017146be2a2af7ec113a1feb6183"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "line": "179",
+      "directive": "ifdef",
+      "expression": "ANSI",
+      "chain_start": "179",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "cbcb905c9c3a0b073597c2c9e150b64b8841017146be2a2af7ec113a1feb6183"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "line": "183",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "179",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "cbcb905c9c3a0b073597c2c9e150b64b8841017146be2a2af7ec113a1feb6183"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "line": "200",
+      "directive": "ifndef",
+      "expression": "NTVDM",
+      "chain_start": "200",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "cbcb905c9c3a0b073597c2c9e150b64b8841017146be2a2af7ec113a1feb6183"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "line": "292",
+      "directive": "if",
+      "expression": "defined(X86GFX) && defined(NTVDM)",
+      "chain_start": "292",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "cbcb905c9c3a0b073597c2c9e150b64b8841017146be2a2af7ec113a1feb6183"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "line": "302",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "292",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "cbcb905c9c3a0b073597c2c9e150b64b8841017146be2a2af7ec113a1feb6183"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "line": "304",
+      "directive": "ifndef",
+      "expression": "host_update_logical_page",
+      "chain_start": "304",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "cbcb905c9c3a0b073597c2c9e150b64b8841017146be2a2af7ec113a1feb6183"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}

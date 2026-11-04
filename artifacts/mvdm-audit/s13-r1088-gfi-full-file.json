@@ -1,0 +1,34 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/gfi.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gfi.h",
+  "original_sha256": "ae7b3dc66f9d618a841068e0e730c79751a7e496e223cf1d01ef0c4505e54a9d",
+  "current_sha256": "ae7b3dc66f9d618a841068e0e730c79751a7e496e223cf1d01ef0c4505e54a9d",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gfi.h",
+      "line": "503",
+      "directive": "ifdef",
+      "expression": "NTVDM",
+      "chain_start": "503",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f8c8457309bf87d8e298d3725f7baae0a5331690f972dad10981bd259c608cbc"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gfi.h",
+      "line": "595",
+      "directive": "ifndef",
+      "expression": "host_rflop_drive_type",
+      "chain_start": "595",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f8c8457309bf87d8e298d3725f7baae0a5331690f972dad10981bd259c608cbc"
+    }
+  ],
+  "review": "Entire file is byte-identical to original. Both nonnested conditional groups are observed selected in product and retained; no exclusion needed.",
+  "evidence": [
+    "s13-r841-gfi-header-context.json"
+  ]
+}

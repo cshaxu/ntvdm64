@@ -1,0 +1,1279 @@
+{
+  "records": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/ccpu/call.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "6944c1538c790aebd455b079b2e9249e1db7fe3ccec95ef9b731e721d8563b80"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/ccpu/ccpusas4.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "cc4a96b9d727affdfd498e72ac2c46b07b424f686160706c9b8b55b9ff850126"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/ccpu/c_main.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "3187f7f824ed9aa838e02ff463a679fb5d270011264c3d6fdf535b38618f8ab7"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/ccpu/zfrsrvd.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "6cfd9d4c5f8a676d07fcd4184c82c9cc9123da54dcf277b4fd29a8b9b36c0f8c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/ccpu/sasCdef.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "66522e3e5e107104ee842619c4cf4e47b26b5ee92004358a11b041daa5f64bf7"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/bios/cmos_bis.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "74bb2e9d38f176d488bab37fd09bd27a63fd3be48d9389a6cf47307d99c77c5c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/bios/emm_fncs.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "905a798dbf817d5d2667b10927565f6e0f5f74020e326a26cdfd1237f4a389b1"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/bios/rom_basc.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "627edf5f788c61c2406f6395d23b4003b198e896ae8984e6e9e8d9c82d1c3713"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/bios/slave_bs.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "8dc4bba2e8f9760fa56fdc7042ea4a23eced6cb919d50af9b8df9651d85d8472"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/bios/rtc_bios.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "e799118526e2c9255f6d00b2b303d94d3372869ffa05a35ad7007f56eed85dcf"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/bios/reset.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "4d77c09b0996dcbfe36daf0de3248569249d255bb66c43d80c996fc3727010a8"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/bios/tape_io.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "7019a648f71869ab29aa9e526baa962767df81415f398aeac6d6e344b90c5f35"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/bios/ill_bop.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "48f26500173b20403f793f98f2e6f33f93908bfb98ec3a0b6048d319c9fdfa96"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/bios/equipmnt.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "dff6a95f8d15f2d3ac9529a531c79b1f9486074eca1f7235fd2a4a274b015ad7"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/bios/virtual.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "5927eb7fc5afa35de1e6ca1f767f1b430e61884673d736f62784d565e47e9bcc"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/bios/mem_size.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "be10e2b959cb31980eb1960ad06e8f7a2352e00bc23a2d86abccd06de566a148"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/bios/build_id.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "4bfb7821851bf2ccd8fc6d704258bfb1579227943a406e486ecbda63d93191d8"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/keymouse/keybd_io.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "4b398f637643fdb606a6df68703813204737cf975a7f90951fce074f4e194d18"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/keymouse/keyba.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "3dfd0bd7693e24c03a1adf4f70a5e6c44c609ee418bb32ff31f1b949fae5d354"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/keymouse/mouse.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "32cf589b97da4fd592c78a3de12eab29b5e7915703a2a0712e1c45a657edad2b"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/system/at_dma.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "9cc5016e6f0689bddcfe8e10577b42f12c0a849c3f6f520957585aacbb1c0be2"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/keymouse/mouse_io.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "7ba6cade9bd1b4fc0dc01fc82cd424e883af3710f207aa771b1fd25a5807d5a2"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/system/cmosnt.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "7df83942a380bbddd280d6d46c64f107b34f4280977eebd3abf1303dccba3d21"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/system/illegalp.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "1b5d1130f615889269140f5422241258661f357992312c41b0297c5a67ede5b4"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/system/rom.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "69420f1b7f409fd0feae05d4157ae3da039e13c5631b33861b2a48465da812aa"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/system/timer.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "6770a759a7fa6832c17eab2bbe91f803b3b13d355edee0c6add1221f4f7c27d3"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/system/unexp_nt.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "507d22ac82d1dcdfbe0c60310fd23acc1c10de99d91a463b3446b90c555831d8"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/disks/diskbios.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "87088b7e51ca07a1f4e768a6a3eb2db7a194480c4ad551dc826cb76b6dc45f8e"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/disks/floppy_i.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "544fcb96bb5cd53479b6a3c94d64be95216991ff630835801aed0ca5a9b90058"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/disks/floppy.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "5fc7f8825d81575de1ddcc16c995f818a331ede9e78ad0933521830bef9d847d"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/disks/fdisk.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "304c8d46603224497e6743a80f49eb98bd487874880af683052bf07c1b14c369"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/disks/gfi_mpty.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "4859ede1844ac9d3bee0350501bd21ec40a1d58a92325372fc019d71fe6383a8"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/disks/gfi.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "2f700ed6bb186ab083e0865ed8686f844eda1ecc9ce7e1729d3535d072222582"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/support/time_day.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "0358ace4a16af9be9131a8ff2174de34f17eb5c43f41e866f0188d551ed5a168"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/support/ios.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "d7ee0ecedf5e37efccb971094d717263f6b0cb07a60119a6328df46078f6e411"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/support/main.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "11f61562dc9f9484dc06a577519faf528d874a3c98687a061ff64570795e5eba"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/support/xt.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "5373b1cb6e3afd606ff593480a4868f2b846402b48081acb72ab0d93f479bd51"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/ega_prts.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "c2aacb44efe926aeea102635dff3bce12b6b668d0018429516264151e0cd4598"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/ega_vide.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "b640eb6933e6a061ef3905247dc3a68c5e088db7a36ede5756764159ee9219f6"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/gfx_updt.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "474160d4c96e2423b50d46840538e6c445b223ede3e641e690043ec30b39bbe0"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/video.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "8cf297df02d6aebd0693483970b1f6395c7d0457bf911af96a78e21ac9246807"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/gvi.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "f15e1f695e7ad1aa5f0bbb0148e7dd8902ca390db92702070f175de5fea6abbf"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/v7_video.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "99d97c96fc01462a43a0d4cb8823e72003c82e7741d254614f43f7b62e6265e5"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/ega_read.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "a01e3a8a4da9c90911c3c1db5760cae26e1a67da3a1e417e6cbeb69e2d448c88"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/vga_prts.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "a9a010cfc0f3bcaaba8ea8b6a42756de2eaa79fa3f9d28c9bc47d1eaa3990b72"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/vga_vide.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "09ce5cde2a1ca1cad651c779b2b15c660e480e9d11d786e2a1fed54f9f2e1c30"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/ega_dmmy.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "21dc527dc5510624ab568689d067947e3110bce0cacade7457451157026a3da4"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/egawrtm0.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "54824ae2697b3f5d287b29096f8171daac4e17059e3b7d7c5d06b82d4018a5f5"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/egwrtm12.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "cefd5355735a71b617e697e99100148c02df1782b612e1a829da998b773d46e2"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/cga.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "cc37223fa49aad09fe8825170c1e0b1e532c79c38eda7424e84524c6b70db12b"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/cvidc/accessfn.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "61f9778c7bb9405f39a26f09f7fca46319499fff0260cd08bda322a97386a573"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/comms/printer.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "517bd0ac3d14020582050fcca1f8629735c955bd18dfa4c78cc755eeaa602313"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/comms/printer_.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "b12fac56e4bc003ffbbcff28d4fa9da09fb21c18fcff7038193bacd9afaa7e69"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/comms/com.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "8e5eea5ee9685a5c8ee2e9eeae9d72f4addf9bd8030d6d078754371fa24ab200"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/comms/rs232_io.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "76da5145e91054027c45e6d94ae631d06ec6c81c0bc59feff4dba3a65fc752c7"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/dos/emm_mngr.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "c58ce58961e7f28ca9cceb6c751a0762587a8bfd9675c630205a45e0a786f2ab"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/base-debug/btrace.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "6793f269457a348ba54ccb4694328e4fd6c6ea6e76e8790f12f751eab26b2b3f"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/base-debug/trace.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "18c51727eb7ee110913173f8ea094490fa61dc533a85069dda7a094436487aa0"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/base-debug/pigyoda.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "751157062a3e95a6425478cca9cfe7b70245632c12306eecdf0b55478a27d095"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/sim32.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "e04f09c65c06e3a6bda75d0bc78cfed126e1518570d5c436374f05f53d743f0c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_timer.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "c93a1a2b8843c2f4b675d5a9feea8dbe9d186619d1c2d6f3f22d9acfd490bdc0"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_msscs.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "64272b542d5c2d929e976fc87acb52f4a6307b402e947f7307991e6bf027a88c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_error.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "2a3f33170d2c94f01cd9f8f27d722b0184e9aa0d2f52534d1d39d0d95d8a2f6a"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_cga.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "268c790f85939c9f9c3f07e3f3c9dcd6a5ea187782a17a72917fedc378a91bc5"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_ega.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "a01d89cd5551874f51f68963e31a40ab86567312ae6cd10507a50c6935b13e46"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_input.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "62caed980da9f70977df3b8597f2e81af24f1d9a6260e08bab34a558e51a63c8"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_graph.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "70e5732c249689c20754089975fbda18688474974ad549f30568cf8395ef3981"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_bop.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "4c3a0b812a50af25ad72c051578315aa4cdc61d6f07662c0d9403ad834de4cb7"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_sas.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "98b1f7c019e72586f1f8a9fe1a61eb28769b1d2d55d22af6db219983e24842da"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_cpu.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "52c70edb4077b49ce204b6c2ed3823a487b34e4d709f530fedf51ac87d5cb7ce"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_unix.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "c8cfd7df7edd6e7ef158af9be37ebd8cc98d85ebdd561e91c25b325f88231f11"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_lpt.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "580309693d35ed7de98b4fbb39a15dde0a9bebde529d0f3fa1c14aa850a9e478"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_mouse.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "ddabfd236fb904c172e74f2462da0c73bc6b454da7f6a84e64a8e8d9b30e1568"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_event.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "a4497f7808aa48a4d79b40e9d1cff9497426649e26e98eb1c8d9308cefdac250"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/config.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "053aaad06aaa96869f2664d3a1d3776e5655c6a02dac272fe64974efff9ff952"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/stubs.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "a578bcf4b131a28489462911369b347ef0e6e41475c55881851bd043450fefa5"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_fulsc.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "a17f31648e705a77b63e47f19462c70f83bfe70160247b714fd2847df55de623"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_emm.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "670f0f19a7b400bdc61734c701d73d4355af35f5e3fd3eb4bbbbdfb0924e2ea3"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_eoi.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "92847bc0535d18b88d6684cc85bcea955d41e71b5e8ee99f45a9aee5a915e57e"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_vdd.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "166ded22dc6dd25879424870bdaa301736d00418392fb3ab767bbacb7e9c3766"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_det.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "2bd09938f23a69bea20b24875fb98d44e11093e4629077309a3c678e0329bd5b"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_umb.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "07cfcff9ecbba3298ed358b70944924846b44dbb83ebb39f339bf5e21b2289be"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_mem.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "65bce241c77c04d8ac8580f727ae426467f9b7cdafc8641146801ad8b50f5ca1"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/host/nt_reset.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "a5b95146d94c029f82f0860a0b11d2c13b5ae8f904a1519221f239b1ab028dc8"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/tests/keyboard_controller_pic_test.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "dc2d6097db9740f34555faab040644c0083073862a0ae10877a440f187f73e9a"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/tests/pic_reset_eoi_test.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "d86008e3c2e0f2f1c69a4e81bc5337d2224130810aaaa1b017c583c1476271b7"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/tests/ccpu_bounded_execution_fixture.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "6aca673dbc45309db4fa746bf79ed44da50f1d6094a2f5f27c9340d8489f89d1"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/tests/cvidc_vector_binding_fixture.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "6beaf837e4d2a8f4d4e32bccfe758f5b42e0ac1bcd0d27752a60bb18736a3378"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/tests/ccpu_bit_matrix_fixture.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "4b5a25a98fafceea41516b6aeefa05b5487e7edfdb6309087553b6824e84cd91"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/tests/ccpu_far_exception_fixture.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "8c9875ee8db7ce9ba38cef90d9b33b6f660d12a726846de0b950e836942f2b5d"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/tests/ccpu_x87_span_fixture.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "31497c2e6eda36a790a56b1e1d74a46e7c2e318690454804852bf58a69e33299"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/tests/ccpu_bit_fault_fixture.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "0fd4369e72b51bb914fd620c64c0e9f333d7d45764391f768b78753f1351f5c2"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/tests/ccpu_x87_page_fixture.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "dbd83f86f0a5f186fa3e3ae3e530d879e0b01492871610c91ac79cae2c317cdd"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/ccpu/call.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "6944c1538c790aebd455b079b2e9249e1db7fe3ccec95ef9b731e721d8563b80"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/ccpu/ccpusas4.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "cc4a96b9d727affdfd498e72ac2c46b07b424f686160706c9b8b55b9ff850126"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/ccpu/c_main.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "3187f7f824ed9aa838e02ff463a679fb5d270011264c3d6fdf535b38618f8ab7"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/ccpu/sasCdef.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "66522e3e5e107104ee842619c4cf4e47b26b5ee92004358a11b041daa5f64bf7"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/ccpu/zfrsrvd.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "6cfd9d4c5f8a676d07fcd4184c82c9cc9123da54dcf277b4fd29a8b9b36c0f8c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/bios/cmos_bis.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "74bb2e9d38f176d488bab37fd09bd27a63fd3be48d9389a6cf47307d99c77c5c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/bios/emm_fncs.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "905a798dbf817d5d2667b10927565f6e0f5f74020e326a26cdfd1237f4a389b1"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/bios/rom_basc.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "627edf5f788c61c2406f6395d23b4003b198e896ae8984e6e9e8d9c82d1c3713"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/bios/reset.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "4d77c09b0996dcbfe36daf0de3248569249d255bb66c43d80c996fc3727010a8"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/bios/rtc_bios.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "e799118526e2c9255f6d00b2b303d94d3372869ffa05a35ad7007f56eed85dcf"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/bios/slave_bs.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "8dc4bba2e8f9760fa56fdc7042ea4a23eced6cb919d50af9b8df9651d85d8472"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/bios/tape_io.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "7019a648f71869ab29aa9e526baa962767df81415f398aeac6d6e344b90c5f35"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/bios/build_id.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "4bfb7821851bf2ccd8fc6d704258bfb1579227943a406e486ecbda63d93191d8"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/bios/ill_bop.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "48f26500173b20403f793f98f2e6f33f93908bfb98ec3a0b6048d319c9fdfa96"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/bios/equipmnt.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "dff6a95f8d15f2d3ac9529a531c79b1f9486074eca1f7235fd2a4a274b015ad7"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/bios/mem_size.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "be10e2b959cb31980eb1960ad06e8f7a2352e00bc23a2d86abccd06de566a148"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/keymouse/keyba.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "3dfd0bd7693e24c03a1adf4f70a5e6c44c609ee418bb32ff31f1b949fae5d354"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/bios/virtual.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "5927eb7fc5afa35de1e6ca1f767f1b430e61884673d736f62784d565e47e9bcc"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/keymouse/mouse.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "32cf589b97da4fd592c78a3de12eab29b5e7915703a2a0712e1c45a657edad2b"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/keymouse/keybd_io.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "4b398f637643fdb606a6df68703813204737cf975a7f90951fce074f4e194d18"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/system/at_dma.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "9cc5016e6f0689bddcfe8e10577b42f12c0a849c3f6f520957585aacbb1c0be2"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/keymouse/mouse_io.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "7ba6cade9bd1b4fc0dc01fc82cd424e883af3710f207aa771b1fd25a5807d5a2"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/system/illegalp.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "1b5d1130f615889269140f5422241258661f357992312c41b0297c5a67ede5b4"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/system/cmosnt.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "7df83942a380bbddd280d6d46c64f107b34f4280977eebd3abf1303dccba3d21"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/system/rom.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "69420f1b7f409fd0feae05d4157ae3da039e13c5631b33861b2a48465da812aa"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/system/timer.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "6770a759a7fa6832c17eab2bbe91f803b3b13d355edee0c6add1221f4f7c27d3"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/system/unexp_nt.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "507d22ac82d1dcdfbe0c60310fd23acc1c10de99d91a463b3446b90c555831d8"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/disks/floppy.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "5fc7f8825d81575de1ddcc16c995f818a331ede9e78ad0933521830bef9d847d"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/disks/floppy_i.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "544fcb96bb5cd53479b6a3c94d64be95216991ff630835801aed0ca5a9b90058"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/disks/diskbios.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "87088b7e51ca07a1f4e768a6a3eb2db7a194480c4ad551dc826cb76b6dc45f8e"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/disks/fdisk.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "304c8d46603224497e6743a80f49eb98bd487874880af683052bf07c1b14c369"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/disks/gfi.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "2f700ed6bb186ab083e0865ed8686f844eda1ecc9ce7e1729d3535d072222582"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/disks/gfi_mpty.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "4859ede1844ac9d3bee0350501bd21ec40a1d58a92325372fc019d71fe6383a8"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/support/time_day.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "0358ace4a16af9be9131a8ff2174de34f17eb5c43f41e866f0188d551ed5a168"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/support/ios.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "d7ee0ecedf5e37efccb971094d717263f6b0cb07a60119a6328df46078f6e411"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/support/main.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "11f61562dc9f9484dc06a577519faf528d874a3c98687a061ff64570795e5eba"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/support/xt.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "5373b1cb6e3afd606ff593480a4868f2b846402b48081acb72ab0d93f479bd51"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/ega_prts.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "29464ceb0d8f9ed1ddd18120bc708ba7070b5da1205b18a85a89bab2f2293f28"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/ega_vide.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "8ad5b9e904df910317becec7c641a0c393d47c1745d78d1402c38eba136a44fb"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/gvi.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "281b088912b45d743f5e13b151db9c7ca85d6c863b72112e05c0025c25a22fa4"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/gfx_updt.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "92e881a5b9d6cc0a9fef052d1a00338c54ad21dfcd2fafcf4fbfa75ad469a7f9"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/video.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "79b550574e8b1d1a85ee97771df516034d31c8b805c594c07dd6c0143b11cd9a"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/v7_video.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "4c824ab175b0a1c5136816531c0a7a9d4bf45e63bee7301de0b4731feae31750"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/vga_prts.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "8630f051c0a842f6b5652a3f671b8628adf920bda13323743d31ab127ea89d31"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/vga_vide.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "671b0f399b9188e20e17ca03c68258ec0e2186e38358f70dd86fdf202aadb502"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/ega_read.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "170ceac493b1390a07d33d57164b30eb850ae12ca702b4efe0ee22f6222c4dbd"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/ega_dmmy.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "99054c751e106b697fc45880054b76d64cc0b75a10999aad441b0ab0bc61998d"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/egwrtm12.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "43aeb0a88b2c2632d6d947b21e641e83d5dd2b7a60c32b00f32799a083db0469"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/egawrtm0.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "e2cbbc6fc26d22157795cc05066420019dddce01c195b4806a94fba2f4f3c915"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/cga.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "4a7dbf01a151368ea6b0dabbf9a9ec009552d4abf9aab3046edfc5b5f61a830c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/cvidc/accessfn.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "9b1afaef2b074d3e787eed13ed712a0a788c7cb9487ba1d3b8b48d45884f09c0"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/comms/com.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "8e5eea5ee9685a5c8ee2e9eeae9d72f4addf9bd8030d6d078754371fa24ab200"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/comms/printer.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "517bd0ac3d14020582050fcca1f8629735c955bd18dfa4c78cc755eeaa602313"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/comms/printer_.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "b12fac56e4bc003ffbbcff28d4fa9da09fb21c18fcff7038193bacd9afaa7e69"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/dos/emm_mngr.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "c58ce58961e7f28ca9cceb6c751a0762587a8bfd9675c630205a45e0a786f2ab"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/comms/rs232_io.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "76da5145e91054027c45e6d94ae631d06ec6c81c0bc59feff4dba3a65fc752c7"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/base-debug/trace.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "18c51727eb7ee110913173f8ea094490fa61dc533a85069dda7a094436487aa0"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/base-debug/btrace.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "6793f269457a348ba54ccb4694328e4fd6c6ea6e76e8790f12f751eab26b2b3f"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/base-debug/pigyoda.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "751157062a3e95a6425478cca9cfe7b70245632c12306eecdf0b55478a27d095"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/sim32.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "e04f09c65c06e3a6bda75d0bc78cfed126e1518570d5c436374f05f53d743f0c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_timer.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "c93a1a2b8843c2f4b675d5a9feea8dbe9d186619d1c2d6f3f22d9acfd490bdc0"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_msscs.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "64272b542d5c2d929e976fc87acb52f4a6307b402e947f7307991e6bf027a88c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_error.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "2a3f33170d2c94f01cd9f8f27d722b0184e9aa0d2f52534d1d39d0d95d8a2f6a"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_ega.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "a01d89cd5551874f51f68963e31a40ab86567312ae6cd10507a50c6935b13e46"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_cga.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "268c790f85939c9f9c3f07e3f3c9dcd6a5ea187782a17a72917fedc378a91bc5"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_input.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "62caed980da9f70977df3b8597f2e81af24f1d9a6260e08bab34a558e51a63c8"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_graph.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "70e5732c249689c20754089975fbda18688474974ad549f30568cf8395ef3981"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_bop.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "4c3a0b812a50af25ad72c051578315aa4cdc61d6f07662c0d9403ad834de4cb7"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_sas.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "98b1f7c019e72586f1f8a9fe1a61eb28769b1d2d55d22af6db219983e24842da"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_cpu.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "52c70edb4077b49ce204b6c2ed3823a487b34e4d709f530fedf51ac87d5cb7ce"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_unix.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "c8cfd7df7edd6e7ef158af9be37ebd8cc98d85ebdd561e91c25b325f88231f11"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_lpt.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "580309693d35ed7de98b4fbb39a15dde0a9bebde529d0f3fa1c14aa850a9e478"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_mouse.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "ddabfd236fb904c172e74f2462da0c73bc6b454da7f6a84e64a8e8d9b30e1568"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_event.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "a4497f7808aa48a4d79b40e9d1cff9497426649e26e98eb1c8d9308cefdac250"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/config.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "053aaad06aaa96869f2664d3a1d3776e5655c6a02dac272fe64974efff9ff952"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/stubs.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "a578bcf4b131a28489462911369b347ef0e6e41475c55881851bd043450fefa5"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_fulsc.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "a17f31648e705a77b63e47f19462c70f83bfe70160247b714fd2847df55de623"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_emm.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "670f0f19a7b400bdc61734c701d73d4355af35f5e3fd3eb4bbbbdfb0924e2ea3"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_eoi.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "92847bc0535d18b88d6684cc85bcea955d41e71b5e8ee99f45a9aee5a915e57e"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_vdd.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "166ded22dc6dd25879424870bdaa301736d00418392fb3ab767bbacb7e9c3766"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_det.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "2bd09938f23a69bea20b24875fb98d44e11093e4629077309a3c678e0329bd5b"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_umb.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "07cfcff9ecbba3298ed358b70944924846b44dbb83ebb39f339bf5e21b2289be"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_reset.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "a5b95146d94c029f82f0860a0b11d2c13b5ae8f904a1519221f239b1ab028dc8"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/host/nt_mem.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "65bce241c77c04d8ac8580f727ae426467f9b7cdafc8641146801ad8b50f5ca1"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/tests/ccpu_x87_span_fixture.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "31497c2e6eda36a790a56b1e1d74a46e7c2e318690454804852bf58a69e33299"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/tests/ccpu_x87_page_fixture.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "dbd83f86f0a5f186fa3e3ae3e530d879e0b01492871610c91ac79cae2c317cdd"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/tests/ccpu_bit_fault_fixture.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "0fd4369e72b51bb914fd620c64c0e9f333d7d45764391f768b78753f1351f5c2"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/tests/ccpu_bit_matrix_fixture.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "4b5a25a98fafceea41516b6aeefa05b5487e7edfdb6309087553b6824e84cd91"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/tests/ccpu_bounded_execution_fixture.obj",
+      "BASE_SAS": false,
+      "HOST_SAS": false,
+      "command_sha256": "6aca673dbc45309db4fa746bf79ed44da50f1d6094a2f5f27c9340d8489f89d1"
+    }
+  ],
+  "limitations": "Command flags alone do not capture source macro mutations; project source search found none for these names."
+}

@@ -20,16 +20,19 @@
 	(extensions_controller.ram_bank_select.as_bfld.counter_bank_enable? \
 			EGA_PLANE_SIZE:0x10000)
 #else
-#define	EGA_PLANE_SIZE	0x10000
-#define EGA_PLANE_DISP_SIZE EGA_PLANE_SIZE
+#line 23
+#error Excluded unsupported non-V7VGA port profile
 #endif /* V7VGA */
+#line 26
 
 	extern void ega_init IPT0();
 	extern void ega_term IPT0();
 	extern void ega_gc_outb_index IPT2(io_addr,ia,half_word,hw);
 #ifdef	HUNTER
+#line 31
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
+#line 35
 	IMPORT VOID update_banking IPT0();
 	IMPORT VOID set_banking IPT2(IU8, rd_bank, IU8, wrt_bank);
 
@@ -74,3 +77,4 @@
 #line 76
 #error DIVERGENCE MVDM-HOST-DIV-617: unsupported alternate host profile
 #endif /* C_VID || A2CPU */
+#line 84

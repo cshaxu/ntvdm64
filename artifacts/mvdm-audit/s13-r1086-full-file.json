@@ -1,0 +1,55 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/equip.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\equip.h",
+  "original_sha256": "9530d21a819d9e3ff63d9fd8173f2c0df049cc48aa9ee49a740bad6db921e8aa",
+  "before_sha256": "844175be765bed14c194284db4c723c438985d9094df370212737cb9ae1a9fe7",
+  "after_sha256": "d983a6294001ed8409399b04ca735da2cdf1bc64223584500b5b2ff13a64e72f",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/equip.h",
+      "line": "23",
+      "directive": "ifdef",
+      "expression": "BIGEND",
+      "chain_start": "23",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "c6e2e1f5acf6eb7ab819ea9c4f02388edfc62baa4bf3af6292f975dfa3690b28"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/equip.h",
+      "line": "27",
+      "directive": "ifdef",
+      "expression": "LITTLEND",
+      "chain_start": "27",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c6e2e1f5acf6eb7ab819ea9c4f02388edfc62baa4bf3af6292f975dfa3690b28"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/equip.h",
+      "line": "28",
+      "directive": "ifdef",
+      "expression": "BIT_ORDER1",
+      "chain_start": "28",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "c6e2e1f5acf6eb7ab819ea9c4f02388edfc62baa4bf3af6292f975dfa3690b28"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/equip.h",
+      "line": "31",
+      "directive": "ifdef",
+      "expression": "BIT_ORDER2",
+      "chain_start": "31",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c6e2e1f5acf6eb7ab819ea9c4f02388edfc62baa4bf3af6292f975dfa3690b28"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}

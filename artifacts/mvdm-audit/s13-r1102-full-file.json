@@ -1,0 +1,67 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/printer.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\printer.h",
+  "original_sha256": "c4c064dd442805e2942a799d8c90b46d6f26e4fbe5bba58799f53bbbebb42092",
+  "before_sha256": "2c822ac8f45912075a6ff869a5bee0ca62b0ebc6b6902408eff0af59dea6dd24",
+  "after_sha256": "2c822ac8f45912075a6ff869a5bee0ca62b0ebc6b6902408eff0af59dea6dd24",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/printer.h",
+      "line": "1",
+      "directive": "ifdef",
+      "expression": "PRINTER",
+      "chain_start": "1",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "9ac6a0d0fa47623a542044312be06d77e8feffe2b597ba8a883b71d29b756122"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/printer.h",
+      "line": "31",
+      "directive": "ifdef",
+      "expression": "ANSI",
+      "chain_start": "31",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "9ac6a0d0fa47623a542044312be06d77e8feffe2b597ba8a883b71d29b756122"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/printer.h",
+      "line": "35",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "31",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "9ac6a0d0fa47623a542044312be06d77e8feffe2b597ba8a883b71d29b756122"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/printer.h",
+      "line": "41",
+      "directive": "ifdef",
+      "expression": "PS_FLUSHING",
+      "chain_start": "41",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "9ac6a0d0fa47623a542044312be06d77e8feffe2b597ba8a883b71d29b756122"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/printer.h",
+      "line": "59",
+      "directive": "if",
+      "expression": "defined(NTVDM)",
+      "chain_start": "59",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "9ac6a0d0fa47623a542044312be06d77e8feffe2b597ba8a883b71d29b756122"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "Excluded non-ANSI printer prototypes: the supported worker graphs define ANSI; marker observations selected the ANSI arm. The only source-level ANSI undef found was stubs.c, whose dependency output does not include this header."
+}

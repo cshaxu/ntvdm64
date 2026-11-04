@@ -33,10 +33,10 @@ extern	void printer_init(int);
 extern	void printer_post(int);
 extern	void printer_status_changed(int);
 #else
-extern	void printer_init();
-extern	void printer_post();
-extern	void printer_status_changed();
+#line 36
+#error Unsupported excluded original configuration
 #endif
+#line 40
 
 #ifdef PS_FLUSHING
 #line 42

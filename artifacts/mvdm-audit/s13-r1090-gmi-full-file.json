@@ -1,0 +1,13 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/gmi.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gmi.h",
+  "original_sha256": "828d5e4399c5cc396367373e96c4d6785ac0026f50467176f30a977afe01919a",
+  "before_sha256": "5231fd9fa1b93ad00a68be2aaff6b65a0b95fcb6539699f22ca0be4b6139d65b",
+  "after_sha256": "5d33a2aedb0ccb6e959fdb10a78d91be362cee722c4b7fdf58eeb68a59948cdf",
+  "review": "Full original tree aligns through selected arms. Additional local CPU40/C_VID typed callback guard is registered adaptation; selected product path retained. Unselected local generic and original non-CCPU arms already #error; added original #line 19 and 49. Original EGATEST arm already error and selected else retained.",
+  "evidence": [
+    "s13-r846-gmi-header-contexts.json",
+    "compile-branch-selection/branches.csv"
+  ],
+  "limitations": "Build and image comparison pending."
+}

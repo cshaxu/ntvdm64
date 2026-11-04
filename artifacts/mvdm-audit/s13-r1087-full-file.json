@@ -1,0 +1,132 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\floppy.h",
+  "original_sha256": "500e1a6e48950dc2c184a70c39b9606723133c6ab06affac898da89e24fbaca8",
+  "before_sha256": "81c5978ffac33f187680f3e876e8409913491197da9c36b60b35f13f005550cf",
+  "after_sha256": "81c5978ffac33f187680f3e876e8409913491197da9c36b60b35f13f005550cf",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "line": "187",
+      "directive": "ifdef",
+      "expression": "NTVDM",
+      "chain_start": "187",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "99ef565cb6143966b0a91548e860b2d4eff4f0a37826563ef692c36a207936d9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "line": "192",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "187",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "99ef565cb6143966b0a91548e860b2d4eff4f0a37826563ef692c36a207936d9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "line": "474",
+      "directive": "ifdef",
+      "expression": "ANSI",
+      "chain_start": "474",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "99ef565cb6143966b0a91548e860b2d4eff4f0a37826563ef692c36a207936d9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "line": "478",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "474",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "99ef565cb6143966b0a91548e860b2d4eff4f0a37826563ef692c36a207936d9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "line": "488",
+      "directive": "ifdef",
+      "expression": "ANSI",
+      "chain_start": "488",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "99ef565cb6143966b0a91548e860b2d4eff4f0a37826563ef692c36a207936d9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "line": "502",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "488",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "99ef565cb6143966b0a91548e860b2d4eff4f0a37826563ef692c36a207936d9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "line": "523",
+      "directive": "ifdef",
+      "expression": "ANSI",
+      "chain_start": "523",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "99ef565cb6143966b0a91548e860b2d4eff4f0a37826563ef692c36a207936d9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "line": "527",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "523",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "99ef565cb6143966b0a91548e860b2d4eff4f0a37826563ef692c36a207936d9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "line": "537",
+      "directive": "ifdef",
+      "expression": "ANSI",
+      "chain_start": "537",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "99ef565cb6143966b0a91548e860b2d4eff4f0a37826563ef692c36a207936d9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "line": "543",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "537",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "99ef565cb6143966b0a91548e860b2d4eff4f0a37826563ef692c36a207936d9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "line": "574",
+      "directive": "ifdef",
+      "expression": "NTVDM",
+      "chain_start": "574",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "99ef565cb6143966b0a91548e860b2d4eff4f0a37826563ef692c36a207936d9"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}

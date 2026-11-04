@@ -26,6 +26,7 @@ typedef struct
 	VOID	(*w_move)IPT4(IU32, eaOff, IHPE, fromOff, IU32, count,
 		 IBOOL, srcInRAM);
 #else
+#line 19
 #error DIVERGENCE MVDM-HOST-DIV-618: unsupported generic video callback profile
 #endif
 #line 26
@@ -52,6 +53,7 @@ IMPORT	boolean	gmi_disconnect_mem IPT3(sys_addr, laddr,
 	sys_addr, haddr, mem_type, type);
 IMPORT	void	gmi_define_mem IPT2(mem_type, type, MEM_HANDLERS *, handlers);
 #else	/* CCPU */
+#line 49
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 

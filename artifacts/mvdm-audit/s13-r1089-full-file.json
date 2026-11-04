@@ -1,0 +1,154 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gfx_upd.h",
+  "original_sha256": "a8577d81b26da6831e8d5dd496e41ebd40a947c3d641c39c77304d509ba2be61",
+  "before_sha256": "52066232c84678a1b2a1bb45742821e405cde3088e9ad928b9251d988db28ba2",
+  "after_sha256": "52066232c84678a1b2a1bb45742821e405cde3088e9ad928b9251d988db28ba2",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
+      "line": "56",
+      "directive": "ifdef",
+      "expression": "VGG",
+      "chain_start": "56",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "2213bdd7d4f5f4e45d5843277e20686b34dea37316f9d3c42865fa54f7bf17a6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
+      "line": "123",
+      "directive": "ifdef",
+      "expression": "GISP_SVGA",
+      "chain_start": "123",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "2213bdd7d4f5f4e45d5843277e20686b34dea37316f9d3c42865fa54f7bf17a6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
+      "line": "126",
+      "directive": "ifdef",
+      "expression": "EGG",
+      "chain_start": "126",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "2213bdd7d4f5f4e45d5843277e20686b34dea37316f9d3c42865fa54f7bf17a6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
+      "line": "172",
+      "directive": "ifdef",
+      "expression": "GISP_SVGA",
+      "chain_start": "172",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "2213bdd7d4f5f4e45d5843277e20686b34dea37316f9d3c42865fa54f7bf17a6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
+      "line": "175",
+      "directive": "ifdef",
+      "expression": "EGG",
+      "chain_start": "175",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "2213bdd7d4f5f4e45d5843277e20686b34dea37316f9d3c42865fa54f7bf17a6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
+      "line": "189",
+      "directive": "ifndef",
+      "expression": "host_mode_select_changed",
+      "chain_start": "189",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "2213bdd7d4f5f4e45d5843277e20686b34dea37316f9d3c42865fa54f7bf17a6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
+      "line": "195",
+      "directive": "ifndef",
+      "expression": "host_color_select_changed",
+      "chain_start": "195",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "2213bdd7d4f5f4e45d5843277e20686b34dea37316f9d3c42865fa54f7bf17a6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
+      "line": "201",
+      "directive": "ifndef",
+      "expression": "host_screen_address_changed",
+      "chain_start": "201",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "2213bdd7d4f5f4e45d5843277e20686b34dea37316f9d3c42865fa54f7bf17a6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
+      "line": "207",
+      "directive": "ifndef",
+      "expression": "host_cursor_size_changed",
+      "chain_start": "207",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "2213bdd7d4f5f4e45d5843277e20686b34dea37316f9d3c42865fa54f7bf17a6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
+      "line": "213",
+      "directive": "ifndef",
+      "expression": "host_scroll_complete",
+      "chain_start": "213",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "2213bdd7d4f5f4e45d5843277e20686b34dea37316f9d3c42865fa54f7bf17a6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
+      "line": "225",
+      "directive": "ifdef",
+      "expression": "V7VGA",
+      "chain_start": "225",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "2213bdd7d4f5f4e45d5843277e20686b34dea37316f9d3c42865fa54f7bf17a6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
+      "line": "266",
+      "directive": "if",
+      "expression": "defined(HERC)",
+      "chain_start": "266",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "2213bdd7d4f5f4e45d5843277e20686b34dea37316f9d3c42865fa54f7bf17a6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
+      "line": "282",
+      "directive": "ifdef",
+      "expression": "NTVDM",
+      "chain_start": "282",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "2213bdd7d4f5f4e45d5843277e20686b34dea37316f9d3c42865fa54f7bf17a6"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}

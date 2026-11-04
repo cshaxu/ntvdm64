@@ -363,8 +363,10 @@ typedef struct _extioentry {
 #define AT_KEYB_ADAPTOR		26
 #define CMOS_ADAPTOR		27
 #ifdef HERC
+#line 362
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif
+#line 364
 #if (NUM_SERIAL_PORTS > 2)
 #define COM3_ADAPTOR		29
 #define COM4_ADAPTOR		30
@@ -396,27 +398,15 @@ typedef struct _extioentry {
 #define NUMBER_SPARE_ADAPTERS	(SPARE_ADAPTER8 - SPARE_ADAPTER1)
 
 #else	/* NTVDM */
-
-#ifdef GISP_SVGA
-#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
-#else 		/* GISP_SVGA */
-
-/* Adapter for SoundBlaster Null Driver */
-
-#ifdef SWIN_SNDBLST_NULL
-#error DIVERGENCE MVDM-HOST-DIV-528: SWIN_SNDBLST_NULL platform branch is not selected; see mirror register.
-#endif
-
-#ifndef IO_MAX_NUMBER_ADAPTORS
-#define IO_MAX_NUMBER_ADAPTORS	37	/* make this equal to the highest used plus one please! */
-#endif
-
-#endif		/* GISP_SVGA */
+#line 395
+#error Unsupported excluded original configuration
 #endif	/* NTVDM */
+#line 413
 #else	/* SFELLOW */
 #line 414
 #error DIVERGENCE MVDM-HOST-DIV-521: SFELLOW alternative is not selected; see mirror register.
 #endif /*SFELLOW */
+#line 442
 
 /*
  * The Bit masks for specifying Read/Write access when connecting ports
@@ -523,6 +513,7 @@ IMPORT void	io_init IPT0();
 IMPORT char	Ios_in_adapter_table[];
 IMPORT char	Ios_out_adapter_table[];
 #endif
+#line 571
 
 IMPORT void	(*Ios_inb_function  [])
 	IPT2(io_addr, io_address, half_word *, value);
