@@ -519,3 +519,5 @@ The [r1392 review](s13-r1392-registered-diffs.json) records eight further files 
 The [r1393 event review](s13-r1393-ntevent-review.json) checks original groups, selected direct bodies and matching source positions with two local groups. The [candidate tree inventory](s13-r1393-pending-tree-candidates.json) does not prove that every unmatched signature is missing; duplicate or reordered groups require review. Counts: 181 identical / 803 differing files reviewed / 1,056 total; 72 differing files pending.
 
 The [r1394 printer review](s13-r1394-printer-review.json) checks 25 historically hit and 22 excluded arms and matching-source lines, including naturally aligned excluded anchors. Counts: 181 identical / 804 differing files reviewed / 1,056 total; 71 differing files pending. Evidence is source-derived and historical.
+
+The [r1395 local-group review](s13-r1395-local-groups-review.json) checks four files, records retained direct diffs and complete local-group bodies, and links their registrations. Counts: 181 identical / 808 differing files reviewed / 1,056 total; 67 differing files pending. Evidence is source-derived and historical.

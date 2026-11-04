@@ -1,0 +1,858 @@
+{
+  "method": "Compare reachable original trees and retained direct diffs; local groups retain recorded states and their complete bodies are recorded. Matching original lines use selected source projection.",
+  "limits": "Source-derived projection and historical hit records, not new compiler or runtime tests; registration does not establish behavior equivalence.",
+  "records": [
+    {
+      "path": "src/mvdm-host/inc/mvdm.h",
+      "current_sha256": "70a9ae9350c3a0cf1943f292fdad02f2d712c0ed855e48dd90788f701f051380",
+      "original_sha256": "9f450f2eb6ee684763f7f9e27ee43c80e7e24d1e5a87ff254fbd7da4fcd1cdb7",
+      "matched_lines": 64,
+      "groups": {
+        "excluded": 3,
+        "original_groups": 3,
+        "local_groups": 1,
+        "selected": 1
+      },
+      "local_groups": [
+        {
+          "line": 73,
+          "signature": [
+            [
+              "if",
+              "defined(_M_IX86)"
+            ],
+            [
+              "else",
+              ""
+            ]
+          ]
+        }
+      ],
+      "direct_diffs": [
+        {
+          "branch_line": 72,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -1,4 +0,0 @@",
+            "-#define FETCHWORD(s)  (*(UNALIGNED WORD *)&(s))",
+            "-#define FETCHDWORD(s) (*(UNALIGNED DWORD *)&(s))",
+            "-#define STOREWORD(d,s)  *(UNALIGNED WORD *)&(d)=(WORD)s",
+            "-#define STOREDWORD(d,s) *(UNALIGNED DWORD *)&(d)=(DWORD)s"
+          ]
+        }
+      ],
+      "issues": [],
+      "registered_differences": [
+        "MVDM-SUPPORT-DIV-006"
+      ],
+      "local_group_bodies": [
+        {
+          "line": 73,
+          "arms": [
+            {
+              "directive": "if",
+              "expression": "defined(_M_IX86)",
+              "body": [
+                "#line 74",
+                "#define FETCHWORD(s)\t((WORD)(s))",
+                "#define FETCHDWORD(s)\t((DWORD)(s))",
+                "#define STOREWORD(d,s)\t(WORD)d=(WORD)s",
+                "#define STOREDWORD(d,s) (DWORD)d=(DWORD)s"
+              ]
+            },
+            {
+              "directive": "else",
+              "expression": "",
+              "body": [
+                "#line 79",
+                "#error Unsupported non-x86 MVDM host access profile"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "current_sha256": "951d12ec9c14056c9269e5d10a773f2be3d4de1c7e646ce68cc7311887856b3d",
+      "original_sha256": "f7b5efebebd8bf8c6ad5c56adb74c8217490b2b92f113b1e850401fd5f029500",
+      "matched_lines": 108,
+      "groups": {
+        "selected": 5,
+        "original_groups": 6,
+        "local_groups": 2,
+        "excluded": 1
+      },
+      "local_groups": [
+        {
+          "line": 87,
+          "signature": [
+            [
+              "if",
+              "defined(CPU_40_STYLE)&&defined(C_VID)"
+            ],
+            [
+              "else",
+              ""
+            ]
+          ]
+        },
+        {
+          "line": 100,
+          "signature": [
+            [
+              "if",
+              "defined(CPU_40_STYLE)&&defined(C_VID)"
+            ],
+            [
+              "else",
+              ""
+            ]
+          ]
+        }
+      ],
+      "direct_diffs": [
+        {
+          "branch_line": 99,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -1 +0,0 @@",
+            "-void (*str_read) IPT3(IU8 *, dest, ULONG, offset, ULONG, count);"
+          ]
+        }
+      ],
+      "issues": [],
+      "registered_differences": [
+        "MVDM-HOST-DIV-089"
+      ],
+      "local_group_bodies": [
+        {
+          "line": 87,
+          "arms": [
+            {
+              "directive": "if",
+              "expression": "defined(CPU_40_STYLE) && defined(C_VID)",
+              "body": [
+                "\t/* DIVERGENCE MVDM-HOST-DIV-089: selected C-video EVID glue uses the",
+                "\t * exact IU32 offset/count contract below.  The historical ULONG carrier",
+                "\t * only matched it by 32-bit typedef coincidence. */",
+                "#line 87",
+                "\tIU32 (*b_read) IPT1(IU32, eaOff);",
+                "\tIU32 (*w_read) IPT1(IU32, eaOff);"
+              ]
+            },
+            {
+              "directive": "else",
+              "expression": "",
+              "body": [
+                "#line 87",
+                "#error DIVERGENCE MVDM-HOST-DIV-618: unsupported generic video callback profile"
+              ]
+            }
+          ]
+        },
+        {
+          "line": 100,
+          "arms": [
+            {
+              "directive": "if",
+              "expression": "defined(CPU_40_STYLE) && defined(C_VID)",
+              "body": [
+                "#line 91",
+                "\tvoid (*str_read) IPT3(IU8 *, dest, IU32, eaOff, IU32, count);"
+              ]
+            },
+            {
+              "directive": "else",
+              "expression": "",
+              "body": [
+                "#line 91",
+                "#error Excluded unsupported generic string video callback profile"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "current_sha256": "941078c44c2d12aec016392615e2348676a23e540f18d2cb023ca9fb27004282",
+      "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+      "matched_lines": 864,
+      "groups": {
+        "selected": 7,
+        "original_groups": 21,
+        "excluded": 16,
+        "local_groups": 1
+      },
+      "local_groups": [
+        {
+          "line": 435,
+          "signature": [
+            [
+              "if",
+              "defined(_M_IX86)&&!defined(CPU_40_STYLE)"
+            ],
+            [
+              "else",
+              ""
+            ]
+          ]
+        }
+      ],
+      "direct_diffs": [
+        {
+          "branch_line": 434,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -1,11 +0,0 @@",
+            "-vdmMemorySize = GetVDMSize(VDMForWOW);",
+            "-// Extend the vdm size if the user asks for it through a .PIF.",
+            "-// Also make sure we have at least appropriate size of dpmi",
+            "-// memory.",
+            "-//",
+            "-if ((xmsMemorySize + emsMemorySize +  1024 + dpmiMemorySize) >",
+            "-vdmMemorySize)",
+            "-{",
+            "-vdmMemorySize = xmsMemorySize + emsMemorySize + 1024 +",
+            "-dpmiMemorySize;",
+            "-}"
+          ]
+        }
+      ],
+      "issues": [],
+      "registered_differences": [
+        "MVDM-HOST-DIV-056"
+      ],
+      "local_group_bodies": [
+        {
+          "line": 435,
+          "arms": [
+            {
+              "directive": "if",
+              "expression": "defined(_M_IX86) && !defined(CPU_40_STYLE)",
+              "body": [
+                "#line 510",
+                "#error Excluded unsupported non-CPU40 i386 memory-size profile"
+              ]
+            },
+            {
+              "directive": "else",
+              "expression": "",
+              "body": [
+                "#line 510",
+                "\t vdmMemorySize = GetVDMSize(VDMForWOW);",
+                "",
+                "\t // Extend the vdm size if the user asks for it through a .PIF.",
+                "\t // Also make sure we have at least appropriate size of dpmi",
+                "\t // memory.",
+                "\t //",
+                "\t if ((xmsMemorySize + emsMemorySize +  1024 + dpmiMemorySize) >",
+                "\t      vdmMemorySize)",
+                "\t {",
+                "\t    vdmMemorySize = xmsMemorySize + emsMemorySize + 1024 +",
+                "\t\t\t    dpmiMemorySize;",
+                "\t }"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "current_sha256": "4e4e2bcc90ff33aa6b8abc02f4f04f355945899d42a48156a0d1adbf1f0c87d0",
+      "original_sha256": "a3e9286c40e4e11ec872fd9b2d7b23cba640f09fb4840c4e6130e301d5277b9e",
+      "matched_lines": 587,
+      "groups": {
+        "local_groups": 5,
+        "excluded": 3,
+        "selected": 1,
+        "original_groups": 3
+      },
+      "local_groups": [
+        {
+          "line": 249,
+          "signature": [
+            [
+              "ifdef",
+              "WOW_ORIGINAL_DIALOG_KEYBOARD"
+            ]
+          ]
+        },
+        {
+          "line": 265,
+          "signature": [
+            [
+              "ifdef",
+              "WOW_ORIGINAL_DIALOG_KEYBOARD"
+            ]
+          ]
+        },
+        {
+          "line": 271,
+          "signature": [
+            [
+              "ifdef",
+              "WOW_ORIGINAL_DIALOG_KEYBOARD"
+            ]
+          ]
+        },
+        {
+          "line": 284,
+          "signature": [
+            [
+              "ifdef",
+              "WOW_ORIGINAL_DIALOG_KEYBOARD"
+            ]
+          ]
+        },
+        {
+          "line": 332,
+          "signature": [
+            [
+              "ifdef",
+              "WOW_ORIGINAL_DIALOG_KEYBOARD"
+            ]
+          ]
+        }
+      ],
+      "direct_diffs": [
+        {
+          "branch_line": 264,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -1,2 +0,0 @@",
+            "-case WM_CHAR:",
+            "-case EM_SETPASSWORDCHAR:"
+          ]
+        }
+      ],
+      "issues": [],
+      "registered_differences": [
+        "OPENNT-HOST-119"
+      ],
+      "local_group_bodies": [
+        {
+          "line": 249,
+          "arms": [
+            {
+              "directive": "ifdef",
+              "expression": "WOW_ORIGINAL_DIALOG_KEYBOARD",
+              "body": [
+                "#line 213",
+                "BOOL IsDialogMessageA(",
+                "    HWND hwndDlg,",
+                "    LPMSG lpmsg)",
+                "{",
+                "    WPARAM wParamSaved = lpmsg->wParam;",
+                "    BOOL bRet;",
+                "",
+                "    switch (lpmsg->message) {"
+              ]
+            }
+          ]
+        },
+        {
+          "line": 265,
+          "arms": [
+            {
+              "directive": "ifdef",
+              "expression": "WOW_ORIGINAL_DIALOG_KEYBOARD",
+              "body": [
+                "#line 232",
+                "    case WM_CHAR:",
+                "    case EM_SETPASSWORDCHAR:"
+              ]
+            }
+          ]
+        },
+        {
+          "line": 271,
+          "arms": [
+            {
+              "directive": "ifdef",
+              "expression": "WOW_ORIGINAL_DIALOG_KEYBOARD",
+              "body": [
+                "#line 235",
+                "    case WM_CHARTOITEM:",
+                "    case WM_DEADCHAR:",
+                "    case WM_SYSCHAR:",
+                "    case WM_SYSDEADCHAR:",
+                "    case WM_MENUCHAR:"
+              ]
+            }
+          ]
+        },
+        {
+          "line": 284,
+          "arms": [
+            {
+              "directive": "ifdef",
+              "expression": "WOW_ORIGINAL_DIALOG_KEYBOARD",
+              "body": [
+                "#line 243",
+                "",
+                "#line 245",
+                "        RtlMBMessageWParamCharToWCS(lpmsg->message, (PDWORD)&lpmsg->wParam);",
+                "    }",
+                "",
+                "    /* DIVERGENCE(OPENNT-HOST-119): restore caller input on callback exception. */",
+                "    __try {",
+                "        bRet = IsDialogMessageW(hwndDlg, lpmsg);",
+                "    } __finally {",
+                "        /* Restore the original ANSI char. */",
+                "        lpmsg->wParam = wParamSaved;",
+                "    }",
+                "#line 254",
+                "    return bRet;",
+                "}",
+                "",
+                "BOOL IsDialogMessageW(",
+                "    HWND hwndDlg,",
+                "    LPMSG lpMsg)",
+                "{",
+                "    PWND pwndDlg;",
+                "    PWND pwnd;",
+                "    PWND pwnd2;",
+                "    HWND hwnd2;",
+                "    HWND hwndFocus;",
+                "    int iOK;",
+                "    BOOL fBack;",
+                "    UINT code;",
+                "    LONG lT;",
+                "    TL tlpwnd;",
+                "    TL tlpwndDlg;",
+                "    BOOL fLockDlg = FALSE;",
+                "    TL tlpwnd2;",
+                "",
+                "    if ((pwndDlg = ValidateHwndNoRip(hwndDlg)) == NULL) {",
+                "        return FALSE;",
+                "    }",
+                "",
+                "    CheckLock(pwndDlg);",
+                ""
+              ]
+            }
+          ]
+        },
+        {
+          "line": 332,
+          "arms": [
+            {
+              "directive": "ifdef",
+              "expression": "WOW_ORIGINAL_DIALOG_KEYBOARD",
+              "body": [
+                "#line 309",
+                "",
+                "    if (CallMsgFilter(lpMsg, MSGF_DIALOGBOX))",
+                "        return TRUE;",
+                "",
+                "    /* DIVERGENCE(OPENNT-HOST-119): a filter may destroy the retained dialog. */",
+                "    if (TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS))",
+                "        return FALSE;",
+                "",
+                "#line 313",
+                "    if (lpMsg->hwnd == NULL) {",
+                "        return FALSE;",
+                "    }",
+                "",
+                "    pwnd = ValidateHwnd(lpMsg->hwnd);",
+                "    /* DIVERGENCE(OPENNT-HOST-119): a filter may withdraw the message target. */",
+                "    if (!pwnd) return FALSE;",
+                "    //",
+                "    // THIS IS FOR MFC.",
+                "    //",
+                "    // This solves many problems with apps that use MFC but want to take",
+                "    // advantage of DS_CONTROL.  MFC blindly passes in child dialogs sometimes",
+                "    // to IsDialogMessage, which can screw up tabbing etc.",
+                "    //",
+                "#line 325",
+                "    if (TestWF(pwndDlg, WEFCONTROLPARENT) && TestWF(pwndDlg, WFCHILD)) {",
+                "        pwndDlg = GetParentDialog(pwndDlg);",
+                "        ThreadLock(pwndDlg, &tlpwndDlg);",
+                "        fLockDlg = TRUE;",
+                "        hwndDlg = HWq(pwndDlg);",
+                "    }",
+                "",
+                "    if (pwnd != pwndDlg && !_IsChild(pwndDlg, pwnd)) {",
+                "        if (fLockDlg)",
+                "            ThreadUnlock(&tlpwndDlg);",
+                "        return FALSE;",
+                "    }",
+                "    ThreadLock(pwnd, &tlpwnd);",
+                "",
+                "    fBack = FALSE;",
+                "    iOK = IDCANCEL;",
+                "    switch (lpMsg->message) {",
+                "    case WM_LBUTTONDOWN:",
+                "",
+                "        /*",
+                "         * Move the default button styles around on button clicks in the",
+                "         * same way as TABs.",
+                "         */",
+                "        if ((pwnd != pwndDlg) && ((hwndFocus = GetFocus()) != NULL)) {",
+                "            xxxCheckDefPushButton(pwndDlg, hwndFocus, lpMsg->hwnd);",
+                "        }",
+                "        break;",
+                "",
+                "    case WM_SYSCHAR:",
+                "",
+                "        /*",
+                "         * If no control has focus, and Alt not down, then ignore.",
+                "         */",
+                "        if ((GetFocus() == NULL) && (GetKeyState(VK_MENU) >= 0)) {",
+                "            if (lpMsg->wParam == VK_RETURN && TestWF(pwnd, WFMINIMIZED)) {",
+                "",
+                "                /*",
+                "                 * If this is an iconic dialog box window and the user hits",
+                "                 * return, send the message off to DefWindowProc so that it",
+                "                 * can be restored.  Especially useful for apps whose top",
+                "                 * level window is a dialog box.",
+                "                 */",
+                "                goto CallDefWindowProcAndReturnTrue;",
+                "            } else {",
+                "                NtUserMessageBeep(0);",
+                "            }",
+                "",
+                "            ThreadUnlock(&tlpwnd);",
+                "            if (fLockDlg)",
+                "                ThreadUnlock(&tlpwndDlg);",
+                "            return TRUE;",
+                "        }",
+                "",
+                "        /*",
+                "         * If alt+menuchar, process as menu.",
+                "         */",
+                "        if (lpMsg->wParam == MENUSYSMENU) {",
+                "            DefWindowProcWorker(pwndDlg, lpMsg->message, lpMsg->wParam,",
+                "                    lpMsg->lParam, FALSE);",
+                "            ThreadUnlock(&tlpwnd);",
+                "            if (fLockDlg)",
+                "                ThreadUnlock(&tlpwndDlg);",
+                "            return TRUE;",
+                "        }",
+                "",
+                "    /*",
+                "     *** FALL THRU **",
+                "     */",
+                "",
+                "    case WM_CHAR:",
+                "",
+                "        /*",
+                "         * Ignore chars sent to the dialog box (rather than the control).",
+                "         */",
+                "        if (pwnd == pwndDlg) {",
+                "            ThreadUnlock(&tlpwnd);",
+                "            if (fLockDlg)",
+                "                ThreadUnlock(&tlpwndDlg);",
+                "            return TRUE;",
+                "        }",
+                "",
+                "        code = (UINT)SendMessage(lpMsg->hwnd, WM_GETDLGCODE, lpMsg->wParam,",
+                "                (DWORD)lpMsg);",
+                "",
+                "        /* DIVERGENCE(OPENNT-HOST-119): consume a message whose target died. */",
+                "        if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS) ||",
+                "                TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS))",
+                "            goto ReturnProcessed;",
+                "",
+                "        /*",
+                "         * If the control wants to process the message, then don't check for",
+                "         * possible mnemonic key.",
+                "         */",
+                "#line 413",
+                "        if ((lpMsg->message == WM_CHAR) && (code & (DLGC_WANTCHARS | DLGC_WANTMESSAGE)))",
+                "            break;",
+                "",
+                "        /* If the control wants tabs, then don't let tab fall thru here",
+                "         */",
+                "        if ((lpMsg->wParam == VK_TAB) && (code & DLGC_WANTTAB))",
+                "            break;",
+                "",
+                "",
+                "        /*",
+                "         * HACK ALERT",
+                "         *",
+                "         * If ALT is held down (i.e., SYSCHARs), then ALWAYS do mnemonic",
+                "         * processing.  If we do away with SYSCHARS, then we should",
+                "         * check key state of ALT instead.",
+                "         */",
+                "",
+                "        /*",
+                "         * Space is not a valid mnemonic, but it IS the char that toggles",
+                "         * button states.  Don't look for it as a mnemonic or we will",
+                "         * beep when it is typed....",
+                "         */",
+                "        if (lpMsg->wParam == VK_SPACE) {",
+                "            ThreadUnlock(&tlpwnd);",
+                "            if (fLockDlg)",
+                "                ThreadUnlock(&tlpwndDlg);",
+                "            return TRUE;",
+                "        }",
+                "",
+                "        if (!(pwnd2 = xxxGotoNextMnem(pwndDlg, pwnd, (WCHAR)lpMsg->wParam))) {",
+                "",
+                "            if (code & DLGC_WANTMESSAGE)",
+                "                break;",
+                "",
+                "            /*",
+                "             * No mnemonic could be found so we will send the sys char over",
+                "             * to xxxDefWindowProc so that any menu bar on the dialog box is",
+                "             * handled properly.",
+                "             */",
+                "            if (lpMsg->message == WM_SYSCHAR) {",
+                "CallDefWindowProcAndReturnTrue:",
+                "                DefWindowProcWorker(pwndDlg, lpMsg->message, lpMsg->wParam,",
+                "                        lpMsg->lParam, FALSE);",
+                "",
+                "                ThreadUnlock(&tlpwnd);",
+                "                if (fLockDlg)",
+                "                    ThreadUnlock(&tlpwndDlg);",
+                "                return TRUE;",
+                "            }",
+                "            NtUserMessageBeep(0);",
+                "        } else {",
+                "",
+                "            /*",
+                "             * pwnd2 is 1 if the mnemonic took us to a pushbutton.  We",
+                "             * don't change the default button status here since doing this",
+                "             * doesn't change the focus.",
+                "             */",
+                "            if (pwnd2 != (PWND)1) {",
+                "                ThreadLockAlways(pwnd2, &tlpwnd2);",
+                "                xxxCheckDefPushButton(pwndDlg, lpMsg->hwnd, HWq(pwnd2));",
+                "                ThreadUnlock(&tlpwnd2);",
+                "            }",
+                "        }",
+                "",
+                "        ThreadUnlock(&tlpwnd);",
+                "        if (fLockDlg)",
+                "            ThreadUnlock(&tlpwndDlg);",
+                "        return TRUE;",
+                "",
+                "    case WM_KEYDOWN:",
+                "        code = (UINT)SendMessage(lpMsg->hwnd, WM_GETDLGCODE, lpMsg->wParam,",
+                "                (DWORD)lpMsg);",
+                "        /* DIVERGENCE(OPENNT-HOST-119): query cannot authorize stale navigation. */",
+                "        if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS) ||",
+                "                TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS))",
+                "            goto ReturnProcessed;",
+                "#line 485",
+                "        if (code & (DLGC_WANTALLKEYS | DLGC_WANTMESSAGE))",
+                "            break;",
+                "",
+                "        switch (lpMsg->wParam) {",
+                "        case VK_TAB:",
+                "            if (code & DLGC_WANTTAB)",
+                "                break;",
+                "            pwnd2 = _GetNextDlgTabItem(pwndDlg, pwnd,",
+                "                    (GetKeyState(VK_SHIFT) & 0x8000));",
+                "            if (pwnd2 != NULL) {",
+                "                hwnd2 = HWq(pwnd2);",
+                "                ThreadLockAlways(pwnd2, &tlpwnd2);",
+                "                DlgSetFocus(hwnd2);",
+                "                /* DIVERGENCE(OPENNT-HOST-119): focus can retire either window. */",
+                "                if (!TestWF(pwnd2, WFDESTROYED) && !(pwnd2->fnid & FNID_STATUS_BITS) &&",
+                "                        !TestWF(pwndDlg, WFDESTROYED) && !(pwndDlg->fnid & FNID_STATUS_BITS))",
+                "                    xxxCheckDefPushButton(pwndDlg, lpMsg->hwnd, hwnd2);",
+                "#line 499",
+                "                ThreadUnlock(&tlpwnd2);",
+                "            }",
+                "",
+                "            ThreadUnlock(&tlpwnd);",
+                "            if (fLockDlg)",
+                "                ThreadUnlock(&tlpwndDlg);",
+                "            return TRUE;",
+                "",
+                "        case VK_LEFT:",
+                "        case VK_UP:",
+                "            fBack = TRUE;",
+                "",
+                "        /*",
+                "         *** FALL THRU **",
+                "         */",
+                "        case VK_RIGHT:",
+                "        case VK_DOWN:",
+                "            if (code & DLGC_WANTARROWS)",
+                "                break;",
+                "",
+                "            pwnd2 = _GetNextDlgGroupItem(pwndDlg, pwnd, fBack);",
+                "            if (pwnd2 == NULL) {",
+                "                ThreadUnlock(&tlpwnd);",
+                "                if (fLockDlg)",
+                "                    ThreadUnlock(&tlpwndDlg);",
+                "                return TRUE;",
+                "            }",
+                "",
+                "            hwnd2 = HWq(pwnd2);",
+                "            ThreadLockAlways(pwnd2, &tlpwnd2);",
+                "",
+                "            code = (UINT)SendMessage(hwnd2, WM_GETDLGCODE, lpMsg->wParam,",
+                "                    (DWORD)lpMsg);",
+                "",
+                "            /* DIVERGENCE(OPENNT-HOST-119): do not borrow cleaned Button data. */",
+                "            if (TestWF(pwnd2, WFDESTROYED) || (pwnd2->fnid & FNID_STATUS_BITS) ||",
+                "                    TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS)) {",
+                "                ThreadUnlock(&tlpwnd2);",
+                "                ThreadUnlock(&tlpwnd);",
+                "                if (fLockDlg) ThreadUnlock(&tlpwndDlg);",
+                "                return TRUE;",
+                "            }",
+                "",
+                "            /*",
+                "             * We are just moving the focus rect around! So, do not send",
+                "             * BN_CLICK messages, when WM_SETFOCUSing.  Fix for Bug",
+                "             * #4358.",
+                "             */",
+                "#line 538",
+                "            if (code & (DLGC_UNDEFPUSHBUTTON | DLGC_DEFPUSHBUTTON)) {",
+                "                PBUTN pbutn;",
+                "                BOOL fIsNTButton = (GETFNID(pwnd2) == FNID_BUTTON);",
+                "                /* DIVERGENCE(OPENNT-HOST-119): dialog focus also borrows BUTN. */",
+                "                wow_button_scope buttonScope;",
+                "                if (fIsNTButton) wow_button_scope_enter(&buttonScope, pwnd2);",
+                "                __try {",
+                "#line 541",
+                "                if (fIsNTButton) {",
+                "                    pbutn = ((PBUTNWND)pwnd2)->pbutn;",
+                "                    BUTTONSTATE(pbutn) |= BST_DONTCLICK;",
+                "                }",
+                "                DlgSetFocus(hwnd2);",
+                "                /* DIVERGENCE(OPENNT-HOST-119): restore before releasing BUTN. */",
+                "                } __finally {",
+                "#line 546",
+                "                if (fIsNTButton) {",
+                "                    BUTTONSTATE(pbutn) &= ~BST_DONTCLICK;",
+                "                }",
+                "                    if (fIsNTButton) wow_button_scope_leave(&buttonScope);",
+                "                }",
+                "                if (!TestWF(pwnd2, WFDESTROYED) && !(pwnd2->fnid & FNID_STATUS_BITS) &&",
+                "                        !TestWF(pwndDlg, WFDESTROYED) && !(pwndDlg->fnid & FNID_STATUS_BITS))",
+                "                    xxxCheckDefPushButton(pwndDlg, lpMsg->hwnd, hwnd2);",
+                "#line 550",
+                "            } else if (code & DLGC_RADIOBUTTON) {",
+                "                DlgSetFocus(hwnd2);",
+                "                /* DIVERGENCE(OPENNT-HOST-119): radio focus is also a callout. */",
+                "                if (!TestWF(pwnd2, WFDESTROYED) && !(pwnd2->fnid & FNID_STATUS_BITS) &&",
+                "                        !TestWF(pwndDlg, WFDESTROYED) && !(pwndDlg->fnid & FNID_STATUS_BITS))",
+                "                    xxxCheckDefPushButton(pwndDlg, lpMsg->hwnd, hwnd2);",
+                "                if (!TestWF(pwnd2, WFDESTROYED) && !(pwnd2->fnid & FNID_STATUS_BITS) &&",
+                "                        !TestWF(pwndDlg, WFDESTROYED) && !(pwndDlg->fnid & FNID_STATUS_BITS) &&",
+                "                        TestWF(pwnd2, BFTYPEMASK) == LOBYTE(BS_AUTORADIOBUTTON)) {",
+                "",
+                "                    /*",
+                "                     * So that auto radio buttons get clicked on",
+                "                     */",
+                "                    /* DIVERGENCE(OPENNT-HOST-119): reject destruction in query. */",
+                "                    if (!SendMessage(hwnd2, BM_GETCHECK, 0, 0L) &&",
+                "                            !TestWF(pwnd2, WFDESTROYED) && !(pwnd2->fnid & FNID_STATUS_BITS) &&",
+                "                            !TestWF(pwndDlg, WFDESTROYED) && !(pwndDlg->fnid & FNID_STATUS_BITS)) {",
+                "#line 559",
+                "                        SendMessage(hwnd2, BM_CLICK, TRUE, 0L);",
+                "                    }",
+                "                }",
+                "            } else if (!(code & DLGC_STATIC)) {",
+                "                DlgSetFocus(hwnd2);",
+                "                /* DIVERGENCE(OPENNT-HOST-119): ordinary focus has the same edge. */",
+                "                if (!TestWF(pwnd2, WFDESTROYED) && !(pwnd2->fnid & FNID_STATUS_BITS) &&",
+                "                        !TestWF(pwndDlg, WFDESTROYED) && !(pwndDlg->fnid & FNID_STATUS_BITS))",
+                "                    xxxCheckDefPushButton(pwndDlg, lpMsg->hwnd, hwnd2);",
+                "#line 565",
+                "            }",
+                "            ThreadUnlock(&tlpwnd2);",
+                "            ThreadUnlock(&tlpwnd);",
+                "            if (fLockDlg)",
+                "                ThreadUnlock(&tlpwndDlg);",
+                "            return TRUE;",
+                "",
+                "        case VK_EXECUTE:",
+                "        case VK_RETURN:",
+                "",
+                "            /*",
+                "             * Guy pressed return - if button with focus is",
+                "             * defpushbutton, return its ID.  Otherwise, return id",
+                "             * of original defpushbutton.",
+                "             */",
+                "            if (!(hwndFocus = GetFocus()))",
+                "                code = 0;",
+                "            else",
+                "            {",
+                "                /* DIVERGENCE(OPENNT-HOST-119): retain focus before its query. */",
+                "                pwnd2 = ValidateHwnd(hwndFocus);",
+                "                if (!pwnd2) goto ReturnProcessed;",
+                "#line 584",
+                "                code = (WORD)(DWORD)SendMessage(hwndFocus, WM_GETDLGCODE,",
+                "                    0, 0L);",
+                "                /* DIVERGENCE(OPENNT-HOST-119): do not resolve a replacement HWND. */",
+                "                if (TestWF(pwnd2, WFDESTROYED) || (pwnd2->fnid & FNID_STATUS_BITS) ||",
+                "                        TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS))",
+                "                    goto ReturnProcessed;",
+                "#line 586",
+                "            }",
+                "",
+                "            if (code & DLGC_DEFPUSHBUTTON)",
+                "            {",
+                "                iOK = GetDlgCtrlID(hwndFocus);",
+                "                /* DIVERGENCE(OPENNT-HOST-119): use the pre-query retained pwnd2. */",
+                "                goto HaveWindow;",
+                "            }",
+                "            else",
+                "            {",
+                "                lT = (LONG)SendMessage(hwndDlg, DM_GETDEFID, 0, 0L);",
+                "                /* DIVERGENCE(OPENNT-HOST-119): default query may retire dialog. */",
+                "                if (TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS))",
+                "                    goto ReturnProcessed;",
+                "#line 597",
+                "                iOK = MAKELONG(",
+                "                    (HIWORD(lT)==DC_HASDEFID ? LOWORD(lT) : IDOK),",
+                "                    0);",
+                "            }",
+                "            // FALL THRU",
+                "",
+                "        case VK_ESCAPE:",
+                "        case VK_CANCEL:",
+                "",
+                "            /*",
+                "             * Make sure button is not disabled.",
+                "             */",
+                "            pwnd2 = _FindDlgItem(pwndDlg, iOK);",
+                "HaveWindow:",
+                "            if (pwnd2 != NULL && TestWF(pwnd2, WFDISABLED)) {",
+                "                NtUserMessageBeep(0);",
+                "            } else {",
+                "                SendMessage(hwndDlg, WM_COMMAND,",
+                "                        MAKELONG(iOK, BN_CLICKED), (LONG)HW(pwnd2));",
+                "            }",
+                "",
+                "ReturnProcessed: /* DIVERGENCE(OPENNT-HOST-119): shared existing unlock exit. */",
+                "#line 618",
+                "            ThreadUnlock(&tlpwnd);",
+                "            if (fLockDlg)",
+                "                ThreadUnlock(&tlpwndDlg);",
+                "            return TRUE;",
+                "        }",
+                "        break;",
+                "    }",
+                "",
+                "    ThreadUnlock(&tlpwnd);",
+                "    if (fLockDlg)",
+                "        ThreadUnlock(&tlpwndDlg);",
+                "",
+                "    TranslateMessage(lpMsg);",
+                "    DispatchMessage(lpMsg);",
+                "",
+                "    return TRUE;",
+                "}"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
