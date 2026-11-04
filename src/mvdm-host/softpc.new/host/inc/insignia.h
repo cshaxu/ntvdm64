@@ -35,28 +35,26 @@ DbgPrint(
 #define VOID            void            /* Nothing */
 
 #if !defined(_WINDOWS_) && !defined(NT_INCLUDED)    /* Types already defined by windows */
-typedef char            CHAR;           /* Used as a text character */
+#line 38
+#error Unsupported excluded original configuration
 #endif
+#line 40
 
 typedef signed char     TINY;            /* 8-bit signed integer */
 
 #if !defined(_WINDOWS_) && !defined(NT_INCLUDED)    /* Types already defined by windows */
-typedef short           SHORT;          /* 16-bit signed integer */
-//typedef long            LONG;           /* 32-bit signed integer */
+#line 44
+#error Unsupported excluded original configuration
 #endif
+#line 47
 
 typedef unsigned char   UTINY;          /* 8-bit unsigned integer */
 
 #if !defined(_WINDOWS_) && !defined(NT_INCLUDED)    /* Types already defined by windows */
-typedef unsigned char   UCHAR;          /*  8-bit unsigned integer */
-typedef unsigned short  USHORT;         /* 16-bit unsigned integer */
-//typedef unsigned long   ULONG;          /* 32-bit unsigned integer */
-typedef unsigned short  WORD;           /* 16-bit unsigned integer */
-typedef unsigned long   DWORD;          /* 32-bit unsigned integer */
-
-typedef float           FLOAT;          /* 32-bit floating point */
-//typedef double          DOUBLE;         /* 64-bit floating point */
+#line 51
+#error Unsupported excluded original configuration
 #endif
+#line 60
 
 
 typedef double          EXTENDED;       /* >64-bit floating point */
@@ -85,29 +83,33 @@ typedef unsigned int         IUH;	    /* Host register sized unsigned quantity *
  */
 
 #ifndef FALSE
-#define FALSE           ((BOOL) 0)      /* Boolean falsehood value */
-#define TRUE            (!FALSE)        /* Boolean truth value */
+#line 88
+#error Unsupported excluded original configuration
 #endif
+#line 91
 
 #define STRINGIFY(x)	#x
 
 #if !defined(_WINDOWS_) && !defined(NT_INCLUDED)   /* Types already defined by windows */
-//typedef int INT;
-typedef unsigned int UINT;
+#line 95
+#error Unsupported excluded original configuration
 #endif
+#line 98
 
 #ifndef NULL
-#define NULL            (0L)    /* Null pointer value */
+#line 100
+#error Unsupported excluded original configuration
 #endif
+#line 102
 
 #ifndef BOOL
 #ifdef NT_INCLUDED
-#if !defined(_WINDOWS_) 			  /* Types already defined by windows */
-typedef int BOOL;	/* only defined in windows */
-#endif
+#line 105
+#error Unsupported excluded original configuration
 #else
 #define BOOL UINT
 #endif
+#line 111
 #endif
 
 /*

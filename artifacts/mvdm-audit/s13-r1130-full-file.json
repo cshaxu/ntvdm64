@@ -1,0 +1,155 @@
+{
+  "path": "src/mvdm-host/xms.486/xms.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\xms.486\\xms.h",
+  "original_sha256": "0fad52bf1e4c6db87bdc77cf9ec2f35540da2fc4972d2b32e32d57a46776a9fc",
+  "before_sha256": "cd1c85261260a3bf69bfbeb5bcdadc3eccc7744974202bb0ca9a57fc5520eb2d",
+  "after_sha256": "6cc99e7bb7d7833b7f1b7475b97734830d3b7c395b22d1715b22fc787360b45f",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "line": "22",
+      "directive": "ifdef",
+      "expression": "DOS",
+      "chain_start": "22",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "f9c4bcd6f47e8cf2bb3fc33f9b23bac85dcbc05fb00dac7bf2050c9badd30ec5"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "line": "26",
+      "directive": "ifdef",
+      "expression": "OS2_16",
+      "chain_start": "26",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "f9c4bcd6f47e8cf2bb3fc33f9b23bac85dcbc05fb00dac7bf2050c9badd30ec5"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "line": "30",
+      "directive": "ifdef",
+      "expression": "OS2_32",
+      "chain_start": "30",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "f9c4bcd6f47e8cf2bb3fc33f9b23bac85dcbc05fb00dac7bf2050c9badd30ec5"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "line": "41",
+      "directive": "ifdef",
+      "expression": "WIN_16",
+      "chain_start": "41",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "f9c4bcd6f47e8cf2bb3fc33f9b23bac85dcbc05fb00dac7bf2050c9badd30ec5"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "line": "46",
+      "directive": "ifdef",
+      "expression": "WIN_32",
+      "chain_start": "46",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f9c4bcd6f47e8cf2bb3fc33f9b23bac85dcbc05fb00dac7bf2050c9badd30ec5"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "line": "53",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "46",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f9c4bcd6f47e8cf2bb3fc33f9b23bac85dcbc05fb00dac7bf2050c9badd30ec5"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "line": "57",
+      "directive": "ifdef",
+      "expression": "FLAT_32",
+      "chain_start": "57",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f9c4bcd6f47e8cf2bb3fc33f9b23bac85dcbc05fb00dac7bf2050c9badd30ec5"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "line": "58",
+      "directive": "ifndef",
+      "expression": "i386",
+      "chain_start": "58",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f9c4bcd6f47e8cf2bb3fc33f9b23bac85dcbc05fb00dac7bf2050c9badd30ec5"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "line": "60",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "58",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "f9c4bcd6f47e8cf2bb3fc33f9b23bac85dcbc05fb00dac7bf2050c9badd30ec5"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "line": "65",
+      "directive": "ifdef",
+      "expression": "WIN",
+      "chain_start": "65",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f9c4bcd6f47e8cf2bb3fc33f9b23bac85dcbc05fb00dac7bf2050c9badd30ec5"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "line": "70",
+      "directive": "ifdef",
+      "expression": "SIGNALS",
+      "chain_start": "70",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "f9c4bcd6f47e8cf2bb3fc33f9b23bac85dcbc05fb00dac7bf2050c9badd30ec5"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "line": "75",
+      "directive": "ifdef",
+      "expression": "OS2_32",
+      "chain_start": "75",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "f9c4bcd6f47e8cf2bb3fc33f9b23bac85dcbc05fb00dac7bf2050c9badd30ec5"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "line": "146",
+      "directive": "ifndef",
+      "expression": "i386",
+      "chain_start": "146",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f9c4bcd6f47e8cf2bb3fc33f9b23bac85dcbc05fb00dac7bf2050c9badd30ec5"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "Excluded the i386-only XMS alignment alias; both worker graphs report no i386 definition. Both observed WIN_32 alternatives are preserved."
+}

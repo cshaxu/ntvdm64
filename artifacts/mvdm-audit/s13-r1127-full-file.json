@@ -1,0 +1,22 @@
+{
+  "path": "src/mvdm-host/wow32/isz.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\isz.h",
+  "original_sha256": "7168be4c0f441b97e25c04894ef9b331a1577adb002f6e5f116f262d25cd5892",
+  "before_sha256": "7168be4c0f441b97e25c04894ef9b331a1577adb002f6e5f116f262d25cd5892",
+  "after_sha256": "7168be4c0f441b97e25c04894ef9b331a1577adb002f6e5f116f262d25cd5892",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/wow32/isz.h",
+      "line": "51",
+      "directive": "ifndef",
+      "expression": "WOW32_C",
+      "chain_start": "51",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "2179e7130a6a53d6e08588e06b8f74654d5e394957421203fbbe7fbf1738b5dd"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}

@@ -1,0 +1,33 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/host_rrr.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\host_rrr.h",
+  "original_sha256": "a849bf3b9c08d83ca3e21a386c6a45042494df82eeb28e4c8d0de3d7f14972ac",
+  "before_sha256": "b48dbb4e7165d7002786542322da2b2f406dd78180ca8e476fd0f7a66509d0ba",
+  "after_sha256": "b48dbb4e7165d7002786542322da2b2f406dd78180ca8e476fd0f7a66509d0ba",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_rrr.h",
+      "line": "1",
+      "directive": "ifndef",
+      "expression": "_HOST_ERROR_H",
+      "chain_start": "1",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "09d6b98cf0e8545f6e16196ab7ca0fe4675e1aa556e45511954f3bd25b9f3091"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_rrr.h",
+      "line": "40",
+      "directive": "ifdef",
+      "expression": "X86GFX",
+      "chain_start": "40",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "09d6b98cf0e8545f6e16196ab7ca0fe4675e1aa556e45511954f3bd25b9f3091"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}

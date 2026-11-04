@@ -17,11 +17,13 @@
 #line 17
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
+#line 20
 
 #ifdef MONITOR
 #line 22
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
+#line 39
 
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: log1p */
@@ -42,7 +44,7 @@ double x;
 #line 56
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif	//MONITOR
-#line 42
+#line 242
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: ASSERT CODE */
 
@@ -130,18 +132,10 @@ decode_files_init()
 }
 
 #ifdef ALPHA
-
-//
-// temporary change to get Alpha CPU running
-// in checked mode. Andy - 13/1/94
-//
-
-double get_287_reg_as_double(int i)
-{
-        extern char *GDP;
-        return(*(double *)(GDP + 0x80 + i * 8));
-}
+#line 329
+#error Unsupported excluded original configuration
 #endif
+#line 341
 
 #ifdef CPU_40_STYLE
 
@@ -165,8 +159,10 @@ GLOBAL void host_sigio_event IPT0()
 
 #ifndef GENERIC_NPX
 #ifndef CPU_40_STYLE
+#line 364
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
+#line 385
 #endif /* GENERIC_NPX */
 #endif
 
@@ -329,7 +325,7 @@ void DispatchInterrupts()
 #line 556
 #error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif  //MONITOR
-#line 330
+#line 569
 
 
 #ifndef MONITOR

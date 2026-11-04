@@ -29,11 +29,13 @@
 #line 27
 #error DIVERGENCE MVDM-HOST-DIV-528: OS2_16 platform branch is not selected; see mirror register.
 #endif
+#line 30
 
 #ifdef OS2_32
 #line 32
 #error DIVERGENCE MVDM-HOST-DIV-528: OS2_32 platform branch is not selected; see mirror register.
 #endif
+#line 35
 
 #include <stdarg.h>
 #include <stdio.h>
@@ -64,8 +66,10 @@
 #ifndef i386
 #define ALIGN_32
 #else
-#define NOALIGN_32
+#line 63
+#error Unsupported excluded original configuration
 #endif
+#line 65
 #endif
 
 #ifdef WIN
@@ -77,12 +81,13 @@
 #line 73
 #error DIVERGENCE MVDM-HOST-DIV-600: Unsupported original DOS/Win16 host profile
 #endif
-#line 74
+#line 76
 
 #ifdef OS2_32
 #line 78
 #error DIVERGENCE MVDM-HOST-DIV-528: OS2_32 platform branch is not selected; see mirror register.
 #endif
+#line 81
 #include <xmsexp.h>
 #include <suballoc.h>
 

@@ -27,8 +27,10 @@ Revision History:
 #endif
 
 #ifdef __cplusplus
-extern "C" {
+#line 30
+#error Unsupported excluded original configuration
 #endif
+#line 32
 
 //
 // Device Name - this string is the name of the device.  It is the name
@@ -66,8 +68,10 @@ extern "C" {
 // Declair the GUID that represents the device interface for mice.
 //
 #ifndef FAR
-#define FAR
+#line 69
+#error Unsupported excluded original configuration
 #endif
+#line 71
 
 DEFINE_GUID( GUID_CLASS_KEYBOARD, 0x884b96c3, 0x56ef, 0x11d1, \
              0xbc, 0x8c, 0x00, 0xa0, 0xc9, 0x14, 0x05, 0xdd);
@@ -349,8 +353,10 @@ typedef struct _KEYBOARD_IME_STATUS {
 } KEYBOARD_IME_STATUS, *PKEYBOARD_IME_STATUS;
 
 #ifdef __cplusplus
-}
+#line 352
+#error Unsupported excluded original configuration
 #endif
+#line 354
 
 #endif // _NTDDKBD_
 

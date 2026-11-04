@@ -25,9 +25,10 @@
 #include <stdio.h>
 
 #if defined(DBG)
-#define DEBUG_MEM YES_PLEASE
-//#define DEBUG_MEM_DUMP 1
+#line 25
+#error Unsupported excluded original configuration
 #endif
+#line 28
 
 /* Need all of the following to include nt.h and windows.h in the same file. */
 #include <nt.h>
@@ -49,11 +50,10 @@
 
 /* Make local symbols visible if debugging. */
 #ifdef DEBUG_MEM
-#define LOCAL
-
-GLOBAL VOID DumpAllocationHeaders IFN1();
-
+#line 47
+#error Unsupported excluded original configuration
 #endif /* DEBUG_MEM */
+#line 52
 
 /* Macros and typedefs. */
 
@@ -175,9 +175,10 @@ GLOBAL IU8 *InitIntelMemory IFN1(IU32, MaxIntelMemorySize)
     SECTION_HEADER  *entryPtr;      /* Header entry for real mode area. */
 
 #ifdef DEBUG_MEM
-    printf("NTVDM:InitIntelMemory(%lx [%dK])\n",
-	   MaxIntelMemorySize, MaxIntelMemorySize/ONE_K);
+#line 173
+#error Unsupported excluded original configuration
 #endif
+#line 176
 
     /*
      * Setup the value to initalise allocated memory with
@@ -207,8 +208,10 @@ GLOBAL IU8 *InitIntelMemory IFN1(IU32, MaxIntelMemorySize)
         return((IU8 *) NULL);
     }
 #ifdef DEBUG_MEM
-    printf("NTVDM:Commitment granularity is %lx\n", commitGran);
+#line 205
+#error Unsupported excluded original configuration
 #endif
+#line 207
     commitShift = 0;
     for (temp = commitGran; temp > 1; temp >>= 1)
 	commitShift++;
@@ -293,8 +296,10 @@ OUTPUT:
 GLOBAL	VOID FreeIntelMemory IFN0()
 {
 #ifdef DEBUG_MEM
-    printf("NTVDM:FreeIntelMemory\n");
+#line 284
+#error Unsupported excluded original configuration
 #endif
+#line 286
 
     /* DIVERGENCE(MVDM-HOST-DIV-035): retire bindings before their backing. */
     mvdm_softpc_physical_mapping_release();
@@ -336,8 +341,10 @@ GLOBAL  VOID SetWOWforceIncrAlloc IFN1(IBOOL, iEnable)
         WOWforceIncrAlloc = 0;
     }
 #ifdef DEBUG_MEM
-    printf("NTVDM:SetWOWforceIncrAlloc, WOWforceIncrAlloc: %X\n", WOWforceIncrAlloc);
+#line 324
+#error Unsupported excluded original configuration
 #endif
+#line 326
 }
 
 
@@ -376,9 +383,10 @@ GLOBAL NTSTATUS VdmAllocateVirtualMemory IFN3(PULONG, INTELAddress,
     IU32    commitSize;
 
 #ifdef DEBUG_MEM
-    printf("NTVDM:VdmAllocateVirtualMemory(%lx [%dK],%s)\n",
-	   Size, Size/ONE_K, Commit ? "COMMIT" : "DONOT_COMMIT");
+#line 364
+#error Unsupported excluded original configuration
 #endif
+#line 367
 
     /* Make sure memory system is initialised. */
     assert0(memInit, "Called VdmAllocateVirtualMemory before initialisation");
@@ -395,8 +403,10 @@ GLOBAL NTSTATUS VdmAllocateVirtualMemory IFN3(PULONG, INTELAddress,
     if ((WOWforceIncrAlloc != 0) && lastAllocPtr
                              && (GetCurrentThreadId() == WOWforceIncrAlloc)) {
 #ifdef DEBUG_MEM
-    printf("\nNTVDM:VdmAllocateVirtualMemory, using increasing linear address strategy.\n");
+#line 383
+#error Unsupported excluded original configuration
 #endif
+#line 385
         headerPtr = lastAllocPtr;
     } else {
         headerPtr = &headerTable[0];
@@ -458,16 +468,10 @@ GLOBAL NTSTATUS VdmAllocateVirtualMemory IFN3(PULONG, INTELAddress,
     *INTELAddress = ((ULONG) (IHPE) headerPtr->address) - (ULONG) intelMem;
 
 #ifdef DEBUG_MEM
-    printf(" => alloc %lxh, commit %lxh\n",
-        ((ULONG) (IHPE)headerPtr->address) - (ULONG)intelMem,
-        ((ULONG) (IHPE)commitAddr) - (ULONG)intelMem);
-
-#ifdef DEBUG_MEM_DUMP
-#line 451
-#error DIVERGENCE MVDM-HOST-DIV-529: DEBUG_MEM_DUMP platform branch is not selected; see mirror register.
+#line 446
+#error Unsupported excluded original configuration
 #endif
-#line 453
-#endif
+#line 454
 
     return(STATUS_SUCCESS);
 }
@@ -491,8 +495,10 @@ GLOBAL NTSTATUS VdmCommitVirtualMemory IFN2(ULONG, INTELAddress,
     IHP     retAddr;
 
 #ifdef DEBUG_MEM
-    printf("NTVDM:VdmCommitVirtualMemory(%lxh,%lxh)\n",INTELAddress, Size);
+#line 477
+#error Unsupported excluded original configuration
 #endif
+#line 479
 
     retAddr = VirtualAlloc((LPVOID) (intelMem + INTELAddress),
 			   (DWORD) Size,
@@ -527,8 +533,10 @@ GLOBAL NTSTATUS VdmDeCommitVirtualMemory IFN2(ULONG, INTELAddress,
 					     ULONG, Size)
 {
 #ifdef DEBUG_MEM
-    printf("NTVDM:VdmDeCommitVirtualMemory(%lxh,%lxh)\n",INTELAddress, Size);
+#line 513
+#error Unsupported excluded original configuration
 #endif
+#line 515
 
 
     sas_overwrite_memory(INTELAddress, Size);
@@ -571,8 +579,10 @@ GLOBAL NTSTATUS VdmFreeVirtualMemory IFN1(ULONG, INTELAddress)
     assert0(memInit, "Called VdmFreeVirtualMemory before initialisation");
 
 #ifdef DEBUG_MEM
-    printf("NTVDM:VdmFreeVirtualMemory(%lxh)\n",INTELAddress);
+#line 557
+#error Unsupported excluded original configuration
 #endif
+#line 559
 
     /* Calculate chunk address */
     Address = INTELAddress + (ULONG)intelMem;
@@ -659,12 +669,10 @@ GLOBAL NTSTATUS VdmFreeVirtualMemory IFN1(ULONG, INTELAddress)
 
 
 #ifdef DEBUG_MEM
-#ifdef DEBUG_MEM_DUMP
-#line 646
-#error DIVERGENCE MVDM-HOST-DIV-529: DEBUG_MEM_DUMP platform branch is not selected; see mirror register.
+#line 645
+#error Unsupported excluded original configuration
 #endif
-#line 648
-#endif
+#line 649
 
     return(STATUS_SUCCESS);
 }
@@ -717,9 +725,10 @@ GLOBAL NTSTATUS VdmQueryFreeVirtualMemory IFN2(PULONG, FreeBytes,
     *LargestFreeBlock = (ULONG) maxFree;
 
 #ifdef DEBUG_MEM
-    printf("NTVDM:VdmQueryFreeVirtualMemory() Total %lx [%dK], Largest %lx[%dK]\n",
-	    *FreeBytes, *FreeBytes/ONE_K, *LargestFreeBlock, *LargestFreeBlock/ONE_K);
+#line 701
+#error Unsupported excluded original configuration
 #endif
+#line 704
 
     return(STATUS_SUCCESS);
 }
@@ -757,9 +766,10 @@ GLOBAL NTSTATUS VdmReallocateVirtualMemory IFN3(ULONG, INTELOriginalAddress,
 
 
 #ifdef DEBUG_MEM
-    printf("NTVDM:VdmReallocateVirtualMemory(%lx [%dK] at %lx)\n",
-	   NewSize, NewSize/ONE_K, INTELOriginalAddress);
+#line 741
+#error Unsupported excluded original configuration
 #endif
+#line 744
 
     /* Round NewSize up to a multiple of 4K. */
     if (NewSize & PAGE_MASK)
@@ -904,13 +914,10 @@ GLOBAL NTSTATUS VdmReallocateVirtualMemory IFN3(ULONG, INTELOriginalAddress,
     }
 
 #ifdef DEBUG_MEM
-    printf("to %lx\n", *INTELNewAddress);
-#ifdef DEBUG_MEM_DUMP
-#line 890
-#error DIVERGENCE MVDM-HOST-DIV-529: DEBUG_MEM_DUMP platform branch is not selected; see mirror register.
+#line 888
+#error Unsupported excluded original configuration
 #endif
-#line 892
-#endif
+#line 893
     /* Success. */
     return(STATUS_SUCCESS);
 }
@@ -956,9 +963,10 @@ GLOBAL NTSTATUS VdmAddVirtualMemory IFN3(ULONG, HostAddress,
     NTSTATUS status;
 
 #ifdef DEBUG_MEM
-    printf("NTVDM:VdmAddVirtualMemory (%lx [%dK]) at %lx)\n",
-	   Size, Size/ONE_K, HostAddress);
+#line 937
+#error Unsupported excluded original configuration
 #endif
+#line 940
 
     /* Make sure memory system is initialised. */
     assert0(memInit, "Called VdmAddVirtualMemory before initialisation");
@@ -996,13 +1004,10 @@ GLOBAL NTSTATUS VdmAddVirtualMemory IFN3(ULONG, HostAddress,
     *IntelAddress += alignfix;
 
 #ifdef DEBUG_MEM
-#ifdef DEBUG_MEM_DUMP
-#line 975
-#error DIVERGENCE MVDM-HOST-DIV-529: DEBUG_MEM_DUMP platform branch is not selected; see mirror register.
+#line 974
+#error Unsupported excluded original configuration
 #endif
-#line 977
-    printf("NTVDM:VdmAddVirtualMemory => *IntelAddress=%lx\n", *IntelAddress);
-#endif
+#line 979
 
     return(STATUS_SUCCESS);
 }
@@ -1023,13 +1028,10 @@ GLOBAL NTSTATUS VdmRemoveVirtualMemory IFN1(ULONG, IntelAddress)
     NTSTATUS status;
 
 #ifdef DEBUG_MEM
-    printf("NTVDM:VdmRemoveVirtualMemory at %lx)\n", IntelAddress);
-#ifdef DEBUG_MEM_DUMP
-#line 1001
-#error DIVERGENCE MVDM-HOST-DIV-529: DEBUG_MEM_DUMP platform branch is not selected; see mirror register.
+#line 999
+#error Unsupported excluded original configuration
 #endif
-#line 1003
-#endif
+#line 1004
 
     /* Make sure memory system is initialised. */
     assert0(memInit, "Called VdmRemoveVirtualMemory before initialisation");
@@ -1051,22 +1053,20 @@ GLOBAL NTSTATUS VdmRemoveVirtualMemory IFN1(ULONG, IntelAddress)
     /* step 2 - reset the PhysicalPageREC.translation entries */
 
 #ifdef DEBUG_MEM
-    if (Size==0) {
-        printf("NTVDM:VdmRemoveVirtualMemory WARNING, Size==0\n");
-    }
+#line 1025
+#error Unsupported excluded original configuration
 #endif
+#line 1029
     VdmSetPhysRecStructs(HostAddress, IntelAddress, Size);
     ADDRESS_TO_HEADER(IntelAddress+intelMem)->flags &= ~HDR_REMAP_FLAG;
 
     /* step 3 - free the reserved intel address space */
 
 #ifdef DEBUG_MEM
-#ifdef DEBUG_MEM_DUMP
-#line 1036
-#error DIVERGENCE MVDM-HOST-DIV-529: DEBUG_MEM_DUMP platform branch is not selected; see mirror register.
+#line 1035
+#error Unsupported excluded original configuration
 #endif
-#line 1038
-#endif
+#line 1039
     return VdmFreeVirtualMemory(IntelAddress);
 }
 
@@ -1327,10 +1327,10 @@ LOCAL void exclusiveChunkPages IFN4(SECTION_HEADER *, chunkHeader,
                         allocAddr,
                         allocSize);
 #ifdef DEBUG_MEM
-    printf("NTVDM:Exclusive range to %s %lx+%lx is %lx+%lx\n",
-    Commit ? "COMMIT" : "DECOMMIT", chunkHeader->address,chunkHeader->size,
-    *allocAddr, *allocSize);
+#line 1300
+#error Unsupported excluded original configuration
 #endif
+#line 1304
 }
 
 /*
@@ -1440,47 +1440,10 @@ LOCAL void exclusiveAllocPages IFN6(IHPE, address,
 
 
 #ifdef DEBUG_MEM
-
-
-/*
-=========================== Dump Header Linked List ===========================
-PURPOSE:
-	Dump the headers linked list controlling allocated blocks
-
-
-INPUT:	    None
-OUTPUT:     Via printf
-
-================================================================================
-*/
-
-GLOBAL VOID DumpAllocationHeaders IFN1(char*, where)
-{
-
-    SECTION_HEADER  *headerPtr; /* Pointer for searching through linked list. */
-
-    /* Dump headers */
-    printf("NTVDM: Dump Allocation Headers %s\n", where);
-    printf("ptr        address   status size     (k)     commit\n");
-
-    for(headerPtr = &headerTable[0] ;
-	headerPtr != NULL ;
-	headerPtr = headerPtr->next)
-    {
-	printf("%08lxh: %08lxh [%s] %08lxh (%05dK)%s%s\n",
-               headerPtr,
-	       headerPtr->address - intelMem,
-	       SECTION_IS_FREE(headerPtr) ? "FREE" : "USED",
-	       headerPtr->size, headerPtr->size / ONE_K,
-	       headerPtr->flags & HDR_COMMITTED_FLAG ? " COMMITTED" : "",
-	       headerPtr->flags & HDR_REMAP_FLAG ? " REMAPPED" : "");
-    }
-
-    printf("\n");
-}
-
-
+#line 1413
+#error Unsupported excluded original configuration
 #endif DEBUG_MEM
+#line 1454
 
 
 #endif /* CPU_40_STYLE */

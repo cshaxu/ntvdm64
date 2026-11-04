@@ -1,0 +1,188 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\stubs.c",
+  "original_sha256": "c1821a3738bbee78293a47262cb8df14e68043cfd6b4092b7fa56bdb01c6d991",
+  "before_sha256": "4ef922944f275ca90db9d55e28e0c63a8da4c4ec41af43908640834e96e038ba",
+  "after_sha256": "64871011ce11cf2724bc58468ccd6245053d5e0b735530127fbc81d26502e685",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "line": "16",
+      "directive": "ifdef",
+      "expression": "X86GFX",
+      "chain_start": "16",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "fa4d12957101c4a6bc9ef8468f99372171f1afa3cd2e07d6e85c4508699fa201"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "line": "20",
+      "directive": "ifdef",
+      "expression": "MONITOR",
+      "chain_start": "20",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "fa4d12957101c4a6bc9ef8468f99372171f1afa3cd2e07d6e85c4508699fa201"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "line": "27",
+      "directive": "ifndef",
+      "expression": "MONITOR",
+      "chain_start": "27",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "fa4d12957101c4a6bc9ef8468f99372171f1afa3cd2e07d6e85c4508699fa201"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "line": "39",
+      "directive": "ifdef",
+      "expression": "MONITOR",
+      "chain_start": "39",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "fa4d12957101c4a6bc9ef8468f99372171f1afa3cd2e07d6e85c4508699fa201"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "line": "105",
+      "directive": "ifndef",
+      "expression": "A2CPU",
+      "chain_start": "105",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "fa4d12957101c4a6bc9ef8468f99372171f1afa3cd2e07d6e85c4508699fa201"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "line": "128",
+      "directive": "ifdef",
+      "expression": "ALPHA",
+      "chain_start": "128",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "fa4d12957101c4a6bc9ef8468f99372171f1afa3cd2e07d6e85c4508699fa201"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "line": "142",
+      "directive": "ifdef",
+      "expression": "CPU_40_STYLE",
+      "chain_start": "142",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "fa4d12957101c4a6bc9ef8468f99372171f1afa3cd2e07d6e85c4508699fa201"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "line": "162",
+      "directive": "ifndef",
+      "expression": "GENERIC_NPX",
+      "chain_start": "162",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "fa4d12957101c4a6bc9ef8468f99372171f1afa3cd2e07d6e85c4508699fa201"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "line": "163",
+      "directive": "ifndef",
+      "expression": "CPU_40_STYLE",
+      "chain_start": "163",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "fa4d12957101c4a6bc9ef8468f99372171f1afa3cd2e07d6e85c4508699fa201"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "line": "189",
+      "directive": "ifndef",
+      "expression": "A2CPU",
+      "chain_start": "189",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "fa4d12957101c4a6bc9ef8468f99372171f1afa3cd2e07d6e85c4508699fa201"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "line": "229",
+      "directive": "ifdef",
+      "expression": "NOT_IN_USE",
+      "chain_start": "229",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "fa4d12957101c4a6bc9ef8468f99372171f1afa3cd2e07d6e85c4508699fa201"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "line": "303",
+      "directive": "ifndef",
+      "expression": "MONITOR",
+      "chain_start": "303",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "fa4d12957101c4a6bc9ef8468f99372171f1afa3cd2e07d6e85c4508699fa201"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "line": "312",
+      "directive": "if",
+      "expression": "0",
+      "chain_start": "312",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "fa4d12957101c4a6bc9ef8468f99372171f1afa3cd2e07d6e85c4508699fa201"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "line": "327",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "303",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "fa4d12957101c4a6bc9ef8468f99372171f1afa3cd2e07d6e85c4508699fa201"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "line": "332",
+      "directive": "ifndef",
+      "expression": "MONITOR",
+      "chain_start": "332",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "fa4d12957101c4a6bc9ef8468f99372171f1afa3cd2e07d6e85c4508699fa201"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "line": "369",
+      "directive": "ifndef",
+      "expression": "MONITOR",
+      "chain_start": "369",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "fa4d12957101c4a6bc9ef8468f99372171f1afa3cd2e07d6e85c4508699fa201"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "Excluded ALPHA-only code: the supported stubs.c worker targets are x86 and no ALPHA definition was found."
+}

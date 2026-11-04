@@ -1,0 +1,67 @@
+{
+  "path": "src/non-mvdm/public/ddk/inc/ntddkbd.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\ddk\\inc\\ntddkbd.h",
+  "original_sha256": "f3bf258135d2853ebb77d6bc81e12499528c5b7efe1f58ead6f5c1315c5bf5c1",
+  "before_sha256": "0686c34108c566e08e544c6229f831da0dddd0fb963e60fb6460ba041e87af0c",
+  "after_sha256": "b395238663867747ea1032f19fcdb7ae919c7a859fd827c814abb70f2e1ee472",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddkbd.h",
+      "line": "22",
+      "directive": "ifndef",
+      "expression": "_NTDDKBD_",
+      "chain_start": "22",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "cb505a7e90d41a4145b436dde5823857256959b98ac6baa888b82ce449d77e11"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddkbd.h",
+      "line": "25",
+      "directive": "if",
+      "expression": "_MSC_VER > 1000",
+      "chain_start": "25",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "cb505a7e90d41a4145b436dde5823857256959b98ac6baa888b82ce449d77e11"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddkbd.h",
+      "line": "29",
+      "directive": "ifdef",
+      "expression": "__cplusplus",
+      "chain_start": "29",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "cb505a7e90d41a4145b436dde5823857256959b98ac6baa888b82ce449d77e11"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddkbd.h",
+      "line": "68",
+      "directive": "ifndef",
+      "expression": "FAR",
+      "chain_start": "68",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "cb505a7e90d41a4145b436dde5823857256959b98ac6baa888b82ce449d77e11"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddkbd.h",
+      "line": "351",
+      "directive": "ifdef",
+      "expression": "__cplusplus",
+      "chain_start": "351",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "cb505a7e90d41a4145b436dde5823857256959b98ac6baa888b82ce449d77e11"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "Excluded two C++ linkage arms and the FAR fallback in the observed C-only worker contexts; their Windows compatibility header supplies FAR."
+}

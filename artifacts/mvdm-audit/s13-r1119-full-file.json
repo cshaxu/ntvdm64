@@ -1,0 +1,77 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/nt_extra.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_extra.h",
+  "original_sha256": "a422d528074b6a16b5a09e2b2df2d83f3f8ba4c5729e368cd0acc64c0bebbd96",
+  "before_sha256": "a422d528074b6a16b5a09e2b2df2d83f3f8ba4c5729e368cd0acc64c0bebbd96",
+  "after_sha256": "a422d528074b6a16b5a09e2b2df2d83f3f8ba4c5729e368cd0acc64c0bebbd96",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_extra.h",
+      "line": "16",
+      "directive": "ifndef",
+      "expression": "_NT_EXTRA_H",
+      "chain_start": "16",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "8660e7b1ae9b31dd4f85b717a7e40194fdbf159a4c5533a03653488940796daf"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_extra.h",
+      "line": "19",
+      "directive": "ifdef",
+      "expression": "NTVDM",
+      "chain_start": "19",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "8660e7b1ae9b31dd4f85b717a7e40194fdbf159a4c5533a03653488940796daf"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_extra.h",
+      "line": "32",
+      "directive": "ifdef",
+      "expression": "leave",
+      "chain_start": "32",
+      "depth": "3",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "8660e7b1ae9b31dd4f85b717a7e40194fdbf159a4c5533a03653488940796daf"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_extra.h",
+      "line": "35",
+      "directive": "ifdef",
+      "expression": "DELETE",
+      "chain_start": "35",
+      "depth": "3",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "8660e7b1ae9b31dd4f85b717a7e40194fdbf159a4c5533a03653488940796daf"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_extra.h",
+      "line": "38",
+      "directive": "ifdef",
+      "expression": "CREATE_NEW",
+      "chain_start": "38",
+      "depth": "3",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "8660e7b1ae9b31dd4f85b717a7e40194fdbf159a4c5533a03653488940796daf"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_extra.h",
+      "line": "48",
+      "directive": "ifdef",
+      "expression": "MAX_PATH",
+      "chain_start": "48",
+      "depth": "3",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "8660e7b1ae9b31dd4f85b717a7e40194fdbf159a4c5533a03653488940796daf"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}

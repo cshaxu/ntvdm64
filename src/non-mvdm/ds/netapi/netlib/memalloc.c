@@ -1,7 +1,9 @@
 #ifndef CDEBUG
 #ifndef WIN32
-    #define WIN32
+#line 3
+#error Unsupported excluded original configuration
 #endif
+#line 5
 #endif
 
 /*++
@@ -166,7 +168,7 @@ Return Value:
 #line 168
 #error Unsupported excluded original configuration
 #endif // ndef WIN32
-#line 178
+#line 179
 } // NetpMemoryFree
 
 
@@ -227,10 +229,12 @@ Return Value:
         HANDLE hOldMem;
 
 #ifdef notdef // LocalHandle returns 0 for LMEM_FIXED block
+#line 239
 #error DIVERGENCE OPENNT-HOST-136: notdef branch is not selected; see mirror register.
 #else
         hOldMem = (HANDLE) OldAddress;
 #endif // notdef
+#line 243
         NetpAssert(hOldMem != NULL);
 
         hNewMem = LocalReAlloc(

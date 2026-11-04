@@ -106,16 +106,20 @@ ULONG WOWpSysErrorBox(LPSTR,LPSTR,USHORT,USHORT,USHORT);
 
 
 #ifdef host_error_ext
-#undef host_error_ext
+#line 105
+#error Unsupported excluded original configuration
 #endif
+#line 107
 SHORT host_error_ext(int error_num, int options, ErrDataPtr data)
 {
     return host_error(error_num, options, NULL);
 }
 
 #ifdef host_error
-#undef host_error
+#line 113
+#error Unsupported excluded original configuration
 #endif
+#line 115
 SHORT host_error(int error_num, int options, char *extra_char);
 
 #ifdef host_error_conf

@@ -436,10 +436,10 @@ extern PUCHAR IntelMemoryBase;  // Start of emulated CPU's memory
 //
 
 #ifndef UNREFERENCED_PARAMETER
-#define UNREFERENCED_PARAMETER(P)          (P)
-#define DBG_UNREFERENCED_PARAMETER(P)      (P)
-#define DBG_UNREFERENCED_LOCAL_VARIABLE(V) (V)
+#line 461
+#error Unsupported excluded original configuration
 #endif
+#line 465
 
 #define SIZE_BOGUS      256
 

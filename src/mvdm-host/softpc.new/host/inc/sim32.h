@@ -68,25 +68,17 @@ extern IMEMBLOCK *sas_mem_map(void);
 extern void sas_clear_map(void);
 
 #else   /*ANSI*/
-/* Sas/gmi Sim32 crossovers */
-extern BOOL Sim32FlushVDMPointer ();
-extern BOOL Sim32FreeVDMPointer ();
-extern BOOL Sim32GetVDMMemory ();
-extern BOOL Sim32SetVDMMemory ();
-
-/* Sim32 cpu crossovers */
-extern VDMREG *EnterIdle();
-extern void LeaveIdle();
-
-/* Sim32 cpu idle interrupt handler should only be called by the event manager */
-extern void Sim32_cpu_stall();
+#line 70
+#error Unsupported excluded original configuration
 #endif /* ANSI */
+#line 83
 
 /* Microsoft sas extensions */
 extern IMEMBLOCK *sas_mem_map ();
 extern void sas_clear_map();
 
 #endif /* MONITOR */
+#line 89
 
 /* This flag is used to signal that the cpu has gone idle due to a call to EnterIdle */
 extern BOOL cpu_flagged_idle;

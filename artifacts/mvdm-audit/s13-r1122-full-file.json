@@ -1,0 +1,56 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/sim32.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\sim32.h",
+  "original_sha256": "eeb9a654e53b5934850a6e7fa86fc67b1576ac9f1b9262d87acb5eed42c2fd98",
+  "before_sha256": "38ae28c3c41d48502ec141ae2cebdc0608e96ce4dd3643338313e75a88b2d4bc",
+  "after_sha256": "85aafb83ae3b8daaffe837cb8589e2ca1295f08e08cc348aeb3be326247efb5a",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/sim32.h",
+      "line": "47",
+      "directive": "ifdef",
+      "expression": "MONITOR",
+      "chain_start": "47",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "c9061de1c26ba34b9de2abd52831f72d8717c33c1dbc9860733b77d79bb9a680"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/sim32.h",
+      "line": "49",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "47",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c9061de1c26ba34b9de2abd52831f72d8717c33c1dbc9860733b77d79bb9a680"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/sim32.h",
+      "line": "51",
+      "directive": "ifdef",
+      "expression": "ANSI",
+      "chain_start": "51",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "c9061de1c26ba34b9de2abd52831f72d8717c33c1dbc9860733b77d79bb9a680"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/sim32.h",
+      "line": "69",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "51",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "c9061de1c26ba34b9de2abd52831f72d8717c33c1dbc9860733b77d79bb9a680"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "Excluded the non-ANSI SIM32 prototypes. Each worker graph reports four product consumers; none is the ANSI-undefining stubs.c, and the graphs define ANSI."
+}

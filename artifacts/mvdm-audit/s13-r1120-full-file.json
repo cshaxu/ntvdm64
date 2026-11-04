@@ -1,0 +1,143 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/nt_graph.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_graph.h",
+  "original_sha256": "f23f9cf86756ca99f3204d505baa1d1197446851065f1849814647f5c4cdc6f3",
+  "before_sha256": "2fceeae0ba9896df29af6df7d799a8da6bc8f4938d0078608534b6a5ca511ee3",
+  "after_sha256": "2fceeae0ba9896df29af6df7d799a8da6bc8f4938d0078608534b6a5ca511ee3",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_graph.h",
+      "line": "77",
+      "directive": "ifdef",
+      "expression": "X86GFX",
+      "chain_start": "77",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "11558a25a208b90d6f2995a9dbdec4cd87f910ad8c38d72f931d9b6dc2a3b535"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_graph.h",
+      "line": "88",
+      "directive": "ifndef",
+      "expression": "WINDOWED",
+      "chain_start": "88",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "11558a25a208b90d6f2995a9dbdec4cd87f910ad8c38d72f931d9b6dc2a3b535"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_graph.h",
+      "line": "91",
+      "directive": "ifndef",
+      "expression": "FULLSCREEN",
+      "chain_start": "91",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "11558a25a208b90d6f2995a9dbdec4cd87f910ad8c38d72f931d9b6dc2a3b535"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_graph.h",
+      "line": "94",
+      "directive": "ifndef",
+      "expression": "STREAM_IO",
+      "chain_start": "94",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "11558a25a208b90d6f2995a9dbdec4cd87f910ad8c38d72f931d9b6dc2a3b535"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_graph.h",
+      "line": "109",
+      "directive": "ifdef",
+      "expression": "BIGWIN",
+      "chain_start": "109",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "11558a25a208b90d6f2995a9dbdec4cd87f910ad8c38d72f931d9b6dc2a3b535"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_graph.h",
+      "line": "115",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "109",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "11558a25a208b90d6f2995a9dbdec4cd87f910ad8c38d72f931d9b6dc2a3b535"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_graph.h",
+      "line": "190",
+      "directive": "ifdef",
+      "expression": "BIGWIN",
+      "chain_start": "190",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "11558a25a208b90d6f2995a9dbdec4cd87f910ad8c38d72f931d9b6dc2a3b535"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_graph.h",
+      "line": "251",
+      "directive": "ifdef",
+      "expression": "V7VGA",
+      "chain_start": "251",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "11558a25a208b90d6f2995a9dbdec4cd87f910ad8c38d72f931d9b6dc2a3b535"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_graph.h",
+      "line": "376",
+      "directive": "ifdef",
+      "expression": "V7VGA",
+      "chain_start": "376",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "11558a25a208b90d6f2995a9dbdec4cd87f910ad8c38d72f931d9b6dc2a3b535"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_graph.h",
+      "line": "392",
+      "directive": "ifdef",
+      "expression": "MONITOR",
+      "chain_start": "392",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "11558a25a208b90d6f2995a9dbdec4cd87f910ad8c38d72f931d9b6dc2a3b535"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_graph.h",
+      "line": "404",
+      "directive": "ifdef",
+      "expression": "BIGWIN",
+      "chain_start": "404",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "11558a25a208b90d6f2995a9dbdec4cd87f910ad8c38d72f931d9b6dc2a3b535"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_graph.h",
+      "line": "423",
+      "directive": "ifdef",
+      "expression": "MONITOR",
+      "chain_start": "423",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "11558a25a208b90d6f2995a9dbdec4cd87f910ad8c38d72f931d9b6dc2a3b535"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}

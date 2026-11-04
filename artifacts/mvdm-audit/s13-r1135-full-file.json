@@ -1,0 +1,56 @@
+{
+  "path": "src/non-mvdm/public/ddk/inc/ntddbeep.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\ddk\\inc\\ntddbeep.h",
+  "original_sha256": "4e9e17a77c0e173166ab528de3a68d0c53883f513d55a998329d14f207e4272a",
+  "before_sha256": "f05149bb02bad70d64be74c2e6eab787ef6035ba2331dbf322e660edcfc27692",
+  "after_sha256": "614f80ea9f69baecd162d7c727fe85054774974f13610dc94f7ea16d2d990ed5",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddbeep.h",
+      "line": "22",
+      "directive": "ifndef",
+      "expression": "_NTDDBEEP_",
+      "chain_start": "22",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "5ae6bfc56a1033b90c58de22e149662f7a4f6463529698766dff8a1dab381778"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddbeep.h",
+      "line": "25",
+      "directive": "if",
+      "expression": "_MSC_VER > 1000",
+      "chain_start": "25",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "5ae6bfc56a1033b90c58de22e149662f7a4f6463529698766dff8a1dab381778"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddbeep.h",
+      "line": "29",
+      "directive": "ifdef",
+      "expression": "__cplusplus",
+      "chain_start": "29",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "5ae6bfc56a1033b90c58de22e149662f7a4f6463529698766dff8a1dab381778"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddbeep.h",
+      "line": "66",
+      "directive": "ifdef",
+      "expression": "__cplusplus",
+      "chain_start": "66",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "5ae6bfc56a1033b90c58de22e149662f7a4f6463529698766dff8a1dab381778"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "Excluded two C++ linkage arms in the observed C-only worker product contexts."
+}

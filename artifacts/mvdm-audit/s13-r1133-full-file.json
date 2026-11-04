@@ -1,0 +1,44 @@
+{
+  "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+  "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\xactsrv\\apimsg.c",
+  "original_sha256": "1ed708dee1236ea6424610d2274830b651062ba602d4b2cfa60e49e33de4c186",
+  "before_sha256": "ac4490e2810adb728cea80a303fa86d67a93949a429c1b155cd84b1e80c11926",
+  "after_sha256": "ac4490e2810adb728cea80a303fa86d67a93949a429c1b155cd84b1e80c11926",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "line": "36",
+      "directive": "ifdef",
+      "expression": "UNICODE",
+      "chain_start": "36",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "0acc7ea4dd544b5f8b4ef40f748a20e74f4d4bed5bd5d286ba544fcc930fd42d"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "line": "55",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "36",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "0acc7ea4dd544b5f8b4ef40f748a20e74f4d4bed5bd5d286ba544fcc930fd42d"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "line": "74",
+      "directive": "ifdef",
+      "expression": "UNICODE",
+      "chain_start": "74",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "0acc7ea4dd544b5f8b4ef40f748a20e74f4d4bed5bd5d286ba544fcc930fd42d"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}

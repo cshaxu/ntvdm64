@@ -1,0 +1,100 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_error.c",
+  "original_sha256": "3305eaabac76e039dfe80aa0f2e15c48433edd95a74615e5db55b97d2b393228",
+  "before_sha256": "46097e7dcf16117445a686da02d2786be5d947c2c32b0982876a90a2eccea6fc",
+  "after_sha256": "b24112d0047399aba616fde7f058e6702b0414c74b0d012a4818bd1fa2cace84",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "line": "100",
+      "directive": "ifndef",
+      "expression": "MONITOR",
+      "chain_start": "100",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "501f27c0f3f2e9f830c4fb36bf84bc98ecb5ff09cd94bec722a16cc9dd9780e4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "line": "108",
+      "directive": "ifdef",
+      "expression": "host_error_ext",
+      "chain_start": "108",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "501f27c0f3f2e9f830c4fb36bf84bc98ecb5ff09cd94bec722a16cc9dd9780e4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "line": "116",
+      "directive": "ifdef",
+      "expression": "host_error",
+      "chain_start": "116",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "501f27c0f3f2e9f830c4fb36bf84bc98ecb5ff09cd94bec722a16cc9dd9780e4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "line": "121",
+      "directive": "ifdef",
+      "expression": "host_error_conf",
+      "chain_start": "121",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "501f27c0f3f2e9f830c4fb36bf84bc98ecb5ff09cd94bec722a16cc9dd9780e4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "line": "152",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "152",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "501f27c0f3f2e9f830c4fb36bf84bc98ecb5ff09cd94bec722a16cc9dd9780e4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "line": "197",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "197",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "501f27c0f3f2e9f830c4fb36bf84bc98ecb5ff09cd94bec722a16cc9dd9780e4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "line": "616",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "616",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "501f27c0f3f2e9f830c4fb36bf84bc98ecb5ff09cd94bec722a16cc9dd9780e4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "line": "1159",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "1159",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "501f27c0f3f2e9f830c4fb36bf84bc98ecb5ff09cd94bec722a16cc9dd9780e4"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "Excluded host_error_ext and host_error macro undef blocks: the selected nt_error.c host error header declares these as functions and does not define those macros. The actually selected host_error_conf macro handling is retained."
+}

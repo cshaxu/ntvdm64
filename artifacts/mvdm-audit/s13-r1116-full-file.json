@@ -1,0 +1,22 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/nt_com.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_com.h",
+  "original_sha256": "203bf4bcfa6ddd5ff89cad3743fd99251df19838dd9e8bfcbf549a2e23dd4298",
+  "before_sha256": "203bf4bcfa6ddd5ff89cad3743fd99251df19838dd9e8bfcbf549a2e23dd4298",
+  "after_sha256": "203bf4bcfa6ddd5ff89cad3743fd99251df19838dd9e8bfcbf549a2e23dd4298",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_com.h",
+      "line": "43",
+      "directive": "ifdef",
+      "expression": "_RS232_H",
+      "chain_start": "43",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "772b66e8a279eea916d1a91769b5017020e0d4c4d0b5eec4ca8371036d4a2cc1"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}
