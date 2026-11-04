@@ -43,8 +43,10 @@ Revision History:
 
 
 #ifdef NT_INCLUDED
-#include <nturtl.h>
+#line 46
+#error Unsupported excluded original configuration
 #endif
+#line 48
 
 
 #include <time.h>

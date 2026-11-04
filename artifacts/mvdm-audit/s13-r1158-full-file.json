@@ -1,0 +1,22 @@
+{
+  "path": "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\internal\\windows\\inc\\wowuserp.h",
+  "original_sha256": "10ce21b98498ec4170806af9909854429c99929083b4730d370e5a7cc4e479d8",
+  "before_sha256": "10ce21b98498ec4170806af9909854429c99929083b4730d370e5a7cc4e479d8",
+  "after_sha256": "10ce21b98498ec4170806af9909854429c99929083b4730d370e5a7cc4e479d8",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+      "line": "166",
+      "directive": "ifndef",
+      "expression": "_WALIAS_",
+      "chain_start": "166",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "fd9395f3d74001454f097d687fa3eeb2bd7d0f29ee27e5dab48ba0216d4036b4"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}

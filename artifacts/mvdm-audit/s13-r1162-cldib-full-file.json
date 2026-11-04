@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\cldib.c",
+  "original_sha256": "e16fb36805f44767b45b597510a6c08d1dbc47271783e5d1f8f09273c0f782fb",
+  "current_sha256": "e3863929df1748b35339f694005acf9f02c1280f21e7be4b2678fa4316d8263c",
+  "review": "Original has no conditional groups. Current has one local WOW_BITMAP_FIXTURE_BINDINGS include selector; preserve it for product and fixture bindings. No source change.",
+  "limitations": "Product dependency and fixture contexts; no runtime behavior claim."
+}

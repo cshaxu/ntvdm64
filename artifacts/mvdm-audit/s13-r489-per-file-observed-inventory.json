@@ -2,7 +2,7 @@
   "baseline_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r379.zip",
   "graph_inventory": "s13-r473-all-graph-coverage.json",
   "total_observed_files": 1057,
-  "completed_files": 963,
+  "completed_files": 981,
   "records": [
     {
       "path": "src/mvdm-host/dbg/dbg.c",
@@ -6794,14 +6794,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\vga_prts.c",
-      "current_sha256": "bea09443124793e235e99548e987bbc36c7b061516bd6de6ef2fca479c0d6a01",
+      "current_sha256": "b97e7741e7f1bc7b1d17b54bd951b79cfd6d75273b7d1187cbada1b33c0ad6c3",
       "original_sha256": "16305a48051b980b4c9f8aba15dda7bd6801964bb02897b8c2290a1eff04fbbc",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r901-ordered-positive-witnesses.json"
+      "status": "completed-original-conditional-tree",
+      "evidence": "s13-r1170-full-file.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/vga_vide.c",
@@ -10224,8 +10224,8 @@
         "build\\.ninja\\msvc-x64-release\\worker\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r955-basesrv-local-context.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1168-local-full-file.json"
     },
     {
       "path": "src/non-mvdm/base/win32/server/srvvdm.c",
@@ -10881,8 +10881,8 @@
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r966-vdmapi-local-context.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1167-local-full-file.json"
     },
     {
       "path": "src/non-mvdm/public/internal/base/inc/winss.h",
@@ -11093,14 +11093,14 @@
     {
       "path": "src/non-mvdm/public/internal/ds/inc/timelib.h",
       "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\timelib.h",
-      "current_sha256": "6f44ad84f7119f62c58646f5c1f9405a8e2b6da7d6dc91503264aa4128bd3dcc",
+      "current_sha256": "2fd1270833ea0b825ab7443799b5cd86620d5146fed8034566dc5b2febddc059",
       "original_sha256": "6f44ad84f7119f62c58646f5c1f9405a8e2b6da7d6dc91503264aa4128bd3dcc",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r967-ordered-positive-witnesses.json"
+      "status": "completed-original-conditional-tree",
+      "evidence": "s13-r1152-full-file.json"
     },
     {
       "path": "src/non-mvdm/public/internal/ds/inc/xsprocs.h",
@@ -11116,14 +11116,14 @@
     {
       "path": "src/non-mvdm/public/internal/ds/inc/xstypes.h",
       "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\xstypes.h",
-      "current_sha256": "b140254bef8ca8c871c6ca3a94a09c5f858ad9b5560cb687392af22e7c8d8539",
+      "current_sha256": "12e60822cae0d06af26bb740113d0020111cdad4adf194f504a9640213723cf9",
       "original_sha256": "b140254bef8ca8c871c6ca3a94a09c5f858ad9b5560cb687392af22e7c8d8539",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r967-ordered-positive-witnesses.json"
+      "status": "completed-original-conditional-tree",
+      "evidence": "s13-r1153-full-file.json"
     },
     {
       "path": "src/non-mvdm/public/internal/net/inc/tstring.h",
@@ -11134,8 +11134,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r967-ordered-positive-witnesses.json"
+      "status": "completed-original-conditional-tree",
+      "evidence": "s13-r1154-full-file.json"
     },
     {
       "path": "src/non-mvdm/public/internal/shell/inc/wowcmndg.h",
@@ -11160,50 +11160,50 @@
     {
       "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
       "original": "O:\\repos.external\\OpenNT\\public\\internal\\windows\\inc\\pif.h",
-      "current_sha256": "cba592699266517e0fe2b966d86517ef2a2c569887a740d7eb3d09df6c4c6cdd",
+      "current_sha256": "df90cc35dba852c44cab80539bb19b8e7c4fec38e29bfcd5b2078e7cc6f78318",
       "original_sha256": "224f6bdf5cfa15a37d95f97e24c30d37d947d5f7f5199d50aeab65b39d150c55",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "partial-per-file-outer-reviewed",
+      "status": "completed-original-conditional-tree",
       "partial_evidence": "s13-r662-guard-line-audit.json",
-      "evidence": "s13-r967-ordered-positive-witnesses.json"
+      "evidence": "s13-r1163-full-file.json"
     },
     {
       "path": "src/non-mvdm/public/internal/windows/inc/winconp.h",
       "original": "O:\\repos.external\\OpenNT\\public\\internal\\windows\\inc\\winconp.h",
-      "current_sha256": "26b1b3cff877ee2802aeff0eeab04f1daf7127e63279bcaa990c8b4f97384f2d",
+      "current_sha256": "72ed509243278f92911e482bafbcfd6eb6a77dbfc72334afc52896ab671ac2e3",
       "original_sha256": "26b1b3cff877ee2802aeff0eeab04f1daf7127e63279bcaa990c8b4f97384f2d",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r967-ordered-positive-witnesses.json"
+      "status": "completed-original-conditional-tree",
+      "evidence": "s13-r1155-full-file.json"
     },
     {
       "path": "src/non-mvdm/public/internal/windows/inc/winddi.h",
       "original": "O:\\repos.external\\OpenNT\\public\\internal\\windows\\inc\\winddi.h",
-      "current_sha256": "f3ba4a33dbbb58768c2fb8aacc205a017f05d11521ad1650e39a998be5344f4a",
+      "current_sha256": "61f7f357475e63478c6efeb79f86dca7c67910ebd19e394a7c9884056efa0446",
       "original_sha256": "f3ba4a33dbbb58768c2fb8aacc205a017f05d11521ad1650e39a998be5344f4a",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r967-ordered-positive-witnesses.json"
+      "status": "completed-original-conditional-tree",
+      "evidence": "s13-r1156-full-file.json"
     },
     {
       "path": "src/non-mvdm/public/internal/windows/inc/wingdip.h",
       "original": "O:\\repos.external\\OpenNT\\public\\internal\\windows\\inc\\wingdip.h",
-      "current_sha256": "6514e6866b4f50a6132d71bf2f803103e1c46fec71981d720ce927ffeb83d1ce",
+      "current_sha256": "71f027cf03fdc00b246770d8a5ee16f8bf7b2603d4807f41bc55688b9a4a0328",
       "original_sha256": "fc35d359bf23f905916980740c56199d3627eb55b9c223091a75a8e4e606dd4d",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r967-ordered-positive-witnesses.json"
+      "status": "completed-original-conditional-tree",
+      "evidence": "s13-r1157-full-file.json"
     },
     {
       "path": "src/non-mvdm/public/internal/windows/inc/wowgdip.h",
@@ -11226,8 +11226,8 @@
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r967-ordered-positive-witnesses.json"
+      "status": "completed-original-conditional-tree",
+      "evidence": "s13-r1158-full-file.json"
     },
     {
       "path": "src/non-mvdm/public/sdk/inc/devioctl.h",
@@ -11251,15 +11251,15 @@
     {
       "path": "src/non-mvdm/public/sdk/inc/dlcapi.h",
       "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\dlcapi.h",
-      "current_sha256": "c98cae26f503b5285e465b2fd40e0fe1a6344a44d5bb5bd00e876f20dd8c1dda",
+      "current_sha256": "46626c141240eb45934df272e3c174e3173e32412f4c19891056acdb2d33a716",
       "original_sha256": "c98cae26f503b5285e465b2fd40e0fe1a6344a44d5bb5bd00e876f20dd8c1dda",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-redir-contract\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r967-ordered-positive-witnesses.json"
+      "status": "completed-original-conditional-tree",
+      "evidence": "s13-r1159-full-file.json"
     },
     {
       "path": "src/non-mvdm/public/sdk/inc/nt_vdd.h",
@@ -11312,8 +11312,8 @@
         "build\\.ninja\\msvc-x64-release\\worker\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r967-ordered-positive-witnesses.json"
+      "status": "completed-original-conditional-tree",
+      "evidence": "s13-r1160-full-file.json"
     },
     {
       "path": "src/non-mvdm/public/sdk/inc/ntdbg.h",
@@ -11343,7 +11343,7 @@
     {
       "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
       "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntlpcapi.h",
-      "current_sha256": "b9cc21e2fc62fd35105a7a833f835d5007f6d0bb91795c1d2499a6299ef5eb53",
+      "current_sha256": "2b0d2c272e760c77a8182ff65f58d38f1a204f9936c4b4aa380d1bff585c5d86",
       "original_sha256": "653097c73182630ce39183526334ae4027b1aef00e2d28812a0e5e84c6164db5",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\frontend\\build.ninja:deps",
@@ -11354,8 +11354,8 @@
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r973-ordered-positive-witnesses.json"
+      "status": "completed-original-conditional-tree",
+      "evidence": "s13-r1161-full-file.json"
     },
     {
       "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
@@ -11440,15 +11440,15 @@
     {
       "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
       "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\vdmdbg.h",
-      "current_sha256": "a3048cbcaa26e32ae542a73aae59356e9fa2eb85af00932a027ff4e8e47f225c",
+      "current_sha256": "49a5c12ac3f61bfd59d8f8d4dffaf50e5cf2fb8c8a3325c084b2fced9cc3971c",
       "original_sha256": "a3048cbcaa26e32ae542a73aae59356e9fa2eb85af00932a027ff4e8e47f225c",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r979-ordered-positive-witnesses.json"
+      "status": "completed-original-conditional-tree",
+      "evidence": "s13-r1164-full-file.json"
     },
     {
       "path": "src/non-mvdm/public/sdk/inc/wownt32.h",
@@ -11480,8 +11480,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r980-cldib-local-context.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1162-cldib-full-file.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
@@ -11924,8 +11924,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r1005-winmgrc-local-context.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1165-local-full-file.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
@@ -12257,8 +12257,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "partial-per-file-outer-reviewed",
-      "evidence": "s13-r1047-winmgr-local-context.json"
+      "status": "completed-original-conditional-tree-with-local-binding",
+      "evidence": "s13-r1166-local-full-file.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",

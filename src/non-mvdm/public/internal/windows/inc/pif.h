@@ -28,8 +28,10 @@
 #define PIFMAXFILEPATH  260
 
 #ifndef LF_FACESIZE
-#define LF_FACESIZE     32
+#line 31
+#error Unsupported excluded original configuration
 #endif
+#line 33
 
 #define LARGEST_GROUP   sizeof(PROPPRG)
 
@@ -67,8 +69,10 @@
 
 /* XLATOFF */
 #ifndef FAR
-#define FAR
+#line 70
+#error Unsupported excluded original configuration
 #endif
+#line 72
 /* XLATON */
 
 //#ifdef  RECT
@@ -462,60 +466,8 @@ typedef UNALIGNED PROPNT31 FAR *LPPROPNT31;
 #endif
 
 #ifdef UNICODE
-#ifdef GROUP_NT31
-#define GROUP_NT40              12
-#else
-#define GROUP_NT40              11
-#endif
-#define MAX_VALID_GROUP         GROUP_NT40
-
-
-#define WNT_LET_SYS_POS         0x0001
-#define WNT_CONSOLE_PROPS       0x0002
-
-typedef struct PROPNT40 {                                   /* wnt */
-   DWORD    flWnt;                                          // NT Specific PIF falgs
-
-// UNICODE version of strings, and copy of ANSI to see if they've changed
-
-   WCHAR    awchCmdLine[PIFSTARTLOCSIZE+PIFPARAMSSIZE+1];   // Command line
-   CHAR     achSaveCmdLine[PIFSTARTLOCSIZE+PIFPARAMSSIZE+1];// Saved ANSI Command Line
-
-   WCHAR    awchOtherFile[PIFDEFFILESIZE];                  // name of "other" file in directory
-   CHAR     achSaveOtherFile[PIFDEFFILESIZE];               // Saved ANSI "other" file in directory
-
-   WCHAR    awchPIFFile[PIFDEFFILESIZE];                    // name of PIF file
-   CHAR     achSavePIFFile[PIFDEFFILESIZE];                 // Saved ANSI name of PIF file
-
-   WCHAR    awchTitle[PIFNAMESIZE];                         // Title for cmd window
-   CHAR     achSaveTitle[PIFNAMESIZE];                      // Saved ANSI Title for cmd window
-
-   WCHAR    awchIconFile[PIFDEFFILESIZE];                   // Name of file containing icons
-   CHAR     achSaveIconFile[PIFDEFFILESIZE];                // Saved ANSI Name of file containing icons
-
-   WCHAR    awchWorkDir[PIFDEFPATHSIZE];                    // working directory
-   CHAR     achSaveWorkDir[PIFDEFPATHSIZE];                 // Saved ANSI working directory
-
-   WCHAR    awchBatchFile[PIFDEFFILESIZE];                  // batch file
-   CHAR     achSaveBatchFile[PIFDEFFILESIZE];               // Saved ANSI batch file
-
-// Console properties
-
-   DWORD    dwForeColor;                                    // Console Text Foreground Color
-   DWORD    dwBackColor;                                    // Console Text Background Color
-   DWORD    dwPopupForeColor;                               // Console Popup Text Foreground Color
-   DWORD    dwPopupBackColor;                               // Console Popup Text Background Color
-   COORD    WinSize;                                        // Console Window Size
-   COORD    BuffSize;                                       // Console Buffer Size
-   POINT    WinPos;                                         // Console Window Position
-   DWORD    dwCursorSize;                                   // Console Cursor Size
-   DWORD    dwCmdHistBufSize;                               // Console Command Histroy Buffer Size
-   DWORD    dwNumCmdHist;                                   // Number of Command Histories for Console
-
-} PROPNT40;
-typedef UNALIGNED PROPNT40 *PPROPNT40;
-typedef UNALIGNED PROPNT40 FAR *LPPROPNT40;
-
+#line 465
+#error Unsupported excluded original configuration
 #else
 
 #ifndef WINNT
@@ -523,6 +475,7 @@ typedef UNALIGNED PROPNT40 FAR *LPPROPNT40;
 #endif
 
 #endif // UNICODE
+#line 526
 
 #define GROUP_ICON              (MAX_VALID_GROUP+1)
 #define GROUP_MAX               0x0FF
@@ -828,13 +781,10 @@ typedef UNALIGNED WNTPIF31 FAR *LPWNTPIF31;                                 /* ;
 #endif
                                                                             /* ;Internal */
 #ifdef UNICODE
-typedef struct WNTPIF40 {                   /* adv */                       /* ;Internal */
-    PROPNT40 nt40Prop;                      // PROPWNT data                 /* ;Internal */
-    WORD    wInternalRevision;              // Internal WNTPIF40 version    /* ;Internal */
-} WNTPIF40;                                                                 /* ;Internal */
-typedef UNALIGNED WNTPIF40 *PWNTPIF40;                                      /* ;Internal */
-typedef UNALIGNED WNTPIF40 FAR *LPWNTPIF40;                                 /* ;Internal */
+#line 831
+#error Unsupported excluded original configuration
 #endif
+#line 838
                                                                             /* ;Internal */
 //                                                                          /* ;Internal */
 // Whenever a previously reserved field or bit becomes used, increment      /* ;Internal */
@@ -898,15 +848,10 @@ typedef struct PIFDATA {                    /* pd */  //Examples            /* ;
 
 
 #ifdef UNICODE
-    PIFEXTHDR   wnthdr40;                   // 0x000                        /* ;Internal */
-//  struct {                                                                /* ;Internal */
-//      CHAR    extsig[PIFEXTSIGSIZE];      // 0x000    "WINDOWS NT  4.0"   /* ;Internal */
-//      WORD    extnxthdrfloff;             // 0x000    0xFFFF              /* ;Internal */
-//      WORD    extfileoffset;              // 0x000    0x0237              /* ;Internal */
-//      WORD    extsizebytes;               // 0x000    ???                 /* ;Internal */
-//  };                                                                      /* ;Internal */
-    WNTPIF40    wntpif40;                   // 0x000                        /* ;Internal */
+#line 901
+#error Unsupported excluded original configuration
 #endif
+#line 910
                                                                             /* ;Internal */
 } PIFDATA;                                  // 0x221 if Windows 3.x PIF     /* ;Internal */
 typedef UNALIGNED PIFDATA *PPIFDATA;                                        /* ;Internal */

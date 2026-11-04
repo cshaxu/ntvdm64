@@ -1,0 +1,210 @@
+{
+  "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\internal\\windows\\inc\\pif.h",
+  "original_sha256": "224f6bdf5cfa15a37d95f97e24c30d37d947d5f7f5199d50aeab65b39d150c55",
+  "before_sha256": "ea6b90e0f05b79d4004e06f1254fea5607be956a395d9ce7c01038afcdaef337",
+  "after_sha256": "df90cc35dba852c44cab80539bb19b8e7c4fec38e29bfcd5b2078e7cc6f78318",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "line": "12",
+      "directive": "ifndef",
+      "expression": "_INC_PIF",
+      "chain_start": "12",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f4bd937938b7c76ed17fabf55bef541ad9521250ebab8547f93609e4b20e15e8"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "line": "16",
+      "directive": "ifndef",
+      "expression": "RC_INVOKED",
+      "chain_start": "16",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f4bd937938b7c76ed17fabf55bef541ad9521250ebab8547f93609e4b20e15e8"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "line": "30",
+      "directive": "ifndef",
+      "expression": "LF_FACESIZE",
+      "chain_start": "30",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "f4bd937938b7c76ed17fabf55bef541ad9521250ebab8547f93609e4b20e15e8"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "line": "69",
+      "directive": "ifndef",
+      "expression": "FAR",
+      "chain_start": "69",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "f4bd937938b7c76ed17fabf55bef541ad9521250ebab8547f93609e4b20e15e8"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "line": "444",
+      "directive": "ifdef",
+      "expression": "WINNT",
+      "chain_start": "444",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f4bd937938b7c76ed17fabf55bef541ad9521250ebab8547f93609e4b20e15e8"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "line": "447",
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "chain_start": "447",
+      "depth": "3",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f4bd937938b7c76ed17fabf55bef541ad9521250ebab8547f93609e4b20e15e8"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "line": "464",
+      "directive": "ifdef",
+      "expression": "UNICODE",
+      "chain_start": "464",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "f4bd937938b7c76ed17fabf55bef541ad9521250ebab8547f93609e4b20e15e8"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "line": "465",
+      "directive": "ifdef",
+      "expression": "GROUP_NT31",
+      "chain_start": "465",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "f4bd937938b7c76ed17fabf55bef541ad9521250ebab8547f93609e4b20e15e8"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "line": "467",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "465",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "f4bd937938b7c76ed17fabf55bef541ad9521250ebab8547f93609e4b20e15e8"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "line": "519",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "464",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f4bd937938b7c76ed17fabf55bef541ad9521250ebab8547f93609e4b20e15e8"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "line": "521",
+      "directive": "ifndef",
+      "expression": "WINNT",
+      "chain_start": "521",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "f4bd937938b7c76ed17fabf55bef541ad9521250ebab8547f93609e4b20e15e8"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "line": "820",
+      "directive": "ifdef",
+      "expression": "WINNT",
+      "chain_start": "820",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f4bd937938b7c76ed17fabf55bef541ad9521250ebab8547f93609e4b20e15e8"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "line": "830",
+      "directive": "ifdef",
+      "expression": "UNICODE",
+      "chain_start": "830",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "f4bd937938b7c76ed17fabf55bef541ad9521250ebab8547f93609e4b20e15e8"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "line": "888",
+      "directive": "ifdef",
+      "expression": "WINNT",
+      "chain_start": "888",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f4bd937938b7c76ed17fabf55bef541ad9521250ebab8547f93609e4b20e15e8"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "line": "900",
+      "directive": "ifdef",
+      "expression": "UNICODE",
+      "chain_start": "900",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "f4bd937938b7c76ed17fabf55bef541ad9521250ebab8547f93609e4b20e15e8"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "line": "968",
+      "directive": "if",
+      "expression": "!defined(NTVDM) && defined(WINAPI)",
+      "chain_start": "968",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "f4bd937938b7c76ed17fabf55bef541ad9521250ebab8547f93609e4b20e15e8"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "line": "984",
+      "directive": "ifdef",
+      "expression": "PIF_PROPERTY_SHEETS",
+      "chain_start": "984",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "f4bd937938b7c76ed17fabf55bef541ad9521250ebab8547f93609e4b20e15e8"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "line": "990",
+      "directive": "ifndef",
+      "expression": "RC_INVOKED",
+      "chain_start": "990",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "f4bd937938b7c76ed17fabf55bef541ad9521250ebab8547f93609e4b20e15e8"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "pif.h is also consumed by src/addon/pif/pif.c outside the observed Ninja census. Its BUILD.CMD compiles C without UNICODE and defines WINNT; the two worker consumer commands also have UNICODE absent and WINNT defined. The standalone PIF build was verified; comparison with the published binary is s13-r1170-pif-image-compare.json."
+}

@@ -1,0 +1,78 @@
+{
+  "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\vdmdbg.h",
+  "original_sha256": "a3048cbcaa26e32ae542a73aae59356e9fa2eb85af00932a027ff4e8e47f225c",
+  "before_sha256": "6b0438beee5eb4bfb5c8cb978ce649f724a001d0dacfd1c42a331e2ed313bb4d",
+  "after_sha256": "49a5c12ac3f61bfd59d8f8d4dffaf50e5cf2fb8c8a3325c084b2fced9cc3971c",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+      "line": "16",
+      "directive": "ifndef",
+      "expression": "_VDMDBG_",
+      "chain_start": "16",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "a3048cbcaa26e32ae542a73aae59356e9fa2eb85af00932a027ff4e8e47f225c"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+      "line": "19",
+      "directive": "ifdef",
+      "expression": "__cplusplus",
+      "chain_start": "19",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "a3048cbcaa26e32ae542a73aae59356e9fa2eb85af00932a027ff4e8e47f225c"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+      "line": "27",
+      "directive": "ifndef",
+      "expression": "DBG_SEGLOAD",
+      "chain_start": "27",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "a3048cbcaa26e32ae542a73aae59356e9fa2eb85af00932a027ff4e8e47f225c"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+      "line": "62",
+      "directive": "ifdef",
+      "expression": "_X86_",
+      "chain_start": "62",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "a3048cbcaa26e32ae542a73aae59356e9fa2eb85af00932a027ff4e8e47f225c"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+      "line": "69",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "62",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "a3048cbcaa26e32ae542a73aae59356e9fa2eb85af00932a027ff4e8e47f225c"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+      "line": "525",
+      "directive": "ifdef",
+      "expression": "__cplusplus",
+      "chain_start": "525",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "a3048cbcaa26e32ae542a73aae59356e9fa2eb85af00932a027ff4e8e47f225c"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "The selected debugger consumer contexts are x86; WOW32 wkman.c explicitly defines _X86_ around this header. Earlier marker observations selected the _X86_ branch. C++ branches are not selected in these C builds."
+}

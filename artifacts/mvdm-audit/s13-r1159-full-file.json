@@ -1,0 +1,45 @@
+{
+  "path": "src/non-mvdm/public/sdk/inc/dlcapi.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\dlcapi.h",
+  "original_sha256": "c98cae26f503b5285e465b2fd40e0fe1a6344a44d5bb5bd00e876f20dd8c1dda",
+  "before_sha256": "e99a4a6f5dcd8cd333e2e6496f050a07fbaee22b3b9d3158a8729ac2305efa8c",
+  "after_sha256": "46626c141240eb45934df272e3c174e3173e32412f4c19891056acdb2d33a716",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/dlcapi.h",
+      "line": "17",
+      "directive": "ifndef",
+      "expression": "_DLCAPI_",
+      "chain_start": "17",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "e2fb32ca94c0fe88147fc579111541327bd927e7784955182662d450839c83bf"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/dlcapi.h",
+      "line": "20",
+      "directive": "ifdef",
+      "expression": "__cplusplus",
+      "chain_start": "20",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "e2fb32ca94c0fe88147fc579111541327bd927e7784955182662d450839c83bf"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/dlcapi.h",
+      "line": "904",
+      "directive": "ifdef",
+      "expression": "__cplusplus",
+      "chain_start": "904",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "e2fb32ca94c0fe88147fc579111541327bd927e7784955182662d450839c83bf"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "Observed worker and redirection contract consumers compile as C; C++ linkage arms are not selected."
+}

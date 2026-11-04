@@ -1,0 +1,44 @@
+{
+  "path": "src/non-mvdm/public/sdk/inc/ntcsrsrv.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntcsrsrv.h",
+  "original_sha256": "9f22e4932d1b51c404c6bdaa6c4ca875ab8c19f1266c31c930985bdf75d1bbf2",
+  "before_sha256": "9f22e4932d1b51c404c6bdaa6c4ca875ab8c19f1266c31c930985bdf75d1bbf2",
+  "after_sha256": "9f22e4932d1b51c404c6bdaa6c4ca875ab8c19f1266c31c930985bdf75d1bbf2",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntcsrsrv.h",
+      "line": "22",
+      "directive": "ifndef",
+      "expression": "_NTCSRSRVAPI_",
+      "chain_start": "22",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "selected",
+      "sha256": "31b150668bcb0bf0f4c4199f7a612ebf083b5e3be6a8c6fc5e135bcb400ac960"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntcsrsrv.h",
+      "line": "29",
+      "directive": "if",
+      "expression": "!defined(_CSRSRV_)",
+      "chain_start": "29",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "selected",
+      "sha256": "31b150668bcb0bf0f4c4199f7a612ebf083b5e3be6a8c6fc5e135bcb400ac960"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntcsrsrv.h",
+      "line": "31",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "29",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "selected",
+      "sha256": "31b150668bcb0bf0f4c4199f7a612ebf083b5e3be6a8c6fc5e135bcb400ac960"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}

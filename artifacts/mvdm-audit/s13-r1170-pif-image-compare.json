@@ -1,0 +1,8 @@
+{
+  "prior": "assets/release/PIF.EXE",
+  "candidate": "build/t473-s13/r1170-pif/PIF.EXE",
+  "prior_sha256": "366bbe4066446edb680efb093f1036e16007437c3ac9adb87c8f5bdeb9e26670",
+  "candidate_sha256": "134a25652374b492138b28e3b06cff4506c04a1d26332c664704aa099b82e036",
+  "classification": "timestamp-only",
+  "byte_differences": 6
+}

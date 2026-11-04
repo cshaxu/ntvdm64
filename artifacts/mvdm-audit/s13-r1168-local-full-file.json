@@ -1,0 +1,32 @@
+{
+  "path": "src/non-mvdm/base/win32/server/basesrv.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\win32\\server\\basesrv.h",
+  "original_sha256": "a6863d6360830149e0b4895423f3d0f8a8e13326d784821d88b433ff849f3e31",
+  "current_sha256": "3483fd51434edb16a1e09aa5793a8ef23f651870113462f2419816e6a468df96",
+  "selected_local_conditions": [
+    {
+      "path": "src/non-mvdm/base/win32/server/basesrv.h",
+      "line": "30",
+      "directive": "if",
+      "expression": "defined(OPENNT_BASE_VDM_SERVER)",
+      "chain_start": "30",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "selected",
+      "sha256": "5016d623cb8295cda7e9788cbde1fa6d52c3f52a98bea3dc63fc8a54067fe414"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/basesrv.h",
+      "line": "231",
+      "directive": "if",
+      "expression": "!defined(OPENNT_BASE_VDM_SERVER)",
+      "chain_start": "231",
+      "depth": "1",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "not-selected-in-observed-contexts",
+      "sha256": "5016d623cb8295cda7e9788cbde1fa6d52c3f52a98bea3dc63fc8a54067fe414"
+    }
+  ],
+  "review": "Original has no conditional groups. Current product-binding selectors are observed selected or already explicitly excluded. No source edit.",
+  "limitations": "Selection witness and source comparison only; no runtime behavior claim."
+}

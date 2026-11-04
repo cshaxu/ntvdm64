@@ -18,8 +18,10 @@ Revision History:
 #define _DLCAPI_
 
 #ifdef __cplusplus
-extern "C" {
+#line 21
+#error Unsupported excluded original configuration
 #endif
+#line 23
 
 //
 // DLC Command Codes
@@ -902,7 +904,9 @@ AcsLan(
     );
 
 #ifdef __cplusplus
-}
+#line 905
+#error Unsupported excluded original configuration
 #endif
+#line 907
 
 #endif // _DLCAPI_

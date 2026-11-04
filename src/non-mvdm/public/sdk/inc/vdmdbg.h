@@ -17,8 +17,10 @@ Abstract:
 #define _VDMDBG_
 
 #ifdef __cplusplus
-extern "C" {
+#line 20
+#error Unsupported excluded original configuration
 #endif
+#line 22
 
 #include <pshpack4.h>
 
@@ -67,142 +69,10 @@ typedef struct _CONTEXT VDMCONTEXT;
 typedef struct _LDT_ENTRY VDMLDT_ENTRY;
 
 #else // _X86_
-
-//
-//  Define the size of the 80387 save area, which is in the context frame.
-//
-
-#define SIZE_OF_80387_REGISTERS      80
-
-typedef struct _FLOATING_SAVE_AREA {
-    ULONG   ControlWord;
-    ULONG   StatusWord;
-    ULONG   TagWord;
-    ULONG   ErrorOffset;
-    ULONG   ErrorSelector;
-    ULONG   DataOffset;
-    ULONG   DataSelector;
-    UCHAR   RegisterArea[SIZE_OF_80387_REGISTERS];
-    ULONG   Cr0NpxState;
-} FLOATING_SAVE_AREA;
-
-//
-// Simulated context structure for the 16-bit environment
-//
-
-typedef struct _VDMCONTEXT {
-
-    //
-    // The flags values within this flag control the contents of
-    // a CONTEXT record.
-    //
-    // If the context record is used as an input parameter, then
-    // for each portion of the context record controlled by a flag
-    // whose value is set, it is assumed that that portion of the
-    // context record contains valid context. If the context record
-    // is being used to modify a threads context, then only that
-    // portion of the threads context will be modified.
-    //
-    // If the context record is used as an IN OUT parameter to capture
-    // the context of a thread, then only those portions of the thread's
-    // context corresponding to set flags will be returned.
-    //
-    // The context record is never used as an OUT only parameter.
-    //
-    // CONTEXT_FULL on some systems (MIPS namely) does not contain the
-    // CONTEXT_SEGMENTS definition.  VDMDBG assumes that CONTEXT_INTEGER also
-    // includes CONTEXT_SEGMENTS to account for this.
-    //
-
-    ULONG ContextFlags;
-
-    //
-    // This section is specified/returned if CONTEXT_DEBUG_REGISTERS is
-    // set in ContextFlags.  Note that CONTEXT_DEBUG_REGISTERS is NOT
-    // included in CONTEXT_FULL.
-    //
-
-    ULONG   Dr0;
-    ULONG   Dr1;
-    ULONG   Dr2;
-    ULONG   Dr3;
-    ULONG   Dr6;
-    ULONG   Dr7;
-
-    //
-    // This section is specified/returned if the
-    // ContextFlags word contians the flag CONTEXT_FLOATING_POINT.
-    //
-
-    FLOATING_SAVE_AREA FloatSave;
-
-    //
-    // This section is specified/returned if the
-    // ContextFlags word contians the flag CONTEXT_SEGMENTS.
-    //
-
-    ULONG   SegGs;
-    ULONG   SegFs;
-    ULONG   SegEs;
-    ULONG   SegDs;
-
-    //
-    // This section is specified/returned if the
-    // ContextFlags word contians the flag CONTEXT_INTEGER.
-    //
-
-    ULONG   Edi;
-    ULONG   Esi;
-    ULONG   Ebx;
-    ULONG   Edx;
-    ULONG   Ecx;
-    ULONG   Eax;
-
-    //
-    // This section is specified/returned if the
-    // ContextFlags word contians the flag CONTEXT_CONTROL.
-    //
-
-    ULONG   Ebp;
-    ULONG   Eip;
-    ULONG   SegCs;              // MUST BE SANITIZED
-    ULONG   EFlags;             // MUST BE SANITIZED
-    ULONG   Esp;
-    ULONG   SegSs;
-
-} VDMCONTEXT;
-
-//
-//  LDT descriptor entry
-//
-
-typedef struct _VDMLDT_ENTRY {
-    USHORT  LimitLow;
-    USHORT  BaseLow;
-    union {
-        struct {
-            UCHAR   BaseMid;
-            UCHAR   Flags1;     // Declare as bytes to avoid alignment
-            UCHAR   Flags2;     // Problems.
-            UCHAR   BaseHi;
-        } Bytes;
-        struct {
-            ULONG   BaseMid : 8;
-            ULONG   Type : 5;
-            ULONG   Dpl : 2;
-            ULONG   Pres : 1;
-            ULONG   LimitHi : 4;
-            ULONG   Sys : 1;
-            ULONG   Reserved_0 : 1;
-            ULONG   Default_Big : 1;
-            ULONG   Granularity : 1;
-            ULONG   BaseHi : 8;
-        } Bits;
-    } HighWord;
-} VDMLDT_ENTRY;
-
-
+#line 70
+#error Unsupported excluded original configuration
 #endif // _X86_
+#line 206
 
 typedef VDMCONTEXT *LPVDMCONTEXT;
 typedef VDMLDT_ENTRY *LPVDMLDT_ENTRY;
@@ -523,7 +393,9 @@ VDMBreakThread(
 );
 
 #ifdef __cplusplus
-}
+#line 526
+#error Unsupported excluded original configuration
 #endif
+#line 528
 
 #endif // _VDMDBG_

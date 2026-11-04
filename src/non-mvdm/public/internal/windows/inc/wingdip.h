@@ -15,8 +15,10 @@ Abstract:
 #ifndef _WINGDIP_
 #define _WINGDIP_
 #ifdef __cplusplus
-extern "C" {
+#line 18
+#error Unsupported excluded original configuration
 #endif
+#line 20
 #define CAPS1         94    /* Extra Caps */
 /* CAPS1 */
 #define C1_TRANSPARENT      0x0001
@@ -43,8 +45,10 @@ extern "C" {
 #define DMDITHER_LAST       DMDITHER_GRAYSCALE
 HANDLE WINAPI SetObjectOwner(HGDIOBJ, HANDLE);
 #ifdef __cplusplus
-}
+#line 46
+#error Unsupported excluded original configuration
 #endif
+#line 48
 
 // Old fields that Chicago won't support that we can't publically
 // support anymore
@@ -217,8 +221,10 @@ WINAPI SetFontEnumeration (
 #define GFRI_TTFILENAME     4L
 #define GFRI_ISREMOVED      5L
 #ifdef DBCS // for GetFontResourceInfo()
+#line 220
 #error DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register.
 #endif // DBCS
+#line 222
 
 // file path separator for Add/RemoveFontResourceA/W
 

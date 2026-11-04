@@ -2363,46 +2363,8 @@ EngEscape(
 
 
 #ifdef _X86_
-
-    typedef struct _FLOATOBJ
-    {
-        ULONG ul1;
-        ULONG ul2;
-    } FLOATOBJ, *PFLOATOBJ;
-
-    VOID  FLOATOBJ_SetFloat(PFLOATOBJ,FLOAT);
-    VOID  FLOATOBJ_SetLong(PFLOATOBJ,LONG);
-
-    LONG  FLOATOBJ_GetFloat(PFLOATOBJ);
-    LONG  FLOATOBJ_GetLong(PFLOATOBJ);
-
-    VOID  FLOATOBJ_AddFloat(PFLOATOBJ,FLOAT);
-    VOID  FLOATOBJ_AddLong(PFLOATOBJ,LONG);
-    VOID  FLOATOBJ_Add(PFLOATOBJ,PFLOATOBJ);
-
-    VOID  FLOATOBJ_SubFloat(PFLOATOBJ,FLOAT);
-    VOID  FLOATOBJ_SubLong(PFLOATOBJ,LONG);
-    VOID  FLOATOBJ_Sub(PFLOATOBJ,PFLOATOBJ);
-
-    VOID  FLOATOBJ_MulFloat(PFLOATOBJ,FLOAT);
-    VOID  FLOATOBJ_MulLong(PFLOATOBJ,LONG);
-    VOID  FLOATOBJ_Mul(PFLOATOBJ,PFLOATOBJ);
-
-    VOID  FLOATOBJ_DivFloat(PFLOATOBJ,FLOAT);
-    VOID  FLOATOBJ_DivLong(PFLOATOBJ,LONG);
-    VOID  FLOATOBJ_Div(PFLOATOBJ,PFLOATOBJ);
-
-    VOID  FLOATOBJ_Neg(PFLOATOBJ);
-
-    BOOL  FLOATOBJ_EqualLong(PFLOATOBJ,LONG);
-    BOOL  FLOATOBJ_GreaterThanLong(PFLOATOBJ,LONG);
-    BOOL  FLOATOBJ_LessThanLong(PFLOATOBJ,LONG);
-
-    BOOL  FLOATOBJ_Equal(PFLOATOBJ,PFLOATOBJ);
-    BOOL  FLOATOBJ_GreaterThan(PFLOATOBJ,PFLOATOBJ);
-    BOOL  FLOATOBJ_LessThan(PFLOATOBJ,PFLOATOBJ);
-
-
+#line 2366
+#error Unsupported excluded original configuration
 #else
 
     // any platform that has support for floats in the kernel
@@ -2444,6 +2406,7 @@ EngEscape(
 
 
 #endif // _FLOATOBJ_
+#line 2447
 
 typedef struct  tagFLOATOBJ_XFORM
 {

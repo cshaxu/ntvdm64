@@ -1,0 +1,45 @@
+{
+  "path": "src/non-mvdm/public/internal/windows/inc/winddi.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\internal\\windows\\inc\\winddi.h",
+  "original_sha256": "f3ba4a33dbbb58768c2fb8aacc205a017f05d11521ad1650e39a998be5344f4a",
+  "before_sha256": "4a9bd2d5c5fcb9c542854ef5ddfde2ac582f427cfd3b0a0ff1b725829212c158",
+  "after_sha256": "61f7f357475e63478c6efeb79f86dca7c67910ebd19e394a7c9884056efa0446",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/winddi.h",
+      "line": "16",
+      "directive": "ifndef",
+      "expression": "_WINDDI_",
+      "chain_start": "16",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "0f3685faeaeac434361412f83c9936f8561e6686ca6022faa09a2a77c1e68e3d"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/winddi.h",
+      "line": "2365",
+      "directive": "ifdef",
+      "expression": "_X86_",
+      "chain_start": "2365",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "0f3685faeaeac434361412f83c9936f8561e6686ca6022faa09a2a77c1e68e3d"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/winddi.h",
+      "line": "2406",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "2365",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "0f3685faeaeac434361412f83c9936f8561e6686ca6022faa09a2a77c1e68e3d"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "winddi.h has one WOW32 consumer, wow32fax.obj. Its build does not define _X86_; the WOW32 precompiled header explicitly clears it. The existing selection witness does not select this original branch."
+}

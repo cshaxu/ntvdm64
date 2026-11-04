@@ -1,0 +1,21 @@
+{
+  "path": "src/non-mvdm/public/internal/base/inc/vdmapi.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\vdmapi.h",
+  "original_sha256": "b942656ba8761ddb9325a7eea7997394562d2e57797c923ff5688d7be86426de",
+  "current_sha256": "594129af180c88f785a43fbaef9e1eee0d694abb182a468127888f56dfd3235a",
+  "selected_local_conditions": [
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdmapi.h",
+      "line": "5",
+      "directive": "ifndef",
+      "expression": "MVDM_OPENNT_VDMAPI_H",
+      "chain_start": "5",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "selected",
+      "sha256": "594129af180c88f785a43fbaef9e1eee0d694abb182a468127888f56dfd3235a"
+    }
+  ],
+  "review": "Original has no conditional groups. Current product-binding selectors are all observed selected and preserved. No source edit.",
+  "limitations": "Selection witness and source comparison only; no runtime behavior claim."
+}

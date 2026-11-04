@@ -1,0 +1,99 @@
+{
+  "path": "src/non-mvdm/public/internal/net/inc/tstring.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\internal\\net\\inc\\tstring.h",
+  "original_sha256": "0dd95258b49d3c4e283d5cf49ca8e309af05d24343a3f7680a94d9769611b517",
+  "before_sha256": "0dd95258b49d3c4e283d5cf49ca8e309af05d24343a3f7680a94d9769611b517",
+  "after_sha256": "0dd95258b49d3c4e283d5cf49ca8e309af05d24343a3f7680a94d9769611b517",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/tstring.h",
+      "line": "75",
+      "directive": "ifndef",
+      "expression": "_TSTRING_H_INCLUDED",
+      "chain_start": "75",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "522f3713d5e33d8957eba5431fbc002b95d25c1dd50e4f82bbdc8e2aea955421"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/tstring.h",
+      "line": "136",
+      "directive": "ifdef",
+      "expression": "UNICODE",
+      "chain_start": "136",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "522f3713d5e33d8957eba5431fbc002b95d25c1dd50e4f82bbdc8e2aea955421"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/tstring.h",
+      "line": "150",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "136",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "522f3713d5e33d8957eba5431fbc002b95d25c1dd50e4f82bbdc8e2aea955421"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/tstring.h",
+      "line": "193",
+      "directive": "ifdef",
+      "expression": "UNICODE",
+      "chain_start": "193",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "522f3713d5e33d8957eba5431fbc002b95d25c1dd50e4f82bbdc8e2aea955421"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/tstring.h",
+      "line": "201",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "193",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "522f3713d5e33d8957eba5431fbc002b95d25c1dd50e4f82bbdc8e2aea955421"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/tstring.h",
+      "line": "224",
+      "directive": "ifdef",
+      "expression": "UNICODE",
+      "chain_start": "224",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "522f3713d5e33d8957eba5431fbc002b95d25c1dd50e4f82bbdc8e2aea955421"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/tstring.h",
+      "line": "229",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "224",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "522f3713d5e33d8957eba5431fbc002b95d25c1dd50e4f82bbdc8e2aea955421"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/tstring.h",
+      "line": "243",
+      "directive": "ifdef",
+      "expression": "_NTDEF_",
+      "chain_start": "243",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "522f3713d5e33d8957eba5431fbc002b95d25c1dd50e4f82bbdc8e2aea955421"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}

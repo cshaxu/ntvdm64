@@ -1,0 +1,122 @@
+{
+  "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntlpcapi.h",
+  "original_sha256": "653097c73182630ce39183526334ae4027b1aef00e2d28812a0e5e84c6164db5",
+  "before_sha256": "1e9da2b84c34390a924c4201e43f782f89f1460d1bdd966fc38bca931a157bc1",
+  "after_sha256": "2b0d2c272e760c77a8182ff65f58d38f1a204f9936c4b4aa380d1bff585c5d86",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "line": "22",
+      "directive": "ifndef",
+      "expression": "_NTLPCAPI_",
+      "chain_start": "22",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "selected",
+      "sha256": "b9cc21e2fc62fd35105a7a833f835d5007f6d0bb91795c1d2499a6299ef5eb53"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "line": "25",
+      "directive": "if",
+      "expression": "_MSC_VER > 1000",
+      "chain_start": "25",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "selected",
+      "sha256": "b9cc21e2fc62fd35105a7a833f835d5007f6d0bb91795c1d2499a6299ef5eb53"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "line": "29",
+      "directive": "ifdef",
+      "expression": "__cplusplus",
+      "chain_start": "29",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "not-selected-in-observed-contexts",
+      "sha256": "b9cc21e2fc62fd35105a7a833f835d5007f6d0bb91795c1d2499a6299ef5eb53"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "line": "44",
+      "directive": "if",
+      "expression": "defined(USE_LPC6432)",
+      "chain_start": "44",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "not-selected-in-observed-contexts",
+      "sha256": "b9cc21e2fc62fd35105a7a833f835d5007f6d0bb91795c1d2499a6299ef5eb53"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "line": "48",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "44",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "selected",
+      "sha256": "b9cc21e2fc62fd35105a7a833f835d5007f6d0bb91795c1d2499a6299ef5eb53"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "line": "124",
+      "directive": "ifdef",
+      "expression": "_WIN64",
+      "chain_start": "124",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "selected",
+      "sha256": "b9cc21e2fc62fd35105a7a833f835d5007f6d0bb91795c1d2499a6299ef5eb53"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "line": "126",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "124",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "not-selected-in-observed-contexts",
+      "sha256": "b9cc21e2fc62fd35105a7a833f835d5007f6d0bb91795c1d2499a6299ef5eb53"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "line": "131",
+      "directive": "if",
+      "expression": "defined(USE_LPC6432)",
+      "chain_start": "131",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "not-selected-in-observed-contexts",
+      "sha256": "b9cc21e2fc62fd35105a7a833f835d5007f6d0bb91795c1d2499a6299ef5eb53"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "line": "337",
+      "directive": "if",
+      "expression": "DEVL",
+      "chain_start": "337",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "not-selected-in-observed-contexts",
+      "sha256": "b9cc21e2fc62fd35105a7a833f835d5007f6d0bb91795c1d2499a6299ef5eb53"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "line": "354",
+      "directive": "ifdef",
+      "expression": "__cplusplus",
+      "chain_start": "354",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "not-selected-in-observed-contexts",
+      "sha256": "b9cc21e2fc62fd35105a7a833f835d5007f6d0bb91795c1d2499a6299ef5eb53"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "Actual ntlpcapi.h consumers across seven graphs were checked. Some unrelated worker objects define DEVL, but none of this header's 46 x86 worker consumers do. The x64 launcher and native-worker consumers are C, despite other unrelated C++ objects in those graphs. USE_LPC6432 has no source or graph definition."
+}

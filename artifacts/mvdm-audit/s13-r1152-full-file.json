@@ -1,0 +1,34 @@
+{
+  "path": "src/non-mvdm/public/internal/ds/inc/timelib.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\timelib.h",
+  "original_sha256": "6f44ad84f7119f62c58646f5c1f9405a8e2b6da7d6dc91503264aa4128bd3dcc",
+  "before_sha256": "fb9bb06b05f84893e128f1a3bd459426f176eb350daa47773e936de601b890d3",
+  "after_sha256": "2fd1270833ea0b825ab7443799b5cd86620d5146fed8034566dc5b2febddc059",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/timelib.h",
+      "line": "41",
+      "directive": "ifndef",
+      "expression": "_TIMELIB_",
+      "chain_start": "41",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "e0e7d89d32b80c2bd2bd1feba400005135d91c6f26e3d797b5cbfff243ca23a6"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/timelib.h",
+      "line": "45",
+      "directive": "ifdef",
+      "expression": "NT_INCLUDED",
+      "chain_start": "45",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "e0e7d89d32b80c2bd2bd1feba400005135d91c6f26e3d797b5cbfff243ca23a6"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "NT_INCLUDED is absent in both observed worker graphs; no source-level definition was found."
+}

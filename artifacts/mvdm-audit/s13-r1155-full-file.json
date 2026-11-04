@@ -1,0 +1,67 @@
+{
+  "path": "src/non-mvdm/public/internal/windows/inc/winconp.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\internal\\windows\\inc\\winconp.h",
+  "original_sha256": "26b1b3cff877ee2802aeff0eeab04f1daf7127e63279bcaa990c8b4f97384f2d",
+  "before_sha256": "6c3b53944a666f49ba8beb69bb103ab0b99cd3d3bbd6459f289f96f10d1e3a04",
+  "after_sha256": "72ed509243278f92911e482bafbcfd6eb6a77dbfc72334afc52896ab671ac2e3",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/winconp.h",
+      "line": "1",
+      "directive": "ifndef",
+      "expression": "_WINCONP_",
+      "chain_start": "1",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "76ceafb087e736b272513f2c9eceaef29d7a6378cbaceee45ed3614c1294d6c2"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/winconp.h",
+      "line": "4",
+      "directive": "ifdef",
+      "expression": "__cplusplus",
+      "chain_start": "4",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "76ceafb087e736b272513f2c9eceaef29d7a6378cbaceee45ed3614c1294d6c2"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/winconp.h",
+      "line": "19",
+      "directive": "ifdef",
+      "expression": "UNICODE",
+      "chain_start": "19",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "76ceafb087e736b272513f2c9eceaef29d7a6378cbaceee45ed3614c1294d6c2"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/winconp.h",
+      "line": "21",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "19",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "76ceafb087e736b272513f2c9eceaef29d7a6378cbaceee45ed3614c1294d6c2"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/winconp.h",
+      "line": "87",
+      "directive": "ifdef",
+      "expression": "__cplusplus",
+      "chain_start": "87",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "76ceafb087e736b272513f2c9eceaef29d7a6378cbaceee45ed3614c1294d6c2"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "The two worker graphs have one winconp.h consumer each: cmdkeyb.obj. Their actual compiler commands do not define UNICODE. Both are C builds."
+}

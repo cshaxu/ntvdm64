@@ -1,0 +1,56 @@
+{
+  "path": "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\internal\\windows\\inc\\wingdip.h",
+  "original_sha256": "fc35d359bf23f905916980740c56199d3627eb55b9c223091a75a8e4e606dd4d",
+  "before_sha256": "10d040a65eeb07123297fb27d6a9ec2d5953d03c6bc75cc96f2eaa5050dfce0f",
+  "after_sha256": "71f027cf03fdc00b246770d8a5ee16f8bf7b2603d4807f41bc55688b9a4a0328",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+      "line": "15",
+      "directive": "ifndef",
+      "expression": "_WINGDIP_",
+      "chain_start": "15",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "6514e6866b4f50a6132d71bf2f803103e1c46fec71981d720ce927ffeb83d1ce"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+      "line": "17",
+      "directive": "ifdef",
+      "expression": "__cplusplus",
+      "chain_start": "17",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "6514e6866b4f50a6132d71bf2f803103e1c46fec71981d720ce927ffeb83d1ce"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+      "line": "45",
+      "directive": "ifdef",
+      "expression": "__cplusplus",
+      "chain_start": "45",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "6514e6866b4f50a6132d71bf2f803103e1c46fec71981d720ce927ffeb83d1ce"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+      "line": "219",
+      "directive": "ifdef",
+      "expression": "DBCS",
+      "chain_start": "219",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "6514e6866b4f50a6132d71bf2f803103e1c46fec71981d720ce927ffeb83d1ce"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "The observed WOW32 and call-boundary graphs compile C consumers; the C++ linkage branches are not selected."
+}

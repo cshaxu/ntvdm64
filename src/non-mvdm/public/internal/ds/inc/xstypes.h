@@ -45,8 +45,10 @@ typedef struct _TRANSACTION {
     DWORD BlockHeader[2];
 
 #if SRVDBG2
-    DWORD ReferenceHistory[4];
+#line 48
+#error Unsupported excluded original configuration
 #endif
+#line 50
 
     LPVOID NonpagedHeader;
 

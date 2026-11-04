@@ -2,8 +2,10 @@
 #define _WINCONP_
 
 #ifdef __cplusplus
-extern "C" {
+#line 5
+#error Unsupported excluded original configuration
 #endif
+#line 7
 #define ENABLE_INSERT_MODE     0x0020
 #define ENABLE_QUICK_EDIT_MODE 0x0040
 #define ENABLE_PRIVATE_FLAGS   0x0080
@@ -17,10 +19,12 @@ BOOL
 WINAPI
 GetConsoleKeyboardLayoutNameW( LPWSTR );
 #ifdef UNICODE
-#define GetConsoleKeyboardLayoutName  GetConsoleKeyboardLayoutNameW
+#line 20
+#error Unsupported excluded original configuration
 #else
 #define GetConsoleKeyboardLayoutName  GetConsoleKeyboardLayoutNameA
 #endif // !UNICODE
+#line 24
 
 //
 // Registry strings
@@ -85,7 +89,9 @@ typedef struct _CONSOLE_STATE_INFO {
 #define CM_PROPERTIES_END            (WM_USER+202)
 
 #ifdef __cplusplus
-}
+#line 88
+#error Unsupported excluded original configuration
 #endif
+#line 90
 
 #endif // _WINCONP_

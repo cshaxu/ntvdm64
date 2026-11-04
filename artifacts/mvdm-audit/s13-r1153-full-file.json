@@ -1,0 +1,34 @@
+{
+  "path": "src/non-mvdm/public/internal/ds/inc/xstypes.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\xstypes.h",
+  "original_sha256": "b140254bef8ca8c871c6ca3a94a09c5f858ad9b5560cb687392af22e7c8d8539",
+  "before_sha256": "4d99007702ec521640a590ffcdbccac06f05bacd6928e6dd33da1603501de03d",
+  "after_sha256": "12e60822cae0d06af26bb740113d0020111cdad4adf194f504a9640213723cf9",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/xstypes.h",
+      "line": "21",
+      "directive": "ifndef",
+      "expression": "_XSTYPES_",
+      "chain_start": "21",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "933f190be6d76778904de33d817f0b11c0a38b7628f18ecdabeadafffe7a9e1d"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/xstypes.h",
+      "line": "47",
+      "directive": "if",
+      "expression": "SRVDBG2",
+      "chain_start": "47",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "933f190be6d76778904de33d817f0b11c0a38b7628f18ecdabeadafffe7a9e1d"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "SRVDBG2 is absent in both observed worker graphs; no source-level definition was found."
+}
