@@ -1,0 +1,54 @@
+{
+  "scope": "Old instrumented branch snapshot: unhit but nonempty arms whose current file hashes still match the snapshot",
+  "candidate_arms": 5,
+  "files": [
+    {
+      "path": "src/mvdm-host/inc/wowmmcb.h",
+      "sha256": "792d12c29a5913ee4dd9d46f3173f4e7ac8f1cd88cfa91272268bd8bcafb8e8c",
+      "original_sha256": "c4135b71b57c210150d6083b6eb179ac256e164a1b58a475b4c4f9395dc3cf89",
+      "existing_evidence": "s13-r1257-wowcomm-mmcb-shared-review.json"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/wownt32.h",
+      "sha256": "fe726b917229ef7aad3615d001ac32f5d1c4a7237486b68195a3650acde5bcee",
+      "original_sha256": "7b3077a7da4144abd73494311d85f34d46ecd483d2e14afd6619693891143cb7",
+      "existing_evidence": "s13-r1271-simple-condition-audit.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "sha256": "ce6287365d6d44fb89cbcafe728c5d8af5d97a99fed52a0fbd3d8b01e1f88c69",
+      "original_sha256": "4a2cb2067f5dd776676d7f808f40f6468082db018e16bcf9a77daf00bddb34c9",
+      "existing_evidence": "s13-r1216-rtl-getset-full-file.json"
+    }
+  ],
+  "findings": [
+    {
+      "path": "src/mvdm-host/inc/wowmmcb.h",
+      "line": 24,
+      "condition": "#ifndef UNALIGNED",
+      "disposition": "Preserve SDK declaration fallback; observed non-hit does not prove absence in other supported header inclusion contexts."
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/wownt32.h",
+      "line": 16,
+      "condition": "#ifndef _WOWNT32_",
+      "disposition": "Preserve include guard: current precomp suppresses the conflicting declaration cohort but wow.h still includes the header. A non-hit is expected after the guard is pre-defined and does not by itself establish removability."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "lines": [
+        54,
+        92,
+        161
+      ],
+      "condition": "local dialog owner and private-word alternatives",
+      "disposition": "Preserve current fixture variants: call-boundaries graph compiles original getset_reader with neither product selector and native_getset_reader with both selectors."
+    }
+  ],
+  "product_graph": "build/.ninja/msvc-x86-release/wow32/build.ninja",
+  "fixture_graph": "build/.ninja/msvc-x86-release/call-boundaries/build.ninja",
+  "limits": [
+    "Snapshot covers only hash-identical files; changed files need separate evidence.",
+    "Ninja flags and earlier recorded preprocessing are static/build observations, not runtime semantic tests."
+  ]
+}
