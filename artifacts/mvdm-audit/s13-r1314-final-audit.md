@@ -196,6 +196,18 @@ files now have this condition/line review. The review does not establish the
 behavior of local edits or certify comment-only line positions. The other 501
 differing files contain conditional groups and remain under separate review.
 
+The [r1334 original-tree review](s13-r1334-excluded-only-review.json)
+examined all 501 condition-bearing differing files with a conservative
+criterion: the original and current condition trees must match, every current
+arm must be an excluded `#error` with its original branch and continuation
+anchors, and the complete code outside those arms must match the original
+projection with matching logical code-line positions. 108 files meet that
+criterion. One further file passes the tree and matching-line checks but has
+local outside-arm changes, so is not counted as complete. The other 392
+require retained-branch context or further review. Thus 481 differing files
+have completed condition/selected-original-code review and 393 remain; this
+does not assert runtime behavior for excluded paths.
+
 The [r1323 anchor review](s13-r1323-anchor-review.json) additionally checks
 16 existing `#line` anchors against the specific original statement or branch
 entry they represent, including project-local selector cases. The remaining

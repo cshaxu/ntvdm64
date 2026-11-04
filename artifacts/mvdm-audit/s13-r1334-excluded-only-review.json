@@ -1,0 +1,3056 @@
+{
+  "method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior. Complete-file classification additionally requires the entire outside-arm selected original/current projection to match after ignoring blank lines and edge whitespace; all matching code logical positions must agree.",
+  "records": [
+    {
+      "path": "src/mvdm-host/dbg/dbg.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdconf.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(12, 13, 12, 13, '#include <mvdm.h>'), (13, 14, 13, 14, '#include <ctype.h>')]"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmddisp.c",
+      "status": "pass",
+      "current_sha256": "91e321e7d4bf19527ef7a0371d1c6137ec056f37c2da85bc8f59d009b12c0a94",
+      "original_sha256": "2a906e7100da9db6f16bab91c767b149f28e63a0db2803297812a8e86d2b19d6",
+      "excluded_arms": 1,
+      "matching_code_lines": 27,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(11, 18, 11, 18, '#include <cmdsvc.h>'), (12, 19, 12, 19, '#include <demexp.h>')]"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/dem.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(21, 22, 21, 22, 'PSZ pszDefaultDOSDirectory;'), (23, 24, 23, 24, 'extern VOID\\tTerminateVDM(VOID);')]"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/dem.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demdasd.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demdisp.c",
+      "status": "pass",
+      "current_sha256": "95f0e3397e7f876d1bd57d3bc375401103482e503f4a61b26368be3fa82d98c3",
+      "original_sha256": "7ea3a829e3f8aad2dfe644d101cabaff514de25909db937675fc323dfce8fe3c",
+      "excluded_arms": 4,
+      "matching_code_lines": 104,
+      "complete_condition_and_selected_projection": false,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": false
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demerror.c",
+      "status": "pass",
+      "current_sha256": "c7bc55645504700dbf85da5f04b4a90b3fc28f8e28ea0d313446cbfd2ad808e9",
+      "original_sha256": "8c266cc5086f5bfb834f7d2054459f0a91b1789e90095e56ff363f77d409b64f",
+      "excluded_arms": 4,
+      "matching_code_lines": 176,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demfile.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(25, 24, 25, 24, 'BOOL (*VrInitialized)(VOID);  // POINTER TO FUNCTION'), (26, 25, 26, 25, 'extern BOOL LoadVdmRedir(VOID);')]"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(45, 66, 45, 66, 'VOID demClose (VOID)'), (46, 67, 46, 67, '{')]"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demioctl.c",
+      "status": "pass",
+      "current_sha256": "6c0db6e312ca2800614fb9b9068a9c39a6ffca7531e1aaab00d64f95b35c4ddd",
+      "original_sha256": "6f480bf758d071b1fd2f76a137f892b77d1ea8d2d8ffb4690d395aedf5f733fa",
+      "excluded_arms": 1,
+      "matching_code_lines": 425,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demmisc.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demmsg.c",
+      "status": "pass",
+      "current_sha256": "adcb4b21a626d5d7429e65d3fea69b19196b70a450d7dd379abbf52e5965e0ac",
+      "original_sha256": "1414099a0a5ad421440f101bbc6c669285141ab53bd9403b9ead4a6e4d9db2c8",
+      "excluded_arms": 1,
+      "matching_code_lines": 0,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(23, 24, 23, 24, 'extern BOOL IsFirstCall;'), (31, 32, 31, 32, '#define FINDFILE_DEVICE (HANDLE)0xffffffff')]"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/data.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/debug.c",
+      "status": "pass",
+      "current_sha256": "ef8e04f3ea91d4c9ca87fbb034d745a28739ed1656a7dfebc1290b6e195e6b5d",
+      "original_sha256": "88a0fb538d88f8bee711bd2aa5390602394abe1fc1a577090f15183a3bfd1fb1",
+      "excluded_arms": 1,
+      "matching_code_lines": 3,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmidata.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmimemr.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/savestat.c",
+      "status": "pass",
+      "current_sha256": "59efaecefb32f3c1bd839cbf602587f0fb65ffd360c5e12ea807a255b06781de",
+      "original_sha256": "76864b5f6c852820722d123395e49da43fd206f2420dd38d00d1ce911b1d7e42",
+      "excluded_arms": 1,
+      "matching_code_lines": 49,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/xmem.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(205, 206, 211, 212, '        setCF(1);')]"
+    },
+    {
+      "path": "src/mvdm-host/inc/demexp.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/inc/dpmi.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/inc/mvdm.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/inc/softpc.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/inc/suballoc.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/inc/vdmredir.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/inc/vrnmpipe.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/inc/wow.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/inc/wowfax.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/inc/wowinfo.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/inc/wowkbd.h",
+      "status": "pass",
+      "current_sha256": "86f533eb464f1bae992b8f6410ed6d9789d49d9bb74fa77e7477cef9ac48d6ef",
+      "original_sha256": "ecff4d47c62f462aa0cea48d5cb0c8c0b658e33d89dbb6f47899df2228a414cf",
+      "excluded_arms": 1,
+      "matching_code_lines": 76,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/inc/wowkrn.h",
+      "status": "pass",
+      "current_sha256": "e4f70c604034b6352a0ca1a4866bc72690f3dbb216554cdf038f832762dbb3b6",
+      "original_sha256": "8d9fbb2c3b74c21588eaa7541513db0e3181e41caa0d6a38d2395ae27c01b8cf",
+      "excluded_arms": 12,
+      "matching_code_lines": 1105,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/inc/wowmmcb.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/inc/wowmmed.h",
+      "status": "pass",
+      "current_sha256": "cdbdd00ae2096fcc194072629312f105895e2b353ba999c9e276cc24991e095c",
+      "original_sha256": "8416869d9f2a35a41e10187f0f27fa35198b750e5474cc5e281d30ba9f2918b9",
+      "excluded_arms": 9,
+      "matching_code_lines": 1194,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/inc/wowsnd.h",
+      "status": "pass",
+      "current_sha256": "551d5b47d4fbc2f02fb1499cefc1bb6a6a515acf43949b2648d23dc04a159223",
+      "original_sha256": "944acedf0708f0fc2176b28a18e07747da57042fd93bfb63a51663e9e2a250e6",
+      "excluded_arms": 7,
+      "matching_code_lines": 71,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/inc/wowusr.h",
+      "status": "pass",
+      "current_sha256": "ce4f2f8a6d337d962cffc6b4c99aa6e593856e32430335878a6798475e48abd3",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "excluded_arms": 41,
+      "matching_code_lines": 2571,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/oemuni/process.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(14, 15, 14, 15, 'UINT'), (15, 16, 15, 16, 'APIENTRY')]"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/cmos_bis.c",
+      "status": "pass",
+      "current_sha256": "8246b718d443d44c4651859a63ef31c9676e30303df54cc6e9eb7f2d3dbb076d",
+      "original_sha256": "e3b6710db5887ef77c5a38c881ebb4eeff2575db65e86a3468258aaa9293e1bd",
+      "excluded_arms": 2,
+      "matching_code_lines": 27,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+      "status": "pass",
+      "current_sha256": "812e8edc8bf1d70942c47990a3536865a2ca681d0ab5be0bff122d29980550db",
+      "original_sha256": "c65121f592f91efbea0db0b3282f3252f4a58a4a87a281570ee3a0e50686cc87",
+      "excluded_arms": 8,
+      "matching_code_lines": 33,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+      "status": "review",
+      "reason": "excluded error line missing"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+      "status": "pass",
+      "current_sha256": "6ec95ec46d9c6511b19c4e3338025be57ebdd3f289861f9be050e3cf29e95a0c",
+      "original_sha256": "89df5a6fa3fc27def18b904fcd83f6c872778fec33dfc58634c9f73449165799",
+      "excluded_arms": 5,
+      "matching_code_lines": 14,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/mem_size.c",
+      "status": "pass",
+      "current_sha256": "58c3c6151854ed5cc1a49e448a21db7959bdfab349b4497e06965a1ffb58e267",
+      "original_sha256": "2e8937e8fc10fbc69425692fb8b127b20e786fae37fd453049b62dd0472c9e8f",
+      "excluded_arms": 2,
+      "matching_code_lines": 14,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/rom_basc.c",
+      "status": "review",
+      "reason": "excluded error line missing"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/slave_bs.c",
+      "status": "pass",
+      "current_sha256": "e737a62549a1c7c3a990b4de840b791506c8fdf4a245179efe9cb6304f5ef520",
+      "original_sha256": "22079cb4c1e033f1d33246da6f60f8d5e1bba5c925ee3e9e5ea3c3fd756c7368",
+      "excluded_arms": 2,
+      "matching_code_lines": 52,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/bound.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/bswap.c",
+      "status": "pass",
+      "current_sha256": "5859c6f4480ab7db9d4a0f2cead39649478a9e28a490ce97df6a4d0ed0525c27",
+      "original_sha256": "d6e833e572222ce68fd989348de0bfd68030d0016a2a2d7379cf3473ad852f39",
+      "excluded_arms": 1,
+      "matching_code_lines": 13,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_getset.c",
+      "status": "pass",
+      "current_sha256": "d6acab8b0a26dae1ea579c6da8313a054caa7bf812a939006477005074ace351",
+      "original_sha256": "02783213debc6b9a712adecf37941b4fea01c60c0cc86c0d3cdf526b1ff43374",
+      "excluded_arms": 1,
+      "matching_code_lines": 2,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_intr.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_mem.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_oprnd.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_page.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(64, 68, 64, 68, '#define LAST_DWORD_ON_PAGE 0xffc'), (65, 69, 65, 69, '#define LAST_WORD_ON_PAGE  0xffe')]"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_page.h",
+      "status": "pass",
+      "current_sha256": "50e62c347f220ef41e863e4b47d011e09303abffd6b30fc2b5d8b52c00fc45fb",
+      "original_sha256": "f89ead8f38886fd2be66d322bec8adf2e1be56108e35ef95f89063082da973f9",
+      "excluded_arms": 1,
+      "matching_code_lines": 97,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.h",
+      "status": "pass",
+      "current_sha256": "7c210c32a6ca46a4c9f3dbbfd19089d142c77f4b9a257b0361526ffdf7f75fe9",
+      "original_sha256": "323384e4437fa1bba94994f6cd5a762bc74c9d35eb03d6966ac8df235e165f75",
+      "excluded_arms": 2,
+      "matching_code_lines": 72,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(29, 31, 29, 31, '#include <c_page.h>'), (30, 32, 30, 32, '#include <mov.h>')]"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xtrn.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(53, 55, 56, 58, '   if ( setjmp(interface_abort) == 0 )'), (54, 56, 57, 59, '      {')]"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpupig.c",
+      "status": "pass",
+      "current_sha256": "2f8846d98caf9a9b059e70d8830fc6d74a181b485932a216765e48690651287b",
+      "original_sha256": "bfeaff9c9a49039aa29740f6dac2dd6a32bce897d0d0ffe3d00a43d66cd09523",
+      "excluded_arms": 1,
+      "matching_code_lines": 2,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpupig.h",
+      "status": "pass",
+      "current_sha256": "8983ef54b45a03ebffef1bb78661d3a81c33ce4819e138be263eae66feddd225",
+      "original_sha256": "73b2e7ceda4cb3ba83343b1fe07a428dccab76a196b2d7c3951c37962be1e1db",
+      "excluded_arms": 1,
+      "matching_code_lines": 0,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cmpxchg.c",
+      "status": "pass",
+      "current_sha256": "586fef62de0d56e81d1c2d675be00f7738f71226c4f1a7e770efe76255e8a6ed",
+      "original_sha256": "02318c7bd61ead65d6d2c97b3980a7acc573d7b6fd951371fbfac157fec397f1",
+      "excluded_arms": 1,
+      "matching_code_lines": 13,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/in.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/invd.c",
+      "status": "pass",
+      "current_sha256": "0cb68c9ac8a34815fd07d71fcf7df5fab7c6fdf11701d1efe6f12e19f376324d",
+      "original_sha256": "f6e2d5b7a257a13fa91f071c5d740f20fb47654c97e35da744e7dc6ee493895e",
+      "excluded_arms": 1,
+      "matching_code_lines": 12,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/invlpg.c",
+      "status": "pass",
+      "current_sha256": "6363edd6b303e581cbc72e0432d059d9e932223849a858e4bee61a2937090f95",
+      "original_sha256": "3d948316d66bdd957a2612340f6f653e975aaa99a65c97467b916737ae3394ba",
+      "excluded_arms": 1,
+      "matching_code_lines": 13,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/iret.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/jmp.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lgdt.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lidt.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lldt.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lxs.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/mov.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/out.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ret.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sgdt.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/shld.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/shrd.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sidt.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/wbinvd.c",
+      "status": "pass",
+      "current_sha256": "20771f7ca8afcd24dad998d17b0ad8c2113d7bd772f10210a7c730c3521660a0",
+      "original_sha256": "61cc2d303ac4935f8dc024ead2c3020201a10d3a5b08403f65f0b130bb2a537d",
+      "excluded_arms": 1,
+      "matching_code_lines": 12,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/xadd.c",
+      "status": "pass",
+      "current_sha256": "35b58fb6e017ed57d710db9bcb925c39d0a1fa5d22ea7536dfb592da7d469046",
+      "original_sha256": "80d97ce7d9b57b24c6b498b72def5e847ca39642545bd841f0fbae5725c702e2",
+      "excluded_arms": 1,
+      "matching_code_lines": 13,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/cpu4gen.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/evidgen.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/j_c_lang.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/btrace.c",
+      "status": "pass",
+      "current_sha256": "2c1465908bdefee80bf1394a313efa6168697e14e7cc2f11d8dd05836f473adb",
+      "original_sha256": "5a19a8cf73bd5c06c47bf3292189c8989bc970933bb4968336580f4be0028e3f",
+      "excluded_arms": 3,
+      "matching_code_lines": 9,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/dasm.c",
+      "status": "pass",
+      "current_sha256": "1fbe2c8970dc308d6145dd37de69b7300425bd276eab93dab21946e9bbf1dbb3",
+      "original_sha256": "6f90249d51eee69af65f59de138f915dc05af3a67b7bb529ea33596c04888b9b",
+      "excluded_arms": 2,
+      "matching_code_lines": 2,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/debuggng.c",
+      "status": "pass",
+      "current_sha256": "c0206ca86ef8659c239c78de9d3f1c9ebf50bc11e3ef5f7df6119f3558c130d8",
+      "original_sha256": "c483e5ef755f537c7197fc7ce929ed3837b1227f57f6b874b5c8ab46b15045ad",
+      "excluded_arms": 1,
+      "matching_code_lines": 2,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/ega_dump.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/pigyoda.c",
+      "status": "pass",
+      "current_sha256": "f351453f515087eec402ce1fbcf028526c158a7f472fe6c530165331c57f831f",
+      "original_sha256": "ede413a201fc0d4115b5bb0cd50aad3dd34d93a61dc734df49bfd464132ee7f2",
+      "excluded_arms": 1,
+      "matching_code_lines": 8,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/profile.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "status": "pass",
+      "current_sha256": "1c465622c09e1072dc1ab8f49edd366afbfc0419fd376ad7ea4bb19ebc68bcd8",
+      "original_sha256": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+      "excluded_arms": 14,
+      "matching_code_lines": 127,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "status": "pass",
+      "current_sha256": "c4824481efbd33a6db998ca8e96928820136c86daa0fa4e7b543feb4b7776ff5",
+      "original_sha256": "234d4fdac97c117a01ee642242dbab691e6809d0a3d25e63df4604d5fbbd955f",
+      "excluded_arms": 1,
+      "matching_code_lines": 2,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "status": "pass",
+      "current_sha256": "300702c4444d999a399614467b0b19f07f9be9e3553cc03cada6affdae353ab9",
+      "original_sha256": "396c621a6c6abf135fdec730a0be91c8bc5582de51687ed006ca5df97d354dc5",
+      "excluded_arms": 1,
+      "matching_code_lines": 2,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_test.c",
+      "status": "pass",
+      "current_sha256": "ad0a3b57e944e56546161145b89d1608d1f77070e8813188678f41ca18d75f93",
+      "original_sha256": "cfba520508d5e274ac23d471af6656b7bc41af1a8b0606b3b7020570ab2e2210",
+      "excluded_arms": 2,
+      "matching_code_lines": 4,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/base_def.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cga.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cntlbop.h",
+      "status": "pass",
+      "current_sha256": "6c87e963d683f71bcdd8869a2324a158a94c3c05992d14b726af019ce6559ded",
+      "original_sha256": "b14316fbd29fee3d582cd88c0b869e46ea01c41964fc1a4bfca87742db2a09cb",
+      "excluded_arms": 3,
+      "matching_code_lines": 17,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/config.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu4.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/debug.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dma.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dsktrace.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egagraph.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egaports.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egaread.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/equip.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/error.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gendrvr.h",
+      "status": "pass",
+      "current_sha256": "0b2dc7885e54f445f4950e324f9b51def42b0037d5c72b1c589693ca94683e2e",
+      "original_sha256": "f6750f0da3fab360f5348981440747be5dc612ce81eabec6913557f59b5f0185",
+      "excluded_arms": 2,
+      "matching_code_lines": 0,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gisp_sas.h",
+      "status": "pass",
+      "current_sha256": "8a6e9ee2a17b879c88b829f1555b32ab4444d19d548047329b95e2e97afa0a23",
+      "original_sha256": "2413fd0f1b4a4d9cb0238a4c811d088d2d0d1b0c0eaa423956400bd8256558e3",
+      "excluded_arms": 1,
+      "matching_code_lines": 0,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gispsvga.h",
+      "status": "pass",
+      "current_sha256": "5afbb02100a36baaf90731d50752fab72ac733092d84e7127688f4bbe42fce12",
+      "original_sha256": "27cf2b856a23d0fb84e1162959043377dade1414d063349acaf952cf741bf60e",
+      "excluded_arms": 1,
+      "matching_code_lines": 0,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gmi.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hfx.h",
+      "status": "pass",
+      "current_sha256": "9c66c2992f4504aacda2fbdd19e31a943a96974d81f37fecf804217b26eac2ca",
+      "original_sha256": "88f2ba15861dbb20e502b88b650c37aa3f5a569368665105b24c11e89b6bb758",
+      "excluded_arms": 1,
+      "matching_code_lines": 0,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_com.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_lpt.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_nls.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_sas.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hunter.h",
+      "status": "pass",
+      "current_sha256": "3ffb9e2b20d8632ef6c57787f9e99ddba1a9b33505e344f9ec1b2b9908001b64",
+      "original_sha256": "92958f20ad0e03e8423eb190f0793813e02a752b1820e94aff01049573475edf",
+      "excluded_arms": 1,
+      "matching_code_lines": 0,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/idetect.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/keyba.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/lock.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/mouse_io.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ppi.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/printer.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/profile.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/quick_ev.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/rs232.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/suplib.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timer.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timeval.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/trace.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/vgaports.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/xt.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/yoda.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "status": "pass",
+      "current_sha256": "c82031be6b27b472780c58209a474e589387d52e243b78e62a8f14c0e2780232",
+      "original_sha256": "2d196d9f0c1ef860436d8eb47c01820913a1164dd1b32e3bd518226653476785",
+      "excluded_arms": 19,
+      "matching_code_lines": 158,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/cmosnt.c",
+      "status": "pass",
+      "current_sha256": "3e94187916877a0ad20baebcd63cdc089034b0b047e3ac97263f4b9a26f39a80",
+      "original_sha256": "00156a734520b5d59442bf9d6127f4e722a7a697f9be33f34feecf4aef06d850",
+      "excluded_arms": 2,
+      "matching_code_lines": 783,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/dummy_nt.c",
+      "status": "pass",
+      "current_sha256": "0b3bed6358f116366f2a0f25b76f2a53b3d7fe6053142c0f4f52b10300512a1e",
+      "original_sha256": "ce1b03e11f45eb795dfbfdde1e3ac4ebc2022d77dfa5f4dd30453ba6eebdb233",
+      "excluded_arms": 2,
+      "matching_code_lines": 6,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timestrb.c",
+      "status": "pass",
+      "current_sha256": "8d3472bba03117e0378be943bdcaaf32403e418e828bc59737c43eb1608d1f39",
+      "original_sha256": "e314b1b5e88474ac9d1c978b3db71820fee667f7de3eff23b66e48bf0d3532e7",
+      "excluded_arms": 6,
+      "matching_code_lines": 33,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/unexp_nt.c",
+      "status": "pass",
+      "current_sha256": "e5ad6ab2ba6b642c9e1648f2533c0ca06d9fbdbae07db0f299dd4087dd956ecd",
+      "original_sha256": "a96ba5effe9b1cec5d78545f9656486a8e7b692e829c1c06634653bb8c905f0e",
+      "excluded_arms": 2,
+      "matching_code_lines": 44,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_dmmy.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_mode.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_trcr.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_ports.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_vide.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video_io.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/error.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_hfx.h",
+      "status": "pass",
+      "current_sha256": "34e8910a1605eb0acc5e9e2a598146b5aa825be46bdaea44c849734d5746de08",
+      "original_sha256": "48a9b2bf6c4439301182aa118fe42afb8aafaa20146b2597021af162f2465f85",
+      "excluded_arms": 2,
+      "matching_code_lines": 0,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_inc.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_rrr.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/insignia.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_eoi.h",
+      "status": "review",
+      "reason": "matching code line positions differ: [(24, 23, 24, 23, 'VOID ica_RestartInterrupts(ULONG IrqLine);'), (25, 24, 25, 24, 'BOOL ica_restart_interrupts(int adapter);')]"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_event.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_fulsc.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_graph.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_inthk.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_pif.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_reset.h",
+      "status": "pass",
+      "current_sha256": "acdf0c2329ec0b2f63387ead6c988d459765b34a23212570294565b2ee394ef4",
+      "original_sha256": "91e93365fc76a16fea422918dc0bfb32499f27cd9c84998268a9368eb367c7f3",
+      "excluded_arms": 1,
+      "matching_code_lines": 8,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/sim32.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/cpucstbs.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/fprt.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ega.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_hosts.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(108, 114, 114, 120, '    if(!SetConsoleMode(sc.InputHandle,mode))'), (109, 115, 115, 121, '\\tDisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);')]"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_input.c",
+      "status": "pass",
+      "current_sha256": "e5116de0bc34641a431956bbb3dfaf06b7d5ba21ea8675715af0a425be639e23",
+      "original_sha256": "9f54d1ed5c7074ba753b31daf28a42231598107e9a779381e94b91a25218e8f7",
+      "excluded_arms": 1,
+      "matching_code_lines": 74,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_lpt.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(35, 45, 35, 45, '#define TEXT_MODE          1'), (36, 46, 36, 46, '#define GRAPHICS_MODE      2')]"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_nls.c",
+      "status": "pass",
+      "current_sha256": "e0147d7a5ac0c5863a24ea061c35c7b74a489d6a906320e1c4b4bbd3f10b42ea",
+      "original_sha256": "6cef4fc4adf6ce81f42cfa4ebfa9c1edb153a3ce651a69321f5b5022a9b6fa06",
+      "excluded_arms": 2,
+      "matching_code_lines": 71,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
+      "status": "pass",
+      "current_sha256": "14a734378272bf6cf08aafe072a427bf63cdde2eb7face818509ad07cfe6adf8",
+      "original_sha256": "c2beca20761b59db5f8aede5f80e48d15ffd05cc0c81d1e0e5e017041ae01e63",
+      "excluded_arms": 10,
+      "matching_code_lines": 319,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rez.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sas.c",
+      "status": "pass",
+      "current_sha256": "7a136999330a3fa6c10311bcd6c08f3701585a67bc8925c1510c20ab583b2d7c",
+      "original_sha256": "077663754025071c48ec5f0bfebbcf07e1a6bcc240153b40545ef6f3c59c8344",
+      "excluded_arms": 3,
+      "matching_code_lines": 9,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sec.c",
+      "status": "pass",
+      "current_sha256": "c07036b22cbd67a0aa6d65a9f81a235df5d862f40d87ce6a1b3afba32132db65",
+      "original_sha256": "2ba1facf8d0c0a00c71f78dfb1fc8e2d001b699e2659465044a94738b637c9bd",
+      "excluded_arms": 1,
+      "matching_code_lines": 49,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sound.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(27, 33, 27, 33, '#include \"xt.h\"'), (28, 34, 28, 34, '#include \"config.h\"')]"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_thred.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vga.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_wcom.c",
+      "status": "pass",
+      "current_sha256": "460fb69e94a9a3aa81cf2e622118f912c92694736970217c899a947b1758b4a8",
+      "original_sha256": "18c709bc88c37de4d9323101d528af0ec23a5e7e7b6942a1d2a1a9e7ded111a8",
+      "excluded_arms": 6,
+      "matching_code_lines": 230,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "status": "pass",
+      "current_sha256": "20ada4729cbe0b891d3621870d826eb7dd0819fda3b4aaf8c17baf9d37f79204",
+      "original_sha256": "2ec898da6746f0992020845bde73a30edaf7cdd5c744559501eb9cbaa000df0a",
+      "excluded_arms": 1,
+      "matching_code_lines": 5,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/x86_emm.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/suballoc/suballcp.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/suballoc/suballoc.c",
+      "status": "pass",
+      "current_sha256": "dde9cb4e50aca817922649a8d6a7816f53b1c331a0fa7ed6055be23202871b32",
+      "original_sha256": "b06496e16d551f2bbac37d896b61857c6569eda8c98fb3d26dbf574e594148e0",
+      "excluded_arms": 1,
+      "matching_code_lines": 378,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdebug.c",
+      "status": "pass",
+      "current_sha256": "a46eab9b3724ff69d9ab345ebd9e303fc4f59b028121561e956982d125ccdb80",
+      "original_sha256": "a857e79085fabc406667f849229100ee7b92cd13107ceeb37fa798aedeba42ea",
+      "excluded_arms": 1,
+      "matching_code_lines": 0,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdebug.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdisp.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc.h",
+      "status": "pass",
+      "current_sha256": "63be1f8951611150544104f986831c8d2a49844c6a064e904661f517ff9b0579",
+      "original_sha256": "85ea2d8288f4bee6162f5475bbae5c40f4470d8521b4360f4a77a130a14df8a8",
+      "excluded_arms": 1,
+      "matching_code_lines": 500,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "status": "pass",
+      "current_sha256": "0af68a587ff958e76ab5e0ae139c6e233aca39dfedbfeffcc1fd7ae35a6600da",
+      "original_sha256": "90e6dc8f5625c371c8c14a2a111c3403d0f4b24597eacce8549049138f5721a6",
+      "excluded_arms": 7,
+      "matching_code_lines": 463,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcdbg.c",
+      "status": "pass",
+      "current_sha256": "8514683f311603f398605e339e642b592b24e31d60a457e57d4b2fe88d8a907f",
+      "original_sha256": "98e30a6019415eed62efa2aed0d921d4f8b7f4fe5da150e664c925d9e61504c2",
+      "excluded_arms": 1,
+      "matching_code_lines": 0,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcdbg.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdll.c",
+      "status": "pass",
+      "current_sha256": "146606d30cf36eae71ee91d194e250b8f3a78ddf3a6b7f81ae87dcde225f9a59",
+      "original_sha256": "234946e3dc0bda5851de48f05ddb2dc921f76f7c717772cb2f69d4eab5d8ec10",
+      "excluded_arms": 3,
+      "matching_code_lines": 29,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrinit.c",
+      "status": "pass",
+      "current_sha256": "a2e4878558786715e56bda92357c5e1db94cef2949c1b0879bed44f1e7807866",
+      "original_sha256": "088ecff80459ed358ebf4f7dd291821748475a8fbdccaf27a1ee1df2b6648273",
+      "excluded_arms": 1,
+      "matching_code_lines": 289,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmisc.c",
+      "status": "pass",
+      "current_sha256": "e5e3e14c680375918a790dc39f2a42ebcc3a3a1c85170629f1fd46607b9098c1",
+      "original_sha256": "1af57aba3be6a1425eb18187a73c579f56619a2593bce3b2c20be8cf67216b6d",
+      "excluded_arms": 2,
+      "matching_code_lines": 27,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "status": "review",
+      "reason": "continuation line not explicit"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetb.c",
+      "status": "pass",
+      "current_sha256": "5fff5e79500fd5dd734a91ec1f1342c625f50244ce9a8fc0533dd58a45649b6a",
+      "original_sha256": "1de0507a7a4649253b63fc4a42da9c54a9670c8a2883bbe3b19b27f132e94157",
+      "excluded_arms": 4,
+      "matching_code_lines": 223,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrputil.c",
+      "status": "pass",
+      "current_sha256": "ca92d822cc6626218ae76b957dac963711e9895c36072781a4c691e53c0b91a8",
+      "original_sha256": "1440cd1379dee1bbe65b0a1e6f6a637a3de48765da85cfd94153e8876a66fe16",
+      "excluded_arms": 1,
+      "matching_code_lines": 88,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(355, 356, 355, 356, '    remapi_err_flag = 0;'), (361, 362, 361, 362, '    rcv_dl_flag     = FALSE;')]"
+    },
+    {
+      "path": "src/mvdm-host/wow32/fastwow.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/mapembed.c",
+      "status": "pass",
+      "current_sha256": "21e5b1811d8be25289c87c4934edcb6738315049dae15a974daa6a6a8f0a8381",
+      "original_sha256": "55c13643489f5bcc9419ce0341accb284f946d8d75352527a3b9181dfeb4a385",
+      "excluded_arms": 1,
+      "matching_code_lines": 247,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/precomp.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/waccel.c",
+      "status": "pass",
+      "current_sha256": "b3677ef2ad59ae352ff4cb9fcbc8ef0cf0daa35933773274803c0983ab9d312e",
+      "original_sha256": "c78dd24195e1a7d28dc3a9ee535b4104e9859f98ea8869f8f5591bc9c159a8e8",
+      "excluded_arms": 3,
+      "matching_code_lines": 225,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/walias.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/walias.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcommdlg.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdib.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdos.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(17, 18, 17, 18, 'extern DOSWOWDATA DosWowData;'), (18, 19, 18, 19, 'extern PWORD16 pCurTDB, pCurDirOwner;')]"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgdi.c",
+      "status": "pass",
+      "current_sha256": "dee0a0ecf5f73c013dc97d2cbaf12b85a56257038d3ce98e4a31ac11363bfa75",
+      "original_sha256": "4c28e5166b294ac2a17982b3ff6e6559f369b8a8a2dd766aa18e16c8f74379d6",
+      "excluded_arms": 4,
+      "matching_code_lines": 3034,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgdi31.c",
+      "status": "pass",
+      "current_sha256": "10f6dd949339834b89e9347e50be30e6edfa78fae1d97624c3ffd5c5e794b931",
+      "original_sha256": "38d1d570fd1625affdf99eb1ce072e78b26a532abfd5fc9dd32c10b2c46d06e6",
+      "excluded_arms": 1,
+      "matching_code_lines": 724,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgmeta.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgprnset.c",
+      "status": "pass",
+      "current_sha256": "ce61c0d318227aa3cc0d9cf453ac5cd88f8b49c7e7caff8eac7508f753113b86",
+      "original_sha256": "7e53074328ace93ae8ce39fb218fa780ff868999b40f7904fdbbff45fbd7b990",
+      "excluded_arms": 1,
+      "matching_code_lines": 346,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgtbl.h",
+      "status": "pass",
+      "current_sha256": "d848bc3fe0048aed0b4136512addd0f35b60322d2b63d7670dadee2b108eb7e9",
+      "original_sha256": "43cc4724b0e6040c0ed6cdf12c4478c40a1e0bcd3b74bf6b32d91b9f77df71a1",
+      "excluded_arms": 1,
+      "matching_code_lines": 1,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wheap.c",
+      "status": "pass",
+      "current_sha256": "087f929d0cbaa781849d4021ca6d9ed5afa5c0711b85b1c162102252108806cd",
+      "original_sha256": "be3af89da01d5a6f296a47b7e505e2d6598b4c4e1a5cb35e76dab3ac839848de",
+      "excluded_arms": 1,
+      "matching_code_lines": 18,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkbtbl.h",
+      "status": "pass",
+      "current_sha256": "87fc3f1fdb63425861abbeea075a5cec5872b16bf023062a76678543262dabd6",
+      "original_sha256": "416aa19bd74bfdf5b5b4bb7ae849fee56e9ecc378f47eea9f70ed252d8db8cc6",
+      "excluded_arms": 1,
+      "matching_code_lines": 1,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(20, 35, 20, 35, 'ULONG FASTCALL WK32RegOpenKey32(PVDMFRAME pFrame)'), (21, 36, 21, 36, '{')]"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkfileio.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(17, 19, 17, 19, '#pragma hdrstop'), (18, 20, 18, 20, '#include \"dossvc.h\"')]"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkgthunk.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkmem.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkmem.h",
+      "status": "pass",
+      "current_sha256": "b5dfa8bba416e5be06599b09e21e4be922ffe00666b9e678ce298a719c7648d2",
+      "original_sha256": "313bd585b854ddfa21d8029814d78a5560aef3564179cef82e5819fbf64da524",
+      "excluded_arms": 1,
+      "matching_code_lines": 3,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wktbl.h",
+      "status": "pass",
+      "current_sha256": "292cbefc0c53e70039554d69d2b4ede507cc2c43e65f5cbd93e89537d1e11c0a",
+      "original_sha256": "054dc8c4703bde7388d9131dd84c9d3d64913d42a4f251eb89088587a0c2347f",
+      "excluded_arms": 1,
+      "matching_code_lines": 1,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.h",
+      "status": "pass",
+      "current_sha256": "7b9696ef8c12eaf2b917d6fd4c187426bdd7fdc258d77acf47f4984351ad42ac",
+      "original_sha256": "48bcee7abcca92bafd6dcea4bcfd9437bae10c170bb9bfee4db587e00e134cc0",
+      "excluded_arms": 1,
+      "matching_code_lines": 42,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmedia.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmedia1.c",
+      "status": "pass",
+      "current_sha256": "5f05fbe4943789d44b22c05f49f85cd4ca55fbbb340a6226adcc8d2e9a8795c5",
+      "original_sha256": "74b1872bf1afff7a59721564f52b33c4fd74d9d7e329ccdbff33f6bd612778d2",
+      "excluded_arms": 1,
+      "matching_code_lines": 4,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmedia2.c",
+      "status": "pass",
+      "current_sha256": "077191aa635f549fea29d453a9bf83a2bf6a0cf9b336a5d90ea72456f7193b82",
+      "original_sha256": "4a2a6e5e6c6e7172cb3fea4bb9035a18c7c5a292618b9eb507b71ae9f7d76856",
+      "excluded_arms": 1,
+      "matching_code_lines": 4,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmstru1.c",
+      "status": "pass",
+      "current_sha256": "d97da12dff4e5c770a140ac68ceb000c8ea4bc14c201010a517c403e098cf525",
+      "original_sha256": "8480eec46ce4371647743d176d19709a9902a749a84452a5743f1a72ab675be9",
+      "excluded_arms": 1,
+      "matching_code_lines": 3,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmstru2.c",
+      "status": "pass",
+      "current_sha256": "65e3db557ec21b82111532a0fa239c3802e03d53eefef2acf5ada8b82fdc7dc6",
+      "original_sha256": "f96ae87c3f0290b72c838b174b8efbe82bd727290451ba99650ecc85bf738632",
+      "excluded_arms": 1,
+      "matching_code_lines": 3,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmstruc.c",
+      "status": "pass",
+      "current_sha256": "992629a1e93a0b558b1b5d052b855f96f56367ff138ac40494153ab977881221",
+      "original_sha256": "af5f3e85909f195c283d4c2d275b07b995e44e448e0decb2ee6fb06764fa1cc4",
+      "excluded_arms": 1,
+      "matching_code_lines": 2,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmstruc.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmtbl.h",
+      "status": "pass",
+      "current_sha256": "dd57825df62f5ff0a0280ec10cacbbed4cf4645cd15f2086d65ab36ef3467f07",
+      "original_sha256": "c35252b376c0f6132df8439f19ef66c780a2cf3bb39720b62c0d1d8b6f2069e4",
+      "excluded_arms": 1,
+      "matching_code_lines": 1,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsg16.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsg16.h",
+      "status": "pass",
+      "current_sha256": "fea2358d3826640f1edfb17f24f3bbf39df713fbd0fe3208f03c184896a81b09",
+      "original_sha256": "a4322e35e9eaf992598c9de133074fb5d69e649d9729e37565c90156c55f6f98",
+      "excluded_arms": 2,
+      "matching_code_lines": 18,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgbm.c",
+      "status": "pass",
+      "current_sha256": "52fd5d7707b47d7d9ad99343c65f167d70e4fd15b0701a659ecbdf223d353356",
+      "original_sha256": "d7ef837d592221481c988ccb2e164faff9d7a0b6349b59e1bbc3841323a98692",
+      "excluded_arms": 1,
+      "matching_code_lines": 21,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgbm.h",
+      "status": "pass",
+      "current_sha256": "335941f4ec8178aec2a738672a583a9ce90a2bb6473912bcd138dfb9a99f70ef",
+      "original_sha256": "3cc1b146978c625e2850ef427128a7bc84acb5205b4c6901d6310845bf04a6b2",
+      "excluded_arms": 1,
+      "matching_code_lines": 4,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgcb.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(18, 19, 18, 19, 'MODNAME(wmsgcb.c);'), (95, 98, 137, 139, '                GETPSZPTR(lpmpex->Parm16.WndProc.lParam, (LPSZ)lpmpex->lParam);')]"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgem.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(88, 90, 138, 140, '                    RtlCopyMemory ((PSZ)lpmpex->lParam, psz, i);'), (89, 91, 139, 141, '                }')]"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsglb.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(105, 107, 158, 160, '            break;'), (107, 109, 160, 162, '        case LB_SETSEL:')]"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgsbm.c",
+      "status": "pass",
+      "current_sha256": "7932d60818f79517f1de608ba021dd4d6d2aa2c9d1ef748ca30a7cf972b402af",
+      "original_sha256": "cf1ea646693339e8c2b03875dad6c7b4a92576fc80f330407e60231e2689b18e",
+      "excluded_arms": 1,
+      "matching_code_lines": 38,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmtbl32.c",
+      "status": "pass",
+      "current_sha256": "64c6a20a35d69b9b26b04f72b1174c8440cb41d3ced37d5419e057a5dab454b6",
+      "original_sha256": "8fb4f02963ceb0772e69749d703868273f942978fa6baf162e039065dd957bd6",
+      "excluded_arms": 1,
+      "matching_code_lines": 1029,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmtbl32.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wole2.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32fax.c",
+      "status": "pass",
+      "current_sha256": "289bc523ff8074bcf77d29b5404a706024ecfca81fdcdaf43f0673e98aac3a4a",
+      "original_sha256": "855ac6c5d6d6ca97cc78802994784e8612e5eb6197533790466664bf0e892700",
+      "excluded_arms": 2,
+      "matching_code_lines": 711,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowhooks.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(13, 15, 13, 15, '#pragma hdrstop'), (15, 17, 15, 17, 'MODNAME(wowhooks.c);')]"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowtbl.c",
+      "status": "pass",
+      "current_sha256": "0fedfaf8c7ca77b7e8781717046ea211fc805627dc45bdc8c5f2c7acf524e2db",
+      "original_sha256": "4c053570af6e72b0159d0e1bc7c5e9859ef89d513781bbcd1e767ddaf7695960",
+      "excluded_arms": 4,
+      "matching_code_lines": 54,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowtbl.h",
+      "status": "pass",
+      "current_sha256": "6f0847322a1151fdce4f7dbc9aee24d4130358804259d9b10804ef96bb1c01c3",
+      "original_sha256": "343409d8adc9c2f013fbc3c44c2c1f611556321832c95037ef7f90f7e439fe01",
+      "excluded_arms": 1,
+      "matching_code_lines": 19,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.h",
+      "status": "pass",
+      "current_sha256": "b667bafe7e4af4c42cd0d9d4113d1836f4c0bf7b0bf18bb930868d504750979c",
+      "original_sha256": "3861f621ac54295bc90b357a66a6d36ecba10878c4a1b5fcd49d37f95ae8351f",
+      "excluded_arms": 1,
+      "matching_code_lines": 28,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wres16.c",
+      "status": "pass",
+      "current_sha256": "822f6a9f232eadee4a6f8d3b12a3bc49f43e5c85d85c2574a328ec97f5ad1f9f",
+      "original_sha256": "24324d4b95b7c5ac102e9751872af1db779efc0cff223b32aa066034cb874ae9",
+      "excluded_arms": 1,
+      "matching_code_lines": 379,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wshltbl.h",
+      "status": "pass",
+      "current_sha256": "9c59d43c215d182bcf9edbeebe4f963db44d9d63c43464f25a6e4faf1a365247",
+      "original_sha256": "8f3479c3135087e2b4c12d7c4d32750e8a78024e15e6b453ca09b5081eac6f5d",
+      "excluded_arms": 1,
+      "matching_code_lines": 1,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsocktbl.h",
+      "status": "pass",
+      "current_sha256": "128f2f07c612caf322e7134a77d3f6f6a889e819d664f014f0ffd91511100c9a",
+      "original_sha256": "a16351b3392f882b17a406688cd03b27e3c9e58a358c14a75af925c2ee0923dc",
+      "excluded_arms": 1,
+      "matching_code_lines": 48,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wspool.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wstbl.h",
+      "status": "pass",
+      "current_sha256": "8b83f7ee7f034df24996a7bc16874d5371b4186b07daf4daae8e6bac129cc136",
+      "original_sha256": "e05abe8a2fb397e299aba997e1928c3f74e00eecb23277b4c1c60f66480d439a",
+      "excluded_arms": 1,
+      "matching_code_lines": 1,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wstruc.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wstruc.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsubcls.c",
+      "status": "pass",
+      "current_sha256": "e75b7cae0844a4503d1bf281e14393b9552ae495ef069f6c86366f59baa38c2b",
+      "original_sha256": "b37021cb2a0480f3aca685efb8006b32d31b0fe073b6b3fc9b99f05764679e4b",
+      "excluded_arms": 2,
+      "matching_code_lines": 142,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wthtbl.h",
+      "status": "pass",
+      "current_sha256": "aeb4b3a9af904b6591f8df1955bad4d42dc6b0f4234e6cc5fcde8c541b1dae6a",
+      "original_sha256": "8423dfbab62c8ee94f069502f829317c153ae371702f851b94da12f6a18a4b89",
+      "excluded_arms": 1,
+      "matching_code_lines": 1,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclip.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(17, 18, 17, 18, '#pragma hdrstop'), (19, 20, 19, 20, 'struct _CBFORMATS  ClipboardFormats;')]"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wucomm.c",
+      "status": "pass",
+      "current_sha256": "db0b755c83fccedc8a5c935e72ba12569d723df99f05986ed171e5dffe4214f2",
+      "original_sha256": "c9c8b11d65ac3f2b1ee9216a8102ef56908bff5c5bf4ed2dd2badc30ca8a4284",
+      "excluded_arms": 2,
+      "matching_code_lines": 1532,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wucomm.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wudlg.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(16, 18, 16, 18, '#pragma hdrstop'), (18, 20, 18, 20, 'MODNAME(wudlg.c);')]"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuman.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(16, 17, 16, 17, '#pragma hdrstop'), (18, 19, 18, 19, 'MODNAME(wuman.c);')]"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser31.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wusercli.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wusercli.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wutbl.h",
+      "status": "pass",
+      "current_sha256": "cf01d59ab4dd25a74d67d00522ea859e5fa80fa575921671f9845c8e1da656d3",
+      "original_sha256": "22d88170a6047c25a31a5165d1fa079e0d6bf4ecf94f123b2544ee95bdb644f2",
+      "excluded_arms": 1,
+      "matching_code_lines": 1,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsa20.c",
+      "status": "pass",
+      "current_sha256": "7ab0eb6d96560ccf4a7b8b5999d7f35fc301c923df2e6a7c6904dc5b74f6f929",
+      "original_sha256": "7261b7064a089b655b8d41d3e4ef6887be869af2b7b62970389aeee9a8acc94b",
+      "excluded_arms": 2,
+      "matching_code_lines": 36,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsdisp.c",
+      "status": "pass",
+      "current_sha256": "f44b2c9cc2b4730f385e75694e83f0106a69cf399eac010da406fb0273d2212d",
+      "original_sha256": "24b0fa2fe32bd7a94606d424a10b0961a9911190cb2684456af04034e04bff01",
+      "excluded_arms": 1,
+      "matching_code_lines": 24,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsmemr.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/ex/probe.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/environ.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(23, 24, 23, 24, '#include <nturtl.h>'), (24, 25, 24, 25, '#include <string.h>')]"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.c",
+      "status": "pass",
+      "current_sha256": "1bbed0c19ef908b0e2a3145f8b47e8936597d39e06ed9282bd0058499d75f439",
+      "original_sha256": "88bf09ab98778e0ca58d9d232d3b7aba6115223f43eddf981f6e06b786e77e48",
+      "excluded_arms": 3,
+      "matching_code_lines": 58,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/time.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/inc/base.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/basesrv.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(35, 40, 35, 40, 'LUID WowAuthId={0xFFFFFFFF,-1};'), (40, 45, 40, 45, 'BOOL fIsFirstVDM = TRUE;')]"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+      "status": "pass",
+      "current_sha256": "a07a7fd2127ca6068ccdc31c9c079e1a0208d703eee6d5524a9416923750ede9",
+      "original_sha256": "3db640c6cdc48e0835cc6a54c69bd12196245fba3feeb486a79e45a7c9abbf86",
+      "excluded_arms": 1,
+      "matching_code_lines": 225,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "status": "review",
+      "reason": "group count differs"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/convert.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsconst.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsdata.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsdef16.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsparm16.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsprocsp.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/private/inc/dlcio.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddbeep.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddkbd.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddser.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/align.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbgtpt.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbmacro.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbtypes.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tstr.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdmapi.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/debuglib.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netdebug.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlibnt.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rap.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rapdebug.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/timelib.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/xstypes.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/shell/inc/wowcmndg.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/winconp.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/winddi.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/dlcapi.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntcsrmsg.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/wownt32.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+      "status": "review",
+      "reason": "continuation line not explicit"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+      "status": "pass",
+      "current_sha256": "665d37b64355e9825974ab3b59a7870c7dccb1c93903b8b3a2334d42204451e1",
+      "original_sha256": "360e3c653cc70079f8f9d0db42d37f5580a82881f1ffb9b1fef954d8f1e7463d",
+      "excluded_arms": 2,
+      "matching_code_lines": 1210,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(11, 14, 11, 14, '#include \"precomp.h\"'), (22, 16, 22, 16, 'BOOL EndDialog(')]"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+      "status": "pass",
+      "current_sha256": "f0f15a39cc233b6cbfb25b891af2e858f8e68eca735a5bcedf0e7396ecd7b9eb",
+      "original_sha256": "b50e0f8f305f6456b3a952ddd63c815357136f222328c6d83dd0e76e697b5634",
+      "excluded_arms": 6,
+      "matching_code_lines": 397,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(2835, 2836, 2907, 2908, '                (DWORD)hdc, (LONG)pwndEdit, ped->fAnsi);'), (2836, 2837, 2908, 2909, '    }')]"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "status": "pass",
+      "current_sha256": "82aa1c7145f0c7857c22f06a0c8102e0141886c39647dfce7d9ff91c9e556bec",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "excluded_arms": 16,
+      "matching_code_lines": 1900,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "status": "pass",
+      "current_sha256": "39b651554ffcc5a763fe7870a7a81cba99ae3f6b6066f3812df419a76372330f",
+      "original_sha256": "5d730399ce35740c88e7d5f98f1a4c4882802a6e66a830d11b3d8e4bfad9eb1c",
+      "excluded_arms": 14,
+      "matching_code_lines": 1229,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edmlonce.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edmlrare.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edslrare.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/handles.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl2.c",
+      "status": "pass",
+      "current_sha256": "495380be7c339b629f4eb543e34765c350c75e815b7743d88deff19c02e8da48",
+      "original_sha256": "a99c9ef3b6a7a07b219ddda18ff2fb6a8a11c42f5378e5f77e10e336ad7d1744",
+      "excluded_arms": 1,
+      "matching_code_lines": 1745,
+      "complete_condition_and_selected_projection": true,
+      "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxrare.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(695, 696, 698, 699, '                plb->iTabPixelPositions = NULL;'), (696, 697, 699, 700, '        }')]"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(91, 20, 94, 20, '{'), (101, 25, 104, 25, '    UserAssert(idSection <= PMAP_LAST);')]"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/random.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(203, 8, 208, 8, 'HBRUSH xxxGetControlBrush('), (204, 9, 209, 9, '    PWND pwnd,')]"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "status": "review",
+      "reason": "retained or structural branch requires context"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/server/exports.c",
+      "status": "review",
+      "reason": "matching code line positions differ: [(102, 8, 102, 8, 'NTSTATUS'), (103, 9, 103, 9, '_UserTestTokenForInteractive(')]"
+    }
+  ],
+  "complete_files": 108
+}
