@@ -1,0 +1,74 @@
+{
+  "records": [
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "before_sha256": "9a369f51a4fc57196e8c758a87d10e36f051eb3439aba2d0d2ead7daee5462d6",
+      "after_sha256": "06995f4ee3203dee288d7ee867b51b10333b48f6a1e9f9799ed9a742a96aef13",
+      "original_sha256": "3f03d0dbb08e0163f2d9cf415daad0981e42e1b1855f6f48a3b59022b7374173",
+      "anchors": [
+        {
+          "text": "BOOL BaseCreateVDMEnvironment(",
+          "original_line": 3022
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "before_sha256": "36e250a159f095037fc69404d9a54d917b8bd26e4f26ba28d1f9cebc5287a4ce",
+      "after_sha256": "95eb4d2599de1333ca50c7bbcd780d58bc9c45bf5f0d0b02d591ad993643c7f1",
+      "original_sha256": "787eda33785a87ce9e71202c97b5913e2857f7106fed5bb97103049b1d5e3472",
+      "anchors": [
+        {
+          "text": "void SetWindowState(",
+          "original_line": 2826
+        },
+        {
+          "text": "void ClearWindowState(",
+          "original_line": 2834
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "before_sha256": "6509290c8c66b7cdab375d7957cb20df326e2074e0cd7de7e8942dd018a1b41e",
+      "after_sha256": "1e222b3ee36a92b1a7f5f75d8ad2af959ba80db9df407fb98c611ffdf755d077",
+      "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
+      "anchors": [
+        {
+          "text": "#include \"precomp.h\"",
+          "original_line": 13
+        },
+        {
+          "text": "DWORD GetSizeDialogTemplate(",
+          "original_line": 438
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "before_sha256": "7900b8b6f0eeb514ffcbcd1c46b878a247d0c28a74a19542b8e8bc80ae2035a1",
+      "after_sha256": "d4eead5ec6a4d2578db998685d6a0a176bc82cc907883eee11c4a8d7bdffae23",
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "anchors": [
+        {
+          "text": "BOOL _DefSetText(",
+          "original_line": 1291
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "before_sha256": "2719465cc91f9d173af90ec463d92c3f4bf47996a7aa3cba7b15d9b974506de5",
+      "after_sha256": "9a7dc6cc1c0e13dad1d754e46cc58a9d77a9742e06e65b8c58f31ffafe7500e0",
+      "original_sha256": "7491e5b3331de8cb7a2189b8efbe91f56076f80a08338bf816d793e80a4faf76",
+      "anchors": [
+        {
+          "text": "VOID DrawPushButton(",
+          "original_line": 1004
+        }
+      ]
+    }
+  ],
+  "scope": "Only #line directives; original physical positions checked. Other branch and line paths remain under review; batch build passed.",
+  "batch_verification": "Cached x86 root, NTVDM, WOW32 and x64 builds passed; ten images published and verified; eight byte-identical and two PE timestamp-only. See s13-r1406-build-image-compare.json. No runtime retest per owner instruction."
+}

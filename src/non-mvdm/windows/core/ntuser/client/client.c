@@ -79,6 +79,7 @@ WORD WowGetDefWindowProcBits(
 #define WOW_ORIGINAL_CONTROL_STATE_CALLS
 #include "wow_edit_call_bindings.h"
 
+#line 2826
 void SetWindowState(
     PWND pwnd,
     UINT flags)
@@ -87,6 +88,7 @@ void SetWindowState(
         NtUserCallHwndParam(HWq(pwnd), flags, SFI_SETWINDOWSTATE);
 }
 
+#line 2834
 void ClearWindowState(
     PWND pwnd,
     UINT flags)

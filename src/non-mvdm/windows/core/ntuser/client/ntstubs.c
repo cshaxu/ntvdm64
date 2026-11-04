@@ -3,6 +3,7 @@
 #include "precomp.h"
 #include "../inc/ntsend.h"
 
+#line 1291
 BOOL _DefSetText(
     HWND hwnd,
     LPCWSTR lpszText,

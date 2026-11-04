@@ -16,6 +16,7 @@
  * and modal entry as an isolated source selection. The complete dialog
  * producer/manager supplies the private precomp environment; no alternate
  * parser or native-modal fallback is introduced. Not yet product-selected. */
+#line 13
 #include "precomp.h"
 
 PBYTE SkipIDorString(
@@ -29,6 +30,7 @@ PBYTE SkipIDorString(
     return pb;
 }
 
+#line 438
 DWORD GetSizeDialogTemplate(
     HINSTANCE      hmod,
     LPCDLGTEMPLATE pdt)

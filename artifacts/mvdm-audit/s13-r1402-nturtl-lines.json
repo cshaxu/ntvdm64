@@ -1,0 +1,15 @@
+{
+  "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+  "before_sha256": "02dfdb43c3d3db9380546a98fcf07d916059c0f4e001b5fe3c06cce19e811c03",
+  "after_sha256": "9db2ed0cd6cb791cd9d53b9eff623b3d02a7010ccd858c7ab7aa7cdc07f142ef",
+  "original_sha256": "c6b7844e2e1248ac38ee90dd8173f95ab0f7997d7a7cfbafda851cc07cc80921",
+  "line_anchors": {
+    "include_guard": 28,
+    "RtlIsDosDeviceName_U": 257,
+    "RtlDosPathNameToNtPathName_U": 294,
+    "endif": 1103
+  },
+  "proof": "Only #line directives added; removing them produces byte-identical pre-edit file. Original LF byte positions checked directly. The guard remains the only original conditional.",
+  "limits": "Existing OPENNT-HOST-007 declarations are compressed local subset and differ in type spelling. These anchors identify original function-name lines, not every original token position. Batch build and comparison passed.",
+  "batch_verification": "Cached x86 root, NTVDM, WOW32 and x64 builds passed; ten images published and verified; eight byte-identical and two PE timestamp-only. See s13-r1406-build-image-compare.json. No runtime retest per owner instruction."
+}

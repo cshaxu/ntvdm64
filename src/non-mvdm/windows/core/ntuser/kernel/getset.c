@@ -13,9 +13,11 @@
 
 /* DIVERGENCE(OPENNT-HOST-086): complete xxxSetWindowLong only.
  * Retained local WND/control state; no USER server runtime import. */
+#line 14
 #include "precomp.h"
 #pragma hdrstop
 
+#line 256
 DWORD xxxSetWindowLong(
     PWND  pwnd,
     int   index,

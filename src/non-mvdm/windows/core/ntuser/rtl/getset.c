@@ -17,8 +17,10 @@
 #include "precomp.h"
 #pragma hdrstop
 
+#line 15
 DWORD GetWindowData(PWND, int, BOOL);
 
+#line 28
 DWORD _GetWindowLong(
     PWND pwnd,
     int index,

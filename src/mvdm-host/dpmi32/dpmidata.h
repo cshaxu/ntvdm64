@@ -44,6 +44,7 @@ Revision History:
 #define switch_to_protected_mode        DpmiIllegalFunction
 #endif
 #if !defined(CPU_40_STYLE)
+#line 47
 #define DpmiSetDebugRegisters           DpmiIllegalFunction
 #endif /* MVDM-HOST-DIV-281: CPU40 binds the original debug-register BOP. */
 
@@ -231,6 +232,7 @@ DpmiCpu40SwitchToProtectedMode(
     VOID
     );
 
+#line 242
 VOID
 DpmiSwitchToRealMode(
     VOID

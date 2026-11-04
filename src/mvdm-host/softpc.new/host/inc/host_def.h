@@ -40,14 +40,17 @@
 
 #ifdef MONITOR
 #if defined(CPU_40_STYLE) /* DIVERGENCE(MVDM-HOST-DIV-551) */
+#line 40
 #define CpuH "cpu4.h"
 #else
 #line 40
 #error Excluded non-CPU40 MONITOR CPU interface
 #endif
 #else
+#line 42
 #define CpuH "cpu4.h"
 #endif
+#line 44
 
 // reduce unused param warnings.
 #define UNREFERENCED_FORMAL_PARAMETER(x)   (x)
@@ -105,6 +108,7 @@ extern	quick_event_delays	host_delays;
  */
 extern void host_simulate(void);
 
+#line 91
 #ifndef EGATEST
 #ifndef MONITOR
 #define BIGWIN

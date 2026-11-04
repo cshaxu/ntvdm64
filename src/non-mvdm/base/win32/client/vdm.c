@@ -35,6 +35,7 @@ static VOID BaseSetLastNTError(NTSTATUS Status)
 #if (!defined(OPENNT_BASE_CLIENT_VDM_COMMANDS) && !defined(OPENNT_BASE_CLIENT_CLASSIFIER)) || defined(OPENNT_BASE_CLIENT_VDM_ENVIRONMENT)
 UINT BaseGetEnvNameType_U(WCHAR *Name, DWORD NameLength);
 
+#line 3022
 BOOL BaseCreateVDMEnvironment(
     PWCHAR lpEnvironment,
     ANSI_STRING * pAStringEnv,

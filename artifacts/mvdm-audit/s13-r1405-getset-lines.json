@@ -1,0 +1,36 @@
+{
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "before_sha256": "e1db390362e665fe9091c9a57c6cb8d532061460e1abeb401b8b844143d5123d",
+      "after_sha256": "e9fcb40a2e0fb80668b331c46abbd3f323deaab2f3fca85cd2d520df1e914754",
+      "anchors": [
+        {
+          "text": "#include \"precomp.h\"",
+          "original_line": 14
+        },
+        {
+          "text": "DWORD xxxSetWindowLong(",
+          "original_line": 256
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "before_sha256": "ce6287365d6d44fb89cbcafe728c5d8af5d97a99fed52a0fbd3d8b01e1f88c69",
+      "after_sha256": "2e98d74503d5f85a20c82647cea94198ba8657471d8fb66b247785a0f9eb78bc",
+      "anchors": [
+        {
+          "text": "DWORD GetWindowData(",
+          "original_line": 15
+        },
+        {
+          "text": "DWORD _GetWindowLong(",
+          "original_line": 28
+        }
+      ]
+    }
+  ],
+  "scope": "Only #line inserted. Function and declaration anchor lines checked against original; remaining paths and batch build passed.",
+  "batch_verification": "Cached x86 root, NTVDM, WOW32 and x64 builds passed; ten images published and verified; eight byte-identical and two PE timestamp-only. See s13-r1406-build-image-compare.json. No runtime retest per owner instruction."
+}

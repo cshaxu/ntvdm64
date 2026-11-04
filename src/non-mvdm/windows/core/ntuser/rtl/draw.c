@@ -8,6 +8,7 @@
 /* DIVERGENCE(OPENNT-HOST-111): additional unchanged original drawing body.
  * Select only with the complete scoped button resource environment. */
 #ifdef WOW_ORIGINAL_BUTTON_DRAWING
+#line 1004
 VOID DrawPushButton(
     HDC    hdc,
     LPRECT lprc,

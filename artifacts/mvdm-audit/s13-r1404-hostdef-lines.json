@@ -1,0 +1,14 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+  "before_sha256": "bc14d5c9b0d217b0bd0488045872156df177126dc1e67a554e2e92d4c8c1ebd5",
+  "after_sha256": "4f4d82695e316b72530d4b73288650c15e714ef79e0cc01bbe92c6ce7a902ee8",
+  "original_sha256": "480c35aa09b40d75d82fe0e1fe3e6cb0f981e573549ea2e193e8a62be4816d10",
+  "anchors": {
+    "MONITOR_CPU40_adaptation": 40,
+    "non_MONITOR_CpuH": 42,
+    "continuation": 44,
+    "EGATEST_guard": 91
+  },
+  "scope": "Only #line inserted; other contexts and full file review remain pending. Batch build passed.",
+  "batch_verification": "Cached x86 root, NTVDM, WOW32 and x64 builds passed; ten images published and verified; eight byte-identical and two PE timestamp-only. See s13-r1406-build-image-compare.json. No runtime retest per owner instruction."
+}

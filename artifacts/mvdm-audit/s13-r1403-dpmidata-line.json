@@ -1,0 +1,13 @@
+{
+  "path": "src/mvdm-host/dpmi32/dpmidata.h",
+  "before_sha256": "b280eb7dcb2fc49c9af50c0678313a10edc719e30ebcb04b0960eb52b66760b0",
+  "after_sha256": "82c2955d7bfed6b7f8638f493d99c0950f4be4a8e86d7e28b26af067ef3cc0c8",
+  "original_sha256": "f9772482513601c2e316e097a92485864557af77010e77285d725d903a0fd7b2",
+  "original_line": 47,
+  "scope": "One retained fallback macro; other line mismatches and complete file review remain pending. Only #line inserted; batch build passed.",
+  "additional_anchor": {
+    "declaration": "first DpmiSwitchToRealMode",
+    "original_line": 242
+  },
+  "batch_verification": "Cached x86 root, NTVDM, WOW32 and x64 builds passed; ten images published and verified; eight byte-identical and two PE timestamp-only. See s13-r1406-build-image-compare.json. No runtime retest per owner instruction."
+}
