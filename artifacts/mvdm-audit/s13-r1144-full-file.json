@@ -1,0 +1,89 @@
+{
+  "path": "src/non-mvdm/public/internal/base/inc/tstr.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\tstr.h",
+  "original_sha256": "dfc0a04bbeb35130d655e20521c972d43df3500efda32d7de6ddcea53be791c6",
+  "before_sha256": "75f8c09071b85f35c660d58ae4e0ba306070aef461f69aede32856a6db8f4722",
+  "after_sha256": "613cd5135d5219f2f8812717bb3b9d987dbd419647483a26e7c9058ec61893ab",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tstr.h",
+      "line": "73",
+      "directive": "ifndef",
+      "expression": "_TSTR_H_INCLUDED",
+      "chain_start": "73",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "189e823c111218594156d2e135bf338158866583d6883fcc35bc37df82b4adf8"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tstr.h",
+      "line": "81",
+      "directive": "ifdef",
+      "expression": "__cplusplus",
+      "chain_start": "81",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "189e823c111218594156d2e135bf338158866583d6883fcc35bc37df82b4adf8"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tstr.h",
+      "line": "98",
+      "directive": "ifdef",
+      "expression": "LM20_COMPATIBLE",
+      "chain_start": "98",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "189e823c111218594156d2e135bf338158866583d6883fcc35bc37df82b4adf8"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tstr.h",
+      "line": "100",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "98",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "189e823c111218594156d2e135bf338158866583d6883fcc35bc37df82b4adf8"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tstr.h",
+      "line": "105",
+      "directive": "if",
+      "expression": "defined(UNICODE)",
+      "chain_start": "105",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "189e823c111218594156d2e135bf338158866583d6883fcc35bc37df82b4adf8"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tstr.h",
+      "line": "164",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "105",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "189e823c111218594156d2e135bf338158866583d6883fcc35bc37df82b4adf8"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tstr.h",
+      "line": "295",
+      "directive": "ifdef",
+      "expression": "__cplusplus",
+      "chain_start": "295",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "189e823c111218594156d2e135bf338158866583d6883fcc35bc37df82b4adf8"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "The worker graphs are C builds and do not define LM20_COMPATIBLE; no source definition was found."
+}

@@ -1,0 +1,55 @@
+{
+  "path": "src/non-mvdm/public/internal/ds/inc/crypt.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\crypt.h",
+  "original_sha256": "0a325a131b109964594681317389ac7b7e4dce8f05f6dc553c499203f296c3ed",
+  "before_sha256": "0a325a131b109964594681317389ac7b7e4dce8f05f6dc553c499203f296c3ed",
+  "after_sha256": "0a325a131b109964594681317389ac7b7e4dce8f05f6dc553c499203f296c3ed",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/crypt.h",
+      "line": "23",
+      "directive": "ifndef",
+      "expression": "_NTCRYPT_",
+      "chain_start": "23",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "selected",
+      "sha256": "530561f4b83bba78c99f8ac6010b46660bb15831a007000bbff849f863798398"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/crypt.h",
+      "line": "26",
+      "directive": "ifndef",
+      "expression": "MIDL_PASS",
+      "chain_start": "26",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "selected",
+      "sha256": "530561f4b83bba78c99f8ac6010b46660bb15831a007000bbff849f863798398"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/crypt.h",
+      "line": "28",
+      "directive": "ifndef",
+      "expression": "RPC_NO_WINDOWS_H",
+      "chain_start": "28",
+      "depth": "3",
+      "x86": "selected",
+      "x64": "selected",
+      "sha256": "530561f4b83bba78c99f8ac6010b46660bb15831a007000bbff849f863798398"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/crypt.h",
+      "line": "590",
+      "directive": "ifndef",
+      "expression": "MIDL_PASS",
+      "chain_start": "590",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "selected",
+      "sha256": "530561f4b83bba78c99f8ac6010b46660bb15831a007000bbff849f863798398"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}

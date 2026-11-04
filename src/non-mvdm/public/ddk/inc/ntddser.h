@@ -34,12 +34,10 @@ Revision History:
 // Make sure FAR is defined...
 //
 #ifndef FAR
-#ifdef _WIN32
-#define FAR
-#else
-#define FAR _far
+#line 37
+#error Unsupported excluded original configuration
 #endif
-#endif
+#line 43
 
 // begin_wioctlguids
 DEFINE_GUID(GUID_CLASS_COMPORT,          0x86e0d1e0L, 0x8089, 0x11d0, 0x9c, 0xe4, 0x08, 0x00, 0x3e, 0x30, 0x1f, 0x73);
@@ -51,8 +49,10 @@ DEFINE_GUID(GUID_SERENUM_BUS_ENUMERATOR, 0x4D36E978L, 0xE325, 0x11CE, 0xBF, 0xC1
 #define _NTDDSER_
 
 #ifdef __cplusplus
-extern "C" {
+#line 54
+#error Unsupported excluded original configuration
 #endif
+#line 56
 
 //
 // NtDeviceIoControlFile IoControlCode values for this device.
@@ -683,8 +683,10 @@ typedef struct _SERENUM_PORT_PARAMETERS
 } SERENUM_PORT_PARAMETERS, *PSERENUM_PORT_PARAMETERS;
 
 #ifdef __cplusplus
-}
+#line 686
+#error Unsupported excluded original configuration
 #endif
+#line 688
 
 #endif  // _NTDDSER_
 

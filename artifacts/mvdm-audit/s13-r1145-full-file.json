@@ -1,0 +1,166 @@
+{
+  "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\vdm.h",
+  "original_sha256": "c614c03a004f974c1eef37f1b29d3a8e1d7cfc33d04e7e7304befcbd6faafd18",
+  "before_sha256": "eb8de32e1c921e2797350cef3e3222ad7491541f7df1560084a4051953ddc1f4",
+  "after_sha256": "1b5fd4b9250ba4639c84907e6e2d1b0bddd0cc206f42ca889cb461ba9ec26baa",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "line": "21",
+      "directive": "ifndef",
+      "expression": "_VDM_H_",
+      "chain_start": "21",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "e0e35167de38227b06e6d7384043d414295c49100e30904562dc3d945ff022de"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "line": "45",
+      "directive": "if",
+      "expression": "defined (_NTDEF_)",
+      "chain_start": "45",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "e0e35167de38227b06e6d7384043d414295c49100e30904562dc3d945ff022de"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "line": "93",
+      "directive": "if",
+      "expression": "defined(i386)",
+      "chain_start": "93",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "e0e35167de38227b06e6d7384043d414295c49100e30904562dc3d945ff022de"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "line": "97",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "93",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "e0e35167de38227b06e6d7384043d414295c49100e30904562dc3d945ff022de"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "line": "109",
+      "directive": "ifdef",
+      "expression": "_VDMNTOS_",
+      "chain_start": "109",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "e0e35167de38227b06e6d7384043d414295c49100e30904562dc3d945ff022de"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "line": "114",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "109",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "e0e35167de38227b06e6d7384043d414295c49100e30904562dc3d945ff022de"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "line": "117",
+      "directive": "if",
+      "expression": "defined(_PC98_)",
+      "chain_start": "117",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "e0e35167de38227b06e6d7384043d414295c49100e30904562dc3d945ff022de"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "line": "119",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "117",
+      "depth": "3",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "e0e35167de38227b06e6d7384043d414295c49100e30904562dc3d945ff022de"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "line": "130",
+      "directive": "if",
+      "expression": "defined (_X86_)",
+      "chain_start": "130",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "e0e35167de38227b06e6d7384043d414295c49100e30904562dc3d945ff022de"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "line": "169",
+      "directive": "if",
+      "expression": "DBG",
+      "chain_start": "169",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "e0e35167de38227b06e6d7384043d414295c49100e30904562dc3d945ff022de"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "line": "171",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "169",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "e0e35167de38227b06e6d7384043d414295c49100e30904562dc3d945ff022de"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "line": "210",
+      "directive": "if",
+      "expression": "0",
+      "chain_start": "210",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "e0e35167de38227b06e6d7384043d414295c49100e30904562dc3d945ff022de"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "line": "287",
+      "directive": "if",
+      "expression": "defined(_X86_)",
+      "chain_start": "287",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "e0e35167de38227b06e6d7384043d414295c49100e30904562dc3d945ff022de"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "line": "313",
+      "directive": "if",
+      "expression": "defined (_NTDEF_)",
+      "chain_start": "313",
+      "depth": "3",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "e0e35167de38227b06e6d7384043d414295c49100e30904562dc3d945ff022de"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "The two x86 worker graphs and WOW32 graph have neither i386 nor _VDMNTOS_ definitions; no source definition was found."
+}

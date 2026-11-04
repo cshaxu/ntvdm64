@@ -1,0 +1,33 @@
+{
+  "path": "src/non-mvdm/public/internal/base/inc/packon.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\packon.h",
+  "original_sha256": "b6d5e46dc0e41e95265f3de79ebe371f4f77aa3882c087f7a4a95ae2f03cb1a2",
+  "before_sha256": "b6d5e46dc0e41e95265f3de79ebe371f4f77aa3882c087f7a4a95ae2f03cb1a2",
+  "after_sha256": "b6d5e46dc0e41e95265f3de79ebe371f4f77aa3882c087f7a4a95ae2f03cb1a2",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/packon.h",
+      "line": "27",
+      "directive": "if",
+      "expression": "! (defined(lint) || defined(_lint))",
+      "chain_start": "27",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "7da0a9d127623cf592a26d7e820aab131313f7a2e73183281312ac8d43690674"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/packon.h",
+      "line": "28",
+      "directive": "if",
+      "expression": "( _MSC_VER >= 800 )",
+      "chain_start": "28",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "7da0a9d127623cf592a26d7e820aab131313f7a2e73183281312ac8d43690674"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}

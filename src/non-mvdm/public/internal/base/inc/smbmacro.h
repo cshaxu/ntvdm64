@@ -91,12 +91,10 @@ Revision History:
         (byteCount) )
 
 #else
-
-#define NEXT_LOCATION(base,type,byteCount)  \
-        (PVOID)(( (ULONG)( (PUCHAR)( &((type *)(base))->Buffer[0] ) ) + \
-        (byteCount) + 3) & ~3)
-
+#line 94
+#error Unsupported excluded original configuration
 #endif
+#line 100
 
 //
 // Macro to find the offset of a followon command to an and X command.

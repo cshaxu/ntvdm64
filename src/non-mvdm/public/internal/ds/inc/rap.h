@@ -107,37 +107,10 @@ Revision History:
 #define FORMAT_LPDESC_CHAR      "%c"
 
 #else // DESC_CHAR_UNICODE is defined
-
-//
-// The descriptor strings are really ASCIIZ strings, and are not expected to
-// be translated into Unicode.  So, let's define a type for them just to
-// make this clearer.  (That'll also make it easier to change to Unicode later
-// if I'm wrong.  --JR)
-//
-
-#include <wchar.h>      // iswdigit(), wcslen().
-
-//typedef WCHAR DESC_CHAR;
-
-// DESCLEN(desc): return number of characters (not including null) in desc:
-#define DESCLEN(desc)                   wcslen(desc)
-
-// DESC_CHAR_IS_DIGIT(descchar): return nonzero iff descchar is a digit.
-#define DESC_CHAR_IS_DIGIT(descchar)    iswdigit(descchar)
-
-// DESC_DIGIT_TO_NUM(descchar): return integer value of descchar.
-#define DESC_DIGIT_TO_NUM(descchar) \
-    ( (DWORD) ( ((int)(descchar)) - ((int) L'0') ) )
-
-//
-// Format strings for NetpDbgPrint use (see NetDebug.h).  Note that
-// FORMAT_LPDESC_CHAR will go away one of these days.
-//
-#define FORMAT_DESC_CHAR        "%wc"
-#define FORMAT_LPDESC           "%ws"
-#define FORMAT_LPDESC_CHAR      "%wc"
-
+#line 110
+#error Unsupported excluded original configuration
 #endif // DESC_CHAR_UNICODE is defined
+#line 141
 
 //typedef DESC_CHAR * LPDESC;
 

@@ -91,14 +91,14 @@ typedef struct _VdmVirtualIca{
 
 
 #if defined(i386)
-#define VDM_PM_IRETBOPSEG  0x147
-#define VDM_PM_IRETBOPOFF  0x6
-#define VDM_PM_IRETBOPSIZE 8
+#line 94
+#error Unsupported excluded original configuration
 #else
 #define VDM_PM_IRETBOPSEG  0xd3
 #define VDM_PM_IRETBOPOFF  0x0
 #define VDM_PM_IRETBOPSIZE 4
 #endif
+#line 102
 
 #define VDM_RM_IRETBOPSIZE 4
 
@@ -107,18 +107,18 @@ typedef struct _VdmVirtualIca{
 // VDM state which was earlier in vdmtib->flags has been moved to
 // dos arena at following fixed address.
 #ifdef _VDMNTOS_
-
-#define  FIXED_NTVDMSTATE_LINEAR    VdmFixedStateLinear
-#define  FIXED_NTVDMSTATE_SIZE      4
-
+#line 110
+#error Unsupported excluded original configuration
 #else  // _VDMNTOS_
 
 /* XLATON */
 #if defined(_PC98_)
+#line 118
 #error DIVERGENCE OPENNT-HOST-136: _PC98_ branch is not selected; see mirror register.
 #else  // !_PC98_
 #define  FIXED_NTVDMSTATE_SEGMENT   0x70
 #endif // _PC98_
+#line 122
 
 #define  FIXED_NTVDMSTATE_OFFSET    0x14
 #define  FIXED_NTVDMSTATE_LINEAR    ((FIXED_NTVDMSTATE_SEGMENT << 4) + FIXED_NTVDMSTATE_OFFSET)
@@ -126,6 +126,7 @@ typedef struct _VdmVirtualIca{
 /* XLATOFF */
 
 #endif // _VDMNTOS_
+#line 129
 
 #if defined (_X86_)
   // defined on x86 only since on mips we must reference thru sas

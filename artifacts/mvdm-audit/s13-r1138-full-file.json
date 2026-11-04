@@ -1,0 +1,67 @@
+{
+  "path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\ddk\\inc\\ntddvdeo.h",
+  "original_sha256": "e81160b69920ee87d603fe593916994f8448a280b2a2adfefd34c190b1b3cb78",
+  "before_sha256": "081f2c7fc87660926bdbed24f0f1ba930b8b6acda3b24229a23404aa35500dab",
+  "after_sha256": "d44312ef1b0a3200051fc9fc27b3e1ded47b47eae8a6b2cff9baa126bb18f36a",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+      "line": "22",
+      "directive": "ifndef",
+      "expression": "_NTDDVDEO_",
+      "chain_start": "22",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "37a5ac7a2abe2812b8749d9633942aeb751cfcdf8763e4748e46e17876f8a450"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+      "line": "25",
+      "directive": "if",
+      "expression": "_MSC_VER > 1000",
+      "chain_start": "25",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "37a5ac7a2abe2812b8749d9633942aeb751cfcdf8763e4748e46e17876f8a450"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+      "line": "29",
+      "directive": "ifdef",
+      "expression": "__cplusplus",
+      "chain_start": "29",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "37a5ac7a2abe2812b8749d9633942aeb751cfcdf8763e4748e46e17876f8a450"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+      "line": "1518",
+      "directive": "ifndef",
+      "expression": "_WINCON_",
+      "chain_start": "1518",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "37a5ac7a2abe2812b8749d9633942aeb751cfcdf8763e4748e46e17876f8a450"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+      "line": "1681",
+      "directive": "ifdef",
+      "expression": "__cplusplus",
+      "chain_start": "1681",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "37a5ac7a2abe2812b8749d9633942aeb751cfcdf8763e4748e46e17876f8a450"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "The observed worker products are C builds; the force-included Windows headers define _WINCON_."
+}

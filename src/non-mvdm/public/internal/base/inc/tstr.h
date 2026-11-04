@@ -79,8 +79,10 @@ Revision History:
 #include <wchar.h>
 
 #ifdef __cplusplus
-extern "C" {
+#line 82
+#error Unsupported excluded original configuration
 #endif
+#line 84
 
 LPWSTR
 ultow (
@@ -96,10 +98,12 @@ wtol (
 
 
 #ifdef LM20_COMPATIBLE
-#define MAKE_STR_FUNCTION(s)    s##f
+#line 99
+#error Unsupported excluded original configuration
 #else
 #define MAKE_STR_FUNCTION(s)    s
 #endif
+#line 103
 
 
 #if defined(UNICODE)
@@ -293,7 +297,9 @@ wtol (
 #define DOWN_LEVEL_STRSIZE(n)   ((n) / sizeof(_CHAR_TYPE))
 
 #ifdef __cplusplus
-}
+#line 296
+#error Unsupported excluded original configuration
 #endif
+#line 298
 
 #endif  // _TSTR_H_INCLUDED

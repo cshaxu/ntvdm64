@@ -1,0 +1,89 @@
+{
+  "path": "src/non-mvdm/public/ddk/inc/ntddser.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\ddk\\inc\\ntddser.h",
+  "original_sha256": "707287adc6162093ebe5dd9608b6f4e528b4b94cb0e2caa0df930ecffd4d3b46",
+  "before_sha256": "c84da0afe1f3ef417cc6523d1de4092c02e011f7697f3e80824b4033173c84e4",
+  "after_sha256": "d993fbfce54cfc3cf05fff55e59ce9331499491fe04035e7d6317a4be3f67735",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddser.h",
+      "line": "32",
+      "directive": "ifdef",
+      "expression": "DEFINE_GUID",
+      "chain_start": "32",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "5205a926bf74673a56e0642febd9303eedae581dece06f009c0a0ebefde650f0"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddser.h",
+      "line": "36",
+      "directive": "ifndef",
+      "expression": "FAR",
+      "chain_start": "36",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "5205a926bf74673a56e0642febd9303eedae581dece06f009c0a0ebefde650f0"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddser.h",
+      "line": "37",
+      "directive": "ifdef",
+      "expression": "_WIN32",
+      "chain_start": "37",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "5205a926bf74673a56e0642febd9303eedae581dece06f009c0a0ebefde650f0"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddser.h",
+      "line": "39",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "37",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "5205a926bf74673a56e0642febd9303eedae581dece06f009c0a0ebefde650f0"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddser.h",
+      "line": "50",
+      "directive": "ifndef",
+      "expression": "_NTDDSER_",
+      "chain_start": "50",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "5205a926bf74673a56e0642febd9303eedae581dece06f009c0a0ebefde650f0"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddser.h",
+      "line": "53",
+      "directive": "ifdef",
+      "expression": "__cplusplus",
+      "chain_start": "53",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "5205a926bf74673a56e0642febd9303eedae581dece06f009c0a0ebefde650f0"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddser.h",
+      "line": "685",
+      "directive": "ifdef",
+      "expression": "__cplusplus",
+      "chain_start": "685",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "5205a926bf74673a56e0642febd9303eedae581dece06f009c0a0ebefde650f0"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "The observed worker products are C builds; FAR is provided by the force-included Windows headers. The excluded FAR arm subsumes its nested platform branches."
+}

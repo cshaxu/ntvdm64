@@ -1,0 +1,56 @@
+{
+  "path": "src/non-mvdm/public/internal/base/inc/align.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\align.h",
+  "original_sha256": "b2922ca133bfd608bf86f33595c1dfb2b325cb31a0e83d4bfe18f0d91795e28f",
+  "before_sha256": "21e9eeca70067169cdd56117a7874e6fdd061f4f9ab347969cba3b5b3a6574ff",
+  "after_sha256": "ab9c4ec4eb93424ca48ec557c13c66eb607a169260a0d4ca5efc1bb546e399f3",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/align.h",
+      "line": "17",
+      "directive": "ifndef",
+      "expression": "_ALIGN_",
+      "chain_start": "17",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "2bad93351b7fe722343b8835d9ea8e5996d1ea13438be24bf2cbe94889308f34"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/align.h",
+      "line": "93",
+      "directive": "if",
+      "expression": "defined(_X86_)",
+      "chain_start": "93",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "2bad93351b7fe722343b8835d9ea8e5996d1ea13438be24bf2cbe94889308f34"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/align.h",
+      "line": "97",
+      "directive": "elif",
+      "expression": "defined(_AMD64_)",
+      "chain_start": "93",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "2bad93351b7fe722343b8835d9ea8e5996d1ea13438be24bf2cbe94889308f34"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/align.h",
+      "line": "101",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "93",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "2bad93351b7fe722343b8835d9ea8e5996d1ea13438be24bf2cbe94889308f34"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "The header is used only in the observed x86 worker graphs; their commands do not select _AMD64_."
+}

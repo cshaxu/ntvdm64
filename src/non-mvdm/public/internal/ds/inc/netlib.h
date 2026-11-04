@@ -117,8 +117,10 @@ Revision History:
 
 
 #ifdef __cplusplus
-extern "C" {
+#line 120
+#error Unsupported excluded original configuration
 #endif
+#line 122
 
 // Arbitrary.  PortUAS has at least 16 args in one message.
 // This allows arg numbers 1-19 to be used.
@@ -385,10 +387,12 @@ NetpMemoryReallocate(
     }
 
 #if defined(lint) || defined(_lint)
-#define UNUSED(x)               { (x) = (x); }
+#line 394
+#error Unsupported excluded original configuration
 #else
 #define UNUSED(x)               { (void) (x); }
 #endif
+#line 398
 
 //
 // NetpGetComputerName retrieves the local computername from the local
@@ -551,7 +555,9 @@ NetpWriteEventlog(
     );
 
 #ifdef __cplusplus
-}
+#line 560
+#error Unsupported excluded original configuration
 #endif
+#line 562
 
 #endif // ndef _NETLIB_

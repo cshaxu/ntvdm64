@@ -157,8 +157,10 @@ typedef LPSTR LPDEBUG_STRING;
 #define FORMAT_LPDEBUG_STRING   "%s"
 
 #ifdef __cplusplus
-extern "C" {
+#line 157
+#error Unsupported excluded original configuration
 #endif
+#line 159
 
 
 // NetpAssert: continue if Predicate is true; otherwise print debug message
@@ -348,7 +350,9 @@ extern "C" {
     /*lint -restore */
 
 #ifdef __cplusplus
-}
+#line 671
+#error Unsupported excluded original configuration
 #endif
+#line 673
 
 #endif // ndef _NETDEBUG_

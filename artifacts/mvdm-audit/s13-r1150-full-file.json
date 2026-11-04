@@ -1,0 +1,45 @@
+{
+  "path": "src/non-mvdm/public/internal/ds/inc/netlibnt.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\netlibnt.h",
+  "original_sha256": "8545a4ebfe8156e40405fd6a22d6c49b42aaf3b6df1b6254a52b63c330e11ba8",
+  "before_sha256": "86a104daaf7af677f033568fd168230c1d3d8f31d458f44ca4f736e35752b97d",
+  "after_sha256": "d3b325d11e1deb0963efb3722c3add63a335452a227183b1187d9802692cc9c9",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlibnt.h",
+      "line": "53",
+      "directive": "ifndef",
+      "expression": "_NETLIBNT_",
+      "chain_start": "53",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "20d74f1e556db7c448589d0b0fce8b243e2c07780c3cca463092cee6034f022e"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlibnt.h",
+      "line": "56",
+      "directive": "ifdef",
+      "expression": "__cplusplus",
+      "chain_start": "56",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "20d74f1e556db7c448589d0b0fce8b243e2c07780c3cca463092cee6034f022e"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlibnt.h",
+      "line": "112",
+      "directive": "ifdef",
+      "expression": "__cplusplus",
+      "chain_start": "112",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "20d74f1e556db7c448589d0b0fce8b243e2c07780c3cca463092cee6034f022e"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "C++ linkage arms are unselected in the observed C-only worker graphs."
+}

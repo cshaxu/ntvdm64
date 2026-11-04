@@ -1,0 +1,44 @@
+{
+  "path": "src/non-mvdm/public/internal/ds/inc/debuglib.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\debuglib.h",
+  "original_sha256": "d3f73f4317c039937ba51ef439cff38a721328e5ae7c0a7bccce290e2031ac51",
+  "before_sha256": "9650c3c246f82bc14c769189cc7f59aa702c8327b28da8e17a6825b7709c8914",
+  "after_sha256": "9650c3c246f82bc14c769189cc7f59aa702c8327b28da8e17a6825b7709c8914",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/debuglib.h",
+      "line": "58",
+      "directive": "ifndef",
+      "expression": "_DEBUGLIB_",
+      "chain_start": "58",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "b0bdedfcc205b3cf72f54fc8c0c346738d74a75451eb597be7010d8b55411231"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/debuglib.h",
+      "line": "143",
+      "directive": "if",
+      "expression": "DBG",
+      "chain_start": "143",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "b0bdedfcc205b3cf72f54fc8c0c346738d74a75451eb597be7010d8b55411231"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/debuglib.h",
+      "line": "145",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "143",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "b0bdedfcc205b3cf72f54fc8c0c346738d74a75451eb597be7010d8b55411231"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}

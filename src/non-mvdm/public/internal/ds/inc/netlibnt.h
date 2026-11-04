@@ -54,8 +54,10 @@ Revision History:
 #define _NETLIBNT_
 
 #ifdef __cplusplus
-extern "C" {
+#line 57
+#error Unsupported excluded original configuration
 #endif
+#line 59
 
 NET_API_STATUS
 NetpAllocTStrFromString(
@@ -110,7 +112,9 @@ NetpRdrFsControlTree(
     );
 
 #ifdef __cplusplus
-}
+#line 113
+#error Unsupported excluded original configuration
 #endif
+#line 115
 
 #endif // ndef _NETLIBNT_

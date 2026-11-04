@@ -1,0 +1,45 @@
+{
+  "path": "src/non-mvdm/public/internal/ds/inc/rap.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\rap.h",
+  "original_sha256": "f1b132b2ab6d5b848303f27696fbcf4a78d8d937919b46dda004efb0930b9086",
+  "before_sha256": "7b69c78b55cdcce3164688721bfb156a74e3690d823dbf5f302066696aa550f9",
+  "after_sha256": "4c54f51c544841e51b1b16781d7ab6fd156b156d98b9e947a6ab80ba7c7c2426",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rap.h",
+      "line": "63",
+      "directive": "ifndef",
+      "expression": "_RAP_",
+      "chain_start": "63",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "8014aa01e648991ee8b93e0c109efd1efa26c700761467412be69daa06d9613a"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rap.h",
+      "line": "77",
+      "directive": "ifndef",
+      "expression": "DESC_CHAR_UNICODE",
+      "chain_start": "77",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "8014aa01e648991ee8b93e0c109efd1efa26c700761467412be69daa06d9613a"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rap.h",
+      "line": "109",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "77",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "8014aa01e648991ee8b93e0c109efd1efa26c700761467412be69daa06d9613a"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "Neither observed worker graph nor the current source defines DESC_CHAR_UNICODE."
+}

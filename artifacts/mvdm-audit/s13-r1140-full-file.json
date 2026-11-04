@@ -1,0 +1,44 @@
+{
+  "path": "src/non-mvdm/public/internal/base/inc/debugfmt.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\debugfmt.h",
+  "original_sha256": "679c56f19ab86710f1866e90df828baf6f6ff96630f2ddddd26b35de9aff49e8",
+  "before_sha256": "679c56f19ab86710f1866e90df828baf6f6ff96630f2ddddd26b35de9aff49e8",
+  "after_sha256": "679c56f19ab86710f1866e90df828baf6f6ff96630f2ddddd26b35de9aff49e8",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/debugfmt.h",
+      "line": "33",
+      "directive": "ifndef",
+      "expression": "_DEBUGFMT_",
+      "chain_start": "33",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "027514c5455d7b54a09f706e94cf28ec5a2661abea70f961bdae17e327ce81dd"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/debugfmt.h",
+      "line": "64",
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "chain_start": "64",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "027514c5455d7b54a09f706e94cf28ec5a2661abea70f961bdae17e327ce81dd"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/debugfmt.h",
+      "line": "67",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "64",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "027514c5455d7b54a09f706e94cf28ec5a2661abea70f961bdae17e327ce81dd"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted."
+}

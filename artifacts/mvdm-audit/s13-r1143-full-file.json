@@ -1,0 +1,45 @@
+{
+  "path": "src/non-mvdm/public/internal/base/inc/smbmacro.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\smbmacro.h",
+  "original_sha256": "e7a4ff096b5e2fdd0a81cd1c080e57253231664f87cb329c17a25c694282d8d1",
+  "before_sha256": "0becdbeaf6f64b98017adc4008eda010ba654e4de68cf99a6c01859795682706",
+  "after_sha256": "b8d477fc44cba472316e1bc9fe06dddc366960b5aa896d888bd0344792e30157",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbmacro.h",
+      "line": "22",
+      "directive": "ifndef",
+      "expression": "_SMBMACRO_",
+      "chain_start": "22",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "de4b66c03110e7fde0a30e355a031bc21e939b0f9bdc199ae424b84c010955b3"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbmacro.h",
+      "line": "87",
+      "directive": "ifndef",
+      "expression": "NO_PACKING",
+      "chain_start": "87",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "de4b66c03110e7fde0a30e355a031bc21e939b0f9bdc199ae424b84c010955b3"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbmacro.h",
+      "line": "93",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "87",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "de4b66c03110e7fde0a30e355a031bc21e939b0f9bdc199ae424b84c010955b3"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "Neither observed worker graph defines NO_PACKING and no source definition was found."
+}

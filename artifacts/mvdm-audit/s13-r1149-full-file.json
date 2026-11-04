@@ -1,0 +1,100 @@
+{
+  "path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+  "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\netlib.h",
+  "original_sha256": "d160c2657ce8bd4cd006af505a5325b311fe27a7f80682518adb01771ab5b7c4",
+  "before_sha256": "8b941feb8aa19661fc1ab4c9f3bab6d5da663c5ee66ee9498a4de0e8936abd86",
+  "after_sha256": "67a11a43361b66ba76be7ad8b0dc8638de102948ab0ff3a9b1e345c5ca604833",
+  "prior_records": [
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+      "line": "94",
+      "directive": "ifndef",
+      "expression": "_NETLIB_",
+      "chain_start": "94",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "ae2b6d34cbaed6c601e38ad2a1b5d5982de4729c8342a0662d4980880091d500"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+      "line": "112",
+      "directive": "ifdef",
+      "expression": "CDEBUG",
+      "chain_start": "112",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "ae2b6d34cbaed6c601e38ad2a1b5d5982de4729c8342a0662d4980880091d500"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+      "line": "117",
+      "directive": "ifdef",
+      "expression": "__cplusplus",
+      "chain_start": "117",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "ae2b6d34cbaed6c601e38ad2a1b5d5982de4729c8342a0662d4980880091d500"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+      "line": "200",
+      "directive": "ifdef",
+      "expression": "CDEBUG",
+      "chain_start": "200",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "ae2b6d34cbaed6c601e38ad2a1b5d5982de4729c8342a0662d4980880091d500"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+      "line": "202",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "200",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "ae2b6d34cbaed6c601e38ad2a1b5d5982de4729c8342a0662d4980880091d500"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+      "line": "382",
+      "directive": "if",
+      "expression": "defined(lint) || defined(_lint)",
+      "chain_start": "382",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "ae2b6d34cbaed6c601e38ad2a1b5d5982de4729c8342a0662d4980880091d500"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+      "line": "384",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "382",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "ae2b6d34cbaed6c601e38ad2a1b5d5982de4729c8342a0662d4980880091d500"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+      "line": "548",
+      "directive": "ifdef",
+      "expression": "__cplusplus",
+      "chain_start": "548",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "ae2b6d34cbaed6c601e38ad2a1b5d5982de4729c8342a0662d4980880091d500"
+    }
+  ],
+  "review": "Original/current conditional trees match recursively through retained arms. Product observations select all retained real-code arms; all others were already #error. Anchors normalized to original physical LF lines.",
+  "limitations": "Build and byte comparison pending; excluded original nested groups intentionally omitted.",
+  "manual_change_before_anchor_normalization": "C++ and lint alternatives are unselected in the C-only worker graphs; no lint macro definition was found."
+}

@@ -27,8 +27,10 @@ Revision History:
 #endif
 
 #ifdef __cplusplus
-extern "C" {
+#line 30
+#error Unsupported excluded original configuration
 #endif
+#line 32
 
 #include <tvout.h>
 
@@ -1516,68 +1518,10 @@ typedef struct _VIDEO_LUT_RGB256WORDS {
 
 
 #ifndef _WINCON_
-
-typedef struct _COORD {
-    SHORT X;
-    SHORT Y;
-} COORD, *PCOORD;
-
-typedef struct _CHAR_INFO {
-    union {
-        WCHAR UnicodeChar;
-        CHAR   AsciiChar;
-    } Char;
-    USHORT Attributes;
-} CHAR_INFO, *PCHAR_INFO;
-
-//
-// Attributes flags:
-//
-
-#define FOREGROUND_BLUE      0x0001 // text color contains blue.
-#define FOREGROUND_GREEN     0x0002 // text color contains green.
-#define FOREGROUND_RED       0x0004 // text color contains red.
-#define FOREGROUND_INTENSITY 0x0008 // text color is intensified.
-#define BACKGROUND_BLUE      0x0010 // background color contains blue.
-#define BACKGROUND_GREEN     0x0020 // background color contains green.
-#define BACKGROUND_RED       0x0040 // background color contains red.
-#define BACKGROUND_INTENSITY 0x0080 // background color is intensified.
-#define COMMON_LVB_LEADING_BYTE    0x0100 // Leading Byte of DBCS
-#define COMMON_LVB_TRAILING_BYTE   0x0200 // Trailing Byte of DBCS
-#define COMMON_LVB_GRID_HORIZONTAL 0x0400 // DBCS: Grid attribute: top horizontal.
-#define COMMON_LVB_GRID_LVERTICAL  0x0800 // DBCS: Grid attribute: left vertical.
-#define COMMON_LVB_GRID_RVERTICAL  0x1000 // DBCS: Grid attribute: right vertical.
-#define COMMON_LVB_REVERSE_VIDEO   0x4000 // DBCS: Reverse fore/back ground attribute.
-#define COMMON_LVB_UNDERSCORE      0x8000 // DBCS: Underscore.
-
-#define COMMON_LVB_SBCSDBCS        0x0300 // SBCS or DBCS flag.
-
-
-
-//
-// Share of conapi.h
-//
-#define CHAR_TYPE_SBCS     0   // Displayed SBCS character
-#define CHAR_TYPE_LEADING  2   // Displayed leading byte of DBCS
-#define CHAR_TYPE_TRAILING 3   // Displayed trailing byte of DBCS
-
-
-//
-// Share of foncache.h
-//
-#define BITMAP_BITS_BYTE_ALIGN   8 // BYTE align is 8 bit
-#define BITMAP_BITS_WORD_ALIGN  16 // WORD align is 16 bit
-#define BITMAP_ARRAY_BYTE  3       // BYTE array is 8 bit  (shift count = 3)
-
-#define BITMAP_PLANES      1
-#define BITMAP_BITS_PIXEL  1
-
-
-#define BYTE_ALIGN  sizeof(UCHAR)
-#define WORD_ALIGN  sizeof(USHORT)
-
-
+#line 1519
+#error Unsupported excluded original configuration
 #endif // _WINCON_
+#line 1581
 
 
 typedef struct _FSCNTL_SCREEN_INFO {
@@ -1679,8 +1623,10 @@ typedef struct _FSVIDEO_CURSOR_POSITION {
 } FSVIDEO_CURSOR_POSITION, *PFSVIDEO_CURSOR_POSITION;
 
 #ifdef __cplusplus
-}
+#line 1682
+#error Unsupported excluded original configuration
 #endif
+#line 1684
 
 #endif  // _NTDDVDEO_
 
