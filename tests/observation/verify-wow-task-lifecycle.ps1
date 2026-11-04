@@ -180,9 +180,9 @@ foreach ($object in $fixtureSupportObjects) {
     }
 }
 $fixtureLibraries = @(
-    'worker-base.lib', 'common-root.lib', 'common-rpc.lib',
+    'worker-base.lib', 'common-root.lib', 'common-rpc.lib', 'lib-rpc.lib',
     'nthook-installer.lib', 'nthook-context.lib',
-    'common-transport.lib', 'common-codec.lib', 'common-console.lib',
+    'lib-io.lib', 'common-codec.lib', 'common-console.lib',
     'opennt-base-client.lib', 'opennt-base-bindings.lib', 'common-base-srv-bindings.lib', 'broker-transport.lib', 'common-base-srv-transport.lib',
     'worker-shell.lib', 'worker-command-bindings.lib',
     'original-softpc-host-fixture-roots.lib', 'original-softpc-support.lib',

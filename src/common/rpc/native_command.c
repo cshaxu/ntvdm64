@@ -2,7 +2,7 @@
  * standalone adapter. Original DOS/WOW command and receipt state stays there. */
 #include "native_command.h"
 #include "common/codec/native_launch.h"
-#include "async_call.h"
+#include "lib/rpc/async_call.h"
 #include "common/protocol/frontend_lifecycle.h"
 
 static BOOL connected(const common_rpc_connection *state)

@@ -1,7 +1,7 @@
 /* Project-added worker/control RPC adaptation; not original VDM dispatch,
  * task completion, blocking/resume or resource lifetime decisions. */
 #include "worker_control.h"
-#include "async_call.h"
+#include "lib/rpc/async_call.h"
 #include "common/protocol/frontend_lifecycle.h"
 #include "common/protocol/frontend_protocol.h"
 

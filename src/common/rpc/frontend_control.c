@@ -1,7 +1,7 @@
 /* Project-added frontend control RPC exchanges extracted from the standalone
  * BaseClient adapter. Decisions and per-process resource owners stay local. */
 #include "frontend_control.h"
-#include "async_call.h"
+#include "lib/rpc/async_call.h"
 #include "common/protocol/frontend_lifecycle.h"
 
 DWORD common_rpc_retire_workerless_frontend(const common_rpc_connection *state,DWORD *retired)

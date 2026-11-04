@@ -1,7 +1,7 @@
 #ifndef TEST_RPC_ASYNC_H
 #define TEST_RPC_ASYNC_H
 #include "service.h"
-#include "common/rpc/async_call.h"
+#include "lib/rpc/async_call.h"
 /* Raw-wire fixtures vary authentication/version inputs intentionally. Reuse
  * production cancellation, never a test transport or replacement endpoint. */
 static __inline DWORD test_rpc_connect_controls(handle_t binding,HANDLE process,ULONG protocol,

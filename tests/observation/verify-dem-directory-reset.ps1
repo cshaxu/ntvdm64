@@ -27,8 +27,8 @@ if(!$closure.Success){throw 'Selected fixture closure absent'}
 $extraClosure=[regex]::Match($generator,"(?m)^\`$fixtureHostLibraries \+= '([^']+)'\r?$")
 if(!$extraClosure.Success){throw 'Selected fixture additional closure absent'}
 $dependencies=@('obj/tests/ccpu_bounded_execution_fixture_seams.obj','obj/tests/ccpu_host_fixture_seams.obj')+
-    $closure.Groups[1].Value.Split(' ')+$extraClosure.Groups[1].Value.Trim().Split(' ')+@('common-root.lib','common-rpc.lib',
-    'common-transport.lib','common-codec.lib','common-console.lib')
+    $closure.Groups[1].Value.Split(' ')+$extraClosure.Groups[1].Value.Trim().Split(' ')+@('common-root.lib','common-rpc.lib', 'lib-rpc.lib',
+    'lib-io.lib','common-codec.lib','common-console.lib')
 $libraries=$dependencies | ForEach-Object {
     $p=Join-Path (Join-Path $repo $BuildCache) $_
     if(!(Test-Path $p)){throw "Missing cache input $_"}; $p

@@ -1,4 +1,4 @@
-#include "common/rpc/local_binding.h"
+#include "lib/rpc/local_binding.h"
 
 /* Combined CCPU/WOW fixtures retain the production BaseClient functions.
  * Their one external service boundary is forbidden: an unexpected attempt

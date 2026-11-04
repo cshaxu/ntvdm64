@@ -2,13 +2,13 @@
 
 ## Current Work
 
-**Active: M0 T474 S2 — NTSRV shared implementation ownership**
+**Active: M0 T474 S3 — generic RPC and I/O library ownership**
 
 The owner directs local build, test, publication to this worktree's
 assets/release and local commits for later cherry-pick; no push or publication
-to the main worktree runtime. Audit other components' dependencies on
-NTSRV-owned implementation, extract appropriate shared mechanics to common,
-and keep service policy and state in NTSRV.
+to the main worktree runtime. The owner closes S2 locally and admits S3 to
+extract product-independent RPC and I/O mechanisms from common to lib/rpc
+and lib/io while retaining NTVDM64 protocol and policy in common.
 
 S1 local closure: Run16-owned implementation no longer enters the inspected
 other-product source/link closures. Hook-specific classification belongs to
@@ -18,8 +18,8 @@ regressions and dependency negative controls passed. Local ten-image release
 changed images were freshly built and seven unchanged baseline images reused.
 Full integration and publication to the main runtime remain pending.
 
-S2 local implementation, publication and Control verification are complete;
-review remains active. Shared clients, scope and transport belong to
+S2 is owner-closed locally after implementation, publication and Control verification;
+main integration and Full product verification remain pending. Shared clients, scope and transport belong to
 common/base_srv; service policy remains NTSRV-owned. Candidate package
 e34caccf-13d8-4999-9be2-183ba247b6ee is published locally with ten matching
 hashes. The complete Control suite passed all 12 selected gates with the
@@ -28,26 +28,32 @@ window handoff. The optional DOS4GW/NESticle fixture was absent and skipped;
 Full was not run. The original guest long-PATH issue remains unresolved.
 [Evidence](../etc/evidence/m0-t474-s2-basesrv-shared-ownership.md).
 
+S3 implementation and local publication are ready for owner review. Generic
+RPC and I/O mechanics now reside in lib; product protocol and policy remain
+in common. Fresh local package e05f16a8-e865-40e1-8a6e-d86bc5d25809 passed
+all 12 selected Control gates and ten release hash checks. Full was not run;
+the optional DOS4GW/NESticle fixture was unavailable. The original guest
+long-PATH issue remains. [S3 evidence](../etc/evidence/m0-t474-s3-generic-libraries.md).
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T474 S2, Ordinary Mode. |
-| Admission And Approval | Owner directs S2 after S1 local release and closure. |
-| Objective | Audit and remove cross-component use of NTSRV-private implementation, placing shared mechanics in common and retaining service policy. |
-| Non-goals | Change runtime semantics, guest media, worker-base ownership or the main worktree. |
-| Reference Baseline | S1 local commits 54b2eefea and e52b00dd5; local release above. |
-| Files And ABI Surface | NTSRV client, transport, classification, authentication, common, production build graphs and focused fixtures. |
-| Applicable Rules | Owner-directed dependency boundary, source provenance, unchanged RPC, resource lifecycle and service authority. |
-| Verification | Inventory real production sources and linked symbols; focused builds and tests, local package, governance and relative-link checks; inspect diff. |
-| Expected Markers | Other components select neutral shared source instead of NTSRV-private implementation while behavior and service authority remain unchanged. |
-| Asset Needs | Existing compiler, build tools, local release baseline and focused fixtures. |
-| Reporting Requirements | Consumers, actual use, ownership decisions, validation and limitations. |
-| Stop Conditions | Required semantic change, guest modification, or inability to preserve source and ownership boundaries. |
-| Exit Criteria | Reviewed S2 local build, tests, assets/release publication and local commit; no push. |
-| Original Owner Request | Start NTSRV S2 after the local S1 release, extracting shared implementation to common and removing component cross-dependencies. |
-| Similar-Issue Sweep | Base RPC client slices, broker transport, classification, authentication, public headers and all production architectures. |
-| Temporary Evidence | build/t474-s2, owner S2, 60-minute phase, 3-GiB and 10-minute no-progress budget; stable caches retained. |
+| Identifier Mode | M0 T474 S3, Ordinary Mode. |
+| Admission And Approval | Owner closes S2 locally and inserts S3 for generic RPC and I/O extraction. |
+| Objective | Place NTVDM64-independent low-level RPC and I/O mechanisms in lib/rpc and lib/io; product-specific protocols remain in common. |
+| Non-goals | Alter wire behavior, authentication policy, resource lifetime, guest media, or main worktree. |
+| Reference Baseline | S2 local release e34caccf-13d8-4999-9be2-183ba247b6ee; [S2 evidence](../etc/evidence/m0-t474-s2-basesrv-shared-ownership.md). |
+| Files And ABI Surface | Shared RPC and pipe implementations, new src/lib submodules, consumers, production build graphs, tests and authority documents. |
+| Applicable Rules | Owner directs lib extraction; original source provenance, current RPC/pipe contracts, behavior and lifecycle remain binding. |
+| Verification | Audit all common mechanisms and production consumers, verify dependency direction, build affected products, focused success/failure/lifecycle tests, local package, Control, governance and relative links. |
+| Expected Markers | Generic lib has no NTVDM64 protocol or component dependency; shared business protocol remains common; behavior unchanged. |
+| Asset Needs | Existing compiler, local release baseline and isolated fixtures. |
+| Reporting Requirements | Moved and retained mechanisms, actual dependencies, verification and Full/guest limits. |
+| Stop Conditions | Required observable semantic change, guest modification, or inability to separate generic mechanics safely. |
+| Exit Criteria | Reviewed local build, tests, assets/release publication and local commit; no push. |
+| Original Owner Request | Insert S3 to move context-independent low-level integration from common into lib, including lib/rpc and NTCON-worker transport into lib/io. |
+| Similar-Issue Sweep | RPC binding and async, named-pipe transfer, protocol codecs, Console client, shared process and filesystem mechanisms. |
+| Temporary Evidence | build/t474-s3, owner S3, 60-minute phase, 3-GiB and 10-minute no-progress budget; stable caches retained. |
 
 ## S12 Closure Record
 

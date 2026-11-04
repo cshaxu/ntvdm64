@@ -13,6 +13,15 @@ the unselected full variants remain available in Git history and provenance.
 Component-private adapters remain with their component. Moving these roots
 does not change their source provenance, executable ownership or ABI.
 
+## Generic integration libraries — T474 S3
+
+`src/lib/rpc` carries local RPC binding and async completion mechanics;
+`src/lib/io` carries checked overlapped pipe transfer, Console membership
+sampling and final native file-path resolution. Their product-independent contracts depend only on native platform
+APIs. Product wire formats, RPC operations, frontend codecs and lifecycle
+policy stay in `common` or their executable owners. Generic libraries never
+depend on common, worker-base or private executable components.
+
 ## Base RPC client slices — T445 S7
 
 The BaseSrv client source is owned by common/base_srv:
@@ -134,7 +143,8 @@ src/
   mvdm-guest/
   non-mvdm/
   compat/
-  common/{protocol,codec,transport,console}/
+  common/{protocol,codec,console}/
+  lib/{rpc,io}/
   worker-base/
   run16-exe/
   ntsrv-exe/

@@ -2,10 +2,11 @@
 
 ## T474 shared ownership direction
 
-Product components select shared source from common, mvdm-host and non-mvdm,
-not another product component's private implementation. NTVDM and NTVWM may
-share worker-base; no other component may depend on it, and worker-base may
-depend only on the three shared owners. Explicit runtime protocols and
+Product components select shared source from common, lib, mvdm-host and
+non-mvdm, not another product component's private implementation. NTVDM and
+NTVWM may share worker-base; no other component may depend on it, and
+worker-base may depend only on those shared owners. Generic lib code must not
+depend on product common, executable-private code or worker-base. Explicit runtime protocols and
 NTVDM-provided module ABIs remain separate from source ownership. Shared
 BaseSrv client and transport mechanisms belong to common/base_srv; service
 authorization, task and lifecycle decisions remain NTSRV-owned.

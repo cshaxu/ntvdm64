@@ -9,7 +9,7 @@ foreach($variant in @('observed','ordinary')) {
         @("$repo/tests/app/native_console_capture_test.c","$repo/src/ntvwm-exe/console_state.c")}
     $dir=Join-Path $root $variant
     $null=New-Item -ItemType Directory $dir
-    & $CompilerWrapper cl.exe /nologo /MT /O2 /W4 /D_WIN32_WINNT=0x0A00 "/I$repo/src" "/Fo$dir\" "/Fe$dir/test.exe" @sources "$repo/src/common/console/members.c" /link user32.lib *> "$dir/build.txt"
+    & $CompilerWrapper cl.exe /nologo /MT /O2 /W4 /D_WIN32_WINNT=0x0A00 "/I$repo/src" "/Fo$dir\" "/Fe$dir/test.exe" @sources "$repo/src/lib/io/console_members.c" /link user32.lib *> "$dir/build.txt"
     if($LASTEXITCODE){throw "Compile failed: $dir/build.txt"}
     $child=Start-Process "$dir/test.exe" -WindowStyle Hidden -PassThru -RedirectStandardOutput "$dir/result.txt" -RedirectStandardError "$dir/stderr.txt"
     @{pid=$child.Id;start=$child.StartTime;deadline=$child.StartTime.AddSeconds(30)} | ConvertTo-Json | Set-Content "$dir/owner.json"

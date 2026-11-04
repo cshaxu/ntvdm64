@@ -3,7 +3,7 @@
  * Actual pipe/kernel lifetime remains covered by the request/execution tests. */
 #include <windows.h>
 #include <stdio.h>
-#include "common/transport/pipe_transfer.h"
+#include "lib/io/pipe_transfer.h"
 static DWORD last_error,remaining,step,wait_result,stop_result,peer_result;
 static BOOL pending,eof,fail_result,peer_first;
 static unsigned checks,failures,cancels,drains,calls;
@@ -47,7 +47,7 @@ static BOOL WINAPI fake_result(HANDLE pipe,LPOVERLAPPED io,LPDWORD count,BOOL wa
 #define WaitForMultipleObjects fake_wait
 #define CancelIoEx fake_cancel
 #define GetOverlappedResult fake_result
-#include "../../src/common/transport/pipe_transfer.c"
+#include "../../src/lib/io/pipe_transfer.c"
 /* This fixture explicitly selects completion-first; endpoint priority is not
  * a launcher-owned wrapper around the common transport. */
 static DWORD frontend_request_transfer(HANDLE pipe,HANDLE peer,HANDLE stop,HANDLE event,
