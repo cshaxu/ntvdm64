@@ -1,0 +1,491 @@
+{
+  "method": "Compare reachable original condition trees and recorded retained-arm states; inspect direct diffs and nine local conditional group bodies against existing registrations. Matching original lines use selected source projection.",
+  "limits": "No new runtime or compiler diagnostic test. The documented early-EOI correction and other functional adaptations are not asserted equivalent to original by this structural audit.",
+  "registered_differences": [
+    "MVDM-HOST-DIV-461",
+    "MVDM-HOST-DIV-315",
+    "MVDM-HOST-DIV-317",
+    "MVDM-HOST-DIV-321",
+    "MVDM-HOST-DIV-359",
+    "MVDM-HOST-DIV-146",
+    "MVDM-HOST-DIV-085",
+    "MVDM-HOST-DIV-207"
+  ],
+  "review": {
+    "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+    "current_sha256": "cad3bb755126c1b7f6970b065d6f4db258e081a32b83acdbf800d9eacaf63bef",
+    "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+    "matched_lines": 2233,
+    "groups": {
+      "excluded": 69,
+      "original_groups": 99,
+      "local_groups": 9,
+      "selected": 69
+    },
+    "local_groups": [
+      {
+        "line": 90,
+        "signature": [
+          [
+            "ifdef",
+            "NTVDM"
+          ]
+        ]
+      },
+      {
+        "line": 852,
+        "signature": [
+          [
+            "ifdef",
+            "NTVDM"
+          ]
+        ]
+      },
+      {
+        "line": 865,
+        "signature": [
+          [
+            "ifdef",
+            "NTVDM"
+          ]
+        ]
+      },
+      {
+        "line": 1247,
+        "signature": [
+          [
+            "ifdef",
+            "NTVDM"
+          ]
+        ]
+      },
+      {
+        "line": 1290,
+        "signature": [
+          [
+            "ifdef",
+            "NTVDM"
+          ]
+        ]
+      },
+      {
+        "line": 2046,
+        "signature": [
+          [
+            "ifdef",
+            "NTVDM"
+          ]
+        ]
+      },
+      {
+        "line": 2061,
+        "signature": [
+          [
+            "ifdef",
+            "NTVDM"
+          ]
+        ]
+      },
+      {
+        "line": 2532,
+        "signature": [
+          [
+            "ifdef",
+            "NTVDM"
+          ]
+        ]
+      },
+      {
+        "line": 2603,
+        "signature": [
+          [
+            "ifdef",
+            "NTVDM"
+          ]
+        ]
+      }
+    ],
+    "direct_diffs": [
+      {
+        "branch_line": 114,
+        "diff": [
+          "--- ",
+          "+++ ",
+          "@@ -2,2 +2,3 @@",
+          " #include \"nt_eoi.h\"",
+          "+#include \"xms.h\"",
+          " /* exported for NT host event code */",
+          "@@ -24,2 +25,11 @@",
+          " BOOL bForceDelayInts = FALSE;",
+          "+/*",
+          "+* DIVERGENCE(MVDM-HOST-DIV-461): output-data consumption and IRQ1's PIC",
+          "+* acknowledgement are distinct hardware observations.  The original NT host",
+          "+* path retired this one-slot latch from KbdEOIHook(), which loses a scan byte",
+          "+* when a client acknowledges IRQ1 before reading port 60.  Advance the slot",
+          "+* only after this byte has been both read and normally acknowledged.",
+          "+*/",
+          "+LOCAL BOOL kbd_output_data_read = FALSE;",
+          "+LOCAL BOOL kbd_output_irq_acknowledged = FALSE;",
+          " ULONG LastKbdInt=0;"
+        ]
+      },
+      {
+        "branch_line": 821,
+        "diff": [
+          "--- ",
+          "+++ ",
+          "@@ -1 +1 @@",
+          "-KbdHdwFull = BUFF_6805_VMAX - free_6805_buff_size;",
+          "+nt_keyboard_history.device[buff_6805_out_ptr]=0; /* DIV-317: response, not user input. */"
+        ]
+      },
+      {
+        "branch_line": 830,
+        "diff": [
+          "--- ",
+          "+++ ",
+          "@@ -1 +1 @@",
+          "-key_marker_buffer[buff_6805_out_ptr]=0;",
+          "+nt_keyboard_history.device[buff_6805_in_ptr]=nt_keyboard_history.active; /* DIV-317 */"
+        ]
+      },
+      {
+        "branch_line": 887,
+        "diff": [
+          "--- ",
+          "+++ ",
+          "@@ -2,2 +2,3 @@",
+          " /* Clear key marker buffer */",
+          "+mvdm_keyboard_history_clear_ring(&nt_keyboard_history); /* DIV-317 */",
+          " {"
+        ]
+      },
+      {
+        "branch_line": 900,
+        "diff": [
+          "--- ",
+          "+++ ",
+          "@@ -50,7 +50,12 @@",
+          " {",
+          "-if(last_marker == 0)",
+          "+/* DIVERGENCE: MVDM-HOST-DIV-315: a complete single-byte key",
+          "+* counts independently of any preceding partial multibyte key. */",
+          "+if(last_marker == 0 || (key_marker_buffer[tmp_6805_out_ptr] & ONECHARCODEMASK))",
+          " {",
+          "+if(last_marker) *part_key_transferred = TRUE;",
+          "+last_marker = 0;",
+          " /* start of key seq found */",
+          " if(key_marker_buffer[tmp_6805_out_ptr] & ONECHARCODEMASK)",
+          "-keys_in_buffer++; /* one byte seq\t    else */",
+          "+keys_in_buffer++; /* one byte seq */",
+          "+else",
+          " last_marker = key_marker_buffer[tmp_6805_out_ptr];",
+          "@@ -83,2 +88,9 @@",
+          " }",
+          "+/* DIV-317: snapshot original live slots before keys_in_6805_buff resets them. */",
+          "+GLOBAL unsigned PendingKeyboardHistory(void)",
+          "+{",
+          "+return mvdm_keyboard_history_pending(&nt_keyboard_history,buff_6805_out_ptr,",
+          "+buff_6805_in_ptr,BUFF_6805_PMAX,scanning_discontinued ? held_event_count : 0,",
+          "+output_full,pending_8042,waiting_for_upcode);",
+          "+}",
+          " void Reset6805and8042(void)",
+          "@@ -86,2 +98,4 @@",
+          " int key;",
+          "+mvdm_keyboard_reset_pending_irq(); /* DIVERGENCE(MVDM-HOST-DIV-321) */",
+          "+mvdm_keyboard_history_clear_device(&nt_keyboard_history); /* DIV-317 */",
+          " /* Reset 6805 */",
+          "@@ -111,2 +125,4 @@",
+          " pending_8042 = output_full = in_anomalous_state = FALSE;",
+          "+kbd_output_data_read = FALSE;",
+          "+kbd_output_irq_acknowledged = FALSE;",
+          " int_enabled = translating = TRUE;"
+        ]
+      },
+      {
+        "branch_line": 1766,
+        "diff": [
+          "--- ",
+          "+++ ",
+          "@@ -8,2 +8,5 @@",
+          " output_full = FALSE;",
+          "+kbd_output_data_read = FALSE;",
+          "+kbd_output_irq_acknowledged = FALSE;",
+          "+nt_keyboard_history.output=0; /* DIV-317: original port replacement. */",
+          " KbdData = -1;"
+        ]
+      },
+      {
+        "branch_line": 2079,
+        "diff": [
+          "--- ",
+          "+++ ",
+          "@@ -13,3 +13,3 @@",
+          " //",
+          "-if (bKbdEoiPending)",
+          "+if (bKbdEoiPending || kbd_output_irq_acknowledged)",
+          " return;",
+          "@@ -53,8 +53,13 @@",
+          " }",
+          "-bKbdIntHooked = KbdInt09Off != *(word *)(Start_of_M_area+0x09*4) ||",
+          "-KbdInt09Seg != *(word *)(Start_of_M_area+0x09*4+2);",
+          "-bBiosBufferSpace = bBiosOwnsKbdHdw &&",
+          "-(bios_buffer_size() < (bPifFastPaste ? 8 : 2));",
+          "+/* PIC reset cancellation is not a normal EOI.  The original hook did not",
+          "+* distinguish CallCount and consequently retired this old device slot.",
+          "+* Preserve that reset semantics explicitly: it must neither retain an",
+          "+* unread pre-reset byte as an early-normal-EOI slot nor manufacture a",
+          "+* second acknowledgement for it. */",
+          "+if (CallCount < 0) {",
+          "+bKbdEoiPending = FALSE;",
+          "+kbd_output_data_read = FALSE;",
+          "+kbd_output_irq_acknowledged = FALSE;",
+          " output_full = FALSE;",
+          "-bKbdEoiPending = FALSE;",
+          "+nt_keyboard_history.output=0;",
+          " bForceDelayInts = TRUE;",
+          "@@ -64,2 +69,19 @@",
+          " HostReleaseKbd();",
+          "+return;",
+          "+}",
+          "+bKbdIntHooked = KbdInt09Off != *(word *)(Start_of_M_area+0x09*4) ||",
+          "+KbdInt09Seg != *(word *)(Start_of_M_area+0x09*4+2);",
+          "+bBiosBufferSpace = bBiosOwnsKbdHdw &&",
+          "+(bios_buffer_size() < (bPifFastPaste ? 8 : 2));",
+          "+bKbdEoiPending = FALSE;",
+          "+kbd_output_irq_acknowledged = TRUE;",
+          "+if (!output_full || kbd_output_data_read) {",
+          "+output_full = FALSE;",
+          "+nt_keyboard_history.output=0; /* DIV-317: both slot observations retire this value. */",
+          "+bForceDelayInts = TRUE;",
+          "+continue_output();",
+          "+bForceDelayInts = FALSE;",
+          "+}",
+          "+if (!bBiosOwnsKbdHdw)",
+          "+HostReleaseKbd();",
+          " }",
+          "@@ -67,2 +89,6 @@",
+          " {",
+          "+nt_keyboard_history.output=nt_keyboard_history.translated; /* DIV-317 */",
+          "+nt_keyboard_history.translated=0;",
+          "+kbd_output_data_read = FALSE;",
+          "+kbd_output_irq_acknowledged = FALSE;",
+          " output_full = TRUE;"
+        ]
+      },
+      {
+        "branch_line": 2437,
+        "diff": [
+          "--- ",
+          "+++ ",
+          "@@ -1,2 +1,11 @@",
+          "-cpu_interrupt_map |= CPU_RESET_EXCEPTION_MASK;",
+          "-host_cpu_interrupt();",
+          "+/*",
+          "+* DIVERGENCE(MVDM-HOST-DIV-146): the original CPU40",
+          "+* controller branch reaches CCPU's private interrupt bitmap",
+          "+* directly, then asks the historical host to wake that CPU.",
+          "+* This composition keeps that bitmap private to c_main.c and",
+          "+* retains the same CPU_HW_RESET event through the original",
+          "+* public CCPU entrypoint.  c_cpu_interrupt performs the",
+          "+* original bitmap update and clears quick mode for the",
+          "+* selected single-session executor.",
+          "+*/",
+          "+cpu_interrupt(CPU_HW_RESET, 0);"
+        ]
+      },
+      {
+        "branch_line": 2476,
+        "diff": [
+          "--- ",
+          "+++ ",
+          "@@ -5,2 +5,9 @@",
+          " output_full = FALSE;",
+          "+kbd_output_data_read = FALSE;",
+          "+kbd_output_irq_acknowledged = FALSE;",
+          " KbdData = -1;",
+          "+nt_keyboard_history.output=0; /* DIV-317: direct controller response replaces scan output. */",
+          "+/* DIV-359: expose the controller reply through port 60/status,",
+          "+* without generating an IRQ or entering the scan-code queue. */",
+          "+output_contents = (char)code_to_send;",
+          "+kbd_status |= 1;"
+        ]
+      },
+      {
+        "branch_line": 2614,
+        "diff": [
+          "--- ",
+          "+++ ",
+          "@@ -1,3 +1,2 @@",
+          "-if (bKbdEoiPending || keyboard_interface_disabled) {",
+          "-return;",
+          "-}",
+          "+nt_keyboard_history.translated=nt_keyboard_history.pending; /* DIV-317 */",
+          "+nt_keyboard_history.pending=0;"
+        ]
+      },
+      {
+        "branch_line": 2640,
+        "diff": [
+          "--- ",
+          "+++ ",
+          "@@ -11,2 +11,4 @@",
+          " bKbdEoiPending = FALSE;",
+          "+kbd_output_data_read = FALSE;",
+          "+kbd_output_irq_acknowledged = FALSE;",
+          " bKbdIntHooked = FALSE;"
+        ]
+      },
+      {
+        "branch_line": 2700,
+        "diff": [
+          "--- ",
+          "+++ ",
+          "@@ -3,2 +3,11 @@",
+          " kbd_status &= 0xfe;",
+          "+/* Port 64 observes controller status; only port 60 consumes data. */",
+          "+kbd_output_data_read = TRUE;",
+          "+if (kbd_output_irq_acknowledged && output_full) {",
+          "+output_full = FALSE;",
+          "+nt_keyboard_history.output=0;",
+          "+bForceDelayInts = TRUE;",
+          "+continue_output();",
+          "+bForceDelayInts = FALSE;",
+          "+}",
+          " sure_note_trace1(AT_KBD_VERBOSE,\"scan code read:0x%x\",*val);"
+        ]
+      },
+      {
+        "branch_line": 2819,
+        "diff": [
+          "--- ",
+          "+++ ",
+          "@@ -13,2 +13,4 @@",
+          " op_port_remembered_bits=0xc;",
+          "+kbd_output_data_read = FALSE;",
+          "+kbd_output_irq_acknowledged = FALSE;",
+          " int_enabled = translating = TRUE;"
+        ]
+      }
+    ],
+    "issues": []
+  },
+  "local_group_bodies": [
+    {
+      "line": 90,
+      "arms": [
+        {
+          "directive": "ifdef",
+          "expression": "NTVDM",
+          "body": [
+            "/* DIVERGENCE(MVDM-HOST-DIV-317): metadata only; original scan bytes unchanged. */",
+            "#include \"mvdm_keyboard_history.h\"",
+            "extern mvdm_keyboard_history nt_keyboard_history;",
+            "extern void mvdm_keyboard_reset_pending_irq(void); /* DIVERGENCE(MVDM-HOST-DIV-321) */"
+          ]
+        }
+      ]
+    },
+    {
+      "line": 852,
+      "arms": [
+        {
+          "directive": "ifdef",
+          "expression": "NTVDM",
+          "body": [
+            "\tnt_keyboard_history.translated=nt_keyboard_history.device[buff_6805_out_ptr]; /* DIV-317 */",
+            "\tnt_keyboard_history.device[buff_6805_out_ptr]=0;",
+            "#line 975",
+            "\tkey_marker_buffer[buff_6805_out_ptr]=0;"
+          ]
+        }
+      ]
+    },
+    {
+      "line": 865,
+      "arms": [
+        {
+          "directive": "ifdef",
+          "expression": "NTVDM",
+          "body": [
+            "   KbdHdwFull = BUFF_6805_VMAX - free_6805_buff_size;"
+          ]
+        }
+      ]
+    },
+    {
+      "line": 1247,
+      "arms": [
+        {
+          "directive": "ifdef",
+          "expression": "NTVDM",
+          "body": [
+            "        nt_keyboard_history.held[held_event_count]=nt_keyboard_history.active; /* DIV-317 */"
+          ]
+        }
+      ]
+    },
+    {
+      "line": 1290,
+      "arms": [
+        {
+          "directive": "ifdef",
+          "expression": "NTVDM",
+          "body": [
+            "        nt_keyboard_history.held[held_event_count]=nt_keyboard_history.active; /* DIV-317 */"
+          ]
+        }
+      ]
+    },
+    {
+      "line": 2046,
+      "arms": [
+        {
+          "directive": "ifdef",
+          "expression": "NTVDM",
+          "body": [
+            "                        nt_keyboard_history.active=nt_keyboard_history.held[i]; /* DIV-317 */"
+          ]
+        }
+      ]
+    },
+    {
+      "line": 2061,
+      "arms": [
+        {
+          "directive": "ifdef",
+          "expression": "NTVDM",
+          "body": [
+            "        nt_keyboard_history.active=0; /* DIV-317: later internal actions have no raw origin. */"
+          ]
+        }
+      ]
+    },
+    {
+      "line": 2532,
+      "arms": [
+        {
+          "directive": "ifdef",
+          "expression": "NTVDM",
+          "body": [
+            "                        nt_keyboard_history.prefix=nt_keyboard_history.translated; /* DIV-317 */"
+          ]
+        }
+      ]
+    },
+    {
+      "line": 2603,
+      "arms": [
+        {
+          "directive": "ifdef",
+          "expression": "NTVDM",
+          "body": [
+            "if (bKbdEoiPending || keyboard_interface_disabled) {",
+            "    return;",
+            "    }"
+          ]
+        }
+      ]
+    }
+  ]
+}
