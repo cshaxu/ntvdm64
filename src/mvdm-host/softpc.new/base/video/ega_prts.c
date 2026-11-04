@@ -2453,7 +2453,7 @@ LOCAL void	ega_gc_mask IFN2(io_addr, port, half_word, value)
 #ifdef PROD
 	UNUSED(port);
 #endif
-#line 2434
+#line 2968
 	note_entrance2("ega_gc_mask(%x,%x)", port, value);
 
 	/*
@@ -2503,7 +2503,7 @@ void	ega_gc_mask_ff IFN2(io_addr, port, half_word, value)
 #ifdef PROD
 	UNUSED(port);
 #endif
-#line 2479
+#line 3016
 	note_entrance2("ega_gc_mask(%x,%x)", port, value);
 
 	/*

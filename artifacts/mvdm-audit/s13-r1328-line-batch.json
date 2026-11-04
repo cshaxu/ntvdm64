@@ -1,0 +1,1380 @@
+{
+  "method": "Every corrected existing #line maps at least two unique exact original statements with consistent offset and surrounding context; only #line values change. Remaining branches are not certified.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\tape_io.c",
+      "before_sha256": "540599b96001b9306cb33210839d34e15ee5eed829725c29163f6b529e4358ca",
+      "after_sha256": "aaeb367d4069645cd2d693ead697b918df36cf16aa9407185e452e4d25828525",
+      "fixes": [
+        {
+          "physical": 114,
+          "old": 103,
+          "new": 100,
+          "matches": [
+            {
+              "physical": 121,
+              "original": 106,
+              "target": 100,
+              "text": "switch ( getAH() )",
+              "context": 8
+            },
+            {
+              "physical": 123,
+              "original": 108,
+              "target": 100,
+              "text": "case INT15_DEVICE_OPEN:",
+              "context": 8
+            },
+            {
+              "physical": 124,
+              "original": 109,
+              "target": 100,
+              "text": "case INT15_DEVICE_CLOSE:",
+              "context": 9
+            },
+            {
+              "physical": 125,
+              "original": 110,
+              "target": 100,
+              "text": "case INT15_PROGRAM_TERMINATION:",
+              "context": 10
+            },
+            {
+              "physical": 126,
+              "original": 111,
+              "target": 100,
+              "text": "case INT15_REQUEST_KEY:",
+              "context": 10
+            },
+            {
+              "physical": 127,
+              "original": 112,
+              "target": 100,
+              "text": "case INT15_DEVICE_BUSY:",
+              "context": 10
+            },
+            {
+              "physical": 128,
+              "original": 113,
+              "target": 100,
+              "text": "setAH( 0 );",
+              "context": 9
+            },
+            {
+              "physical": 129,
+              "original": 114,
+              "target": 100,
+              "text": "setCF( 0 );",
+              "context": 8
+            },
+            {
+              "physical": 132,
+              "original": 117,
+              "target": 100,
+              "text": "case INT15_EMS_DETERMINE:",
+              "context": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\fpu.c",
+      "before_sha256": "105f6260fa8fb1812e2a1fcc25de69886f56996d36ffa70186ed088612b6e098",
+      "after_sha256": "41ea50644b9d6ebc9c1cf7dde8cb80315df813eefd6316afb0cee70d54eb777f",
+      "fixes": [
+        {
+          "physical": 1871,
+          "old": 1867,
+          "new": 1886,
+          "matches": [
+            {
+              "physical": 1874,
+              "original": 1888,
+              "target": 1886,
+              "text": "if (((FPHOST *)&(FPPtr->fpvalue))->hiword.exp == HOST_MAX_EXP) {",
+              "context": 6
+            },
+            {
+              "physical": 1876,
+              "original": 1890,
+              "target": 1886,
+              "text": "tagword |= TAG_INFINITY_MASK;",
+              "context": 8
+            },
+            {
+              "physical": 1879,
+              "original": 1893,
+              "target": 1886,
+              "text": "FPPtr->tagvalue = tagword;",
+              "context": 7
+            },
+            {
+              "physical": 1894,
+              "original": 1908,
+              "target": 1886,
+              "text": "LOCAL VOID SignalStackUnderflow IFN1(FPSTACKENTRY *, StackPtr)",
+              "context": 10
+            },
+            {
+              "physical": 1915,
+              "original": 1929,
+              "target": 1886,
+              "text": "LOCAL VOID SignalSNaN IFN1(FPSTACKENTRY *, StackPtr)",
+              "context": 9
+            },
+            {
+              "physical": 1934,
+              "original": 1948,
+              "target": 1886,
+              "text": "LOCAL VOID SignalIndefinite IFN1(FPSTACKENTRY *, StackPtr)",
+              "context": 9
+            },
+            {
+              "physical": 1949,
+              "original": 1963,
+              "target": 1886,
+              "text": "LOCAL VOID SignalInvalid IFN0()",
+              "context": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\printer.c",
+      "before_sha256": "9d41bc3814358588da72747e6995d7a28b9237da1d27cbec8e54c07b3dd439e6",
+      "after_sha256": "5e46d893abe62d4d74611ed8b0feca0ea191473d0460e2c73ba78ab714b8e4d5",
+      "fixes": [
+        {
+          "physical": 477,
+          "old": 452,
+          "new": 481,
+          "matches": [
+            {
+              "physical": 481,
+              "original": 484,
+              "target": 481,
+              "text": "case STATUS_OFFSET:",
+              "context": 7
+            },
+            {
+              "physical": 485,
+              "original": 488,
+              "target": 481,
+              "text": "case CONTROL_OFFSET:",
+              "context": 8
+            },
+            {
+              "physical": 487,
+              "original": 490,
+              "target": 481,
+              "text": "old_control = get_control(adapter);\t/* Save old value to see what's changed */",
+              "context": 7
+            },
+            {
+              "physical": 488,
+              "original": 491,
+              "target": 481,
+              "text": "set_control(adapter, value);",
+              "context": 6
+            },
+            {
+              "physical": 489,
+              "original": 492,
+              "target": 481,
+              "text": "if (low_high(old_control, value, INIT_P))",
+              "context": 5
+            }
+          ]
+        },
+        {
+          "physical": 707,
+          "old": 658,
+          "new": 700,
+          "matches": [
+            {
+              "physical": 709,
+              "original": 701,
+              "target": 700,
+              "text": "control_reg[adapter] = 0xEC;",
+              "context": 7
+            },
+            {
+              "physical": 710,
+              "original": 702,
+              "target": 700,
+              "text": "status_reg[adapter] = 0xDF;",
+              "context": 8
+            },
+            {
+              "physical": 712,
+              "original": 704,
+              "target": 700,
+              "text": "output_reg[adapter] = 0xAA;",
+              "context": 9
+            },
+            {
+              "physical": 725,
+              "original": 717,
+              "target": 700,
+              "text": "host_print_auto_feed(adapter, FALSE);",
+              "context": 9
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "before_sha256": "b799697b8d39cb67f3d5bb496ec27dfcb748a84912de673bfd49fa0ffc951b57",
+      "after_sha256": "bcf42d582f7f1e9b8bd41e99ddeb41dbbb3fd2f6cca585c38b147a0856906276",
+      "fixes": [
+        {
+          "physical": 112,
+          "old": 161,
+          "new": 158,
+          "matches": [
+            {
+              "physical": 120,
+              "original": 165,
+              "target": 158,
+              "text": "void   host_show_pointer(void);",
+              "context": 4
+            },
+            {
+              "physical": 121,
+              "original": 166,
+              "target": 158,
+              "text": "void   host_hide_pointer(void);",
+              "context": 4
+            },
+            {
+              "physical": 123,
+              "original": 168,
+              "target": 158,
+              "text": "LOCAL word              saved_int71_segment;",
+              "context": 4
+            },
+            {
+              "physical": 124,
+              "original": 169,
+              "target": 158,
+              "text": "LOCAL word              saved_int71_offset;",
+              "context": 4
+            }
+          ]
+        },
+        {
+          "physical": 2665,
+          "old": 2570,
+          "new": 2951,
+          "matches": [
+            {
+              "physical": 2674,
+              "original": 2959,
+              "target": 2951,
+              "text": "if (cursor_flag != MOUSE_CURSOR_DISPLAYED)",
+              "context": 6
+            },
+            {
+              "physical": 2675,
+              "original": 2960,
+              "target": 2951,
+              "text": "if (++cursor_flag == MOUSE_CURSOR_DISPLAYED)",
+              "context": 5
+            }
+          ]
+        },
+        {
+          "physical": 3445,
+          "old": 3718,
+          "new": 3712,
+          "matches": [
+            {
+              "physical": 3457,
+              "original": 3723,
+              "target": 3712,
+              "text": "sas_stores(dest, (IU8 *)mouse_context_magic, MOUSE_CONTEXT_MAGIC_SIZE);",
+              "context": 6
+            },
+            {
+              "physical": 3458,
+              "original": 3724,
+              "target": 3712,
+              "text": "dest += MOUSE_CONTEXT_MAGIC_SIZE;",
+              "context": 6
+            },
+            {
+              "physical": 3461,
+              "original": 3727,
+              "target": 3712,
+              "text": "sas_stores(dest, (IU8 *)&mouse_context, sizeof(MOUSE_CONTEXT));",
+              "context": 8
+            },
+            {
+              "physical": 3462,
+              "original": 3728,
+              "target": 3712,
+              "text": "dest += sizeof(MOUSE_CONTEXT);",
+              "context": 7
+            },
+            {
+              "physical": 3465,
+              "original": 3731,
+              "target": 3712,
+              "text": "sas_store (dest, (byte)(cs & 0xFF));",
+              "context": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\qevnt.c",
+      "before_sha256": "8632d93fe877d6569231aecffd39bfe6987e8aaca336bc159b5ed6ecc3101ff5",
+      "after_sha256": "df855fb85642e28effdde1b3c742e7b73e277b02edc89957df3f32d23907ce1c",
+      "fixes": [
+        {
+          "physical": 153,
+          "old": 151,
+          "new": 148,
+          "matches": [
+            {
+              "physical": 158,
+              "original": 152,
+              "target": 148,
+              "text": "ResetCpuQevCount(",
+              "context": 10
+            },
+            {
+              "physical": 159,
+              "original": 153,
+              "target": 148,
+              "text": "PLARGE_INTEGER CurrTime",
+              "context": 11
+            },
+            {
+              "physical": 162,
+              "original": 156,
+              "target": 148,
+              "text": "LARGE_INTEGER DiffTime;",
+              "context": 10
+            },
+            {
+              "physical": 163,
+              "original": 157,
+              "target": 148,
+              "text": "PQEV_ENTRY  pqevEntry;",
+              "context": 10
+            },
+            {
+              "physical": 164,
+              "original": 158,
+              "target": 148,
+              "text": "ULONG DelayTime;",
+              "context": 10
+            },
+            {
+              "physical": 172,
+              "original": 166,
+              "target": 148,
+              "text": "pqevEntry = CONTAINING_RECORD(QuickEventListHead.Flink,",
+              "context": 9
+            },
+            {
+              "physical": 173,
+              "original": 167,
+              "target": 148,
+              "text": "QEV_ENTRY,",
+              "context": 8
+            },
+            {
+              "physical": 174,
+              "original": 168,
+              "target": 148,
+              "text": "qevListEntry",
+              "context": 8
+            },
+            {
+              "physical": 177,
+              "original": 171,
+              "target": 148,
+              "text": "DiffTime.QuadPart = pqevEntry->DueTimeStamp.QuadPart - CurrTime->QuadPart;",
+              "context": 9
+            },
+            {
+              "physical": 184,
+              "original": 178,
+              "target": 148,
+              "text": "if (DiffTime.QuadPart < 0) {",
+              "context": 10
+            },
+            {
+              "physical": 185,
+              "original": 179,
+              "target": 148,
+              "text": "DelayTime = (pqevEntry->DelayTime >> 1) + 1;",
+              "context": 9
+            },
+            {
+              "physical": 188,
+              "original": 182,
+              "target": 148,
+              "text": "DelayTime = DiffTime.LowPart;    /* ignore overflow! */",
+              "context": 8
+            },
+            {
+              "physical": 191,
+              "original": 185,
+              "target": 148,
+              "text": "qevNextDueTime.QuadPart = CurrTime->QuadPart + DelayTime;",
+              "context": 5
+            },
+            {
+              "physical": 192,
+              "original": 186,
+              "target": 148,
+              "text": "host_q_ev_set_count(host_calc_q_ev_inst_for_time(DelayTime));",
+              "context": 5
+            }
+          ]
+        },
+        {
+          "physical": 216,
+          "old": 218,
+          "new": 217,
+          "matches": [
+            {
+              "physical": 221,
+              "original": 221,
+              "target": 217,
+              "text": "PQEV_ENTRY  NewEntry;",
+              "context": 6
+            },
+            {
+              "physical": 222,
+              "original": 222,
+              "target": 217,
+              "text": "PQEV_ENTRY  EarlierEntry;",
+              "context": 7
+            },
+            {
+              "physical": 229,
+              "original": 229,
+              "target": 217,
+              "text": "NewEntry = qevHandle.pvQuickEvent = malloc(sizeof(QEV_ENTRY));",
+              "context": 7
+            },
+            {
+              "physical": 230,
+              "original": 230,
+              "target": 217,
+              "text": "if (!NewEntry) {",
+              "context": 7
+            },
+            {
+              "physical": 232,
+              "original": 232,
+              "target": 217,
+              "text": "return (q_ev_handle)1;",
+              "context": 8
+            },
+            {
+              "physical": 235,
+              "original": 235,
+              "target": 217,
+              "text": "host_TimeStamp(&CurrTime);",
+              "context": 9
+            },
+            {
+              "physical": 237,
+              "original": 237,
+              "target": 217,
+              "text": "NewEntry->DueTimeStamp.QuadPart = CurrTime.QuadPart + Time;",
+              "context": 8
+            },
+            {
+              "physical": 238,
+              "original": 238,
+              "target": 217,
+              "text": "NewEntry->qevCallBack = func;",
+              "context": 8
+            },
+            {
+              "physical": 239,
+              "original": 239,
+              "target": 217,
+              "text": "NewEntry->Param = param;",
+              "context": 8
+            },
+            {
+              "physical": 240,
+              "original": 240,
+              "target": 217,
+              "text": "NewEntry->QuickEventId = qevNextHandleId++;",
+              "context": 9
+            },
+            {
+              "physical": 241,
+              "original": 241,
+              "target": 217,
+              "text": "qevHandle.QuickEventId = NewEntry->QuickEventId;",
+              "context": 9
+            },
+            {
+              "physical": 247,
+              "original": 247,
+              "target": 217,
+              "text": "EarlierEntry = NULL;",
+              "context": 10
+            },
+            {
+              "physical": 248,
+              "original": 248,
+              "target": 217,
+              "text": "Next = QuickEventListHead.Blink;",
+              "context": 11
+            },
+            {
+              "physical": 251,
+              "original": 251,
+              "target": 217,
+              "text": "if (NewEntry->DueTimeStamp.QuadPart >",
+              "context": 11
+            },
+            {
+              "physical": 252,
+              "original": 252,
+              "target": 217,
+              "text": "pqevEntry->DueTimeStamp.QuadPart)",
+              "context": 11
+            },
+            {
+              "physical": 254,
+              "original": 254,
+              "target": 217,
+              "text": "EarlierEntry = pqevEntry;",
+              "context": 9
+            },
+            {
+              "physical": 257,
+              "original": 257,
+              "target": 217,
+              "text": "Next= Next->Blink;",
+              "context": 9
+            },
+            {
+              "physical": 264,
+              "original": 264,
+              "target": 217,
+              "text": "if (EarlierEntry) {",
+              "context": 10
+            },
+            {
+              "physical": 265,
+              "original": 265,
+              "target": 217,
+              "text": "Next = EarlierEntry->qevListEntry.Flink;",
+              "context": 11
+            },
+            {
+              "physical": 266,
+              "original": 266,
+              "target": 217,
+              "text": "NewEntry->qevListEntry.Flink = Next;",
+              "context": 10
+            },
+            {
+              "physical": 267,
+              "original": 267,
+              "target": 217,
+              "text": "NewEntry->qevListEntry.Blink = &EarlierEntry->qevListEntry;",
+              "context": 10
+            },
+            {
+              "physical": 268,
+              "original": 268,
+              "target": 217,
+              "text": "EarlierEntry->qevListEntry.Flink = &NewEntry->qevListEntry;",
+              "context": 10
+            },
+            {
+              "physical": 269,
+              "original": 269,
+              "target": 217,
+              "text": "NewEntry->DelayTime = (ULONG)(NewEntry->DueTimeStamp.QuadPart -",
+              "context": 10
+            },
+            {
+              "physical": 270,
+              "original": 270,
+              "target": 217,
+              "text": "EarlierEntry->DueTimeStamp.QuadPart);",
+              "context": 10
+            },
+            {
+              "physical": 272,
+              "original": 272,
+              "target": 217,
+              "text": "if (Next == &QuickEventListHead) {",
+              "context": 10
+            },
+            {
+              "physical": 273,
+              "original": 273,
+              "target": 217,
+              "text": "QuickEventListHead.Blink = &NewEntry->qevListEntry;",
+              "context": 10
+            },
+            {
+              "physical": 275,
+              "original": 275,
+              "target": 217,
+              "text": "else {",
+              "context": 9
+            },
+            {
+              "physical": 276,
+              "original": 276,
+              "target": 217,
+              "text": "pqevEntry = CONTAINING_RECORD(Next, QEV_ENTRY, qevListEntry);",
+              "context": 8
+            },
+            {
+              "physical": 277,
+              "original": 277,
+              "target": 217,
+              "text": "pqevEntry->qevListEntry.Blink = &NewEntry->qevListEntry;",
+              "context": 8
+            },
+            {
+              "physical": 278,
+              "original": 278,
+              "target": 217,
+              "text": "pqevEntry->DelayTime = (ULONG)(pqevEntry->DueTimeStamp.QuadPart -",
+              "context": 8
+            },
+            {
+              "physical": 279,
+              "original": 279,
+              "target": 217,
+              "text": "NewEntry->DueTimeStamp.QuadPart);",
+              "context": 8
+            },
+            {
+              "physical": 288,
+              "original": 288,
+              "target": 217,
+              "text": "InsertHeadList(&QuickEventListHead, &NewEntry->qevListEntry);",
+              "context": 10
+            },
+            {
+              "physical": 289,
+              "original": 289,
+              "target": 217,
+              "text": "NewEntry->DelayTime = Time;",
+              "context": 9
+            },
+            {
+              "physical": 295,
+              "original": 295,
+              "target": 217,
+              "text": "return qevHandle.Handle;",
+              "context": 4
+            }
+          ]
+        },
+        {
+          "physical": 456,
+          "old": 426,
+          "new": 451,
+          "matches": [
+            {
+              "physical": 469,
+              "original": 463,
+              "target": 451,
+              "text": "calc_q_inst_for_time(",
+              "context": 9
+            },
+            {
+              "physical": 470,
+              "original": 464,
+              "target": 451,
+              "text": "IU32 Usecs",
+              "context": 9
+            },
+            {
+              "physical": 473,
+              "original": 467,
+              "target": 451,
+              "text": "ULONG InstrJumpCounts;",
+              "context": 10
+            },
+            {
+              "physical": 475,
+              "original": 469,
+              "target": 451,
+              "text": "InstrJumpCounts = (Usecs * qevJumpRestart)/qevUsecPerIJC;",
+              "context": 9
+            },
+            {
+              "physical": 476,
+              "original": 470,
+              "target": 451,
+              "text": "if (!InstrJumpCounts) {",
+              "context": 8
+            },
+            {
+              "physical": 477,
+              "original": 471,
+              "target": 451,
+              "text": "InstrJumpCounts = 1;",
+              "context": 7
+            },
+            {
+              "physical": 480,
+              "original": 474,
+              "target": 451,
+              "text": "return InstrJumpCounts;",
+              "context": 7
+            },
+            {
+              "physical": 488,
+              "original": 482,
+              "target": 451,
+              "text": "calc_q_time_for_inst(",
+              "context": 9
+            },
+            {
+              "physical": 489,
+              "original": 483,
+              "target": 451,
+              "text": "IU32 InstrJumpCounts",
+              "context": 10
+            },
+            {
+              "physical": 492,
+              "original": 486,
+              "target": 451,
+              "text": "ULONG Usecs;",
+              "context": 10
+            },
+            {
+              "physical": 494,
+              "original": 488,
+              "target": 451,
+              "text": "Usecs = InstrJumpCounts * qevUsecPerIJC / qevJumpRestart;",
+              "context": 8
+            },
+            {
+              "physical": 495,
+              "original": 489,
+              "target": 451,
+              "text": "if (!Usecs) {",
+              "context": 8
+            },
+            {
+              "physical": 496,
+              "original": 490,
+              "target": 451,
+              "text": "Usecs = 1;",
+              "context": 7
+            },
+            {
+              "physical": 500,
+              "original": 494,
+              "target": 451,
+              "text": "return Usecs;",
+              "context": 4
+            },
+            {
+              "physical": 533,
+              "original": 527,
+              "target": 451,
+              "text": "quick_tick_recalibrate(void)",
+              "context": 9
+            },
+            {
+              "physical": 535,
+              "original": 529,
+              "target": 451,
+              "text": "LARGE_INTEGER CurrTime, PeriodTime;",
+              "context": 7
+            },
+            {
+              "physical": 536,
+              "original": 530,
+              "target": 451,
+              "text": "ULONG usecPerIJC;",
+              "context": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_prts.c",
+      "before_sha256": "bb1a704b8fc1e48c3b659c18821a0025498b28aed63641ed12bfdffb7e370006",
+      "after_sha256": "669af0ef1a27ef2c93fcf8ac739c774b769812626ba647e47b50b554f6c5f598",
+      "fixes": [
+        {
+          "physical": 2456,
+          "old": 2434,
+          "new": 2968,
+          "matches": [
+            {
+              "physical": 2463,
+              "original": 2974,
+              "target": 2968,
+              "text": "mask = value | (((USHORT)value) << 8);",
+              "context": 9
+            },
+            {
+              "physical": 2464,
+              "original": 2975,
+              "target": 2968,
+              "text": "mask |= (mask << 16);\t/* replicate the mask into 4 bytes */",
+              "context": 10
+            },
+            {
+              "physical": 2465,
+              "original": 2976,
+              "target": 2968,
+              "text": "setVideobit_prot_mask(mask);",
+              "context": 9
+            },
+            {
+              "physical": 2466,
+              "original": 2977,
+              "target": 2968,
+              "text": "setVideodata_xor_mask(~(EGA_CPU.calc_data_xor & mask));",
+              "context": 8
+            },
+            {
+              "physical": 2467,
+              "original": 2978,
+              "target": 2968,
+              "text": "setVideolatch_xor_mask(EGA_CPU.calc_latch_xor & mask);",
+              "context": 8
+            },
+            {
+              "physical": 2468,
+              "original": 2979,
+              "target": 2968,
+              "text": "if( value == 0xff )",
+              "context": 8
+            }
+          ]
+        },
+        {
+          "physical": 2506,
+          "old": 2479,
+          "new": 3016,
+          "matches": [
+            {
+              "physical": 2513,
+              "original": 3022,
+              "target": 3016,
+              "text": "if(value != 0xff)",
+              "context": 9
+            },
+            {
+              "physical": 2515,
+              "original": 3024,
+              "target": 3016,
+              "text": "mask = value | (((USHORT)value) << 8);",
+              "context": 9
+            },
+            {
+              "physical": 2516,
+              "original": 3025,
+              "target": 3016,
+              "text": "mask |= (mask << 16);\t/* replicate the mask into 4 bytes */",
+              "context": 8
+            },
+            {
+              "physical": 2517,
+              "original": 3026,
+              "target": 3016,
+              "text": "setVideobit_prot_mask(mask);",
+              "context": 8
+            },
+            {
+              "physical": 2518,
+              "original": 3027,
+              "target": 3016,
+              "text": "setVideodata_xor_mask(~(EGA_CPU.calc_data_xor & mask));",
+              "context": 8
+            },
+            {
+              "physical": 2519,
+              "original": 3028,
+              "target": 3016,
+              "text": "setVideolatch_xor_mask(EGA_CPU.calc_latch_xor & mask);",
+              "context": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_read.c",
+      "before_sha256": "6670664cf361e53685d725e224c8c4bf1c0a936dd2157839ac6b76732d7d3404",
+      "after_sha256": "57a7717f6d61bcc0f756b6ef5acc94d73f2e804a3790ea42002d6ca54aba25db",
+      "fixes": [
+        {
+          "physical": 353,
+          "old": 264,
+          "new": 441,
+          "matches": [
+            {
+              "physical": 360,
+              "original": 447,
+              "target": 441,
+              "text": "rdm0_word_ch2 IFN1(ULONG, offset )",
+              "context": 8
+            },
+            {
+              "physical": 362,
+              "original": 449,
+              "target": 441,
+              "text": "IU32 temp;",
+              "context": 8
+            },
+            {
+              "physical": 365,
+              "original": 452,
+              "target": 441,
+              "text": "setVideolatches(*(IU32 *)( EGA_planes +",
+              "context": 8
+            },
+            {
+              "physical": 366,
+              "original": 453,
+              "target": 441,
+              "text": "((( offset + 1 ) >> 1 ) << 2 )));",
+              "context": 8
+            },
+            {
+              "physical": 373,
+              "original": 460,
+              "target": 441,
+              "text": "temp = EGA_CPU.read_mapped_plane_ch2[offset + 1];",
+              "context": 9
+            },
+            {
+              "physical": 374,
+              "original": 461,
+              "target": 441,
+              "text": "temp |= ( EGA_CPU.read_mapped_plane_ch2[offset + 4] << 8 );",
+              "context": 9
+            },
+            {
+              "physical": 378,
+              "original": 465,
+              "target": 441,
+              "text": "temp = EGA_CPU.read_mapped_plane_ch2[offset];",
+              "context": 8
+            },
+            {
+              "physical": 379,
+              "original": 466,
+              "target": 441,
+              "text": "temp |= ( EGA_CPU.read_mapped_plane_ch2[offset + 1] << 8 );",
+              "context": 7
+            }
+          ]
+        },
+        {
+          "physical": 385,
+          "old": 295,
+          "new": 472,
+          "matches": [
+            {
+              "physical": 392,
+              "original": 478,
+              "target": 472,
+              "text": "rdm0_string_ch2 IFN3(UTINY *, dest, ULONG, offset, ULONG, count )",
+              "context": 8
+            },
+            {
+              "physical": 394,
+              "original": 480,
+              "target": 472,
+              "text": "ULONG lsb;",
+              "context": 9
+            },
+            {
+              "physical": 395,
+              "original": 481,
+              "target": 472,
+              "text": "ULONG inc;",
+              "context": 9
+            },
+            {
+              "physical": 396,
+              "original": 482,
+              "target": 472,
+              "text": "UTINY *planes;",
+              "context": 10
+            },
+            {
+              "physical": 409,
+              "original": 495,
+              "target": 472,
+              "text": "inc = 3;",
+              "context": 9
+            },
+            {
+              "physical": 412,
+              "original": 498,
+              "target": 472,
+              "text": "inc = 1;",
+              "context": 8
+            },
+            {
+              "physical": 414,
+              "original": 500,
+              "target": 472,
+              "text": "planes = EGA_CPU.read_mapped_plane_ch2;",
+              "context": 7
+            },
+            {
+              "physical": 416,
+              "original": 502,
+              "target": 472,
+              "text": "while( count-- )",
+              "context": 5
+            }
+          ]
+        },
+        {
+          "physical": 458,
+          "old": 364,
+          "new": 541,
+          "matches": [
+            {
+              "physical": 463,
+              "original": 545,
+              "target": 541,
+              "text": "rdm1_word_ch2 IFN1(ULONG, offset )\t\t/* used to correct writes to M when in mode 1 */",
+              "context": 7
+            },
+            {
+              "physical": 465,
+              "original": 547,
+              "target": 541,
+              "text": "IU32 temp1, temp2, lsb;",
+              "context": 8
+            },
+            {
+              "physical": 467,
+              "original": 549,
+              "target": 541,
+              "text": "setVideolatches(*(IU32 *)( EGA_planes + ((( offset + 1 ) >> 1 ) << 2 )));",
+              "context": 8
+            },
+            {
+              "physical": 475,
+              "original": 557,
+              "target": 541,
+              "text": "temp1 = (( EGA_plane01[offset] ^ comp1 ) | dont_care1 )",
+              "context": 9
+            },
+            {
+              "physical": 479,
+              "original": 561,
+              "target": 541,
+              "text": "temp2 = (( EGA_plane01[offset] ^ comp0 ) | dont_care0 )",
+              "context": 10
+            },
+            {
+              "physical": 484,
+              "original": 566,
+              "target": 541,
+              "text": "temp1 = (( EGA_plane01[offset] ^ comp0 ) | dont_care0 )",
+              "context": 9
+            },
+            {
+              "physical": 488,
+              "original": 570,
+              "target": 541,
+              "text": "temp2 = (( EGA_plane01[offset] ^ comp1 ) | dont_care1 )",
+              "context": 8
+            },
+            {
+              "physical": 492,
+              "original": 574,
+              "target": 541,
+              "text": "temp1 |= temp2 << 8;",
+              "context": 6
+            }
+          ]
+        },
+        {
+          "physical": 645,
+          "old": 556,
+          "new": 746,
+          "matches": [
+            {
+              "physical": 650,
+              "original": 750,
+              "target": 746,
+              "text": "ega_read_routines_update IFN0()",
+              "context": 6
+            },
+            {
+              "physical": 653,
+              "original": 753,
+              "target": 746,
+              "text": "LOCAL BOOL ram_off = TRUE;\t/* optimised to avoid updates if ram disabled */",
+              "context": 7
+            },
+            {
+              "physical": 654,
+              "original": 754,
+              "target": 746,
+              "text": "LOCAL READ_POINTERS *read_ptrs;",
+              "context": 8
+            },
+            {
+              "physical": 658,
+              "original": 758,
+              "target": 746,
+              "text": "if( ram_off && (!EGA_CPU.ram_enabled ))",
+              "context": 7
+            },
+            {
+              "physical": 661,
+              "original": 761,
+              "target": 746,
+              "text": "if( !EGA_CPU.ram_enabled )\t/* video off, just return 0xff */",
+              "context": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_writ.c",
+      "before_sha256": "20e6d484f4f205feb024c1f32e1e3b5679369b4e2349758bc9a73bd3d16fcb7a",
+      "after_sha256": "f07c9321faeece6d9c46fb3886fa967419eee5a8e416e7ae05e6d74b52c560ab",
+      "fixes": [
+        {
+          "physical": 557,
+          "old": 499,
+          "new": 738,
+          "matches": [
+            {
+              "physical": 560,
+              "original": 740,
+              "target": 738,
+              "text": "setVideowrmode(EGA_CPU.write_mode);\t/* reset for 'copy case' below */",
+              "context": 7
+            },
+            {
+              "physical": 562,
+              "original": 742,
+              "target": 738,
+              "text": "if( EGA_CPU.chain == CHAIN2 )",
+              "context": 7
+            },
+            {
+              "physical": 563,
+              "original": 743,
+              "target": 738,
+              "text": "switch (EGA_CPU.write_mode)",
+              "context": 8
+            },
+            {
+              "physical": 565,
+              "original": 745,
+              "target": 738,
+              "text": "case 0:",
+              "context": 8
+            },
+            {
+              "physical": 566,
+              "original": 746,
+              "target": 738,
+              "text": "if( state == 0 )\t/* basic text */",
+              "context": 7
+            },
+            {
+              "physical": 568,
+              "original": 748,
+              "target": 738,
+              "text": "handler = &mode0_copy_handlers;",
+              "context": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gfx_updt.c",
+      "before_sha256": "7fbd263ceaa51a57c01739a79f717fed0a341340e1005f3a4bee20bb0539580e",
+      "after_sha256": "431a20fac65b6660d18f2ae0fb0b9efa20887e038fc2c2342b287651c7dedf10",
+      "fixes": [
+        {
+          "physical": 3701,
+          "old": 3603,
+          "new": 3761,
+          "matches": [
+            {
+              "physical": 3704,
+              "original": 3763,
+              "target": 3761,
+              "text": "curr_mark_type = marking_type;",
+              "context": 5
+            },
+            {
+              "physical": 3706,
+              "original": 3765,
+              "target": 3761,
+              "text": "set_mark_funcs();",
+              "context": 7
+            },
+            {
+              "physical": 3720,
+              "original": 3779,
+              "target": 3761,
+              "text": "save_gfx_update_routines();",
+              "context": 9
+            },
+            {
+              "physical": 3721,
+              "original": 3780,
+              "target": 3761,
+              "text": "if (get_display_disabled())",
+              "context": 8
+            },
+            {
+              "physical": 3722,
+              "original": 3781,
+              "target": 3761,
+              "text": "inhibit_gfx_update_routines();",
+              "context": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\vga_prts.c",
+      "before_sha256": "12e7169720adcc8a31487d47f20c9c344bc58d02a9fb463a242c865ac1ad4be7",
+      "after_sha256": "caa6bb69a67c3a60e36f776c3f3dc5a6f2e35b9836e9411a60b4a94e82e35ac1",
+      "fixes": [
+        {
+          "physical": 2201,
+          "old": 2173,
+          "new": 2180,
+          "matches": [
+            {
+              "physical": 2209,
+              "original": 2187,
+              "target": 2180,
+              "text": "mask = value | (value << 8);",
+              "context": 8
+            },
+            {
+              "physical": 2210,
+              "original": 2188,
+              "target": 2180,
+              "text": "mask |= (mask << 16);\t/* replicate the mask into 4 bytes */",
+              "context": 9
+            },
+            {
+              "physical": 2211,
+              "original": 2189,
+              "target": 2180,
+              "text": "setVideobit_prot_mask(mask);",
+              "context": 9
+            },
+            {
+              "physical": 2212,
+              "original": 2190,
+              "target": 2180,
+              "text": "setVideodata_xor_mask(~(EGA_CPU.calc_data_xor & mask));",
+              "context": 8
+            },
+            {
+              "physical": 2213,
+              "original": 2191,
+              "target": 2180,
+              "text": "setVideolatch_xor_mask(EGA_CPU.calc_latch_xor & mask);",
+              "context": 8
+            },
+            {
+              "physical": 2215,
+              "original": 2193,
+              "target": 2180,
+              "text": "if(value == 0xff)",
+              "context": 7
+            }
+          ]
+        },
+        {
+          "physical": 2252,
+          "old": 2220,
+          "new": 2230,
+          "matches": [
+            {
+              "physical": 2260,
+              "original": 2237,
+              "target": 2230,
+              "text": "if(value != 0xff)",
+              "context": 9
+            },
+            {
+              "physical": 2262,
+              "original": 2239,
+              "target": 2230,
+              "text": "mask = value | (value << 8);",
+              "context": 9
+            },
+            {
+              "physical": 2263,
+              "original": 2240,
+              "target": 2230,
+              "text": "mask |= (mask << 16);\t/* replicate the mask into 4 bytes */",
+              "context": 8
+            },
+            {
+              "physical": 2264,
+              "original": 2241,
+              "target": 2230,
+              "text": "setVideobit_prot_mask(mask);",
+              "context": 8
+            },
+            {
+              "physical": 2265,
+              "original": 2242,
+              "target": 2230,
+              "text": "setVideodata_xor_mask(~(EGA_CPU.calc_data_xor & mask));",
+              "context": 8
+            },
+            {
+              "physical": 2266,
+              "original": 2243,
+              "target": 2230,
+              "text": "setVideolatch_xor_mask(EGA_CPU.calc_latch_xor & mask);",
+              "context": 7
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

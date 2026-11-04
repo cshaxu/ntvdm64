@@ -150,7 +150,7 @@ q_event_init(
  *  Caller must hold ica lock
  */
 #ifndef MONITOR
-#line 151
+#line 148
 /*
 *  Caller must hold ica lock
 */
@@ -213,7 +213,7 @@ add_q_event_t(
 #line 207
 #error Excluded unsupported quick-event hardware monitor path
 #else
-#line 218
+#line 217
 
 
         QEVHANDLE   qevHandle;
@@ -453,7 +453,7 @@ delete_q_event(
 
 
 #ifndef MONITOR
-#line 426
+#line 451
 /*
  * The QuickEvent list stores time in usecs. The CPU quick event counter
  * uses Instruction Jump Counts (IJC) which tracks progress in emulated

@@ -350,7 +350,7 @@ rdm0_byte_ch2 IFN1(ULONG, offset )
 #ifdef C_VID
 	EasVal = temp;
 #endif
-#line 264
+#line 441
 	return( temp );
 }
 
@@ -382,7 +382,7 @@ rdm0_word_ch2 IFN1(ULONG, offset )
 #ifdef C_VID
 	EasVal = temp;
 #endif
-#line 295
+#line 472
 	return( temp );
 }
 
@@ -455,7 +455,7 @@ rdm1_byte_ch2 IFN1(ULONG, offset )
 #ifdef C_VID
 	EasVal = temp;
 #endif
-#line 364
+#line 541
 	return( temp );
 }
 
@@ -642,7 +642,7 @@ update_shift_count IFN0()
 
 			break;
 #endif	/* VGG */
-#line 556
+#line 746
 	}
 }
 

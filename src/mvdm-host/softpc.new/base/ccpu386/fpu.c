@@ -1868,7 +1868,7 @@ LOCAL VOID CalcTagword IFN1(FPSTACKENTRY *, FPPtr)
 #error Unsupported excluded original configuration
 #endif
 #line 1886
-#line 1867
+#line 1886
 		}
 	} else {
 		if (((FPHOST *)&(FPPtr->fpvalue))->hiword.exp == HOST_MAX_EXP) {

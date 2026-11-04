@@ -554,7 +554,7 @@ ega_write_routines_update IFN1(CHANGE_TYPE, reason )
 #ifdef V7VGA
 		|| ( Last_v7_fg_bg != fg_bg_control)
 #endif /* V7VGA */
-#line 499
+#line 738
 		)
 	{
 		setVideowrmode(EGA_CPU.write_mode);	/* reset for 'copy case' below */

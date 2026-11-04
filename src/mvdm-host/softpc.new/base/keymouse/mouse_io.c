@@ -109,7 +109,7 @@
 #line 111
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif  /* MONITOR */
-#line 161
+#line 158
 
 IMPORT void host_m2p_ratio(word *,word *,word *,word *);
 /* DIVERGENCE(MVDM-HOST-DIV-058): match the original call operands' scalar
@@ -2662,7 +2662,7 @@ LOCAL void mouse_show_cursor IFN4(word *,junk1,word *,junk2,word *,junk3,word *,
 #error Excluded unsupported non-NTVDM mouse profile
 #else
 #if !defined(MONITOR)
-#line 2570
+#line 2951
 	/*
 	 *	Disable conditional off area
 	 */
@@ -3442,7 +3442,7 @@ LOCAL void mouse_save_state IFN4(word *,m1,word *,m2,word *,m3,word *,m4)
 #line 3715
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
-#line 3718
+#line 3712
 	note_trace0(MOUSE_VERBOSE, "mouse_io: mouse_save_state()");
 
 	dest = effective_addr (getES(), *m4);

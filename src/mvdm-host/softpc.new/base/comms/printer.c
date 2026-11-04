@@ -474,7 +474,7 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 #if defined(NTVDM)
 			set_state(adapter, STATE_DATA);
 #endif
-#line 452
+#line 481
 			/* Write char to internal buffer */
 			output_reg[adapter] = value;
 			break;
@@ -704,7 +704,7 @@ void printer_init IFN1(int,adapter)
 	}
 	else
 #endif /* NTVDM && MONITOR */
-#line 658
+#line 700
 	{
 	    control_reg[adapter] = 0xEC;
 	    status_reg[adapter] = 0xDF;

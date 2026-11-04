@@ -2198,7 +2198,7 @@ GLOBAL VOID	vga_gc_mask IFN2(USHORT,port,FAST UTINY,value)
 #ifdef PROD
 	UNUSED(port);
 #endif
-#line 2173
+#line 2180
 	NON_PROD(if(io_verbose & EGA_PORTS_VERBOSE)fprintf(trace_file,"gc(8,%x)\n",value);)
 	note_entrance2("vga_gc_mask(%x,%x)", port, value);
 
@@ -2249,7 +2249,7 @@ GLOBAL VOID	vga_gc_mask_ff IFN2(USHORT,port,FAST UTINY,value)
 #ifdef PROD
 	UNUSED(port);
 #endif
-#line 2220
+#line 2230
 	NON_PROD(if(io_verbose & EGA_PORTS_VERBOSE)fprintf(trace_file,"gc(8,%x)\n",value);)
 	note_entrance2("vga_gc_mask(%x,%x)", port, value);
 

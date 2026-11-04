@@ -3698,7 +3698,7 @@ GLOBAL void set_gfx_update_routines IFN3(T_calc_update, update_routine,
 #endif /* VGG */
 #line 3602
 #endif /* !NTVDM | (NTVDM & !X86GFX) */
-#line 3603
+#line 3761
 	}
 
 	curr_mark_type = marking_type;

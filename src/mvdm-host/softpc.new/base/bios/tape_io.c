@@ -111,7 +111,7 @@ half_word target_AR;
 #line 101
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif /* NTVDM & MONITOR */
-#line 103
+#line 100
         /*
          *	Determine function
          */

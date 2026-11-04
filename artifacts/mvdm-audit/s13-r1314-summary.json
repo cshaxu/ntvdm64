@@ -47,5 +47,7 @@
   "condition_free_differing_files_code_review_complete": 373,
   "condition_free_reviewed_matching_code": 370,
   "condition_free_reviewed_comment_only": 3,
-  "batch_r1327_condition_free_code_audited": 315
+  "batch_r1327_condition_free_code_audited": 315,
+  "batch_r1328_anchor_files_partially_corrected": 10,
+  "batch_r1328_context_matched_anchors_corrected": 20
 }
