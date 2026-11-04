@@ -74,6 +74,12 @@ Detours build path. Restricted file operations, unapproved target rejection,
 two actual NTVDM relinks and both real WRITE startup frontiers passed. Product
 build and Control passed; local package `454dd50e-b64b-42ed-bed7-453ae71bfd00`
 has ten verified hashes. WRITE editing, save and exit were not verified.
+P9 converts the running-NTCON Console observer to C, using the existing late
+thread guard and MinHook trampolines. Real NTCON hook installation, mouse
+acknowledgment and guest completion passed; four-process call/error/lifetime
+and protection-failure rollback tests passed. Product build and Control passed;
+local package `0abcb77d-13e9-43f6-8049-37fb5636fa3f` has ten verified hashes.
+The late backend does not exclude new-thread races or implement removal.
 The adjacent library's same-width payload-only mechanism, non-Detours payload
 format, helper ordinal and startup-only transaction require compatibility proof;
 no untested semantic equivalence is assumed. Prior [S4 evidence](../etc/evidence/m0-t475-s4-nthook-dependency-cleanup.md),

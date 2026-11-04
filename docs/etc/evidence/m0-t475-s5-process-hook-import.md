@@ -289,3 +289,40 @@ Control passed (`p8/control.process`); ten local release image hashes and the
 license match package `454dd50e-b64b-42ed-bed7-453ae71bfd00`. Full and
 DOS4GW/NESticle were not run. The running-process console observer, Detours
 vendor sources and historical C++ fixtures remain open in S5.
+
+## P9 — C late-install Console observer
+
+The test-only NTCON Console observer now uses the existing C late-patch and
+thread guard with the MinHook trampoline backend. Installation is deferred
+until the injected input hook runs outside the loader lock; the DLL is pinned
+before patches can be published. The five observed APIs retain their original
+result and LastError. A failed batch records an error and suppresses input
+acknowledgment; installed trampolines remain pinned, and retained suspension
+handles are retried before returning to the message loop. The Detours C++
+observer source and its diagnostic build selection were removed.
+
+Four independent x64 private-desktop fixture processes exercised actual late
+patches, five original API results/errors, trace records, a live pair of other
+threads and DLL pinning (`p9/fixture-r4.process`, exit 0). Four additional
+processes injected a protection failure after two protections and confirmed
+no hook publication, input suppression, preserved calls and continued worker
+thread progress (`p9/fixture-fault-r2.process`, exit 0). The final non-debug
+DLL was injected by WH_GETMESSAGE into actual isolated NTCON; the real
+frontend acknowledged mouse input and the assembled graphics guest completed
+with `WINDOW-MOUSE-PASS` (`p9/real-mouse-final2.process`, exit 0). Earlier
+attempts failed before injection or configuration due to mixed path separators;
+they are not passing evidence. The first WRITE-based attempt also did not
+create the required graphics window.
+
+The late primitive checks and suspends the observed thread set but does not
+prevent new thread creation, and hook removal is not implemented. The tests do
+not prove all concurrency interleavings or normal physical input behavior;
+the diagnostic DLL remains pinned until its target exits. These boundaries
+are not evidence of a fully general late-hook API.
+
+The x86/x64 product build and focused checks passed (`p9/build.process`);
+staging checked 63 immutable guest files and 274 exports (`p9/stage.process`).
+Control passed (`p9/control.process`); ten local release image hashes and the
+license match package `0abcb77d-13e9-43f6-8049-37fb5636fa3f`. Full and
+DOS4GW/NESticle were not run. Vendored Detours and historical C++ fixtures
+remain open in S5.

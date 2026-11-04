@@ -6,10 +6,16 @@
 #include <stdio.h>
 #include "lib-nxvm/kvm-window/window.h"
 
+#ifdef WIN31_CONSOLE_API_TRACE
+BOOL win31_console_api_on_message(void);
+#endif
 static unsigned accepted;
 
 LRESULT CALLBACK MouseInputHook(int code, WPARAM removed, LPARAM value)
 {
+#ifdef WIN31_CONSOLE_API_TRACE
+    if (!win31_console_api_on_message()) return CallNextHookEx(NULL, code, removed, value);
+#endif
     if (code == HC_ACTION && removed == PM_REMOVE) {
         MSG *message = (MSG *)value;
         if (message->message == WM_APP + 0x5f1) {
