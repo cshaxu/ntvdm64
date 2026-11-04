@@ -201,3 +201,22 @@ Staging checked 63 immutable guest files and 274 ordinal exports
 and license in local release package `845cebf2-9632-40b0-8509-912517e8fad0`
 were hash verified. Full and DOS4GW/NESticle were not run. Diagnostic probes,
 legacy fixtures and the test-only Detours implementation remain outstanding.
+
+## P5 — C startup Console trace
+
+The startup-only Win31 Console trace now uses the shared C trampoline
+transaction; it preserves logging, original call/result and LastError.
+`tests/observation/verify-console-trace-c.ps1` exercised real interception,
+log content, the original function and LastError under x86 and x64 MSVC
+(`build/t475-s5/console-trace.process`, exit 0). A test-only NTVDM relink
+using the actual product object archive and the C trace also succeeded
+(`p5-console-relink.process`, exit 0); that diagnostic image was not run as a
+real guest and was not published. Its build script retains the old C++ branch
+for the not-yet-converted write guard.
+
+P5's x86/x64 product build and focused checks passed (`p5/build.process`);
+staging verified 63 immutable guest files and 274 ordinal exports; Control
+passed (`p5/stage.process`, `p5/control.process`, exit 0). Ten local release
+hashes and the license match package `f49f5403-2030-433e-87b3-77b5858a2b35`.
+Full and DOS4GW/NESticle were not run. Remaining C++/Detours diagnostics and
+legacy test sources remain open in S5.

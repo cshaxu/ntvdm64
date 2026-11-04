@@ -54,6 +54,11 @@ checks and actual x86/x64 ChildFirst observation passed, as did Control.
 Local package `845cebf2-9632-40b0-8509-912517e8fad0` has ten verified hashes.
 Diagnostic and legacy C++/Detours sources remain within S5.
 
+P5 converts the startup Console trace to C; x86/x64 interception, original
+call and LastError checks, an actual NTVDM diagnostic relink, product build and
+Control passed. Local package `f49f5403-2030-433e-87b3-77b5858a2b35` has ten
+verified hashes. The diagnostic relink was not run with a real guest.
+
 The adjacent library's same-width payload-only mechanism, non-Detours payload
 format, helper ordinal and startup-only transaction require compatibility proof;
 no untested semantic equivalence is assumed. Prior [S4 evidence](../etc/evidence/m0-t475-s4-nthook-dependency-cleanup.md),

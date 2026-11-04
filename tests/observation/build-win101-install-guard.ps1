@@ -29,8 +29,15 @@ if(!$ProbeSource){$ProbeSource="$PSScriptRoot/win101_install_write_guard.cpp"}
 $ProbeSource=(Resolve-Path $ProbeSource).Path
 if(!$ProbeSource.StartsWith((Join-Path $repo 'tests')+'\',[StringComparison]::OrdinalIgnoreCase)){throw 'Test-owned probe source required'}
 $sources=@($ProbeSource)
-foreach($name in @('detours','disasm','image','modules','creatwth')) {
-    $sources+=Join-Path $repo "src/lib-win32/process-hook/detours/$name.cpp"
+$sharedHook=[IO.Path]::GetExtension($ProbeSource) -ieq '.c'
+if($sharedHook){
+    foreach($name in @('startup_hooks.c','minhook/src/buffer.c','minhook/src/trampoline.c','minhook/src/hde/hde32.c')){
+        $sources+=Join-Path $repo "src/lib-win32/process-hook/$name"
+    }
+}else{
+    foreach($name in @('detours','disasm','image','modules','creatwth')) {
+        $sources+=Join-Path $repo "src/lib-win32/process-hook/detours/$name.cpp"
+    }
 }
 $commands=@('@echo off',
     'call "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul',
@@ -38,7 +45,8 @@ $commands=@('@echo off',
 $objects=@()
 foreach($source in $sources) {
     $obj=Join-Path $build ([IO.Path]::GetFileNameWithoutExtension($source)+'.obj')
-    $commands+='cl.exe /nologo /MT /EHsc /std:c++14 /c /Fo"'+$obj+'" "'+$source+'"'
+    $flags=if($sharedHook){'/std:c11 /FI"'+$repo+'/src/compat/include/process_hook_msvc.h"'}else{'/EHsc /std:c++14'}
+    $commands+='cl.exe /nologo /MT '+$flags+' /c /Fo"'+$obj+'" "'+$source+'"'
     $commands+='if errorlevel 1 exit /b %errorlevel%'
     $objects+='"'+$obj+'"'
 }
