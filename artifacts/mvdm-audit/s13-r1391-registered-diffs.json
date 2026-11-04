@@ -1,0 +1,261 @@
+{
+  "method": "Review retained-arm direct differences against specific existing mirror registrations after original-tree and selected source-projection checks; full diffs listed.",
+  "limits": "Source-derived matching-line projection and existing historical hit evidence; no new runtime or compiler diagnostic test.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "current_sha256": "9450c25c9566579ea53fb66a512f757c951dfdb665eb0c1e9bead18a790a50d5",
+      "original_sha256": "1309239998f72b64583b184d33623c763c3c98ea185081f8d8b294cd9b8c524f",
+      "matched_lines": 5879,
+      "strict_tree": {
+        "excluded": 6,
+        "groups": 9,
+        "retained": 6,
+        "retained_leaf_differences": 1
+      },
+      "registered_differences": [
+        "MVDM-HOST-DIV-130"
+      ],
+      "retained_arm_direct_differences": [
+        {
+          "branch_line": 5789,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -60,3 +60,3 @@",
+            " {",
+            "-reg_num += TOSPtr - FPUStackBase;",
+            "+reg_num += (IU32)(TOSPtr - FPUStackBase);",
+            " NpxStackRegAsString (&FPUStackBase[reg_num&7], buffer, 12);"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host.h",
+      "current_sha256": "8fb42849d935c468c8abcd62db19dd3087b3374f2d633bafcaa9a79aae5b8e4b",
+      "original_sha256": "7777d03c1ab2be0f278941a5d0085847c209da5b7984e05fdbcb8aa2885a495b",
+      "matched_lines": 45,
+      "strict_tree": {
+        "excluded": 3,
+        "groups": 5,
+        "retained": 2,
+        "retained_leaf_differences": 1
+      },
+      "registered_differences": [
+        "MVDM-HOST-DIV-090"
+      ],
+      "retained_arm_direct_differences": [
+        {
+          "branch_line": 54,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -1 +1,4 @@",
+            "-IMPORT VOID memset4 IPT3( IU32, data, ULONG *, laddr, ULONG, count );",
+            "+/* DIVERGENCE MVDM-HOST-DIV-090: bind the exact original host_def.h provider",
+            "+* carrier; `ULONG *` only happened to match `unsigned int *` on NT4. */",
+            "+IMPORT VOID memset4 IPT3( unsigned int, data, unsigned int *, laddr,",
+            "+unsigned int, count );"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+      "current_sha256": "15f7c04de7479ba122b2516c499f59ae01d598931881902a4b042c2ae649b398",
+      "original_sha256": "b93eb0784830446b53eeadb4b4f2dc5506787cd5313b313ecfc1ec14c5b7d160",
+      "matched_lines": 373,
+      "strict_tree": {
+        "retained": 9,
+        "groups": 13,
+        "excluded": 12,
+        "retained_leaf_differences": 1
+      },
+      "registered_differences": [
+        "MVDM-HOST-DIV-024"
+      ],
+      "retained_arm_direct_differences": [
+        {
+          "branch_line": 206,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -1,2 +1,2 @@",
+            "-#include \"..\\..\\..\\..\\inc\\vdm.h\"",
+            "+#include <vdm.h>",
+            " /*  NTVDM"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+      "current_sha256": "4707df970954edcae73ba0e47f9c46e76405bc7bb6271a24d359f2bd2af0024d",
+      "original_sha256": "049c4ea27ebb73296fdc96f932571598e76be8ebcf5165e5cf5815a5095de20f",
+      "matched_lines": 1909,
+      "strict_tree": {
+        "retained": 73,
+        "excluded": 40,
+        "groups": 89,
+        "retained_leaf_differences": 2
+      },
+      "registered_differences": [
+        "MVDM-HOST-DIV-090"
+      ],
+      "retained_arm_direct_differences": [
+        {
+          "branch_line": 1959,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -14,3 +14,3 @@",
+            " {",
+            "-memset4( attr, (ULONG *)&EGA_planes[dest<<2], colsdiff );",
+            "+memset4( attr, (unsigned int *)&EGA_planes[dest<<2], colsdiff );",
+            " if(!screen_updated)"
+          ]
+        },
+        {
+          "branch_line": 2006,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -16,3 +16,3 @@",
+            " {",
+            "-memset4( attr, (ULONG *)&EGA_planes[dest<<2], colsdiff );",
+            "+memset4( attr, (unsigned int *)&EGA_planes[dest<<2], colsdiff );",
+            " if(!screen_updated)"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "current_sha256": "9d659d4faec311c4a7d794a65a1667dd4cc479d67f4dc680c284cf3bbefe7378",
+      "original_sha256": "320d697e9969cf146d5b0f94813aa62b501b0eefeff31806b22d463912965518",
+      "matched_lines": 151,
+      "strict_tree": {
+        "excluded": 4,
+        "retained": 4,
+        "groups": 5,
+        "implicit_retained_anchor": 1,
+        "retained_leaf_differences": 1
+      },
+      "registered_differences": [
+        "MVDM-HOST-DIV-064"
+      ],
+      "retained_arm_direct_differences": [
+        {
+          "branch_line": 104,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -1,4 +1,2 @@",
+            "-count = h_addr4 - l_addr4;",
+            "-RtlFillMemoryUlong(l_addr4, count, data4);",
+            "+do *l_addr4++ = data4; while (h_addr4 > l_addr4);",
+            " l_addr = (unsigned char *)l_addr4;",
+            "-l_addr += count;"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "current_sha256": "8ea79491911b1a274c89771717062068df5c453e89648ee21dd588dffaf1e371",
+      "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+      "matched_lines": 768,
+      "strict_tree": {
+        "retained": 5,
+        "groups": 31,
+        "excluded": 30,
+        "retained_leaf_differences": 1
+      },
+      "registered_differences": [
+        "MVDM-HOST-DIV-770"
+      ],
+      "retained_arm_direct_differences": [
+        {
+          "branch_line": 349,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -1 +1,3 @@",
+            "+mvdm_softpc_report_wow_stage(\"dispatch-begin\",",
+            "+(unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());",
+            " (*WOWDispatchEntry)();"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "current_sha256": "e5234fca6a99ea1e66e9a2ab663c9020ff039e9a3fd170b802fd4861037e015e",
+      "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0",
+      "matched_lines": 629,
+      "strict_tree": {
+        "retained": 5,
+        "groups": 10,
+        "excluded": 9,
+        "implicit_continuation": 2,
+        "implicit_retained_anchor": 1,
+        "retained_leaf_differences": 1
+      },
+      "registered_differences": [
+        "MVDM-HOST-DIV-304"
+      ],
+      "retained_arm_direct_differences": [
+        {
+          "branch_line": 687,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -2,2 +2,9 @@",
+            " SaveIp = getIP();",
+            "+/* DIVERGENCE(MVDM-HOST-DIV-304): default-off witness after the original",
+            "+* stack selection and before the original CCPU reentry.  It copies no",
+            "+* guest state and does not alter the callback protocol. */",
+            "+wow_callback_frame_trace(\"simulate\", (DWORD)iRetID, ptd->vpStack,",
+            "+ptd->vpCBStack, 0, ptd->htask16, (DWORD)vpfnProc,",
+            "+pParm16 ? pParm16->WndProc.wMsg : 0,",
+            "+pParm16 ? pParm16->WndProc.lParam : 0);",
+            " host_simulate();"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntcsrmsg.h",
+      "current_sha256": "edafef9f825bbcc4000195c3fcbd63d6dd65d753271770bf6e5480a83b7879b1",
+      "original_sha256": "896d25bb240d105c64f96ab06f97bee8e013ad7c4e679a0292b07c5e594c6fc7",
+      "matched_lines": 138,
+      "strict_tree": {
+        "retained_leaf_differences": 1,
+        "retained": 1,
+        "groups": 1
+      },
+      "registered_differences": [
+        "OPENNT-HOST-066"
+      ],
+      "retained_arm_direct_differences": [
+        {
+          "branch_line": 22,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -63,4 +63,6 @@",
+            " ULONG CountCapturePointers;",
+            "-PULONG MessagePointerOffsets;   // Offsets within CSR_API_MSG of pointers",
+            "-PULONG CapturePointerOffsets;   // Offsets within CaptureBuffer of pointers",
+            "+/* DIVERGENCE(OPENNT-HOST-066): process-local capture metadata only;",
+            "+* ULONG_PTR is the identical original ULONG carrier in x86 builds. */",
+            "+PULONG_PTR MessagePointerOffsets; // Offsets within CSR_API_MSG of pointers",
+            "+PULONG_PTR CapturePointerOffsets; // Offsets within CaptureBuffer of pointers",
+            " PCHAR FreeSpace;"
+          ]
+        }
+      ]
+    }
+  ]
+}
