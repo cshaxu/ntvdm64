@@ -37,6 +37,7 @@
 #include "nt_eoi.h"
 
 // from nt_timer.c
+#line 44
 extern ULONG GetPerfCounter(VOID);
 
 
@@ -102,6 +103,7 @@ BlockWOWIdle(
 #endif
 #line 91
 
+#line 105
        }
    else {
        *pNtVDMState &= ~VDM_WOWBLOCKED;
@@ -293,6 +295,7 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
         //
         // Keep Wow Tasks active
         //
+#line 306
         WOWIdle(TRUE);
 #endif
 #line 311
@@ -397,6 +400,7 @@ void SoftPcEoi(int Adapter, int* Line) {
     pic_line = (IS32)*Line;
     ica_eoi((IU32)Adapter, &pic_line, 0);
     *Line = (int)pic_line;
+#line 417
 }
 
 

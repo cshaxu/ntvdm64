@@ -162,6 +162,7 @@ void nt_init_cga_colour_med_graph()
 #line 150
 
 #ifdef LITTLEND
+#line 190
                         cga_med_graph_hi_nyb[i]
                                 = ( byte3 << 24 ) | ( byte3 << 16)
                                         | ( byte4 << 8 ) | byte4;

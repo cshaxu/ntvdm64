@@ -639,6 +639,7 @@ GLOBAL VOID	do_new_cursor IFN0()
 	if (crt_controller.cursor_start.as_bfld.cursor_off)
 		set_cursor_visible(FALSE);
 
+#line 631
 	if(( get_cur_y() < 0 ) ||
 			((( get_cur_y() + 1 ) * get_char_height()) > get_screen_height() ))
 	{
@@ -1440,6 +1441,7 @@ GLOBAL VOID	vga_crtc_outb IFN2(io_addr,port,half_word,value)
 						new.value = value;
 						/* DIV-358: retain bit-only writes as well as geometry. */
 						crt_controller.cursor_start.as.abyte = value;
+#line 1422
 						do_new_cursor();
 #ifdef V7VGA
 					}
@@ -2142,6 +2144,7 @@ FAST TINY colour_dont_care;
 #include	"cpu_vid.h"
 IMPORT VOID Glue_set_vid_wrt_ptrs IPT1(WRT_POINTERS *, handler);
 
+#line 2123
 GLOBAL VOID vga_mask_register_changed IFN1(BOOL, gotBitProtection)
 {
 	ULONG				state;
@@ -2181,6 +2184,7 @@ GLOBAL VOID vga_mask_register_changed IFN1(BOOL, gotBitProtection)
 #else
 #line 2156
 #if !(defined(NTVDM) && defined(X86GFX))
+#line 2164
 	Glue_set_vid_wrt_ptrs(&mode_chain_handler_table[EGA_CPU.saved_mode_chain][state]);
 #endif /* !(NTVDM && X86GFX) */
 #endif /* A3CPU */

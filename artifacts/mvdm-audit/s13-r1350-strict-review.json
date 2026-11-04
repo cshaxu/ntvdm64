@@ -1,0 +1,29 @@
+{
+  "method": "Same strict original-tree and observed selected-projection review as r1348; unobserved contexts and local runtime behavior are not certified.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_ports.c",
+      "before_sha256": "9eec47fab4481684b32dbdb34ed9c10766ff64c292078e52f704f5189d50c1a2",
+      "original_sha256": "d02575bd0594f9ccc3a23ad7ed0eb208ec7c1414eeffd558dd1ce6b648f1991b",
+      "anchors": {},
+      "matched_lines": 758,
+      "strict_tree": {
+        "retained": 2,
+        "excluded": 1,
+        "groups": 3
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+      "before_sha256": "39a76118fb517efeaf152bcba60b29b8fe9a617c3e58c881aa27d67a5d249df8",
+      "original_sha256": "ef84222253b20092ab43505ea3232b3c1174833166ebb4880cb378880a967cc7",
+      "anchors": {},
+      "matched_lines": 901,
+      "strict_tree": {
+        "excluded": 6,
+        "groups": 14,
+        "retained": 9
+      }
+    }
+  ]
+}

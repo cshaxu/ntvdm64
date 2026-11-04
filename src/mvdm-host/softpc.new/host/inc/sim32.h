@@ -51,6 +51,7 @@ UCHAR *Sim32pGetVDMPointer(ULONG addr, UCHAR pm);
 /********************************************************/
 #ifdef ANSI
 /* Sas/gmi Sim32 crossovers */
+#line 53
 extern BOOL Sim32FlushVDMPointer (double_word, word, UTINY *, BOOL);
 extern BOOL Sim32FreeVDMPointer (double_word, word, UTINY *, BOOL);
 extern BOOL Sim32GetVDMMemory (double_word, word, UTINY *, BOOL);

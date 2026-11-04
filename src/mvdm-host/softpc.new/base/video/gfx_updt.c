@@ -113,6 +113,7 @@ IMPORT void setMarkPointers IPT1(IUH, markset);
  * in host_graph.h.
  */
 
+#line 107
 int terminal_type = TERMINAL_TYPE_DEFAULT;
 
 /*
@@ -167,6 +168,7 @@ int terminal_type = TERMINAL_TYPE_DEFAULT;
 #error Unsupported excluded original configuration
 #else
 #line 163
+#line 189
 #define	SET_VGLOBS_MARK_STRING(func)	setVideomark_string(func);
 #endif	/* NO_STRING_OPERATIONS */
 #line 191
@@ -195,6 +197,7 @@ GLOBAL LONG dirty_curs_y;
 	/* DIVERGENCE(MVDM-HOST-DIV-135): selected marking dispatch is void; see
 	 * gfx_upd.h.  Original callers use only its dirty-state side effect. */
 	LOCAL VOID simple_update IPT0();
+#line 214
 	boolean	dummy_scroll IPT6(int,dummy1,int,dummy2,int,dummy3,
 			int,dummy4,int,dummy5,int,dummy6);
 #if defined(NTVDM) && defined(MONITOR)
@@ -220,6 +223,7 @@ GLOBAL LONG dirty_curs_y;
 #error Unsupported excluded original configuration
 #else	/* HOST_SCREEN_UPDATES */
 
+#line 240
 #define	HostUpdatedVGA()	FALSE
 #define	HostUpdatedEGA()	FALSE
 
@@ -516,6 +520,7 @@ static	void	paint_records IFN2(int, start_rec, int, end_rec)
 #line 523
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #else
+#line 525
 #define get_char_attr(unsigned_long_ptr)     (((*(unsigned_long_ptr)) & 0xffff))
 #endif
 #line 527
@@ -636,6 +641,7 @@ simple_handler IFN0()
 LOCAL	VOID simple_update IFN0()
 {
 	setVideodirty_total(getVideodirty_total() + 1);
+#line 639
 }
 
 LOCAL VOID simple_update_b_move IFN4(UTINY *, laddr, UTINY *, haddr, 
@@ -2509,6 +2515,7 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,
 #line 2498
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #else
+#line 2500
 	data = (attr << 8) | ' ';
 #endif
 #line 2502
@@ -2648,6 +2655,7 @@ boolean text_scroll_down IFN6(int, start, int, width, int, height,
 #line 2635
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #else
+#line 2637
 	data = (attr << 8) | ' ';
 #endif
 #line 2639
@@ -3416,6 +3424,7 @@ GLOBAL VOID ega_mark_byte IFN1(int, off_in)
 #line 3486
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
+#line 3488
 	register int offset = off_in>>2;
 
 	video_copy[offset] = 1;
@@ -3438,6 +3447,7 @@ GLOBAL VOID ega_mark_word IFN1(int, addr)
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
 
+#line 3508
 	register	int	offset1 = addr >> 2;
 	register	int	offset2 = (addr+1) >> 2;
 
@@ -3462,6 +3472,7 @@ GLOBAL VOID ega_mark_wfill IFN3(int, laddr, int, haddr, int, col)
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
 
+#line 3530
 	register	int	offset1 = laddr >> 2;
 	register	int	offset2 = haddr >> 2;
 
@@ -3486,6 +3497,7 @@ GLOBAL VOID ega_mark_string IFN2(int, laddr, int, haddr)
 #line 3550
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
+#line 3552
 	register	int	offset1 = laddr >> 2;
 	register	int	offset2 = haddr >> 2;
 
@@ -3558,6 +3570,7 @@ set_mark_funcs IFN0()
 #line 3616
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else	/* CPU_40_STYLE - EVID */
+#line 3621
 			SetMarkPointers(0);
 #endif	/* CPU_40_STYLE - EVID */
 #line 3623
@@ -3574,6 +3587,7 @@ set_mark_funcs IFN0()
 #line 3633
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else	/* CPU_40_STYLE - EVID */
+#line 3638
 			SetMarkPointers(1);
 #endif	/* CPU_40_STYLE - EVID */
 #line 3640
@@ -3605,6 +3619,7 @@ set_mark_funcs IFN0()
 #line 3671
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else	/* CPU_40_STYLE - EVID */
+#line 3676
 					SetMarkPointers(2);
 #endif	/* CPU_40_STYLE - EVID */
 #line 3678
@@ -3627,6 +3642,7 @@ set_mark_funcs IFN0()
 #line 3695
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else	/* CPU_40_STYLE - EVID */
+#line 3700
 					SetMarkPointers(3);
 #endif	/* CPU_40_STYLE - EVID */
 #line 3702
@@ -3635,6 +3651,7 @@ set_mark_funcs IFN0()
 					break;
 #endif	/* VGG */
 #line 3548
+#line 3705
 			}
 
 			break;

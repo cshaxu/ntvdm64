@@ -104,6 +104,7 @@ fwd_word_fill(
 #else
 #line 116
                 do *l_addr4++ = data4; while (h_addr4 > l_addr4);
+#line 121
                 l_addr = (unsigned char *)l_addr4;
 #endif
 #line 124

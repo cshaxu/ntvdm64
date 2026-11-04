@@ -3,6 +3,7 @@
 #include <nturtl.h>
 #include <windows.h>
 #include <stdint.h>
+#line 5
 #include <vdm.h>
 #include "insignia.h"
 #include "host_def.h"
@@ -63,6 +64,7 @@ DATA OBJECTS      : None
 
 /* [3.1.1 #INCLUDES]                                                    */
 
+#line 63
 #include "stdio.h"
 
 #include "xt.h"
@@ -74,6 +76,7 @@ DATA OBJECTS      : None
 #include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_firmware.h"
+#line 71
 #include "host_bop.h"
 #include "demexp.h"
 #include "xmsexp.h"
@@ -186,6 +189,7 @@ DWORD ntvdm_wow_terminate_ticket(uint64_t ticket)
     return terminate_ticket ? terminate_ticket(ticket) : ERROR_PROC_NOT_FOUND;
 }
 
+#line 170
 static BOOL WowModeInitialized = FALSE;
 
 void MS_bop_1(void) {
@@ -209,10 +213,12 @@ void MS_bop_1(void) {
         (unsigned long)getCR3(), getCS(), getIP(),
         (unsigned long)c_getDS_BASE(), (unsigned long)c_getDS_LIMIT());
 
+#line 174
     if (!WowModeInitialized) {
     //Load the WOW DLL
     mvdm_softpc_report_wow_stage("load-begin",
         (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
+#line 176
     if ((hWOWDll = SafeLoadLibrary("WOW32")) == NULL)
     {
 #ifndef PROD
@@ -222,6 +228,7 @@ void MS_bop_1(void) {
 #line 181
         mvdm_softpc_report_wow_stage("load-failed",
             (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
+#line 181
         TerminateVDM();
         return;
     }
@@ -236,6 +243,7 @@ void MS_bop_1(void) {
 #line 191
         mvdm_softpc_report_wow_stage("init-export-missing",
             (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
+#line 191
         FreeLibrary(hWOWDll);
         TerminateVDM();
         return;
@@ -245,6 +253,7 @@ void MS_bop_1(void) {
        implicit FARPROC-to-MYFARPROC conversion.  Preserve the original raw
        export address and call path; no WOW provider is enabled by this cast. */
     if ((WOWDispatchEntry = (MYFARPROC)GetProcAddress(hWOWDll, "W32Dispatch")) == NULL)
+#line 197
     {
 #ifndef PROD
 #line 199
@@ -253,6 +262,7 @@ void MS_bop_1(void) {
 #line 201
         mvdm_softpc_report_wow_stage("dispatch-export-missing",
             (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
+#line 201
         FreeLibrary(hWOWDll);
         TerminateVDM();
         return;
@@ -302,6 +312,7 @@ void MS_bop_1(void) {
     // Call the init routine
     mvdm_softpc_report_wow_stage("init-begin",
         (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
+#line 242
     if ((*WOWInitEntry)() == FALSE)
     {
 #ifndef PROD
@@ -311,6 +322,7 @@ void MS_bop_1(void) {
 #line 247
         mvdm_softpc_report_wow_stage("init-failed",
             (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
+#line 247
         TerminateVDM();
         return;
     }
@@ -330,12 +342,14 @@ void MS_bop_1(void) {
     mvdm_softpc_report_wow_stage("activated",
         (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
 
+#line 251
     WowModeInitialized = TRUE;
     }
 
 #if !defined(CPU_40_STYLE) || defined(CCPU)
     mvdm_softpc_report_wow_stage("dispatch-begin",
         (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
+#line 255
     (*WOWDispatchEntry)();
 #else
 #line 257
@@ -346,6 +360,7 @@ void MS_bop_1(void) {
      * state remains entirely owned by the original BOP/CCPU sequence. */
     mvdm_softpc_report_wow_dispatch_return_state((unsigned long)getCR0(),
         (unsigned long)getCR3(), getCS(), getIP());
+#line 278
 }
 
 
@@ -359,6 +374,7 @@ void MS_bop_2(void) {
         getDX(), getSS(), getBP());
     XMSDispatch(service);
 
+#line 288
     setIP((USHORT)(getIP() + 1));
 }
 
@@ -511,6 +527,7 @@ Return Value:
         //
 
         /* DIVERGENCE(MVDM-HOST-DIV-466): V86 addresses use real-mode segments. */
+#line 448
         VrDispatch((ULONG)(*Sim32GetVDMPointer(SEGOFF(getCS(),getIP()),
                                                1,
                                                (UCHAR)((getMSW() & MSW_PE) && !getVM())
@@ -682,6 +699,7 @@ void MS_bop_8 (void)
 
 
     // Get the Function Number
+#line 595
     iFunc = (ULONG)(*Sim32GetVDMPointer(SEGOFF(getCS(),getIP()),
                                         1,
                                         uchMode
@@ -728,6 +746,7 @@ void MS_bop_9(void)
     mvdm_softpc_report_setup_hardware_probe("direct-access-bop-enter",
         direct_access_cpu,
         direct_access_stack_pointer);
+#line 625
     host_direct_access_error((ULONG)getAX());
     direct_access_cpu =
         ((unsigned long)getCS() << 16) | (unsigned long)getIP();
@@ -736,6 +755,7 @@ void MS_bop_9(void)
     mvdm_softpc_report_setup_hardware_probe("direct-access-bop-leave",
         direct_access_cpu,
         direct_access_stack_pointer);
+#line 626
 }
 
 //
@@ -948,6 +968,7 @@ void ISV_RegisterModule (BOOL fMode)
     /* DIVERGENCE MVDM-HOST-DIV-008: preserve the historical export address
        while making the intended FARPROC call shape explicit for modern x86. */
     if ((InitEntry = (FARPROC)GetProcAddress(hDll, pchInit)) == NULL){
+#line 847
         FreeLibrary(hDll);
         setCF(1);
         setAX(3);
@@ -968,6 +989,7 @@ void ISV_RegisterModule (BOOL fMode)
 
     /* DIVERGENCE MVDM-HOST-DIV-008: see the matching InitEntry conversion. */
     if ((DispatchEntry = (FARPROC)GetProcAddress(hDll, pchDispatch)) == NULL){
+#line 866
     FreeLibrary(hDll);
     setCF(1);
     setAX(2);
