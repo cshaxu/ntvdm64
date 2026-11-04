@@ -1,0 +1,281 @@
+{
+  "header_sha256": "579d9db47476bbf0bbfb6e1f5b340e229b59340cf1edf94ae9032921cfa28171",
+  "arms": [
+    {
+      "line": 187,
+      "label": "codex_floppy_h_arm_0000",
+      "kind": "ifdef",
+      "expression": "NTVDM"
+    },
+    {
+      "line": 192,
+      "label": "codex_floppy_h_arm_0001",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 473,
+      "label": "codex_floppy_h_arm_0002",
+      "kind": "ifdef",
+      "expression": "ANSI"
+    },
+    {
+      "line": 477,
+      "label": "codex_floppy_h_arm_0003",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 487,
+      "label": "codex_floppy_h_arm_0004",
+      "kind": "ifdef",
+      "expression": "ANSI"
+    },
+    {
+      "line": 501,
+      "label": "codex_floppy_h_arm_0005",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 512,
+      "label": "codex_floppy_h_arm_0006",
+      "kind": "ifdef",
+      "expression": "ANSI"
+    },
+    {
+      "line": 516,
+      "label": "codex_floppy_h_arm_0007",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 526,
+      "label": "codex_floppy_h_arm_0008",
+      "kind": "ifdef",
+      "expression": "ANSI"
+    },
+    {
+      "line": 532,
+      "label": "codex_floppy_h_arm_0009",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 561,
+      "label": "codex_floppy_h_arm_0010",
+      "kind": "ifdef",
+      "expression": "NTVDM"
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/disks/floppy_i.obj",
+      "probe_index": 1,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_floppy_h_arm_0000",
+        "codex_floppy_h_arm_0002",
+        "codex_floppy_h_arm_0004",
+        "codex_floppy_h_arm_0006",
+        "codex_floppy_h_arm_0008",
+        "codex_floppy_h_arm_0010"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/host/nt_rflop.obj",
+      "probe_index": 4,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_floppy_h_arm_0000",
+        "codex_floppy_h_arm_0002",
+        "codex_floppy_h_arm_0004",
+        "codex_floppy_h_arm_0006",
+        "codex_floppy_h_arm_0008",
+        "codex_floppy_h_arm_0010"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/host/config.obj",
+      "probe_index": 3,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/config.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_floppy_h_arm_0000",
+        "codex_floppy_h_arm_0002",
+        "codex_floppy_h_arm_0004",
+        "codex_floppy_h_arm_0006",
+        "codex_floppy_h_arm_0008",
+        "codex_floppy_h_arm_0010"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/bios/reset.obj",
+      "probe_index": 5,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/reset.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_floppy_h_arm_0000",
+        "codex_floppy_h_arm_0002",
+        "codex_floppy_h_arm_0004",
+        "codex_floppy_h_arm_0006",
+        "codex_floppy_h_arm_0008",
+        "codex_floppy_h_arm_0010"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/disks/floppy.obj",
+      "probe_index": 2,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_floppy_h_arm_0000",
+        "codex_floppy_h_arm_0002",
+        "codex_floppy_h_arm_0004",
+        "codex_floppy_h_arm_0006",
+        "codex_floppy_h_arm_0008",
+        "codex_floppy_h_arm_0010"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/bios/reset.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/reset.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_floppy_h_arm_0000",
+        "codex_floppy_h_arm_0002",
+        "codex_floppy_h_arm_0004",
+        "codex_floppy_h_arm_0006",
+        "codex_floppy_h_arm_0008",
+        "codex_floppy_h_arm_0010"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/disks/floppy_i.obj",
+      "probe_index": 7,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_floppy_h_arm_0000",
+        "codex_floppy_h_arm_0002",
+        "codex_floppy_h_arm_0004",
+        "codex_floppy_h_arm_0006",
+        "codex_floppy_h_arm_0008",
+        "codex_floppy_h_arm_0010"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/disks/floppy.obj",
+      "probe_index": 6,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_floppy_h_arm_0000",
+        "codex_floppy_h_arm_0002",
+        "codex_floppy_h_arm_0004",
+        "codex_floppy_h_arm_0006",
+        "codex_floppy_h_arm_0008",
+        "codex_floppy_h_arm_0010"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/host/nt_rflop.obj",
+      "probe_index": 9,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_floppy_h_arm_0000",
+        "codex_floppy_h_arm_0002",
+        "codex_floppy_h_arm_0004",
+        "codex_floppy_h_arm_0006",
+        "codex_floppy_h_arm_0008",
+        "codex_floppy_h_arm_0010"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/host/config.obj",
+      "probe_index": 8,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/config.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_floppy_h_arm_0000",
+        "codex_floppy_h_arm_0002",
+        "codex_floppy_h_arm_0004",
+        "codex_floppy_h_arm_0006",
+        "codex_floppy_h_arm_0008",
+        "codex_floppy_h_arm_0010"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\floppy.h",
+  "original_sha256": "500e1a6e48950dc2c184a70c39b9606723133c6ab06affac898da89e24fbaca8",
+  "after_sha256": "81c5978ffac33f187680f3e876e8409913491197da9c36b60b35f13f005550cf",
+  "first_level_changes": [
+    "Six original groups align. Normalize one already excluded NTVDM alternative with original #line 193; selected NTVDM and ANSI arms retained. No original outer condition restored."
+  ],
+  "limitations": "Observed release dependency contexts only; no runtime behavior claim."
+}

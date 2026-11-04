@@ -1,0 +1,34 @@
+{
+  "header_sha256": "de187a1c80e136c77379bbce1cc9afda8d41e4f72605990ea7c91bdc987be6f1",
+  "arms": [
+    {
+      "line": 1,
+      "label": "codex_hostcom_h_arm_0000",
+      "kind": "ifndef",
+      "expression": "_HOST_COM_H"
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/support/terminat.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/support/terminat.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_hostcom_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/softpc.new/base/inc/host_com.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\host_com.h",
+  "original_sha256": "d7085b215a923dc8df3a9dd44bdc3739d3035ac2fe8978f282b6a3cafd97b68b",
+  "after_sha256": "de187a1c80e136c77379bbce1cc9afda8d41e4f72605990ea7c91bdc987be6f1",
+  "review": "Original outer include guard positively selected in actual product context and retained. Nested groups are for later depth. No source change.",
+  "limitations": "Positive witness establishes outer selection only."
+}

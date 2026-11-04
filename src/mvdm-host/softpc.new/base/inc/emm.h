@@ -38,6 +38,7 @@ AMMENDMENTS	:
 	(segment / PAGE_PARA_RATIO)
 
 #else
+#line 41
 #error Unsupported excluded original configuration
 #endif
 #line 46
@@ -184,6 +185,7 @@ extern int		restore_map(short handle_no, unsigned short segment,
 				    unsigned short offset,
 				    short pages_out[], short pages_in[]);
 #else /* ANSI */
+#line 185
 #error Unsupported excluded original configuration
 #endif /* ANSI */
 #line 187

@@ -190,6 +190,7 @@
 			(rate == RS_500 ? RS_250: \
 			(rate == RS_250 ? RS_300: RS_500)))
 #else
+#line 193
 #error Unsupported excluded original configuration
 #endif
 #line 197

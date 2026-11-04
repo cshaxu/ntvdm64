@@ -1,0 +1,1617 @@
+{
+  "header_sha256": "9379016479d85977f583faf6861a3565c7833b00469434ab391ce4c84e113115",
+  "arms": [
+    {
+      "line": 55,
+      "label": "codex_gvi_h_arm_0000",
+      "kind": "ifdef",
+      "expression": "EGG"
+    },
+    {
+      "line": 65,
+      "label": "codex_gvi_h_arm_0001",
+      "kind": "ifdef",
+      "expression": "HERC"
+    },
+    {
+      "line": 81,
+      "label": "codex_gvi_h_arm_0002",
+      "kind": "ifdef",
+      "expression": "EGG"
+    },
+    {
+      "line": 86,
+      "label": "codex_gvi_h_arm_0003",
+      "kind": "ifdef",
+      "expression": "VGG"
+    },
+    {
+      "line": 114,
+      "label": "codex_gvi_h_arm_0004",
+      "kind": "ifdef",
+      "expression": "BIT_ORDER1"
+    },
+    {
+      "line": 117,
+      "label": "codex_gvi_h_arm_0005",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 137,
+      "label": "codex_gvi_h_arm_0006",
+      "kind": "ifdef",
+      "expression": "BIT_ORDER1"
+    },
+    {
+      "line": 140,
+      "label": "codex_gvi_h_arm_0007",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 161,
+      "label": "codex_gvi_h_arm_0008",
+      "kind": "ifdef",
+      "expression": "VGG"
+    },
+    {
+      "line": 163,
+      "label": "codex_gvi_h_arm_0009",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 179,
+      "label": "codex_gvi_h_arm_0010",
+      "kind": "ifdef",
+      "expression": "VGG"
+    },
+    {
+      "line": 258,
+      "label": "codex_gvi_h_arm_0011",
+      "kind": "ifdef",
+      "expression": "VGG"
+    },
+    {
+      "line": 261,
+      "label": "codex_gvi_h_arm_0012",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 270,
+      "label": "codex_gvi_h_arm_0013",
+      "kind": "ifdef",
+      "expression": "VGG"
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/bios/reset.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/reset.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/support/terminat.obj",
+      "probe_index": 2,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/support/terminat.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/ega_mode.obj",
+      "probe_index": 4,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_mode.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/ega_prts.obj",
+      "probe_index": 5,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_prts.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/keymouse/mouse_io.obj",
+      "probe_index": 1,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/support/main.obj",
+      "probe_index": 3,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/support/main.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/v7_ports.obj",
+      "probe_index": 10,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/v7_ports.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/ega_vide.obj",
+      "probe_index": 6,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_vide.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/gfx_updt.obj",
+      "probe_index": 7,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/v7_video.obj",
+      "probe_index": 11,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/v7_video.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/video.obj",
+      "probe_index": 8,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/video.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/gvi.obj",
+      "probe_index": 9,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/gvi.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/vga_mode.obj",
+      "probe_index": 12,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/vga_mode.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/ega_writ.obj",
+      "probe_index": 17,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/vga_vide.obj",
+      "probe_index": 15,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/vga_vide.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/ega_read.obj",
+      "probe_index": 13,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/vga_prts.obj",
+      "probe_index": 14,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/ega_dmmy.obj",
+      "probe_index": 16,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_dmmy.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/cga.obj",
+      "probe_index": 18,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/cga.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/host/nt_error.obj",
+      "probe_index": 21,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/base-debug/trace.obj",
+      "probe_index": 19,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/debug/trace.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/host/nt_msscs.obj",
+      "probe_index": 20,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/host/nt_cga.obj",
+      "probe_index": 22,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_cga.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/host/nt_ega.obj",
+      "probe_index": 23,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_ega.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/host/nt_vga.obj",
+      "probe_index": 24,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_vga.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/host/nt_graph.obj",
+      "probe_index": 26,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/host/nt_event.obj",
+      "probe_index": 29,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/host/nt_mouse.obj",
+      "probe_index": 27,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/host/nt_munge.obj",
+      "probe_index": 28,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_munge.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/host/nt_hosts.obj",
+      "probe_index": 25,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_hosts.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/host/nt_fulsc.obj",
+      "probe_index": 30,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/host/nt_det.obj",
+      "probe_index": 31,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/support/terminat.obj",
+      "probe_index": 35,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/support/terminat.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/bios/reset.obj",
+      "probe_index": 33,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/reset.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/keymouse/mouse_io.obj",
+      "probe_index": 34,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/host/nt_reset.obj",
+      "probe_index": 32,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/support/main.obj",
+      "probe_index": 36,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/support/main.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/ega_mode.obj",
+      "probe_index": 37,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_mode.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/ega_vide.obj",
+      "probe_index": 39,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_vide.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/ega_prts.obj",
+      "probe_index": 38,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_prts.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/gfx_updt.obj",
+      "probe_index": 41,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/gvi.obj",
+      "probe_index": 40,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/gvi.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/video.obj",
+      "probe_index": 42,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/video.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/v7_ports.obj",
+      "probe_index": 43,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/v7_ports.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/v7_video.obj",
+      "probe_index": 44,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/v7_video.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/vga_vide.obj",
+      "probe_index": 47,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/vga_vide.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/vga_prts.obj",
+      "probe_index": 46,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/vga_mode.obj",
+      "probe_index": 45,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/vga_mode.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/ega_read.obj",
+      "probe_index": 48,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/ega_dmmy.obj",
+      "probe_index": 50,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_dmmy.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/ega_writ.obj",
+      "probe_index": 49,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/cga.obj",
+      "probe_index": 51,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/cga.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/base-debug/trace.obj",
+      "probe_index": 52,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/debug/trace.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/host/nt_msscs.obj",
+      "probe_index": 53,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/host/nt_error.obj",
+      "probe_index": 54,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/host/nt_ega.obj",
+      "probe_index": 55,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_ega.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/host/nt_vga.obj",
+      "probe_index": 56,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_vga.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/host/nt_cga.obj",
+      "probe_index": 57,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_cga.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/host/nt_graph.obj",
+      "probe_index": 58,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/host/nt_munge.obj",
+      "probe_index": 60,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_munge.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/host/nt_hosts.obj",
+      "probe_index": 59,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_hosts.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/host/nt_mouse.obj",
+      "probe_index": 61,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/host/nt_event.obj",
+      "probe_index": 62,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/host/nt_det.obj",
+      "probe_index": 64,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/host/nt_fulsc.obj",
+      "probe_index": 63,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/host/nt_reset.obj",
+      "probe_index": 65,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gvi_h_arm_0000",
+        "codex_gvi_h_arm_0002",
+        "codex_gvi_h_arm_0003",
+        "codex_gvi_h_arm_0005",
+        "codex_gvi_h_arm_0007",
+        "codex_gvi_h_arm_0008",
+        "codex_gvi_h_arm_0010",
+        "codex_gvi_h_arm_0011",
+        "codex_gvi_h_arm_0013"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gvi.h",
+  "original_sha256": "c4dfbf2bb2d6e8d79e9fd607f6ab50b149a5edb2768b25d2475002e2e9940716",
+  "after_sha256": "08cc7e89dd5ed283657784df061ab20a1da0aa7a20a2de561c6cfd4adc9cacf9",
+  "first_level_changes": [
+    "Ten original groups align. Normalize two already excluded VGG else arms to original #line and existing #error; nine positively selected arms retained. No original outer condition restored."
+  ],
+  "limitations": "Observed release dependency contexts only; no runtime behavior claim."
+}

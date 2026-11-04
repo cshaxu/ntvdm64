@@ -1,0 +1,465 @@
+{
+  "header_sha256": "cd639df0139c9e8577c16415c95ca88aea14701a9c47a170c99fbbcedeee9131",
+  "arms": [
+    {
+      "line": 24,
+      "label": "codex_emmh_h_arm_0000",
+      "kind": "ifdef",
+      "expression": "NTVDM"
+    },
+    {
+      "line": 40,
+      "label": "codex_emmh_h_arm_0001",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 46,
+      "label": "codex_emmh_h_arm_0002",
+      "kind": "ifndef",
+      "expression": "PROD"
+    },
+    {
+      "line": 49,
+      "label": "codex_emmh_h_arm_0003",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 78,
+      "label": "codex_emmh_h_arm_0004",
+      "kind": "ifdef",
+      "expression": "NTVDM"
+    },
+    {
+      "line": 101,
+      "label": "codex_emmh_h_arm_0005",
+      "kind": "ifdef",
+      "expression": "NTVDM"
+    },
+    {
+      "line": 115,
+      "label": "codex_emmh_h_arm_0006",
+      "kind": "ifdef",
+      "expression": "NTVDM"
+    },
+    {
+      "line": 182,
+      "label": "codex_emmh_h_arm_0007",
+      "kind": "ifdef",
+      "expression": "ANSI"
+    },
+    {
+      "line": 186,
+      "label": "codex_emmh_h_arm_0008",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 205,
+      "label": "codex_emmh_h_arm_0009",
+      "kind": "ifndef",
+      "expression": "NTVDM"
+    },
+    {
+      "line": 299,
+      "label": "codex_emmh_h_arm_0010",
+      "kind": "if",
+      "expression": "defined(X86GFX) && defined(NTVDM)"
+    },
+    {
+      "line": 302,
+      "label": "codex_emmh_h_arm_0011",
+      "kind": "else",
+      "expression": ""
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/bios/emm_fncs.obj",
+      "probe_index": 1,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_emmh_h_arm_0000",
+        "codex_emmh_h_arm_0003",
+        "codex_emmh_h_arm_0004",
+        "codex_emmh_h_arm_0005",
+        "codex_emmh_h_arm_0006",
+        "codex_emmh_h_arm_0007",
+        "codex_emmh_h_arm_0011"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/bios/reset.obj",
+      "probe_index": 2,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/reset.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_emmh_h_arm_0000",
+        "codex_emmh_h_arm_0003",
+        "codex_emmh_h_arm_0004",
+        "codex_emmh_h_arm_0005",
+        "codex_emmh_h_arm_0006",
+        "codex_emmh_h_arm_0007",
+        "codex_emmh_h_arm_0011"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/ccpu/ccpusas4.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_emmh_h_arm_0000",
+        "codex_emmh_h_arm_0003",
+        "codex_emmh_h_arm_0004",
+        "codex_emmh_h_arm_0005",
+        "codex_emmh_h_arm_0006",
+        "codex_emmh_h_arm_0007",
+        "codex_emmh_h_arm_0011"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dos/emm_mngr.obj",
+      "probe_index": 4,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_emmh_h_arm_0000",
+        "codex_emmh_h_arm_0003",
+        "codex_emmh_h_arm_0004",
+        "codex_emmh_h_arm_0005",
+        "codex_emmh_h_arm_0006",
+        "codex_emmh_h_arm_0007",
+        "codex_emmh_h_arm_0011"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/host/nt_msscs.obj",
+      "probe_index": 5,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_emmh_h_arm_0000",
+        "codex_emmh_h_arm_0003",
+        "codex_emmh_h_arm_0004",
+        "codex_emmh_h_arm_0005",
+        "codex_emmh_h_arm_0006",
+        "codex_emmh_h_arm_0007",
+        "codex_emmh_h_arm_0011"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/support/terminat.obj",
+      "probe_index": 3,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/support/terminat.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_emmh_h_arm_0000",
+        "codex_emmh_h_arm_0003",
+        "codex_emmh_h_arm_0004",
+        "codex_emmh_h_arm_0005",
+        "codex_emmh_h_arm_0006",
+        "codex_emmh_h_arm_0007",
+        "codex_emmh_h_arm_0011"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/host/config.obj",
+      "probe_index": 6,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/config.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_emmh_h_arm_0000",
+        "codex_emmh_h_arm_0003",
+        "codex_emmh_h_arm_0004",
+        "codex_emmh_h_arm_0005",
+        "codex_emmh_h_arm_0006",
+        "codex_emmh_h_arm_0007",
+        "codex_emmh_h_arm_0011"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/ccpu/ccpusas4.obj",
+      "probe_index": 9,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_emmh_h_arm_0000",
+        "codex_emmh_h_arm_0003",
+        "codex_emmh_h_arm_0004",
+        "codex_emmh_h_arm_0005",
+        "codex_emmh_h_arm_0006",
+        "codex_emmh_h_arm_0007",
+        "codex_emmh_h_arm_0011"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/bios/reset.obj",
+      "probe_index": 11,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/reset.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_emmh_h_arm_0000",
+        "codex_emmh_h_arm_0003",
+        "codex_emmh_h_arm_0004",
+        "codex_emmh_h_arm_0005",
+        "codex_emmh_h_arm_0006",
+        "codex_emmh_h_arm_0007",
+        "codex_emmh_h_arm_0011"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/host/nt_umb.obj",
+      "probe_index": 8,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_emmh_h_arm_0000",
+        "codex_emmh_h_arm_0003",
+        "codex_emmh_h_arm_0004",
+        "codex_emmh_h_arm_0005",
+        "codex_emmh_h_arm_0006",
+        "codex_emmh_h_arm_0007",
+        "codex_emmh_h_arm_0011"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/bios/emm_fncs.obj",
+      "probe_index": 10,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_emmh_h_arm_0000",
+        "codex_emmh_h_arm_0003",
+        "codex_emmh_h_arm_0004",
+        "codex_emmh_h_arm_0005",
+        "codex_emmh_h_arm_0006",
+        "codex_emmh_h_arm_0007",
+        "codex_emmh_h_arm_0011"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/host/nt_emm.obj",
+      "probe_index": 7,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_emmh_h_arm_0000",
+        "codex_emmh_h_arm_0003",
+        "codex_emmh_h_arm_0004",
+        "codex_emmh_h_arm_0005",
+        "codex_emmh_h_arm_0006",
+        "codex_emmh_h_arm_0007",
+        "codex_emmh_h_arm_0011"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/support/terminat.obj",
+      "probe_index": 12,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/support/terminat.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_emmh_h_arm_0000",
+        "codex_emmh_h_arm_0003",
+        "codex_emmh_h_arm_0004",
+        "codex_emmh_h_arm_0005",
+        "codex_emmh_h_arm_0006",
+        "codex_emmh_h_arm_0007",
+        "codex_emmh_h_arm_0011"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dos/emm_mngr.obj",
+      "probe_index": 13,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_emmh_h_arm_0000",
+        "codex_emmh_h_arm_0003",
+        "codex_emmh_h_arm_0004",
+        "codex_emmh_h_arm_0005",
+        "codex_emmh_h_arm_0006",
+        "codex_emmh_h_arm_0007",
+        "codex_emmh_h_arm_0011"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/host/nt_msscs.obj",
+      "probe_index": 14,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_emmh_h_arm_0000",
+        "codex_emmh_h_arm_0003",
+        "codex_emmh_h_arm_0004",
+        "codex_emmh_h_arm_0005",
+        "codex_emmh_h_arm_0006",
+        "codex_emmh_h_arm_0007",
+        "codex_emmh_h_arm_0011"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/host/nt_umb.obj",
+      "probe_index": 17,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_emmh_h_arm_0000",
+        "codex_emmh_h_arm_0003",
+        "codex_emmh_h_arm_0004",
+        "codex_emmh_h_arm_0005",
+        "codex_emmh_h_arm_0006",
+        "codex_emmh_h_arm_0007",
+        "codex_emmh_h_arm_0011"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/host/nt_emm.obj",
+      "probe_index": 16,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_emmh_h_arm_0000",
+        "codex_emmh_h_arm_0003",
+        "codex_emmh_h_arm_0004",
+        "codex_emmh_h_arm_0005",
+        "codex_emmh_h_arm_0006",
+        "codex_emmh_h_arm_0007",
+        "codex_emmh_h_arm_0011"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/host/config.obj",
+      "probe_index": 15,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/config.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_emmh_h_arm_0000",
+        "codex_emmh_h_arm_0003",
+        "codex_emmh_h_arm_0004",
+        "codex_emmh_h_arm_0005",
+        "codex_emmh_h_arm_0006",
+        "codex_emmh_h_arm_0007",
+        "codex_emmh_h_arm_0011"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\emm.h",
+  "original_sha256": "d92cc144f50e60de5042f76c67574a3fdc22b0ad38411d92d1459d4a02b17789",
+  "after_sha256": "3bcc3def41acf384273bc507564e6ab3efddb020fb3dccb8c76d7265e8b3c0b6",
+  "first_level_changes": [
+    "Eight original groups match current. Normalize two previously excluded else arms to original #line and existing #error; seven selected arms retained. No original outer condition restored."
+  ],
+  "limitations": "Observed release graph dependency contexts only; no runtime behavior claim."
+}

@@ -1,0 +1,34 @@
+{
+  "header_sha256": "20c58d8fb126135214410b44cda85a9fb57c7644088e820ce979ad37e7681a39",
+  "arms": [
+    {
+      "line": 5,
+      "label": "codex_egagraph_h_arm_0000",
+      "kind": "ifdef",
+      "expression": "EGG"
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/keymouse/mouse_io.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_egagraph_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/softpc.new/base/inc/egagraph.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egagraph.h",
+  "original_sha256": "20c58d8fb126135214410b44cda85a9fb57c7644088e820ce979ad37e7681a39",
+  "after_sha256": "20c58d8fb126135214410b44cda85a9fb57c7644088e820ce979ad37e7681a39",
+  "review": "Original outer EGG group positively selected in actual product context and retained. Nested groups are for later depth. No source change.",
+  "limitations": "Positive witness establishes outer selection only."
+}

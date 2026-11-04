@@ -1,0 +1,49 @@
+{
+  "header_sha256": "34809d684e12808e6a20e204f5dac448041f6ad329ef8a315e3b926793807aca",
+  "arms": [
+    {
+      "line": 6,
+      "label": "codex_egaports_h_arm_0000",
+      "kind": "ifdef",
+      "expression": "EGG"
+    },
+    {
+      "line": 66,
+      "label": "codex_egaports_h_arm_0001",
+      "kind": "if",
+      "expression": "defined(C_VID) || defined(A2CPU)"
+    },
+    {
+      "line": 73,
+      "label": "codex_egaports_h_arm_0002",
+      "kind": "else",
+      "expression": ""
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/keymouse/mouse_io.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_egaports_h_arm_0000",
+        "codex_egaports_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/softpc.new/base/inc/egaports.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egaports.h",
+  "original_sha256": "9258473bc4f8c375852c51ea8d7eb71a0163e503bd371f779b78eeb6227146af",
+  "after_sha256": "cf50851c94022247b05468b5df5dcc5ad88f2dbfaa0a010a8c215908b83163a5",
+  "change": "Add original #line 76 within already excluded else arm; no new exclusion.",
+  "review": "One product context selects EGG and C_VID/A2CPU branch. Header appears in 42 observed contexts; full context coverage not completed.",
+  "disposition": "deferred-depth1-contexts-unverified",
+  "limitations": "Positive witness proves these selected arms; remaining include contexts not individually verified."
+}

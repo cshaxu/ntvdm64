@@ -71,5 +71,6 @@
 
 #define Cpu_define_outb( port, func )
 #else
+#line 76
 #error DIVERGENCE MVDM-HOST-DIV-617: unsupported alternate host profile
 #endif /* C_VID || A2CPU */

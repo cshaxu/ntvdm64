@@ -183,6 +183,7 @@ extern void (*BIOS[])();
 #endif /* bop */
 
 #ifdef PTY
+#line 186
 #error Unsupported excluded original configuration
 #endif
 #line 188
@@ -201,6 +202,7 @@ extern void return_from_call();
 #endif
 
 #ifdef SUSPEND
+#line 200
 #error Unsupported excluded original configuration
 #endif
 #line 202
@@ -298,40 +300,48 @@ extern void bootstrap2();
 extern void bootstrap3();
 
 #ifdef NOVELL
+#line 295
 #error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register.
 #endif
 #line 297
 
 #ifdef	MSWDVR
+#line 315
 #error Unsupported excluded original configuration
 #endif
 #line 321
 
 #ifdef	NOVELL_IPX
+#line 323
 #error Unsupported excluded original configuration
 #endif
 #line 327
 
 #ifdef	NOVELL_TCPIP
+#line 329
 #error Unsupported excluded original configuration
 #endif
 #line 332
 
 #ifdef WINSOCK
+#line 334
 #error Unsupported excluded original configuration
 #endif /* WINSOCK */
 #line 336
 
 #ifdef SWINAPI
+#line 338
 #error DIVERGENCE MVDM-HOST-DIV-529: SWINAPI platform branch is not selected; see mirror register.
 #endif /* SWINAPI */
 
 #if	defined(SOFTWIN_API) || defined(SWIN_HFX)
+#line 344
 #error Unsupported excluded original configuration
 #endif	/* SOFTWIN_API or SWIN_HFX */
 #line 347
 
 #if	defined(SOFTWIN_API)
+#line 349
 #error DIVERGENCE MVDM-HOST-DIV-528: SOFTWIN_API platform branch is not selected; see mirror register.
 #endif	/* SOFTWIN_API */
 
@@ -350,6 +360,7 @@ extern void host_reset(void);
 extern void display_string(char *);
 extern void clear_string(void);
 #else
+#line 364
 #error Unsupported excluded original configuration
 #endif /* ANSI */
 #line 371
@@ -358,6 +369,7 @@ extern void clear_string(void);
 extern void smeg_collect_data(void);
 extern void smeg_freeze_data(void);
 #else
+#line 376
 #error Unsupported excluded original configuration
 #endif /* ANSI */
 #line 379
@@ -376,15 +388,18 @@ extern void switch_to_real_mode(void);
 #endif	/* NTVDM */
 
 #ifdef GISP_CPU
+#line 394
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register.
 #endif	/* GISP_CPU */
 
 #ifdef HFX
+#line 398
 #error Unsupported excluded original configuration
 #endif /* HFX */
 #line 382
 
 #ifdef DOS_APP_LIC
+#line 402
 #error DIVERGENCE MVDM-HOST-DIV-531: DOS_APP_LIC branch is not selected; see mirror register.
 #endif
 

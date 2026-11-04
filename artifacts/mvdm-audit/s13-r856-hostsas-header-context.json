@@ -1,0 +1,39 @@
+{
+  "header_sha256": "56d90296ef3e600caf6184760fa4ec930a4c49037dc65b2bfba90fdba621506c",
+  "arms": [
+    {
+      "line": 21,
+      "label": "codex_hostsas_h_arm_0000",
+      "kind": "if",
+      "expression": "defined(BASE_SAS) && defined(HOST_SAS)"
+    },
+    {
+      "line": 27,
+      "label": "codex_hostsas_h_arm_0001",
+      "kind": "ifndef",
+      "expression": "BASE_SAS"
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/ccpu/c_main.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/softpc.new/base/inc/host_sas.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\host_sas.h",
+  "original_sha256": "42f3e8b6a7ad9f4628ae35cd133b6747a19b840c0d3ead23d2d1567874c4e717",
+  "after_sha256": "56d90296ef3e600caf6184760fa4ec930a4c49037dc65b2bfba90fdba621506c",
+  "review": "One actual CCPU product context selects neither outer arm; 183 observed dependency contexts remain to be classified. The !BASE_SAS branch contains code and cannot be excluded from a single negative witness. No source change.",
+  "disposition": "deferred-depth1-contexts-unverified",
+  "limitations": "Unknown contexts preserved, not classified as excluded."
+}

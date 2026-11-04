@@ -1,0 +1,521 @@
+{
+  "header_sha256": "efa6c67ecb4c3137053667168e61fe68f25d9b1060a7c397cdcf3eced716b773",
+  "arms": [
+    {
+      "line": 32,
+      "label": "codex_cpuvid_h_arm_0000",
+      "kind": "ifndef",
+      "expression": "NO_STRING_OPERATIONS"
+    },
+    {
+      "line": 70,
+      "label": "codex_cpuvid_h_arm_0001",
+      "kind": "ifdef",
+      "expression": "VGG"
+    },
+    {
+      "line": 78,
+      "label": "codex_cpuvid_h_arm_0002",
+      "kind": "ifdef",
+      "expression": "VGG"
+    },
+    {
+      "line": 87,
+      "label": "codex_cpuvid_h_arm_0003",
+      "kind": "if",
+      "expression": "defined(CPU_40_STYLE) && defined(C_VID)"
+    },
+    {
+      "line": 93,
+      "label": "codex_cpuvid_h_arm_0004",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 97,
+      "label": "codex_cpuvid_h_arm_0005",
+      "kind": "ifndef",
+      "expression": "NO_STRING_OPERATIONS"
+    },
+    {
+      "line": 121,
+      "label": "codex_cpuvid_h_arm_0006",
+      "kind": "ifndef",
+      "expression": "Cpu_set_vid_wrt_ptrs"
+    },
+    {
+      "line": 127,
+      "label": "codex_cpuvid_h_arm_0007",
+      "kind": "ifndef",
+      "expression": "CPU_40_STYLE"
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/vga_prts.obj",
+      "probe_index": 4,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_cpuvid_h_arm_0000",
+        "codex_cpuvid_h_arm_0001",
+        "codex_cpuvid_h_arm_0002",
+        "codex_cpuvid_h_arm_0003",
+        "codex_cpuvid_h_arm_0005",
+        "codex_cpuvid_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/ega_prts.obj",
+      "probe_index": 1,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_prts.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_cpuvid_h_arm_0000",
+        "codex_cpuvid_h_arm_0001",
+        "codex_cpuvid_h_arm_0002",
+        "codex_cpuvid_h_arm_0003",
+        "codex_cpuvid_h_arm_0005",
+        "codex_cpuvid_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/ega_read.obj",
+      "probe_index": 3,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_cpuvid_h_arm_0000",
+        "codex_cpuvid_h_arm_0001",
+        "codex_cpuvid_h_arm_0002",
+        "codex_cpuvid_h_arm_0003",
+        "codex_cpuvid_h_arm_0005",
+        "codex_cpuvid_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/video.obj",
+      "probe_index": 2,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/video.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_cpuvid_h_arm_0000",
+        "codex_cpuvid_h_arm_0001",
+        "codex_cpuvid_h_arm_0002",
+        "codex_cpuvid_h_arm_0003",
+        "codex_cpuvid_h_arm_0005",
+        "codex_cpuvid_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/ccpu/ccpusas4.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_cpuvid_h_arm_0000",
+        "codex_cpuvid_h_arm_0001",
+        "codex_cpuvid_h_arm_0002",
+        "codex_cpuvid_h_arm_0003",
+        "codex_cpuvid_h_arm_0005",
+        "codex_cpuvid_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/ega_writ.obj",
+      "probe_index": 5,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_cpuvid_h_arm_0000",
+        "codex_cpuvid_h_arm_0001",
+        "codex_cpuvid_h_arm_0002",
+        "codex_cpuvid_h_arm_0003",
+        "codex_cpuvid_h_arm_0005",
+        "codex_cpuvid_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/cvidc/evidfunc.obj",
+      "probe_index": 9,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/evidfunc.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_cpuvid_h_arm_0000",
+        "codex_cpuvid_h_arm_0001",
+        "codex_cpuvid_h_arm_0002",
+        "codex_cpuvid_h_arm_0003",
+        "codex_cpuvid_h_arm_0005",
+        "codex_cpuvid_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/egwrtm12.obj",
+      "probe_index": 7,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_cpuvid_h_arm_0000",
+        "codex_cpuvid_h_arm_0001",
+        "codex_cpuvid_h_arm_0002",
+        "codex_cpuvid_h_arm_0003",
+        "codex_cpuvid_h_arm_0005",
+        "codex_cpuvid_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/tests/cvidc_vector_binding_fixture.obj",
+      "probe_index": 11,
+      "source": "O:/repos.hobby/ntvdm64/tests/mvdm-host/cvidc_vector_binding_fixture.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_cpuvid_h_arm_0000",
+        "codex_cpuvid_h_arm_0001",
+        "codex_cpuvid_h_arm_0002",
+        "codex_cpuvid_h_arm_0003",
+        "codex_cpuvid_h_arm_0005",
+        "codex_cpuvid_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/cga.obj",
+      "probe_index": 8,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/cga.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_cpuvid_h_arm_0000",
+        "codex_cpuvid_h_arm_0001",
+        "codex_cpuvid_h_arm_0002",
+        "codex_cpuvid_h_arm_0003",
+        "codex_cpuvid_h_arm_0005",
+        "codex_cpuvid_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/egawrtm0.obj",
+      "probe_index": 6,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_cpuvid_h_arm_0000",
+        "codex_cpuvid_h_arm_0001",
+        "codex_cpuvid_h_arm_0002",
+        "codex_cpuvid_h_arm_0003",
+        "codex_cpuvid_h_arm_0005",
+        "codex_cpuvid_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/ccpu/ccpusas4.obj",
+      "probe_index": 12,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_cpuvid_h_arm_0000",
+        "codex_cpuvid_h_arm_0001",
+        "codex_cpuvid_h_arm_0002",
+        "codex_cpuvid_h_arm_0003",
+        "codex_cpuvid_h_arm_0005",
+        "codex_cpuvid_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/video.obj",
+      "probe_index": 14,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/video.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_cpuvid_h_arm_0000",
+        "codex_cpuvid_h_arm_0001",
+        "codex_cpuvid_h_arm_0002",
+        "codex_cpuvid_h_arm_0003",
+        "codex_cpuvid_h_arm_0005",
+        "codex_cpuvid_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/ega_read.obj",
+      "probe_index": 16,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_cpuvid_h_arm_0000",
+        "codex_cpuvid_h_arm_0001",
+        "codex_cpuvid_h_arm_0002",
+        "codex_cpuvid_h_arm_0003",
+        "codex_cpuvid_h_arm_0005",
+        "codex_cpuvid_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/ega_writ.obj",
+      "probe_index": 17,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_cpuvid_h_arm_0000",
+        "codex_cpuvid_h_arm_0001",
+        "codex_cpuvid_h_arm_0002",
+        "codex_cpuvid_h_arm_0003",
+        "codex_cpuvid_h_arm_0005",
+        "codex_cpuvid_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/vga_prts.obj",
+      "probe_index": 15,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_cpuvid_h_arm_0000",
+        "codex_cpuvid_h_arm_0001",
+        "codex_cpuvid_h_arm_0002",
+        "codex_cpuvid_h_arm_0003",
+        "codex_cpuvid_h_arm_0005",
+        "codex_cpuvid_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/ega_prts.obj",
+      "probe_index": 13,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_prts.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_cpuvid_h_arm_0000",
+        "codex_cpuvid_h_arm_0001",
+        "codex_cpuvid_h_arm_0002",
+        "codex_cpuvid_h_arm_0003",
+        "codex_cpuvid_h_arm_0005",
+        "codex_cpuvid_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/egwrtm12.obj",
+      "probe_index": 18,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_cpuvid_h_arm_0000",
+        "codex_cpuvid_h_arm_0001",
+        "codex_cpuvid_h_arm_0002",
+        "codex_cpuvid_h_arm_0003",
+        "codex_cpuvid_h_arm_0005",
+        "codex_cpuvid_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/egawrtm0.obj",
+      "probe_index": 19,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_cpuvid_h_arm_0000",
+        "codex_cpuvid_h_arm_0001",
+        "codex_cpuvid_h_arm_0002",
+        "codex_cpuvid_h_arm_0003",
+        "codex_cpuvid_h_arm_0005",
+        "codex_cpuvid_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/cga.obj",
+      "probe_index": 20,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/cga.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_cpuvid_h_arm_0000",
+        "codex_cpuvid_h_arm_0001",
+        "codex_cpuvid_h_arm_0002",
+        "codex_cpuvid_h_arm_0003",
+        "codex_cpuvid_h_arm_0005",
+        "codex_cpuvid_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/cvidc/evidfunc.obj",
+      "probe_index": 22,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/evidfunc.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_cpuvid_h_arm_0000",
+        "codex_cpuvid_h_arm_0001",
+        "codex_cpuvid_h_arm_0002",
+        "codex_cpuvid_h_arm_0003",
+        "codex_cpuvid_h_arm_0005",
+        "codex_cpuvid_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/cvidc/ev_glue.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/ev_glue.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_cpuvid_h_arm_0000",
+        "codex_cpuvid_h_arm_0001",
+        "codex_cpuvid_h_arm_0002",
+        "codex_cpuvid_h_arm_0003",
+        "codex_cpuvid_h_arm_0005",
+        "codex_cpuvid_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/cvidc/ev_glue.obj",
+      "probe_index": 1,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/ev_glue.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_cpuvid_h_arm_0000",
+        "codex_cpuvid_h_arm_0001",
+        "codex_cpuvid_h_arm_0002",
+        "codex_cpuvid_h_arm_0003",
+        "codex_cpuvid_h_arm_0005",
+        "codex_cpuvid_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cpu_vid.h",
+  "original_sha256": "f7b5efebebd8bf8c6ad5c56adb74c8217490b2b92f113b1e850401fd5f029500",
+  "after_sha256": "efa6c67ecb4c3137053667168e61fe68f25d9b1060a7c397cdcf3eced716b773",
+  "review": "Original six first-level groups retained with an added CPU40/C_VID adaptation group. All 23 observed contexts agree on six selected arms; original non-CPU40 and local fallback already #error. No source change. Two ev_glue witnesses rerun with source directory search preserved.",
+  "limitations": "Observed release/test graph contexts only; no runtime behavior asserted."
+}

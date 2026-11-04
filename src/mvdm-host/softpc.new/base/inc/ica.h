@@ -60,11 +60,13 @@
 #define CPU_RTC_INT		0
 
 #if defined (NOVELL) || defined (NOVELL_IPX)
+#line 63
 #error Unsupported excluded original configuration
 #endif
 #line 65
 
 #if defined (SWIN_HAW) 
+#line 67
 #error DIVERGENCE MVDM-HOST-DIV-528: SWIN_HAW platform branch is not selected; see mirror register.
 #endif
 
@@ -136,12 +138,14 @@ extern void ica_hw_interrupt(IU32 adapter, IU32 line_no, IS32 call_count);
 extern VDMVIRTUALICA VirtualIca[];
 
 #else   /* ndef NTVDM */
+#line 141
 #error Unsupported excluded original configuration
 #endif  /* NTVDM */
 #line 206
 
 
 #if !defined(NTVDM)
+#line 209
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* !NTVDM */
 #line 205

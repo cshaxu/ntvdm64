@@ -1,0 +1,151 @@
+{
+  "scope": "Second-depth intake for selected first-depth arms in r861 batch; parent references only, no child branch classification. Deferred files remain incomplete in inventory.",
+  "parents": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "parent_line": 355,
+      "parent_kind": "ifdef",
+      "parent_expression": "ANSI",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r811-bios-header-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/config.h",
+      "parent_line": 1,
+      "parent_kind": "ifndef",
+      "parent_expression": "_CONFIG_H",
+      "next_depth_group_count": 8,
+      "positive_evidence": "s13-r815-config-header-context.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "parent_line": 97,
+      "parent_kind": "ifndef",
+      "parent_expression": "NO_STRING_OPERATIONS",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r820-cpuvid-header-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+      "parent_line": 99,
+      "parent_kind": "ifndef",
+      "parent_expression": "HOST_VGA_GLOBALS",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r827-egacpu-header-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+      "parent_line": 138,
+      "parent_kind": "else",
+      "parent_expression": "",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r827-egacpu-header-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egagraph.h",
+      "parent_line": 5,
+      "parent_kind": "ifdef",
+      "parent_expression": "EGG",
+      "next_depth_group_count": 7,
+      "positive_evidence": "s13-r829-egagraph-header-context.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "parent_line": 116,
+      "parent_kind": "ifdef",
+      "parent_expression": "NTVDM",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r835-emm-header-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "parent_line": 304,
+      "parent_kind": "else",
+      "parent_expression": "",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r835-emm-header-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/equip.h",
+      "parent_line": 29,
+      "parent_kind": "ifdef",
+      "parent_expression": "LITTLEND",
+      "next_depth_group_count": 2,
+      "positive_evidence": "s13-r837-equip-header-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gmi.h",
+      "parent_line": 34,
+      "parent_kind": "ifndef",
+      "parent_expression": "UNIVERSAL",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r846-gmi-header-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+      "parent_line": 55,
+      "parent_kind": "ifdef",
+      "parent_expression": "EGG",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r848-gvi-header-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+      "parent_line": 180,
+      "parent_kind": "ifdef",
+      "parent_expression": "VGG",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r848-gvi-header-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+      "parent_line": 272,
+      "parent_kind": "ifdef",
+      "parent_expression": "VGG",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r848-gvi-header-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_com.h",
+      "parent_line": 1,
+      "parent_kind": "ifndef",
+      "parent_expression": "_HOST_COM_H",
+      "next_depth_group_count": 6,
+      "positive_evidence": "s13-r852-hostcom-header-context.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_lpt.h",
+      "parent_line": 1,
+      "parent_kind": "ifdef",
+      "parent_expression": "PRINTER",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r854-hostlpt-header-context.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "parent_line": 83,
+      "parent_kind": "ifndef",
+      "parent_expression": "CPU_30_STYLE",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r858-ica-header-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "parent_line": 106,
+      "parent_kind": "if",
+      "parent_expression": "defined (NTVDM)",
+      "next_depth_group_count": 1,
+      "positive_evidence": "s13-r858-ica-header-contexts.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
+      "parent_line": 330,
+      "parent_kind": "ifndef",
+      "parent_expression": "SFELLOW",
+      "next_depth_group_count": 5,
+      "positive_evidence": "s13-r860-ios-header-contexts.json"
+    }
+  ],
+  "parent_count": 18,
+  "next_depth_group_count": 41
+}

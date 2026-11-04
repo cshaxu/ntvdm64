@@ -1,0 +1,237 @@
+{
+  "header_sha256": "ea8760256e77d4d57a1dfe0f15d61a33ec30589db4425e257bb46fa0a2b817f1",
+  "arms": [
+    {
+      "line": 23,
+      "label": "codex_equip_h_arm_0000",
+      "kind": "ifdef",
+      "expression": "BIGEND"
+    },
+    {
+      "line": 28,
+      "label": "codex_equip_h_arm_0001",
+      "kind": "ifdef",
+      "expression": "LITTLEND"
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/disks/floppy_i.obj",
+      "probe_index": 2,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_equip_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/video.obj",
+      "probe_index": 5,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/video.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_equip_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/bios/reset.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/reset.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_equip_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/bios/equipmnt.obj",
+      "probe_index": 1,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_equip_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/ega_vide.obj",
+      "probe_index": 4,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_vide.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_equip_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/disks/floppy.obj",
+      "probe_index": 3,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_equip_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/vga_vide.obj",
+      "probe_index": 6,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/vga_vide.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_equip_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/bios/reset.obj",
+      "probe_index": 7,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/reset.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_equip_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/bios/equipmnt.obj",
+      "probe_index": 8,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_equip_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/disks/floppy.obj",
+      "probe_index": 9,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_equip_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/disks/floppy_i.obj",
+      "probe_index": 10,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_equip_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/ega_vide.obj",
+      "probe_index": 11,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_vide.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_equip_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/vga_vide.obj",
+      "probe_index": 13,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/vga_vide.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_equip_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/video.obj",
+      "probe_index": 12,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/video.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_equip_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/softpc.new/base/inc/equip.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\equip.h",
+  "original_sha256": "9530d21a819d9e3ff63d9fd8173f2c0df049cc48aa9ee49a740bad6db921e8aa",
+  "after_sha256": "844175be765bed14c194284db4c723c438985d9094df370212737cb9ae1a9fe7",
+  "first_level_changes": [
+    "Original BIGEND and LITTLEND groups retained. Add #line 24 to already excluded BIGEND and correct continuation #line 26 to original line 63. LITTLEND selected in all 14 observed contexts and retained. No original outer condition restored."
+  ],
+  "limitations": "Observed release dependency contexts only; no runtime behavior claimed."
+}

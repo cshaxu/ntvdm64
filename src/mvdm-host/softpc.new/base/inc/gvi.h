@@ -161,6 +161,7 @@ typedef	struct {
 #ifdef VGG
 	_10_BITS screen_height;		/* Height in pc scanlines of screen	    */
 #else
+#line 185
 #error Unsupported excluded original configuration
 #endif
 #line 187
@@ -259,6 +260,7 @@ extern	DISPLAY_GLOBS	PCDisplay;
 #define get_screen_height()             ((video_adapter == VGA) ? ((PCDisplay.screen_height.as_word+1)<<EGA_GRAPH.multiply_vert_by_two) : \
 							((PCDisplay.screen_height.as_word+1)*get_pc_pix_height()))
 #else
+#line 282
 #error Unsupported excluded original configuration
 #endif /* VGG */
 #line 254

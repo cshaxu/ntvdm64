@@ -1,0 +1,41 @@
+{
+  "header_sha256": "ae7b3dc66f9d618a841068e0e730c79751a7e496e223cf1d01ef0c4505e54a9d",
+  "arms": [
+    {
+      "line": 503,
+      "label": "codex_gfi_h_arm_0000",
+      "kind": "ifdef",
+      "expression": "NTVDM"
+    },
+    {
+      "line": 595,
+      "label": "codex_gfi_h_arm_0001",
+      "kind": "ifndef",
+      "expression": "host_rflop_drive_type"
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/bios/reset.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/reset.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_gfi_h_arm_0000",
+        "codex_gfi_h_arm_0001"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/softpc.new/base/inc/gfi.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gfi.h",
+  "original_sha256": "ae7b3dc66f9d618a841068e0e730c79751a7e496e223cf1d01ef0c4505e54a9d",
+  "after_sha256": "ae7b3dc66f9d618a841068e0e730c79751a7e496e223cf1d01ef0c4505e54a9d",
+  "review": "Both original first-level groups positively selected in a product context and retained; nested groups, if present, for later depth. No source change.",
+  "limitations": "Positive product witness establishes both outer selections only."
+}

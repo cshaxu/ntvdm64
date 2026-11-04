@@ -23,6 +23,7 @@
 #if defined( NTVDM ) || defined ( GISP_SVGA ) || defined ( SFELLOW )
 #define PC_IO_MEM_SIZE 	0x10000	/* Must be a power of two! */
 #else
+#line 26
 #error Unsupported excluded original configuration
 #endif
 #line 28
@@ -413,6 +414,7 @@ typedef struct _extioentry {
 #endif		/* GISP_SVGA */
 #endif	/* NTVDM */
 #else	/* SFELLOW */
+#line 414
 #error DIVERGENCE MVDM-HOST-DIV-521: SFELLOW alternative is not selected; see mirror register.
 #endif /*SFELLOW */
 
@@ -456,6 +458,7 @@ IMPORT void	io_define_inb
 );
 
 #ifdef SFELLOW
+#line 483
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #endif	/* SFELLOW */
 #line 499
@@ -482,6 +485,7 @@ IMPORT void	io_define_outb
 );
 
 #ifdef SFELLOW
+#line 522
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #endif	/* SFELLOW */
 #line 538
@@ -503,6 +507,7 @@ IMPORT void	io_define_out_routines
 IMPORT IBOOL	io_connect_port IPT3(io_addr, io_address, half_word, adapter,
 	half_word, mode);
 #else
+#line 556
 #error Unsupported excluded original configuration
 #endif	/* NTVDM */
 #line 559
@@ -512,6 +517,7 @@ IMPORT void	io_init IPT0();
 
 /* Externs and macros for io_redefine_inb/outb */
 #ifdef MAC68K
+#line 565
 #error DIVERGENCE MVDM-HOST-DIV-529: MAC68K platform branch is not selected; see mirror register.
 #else
 IMPORT char	Ios_in_adapter_table[];

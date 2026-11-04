@@ -1,0 +1,333 @@
+{
+  "header_sha256": "3b3c32d5746eb485ac6f0739214f6dfa1b098b698ca567478af0bfb4420dd996",
+  "arms": [
+    {
+      "line": 138,
+      "label": "codex_dma_h_arm_0000",
+      "kind": "ifdef",
+      "expression": "BIT_ORDER1"
+    },
+    {
+      "line": 143,
+      "label": "codex_dma_h_arm_0001",
+      "kind": "ifdef",
+      "expression": "BIT_ORDER2"
+    },
+    {
+      "line": 162,
+      "label": "codex_dma_h_arm_0002",
+      "kind": "ifdef",
+      "expression": "BIT_ORDER1"
+    },
+    {
+      "line": 167,
+      "label": "codex_dma_h_arm_0003",
+      "kind": "ifdef",
+      "expression": "BIT_ORDER2"
+    },
+    {
+      "line": 195,
+      "label": "codex_dma_h_arm_0004",
+      "kind": "ifdef",
+      "expression": "BIT_ORDER1"
+    },
+    {
+      "line": 200,
+      "label": "codex_dma_h_arm_0005",
+      "kind": "ifdef",
+      "expression": "BIT_ORDER2"
+    },
+    {
+      "line": 314,
+      "label": "codex_dma_h_arm_0006",
+      "kind": "ifdef",
+      "expression": "BIGEND"
+    },
+    {
+      "line": 319,
+      "label": "codex_dma_h_arm_0007",
+      "kind": "ifdef",
+      "expression": "LITTLEND"
+    },
+    {
+      "line": 477,
+      "label": "codex_dma_h_arm_0008",
+      "kind": "ifdef",
+      "expression": "NTVDM"
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/bios/reset.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/reset.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dma_h_arm_0001",
+        "codex_dma_h_arm_0003",
+        "codex_dma_h_arm_0005",
+        "codex_dma_h_arm_0007",
+        "codex_dma_h_arm_0008"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/system/at_dma.obj",
+      "probe_index": 1,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/system/at_dma.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dma_h_arm_0001",
+        "codex_dma_h_arm_0003",
+        "codex_dma_h_arm_0005",
+        "codex_dma_h_arm_0007",
+        "codex_dma_h_arm_0008"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/disks/floppy.obj",
+      "probe_index": 2,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dma_h_arm_0001",
+        "codex_dma_h_arm_0003",
+        "codex_dma_h_arm_0005",
+        "codex_dma_h_arm_0007",
+        "codex_dma_h_arm_0008"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/host/nt_rflop.obj",
+      "probe_index": 4,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dma_h_arm_0001",
+        "codex_dma_h_arm_0003",
+        "codex_dma_h_arm_0005",
+        "codex_dma_h_arm_0007",
+        "codex_dma_h_arm_0008"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/tests/ccpu_bounded_execution_fixture.obj",
+      "probe_index": 5,
+      "source": "O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_bounded_execution_fixture.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dma_h_arm_0001",
+        "codex_dma_h_arm_0003",
+        "codex_dma_h_arm_0005",
+        "codex_dma_h_arm_0007",
+        "codex_dma_h_arm_0008"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/host/nt_vdd.obj",
+      "probe_index": 3,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dma_h_arm_0001",
+        "codex_dma_h_arm_0003",
+        "codex_dma_h_arm_0005",
+        "codex_dma_h_arm_0007",
+        "codex_dma_h_arm_0008"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/tests/ccpu_bit_matrix_fixture.obj",
+      "probe_index": 6,
+      "source": "O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_bounded_execution_fixture.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dma_h_arm_0001",
+        "codex_dma_h_arm_0003",
+        "codex_dma_h_arm_0005",
+        "codex_dma_h_arm_0007",
+        "codex_dma_h_arm_0008"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/host/nt_vdd.obj",
+      "probe_index": 10,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dma_h_arm_0001",
+        "codex_dma_h_arm_0003",
+        "codex_dma_h_arm_0005",
+        "codex_dma_h_arm_0007",
+        "codex_dma_h_arm_0008"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/disks/floppy.obj",
+      "probe_index": 9,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dma_h_arm_0001",
+        "codex_dma_h_arm_0003",
+        "codex_dma_h_arm_0005",
+        "codex_dma_h_arm_0007",
+        "codex_dma_h_arm_0008"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/host/nt_rflop.obj",
+      "probe_index": 11,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dma_h_arm_0001",
+        "codex_dma_h_arm_0003",
+        "codex_dma_h_arm_0005",
+        "codex_dma_h_arm_0007",
+        "codex_dma_h_arm_0008"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/system/at_dma.obj",
+      "probe_index": 8,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/system/at_dma.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dma_h_arm_0001",
+        "codex_dma_h_arm_0003",
+        "codex_dma_h_arm_0005",
+        "codex_dma_h_arm_0007",
+        "codex_dma_h_arm_0008"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/bios/reset.obj",
+      "probe_index": 7,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/reset.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dma_h_arm_0001",
+        "codex_dma_h_arm_0003",
+        "codex_dma_h_arm_0005",
+        "codex_dma_h_arm_0007",
+        "codex_dma_h_arm_0008"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/tests/ccpu_bit_matrix_fixture.obj",
+      "probe_index": 12,
+      "source": "O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_bounded_execution_fixture.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dma_h_arm_0001",
+        "codex_dma_h_arm_0003",
+        "codex_dma_h_arm_0005",
+        "codex_dma_h_arm_0007",
+        "codex_dma_h_arm_0008"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/tests/ccpu_bounded_execution_fixture.obj",
+      "probe_index": 13,
+      "source": "O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_bounded_execution_fixture.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dma_h_arm_0001",
+        "codex_dma_h_arm_0003",
+        "codex_dma_h_arm_0005",
+        "codex_dma_h_arm_0007",
+        "codex_dma_h_arm_0008"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/softpc.new/base/inc/dma.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\dma.h",
+  "original_sha256": "d69831cddb3de18bebe1532c659608b404686374324b3eeebed5607e15a774e4",
+  "after_sha256": "3b3c32d5746eb485ac6f0739214f6dfa1b098b698ca567478af0bfb4420dd996",
+  "review": "Original nine first-level groups align. All 14 observed product and fixture contexts select BIT_ORDER2, LITTLEND and NTVDM; the other groups already have original #line and #error. No source change.",
+  "limitations": "Observed release/test graph dependency contexts only; no runtime behavior claim."
+}

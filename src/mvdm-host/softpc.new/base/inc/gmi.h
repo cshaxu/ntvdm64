@@ -65,6 +65,7 @@ IMPORT	void	gmi_define_mem IPT2(mem_type, type, MEM_HANDLERS *, handlers);
 #define BACKWARDS 1
 
 #ifdef EGATEST
+#line 66
 #error DIVERGENCE MVDM-HOST-DIV-529: EGATEST platform branch is not selected; see mirror register.
 #else
 #define gmi_redefine_mem(type,handlers) \

@@ -1,0 +1,86 @@
+{
+  "header_sha256": "cbf57be356f8c69dbe92bf77767177efa547965b2d878590876e7baf55f20227",
+  "arms": [
+    {
+      "line": 49,
+      "label": "codex_cpu4_h_arm_0000",
+      "kind": "ifdef",
+      "expression": "CPU_PRIVATE"
+    },
+    {
+      "line": 66,
+      "label": "codex_cpu4_h_arm_0001",
+      "kind": "ifdef",
+      "expression": "IRET_HOOKS"
+    },
+    {
+      "line": 78,
+      "label": "codex_cpu4_h_arm_0002",
+      "kind": "ifdef",
+      "expression": "GISP_CPU"
+    },
+    {
+      "line": 80,
+      "label": "codex_cpu4_h_arm_0003",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 86,
+      "label": "codex_cpu4_h_arm_0004",
+      "kind": "ifdef",
+      "expression": "IRET_HOOKS"
+    },
+    {
+      "line": 109,
+      "label": "codex_cpu4_h_arm_0005",
+      "kind": "if",
+      "expression": "!defined(CCPU) && !defined(PROD)"
+    },
+    {
+      "line": 113,
+      "label": "codex_cpu4_h_arm_0006",
+      "kind": "ifndef",
+      "expression": "CCPU"
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/ccpu/c_main.obj",
+      "probe_index": 1,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_cpu4_h_arm_0003"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/ccpu/c_main.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_cpu4_h_arm_0003"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/softpc.new/base/inc/cpu4.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cpu4.h",
+  "original_sha256": "c1296168c866527a931bfa4b7cefe21f54acc96a6f242b0a60d6cdba4cdba725",
+  "after_sha256": "cbf57be356f8c69dbe92bf77767177efa547965b2d878590876e7baf55f20227",
+  "review": "Two CCPU product witnesses selected GISP_CPU else; 167 dependency contexts exist. CPU_PRIVATE is defined by several actual source files including trace.c and sascdef.c; two witnesses cannot classify all alternatives. No source change.",
+  "disposition": "deferred-depth1-contexts-unverified",
+  "limitations": "Preserve all uncertain arms; actual context coverage still required."
+}
