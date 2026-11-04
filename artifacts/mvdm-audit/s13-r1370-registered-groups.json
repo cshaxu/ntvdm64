@@ -1,0 +1,176 @@
+{
+  "method": "Original groups paired separately from local groups; selected direct differences compared to the exact inline registered adaptation and ledger; excluded arms require verified #error state. Matching original code line mapping uses existing observed-projection recheck. This confirms structural provenance, not independent runtime behavior or unobserved contexts.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+      "current_sha256": "bd2899fb2c68a293ad2e951d4042d3ac2c397c786161e755d83430d11674bf8c",
+      "original_sha256": "e1f8f19a1f513402a10dc13eaf3b43d45a208fd71a72692f690f808a7e7762b2",
+      "matched_lines": 586,
+      "groups": {
+        "local_groups": 1,
+        "excluded": 7,
+        "original_groups": 13,
+        "selected": 6
+      },
+      "selected_differences": [
+        {
+          "original_line": 248,
+          "current_line": 247,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -1,6 +1,8 @@",
+            " {",
+            " extern BOOL host_exint_hook IPT2(IS32, exp_no, IS32, error_code);",
+            "-if(GET_PE() && host_exint_hook((IS32) nmbr, (IS32)error_code))",
+            "+/* DIVERGENCE: MVDM-HOST-DIV-268: NTVDMx64 handled-hook scope. */",
+            "+if(GET_PE() && host_exint_hook((IS32) nmbr, (IS32)error_code)) {",
+            " doing_contributory = FALSE;",
+            " c_cpu_continue();\t    /* DOES NOT RETURN */",
+            " }",
+            "+}"
+          ]
+        },
+        {
+          "original_line": 308,
+          "current_line": 313,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -1,6 +1,8 @@",
+            " {",
+            " extern BOOL host_exint_hook IPT2(IS32, exp_no, IS32, error_code);",
+            "-if(GET_PE() && host_exint_hook((IS32) nmbr, (IS32)error_code))",
+            "+/* DIVERGENCE: MVDM-HOST-DIV-268: NTVDMx64 handled-hook scope. */",
+            "+if(GET_PE() && host_exint_hook((IS32) nmbr, (IS32)error_code)) {",
+            " doing_contributory = FALSE;",
+            " c_cpu_continue();\t/* DOES NOT RETURN */",
+            " }",
+            "+}"
+          ]
+        },
+        {
+          "original_line": 369,
+          "current_line": 380,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -1,6 +1,8 @@",
+            " {",
+            " extern BOOL host_exint_hook IPT2(IS32, exp_no, IS32, error_code);",
+            "-if(GET_PE() && host_exint_hook((IS32) DF_INT_NR, (IS32)NULL_ERROR_CODE))",
+            "+/* DIVERGENCE: MVDM-HOST-DIV-268: NTVDMx64 handled-hook scope. */",
+            "+if(GET_PE() && host_exint_hook((IS32) DF_INT_NR, (IS32)NULL_ERROR_CODE)) {",
+            " doing_double_fault = FALSE;",
+            " c_cpu_continue(); /* DOES NOT RETURN */",
+            " }",
+            "+}"
+          ]
+        },
+        {
+          "original_line": 433,
+          "current_line": 450,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -1,7 +1,9 @@",
+            " {",
+            " extern BOOL host_exint_hook IPT2(IS32, exp_no, IS32, error_code);",
+            "-if(GET_PE() && host_exint_hook((IS32) I0_INT_NR, (IS32)NULL_ERROR_CODE))",
+            "+/* DIVERGENCE: MVDM-HOST-DIV-268: NTVDMx64 handled-hook scope. */",
+            "+if(GET_PE() && host_exint_hook((IS32) I0_INT_NR, (IS32)NULL_ERROR_CODE)) {",
+            " doing_fault = FALSE;",
+            " doing_contributory = FALSE;",
+            " c_cpu_continue(); /* DOES NOT RETURN */",
+            " }",
+            "+}"
+          ]
+        },
+        {
+          "original_line": 579,
+          "current_line": 602,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -1,7 +1,9 @@",
+            " {",
+            " extern BOOL host_exint_hook IPT2(IS32, exp_no, IS32, error_code);",
+            "-if(GET_PE() && host_exint_hook((IS32) PF_INT_NR, (IS32)page_error))",
+            "+/* DIVERGENCE: MVDM-HOST-DIV-268: NTVDMx64 handled-hook scope. */",
+            "+if(GET_PE() && host_exint_hook((IS32) PF_INT_NR, (IS32)page_error)) {",
+            " doing_fault = FALSE;",
+            " doing_page_fault = FALSE;",
+            " c_cpu_continue(); /* DOES NOT RETURN */",
+            " }",
+            "+}"
+          ]
+        }
+      ],
+      "reviewed_registration": "MVDM-HOST-DIV-268"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+      "current_sha256": "ff732fd6c05bf24832a7099bb74e2fd96f7b3acb8032377726925b5dc080d25b",
+      "original_sha256": "4a53a9d1c7fb984deb2c5b0fd629442ee8a35272ad90323624d55daa65886194",
+      "matched_lines": 319,
+      "groups": {
+        "excluded": 3,
+        "selected": 7,
+        "original_groups": 7,
+        "local_groups": 2
+      },
+      "selected_differences": [
+        {
+          "original_line": 121,
+          "current_line": 101,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -1 +1,4 @@",
+            "-VGA_GLOBALS\t*globals;",
+            "+/* DIVERGENCE(MVDM-HOST-DIV-062): the original C-video profile stores its",
+            "+* generated VGAGLOBALSETTINGS carrier here.  NT4's permissive C accepted",
+            "+* assignment to the sibling VGA_GLOBALS view; retain that view for other",
+            "+* profiles, but give C_VID its actual generated source type. */"
+          ]
+        }
+      ],
+      "reviewed_registration": "MVDM-HOST-DIV-062"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+      "current_sha256": "7552e67cd37b75c0935ac054faf7076740d9231201a2944659e9cd7c047843b9",
+      "original_sha256": "ce5c8812c1bd5f125f007521b2c1c815739e4969fed1ff2e39600a5a47af0525",
+      "matched_lines": 499,
+      "groups": {
+        "local_groups": 2,
+        "excluded": 4,
+        "original_groups": 6,
+        "selected": 3
+      },
+      "selected_differences": [
+        {
+          "original_line": 27,
+          "current_line": 27,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -187,7 +187,9 @@",
+            " set_host_pix_height(1);",
+            " set_banking( 0, 0 );",
+            "-if (is_bad_vid_mode(getBL()) && !is_v7vga_mode(getBL()))",
+            "+/* DIVERGENCE(VIDEO7-PRESERVE-MODE): SoftPC T70 S10 validates the mode,",
+            "+* not BL's preserve-memory flag; retain that flag for screen clearing. */",
+            "+video_mode = getBL() & 0x7F; /* get rid of top bit - indicates clear or not */",
+            "+if (is_bad_vid_mode(video_mode) && !is_v7vga_mode(video_mode))",
+            " return;",
+            "-video_mode = getBL() & 0x7F; /* get rid of top bit - indicates clear or not */",
+            " /*",
+            " * The method of storing an extended video mode according to a real BIOS is"
+          ]
+        }
+      ],
+      "reviewed_registration": "VIDEO7-PRESERVE-MODE"
+    }
+  ]
+}

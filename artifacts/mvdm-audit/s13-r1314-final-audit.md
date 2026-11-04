@@ -478,3 +478,10 @@ and WOW32 has three changed assertion-line immediate bytes plus timestamps,
 independently attributed in [proof](s13-r1369-diagnostic-line-proof.json).
 Per owner instruction tests were not repeated. Counts: 181 byte-identical /
 753 differing files reviewed / 1,056 total; 122 differing files pending.
+
+The [r1370 registered-group review](s13-r1370-registered-groups.json) pairs
+original and local groups in three further files and attributes each selected
+direct difference to its exact existing registration. Matching original-code
+line positions use the recorded observed projection. No runtime equivalence
+or unobserved context is claimed. Counts: 181 byte-identical / 756 differing
+files reviewed / 1,056 total; 119 differing files remain.
