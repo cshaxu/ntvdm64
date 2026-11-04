@@ -40,6 +40,7 @@
 #include "bios.h"
 #include "virtual.h"
 #include "mvdm_softpc_termination.h"
+#line 36
 #include "error.h"
 #include "debug.h"
 
@@ -266,6 +267,7 @@ extern VOID ClearInstanceDataMarking(VOID);
  */
 
 /* Control Messages received by Virtual Device Drivers (Windows 3.1) */
+#line 255
 #define VxD_Sys_Critical_Init		0x00
 #define VxD_Device_Init			0x01
 #define VxD_Init_Complete		0x02
@@ -421,6 +423,7 @@ LOCAL IBOOL allocate_NIDDB IFN2
 
 	    /* DIVERGENCE MVDM-HOST-DIV-468: the unpublished table is ours. */
 	    host_free((IHP)instance_ptr);
+#line 408
 	    return FALSE;
 	    }
 	 }
@@ -514,6 +517,7 @@ LOCAL void delete_NIDDB IFN1
    IU8 previous_virtual_byte = last_virtual_byte;
 
    /* Ensure instance is active (for terminate callback). */
+#line 500
    swap_NIDDB(record_id);
 
    instance_ptr = vrecs[record_id].vr_pinst_tbl;
@@ -564,6 +568,7 @@ LOCAL void delete_NIDDB IFN1
    for (i = 0; i < MAX_INSTANCES; ++i)
       master_ptrs[i] = snapshot_ptrs[i];
    last_virtual_byte = (IU8)0xff;
+#line 526
    }
 
 /* Return true if any data instance is extant */
@@ -736,6 +741,7 @@ virtual_device_trap IFN0()
    mvdm_softpc_report_virtual_device_control((unsigned long)getEAX(),
        getBX(), getCX(), getDX());
 
+#line 695
    switch ( getEAX() )
       {
    case VxD_Device_Init:
@@ -869,6 +875,7 @@ virtual_swap_instance IFN0()
        vrecs[current_virtual_byte].vr_pinst_tbl == (IHP *)0)
       mvdm_softpc_invalid_virtual_instance(current_virtual_byte);
 
+#line 820
    if ( current_virtual_byte == last_virtual_byte )
       return;   /* Nothing to do */
 

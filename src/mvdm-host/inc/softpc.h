@@ -199,6 +199,7 @@ __cdecl host_simulate(
 
 HANDLE
 WINAPI
+#line 195
 host_CreateThread(
     LPSECURITY_ATTRIBUTES lpThreadAttributes,
     DWORD dwStackSize,
@@ -215,6 +216,7 @@ __cdecl cpu_createthread(
 
 VOID
 WINAPI
+#line 210
 host_ExitThread(
     DWORD dwExitCode
     );
@@ -240,6 +242,7 @@ UCHAR *__cdecl Sim32pGetVDMPointer(ULONG addr, UCHAR pm);
 /*********************** FOR MIPS BUILD ***************************/
 
 
+#line 531
 #define GetVDMAddr(usSeg,usOff) Sim32pGetVDMPointer((ULONG)(((ULONG)usSeg << 16) | usOff),FALSE)
 
 #define RMSEGOFFTOLIN(seg, off) (PVOID)(((ULONG)(seg) << 4) + (ULONG)(off))

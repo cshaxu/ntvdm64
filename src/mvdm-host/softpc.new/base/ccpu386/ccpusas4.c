@@ -67,6 +67,7 @@ extern UTINY *host_sas_init IPT1(sys_addr, size);
 extern UTINY *host_sas_term IPT0();
 
 /********************************************************/
+#line 66
 #define SIXTY_FOUR_K 1024*64
 
 /* global functions & variables */
@@ -782,6 +783,7 @@ IFN2(PHY_ADDR, addr, IU8, val)
 		mvdm_softpc_report_wow_source_descriptor_store((unsigned long)addr,
 			(unsigned long)val, sizeof(val), getCS(), getEIP(), getSS(), getESP());
 
+#line 794
 	addr &= SasWrapMask;
 	checkAccess(addr);
 
@@ -832,6 +834,7 @@ IFN2(LIN_ADDR, addr, IU8, val)
 	if (mvdm_softpc_wow_source_descriptor_trace_active)
 		mvdm_softpc_report_wow_source_descriptor_store((unsigned long)addr,
 			(unsigned long)val, sizeof(val), getCS(), getEIP(), getSS(), getESP());
+#line 841
 	bios_write_byte(addr, val);
 }
 
@@ -846,6 +849,7 @@ phy_w16 IFN2(PHY_ADDR, addr, IU16, val)
 		mvdm_softpc_report_wow_source_descriptor_store((unsigned long)addr,
 			(unsigned long)val, sizeof(val), getCS(), getEIP(), getSS(), getESP());
 
+#line 852
 	addr &= SasWrapMask;
 	checkAccess(addr);
 
@@ -912,6 +916,7 @@ c_sas_storew IFN2(LIN_ADDR, addr, IU16, val)
 	if (mvdm_softpc_wow_source_descriptor_trace_active)
 		mvdm_softpc_report_wow_source_descriptor_store((unsigned long)addr,
 			(unsigned long)val, sizeof(val), getCS(), getEIP(), getSS(), getESP());
+#line 915
 	if ((addr & 0xFFF) <= 0xFFE)
 		bios_write_word(addr, val);
 	else
@@ -930,6 +935,7 @@ IFN2(LIN_ADDR, addr, IU32, val)
 		mvdm_softpc_report_wow_source_descriptor_store((unsigned long)addr,
 			(unsigned long)val, sizeof(val), getCS(), getEIP(), getSS(), getESP());
 
+#line 930
 	if ((addr & 0xFFF) <= 0xFFC)
 		bios_write_double(addr, val);
 	else

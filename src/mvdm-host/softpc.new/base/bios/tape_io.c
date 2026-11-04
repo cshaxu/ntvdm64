@@ -24,6 +24,7 @@
 /*
  *    O/S include files.
  */
+#line 31
 #include <stdio.h>
 #include TypesH
 
@@ -36,6 +37,7 @@
 /* DIVERGENCE(MVDM-HOST-DIV-085): preserve the original XMS-mediated A20
  * transition by consuming the original XMS interface contract directly. */
 #include "xms.h"
+#line 40
 #include "ios.h"
 #include "bios.h"
 #include "tape_io.h"
@@ -49,6 +51,7 @@
 #include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 
 
+#line 52
 #define ONE_MEGABYTE    (1024 * 1024)
 #define SIXTY_FOUR_K    (64 * 1024)
 #define	WRAP_AREA(addr) (addr) >= ONE_MEGABYTE && (addr) < ONE_MEGABYTE + SIXTY_FOUR_K
@@ -200,6 +203,7 @@ half_word target_AR;
 #else
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
+#line 192
 		}
 		else
 			sas_move_words_forward ( source_base, target_base, byte_count >> 1);
@@ -330,5 +334,6 @@ half_word target_AR;
 	}
 	mvdm_softpc_report_setup_hardware_probe("int15-leave",
 		setup_int15_function, (unsigned long)getAH());
+#line 324
 }
 

@@ -23,6 +23,7 @@
 #if DEVL
 // int 21h func names
 // index off of function number in ah
+#line 25
 char *scname[] = {
      "Terminate Program",
      "Read Kbd with Echo",
@@ -606,6 +607,7 @@ VOID demIsDebug(void)
 
 VOID demDiskReset (VOID)
 {
+#line 611
     HostFloppyReset();
     HostFdiskReset();
     /* DIVERGENCE MVDM-HOST-DIV-111: the registered SCS word is a scoped
@@ -613,6 +615,7 @@ VOID demDiskReset (VOID)
     if (!mvdm_command_guest_state_write_fd_access(0u))
         TerminateVDM();
 
+#line 615
     return;
 }
 

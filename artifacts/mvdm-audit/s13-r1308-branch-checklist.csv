@@ -84,9 +84,9 @@ src/mvdm-host/dos/dem/dem.h,71,3,else,,excluded-error,unique-structure-historica
 src/mvdm-host/dos/dem/dem.h,78,2,ifdef,WIN,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/dos/dem/dem.h,83,2,ifdef,SIGNALS,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/dos/dem/dem.h,89,2,ifdef,OS2_32,excluded-error,none,error-anchor-match
-src/mvdm-host/dos/dem/dem.h,157,2,if,DEVL,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/dos/dem/dem.h,262,2,if,DBG,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/dos/dem/dem.h,265,2,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/dos/dem/dem.h,159,2,if,DEVL,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/dos/dem/dem.h,264,2,if,DBG,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/dos/dem/dem.h,267,2,else,,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/dos/dem/demdasd.c,78,1,if,DBG,excluded-error,none,error-anchor-match
 src/mvdm-host/dos/dem/demdasd.c,113,1,if,DBG,excluded-error,none,error-anchor-match
 src/mvdm-host/dos/dem/demdasd.c,155,1,if,DBG,excluded-error,none,error-anchor-match
@@ -110,10 +110,10 @@ src/mvdm-host/dos/dem/demhndl.c,456,1,if,(FILE_BEGIN != 0 || FILE_CURRENT != 1 |
 src/mvdm-host/dos/dem/demhndl.c,616,1,if,DBG,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/dos/dem/demioctl.c,68,1,if,DBG,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/dos/dem/demmisc.c,23,1,if,DEVL,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dos/dem/demmisc.c,224,1,if,DEVL,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dos/dem/demmisc.c,260,1,if,DEVL,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dos/dem/demmisc.c,306,1,if,DEVL,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dos/dem/demmisc.c,532,1,if,DBG,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/dos/dem/demmisc.c,225,1,if,DEVL,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dos/dem/demmisc.c,261,1,if,DEVL,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dos/dem/demmisc.c,307,1,if,DEVL,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dos/dem/demmisc.c,533,1,if,DBG,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/dos/dem/demmsg.c,8,1,if,DBG,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/dos/dem/demsrch.c,314,1,if,DBG,excluded-error,none,error-anchor-match
 src/mvdm-host/dos/dem/demsrch.c,480,1,if,DBG,excluded-error,none,error-anchor-match
@@ -263,8 +263,8 @@ src/mvdm-host/inc/mvdm.h,79,2,else,,excluded-error,r1312-unhit-non-x86-profile-e
 src/mvdm-host/inc/sharewow.h,48,1,ifndef,SHAREWOW_MAIN,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/inc/sharewow.h,54,1,else,,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/inc/softpc.h,34,1,ifdef,i386,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/inc/softpc.h,234,1,ifdef,i386,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/inc/softpc.h,237,1,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/inc/softpc.h,236,1,ifdef,i386,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/inc/softpc.h,239,1,else,,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/inc/suballoc.h,33,1,ifdef,i386,excluded-error,none,error-anchor-match
 src/mvdm-host/inc/suballoc.h,36,1,else,,current-hit,r1312-fixture-or-addon-equivalent-preprocessing,not-applicable
 src/mvdm-host/inc/suballoc.h,37,2,if,defined(_M_IX86),current-hit,r1311-current-equivalent-preprocessing,not-applicable
@@ -274,26 +274,26 @@ src/mvdm-host/inc/vdmredir.h,55,2,if,DBG,excluded-error,unique-structure-histori
 src/mvdm-host/inc/vdmredir.h,58,2,else,,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/inc/vdmredir.h,70,2,ifdef,UNALIGNED_VDM_POINTERS,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/inc/vdmredir.h,73,2,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/inc/vdmredir.h,157,2,ifdef,i386,excluded-error,none,error-anchor-match
-src/mvdm-host/inc/vdmredir.h,160,2,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/inc/vdmredir.h,161,3,ifdef,UNALIGNED_VDM_POINTERS,excluded-error,none,error-anchor-match
-src/mvdm-host/inc/vdmredir.h,164,3,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/inc/vdmredir.h,175,2,ifdef,i386,excluded-error,none,error-anchor-match
-src/mvdm-host/inc/vdmredir.h,178,2,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/inc/vdmredir.h,179,3,ifdef,UNALIGNED_VDM_POINTERS,excluded-error,none,error-anchor-match
-src/mvdm-host/inc/vdmredir.h,182,3,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/inc/vdmredir.h,199,2,ifdef,i386,excluded-error,none,error-anchor-match
-src/mvdm-host/inc/vdmredir.h,202,2,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/inc/vdmredir.h,203,3,ifdef,UNALIGNED_VDM_POINTERS,excluded-error,none,error-anchor-match
-src/mvdm-host/inc/vdmredir.h,206,3,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/inc/vdmredir.h,221,2,ifdef,i386,excluded-error,none,error-anchor-match
-src/mvdm-host/inc/vdmredir.h,224,2,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/inc/vdmredir.h,225,3,ifdef,UNALIGNED_VDM_POINTERS,excluded-error,none,error-anchor-match
-src/mvdm-host/inc/vdmredir.h,228,3,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/inc/vdmredir.h,413,2,ifdef,i386,excluded-error,none,error-anchor-match
-src/mvdm-host/inc/vdmredir.h,416,2,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/inc/vdmredir.h,428,2,ifdef,i386,excluded-error,none,error-anchor-match
-src/mvdm-host/inc/vdmredir.h,431,2,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/inc/vdmredir.h,158,2,ifdef,i386,excluded-error,none,error-anchor-match
+src/mvdm-host/inc/vdmredir.h,161,2,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/inc/vdmredir.h,162,3,ifdef,UNALIGNED_VDM_POINTERS,excluded-error,none,error-anchor-match
+src/mvdm-host/inc/vdmredir.h,165,3,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/inc/vdmredir.h,177,2,ifdef,i386,excluded-error,none,error-anchor-match
+src/mvdm-host/inc/vdmredir.h,180,2,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/inc/vdmredir.h,181,3,ifdef,UNALIGNED_VDM_POINTERS,excluded-error,none,error-anchor-match
+src/mvdm-host/inc/vdmredir.h,184,3,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/inc/vdmredir.h,202,2,ifdef,i386,excluded-error,none,error-anchor-match
+src/mvdm-host/inc/vdmredir.h,205,2,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/inc/vdmredir.h,206,3,ifdef,UNALIGNED_VDM_POINTERS,excluded-error,none,error-anchor-match
+src/mvdm-host/inc/vdmredir.h,209,3,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/inc/vdmredir.h,225,2,ifdef,i386,excluded-error,none,error-anchor-match
+src/mvdm-host/inc/vdmredir.h,228,2,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/inc/vdmredir.h,229,3,ifdef,UNALIGNED_VDM_POINTERS,excluded-error,none,error-anchor-match
+src/mvdm-host/inc/vdmredir.h,232,3,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/inc/vdmredir.h,418,2,ifdef,i386,excluded-error,none,error-anchor-match
+src/mvdm-host/inc/vdmredir.h,421,2,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/inc/vdmredir.h,434,2,ifdef,i386,excluded-error,none,error-anchor-match
+src/mvdm-host/inc/vdmredir.h,437,2,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/inc/vrnmpipe.h,107,1,ifdef,VDMREDIR_DLL,historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/inc/vrnmpipe.h,142,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/inc/vrnmpipe.h,183,1,ifdef,VDMREDIR_DLL,historical-hit,unchanged-directive-git-line-map,not-applicable
@@ -613,32 +613,32 @@ src/mvdm-host/softpc.new/base/bios/rtc_bios.c,43,2,ifdef,MONITOR,excluded-error,
 src/mvdm-host/softpc.new/base/bios/slave_bs.c,33,1,ifdef,SCCSID,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/bios/slave_bs.c,39,1,ifdef,SEGMENTATION,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/bios/tape_io.c,19,1,ifdef,SEGMENTATION,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/bios/tape_io.c,73,1,ifdef,PM,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/bios/tape_io.c,74,2,ifndef,CPU_30_STYLE,current-hit,r1311-current-equivalent-preprocessing,not-applicable
-src/mvdm-host/softpc.new/base/bios/tape_io.c,86,2,if,(!defined(PROD) || !defined(CPU_30_STYLE)),current-hit,r1311-current-equivalent-preprocessing,not-applicable
-src/mvdm-host/softpc.new/base/bios/tape_io.c,94,2,ifdef,CPU_30_STYLE,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/bios/tape_io.c,97,2,else,,current-hit,r1311-current-equivalent-preprocessing,not-applicable
-src/mvdm-host/softpc.new/base/bios/tape_io.c,110,1,if,defined(NTVDM) && defined(MONITOR),excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/bios/tape_io.c,134,1,if,0,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/bios/tape_io.c,139,1,ifdef,PM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/bios/tape_io.c,146,1,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/bios/tape_io.c,153,1,ifdef,PM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/bios/tape_io.c,212,1,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/bios/tape_io.c,164,2,ifdef,CPU_30_STYLE,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/bios/tape_io.c,167,2,else,,current-hit,r1311-current-equivalent-preprocessing,not-applicable
-src/mvdm-host/softpc.new/base/bios/tape_io.c,195,2,ifdef,NTVDM,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/bios/tape_io.c,200,2,else,,excluded-error,unique-structure-historical,error-preceding-line-anchor-verified
-src/mvdm-host/softpc.new/base/bios/tape_io.c,221,1,ifdef,PM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/bios/tape_io.c,278,1,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/bios/tape_io.c,288,1,if,defined(NTVDM) && defined(MONITOR),excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/bios/tape_io.c,291,1,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/bios/tape_io.c,300,1,ifdef,SPC486,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/bios/tape_io.c,315,1,ifndef,PROD,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/bios/tape_io.c,76,1,ifdef,PM,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/bios/tape_io.c,77,2,ifndef,CPU_30_STYLE,current-hit,r1311-current-equivalent-preprocessing,not-applicable
+src/mvdm-host/softpc.new/base/bios/tape_io.c,89,2,if,(!defined(PROD) || !defined(CPU_30_STYLE)),current-hit,r1311-current-equivalent-preprocessing,not-applicable
+src/mvdm-host/softpc.new/base/bios/tape_io.c,97,2,ifdef,CPU_30_STYLE,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/bios/tape_io.c,100,2,else,,current-hit,r1311-current-equivalent-preprocessing,not-applicable
+src/mvdm-host/softpc.new/base/bios/tape_io.c,113,1,if,defined(NTVDM) && defined(MONITOR),excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/bios/tape_io.c,137,1,if,0,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/bios/tape_io.c,142,1,ifdef,PM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/bios/tape_io.c,149,1,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/bios/tape_io.c,156,1,ifdef,PM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/bios/tape_io.c,216,1,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/bios/tape_io.c,167,2,ifdef,CPU_30_STYLE,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/bios/tape_io.c,170,2,else,,current-hit,r1311-current-equivalent-preprocessing,not-applicable
+src/mvdm-host/softpc.new/base/bios/tape_io.c,198,2,ifdef,NTVDM,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/bios/tape_io.c,203,2,else,,excluded-error,unique-structure-historical,error-preceding-line-anchor-verified
+src/mvdm-host/softpc.new/base/bios/tape_io.c,225,1,ifdef,PM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/bios/tape_io.c,282,1,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/bios/tape_io.c,292,1,if,defined(NTVDM) && defined(MONITOR),excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/bios/tape_io.c,295,1,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/bios/tape_io.c,304,1,ifdef,SPC486,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/bios/tape_io.c,319,1,ifndef,PROD,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/bios/virtual.c,14,1,ifdef,SCCSID,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/bios/virtual.c,25,1,if,defined(NTVDM) && defined(MONITOR),excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/bios/virtual.c,720,1,ifdef,CPU_40_STYLE,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/bios/virtual.c,837,2,ifndef,NTVDM,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/bios/virtual.c,883,1,ifdef,CPU_40_STYLE,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/bios/virtual.c,725,1,ifdef,CPU_40_STYLE,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/bios/virtual.c,843,2,ifndef,NTVDM,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/bios/virtual.c,890,1,ifdef,CPU_40_STYLE,historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/softpc.new/base/ccpu386/aaa.c,52,1,ifdef,SET_UNDEFINED_FLAG,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/ccpu386/aad.c,55,1,ifdef,SET_UNDEFINED_FLAG,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/ccpu386/aam.c,59,1,ifdef,SET_UNDEFINED_FLAG,historical-hit,unique-structure-historical,not-applicable
@@ -892,25 +892,25 @@ src/mvdm-host/softpc.new/base/ccpu386/ccpupig.c,16,1,ifdef,PIG,excluded-error,un
 src/mvdm-host/softpc.new/base/ccpu386/ccpupig.h,13,1,ifdef,PIG,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,23,1,ifdef,CCPU,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,25,2,ifdef,SEGMENTATION,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,141,2,ifdef,BACK_M,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,149,2,ifndef,EGATEST,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,254,2,ifndef,CHECK_ACCESS,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,256,2,else,,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,262,2,ifndef,PROD,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,367,2,ifdef,BACK_M,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,370,2,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,385,2,ifdef,BACK_M,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,393,2,ifndef,EGATEST,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,539,2,ifdef,EGG,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,796,2,ifdef,LIM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,860,2,ifdef,LIM,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,1237,2,ifndef,EGATEST,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,1282,2,ifndef,PROD,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,1327,2,ifdef,BACK_M,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,1330,2,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,1445,2,ifdef,PROD,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,1447,2,else,,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,1960,2,ifndef,PROD,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,142,2,ifdef,BACK_M,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,150,2,ifndef,EGATEST,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,255,2,ifndef,CHECK_ACCESS,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,257,2,else,,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,263,2,ifndef,PROD,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,368,2,ifdef,BACK_M,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,371,2,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,386,2,ifdef,BACK_M,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,394,2,ifndef,EGATEST,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,540,2,ifdef,EGG,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,798,2,ifdef,LIM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,864,2,ifdef,LIM,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,1243,2,ifndef,EGATEST,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,1288,2,ifndef,PROD,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,1333,2,ifdef,BACK_M,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,1336,2,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,1451,2,ifdef,PROD,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,1453,2,else,,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,1966,2,ifndef,PROD,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.h,28,1,if,!defined(PIG),historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.h,29,2,ifdef,BACK_M,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.h,32,2,else,,historical-hit,unique-structure-historical,not-applicable
@@ -1597,57 +1597,57 @@ src/mvdm-host/softpc.new/base/comms/printer.c,139,2,ifdef,ERROR,historical-hit,u
 src/mvdm-host/softpc.new/base/comms/printer.c,175,2,if,defined(NTVDM) && defined(MONITOR),historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/softpc.new/base/comms/printer.c,187,2,if,defined(NTVDM),historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/softpc.new/base/comms/printer.c,217,2,ifdef,PS_FLUSHING,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/comms/printer.c,241,2,if,defined(NTVDM) && defined(MONITOR),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/comms/printer.c,258,2,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/comms/printer.c,284,2,if,defined(NTVDM) && defined(MONITOR),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/comms/printer.c,298,2,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/comms/printer.c,330,2,if,defined(NTVDM),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/comms/printer.c,356,2,ifndef,DELAYED_INTS,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/comms/printer.c,359,2,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/comms/printer.c,369,2,ifndef,DELAYED_INTS,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/comms/printer.c,372,2,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/comms/printer.c,402,2,ifdef,PC_CONFIG,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/comms/printer.c,429,2,if,defined(NTVDM),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/comms/printer.c,451,3,if,!defined(MONITOR),excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/comms/printer.c,454,3,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/comms/printer.c,474,2,if,defined(NTVDM),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/comms/printer.c,490,2,ifdef,PC_CONFIG,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/comms/printer.c,493,2,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/comms/printer.c,506,2,if,defined(NTVDM),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/comms/printer.c,519,2,ifdef,PS_FLUSHING,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/comms/printer.c,539,2,if,defined(NTVDM) && !defined(MONITOR),excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/comms/printer.c,542,2,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/comms/printer.c,549,2,ifndef,DELAYED_INTS,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/comms/printer.c,554,2,ifdef,PS_FLUSHING,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/comms/printer.c,577,2,if,defined(NTVDM),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/comms/printer.c,588,2,ifndef,PROD,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/comms/printer.c,643,2,if,defined(NTVDM),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/comms/printer.c,651,2,if,defined(NTVDM) && !defined(MONITOR),excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/comms/printer.c,654,2,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/comms/printer.c,660,2,ifndef,PROD,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/comms/printer.c,672,2,ifdef,SEGMENTATION,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/comms/printer.c,695,2,if,defined(NTVDM) && defined(MONITOR),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/comms/printer.c,727,2,if,defined(NTVDM) && defined(MONITOR),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/comms/printer.c,737,2,if,defined(NTVDM) && defined(MONITOR),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/comms/printer.c,741,3,ifdef,ANSI,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/comms/printer.c,743,3,else,,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/comms/printer.c,797,1,ifdef,NTVDM,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/comms/printer.c,802,2,if,defined(MONITOR),historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/comms/printer.c,804,2,else,,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/comms/printer.c,814,1,ifdef,PS_FLUSHING,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/comms/printer.c,242,2,if,defined(NTVDM) && defined(MONITOR),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/comms/printer.c,259,2,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/comms/printer.c,285,2,if,defined(NTVDM) && defined(MONITOR),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/comms/printer.c,299,2,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/comms/printer.c,331,2,if,defined(NTVDM),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/comms/printer.c,357,2,ifndef,DELAYED_INTS,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/comms/printer.c,360,2,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/comms/printer.c,370,2,ifndef,DELAYED_INTS,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/comms/printer.c,373,2,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/comms/printer.c,403,2,ifdef,PC_CONFIG,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/comms/printer.c,430,2,if,defined(NTVDM),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/comms/printer.c,452,3,if,!defined(MONITOR),excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/comms/printer.c,455,3,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/comms/printer.c,475,2,if,defined(NTVDM),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/comms/printer.c,491,2,ifdef,PC_CONFIG,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/comms/printer.c,494,2,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/comms/printer.c,507,2,if,defined(NTVDM),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/comms/printer.c,520,2,ifdef,PS_FLUSHING,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/comms/printer.c,540,2,if,defined(NTVDM) && !defined(MONITOR),excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/comms/printer.c,543,2,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/comms/printer.c,550,2,ifndef,DELAYED_INTS,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/comms/printer.c,556,2,ifdef,PS_FLUSHING,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/comms/printer.c,579,2,if,defined(NTVDM),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/comms/printer.c,590,2,ifndef,PROD,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/comms/printer.c,645,2,if,defined(NTVDM),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/comms/printer.c,653,2,if,defined(NTVDM) && !defined(MONITOR),excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/comms/printer.c,656,2,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/comms/printer.c,662,2,ifndef,PROD,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/comms/printer.c,674,2,ifdef,SEGMENTATION,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/comms/printer.c,697,2,if,defined(NTVDM) && defined(MONITOR),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/comms/printer.c,729,2,if,defined(NTVDM) && defined(MONITOR),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/comms/printer.c,739,2,if,defined(NTVDM) && defined(MONITOR),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/comms/printer.c,743,3,ifdef,ANSI,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/comms/printer.c,745,3,else,,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/comms/printer.c,799,1,ifdef,NTVDM,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/comms/printer.c,804,2,if,defined(MONITOR),historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/comms/printer.c,806,2,else,,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/comms/printer.c,816,1,ifdef,PS_FLUSHING,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/comms/printer_.c,23,1,ifdef,SCCSID,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/comms/printer_.c,28,1,ifdef,SEGMENTATION,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/comms/printer_.c,37,1,ifdef,PRINTER,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/comms/printer_.c,43,2,ifdef,SYSTEMV,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/comms/printer_.c,66,2,if,defined(NTVDM) && defined(MONITOR),excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/comms/printer_.c,72,2,if,defined(NTVDM),historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/comms/printer_.c,90,1,if,defined(NTVDM) && defined(MONITOR),excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/comms/printer_.c,112,1,ifdef,PRINTER,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/comms/printer_.c,120,2,ifdef,NTVDM,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/comms/printer_.c,124,3,ifdef,MONITOR,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/comms/printer_.c,209,1,if,defined(NTVDM) && defined(MONITOR),excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/comms/printer_.c,215,1,if,defined(NTVDM),historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/comms/printer_.c,218,2,ifdef,PRINTER,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/comms/printer_.c,44,2,ifdef,SYSTEMV,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/comms/printer_.c,67,2,if,defined(NTVDM) && defined(MONITOR),excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/comms/printer_.c,73,2,if,defined(NTVDM),historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/comms/printer_.c,91,1,if,defined(NTVDM) && defined(MONITOR),excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/comms/printer_.c,113,1,ifdef,PRINTER,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/comms/printer_.c,122,2,ifdef,NTVDM,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/comms/printer_.c,126,3,ifdef,MONITOR,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/comms/printer_.c,214,1,if,defined(NTVDM) && defined(MONITOR),excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/comms/printer_.c,220,1,if,defined(NTVDM),historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/comms/printer_.c,223,2,ifdef,PRINTER,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/comms/rs232_io.c,14,1,ifdef,SCCSID,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/comms/rs232_io.c,20,1,ifdef,SEGMENTATION,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/comms/rs232_io.c,49,1,if,defined(IP32) || defined(TK43) || defined(macintosh),excluded-error,unique-structure-historical,error-anchor-match

@@ -1,0 +1,82 @@
+[
+  {
+    "path": "src/mvdm-host/dos/dem/dem.h",
+    "current_sha256": "5eeeea3914420309a316496d90912e173bd1be90a4bd09da39e4e7e9069c460f",
+    "original_sha256": "c9c4b4814e1b30ffad29a7716948ec7b6c0ade8f6ab2fbb9fd6998d358706e5a",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 212
+  },
+  {
+    "path": "src/mvdm-host/dos/dem/demmisc.c",
+    "current_sha256": "d5f98246059f0707a1e539d26cad8309e639dbb707accf3088d5742e0e4ba9ba",
+    "original_sha256": "19676fa5995555ec0b16c2923953b4e6236467dc42bf36cc7e746f45d0fcf912",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 627
+  },
+  {
+    "path": "src/mvdm-host/inc/softpc.h",
+    "current_sha256": "4bb85e0a70526b1bbf67ac5ac4531afb1c649efcda65d05ade6280029b18c75b",
+    "original_sha256": "1e6fbd5f67aa04749d7896bd0109fe45daa22e691839d1261bbc3f039924bd9b",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 311
+  },
+  {
+    "path": "src/mvdm-host/inc/vdmredir.h",
+    "current_sha256": "63b125295473d5ff442ae62afdc700460455b3eff0dc53872d6135983891d8a2",
+    "original_sha256": "2462271dd22683738e60b4154bd891a8dfc679d4c34b9f75b23ecf91523add2d",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 372
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+    "current_sha256": "84e4c94857da2af248a4f570385c9c2290cc21042ed03e9c86be52ee4b970e31",
+    "original_sha256": "3aa86f1faf07f68937629f1d6e410eb41f498e17dc6d747647c7d6e5697c80aa",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 243
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+    "current_sha256": "9469b54a27735977116dca86d54389eedb20f30cd795029a63167d531764a0d1",
+    "original_sha256": "346e2186fe608c318a25796c7d6a35bbc8de6f21c255b212c2ddfc2bc3c89f40",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 832
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+    "current_sha256": "cdadad02799c68fbbb16516145ac7dfba31dbf53319eae10267d2052bcd24b42",
+    "original_sha256": "2802840ef84106ae0f99c6f17af370da66c9381a1355570f5998039fbb33534e",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 1873
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.h",
+    "current_sha256": "ea9842a3d092fb68850c3155246779d174aa5423699b51d6ea9203617b39441e",
+    "original_sha256": "8b4622e066f61c6815dbadf3f3c735d7dd29210673a6930f354aaf0e2be880e8",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 29
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+    "current_sha256": "ec6956b197159f60ca825f50e10931d3994e47e603674d91318f1ff9e6bc55b7",
+    "original_sha256": "b1456dcbc0dc6b4d1fd5d101bfaa6bdc9a4cd5d970c14215f3ae62a173f17ccb",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 642
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+    "current_sha256": "3ccf4236b39535ed37c16dfccddd2d0a36436d94d6585ea50ad6938356ab1b52",
+    "original_sha256": "53edfe9fb4bb9d965acb8a7cc5f33d14cdf0694957dadfa912e0175488dbcf81",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 181
+  }
+]

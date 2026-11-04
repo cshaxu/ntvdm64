@@ -354,3 +354,13 @@ NTVDM, WOW32 and x64 builds passed; ten images published and verified. Eight
 match byte-for-byte and NTVDM/WOW32 differ only by PE timestamps
 ([comparison](s13-r1346-build-image-compare.json)); tests were not repeated
 under the owner-approved unchanged-image rule.
+
+The [r1347 batch](s13-r1347-batch.json) aligns matching source lines on
+observed selected paths in ten files, including within selected branches;
+[context recheck](s13-r1347-context-recheck.json) passes. All ten remain
+pending complete tree review. Cached x86, NTVDM, WOW32 and x64 builds passed;
+ten images were published and verified. Eight match byte-for-byte and NTVDM
+and WOW32 differ only by PE timestamps
+([comparison](s13-r1347-build-image-compare.json)); runtime tests were not
+repeated under the owner-approved rule. Counts remain 182 byte-identical /
+577 differing files reviewed / 1,056 total, with 297 differing files pending.

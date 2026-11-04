@@ -227,6 +227,7 @@ sys_addr lp16BitPrtBusy;
  * ============================================================================
  */
 
+#line 224
 #define set_low(val, bit)		val &= ~bit
 #define set_high(val, bit)		val |=  bit
 #define low_high(val1, val2, bit)	(!(val1 & bit) && (val2 & bit))
@@ -550,6 +551,7 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 				    		handle_for_out_event[adapter]=add_q_event_t(lpr_state_out_event,HOST_PRINTER_DELAY,adapter);
 #endif /* DELAYED_INTS */
 #line 517
+#line 556
 					}
 #ifdef PS_FLUSHING
 #line 558

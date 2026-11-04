@@ -134,6 +134,7 @@ typedef struct _DISKINFO {
 /* DIVERGENCE MVDM-HOST-DIV-005: the original x86 pointer identifies a
  * four-byte guest far-address cell; it is retained numerically. */
 extern mvdm_guest_location dta_location;
+#line 123
 extern BOOL   VDMForWOW;
 extern PVHE   pHardErrPacket;
 extern ULONG  CurrentISVC;
@@ -153,6 +154,7 @@ extern mvdm_guest_location sft_head_location;
 extern mvdm_guest_location extended_error_location;
 
 
+#line 134
 #include "demexp.h"
 #if DEVL
 extern CHAR demDebugBuffer [];

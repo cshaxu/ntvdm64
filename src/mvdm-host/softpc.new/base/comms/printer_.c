@@ -35,6 +35,7 @@
  *    O/S include files.
  */
 #ifdef PRINTER
+#line 41
 #include <stdio.h>
 
 #include TypesH
@@ -111,6 +112,7 @@ void printer_io()
     mvdm_softpc_report_setup_hardware_probe("int17-enter", getAH(), getDX());
 #ifdef PRINTER
 
+#line 105
     half_word time_out, status;
     word printer_io_address, printer_io_reg, printer_status_reg, printer_control_reg;
     boolean printer_busy = TRUE;
@@ -126,11 +128,13 @@ void printer_io()
 #error Excluded unsupported MONITOR printer BOP profile
 #endif
 
+#line 122
         case 1:
         case 2:
             /* this is the bop to track a DOS open/close on LPTn */
             printer_bop_openclose (bopsubfunction);
             mvdm_softpc_report_setup_hardware_probe("int17-leave", getAH(), getDX());
+#line 126
             return;
    }
 #endif
@@ -204,6 +208,7 @@ void printer_io()
     }
 #endif
     mvdm_softpc_report_setup_hardware_probe("int17-leave", getAH(), getDX());
+#line 198
 }
 
 #if defined(NTVDM) && defined(MONITOR)

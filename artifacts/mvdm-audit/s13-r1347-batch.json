@@ -1,0 +1,135 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/dos/dem/dem.h",
+      "before_sha256": "2a72b0640aaaffe34f2179ef8c85b60810eb5e7f26451578efa35de15d70c1cf",
+      "original_sha256": "c9c4b4814e1b30ffad29a7716948ec7b6c0ade8f6ab2fbb9fd6998d358706e5a",
+      "anchors": {
+        "136": 123,
+        "155": 134
+      },
+      "matched_lines": 212,
+      "after_sha256": "5eeeea3914420309a316496d90912e173bd1be90a4bd09da39e4e7e9069c460f"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demmisc.c",
+      "before_sha256": "84b6a0b40069cde1c5558f4c4387883e012235ed15c7914567098191df5759a3",
+      "original_sha256": "19676fa5995555ec0b16c2923953b4e6236467dc42bf36cc7e746f45d0fcf912",
+      "anchors": {
+        "25": 25,
+        "608": 611,
+        "615": 615
+      },
+      "matched_lines": 627,
+      "after_sha256": "d5f98246059f0707a1e539d26cad8309e639dbb707accf3088d5742e0e4ba9ba"
+    },
+    {
+      "path": "src/mvdm-host/inc/softpc.h",
+      "before_sha256": "300a9a92ec835a8aaa115837c925f6c6edc21806e3798457f1d0be488295ae83",
+      "original_sha256": "1e6fbd5f67aa04749d7896bd0109fe45daa22e691839d1261bbc3f039924bd9b",
+      "anchors": {
+        "201": 195,
+        "217": 210,
+        "242": 531
+      },
+      "matched_lines": 311,
+      "after_sha256": "4bb85e0a70526b1bbf67ac5ac4531afb1c649efcda65d05ade6280029b18c75b"
+    },
+    {
+      "path": "src/mvdm-host/inc/vdmredir.h",
+      "before_sha256": "3b8ea539ca0989e7b8be3be6cc4098ec0cd1e6940677213992d29933c5cf011a",
+      "original_sha256": "2462271dd22683738e60b4154bd891a8dfc679d4c34b9f75b23ecf91523add2d",
+      "anchors": {
+        "73": 72,
+        "164": 161,
+        "182": 177,
+        "206": 199,
+        "228": 219,
+        "416": 414,
+        "431": 436
+      },
+      "matched_lines": 372,
+      "after_sha256": "63b125295473d5ff442ae62afdc700460455b3eff0dc53872d6135983891d8a2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "before_sha256": "aaeb367d4069645cd2d693ead697b918df36cf16aa9407185e452e4d25828525",
+      "original_sha256": "3aa86f1faf07f68937629f1d6e410eb41f498e17dc6d747647c7d6e5697c80aa",
+      "anchors": {
+        "26": 31,
+        "38": 40,
+        "51": 52,
+        "202": 192,
+        "332": 324
+      },
+      "matched_lines": 243,
+      "after_sha256": "84e4c94857da2af248a4f570385c9c2290cc21042ed03e9c86be52ee4b970e31"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+      "before_sha256": "2e26691abe87240f268dfe0c3362882e0f4984b689679c3ce02056442aea4a61",
+      "original_sha256": "346e2186fe608c318a25796c7d6a35bbc8de6f21c255b212c2ddfc2bc3c89f40",
+      "anchors": {
+        "42": 36,
+        "268": 255,
+        "423": 408,
+        "516": 500,
+        "566": 526,
+        "738": 695,
+        "871": 820
+      },
+      "matched_lines": 832,
+      "after_sha256": "9469b54a27735977116dca86d54389eedb20f30cd795029a63167d531764a0d1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "before_sha256": "b460b6d58a89ade4d7336812a0ffc98d884ab6f7132f2ce51728bc95cac01bf6",
+      "original_sha256": "2802840ef84106ae0f99c6f17af370da66c9381a1355570f5998039fbb33534e",
+      "anchors": {
+        "69": 66,
+        "784": 794,
+        "834": 841,
+        "848": 852,
+        "914": 915,
+        "932": 930
+      },
+      "matched_lines": 1873,
+      "after_sha256": "cdadad02799c68fbbb16516145ac7dfba31dbf53319eae10267d2052bcd24b42"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.h",
+      "before_sha256": "2f4a6c24087abe2fc08a3732fdd7e27730b82077742e1d27f3eab49aca209079",
+      "original_sha256": "8b4622e066f61c6815dbadf3f3c735d7dd29210673a6930f354aaf0e2be880e8",
+      "anchors": {
+        "32": 32
+      },
+      "matched_lines": 29,
+      "after_sha256": "ea9842a3d092fb68850c3155246779d174aa5423699b51d6ea9203617b39441e"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "before_sha256": "5e46d893abe62d4d74611ed8b0feca0ea191473d0460e2c73ba78ab714b8e4d5",
+      "original_sha256": "b1456dcbc0dc6b4d1fd5d101bfaa6bdc9a4cd5d970c14215f3ae62a173f17ccb",
+      "anchors": {
+        "229": 224,
+        "552": 556
+      },
+      "matched_lines": 642,
+      "after_sha256": "ec6956b197159f60ca825f50e10931d3994e47e603674d91318f1ff9e6bc55b7"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "before_sha256": "bc09e35d2c249e5eb5b77eefcc2e5f46a28bbaaa9bba13d92b03c72cf0bd6908",
+      "original_sha256": "53edfe9fb4bb9d965acb8a7cc5f33d14cdf0694957dadfa912e0175488dbcf81",
+      "anchors": {
+        "37": 41,
+        "113": 105,
+        "128": 122,
+        "133": 126,
+        "206": 198
+      },
+      "matched_lines": 181,
+      "after_sha256": "3ccf4236b39535ed37c16dfccddd2d0a36436d94d6585ea50ad6938356ab1b52"
+    }
+  ]
+}

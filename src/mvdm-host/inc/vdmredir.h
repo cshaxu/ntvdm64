@@ -71,6 +71,7 @@ Revision History:
 #line 68
 #error Excluded unsupported UNALIGNED_VDM_POINTERS configuration
 #else
+#line 72
 typedef LPBYTE ULPBYTE;
 typedef LPWORD ULPWORD;
 typedef LPDWORD ULPDWORD;
@@ -162,6 +163,7 @@ typedef LPDWORD ULPDWORD;
 #line 159
 #error Excluded unsupported UNALIGNED_VDM_POINTERS configuration
 #else
+#line 161
 #define READ_WORD(addr)                 (((WORD)READ_BYTE(addr)) | (((WORD)READ_BYTE((LPBYTE)(addr)+1)) << 8))
 #endif  // UNALIGNED_VDM_POINTERS
 #endif  // i386
@@ -180,6 +182,7 @@ typedef LPDWORD ULPDWORD;
 #line 175
 #error Excluded unsupported UNALIGNED_VDM_POINTERS configuration
 #else
+#line 177
 #define READ_DWORD(addr)                (((DWORD)READ_WORD(addr)) | (((DWORD)READ_WORD((LPWORD)(addr)+1)) << 16))
 #endif  // UNALIGNED_VDM_POINTERS
 #endif  // i386
@@ -204,6 +207,7 @@ typedef LPDWORD ULPDWORD;
 #line 197
 #error Excluded unsupported UNALIGNED_VDM_POINTERS configuration
 #else
+#line 199
 #define WRITE_WORD(addr, value) \
             {\
                 ((LPBYTE)(addr))[0] = LOBYTE(value); \
@@ -226,6 +230,7 @@ typedef LPDWORD ULPDWORD;
 #line 217
 #error Excluded unsupported UNALIGNED_VDM_POINTERS configuration
 #else
+#line 219
 #define WRITE_DWORD(addr, value) \
             { \
                 ((LPBYTE)(addr))[0] = LOBYTE(LOWORD((DWORD)(value))); \
@@ -414,6 +419,7 @@ typedef struct _VR_ASYNC_DISPOSITION {
 #line 404
 #error Excluded unsupported i386 configuration
 #else
+#line 414
 LPVOID _inlinePointerFromWords(WORD seg, WORD off);
 #endif
 
@@ -429,6 +435,7 @@ LPVOID _inlinePointerFromWords(WORD seg, WORD off);
 #line 426
 #error Excluded unsupported i386 configuration
 #else
+#line 436
 extern LPVOID _inlineConvertAddress(WORD Seg, WORD Off, WORD Size, BOOLEAN Pm);
 #endif
 
