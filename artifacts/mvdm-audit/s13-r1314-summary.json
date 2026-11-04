@@ -13,15 +13,15 @@
   "line_checks": {
     "error-anchor-match": 3859,
     "not-applicable": 3597,
-    "error-original-mapping-ambiguous": 87,
+    "error-original-mapping-ambiguous": 71,
     "error-preceding-line-anchor-verified": 8,
-    "error-original-reference-verified": 13,
+    "error-original-reference-verified": 29,
     "error-natural-match": 8,
     "error-prior-full-file-original-review": 28,
     "error-original-guard-line-verified": 2
   },
   "files_with_unobserved_retained": 6,
-  "files_with_ambiguous_error_line": 33,
+  "files_with_ambiguous_error_line": 26,
   "different_files_selected_lines_not_fully_certified": 874,
   "limitation": "Marker hits are observed compile contexts, not proof of every supported configuration. A hit requires retention; no hit is not proof of exclusion. Selected-line mapping for differing files is not completely certified.",
   "zero_branch_differing_files_scanned": 373,
@@ -37,5 +37,6 @@
   "zero_branch_files_code_lines_aligned_comment_lines_not_certified": 18,
   "batch_r1322_files_equal_code_blocks_aligned": 8,
   "batch_r1322_error_anchors_verified": 2,
-  "zero_branch_unique_line_mapping_note": "Comment-only matched lines are not certified in 18 code-aligned files; prior raw count is superseded."
+  "zero_branch_unique_line_mapping_note": "Comment-only matched lines are not certified in 18 code-aligned files; prior raw count is superseded.",
+  "batch_r1323_existing_original_anchors_verified": 16
 }

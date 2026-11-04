@@ -146,7 +146,7 @@ src/mvdm-host/dpmi32/dpmidata.h,34,1,else,,historical-hit,unique-structure-histo
 src/mvdm-host/dpmi32/dpmidata.h,37,2,if,defined(CPU_40_STYLE),historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/dpmi32/dpmidata.h,42,2,else,,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/dpmi32/dpmidata.h,45,2,if,!defined(CPU_40_STYLE),historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/dpmi32/dpmidata.h,60,2,if,!defined(_WINNT_),excluded-error,unique-structure-historical,error-original-mapping-ambiguous
+src/mvdm-host/dpmi32/dpmidata.h,60,2,if,!defined(_WINNT_),excluded-error,unique-structure-historical,error-original-reference-verified
 src/mvdm-host/dpmi32/dpmidata.h,180,1,if,DBG,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/dpmi32/dpmiint.c,44,1,if,defined(CPU_40_STYLE),historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/dpmi32/dpmiint.c,95,1,ifdef,i386,excluded-error,none,error-anchor-match
@@ -194,7 +194,7 @@ src/mvdm-host/dpmi32/dpmiint.c,1462,3,if,defined(CCPU),historical-hit,unchanged-
 src/mvdm-host/dpmi32/dpmiint.c,1471,2,if,defined(CPU_40_STYLE) && defined(CCPU),historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/dpmi32/dpmiint.c,1473,2,else,,excluded-error,unique-structure-historical,error-original-mapping-ambiguous
 src/mvdm-host/dpmi32/dpmiint.c,1486,2,if,defined(CPU_40_STYLE),historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/dpmi32/dpmiint.c,1501,2,else,,excluded-error,unique-structure-historical,error-original-mapping-ambiguous
+src/mvdm-host/dpmi32/dpmiint.c,1501,2,else,,excluded-error,unique-structure-historical,error-original-reference-verified
 src/mvdm-host/dpmi32/dpmiint.c,1496,3,if,defined(CCPU),historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/dpmi32/dpmiint.c,1511,2,if,defined(CPU_40_STYLE) && defined(CCPU),historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/dpmi32/dpmiint.c,1529,2,if,defined(CPU_40_STYLE) && defined(CCPU),historical-hit,unchanged-directive-git-line-map,not-applicable
@@ -575,10 +575,10 @@ src/mvdm-host/softpc.new/base/bios/reset.c,385,1,ifndef,NTVDM,excluded-error,non
 src/mvdm-host/softpc.new/base/bios/reset.c,393,1,ifdef,PM,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/bios/reset.c,398,2,ifdef,NTVDM,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/bios/reset.c,491,2,ifndef,CPU_30_STYLE,empty-or-structural,no-direct-code-after-comment-and-directive-filter,not-applicable
-src/mvdm-host/softpc.new/base/bios/reset.c,492,3,if,!defined(CPU_40_STYLE),excluded-error,none,error-original-mapping-ambiguous
+src/mvdm-host/softpc.new/base/bios/reset.c,492,3,if,!defined(CPU_40_STYLE),excluded-error,none,error-original-reference-verified
 src/mvdm-host/softpc.new/base/bios/reset.c,523,2,ifdef,NPX,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/bios/reset.c,562,2,ifndef,CPU_30_STYLE,empty-or-structural,no-direct-code-after-comment-and-directive-filter,not-applicable
-src/mvdm-host/softpc.new/base/bios/reset.c,563,3,if,!defined(CPU_40_STYLE),excluded-error,none,error-original-mapping-ambiguous
+src/mvdm-host/softpc.new/base/bios/reset.c,563,3,if,!defined(CPU_40_STYLE),excluded-error,none,error-original-reference-verified
 src/mvdm-host/softpc.new/base/bios/reset.c,587,2,ifdef,DPMI,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/base/bios/reset.c,605,1,ifndef,NTVDM,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/base/bios/reset.c,613,1,ifdef,NOVELL,excluded-error,none,error-anchor-match
@@ -2828,7 +2828,7 @@ src/mvdm-host/softpc.new/base/inc/egacpu.h,25,1,else,,historical-hit,unique-stru
 src/mvdm-host/softpc.new/base/inc/egacpu.h,93,1,ifdef,C_VID,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/inc/egacpu.h,99,1,ifndef,HOST_VGA_GLOBALS,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/inc/egacpu.h,104,2,ifdef,C_VID,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/inc/egacpu.h,106,2,else,,excluded-error,unique-structure-historical,error-original-mapping-ambiguous
+src/mvdm-host/softpc.new/base/inc/egacpu.h,106,2,else,,excluded-error,unique-structure-historical,error-original-reference-verified
 src/mvdm-host/softpc.new/base/inc/egacpu.h,130,1,ifdef,V7VGA,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/inc/egacpu.h,136,1,ifndef,CPU_40_STYLE,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/inc/egacpu.h,139,1,else,,historical-hit,unique-structure-historical,not-applicable
@@ -2916,7 +2916,7 @@ src/mvdm-host/softpc.new/base/inc/gfx_upd.h,289,1,ifdef,NTVDM,historical-hit,uni
 src/mvdm-host/softpc.new/base/inc/gisp_sas.h,22,1,ifdef,GISP_SVGA,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/inc/gispsvga.h,24,1,ifdef,GISP_SVGA,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/inc/gmi.h,19,1,if,defined(CPU_40_STYLE) && defined(C_VID),historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/inc/gmi.h,28,1,else,,excluded-error,unique-structure-historical,error-original-mapping-ambiguous
+src/mvdm-host/softpc.new/base/inc/gmi.h,28,1,else,,excluded-error,unique-structure-historical,error-original-reference-verified
 src/mvdm-host/softpc.new/base/inc/gmi.h,35,1,ifndef,UNIVERSAL,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/inc/gmi.h,49,2,ifdef,CCPU,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/inc/gmi.h,55,2,else,,excluded-error,unique-structure-historical,error-anchor-match
@@ -2970,7 +2970,7 @@ src/mvdm-host/softpc.new/base/inc/ica.h,62,1,if,defined (NOVELL) || defined (NOV
 src/mvdm-host/softpc.new/base/inc/ica.h,68,1,if,defined (SWIN_HAW),excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/inc/ica.h,75,1,if,defined (ASPI),excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/inc/ica.h,84,1,ifndef,CPU_30_STYLE,empty-or-structural,no-direct-code-after-comment-and-directive-filter,not-applicable
-src/mvdm-host/softpc.new/base/inc/ica.h,89,2,if,!defined(CCPU),excluded-error,none,error-original-mapping-ambiguous
+src/mvdm-host/softpc.new/base/inc/ica.h,89,2,if,!defined(CCPU),excluded-error,none,error-original-reference-verified
 src/mvdm-host/softpc.new/base/inc/ica.h,110,1,if,defined (NTVDM),historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/inc/ica.h,144,1,else,,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/inc/ica.h,112,2,ifdef,MONITOR,historical-hit,unique-structure-historical,not-applicable
@@ -4875,7 +4875,7 @@ src/mvdm-host/softpc.new/base/video/video.c,1465,1,ifdef,EGG,historical-hit,unch
 src/mvdm-host/softpc.new/base/video/video.c,1470,1,else,,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/base/video/video.c,1541,1,ifdef,REAL_VGA,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/base/video/video.c,1544,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/video/video.c,1548,2,if,( defined(NTVDM) && defined(MONITOR) && !defined(MVDM_STANDALONE_SAS_VIDEO) ) || defined(GISP_SVGA),excluded-error,unique-structure-historical,error-original-mapping-ambiguous
+src/mvdm-host/softpc.new/base/video/video.c,1548,2,if,( defined(NTVDM) && defined(MONITOR) && !defined(MVDM_STANDALONE_SAS_VIDEO) ) || defined(GISP_SVGA),excluded-error,unique-structure-historical,error-original-reference-verified
 src/mvdm-host/softpc.new/base/video/video.c,1551,2,else,,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/video/video.c,1553,3,ifdef,EGG,historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/softpc.new/base/video/video.c,1555,4,ifdef,CPU_40_STYLE,historical-hit,unchanged-directive-git-line-map,not-applicable
@@ -5262,7 +5262,7 @@ src/mvdm-host/softpc.new/host/src/nt_event.c,1361,1,ifndef,PROD,excluded-error,n
 src/mvdm-host/softpc.new/host/src/nt_event.c,1386,1,ifndef,PROD,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_event.c,1459,1,ifdef,X86GFX,excluded-error,none,error-original-mapping-ambiguous
 src/mvdm-host/softpc.new/host/src/nt_event.c,1483,1,ifdef,MONITOR,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_event.c,1491,1,ifdef,X86GFX,excluded-error,none,error-original-mapping-ambiguous
+src/mvdm-host/softpc.new/host/src/nt_event.c,1491,1,ifdef,X86GFX,excluded-error,none,error-original-reference-verified
 src/mvdm-host/softpc.new/host/src/nt_event.c,1562,1,ifndef,PROD,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_event.c,1602,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_event.c,1612,1,ifndef,PROD,excluded-error,none,error-anchor-match
@@ -5288,7 +5288,7 @@ src/mvdm-host/softpc.new/host/src/nt_fulsc.c,521,1,if,0,excluded-error,none,erro
 src/mvdm-host/softpc.new/host/src/nt_fulsc.c,527,1,if,0,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_fulsc.c,543,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_fulsc.c,557,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/host/src/nt_fulsc.c,581,1,ifdef,X86GFX,excluded-error,none,error-original-mapping-ambiguous
+src/mvdm-host/softpc.new/host/src/nt_fulsc.c,581,1,ifdef,X86GFX,excluded-error,none,error-original-reference-verified
 src/mvdm-host/softpc.new/host/src/nt_fulsc.c,607,1,ifndef,X86GFX,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/host/src/nt_fulsc.c,611,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_fulsc.c,620,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
@@ -5484,7 +5484,7 @@ src/mvdm-host/softpc.new/host/src/nt_reset.c,131,1,ifdef,MONITOR,excluded-error,
 src/mvdm-host/softpc.new/host/src/nt_reset.c,143,1,ifdef,MONITOR,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_reset.c,151,1,ifdef,HUNTER,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_reset.c,154,1,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/host/src/nt_reset.c,155,2,ifdef,X86GFX,excluded-error,unique-structure-historical,error-original-mapping-ambiguous
+src/mvdm-host/softpc.new/host/src/nt_reset.c,155,2,ifdef,X86GFX,excluded-error,unique-structure-historical,error-original-reference-verified
 src/mvdm-host/softpc.new/host/src/nt_reset.c,222,1,ifndef,MONITOR,current-hit,r1311-current-equivalent-preprocessing,not-applicable
 src/mvdm-host/softpc.new/host/src/nt_reset.c,317,1,ifdef,X86GFX,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/host/src/nt_reset.c,354,1,ifdef,HUNTER,excluded-error,unique-structure-historical,error-anchor-match
@@ -5620,7 +5620,7 @@ src/mvdm-host/softpc.new/host/src/sim32.c,68,2,ifndef,MONITOR,historical-hit,unc
 src/mvdm-host/softpc.new/host/src/sim32.c,196,2,ifndef,MONITOR,historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/softpc.new/host/src/sim32.c,241,2,ifndef,CPU_40_STYLE,excluded-error,unique-structure-historical,error-original-mapping-ambiguous
 src/mvdm-host/softpc.new/host/src/sim32.c,252,2,ifdef,CPU_40_STYLE,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/host/src/sim32.c,267,2,else,,excluded-error,unique-structure-historical,error-original-mapping-ambiguous
+src/mvdm-host/softpc.new/host/src/sim32.c,267,2,else,,excluded-error,unique-structure-historical,error-original-reference-verified
 src/mvdm-host/softpc.new/host/src/sim32.c,335,2,ifndef,CPU_40_STYLE,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/host/src/sim32.c,338,2,else,,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/host/src/sim32.c,351,3,ifndef,PROD,excluded-error,none,error-anchor-match
@@ -6882,12 +6882,12 @@ src/non-mvdm/windows/core/ntuser/client/dlgmgr.c,95,1,ifdef,SYSMODALWINDOWS,excl
 src/non-mvdm/windows/core/ntuser/client/dlgmgr.c,318,1,if,defined(WOW_ORIGINAL_DIALOG_MANAGER),historical-hit,unique-structure-historical,not-applicable
 src/non-mvdm/windows/core/ntuser/client/dlgmgr.c,451,2,ifdef,WOW_NATIVE_DIALOG_PROCEDURE_OWNER,historical-hit,unique-structure-historical,not-applicable
 src/non-mvdm/windows/core/ntuser/client/dlgmgr.c,512,2,ifdef,WOW_NATIVE_DIALOG_PROCEDURE_OWNER,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/non-mvdm/windows/core/ntuser/client/dlgmgr.c,517,2,else,,excluded-error,none,error-original-mapping-ambiguous
+src/non-mvdm/windows/core/ntuser/client/dlgmgr.c,517,2,else,,excluded-error,none,error-original-reference-verified
 src/non-mvdm/windows/core/ntuser/client/dlgmgr.c,529,2,ifdef,WOW_NATIVE_DIALOG_PROCEDURE_OWNER,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/non-mvdm/windows/core/ntuser/client/dlgmgr.c,532,2,else,,excluded-error,none,error-original-mapping-ambiguous
-src/non-mvdm/windows/core/ntuser/client/dlgmgr.c,946,2,ifndef,WOW_NATIVE_DIALOG_PROCEDURE_OWNER,excluded-error,unique-structure-historical,error-original-mapping-ambiguous
+src/non-mvdm/windows/core/ntuser/client/dlgmgr.c,532,2,else,,excluded-error,none,error-original-reference-verified
+src/non-mvdm/windows/core/ntuser/client/dlgmgr.c,946,2,ifndef,WOW_NATIVE_DIALOG_PROCEDURE_OWNER,excluded-error,unique-structure-historical,error-original-reference-verified
 src/non-mvdm/windows/core/ntuser/client/dlgmgr.c,1002,2,ifdef,WOW_NATIVE_DIALOG_PROCEDURE_OWNER,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/non-mvdm/windows/core/ntuser/client/dlgmgr.c,1004,2,else,,excluded-error,none,error-original-mapping-ambiguous
+src/non-mvdm/windows/core/ntuser/client/dlgmgr.c,1004,2,else,,excluded-error,none,error-original-reference-verified
 src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c,236,1,ifdef,WOW_ORIGINAL_DIALOG_KEYBOARD,historical-hit,unchanged-directive-git-line-map,not-applicable
 src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c,247,1,ifdef,FE_SB,excluded-error,none,error-anchor-match
 src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c,250,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable

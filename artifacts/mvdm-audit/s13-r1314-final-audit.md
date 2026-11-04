@@ -106,6 +106,14 @@ images are identical and NTVDM/WOW32 differ only in PE timestamps
 ([comparison](s13-r1322-build-image-compare.json)). Runtime tests were not
 repeated under owner instruction.
 
+The [r1323 anchor review](s13-r1323-anchor-review.json) additionally checks
+16 existing `#line` anchors against the specific original statement or branch
+entry they represent, including project-local selector cases. The remaining
+ambiguous error-anchor count is 71. It also found an actual mismatch in
+`cpu_vid.h`: both the selected and excluded generic `str_read` mappings need
+to refer to original line 91 rather than unrelated original lines 95/102;
+that source correction is still pending and is not represented as complete.
+
 The [fifth ten-file batch](s13-r1321-line-batch.json) restores original
 positions for matching code lines in another ten files. The batch uses newline
 boundaries rather than treating form-feed characters as line breaks, and

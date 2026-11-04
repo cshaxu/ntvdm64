@@ -1,0 +1,149 @@
+{
+  "method": "Checked each #line immediately before #error against the identified original statement or original excluded-arm entry and surrounding code; selector may be project-local. Blank #line 79 is the original first line immediately following its enclosing condition.",
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmidata.h",
+      "line": 60,
+      "anchor": 58,
+      "current_sha256": "023e38a8c0488f1f6b2aef266ec7d0f72fd14c66d7eb587aa68eeca9e1436ba5",
+      "original_sha256": "f9772482513601c2e316e097a92485864557af77010e77285d725d903a0fd7b2",
+      "original_line_text": "typedef struct _LDT_ENTRY {",
+      "kind": "local selector / original code reference"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "line": 1501,
+      "anchor": 1270,
+      "current_sha256": "e057126ff706a0df937168efbd1b9218c47d863fab820d3b2ea281a2c70d127b",
+      "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+      "original_line_text": "    if (Ldt[(SegCS & ~0x7)/sizeof(LDT_ENTRY)].HighWord.Bits.Default_Big) {",
+      "kind": "local selector / original code reference"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 492,
+      "anchor": 620,
+      "current_sha256": "c6bd0666c084f7233a8cb1d75bfe3887fd0a0ab624295864ff9d5bfa35b4e0b9",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "original_line_text": "\t\t\t\ttemp_word = temp_word + HOST_BOP_IP_FUDGE;",
+      "kind": "local selector / original code reference"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 563,
+      "anchor": 684,
+      "current_sha256": "c6bd0666c084f7233a8cb1d75bfe3887fd0a0ab624295864ff9d5bfa35b4e0b9",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "original_line_text": "\t\t\t    temp_word = temp_word + HOST_BOP_IP_FUDGE;",
+      "kind": "local selector / original code reference"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+      "line": 106,
+      "anchor": 122,
+      "current_sha256": "9dc9a5b32884ce9388ba06522ca48854951964f66a62652a30b979428016fe47",
+      "original_sha256": "4a53a9d1c7fb984deb2c5b0fd629442ee8a35272ad90323624d55daa65886194",
+      "original_line_text": "\tVGA_GLOBALS\t*globals;",
+      "kind": "local selector / original code reference"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gmi.h",
+      "line": 28,
+      "anchor": 19,
+      "current_sha256": "5d33a2aedb0ccb6e959fdb10a78d91be362cee722c4b7fdf58eeb68a59948cdf",
+      "original_sha256": "828d5e4399c5cc396367373e96c4d6785ac0026f50467176f30a977afe01919a",
+      "original_line_text": "\tVOID\t(*b_write)();",
+      "kind": "local selector / original code reference"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "line": 89,
+      "anchor": 79,
+      "current_sha256": "b525284d28990da14a61ea02d11f3b6b7f3e94726bef7b33db03c9dd8ff6841e",
+      "original_sha256": "21109fa7e6b8d6a8ecfe8e733a16805829560e218be11e46e5a33dac28820316",
+      "original_line_text": "",
+      "kind": "local selector / original code reference"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "line": 1548,
+      "anchor": 1512,
+      "current_sha256": "697b2da90d81b4e5ab75ecf92defca26b3d2e59fb2cd641e269fccfa0ee00bfb",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+      "original_line_text": "                        *((unsigned short *)( video_pc_low_regen + cpos)) = (getBL() << 8) | getAL();",
+      "kind": "original condition with standalone qualification"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "line": 1491,
+      "anchor": 1428,
+      "current_sha256": "6475d6001f0b0819d619eacd70593d84eef66123f04cb138ae7c1aee7e439592",
+      "original_sha256": "7f555a87ba029627d6811c0f7b96964bb8a96af90c60c89012975a4ac5442076",
+      "original_line_text": "\t    if (BlockFlags == 1 && sc.ScreenState == FULLSCREEN)",
+      "kind": "local selector / original code reference"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "line": 581,
+      "anchor": 1415,
+      "current_sha256": "7a7f43d4a57ef02953a628a6f82a23f305da8145e6a626b08b22c5b9c23e4d28",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "original_line_text": "/*",
+      "kind": "local selector / original code reference"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "line": 155,
+      "anchor": 141,
+      "current_sha256": "4637d1dd86db3eab2baa1a2cd09029f38f34667d4912ce83e58f007ffad5dbc2",
+      "original_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47",
+      "original_line_text": "    if (sc.ScreenState == FULLSCREEN)\t// initialised in ConsoleInit()",
+      "kind": "local selector / original code reference"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "line": 267,
+      "anchor": 239,
+      "current_sha256": "675f1d654972d1858d973563a1214d72a523f5e29aec6db3963f23496b4d893c",
+      "original_sha256": "1f634b9d6c09d0f767a90ec9e577817800a07dc353cffa433ca2e0268d2cd42f",
+      "original_line_text": "    else",
+      "kind": "local selector / original code reference"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "line": 517,
+      "anchor": 474,
+      "current_sha256": "a0f66436974af49a2c42562ae334ee6816a43db0eea8f2a1ef7907909e1e0c79",
+      "original_sha256": "8e2383f52e4e3f65f656bd492143d7a8ed5d0a2526ad8e6af10d242465ff8d7a",
+      "original_line_text": "    if (((PDIALOG)pwnd)->resultWP != 0)",
+      "kind": "local selector / original code reference"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "line": 532,
+      "anchor": 482,
+      "current_sha256": "a0f66436974af49a2c42562ae334ee6816a43db0eea8f2a1ef7907909e1e0c79",
+      "original_sha256": "8e2383f52e4e3f65f656bd492143d7a8ed5d0a2526ad8e6af10d242465ff8d7a",
+      "original_line_text": "    if (PDLG(pwnd)->lpfnDlg != NULL) {",
+      "kind": "local selector / original code reference"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "line": 946,
+      "anchor": 884,
+      "current_sha256": "a0f66436974af49a2c42562ae334ee6816a43db0eea8f2a1ef7907909e1e0c79",
+      "original_sha256": "8e2383f52e4e3f65f656bd492143d7a8ed5d0a2526ad8e6af10d242465ff8d7a",
+      "original_line_text": "            if (lParam == NF_QUERY)",
+      "kind": "local selector / original code reference"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "line": 1004,
+      "anchor": 937,
+      "current_sha256": "a0f66436974af49a2c42562ae334ee6816a43db0eea8f2a1ef7907909e1e0c79",
+      "original_sha256": "8e2383f52e4e3f65f656bd492143d7a8ed5d0a2526ad8e6af10d242465ff8d7a",
+      "original_line_text": "        return ((PDIALOG)pwnd)->resultWP;",
+      "kind": "local selector / original code reference"
+    }
+  ]
+}
