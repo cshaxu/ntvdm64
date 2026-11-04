@@ -57,6 +57,7 @@ extern boolean         host_check_read_access();
 IMPORT VOID memset4 IPT3( unsigned int, data, unsigned int *, laddr,
 	unsigned int, count );
 #endif
+#line 52
 IMPORT VOID fill_alternate_bytes IPT3( IS8 *, start, IS8 *, end, IS8, value);
 IMPORT VOID fill_both_bytes IPT3( IU16, data, IU16 *, dest, ULONG, len );
 

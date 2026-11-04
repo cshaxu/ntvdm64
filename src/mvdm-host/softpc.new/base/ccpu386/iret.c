@@ -314,6 +314,7 @@ IRET()
       load_SS_cache(new_ss, ss_descr_addr, &ss_entry);
       set_current_SP(new_sp);
 
+#line 321
       SET_CPL(privilege);
 
       /* finally re-validate DS and ES segments */

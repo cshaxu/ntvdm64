@@ -57,6 +57,7 @@ IMPORT VOID host_terminate IPT0();
 /* DIVERGENCE(MVDM-HOST-DIV-356): standalone service permission precedes cleanup. */
 IMPORT VOID ntvdm_worker_lifecycle_authorize_exit IPT0();
 
+#line 56
 void terminate()
 {
 	SAVED BOOL already_called_terminate = FALSE;
@@ -65,6 +66,7 @@ void terminate()
 	/* DIVERGENCE(MVDM-HOST-DIV-356): preserve the original cleanup thread/order. */
 	ntvdm_worker_lifecycle_authorize_exit();
 
+#line 61
 	if (already_called_terminate)
 	{
 		assert0( NO, "Error: terminate called twice - exiting" );

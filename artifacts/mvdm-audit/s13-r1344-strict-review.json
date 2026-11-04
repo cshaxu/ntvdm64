@@ -1,0 +1,17 @@
+{
+  "method": "Same strict original-tree and observed selected-projection review as r1343; this does not certify unobserved contexts or local code runtime behavior.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/iret.c",
+      "before_sha256": "49bf538b29c800c726798b056f0e0fdfe7a87a023f638430299e6e3b68b89917",
+      "original_sha256": "091378ab6583c06e7593b5b34f336531d874e695be633596d652ea42f5446eb3",
+      "anchors": {},
+      "matched_lines": 319,
+      "strict_tree": {
+        "excluded": 1,
+        "retained": 1,
+        "groups": 1
+      }
+    }
+  ]
+}

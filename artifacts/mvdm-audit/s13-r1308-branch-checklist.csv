@@ -1359,18 +1359,18 @@ src/mvdm-host/softpc.new/base/ccpu386/div.c,81,1,ifdef,SET_UNDEFINED_DIV_FLAG,hi
 src/mvdm-host/softpc.new/base/ccpu386/div.c,119,1,ifdef,SET_UNDEFINED_DIV_FLAG,historical-hit,matching-complete-condition-sequence,not-applicable
 src/mvdm-host/softpc.new/base/ccpu386/div.c,159,1,ifdef,SET_UNDEFINED_DIV_FLAG,historical-hit,matching-complete-condition-sequence,not-applicable
 src/mvdm-host/softpc.new/base/ccpu386/evidgen.h,6,1,ifndef,_EVIDGEN_H_,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/ccpu386/fpu.c,160,1,ifndef,NULL,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/ccpu386/fpu.c,234,1,ifndef,host_log2,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/ccpu386/fpu.c,238,1,ifndef,host_log1p,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/ccpu386/fpu.c,266,1,ifdef,SUN4,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/ccpu386/fpu.c,468,1,ifdef,BIGEND,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/ccpu386/fpu.c,471,1,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/ccpu386/fpu.c,1293,1,ifndef,SFELLOW,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/ccpu386/fpu.c,1295,1,else,,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/ccpu386/fpu.c,1748,1,if,(HOST_BIAS >= 16383),excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/ccpu386/fpu.c,1751,1,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/ccpu386/fpu.c,1866,1,if,(HOST_BIAS >= 16383),excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/ccpu386/fpu.c,5784,1,ifndef,PIG,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/ccpu386/fpu.c,161,1,ifndef,NULL,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/ccpu386/fpu.c,236,1,ifndef,host_log2,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/ccpu386/fpu.c,240,1,ifndef,host_log1p,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/ccpu386/fpu.c,268,1,ifdef,SUN4,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/ccpu386/fpu.c,470,1,ifdef,BIGEND,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/ccpu386/fpu.c,473,1,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/ccpu386/fpu.c,1297,1,ifndef,SFELLOW,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/ccpu386/fpu.c,1299,1,else,,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/ccpu386/fpu.c,1752,1,if,(HOST_BIAS >= 16383),excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/ccpu386/fpu.c,1755,1,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/ccpu386/fpu.c,1870,1,if,(HOST_BIAS >= 16383),excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/ccpu386/fpu.c,5789,1,ifndef,PIG,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/ccpu386/fpu_c.h,1,1,ifndef,_Fpu_c_h,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/ccpu386/gdpvar.h,1,1,ifndef,_gdpvar_h,current-context-no-hit,r1312-product-fixture-addon-equivalent-preprocessing,not-applicable
 src/mvdm-host/softpc.new/base/ccpu386/idiv.c,74,1,ifdef,SET_UNDEFINED_DIV_FLAG,historical-hit,matching-complete-condition-sequence,not-applicable
@@ -1435,7 +1435,7 @@ src/mvdm-host/softpc.new/base/ccpu386/out.c,85,2,else,,historical-hit,unique-str
 src/mvdm-host/softpc.new/base/ccpu386/pigger_c.h,1,1,ifndef,_Pigger_c_h,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/ccpu386/ret.c,86,1,ifdef,TAKE_REAL_MODE_LIMIT_FAULT,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/ccpu386/ret.c,89,1,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/ccpu386/ret.c,244,1,ifndef,TAKE_REAL_MODE_LIMIT_FAULT,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/ccpu386/ret.c,245,1,ifndef,TAKE_REAL_MODE_LIMIT_FAULT,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/ccpu386/sar.c,77,1,ifdef,SET_UNDEFINED_FLAG,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/ccpu386/sgdt.c,37,1,ifdef,ANSI,historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/softpc.new/base/ccpu386/sgdt.c,41,1,else,,excluded-error,none,error-anchor-match
@@ -1456,10 +1456,10 @@ src/mvdm-host/softpc.new/base/ccpu386/sidt.c,65,1,else,,excluded-error,none,erro
 src/mvdm-host/softpc.new/base/ccpu386/univer_c.h,1,1,ifndef,_Univer_c_h,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/ccpu386/wbinvd.c,35,1,ifdef,SPC486,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/ccpu386/xadd.c,37,1,ifdef,SPC486,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c,32,1,ifdef,SFELLOW,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c,4854,1,ifdef,SPC486,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c,4857,1,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c,4863,1,ifndef,SFELLOW,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c,34,1,ifdef,SFELLOW,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c,4859,1,ifdef,SPC486,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c,4862,1,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c,4868,1,ifndef,SFELLOW,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/comms/com.c,15,1,ifdef,SCCSID,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/comms/com.c,21,1,ifdef,SEGMENTATION,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/base/comms/com.c,38,1,if,defined(NTVDM) && defined(MONITOR),excluded-error,unique-structure-historical,error-anchor-match
@@ -2900,19 +2900,19 @@ src/mvdm-host/softpc.new/base/inc/gendrvr.h,21,1,if,defined (GEN_DRVR) || define
 src/mvdm-host/softpc.new/base/inc/gendrvr.h,28,1,ifdef,GEN_DRVR,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/inc/gfi.h,503,1,ifdef,NTVDM,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/inc/gfi.h,595,1,ifndef,host_rflop_drive_type,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/inc/gfx_upd.h,56,1,ifdef,VGG,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/inc/gfx_upd.h,123,1,ifdef,GISP_SVGA,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/inc/gfx_upd.h,128,1,ifdef,EGG,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/inc/gfx_upd.h,174,1,ifdef,GISP_SVGA,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/inc/gfx_upd.h,179,1,ifdef,EGG,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/inc/gfx_upd.h,193,1,ifndef,host_mode_select_changed,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/inc/gfx_upd.h,199,1,ifndef,host_color_select_changed,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/inc/gfx_upd.h,205,1,ifndef,host_screen_address_changed,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/inc/gfx_upd.h,211,1,ifndef,host_cursor_size_changed,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/inc/gfx_upd.h,217,1,ifndef,host_scroll_complete,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/inc/gfx_upd.h,229,1,ifdef,V7VGA,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/inc/gfx_upd.h,271,1,if,defined(HERC),excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/inc/gfx_upd.h,289,1,ifdef,NTVDM,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/inc/gfx_upd.h,57,1,ifdef,VGG,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/inc/gfx_upd.h,124,1,ifdef,GISP_SVGA,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/inc/gfx_upd.h,129,1,ifdef,EGG,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/inc/gfx_upd.h,175,1,ifdef,GISP_SVGA,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/inc/gfx_upd.h,180,1,ifdef,EGG,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/inc/gfx_upd.h,194,1,ifndef,host_mode_select_changed,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/inc/gfx_upd.h,200,1,ifndef,host_color_select_changed,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/inc/gfx_upd.h,206,1,ifndef,host_screen_address_changed,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/inc/gfx_upd.h,212,1,ifndef,host_cursor_size_changed,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/inc/gfx_upd.h,218,1,ifndef,host_scroll_complete,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/inc/gfx_upd.h,230,1,ifdef,V7VGA,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/inc/gfx_upd.h,272,1,if,defined(HERC),excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/inc/gfx_upd.h,290,1,ifdef,NTVDM,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/inc/gisp_sas.h,22,1,ifdef,GISP_SVGA,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/inc/gispsvga.h,24,1,ifdef,GISP_SVGA,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/inc/gmi.h,19,1,if,defined(CPU_40_STYLE) && defined(C_VID),historical-hit,unique-structure-historical,not-applicable
@@ -2945,7 +2945,7 @@ src/mvdm-host/softpc.new/base/inc/host.h,23,1,ifdef,PC_CONFIG,excluded-error,uni
 src/mvdm-host/softpc.new/base/inc/host.h,41,1,ifndef,host_memset,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/inc/host.h,49,1,ifdef,SUSPEND,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/inc/host.h,54,1,ifndef,REAL_VGA,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/inc/host.h,64,1,ifdef,SETUID_ROOT,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/inc/host.h,65,1,ifdef,SETUID_ROOT,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/inc/host_cfg.h,9,1,ifndef,_HOST_CONFIG_H,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/inc/host_com.h,1,1,ifndef,_HOST_COM_H,historical-hit,unique-structure-historical,not-applicable
 src/mvdm-host/softpc.new/base/inc/host_com.h,190,2,if,defined(NTVDM) && defined(FIFO_ON),excluded-error,unique-structure-historical,error-anchor-match
@@ -3733,18 +3733,18 @@ src/mvdm-host/softpc.new/base/support/terminat.c,32,1,ifdef,NOVELL,excluded-erro
 src/mvdm-host/softpc.new/base/support/terminat.c,37,1,ifdef,GISP_SVGA,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/base/support/terminat.c,42,1,ifdef,LICENSING,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/base/support/terminat.c,49,1,ifdef,SEGMENTATION,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/support/terminat.c,76,1,ifdef,MSWDVR,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/support/terminat.c,82,1,ifdef,SWIN_SNDBLST_NULL,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/support/terminat.c,88,1,ifdef,GISP_SVGA,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/support/terminat.c,95,1,ifdef,PC_CONFIG,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/support/terminat.c,98,1,else,,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/support/terminat.c,116,1,ifndef,NTVDM,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/support/terminat.c,122,1,ifdef,LIM,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/support/terminat.c,127,1,ifdef,FLOPPY_B,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/support/terminat.c,132,1,ifdef,SLAVEPC,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/support/terminat.c,141,1,ifdef,CPU_30_STYLE,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/support/terminat.c,147,1,ifdef,NOVELL,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/support/terminat.c,153,1,ifdef,LICENSING,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/support/terminat.c,78,1,ifdef,MSWDVR,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/support/terminat.c,84,1,ifdef,SWIN_SNDBLST_NULL,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/support/terminat.c,90,1,ifdef,GISP_SVGA,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/support/terminat.c,97,1,ifdef,PC_CONFIG,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/support/terminat.c,100,1,else,,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/support/terminat.c,118,1,ifndef,NTVDM,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/support/terminat.c,124,1,ifdef,LIM,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/support/terminat.c,129,1,ifdef,FLOPPY_B,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/support/terminat.c,134,1,ifdef,SLAVEPC,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/support/terminat.c,143,1,ifdef,CPU_30_STYLE,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/support/terminat.c,149,1,ifdef,NOVELL,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/support/terminat.c,155,1,ifdef,LICENSING,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/base/support/time_day.c,41,1,ifdef,SCCSID,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/support/time_day.c,47,1,ifdef,SEGMENTATION,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/support/time_day.c,94,1,ifdef,XTSFD,excluded-error,unique-structure-historical,error-anchor-match
@@ -3980,14 +3980,14 @@ src/mvdm-host/softpc.new/base/system/rom.c,479,2,ifdef,CPU_40_STYLE,historical-h
 src/mvdm-host/softpc.new/base/system/rom.c,538,2,else,,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/base/system/rom.c,490,3,ifdef,macintosh,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/system/rom.c,524,3,ifndef,GISP_SVGA,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/system/rom.c,548,1,ifndef,GISP_SVGA,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/system/rom.c,556,2,if,!(defined(NTVDM) & defined(MONITOR)),historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/system/rom.c,573,1,ifndef,GISP_SVGA,historical-hit,unique-structure-historical,not-applicable
-src/mvdm-host/softpc.new/base/system/rom.c,575,1,else,,excluded-error,unique-structure-historical,error-anchor-match
-src/mvdm-host/softpc.new/base/system/rom.c,583,1,if,!defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX) ),historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/system/rom.c,590,2,ifdef,CPU_40_STYLE,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/softpc.new/base/system/rom.c,655,2,else,,excluded-error,none,error-anchor-match
-src/mvdm-host/softpc.new/base/system/rom.c,626,3,ifndef,PROD,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/system/rom.c,549,1,ifndef,GISP_SVGA,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/system/rom.c,557,2,if,!(defined(NTVDM) & defined(MONITOR)),historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/system/rom.c,574,1,ifndef,GISP_SVGA,historical-hit,unique-structure-historical,not-applicable
+src/mvdm-host/softpc.new/base/system/rom.c,576,1,else,,excluded-error,unique-structure-historical,error-anchor-match
+src/mvdm-host/softpc.new/base/system/rom.c,584,1,if,!defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX) ),historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/system/rom.c,591,2,ifdef,CPU_40_STYLE,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/softpc.new/base/system/rom.c,656,2,else,,excluded-error,none,error-anchor-match
+src/mvdm-host/softpc.new/base/system/rom.c,627,3,ifndef,PROD,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/system/timer.c,34,1,ifdef,SCCSID,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/softpc.new/base/system/timer.c,40,1,ifdef,SEGMENTATION,excluded-error,none,error-anchor-match
 src/mvdm-host/softpc.new/base/system/timer.c,72,1,ifndef,PROD,excluded-error,none,error-anchor-match

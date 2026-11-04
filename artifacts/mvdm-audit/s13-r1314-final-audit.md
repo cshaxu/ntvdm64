@@ -324,3 +324,13 @@ No source changes were needed. This is not a runtime proof for local code or
 for unobserved configurations. The inventory is 182 byte-identical / 572
 differing files with this structural and matching-code review / 1,056 total;
 302 differing files remain.
+
+The [r1344 batch](s13-r1344-batch.json) aligns observed selected-path
+matching code in ten files; their [recheck](s13-r1344-context-recheck.json)
+passes. One additionally passed [strict tree review](s13-r1344-strict-review.json);
+the other nine remain pending. Current count: 182 byte-identical / 573
+differing with structure and matching-code review / 1,056 total, leaving 301
+differing pending. Cached x86 root, NTVDM, WOW32 and x64 builds passed; ten
+images published and verified. Nine match byte-for-byte and NTVDM differs only
+by PE timestamp ([comparison](s13-r1344-build-image-compare.json)); tests were
+not repeated under the owner-approved rule.

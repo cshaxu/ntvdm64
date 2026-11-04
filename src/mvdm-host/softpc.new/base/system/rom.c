@@ -543,6 +543,7 @@ GLOBAL VOID patch_rom IFN2(sys_addr, addr, half_word, val)
 
 #endif	/* !NTVDM | (NTVDM & !X86GFX) */
 #line 514
+#line 588
 }
 
 #ifndef GISP_SVGA

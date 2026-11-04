@@ -3106,3 +3106,5 @@ MVDM-HOST-DIV-814: correct original error and continuation line anchors for the 
 MVDM-HOST-DIV-815: restore original logical source positions for matching code in six WOW32 mirror files while preserving local adaptations. Evidence: artifacts/mvdm-audit/s13-r1337-line-batch.json and s13-r1337-tree-recheck.json.
 
 MVDM-HOST-DIV-816: restore original logical source positions for matching code on the observed selected branch in six mirror files; retained code and conditional selectors are unchanged. Evidence: artifacts/mvdm-audit/s13-r1341-pending-line-batch.json and s13-r1342-context-recheck.json. Other contexts require separate review.
+
+MVDM-HOST-DIV-817: restore original logical source positions for matching code in ten mirror files on observed selected paths, retaining conditions and local adaptations. Evidence: artifacts/mvdm-audit/s13-r1344-batch.json and s13-r1344-context-recheck.json; other contexts remain under review.

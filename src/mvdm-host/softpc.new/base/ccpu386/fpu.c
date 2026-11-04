@@ -18,6 +18,7 @@
 #include "insignia.h"
 #include "host_def.h"
 #include <stdio.h>
+#line 20
 #include <math.h>
 #include "cfpu_def.h"
 #include "ckmalloc.h"
@@ -163,6 +164,7 @@ GLOBAL void setNpxStackRegs IPT1(FPSTACKENTRY *, loadPtr);
 #endif
 #line 161
 #line 162
+#line 161
 #define TAG_NEGATIVE_MASK 1
 #define TAG_ZERO_MASK 2
 #define TAG_INFINITY_MASK 4
@@ -1028,6 +1030,7 @@ LOCAL VOID CVTI64FPH IFN1(FPU_I64 *, as64)
 LOCAL VOID CVTFPHI64 IFN2(FPU_I64 *, as64, FPH *, FPPtr)
 {
 	FPHOST bits;
+#line 1042
 	IU32    high32 = 0;
 	IU32	low32 = 0;
 	IS32	exp;
@@ -1037,6 +1040,7 @@ LOCAL VOID CVTFPHI64 IFN2(FPU_I64 *, as64, FPH *, FPPtr)
 	/* T60: copy the representation without aliasing a double as FP64. */
 	memcpy(&bits, FPPtr, sizeof(bits));
 	exp = bits.hiword.exp;
+#line 1049
 	if (exp != 0) {
 		high32 = bits.hiword.mant_hi;
 		low32 = bits.mant_lo;
@@ -3238,6 +3242,7 @@ GLOBAL VOID FIST IFN1(VOID *, memPtr)
 			case M64I	: /* T60: convert the rounded value, as for M16I/M32I. */
 					  FPRes = npx_rint(TOSPtr->fpvalue);
 					  CVTFPHI64((FPU_I64 *)&FPTemp, &FPRes);
+#line 3253
 					  CVTI64FPH((FPU_I64 *)&FPTemp);	/* Result in FPRes */
 					  /* Check for overflow */
 					  if (FPRes != npx_rint(TOSPtr->fpvalue)) {

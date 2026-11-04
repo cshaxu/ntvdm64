@@ -1,0 +1,113 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "before_sha256": "41ea50644b9d6ebc9c1cf7dde8cb80315df813eefd6316afb0cee70d54eb777f",
+      "original_sha256": "1309239998f72b64583b184d33623c763c3c98ea185081f8d8b294cd9b8c524f",
+      "anchors": {
+        "20": 20,
+        "165": 161,
+        "1030": 1042,
+        "1039": 1049,
+        "3240": 3253
+      },
+      "matched_lines": 5879,
+      "after_sha256": "9450c25c9566579ea53fb66a512f757c951dfdb665eb0c1e9bead18a790a50d5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/iret.c",
+      "before_sha256": "f4afd2d859ad0f59c4e8fc1bd5105a9e5350a67cd1159fe6d49dc411571af7c1",
+      "original_sha256": "091378ab6583c06e7593b5b34f336531d874e695be633596d652ea42f5446eb3",
+      "anchors": {
+        "316": 321
+      },
+      "matched_lines": 319,
+      "after_sha256": "49bf538b29c800c726798b056f0e0fdfe7a87a023f638430299e6e3b68b89917"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ret.c",
+      "before_sha256": "66d26a95cec8b48f185c3295d3a9a69537b1dc927210f42c247204ae33524f6f",
+      "original_sha256": "9531f24ac58029b3a7eb768a49b8e99242b6e9d9fbc5825b6982ae53687688f5",
+      "anchors": {
+        "207": 212
+      },
+      "matched_lines": 257,
+      "after_sha256": "e1e43eba1db580fd62d1e5b979559a93349691153c90659dfcc4144dc2c82ae4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "before_sha256": "acb5eada1a872bc2a4be06cb726e50bffa6e596756b78fa7e929fedef42aa36f",
+      "original_sha256": "3beaf1ec7ca8ac2092bb88de4597a19de8aecdd564fa2b55ccb1a4009041e961",
+      "anchors": {
+        "24": 24,
+        "28": 26,
+        "48": 41,
+        "93": 84,
+        "4816": 4808
+      },
+      "matched_lines": 4849,
+      "after_sha256": "2feb3af8dc8fdf3d4ce7aa262c121b0fb80357a69bb266f8d1e1006709bac29b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
+      "before_sha256": "52066232c84678a1b2a1bb45742821e405cde3088e9ad928b9251d988db28ba2",
+      "original_sha256": "a8577d81b26da6831e8d5dd496e41ebd40a947c3d641c39c77304d509ba2be61",
+      "anchors": {
+        "32": 29
+      },
+      "matched_lines": 247,
+      "after_sha256": "53b5da70251b70542c40a601edb354705559353ed3b3d05947c8de22fff5add8"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host.h",
+      "before_sha256": "2a1b02381aa507a48c9ab930acd40db1a183f33596db2f505c9a6f8abd43924a",
+      "original_sha256": "7777d03c1ab2be0f278941a5d0085847c209da5b7984e05fdbcb8aa2885a495b",
+      "anchors": {
+        "59": 52
+      },
+      "matched_lines": 45,
+      "after_sha256": "8fb42849d935c468c8abcd62db19dd3087b3374f2d633bafcaa9a79aae5b8e4b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "before_sha256": "ae346e8909b066924ec2ad0be4356ce14a8ff12a44f307f067e9cd7397bba82f",
+      "original_sha256": "b085166424614a154a41f794bf3505f50a77a2ea60338bcefcb845be8e092e53",
+      "anchors": {
+        "59": 56,
+        "67": 61
+      },
+      "matched_lines": 89,
+      "after_sha256": "0b55f0aec8c42f623f329b985533a71c615cf6a493eddb32fa941b7ed679c869"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "before_sha256": "85413fb1b67bc42c3846eea19a617883e4074ddc75fdd009167780028819f1c6",
+      "original_sha256": "947f9fc49dbffad48b2d1668548d63e8d26197a35d72fd4c26e7ce1e4c96af6f",
+      "anchors": {
+        "545": 588
+      },
+      "matched_lines": 500,
+      "after_sha256": "bacb75c018512cc2d70c3dde370aeb2e2057180b26162ab94560eaf5e9fa8cab"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_event.h",
+      "before_sha256": "4ccd3c63342e7add3744c21b20569e5bd34979c6e96f2dc659ec94c010704dea",
+      "original_sha256": "f4353f69708952f3bdc0f0d26db0f667eda34abf04f8694d1af059a649f76969",
+      "anchors": {
+        "67": 59
+      },
+      "matched_lines": 51,
+      "after_sha256": "c240ca9190ba7c14ac0e5e75e1c8e0a63cfee93221a9f7f601740316aa0878e5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_inthk.h",
+      "before_sha256": "73c737cc70121d7b76f09ce8f5c85c14144f864a8d78393f6e0d7b15b80fe4e5",
+      "original_sha256": "463f0daebc4d196dc1e108289cf10a8c3e3580efc1cf96ca880af30acbc4e632",
+      "anchors": {
+        "37": 39
+      },
+      "matched_lines": 34,
+      "after_sha256": "b42e8bd8cd7177d60b67d1c26394d8e6c853f10e223fec3d91d71b96713c245b"
+    }
+  ]
+}

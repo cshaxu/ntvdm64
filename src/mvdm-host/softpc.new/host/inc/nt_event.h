@@ -65,4 +65,5 @@ extern HANDLE hWndConsole;
  * Boolean external type implicitly.  Its provider is nt_event.c; make the
  * exact existing BOOL contract visible to modern C. */
 extern BOOL PointerAttachedWindowed;
+#line 59
 extern BOOL DelayedReattachMouse;
