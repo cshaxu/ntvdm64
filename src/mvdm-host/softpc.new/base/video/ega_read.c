@@ -321,7 +321,7 @@ READ_STATE read_state;
 #ifndef	NO_STRING_OPERATIONS
 GLOBAL void (*string_read_ptr)();
 #endif	/* NO_STRING_OPERATIONS */
-#line 236
+#line 413
 
 /* comparison masks for read mode 1 */
 ULONG comp0, comp1, comp2, comp3;

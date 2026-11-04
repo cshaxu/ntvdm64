@@ -42,7 +42,7 @@
 #line 121
 #define CHARSTOBYTES(cch) (cch)
 #endif
-#line 123
+#line 1052
 /* OPENNT-HOST-090: unchanged message bitmap descriptor. */
 typedef struct _WNDMSG {
     UINT maxMsgs;

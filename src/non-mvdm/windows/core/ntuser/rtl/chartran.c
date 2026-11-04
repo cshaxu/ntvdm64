@@ -28,7 +28,7 @@
 
 #line 363
 #define NWCH 2
-#line 365
+#line 441
 /* DIVERGENCE(OPENNT-HOST-119): restore the original message converter. */
 BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
 {

@@ -841,7 +841,7 @@ void MS_bop_F(void)
 #error Excluded original conditional branch
 #endif
 #line 746
-#line 778
+#line 746
 
     /*
      * Now that spckbd is loaded, and the ivt rom vectors are hooked

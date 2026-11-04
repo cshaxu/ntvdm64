@@ -2339,7 +2339,7 @@ outb(ICA0_PORT_0, END_INTERRUPT);
 #error Excluded unsupported non-NTVDM mouse profile
 #else
 #if !defined(MONITOR)
-#line 2263
+#line 2642
 	/*
 	 *	If the cursor is currently displayed, move it to the new
 	 *	position

@@ -491,7 +491,7 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 #line 494
 #error DIVERGENCE MVDM-HOST-DIV-531: PC_CONFIG branch is not selected; see mirror register.
 #else
-#line 467
+#line 499
 				/* this was a call to host_print_doc - <chrisP 28Aug91> */
 				host_reset_print(adapter);
 #endif

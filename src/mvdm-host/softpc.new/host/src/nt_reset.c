@@ -220,7 +220,7 @@ void  host_applInit(int argc,char *argv[])
                 continue;
             }
 #ifndef MONITOR
-#line 200
+#line 202
             //
             // Check for windowed graphics resize
             //

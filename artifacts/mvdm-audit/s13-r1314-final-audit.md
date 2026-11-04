@@ -95,6 +95,17 @@ images are identical and NTVDM/WOW32 differ only in PE timestamps
 ([comparison](s13-r1319-build-image-compare.json)); runtime tests were not
 repeated under owner instruction.
 
+The [r1326 anchor batch](s13-r1326-line-batch.json) corrects 12 selected
+source anchors across ten condition-bearing files using unique original
+statements and surrounding context. An otherwise tempting `cpu_vid.h`
+candidate was rejected because a similarly spelled declaration belongs to a
+different original structure. Other branches remain under audit. Build and
+publication passed for cached x86 root, NTVDM worker, WOW32 and x64 builds;
+the package was verified at both destinations. Eight images are identical
+and NTVDM/WOW32 differ only in PE timestamps
+([comparison](s13-r1326-build-image-compare.json)); runtime tests were not
+repeated under owner instruction.
+
 The [r1325 anchor batch](s13-r1325-line-batch.json) corrects 32 source-line
 anchors in ten further condition-bearing files against unique exact original
 statements. This does not certify the rest of those files. Build and

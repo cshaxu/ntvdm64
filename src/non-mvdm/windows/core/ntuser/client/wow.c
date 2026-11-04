@@ -18,7 +18,7 @@
 #else // WOW
 #line 120
 #endif // !WOW
-#line 138
+#line 249
 
 
 PWND _GetDlgItem(

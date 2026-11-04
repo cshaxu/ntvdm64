@@ -1,0 +1,181 @@
+{
+  "method": "Each anchor maps to a unique exact original statement plus at least three nearby matching source lines, avoiding false matches against similar structures; only #line values change. Other branches remain under audit.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\printer.c",
+      "before_sha256": "eae8403732861a3d705a99d487c019b4dbdd66339ad0ad8bc88cba715425d9e4",
+      "after_sha256": "9d41bc3814358588da72747e6995d7a28b9237da1d27cbec8e54c07b3dd439e6",
+      "fixes": [
+        {
+          "physical": 494,
+          "old": 467,
+          "new": 499,
+          "matched_original_line": 500,
+          "source": "host_reset_print(adapter);",
+          "matching_context_lines": 4
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "before_sha256": "8da8c96ea838dd3ff5abdf1b82c5ffcbb098c4ad148531364acd57f4f9bb08ce",
+      "after_sha256": "b799697b8d39cb67f3d5bb496ec27dfcb748a84912de673bfd49fa0ffc951b57",
+      "fixes": [
+        {
+          "physical": 2342,
+          "old": 2263,
+          "new": 2642,
+          "matched_original_line": 2646,
+          "source": "if (condition_mask & MOUSE_CALL_MASK_POSITION_BIT)",
+          "matching_context_lines": 6
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_read.c",
+      "before_sha256": "c5269aec79514350b46134e17762902023354fb2abc80d414d771611431f153c",
+      "after_sha256": "6670664cf361e53685d725e224c8c4bf1c0a936dd2157839ac6b76732d7d3404",
+      "fixes": [
+        {
+          "physical": 324,
+          "old": 236,
+          "new": 413,
+          "matched_original_line": 415,
+          "source": "ULONG comp0, comp1, comp2, comp3;",
+          "matching_context_lines": 6
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_bop.c",
+      "before_sha256": "053ea94ae0d2b2fb19b8effee4aeda88151f8317629e9d5cd8894eb92b4c26bb",
+      "after_sha256": "7ac4471694bfda9e87b6c1c1a7825ededb8cde32ee74b1795746f9477915b2ab",
+      "fixes": [
+        {
+          "physical": 844,
+          "old": 778,
+          "new": 746,
+          "matched_original_line": 754,
+          "source": "host_ica_lock();",
+          "matching_context_lines": 10
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_eoi.c",
+      "before_sha256": "06bbeddb0a31f4f203f6c22f328def3be4c27943364f828a8e2d58d9b63b1079",
+      "after_sha256": "03d642d2c29f8217d02a9859885b11ab56b198d0769fad1b4a5b93982587fe02",
+      "fixes": [
+        {
+          "physical": 72,
+          "old": 64,
+          "new": 75,
+          "matched_original_line": 81,
+          "source": "HANDLE RegisterWOWIdle(VOID)",
+          "matching_context_lines": 8
+        },
+        {
+          "physical": 269,
+          "old": 278,
+          "new": 279,
+          "matched_original_line": 282,
+          "source": "if (Delay == 0xFFFFFFFF) {",
+          "matching_context_lines": 8
+        },
+        {
+          "physical": 325,
+          "old": 337,
+          "new": 333,
+          "matched_original_line": 337,
+          "source": "void DelayIrqQuickEvent(long param)",
+          "matching_context_lines": 8
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_reset.c",
+      "before_sha256": "d6ba0fdeb5492eaffdf2d5685fcd2df294e58bbc1c489054e1925f4c467dc34f",
+      "after_sha256": "c9e619ef5c65c337ecb9f9e979fbd41aac6f197d769dfeed78c2a5537f7d1f2c",
+      "fixes": [
+        {
+          "physical": 223,
+          "old": 200,
+          "new": 202,
+          "matched_original_line": 205,
+          "source": "if (*psz == 'E') {",
+          "matching_context_lines": 7
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_timer.c",
+      "before_sha256": "3d43baf8e5b5835172141aef3b518eb9134973149689062efdaaed4a5b66e573",
+      "after_sha256": "ad47459a91a745bbf9497663a9c03485c1ef1a2d71214324e1962c735a3f0735",
+      "fixes": [
+        {
+          "physical": 594,
+          "old": 579,
+          "new": 578,
+          "matched_original_line": 590,
+          "source": "SetThreadPriority(ThreadInfo.HeartBeat.Handle,",
+          "matching_context_lines": 10
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "before_sha256": "45836325a4ba50893a6aa4f7f98b4655451592ce2643e9cbeb12b1973ffae5bb",
+      "after_sha256": "07fd07eb487b5fc52f0e64164a6e33d1e61a903b31d7a851c9ad1df41e5df83a",
+      "fixes": [
+        {
+          "physical": 21,
+          "old": 138,
+          "new": 249,
+          "matched_original_line": 251,
+          "source": "PWND _GetDlgItem(",
+          "matching_context_lines": 6
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\user.h",
+      "before_sha256": "bd85b9a24c82fdd3774aaa642c06a289f730e35bef06931581ce757ebe366cb9",
+      "after_sha256": "e7cbc1b7500ffc67bedc871c58c50e7781ff34391e3652b7590573d9fe206f16",
+      "fixes": [
+        {
+          "physical": 45,
+          "old": 123,
+          "new": 1052,
+          "matched_original_line": 1053,
+          "source": "typedef struct _WNDMSG {",
+          "matching_context_lines": 4
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+      "before_sha256": "cfff3852c4bb3012434caa3a74b71e0fa63aad27afdff9504d8162be219a2ef0",
+      "after_sha256": "95883fb4761c3748b3757457c9a8bbb096be140184a5bb8f0ae509c00694fba4",
+      "fixes": [
+        {
+          "physical": 31,
+          "old": 365,
+          "new": 441,
+          "matched_original_line": 442,
+          "source": "BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)",
+          "matching_context_lines": 4
+        }
+      ]
+    }
+  ]
+}

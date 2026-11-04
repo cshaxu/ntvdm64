@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-644: correct original-source diagnostic anchors in seven
+condition-bearing device and host files, matching surrounding context as well
+as source statements. Only `#line` values change. Evidence:
+`../../artifacts/mvdm-audit/s13-r1326-line-batch.json`.
+
 MVDM-HOST-DIV-643: correct 32 original-source diagnostic anchors in ten
 condition-bearing trace, video and host files. Only `#line` values change;
 the exact source matches are recorded in

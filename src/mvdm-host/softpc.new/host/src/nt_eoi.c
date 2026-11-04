@@ -69,7 +69,7 @@ LARGE_INTEGER BlockTime = {0,0};
 extern LARGE_INTEGER CurrHeartBeat;
 void host_TimeStamp(PLARGE_INTEGER pliTime);
 #endif
-#line 64
+#line 75
 
 
 /*
@@ -266,7 +266,7 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
 #line 258
 #error Excluded unsupported delayed-interrupt monitor dispatch
 #else
-#line 278
+#line 279
         //
         // Cancel delay hw interrupt, delete quick event if any
         //
@@ -322,7 +322,7 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
  *
  */
 #ifndef MONITOR
-#line 337
+#line 333
 /*
 * QuickEvent call back function
 *
