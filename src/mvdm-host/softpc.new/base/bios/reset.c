@@ -784,38 +784,10 @@ void reset()
 
 #ifdef LIM
 #if !defined(SUN_VA) && !defined(NTVDM)
-/*
-	Temporary removal of LIM for SUN_VA until this issue is sorted out
-*/
-	/*
-	 * Initialise the LIM
-	 *
-	 * 'free expanded memory' only does anything if expanded memory
-	 * has previously been initialised
-	 *
-	 * GISP_SVGAs may need to disable LIM if there isn't room in the
-	 * UMA for the page frame, so don't insist on LIM for these.
-	 */
-
-#ifdef GISP_SVGA
-#line 1047
-#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
-#endif /*GISP_SVGA */
-	if (soft_reset)			/* if LIM already initialised */
-		free_expanded_memory();
-
-	backFill = (SHORT) (config_inquire(C_MEM_LIMIT, NULL)? 256: 640);
-	if (limSize = (ULONG)config_inquire(C_LIM_SIZE, NULL))
-		while (init_expanded_memory(limSize, backFill) != SUCCESS)
-		{
-			free_expanded_memory();
-			host_error(EG_EXPANDED_MEM_FAILURE, ERR_QU_CO, NULL);
-		}
-#ifdef GISP_SVGA
-#line 1060
-#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
-#endif /*GISP_SVGA */
+#line 1033
+#error Unsupported non-NTVDM LIM reset profile
 #endif /* !SUN_VA & !NTVDM */
+#line 1063
 
 #endif /* LIM */
 

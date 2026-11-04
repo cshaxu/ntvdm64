@@ -1499,9 +1499,10 @@ Return Value:
 #endif
     if (CodeSegmentIsBig) {
 #else
-    CodeSegmentIsBig = Ldt[(SegCS & ~0x7)/sizeof(LDT_ENTRY)].HighWord.Bits.Default_Big ? 1u : 0u;
-    if (CodeSegmentIsBig) {
+#line 1270
+#error Unsupported non-CPU40 DPMI selector carrier
 #endif
+#line 1271
         pCode += getEIP();
     } else {
         pCode += getIP();

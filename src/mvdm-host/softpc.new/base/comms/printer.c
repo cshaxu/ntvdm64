@@ -139,7 +139,7 @@
 #ifdef	ERROR
 #undef	ERROR
 #endif
-#line 138
+#line 140
 
 static half_word output_reg[NUM_PARALLEL_PORTS];
 static half_word control_reg[NUM_PARALLEL_PORTS];
@@ -179,7 +179,7 @@ sys_addr lp16BitPrtId;
 sys_addr lp16BitPrtCount;
 sys_addr lp16BitPrtBusy;
 #endif
-#line 177
+#line 179
 
 #define STATE_READY     0
 #define STATE_OUT       1

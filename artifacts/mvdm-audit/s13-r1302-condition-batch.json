@@ -1,0 +1,122 @@
+{
+  "scope": "Ten mirror files: proven excluded arms and original line continuations",
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmi32p.h",
+      "original_sha256": "c5734d7842c34ae436cd12a5b52ad76d4fab88940a64f3af7e5fdc6fbc92e4a9",
+      "current_sha256": "ce27e2cae0ded642be772388832e546d85cc66e1bbafcdfd524784699cf6cc88",
+      "change": "i386 kernel inline selector limit",
+      "justification": "34 observed include contexts across two product graphs selected non-i386 branch; same header already rejects i386 kernel VDM path.",
+      "prior_evidence": [
+        "s13-r755-dpmi32p-contexts.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmidata.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmidata.h",
+      "original_sha256": "f9772482513601c2e316e097a92485864557af77010e77285d725d903a0fd7b2",
+      "current_sha256": "023e38a8c0488f1f6b2aef266ec7d0f72fd14c66d7eb587aa68eeca9e1436ba5",
+      "change": "original LDT_ENTRY fallback under project-local !defined(_WINNT_)",
+      "justification": "All 34 observed include contexts select Windows public declaration; direct include scan found only DPMI precomp and fast-BOP provider, and no _WINNT_ undef in source/tests/tools. Existing selected public SDK layout remains unchanged.",
+      "prior_evidence": [
+        "s13-r757-dpmidata-contexts.json",
+        "MVDM-HOST-DIV-139"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+      "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+      "current_sha256": "e057126ff706a0df937168efbd1b9218c47d863fab820d3b2ea281a2c70d127b",
+      "change": "local non-CPU40 DPMI selector carrier",
+      "justification": "Only the CPU40 DPMI owner is in current product graphs; failure-trace build reuses that owner dpmi_cflags. The alternative is under project-added CPU40 selector.",
+      "prior_evidence": [
+        "s13-r758-dpmiint-conditions.json",
+        "tools/build/Build-T420S35EnvironmentTrace.ps1"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/wow.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wow.h",
+      "original_sha256": "64663c13abaefccd99533352e08fb28efc66032c94a1780bff73be4f4cdbf70b",
+      "current_sha256": "1a44a3a9de28ce28f05a42be0540f21610c57453c901c977711310c87692576f",
+      "change": "Correct original continuation anchors 1253, 1292, 1334.",
+      "justification": "Original physical continuation position verified against adjacent original and current lines.",
+      "prior_evidence": [
+        "s13-r1287-continuation-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\emm_fncs.c",
+      "original_sha256": "2ffb142bb4ad67958493668e06bec3d81936790497965cdc5ca8a2ac0e142722",
+      "current_sha256": "35f65b92c0724addb70410895a21a87aa110450446fb4c39707b55f5be4523de",
+      "change": "Correct original continuation anchors 378 and 456.",
+      "justification": "Original physical continuation position verified against adjacent original and current lines.",
+      "prior_evidence": [
+        "s13-r719-witnessed-anchor-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "current_sha256": "c6bd0666c084f7233a8cb1d75bfe3887fd0a0ab624295864ff9d5bfa35b4e0b9",
+      "change": "non-NTVDM LIM reset including nested GISP_SVGA",
+      "justification": "Production NTVDM branch selected and LIM selected; non-NTVDM inner condition unhit. Source lives in host-only backend; nested GISP branches are subsumed by exclusion.",
+      "prior_evidence": [
+        "artifacts/mvdm-audit/compile-branch-selection/branches.csv"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\tape_io.c",
+      "original_sha256": "3aa86f1faf07f68937629f1d6e410eb41f498e17dc6d747647c7d6e5697c80aa",
+      "current_sha256": "540599b96001b9306cb33210839d34e15ee5eed829725c29163f6b529e4358ca",
+      "change": "Correct original declaration and continuation anchors 73, 76, 83, 86, 92, 95 and 96.",
+      "justification": "Original physical continuation position verified against adjacent original and current lines.",
+      "prior_evidence": [
+        "s13-r1287-continuation-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\printer.c",
+      "original_sha256": "b1456dcbc0dc6b4d1fd5d101bfaa6bdc9a4cd5d970c14215f3ae62a173f17ccb",
+      "current_sha256": "56eea64461d995c773dcb2ce68479850de4ec897f4170647d4231c0674c539e5",
+      "change": "Correct original continuation anchors 140 and 179.",
+      "justification": "Original physical continuation position verified against adjacent original and current lines.",
+      "prior_evidence": [
+        "s13-r1295-continuation-batch.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\qevnt.c",
+      "original_sha256": "3e0d97d17bcc4c107b5173bf38868c79ab68d3042d29472a1a7259364da2947c",
+      "current_sha256": "a9c74bd012c90949bfb2d547aab7c89aa60e8678093431c82885dab34b15df40",
+      "change": "Correct original continuation anchors 143, 189, 367 and 445.",
+      "justification": "Original physical continuation position verified against adjacent original and current lines.",
+      "prior_evidence": [
+        "s13-r708-qevnt-anchor-review.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\windows\\inc\\pif.h",
+      "original_sha256": "224f6bdf5cfa15a37d95f97e24c30d37d947d5f7f5199d50aeab65b39d150c55",
+      "current_sha256": "1633d18b84205a1dd96a1730017261ca141b4f669fade1356ca575f90eeea122",
+      "change": "non-WINNT MAX_VALID_GROUP fallback",
+      "justification": "Two production consumers use /DWINNT; addon and current observation/component fixtures explicitly define WINNT; the two source consumers without that definition are referenced only from tools/historical/opennt-pre-t260.",
+      "prior_evidence": [
+        "s13-r1163-full-file.json",
+        "s13-r1300-unhit-condition-review.json"
+      ]
+    }
+  ],
+  "limitations": [
+    "Observed product and retained test contexts inform exclusions; unsupported or historical guest builds are not asserted.",
+    "No guest source or binary changed."
+  ]
+}

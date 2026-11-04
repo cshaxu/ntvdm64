@@ -471,8 +471,10 @@ typedef UNALIGNED PROPNT31 FAR *LPPROPNT31;
 #else
 
 #ifndef WINNT
-#define MAX_VALID_GROUP         GROUP_ENV
+#line 522
+#error Unsupported non-WINNT PIF profile
 #endif
+#line 524
 
 #endif // UNICODE
 #line 526

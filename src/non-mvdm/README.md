@@ -2457,3 +2457,5 @@ OPENNT-HOST-252: reconcile USER shared-header condition frames around existing c
 OPENNT-HOST-253: correct original diagnostic continuation anchors in six host mirror files without changing selected tokens. Evidence: artifacts/mvdm-audit/s13-r1289-continuation-batch.json.
 
 OPENNT-HOST-254: restore an original dialog diagnostic continuation anchor; selected program tokens unchanged. Evidence: artifacts/mvdm-audit/s13-r1295-continuation-batch.json.
+
+OPENNT-HOST-255: reject the original non-WINNT PIF fallback in supported product and addon configurations, retaining its guard and diagnostic mapping. Evidence: artifacts/mvdm-audit/s13-r1302-condition-batch.json.

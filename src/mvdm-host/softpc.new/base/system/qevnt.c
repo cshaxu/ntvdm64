@@ -141,7 +141,7 @@ q_event_init(
 
      host_ica_unlock();
 #endif
-#line 138
+#line 143
 }
 
 
@@ -192,7 +192,7 @@ ResetCpuQevCount(
      host_q_ev_set_count(host_calc_q_ev_inst_for_time(DelayTime));
 }
 #endif
-#line 182
+#line 189
 
 
 
@@ -366,7 +366,7 @@ dispatch_q_event(
             (*qevCallBack)(Param);
             }
 #endif
-#line 345
+#line 367
 }
 
 
@@ -446,7 +446,7 @@ delete_q_event(
 
         host_ica_unlock();
 #endif
-#line 421
+#line 445
 }
 
 

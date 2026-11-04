@@ -346,7 +346,7 @@ GLOBAL void emm_init IFN0()
 #if	defined(SUN_VA) || defined(NTVDM)
 	SHORT limSize, backFill;
 #endif
-#line 316
+#line 378
 
 	segment68 = getDS();
 	offset68 = getDX();
@@ -376,7 +376,7 @@ GLOBAL void emm_init IFN0()
 	}
 
 #endif	/* NTVDM */
-#line 343
+#line 456
 
 	total_pages = get_total_pages();
 	setBX(total_pages);

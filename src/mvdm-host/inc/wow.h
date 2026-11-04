@@ -1252,7 +1252,7 @@ typedef VPVOID VPOLDCURSORICONRESOURCE16;
 #define OLDEM_GETPASSWORDCHAR   (WM_USER+34)
 #define OLDEM_MSGMAX            (WM_USER+35)
 #endif
-#line 1252
+#line 1253
 
 #define OLDBM_GETCHECK          (WM_USER+0)
 #define OLDBM_SETCHECK          (WM_USER+1)
@@ -1294,7 +1294,7 @@ typedef VPVOID VPOLDCURSORICONRESOURCE16;
 #define OLDCBEC_SETCOMBOFOCUS   (WM_USER+26)    /* ;Internal */
 #define OLDCBEC_KILLCOMBOFOCUS  (WM_USER+27)    /* ;Internal */
 #endif
-#line 1291
+#line 1292
 
 #define OLDLB_ADDSTRING         (WM_USER+1)
 #define OLDLB_INSERTSTRING      (WM_USER+2)
@@ -1339,7 +1339,7 @@ typedef VPVOID VPOLDCURSORICONRESOURCE16;
 #define OLDLBCB_CARETOFF        (WM_USER+37)     /* ;Internal */
 #define OLDLB_MSGMAX            (WM_USER+38)     /* ;Internal */
 #endif
-#line 1333
+#line 1334
 
 #define OLDSBM_SETPOS           (WM_USER+0)
 #define OLDSBM_GETPOS           (WM_USER+1)

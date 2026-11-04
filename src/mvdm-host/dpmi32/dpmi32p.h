@@ -28,16 +28,10 @@ Revision History:
 #else
 #line 29
 #ifdef i386
-#define GET_SELECTOR_LIMIT(Selector, Limit) _asm      \
-         {                                          \
-            _asm    xor     eax, eax                \
-            _asm    xor     ecx, ecx                \
-            _asm    mov     ax, Selector            \
-            _asm    or      eax, 7                  \
-            _asm    lsl     ecx, eax                \
-            _asm    mov     [Limit], ecx            \
-         }
+#line 30
+#error Unsupported i386 kernel selector limit path
 #else
+#line 40
 
 #define GET_SELECTOR_LIMIT(Selector, Limit) { {                             \
             USHORT i = (Selector & ~0x7)/sizeof(LDT_ENTRY);                 \

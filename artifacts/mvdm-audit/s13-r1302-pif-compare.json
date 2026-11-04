@@ -1,0 +1,9 @@
+{
+  "old_sha256": "366bbe4066446edb680efb093f1036e16007437c3ac9adb87c8f5bdeb9e26670",
+  "new_sha256": "e3405217a5738c32b93a55648a35feaf46361e0ed68a92785c46935b74c876c8",
+  "old_size": 150528,
+  "new_size": 150528,
+  "different_bytes": 6,
+  "outside_timestamp": 0,
+  "classification": "timestamp-only"
+}

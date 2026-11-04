@@ -486,40 +486,47 @@
     {
       "path": "src/mvdm-host/dpmi32/dpmi32p.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmi32p.h",
-      "current_sha256": "4980f5f7d98599e98f3a32c2b51542d93fa99f9984ccd982b519f873258d5a41",
+      "current_sha256": "ce27e2cae0ded642be772388832e546d85cc66e1bbafcdfd524784699cf6cc88",
       "original_sha256": "c5734d7842c34ae436cd12a5b52ad76d4fab88940a64f3af7e5fdc6fbc92e4a9",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
       "status": "completed-original-witnessed-condition-tree",
-      "evidence": "s13-r755-dpmi32p-contexts.json"
+      "evidence": "s13-r1302-condition-batch.json",
+      "evidence_history": [
+        "s13-r755-dpmi32p-contexts.json"
+      ]
     },
     {
       "path": "src/mvdm-host/dpmi32/dpmidata.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmidata.h",
-      "current_sha256": "f6c1ad552fb6a1782f897d82dc1ee6926132c053835f7a688d8e49d4d6389d4d",
+      "current_sha256": "023e38a8c0488f1f6b2aef266ec7d0f72fd14c66d7eb587aa68eeca9e1436ba5",
       "original_sha256": "f9772482513601c2e316e097a92485864557af77010e77285d725d903a0fd7b2",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
       "status": "completed-original-witnessed-condition-tree",
-      "evidence": "s13-r757-dpmidata-contexts.json"
+      "evidence": "s13-r1302-condition-batch.json",
+      "evidence_history": [
+        "s13-r757-dpmidata-contexts.json"
+      ]
     },
     {
       "path": "src/mvdm-host/dpmi32/dpmiint.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
-      "current_sha256": "919627a33f2b3f1123f6dc13bf3b7110fc3aca41823dcf57f5f4c3ff2de64497",
+      "current_sha256": "e057126ff706a0df937168efbd1b9218c47d863fab820d3b2ea281a2c70d127b",
       "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
       "status": "completed-original-diagnostic-continuations",
-      "evidence": "s13-r1295-continuation-batch.json",
+      "evidence": "s13-r1302-condition-batch.json",
       "evidence_history": [
-        "s13-r1288-continuation-batch.json"
+        "s13-r1288-continuation-batch.json",
+        "s13-r1295-continuation-batch.json"
       ]
     },
     {
@@ -1124,13 +1131,16 @@
     {
       "path": "src/mvdm-host/inc/wow.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wow.h",
-      "current_sha256": "8d94aef51ffdf5f5eeca6724981488113fb205fb949ba8f8264db55f0879784b",
+      "current_sha256": "1a44a3a9de28ce28f05a42be0540f21610c57453c901c977711310c87692576f",
       "original_sha256": "64663c13abaefccd99533352e08fb28efc66032c94a1780bff73be4f4cdbf70b",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
       "status": "completed-original-diagnostic-continuations",
-      "evidence": "s13-r1287-continuation-batch.json"
+      "evidence": "s13-r1302-condition-batch.json",
+      "evidence_history": [
+        "s13-r1287-continuation-batch.json"
+      ]
     },
     {
       "path": "src/mvdm-host/inc/wowclip.h",
@@ -1425,14 +1435,17 @@
     {
       "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\emm_fncs.c",
-      "current_sha256": "a71bb18612e61661afc905c71711aaf5cfe37efbd6a5c191a916927819123e37",
+      "current_sha256": "35f65b92c0724addb70410895a21a87aa110450446fb4c39707b55f5be4523de",
       "original_sha256": "2ffb142bb4ad67958493668e06bec3d81936790497965cdc5ca8a2ac0e142722",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
       "status": "completed-original-witnessed-condition-tree",
-      "evidence": "s13-r719-witnessed-anchor-batch.json"
+      "evidence": "s13-r1302-condition-batch.json",
+      "evidence_history": [
+        "s13-r719-witnessed-anchor-batch.json"
+      ]
     },
     {
       "path": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
@@ -1475,7 +1488,7 @@
     {
       "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
-      "current_sha256": "2e563c3d998e8bb65df31233f8c1fa1884ab436ebb7b975219ac25a65c7f7d12",
+      "current_sha256": "c6bd0666c084f7233a8cb1d75bfe3887fd0a0ab624295864ff9d5bfa35b4e0b9",
       "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
@@ -1483,7 +1496,10 @@
       ],
       "status": "completed-original-diagnostic-continuations",
       "pending_change": "r503 exclude non-CPU40 reset BOP adjustment; full file audit pending",
-      "evidence": "s13-r1287-continuation-batch.json"
+      "evidence": "s13-r1302-condition-batch.json",
+      "evidence_history": [
+        "s13-r1287-continuation-batch.json"
+      ]
     },
     {
       "path": "src/mvdm-host/softpc.new/base/bios/rom_basc.c",
@@ -1526,14 +1542,17 @@
     {
       "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\tape_io.c",
-      "current_sha256": "3925d3a06c54d3779b68e325b2c64801c9fa5b3e6c59739d8289fa049151fa69",
+      "current_sha256": "540599b96001b9306cb33210839d34e15ee5eed829725c29163f6b529e4358ca",
       "original_sha256": "3aa86f1faf07f68937629f1d6e410eb41f498e17dc6d747647c7d6e5697c80aa",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
       "status": "completed-original-diagnostic-continuations",
-      "evidence": "s13-r1287-continuation-batch.json"
+      "evidence": "s13-r1302-condition-batch.json",
+      "evidence_history": [
+        "s13-r1287-continuation-batch.json"
+      ]
     },
     {
       "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
@@ -4791,7 +4810,7 @@
     {
       "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\printer.c",
-      "current_sha256": "0e45d8383d6bbc2ccb0f0abc6196e9878ef9c2df749978b4fd80407c10860107",
+      "current_sha256": "56eea64461d995c773dcb2ce68479850de4ec897f4170647d4231c0674c539e5",
       "original_sha256": "b1456dcbc0dc6b4d1fd5d101bfaa6bdc9a4cd5d970c14215f3ae62a173f17ccb",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
@@ -4799,9 +4818,10 @@
       ],
       "status": "completed-original-diagnostic-continuations",
       "pending_change": "r514 exclude non-MONITOR status arm; other groups pending",
-      "evidence": "s13-r1295-continuation-batch.json",
+      "evidence": "s13-r1302-condition-batch.json",
       "evidence_history": [
-        "s13-r1287-continuation-batch.json"
+        "s13-r1287-continuation-batch.json",
+        "s13-r1295-continuation-batch.json"
       ]
     },
     {
@@ -6914,14 +6934,17 @@
     {
       "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\qevnt.c",
-      "current_sha256": "ff5c3e21663c521586a49006c1a9dbe68655db976bb6822c57418a52c9b7e8a3",
+      "current_sha256": "a9c74bd012c90949bfb2d547aab7c89aa60e8678093431c82885dab34b15df40",
       "original_sha256": "3e0d97d17bcc4c107b5173bf38868c79ab68d3042d29472a1a7259364da2947c",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
       "status": "completed-original-witnessed-condition-tree",
-      "evidence": "s13-r708-qevnt-anchor-review.json"
+      "evidence": "s13-r1302-condition-batch.json",
+      "evidence_history": [
+        "s13-r708-qevnt-anchor-review.json"
+      ]
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
@@ -11704,7 +11727,7 @@
     {
       "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
       "original": "O:\\repos.external\\OpenNT\\public\\internal\\windows\\inc\\pif.h",
-      "current_sha256": "df90cc35dba852c44cab80539bb19b8e7c4fec38e29bfcd5b2078e7cc6f78318",
+      "current_sha256": "1633d18b84205a1dd96a1730017261ca141b4f669fade1356ca575f90eeea122",
       "original_sha256": "224f6bdf5cfa15a37d95f97e24c30d37d947d5f7f5199d50aeab65b39d150c55",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
@@ -11712,7 +11735,10 @@
       ],
       "status": "completed-original-conditional-tree",
       "partial_evidence": "s13-r662-guard-line-audit.json",
-      "evidence": "s13-r1163-full-file.json"
+      "evidence": "s13-r1302-condition-batch.json",
+      "evidence_history": [
+        "s13-r1163-full-file.json"
+      ]
     },
     {
       "path": "src/non-mvdm/public/internal/windows/inc/winconp.h",

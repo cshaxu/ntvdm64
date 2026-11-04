@@ -72,11 +72,11 @@ void cassette_io()
         unsigned long setup_int15_argument = (unsigned long)getAL();
 #ifdef PM
 #ifndef CPU_30_STYLE
-#line 78
+#line 73
 IMPORT void retrieve_descr_fields IPT4(half_word *, AR, sys_addr *, base,
 	word *, limit, sys_addr, descr_addr);
 #endif /* not CPU_30_STYLE */
-#line 80
+#line 76
 half_word cmos_u_m_s_hi;
 half_word cmos_u_m_s_lo;
 sys_addr gdt;
@@ -84,24 +84,24 @@ sys_addr  source;
 sys_addr  source_base;
 sys_addr  target;
 #if (!defined(PROD) || !defined(CPU_30_STYLE))
-#line 86
+#line 83
 word      source_limit;
 word      target_limit;
 #endif
-#line 88
+#line 86
 sys_addr  target_base;
 sys_addr byte_count;   /* Max size is 0x8000 * 2 = 10000 */
 #ifdef CPU_30_STYLE
 #line 89
 #error Excluded unsupported CPU30 descriptor path
 #else
-#line 90
+#line 92
 half_word source_AR;
 half_word target_AR;
 #endif /* CPU_30_STYLE */
-#line 92
+#line 95
 #endif /* PM */
-#line 93
+#line 96
 
 	half_word	mask,		/* interrupt mask			*/
 			alarm;		/* value read from alarm register	*/	

@@ -55,36 +55,13 @@ Revision History:
 // is to put the definition here.
 //
 
-/* DIVERGENCE(MVDM-HOST-DIV-139): the historical NT headers intentionally
- * hid their LDT_ENTRY declaration from this non-i386 source branch.  Modern
- * public winnt.h exposes the identical x86 descriptor layout first.  Keep
- * the original local definition only when that public carrier is absent. */
+/* DIVERGENCE(MVDM-HOST-DIV-139): selected contexts obtain LDT_ENTRY
+ * from the public Windows header; reject the unselected fallback. */
 #if !defined(_WINNT_)
-typedef struct _LDT_ENTRY {
-    WORD    LimitLow;
-    WORD    BaseLow;
-    union {
-        struct {
-            BYTE    BaseMid;
-            BYTE    Flags1;     // Declare as bytes to avoid alignment
-            BYTE    Flags2;     // Problems.
-            BYTE    BaseHi;
-        } Bytes;
-        struct {
-            DWORD   BaseMid : 8;
-            DWORD   Type : 5;
-            DWORD   Dpl : 2;
-            DWORD   Pres : 1;
-            DWORD   LimitHi : 4;
-            DWORD   Sys : 1;
-            DWORD   Reserved_0 : 1;
-            DWORD   Default_Big : 1;
-            DWORD   Granularity : 1;
-            DWORD   BaseHi : 8;
-        } Bits;
-    } HighWord;
-} LDT_ENTRY, *PLDT_ENTRY;
+#line 58
+#error Unsupported DPMI profile without Windows descriptor declarations
 #endif
+#line 82
 
 //
 // Data items
