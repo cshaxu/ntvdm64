@@ -1,0 +1,3700 @@
+{
+  "method": "Unique exact line matches between current and original, with sequential #line accounting; both versions have no conditional groups. This is a discrepancy detector, not a complete proof of all lines.",
+  "records": [
+    {
+      "path": "src/mvdm-host/dos/command/cmd.c",
+      "unique_matches": 21,
+      "bad_count": 16,
+      "first_bad": [
+        [
+          12,
+          11,
+          12,
+          11
+        ],
+        [
+          14,
+          13,
+          14,
+          13
+        ],
+        [
+          15,
+          14,
+          15,
+          14
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmddata.c",
+      "unique_matches": 38,
+      "bad_count": 25,
+      "first_bad": [
+        [
+          19,
+          21,
+          19,
+          21
+        ],
+        [
+          20,
+          22,
+          20,
+          22
+        ],
+        [
+          21,
+          23,
+          21,
+          23
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdenv.c",
+      "unique_matches": 479,
+      "bad_count": 468,
+      "first_bad": [
+        [
+          26,
+          20,
+          26,
+          20
+        ],
+        [
+          28,
+          22,
+          28,
+          22
+        ],
+        [
+          29,
+          23,
+          29,
+          23
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "unique_matches": 284,
+      "bad_count": 275,
+      "first_bad": [
+        [
+          17,
+          16,
+          17,
+          16
+        ],
+        [
+          18,
+          17,
+          18,
+          17
+        ],
+        [
+          52,
+          20,
+          52,
+          20
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdkeyb.c",
+      "unique_matches": 142,
+      "bad_count": 130,
+      "first_bad": [
+        [
+          20,
+          18,
+          20,
+          18
+        ],
+        [
+          21,
+          19,
+          21,
+          19
+        ],
+        [
+          22,
+          20,
+          22,
+          20
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdkeyb.h",
+      "unique_matches": 14,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdpif.c",
+      "unique_matches": 175,
+      "bad_count": 160,
+      "first_bad": [
+        [
+          22,
+          21,
+          22,
+          21
+        ],
+        [
+          23,
+          22,
+          23,
+          22
+        ],
+        [
+          24,
+          23,
+          24,
+          23
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdredir.c",
+      "unique_matches": 357,
+      "bad_count": 349,
+      "first_bad": [
+        [
+          28,
+          16,
+          28,
+          16
+        ],
+        [
+          30,
+          18,
+          30,
+          18
+        ],
+        [
+          32,
+          20,
+          32,
+          20
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demdasd.h",
+      "unique_matches": 243,
+      "bad_count": 210,
+      "first_bad": [
+        [
+          50,
+          47,
+          50,
+          47
+        ],
+        [
+          51,
+          48,
+          51,
+          48
+        ],
+        [
+          52,
+          49,
+          52,
+          49
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demdata.c",
+      "unique_matches": 9,
+      "bad_count": 3,
+      "first_bad": [
+        [
+          14,
+          12,
+          14,
+          12
+        ],
+        [
+          20,
+          16,
+          20,
+          16
+        ],
+        [
+          28,
+          21,
+          28,
+          21
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demfcb.c",
+      "unique_matches": 356,
+      "bad_count": 124,
+      "first_bad": [
+        [
+          454,
+          452,
+          454,
+          452
+        ],
+        [
+          455,
+          453,
+          455,
+          453
+        ],
+        [
+          457,
+          455,
+          457,
+          455
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demgset.c",
+      "unique_matches": 507,
+      "bad_count": 488,
+      "first_bad": [
+        [
+          30,
+          29,
+          30,
+          29
+        ],
+        [
+          31,
+          30,
+          31,
+          30
+        ],
+        [
+          34,
+          33,
+          34,
+          33
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demmsg.h",
+      "unique_matches": 14,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmimscr.c",
+      "unique_matches": 34,
+      "bad_count": 23,
+      "first_bad": [
+        [
+          29,
+          27,
+          29,
+          27
+        ],
+        [
+          36,
+          34,
+          36,
+          34
+        ],
+        [
+          37,
+          35,
+          37,
+          35
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/precomp.h",
+      "unique_matches": 18,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/xlathlp.h",
+      "unique_matches": 27,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/bop.h",
+      "unique_matches": 55,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/cmdsvc.h",
+      "unique_matches": 100,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/curdir.h",
+      "unique_matches": 46,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/dbgexp.h",
+      "unique_matches": 11,
+      "bad_count": 11,
+      "first_bad": [
+        [
+          4,
+          1,
+          4,
+          1
+        ],
+        [
+          6,
+          3,
+          6,
+          3
+        ],
+        [
+          8,
+          5,
+          8,
+          5
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/dbginfo.h",
+      "unique_matches": 22,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/dbgsvc.h",
+      "unique_matches": 49,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/doswow.h",
+      "unique_matches": 57,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/exterr.h",
+      "unique_matches": 140,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/memapi.h",
+      "unique_matches": 33,
+      "bad_count": 33,
+      "first_bad": [
+        [
+          4,
+          1,
+          4,
+          1
+        ],
+        [
+          6,
+          3,
+          6,
+          3
+        ],
+        [
+          8,
+          5,
+          8,
+          5
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/monregs.h",
+      "unique_matches": 101,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/netb.h",
+      "unique_matches": 53,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/oemuni.h",
+      "unique_matches": 83,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/rdrexp.h",
+      "unique_matches": 16,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/rdrsvc.h",
+      "unique_matches": 72,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/tdb16.h",
+      "unique_matches": 79,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/vint.h",
+      "unique_matches": 91,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/vrdefld.h",
+      "unique_matches": 16,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/vrdlctab.h",
+      "unique_matches": 102,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/vrinit.h",
+      "unique_matches": 22,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/vrmisc.h",
+      "unique_matches": 14,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/vrmslot.h",
+      "unique_matches": 75,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/vrnetapi.h",
+      "unique_matches": 40,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/vrremote.h",
+      "unique_matches": 58,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/wowclip.h",
+      "unique_matches": 17,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/wowcmdlg.h",
+      "unique_matches": 119,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/wowcmpat.h",
+      "unique_matches": 66,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/wowgdi.h",
+      "unique_matches": 1076,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/wowshell.h",
+      "unique_matches": 103,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/wowth.h",
+      "unique_matches": 20,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/wowwsock.h",
+      "unique_matches": 281,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/xmsexp.h",
+      "unique_matches": 18,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/xmssvc.h",
+      "unique_matches": 27,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/oemuni/file.c",
+      "unique_matches": 276,
+      "bad_count": 168,
+      "first_bad": [
+        [
+          522,
+          519,
+          522,
+          519
+        ],
+        [
+          524,
+          521,
+          524,
+          521
+        ],
+        [
+          525,
+          522,
+          525,
+          522
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/oemuni/oem.h",
+      "unique_matches": 6,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/aaa.h",
+      "unique_matches": 6,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/aad.h",
+      "unique_matches": 9,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/aam.h",
+      "unique_matches": 9,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/aas.h",
+      "unique_matches": 6,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/adc.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/add.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/and.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/arpl.h",
+      "unique_matches": 10,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/bound.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/bsf.h",
+      "unique_matches": 10,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/bsr.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/bswap.h",
+      "unique_matches": 9,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/bt.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/btc.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/btr.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/bts.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_addr.h",
+      "unique_matches": 21,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.h",
+      "unique_matches": 69,
+      "bad_count": 10,
+      "first_bad": [
+        [
+          102,
+          100,
+          102,
+          100
+        ],
+        [
+          104,
+          102,
+          104,
+          102
+        ],
+        [
+          107,
+          105,
+          107,
+          105
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_debug.c",
+      "unique_matches": 181,
+      "bad_count": 137,
+      "first_bad": [
+        [
+          77,
+          75,
+          77,
+          75
+        ],
+        [
+          78,
+          76,
+          78,
+          76
+        ],
+        [
+          81,
+          79,
+          81,
+          79
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_debug.h",
+      "unique_matches": 24,
+      "bad_count": 15,
+      "first_bad": [
+        [
+          22,
+          20,
+          22,
+          20
+        ],
+        [
+          24,
+          22,
+          24,
+          22
+        ],
+        [
+          25,
+          23,
+          25,
+          23
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_div64.h",
+      "unique_matches": 15,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_intr.h",
+      "unique_matches": 13,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_mul64.h",
+      "unique_matches": 15,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_neg64.h",
+      "unique_matches": 10,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_prot.h",
+      "unique_matches": 18,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.h",
+      "unique_matches": 15,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.h",
+      "unique_matches": 22,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.h",
+      "unique_matches": 21,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.h",
+      "unique_matches": 31,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.h",
+      "unique_matches": 39,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xtrn.h",
+      "unique_matches": 23,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cbw.h",
+      "unique_matches": 6,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cdq.h",
+      "unique_matches": 6,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/clc.h",
+      "unique_matches": 6,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cld.h",
+      "unique_matches": 6,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cli.h",
+      "unique_matches": 6,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/clts.h",
+      "unique_matches": 6,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cmc.h",
+      "unique_matches": 6,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cmp.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cmpxchg.h",
+      "unique_matches": 8,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cwd.h",
+      "unique_matches": 6,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cwde.h",
+      "unique_matches": 6,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/daa.h",
+      "unique_matches": 6,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/das.h",
+      "unique_matches": 6,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/dec.h",
+      "unique_matches": 10,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/div.h",
+      "unique_matches": 8,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/enter.h",
+      "unique_matches": 7,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fault.h",
+      "unique_matches": 173,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/idiv.h",
+      "unique_matches": 8,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/imul.h",
+      "unique_matches": 10,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/in.h",
+      "unique_matches": 8,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/inc.h",
+      "unique_matches": 10,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/into.h",
+      "unique_matches": 6,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/intx.h",
+      "unique_matches": 9,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/invd.h",
+      "unique_matches": 6,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/invlpg.h",
+      "unique_matches": 9,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/iret.h",
+      "unique_matches": 6,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/jcxz.h",
+      "unique_matches": 7,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/jmp.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/jxx.h",
+      "unique_matches": 21,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lahf.h",
+      "unique_matches": 6,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lar.h",
+      "unique_matches": 10,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lea.h",
+      "unique_matches": 10,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/leave.h",
+      "unique_matches": 7,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lgdt.h",
+      "unique_matches": 7,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lidt.h",
+      "unique_matches": 7,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lldt.h",
+      "unique_matches": 9,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lmsw.c",
+      "unique_matches": 37,
+      "bad_count": 19,
+      "first_bad": [
+        [
+          29,
+          28,
+          29,
+          28
+        ],
+        [
+          31,
+          30,
+          31,
+          30
+        ],
+        [
+          33,
+          32,
+          33,
+          32
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lmsw.h",
+      "unique_matches": 9,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/localfm.c",
+      "unique_matches": 5,
+      "bad_count": 2,
+      "first_bad": [
+        [
+          14,
+          7,
+          14,
+          7
+        ],
+        [
+          15,
+          9,
+          15,
+          9
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/loopxx.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lsl.h",
+      "unique_matches": 10,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ltr.h",
+      "unique_matches": 9,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lxs.h",
+      "unique_matches": 10,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/mov.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/movsx.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/mul.h",
+      "unique_matches": 8,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/neg.h",
+      "unique_matches": 10,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/newnpx.h",
+      "unique_matches": 66,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/nop.h",
+      "unique_matches": 6,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/not.h",
+      "unique_matches": 9,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.c",
+      "unique_matches": 116,
+      "bad_count": 19,
+      "first_bad": [
+        [
+          203,
+          187,
+          203,
+          187
+        ],
+        [
+          210,
+          194,
+          210,
+          194
+        ],
+        [
+          216,
+          200,
+          216,
+          200
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.h",
+      "unique_matches": 8,
+      "bad_count": 2,
+      "first_bad": [
+        [
+          9,
+          7,
+          9,
+          7
+        ],
+        [
+          10,
+          8,
+          10,
+          8
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/or.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/out.h",
+      "unique_matches": 8,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/pop.h",
+      "unique_matches": 9,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/popa.h",
+      "unique_matches": 7,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/popf.c",
+      "unique_matches": 41,
+      "bad_count": 33,
+      "first_bad": [
+        [
+          18,
+          16,
+          18,
+          16
+        ],
+        [
+          19,
+          17,
+          19,
+          17
+        ],
+        [
+          20,
+          18,
+          20,
+          18
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/popf.h",
+      "unique_matches": 7,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/push.h",
+      "unique_matches": 7,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/pusha.h",
+      "unique_matches": 6,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/pushf.h",
+      "unique_matches": 6,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/rcl.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/rcr.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ret.h",
+      "unique_matches": 7,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/rol.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ror.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/rsrvd.h",
+      "unique_matches": 6,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sahf.h",
+      "unique_matches": 6,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sar.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sascdef.c",
+      "unique_matches": 119,
+      "bad_count": 10,
+      "first_bad": [
+        [
+          136,
+          132,
+          136,
+          132
+        ],
+        [
+          137,
+          133,
+          137,
+          133
+        ],
+        [
+          138,
+          134,
+          138,
+          134
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sbb.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/setxx.h",
+      "unique_matches": 21,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sgdt.h",
+      "unique_matches": 7,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/shl.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/shld.h",
+      "unique_matches": 12,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/shr.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/shrd.h",
+      "unique_matches": 12,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sidt.h",
+      "unique_matches": 7,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sldt.h",
+      "unique_matches": 9,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/smsw.h",
+      "unique_matches": 9,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/stc.h",
+      "unique_matches": 6,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/std.h",
+      "unique_matches": 6,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sti.h",
+      "unique_matches": 6,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/str.h",
+      "unique_matches": 9,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sub.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/test.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/verr.h",
+      "unique_matches": 9,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/verw.h",
+      "unique_matches": 9,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/wait.h",
+      "unique_matches": 6,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/wbinvd.h",
+      "unique_matches": 6,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/xadd.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/xchg.h",
+      "unique_matches": 10,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/xlat.h",
+      "unique_matches": 9,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/xor.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.h",
+      "unique_matches": 9,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/evidfunc.h",
+      "unique_matches": 690,
+      "bad_count": 53,
+      "first_bad": [
+        [
+          656,
+          660,
+          656,
+          660
+        ],
+        [
+          658,
+          662,
+          658,
+          662
+        ],
+        [
+          659,
+          663,
+          659,
+          663
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/j_c_lang.c",
+      "unique_matches": 66,
+      "bad_count": 64,
+      "first_bad": [
+        [
+          6,
+          4,
+          6,
+          4
+        ],
+        [
+          7,
+          5,
+          7,
+          5
+        ],
+        [
+          9,
+          7,
+          9,
+          7
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid010.c",
+      "unique_matches": 1102,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid011.c",
+      "unique_matches": 932,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid012.c",
+      "unique_matches": 919,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid013.c",
+      "unique_matches": 1432,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid014.c",
+      "unique_matches": 1273,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid015.c",
+      "unique_matches": 1188,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid016.c",
+      "unique_matches": 1300,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid017.c",
+      "unique_matches": 992,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid018.c",
+      "unique_matches": 1061,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid021.c",
+      "unique_matches": 1319,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid022.c",
+      "unique_matches": 963,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid023.c",
+      "unique_matches": 692,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid024.c",
+      "unique_matches": 839,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid025.c",
+      "unique_matches": 978,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid026.c",
+      "unique_matches": 1008,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid027.c",
+      "unique_matches": 1127,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid028.c",
+      "unique_matches": 1201,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid029.c",
+      "unique_matches": 1067,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid030.c",
+      "unique_matches": 783,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sinit011.c",
+      "unique_matches": 210,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sinit012.c",
+      "unique_matches": 318,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sinit013.c",
+      "unique_matches": 540,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/vglfunc.c",
+      "unique_matches": 162,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/build_id.h",
+      "unique_matches": 30,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/chkmallc.h",
+      "unique_matches": 19,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ckmalloc.h",
+      "unique_matches": 21,
+      "bad_count": 9,
+      "first_bad": [
+        [
+          30,
+          26,
+          30,
+          26
+        ],
+        [
+          31,
+          27,
+          31,
+          27
+        ],
+        [
+          38,
+          34,
+          38,
+          34
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cmosbios.h",
+      "unique_matches": 13,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/fdisk.h",
+      "unique_matches": 32,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/fla.h",
+      "unique_matches": 70,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ga_defs.h",
+      "unique_matches": 32,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ga_mark.h",
+      "unique_matches": 56,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/get_env.h",
+      "unique_matches": 13,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gfitest.h",
+      "unique_matches": 15,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_gwi.h",
+      "unique_matches": 8,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/keyboard.h",
+      "unique_matches": 132,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/mouse.h",
+      "unique_matches": 71,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/rtc_bios.h",
+      "unique_matches": 24,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sasp.h",
+      "unique_matches": 12,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/spcfile.h",
+      "unique_matches": 7,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/tape_io.h",
+      "unique_matches": 69,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timestmp.h",
+      "unique_matches": 20,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/tmstrobe.h",
+      "unique_matches": 20,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/virtual.h",
+      "unique_matches": 25,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_bop.h",
+      "unique_matches": 16,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_gen.h",
+      "unique_matches": 44,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_gfx.h",
+      "unique_matches": 13,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_qev.h",
+      "unique_matches": 1,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_trc.h",
+      "unique_matches": 15,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/hostsync.h",
+      "unique_matches": 21,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_cga.h",
+      "unique_matches": 14,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_cgalt.h",
+      "unique_matches": 10,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_det.h",
+      "unique_matches": 16,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_ega.h",
+      "unique_matches": 14,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_egalt.h",
+      "unique_matches": 41,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_fdisk.h",
+      "unique_matches": 14,
+      "bad_count": 10,
+      "first_bad": [
+        [
+          6,
+          7,
+          6,
+          7
+        ],
+        [
+          7,
+          8,
+          7,
+          8
+        ],
+        [
+          8,
+          9,
+          8,
+          9
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_mem.h",
+      "unique_matches": 19,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_mouse.h",
+      "unique_matches": 40,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_thred.h",
+      "unique_matches": 24,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_timer.h",
+      "unique_matches": 15,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_uis.h",
+      "unique_matches": 63,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_vddp.h",
+      "unique_matches": 25,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/ntcheese.h",
+      "unique_matches": 17,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fdisk.c",
+      "unique_matches": 390,
+      "bad_count": 384,
+      "first_bad": [
+        [
+          14,
+          12,
+          14,
+          12
+        ],
+        [
+          16,
+          14,
+          16,
+          14
+        ],
+        [
+          18,
+          16,
+          18,
+          16
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_keycd.c",
+      "unique_matches": 479,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_pif.c",
+      "unique_matches": 269,
+      "bad_count": 252,
+      "first_bad": [
+        [
+          30,
+          29,
+          30,
+          29
+        ],
+        [
+          31,
+          30,
+          31,
+          30
+        ],
+        [
+          33,
+          32,
+          33,
+          32
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/dlstruct.h",
+      "unique_matches": 188,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrica.h",
+      "unique_matches": 13,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrputil.h",
+      "unique_matches": 23,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/isvwow.h",
+      "unique_matches": 53,
+      "bad_count": 39,
+      "first_bad": [
+        [
+          25,
+          24,
+          25,
+          24
+        ],
+        [
+          26,
+          25,
+          26,
+          25
+        ],
+        [
+          30,
+          29,
+          30,
+          29
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/waccel.h",
+      "unique_matches": 23,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/walloc16.c",
+      "unique_matches": 135,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.h",
+      "unique_matches": 36,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall32.h",
+      "unique_matches": 23,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcmdgtbl.h",
+      "unique_matches": 20,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcntl32.c",
+      "unique_matches": 280,
+      "bad_count": 270,
+      "first_bad": [
+        [
+          19,
+          18,
+          19,
+          18
+        ],
+        [
+          23,
+          22,
+          23,
+          22
+        ],
+        [
+          24,
+          23,
+          24,
+          23
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcntl32.h",
+      "unique_matches": 47,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcommdlg.h",
+      "unique_matches": 17,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcuricon.c",
+      "unique_matches": 517,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcuricon.h",
+      "unique_matches": 70,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdde.c",
+      "unique_matches": 427,
+      "bad_count": 402,
+      "first_bad": [
+        [
+          59,
+          58,
+          59,
+          58
+        ],
+        [
+          62,
+          61,
+          62,
+          61
+        ],
+        [
+          69,
+          67,
+          69,
+          67
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdde.h",
+      "unique_matches": 77,
+      "bad_count": 49,
+      "first_bad": [
+        [
+          60,
+          47,
+          60,
+          47
+        ],
+        [
+          61,
+          48,
+          61,
+          48
+        ],
+        [
+          64,
+          51,
+          64,
+          51
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdib.h",
+      "unique_matches": 56,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdos.h",
+      "unique_matches": 18,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgdi.h",
+      "unique_matches": 152,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgdi31.h",
+      "unique_matches": 85,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgfont.h",
+      "unique_matches": 29,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgman.c",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgman.h",
+      "unique_matches": 8,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgmeta.h",
+      "unique_matches": 28,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgpal.c",
+      "unique_matches": 119,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgpal.h",
+      "unique_matches": 20,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgprnset.h",
+      "unique_matches": 15,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgtbl2.h",
+      "unique_matches": 365,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgtext.c",
+      "unique_matches": 121,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgtext.h",
+      "unique_matches": 20,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wheap.h",
+      "unique_matches": 21,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/winsockp.h",
+      "unique_matches": 100,
+      "bad_count": 42,
+      "first_bad": [
+        [
+          77,
+          76,
+          77,
+          76
+        ],
+        [
+          78,
+          77,
+          78,
+          77
+        ],
+        [
+          79,
+          78,
+          79,
+          78
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkbdtbl2.h",
+      "unique_matches": 42,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkbman.c",
+      "unique_matches": 76,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkbman.h",
+      "unique_matches": 21,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.h",
+      "unique_matches": 81,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkfileio.h",
+      "unique_matches": 50,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkgthunk.h",
+      "unique_matches": 13,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wklocal.h",
+      "unique_matches": 20,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.h",
+      "unique_matches": 110,
+      "bad_count": 110,
+      "first_bad": [
+        [
+          4,
+          1,
+          4,
+          1
+        ],
+        [
+          6,
+          3,
+          6,
+          3
+        ],
+        [
+          8,
+          5,
+          8,
+          5
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wktbl2.h",
+      "unique_matches": 305,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmedia.c",
+      "unique_matches": 154,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmtbl2.h",
+      "unique_matches": 12,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgcb.h",
+      "unique_matches": 13,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgem.h",
+      "unique_matches": 13,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsglb.h",
+      "unique_matches": 13,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgsbm.h",
+      "unique_matches": 13,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wole2.h",
+      "unique_matches": 17,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowhooks.h",
+      "unique_matches": 129,
+      "bad_count": 108,
+      "first_bad": [
+        [
+          41,
+          37,
+          41,
+          37
+        ],
+        [
+          42,
+          38,
+          42,
+          38
+        ],
+        [
+          43,
+          39,
+          43,
+          39
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wreldc.c",
+      "unique_matches": 126,
+      "bad_count": 31,
+      "first_bad": [
+        [
+          229,
+          228,
+          229,
+          228
+        ],
+        [
+          230,
+          229,
+          230,
+          229
+        ],
+        [
+          232,
+          231,
+          232,
+          231
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wreldc.h",
+      "unique_matches": 24,
+      "bad_count": 2,
+      "first_bad": [
+        [
+          40,
+          39,
+          40,
+          39
+        ],
+        [
+          41,
+          40,
+          41,
+          40
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wres16.h",
+      "unique_matches": 35,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wres32.c",
+      "unique_matches": 32,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wres32.h",
+      "unique_matches": 16,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsdata.c",
+      "unique_matches": 278,
+      "bad_count": 192,
+      "first_bad": [
+        [
+          347,
+          346,
+          347,
+          346
+        ],
+        [
+          350,
+          349,
+          350,
+          349
+        ],
+        [
+          351,
+          350,
+          351,
+          350
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsdynmc.h",
+      "unique_matches": 51,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsext.c",
+      "unique_matches": 394,
+      "bad_count": 265,
+      "first_bad": [
+        [
+          248,
+          244,
+          248,
+          244
+        ],
+        [
+          252,
+          248,
+          252,
+          248
+        ],
+        [
+          254,
+          250,
+          254,
+          250
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wshell.h",
+      "unique_matches": 40,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wshtbl2.h",
+      "unique_matches": 44,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsman.c",
+      "unique_matches": 16,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsman.h",
+      "unique_matches": 11,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wspool.c",
+      "unique_matches": 143,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsraw.c",
+      "unique_matches": 590,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wstbl2.h",
+      "unique_matches": 28,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsubcls.h",
+      "unique_matches": 27,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wthman.c",
+      "unique_matches": 12,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wthman.h",
+      "unique_matches": 9,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wthtbl2.h",
+      "unique_matches": 10,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wucaret.c",
+      "unique_matches": 167,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wucaret.h",
+      "unique_matches": 16,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.h",
+      "unique_matches": 19,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclip.h",
+      "unique_matches": 44,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wucursor.c",
+      "unique_matches": 222,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wucursor.h",
+      "unique_matches": 15,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuhook.c",
+      "unique_matches": 304,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuhook.h",
+      "unique_matches": 17,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wulang.c",
+      "unique_matches": 98,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wulang.h",
+      "unique_matches": 24,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuman.h",
+      "unique_matches": 15,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumenu.c",
+      "unique_matches": 594,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumenu.h",
+      "unique_matches": 28,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.h",
+      "unique_matches": 34,
+      "bad_count": 25,
+      "first_bad": [
+        [
+          19,
+          18,
+          19,
+          18
+        ],
+        [
+          20,
+          19,
+          20,
+          19
+        ],
+        [
+          21,
+          20,
+          21,
+          20
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.h",
+      "unique_matches": 84,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser31.h",
+      "unique_matches": 60,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wutbl2.h",
+      "unique_matches": 501,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wutext.c",
+      "unique_matches": 43,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wutext.h",
+      "unique_matches": 10,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wutmr.c",
+      "unique_matches": 308,
+      "bad_count": 229,
+      "first_bad": [
+        [
+          222,
+          221,
+          222,
+          221
+        ],
+        [
+          225,
+          224,
+          225,
+          224
+        ],
+        [
+          227,
+          226,
+          227,
+          226
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wutmr.h",
+      "unique_matches": 55,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.h",
+      "unique_matches": 55,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wwstbl2.h",
+      "unique_matches": 72,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsmisc.c",
+      "unique_matches": 27,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/base/ntdll/csrutil.c",
+      "unique_matches": 78,
+      "bad_count": 78,
+      "first_bad": [
+        [
+          8,
+          266,
+          8,
+          266
+        ],
+        [
+          9,
+          267,
+          9,
+          267
+        ],
+        [
+          10,
+          268,
+          10,
+          268
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.h",
+      "unique_matches": 244,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/base/win32/inc/basemsg.h",
+      "unique_matches": 172,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/base/win32/inc/basevdm.h",
+      "unique_matches": 36,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.h",
+      "unique_matches": 108,
+      "bad_count": 86,
+      "first_bad": [
+        [
+          39,
+          38,
+          39,
+          38
+        ],
+        [
+          40,
+          39,
+          40,
+          39
+        ],
+        [
+          41,
+          40,
+          41,
+          40
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/api/apibuff.c",
+      "unique_matches": 10,
+      "bad_count": 6,
+      "first_bad": [
+        [
+          27,
+          232,
+          27,
+          232
+        ],
+        [
+          36,
+          241,
+          36,
+          241
+        ],
+        [
+          37,
+          242,
+          37,
+          242
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/time.c",
+      "unique_matches": 461,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/timezone.c",
+      "unique_matches": 59,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/ascii.c",
+      "unique_matches": 50,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/auxdata.c",
+      "unique_matches": 76,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/examine.c",
+      "unique_matches": 173,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/parmnum.c",
+      "unique_matches": 107,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/pointer.c",
+      "unique_matches": 53,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/strucsiz.c",
+      "unique_matches": 21,
+      "bad_count": 15,
+      "first_bad": [
+        [
+          20,
+          47,
+          20,
+          47
+        ],
+        [
+          21,
+          48,
+          21,
+          48
+        ],
+        [
+          22,
+          49,
+          22,
+          49
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
+      "unique_matches": 200,
+      "bad_count": 183,
+      "first_bad": [
+        [
+          41,
+          40,
+          41,
+          40
+        ],
+        [
+          42,
+          41,
+          42,
+          41
+        ],
+        [
+          43,
+          42,
+          43,
+          42
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apiwksta.c",
+      "unique_matches": 392,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/wkstadef.h",
+      "unique_matches": 23,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xssubs.c",
+      "unique_matches": 615,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntdddlc.h",
+      "unique_matches": 56,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/conroute.h",
+      "unique_matches": 38,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/ntddvdm.h",
+      "unique_matches": 25,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/winss.h",
+      "unique_matches": 27,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/apinums.h",
+      "unique_matches": 201,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxuser.h",
+      "unique_matches": 35,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/shell/inc/wowshlp.h",
+      "unique_matches": 22,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/wowgdip.h",
+      "unique_matches": 14,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ptypes32.h",
+      "unique_matches": 48,
+      "bad_count": 4,
+      "first_bad": [
+        [
+          55,
+          56,
+          55,
+          56
+        ],
+        [
+          57,
+          59,
+          57,
+          59
+        ],
+        [
+          58,
+          60,
+          58,
+          60
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/draw.c",
+      "unique_matches": 34,
+      "bad_count": 34,
+      "first_bad": [
+        [
+          4,
+          13,
+          4,
+          13
+        ],
+        [
+          6,
+          25,
+          6,
+          25
+        ],
+        [
+          7,
+          26,
+          7,
+          26
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/drawtext.c",
+      "unique_matches": 126,
+      "bad_count": 126,
+      "first_bad": [
+        [
+          6,
+          12,
+          6,
+          12
+        ],
+        [
+          8,
+          171,
+          8,
+          171
+        ],
+        [
+          13,
+          176,
+          13,
+          176
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/hdata.c",
+      "unique_matches": 55,
+      "bad_count": 51,
+      "first_bad": [
+        [
+          16,
+          455,
+          16,
+          455
+        ],
+        [
+          19,
+          458,
+          19,
+          458
+        ],
+        [
+          20,
+          459,
+          20,
+          459
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/miscutil.c",
+      "unique_matches": 17,
+      "bad_count": 10,
+      "first_bad": [
+        [
+          15,
+          12,
+          15,
+          12
+        ],
+        [
+          16,
+          13,
+          16,
+          13
+        ],
+        [
+          18,
+          24,
+          18,
+          24
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/taskman.c",
+      "unique_matches": 331,
+      "bad_count": 324,
+      "first_bad": [
+        [
+          22,
+          29,
+          22,
+          29
+        ],
+        [
+          23,
+          30,
+          23,
+          30
+        ],
+        [
+          24,
+          31,
+          24,
+          31
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/help.c",
+      "unique_matches": 21,
+      "bad_count": 15,
+      "first_bad": [
+        [
+          18,
+          20,
+          18,
+          20
+        ],
+        [
+          19,
+          21,
+          19,
+          21
+        ],
+        [
+          20,
+          22,
+          20,
+          22
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/random.c",
+      "unique_matches": 25,
+      "bad_count": 21,
+      "first_bad": [
+        [
+          17,
+          80,
+          17,
+          80
+        ],
+        [
+          18,
+          81,
+          18,
+          81
+        ],
+        [
+          19,
+          82,
+          19,
+          82
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/rect.c",
+      "unique_matches": 3,
+      "bad_count": 3,
+      "first_bad": [
+        [
+          8,
+          46,
+          8,
+          46
+        ],
+        [
+          13,
+          51,
+          13,
+          51
+        ],
+        [
+          15,
+          53,
+          15,
+          53
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/text.c",
+      "unique_matches": 9,
+      "bad_count": 9,
+      "first_bad": [
+        [
+          8,
+          28,
+          8,
+          28
+        ],
+        [
+          9,
+          29,
+          9,
+          29
+        ],
+        [
+          10,
+          30,
+          10,
+          30
+        ]
+      ],
+      "original_outer_groups": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/c2cpusad.h",
+      "unique_matches": 354,
+      "bad_count": 0,
+      "first_bad": [],
+      "original_outer_groups": 0
+    }
+  ]
+}

@@ -56,3 +56,15 @@ identical files, but does not establish that all their arms were hit, nor that
 different build contexts select the same arms. The remaining ambiguous rows
 and files are counted in the machine-readable summary and must not be counted
 as completed original-line checks.
+
+An additional [line scan](s13-r1316-zero-branch-line-scan.json) checked the
+373 differing files where neither the current nor original file contains a
+conditional group. It compared unique, unchanged lines and applied sequential
+`#line` directives. In 58 files, 6,231 of 45,695 matched lines had different
+logical positions from the original; the other 315 files showed no mismatch
+among these unique matches. These are source-level findings, not proof that
+all matches compile or that every differing position is an observable runtime
+failure. Nor does the absence of a unique-line mismatch certify every line.
+The per-file checklist includes these two counts. The remaining files with
+conditions require checks using the actual selected preprocessing contexts;
+this zero-branch scan does not cover them.

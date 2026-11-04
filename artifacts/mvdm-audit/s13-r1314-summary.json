@@ -23,5 +23,10 @@
   "files_with_unobserved_retained": 6,
   "files_with_ambiguous_error_line": 33,
   "different_files_selected_lines_not_fully_certified": 874,
-  "limitation": "Marker hits are observed compile contexts, not proof of every supported configuration. A hit requires retention; no hit is not proof of exclusion. Selected-line mapping for differing files is not completely certified."
+  "limitation": "Marker hits are observed compile contexts, not proof of every supported configuration. A hit requires retention; no hit is not proof of exclusion. Selected-line mapping for differing files is not completely certified.",
+  "zero_branch_differing_files_scanned": 373,
+  "zero_branch_files_with_unique_line_mismatches": 58,
+  "zero_branch_files_no_unique_line_mismatch_observed": 315,
+  "zero_branch_unique_matched_lines": 45695,
+  "zero_branch_unique_lines_with_different_mapping": 6231
 }
