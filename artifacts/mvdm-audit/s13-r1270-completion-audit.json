@@ -1,0 +1,66 @@
+{
+  "scope": "Current inventory, original candidates, conditional-arm hygiene and product build graph audit",
+  "census_files": 1056,
+  "current_and_original_hash_mismatches": 0,
+  "original_byte_identical": 182,
+  "original_different": 874,
+  "lexical_no_conditional_files_checked": 483,
+  "lexical_no_conditional_contradictions": 0,
+  "conditional_parser_files": 1055,
+  "direct_error_arms": 3999,
+  "error_arms_with_remaining_content_or_nested_groups": 0,
+  "conditional_parser_failures": 0,
+  "graphs": [
+    {
+      "graph": "msvc-x86-release/worker",
+      "sha256": "83d1f77c7a7fc7227ddf4e21265d551f265dc841c55abd1735210a7cdc272bab"
+    },
+    {
+      "graph": "msvc-x86-release/wow32",
+      "sha256": "57cc276a409e24a25cd956b822478ff85ae464f25c093b8ac1b921b237c8b87a"
+    },
+    {
+      "graph": "msvc-x64-release/frontend",
+      "sha256": "de2e799b4fcf9d4a44b6a85a060933ac18095d69cf6bad88453afd843cb763e3"
+    },
+    {
+      "graph": "msvc-x64-release/hook",
+      "sha256": "86957a52bb51b4ca65c75852c180635e63c8604abfe4b2dc300e4ca278f902dd"
+    },
+    {
+      "graph": "msvc-x64-release/launcher",
+      "sha256": "b8311977f1dfeeaca03ec46b04947d7e9cb01da7d6e44ce62847b55f050c17fd"
+    },
+    {
+      "graph": "msvc-x64-release/monitor",
+      "sha256": "b782dc1993f9f75b3917cfd5739c2308fbba82e22080e58f58e71a36d5d24612"
+    },
+    {
+      "graph": "msvc-x64-release/service",
+      "sha256": "1aececf900a17fceafd125c397ded64107cbb0fa3eb062b18adf951db4f04d1a"
+    },
+    {
+      "graph": "msvc-x64-release/worker",
+      "sha256": "a4e284175f22876724160192dde76e338599ac52a2e415b20546dca7da5188e5"
+    },
+    {
+      "graph": "msvc-x64-release/worker-reference-x86",
+      "sha256": "f5a838423c76dbb5e2231fd8d2858ac3316cb6133ec3e5a661696d6e0be6f0eb"
+    }
+  ],
+  "distinct_ninja_source_inputs": 537,
+  "missing_source_inputs": {},
+  "distinct_ninja_dep_paths": 521,
+  "missing_dep_paths": {
+    "src/non-mvdm/public/ddk/inc/ntdddisk.h": [
+      "msvc-x64-release/worker-reference-x86"
+    ],
+    "src/non-mvdm/public/sdk/inc/ntdbg.h": [
+      "msvc-x64-release/worker-reference-x86"
+    ]
+  },
+  "missing_deps_note": "Both paths appear solely in stale worker-reference-x86 dep records; they were removed after actual supported-context tests confirmed their bodies unselected. See s13-r1227-ntdbg-unselected.json and s13-r1233-ntdddisk-preprocess.json / s13-r1234-ntdddisk-unselected.json. The reference graph is generated for inspection, not a product build target.",
+  "published_manifest_entries": 10,
+  "publication_hash_mismatches": [],
+  "limits": "Graph observations and parser hygiene do not by themselves prove semantic equivalence or completeness of every include macro context; historical per-file records and the registered USER guard projections remain necessary evidence."
+}
