@@ -1,0 +1,12 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+  "current_sha256": "9974d509790f6b8185dd09242967298f34d8e93cc95b9e65ace1f9dd58f467ce",
+  "original_sha256": "e79dd6aa79d24e37ad8390c8879abf3436674ee101037f0e09415148a938ac95",
+  "direct_binding_path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+  "direct_binding_sha256": "f2bc102075e0624cfe95a040c0608d97df5a8a198a0c0d08bf0271a71207b93a",
+  "observation": "Original non-CPU30 path contains CCPU-guarded function-pointer declarations/macros; current host_cpu.h retains CCPU guards with empty bodies. cpu4.h includes host_cpu.h then cpu4gen.h, whose macros bind getAX/setAX/getCPL/setCPL directly to c_* functions.",
+  "search": "rg over src found no getAX_func, getCPL_func or host_simulate_func references. This is a selected sample, not proof for every original vector name.",
+  "risk": "Restoring original get/set macros verbatim could conflict with cpu4gen.h definitions and change call binding. No source restoration or exclusion was performed.",
+  "next": "Compare all removed pointer-vector names and all supported include contexts; determine whether original bodies are needed or must remain an explicitly registered adaptation, and verify macro conflicts before editing.",
+  "status": "open; file remains not-fully-certified"
+}
