@@ -93,9 +93,8 @@ Routine Description:
 
 #line 88
 #ifdef i386
-#ifndef CPU_40_STYLE /* DIVERGENCE(MVDM-HOST-DIV-554) */
+#line 89
 #error Excluded unsupported VdmSetInt21Handler kernel VDM path
-#endif /* !CPU_40_STYLE */
 #endif
 #line 107
     setAX(0);
@@ -1311,15 +1310,7 @@ Return Value:
         fDpmiIntsHaveBeenHooked = TRUE;
     }
 #else
-#if defined(CPU_40_STYLE)
-#line 1168
-    if (fDpmiHookInts) {
-        VdmInstallHardwareIntHandler(DpmiHwIntHandler);
-        VdmInstallSoftwareIntHandler(DpmiSwIntHandler);
-        VdmInstallFaultHandler(DpmiFaultHandler);
-        fDpmiIntsHaveBeenHooked = TRUE;
-    }
-#endif
+#error Excluded unsupported i386 kernel VDM interrupt hook path
 #endif // i386
 #line 1175
 }
@@ -1357,15 +1348,7 @@ Return Value:
         fDpmiIntsHaveBeenHooked = FALSE;
     }
 #else
-#if defined(CPU_40_STYLE)
-#line 1202
-    if (fDpmiIntsHaveBeenHooked) {
-        VdmInstallHardwareIntHandler(NULL);
-        VdmInstallSoftwareIntHandler(NULL);
-        VdmInstallFaultHandler(NULL);
-        fDpmiIntsHaveBeenHooked = FALSE;
-    }
-#endif
+#error Excluded unsupported i386 kernel VDM interrupt hook path
 #endif // i386
 #line 1209
 }

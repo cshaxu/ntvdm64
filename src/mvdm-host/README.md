@@ -303,7 +303,7 @@ fast-BOP runtime semantics. Evidence:
 MVDM-HOST-DIV-582: retrospectively register the existing CPU40 selection in
 `dpmi32/dpmiint.c` and `dpmi32/dpmiint.h`. Four original `#ifndef i386`
 boundaries select the software-executor handler/carrier and interrupt-hook
-paths on CPU40 even when the host is i386. This records current selection;
+paths in the supported CPU40 build contexts. This records current selection;
 it does not establish complete DPMI fault semantics. Original/current
 boundary evidence is in
 `../../artifacts/mvdm-audit/s13-bfs-depth1-original-dpmi-selectors.json`.
@@ -479,8 +479,8 @@ diagnostic locations and existing supported selections. Evidence:
 `../../artifacts/mvdm-audit/s13-mirror-conditional-reconciliation.md`.
 
 MVDM-HOST-DIV-554: restore the original `i386` conditional at the removed
-`VdmSetInt21Handler` kernel-monitor call and reject the unavailable non-CPU40
-path without rejecting an `i386`-defined CPU40 build. The selected CCPU
+`VdmSetInt21Handler` kernel-monitor call and reject the unselected kernel
+VDM path in the supported build contexts. The selected CCPU
 interrupt registration is unchanged; the historical kernel control service
 remains unimplemented. See
 `../../artifacts/mvdm-audit/s13-mirror-conditional-reconciliation.md`.
@@ -1947,7 +1947,7 @@ runtime-discovery inputs.  The complete per-file provenance is in
 | --- | --- | --- | --- | --- |
 | MVDM-SUPPORT-DIV-001 | Model `DEMEXTERR.ExtendedErrorPointer` as a 32-bit field in the packed DOS data record. | The original x86 `PUCHAR` happens to be 32 bits; on x64 it widens and changes the guest ABI. | Preserve the source record's nine-byte packed layout by storing the guest pointer numerically as `ULONG`. | `inc/dossvc.h` |
 | MVDM-SUPPORT-DIV-005 | Declare the internal MVDM hardware/software/fault interrupt registration callbacks. | The original public declarations carried function pointers as `PVOID`, relying on an invalid function/data-pointer conversion that has no safe C ABI meaning. | Retain the original registration entrypoint names and callback parameters/results, but publish three named `int`-returning function-pointer types. | `inc/intapi.h`; `softpc.new/host/inc/nt_inthk.h`; `softpc.new/host/src/nt_inthk.c` |
-| MVDM-SUPPORT-DIV-006 | Select original fetch/store macros. | MSVC defines _M_IX86 rather than the historical i386 spelling. | Preserve both original alternatives and select the same x86 access macros for MSVC inside the original non-i386 alternative. | `inc/mvdm.h` |
+| MVDM-SUPPORT-DIV-006 | Select original fetch/store macros. | MSVC defines _M_IX86 rather than the historical i386 spelling. | Reject the unselected historical i386 arm and select the same x86 access macros for MSVC inside the original non-i386 alternative. | `inc/mvdm.h` |
 | MVDM-SUPPORT-DIV-007 | Select original suballocation granularity. | MSVC defines _M_IX86 rather than i386. | Preserve both original alternatives and select the same 4096-byte granularity for MSVC inside the original non-i386 alternative. | `inc/suballoc.h` |
 
 ### Existing MVDM host divergences
@@ -2217,9 +2217,9 @@ this does not exclude i386 in other source contexts. See
 `../../artifacts/mvdm-audit/s13-bfs-depth1-wow-i386-headers.json`.
 
 MVDM-HOST-DIV-634: restore the original `#ifndef i386` outer selector in
-`dpmi32/dpmiint.h`; keep the existing CPU40 carrier in the i386 alternative
-and preserve the unsupported non-CPU40 rejection. Both branches retain the
-same selected original definitions and original diagnostic continuation.
+`dpmi32/dpmiint.h`; retain the selected software carrier and replace the
+unselected i386 alternative with `#error`, preserving original diagnostic
+continuation.
 Evidence: `../../artifacts/mvdm-audit/s13-bfs-depth1-dpmiint-header-restoration.json`.
 
 MVDM-HOST-DIV-635: restore original `#ifndef i386` outer selectors for
@@ -2967,3 +2967,18 @@ Evidence: ../../artifacts/mvdm-audit/s13-r745-egaprts-old-mask.json.
 MVDM-HOST-DIV-796: reject the two unselected DELAYED_INTS printer branches
 while preserving original conditions and selected immediate paths. Evidence:
 ../../artifacts/mvdm-audit/s13-r746-printer-delayed.json.
+
+MVDM-HOST-DIV-797: remove the stale continuation mapping after the excluded
+WIN_16 branch in dos/command/cmd.h, preserving the original line 45 mapping.
+Full header review remains pending. Evidence:
+../../artifacts/mvdm-audit/s13-r747-cmd-header-partial.json.
+
+MVDM-HOST-DIV-798: replace the unselected WIN_32, FLAT_32 and WIN branches in
+host COMMAND cmd.h while retaining original conditions, selected fallback and
+original diagnostic mappings. This is based on 24 observed inclusion contexts;
+other configurations remain outside that evidence. Evidence:
+../../artifacts/mvdm-audit/s13-r749-cmd-header-branches.json.
+
+MVDM-HOST-DIV-799: reject unselected original DEM header branches and restore
+original diagnostic mappings; retain selected WIN_32, FLAT_32, non-i386 and
+other observed paths. Evidence: ../../artifacts/mvdm-audit/s13-r752-dem-header-branches.json.

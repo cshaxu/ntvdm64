@@ -1,0 +1,91 @@
+{
+  "path": "src/mvdm-host/dpmi32/dpmi32.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmi32.c",
+  "source_sha256": "b9d1b7803f22f12e1d4c8ea474a391fff0e0cd3fa1aff29ba4130c983e5466af",
+  "original_sha256": "c271daf86bdfa846c9602f74bd2a4059b98c2ad1f12676e966bcfd427ba93dca",
+  "original_branches": [
+    {
+      "original_line": 103,
+      "original_endif": 105,
+      "condition": "DBG",
+      "witness": {
+        "label": "codex_r688_arm_0000",
+        "line": 110,
+        "kind": "if",
+        "expression": "DBG",
+        "error_only": true
+      }
+    },
+    {
+      "original_line": 247,
+      "original_endif": 252,
+      "condition": "defined(i386)",
+      "witness": {
+        "label": "codex_r688_arm_0001",
+        "line": 257,
+        "kind": "if",
+        "expression": "defined(i386)",
+        "error_only": true
+      }
+    }
+  ],
+  "selected_local_cpu40": {
+    "label": "codex_r688_arm_0002",
+    "line": 305,
+    "kind": "if",
+    "expression": "defined(CPU_40_STYLE)",
+    "error_only": false
+  },
+  "difference_registration": "MVDM-HOST-DIV-223",
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "d832c9c688cf59622649c99f99237bda4890cac8002679ef221d6ef312ece171",
+      "hit": [
+        "codex_r688_arm_0002"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "d832c9c688cf59622649c99f99237bda4890cac8002679ef221d6ef312ece171",
+      "hit": [
+        "codex_r688_arm_0002"
+      ]
+    }
+  ],
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 158,
+      "identical": true,
+      "include_trace_sha256": "48ae302dc200f5a85d6e5022f014a70d9cdd1a9a55dbaebcabaa25a86a6af1ee",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 158,
+      "identical": true,
+      "include_trace_sha256": "48ae302dc200f5a85d6e5022f014a70d9cdd1a9a55dbaebcabaa25a86a6af1ee",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "contexts": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/dpmi32.obj",
+      "command_sha256": "8c12937cc921593a8320f3bef2b627dadd71feb8edd1870f1252a09b5d805e48"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/dpmi32.obj",
+      "command_sha256": "8c12937cc921593a8320f3bef2b627dadd71feb8edd1870f1252a09b5d805e48"
+    }
+  ],
+  "limits": "Conditional structure reviewed in observed release graphs; selected CPU40 behavior and unobserved configurations not proved by this review."
+}

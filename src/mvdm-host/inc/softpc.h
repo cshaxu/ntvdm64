@@ -230,7 +230,9 @@ void *ch_malloc(unsigned int NumBytes);
 UCHAR *__cdecl Sim32pGetVDMPointer(ULONG addr, UCHAR pm);
 #define Sim32GetVDMPointer(Addr,Size,Mode) Sim32pGetVDMPointer(Addr,Mode)
 
+#line 225
 #ifdef i386
+#line 226
 #error Excluded unsupported i386 kernel VDM register interface
 #else
 #line 532

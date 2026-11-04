@@ -1,0 +1,631 @@
+{
+  "header_sha256": "0bc1801df122b0d848a7e06250055c73fb27877227ff50adec797af752120d56",
+  "arms": [
+    {
+      "line": 25,
+      "label": "codex_dpmi32p_h_arm_0000",
+      "kind": "if",
+      "expression": "DBG"
+    },
+    {
+      "line": 27,
+      "label": "codex_dpmi32p_h_arm_0001",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 28,
+      "label": "codex_dpmi32p_h_arm_0002",
+      "kind": "ifdef",
+      "expression": "i386"
+    },
+    {
+      "line": 38,
+      "label": "codex_dpmi32p_h_arm_0003",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 53,
+      "label": "codex_dpmi32p_h_arm_0004",
+      "kind": "ifdef",
+      "expression": "i386"
+    },
+    {
+      "line": 108,
+      "label": "codex_dpmi32p_h_arm_0005",
+      "kind": "ifndef",
+      "expression": "i386"
+    },
+    {
+      "line": 119,
+      "label": "codex_dpmi32p_h_arm_0006",
+      "kind": "if",
+      "expression": "defined(CPU_40_STYLE)"
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/dpmi32.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmi32.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/debug.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/debug.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/dpmiint.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmiint.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/buffer.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/buffer.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/data.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/data.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/dpmiselr.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmiselr.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/int21map.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/int21map.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/modesw.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/modesw.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/register.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/register.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/savestat.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/savestat.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/stack.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/stack.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/vxd.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/vxd.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/xmem.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/xmem.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/dpmimemr.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmimemr.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/dpmimscr.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmimscr.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/i386_dpmi386.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/i386/dpmi386.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/adapter-softpc/mvdm_softpc_fast_bop.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_fast_bop.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/debug.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/debug.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/dpmiint.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmiint.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/dpmi32.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmi32.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/data.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/data.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/buffer.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/buffer.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/dpmiselr.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmiselr.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/int21map.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/int21map.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/modesw.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/modesw.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/register.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/register.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/savestat.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/savestat.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/vxd.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/vxd.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/stack.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/stack.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/xmem.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/xmem.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/dpmimscr.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmimscr.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/dpmimemr.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmimemr.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/i386_dpmi386.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/i386/dpmi386.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005",
+        "codex_dpmi32p_h_arm_0006"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/adapter-softpc/mvdm_softpc_fast_bop.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_fast_bop.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmi32p_h_arm_0001",
+        "codex_dpmi32p_h_arm_0003",
+        "codex_dpmi32p_h_arm_0005"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmi32p.h",
+  "original_sha256": "c5734d7842c34ae436cd12a5b52ad76d4fab88940a64f3af7e5fdc6fbc92e4a9",
+  "after_sha256": "4980f5f7d98599e98f3a32c2b51542d93fa99f9984ccd982b519f873258d5a41",
+  "changes": "Restore original #line 26 and #line 29 around previously excluded DBG branch. Existing i386 exclusion retained. Selected CPU40 declarations and product adaptations preserved.",
+  "limitations": "Witnesses cover observed release graph contexts; no assertion that unsupported configurations or selected runtime semantics were tested."
+}

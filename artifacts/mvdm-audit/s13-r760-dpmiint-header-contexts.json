@@ -1,0 +1,67 @@
+{
+  "header_sha256": "2f6c8f88fccaad6847b903d9c25d28bbd65494541eda7b9c9e3679e5b2e27eaf",
+  "arms": [
+    {
+      "line": 26,
+      "label": "codex_dpmiint_h_arm_0000",
+      "kind": "ifndef",
+      "expression": "i386"
+    },
+    {
+      "line": 43,
+      "label": "codex_dpmiint_h_arm_0001",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 44,
+      "label": "codex_dpmiint_h_arm_0002",
+      "kind": "if",
+      "expression": "defined(CPU_40_STYLE)"
+    },
+    {
+      "line": 61,
+      "label": "codex_dpmiint_h_arm_0003",
+      "kind": "else",
+      "expression": ""
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/dpmiint.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmiint.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmiint_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/dpmiint.obj",
+      "probe_index": 1,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmiint.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_dpmiint_h_arm_0000"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/dpmi32/dpmiint.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.h",
+  "original_sha256": "245976d103b8dd3b918b008b85e9e94b3ec245fb9119c28b897f936a94b69b5e",
+  "after_sha256": "93ff578e59baa0d11ead3cf1d246c2fb89e50ffbb876e1bdca4b14fb52568a33",
+  "changes": "Replace unselected original i386 else arm and its nested local CPU40 duplicate with #error and original #line 40. Preserve selected software carrier and original continuation.",
+  "limitations": "Evidence covers two observed product release contexts, not unobserved configurations or runtime behavior."
+}

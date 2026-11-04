@@ -1,0 +1,336 @@
+{
+  "path": "src/mvdm-host/dpmi32/dpmiint.c",
+  "source_sha256": "556ed5ec620a7339c9464d5d25c7306e6651556fd8c51a35ebf2b20ad5f1711f",
+  "object": "dpmi/dpmiint",
+  "arms": [
+    {
+      "label": "codex_r688_arm_0000",
+      "line": 44,
+      "kind": "if",
+      "expression": "defined(CPU_40_STYLE)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0001",
+      "line": 95,
+      "kind": "ifdef",
+      "expression": "i386",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0002",
+      "line": 381,
+      "kind": "if",
+      "expression": "defined(CPU_40_STYLE)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0003",
+      "line": 424,
+      "kind": "ifdef",
+      "expression": "i386",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0004",
+      "line": 525,
+      "kind": "if",
+      "expression": "defined(CPU_40_STYLE)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0005",
+      "line": 568,
+      "kind": "if",
+      "expression": "defined(CPU_40_STYLE) && defined(CCPU)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0006",
+      "line": 596,
+      "kind": "if",
+      "expression": "!defined(CPU_40_STYLE)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0007",
+      "line": 602,
+      "kind": "if",
+      "expression": "defined(CPU_40_STYLE)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0008",
+      "line": 612,
+      "kind": "if",
+      "expression": "defined(CPU_40_STYLE)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0009",
+      "line": 618,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0010",
+      "line": 625,
+      "kind": "if",
+      "expression": "defined(CPU_40_STYLE)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0011",
+      "line": 628,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0012",
+      "line": 635,
+      "kind": "if",
+      "expression": "defined(CPU_40_STYLE)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0013",
+      "line": 638,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0014",
+      "line": 649,
+      "kind": "if",
+      "expression": "defined(CPU_40_STYLE)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0015",
+      "line": 652,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0016",
+      "line": 659,
+      "kind": "if",
+      "expression": "DBG",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0017",
+      "line": 794,
+      "kind": "ifdef",
+      "expression": "i386",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0018",
+      "line": 796,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0019",
+      "line": 883,
+      "kind": "ifdef",
+      "expression": "i386",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0020",
+      "line": 885,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0021",
+      "line": 927,
+      "kind": "if",
+      "expression": "!defined(i386) || defined(CPU_40_STYLE)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0022",
+      "line": 1154,
+      "kind": "if",
+      "expression": "defined(CPU_40_STYLE)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0023",
+      "line": 1160,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0024",
+      "line": 1212,
+      "kind": "if",
+      "expression": "defined(CPU_40_STYLE)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0025",
+      "line": 1227,
+      "kind": "if",
+      "expression": "defined(CPU_40_STYLE)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0026",
+      "line": 1229,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0027",
+      "line": 1239,
+      "kind": "if",
+      "expression": "defined(CPU_40_STYLE)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0028",
+      "line": 1258,
+      "kind": "if",
+      "expression": "defined(CPU_40_STYLE)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0029",
+      "line": 1274,
+      "kind": "if",
+      "expression": "defined(CPU_40_STYLE)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0030",
+      "line": 1305,
+      "kind": "ifndef",
+      "expression": "i386",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0031",
+      "line": 1313,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0032",
+      "line": 1351,
+      "kind": "ifndef",
+      "expression": "i386",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0033",
+      "line": 1359,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0034",
+      "line": 1399,
+      "kind": "ifndef",
+      "expression": "i386",
+      "error_only": false
+    }
+  ],
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "07dab09cfc2757e4cee7dbdcff650777b98bf3b557016269e705bb78cc754c96",
+      "hit": [
+        "codex_r688_arm_0000",
+        "codex_r688_arm_0002",
+        "codex_r688_arm_0004",
+        "codex_r688_arm_0005",
+        "codex_r688_arm_0007",
+        "codex_r688_arm_0008",
+        "codex_r688_arm_0010",
+        "codex_r688_arm_0012",
+        "codex_r688_arm_0014",
+        "codex_r688_arm_0018",
+        "codex_r688_arm_0020",
+        "codex_r688_arm_0021",
+        "codex_r688_arm_0022",
+        "codex_r688_arm_0024",
+        "codex_r688_arm_0025",
+        "codex_r688_arm_0027",
+        "codex_r688_arm_0028",
+        "codex_r688_arm_0029",
+        "codex_r688_arm_0030",
+        "codex_r688_arm_0032",
+        "codex_r688_arm_0034"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "07dab09cfc2757e4cee7dbdcff650777b98bf3b557016269e705bb78cc754c96",
+      "hit": [
+        "codex_r688_arm_0000",
+        "codex_r688_arm_0002",
+        "codex_r688_arm_0004",
+        "codex_r688_arm_0005",
+        "codex_r688_arm_0007",
+        "codex_r688_arm_0008",
+        "codex_r688_arm_0010",
+        "codex_r688_arm_0012",
+        "codex_r688_arm_0014",
+        "codex_r688_arm_0018",
+        "codex_r688_arm_0020",
+        "codex_r688_arm_0021",
+        "codex_r688_arm_0022",
+        "codex_r688_arm_0024",
+        "codex_r688_arm_0025",
+        "codex_r688_arm_0027",
+        "codex_r688_arm_0028",
+        "codex_r688_arm_0029",
+        "codex_r688_arm_0030",
+        "codex_r688_arm_0032",
+        "codex_r688_arm_0034"
+      ]
+    }
+  ],
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+  "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+  "after_sha256": "0185fbdf3aff83e0af8ef87d85d251629e49e9d3f4bf0588118ab07d10d12e4c",
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 160,
+      "identical": true,
+      "include_trace_sha256": "d9f127e4c2127b34087a2fefb513f4a5a5b304c0ec79a260b75f7e78eb50d6df",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 160,
+      "identical": true,
+      "include_trace_sha256": "d9f127e4c2127b34087a2fefb513f4a5a5b304c0ec79a260b75f7e78eb50d6df",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "first_level_changes": [
+    "Replace nested conditional within unselected original i386 VdmSetInt21Handler arm with #error and original #line 89.",
+    "Replace two unselected i386 else-arm duplicate interrupt registration code blocks with #error; original selected non-i386 blocks retained."
+  ],
+  "limitations": "Only observed release graph contexts; no runtime semantics or unobserved configurations asserted. Existing selected adaptations preserved."
+}

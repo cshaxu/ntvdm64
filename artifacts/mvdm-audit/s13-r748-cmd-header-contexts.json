@@ -1,0 +1,489 @@
+{
+  "header_sha256": "af87df96738695b4b65bd27a039842acc1ac4645ce9dd51462513c23901ee280",
+  "arms": [
+    {
+      "line": 20,
+      "label": "codex_cmd_h_arm_0000",
+      "kind": "ifdef",
+      "expression": "DOS"
+    },
+    {
+      "line": 25,
+      "label": "codex_cmd_h_arm_0001",
+      "kind": "ifdef",
+      "expression": "OS2_16"
+    },
+    {
+      "line": 29,
+      "label": "codex_cmd_h_arm_0002",
+      "kind": "ifdef",
+      "expression": "OS2_32"
+    },
+    {
+      "line": 41,
+      "label": "codex_cmd_h_arm_0003",
+      "kind": "ifdef",
+      "expression": "WIN_16"
+    },
+    {
+      "line": 47,
+      "label": "codex_cmd_h_arm_0004",
+      "kind": "ifdef",
+      "expression": "WIN_32"
+    },
+    {
+      "line": 54,
+      "label": "codex_cmd_h_arm_0005",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 58,
+      "label": "codex_cmd_h_arm_0006",
+      "kind": "ifdef",
+      "expression": "FLAT_32"
+    },
+    {
+      "line": 59,
+      "label": "codex_cmd_h_arm_0007",
+      "kind": "ifndef",
+      "expression": "i386"
+    },
+    {
+      "line": 61,
+      "label": "codex_cmd_h_arm_0008",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 66,
+      "label": "codex_cmd_h_arm_0009",
+      "kind": "ifdef",
+      "expression": "WIN"
+    },
+    {
+      "line": 71,
+      "label": "codex_cmd_h_arm_0010",
+      "kind": "ifdef",
+      "expression": "SIGNALS"
+    },
+    {
+      "line": 76,
+      "label": "codex_cmd_h_arm_0011",
+      "kind": "ifdef",
+      "expression": "OS2_32"
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmd.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmd.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": true,
+      "hit": [
+        "codex_cmd_h_arm_0005"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "82f3557bfc52fabcc213a8bdc7276774aea972feded3139f57d15f5de4b3fbe5",
+      "normalized_instrumented_include_sha256": "82f3557bfc52fabcc213a8bdc7276774aea972feded3139f57d15f5de4b3fbe5"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmddata.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmddata.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": true,
+      "hit": [
+        "codex_cmd_h_arm_0005"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "02a28b917f321cfff1d9ae5bb334a93fefd6b4e846dcd811b5c57dcc05cb547a",
+      "normalized_instrumented_include_sha256": "02a28b917f321cfff1d9ae5bb334a93fefd6b4e846dcd811b5c57dcc05cb547a"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmddisp.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmddisp.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": true,
+      "hit": [
+        "codex_cmd_h_arm_0005"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "b4d2eca28ccc71ab0304b388a753d36dd43f4ca3168947edc08f89edf654f3a7",
+      "normalized_instrumented_include_sha256": "b4d2eca28ccc71ab0304b388a753d36dd43f4ca3168947edc08f89edf654f3a7"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmdexit.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdexit.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": true,
+      "hit": [
+        "codex_cmd_h_arm_0005"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "b4d2eca28ccc71ab0304b388a753d36dd43f4ca3168947edc08f89edf654f3a7",
+      "normalized_instrumented_include_sha256": "b4d2eca28ccc71ab0304b388a753d36dd43f4ca3168947edc08f89edf654f3a7"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmdexec.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdexec.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": true,
+      "hit": [
+        "codex_cmd_h_arm_0005"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "9f30695dfff9f3b23a9ca250e1c504a046ce707679fbc2afcfed74e8bb8953a6",
+      "normalized_instrumented_include_sha256": "9f30695dfff9f3b23a9ca250e1c504a046ce707679fbc2afcfed74e8bb8953a6"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmdmisc.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdmisc.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": true,
+      "hit": [
+        "codex_cmd_h_arm_0005"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "4aefe37691d90d360188612b3fb61d85547707510e7cdb757dfda0719dfca6af",
+      "normalized_instrumented_include_sha256": "4aefe37691d90d360188612b3fb61d85547707510e7cdb757dfda0719dfca6af"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmdpif.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdpif.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": true,
+      "hit": [
+        "codex_cmd_h_arm_0005"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "f987b3ece07f24b5f93fbbd613ab31737088d10ff080ba3045073e46f1054ef8",
+      "normalized_instrumented_include_sha256": "f987b3ece07f24b5f93fbbd613ab31737088d10ff080ba3045073e46f1054ef8"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmdredir.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdredir.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": true,
+      "hit": [
+        "codex_cmd_h_arm_0005"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "e95ddcdf8dec25a0e1586d2235b56dcea7b70de89416f39ccce4521e2bbb4105",
+      "normalized_instrumented_include_sha256": "e95ddcdf8dec25a0e1586d2235b56dcea7b70de89416f39ccce4521e2bbb4105"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmdconf.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdconf.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": true,
+      "hit": [
+        "codex_cmd_h_arm_0005"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "24ef177b5fc488f0822c4ed18b7a6ec2633704310ee224a3f6fbab9b0f9ae4de",
+      "normalized_instrumented_include_sha256": "24ef177b5fc488f0822c4ed18b7a6ec2633704310ee224a3f6fbab9b0f9ae4de"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmdkeyb.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdkeyb.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_cmd_h_arm_0005"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "31ad9c14fad3fa392541c14e0c3c64b44bcb3ab9221caeef4183877b434769a2",
+      "normalized_instrumented_include_sha256": "31ad9c14fad3fa392541c14e0c3c64b44bcb3ab9221caeef4183877b434769a2"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmdenv.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdenv.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": true,
+      "hit": [
+        "codex_cmd_h_arm_0005"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "2efb45ce3bdb7eb77afad455b7dd100015a05ecbf29ec18e464cebf38e99d4e1",
+      "normalized_instrumented_include_sha256": "2efb45ce3bdb7eb77afad455b7dd100015a05ecbf29ec18e464cebf38e99d4e1"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/adapter-basesrv/mvdm_command_guest_state.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_cmd_h_arm_0005"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "689420a61c0a1434c652e267eed681b454920780940cb8941dc2f91803281c03",
+      "normalized_instrumented_include_sha256": "689420a61c0a1434c652e267eed681b454920780940cb8941dc2f91803281c03"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmddata.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmddata.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": true,
+      "hit": [
+        "codex_cmd_h_arm_0005"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "02a28b917f321cfff1d9ae5bb334a93fefd6b4e846dcd811b5c57dcc05cb547a",
+      "normalized_instrumented_include_sha256": "02a28b917f321cfff1d9ae5bb334a93fefd6b4e846dcd811b5c57dcc05cb547a"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmd.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmd.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": true,
+      "hit": [
+        "codex_cmd_h_arm_0005"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "82f3557bfc52fabcc213a8bdc7276774aea972feded3139f57d15f5de4b3fbe5",
+      "normalized_instrumented_include_sha256": "82f3557bfc52fabcc213a8bdc7276774aea972feded3139f57d15f5de4b3fbe5"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmdexit.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdexit.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": true,
+      "hit": [
+        "codex_cmd_h_arm_0005"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "b4d2eca28ccc71ab0304b388a753d36dd43f4ca3168947edc08f89edf654f3a7",
+      "normalized_instrumented_include_sha256": "b4d2eca28ccc71ab0304b388a753d36dd43f4ca3168947edc08f89edf654f3a7"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmddisp.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmddisp.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": true,
+      "hit": [
+        "codex_cmd_h_arm_0005"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "b4d2eca28ccc71ab0304b388a753d36dd43f4ca3168947edc08f89edf654f3a7",
+      "normalized_instrumented_include_sha256": "b4d2eca28ccc71ab0304b388a753d36dd43f4ca3168947edc08f89edf654f3a7"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmdexec.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdexec.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": true,
+      "hit": [
+        "codex_cmd_h_arm_0005"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "9f30695dfff9f3b23a9ca250e1c504a046ce707679fbc2afcfed74e8bb8953a6",
+      "normalized_instrumented_include_sha256": "9f30695dfff9f3b23a9ca250e1c504a046ce707679fbc2afcfed74e8bb8953a6"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmdpif.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdpif.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": true,
+      "hit": [
+        "codex_cmd_h_arm_0005"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "f987b3ece07f24b5f93fbbd613ab31737088d10ff080ba3045073e46f1054ef8",
+      "normalized_instrumented_include_sha256": "f987b3ece07f24b5f93fbbd613ab31737088d10ff080ba3045073e46f1054ef8"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmdmisc.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdmisc.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": true,
+      "hit": [
+        "codex_cmd_h_arm_0005"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "4aefe37691d90d360188612b3fb61d85547707510e7cdb757dfda0719dfca6af",
+      "normalized_instrumented_include_sha256": "4aefe37691d90d360188612b3fb61d85547707510e7cdb757dfda0719dfca6af"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmdconf.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdconf.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": true,
+      "hit": [
+        "codex_cmd_h_arm_0005"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "24ef177b5fc488f0822c4ed18b7a6ec2633704310ee224a3f6fbab9b0f9ae4de",
+      "normalized_instrumented_include_sha256": "24ef177b5fc488f0822c4ed18b7a6ec2633704310ee224a3f6fbab9b0f9ae4de"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmdredir.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdredir.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": true,
+      "hit": [
+        "codex_cmd_h_arm_0005"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "e95ddcdf8dec25a0e1586d2235b56dcea7b70de89416f39ccce4521e2bbb4105",
+      "normalized_instrumented_include_sha256": "e95ddcdf8dec25a0e1586d2235b56dcea7b70de89416f39ccce4521e2bbb4105"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmdenv.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdenv.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": true,
+      "hit": [
+        "codex_cmd_h_arm_0005"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "2efb45ce3bdb7eb77afad455b7dd100015a05ecbf29ec18e464cebf38e99d4e1",
+      "normalized_instrumented_include_sha256": "2efb45ce3bdb7eb77afad455b7dd100015a05ecbf29ec18e464cebf38e99d4e1"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmdkeyb.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdkeyb.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_cmd_h_arm_0005"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "31ad9c14fad3fa392541c14e0c3c64b44bcb3ab9221caeef4183877b434769a2",
+      "normalized_instrumented_include_sha256": "31ad9c14fad3fa392541c14e0c3c64b44bcb3ab9221caeef4183877b434769a2"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/adapter-basesrv/mvdm_command_guest_state.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_cmd_h_arm_0005"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "689420a61c0a1434c652e267eed681b454920780940cb8941dc2f91803281c03",
+      "normalized_instrumented_include_sha256": "689420a61c0a1434c652e267eed681b454920780940cb8941dc2f91803281c03"
+    }
+  ],
+  "method": "Every observed object was preprocessed twice; temporary overlay header paths replaced with the original identity and Windows slash spellings normalized. No other include-order differences are accepted.",
+  "limits": "Only observed dependency logs and configured release graphs; unobserved include contexts and future macro configurations remain unproven."
+}

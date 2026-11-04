@@ -1,0 +1,123 @@
+{
+  "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+  "source_sha256": "45201ac174ae87bf3b8123870f7cb94ef0aaf5267caf2bc82a56c36eeec62596",
+  "object": "dpmi/dpmiselr",
+  "arms": [
+    {
+      "label": "codex_r688_arm_0000",
+      "line": 39,
+      "kind": "if",
+      "expression": "DBG",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0001",
+      "line": 44,
+      "kind": "ifndef",
+      "expression": "i386",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0002",
+      "line": 241,
+      "kind": "if",
+      "expression": "defined(CPU_40_STYLE)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0003",
+      "line": 247,
+      "kind": "ifndef",
+      "expression": "i386",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0004",
+      "line": 258,
+      "kind": "if",
+      "expression": "DBG",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0005",
+      "line": 261,
+      "kind": "if",
+      "expression": "defined(CPU_40_STYLE)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0006",
+      "line": 308,
+      "kind": "ifdef",
+      "expression": "i386",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0007",
+      "line": 316,
+      "kind": "ifndef",
+      "expression": "i386",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0008",
+      "line": 324,
+      "kind": "ifndef",
+      "expression": "i386",
+      "error_only": false
+    }
+  ],
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "2db6f277fe76e64e050f9dd2226b4467831134a1f111bd91d2dffae38e7b3880",
+      "hit": [
+        "codex_r688_arm_0001",
+        "codex_r688_arm_0002",
+        "codex_r688_arm_0003",
+        "codex_r688_arm_0005",
+        "codex_r688_arm_0007",
+        "codex_r688_arm_0008"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "2db6f277fe76e64e050f9dd2226b4467831134a1f111bd91d2dffae38e7b3880",
+      "hit": [
+        "codex_r688_arm_0001",
+        "codex_r688_arm_0002",
+        "codex_r688_arm_0003",
+        "codex_r688_arm_0005",
+        "codex_r688_arm_0007",
+        "codex_r688_arm_0008"
+      ]
+    }
+  ],
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiselr.c",
+  "original_sha256": "9bdd58d63029de9438633a62934af2b2b868206cb7f06cc868f537e030fbd234",
+  "after_sha256": "4166f23fd74cafc0aacd9cab592c0d218bcabc9b0e600338883c1bf45f708ffe",
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 161,
+      "identical": true,
+      "include_trace_sha256": "f74cd11da6337d28eb8cfadd97c578730191d9a5b48f9483e5377cbd8fb5cbe6",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 161,
+      "identical": true,
+      "include_trace_sha256": "f74cd11da6337d28eb8cfadd97c578730191d9a5b48f9483e5377cbd8fb5cbe6",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "first_level_changes": [
+    "Restore original line 158/161 anchors around previously excluded DBG selector-limit update."
+  ],
+  "limitations": "Observed product release graph contexts only; no runtime semantics asserted. Selected adaptations preserved."
+}

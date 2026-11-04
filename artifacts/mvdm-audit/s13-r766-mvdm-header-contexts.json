@@ -1,0 +1,2596 @@
+{
+  "header_sha256": "98d97184a942a2c67971577522f9d52bd708d6627d45349347cc9c097f56e967",
+  "arms": [
+    {
+      "line": 23,
+      "label": "codex_mvdm_h_arm_0000",
+      "kind": "ifdef",
+      "expression": "H2INC"
+    },
+    {
+      "line": 60,
+      "label": "codex_mvdm_h_arm_0001",
+      "kind": "ifndef",
+      "expression": "MAKEWORD"
+    },
+    {
+      "line": 66,
+      "label": "codex_mvdm_h_arm_0002",
+      "kind": "ifdef",
+      "expression": "i386"
+    },
+    {
+      "line": 72,
+      "label": "codex_mvdm_h_arm_0003",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 73,
+      "label": "codex_mvdm_h_arm_0004",
+      "kind": "if",
+      "expression": "defined(_M_IX86)"
+    },
+    {
+      "line": 79,
+      "label": "codex_mvdm_h_arm_0005",
+      "kind": "else",
+      "expression": ""
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmddata.obj",
+      "probe_index": 5,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmddata.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dem/demfcb.obj",
+      "probe_index": 0,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demfcb.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dem/demmisc.obj",
+      "probe_index": 3,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demmisc.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dem/demsrch.obj",
+      "probe_index": 4,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demsrch.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dem/demhndl.obj",
+      "probe_index": 2,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demhndl.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dem/demgset.obj",
+      "probe_index": 1,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demgset.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmdkeyb.obj",
+      "probe_index": 11,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdkeyb.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmdmisc.obj",
+      "probe_index": 7,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdmisc.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmdexec.obj",
+      "probe_index": 6,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdexec.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmdconf.obj",
+      "probe_index": 10,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdconf.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmdredir.obj",
+      "probe_index": 9,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdredir.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmdpif.obj",
+      "probe_index": 8,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdpif.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmdenv.obj",
+      "probe_index": 12,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdenv.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/xms/xmsblock.obj",
+      "probe_index": 13,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486/xmsblock.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/dpmiint.obj",
+      "probe_index": 16,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmiint.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/debug.obj",
+      "probe_index": 15,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/debug.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/dpmi32.obj",
+      "probe_index": 14,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmi32.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/buffer.obj",
+      "probe_index": 17,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/buffer.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/data.obj",
+      "probe_index": 18,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/data.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/dpmiselr.obj",
+      "probe_index": 19,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmiselr.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/savestat.obj",
+      "probe_index": 23,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/savestat.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/modesw.obj",
+      "probe_index": 21,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/modesw.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/int21map.obj",
+      "probe_index": 20,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/int21map.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/register.obj",
+      "probe_index": 22,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/register.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/stack.obj",
+      "probe_index": 24,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/stack.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/vxd.obj",
+      "probe_index": 25,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/vxd.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/dpmimemr.obj",
+      "probe_index": 27,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmimemr.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/dpmimscr.obj",
+      "probe_index": 28,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmimscr.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/xmem.obj",
+      "probe_index": 26,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/xmem.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/i386_dpmi386.obj",
+      "probe_index": 29,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/i386/dpmi386.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/mvdm-debugger/dbg.obj",
+      "probe_index": 30,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dbg/dbg.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/adapter-softpc/mvdm_softpc_fast_bop.obj",
+      "probe_index": 31,
+      "source": "O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_fast_bop.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/redir/vrnetb.obj",
+      "probe_index": 32,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrnetb.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dem/demfcb.obj",
+      "probe_index": 35,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demfcb.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/redir/vrremote.obj",
+      "probe_index": 33,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrremote.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/tests/cpu40_descriptor_domain_fixture.obj",
+      "probe_index": 34,
+      "source": "O:/repos.hobby/ntvdm64/tests/mvdm-host/dpmi/cpu40_descriptor_domain_fixture.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dem/demhndl.obj",
+      "probe_index": 36,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demhndl.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dem/demgset.obj",
+      "probe_index": 37,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demgset.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dem/demmisc.obj",
+      "probe_index": 38,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demmisc.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmddata.obj",
+      "probe_index": 40,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmddata.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dem/demsrch.obj",
+      "probe_index": 39,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demsrch.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmdexec.obj",
+      "probe_index": 41,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdexec.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmdpif.obj",
+      "probe_index": 42,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdpif.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmdmisc.obj",
+      "probe_index": 43,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdmisc.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmdconf.obj",
+      "probe_index": 44,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdconf.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmdkeyb.obj",
+      "probe_index": 47,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdkeyb.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmdenv.obj",
+      "probe_index": 46,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdenv.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmdredir.obj",
+      "probe_index": 45,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdredir.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/xms/xmsblock.obj",
+      "probe_index": 48,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486/xmsblock.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/debug.obj",
+      "probe_index": 49,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/debug.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/dpmiint.obj",
+      "probe_index": 50,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmiint.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/dpmi32.obj",
+      "probe_index": 51,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmi32.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/data.obj",
+      "probe_index": 52,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/data.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/buffer.obj",
+      "probe_index": 53,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/buffer.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/int21map.obj",
+      "probe_index": 55,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/int21map.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/dpmiselr.obj",
+      "probe_index": 54,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmiselr.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/modesw.obj",
+      "probe_index": 56,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/modesw.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/register.obj",
+      "probe_index": 57,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/register.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/savestat.obj",
+      "probe_index": 58,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/savestat.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/vxd.obj",
+      "probe_index": 59,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/vxd.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/stack.obj",
+      "probe_index": 60,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/stack.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/xmem.obj",
+      "probe_index": 61,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/xmem.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/dpmimscr.obj",
+      "probe_index": 62,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmimscr.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/dpmimemr.obj",
+      "probe_index": 63,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmimemr.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/i386_dpmi386.obj",
+      "probe_index": 64,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/i386/dpmi386.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/mvdm-debugger/dbg.obj",
+      "probe_index": 65,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dbg/dbg.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/adapter-softpc/mvdm_softpc_fast_bop.obj",
+      "probe_index": 66,
+      "source": "O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_fast_bop.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/redir/vrnetb.obj",
+      "probe_index": 67,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrnetb.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/redir/vrremote.obj",
+      "probe_index": 68,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrremote.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wres32.obj",
+      "probe_index": 69,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wres32.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wmsglb.obj",
+      "probe_index": 70,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsglb.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wgman.obj",
+      "probe_index": 71,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgman.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wmtbl32.obj",
+      "probe_index": 72,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmtbl32.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wgprnset.obj",
+      "probe_index": 74,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgprnset.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wcntl32.obj",
+      "probe_index": 73,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wcntl32.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wmsgem.obj",
+      "probe_index": 75,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsgem.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wgdi31.obj",
+      "probe_index": 76,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgdi31.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wmsgbm.obj",
+      "probe_index": 77,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsgbm.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wgfont.obj",
+      "probe_index": 78,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgfont.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/mapembed.obj",
+      "probe_index": 79,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/mapembed.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wgpal.obj",
+      "probe_index": 80,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgpal.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wcall32.obj",
+      "probe_index": 81,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wcall32.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wgmeta.obj",
+      "probe_index": 82,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgmeta.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wres16.obj",
+      "probe_index": 83,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wres16.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/walias.obj",
+      "probe_index": 84,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/walias.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wdde.obj",
+      "probe_index": 86,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wdde.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wmsgcb.obj",
+      "probe_index": 85,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsgcb.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wow32.obj",
+      "probe_index": 87,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wow32.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wstruc.obj",
+      "probe_index": 89,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wstruc.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wmsgsbm.obj",
+      "probe_index": 88,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsgsbm.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wcall16.obj",
+      "probe_index": 90,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wcall16.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wowtbl.obj",
+      "probe_index": 91,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wowtbl.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wmdisp32.obj",
+      "probe_index": 92,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmdisp32.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wgdi.obj",
+      "probe_index": 93,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgdi.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wgtext.obj",
+      "probe_index": 95,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgtext.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wmsg16.obj",
+      "probe_index": 94,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsg16.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wkbman.obj",
+      "probe_index": 96,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkbman.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wkmem.obj",
+      "probe_index": 97,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkmem.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wkgthunk.obj",
+      "probe_index": 98,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkgthunk.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wkman.obj",
+      "probe_index": 99,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkman.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wkernel.obj",
+      "probe_index": 101,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkernel.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wkfileio.obj",
+      "probe_index": 100,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkfileio.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wsman.obj",
+      "probe_index": 102,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wsman.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wuser31.obj",
+      "probe_index": 104,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuser31.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wow32fax.obj",
+      "probe_index": 103,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wow32fax.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wshell.obj",
+      "probe_index": 105,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wshell.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wucaret.obj",
+      "probe_index": 107,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wucaret.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wuman.obj",
+      "probe_index": 106,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuman.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wuclass.obj",
+      "probe_index": 108,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuclass.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wucomm.obj",
+      "probe_index": 109,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wucomm.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wuclip.obj",
+      "probe_index": 110,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuclip.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wucursor.obj",
+      "probe_index": 111,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wucursor.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wulang.obj",
+      "probe_index": 114,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wulang.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wudlg.obj",
+      "probe_index": 112,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wudlg.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wuhook.obj",
+      "probe_index": 113,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuhook.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wumenu.obj",
+      "probe_index": 115,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wumenu.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wumsg.obj",
+      "probe_index": 116,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wumsg.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wuser.obj",
+      "probe_index": 117,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuser.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wutext.obj",
+      "probe_index": 118,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wutext.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wutmr.obj",
+      "probe_index": 119,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wutmr.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wuwind.obj",
+      "probe_index": 120,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuwind.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wowhooks.obj",
+      "probe_index": 121,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wowhooks.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wdos.obj",
+      "probe_index": 122,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wdos.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wreldc.obj",
+      "probe_index": 123,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wreldc.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wcuricon.obj",
+      "probe_index": 124,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wcuricon.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wsubcls.obj",
+      "probe_index": 125,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wsubcls.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wmmedia.obj",
+      "probe_index": 126,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmedia.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wmmedia1.obj",
+      "probe_index": 127,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmedia1.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wmmedia2.obj",
+      "probe_index": 128,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmedia2.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wmmstruc.obj",
+      "probe_index": 129,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmstruc.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wmmstru2.obj",
+      "probe_index": 130,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmstru2.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wmmstru1.obj",
+      "probe_index": 132,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmstru1.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/walloc16.obj",
+      "probe_index": 131,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/walloc16.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/waccel.obj",
+      "probe_index": 133,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/waccel.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wmmalias.obj",
+      "probe_index": 134,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmalias.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wsext.obj",
+      "probe_index": 135,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wsext.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wsdata.obj",
+      "probe_index": 136,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wsdata.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wsraw.obj",
+      "probe_index": 137,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wsraw.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wheap.obj",
+      "probe_index": 138,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wheap.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wcommdlg.obj",
+      "probe_index": 140,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wcommdlg.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wthman.obj",
+      "probe_index": 139,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wthman.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wdib.obj",
+      "probe_index": 141,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wdib.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wusercli.obj",
+      "probe_index": 142,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wusercli.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wspool.obj",
+      "probe_index": 143,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wspool.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wole2.obj",
+      "probe_index": 144,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wole2.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wparam.obj",
+      "probe_index": 145,
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wparam.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wow32-dll/wow_hook_callback.obj",
+      "probe_index": 146,
+      "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_hook_callback.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wow32-dll/wow_shell_callback.obj",
+      "probe_index": 147,
+      "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_shell_callback.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wow32-dll/wow_task_cleanup_entry.obj",
+      "probe_index": 148,
+      "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_task_cleanup_entry.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wow32-dll/wow_idle_hook_binding.obj",
+      "probe_index": 149,
+      "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_idle_hook_binding.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wow32-dll/wow_common_dialog_calls.obj",
+      "probe_index": 150,
+      "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_common_dialog_calls.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wow32-dll/wow_message_lifetime.obj",
+      "probe_index": 151,
+      "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_message_lifetime.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wow32-dll/wow_user_thunk_scope.obj",
+      "probe_index": 152,
+      "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_user_thunk_scope.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wow32-dll/wow_user_native_extension.obj",
+      "probe_index": 153,
+      "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_user_native_extension.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wow32-dll/wow_launch_identity.obj",
+      "probe_index": 154,
+      "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_launch_identity.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wow32-dll/wow_task_termination.obj",
+      "probe_index": 155,
+      "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_task_termination.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wow32-dll/wow_registry_binding.obj",
+      "probe_index": 156,
+      "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_registry_binding.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/tests/wow-boundary-adapter.obj",
+      "probe_index": 157,
+      "source": "O:/repos.hobby/ntvdm64/tests/build/wow_thunk_macro_boundary.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/tests/wow-boundary-thunk.obj",
+      "probe_index": 158,
+      "source": "O:/repos.hobby/ntvdm64/tests/build/wow_thunk_macro_boundary.c",
+      "exits": [
+        0,
+        0
+      ],
+      "hit": [
+        "codex_mvdm_h_arm_0003",
+        "codex_mvdm_h_arm_0004"
+      ],
+      "same_include_order_normalized": true
+    }
+  ],
+  "path": "src/mvdm-host/inc/mvdm.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\mvdm.h",
+  "original_sha256": "9f450f2eb6ee684763f7f9e27ee43c80e7e24d1e5a87ff254fbd7da4fcd1cdb7",
+  "after_sha256": "da42c5bffd3cb0b567024fc59d006f523e456d292735bf014f792b602aa6fd77",
+  "first_level_changes": [
+    "Replace unselected original i386 arm by #error; selected _M_IX86 adaptation under non-i386 remains.",
+    "Restore original line 68/69/71 anchors for already excluded MAKEWORD branch."
+  ],
+  "limitations": "Evidence covers observed release and test object contexts; graph inventory may not include unsupported configurations. No runtime behavior claimed."
+}

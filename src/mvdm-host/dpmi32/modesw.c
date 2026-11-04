@@ -203,6 +203,7 @@ Return Value:
 --*/
 {
 
+#line 49
 #if defined(i386)
 #error DIVERGENCE MVDM-HOST-DIV-619: unsupported i386 kernel VDM host path
 #else
@@ -275,6 +276,7 @@ Return Value:
 
 --*/
 {
+#line 97
 #if defined(i386)
 #error DIVERGENCE MVDM-HOST-DIV-619: unsupported i386 kernel VDM host path
 #else

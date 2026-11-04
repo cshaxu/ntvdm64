@@ -2,7 +2,7 @@
   "baseline_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r379.zip",
   "graph_inventory": "s13-r473-all-graph-coverage.json",
   "total_observed_files": 1057,
-  "completed_files": 852,
+  "completed_files": 865,
   "records": [
     {
       "path": "src/mvdm-host/dbg/dbg.c",
@@ -37,7 +37,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r749-cmd-header-branches.json"
     },
     {
       "path": "src/mvdm-host/dos/command/cmdconf.c",
@@ -185,8 +186,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r645-dbg-guard-lines.json"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r645-dbg-guard-lines.json",
+      "evidence": "s13-r752-dem-header-branches.json"
     },
     {
       "path": "src/mvdm-host/dos/dem/demdasd.c",
@@ -443,51 +445,56 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r753-dpmi32-conditions.json"
     },
     {
       "path": "src/mvdm-host/dpmi32/dpmi32p.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmi32p.h",
-      "current_sha256": "0bc1801df122b0d848a7e06250055c73fb27877227ff50adec797af752120d56",
+      "current_sha256": "4980f5f7d98599e98f3a32c2b51542d93fa99f9984ccd982b519f873258d5a41",
       "original_sha256": "c5734d7842c34ae436cd12a5b52ad76d4fab88940a64f3af7e5fdc6fbc92e4a9",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r755-dpmi32p-contexts.json"
     },
     {
       "path": "src/mvdm-host/dpmi32/dpmidata.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmidata.h",
-      "current_sha256": "7cacd3f941265c3aaf54d4179c525fee0b6fe37ef73a53a13173c513de00fc48",
+      "current_sha256": "f6c1ad552fb6a1782f897d82dc1ee6926132c053835f7a688d8e49d4d6389d4d",
       "original_sha256": "f9772482513601c2e316e097a92485864557af77010e77285d725d903a0fd7b2",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r757-dpmidata-contexts.json"
     },
     {
       "path": "src/mvdm-host/dpmi32/dpmiint.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
-      "current_sha256": "556ed5ec620a7339c9464d5d25c7306e6651556fd8c51a35ebf2b20ad5f1711f",
+      "current_sha256": "0185fbdf3aff83e0af8ef87d85d251629e49e9d3f4bf0588118ab07d10d12e4c",
       "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r758-dpmiint-conditions.json"
     },
     {
       "path": "src/mvdm-host/dpmi32/dpmiint.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.h",
-      "current_sha256": "2f6c8f88fccaad6847b903d9c25d28bbd65494541eda7b9c9e3679e5b2e27eaf",
+      "current_sha256": "93ff578e59baa0d11ead3cf1d246c2fb89e50ffbb876e1bdca4b14fb52568a33",
       "original_sha256": "245976d103b8dd3b918b008b85e9e94b3ec245fb9119c28b897f936a94b69b5e",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r760-dpmiint-header-contexts.json"
     },
     {
       "path": "src/mvdm-host/dpmi32/dpmimemr.c",
@@ -498,7 +505,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r761-dpmimemr-conditions.json"
     },
     {
       "path": "src/mvdm-host/dpmi32/dpmimscr.c",
@@ -514,13 +522,14 @@
     {
       "path": "src/mvdm-host/dpmi32/dpmiselr.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiselr.c",
-      "current_sha256": "45201ac174ae87bf3b8123870f7cb94ef0aaf5267caf2bc82a56c36eeec62596",
+      "current_sha256": "4166f23fd74cafc0aacd9cab592c0d218bcabc9b0e600338883c1bf45f708ffe",
       "original_sha256": "9bdd58d63029de9438633a62934af2b2b868206cb7f06cc868f537e030fbd234",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r762-dpmiselr-conditions.json"
     },
     {
       "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
@@ -531,7 +540,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r763-dpmi386-conditions.json"
     },
     {
       "path": "src/mvdm-host/dpmi32/int21map.c",
@@ -549,13 +559,14 @@
     {
       "path": "src/mvdm-host/dpmi32/modesw.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\modesw.c",
-      "current_sha256": "5c45cbb888e2f32b099c165cb9db74019892ea98f4ad1998238dfe3a1f72bff0",
+      "current_sha256": "178f7b6d8d71d56401f2b614daa17f6188d883c146b76531b7a2d18b4c96ef70",
       "original_sha256": "aa7157e2a39fead41e42e87f87e332e9464bf69a668671de976c69637ce06a67",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r764-modesw-conditions.json"
     },
     {
       "path": "src/mvdm-host/dpmi32/precomp.h",
@@ -814,14 +825,15 @@
     {
       "path": "src/mvdm-host/inc/mvdm.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\mvdm.h",
-      "current_sha256": "98d97184a942a2c67971577522f9d52bd708d6627d45349347cc9c097f56e967",
+      "current_sha256": "da42c5bffd3cb0b567024fc59d006f523e456d292735bf014f792b602aa6fd77",
       "original_sha256": "9f450f2eb6ee684763f7f9e27ee43c80e7e24d1e5a87ff254fbd7da4fcd1cdb7",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r766-mvdm-header-contexts.json"
     },
     {
       "path": "src/mvdm-host/inc/netb.h",
@@ -885,7 +897,7 @@
     {
       "path": "src/mvdm-host/inc/softpc.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\softpc.h",
-      "current_sha256": "ade4dc8485cd25648975a1d2e39343990f61436146f95a1967a0075ee190a987",
+      "current_sha256": "300a9a92ec835a8aaa115837c925f6c6edc21806e3798457f1d0be488295ae83",
       "original_sha256": "1e6fbd5f67aa04749d7896bd0109fe45daa22e691839d1261bbc3f039924bd9b",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
@@ -893,7 +905,8 @@
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r768-softpc-header-contexts.json"
     },
     {
       "path": "src/mvdm-host/inc/suballoc.h",

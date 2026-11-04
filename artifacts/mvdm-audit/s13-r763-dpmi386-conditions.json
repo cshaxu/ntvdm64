@@ -1,0 +1,80 @@
+{
+  "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
+  "source_sha256": "36aa9653d2da9c2b0e3487cfb58064aa1c850618cddcfb912d18c0636ae6eaa3",
+  "object": "dpmi/i386_dpmi386",
+  "arms": [
+    {
+      "label": "codex_r688_arm_0000",
+      "line": 30,
+      "kind": "if",
+      "expression": "defined(CPU_40_STYLE)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0001",
+      "line": 64,
+      "kind": "if",
+      "expression": "defined(CPU_40_STYLE)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0002",
+      "line": 70,
+      "kind": "if",
+      "expression": "defined(CPU_40_STYLE)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0003",
+      "line": 74,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    }
+  ],
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "c791b1ed1b66d90d2debbda7057d0d2bb6941b5174b3e1dec6f9284435de0b27",
+      "hit": [
+        "codex_r688_arm_0000",
+        "codex_r688_arm_0001",
+        "codex_r688_arm_0002"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "c791b1ed1b66d90d2debbda7057d0d2bb6941b5174b3e1dec6f9284435de0b27",
+      "hit": [
+        "codex_r688_arm_0000",
+        "codex_r688_arm_0001",
+        "codex_r688_arm_0002"
+      ]
+    }
+  ],
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\i386\\dpmi386.c",
+  "original_sha256": "e47bd6f7a1f48ba94022c9d5ed78714c269f751737f8f69711fc44c06523f8f0",
+  "after_sha256": "36aa9653d2da9c2b0e3487cfb58064aa1c850618cddcfb912d18c0636ae6eaa3",
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 159,
+      "identical": true,
+      "include_trace_sha256": "406251b2c06fe545710048701f6289e64ab9a0c614d3ea20fcd62f22c7c7deb4",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 159,
+      "identical": true,
+      "include_trace_sha256": "406251b2c06fe545710048701f6289e64ab9a0c614d3ea20fcd62f22c7c7deb4",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "review": "Original has no conditional groups; selected local CPU40 debug service preserved; alternate CPU path is already #error. Existing unconditional kernel-monitor removal governed by DIV-281 and outside first-level conditional scope. No source change.",
+  "limitations": "Observed product graph contexts only; no runtime equivalence claim."
+}

@@ -23,8 +23,10 @@ Revision History:
 
 
 #if DBG
+#line 26
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
+#line 29
 #ifdef i386
 #define GET_SELECTOR_LIMIT(Selector, Limit) _asm      \
          {                                          \

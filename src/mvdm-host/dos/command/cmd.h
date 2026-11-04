@@ -18,17 +18,22 @@
 */
 
 #ifdef DOS
+#line 21
 #error DIVERGENCE MVDM-HOST-DIV-600: Unsupported original DOS/Win16 host profile
 #endif
 #line 23
 
 #ifdef OS2_16
+#line 25
 #error DIVERGENCE MVDM-HOST-DIV-528: OS2_16 platform branch is not selected; see mirror register.
 #endif
+#line 28
 
 #ifdef OS2_32
+#line 30
 #error DIVERGENCE MVDM-HOST-DIV-528: OS2_32 platform branch is not selected; see mirror register.
 #endif
+#line 33
 
 #include <stdarg.h>
 #include <stdio.h>
@@ -43,40 +48,39 @@
 #error DIVERGENCE MVDM-HOST-DIV-600: Unsupported original DOS/Win16 host profile
 #endif
 #line 45
-#line 43
 
 #ifdef WIN_32
-#define WIN
-#define FLAT_32
-#define TRUE_IF_WIN32	1
-#include <nt.h>
-#include <ntrtl.h>
-#include <nturtl.h>
+#line 47
+#error Unsupported excluded original command host profile
 #else
+#line 54
 #define TRUE_IF_WIN32	0
 #endif
+#line 56
 
 #ifdef FLAT_32
-#ifndef i386
-#define ALIGN_32
-#else
-#define NOALIGN_32
+#line 58
+#error Unsupported excluded original command host profile
 #endif
-#endif
+#line 64
 
 #ifdef WIN
-#define _WINDOWS
-#include <windows.h>
+#line 66
+#error Unsupported excluded original command host profile
 #endif
+#line 69
 
 #ifdef SIGNALS
+#line 71
 #error DIVERGENCE MVDM-HOST-DIV-600: Unsupported original DOS/Win16 host profile
 #endif
-#line 72
+#line 74
 
 #ifdef OS2_32
+#line 76
 #error DIVERGENCE MVDM-HOST-DIV-528: OS2_32 platform branch is not selected; see mirror register.
 #endif
+#line 79
 
 #include <vdmapi.h>
 

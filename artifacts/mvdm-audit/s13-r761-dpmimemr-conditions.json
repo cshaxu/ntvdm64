@@ -1,0 +1,89 @@
+{
+  "path": "src/mvdm-host/dpmi32/dpmimemr.c",
+  "source_sha256": "8c4d1a0ad9b2cbf86be4c5f44a18661196bf2caff4cb14c382ba529861e43c33",
+  "object": "dpmi/dpmimemr",
+  "arms": [
+    {
+      "label": "codex_r688_arm_0000",
+      "line": 64,
+      "kind": "if",
+      "expression": "defined(CPU_40_STYLE)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0001",
+      "line": 123,
+      "kind": "if",
+      "expression": "defined(CPU_40_STYLE)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0002",
+      "line": 181,
+      "kind": "if",
+      "expression": "defined(CPU_40_STYLE)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0003",
+      "line": 262,
+      "kind": "if",
+      "expression": "defined(CPU_40_STYLE)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0004",
+      "line": 265,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    }
+  ],
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "a1c534727d9286adafebc244ea6d77c00fb0d342bbcbec2b80eb7efdbd72e26e",
+      "hit": [
+        "codex_r688_arm_0000",
+        "codex_r688_arm_0001",
+        "codex_r688_arm_0002",
+        "codex_r688_arm_0003"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "a1c534727d9286adafebc244ea6d77c00fb0d342bbcbec2b80eb7efdbd72e26e",
+      "hit": [
+        "codex_r688_arm_0000",
+        "codex_r688_arm_0001",
+        "codex_r688_arm_0002",
+        "codex_r688_arm_0003"
+      ]
+    }
+  ],
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmimemr.c",
+  "original_sha256": "a21e43830622d5d04bfcd018c6751cdc7a3de54c166621731494363c8d5a60ae",
+  "after_sha256": "8c4d1a0ad9b2cbf86be4c5f44a18661196bf2caff4cb14c382ba529861e43c33",
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmimemr.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 159,
+      "identical": true,
+      "include_trace_sha256": "b53d08eb362f20811f13466122e4ac4846dfde111e725b9c97fe938fb37aca24",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmimemr.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 159,
+      "identical": true,
+      "include_trace_sha256": "b53d08eb362f20811f13466122e4ac4846dfde111e725b9c97fe938fb37aca24",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "review": "Original has no conditional groups; local CPU40 selections observed in both contexts, non-CPU40 alternative already #error. No source change. DIV-224 and DIV-513 retained.",
+  "limitations": "Observed release graph contexts only; no runtime equivalence claim."
+}

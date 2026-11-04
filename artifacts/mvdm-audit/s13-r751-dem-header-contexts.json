@@ -1,0 +1,795 @@
+{
+  "header_sha256": "f32589f3485db19799555545f872601e43f522d9db044a86d419a0e16c551e00",
+  "arms": [
+    {
+      "line": 8,
+      "label": "codex_dem_h_arm_0000",
+      "kind": "ifndef",
+      "expression": "_DEMINCLUDED_"
+    },
+    {
+      "line": 23,
+      "label": "codex_dem_h_arm_0001",
+      "kind": "ifdef",
+      "expression": "DOS"
+    },
+    {
+      "line": 27,
+      "label": "codex_dem_h_arm_0002",
+      "kind": "ifdef",
+      "expression": "OS2_16"
+    },
+    {
+      "line": 31,
+      "label": "codex_dem_h_arm_0003",
+      "kind": "ifdef",
+      "expression": "OS2_32"
+    },
+    {
+      "line": 42,
+      "label": "codex_dem_h_arm_0004",
+      "kind": "ifdef",
+      "expression": "WIN_16"
+    },
+    {
+      "line": 47,
+      "label": "codex_dem_h_arm_0005",
+      "kind": "ifdef",
+      "expression": "WIN_32"
+    },
+    {
+      "line": 55,
+      "label": "codex_dem_h_arm_0006",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 59,
+      "label": "codex_dem_h_arm_0007",
+      "kind": "ifdef",
+      "expression": "FLAT_32"
+    },
+    {
+      "line": 60,
+      "label": "codex_dem_h_arm_0008",
+      "kind": "ifndef",
+      "expression": "i386"
+    },
+    {
+      "line": 62,
+      "label": "codex_dem_h_arm_0009",
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 67,
+      "label": "codex_dem_h_arm_0010",
+      "kind": "ifdef",
+      "expression": "WIN"
+    },
+    {
+      "line": 72,
+      "label": "codex_dem_h_arm_0011",
+      "kind": "ifdef",
+      "expression": "SIGNALS"
+    },
+    {
+      "line": 77,
+      "label": "codex_dem_h_arm_0012",
+      "kind": "ifdef",
+      "expression": "OS2_32"
+    },
+    {
+      "line": 143,
+      "label": "codex_dem_h_arm_0013",
+      "kind": "if",
+      "expression": "DEVL"
+    },
+    {
+      "line": 248,
+      "label": "codex_dem_h_arm_0014",
+      "kind": "if",
+      "expression": "DBG"
+    },
+    {
+      "line": 251,
+      "label": "codex_dem_h_arm_0015",
+      "kind": "else",
+      "expression": ""
+    }
+  ],
+  "records": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dem/dem.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/dem.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "358ee15e21f5ad5238e0efab7e879a567cf654eaafd1976a630b1f89cb5dac98",
+      "normalized_instrumented_include_sha256": "358ee15e21f5ad5238e0efab7e879a567cf654eaafd1976a630b1f89cb5dac98"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dem/demfcb.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demfcb.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "c059c624d9d533b80ea873bb8b3375e1496c4f1f0a3412434973015326f7fe69",
+      "normalized_instrumented_include_sha256": "c059c624d9d533b80ea873bb8b3375e1496c4f1f0a3412434973015326f7fe69"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dem/demdata.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demdata.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "85dc7295cde1fb04a3d91510fbd591416bc3a3ca3e54ed1d8ca8260ef06e01f2",
+      "normalized_instrumented_include_sha256": "85dc7295cde1fb04a3d91510fbd591416bc3a3ca3e54ed1d8ca8260ef06e01f2"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dem/demdir.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demdir.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "9b5dfc3279f5383af4908b4b25bff76fb60305d6e8defd216285094a812e2aef",
+      "normalized_instrumented_include_sha256": "9b5dfc3279f5383af4908b4b25bff76fb60305d6e8defd216285094a812e2aef"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dem/demdisp.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demdisp.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "e0b05ed0246538a761ee1971491c8bc247e57b95f3f5caf03848ee31bb6b0b2b",
+      "normalized_instrumented_include_sha256": "e0b05ed0246538a761ee1971491c8bc247e57b95f3f5caf03848ee31bb6b0b2b"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dem/demerror.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demerror.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "9b5dfc3279f5383af4908b4b25bff76fb60305d6e8defd216285094a812e2aef",
+      "normalized_instrumented_include_sha256": "9b5dfc3279f5383af4908b4b25bff76fb60305d6e8defd216285094a812e2aef"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dem/demfile.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demfile.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "3efc310bd6e634aadbd837f4803f87371a2c13c0182e0ee8f68b778493d271d5",
+      "normalized_instrumented_include_sha256": "3efc310bd6e634aadbd837f4803f87371a2c13c0182e0ee8f68b778493d271d5"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dem/demgset.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demgset.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "c1d6409615d7ca6274631c175683f8c42f8629d6c01138301a7242c7ed1a819c",
+      "normalized_instrumented_include_sha256": "c1d6409615d7ca6274631c175683f8c42f8629d6c01138301a7242c7ed1a819c"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dem/demioctl.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demioctl.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "a8a781e7fa7d5a482a84544ddf96ba9ddaf24656b4c3ea1d9bed90d088a63beb",
+      "normalized_instrumented_include_sha256": "a8a781e7fa7d5a482a84544ddf96ba9ddaf24656b4c3ea1d9bed90d088a63beb"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dem/demhndl.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demhndl.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "f85e875fec380da7469a1765beb1daedae69cd9b2d63468018206cfc9dd7618a",
+      "normalized_instrumented_include_sha256": "f85e875fec380da7469a1765beb1daedae69cd9b2d63468018206cfc9dd7618a"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dem/demlock.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demlock.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "9b5dfc3279f5383af4908b4b25bff76fb60305d6e8defd216285094a812e2aef",
+      "normalized_instrumented_include_sha256": "9b5dfc3279f5383af4908b4b25bff76fb60305d6e8defd216285094a812e2aef"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dem/demmisc.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demmisc.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "56a944c1c23896e77c2d6a9b8341900c6d20f01a275d746f12f8db71ba306c3f",
+      "normalized_instrumented_include_sha256": "56a944c1c23896e77c2d6a9b8341900c6d20f01a275d746f12f8db71ba306c3f"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dem/demlabel.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demlabel.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "9b5dfc3279f5383af4908b4b25bff76fb60305d6e8defd216285094a812e2aef",
+      "normalized_instrumented_include_sha256": "9b5dfc3279f5383af4908b4b25bff76fb60305d6e8defd216285094a812e2aef"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dem/demdasd.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demdasd.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "c662349bb9e5d99f473de694f21aabf61055a35ee60e1729f47229d08a49a687",
+      "normalized_instrumented_include_sha256": "c662349bb9e5d99f473de694f21aabf61055a35ee60e1729f47229d08a49a687"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dem/demsrch.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demsrch.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "48922084a3120f9bf8f144f26174e9548d387e3d30364c8875e2b79dba0e0dad",
+      "normalized_instrumented_include_sha256": "48922084a3120f9bf8f144f26174e9548d387e3d30364c8875e2b79dba0e0dad"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dem/dem.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/dem.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "358ee15e21f5ad5238e0efab7e879a567cf654eaafd1976a630b1f89cb5dac98",
+      "normalized_instrumented_include_sha256": "358ee15e21f5ad5238e0efab7e879a567cf654eaafd1976a630b1f89cb5dac98"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dem/demfcb.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demfcb.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "c059c624d9d533b80ea873bb8b3375e1496c4f1f0a3412434973015326f7fe69",
+      "normalized_instrumented_include_sha256": "c059c624d9d533b80ea873bb8b3375e1496c4f1f0a3412434973015326f7fe69"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dem/demdata.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demdata.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "85dc7295cde1fb04a3d91510fbd591416bc3a3ca3e54ed1d8ca8260ef06e01f2",
+      "normalized_instrumented_include_sha256": "85dc7295cde1fb04a3d91510fbd591416bc3a3ca3e54ed1d8ca8260ef06e01f2"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dem/demdir.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demdir.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "9b5dfc3279f5383af4908b4b25bff76fb60305d6e8defd216285094a812e2aef",
+      "normalized_instrumented_include_sha256": "9b5dfc3279f5383af4908b4b25bff76fb60305d6e8defd216285094a812e2aef"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dem/demdisp.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demdisp.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "e0b05ed0246538a761ee1971491c8bc247e57b95f3f5caf03848ee31bb6b0b2b",
+      "normalized_instrumented_include_sha256": "e0b05ed0246538a761ee1971491c8bc247e57b95f3f5caf03848ee31bb6b0b2b"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dem/demerror.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demerror.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "9b5dfc3279f5383af4908b4b25bff76fb60305d6e8defd216285094a812e2aef",
+      "normalized_instrumented_include_sha256": "9b5dfc3279f5383af4908b4b25bff76fb60305d6e8defd216285094a812e2aef"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dem/demhndl.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demhndl.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "f85e875fec380da7469a1765beb1daedae69cd9b2d63468018206cfc9dd7618a",
+      "normalized_instrumented_include_sha256": "f85e875fec380da7469a1765beb1daedae69cd9b2d63468018206cfc9dd7618a"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dem/demfile.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demfile.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "3efc310bd6e634aadbd837f4803f87371a2c13c0182e0ee8f68b778493d271d5",
+      "normalized_instrumented_include_sha256": "3efc310bd6e634aadbd837f4803f87371a2c13c0182e0ee8f68b778493d271d5"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dem/demgset.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demgset.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "c1d6409615d7ca6274631c175683f8c42f8629d6c01138301a7242c7ed1a819c",
+      "normalized_instrumented_include_sha256": "c1d6409615d7ca6274631c175683f8c42f8629d6c01138301a7242c7ed1a819c"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dem/demioctl.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demioctl.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "a8a781e7fa7d5a482a84544ddf96ba9ddaf24656b4c3ea1d9bed90d088a63beb",
+      "normalized_instrumented_include_sha256": "a8a781e7fa7d5a482a84544ddf96ba9ddaf24656b4c3ea1d9bed90d088a63beb"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dem/demlock.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demlock.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "9b5dfc3279f5383af4908b4b25bff76fb60305d6e8defd216285094a812e2aef",
+      "normalized_instrumented_include_sha256": "9b5dfc3279f5383af4908b4b25bff76fb60305d6e8defd216285094a812e2aef"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dem/demmisc.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demmisc.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "56a944c1c23896e77c2d6a9b8341900c6d20f01a275d746f12f8db71ba306c3f",
+      "normalized_instrumented_include_sha256": "56a944c1c23896e77c2d6a9b8341900c6d20f01a275d746f12f8db71ba306c3f"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dem/demlabel.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demlabel.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "9b5dfc3279f5383af4908b4b25bff76fb60305d6e8defd216285094a812e2aef",
+      "normalized_instrumented_include_sha256": "9b5dfc3279f5383af4908b4b25bff76fb60305d6e8defd216285094a812e2aef"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dem/demsrch.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demsrch.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "48922084a3120f9bf8f144f26174e9548d387e3d30364c8875e2b79dba0e0dad",
+      "normalized_instrumented_include_sha256": "48922084a3120f9bf8f144f26174e9548d387e3d30364c8875e2b79dba0e0dad"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dem/demdasd.obj",
+      "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demdasd.c",
+      "exits": [
+        0,
+        0
+      ],
+      "same_include_order": false,
+      "hit": [
+        "codex_dem_h_arm_0000",
+        "codex_dem_h_arm_0005",
+        "codex_dem_h_arm_0007",
+        "codex_dem_h_arm_0008",
+        "codex_dem_h_arm_0010",
+        "codex_dem_h_arm_0013",
+        "codex_dem_h_arm_0015"
+      ],
+      "normalized_include_order_identical": true,
+      "normalized_original_include_sha256": "c662349bb9e5d99f473de694f21aabf61055a35ee60e1729f47229d08a49a687",
+      "normalized_instrumented_include_sha256": "c662349bb9e5d99f473de694f21aabf61055a35ee60e1729f47229d08a49a687"
+    }
+  ],
+  "method": "Preprocessed each observed object twice; temporary overlay header paths normalized to original identity and slash spellings normalized.",
+  "limits": "Only observed dependency logs and configured release graphs; other inclusion contexts remain unproven."
+}

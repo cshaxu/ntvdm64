@@ -1,0 +1,116 @@
+{
+  "path": "src/mvdm-host/dpmi32/modesw.c",
+  "source_sha256": "5c45cbb888e2f32b099c165cb9db74019892ea98f4ad1998238dfe3a1f72bff0",
+  "object": "dpmi/modesw",
+  "arms": [
+    {
+      "label": "codex_r688_arm_0000",
+      "line": 166,
+      "kind": "ifndef",
+      "expression": "i386",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0001",
+      "line": 206,
+      "kind": "if",
+      "expression": "defined(i386)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0002",
+      "line": 208,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0003",
+      "line": 231,
+      "kind": "ifndef",
+      "expression": "i386",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0004",
+      "line": 238,
+      "kind": "ifndef",
+      "expression": "i386",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0005",
+      "line": 278,
+      "kind": "if",
+      "expression": "defined(i386)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0006",
+      "line": 280,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0007",
+      "line": 296,
+      "kind": "ifndef",
+      "expression": "i386",
+      "error_only": false
+    }
+  ],
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "5b833a5b07d95d6deede1956c0b8ccfcbab44207e3aa99f83bbb68b5dd24b14e",
+      "hit": [
+        "codex_r688_arm_0000",
+        "codex_r688_arm_0002",
+        "codex_r688_arm_0003",
+        "codex_r688_arm_0004",
+        "codex_r688_arm_0006",
+        "codex_r688_arm_0007"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "5b833a5b07d95d6deede1956c0b8ccfcbab44207e3aa99f83bbb68b5dd24b14e",
+      "hit": [
+        "codex_r688_arm_0000",
+        "codex_r688_arm_0002",
+        "codex_r688_arm_0003",
+        "codex_r688_arm_0004",
+        "codex_r688_arm_0006",
+        "codex_r688_arm_0007"
+      ]
+    }
+  ],
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\modesw.c",
+  "original_sha256": "aa7157e2a39fead41e42e87f87e332e9464bf69a668671de976c69637ce06a67",
+  "after_sha256": "178f7b6d8d71d56401f2b614daa17f6188d883c146b76531b7a2d18b4c96ef70",
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 160,
+      "identical": true,
+      "include_trace_sha256": "a47d7c24dc84d2e1bd3c359bb3727951603b129e155531ef7c24a716f5a10359",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 160,
+      "identical": true,
+      "include_trace_sha256": "a47d7c24dc84d2e1bd3c359bb3727951603b129e155531ef7c24a716f5a10359",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "first_level_changes": [
+    "Restore original #line 49 and 97 at already excluded i386 arms; selected non-i386 and local adaptations preserved."
+  ],
+  "limitations": "Observed release graph contexts only; no runtime behavior claimed."
+}

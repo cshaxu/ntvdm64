@@ -57,18 +57,18 @@ typedef DWORD UNALIGNED *PDWORD16;
 #define HIW(l)		WORDOF(l,1)
 #define INTOF(i,n)	(((PINT)&(i))[n])
 #define UINTOF(i,n)	(((PUINT)&(i))[n])
+#line 68
 #ifndef MAKEWORD
+#line 69
 #error Excluded unsupported missing MAKEWORD SDK profile
 #endif
+#line 71
 #define MAKEDWORD(l0,h0,l1,h1)	((DWORD)MAKEWORD(l0,h0)|((DWORD)MAKEWORD(l1,h1)<<16))
 #define GETBYTE(p)	*((PBYTE)p)++
 /* DIVERGENCE(MVDM-SUPPORT-DIV-006): recognize MSVC's x86 target macro. */
 #ifdef i386
 #line 74
-#define FETCHWORD(s)	((WORD)(s))
-#define FETCHDWORD(s)	((DWORD)(s))
-#define STOREWORD(d,s)	(WORD)d=(WORD)s
-#define STOREDWORD(d,s) (DWORD)d=(DWORD)s
+#error Excluded unsupported historical i386 SDK profile
 #else
 #if defined(_M_IX86)
 #line 74

@@ -1,0 +1,131 @@
+{
+  "path": "src/mvdm-host/dos/command/cmd.h",
+  "original": "O:/repos.external/OpenNT/base/mvdm/dos/command/cmd.h",
+  "before_sha256": "804b5b9aa717a7209e31419285f8204f6843574c607de38f349e05a1c4449b10",
+  "after_sha256": "af87df96738695b4b65bd27a039842acc1ac4645ce9dd51462513c23901ee280",
+  "original_sha256": "ea707e7955198462f93a0e795ae1751d83749578e93653e9b0baf4594d069711",
+  "finding": "Remove stale #line 43 overriding the correct original post-WIN_16 continuation at line 45. Existing WIN_16 excluded body and WIN_32 selected body are unchanged.",
+  "observed_include_contexts": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmd.obj"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmddata.obj"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmddisp.obj"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmdexit.obj"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmdexec.obj"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmdmisc.obj"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmdpif.obj"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmdredir.obj"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmdconf.obj"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmdkeyb.obj"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/command/cmdenv.obj"
+    },
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/adapter-basesrv/mvdm_command_guest_state.obj"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmddata.obj"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmd.obj"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmdexit.obj"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmddisp.obj"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmdexec.obj"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmdpif.obj"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmdmisc.obj"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmdconf.obj"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmdredir.obj"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmdenv.obj"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/command/cmdkeyb.obj"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/adapter-basesrv/mvdm_command_guest_state.obj"
+    }
+  ],
+  "limits": "This is a partial first-file correction. Complete conditional-tree and all supported inclusion-context review remain pending."
+}

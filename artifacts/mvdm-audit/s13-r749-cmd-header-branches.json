@@ -1,0 +1,83 @@
+{
+  "path": "src/mvdm-host/dos/command/cmd.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmd.h",
+  "before_sha256": "af87df96738695b4b65bd27a039842acc1ac4645ce9dd51462513c23901ee280",
+  "after_sha256": "983a366f8be8f98a7c534588fe3f08b6c20af3333df21d0b2b7dd936f289896b",
+  "original_sha256": "ea707e7955198462f93a0e795ae1751d83749578e93653e9b0baf4594d069711",
+  "branches": [
+    {
+      "condition": "OS2_32",
+      "original_line": 75,
+      "original_endif_line": 78,
+      "already_error": true,
+      "removed_body_sha256": "2efda9d7178a4409a87fd75707ba1c230596f5e3b8ba138616b50d303c0658c0",
+      "removed_nested_groups": 0
+    },
+    {
+      "condition": "SIGNALS",
+      "original_line": 70,
+      "original_endif_line": 73,
+      "already_error": true,
+      "removed_body_sha256": "c92efcbff68d667d9ea5f3cb271d8388665286d2233a7b24429e3eeb80f0d2d7",
+      "removed_nested_groups": 0
+    },
+    {
+      "condition": "WIN",
+      "original_line": 65,
+      "original_endif_line": 68,
+      "already_error": false,
+      "removed_body_sha256": "79e978044ee11dd8431803b6fa8ee41b1227efb22ce99e7c232f10478955fda9",
+      "removed_nested_groups": 0
+    },
+    {
+      "condition": "FLAT_32",
+      "original_line": 57,
+      "original_endif_line": 63,
+      "already_error": false,
+      "removed_body_sha256": "7449bc69bdbdbf460eae5ad44e0db50c6fa46502b45c175f13c61d521b299efc",
+      "removed_nested_groups": 1
+    },
+    {
+      "condition": "WIN_32",
+      "original_line": 46,
+      "original_endif_line": 55,
+      "already_error": false,
+      "removed_body_sha256": "f7cf634be6156cc59763abe6fd47d1f709713ea18e0e157d036e58049fb97f6a",
+      "removed_nested_groups": 0
+    },
+    {
+      "condition": "WIN_16",
+      "original_line": 41,
+      "original_endif_line": 44,
+      "already_error": true,
+      "removed_body_sha256": "eee6700a268dac19d3b4e76912867827e8eab5de9d746619d1a91255b822d9b7",
+      "removed_nested_groups": 0
+    },
+    {
+      "condition": "OS2_32",
+      "original_line": 29,
+      "original_endif_line": 32,
+      "already_error": true,
+      "removed_body_sha256": "2efda9d7178a4409a87fd75707ba1c230596f5e3b8ba138616b50d303c0658c0",
+      "removed_nested_groups": 0
+    },
+    {
+      "condition": "OS2_16",
+      "original_line": 24,
+      "original_endif_line": 27,
+      "already_error": true,
+      "removed_body_sha256": "22fa0fcfa92358ed6ecd47b56a2bb985a9a73ffb9a066f8fa88df1bdc352ba5d",
+      "removed_nested_groups": 0
+    },
+    {
+      "condition": "DOS",
+      "original_line": 20,
+      "original_endif_line": 22,
+      "already_error": true,
+      "removed_body_sha256": "c92efcbff68d667d9ea5f3cb271d8388665286d2233a7b24429e3eeb80f0d2d7",
+      "removed_nested_groups": 0
+    }
+  ],
+  "context_evidence": "s13-r748-cmd-header-contexts.json",
+  "limits": "24 observed release dependency contexts; contexts not represented by these graphs remain unproven."
+}

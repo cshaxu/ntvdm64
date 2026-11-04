@@ -255,9 +255,11 @@ Return Value:
 #endif
 
             FlatAddress[(registerAX >> 3) + i] = Base;
+#line 158
 #if DBG
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 161
 #if defined(CPU_40_STYLE)
             ULONG Selector = registerAX + i * sizeof(LDT_ENTRY);
             ULONG GdtAddress = DpmiCpu40DescriptorShadowAddress(

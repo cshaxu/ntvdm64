@@ -1,0 +1,52 @@
+{
+  "path": "src/mvdm-host/dos/dem/dem.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\dem.h",
+  "before_sha256": "f32589f3485db19799555545f872601e43f522d9db044a86d419a0e16c551e00",
+  "after_sha256": "b28f712a450484d3898029ab24105bd6b1214ffa62fdbb2b465d4d7ef7a55c0a",
+  "original_sha256": "c9c4b4814e1b30ffad29a7716948ec7b6c0ade8f6ab2fbb9fd6998d358706e5a",
+  "excluded_arms": [
+    {
+      "original_line": 74,
+      "current_line": 72,
+      "kind": "ifdef",
+      "expression": "SIGNALS",
+      "removed_sha256": "f21d3dd9d37b179d9f27d848c813239677020d8829bb960c11a68f1e9a62deb8",
+      "removed_nested_groups": 0
+    },
+    {
+      "original_line": 64,
+      "current_line": 62,
+      "kind": "else",
+      "expression": "",
+      "removed_sha256": "ccb3104e40b18a702616f1037085455825994fac04ec71482667b3f7a34f2a4f",
+      "removed_nested_groups": 0
+    },
+    {
+      "original_line": 57,
+      "current_line": 55,
+      "kind": "else",
+      "expression": "",
+      "removed_sha256": "b08ff48f5902216b9673634cf72ba469fefd51554694f51a5e6c794b7aba5c48",
+      "removed_nested_groups": 0
+    },
+    {
+      "original_line": 44,
+      "current_line": 42,
+      "kind": "ifdef",
+      "expression": "WIN_16",
+      "removed_sha256": "030309ce6d4f618319ccfcd87351e59163679ff93e9a332335945f6a3eac32b7",
+      "removed_nested_groups": 0
+    },
+    {
+      "original_line": 23,
+      "current_line": 23,
+      "kind": "ifdef",
+      "expression": "DOS",
+      "removed_sha256": "c8f4e6c66e0420b7f347ed9027169f7363c83346bcdcaf761679faf4c6a91c19",
+      "removed_nested_groups": 0
+    }
+  ],
+  "diagnostic_anchor_count": 16,
+  "context_evidence": "s13-r751-dem-header-contexts.json",
+  "limits": "30 observed worker release inclusion contexts; other configurations remain unproven."
+}

@@ -29,6 +29,7 @@ Revision History:
 // to add a bunch of stub functions
 //
 #ifdef i386
+#line 32
 #error Excluded unsupported i386 kernel VDM DPMI state
 #else
 #line 45

@@ -41,26 +41,8 @@ BOOL fDpmiIntsHaveBeenHooked = FALSE;
 #define VDM_INT_32 2
 
 #else
-#if defined(CPU_40_STYLE)
-#line 24
-
-GETREGISTERFUNCTION GetRegisterByIndex[8] = {getEAX, getECX, getEDX, getECX,
-                                             getESP, getEBP, getESI, getEDI};
-SETREGISTERFUNCTION SetRegisterByIndex[8] = {setEAX, setECX, setEDX, setECX,
-                                             setESP, setEBP, setESI, setEDI};
-
-VDM_INTERRUPTHANDLER DpmiInterruptHandlers[256] = {0};
-VDM_FAULTHANDLER DpmiFaultHandlers[32] = {0};
-BOOL fDpmiHookInts = TRUE;
-BOOL fDpmiIntsHaveBeenHooked = FALSE;
-
-#define VDM_INT_INT_GATE 1
-#define EFLAGS_TF_MASK 0x100
-#define VDM_INT_32 2
-
-#else
-#error Unsupported excluded original configuration
-#endif
+#line 40
+#error Excluded unsupported i386 kernel VDM handler carrier
 #endif // i386
 #line 46
 
