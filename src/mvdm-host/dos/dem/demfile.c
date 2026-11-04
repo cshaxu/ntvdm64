@@ -1039,6 +1039,7 @@ SHORT   hDosHandle;
  *
  */
 
+#line 993
 VOID VDDAssociateNtHandle (pSFT,hFile,wAccess)
 PDOSSFT     pSFT;
 HANDLE      hFile;

@@ -169,6 +169,7 @@ static VOID demFastIoUnavailable (VOID)
     setCF(1);
 }
 
+#line 241
 VOID demSetV86KernelAddr (VOID)
 {
     // Here debugger callout has to be made for DOSKRNL symbols

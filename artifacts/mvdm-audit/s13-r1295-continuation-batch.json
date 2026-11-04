@@ -1,0 +1,140 @@
+{
+  "scope": "Original source diagnostic anchors at uniquely matched retained lines",
+  "records": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdconf.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdconf.c",
+      "original_sha256": "32892c8c489bed9e4be8faed12e1bafbc6c580ba81a509425e8493de1e6ffc0a",
+      "current_sha256": "8f418290e80ed33bb5fbcbbbe0e11d06498098730b89885355eebd54f11ceaa6",
+      "anchors": [
+        {
+          "original_line": 622,
+          "retained_text": "void WriteFileAssert(HANDLE hFile, CHAR *pBuff, DWORD dwBytes)",
+          "current_line_directive": 636
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demdisp.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demdisp.c",
+      "original_sha256": "7ea3a829e3f8aad2dfe644d101cabaff514de25909db937675fc323dfce8fe3c",
+      "current_sha256": "95f0e3397e7f876d1bd57d3bc375401103482e503f4a61b26368be3fa82d98c3",
+      "anchors": [
+        {
+          "original_line": 241,
+          "retained_text": "VOID demSetV86KernelAddr (VOID)",
+          "current_line_directive": 172
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demfile.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demfile.c",
+      "original_sha256": "701c7ce94b6317f23d73d847c681338ddb522d0216cf6373713e542c34236620",
+      "current_sha256": "6c83ea4c82951b9888d342c2d3816b712b44eb23fc21dbca2f0e3a0c23abfa13",
+      "anchors": [
+        {
+          "original_line": 993,
+          "retained_text": "VOID VDDAssociateNtHandle (pSFT,hFile,wAccess)",
+          "current_line_directive": 1042
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demmisc.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demmisc.c",
+      "original_sha256": "19676fa5995555ec0b16c2923953b4e6236467dc42bf36cc7e746f45d0fcf912",
+      "current_sha256": "84b6a0b40069cde1c5558f4c4387883e012235ed15c7914567098191df5759a3",
+      "anchors": [
+        {
+          "original_line": 626,
+          "retained_text": "VOID demExitVDM ( VOID )",
+          "current_line_directive": 627
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demsrch.c",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "current_sha256": "9b77500723895b7a0d6a3c7712f85883fa58b29d7608b2f75c3ba02f6d2b0352",
+      "anchors": [
+        {
+          "original_line": 2384,
+          "retained_text": "VOID FreeFFindEntry(PFFINDLIST pFFindEntry)",
+          "current_line_directive": 2421
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+      "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+      "current_sha256": "919627a33f2b3f1123f6dc13bf3b7110fc3aca41823dcf57f5f4c3ff2de64497",
+      "anchors": [
+        {
+          "original_line": 1238,
+          "retained_text": "BOOL",
+          "current_line_directive": 1429
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\printer.c",
+      "original_sha256": "b1456dcbc0dc6b4d1fd5d101bfaa6bdc9a4cd5d970c14215f3ae62a173f17ccb",
+      "current_sha256": "0e45d8383d6bbc2ccb0f0abc6196e9878ef9c2df749978b4fd80407c10860107",
+      "anchors": [
+        {
+          "original_line": 787,
+          "retained_text": "void printer_is_being_closed(int adapter)",
+          "current_line_directive": 798
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gfx_updt.c",
+      "original_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987",
+      "current_sha256": "e5b1246be824ec9dc136311783e4ed680d48c259a28287c1b7ba355655a5624d",
+      "anchors": [
+        {
+          "original_line": 3710,
+          "retained_text": "assert1(NO,\"Unknown marking type %d\", (int) curr_mark_type);",
+          "current_line_directive": 3643
+        },
+        {
+          "original_line": 4826,
+          "retained_text": "void stream_io_update(void)",
+          "current_line_directive": 4097
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.c",
+      "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
+      "current_sha256": "4552d867b3d6d9bf5da5053ac337b5d5df53b1efd737899f1d691f2af0df7ef7",
+      "anchors": [
+        {
+          "original_line": 604,
+          "retained_text": "fThunkStrRtns = GetSystemDefaultLCID() !=",
+          "current_line_directive": 611
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgbegin.c",
+      "original_sha256": "c3df77a2987e97df8872c3dab8f6e7c10a08850c5ebcb439c0ec1dc88b0cdc44",
+      "current_sha256": "1faec32a09f50d1ad97d71bf57872c75a419910c72aadc017ad132fe70d0d0db",
+      "anchors": [
+        {
+          "original_line": 613,
+          "retained_text": "ThreadLock(pwnd, &tlpwnd);",
+          "current_line_directive": 646
+        }
+      ]
+    }
+  ]
+}

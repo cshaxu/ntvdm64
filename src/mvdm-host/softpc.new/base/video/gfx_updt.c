@@ -3640,6 +3640,7 @@ set_mark_funcs IFN0()
 			break;
 
 		default:
+#line 3710
 			assert1(NO,"Unknown marking type %d", (int) curr_mark_type);
 			break;
 	}
@@ -4093,6 +4094,7 @@ void jazz_text_update()
 #line 4436
 
 #ifdef NTVDM
+#line 4826
 void stream_io_update(void)
 {
 

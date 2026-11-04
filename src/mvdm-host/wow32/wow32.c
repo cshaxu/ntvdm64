@@ -608,6 +608,7 @@ BOOL W32Init(VOID)
         // US.
         //
 
+#line 604
         fThunkStrRtns = GetSystemDefaultLCID() !=
                             MAKELCID(
                                 MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_US),

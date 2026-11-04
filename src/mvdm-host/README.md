@@ -3006,3 +3006,5 @@ MVDM-HOST-DIV-809: correct original diagnostic and continuation anchors in exist
 MVDM-HOST-DIV-810: correct original source diagnostic continuation positions in ten host mirror files without changing selected program tokens. Evidence: artifacts/mvdm-audit/s13-r1288-continuation-batch.json.
 
 MVDM-HOST-DIV-811: correct original diagnostic continuation anchors in four host mirror files without changing selected tokens. Evidence: artifacts/mvdm-audit/s13-r1289-continuation-batch.json.
+
+MVDM-HOST-DIV-812: restore original diagnostic continuation anchors in nine host mirror files; selected program tokens unchanged. Evidence: artifacts/mvdm-audit/s13-r1295-continuation-batch.json.

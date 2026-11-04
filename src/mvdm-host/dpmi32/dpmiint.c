@@ -1426,6 +1426,7 @@ DpmiMappedCodeByte(ULONG Base, ULONG Offset, PUCHAR Value)
     return TRUE;
 }
 #endif
+#line 1238
 BOOL
 DpmiEmulateInstruction(
     VOID

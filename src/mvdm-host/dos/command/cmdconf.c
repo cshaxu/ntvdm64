@@ -633,6 +633,7 @@ DWORD WriteExpanded(HANDLE hFile,  CHAR *pch, DWORD dwChars)
  *  If one occurs displays warning popup and terminates the vdm.
  *
  */
+#line 622
 void WriteFileAssert(HANDLE hFile, CHAR *pBuff, DWORD dwBytes)
 {
   DWORD dw;

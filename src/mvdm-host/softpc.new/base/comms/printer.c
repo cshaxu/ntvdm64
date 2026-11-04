@@ -795,6 +795,7 @@ void printer_setup_table(sys_addr table_addr)
 #line 743
 
 #ifdef NTVDM
+#line 787
 void printer_is_being_closed(int adapter)
 {
 

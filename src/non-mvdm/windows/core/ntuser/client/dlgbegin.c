@@ -643,6 +643,7 @@ DeleteFontAndMenuAndFail:
     /*
      * Time to lock pwnd so it doesn't go away while we're calling back.
      */
+#line 613
     ThreadLock(pwnd, &tlpwnd);
 
     /*

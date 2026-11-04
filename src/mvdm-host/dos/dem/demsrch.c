@@ -2418,6 +2418,7 @@ AddFFindEntry(
  * Exit  -  None
  *
  */
+#line 2384
 VOID FreeFFindEntry(PFFINDLIST pFFindEntry)
 {
     RemoveEntryList(&pFFindEntry->FFindEntry);

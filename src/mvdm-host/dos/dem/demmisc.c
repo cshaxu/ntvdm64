@@ -624,6 +624,7 @@ VOID demDiskReset (VOID)
  * Exit  - None (VDM Is killed)
  */
 
+#line 626
 VOID demExitVDM ( VOID )
 {
     RcErrorDialogBox(ED_BADSYSFILE,"config.nt",NULL);
