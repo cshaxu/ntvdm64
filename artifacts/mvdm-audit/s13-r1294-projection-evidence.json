@@ -1,0 +1,272 @@
+{
+  "scope": "Link 29 mechanical ordered-tree mismatches to pre-existing per-file structural reviews; coverage of each review varies",
+  "direct_hash_matches": 21,
+  "line_only_since_review": 8,
+  "limits": [
+    "A review evidence link and matching hash do not independently prove original runtime semantics or unsupported compile contexts.",
+    "Local projections are retained under their existing registrations; this report does not authorize additional divergence."
+  ],
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "source_sha256": "7b2a3d4657034afba8e456dbdaa1c86205ca495c81ccdf24e700b154a71f29c8",
+      "structural_review": "s13-r758-dpmiint-conditions.json",
+      "review_source_sha256": "0185fbdf3aff83e0af8ef87d85d251629e49e9d3f4bf0588118ab07d10d12e4c",
+      "reviewed_commit": "b478aca8e8febdb4357e5d056edbcfb9dbaf8a0f",
+      "since_review": "only #line and blank lines",
+      "unmatched_selector_count": 4
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "source_sha256": "07775984ef3fe7e1e362423caa18ee91cb71e46a28021be27680933718f98436",
+      "structural_review": "s13-r1072-emm-full-file.json",
+      "review_source_sha256": "07775984ef3fe7e1e362423caa18ee91cb71e46a28021be27680933718f98436",
+      "reviewed_commit": null,
+      "since_review": "same bytes",
+      "unmatched_selector_count": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "source_sha256": "dc79f88da50ef0660fc1d5722037413d6120689ccda2dbde8c22b80465722eb2",
+      "structural_review": "s13-r1174-mouse-full-file.json",
+      "review_source_sha256": "7fe09d59e6e7f5698542146fa57f998b1e4411ee3880fc072ac67b48899bb73f",
+      "reviewed_commit": "ba63e5c2f82eef52fb60d6af700edf30beb38ff5",
+      "since_review": "only #line and blank lines",
+      "unmatched_selector_count": 40
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "source_sha256": "a79efd4d687d5edc476974f7593c1356c5cd663d9d9e75ccfdaa7fe0b034e4f4",
+      "structural_review": "s13-r1175-ios-full-file.json",
+      "review_source_sha256": "a79efd4d687d5edc476974f7593c1356c5cd663d9d9e75ccfdaa7fe0b034e4f4",
+      "reviewed_commit": null,
+      "since_review": "same bytes",
+      "unmatched_selector_count": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "source_sha256": "2174ed07e84b13a3aa32e17d9e9d75dd6115df8a5e08874ccc49777976c2b407",
+      "structural_review": "s13-r1176-main-full-file.json",
+      "review_source_sha256": "2174ed07e84b13a3aa32e17d9e9d75dd6115df8a5e08874ccc49777976c2b407",
+      "reviewed_commit": null,
+      "since_review": "same bytes",
+      "unmatched_selector_count": 24
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "source_sha256": "e0f3547c1d58b42c24e38310b5157a187e2719b4e70590f0633183b6b96af474",
+      "structural_review": "s13-r1253-xt-condition-review.json",
+      "review_source_sha256": "e0f3547c1d58b42c24e38310b5157a187e2719b4e70590f0633183b6b96af474",
+      "reviewed_commit": null,
+      "since_review": "same bytes",
+      "unmatched_selector_count": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "source_sha256": "2c0db8351f49fd223d4a63201f20747af23016c6db5ad490d09db649a58560fb",
+      "structural_review": "s13-r1255-egawrtm-review.json",
+      "review_source_sha256": "db9c142660680fc80fbb43b0f11be401df8385d470231ec48b48c86a081d3fcf",
+      "reviewed_commit": "a7338bfc5e655b8b014fb6190b41107928a3f823",
+      "since_review": "only #line and blank lines",
+      "unmatched_selector_count": 11
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "source_sha256": "c56c433af9612aa4df5eea80952a4a0731bec84d7a167fee91edd6ae7e6aacf8",
+      "structural_review": "s13-r1255-egawrtm-review.json",
+      "review_source_sha256": "1286acebd1f10259c265899df132015240987ff89933a746a8e55ad6e91f732a",
+      "reviewed_commit": "a7338bfc5e655b8b014fb6190b41107928a3f823",
+      "since_review": "only #line and blank lines",
+      "unmatched_selector_count": 7
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "source_sha256": "16d531a00717b0324368685c15955bff9825530a7aa2ef2c77263eb95e698006",
+      "structural_review": "s13-r1254-video-review.json",
+      "review_source_sha256": "0cd2c6fe1eaf184e94293635e484e987f6aeb63e7032636240440b02a6b926f5",
+      "reviewed_commit": "a7338bfc5e655b8b014fb6190b41107928a3f823",
+      "since_review": "only #line and blank lines",
+      "unmatched_selector_count": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "source_sha256": "675f1d654972d1858d973563a1214d72a523f5e29aec6db3963f23496b4d893c",
+      "structural_review": "s13-r1235-sim32-full-review.json",
+      "review_source_sha256": "89f5fe924f6f99e06f9da1d75addfa204c95f87b9e5f57e280d47665eddb94ee",
+      "reviewed_commit": "c7f5b23c87baff62803eec8be8a2f32776419fac",
+      "since_review": "only #line and blank lines",
+      "unmatched_selector_count": 1
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "source_sha256": "17b73ddd07b0131fcedb491f22c0d2a8985c0002c85df241a322da0fadde5981",
+      "structural_review": "s13-r1265-ntrtl-review.json",
+      "review_source_sha256": "17b73ddd07b0131fcedb491f22c0d2a8985c0002c85df241a322da0fadde5981",
+      "reviewed_commit": null,
+      "since_review": "same bytes",
+      "unmatched_selector_count": 23
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "source_sha256": "36e250a159f095037fc69404d9a54d917b8bd26e4f26ba28d1f9cebc5287a4ce",
+      "structural_review": "s13-r1244-client-full-review.json",
+      "review_source_sha256": "36e250a159f095037fc69404d9a54d917b8bd26e4f26ba28d1f9cebc5287a4ce",
+      "reviewed_commit": null,
+      "since_review": "same bytes",
+      "unmatched_selector_count": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "source_sha256": "65031fc65032c9013a858b1f04d0e7082dada639b05130ed03ddceeb5b7914aa",
+      "structural_review": "s13-r1242-clmsg-full-review.json",
+      "review_source_sha256": "65031fc65032c9013a858b1f04d0e7082dada639b05130ed03ddceeb5b7914aa",
+      "reviewed_commit": null,
+      "since_review": "same bytes",
+      "unmatched_selector_count": 10
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "source_sha256": "6509290c8c66b7cdab375d7957cb20df326e2074e0cd7de7e8942dd018a1b41e",
+      "structural_review": "s13-r1211-clres-full-file.json",
+      "review_source_sha256": "6509290c8c66b7cdab375d7957cb20df326e2074e0cd7de7e8942dd018a1b41e",
+      "reviewed_commit": null,
+      "since_review": "same bytes",
+      "unmatched_selector_count": 8
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "source_sha256": "7900b8b6f0eeb514ffcbcd1c46b878a247d0c28a74a19542b8e8bc80ae2035a1",
+      "structural_review": "s13-r1237-ntstubs-full-review.json",
+      "review_source_sha256": "7900b8b6f0eeb514ffcbcd1c46b878a247d0c28a74a19542b8e8bc80ae2035a1",
+      "reviewed_commit": null,
+      "since_review": "same bytes",
+      "unmatched_selector_count": 12
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "source_sha256": "ca1d6db964ed3ab92b0c92845072126c821f5a95fd9cee24264289307adf6cd1",
+      "structural_review": "s13-r1267-usercli-review.json",
+      "review_source_sha256": "ca1d6db964ed3ab92b0c92845072126c821f5a95fd9cee24264289307adf6cd1",
+      "reviewed_commit": null,
+      "since_review": "same bytes",
+      "unmatched_selector_count": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "source_sha256": "45836325a4ba50893a6aa4f7f98b4655451592ce2643e9cbeb12b1973ffae5bb",
+      "structural_review": "s13-r1210-wowclient-full-file.json",
+      "review_source_sha256": "45836325a4ba50893a6aa4f7f98b4655451592ce2643e9cbeb12b1973ffae5bb",
+      "reviewed_commit": null,
+      "since_review": "same bytes",
+      "unmatched_selector_count": 8
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "source_sha256": "af265fc49e2fe5d9663560ef8a53a7474f18f0dac150bf6a4ee1b6141527e3cd",
+      "structural_review": "s13-r1264-ntcftxt-review.json",
+      "review_source_sha256": "af265fc49e2fe5d9663560ef8a53a7474f18f0dac150bf6a4ee1b6141527e3cd",
+      "reviewed_commit": null,
+      "since_review": "same bytes",
+      "unmatched_selector_count": 15
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "source_sha256": "bd85b9a24c82fdd3774aaa642c06a289f730e35bef06931581ce757ebe366cb9",
+      "structural_review": "s13-r1268-user-review.json",
+      "review_source_sha256": "50a5a5b647f6fc7c56371bfee5b7248327a7ecbf753a921c68ec32b3ffcf553f",
+      "reviewed_commit": "f340c1acf4612d9c60ed3403b8330863824319cd",
+      "since_review": "only #line and blank lines",
+      "unmatched_selector_count": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "source_sha256": "326081a72f994be4e59e3847e77f03980ebdc8f7830d109dfb07e2d3c0395a34",
+      "structural_review": "s13-r1240-kernel-class-review.json",
+      "review_source_sha256": "326081a72f994be4e59e3847e77f03980ebdc8f7830d109dfb07e2d3c0395a34",
+      "reviewed_commit": null,
+      "since_review": "same bytes",
+      "unmatched_selector_count": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "source_sha256": "1d3e06a8bbd902687e5aa4231e85bfb99eaebe0dc0a07b54e0eb33fb784cae9a",
+      "structural_review": "s13-r1241-handtabl-full-review.json",
+      "review_source_sha256": "1d3e06a8bbd902687e5aa4231e85bfb99eaebe0dc0a07b54e0eb33fb784cae9a",
+      "reviewed_commit": null,
+      "since_review": "same bytes",
+      "unmatched_selector_count": 20
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "source_sha256": "6be9e92da0209bbaeae041d25b584ed42ee52ff492ba0b1b378c3a856ae64a6f",
+      "structural_review": "s13-r1247-input-review.json",
+      "review_source_sha256": "6be9e92da0209bbaeae041d25b584ed42ee52ff492ba0b1b378c3a856ae64a6f",
+      "reviewed_commit": null,
+      "since_review": "same bytes",
+      "unmatched_selector_count": 11
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "source_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "structural_review": "s13-r1263-ntstubs-review.json",
+      "review_source_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "reviewed_commit": null,
+      "since_review": "same bytes",
+      "unmatched_selector_count": 51
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "source_sha256": "df24a51494f20cbd23a359e4f3c01067ca50987b0ebb6b642eccd7402b87640f",
+      "structural_review": "s13-r1248-queue-review.json",
+      "review_source_sha256": "df24a51494f20cbd23a359e4f3c01067ca50987b0ebb6b642eccd7402b87640f",
+      "reviewed_commit": null,
+      "since_review": "same bytes",
+      "unmatched_selector_count": 18
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "source_sha256": "351fc45e0c0e6b2590fd5a901ca99bfad937b8411a4b337f6b8c18c584c3e028",
+      "structural_review": "s13-r1243-server-full-review.json",
+      "review_source_sha256": "351fc45e0c0e6b2590fd5a901ca99bfad937b8411a4b337f6b8c18c584c3e028",
+      "reviewed_commit": null,
+      "since_review": "same bytes",
+      "unmatched_selector_count": 5
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "source_sha256": "cd42111cedcc41c994c465fa4abfc9f2c7d83a283464dd98a561787e9353d0a1",
+      "structural_review": "s13-r1266-userk-review.json",
+      "review_source_sha256": "cd42111cedcc41c994c465fa4abfc9f2c7d83a283464dd98a561787e9353d0a1",
+      "reviewed_commit": null,
+      "since_review": "same bytes",
+      "unmatched_selector_count": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "source_sha256": "cfff3852c4bb3012434caa3a74b71e0fa63aad27afdff9504d8162be219a2ef0",
+      "structural_review": "s13-r1207-chartran-full-file.json",
+      "review_source_sha256": "bb666cabd52037ac4a82b7cde6d139d779680b1e554bddcb841e0c18cacb07a5",
+      "reviewed_commit": "ae3319454d2a9563f1f317f66694d8dc182a0f26",
+      "since_review": "only #line and blank lines",
+      "unmatched_selector_count": 7
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "source_sha256": "c44237e4e365437f8bb6cc6a233737e8b8c12dadc7ee9402be78d86e72655821",
+      "structural_review": "s13-r1214-drawtext-full-file.json",
+      "review_source_sha256": "c44237e4e365437f8bb6cc6a233737e8b8c12dadc7ee9402be78d86e72655821",
+      "reviewed_commit": null,
+      "since_review": "same bytes",
+      "unmatched_selector_count": 4
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "source_sha256": "cacfbf60110955d56472ea67424911a522d3ea19fc3415ea75ad1a22527aab11",
+      "structural_review": "s13-r1245-rtl-wow-review.json",
+      "review_source_sha256": "cacfbf60110955d56472ea67424911a522d3ea19fc3415ea75ad1a22527aab11",
+      "reviewed_commit": null,
+      "since_review": "same bytes",
+      "unmatched_selector_count": 3
+    }
+  ]
+}

@@ -9,7 +9,7 @@ and finish all its conditional branches before marking that file complete;
 build each batch of 10 modified code files. The earlier per-depth BFS is superseded. Process the pending per-file inventory in its existing order; review
 and register files even when no source edit is needed. If binary differences are limited to timestamps or verified diagnostic line-number constants, reuse prior test evidence; otherwise run Full before publication. [Progress](../../artifacts/mvdm-audit/s13-bfs-progress.md);
 [observed per-file inventory](../../artifacts/mvdm-audit/s13-r489-per-file-observed-inventory.json).
-Latest checkpoint: [r1289](../../artifacts/mvdm-audit/s13-r1289-delivery.md). Inventory hashes and completed count reconciled: [r1290](../../artifacts/mvdm-audit/s13-r1290-inventory-check.json). Mechanical tree comparison found 89 files requiring projection/mismatch triage: [r1291](../../artifacts/mvdm-audit/s13-r1291-structural-triage.json).
+Latest checkpoint: [r1289](../../artifacts/mvdm-audit/s13-r1289-delivery.md). Inventory hashes and completed count reconciled: [r1290](../../artifacts/mvdm-audit/s13-r1290-inventory-check.json). Mechanical tree comparison found 89 files requiring projection/mismatch triage: [r1291](../../artifacts/mvdm-audit/s13-r1291-structural-triage.json). Of these, 29 with unmatched ordered selectors were linked to prior reviews and byte/line-only history; prior review scope varies: [r1294](../../artifacts/mvdm-audit/s13-r1294-projection-evidence.json).
 The 1,056-file [census](../../artifacts/mvdm-audit/s13-r624-current-file-census.json)
 includes one product-generator input; supported-context verification remains open.
 
