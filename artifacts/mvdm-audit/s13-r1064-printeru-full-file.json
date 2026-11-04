@@ -1,0 +1,10 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\printer_.c",
+  "original_sha256": "53edfe9fb4bb9d965acb8a7cc5f33d14cdf0694957dadfa912e0175488dbcf81",
+  "before_sha256": "d05bd83b27e3ae7a3807f452a88bfc0d669f2eaab1a1535c7b6c74985e4c7649",
+  "after_sha256": "8a28da0071d6dfa1399fc9373f34129f8fe318ff80cce7f314457ac58b6b3b18",
+  "removed_body_sha256": "a3069dd56bf0f6549a100cd74b247fcf1824ffdd976528c0edbda59ca75c3a23",
+  "review": "Original/current full conditional structure matches along selected arms; nested original PRINTER group inside excluded MONITOR parent is intentionally omitted. Product marker records select remaining real-code branches. Nested MONITOR printer BOP arm was unhit and its two product compilation commands omit /DMONITOR; replaced with #error at original line 116, including an unreachable local hardware-probe call.",
+  "limitations": "Build and byte comparison pending; printer.c is a separate source compiled with /DMONITOR, so its selector is not generalized to this file."
+}

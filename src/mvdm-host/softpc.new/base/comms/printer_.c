@@ -115,11 +115,8 @@ void printer_io()
 
     switch (bopsubfunction) {
 #ifdef MONITOR
-        case 0:
-            /* this is the bop to flush 16bit printer buffer */
-            printer_bop_flush ();
-            mvdm_softpc_report_setup_hardware_probe("int17-leave", getAH(), getDX());
-            return;
+#line 116
+#error Excluded unsupported MONITOR printer BOP profile
 #endif
 
         case 1:

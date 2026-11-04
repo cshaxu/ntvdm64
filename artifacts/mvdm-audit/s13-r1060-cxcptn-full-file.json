@@ -1,0 +1,11 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_xcptn.c",
+  "original_sha256": "e1f8f19a1f513402a10dc13eaf3b43d45a208fd71a72692f690f808a7e7762b2",
+  "current_sha256": "0ef2365f967dcf6a0289055665398dc24bcb0c686c1588ebca2ee3d39f793a29",
+  "review": "Complete conditional-tree comparison has no nested groups: 13 original groups align with 13 of 14 current groups; the additional local PROD group is existing runtime binding. r790 product witnesses select all retained real-code arms and excluded arms are already #error with line anchors. No code changed.",
+  "evidence": [
+    "s13-r790-cxcptn-conditions.json"
+  ],
+  "limitations": "Product release observations only; prior tests retain their original scope."
+}

@@ -1,0 +1,8 @@
+{
+  "path": "src/mvdm-host/inc/wowcomm.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowcomm.h",
+  "original_sha256": "4817961493d33932a98f5ee2222c0f2e20a43fd4900430910b81e5c70c5f1c85",
+  "current_sha256": "4817961493d33932a98f5ee2222c0f2e20a43fd4900430910b81e5c70c5f1c85",
+  "review": "Complete original/current conditional structure matches; product WOW32 observed include guard selected and UNALIGNED fallback unselected. The original header is also directly included by mvdm-guest/wow16/user/wowcomm.c, where the fallback explicitly serves 16-bit compilation.",
+  "limitations": "Guest source and builds are prohibited; do not remove the guest-consumed fallback without proving supported guest ownership. No source change."
+}

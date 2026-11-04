@@ -1,0 +1,89 @@
+{
+  "path": "src/mvdm-host/inc/wow.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wow.h",
+  "original_sha256": "64663c13abaefccd99533352e08fb28efc66032c94a1780bff73be4f4cdbf70b",
+  "before_sha256": "fd337675f4ff221ec2627d6fdad8f8d0a00c4015b18b46166ac7361e1efeb613",
+  "after_sha256": "fd337675f4ff221ec2627d6fdad8f8d0a00c4015b18b46166ac7361e1efeb613",
+  "branches": [
+    {
+      "kind": "ifndef",
+      "expr": "NOEXTERNS",
+      "selected": true,
+      "original_line": 24
+    },
+    {
+      "kind": "ifdef",
+      "expr": "i386",
+      "selected": false,
+      "original_line": 29
+    },
+    {
+      "kind": "ifdef",
+      "expr": "NOLOG",
+      "selected": false,
+      "original_line": 58
+    },
+    {
+      "kind": "else",
+      "expr": "",
+      "selected": true,
+      "original_line": 61
+    },
+    {
+      "kind": "ifdef",
+      "expr": "DEBUG",
+      "selected": false,
+      "original_line": 67
+    },
+    {
+      "kind": "else",
+      "expr": "",
+      "selected": true,
+      "original_line": 73
+    },
+    {
+      "kind": "ifndef",
+      "expr": "WM_USER",
+      "selected": false,
+      "original_line": 1212
+    },
+    {
+      "kind": "ifndef",
+      "expr": "WIN31",
+      "selected": false,
+      "original_line": 1243
+    },
+    {
+      "kind": "else",
+      "expr": "",
+      "selected": true,
+      "original_line": 1245
+    },
+    {
+      "kind": "ifndef",
+      "expr": "WIN31",
+      "selected": false,
+      "original_line": 1279
+    },
+    {
+      "kind": "else",
+      "expr": "",
+      "selected": true,
+      "original_line": 1281
+    },
+    {
+      "kind": "ifndef",
+      "expr": "WIN31",
+      "selected": false,
+      "original_line": 1322
+    },
+    {
+      "kind": "else",
+      "expr": "",
+      "selected": true,
+      "original_line": 1324
+    }
+  ],
+  "review": "Complete original/current first-level groups align; all selected arms have no further conditions. Product WOW32 positive witnesses retained. Nonselected arms were already #error; original line anchors normalized. Nested original i386 DEBUG group is within excluded i386 arm and need not be restored.",
+  "limitations": "No new branch exclusion. Build/byte comparison pending."
+}

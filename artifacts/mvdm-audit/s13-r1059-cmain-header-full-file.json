@@ -1,0 +1,12 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.h",
+  "original_sha256": "c900712ad3c01e1e6ea6ee3b3ce597bf67f0ae1392576a8f60413af78a4742b6",
+  "current_sha256": "24d7a95929e1ed4428ec8f749ba1229c91c27e675baf3d8c8ba6c347ba1de68e",
+  "review": "Full original/current conditional tree matches: PIG and DOUBLE_CPU arms are already #error; !DOUBLE_CPU is observed selected, and its sole nested original #if 0 is #error with original #line 167/168/179. Prior full builds validate excluded guards. No source change.",
+  "evidence": [
+    "s13-r789-cmain-header-contexts.json",
+    "s13-r1051-cmain-context-resolution.json"
+  ],
+  "limitations": "External unsupported profiles are not product contexts."
+}

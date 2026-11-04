@@ -1,0 +1,32 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/evidgen.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\evidgen.h",
+  "original_sha256": "867a2c65cbc1b0980ac6a07002072fcfb638e4c24ebe8e513f4c93f3d1c6fe6c",
+  "current_sha256": "fdb5437bda1e496b87852333ef3729ecf2d54915976333cba735f8cf1ffdc0a3",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/evidgen.h",
+      "line": "97",
+      "directive": "ifndef",
+      "expression": "CPU_40_STYLE",
+      "chain_start": "97",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "fdb5437bda1e496b87852333ef3729ecf2d54915976333cba735f8cf1ffdc0a3"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/evidgen.h",
+      "line": "138",
+      "directive": "ifndef",
+      "expression": "CPU_40_STYLE",
+      "chain_start": "138",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "fdb5437bda1e496b87852333ef3729ecf2d54915976333cba735f8cf1ffdc0a3"
+    }
+  ],
+  "review": "Original has no conditional groups. Current two CPU_40_STYLE guards implement registered MVDM-HOST-DIV-156 typed-accessor compatibility; both were observed selected in real product contexts including C-VID binding compiled without CPU_40_STYLE. The alternate unguarded CPU40 access path also exists. Both guards retained unchanged; no nested groups.",
+  "limitations": "No new exclusion or code edit."
+}

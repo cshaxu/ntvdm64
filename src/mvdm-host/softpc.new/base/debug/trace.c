@@ -23,6 +23,7 @@
 #line 23
 #error Excluded unsupported SEGMENTATION configuration
 #endif
+#line 30
 
 /*
  *    O/S include files.
@@ -56,7 +57,7 @@ FILE *trace_file;
 #line 60
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* nPROD */
-#line 62
+#line 71
 
 static int trace_start = 0;
 
@@ -70,8 +71,10 @@ void get_lar()
 
 {
 #ifndef PROD
+#line 84
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 87
 }
 
 #endif
@@ -95,7 +98,7 @@ int  dump_info;
 	UNUSED(error_msg);
 	UNUSED(dump_info);
 #endif	/* PROD */
-#line 244
+#line 464
 }
 
 void trace_init()
@@ -113,5 +116,5 @@ void trace_init()
 #line 497
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* !PROD */
-#line 279
+#line 559
 

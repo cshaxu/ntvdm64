@@ -1,0 +1,12 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ccpusas4.h",
+  "original_sha256": "8b4622e066f61c6815dbadf3f3c735d7dd29210673a6930f354aaf0e2be880e8",
+  "before_sha256": "c37f5d8628578ce7136d62fbaa373127bdb5dbdea72cbab917bd52dd46ffc922",
+  "after_sha256": "2f4a6c24087abe2fc08a3732fdd7e27730b82077742e1d27f3eab49aca209079",
+  "review": "Full original/current tree matches: !PIG is selected; nested BACK_M is already #error and its else is product selected. Added original #line 30 inside the excluded BACK_M arm.",
+  "evidence": [
+    "s13-r792-ccpusas4-header-context.json"
+  ],
+  "limitations": "Build and byte comparison pending."
+}

@@ -729,8 +729,8 @@ void printer_init IFN1(int,adapter)
 #ifdef ANSI
 void printer_setup_table(sys_addr table_addr)
 #else /* ANSI */
-void printer_setup_table(table_addr)
-sys_addr table_addr;
+#line 735
+#error Excluded unsupported non-ANSI printer configuration
 #endif /* ANSI */
 {
     int i;
@@ -789,8 +789,8 @@ void printer_is_being_closed(int adapter)
 #if defined(MONITOR)
 	set_state(adapter, STATE_READY);
 #else
-	state[adapter] = STATE_READY;
-
+#line 793
+#error Excluded unsupported non-MONITOR printer configuration
 #endif
 }
 

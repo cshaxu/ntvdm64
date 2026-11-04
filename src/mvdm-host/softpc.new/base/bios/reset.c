@@ -521,7 +521,8 @@ void reset()
 				** stored double word.
 				*/
 #ifdef	NPX
-				npx_reset();
+#line 647
+#error Excluded unsupported NPX configuration
 #endif	/* NPX */
 				outb(ICA0_PORT_0, (half_word)0x11);
 				outb(ICA0_PORT_1, (half_word)0x08);
@@ -584,8 +585,8 @@ void reset()
 		}
 	}
 #ifdef DPMI
-	/* ensure DPMI host is not still active */
-	DPMI_reset();
+#line 704
+#error Excluded unsupported DPMI configuration
 #endif /* DPMI */
 #endif /* PM */
 
@@ -618,7 +619,8 @@ void reset()
  
 #ifndef HostProcessClipData
 #ifdef MSWDVR
-        msw_smcpy_term();
+#line 777
+#error Excluded unsupported MSWDVR configuration
 #endif
 #endif
 

@@ -4351,11 +4351,8 @@ CPU_RESTORED_RESET:
 #ifdef NTVDM
 	     ccpu_dispatch_accepted_irq(acknowledged_interrupt);
 #else
-	     cpu_hw_interrupt_number = (IU16)acknowledged_interrupt;
-	     EXT = EXTERNAL;
-	     SYNCH_TICK();
-	     do_intrupt(cpu_hw_interrupt_number, FALSE, FALSE, (IU16)0);
-	     CCPU_save_EIP = GET_EIP();   /* to reflect IP change */
+#line 4413
+#error Excluded unsupported non-NTVDM CCPU interrupt dispatch
 #endif
 	 }
       }

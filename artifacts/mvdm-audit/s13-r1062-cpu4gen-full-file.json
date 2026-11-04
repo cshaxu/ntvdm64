@@ -1,0 +1,13 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+  "original_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb",
+  "before_sha256": "146c7ae07b2bacbcb0b2b4e256325d620e79883815af09b94de37f9c65ab1bc5",
+  "after_sha256": "d39454a3945972f63df743e8f4ade5e7b2984ffe96bcbaade483aed42e2e5294",
+  "review": "Complete original/current conditional structure matches for every retained arm. Both CPU_PRIVATE arms have observed hits; all 215 non-CCPU else arms were already #error. Corrected their original diagnostic #line anchors and corresponding post-endif continuation lines against actual pinned original source, ignoring nested original PROD branches under excluded bodies.",
+  "evidence": [
+    "s13-r794-cpu4gen-header-context.json",
+    "compile-branch-selection/branches.csv"
+  ],
+  "limitations": "Build and byte comparison pending; line changes may affect diagnostics or __LINE__ expansions."
+}

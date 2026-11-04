@@ -159,11 +159,19 @@ half_word target_AR;
                source = gdt + 0x10;   /* see layout in bios listing */
                target = gdt + 0x18;
 
+#line 143
+#ifdef CPU_30_STYLE
+#line 144
+#error Excluded unsupported CPU_30_STYLE configuration
+#else /* CPU_30_STYLE */
+#line 157
 		/* retrieve descriptor information for source */
 		retrieve_descr_fields(&source_AR, &source_base, &source_limit, source);
 
 		/* retrieve descriptor information for target */
 		retrieve_descr_fields(&target_AR, &target_base, &target_limit, target);
+#endif /* CPU_30_STYLE */
+#line 163
 
 		/* make word count into a byte count */
 		byte_count = getCX() << 1;

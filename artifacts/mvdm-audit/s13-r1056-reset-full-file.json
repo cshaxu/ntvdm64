@@ -1,0 +1,520 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+  "source_sha256": "b9040f6216647f957668c3c1465322a24b2cb70c48ec10a5b55907142ef384f8",
+  "object": "bios/reset",
+  "arms": [
+    {
+      "label": "codex_r688_arm_0000",
+      "line": 21,
+      "kind": "ifdef",
+      "expression": "SEGMENTATION",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0001",
+      "line": 64,
+      "kind": "ifdef",
+      "expression": "PRINTER",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0002",
+      "line": 71,
+      "kind": "ifdef",
+      "expression": "NOVELL",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0003",
+      "line": 79,
+      "kind": "ifdef",
+      "expression": "GISP_SVGA",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0004",
+      "line": 85,
+      "kind": "ifdef",
+      "expression": "LICENSING",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0005",
+      "line": 99,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0006",
+      "line": 106,
+      "kind": "ifdef",
+      "expression": "NPX",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0007",
+      "line": 112,
+      "kind": "ifdef",
+      "expression": "DPMI",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0008",
+      "line": 118,
+      "kind": "ifdef",
+      "expression": "GISP_SVGA",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0009",
+      "line": 123,
+      "kind": "if",
+      "expression": "defined(DELTA) && defined(A2CPU)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0010",
+      "line": 161,
+      "kind": "ifdef",
+      "expression": "PIG",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0011",
+      "line": 207,
+      "kind": "ifdef",
+      "expression": "GISP_SVGA",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0012",
+      "line": 210,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0013",
+      "line": 300,
+      "kind": "ifdef",
+      "expression": "NPX",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0014",
+      "line": 303,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0015",
+      "line": 309,
+      "kind": "ifdef",
+      "expression": "FLOPPY_B",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0016",
+      "line": 312,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0017",
+      "line": 325,
+      "kind": "ifdef",
+      "expression": "CGAMONO",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0018",
+      "line": 335,
+      "kind": "ifdef",
+      "expression": "EGG",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0019",
+      "line": 337,
+      "kind": "ifdef",
+      "expression": "VGG",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0020",
+      "line": 345,
+      "kind": "ifdef",
+      "expression": "HERC",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0021",
+      "line": 377,
+      "kind": "ifndef",
+      "expression": "PROD",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0022",
+      "line": 385,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0023",
+      "line": 393,
+      "kind": "ifdef",
+      "expression": "PM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0024",
+      "line": 398,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0025",
+      "line": 491,
+      "kind": "ifndef",
+      "expression": "CPU_30_STYLE",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0026",
+      "line": 492,
+      "kind": "if",
+      "expression": "!defined(CPU_40_STYLE)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0027",
+      "line": 523,
+      "kind": "ifdef",
+      "expression": "NPX",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0028",
+      "line": 561,
+      "kind": "ifndef",
+      "expression": "CPU_30_STYLE",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0029",
+      "line": 562,
+      "kind": "if",
+      "expression": "!defined(CPU_40_STYLE)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0030",
+      "line": 586,
+      "kind": "ifdef",
+      "expression": "DPMI",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0031",
+      "line": 604,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0032",
+      "line": 612,
+      "kind": "ifdef",
+      "expression": "NOVELL",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0033",
+      "line": 619,
+      "kind": "ifndef",
+      "expression": "HostProcessClipData",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0034",
+      "line": 620,
+      "kind": "ifdef",
+      "expression": "MSWDVR",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0035",
+      "line": 625,
+      "kind": "if",
+      "expression": "!defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX))",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0036",
+      "line": 633,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0037",
+      "line": 651,
+      "kind": "ifdef",
+      "expression": "IPC",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0038",
+      "line": 664,
+      "kind": "ifdef",
+      "expression": "PRINTER",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0039",
+      "line": 666,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0040",
+      "line": 675,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0041",
+      "line": 685,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0042",
+      "line": 697,
+      "kind": "ifdef",
+      "expression": "GISP_SVGA",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0043",
+      "line": 703,
+      "kind": "ifdef",
+      "expression": "PIG",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0044",
+      "line": 719,
+      "kind": "ifdef",
+      "expression": "SWIN_SNDBLST_NULL",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0045",
+      "line": 724,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0046",
+      "line": 735,
+      "kind": "if",
+      "expression": "defined (GEN_DRVR) || defined (CDROM)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0047",
+      "line": 747,
+      "kind": "ifdef",
+      "expression": "NPX",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0048",
+      "line": 758,
+      "kind": "ifdef",
+      "expression": "PRINTER",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0049",
+      "line": 766,
+      "kind": "if",
+      "expression": "defined(DELTA) && defined(A2CPU)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0050",
+      "line": 771,
+      "kind": "ifdef",
+      "expression": "SOFTWIN_API",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0051",
+      "line": 777,
+      "kind": "ifdef",
+      "expression": "HUNTER",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0052",
+      "line": 783,
+      "kind": "ifdef",
+      "expression": "LIM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0053",
+      "line": 784,
+      "kind": "if",
+      "expression": "!defined(SUN_VA) && !defined(NTVDM)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0054",
+      "line": 798,
+      "kind": "ifdef",
+      "expression": "GISP_SVGA",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0055",
+      "line": 811,
+      "kind": "ifdef",
+      "expression": "GISP_SVGA",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0056",
+      "line": 818,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0057",
+      "line": 822,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0058",
+      "line": 832,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0059",
+      "line": 847,
+      "kind": "ifdef",
+      "expression": "HFX",
+      "error_only": true
+    }
+  ],
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "572e4931d4987e39d0ede11d04f8df0295975cb47e88c976745e0eda15ffa7f9",
+      "hit": [
+        "codex_r688_arm_0001",
+        "codex_r688_arm_0012",
+        "codex_r688_arm_0014",
+        "codex_r688_arm_0016",
+        "codex_r688_arm_0018",
+        "codex_r688_arm_0019",
+        "codex_r688_arm_0023",
+        "codex_r688_arm_0024",
+        "codex_r688_arm_0025",
+        "codex_r688_arm_0028",
+        "codex_r688_arm_0033",
+        "codex_r688_arm_0035",
+        "codex_r688_arm_0038",
+        "codex_r688_arm_0040",
+        "codex_r688_arm_0048",
+        "codex_r688_arm_0052",
+        "codex_r688_arm_0056",
+        "codex_r688_arm_0058"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "572e4931d4987e39d0ede11d04f8df0295975cb47e88c976745e0eda15ffa7f9",
+      "hit": [
+        "codex_r688_arm_0001",
+        "codex_r688_arm_0012",
+        "codex_r688_arm_0014",
+        "codex_r688_arm_0016",
+        "codex_r688_arm_0018",
+        "codex_r688_arm_0019",
+        "codex_r688_arm_0023",
+        "codex_r688_arm_0024",
+        "codex_r688_arm_0025",
+        "codex_r688_arm_0028",
+        "codex_r688_arm_0033",
+        "codex_r688_arm_0035",
+        "codex_r688_arm_0038",
+        "codex_r688_arm_0040",
+        "codex_r688_arm_0048",
+        "codex_r688_arm_0052",
+        "codex_r688_arm_0056",
+        "codex_r688_arm_0058"
+      ]
+    }
+  ],
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+  "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+  "before_sha256": "b9040f6216647f957668c3c1465322a24b2cb70c48ec10a5b55907142ef384f8",
+  "after_sha256": "b90f4695d347b53ec336f38c2e583213a36c91e47366f01d96233c5f8d35258a",
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 209,
+      "identical": true,
+      "include_trace_sha256": "56b7ad6420d9495cb19e9c10272be72f6ff169514a9d8f9c654b3866483ff221",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 209,
+      "identical": true,
+      "include_trace_sha256": "56b7ad6420d9495cb19e9c10272be72f6ff169514a9d8f9c654b3866483ff221",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "removed_arms": [
+    {
+      "macro": "NPX",
+      "original_line": 647,
+      "old_body_sha256": "e704d88d49ab6d3e6297c05ee66dbadf2f663f26074f04abf0d2516a515af36c"
+    },
+    {
+      "macro": "DPMI",
+      "original_line": 704,
+      "old_body_sha256": "111306cd7a129240a012774a03677db6d74f39315d2f018d49df5aecf6854c0d"
+    },
+    {
+      "macro": "MSWDVR",
+      "original_line": 777,
+      "old_body_sha256": "c1420e4fd668ee3e6f9d826da14c93a21c70feb2f66fb0f87a88c0c8785d34db"
+    }
+  ],
+  "review": "Recursive structure matches original in all retained arms except two registered local non-CPU40 rejection guards. Both supported product contexts observed 18 selected arms; three previously unhit real-code arms are excluded after validating build macro sets and sources: NPX is defined only when !CCPU, and DPMI/MSWDVR are absent from product definitions. Original nested conditions within already excluded ancestors are not restored.",
+  "limitations": "Cached compilation and package comparison pending. No guest changes."
+}

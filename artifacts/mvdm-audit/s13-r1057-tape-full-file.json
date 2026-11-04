@@ -1,0 +1,205 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+  "source_sha256": "b07b00252359ee706c07b58f457a952ea7277c40880c40f9d4ab6a0bc105194b",
+  "object": "bios/tape_io",
+  "arms": [
+    {
+      "label": "codex_r688_arm_0000",
+      "line": 19,
+      "kind": "ifdef",
+      "expression": "SEGMENTATION",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0001",
+      "line": 73,
+      "kind": "ifdef",
+      "expression": "PM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0002",
+      "line": 74,
+      "kind": "ifndef",
+      "expression": "CPU_30_STYLE",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0003",
+      "line": 86,
+      "kind": "if",
+      "expression": "(!defined(PROD) || !defined(CPU_30_STYLE))",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0004",
+      "line": 94,
+      "kind": "ifdef",
+      "expression": "CPU_30_STYLE",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0005",
+      "line": 96,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0006",
+      "line": 109,
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0007",
+      "line": 133,
+      "kind": "if",
+      "expression": "0",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0008",
+      "line": 138,
+      "kind": "ifdef",
+      "expression": "PM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0009",
+      "line": 145,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0010",
+      "line": 152,
+      "kind": "ifdef",
+      "expression": "PM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0011",
+      "line": 186,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0012",
+      "line": 191,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0013",
+      "line": 203,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0014",
+      "line": 212,
+      "kind": "ifdef",
+      "expression": "PM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0015",
+      "line": 269,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0016",
+      "line": 279,
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0017",
+      "line": 282,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0018",
+      "line": 291,
+      "kind": "ifdef",
+      "expression": "SPC486",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0019",
+      "line": 306,
+      "kind": "ifndef",
+      "expression": "PROD",
+      "error_only": true
+    }
+  ],
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "d08550d11e68970f964c062c7d80bfad0d2ca3154c1a994f09350a86bb844495",
+      "hit": [
+        "codex_r688_arm_0001",
+        "codex_r688_arm_0002",
+        "codex_r688_arm_0003",
+        "codex_r688_arm_0005",
+        "codex_r688_arm_0008",
+        "codex_r688_arm_0010",
+        "codex_r688_arm_0011",
+        "codex_r688_arm_0014",
+        "codex_r688_arm_0017"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "d08550d11e68970f964c062c7d80bfad0d2ca3154c1a994f09350a86bb844495",
+      "hit": [
+        "codex_r688_arm_0001",
+        "codex_r688_arm_0002",
+        "codex_r688_arm_0003",
+        "codex_r688_arm_0005",
+        "codex_r688_arm_0008",
+        "codex_r688_arm_0010",
+        "codex_r688_arm_0011",
+        "codex_r688_arm_0014",
+        "codex_r688_arm_0017"
+      ]
+    }
+  ],
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\tape_io.c",
+  "original_sha256": "3aa86f1faf07f68937629f1d6e410eb41f498e17dc6d747647c7d6e5697c80aa",
+  "before_sha256": "b07b00252359ee706c07b58f457a952ea7277c40880c40f9d4ab6a0bc105194b",
+  "after_sha256": "ecd58f9518d7c331853188d270ca9fea5bfba18ea182a359fb0514d2cee63517",
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 194,
+      "identical": true,
+      "include_trace_sha256": "33c504e7601cf3906d65b94f1aca75a447be3bd42840c312489ca386af8637b6",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 194,
+      "identical": true,
+      "include_trace_sha256": "33c504e7601cf3906d65b94f1aca75a447be3bd42840c312489ca386af8637b6",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "review": "Audited complete original/current conditional tree along selected product paths. Restored original CPU_30_STYLE if/else enclosing unchanged CPU40 descriptor operations; CPU30 unsupported arm replaced by #error with original line anchors. Other unselected current branches already #error; nested original conditions under those excluded parents not restored.",
+  "limitations": "Build and byte comparison pending. No guest change."
+}

@@ -1,0 +1,12 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/j_c_lang.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\j_c_lang.h",
+  "original_sha256": "24f207c966e47150f1b1be512ed73a4ff8c331009a212e4ceda76b822944dda1",
+  "current_sha256": "21b34c46d35bbf1588d07a78bf3d77f3ea498fd30bd7e2d4fcea1f254848481d",
+  "review": "Full original/current tree has two nonnested groups: LITTLEND is observed selected; BIGEND is already #error with original line anchors. No source change.",
+  "evidence": [
+    "s13-r802-jclang-header-context.json",
+    "compile-branch-selection/branches.csv"
+  ],
+  "limitations": "No new exclusion."
+}

@@ -1,0 +1,32 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/cpu_c.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\cpu_c.h",
+  "original_sha256": "8cd25a965f1866a6d8e64621712c00d2c5cb83f47c053c7aac8cb72ce6620f15",
+  "current_sha256": "8cd25a965f1866a6d8e64621712c00d2c5cb83f47c053c7aac8cb72ce6620f15",
+  "prior_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/cpu_c.h",
+      "line": "1",
+      "directive": "ifndef",
+      "expression": "_Cpu_c_h",
+      "chain_start": "1",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "b8053aab0869cae44ec197df7937876f03858d7a50da834cc8d3199d7dc91a31"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/cpu_c.h",
+      "line": "104",
+      "directive": "ifndef",
+      "expression": "SWAPPED_M",
+      "chain_start": "104",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "b8053aab0869cae44ec197df7937876f03858d7a50da834cc8d3199d7dc91a31"
+    }
+  ],
+  "review": "Entire file is byte-identical to original. Both the include guard and its sole nested SWAPPED_M guard were observed selected in product contexts; retained unchanged.",
+  "limitations": "No unselected condition bodies to exclude."
+}

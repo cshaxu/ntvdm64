@@ -1,0 +1,426 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+  "source_sha256": "2a744e82cae78d64641e336b4495a956f35bb890c0f276f00a24b2d7ebd65dec",
+  "object": "comms/printer",
+  "arms": [
+    {
+      "label": "codex_r688_arm_0000",
+      "line": 3,
+      "kind": "ifdef",
+      "expression": "PRINTER",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0001",
+      "line": 69,
+      "kind": "ifdef",
+      "expression": "SCCSID",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0002",
+      "line": 73,
+      "kind": "ifdef",
+      "expression": "SEGMENTATION",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0003",
+      "line": 89,
+      "kind": "ifdef",
+      "expression": "SYSTEMV",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0004",
+      "line": 110,
+      "kind": "ifndef",
+      "expression": "PROD",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0005",
+      "line": 137,
+      "kind": "ifdef",
+      "expression": "ERROR",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0006",
+      "line": 173,
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0007",
+      "line": 185,
+      "kind": "if",
+      "expression": "defined(NTVDM)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0008",
+      "line": 215,
+      "kind": "ifdef",
+      "expression": "PS_FLUSHING",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0009",
+      "line": 238,
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0010",
+      "line": 255,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0011",
+      "line": 281,
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0012",
+      "line": 295,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0013",
+      "line": 327,
+      "kind": "if",
+      "expression": "defined(NTVDM)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0014",
+      "line": 353,
+      "kind": "ifndef",
+      "expression": "DELAYED_INTS",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0015",
+      "line": 356,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0016",
+      "line": 366,
+      "kind": "ifndef",
+      "expression": "DELAYED_INTS",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0017",
+      "line": 369,
+      "kind": "else",
+      "expression": "",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0018",
+      "line": 399,
+      "kind": "ifdef",
+      "expression": "PC_CONFIG",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0019",
+      "line": 425,
+      "kind": "if",
+      "expression": "defined(NTVDM)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0020",
+      "line": 447,
+      "kind": "if",
+      "expression": "!defined(MONITOR)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0021",
+      "line": 450,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0022",
+      "line": 470,
+      "kind": "if",
+      "expression": "defined(NTVDM)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0023",
+      "line": 486,
+      "kind": "ifdef",
+      "expression": "PC_CONFIG",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0024",
+      "line": 488,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0025",
+      "line": 501,
+      "kind": "if",
+      "expression": "defined(NTVDM)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0026",
+      "line": 514,
+      "kind": "ifdef",
+      "expression": "PS_FLUSHING",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0027",
+      "line": 533,
+      "kind": "if",
+      "expression": "defined(NTVDM) && !defined(MONITOR)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0028",
+      "line": 535,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0029",
+      "line": 542,
+      "kind": "ifndef",
+      "expression": "DELAYED_INTS",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0030",
+      "line": 547,
+      "kind": "ifdef",
+      "expression": "PS_FLUSHING",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0031",
+      "line": 569,
+      "kind": "if",
+      "expression": "defined(NTVDM)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0032",
+      "line": 580,
+      "kind": "ifndef",
+      "expression": "PROD",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0033",
+      "line": 634,
+      "kind": "if",
+      "expression": "defined(NTVDM)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0034",
+      "line": 642,
+      "kind": "if",
+      "expression": "defined(NTVDM) && !defined(MONITOR)",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0035",
+      "line": 644,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0036",
+      "line": 650,
+      "kind": "ifndef",
+      "expression": "PROD",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0037",
+      "line": 661,
+      "kind": "ifdef",
+      "expression": "SEGMENTATION",
+      "error_only": true
+    },
+    {
+      "label": "codex_r688_arm_0038",
+      "line": 683,
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0039",
+      "line": 715,
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0040",
+      "line": 725,
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0041",
+      "line": 729,
+      "kind": "ifdef",
+      "expression": "ANSI",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0042",
+      "line": 731,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0043",
+      "line": 785,
+      "kind": "ifdef",
+      "expression": "NTVDM",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0044",
+      "line": 789,
+      "kind": "if",
+      "expression": "defined(MONITOR)",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0045",
+      "line": 791,
+      "kind": "else",
+      "expression": "",
+      "error_only": false
+    },
+    {
+      "label": "codex_r688_arm_0046",
+      "line": 801,
+      "kind": "ifdef",
+      "expression": "PS_FLUSHING",
+      "error_only": true
+    }
+  ],
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "de1edd5dcd1a78a152c0b8255b06a721d850181e0e2f57c99af983f549542376",
+      "hit": [
+        "codex_r688_arm_0000",
+        "codex_r688_arm_0005",
+        "codex_r688_arm_0006",
+        "codex_r688_arm_0007",
+        "codex_r688_arm_0009",
+        "codex_r688_arm_0011",
+        "codex_r688_arm_0013",
+        "codex_r688_arm_0014",
+        "codex_r688_arm_0016",
+        "codex_r688_arm_0019",
+        "codex_r688_arm_0021",
+        "codex_r688_arm_0022",
+        "codex_r688_arm_0024",
+        "codex_r688_arm_0025",
+        "codex_r688_arm_0028",
+        "codex_r688_arm_0029",
+        "codex_r688_arm_0031",
+        "codex_r688_arm_0033",
+        "codex_r688_arm_0035",
+        "codex_r688_arm_0038",
+        "codex_r688_arm_0039",
+        "codex_r688_arm_0040",
+        "codex_r688_arm_0041",
+        "codex_r688_arm_0043",
+        "codex_r688_arm_0044"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "de1edd5dcd1a78a152c0b8255b06a721d850181e0e2f57c99af983f549542376",
+      "hit": [
+        "codex_r688_arm_0000",
+        "codex_r688_arm_0005",
+        "codex_r688_arm_0006",
+        "codex_r688_arm_0007",
+        "codex_r688_arm_0009",
+        "codex_r688_arm_0011",
+        "codex_r688_arm_0013",
+        "codex_r688_arm_0014",
+        "codex_r688_arm_0016",
+        "codex_r688_arm_0019",
+        "codex_r688_arm_0021",
+        "codex_r688_arm_0022",
+        "codex_r688_arm_0024",
+        "codex_r688_arm_0025",
+        "codex_r688_arm_0028",
+        "codex_r688_arm_0029",
+        "codex_r688_arm_0031",
+        "codex_r688_arm_0033",
+        "codex_r688_arm_0035",
+        "codex_r688_arm_0038",
+        "codex_r688_arm_0039",
+        "codex_r688_arm_0040",
+        "codex_r688_arm_0041",
+        "codex_r688_arm_0043",
+        "codex_r688_arm_0044"
+      ]
+    }
+  ],
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\printer.c",
+  "original_sha256": "b1456dcbc0dc6b4d1fd5d101bfaa6bdc9a4cd5d970c14215f3ae62a173f17ccb",
+  "before_sha256": "2a744e82cae78d64641e336b4495a956f35bb890c0f276f00a24b2d7ebd65dec",
+  "after_sha256": "04d3c8c9dafa6cb9d38c4e3c073ac7a4f8787dc3fbc260ef10d82fb6fd33c4b9",
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 185,
+      "identical": true,
+      "include_trace_sha256": "b0bb42056359ca3a6d8440a48e2ef6411d3ff3e1efe340ad01ab3ce91585e78e",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 185,
+      "identical": true,
+      "include_trace_sha256": "b0bb42056359ca3a6d8440a48e2ef6411d3ff3e1efe340ad01ab3ce91585e78e",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "review": "Recursive original/current tree matches in retained arms; prior exclusions already error. Two unhit real-code alternatives are excluded: non-ANSI printer_setup_table and non-MONITOR printer close. Both actual product compile commands specify /DANSI and per-source /DMONITOR, confirmed by two contextual witnesses. Other selected original paths retained.",
+  "limitations": "Build and byte comparison pending. The per-source printer MONITOR selector is an existing build setting; this evidence alone does not establish hardware V86 monitor behavior."
+}

@@ -1,0 +1,236 @@
+{
+  "records": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/ccpu/localfm.obj",
+      "CCPU": true,
+      "PROD": true,
+      "command_sha256": "9c8c134d8adb9abeb80bfe2a00d636bf1857646d08f00fac3dd73ef89ff930df"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/ega_prts.obj",
+      "CCPU": true,
+      "PROD": true,
+      "command_sha256": "c2aacb44efe926aeea102635dff3bce12b6b668d0018429516264151e0cd4598"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/ega_vide.obj",
+      "CCPU": true,
+      "PROD": true,
+      "command_sha256": "b640eb6933e6a061ef3905247dc3a68c5e088db7a36ede5756764159ee9219f6"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/gfx_updt.obj",
+      "CCPU": true,
+      "PROD": true,
+      "command_sha256": "474160d4c96e2423b50d46840538e6c445b223ede3e641e690043ec30b39bbe0"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/video.obj",
+      "CCPU": true,
+      "PROD": true,
+      "command_sha256": "8cf297df02d6aebd0693483970b1f6395c7d0457bf911af96a78e21ac9246807"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/video_io.obj",
+      "CCPU": true,
+      "PROD": true,
+      "command_sha256": "ecaf5a88eb8cd8ff6a44099dd7e97c6e19d7e303d6e524bee26dc0cf2c893ad6"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/v7_video.obj",
+      "CCPU": true,
+      "PROD": true,
+      "command_sha256": "99d97c96fc01462a43a0d4cb8823e72003c82e7741d254614f43f7b62e6265e5"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/ega_read.obj",
+      "CCPU": true,
+      "PROD": true,
+      "command_sha256": "a01e3a8a4da9c90911c3c1db5760cae26e1a67da3a1e417e6cbeb69e2d448c88"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/vga_prts.obj",
+      "CCPU": true,
+      "PROD": true,
+      "command_sha256": "a9a010cfc0f3bcaaba8ea8b6a42756de2eaa79fa3f9d28c9bc47d1eaa3990b72"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/vga_vide.obj",
+      "CCPU": true,
+      "PROD": true,
+      "command_sha256": "09ce5cde2a1ca1cad651c779b2b15c660e480e9d11d786e2a1fed54f9f2e1c30"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/ega_writ.obj",
+      "CCPU": true,
+      "PROD": true,
+      "command_sha256": "2abc6b41d6cce9d5f52749ba9f161555a63809a7cd28c6956b86852118f809d5"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/egawrtm0.obj",
+      "CCPU": true,
+      "PROD": true,
+      "command_sha256": "54824ae2697b3f5d287b29096f8171daac4e17059e3b7d7c5d06b82d4018a5f5"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/egwrtm12.obj",
+      "CCPU": true,
+      "PROD": true,
+      "command_sha256": "cefd5355735a71b617e697e99100148c02df1782b612e1a829da998b773d46e2"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/video/cga.obj",
+      "CCPU": true,
+      "PROD": true,
+      "command_sha256": "cc37223fa49aad09fe8825170c1e0b1e532c79c38eda7424e84524c6b70db12b"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/cvidc/accessfn.obj",
+      "CCPU": false,
+      "PROD": false,
+      "command_sha256": "61f9778c7bb9405f39a26f09f7fca46319499fff0260cd08bda322a97386a573"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/cvidc/mvdm_cvidc_vector_binding.obj",
+      "CCPU": false,
+      "PROD": false,
+      "command_sha256": "eee0cd574be4d35d015e8c635f886d15b8a0937fc80fe624176a3a67e465d5d3"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/tests/cvidc_vector_binding_fixture.obj",
+      "CCPU": false,
+      "PROD": false,
+      "command_sha256": "6beaf837e4d2a8f4d4e32bccfe758f5b42e0ac1bcd0d27752a60bb18736a3378"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/ccpu/localfm.obj",
+      "CCPU": true,
+      "PROD": true,
+      "command_sha256": "9c8c134d8adb9abeb80bfe2a00d636bf1857646d08f00fac3dd73ef89ff930df"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/ega_prts.obj",
+      "CCPU": true,
+      "PROD": true,
+      "command_sha256": "29464ceb0d8f9ed1ddd18120bc708ba7070b5da1205b18a85a89bab2f2293f28"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/ega_vide.obj",
+      "CCPU": true,
+      "PROD": true,
+      "command_sha256": "8ad5b9e904df910317becec7c641a0c393d47c1745d78d1402c38eba136a44fb"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/gfx_updt.obj",
+      "CCPU": true,
+      "PROD": true,
+      "command_sha256": "92e881a5b9d6cc0a9fef052d1a00338c54ad21dfcd2fafcf4fbfa75ad469a7f9"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/video.obj",
+      "CCPU": true,
+      "PROD": true,
+      "command_sha256": "79b550574e8b1d1a85ee97771df516034d31c8b805c594c07dd6c0143b11cd9a"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/video_io.obj",
+      "CCPU": true,
+      "PROD": true,
+      "command_sha256": "fba68682c65504ba30f6fb9b408068434c7050d58c0d073334f26f3037516542"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/v7_video.obj",
+      "CCPU": true,
+      "PROD": true,
+      "command_sha256": "4c824ab175b0a1c5136816531c0a7a9d4bf45e63bee7301de0b4731feae31750"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/vga_prts.obj",
+      "CCPU": true,
+      "PROD": true,
+      "command_sha256": "8630f051c0a842f6b5652a3f671b8628adf920bda13323743d31ab127ea89d31"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/vga_vide.obj",
+      "CCPU": true,
+      "PROD": true,
+      "command_sha256": "671b0f399b9188e20e17ca03c68258ec0e2186e38358f70dd86fdf202aadb502"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/ega_read.obj",
+      "CCPU": true,
+      "PROD": true,
+      "command_sha256": "170ceac493b1390a07d33d57164b30eb850ae12ca702b4efe0ee22f6222c4dbd"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/ega_writ.obj",
+      "CCPU": true,
+      "PROD": true,
+      "command_sha256": "5fd721e8caecd8a6213b2d93ce4ccaa2f7aa514eee11ee59e98c55946e480112"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/egwrtm12.obj",
+      "CCPU": true,
+      "PROD": true,
+      "command_sha256": "43aeb0a88b2c2632d6d947b21e641e83d5dd2b7a60c32b00f32799a083db0469"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/egawrtm0.obj",
+      "CCPU": true,
+      "PROD": true,
+      "command_sha256": "e2cbbc6fc26d22157795cc05066420019dddce01c195b4806a94fba2f4f3c915"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/video/cga.obj",
+      "CCPU": true,
+      "PROD": true,
+      "command_sha256": "4a7dbf01a151368ea6b0dabbf9a9ec009552d4abf9aab3046edfc5b5f61a830c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/cvidc/accessfn.obj",
+      "CCPU": false,
+      "PROD": false,
+      "command_sha256": "9b1afaef2b074d3e787eed13ed712a0a788c7cb9487ba1d3b8b48d45884f09c0"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/cvidc/mvdm_cvidc_vector_binding.obj",
+      "CCPU": false,
+      "PROD": false,
+      "command_sha256": "3445c5d98e3b26ae27b7967c3757c9a7f977c3bbe5cd70444dc9fc79505b0c2d"
+    }
+  ],
+  "limitations": "Flags alone do not capture source-level definitions; project source was also searched for #define/#undef PROD, with no matches."
+}

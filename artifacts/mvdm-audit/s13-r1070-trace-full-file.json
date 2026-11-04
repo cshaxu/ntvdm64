@@ -1,0 +1,12 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\trace.c",
+  "original_sha256": "b776bec19f7c7c615684711b915c7c7d1c56a124d37e14fc30a575681c83b2e3",
+  "before_sha256": "d49b0d3b564533b552dc684d7ec1f5c688839653dce2acba3117fdf3fcf7e063",
+  "after_sha256": "4c7adf902ed8846452b3c4cb46453860107d0c06d5c3bbdf5b2360f681f700fd",
+  "review": "All original/current conditional groups align recursively through selected arms. Product witnesses select all retained real-code arms; excluded arms were already #error. Corrected error and continuation line anchors against original.",
+  "evidence": [
+    "s13-r804-trace-conditions.json"
+  ],
+  "limitations": "Build and byte comparison pending; nested original conditions under excluded arms intentionally omitted."
+}
