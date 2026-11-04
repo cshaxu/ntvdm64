@@ -214,6 +214,7 @@ LONG _SetWindowLong(
 #endif /* original client-owner selection */
 #line 953
 #ifdef DEBUG
+#line 954
 #error Excluded unsupported original DEBUG window-style tracing
 #endif
 #if defined(WOW_ORIGINAL_DIALOG_GETSET) && !defined(WOW_ORIGINAL_CONTROL_TEXT) && !defined(WOW_ORIGINAL_CONTROL_COLOR) && !defined(WOW_ORIGINAL_CONTROL_BRUSH_CLIENT)
@@ -230,6 +231,7 @@ LONG _SetWindowLong(
 #endif /* WOW_ORIGINAL_DIALOG_GETSET */
 #line 965
 #ifdef DEBUG
+#line 966
 #error Excluded unsupported original DEBUG window-style tracing
 #endif
 #if defined(WOW_ORIGINAL_DIALOG_GETSET) && !defined(WOW_ORIGINAL_CONTROL_TEXT) && !defined(WOW_ORIGINAL_CONTROL_COLOR) && !defined(WOW_ORIGINAL_CONTROL_BRUSH_CLIENT)
@@ -297,18 +299,23 @@ LONG GetClassWOWWords(
 #endif /* WOW_ORIGINAL_DIALOG_GETSET */
 #line 380
 #ifdef MEMPHIS_MENUS
+#line 381
 #error Excluded unsupported MEMPHIS_MENUS client owner
 #else // MEMPHIS_MENUS
 #line 440
 #endif // MEMPHIS_MENUS
 #line 500
 #ifdef MEMPHIS_MENU_WATERMARKS
+#line 501
 #error Excluded unsupported MEMPHIS_MENU_WATERMARKS client owner
 #endif // MEMPHIS_MENU_WATERMARKS
+#line 523
 #line 1611
 #ifdef FE_SB // fnINWPARAMDBCSCHAR()
+#line 1612
 #error Excluded unsupported FE_SB client message owner
 #endif // FE_SB
+#line 1646
 
 
 #line 693
@@ -332,6 +339,12 @@ LONG GetClassWOWWords(
 #error Excluded unsupported original FE_SB branch
 #else
 #line 759
+#line 760
+#ifdef DEBUG
+#line 761
+#error Excluded unsupported original DEBUG message tracing
+#endif
+#line 765
 #endif // FE_SB
 #line 767
 

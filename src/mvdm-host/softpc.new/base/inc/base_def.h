@@ -49,6 +49,7 @@
 #line 47
 #error Excluded unsupported missing TRUE base profile
 #endif
+#line 49
 
 #line 50
 #ifndef FALSE

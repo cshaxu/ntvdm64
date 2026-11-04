@@ -1,0 +1,175 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\sim32.c",
+  "original_sha256": "1f634b9d6c09d0f767a90ec9e577817800a07dc353cffa433ca2e0268d2cd42f",
+  "current_sha256": "89f5fe924f6f99e06f9da1d75addfa204c95f87b9e5f57e280d47665eddb94ee",
+  "prior_selection_records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "line": "16",
+      "directive": "ifdef",
+      "expression": "SIM32",
+      "chain_start": "16",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "2fdd374048faf4ba0b34538f01b4a774f29b5e1114017bb44089bf9abcafb7ec"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "line": "18",
+      "directive": "ifdef",
+      "expression": "CPU_40_STYLE",
+      "chain_start": "18",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "2fdd374048faf4ba0b34538f01b4a774f29b5e1114017bb44089bf9abcafb7ec"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "line": "37",
+      "directive": "ifdef",
+      "expression": "CPU_40_STYLE",
+      "chain_start": "37",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "2fdd374048faf4ba0b34538f01b4a774f29b5e1114017bb44089bf9abcafb7ec"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "line": "42",
+      "directive": "ifdef",
+      "expression": "CPU_40_STYLE",
+      "chain_start": "42",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "2fdd374048faf4ba0b34538f01b4a774f29b5e1114017bb44089bf9abcafb7ec"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "line": "68",
+      "directive": "ifndef",
+      "expression": "MONITOR",
+      "chain_start": "68",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "2fdd374048faf4ba0b34538f01b4a774f29b5e1114017bb44089bf9abcafb7ec"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "line": "196",
+      "directive": "ifndef",
+      "expression": "MONITOR",
+      "chain_start": "196",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "2fdd374048faf4ba0b34538f01b4a774f29b5e1114017bb44089bf9abcafb7ec"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "line": "241",
+      "directive": "ifndef",
+      "expression": "CPU_40_STYLE",
+      "chain_start": "241",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "2fdd374048faf4ba0b34538f01b4a774f29b5e1114017bb44089bf9abcafb7ec"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "line": "252",
+      "directive": "ifdef",
+      "expression": "CPU_40_STYLE",
+      "chain_start": "252",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "2fdd374048faf4ba0b34538f01b4a774f29b5e1114017bb44089bf9abcafb7ec"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "line": "267",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "252",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "2fdd374048faf4ba0b34538f01b4a774f29b5e1114017bb44089bf9abcafb7ec"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "line": "276",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "276",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "2fdd374048faf4ba0b34538f01b4a774f29b5e1114017bb44089bf9abcafb7ec"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "line": "350",
+      "directive": "ifndef",
+      "expression": "CPU_40_STYLE",
+      "chain_start": "350",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "2fdd374048faf4ba0b34538f01b4a774f29b5e1114017bb44089bf9abcafb7ec"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "line": "365",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "365",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "2fdd374048faf4ba0b34538f01b4a774f29b5e1114017bb44089bf9abcafb7ec"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "line": "407",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "407",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "2fdd374048faf4ba0b34538f01b4a774f29b5e1114017bb44089bf9abcafb7ec"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "line": "450",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "350",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "2fdd374048faf4ba0b34538f01b4a774f29b5e1114017bb44089bf9abcafb7ec"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "line": "462",
+      "directive": "ifndef",
+      "expression": "PROD",
+      "chain_start": "462",
+      "depth": "3",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "2fdd374048faf4ba0b34538f01b4a774f29b5e1114017bb44089bf9abcafb7ec"
+    }
+  ],
+  "review": "Original and current conditional trees align except the documented local CPU40 dispatch for sim32_effective_addr. The only unmatched original #ifndef PROD (original line 247) is inside the replaced CPU30 DESCR/selector_outside_table block; the selected CPU40 uses the pre-existing MVDM-HOST-DIV-177 checked descriptor adapter. The retired non-CPU40 alternative is #error. The earlier function-local CPU40 initialization selector is retained. No new behavioral code or guest source changed.",
+  "limitations": "This classification depends on existing adapter semantic evidence; it is not new proof that every CPU exception matches NT4."
+}

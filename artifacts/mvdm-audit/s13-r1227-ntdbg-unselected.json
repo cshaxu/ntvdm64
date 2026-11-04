@@ -1,0 +1,32 @@
+{
+  "removed": {
+    "path": "src/non-mvdm/public/sdk/inc/ntdbg.h",
+    "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntdbg.h",
+    "current_sha256": "33606d8977bdea48f291fccff2f2fe357ac7d018db5cb424508016e6b2073ffe",
+    "original_sha256": "a5b4a6018a953d66d0e73008ceed9939e4f88917fca9250f6dbf780dcf1c332a",
+    "observed_in": [
+      "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
+      "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
+    ],
+    "status": "deferred-depth1-contexts-unverified",
+    "evidence": "s13-r969-ntdbg-context-review.json"
+  },
+  "reason": "The entire original header body is inside #ifndef _NTDBG_; both actual product debugger compile contexts explicitly define _NTDBG_. The only source include was dbg.c, and no other source, tool or test consumer was found. A Ninja dependency merely proves the header file was opened, not that its contents were selected. Removed the inactive include, header and now-unnecessary per-object compiler define. Original dbg.c include replacement preserves the physical line count.",
+  "dbg_current_sha256": "f6c2da346f0a421620523036c1afa156852441a035e1407906616ae86e82bd27",
+  "contexts": [
+    {
+      "tree": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/mvdm-debugger/dbg.obj",
+      "previous_command_sha256": "db3ebae679ccb8b24b0a500c3b0e4d08a7266a1e22bb60009eebef688acff02e",
+      "previous_define": "/D_NTDBG_"
+    },
+    {
+      "tree": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "object": "obj/mvdm-debugger/dbg.obj",
+      "previous_command_sha256": "db3ebae679ccb8b24b0a500c3b0e4d08a7266a1e22bb60009eebef688acff02e",
+      "previous_define": "/D_NTDBG_"
+    }
+  ],
+  "prior_evidence": "docs/etc/evidence/m0-t420-s43-debugger-capability-ledger.md",
+  "limitations": "Next ten-file batch requires full build, image comparison and applicable tests; no guest source or binary changed."
+}

@@ -58,7 +58,7 @@
 #include <nt.h>
 #include <ntrtl.h>
 #include <nturtl.h>
-#include <ntdddisk.h>
+
 #else
 #line 58
 #error Unsupported excluded original DEM host configuration

@@ -1,0 +1,9 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+  "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+  "current_sha256": "4c34acfe5d90072be867b616be647fcac9d81af602b86e10c272e5e6c8fd93ac",
+  "review": "Original selected NTVDM alternative begins after physical #else at line 1949: corrected selected #line 1816 to 1950; original end remains 2093.",
+  "prior_evidence": "s13-r1219-timer-line-reopen.json",
+  "limitations": "Build, binary comparison and required verification pending."
+}

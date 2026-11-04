@@ -1,0 +1,120 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+  "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+  "current_sha256": "7900b8b6f0eeb514ffcbcd1c46b878a247d0c28a74a19542b8e8bc80ae2035a1",
+  "prior_selection_records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "line": "2",
+      "directive": "if",
+      "expression": "defined(WOW_ORIGINAL_CONTROL_TEXT)",
+      "chain_start": "2",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "6aa2d4bc93df73b9d6d5e2e301eeec9f9fb113aefc5e5bea4e4d83b4e17497d3"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "line": "33",
+      "directive": "elif",
+      "expression": "defined(WOW_ORIGINAL_CONTROL_COLOR) || defined(WOW_ORIGINAL_CONTROL_BRUSH_CLIENT)",
+      "chain_start": "2",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "6aa2d4bc93df73b9d6d5e2e301eeec9f9fb113aefc5e5bea4e4d83b4e17497d3"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "line": "37",
+      "directive": "ifdef",
+      "expression": "WOW_ORIGINAL_CONTROL_BRUSH_CLIENT",
+      "chain_start": "37",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "6aa2d4bc93df73b9d6d5e2e301eeec9f9fb113aefc5e5bea4e4d83b4e17497d3"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "line": "57",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "37",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "6aa2d4bc93df73b9d6d5e2e301eeec9f9fb113aefc5e5bea4e4d83b4e17497d3"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "line": "79",
+      "directive": "elif",
+      "expression": "defined(WOW_ORIGINAL_DIALOG_GETSET)",
+      "chain_start": "2",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "6aa2d4bc93df73b9d6d5e2e301eeec9f9fb113aefc5e5bea4e4d83b4e17497d3"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "line": "114",
+      "directive": "ifdef",
+      "expression": "WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+      "chain_start": "114",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "6aa2d4bc93df73b9d6d5e2e301eeec9f9fb113aefc5e5bea4e4d83b4e17497d3"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "line": "118",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "114",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "6aa2d4bc93df73b9d6d5e2e301eeec9f9fb113aefc5e5bea4e4d83b4e17497d3"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "line": "214",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "chain_start": "214",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "6aa2d4bc93df73b9d6d5e2e301eeec9f9fb113aefc5e5bea4e4d83b4e17497d3"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "line": "226",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "chain_start": "226",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "6aa2d4bc93df73b9d6d5e2e301eeec9f9fb113aefc5e5bea4e4d83b4e17497d3"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "line": "243",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "2",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "6aa2d4bc93df73b9d6d5e2e301eeec9f9fb113aefc5e5bea4e4d83b4e17497d3"
+    }
+  ],
+  "review": "Mapped pinned original conditional groups by original physical line despite reordering into function-owner subsets. Restored the original DEBUG group at 760 inside the retained FE_SB alternative with an excluded body. Added missing excluded-arm line anchors at 380, 500, 953, 965 and 1611, plus original continuation anchors 523 and 1646. Existing WOW text/color/brush/dialog owner selectors and selected bindings remain.",
+  "limitations": "Build and tests pending. DEBUG, FE_SB and Memphis profiles remain unsupported; no guest modified."
+}

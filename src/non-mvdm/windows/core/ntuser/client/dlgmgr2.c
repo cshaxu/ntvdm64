@@ -245,6 +245,7 @@ BOOL IsDialogMessageA(
 #endif /* WOW_ORIGINAL_DIALOG_KEYBOARD */
 #line 221
 #ifdef FE_SB // IsDialogMessageA()
+#line 222
 #error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
 #else
 #ifdef WOW_ORIGINAL_DIALOG_KEYBOARD
@@ -263,6 +264,7 @@ BOOL IsDialogMessageA(
 #endif /* WOW_ORIGINAL_DIALOG_KEYBOARD */
 #line 240
 #ifdef FE_IME // IsDialogMessageA()
+#line 241
 #error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
 #endif // FE_IME
 #ifdef WOW_ORIGINAL_DIALOG_KEYBOARD
@@ -308,6 +310,7 @@ BOOL IsDialogMessageW(
 #endif /* WOW_ORIGINAL_DIALOG_KEYBOARD */
 #line 281
 #ifdef LATER // JerrySh - we shouldn't need this on the client-side
+#line 282
 #error DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register.
 #endif
 #ifdef WOW_ORIGINAL_DIALOG_KEYBOARD

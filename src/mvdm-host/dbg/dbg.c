@@ -12,7 +12,7 @@
 #include <nt.h>
 #include <ntrtl.h>
 #include <nturtl.h>
-#include <ntdbg.h>
+
 #include <windows.h>
 #include <stdio.h>
 #include <string.h>

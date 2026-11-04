@@ -3,7 +3,7 @@
 #include <nt.h>
 #include <ntrtl.h>
 #include <nturtl.h>
-#include <ntdddisk.h>
+
 #include <windows.h>
 #include "insignia.h"
 #include "host_def.h"

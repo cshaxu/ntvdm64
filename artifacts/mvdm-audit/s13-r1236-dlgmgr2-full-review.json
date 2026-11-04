@@ -1,0 +1,65 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgmgr2.c",
+  "original_sha256": "a3e9286c40e4e11ec872fd9b2d7b23cba640f09fb4840c4e6130e301d5277b9e",
+  "current_sha256": "f48ce8562cdea6f1a37467eabab000ff052802ff3efef33f5d754be468555ccf",
+  "prior_selection_records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "line": "236",
+      "directive": "ifdef",
+      "expression": "WOW_ORIGINAL_DIALOG_KEYBOARD",
+      "chain_start": "236",
+      "depth": "1",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "249991fd20d874ece85ca9fbae411c96a6d883aaa5f9990cf2e75d221e95add9"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "line": "245",
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "chain_start": "245",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "249991fd20d874ece85ca9fbae411c96a6d883aaa5f9990cf2e75d221e95add9"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "line": "247",
+      "directive": "else",
+      "expression": "",
+      "chain_start": "245",
+      "depth": "2",
+      "x86": "selected",
+      "x64": "unobserved",
+      "sha256": "249991fd20d874ece85ca9fbae411c96a6d883aaa5f9990cf2e75d221e95add9"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "line": "256",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "chain_start": "256",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "249991fd20d874ece85ca9fbae411c96a6d883aaa5f9990cf2e75d221e95add9"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "line": "297",
+      "directive": "ifdef",
+      "expression": "LATER",
+      "chain_start": "297",
+      "depth": "2",
+      "x86": "not-selected-in-observed-contexts",
+      "x64": "unobserved",
+      "sha256": "249991fd20d874ece85ca9fbae411c96a6d883aaa5f9990cf2e75d221e95add9"
+    }
+  ],
+  "review": "The pinned original has three top-level condition groups at physical lines 221, 240 and 281. All three exist in the selected source, with bodies excluded by the prior supported-profile decision. Added #line 222, 241 and 282 before their existing error directives. Local WOW_ORIGINAL_DIALOG_KEYBOARD wrappers are maintained because they select the actual owner subset and are not original condition groups.",
+  "limitations": "Build, image comparison and tests pending."
+}

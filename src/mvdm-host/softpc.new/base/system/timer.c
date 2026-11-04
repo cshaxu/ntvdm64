@@ -1751,7 +1751,7 @@ LOCAL void updateCounter IFN0()
 #line 1853
 #error Excluded unsupported non-NTVDM timer profile
 #else   /* NTVDM */
-#line 1816
+#line 1950
 
 
 /*

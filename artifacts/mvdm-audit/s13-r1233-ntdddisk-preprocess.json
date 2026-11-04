@@ -1,0 +1,197 @@
+{
+  "header": "O:\\repos.hobby\\ntvdm64\\src\\non-mvdm\\public\\ddk\\inc\\ntdddisk.h",
+  "source_sha256": "ab1a18990f477e823de45110a12a83498e87b0c4ce87c39d89720cce8ed9e455",
+  "method": "Temporary scratch header inserts preprocessing tokens after each parsed arm; actual x86 product object command and include paths reused with scratch header first; /EP only, no product source or objects modified.",
+  "arms": [
+    {
+      "line": 18,
+      "kind": "ifndef",
+      "expression": "_NTDDDISK_H_"
+    },
+    {
+      "line": 21,
+      "kind": "if",
+      "expression": "_MSC_VER > 1000"
+    },
+    {
+      "line": 25,
+      "kind": "ifdef",
+      "expression": "__cplusplus"
+    },
+    {
+      "line": 69,
+      "kind": "if",
+      "expression": "(_WIN32_WINNT >= 0x0400)"
+    },
+    {
+      "line": 83,
+      "kind": "if",
+      "expression": "(_WIN32_WINNT >= 0x0500)"
+    },
+    {
+      "line": 429,
+      "kind": "if",
+      "expression": "(_WIN32_WINNT >= 0x0500)"
+    },
+    {
+      "line": 439,
+      "kind": "if",
+      "expression": "(_WIN32_WINNT >= 0x0400)"
+    },
+    {
+      "line": 452,
+      "kind": "if",
+      "expression": "(_WIN32_WINNT >= 0x0500)"
+    },
+    {
+      "line": 740,
+      "kind": "if",
+      "expression": "(_WIN32_WINNT >= 0x0400)"
+    },
+    {
+      "line": 903,
+      "kind": "ifdef",
+      "expression": "__cplusplus"
+    }
+  ],
+  "contexts": [
+    {
+      "object": "obj/dem/dem.obj",
+      "exit_code": 0,
+      "hits": [],
+      "guard_predefined": true,
+      "guard_undefined": false,
+      "output_sha256": "37abd8ef3bb5e43e811adced2472a5c12ee429d85e6e1292e2faca4aac9852a1"
+    },
+    {
+      "object": "obj/dem/demfcb.obj",
+      "exit_code": 0,
+      "hits": [],
+      "guard_predefined": true,
+      "guard_undefined": false,
+      "output_sha256": "0f6662b7b02173af9f32e274df5f8d2cd4dad01438b4022960285b5e1b1d8a08"
+    },
+    {
+      "object": "obj/dem/demdata.obj",
+      "exit_code": 0,
+      "hits": [],
+      "guard_predefined": true,
+      "guard_undefined": false,
+      "output_sha256": "f02615c6d85c6c7f584db30e509df7d818ed28aed8307cba472778ccd9244af1"
+    },
+    {
+      "object": "obj/dem/demdir.obj",
+      "exit_code": 0,
+      "hits": [],
+      "guard_predefined": true,
+      "guard_undefined": false,
+      "output_sha256": "ee6197b6c14e8c07b411a361c76b7cb880c9a64dd57df4fae5b0eeecaa92c9ad"
+    },
+    {
+      "object": "obj/dem/demdisp.obj",
+      "exit_code": 0,
+      "hits": [],
+      "guard_predefined": true,
+      "guard_undefined": false,
+      "output_sha256": "f61c251eeca0db41f4142587fb319e8fb399324135463c3a68e75fea2c3a6c7e"
+    },
+    {
+      "object": "obj/dem/demerror.obj",
+      "exit_code": 0,
+      "hits": [],
+      "guard_predefined": true,
+      "guard_undefined": false,
+      "output_sha256": "5932a124e6666ed0e8b78c2d611b1dea393328c75863a8c18578114b8ac71cea"
+    },
+    {
+      "object": "obj/dem/demfile.obj",
+      "exit_code": 0,
+      "hits": [],
+      "guard_predefined": true,
+      "guard_undefined": false,
+      "output_sha256": "3d4df9584541c38a5dad50c5078b7e1f4b7ca284d182d145642a331e495b4f26"
+    },
+    {
+      "object": "obj/dem/demgset.obj",
+      "exit_code": 0,
+      "hits": [],
+      "guard_predefined": true,
+      "guard_undefined": false,
+      "output_sha256": "cc90c173e817de5b1fac73ab0d74adfabe7151e4c7203880a35f882787836ae6"
+    },
+    {
+      "object": "obj/dem/demioctl.obj",
+      "exit_code": 0,
+      "hits": [],
+      "guard_predefined": true,
+      "guard_undefined": false,
+      "output_sha256": "70507c680fb3374e1df01ddd1ac090762e8e0718d27ab87b9fe23b80942d3614"
+    },
+    {
+      "object": "obj/dem/demhndl.obj",
+      "exit_code": 0,
+      "hits": [],
+      "guard_predefined": true,
+      "guard_undefined": false,
+      "output_sha256": "2731479dc4d7b3a3613a2ce2b86368960d6f64825200661b07ca1d2a69328897"
+    },
+    {
+      "object": "obj/dem/demlock.obj",
+      "exit_code": 0,
+      "hits": [],
+      "guard_predefined": true,
+      "guard_undefined": false,
+      "output_sha256": "fc9c3bcc904959f6e60565c0ac102fee2ecfbf459df610c938d6f2751723c294"
+    },
+    {
+      "object": "obj/dem/demmisc.obj",
+      "exit_code": 0,
+      "hits": [],
+      "guard_predefined": true,
+      "guard_undefined": false,
+      "output_sha256": "337656b8658440edd1513bf609367aa02a08069f3c53963dc7d7ba794b0c8be9"
+    },
+    {
+      "object": "obj/dem/demlabel.obj",
+      "exit_code": 0,
+      "hits": [],
+      "guard_predefined": true,
+      "guard_undefined": false,
+      "output_sha256": "f392a78cba7fcccae3795d68c62df86208aabcdbd25ad31329c146b0a88c0ed9"
+    },
+    {
+      "object": "obj/dem/demdasd.obj",
+      "exit_code": 0,
+      "hits": [],
+      "guard_predefined": true,
+      "guard_undefined": false,
+      "output_sha256": "378f20a8bc12247ae95767e094f70490b0995b11f39499c057a757c8330c0fcf"
+    },
+    {
+      "object": "obj/dem/demsrch.obj",
+      "exit_code": 0,
+      "hits": [],
+      "guard_predefined": true,
+      "guard_undefined": false,
+      "output_sha256": "f0a9250860e4b409a1a13c1f483541d98f24baa0ed7aebd8bec72dfd36c64aaa"
+    },
+    {
+      "object": "obj/host/nt_fdisk.obj",
+      "exit_code": 0,
+      "hits": [],
+      "guard_predefined": true,
+      "guard_undefined": false,
+      "output_sha256": "881c445f71a6073a020b59a26419f077b12842364c2268f28d69985ceb1965f1"
+    },
+    {
+      "object": "obj/host/nt_rflop.obj",
+      "exit_code": 0,
+      "hits": [],
+      "guard_predefined": true,
+      "guard_undefined": false,
+      "output_sha256": "0881780d9a4371d2c205584306fd01d1f8818eeb212f50f79c3ca3e547290f1d"
+    }
+  ],
+  "matching_x64_reference": "Each of 17 x64 reference-worker object commands has the same ordered /D, /U, /FI and /I arguments as its x86 counterpart.",
+  "note": "The scratch marker probe was /EP only; the header was opened but the source guard was predefined in every observed product object."
+}

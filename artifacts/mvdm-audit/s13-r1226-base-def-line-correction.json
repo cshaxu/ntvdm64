@@ -1,0 +1,9 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/base_def.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\base_def.h",
+  "original_sha256": "084991cfc23dc79529cc67a43488ec114be882fb62a9f95b879e1b6995f7afae",
+  "current_sha256": "8145696480049e7aba5e79045a59a76bbf6042d35da109bb405e827394ca0953",
+  "review": "Added missing #line 49 following the original TRUE fallback; FALSE already resumes at original line 53.",
+  "prior_evidence": "s13-r1220-base-def-line-reopen.json",
+  "limitations": "Build, binary comparison and required verification pending."
+}

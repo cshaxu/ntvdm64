@@ -2982,3 +2982,7 @@ other configurations remain outside that evidence. Evidence:
 MVDM-HOST-DIV-799: reject unselected original DEM header branches and restore
 original diagnostic mappings; retain selected WIN_32, FLAT_32, non-i386 and
 other observed paths. Evidence: ../../artifacts/mvdm-audit/s13-r752-dem-header-branches.json.
+
+MVDM-HOST-DIV-800: remove the dbg.c include of the historical ntdbg.h whose entire body was suppressed by the sole product debugger compile's _NTDBG_ definition; remove that unused header and the now-unnecessary compiler define. Other debugger bindings remain unchanged. Evidence: artifacts/mvdm-audit/s13-r1227-ntdbg-unselected.json.
+
+MVDM-HOST-DIV-801: remove three inactive includes of the historical ntdddisk.h; its original body is guarded out before every product include and the selected SDK definitions remain. Seventeen actual x86 object preprocessors and matching x64 reference commands are recorded in artifacts/mvdm-audit/s13-r1233-ntdddisk-preprocess.json. The unselected mirror header is removed.

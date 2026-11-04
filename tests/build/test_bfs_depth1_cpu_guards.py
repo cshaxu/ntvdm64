@@ -138,7 +138,7 @@ for i, line in enumerate(timer):
         continue
     j = guard_error_index(timer, i)
     if (j + 2 < len(timer) and timer[j].strip() == '#error Excluded unsupported non-NTVDM timer profile'
-            and timer[j + 1].strip() == '#else   /* NTVDM */' and timer[j + 2].strip() == '#line 1816'):
+            and timer[j + 1].strip() == '#else   /* NTVDM */' and timer[j + 2].strip() == '#line 1950'):
         timer_matches.append((i, j))
 if len(timer_matches) != 1:
     raise SystemExit('timer NTVDM guard missing or ambiguous')
@@ -152,7 +152,7 @@ probe.write_text('\n'.join(timer[timer_start:timer_error + 3] + ['int selected_l
 base = ['cl.exe', '/nologo', '/EP', '/TC']
 selected = subprocess.run(base + ['/DNTVDM', str(probe)], capture_output=True, text=True, errors='replace')
 excluded = subprocess.run(base + [str(probe)], capture_output=True, text=True, errors='replace')
-if (selected.returncode or not re.search(r'int\s+selected_line\s*=\s*1816\s*;', selected.stdout)
+if (selected.returncode or not re.search(r'int\s+selected_line\s*=\s*1950\s*;', selected.stdout)
         or not re.search(r'int\s+following_line\s*=\s*2093\s*;', selected.stdout)):
     raise SystemExit('timer NTVDM selected lines failed: ' + selected.stderr)
 if not excluded.returncode or 'Excluded unsupported non-NTVDM timer profile' not in excluded.stdout + excluded.stderr:
@@ -841,6 +841,8 @@ for macro, original_line in (('TRUE', 46), ('FALSE', 50)):
         snippet.append(source[error_index + 2])
         following = int(source[error_index + 2].strip().split()[1])
     probe.write_text('\n'.join(snippet + ['int after_bool = __LINE__;']) + '\n', encoding='ascii')
+    if following != original_line + 3:
+        raise SystemExit('base Boolean original continuation changed: ' + macro)
     selected = subprocess.run(base + ['/D' + macro, str(probe)], capture_output=True, text=True, errors='replace')
     rejected = subprocess.run(base + ['/U' + macro, str(probe)], capture_output=True, text=True, errors='replace')
     if selected.returncode or not re.search(r'int\s+after_bool\s*=\s*' + str(following) + r'\s*;', selected.stdout):
@@ -1005,14 +1007,19 @@ print('PASS original Alpha probe first-depth exclusion and lines')
 
 source = (repo / 'src/non-mvdm/windows/core/ntuser/client/ntstubs.c').read_text(encoding='latin1').splitlines()
 marker = '#error Excluded unsupported FE_SB client message owner'
-matches = [i for i, line in enumerate(source) if line.strip() == '#ifdef FE_SB // fnINWPARAMDBCSCHAR()' and source[i+1].strip() == marker and source[i+2].strip() == '#endif // FE_SB']
+matches = [i for i, line in enumerate(source) if line.strip() == '#ifdef FE_SB // fnINWPARAMDBCSCHAR()'
+           and source[guard_error_index(source, i)].strip() == marker
+           and source[guard_error_index(source, i)+1].strip() == '#endif // FE_SB']
 if len(matches) != 1 or source[matches[0]-1].strip() != '#line 1611':
     raise SystemExit('restored original ntstubs FE_SB guard or line missing')
 i = matches[0]
-probe.write_text('\n'.join(source[i-1:i+3] + ['int after_ntstubs_guard = __LINE__;']) + '\n', encoding='ascii')
+j = guard_error_index(source, i)
+if source[j+2].strip() != '#line 1646':
+    raise SystemExit('ntstubs FE_SB original continuation missing')
+probe.write_text('\n'.join(source[i-1:j+3] + ['int after_ntstubs_guard = __LINE__;']) + '\n', encoding='ascii')
 selected = subprocess.run(base + ['/UFE_SB', str(probe)], capture_output=True, text=True, errors='replace')
 rejected = subprocess.run(base + ['/DFE_SB', str(probe)], capture_output=True, text=True, errors='replace')
-if selected.returncode or not re.search(r'int\s+after_ntstubs_guard\s*=\s*1614\s*;', selected.stdout):
+if selected.returncode or not re.search(r'int\s+after_ntstubs_guard\s*=\s*1646\s*;', selected.stdout):
     raise SystemExit('ntstubs FE_SB selected guard or line failed: ' + selected.stderr)
 if not rejected.returncode or marker[7:] not in rejected.stdout + rejected.stderr:
     raise SystemExit('unsupported FE_SB client message owner did not reject')
@@ -1035,14 +1042,19 @@ for macro, original_line in (('MEMPHIS_MENUS', 380), ('MEMPHIS_MENU_WATERMARKS',
                 or not rejected.returncode or marker[7:] not in rejected.stdout + rejected.stderr):
             raise SystemExit('ntstubs Memphis menu boundary control failed')
         continue
-    matches = [i for i, line in enumerate(source) if line.strip() == '#ifdef ' + macro and source[i+1].strip() == marker and source[i+2].strip() == '#endif // ' + macro]
+    matches = [i for i, line in enumerate(source) if line.strip() == '#ifdef ' + macro
+               and source[guard_error_index(source, i)].strip() == marker
+               and source[guard_error_index(source, i)+1].strip() == '#endif // ' + macro]
     if len(matches) != 1 or source[matches[0]-1].strip() != '#line ' + str(original_line):
         raise SystemExit('restored ntstubs menu guard or line missing: ' + macro)
     i = matches[0]
-    probe.write_text('\n'.join(source[i-1:i+3] + ['int after_menu_guard = __LINE__;']) + '\n', encoding='ascii')
+    j = guard_error_index(source, i)
+    if source[j+2].strip() != '#line 523':
+        raise SystemExit('restored ntstubs menu continuation missing')
+    probe.write_text('\n'.join(source[i-1:j+3] + ['int after_menu_guard = __LINE__;']) + '\n', encoding='ascii')
     selected = subprocess.run(base + ['/U' + macro, str(probe)], capture_output=True, text=True, errors='replace')
     rejected = subprocess.run(base + ['/D' + macro, str(probe)], capture_output=True, text=True, errors='replace')
-    if selected.returncode or not re.search(r'int\s+after_menu_guard\s*=\s*' + str(original_line + 3) + r'\s*;', selected.stdout):
+    if selected.returncode or not re.search(r'int\s+after_menu_guard\s*=\s*523\s*;', selected.stdout):
         raise SystemExit('ntstubs menu selected guard or line failed: ' + macro + selected.stderr)
     if not rejected.returncode or marker[7:] not in rejected.stdout + rejected.stderr:
         raise SystemExit('unsupported ntstubs menu owner did not reject: ' + macro)
@@ -1276,7 +1288,10 @@ for original, continuation in ((953, 956), (965, 970)):
         directive = re.match(r'^\s*#\s*(if|ifdef|ifndef|endif)\b', line)
         if directive:
             depth += -1 if directive.group(1) == 'endif' else 1
-    if depth or lines[i + 1] != '#ifdef DEBUG' or not lines[i + 2].startswith('#error ') or lines[i + 5] != '#line ' + str(continuation):
+    j = guard_error_index(lines, i + 1)
+    if (depth or lines[i + 1] != '#ifdef DEBUG' or not lines[j].startswith('#error ')
+            or not lines[j + 1].startswith('#endif')
+            or '#line ' + str(continuation) not in lines[j + 2:j + 5]):
         raise SystemExit('ntstubs original DEBUG guard or continuation mismatch at ' + str(original))
 lines = (repo / 'src/mvdm-host/softpc.new/host/src/nt_event.c').read_text(encoding='latin1').splitlines()
 i = lines.index('#line 1493')
@@ -1294,7 +1309,8 @@ for original, selector, continuation in ((221, '#ifdef FE_SB', 235), (240, '#ifd
         directive = re.match(r'^\s*#\s*(if|ifdef|ifndef|endif)\b', line)
         if directive:
             depth += -1 if directive.group(1) == 'endif' else 1
-    if depth or not lines[i + 1].startswith(selector) or not lines[i + 2].startswith('#error '):
+    j = guard_error_index(lines, i + 1)
+    if depth or not lines[i + 1].startswith(selector) or not lines[j].startswith('#error '):
         raise SystemExit('dlgmgr2 original first-depth guard missing at ' + str(original))
     if '#line ' + str(continuation) not in lines[i:i + 18]:
         raise SystemExit('dlgmgr2 original continuation missing at ' + str(original))

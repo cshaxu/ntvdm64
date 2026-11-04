@@ -1,11 +1,11 @@
 {
   "scope": "All currently present .c and .h files under src/mvdm-host and src/non-mvdm, regardless of compilation or provenance.",
-  "filesystem_total": 1058,
+  "filesystem_total": 1056,
   "by_root": {
     "mvdm-host": 876,
-    "non-mvdm": 182
+    "non-mvdm": 180
   },
-  "observed_graph_inventory": 1057,
+  "observed_graph_inventory": 1055,
   "not_in_observed_graph_inventory": 1,
   "independently_confirmed_generator_inputs": 1,
   "untracked": 0,
@@ -13,11 +13,11 @@
   "records": [
     {
       "path": "src/mvdm-host/dbg/dbg.c",
-      "sha256": "f5da99382a421b548c54b2e1796b864a80a2f15e19d4109b3bfa809f889b380f",
+      "sha256": "f6c2da346f0a421620523036c1afa156852441a035e1407906616ae86e82bd27",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "completed-original-conditional-tree",
-      "additional_evidence": "s13-r668-tree-review.json",
+      "additional_evidence": "s13-r1227-ntdbg-unselected.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\dbg\\dbg.c",
       "original_candidate_sha256": "5a3a207eff1570908e270c737d12fb40fe66097895063136d17fe6b971494b90"
     },
@@ -163,13 +163,14 @@
     },
     {
       "path": "src/mvdm-host/dos/dem/dem.h",
-      "sha256": "b28f712a450484d3898029ab24105bd6b1214ffa62fdbb2b465d4d7ef7a55c0a",
+      "sha256": "2a72b0640aaaffe34f2179ef8c85b60810eb5e7f26451578efa35de15d70c1cf",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "completed-original-witnessed-condition-tree",
       "additional_evidence": "s13-r752-dem-header-branches.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\dem.h",
-      "original_candidate_sha256": "c9c4b4814e1b30ffad29a7716948ec7b6c0ade8f6ab2fbb9fd6998d358706e5a"
+      "original_candidate_sha256": "c9c4b4814e1b30ffad29a7716948ec7b6c0ade8f6ab2fbb9fd6998d358706e5a",
+      "include_removal_evidence": "s13-r1234-ntdddisk-unselected.json"
     },
     {
       "path": "src/mvdm-host/dos/dem/demdasd.c",
@@ -4693,11 +4694,11 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/base_def.h",
-      "sha256": "a8b6961eb1cd3d78d98a284ee436db7ef009c9d638723b6aebddb6e6692909f5",
+      "sha256": "8145696480049e7aba5e79045a59a76bbf6042d35da109bb405e827394ca0953",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "deferred-original-selected-line-incorrect",
-      "additional_evidence": "s13-r1220-base-def-line-reopen.json",
+      "review_status": "completed-original-conditional-tree",
+      "additional_evidence": "s13-r1226-base-def-line-correction.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\base_def.h",
       "original_candidate_sha256": "084991cfc23dc79529cc67a43488ec114be882fb62a9f95b879e1b6995f7afae"
     },
@@ -5683,11 +5684,11 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/timer.c",
-      "sha256": "647ff4d9df48731992fbc53c7cb1392bc452cd7f07476d040e1238076ca7c126",
+      "sha256": "4c34acfe5d90072be867b616be647fcac9d81af602b86e10c272e5e6c8fd93ac",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "deferred-original-selected-line-incorrect",
-      "additional_evidence": "s13-r1219-timer-line-reopen.json",
+      "review_status": "completed-original-conditional-tree",
+      "additional_evidence": "s13-r1225-timer-line-correction.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
       "original_candidate_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55"
     },
@@ -6423,13 +6424,14 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_fdisk.c",
-      "sha256": "323cec6500d9428a3609e2bc5ad30d386fd3d0a4d8909cd525fde678e30f009d",
+      "sha256": "c7b18b2c7336beaadec261e8faf9d698f052011ba6c8df652597ed34f357a3ac",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "completed-no-conditional-directives-in-either-version",
       "additional_evidence": null,
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fdisk.c",
-      "original_candidate_sha256": "f4cca0215e2ff4f49113fe95a26529854b712e096af1c3cc54536061808c4867"
+      "original_candidate_sha256": "f4cca0215e2ff4f49113fe95a26529854b712e096af1c3cc54536061808c4867",
+      "include_removal_evidence": "s13-r1234-ntdddisk-unselected.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
@@ -6593,13 +6595,14 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
-      "sha256": "54b7350c8a6a9d00ed2ced4f327ea191b9a0a396628f32039be550144ba7f2b7",
+      "sha256": "11df3d7a6b5e76ceae593c651a52aa0f4187eb11950c46c96caaac5b21461e25",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "completed-original-witnessed-condition-tree",
       "additional_evidence": "s13-r679-witnessed-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_rflop.c",
-      "original_candidate_sha256": "22c82627bf993ac4fd072ad1bb7d4f62000b60889e6955e83f5f676ac5bd7a29"
+      "original_candidate_sha256": "22c82627bf993ac4fd072ad1bb7d4f62000b60889e6955e83f5f676ac5bd7a29",
+      "include_removal_evidence": "s13-r1234-ntdddisk-unselected.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_sas.c",
@@ -6716,8 +6719,8 @@
       "sha256": "89f5fe924f6f99e06f9da1d75addfa204c95f87b9e5f57e280d47665eddb94ee",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "partial-per-file-outer-reviewed",
-      "additional_evidence": "s13-r930-ordered-positive-witnesses.json",
+      "review_status": "completed-original-conditional-tree-with-local-binding",
+      "additional_evidence": "s13-r1235-sim32-full-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\sim32.c",
       "original_candidate_sha256": "1f634b9d6c09d0f767a90ec9e577817800a07dc353cffa433ca2e0268d2cd42f"
     },
@@ -9252,16 +9255,6 @@
       "original_candidate_sha256": "4e9e17a77c0e173166ab528de3a68d0c53883f513d55a998329d14f207e4272a"
     },
     {
-      "path": "src/non-mvdm/public/ddk/inc/ntdddisk.h",
-      "sha256": "ab1a18990f477e823de45110a12a83498e87b0c4ce87c39d89720cce8ed9e455",
-      "tracked": true,
-      "observed_in_existing_graph_inventory": true,
-      "review_status": "deferred-depth1-contexts-unverified",
-      "additional_evidence": "s13-r964-ntdddisk-context-review.json",
-      "original_candidate": "O:\\repos.external\\OpenNT\\public\\ddk\\inc\\ntdddisk.h",
-      "original_candidate_sha256": "ab1a18990f477e823de45110a12a83498e87b0c4ce87c39d89720cce8ed9e455"
-    },
-    {
       "path": "src/non-mvdm/public/ddk/inc/ntdddlc.h",
       "sha256": "37ef574eeb47ceea14a898b7c35b2f9360660e6778ab1126cbb7f480ffa9247e",
       "tracked": true,
@@ -9782,16 +9775,6 @@
       "original_candidate_sha256": "9f22e4932d1b51c404c6bdaa6c4ca875ab8c19f1266c31c930985bdf75d1bbf2"
     },
     {
-      "path": "src/non-mvdm/public/sdk/inc/ntdbg.h",
-      "sha256": "33606d8977bdea48f291fccff2f2fe357ac7d018db5cb424508016e6b2073ffe",
-      "tracked": true,
-      "observed_in_existing_graph_inventory": true,
-      "review_status": "deferred-depth1-contexts-unverified",
-      "additional_evidence": "s13-r969-ntdbg-context-review.json",
-      "original_candidate": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntdbg.h",
-      "original_candidate_sha256": "a5b4a6018a953d66d0e73008ceed9939e4f88917fca9250f6dbf780dcf1c332a"
-    },
-    {
       "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
       "sha256": "082316384723f6cfce62a5b5370e6cc0812badb71f11a005e03bdd39e3dbac33",
       "tracked": true,
@@ -10013,11 +9996,11 @@
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
-      "sha256": "1da660aa8e942172f9eaad5ac4ef280fda58540a7416c0a8f029a62fb8ccdff0",
+      "sha256": "f48ce8562cdea6f1a37467eabab000ff052802ff3efef33f5d754be468555ccf",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "deferred-depth1-original-alignment",
-      "additional_evidence": "s13-r992-dlgmgr2-structure-review.json",
+      "review_status": "completed-original-conditional-tree-with-local-binding",
+      "additional_evidence": "s13-r1236-dlgmgr2-full-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgmgr2.c",
       "original_candidate_sha256": "a3e9286c40e4e11ec872fd9b2d7b23cba640f09fb4840c4e6130e301d5277b9e"
     },
@@ -10243,11 +10226,11 @@
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
-      "sha256": "dcb180b4dedb8e6179f533c029c2b3c5d0d20be17f2650714ef8516b96ec4356",
+      "sha256": "7900b8b6f0eeb514ffcbcd1c46b878a247d0c28a74a19542b8e8bc80ae2035a1",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "deferred-depth1-original-alignment",
-      "additional_evidence": "s13-r999-ntstubs-structure-review.json",
+      "review_status": "completed-original-conditional-tree-with-local-binding",
+      "additional_evidence": "s13-r1237-ntstubs-full-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
       "original_candidate_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01"
     },
