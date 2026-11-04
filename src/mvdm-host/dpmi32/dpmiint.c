@@ -165,6 +165,7 @@ Arguments:
 
 {
     PVDM_INTERRUPTHANDLER Handlers = DpmiInterruptHandlers;
+#line 176
     USHORT SegSs, SegCs;
     UCHAR XNumber;
     PCHAR VdmStackPointer;

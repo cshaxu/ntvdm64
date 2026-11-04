@@ -1,28 +1,28 @@
 {
-  "files": 1056,
+  "files": 1055,
   "identical": 181,
-  "different": 875,
+  "different": 874,
   "arms": 7602,
   "states": {
-    "excluded-error": 4006,
+    "excluded-error": 4007,
     "historical-hit": 3199,
     "current-hit": 144,
-    "current-context-no-hit": 11,
+    "current-context-no-hit": 10,
     "empty-or-structural": 242
   },
   "line_checks": {
     "error-anchor-match": 3860,
-    "not-applicable": 3596,
+    "not-applicable": 3595,
     "error-original-mapping-ambiguous": 0,
     "error-preceding-line-anchor-verified": 8,
-    "error-original-reference-verified": 100,
+    "error-original-reference-verified": 101,
     "error-natural-match": 8,
     "error-prior-full-file-original-review": 28,
     "error-original-guard-line-verified": 2
   },
-  "files_with_unobserved_retained": 5,
+  "files_with_unobserved_retained": 4,
   "files_with_ambiguous_error_line": 0,
-  "different_files_selected_lines_not_fully_certified": 55,
+  "different_files_selected_lines_not_fully_certified": 54,
   "limitation": "Marker hits are observed compile contexts, not proof of every supported configuration. A hit requires retention; no hit is not proof of exclusion. Selected-line mapping for differing files is not completely certified.",
   "zero_branch_differing_files_scanned": 373,
   "zero_branch_files_with_unique_line_mismatches": 0,
@@ -106,5 +106,6 @@
   "r1400_cmain_reviewed": 1,
   "r1401_keyba_reviewed": 1,
   "r1402_nturtl_reviewed": 1,
-  "r1411_hostcpu_reviewed": 1
+  "r1411_hostcpu_reviewed": 1,
+  "r1412_wownt32_removed": 1
 }

@@ -1,0 +1,86 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "before_sha256": "002777f850aeeed9e170bb2e4196a12f66fa9df58ac5597c76a6d9a02035d4d2",
+      "after_sha256": "d7003eba361a1a7b99398795a06a91b37896a7b2af5e26b6dd46e29fcf33bdd6",
+      "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+      "anchor": {
+        "text": "USHORT SegSs, SegCs;",
+        "original_line": 176
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "before_sha256": "0316e2c9c4dd60ab2807c334cffad352cbbe688b0056091364039663af6c1776",
+      "after_sha256": "0a0691c04bb23e1a6e17ea908dda7306d8d2a73d6285179eae4c22667b6a17ae",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "anchor": {
+        "text": "#include <stdlib.h>",
+        "original_line": 34
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "before_sha256": "bcf42d582f7f1e9b8bd41e99ddeb41dbbb3fd2f6cca585c38b147a0856906276",
+      "after_sha256": "41bf9769e5d124976f8a4c12972badabaf4c6b3c3234e9210902ee56f36402a7",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "anchor": {
+        "text": "GLOBAL mouse_ega_mode(curr_video_mode)",
+        "original_line": 1710
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "before_sha256": "2174ed07e84b13a3aa32e17d9e9d75dd6115df8a5e08874ccc49777976c2b407",
+      "after_sha256": "8f625455d217e902ae808c6558b7e217ac2fd5aa8fee329f5eaa2e58fbe0e4a4",
+      "original_sha256": "5dfdca835f1ca6fddf07826f2b4aa9e25f4c8bd0ceef21b2dce9884de721376c",
+      "anchor": {
+        "text": "#include \"timer.h\"",
+        "original_line": 50
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "before_sha256": "0ad1b8ee801d57eff179ba24e22d31f3e36a7c1cb827b87f79a479c8ba66b82c",
+      "after_sha256": "cf18fb5933b15f5b1363759aba7f37a0e7ef60469f1f39ed56786a89786dcb24",
+      "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+      "anchor": {
+        "text": "USHORT *planes;",
+        "original_line": 422
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "before_sha256": "87ff01577dd9513f5a54bb2d3b2328db9676034b2b0a2f171701baae6e4d4670",
+      "after_sha256": "151646a7b9ba9319b6ce683f7c49c899168fe94d0f97721b12b64430c83f4b0a",
+      "original_sha256": "826aa1a6f685f7dc0d8b4362f3eb83899697d8a6e2a555739ff61e2388d254a1",
+      "anchor": {
+        "text": "USHORT swapped;",
+        "original_line": 291
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "before_sha256": "104787f7f5127b4a500fe51b60e28a8f3f4c02129af7f2b02eb96f03e90caf08",
+      "after_sha256": "33ad6f8273c53ebbaa5fe365d36b455c1ffca1527e25978d1a53875622b7c34b",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+      "anchor": {
+        "text": "#include \"host_gfx.h\"",
+        "original_line": 90
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "before_sha256": "85099e336c118e599d238f71d632757971a76407246682b2f7e22f70033f80e6",
+      "after_sha256": "628f895c90c814795e3ebb23e9aa2dc4fa59783fea8783360f66297723e5b895",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "anchor": {
+        "text": "#include \"nt_graph.h\"",
+        "original_line": 56
+      }
+    }
+  ],
+  "scope": "Only #line directives; exact original physical positions checked. Other branch and line paths remain under review; batch build passed.",
+  "batch_verification": "Cached x86 root, NTVDM, WOW32 and x64 builds passed; WOW32 ninja deps contain zero wownt32.h entries; ten images published and verified, eight byte-identical and two PE timestamp-only. See s13-r1413-build-image-compare.json. No runtime retest per owner instruction."
+}

@@ -1517,6 +1517,7 @@ GLOBAL void mouse_video_mode_changed(int new_mode)
 }
 #endif
 
+#line 1710
 GLOBAL mouse_ega_mode(curr_video_mode)
 int curr_video_mode;
 {

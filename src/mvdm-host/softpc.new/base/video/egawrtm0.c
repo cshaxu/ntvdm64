@@ -357,6 +357,7 @@ VOID
 ega_copy_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 {
     ULONG lsb;
+#line 422
     USHORT *planes;
 
 	note_entrance0("ega_copy_w_fill");

@@ -1,0 +1,17 @@
+{
+  "removed_path": "src/non-mvdm/public/sdk/inc/wownt32.h",
+  "removed_sha256": "fe726b917229ef7aad3615d001ac32f5d1c4a7237486b68195a3650acde5bcee",
+  "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\wownt32.h",
+  "consumer": "src/mvdm-host/inc/wow.h",
+  "consumer_before_sha256": "1a44a3a9de28ce28f05a42be0540f21610c57453c901c977711310c87692576f",
+  "consumer_after_sha256": "a6aa5375704bd870fb85ecc0be7c03d975f5efad1ba51bb3d39d5174682ea3e8",
+  "basis": [
+    "Existing branch checklist reports no observed host hit on _WOWNT32_ body.",
+    "Source include search finds wow.h included by wow32.h, itself included from WOW32 precomp.h and winsockp.h; winsockp.h is included by precomp.h.",
+    "WOW32 precomp.h defines _WOWNT32_ before wow32.h; this suppresses the header body.",
+    "The test fixture directly including wow32.h first includes the same precomp.h."
+  ],
+  "change": "Replace physical include with explicit #ifndef _WOWNT32_ #error and preserve original include-line position. Delete header which otherwise contributes no selected declarations.",
+  "limits": "Product x86/x64 build and dependency checks passed; user-mode exports remain implemented by original WOW32 and compatibility declarations.",
+  "batch_verification": "Cached x86 root, NTVDM, WOW32 and x64 builds passed; WOW32 ninja deps contain zero wownt32.h entries; ten images published and verified, eight byte-identical and two PE timestamp-only. See s13-r1413-build-image-compare.json. No runtime retest per owner instruction."
+}

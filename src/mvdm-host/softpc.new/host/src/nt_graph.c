@@ -60,6 +60,7 @@
 #include "ntvdm-exe/softpc/include/mvdm_softpc_text_video.h"
 /* DIVERGENCE(MVDM-HOST-DIV-318): original CCPU cursor refresh owner. */
 
+#line 56
 #include "nt_graph.h"
 #include "ntvdm-exe/win32/console_graphics.h"
 #include "nt_cga.h"

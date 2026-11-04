@@ -90,6 +90,7 @@
 /* DIVERGENCE(MVDM-HOST-DIV-067): retain the same-package EGA service's
  * original parameter and `void` result contract. */
 IMPORT void ega_read_dot IPT3(int, page, int, col, int, row);
+#line 90
 #include "host_gfx.h"
 #include "cpu_vid.h"
 #include "ga_defs.h"

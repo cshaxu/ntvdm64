@@ -52,6 +52,7 @@
 /* DIVERGENCE(MVDM-HOST-DIV-162): selected CCPU40/C-VID sources retain their
  * original tables but not the historical generated pre-config binder. */
 #include "mvdm_cvidc_vector_binding.h"
+#line 50
 #include "timer.h"
 #include "yoda.h"
 //#include "host_env.h"

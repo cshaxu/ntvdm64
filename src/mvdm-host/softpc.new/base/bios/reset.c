@@ -27,6 +27,7 @@
 /*
  *    O/S include files.
  */
+#line 34
 #include <stdlib.h>
 #include <stdio.h>
 #include TypesH

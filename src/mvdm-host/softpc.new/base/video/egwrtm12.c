@@ -223,6 +223,7 @@ fill_alternate_bytes IFN3(byte *, start, byte *, end, byte, value )
 GLOBAL VOID
 fill_both_bytes IFN3(USHORT, data, USHORT *, dest, ULONG, len )
 {
+#line 291
 	USHORT swapped;
 
 #ifdef BIGEND
