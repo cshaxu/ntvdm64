@@ -1,0 +1,138 @@
+{
+  "path": "src/mvdm-host/dpmi32/dpmidata.h",
+  "current_sha256": "82c2955d7bfed6b7f8638f493d99c0950f4be4a8e86d7e28b26af067ef3cc0c8",
+  "original_sha256": "f9772482513601c2e316e097a92485864557af77010e77285d725d903a0fd7b2",
+  "arm_states": {
+    "original:excluded-error": 2,
+    "original:historical-hit": 1,
+    "local:historical-hit": 3,
+    "local:excluded-error": 1
+  },
+  "local_group_bodies": [
+    {
+      "line": 37,
+      "arms": [
+        {
+          "directive": "if",
+          "expression": "defined(CPU_40_STYLE)",
+          "body": [
+            "/* CPU40 owns the same DPMI BOP frame transition in `modesw.c`.  The",
+            " * i386 implementation also changes kernel-VDM state bits, which do not",
+            " * exist in this software-emulation profile. */",
+            "#define switch_to_protected_mode        DpmiCpu40SwitchToProtectedMode"
+          ]
+        },
+        {
+          "directive": "else",
+          "expression": "",
+          "body": [
+            "#line 46",
+            "#define switch_to_protected_mode        DpmiIllegalFunction"
+          ]
+        }
+      ]
+    },
+    {
+      "line": 46,
+      "arms": [
+        {
+          "directive": "if",
+          "expression": "!defined(CPU_40_STYLE)",
+          "body": [
+            "#line 47",
+            "#define DpmiSetDebugRegisters           DpmiIllegalFunction"
+          ]
+        }
+      ]
+    },
+    {
+      "line": 62,
+      "arms": [
+        {
+          "directive": "if",
+          "expression": "!defined(_WINNT_)",
+          "body": [
+            "#line 58",
+            "#error Unsupported DPMI profile without Windows descriptor declarations"
+          ]
+        }
+      ]
+    }
+  ],
+  "retained_arm_diffs": [
+    {
+      "branch_line": 34,
+      "diff": [
+        "--- ",
+        "+++ ",
+        "@@ -1,3 +1 @@",
+        "-#define switch_to_protected_mode        DpmiIllegalFunction",
+        "-#define DpmiSetDebugRegisters           DpmiIllegalFunction",
+        " //",
+        "@@ -10,26 +8,4 @@",
+        " //",
+        "-typedef struct _LDT_ENTRY {",
+        "-WORD    LimitLow;",
+        "-WORD    BaseLow;",
+        "-union {",
+        "-struct {",
+        "-BYTE    BaseMid;",
+        "-BYTE    Flags1;     // Declare as bytes to avoid alignment",
+        "-BYTE    Flags2;     // Problems.",
+        "-BYTE    BaseHi;",
+        "-} Bytes;",
+        "-struct {",
+        "-DWORD   BaseMid : 8;",
+        "-DWORD   Type : 5;",
+        "-DWORD   Dpl : 2;",
+        "-DWORD   Pres : 1;",
+        "-DWORD   LimitHi : 4;",
+        "-DWORD   Sys : 1;",
+        "-DWORD   Reserved_0 : 1;",
+        "-DWORD   Default_Big : 1;",
+        "-DWORD   Granularity : 1;",
+        "-DWORD   BaseHi : 8;",
+        "-} Bits;",
+        "-} HighWord;",
+        "-} LDT_ENTRY, *PLDT_ENTRY;",
+        "+/* DIVERGENCE(MVDM-HOST-DIV-139): selected contexts obtain LDT_ENTRY",
+        "+* from the public Windows header; reject the unselected fallback. */",
+        " //"
+      ]
+    }
+  ],
+  "projection": {
+    "path": "src/mvdm-host/dpmi32/dpmidata.h",
+    "sha256": "82c2955d7bfed6b7f8638f493d99c0950f4be4a8e86d7e28b26af067ef3cc0c8",
+    "projections": 2,
+    "mismatches": [
+      {
+        "line": 232,
+        "values": [
+          [
+            239,
+            244,
+            "    VOID"
+          ]
+        ]
+      },
+      {
+        "line": 233,
+        "values": [
+          [
+            240,
+            245,
+            "    );"
+          ]
+        ]
+      }
+    ]
+  },
+  "false_matches": "Current 232-233 are the arguments/terminator of the added DpmiCpu40SwitchToProtectedMode declaration; original 239-240 belong to DpmiSwitchToProtectedMode. They are not corresponding source lines.",
+  "registered_differences": [
+    "MVDM-HOST-DIV-139",
+    "MVDM-HOST-DIV-281",
+    "MVDM-HOST-DIV-847"
+  ],
+  "limits": "Source-derived projections and historical hit records, not new compiler diagnostic or mode-switch runtime validation."
+}
