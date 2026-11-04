@@ -1,7 +1,7 @@
 #ifndef OPENNT_BASE_VALUES_H
 #define OPENNT_BASE_VALUES_H
-#include "ntsrv-exe/transport/vdm_message.h"
-#include "ntsrv-exe/transport/vdm_values.h"
+#include "common/base_srv/vdm_message.h"
+#include "common/protocol/vdm_protocol.h"
 /* BASE_API_MSG must be declared. Exact operation-selected size is required.
  * Only scalar fields change. Handles, borrowed buffers and startup storage
  * must be bound separately. Decode validates all narrowing before mutation;

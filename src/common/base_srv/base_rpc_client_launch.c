@@ -6,13 +6,12 @@
 #include "service.h"
 #include <base_client.h>
 #include <base_command.h>
-#include <base_service.h>
-#include <base_rpc_client.h>
-#include <base_rpc_client_internal.h>
-#include <base_rpc_client_launch.h>
-#include "ntsrv-exe/transport/vdm_receipt.h"
+#include "common/base_srv/base_rpc_client.h"
+#include "common/base_srv/base_rpc_client_internal.h"
+#include "common/base_srv/base_rpc_client_launch.h"
 #include "common/rpc/async_call.h"
 #include "common/protocol/frontend_lifecycle.h"
+#include "common/base_srv/receipt_roles.h"
 
 static struct {
     uint64_t observation_direct; /* Captured on actual Get delivery, not a selector. */

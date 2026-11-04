@@ -74,7 +74,7 @@ the operation. See the [complete design](../etc/operations/t447-wow-execution-pl
 
 ## Base RPC client split — T445 S7
 
-The NTSRV-owned client has separately selected core and launch-style archives.
+The common/base_srv client has separately selected core and launch-style archives.
 Core owns one authenticated connection, frontend/native control and disconnect.
 Only launch/execution consumers link the original BaseClient dispatch facade.
 The extension borrows the core connection for synchronous calls and registers
@@ -838,10 +838,8 @@ owns a second registry nor enumerates or controls arbitrary Windows processes.
 There is no generic shared Win32/compatibility component. A process-local
 Win32 binding belongs to the executable that owns the relevant HANDLE,
 Console, thread or teardown in the explicitly named executable owners. Original code
-stays in its original mirror even when several executables link it. The
-BaseSrv protocol implementation and client library are
-NTSRV-owned; clients may link that library but do not own a
-parallel protocol. Service IDL and shared product data belong to the stateless
+stays in its original mirror even when several executables link it. Shared BaseSrv client and transport mechanisms belong to common/base_srv;
+NTSRV owns service implementation and policy. Clients do not own a parallel protocol. Service IDL and shared product data belong to the stateless
 `common/protocol` surface for version identity and copied I/O/management contracts. Package
 layout updates worker session state and belongs to ntvdm-exe, not a shared root.
 

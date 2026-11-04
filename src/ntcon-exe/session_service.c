@@ -2,7 +2,7 @@
 #include "common/console/members.h"
 #include "console_channel.h"
 #include "common/protocol/frontend_lifecycle.h"
-#include "ntsrv-exe/opennt/include/base_rpc_client.h"
+#include "common/base_srv/base_rpc_client.h"
 #include <stdio.h>
 struct frontend_session_service {
     HANDLE notification,stop,thread,retire,state_changed;

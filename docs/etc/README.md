@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T474 S2 BaseSrv ownership](evidence/m0-t474-s2-basesrv-shared-ownership.md)
+records the shared source boundary and local verification.
+
 [T473 S12 closure](evidence/m0-t473-s12-source-layout-closure.md) records
 the accepted source-layout and macro-boundary delivery.
 

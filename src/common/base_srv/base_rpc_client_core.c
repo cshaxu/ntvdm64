@@ -6,8 +6,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "service.h"
-#include "ntsrv-exe/transport/rpc_security.h"
-#include <base_rpc_client.h>
+#include "common/base_srv/scope.h"
+#include "common/base_srv/base_rpc_client.h"
 #include "common/protocol/version.h" /* Shared metadata, no product behavior. */
 #include "common/protocol/frontend_lifecycle.h"
 #include "common/protocol/frontend_protocol.h"
@@ -19,7 +19,7 @@
 #include "common/rpc/dos_observation.h"
 #include "common/rpc/async_call.h"
 #include "common/rpc/interface_query.h"
-#include <base_rpc_client_internal.h>
+#include "common/base_srv/base_rpc_client_internal.h"
 
 typedef struct OPENNT_BASE_RPC_CLIENT {
     RPC_BINDING_HANDLE binding;

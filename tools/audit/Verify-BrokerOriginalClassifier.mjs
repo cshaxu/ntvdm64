@@ -33,7 +33,7 @@ if(ownerBuild) commands=[
     `cl.exe ${flags} /we4013 /Gy /Fo"${build}/support.obj" "${root}/src/compat/opennt_support_rtl.c"`,
     `cl.exe ${flags} /we4013 /Fo"${build}/fixture.obj" "${root}/tests/broker/original_classifier.c"`,
     `cl.exe ${rtlFlags} /Fo"${build}/error.obj" "${root}/src/non-mvdm/base/ntos/rtl/error.c"`,
-    `link.exe /nologo /opt:ref /out:original-classifier.exe /map:original-classifier.map fixture.obj "${ownerBuild}/opennt-base-client.lib" "${ownerBuild}/opennt-base-bindings.lib" support.obj error.obj ntdll.lib kernel32.lib legacy_stdio_definitions.lib`
+    `link.exe /nologo /opt:ref /out:original-classifier.exe /map:original-classifier.map fixture.obj "${ownerBuild}/opennt-base-client.lib" "${ownerBuild}/opennt-base-bindings.lib" "${ownerBuild}/common-base-srv-bindings.lib" support.obj error.obj ntdll.lib kernel32.lib legacy_stdio_definitions.lib`
 ];
 const log=fs.openSync(path.join(build,'build.log'),'w');
 for(const command of commands) {

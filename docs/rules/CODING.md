@@ -1,5 +1,13 @@
 # Coding Rules
 
+## T474 BaseSrv source boundary
+
+Shared BaseSrv clients, scope and copied transport live in common/base_srv;
+service-private authorization and state remain in NTSRV. common/rpc is a
+sibling, not a parent; a future general-purpose lib extraction requires a
+separate audit. This owner direction supersedes older NTSRV-client ownership
+statements below without altering protocol or execution behavior.
+
 ## Owner-approved T424 S7 library reorganization
 
 The owner explicitly plans src/common as the successor to src/interface after

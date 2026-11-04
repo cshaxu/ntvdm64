@@ -15,7 +15,7 @@ does not change their source provenance, executable ownership or ABI.
 
 ## Base RPC client slices — T445 S7
 
-NTSRV retains both source owners under opennt/source:
+The BaseSrv client source is owned by common/base_srv:
 base_rpc_client_core.c builds base-rpc-client-core.lib for shared connection,
 control and resource handoff; base_rpc_client_launch.c builds the remaining
 Run16/VDM execution client slice.
@@ -222,7 +222,7 @@ Broker discovery/submission belongs to run16; worker/frontend creation and
 management to NTSRV; presentation
 to NTCON; monitoring to NTMON. These consumers retain their common kind-aware
 handling internally. Backend state operations remain explicit in each worker.
-BaseSrv client implementation remains NTSRV-owned; IDL belongs to common/protocol.
+BaseSrv client implementation belongs to common/base_srv; IDL belongs to common/protocol.
 
 Latest owner directive selects an ordinary hidden Console owned/attached by
 ntvwm-exe, replacing the ConPTY/VT plan below. No private helper is permitted.
@@ -262,8 +262,9 @@ source roots or destinations. `session` is worker-local implementation inside
 
 Do not create a shared Win32 helper root. Place a Win32 binding in the one
 executable that owns its process-local resource. Original code remains in its
-mirror even when several EXEs link it; BaseSrv protocol/client code remains
-`ntsrv`-owned even when both clients link it. Only a named, same-shaped
+mirror even when several EXEs link it; shared BaseSrv client and transport
+mechanisms belong to `common/base_srv`, and service policy remains in NTSRV.
+Only a named, same-shaped
 historical host ABI whose finite public-Win32/NTDLL binding is recorded may
 live in `compat`. The stateless shared product surface is
 limited to common's specifically admitted protocol/codec/transport/Console

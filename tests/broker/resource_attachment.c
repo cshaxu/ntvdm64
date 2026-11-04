@@ -7,10 +7,10 @@
 #include "resource_attachment.h"
 #include "rpc_security.h"
 #include "vdm_receipt.h"
-#include "vdm_message.h"
-#include "vdm_values.h"
-#include "vdm_startup.h"
-#include "vdm_payload.h"
+#include "common/base_srv/vdm_message.h"
+#include "common/protocol/vdm_protocol.h"
+#include "common/protocol/vdm_protocol.h"
+#include "common/base_srv/vdm_payload.h"
 
 void *__RPC_USER midl_user_allocate(size_t size) { return malloc(size); }
 void __RPC_USER midl_user_free(void *value) { free(value); }

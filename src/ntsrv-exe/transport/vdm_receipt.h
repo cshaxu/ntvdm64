@@ -5,10 +5,7 @@
 #define BROKER_VDM_RECEIPT_H
 #include <windows.h>
 #include <stdint.h>
-enum broker_vdm_receipt_role {
-    BROKER_VDM_STDIN=1, BROKER_VDM_STDOUT, BROKER_VDM_STDERR,
-    BROKER_VDM_PARENT_WAIT, BROKER_VDM_WORKER_WAIT
-};
+#include "common/base_srv/receipt_roles.h"
 typedef struct broker_vdm_receipt_entry broker_vdm_receipt_entry;
 typedef struct broker_vdm_receipts {
     uint32_t generation, issued;

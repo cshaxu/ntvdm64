@@ -1,6 +1,10 @@
 /* Finite scalar marshalling for original basemsg.h; not a native CSR struct
  * copy. Keep pointer/resource materialization outside these fragments. */
-#include "basesrv.h"
+#include <base.h>
+#include <ntlpcapi.h>
+#include <ntcsrmsg.h>
+#include <basemsg.h>
+#include <basevdm.h>
 #include <base_values.h>
 #include <string.h>
 typedef char check_values_size[sizeof(broker_vdm_check_values)==36?1:-1];

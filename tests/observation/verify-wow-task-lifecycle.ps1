@@ -183,7 +183,7 @@ $fixtureLibraries = @(
     'worker-base.lib', 'common-root.lib', 'common-rpc.lib',
     'nthook-installer.lib', 'nthook-context.lib',
     'common-transport.lib', 'common-codec.lib', 'common-console.lib',
-    'opennt-base-client.lib', 'opennt-base-bindings.lib', 'broker-transport.lib',
+    'opennt-base-client.lib', 'opennt-base-bindings.lib', 'common-base-srv-bindings.lib', 'broker-transport.lib', 'common-base-srv-transport.lib',
     'worker-shell.lib', 'worker-command-bindings.lib',
     'original-softpc-host-fixture-roots.lib', 'original-softpc-support.lib',
     'original-softpc-bios.lib', 'original-softpc-keymouse.lib',

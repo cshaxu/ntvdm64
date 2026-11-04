@@ -8,7 +8,7 @@
 #include "worker-base/input_watch.h"
 #include "common/protocol/frontend_protocol.h"
 #include "next_command.h"
-#include "ntsrv-exe/opennt/include/base_rpc_client.h"
+#include "common/base_srv/base_rpc_client.h"
 #include "native_pc_font.h"
 #include <stdio.h>
 

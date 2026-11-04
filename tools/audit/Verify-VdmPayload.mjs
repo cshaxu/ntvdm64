@@ -7,7 +7,7 @@ const ownerBuild=path.resolve(process.env.OPENNT_BROKER_OWNER_BUILD || 'build/M0
 fs.mkdirSync(build,{recursive:true});
 const command=path.join(build,'compile.cmd');
 fs.writeFileSync(command,'@echo off\r\ncall "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul\r\nif errorlevel 1 exit /b %errorlevel%\r\n'+
-    `cl.exe /nologo /MT /W4 /I "${root}/src/broker" "${root}/tests/broker/vdm_payload.c" "${ownerBuild}/broker-transport.lib" /Fepayload.exe /link /map:payload.map\r\n`);
+    `cl.exe /nologo /MT /W4 /I "${root}/src" "${root}/tests/broker/vdm_payload.c" "${ownerBuild}/common-base-srv-transport.lib" /Fepayload.exe /link /map:payload.map\r\n`);
 const compile=spawnSync('cmd.exe',['/d','/c',`call "${command}"`],{cwd:build,windowsHide:true,windowsVerbatimArguments:true,encoding:'utf8',timeout:60000});
 fs.writeFileSync(path.join(build,'build.log'),compile.stdout+compile.stderr);
 assert.equal(compile.status,0,'Build failed; see build.log');

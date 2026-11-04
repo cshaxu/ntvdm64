@@ -1,8 +1,8 @@
 #include "common/protocol/vdm_protocol.h"
-#include "vdm_values.h"
-#include "vdm_startup.h"
-#include "vdm_payload.h"
-#include "vdm_message.h"
+#include "common/protocol/vdm_protocol.h"
+#include "common/protocol/vdm_protocol.h"
+#include "common/base_srv/vdm_payload.h"
+#include "common/base_srv/vdm_message.h"
 #include <stdio.h>
 #include <string.h>
 #include <stddef.h>

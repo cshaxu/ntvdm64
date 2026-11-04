@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include "service.h"
-#include "ntsrv-exe/transport/rpc_security.h"
+#include "common/base_srv/scope.h"
 #include "common/protocol/version.h"
 #include "common/rpc/local_binding.h"
 #include "common/rpc/management.h"

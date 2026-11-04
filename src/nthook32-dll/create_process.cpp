@@ -2,7 +2,7 @@
 #include "detours/detours.h"
 #include "common/rpc/local_binding.h"
 #include "common/rpc/management.h"
-#include "ntsrv-exe/transport/rpc_security.h"
+#include "common/base_srv/scope.h"
 #include <wchar.h>
 static decltype(&CreateProcessW) create_w=CreateProcessW;
 static decltype(&CreateProcessA) create_a=CreateProcessA;
