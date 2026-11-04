@@ -112,3 +112,12 @@ DOS4GW/NESticle was skipped because external fixtures were not supplied; Full
 was not run. Local release package `248c03f9-c456-4590-8c7c-b4db11252106`
 contains ten hash-verified images. Main-runtime publication and push remain
 deferred.
+
+Main advanced to `09b58f5c6` during the preceding run. The 32 local commits
+were replayed on that newer baseline, including its diagnostic location updates.
+A fresh x86/x64 build and focused ownership/lifecycle checks passed
+(`build/rebase-main-09b/build.process`, exit 0); staging verified 63 guest files
+and 274 ordinals (`stage.process`, exit 0); Control passed (`control.process`,
+exit 0), with DOS4GW/NESticle skipped and Full not run. The new worktree-local
+release package `5ab28665-fddd-4348-8ba7-6158ee56d015` has ten verified image
+hashes. The preceding package and test evidence correspond to `8049d0c04`.

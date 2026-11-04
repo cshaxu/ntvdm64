@@ -6,8 +6,8 @@
 local commits await the owner-directed later cherry-pick. Main-runtime
 publication and push remain deferred for this worktree.
 
-Rebased onto main `8049d0c04`; rebuilt and locally published package
-`248c03f9-c456-4590-8c7c-b4db11252106`. Product build, focused checks,
+Rebased onto main `09b58f5c6`; rebuilt and locally published package
+`5ab28665-fddd-4348-8ba7-6158ee56d015`. Product build, focused checks,
 Control and ten release hashes passed; Full and DOS4GW/NESticle were not run.
 See [S4 evidence](../etc/evidence/m0-t475-s4-nthook-dependency-cleanup.md).
 
