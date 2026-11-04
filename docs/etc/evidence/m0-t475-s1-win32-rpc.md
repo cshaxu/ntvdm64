@@ -30,3 +30,26 @@ optional external DOS4GW/NESticle fixture was absent and skipped; Full was not
 run. The original guest long-PATH limitation remains. Package
 `b08813cb-cf4a-48d5-8ec8-cd0590a35f47` is published only to this worktree's
 `assets/release`; all ten release hashes matched.
+
+## Process attribute-list extraction P
+
+The owner admitted a local P for `lib-win32/process`. Its generic attribute
+list helper owns allocation, initialization, one attribute update and cleanup.
+NTSRV Worker creation retains Job policy, admission, resume and failure
+rollback; frontend creation retains its inherited handle list, admission and
+retirement decisions. Attribute values remain borrowed until list destruction.
+
+The x64 NTSRV and x86 focused fixture were rebuilt. The production library
+composition and negative ownership checks passed. The 36-check unit fixture
+covers success, allocation, initialization and update failures, duplicate
+initialization, resource release and repeat destruction. The package uses the
+new NTSRV and nine verified baseline build products. All ten input and staged
+output hashes matched; 63 immutable guest files and 274 export ordinals passed.
+Build, fixture, stage and Control command/PID/output records reside in
+`build/t475-process-p`.
+
+Control passed all 12 selected gates against the identical ten-image package;
+the optional DOS4GW/NESticle external fixture was absent and skipped. Full was
+not run and the known original guest long-PATH limitation remains. Package
+`f3161950-6ff1-4558-9080-9686bd37cb98` was published to this worktree's
+`assets/release`, with all ten release hashes verified.

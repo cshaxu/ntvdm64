@@ -202,7 +202,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
             }
         }
     }
-    foreach($archive in @('lib-rpc.lib','lib-io.lib')) {
+    foreach($archive in @('lib-rpc.lib','lib-io.lib','lib-process.lib')) {
         if(@(Get-FrontendSources $archive 'common').Count) {
             throw "$archive must not depend on product common sources"
         }
@@ -216,6 +216,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
     if(@(Compare-Object @('console/client.c') @(Get-FrontendSources 'common-console.lib' 'common')).Count) {
         throw 'Common Console client must have exactly one provider'
     }
+    if(@(Compare-Object @('process/attributes.c') @(Get-FrontendSources 'lib-process.lib' 'lib-win32')).Count) { throw 'Win32 process library must own the attribute-list implementation' }
     if(@(Compare-Object @('rpc/local_binding.c','rpc/peer.c') @(Get-FrontendSources 'lib-rpc.lib' 'lib-win32')).Count) {
         throw 'Generic RPC binding must have exactly one provider'
     }
