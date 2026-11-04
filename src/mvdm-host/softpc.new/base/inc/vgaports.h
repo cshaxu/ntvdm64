@@ -952,7 +952,7 @@ struct extensions_controller
 #endif /* V7VGA */
 
 #endif /* BIT_ORDER2 */
-#line 1005
+#line 1961
 
 #ifdef V7VGA
 #ifdef CPU_40_STYLE

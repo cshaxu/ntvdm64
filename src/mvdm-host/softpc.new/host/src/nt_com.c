@@ -395,7 +395,6 @@ GLOBAL CPU int host_com_open(int adapter)
 #endif
 #line 391
 
-
     /*:::::::::::::::::::::: Create objects used to control comms activity */
 
     current->ModemEvent = CreateEvent(NULL,TRUE,FALSE,NULL);
@@ -720,7 +719,6 @@ GLOBAL CPU void host_com_close IFN1(int, adapter)
 #error DIVERGENCE MVDM-HOST-DIV-579: hardware monitor IRET hooks are not selected
 #endif
 #line 715
-
 
 	/*. This makes sure that the next access to the port will reopen it */
 	current->ReOpenCounter = 0;

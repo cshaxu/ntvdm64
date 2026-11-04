@@ -1551,7 +1551,7 @@ int curr_video_mode;
 
 }
 #endif
-#line 1522
+#line 1747
 
 void mouse_video_io()
 {

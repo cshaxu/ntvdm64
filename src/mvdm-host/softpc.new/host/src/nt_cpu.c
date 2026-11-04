@@ -153,7 +153,7 @@ void	host_clear_hw_int()
 #line 136
 }
 #endif
-#line 167
+#line 138
 
 
 #ifdef CCPU
@@ -286,6 +286,7 @@ GLOBAL void InitNtCpuInfo IFN0()
 #line 304
     /* DIVERGENCE(MVDM-HOST-DIV-048): see the InNanoCpu note above. */
 
+#line 305
     nt_cpu_info.nano_esp = &GLOBAL_nanoEsp;
     nt_cpu_info.host_sp = &GLOBAL_HSP;
     nt_cpu_info.ss_base = &GLOBAL_notionalSsBase;

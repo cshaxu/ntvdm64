@@ -97,6 +97,7 @@ Routine Description:
 #error Excluded unsupported VdmSetInt21Handler kernel VDM path
 #endif
 #line 107
+
     setAX(0);
 }
 

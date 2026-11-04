@@ -103,7 +103,7 @@ typedef struct
 #error Excluded unsupported generic string video callback profile
 #endif
 #endif	/* NO_STRING_OPERATIONS */
-#line 105
+#line 93
 
 } READ_POINTERS; 
 

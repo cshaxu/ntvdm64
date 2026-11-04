@@ -1234,14 +1234,14 @@ for(i = CGA_PORT_START; i <= CGA_PORT_END; i++)
 #endif /* JOKER */
 #line 1409
 #endif /* GISP_CPU */
-#line 1375
+#line 1410
 
 #ifdef CPU_40_STYLE
 	setVideochain(3);
 	SetWritePointers();
 	SetReadPointers(3);
 #endif	/* CPU_40_STYLE */
-#line 1381
+#line 1416
 
 	sas_connect_memory(gvi_pc_low_regen,gvi_pc_high_regen,(half_word)SAS_VIDEO);
 

@@ -714,7 +714,7 @@ ega_read_routines_update IFN0()
 #line 839
 				break;
 #endif	/* VGG */
-#line 619
+#line 841
 		}
 	}
 	else   /* read mode 1 */
@@ -771,7 +771,7 @@ ega_read_routines_update IFN0()
 #line 904
 				break;
 #endif	/* VGG */
-#line 669
+#line 906
 		}
 	}
 

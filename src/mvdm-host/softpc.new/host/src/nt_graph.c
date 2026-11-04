@@ -92,7 +92,7 @@ extern int DAC_data_bits;
 #else
 #error Unsupported excluded original configuration
 #endif
-#line 93
+#line 80
 
 extern byte  *video_copy;
 

@@ -80,7 +80,6 @@ extern char achES[];
 #endif
 #line 73
 
-
 extern IU8 lcifo[];
 
 /*
@@ -146,7 +145,6 @@ host_reset()
 #error Excluded unsupported monitor ICA initialization wait
 #endif
 #line 135
-
 
     host_ica_unlock();
 
