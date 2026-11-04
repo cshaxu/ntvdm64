@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-646: correct twelve original diagnostic anchors in ten host and
+VDM redirector sources, using multiple exact original statements and context.
+Only `#line` values change. Evidence:
+`../../artifacts/mvdm-audit/s13-r1329-line-batch.json`.
+
 MVDM-HOST-DIV-645: correct 20 original diagnostic anchors in ten conditional
 BIOS, CPU and device sources, with multiple exact matching statements and
 surrounding context for each. Only `#line` values change. Evidence:

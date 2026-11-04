@@ -120,7 +120,7 @@ BlockWOWIdle(
            return;
            }
 #endif
-#line 107
+#line 122
        }
 
    host_ica_unlock();

@@ -1,0 +1,981 @@
+{
+  "method": "Every corrected existing #line maps at least two unique exact original statements with consistent offset and surrounding context; only #line values change. Remaining branches are not certified.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_eoi.c",
+      "before_sha256": "03d642d2c29f8217d02a9859885b11ab56b198d0769fad1b4a5b93982587fe02",
+      "after_sha256": "c717198ac4ada2e53df9e9a3235ecaf42f0cb66e6b539f13849629c04445f66e",
+      "fixes": [
+        {
+          "physical": 123,
+          "old": 107,
+          "new": 122,
+          "matches": [
+            {
+              "physical": 138,
+              "original": 136,
+              "target": 122,
+              "text": "WOWIdle(",
+              "context": 11
+            },
+            {
+              "physical": 139,
+              "original": 137,
+              "target": 122,
+              "text": "BOOL Force",
+              "context": 11
+            },
+            {
+              "physical": 142,
+              "original": 140,
+              "target": 122,
+              "text": "if (VDMForWOW && (Force || (*pNtVDMState & VDM_WOWBLOCKED))) {",
+              "context": 8
+            },
+            {
+              "physical": 143,
+              "original": 141,
+              "target": 122,
+              "text": "SetEvent(hWowIdleEvent);",
+              "context": 7
+            },
+            {
+              "physical": 161,
+              "original": 159,
+              "target": 122,
+              "text": "BOOL RegisterEOIHook(int IrqLine, EOIHOOKPROC EoiHookProc)",
+              "context": 10
+            },
+            {
+              "physical": 164,
+              "original": 162,
+              "target": 122,
+              "text": "if (!EoiHooks[IrqLine]) {",
+              "context": 9
+            },
+            {
+              "physical": 165,
+              "original": 163,
+              "target": 122,
+              "text": "EoiHooks[IrqLine] = EoiHookProc;",
+              "context": 8
+            },
+            {
+              "physical": 179,
+              "original": 177,
+              "target": 122,
+              "text": "BOOL RemoveEOIHook(int IrqLine, EOIHOOKPROC EoiHookProc)",
+              "context": 11
+            },
+            {
+              "physical": 181,
+              "original": 179,
+              "target": 122,
+              "text": "if (EoiHooks[IrqLine] == EoiHookProc) {",
+              "context": 10
+            },
+            {
+              "physical": 182,
+              "original": 180,
+              "target": 122,
+              "text": "EoiHooks[IrqLine] = NULL;",
+              "context": 9
+            },
+            {
+              "physical": 200,
+              "original": 198,
+              "target": 122,
+              "text": "VOID host_EOI_hook(int IrqLine, int CallCount)",
+              "context": 8
+            },
+            {
+              "physical": 202,
+              "original": 200,
+              "target": 122,
+              "text": "if ((ULONG)IrqLine >= sizeof(EoiHooks)/sizeof(EOIHOOKPROC)) {",
+              "context": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_event.c",
+      "before_sha256": "6475d6001f0b0819d619eacd70593d84eef66123f04cb138ae7c1aee7e439592",
+      "after_sha256": "7da075bc99beb8991d4f79a5c3eb35b717699f6c0712581d7725ec71d177dbfd",
+      "fixes": [
+        {
+          "physical": 1365,
+          "old": 1333,
+          "new": 1328,
+          "matches": [
+            {
+              "physical": 1372,
+              "original": 1334,
+              "target": 1328,
+              "text": "ExitProcess(0);",
+              "context": 5
+            },
+            {
+              "physical": 1376,
+              "original": 1338,
+              "target": 1328,
+              "text": "if ( (CntrlHandlerState & CNTRL_PIFALLOWCLOSE) ||",
+              "context": 8
+            },
+            {
+              "physical": 1377,
+              "original": 1339,
+              "target": 1328,
+              "text": "(!(CntrlHandlerState & CNTRL_SHELLCOUNT) &&",
+              "context": 8
+            },
+            {
+              "physical": 1378,
+              "original": 1340,
+              "target": 1328,
+              "text": "(CntrlHandlerState & CNTRL_VDMBLOCKED))   )",
+              "context": 7
+            },
+            {
+              "physical": 1380,
+              "original": 1342,
+              "target": 1328,
+              "text": "TerminateVDM();",
+              "context": 8
+            }
+          ]
+        },
+        {
+          "physical": 1462,
+          "old": 1484,
+          "new": 1402,
+          "matches": [
+            {
+              "physical": 1477,
+              "original": 1416,
+              "target": 1402,
+              "text": "ResetConsoleState();",
+              "context": 5
+            },
+            {
+              "physical": 1480,
+              "original": 1419,
+              "target": 1402,
+              "text": "while(ShowConsoleCursor(sc.OutputHandle,TRUE) < 0)",
+              "context": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "before_sha256": "2abcecbc17591528671f275a9fe270079006abebf1d425d2b8623a6ac3b4e0cf",
+      "after_sha256": "f8ba4d962d36cb7aa93e083d261769ecfe9d7569b6ac7a0c5df53ff1dfb26c5e",
+      "fixes": [
+        {
+          "physical": 784,
+          "old": 805,
+          "new": 801,
+          "matches": [
+            {
+              "physical": 796,
+              "original": 812,
+              "target": 801,
+              "text": "void nt_mark_screen_refresh(void)",
+              "context": 7
+            },
+            {
+              "physical": 798,
+              "original": 814,
+              "target": 801,
+              "text": "sub_note_trace0(ALL_ADAPT_VERBOSE, \"nt_mark_screen_refresh\");",
+              "context": 8
+            },
+            {
+              "physical": 800,
+              "original": 816,
+              "target": 801,
+              "text": "screen_refresh_required();",
+              "context": 8
+            },
+            {
+              "physical": 808,
+              "original": 824,
+              "target": 801,
+              "text": "void nt_graphics_tick(void)",
+              "context": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_lpt.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_lpt.c",
+      "before_sha256": "dc2191f1c3165661667ea4fbf48ff49d893b036d2a8c6e7f7fec2edc68f626d9",
+      "after_sha256": "bb24a879db9f769ec6eea46eab09a08af7a206c9539a1d91de88a64cdd4358ed",
+      "fixes": [
+        {
+          "physical": 416,
+          "old": 403,
+          "new": 401,
+          "matches": [
+            {
+              "physical": 421,
+              "original": 405,
+              "target": 401,
+              "text": "return(PrinterStatus);",
+              "context": 6
+            },
+            {
+              "physical": 424,
+              "original": 408,
+              "target": 401,
+              "text": "BOOLEAN host_set_lpt_direct_access(int adapter, BOOLEAN direct_access)",
+              "context": 6
+            },
+            {
+              "physical": 430,
+              "original": 414,
+              "target": 401,
+              "text": "host_lpt_close(adapter);",
+              "context": 9
+            },
+            {
+              "physical": 431,
+              "original": 415,
+              "target": 401,
+              "text": "host_lpt_open(adapter, direct_access);",
+              "context": 8
+            },
+            {
+              "physical": 432,
+              "original": 416,
+              "target": 401,
+              "text": "if (!lpt->active)",
+              "context": 8
+            },
+            {
+              "physical": 433,
+              "original": 417,
+              "target": 401,
+              "text": "set_lpt_status(adapter, HOST_LPT_BUSY);",
+              "context": 9
+            },
+            {
+              "physical": 434,
+              "original": 418,
+              "target": 401,
+              "text": "return (lpt->active);",
+              "context": 8
+            },
+            {
+              "physical": 457,
+              "original": 441,
+              "target": 401,
+              "text": "boolean flushBuffer IFN1( int, adapter )",
+              "context": 10
+            },
+            {
+              "physical": 459,
+              "original": 443,
+              "target": 401,
+              "text": "FAST HOST_LPT *lpt = &host_lpt[adapter];",
+              "context": 10
+            },
+            {
+              "physical": 460,
+              "original": 444,
+              "target": 401,
+              "text": "DWORD BytesWritten;",
+              "context": 10
+            },
+            {
+              "physical": 462,
+              "original": 446,
+              "target": 401,
+              "text": "if (lpt->direct_access) {",
+              "context": 10
+            },
+            {
+              "physical": 463,
+              "original": 447,
+              "target": 401,
+              "text": "DeviceIoControl(lpt->handle,",
+              "context": 10
+            },
+            {
+              "physical": 464,
+              "original": 448,
+              "target": 401,
+              "text": "IOCTL_VDM_PAR_WRITE_DATA_PORT,",
+              "context": 10
+            },
+            {
+              "physical": 465,
+              "original": 449,
+              "target": 401,
+              "text": "lpt->kBuffer,",
+              "context": 10
+            },
+            {
+              "physical": 466,
+              "original": 450,
+              "target": 401,
+              "text": "lpt->bytesInBuffer,",
+              "context": 10
+            },
+            {
+              "physical": 467,
+              "original": 451,
+              "target": 401,
+              "text": "NULL,",
+              "context": 10
+            },
+            {
+              "physical": 469,
+              "original": 453,
+              "target": 401,
+              "text": "&BytesWritten,",
+              "context": 10
+            },
+            {
+              "physical": 470,
+              "original": 454,
+              "target": 401,
+              "text": "NULL",
+              "context": 9
+            },
+            {
+              "physical": 473,
+              "original": 457,
+              "target": 401,
+              "text": "lpt->bytesInBuffer = 0;",
+              "context": 7
+            },
+            {
+              "physical": 474,
+              "original": 458,
+              "target": 401,
+              "text": "return TRUE;",
+              "context": 7
+            },
+            {
+              "physical": 479,
+              "original": 463,
+              "target": 401,
+              "text": "if( !WriteFile( lpt->handle, lpt->kBuffer,",
+              "context": 5
+            },
+            {
+              "physical": 480,
+              "original": 464,
+              "target": 401,
+              "text": "lpt->bytesInBuffer, &BytesWritten, NULL )",
+              "context": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mem.c",
+      "before_sha256": "77e53a6455a72f33bda9c0737096ba3c182c97753cb76f7e96fd19a2ab402235",
+      "after_sha256": "c4eee23b81dee6622c77d42f1855b18ce4c77b0aa928a44bb4ef425a47e69726",
+      "fixes": [
+        {
+          "physical": 302,
+          "old": 286,
+          "new": 283,
+          "matches": [
+            {
+              "physical": 308,
+              "original": 288,
+              "target": 283,
+              "text": "VirtualFree (intelMem, 0, MEM_RELEASE);",
+              "context": 5
+            },
+            {
+              "physical": 311,
+              "original": 291,
+              "target": 283,
+              "text": "VirtualFree (headerTable, 0, MEM_RELEASE);",
+              "context": 8
+            },
+            {
+              "physical": 335,
+              "original": 315,
+              "target": 283,
+              "text": "GLOBAL  VOID SetWOWforceIncrAlloc IFN1(IBOOL, iEnable)",
+              "context": 10
+            },
+            {
+              "physical": 337,
+              "original": 317,
+              "target": 283,
+              "text": "if (iEnable) {",
+              "context": 9
+            },
+            {
+              "physical": 338,
+              "original": 318,
+              "target": 283,
+              "text": "WOWforceIncrAlloc = GetCurrentThreadId();",
+              "context": 8
+            },
+            {
+              "physical": 340,
+              "original": 320,
+              "target": 283,
+              "text": "else {",
+              "context": 7
+            },
+            {
+              "physical": 341,
+              "original": 321,
+              "target": 283,
+              "text": "WOWforceIncrAlloc = 0;",
+              "context": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_rflop.c",
+      "before_sha256": "11df3d7a6b5e76ceae593c651a52aa0f4187eb11950c46c96caaac5b21461e25",
+      "after_sha256": "5bcaf7b53f46797e55b467705c090b6e49c31e9394693725ec43a162527048e3",
+      "fixes": [
+        {
+          "physical": 810,
+          "old": 888,
+          "new": 885,
+          "matches": [
+            {
+              "physical": 821,
+              "original": 895,
+              "target": 885,
+              "text": "floppy_open_count--;",
+              "context": 6
+            },
+            {
+              "physical": 823,
+              "original": 897,
+              "target": 885,
+              "text": "density_changed = TRUE;",
+              "context": 7
+            },
+            {
+              "physical": 824,
+              "original": 898,
+              "target": 885,
+              "text": "return TRUE;",
+              "context": 8
+            },
+            {
+              "physical": 828,
+              "original": 902,
+              "target": 885,
+              "text": "MEDIA_TYPE",
+              "context": 9
+            },
+            {
+              "physical": 829,
+              "original": 903,
+              "target": 885,
+              "text": "nt_floppy_get_media_type",
+              "context": 9
+            },
+            {
+              "physical": 831,
+              "original": 905,
+              "target": 885,
+              "text": "BYTE\tdrive,",
+              "context": 9
+            },
+            {
+              "physical": 832,
+              "original": 906,
+              "target": 885,
+              "text": "WORD\tcylinders,",
+              "context": 10
+            },
+            {
+              "physical": 833,
+              "original": 907,
+              "target": 885,
+              "text": "WORD\tsectors,",
+              "context": 11
+            },
+            {
+              "physical": 834,
+              "original": 908,
+              "target": 885,
+              "text": "WORD\theads",
+              "context": 10
+            },
+            {
+              "physical": 837,
+              "original": 911,
+              "target": 885,
+              "text": "FLP \tflp;",
+              "context": 10
+            },
+            {
+              "physical": 838,
+              "original": 912,
+              "target": 885,
+              "text": "USHORT      index;",
+              "context": 10
+            },
+            {
+              "physical": 841,
+              "original": 915,
+              "target": 885,
+              "text": "if (heads == 2){",
+              "context": 10
+            },
+            {
+              "physical": 842,
+              "original": 916,
+              "target": 885,
+              "text": "index = flp->drive_type;",
+              "context": 10
+            },
+            {
+              "physical": 843,
+              "original": 917,
+              "target": 885,
+              "text": "switch (index) {",
+              "context": 10
+            },
+            {
+              "physical": 844,
+              "original": 918,
+              "target": 885,
+              "text": "case GFI_DRIVE_TYPE_12:",
+              "context": 9
+            },
+            {
+              "physical": 848,
+              "original": 922,
+              "target": 885,
+              "text": "index = GFI_DRIVE_TYPE_360;",
+              "context": 10
+            },
+            {
+              "physical": 850,
+              "original": 924,
+              "target": 885,
+              "text": "case GFI_DRIVE_TYPE_360:",
+              "context": 8
+            },
+            {
+              "physical": 851,
+              "original": 925,
+              "target": 885,
+              "text": "if (cylinders != floppy_tksc[index].trks_per_disk ||",
+              "context": 8
+            },
+            {
+              "physical": 852,
+              "original": 926,
+              "target": 885,
+              "text": "sectors != floppy_tksc[index].secs_per_trk)",
+              "context": 8
+            },
+            {
+              "physical": 853,
+              "original": 927,
+              "target": 885,
+              "text": "index = GFI_DRIVE_TYPE_NULL;",
+              "context": 9
+            },
+            {
+              "physical": 856,
+              "original": 930,
+              "target": 885,
+              "text": "case GFI_DRIVE_TYPE_288:",
+              "context": 8
+            },
+            {
+              "physical": 860,
+              "original": 934,
+              "target": 885,
+              "text": "index = GFI_DRIVE_TYPE_144;",
+              "context": 6
+            },
+            {
+              "physical": 862,
+              "original": 936,
+              "target": 885,
+              "text": "case GFI_DRIVE_TYPE_144:",
+              "context": 6
+            },
+            {
+              "physical": 866,
+              "original": 940,
+              "target": 885,
+              "text": "index = GFI_DRIVE_TYPE_720;",
+              "context": 6
+            },
+            {
+              "physical": 868,
+              "original": 942,
+              "target": 885,
+              "text": "case GFI_DRIVE_TYPE_720:",
+              "context": 7
+            },
+            {
+              "physical": 872,
+              "original": 946,
+              "target": 885,
+              "text": "default:",
+              "context": 8
+            },
+            {
+              "physical": 873,
+              "original": 947,
+              "target": 885,
+              "text": "index = GFI_DRIVE_TYPE_NULL;",
+              "context": 9
+            },
+            {
+              "physical": 877,
+              "original": 951,
+              "target": 885,
+              "text": "index = GFI_DRIVE_TYPE_NULL;",
+              "context": 6
+            },
+            {
+              "physical": 878,
+              "original": 952,
+              "target": 885,
+              "text": "return(media_table[index]);",
+              "context": 6
+            },
+            {
+              "physical": 882,
+              "original": 956,
+              "target": 885,
+              "text": "BOOL nt_floppy_media_check (UTINY drive)",
+              "context": 8
+            },
+            {
+              "physical": 884,
+              "original": 958,
+              "target": 885,
+              "text": "FLP    flp;",
+              "context": 8
+            },
+            {
+              "physical": 885,
+              "original": 959,
+              "target": 885,
+              "text": "ULONG  size_returned;",
+              "context": 9
+            },
+            {
+              "physical": 888,
+              "original": 962,
+              "target": 885,
+              "text": "if (flp->diskette_fd == INVALID_HANDLE_VALUE)",
+              "context": 10
+            },
+            {
+              "physical": 890,
+              "original": 964,
+              "target": 885,
+              "text": "return(DeviceIoControl(flp->diskette_fd,",
+              "context": 8
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_timer.c",
+      "before_sha256": "ad47459a91a745bbf9497663a9c03485c1ef1a2d71214324e1962c735a3f0735",
+      "after_sha256": "db239c2edcac7355d055c3535e438dfef12a59deecda6fbe5799ed1a896f2eff",
+      "fixes": [
+        {
+          "physical": 811,
+          "old": 841,
+          "new": 838,
+          "matches": [
+            {
+              "physical": 818,
+              "original": 844,
+              "target": 838,
+              "text": "CloseHandle(ThreadInfo.HeartBeat.Handle);",
+              "context": 5
+            },
+            {
+              "physical": 819,
+              "original": 845,
+              "target": 838,
+              "text": "ThreadInfo.HeartBeat.Handle = NULL;",
+              "context": 5
+            },
+            {
+              "physical": 820,
+              "original": 846,
+              "target": 838,
+              "text": "ThreadInfo.HeartBeat.ID = 0;",
+              "context": 6
+            },
+            {
+              "physical": 821,
+              "original": 847,
+              "target": 838,
+              "text": "ExitThread(0);",
+              "context": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\stubs.c",
+      "before_sha256": "64871011ce11cf2724bc58468ccd6245053d5e0b735530127fbc81d26502e685",
+      "after_sha256": "d9b800e05b8df940b20ba08d7937e4b909cb75362e110d5888a8d2840dcfc925",
+      "fixes": [
+        {
+          "physical": 311,
+          "old": 545,
+          "new": 543,
+          "matches": [
+            {
+              "physical": 318,
+              "original": 549,
+              "target": 543,
+              "text": "int VdmTibStruct;",
+              "context": 6
+            },
+            {
+              "physical": 320,
+              "original": 551,
+              "target": 543,
+              "text": "void DispatchInterrupts()",
+              "context": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "before_sha256": "5c451467a56fc59cad34150b8716c1a8ac31cbbebfa3648d0291f05a4e3a632a",
+      "after_sha256": "04d300327902cba41bcb50f7f3d04cda25b9f549d5d9e5911458b4fa9040e05c",
+      "fixes": [
+        {
+          "physical": 207,
+          "old": 218,
+          "new": 236,
+          "matches": [
+            {
+              "physical": 252,
+              "original": 280,
+              "target": 236,
+              "text": "if (wkstaInfo) {",
+              "context": 5
+            },
+            {
+              "physical": 253,
+              "original": 281,
+              "target": 236,
+              "text": "NetApiBufferFree((LPVOID)wkstaInfo);",
+              "context": 5
+            },
+            {
+              "physical": 255,
+              "original": 283,
+              "target": 236,
+              "text": "if (userInfo) {",
+              "context": 5
+            },
+            {
+              "physical": 256,
+              "original": 284,
+              "target": 236,
+              "text": "NetApiBufferFree((LPVOID)userInfo);",
+              "context": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "before_sha256": "a4de409e7d4d9e7925d455a8f0fc95f3a2f57655edae0f5beb32bdcc49df514c",
+      "after_sha256": "0d3ad0a4c651d71fa82517ac69d0f17ab25871032881107c71eea8d48d2652f4",
+      "fixes": [
+        {
+          "physical": 1581,
+          "old": 1678,
+          "new": 1677,
+          "matches": [
+            {
+              "physical": 1596,
+              "original": 1691,
+              "target": 1677,
+              "text": "setDS(HIWORD(pAsyncInfo->Buffer));",
+              "context": 8
+            },
+            {
+              "physical": 1597,
+              "original": 1692,
+              "target": 1677,
+              "text": "setSI(LOWORD(pAsyncInfo->Buffer));",
+              "context": 9
+            },
+            {
+              "physical": 1598,
+              "original": 1693,
+              "target": 1677,
+              "text": "setES(HIWORD(pAsyncInfo->Semaphore));",
+              "context": 10
+            },
+            {
+              "physical": 1599,
+              "original": 1694,
+              "target": 1677,
+              "text": "setDI(LOWORD(pAsyncInfo->Semaphore));",
+              "context": 9
+            },
+            {
+              "physical": 1600,
+              "original": 1695,
+              "target": 1677,
+              "text": "setCX(HIWORD(pAsyncInfo->ANR));",
+              "context": 9
+            },
+            {
+              "physical": 1601,
+              "original": 1696,
+              "target": 1677,
+              "text": "setBX(LOWORD(pAsyncInfo->ANR));",
+              "context": 10
+            },
+            {
+              "physical": 1602,
+              "original": 1697,
+              "target": 1677,
+              "text": "setAL((BYTE)pAsyncInfo->Type2);",
+              "context": 9
+            },
+            {
+              "physical": 1603,
+              "original": 1698,
+              "target": 1677,
+              "text": "SET_CALLBACK_NAMEPIPE();",
+              "context": 8
+            }
+          ]
+        },
+        {
+          "physical": 1659,
+          "old": 1759,
+          "new": 1758,
+          "matches": [
+            {
+              "physical": 1665,
+              "original": 1763,
+              "target": 1758,
+              "text": "VrCancelPipeIo(",
+              "context": 6
+            },
+            {
+              "physical": 1666,
+              "original": 1764,
+              "target": 1758,
+              "text": "IN DWORD Thread",
+              "context": 7
+            },
+            {
+              "physical": 1690,
+              "original": 1788,
+              "target": 1758,
+              "text": "POVERLAPPED_PIPE_IO ptr;",
+              "context": 8
+            },
+            {
+              "physical": 1693,
+              "original": 1791,
+              "target": 1758,
+              "text": "for (ptr = PipeIoQueue; ptr; ptr = ptr->Next) {",
+              "context": 8
+            },
+            {
+              "physical": 1694,
+              "original": 1792,
+              "target": 1758,
+              "text": "if (ptr->Thread == Thread) {",
+              "context": 9
+            },
+            {
+              "physical": 1695,
+              "original": 1793,
+              "target": 1758,
+              "text": "ptr->Cancelled = TRUE;",
+              "context": 8
+            },
+            {
+              "physical": 1696,
+              "original": 1794,
+              "target": 1758,
+              "text": "SetEvent(ptr->Overlapped.hEvent);",
+              "context": 7
+            },
+            {
+              "physical": 1731,
+              "original": 1829,
+              "target": 1758,
+              "text": "DWORD numberOfHandles;",
+              "context": 8
+            },
+            {
+              "physical": 1732,
+              "original": 1830,
+              "target": 1758,
+              "text": "DWORD index;",
+              "context": 7
+            },
+            {
+              "physical": 1733,
+              "original": 1831,
+              "target": 1758,
+              "text": "HANDLE eventList[MAXIMUM_ASYNC_PIPES + 1];",
+              "context": 7
+            },
+            {
+              "physical": 1734,
+              "original": 1832,
+              "target": 1758,
+              "text": "PDOS_ASYNC_NAMED_PIPE_INFO pRequest;",
+              "context": 6
+            },
+            {
+              "physical": 1736,
+              "original": 1834,
+              "target": 1758,
+              "text": "UNREFERENCED_PARAMETER(Parameters);",
+              "context": 5
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1362,7 +1362,7 @@ BOOL CntrlHandler(ULONG CtrlType)
 #line 1328
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 1333
+#line 1328
             if (CntrlHandlerState & CNTRL_PUSHEXIT) {
                 /* DIVERGENCE(MVDM-HOST-DIV-355): defer the original
                  * cmdPushExit cleanup until the service's Console-close
@@ -1459,7 +1459,7 @@ BOOL CntrlHandler(ULONG CtrlType)
 #ifdef X86GFX
 #error Unsupported excluded original configuration
 #endif
-#line 1484
+#line 1402
             { /* DIVERGENCE(MVDM-HOST-DIV-322): always extract software VGA. */
                 /* DIVERGENCE(MVDM-HOST-DIV-311): this stopped-guest
                  * handoff must finish the original pending mode selection

@@ -808,7 +808,7 @@ NTSTATUS DelayHeartBeat(LONG Delay)
 
 
 #endif
-#line 841
+#line 838
          // alerted to die
      /* DIVERGENCE: MVDM-HOST-DIV-040. The same-shaped public Win32 adapter
       * wakes this alertable wait through QueueUserAPC.  Modern user-mode

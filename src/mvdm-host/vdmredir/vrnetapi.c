@@ -204,7 +204,7 @@ Return Value:
 #line 211
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 218
+#line 236
 
     rc1 = NetWkstaGetInfo(NULL, 100, (LPBYTE*)&wkstaInfo);
     rc2 = NetWkstaUserGetInfo(0, 1, (LPBYTE*)&userInfo);

@@ -95,6 +95,16 @@ images are identical and NTVDM/WOW32 differ only in PE timestamps
 ([comparison](s13-r1319-build-image-compare.json)); runtime tests were not
 repeated under owner instruction.
 
+The [r1329 anchor batch](s13-r1329-line-batch.json) corrects another twelve
+selected-source anchors in ten condition-bearing files, based on multiple
+exact original statements and surrounding context. Other branches remain
+under audit. Cached x86 root, NTVDM worker, WOW32 and x64 builds passed and
+the full package was published to both destinations. Nine images are
+byte-identical; NTVDM has two changed diagnostic `__LINE__` immediate bytes
+plus timestamps. The [binary/source proof](s13-r1329-diagnostic-line-proof.json)
+identifies both `DisplayErrorTerm` calls and the exact old/new line values;
+runtime tests were not repeated under owner-approved line-only policy.
+
 The [r1328 anchor batch](s13-r1328-line-batch.json) corrects another 20
 selected-source anchors in ten condition-bearing files using multiple exact
 original statements and context. Other branches remain under audit. Build and

@@ -413,7 +413,7 @@ GLOBAL UCHAR host_read_printer_status_port(int adapter)
 #line 398
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 403
+#line 401
         PrinterStatus = 0;
     }
     mvdm_softpc_report_setup_hardware_probe("lpt-status-ioctl-leave", (unsigned long)adapter,

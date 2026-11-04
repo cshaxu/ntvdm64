@@ -807,7 +807,7 @@ BOOL nt_floppy_close(UTINY drive)
 #line 884
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 888
+#line 885
 
     if (flp->diskette_fd != INVALID_HANDLE_VALUE) {
 	CloseHandle(flp->diskette_fd);

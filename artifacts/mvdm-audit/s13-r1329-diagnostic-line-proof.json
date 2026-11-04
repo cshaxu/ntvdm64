@@ -1,0 +1,42 @@
+{
+  "classification": "diagnostic-line-immediate-only plus PE/debug timestamps",
+  "old_sha256": "9d608bf8423a09894c679528b5a1d0fc56c73d5197c52405275c8d77d92aa504",
+  "new_sha256": "21900c5c1879734f66ebb12fa45cfce0026c28e3e66c5e636d28cb234050a771",
+  "differing_offsets": [
+    288,
+    289,
+    330268,
+    360761,
+    1698412,
+    1698413
+  ],
+  "cases": [
+    {
+      "offset": 330268,
+      "source": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "anchor_physical": 1462,
+      "call_physical": 1475,
+      "old_anchor": 1484,
+      "new_anchor": 1402,
+      "source_pointer": 5879936,
+      "binary_file_string": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "old_line": 1496,
+      "new_line": 1414,
+      "call": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);"
+    },
+    {
+      "offset": 360761,
+      "source": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "anchor_physical": 784,
+      "call_physical": 822,
+      "old_anchor": 805,
+      "new_anchor": 801,
+      "source_pointer": 5881240,
+      "binary_file_string": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "old_line": 842,
+      "new_line": 838,
+      "call": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);"
+    }
+  ],
+  "proof": "Both changed immediates are pushed beside the matching source-file string and equal the old/new __LINE__ arithmetic at DisplayErrorTerm calls; all other differences lie in PE/debug timestamps."
+}

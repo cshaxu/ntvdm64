@@ -299,7 +299,7 @@ GLOBAL	VOID FreeIntelMemory IFN0()
 #line 284
 #error Unsupported excluded original configuration
 #endif
-#line 286
+#line 283
 
     /* DIVERGENCE(MVDM-HOST-DIV-035): retire bindings before their backing. */
     mvdm_softpc_physical_mapping_release();

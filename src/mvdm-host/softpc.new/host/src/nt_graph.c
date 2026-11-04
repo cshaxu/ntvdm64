@@ -781,7 +781,7 @@ void nt_flush_screen(void)
 #line 803
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
-#line 805
+#line 801
         {
             (void)(*update_alg.calc_update)();
             /* DIVERGENCE(MVDM-HOST-DIV-314): preserve the notification until

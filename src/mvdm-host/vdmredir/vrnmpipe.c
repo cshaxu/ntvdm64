@@ -1578,7 +1578,7 @@ Return Value:
 #line 1672
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 1678
+#line 1677
 
         //
         // returning FALSE indicates that the hardware interrupt callback was
@@ -1656,7 +1656,7 @@ Return Value:
 #line 1755
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 1759
+#line 1758
 
 }
 
