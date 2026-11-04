@@ -1,0 +1,32 @@
+{
+  "method": "Compare original/current selectors and excluded/retained leaves, then verify matching-code line positions across all four combinations of recorded hit arms; combinations may include conservatively overapproximated contexts. Runtime behavior is not certified.",
+  "records": [
+    {
+      "path": "src/mvdm-host/inc/vrnmpipe.h",
+      "current_sha256": "6a4a0f46af3ab8e094e3e51e2c60316a7c6734a3b128d5ecd473a53e1d307f6d",
+      "original_sha256": "06e77e0e94ff590b0aef18577f53eda9987c6dc2331ac6e8c185cfd10fe79da6",
+      "multi_hit_groups": [
+        [
+          107,
+          [
+            0,
+            1
+          ]
+        ],
+        [
+          183,
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      "projections_checked": 4,
+      "tree": {
+        "retained": 4,
+        "groups": 3,
+        "excluded": 1
+      }
+    }
+  ]
+}

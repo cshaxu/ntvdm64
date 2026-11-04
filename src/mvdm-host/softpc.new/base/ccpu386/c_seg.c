@@ -38,6 +38,7 @@ Segment Register Support.
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /* Load CS, both selector and hidden cache. Selector must be valid.   */
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+#line 40
 GLOBAL VOID
 load_CS_cache
        	    	    		                    
@@ -104,6 +105,7 @@ IFN3(
        * descriptor, cache, execution order or fault handling. */
       mvdm_softpc_report_wow_code_segment_load(selector, entry->base,
                                                 entry->limit, entry->AR);
+#line 97
       }
    }
 
@@ -276,6 +278,7 @@ IFN2(
 	 }
       else
 #endif
+#line 246
       if ( selector_is_null(selector) )
 	 {
 	 /* load is allowed - but later access will fail

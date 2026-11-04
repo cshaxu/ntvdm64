@@ -3122,3 +3122,15 @@ MVDM-HOST-DIV-822: restore original logical source positions for matching code o
 MVDM-HOST-DIV-823: restore original logical source positions for matching code on observed selected paths, retaining conditions and local adaptations. Evidence: artifacts/mvdm-audit/s13-r1351-batch.json and s13-r1351-context-recheck.json; other contexts remain under review.
 
 MVDM-HOST-DIV-824: restore original logical source positions in observed selected paths of the S13 batch; keep the existing WM_COPYDATA condition while consolidating a continued expression onto its first line. Evidence: artifacts/mvdm-audit/s13-r1352-batch.json and s13-r1352-context-recheck.json.
+
+MVDM-HOST-DIV-825: retain the original CCPU gdpvar.h guard while rejecting its shadowed body; the product include path selects the generated GDP header first. Evidence: artifacts/mvdm-audit/s13-r1354-gdp-guard-review.json. Cached batch build and ten-image publication passed.
+
+MVDM-HOST-DIV-826: restore original source line mappings in int21map.c while preserving its existing IOCTL token stream; evidence: artifacts/mvdm-audit/s13-r1356-int21map.json, s13-r1356-int21map-recheck.json and s13-r1356-int21map-token-proof.json. Cached batch build and ten-image publication passed.
+
+MVDM-HOST-DIV-827: restore original source line mappings in c_oprnd.h selected paths while preserving macro tokens and avoiding a cross-runtime-branch false match. Evidence: artifacts/mvdm-audit/s13-r1359-c-oprnd.json, s13-r1359-c-oprnd-recheck.json and s13-r1359-c-oprnd-token-proof.json. Cached batch build and ten-image publication passed.
+
+MVDM-HOST-DIV-828: restore the original ANR field logical line in vrnmpipe.h following the registered DIV-167 local representation. Evidence: artifacts/mvdm-audit/s13-r1361-vrnmpipe-line.json. Cached batch build and ten-image publication passed.
+
+MVDM-HOST-DIV-829: restore the original DPMI data.c continuation source line after the local CPU40 descriptor group. Evidence: artifacts/mvdm-audit/s13-r1364-dpmi-data-line.json. Cached batch build and ten-image publication passed.
+
+MVDM-HOST-DIV-830: restore original logical source positions for matching code on observed selected paths in five files with additional local condition groups. Evidence: artifacts/mvdm-audit/s13-r1365-batch.json and s13-r1365-extra-group-recheck.json. Other contexts remain under review.

@@ -1,0 +1,10 @@
+[
+  {
+    "path": "src/mvdm-host/dpmi32/int21map.c",
+    "current_sha256": "0aaef2ba8f555513a69f4627483281a96312d026a9680f4232c7f0b1952feb88",
+    "original_sha256": "b0a8632ddb1bb0ed609115bcb113c7a43a0b042930cd281d333540089589c7e1",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 2987
+  }
+]

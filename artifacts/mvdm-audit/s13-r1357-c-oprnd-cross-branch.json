@@ -1,0 +1,13 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_oprnd.h",
+  "original_sha256": "d7b6cf24845a42b42246cb8ae2c41b7bbeda398c0da4cb51cab2620e3938619e",
+  "current_sha256": "74a76416d33546ff0d2fd718eeecf07d5e30c19ef113f0a76678b69cbeb8326a",
+  "original_line": 265,
+  "current_line": 279,
+  "finding": "Identical 94-byte limit_check text occurs under the true arm in the original but the false arm in current code. A text-only match is not sufficient to map either statement to the same semantic source position.",
+  "action": "Retain existing behavior; do not auto-apply the proposed source-line anchor. Review original selected-path correspondence and local semantic adaptation first.",
+  "status": "open",
+  "registered_adaptation": "MVDM-HOST-DIV-470",
+  "registered_reason": "32-bit and 16-bit x87 state-save spans use 108 and 94 bytes respectively; selected original check differs from corresponding transfer sizes.",
+  "registration": "src/mvdm-host/README.md"
+}

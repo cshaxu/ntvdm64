@@ -423,3 +423,21 @@ position. Three cases lacking such a match remain pending. No source change
 was made. This is not proof of unobserved contexts or local runtime behavior.
 Counts: 182 byte-identical / 723 differing files reviewed / 1,056 total; 151
 differing files remain.
+
+The [r1355 EOF review](s13-r1355-eof-continuation-review.json) resolves three
+previously unpaired continuation cases: after the matching conditional groups
+there is no further source code, only blanks and closing directives. The
+working inventory currently includes a pending, unbuilt gdpvar.h exclusion;
+no release or submission is claimed for it.
+
+The r1365 ten-file batch includes the [shadowed GDP guard](s13-r1354-gdp-guard-review.json),
+line alignment for [int21map](s13-r1356-int21map.json), [c_oprnd](s13-r1359-c-oprnd.json),
+[vrnmpipe](s13-r1361-vrnmpipe-line.json), [DPMI data](s13-r1364-dpmi-data-line.json),
+and [five files with local groups](s13-r1365-batch.json). Existing local token
+streams were preserved where reflowed. GDP passed the product build and its
+original guard is now excluded; other partial audits remain pending. Counts:
+181 byte-identical / 730 differing files reviewed / 1,056 total; 145 differing
+files pending. Cached x86 root, NTVDM, WOW32 and x64 builds passed; ten images
+were published and verified. Eight match byte-for-byte and NTVDM/WOW32 differ
+only by PE timestamps ([comparison](s13-r1365-build-image-compare.json));
+per owner instruction tests were not repeated.

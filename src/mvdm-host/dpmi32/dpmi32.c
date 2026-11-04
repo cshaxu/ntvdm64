@@ -31,6 +31,7 @@ extern int setLDT_BASE_LIMIT(ULONG base, ULONG limit);
 //
 // Information about the current PSP
 //
+#line 29
 USHORT CurrentPSPSelector;
 
 //
@@ -105,6 +106,7 @@ Return Value:
     DBGTRACE(DPMI_DISPATCH_ENTRY, Index, 0, 0);
     mvdm_softpc_report_dpmi_bop(Index, getAX(), getBX(), getCX());
 
+#line 102
     if (Index >= MAX_DPMI_BOP_FUNC) {
 #line 103
 #if DBG
@@ -294,6 +296,7 @@ Return Value:
 
 --*/
 {
+#line 289
     Ldt = (PVOID)Sim32GetVDMPointer(
         (getAX() << 16),
         0,
@@ -343,4 +346,5 @@ Return Value:
     mvdm_softpc_report_dpmi_table_address("after", (ULONG)Ldt - IntelBase,
         Cpu40GdtShadowAddress, Cpu40LdtShadowAddress);
 #endif
+#line 297
 }

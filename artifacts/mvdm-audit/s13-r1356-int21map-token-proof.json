@@ -1,0 +1,8 @@
+{
+  "path": "src/mvdm-host/dpmi32/int21map.c",
+  "method": "Compare lexical tokens after removing whitespace, C comments and #line directives; strings and character literals retained.",
+  "before_sha256": "05fdf944320c75f98c0a2023568479c216128a031e8375cbd79d012d7117501a",
+  "after_sha256": "0aaef2ba8f555513a69f4627483281a96312d026a9680f4232c7f0b1952feb88",
+  "token_count": 7101,
+  "equal": true
+}

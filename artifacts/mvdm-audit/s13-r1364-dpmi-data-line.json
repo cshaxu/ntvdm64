@@ -1,0 +1,10 @@
+{
+  "path": "src/mvdm-host/dpmi32/data.c",
+  "before_sha256": "fa77262578ebef876e292dfc6d9b43f6cb64662a85f0a8679b89675d69625cd2",
+  "after_sha256": "7e1161e8dcff68b40405d04301b995bd6d8b029715cac5c0ae667bbb52e327a8",
+  "original_sha256": "fa3b44b0f6a5ea6165063bae35fe66063e23e518dad8c0cdf3de16d353c54cde",
+  "insert_before_current_line": 204,
+  "continuation_original_line": 138,
+  "original_first_declaration_line": 139,
+  "reason": "A project CPU40 group is nested at the end of the original !i386 arm; its extra lines shift both original declarations after the enclosing endif. Restore the original continuation without changing any selected code."
+}

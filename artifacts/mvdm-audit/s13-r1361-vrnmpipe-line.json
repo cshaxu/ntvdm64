@@ -1,0 +1,11 @@
+{
+  "path": "src/mvdm-host/inc/vrnmpipe.h",
+  "before_sha256": "9b86ded8d08d6b8327b9e75491ec1c6c6de22dfad5fbf0a987073fdeb706107a",
+  "after_sha256": "6a4a0f46af3ab8e094e3e51e2c60316a7c6734a3b128d5ecd473a53e1d307f6d",
+  "original_sha256": "06e77e0e94ff590b0aef18577f53eda9987c6dc2331ac6e8c185cfd10fe79da6",
+  "insert_before_current_line": 269,
+  "original_line": 265,
+  "reason": "Original field ANR follows two adapted fields and a four-line local comment; this anchor restores its original logical source line in both observed alternatives.",
+  "second_insert_before_intermediate_line": 282,
+  "second_original_line": 270
+}

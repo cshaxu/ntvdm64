@@ -1,0 +1,10 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_oprnd.h",
+    "current_sha256": "e28138c2d900f501b7fe9d1007ccd98c3788a36fa96fdeb1cea8e345a485b82e",
+    "original_sha256": "d7b6cf24845a42b42246cb8ae2c41b7bbeda398c0da4cb51cab2620e3938619e",
+    "anchors": {},
+    "unresolved": [],
+    "matched_lines": 1112
+  }
+]

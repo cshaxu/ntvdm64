@@ -1,0 +1,41 @@
+{
+  "method": "Original and current guard lines are identical and occupy the same physical line; no preceding #line exists, so the #error naturally reports the original branch body line if selected. This only audits these specific anchors, not the whole file.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+      "original_sha256": "08b798882c49443b2641ebf091adf07959059d46bc703467d860ab22659f2967",
+      "current_sha256": "8b281254ad6b9aa1478070e4209dd76e859c70f5494c4a55c02cbdbc369f44a9",
+      "original_guard_line": 23,
+      "current_guard_line": 23,
+      "original_body_line": 24,
+      "current_error_line": 24
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/rom_basc.c",
+      "original_sha256": "2e6f1783fcb3695443ab0a3a6fcb5dbf2bd3e2e7905217cd61021e031a8a709a",
+      "current_sha256": "5b03ffa5ba2ecb77f60c7f01d61a6ca96029c838d2b92ffcfba5cf00ee098c87",
+      "original_guard_line": 16,
+      "current_guard_line": 16,
+      "original_body_line": 17,
+      "current_error_line": 17
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "original_sha256": "b1456dcbc0dc6b4d1fd5d101bfaa6bdc9a4cd5d970c14215f3ae62a173f17ccb",
+      "current_sha256": "ec6956b197159f60ca825f50e10931d3994e47e603674d91318f1ff9e6bc55b7",
+      "original_guard_line": 69,
+      "current_guard_line": 69,
+      "original_body_line": 70,
+      "current_error_line": 70
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "original_sha256": "b1456dcbc0dc6b4d1fd5d101bfaa6bdc9a4cd5d970c14215f3ae62a173f17ccb",
+      "current_sha256": "ec6956b197159f60ca825f50e10931d3994e47e603674d91318f1ff9e6bc55b7",
+      "original_guard_line": 73,
+      "current_guard_line": 73,
+      "original_body_line": 74,
+      "current_error_line": 74
+    }
+  ]
+}

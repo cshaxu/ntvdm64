@@ -1,0 +1,11 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+  "original_sha256": "1f634b9d6c09d0f767a90ec9e577817800a07dc353cffa433ca2e0268d2cd42f",
+  "current_sha256": "dc26178793fbe85a2044eff465b26399ffddc0299b9f1c65e5a3ef13ba82a2f5",
+  "original_inner_group_line": 247,
+  "original_parent_code_line": 239,
+  "current_excluded_parent_line": 269,
+  "reason": "Original non-CPU40 descriptor implementation containing #ifndef PROD is represented by the CPU_40_STYLE else arm, already excluded as a whole. The owner policy does not preserve nested condition structure inside an excluded branch. The apparent missing group is therefore not restored.",
+  "remaining": "Selected CPU40 adaptation and complete logical line mapping still require per-file review.",
+  "status": "partial-review"
+}

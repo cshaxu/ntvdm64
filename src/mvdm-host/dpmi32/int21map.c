@@ -203,6 +203,7 @@ Return Value:
     else (*ApiXlatTable[DosMajorCode])();
 
     // put this back in after beta 2.5
+#line 199
     DpmiFreeAllBuffers();
 
 #line 201
@@ -213,6 +214,7 @@ Return Value:
 #line 210
 #line 214
 
+#line 211
 }
 
 VOID
@@ -242,14 +244,17 @@ Return Value:
     BOOL ReturnZero = (getAH() == 6 || getAX() == 0x0c06) && getDL() == 0xff;
     BOOL ZeroFlag;
 
+#line 236
     DpmiSwitchToRealMode();
     DpmiSaveSegmentsAndStack(&State);
     DPMI_EXEC_INT(0x21);
     DpmiSwitchToProtectedMode();
     DpmiRestoreSegmentsAndStack();
     ZeroFlag = getZF();
+#line 241
     DpmiSimulateIretCF();
     if (ReturnZero) setZF(ZeroFlag);
+#line 242
 }
 
 VOID
@@ -1084,6 +1089,7 @@ Return Value:
      * reuse the original segment conversion without losing error BX. */
     BOOL ReturnDI = getAH() == 0x59;
 
+#line 1081
     DpmiSwitchToRealMode();
     DpmiSaveSegmentsAndStack(&State);
     DPMI_EXEC_INT(0x21);
@@ -1095,6 +1101,7 @@ Return Value:
 
     if (ReturnDI) (*SetDIRegister)((ULONG)getDI());
     else (*SetBXRegister)((ULONG)getBX());
+#line 1091
     setES(Selector);
 
     DpmiSimulateIretCF();
@@ -1553,6 +1560,7 @@ Return Value:
      * destination for DOSX's eight-byte load-only return contract. */
     PUCHAR LoadResult = NULL;
 
+#line 1591
     DpmiSwitchToRealMode();
     DpmiSaveSegmentsAndStack(&State);
     ClientDX = getDX();
@@ -1607,6 +1615,7 @@ Return Value:
         /* DIVERGENCE(MVDM-HOST-DIV-289): xsssp/xcsip follow EXEC0. */
         if (getAL() == 1) LoadResult = CommandTail + 14;
 
+#line 1642
         if (CurrentAppFlags & DPMI_32BIT) {
             //
             // CommandTail -> string
@@ -1694,6 +1703,7 @@ Return Value:
         // Free translation buffer
         //
 
+#line 1725
         DpmiUnmapString(BufferedString, Length);
     }
     setDX(ClientDX);
@@ -2599,6 +2609,7 @@ Return Value:
 
     /* DIVERGENCE(MVDM-HOST-DIV-285): map the client's DS:DX, not DS:0. */
     Data += (*GetDXRegister)();
+#line 2615
     BufferedData = DpmiMapAndCopyBuffer(Data, 2);
 
     DPMI_FLAT_TO_SEGMENTED(BufferedData, &DataSeg, &DataOff);
@@ -2644,11 +2655,10 @@ Return Value:
 
     /* DIVERGENCE(MVDM-HOST-DIV-288): original DEM also consumes media-ID
      * and access-flag packets; protected pointers require this mapping. */
+#line 2658
     if (((IoctlSubFunction < 0x40) || (IoctlSubFunction > 0x42) &&
         (IoctlSubFunction < 0x60) || (IoctlSubFunction > 0x62) &&
-        (IoctlSubFunction != 0x68)) &&
-        IoctlSubFunction != 0x46 && IoctlSubFunction != 0x66 &&
-        IoctlSubFunction != 0x47 && IoctlSubFunction != 0x67
+        (IoctlSubFunction != 0x68)) && IoctlSubFunction != 0x46 && IoctlSubFunction != 0x66 && IoctlSubFunction != 0x47 && IoctlSubFunction != 0x67
     ) {
 #line 2662
 #if DBG
@@ -2688,6 +2698,7 @@ Return Value:
     case 0x67:
         Length = (IoctlSubFunction == 0x46 || IoctlSubFunction == 0x66) ? 25 : 2;
         break;
+#line 2690
     case 0x40:
         //
         // Map set device params
@@ -2701,6 +2712,7 @@ Return Value:
         /* DIVERGENCE(MVDM-HOST-DIV-287): original A_FORMATPACKET adds
          * FP_TRACKCOUNT only when special-functions bit 1 is set. */
         Length = (Data[0] & 2) ? 7 : 5;
+#line 2697
         break;
 
     case 0x60:
@@ -2834,14 +2846,16 @@ Return Value:
 
     if (CurrentAppFlags & DPMI_32BIT) {
 
-        Data = Sim32GetVDMPointer(
             /* DIVERGENCE(MVDM-HOST-DIV-286): the 32-bit selector lies
              * beyond the 13-byte DOS packet copy; read the client owner. */
+#line 2830
+        Data = Sim32GetVDMPointer(
             (*((PWORD16)(ParameterBlock + 0xd)) << 16),
             1,
             TRUE
             );
 
+#line 2836
         Data += *((PDWORD16)(BufferedPBlock + 0x9));
 
     } else {

@@ -1,0 +1,24 @@
+{
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+      "original_sha256": "45b92f7236fba49d58e2c3d912126067c3843ec560c28cdd8a20167c62aaef65",
+      "current_sha256": "abdb6793896a0f0da1f7d79d45c4e919cfb50ae0757bbc70e39e9cc40e25b4e2",
+      "original_guard_line": 134,
+      "current_guard_line": 76,
+      "selected_original_body_present": false,
+      "project_subset_registration": "OPENNT-HOST-052",
+      "note": "Original body is part of an omitted original function; guard shell is outside selected function. Macro being undefined does not prove this is an excluded branch. Retain as partial review; no replacement by #error without full subset/context audit."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+      "original_sha256": "0e3999df8610405c990760ee1a417bf312e3b76744f8f9387bbd94583f9d800d",
+      "current_sha256": "a4f04cdfa139c78bc761b5e78b39c727a128549b2702e9a7098d22b07dd38aeb",
+      "original_guard_line": 840,
+      "current_guard_line": 86,
+      "selected_original_body_present": false,
+      "project_subset_registration": "OPENNT-HOST-113",
+      "note": "Original body is part of an omitted original function; guard shell is outside selected function. Macro being undefined does not prove this is an excluded branch. Retain as partial review; no replacement by #error without full subset/context audit."
+    }
+  ]
+}

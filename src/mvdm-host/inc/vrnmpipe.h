@@ -266,6 +266,7 @@ typedef struct _DOS_ASYNC_NAMED_PIPE_INFO {
      * fresh session lease only when it reads or writes either location. */
     DWORD   pBytesTransferred;
     DWORD   pErrorCode;
+#line 265
     DWORD   ANR;                // 16:16 address of ANR
     DWORD   Semaphore;          // 16:16 address of 'semaphore' in VDM
 #line 267
@@ -278,6 +279,7 @@ typedef struct _DOS_ASYNC_NAMED_PIPE_INFO {
      * outstanding original async request.  It never enters a guest, MVDM or
      * adapter ABI and is released at the original request cleanup points. */
     PVOID   PrivateAsyncState;
+#line 270
 } DOS_ASYNC_NAMED_PIPE_INFO, *PDOS_ASYNC_NAMED_PIPE_INFO;
 
 //

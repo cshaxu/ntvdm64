@@ -71,6 +71,7 @@ Return Value:
     return Success ? STATUS_SUCCESS : (NTSTATUS)-1;
 #endif
 
+#line 64
     Status = VdmAllocateVirtualMemory((PULONG)Address, *Size, TRUE);
 
     if (Status == STATUS_NOT_IMPLEMENTED) {
@@ -126,6 +127,7 @@ Return Value:
     return Success ? STATUS_SUCCESS : (NTSTATUS)-1;
 #endif
 
+#line 113
     Status = VdmFreeVirtualMemory(*(PULONG)Address);
 
     if (Status == STATUS_NOT_IMPLEMENTED) {
@@ -185,6 +187,7 @@ Return Value:
         (PULONG)NewAddress);
 #endif
 
+#line 165
     Status = VdmReallocateVirtualMemory((ULONG)OldAddress,
                                         (PULONG)NewAddress,
                                         *NewSize);
@@ -278,6 +281,7 @@ Return Value:
     //
     // sudeepb 01-Mar-1995.
 
+#line 261
     MemInfo->LargestFree = LargestFree;
     MemInfo->MaxUnlocked = LargestFree/4096;
     MemInfo->MaxLocked = 0xb61;
@@ -295,4 +299,5 @@ Return Value:
 
     MemInfo->PageFileSize = MemStatus.dwTotalPageFile / 4096;
 
+#line 277
 }

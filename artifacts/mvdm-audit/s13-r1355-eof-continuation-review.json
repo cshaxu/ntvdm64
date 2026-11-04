@@ -1,0 +1,57 @@
+{
+  "method": "The unpaired implicit continuations have no subsequent original or current source content except blank lines, closing #endif directives and #line directives; no diagnostic code position remains to map. Other groups have prior strict tree and matching projection evidence.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.h",
+      "current_sha256": "ea9842a3d092fb68850c3155246779d174aa5423699b51d6ea9203617b39441e",
+      "original_sha256": "8b4622e066f61c6815dbadf3f3c735d7dd29210673a6930f354aaf0e2be880e8",
+      "groups": [
+        {
+          "original_endif": 33,
+          "current_endif": 35,
+          "next_matched_code": null
+        }
+      ],
+      "passed": false,
+      "matched_lines": 29
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_sas.h",
+      "current_sha256": "2f8a9d4296d115f48a74eacdb91ad4b37367ef5043f865a91732753db2c8e1df",
+      "original_sha256": "42f3e8b6a7ad9f4628ae35cd133b6747a19b840c0d3ead23d2d1567874c4e717",
+      "groups": [
+        {
+          "original_endif": 199,
+          "current_endif": 32,
+          "next_matched_code": null
+        }
+      ],
+      "passed": false,
+      "matched_lines": 23
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+      "current_sha256": "d25bb8f24789c19a6d4499fc0f7c84d3adac70413ef9ca8ed47ee92da215250f",
+      "original_sha256": "0fb164317335d8b48c51122182922259c902c7f60afb28111bafa9fb75735a6a",
+      "groups": [
+        {
+          "original_endif": 31,
+          "current_endif": 15,
+          "next_matched_code": [
+            232,
+            16,
+            233,
+            233
+          ]
+        },
+        {
+          "original_endif": 522,
+          "current_endif": 35,
+          "next_matched_code": null
+        }
+      ],
+      "passed": false,
+      "matched_lines": 16
+    }
+  ]
+}

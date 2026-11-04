@@ -37,6 +37,7 @@ extern BOOL mvdm_debugger_read_debug_registers(USHORT Selector,
  * service below, not the process-LDT/kernel-monitor/fast-BOP providers. */
 
 
+#line 342
 VOID
 DpmiSetDebugRegisters(
     VOID
@@ -65,6 +66,7 @@ Return Value:
     ULONG DebugRegisters[6];
 #endif
 
+#line 367
     setCF(0);
 
 #if defined(CPU_40_STYLE)
@@ -77,6 +79,7 @@ Return Value:
 #endif
 
     if (RegisterPointer == NULL || !ThreadSetDebugContext((PULONG) RegisterPointer))
+#line 375
         {
         ULONG ClearDebugRegisters[6] = {0, 0, 0, 0, 0, 0};
 

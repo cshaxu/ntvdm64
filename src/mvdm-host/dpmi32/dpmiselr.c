@@ -161,6 +161,7 @@ Return Value:
     return STATUS_SUCCESS;
 }
 
+#line 74
 VOID
 DpmiSetDescriptorEntry(
     VOID
@@ -192,6 +193,7 @@ Return Value:
 
     registerAX = getAX();
     mvdm_softpc_report_dpmi_set_descriptor_entry(registerAX, getBX(), getCX());
+#line 104
     if (registerAX % 8){
         return;
     }
@@ -204,6 +206,7 @@ Return Value:
         getCX(), (ULONG)Descriptors, (ULONG)(getMSW() & MSW_PE));
 
 
+#line 113
     registerCX =  getCX();
     for (i = 0; i < registerCX; i++) {
 
@@ -245,6 +248,7 @@ Return Value:
                 (registerAX + i * sizeof(LDT_ENTRY)), Base);
 #endif
 #ifndef i386
+#line 148
             {
                 ULONG BaseOrig = Base;
                 Base = GetDescriptorMapping(registerAX+i*8, Base);
@@ -303,6 +307,7 @@ Return Value:
                     *((PULONG)Gdt + 1), *(PULONG)Ldt, *((PULONG)Ldt + 1));
             }
 #endif
+#line 161
         }
     }
 
@@ -320,6 +325,7 @@ Return Value:
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 #endif // not i386
+#line 182
 }
 
 

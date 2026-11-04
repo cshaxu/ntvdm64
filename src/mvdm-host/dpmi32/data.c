@@ -201,6 +201,7 @@ Routine Description:
 }
 #endif
 #endif
+#line 138
 
 ULONG DosxIret;
 ULONG DosxIretd;

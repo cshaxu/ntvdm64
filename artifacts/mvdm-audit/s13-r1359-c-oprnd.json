@@ -1,0 +1,120 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_oprnd.h",
+      "before_sha256": "74a76416d33546ff0d2fd718eeecf07d5e30c19ef113f0a76678b69cbeb8326a",
+      "original_sha256": "d7b6cf24845a42b42246cb8ae2c41b7bbeda398c0da4cb51cab2620e3938619e",
+      "anchors": {
+        "210": 202,
+        "220": 211,
+        "236": 226,
+        "256": 245,
+        "284": 272,
+        "1088": 1068,
+        "1115": 1093,
+        "1149": 1125
+      },
+      "unresolved": [
+        [
+          279,
+          265,
+          267,
+          "      limit_check(m_seg[ARG], m_off[ARG], (INT)1, (INT)94);\t\\"
+        ],
+        [
+          1109,
+          1086,
+          1088,
+          "\t\tTYPE\t\t\t\t\t\t\\"
+        ],
+        [
+          1110,
+          1087,
+          1089,
+          "\t\tlimit_check(m_seg[0], m_off[0], (INT)1, (INT)2);\t\\"
+        ],
+        [
+          1111,
+          1088,
+          1090,
+          "\t\tm_la[0] = GET_SR_BASE(m_seg[0]) + m_off[0];\t\\"
+        ],
+        [
+          1112,
+          1089,
+          1091,
+          "\t\tm_pa[0] = usr_chk_word(m_la[0], PAGE);\t\t\\"
+        ],
+        [
+          1113,
+          1090,
+          1092,
+          "\t\tF_Ew(0)\t\t\t\t\t\t\\"
+        ],
+        [
+          1114,
+          1091,
+          1093,
+          "      }\t\t\t\t\t\t\t\t\\"
+        ],
+        [
+          1115,
+          1092,
+          1094,
+          ""
+        ],
+        [
+          1136,
+          1111,
+          1113,
+          "\t\tTYPE\t\t\t\t\t\t\\"
+        ],
+        [
+          1137,
+          1112,
+          1114,
+          "\t\tlimit_check(m_seg[0], m_off[0], (INT)1, (INT)4);\t\\"
+        ],
+        [
+          1138,
+          1113,
+          1115,
+          "\t\tm_la[0] = GET_SR_BASE(m_seg[0]) + m_off[0];\t\\"
+        ],
+        [
+          1139,
+          1114,
+          1116,
+          "\t\tm_pa[0] = usr_chk_dword(m_la[0], PAGE);\t\t\\"
+        ],
+        [
+          1140,
+          1115,
+          1117,
+          "\t\tF_Ed(0)\t\t\t\t\t\t\\"
+        ],
+        [
+          1141,
+          1116,
+          1118,
+          "      }\t\t\t\t\t\t\t\t\\"
+        ],
+        [
+          1142,
+          1117,
+          1119,
+          ""
+        ]
+      ],
+      "matched_lines": 1113,
+      "removed_physical_indices": [
+        1106,
+        1107,
+        1133,
+        1134
+      ],
+      "after_sha256": "e28138c2d900f501b7fe9d1007ccd98c3788a36fa96fdeb1cea8e345a485b82e",
+      "reason": "Preserve bit-index macro token stream while reflowing two local three-line expressions to original one-line spans; exclude cross-runtime-branch false text match."
+    }
+  ]
+}

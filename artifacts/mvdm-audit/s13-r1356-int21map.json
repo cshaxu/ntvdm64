@@ -1,0 +1,66 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "before_sha256": "05fdf944320c75f98c0a2023568479c216128a031e8375cbd79d012d7117501a",
+      "original_sha256": "b0a8632ddb1bb0ed609115bcb113c7a43a0b042930cd281d333540089589c7e1",
+      "anchors": {
+        "205": 199,
+        "215": 211,
+        "244": 236,
+        "250": 241,
+        "252": 242,
+        "1086": 1081,
+        "1097": 1091,
+        "1555": 1591,
+        "1609": 1642,
+        "1696": 1725,
+        "2601": 2615,
+        "2690": 2690,
+        "2703": 2697,
+        "2844": 2836,
+        "2646": 2658,
+        "2838": 2830
+      },
+      "unresolved": [
+        [
+          2648,
+          2659,
+          2661,
+          "        (IoctlSubFunction < 0x60) || (IoctlSubFunction > 0x62) &&"
+        ],
+        [
+          2652,
+          2661,
+          2665,
+          "    ) {"
+        ],
+        [
+          2841,
+          2832,
+          2834,
+          "            1,"
+        ],
+        [
+          2842,
+          2833,
+          2835,
+          "            TRUE"
+        ],
+        [
+          2843,
+          2834,
+          2836,
+          "            );"
+        ]
+      ],
+      "matched_lines": 2987,
+      "removed_physical_indices": [
+        2649,
+        2650
+      ],
+      "after_sha256": "0aaef2ba8f555513a69f4627483281a96312d026a9680f4232c7f0b1952feb88",
+      "reason": "Preserve existing IOCTL terms while joining local-only lines and move its existing selector comment before the call; both changes preserve the selected token sequence."
+    }
+  ]
+}

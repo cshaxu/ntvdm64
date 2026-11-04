@@ -208,6 +208,7 @@ operand)
          m_pa[ARG] = NO_PHYSICAL_MAPPING;			\
       }
 
+#line 202
 #define D_E08(ARG, TYPE, PAGE)					\
       m_isreg[ARG] = FALSE;					\
       d_mem(modRM, &p, segment_override,			\
@@ -218,6 +219,7 @@ operand)
       m_pa[ARG] = usr_chk_word(m_la[ARG], PAGE);		\
       D_NPX_PAGES(ARG, PAGE, 8)
 
+#line 211
 #define F_E08(ARG)						\
       vir_read_bytes(&ops[ARG].npxbuff[0], m_la[ARG], m_pa[ARG], 0x08);
 
@@ -234,6 +236,7 @@ operand)
       m_pa[ARG] = usr_chk_word(m_la[ARG], PAGE);		\
       D_NPX_PAGES(ARG, PAGE, 10)
 
+#line 226
 #define F_E0a(ARG)						\
       vir_read_bytes(&ops[ARG].npxbuff[0], m_la[ARG], m_pa[ARG], 0x0a);
 
@@ -254,6 +257,7 @@ operand)
       m_pa[ARG] = usr_chk_word(m_la[ARG], PAGE);		\
       D_NPX_PAGES(ARG, PAGE, (NPX_ADDRESS_SIZE_32 ? 28 : 14))
 
+#line 245
 #define F_E0e(ARG)						\
       if (NPX_ADDRESS_SIZE_32) {				\
 	vir_read_bytes(&ops[ARG].npxbuff[0], m_la[ARG], m_pa[ARG], 0x1c);	\
@@ -282,6 +286,7 @@ operand)
       m_pa[ARG] = usr_chk_word(m_la[ARG], PAGE);		\
       D_NPX_PAGES(ARG, PAGE, (NPX_ADDRESS_SIZE_32 ? 108 : 94))
 
+#line 272
 #define F_E5e(ARG)						\
       if (NPX_ADDRESS_SIZE_32) {				\
 	vir_read_bytes(&ops[ARG].npxbuff[0], m_la[ARG], m_pa[ARG], 0x6c);	\
@@ -1086,6 +1091,7 @@ operand)
 
 /* MVDM-HOST-DIV-469: register bit indexes are signed element displacements;
  * address_add applies the current address-size wrap before limit checking. */
+#line 1068
 #define BT_OPSw(TYPE, PAGE) \
 	if ( GET_MODE(modRM) == 3 ) {				\
 		/*						\
@@ -1103,9 +1109,7 @@ operand)
 		m_isreg[0] = FALSE;				\
 		d_mem(modRM, &p, segment_override,		\
 			&m_seg[0], &m_off[0]);			\
-		m_off[0] = address_add(m_off[0],		\
-		    (IS32)(((ops[1].sng & 0xffffu) >> 4) * 2u) - \
-		    ((ops[1].sng & 0x8000u) ? 8192 : 0));	\
+		m_off[0] = address_add(m_off[0], (IS32)(((ops[1].sng & 0xffffu) >> 4) * 2u) - ((ops[1].sng & 0x8000u) ? 8192 : 0)); \
 		TYPE						\
 		limit_check(m_seg[0], m_off[0], (INT)1, (INT)2);	\
 		m_la[0] = GET_SR_BASE(m_seg[0]) + m_off[0];	\
@@ -1113,6 +1117,7 @@ operand)
 		F_Ew(0)						\
       }								\
 
+#line 1093
 #define BT_OPSd(TYPE, PAGE) \
 	if ( GET_MODE(modRM) == 3 ) {				\
 		/*						\
@@ -1130,9 +1135,7 @@ operand)
 		m_isreg[0] = FALSE;				\
 		d_mem(modRM, &p, segment_override,		\
 			&m_seg[0], &m_off[0]);			\
-		m_off[0] = address_add(m_off[0],		\
-		    (IS32)((ops[1].sng >> 5) * 4u) -		\
-		    ((ops[1].sng & 0x80000000u) ? 536870912 : 0)); \
+		m_off[0] = address_add(m_off[0], (IS32)((ops[1].sng >> 5) * 4u) - ((ops[1].sng & 0x80000000u) ? 536870912 : 0)); \
 		TYPE						\
 		limit_check(m_seg[0], m_off[0], (INT)1, (INT)4);	\
 		m_la[0] = GET_SR_BASE(m_seg[0]) + m_off[0];	\
@@ -1147,6 +1150,7 @@ operand)
 
 /* Mm == address of memory operand <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
 
+#line 1125
 #define D_Mm(ARG)						\
    if ( GET_MODE(modRM) == 3 )					\
       Int6(); /* Register operand not allowed */		\

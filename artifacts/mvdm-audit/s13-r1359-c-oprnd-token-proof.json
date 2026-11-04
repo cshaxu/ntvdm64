@@ -1,0 +1,8 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_oprnd.h",
+  "method": "Compare lexical tokens after preprocessing line splices and removing whitespace, C comments and #line directives; preserve literals.",
+  "before_sha256": "74a76416d33546ff0d2fd718eeecf07d5e30c19ef113f0a76678b69cbeb8326a",
+  "after_sha256": "e28138c2d900f501b7fe9d1007ccd98c3788a36fa96fdeb1cea8e345a485b82e",
+  "token_count": 7291,
+  "equal": true
+}

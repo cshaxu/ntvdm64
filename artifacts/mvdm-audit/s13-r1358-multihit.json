@@ -1,0 +1,54 @@
+{
+  "method": "Compare original/current selectors and excluded/retained leaves, then check matching-code logical line positions across all combinations of recorded hit arms (including conservative combinations not independently proved realizable). Unknown arms, >128 combinations, local differing leaves and mapping mismatches remain pending. Does not prove runtime behavior.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/error.h",
+      "current_sha256": "e1f50719a32e302c9d2e91a49c651669407f4dcc731e625cafde2671b918ed87",
+      "original_sha256": "40953fbb22a9c6a5bff875414e4dd6822340ec4a2501edec79415573fea16ab3",
+      "multi_hit_groups": [
+        [
+          223,
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      "projections_checked": 2,
+      "tree": {
+        "retained": 5,
+        "groups": 5,
+        "excluded": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "current_sha256": "6cc99e7bb7d7833b7f1b7475b97734830d3b7c395b22d1715b22fc787360b45f",
+      "original_sha256": "0fad52bf1e4c6db87bdc77cf9ec2f35540da2fc4972d2b32e32d57a46776a9fc",
+      "multi_hit_groups": [
+        [
+          54,
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      "projections_checked": 2,
+      "tree": {
+        "excluded": 7,
+        "groups": 11,
+        "retained": 6
+      }
+    }
+  ],
+  "held_reasons": {
+    "retained leaf differs": 20,
+    "retained alternative line missing": 20,
+    "continuation line not explicit": 6,
+    "line mapping mismatch": 1,
+    "unknown arm": 4,
+    "excluded error line missing": 3,
+    "too many combinations": 1
+  }
+}
