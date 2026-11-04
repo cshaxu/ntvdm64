@@ -11,7 +11,7 @@ existing current-context probes. Zero observed hits does not establish that an
 arm is unreachable. `original-identity` establishes byte equality and hence
 original physical lines, not that all branches were exercised. Other line
 statuses have the scopes stated in the source evidence; they are not all-context
-compiler diagnostic verification. 81 differing files remain not fully
+compiler diagnostic verification. 73 differing files remain not fully
 certified, and 11 retained arms in five files have no observed host hit.
 
 This is a tracking inventory, not a completion certificate. The source branch

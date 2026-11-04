@@ -1,0 +1,493 @@
+{
+  "method": "Review direct retained-arm differences against specific existing mirror registrations after original-tree and source-projection checks; full diffs listed.",
+  "limits": "Source-derived matching-line projection and historical hit evidence, not a new runtime or compiler diagnostic test. Registration is not an assertion that local behavior equals original.",
+  "records": [
+    {
+      "path": "src/mvdm-host/dos/dem/dem.h",
+      "current_sha256": "5eeeea3914420309a316496d90912e173bd1be90a4bd09da39e4e7e9069c460f",
+      "original_sha256": "c9c4b4814e1b30ffad29a7716948ec7b6c0ade8f6ab2fbb9fd6998d358706e5a",
+      "matched_lines": 212,
+      "strict_tree": {
+        "retained": 7,
+        "excluded": 9,
+        "groups": 13,
+        "retained_leaf_differences": 1
+      },
+      "registered_differences": [
+        "MVDM-HOST-DIV-004",
+        "MVDM-HOST-DIV-005",
+        "MVDM-HOST-DIV-006",
+        "MVDM-HOST-DIV-007",
+        "MVDM-HOST-DIV-801"
+      ],
+      "retained_arm_direct_differences": [
+        {
+          "branch_line": 8,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -40,4 +40,7 @@",
+            " #include \"dossvc.h\"",
+            "+#include <mvdm_guest_location.h>",
+            " /** DEM Externs **/",
+            "-extern ULONG  UNALIGNED *pulDTALocation;",
+            "+/* DIVERGENCE MVDM-HOST-DIV-005: the original x86 pointer identifies a",
+            "+* four-byte guest far-address cell; it is retained numerically. */",
+            "+extern mvdm_guest_location dta_location;",
+            " extern BOOL   VDMForWOW;",
+            "@@ -49,4 +52,12 @@",
+            " extern USHORT nDrives;",
+            "-extern PUSHORT pusCurrentPDB;",
+            "-extern PDEMEXTERR pExtendedError;",
+            "+/* DIVERGENCE MVDM-HOST-DIV-006: current PDB is a two-byte guest scalar;",
+            "+* callers must read it under a fresh bounded lease. */",
+            "+extern mvdm_guest_location current_pdb_location;",
+            "+/* DIVERGENCE MVDM-HOST-DIV-007: the original SFT-chain head was retained as",
+            "+* a native pointer.  It remains the original numeric DS:offset location and",
+            "+* VDD obtains only fresh bounded shadows from it. */",
+            "+extern mvdm_guest_location sft_head_location;",
+            "+/* DIVERGENCE MVDM-HOST-DIV-005: the original x86 pointer is retained as a",
+            "+* numeric guest descriptor; every use must acquire a fresh bounded lease. */",
+            "+extern mvdm_guest_location extended_error_location;",
+            " #include \"demexp.h\""
+          ]
+        },
+        {
+          "branch_line": 54,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -6,2 +6 @@",
+            " #include <nturtl.h>",
+            "-#include <ntdddisk.h>"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/softpc.h",
+      "current_sha256": "4bb85e0a70526b1bbf67ac5ac4531afb1c649efcda65d05ade6280029b18c75b",
+      "original_sha256": "1e6fbd5f67aa04749d7896bd0109fe45daa22e691839d1261bbc3f039924bd9b",
+      "matched_lines": 311,
+      "strict_tree": {
+        "excluded": 2,
+        "groups": 2,
+        "implicit_retained_anchor": 1,
+        "retained_leaf_differences": 1,
+        "retained": 1,
+        "implicit_continuation": 1
+      },
+      "registered_differences": [
+        "MVDM-HOST-DIV-294"
+      ],
+      "retained_arm_direct_differences": [
+        {
+          "branch_line": 239,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -24,20 +24,20 @@",
+            " extern VOID setBH(UCHAR val);",
+            "-extern USHORT getAX(VOID);",
+            "-extern USHORT getCX(VOID);",
+            "-extern USHORT getDX(VOID);",
+            "-extern USHORT getBX(VOID);",
+            "-extern USHORT getSP(VOID);",
+            "-extern USHORT getBP(VOID);",
+            "-extern USHORT getSI(VOID);",
+            "-extern USHORT getDI(VOID);",
+            "-extern USHORT getIP(VOID);",
+            "-extern VOID setAX(USHORT val);",
+            "-extern VOID setCX(USHORT val);",
+            "-extern VOID setDX(USHORT val);",
+            "-extern VOID setBX(USHORT val);",
+            "-extern VOID setSP(USHORT val);",
+            "-extern VOID setBP(USHORT val);",
+            "-extern VOID setSI(USHORT val);",
+            "-extern VOID setDI(USHORT val);",
+            "-extern VOID setIP(USHORT val);",
+            "+extern USHORT __cdecl getAX(VOID);",
+            "+extern USHORT __cdecl getCX(VOID);",
+            "+extern USHORT __cdecl getDX(VOID);",
+            "+extern USHORT __cdecl getBX(VOID);",
+            "+extern USHORT __cdecl getSP(VOID);",
+            "+extern USHORT __cdecl getBP(VOID);",
+            "+extern USHORT __cdecl getSI(VOID);",
+            "+extern USHORT __cdecl getDI(VOID);",
+            "+extern USHORT __cdecl getIP(VOID);",
+            "+extern VOID __cdecl setAX(USHORT val);",
+            "+extern VOID __cdecl setCX(USHORT val);",
+            "+extern VOID __cdecl setDX(USHORT val);",
+            "+extern VOID __cdecl setBX(USHORT val);",
+            "+extern VOID __cdecl setSP(USHORT val);",
+            "+extern VOID __cdecl setBP(USHORT val);",
+            "+extern VOID __cdecl setSI(USHORT val);",
+            "+extern VOID __cdecl setDI(USHORT val);",
+            "+extern VOID __cdecl setIP(USHORT val);",
+            " extern ULONG getEAX(VOID);",
+            "@@ -60,12 +60,12 @@",
+            " extern VOID setEIP(ULONG val);",
+            "-extern USHORT getES(VOID);",
+            "-extern USHORT getCS(VOID);",
+            "-extern USHORT getSS(VOID);",
+            "-extern USHORT getDS(VOID);",
+            "+extern USHORT __cdecl getES(VOID);",
+            "+extern USHORT __cdecl getCS(VOID);",
+            "+extern USHORT __cdecl getSS(VOID);",
+            "+extern USHORT __cdecl getDS(VOID);",
+            " extern USHORT getFS(VOID);",
+            " extern USHORT getGS(VOID);",
+            "-extern VOID setES(USHORT val);",
+            "-extern VOID setCS(USHORT val);",
+            "-extern VOID setSS(USHORT val);",
+            "-extern VOID setDS(USHORT val);",
+            "+extern VOID __cdecl setES(USHORT val);",
+            "+extern VOID __cdecl setCS(USHORT val);",
+            "+extern VOID __cdecl setSS(USHORT val);",
+            "+extern VOID __cdecl setDS(USHORT val);",
+            " extern VOID setFS(USHORT val);",
+            "@@ -85,3 +85,3 @@",
+            " extern ULONG getEFLAGS(VOID);",
+            "-extern USHORT getMSW(VOID);",
+            "+extern USHORT __cdecl getMSW(VOID);",
+            " extern VOID setAF(ULONG val);"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c",
+      "current_sha256": "12af7726b0d966887aeb9b216a521f38dccbba86cfeee1e7186386f36f187ce3",
+      "original_sha256": "a12ddfd55dbd3b4426ff20075c46a665c6a30c6a955f24f6ab4872fb4895e935",
+      "matched_lines": 791,
+      "strict_tree": {
+        "retained": 4,
+        "groups": 5,
+        "retained_leaf_differences": 1,
+        "excluded": 1
+      },
+      "registered_differences": [
+        "MVDM-HOST-DIV-137",
+        "MVDM-HOST-DIV-156"
+      ],
+      "retained_arm_direct_differences": [
+        {
+          "branch_line": 56,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -1,2 +1,6 @@",
+            " IUH ega_gc_outb_mask;",
+            "-IHP Gdp;",
+            "+/* DIVERGENCE(MVDM-HOST-DIV-137): C-VID owns the GDP allocation through",
+            "+* setup_global_data_ptr().  Give that owner one strong zero-initialized",
+            "+* definition instead of allowing C-VID and CCPU localfm.c to coalesce",
+            "+* separate tentative definitions at link time. */",
+            "+IHP Gdp = (IHP)0;"
+          ]
+        },
+        {
+          "branch_line": 759,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -12,2 +12,3 @@",
+            " {",
+            "+mvdm_cvidc_bind_vectors();",
+            " EGA_CPU.globals = &(GLOBAL_VGAGlobals);"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "current_sha256": "235dccd77e38abd5397cc6b064ad297d7f0cc1406a6676801590b0bba739f510",
+      "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896",
+      "matched_lines": 1605,
+      "strict_tree": {
+        "excluded": 26,
+        "groups": 38,
+        "retained": 23,
+        "retained_leaf_differences": 1
+      },
+      "registered_differences": [
+        "MVDM-HOST-DIV-325",
+        "MVDM-HOST-DIV-059"
+      ],
+      "retained_arm_direct_differences": [
+        {
+          "branch_line": 661,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -18,2 +18,7 @@",
+            " sas_storew_no_check(BIOS_KB_BUFFER_TAIL, buffer_ptr);",
+            "+/* DIVERGENCE(MVDM-HOST-DIV-325): only the explicit Win3.1",
+            "+* Setup trace records a key after the original BIOS buffer",
+            "+* commit.  It cannot affect delivery, ownership or IRQs. */",
+            "+mvdm_softpc_report_setup_hardware_probe(\"keyboard-buffer-put\",",
+            "+(unsigned long)s, (unsigned long)v);",
+            " setAX(0x9102);"
+          ]
+        },
+        {
+          "branch_line": 1437,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -8,2 +8,5 @@",
+            " {",
+            "+/* DIVERGENCE(MVDM-HOST-DIV-325): register-only diagnostics. */",
+            "+mvdm_softpc_report_setup_hardware_probe(\"keyboard-bop-enter\",",
+            "+(unsigned long)getAH(), (unsigned long)getAL());",
+            " switch (getAH()) {",
+            "@@ -26,3 +29,7 @@",
+            " case 2:",
+            "+mvdm_softpc_report_setup_hardware_probe(\"keyboard-waitio-enter\",",
+            "+(unsigned long)getAH(), (unsigned long)getAL());",
+            " IDLE_waitio();",
+            "+mvdm_softpc_report_setup_hardware_probe(\"keyboard-waitio-leave\",",
+            "+(unsigned long)getAH(), (unsigned long)getAL());",
+            " break;"
+          ]
+        },
+        {
+          "branch_line": 1552,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -12,5 +12,13 @@",
+            " KbdSeg     = getDS();",
+            "-pkio_table = (word *) effective_addr(getCS(), getSI());",
+            "+/*",
+            "+* DIVERGENCE(MVDM-HOST-DIV-059): effective_addr is a fixed-width guest",
+            "+* physical number, not a host pointer.  The original function already",
+            "+* uses Start_of_M_area as the selected SoftPC SAS backing store below;",
+            "+* use that same native-width backing path for every table pointer rather",
+            "+* than converting the guest number directly to a host address.",
+            "+*/",
+            "+phy_base   = effective_addr(getCS(), getSI());",
+            "+pkio_table = (word *)(Start_of_M_area + phy_base);",
+            " /* IDLE variables */",
+            "-sas_loadw((sys_addr)(pkio_table + 12), &w);",
+            "+sas_loadw((sys_addr)(phy_base + 12 * sizeof(word)), &w);",
+            " pICounter\t\t  = (word *) (Start_of_M_area + ((KbdSeg<<4)+w));"
+          ]
+        },
+        {
+          "branch_line": 1592,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -59,4 +59,6 @@",
+            " stream_io_buffer_size = *pkio_table++;",
+            "-stream_io_buffer = (half_word *)effective_addr(*pkio_table++, 0);",
+            "-stream_io_dirty_count_ptr = (word *)effective_addr(KbdSeg, *pkio_table++);",
+            "+stream_io_buffer = (half_word *)(Start_of_M_area +",
+            "+effective_addr(*pkio_table++, 0));",
+            "+stream_io_dirty_count_ptr = (word *)(Start_of_M_area +",
+            "+effective_addr(KbdSeg, *pkio_table++));",
+            " stream_io_bios_busy_sysaddr = effective_addr(KbdSeg, *pkio_table++);"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "current_sha256": "14b1be5d756ff06c3578f5f12a111595afff50a5ea3aa9fa39df6c4e983011f8",
+      "original_sha256": "8908c3a4445c788eec0fcfa050cf18cac5f79413e03c5ddbdcca259779bf2860",
+      "matched_lines": 573,
+      "strict_tree": {
+        "retained": 30,
+        "excluded": 23,
+        "groups": 37,
+        "retained_leaf_differences": 1
+      },
+      "registered_differences": [
+        "MVDM-HOST-DIV-067",
+        "MVDM-HOST-DIV-089"
+      ],
+      "retained_arm_direct_differences": [
+        {
+          "branch_line": 123,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -13,2 +13,5 @@",
+            " #include\t\"cpu_vid.h\"",
+            "+/* DIVERGENCE(MVDM-HOST-DIV-067): the selected C_VID function has an",
+            "+* original `void (IUH)` shape; do not use an implicit C declaration. */",
+            "+IMPORT void setReadPointers IPT1(IUH, readset);",
+            " /* [3.1.2 DECLARATIONS]                                                 */"
+          ]
+        },
+        {
+          "branch_line": 286,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -1,5 +1,7 @@",
+            " /* C_Evid glue */",
+            "-extern read_byte_ev_glue IPT1(IU32, eaOff);",
+            "-extern read_word_ev_glue IPT1(IU32, eaOff);",
+            "-extern read_str_fwd_ev_glue IPT3(IU8 *, dest, IU32, eaOff, IU32, count);",
+            "+/* DIVERGENCE MVDM-HOST-DIV-089: retain the concrete original C-video read",
+            "+* glue contracts instead of implicit host-int declarations. */",
+            "+extern IU32 read_byte_ev_glue IPT1(IU32, eaOff);",
+            "+extern IU32 read_word_ev_glue IPT1(IU32, eaOff);",
+            "+extern void read_str_fwd_ev_glue IPT3(IU8 *, dest, IU32, eaOff, IU32, count);",
+            " READ_POINTERS Glue_reads ="
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "current_sha256": "49b235efd0b6ccb1c226f63e17b5838c5ed441487bc68340f4d3b03179117474",
+      "original_sha256": "42b33f105e30d31a2805d9f835a74d80c47b4d96ee77101c18f096772e60c47a",
+      "matched_lines": 457,
+      "strict_tree": {
+        "retained": 22,
+        "excluded": 16,
+        "groups": 30,
+        "retained_leaf_differences": 1
+      },
+      "registered_differences": [
+        "MVDM-HOST-DIV-136",
+        "MVDM-HOST-DIV-074",
+        "MVDM-HOST-DIV-088"
+      ],
+      "retained_arm_direct_differences": [
+        {
+          "branch_line": 87,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -1,9 +1,11 @@",
+            "-IMPORT VOID ega_copy_b_write();",
+            "-IMPORT VOID ega_mode0_chn_b_write();",
+            "-IMPORT VOID ega_mode1_chn_b_write();",
+            "-IMPORT VOID ega_mode2_chn_b_write();",
+            "-IMPORT VOID ega_copy_w_write();",
+            "-IMPORT VOID ega_mode0_chn_w_write();",
+            "-IMPORT VOID ega_mode1_chn_w_write();",
+            "-IMPORT VOID ega_mode2_chn_w_write();",
+            "+/* DIVERGENCE(MVDM-HOST-DIV-136): preserve the original writer table order,",
+            "+* with the exact original provider parameter contracts. */",
+            "+IMPORT VOID ega_copy_b_write IPT2(ULONG, value, ULONG, offset);",
+            "+IMPORT VOID ega_mode0_chn_b_write IPT2(ULONG, value, ULONG, offset);",
+            "+IMPORT VOID ega_mode1_chn_b_write IPT2(ULONG, value, ULONG, offset);",
+            "+IMPORT VOID ega_mode2_chn_b_write IPT2(ULONG, value, ULONG, offset);",
+            "+IMPORT VOID ega_copy_w_write IPT2(ULONG, value, ULONG, offset);",
+            "+IMPORT VOID ega_mode0_chn_w_write IPT2(ULONG, value, ULONG, offset);",
+            "+IMPORT VOID ega_mode1_chn_w_write IPT2(ULONG, value, ULONG, offset);",
+            "+IMPORT VOID ega_mode2_chn_w_write IPT2(ULONG, value, ULONG, offset);",
+            " /* Handy array to extract all 4 plane values in one go. */"
+          ]
+        },
+        {
+          "branch_line": 143,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -4,5 +4,9 @@",
+            " extern void  fill_byte_ev_glue IPT3(IU32, eaOff, IU8, eaVal, IU32, count);",
+            "-extern void  fill_word_ev_glue IPT3(IU32, eaOff, IU8, eaVal, IU32, count);",
+            "+/* DIVERGENCE MVDM-HOST-DIV-074: match the original glue body's IU16 word value. */",
+            "+extern void  fill_word_ev_glue IPT3(IU32, eaOff, IU16, eaVal, IU32, count);",
+            " extern void  move_byte_fwd_ev_glue IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);",
+            " extern void  move_word_fwd_ev_glue IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);",
+            "+/* DIVERGENCE MVDM-HOST-DIV-088: use the original C-video selector body's",
+            "+* exact no-argument contract rather than an implicit host-int call. */",
+            "+extern void setWritePointers IPT0();",
+            " MEM_HANDLERS Glue_writes ="
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vga.c",
+      "current_sha256": "1ebdafaf6e9ed6afc128b64d305233ca8f8b12c5dd77aa12052d8a57283f99af",
+      "original_sha256": "81db9f2e415e58c21b0a10110d03d0f16532c2150aba84feb2cab8f74627ee6d",
+      "matched_lines": 1622,
+      "strict_tree": {
+        "excluded": 3,
+        "groups": 7,
+        "retained": 4,
+        "retained_leaf_differences": 1
+      },
+      "registered_differences": [
+        "VIDEO7-PACKED-SURFACE"
+      ],
+      "retained_arm_direct_differences": [
+        {
+          "branch_line": 1320,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -30,3 +30,7 @@",
+            " */",
+            "-if( height>400 || width>640 ){",
+            "+/* DIVERGENCE(VIDEO7-PACKED-SURFACE): SoftPC T60 bounds the actual",
+            "+* DIB/source extent instead of rejecting full 480-line updates. */",
+            "+if (width <= 0 || height <= 0 || screen_x < 0 || screen_y < 0 ||",
+            "+screen_x >= sc.PC_W_Width || screen_y >= sc.PC_W_Height ||",
+            "+offset < 0 || offset >= 4 * EGA_PLANE_SIZE || get_offset_per_line() <= 0){",
+            " assert2( NO, \"VDM: nt_v7vga_hi_graph_std() w=%d h=%d\", width, height );",
+            "@@ -34,2 +38,7 @@",
+            " }",
+            "+width = min(width, sc.PC_W_Width - screen_x);",
+            "+height = min(height, sc.PC_W_Height - screen_y);",
+            "+width = min(width, 4 * EGA_PLANE_SIZE - offset);",
+            "+height = min(height, 1 + (4 * EGA_PLANE_SIZE - offset - width) /",
+            "+get_offset_per_line());",
+            " local_height = height;"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "current_sha256": "468a42c537dd5733b02dbf276bc1d49f000a5fab55e43d7403ed7e1439d2c04a",
+      "original_sha256": "bad1de87b499d3052e757d858b39437232f5653610dc5560c06afcc5e05fd391",
+      "matched_lines": 228,
+      "strict_tree": {
+        "excluded": 1,
+        "retained_leaf_differences": 1,
+        "retained": 1,
+        "groups": 1
+      },
+      "registered_differences": [
+        "MVDM-HOST-DIV-077",
+        "MVDM-HOST-DIV-771"
+      ],
+      "retained_arm_direct_differences": [
+        {
+          "branch_line": 219,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -1,10 +1,7 @@",
+            "-SoftpcBase = (ULONG) GetVDMAddr (0,0);",
+            "-RtlCopyMemory((PVOID)((ULONG)pDst + SoftpcBase),",
+            "-(PVOID)((ULONG)pSrc + SoftpcBase),",
+            "-cbTransfer);",
+            "-// if we touched the intel memory, tell the emulator to flush its cache",
+            "-// WARNING!!!! Donot use Sim32FlushVDMPoiner unless you know the exact segment",
+            "-// address. In this case, we have no idea what the segment value is, all we",
+            "-// know is its \"linear address\".",
+            "-// BUGBUG verify whether we can ignore the case with pDst > 0x110000",
+            "-sas_overwrite_memory(pDst, cbTransfer);",
+            "+mvdm_softpc_report_xms_move((ULONG)pSrc, (ULONG)pDst, cbTransfer, FALSE);",
+            "+if (!mvdm_softpc_guest_memory_copy_forward((ULONG)pDst,",
+            "+(ULONG)pSrc, cbTransfer)) {",
+            "+mvdm_xms_cancel_current_operation();",
+            "+return;",
+            "+}",
+            "+mvdm_softpc_report_xms_move((ULONG)pSrc, (ULONG)pDst, cbTransfer, TRUE);"
+          ]
+        }
+      ]
+    }
+  ]
+}
