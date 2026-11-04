@@ -11,7 +11,7 @@ static int append(const wchar_t *path,const char *tag,DWORD pid)
     HANDLE file=CreateFileW(path,FILE_APPEND_DATA,FILE_SHARE_READ|FILE_SHARE_WRITE,
         NULL,OPEN_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
     if(file==INVALID_HANDLE_VALUE)return 2;
-    int count=sprintf_s(text,"%s %lu width=%u hook=%u\r\n",tag,pid,(unsigned)(sizeof(void*)*8),
+    int count=sprintf_s(text,sizeof(text),"%s %lu width=%u hook=%u\r\n",tag,pid,(unsigned)(sizeof(void*)*8),
         GetModuleHandleW(sizeof(void*)==8 ? L"nthook64.dll" : L"nthook32.dll") ? 1u : 0u);
     BOOL written=count>0 && WriteFile(file,text,(DWORD)count,&bytes,NULL) && bytes==(DWORD)count;
     CloseHandle(file);return written ? 0 : 3;
@@ -23,7 +23,7 @@ static DWORD WINAPI spawn_fast(void *value)
     WCHAR image[MAX_PATH],command[2048];STARTUPINFOW startup={sizeof(startup)};
     PROCESS_INFORMATION child={0};DWORD code=0;
     BOOL ok=GetModuleFileNameW(NULL,image,MAX_PATH)!=0;
-    if(ok)swprintf_s(command,L"\"%s\" leaf \"%s\" \"%s\" unused \"%s\"",image,args[2],args[4],args[5]);
+    if(ok)swprintf_s(command,ARRAYSIZE(command),L"\"%s\" leaf \"%s\" \"%s\" unused \"%s\"",image,args[2],args[4],args[5]);
     if(ok)ok=CreateProcessW(image,command,NULL,NULL,FALSE,0,NULL,NULL,&startup,&child);
     if(ok) {
         CloseHandle(child.hThread);
@@ -41,37 +41,37 @@ int wmain(int argc,wchar_t **argv)
         WCHAR image[MAX_PATH],launcher[MAX_PATH],command[2048],name[160];
         STARTUPINFOW startup={sizeof(startup)};PROCESS_INFORMATION target={0};DWORD code=0;
         if(!GetModuleFileNameW(NULL,image,MAX_PATH))return 2;
-        wcscpy_s(launcher,image);WCHAR *slash=wcsrchr(launcher,L'\\');if(!slash)return 2;*slash=0;
-        wcscat_s(launcher,L"\\..\\..\\system32\\run16.exe");
+        wcscpy_s(launcher,ARRAYSIZE(launcher),image);WCHAR *slash=wcsrchr(launcher,L'\\');if(!slash)return 2;*slash=0;
+        wcscat_s(launcher,ARRAYSIZE(launcher),L"\\..\\..\\system32\\run16.exe");
         WCHAR canonical[MAX_PATH];DWORD canonical_chars=GetFullPathNameW(launcher,MAX_PATH,canonical,NULL);
-        if(!canonical_chars || canonical_chars>=MAX_PATH)return 2;wcscpy_s(launcher,canonical);
+        if(!canonical_chars || canonical_chars>=MAX_PATH)return 2;wcscpy_s(launcher,ARRAYSIZE(launcher),canonical);
         const WCHAR *mode=!wcscmp(argv[1],L"host-fast") ? L"parent-fast" :
             !wcscmp(argv[1],L"host-suspended") ? L"parent-suspended" :
             !wcscmp(argv[1],L"host-concurrent") ? L"parent-concurrent" : L"parent";
-        swprintf_s(command,L"\"%s\" \"%s\" %s \"%s\" \"%s\" \"%s\" \"%s\"",
+        swprintf_s(command,ARRAYSIZE(command),L"\"%s\" \"%s\" %s \"%s\" \"%s\" \"%s\" \"%s\"",
             launcher,image,mode,argv[2],argv[3],argv[4],argv[5]);
         if(!wcscmp(argv[1],L"host-cmd")) {
             WCHAR cmd[MAX_PATH],batch[MAX_PATH],text[2048];char encoded[4096];DWORD written=0;
             UINT length=sizeof(void*)==4 ? GetSystemWow64DirectoryW(cmd,MAX_PATH) : GetSystemDirectoryW(cmd,MAX_PATH);
-            if(!length || length>=MAX_PATH)return 2;wcscat_s(cmd,L"\\cmd.exe");
-            wcscpy_s(batch,image);WCHAR *end=wcsrchr(batch,L'\\');if(!end)return 2;
+            if(!length || length>=MAX_PATH)return 2;wcscat_s(cmd,ARRAYSIZE(cmd),L"\\cmd.exe");
+            wcscpy_s(batch,ARRAYSIZE(batch),image);WCHAR *end=wcsrchr(batch,L'\\');if(!end)return 2;
             wcscpy_s(end+1,MAX_PATH-(end+1-batch),L"L.CMD");
-            swprintf_s(text,L"@echo off\r\n\"%s\" /d /c %s parent %s %s %s %s\r\nexit /b %%errorlevel%%\r\n",
+            swprintf_s(text,ARRAYSIZE(text),L"@echo off\r\n\"%s\" /d /c %s parent %s %s %s %s\r\nexit /b %%errorlevel%%\r\n",
                 cmd,image,argv[2],argv[3],argv[4],argv[5]);
             int bytes=WideCharToMultiByte(CP_ACP,0,text,-1,encoded,sizeof(encoded),NULL,NULL);
             HANDLE file=CreateFileW(batch,GENERIC_WRITE,FILE_SHARE_READ,NULL,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
             if(file==INVALID_HANDLE_VALUE || bytes<2)return 2;
             BOOL ok=WriteFile(file,encoded,(DWORD)(bytes-1),&written,NULL) && written==(DWORD)(bytes-1);
             CloseHandle(file);if(!ok)return 3;
-            swprintf_s(command,L"\"%s\" \"%s\" /d /c \"%s\"",launcher,cmd,batch);
+            swprintf_s(command,ARRAYSIZE(command),L"\"%s\" \"%s\" /d /c \"%s\"",launcher,cmd,batch);
         }
         if(!CreateProcessW(launcher,command,NULL,NULL,FALSE,0,NULL,NULL,&startup,&target))return 3;
         CloseHandle(target.hThread);
         if(WaitForSingleObject(target.hProcess,30000)!=WAIT_OBJECT_0)return 4;
         if(!GetExitCodeProcess(target.hProcess,&code))return 5;CloseHandle(target.hProcess);
         if(append(argv[5],"DIRECTRESULT",code))return 3;
-        swprintf_s(name,L"%s-done",argv[3]);HANDLE done=open_event(name);
-        swprintf_s(name,L"%s-host",argv[3]);HANDLE host=open_event(name);
+        swprintf_s(name,ARRAYSIZE(name),L"%s-done",argv[3]);HANDLE done=open_event(name);
+        swprintf_s(name,ARRAYSIZE(name),L"%s-host",argv[3]);HANDLE host=open_event(name);
         if(!done || !host)return 6;SetEvent(done);
         if(WaitForSingleObject(host,20000)!=WAIT_OBJECT_0)return 7;
         CloseHandle(done);CloseHandle(host);return (int)code;
@@ -98,13 +98,13 @@ int wmain(int argc,wchar_t **argv)
         PROCESS_INFORMATION child={0};STARTUPINFOW startup={sizeof(startup)};
         if(!GetModuleFileNameW(NULL,image,MAX_PATH))return 3;
         BOOL fast=!wcscmp(argv[1],L"parent-fast"),suspended=!wcscmp(argv[1],L"parent-suspended");
-        swprintf_s(command,L"\"%s\" %s \"%s\" \"%s\" unused \"%s\"",image,fast ? L"leaf-fast" : L"leaf",argv[2],argv[4],argv[5]);
+        swprintf_s(command,ARRAYSIZE(command),L"\"%s\" %s \"%s\" \"%s\" unused \"%s\"",image,fast ? L"leaf-fast" : L"leaf",argv[2],argv[4],argv[5]);
         ULONGLONG before=GetTickCount64();
         if(!CreateProcessW(image,command,NULL,NULL,FALSE,suspended ? CREATE_SUSPENDED : 0,NULL,NULL,&startup,&child))return 5;
         if(append(argv[5],"CREATEMS",(DWORD)(GetTickCount64()-before)))return 3;
         if(append(argv[5],"ROOT",GetCurrentProcessId()))return 3;
         if(suspended) {
-            WCHAR name[160];swprintf_s(name,L"%s-resume",argv[3]);HANDLE resume=open_event(name);
+            WCHAR name[160];swprintf_s(name,ARRAYSIZE(name),L"%s-resume",argv[3]);HANDLE resume=open_event(name);
             if(!resume || append(argv[5],"CREATED",child.dwProcessId))return 6;
             SetEvent(ready);
             if(WaitForSingleObject(resume,15000)!=WAIT_OBJECT_0 || ResumeThread(child.hThread)==(DWORD)-1)return 7;

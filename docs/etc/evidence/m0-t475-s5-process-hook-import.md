@@ -180,3 +180,24 @@ and real Win16 WRITE startup reached main/document/page-info in four snapshots
 `144d08b7-5c28-49ba-b41f-85d58908098a` has ten worktree-release hashes and
 the installed MIT/MinHook notices verified. Full, OS/2 NE and external
 DOS4GW/NESticle were not run.
+
+## P4 — C Hook and native observation fixtures
+
+The production Hook integration fixture and native process observation fixture
+were converted from C++ to C. Array capacities are explicit and the same
+controlled cases and failure assertions are retained; build graphs now select C.
+The x86/x64 product build passed (`p4/build.process`); Hook fixtures passed
+118 x86, 118 x64 and 168 cross-width assertions (`p4/hooks-wrapper.process`).
+The C observation fixture was rebuilt for both widths (`p4-native-probes.process`)
+and exercised against real package processes, reporting actual ChildFirst
+CREATE/EXIT and parent/Direct identities for both widths
+(`p4/native-observation-r3.process`). The first two observation attempts failed
+because the monitor tool lacked the isolated package identity and then was
+outside the isolated package directory; r3 stamped a private copy and placed it
+with that isolated package. Those failures are not passing evidence.
+
+Staging checked 63 immutable guest files and 274 ordinal exports
+(`p4/stage.process`); Control passed (`p4/control.process`); the ten images
+and license in local release package `845cebf2-9632-40b0-8509-912517e8fad0`
+were hash verified. Full and DOS4GW/NESticle were not run. Diagnostic probes,
+legacy fixtures and the test-only Detours implementation remain outstanding.

@@ -49,6 +49,11 @@ has ten verified hashes. One imported helper has a recorded local cleanup fix;
 remaining diagnostic/test C++ and Detours, Full, OS/2 NE and WRITE editing/exit
 remain open or unverified. See [S5 evidence](../etc/evidence/m0-t475-s5-process-hook-import.md).
 
+P4 converts the Hook and native observation fixtures to C; 118/118/168 Hook
+checks and actual x86/x64 ChildFirst observation passed, as did Control.
+Local package `845cebf2-9632-40b0-8509-912517e8fad0` has ten verified hashes.
+Diagnostic and legacy C++/Detours sources remain within S5.
+
 The adjacent library's same-width payload-only mechanism, non-Detours payload
 format, helper ordinal and startup-only transaction require compatibility proof;
 no untested semantic equivalence is assumed. Prior [S4 evidence](../etc/evidence/m0-t475-s4-nthook-dependency-cleanup.md),

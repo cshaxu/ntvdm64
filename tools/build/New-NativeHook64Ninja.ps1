@@ -72,7 +72,8 @@ foreach($source in $sources) {
 $graph.Add('build nthook64.dll: dll '+($objects -join ' ')+' observation-stub.obj | '+(NP (Join-Path $root 'src/nthook32-dll/nthook64.def')))
 $graph.Add('rule test')
 $graph.Add('  command = link.exe /nologo /subsystem:$subsystem /entry:wmainCRTStartup /opt:ref /out:$out /map:$out.map $in kernel32.lib ntdll.lib advapi32.lib user32.lib rpcrt4.lib legacy_stdio_definitions.lib')
-$graph.Add('build fixture.obj: cc '+(NP (Join-Path $root 'tests/component-integration/nthook_install_test.cpp')))
+$graph.Add('build fixture.obj: cc '+(NP (Join-Path $root 'tests/component-integration/nthook_install_test.c')))
+$graph.Add('  cflags = $cflags /std:c11')
 $testObjects=$objects
 $graph.Add('build nthook-install-test.exe: test fixture.obj '+($testObjects -join ' ')+' observation-stub.obj || nthook64.dll nthook-gui-test.exe run16.exe')
 $graph.Add('  subsystem = console')

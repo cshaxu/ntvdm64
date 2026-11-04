@@ -1,8 +1,6 @@
 #include "nthook32-dll/hook.h"
-extern "C" {
 #include "lib-win32/process-hook/helper.h"
 #include "lib-win32/process-hook/payload.h"
-}
 #include <stdio.h>
 #include <wchar.h>
 static unsigned assertions;
@@ -13,7 +11,7 @@ static void check(BOOL condition,PCSTR message)
     ++assertions;
     if(!condition){fprintf(stderr,"FAIL: %s (%lu)\n",message,GetLastError());ExitProcess(1);}
 }
-static DWORD child(PCWSTR mode,PCWSTR next=NULL,PCWSTR final=NULL)
+static DWORD child(PCWSTR mode,PCWSTR next,PCWSTR final)
 {
     if(!wcscmp(mode,L"held-helper")) {
         HANDLE never=CreateEventW(NULL,TRUE,FALSE,NULL);
@@ -23,7 +21,7 @@ static DWORD child(PCWSTR mode,PCWSTR next=NULL,PCWSTR final=NULL)
     nthook_context context={0};BOOL found=FALSE;DWORD context_error=0;
     HMODULE hook=GetModuleHandleW(sizeof(void *)==8 ? L"nthook64.dll" : L"nthook32.dll");
     if(hook) {
-        auto flags=(DWORD (WINAPI *)(void))GetProcAddress(hook,"NthookContextFlags");
+        DWORD (WINAPI *flags)(void)=(DWORD (WINAPI *)(void))GetProcAddress(hook,"NthookContextFlags");
         if(!flags)return 10;
         DWORD value=flags();context.mode=value&0xffu;
         context.frontend=(value&0x100u)?(HANDLE)(ULONG_PTR)1:NULL;found=TRUE;
@@ -41,7 +39,7 @@ static DWORD child(PCWSTR mode,PCWSTR next=NULL,PCWSTR final=NULL)
         return 0;
     }
     if(!hook || context.mode!=NATIVE_HOOK_INTERCEPT)return 13;
-    auto read=(DWORD (WINAPI *)(void))GetProcAddress(hook,"NthookContextFlags");
+    DWORD (WINAPI *read)(void)=(DWORD (WINAPI *)(void))GetProcAddress(hook,"NthookContextFlags");
     if(!read || (read()&0xff)!=NATIVE_HOOK_INTERCEPT)return 14;
     if(!wcscmp(mode,L"gui") && context.frontend)return 15;
     if(!wcscmp(mode,L"grandchild"))return 0;
@@ -74,7 +72,7 @@ static DWORD child(PCWSTR mode,PCWSTR next=NULL,PCWSTR final=NULL)
         if(!result) {
             /* Both fields: the explicit application wins even when argv[0]
              * differs, and the tail begins after command's first token. */
-            wcscpy_s(command,L"custom-name /explicit");
+            wcscpy_s(command,ARRAYSIZE(command),L"custom-name /explicit");
             ZeroMemory(&local_process,sizeof(local_process));
             if(!CreateProcessW(legacy,command,NULL,NULL,FALSE,0,NULL,NULL,
                 &local_startup,&local_process)) {result=GetLastError();goto native_identity_done;}
@@ -127,7 +125,7 @@ static DWORD child(PCWSTR mode,PCWSTR next=NULL,PCWSTR final=NULL)
                 created=CreateProcessA(application_a,command_a,NULL,NULL,FALSE,
                     CREATE_SEPARATE_WOW_VDM,NULL,NULL,&startup_a,&local_process);
             } else {
-                wcscpy_s(command,L"custom /separate");
+                wcscpy_s(command,ARRAYSIZE(command),L"custom /separate");
                 created=CreateProcessW(legacy,command,NULL,NULL,FALSE,
                     CREATE_SEPARATE_WOW_VDM,NULL,NULL,&local_startup,&local_process);
             }
@@ -199,8 +197,8 @@ native_identity_done:
     WCHAR image[MAX_PATH],command[2*MAX_PATH];PROCESS_INFORMATION process={0};
     STARTUPINFOW startup={sizeof(startup)};
     GetModuleFileNameW(NULL,image,MAX_PATH);
-    WCHAR application[MAX_PATH];wcscpy_s(application,image);
-    swprintf_s(command,L"\"%ls\" grandchild",image);
+    WCHAR application[MAX_PATH];wcscpy_s(application,ARRAYSIZE(application),image);
+    swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" grandchild",image);
     if(!wcscmp(mode,L"attributes")) {
         SECURITY_ATTRIBUTES security={sizeof(security),NULL,TRUE};
         HANDLE included=CreateEventW(&security,TRUE,FALSE,NULL),excluded=CreateEventW(&security,TRUE,FALSE,NULL);
@@ -221,7 +219,7 @@ native_identity_done:
         if(length<0)return 25;cursor+=length+1;*cursor=0;GetWindowsDirectoryW(windows,MAX_PATH);
         extended.StartupInfo.dwFlags=STARTF_USESTDHANDLES;
         extended.StartupInfo.hStdInput=input;extended.StartupInfo.hStdOutput=extended.StartupInfo.hStdError=output;
-        swprintf_s(command,L"\"%ls\" attributes-leaf",image);
+        swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" attributes-leaf",image);
         BOOL initialized=extended.lpAttributeList && InitializeProcThreadAttributeList(extended.lpAttributeList,1,0,&bytes);
         BOOL created=initialized && UpdateProcThreadAttribute(extended.lpAttributeList,0,PROC_THREAD_ATTRIBUTE_HANDLE_LIST,list,sizeof(list),NULL,NULL) &&
             CreateProcessW(image,command,NULL,NULL,TRUE,CREATE_SUSPENDED|CREATE_UNICODE_ENVIRONMENT|EXTENDED_STARTUPINFO_PRESENT,
@@ -242,21 +240,21 @@ native_identity_done:
     }
     if(!wcscmp(mode,L"alternate")) {
         if(!next || !final)return 33;
-        wcscpy_s(application,next);
-        swprintf_s(command,L"\"%ls\" alternate-leaf \"%ls\"",next,final);
+        wcscpy_s(application,ARRAYSIZE(application),next);
+        swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" alternate-leaf \"%ls\"",next,final);
     } else if(!wcscmp(mode,L"alternate-leaf")) {
         if(!next)return 34;
-        wcscpy_s(application,next);
-        swprintf_s(command,L"\"%ls\" grandchild",next);
+        wcscpy_s(application,ARRAYSIZE(application),next);
+        swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" grandchild",next);
     } else if(!wcscmp(mode,L"cmd")) {
         WCHAR windows[MAX_PATH];if(!GetWindowsDirectoryW(windows,MAX_PATH))return 19;
-        swprintf_s(application,L"%ls\\%ls\\cmd.exe",windows,sizeof(void *)==8 ? L"System32" : L"SysWOW64");
-        swprintf_s(command,L"\"%ls\" /d /s /c \"\"%ls\" grandchild\"",application,image);
+        swprintf_s(application,ARRAYSIZE(application),L"%ls\\%ls\\cmd.exe",windows,sizeof(void *)==8 ? L"System32" : L"SysWOW64");
+        swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" /d /s /c \"\"%ls\" grandchild\"",application,image);
     } else if(!wcscmp(mode,L"gui-to-cui") || !wcscmp(mode,L"cui-to-gui")) {
         WCHAR *slash=wcsrchr(application,L'\\');
         wcscpy_s(slash+1,MAX_PATH-(slash+1-application),
             !wcscmp(mode,L"gui-to-cui") ? L"nthook-install-test.exe" : L"nthook-gui-test.exe");
-        swprintf_s(command,L"\"%ls\" %ls",application,
+        swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" %ls",application,
             !wcscmp(mode,L"cui-to-gui") ? L"gui" : L"grandchild");
     }
     if(!wcscmp(mode,L"ansi")) {
@@ -275,7 +273,7 @@ native_identity_done:
 static DWORD run(PCWSTR image,PCWSTR mode,nthook_context *context,DWORD install_mode)
 {
     WCHAR command[2*MAX_PATH];PROCESS_INFORMATION process={0};STARTUPINFOW startup={sizeof(startup)};
-    swprintf_s(command,L"\"%ls\" %ls",image,mode);
+    swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" %ls",image,mode);
     check(CreateProcessW(image,command,NULL,NULL,FALSE,CREATE_SUSPENDED,NULL,NULL,&startup,&process),"create suspended no-inherit child");
     DWORD error=nthook_install(process.hProcess,context,install_mode),result=MAXDWORD;
     if(error) {
@@ -294,15 +292,16 @@ static DWORD run(PCWSTR image,PCWSTR mode,nthook_context *context,DWORD install_
     printf("case=%ls install=%lu exit=%lu\n",mode,error,result);fflush(stdout);
     return error ? error : result;
 }
-static BOOL WINAPI helper_create(LPCWSTR,LPWSTR,LPSECURITY_ATTRIBUTES pa,
+static BOOL WINAPI helper_create(LPCWSTR application,LPWSTR commandline,LPSECURITY_ATTRIBUTES pa,
     LPSECURITY_ATTRIBUTES ta,BOOL inherit,DWORD flags,LPVOID environment,
     LPCWSTR directory,LPSTARTUPINFOW startup,LPPROCESS_INFORMATION process)
 {
+    (void)application;(void)commandline;
     if(helper_fault==0){SetLastError(ERROR_ACCESS_DENIED);return FALSE;}
     WCHAR image[MAX_PATH],command[MAX_PATH+32];
     if(helper_fault==2 && !TerminateProcess(fault_target,37))return FALSE;
     GetModuleFileNameW(NULL,image,MAX_PATH);
-    swprintf_s(command,L"\"%ls\" held-helper",image);
+    swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" held-helper",image);
     BOOL result=CreateProcessW(image,command,pa,ta,inherit,flags,environment,directory,startup,process);
     if(result)check(DuplicateHandle(GetCurrentProcess(),process->hProcess,GetCurrentProcess(),
         &fault_helper,SYNCHRONIZE,FALSE,0),"pin exact injected installer for cleanup proof");
@@ -315,7 +314,7 @@ static void helper_failures(PCWSTR image,const nthook_context *context)
     check(dll && *dll,"select opposite-width installer path");
     for(helper_fault=0;helper_fault<3;++helper_fault) {
         STARTUPINFOW startup={sizeof(startup)};PROCESS_INFORMATION target={0};
-        WCHAR command[MAX_PATH+32];swprintf_s(command,L"\"%ls\" grandchild",image);
+        WCHAR command[MAX_PATH+32];swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" grandchild",image);
         check(CreateProcessW(image,command,NULL,NULL,FALSE,CREATE_SUSPENDED,NULL,NULL,&startup,&target),
             "create exact suspended target for installer failure");
         fault_target=target.hProcess;fault_helper=NULL;
@@ -370,7 +369,7 @@ static void malformed(PCWSTR image,const nthook_context *context,unsigned mutati
     case 8:header->flags=NATIVE_HOOK_SEPARATE_WOW;header->mode=NATIVE_HOOK_INTERCEPT;break;
     }
     WCHAR command[2*MAX_PATH];STARTUPINFOW startup={sizeof(startup)};PROCESS_INFORMATION process={0};
-    swprintf_s(command,L"\"%ls\" invalid",image);
+    swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" invalid",image);
     check(CreateProcessW(image,command,NULL,NULL,FALSE,CREATE_SUSPENDED,NULL,NULL,&startup,&process),"malformed context isolated suspended child");
     check(process_hook_payload_write(process.hProcess,data,bytes)==ERROR_SUCCESS,"copy malformed fixture payload");
     check(ResumeThread(process.hThread)==1,"resume malformed fixture");
@@ -417,11 +416,11 @@ int wmain(int argc,WCHAR **argv)
         return 0;
     }
     if(argc==4 && !wcscmp(argv[1],L"alternate"))return (int)child(argv[1],argv[2],argv[3]);
-    if(argc==3 && !wcscmp(argv[1],L"alternate-leaf"))return (int)child(argv[1],argv[2]);
-    if(argc==2)return (int)child(argv[1]);
+    if(argc==3 && !wcscmp(argv[1],L"alternate-leaf"))return (int)child(argv[1],argv[2],NULL);
+    if(argc==2)return (int)child(argv[1],NULL,NULL);
     nthook_context context;WCHAR image[MAX_PATH],gui[MAX_PATH],legacy_launcher[MAX_PATH],saved_launcher[MAX_PATH],*slash;
     check(!nthook_context_paths(&context),"own-package pinned paths");
-    GetModuleFileNameW(NULL,image,MAX_PATH);wcscpy_s(gui,image);
+    GetModuleFileNameW(NULL,image,MAX_PATH);wcscpy_s(gui,ARRAYSIZE(gui),image);
     slash=wcsrchr(gui,L'\\');wcscpy_s(slash+1,MAX_PATH-(slash+1-gui),L"nthook-gui-test.exe");
     context.frontend=CreateEventW(NULL,TRUE,FALSE,NULL);
     context.execution=CreateEventW(NULL,TRUE,FALSE,NULL);
@@ -436,13 +435,13 @@ int wmain(int argc,WCHAR **argv)
     check(WaitForSingleObject(context.frontend,0)==WAIT_OBJECT_0 &&
           WaitForSingleObject(context.execution,0)==WAIT_OBJECT_0,"recipient-local duplicated events");
     check(run(image,L"nested",&context,NATIVE_HOOK_INTERCEPT)==0,"CUI immediate descendant propagated");
-    wcscpy_s(legacy_launcher,image);slash=wcsrchr(legacy_launcher,L'\\');
+    wcscpy_s(legacy_launcher,ARRAYSIZE(legacy_launcher),image);slash=wcsrchr(legacy_launcher,L'\\');
     wcscpy_s(slash+1,MAX_PATH-(slash+1-legacy_launcher),L"hook-legacy-launcher.exe");
     check(CopyFileW(image,legacy_launcher,FALSE),"private legacy launcher fixture");
-    wcscpy_s(saved_launcher,context.launcher);wcscpy_s(context.launcher,legacy_launcher);
+    wcscpy_s(saved_launcher,ARRAYSIZE(saved_launcher),context.launcher);wcscpy_s(context.launcher,ARRAYSIZE(context.launcher),legacy_launcher);
     check(run(image,L"legacy-request",&context,NATIVE_HOOK_INTERCEPT)==0,
         "legacy Hook selects the image and preserves BaseCheckVDM-style tails");
-    wcscpy_s(context.launcher,saved_launcher);DeleteFileW(legacy_launcher);
+    wcscpy_s(context.launcher,ARRAYSIZE(context.launcher),saved_launcher);DeleteFileW(legacy_launcher);
     check(run(image,L"ansi",&context,NATIVE_HOOK_INTERCEPT)==0,"ANSI native child propagated");
     check(run(image,L"cmd",&context,NATIVE_HOOK_INTERCEPT)==0,"actual matching-width CMD propagated immediate child");
     check(run(image,L"attributes",&context,NATIVE_HOOK_INTERCEPT)==0,"explicit handle list/Unicode environment/CWD/streams preserved");
@@ -454,7 +453,7 @@ int wmain(int argc,WCHAR **argv)
     check(run(gui,L"gui",&context,NATIVE_HOOK_INTERCEPT)==0,"GUI carries no text capability");
     if(argc==3) {
         WCHAR alternating[2*MAX_PATH];
-        swprintf_s(alternating,L"alternate \"%ls\" \"%ls\"",argv[1],image);
+        swprintf_s(alternating,ARRAYSIZE(alternating),L"alternate \"%ls\" \"%ls\"",argv[1],image);
         check(run(image,alternating,&context,NATIVE_HOOK_INTERCEPT)==0,
             "ordinary alternating native-width descendants retain actual handles, suspension and matching Hooks");
         check(run(argv[1],L"nested",&context,NATIVE_HOOK_INTERCEPT)==0,
@@ -469,8 +468,8 @@ int wmain(int argc,WCHAR **argv)
     context.frontend=(HANDLE)(ULONG_PTR)0x7ffffffe;context.execution=(HANDLE)(ULONG_PTR)0x7ffffffd;
     check(run(image,L"grandchild",&context,NATIVE_HOOK_LAUNCHER)==ERROR_INVALID_HANDLE,"invalid capability fails before handoff");
     context.frontend=context.execution=NULL;
-    if(sizeof(void *)==8)wcscat_s(context.hook64,L".missing");
-    else wcscat_s(context.hook,L".missing");
+    if(sizeof(void *)==8)wcscat_s(context.hook64,ARRAYSIZE(context.hook64),L".missing");
+    else wcscat_s(context.hook,ARRAYSIZE(context.hook),L".missing");
     check(run(image,L"grandchild",&context,NATIVE_HOOK_INTERCEPT)==ERROR_FILE_NOT_FOUND,"missing DLL fails before handoff");
     printf("NTHOOK-INSTALL-PASS assertions=%u\n",assertions);return 0;
 }
