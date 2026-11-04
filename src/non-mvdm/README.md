@@ -2453,3 +2453,5 @@ OPENNT-HOST-250: reconcile userk.h original condition frames and unify the origi
 OPENNT-HOST-251: reconcile USER client condition frames around the selected declaration cohorts. The original whole-file _USERCLI_ guard cannot be reinstated unchanged because it suppresses the second required inclusion; cohort projection is retained and tested. Evidence: artifacts/mvdm-audit/s13-r1267-usercli-review.json.
 
 OPENNT-HOST-252: reconcile USER shared-header condition frames around existing cohorts; retain cohort guards instead of the original whole-file _USER_ guard, which would suppress required later inclusions. Evidence: artifacts/mvdm-audit/s13-r1268-user-review.json.
+
+OPENNT-HOST-253: correct original diagnostic continuation anchors in six host mirror files without changing selected tokens. Evidence: artifacts/mvdm-audit/s13-r1289-continuation-batch.json.

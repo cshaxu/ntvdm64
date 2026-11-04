@@ -90,8 +90,9 @@
 #line 79
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif /* 3.0 CPU or CCPU */
-#line 80
+#line 90
 #endif /* CPU_30_STYLE */
+#line 92
 #define DIVIDE_OVERFLOW_INT     0
 
 #define	END_INTERRUPT	0x20

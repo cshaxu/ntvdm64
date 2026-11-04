@@ -3004,3 +3004,5 @@ MVDM-HOST-DIV-808: restore original diagnostic lines in existing excluded branch
 MVDM-HOST-DIV-809: correct original diagnostic and continuation anchors in existing video, printer and NTCON event projections. Evidence: artifacts/mvdm-audit/s13-r1287-continuation-batch.json.
 
 MVDM-HOST-DIV-810: correct original source diagnostic continuation positions in ten host mirror files without changing selected program tokens. Evidence: artifacts/mvdm-audit/s13-r1288-continuation-batch.json.
+
+MVDM-HOST-DIV-811: correct original diagnostic continuation anchors in four host mirror files without changing selected tokens. Evidence: artifacts/mvdm-audit/s13-r1289-continuation-batch.json.

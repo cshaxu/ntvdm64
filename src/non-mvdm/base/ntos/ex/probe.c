@@ -31,7 +31,7 @@ Revision History:
 #line 28
 #error DIVERGENCE OPENNT-HOST-144: kernel allocation pragma profile is not selected
 #endif
-#line 31
+#line 143
 
 #undef ProbeForRead
 NTKERNELAPI

@@ -1010,6 +1010,7 @@ CallDWP:
         return result;
 }
 
+#line 952
 LONG WINAPI DefDlgProcW(
     HWND hwnd,
     UINT message,

@@ -1,0 +1,19 @@
+{
+  "scope": "10 host mirror files; original source line continuation correction only",
+  "files": [
+    "src/mvdm-host/softpc.new/base/inc/ica.h",
+    "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+    "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+    "src/mvdm-host/wow32/wow32.c",
+    "src/non-mvdm/base/ntos/ex/probe.c",
+    "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+    "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+    "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+    "src/non-mvdm/windows/core/ntuser/inc/user.h",
+    "src/non-mvdm/windows/core/ntuser/rtl/chartran.c"
+  ],
+  "proof": "Original baseline adjacent retained statements and conditional context; selected source tokens unchanged.",
+  "build": "x86, x86-extra and x64 cached product builds passed",
+  "runtime_tests": "not repeated: 10-image comparison shows identical or PE timestamp-only; r1287 Full retained",
+  "guest": "unchanged"
+}

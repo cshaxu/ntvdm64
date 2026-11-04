@@ -110,6 +110,7 @@ BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
 }
 
 /* DIVERGENCE(OPENNT-HOST-118): recover unchanged companion ANSI constructor. */
+#line 559
 VOID RtlInitLargeAnsiString(
     PLARGE_ANSI_STRING plstr,
     LPCSTR psz,

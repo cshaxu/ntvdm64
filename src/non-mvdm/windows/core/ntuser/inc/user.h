@@ -311,6 +311,7 @@ typedef struct tagITEM {
 #line 1987
 } ITEM, *PITEM, *LPITEM;
 
+#line 1992
 typedef struct tagMENU {
     PROCOBJHEAD     head;
     DWORD           fFlags;         /* Menu Flags */
@@ -335,6 +336,7 @@ typedef struct tagMENU {
 
 } MENU, *PMENU;
 
+#line 1388
 typedef struct tagWND {          // wnd
     THROBJHEAD    head;
 

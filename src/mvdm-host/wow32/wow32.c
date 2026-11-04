@@ -454,7 +454,7 @@ BOOL W32Init(VOID)
 #line 464
 #error DIVERGENCE MVDM-HOST-DIV-595: DEBUG initialization profile is not selected
 #endif
-#line 468
+#line 470
     PTD ptd;
     PFNWOWHANDLERSIN pfnIn;
     LPVOID lpSharedTaskMemory;

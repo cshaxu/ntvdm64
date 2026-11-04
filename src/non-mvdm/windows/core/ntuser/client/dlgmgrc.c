@@ -186,6 +186,7 @@ PWND _NextSibblingOrAncestor (PWND pwndRoot, PWND pwndStart)
 #line 192
 }
 
+#line 207
 PWND _NextControl(
     PWND pwndRoot,
     PWND pwndStart,

@@ -296,9 +296,6 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
         WOWIdle(TRUE);
 #endif
 #line 311
-
-
-
         }
 
 

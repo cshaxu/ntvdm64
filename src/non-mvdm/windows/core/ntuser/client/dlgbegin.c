@@ -628,7 +628,7 @@ DeleteFontAndMenuAndFail:
 #else
 #error Unsupported excluded original configuration
 #endif
-#line 630
+#line 601
     PDLG(pwnd)->fEnd = FALSE;
     PDLG(pwnd)->result = IDOK;
 

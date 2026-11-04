@@ -621,7 +621,7 @@ DWORD HeartBeatThread(PVOID pv)
 #line 609
 #error Excluded unsupported monitor timer lock release
 #endif
-#line 611
+#line 612
       dwRet = Win32_host_timer();
 
       }
