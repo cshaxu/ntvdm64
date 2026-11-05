@@ -15,7 +15,9 @@ The [implementation sequence](../etc/operations/m0-t477-host-frontend-plan.md)
 retains the complete approved host scope. The guest 386/VxD driver and actual
 guest bridge remain a separate queued package. Admission is complete;
 production implementation, build, runtime verification and publication are
-not yet performed in this worktree.
+not yet performed in this worktree. The owner explicitly confirms S1 admission
+and requests the [S1 design](../etc/operations/m0-t477-s1-frontend-base-design.md);
+it defines two production P deliveries, channel extraction then service extraction.
 
 ## Active Packet
 
