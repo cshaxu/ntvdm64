@@ -24,13 +24,17 @@ active-packet transition does not change any candidate's proposed scope.
 | 7 | Upgrade to a Windows XP NTVDM baseline — assess and recover XP-era capabilities including audio and long file names, update all guest components, and make required modern-host compatibility repairs. | [Proposal](../proposals/proposal-windows-xp-ntvdm-baseline-upgrade-001.md) |
 | 8 | Hardware-virtualized guest CPU acceleration — investigate and implement a modern hardware-virtualization execution backend for 16/32-bit guest instructions, subject to demonstrated feasibility and compatibility. | [Proposal](../proposals/proposal-hardware-virtualized-guest-cpu-001.md) |
 | 9 | Windows 1.01 application launch from the host — classify and launch a selected application through its matching Windows 1.01 guest environment, preserving arguments, environment selection and truthful application lifecycle results. | [Proposal](../proposals/proposal-win101-host-application-launch-001.md) |
-| 10 | Remove WOW32 and VDMREDIR PE runtime imports from NTVDM while retaining one worker-owned state and the required original ABI. | [Proposal](../proposals/proposal-worker-runtime-import-boundary-001.md) |
-| 11 | Complete mirror conditional and diagnostic-line audit — audit and correct each compiled mirror file as a complete unit, using actual supported contexts and registered evidence. | [Proposal](../proposals/proposal-mirror-conditional-file-audit-001.md) |
+| 10 | Complete mirror conditional and diagnostic-line audit — audit and correct each compiled mirror file as a complete unit, using actual supported contexts and registered evidence. | [Proposal](../proposals/proposal-mirror-conditional-file-audit-001.md) |
 
 The owner moved shared implementation ownership review to the front; it is
 now admitted in the independent worktree. The external system launch
 loader candidate was removed from the queue.
 The latter's proposal remains as historical planning material; it is not pending.
+
+The owner accepts the original WOW32 and VDMREDIR PE runtime imports from
+NTVDM and removes their elimination candidate from the queue. Its
+[proposal](../proposals/proposal-worker-runtime-import-boundary-001.md) is
+retained as historical planning material and is not pending.
 
 On 2026-10-29 the owner moved further SOL Options and related WOW multi-window
 performance optimization out of the active task and directed its candidate to

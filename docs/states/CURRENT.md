@@ -2,30 +2,9 @@
 
 ## Current Work
 
-**Active: M0 T474 S6** — verification complete; awaiting owner acceptance.
-
-## Active Packet
-
-### M0 T474 S6 — component-oriented tests
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T474 S6, Ordinary Mode. |
-| Admission And Approval | Owner admitted test organization, with common and lib-win32 first. |
-| Candidate Proposal | [Shared implementation ownership](../proposals/proposal-shared-implementation-ownership-001.md). |
-| Objective | Align test paths and dependency direction with component ownership. |
-| Non-goals | No product behavior, guest or mirror changes. |
-| Reference Baseline | `d524de6ad`. |
-| Files And ABI Surface | Test sources, runners, build graph and documentation; no product ABI changes. |
-| Applicable Rules | Units may use inner dependencies; true product integration belongs in `test/integration`. |
-| Verification | [S6 evidence](../etc/evidence/m0-t474-s6-public-component-tests.md) records builds, unit and product integration gates. |
-| Expected Markers | Public component tests match their owners and reverse dependencies are removed. |
-| Asset Needs | Existing cached builds and isolated test runtime. |
-| Reporting Requirements | Report ownership, verification and remaining non-public test layout. |
-| Stop Conditions | Product behavior drift, lost coverage or unresolved ownership. |
-| Exit Criteria | Verified result committed and pushed, then owner acceptance. |
-| Original Owner Request | Organize public component tests with clear dependency direction. |
-| Similar-Issue Sweep | Audited scattered public-component tests and their runners. |
+**No active numeric M/T/S packet.** T474 is owner-accepted and closed; see
+[closure](../history/m0-t474-closure.md). The owner directed integration of the
+independent mirror-conditional worktree as the next task.
 
 ## S5 Closure Record
 
@@ -212,7 +191,7 @@ T456 S1/S2 disposable evidence uses `build/t456-s1` and `build/t456-s2`.
 
 ## Recent M0 Closures
 
-[T460](../history/m0-t460-closure.md), [T454](../history/m0-t454-closure.md),
+[T474](../history/m0-t474-closure.md), [T460](../history/m0-t460-closure.md), [T454](../history/m0-t454-closure.md),
 [T453](../history/m0-t453-closure.md), T452,
 [T451](../history/m0-t451-closure.md), [T450](../history/m0-t450-closure.md),
 [T449](../history/m0-t449-closure.md), [T448](../history/m0-t448-closure.md).
