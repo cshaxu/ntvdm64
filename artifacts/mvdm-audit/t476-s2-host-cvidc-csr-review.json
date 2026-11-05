@@ -1,0 +1,212 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c",
+      "current_sha256": "12af7726b0d966887aeb9b216a521f38dccbba86cfeee1e7186386f36f187ce3",
+      "original_sha256": "a12ddfd55dbd3b4426ff20075c46a665c6a30c6a955f24f6ab4872fb4895e935",
+      "prior_line_evidence": "s13-r1349-context-recheck.json",
+      "matched_lines": 791,
+      "arms": [
+        {
+          "directive": "ifdef",
+          "expression": "CCPU",
+          "status": "hit",
+          "contexts": [
+            229
+          ]
+        },
+        {
+          "directive": "ifdef",
+          "expression": "CCPU",
+          "status": "hit",
+          "contexts": [
+            229
+          ]
+        },
+        {
+          "directive": "ifdef",
+          "expression": "C_VID",
+          "status": "hit",
+          "contexts": [
+            229
+          ]
+        },
+        {
+          "directive": "ifdef",
+          "expression": "CCPU",
+          "status": "hit",
+          "contexts": [
+            229
+          ]
+        },
+        {
+          "directive": "ifndef",
+          "expression": "PROD",
+          "status": "previously-excluded",
+          "contexts": []
+        }
+      ],
+      "compiler_contexts": [
+        229
+      ],
+      "local_diff_review": "DIV-076/137/156 retain native ABI, GDP allocation and vector binder; non-PROD excluded."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host.h",
+      "current_sha256": "8fb42849d935c468c8abcd62db19dd3087b3374f2d633bafcaa9a79aae5b8e4b",
+      "original_sha256": "7777d03c1ab2be0f278941a5d0085847c209da5b7984e05fdbcb8aa2885a495b",
+      "prior_line_evidence": "s13-r1344-context-recheck.json",
+      "matched_lines": 45,
+      "arms": [
+        {
+          "directive": "ifdef",
+          "expression": "PC_CONFIG",
+          "status": "previously-excluded",
+          "contexts": []
+        },
+        {
+          "directive": "ifndef",
+          "expression": "host_memset",
+          "status": "hit",
+          "contexts": [
+            19,
+            130,
+            132,
+            135,
+            136,
+            151,
+            156,
+            171,
+            173,
+            178,
+            180,
+            187,
+            192,
+            194,
+            317,
+            318,
+            333,
+            352
+          ]
+        },
+        {
+          "directive": "ifdef",
+          "expression": "SUSPEND",
+          "status": "previously-excluded",
+          "contexts": []
+        },
+        {
+          "directive": "ifndef",
+          "expression": "REAL_VGA",
+          "status": "hit",
+          "contexts": [
+            19,
+            130,
+            132,
+            135,
+            136,
+            151,
+            156,
+            171,
+            173,
+            178,
+            180,
+            187,
+            192,
+            194,
+            317,
+            318,
+            333,
+            352
+          ]
+        },
+        {
+          "directive": "ifdef",
+          "expression": "SETUID_ROOT",
+          "status": "previously-excluded",
+          "contexts": []
+        }
+      ],
+      "compiler_contexts": [
+        19,
+        130,
+        132,
+        135,
+        136,
+        151,
+        156,
+        171,
+        173,
+        178,
+        180,
+        187,
+        192,
+        194,
+        317,
+        318,
+        333,
+        352
+      ],
+      "local_diff_review": "DIV-090 provides exact host memset ABI; unused PC_CONFIG, SUSPEND and SETUID_ROOT excluded."
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntcsrmsg.h",
+      "current_sha256": "edafef9f825bbcc4000195c3fcbd63d6dd65d753271770bf6e5480a83b7879b1",
+      "original_sha256": "896d25bb240d105c64f96ab06f97bee8e013ad7c4e679a0292b07c5e594c6fc7",
+      "prior_line_evidence": "s13-r1352-context-recheck.json",
+      "matched_lines": 138,
+      "arms": [
+        {
+          "directive": "ifndef",
+          "expression": "_NTCSRMSG_",
+          "status": "hit",
+          "contexts": [
+            414,
+            416,
+            417,
+            418,
+            419,
+            450,
+            518,
+            776,
+            777,
+            778,
+            839,
+            840,
+            841,
+            881,
+            891,
+            893,
+            895,
+            896,
+            897,
+            898,
+            939,
+            941,
+            942,
+            943,
+            944,
+            945,
+            946,
+            947,
+            948,
+            950,
+            951,
+            954,
+            956,
+            958,
+            959,
+            960
+          ]
+        }
+      ],
+      "compiler_contexts": [
+        416,
+        518,
+        893,
+        939
+      ],
+      "local_diff_review": "OPENNT-HOST-066 uses native-width pointers for process-local capture metadata."
+    }
+  ]
+}

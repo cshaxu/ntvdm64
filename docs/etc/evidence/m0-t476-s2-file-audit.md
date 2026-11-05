@@ -281,3 +281,8 @@ The [EOI and sound reviews](../../../artifacts/mvdm-audit/t476-s2-eoi-sound-fina
 ### DEM dispatch review
 
 The [DEM dispatch review](../../../artifacts/mvdm-audit/t476-s2-demdisp-final-review.json) completes `demdisp.c`, checking its complete original diff, four excluded DBG groups, hash-bound conditional and line projection, and selected compiler observations. The existing fast-I/O fallback remains registered under DIV-188. Total: **816 of 1,055 complete; 239 open**.
+
+
+### C-video, host and CSR declaration reviews
+
+The [three file reviews](../../../artifacts/mvdm-audit/t476-s2-host-cvidc-csr-review.json) complete `ev_glue.c`, `host.h` and `ntcsrmsg.h`: full original diffs, original conditions and S1 arm observations, hash-matched prior line projections and actual compiler samples were checked. Existing vector, native ABI and capture-metadata adaptations remain registered. Total: **819 of 1,055 complete; 236 open**.
