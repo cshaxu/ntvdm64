@@ -110,5 +110,7 @@
   "r1412_wownt32_removed": 1,
   "r1415_tape_reviewed": 1,
   "r1416_dpmidata_reviewed": 1,
-  "r1421_multihit_reviewed": 4
+  "r1421_multihit_reviewed": 4,
+  "r1422_empty_shell_candidates_arms": 156,
+  "r1422_empty_shell_candidates_files": 27
 }

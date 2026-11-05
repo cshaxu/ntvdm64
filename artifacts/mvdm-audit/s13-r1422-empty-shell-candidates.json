@@ -1,0 +1,3426 @@
+{
+  "method": "Pair original/current conditional groups by ordered signature, skip current #error bodies, and report empty-or-structural current arms whose matched original arm has direct non-comment source.",
+  "limits": "Candidates only: duplicate selectors, local reorder, function-scoped subset extraction and preprocessing context can make group matches or apparent reachability misleading. An empty file-scope shell hit is not evidence that the original body was compiled. No candidate is automatically classified as removable or selected.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_sha256": "202bf3d58825732c9076b84df0c2bc19f9264b003a0ed8382a4b57925e46d8bb",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "directive": "ifndef",
+      "expression": "CPU_30_STYLE",
+      "current_line": 493,
+      "original_line": 619,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 620,
+          "text": "temp_word = temp_word + HOST_BOP_IP_FUDGE;"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_sha256": "202bf3d58825732c9076b84df0c2bc19f9264b003a0ed8382a4b57925e46d8bb",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "directive": "ifndef",
+      "expression": "CPU_30_STYLE",
+      "current_line": 564,
+      "original_line": 683,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 684,
+          "text": "temp_word = temp_word + HOST_BOP_IP_FUDGE;"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "current_sha256": "b525284d28990da14a61ea02d11f3b6b7f3e94726bef7b33db03c9dd8ff6841e",
+      "original_sha256": "21109fa7e6b8d6a8ecfe8e733a16805829560e218be11e46e5a33dac28820316",
+      "directive": "ifndef",
+      "expression": "CPU_30_STYLE",
+      "current_line": 84,
+      "original_line": 78,
+      "original_direct_code_count": 4,
+      "original_examples": [
+        {
+          "line": 81,
+          "text": "#define CPU_HW_INT\t\t0"
+        },
+        {
+          "line": 82,
+          "text": "#define CPU_HW_INT_MASK\t\t(1 << CPU_HW_INT)"
+        },
+        {
+          "line": 88,
+          "text": "#define CPU_SW_INT              8"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "current_sha256": "fbd2aaa1741bccc78af08334310f01a4563a7fd452f64142488703cdc529973b",
+      "original_sha256": "a95cda1054b1840df73dbcec6e23cacbee1ddf2fd1ed071318c8c9252f21c0cc",
+      "directive": "if",
+      "expression": "defined(CCPU) && !defined(CPU_30_STYLE)",
+      "current_line": 83,
+      "original_line": 75,
+      "original_direct_code_count": 41,
+      "original_examples": [
+        {
+          "line": 85,
+          "text": "reg SP;\t\t/* Stack Pointer\t*/"
+        },
+        {
+          "line": 87,
+          "text": "reg IP;\t\t/* Instruction Pointer\t*/"
+        },
+        {
+          "line": 89,
+          "text": "reg CS;\t\t/* Code Segment\t\t*/"
+        }
+      ],
+      "original_children": 1,
+      "current_children": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "current_sha256": "fbd2aaa1741bccc78af08334310f01a4563a7fd452f64142488703cdc529973b",
+      "original_sha256": "a95cda1054b1840df73dbcec6e23cacbee1ddf2fd1ed071318c8c9252f21c0cc",
+      "directive": "if",
+      "expression": "!defined(MAC_LIKE) && !defined(CPU_30_STYLE)",
+      "current_line": 119,
+      "original_line": 346,
+      "original_direct_code_count": 258,
+      "original_examples": [
+        {
+          "line": 348,
+          "text": "half_word pf_table[] = {"
+        },
+        {
+          "line": 349,
+          "text": "1,\t/* 00 */"
+        },
+        {
+          "line": 350,
+          "text": "0,\t/* 01 */"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "current_sha256": "628f895c90c814795e3ebb23e9aa2dc4fa59783fea8783360f66297723e5b895",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "directive": "ifndef",
+      "expression": "X86GFX",
+      "current_line": 704,
+      "original_line": 760,
+      "original_direct_code_count": 2,
+      "original_examples": [
+        {
+          "line": 761,
+          "text": "if (sc.ScreenState == FULLSCREEN)   // don't want sudden screen clears"
+        },
+        {
+          "line": 762,
+          "text": "return;"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 1
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/ex/probe.c",
+      "current_sha256": "44053c4322b7dca6585e214285c7a5af6c1daee976b5a7f8b362bb979074209e",
+      "original_sha256": "0d1cae414b609c624e6bdf04fa28ebd84ff38dbb9687a63d8bc9e840c2f2372b",
+      "directive": "else",
+      "expression": "",
+      "current_line": 91,
+      "original_line": 121,
+      "original_direct_code_count": 4,
+      "original_examples": [
+        {
+          "line": 123,
+          "text": "do {"
+        },
+        {
+          "line": 124,
+          "text": "*(volatile CHAR *)StartAddress = *(volatile CHAR *)StartAddress;"
+        },
+        {
+          "line": 126,
+          "text": "StartAddress = (StartAddress & ~(PAGE_SIZE - 1)) + PAGE_SIZE;"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "current_sha256": "3a527fdf6274b858201f4f8729c74867cfad1b40799b50e29e937b89e6cdb1ab",
+      "original_sha256": "d4bddfbf3eadd81cbf913a60108f1c7cb3362c6c51b042701bba43da6bb8e52a",
+      "directive": "ifndef",
+      "expression": "IsNEC_98",
+      "current_line": 44,
+      "original_line": 1411,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 1412,
+          "text": "#define IsNEC_98 (FALSE)"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "current_sha256": "3a527fdf6274b858201f4f8729c74867cfad1b40799b50e29e937b89e6cdb1ab",
+      "original_sha256": "d4bddfbf3eadd81cbf913a60108f1c7cb3362c6c51b042701bba43da6bb8e52a",
+      "directive": "ifndef",
+      "expression": "IsNotNEC_98",
+      "current_line": 47,
+      "original_line": 1415,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 1416,
+          "text": "#define IsNotNEC_98 (TRUE)"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "current_sha256": "3a527fdf6274b858201f4f8729c74867cfad1b40799b50e29e937b89e6cdb1ab",
+      "original_sha256": "d4bddfbf3eadd81cbf913a60108f1c7cb3362c6c51b042701bba43da6bb8e52a",
+      "directive": "ifndef",
+      "expression": "SetNEC_98",
+      "current_line": 50,
+      "original_line": 1419,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 1420,
+          "text": "#define SetNEC_98"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "current_sha256": "3a527fdf6274b858201f4f8729c74867cfad1b40799b50e29e937b89e6cdb1ab",
+      "original_sha256": "d4bddfbf3eadd81cbf913a60108f1c7cb3362c6c51b042701bba43da6bb8e52a",
+      "directive": "ifndef",
+      "expression": "SetNotNEC_98",
+      "current_line": 53,
+      "original_line": 1423,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 1424,
+          "text": "#define SetNotNEC_98"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "current_sha256": "3a527fdf6274b858201f4f8729c74867cfad1b40799b50e29e937b89e6cdb1ab",
+      "original_sha256": "d4bddfbf3eadd81cbf913a60108f1c7cb3362c6c51b042701bba43da6bb8e52a",
+      "directive": "else",
+      "expression": "",
+      "current_line": 70,
+      "original_line": 1471,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 1472,
+          "text": "volatile KSYSTEM_TIME SystemTime;"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+      "current_sha256": "51e043c613163927f1edd896032ab18693276f936a741410f42e71b526d8f045",
+      "original_sha256": "cafd48b3a9c672c6a18503d4565e7864a284ec029f63ae04ff221c58a2db5148",
+      "directive": "ifndef",
+      "expression": "CLIENT_ID64_DEFINED",
+      "current_line": 39,
+      "original_line": 138,
+      "original_direct_code_count": 6,
+      "original_examples": [
+        {
+          "line": 140,
+          "text": "typedef struct _CLIENT_ID64 {"
+        },
+        {
+          "line": 141,
+          "text": "ULONGLONG  UniqueProcess;"
+        },
+        {
+          "line": 142,
+          "text": "ULONGLONG  UniqueThread;"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+      "current_sha256": "51e043c613163927f1edd896032ab18693276f936a741410f42e71b526d8f045",
+      "original_sha256": "cafd48b3a9c672c6a18503d4565e7864a284ec029f63ae04ff221c58a2db5148",
+      "directive": "if",
+      "expression": "!defined(_X86_)",
+      "current_line": 52,
+      "original_line": 396,
+      "original_direct_code_count": 11,
+      "original_examples": [
+        {
+          "line": 397,
+          "text": "#define Wx86CurrentTib()  (  \\"
+        },
+        {
+          "line": 398,
+          "text": "NtCurrentTeb()->Vdm &&  \\"
+        },
+        {
+          "line": 399,
+          "text": "((PWX86TIB)NtCurrentTeb()->Vdm)->Size == sizeof(WX86TIB) \\"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+      "current_sha256": "51e043c613163927f1edd896032ab18693276f936a741410f42e71b526d8f045",
+      "original_sha256": "cafd48b3a9c672c6a18503d4565e7864a284ec029f63ae04ff221c58a2db5148",
+      "directive": "else",
+      "expression": "",
+      "current_line": 54,
+      "original_line": 419,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 420,
+          "text": "#define Wx86CurrentTib() (NULL)"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "if",
+      "expression": "( _MSC_VER >= 800 )",
+      "current_line": 161,
+      "original_line": 35,
+      "original_direct_code_count": 4,
+      "original_examples": [
+        {
+          "line": 36,
+          "text": "#pragma warning(disable:4514)"
+        },
+        {
+          "line": 40,
+          "text": "#pragma warning(disable:4001)"
+        },
+        {
+          "line": 41,
+          "text": "#pragma warning(disable:4201)"
+        }
+      ],
+      "original_children": 1,
+      "current_children": 1
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "if",
+      "expression": "_MSC_VER >= 1200",
+      "current_line": 164,
+      "original_line": 37,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 38,
+          "text": "#pragma warning(push)"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "if",
+      "expression": "(_MSC_VER > 1020)",
+      "current_line": 171,
+      "original_line": 44,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 45,
+          "text": "#pragma once"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "else",
+      "expression": "",
+      "current_line": 181,
+      "original_line": 86,
+      "original_direct_code_count": 2,
+      "original_examples": [
+        {
+          "line": 87,
+          "text": "#define ASSERT( exp )"
+        },
+        {
+          "line": 88,
+          "text": "#define ASSERTMSG( msg, exp )"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "else",
+      "expression": "",
+      "current_line": 189,
+      "original_line": 1045,
+      "original_direct_code_count": 7,
+      "original_examples": [
+        {
+          "line": 1047,
+          "text": "NTSYSAPI"
+        },
+        {
+          "line": 1048,
+          "text": "VOID"
+        },
+        {
+          "line": 1049,
+          "text": "NTAPI"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "ifdef",
+      "expression": "_WIN64",
+      "current_line": 194,
+      "original_line": 1575,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 1576,
+          "text": "#define RtlIntPtrToUnicodeString(Value, Base, String) RtlInt64ToUnicodeString(Value, Base, String)"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "else",
+      "expression": "",
+      "current_line": 196,
+      "original_line": 1577,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 1578,
+          "text": "#define RtlIntPtrToUnicodeString(Value, Base, String) RtlIntegerToUnicodeString(Value, Base, String)"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "ifdef",
+      "expression": "_NTSYSTEM_",
+      "current_line": 201,
+      "original_line": 1594,
+      "original_direct_code_count": 2,
+      "original_examples": [
+        {
+          "line": 1596,
+          "text": "#define NLS_MB_CODE_PAGE_TAG NlsMbCodePageTag"
+        },
+        {
+          "line": 1597,
+          "text": "#define NLS_MB_OEM_CODE_PAGE_TAG NlsMbOemCodePageTag"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "else",
+      "expression": "",
+      "current_line": 203,
+      "original_line": 1599,
+      "original_direct_code_count": 2,
+      "original_examples": [
+        {
+          "line": 1601,
+          "text": "#define NLS_MB_CODE_PAGE_TAG (*NlsMbCodePageTag)"
+        },
+        {
+          "line": 1602,
+          "text": "#define NLS_MB_OEM_CODE_PAGE_TAG (*NlsMbOemCodePageTag)"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "ifndef",
+      "expression": "DEFINE_GUIDEX",
+      "current_line": 208,
+      "original_line": 2234,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 2235,
+          "text": "#define DEFINE_GUIDEX(name) EXTERN_C const CDECL GUID name"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "ifndef",
+      "expression": "STATICGUIDOF",
+      "current_line": 213,
+      "original_line": 2238,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 2239,
+          "text": "#define STATICGUIDOF(guid) STATIC_##guid"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "ifndef",
+      "expression": "__IID_ALIGNED__",
+      "current_line": 218,
+      "original_line": 2242,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 2243,
+          "text": "#define __IID_ALIGNED__"
+        }
+      ],
+      "original_children": 1,
+      "current_children": 1
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "else",
+      "expression": "",
+      "current_line": 224,
+      "original_line": 2249,
+      "original_direct_code_count": 2,
+      "original_examples": [
+        {
+          "line": 2250,
+          "text": "#define IsEqualGUIDAligned(guid1, guid2) \\"
+        },
+        {
+          "line": 2251,
+          "text": "((*(PLONGLONG)(guid1) == *(PLONGLONG)(guid2)) && (*((PLONGLONG)(guid1) + 1) == *((PLONGLONG)(guid2) + 1)))"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "if",
+      "expression": "defined(_WIN64)",
+      "current_line": 231,
+      "original_line": 2814,
+      "original_direct_code_count": 40,
+      "original_examples": [
+        {
+          "line": 2815,
+          "text": "typedef struct _RTL_DRIVE_LETTER_CURDIR32 {"
+        },
+        {
+          "line": 2816,
+          "text": "USHORT Flags;"
+        },
+        {
+          "line": 2817,
+          "text": "USHORT Length;"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "if",
+      "expression": "defined(_X86_)",
+      "current_line": 236,
+      "original_line": 2864,
+      "original_direct_code_count": 40,
+      "original_examples": [
+        {
+          "line": 2865,
+          "text": "typedef struct _RTL_DRIVE_LETTER_CURDIR64 {"
+        },
+        {
+          "line": 2866,
+          "text": "USHORT Flags;"
+        },
+        {
+          "line": 2867,
+          "text": "USHORT Length;"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "if",
+      "expression": "!defined(MIDL_PASS)",
+      "current_line": 241,
+      "original_line": 3052,
+      "original_direct_code_count": 10,
+      "original_examples": [
+        {
+          "line": 3053,
+          "text": "__inline"
+        },
+        {
+          "line": 3054,
+          "text": "PIMAGE_NT_HEADERS"
+        },
+        {
+          "line": 3055,
+          "text": "NTAPI"
+        }
+      ],
+      "original_children": 1,
+      "current_children": 1
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "ifndef",
+      "expression": "_MAC",
+      "current_line": 244,
+      "original_line": 3078,
+      "original_direct_code_count": 14,
+      "original_examples": [
+        {
+          "line": 3079,
+          "text": "if (Base != NULL && Base != (PVOID)-1) {"
+        },
+        {
+          "line": 3080,
+          "text": "__try {"
+        },
+        {
+          "line": 3081,
+          "text": "if ((((PIMAGE_DOS_HEADER)Base)->e_magic == IMAGE_DOS_SIGNATURE) &&"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "if",
+      "expression": "defined(_WIN64)",
+      "current_line": 251,
+      "original_line": 3126,
+      "original_direct_code_count": 8,
+      "original_examples": [
+        {
+          "line": 3127,
+          "text": "NTSYSAPI"
+        },
+        {
+          "line": 3128,
+          "text": "PVOID"
+        },
+        {
+          "line": 3129,
+          "text": "RtlImageDirectoryEntryToData32 ("
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "else",
+      "expression": "",
+      "current_line": 253,
+      "original_line": 3135,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 3136,
+          "text": "#define RtlImageDirectoryEntryToData32 RtlImageDirectoryEntryToData"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "if",
+      "expression": "defined(_M_IX86) || defined(_M_MRX000) || defined(_M_ALPHA)",
+      "current_line": 258,
+      "original_line": 3164,
+      "original_direct_code_count": 4,
+      "original_examples": [
+        {
+          "line": 3180,
+          "text": "#define RtlMoveMemory(Destination,Source,Length) memmove((Destination),(Source),(Length))"
+        },
+        {
+          "line": 3181,
+          "text": "#define RtlCopyMemory(Destination,Source,Length) memcpy((Destination),(Source),(Length))"
+        },
+        {
+          "line": 3182,
+          "text": "#define RtlFillMemory(Destination,Length,Fill) memset((Destination),(Fill),(Length))"
+        }
+      ],
+      "original_children": 1,
+      "current_children": 1
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "else",
+      "expression": "",
+      "current_line": 264,
+      "original_line": 3176,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 3177,
+          "text": "#define RtlEqualMemory(Destination,Source,Length) (!memcmp((Destination),(Source),(Length)))"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "else",
+      "expression": "",
+      "current_line": 268,
+      "original_line": 3185,
+      "original_direct_code_count": 47,
+      "original_examples": [
+        {
+          "line": 3187,
+          "text": "NTSYSAPI"
+        },
+        {
+          "line": 3188,
+          "text": "ULONG"
+        },
+        {
+          "line": 3189,
+          "text": "NTAPI"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "else",
+      "expression": "",
+      "current_line": 276,
+      "original_line": 3291,
+      "original_direct_code_count": 3,
+      "original_examples": [
+        {
+          "line": 3293,
+          "text": "#define RtlCopyBytes RtlCopyMemory"
+        },
+        {
+          "line": 3294,
+          "text": "#define RtlZeroBytes RtlZeroMemory"
+        },
+        {
+          "line": 3295,
+          "text": "#define RtlFillBytes RtlFillMemory"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "else",
+      "expression": "",
+      "current_line": 284,
+      "original_line": 3428,
+      "original_direct_code_count": 3,
+      "original_examples": [
+        {
+          "line": 3430,
+          "text": "#define KdPrint(_x_)"
+        },
+        {
+          "line": 3431,
+          "text": "#define KdBreakPoint()"
+        },
+        {
+          "line": 3432,
+          "text": "#define KdBreakPointWithStatus(s)"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "ifndef",
+      "expression": "_DBGNT_",
+      "current_line": 289,
+      "original_line": 3436,
+      "original_direct_code_count": 12,
+      "original_examples": [
+        {
+          "line": 3437,
+          "text": "ULONG"
+        },
+        {
+          "line": 3438,
+          "text": "_cdecl"
+        },
+        {
+          "line": 3439,
+          "text": "DbgPrint ("
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "if",
+      "expression": "defined(MIDL_PASS) || defined(__cplusplus) || !defined(_M_IX86)",
+      "current_line": 294,
+      "original_line": 3486,
+      "original_direct_code_count": 42,
+      "original_examples": [
+        {
+          "line": 3492,
+          "text": "NTSYSAPI"
+        },
+        {
+          "line": 3493,
+          "text": "LARGE_INTEGER"
+        },
+        {
+          "line": 3494,
+          "text": "NTAPI"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "else",
+      "expression": "",
+      "current_line": 296,
+      "original_line": 3561,
+      "original_direct_code_count": 88,
+      "original_examples": [
+        {
+          "line": 3563,
+          "text": "#pragma warning(disable:4035)               // re-enable below"
+        },
+        {
+          "line": 3569,
+          "text": "__inline LARGE_INTEGER"
+        },
+        {
+          "line": 3570,
+          "text": "NTAPI"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "if",
+      "expression": "defined(MIDL_PASS) || defined(__cplusplus) || !defined(_M_IX86)",
+      "current_line": 301,
+      "original_line": 3751,
+      "original_direct_code_count": 33,
+      "original_examples": [
+        {
+          "line": 3757,
+          "text": "NTSYSAPI"
+        },
+        {
+          "line": 3758,
+          "text": "LARGE_INTEGER"
+        },
+        {
+          "line": 3759,
+          "text": "NTAPI"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "else",
+      "expression": "",
+      "current_line": 303,
+      "original_line": 3804,
+      "original_direct_code_count": 97,
+      "original_examples": [
+        {
+          "line": 3806,
+          "text": "#pragma warning(disable:4035)               // re-enable below"
+        },
+        {
+          "line": 3812,
+          "text": "__inline LARGE_INTEGER"
+        },
+        {
+          "line": 3813,
+          "text": "NTAPI"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "if",
+      "expression": "defined(_WIN64)",
+      "current_line": 308,
+      "original_line": 5691,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 5692,
+          "text": "ULONG Alignment;"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "ifdef",
+      "expression": "UNICODE",
+      "current_line": 313,
+      "original_line": 6166,
+      "original_direct_code_count": 3,
+      "original_examples": [
+        {
+          "line": 6167,
+          "text": "typedef OSVERSIONINFOW OSVERSIONINFO;"
+        },
+        {
+          "line": 6168,
+          "text": "typedef POSVERSIONINFOW POSVERSIONINFO;"
+        },
+        {
+          "line": 6169,
+          "text": "typedef LPOSVERSIONINFOW LPOSVERSIONINFO;"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "else",
+      "expression": "",
+      "current_line": 315,
+      "original_line": 6170,
+      "original_direct_code_count": 3,
+      "original_examples": [
+        {
+          "line": 6171,
+          "text": "typedef OSVERSIONINFOA OSVERSIONINFO;"
+        },
+        {
+          "line": 6172,
+          "text": "typedef POSVERSIONINFOA POSVERSIONINFO;"
+        },
+        {
+          "line": 6173,
+          "text": "typedef LPOSVERSIONINFOA LPOSVERSIONINFO;"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "ifdef",
+      "expression": "UNICODE",
+      "current_line": 320,
+      "original_line": 6203,
+      "original_direct_code_count": 3,
+      "original_examples": [
+        {
+          "line": 6204,
+          "text": "typedef OSVERSIONINFOEXW OSVERSIONINFOEX;"
+        },
+        {
+          "line": 6205,
+          "text": "typedef POSVERSIONINFOEXW POSVERSIONINFOEX;"
+        },
+        {
+          "line": 6206,
+          "text": "typedef LPOSVERSIONINFOEXW LPOSVERSIONINFOEX;"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "directive": "else",
+      "expression": "",
+      "current_line": 322,
+      "original_line": 6207,
+      "original_direct_code_count": 3,
+      "original_examples": [
+        {
+          "line": 6208,
+          "text": "typedef OSVERSIONINFOEXA OSVERSIONINFOEX;"
+        },
+        {
+          "line": 6209,
+          "text": "typedef POSVERSIONINFOEXA POSVERSIONINFOEX;"
+        },
+        {
+          "line": 6210,
+          "text": "typedef LPOSVERSIONINFOEXA LPOSVERSIONINFOEX;"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "current_sha256": "353134a2e0c43c88fd7b69db8d53ca3edc9363e68a2a4321c4c20e7745c3cf57",
+      "original_sha256": "787eda33785a87ce9e71202c97b5913e2857f7106fed5bb97103049b1d5e3472",
+      "directive": "else",
+      "expression": "",
+      "current_line": 223,
+      "original_line": 2290,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 2291,
+          "text": "apfnWowOut->dwBldInfo = (WINVER << 16);"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "current_sha256": "a5bbfa44603c510760d005baeba2525daef972d7a9380a5e2fa3cdb1121a3e3e",
+      "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+      "directive": "else",
+      "expression": "",
+      "current_line": 461,
+      "original_line": 1789,
+      "original_direct_code_count": 2,
+      "original_examples": [
+        {
+          "line": 1790,
+          "text": "if (fAnsi)"
+        },
+        {
+          "line": 1791,
+          "text": "RtlMBMessageWParamCharToWCS(pmsg->message, (PDWORD)&pmsg->wParam);"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "current_sha256": "a5bbfa44603c510760d005baeba2525daef972d7a9380a5e2fa3cdb1121a3e3e",
+      "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+      "directive": "else",
+      "expression": "",
+      "current_line": 470,
+      "original_line": 1840,
+      "original_direct_code_count": 10,
+      "original_examples": [
+        {
+          "line": 1841,
+          "text": "if (fAnsi != ((TestWF(pwnd, WFANSIPROC)) ? TRUE : FALSE)) {"
+        },
+        {
+          "line": 1842,
+          "text": "UserAssert(PtiCurrent() == GETPTI(pwnd)); // use receiver's codepage"
+        },
+        {
+          "line": 1843,
+          "text": "if (fAnsi) {"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "current_sha256": "9d09fd22d8a5047d258891b20d7583060f0287e4b24c0dd69eb9833d72ee2932",
+      "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
+      "directive": "else",
+      "expression": "",
+      "current_line": 1088,
+      "original_line": 1691,
+      "original_direct_code_count": 8,
+      "original_examples": [
+        {
+          "line": 1693,
+          "text": "dib1Vga.bi.biWidth  = cx;"
+        },
+        {
+          "line": 1694,
+          "text": "dib1Vga.bi.biHeight = cy;"
+        },
+        {
+          "line": 1696,
+          "text": "hbm = CreateDIBitmap(hdcScreen,"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "current_sha256": "9d09fd22d8a5047d258891b20d7583060f0287e4b24c0dd69eb9833d72ee2932",
+      "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
+      "directive": "else",
+      "expression": "",
+      "current_line": 1097,
+      "original_line": 2626,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 2627,
+          "text": "cfSearch.bpp = 0;"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+      "current_sha256": "cf5b2b70ab27fecbdb7ff787e39a53c1982a01d2d25f45e351fe87d0cbc43995",
+      "original_sha256": "fd78200232574074f7ec68d2f5b851c27ee9d5024427310d18ebbcb048336e97",
+      "directive": "ifndef",
+      "expression": "RC_INVOKED",
+      "current_line": 45,
+      "original_line": 85,
+      "original_direct_code_count": 4,
+      "original_examples": [
+        {
+          "line": 86,
+          "text": "#undef  LHND"
+        },
+        {
+          "line": 87,
+          "text": "#define LHND                (LMEM_MOVEABLE | LMEM_ZEROINIT)"
+        },
+        {
+          "line": 89,
+          "text": "#undef  LMHtoP"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_sha256": "d4eead5ec6a4d2578db998685d6a0a176bc82cc907883eee11c4a8d7bdffae23",
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "directive": "else",
+      "expression": "",
+      "current_line": 305,
+      "original_line": 439,
+      "original_direct_code_count": 40,
+      "original_examples": [
+        {
+          "line": 440,
+          "text": "BOOL ThunkedMenuItemInfo("
+        },
+        {
+          "line": 441,
+          "text": "HMENU hMenu,"
+        },
+        {
+          "line": 442,
+          "text": "UINT nPosition,"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_sha256": "d4eead5ec6a4d2578db998685d6a0a176bc82cc907883eee11c4a8d7bdffae23",
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "directive": "else",
+      "expression": "",
+      "current_line": 341,
+      "original_line": 758,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 765,
+          "text": "pmsg->wParam = (WPARAM)dwAnsi;"
+        }
+      ],
+      "original_children": 1,
+      "current_children": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_sha256": "d4eead5ec6a4d2578db998685d6a0a176bc82cc907883eee11c4a8d7bdffae23",
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "directive": "else",
+      "expression": "",
+      "current_line": 356,
+      "original_line": 779,
+      "original_direct_code_count": 2,
+      "original_examples": [
+        {
+          "line": 780,
+          "text": "if (!RtlWCSMessageWParamCharToMB(pmsg->message, (LPDWORD)&(pmsg->wParam)))"
+        },
+        {
+          "line": 781,
+          "text": "retval = 0;"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_sha256": "d4eead5ec6a4d2578db998685d6a0a176bc82cc907883eee11c4a8d7bdffae23",
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "directive": "else",
+      "expression": "",
+      "current_line": 365,
+      "original_line": 792,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 793,
+          "text": "}"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "bfd2af514bb86619de9c20af416898b65e52ce4a8db8885135d7d4f9fb3a2b94",
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "directive": "ifndef",
+      "expression": "WOW",
+      "current_line": 10,
+      "original_line": 15,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 16,
+          "text": "#pragma hdrstop"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "bfd2af514bb86619de9c20af416898b65e52ce4a8db8885135d7d4f9fb3a2b94",
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "directive": "else",
+      "expression": "",
+      "current_line": 19,
+      "original_line": 119,
+      "original_direct_code_count": 5,
+      "original_examples": [
+        {
+          "line": 126,
+          "text": "#define ClientSharedInfo()  (&gSharedInfo)"
+        },
+        {
+          "line": 132,
+          "text": "#define LPPOINTWOW                LPPOINT"
+        },
+        {
+          "line": 133,
+          "text": "#define NORMALIZEDSHORTVALUE(x)   (x)"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "bfd2af514bb86619de9c20af416898b65e52ce4a8db8885135d7d4f9fb3a2b94",
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "directive": "else",
+      "expression": "",
+      "current_line": 60,
+      "original_line": 442,
+      "original_direct_code_count": 12,
+      "original_examples": [
+        {
+          "line": 443,
+          "text": "try {"
+        },
+        {
+          "line": 444,
+          "text": "if (!GETPTI(pwnd)) {"
+        },
+        {
+          "line": 450,
+          "text": "UserAssert(FALSE);"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "bfd2af514bb86619de9c20af416898b65e52ce4a8db8885135d7d4f9fb3a2b94",
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "directive": "else",
+      "expression": "",
+      "current_line": 69,
+      "original_line": 726,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 727,
+          "text": "return _ClientToScreen(pwnd, ppoint);"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "bfd2af514bb86619de9c20af416898b65e52ce4a8db8885135d7d4f9fb3a2b94",
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "directive": "else",
+      "expression": "",
+      "current_line": 87,
+      "original_line": 779,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 780,
+          "text": "return _GetWindowRect(pwnd, prect);"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "bfd2af514bb86619de9c20af416898b65e52ce4a8db8885135d7d4f9fb3a2b94",
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "directive": "else",
+      "expression": "",
+      "current_line": 96,
+      "original_line": 802,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 803,
+          "text": "return _ScreenToClient(pwnd, ppoint);"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "bfd2af514bb86619de9c20af416898b65e52ce4a8db8885135d7d4f9fb3a2b94",
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "directive": "else",
+      "expression": "",
+      "current_line": 105,
+      "original_line": 837,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 838,
+          "text": "return NtUserEnableMenuItem(hMenu, uIDEnableItem, uEnable);"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "bfd2af514bb86619de9c20af416898b65e52ce4a8db8885135d7d4f9fb3a2b94",
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "directive": "ifndef",
+      "expression": "WOW",
+      "current_line": 111,
+      "original_line": 890,
+      "original_direct_code_count": 2,
+      "original_examples": [
+        {
+          "line": 891,
+          "text": "DWORD dwHookData;"
+        },
+        {
+          "line": 892,
+          "text": "DWORD dwFlags;"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "bfd2af514bb86619de9c20af416898b65e52ce4a8db8885135d7d4f9fb3a2b94",
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "directive": "else",
+      "expression": "",
+      "current_line": 120,
+      "original_line": 913,
+      "original_direct_code_count": 82,
+      "original_examples": [
+        {
+          "line": 914,
+          "text": "switch ((INT)(SHORT)HIWORD(dwHookCurrent)) {"
+        },
+        {
+          "line": 915,
+          "text": "case WH_CALLWNDPROC:"
+        },
+        {
+          "line": 916,
+          "text": "case WH_CALLWNDPROCRET:"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "af265fc49e2fe5d9663560ef8a53a7474f18f0dac150bf6a4ee1b6141527e3cd",
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "directive": "else",
+      "expression": "",
+      "current_line": 435,
+      "original_line": 325,
+      "original_direct_code_count": 3,
+      "original_examples": [
+        {
+          "line": 326,
+          "text": "if (!RtlWCSMessageWParamCharToMB(pmsg->message, (LPDWORD)&(pmsg->wParam))) {"
+        },
+        {
+          "line": 327,
+          "text": "retval = 0;"
+        },
+        {
+          "line": 328,
+          "text": "}"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "af265fc49e2fe5d9663560ef8a53a7474f18f0dac150bf6a4ee1b6141527e3cd",
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "current_line": 464,
+      "original_line": 369,
+      "original_direct_code_count": 3,
+      "original_examples": [
+        {
+          "line": 370,
+          "text": "if (retval) {"
+        },
+        {
+          "line": 375,
+          "text": "WCSToMB(pstr->Buffer, -1, &pwszKL, KL_NAMELENGTH, FALSE);"
+        },
+        {
+          "line": 376,
+          "text": "}"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "af265fc49e2fe5d9663560ef8a53a7474f18f0dac150bf6a4ee1b6141527e3cd",
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "current_line": 469,
+      "original_line": 395,
+      "original_direct_code_count": 6,
+      "original_examples": [
+        {
+          "line": 396,
+          "text": "if ((wMapType == 2) && (retval != 0)) {"
+        },
+        {
+          "line": 397,
+          "text": "WCHAR wch = LOWORD(retval);"
+        },
+        {
+          "line": 398,
+          "text": "retval &= ~0xFFFF;"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "af265fc49e2fe5d9663560ef8a53a7474f18f0dac150bf6a4ee1b6141527e3cd",
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "current_line": 474,
+      "original_line": 414,
+      "original_direct_code_count": 2,
+      "original_examples": [
+        {
+          "line": 415,
+          "text": "static HKL  hMVKCachedHKL = 0;"
+        },
+        {
+          "line": 416,
+          "text": "static UINT uMVKCachedCP  = 0;"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "af265fc49e2fe5d9663560ef8a53a7474f18f0dac150bf6a4ee1b6141527e3cd",
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "current_line": 479,
+      "original_line": 431,
+      "original_direct_code_count": 28,
+      "original_examples": [
+        {
+          "line": 432,
+          "text": "if ((wMapType == 2) && (retval != 0)) {"
+        },
+        {
+          "line": 433,
+          "text": "WCHAR wch = LOWORD(retval);"
+        },
+        {
+          "line": 435,
+          "text": "if (hkl != hMVKCachedHKL) {"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "af265fc49e2fe5d9663560ef8a53a7474f18f0dac150bf6a4ee1b6141527e3cd",
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "current_line": 484,
+      "original_line": 514,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 522,
+          "text": "RtlMBMessageWParamCharToWCS(wMsg, &wParam);"
+        }
+      ],
+      "original_children": 1,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "af265fc49e2fe5d9663560ef8a53a7474f18f0dac150bf6a4ee1b6141527e3cd",
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "current_line": 489,
+      "original_line": 549,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 558,
+          "text": "RtlMBMessageWParamCharToWCS(msg, &wParam);"
+        }
+      ],
+      "original_children": 1,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "af265fc49e2fe5d9663560ef8a53a7474f18f0dac150bf6a4ee1b6141527e3cd",
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "current_line": 494,
+      "original_line": 934,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 942,
+          "text": "RtlMBMessageWParamCharToWCS(wMsg, &wParam);"
+        }
+      ],
+      "original_children": 1,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "af265fc49e2fe5d9663560ef8a53a7474f18f0dac150bf6a4ee1b6141527e3cd",
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "current_line": 499,
+      "original_line": 976,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 984,
+          "text": "RtlMBMessageWParamCharToWCS(wMsg, &wParam);"
+        }
+      ],
+      "original_children": 1,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "af265fc49e2fe5d9663560ef8a53a7474f18f0dac150bf6a4ee1b6141527e3cd",
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "current_line": 504,
+      "original_line": 1111,
+      "original_direct_code_count": 2,
+      "original_examples": [
+        {
+          "line": 1112,
+          "text": "static HKL  hVKSCachedHKL = 0;"
+        },
+        {
+          "line": 1113,
+          "text": "static UINT uVKSCachedCP  = 0;"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "af265fc49e2fe5d9663560ef8a53a7474f18f0dac150bf6a4ee1b6141527e3cd",
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "current_line": 515,
+      "original_line": 1295,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 1296,
+          "text": "LPSTR psz;"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "af265fc49e2fe5d9663560ef8a53a7474f18f0dac150bf6a4ee1b6141527e3cd",
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "current_line": 526,
+      "original_line": 1505,
+      "original_direct_code_count": 9,
+      "original_examples": [
+        {
+          "line": 1506,
+          "text": "switch (pmsg->message) {"
+        },
+        {
+          "line": 1521,
+          "text": "case WM_CHARTOITEM:"
+        },
+        {
+          "line": 1522,
+          "text": "case WM_DEADCHAR:"
+        }
+      ],
+      "original_children": 2,
+      "current_children": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "current_sha256": "48228ae52600fd1b777a6100254c70c6f6dfbcb31b0c91d34dd72bc55c3e2add",
+      "original_sha256": "82528443bc5f6c227e0e14fe8a9dbc928ba735f98cf3891744c20c8e1604939a",
+      "directive": "else",
+      "expression": "",
+      "current_line": 248,
+      "original_line": 377,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 378,
+          "text": "cch = wcslen(lpwndcls->lpszClassName) + 1;"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+      "current_sha256": "85faf2effa8c00a0fad977e23974d581e942a3ec510f77424a2c5eefad2e1464",
+      "original_sha256": "45b92f7236fba49d58e2c3d912126067c3843ec560c28cdd8a20167c62aaef65",
+      "directive": "ifndef",
+      "expression": "LATER",
+      "current_line": 77,
+      "original_line": 134,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 135,
+          "text": "return STATUS_INVALID_HANDLE;"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "current_sha256": "1d3e06a8bbd902687e5aa4231e85bfb99eaebe0dc0a07b54e0eb33fb784cae9a",
+      "original_sha256": "f0b56314a93423599f06645d17104391f19a0ca07c3944853b065d8866493f7c",
+      "directive": "else",
+      "expression": "",
+      "current_line": 106,
+      "original_line": 1325,
+      "original_direct_code_count": 3,
+      "original_examples": [
+        {
+          "line": 1326,
+          "text": "PVOID"
+        },
+        {
+          "line": 1327,
+          "text": "ThreadUnlock1("
+        },
+        {
+          "line": 1328,
+          "text": "VOID)"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+      "current_sha256": "a4f04cdfa139c78bc761b5e78b39c727a128549b2702e9a7098d22b07dd38aeb",
+      "original_sha256": "0e3999df8610405c990760ee1a417bf312e3b76744f8f9387bbd94583f9d800d",
+      "directive": "ifndef",
+      "expression": "KOREA",
+      "current_line": 86,
+      "original_line": 840,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 847,
+          "text": "cyMenuFontAscent += SYSMET(CYBORDER);"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "current_sha256": "6be9e92da0209bbaeae041d25b584ed42ee52ff492ba0b1b378c3a856ae64a6f",
+      "original_sha256": "b7656bca55e892a42ba825be0324211450ad298c40717e1ae5a889d084467529",
+      "directive": "else",
+      "expression": "",
+      "current_line": 340,
+      "original_line": 4757,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 4758,
+          "text": "lpMsg->wParam = wParam;"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "directive": "if",
+      "expression": "defined(_X86_)",
+      "current_line": 144,
+      "original_line": 6312,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 6313,
+          "text": "ProbeForWrite((PVOID)str.Buffer, str.MaximumLength, sizeof(BYTE));"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "directive": "if",
+      "expression": "defined(_X86_)",
+      "current_line": 153,
+      "original_line": 6417,
+      "original_direct_code_count": 17,
+      "original_examples": [
+        {
+          "line": 6418,
+          "text": "if (ARGUMENT_PRESENT(pWOW)) {"
+        },
+        {
+          "line": 6419,
+          "text": "ProbeForRead(pWOW, sizeof(adwWOW), sizeof(BYTE));"
+        },
+        {
+          "line": 6420,
+          "text": "RtlCopyMemory(adwWOW, pWOW, sizeof(adwWOW));"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "directive": "if",
+      "expression": "defined(_X86_)",
+      "current_line": 162,
+      "original_line": 6689,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 6690,
+          "text": "ProbeForRead(strKLID.Buffer, strKLID.Length, sizeof(BYTE));"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "directive": "if",
+      "expression": "defined(_X86_)",
+      "current_line": 171,
+      "original_line": 6929,
+      "original_direct_code_count": 2,
+      "original_examples": [
+        {
+          "line": 6930,
+          "text": "ProbeForWrite(lpAccelDst, cAccelEntries * sizeof(*lpAccelDst),"
+        },
+        {
+          "line": 6931,
+          "text": "sizeof(BYTE));"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "directive": "if",
+      "expression": "defined(_X86_)",
+      "current_line": 180,
+      "original_line": 6977,
+      "original_direct_code_count": 2,
+      "original_examples": [
+        {
+          "line": 6978,
+          "text": "ProbeForRead(strClassName.Buffer, strClassName.Length, sizeof(BYTE));"
+        },
+        {
+          "line": 6979,
+          "text": "ProbeForRead(strWindowName.Buffer, strWindowName.Length, sizeof(BYTE));"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "directive": "if",
+      "expression": "defined(_X86_)",
+      "current_line": 189,
+      "original_line": 7026,
+      "original_direct_code_count": 4,
+      "original_examples": [
+        {
+          "line": 7027,
+          "text": "if (HIWORD(strClassName.Buffer))"
+        },
+        {
+          "line": 7028,
+          "text": "ProbeForRead(strClassName.Buffer, strClassName.Length,"
+        },
+        {
+          "line": 7029,
+          "text": "sizeof(BYTE));"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "directive": "if",
+      "expression": "defined(_X86_)",
+      "current_line": 198,
+      "original_line": 7071,
+      "original_direct_code_count": 2,
+      "original_examples": [
+        {
+          "line": 7072,
+          "text": "ProbeForWrite(strClassName.Buffer, strClassName.MaximumLength,"
+        },
+        {
+          "line": 7073,
+          "text": "sizeof(BYTE));"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "directive": "if",
+      "expression": "defined(_X86_)",
+      "current_line": 207,
+      "original_line": 7102,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 7103,
+          "text": "ProbeForWrite(lpszFormatName, chMax * sizeof(WCHAR), sizeof(BYTE));"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "directive": "if",
+      "expression": "defined(_X86_)",
+      "current_line": 216,
+      "original_line": 7131,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 7132,
+          "text": "ProbeForWrite(lpszKeyName, chMax * sizeof(WCHAR), sizeof(BYTE));"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "directive": "if",
+      "expression": "defined(_X86_)",
+      "current_line": 225,
+      "original_line": 7161,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 7162,
+          "text": "ProbeForWrite(strKLID.Buffer, strKLID.MaximumLength, sizeof(BYTE));"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "directive": "if",
+      "expression": "defined(_X86_)",
+      "current_line": 234,
+      "original_line": 7188,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 7189,
+          "text": "ProbeForWrite(lpBuff, nItems * sizeof(*lpBuff), sizeof(BYTE));"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "directive": "if",
+      "expression": "defined(_X86_)",
+      "current_line": 243,
+      "original_line": 7261,
+      "original_direct_code_count": 2,
+      "original_examples": [
+        {
+          "line": 7262,
+          "text": "#define DATAALIGN sizeof(BYTE)"
+        },
+        {
+          "line": 7263,
+          "text": "#define CHARALIGN sizeof(BYTE)"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "directive": "if",
+      "expression": "defined(_X86_)",
+      "current_line": 252,
+      "original_line": 7333,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 7334,
+          "text": "ProbeForRead(strFormat.Buffer, strFormat.Length, sizeof(BYTE));"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "directive": "if",
+      "expression": "defined(_X86_)",
+      "current_line": 261,
+      "original_line": 7363,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 7364,
+          "text": "ProbeForRead(strMessage.Buffer, strMessage.Length, sizeof(BYTE));"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "directive": "if",
+      "expression": "defined(_X86_)",
+      "current_line": 270,
+      "original_line": 7439,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 7440,
+          "text": "ProbeForRead(strClassName.Buffer, strClassName.Length, sizeof(BYTE));"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "directive": "if",
+      "expression": "defined(_X86_)",
+      "current_line": 279,
+      "original_line": 8558,
+      "original_direct_code_count": 2,
+      "original_examples": [
+        {
+          "line": 8559,
+          "text": "ProbeForRead(mdics.strTitle.Buffer, mdics.strTitle.Length,"
+        },
+        {
+          "line": 8560,
+          "text": "sizeof(BYTE));"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "directive": "if",
+      "expression": "defined(_X86_)",
+      "current_line": 288,
+      "original_line": 8571,
+      "original_direct_code_count": 2,
+      "original_examples": [
+        {
+          "line": 8572,
+          "text": "ProbeForRead(mdics.strClass.Buffer, mdics.strClass.Length,"
+        },
+        {
+          "line": 8573,
+          "text": "sizeof(BYTE));"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "directive": "if",
+      "expression": "defined(_X86_)",
+      "current_line": 297,
+      "original_line": 8687,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 8688,
+          "text": "ProbeForRead(str.Buffer, str.Length, sizeof(BYTE));"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "directive": "if",
+      "expression": "defined(_X86_)",
+      "current_line": 306,
+      "original_line": 8747,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 8748,
+          "text": "ProbeForRead(str.Buffer, str.Length, sizeof(BYTE));"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "directive": "if",
+      "expression": "defined(_X86_)",
+      "current_line": 315,
+      "original_line": 9237,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 9238,
+          "text": "ProbeForWrite((PVOID)str.Buffer, str.MaximumLength, sizeof(BYTE));"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "directive": "if",
+      "expression": "defined(_X86_)",
+      "current_line": 324,
+      "original_line": 9303,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 9304,
+          "text": "ProbeForWrite((PVOID)str.Buffer, str.MaximumLength, sizeof(BYTE));"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "directive": "if",
+      "expression": "defined(_X86_)",
+      "current_line": 333,
+      "original_line": 9354,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 9355,
+          "text": "ProbeForWrite((PVOID)str.Buffer, str.MaximumLength, sizeof(BYTE));"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "directive": "if",
+      "expression": "defined(_X86_)",
+      "current_line": 342,
+      "original_line": 9395,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 9396,
+          "text": "ProbeForWrite((PVOID)lParam, wParam * sizeof(INT), sizeof(BYTE));"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "directive": "if",
+      "expression": "defined(_X86_)",
+      "current_line": 351,
+      "original_line": 9435,
+      "original_direct_code_count": 2,
+      "original_examples": [
+        {
+          "line": 9436,
+          "text": "if (lParam)"
+        },
+        {
+          "line": 9437,
+          "text": "ProbeForRead((PVOID)lParam, wParam * sizeof(UINT), sizeof(BYTE));"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "directive": "if",
+      "expression": "defined(_X86_)",
+      "current_line": 360,
+      "original_line": 9558,
+      "original_direct_code_count": 2,
+      "original_examples": [
+        {
+          "line": 9559,
+          "text": "ProbeForRead(csex.strName.Buffer, csex.strName.MaximumLength,"
+        },
+        {
+          "line": 9560,
+          "text": "sizeof(BYTE));"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_sha256": "cd42111cedcc41c994c465fa4abfc9f2c7d83a283464dd98a561787e9353d0a1",
+      "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+      "directive": "ifndef",
+      "expression": "_WINBASE_",
+      "current_line": 92,
+      "original_line": 22,
+      "original_direct_code_count": 24,
+      "original_examples": [
+        {
+          "line": 27,
+          "text": "#define WINBASEAPI DECLSPEC_IMPORT"
+        },
+        {
+          "line": 28,
+          "text": "#define MAXINTATOM 0xC000"
+        },
+        {
+          "line": 29,
+          "text": "#define MAKEINTATOM(i)  (LPTSTR)((DWORD)((WORD)(i)))"
+        }
+      ],
+      "original_children": 1,
+      "current_children": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_sha256": "cd42111cedcc41c994c465fa4abfc9f2c7d83a283464dd98a561787e9353d0a1",
+      "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+      "directive": "if",
+      "expression": "(WINVER >= 0x0400)",
+      "current_line": 95,
+      "original_line": 54,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 55,
+          "text": "#define STARTF_USEHOTKEY        0x00000200"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_sha256": "cd42111cedcc41c994c465fa4abfc9f2c7d83a283464dd98a561787e9353d0a1",
+      "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+      "directive": "ifdef",
+      "expression": "RIP_COMPONENT",
+      "current_line": 108,
+      "original_line": 65,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 66,
+          "text": "#undef RIP_COMPONENT"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_sha256": "cd42111cedcc41c994c465fa4abfc9f2c7d83a283464dd98a561787e9353d0a1",
+      "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+      "directive": "else",
+      "expression": "",
+      "current_line": 116,
+      "original_line": 84,
+      "original_direct_code_count": 2,
+      "original_examples": [
+        {
+          "line": 85,
+          "text": "#define CheckPtiSysPeek(where, pq, newIdSysPeek)"
+        },
+        {
+          "line": 86,
+          "text": "#define CheckSysLock(where, pq, pti)"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_sha256": "cd42111cedcc41c994c465fa4abfc9f2c7d83a283464dd98a561787e9353d0a1",
+      "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+      "directive": "else",
+      "expression": "",
+      "current_line": 124,
+      "original_line": 116,
+      "original_direct_code_count": 2,
+      "original_examples": [
+        {
+          "line": 117,
+          "text": "#define PtiCurrent()  (gptiCurrent)"
+        },
+        {
+          "line": 118,
+          "text": "#define PtiCurrentShared() ((PTHREADINFO)(W32GetCurrentThread()))"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_sha256": "cd42111cedcc41c994c465fa4abfc9f2c7d83a283464dd98a561787e9353d0a1",
+      "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+      "directive": "else",
+      "expression": "",
+      "current_line": 138,
+      "original_line": 792,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 793,
+          "text": "#define CheckLock(p)"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_sha256": "cd42111cedcc41c994c465fa4abfc9f2c7d83a283464dd98a561787e9353d0a1",
+      "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+      "directive": "else",
+      "expression": "",
+      "current_line": 146,
+      "original_line": 842,
+      "original_direct_code_count": 7,
+      "original_examples": [
+        {
+          "line": 844,
+          "text": "#define TRACE_INIT(str) {}"
+        },
+        {
+          "line": 845,
+          "text": "#define TRACE_SWITCH(str) {}"
+        },
+        {
+          "line": 846,
+          "text": "#define TRACE(s)"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_sha256": "cd42111cedcc41c994c465fa4abfc9f2c7d83a283464dd98a561787e9353d0a1",
+      "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+      "directive": "else",
+      "expression": "",
+      "current_line": 154,
+      "original_line": 895,
+      "original_direct_code_count": 13,
+      "original_examples": [
+        {
+          "line": 896,
+          "text": "#define ThreadLock(_pobj_, _ptl_)          \\"
+        },
+        {
+          "line": 897,
+          "text": "{                                          \\"
+        },
+        {
+          "line": 898,
+          "text": "\\"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_sha256": "cd42111cedcc41c994c465fa4abfc9f2c7d83a283464dd98a561787e9353d0a1",
+      "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+      "directive": "else",
+      "expression": "",
+      "current_line": 162,
+      "original_line": 917,
+      "original_direct_code_count": 11,
+      "original_examples": [
+        {
+          "line": 918,
+          "text": "#define ThreadLockAlways(_pobj_, _ptl_)    \\"
+        },
+        {
+          "line": 919,
+          "text": "{                                          \\"
+        },
+        {
+          "line": 920,
+          "text": "\\"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_sha256": "cd42111cedcc41c994c465fa4abfc9f2c7d83a283464dd98a561787e9353d0a1",
+      "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+      "directive": "else",
+      "expression": "",
+      "current_line": 170,
+      "original_line": 938,
+      "original_direct_code_count": 7,
+      "original_examples": [
+        {
+          "line": 939,
+          "text": "#define ThreadLockAlwaysWithPti(_pti_, _pobj_, _ptl_)  \\"
+        },
+        {
+          "line": 940,
+          "text": "{                                          \\"
+        },
+        {
+          "line": 941,
+          "text": "(_ptl_)->next = _pti_->ptl;            \\"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_sha256": "cd42111cedcc41c994c465fa4abfc9f2c7d83a283464dd98a561787e9353d0a1",
+      "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+      "directive": "else",
+      "expression": "",
+      "current_line": 178,
+      "original_line": 954,
+      "original_direct_code_count": 9,
+      "original_examples": [
+        {
+          "line": 955,
+          "text": "#define ThreadLockWithPti(_pti_, _pobj_, _ptl_)  \\"
+        },
+        {
+          "line": 956,
+          "text": "{                                          \\"
+        },
+        {
+          "line": 957,
+          "text": "(_ptl_)->next = _pti_->ptl;            \\"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_sha256": "cd42111cedcc41c994c465fa4abfc9f2c7d83a283464dd98a561787e9353d0a1",
+      "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+      "directive": "else",
+      "expression": "",
+      "current_line": 186,
+      "original_line": 969,
+      "original_direct_code_count": 2,
+      "original_examples": [
+        {
+          "line": 970,
+          "text": "#define ThreadUnlock(ptl) ThreadUnlock1()"
+        },
+        {
+          "line": 971,
+          "text": "PVOID ThreadUnlock1(VOID);"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_sha256": "cd42111cedcc41c994c465fa4abfc9f2c7d83a283464dd98a561787e9353d0a1",
+      "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+      "directive": "else",
+      "expression": "",
+      "current_line": 194,
+      "original_line": 982,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 983,
+          "text": "#define HMLockObject(p)     (((PHEAD)p)->cLockObj++)"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_sha256": "cd42111cedcc41c994c465fa4abfc9f2c7d83a283464dd98a561787e9353d0a1",
+      "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+      "directive": "else",
+      "expression": "",
+      "current_line": 202,
+      "original_line": 1055,
+      "original_direct_code_count": 5,
+      "original_examples": [
+        {
+          "line": 1056,
+          "text": "#define ThreadUnlockAndFreePool(_pti_, _ptl_)  \\"
+        },
+        {
+          "line": 1057,
+          "text": "{                                           \\"
+        },
+        {
+          "line": 1058,
+          "text": "UserFreePool(_pti_->ptlPool->pobj);     \\"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_sha256": "cd42111cedcc41c994c465fa4abfc9f2c7d83a283464dd98a561787e9353d0a1",
+      "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+      "directive": "else",
+      "expression": "",
+      "current_line": 210,
+      "original_line": 1095,
+      "original_direct_code_count": 5,
+      "original_examples": [
+        {
+          "line": 1096,
+          "text": "#define CheckCritIn()"
+        },
+        {
+          "line": 1097,
+          "text": "#define CheckCritInShared()"
+        },
+        {
+          "line": 1098,
+          "text": "#define CheckCritOut()"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_sha256": "cd42111cedcc41c994c465fa4abfc9f2c7d83a283464dd98a561787e9353d0a1",
+      "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+      "directive": "ifdef",
+      "expression": "POOL_TAGGING",
+      "current_line": 215,
+      "original_line": 1219,
+      "original_direct_code_count": 18,
+      "original_examples": [
+        {
+          "line": 1221,
+          "text": "PVOID _UserReAllocPoolWithTag("
+        },
+        {
+          "line": 1222,
+          "text": "PVOID pSrc,"
+        },
+        {
+          "line": 1223,
+          "text": "ULONG uBytesSrc,"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_sha256": "cd42111cedcc41c994c465fa4abfc9f2c7d83a283464dd98a561787e9353d0a1",
+      "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+      "directive": "else",
+      "expression": "",
+      "current_line": 217,
+      "original_line": 1245,
+      "original_direct_code_count": 16,
+      "original_examples": [
+        {
+          "line": 1247,
+          "text": "PVOID _UserReAllocPool("
+        },
+        {
+          "line": 1248,
+          "text": "PVOID pSrc,"
+        },
+        {
+          "line": 1249,
+          "text": "ULONG uBytesSrc,"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_sha256": "cd42111cedcc41c994c465fa4abfc9f2c7d83a283464dd98a561787e9353d0a1",
+      "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+      "directive": "else",
+      "expression": "",
+      "current_line": 225,
+      "original_line": 1278,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 1279,
+          "text": "#define UserFreePool(p) ExFreePool(p);"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_sha256": "cd42111cedcc41c994c465fa4abfc9f2c7d83a283464dd98a561787e9353d0a1",
+      "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+      "directive": "else",
+      "expression": "",
+      "current_line": 317,
+      "original_line": 3570,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 3571,
+          "text": "#define Validateppopupmenu(ppopupmenu)"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_sha256": "cd42111cedcc41c994c465fa4abfc9f2c7d83a283464dd98a561787e9353d0a1",
+      "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+      "directive": "ifndef",
+      "expression": "MSDWP",
+      "current_line": 322,
+      "original_line": 3712,
+      "original_direct_code_count": 38,
+      "original_examples": [
+        {
+          "line": 3717,
+          "text": "unsigned int umin(UINT, UINT);"
+        },
+        {
+          "line": 3718,
+          "text": "unsigned int umax(UINT, UINT);"
+        },
+        {
+          "line": 3719,
+          "text": "HDC    GetClientDc();"
+        }
+      ],
+      "original_children": 1,
+      "current_children": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_sha256": "cd42111cedcc41c994c465fa4abfc9f2c7d83a283464dd98a561787e9353d0a1",
+      "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+      "directive": "ifndef",
+      "expression": "MSDWP",
+      "current_line": 333,
+      "original_line": 3781,
+      "original_direct_code_count": 86,
+      "original_examples": [
+        {
+          "line": 3783,
+          "text": "LONG xxxSwitchWndProc(PWND, UINT, DWORD, LONG);"
+        },
+        {
+          "line": 3784,
+          "text": "LONG xxxDesktopWndProc(PWND, UINT, DWORD, LONG);"
+        },
+        {
+          "line": 3785,
+          "text": "LONG xxxSitWndProc(PWND, UINT, DWORD, LONG);"
+        }
+      ],
+      "original_children": 1,
+      "current_children": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_sha256": "cd42111cedcc41c994c465fa4abfc9f2c7d83a283464dd98a561787e9353d0a1",
+      "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+      "directive": "else",
+      "expression": "",
+      "current_line": 347,
+      "original_line": 5026,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 5027,
+          "text": "#define PMAP_LAST              36"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "current_sha256": "de94ce38c9cd095af7535c3c957ab30a49acc56b5b5500dad592d250ebc02c9d",
+      "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+      "directive": "else",
+      "expression": "",
+      "current_line": 435,
+      "original_line": 362,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 363,
+          "text": "#define NWCH 2"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "current_sha256": "de94ce38c9cd095af7535c3c957ab30a49acc56b5b5500dad592d250ebc02c9d",
+      "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+      "directive": "else",
+      "expression": "",
+      "current_line": 444,
+      "original_line": 382,
+      "original_direct_code_count": 3,
+      "original_examples": [
+        {
+          "line": 383,
+          "text": "cwch = WideCharToMultiByte(CodePage, 0,"
+        },
+        {
+          "line": 384,
+          "text": "(LPCWSTR)pWParam, NWCH,"
+        },
+        {
+          "line": 385,
+          "text": "(LPSTR)&dwAnsi, sizeof(dwAnsi), NULL, NULL);"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "current_sha256": "de94ce38c9cd095af7535c3c957ab30a49acc56b5b5500dad592d250ebc02c9d",
+      "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+      "directive": "else",
+      "expression": "",
+      "current_line": 453,
+      "original_line": 416,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 423,
+          "text": "*pWParam = dwAnsi;"
+        }
+      ],
+      "original_children": 1,
+      "current_children": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "current_sha256": "c42964ed702de00fc96322d76922bca0e34bad7ae7b306885ecd5b36de5b7988",
+      "original_sha256": "7491e5b3331de8cb7a2189b8efbe91f56076f80a08338bf816d793e80a4faf76",
+      "directive": "else",
+      "expression": "",
+      "current_line": 139,
+      "original_line": 683,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 684,
+          "text": "((wType != DFC_SCROLL) || !(wState & DFCS_SCROLLSIZEGRIP)))"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_sha256": "607f45d960e69da00470820ed0f2bd8337a17caab0815776d00cd4852e488eae",
+      "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+      "directive": "else",
+      "expression": "",
+      "current_line": 232,
+      "original_line": 720,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 721,
+          "text": "UNREFERENCED_PARAMETER(dwCodePage);"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_sha256": "607f45d960e69da00470820ed0f2bd8337a17caab0815776d00cd4852e488eae",
+      "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+      "directive": "else",
+      "expression": "",
+      "current_line": 241,
+      "original_line": 881,
+      "original_direct_code_count": 3,
+      "original_examples": [
+        {
+          "line": 882,
+          "text": "cxPrefixes = UserGetTextExtentPointW(hdc, &PrefixChar, 1, &size);"
+        },
+        {
+          "line": 883,
+          "text": "cxPrefixes = size.cx - iOverhang;"
+        },
+        {
+          "line": 884,
+          "text": "cxPrefixes *=  iPrefixCount;"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_sha256": "607f45d960e69da00470820ed0f2bd8337a17caab0815776d00cd4852e488eae",
+      "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+      "directive": "else",
+      "expression": "",
+      "current_line": 250,
+      "original_line": 1226,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 1227,
+          "text": "lpchLineEnd = lpch = GetNextWordbreak(0,lpchText, lpchEnd, (dwFormat & DT_WORDBREAK));"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_sha256": "607f45d960e69da00470820ed0f2bd8337a17caab0815776d00cd4852e488eae",
+      "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+      "directive": "else",
+      "expression": "",
+      "current_line": 282,
+      "original_line": 1659,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 1660,
+          "text": "if (GETAPPVER() < VER40) {"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "original_sha256": "b632fc75232db7c2bc95baf758820c087a23f7e17a61c361e47c4687a4f543d3",
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "current_line": 28,
+      "original_line": 30,
+      "original_direct_code_count": 4,
+      "original_examples": [
+        {
+          "line": 31,
+          "text": "#include <w32p.h>"
+        },
+        {
+          "line": 32,
+          "text": "#undef _USERK_"
+        },
+        {
+          "line": 33,
+          "text": "#include \"..\\kernel\\precomp.h\""
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "original_sha256": "b632fc75232db7c2bc95baf758820c087a23f7e17a61c361e47c4687a4f543d3",
+      "directive": "else",
+      "expression": "",
+      "current_line": 30,
+      "original_line": 35,
+      "original_direct_code_count": 4,
+      "original_examples": [
+        {
+          "line": 36,
+          "text": "#include <ntgdistr.h>"
+        },
+        {
+          "line": 37,
+          "text": "#include \"winuserp.h\""
+        },
+        {
+          "line": 38,
+          "text": "#include \"winuserk.h\""
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "original_sha256": "b632fc75232db7c2bc95baf758820c087a23f7e17a61c361e47c4687a4f543d3",
+      "directive": "ifdef",
+      "expression": "RIP_COMPONENT",
+      "current_line": 43,
+      "original_line": 46,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 47,
+          "text": "#undef RIP_COMPONENT"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "original_sha256": "b632fc75232db7c2bc95baf758820c087a23f7e17a61c361e47c4687a4f543d3",
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "current_line": 47,
+      "original_line": 49,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 50,
+          "text": "#define RIP_COMPONENT RIP_USERKRNL"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "original_sha256": "b632fc75232db7c2bc95baf758820c087a23f7e17a61c361e47c4687a4f543d3",
+      "directive": "else",
+      "expression": "",
+      "current_line": 49,
+      "original_line": 51,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 52,
+          "text": "#define RIP_COMPONENT RIP_USER"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "original_sha256": "b632fc75232db7c2bc95baf758820c087a23f7e17a61c361e47c4687a4f543d3",
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "current_line": 55,
+      "original_line": 68,
+      "original_direct_code_count": 4,
+      "original_examples": [
+        {
+          "line": 71,
+          "text": "#define REBASEALWAYS(p, elem) ((p)->elem)"
+        },
+        {
+          "line": 72,
+          "text": "#define REBASEPTR(obj, p) (p)"
+        },
+        {
+          "line": 73,
+          "text": "#define REBASE(p, elem) ((p)->elem)"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "original_sha256": "b632fc75232db7c2bc95baf758820c087a23f7e17a61c361e47c4687a4f543d3",
+      "directive": "else",
+      "expression": "",
+      "current_line": 57,
+      "original_line": 76,
+      "original_direct_code_count": 7,
+      "original_examples": [
+        {
+          "line": 94,
+          "text": "#define REBASE(p, elem) ((PVOID)((p)->elem) <= MM_HIGHEST_USER_ADDRESS ? \\"
+        },
+        {
+          "line": 95,
+          "text": "((p)->elem) : REBASEALWAYS(p, elem))"
+        },
+        {
+          "line": 96,
+          "text": "#define REBASEPWND(p, elem) ((PWND)REBASE(p, elem))"
+        }
+      ],
+      "original_children": 1,
+      "current_children": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "original_sha256": "b632fc75232db7c2bc95baf758820c087a23f7e17a61c361e47c4687a4f543d3",
+      "directive": "else",
+      "expression": "",
+      "current_line": 64,
+      "original_line": 85,
+      "original_direct_code_count": 2,
+      "original_examples": [
+        {
+          "line": 86,
+          "text": "#define REBASEALWAYS(p, elem) ((PVOID)(((PBYTE)(p) + ((PBYTE)(p)->elem - (p)->head.pSelf))))"
+        },
+        {
+          "line": 87,
+          "text": "#define REBASEPTR(obj, p) ((PVOID)((PBYTE)(p) - ((PBYTE)(obj)->head.pSelf - (PBYTE)(obj))))"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "original_sha256": "b632fc75232db7c2bc95baf758820c087a23f7e17a61c361e47c4687a4f543d3",
+      "directive": "else",
+      "expression": "",
+      "current_line": 68,
+      "original_line": 89,
+      "original_direct_code_count": 2,
+      "original_examples": [
+        {
+          "line": 90,
+          "text": "#define REBASEALWAYS(p, elem) ((PVOID)(((PBYTE)(p) + ((PBYTE)(p)->elem - (p)->head.pSelf))))"
+        },
+        {
+          "line": 91,
+          "text": "#define REBASEPTR(obj, p) ((PVOID)((PBYTE)(p) - ((PBYTE)(obj)->head.pSelf - (PBYTE)(obj))))"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "original_sha256": "b632fc75232db7c2bc95baf758820c087a23f7e17a61c361e47c4687a4f543d3",
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "current_line": 83,
+      "original_line": 131,
+      "original_direct_code_count": 14,
+      "original_examples": [
+        {
+          "line": 133,
+          "text": "DWORD NtGdiGetCharSet("
+        },
+        {
+          "line": 134,
+          "text": "HDC hdc);"
+        },
+        {
+          "line": 136,
+          "text": "INT EngMultiByteToWideChar("
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "original_sha256": "b632fc75232db7c2bc95baf758820c087a23f7e17a61c361e47c4687a4f543d3",
+      "directive": "else",
+      "expression": "",
+      "current_line": 85,
+      "original_line": 148,
+      "original_direct_code_count": 18,
+      "original_examples": [
+        {
+          "line": 150,
+          "text": "UINT GetACP(void);"
+        },
+        {
+          "line": 151,
+          "text": "UINT GetOEMCP(void);"
+        },
+        {
+          "line": 152,
+          "text": "int MultiByteToWideChar("
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "original_sha256": "b632fc75232db7c2bc95baf758820c087a23f7e17a61c361e47c4687a4f543d3",
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "current_line": 91,
+      "original_line": 177,
+      "original_direct_code_count": 34,
+      "original_examples": [
+        {
+          "line": 179,
+          "text": "BOOL _GetTextMetricsW("
+        },
+        {
+          "line": 180,
+          "text": "HDC hdc,"
+        },
+        {
+          "line": 181,
+          "text": "LPTEXTMETRICW ptm);"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "original_sha256": "b632fc75232db7c2bc95baf758820c087a23f7e17a61c361e47c4687a4f543d3",
+      "directive": "else",
+      "expression": "",
+      "current_line": 93,
+      "original_line": 216,
+      "original_direct_code_count": 23,
+      "original_examples": [
+        {
+          "line": 218,
+          "text": "#define UserCreateFontIndirectW   CreateFontIndirectW"
+        },
+        {
+          "line": 219,
+          "text": "#define UserCreateRectRgn         CreateRectRgn"
+        },
+        {
+          "line": 220,
+          "text": "#define UserDeleteObject          DeleteObject"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "current_sha256": "8c677e6104dee8b06268c77688f0286e1095caccceb1e04d58c6d0fe4323b033",
+      "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+      "directive": "else",
+      "expression": "",
+      "current_line": 12,
+      "original_line": 108,
+      "original_direct_code_count": 6,
+      "original_examples": [
+        {
+          "line": 115,
+          "text": "#define ClientSharedInfo()  (&gSharedInfo)"
+        },
+        {
+          "line": 116,
+          "text": "#define ServerInfo()  (gpsi)"
+        },
+        {
+          "line": 122,
+          "text": "#define LPPOINTWOW                LPPOINT"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "current_sha256": "8c677e6104dee8b06268c77688f0286e1095caccceb1e04d58c6d0fe4323b033",
+      "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+      "directive": "else",
+      "expression": "",
+      "current_line": 27,
+      "original_line": 150,
+      "original_direct_code_count": 15,
+      "original_examples": [
+        {
+          "line": 154,
+          "text": "#define DESKTOPVALIDATE(pobj) \\"
+        },
+        {
+          "line": 155,
+          "text": "\\"
+        },
+        {
+          "line": 156,
+          "text": "PCLIENTINFO pci = GetClientInfo();                          \\"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "current_sha256": "8c677e6104dee8b06268c77688f0286e1095caccceb1e04d58c6d0fe4323b033",
+      "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+      "directive": "ifndef",
+      "expression": "WOW",
+      "current_line": 153,
+      "original_line": 344,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 345,
+          "text": "#pragma optimize(\"\", on)"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 0
+    }
+  ]
+}
