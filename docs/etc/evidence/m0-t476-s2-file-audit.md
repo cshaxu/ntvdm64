@@ -320,3 +320,5 @@ The [mode-switch review](../../../artifacts/mvdm-audit/t476-s2-modesw-review.jso
 ## Reused strict file reviews
 
 A further 44 files have hash-matched recursive original-structure and logical-line reviews corroborated by the S1 per-arm ledger and compiler line observations, with no static line leads. Their identities and evidence links are recorded in [the batch](../../../artifacts/mvdm-audit/t476-s2-strict-reused-batch.json). This brings the checklist to 872 reviewed and 183 pending. These records do not establish behavior in unobserved configurations or certify local runtime behavior. No source or product binary changed in this batch.
+
+A further 36 files reuse hash-matched original-tree and local-difference reviews, checked against the per-arm ledger, static line scan and compiler line observations. The [batch record](../../../artifacts/mvdm-audit/t476-s2-reused-local-review-batch.json) preserves each prior review and its limitations. The checklist now records 908 reviewed and 147 pending. No source or product binary changed.

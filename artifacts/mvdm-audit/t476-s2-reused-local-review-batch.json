@@ -1,0 +1,1725 @@
+{
+  "method": "Reuse hash-matched original-tree, local-difference and logical-line prior reviews corroborated by S1 arm observations, static line scan and real compiler line samples; runtime behavior and unobserved configurations are not certified.",
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/dem/dem.h",
+      "current_sha256": "5eeeea3914420309a316496d90912e173bd1be90a4bd09da39e4e7e9069c460f",
+      "original_sha256": "c9c4b4814e1b30ffad29a7716948ec7b6c0ade8f6ab2fbb9fd6998d358706e5a",
+      "prior_full_file_evidence": "s13-r1392-registered-diffs.json",
+      "prior_method": "Review direct retained-arm differences against specific existing mirror registrations after original-tree and source-projection checks; full diffs listed.",
+      "prior_record": {
+        "path": "src/mvdm-host/dos/dem/dem.h",
+        "current_sha256": "5eeeea3914420309a316496d90912e173bd1be90a4bd09da39e4e7e9069c460f",
+        "original_sha256": "c9c4b4814e1b30ffad29a7716948ec7b6c0ade8f6ab2fbb9fd6998d358706e5a",
+        "matched_lines": 212,
+        "strict_tree": {
+          "retained": 7,
+          "excluded": 9,
+          "groups": 13,
+          "retained_leaf_differences": 1
+        },
+        "registered_differences": [
+          "MVDM-HOST-DIV-004",
+          "MVDM-HOST-DIV-005",
+          "MVDM-HOST-DIV-006",
+          "MVDM-HOST-DIV-007",
+          "MVDM-HOST-DIV-801"
+        ],
+        "retained_arm_direct_differences": [
+          {
+            "branch_line": 8,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -40,4 +40,7 @@",
+              " #include \"dossvc.h\"",
+              "+#include <mvdm_guest_location.h>",
+              " /** DEM Externs **/",
+              "-extern ULONG  UNALIGNED *pulDTALocation;",
+              "+/* DIVERGENCE MVDM-HOST-DIV-005: the original x86 pointer identifies a",
+              "+* four-byte guest far-address cell; it is retained numerically. */",
+              "+extern mvdm_guest_location dta_location;",
+              " extern BOOL   VDMForWOW;",
+              "@@ -49,4 +52,12 @@",
+              " extern USHORT nDrives;",
+              "-extern PUSHORT pusCurrentPDB;",
+              "-extern PDEMEXTERR pExtendedError;",
+              "+/* DIVERGENCE MVDM-HOST-DIV-006: current PDB is a two-byte guest scalar;",
+              "+* callers must read it under a fresh bounded lease. */",
+              "+extern mvdm_guest_location current_pdb_location;",
+              "+/* DIVERGENCE MVDM-HOST-DIV-007: the original SFT-chain head was retained as",
+              "+* a native pointer.  It remains the original numeric DS:offset location and",
+              "+* VDD obtains only fresh bounded shadows from it. */",
+              "+extern mvdm_guest_location sft_head_location;",
+              "+/* DIVERGENCE MVDM-HOST-DIV-005: the original x86 pointer is retained as a",
+              "+* numeric guest descriptor; every use must acquire a fresh bounded lease. */",
+              "+extern mvdm_guest_location extended_error_location;",
+              " #include \"demexp.h\""
+            ]
+          },
+          {
+            "branch_line": 54,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -6,2 +6 @@",
+              " #include <nturtl.h>",
+              "-#include <ntdddisk.h>"
+            ]
+          }
+        ]
+      },
+      "hit_arms": 7,
+      "excluded_arms": 9,
+      "compiler_contexts": 12,
+      "compiler_unique_line_samples": 38
+    },
+    {
+      "path": "src/mvdm-host/inc/mvdm.h",
+      "current_sha256": "70a9ae9350c3a0cf1943f292fdad02f2d712c0ed855e48dd90788f701f051380",
+      "original_sha256": "9f450f2eb6ee684763f7f9e27ee43c80e7e24d1e5a87ff254fbd7da4fcd1cdb7",
+      "prior_full_file_evidence": "s13-r1395-local-groups-review.json",
+      "prior_method": "Compare reachable original trees and retained direct diffs; local groups retain recorded states and their complete bodies are recorded. Matching original lines use selected source projection.",
+      "prior_record": {
+        "path": "src/mvdm-host/inc/mvdm.h",
+        "current_sha256": "70a9ae9350c3a0cf1943f292fdad02f2d712c0ed855e48dd90788f701f051380",
+        "original_sha256": "9f450f2eb6ee684763f7f9e27ee43c80e7e24d1e5a87ff254fbd7da4fcd1cdb7",
+        "matched_lines": 64,
+        "groups": {
+          "excluded": 3,
+          "original_groups": 3,
+          "local_groups": 1,
+          "selected": 1
+        },
+        "local_groups": [
+          {
+            "line": 73,
+            "signature": [
+              [
+                "if",
+                "defined(_M_IX86)"
+              ],
+              [
+                "else",
+                ""
+              ]
+            ]
+          }
+        ],
+        "direct_diffs": [
+          {
+            "branch_line": 72,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -1,4 +0,0 @@",
+              "-#define FETCHWORD(s)  (*(UNALIGNED WORD *)&(s))",
+              "-#define FETCHDWORD(s) (*(UNALIGNED DWORD *)&(s))",
+              "-#define STOREWORD(d,s)  *(UNALIGNED WORD *)&(d)=(WORD)s",
+              "-#define STOREDWORD(d,s) *(UNALIGNED DWORD *)&(d)=(DWORD)s"
+            ]
+          }
+        ],
+        "issues": [],
+        "registered_differences": [
+          "MVDM-SUPPORT-DIV-006"
+        ],
+        "local_group_bodies": [
+          {
+            "line": 73,
+            "arms": [
+              {
+                "directive": "if",
+                "expression": "defined(_M_IX86)",
+                "body": [
+                  "#line 74",
+                  "#define FETCHWORD(s)\t((WORD)(s))",
+                  "#define FETCHDWORD(s)\t((DWORD)(s))",
+                  "#define STOREWORD(d,s)\t(WORD)d=(WORD)s",
+                  "#define STOREDWORD(d,s) (DWORD)d=(DWORD)s"
+                ]
+              },
+              {
+                "directive": "else",
+                "expression": "",
+                "body": [
+                  "#line 79",
+                  "#error Unsupported non-x86 MVDM host access profile"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "hit_arms": 2,
+      "excluded_arms": 4,
+      "compiler_contexts": 104,
+      "compiler_unique_line_samples": 4
+    },
+    {
+      "path": "src/mvdm-host/inc/wowusr.h",
+      "current_sha256": "ce4f2f8a6d337d962cffc6b4c99aa6e593856e32430335878a6798475e48abd3",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "prior_full_file_evidence": "s13-r1334-excluded-only-review.json",
+      "prior_method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior. Complete-file classification additionally requires the entire outside-arm selected original/current projection to match after ignoring blank lines and edge whitespace; all matching code logical positions must agree.",
+      "prior_record": {
+        "path": "src/mvdm-host/inc/wowusr.h",
+        "status": "pass",
+        "current_sha256": "ce4f2f8a6d337d962cffc6b4c99aa6e593856e32430335878a6798475e48abd3",
+        "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+        "excluded_arms": 41,
+        "matching_code_lines": 2571,
+        "complete_condition_and_selected_projection": true,
+        "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+      },
+      "hit_arms": 0,
+      "excluded_arms": 41,
+      "compiler_contexts": 74,
+      "compiler_unique_line_samples": 512
+    },
+    {
+      "path": "src/mvdm-host/oemuni/process.c",
+      "current_sha256": "179c07c8e1542ed304baebecdbd975431818fc1b7ea4494c22d35a433ed1f8e9",
+      "original_sha256": "38c9125f9f3c43f32f696616e565e63b8f056da7ec264d980a5e5278cc640468",
+      "prior_full_file_evidence": "s13-r1335-tree-recheck.json",
+      "prior_method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior.",
+      "prior_record": {
+        "path": "src/mvdm-host/oemuni/process.c",
+        "status": "pass",
+        "current_sha256": "179c07c8e1542ed304baebecdbd975431818fc1b7ea4494c22d35a433ed1f8e9",
+        "original_sha256": "38c9125f9f3c43f32f696616e565e63b8f056da7ec264d980a5e5278cc640468",
+        "excluded_arms": 1,
+        "matching_code_lines": 529
+      },
+      "hit_arms": 0,
+      "excluded_arms": 1,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 74
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "current_sha256": "951d12ec9c14056c9269e5d10a773f2be3d4de1c7e646ce68cc7311887856b3d",
+      "original_sha256": "f7b5efebebd8bf8c6ad5c56adb74c8217490b2b92f113b1e850401fd5f029500",
+      "prior_full_file_evidence": "s13-r1395-local-groups-review.json",
+      "prior_method": "Compare reachable original trees and retained direct diffs; local groups retain recorded states and their complete bodies are recorded. Matching original lines use selected source projection.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+        "current_sha256": "951d12ec9c14056c9269e5d10a773f2be3d4de1c7e646ce68cc7311887856b3d",
+        "original_sha256": "f7b5efebebd8bf8c6ad5c56adb74c8217490b2b92f113b1e850401fd5f029500",
+        "matched_lines": 108,
+        "groups": {
+          "selected": 5,
+          "original_groups": 6,
+          "local_groups": 2,
+          "excluded": 1
+        },
+        "local_groups": [
+          {
+            "line": 87,
+            "signature": [
+              [
+                "if",
+                "defined(CPU_40_STYLE)&&defined(C_VID)"
+              ],
+              [
+                "else",
+                ""
+              ]
+            ]
+          },
+          {
+            "line": 100,
+            "signature": [
+              [
+                "if",
+                "defined(CPU_40_STYLE)&&defined(C_VID)"
+              ],
+              [
+                "else",
+                ""
+              ]
+            ]
+          }
+        ],
+        "direct_diffs": [
+          {
+            "branch_line": 99,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -1 +0,0 @@",
+              "-void (*str_read) IPT3(IU8 *, dest, ULONG, offset, ULONG, count);"
+            ]
+          }
+        ],
+        "issues": [],
+        "registered_differences": [
+          "MVDM-HOST-DIV-089"
+        ],
+        "local_group_bodies": [
+          {
+            "line": 87,
+            "arms": [
+              {
+                "directive": "if",
+                "expression": "defined(CPU_40_STYLE) && defined(C_VID)",
+                "body": [
+                  "\t/* DIVERGENCE MVDM-HOST-DIV-089: selected C-video EVID glue uses the",
+                  "\t * exact IU32 offset/count contract below.  The historical ULONG carrier",
+                  "\t * only matched it by 32-bit typedef coincidence. */",
+                  "#line 87",
+                  "\tIU32 (*b_read) IPT1(IU32, eaOff);",
+                  "\tIU32 (*w_read) IPT1(IU32, eaOff);"
+                ]
+              },
+              {
+                "directive": "else",
+                "expression": "",
+                "body": [
+                  "#line 87",
+                  "#error DIVERGENCE MVDM-HOST-DIV-618: unsupported generic video callback profile"
+                ]
+              }
+            ]
+          },
+          {
+            "line": 100,
+            "arms": [
+              {
+                "directive": "if",
+                "expression": "defined(CPU_40_STYLE) && defined(C_VID)",
+                "body": [
+                  "#line 91",
+                  "\tvoid (*str_read) IPT3(IU8 *, dest, IU32, eaOff, IU32, count);"
+                ]
+              },
+              {
+                "directive": "else",
+                "expression": "",
+                "body": [
+                  "#line 91",
+                  "#error Excluded unsupported generic string video callback profile"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "hit_arms": 7,
+      "excluded_arms": 3,
+      "compiler_contexts": 10,
+      "compiler_unique_line_samples": 21
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "current_sha256": "c82031be6b27b472780c58209a474e589387d52e243b78e62a8f14c0e2780232",
+      "original_sha256": "2d196d9f0c1ef860436d8eb47c01820913a1164dd1b32e3bd518226653476785",
+      "prior_full_file_evidence": "s13-r1334-excluded-only-review.json",
+      "prior_method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior. Complete-file classification additionally requires the entire outside-arm selected original/current projection to match after ignoring blank lines and edge whitespace; all matching code logical positions must agree.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+        "status": "pass",
+        "current_sha256": "c82031be6b27b472780c58209a474e589387d52e243b78e62a8f14c0e2780232",
+        "original_sha256": "2d196d9f0c1ef860436d8eb47c01820913a1164dd1b32e3bd518226653476785",
+        "excluded_arms": 19,
+        "matching_code_lines": 158,
+        "complete_condition_and_selected_projection": true,
+        "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+      },
+      "hit_arms": 0,
+      "excluded_arms": 19,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 42
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "current_sha256": "49b235efd0b6ccb1c226f63e17b5838c5ed441487bc68340f4d3b03179117474",
+      "original_sha256": "42b33f105e30d31a2805d9f835a74d80c47b4d96ee77101c18f096772e60c47a",
+      "prior_full_file_evidence": "s13-r1392-registered-diffs.json",
+      "prior_method": "Review direct retained-arm differences against specific existing mirror registrations after original-tree and source-projection checks; full diffs listed.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+        "current_sha256": "49b235efd0b6ccb1c226f63e17b5838c5ed441487bc68340f4d3b03179117474",
+        "original_sha256": "42b33f105e30d31a2805d9f835a74d80c47b4d96ee77101c18f096772e60c47a",
+        "matched_lines": 457,
+        "strict_tree": {
+          "retained": 22,
+          "excluded": 16,
+          "groups": 30,
+          "retained_leaf_differences": 1
+        },
+        "registered_differences": [
+          "MVDM-HOST-DIV-136",
+          "MVDM-HOST-DIV-074",
+          "MVDM-HOST-DIV-088"
+        ],
+        "retained_arm_direct_differences": [
+          {
+            "branch_line": 87,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -1,9 +1,11 @@",
+              "-IMPORT VOID ega_copy_b_write();",
+              "-IMPORT VOID ega_mode0_chn_b_write();",
+              "-IMPORT VOID ega_mode1_chn_b_write();",
+              "-IMPORT VOID ega_mode2_chn_b_write();",
+              "-IMPORT VOID ega_copy_w_write();",
+              "-IMPORT VOID ega_mode0_chn_w_write();",
+              "-IMPORT VOID ega_mode1_chn_w_write();",
+              "-IMPORT VOID ega_mode2_chn_w_write();",
+              "+/* DIVERGENCE(MVDM-HOST-DIV-136): preserve the original writer table order,",
+              "+* with the exact original provider parameter contracts. */",
+              "+IMPORT VOID ega_copy_b_write IPT2(ULONG, value, ULONG, offset);",
+              "+IMPORT VOID ega_mode0_chn_b_write IPT2(ULONG, value, ULONG, offset);",
+              "+IMPORT VOID ega_mode1_chn_b_write IPT2(ULONG, value, ULONG, offset);",
+              "+IMPORT VOID ega_mode2_chn_b_write IPT2(ULONG, value, ULONG, offset);",
+              "+IMPORT VOID ega_copy_w_write IPT2(ULONG, value, ULONG, offset);",
+              "+IMPORT VOID ega_mode0_chn_w_write IPT2(ULONG, value, ULONG, offset);",
+              "+IMPORT VOID ega_mode1_chn_w_write IPT2(ULONG, value, ULONG, offset);",
+              "+IMPORT VOID ega_mode2_chn_w_write IPT2(ULONG, value, ULONG, offset);",
+              " /* Handy array to extract all 4 plane values in one go. */"
+            ]
+          },
+          {
+            "branch_line": 143,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -4,5 +4,9 @@",
+              " extern void  fill_byte_ev_glue IPT3(IU32, eaOff, IU8, eaVal, IU32, count);",
+              "-extern void  fill_word_ev_glue IPT3(IU32, eaOff, IU8, eaVal, IU32, count);",
+              "+/* DIVERGENCE MVDM-HOST-DIV-074: match the original glue body's IU16 word value. */",
+              "+extern void  fill_word_ev_glue IPT3(IU32, eaOff, IU16, eaVal, IU32, count);",
+              " extern void  move_byte_fwd_ev_glue IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);",
+              " extern void  move_word_fwd_ev_glue IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);",
+              "+/* DIVERGENCE MVDM-HOST-DIV-088: use the original C-video selector body's",
+              "+* exact no-argument contract rather than an implicit host-int call. */",
+              "+extern void setWritePointers IPT0();",
+              " MEM_HANDLERS Glue_writes ="
+            ]
+          }
+        ]
+      },
+      "hit_arms": 22,
+      "excluded_arms": 16,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 80
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "current_sha256": "941078c44c2d12aec016392615e2348676a23e540f18d2cb023ca9fb27004282",
+      "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+      "prior_full_file_evidence": "s13-r1395-local-groups-review.json",
+      "prior_method": "Compare reachable original trees and retained direct diffs; local groups retain recorded states and their complete bodies are recorded. Matching original lines use selected source projection.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/host/src/config.c",
+        "current_sha256": "941078c44c2d12aec016392615e2348676a23e540f18d2cb023ca9fb27004282",
+        "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+        "matched_lines": 864,
+        "groups": {
+          "selected": 7,
+          "original_groups": 21,
+          "excluded": 16,
+          "local_groups": 1
+        },
+        "local_groups": [
+          {
+            "line": 435,
+            "signature": [
+              [
+                "if",
+                "defined(_M_IX86)&&!defined(CPU_40_STYLE)"
+              ],
+              [
+                "else",
+                ""
+              ]
+            ]
+          }
+        ],
+        "direct_diffs": [
+          {
+            "branch_line": 434,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -1,11 +0,0 @@",
+              "-vdmMemorySize = GetVDMSize(VDMForWOW);",
+              "-// Extend the vdm size if the user asks for it through a .PIF.",
+              "-// Also make sure we have at least appropriate size of dpmi",
+              "-// memory.",
+              "-//",
+              "-if ((xmsMemorySize + emsMemorySize +  1024 + dpmiMemorySize) >",
+              "-vdmMemorySize)",
+              "-{",
+              "-vdmMemorySize = xmsMemorySize + emsMemorySize + 1024 +",
+              "-dpmiMemorySize;",
+              "-}"
+            ]
+          }
+        ],
+        "issues": [],
+        "registered_differences": [
+          "MVDM-HOST-DIV-056"
+        ],
+        "local_group_bodies": [
+          {
+            "line": 435,
+            "arms": [
+              {
+                "directive": "if",
+                "expression": "defined(_M_IX86) && !defined(CPU_40_STYLE)",
+                "body": [
+                  "#line 510",
+                  "#error Excluded unsupported non-CPU40 i386 memory-size profile"
+                ]
+              },
+              {
+                "directive": "else",
+                "expression": "",
+                "body": [
+                  "#line 510",
+                  "\t vdmMemorySize = GetVDMSize(VDMForWOW);",
+                  "",
+                  "\t // Extend the vdm size if the user asks for it through a .PIF.",
+                  "\t // Also make sure we have at least appropriate size of dpmi",
+                  "\t // memory.",
+                  "\t //",
+                  "\t if ((xmsMemorySize + emsMemorySize +  1024 + dpmiMemorySize) >",
+                  "\t      vdmMemorySize)",
+                  "\t {",
+                  "\t    vdmMemorySize = xmsMemorySize + emsMemorySize + 1024 +",
+                  "\t\t\t    dpmiMemorySize;",
+                  "\t }"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "hit_arms": 8,
+      "excluded_arms": 17,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 145
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_hosts.c",
+      "current_sha256": "9fde43cfebd448ff03be94b44ffef71fc039567e665524d40c1e144e8a282c1c",
+      "original_sha256": "9840cb53a0298fdf7f9d27ade387c57659e3c57afbe587cfdf63fbdbafe8c41d",
+      "prior_full_file_evidence": "s13-r1336-tree-recheck.json",
+      "prior_method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_hosts.c",
+        "status": "pass",
+        "current_sha256": "9fde43cfebd448ff03be94b44ffef71fc039567e665524d40c1e144e8a282c1c",
+        "original_sha256": "9840cb53a0298fdf7f9d27ade387c57659e3c57afbe587cfdf63fbdbafe8c41d",
+        "excluded_arms": 4,
+        "matching_code_lines": 143
+      },
+      "hit_arms": 0,
+      "excluded_arms": 4,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 45
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "current_sha256": "af1f7a46666b40366ef536931ea0d03c9c89e33420b3f059fff08681ef84951a",
+      "original_sha256": "a3465d006a88549ce5fd52ac3f8d9c0dcf1f2b2c6825f35db3d2dc683fbc7abe",
+      "prior_full_file_evidence": "s13-r1398-local-groups-review.json",
+      "prior_method": "Compare reachable original trees and retained direct diffs; local groups retain recorded states and complete bodies are recorded. Matching original lines use selected source projection.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+        "current_sha256": "af1f7a46666b40366ef536931ea0d03c9c89e33420b3f059fff08681ef84951a",
+        "original_sha256": "a3465d006a88549ce5fd52ac3f8d9c0dcf1f2b2c6825f35db3d2dc683fbc7abe",
+        "matched_lines": 208,
+        "groups": {
+          "local_groups": 3,
+          "excluded": 7,
+          "original_groups": 12,
+          "selected": 8
+        },
+        "local_groups": [
+          {
+            "line": 42,
+            "signature": [
+              [
+                "ifdef",
+                "CCPU"
+              ]
+            ]
+          },
+          {
+            "line": 239,
+            "signature": [
+              [
+                "ifdef",
+                "CCPU"
+              ]
+            ]
+          },
+          {
+            "line": 423,
+            "signature": [
+              [
+                "ifdef",
+                "CCPU"
+              ]
+            ]
+          }
+        ],
+        "direct_diffs": [
+          {
+            "branch_line": 23,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -7,2 +7,3 @@",
+              " #include \"host_def.h\"",
+              "+#include CpuH",
+              " #include \"gdpvar.h\"",
+              "@@ -10,2 +11,5 @@",
+              " #include \"debug.h\"",
+              "+#include \"ios.h\"",
+              "+#include \"ntvdm-exe/softpc/include/mvdm_softpc_termination.h\"",
+              "+#include \"ntvdm-exe/softpc/include/mvdm_softpc_effective_address.h\"",
+              " /* Make local symbols visible if debugging. */"
+            ]
+          },
+          {
+            "branch_line": 152,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -3,2 +3,21 @@",
+              " BOOL returnStatus = FALSE;",
+              "+/* DIVERGENCE(MVDM-HOST-DIV-307): observation only for the original",
+              "+* WOW_x86 INT 2Ah fast LDT publication protocol.  NT4's kernel trap",
+              "+* recognizes EAX==EBP==F0F0F0F1 and calls NtSetLdtEntries with EBX,",
+              "+* ECX and EDX.  CPU40 deliberately retains the normal software-",
+              "+* interrupt dispatch here; this witness records the existing protocol",
+              "+* before any standalone carrier is selected. */",
+              "+if (int_no == 0x2a && getEAX() == 0xf0f0f0f1UL &&",
+              "+getEBP() == 0xf0f0f0f1UL) {",
+              "+mvdm_softpc_report_wow_int2a_ldt((unsigned short)getEBX(),",
+              "+(unsigned long)getECX(), (unsigned long)getEDX());",
+              "+}",
+              "+if (int_no == 0x2a) {",
+              "+/* DIVERGENCE(MVDM-HOST-DIV-309): default-off scalar witness for the",
+              "+* original WOW_x86 kernel-LDT carrier.  It precedes no decision and",
+              "+* cannot alter the existing software-interrupt dispatch. */",
+              "+mvdm_softpc_report_wow_int2a((unsigned long)getEAX(),",
+              "+(unsigned long)getEBX(), (unsigned long)getECX(),",
+              "+(unsigned long)getEDX(), (unsigned long)getEBP());",
+              "+}",
+              " /* software interrupt handler defined ? */"
+            ]
+          },
+          {
+            "branch_line": 238,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -3,2 +3,3 @@",
+              " BOOL returnStatus = FALSE;",
+              "+BOOL handlerInstalled = EXIntHandler != NULL;",
+              " /* exception interrupt handler defined ? */",
+              "@@ -8,2 +9,7 @@",
+              " }",
+              "+/* DIVERGENCE(MVDM-HOST-DIV-308): default-off observation of the",
+              "+* source-defined CCPU exception-hook result.  This locates a missing",
+              "+* DOSX fault-vector publication without changing the hook contract. */",
+              "+mvdm_softpc_report_wow_exception_hook((ULONG)exp_no, (ULONG)error_code,",
+              "+(ULONG)handlerInstalled, (ULONG)returnStatus);",
+              " return( returnStatus );"
+            ]
+          }
+        ],
+        "issues": [],
+        "registered_differences": [
+          "MVDM-HOST-DIV-473",
+          "MVDM-HOST-DIV-480",
+          "MVDM-HOST-DIV-544",
+          "MVDM-HOST-DIV-307",
+          "MVDM-HOST-DIV-308",
+          "MVDM-HOST-DIV-309"
+        ],
+        "local_group_bodies": [
+          {
+            "line": 42,
+            "arms": [
+              {
+                "directive": "ifdef",
+                "expression": "CCPU",
+                "body": [
+                  "#include <c_xcptn.h>",
+                  "#include <c_reg.h>"
+                ]
+              }
+            ]
+          },
+          {
+            "line": 239,
+            "arms": [
+              {
+                "directive": "ifdef",
+                "expression": "CCPU",
+                "body": [
+                  "/* Non-faulting fetch for the CPU40 monitor path. The CPU's cached decision",
+                  " * remains authoritative; a cache miss uses its page-protection rules. */",
+                  "static BOOL monitor_read_ram(ULONG physical, void *value, ULONG size)",
+                  "{",
+                  "    extern unsigned long c_sas_memory_size(void);",
+                  "    extern int c_sas_memory_type(unsigned long);",
+                  "    extern unsigned char *c_GetPhyAdd(unsigned long);",
+                  "    extern unsigned long SasWrapMask;",
+                  "    ULONG available=c_sas_memory_size();",
+                  "    int first, last;",
+                  "    if (!size) return FALSE;",
+                  "    physical &= SasWrapMask;",
+                  "    if (size-1 > SasWrapMask-physical) return FALSE;",
+                  "    if (physical>=available || size>available-physical) return FALSE;",
+                  "    first=c_sas_memory_type(physical);last=c_sas_memory_type(physical+size-1);",
+                  "    if ((first!=0 && first!=2) || (last!=0 && last!=2)) return FALSE;",
+                  "    CopyMemory(value,c_GetPhyAdd(physical),size);",
+                  "    return TRUE;",
+                  "}",
+                  "",
+                  "static BOOL monitor_translate(ULONG linear, BOOL write, ULONG *physical)",
+                  "{",
+                  "    extern unsigned long c_getCR0(void), c_getCR3(void);",
+                  "    extern int xtrn2phy(unsigned long, unsigned char, unsigned long *);",
+                  "    extern int ccpu_monitor_cached_access(unsigned long, unsigned char, unsigned long *);",
+                  "    UCHAR access=(getCPL()==3 ? 2 : 0) | (write ? 1 : 0);",
+                  "    *physical=linear;",
+                  "    if (c_getCR0() & 0x80000000UL) {",
+                  "        ULONG pde,pte,dir=(c_getCR3() & 0xfffff000UL)+((linear>>22)<<2);",
+                  "        ULONG table;",
+                  "        int cached=ccpu_monitor_cached_access(linear,access,physical);",
+                  "        if(cached<0) return FALSE;",
+                  "        if(cached>0) return TRUE;",
+                  "        if (!monitor_read_ram(dir,&pde,sizeof(pde)) || !(pde&1)) return FALSE;",
+                  "        table=(pde&0xfffff000UL)+(((linear>>12)&0x3ffUL)<<2);",
+                  "        if (!monitor_read_ram(table,&pte,sizeof(pte)) || !(pte&1)) return FALSE;",
+                  "        if (!xtrn2phy(linear,access,physical)) return FALSE;",
+                  "    }",
+                  "    return TRUE;",
+                  "}",
+                  "",
+                  "static BOOL monitor_mark_access(ULONG linear, BOOL write, ULONG expected)",
+                  "{",
+                  "    extern unsigned long c_getCR0(void);",
+                  "    extern unsigned long SasWrapMask;",
+                  "    extern int xtrn2phy(unsigned long, unsigned char, unsigned long *);",
+                  "    ULONG physical;",
+                  "    UCHAR access=(getCPL()==3 ? 2 : 0) | (write ? 1 : 0) | 4;",
+                  "    if (!(c_getCR0() & 0x80000000UL)) return (linear & SasWrapMask)==expected;",
+                  "    return xtrn2phy(linear,access,&physical) && (physical & SasWrapMask)==expected;",
+                  "}",
+                  "",
+                  "typedef struct { ULONG ip, base, limit; } MONITOR_CODE;",
+                  "",
+                  "static BOOL monitor_segment(USHORT selector, ULONG *base, ULONG *limit, ULONG *access)",
+                  "{",
+                  "    BOOL was_contributory=doing_contributory, resolved;",
+                  "    /* A nested CPU fault can leave through c_cpu_continue without returning. */",
+                  "    doing_contributory=FALSE;",
+                  "    resolved=mvdm_softpc_protected_segment(selector,base,limit,access);",
+                  "    doing_contributory=was_contributory;",
+                  "    return resolved;",
+                  "}",
+                  "",
+                  "static BOOL monitor_fetch_byte(const MONITOR_CODE *code, ULONG displacement, UCHAR *value)",
+                  "{",
+                  "    extern unsigned long SasWrapMask;",
+                  "    ULONG offset=code->ip+displacement, linear, physical;",
+                  "    if (offset>code->limit) return FALSE;",
+                  "    /* NT4 forms the guest linear address with 32-bit addition. */",
+                  "    linear=code->base+offset;",
+                  "    if (!monitor_translate(linear,FALSE,&physical)) return FALSE;",
+                  "    if (!monitor_read_ram(physical,value,1)) return FALSE;",
+                  "    /* The original host read participates in paging accessed accounting. */",
+                  "    return monitor_mark_access(linear,FALSE,physical & SasWrapMask);",
+                  "}",
+                  "",
+                  "/* KiVdmSetUserCR0 accepts only the guest's MP/EM bits. CPU40 owns the",
+                  " * virtual CR0; do not touch PE, paging, TS or host processor state. */",
+                  "static void monitor_set_npx_control(ULONG value)",
+                  "{",
+                  "    extern unsigned long c_getCR0(void);",
+                  "    extern void c_setCR0(unsigned long);",
+                  "    c_setCR0((c_getCR0() & ~6UL) | (value & 6UL));",
+                  "}",
+                  "",
+                  "/* Original VdmDecodeOperand's 16-bit memory-address forms for LMSW. */",
+                  "static BOOL monitor_lmsw_operand(const MONITOR_CODE *code, ULONG *cursor, UCHAR modrm, ULONG *value)",
+                  "{",
+                  "    extern unsigned long SasWrapMask;",
+                  "    ULONG offset=0, base, limit, access, linear, physical[4], i;",
+                  "    UCHAR lo,hi,bytes[4],mode=modrm>>6,rm=modrm&7;",
+                  "    BOOL stack=FALSE;",
+                  "    switch(rm) {",
+                  "        case 0: offset=getBX()+getSI();break;",
+                  "        case 1: offset=getBX()+getDI();break;",
+                  "        case 2: offset=getBP()+getSI();stack=TRUE;break;",
+                  "        case 3: offset=getBP()+getDI();stack=TRUE;break;",
+                  "        case 4: offset=getSI();break;",
+                  "        case 5: offset=getDI();break;",
+                  "        case 6: if(mode) {offset=getBP();stack=TRUE;} break;",
+                  "        default: offset=getBX();break;",
+                  "    }",
+                  "    if(mode==1) {",
+                  "            if(!monitor_fetch_byte(code,(*cursor)++,&lo)) return FALSE;",
+                  "            offset+=(signed char)lo;",
+                  "    } else if(mode==2 || (mode==0 && rm==6)) {",
+                  "            if(!monitor_fetch_byte(code,(*cursor)++,&lo) ||",
+                  "               !monitor_fetch_byte(code,(*cursor)++,&hi)) return FALSE;",
+                  "            offset+=(ULONG)lo | ((ULONG)hi<<8);",
+                  "    }",
+                  "    /* VdmDecodeOperand accumulates zero-extended 16-bit registers and",
+                  "     * signed displacement in EBX, without truncating or checking the",
+                  "     * default selector's segment limit before adding its base. */",
+                  "    if(!monitor_segment(stack ? getSS() : getDS(),&base,&limit,&access)) return FALSE;",
+                  "    linear=base+offset;",
+                  "    /* VdmOpcodeLmsw reads a dword before KiVdmSetUserCR0 masks it. */",
+                  "    if(linear>0xfffffffcUL) return FALSE;",
+                  "    for(i=0;i<4;i++) if(!monitor_translate(linear+i,FALSE,&physical[i]) ||",
+                  "        !monitor_read_ram(physical[i],&bytes[i],1)) return FALSE;",
+                  "    for(i=0;i<4;i++) if(!monitor_mark_access(linear+i,FALSE,physical[i]&SasWrapMask)) return FALSE;",
+                  "    *value=(ULONG)bytes[0] | ((ULONG)bytes[1]<<8);",
+                  "    return TRUE;",
+                  "}",
+                  "",
+                  "/* NT4 EventVdmStringIo's 16-bit count/index contract.",
+                  " * Decline unsupported mappings before any I/O. */",
+                  "static BOOL monitor_string_io(UCHAR op)",
+                  "{",
+                  "    extern unsigned long c_sas_memory_size(void);",
+                  "    extern int c_sas_memory_type(unsigned long);",
+                  "    extern unsigned char *c_GetPhyAdd(unsigned long);",
+                  "    extern unsigned long SasWrapMask;",
+                  "    extern void insb(io_addr,half_word *,word), insw(io_addr,word *,word);",
+                  "    extern void outsb(io_addr,half_word *,word), outsw(io_addr,word *,word);",
+                  "    BOOL input=(op==0x6c || op==0x6d), direct;",
+                  "    ULONG width=(op==0x6d || op==0x6f) ? 2 : 1;",
+                  "    ULONG count=1, index=input ? getDI() : getSI();",
+                  "    ULONG bytes=count*width, address, base, limit, access, i, physical;",
+                  "    ULONG available=c_sas_memory_size();",
+                  "    ULONG mapping[2];",
+                  "    union { USHORT aligned; UCHAR bytes[2]; } storage;",
+                  "    UCHAR *buffer=storage.bytes;",
+                  "    /* SIM32 uses the current selector-table descriptor, not the CPU cache. */",
+                  "    if(!monitor_segment(input ? getES() : getDS(),&base,&limit,&access)) return FALSE;",
+                  "    address=base+index;",
+                  "    if (bytes && address+bytes-1<address) return FALSE;",
+                  "    for(i=0;i<bytes;i++) {",
+                  "        int type;",
+                  "        if(!monitor_translate(address+i,input,&physical)) goto string_unhandled;",
+                  "        physical &= SasWrapMask;",
+                  "        if(physical>=available) goto string_unhandled;",
+                  "        type=c_sas_memory_type(physical);",
+                  "        if (input ? type!=0 : (type!=0 && type!=2)) goto string_unhandled;",
+                  "        mapping[i]=physical;",
+                  "        /* The original IOS routine receives the existing guest buffer. */",
+                  "        buffer[i]=*c_GetPhyAdd(physical);",
+                  "    }",
+                  "    for(i=0;i<bytes;i+=0x1000UL-((address+i)&0xfffUL)) {",
+                  "        if(!monitor_mark_access(address+i,input,mapping[i])) goto string_unhandled;",
+                  "    }",
+                  "    /* The original monitor passes its guest pointer to the device.  Use",
+                  "     * that same live storage when the validated bytes are contiguous. */",
+                  "    direct=(bytes==1 || c_GetPhyAdd(mapping[1])==c_GetPhyAdd(mapping[0])+1);",
+                  "    if(direct) buffer=c_GetPhyAdd(mapping[0]);",
+                  "    /* Reuse the original monitor IOS entries and their adapter routing. */",
+                  "    if(input && width==1) insb(getDX(),(half_word *)buffer,(word)count);",
+                  "    else if(input) insw(getDX(),(word *)buffer,(word)count);",
+                  "    else if(width==1) outsb(getDX(),(half_word *)buffer,(word)count);",
+                  "    else outsw(getDX(),(word *)buffer,(word)count);",
+                  "    if(input && !direct)for(i=0;i<bytes;i++)*c_GetPhyAdd(mapping[i])=buffer[i];",
+                  "    index=(USHORT)(getDF() ? index-bytes : index+bytes);",
+                  "    if(input)setDI(index);else setSI(index);",
+                  "    return TRUE;",
+                  "string_unhandled:",
+                  "    return FALSE;",
+                  "}"
+                ]
+              }
+            ]
+          },
+          {
+            "line": 423,
+            "arms": [
+              {
+                "directive": "ifdef",
+                "expression": "CCPU",
+                "body": [
+                  "    /* DIVERGENCE(MVDM-HOST-DIV-473): provisional CPU40 host monitor dispatch. Further instruction, paging and lifecycle coverage is required before release. */",
+                  "    /* DIVERGENCE(MVDM-HOST-DIV-480): NT4's protected-VDM Kt0d110 attempts",
+                  "     * opcode dispatch for #GP without filtering its error code; unhandled",
+                  "     * operations retain the original handler and its complete code below. */",
+                  "    /* DIVERGENCE(MVDM-HOST-DIV-544): only the installed NT DPMI fault",
+                  "     * owner admits the protected-VDM monitor. Without that owner a guest",
+                  "     * VMM owns its IDT and I/O bitmap, including its protected-mode #GPs. */",
+                  "    if (handlerInstalled && exp_no == 13 && getCPL() != 0 && !getVM()) {",
+                  "        extern unsigned long c_getEIP(void);",
+                  "        extern void IN8(unsigned long *,unsigned long), IN16(unsigned long *,unsigned long);",
+                  "        extern void OUT8(unsigned long,unsigned long), OUT16(unsigned long,unsigned long);",
+                  "        extern void ccpu_monitor_dispatch_irq(void);",
+                  "        unsigned long ip=c_getEIP(), cs_access;",
+                  "        MONITOR_CODE code;",
+                  "        unsigned char op;",
+                  "        code.ip=ip;",
+                  "        if(!monitor_segment(getCS(),&code.base,&code.limit,&cs_access) ||",
+                  "           (cs_access&0x98)!=0x98) goto candidate_unhandled;",
+                  "        if (monitor_fetch_byte(&code,0,&op)) {",
+                  "            unsigned long prefix=0;",
+                  "            while (op==0x26 || op==0x2e || op==0x36 || op==0x3e ||",
+                  "                   op==0x64 || op==0x65 || op==0x66 || op==0x67 || op==0xf0 || op==0xf2 || op==0xf3) {",
+                  "                ++prefix;",
+                  "                if(prefix>=128 || !monitor_fetch_byte(&code,prefix,&op))",
+                  "                    goto candidate_unhandled;",
+                  "            }",
+                  "            if(op==0x0f) {",
+                  "                unsigned char second, modrm;",
+                  "                /* NT4 Opcode0F initializes RiEip from the original trap",
+                  "                 * EIP and advances it once, so a leading prefix is not a",
+                  "                 * supported 0F dispatch. Preserve its fallback path. */",
+                  "                if(prefix) goto candidate_unhandled;",
+                  "                if(!monitor_fetch_byte(&code,prefix+1,&second)) goto candidate_unhandled;",
+                  "                /* NT4 VdmOpcodeClts intentionally performs no CR0 change. */",
+                  "                if(second==0x06) {setEIP(ip+prefix+2);return TRUE;}",
+                  "                if(second==0x20) {",
+                  "                    ULONG value;",
+                  "                    extern unsigned long c_getCR0(void);",
+                  "                    if(!monitor_fetch_byte(&code,prefix+2,&modrm) || (modrm&0xc0)!=0xc0) goto candidate_unhandled;",
+                  "                    value=(modrm&0x38) ? 0 : (c_getCR0() & ~8UL);",
+                  "                    SET_GR(modrm & 7,value);",
+                  "                    setEIP(ip+prefix+3);return TRUE;",
+                  "                }",
+                  "                if(second==0x21 || second==0x23) {",
+                  "                    extern unsigned long CCPU_DR[8];",
+                  "                    extern void ccpu_monitor_write_dr(unsigned long,unsigned long);",
+                  "                    ULONG value, index;",
+                  "                    if(!monitor_fetch_byte(&code,prefix+2,&modrm) || (modrm&0xc0)!=0xc0) goto candidate_unhandled;",
+                  "                    index=(modrm>>3)&7;",
+                  "                    if(second==0x21) {",
+                  "                        value=(index==4 || index==5) ? 0 : CCPU_DR[index];",
+                  "                        if(index==6)value&=0x0000e00fUL;",
+                  "                        if(index==7)value&=0xffff0155UL;",
+                  "                        SET_GR(modrm & 7,value);",
+                  "                    } else if(index!=4 && index!=5) {",
+                  "                        value=GET_GR(modrm & 7);",
+                  "                        if(index<4)value&=0x00ffffffUL;",
+                  "                        else if(index==6)value&=0x0000e00fUL;",
+                  "                        else value=(value | ((value&0x2aaUL)>>1)) & 0xffff0155UL;",
+                  "                        /* The breakpoint check observes the next instruction. */",
+                  "                        setEIP(ip+prefix+3);",
+                  "                        ccpu_monitor_write_dr(index,value);",
+                  "                        /* A #DB handler may have changed EIP. */",
+                  "                        return TRUE;",
+                  "                    }",
+                  "                    setEIP(ip+prefix+3);return TRUE;",
+                  "                }",
+                  "                if(second==0x22 || second==0x01) {",
+                  "                    ULONG operand, next=prefix+3;",
+                  "                    if(!monitor_fetch_byte(&code,prefix+2,&modrm)) goto candidate_unhandled;",
+                  "                    if(second==0x22) {",
+                  "                        if((modrm&0xc0)!=0xc0 || (modrm&0x38)!=0) goto candidate_unhandled;",
+                  "                        operand=GET_GR(modrm & 7);",
+                  "                    } else {",
+                  "                        if((modrm&0x38)!=0x30) goto candidate_unhandled;",
+                  "                        if((modrm&0xc0)==0xc0) operand=GET_GR(modrm & 7);",
+                  "                        else if(!monitor_lmsw_operand(&code,&next,modrm,&operand)) goto candidate_unhandled;",
+                  "                    }",
+                  "                    monitor_set_npx_control(operand);",
+                  "                    setEIP(ip+next);return TRUE;",
+                  "                }",
+                  "                goto candidate_unhandled;",
+                  "            }",
+                  "            /* Kt0d110 invokes the protected-VDM dispatcher before the",
+                  "             * non-VDM IOPL diagnosis in Kt0d50. */",
+                  "            if(op>=0x6c && op<=0x6f) {",
+                  "                /* NT4's protected dispatcher passes the length in EBX;",
+                  "                 * OpcodeINS/OUTS test EBX, not RiPrefixFlags, for REP. */",
+                  "                if(!monitor_string_io(op)) goto candidate_unhandled;",
+                  "                setEIP(ip+prefix+1);return TRUE;",
+                  "            }",
+                  "            if (op>=0xe4 && op<=0xe7) {",
+                  "                unsigned long next=prefix+1;",
+                  "                unsigned char immediate;",
+                  "                unsigned long port,value=0;",
+                  "                if(!monitor_fetch_byte(&code,next,&immediate)) goto candidate_unhandled;",
+                  "                port=immediate;",
+                  "                if(op==0xe4){IN8(&value,port);setAL(value);} else if(op==0xe5){IN16(&value,port);setAX(value);}",
+                  "                else if(op==0xe6) OUT8(port,getAL()); else OUT16(port,getAX());",
+                  "                setEIP(ip+prefix+2);return TRUE;",
+                  "            }",
+                  "            if (op>=0xec && op<=0xef) {",
+                  "                unsigned long port=getDX(),value=0;",
+                  "                if(op==0xec){IN8(&value,port);setAL(value);} else if(op==0xed){IN16(&value,port);setAX(value);}",
+                  "                else if(op==0xee) OUT8(port,getAL()); else OUT16(port,getAX());",
+                  "                setEIP(ip+prefix+1);return TRUE;",
+                  "            }",
+                  "            if (op==0xfa || op==0xfb) {",
+                  "                extern unsigned char *c_GetPhyAdd(unsigned long);",
+                  "                extern void host_ica_lock(void), host_ica_unlock(void);",
+                  "                volatile LONG *state=(volatile LONG *)c_GetPhyAdd(0x714);",
+                  "                host_ica_lock();",
+                  "                if(op==0xfb) InterlockedOr(state,0x200);",
+                  "                else InterlockedAnd(state,~0x200);",
+                  "                host_ica_unlock();",
+                  "                /* NT4 OpcodeCLI/OpcodeSTI advance the trapped EIP once,",
+                  "                 * including when its dispatcher encountered a prefix. */",
+                  "                setIF(op==0xfb); setEIP(ip+1);",
+                  "                if(op==0xfb) ccpu_monitor_dispatch_irq();",
+                  "                return TRUE;",
+                  "            }",
+                  "        }",
+                  "    }",
+                  "candidate_unhandled:"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "hit_arms": 11,
+      "excluded_arms": 7,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 6
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "current_sha256": "4f493beeb6fe3ef9f2094269d50897daab0221fdd564fb16814045f51f2ace4c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "prior_full_file_evidence": "s13-r1336-tree-recheck.json",
+      "prior_method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+        "status": "pass",
+        "current_sha256": "4f493beeb6fe3ef9f2094269d50897daab0221fdd564fb16814045f51f2ace4c",
+        "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+        "excluded_arms": 17,
+        "matching_code_lines": 1027
+      },
+      "hit_arms": 0,
+      "excluded_arms": 17,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 161
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "current_sha256": "394b6fdc6f9268345f3fc204f15c73dbc81a846d4d6b136fbde975d9e13d3c87",
+      "original_sha256": "96ee0fb677da9f35811f9dc1715d583474ce72bba9fa91f5eb2d5f6ab242b0c3",
+      "prior_full_file_evidence": "s13-r1396-local-groups-review.json",
+      "prior_method": "Compare reachable original trees and retained direct diffs; local groups retain recorded states and complete bodies are recorded. Matching original lines use selected source projection.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+        "current_sha256": "394b6fdc6f9268345f3fc204f15c73dbc81a846d4d6b136fbde975d9e13d3c87",
+        "original_sha256": "96ee0fb677da9f35811f9dc1715d583474ce72bba9fa91f5eb2d5f6ab242b0c3",
+        "matched_lines": 1276,
+        "groups": {
+          "excluded": 9,
+          "original_groups": 12,
+          "selected": 4,
+          "local_groups": 2
+        },
+        "local_groups": [
+          {
+            "line": 145,
+            "signature": [
+              [
+                "ifdef",
+                "CPU_40_STYLE"
+              ],
+              [
+                "else",
+                ""
+              ]
+            ]
+          },
+          {
+            "line": 298,
+            "signature": [
+              [
+                "if",
+                "defined(MVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION)"
+              ],
+              [
+                "else",
+                ""
+              ]
+            ]
+          }
+        ],
+        "direct_diffs": [
+          {
+            "branch_line": 144,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -1 +0,0 @@",
+              "-fVirtualInt |=  MIPS_BIT_MASK;"
+            ]
+          },
+          {
+            "branch_line": 313,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -26,3 +26,4 @@",
+              " {",
+              "-char config_sys_pathname[MAX_PATH];",
+              "+/* DIVERGENCE(MVDM-HOST-DIV-278): match GetPIFConfigFiles' output contract. */",
+              "+char config_sys_pathname[MAX_PATH+12];",
+              " HANDLE  handle;"
+            ]
+          }
+        ],
+        "issues": [],
+        "registered_differences": [
+          "MVDM-HOST-DIV-039",
+          "MVDM-HOST-DIV-134",
+          "MVDM-HOST-DIV-278"
+        ],
+        "local_group_bodies": [
+          {
+            "line": 145,
+            "arms": [
+              {
+                "directive": "ifdef",
+                "expression": "CPU_40_STYLE",
+                "body": [
+                  "    fVirtualInt |= MIPS_BIT_MASK;"
+                ]
+              },
+              {
+                "directive": "else",
+                "expression": "",
+                "body": [
+                  "#line 124",
+                  "#error Excluded unsupported non-CPU40 virtual interrupt state"
+                ]
+              }
+            ]
+          },
+          {
+            "line": 298,
+            "arms": [
+              {
+                "directive": "if",
+                "expression": "defined(MVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION)",
+                "body": [
+                  "   /* DIVERGENCE(MVDM-HOST-DIV-134): preserve the original first-session",
+                  "    * call site and void completion contract, but do not create Brief's",
+                  "    * installation-only C:\\\\MSDOS.SYS/C:\\\\IO.SYS placeholders on an admitted",
+                  "    * real host drive. The selected adapter records this explicit product",
+                  "    * disposition; the original source body remains below as mirror evidence. */",
+                  "   mvdm_softpc_prepare_system_file_compatibility();"
+                ]
+              },
+              {
+                "directive": "else",
+                "expression": "",
+                "body": [
+                  "#line 260",
+                  "#error Unsupported excluded original configuration"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "hit_arms": 6,
+      "excluded_arms": 11,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 151
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "current_sha256": "c345a04590804d528a75f7a300c09cd2dfe4178ba5a86adc5bf36fce4810a631",
+      "original_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47",
+      "prior_full_file_evidence": "s13-r1396-local-groups-review.json",
+      "prior_method": "Compare reachable original trees and retained direct diffs; local groups retain recorded states and complete bodies are recorded. Matching original lines use selected source projection.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+        "current_sha256": "c345a04590804d528a75f7a300c09cd2dfe4178ba5a86adc5bf36fce4810a631",
+        "original_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47",
+        "matched_lines": 310,
+        "groups": {
+          "excluded": 9,
+          "original_groups": 11,
+          "selected": 3,
+          "local_groups": 1
+        },
+        "local_groups": [
+          {
+            "line": 157,
+            "signature": [
+              [
+                "ifdef",
+                "X86GFX"
+              ]
+            ]
+          }
+        ],
+        "direct_diffs": [
+          {
+            "branch_line": 156,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -1,4 +1 @@",
+              "-if (sc.ScreenState == FULLSCREEN)\t// initialised in ConsoleInit()",
+              "-IDLE_ctl(FALSE);",
+              "-else",
+              " IDLE_ctl(TRUE);\t\t// can't idle detect fullscreen"
+            ]
+          }
+        ],
+        "issues": [],
+        "registered_differences": [
+          "MVDM-HOST-DIV-703"
+        ],
+        "local_group_bodies": [
+          {
+            "line": 157,
+            "arms": [
+              {
+                "directive": "ifdef",
+                "expression": "X86GFX",
+                "body": [
+                  "#line 141",
+                  "#error X86GFX fullscreen idle path is not supported"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "hit_arms": 3,
+      "excluded_arms": 10,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 51
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vga.c",
+      "current_sha256": "1ebdafaf6e9ed6afc128b64d305233ca8f8b12c5dd77aa12052d8a57283f99af",
+      "original_sha256": "81db9f2e415e58c21b0a10110d03d0f16532c2150aba84feb2cab8f74627ee6d",
+      "prior_full_file_evidence": "s13-r1392-registered-diffs.json",
+      "prior_method": "Review direct retained-arm differences against specific existing mirror registrations after original-tree and source-projection checks; full diffs listed.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_vga.c",
+        "current_sha256": "1ebdafaf6e9ed6afc128b64d305233ca8f8b12c5dd77aa12052d8a57283f99af",
+        "original_sha256": "81db9f2e415e58c21b0a10110d03d0f16532c2150aba84feb2cab8f74627ee6d",
+        "matched_lines": 1622,
+        "strict_tree": {
+          "excluded": 3,
+          "groups": 7,
+          "retained": 4,
+          "retained_leaf_differences": 1
+        },
+        "registered_differences": [
+          "VIDEO7-PACKED-SURFACE"
+        ],
+        "retained_arm_direct_differences": [
+          {
+            "branch_line": 1320,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -30,3 +30,7 @@",
+              " */",
+              "-if( height>400 || width>640 ){",
+              "+/* DIVERGENCE(VIDEO7-PACKED-SURFACE): SoftPC T60 bounds the actual",
+              "+* DIB/source extent instead of rejecting full 480-line updates. */",
+              "+if (width <= 0 || height <= 0 || screen_x < 0 || screen_y < 0 ||",
+              "+screen_x >= sc.PC_W_Width || screen_y >= sc.PC_W_Height ||",
+              "+offset < 0 || offset >= 4 * EGA_PLANE_SIZE || get_offset_per_line() <= 0){",
+              " assert2( NO, \"VDM: nt_v7vga_hi_graph_std() w=%d h=%d\", width, height );",
+              "@@ -34,2 +38,7 @@",
+              " }",
+              "+width = min(width, sc.PC_W_Width - screen_x);",
+              "+height = min(height, sc.PC_W_Height - screen_y);",
+              "+width = min(width, 4 * EGA_PLANE_SIZE - offset);",
+              "+height = min(height, 1 + (4 * EGA_PLANE_SIZE - offset - width) /",
+              "+get_offset_per_line());",
+              " local_height = height;"
+            ]
+          }
+        ]
+      },
+      "hit_arms": 4,
+      "excluded_arms": 3,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 93
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc.h",
+      "current_sha256": "63be1f8951611150544104f986831c8d2a49844c6a064e904661f517ff9b0579",
+      "original_sha256": "85ea2d8288f4bee6162f5475bbae5c40f4470d8521b4360f4a77a130a14df8a8",
+      "prior_full_file_evidence": "s13-r1334-excluded-only-review.json",
+      "prior_method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior. Complete-file classification additionally requires the entire outside-arm selected original/current projection to match after ignoring blank lines and edge whitespace; all matching code logical positions must agree.",
+      "prior_record": {
+        "path": "src/mvdm-host/vdmredir/vrdlc.h",
+        "status": "pass",
+        "current_sha256": "63be1f8951611150544104f986831c8d2a49844c6a064e904661f517ff9b0579",
+        "original_sha256": "85ea2d8288f4bee6162f5475bbae5c40f4470d8521b4360f4a77a130a14df8a8",
+        "excluded_arms": 1,
+        "matching_code_lines": 500,
+        "complete_condition_and_selected_projection": true,
+        "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+      },
+      "hit_arms": 0,
+      "excluded_arms": 1,
+      "compiler_contexts": 6,
+      "compiler_unique_line_samples": 168
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "current_sha256": "0af68a587ff958e76ab5e0ae139c6e233aca39dfedbfeffcc1fd7ae35a6600da",
+      "original_sha256": "90e6dc8f5625c371c8c14a2a111c3403d0f4b24597eacce8549049138f5721a6",
+      "prior_full_file_evidence": "s13-r1334-excluded-only-review.json",
+      "prior_method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior. Complete-file classification additionally requires the entire outside-arm selected original/current projection to match after ignoring blank lines and edge whitespace; all matching code logical positions must agree.",
+      "prior_record": {
+        "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+        "status": "pass",
+        "current_sha256": "0af68a587ff958e76ab5e0ae139c6e233aca39dfedbfeffcc1fd7ae35a6600da",
+        "original_sha256": "90e6dc8f5625c371c8c14a2a111c3403d0f4b24597eacce8549049138f5721a6",
+        "excluded_arms": 7,
+        "matching_code_lines": 463,
+        "complete_condition_and_selected_projection": true,
+        "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+      },
+      "hit_arms": 0,
+      "excluded_arms": 7,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 119
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "current_sha256": "f59963b1f71a67b65896d7d9af38c507e2bbca8da2d059defd76a6d6cb7ff3a2",
+      "original_sha256": "f75d2984624cee1a77b6f5bf6a18fe4a7f38a059d32b0e711edb97d03a08c9b8",
+      "prior_full_file_evidence": "s13-r1336-tree-recheck.json",
+      "prior_method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior.",
+      "prior_record": {
+        "path": "src/mvdm-host/vdmredir/vrremote.c",
+        "status": "pass",
+        "current_sha256": "f59963b1f71a67b65896d7d9af38c507e2bbca8da2d059defd76a6d6cb7ff3a2",
+        "original_sha256": "f75d2984624cee1a77b6f5bf6a18fe4a7f38a059d32b0e711edb97d03a08c9b8",
+        "excluded_arms": 8,
+        "matching_code_lines": 678
+      },
+      "hit_arms": 0,
+      "excluded_arms": 8,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 147
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdos.c",
+      "current_sha256": "84f2c81add639d10c4b7274271b24e15508e65231872b508d0c774c696dd2219",
+      "original_sha256": "e87b5cb3825ed937266c3badd287efd03cec3af0c26acb32ccc86d71fa47f314",
+      "prior_full_file_evidence": "s13-r1336-tree-recheck.json",
+      "prior_method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior.",
+      "prior_record": {
+        "path": "src/mvdm-host/wow32/wdos.c",
+        "status": "pass",
+        "current_sha256": "84f2c81add639d10c4b7274271b24e15508e65231872b508d0c774c696dd2219",
+        "original_sha256": "e87b5cb3825ed937266c3badd287efd03cec3af0c26acb32ccc86d71fa47f314",
+        "excluded_arms": 1,
+        "matching_code_lines": 370
+      },
+      "hit_arms": 0,
+      "excluded_arms": 1,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 104
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgdi.c",
+      "current_sha256": "dee0a0ecf5f73c013dc97d2cbaf12b85a56257038d3ce98e4a31ac11363bfa75",
+      "original_sha256": "4c28e5166b294ac2a17982b3ff6e6559f369b8a8a2dd766aa18e16c8f74379d6",
+      "prior_full_file_evidence": "s13-r1334-excluded-only-review.json",
+      "prior_method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior. Complete-file classification additionally requires the entire outside-arm selected original/current projection to match after ignoring blank lines and edge whitespace; all matching code logical positions must agree.",
+      "prior_record": {
+        "path": "src/mvdm-host/wow32/wgdi.c",
+        "status": "pass",
+        "current_sha256": "dee0a0ecf5f73c013dc97d2cbaf12b85a56257038d3ce98e4a31ac11363bfa75",
+        "original_sha256": "4c28e5166b294ac2a17982b3ff6e6559f369b8a8a2dd766aa18e16c8f74379d6",
+        "excluded_arms": 4,
+        "matching_code_lines": 3034,
+        "complete_condition_and_selected_projection": true,
+        "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+      },
+      "hit_arms": 0,
+      "excluded_arms": 4,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 481
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "current_sha256": "dc7083ca45c5d1f4f94ee7c07b2d87532e541dd2c0a259fd3cbf4dab9628aa2e",
+      "original_sha256": "c07f5e981d65f6911419990292fd3466d487fd79ff52b4819bb9905f808e68bd",
+      "prior_full_file_evidence": "s13-r1336-tree-recheck.json",
+      "prior_method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior.",
+      "prior_record": {
+        "path": "src/mvdm-host/wow32/wkernel.c",
+        "status": "pass",
+        "current_sha256": "dc7083ca45c5d1f4f94ee7c07b2d87532e541dd2c0a259fd3cbf4dab9628aa2e",
+        "original_sha256": "c07f5e981d65f6911419990292fd3466d487fd79ff52b4819bb9905f808e68bd",
+        "excluded_arms": 5,
+        "matching_code_lines": 425
+      },
+      "hit_arms": 0,
+      "excluded_arms": 5,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 48
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkfileio.c",
+      "current_sha256": "98ea817ace9cfa89418364c3935127ac6187ac1f6f8a8cb3d4f6ca2e1df93c12",
+      "original_sha256": "3437d0886ec49109668f09a46f5cf8b533ccfbd08f78ef441cbf71853482a8ad",
+      "prior_full_file_evidence": "s13-r1336-tree-recheck.json",
+      "prior_method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior.",
+      "prior_record": {
+        "path": "src/mvdm-host/wow32/wkfileio.c",
+        "status": "pass",
+        "current_sha256": "98ea817ace9cfa89418364c3935127ac6187ac1f6f8a8cb3d4f6ca2e1df93c12",
+        "original_sha256": "3437d0886ec49109668f09a46f5cf8b533ccfbd08f78ef441cbf71853482a8ad",
+        "excluded_arms": 3,
+        "matching_code_lines": 1241
+      },
+      "hit_arms": 0,
+      "excluded_arms": 3,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 307
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgcb.c",
+      "current_sha256": "ddf674c72fe21108b2114e18b8a490901b67cd1743c7e37dae5971c285d3f346",
+      "original_sha256": "ca644a033b4ed5974f70fad75615ef18c80466f3ed6d987554ce031cacab1e13",
+      "prior_full_file_evidence": "s13-r1336-tree-recheck.json",
+      "prior_method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior.",
+      "prior_record": {
+        "path": "src/mvdm-host/wow32/wmsgcb.c",
+        "status": "pass",
+        "current_sha256": "ddf674c72fe21108b2114e18b8a490901b67cd1743c7e37dae5971c285d3f346",
+        "original_sha256": "ca644a033b4ed5974f70fad75615ef18c80466f3ed6d987554ce031cacab1e13",
+        "excluded_arms": 1,
+        "matching_code_lines": 83
+      },
+      "hit_arms": 0,
+      "excluded_arms": 1,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 8
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgem.c",
+      "current_sha256": "4369133404e654d8fd80c8fd1a293c5d230cb9471345da47974a40cebe966ff1",
+      "original_sha256": "88d05e4770453621472704e90edcefd6ad18b618528b4166da3a9ba1ea1a3619",
+      "prior_full_file_evidence": "s13-r1337-tree-recheck.json",
+      "prior_method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior.",
+      "prior_record": {
+        "path": "src/mvdm-host/wow32/wmsgem.c",
+        "status": "pass",
+        "current_sha256": "4369133404e654d8fd80c8fd1a293c5d230cb9471345da47974a40cebe966ff1",
+        "original_sha256": "88d05e4770453621472704e90edcefd6ad18b618528b4166da3a9ba1ea1a3619",
+        "excluded_arms": 1,
+        "matching_code_lines": 144
+      },
+      "hit_arms": 0,
+      "excluded_arms": 1,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 28
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsglb.c",
+      "current_sha256": "410569f80665c3eea87bba3cde6a8265647f9fc123ace234596f6e396c3c64e2",
+      "original_sha256": "5e1a7dd4140ae6538d4e728ca869013e8cd00d06d5339ee5682319d5ff4bf26e",
+      "prior_full_file_evidence": "s13-r1337-tree-recheck.json",
+      "prior_method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior.",
+      "prior_record": {
+        "path": "src/mvdm-host/wow32/wmsglb.c",
+        "status": "pass",
+        "current_sha256": "410569f80665c3eea87bba3cde6a8265647f9fc123ace234596f6e396c3c64e2",
+        "original_sha256": "5e1a7dd4140ae6538d4e728ca869013e8cd00d06d5339ee5682319d5ff4bf26e",
+        "excluded_arms": 1,
+        "matching_code_lines": 110
+      },
+      "hit_arms": 0,
+      "excluded_arms": 1,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 12
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowhooks.c",
+      "current_sha256": "b401f6ce0464288e139ef3420f7a368ec02c9f5aa8fa77b6cf23eae3aa4465fb",
+      "original_sha256": "345220990242cde0890884f478bef8622c2fc537c9e6200fa9b289145be0cc67",
+      "prior_full_file_evidence": "s13-r1337-tree-recheck.json",
+      "prior_method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior.",
+      "prior_record": {
+        "path": "src/mvdm-host/wow32/wowhooks.c",
+        "status": "pass",
+        "current_sha256": "b401f6ce0464288e139ef3420f7a368ec02c9f5aa8fa77b6cf23eae3aa4465fb",
+        "original_sha256": "345220990242cde0890884f478bef8622c2fc537c9e6200fa9b289145be0cc67",
+        "excluded_arms": 2,
+        "matching_code_lines": 1062
+      },
+      "hit_arms": 0,
+      "excluded_arms": 2,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 235
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsubcls.c",
+      "current_sha256": "e75b7cae0844a4503d1bf281e14393b9552ae495ef069f6c86366f59baa38c2b",
+      "original_sha256": "b37021cb2a0480f3aca685efb8006b32d31b0fe073b6b3fc9b99f05764679e4b",
+      "prior_full_file_evidence": "s13-r1334-excluded-only-review.json",
+      "prior_method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior. Complete-file classification additionally requires the entire outside-arm selected original/current projection to match after ignoring blank lines and edge whitespace; all matching code logical positions must agree.",
+      "prior_record": {
+        "path": "src/mvdm-host/wow32/wsubcls.c",
+        "status": "pass",
+        "current_sha256": "e75b7cae0844a4503d1bf281e14393b9552ae495ef069f6c86366f59baa38c2b",
+        "original_sha256": "b37021cb2a0480f3aca685efb8006b32d31b0fe073b6b3fc9b99f05764679e4b",
+        "excluded_arms": 2,
+        "matching_code_lines": 142,
+        "complete_condition_and_selected_projection": true,
+        "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+      },
+      "hit_arms": 0,
+      "excluded_arms": 2,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 39
+    },
+    {
+      "path": "src/mvdm-host/wow32/wudlg.c",
+      "current_sha256": "4e662a804b0ce6df9c11a30f6d510f8f50b7292321ca1d6c983d003c84a3711f",
+      "original_sha256": "8a0dfcb7cbfea232c491fd9249c10048946f9f0d0e0b4120227dccd6ab37109e",
+      "prior_full_file_evidence": "s13-r1337-tree-recheck.json",
+      "prior_method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior.",
+      "prior_record": {
+        "path": "src/mvdm-host/wow32/wudlg.c",
+        "status": "pass",
+        "current_sha256": "4e662a804b0ce6df9c11a30f6d510f8f50b7292321ca1d6c983d003c84a3711f",
+        "original_sha256": "8a0dfcb7cbfea232c491fd9249c10048946f9f0d0e0b4120227dccd6ab37109e",
+        "excluded_arms": 5,
+        "matching_code_lines": 431
+      },
+      "hit_arms": 0,
+      "excluded_arms": 5,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 80
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "current_sha256": "468a42c537dd5733b02dbf276bc1d49f000a5fab55e43d7403ed7e1439d2c04a",
+      "original_sha256": "bad1de87b499d3052e757d858b39437232f5653610dc5560c06afcc5e05fd391",
+      "prior_full_file_evidence": "s13-r1392-registered-diffs.json",
+      "prior_method": "Review direct retained-arm differences against specific existing mirror registrations after original-tree and source-projection checks; full diffs listed.",
+      "prior_record": {
+        "path": "src/mvdm-host/xms.486/xmsblock.c",
+        "current_sha256": "468a42c537dd5733b02dbf276bc1d49f000a5fab55e43d7403ed7e1439d2c04a",
+        "original_sha256": "bad1de87b499d3052e757d858b39437232f5653610dc5560c06afcc5e05fd391",
+        "matched_lines": 228,
+        "strict_tree": {
+          "excluded": 1,
+          "retained_leaf_differences": 1,
+          "retained": 1,
+          "groups": 1
+        },
+        "registered_differences": [
+          "MVDM-HOST-DIV-077",
+          "MVDM-HOST-DIV-771"
+        ],
+        "retained_arm_direct_differences": [
+          {
+            "branch_line": 219,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -1,10 +1,7 @@",
+              "-SoftpcBase = (ULONG) GetVDMAddr (0,0);",
+              "-RtlCopyMemory((PVOID)((ULONG)pDst + SoftpcBase),",
+              "-(PVOID)((ULONG)pSrc + SoftpcBase),",
+              "-cbTransfer);",
+              "-// if we touched the intel memory, tell the emulator to flush its cache",
+              "-// WARNING!!!! Donot use Sim32FlushVDMPoiner unless you know the exact segment",
+              "-// address. In this case, we have no idea what the segment value is, all we",
+              "-// know is its \"linear address\".",
+              "-// BUGBUG verify whether we can ignore the case with pDst > 0x110000",
+              "-sas_overwrite_memory(pDst, cbTransfer);",
+              "+mvdm_softpc_report_xms_move((ULONG)pSrc, (ULONG)pDst, cbTransfer, FALSE);",
+              "+if (!mvdm_softpc_guest_memory_copy_forward((ULONG)pDst,",
+              "+(ULONG)pSrc, cbTransfer)) {",
+              "+mvdm_xms_cancel_current_operation();",
+              "+return;",
+              "+}",
+              "+mvdm_softpc_report_xms_move((ULONG)pSrc, (ULONG)pDst, cbTransfer, TRUE);"
+            ]
+          }
+        ]
+      },
+      "hit_arms": 1,
+      "excluded_arms": 1,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 27
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "current_sha256": "7b37eb1ac88922a8ba0ff6106cb71f8d31697c04db95a38fef61f98140985cac",
+      "original_sha256": "c1e2177c6c00679d85cfa475f620841f6736b0e56d8dbf790b71afe33e1ed80b",
+      "prior_full_file_evidence": "s13-r1337-tree-recheck.json",
+      "prior_method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior.",
+      "prior_record": {
+        "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+        "status": "pass",
+        "current_sha256": "7b37eb1ac88922a8ba0ff6106cb71f8d31697c04db95a38fef61f98140985cac",
+        "original_sha256": "c1e2177c6c00679d85cfa475f620841f6736b0e56d8dbf790b71afe33e1ed80b",
+        "excluded_arms": 3,
+        "matching_code_lines": 2132
+      },
+      "hit_arms": 0,
+      "excluded_arms": 3,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 472
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+      "current_sha256": "665d37b64355e9825974ab3b59a7870c7dccb1c93903b8b3a2334d42204451e1",
+      "original_sha256": "360e3c653cc70079f8f9d0db42d37f5580a82881f1ffb9b1fef954d8f1e7463d",
+      "prior_full_file_evidence": "s13-r1334-excluded-only-review.json",
+      "prior_method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior. Complete-file classification additionally requires the entire outside-arm selected original/current projection to match after ignoring blank lines and edge whitespace; all matching code logical positions must agree.",
+      "prior_record": {
+        "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+        "status": "pass",
+        "current_sha256": "665d37b64355e9825974ab3b59a7870c7dccb1c93903b8b3a2334d42204451e1",
+        "original_sha256": "360e3c653cc70079f8f9d0db42d37f5580a82881f1ffb9b1fef954d8f1e7463d",
+        "excluded_arms": 2,
+        "matching_code_lines": 1210,
+        "complete_condition_and_selected_projection": true,
+        "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+      },
+      "hit_arms": 0,
+      "excluded_arms": 2,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 206
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+      "current_sha256": "47d85ea9aa338c8bba1c0bab0346fdd3de12ae123d08e0d5ec60f2173c2952c1",
+      "original_sha256": "191c9ce7dce323873f5ef40f74141950940f6723e14d48b5fa09ca5517dde6cd",
+      "prior_full_file_evidence": "s13-r1337-tree-recheck.json",
+      "prior_method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior.",
+      "prior_record": {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+        "status": "pass",
+        "current_sha256": "47d85ea9aa338c8bba1c0bab0346fdd3de12ae123d08e0d5ec60f2173c2952c1",
+        "original_sha256": "191c9ce7dce323873f5ef40f74141950940f6723e14d48b5fa09ca5517dde6cd",
+        "excluded_arms": 3,
+        "matching_code_lines": 46
+      },
+      "hit_arms": 0,
+      "excluded_arms": 3,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 9
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "current_sha256": "fa407b77a11dddfecfbeb780140e679553f2fe8706c16adc13b25f82c1bb43e8",
+      "original_sha256": "13e3aa26649c7b21a49a3f3114a73bc06fdfc6472b782663bb10879cabc0ddb6",
+      "prior_full_file_evidence": "s13-r1341-pending-tree-recheck.json",
+      "prior_method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior.",
+      "prior_record": {
+        "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+        "status": "pass",
+        "current_sha256": "fa407b77a11dddfecfbeb780140e679553f2fe8706c16adc13b25f82c1bb43e8",
+        "original_sha256": "13e3aa26649c7b21a49a3f3114a73bc06fdfc6472b782663bb10879cabc0ddb6",
+        "excluded_arms": 10,
+        "matching_code_lines": 1438
+      },
+      "hit_arms": 0,
+      "excluded_arms": 10,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 526
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "current_sha256": "82aa1c7145f0c7857c22f06a0c8102e0141886c39647dfce7d9ff91c9e556bec",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "prior_full_file_evidence": "s13-r1334-excluded-only-review.json",
+      "prior_method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior. Complete-file classification additionally requires the entire outside-arm selected original/current projection to match after ignoring blank lines and edge whitespace; all matching code logical positions must agree.",
+      "prior_record": {
+        "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+        "status": "pass",
+        "current_sha256": "82aa1c7145f0c7857c22f06a0c8102e0141886c39647dfce7d9ff91c9e556bec",
+        "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+        "excluded_arms": 16,
+        "matching_code_lines": 1900,
+        "complete_condition_and_selected_projection": true,
+        "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+      },
+      "hit_arms": 0,
+      "excluded_arms": 16,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 666
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl2.c",
+      "current_sha256": "495380be7c339b629f4eb543e34765c350c75e815b7743d88deff19c02e8da48",
+      "original_sha256": "a99c9ef3b6a7a07b219ddda18ff2fb6a8a11c42f5378e5f77e10e336ad7d1744",
+      "prior_full_file_evidence": "s13-r1334-excluded-only-review.json",
+      "prior_method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior. Complete-file classification additionally requires the entire outside-arm selected original/current projection to match after ignoring blank lines and edge whitespace; all matching code logical positions must agree.",
+      "prior_record": {
+        "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl2.c",
+        "status": "pass",
+        "current_sha256": "495380be7c339b629f4eb543e34765c350c75e815b7743d88deff19c02e8da48",
+        "original_sha256": "a99c9ef3b6a7a07b219ddda18ff2fb6a8a11c42f5378e5f77e10e336ad7d1744",
+        "excluded_arms": 1,
+        "matching_code_lines": 1745,
+        "complete_condition_and_selected_projection": true,
+        "selected_original_projection_equal_ignoring_blank_and_edge_whitespace": true
+      },
+      "hit_arms": 0,
+      "excluded_arms": 1,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 527
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/random.c",
+      "current_sha256": "7ed9b09c117a0f703e3cd4d80ba36ddb0219930e1b74765f289333942b2b2291",
+      "original_sha256": "b3ed1082041c1c600c92487b45ff0c4750a50456e5ba7ea14a3ec8ef83a1f9cd",
+      "prior_full_file_evidence": "s13-r1341-pending-tree-recheck.json",
+      "prior_method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior.",
+      "prior_record": {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/random.c",
+        "status": "pass",
+        "current_sha256": "7ed9b09c117a0f703e3cd4d80ba36ddb0219930e1b74765f289333942b2b2291",
+        "original_sha256": "b3ed1082041c1c600c92487b45ff0c4750a50456e5ba7ea14a3ec8ef83a1f9cd",
+        "excluded_arms": 1,
+        "matching_code_lines": 17
+      },
+      "hit_arms": 0,
+      "excluded_arms": 1,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 5
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/server/exports.c",
+      "current_sha256": "d97433a478d69f07677b4bf33fec6e5158f3453fa94630805e277ae30ed5c2f5",
+      "original_sha256": "dbeb0ad48349bf5887a1333f21b427d8e0fdd3cb226977a9dc786373e961c71f",
+      "prior_full_file_evidence": "s13-r1341-pending-tree-recheck.json",
+      "prior_method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior.",
+      "prior_record": {
+        "path": "src/non-mvdm/windows/core/ntuser/server/exports.c",
+        "status": "pass",
+        "current_sha256": "d97433a478d69f07677b4bf33fec6e5158f3453fa94630805e277ae30ed5c2f5",
+        "original_sha256": "dbeb0ad48349bf5887a1333f21b427d8e0fdd3cb226977a9dc786373e961c71f",
+        "excluded_arms": 1,
+        "matching_code_lines": 38
+      },
+      "hit_arms": 0,
+      "excluded_arms": 1,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 7
+    }
+  ]
+}
