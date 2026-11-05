@@ -19,10 +19,10 @@ function Extract-Function([string]$Signature) {
 }
 $body=(Extract-Function 'static void publish_text_update(void)')+"`r`n"+(Extract-Function 'void nt_graphics_tick(void)')
 [IO.File]::WriteAllText("$root/blocked_video_tick.inc",$body,[Text.Encoding]::ASCII)
-@("$repo/src/mvdm-host/softpc.new/host/src/nt_graph.c","$repo/tests/component-integration/blocked_video_tick_test.c") | ForEach-Object {
+@("$repo/src/mvdm-host/softpc.new/host/src/nt_graph.c","$repo/test/ntvdm-exe/softpc/blocked_video_tick_test.c") | ForEach-Object {
     [pscustomobject]@{Path=$_;Sha256=Get-IsolatedFileSha256 $_}
 } | ConvertTo-Json | Set-Content "$root/inputs.json"
-& $wrapper cl.exe /nologo /MT /O2 /W4 /WX /TC "/I$root" "/Fo$root/test.obj" "/Fe$root/test.exe" "$repo/tests/component-integration/blocked_video_tick_test.c" *> "$root/build.log"
+& $wrapper cl.exe /nologo /MT /O2 /W4 /WX /TC "/I$root" "/Fo$root/test.obj" "/Fe$root/test.exe" "$repo/test/ntvdm-exe/softpc/blocked_video_tick_test.c" *> "$root/build.log"
 if($LASTEXITCODE){throw 'Blocked tick fixture build failed'}
 & "$root/test.exe" *> "$root/result.txt"
 if($LASTEXITCODE){throw 'Blocked tick fixture failed'}

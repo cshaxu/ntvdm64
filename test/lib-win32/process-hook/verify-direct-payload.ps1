@@ -12,7 +12,7 @@ function Invoke-Owned([string]$file,[string[]]$arguments,[string]$dir,[string]$n
 }
 foreach ($arch in @('x86','x64')) {
  $dir=Join-Path $build $arch; New-Item -ItemType Directory -Force $dir | Out-Null
- $test=Join-Path $root 'tests/lib-win32/process-hook/payload_direct.c';$source=Join-Path $root 'src/lib-win32/process-hook/payload.c'
+ $test=Join-Path $root 'test/lib-win32/process-hook/payload_direct.c';$source=Join-Path $root 'src/lib-win32/process-hook/payload.c'
  $lines=@('@echo off',"call `"$vs`" -arch=$arch -host_arch=x64 >nul",'if errorlevel 1 exit /b %errorlevel%',
  "cl /nologo /std:c11 /MT /W4 /we4013 /DUNICODE /D_UNICODE /D_WIN32_WINNT=0x0A00 /I `"$root/src`" `"$test`" `"$source`" /Fe:payload-direct.exe /link kernel32.lib",'if errorlevel 1 exit /b %errorlevel%','exit /b 0')
  [IO.File]::WriteAllLines((Join-Path $dir 'build.cmd'),$lines,[Text.Encoding]::ASCII)

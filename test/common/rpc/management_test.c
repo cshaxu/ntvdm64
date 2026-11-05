@@ -31,7 +31,7 @@ static RPC_STATUS RPC_ENTRY unit_complete(PRPC_ASYNC_STATE async,void *reply)
     return ERROR_SUCCESS;
 }
 #define RpcAsyncCompleteCall unit_complete
-#include "../../src/common/rpc/management.c"
+#include "common/rpc/management.c"
 #undef RpcAsyncCompleteCall
 static DWORD result(PRPC_ASYNC_STATE async)
 {

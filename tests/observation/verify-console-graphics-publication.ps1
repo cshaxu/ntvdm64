@@ -9,7 +9,7 @@ if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or 
 $wrapper=(Resolve-Path $CompilerWrapper).Path
 $null=New-Item -ItemType Directory -Path $root
 $sources=@('src/worker-base/publication.c','src/ntvdm-exe/win32/console_bitmap.c',
- 'src/ntvdm-exe/win32/console_graphics.c','tests/component-integration/console_graphics_publication_test.c')
+ 'src/ntvdm-exe/win32/console_graphics.c','test/ntvdm-exe/win32/console_graphics_publication_test.c')
 $objects=@()
 foreach($source in $sources){
  $object=Join-Path $root (([IO.Path]::GetFileNameWithoutExtension($source))+'.obj')

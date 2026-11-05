@@ -20,7 +20,7 @@ static RPC_STATUS RPC_ENTRY unit_complete(PRPC_ASYNC_STATE call,void *reply)
     *(DWORD *)reply=injected;return completion_error;
 }
 #define RpcAsyncCompleteCall unit_complete
-#include "../../src/common/rpc/native_command.c"
+#include "common/rpc/native_command.c"
 #undef RpcAsyncCompleteCall
 static error_status_t unit_issue(PRPC_ASYNC_STATE call)
 {

@@ -3,7 +3,7 @@ param([Parameter(Mandatory)][string]$OutputRoot,
       [Parameter(Mandatory)][string]$WorkerBuildRoot,
       [Parameter(Mandatory)][string]$WowBuildRoot)
 $ErrorActionPreference = 'Stop'
-$root = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
+$root = (Resolve-Path (Join-Path $PSScriptRoot '../../..')).Path
 $out = [IO.Path]::GetFullPath((Join-Path $root $OutputRoot))
 if (!$out.StartsWith(([IO.Path]::GetFullPath((Join-Path $root 'build')) + '\'),
     [StringComparison]::OrdinalIgnoreCase) -or (Test-Path $out)) {
@@ -35,7 +35,7 @@ $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\To
   'if errorlevel 1 exit /b %errorlevel%', '%*') | Set-Content $wrapper -Encoding ASCII
 $test = Join-Path $out 'test.obj'
 $provider = Join-Path $out 'crt_compat.obj'
-& $wrapper cl /nologo /c /MT /D_NO_CRT_STDIO_INLINE /D_CRT_SECURE_NO_WARNINGS "/Fo$test" (Join-Path $root 'tests/component-integration/crt_compat_test.c') *> (Join-Path $out 'compile-test.log')
+& $wrapper cl /nologo /c /MT /D_NO_CRT_STDIO_INLINE /D_CRT_SECURE_NO_WARNINGS "/Fo$test" (Join-Path $root 'test/lib-win32/crt-compat/crt_compat_test.c') *> (Join-Path $out 'compile-test.log')
 if ($LASTEXITCODE) { throw 'Test compile failed.' }
 & $wrapper cl /nologo /c /MT "/Fo$provider" (Join-Path $root 'src/lib-win32/crt-compat/crt_compat.c') *> (Join-Path $out 'compile-provider.log')
 if ($LASTEXITCODE) { throw 'Provider compile failed.' }

@@ -47,7 +47,7 @@ static BOOL WINAPI fake_result(HANDLE pipe,LPOVERLAPPED io,LPDWORD count,BOOL wa
 #define WaitForMultipleObjects fake_wait
 #define CancelIoEx fake_cancel
 #define GetOverlappedResult fake_result
-#include "../../src/lib-win32/pipe/pipe_transfer.c"
+#include "lib-win32/pipe/pipe_transfer.c"
 /* This fixture explicitly selects completion-first; endpoint priority is not
  * a launcher-owned wrapper around the common transport. */
 static DWORD frontend_request_transfer(HANDLE pipe,HANDLE peer,HANDLE stop,HANDLE event,

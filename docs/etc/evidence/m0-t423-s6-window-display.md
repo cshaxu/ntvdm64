@@ -90,7 +90,7 @@ is owner-waived, not passed. Safe background integration remains required.
 
 Command: build/M0-T423/S6/build-library.cmd imports VsDevCmd x86/host-x64 then
 runs the checked-in
-[verification script](../../../tests/component-integration/verify-frontend-window-library.ps1).
+[verification script](../../../test/ntcon-exe/verify-frontend-window-library.ps1).
 All compiler/linker products remain under build/M0-T423/S6/library. Toolchain:
 MSVC Win32/x86, /MT /std:c11 /W4, selected Win32 leaf linked with USER32/GDI32.
 No window is created, no desktop switched, no guest started in this unit test.

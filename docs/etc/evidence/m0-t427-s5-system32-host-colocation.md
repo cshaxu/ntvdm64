@@ -42,7 +42,7 @@ Formal VdmTib storage check passes.
 
 | Entry / run | Observed assertions |
 | --- | --- |
-| [common_system_root_test](../../../tests/app/common_system_root_test.c), r006/root fixture/system32 with expected-root argument | Own-image parent root despite changed CWD/inherited root; joins, capacity/error clearing and invalid relatives pass. |
+| [common_system_root_test](../../../test/common/system_root_test.c), r006/root fixture/system32 with expected-root argument | Own-image parent root despite changed CWD/inherited root; joins, capacity/error clearing and invalid relatives pass. |
 | Cache guest-environment-test/application-search-test, fresh r006/search fixture | Bounded projection/host data; directory-first suffix/explicit/drive/empty/Unicode/capacity cases pass. |
 | [original_runtime_layout_test](../../../tests/observation/original_runtime_layout_test.mjs), r002/runtime | NTVDM in system32, no flat copy; unique original destinations and source/destination hashes. |
 | New-T310FirmwareResourceNinja r003/resources all-verify | Firmware/media, missing local DLL with CWD impostor, native fallback and WOW boot-environment ownership pass. |

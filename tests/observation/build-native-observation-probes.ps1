@@ -5,7 +5,7 @@ $repo=(Resolve-Path "$PSScriptRoot/../..").Path
 $build=[IO.Path]::GetFullPath((Join-Path $repo $BuildRoot))
 if(!$build.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase)){throw 'Build-only output'}
 New-Item -ItemType Directory -Path $build -Force|Out-Null
-$source=Join-Path $repo 'tests/component-integration/native_observation_probe.c'
+$source=Join-Path $repo 'test/integration/native_observation_probe.c'
 $utf8=[Text.UTF8Encoding]::new($false)
 foreach($width in @('x86','x64')) {
  $wrapper=Join-Path $build "$width.cmd"

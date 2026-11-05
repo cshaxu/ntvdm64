@@ -15,18 +15,15 @@ function Invoke-Owned([string]$file,[string[]]$arguments,[string]$dir,[string]$n
 }
 $stage=Join-Path $root 'src/lib-win32/process-hook/staging.c'
 $helper=Join-Path $root 'src/lib-win32/process-hook/helper.c'
-$test=Join-Path $root 'tests/lib-win32/process-hook/cross_payload.c'
-$dll=Join-Path $root 'tests/lib-win32/process-hook/cross_helper.c'
-$def=Join-Path $root 'tests/lib-win32/process-hook/cross_helper.def'
-$packetTest=Join-Path $root 'tests/lib-win32/process-hook/context_packet.c'
-$packetSource=Join-Path $root 'src/common/native-hook/packet.c'
+$test=Join-Path $root 'test/lib-win32/process-hook/cross_payload.c'
+$dll=Join-Path $root 'test/lib-win32/process-hook/cross_helper.c'
+$def=Join-Path $root 'test/lib-win32/process-hook/cross_helper.def'
 foreach ($arch in @('x86','x64')) {
     $dir=Join-Path $build $arch; New-Item -ItemType Directory -Force $dir | Out-Null
     $lines=@('@echo off',"call `"$vs`" -arch=$arch -host_arch=x64 >nul",'if errorlevel 1 exit /b %errorlevel%',
         "cl /nologo /std:c11 /MT /DUNICODE /D_UNICODE /D_WIN32_WINNT=0x0A00 /I `"$root/src`" `"$test`" `"$stage`" `"$helper`" /Fe:cross-payload.exe /link kernel32.lib user32.lib",'if errorlevel 1 exit /b %errorlevel%',
         "cl /nologo /std:c11 /MT /LD /DUNICODE /D_UNICODE /D_WIN32_WINNT=0x0A00 /I `"$root/src`" `"$dll`" `"$stage`" `"$helper`" /Fe:cross-helper.dll /link /def:`"$def`" kernel32.lib user32.lib",'if errorlevel 1 exit /b %errorlevel%',
-        "cl /nologo /std:c11 /MT /DUNICODE /D_UNICODE /D_WIN32_WINNT=0x0A00 /I `"$root/src`" `"$packetTest`" `"$packetSource`" /Fe:context-packet.exe /link kernel32.lib",'if errorlevel 1 exit /b %errorlevel%',
-        'context-packet.exe','if errorlevel 1 exit /b %errorlevel%','exit /b 0')
+        'exit /b 0')
     [IO.File]::WriteAllLines((Join-Path $dir 'build.cmd'),$lines,[Text.Encoding]::ASCII)
     Invoke-Owned 'cmd' @('/c','build.cmd') $dir "build-$arch"
 }

@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
 const cp = require('node:child_process');
-const root = path.resolve(__dirname, '../..');
+const root = path.resolve(__dirname, '../../../../..');
 const textCursor = process.argv[3] === 'text-cursor';
 if (process.argv[3] && !textCursor) throw new Error('Expected optional text-cursor mode');
 const output = path.resolve(root, process.argv[2] || 'build/M0-T423/S7/original-coordinates');

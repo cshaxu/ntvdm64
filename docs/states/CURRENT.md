@@ -2,35 +2,34 @@
 
 ## Current Work
 
-**Active: M0 T474 S5** — use LF for non-mirror project text.
-
-The owner directed LF for all non-mirror components while preserving original
-mirror bytes. S4 was delivered; its [evidence](../etc/evidence/m0-t474-s4-process-launch.md) remains available.
+**Active: M0 T474 S6** — verification complete; awaiting owner acceptance.
 
 ## Active Packet
 
-### M0 T474 S5 — project line endings
+### M0 T474 S6 — component-oriented tests
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T474 S5, Ordinary Mode. |
-| Admission And Approval | Owner directs LF for non-mirror components and original byte retention for mirrors. |
-| Candidate Proposal | [Shared implementation ownership](../proposals/proposal-shared-implementation-ownership-001.md); owner line-ending direction applies project-wide. |
-| Objective | Configure project text and normalize owned text to LF; preserve imported mirror and pinned third-party bytes. |
-| Non-goals | No behavioral changes, guest modifications, or rewriting immutable evidence or media. |
-| Reference Baseline | `ac8bb9864`; S4 delivered. |
-| Files And ABI Surface | Project text, `.gitattributes`, `.editorconfig` and documentation; no API changes. |
-| Applicable Rules | Preserve source provenance, original mirror bytes, user files and shared source identity. |
-| Verification | Tracked text inventory, mirror byte verification, Git attributes, script and build checks appropriate to line-ending-only changes. |
-| Delivery State | Owned UTF-8 text normalized; original mirrors retained; cached builds, focused checks and governance passed. Rebuilt product differences were PE/debug timestamps only, so the previously tested package remains published. [Evidence](../etc/evidence/m0-t474-s5-lf-line-endings.md). Awaiting owner acceptance. |
-| Expected Markers | Owned text LF in worktree and Git; mirrors and pinned imports unchanged. |
-| Asset Needs | Existing repository and cached build; no guest modification. |
-| Reporting Requirements | Counts, exclusions, build and tests, and identity impact on shared libraries. |
-| Stop Conditions | Non-text ambiguity, required behavior change, or inability to preserve original mirror. |
-| Exit Criteria | All classified owned text LF, mirror bytes unchanged, validation, commit and push. |
-| Original Owner Request | All non-mirror components must use LF; mirror components keep original bytes. |
-| Similar-Issue Sweep | Source, tools, tests, docs, shared components, editor and Git configuration. |
-| Temporary Evidence | `build/t474-s5`; 90 minutes, 4 GiB and 15-minute no-progress budget. |
+| Identifier Mode | M0 T474 S6, Ordinary Mode. |
+| Admission And Approval | Owner admitted test organization, with common and lib-win32 first. |
+| Candidate Proposal | [Shared implementation ownership](../proposals/proposal-shared-implementation-ownership-001.md). |
+| Objective | Align test paths and dependency direction with component ownership. |
+| Non-goals | No product behavior, guest or mirror changes. |
+| Reference Baseline | `d524de6ad`. |
+| Files And ABI Surface | Test sources, runners, build graph and documentation; no product ABI changes. |
+| Applicable Rules | Units may use inner dependencies; true product integration belongs in `test/integration`. |
+| Verification | [S6 evidence](../etc/evidence/m0-t474-s6-public-component-tests.md) records builds, unit and product integration gates. |
+| Expected Markers | Public component tests match their owners and reverse dependencies are removed. |
+| Asset Needs | Existing cached builds and isolated test runtime. |
+| Reporting Requirements | Report ownership, verification and remaining non-public test layout. |
+| Stop Conditions | Product behavior drift, lost coverage or unresolved ownership. |
+| Exit Criteria | Verified result committed and pushed, then owner acceptance. |
+| Original Owner Request | Organize public component tests with clear dependency direction. |
+| Similar-Issue Sweep | Audited scattered public-component tests and their runners. |
+
+## S5 Closure Record
+
+The [S5 LF rules and verification](../etc/evidence/m0-t474-s5-lf-line-endings.md) were delivered.
 
 ## S4 Closure Record
 

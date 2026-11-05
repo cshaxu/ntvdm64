@@ -12,7 +12,7 @@ foreach($arch in @('x86','x64')){
  if(!$gcc){throw "supply the $arch GCC compiler path"}
  if(!(Test-Path -LiteralPath $gcc)){throw "missing compiler $gcc"}
  $dir=Join-Path $build $arch;New-Item -ItemType Directory -Force $dir | Out-Null
- $test=Join-Path $root 'tests/lib-win32/process-hook/payload_direct.c';$source=Join-Path $root 'src/lib-win32/process-hook/payload.c'
+ $test=Join-Path $root 'test/lib-win32/process-hook/payload_direct.c';$source=Join-Path $root 'src/lib-win32/process-hook/payload.c'
  $bin=Split-Path $gcc
  $lines=@('@echo off',"set `"PATH=$bin;%PATH%`"", "`"$gcc`" -std=c17 -Wall -Wextra -Werror -DUNICODE -D_UNICODE -D_WIN32_WINNT=0x0A00 -I `"$root/src`" `"$test`" `"$source`" -static -municode -o payload-direct.exe",'if errorlevel 1 exit /b %errorlevel%','exit /b 0')
  [IO.File]::WriteAllLines((Join-Path $dir 'build.cmd'),$lines,[Text.Encoding]::ASCII);Run 'cmd' @('/c','build.cmd') $dir "build-$arch"

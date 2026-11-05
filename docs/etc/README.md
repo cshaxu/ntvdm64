@@ -1133,3 +1133,5 @@ focused timer/hook witnesses, and the finite S2 dialog/input/caret handoff.
 [T474 S4 process-launch](evidence/m0-t474-s4-process-launch.md) records the shared launch boundary and verification.
 
 [T474 S5 LF line endings](evidence/m0-t474-s5-lf-line-endings.md) records the line-ending boundary, normalization and verification.
+
+[T474 S6 public component tests](evidence/m0-t474-s6-public-component-tests.md) records test ownership, dependency direction and verification.

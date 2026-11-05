@@ -31,7 +31,7 @@ $sources += Join-Path $owner 'window_input_queue.c'
 $sources += Join-Path $owner 'window_keyboard.c'
 $sources += Join-Path $repo 'src/ntvwm-exe/text_frame.c'
 $sources += Join-Path $owner 'console_video.c'
-$sources += Join-Path $PSScriptRoot 'frontend_window_library_test.c'
+$sources += Join-Path $repo 'test/ntcon-exe/frontend_window_library_test.c'
 for ($index = 0; $index -lt $sources.Count; ++$index) {
     $object = Join-Path $output "$index.obj"
     & cl.exe /nologo /c /MT /std:c11 /W4 /DWIN32_LEAN_AND_MEAN /D_WIN32_WINNT=0x0601 "/I$owner" "/I$repo/src" "/I$output" "/Fo$object" $sources[$index]
@@ -48,7 +48,7 @@ $keyboardObject = Join-Path $output 'window-keyboard.obj'
 $keyboardTestObject = Join-Path $output 'keyboard-test.obj'
 & cl.exe /nologo /c /MT /std:c11 /W4 /D_WIN32_WINNT=0x0601 "/I$owner" "/I$repo/src" "/Fo$keyboardObject" (Join-Path $owner 'window_keyboard.c')
 if ($LASTEXITCODE) { throw 'Window keyboard compilation failed' }
-& cl.exe /nologo /c /MT /std:c11 /W4 /D_WIN32_WINNT=0x0601 "/I$owner" "/I$repo/src" "/Fo$keyboardTestObject" (Join-Path $PSScriptRoot 'frontend_window_keyboard_test.c')
+& cl.exe /nologo /c /MT /std:c11 /W4 /D_WIN32_WINNT=0x0601 "/I$owner" "/I$repo/src" "/Fo$keyboardTestObject" (Join-Path $repo 'test/ntcon-exe/frontend_window_keyboard_test.c')
 if ($LASTEXITCODE) { throw 'Window keyboard fixture compilation failed' }
 $keyboardExe = Join-Path $output 'frontend-window-keyboard-test.exe'
 & link.exe /nologo /machine:x86 "/out:$keyboardExe" $keyboardObject $keyboardTestObject user32.lib

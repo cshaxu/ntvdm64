@@ -17,7 +17,7 @@ foreach($forbidden in @('PATCHSET.EXE','KRNL386-ADAPTED.EXE','WIN386-ADAPTED.EXE
 $runner=Get-Content -LiteralPath (Join-Path $payload 'SETUP.CMD') -Raw
 if(!$runner.Contains('call run16 command /c SETUP.EXE')) {throw 'Setup runner does not use the synchronous DOS COMMAND entry'}
 if(!$runner.Contains('PIF.EXE" create') -or $runner.Contains('PATCHSET.EXE" --win31')) {throw 'Setup runner must generate profiles without repatching installed guests'}
-& (Join-Path $repo 'tests\component-integration\win31_launch_profile_test.ps1') -InstallRoot $install -ProfileDirectory (Join-Path $install 'PATCH') -SetupMode
+& (Join-Path $repo 'test\integration\win31_launch_profile_test.ps1') -InstallRoot $install -ProfileDirectory (Join-Path $install 'PATCH') -SetupMode
 $forbiddenRoots = @($package)
 # A build-owned installation fixture may deliberately live under the
 # repository's build tree.  Its self-contained profiles must name the

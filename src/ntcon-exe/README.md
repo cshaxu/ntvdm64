@@ -44,7 +44,7 @@ Launcher completion, I/O failure and frontend-session closure remain
 different events; native descendants are not recursively terminated.
 
 The generated-link ownership check is
-tests/component-integration/verify-frontend-link-ownership.ps1. It checks the
+tools/audit/verify-frontend-link-ownership.ps1. It checks the
 client archive and transitive executable link inputs, excluding order-only
 build prerequisites. The current delivery and verification status belongs to
 docs/states/CURRENT.md; component placement alone is not S4 acceptance or
@@ -80,7 +80,7 @@ controller. The existing indexed worker wire becomes RGB at that boundary;
 wire text limits remain160x96/font32, independently of dynamic library capacity.
 Text underline and both cursor spans retain their wire semantics, with Window
 as the sole blink-phase owner. A failed decode is never committed.
-`tests/component-integration/verify-frontend-window-library.ps1` checks pinned
+`test/ntcon-exe/verify-frontend-window-library.ps1` checks pinned
 bytes and builds the real Win32 leaf with a non-interactive contract fixture.
 Library-only assertions do not substitute for the production channel, Window
 and CAF regression gates. CURRENT and the S8 evidence ledger record those

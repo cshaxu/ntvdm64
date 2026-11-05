@@ -6,7 +6,7 @@ New-Item -ItemType Directory -Force $build | Out-Null
 $vs='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 if (!(Test-Path -LiteralPath $vs)) { throw 'MSVC environment not found' }
 $hook=Join-Path $root 'src/lib-win32/process-hook'
-$shim=Join-Path $root 'src/compat/include/process_hook_msvc.h'
+$shim=Join-Path $PSScriptRoot 'msvc_compat.h'
 foreach ($arch in @('x86','x64')) {
     $dir=Join-Path $build $arch
     New-Item -ItemType Directory -Force $dir | Out-Null
@@ -15,7 +15,7 @@ foreach ($arch in @('x86','x64')) {
     $quoted=($sources | ForEach-Object { '"'+(Join-Path $hook $_)+'"' }) -join ' '
     $lines=@('@echo off',"call `"$vs`" -arch=$arch -host_arch=x64 >nul",'if errorlevel 1 exit /b %errorlevel%')
     foreach ($name in @('link','payload')) {
-        $test=Join-Path $root "tests/lib-win32/process-hook/$name.c"
+        $test=Join-Path $root "test/lib-win32/process-hook/$name.c"
         $lines+="cl /nologo /std:c11 /MT /FI `"$shim`" /DUNICODE /D_UNICODE /D_WIN32_WINNT=0x0A00 /I `"$root/src`" `"$test`" $quoted /Fe:$name.exe /link kernel32.lib user32.lib"
         $lines+='if errorlevel 1 exit /b %errorlevel%'
         $lines+="$name.exe"

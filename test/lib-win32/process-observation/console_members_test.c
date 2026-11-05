@@ -31,7 +31,7 @@ static DWORD fake_members(LPDWORD buffer,DWORD capacity)
 #define HeapAlloc fake_alloc
 #define HeapFree fake_free
 #define GetConsoleProcessList fake_members
-#include "../../src/lib-win32/process-observation/console_members.c"
+#include "lib-win32/process-observation/console_members.c"
 #undef GetConsoleProcessList
 #undef HeapFree
 #undef HeapAlloc

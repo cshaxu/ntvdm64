@@ -98,8 +98,8 @@ worker-kind dispatch, I/O relay, helper, new queue or new scheduler.
 [base_service_reservation_test](../../../tests/adapter-basesrv/base_service_reservation_test.c)
 already contains native-worker/backend, frontend root/rundown, cancellation,
 management stop, launcher survival, completion-rundown, WOW late-query and
-explicit-time deadline cases. [common_worker_control_test](../../../tests/app/common_worker_control_test.c)
-covers the common RPC client envelope. [common_management_test](../../../tests/app/common_management_test.c)
+explicit-time deadline cases. [common_worker_control_test](../../../test/common/rpc/worker_control_test.c)
+covers the common RPC client envelope. [common_management_test](../../../test/common/rpc/management_test.c)
 and [frontend_scope_lifetime_test](../../../tests/app/frontend_scope_lifetime_test.c)
 are candidate consumers; the latter contains client stubs and cannot alone
 prove authenticated parent selection or real input restoration.

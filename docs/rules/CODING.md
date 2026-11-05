@@ -4,6 +4,14 @@ Project-owned non-mirror text uses LF in both the working tree and Git. Original
 mirrors, pinned third-party inputs, immutable evidence and media retain their
 original bytes; do not normalize their line endings.
 
+Unit tests follow the tested component and subcomponent under `test/`, e.g.
+`test/common/rpc` and `test/lib-win32/pipe`. A unit may use its target's inner
+dependencies, never reverse-depend on outer product components. Tests of actual
+integrated product execution belong under `test/integration`; dependency count
+alone does not determine the test type. Test-only compiler seams are local to
+the owning test, while production integration and policy remain outside generic
+library units.
+
 ## T474 BaseSrv source boundary
 
 Shared BaseSrv clients, scope and copied transport live in common/base_srv;
