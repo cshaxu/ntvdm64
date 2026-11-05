@@ -148,3 +148,7 @@ implementation replaces the original call algorithm. The minimal EBX repair
 adds preservation and adjusts only its three argument offsets. The actual
 product objects pass the host matrix. Documentation governance and diff checks
 are required immediately before committing this closure.
+
+Local delivery P1 is commit ca910d6a1. A follow-up P2 records that identity
+and removes a trailing blank line in the retained test script; no production
+source, executable or test behavior changes after the verified publication.

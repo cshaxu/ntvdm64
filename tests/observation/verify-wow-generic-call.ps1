@@ -48,5 +48,3 @@ try {
  try {Stop-IsolatedPackageScope $scope;Remove-PhysicalRuntimeStage $runtime}
  finally {foreach($n in $saved.Keys){[Environment]::SetEnvironmentVariable($n,$saved[$n])}}
 }
-
-
