@@ -1,0 +1,280 @@
+{
+  "method": "hash-bound complete excluded original conditional and outside projection review; no hit arms; actual compiler file marker and no emitted source lines in selected contexts",
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/dem/demmsg.c",
+      "current_sha256": "adcb4b21a626d5d7429e65d3fea69b19196b70a450d7dd379abbf52e5965e0ac",
+      "original_sha256": "1414099a0a5ad421440f101bbc6c669285141ab53bd9403b9ead4a6e4d9db2c8",
+      "excluded_arms": 1,
+      "file_marker_contexts": [
+        254
+      ],
+      "emitted_lines": 0,
+      "prior_evidence": "s13-r1334-excluded-only-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/bswap.c",
+      "current_sha256": "5859c6f4480ab7db9d4a0f2cead39649478a9e28a490ce97df6a4d0ed0525c27",
+      "original_sha256": "d6e833e572222ce68fd989348de0bfd68030d0016a2a2d7379cf3473ad852f39",
+      "excluded_arms": 1,
+      "file_marker_contexts": [
+        11
+      ],
+      "emitted_lines": 0,
+      "prior_evidence": "s13-r1334-excluded-only-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_getset.c",
+      "current_sha256": "d6acab8b0a26dae1ea579c6da8313a054caa7bf812a939006477005074ace351",
+      "original_sha256": "02783213debc6b9a712adecf37941b4fea01c60c0cc86c0d3cdf526b1ff43374",
+      "excluded_arms": 1,
+      "file_marker_contexts": [
+        34
+      ],
+      "emitted_lines": 0,
+      "prior_evidence": "s13-r1334-excluded-only-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpupig.c",
+      "current_sha256": "2f8846d98caf9a9b059e70d8830fc6d74a181b485932a216765e48690651287b",
+      "original_sha256": "bfeaff9c9a49039aa29740f6dac2dd6a32bce897d0d0ffe3d00a43d66cd09523",
+      "excluded_arms": 1,
+      "file_marker_contexts": [
+        18
+      ],
+      "emitted_lines": 0,
+      "prior_evidence": "s13-r1334-excluded-only-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpupig.h",
+      "current_sha256": "8983ef54b45a03ebffef1bb78661d3a81c33ce4819e138be263eae66feddd225",
+      "original_sha256": "73b2e7ceda4cb3ba83343b1fe07a428dccab76a196b2d7c3951c37962be1e1db",
+      "excluded_arms": 1,
+      "file_marker_contexts": [
+        35
+      ],
+      "emitted_lines": 0,
+      "prior_evidence": "s13-r1334-excluded-only-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cmpxchg.c",
+      "current_sha256": "586fef62de0d56e81d1c2d675be00f7738f71226c4f1a7e770efe76255e8a6ed",
+      "original_sha256": "02318c7bd61ead65d6d2c97b3980a7acc573d7b6fd951371fbfac157fec397f1",
+      "excluded_arms": 1,
+      "file_marker_contexts": [
+        27
+      ],
+      "emitted_lines": 0,
+      "prior_evidence": "s13-r1334-excluded-only-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/invd.c",
+      "current_sha256": "0cb68c9ac8a34815fd07d71fcf7df5fab7c6fdf11701d1efe6f12e19f376324d",
+      "original_sha256": "f6e2d5b7a257a13fa91f071c5d740f20fb47654c97e35da744e7dc6ee493895e",
+      "excluded_arms": 1,
+      "file_marker_contexts": [
+        61
+      ],
+      "emitted_lines": 0,
+      "prior_evidence": "s13-r1334-excluded-only-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/invlpg.c",
+      "current_sha256": "6363edd6b303e581cbc72e0432d059d9e932223849a858e4bee61a2937090f95",
+      "original_sha256": "3d948316d66bdd957a2612340f6f653e975aaa99a65c97467b916737ae3394ba",
+      "excluded_arms": 1,
+      "file_marker_contexts": [
+        62
+      ],
+      "emitted_lines": 0,
+      "prior_evidence": "s13-r1334-excluded-only-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/wbinvd.c",
+      "current_sha256": "20771f7ca8afcd24dad998d17b0ad8c2113d7bd772f10210a7c730c3521660a0",
+      "original_sha256": "61cc2d303ac4935f8dc024ead2c3020201a10d3a5b08403f65f0b130bb2a537d",
+      "excluded_arms": 1,
+      "file_marker_contexts": [
+        121
+      ],
+      "emitted_lines": 0,
+      "prior_evidence": "s13-r1334-excluded-only-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/xadd.c",
+      "current_sha256": "35b58fb6e017ed57d710db9bcb925c39d0a1fa5d22ea7536dfb592da7d469046",
+      "original_sha256": "80d97ce7d9b57b24c6b498b72def5e847ca39642545bd841f0fbae5725c702e2",
+      "excluded_arms": 1,
+      "file_marker_contexts": [
+        122
+      ],
+      "emitted_lines": 0,
+      "prior_evidence": "s13-r1334-excluded-only-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/btrace.c",
+      "current_sha256": "2c1465908bdefee80bf1394a313efa6168697e14e7cc2f11d8dd05836f473adb",
+      "original_sha256": "5a19a8cf73bd5c06c47bf3292189c8989bc970933bb4968336580f4be0028e3f",
+      "excluded_arms": 3,
+      "file_marker_contexts": [
+        302
+      ],
+      "emitted_lines": 0,
+      "prior_evidence": "s13-r1334-excluded-only-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/dasm.c",
+      "current_sha256": "1fbe2c8970dc308d6145dd37de69b7300425bd276eab93dab21946e9bbf1dbb3",
+      "original_sha256": "6f90249d51eee69af65f59de138f915dc05af3a67b7bb529ea33596c04888b9b",
+      "excluded_arms": 2,
+      "file_marker_contexts": [
+        307
+      ],
+      "emitted_lines": 0,
+      "prior_evidence": "s13-r1334-excluded-only-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/debuggng.c",
+      "current_sha256": "c0206ca86ef8659c239c78de9d3f1c9ebf50bc11e3ef5f7df6119f3558c130d8",
+      "original_sha256": "c483e5ef755f537c7197fc7ce929ed3837b1227f57f6b874b5c8ab46b15045ad",
+      "excluded_arms": 1,
+      "file_marker_contexts": [
+        300
+      ],
+      "emitted_lines": 0,
+      "prior_evidence": "s13-r1334-excluded-only-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/pigyoda.c",
+      "current_sha256": "f351453f515087eec402ce1fbcf028526c158a7f472fe6c530165331c57f831f",
+      "original_sha256": "ede413a201fc0d4115b5bb0cd50aad3dd34d93a61dc734df49bfd464132ee7f2",
+      "excluded_arms": 1,
+      "file_marker_contexts": [
+        305
+      ],
+      "emitted_lines": 0,
+      "prior_evidence": "s13-r1334-excluded-only-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "current_sha256": "c4824481efbd33a6db998ca8e96928820136c86daa0fa4e7b543feb4b7776ff5",
+      "original_sha256": "234d4fdac97c117a01ee642242dbab691e6809d0a3d25e63df4604d5fbbd955f",
+      "excluded_arms": 1,
+      "file_marker_contexts": [
+        166
+      ],
+      "emitted_lines": 0,
+      "prior_evidence": "s13-r1334-excluded-only-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "current_sha256": "300702c4444d999a399614467b0b19f07f9be9e3553cc03cada6affdae353ab9",
+      "original_sha256": "396c621a6c6abf135fdec730a0be91c8bc5582de51687ed006ca5df97d354dc5",
+      "excluded_arms": 1,
+      "file_marker_contexts": [
+        168
+      ],
+      "emitted_lines": 0,
+      "prior_evidence": "s13-r1334-excluded-only-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_test.c",
+      "current_sha256": "ad0a3b57e944e56546161145b89d1608d1f77070e8813188678f41ca18d75f93",
+      "original_sha256": "cfba520508d5e274ac23d471af6656b7bc41af1a8b0606b3b7020570ab2e2210",
+      "excluded_arms": 2,
+      "file_marker_contexts": [
+        169
+      ],
+      "emitted_lines": 0,
+      "prior_evidence": "s13-r1334-excluded-only-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gendrvr.h",
+      "current_sha256": "0b2dc7885e54f445f4950e324f9b51def42b0037d5c72b1c589693ca94683e2e",
+      "original_sha256": "f6750f0da3fab360f5348981440747be5dc612ce81eabec6913557f59b5f0185",
+      "excluded_arms": 2,
+      "file_marker_contexts": [
+        134
+      ],
+      "emitted_lines": 0,
+      "prior_evidence": "s13-r1334-excluded-only-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gisp_sas.h",
+      "current_sha256": "8a6e9ee2a17b879c88b829f1555b32ab4444d19d548047329b95e2e97afa0a23",
+      "original_sha256": "2413fd0f1b4a4d9cb0238a4c811d088d2d0d1b0c0eaa423956400bd8256558e3",
+      "excluded_arms": 1,
+      "file_marker_contexts": [
+        133
+      ],
+      "emitted_lines": 0,
+      "prior_evidence": "s13-r1334-excluded-only-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gispsvga.h",
+      "current_sha256": "5afbb02100a36baaf90731d50752fab72ac733092d84e7127688f4bbe42fce12",
+      "original_sha256": "27cf2b856a23d0fb84e1162959043377dade1414d063349acaf952cf741bf60e",
+      "excluded_arms": 1,
+      "file_marker_contexts": [
+        130
+      ],
+      "emitted_lines": 0,
+      "prior_evidence": "s13-r1334-excluded-only-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hfx.h",
+      "current_sha256": "9c66c2992f4504aacda2fbdd19e31a943a96974d81f37fecf804217b26eac2ca",
+      "original_sha256": "88f2ba15861dbb20e502b88b650c37aa3f5a569368665105b24c11e89b6bb758",
+      "excluded_arms": 1,
+      "file_marker_contexts": [
+        130
+      ],
+      "emitted_lines": 0,
+      "prior_evidence": "s13-r1334-excluded-only-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hunter.h",
+      "current_sha256": "3ffb9e2b20d8632ef6c57787f9e99ddba1a9b33505e344f9ec1b2b9908001b64",
+      "original_sha256": "92958f20ad0e03e8423eb190f0793813e02a752b1820e94aff01049573475edf",
+      "excluded_arms": 1,
+      "file_marker_contexts": [
+        134
+      ],
+      "emitted_lines": 0,
+      "prior_evidence": "s13-r1334-excluded-only-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_hfx.h",
+      "current_sha256": "34e8910a1605eb0acc5e9e2a598146b5aa825be46bdaea44c849734d5746de08",
+      "original_sha256": "48a9b2bf6c4439301182aa118fe42afb8aafaa20146b2597021af162f2465f85",
+      "excluded_arms": 2,
+      "file_marker_contexts": [
+        130
+      ],
+      "emitted_lines": 0,
+      "prior_evidence": "s13-r1334-excluded-only-review.json"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdebug.c",
+      "current_sha256": "a46eab9b3724ff69d9ab345ebd9e303fc4f59b028121561e956982d125ccdb80",
+      "original_sha256": "a857e79085fabc406667f849229100ee7b92cd13107ceeb37fa798aedeba42ea",
+      "excluded_arms": 1,
+      "file_marker_contexts": [
+        483
+      ],
+      "emitted_lines": 0,
+      "prior_evidence": "s13-r1334-excluded-only-review.json"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcdbg.c",
+      "current_sha256": "8514683f311603f398605e339e642b592b24e31d60a457e57d4b2fe88d8a907f",
+      "original_sha256": "98e30a6019415eed62efa2aed0d921d4f8b7f4fe5da150e664c925d9e61504c2",
+      "excluded_arms": 1,
+      "file_marker_contexts": [
+        482
+      ],
+      "emitted_lines": 0,
+      "prior_evidence": "s13-r1334-excluded-only-review.json"
+    }
+  ]
+}

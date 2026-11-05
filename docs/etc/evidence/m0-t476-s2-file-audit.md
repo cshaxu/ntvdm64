@@ -101,3 +101,7 @@ The same [COMMAND file review](../../../artifacts/mvdm-audit/t476-s2-command-fil
 ## Excluded-only files with transformed compiler output
 
 The [excluded transformed-line review](../../../artifacts/mvdm-audit/t476-s2-excluded-transformed-review.json) completes nine additional files with hash-matched complete excluded-branch and outside-projection evidence. Twenty-eight actual compiler contexts cover 34 candidates; nine emit lines and all those emitted lines map to nonblank original code or identical original pragmas. The other 25 emit no lines and remain open. The running partition is 703 complete and 352 open.
+
+## Excluded-only files without emitted lines
+
+The [no-emission exclusion review](../../../artifacts/mvdm-audit/t476-s2-excluded-no-emission-review.json) completes the remaining 25 excluded-only candidates. Their hash-matched prior review checked the complete original conditional tree and outside projection, all conditional arms are explicitly excluded, the file marker was observed in a selected product compile, and the selected compiler context emitted no source lines. The record does not claim emitted-line sampling. They remain build-selected inputs; no file was deleted. The running partition is 728 complete and 327 open. The two COMMAND line-only source corrections remain unbuilt as part of the owner-directed ten-file batch.
