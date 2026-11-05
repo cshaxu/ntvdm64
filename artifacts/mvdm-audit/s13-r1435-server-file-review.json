@@ -1,0 +1,208 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+  "current_sha256": "170c4933ba983fa3fe941ddf91dbbf2b8483830b1cccdf80798e020c5aa6b3cb",
+  "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+  "branch_records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "line": "4",
+      "depth": "1",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "state": "excluded-error",
+      "marker_basis": "none",
+      "line_check": "error-anchor-match"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "line": "9",
+      "depth": "1",
+      "directive": "if",
+      "expression": "defined(WOW_ORIGINAL_DEFAULT_MESSAGES)",
+      "state": "historical-hit",
+      "marker_basis": "unchanged-directive-git-line-map",
+      "line_check": "not-applicable"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "line": "287",
+      "depth": "1",
+      "directive": "if",
+      "expression": "0",
+      "state": "excluded-error",
+      "marker_basis": "none",
+      "line_check": "error-anchor-match"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "line": "291",
+      "depth": "1",
+      "directive": "if",
+      "expression": "defined(WOW_ORIGINAL_DEFAULT_MESSAGES)",
+      "state": "current-hit",
+      "marker_basis": "r1311-current-equivalent-preprocessing",
+      "line_check": "not-applicable"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "line": "391",
+      "depth": "1",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "state": "excluded-error",
+      "marker_basis": "none",
+      "line_check": "error-anchor-match"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "line": "395",
+      "depth": "1",
+      "directive": "if",
+      "expression": "defined(WOW_ORIGINAL_DEFAULT_MESSAGES)",
+      "state": "current-hit",
+      "marker_basis": "r1311-current-equivalent-preprocessing",
+      "line_check": "not-applicable"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "line": "425",
+      "depth": "1",
+      "directive": "ifndef",
+      "expression": "PAGE_SIZE",
+      "state": "current-hit",
+      "marker_basis": "r1311-current-equivalent-preprocessing",
+      "line_check": "not-applicable"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "line": "430",
+      "depth": "1",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "state": "excluded-error",
+      "marker_basis": "none",
+      "line_check": "error-anchor-match"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "line": "438",
+      "depth": "1",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "state": "excluded-error",
+      "marker_basis": "none",
+      "line_check": "error-anchor-match"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "line": "445",
+      "depth": "1",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "state": "excluded-error",
+      "marker_basis": "none",
+      "line_check": "error-anchor-match"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "line": "452",
+      "depth": "1",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "state": "excluded-error",
+      "marker_basis": "none",
+      "line_check": "error-anchor-match"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "line": "460",
+      "depth": "1",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "state": "excluded-error",
+      "marker_basis": "none",
+      "line_check": "error-anchor-match"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "line": "463",
+      "depth": "1",
+      "directive": "else",
+      "expression": "",
+      "state": "empty-or-structural",
+      "marker_basis": "no-direct-code-after-comment-and-directive-filter",
+      "line_check": "not-applicable"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "line": "470",
+      "depth": "1",
+      "directive": "ifdef",
+      "expression": "ANDREVA_DBG",
+      "state": "excluded-error",
+      "marker_basis": "none",
+      "line_check": "error-anchor-match"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "line": "478",
+      "depth": "1",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "state": "excluded-error",
+      "marker_basis": "none",
+      "line_check": "error-anchor-match"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "line": "485",
+      "depth": "1",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "state": "excluded-error",
+      "marker_basis": "none",
+      "line_check": "error-anchor-match"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "line": "492",
+      "depth": "1",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "state": "excluded-error",
+      "marker_basis": "none",
+      "line_check": "error-anchor-match"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "line": "499",
+      "depth": "1",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "state": "excluded-error",
+      "marker_basis": "none",
+      "line_check": "error-anchor-match"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "line": "506",
+      "depth": "1",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "state": "excluded-error",
+      "marker_basis": "none",
+      "line_check": "error-anchor-match"
+    }
+  ],
+  "finding": {
+    "current_line": 463,
+    "original_alternative_line": 992,
+    "original_body_line": 993,
+    "original_body": "FNID(FNID_UNUSED)                   = xxxUnusedFunctionId;",
+    "current_body": "#line 993 followed by #endif",
+    "original_context": "The original alternative is within the omitted USER server function initialization, not within the retained message-table implementation.",
+    "status": "not resolved; empty conditional structure can be preprocessed in a current context but does not demonstrate original function or body was selected. Marking this else #error directly would reject a supported non-FE_IME context.",
+    "evidence": "s13-r1243-server-full-review.json; MVDM-related local subset OPENNT-HOST-090; s13-r1427-excluded-body-audit.json"
+  },
+  "other_boundaries": "Other original/current condition group matches and diagnostic continuation mappings are not newly certified by this record. No changes to source or tests."
+}
