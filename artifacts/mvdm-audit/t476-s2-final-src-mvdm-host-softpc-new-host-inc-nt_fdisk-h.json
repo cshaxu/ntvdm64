@@ -1,0 +1,66 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/nt_fdisk.h",
+  "current_sha256": "fe830c74945f250bc59bca2804fa094a74121ce544edd3bd523041bef5ac2d10",
+  "original_sha256": "d681eb7fc45dedcc5501cb43516a8e9d1c7d94d6f70ebbf72517364134fe1c87",
+  "original_and_current_conditional_arms": 0,
+  "matching_original_source_lines": 10,
+  "matched_line_positions": [
+    [
+      7,
+      7,
+      7
+    ],
+    [
+      8,
+      8,
+      8
+    ],
+    [
+      9,
+      9,
+      9
+    ],
+    [
+      11,
+      11,
+      11
+    ],
+    [
+      12,
+      12,
+      12
+    ],
+    [
+      13,
+      13,
+      13
+    ],
+    [
+      14,
+      14,
+      14
+    ],
+    [
+      15,
+      15,
+      15
+    ],
+    [
+      16,
+      16,
+      16
+    ],
+    [
+      17,
+      17,
+      17
+    ]
+  ],
+  "compiler_contexts": [
+    326,
+    335,
+    350
+  ],
+  "compiler_unique_original_lines_seen": 5,
+  "local_diff_review": "Complete original/current diff reviewed. DIV-111 removes the retained host pointer declaration in favor of session guest-state ownership."
+}

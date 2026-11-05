@@ -1,0 +1,119 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/popf.c",
+  "current_sha256": "5968ca934ab21697961e7ccf0ea06c57ca8a7307b89e55de8677c0e135795470",
+  "original_sha256": "66c4fcaf0f3329dc6d7021a0ad8ba910fa775e84d63ad35404ee2a3134dd46c3",
+  "original_and_current_conditional_arms": 0,
+  "matching_original_source_lines": 21,
+  "matched_line_positions": [
+    [
+      5,
+      5,
+      5
+    ],
+    [
+      7,
+      7,
+      7
+    ],
+    [
+      33,
+      36,
+      33
+    ],
+    [
+      38,
+      41,
+      38
+    ],
+    [
+      41,
+      44,
+      41
+    ],
+    [
+      42,
+      45,
+      42
+    ],
+    [
+      45,
+      48,
+      45
+    ],
+    [
+      48,
+      51,
+      48
+    ],
+    [
+      49,
+      52,
+      49
+    ],
+    [
+      50,
+      53,
+      50
+    ],
+    [
+      52,
+      55,
+      52
+    ],
+    [
+      55,
+      58,
+      55
+    ],
+    [
+      56,
+      59,
+      56
+    ],
+    [
+      57,
+      60,
+      57
+    ],
+    [
+      58,
+      61,
+      58
+    ],
+    [
+      60,
+      63,
+      60
+    ],
+    [
+      61,
+      64,
+      61
+    ],
+    [
+      62,
+      65,
+      62
+    ],
+    [
+      64,
+      67,
+      64
+    ],
+    [
+      65,
+      68,
+      65
+    ],
+    [
+      66,
+      69,
+      66
+    ]
+  ],
+  "compiler_contexts": [
+    89
+  ],
+  "compiler_unique_original_lines_seen": 10,
+  "local_diff_review": "Complete original/current diff reviewed. DIV-076 includes the native C varargs declaration."
+}

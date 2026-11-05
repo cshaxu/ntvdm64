@@ -1,0 +1,54 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.h",
+  "current_sha256": "47bcf3e007623dd2445f5f433a4b2d261b29fea090422a2df05312914f8dc74b",
+  "original_sha256": "a30d41e57c90bc0b27366debdaa1e6a23c214cc07d757e9f46c7b43fa636328e",
+  "original_and_current_conditional_arms": 0,
+  "matching_original_source_lines": 8,
+  "matched_line_positions": [
+    [
+      1,
+      1,
+      1
+    ],
+    [
+      2,
+      2,
+      2
+    ],
+    [
+      3,
+      3,
+      3
+    ],
+    [
+      4,
+      4,
+      4
+    ],
+    [
+      5,
+      5,
+      5
+    ],
+    [
+      6,
+      6,
+      6
+    ],
+    [
+      7,
+      10,
+      7
+    ],
+    [
+      8,
+      11,
+      8
+    ]
+  ],
+  "compiler_contexts": [
+    36
+  ],
+  "compiler_unique_original_lines_seen": 8,
+  "local_diff_review": "Complete original/current diff reviewed. DIV-348 declares the existing abandoned-frame helper."
+}

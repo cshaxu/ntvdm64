@@ -1,0 +1,54 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/help.c",
+  "current_sha256": "d56c1550a4e1969665434b9acf8e8c339c0771a0c26e5887fc0b33ec24bfaf2b",
+  "original_sha256": "7ffe7d97c36f1aa6ab119eb7f0c9ca70fd8eb57cbefe322e40d0c5df041be16f",
+  "original_and_current_conditional_arms": 0,
+  "matching_original_source_lines": 8,
+  "matched_line_positions": [
+    [
+      28,
+      27,
+      28
+    ],
+    [
+      29,
+      28,
+      29
+    ],
+    [
+      31,
+      30,
+      31
+    ],
+    [
+      35,
+      36,
+      35
+    ],
+    [
+      36,
+      37,
+      36
+    ],
+    [
+      37,
+      38,
+      37
+    ],
+    [
+      38,
+      39,
+      38
+    ],
+    [
+      42,
+      43,
+      42
+    ]
+  ],
+  "compiler_contexts": [
+    741
+  ],
+  "compiler_unique_original_lines_seen": 4,
+  "local_diff_review": "Complete original/current diff reviewed. OPENNT-HOST-107 retains GetContextHelpId with the registered private-property binding and omits unrelated original functions."
+}

@@ -1,0 +1,49 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/text.c",
+  "current_sha256": "b6539c0df34096ed6a3a2935f2d905ff01acb0d02586218c97c40f764a33ef53",
+  "original_sha256": "d2dae26e4766c2567225cb6bfc8147b4e80955b4ca49dcaf97b6193e7067a8e2",
+  "original_and_current_conditional_arms": 0,
+  "matching_original_source_lines": 7,
+  "matched_line_positions": [
+    [
+      28,
+      9,
+      28
+    ],
+    [
+      30,
+      11,
+      30
+    ],
+    [
+      32,
+      13,
+      32
+    ],
+    [
+      34,
+      15,
+      34
+    ],
+    [
+      39,
+      38,
+      39
+    ],
+    [
+      40,
+      39,
+      40
+    ],
+    [
+      48,
+      49,
+      48
+    ]
+  ],
+  "compiler_contexts": [
+    653
+  ],
+  "compiler_unique_original_lines_seen": 5,
+  "local_diff_review": "Complete original/current diff reviewed. OPENNT-HOST-112 retains PSMGetTextExtent and registers temporary buffer capacity and cleanup changes."
+}

@@ -1,0 +1,24 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/localfm.c",
+  "current_sha256": "0017f737c6e2cce042aeb4f6b95c9a69201e1908d4cae6a9af5de14998a87180",
+  "original_sha256": "5dbb2bd74e82d5b87910db81f1411610c84a2d57a553e8cb78080871d19835df",
+  "original_and_current_conditional_arms": 0,
+  "matching_original_source_lines": 2,
+  "matched_line_positions": [
+    [
+      7,
+      16,
+      7
+    ],
+    [
+      9,
+      18,
+      9
+    ]
+  ],
+  "compiler_contexts": [
+    129
+  ],
+  "compiler_unique_original_lines_seen": 2,
+  "local_diff_review": "Complete original/current diff reviewed. DIV-137 uses the selected CCPU and C-VID shared state providers."
+}

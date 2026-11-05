@@ -178,3 +178,23 @@ The [OEM file helper review](../../../artifacts/mvdm-audit/t476-s2-oem-file-fina
 ### Completed RAP structure-size review
 
 The [RAP structure-size review](../../../artifacts/mvdm-audit/t476-s2-rap-strucsiz-final-review.json) completes `strucsiz.c`. Neither source has conditional groups. The complete diff preserves the original RAP sizing code, removing prose and comments with continuation anchors; matching source positions and actual compiler observations agree. Total: **755 of 1,055 complete; 300 open**.
+
+
+### Completed DPMI, export and CPU source reviews
+
+Ten unconditional original/current pairs were checked by complete diff, registered adaptation, line-position comparison and hash-bound compiler samples: `dpmimscr.c`, `dbgexp.h`, `memapi.h`, `c_debug.c`, `lmsw.c`, `localfm.c`, `ntthread.c`, `ntthread.h`, `popf.c` and `sascdef.c`. Their individual `t476-s2-final-*` JSON records in `artifacts/mvdm-audit` retain exact source hashes, compiler contexts and matched line positions. Their runtime code was not altered during review. Total: **765 of 1,055 complete; 290 open**.
+
+
+### Completed C-video, host disk/PIF and WOW header reviews
+
+Ten more unconditional original/current pairs were reviewed as complete files: `evidfunc.h`, `j_c_lang.c`, `nt_fdisk.h`, `nt_fdisk.c`, `nt_pif.c`, `isvwow.h`, `wdde.h`, `winsockp.h`, `wkman.h` and `wowhooks.h`. The individual `t476-s2-final-*` records retain hashes, compiler contexts, matching line positions and the registered local adaptation. DIV-463's affected-file list was corrected to identify `winsockp.h` rather than a nonexistent `.c` file. No runtime code was changed by these reviews. Total: **775 of 1,055 complete; 280 open**.
+
+
+### Completed WOW, BaseSrv and XactSrv source reviews
+
+Eight further unconditional pairs were fully reviewed: `wreldc.c`, `wreldc.h`, `wsext.c`, `wutmr.c`, `srvvdm.h`, `apiuse.c`, `apiwksta.c` and `xssubs.c`. The per-file `t476-s2-final-*` records bind original/current hashes to existing compiler contexts, matched line positions and each local adaptation. No runtime source was changed in this review. Total: **783 of 1,055 complete; 272 open**.
+
+
+### Completed USER drawing, help and text reviews
+
+The unconditional `client/draw.c`, `rtl/help.c` and `rtl/text.c` pairs were reviewed against their originals. The full diffs preserve the registered PaintRect subset, help property binding and text buffer ownership adaptations. Individual `t476-s2-final-*` records bind the current and original hashes, compiler observations and matching line positions. Total: **786 of 1,055 complete; 269 open**.

@@ -1,0 +1,69 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/lmsw.c",
+  "current_sha256": "b2692006499b2faf741da6faf057e77c759c89317ec86052fc9927a1b3b844c3",
+  "original_sha256": "8bc5bad26249b91c1cc9b3be756575c081b2da322bb8dcc7e9f554d4f68a4e96",
+  "original_and_current_conditional_arms": 0,
+  "matching_original_source_lines": 11,
+  "matched_line_positions": [
+    [
+      5,
+      5,
+      5
+    ],
+    [
+      7,
+      7,
+      7
+    ],
+    [
+      30,
+      32,
+      30
+    ],
+    [
+      35,
+      37,
+      35
+    ],
+    [
+      39,
+      41,
+      39
+    ],
+    [
+      44,
+      46,
+      44
+    ],
+    [
+      45,
+      47,
+      45
+    ],
+    [
+      46,
+      48,
+      46
+    ],
+    [
+      49,
+      51,
+      49
+    ],
+    [
+      52,
+      61,
+      52
+    ],
+    [
+      55,
+      64,
+      55
+    ]
+  ],
+  "compiler_contexts": [
+    74
+  ],
+  "compiler_unique_original_lines_seen": 2,
+  "local_diff_review": "Complete original/current diff reviewed. DIV-327 adds a default-off observer around original LMSW state updates."
+}
