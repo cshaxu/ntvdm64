@@ -9,8 +9,7 @@
         "CMAKE_BUILD_TYPE": "Release",
         "NTVDM_ARCHITECTURE": "x86",
         "NTVDM_USE_CCACHE": "OFF",
-        "CMAKE_C_COMPILER_LAUNCHER": "",
-        "CMAKE_CXX_COMPILER_LAUNCHER": ""
+        "CMAKE_C_COMPILER_LAUNCHER": ""
       }
     },
     {

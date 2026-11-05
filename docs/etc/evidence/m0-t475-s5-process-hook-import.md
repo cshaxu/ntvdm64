@@ -487,3 +487,47 @@ immutable guest files and 274 ordinal exports (`p13/stage.process`), and
 Control passed (`p13/control.process`). Ten release image hashes and the
 license match local package `f4f0567d-2924-4971-bdc3-a5a4d73559ce`.
 Archived historical scripts and the late-hook concurrency limit remain open.
+
+## P14 archived C++ build-script index
+
+Three inactive pre-T260 scripts that selected historical Bochs C++ sources
+were removed from the working tree. Their required Bochs inputs and retained
+base build artifacts are absent, and no active `src`, `tests`, or `tools`
+reference to their script names was found. This retirement is not a passing
+replacement for those historical probes. Exact source blobs remain reachable
+from commit `09b58f5c6`; retrieve them with `git cat-file blob <blob-id>`.
+`p13/historical-script-audit.process` verified normalized working content
+against those historical objects before removal.
+
+| Former path | Git blob | Blob SHA-256 |
+| --- | --- | --- |
+| `tools/historical/pre-t260/build/New-T187S3PassiveListenerEngineDerivative.ps1` | `5574a90a6b342b27351d1a3a817f9c2f3f929931` | `8838d55564ac938bd657042908272ef8d9406fa1b95094b5e143bbf9f9e5e349` |
+| `tools/historical/pre-t260/build/New-T190S3CommandBootstrapDerivative.ps1` | `65bc38282b03a9e1518618ea2d3fc4e176c55c7b` | `7d5418b5abe2db88f1f6959cec6a42e97470987455c13e40675daf59cc3639b4` |
+| `tools/historical/pre-t260/probe/Invoke-T212S5EngineCancellationProbe.ps1` | `d3961ca8b16c80e479280c49d5fe9b0901f27867` | `53e0fe9df5376566ae303e60267ec0131590b00d79c51f9f6845db739be42390` |
+
+The three indexed historical script blobs remained byte-retrievable and
+matched their SHA-256 after retirement (`p14/archive-check.process`, exit 0).
+The top-level CMake project and presets now enable C only; the obsolete C++
+compiler launcher setting was removed. On fresh x86 and x64 Ninja trees,
+CMake configured successfully, did not create a C++ compiler cache entry or
+detection file, and built the C observation peer (`p14/cmake-check.process`,
+exit 0). Cache ON/OFF reconfiguration and C peer builds also passed for both
+architectures in those same trees (`p14/toggle.process`, exit 0). The build-
+hygiene test was updated to check the C launcher and reject C++ compile modes;
+its parser and a negative expression control passed
+(`p14/hygiene-check.log`). The complete build-hygiene suite was not run.
+
+The imported-library identity check confirmed 22 unchanged upstream files and
+one recorded local helper fix (`p14/import-identity.process`, exit 0).
+
+Synthetic C-array and input identity-negative tests passed (`p14-arrays.process`,
+exit 0). The x86/x64 product build and focused checks passed (`p14/build.process`);
+the 443-command SoftPC profile audit, 971-command selected C-only graph scan,
+and tracked-source C++ extension scan passed (`p14/profile.process`,
+`p14/selected-c.process`, `p14/source-scan.process`). Staging checked 63
+immutable guest files and 274 exports (`p14/stage.process`), and Control passed
+(`p14/control.process`). Ten local release image hashes and the license match
+package `8e4a9c29-e13d-4bd3-979a-4e0ed94e1d52`. The earlier P12 Full result
+remains selected-gate evidence; the external DOS4GW/NESticle fixture was not
+available. The historical T290 matrix remains incomplete, and new-thread
+races and removal are not proven for the experimental late-hook primitive.

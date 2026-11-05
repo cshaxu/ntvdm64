@@ -106,6 +106,12 @@ Product build and Control passed; local package
 selected-gate comparison against pre-replacement P2 passed on P12; external
 DOS4GW/NESticle was unavailable. Archived historical scripts and late-hook
 concurrency remain open.
+P14 retires three inactive historical C++ build scripts with indexed Git
+objects and removes C++ language configuration from CMake. Fresh x86/x64
+C-only configurations built the C observation peer without detecting a C++
+compiler. Product build, profile checks and Control passed; local package
+`8e4a9c29-e13d-4bd3-979a-4e0ed94e1d52` has ten verified hashes. General
+late-hook concurrency and external DOS4GW/NESticle remain unverified.
 The adjacent library's same-width payload-only mechanism, non-Detours payload
 format, helper ordinal and startup-only transaction require compatibility proof;
 no untested semantic equivalence is assumed. Prior [S4 evidence](../etc/evidence/m0-t475-s4-nthook-dependency-cleanup.md),

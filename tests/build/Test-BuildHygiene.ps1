@@ -117,7 +117,8 @@ if(!$CleanupOnly){
         $null=Run-Dev $architecture "`"$cmake`" --build `"$tree`" --target native-launcher" "$architecture-cache-hit-rebuild"
         $null=Run-Dev $architecture "`"$cmake`" --preset $preset" "$architecture-disable-cache"
         $cache=Get-Content "$tree/CMakeCache.txt" -Raw
-        Check ($cache -match '(?m)^CMAKE_C_COMPILER_LAUNCHER:STRING=\r?$' -and $cache -match '(?m)^CMAKE_CXX_COMPILER_LAUNCHER:STRING=\r?$') "$architecture cache-off clears old launchers in same tree"
+        Check ($cache -match '(?m)^CMAKE_C_COMPILER_LAUNCHER:STRING=\r?$') "$architecture cache-off clears C launcher in same tree"
+        Check ($commands -notmatch '(?i)/std:c\+\+|/TP(?:\s|$)') "$architecture manifest graph selects no C++ compile mode"
     }
     $stats=@(& $cmake -E env "CCACHE_DIR=$repo/build/.ccache" "CCACHE_TEMPDIR=$repo/build/.ccache/tmp" "CCACHE_MAXSIZE=5G" $ccache --print-stats)
     if($LASTEXITCODE){throw 'Repository ccache stats failed'}
