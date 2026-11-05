@@ -236,6 +236,22 @@ static DWORD instance_rpc_begin(common_frontend_key keys[2],HANDLE events[4])
         if(error)return error;
     }
     if(keys[0].instance==keys[1].instance)return ERROR_INVALID_DATA;
+    {
+        HANDLE contexts[2]={0},repeat=NULL;
+        typedef BOOL (WINAPI *COMPARE_OBJECTS)(HANDLE,HANDLE);
+        COMPARE_OBJECTS compare=(COMPARE_OBJECTS)GetProcAddress(GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
+        if(!compare)return ERROR_CALL_NOT_IMPLEMENTED;
+        for(i=0;i<2;++i) {
+            error=OpenNtBaseClientAcquireConsoleContext(events[i*2],&contexts[i]);
+            if(error)break;
+        }
+        if(!error && compare(contexts[0],contexts[1]))error=ERROR_INVALID_DATA;
+        if(!error)error=OpenNtBaseClientAcquireConsoleContext(events[0],&repeat);
+        if(!error && !compare(contexts[0],repeat))error=ERROR_INVALID_DATA;
+        if(repeat)CloseHandle(repeat);
+        for(i=0;i<2;++i)if(contexts[i])CloseHandle(contexts[i]);
+        if(error)return error;
+    }
     error=OpenNtBaseClientRegisterEmbeddedFrontend(&location,&bad,&first,&second);
     if(error!=ERROR_ALREADY_EXISTS || first || second)return ERROR_INVALID_DATA;
     bad=keys[0];++bad.generation;

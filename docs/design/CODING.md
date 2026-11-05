@@ -36,6 +36,12 @@ NTCON and NTVWM use core only; NTVDM and Run16 select both. WOW reaches the
 worker's existing client exports, not a DLL-private duplicate connection.
 The private composition header is not a wire ABI or general plugin registry.
 
+T477 separates explicit frontend-instance control into frontend_client.c/.h
+within the same shared client archive. The process core owns the authenticated
+RPC connection; frontend calls borrow it and pass an instance key. Worker-base
+consumes backend control only. NTCON and future NTVDM VM adapters compose
+common/frontend-base directly; worker-base does not depend on frontend-base.
+
 ## Owner-approved independent guest add-on — T435
 
 T436 S1 owner follow-up admits tools/win31-setup for isolated Windows 3.1

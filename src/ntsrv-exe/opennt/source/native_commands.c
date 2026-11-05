@@ -1,6 +1,6 @@
 /* NTSRV-private native commands; project adaptation,
- * not an original OpenNT mirror. Physical separation only: existing function
- * bodies, state authority and lock/resource contracts are preserved. */
+ * not an original OpenNT mirror. Instance associations use the existing service
+ * lock; original task owners and direct frontend/backend I/O remain separate. */
 #include <service_internal.h>
 #include "common/native_image.h"
 
@@ -320,7 +320,9 @@ DWORD service_queue_native_command(OPENNT_BASE_CONNECTION *connection,DWORD pid,
     DWORD bytes,const BYTE *payload)
 {
     HANDLE root_process=NULL,execution=NULL,worker=NULL,frontend=NULL;
-    DWORD root_generation=0,worker_generation=0,error;
+    DWORD peer_generation=0,worker_generation=0,error;
+    uint64_t root_generation=0;
+    OPENNT_FRONTEND_INSTANCE *selected_root=NULL;
     OPENNT_BASE_WIN32RECORD *record=NULL;
     BYTE *owned_payload=NULL;
     LIST_ENTRY *link;
@@ -356,7 +358,8 @@ DWORD service_queue_native_command(OPENNT_BASE_CONNECTION *connection,DWORD pid,
     }
     if(capability) {
         error=OpenNtBaseServiceRetainFrontendRoot(connection,pid,generation,capability,
-            &root_process,&root_generation);
+            &root_process,&peer_generation);
+        if(!error){selected_root=service_frontend_by_capability(connection->service,capability);root_generation=selected_root->key.instance;}
         if (error) goto done;
         error=OpenNtBaseServiceAcquireConsoleContext(connection,pid,generation,capability,&execution);
         if (error) goto done;
@@ -369,7 +372,7 @@ DWORD service_queue_native_command(OPENNT_BASE_CONNECTION *connection,DWORD pid,
             OpenNtBaseServiceRetainNativeCommandWorker(connection,pid,generation,&worker) :
             OpenNtBaseServiceRetainCommandWorker(connection,pid,generation,&worker);
         if (error) goto done;
-        for (link=connection->service->connections.Flink;link!=&connection->service->connections;link=link->Flink) {
+        for(link=connection->service->connections.Flink;link!=&connection->service->connections;link=link->Flink) {
             OPENNT_BASE_CONNECTION *candidate=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
             if (candidate->native_worker &&
                 GetProcessId(candidate->process.ProcessHandle)==GetProcessId(worker)) {
@@ -388,12 +391,11 @@ DWORD service_queue_native_command(OPENNT_BASE_CONNECTION *connection,DWORD pid,
                 SYNCHRONIZE,FALSE,0)) { error=GetLastError();goto done; }
     }
     error=ERROR_ACCESS_DENIED;
-    for (link=connection->service->connections.Flink;link!=&connection->service->connections;link=link->Flink) {
-        OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-        if (capability && root->process.SequenceNumber!=root_generation) continue;
+    do {
+
         if(capability) {
             HANDLE origin=NULL;
-            error=service_acquire_console_context(root,connection->console,worker_generation,&origin);
+            error=service_acquire_console_context(selected_root,connection->console,worker_generation,&origin);
             if(error)goto done;
             CloseHandle(execution);execution=origin;
         }
@@ -407,7 +409,7 @@ DWORD service_queue_native_command(OPENNT_BASE_CONNECTION *connection,DWORD pid,
         WakeAllConditionVariable(&connection->service->frontend_changed);
         service_signal_frontend_states(connection->service);
         error=ERROR_SUCCESS;break;
-    }
+    } while(0);
 done:
     if (root_process) CloseHandle(root_process);
     if (worker) CloseHandle(worker);
@@ -516,7 +518,7 @@ done:
 /* Caller holds the service lock. Completion is original DOS receipt state;
  * origin is the existing inherited context, never physical PID membership. */
 DWORD service_prepare_parent_resume(OPENNT_BASE_CONNECTION *caller,
-    DWORD root_generation,BOOL *native_parent)
+    uint64_t root_generation,BOOL *native_parent)
 {
     LIST_ENTRY *link;
     *native_parent=FALSE;
@@ -569,7 +571,7 @@ DWORD OpenNtBaseServiceSubmitNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD 
         BOOL native_parent=FALSE;
         if(bytes || payload)return ERROR_INVALID_PARAMETER;
         EnterCriticalSection(&caller->service->lock);
-        error=service_prepare_parent_resume(caller,root_generation,&native_parent);
+        error=service_prepare_parent_resume(caller,caller->retained_frontend_root,&native_parent);
         if(!error && !native_parent)caller->dos_completion_read=FALSE;
         LeaveCriticalSection(&caller->service->lock);
         if(error || !native_parent)return error;
@@ -739,21 +741,21 @@ DWORD service_take_native_command(OPENNT_BASE_CONNECTION *root,DWORD pid,
          * broker-authenticated execution Console. Do not reduce that proven
          * association back to raw Console equality at delivery time. */
         if(caller->channel_frontend) {
-            OPENNT_BASE_CONNECTION *frontend=NULL;
-            LIST_ENTRY *root_link;
-            for(root_link=root->service->connections.Flink;
-                root_link!=&root->service->connections;root_link=root_link->Flink) {
-                OPENNT_BASE_CONNECTION *candidate=CONTAINING_RECORD(root_link,
-                    OPENNT_BASE_CONNECTION,service_link);
-                if(candidate->process.SequenceNumber==caller->frontend_channel_root &&
-                    candidate->frontend.capability &&
-                    WaitForSingleObject(candidate->process.ProcessHandle,0)==WAIT_TIMEOUT) {
-                    frontend=candidate;break;
+            OPENNT_FRONTEND_INSTANCE *selected=service_frontend_by_identity(root->service,caller->frontend_channel_root);
+            BOOL matches=FALSE;
+            LIST_ENTRY *entry;
+            if(!service_frontend_open(selected)){error=ERROR_PIPE_NOT_CONNECTED;goto done;}
+            if(selected->embedded) {
+                for(entry=root->service->console_contexts.Flink;entry!=&root->service->console_contexts;entry=entry->Flink) {
+                    OPENNT_BASE_CONSOLE_CONTEXT *context=CONTAINING_RECORD(entry,OPENNT_BASE_CONSOLE_CONTEXT,link);
+                    if(context->root==selected && context->console==caller->console){matches=TRUE;break;}
                 }
+                error=matches ? ERROR_SUCCESS : ERROR_ACCESS_DENIED;
+            } else {
+                if(!service_root_console_matches(selected->owner,caller->console) ||
+                    !selected->owner->console_member_count){error=ERROR_PIPE_NOT_CONNECTED;goto done;}
+                error=service_copy_execution_console_members(root,selected->owner);
             }
-            if(!frontend || !service_root_console_matches(frontend,caller->console) ||
-                !frontend->console_member_count) {error=ERROR_PIPE_NOT_CONNECTED;goto done;}
-            error=service_copy_execution_console_members(root,frontend);
         } else error=ERROR_SUCCESS;
         if(error)goto done;
         /* The pinned sender process permits only this direct channel's finite

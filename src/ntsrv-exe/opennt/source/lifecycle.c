@@ -1,6 +1,6 @@
 /* NTSRV-private lifecycle; project adaptation,
- * not an original OpenNT mirror. Physical separation only: existing function
- * bodies, state authority and lock/resource contracts are preserved. */
+ * not an original OpenNT mirror. Instance associations use the existing service
+ * lock; original task owners and direct frontend/backend I/O remain separate. */
 #include <service_internal.h>
 #include "common/protocol/frontend_lifecycle.h"
 
@@ -277,6 +277,13 @@ DWORD OpenNtBaseServiceRequestParticipantExit(OPENNT_BASE_CONNECTION *participan
     key.category=MANAGEMENT_WORKER;
     if(scope==OPENNT_EXIT_CONSOLE) {
         if(watch->wow){error=ERROR_NOT_SUPPORTED;goto done;}
+        if(!watch->frontend_association){error=ERROR_NOT_READY;goto done;}
+        OPENNT_FRONTEND_INSTANCE *selected=service_frontend_by_identity(service,watch->frontend_association->identity);
+        if(selected && selected->embedded) {
+            error=OpenNtBaseServiceCloseFrontendInstance(selected->owner,
+                GetProcessId(selected->owner->process.ProcessHandle),selected->owner->process.SequenceNumber,&selected->key);
+            LeaveCriticalSection(&service->lock);return error;
+        }
         if(!watch->frontend_root_generation){error=ERROR_NOT_READY;goto done;}
         /* Never accept a caller-supplied frontend identity. The retained
          * authenticated association selects the existing close transaction. */
@@ -387,9 +394,9 @@ DWORD OpenNtBaseServiceFrontendUsage(OPENNT_BASE_CONNECTION *root,DWORD pid,
     if(!OpenNtBaseServicePeer(root,pid,generation) || !root->frontend.capability)goto done;
     for(link=root->service->connections.Flink;link!=&root->service->connections;link=link->Flink){
         OPENNT_BASE_CONNECTION *caller=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-        if(caller->frontend_request_root==generation || caller->frontend_channel_root==generation)
+        if(caller->frontend_request_root==root->frontend.key.instance || caller->frontend_channel_root==root->frontend.key.instance)
             pending_count=1;
-        if(caller->native_activity_root==generation && caller->native_inflight &&
+        if(caller->native_activity_root==root->frontend.key.instance && caller->native_inflight &&
             WaitForSingleObject(caller->process.ProcessHandle,0)==WAIT_TIMEOUT)
             pending_count=1;
         /* Management Win32Records do not add a separate frontend pin. */
@@ -470,16 +477,7 @@ DWORD OpenNtBaseServiceRetireWorkerlessFrontend(OPENNT_BASE_CONNECTION *root,DWO
  * This is a Console-root lifetime check, never a DOS/native task scheduler. */
 BOOL service_root_has_worker(OPENNT_BASE_CONNECTION *root)
 {
-    LIST_ENTRY *link;
-    OPENNT_BASE_SERVICE *service=root->service;
-    DWORD generation=root->process.SequenceNumber;
-    for(link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
-        OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
-        if(watch->wow || WaitForSingleObject(watch->process.ProcessHandle,0)!=WAIT_TIMEOUT)
-            continue;
-        if(watch->frontend_root_generation==generation)return TRUE;
-    }
-    return FALSE;
+    return service_drain_frontend(&root->frontend,FALSE);
 }
 
 /* The root process is NTCON, so its continued attachment must never count as
@@ -523,7 +521,6 @@ DWORD OpenNtBaseServiceReconcileFrontends(OPENNT_BASE_SERVICE *service)
         if(root->frontend.close_draining) {
             BOOL live_worker=FALSE;
             BOOL frontend_live=WaitForSingleObject(root->process.ProcessHandle,0)==WAIT_TIMEOUT;
-            LIST_ENTRY *watch_link;
             /* The acknowledgement is the ordering fence.  Before it, retain
              * the transaction but do not touch worker lifetime.  Afterwards
              * retry only Console-close delivery; a lost wake cannot silently
@@ -532,23 +529,7 @@ DWORD OpenNtBaseServiceReconcileFrontends(OPENNT_BASE_SERVICE *service)
             /* If NTCON itself has gone away before acknowledging, still use
              * Console-close for the worker. Reopening admission would be
              * wrong; generic worker shutdown would be the wrong command. */
-            for(watch_link=service->worker_watches.Flink;
-                watch_link!=&service->worker_watches;watch_link=watch_link->Flink) {
-                OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(watch_link,OPENNT_BASE_WORKER_WATCH,link);
-                if(watch->wow || watch->native_gui_launcher ||
-                    watch->frontend_root_generation!=root->process.SequenceNumber ||
-                    WaitForSingleObject(watch->process.ProcessHandle,0)!=WAIT_TIMEOUT)continue;
-                live_worker=TRUE;
-                if(watch->close_kind==WORKER_CLOSE_NONE)watch->close_kind=WORKER_CLOSE_CONSOLE;
-                /* The first accepted terminal scope survives root rundown.
-                 * Console-close encompasses an existing worker-close by
-                 * waiting for it, never by dispatching a second close kind. */
-                if(watch->close_kind==WORKER_CLOSE_CONSOLE && watch->console_close &&
-                    WaitForSingleObject(watch->console_close,0)==WAIT_TIMEOUT) {
-                    (void)SetEvent(watch->console_close);
-                    changed=TRUE;
-                }
-            }
+            live_worker=service_drain_frontend(&root->frontend,TRUE);
             if(!live_worker) {
                 root->frontend.close_draining=FALSE;
                 root->frontend.native.close_return_required=FALSE;
@@ -568,21 +549,13 @@ DWORD OpenNtBaseServiceReconcileFrontends(OPENNT_BASE_SERVICE *service)
      * like shared WOW, it remains resident rather than timing out as startup. */
     for(link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
         OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
-        LIST_ENTRY *root_link;
         BOOL attached=FALSE;
-        if(watch->wow || !watch->frontend_root_generation ||
+        OPENNT_FRONTEND_INSTANCE *root;
+        if(watch->wow || !watch->frontend_association ||
             WaitForSingleObject(watch->process.ProcessHandle,0)!=WAIT_TIMEOUT)continue;
-        for(root_link=service->connections.Flink;root_link!=&service->connections;root_link=root_link->Flink) {
-            OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(root_link,OPENNT_BASE_CONNECTION,service_link);
-            if(!root->frontend.capability)continue;
-            if(watch->frontend_root_generation==root->process.SequenceNumber) {
-                /* A draining transaction owns Console-close even if its
-                 * frontend dies. Do not issue a competing worker-close. */
-                if(root->frontend.close_draining ||
-                    (!root->frontend.closing && WaitForSingleObject(root->process.ProcessHandle,0)==WAIT_TIMEOUT))
-                    attached=TRUE;
-            }
-        }
+        root=service_frontend_by_identity(service,watch->frontend_association->identity);
+        if(root && (root->close_draining || (!root->closing &&
+            WaitForSingleObject(root->owner->process.ProcessHandle,0)==WAIT_TIMEOUT)))attached=TRUE;
         if(!attached) {
             if(watch->close_kind==WORKER_CLOSE_NONE)watch->close_kind=WORKER_CLOSE_CONSOLE;
             if(watch->close_kind==WORKER_CLOSE_CONSOLE && watch->console_close &&
@@ -617,7 +590,7 @@ void service_retire_completed_root(OPENNT_BASE_CONNECTION *parent)
     for(link=parent->service->connections.Flink;
         link!=&parent->service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-        if(root->process.SequenceNumber!=parent->retained_frontend_root ||
+        if(root->frontend.key.instance!=parent->retained_frontend_root ||
             !root->frontend.capability || root->frontend.closing ||
             !service_root_console_matches(root,parent->console))continue;
         /* A child completion is not a terminal-root completion.  In
@@ -634,7 +607,7 @@ void service_retire_completed_root(OPENNT_BASE_CONNECTION *parent)
          * broker transaction; no component guesses that another carrier is
          * already idle, and no component contacts Run16 or NTCON directly. */
         root->frontend.terminal_retire=TRUE;
-        service_advance_terminal_root_retire(parent->service,root->process.SequenceNumber);
+        service_advance_terminal_root_retire(parent->service,root->frontend.key.instance);
         break;
     }
 }
@@ -643,7 +616,7 @@ void service_retire_completed_root(OPENNT_BASE_CONNECTION *parent)
  * only after every NTSRV-requested text carrier has really exited.  A root
  * can legitimately contain both the original DOS carrier and NTVWM-CUI:
  * both receive the same broker-owned worker-close instruction. */
-void service_advance_terminal_root_retire(OPENNT_BASE_SERVICE *service,DWORD root_generation)
+void service_advance_terminal_root_retire(OPENNT_BASE_SERVICE *service,uint64_t root_generation)
 {
     LIST_ENTRY *link;
     OPENNT_BASE_CONNECTION *root=NULL;
@@ -651,7 +624,7 @@ void service_advance_terminal_root_retire(OPENNT_BASE_SERVICE *service,DWORD roo
     if(!service || !root_generation)return;
     for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *candidate=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-        if(candidate->process.SequenceNumber==root_generation) {root=candidate;break;}
+        if(candidate->frontend.key.instance==root_generation) {root=candidate;break;}
     }
     if(!root || !root->frontend.terminal_retire || root->frontend.closing)return;
     for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
@@ -668,7 +641,7 @@ void service_advance_terminal_root_retire(OPENNT_BASE_SERVICE *service,DWORD roo
         OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
         OPENNT_BASE_CONNECTION *worker=NULL;
         LIST_ENTRY *worker_link;
-        if(watch->frontend_root_generation!=root_generation ||
+        if((!watch->frontend_association || watch->frontend_association->identity!=root_generation) ||
             WaitForSingleObject(watch->process.ProcessHandle,0)!=WAIT_TIMEOUT)continue;
         if(watch->wow || watch->native_gui_launcher)continue;
         live=TRUE;

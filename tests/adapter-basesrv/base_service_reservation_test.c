@@ -1,3 +1,4 @@
+int fixture_frontend_chains(void);
 int fixture_frontend_instances(void);
 #include <service_internal.h>
 #include "common/protocol/frontend_lifecycle.h"
@@ -219,9 +220,9 @@ static int frontend_completion_barrier(void)
     root->frontend.retire=CreateEventW(NULL,TRUE,FALSE,NULL);
     root->frontend.native.restored=CreateEventW(NULL,TRUE,FALSE,NULL);
     CHECK(root->frontend.retire && root->frontend.native.restored);
-    caller->retained_frontend_root=root_generation;
+    caller->retained_frontend_root=root->frontend.key.instance;
     /* A nested participant neither waits for nor retires the outer lease. */
-    root->retained_frontend_root=root_generation;
+    root->retained_frontend_root=root->frontend.key.instance;
     CHECK(!OpenNtBaseServiceWaitFrontendConsoleRestored(root,child.dwProcessId,root_generation));
     CHECK(WaitForSingleObject(root->frontend.retire,0)==WAIT_TIMEOUT);
     call.caller=caller;call.pid=GetCurrentProcessId();call.generation=generation;
@@ -292,7 +293,7 @@ static int management_frontend_close_ordering(unsigned phase,unsigned competing)
     worker->native_worker=TRUE;worker->registered_worker=!preparing;
     CHECK(!OpenNtBaseServiceRegisterFrontendRoot(root,root_child.dwProcessId,root_generation,capability));
     watch.process=worker->process;watch.service=service;watch.kind=OPENNT_BASE_WORKER_NATIVE;
-    watch.frontend_root_generation=root_generation;
+    CHECK(!service_bind_frontend_watch(&watch,&root->frontend));
     watch.shutdown=CreateEventW(NULL,TRUE,FALSE,NULL);
     watch.console_close=CreateEventW(NULL,TRUE,FALSE,NULL);
     watch.wow_task_close=CreateEventW(NULL,TRUE,FALSE,NULL);
@@ -335,9 +336,10 @@ static int management_frontend_close_ordering(unsigned phase,unsigned competing)
         CHECK(OpenNtBaseServiceRequestParticipantExit(worker,worker_child.dwProcessId,worker_generation,OPENNT_EXIT_CONSOLE)==ERROR_NOT_SUPPORTED);
         watch.wow=FALSE;watch.native_gui_launcher=TRUE;
         CHECK(OpenNtBaseServiceRequestParticipantExit(worker,worker_child.dwProcessId,worker_generation,OPENNT_EXIT_CONSOLE)==ERROR_NOT_SUPPORTED);
-        watch.native_gui_launcher=FALSE;watch.frontend_root_generation=0;
+        OPENNT_FRONTEND_ASSOCIATION *saved_association=watch.frontend_association;
+        watch.native_gui_launcher=FALSE;watch.frontend_root_generation=0;watch.frontend_association=NULL;
         CHECK(OpenNtBaseServiceRequestParticipantExit(worker,worker_child.dwProcessId,worker_generation,OPENNT_EXIT_CONSOLE)==ERROR_NOT_READY);
-        watch.frontend_root_generation=root_generation;
+        watch.frontend_root_generation=root_generation;watch.frontend_association=saved_association;
         CHECK(!root->frontend.close_requested);
         CHECK(watch.close_kind==WORKER_CLOSE_NONE);
     }
@@ -416,7 +418,7 @@ static int management_frontend_close_ordering(unsigned phase,unsigned competing)
     }
     if(root)CHECK(root->frontend.close_requested);
     CHECK(WaitForSingleObject(watch.shutdown,0)==(competing==1 ? WAIT_OBJECT_0 : WAIT_TIMEOUT));
-    EnterCriticalSection(&service->lock);RemoveEntryList(&watch.link);LeaveCriticalSection(&service->lock);
+    EnterCriticalSection(&service->lock);RemoveEntryList(&watch.link);service_release_frontend_association(watch.frontend_association);watch.frontend_association=NULL;LeaveCriticalSection(&service->lock);
     CloseHandle(watch.shutdown);CloseHandle(watch.console_close);CloseHandle(watch.wow_task_close);
     CHECK(!OpenNtBaseServiceDisconnect(worker));
     if(root)CHECK(!OpenNtBaseServiceDisconnect(root));
@@ -1070,6 +1072,7 @@ int main(int argc,char **argv)
         fputs("EXPECTED runner-failure with owned child\n",stderr);
         return 91;
     }
+    if(argc==2 && !strcmp(argv[1],"--frontend-chains"))return fixture_frontend_chains();
     if(argc==2 && !strcmp(argv[1],"--frontend-instances"))return fixture_frontend_instances();
     if(argc==2 && !strcmp(argv[1],"--io-authority"))return fixture_io_authority();
     if(argc==2 && !strcmp(argv[1],"--route-cancellation"))return fixture_route_cancellation();
