@@ -310,7 +310,9 @@ DWORD OpenNtBaseServiceCloseManagementNode(OPENNT_BASE_SERVICE *service,
     if(key->instance!=service->management_epoch || !key->generation) {
         error=ERROR_INVALID_HANDLE;goto done;
     }
-    if(key->category==MANAGEMENT_FRONTEND && !key->object) {
+    if(key->category==MANAGEMENT_VM_FRONTEND) {
+        error=ERROR_NOT_SUPPORTED;
+    } else if(key->category==MANAGEMENT_FRONTEND && !key->object) {
         for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
             OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
             if(root->process.SequenceNumber!=key->generation || !root->frontend.capability)continue;

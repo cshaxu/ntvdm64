@@ -71,6 +71,10 @@ struct OPENNT_BASE_SERVICE {
  * state. Watch/child references preserve ancestry after a host disconnects. */
 typedef struct OPENNT_FRONTEND_ASSOCIATION {
     uint64_t identity;
+    /* Immutable display identity survives endpoint removal with its watches. */
+    uint64_t vm;
+    DWORD owner_generation,owner_pid;
+    BOOL embedded;
     ULONG references;
     struct OPENNT_FRONTEND_ASSOCIATION *parent;
 } OPENNT_FRONTEND_ASSOCIATION;

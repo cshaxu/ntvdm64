@@ -44,6 +44,7 @@ typedef struct OPENNT_BASE_WORKER_INFO {
     uint32_t stack_depth;
     uint32_t process_id;
     WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS];
+    uint64_t frontend_vm; /* VM row display, never management authority. */
 } OPENNT_BASE_WORKER_INFO;
 OPENNT_BASE_SERVICE *OpenNtBaseServiceStart(void);
 BOOL OpenNtBaseServiceStop(OPENNT_BASE_SERVICE *);

@@ -1,7 +1,7 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(66.0),
+    version(67.0),
     pointer_default(unique)
 ]
 interface vdm_service
@@ -266,6 +266,7 @@ interface vdm_service
         /* Original DOS/WOW records or admitted native Direct records only. */
         unsigned long stack_depth;
         wchar_t image[260];
+        hyper frontend_vm; /* Display only; key remains the selector. */
     } DTASKMGR_WORKER;
     /* Read-only trace: no receipts, capabilities, handles or close actions. */
     typedef struct _WORKER_TRACE_NODE {

@@ -9,18 +9,29 @@ static BOOL WINAPI fixture_write(HANDLE,LPCWSTR,DWORD,COORD,LPDWORD);
 #define WaitForSingleObject fixture_wait
 #define ReadConsoleInputW fixture_input
 #define WriteConsoleOutputCharacterW fixture_write
+#define broker_rpc_capture_scope fixture_capture_scope
 #define wmain monitor_product_main
 #define common_rpc_task_snapshot fixture_task_snapshot
 #define common_rpc_close_management_node fixture_close_node
 #define common_rpc_worker_task_trace fixture_task_trace
 #include "../../src/ntmon-exe/main.c"
 #undef wmain
+#undef broker_rpc_capture_scope
 #undef GetTickCount64
 #undef WaitForSingleObject
 #undef ReadConsoleInputW
 #undef WriteConsoleOutputCharacterW
 #include <assert.h>
 #include <stddef.h>
+
+/* Snapshot calls below are replaced by the fixture; binding setup must not
+ * depend on a package resource embedded in a product release image. */
+BOOL fixture_capture_scope(broker_rpc_scope *scope)
+{
+    ZeroMemory(scope,sizeof(*scope));scope->valid=TRUE;
+    lstrcpyW(scope->package_id,L"00000000000000000000000000000001");
+    return TRUE;
+}
 
 static const DTASKMGR_WORKER *reply_items;
 static ULONG reply_count,close_calls;
@@ -175,7 +186,7 @@ int wmain(void)
     DTASKMGR_WORKER items[24]={0};
     ULONG i;
     assert(sizeof(DTASKMGR_KEY)==24 && offsetof(DTASKMGR_KEY,object)==16);
-    assert(sizeof(DTASKMGR_WORKER)==608 && offsetof(DTASKMGR_WORKER,image)==88);
+    assert(sizeof(DTASKMGR_WORKER)==616 && offsetof(DTASKMGR_WORKER,image)==88);
     {
         DTASKMGR_KEY a={0x1234567887654321LL,MANAGEMENT_WORKER,0xfedcba98u,0x100000123LL};
         DTASKMGR_KEY b=a;
@@ -198,6 +209,39 @@ int wmain(void)
         confirmation_text(line,ARRAYSIZE(line),&state);
         assert(wcsstr(line,L"End worker 1234") && !wcsstr(line,L"members"));
         ZeroMemory(&state,sizeof(state));
+    }
+    {
+        DTASKMGR_WORKER vm={0},changed;FILETIME now;WCHAR line[512];
+        MONITOR_STATE selected={0};ULONG before=close_calls;
+        GetSystemTimeAsFileTime(&now);
+        vm.key=(DTASKMGR_KEY){17,MANAGEMENT_VM_FRONTEND,1234,0x100000001LL};
+        vm.process_id=1234;vm.frontend_vm=(hyper)UINT64_MAX;
+        lstrcpyW(vm.image,L"MUST-NOT-DISPLAY-PAYLOAD");
+        task_line(line,ARRAYSIZE(line),&selected,&vm,&now);
+        assert(wcsstr(line,L"1234-18446744073709551615") && wcsstr(line,L"VM") &&
+            !wcsstr(line,L"MUST-NOT-DISPLAY") && !wcsstr(line,L"CONSOLE"));
+        changed=vm;assert(same_rows(&vm,1,&changed,1));
+        changed.frontend_vm=1;assert(!same_rows(&vm,1,&changed,1));
+        assert(!handle_key(&selected,&vm,1,VK_DELETE,0) &&
+            selected.action_error==ERROR_NOT_SUPPORTED && !selected.confirm_key.category && close_calls==before);
+        vm.actions=MANAGEMENT_CAN_CLOSE; /* VM rows stay read-only even with a bad action bit. */
+        assert(!handle_key(&selected,&vm,1,VK_DELETE,0) && !selected.confirm_key.category && close_calls==before);
+        vm.actions=0;
+        changed=vm;++changed.key.object;
+        accept_snapshot(&selected,&changed,1);
+        assert(same_key(&selected.selected_key,&changed.key));
+        vm.key.category=MANAGEMENT_WORKER;vm.parent=changed.key;vm.kind=MANAGEMENT_KIND_DOS;
+        selected.selected_key=vm.key;
+        assert(!handle_key(&selected,&vm,1,VK_RETURN,0) && same_key(&selected.trace_key,&vm.key));
+    }
+    {
+        MONITOR_STATE probe={0};DTASKMGR_WORKER native={0},*copy=NULL;ULONG count=0;
+        probe.binding=(RPC_BINDING_HANDLE)(ULONG_PTR)1;probe.process=(HANDLE)(ULONG_PTR)1;
+        native.key=(DTASKMGR_KEY){17,MANAGEMENT_WORKER,1234,0};
+        native.kind=MANAGEMENT_KIND_WIN64;native.process_id=1234;
+        reply_items=&native;reply_count=1;
+        assert(!refresh(&probe,&copy,&count) && count==1 && same_key(&copy[0].key,&native.key));
+        MIDL_user_free(copy);reply_items=NULL;reply_count=0;
     }
     BOOL allocated=AllocConsole();
     output=CreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,

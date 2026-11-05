@@ -12,6 +12,10 @@ static const common_frontend_key forged_frontend={0x7fffffff,0x7fffffff};
 #include "common/codec/native_launch.h"
 #include "common/protocol/frontend_lifecycle.h"
 #include "ntvdm-exe/frontend/vm_host.h"
+#include "common/base_srv/scope.h"
+#include "common/rpc/management.h"
+#include "common/protocol/management.h"
+#include "lib-win32/rpc/local_binding.h"
 
 PVOID CsrPortHeap;
 /* Adversarial peers still need a complete coherent package: RPC identity is
@@ -284,6 +288,7 @@ typedef struct vm_host_fixture {
     HANDLE input;
     uint64_t payload;
     common_frontend_location first,second;
+    DTASKMGR_KEY first_row;
 } vm_host_fixture;
 static DWORD vm_dispatch(void *context,const console_io_request *request,
     console_io_reply *reply,frontend_base_result *result)
@@ -291,6 +296,33 @@ static DWORD vm_dispatch(void *context,const console_io_request *request,
 static DWORD vm_pending(void *context,BOOL *pending)
 {(void)context;*pending=FALSE;return ERROR_SUCCESS;}
 static void vm_finish(void *context){(void)context;}
+static DWORD vm_snapshot(vm_host_fixture *fixture,BOOL first_present)
+{
+    broker_rpc_scope scope;common_rpc_management client={0};
+    WCHAR endpoint[128];DTASKMGR_WORKER *rows=NULL;ULONG count=0,i,first=0,second=0;
+    DWORD error;
+    if(!broker_rpc_capture_scope(&scope))return GetLastError();
+    swprintf_s(endpoint,ARRAYSIZE(endpoint),BROKER_RPC_ENDPOINT_FORMAT,scope.session,
+        (ULONG)scope.logon.HighPart,(ULONG)scope.logon.LowPart,scope.package_id);
+    error=common_rpc_bind_local(endpoint,&client.binding);if(error)return error;
+    client.process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,GetCurrentProcessId());
+    if(!client.process){error=GetLastError();goto done;}
+    error=common_rpc_task_snapshot(&client,&count,&rows);
+    for(i=0;!error && i<count;++i) {
+        DTASKMGR_WORKER *row=&rows[i];
+        if(!first_present && row->key.category==MANAGEMENT_VM_FRONTEND &&
+            row->key.object==fixture->first_row.object){error=ERROR_INVALID_DATA;break;}
+        if(row->key.category!=MANAGEMENT_VM_FRONTEND || row->process_id!=GetCurrentProcessId())continue;
+        if(row->frontend_vm!=10 && row->frontend_vm!=0x10000000bLL)continue;
+        if(row->parent.category || row->depth || row->actions || row->image[0]){error=ERROR_INVALID_DATA;break;}
+        if(row->frontend_vm==10){++first;fixture->first_row=row->key;}else ++second;
+        if(common_rpc_close_management_node(&client,&row->key)!=ERROR_NOT_SUPPORTED)error=ERROR_INVALID_DATA;
+    }
+    if(!error && (first!=(first_present ? 1u : 0u) || second!=1))error=ERROR_INVALID_DATA;
+done:
+    if(rows)MIDL_user_free(rows);if(client.process)CloseHandle(client.process);
+    if(client.binding)RpcBindingFree(&client.binding);return error;
+}
 static DWORD vm_host_begin(vm_host_fixture *fixture)
 {
     const ntvdm_vm_io io={vm_dispatch,vm_pending,vm_finish};
@@ -304,11 +336,12 @@ static DWORD vm_host_begin(vm_host_fixture *fixture)
     error=ntvdm_vm_host_create(&fixture->host);
     if(!error)error=ntvdm_vm_payload_begin(fixture->host,&fixture->payload);
     if(!error)error=ntvdm_vm_host_register(fixture->host,fixture->payload,10,fixture->input,&io,NULL,&fixture->first);
-    if(!error)error=ntvdm_vm_host_register(fixture->host,fixture->payload,11,fixture->input,&io,NULL,&fixture->second);
+    if(!error)error=ntvdm_vm_host_register(fixture->host,fixture->payload,0x10000000bULL,fixture->input,&io,NULL,&fixture->second);
     if(!error)error=ntvdm_vm_host_origin(fixture->host,&fixture->first,&origins[0]);
     if(!error)error=ntvdm_vm_host_origin(fixture->host,&fixture->second,&origins[1]);
     for(i=0;i<2 && !error;++i)error=OpenNtBaseClientAcquireConsoleContext(origins[i],&contexts[i]);
     if(!error && compare(contexts[0],contexts[1]))error=ERROR_INVALID_DATA;
+    if(!error)error=vm_snapshot(fixture,TRUE);
     for(i=0;i<2;++i){if(origins[i])CloseHandle(origins[i]);if(contexts[i])CloseHandle(contexts[i]);}
     return error;
 }
@@ -324,6 +357,7 @@ static DWORD vm_host_retire_first(vm_host_fixture *fixture)
     if(!error)error=ntvdm_vm_host_retire(fixture->host,&replacement);
     if(!error)error=ntvdm_vm_host_origin(fixture->host,&fixture->second,&origin);
     if(origin)CloseHandle(origin);
+    if(!error)error=vm_snapshot(fixture,FALSE);
     return error;
 }
 static int result_worker(void)

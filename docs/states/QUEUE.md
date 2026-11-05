@@ -37,9 +37,8 @@ retained as historical planning material and is not pending.
 
 The owner split the former multitasking frontend/VxD candidate into the host
 frontend foundation followed by the guest driver and NTVDM bridge. The split
-retains the remaining candidates' relative order. The host foundation is now
-admitted in this independent worktree; see [Current](CURRENT.md). The guest
-driver remains queued.
+retains the remaining candidates' relative order. The host foundation is delivered in its
+[host foundation record](../proposals/proposal-host-common-frontend-foundation-001.md). The guest driver remains queued.
 
 On 2026-10-29 the owner moved further SOL Options and related WOW multi-window
 performance optimization out of the active task and directed its candidate to

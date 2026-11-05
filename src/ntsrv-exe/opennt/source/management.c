@@ -416,7 +416,11 @@ static void service_copy_worker(OPENNT_BASE_WORKER_WATCH *watch,OPENNT_BASE_WORK
         WaitForSingleObject(watch->process.ProcessHandle,0)!=WAIT_TIMEOUT) {
         item->state|=0x80000000u;item->display_state=MANAGEMENT_CLOSING;
     } else item->actions=MANAGEMENT_CAN_CLOSE;
-    if(watch->frontend_root_generation && !watch->wow) {
+    if(!watch->wow && watch->frontend_association && watch->frontend_association->embedded) {
+        item->parent=service_management_key(watch->service,MANAGEMENT_VM_FRONTEND,
+            watch->frontend_association->owner_generation,watch->frontend_association->identity);
+        item->depth=1;
+    } else if(watch->frontend_root_generation && !watch->wow) {
         item->parent=service_management_key(watch->service,MANAGEMENT_FRONTEND,
             watch->frontend_root_generation,0);
         item->depth=1;
@@ -487,6 +491,40 @@ static OPENNT_BASE_CONNECTION *service_management_root(OPENNT_BASE_SERVICE *serv
     return NULL;
 }
 
+/* Each VM is a top-level frontend group, even when its host is itself a
+ * downstream worker. Retained association identity also names tombstones. */
+static DWORD service_append_vm_group(OPENNT_BASE_SERVICE *service,
+    OPENNT_FRONTEND_ASSOCIATION *association,OPENNT_FRONTEND_INSTANCE *root,
+    OPENNT_BASE_WORKER_INFO **rows,uint32_t *count,uint32_t *capacity)
+{
+    OPENNT_BASE_WORKER_INFO item={0};
+    LIST_ENTRY *link;
+    FILETIME started,ignored;
+    uint32_t group=*count;
+    DWORD error;
+    item.key=service_management_key(service,MANAGEMENT_VM_FRONTEND,
+        association->owner_generation,association->identity);
+    item.process_id=association->owner_pid;item.frontend_vm=association->vm;
+    item.display_state=!root ? MANAGEMENT_MISSING :
+        root->closing || root->close_draining || root->terminal_retire ? MANAGEMENT_CLOSING : MANAGEMENT_IDLE;
+    if(root) {
+        if(WaitForSingleObject(root->owner->process.ProcessHandle,0)!=WAIT_TIMEOUT)
+            item.display_state=MANAGEMENT_MISSING;
+        else if(item.display_state==MANAGEMENT_IDLE && root->io_route)item.display_state=MANAGEMENT_BUSY;
+        if(GetProcessTimes(root->owner->process.ProcessHandle,&started,&ignored,&ignored,&ignored))
+            item.started_filetime=((uint64_t)started.dwHighDateTime<<32)|started.dwLowDateTime;
+    }
+    error=service_append_management(rows,count,capacity,&item);if(error)return error;
+    for(link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
+        OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
+        if(watch->frontend_association!=association || watch->wow || watch->native_gui_launcher)continue;
+        error=service_append_worker(watch,rows,count,capacity);if(error)return error;
+        if((*rows)[group].display_state==MANAGEMENT_IDLE && (*rows)[*count-1].stack_depth)
+            (*rows)[group].display_state=MANAGEMENT_BUSY;
+    }
+    return ERROR_SUCCESS;
+}
+
 static DWORD service_copy_management_tree(OPENNT_BASE_SERVICE *service,
     OPENNT_BASE_WORKER_INFO **rows,uint32_t *count,uint32_t *capacity)
 {
@@ -517,13 +555,36 @@ static DWORD service_copy_management_tree(OPENNT_BASE_SERVICE *service,
             error=service_append_worker(watch,rows,count,capacity);if(error)return error;
         }
     }
+    for(link=service->frontend_instances.Flink;link!=&service->frontend_instances;link=link->Flink) {
+        OPENNT_FRONTEND_INSTANCE *root=CONTAINING_RECORD(link,OPENNT_FRONTEND_INSTANCE,instance_link);
+        if(!root->embedded)continue;
+        error=service_append_vm_group(service,root->association,root,rows,count,capacity);
+        if(error)return error;
+    }
+    for(link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
+        OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
+        OPENNT_FRONTEND_ASSOCIATION *association=watch->frontend_association;
+        BOOL first=TRUE;
+        if(!association || !association->embedded || watch->wow || watch->native_gui_launcher ||
+            service_frontend_by_identity(service,association->identity))continue;
+        for(child=service->worker_watches.Flink;child!=link;child=child->Flink) {
+            OPENNT_BASE_WORKER_WATCH *prior=CONTAINING_RECORD(child,OPENNT_BASE_WORKER_WATCH,link);
+            if(prior->frontend_association==association && !prior->wow && !prior->native_gui_launcher)
+                {first=FALSE;break;}
+        }
+        if(first) {
+            error=service_append_vm_group(service,association,NULL,rows,count,capacity);
+            if(error)return error;
+        }
+    }
     /* Tombstones derive solely from surviving association metadata. No extra
      * root registry, PID reopening or synthetic lifetime is introduced. */
     for(link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
         OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
         OPENNT_BASE_WORKER_INFO missing={0};
         BOOL first=TRUE;
-        if(watch->wow || watch->native_gui_launcher)continue; /* Neither is a text worker row. */
+        if(watch->wow || watch->native_gui_launcher ||
+            (watch->frontend_association && watch->frontend_association->embedded))continue;
         if(!watch->frontend_root_generation) {
             error=service_append_worker(watch,rows,count,capacity);if(error)return error;
             continue;
@@ -577,11 +638,11 @@ static DWORD service_copy_management_tree(OPENNT_BASE_SERVICE *service,
 
 static DWORD management_group(const OPENNT_BASE_WORKER_INFO *item)
 {
-    if(item->key.category==MANAGEMENT_WORKER && item->kind==MANAGEMENT_KIND_WIN16)return 1;
-    if(item->key.category==MANAGEMENT_GUI_TARGET || item->key.category==MANAGEMENT_NATIVE_TASK ||
-        (item->key.category==MANAGEMENT_WORKER && !item->parent.category &&
-         (item->kind==MANAGEMENT_KIND_WIN32 || item->kind==MANAGEMENT_KIND_WIN64)))return 2;
-    return 0;
+    if(item->key.category==MANAGEMENT_FRONTEND)return 0;
+    if(item->key.category==MANAGEMENT_VM_FRONTEND)return 1;
+    if(item->key.category==MANAGEMENT_WORKER && item->kind==MANAGEMENT_KIND_WIN16)return 2;
+    if(item->key.category==MANAGEMENT_GUI_TARGET || item->key.category==MANAGEMENT_NATIVE_TASK)return 3;
+    return 4; /* Unassociated workers remain visible after normal groups. */
 }
 static BOOL management_block_after(const OPENNT_BASE_WORKER_INFO *left,const OPENNT_BASE_WORKER_INFO *right)
 {

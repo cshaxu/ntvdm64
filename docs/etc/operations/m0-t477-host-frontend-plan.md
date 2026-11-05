@@ -37,13 +37,14 @@ retains the approved requirements.
 | S1 | Extract common/frontend-base and reconnect NTCON. Audit and separate presentation callbacks from connection state, cancellation and cleanup; remove displaced duplication. | NTCON input/output, handoff, rollback and disconnect regressions; dependency and per-instance tests. |
 | S2 | Extend NTSRV registration, identity and handoff to multiple frontend instances per authenticated host. Reuse existing lifecycle decisions and client transport. | Two identities on one host, independent chains, wrong/stale identity rejection, completion in both orders and host-loss cleanup. |
 | S3 | Connect NTVDM directly to common/frontend-base and bind its scoped payload VM registry to independent frontend instances. Keep worker-base free of frontend-base dependencies. | 1+N isolation, dependency direction, VM-handle reuse, retirement, retained upstream ownership, nested host-fixture chains and cancellation under failure. |
-| S4 | Extend NTMON's existing management view to typed VM frontends and complete integrated host acceptance. | Owner/payload/VM and chain display, unchanged NTCON rows and management behavior, full regression and coherent published package. |
+| S4 | Extend NTMON's existing management view to typed VM frontends and complete integrated host acceptance. | Independent CONSOLE/VM groups, hostPID-VMID and blank VM TASK, unchanged NTCON rows and management behavior, full regression and coherent published package. |
 
 S1 is closed in the [S1 evidence](../evidence/m0-t477-s1-frontend-base.md).
 S2 is closed in the [S2 evidence](../evidence/m0-t477-s2-frontend-instances.md),
 implementing its [design](m0-t477-s2-frontend-instances-design.md). S3 closes
 with [host composition evidence](../evidence/m0-t477-s3-host-composition.md).
-S4 requires sequential admission. Each production P includes implementation,
+S4 closes with [monitor evidence](../evidence/m0-t477-s4-vm-groups.md); the
+[task closure](../../history/m0-t477-closure.md) audits the full host scope. Each production P includes implementation,
 reproducible tests, build, review, coherent publication and delivery evidence
 under the execution rules; a preparatory source move alone is not a completed
 frontend capability. Exact P splits follow the audited source boundaries.

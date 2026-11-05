@@ -208,11 +208,13 @@ static void render_scrollbars(HANDLE output,const MONITOR_STATE *state,ULONG sel
 static void task_line(WCHAR *line,DWORD capacity,const MONITOR_STATE *state,
     const DTASKMGR_WORKER *item,const FILETIME *now)
 {
-    FILETIME started; WCHAR elapsed[16],pid[16],node[16],stack[16];
+    FILETIME started; WCHAR elapsed[16],pid[40],node[44],stack[16];
     started.dwLowDateTime=(DWORD)item->started_filetime;
     started.dwHighDateTime=(DWORD)(item->started_filetime>>32);
     elapsed_text(&started,now,elapsed);
-    if(item->process_id)swprintf_s(pid,ARRAYSIZE(pid),L"%lu",item->process_id);
+    if(item->key.category==MANAGEMENT_VM_FRONTEND)
+        swprintf_s(pid,ARRAYSIZE(pid),L"%lu-%llu",item->process_id,(unsigned long long)item->frontend_vm);
+    else if(item->process_id)swprintf_s(pid,ARRAYSIZE(pid),L"%lu",item->process_id);
     else lstrcpyW(pid,L"-");
     if(item->key.category==MANAGEMENT_WORKER)swprintf_s(stack,ARRAYSIZE(stack),L"%lu",item->stack_depth);
     else lstrcpyW(stack,L"-");
@@ -221,9 +223,11 @@ static void task_line(WCHAR *line,DWORD capacity,const MONITOR_STATE *state,
     swprintf_s(node,ARRAYSIZE(node),L"%s%s",item->depth ? L"  " : L"",pid);
     swprintf_s(line,capacity,L"%c %-12s %-7s %-7s %-10s %-5s %s",
         same_key(&item->key,&state->selected_key) ? L'>' : L' ',node,
+        item->key.category==MANAGEMENT_VM_FRONTEND ? L"VM" :
         item->key.category==MANAGEMENT_FRONTEND ? L"CONSOLE" :
         item->key.category==MANAGEMENT_NATIVE_TASK && item->kind>MANAGEMENT_KIND_WIN64 ? L"UNKNOWN" : kind_name(item->kind),
         state_name(item->display_state),elapsed,stack,
+        item->key.category==MANAGEMENT_VM_FRONTEND ? L"" :
         item->key.category==MANAGEMENT_FRONTEND ||
         (item->key.category==MANAGEMENT_WORKER && item->kind==1u) ? L"-" :
         item->image[0] ? item->image : L"Unknown");
@@ -454,18 +458,8 @@ static DWORD refresh(MONITOR_STATE *state,DTASKMGR_WORKER **items,ULONG *count)
         clear_confirmation(state);
         return error;
     }
-    /* Keep management permission/identity available in NTSRV's snapshot,
-     * but a GUI-only carrier is not one of the owner's program blocks. */
-    {
-        ULONG shown=0;
-        for(ULONG index=0;index<result_count;++index) {
-            const DTASKMGR_WORKER *item=&result[index];
-            if(item->key.category==MANAGEMENT_WORKER && !item->parent.category &&
-                (item->kind==MANAGEMENT_KIND_WIN32 || item->kind==MANAGEMENT_KIND_WIN64))continue;
-            result[shown++]=*item;
-        }
-        result_count=shown;
-    }
+    /* NTSRV excludes transient GUI carriers. Keep genuine unassociated text
+     * workers visible rather than guessing their role from native bitness. */
     *items=result; *count=result_count;
     accept_snapshot(state,result,result_count);
     return ERROR_SUCCESS;
@@ -507,14 +501,16 @@ static BOOL handle_key(MONITOR_STATE *state,const DTASKMGR_WORKER *items,
     if(key==VK_RIGHT && state->horizontal_offset<state->horizontal_limit)++state->horizontal_offset;
     if(key==VK_DELETE) {
         state->action_error=ERROR_NOT_SUPPORTED;
-        if(count && (items[state->selected_row].actions&MANAGEMENT_CAN_CLOSE)) {
+        if(count && items[state->selected_row].key.category!=MANAGEMENT_VM_FRONTEND &&
+            (items[state->selected_row].actions&MANAGEMENT_CAN_CLOSE)) {
             state->confirm_key=items[state->selected_row].key;
             state->confirm_pid=items[state->selected_row].process_id;
             state->action_error=ERROR_SUCCESS;
         }
     }
     if(key==VK_RETURN && count && state->selected_key.category==MANAGEMENT_WORKER &&
-        items[state->selected_row].parent.category==MANAGEMENT_FRONTEND &&
+        (items[state->selected_row].parent.category==MANAGEMENT_FRONTEND ||
+         items[state->selected_row].parent.category==MANAGEMENT_VM_FRONTEND) &&
         items[state->selected_row].kind!=MANAGEMENT_KIND_WIN16) {
         state->trace_key=state->selected_key;state->trace_first=0;state->trace_offset=0;
     }
@@ -530,7 +526,8 @@ static BOOL same_rows(const DTASKMGR_WORKER *a,ULONG ac,const DTASKMGR_WORKER *b
            a->depth!=b->depth || a->display_state!=b->display_state || a->actions!=b->actions ||
            a->process_id!=b->process_id || a->kind!=b->kind || a->state!=b->state ||
            a->started_filetime!=b->started_filetime || a->task!=b->task ||
-           a->stack_depth!=b->stack_depth || wcscmp(a->image,b->image))return FALSE;
+           a->stack_depth!=b->stack_depth || a->frontend_vm!=b->frontend_vm ||
+           wcscmp(a->image,b->image))return FALSE;
     return TRUE;
 }
 static BOOL same_trace(const WORKER_TRACE_NODE *a,ULONG ac,const WORKER_TRACE_NODE *b,ULONG bc)

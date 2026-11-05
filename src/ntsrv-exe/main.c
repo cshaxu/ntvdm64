@@ -275,6 +275,7 @@ error_status_t Server_TaskSnapshot(PRPC_ASYNC_STATE async,handle_t binding,HANDL
             (*entries)[index].started_filetime=(hyper)local[index].started_filetime;
             (*entries)[index].task=local[index].task;
             (*entries)[index].stack_depth=local[index].stack_depth;
+            (*entries)[index].frontend_vm=(hyper)local[index].frontend_vm;
             memcpy((*entries)[index].image,local[index].image,sizeof(local[index].image));
         }
     }
@@ -991,7 +992,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v66_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v67_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -1022,7 +1023,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v66_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v67_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);

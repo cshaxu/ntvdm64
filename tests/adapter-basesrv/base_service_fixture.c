@@ -1031,6 +1031,35 @@ cleanup:
 #undef INSTANCE_CHECK
 }
 
+/* Read the actual service projection, including retained endpoint tombstones. */
+static BOOL fixture_vm_groups(OPENNT_BASE_SERVICE *service,OPENNT_BASE_WORKER_WATCH watches[4])
+{
+    OPENNT_BASE_WORKER_INFO *rows=NULL;uint64_t epoch;uint32_t count=0,i,j,groups=0,workers=0;
+    BOOL ok=FALSE,seen_vm=FALSE;
+    if(OpenNtBaseServiceSnapshotCopy(service,&epoch,&rows,&count))return FALSE;
+    for(i=0;i<count;++i) {
+        OPENNT_BASE_WORKER_INFO *row=&rows[i];
+        if(row->key.category==MANAGEMENT_FRONTEND && seen_vm)goto done;
+        if(row->key.category==MANAGEMENT_WORKER)++workers;
+        if(row->key.category!=MANAGEMENT_VM_FRONTEND)continue;
+        seen_vm=TRUE;++groups;
+        if(row->depth || row->parent.category || row->actions || row->image[0])goto done;
+        for(j=1;j<4;++j)if(watches[j].frontend_association->identity==row->key.object)break;
+        if(j==4)goto done;
+        OPENNT_FRONTEND_ASSOCIATION *association=watches[j].frontend_association;
+        if(row->key.generation!=association->owner_generation || row->process_id!=association->owner_pid ||
+            row->frontend_vm!=association->vm || i+1>=count)goto done;
+        OPENNT_BASE_WORKER_INFO *child=&rows[i+1];
+        if(child->key.category!=MANAGEMENT_WORKER || child->key.generation!=watches[j].process.SequenceNumber ||
+            child->depth!=1 || child->parent.category!=MANAGEMENT_VM_FRONTEND || child->parent.object!=row->key.object)goto done;
+        if(!service_frontend_by_identity(service,association->identity) && row->display_state!=MANAGEMENT_MISSING)goto done;
+        if(OpenNtBaseServiceCloseManagementNode(service,&row->key)!=ERROR_NOT_SUPPORTED)goto done;
+    }
+    ok=groups==3 && workers==4;
+done:
+    if(rows)HeapFree(GetProcessHeap(),0,rows);return ok;
+}
+
 /* Exact production registry/context/selector/close functions. Worker admission
  * is seeded here; the separate RPC carrier fixture proves real peer admission. */
 int fixture_frontend_chains(void)
@@ -1122,18 +1151,21 @@ int fixture_frontend_chains(void)
             CHAIN_CHECK(error==ERROR_ARITHMETIC_OVERFLOW && !failed.instance && !notify && !retire);
             CHAIN_CHECK(GetProcessHandleCount(GetCurrentProcess(),&after) && before==after);
         }
+        CHAIN_CHECK(fixture_vm_groups(service,watches));
         CHAIN_CHECK(service_bind_worker_root(service,children[0].hProcess,roots[0])==ERROR_ACCESS_DENIED);
         CHAIN_CHECK(service_bind_worker_root(service,children[1].hProcess,roots[2])==ERROR_ACCESS_DENIED);
         LeaveCriticalSection(&service->lock);
         if(scenario==2) {
             CHAIN_CHECK(!OpenNtBaseServiceDisconnect(connections[0]));connections[0]=NULL;roots[0]=roots[1]=NULL;
             for(i=1;i<4;++i)CHAIN_CHECK(WaitForSingleObject(watches[i].console_close,0)==WAIT_OBJECT_0);
+            CHAIN_CHECK(fixture_vm_groups(service,watches));
         } else {
             if(scenario==3) {
                 /* A's child host disappears first. Its grandchild still retains
                  * the A ancestry edge after the intermediate record is freed. */
                 CHAIN_CHECK(!OpenNtBaseServiceDisconnect(connections[1]));connections[1]=NULL;roots[2]=NULL;
                 CHAIN_CHECK(WaitForSingleObject(watches[3].console_close,0)==WAIT_OBJECT_0);
+                CHAIN_CHECK(fixture_vm_groups(service,watches));
             }
             CHAIN_CHECK(!OpenNtBaseServiceCloseFrontendInstance(connections[0],children[0].dwProcessId,generations[0],&keys[first]));
             CHAIN_CHECK(WaitForSingleObject(watches[first+1].console_close,0)==WAIT_OBJECT_0);

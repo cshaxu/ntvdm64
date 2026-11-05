@@ -90,7 +90,7 @@ void __RPC_USER MIDL_user_free(void *value) { free(value); }
 static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding,ULONGLONG deadline)
 {
     RPC_IF_ID expected;
-    RPC_STATUS status=RpcIfInqId(Client_vdm_service_v66_0_c_ifspec,&expected);
+    RPC_STATUS status=RpcIfInqId(Client_vdm_service_v67_0_c_ifspec,&expected);
     if (status) return status;
     return common_rpc_classify_interface(binding,&expected,deadline);
 }

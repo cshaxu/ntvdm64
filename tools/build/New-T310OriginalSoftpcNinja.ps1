@@ -1872,7 +1872,7 @@ $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthoo
     $graph.Add('rule frontend_chain_gui_link')
     $graph.Add('  command = link.exe /nologo /subsystem:windows /entry:wmainCRTStartup /opt:ref /out:$out $in rpcrt4.lib ntdll.lib kernel32.lib shell32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib')
     $graph.Add('build frontend-chain-gui.exe: frontend_chain_gui_link ' + $chainInputs)
-    $graph.Add('build obj/tests/broker_frontend_bootstrap.obj: cc ' + (NinjaPath (Join-Path $root 'test/integration/broker_frontend_bootstrap_test.c')))
+    $graph.Add('build obj/tests/broker_frontend_bootstrap.obj: cc ' + (NinjaPath (Join-Path $root 'test/integration/broker_frontend_bootstrap_test.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     # This fixture is also a launcher: it calls StartVdmWorker to exercise
     # execution/startup failures. Production NTCON remains core-only.

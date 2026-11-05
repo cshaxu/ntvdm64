@@ -1730,6 +1730,9 @@ DWORD service_publish_frontend(OPENNT_FRONTEND_INSTANCE *root)
     if(!association)return ERROR_NOT_ENOUGH_MEMORY;
     root->key.instance=++service->next_frontend_instance;
     association->identity=root->key.instance;association->references=1;
+    association->owner_generation=root->owner->process.SequenceNumber;
+    association->owner_pid=GetProcessId(root->owner->process.ProcessHandle);
+    association->embedded=root->embedded;association->vm=root->location.vm;
     if(root->embedded) {
         OPENNT_BASE_WORKER_WATCH *host=service_find_worker_watch(service,root->owner->process.SequenceNumber);
         association->parent=host ? host->frontend_association : NULL;
@@ -2094,7 +2097,8 @@ DWORD service_bind_frontend_watch(OPENNT_BASE_WORKER_WATCH *watch,OPENNT_FRONTEN
             return ERROR_ACCESS_DENIED;
     }
     watch->frontend_association=root->association;++root->association->references;
-    /* Existing NTMON native keys remain process-generation based. VM rows are S4. */
+    /* Native management keys remain process-generation based. VM parents use
+     * the retained instance association rather than a process-only key. */
     watch->frontend_root_generation=root->embedded ? 0 : root->owner->process.SequenceNumber;
     watch->frontend_root_pid=root->embedded ? 0 : GetProcessId(root->owner->process.ProcessHandle);
     for(link=service->frontend_instances.Flink;link!=&service->frontend_instances;link=link->Flink) {

@@ -37,12 +37,16 @@ Each base instance owns at most one active worker channel. The protocol and
 backend client remain in their existing common owners, with pipe primitives
 in lib-win32. Common never depends on executable-private code or worker-base.
 
-NTVDM will directly compose frontend-base in S3, alongside its worker-base
-backend role. Worker-base must not depend on frontend-base. Future NTVWM
-frontend adoption can use the same direct composition. Multi-instance service
-registration is S2 scope; local base instance isolation does not establish it.
-[Current](../states/CURRENT.md) and the
-[S1 evidence](../etc/evidence/m0-t477-s1-frontend-base.md) govern actual delivery.
+NTVDM directly composes frontend-base alongside its worker-base backend role.
+Its scoped payload/VM registry owns identity and adapter lifetime; NTSRV owns
+multi-instance registration, independent chains and authenticated handoff.
+Worker-base does not depend on frontend-base. Future NTVWM frontend adoption
+can use the same direct composition. NTMON projects independent CONSOLE and
+VM groups before WOW and native observations; VM PID is hostPID-VMID, TASK
+is empty, and VM group management is read-only. Internal selection retains
+the full broker identity. The actual guest driver/bridge remains queued.
+[Current](../states/CURRENT.md), [host composition evidence](../etc/evidence/m0-t477-s3-host-composition.md)
+and [monitor evidence](../etc/evidence/m0-t477-s4-vm-groups.md) record delivery.
 
 ## Generic integration libraries — T474 S3
 

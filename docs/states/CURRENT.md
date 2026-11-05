@@ -2,13 +2,17 @@
 
 ## Current Work
 
-**No active M/T/S packet.** T477 S3 P1 completes the direct NTVDM frontend
-composition, scoped VM registry and worker retirement integration. Cached
-x86/x64 builds, focused fixtures and 16/16 Full gates passed; the coherent
-ten-image package was published and hash-verified at both release locations.
-The [S3 evidence](../etc/evidence/m0-t477-s3-host-composition.md) records the
-implementation, delivery and guest-bridge limits. T477 S4 remains subsequent
-work for NTMON typed frontend display and integrated host acceptance.
+**No active M/T/S packet.** M0 T477 closes after S4 P1 host-foundation delivery.
+The [T477 closure](../history/m0-t477-closure.md) records all four stages,
+acceptance evidence and the separately queued guest bridge boundary.
+
+## S4 Closure Record
+
+[VM groups and integrated delivery](../etc/evidence/m0-t477-s4-vm-groups.md):
+CONSOLE and VM frontend groups preserve independent worker chains; VM PID is
+hostPID-VMID, TASK is empty, and VM management remains read-only. Cached
+builds, actual RPC/renderer/service tests and Full 16/16 gates passed. All ten
+images are hash-verified at both publication destinations.
 
 ## S3 Closure Record
 
@@ -141,10 +145,10 @@ packet above remains the only current S authority.
 
 ## Current Technical Baseline
 
-This worktree's [T477 S2 delivery](../etc/evidence/m0-t477-s2-frontend-instances.md)
-builds the ten-image product at application version 0.0.477 and protocol 66.
-Full selected product gates pass and both publication targets match. Guest
-media is unchanged. Actual NTVDM VM composition remains the next S3 scope.
+The [T477 S4 delivery](../etc/evidence/m0-t477-s4-vm-groups.md) publishes the
+ten-image product at application version 0.0.477 and protocol 67. Full selected
+product gates pass and both publication targets match. Guest media is unchanged.
+Actual guest VM discovery and driver integration remain separately queued.
 The earlier [source release review](../../artifacts/mvdm-audit/latest-source-release-review.md)
 remains retained baseline evidence.
 

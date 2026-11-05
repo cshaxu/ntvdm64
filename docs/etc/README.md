@@ -1,5 +1,9 @@
 # Supporting Material
 
+[T477 S4 VM group evidence](evidence/m0-t477-s4-vm-groups.md) records the approved UI, projection ownership and verification.
+
+[T477 S4 monitor design](operations/m0-t477-s4-monitor-design.md) records typed VM snapshot ownership and acceptance.
+
 [T477 S3 host composition evidence](evidence/m0-t477-s3-host-composition.md) records implementation review and layered verification.
 
 [T477 S2 P4 integration evidence](evidence/m0-t477-s2-p4-integration.md) records the merged-source build, tests and publication.

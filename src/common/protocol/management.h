@@ -6,6 +6,7 @@
 #define MANAGEMENT_KIND_WIN16 1u
 #define MANAGEMENT_KIND_WIN32 2u
 #define MANAGEMENT_KIND_WIN64 3u
+#define MANAGEMENT_VM_FRONTEND 6u /* Read-only worker-hosted VM endpoint. */
 #define MANAGEMENT_FRONTEND 1u
 #define MANAGEMENT_WORKER 2u
 #define MANAGEMENT_WOW_TASK 3u

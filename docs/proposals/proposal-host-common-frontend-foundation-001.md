@@ -5,8 +5,9 @@
 The owner split the former multitasking frontend and guest VxD candidate into
 two ordered candidates. This first candidate establishes the host frontend
 foundation; the subsequent [guest driver and NTVDM bridge](proposal-multitask-guest-vdm-frontends-001.md)
-uses that foundation. The host foundation is now admitted in this worktree;
-[Current](../states/CURRENT.md) is the sole active-packet authority. The guest
+uses that foundation. The host foundation is delivered; see the
+[closure](../history/m0-t477-closure.md). [Current](../states/CURRENT.md) remains
+the sole active-packet authority. The guest
 driver remains queued. This proposal retains scope, not another active packet.
 
 Today NTCON is the frontend for a task chain. Extend the host model so NTCON
