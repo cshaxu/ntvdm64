@@ -55,3 +55,7 @@ that a context selected the indicated source region, not that each original
 statement was preserved or that every logical line is correct. The 180
 byte-identical files remain the only completed category at this checkpoint;
 the 874 different files and generator input remain open.
+
+## Completed condition-free files
+
+The [condition-free review](../../../artifacts/mvdm-audit/t476-s2-condition-free-review.json) completes 130 differing files. Each has no original or current conditional group, identical non-comment code after removing line directives and indentation, matching original/current hashes in the earlier full matched-code line review with no mismatch, and at least one actual compiler line sample with no observed mismatch. The comparison retains string contents and does not equate changed code with comment-only differences. These results add 130 completed files to the 180 byte-identical files: 310 completed and 745 still open, including the generated-binding input. Source files were not modified in this batch.
