@@ -2,42 +2,33 @@
 
 ## Current Work
 
-**Active: M0 T476 S1** — main integration verified and published; per-file audit boundaries remain recorded.
+**Active: M0 T476 S2** — complete the outstanding per-file mirror conditional and line audit.
 
-T474 was accepted and closed by the owner; its
-[closure](../history/m0-t474-closure.md) and S1–S6 evidence remain authoritative.
-The owner directed integration of the independent T476 mirror-conditional
-worktree into main, followed by coherent build, testing and publication.
+S1 integrated and published its marker build and 30 exclusions; its [main integration evidence](../etc/evidence/m0-t476-s1-main-integration.md) retains the limits. The owner directed S2 to finish them. The [S2 baseline](../etc/evidence/m0-t476-s2-file-audit.md) tracks all 1,055 files: 180 identical files confirmed, 875 requiring further file-level review.
 
 ## Active Packet
 
-### M0 T476 S1 — inventory and recover missing conditional structure
-
-The independent host C/H marker audit and 30 outermost exclusions have been
-integrated to main. The merged x86/x64 builds, exclusion check and full selected
-product integration gate passed, and the coherent ten-image package was
-published to both release destinations. See the [main integration record](../etc/evidence/m0-t476-s1-main-integration.md) and [original audit evidence](../etc/evidence/m0-t476-s1-mirror-conditional.md). The latter records the
-remaining per-file and line-mapping boundaries; they are not claimed complete.
+### M0 T476 S2 — complete per-file verification
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T476 S1, Ordinary Mode. |
-| Admission And Approval | Owner directed a new T in a worktree based on main's latest commit for the queued original mirror excluded-branch `#error` and `#line` audit. |
-| Objective | Enumerate host mirror C/H files and match original identities; recover missing original conditional boundaries without restoring bodies already replaced by #error or changing existing #line directives. Then instrument all remaining branches and collect full-build hits before any new exclusion decisions. |
-| Non-goals | Do not alter guest mirrors or enable unsupported profiles; preserve accepted T474 changes. |
-| Reference Baseline | Merged `fd221634b` and `0403e0d9b`; historical [S13 closure](../history/m0-t473-s13-closure.md) is inherited evidence, not proof of complete-file coverage. |
-| Files And ABI Surface | Host mirror `.c` and `.h` files in `src/mvdm-host` and `src/non-mvdm`, their product build contexts, necessary include adapters, focused tests and audit records; Guest and non-C/H mirrors are excluded. |
-| Applicable Rules | Source policy, original source provenance, per-file complete audit, preserve unrelated work. |
-| Verification | Pin original/current identities; verify recovered conditional structures and preserved existing guards, instrument remaining branches, full x86/x64 build and hit collection, and validate marker equivalence. Apply later exclusions from the complete hit ledger; run package comparison and required gates. |
-| Expected Markers | Every in-scope host C/H mirror file is inventoried and mapped to its recorded original; existing #error/#line retained; missing condition structures recovered; every not-yet-excluded arm marked and full-build hits recorded. |
-| Asset Needs | Existing pinned original sources and supported local compiler/build tools; no external fetch. |
-| Reporting Requirements | Report completed/identical/incomplete/deleted counts and tested contexts, limitations and local commits. |
-| Stop Conditions | Unavailable verified originals, unsupported profile selection, guest mutation or unapproved selected behavior change. |
-| Exit Criteria | Complete inventory and conditional-structure recovery, comprehensive marker build/hit ledger, and subsequent file-by-file unhit-arm exclusion; validate and deliver batches under the proposal. |
-| Original Owner Request | Owner specified: audit only host mirror C/H files; match original and recover conditional structure, preserving existing #error/#line; mark non-excluded branches; full build and register hits; replace unhit arms with #error and remove their nested branch structure. Guest and non-C/H mirrors are excluded. |
-| Similar-Issue Sweep | All in-scope host C/H mirror files and actual build contexts; preserve already excluded arms and line markers; use owner-directed full-build hit results for remaining branch decisions. |
+| Identifier Mode | M0 T476 S2, Ordinary Mode. |
+| Admission And Approval | Owner admitted S2 to finish the outstanding mirror conditional and line audit. |
 | Candidate Proposal | [Complete mirror conditional audit by file](../proposals/proposal-mirror-conditional-file-audit-001.md). |
-| Temporary Evidence | `build/t476-s1`, 90-minute phase, 4-GiB limit; build-owned caches only. |
+| Objective | Produce a trustworthy per-file account and complete original-structure, branch and diagnostic-line checks, correcting proven defects. |
+| Non-goals | Do not modify or rebuild guest, alter unsupported profiles, or claim unproven results. |
+| Reference Baseline | `2f9e2aea7`, S1 branch ledger and its recorded 1,018 supported contexts. |
+| Files And ABI Surface | Production host mirror C/H, exact original identities, associated audit evidence and minimal selected adaptations. |
+| Applicable Rules | Source policy, complete-file review, no unsupported selected-behavior change and preserved unrelated work. |
+| Verification | Validate source and original identities, actual hit provenance, exclusion structure and compiler line mappings; build and test batches per proposal. |
+| Expected Markers | File-level complete/incomplete decisions with explicit evidence and finite unresolved cases. |
+| Asset Needs | Existing original sources, recorded S1 contexts, cached builds and owned temporary evidence. |
+| Reporting Requirements | Exact per-file progress and findings, changes, tests, publication and remaining uncertainty. |
+| Stop Conditions | Unavailable pinned original, incompatible selected behavior or lack of required semantic authority. |
+| Exit Criteria | All in-scope production files reviewed to the contract, corrections verified, published when required, committed and pushed. |
+| Original Owner Request | Admit a new S to complete the remaining branch-structure and line-number audit. |
+| Similar-Issue Sweep | Include byte-identical files, changed files, prior exclusions and recorded mode/WOW cases. |
+| Temporary Evidence | `build/t476-s2`, 90-minute phase, 4 GiB, 15-minute no-progress budget. |
 
 ## M0 T475 S5 Closure
 

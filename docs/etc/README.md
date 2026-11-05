@@ -1139,3 +1139,5 @@ focused timer/hook witnesses, and the finite S2 dialog/input/caret handoff.
 [T474 S6 public component tests](evidence/m0-t474-s6-public-component-tests.md) records test ownership, dependency direction and verification.
 
 [T476 S1 main integration](evidence/m0-t476-s1-main-integration.md) records the merged commits, complete selected gate and coherent publication.
+
+[T476 S2 per-file audit](evidence/m0-t476-s2-file-audit.md) records the active source-identity and per-file progress baseline.

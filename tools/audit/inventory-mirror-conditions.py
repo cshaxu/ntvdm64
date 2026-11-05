@@ -73,8 +73,8 @@ def main():
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
     output = args.output.resolve()
-    if not output.is_relative_to((root / "build/t476-s1").resolve()) or output.exists():
-        raise SystemExit("output must be a fresh file under build/t476-s1")
+    if not output.is_relative_to((root / "build").resolve()) or output.exists():
+        raise SystemExit("output must be a fresh file under build")
     checkpoint = json.loads(args.identities.read_text(encoding="utf-8"))
     if checkpoint.get("not_in_census") or checkpoint.get("not_in_tree"):
         raise SystemExit("tracked C/H mirror inventory is not reconciled")
