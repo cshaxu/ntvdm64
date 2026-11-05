@@ -110,10 +110,10 @@ P14 retires three inactive historical C++ build scripts with indexed Git
 objects and removes C++ language configuration from CMake. Fresh x86/x64
 C-only configurations built the C observation peer without detecting a C++
 compiler. Product build, profile checks and Control passed; local package
-`8e4a9c29-e13d-4bd3-979a-4e0ed94e1d52` has ten verified hashes. General
-late-hook concurrency and external DOS4GW/NESticle remain unverified.
-The adjacent library's same-width payload-only mechanism, non-Detours payload
-format, helper ordinal and startup-only transaction require compatibility proof;
+`8e4a9c29-e13d-4bd3-979a-4e0ed94e1d52` has ten verified hashes. Subsequent
+Full selected gates passed on that package against the P2 baseline; four-pair
+payload-only and missing-DLL tests also passed. External DOS4GW/NESticle,
+Win16 editing and save, and general late-hook concurrency remain unverified;
 no untested semantic equivalence is assumed. Prior [S4 evidence](../etc/evidence/m0-t475-s4-nthook-dependency-cleanup.md),
 [S3 evidence](../etc/evidence/m0-t475-s3-worker-ntvdm-remediation.md),
 [S2 inventory](../etc/evidence/m0-t475-s2-component-dependency-inventory.md),

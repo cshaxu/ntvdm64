@@ -531,3 +531,22 @@ package `8e4a9c29-e13d-4bd3-979a-4e0ed94e1d52`. The earlier P12 Full result
 remains selected-gate evidence; the external DOS4GW/NESticle fixture was not
 available. The historical T290 matrix remains incomplete, and new-thread
 races and removal are not proven for the experimental late-hook primitive.
+
+## Final P14 package retest
+
+The P14 package `8e4a9c29-e13d-4bd3-979a-4e0ed94e1d52` passed Full selected
+gates against the retained P2 pre-replacement WOW baseline
+(`final-audit/full-r2.process`, exit 0). These include Win16 startup frontiers,
+the Console and Window command matrices, GUI and protocol paths, lifecycle,
+frontend loss and nested handoff. The ten package images matched the build
+inputs. DOS4GW/NESticle was skipped because the external fixtures were not
+supplied. The first attempt could not allocate the required short physical
+test path under sandbox restrictions; the supervised retry used its owned
+short-path stage and completed with cleanup.
+
+The MSVC payload-only test and the actual installer missing-DLL test each
+passed all four x86/x64 caller-target pairs on retest. Product link-map checks
+again rejected Detours; the identity audit confirmed 22 byte-exact imported
+files and the one documented local helper fix; and all 971 selected compiler
+commands were C-only. These checks do not prove every application's behavior,
+Win16 editing or save, or general late-hook new-thread and removal safety.
