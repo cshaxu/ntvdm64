@@ -232,6 +232,7 @@ INT host_main IFN2(INT, argc, CHAR **, argv)
    */
 
 #ifndef	macintosh
+#line 201
   init_virtual_drivers();
 #endif
 

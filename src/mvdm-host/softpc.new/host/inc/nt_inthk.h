@@ -27,12 +27,14 @@ IMPORT NTSTATUS VdmInstallHardwareIntHandler IPT1(PVOID, HardwareIntHandler);
 #ifdef CCPU
 IMPORT BOOL host_swint_hook IPT1(IS32, int_no);
 #endif
+#line 31
 IMPORT NTSTATUS VdmInstallSoftwareIntHandler IPT1(PVOID, SoftwareIntHandler);
 
 
 
 /* Expection interrupt hooking functions */
 #ifdef CCPU
+#line 36
 IMPORT BOOL host_exint_hook IPT2(IS32, exp_no, IS32, error_code);
 #endif
 #line 39

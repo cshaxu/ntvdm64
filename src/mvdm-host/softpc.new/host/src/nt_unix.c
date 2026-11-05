@@ -73,6 +73,7 @@ const char *message;
 message = strerror((int)error);
 if (message != NULL)
    return((LPSTR)message);
+#line 72
 sprintf(buf, "System error %d occurred in %s (line %d)",
 	 error, filename, line);
 return(buf);

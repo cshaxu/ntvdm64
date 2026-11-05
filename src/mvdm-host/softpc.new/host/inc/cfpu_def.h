@@ -20,7 +20,9 @@ typedef double 		FPH;
 #line 18
 typedef struct {
 #ifdef LITTLEND
+#line 21
 IU32	mant:23;
+#line 20
 IU32	exp:8;
 #line 19
 IU32	sign:1;
@@ -33,9 +35,11 @@ IU32	sign:1;
 
 typedef struct {
 #ifdef LITTLEND
+#line 27
 IU32	mant_hi:20;
 #line 26
 IU32	exp:11;
+#line 25
 IU32	sign:1;
 #else
 #line 25
@@ -46,6 +50,7 @@ IU32	sign:1;
 
 typedef struct {
 #ifdef LITTLEND
+#line 32
 IU16	exp:15;
 #line 31
 IU16	sign:1;
@@ -60,6 +65,7 @@ IU16	sign:1;
 
 typedef struct {
 #ifdef LITTLEND
+#line 39
 IU32	mant_lo;
 #line 38
 FP64HI	hiword;
@@ -74,6 +80,7 @@ FP64HI	hiword;
 typedef struct {
 #ifdef LITTLEND
 /* fpu.c's little-endian BCD tables initialize low word before high word. */
+#line 45
 IU32 low_word;
 #line 44
 IS32 high_word;
@@ -92,6 +99,7 @@ IS32 high_word;
 
 typedef struct {
 #ifdef LITTLEND
+#line 56
 IU32	mant_lo;
 #line 55
 IU32	mant_hi;

@@ -1,0 +1,82 @@
+[
+  {
+    "name": "run16.exe",
+    "previous_sha256": "0a3e67504fec93eb6c89b8f89c560a8a2e201b0ed15efdfe3f2778c7522eb05a",
+    "candidate_sha256": "0a3e67504fec93eb6c89b8f89c560a8a2e201b0ed15efdfe3f2778c7522eb05a",
+    "byte_differences": 0,
+    "size_equal": true,
+    "timestamps_only": true
+  },
+  {
+    "name": "ntsrv.exe",
+    "previous_sha256": "d6c3005c28cb0d02984866f144cc8b3c5f5de6be9c9c2f250fff3d37e8cdd609",
+    "candidate_sha256": "d6c3005c28cb0d02984866f144cc8b3c5f5de6be9c9c2f250fff3d37e8cdd609",
+    "byte_differences": 0,
+    "size_equal": true,
+    "timestamps_only": true
+  },
+  {
+    "name": "ntcon.exe",
+    "previous_sha256": "9faf706da2901ca65a638d7a0da9d1d474b10c59f59edfc852d49d63a2aa99b7",
+    "candidate_sha256": "9faf706da2901ca65a638d7a0da9d1d474b10c59f59edfc852d49d63a2aa99b7",
+    "byte_differences": 0,
+    "size_equal": true,
+    "timestamps_only": true
+  },
+  {
+    "name": "ntvdm.exe",
+    "previous_sha256": "8713123c72477e5ec61ad75ede0606d5598779709be868b428d70d43aa116290",
+    "candidate_sha256": "ce703d95358e7ec83adb6eb72610cf5ffcd9db81a763f1d3b419a36886d03989",
+    "byte_differences": 4,
+    "size_equal": true,
+    "timestamps_only": true
+  },
+  {
+    "name": "ntvwm.exe",
+    "previous_sha256": "36086cfa5c6a0efecb0cbd6d0a28d05a773c4f850d5e9a8615203fdc22354c57",
+    "candidate_sha256": "36086cfa5c6a0efecb0cbd6d0a28d05a773c4f850d5e9a8615203fdc22354c57",
+    "byte_differences": 0,
+    "size_equal": true,
+    "timestamps_only": true
+  },
+  {
+    "name": "ntmon.exe",
+    "previous_sha256": "d1c124173c69da6bf44e8f86a11efdb37e1e15d10ffd45ba29e33f78c3e1bfda",
+    "candidate_sha256": "d1c124173c69da6bf44e8f86a11efdb37e1e15d10ffd45ba29e33f78c3e1bfda",
+    "byte_differences": 0,
+    "size_equal": true,
+    "timestamps_only": true
+  },
+  {
+    "name": "WOW32.DLL",
+    "previous_sha256": "621a22ac6147c0de037d4eb8187176eb8c5f10b1aa3f7f701056e2db8f85bcb5",
+    "candidate_sha256": "5e3be5eb6fb8949067cbb3c35d2579a5f0deca02865e23e6adefc41952e5eaaa",
+    "byte_differences": 4,
+    "size_equal": true,
+    "timestamps_only": true
+  },
+  {
+    "name": "VDMREDIR.DLL",
+    "previous_sha256": "bd3f123454c5c205f165906cecbe9bb207c2bae3d8537bd2c6d7d76af895a2b5",
+    "candidate_sha256": "bd3f123454c5c205f165906cecbe9bb207c2bae3d8537bd2c6d7d76af895a2b5",
+    "byte_differences": 0,
+    "size_equal": true,
+    "timestamps_only": true
+  },
+  {
+    "name": "nthook32.dll",
+    "previous_sha256": "4dfc6a769a9b56149e74450b33856a991312230c414e67314687a3cdad0255d2",
+    "candidate_sha256": "4dfc6a769a9b56149e74450b33856a991312230c414e67314687a3cdad0255d2",
+    "byte_differences": 0,
+    "size_equal": true,
+    "timestamps_only": true
+  },
+  {
+    "name": "nthook64.dll",
+    "previous_sha256": "544c2270858ac062f8b789c5307d53a822da1d4c2e131d28dd17848c0ecbe10e",
+    "candidate_sha256": "544c2270858ac062f8b789c5307d53a822da1d4c2e131d28dd17848c0ecbe10e",
+    "byte_differences": 0,
+    "size_equal": true,
+    "timestamps_only": true
+  }
+]

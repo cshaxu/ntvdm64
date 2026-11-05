@@ -1,0 +1,143 @@
+{
+  "method": "Original committed S1 commands reconstructed against current product build roots; all hit arms and at least one file-marker context per candidate. Separate S1 original observations remain distinct.",
+  "contexts": [
+    8,
+    54,
+    173,
+    310,
+    327,
+    351,
+    517,
+    524,
+    547,
+    596,
+    661,
+    893
+  ],
+  "all_success": true,
+  "files": [
+    {
+      "path": "src/mvdm-host/inc/wowmmcb.h",
+      "source_sha256": "685404ef90afbf61c5c1cc615ead941460c7f78bbe0b0a932a7861da3f7dc2fc",
+      "exact_text_observations": 6,
+      "lexical_leads": [],
+      "lead_disposition": "",
+      "transformed_observations": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "source_sha256": "193d9b780feb1557cd029ff2d5c265e9540d3b16339072ab92e08869d5b77fd0",
+      "exact_text_observations": 12,
+      "lexical_leads": [],
+      "lead_disposition": "",
+      "transformed_observations": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "source_sha256": "bf45e4fd68d706510fe773b2b9a319f7a745e268df61b62ed2e44b23d77a203f",
+      "exact_text_observations": 20,
+      "lexical_leads": [
+        [
+          25,
+          19,
+          "IU32\tsign:1;"
+        ]
+      ],
+      "lead_disposition": "Original FP32 and FP64HI both declare the same sign field; actual 25 is FP64HI original line 25.",
+      "transformed_observations": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_inthk.h",
+      "source_sha256": "99026be5db76d468201ba16f6f31fe3039ee6f28771253ff21cf54514032a1e3",
+      "exact_text_observations": 0,
+      "lexical_leads": [],
+      "lead_disposition": "",
+      "transformed_observations": [
+        [
+          22,
+          22,
+          "extern UINT host_hwint_hook (IS32 int_no);"
+        ],
+        [
+          23,
+          23,
+          "extern NTSTATUS VdmInstallHardwareIntHandler (PVOID HardwareIntHandler);"
+        ],
+        [
+          28,
+          28,
+          "extern UINT host_swint_hook (IS32 int_no);"
+        ],
+        [
+          31,
+          31,
+          "extern NTSTATUS VdmInstallSoftwareIntHandler (PVOID SoftwareIntHandler);"
+        ],
+        [
+          36,
+          36,
+          "extern UINT host_exint_hook (IS32 exp_no, IS32 error_code);"
+        ],
+        [
+          39,
+          39,
+          "extern NTSTATUS VdmInstallFaultHandler (PVOID FaultHandler);"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "source_sha256": "6937966cf58120b3c40caf0f822abf7d7703112a35dc2d337e9517f9d69c5a02",
+      "exact_text_observations": 52,
+      "lexical_leads": [],
+      "lead_disposition": "",
+      "transformed_observations": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcntl32.c",
+      "source_sha256": "185fc06a91d733ed3854db3d0b2f4124ea65c339f4b50a0f0148923212d20c68",
+      "exact_text_observations": 24,
+      "lexical_leads": [],
+      "lead_disposition": "",
+      "transformed_observations": []
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/ex/probe.c",
+      "source_sha256": "82829e6f0b8602c300a7d9f1f8941122cb826c74d4cf52d03b4371a1e88ee5fd",
+      "exact_text_observations": 4,
+      "lexical_leads": [],
+      "lead_disposition": "",
+      "transformed_observations": []
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "source_sha256": "52e8ac18ca9104be3f133fce56a897a89730480eb30897158139795ca7eef5aa",
+      "exact_text_observations": 4,
+      "lexical_leads": [
+        [
+          1635,
+          1609,
+          "NtGetTickCount ("
+        ]
+      ],
+      "lead_disposition": "Whitespace normalization conflates two original declarations; actual 1635 is the selected import prototype, while 1609 is the unselected inline variant.",
+      "transformed_observations": []
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+      "source_sha256": "1963ec663153b7c3005d73c05a58194dd4d021acbcd437dd5d6c58d1356dfc90",
+      "exact_text_observations": 12,
+      "lexical_leads": [],
+      "lead_disposition": "",
+      "transformed_observations": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+      "source_sha256": "eebfcd186d38b69f997af3be3f3dc5613fabc6d6103b3b3a3b701bb3c10dcce6",
+      "exact_text_observations": 1,
+      "lexical_leads": [],
+      "lead_disposition": "",
+      "transformed_observations": []
+    }
+  ]
+}

@@ -84,7 +84,7 @@ NtQueryPerformanceCounter (
 #line 1603
 #error Excluded unsupported NT executive shared-data tick implementation
 #else
-#line 1631
+#line 1632
 NTSYSAPI
 ULONG
 NTAPI

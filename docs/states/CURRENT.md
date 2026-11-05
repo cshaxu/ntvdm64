@@ -4,7 +4,7 @@
 
 **Active: M0 T476 S2** — complete the outstanding per-file mirror conditional and line audit.
 
-S1 integrated and published its marker build and 30 exclusions; its [main integration evidence](../etc/evidence/m0-t476-s1-main-integration.md) retains the limits. The owner directed S2 to finish them. The [S2 baseline](../etc/evidence/m0-t476-s2-file-audit.md) tracks all 1,055 files: 793 files have completed file-level review; 262 require further review. The prior ten-file diagnostic-line batch was built and published; six of those files are now individually reviewed, and four remain open. `globals.h` has an unbuilt selected-branch macro restoration; `nt_inthk.h`, `cfpu_def.h`, `main.c`, `nt_unix.c` and `wowmmcb.h` have unbuilt original-line anchors. All six remain open until the next owner-directed source batch build and review.
+S1 integrated and published its marker build and 30 exclusions; its [main integration evidence](../etc/evidence/m0-t476-s1-main-integration.md) retains the limits. The owner directed S2 to finish them. The [S2 baseline](../etc/evidence/m0-t476-s2-file-audit.md) tracks all 1,055 files: 797 files have completed file-level review; 258 require further review. The second ten-file source batch was built, line-checked and published; four files are fully reviewed and six remain open. The earlier batch retains three open files.
 
 ## Active Packet
 

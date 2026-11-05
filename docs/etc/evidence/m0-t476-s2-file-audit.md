@@ -225,3 +225,20 @@ The recorded compiler observations identify four original `cfpu_def.h` fields wh
 ### Additional candidate line anchors
 
 The existing selected-context compiler index identifies `support/main.c` startup calls displaced by the registered vector-binding insertion, `nt_unix.c`'s retained error formatting moved by a registered CRT adaptation, and `wowmmcb.h` declarations displaced by an added ABI notice. Their candidate original-line anchors are unbuilt and unpublished; these files remain open until the next source batch and post-build checks.
+
+
+### Ten-file selected-branch and line candidate
+
+A second source batch contains the selected `globals.h` memory macros and line corrections in `wowmmcb.h`, `support/main.c`, `cfpu_def.h`, `nt_inthk.h`, `nt_unix.c`, `wcntl32.c`, `probe.c`, `ntexapi.h` and `ntpsapi.h`. The two native executive declarations were matched to the correct original declaration variants; `probe.c` physical lines were counted by LF, including the original form-feed. This batch is awaiting the x86/x64 cached build and compiler-line verification; none of these files is newly counted as complete.
+
+
+### Second ten-file build and publication
+
+The second ten-file batch is listed by pinned before/after source hash in [the input record](../../../artifacts/mvdm-audit/t476-s2-batch2-input.json). The first build linked the x86 targets but its owned wrapper never supplied an exit result after the build subprocesses exited; that run was not accepted. After verifying no product compiler or linker child remained, only the stalled wrapper was stopped. An interrupt-header follow-up revealed a second line shift and it was corrected before the repeated cached build. The revised x86 and x64 build and inner NTVDM/WOW32 links completed with exit code 0.
+
+The prior temporary S1 worktree had been removed, so the first reconstruction attempt could not read its command plan. A later reconstruction from the committed command index initially reached 429 of 433 contexts before an obsolete x64 directory path caused an error; that run is not a pass. The corrected [reconstructed compiler check](../../../artifacts/mvdm-audit/t476-s2-batch2-preprocess.json) covers each observed branch and one file marker per candidate in 12 successful current-build-root contexts. For `nt_inthk.h`, a separate transformed-output run confirms all six original declaration lines. This reconstructed observation is distinct from the original S1 marker evidence.
+
+The [ten-component comparison](../../../artifacts/mvdm-audit/t476-s2-batch2-pe-comparison.json) found eight byte-identical images and only COFF/debug timestamp changes in NTVDM and WOW32. As authorized, runtime tests were not repeated. The complete package and hook license were published and SHA-256 verified at `assets/release` and `O:/winnt/system32`; the previous package is backed up under `build/t476-s2/batch2-publish-backup`.
+
+The [four completed header reviews](../../../artifacts/mvdm-audit/t476-s2-batch2-final-reviews.json) cover `wowmmcb.h`, `cfpu_def.h`, `nt_inthk.h` and `client/globals.h`, with original condition inventories, observed arm dispositions, candidate hashes and compiler observations. The other six candidates are built and published but remain open for full-file review. Total: **797 of 1,055 complete; 258 open**.
+

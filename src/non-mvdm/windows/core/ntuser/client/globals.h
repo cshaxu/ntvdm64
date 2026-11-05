@@ -44,8 +44,13 @@ extern WCHAR szOneChar[];
 #line 21
 
 #line 85
-#ifndef RC_INVOKED
+#ifndef RC_INVOKED       // RC can't handle #pragmas
 #line 86
+#undef  LHND
+#define LHND                (LMEM_MOVEABLE | LMEM_ZEROINIT)
+
+#undef  LMHtoP
+#define LMHtoP(handle)      // Don't use this macro
 #endif
 #line 92
 

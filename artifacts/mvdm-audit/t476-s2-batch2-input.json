@@ -1,0 +1,74 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/inc/wowmmcb.h",
+      "prechange_sha256": "2a4d36b164f44c0b8e48636fb1e025291ecd322967b8c375baf52ebe5ea625cf",
+      "current_sha256": "685404ef90afbf61c5c1cc615ead941460c7f78bbe0b0a932a7861da3f7dc2fc",
+      "original_sha256": "c4135b71b57c210150d6083b6eb179ac256e164a1b58a475b4c4f9395dc3cf89",
+      "state": "pending-build-and-file-review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "prechange_sha256": "8f625455d217e902ae808c6558b7e217ac2fd5aa8fee329f5eaa2e58fbe0e4a4",
+      "current_sha256": "193d9b780feb1557cd029ff2d5c265e9540d3b16339072ab92e08869d5b77fd0",
+      "original_sha256": "5dfdca835f1ca6fddf07826f2b4aa9e25f4c8bd0ceef21b2dce9884de721376c",
+      "state": "pending-build-and-file-review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "prechange_sha256": "776905df4ae482b3920efdf4a568ac0c736036b6a247dcf129317a1297e1e748",
+      "current_sha256": "bf45e4fd68d706510fe773b2b9a319f7a745e268df61b62ed2e44b23d77a203f",
+      "original_sha256": "fe3bb4a06759e1cbef74bff327661f9649c92fb2490cdc751bc625a8170d3d4f",
+      "state": "pending-build-and-file-review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_inthk.h",
+      "prechange_sha256": "b42e8bd8cd7177d60b67d1c26394d8e6c853f10e223fec3d91d71b96713c245b",
+      "current_sha256": "99026be5db76d468201ba16f6f31fe3039ee6f28771253ff21cf54514032a1e3",
+      "original_sha256": "463f0daebc4d196dc1e108289cf10a8c3e3580efc1cf96ca880af30acbc4e632",
+      "state": "pending-build-and-file-review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "prechange_sha256": "c2bf90ae275ee14e0f07435ed58a6df737d93a82cbd488c3a3b9e73e7a879156",
+      "current_sha256": "6937966cf58120b3c40caf0f822abf7d7703112a35dc2d337e9517f9d69c5a02",
+      "original_sha256": "f2ab1f40420a0928884cf524305a9b87b8c65b0c3440ab97367aa1cbce6417a7",
+      "state": "pending-build-and-file-review"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcntl32.c",
+      "prechange_sha256": "f5b546392d4eae7d19896cf1d4ba9720e5cf55c61453d134ef2b08313b8f9f03",
+      "current_sha256": "185fc06a91d733ed3854db3d0b2f4124ea65c339f4b50a0f0148923212d20c68",
+      "original_sha256": "36c8cb9a46f13998d0459bc4869dc6dd4191423c0429a7335ebd26f68c804b59",
+      "state": "pending-build-and-file-review"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/ex/probe.c",
+      "prechange_sha256": "9333b95eb5a15d4bb07383ea121feaff594d08ed00044bb6d40799ac2f15cff0",
+      "current_sha256": "82829e6f0b8602c300a7d9f1f8941122cb826c74d4cf52d03b4371a1e88ee5fd",
+      "original_sha256": "0d1cae414b609c624e6bdf04fa28ebd84ff38dbb9687a63d8bc9e840c2f2372b",
+      "state": "pending-build-and-file-review"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "prechange_sha256": "3a527fdf6274b858201f4f8729c74867cfad1b40799b50e29e937b89e6cdb1ab",
+      "current_sha256": "52e8ac18ca9104be3f133fce56a897a89730480eb30897158139795ca7eef5aa",
+      "original_sha256": "d4bddfbf3eadd81cbf913a60108f1c7cb3362c6c51b042701bba43da6bb8e52a",
+      "state": "pending-build-and-file-review"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+      "prechange_sha256": "51e043c613163927f1edd896032ab18693276f936a741410f42e71b526d8f045",
+      "current_sha256": "1963ec663153b7c3005d73c05a58194dd4d021acbcd437dd5d6c58d1356dfc90",
+      "original_sha256": "cafd48b3a9c672c6a18503d4565e7864a284ec029f63ae04ff221c58a2db5148",
+      "state": "pending-build-and-file-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+      "prechange_sha256": "ab8c05f35ff69933d17bb32d3e0199a3b34820a9958ea8fa7dd12913e43b0b8b",
+      "current_sha256": "eebfcd186d38b69f997af3be3f3dc5613fabc6d6103b3b3a3b701bb3c10dcce6",
+      "original_sha256": "fd78200232574074f7ec68d2f5b851c27ee9d5024427310d18ebbcb048336e97",
+      "state": "pending-build-and-file-review"
+    }
+  ]
+}

@@ -1,0 +1,474 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/inc/wowmmcb.h",
+      "prechange_sha256": "2a4d36b164f44c0b8e48636fb1e025291ecd322967b8c375baf52ebe5ea625cf",
+      "current_sha256": "685404ef90afbf61c5c1cc615ead941460c7f78bbe0b0a932a7861da3f7dc2fc",
+      "original_sha256": "c4135b71b57c210150d6083b6eb179ac256e164a1b58a475b4c4f9395dc3cf89",
+      "original_arm_count": 2,
+      "arm_dispositions": [
+        {
+          "directive": "ifndef",
+          "expression": "WOWMMCB_H",
+          "status_before_s1": "hit",
+          "hit_contexts": [
+            517,
+            518,
+            519,
+            520,
+            521,
+            522,
+            523,
+            524,
+            525,
+            526,
+            527,
+            528,
+            529,
+            530,
+            531,
+            532,
+            533,
+            534,
+            535,
+            536,
+            537,
+            538,
+            539,
+            540,
+            541,
+            542,
+            543,
+            544,
+            545,
+            546,
+            547,
+            548,
+            549,
+            550,
+            551,
+            552,
+            553,
+            554,
+            555,
+            556,
+            557,
+            558,
+            559,
+            560,
+            561,
+            562,
+            563,
+            564,
+            565,
+            566,
+            567,
+            568,
+            569,
+            570,
+            571,
+            572,
+            573,
+            574,
+            575,
+            576,
+            577,
+            578,
+            579,
+            580,
+            581,
+            582,
+            583,
+            584,
+            585,
+            586,
+            587,
+            588,
+            589,
+            590,
+            591,
+            592,
+            593,
+            594,
+            595,
+            687,
+            689,
+            722,
+            724,
+            725,
+            726,
+            727,
+            729,
+            730,
+            731,
+            732
+          ]
+        },
+        {
+          "directive": "ifndef",
+          "expression": "UNALIGNED",
+          "status_before_s1": "unhit",
+          "hit_contexts": []
+        }
+      ],
+      "compiler_line_evidence": {
+        "path": "src/mvdm-host/inc/wowmmcb.h",
+        "source_sha256": "685404ef90afbf61c5c1cc615ead941460c7f78bbe0b0a932a7861da3f7dc2fc",
+        "exact_text_observations": 6,
+        "lexical_leads": [],
+        "lead_disposition": "",
+        "transformed_observations": []
+      },
+      "review": "Full diff: DIV-294 cdecl declarations; S1 excluded unhit UNALIGNED fallback; inserted line 1 restores original subsequent positions."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "prechange_sha256": "776905df4ae482b3920efdf4a568ac0c736036b6a247dcf129317a1297e1e748",
+      "current_sha256": "bf45e4fd68d706510fe773b2b9a319f7a745e268df61b62ed2e44b23d77a203f",
+      "original_sha256": "fe3bb4a06759e1cbef74bff327661f9649c92fb2490cdc751bc625a8170d3d4f",
+      "original_arm_count": 6,
+      "arm_dispositions": [
+        {
+          "directive": "if",
+          "expression": "!defined(HOST_BIAS)",
+          "status_before_s1": "hit",
+          "hit_contexts": [
+            54,
+            126
+          ]
+        },
+        {
+          "directive": "ifdef",
+          "expression": "LITTLEND",
+          "status_before_s1": "hit",
+          "hit_contexts": [
+            54,
+            126
+          ]
+        },
+        {
+          "directive": "else",
+          "expression": "",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifdef",
+          "expression": "LITTLEND",
+          "status_before_s1": "hit",
+          "hit_contexts": [
+            54,
+            126
+          ]
+        },
+        {
+          "directive": "else",
+          "expression": "",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifdef",
+          "expression": "LITTLEND",
+          "status_before_s1": "hit",
+          "hit_contexts": [
+            54,
+            126
+          ]
+        },
+        {
+          "directive": "else",
+          "expression": "",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifdef",
+          "expression": "LITTLEND",
+          "status_before_s1": "hit",
+          "hit_contexts": [
+            54,
+            126
+          ]
+        },
+        {
+          "directive": "else",
+          "expression": "",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifdef",
+          "expression": "LITTLEND",
+          "status_before_s1": "hit",
+          "hit_contexts": [
+            54,
+            126
+          ]
+        },
+        {
+          "directive": "else",
+          "expression": "",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifdef",
+          "expression": "LITTLEND",
+          "status_before_s1": "hit",
+          "hit_contexts": [
+            54,
+            126
+          ]
+        },
+        {
+          "directive": "else",
+          "expression": "",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifdef",
+          "expression": "BIGEND",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifdef",
+          "expression": "LITTLEND",
+          "status_before_s1": "hit",
+          "hit_contexts": [
+            54,
+            126
+          ]
+        },
+        {
+          "directive": "ifdef",
+          "expression": "NTVDM",
+          "status_before_s1": "hit",
+          "hit_contexts": [
+            54,
+            126
+          ]
+        },
+        {
+          "directive": "else",
+          "expression": "",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifndef",
+          "expression": "_Fpu_c_h",
+          "status_before_s1": "hit",
+          "hit_contexts": [
+            54,
+            126
+          ]
+        }
+      ],
+      "compiler_line_evidence": {
+        "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+        "source_sha256": "bf45e4fd68d706510fe773b2b9a319f7a745e268df61b62ed2e44b23d77a203f",
+        "exact_text_observations": 20,
+        "lexical_leads": [
+          [
+            25,
+            19,
+            "IU32\tsign:1;"
+          ]
+        ],
+        "lead_disposition": "Original FP32 and FP64HI both declare the same sign field; actual 25 is FP64HI original line 25.",
+        "transformed_observations": []
+      },
+      "review": "Full diff: registered selected little-endian FPU storage layout and status-interface adaptations; excluded alternatives and both original conditional groups retained; individual reordered fields restored to original lines."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_inthk.h",
+      "prechange_sha256": "b42e8bd8cd7177d60b67d1c26394d8e6c853f10e223fec3d91d71b96713c245b",
+      "current_sha256": "99026be5db76d468201ba16f6f31fe3039ee6f28771253ff21cf54514032a1e3",
+      "original_sha256": "463f0daebc4d196dc1e108289cf10a8c3e3580efc1cf96ca880af30acbc4e632",
+      "original_arm_count": 2,
+      "arm_dispositions": [
+        {
+          "directive": "ifdef",
+          "expression": "CCPU",
+          "status_before_s1": "hit",
+          "hit_contexts": [
+            351
+          ]
+        },
+        {
+          "directive": "ifdef",
+          "expression": "CCPU",
+          "status_before_s1": "hit",
+          "hit_contexts": [
+            351
+          ]
+        }
+      ],
+      "compiler_line_evidence": {
+        "path": "src/mvdm-host/softpc.new/host/inc/nt_inthk.h",
+        "source_sha256": "99026be5db76d468201ba16f6f31fe3039ee6f28771253ff21cf54514032a1e3",
+        "exact_text_observations": 0,
+        "lexical_leads": [],
+        "lead_disposition": "",
+        "transformed_observations": [
+          [
+            22,
+            22,
+            "extern UINT host_hwint_hook (IS32 int_no);"
+          ],
+          [
+            23,
+            23,
+            "extern NTSTATUS VdmInstallHardwareIntHandler (PVOID HardwareIntHandler);"
+          ],
+          [
+            28,
+            28,
+            "extern UINT host_swint_hook (IS32 int_no);"
+          ],
+          [
+            31,
+            31,
+            "extern NTSTATUS VdmInstallSoftwareIntHandler (PVOID SoftwareIntHandler);"
+          ],
+          [
+            36,
+            36,
+            "extern UINT host_exint_hook (IS32 exp_no, IS32 error_code);"
+          ],
+          [
+            39,
+            39,
+            "extern NTSTATUS VdmInstallFaultHandler (PVOID FaultHandler);"
+          ]
+        ]
+      },
+      "review": "Full original/current comparison: both CCPU arms are hit; six transformed declarations map to the exact original lines."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+      "prechange_sha256": "ab8c05f35ff69933d17bb32d3e0199a3b34820a9958ea8fa7dd12913e43b0b8b",
+      "current_sha256": "eebfcd186d38b69f997af3be3f3dc5613fabc6d6103b3b3a3b701bb3c10dcce6",
+      "original_sha256": "fd78200232574074f7ec68d2f5b851c27ee9d5024427310d18ebbcb048336e97",
+      "original_arm_count": 4,
+      "arm_dispositions": [
+        {
+          "directive": "ifndef",
+          "expression": "_GLOBALS_",
+          "status_before_s1": "hit",
+          "hit_contexts": [
+            596,
+            597,
+            598,
+            599,
+            600,
+            601,
+            602,
+            603,
+            604,
+            605,
+            606,
+            607,
+            608,
+            609,
+            610,
+            611,
+            612,
+            613,
+            614,
+            615,
+            616,
+            617,
+            618,
+            619,
+            620,
+            621,
+            622,
+            632,
+            633,
+            634,
+            639,
+            643,
+            644,
+            645,
+            646,
+            654,
+            656,
+            717,
+            718
+          ]
+        },
+        {
+          "directive": "if",
+          "expression": "DBG",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifndef",
+          "expression": "RC_INVOKED",
+          "status_before_s1": "hit",
+          "hit_contexts": [
+            596,
+            597,
+            598,
+            599,
+            600,
+            601,
+            602,
+            603,
+            604,
+            605,
+            606,
+            607,
+            608,
+            609,
+            610,
+            611,
+            612,
+            613,
+            614,
+            615,
+            616,
+            617,
+            618,
+            619,
+            620,
+            621,
+            622,
+            632,
+            633,
+            634,
+            639,
+            643,
+            644,
+            645,
+            646,
+            654,
+            656,
+            717,
+            718
+          ]
+        },
+        {
+          "directive": "ifdef",
+          "expression": "WX86",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        }
+      ],
+      "compiler_line_evidence": {
+        "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+        "source_sha256": "eebfcd186d38b69f997af3be3f3dc5613fabc6d6103b3b3a3b701bb3c10dcce6",
+        "exact_text_observations": 1,
+        "lexical_leads": [],
+        "lead_disposition": "",
+        "transformed_observations": []
+      },
+      "review": "Full diff: original globals subset under registered bindings; DBG and WX86 excluded; selected RC_INVOKED arm restores original LHND and LMHtoP definitions. LHND equals the installed SDK definition; exact PE comparison shows no executable change."
+    }
+  ]
+}

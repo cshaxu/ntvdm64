@@ -491,6 +491,7 @@ BOOL FASTCALL  WM32CBDir (LPWM32MSGPARAMEX lpwm32mpex)
         lpwm32mpex->dwParam = 0;
         if (owned & WOW_TEXT_MAPPED) {
             DeleteParamMap(lpwm32mpex->Parm16.WndProc.lParam, PARAM_16, NULL);
+#line 469
             return TRUE;
 #line 471
         }
