@@ -118,3 +118,8 @@ Ten host mirror files received only `#line` corrections, listed with original an
 The x86 and x64 cached product builds succeeded, including the inner NTVDM and WOW32 Ninja targets. The first build attempt stopped before those targets because it invoked CMake on an inner Ninja tree; the corrected build exited zero. Candidate staging succeeded. The [ten-image PE comparison](../../../artifacts/mvdm-audit/t476-s2-batch1-pe-comparison.json) found eight identical images and two images differing exclusively in COFF and debug-directory timestamps; no executable bytes differed. The owner explicitly allows skipping repeat runtime tests for line-only changes with no substantive executable differences, so no runtime test was repeated for this batch.
 
 The coherent ten-image package and hook license were synchronized and SHA-256 checked at `assets/release` and `O:/winnt/system32`; the prior package is retained under `build/t476-s2/batch1-publish-backup`. Build logs and stage results are under `build/t476-s2`. No guest source or binary was rebuilt or changed.
+
+
+### Post-publication compiler-line follow-up
+
+The ten changed files were reprocessed in 39 recorded product contexts; all commands succeeded. The [follow-up index](../../../artifacts/mvdm-audit/t476-s2-batch1-preprocess.json) binds each current source hash to matching original-line observations and unresolved lexical leads. Several apparent mismatches are repeated statements or project-added failure handling; these cannot be accepted or corrected automatically. This is sampled compiler evidence, not complete per-file certification, so the progress count remains unchanged.

@@ -1,0 +1,177 @@
+{
+  "scope": "post-change unique text matching; repeated text and local additions can generate false leads; not complete file proof",
+  "contexts": [
+    138,
+    156,
+    186,
+    261,
+    263,
+    518,
+    525,
+    564,
+    596,
+    597,
+    598,
+    599,
+    600,
+    601,
+    602,
+    603,
+    608,
+    609,
+    611,
+    613,
+    614,
+    615,
+    616,
+    617,
+    618,
+    619,
+    620,
+    621,
+    622,
+    632,
+    633,
+    634,
+    639,
+    643,
+    644,
+    645,
+    646,
+    654,
+    656
+  ],
+  "failed_contexts": [],
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "source_sha256": "09234ab05f404574342767e94572734c735b73976629b411c9825e3320f19028",
+      "matched_line_observations": 98,
+      "mismatch_leads": []
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "source_sha256": "cb5e75063ceb75996d0d87caf77aff7acbde81a7e13f44f8c70db4e8c5ef42eb",
+      "matched_line_observations": 167,
+      "mismatch_leads": [
+        [
+          427,
+          352,
+          "cmdVDMEnvBlk.cchEnv = 0;"
+        ],
+        [
+          430,
+          398,
+          "cchVDMEnv32 = 0;"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "source_sha256": "6b45c5fc535d5344d01f8c6e4315b1f14dd618e7bc79d3bb1c7b527adcfa36ed",
+      "matched_line_observations": 7,
+      "mismatch_leads": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "source_sha256": "000c65af5ddd124d7b0379782a909b79c96f258aaad75131e85e620dfa1ed4c0",
+      "matched_line_observations": 215,
+      "mismatch_leads": [
+        [
+          649,
+          921,
+          "pcu->countlatched = 0;"
+        ],
+        [
+          657,
+          921,
+          "pcu->countlatched = 0;"
+        ],
+        [
+          663,
+          921,
+          "pcu->countlatched = 0;"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "source_sha256": "9710afc2c576fe810b26ee83f099a7ba34e6e9e00aff3d48570b529a1eee81bb",
+      "matched_line_observations": 278,
+      "mismatch_leads": [
+        [
+          633,
+          1411,
+          "if (crt_controller.cursor_start.as_bfld.cursor_off)"
+        ],
+        [
+          2290,
+          1881,
+          "value &= 0xf;"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdde.c",
+      "source_sha256": "d46ec86968c0892dab8f2afdb910b7bfa08764d33b0852d903650b3be424b742",
+      "matched_line_observations": 143,
+      "mismatch_leads": [
+        [
+          678,
+          688,
+          "if ((phTemp1->hMem16 == h16) && (phTemp1->hMem32 == h32)) {"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "source_sha256": "13dd415db787321bbc1b3c65cc07f51646f3145f6d9cf8c5a2e693d443d02767",
+      "matched_line_observations": 212,
+      "mismatch_leads": [
+        [
+          281,
+          1905,
+          "return 1;"
+        ],
+        [
+          348,
+          1905,
+          "return 1;"
+        ],
+        [
+          765,
+          1905,
+          "return 1;"
+        ],
+        [
+          1499,
+          1905,
+          "return 1;"
+        ],
+        [
+          1511,
+          1905,
+          "return 1;"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.c",
+      "source_sha256": "efd09d864475678d3b81d22bf029cbc4b95a69247c420cf783d5a7b0974ef81e",
+      "matched_line_observations": 101,
+      "mismatch_leads": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "source_sha256": "83b39c438d16306c1f8871585211466b37a11982158e6aee5eef1347b98cf94a",
+      "matched_line_observations": 140,
+      "mismatch_leads": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+      "source_sha256": "ab8c05f35ff69933d17bb32d3e0199a3b34820a9958ea8fa7dd12913e43b0b8b",
+      "matched_line_observations": 31,
+      "mismatch_leads": []
+    }
+  ]
+}
