@@ -579,3 +579,27 @@ files and 274 exports; Control passed (`p15/stage.process` and
 `p15/control.process`, exit 0). Local release package
 `6a0098af-e723-401d-8b47-83ab82796cad` has ten verified image hashes and a
 matching license (`p15/release.log`).
+
+## Late-install thread-set comparison
+
+The retired Detours-based NTCON test observer in commit `bd891f962^`, blob
+`70fc83992625b478e9f04ae254c7c324c5e2879f`, called
+`DetourUpdateThread(GetCurrentThread())` and did not register the other target
+threads. It did not establish a process-wide new-thread exclusion guarantee.
+The current test-only observer installs outside the loader lock and uses the
+imported guard. `tests/lib-win32/process-hook/verify-late-guard-race.ps1`
+deterministically creates a worker after the first thread snapshot, once before
+and once after suspension of the observed set; on both x86 and x64 the second
+snapshot rejected each changed set with `ERROR_RETRY`, the guard released its
+resources and the worker exited (`late-race-r2/x86.process` and `x64.process`,
+exit 0). This does not test a new thread created after the verification
+snapshot or prove atomicity against arbitrary concurrent thread creation.
+
+P16 product build, staged guest/export checks and Control passed
+(`p16/build.process`, `p16/stage.process`, `p16/control.process`, exit 0).
+Local release package `24cdf6b3-37c1-4141-bcfe-8f405bfe41d9` has ten
+verified image hashes and a matching license (`p16/release.log`). The owner
+closed S5 on the verified old-version functionality and semantic scope; the
+former Detours observer did not guarantee exclusion of newly created threads.
+DOS4GW/NESticle was excluded by the owner. No push or main publication was
+performed.

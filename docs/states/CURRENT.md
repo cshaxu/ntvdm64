@@ -2,110 +2,22 @@
 
 ## Current Work
 
-**Active: M0 T475 S5 — pure C process-hook replacement**, Ordinary Mode.
-The owner admits importing win16style's `lib-win32/process-hook` unchanged,
-removing C++ and Detours throughout the codebase, and preserving product
-behavior. Worktree-local builds, tests, asset publication and commits remain
-the delivery policy; no push or main-runtime publication.
+**No active M/T/S packet.** The owner closes M0 T475 S5 after local delivery
+and verification of the C process-hook replacement. The next task requires
+separate admission. The ordered candidates remain in [Queue](QUEUE.md).
 
-## Active Packet
+## M0 T475 S5 Closure
 
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T475 S5, Ordinary Mode. |
-| Admission And Approval | Owner directs verbatim import and complete C++/Detours removal with equivalent product behavior. |
-| Objective | Use the unchanged shared pure-C library and remove C++ and Detours from product, tests and build selection without changing functional contracts. |
-| Non-goals | Change guest media, worker authority, NTVDM runtime import boundary, main worktree or system32. |
-| Reference Baseline | Local 900c20484; main baseline 09b58f5c6; ten-image package 5ab28665-fddd-4348-8ba7-6158ee56d015; S4 evidence below. |
-| Files And ABI Surface | lib-win32/process-hook, common/native-hook, NTHook, Run16, both workers, tests, build graphs, helper ordinal, payload and hook ABI. |
-| Applicable Rules | Preserve product/third-party provenance and licenses, shared library identity, process rights, handles, target state, x86/x64 ABI and failures. |
-| Verification | Inventory and identity-check import; x86/x64 compile; four width pairs, payload-only, normal/negative/rollback/cleanup and real guest tests; scan complete codebase and graph; Control, local package/hash and documentation gates per production P. |
-| Expected Markers | Original library matches pinned source; no C++ source or Detours dependency in scope; unchanged caller semantics and verified package. |
-| Asset Needs | Owner-supplied adjacent win16style library and existing immutable guest/test fixtures; no external fetch. |
-| Reporting Requirements | Exact source hashes and license, P evidence, tested paths, omissions and discovered incompatibilities. |
-| Stop Conditions | Required semantic change, unavailable source/license, unsupported cross-width path, failure to retain equivalent behavior or original guest constraint. |
-| Exit Criteria | Each admitted P built, tested, locally published and committed; full codebase audit and behavior comparison complete. |
-| Original Owner Request | Add an S to import win16style process-hook verbatim and completely eliminate C++ and Detours while keeping product functionality identical. |
-| Similar-Issue Sweep | Product and test-only C++/Detours, scripts, generated graphs, archives, helper and diagnostic fixtures. |
-
-P1–P4 imported the pinned C library, proved four-width direct payloads, switched
-the product Hook path and converted initial fixtures. Each package passed its
-recorded local checks; one imported helper has a documented local fix. Exact
-package IDs, results and limits are in [S5 evidence](../etc/evidence/m0-t475-s5-process-hook-import.md).
-Other repositories and worktrees remain out of scope.
-
-P5 converts the startup Console trace to C; x86/x64 interception, original
-call and LastError checks, an actual NTVDM diagnostic relink, product build and
-Control passed. Local package `f49f5403-2030-433e-87b3-77b5858a2b35` has ten
-verified hashes. The diagnostic relink was not run with a real guest.
-
-P6 converts the startup palette trace to C. Both widths passed actual hook,
-original-call and LastError checks; a test-only NTVDM relink reached Win16
-WRITE main/document/page-info in four snapshots. Local package
-`b5eceac1-5472-4266-8287-75ff14854f64` passed Control and hash verification.
-WRITE editing and exit, Full and DOS4GW/NESticle were not verified.
-P7 removes the obsolete Detours mechanism wrapper and replaces its mock-only
-C++ test with C tests of the selected direct-payload implementation. x86/x64
-checks passed, as did the product build and Control. Local package
-`392e6339-d0e6-4e4c-a602-3c48f24cde5a` has ten verified hashes. Other
-C++/Detours diagnostics and legacy fixtures remain open.
-P8 converts both test-only installation write guards to C and removes their
-Detours build path. Restricted file operations, unapproved target rejection,
-two actual NTVDM relinks and both real WRITE startup frontiers passed. Product
-build and Control passed; local package `454dd50e-b64b-42ed-bed7-453ae71bfd00`
-has ten verified hashes. WRITE editing, save and exit were not verified.
-P9 converts the running-NTCON Console observer to C, using the existing late
-thread guard and MinHook trampolines. Real NTCON hook installation, mouse
-acknowledgment and guest completion passed; four-process call/error/lifetime
-and protection-failure rollback tests passed. Product build and Control passed;
-local package `0abcb77d-13e9-43f6-8049-37fb5636fa3f` has ten verified hashes.
-The late backend does not exclude new-thread races or implement removal.
-P10 removes the unreferenced vendored Detours sources and the profile-checker
-exception. Product builds, diagnostic rebuilds, product link-map checks and
-Control passed; local package `1347cbbf-7cc8-4db4-b3d7-4a68910c8575` has ten
-verified hashes. An adapted optional SoftPC profile audit reported existing
-x86 flags on three lib-win32 sources; see P10 evidence. Historical C++ files
-remain open in S5.
-P11 rejects C++ inputs in the active native graph and fixes the x86/WOW32
-lib-win32 macro leakage found in P10. The graph audit passed 443 authored
-commands, 971 selected compiler commands were C-only, and three C++ extension
-negative cases were rejected. Product build and Control passed; local package
-`2edc8463-29b6-49b2-a9e6-c369ecd28ac8` has ten verified hashes. Historical
-sources and late-hook concurrency limits remain open.
-P12 retires six unbuildable historical C++ fixtures, one historical audit
-probe and two unreferenced OpenNT C++ declarations; their exact Git objects
-and provenance remain indexed in the S5 evidence. The tracked working-tree
-C++ extension scan, selected graphs, product build and Control passed. Local
-package `3ae63090-eba4-445c-b264-edf54f09b56f` has ten verified hashes.
-Historical C++-generating tools and late-hook concurrency remain open.
-P13 changes two historical byte-array generators to emit C and makes the
-already-unbuildable T290 C++ ingress graph fail explicitly as retired. Synthetic
-byte/identity-negative tests passed on x86/x64; the locked historical binaries were absent.
-Product build and Control passed; local package
-`f4f0567d-2924-4971-bdc3-a5a4d73559ce` has ten verified hashes. A Full
-selected-gate comparison against pre-replacement P2 passed on P12; external
-DOS4GW/NESticle was unavailable. Archived historical scripts and late-hook
-concurrency remain open.
-P14 retires three inactive historical C++ build scripts with indexed Git
-objects and removes C++ language configuration from CMake. Fresh x86/x64
-C-only configurations built the C observation peer without detecting a C++
-compiler. Product build, profile checks and Control passed; local package
-`8e4a9c29-e13d-4bd3-979a-4e0ed94e1d52` has ten verified hashes. Subsequent
-Full selected gates passed on that package against the P2 baseline; four-pair
-payload-only and missing-DLL tests also passed. A two-round WRITE test passed
-edit, save, content verification, close and restart for both packages. General
-late-hook concurrency remains unverified; the owner excludes DOS4GW/NESticle.
-No untested semantic equivalence is assumed. Prior [S4 evidence](../etc/evidence/m0-t475-s4-nthook-dependency-cleanup.md),
-[S3 evidence](../etc/evidence/m0-t475-s3-worker-ntvdm-remediation.md),
-[S2 inventory](../etc/evidence/m0-t475-s2-component-dependency-inventory.md),
-and [S1 evidence](../etc/evidence/m0-t475-s1-win32-rpc.md) retain the preceding
-local closures. NTVDM PE runtime imports remain separately queued.
-
-P15 adds a repeatable two-round WRITE edit/save/content/close/restart test.
-The P2 baseline, P14 package and P15 package all passed. Product build,
-Control and local release hash checks passed for package
-`6a0098af-e723-401d-8b47-83ab82796cad`; see S5 evidence for the initial
-sandboxed process-observation failure and successful authorized retry.
+The imported process-hook is selected by the product; the recorded local
+helper fix is retained. C++ source/build selection and Detours dependencies
+were removed. x86/x64 builds, all four caller/target width pairs, missing-DLL,
+negative and lifecycle checks, real guest tests, and the Full selected gates
+passed. WRITE edit, save and restart passed against the pre-replacement and
+current packages. The owner excludes DOS4GW/NESticle. The late observer's
+new-thread exclusion limit was also present in the former Detours use and is
+not a new closure requirement. Local release, commits and exact evidence are
+recorded in [S5 evidence](../etc/evidence/m0-t475-s5-process-hook-import.md).
+The owner directs no push or main-runtime publication.
 
 ## S12 Closure Record
 
