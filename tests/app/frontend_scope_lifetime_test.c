@@ -1,3 +1,6 @@
+#include "common/base_srv/frontend_client.h"
+#include "common/protocol/frontend_instance.h"
+static const common_frontend_key fixture_frontend={7,11};
 /* Unit resource-lifetime test of the production root pump. Broker discovery
  * and channel transport are substitutes; real threads/events exercise joining.
  * This does not replace authenticated RPC or real guest Console tests. */
@@ -48,7 +51,7 @@ static DWORD fixture_frontend_start(PCWSTR image,frontend_connection *connection
     notification=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(notification);++registrations;
     CHECK(DuplicateHandle(GetCurrentProcess(),notification,GetCurrentProcess(),&connection->capability,SYNCHRONIZE,TRUE,0));
     CHECK(DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),&connection->process,SYNCHRONIZE,FALSE,0));
-    error=frontend_service_start(notification,attached,&fixture_service);
+    error=frontend_service_start(&fixture_frontend,notification,attached,&fixture_service);
     return error;
 }
 DWORD OpenNtBaseClientStartFrontend(uint64_t window,BOOL borrowed,HANDLE *root,
@@ -60,13 +63,13 @@ DWORD OpenNtBaseClientStartFrontend(uint64_t window,BOOL borrowed,HANDLE *root,
     *root=value.process;*capability=value.capability;*restored=NULL;
     return error;
 }
-DWORD OpenNtBaseClientFrontendConsoleRestored(void){CHECK(FALSE);return ERROR_INVALID_STATE;}
-DWORD OpenNtBaseClientFrontendCloseQuiesced(void)
-{ CHECK(fault_mode && restore_calls==1);CHECK(SetEvent(quiesced_seen));return 0; }
-DWORD OpenNtBaseClientRequestParticipantExit(void)
-{ CHECK(fault_mode);++fault_reports;CHECK(SetEvent(fault_seen));return fault_report_error; }
-DWORD OpenNtBaseClientFrontendIoDisconnected(void)
-{
+DWORD OpenNtBaseClientFrontendConsoleRestored(const common_frontend_key *key){CHECK(key && key->instance==fixture_frontend.instance && key->generation==fixture_frontend.generation);CHECK(FALSE);return ERROR_INVALID_STATE;}
+DWORD OpenNtBaseClientFrontendCloseQuiesced(const common_frontend_key *key)
+{CHECK(key && key->instance==fixture_frontend.instance && key->generation==fixture_frontend.generation); CHECK(fault_mode && restore_calls==1);CHECK(SetEvent(quiesced_seen));return 0; }
+DWORD OpenNtBaseClientCloseFrontendInstance(const common_frontend_key *key)
+{CHECK(key && key->instance==fixture_frontend.instance && key->generation==fixture_frontend.generation); CHECK(fault_mode);++fault_reports;CHECK(SetEvent(fault_seen));return fault_report_error; }
+DWORD OpenNtBaseClientFrontendIoDisconnected(const common_frontend_key *key)
+{CHECK(key && key->instance==fixture_frontend.instance && key->generation==fixture_frontend.generation);
     CHECK(created && !channels[created-1]);
     CHECK(InterlockedCompareExchange(&stopped,0,0)==(LONG)created);
     ++disconnects;CHECK(SetEvent(disconnect_seen));return ERROR_SUCCESS;
@@ -91,8 +94,8 @@ DWORD frontend_session_park(frontend_session *value)
 { (void)value;CHECK(retirement_mode);InterlockedIncrement(&park_calls);CHECK(SetEvent(park_seen));return 0; }
 DWORD frontend_session_drain(frontend_session *value)
 { (void)value;CHECK(retirement_mode);InterlockedIncrement(&drain_calls);return 0; }
-DWORD OpenNtBaseClientFrontendStateChanged(HANDLE *state_changed)
-{
+DWORD OpenNtBaseClientFrontendStateChanged(const common_frontend_key *key,HANDLE *state_changed)
+{CHECK(key && key->instance==fixture_frontend.instance && key->generation==fixture_frontend.generation);
     *state_changed=NULL;
     CHECK(retirement_state);
     return DuplicateHandle(GetCurrentProcess(),retirement_state,GetCurrentProcess(),state_changed,
@@ -103,8 +106,8 @@ DWORD OpenNtBaseClientBrokerProcess(HANDLE *server)
     return DuplicateHandle(GetCurrentProcess(),failed_broker ? failed_broker : GetCurrentProcess(),GetCurrentProcess(),server,
         SYNCHRONIZE,FALSE,0) ? ERROR_SUCCESS : GetLastError();
 }
-DWORD OpenNtBaseClientRetireWorkerlessFrontend(DWORD *retired)
-{
+DWORD OpenNtBaseClientRetireWorkerlessFrontend(const common_frontend_key *key,DWORD *retired)
+{CHECK(key && key->instance==fixture_frontend.instance && key->generation==fixture_frontend.generation);
     *retired=(DWORD)InterlockedCompareExchange(&broker_shutdown,0,0);
     if(retirement_mode) {
         CHECK(SetEvent(usage_seen));
@@ -145,17 +148,18 @@ DWORD OpenNtBaseClientStartNativeWorker(DWORD native_type,HANDLE *worker)
 DWORD OpenNtBaseClientRequestFrontend(HANDLE capability)
 { (void)capability;CHECK(native_mode);return ERROR_SUCCESS; }
 
-DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE value)
+DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE value,common_frontend_key *key)
 {
+    *key=fixture_frontend;
     ++registrations;
     return DuplicateHandle(GetCurrentProcess(),value,GetCurrentProcess(),
         &notification,0,FALSE,DUPLICATE_SAME_ACCESS) ? 0 : GetLastError();
 }
-DWORD OpenNtBaseClientFrontendJoinCandidate(DWORD *nonce,DWORD *pid)
-{*nonce=*pid=0;return ERROR_NOT_FOUND;}
-DWORD OpenNtBaseClientFrontendJoinDecision(DWORD nonce,BOOL same)
-{(void)nonce;(void)same;return ERROR_INVALID_STATE;}
-DWORD OpenNtBaseClientFrontendLeaseReady(void){CHECK(retirement_mode);return ERROR_SUCCESS;}
+DWORD OpenNtBaseClientFrontendJoinCandidate(const common_frontend_key *key,DWORD *nonce,DWORD *pid)
+{CHECK(key && key->instance==fixture_frontend.instance && key->generation==fixture_frontend.generation);*nonce=*pid=0;return ERROR_NOT_FOUND;}
+DWORD OpenNtBaseClientFrontendJoinDecision(const common_frontend_key *key,DWORD nonce,BOOL same)
+{CHECK(key && key->instance==fixture_frontend.instance && key->generation==fixture_frontend.generation);(void)nonce;(void)same;return ERROR_INVALID_STATE;}
+DWORD OpenNtBaseClientFrontendLeaseReady(const common_frontend_key *key){CHECK(key && key->instance==fixture_frontend.instance && key->generation==fixture_frontend.generation);CHECK(retirement_mode);return ERROR_SUCCESS;}
 DWORD OpenNtBaseClientRetainFrontendRoot(HANDLE value,HANDLE *root,DWORD *generation)
 {
     observed_capability=(ULONG_PTR)value;
@@ -171,8 +175,8 @@ DWORD OpenNtBaseClientBindConsoleContext(HANDLE value)
     ++bindings;
     return value==expected_execution ? ERROR_SUCCESS : ERROR_ACCESS_DENIED;
 }
-DWORD OpenNtBaseClientFrontendRequest(DWORD *request,HANDLE *worker)
-{
+DWORD OpenNtBaseClientFrontendRequest(const common_frontend_key *key,DWORD *request,HANDLE *worker)
+{CHECK(key && key->instance==fixture_frontend.instance && key->generation==fixture_frontend.generation);
     DWORD error=ERROR_NOT_FOUND;
     if(fault_mode){ResetEvent(notification);return ERROR_PIPE_NOT_CONNECTED;}
     EnterCriticalSection(&lock);
@@ -192,7 +196,7 @@ static DWORD WINAPI channel_main(void *value)
     frontend_io_channel *channel=value;
     return WaitForSingleObject(channel->release,INFINITE)==WAIT_OBJECT_0 ? 0 : 1;
 }
-DWORD frontend_io_channel_start_request(DWORD request,HANDLE worker,
+DWORD frontend_io_channel_start_request(const common_frontend_key *key,DWORD request,HANDLE worker,
     frontend_session *native,frontend_io_channel **output)
 {
     frontend_io_channel *channel;
@@ -242,7 +246,7 @@ static void service_controls_retirement(void)
     retirement_state=CreateEventW(NULL,FALSE,FALSE,NULL);
     CHECK(creator && usage_seen && park_seen && retirement_state);
     retirement_mode=TRUE;usage_pending=1;
-    CHECK(!frontend_service_start_process(notification,creator,notification,&service));
+    CHECK(!frontend_service_start_process(&fixture_frontend,notification,creator,notification,&service));
     CHECK(SetEvent(retirement_state));
     CHECK(WaitForSingleObject(usage_seen,5000)==WAIT_OBJECT_0);
     CHECK(WaitForSingleObject(frontend_service_thread(service),0)==WAIT_TIMEOUT);
@@ -278,7 +282,7 @@ static void service_controls_fault(void)
         restore_error=scenario==3 ? ERROR_WRITE_FAULT : 0;
         InterlockedExchange(&broker_shutdown,0);
         CHECK(ResetEvent(notification));
-        CHECK(!frontend_service_start_process(notification,failed_broker,notification,&service));
+        CHECK(!frontend_service_start_process(&fixture_frontend,notification,failed_broker,notification,&service));
         CHECK(SetEvent(notification));
         CHECK(WaitForSingleObject(fault_seen,5000)==WAIT_OBJECT_0);
         CHECK(WaitForSingleObject(frontend_service_thread(service),50)==WAIT_TIMEOUT);

@@ -4,7 +4,7 @@ param(
     [Parameter(Mandatory)][string]$PackageRoot,
     [Parameter(Mandatory)][string]$ReportPrefix,
     [Parameter(Mandatory)][ValidateSet('client','bootstrap','startup-rejections',
-        'native-worker-failure','native-completed-worker-loss','native-io-error',
+        'native-worker-failure','native-completed-worker-loss','native-io-error','frontend-instances',
         'workerless-park','worker-loss-park','monitor-rpc',
         'native-command','native-registry','ntvwm-execution','ntvwm-public-startup','frontend-root-parent','admitted-vdm','frontend-io-fault','worker-console-exit')][string[]]$Cases
 )
@@ -48,7 +48,7 @@ foreach($case in $Cases) {
         & "$PSScriptRoot/../../tools/build/Set-PackageIdentity.ps1" -Image (Join-Path $casePackageRoot $image) -PackageId $packageId
         Copy-Item -LiteralPath (Join-Path $casePackageRoot $image) -Destination (Join-Path $casePackageRoot 'ntvdm.exe') -Force
     }
-    if($case -in @('startup-rejections','native-io-error')) {
+    if($case -in @('startup-rejections','native-io-error','frontend-instances')) {
         # This fixture deliberately replaces the frontend with an adversarial
         # peer. Its C-side build-only guard must remain effective even when
         # ordinary product cases execute in a short physical O:\tmp stage.

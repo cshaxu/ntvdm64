@@ -11,7 +11,7 @@
 
 static void service_console_return_ack(OPENNT_BASE_CONNECTION *root);
 static VOID CALLBACK service_frontend_exited(PVOID context,BOOLEAN fired);
-static DWORD service_attach_frontend(OPENNT_BASE_CONNECTION *connection,
+static DWORD service_attach_frontend(OPENNT_FRONTEND_INSTANCE *root,
     HANDLE worker,HANDLE pipe,HANDLE ready);
 
 /* Association lookup is service-private. A pipe lease never creates a task. */
@@ -103,7 +103,7 @@ DWORD OpenNtBaseServiceWorkerIoTransition(OPENNT_BASE_CONNECTION *connection,DWO
     DWORD generation,DWORD action)
 {
     OPENNT_FRONTEND_ROUTE *route;
-    OPENNT_BASE_CONNECTION *root;
+    OPENNT_FRONTEND_INSTANCE *root;
     DWORD error=ERROR_ACCESS_DENIED;
     if(!connection)return ERROR_INVALID_PARAMETER;
     EnterCriticalSection(&connection->service->lock);
@@ -114,8 +114,8 @@ DWORD OpenNtBaseServiceWorkerIoTransition(OPENNT_BASE_CONNECTION *connection,DWO
     if(connection->wow)goto done;
     for(;;) {
         route=service_worker_io_route(connection,pid);
-        if(!route || !(root=route->root ? route->root->owner : NULL) || root->frontend.closing || root->frontend.close_draining ||
-            WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT) {
+        if(!route || !(root=route->root) || root->closing || root->close_draining ||
+            WaitForSingleObject(root->owner->process.ProcessHandle,0)!=WAIT_TIMEOUT) {
             error=ERROR_PIPE_NOT_CONNECTED;break;
         }
         if(action==WORKER_IO_ACQUIRE) {
@@ -124,14 +124,14 @@ DWORD OpenNtBaseServiceWorkerIoTransition(OPENNT_BASE_CONNECTION *connection,DWO
              * I/O has drained. Only a new admitted execution phase may grant
              * this route again after both endpoints acknowledge closure. */
             if(route->io_release_ordered){error=ERROR_BUSY;break;}
-            if(root->frontend.io_route==route && !route->io_releasing) {
+            if(root->io_route==route && !route->io_releasing) {
                 error=ERROR_SUCCESS;break;
             }
-            if(!root->frontend.io_route) {
+            if(!root->io_route) {
                 route->io_release_ordered=route->io_releasing=route->io_worker_closed=route->io_frontend_closed=FALSE;
-                root->frontend.io_route=route;
-                error=service_refresh_frontend_work(root);
-                if(error){root->frontend.io_route=NULL;route->io_requested=FALSE;break;}
+                root->io_route=route;
+                error=service_refresh_instance_work(root);
+                if(error){root->io_route=NULL;route->io_requested=FALSE;break;}
                 error=ERROR_SUCCESS;break;
             }
             /* An admitted phase waits for the old owner's acknowledged
@@ -141,20 +141,20 @@ DWORD OpenNtBaseServiceWorkerIoTransition(OPENNT_BASE_CONNECTION *connection,DWO
                 route->io_worker_closed && route->io_frontend_closed) {
                 error=ERROR_SUCCESS;break;
             }
-            if(root->frontend.io_route!=route) {
+            if(root->io_route!=route) {
                 error=ERROR_INVALID_STATE;break;
             }
             if(action==WORKER_IO_RELEASE_BEGIN) {
                 if(!route->io_release_ordered){error=ERROR_ACCESS_DENIED;break;}
                 route->io_releasing=TRUE;
-                error=service_refresh_frontend_work(root);break;
+                error=service_refresh_instance_work(root);break;
             }
             if(action!=WORKER_IO_RELEASED || !route->io_releasing) {
                 error=ERROR_INVALID_PARAMETER;break;
             }
             route->io_worker_closed=TRUE;
             service_finish_io_release(route);
-            if(root->frontend.io_route!=route){error=ERROR_SUCCESS;break;}
+            if(root->io_route!=route){error=ERROR_SUCCESS;break;}
         }
         if(!SleepConditionVariableCS(&connection->service->frontend_changed,
             &connection->service->lock,INFINITE)) {
@@ -166,15 +166,15 @@ done:
     LeaveCriticalSection(&connection->service->lock);
     return error;
 }
-DWORD OpenNtBaseServiceFrontendIoDisconnected(OPENNT_BASE_CONNECTION *root,DWORD pid,
-    DWORD generation)
+static DWORD service_instance_disconnected(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,OPENNT_FRONTEND_INSTANCE *root)
 {
     OPENNT_FRONTEND_ROUTE *route;
     DWORD error=ERROR_ACCESS_DENIED;
     if(!root)return ERROR_INVALID_PARAMETER;
-    EnterCriticalSection(&root->service->lock);
-    if(!OpenNtBaseServicePeer(root,pid,generation) || !root->frontend.capability)goto done;
-    route=root->frontend.io_route;
+    EnterCriticalSection(&connection->service->lock);
+    if(!OpenNtBaseServicePeer(connection,pid,generation) || !root->capability)goto done;
+    route=root->io_route;
     if(!route){error=ERROR_INVALID_STATE;goto done;}
     /* Unexpected EOF cannot be treated as a successful ownership release. */
     if(!route->io_releasing){error=ERROR_PIPE_NOT_CONNECTED;goto done;}
@@ -182,37 +182,43 @@ DWORD OpenNtBaseServiceFrontendIoDisconnected(OPENNT_BASE_CONNECTION *root,DWORD
     service_finish_io_release(route);
     error=ERROR_SUCCESS;
 done:
-    LeaveCriticalSection(&root->service->lock);
+    LeaveCriticalSection(&connection->service->lock);
     return error;
 }
 
 /* The event is a projection, not a queue. All writers and consumers hold the
  * existing service lock. Decided joins wait on frontend_changed for a lease;
  * they are not work for the frontend's authentication pump. */
-DWORD service_refresh_frontend_work(OPENNT_BASE_CONNECTION *root)
+DWORD service_refresh_instance_work(OPENNT_FRONTEND_INSTANCE *root)
 {
     LIST_ENTRY *link;
     BOOL pending;
     DWORD error;
-    if(!root || !root->frontend.capability)return ERROR_SUCCESS;
-    pending=(root->frontend.native.join_caller && !root->frontend.native.join_decision) ||
-        (root->frontend.io_route && root->frontend.io_route->io_releasing &&
-         !root->frontend.io_route->io_frontend_closed);
-    for(link=root->service->frontend_routes.Flink;
-        !pending && link!=&root->service->frontend_routes;link=link->Flink) {
+    if(!root || !root->capability)return ERROR_SUCCESS;
+    pending=(root->native.join_caller && !root->native.join_decision) ||
+        (root->io_route && root->io_route->io_releasing &&
+         !root->io_route->io_frontend_closed);
+    for(link=root->owner->service->frontend_routes.Flink;
+        !pending && link!=&root->owner->service->frontend_routes;link=link->Flink) {
         OPENNT_FRONTEND_ROUTE *route=CONTAINING_RECORD(link,OPENNT_FRONTEND_ROUTE,link);
-        pending=route==root->frontend.io_route && route->io_requested && !route->pipe &&
+        pending=route==root->io_route && route->io_requested && !route->pipe &&
             !route->delivered && WaitForSingleObject(route->worker,0)==WAIT_TIMEOUT;
     }
-    if(pending ? SetEvent(root->frontend.capability) : ResetEvent(root->frontend.capability))
+    if(root->closing || root->close_draining)pending=FALSE;
+    if(pending ? SetEvent(root->capability) : ResetEvent(root->capability))
         return ERROR_SUCCESS;
     error=GetLastError();
     /* A broken notification cannot authorize another successful acquisition.
      * Use the existing broker-owned failure/retirement path, not retries. */
-    root->frontend.closing=TRUE;
-    service_signal_frontend_states(root->service);
-    WakeAllConditionVariable(&root->service->frontend_changed);
+    root->closing=TRUE;
+    service_signal_frontend_states(root->owner->service);
+    WakeAllConditionVariable(&root->owner->service->frontend_changed);
     return error;
+}
+
+DWORD service_refresh_frontend_work(OPENNT_BASE_CONNECTION *root)
+{
+    return service_refresh_instance_work(root ? &root->frontend : NULL);
 }
 
 void service_delete_console_context(OPENNT_BASE_CONSOLE_CONTEXT *context)
@@ -308,8 +314,8 @@ DWORD service_copy_execution_console_members(OPENNT_BASE_CONNECTION *destination
 
 void service_delete_frontend(OPENNT_FRONTEND_ROUTE *route)
 {
-    OPENNT_BASE_CONNECTION *root=route->root ? route->root->owner : NULL;
-    if(root && root->frontend.io_route==route)root->frontend.io_route=NULL;
+    OPENNT_FRONTEND_INSTANCE *root=route->root;
+    if(root && root->io_route==route)root->io_route=NULL;
     RemoveEntryList(&route->link);
     if (route->pipe) CloseHandle(route->pipe);
     if (route->ready) CloseHandle(route->ready);
@@ -317,8 +323,8 @@ void service_delete_frontend(OPENNT_FRONTEND_ROUTE *route)
     HeapFree(GetProcessHeap(),0,route);
     /* Cleanup has no caller result; notification failure is handled by the
      * helper's explicit broker retirement, never hidden as successful work. */
-    (void)service_refresh_frontend_work(root);
-    if(root)WakeAllConditionVariable(&root->service->frontend_changed);
+    (void)service_refresh_instance_work(root);
+    if(root)WakeAllConditionVariable(&root->owner->service->frontend_changed);
 }
 
 void service_clear_frontend(OPENNT_BASE_CONNECTION *connection)
@@ -326,6 +332,7 @@ void service_clear_frontend(OPENNT_BASE_CONNECTION *connection)
     LIST_ENTRY *link=connection->service->frontend_routes.Flink;
     LIST_ENTRY *context_link=connection->service->console_contexts.Flink;
     LIST_ENTRY *caller_link;
+    service_revoke_host_frontends(connection);
     service_clear_frontend_channel(connection);
     for (caller_link=connection->service->connections.Flink;
          caller_link!=&connection->service->connections;caller_link=caller_link->Flink) {
@@ -341,12 +348,12 @@ void service_clear_frontend(OPENNT_BASE_CONNECTION *connection)
         OPENNT_BASE_CONSOLE_CONTEXT *context=CONTAINING_RECORD(context_link,
             OPENNT_BASE_CONSOLE_CONTEXT,link);
         context_link=context_link->Flink;
-        if (context->root==&connection->frontend) service_delete_console_context(context);
+        if (context->root->owner==connection) service_delete_console_context(context);
     }
     while (link!=&connection->service->frontend_routes) {
         OPENNT_FRONTEND_ROUTE *route=CONTAINING_RECORD(link,OPENNT_FRONTEND_ROUTE,link);
         link=link->Flink;
-        if (route->root==&connection->frontend || (!route->native_worker && !route->pipe && !route->delivered &&
+        if ((route->root && route->root->owner==connection) || (!route->native_worker && !route->pipe && !route->delivered &&
             !route->io_worker_closed && !route->io_frontend_closed &&
             route->request==connection->process.SequenceNumber)) {
             /* Root loss revokes the same physical grant for either worker.
@@ -356,13 +363,14 @@ void service_clear_frontend(OPENNT_BASE_CONNECTION *connection)
             if (route->delivered || (route->io_worker_closed && route->io_frontend_closed))
                 service_delete_frontend(route);
             else {
-                OPENNT_BASE_CONNECTION *root=route->root ? route->root->owner : NULL;
+                OPENNT_FRONTEND_INSTANCE *root=route->root;
+                if(root && root->io_route==route)root->io_route=NULL;
                 /* Retain only the selected worker identity until its exit:
                  * a waiter must observe cancellation, not await a new root. */
                 route->root=NULL;
                 if (route->pipe) { CloseHandle(route->pipe);route->pipe=NULL; }
                 if (route->ready) { CloseHandle(route->ready);route->ready=NULL; }
-                (void)service_refresh_frontend_work(root);
+                (void)service_refresh_instance_work(root);
             }
         }
     }
@@ -1244,16 +1252,16 @@ done:
 
 /* Called under the service lock, with an original-command-selected worker.
  * The route belongs to the root, not to the command submitting descendant. */
-static DWORD service_attach_frontend(OPENNT_BASE_CONNECTION *connection,
+static DWORD service_attach_frontend(OPENNT_FRONTEND_INSTANCE *root,
     HANDLE worker,HANDLE pipe,HANDLE ready)
 {
-    OPENNT_FRONTEND_ROUTE *route=connection->frontend.io_route;
+    OPENNT_FRONTEND_ROUTE *route=root->io_route;
     EVENT_BASIC_INFORMATION event_info;
     HANDLE local_pipe=NULL,local_ready=NULL;
     DWORD error,flags;
-    if(connection->frontend.closing || connection->frontend.close_draining ||
-        connection->frontend.terminal_retire) return ERROR_PIPE_NOT_CONNECTED;
-    if(!route || route->root!=&connection->frontend || !route->io_requested || route->io_releasing ||
+    if(root->closing || root->close_draining ||
+        root->terminal_retire) return ERROR_PIPE_NOT_CONNECTED;
+    if(!route || route->root!=root || !route->io_requested || route->io_releasing ||
         GetProcessId(route->worker)!=GetProcessId(worker))return ERROR_ACCESS_DENIED;
     if(route->pipe || route->ready || route->delivered)return ERROR_ALREADY_EXISTS;
     if (NtQueryEvent(ready,EventBasicInformation,&event_info,sizeof(event_info),NULL)<0 ||
@@ -1268,8 +1276,8 @@ static DWORD service_attach_frontend(OPENNT_BASE_CONNECTION *connection,
             0,FALSE,DUPLICATE_SAME_ACCESS)) { error=GetLastError();goto done; }
     route->pipe=local_pipe;local_pipe=NULL;
     route->ready=local_ready;local_ready=NULL;
-    WakeAllConditionVariable(&connection->service->frontend_changed);
-    service_signal_frontend_states(connection->service);
+    WakeAllConditionVariable(&root->owner->service->frontend_changed);
+    service_signal_frontend_states(root->owner->service);
     error=ERROR_SUCCESS;
 done:
     if(local_ready)CloseHandle(local_ready);
@@ -1286,7 +1294,7 @@ DWORD OpenNtBaseServiceAttachFrontend(OPENNT_BASE_CONNECTION *connection,DWORD p
     if (!connection) return ERROR_ACCESS_DENIED;
     EnterCriticalSection(&connection->service->lock);
     error=OpenNtBaseServiceRetainCommandWorker(connection,pid,generation,&worker);
-    if (!error) error=service_attach_frontend(connection,worker,pipe,ready);
+    if (!error) error=service_attach_frontend(&connection->frontend,worker,pipe,ready);
     if (worker) CloseHandle(worker);
     LeaveCriticalSection(&connection->service->lock);
     return error;
@@ -1363,82 +1371,83 @@ done:
 }
 
 
-DWORD OpenNtBaseServiceFrontendStateChanged(OPENNT_BASE_CONNECTION *root,DWORD pid,
-    DWORD generation,HANDLE *state_changed)
+static DWORD service_instance_state(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,OPENNT_FRONTEND_INSTANCE *root,HANDLE *state_changed)
 {
     DWORD error=ERROR_ACCESS_DENIED;
     if(!state_changed)return ERROR_INVALID_PARAMETER;
     *state_changed=NULL;
     if(!root)return error;
-    EnterCriticalSection(&root->service->lock);
-    if(OpenNtBaseServicePeer(root,pid,generation) && root->frontend.capability &&
-        root->frontend.state_changed) {
-        if(!DuplicateHandle(GetCurrentProcess(),root->frontend.state_changed,GetCurrentProcess(),
+    EnterCriticalSection(&connection->service->lock);
+    if(OpenNtBaseServicePeer(connection,pid,generation) && root->capability &&
+        root->state_changed) {
+        if(!DuplicateHandle(GetCurrentProcess(),root->state_changed,GetCurrentProcess(),
             state_changed,SYNCHRONIZE,FALSE,0)) error=GetLastError();
         else error=ERROR_SUCCESS;
     }
-    LeaveCriticalSection(&root->service->lock);
+    LeaveCriticalSection(&connection->service->lock);
     return error;
 }
 
 
-DWORD OpenNtBaseServiceFrontendRequest(OPENNT_BASE_CONNECTION *root,DWORD pid,
-    DWORD generation,DWORD *request,HANDLE *worker)
+static DWORD service_instance_request(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,OPENNT_FRONTEND_INSTANCE *root,DWORD *request,HANDLE *worker)
 {
     LIST_ENTRY *link;
     DWORD error=ERROR_NOT_FOUND;
     if (!request || !worker) return ERROR_INVALID_PARAMETER;
     *request=0;*worker=NULL;
     if (!root) return ERROR_ACCESS_DENIED;
-    EnterCriticalSection(&root->service->lock);
-    if (!OpenNtBaseServicePeer(root,pid,generation) || !root->frontend.capability) {
+    EnterCriticalSection(&connection->service->lock);
+    if (!OpenNtBaseServicePeer(connection,pid,generation) || !root->capability) {
         error=ERROR_ACCESS_DENIED;goto done;
     }
+    if(root->closing || root->close_draining){error=ERROR_NOT_FOUND;goto done;}
     /* A successful zero request with no endpoint is the broker's explicit
      * disconnect instruction, not EOF-based ownership inference. The current
      * route remains reserved until both endpoints acknowledge closure. */
-    if(root->frontend.io_route && root->frontend.io_route->io_releasing &&
-        !root->frontend.io_route->io_frontend_closed) {
+    if(root->io_route && root->io_route->io_releasing &&
+        !root->io_route->io_frontend_closed) {
         error=ERROR_SUCCESS;goto done;
     }
     /* Independent native worker attachment is not a pending DOS record.
      * The originating launcher can already have returned its direct result. */
-    for(link=root->service->frontend_routes.Flink;link!=&root->service->frontend_routes;link=link->Flink) {
+    for(link=connection->service->frontend_routes.Flink;link!=&connection->service->frontend_routes;link=link->Flink) {
         OPENNT_FRONTEND_ROUTE *route=CONTAINING_RECORD(link,OPENNT_FRONTEND_ROUTE,link);
-        if(route!=root->frontend.io_route || !route->io_requested || route->pipe || route->delivered ||
+        if(route!=root->io_route || !route->io_requested || route->pipe || route->delivered ||
             WaitForSingleObject(route->worker,0)!=WAIT_TIMEOUT)continue;
         error=DuplicateHandle(GetCurrentProcess(),route->worker,GetCurrentProcess(),worker,
             PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,0) ? ERROR_SUCCESS : GetLastError();
         if(!error)*request=route->request;
         goto done;
     }
-    error=service_refresh_frontend_work(root);
+    error=service_refresh_instance_work(root);
     if(!error)error=ERROR_NOT_FOUND;
 done:
-    LeaveCriticalSection(&root->service->lock);
+    LeaveCriticalSection(&connection->service->lock);
     return error;
 }
 
 
-DWORD OpenNtBaseServiceAttachFrontendRequest(OPENNT_BASE_CONNECTION *root,DWORD pid,
-    DWORD generation,DWORD request,HANDLE pipe,HANDLE ready)
+static DWORD service_instance_attach(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,OPENNT_FRONTEND_INSTANCE *root,DWORD request,HANDLE pipe,HANDLE ready)
 {
     LIST_ENTRY *link;
     HANDLE worker=NULL;
     DWORD error=ERROR_ACCESS_DENIED;
     if (!root) return error;
-    EnterCriticalSection(&root->service->lock);
-    if (!OpenNtBaseServicePeer(root,pid,generation) || !root->frontend.capability) {
+    EnterCriticalSection(&connection->service->lock);
+    if (!OpenNtBaseServicePeer(connection,pid,generation) || !root->capability) {
         goto done;
     }
-    for(link=root->service->frontend_routes.Flink;link!=&root->service->frontend_routes;link=link->Flink) {
+    for(link=connection->service->frontend_routes.Flink;link!=&connection->service->frontend_routes;link=link->Flink) {
         OPENNT_FRONTEND_ROUTE *route=CONTAINING_RECORD(link,OPENNT_FRONTEND_ROUTE,link);
-        if(route!=root->frontend.io_route || route->request!=request ||
+        if(route!=root->io_route || route->request!=request ||
             !route->io_requested || route->io_releasing)continue;
         error=service_attach_frontend(root,route->worker,pipe,ready);
         if(!error || error==ERROR_ALREADY_EXISTS) {
             LIST_ENTRY *caller_link;
-            for(caller_link=root->service->connections.Flink;caller_link!=&root->service->connections;caller_link=caller_link->Flink) {
+            for(caller_link=connection->service->connections.Flink;caller_link!=&connection->service->connections;caller_link=caller_link->Flink) {
                 OPENNT_BASE_CONNECTION *caller=CONTAINING_RECORD(caller_link,OPENNT_BASE_CONNECTION,service_link);
                 if(caller->process.SequenceNumber==request && caller->frontend_request_root==generation)
                     caller->frontend_request_root=0;
@@ -1448,13 +1457,13 @@ DWORD OpenNtBaseServiceAttachFrontendRequest(OPENNT_BASE_CONNECTION *root,DWORD 
     }
 done:
     if (worker) CloseHandle(worker);
-    if(OpenNtBaseServicePeer(root,pid,generation) && root->frontend.capability) {
-        DWORD notification_error=service_refresh_frontend_work(root);
+    if(OpenNtBaseServicePeer(connection,pid,generation) && root->capability) {
+        DWORD notification_error=service_refresh_instance_work(root);
         if(!error || error==ERROR_ALREADY_EXISTS) {
             if(notification_error)error=notification_error;
         }
     }
-    LeaveCriticalSection(&root->service->lock);
+    LeaveCriticalSection(&connection->service->lock);
     return error;
 }
 
@@ -1514,7 +1523,7 @@ DWORD OpenNtBaseServiceTakeFrontend(OPENNT_BASE_CONNECTION *connection,DWORD pid
         if (!root || WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT) {
             error=ERROR_PIPE_NOT_CONNECTED; goto done;
         }
-        if(route!=root->frontend.io_route || !route->io_requested || route->io_releasing) {
+        if(route!=route->root->io_route || !route->io_requested || route->io_releasing) {
             error=ERROR_NOT_READY;goto done;
         }
         if (!route->pipe) { error=route->delivered ? ERROR_ALREADY_EXISTS : ERROR_NOT_READY; goto done; }
@@ -1686,4 +1695,344 @@ done:
     }
     if(copy)HeapFree(GetProcessHeap(),0,copy);
     return error;
+}
+
+DWORD OpenNtBaseServiceFrontendIoDisconnected(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation)
+{
+    return service_instance_disconnected(connection,pid,generation,
+        connection ? &connection->frontend : NULL);
+}
+
+DWORD OpenNtBaseServiceFrontendStateChanged(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,HANDLE *state_changed)
+{
+    return service_instance_state(connection,pid,generation,
+        connection ? &connection->frontend : NULL,state_changed);
+}
+
+DWORD OpenNtBaseServiceFrontendRequest(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,DWORD *request,HANDLE *worker)
+{
+    return service_instance_request(connection,pid,generation,
+        connection ? &connection->frontend : NULL,request,worker);
+}
+
+DWORD OpenNtBaseServiceAttachFrontendRequest(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,DWORD request,HANDLE pipe,HANDLE ready)
+{
+    return service_instance_attach(connection,pid,generation,
+        connection ? &connection->frontend : NULL,request,pipe,ready);
+}
+
+/* Identity selection is local to each call. No ambient current-instance slot,
+ * fake process connection or fallback from a missing key is permitted. */
+OPENNT_FRONTEND_INSTANCE *service_find_frontend(OPENNT_BASE_CONNECTION *owner,
+    const common_frontend_key *key)
+{
+    LIST_ENTRY *link;
+    if(!owner || !key || !key->instance || !key->generation)return NULL;
+    for(link=owner->service->frontend_instances.Flink;
+        link!=&owner->service->frontend_instances;link=link->Flink) {
+        OPENNT_FRONTEND_INSTANCE *root=CONTAINING_RECORD(link,OPENNT_FRONTEND_INSTANCE,instance_link);
+        if(root->owner==owner && root->key.instance==key->instance &&
+            root->key.generation==key->generation)return root;
+    }
+    return NULL;
+}
+static DWORD service_publish_frontend(OPENNT_FRONTEND_INSTANCE *root)
+{
+    OPENNT_BASE_SERVICE *service=root->owner->service;
+    if(root->registered)return ERROR_ALREADY_EXISTS;
+    if(service->next_frontend_instance==UINT64_MAX)return ERROR_ARITHMETIC_OVERFLOW;
+    root->key.instance=++service->next_frontend_instance;
+    /* IDs never repeat within a broker lifetime; the authenticated owner
+     * incarnation additionally rejects reused PID/control identities. */
+    root->key.generation=root->owner->process.SequenceNumber;
+    InsertTailList(&service->frontend_instances,&root->instance_link);
+    root->registered=TRUE;
+    return ERROR_SUCCESS;
+}
+DWORD OpenNtBaseServiceRegisterNativeFrontend(OPENNT_BASE_CONNECTION *connection,
+    DWORD pid,DWORD generation,HANDLE capability,common_frontend_key *key)
+{
+    DWORD error;
+    if(!connection || !key)return ERROR_INVALID_PARAMETER;
+    ZeroMemory(key,sizeof(*key));
+    EnterCriticalSection(&connection->service->lock);
+    error=OpenNtBaseServiceRegisterFrontendRoot(connection,pid,generation,capability);
+    if(!error) {
+        error=service_publish_frontend(&connection->frontend);
+        if(!error)*key=connection->frontend.key;
+        else {
+            CloseHandle(connection->frontend.capability);connection->frontend.capability=NULL;
+            CloseHandle(connection->frontend.state_changed);connection->frontend.state_changed=NULL;
+        }
+    }
+    LeaveCriticalSection(&connection->service->lock);
+    return error;
+}
+DWORD OpenNtBaseServiceRegisterEmbeddedFrontend(OPENNT_BASE_CONNECTION *connection,
+    DWORD pid,DWORD generation,const common_frontend_location *location,
+    common_frontend_key *key,HANDLE *notification,HANDLE *retire)
+{
+    OPENNT_FRONTEND_INSTANCE *root=NULL;
+    OPENNT_BASE_WORKER_WATCH *watch;
+    LIST_ENTRY *link;
+    DWORD error=ERROR_ACCESS_DENIED;
+    if(!connection || !location || !key || !notification || !retire)return ERROR_INVALID_PARAMETER;
+    ZeroMemory(key,sizeof(*key));*notification=*retire=NULL;
+    if(!location->payload || !location->incarnation)return ERROR_INVALID_PARAMETER;
+    EnterCriticalSection(&connection->service->lock);
+    if(!OpenNtBaseServicePeer(connection,pid,generation))goto done;
+    watch=service_find_worker_watch(connection->service,generation);
+    /* fVDM alone is not admission. Only the broker-created live worker watch
+     * grants a host this role; ordinary launchers and shared WOW cannot register. */
+    if(!watch || watch->wow || watch->native_gui_launcher ||
+        (watch->kind!=OPENNT_BASE_WORKER_DOS && watch->kind!=OPENNT_BASE_WORKER_NATIVE) ||
+        watch->close_kind!=WORKER_CLOSE_NONE ||
+        !connection->service->compare_handles(watch->process.ProcessHandle,connection->process.ProcessHandle))goto done;
+    for(link=connection->service->frontend_instances.Flink;
+        link!=&connection->service->frontend_instances;link=link->Flink) {
+        OPENNT_FRONTEND_INSTANCE *other=CONTAINING_RECORD(link,OPENNT_FRONTEND_INSTANCE,instance_link);
+        if(other->owner==connection && other->embedded &&
+            other->location.payload==location->payload && other->location.vm==location->vm) {
+            error=ERROR_ALREADY_EXISTS;goto done;
+        }
+    }
+    root=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*root));
+    if(!root){error=ERROR_NOT_ENOUGH_MEMORY;goto done;}
+    root->owner=connection;root->embedded=TRUE;root->location=*location;
+    root->capability=CreateEventW(NULL,TRUE,FALSE,NULL);
+    root->retire=CreateEventW(NULL,TRUE,FALSE,NULL);
+    root->state_changed=CreateEventW(NULL,FALSE,FALSE,NULL);
+    if(!root->capability || !root->retire || !root->state_changed){error=GetLastError();goto done;}
+    if(!DuplicateHandle(GetCurrentProcess(),root->capability,GetCurrentProcess(),notification,SYNCHRONIZE,FALSE,0) ||
+        !DuplicateHandle(GetCurrentProcess(),root->retire,GetCurrentProcess(),retire,SYNCHRONIZE,FALSE,0)) {
+        error=GetLastError();goto done;
+    }
+    error=service_publish_frontend(root);
+    if(!error){*key=root->key;root=NULL;}
+done:
+    if(root) {
+        if(root->capability)CloseHandle(root->capability);
+        if(root->retire)CloseHandle(root->retire);
+        if(root->state_changed)CloseHandle(root->state_changed);
+        HeapFree(GetProcessHeap(),0,root);
+    }
+    if(error) {
+        if(*notification)CloseHandle(*notification);if(*retire)CloseHandle(*retire);
+        *notification=*retire=NULL;
+    }
+    LeaveCriticalSection(&connection->service->lock);
+    return error;
+}
+DWORD OpenNtBaseServiceValidateNativeFrontend(OPENNT_BASE_CONNECTION *connection,
+    DWORD pid,DWORD generation,const common_frontend_key *key)
+{
+    DWORD error=ERROR_ACCESS_DENIED;
+    if(!connection)return error;
+    EnterCriticalSection(&connection->service->lock);
+    if(OpenNtBaseServicePeer(connection,pid,generation) &&
+        service_find_frontend(connection,key)==&connection->frontend)error=ERROR_SUCCESS;
+    LeaveCriticalSection(&connection->service->lock);
+    return error;
+}
+/* Called only after routes/contexts have been revoked under the service lock.
+ * Native event handles still follow their existing connection teardown. */
+void service_release_frontend_instances(OPENNT_BASE_CONNECTION *connection)
+{
+    LIST_ENTRY *link=connection->service->frontend_instances.Flink;
+    while(link!=&connection->service->frontend_instances) {
+        OPENNT_FRONTEND_INSTANCE *root=CONTAINING_RECORD(link,OPENNT_FRONTEND_INSTANCE,instance_link);
+        link=link->Flink;
+        if(root->owner!=connection)continue;
+        RemoveEntryList(&root->instance_link);root->registered=FALSE;
+        if(root->embedded) {
+            CloseHandle(root->capability);CloseHandle(root->retire);CloseHandle(root->state_changed);
+            HeapFree(GetProcessHeap(),0,root);
+        }
+    }
+}
+DWORD OpenNtBaseServiceFrontendIoDisconnectedInstance(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,const common_frontend_key *key)
+{
+    OPENNT_FRONTEND_INSTANCE *root;
+    DWORD error=ERROR_ACCESS_DENIED;
+    if(!connection)return error;
+    EnterCriticalSection(&connection->service->lock);
+    root=service_find_frontend(connection,key);
+    if(root)error=service_instance_disconnected(connection,pid,generation,root);
+    LeaveCriticalSection(&connection->service->lock);
+    return error;
+}
+DWORD OpenNtBaseServiceFrontendStateChangedInstance(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,const common_frontend_key *key,HANDLE *state_changed)
+{
+    OPENNT_FRONTEND_INSTANCE *root;
+    DWORD error=ERROR_ACCESS_DENIED;
+    if(!state_changed)return ERROR_INVALID_PARAMETER;
+    *state_changed=NULL;
+    if(!connection)return error;
+    EnterCriticalSection(&connection->service->lock);
+    root=service_find_frontend(connection,key);
+    if(root)error=service_instance_state(connection,pid,generation,root,state_changed);
+    LeaveCriticalSection(&connection->service->lock);
+    return error;
+}
+DWORD OpenNtBaseServiceFrontendRequestInstance(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,const common_frontend_key *key,DWORD *request,HANDLE *worker)
+{
+    OPENNT_FRONTEND_INSTANCE *root;
+    DWORD error=ERROR_ACCESS_DENIED;
+    if(!request || !worker)return ERROR_INVALID_PARAMETER;
+    *request=0;*worker=NULL;
+    if(!connection)return error;
+    EnterCriticalSection(&connection->service->lock);
+    root=service_find_frontend(connection,key);
+    if(root)error=service_instance_request(connection,pid,generation,root,request,worker);
+    LeaveCriticalSection(&connection->service->lock);
+    return error;
+}
+DWORD OpenNtBaseServiceAttachFrontendRequestInstance(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,const common_frontend_key *key,DWORD request,HANDLE pipe,HANDLE ready)
+{
+    OPENNT_FRONTEND_INSTANCE *root;
+    DWORD error=ERROR_ACCESS_DENIED;
+    if(!connection)return error;
+    EnterCriticalSection(&connection->service->lock);
+    root=service_find_frontend(connection,key);
+    if(root)error=service_instance_attach(connection,pid,generation,root,request,pipe,ready);
+    LeaveCriticalSection(&connection->service->lock);
+    return error;
+}
+
+/* A registered embedded endpoint has no borrowed Windows Console to restore.
+ * It closes only its own downstream carriers through the same Console-close
+ * instruction used by native frontend lifetime arbitration. */
+static BOOL service_instance_has_worker(OPENNT_FRONTEND_INSTANCE *root,BOOL close)
+{
+    OPENNT_BASE_SERVICE *service=root->owner->service;
+    LIST_ENTRY *link,*entry;
+    BOOL live=FALSE;
+    for(link=service->frontend_routes.Flink;link!=&service->frontend_routes;link=link->Flink) {
+        OPENNT_FRONTEND_ROUTE *route=CONTAINING_RECORD(link,OPENNT_FRONTEND_ROUTE,link);
+        if(route->root!=root || WaitForSingleObject(route->worker,0)!=WAIT_TIMEOUT)continue;
+        live=TRUE;
+        if(!close)continue;
+        for(entry=service->worker_watches.Flink;entry!=&service->worker_watches;entry=entry->Flink) {
+            OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(entry,OPENNT_BASE_WORKER_WATCH,link);
+            if(!service->compare_handles(watch->process.ProcessHandle,route->worker))continue;
+            /* An invalid self-edge must never turn endpoint close into host
+             * exit. Admission rejects it; this is a defensive ownership fence. */
+            if(service->compare_handles(watch->process.ProcessHandle,root->owner->process.ProcessHandle))continue;
+            if(watch->close_kind==WORKER_CLOSE_NONE)watch->close_kind=WORKER_CLOSE_CONSOLE;
+            if(watch->close_kind==WORKER_CLOSE_CONSOLE && watch->console_close)
+                (void)SetEvent(watch->console_close);
+        }
+    }
+    return live;
+}
+void service_reconcile_frontend_instances(OPENNT_BASE_SERVICE *service)
+{
+    LIST_ENTRY *link;
+    for(link=service->frontend_instances.Flink;link!=&service->frontend_instances;link=link->Flink) {
+        OPENNT_FRONTEND_INSTANCE *root=CONTAINING_RECORD(link,OPENNT_FRONTEND_INSTANCE,instance_link);
+        if(!root->embedded || !root->close_draining)continue;
+        if(!service_instance_has_worker(root,TRUE)) {
+            root->close_draining=FALSE;root->closing=TRUE;
+            (void)SetEvent(root->retire);(void)SetEvent(root->state_changed);
+        }
+    }
+}
+DWORD OpenNtBaseServiceCloseFrontendInstance(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,const common_frontend_key *key)
+{
+    OPENNT_FRONTEND_INSTANCE *root;
+    DWORD error=ERROR_ACCESS_DENIED;
+    if(!connection)return error;
+    EnterCriticalSection(&connection->service->lock);
+    if(!OpenNtBaseServicePeer(connection,pid,generation))goto done;
+    root=service_find_frontend(connection,key);
+    if(!root)goto done;
+    if(!root->embedded) {
+        /* The same native management transaction retains its return ordering. */
+        OPENNT_BASE_MANAGEMENT_KEY management={0};
+        management.instance=connection->service->management_epoch;
+        management.category=MANAGEMENT_FRONTEND;management.generation=generation;
+        error=OpenNtBaseServiceCloseManagementNode(connection->service,&management);
+        goto done;
+    }
+    root->close_requested=TRUE;root->close_draining=TRUE;
+    (void)service_refresh_instance_work(root);
+    service_reconcile_frontend_instances(connection->service);
+    service_signal_frontend_states(connection->service);
+    WakeAllConditionVariable(&connection->service->frontend_changed);
+    error=ERROR_SUCCESS;
+done:
+    LeaveCriticalSection(&connection->service->lock);return error;
+}
+DWORD OpenNtBaseServiceRetireFrontendInstance(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,const common_frontend_key *key,DWORD *action)
+{
+    OPENNT_FRONTEND_INSTANCE *root;
+    DWORD error=ERROR_ACCESS_DENIED;
+    if(!connection || !action)return ERROR_INVALID_PARAMETER;
+    *action=OPENNT_FRONTEND_RETIRE_NONE;
+    EnterCriticalSection(&connection->service->lock);
+    if(!OpenNtBaseServicePeer(connection,pid,generation))goto done;
+    root=service_find_frontend(connection,key);
+    if(!root)goto done;
+    if(!root->embedded)error=OpenNtBaseServiceRetireWorkerlessFrontend(connection,pid,generation,action);
+    else {
+        service_reconcile_frontend_instances(connection->service);
+        *action=root->closing ? OPENNT_FRONTEND_RETIRE_FINAL_CLOSE : OPENNT_FRONTEND_RETIRE_NONE;
+        error=ERROR_SUCCESS;
+    }
+done:
+    LeaveCriticalSection(&connection->service->lock);return error;
+}
+DWORD OpenNtBaseServiceUnregisterFrontendInstance(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,const common_frontend_key *key)
+{
+    OPENNT_FRONTEND_INSTANCE *root;
+    LIST_ENTRY *link;
+    DWORD error=ERROR_ACCESS_DENIED;
+    if(!connection)return error;
+    EnterCriticalSection(&connection->service->lock);
+    if(!OpenNtBaseServicePeer(connection,pid,generation))goto done;
+    root=service_find_frontend(connection,key);
+    if(!root || !root->embedded)goto done;
+    if(!root->closing || service_instance_has_worker(root,FALSE)){error=ERROR_BUSY;goto done;}
+    link=connection->service->frontend_routes.Flink;
+    while(link!=&connection->service->frontend_routes) {
+        OPENNT_FRONTEND_ROUTE *route=CONTAINING_RECORD(link,OPENNT_FRONTEND_ROUTE,link);
+        link=link->Flink;
+        if(route->root==root)service_delete_frontend(route);
+    }
+    link=connection->service->console_contexts.Flink;
+    while(link!=&connection->service->console_contexts) {
+        OPENNT_BASE_CONSOLE_CONTEXT *context=CONTAINING_RECORD(link,OPENNT_BASE_CONSOLE_CONTEXT,link);
+        link=link->Flink;
+        if(context->root==root)service_delete_console_context(context);
+    }
+    RemoveEntryList(&root->instance_link);
+    CloseHandle(root->capability);CloseHandle(root->retire);CloseHandle(root->state_changed);
+    HeapFree(GetProcessHeap(),0,root);
+    error=ERROR_SUCCESS;
+done:
+    LeaveCriticalSection(&connection->service->lock);return error;
+}
+
+void service_revoke_host_frontends(OPENNT_BASE_CONNECTION *connection)
+{
+    LIST_ENTRY *link;
+    for(link=connection->service->frontend_instances.Flink;
+        link!=&connection->service->frontend_instances;link=link->Flink) {
+        OPENNT_FRONTEND_INSTANCE *root=CONTAINING_RECORD(link,OPENNT_FRONTEND_INSTANCE,instance_link);
+        if(root->owner!=connection || !root->embedded)continue;
+        root->close_requested=TRUE;root->closing=TRUE;
+        (void)service_instance_has_worker(root,TRUE);
+        (void)SetEvent(root->retire);(void)SetEvent(root->state_changed);
+    }
 }

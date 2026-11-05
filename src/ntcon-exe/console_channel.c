@@ -1,3 +1,4 @@
+#include "common/base_srv/frontend_client.h"
 #include "console_channel.h"
 #include "console_frontend.h"
 #include "common/frontend-base/channel.h"
@@ -7,6 +8,7 @@
 #include <stdio.h>
 
 struct frontend_io_channel {
+    common_frontend_key key;
     frontend_console console;
     frontend_base_channel *base;
     BOOL snapshot_held;
@@ -354,8 +356,8 @@ static void finish(void *context)
 static DWORD bind_channel(void *context){return activate(context,TRUE);}
 static DWORD attach_channel(void *context,DWORD request,HANDLE pipe,HANDLE ready,DWORD *generation)
 {
-    (void)context;
-    return OpenNtBaseClientAttachFrontendRequest(request,pipe,ready,generation);
+    frontend_io_channel *channel=context;
+    return OpenNtBaseClientAttachFrontendRequest(&channel->key,request,pipe,ready,generation);
 }
 static void set_generation(void *context,DWORD generation)
 {((frontend_io_channel *)context)->console.generation=generation;}
@@ -375,14 +377,14 @@ DWORD frontend_io_channel_stop(frontend_io_channel *channel)
     HeapFree(GetProcessHeap(),0,channel);
     return ERROR_SUCCESS;
 }
-DWORD frontend_io_channel_start_request(DWORD request,HANDLE worker,frontend_session *root,frontend_io_channel **output)
+DWORD frontend_io_channel_start_request(const common_frontend_key *key,DWORD request,HANDLE worker,frontend_session *root,frontend_io_channel **output)
 {
     frontend_io_channel *channel;
     DWORD error;
     static const frontend_base_channel_ops ops={
         bind_channel,attach_channel,set_generation,active,dispatch,pending_input,finish
     };
-    if (!output || !request || !root || !worker || worker==INVALID_HANDLE_VALUE) {
+    if (!key || !key->instance || !key->generation || !output || !request || !root || !worker || worker==INVALID_HANDLE_VALUE) {
         if (worker && worker!=INVALID_HANDLE_VALUE) CloseHandle(worker);
         if (output) *output=NULL;
         return ERROR_INVALID_PARAMETER;
@@ -390,6 +392,7 @@ DWORD frontend_io_channel_start_request(DWORD request,HANDLE worker,frontend_ses
     *output=NULL;
     channel=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*channel));
     if (!channel) { if (worker) CloseHandle(worker);return ERROR_NOT_ENOUGH_MEMORY; }
+    channel->key=*key;
     channel->root=root;
     channel->console.logical_window=frontend_session_text_region(root);
     channel->console.io_context=channel;

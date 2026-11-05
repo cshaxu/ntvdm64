@@ -1,3 +1,7 @@
+#include "common/base_srv/frontend_client.h"
+#include "common/protocol/frontend_instance.h"
+static common_frontend_key rejected_frontend;
+static const common_frontend_key forged_frontend={0x7fffffff,0x7fffffff};
 /* Actual broker-owned Console bootstrap/return. Run with no existing broker
  * in an isolated Console; this fixture never terminates an unrelated service. */
 #include <windows.h>
@@ -6,6 +10,7 @@
 #include "run16-exe/native_request_client.h"
 #include "common/base_srv/base_rpc_client.h"
 #include "common/codec/native_launch.h"
+#include "common/protocol/frontend_lifecycle.h"
 
 PVOID CsrPortHeap;
 /* Adversarial peers still need a complete coherent package: RPC identity is
@@ -219,8 +224,49 @@ done:
 /* Test-only authenticated sibling, never installed. The real service creates
  * this worker from its reservation. Only final I/O is injected; target binding,
  * startup, completion and one-shot result consumption use production RPC. */
+/* Actual RPC fixture carrier: registration uses the broker-created process
+ * and reservation, not a seeded service watch or an authentication bypass. */
+static DWORD instance_rpc_begin(common_frontend_key keys[2],HANDLE events[4])
+{
+    common_frontend_location location={1,0,1};common_frontend_key bad={0};
+    HANDLE first=NULL,second=NULL;DWORD error,i;
+    for(i=0;i<2;++i) {
+        location.vm=i;
+        error=OpenNtBaseClientRegisterEmbeddedFrontend(&location,&keys[i],&events[i*2],&events[i*2+1]);
+        if(error)return error;
+    }
+    if(keys[0].instance==keys[1].instance)return ERROR_INVALID_DATA;
+    error=OpenNtBaseClientRegisterEmbeddedFrontend(&location,&bad,&first,&second);
+    if(error!=ERROR_ALREADY_EXISTS || first || second)return ERROR_INVALID_DATA;
+    bad=keys[0];++bad.generation;
+    error=OpenNtBaseClientFrontendStateChanged(&bad,&first);
+    if(error!=ERROR_ACCESS_DENIED || first)return ERROR_INVALID_DATA;
+    error=OpenNtBaseClientFrontendStateChanged(&keys[1],&first);
+    if(error)return error;
+    CloseHandle(first);return ERROR_SUCCESS;
+}
+static DWORD instance_rpc_close_first(common_frontend_key keys[2])
+{
+    DWORD error,action=0;HANDLE state=NULL,server=NULL,shutdown=NULL,console=NULL,wow=NULL;
+    error=OpenNtBaseClientCloseFrontendInstance(&keys[0]);if(error)return error;
+    error=OpenNtBaseClientRetireWorkerlessFrontend(&keys[0],&action);
+    if(error || action!=OPENNT_FRONTEND_RETIRE_FINAL_CLOSE)return ERROR_INVALID_DATA;
+    error=OpenNtBaseClientRetireWorkerlessFrontend(&keys[1],&action);
+    if(error || action!=OPENNT_FRONTEND_RETIRE_NONE)return ERROR_INVALID_DATA;
+    error=OpenNtBaseClientUnregisterFrontendInstance(&keys[0]);if(error)return error;
+    error=OpenNtBaseClientFrontendStateChanged(&keys[0],&state);
+    if(error!=ERROR_ACCESS_DENIED || state)return ERROR_INVALID_DATA;
+    keys[0].instance=0;
+    error=OpenNtBaseClientWorkerControls(&server,&shutdown,&console,&wow);
+    if(error || !server || !shutdown || !console || WaitForSingleObject(server,0)!=WAIT_TIMEOUT ||
+        WaitForSingleObject(shutdown,0)!=WAIT_TIMEOUT || WaitForSingleObject(console,0)!=WAIT_TIMEOUT)return ERROR_INVALID_DATA;
+    return ERROR_SUCCESS;
+}
 static int result_worker(void)
 {
+    common_frontend_key keys[2]={{0}};HANDLE instance_events[4]={0};
+    WCHAR mode[2];BOOL instances=GetEnvironmentVariableW(L"T477_FRONTEND_INSTANCE_FIXTURE",mode,2)!=0;
+    DWORD index;
     BYTE *payload=NULL;WCHAR *strings[4];run16_native_launch_packet packet;
     HANDLE caller=NULL,execution=NULL,frontend=NULL,receipt=NULL;
     STARTUPINFOW startup={sizeof(startup)};PROCESS_INFORMATION target={0};
@@ -229,6 +275,7 @@ static int result_worker(void)
     if(!payload)return ERROR_NOT_ENOUGH_MEMORY;
     error=OpenNtBaseClientConnectCurrent();
     if(!error)error=OpenNtBaseClientRegisterNativeBackend(NULL);
+    if(!error && instances)error=instance_rpc_begin(keys,instance_events);
     if(!error)error=OpenNtBaseClientGetNextNativeCommand(NATIVE_LAUNCH_MAX_BYTES,payload,
         &bytes,&caller,&execution,&frontend,&request,&generation);
     if(!error)error=run16_native_launch_unpack(payload,bytes,&packet,strings);
@@ -241,9 +288,13 @@ static int result_worker(void)
     if(!error)error=OpenNtBaseClientBindNativeTarget(request,target.hProcess,receipt);
     if(!error && ResumeThread(target.hThread)==(DWORD)-1)error=GetLastError();
     if(!error)error=OpenNtBaseClientNativeStartupResult(generation,request,0,target.hProcess,receipt);
+    if(!error && instances)error=instance_rpc_close_first(keys);
     if(!error && WaitForSingleObject(target.hProcess,10000)!=WAIT_OBJECT_0)error=ERROR_TIMEOUT;
     if(!error && !GetExitCodeProcess(target.hProcess,&exit_code))error=GetLastError();
     if(!error)error=OpenNtBaseClientCompleteNativeRequest(request,exit_code,ERROR_WRITE_FAULT,0);
+    if(!error && instances)error=OpenNtBaseClientCloseFrontendInstance(&keys[1]);
+    if(!error && instances)error=OpenNtBaseClientUnregisterFrontendInstance(&keys[1]);
+    for(index=0;index<4;++index)if(instance_events[index])CloseHandle(instance_events[index]);
     if(target.hProcess) {
         if(WaitForSingleObject(target.hProcess,0)!=WAIT_OBJECT_0) {
             TerminateProcess(target.hProcess,ERROR_CANCELLED);WaitForSingleObject(target.hProcess,10000);
@@ -255,14 +306,14 @@ static int result_worker(void)
     if(frontend)CloseHandle(frontend);if(receipt)CloseHandle(receipt);
     HeapFree(GetProcessHeap(),0,payload);OpenNtBaseClientDisconnectCurrent();return (int)error;
 }
-static int native_io_error(void)
+static int native_io_error(BOOL instances)
 {
     WCHAR self[MAX_PATH],source[MAX_PATH],directory[MAX_PATH],image[MAX_PATH],*slash;
     PROCESS_INFORMATION broker={0};HANDLE worker=NULL,root=NULL,capability=NULL,restored=NULL;
     DWORD error;const char *stage="connect";int failed=1;
     if(!GetModuleFileNameW(NULL,self,ARRAYSIZE(self)) || !wcsstr(self,L"\\build\\"))return 84;
     wcscpy_s(source,ARRAYSIZE(source),self);slash=wcsrchr(source,L'\\');if(!slash)return 84;slash[1]=0;
-    swprintf_s(directory,ARRAYSIZE(directory),L"%lsnative-result",source);
+    swprintf_s(directory,ARRAYSIZE(directory),instances ? L"%lsfrontend-instances" : L"%lsnative-result",source);
     if(!CreateDirectoryW(directory,NULL))return 84;
     wcscat_s(directory,ARRAYSIZE(directory),L"\\system32");
     if(!CreateDirectoryW(directory,NULL))return 84;
@@ -278,7 +329,10 @@ static int native_io_error(void)
     CsrPortHeap=HeapCreate(0,0,0);if(!CsrPortHeap)return 1;
     error=OpenNtBaseClientConnectCurrent();
     if(error!=RPC_S_SERVER_UNAVAILABLE)goto done;
-    error=start_broker(image,&broker);if(error)goto done;
+    if(instances)SetEnvironmentVariableW(L"T477_FRONTEND_INSTANCE_FIXTURE",L"1");
+    error=start_broker(image,&broker);
+    SetEnvironmentVariableW(L"T477_FRONTEND_INSTANCE_FIXTURE",NULL);
+    if(error)goto done;
     stage="frontend";
     error=OpenNtBaseClientStartFrontend((uint64_t)(UINT_PTR)GetConsoleWindow(),TRUE,&root,&capability,&restored);
     if(error)goto done;
@@ -288,13 +342,18 @@ static int native_io_error(void)
     if(!error){puts("PASS actual RPC I/O-error reply retains exit 37/completed; consumed exactly once");failed=0;}
 done:
     printf("native I/O-error fixture stage=%s status=%lu\n",stage,error);
+    /* Keep the real broker alive until the fixture carrier has finished its
+     * endpoint unregister calls, after reporting the direct target result. */
+    if(instances && worker && WaitForSingleObject(worker,10000)!=WAIT_OBJECT_0)failed=1;
     stop_broker(&broker);
     if(worker){
         if(WaitForSingleObject(worker,10000)!=WAIT_OBJECT_0)failed=1;
+        if(instances){DWORD worker_exit=1;if(!GetExitCodeProcess(worker,&worker_exit) || worker_exit)failed=1;}
         CloseHandle(worker);
     }
     if(root){if(WaitForSingleObject(root,10000)!=WAIT_OBJECT_0)failed=1;CloseHandle(root);}
     if(capability)CloseHandle(capability);if(restored)CloseHandle(restored);
+    if(instances && !failed)puts("PASS actual RPC two frontend instances; duplicate/stale identities denied; first close preserves sibling and backend completion");
     HeapDestroy(CsrPortHeap);CsrPortHeap=NULL;return failed;
 }
 int wmain(int argc,WCHAR **argv)
@@ -304,7 +363,8 @@ int wmain(int argc,WCHAR **argv)
     HANDLE root=NULL,capability=NULL,restored=NULL,fake=NULL,owner=NULL,worker=NULL;
     DWORD error,result=0,generation=0,i;int failed=1;
     if(argc==2 && !wcscmp(argv[1],L"--cui-worker"))return result_worker();
-    if(argc==2 && !wcscmp(argv[1],L"--native-io-error"))return native_io_error();
+    if(argc==2 && !wcscmp(argv[1],L"--frontend-instances"))return native_io_error(TRUE);
+    if(argc==2 && !wcscmp(argv[1],L"--native-io-error"))return native_io_error(FALSE);
     if(argc==8 && !wcscmp(argv[1],L"--session"))return rejected_peer(
         (HANDLE)(UINT_PTR)wcstoul(argv[2],NULL,16),(HANDLE)(UINT_PTR)wcstoul(argv[3],NULL,16));
     if(argc==3 && !wcscmp(argv[1],L"--identity"))return identity_role(argv[2]);
@@ -355,11 +415,11 @@ int wmain(int argc,WCHAR **argv)
     if(error || GetProcessId(owner)!=GetProcessId(root)){puts("FAIL authenticated root identity");goto done;}
     CloseHandle(owner);owner=NULL;
     fake=CreateEventW(NULL,TRUE,FALSE,NULL);if(!fake)goto done;
-    error=OpenNtBaseClientRegisterFrontendRoot(fake);
+    error=OpenNtBaseClientRegisterFrontendRoot(fake,&rejected_frontend);
     if(error!=ERROR_ACCESS_DENIED){puts("FAIL uncreated root registered");goto done;}
     error=OpenNtBaseClientRetainFrontendRoot(fake,&owner,&generation);
     if(error!=ERROR_ACCESS_DENIED || owner){puts("FAIL forged root capability accepted");goto done;}
-    error=OpenNtBaseClientFrontendConsoleRestored();
+    error=OpenNtBaseClientFrontendConsoleRestored(&forged_frontend);
     if(error!=ERROR_ACCESS_DENIED){puts("FAIL launcher forged restoration");goto done;}
     error=OpenNtBaseClientWaitFrontendConsoleRestored();
     if(error){printf("FAIL broker return barrier=%lu\n",error);goto done;}

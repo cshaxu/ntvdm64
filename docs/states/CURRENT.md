@@ -5,10 +5,16 @@
 **Active: M0 T477 S2** — NTSRV frontend-instance registration, identity and
 handoff. Owner admits S2 and requests a design on 2026-11-05. Owner now authorizes the designed P1/P2/P3 implementation, each with builds,
 tests, publication to this worktree assets/release and O:/winnt/system32, and
-a local commit without push. P1 ownership separation passed both service matrices and Full verification,
-was published to both targets and is ready for its local delivery commit;
+a local commit without push. P1 de96479a5 passed both service matrices and Full verification,
+was published to both targets and committed locally. P2 passed its service/RPC/Full gates and both publications;
+its local delivery commit is being recorded. P3 remains pending;
 [S2 evidence](../etc/evidence/m0-t477-s2-frontend-instances.md) records its scope
 and remaining delivery gates.
+
+Owner's role clarification is recorded in [Architecture](../design/ARCHITECTURE.md):
+worker-base owns backend I/O/control, frontend-base supplies reusable frontend
+mechanics, and NTCON/NTVDM own native/VM adapters. P2 separates the frontend
+client facade from process connection ownership; S3 VM composition remains later.
 
 S1 closed with P1 154a61877 and P2 6caaf5d78; [S1 evidence](../etc/evidence/m0-t477-s1-frontend-base.md)
 records builds, tests and both publications. The baseline is 6caaf5d78.

@@ -1,3 +1,4 @@
+int fixture_frontend_instances(void);
 #include <service_internal.h>
 #include "common/protocol/frontend_lifecycle.h"
 #include <stdio.h>
@@ -1069,6 +1070,7 @@ int main(int argc,char **argv)
         fputs("EXPECTED runner-failure with owned child\n",stderr);
         return 91;
     }
+    if(argc==2 && !strcmp(argv[1],"--frontend-instances"))return fixture_frontend_instances();
     if(argc==2 && !strcmp(argv[1],"--io-authority"))return fixture_io_authority();
     if(argc==2 && !strcmp(argv[1],"--route-cancellation"))return fixture_route_cancellation();
     if(argc==2 && !strcmp(argv[1],"--prepared-native-root-loss"))return fixture_prepared_native_root_loss();

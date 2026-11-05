@@ -28,6 +28,7 @@ OPENNT_BASE_SERVICE *OpenNtBaseServiceStart(void)
     InitializeListHead(&service->retired_connections);
     InitializeListHead(&service->worker_watches);
     InitializeListHead(&service->frontend_routes);
+    InitializeListHead(&service->frontend_instances);
     InitializeListHead(&service->console_contexts);
     InitializeListHead(&service->gui_records);
     InitializeListHead(&service->observations);
@@ -99,6 +100,7 @@ BOOL OpenNtBaseServiceStop(OPENNT_BASE_SERVICE *service)
         OPENNT_BASE_CONNECTION *connection;
         entry=RemoveHeadList(&service->retired_connections);
         connection=CONTAINING_RECORD(entry,OPENNT_BASE_CONNECTION,retired_link);
+        service_release_frontend_instances(connection);
         if (connection->frontend.capability) CloseHandle(connection->frontend.capability);
         if (connection->frontend.retire) CloseHandle(connection->frontend.retire);
         if (connection->frontend.native.restored) CloseHandle(connection->frontend.native.restored);
@@ -293,7 +295,10 @@ DWORD OpenNtBaseServiceDisconnect(OPENNT_BASE_CONNECTION *connection)
         broker_vdm_receipts_drain(&connection->streams);
         service_release_launcher_results(service,connection->process.SequenceNumber);
     }
-    if (!error) service_clear_frontend(connection);
+    if (!error) {
+        service_clear_frontend(connection);
+        service_release_frontend_instances(connection);
+    }
     if (!error) {
         LIST_ENTRY *link;
         /* Result latches and receipt signalling share the service lock with

@@ -1,3 +1,5 @@
+#include "common/protocol/frontend_instance.h"
+static const common_frontend_key frontend_key={0x123456789ULL,17};
 #include "common/rpc/frontend_control.h"
 #include <stdio.h>
 
@@ -26,15 +28,17 @@ error_status_t Client_StartFrontend(PRPC_ASYNC_STATE async,handle_t binding,VDM_
     RpcRaiseException(mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED);return ERROR_SUCCESS;
 }
 error_status_t Client_RetireWorkerlessFrontend(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
-    HANDLE process,unsigned long generation,unsigned long *retired)
+    HANDLE process,unsigned long generation,LONGLONG instance,unsigned long frontend_generation,unsigned long *retired)
 {
+    CHECK((uint64_t)instance==frontend_key.instance && frontend_generation==frontend_key.generation);
     peer(binding,connection,process,generation);CHECK(async!=NULL);*retired=1;
     RpcRaiseException(mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED);
     return ERROR_SUCCESS;
 }
 error_status_t Client_FrontendStateChanged(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
-    HANDLE process,unsigned long generation,HANDLE *event)
+    HANDLE process,unsigned long generation,LONGLONG instance,unsigned long frontend_generation,HANDLE *event)
 {
+    CHECK((uint64_t)instance==frontend_key.instance && frontend_generation==frontend_key.generation);
     peer(binding,connection,process,generation);CHECK(async!=NULL);*event=attachment(0);
     RpcRaiseException(mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED);return ERROR_SUCCESS;
 }
@@ -50,8 +54,24 @@ error_status_t Client_FrontendStartupResult(PRPC_ASYNC_STATE async,handle_t bind
 #define NO_OUTPUT(name) error_status_t Client_##name(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection, \
     HANDLE process,unsigned long generation) {peer(binding,connection,process,generation);CHECK(async!=NULL); \
     RpcRaiseException(mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED);return ERROR_SUCCESS;}
-NO_OUTPUT(FrontendConsoleRestored)
+error_status_t Client_FrontendConsoleRestored(PRPC_ASYNC_STATE async,handle_t binding,
+    VDM_CONNECTION connection,HANDLE process,unsigned long generation,LONGLONG instance,
+    unsigned long frontend_generation)
+{
+    peer(binding,connection,process,generation);CHECK(async!=NULL);
+    CHECK((uint64_t)instance==frontend_key.instance && frontend_generation==frontend_key.generation);
+    RpcRaiseException(mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED);return ERROR_SUCCESS;
+}
 NO_OUTPUT(WaitFrontendConsoleRestored)
+
+error_status_t Client_FrontendIoDisconnected(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
+    HANDLE process,unsigned long generation,LONGLONG instance,unsigned long frontend_generation)
+{
+    CHECK((uint64_t)instance==frontend_key.instance && frontend_generation==frontend_key.generation);
+    peer(binding,connection,process,generation);CHECK(async!=NULL);
+    RpcRaiseException(mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED);
+    return ERROR_SUCCESS;
+}
 
 static void closed(unsigned count)
 {
@@ -74,27 +94,29 @@ int main(void)
     CHECK(common_rpc_start_frontend(NULL,0,FALSE,&root,&capability,&restored)==ERROR_INVALID_STATE);
     CHECK(!root && !capability && !restored);
     CHECK(common_rpc_start_frontend(&expected,0,FALSE,NULL,&capability,&restored)==ERROR_INVALID_PARAMETER);
-    CHECK(common_rpc_retire_workerless_frontend(&expected,NULL)==ERROR_INVALID_PARAMETER);
-    CHECK(common_rpc_frontend_state_changed(&expected,NULL)==ERROR_INVALID_PARAMETER);
+    CHECK(common_rpc_retire_workerless_frontend(&expected,&frontend_key,NULL)==ERROR_INVALID_PARAMETER);
+    CHECK(common_rpc_frontend_state_changed(&expected,&frontend_key,NULL)==ERROR_INVALID_PARAMETER);
     retired=77;event=expected.process;
-    CHECK(common_rpc_retire_workerless_frontend(NULL,&retired)==ERROR_INVALID_STATE && retired==77);
-    CHECK(common_rpc_frontend_state_changed(NULL,&event)==ERROR_INVALID_STATE && !event);
-    CHECK(common_rpc_frontend_console_restored(NULL)==ERROR_INVALID_STATE);
+    CHECK(common_rpc_retire_workerless_frontend(NULL,&frontend_key,&retired)==ERROR_INVALID_STATE && retired==77);
+    CHECK(common_rpc_frontend_state_changed(NULL,&frontend_key,&event)==ERROR_INVALID_STATE && !event);
+    CHECK(common_rpc_frontend_console_restored(NULL,&frontend_key)==ERROR_INVALID_STATE);
     CHECK(common_rpc_frontend_startup_result(NULL,NULL,0)==ERROR_INVALID_STATE);
     CHECK(common_rpc_wait_frontend_console_restored(NULL)==ERROR_INVALID_STATE);
+    CHECK(common_rpc_frontend_io_disconnected(NULL,&frontend_key)==ERROR_INVALID_STATE);
     CHECK(!calls);
     for(mode=1;mode<3;++mode) {
         initial=calls;want=mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED;
         CHECK(common_rpc_start_frontend(&expected,0x123456789ULL,17,&root,&capability,&restored)==want);
         CHECK(!root && !capability && !restored);closed(3);
         retired=77;
-        CHECK(common_rpc_retire_workerless_frontend(&expected,&retired)==want);CHECK(retired==77);
-        CHECK(common_rpc_frontend_state_changed(&expected,&event)==want);
+        CHECK(common_rpc_retire_workerless_frontend(&expected,&frontend_key,&retired)==want);CHECK(retired==77);
+        CHECK(common_rpc_frontend_state_changed(&expected,&frontend_key,&event)==want);
         CHECK(!event);closed(1);
-        CHECK(common_rpc_frontend_console_restored(&expected)==want);
+        CHECK(common_rpc_frontend_console_restored(&expected,&frontend_key)==want);
         CHECK(common_rpc_wait_frontend_console_restored(&expected)==want);
         CHECK(common_rpc_frontend_startup_result(&expected,expected.process,ERROR_WRITE_FAULT)==want);
-        CHECK(calls==initial+6U);
+        CHECK(common_rpc_frontend_io_disconnected(&expected,&frontend_key)==want);
+        CHECK(calls==initial+7U);
     }
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&after) && before==after);
     CHECK(WaitForSingleObject(expected.process,0)==WAIT_TIMEOUT);

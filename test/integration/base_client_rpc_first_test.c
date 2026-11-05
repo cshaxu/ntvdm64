@@ -1,3 +1,7 @@
+#include "common/base_srv/frontend_client.h"
+#include "common/protocol/frontend_instance.h"
+static common_frontend_key rejected_frontend;
+static const common_frontend_key forged_frontend={0x7fffffff,0x7fffffff};
 /* Product-facing BaseClient transport cut.  The original vdm.c call sites
  * retain their CSR-shaped signature; this focused client proves the selected
  * replacement reaches the real standalone BaseSrv first-VDM owner. */
@@ -261,7 +265,7 @@ static int frontend_root_parent(void)
     REQUIRE(DuplicateHandle(GetCurrentProcess(),capability,GetCurrentProcess(),
         &restricted,SYNCHRONIZE,TRUE,0));
     /* A launcher cannot impersonate the service-created frontend. */
-    REQUIRE(OpenNtBaseClientRegisterFrontendRoot(capability)==ERROR_ACCESS_DENIED);
+    REQUIRE(OpenNtBaseClientRegisterFrontendRoot(capability,&rejected_frontend)==ERROR_ACCESS_DENIED);
     REQUIRE(OpenNtBaseClientRetainFrontendRoot(restricted,&root,&generation)==ERROR_SUCCESS);
     REQUIRE(generation && GetProcessId(root)==root_pid);
     REQUIRE(!SetEvent(restricted) && GetLastError()==ERROR_ACCESS_DENIED);

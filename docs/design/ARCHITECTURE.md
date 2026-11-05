@@ -1,5 +1,32 @@
 # System Architecture
 
+## Frontend/backend communication roles — T477
+
+Owner clarification distinguishes role from hosting process. A worker process
+has one backend role and may additionally host multiple independent VM frontend
+instances. NTCON has one native Console/Window frontend instance. NTVDM composes
+VM frontends directly; worker-base must never depend on frontend-base.
+
+| Role | Direct I/O owner | NTSRV control owner |
+| --- | --- | --- |
+| Worker backend | worker-base connects to its selected upstream frontend. | worker-base reports/receives backend execution and lifecycle control. |
+| VM frontend | NTVDM supplies per-VM adapters to common/frontend-base. | Its frontend adapter uses explicit per-instance control identity. |
+| Native frontend | NTCON supplies Console/Window adapters to common/frontend-base. | Its single frontend instance uses the same explicit control contract. |
+
+Frontend-base owns reusable frontend channel/service mechanics; executable
+adapters own presentation and input interpretation. A frontend control pump
+exists independently of its active I/O channel; the latter has a thread only
+while connected. Thread count does not imply separate process RPC connections.
+Frontend instances may share the authenticated process connection, with explicit
+instance selection on each call and no ambient current-frontend selector.
+
+Direct frontend/backend pipes carry user I/O and its protocol requests/replies,
+including input reads and presentation acknowledgements. NTSRV exclusively owns
+cross-component task admission, association, handoff and lifecycle control.
+There are no lateral component control RPCs. Endpoint retirement cannot become
+host/backend process exit. Actual implementation progress remains in Current;
+NTVDM VM adapters remain S3 scope, not an implied S2 implementation.
+
 ## Frontend connection base — T477 S1
 
 The delivered frontend extraction places reusable channel and service mechanics

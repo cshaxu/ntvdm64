@@ -1,3 +1,4 @@
+#include "common/base_srv/frontend_client.h"
 #include "session_service.h"
 #include "session_arguments.h"
 #include "common/protocol/frontend_protocol.h"
@@ -14,6 +15,7 @@ static DWORD session_entry(HANDLE caller,HANDLE notification,HANDLE retire,HANDL
 {
     DWORD pid=0,error,ignored;
     frontend_session_service *service=NULL;
+    common_frontend_key frontend={0};
     /* NTSRV validates the exact admitted process and capability in the RPC
      * registration and startup-result calls. The inherited caller identifies
      * the real Console, not the broker's own Console. */
@@ -28,15 +30,15 @@ static DWORD session_entry(HANDLE caller,HANDLE notification,HANDLE retire,HANDL
      * bootstrap with its suspended-process admission, the creator PID, and
      * the one-shot capability reservation; do not replace that authority
      * with an implementation-dependent HWND comparison. */
-    error=OpenNtBaseClientRegisterFrontendRoot(notification);if(error)goto respond;
+    error=OpenNtBaseClientRegisterFrontendRoot(notification,&frontend);if(error)goto respond;
     error=OpenNtBaseClientReportCurrentConsoleMembers();
     if(error)goto respond;
     if(lease) {
         uint64_t actual_window=(uint64_t)(UINT_PTR)GetConsoleWindow();
-        error=OpenNtBaseClientRegisterFrontendLease(actual_window,pid,borrowed,retire,restored);
+        error=OpenNtBaseClientRegisterFrontendLease(&frontend,actual_window,pid,borrowed,retire,restored);
         if(error)goto respond;
     }
-    error=frontend_service_start_process(notification,caller,retire,&service);if(error)goto respond;
+    error=frontend_service_start_process(&frontend,notification,caller,retire,&service);if(error)goto respond;
 respond:
     {
         DWORD sent=OpenNtBaseClientFrontendStartupResult(notification,error);
@@ -56,7 +58,7 @@ done:
          * input-mode/cursor-shape restoration. The launcher has no direct
          * acknowledgement or shutdown channel to this frontend. */
         if(!close_error) {
-            ack_error=OpenNtBaseClientFrontendConsoleRestored();
+            ack_error=OpenNtBaseClientFrontendConsoleRestored(&frontend);
             if(ack_error && !error)error=ack_error;
         }
     }

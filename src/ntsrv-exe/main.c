@@ -88,17 +88,21 @@ complete:
     return ERROR_SUCCESS;
 }
 error_status_t Server_FrontendCloseQuiesced(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
-    HANDLE process,ULONG generation)
+    HANDLE process,ULONG generation,LONGLONG frontend_instance,ULONG frontend_generation)
 {
+    common_frontend_key key={(uint64_t)frontend_instance,frontend_generation};
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if(!error)error=OpenNtBaseServiceValidateNativeFrontend(connection,pid,generation,&key);
     if(!error)error=OpenNtBaseServiceFrontendCloseQuiesced(connection,pid,generation);
     (void)RpcAsyncCompleteCall(async,&error);
     return ERROR_SUCCESS;
 }
 error_status_t Server_FrontendConsoleRestored(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
-    HANDLE process,ULONG generation)
+    HANDLE process,ULONG generation,LONGLONG frontend_instance,ULONG frontend_generation)
 {
+    common_frontend_key key={(uint64_t)frontend_instance,frontend_generation};
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if(!error)error=OpenNtBaseServiceValidateNativeFrontend(connection,pid,generation,&key);
     if(!error)error=OpenNtBaseServiceFrontendConsoleRestored(connection,pid,generation);
     (void)RpcAsyncCompleteCall(async,&error);
     return ERROR_SUCCESS;
@@ -564,10 +568,11 @@ error_status_t Server_WorkerIoTransition(PRPC_ASYNC_STATE async,handle_t binding
     return ERROR_SUCCESS;
 }
 error_status_t Server_FrontendIoDisconnected(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation)
+    ULONG generation,LONGLONG frontend_instance,ULONG frontend_generation)
 {
+    common_frontend_key key={(uint64_t)frontend_instance,frontend_generation};
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if(!error)error=OpenNtBaseServiceFrontendIoDisconnected(connection,pid,generation);
+    if(!error)error=OpenNtBaseServiceFrontendIoDisconnectedInstance(connection,pid,generation,&key);
     (void)RpcAsyncCompleteCall(async,&error);
     return ERROR_SUCCESS;
 }
@@ -597,44 +602,55 @@ error_status_t Server_BindNativeTarget(PRPC_ASYNC_STATE async,handle_t binding,V
     return ERROR_SUCCESS;
 }
 error_status_t Server_RegisterFrontendRoot(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation,HANDLE capability)
+    ULONG generation,HANDLE capability,LONGLONG *frontend_instance,ULONG *frontend_generation)
 {
+    common_frontend_key key={0};
+    *frontend_instance=0;*frontend_generation=0;
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if(!error)error=OpenNtBaseServiceRegisterFrontendRoot(connection,pid,generation,capability);
+    if(!error)error=OpenNtBaseServiceRegisterNativeFrontend(connection,pid,generation,capability,&key);
+    if(!error){*frontend_instance=(LONGLONG)key.instance;*frontend_generation=key.generation;}
     (void)RpcAsyncCompleteCall(async,&error);
     return ERROR_SUCCESS;
 }
 error_status_t Server_RegisterFrontendLease(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
-    HANDLE process,ULONG generation,LONGLONG console_window,ULONG creator_pid,ULONG borrowed,
+    HANDLE process,ULONG generation,LONGLONG frontend_instance,ULONG frontend_generation,LONGLONG console_window,ULONG creator_pid,ULONG borrowed,
     HANDLE retire,HANDLE restored)
 {
+    common_frontend_key key={(uint64_t)frontend_instance,frontend_generation};
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if(!error)error=OpenNtBaseServiceValidateNativeFrontend(connection,pid,generation,&key);
     if(!error)error=OpenNtBaseServiceRegisterFrontendLease(connection,pid,generation,
         (uint64_t)console_window,creator_pid,borrowed!=0,retire,restored);
     (void)RpcAsyncCompleteCall(async,&error);
     return ERROR_SUCCESS;
 }
 error_status_t Server_FrontendJoinCandidate(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
-    HANDLE process,ULONG generation,ULONG *nonce,ULONG *candidate_pid)
+    HANDLE process,ULONG generation,LONGLONG frontend_instance,ULONG frontend_generation,ULONG *nonce,ULONG *candidate_pid)
 {
+    common_frontend_key key={(uint64_t)frontend_instance,frontend_generation};
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
     *nonce=*candidate_pid=0;
+    if(!error)error=OpenNtBaseServiceValidateNativeFrontend(connection,pid,generation,&key);
     if(!error)error=OpenNtBaseServiceFrontendJoinCandidate(connection,pid,generation,nonce,candidate_pid);
     (void)RpcAsyncCompleteCall(async,&error);
     return ERROR_SUCCESS;
 }
 error_status_t Server_FrontendJoinDecision(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
-    HANDLE process,ULONG generation,ULONG nonce,ULONG same_console)
+    HANDLE process,ULONG generation,LONGLONG frontend_instance,ULONG frontend_generation,ULONG nonce,ULONG same_console)
 {
+    common_frontend_key key={(uint64_t)frontend_instance,frontend_generation};
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if(!error)error=OpenNtBaseServiceValidateNativeFrontend(connection,pid,generation,&key);
     if(!error)error=OpenNtBaseServiceFrontendJoinDecision(connection,pid,generation,nonce,same_console!=0);
     (void)RpcAsyncCompleteCall(async,&error);
     return ERROR_SUCCESS;
 }
 error_status_t Server_FrontendLeaseReady(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
-    HANDLE process,ULONG generation)
+    HANDLE process,ULONG generation,LONGLONG frontend_instance,ULONG frontend_generation)
 {
+    common_frontend_key key={(uint64_t)frontend_instance,frontend_generation};
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if(!error)error=OpenNtBaseServiceValidateNativeFrontend(connection,pid,generation,&key);
     if(!error)error=OpenNtBaseServiceFrontendLeaseReady(connection,pid,generation);
     (void)RpcAsyncCompleteCall(async,&error);
     return ERROR_SUCCESS;
@@ -651,25 +667,27 @@ error_status_t Server_RetainFrontendRoot(PRPC_ASYNC_STATE async,handle_t binding
     return ERROR_SUCCESS;
 }
 error_status_t Server_RetireWorkerlessFrontend(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
-    HANDLE process,ULONG generation,ULONG *retired)
+    HANDLE process,ULONG generation,LONGLONG frontend_instance,ULONG frontend_generation,ULONG *retired)
 {
+    common_frontend_key key={(uint64_t)frontend_instance,frontend_generation};
     DWORD pid,error;
     if(!retired){error=ERROR_INVALID_PARAMETER;goto complete;}
     *retired=0;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if(!error)error=OpenNtBaseServiceRetireWorkerlessFrontend(connection,pid,generation,retired);
+    if(!error)error=OpenNtBaseServiceRetireFrontendInstance(connection,pid,generation,&key,retired);
 complete:
     (void)RpcAsyncCompleteCall(async,&error);
     return ERROR_SUCCESS;
 }
 error_status_t Server_FrontendStateChanged(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation,HANDLE *state_changed)
+    ULONG generation,LONGLONG frontend_instance,ULONG frontend_generation,HANDLE *state_changed)
 {
+    common_frontend_key key={(uint64_t)frontend_instance,frontend_generation};
     DWORD pid,error;
     if(!state_changed){error=ERROR_INVALID_PARAMETER;goto complete;}
     *state_changed=NULL;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if(!error)error=OpenNtBaseServiceFrontendStateChanged(connection,pid,generation,state_changed);
+    if(!error)error=OpenNtBaseServiceFrontendStateChangedInstance(connection,pid,generation,&key,state_changed);
 complete:
     (void)RpcAsyncCompleteCall(async,&error);
     return ERROR_SUCCESS;
@@ -683,20 +701,22 @@ error_status_t Server_RequestFrontend(PRPC_ASYNC_STATE async,handle_t binding,VD
     return ERROR_SUCCESS;
 }
 error_status_t Server_FrontendRequest(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation,ULONG *request,HANDLE *worker)
+    ULONG generation,LONGLONG frontend_instance,ULONG frontend_generation,ULONG *request,HANDLE *worker)
 {
+    common_frontend_key key={(uint64_t)frontend_instance,frontend_generation};
     DWORD pid,error;
     *request=0;*worker=NULL;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if(!error)error=OpenNtBaseServiceFrontendRequest(connection,pid,generation,request,worker);
+    if(!error)error=OpenNtBaseServiceFrontendRequestInstance(connection,pid,generation,&key,request,worker);
     (void)RpcAsyncCompleteCall(async,&error);
     return ERROR_SUCCESS;
 }
 error_status_t Server_AttachFrontendRequest(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation,ULONG request,HANDLE channel,HANDLE ready)
+    ULONG generation,LONGLONG frontend_instance,ULONG frontend_generation,ULONG request,HANDLE channel,HANDLE ready)
 {
+    common_frontend_key key={(uint64_t)frontend_instance,frontend_generation};
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if(!error)error=OpenNtBaseServiceAttachFrontendRequest(connection,pid,generation,request,channel,ready);
+    if(!error)error=OpenNtBaseServiceAttachFrontendRequestInstance(connection,pid,generation,&key,request,channel,ready);
     (void)RpcAsyncCompleteCall(async,&error);
     return ERROR_SUCCESS;
 }
@@ -971,7 +991,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v65_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v66_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -1002,10 +1022,46 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v65_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v66_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);
     if (!OpenNtBaseServiceStop(service)) return ERROR_BUSY;
     return (int)result;
+}
+
+error_status_t Server_RegisterEmbeddedFrontend(PRPC_ASYNC_STATE async,handle_t binding,
+    VDM_CONNECTION connection,HANDLE process,ULONG generation,LONGLONG payload,
+    LONGLONG vm,LONGLONG incarnation,LONGLONG *frontend_instance,ULONG *frontend_generation,
+    HANDLE *notification,HANDLE *retire)
+{
+    common_frontend_key key={0};
+    common_frontend_location location={(uint64_t)payload,(uint64_t)vm,(uint64_t)incarnation};
+    DWORD pid,error;
+    *frontend_instance=0;*frontend_generation=0;*notification=*retire=NULL;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if(!error)error=OpenNtBaseServiceRegisterEmbeddedFrontend(connection,pid,generation,
+        &location,&key,notification,retire);
+    if(!error){*frontend_instance=(LONGLONG)key.instance;*frontend_generation=key.generation;}
+    (void)RpcAsyncCompleteCall(async,&error);return ERROR_SUCCESS;
+}
+
+error_status_t Server_CloseFrontendInstance(PRPC_ASYNC_STATE async,handle_t binding,
+    VDM_CONNECTION connection,HANDLE process,ULONG generation,LONGLONG frontend_instance,
+    ULONG frontend_generation)
+{
+    common_frontend_key key={(uint64_t)frontend_instance,frontend_generation};
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if(!error)error=OpenNtBaseServiceCloseFrontendInstance(connection,pid,generation,&key);
+    (void)RpcAsyncCompleteCall(async,&error);return ERROR_SUCCESS;
+}
+
+error_status_t Server_UnregisterFrontendInstance(PRPC_ASYNC_STATE async,handle_t binding,
+    VDM_CONNECTION connection,HANDLE process,ULONG generation,LONGLONG frontend_instance,
+    ULONG frontend_generation)
+{
+    common_frontend_key key={(uint64_t)frontend_instance,frontend_generation};
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if(!error)error=OpenNtBaseServiceUnregisterFrontendInstance(connection,pid,generation,&key);
+    (void)RpcAsyncCompleteCall(async,&error);return ERROR_SUCCESS;
 }

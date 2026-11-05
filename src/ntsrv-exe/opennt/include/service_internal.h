@@ -46,6 +46,8 @@ struct OPENNT_BASE_SERVICE {
     ULONG next_console;
     ULONG next_wait_receipt;
     ULONG next_frontend_join;
+    uint64_t next_frontend_instance;
+    LIST_ENTRY frontend_instances;
     OPENNT_BASE_INTERACTIVE_SCOPE interactive;
     LIST_ENTRY connections;
     LIST_ENTRY retired_connections;
@@ -62,11 +64,15 @@ struct OPENNT_BASE_SERVICE {
     uint32_t observation_count;
     uint64_t next_observation;
 };
-/* The native frontend occupies one stable slot in its host during P1.
+/* The native frontend occupies one stable slot in its host.
  * This is frontend state, not a second process/connection. Routes borrow this
  * record until service_clear_frontend revokes them under the service lock. */
 typedef struct OPENNT_FRONTEND_INSTANCE {
     OPENNT_BASE_CONNECTION *owner;
+    LIST_ENTRY instance_link;
+    common_frontend_key key;
+    common_frontend_location location;
+    BOOL registered,embedded;
     /* Capability is independent of command lifetime. state_changed is a
      * private auto-reset retirement wake, not an execution event. */
     HANDLE capability,retire,state_changed;
@@ -94,6 +100,13 @@ typedef struct OPENNT_FRONTEND_INSTANCE {
         DWORD console_member_watch_count;
     } native;
 } OPENNT_FRONTEND_INSTANCE;
+
+/* All instance helpers require the existing service lock. */
+OPENNT_FRONTEND_INSTANCE *service_find_frontend(OPENNT_BASE_CONNECTION *,const common_frontend_key *);
+DWORD service_refresh_instance_work(OPENNT_FRONTEND_INSTANCE *);
+void service_release_frontend_instances(OPENNT_BASE_CONNECTION *);
+void service_reconcile_frontend_instances(OPENNT_BASE_SERVICE *);
+void service_revoke_host_frontends(OPENNT_BASE_CONNECTION *);
 
 struct OPENNT_BASE_CONNECTION {
     OPENNT_BASE_SERVICE *service;

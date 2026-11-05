@@ -14,6 +14,10 @@ void service_signal_frontend_states(OPENNT_BASE_SERVICE *service)
         OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
         if(root->frontend.state_changed) (void)SetEvent(root->frontend.state_changed);
     }
+    for(link=service->frontend_instances.Flink;link!=&service->frontend_instances;link=link->Flink) {
+        OPENNT_FRONTEND_INSTANCE *root=CONTAINING_RECORD(link,OPENNT_FRONTEND_INSTANCE,instance_link);
+        if(root->embedded && root->state_changed)(void)SetEvent(root->state_changed);
+    }
 }
 
 BOOL OpenNtBaseServiceIsEmpty(OPENNT_BASE_SERVICE *service)
@@ -511,6 +515,7 @@ DWORD OpenNtBaseServiceReconcileFrontends(OPENNT_BASE_SERVICE *service)
     BOOL changed=FALSE,gui_changed;
     if(!service)return ERROR_INVALID_PARAMETER;
     EnterCriticalSection(&service->lock);
+    service_reconcile_frontend_instances(service);
     gui_changed=service_prune_gui_records(service);
     service_observation_prune(service);
     for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {

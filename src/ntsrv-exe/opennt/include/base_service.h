@@ -2,6 +2,7 @@
 #define OPENNT_BASE_SERVICE_H
 #include <windows.h>
 #include <stdint.h>
+#include "common/protocol/frontend_instance.h"
 #include "common/protocol/management.h"
 #include "common/protocol/task_trace.h"
 #include "common/protocol/dos_observation.h"
@@ -255,4 +256,19 @@ DWORD OpenNtBaseServiceAttachStream(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD gen
 DWORD OpenNtBaseServiceRevokeStream(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,DWORD receipt);
 DWORD OpenNtBaseServiceStartVdmWorker(OPENNT_BASE_CONNECTION *,DWORD,DWORD,
     DWORD,const WCHAR *,DWORD,HANDLE,HANDLE *,HANDLE *,DWORD *);
+DWORD OpenNtBaseServiceRegisterNativeFrontend(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE,common_frontend_key *);
+DWORD OpenNtBaseServiceRegisterEmbeddedFrontend(OPENNT_BASE_CONNECTION *,DWORD,DWORD,
+    const common_frontend_location *,common_frontend_key *,HANDLE *,HANDLE *);
+DWORD OpenNtBaseServiceValidateNativeFrontend(OPENNT_BASE_CONNECTION *,DWORD,DWORD,const common_frontend_key *);
+DWORD OpenNtBaseServiceFrontendIoDisconnectedInstance(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,const common_frontend_key *key);
+DWORD OpenNtBaseServiceFrontendStateChangedInstance(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,const common_frontend_key *key,HANDLE *state_changed);
+DWORD OpenNtBaseServiceFrontendRequestInstance(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,const common_frontend_key *key,DWORD *request,HANDLE *worker);
+DWORD OpenNtBaseServiceAttachFrontendRequestInstance(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,const common_frontend_key *key,DWORD request,HANDLE pipe,HANDLE ready);
+DWORD OpenNtBaseServiceCloseFrontendInstance(OPENNT_BASE_CONNECTION *,DWORD,DWORD,const common_frontend_key *);
+DWORD OpenNtBaseServiceRetireFrontendInstance(OPENNT_BASE_CONNECTION *,DWORD,DWORD,const common_frontend_key *,DWORD *);
+DWORD OpenNtBaseServiceUnregisterFrontendInstance(OPENNT_BASE_CONNECTION *,DWORD,DWORD,const common_frontend_key *);
 #endif

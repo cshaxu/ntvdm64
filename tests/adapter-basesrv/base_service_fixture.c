@@ -879,3 +879,139 @@ int fixture_borrowed_console_identity_loss(void)
     puts("PASS borrowed Console identity loss: NTSRV closes only borrowed roots and orders worker shutdown");
     return 0;
 }
+
+/* In-process production-service ownership fixture. Only worker admission and
+ * already-selected route boundaries are seeded; registry/control/release/close
+ * operations below execute the actual service. This is not RPC peer proof. */
+int fixture_frontend_instances(void)
+{
+    OPENNT_BASE_SERVICE *service=OpenNtBaseServiceStart();
+    OPENNT_BASE_CONNECTION *connections[4]={0};
+    OPENNT_BASE_WORKER_WATCH watches[3]={0};
+    PROCESS_INFORMATION children[3]={0};
+    BOOL inserted[3]={0};
+    DWORD generations[4]={0},i,j,result=1,request=0,action=0,before=0,after=0;
+    common_frontend_key keys[2]={{0}},invalid={0},extra={0};
+    common_frontend_location location={1,10,1};
+    HANDLE notifications[2]={0},retires[2]={0},temp=NULL,other=NULL,worker=NULL;
+    HANDLE read=NULL,write=NULL,ready=NULL,pipe=NULL,frontend=NULL,received_ready=NULL;
+    OPENNT_FRONTEND_ROUTE *routes[2]={0};
+    OPENNT_FRONTEND_INSTANCE *roots[2]={0};
+    STARTUPINFOW startup={sizeof(startup)};
+    WCHAR image[MAX_PATH],command[MAX_PATH+40];
+#define INSTANCE_CHECK(x) do {if(!(x)){fprintf(stderr,"FAIL frontend-instances line %d error %lu\n",__LINE__,GetLastError());goto cleanup;}}while(0)
+    INSTANCE_CHECK(service && GetModuleFileNameW(NULL,image,ARRAYSIZE(image)));
+    for(i=0;i<3;++i) {
+        swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" --reservation-child",image);
+        INSTANCE_CHECK(CreateProcessW(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
+            NULL,NULL,&startup,&children[i]));
+        INSTANCE_CHECK(!OpenNtBaseServiceConnect(service,children[i].hProcess,&connections[i],&generations[i]));
+    }
+    INSTANCE_CHECK(!OpenNtBaseServiceConnect(service,GetCurrentProcess(),&connections[3],&generations[3]));
+    connections[0]->process.fVDM=TRUE;
+    INSTANCE_CHECK(OpenNtBaseServiceRegisterEmbeddedFrontend(connections[0],children[0].dwProcessId,
+        generations[0],&location,&extra,&temp,&other)==ERROR_ACCESS_DENIED && !temp && !other);
+    connections[0]->process.fVDM=FALSE;
+    for(i=0;i<3;++i) {
+        watches[i].service=service;watches[i].kind=OPENNT_BASE_WORKER_NATIVE;
+        watches[i].process.ProcessHandle=children[i].hProcess;
+        watches[i].process.SequenceNumber=generations[i];
+        watches[i].shutdown=CreateEventW(NULL,TRUE,FALSE,NULL);
+        watches[i].console_close=CreateEventW(NULL,TRUE,FALSE,NULL);
+        INSTANCE_CHECK(watches[i].shutdown && watches[i].console_close);
+        EnterCriticalSection(&service->lock);
+        connections[i]->native_worker=TRUE;
+        InsertTailList(&service->worker_watches,&watches[i].link);inserted[i]=TRUE;
+        LeaveCriticalSection(&service->lock);
+    }
+    for(i=0;i<2;++i) {
+        location.vm=10+i;
+        INSTANCE_CHECK(!OpenNtBaseServiceRegisterEmbeddedFrontend(connections[0],children[0].dwProcessId,
+            generations[0],&location,&keys[i],&notifications[i],&retires[i]));
+        EnterCriticalSection(&service->lock);
+        roots[i]=service_find_frontend(connections[0],&keys[i]);
+        LeaveCriticalSection(&service->lock);
+        INSTANCE_CHECK(roots[i] && notifications[i] && retires[i]);
+    }
+    INSTANCE_CHECK(keys[0].instance!=keys[1].instance);
+    INSTANCE_CHECK(OpenNtBaseServiceRegisterEmbeddedFrontend(connections[0],children[0].dwProcessId,
+        generations[0],&location,&extra,&temp,&other)==ERROR_ALREADY_EXISTS && !temp && !other);
+    INSTANCE_CHECK(OpenNtBaseServiceFrontendStateChangedInstance(connections[3],GetCurrentProcessId(),
+        generations[3],&keys[0],&temp)==ERROR_ACCESS_DENIED && !temp);
+    invalid=keys[0];++invalid.generation;
+    INSTANCE_CHECK(OpenNtBaseServiceFrontendStateChangedInstance(connections[0],children[0].dwProcessId,
+        generations[0],&invalid,&temp)==ERROR_ACCESS_DENIED && !temp);
+    for(i=0;i<2;++i) {
+        routes[i]=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*routes[i]));INSTANCE_CHECK(routes[i]);
+        routes[i]->root=roots[i];routes[i]->request=generations[i+1];routes[i]->native_worker=TRUE;
+        INSTANCE_CHECK(DuplicateHandle(GetCurrentProcess(),children[i+1].hProcess,GetCurrentProcess(),
+            &routes[i]->worker,PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,0));
+        EnterCriticalSection(&service->lock);
+        InsertTailList(&service->frontend_routes,&routes[i]->link);
+        j=service_authorize_worker_io(connections[i+1],children[i+1].dwProcessId);
+        LeaveCriticalSection(&service->lock);INSTANCE_CHECK(!j);
+        INSTANCE_CHECK(!OpenNtBaseServiceWorkerIoTransition(connections[i+1],children[i+1].dwProcessId,
+            generations[i+1],WORKER_IO_ACQUIRE));
+    }
+    INSTANCE_CHECK(!OpenNtBaseServiceFrontendRequestInstance(connections[0],children[0].dwProcessId,
+        generations[0],&keys[0],&request,&worker) && request==generations[1] && GetProcessId(worker)==children[1].dwProcessId);
+    CloseHandle(worker);worker=NULL;
+    INSTANCE_CHECK(CreatePipe(&read,&write,NULL,0));ready=CreateEventW(NULL,TRUE,FALSE,NULL);INSTANCE_CHECK(ready);
+    INSTANCE_CHECK(OpenNtBaseServiceAttachFrontendRequestInstance(connections[0],children[0].dwProcessId,
+        generations[0],&keys[1],request,read,ready)==ERROR_ACCESS_DENIED);
+    INSTANCE_CHECK(!OpenNtBaseServiceAttachFrontendRequestInstance(connections[0],children[0].dwProcessId,
+        generations[0],&keys[0],request,read,ready));
+    INSTANCE_CHECK(!OpenNtBaseServiceTakeFrontend(connections[1],children[1].dwProcessId,generations[1],
+        &pipe,&frontend,&action,&received_ready) && action==keys[0].generation);
+    CloseHandle(pipe);pipe=NULL;CloseHandle(frontend);frontend=NULL;CloseHandle(received_ready);received_ready=NULL;
+    EnterCriticalSection(&service->lock);routes[0]->io_release_ordered=TRUE;LeaveCriticalSection(&service->lock);
+    INSTANCE_CHECK(!OpenNtBaseServiceWorkerIoTransition(connections[1],children[1].dwProcessId,generations[1],WORKER_IO_RELEASE_BEGIN));
+    INSTANCE_CHECK(!OpenNtBaseServiceFrontendIoDisconnectedInstance(connections[0],children[0].dwProcessId,generations[0],&keys[0]));
+    INSTANCE_CHECK(roots[0]->io_route==routes[0] && roots[1]->io_route==routes[1]);
+    INSTANCE_CHECK(!OpenNtBaseServiceWorkerIoTransition(connections[1],children[1].dwProcessId,generations[1],WORKER_IO_RELEASED));
+    INSTANCE_CHECK(!roots[0]->io_route && roots[1]->io_route==routes[1]);
+    INSTANCE_CHECK(!OpenNtBaseServiceCloseFrontendInstance(connections[0],children[0].dwProcessId,generations[0],&keys[0]));
+    INSTANCE_CHECK(WaitForSingleObject(watches[1].console_close,0)==WAIT_OBJECT_0 &&
+        WaitForSingleObject(watches[0].console_close,0)==WAIT_TIMEOUT && WaitForSingleObject(watches[2].console_close,0)==WAIT_TIMEOUT);
+    INSTANCE_CHECK(OpenNtBaseServiceUnregisterFrontendInstance(connections[0],children[0].dwProcessId,generations[0],&keys[0])==ERROR_BUSY);
+    INSTANCE_CHECK(TerminateProcess(children[1].hProcess,0) && WaitForSingleObject(children[1].hProcess,5000)==WAIT_OBJECT_0);
+    INSTANCE_CHECK(!OpenNtBaseServiceReconcileFrontends(service));
+    INSTANCE_CHECK(!OpenNtBaseServiceRetireFrontendInstance(connections[0],children[0].dwProcessId,generations[0],&keys[0],&action) && action==OPENNT_FRONTEND_RETIRE_FINAL_CLOSE);
+    INSTANCE_CHECK(!OpenNtBaseServiceUnregisterFrontendInstance(connections[0],children[0].dwProcessId,generations[0],&keys[0]));routes[0]=NULL;roots[0]=NULL;
+    INSTANCE_CHECK(OpenNtBaseServiceFrontendRequestInstance(connections[0],children[0].dwProcessId,generations[0],&keys[0],&request,&worker)==ERROR_ACCESS_DENIED);
+    INSTANCE_CHECK(!OpenNtBaseServiceFrontendRequestInstance(connections[0],children[0].dwProcessId,generations[0],&keys[1],&request,&worker) && GetProcessId(worker)==children[2].dwProcessId);
+    CloseHandle(worker);worker=NULL;
+    INSTANCE_CHECK(GetProcessHandleCount(GetCurrentProcess(),&before));
+    for(i=0;i<128;++i) {
+        location.vm=100;location.incarnation=2+i;
+        INSTANCE_CHECK(!OpenNtBaseServiceRegisterEmbeddedFrontend(connections[0],children[0].dwProcessId,generations[0],&location,&extra,&temp,&other));
+        INSTANCE_CHECK(!OpenNtBaseServiceCloseFrontendInstance(connections[0],children[0].dwProcessId,generations[0],&extra));
+        INSTANCE_CHECK(!OpenNtBaseServiceUnregisterFrontendInstance(connections[0],children[0].dwProcessId,generations[0],&extra));
+        CloseHandle(temp);temp=NULL;CloseHandle(other);other=NULL;
+    }
+    INSTANCE_CHECK(GetProcessHandleCount(GetCurrentProcess(),&after) && after==before);
+    INSTANCE_CHECK(!OpenNtBaseServiceDisconnect(connections[0]));connections[0]=NULL;roots[1]=NULL;routes[1]=NULL;
+    INSTANCE_CHECK(WaitForSingleObject(watches[2].console_close,0)==WAIT_OBJECT_0 &&
+        WaitForSingleObject(watches[0].shutdown,0)==WAIT_TIMEOUT && WaitForSingleObject(children[0].hProcess,0)==WAIT_TIMEOUT);
+    result=0;
+cleanup:
+    if(worker)CloseHandle(worker);if(temp)CloseHandle(temp);if(other)CloseHandle(other);
+    if(read)CloseHandle(read);if(write)CloseHandle(write);if(ready)CloseHandle(ready);
+    if(pipe)CloseHandle(pipe);if(frontend)CloseHandle(frontend);if(received_ready)CloseHandle(received_ready);
+    for(i=0;i<2;++i){if(notifications[i])CloseHandle(notifications[i]);if(retires[i])CloseHandle(retires[i]);}
+    if(service) {
+        EnterCriticalSection(&service->lock);
+        for(i=0;i<3;++i)if(inserted[i])RemoveEntryList(&watches[i].link);
+        LeaveCriticalSection(&service->lock);
+        for(i=0;i<4;++i)if(connections[i])OpenNtBaseServiceDisconnect(connections[i]);
+    }
+    for(i=0;i<3;++i) {
+        if(watches[i].shutdown)CloseHandle(watches[i].shutdown);if(watches[i].console_close)CloseHandle(watches[i].console_close);
+        if(children[i].hProcess){TerminateProcess(children[i].hProcess,0);WaitForSingleObject(children[i].hProcess,5000);CloseHandle(children[i].hProcess);}
+        if(children[i].hThread)CloseHandle(children[i].hThread);
+    }
+    if(service && !OpenNtBaseServiceStop(service))result=1;
+    if(!result)puts("PASS frontend instances: two roots, identity rejection, route/release isolation, scoped close, host rundown and 128 retirements without handle growth");
+    return result;
+#undef INSTANCE_CHECK
+}
