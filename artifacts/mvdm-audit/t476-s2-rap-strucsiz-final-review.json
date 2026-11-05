@@ -1,0 +1,94 @@
+{
+  "path": "src/non-mvdm/ds/netapi/rap/strucsiz.c",
+  "current_sha256": "f99d37f08cd34c9527c4279f33eeb893ecd4b4cf8e3e7498775de4f3029ad095",
+  "original_sha256": "b8a2677d4140e82eb197a1d16076603bf34ba661a7006fa8ac23fa1c0618e6e6",
+  "original_and_current_conditional_arms": 0,
+  "matching_original_source_lines": 16,
+  "matched_line_positions": [
+    [
+      3,
+      3,
+      3
+    ],
+    [
+      5,
+      5,
+      5
+    ],
+    [
+      7,
+      7,
+      7
+    ],
+    [
+      9,
+      9,
+      9
+    ],
+    [
+      11,
+      11,
+      11
+    ],
+    [
+      12,
+      12,
+      12
+    ],
+    [
+      48,
+      23,
+      48
+    ],
+    [
+      49,
+      24,
+      49
+    ],
+    [
+      50,
+      25,
+      50
+    ],
+    [
+      51,
+      26,
+      51
+    ],
+    [
+      78,
+      30,
+      78
+    ],
+    [
+      80,
+      32,
+      80
+    ],
+    [
+      81,
+      33,
+      81
+    ],
+    [
+      83,
+      35,
+      83
+    ],
+    [
+      88,
+      40,
+      88
+    ],
+    [
+      92,
+      44,
+      92
+    ]
+  ],
+  "compiler_contexts": [
+    504
+  ],
+  "compiler_unique_original_lines_seen": 7,
+  "local_diff_review": "Full diff reviewed: code retains the original RAP size function and includes; removed prose and trailing comments are non-code, with source continuation anchors preserved."
+}

@@ -173,3 +173,8 @@ The [DEM state access review](../../../artifacts/mvdm-audit/t476-s2-demgset-fina
 ### Completed OEM file helper review
 
 The [OEM file helper review](../../../artifacts/mvdm-audit/t476-s2-oem-file-final-review.json) completes `oemuni/file.c`: there are no original or current conditional groups, the full diff consists of registered output initialization and OEM encoded-byte/capacity fixes, and matching source line positions and 161 unique compiler-observed original lines agree. Total: **754 of 1,055 complete; 301 open**.
+
+
+### Completed RAP structure-size review
+
+The [RAP structure-size review](../../../artifacts/mvdm-audit/t476-s2-rap-strucsiz-final-review.json) completes `strucsiz.c`. Neither source has conditional groups. The complete diff preserves the original RAP sizing code, removing prose and comments with continuation anchors; matching source positions and actual compiler observations agree. Total: **755 of 1,055 complete; 300 open**.
