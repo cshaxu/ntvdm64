@@ -641,7 +641,7 @@ typedef struct tagCBox {
 #define LBUP_SUCCESS        0x0008
 #define LBUP_SELCHANGE      0x0010
 #ifndef OPENNT_COMBO_STATE_LAYOUT_H
-#error T476-S1: branch not selected by product build
+typedef struct tagCBox *PCBOX;
 #endif
 typedef struct _SCROLLPOS {
     INT cItems;

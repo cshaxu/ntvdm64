@@ -117,72 +117,72 @@ LONG _SetWindowLong(
              * procedure storage. Never decode a modern token as NT4 CPD. */
             return wow_dialog_host_set(hwnd, nIndex, dwNewLong, bAnsi);
 #else
-#error T476-S1: branch not selected by product build
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            /*
+             * Get the old window proc address
+             */
+            dwOldLong = (LONG)PDLG(pwnd)->lpfnDlg;
+
+            /*
+             * We always store the actual address in the wndproc; We only
+             * give the CallProc handles to the application
+             */
+            UserAssert(!ISCPDTAG(dwOldLong));
+
+            /*
+             * May need to return a CallProc handle if there is an
+             * Ansi/Unicode tranistion
+             */
+
+            if (bAnsi != ((PDLG(pwnd)->flags & DLGF_ANSI) ? TRUE : FALSE)) {
+                dwCPDType |= bAnsi ? CPD_ANSI_TO_UNICODE : CPD_UNICODE_TO_ANSI;
+            }
+
+            /*
+             * If we detected a transition create a CallProc handle for
+             * this type of transition and this wndproc (dwOldLong)
+             */
+            if (dwCPDType) {
+                DWORD cpd;
+
+                cpd = GetCPD(pwnd, dwCPDType | CPD_DIALOG, dwOldLong);
+
+                if (cpd) {
+                    dwOldLong = cpd;
+                } else {
+                    RIPMSG0(RIP_WARNING, "SetWindowLong (DWL_DLGPROC) unable to alloc CPD returning handle\n");
+                }
+            }
+
+            /*
+             * Convert a possible CallProc Handle into a real address.
+             * The app may have kept the CallProc Handle from some
+             * previous mixed GetClassinfo or SetWindowLong.
+             *
+             * WARNING bAnsi is modified here to represent real type of
+             * proc rather than if SetWindowLongA or W was called
+             */
+            if (ISCPDTAG(dwNewLong)) {
+                PCALLPROCDATA pCPD;
+                if (pCPD = HMValidateHandleNoRip((HANDLE)dwNewLong, TYPE_CALLPROC)) {
+                    dwNewLong = pCPD->pfnClientPrevious;
+                    bAnsi = pCPD->wType & CPD_UNICODE_TO_ANSI;
+                }
+            }
+
+            /*
+             * If an app 'unsubclasses' a server-side window proc we need to
+             * restore everything so SendMessage and friends know that it's
+             * a server-side proc again.  Need to check against client side
+             * stub addresses.
+             */
+            PDLG(pwnd)->lpfnDlg = (WNDPROC)dwNewLong;
+            if (bAnsi) {
+                PDLG(pwnd)->flags |= DLGF_ANSI;
+            } else {
+                PDLG(pwnd)->flags &= ~DLGF_ANSI;
+            }
+
+            return dwOldLong;
 #endif
         case DWL_MSGRESULT:
         case DWL_USER:

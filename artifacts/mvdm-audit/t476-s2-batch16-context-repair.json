@@ -1,0 +1,196 @@
+{
+  "basis": "S1 product context excluded supported addon and fixture contexts",
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "sha256": "7175d1ce3e6d3cc10eaa1ee9845bd51df921d62a3133ca125e2e3e1736f7cefd"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "sha256": "b0c53f809f5da0001c6b92f25f3a300bea61010dcd970200903f324543835ae7"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "sha256": "86455addef0d7c1e23e876e288e80d1eba31770c49fd15f5b35b4143e29b1a9d"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "sha256": "472394e41f56144d855c82e46fedc8df2ed8b14a99a939b59714e7ce1f777ded"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "sha256": "a85cc75f5b51cc8bdd84c17bbbaea770aaace2cfb64882a1b173051a4abf82d7"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "sha256": "1633d18b84205a1dd96a1730017261ca141b4f669fade1356ca575f90eeea122"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cmpxchg.h",
+      "sha256": "da0cb148f406990bdd4af19b231317608b29b9d370f5d5ebf70e2b14ecf683ef"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cwd.h",
+      "sha256": "64758f519e4eb046cd2651e5519136624fdad0f6fc35b5439b5c55d2278d0f7f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cwde.h",
+      "sha256": "42b9d04f5c5fa4d46ba9845d27778fa23b7b9977abf2d03f404b20b2b5573aca"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/daa.h",
+      "sha256": "6f90a5d43b772f5be2ffa9228dfa9055ab4283b3bbe69c748b26419703fade8a"
+    }
+  ],
+  "checks": [
+    "PIF addon x64 build failed before, passed after",
+    "WOW original-getset boundary build and fixture: dialog_getset_failures=0",
+    "CCPU explicit diagnostic build and symbol test passed",
+    "S1 exclusion verifier: 21 remaining exclusions",
+    "x86/x64 cached product builds passed",
+    "10 component staging and publication verified in assets/release and O:/winnt/system32"
+  ],
+  "pe_comparison": [
+    {
+      "name": "run16.exe",
+      "old_sha256": "0a3e67504fec93eb6c89b8f89c560a8a2e201b0ed15efdfe3f2778c7522eb05a",
+      "new_sha256": "0a3e67504fec93eb6c89b8f89c560a8a2e201b0ed15efdfe3f2778c7522eb05a",
+      "size_equal": true,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        264,
+        209540
+      ],
+      "first_offsets": []
+    },
+    {
+      "name": "ntsrv.exe",
+      "old_sha256": "d6c3005c28cb0d02984866f144cc8b3c5f5de6be9c9c2f250fff3d37e8cdd609",
+      "new_sha256": "d6c3005c28cb0d02984866f144cc8b3c5f5de6be9c9c2f250fff3d37e8cdd609",
+      "size_equal": true,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        248,
+        290436
+      ],
+      "first_offsets": []
+    },
+    {
+      "name": "ntcon.exe",
+      "old_sha256": "9faf706da2901ca65a638d7a0da9d1d474b10c59f59edfc852d49d63a2aa99b7",
+      "new_sha256": "9faf706da2901ca65a638d7a0da9d1d474b10c59f59edfc852d49d63a2aa99b7",
+      "size_equal": true,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        264,
+        246004
+      ],
+      "first_offsets": []
+    },
+    {
+      "name": "ntvdm.exe",
+      "old_sha256": "c1054dcd372edec2a893b4445080d7644a55ec01306b3b8f40f934cf7ec4eb8a",
+      "new_sha256": "e597b4e06b92c0b30f8d0e804853cd120a0ff79d406b09368a806a0f12fbe03b",
+      "size_equal": true,
+      "difference_count": 4,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        288,
+        1695252
+      ],
+      "first_offsets": [
+        288,
+        289,
+        1695252,
+        1695253
+      ]
+    },
+    {
+      "name": "ntvwm.exe",
+      "old_sha256": "36086cfa5c6a0efecb0cbd6d0a28d05a773c4f850d5e9a8615203fdc22354c57",
+      "new_sha256": "36086cfa5c6a0efecb0cbd6d0a28d05a773c4f850d5e9a8615203fdc22354c57",
+      "size_equal": true,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        248,
+        223812
+      ],
+      "first_offsets": []
+    },
+    {
+      "name": "ntmon.exe",
+      "old_sha256": "d1c124173c69da6bf44e8f86a11efdb37e1e15d10ffd45ba29e33f78c3e1bfda",
+      "new_sha256": "d1c124173c69da6bf44e8f86a11efdb37e1e15d10ffd45ba29e33f78c3e1bfda",
+      "size_equal": true,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        248,
+        146260
+      ],
+      "first_offsets": []
+    },
+    {
+      "name": "WOW32.DLL",
+      "old_sha256": "c688c5a1063fea8e7c02e424d6ffc7801068f48fa847a58f76981ab78f7ef1e0",
+      "new_sha256": "00d960b5280a278a771597e8cd2e23f472e69908242c6b71d869dd00621b6064",
+      "size_equal": true,
+      "difference_count": 4,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        280,
+        625412
+      ],
+      "first_offsets": [
+        280,
+        281,
+        625412,
+        625413
+      ]
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "old_sha256": "bd3f123454c5c205f165906cecbe9bb207c2bae3d8537bd2c6d7d76af895a2b5",
+      "new_sha256": "bd3f123454c5c205f165906cecbe9bb207c2bae3d8537bd2c6d7d76af895a2b5",
+      "size_equal": true,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        280,
+        125108
+      ],
+      "first_offsets": []
+    },
+    {
+      "name": "nthook32.dll",
+      "old_sha256": "4dfc6a769a9b56149e74450b33856a991312230c414e67314687a3cdad0255d2",
+      "new_sha256": "4dfc6a769a9b56149e74450b33856a991312230c414e67314687a3cdad0255d2",
+      "size_equal": true,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        272,
+        133348
+      ],
+      "first_offsets": []
+    },
+    {
+      "name": "nthook64.dll",
+      "old_sha256": "544c2270858ac062f8b789c5307d53a822da1d4c2e131d28dd17848c0ecbe10e",
+      "new_sha256": "544c2270858ac062f8b789c5307d53a822da1d4c2e131d28dd17848c0ecbe10e",
+      "size_equal": true,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        272,
+        166468
+      ],
+      "first_offsets": []
+    }
+  ],
+  "scope_limit": "Historical product-hit count omits supported addon and fixture contexts; previous complete-review totals require cross-check."
+}

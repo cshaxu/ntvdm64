@@ -55,38 +55,38 @@ DWORD _GetWindowLong(
                 return wow_dialog_host_get(HW(pwnd), index, bAnsi);
 #else
 #line 57
-#error T476-S1: branch not selected by product build
+                dwProc = (DWORD)PDLG(pwnd)->lpfnDlg;
 
+                /*
+                 * If a proc exists check it to see if we need a translation
+                 */
+                if (dwProc) {
 
+                    /*
+                     * May need to return a CallProc handle if there is an
+                     * Ansi/Unicode transition
+                     */
+                    if (bAnsi != ((PDLG(pwnd)->flags & DLGF_ANSI) ? TRUE : FALSE)) {
+                        dwCPDType |= bAnsi ? CPD_ANSI_TO_UNICODE : CPD_UNICODE_TO_ANSI;
+                    }
 
+                    if (dwCPDType) {
+                        DWORD cpd;
 
+                        cpd = (DWORD)GetCPD(pwnd, dwCPDType | CPD_DIALOG, dwProc);
 
+                        if (cpd) {
+                            dwProc = cpd;
+                        } else {
+                            RIPMSG0(RIP_WARNING, "GetWindowLong unable to alloc CPD returning handle\n");
+                        }
+                    }
+                }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                /*
+                 * return proc (or CPD handle)
+                 */
+                return dwProc;
 #endif
 
 #line 90
@@ -95,7 +95,7 @@ DWORD _GetWindowLong(
                  return wow_dialog_host_get(HW(pwnd), index, bAnsi);
 #else
 #line 91
-#error T476-S1: branch not selected by product build
+                 return (DWORD)((PDIALOG)pwnd)->resultWP;
 #endif
 
 #line 93
@@ -166,7 +166,7 @@ DWORD _GetWindowLong(
         return 0;
 #else
 #line 151
-#error T476-S1: branch not selected by product build
+        return GetWindowData(pwnd, index, bAnsi);
 #endif
 #line 152
     } else {

@@ -25,13 +25,22 @@ if staging.in_block_comment(b'#ifndef PROFILE /* description\n continuation */\n
     raise SystemExit("closed directive comment remains open")
 ledger = json.loads((root / "artifacts/mvdm-audit/t476-s1-branch-ledger.json").read_text(encoding="utf-8"))
 expected = collections.Counter()
+restored = {
+    ("src/mvdm-host/inc/suballoc.h", 40, "else"),
+    ("src/mvdm-host/softpc.new/base/ccpu386/c_main.c", 890, "if"),
+    ("src/non-mvdm/public/internal/windows/inc/pif.h", 915, "if"),
+    ("src/non-mvdm/windows/core/ntuser/client/usercli.h", 643, "ifndef"),
+    ("src/non-mvdm/windows/core/ntuser/client/ntstubs.c", 119, "else"),
+    ("src/non-mvdm/windows/core/ntuser/kernel/getset.c", 63, "else"),
+    ("src/non-mvdm/windows/core/ntuser/rtl/getset.c", 56, "else"),
+    ("src/non-mvdm/windows/core/ntuser/rtl/getset.c", 96, "else"),
+    ("src/non-mvdm/windows/core/ntuser/rtl/getset.c", 167, "else"),
+}
 for arm in ledger["arms"]:
     if arm["outermost_new_exclusion"]:
         path = ledger["files"][arm["file"]]["path"]
-        # S2 restored this arm after the supported x64 XMS fixture hit it.
-        if (path, arm["line"], arm["directive"]) == (
-            "src/mvdm-host/inc/suballoc.h", 40, "else"
-        ):
+        # S2 restored arms selected by supported XMS and WOW test fixtures.
+        if (path, arm["line"], arm["directive"]) in restored:
             continue
         expected[(path, arm["directive"], arm["expression"])] += 1
 
