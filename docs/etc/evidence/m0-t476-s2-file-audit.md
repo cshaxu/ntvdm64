@@ -311,3 +311,8 @@ The [DPMI selector review](../../../artifacts/mvdm-audit/t476-s2-dpmiselr-review
 ### DPMI DOS interrupt translation review
 
 The [INT 21 translation review](../../../artifacts/mvdm-audit/t476-s2-int21map-review.json) completes `int21map.c` for original conditional structures and diagnostic lines. The entire original/current diff, registered protected DOS adaptations, 14 excluded and one selected original arm, prior hash-bound 2,987-line projection and actual compiler samples were checked. This does not independently establish runtime equivalence of the local adaptations. Total: **827 of 1,055 complete; 228 open**.
+
+
+### DPMI mode-switch source review
+
+The [mode-switch review](../../../artifacts/mvdm-audit/t476-s2-modesw-review.json) completes `modesw.c` for conditional and diagnostic-line scope. The full original/current diff, S1 branch dispositions, registered CPU40 transition changes and current selected preprocessor output were checked. The actual output confirms original anchors for both transition functions, including relocated MSW/CS operations and closing braces; project-added statements that happen to share original logical positions are not counted as original matches. This review does not independently prove CPU40 runtime equivalence. Total: **828 of 1,055 complete; 227 open**.

@@ -1,0 +1,113 @@
+{
+  "path": "src/mvdm-host/dpmi32/modesw.c",
+  "current_sha256": "7dd7d5fe43e2ba7ced3855e36df2bdbebd26603cf637439d7a6fc59c4ecee280",
+  "original_sha256": "aa7157e2a39fead41e42e87f87e332e9464bf69a668671de976c69637ce06a67",
+  "arms": [
+    {
+      "directive": "ifndef",
+      "expression": "i386",
+      "status": "hit",
+      "contexts": [
+        283
+      ]
+    },
+    {
+      "directive": "if",
+      "expression": "defined(i386)",
+      "status": "previously-excluded",
+      "contexts": []
+    },
+    {
+      "directive": "else",
+      "expression": "",
+      "status": "hit",
+      "contexts": [
+        283
+      ]
+    },
+    {
+      "directive": "ifndef",
+      "expression": "i386",
+      "status": "hit",
+      "contexts": [
+        283
+      ]
+    },
+    {
+      "directive": "ifndef",
+      "expression": "i386",
+      "status": "hit",
+      "contexts": [
+        283
+      ]
+    },
+    {
+      "directive": "if",
+      "expression": "defined(i386)",
+      "status": "previously-excluded",
+      "contexts": []
+    },
+    {
+      "directive": "else",
+      "expression": "",
+      "status": "hit",
+      "contexts": [
+        283
+      ]
+    },
+    {
+      "directive": "ifndef",
+      "expression": "i386",
+      "status": "hit",
+      "contexts": [
+        283
+      ]
+    }
+  ],
+  "compiler_contexts": [
+    283
+  ],
+  "selected_original_anchors": [
+    {
+      "line": 28,
+      "output": "DpmiSwitchToRealMode("
+    },
+    {
+      "line": 53,
+      "output": "PWORD16 Data;"
+    },
+    {
+      "line": 64,
+      "output": "setCS(DosxRmCodeSegment);"
+    },
+    {
+      "line": 66,
+      "output": "setMSW(getMSW() & ~0x1);"
+    },
+    {
+      "line": 74,
+      "output": "}"
+    },
+    {
+      "line": 77,
+      "output": "DpmiSwitchToProtectedMode("
+    },
+    {
+      "line": 101,
+      "output": "PWORD16 Data;"
+    },
+    {
+      "line": 112,
+      "output": "setMSW(getMSW() | 0x1);"
+    },
+    {
+      "line": 118,
+      "output": "setCPL(3);"
+    },
+    {
+      "line": 120,
+      "output": "}"
+    }
+  ],
+  "local_diff_review": "Complete original/current diff reviewed. Original software-CPU transition path and condition frames retained, two kernel-i386 branches excluded. DIV-222/229/230/242/243/310 are registered CPU40 transition adaptations. Actual preprocessed selected anchors include relocated MSW and CS operations and both closing braces; local statements may share original logical positions and were not treated as matching original code."
+}
