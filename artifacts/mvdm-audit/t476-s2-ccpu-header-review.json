@@ -1,0 +1,151 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.h",
+      "current_sha256": "a645bafef7279059c8657d6650d421073d0dede1e07415cdc8b5800bfb0b6c29",
+      "original_sha256": "5a7e4cefa28c674ad3047741cf8f78c9882f3c2362af09ae3a3dc0df336eed17",
+      "original_lines_checked": 138,
+      "local_diff": [
+        {
+          "kind": "insert",
+          "original": [
+            99,
+            98
+          ],
+          "current": [
+            99,
+            101
+          ],
+          "content": [
+            "IMPORT IU32 c_getEFLAGS IPT0();",
+            "",
+            "#line 99"
+          ]
+        }
+      ],
+      "compiler_witnesses": [
+        {
+          "name": "descriptor_super_type",
+          "original_line": 85,
+          "compiler_lines": [
+            85
+          ]
+        },
+        {
+          "name": "do_multiple_shiftrot_of",
+          "original_line": 92,
+          "compiler_lines": [
+            92
+          ]
+        },
+        {
+          "name": "getFLAGS",
+          "original_line": 100,
+          "compiler_lines": [
+            100
+          ]
+        },
+        {
+          "name": "read_descriptor_linear",
+          "original_line": 102,
+          "compiler_lines": [
+            102
+          ]
+        },
+        {
+          "name": "selector_is_null",
+          "original_line": 110,
+          "compiler_lines": [
+            110
+          ]
+        },
+        {
+          "name": "selector_outside_GDT",
+          "original_line": 117,
+          "compiler_lines": [
+            117
+          ]
+        },
+        {
+          "name": "selector_outside_GDT_LDT",
+          "original_line": 125,
+          "compiler_lines": [
+            125
+          ]
+        },
+        {
+          "name": "setFLAGS",
+          "original_line": 133,
+          "compiler_lines": [
+            133
+          ]
+        }
+      ],
+      "uncovered": "no conditional arms; compiler witness is x86 product context"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_debug.h",
+      "current_sha256": "e364c078c6bd4ecc16780795bcd8eedfa02ff479ed977b5d39089687a2d71871",
+      "original_sha256": "aa692f4f8680b717ab51489055c0c7578d0498f8af0702d17c4a0c56b165a88e",
+      "original_lines_checked": 45,
+      "local_diff": [
+        {
+          "kind": "insert",
+          "original": [
+            18,
+            17
+          ],
+          "current": [
+            18,
+            20
+          ],
+          "content": [
+            "/* DIVERGENCE: MVDM-HOST-DIV-282: event delivery is not sticky DR6 status. */",
+            "IMPORT BOOL debug_exception_pending;",
+            "#line 18"
+          ]
+        }
+      ],
+      "compiler_witnesses": [
+        {
+          "name": "nr_inst_break",
+          "original_line": 16,
+          "compiler_lines": [
+            16
+          ]
+        },
+        {
+          "name": "nr_data_break",
+          "original_line": 17,
+          "compiler_lines": [
+            17
+          ]
+        },
+        {
+          "name": "setup_breakpoints",
+          "original_line": 29,
+          "compiler_lines": [
+            29
+          ]
+        },
+        {
+          "name": "check_for_data_exception",
+          "original_line": 31,
+          "compiler_lines": [
+            31
+          ]
+        },
+        {
+          "name": "check_for_inst_exception",
+          "original_line": 40,
+          "compiler_lines": [
+            40
+          ]
+        }
+      ],
+      "uncovered": "no conditional arms; compiler witness is x86 product context"
+    }
+  ],
+  "preprocessor_source": "actual product c_main.c MSVC x86 command; /E instead of /c",
+  "compiler_output_sha256": "9ebf7e3079d47a1ab6855ebeefa510ae24f4d1c011454b79592c7fb5c886ded9"
+}
