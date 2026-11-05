@@ -1,0 +1,89 @@
+{
+  "method": "Hash-bound file-specific original condition and logical line review corroborated by S1 arm ledger and real compiler source-line observations. EOF continuation record explicitly explains lack of subsequent source. Runtime behavior and unobserved configurations are not certified.",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+      "current_sha256": "8b281254ad6b9aa1478070e4209dd76e859c70f5494c4a55c02cbdbc369f44a9",
+      "original_sha256": "08b798882c49443b2641ebf091adf07959059d46bc703467d860ab22659f2967",
+      "prior_full_file_review": "s13-r1386-equipmnt-review.json",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+        "current_sha256": "8b281254ad6b9aa1478070e4209dd76e859c70f5494c4a55c02cbdbc369f44a9",
+        "original_sha256": "08b798882c49443b2641ebf091adf07959059d46bc703467d860ab22659f2967",
+        "excluded": "Original SEGMENTATION guard preserved; sole body is #error and whitespace at original guard/body positions.",
+        "local_change": "Include and conditional diagnostic observer, MVDM-HOST-DIV-325; registration corrected in previous checkpoint.",
+        "line_positions": "All 40 nonblank unchanged lines have original logical positions; local observer has no original counterpart.",
+        "scope": "Source-derived comparison and existing branch evidence; no new runtime test."
+      },
+      "hit_arms": 0,
+      "excluded_arms": 1,
+      "compiler_contexts": [
+        139
+      ],
+      "compiler_unique_line_samples": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/rom_basc.c",
+      "current_sha256": "5b03ffa5ba2ecb77f60c7f01d61a6ca96029c838d2b92ffcfba5cf00ee098c87",
+      "original_sha256": "2e6f1783fcb3695443ab0a3a6fcb5dbf2bd3e2e7905217cd61021e031a8a709a",
+      "prior_full_file_review": "s13-r1385-rom-basc-review.json",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/base/bios/rom_basc.c",
+        "current_sha256": "5b03ffa5ba2ecb77f60c7f01d61a6ca96029c838d2b92ffcfba5cf00ee098c87",
+        "original_sha256": "2e6f1783fcb3695443ab0a3a6fcb5dbf2bd3e2e7905217cd61021e031a8a709a",
+        "original_conditional": "#ifdef SEGMENTATION at line 16; original body lines 17-22",
+        "current_conditional": "same guard and closing endif; body only #error and whitespace",
+        "all_other_lines": "byte text identical after line-ending normalization, at identical physical/logical line numbers; no #line directives in original or current",
+        "arm_status": "excluded-error, unique-structure-historical",
+        "evidence": [
+          "s13-r1271-simple-condition-audit.json",
+          "s13-r1362-natural-error-lines.json"
+        ],
+        "scope": "Source comparison and historical compile evidence; no new runtime test."
+      },
+      "hit_arms": 0,
+      "excluded_arms": 1,
+      "compiler_contexts": [
+        135
+      ],
+      "compiler_unique_line_samples": 1
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+      "current_sha256": "d25bb8f24789c19a6d4499fc0f7c84d3adac70413ef9ca8ed47ee92da215250f",
+      "original_sha256": "0fb164317335d8b48c51122182922259c902c7f60afb28111bafa9fb75735a6a",
+      "prior_full_file_review": "s13-r1355-eof-continuation-review.json",
+      "prior_record": {
+        "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "current_sha256": "d25bb8f24789c19a6d4499fc0f7c84d3adac70413ef9ca8ed47ee92da215250f",
+        "original_sha256": "0fb164317335d8b48c51122182922259c902c7f60afb28111bafa9fb75735a6a",
+        "groups": [
+          {
+            "original_endif": 31,
+            "current_endif": 15,
+            "next_matched_code": [
+              232,
+              16,
+              233,
+              233
+            ]
+          },
+          {
+            "original_endif": 522,
+            "current_endif": 35,
+            "next_matched_code": null
+          }
+        ],
+        "passed": false,
+        "matched_lines": 16
+      },
+      "hit_arms": 2,
+      "excluded_arms": 2,
+      "compiler_contexts": [
+        666,
+        713
+      ],
+      "compiler_unique_line_samples": 9
+    }
+  ]
+}
