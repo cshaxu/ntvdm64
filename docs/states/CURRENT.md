@@ -2,22 +2,11 @@
 
 ## Current Work
 
-**Active: M0 T477 S2 P4 — integrated delivery.** The owner closed T476 with its [evidence limitations](../history/m0-t476-closure.md), directed integration of all existing T477 commits, and admitted one P for the merged source.
+**No active M/T/S packet.** T477 S2 P4 integrated the existing T477 history with the owner-closed T476 baseline and completed its cached build, verification and coherent publication. The [integration evidence](../etc/evidence/m0-t477-s2-p4-integration.md) records results and retained audit limits. T477 S3 and S4 remain subsequent work.
 
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T477 S2 P4, Ordinary Mode. |
-| Admission And Approval | Owner directed integration of the existing T477 branch and a cached full build, tests, complete publication, commit and push. |
-| Objective | Deliver and verify a coherent ten-component package built from the combined T476 and T477 source. |
-| Non-goals | Do not modify or rebuild guest; do not claim unverified T476 audit coverage. |
-| Reference Baseline | T476 closure and [T477 S2 evidence](../etc/evidence/m0-t477-s2-frontend-instances.md); integration may change artifacts. |
-| Files And ABI Surface | Combined T476/T477 tracked changes, release artifacts, delivery and evidence records. |
-| Applicable Rules | Execution, source policy, architecture, coding and documentation authorities. |
-| Verification | Cached x86/x64 full builds, applicable Full gates, complete ten-image staging and publication with hash checks, review, commit and push. |
-| Exit Conditions | All required delivery gates pass; report any limitations honestly. |
-| Temporary Evidence | `build/t477-integration-p4`, 90-minute phase, 4 GiB, 15-minute no-progress budget. |
+## S1 Closure Record
 
-T477 S3 direct NTVDM frontend-base/VM integration and S4 NTMON integration remain later work, not part of this delivery.
+[T477 S1 closure evidence](../etc/evidence/m0-t477-s1-frontend-base.md).
 
 ## M0 T475 S5 Closure
 

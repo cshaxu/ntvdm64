@@ -10,3 +10,6 @@
 /stderr.txt
 /report
 /report.console.txt
+
+# Local linked worktrees are separate checkouts.
+/.worktrees/

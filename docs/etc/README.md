@@ -1,5 +1,7 @@
 # Supporting Material
 
+[T477 S2 P4 integration evidence](evidence/m0-t477-s2-p4-integration.md) records the merged-source build, tests and publication.
+
 [T477 S2 implementation evidence](evidence/m0-t477-s2-frontend-instances.md) records ownership separation and per-part verification/publication.
 
 [T477 S2 frontend-instance design](operations/m0-t477-s2-frontend-instances-design.md) records host/instance separation, control identity and staged verification.
