@@ -13,13 +13,13 @@ retains the approved requirements.
 
 - common/frontend-base owns reusable per-instance frontend channel and
   connection mechanics extracted from NTCON. Native presentation stays NTCON-owned.
-- worker-base owns reusable worker I/O hosting: zero or one upstream backend
-  connection plus N independent downstream frontend connections. It uses
-  frontend-base and has no dependency on NTVDM/NTVWM private implementation.
-  NTCON uses frontend-base directly and never depends on worker-base.
+- worker-base retains shared backend I/O mechanisms and does not depend on
+  frontend-base. NTVDM directly composes common/frontend-base for its N
+  downstream frontend instances alongside its existing upstream backend role.
+  NTCON also uses frontend-base directly and never depends on worker-base.
 - NTVDM owns payload/VM identity, scoped registry and guest adapter. Initial
-  enablement is NTVDM-only; future NTVWM adoption must not require relocating
-  generic hosting logic.
+  enablement is NTVDM-only; future NTVWM adoption can directly compose the same
+  frontend-base without introducing a worker-base dependency on it.
 - NTSRV owns authenticated associations, active-worker handoff and lifecycle.
   It does not relay I/O. Every frontend has at most one active worker.
 - A multitasking payload remains active on its upstream chain while its VM
@@ -36,7 +36,7 @@ retains the approved requirements.
 | --- | --- | --- |
 | S1 | Extract common/frontend-base and reconnect NTCON. Audit and separate presentation callbacks from connection state, cancellation and cleanup; remove displaced duplication. | NTCON input/output, handoff, rollback and disconnect regressions; dependency and per-instance tests. |
 | S2 | Extend NTSRV registration, identity and handoff to multiple frontend instances per authenticated host. Reuse existing lifecycle decisions and client transport. | Two identities on one host, independent chains, wrong/stale identity rejection, completion in both orders and host-loss cleanup. |
-| S3 | Place worker-side upstream/downstream hosting in worker-base; wire NTVDM's scoped payload VM registry to it. | 1+N isolation, VM-handle reuse, retirement, retained upstream ownership, nested host-fixture chains and cancellation under failure. |
+| S3 | Connect NTVDM directly to common/frontend-base and bind its scoped payload VM registry to independent frontend instances. Keep worker-base free of frontend-base dependencies. | 1+N isolation, dependency direction, VM-handle reuse, retirement, retained upstream ownership, nested host-fixture chains and cancellation under failure. |
 | S4 | Extend NTMON's existing management view to typed VM frontends and complete integrated host acceptance. | Owner/payload/VM and chain display, unchanged NTCON rows and management behavior, full regression and coherent published package. |
 
 Only S1 is currently active. Subsequent briefs are admitted sequentially after

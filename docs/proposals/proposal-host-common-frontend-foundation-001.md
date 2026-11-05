@@ -24,14 +24,11 @@ handle is globally unique across workers or payload lifetimes.
    NTCON-specific presentation, native Console behavior and application
    ownership in NTCON. Connect NTCON to the extracted foundation without
    regressing existing behavior.
-2. Place the reusable worker-side mechanisms for hosting and managing the
-   upstream backend connection and multiple downstream frontend connections
-   in `worker-base`. Reuse `common/frontend-base` for frontend connection
-   capabilities; keep worker-only connection ownership and lifecycle in
-   `worker-base`. Its public worker-facing interface must support both NTVDM
-   and future NTVWM use without depending on either executable or assuming a
-   Guest VM type. NTCON must not depend on `worker-base`.
-3. Connect NTVDM to that worker-base capability and establish its payload VM
+2. Keep shared backend I/O mechanisms in `worker-base`, without any dependency
+   on `common/frontend-base`. NTVDM directly composes the shared frontend
+   capability for its downstream instances. Future NTVWM adoption can use
+   that same direct composition. NTCON must not depend on `worker-base`.
+3. Connect NTVDM directly to `common/frontend-base` and establish its payload VM
    frontend registry. Key each frontend by the payload's DOS VM identity or
    handle, scoped to the owning worker and payload; account for registration,
    lookup, retirement, handle reuse and generation/lifetime protection.
@@ -62,10 +59,9 @@ handoff remain governed by the existing lifecycle; do not create dummy
 connections to satisfy this model.
 
 `common/frontend-base` extracts the reusable frontend connection capability
-and per-instance channel/lifecycle state. NTCON uses it directly; NTVDM's VM
-frontends use it through the reusable worker-side hosting mechanics in
-`worker-base`. `worker-base` may depend on `common/frontend-base`, but common
-must not depend on `worker-base` or executable-private code. NTCON's native
+and per-instance channel/lifecycle state. Both NTCON and NTVDM use it directly.
+`worker-base` must not depend on `common/frontend-base`; common must not
+depend on `worker-base` or executable-private code. NTCON's native
 Console and window presentation and NTVDM's VM identity, guest-specific
 adapter and driver connection remain owned by their respective hosts.
 Reuse the current worker/backend I/O protocol, client and transport wherever
@@ -103,8 +99,8 @@ Verify NTCON regression, two concurrently registered VM frontend identities
 and independent task chains, correct association and handoff, monitor display,
 completion in both orders, retained upstream ownership during downstream
 activity, nesting through a worker-hosted VM frontend, wrong/stale identity
-rejection, VM-handle reuse, worker-base dependency direction and its ability to
-host generic frontend instances independently of NTVDM-specific VM state,
+rejection, VM-handle reuse, absence of worker-base dependencies on frontend-base,
+and frontend-base instance isolation independently of NTVDM-specific VM state,
 retirement and worker/payload failure cleanup. Exercise actual production
 components with reproducible fixtures; state separately what remains dependent
 on the later real guest driver. Include relevant lifecycle and single-task,

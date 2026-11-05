@@ -24,7 +24,7 @@ not yet performed in this worktree.
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T477 S1, Ordinary Mode. |
-| Admission And Approval | Owner: create a branch worktree from main and admit implementation using the next T number. Prior owner decisions define frontend-base and worker-base ownership and the 1+N connection model. |
+| Admission And Approval | Owner: create a branch worktree from main and admit implementation using the next T number. Latest owner correction makes NTVDM directly use common/frontend-base in S3; worker-base must not depend on frontend-base. The 1+N connection model remains. |
 | Candidate Proposal | [Host common frontend foundation](../proposals/proposal-host-common-frontend-foundation-001.md). |
 | Objective | Extract reusable per-instance frontend connection and channel lifecycle into common/frontend-base and make NTCON use it with unchanged Console/Window and handoff behavior. |
 | Non-goals | No guest driver/media changes, NTVWM frontend enablement, new scheduler, I/O relay through NTSRV, or implementation of later S scopes during S1. |
@@ -37,7 +37,7 @@ not yet performed in this worktree.
 | Reporting Requirements | Per-P changed ownership, exact tests/results, package/hash evidence, source revision and remaining limits; distinguish host fixtures from real guest driver acceptance. |
 | Stop Conditions | Required guest mutation, lifecycle authority change, unaudited mirror replacement or material contract expansion; record the issue and revise admission before dependent implementation. |
 | Exit Criteria | NTCON uses the shared production implementation, displaced duplicates removed, required tests and coherent publication verified, reviewed commit and delivery disposition recorded under execution rules. |
-| Original Owner Request | Create a new branch worktree from main and admit the host frontend task as the current T number plus one; reusable worker I/O hosting belongs in worker-base, initially used by NTVDM and reusable by NTVWM. |
+| Original Owner Request | Create a new branch worktree from main and admit the host frontend task as the current T number plus one; latest correction: S3 connects NTVDM directly to common/frontend-base, with no worker-base dependency on frontend-base; future NTVWM can use the same direct composition. |
 | Similar-Issue Sweep | NTCON frontend_session/session_service/console_channel, common console client/protocol, both workers' I/O cleanup and NTSRV handoff assumptions. |
 | Temporary Evidence | Worktree-local build/t477-s1; 90-minute phase, 4 GiB, 15-minute no-progress budget. Stable .ninja/.ccache are caches, not evidence. |
 

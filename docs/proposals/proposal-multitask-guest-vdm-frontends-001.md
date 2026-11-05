@@ -14,8 +14,9 @@ The owner split the former candidate into a preceding [host common frontend
 foundation](proposal-host-common-frontend-foundation-001.md) and this guest
 driver/NTVDM connection candidate. This candidate builds on that host
 foundation; it does not absorb the preceding NTCON, NTSRV or NTMON work.
-Reusable worker-side I/O connection hosting belongs to `worker-base`; NTVDM
-owns the guest VM identity, driver connection and guest-specific adaptation.
+NTVDM directly uses `common/frontend-base` for downstream frontend connections;
+`worker-base` retains backend mechanisms and does not depend on frontend-base.
+NTVDM owns guest VM identity, driver connection and guest-specific adaptation.
 The initial consumer is NTVDM; future NTVWM adoption is possible but is not
 part of this candidate.
 
