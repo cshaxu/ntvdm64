@@ -2,50 +2,30 @@
 
 ## Current Work
 
-**Active: M0 T477 S1** — extract the shared frontend connection foundation
-and reconnect NTCON without changing its existing presentation or lifecycle.
+**No active M/T/S packet.** T477 S1 is closed in this independent worktree.
+The approved frontend-base design was implemented in two local P deliveries:
+P1 154a61877 extracted the channel; P2 (this closure commit) extracted the
+service pump. NTCON uses both, preserving its Console/Window presentation,
+existing wire ABI and NTSRV lifecycle authority. Worker-base has no dependency
+on frontend-base.
 
-Owner admitted the host frontend foundation in a new branch worktree on
-2026-11-05, using the current main task number plus one. This worktree starts
-at main commit `869f001e6719cc77e35b44197a75dbd2d3addc72`.
-Main's T476 S2 mirror audit remains independent and is not closed by this
-admission. Only T477 S1 is active here.
+[S1 evidence](../etc/evidence/m0-t477-s1-frontend-base.md) records x86/x64 builds,
+channel/service units, existing integration fixtures and all 16 Full gates for
+each P, plus exact published hashes. The final coherent package was published
+to this worktree assets/release and O:/winnt/system32. The owner requires local
+commits and explicitly defers push; no push was performed. Guest media and
+installed configuration are unchanged.
 
-The [implementation sequence](../etc/operations/m0-t477-host-frontend-plan.md)
-retains the complete approved host scope. The guest 386/VxD driver and actual
-guest bridge remain a separate queued package. Admission is complete;
-The owner now authorizes S1 implementation, build, tests and publication to
-this worktree assets/release and O:/winnt/system32, followed by local commits
-without pushing. P1 channel extraction passed x86/x64 fixtures and all 16 Full gates, then
-published the coherent ten-image package to both targets with matching hashes.
-See [S1 evidence](../etc/evidence/m0-t477-s1-frontend-base.md). P2 service-pump
-extraction remains active. The owner explicitly confirms S1 admission
-and requests the [S1 design](../etc/operations/m0-t477-s1-frontend-base-design.md);
-it defines two production P deliveries, channel extraction then service extraction.
+T477 remains open. The [implementation sequence](../etc/operations/m0-t477-host-frontend-plan.md)
+retains S2 NTSRV multi-frontend registration, S3 direct NTVDM frontend-base
+integration and S4 NTMON integration; none is active or implemented here.
+The guest 386/VxD driver remains a separate queued package. Main worktree's
+independent T476 task/source is untouched by this S1 closure.
 
-## Active Packet
-
-### M0 T477 S1 — shared frontend foundation and NTCON integration
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T477 S1, Ordinary Mode. |
-| Admission And Approval | Owner: create a branch worktree from main and admit implementation using the next T number. Latest owner correction makes NTVDM directly use common/frontend-base in S3; worker-base must not depend on frontend-base. The 1+N connection model remains. |
-| Candidate Proposal | [Host common frontend foundation](../proposals/proposal-host-common-frontend-foundation-001.md). |
-| Objective | Extract reusable per-instance frontend connection and channel lifecycle into common/frontend-base and make NTCON use it with unchanged Console/Window and handoff behavior. |
-| Non-goals | No guest driver/media changes, NTVWM frontend enablement, new scheduler, I/O relay through NTSRV, or implementation of later S scopes during S1. |
-| Reference Baseline | Main 869f001e6719cc77e35b44197a75dbd2d3addc72; owner-approved proposal and existing NTCON/common I/O and BaseSrv clients. |
-| Files And ABI Surface | src/ntcon-exe; new src/common/frontend-base; selected common protocol/client and build composition; owning tests; architecture and evidence. Preserve current wire ABI in S1 unless an evidenced scope revision is recorded. |
-| Applicable Rules | Architecture and coding ownership, source-first reuse, immutable guests, existing NTSRV lifecycle authority, execution and documentation gates. |
-| Verification | Audit complete moved units and resource/lock ownership; build affected x64 frontend/shared and x86 worker consumers; unit cancellation/disconnect/rollback tests; actual NTCON DOS/native handoff, input/output, GUI and redirection regressions; coherent package publication and hash checks. Run git diff --check and tools/governance/Verify-DocumentationGovernance.ps1 including relative-link checks. |
-| Expected Markers | Production NTCON links frontend-base; no common-to-worker/executable dependency; one active worker per frontend; unchanged handoff ordering and deterministic cleanup; reproducible test evidence. |
-| Asset Needs | Existing checked-in project code, selected compiler islands, unchanged guest/package inputs and existing regression runners. No external source import is admitted. |
-| Reporting Requirements | Per-P changed ownership, exact tests/results, package/hash evidence, source revision and remaining limits; distinguish host fixtures from real guest driver acceptance. |
-| Stop Conditions | Required guest mutation, lifecycle authority change, unaudited mirror replacement or material contract expansion; record the issue and revise admission before dependent implementation. |
-| Exit Criteria | NTCON uses the shared production implementation, displaced duplicates removed, required tests and coherent publication verified, reviewed local commit; owner explicitly defers push and requires both this worktree assets/release and O:/winnt/system32 publication. |
-| Original Owner Request | Create a new branch worktree from main and admit the host frontend task as the current T number plus one; latest correction: S3 connects NTVDM directly to common/frontend-base, with no worker-base dependency on frontend-base; future NTVWM can use the same direct composition. |
-| Similar-Issue Sweep | NTCON frontend_session/session_service/console_channel, common console client/protocol, both workers' I/O cleanup and NTSRV handoff assumptions. |
-| Temporary Evidence | Worktree-local build/t477-s1; 90-minute phase, 4 GiB, 15-minute no-progress budget. Stable .ninja/.ccache are caches, not evidence. |
+Temporary delivery evidence is retained in build/t477-s1 for rollback/review,
+with the existing 90-minute phase, 4-GiB and 15-minute no-progress bounds.
+All owned build/test/publication processes are joined at delivery; .ninja and
+.ccache are reusable caches, not acceptance evidence.
 
 ## M0 T475 S5 Closure
 
@@ -163,9 +143,11 @@ packet above remains the only current S authority.
 
 ## Current Technical Baseline
 
-The [latest source delivery](../../artifacts/mvdm-audit/latest-source-release-review.md)
-builds all ten components from committed production code. Full selected
-product gates pass; both deployment targets match. Guest media is unchanged.
+This worktree's [T477 S1 delivery](../etc/evidence/m0-t477-s1-frontend-base.md)
+builds all ten components at application version 0.0.477. Full selected product
+gates pass and both publication targets match. Guest media is unchanged.
+The earlier [source release review](../../artifacts/mvdm-audit/latest-source-release-review.md)
+remains retained baseline evidence.
 
 ## Temporary Evidence
 

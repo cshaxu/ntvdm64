@@ -39,8 +39,8 @@ retains the approved requirements.
 | S3 | Connect NTVDM directly to common/frontend-base and bind its scoped payload VM registry to independent frontend instances. Keep worker-base free of frontend-base dependencies. | 1+N isolation, dependency direction, VM-handle reuse, retirement, retained upstream ownership, nested host-fixture chains and cancellation under failure. |
 | S4 | Extend NTMON's existing management view to typed VM frontends and complete integrated host acceptance. | Owner/payload/VM and chain display, unchanged NTCON rows and management behavior, full regression and coherent published package. |
 
-Only S1 is currently active. Subsequent briefs are admitted sequentially after
-the preceding bounded conclusion. Each production P includes implementation,
+S1 is closed in the [S1 evidence](../evidence/m0-t477-s1-frontend-base.md).
+No S is currently active; subsequent briefs require sequential admission. Each production P includes implementation,
 reproducible tests, build, review, coherent publication and delivery evidence
 under the execution rules; a preparatory source move alone is not a completed
 frontend capability. Exact P splits follow the audited source boundaries.

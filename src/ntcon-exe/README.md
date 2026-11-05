@@ -134,3 +134,7 @@ libvterm-import.json, its unchanged MIT source archive and license are retained
 research provenance only. They have no formal production link edge. Historical
 ConPTY/parser tests that require deleted providers are not S12 acceptance tests;
 their retirement and replacement coverage are tracked in the S12 ledger.
+
+The service pump also uses common/frontend-base/service. NTCON retains
+same-Console membership checks, presentation return/park and BaseSrv calls;
+the common instance owns single-channel sequencing and service/fault waits.

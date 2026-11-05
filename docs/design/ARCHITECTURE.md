@@ -2,7 +2,7 @@
 
 ## Frontend connection base — T477 S1
 
-The admitted frontend extraction places reusable channel and service mechanics
+The delivered frontend extraction places reusable channel and service mechanics
 in `common/frontend-base`. NTCON supplies its native Console/Window and
 operation-dispatch adapter; it retains screen transactions, input receipts and
 restoration. NTSRV remains association, handoff and retirement authority.

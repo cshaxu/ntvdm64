@@ -131,4 +131,85 @@ No installed project processes needed termination. Publication exited 0.
 | nthook64.dll | 67E9600CC43B5B84EA111584DDF79DAAB03AC40FFF8760C39E9159F309C708C2 |
 
 This evidence is committed with M0 T477 S1 P1. No push is authorized.
-P2 service-pump extraction remains within the active S1 and is not yet delivered.
+P2 below completes the service-pump extraction and closes S1.
+
+## P2 service extraction — delivered locally
+
+P1 local commit is 154a61877. P2 moves the existing frontend_run/frontend_pump
+bodies to common/frontend-base/service, replacing native/service dependencies
+with typed per-instance callbacks. NTCON retains same-Console membership,
+BaseSrv calls, presentation creation, return, park and destruction. No second
+pump remains in NTCON; no protocol, service authority, worker-base or guest
+change is introduced. The common archive is selected by production NTCON.
+
+Review preserved stop/broker/notification/retirement/state/channel wait order,
+retirement-before-admission, channel join before disconnect acknowledgement,
+return-prepared admission freeze, one-shot healthy-service fault notification,
+and broker-death-only cleanup after failed control. Unlike the previous ignored
+service-thread wait result, a failed join now explicitly retains the instance.
+Borrowed host resources are freed only after successful service/channel joins.
+
+The new production-library service fixture covers independent instances,
+release/ack ordering and reattachment, unexpected EOF and service retirement,
+failed join retention/retry, broker death, failed exit request and failed return,
+and frozen admission after return preparation. It uses local control callbacks;
+real RPC/native presentation is exercised by existing integration and Full gates.
+The verification and delivery below close this bounded extraction.
+
+## P2 verification and final publication
+
+- All ten components built through the same x86 WOW/worker/hook/redirector and
+  x64 native component commands used in P1. Driver:
+  build/t477-s1/build-verify-p2.ps1; complete log p2-verification.stdout.log.
+- test/common/frontend-base/verify-frontend-base.ps1 -Cases channel,service
+  passed against both x86 worker and x64 frontend trees: four process exit-0
+  records and PASS witnesses under p2-verification/unit-x86 and unit-x64.
+- All six existing integration fixtures from P1 passed again, including
+  console-channel-lifetime, console-frame-failure, frontend-text-handoff and
+  frontend-scope-lifetime. Their assertion files and observer exits are under
+  p2-verification. Tests use actual production code and private desktops.
+- Invoke-ProductVerification.ps1 -Suite Full passed all 16 gates in
+  401131 ms, with the same arguments/environment/unchanged baseline
+  as final P1. Raw gate timings: p2-verification/full/timings.json. Driver exit 0.
+  The same DOS4GW exclusion and WOW startup-only acceptance limits apply.
+- verify-frontend-link-ownership.ps1 passed. NTCON's x64 map resolves both
+  frontend_base_channel and frontend_base_service start/stop from
+  common-frontend-base.lib. Source scan finds no frontend-base edge from
+  worker-base or either worker; their future composition is outside S1.
+
+Package f740681c-8536-414c-acf2-a444f6042f98 was published to both this worktree assets/release and
+O:/winnt/system32. Ten image hashes and the existing hook license match at
+both destinations. No installed project process was running. Guest/configuration
+files were not copied or modified. p2-publication.json and exact-file backups
+retain publication/rollback evidence; publication process exited 0.
+
+| Image | Final published SHA-256 |
+| --- | --- |
+| run16.exe | 20DA46DBCEBA88B84CA5B13B3496C0986716FA411A260D106A46A195FBEEB613 |
+| ntsrv.exe | 9D88DBFCDCD1E17A832B1D5708001B55AFC52CBB6E328ED08892EF0AB812503E |
+| ntcon.exe | 3ECF12E4CF3C0ACD3E91B6836C4E58846109F770232D1F8AD9C79B32E319AFAA |
+| ntvdm.exe | 1131FEAD27D5791EA8BA83281C203BCA27535E2580AE67A4A7A3C73949F56A64 |
+| ntvwm.exe | 967A0859EE9739489D1EBBAF6C27D72E0B1C00F4B241A1B448AC779D985B4E67 |
+| ntmon.exe | EAC86A62B6E59F6D101FA11C7F00DD77E9755A265B3E813069D707BFCBCF693A |
+| WOW32.DLL | 609C8E0F8687B9691F3E303C3E153CAAA87A4FB32A352822D7368B25BAAC5888 |
+| VDMREDIR.DLL | E1507B1DEC347F8B8970A9AC1C4FF7E779D26EF91913D380F66CC39493AAD231 |
+| nthook32.dll | B21DA182749508184043692CD939057ED2A8248482D7135C7CCF07AE1089932D |
+| nthook64.dll | 2424428842714FCDC40D5BE16467A9A2DCDC91236678A8FA22E63D0862A43EC2 |
+
+## S1 closure
+
+The approved design's two production parts are implemented, exercised and
+published. P1 is 154a61877; this closure is committed with P2. Owner explicitly
+requires local commits without push. NTCON uses the shared channel and service
+implementations, with displaced pumps removed and native presentation retained.
+Protocol 65 is unchanged; application version is 0.0.477. No mirror/guest or
+main-worktree source was modified. Documentation governance including relative
+links and git diff --check are required and recorded with the delivery run.
+
+S2 multi-frontend NTSRV registration, S3 direct NTVDM composition and S4 NTMON
+integration remain unimplemented and require sequential admission. S1's local
+two-instance fixtures do not claim multi-instance RPC or guest-driver support.
+T477 itself is not closed. Retain final package, publication backups and concise
+raw verification records in build/t477-s1 for delivery/rollback review; they are
+temporary evidence, not a reusable build cache. Reusable compiler outputs remain
+in .ninja/.ccache. No task process remains running after delivery.

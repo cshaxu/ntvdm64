@@ -19,3 +19,19 @@ its pipe and wakes peer readiness before exit. Failed joins retain ownership.
 Tests under test/common/frontend-base link the production archive with real
 pipes, threads and events. Their local attachment binding does not establish
 RPC authentication or real guest acceptance; those use integration gates.
+
+The service instance owns its pump thread, stop event and at most one channel.
+Notification, retirement, broker-process and state-change handles are borrowed
+from the host adapter. Service actions, Console membership, restoration and
+parking use explicit callbacks; NTSRV still authorizes every association.
+A disconnected acknowledgement follows successful channel join/disposal.
+Unexpected EOF requests participant exit once, then waits for service-directed
+cleanup; failed control/restoration does not authorize retries or success.
+Return preparation freezes request admission until final service retirement.
+Stop joins service first, then channel; failed joins retain borrowed state.
+
+NTCON retains native presentation creation/destruction and its BaseSrv control
+binding. Its service wrapper has no duplicate request/pipe-fault pump. Future
+NTVDM callers can supply VM-specific adapters directly, without worker-base
+including or linking frontend-base. Actual multi-instance RPC addressing is S2,
+not inferred from the two-instance unit fixture.

@@ -2,9 +2,10 @@
 
 ## Status and objective
 
-Owner explicitly admits S1 and requests this design. [Current](../../states/CURRENT.md)
-remains the sole active packet. This document describes planned implementation,
-not completed source changes or test results.
+Owner admitted and authorized this design. Both P deliveries are now complete;
+[S1 evidence](../evidence/m0-t477-s1-frontend-base.md) records implementation,
+verification and publication. [Current](../../states/CURRENT.md) is the sole
+execution-state authority. This document retains the approved design contract.
 
 Extract NTCON's reusable frontend connection and service mechanics into
 common/frontend-base and reconnect the existing production NTCON. Preserve
