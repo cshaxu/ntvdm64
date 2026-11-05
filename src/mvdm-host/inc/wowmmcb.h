@@ -22,7 +22,7 @@
 ** 32 bit compilers.
 */
 #ifndef UNALIGNED
-#define UNALIGNED
+#error T476-S1: branch not selected by product build
 #endif
 
 extern void __cdecl call_ica_hw_interrupt(int, int, int);

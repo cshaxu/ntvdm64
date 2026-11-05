@@ -1,5 +1,7 @@
 # Supporting Material
 
+[T476 S1 mirror conditional audit](evidence/m0-t476-s1-mirror-conditional.md) records the identity checkpoint and current complete-file review evidence.
+
 [T474 S1 shared-ownership integration](evidence/m0-t474-s1-shared-range-integration.md) records the complete sibling range, integration fixes, full validation and published package.
 
 [T475 S5 process-hook import](evidence/m0-t475-s5-process-hook-import.md) records source identity, compatibility boundaries and evidence.

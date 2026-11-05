@@ -1,3 +1,5 @@
+#ifndef _USER_
+#define _USER_
 /* Copyright (c) Microsoft Corporation. Original USER object type subset.
  * DIVERGENCE(OPENNT-HOST-063): retain the unchanged selected type constants
  * for original handtabl.c ownership classification; client-view layouts are
@@ -596,6 +598,7 @@ typedef struct tagOEMBITMAPINFO
 #line 37
 #else
 #line 39
+#error T476-S1: branch not selected by product build
 #endif
 #line 41
 #endif
@@ -618,6 +621,7 @@ typedef struct tagOEMBITMAPINFO
 #line 227
 #ifdef DBG
 #line 228
+#error T476-S1: branch not selected by product build
 #else
 #line 231
 #endif
@@ -625,6 +629,7 @@ typedef struct tagOEMBITMAPINFO
 #line 309
 #ifdef _NTCSRMSG_
 #line 310
+#error T476-S1: branch not selected by product build
 #endif
 #line 329
 #line 395
@@ -737,3 +742,5 @@ typedef struct tagOEMBITMAPINFO
 #error Excluded unsupported original USER condition
 #endif
 #line 2433
+
+#endif /* _USER_ */

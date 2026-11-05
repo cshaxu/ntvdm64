@@ -2,51 +2,43 @@
 
 ## Current Work
 
-**Active: M0 T474 S5** — use LF for non-mirror project text.
+**Active: M0 T476 S1** — audit original mirror conditional branches and diagnostic lines in an independent worktree.
 
-The owner directed LF for all non-mirror components while preserving original
-mirror bytes. S4 was delivered; its [evidence](../etc/evidence/m0-t474-s4-process-launch.md) remains available.
+The owner admitted the former queue item 11. T474 S1 was delivered on main
+([integration evidence](../etc/evidence/m0-t474-s1-shared-range-integration.md));
+main's separate T474 S2 work remains untouched. The preceding independent
+[T475 closure](../history/m0-t475-closure.md) is indexed separately. The former queue item 2 is
+independent and remains queued. This worktree starts at `eac2932d5`.
 
 ## Active Packet
 
-### M0 T474 S5 — project line endings
+### M0 T476 S1 — inventory and recover missing conditional structure
+
+The host C/H audit, full marker build, 30 outermost exclusions, selected
+product rebuild and Control gate have passed. The coherent ten-image package
+is published only to this worktree's `assets/release`; see the
+[audit evidence](../etc/evidence/m0-t476-s1-mirror-conditional.md). This is
+a local delivery awaiting integration; main and its runtime were not changed.
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T474 S5, Ordinary Mode. |
-| Admission And Approval | Owner directs LF for non-mirror components and original byte retention for mirrors. |
-| Candidate Proposal | [Shared implementation ownership](../proposals/proposal-shared-implementation-ownership-001.md); owner line-ending direction applies project-wide. |
-| Objective | Configure project text and normalize owned text to LF; preserve imported mirror and pinned third-party bytes. |
-| Non-goals | No behavioral changes, guest modifications, or rewriting immutable evidence or media. |
-| Reference Baseline | `ac8bb9864`; S4 delivered. |
-| Files And ABI Surface | Project text, `.gitattributes`, `.editorconfig` and documentation; no API changes. |
-| Applicable Rules | Preserve source provenance, original mirror bytes, user files and shared source identity. |
-| Verification | Tracked text inventory, mirror byte verification, Git attributes, script and build checks appropriate to line-ending-only changes. |
-| Delivery State | Owned UTF-8 text normalized; original mirrors retained; cached builds, focused checks and governance passed. Rebuilt product differences were PE/debug timestamps only, so the previously tested package remains published. [Evidence](../etc/evidence/m0-t474-s5-lf-line-endings.md). Awaiting owner acceptance. |
-| Expected Markers | Owned text LF in worktree and Git; mirrors and pinned imports unchanged. |
-| Asset Needs | Existing repository and cached build; no guest modification. |
-| Reporting Requirements | Counts, exclusions, build and tests, and identity impact on shared libraries. |
-| Stop Conditions | Non-text ambiguity, required behavior change, or inability to preserve original mirror. |
-| Exit Criteria | All classified owned text LF, mirror bytes unchanged, validation, commit and push. |
-| Original Owner Request | All non-mirror components must use LF; mirror components keep original bytes. |
-| Similar-Issue Sweep | Source, tools, tests, docs, shared components, editor and Git configuration. |
-| Temporary Evidence | `build/t474-s5`; 90 minutes, 4 GiB and 15-minute no-progress budget. |
-
-## S4 Closure Record
-
-The [S4 delivery](../etc/evidence/m0-t474-s4-process-launch.md) passed verification and was published.
-
-## S3 Closure Record
-
-The [S3 import](../etc/evidence/m0-t474-s3-process-image.md) passed verification and was delivered.
-
-## S2 Closure Record
-
-The [S2 and P1 delivery](../etc/evidence/m0-t474-s2-win32-library-split.md) passed the full selected gates and was published.
-
-## S1 Closure Record
-
-The [S1 integration](../etc/evidence/m0-t474-s1-shared-range-integration.md) was delivered as the S2 baseline.
+| Identifier Mode | M0 T476 S1, Ordinary Mode. |
+| Admission And Approval | Owner directed a new T in a worktree based on main's latest commit for the queued original mirror excluded-branch `#error` and `#line` audit. |
+| Objective | Enumerate host mirror C/H files and match original identities; recover missing original conditional boundaries without restoring bodies already replaced by #error or changing existing #line directives. Then instrument all remaining branches and collect full-build hits before any new exclusion decisions. |
+| Non-goals | Do not audit or alter guest mirrors or host mirror files other than C/H; do not enable unsupported profiles, change selected behavior apart from the required T476 product version, or modify main's unfinished T474 S2. |
+| Reference Baseline | `eac2932d5`; historical [S13 closure](../history/m0-t473-s13-closure.md) is inherited evidence, not proof of complete-file coverage. |
+| Files And ABI Surface | Host mirror `.c` and `.h` files in `src/mvdm-host` and `src/non-mvdm`, their product build contexts, necessary include adapters, focused tests and audit records; Guest and non-C/H mirrors are excluded. |
+| Applicable Rules | Source policy, original source provenance, per-file complete audit, preserve unrelated work. |
+| Verification | Pin original/current identities; verify recovered conditional structures and preserved existing guards, instrument remaining branches, full x86/x64 build and hit collection, and validate marker equivalence. Apply later exclusions from the complete hit ledger; run package comparison and required gates. |
+| Expected Markers | Every in-scope host C/H mirror file is inventoried and mapped to its recorded original; existing #error/#line retained; missing condition structures recovered; every not-yet-excluded arm marked and full-build hits recorded. |
+| Asset Needs | Existing pinned original sources and supported local compiler/build tools; no external fetch. |
+| Reporting Requirements | Report completed/identical/incomplete/deleted counts and tested contexts, limitations and local commits. |
+| Stop Conditions | Unavailable verified originals, unsupported profile selection, guest mutation or unapproved selected behavior change. |
+| Exit Criteria | Complete inventory and conditional-structure recovery, comprehensive marker build/hit ledger, and subsequent file-by-file unhit-arm exclusion; validate and deliver batches under the proposal. |
+| Original Owner Request | Owner specified: audit only host mirror C/H files; match original and recover conditional structure, preserving existing #error/#line; mark non-excluded branches; full build and register hits; replace unhit arms with #error and remove their nested branch structure. Guest and non-C/H mirrors are excluded. |
+| Similar-Issue Sweep | All in-scope host C/H mirror files and actual build contexts; preserve already excluded arms and line markers; use owner-directed full-build hit results for remaining branch decisions. |
+| Candidate Proposal | [Complete mirror conditional audit by file](../proposals/proposal-mirror-conditional-file-audit-001.md). |
+| Temporary Evidence | `build/t476-s1`, 90-minute phase, 4-GiB limit; build-owned caches only. |
 
 ## M0 T475 S5 Closure
 

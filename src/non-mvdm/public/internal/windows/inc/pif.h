@@ -913,25 +913,25 @@ typedef UINT PIFWIZERR;
 /* XLATOFF */
 
 #if !defined(NTVDM) && defined(WINAPI)
-PIFWIZERR WINAPI AppWizard(HWND hwnd, int hProps, UINT action);
-
-int  WINAPI OpenProperties(LPCTSTR lpszApp, LPCTSTR lpszPIF, UINT hInf, UINT flOpt);
-int  WINAPI GetProperties(int hProps, LPCSTR lpszGroup, LPVOID lpProps, int cbProps, UINT flOpt);
-int  WINAPI SetProperties(int hProps, LPCSTR lpszGroup, const VOID FAR *lpProps, int cbProps, UINT flOpt);
-int  WINAPI EditProperties(int hProps, LPCTSTR lpszTitle, UINT uStartPage, HWND hwnd, UINT uMsgPost);
-int  WINAPI FlushProperties(int hProps, UINT flOpt);
-int  WINAPI EnumProperties(int hProps);
-long WINAPI AssociateProperties(int hProps, int iAssociate, long lData);
-int  WINAPI CloseProperties(int hProps, UINT flOpt);
-int  WINAPI CreateStartupProperties(int hProps, UINT flOpt);
-int  WINAPI DeleteStartupProperties(int hProps, UINT flOpt);
-BOOL WINAPI PifPropGetPages(LPVOID lpv, LPFNADDPROPSHEETPAGE lpfnAddPage, LPARAM lParam);
+#error T476-S1: branch not selected by product build
 
 
-#ifdef  PIF_PROPERTY_SHEETS
+
+
+
+
+
+
+
+
+
+
+
+
+
 #line 985
 #error DIVERGENCE OPENNT-HOST-133: PIF_PROPERTY_SHEETS branch is not selected; see mirror register.
-#endif  /* PIF_PROPERTY_SHEETS */
+
 #line 994
 
 #endif	/* !NTVDM && WINAPI */

@@ -35,31 +35,31 @@
 #define WM_DDRV_LAST               (WM_USER+0x100+20) // end DDRV range
 
 #ifdef DEBUG
-#ifdef DEFINE_DDRV_DEBUG_STRINGS
-char *szWmDdrvDebugStrings[] =
-{
-    "WM_DDRV_LOAD",
-    "WM_DDRV_ENABLE",
-    "WM_DDRV_STARTDOC",
-    "WM_DDRV_PRINTPAGE",
-    "WM_DDRV_ESCAPE",
-    "WM_DDRV_DISABLE",
-    "WM_DDRV_INITFAXINFO16",
-    "WM_DDRV_ENDDOC",
-    "WM_DDRV_SUBCLASS",
-    "WM_DDRV_EXTDMODE",
-    "WM_DDRV_DEVCAPS",
-    "WM_DDRV_FREEFAXINFO16",
-    "UNKNOWN MESSAGE",
-    "UNKNOWN MESSAGE",
-    "UNKNOWN MESSAGE",
-    "UNKNOWN MESSAGE",
-    "UNKNOWN MESSAGE",
-    "UNKNOWN MESSAGE",
-    "UNKNOWN MESSAGE",
-    "WM_DDRV_UNLOAD"
-};
-#endif
+#error T476-S1: branch not selected by product build
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #endif // #define(DEBUG)
 
 // WOWFAX component file names. Unicode and ANSII
@@ -74,31 +74,31 @@ char *szWmDdrvDebugStrings[] =
 //***************************************************************************
 
 #if  defined(_WOWFAX16_)
+#error T476-S1: branch not selected by product build
 
-#include "\nt\private\mvdm\wow16\inc\print.h"
-#include "\nt\private\mvdm\wow16\inc\gdidefs.inc"
 
-#define LPTSTR              LPSTR
-#define TEXT(x)             x
-#define SRCCOPY             0x00CC0020L
 
-//
-// the following UNALIGNED definition is required because this file
-// in included in wow16\test\shell\wowfax.h
-//
 
-#ifndef UNALIGNED
 
-#if defined(MIPS) || defined(_ALPHA_) // winnt
+
+
+
+
+
+
+
+
+
+
 #line 93
 #error Excluded unsupported original MIPS/Alpha UNALIGNED fallback
-#else                                 // winnt
+
 #line 95
-#define UNALIGNED                     // winnt
-#endif                                // winnt
+
+
 #line 97
 
-#endif
+
 #line 99
 
 
@@ -163,7 +163,7 @@ typedef WOWFAXINFO16 UNALIGNED FAR *LPWOWFAXINFO16;
 //***************************************************************************
 
 #ifndef _DEF_WOW32_
-#define POINT16             POINT
+#error T476-S1: branch not selected by product build
 #endif
 
 typedef struct _GDIINFO16{  /* gdii16 */

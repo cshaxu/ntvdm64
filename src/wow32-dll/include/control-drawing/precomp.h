@@ -4,7 +4,7 @@
 #include "wow_edit_native_bindings.h"
 #include "wow_edit_entry_bindings.h"
 #define COLOR_MAX WOW_EDIT_COLOR_COUNT
-#include "non-mvdm/windows/core/ntuser/inc/user.h"
+#include "compat/include/opennt_user_multipass.h"
 
 /* OPENNT-HOST-077: resource/metric leaves only. Original DrawFrame retains
  * its geometry, raster operation, brush selection and return behavior. */

@@ -86,7 +86,7 @@ BOOL WINAPI _DefSetText(HWND, LPCWSTR, BOOL);
 DWORD WINAPI xxxSetWindowLong(PWND, int, DWORD, BOOL);
 DWORD WINAPI xxxSetWindowData(PWND, int, DWORD, BOOL);
 #endif
-#include "non-mvdm/windows/core/ntuser/client/usercli.h"
+#include "compat/include/opennt_usercli_multipass.h"
 #undef WOW_ORIGINAL_CONTROL_PROTOTYPES
 #undef WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
 #undef WOW_ORIGINAL_DIALOG_GETSET_LAYOUT

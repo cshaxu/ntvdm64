@@ -200,6 +200,7 @@ RtlConvertLongToLuid(
 #line 1594
 #ifdef _NTSYSTEM_
 #line 1595
+#error T476-S1: branch not selected by product build
 #else
 #line 1600
 #endif

@@ -11,7 +11,7 @@
  * the historical enclosing RTL build; no window/server dependencies. */
 #include <windows.h>
 #define WOW_ORIGINAL_LARGE_STRING_LAYOUT
-#include "../inc/user.h"
+#include "compat/include/opennt_user_multipass.h"
 #undef WOW_ORIGINAL_LARGE_STRING_LAYOUT
 #line 79
 

@@ -62,9 +62,9 @@ DWORD xxxSetWindowLong(
                  return wow_dialog_host_set(HW(pwnd), index, dwData, bAnsi);
 #else
 #line 294
-                 dwOld = (DWORD)((PDIALOG)(pwnd))->resultWP;
-                 ((PDIALOG)(pwnd))->resultWP = (long)dwData;
-                 return dwOld;
+#error T476-S1: branch not selected by product build
+
+
 #endif
 
 #line 298

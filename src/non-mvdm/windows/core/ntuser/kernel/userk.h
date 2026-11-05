@@ -92,9 +92,9 @@ ExitWowCritSect(
 #ifndef _WINBASE_
 #line 23
 #line 54
-#if(WINVER >= 0x0400)
+#error T476-S1: branch not selected by product build
 #line 55
-#endif
+
 #line 57
 #endif
 #line 59
@@ -107,6 +107,7 @@ ExitWowCritSect(
 #line 65
 #ifdef RIP_COMPONENT
 #line 66
+#error T476-S1: branch not selected by product build
 #endif
 #line 68
 #line 81
@@ -214,6 +215,7 @@ ExitWowCritSect(
 #line 1219
 #ifdef POOL_TAGGING
 #line 1220
+#error T476-S1: branch not selected by product build
 #else
 #line 1246
 #endif

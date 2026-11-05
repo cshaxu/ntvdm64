@@ -2,7 +2,7 @@
 #include "wow_user_capture_bindings.h"
 #include "wow_dialog_state_bindings.h"
 #include "wow_edit_entry_bindings.h"
-#include "non-mvdm/windows/core/ntuser/inc/user.h"
+#include "compat/include/opennt_user_multipass.h"
 #include <stddef.h>
 
 /* Exact private STDCLASS data ABI from original wow32/walias.c. The object
