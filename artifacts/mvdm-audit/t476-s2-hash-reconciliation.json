@@ -1,0 +1,97 @@
+{
+  "files": 1055,
+  "stale_entries": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "old_hash": "bf771113914ffda06666d23c8da7d89454eff0dba83f1e35cf4d240d940356dc",
+      "current_hash": "a85cc75f5b51cc8bdd84c17bbbaea770aaace2cfb64882a1b173051a4abf82d7",
+      "old_state": "different-file-review",
+      "current_state": "different-file-review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cmpxchg.h",
+      "old_hash": "90d3ce15b1abd7e218e0c0c7bfae1339e72369f43430eb0f67403a006fc99d32",
+      "current_hash": "da0cb148f406990bdd4af19b231317608b29b9d370f5d5ebf70e2b14ecf683ef",
+      "old_state": "compiler-transformed-confirmed",
+      "current_state": "identical-confirmed"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cwd.h",
+      "old_hash": "e67b4f13b2133bafef49ca4d64bc309b836e291a2881c9ead0fb56dac3348d7f",
+      "current_hash": "64758f519e4eb046cd2651e5519136624fdad0f6fc35b5439b5c55d2278d0f7f",
+      "old_state": "compiler-transformed-confirmed",
+      "current_state": "identical-confirmed"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cwde.h",
+      "old_hash": "30810d016ca065d9bd3f9af7058b989e75ad312f32a2d699e3205d92bd109362",
+      "current_hash": "42b9d04f5c5fa4d46ba9845d27778fa23b7b9977abf2d03f404b20b2b5573aca",
+      "old_state": "compiler-transformed-confirmed",
+      "current_state": "identical-confirmed"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/daa.h",
+      "old_hash": "a5e91df89bbee01b844276a6bb31f46968009773b6a96c3217cbfbeef2de9943",
+      "current_hash": "6f90a5d43b772f5be2ffa9228dfa9055ab4283b3bbe69c748b26419703fade8a",
+      "old_state": "compiler-transformed-confirmed",
+      "current_state": "identical-confirmed"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "old_hash": "07775984ef3fe7e1e362423caa18ee91cb71e46a28021be27680933718f98436",
+      "current_hash": "f220e7bc12ac91cb614d1122645a7de4c697ca516694142ba367423b958f810a",
+      "old_state": "different-file-review",
+      "current_state": "different-file-review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "old_hash": "151646a7b9ba9319b6ce683f7c49c899168fe94d0f97721b12b64430c83f4b0a",
+      "current_hash": "171ee799e7ad006a106bfede7714bfb8d78724ccafaf983273a1e3403ff30d71",
+      "old_state": "different-file-review",
+      "current_state": "different-file-review"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "old_hash": "f6ee41123d29fc02d6c9403b83547ddea97d5f5361743022296f5d8037c89e64",
+      "current_hash": "1633d18b84205a1dd96a1730017261ca141b4f669fade1356ca575f90eeea122",
+      "old_state": "individual-review-confirmed",
+      "current_state": "different-file-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "old_hash": "6adc8353da542308badc958b2c2ef6d15c45e33e96e69085d9300251730e0916",
+      "current_hash": "7175d1ce3e6d3cc10eaa1ee9845bd51df921d62a3133ca125e2e3e1736f7cefd",
+      "old_state": "different-file-review",
+      "current_state": "different-file-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "old_hash": "77e6ba604850a121142719091288ed7bc642a54ea9db7d5bebdd3643a14ebbbf",
+      "current_hash": "b0c53f809f5da0001c6b92f25f3a300bea61010dcd970200903f324543835ae7",
+      "old_state": "different-file-review",
+      "current_state": "different-file-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "old_hash": "3d1f6bc95fc6c497897ac41e8128db1a98502136e5308a386530f09b152ce158",
+      "current_hash": "86455addef0d7c1e23e876e288e80d1eba31770c49fd15f5b35b4143e29b1a9d",
+      "old_state": "different-file-review",
+      "current_state": "different-file-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "old_hash": "de94ce38c9cd095af7535c3c957ab30a49acc56b5b5500dad592d250ebc02c9d",
+      "current_hash": "24d007d177d4b326e5e60614daa2aaf70c7f0b6763bf644e31c8f1c63864afb9",
+      "old_state": "different-file-review",
+      "current_state": "different-file-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "old_hash": "3c63b33119c1252ef5ac6892bd4ae5ac300c9c215d49e668009607db99c8e717",
+      "current_hash": "472394e41f56144d855c82e46fedc8df2ed8b14a99a939b59714e7ce1f777ded",
+      "old_state": "different-file-review",
+      "current_state": "different-file-review"
+    }
+  ],
+  "limitation": "review states predate supported fixture and addon context reconciliation"
+}
