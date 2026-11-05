@@ -98,6 +98,14 @@ and provenance remain indexed in the S5 evidence. The tracked working-tree
 C++ extension scan, selected graphs, product build and Control passed. Local
 package `3ae63090-eba4-445c-b264-edf54f09b56f` has ten verified hashes.
 Historical C++-generating tools and late-hook concurrency remain open.
+P13 changes two historical byte-array generators to emit C and makes the
+already-unbuildable T290 C++ ingress graph fail explicitly as retired. Synthetic
+byte/identity-negative tests passed on x86/x64; the locked historical binaries were absent.
+Product build and Control passed; local package
+`f4f0567d-2924-4971-bdc3-a5a4d73559ce` has ten verified hashes. A Full
+selected-gate comparison against pre-replacement P2 passed on P12; external
+DOS4GW/NESticle was unavailable. Archived historical scripts and late-hook
+concurrency remain open.
 The adjacent library's same-width payload-only mechanism, non-Detours payload
 format, helper ordinal and startup-only transaction require compatibility proof;
 no untested semantic equivalence is assumed. Prior [S4 evidence](../etc/evidence/m0-t475-s4-nthook-dependency-cleanup.md),

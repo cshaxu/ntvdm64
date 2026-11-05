@@ -40,8 +40,8 @@ function Write-Array([string]$Path, [string]$Symbol, [byte[]]$Bytes, [string]$So
 $command = Assert-Input $commandPath 50384 $commandHash
 $share = Assert-Input $sharePath 882 $shareHash
 New-Item -ItemType Directory -Force -Path $output | Out-Null
-Write-Array (Join-Path $output 'command_bytes.cc') 't198_s93_command_bytes' $command 'COMMAND.COM'
-Write-Array (Join-Path $output 'share_bytes.cc') 't198_s93_share_bytes' $share 'SHARE.EXE'
+Write-Array (Join-Path $output 'command_bytes.c') 't198_s93_command_bytes' $command 'COMMAND.COM'
+Write-Array (Join-Path $output 'share_bytes.c') 't198_s93_share_bytes' $share 'SHARE.EXE'
 
 @{
     schema = 'runner.t198.s93.source-built-normal-return-inputs.v1'
@@ -49,7 +49,7 @@ Write-Array (Join-Path $output 'share_bytes.cc') 't198_s93_share_bytes' $share '
         @{ role = 'command'; source = $commandPath; bytes = 50384; sha256 = $commandHash; symbol = 't198_s93_command_bytes' },
         @{ role = 'target'; source = $sharePath; bytes = 882; sha256 = $shareHash; symbol = 't198_s93_share_bytes' }
     )
-    outputs = @('command_bytes.cc', 'share_bytes.cc')
+    outputs = @('command_bytes.c', 'share_bytes.c')
     disposition = 'compile-only fixture input; not a guest runtime import'
 } | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $output 'source-inputs.json') -Encoding utf8
 Write-Host "Generated locked S93 COMMAND/SHARE fixture inputs: $output"

@@ -442,3 +442,48 @@ and the license match package `3ae63090-eba4-445c-b264-edf54f09b56f`.
 Full and DOS4GW/NESticle were not run. Historical scripts capable of emitting
 C++ or referring to retired C++ inputs, and late-hook concurrency, remain
 open; no full-codebase completion is claimed.
+
+## Independent pre-replacement comparison
+
+The P2 package `b8fbc836-9f8c-482d-80c7-7861110808ed`, before product
+selection of the new backend, provided isolated four-sample WinMINE, SOL and
+WRITE baselines (`full-validation/baseline.process`, exit 0). The isolated P12
+package `3ae63090-eba4-445c-b264-edf54f09b56f` passed Full selected gates
+against those baseline signatures (`full-validation/full.process`, exit 0):
+three Win16 startup frontiers, both 17-case frontend command matrices, RPC,
+GUI, lifecycle and nested handoff checks. The test stages use fresh package
+identity where requested. Window signatures do not prove gameplay or editing,
+and these selected gates do not prove every application's equivalence.
+DOS4GW/NESticle was skipped because its verified external fixture was not
+supplied; full retirement deadlines were not requested.
+
+## P13 — historical generator C outputs
+
+The two T198 byte-array generators now produce `.c` files with the same array
+identifiers and bytes, using C linkage. Historical C++ linkage is not claimed;
+the old consumers are absent. The NTDOS generator rejects non-C output paths;
+the S93 output manifest names the C files. The original locked input size and
+SHA-256 checks remain. All three locked historical binaries are absent locally, so
+an end-to-end test using those original binaries was not possible. With
+synthetic data only, the tests first demonstrated that the real identity
+checks reject it, then substituted hashes inside the isolated test process to
+exercise output formatting and compiled/ran byte-by-byte checks on x86 and
+x64 (`p13/arrays-r2.process`, exit 0). No synthetic binary is guest media.
+
+The T290 disabled-ingress generator previously selected a retired C++ file,
+but that file, its C companion and its fixture are all absent. The generator
+now fails explicitly rather than emitting an unusable C++ build graph. This
+is not a passing replacement for that historical fixture; the T290 matrix
+also references six other missing generators. The original script remains
+in commit `09b58f5c6`, blob `086c1c4407a0bac84eebd672558845e2915e1d14`;
+the two previous T198 generator blobs are
+`11c6ec6c19b97d55eb35e431b238ba3c65a4db4c` and
+`728d13584d9dc2315170f57be306b1f724a314fd`.
+
+The x86/x64 product build and focused checks passed (`p13/build.process`);
+the 443-command SoftPC profile and 971-command C-only selected graph checks
+passed (`p13/profile.process`, `p13/selected-c.process`). Staging verified 63
+immutable guest files and 274 ordinal exports (`p13/stage.process`), and
+Control passed (`p13/control.process`). Ten release image hashes and the
+license match local package `f4f0567d-2924-4971-bdc3-a5a4d73559ce`.
+Archived historical scripts and the late-hook concurrency limit remain open.

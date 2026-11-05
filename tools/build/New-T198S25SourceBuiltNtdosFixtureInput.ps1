@@ -11,8 +11,9 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 $repository = [IO.Path]::GetFullPath($RepositoryRoot)
 $input = Join-Path $repository 'artifacts\toolchain-runs\ntdos-tools16-historical-v1\base\mvdm\dos\v86\doskrnl\dos\NTDOS.SYS'
 if ([string]::IsNullOrWhiteSpace($OutputPath)) {
-    $OutputPath = Join-Path $repository 'artifacts\build\t198-s25-native-ntdos-r1\ntdos_bytes.cc'
+    $OutputPath = Join-Path $repository 'artifacts\build\t198-s25-native-ntdos-r1\ntdos_bytes.c'
 }
+if ([IO.Path]::GetExtension($OutputPath) -ine '.c') { throw 'C fixture output requires a .c path' }
 if (-not (Test-Path -LiteralPath $input -PathType Leaf)) { throw "Missing locked input: $input" }
 $bytes = [IO.File]::ReadAllBytes($input)
 $hash = (Get-FileHash -LiteralPath $input -Algorithm SHA256).Hash
