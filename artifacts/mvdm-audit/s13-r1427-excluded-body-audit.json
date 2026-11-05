@@ -1,0 +1,2894 @@
+{
+  "method": "Reparse current conditional groups; verify inventory hash and each checklist excluded-error body consists exclusively of #error, #line and blank lines. No assessment of whether the branch is properly excluded or original-line mapping.",
+  "excluded_checked": 4007,
+  "files_checked": 481,
+  "exceptions": [],
+  "files": [
+    {
+      "path": "src/mvdm-host/dbg/dbg.c",
+      "sha256": "f6c2da346f0a421620523036c1afa156852441a035e1407906616ae86e82bd27",
+      "classified_excluded": 35,
+      "found": 35
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "sha256": "94c1dced55b52c582322558cce2d72cae2a069fd437c72e48beb90caa5893cde",
+      "classified_excluded": 9,
+      "found": 9
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdconf.c",
+      "sha256": "69d346b5665d6755eb63d2e012027d3861894bd39b4f18dfb217959532491e76",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmddisp.c",
+      "sha256": "91e321e7d4bf19527ef7a0371d1c6137ec056f37c2da85bc8f59d009b12c0a94",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "sha256": "15fd9ee90357a2ba89708e4315d41a23fcf5fb912b4e45b89b5fd2faeed466c6",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/dem.c",
+      "sha256": "7f2f34ff27f71dd14fd6f9c8d0811b4c0a149be9c9ec48c80f4db00c339098b8",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/dem.h",
+      "sha256": "5eeeea3914420309a316496d90912e173bd1be90a4bd09da39e4e7e9069c460f",
+      "classified_excluded": 9,
+      "found": 9
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demdasd.c",
+      "sha256": "81e1557a4e8b6065d17ef557df07b264b89340deb82fdb18df57f2a9fab49cf7",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demdisp.c",
+      "sha256": "95f0e3397e7f876d1bd57d3bc375401103482e503f4a61b26368be3fa82d98c3",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demerror.c",
+      "sha256": "c7bc55645504700dbf85da5f04b4a90b3fc28f8e28ea0d313446cbfd2ad808e9",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demfile.c",
+      "sha256": "ded7c3b4eb49c18fb4e947a1cfb005f61c8494fb0a09c9dd2d4f2975787897b6",
+      "classified_excluded": 6,
+      "found": 6
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "sha256": "e0c9e9eba2017053fd2530fc07a2d9bba3e45c6edc97b744ff7940e30c64f7eb",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demioctl.c",
+      "sha256": "6c0db6e312ca2800614fb9b9068a9c39a6ffca7531e1aaab00d64f95b35c4ddd",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demmisc.c",
+      "sha256": "d5f98246059f0707a1e539d26cad8309e639dbb707accf3088d5742e0e4ba9ba",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demmsg.c",
+      "sha256": "adcb4b21a626d5d7429e65d3fea69b19196b70a450d7dd379abbf52e5965e0ac",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "sha256": "cb60c06af4075c049d66639ee42c6ea9c57d7019c5651f3f3f97fc8bb5890241",
+      "classified_excluded": 11,
+      "found": 11
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/data.c",
+      "sha256": "7e1161e8dcff68b40405d04301b995bd6d8b029715cac5c0ae667bbb52e327a8",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/debug.c",
+      "sha256": "ef8e04f3ea91d4c9ca87fbb034d745a28739ed1656a7dfebc1290b6e195e6b5d",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "sha256": "b518ac43247d583a62e50130791784c633338ff638626545ff36c4caae22e0d4",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "sha256": "3f0dd6648c072517cc51e552c4357d0558112c891b6961ca24bab8aeb5859b9e",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmidata.h",
+      "sha256": "82c2955d7bfed6b7f8638f493d99c0950f4be4a8e86d7e28b26af067ef3cc0c8",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "sha256": "d7003eba361a1a7b99398795a06a91b37896a7b2af5e26b6dd46e29fcf33bdd6",
+      "classified_excluded": 19,
+      "found": 19
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.h",
+      "sha256": "93ff578e59baa0d11ead3cf1d246c2fb89e50ffbb876e1bdca4b14fb52568a33",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmimemr.c",
+      "sha256": "5102e5e1a0bac15ed2cacc4d5e6c276ee33f03e456562a0c0465f55e52e1459f",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "sha256": "a55e9b626fe0fb371a83b66408d5109264936245ca58d750aef410ef93cd1da6",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
+      "sha256": "61dd2c2b28e2095cec941b91f4ddd0434f3872d92e8e7260dfa89580990c5a3f",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "sha256": "0aaef2ba8f555513a69f4627483281a96312d026a9680f4232c7f0b1952feb88",
+      "classified_excluded": 14,
+      "found": 14
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "sha256": "178f7b6d8d71d56401f2b614daa17f6188d883c146b76531b7a2d18b4c96ef70",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/savestat.c",
+      "sha256": "59efaecefb32f3c1bd839cbf602587f0fb65ffd360c5e12ea807a255b06781de",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/xmem.c",
+      "sha256": "14d221508789b51e026bd93e2b75669424d4eef0866fd8cea76b4c68d88d2220",
+      "classified_excluded": 5,
+      "found": 5
+    },
+    {
+      "path": "src/mvdm-host/inc/dpmi.h",
+      "sha256": "a56f3292d2d42a7e3feeb060f8ab106ed119f5674e5a30548c1d36a3d8233008",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/mvdm.h",
+      "sha256": "70a9ae9350c3a0cf1943f292fdad02f2d712c0ed855e48dd90788f701f051380",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/mvdm-host/inc/softpc.h",
+      "sha256": "4bb85e0a70526b1bbf67ac5ac4531afb1c649efcda65d05ade6280029b18c75b",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/inc/suballoc.h",
+      "sha256": "8327513e33bc64eb41fdbbf797adfea0580b6180e7bce584b9e4ac4e082f5c2f",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/vdmredir.h",
+      "sha256": "63b125295473d5ff442ae62afdc700460455b3eff0dc53872d6135983891d8a2",
+      "classified_excluded": 12,
+      "found": 12
+    },
+    {
+      "path": "src/mvdm-host/inc/vrnmpipe.h",
+      "sha256": "6a4a0f46af3ab8e094e3e51e2c60316a7c6734a3b128d5ecd473a53e1d307f6d",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/wow.h",
+      "sha256": "a6aa5375704bd870fb85ecc0be7c03d975f5efad1ba51bb3d39d5174682ea3e8",
+      "classified_excluded": 8,
+      "found": 8
+    },
+    {
+      "path": "src/mvdm-host/inc/wowfax.h",
+      "sha256": "6ad84c0b88cca63576bfaaaf3009c46aec2f672149a2116bd062983b092808d0",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/wowinfo.h",
+      "sha256": "e7b736e5b8b74c7e87601f9fba745436cd3bbb3610de6ccf8a348ec267e88940",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/wowkbd.h",
+      "sha256": "86f533eb464f1bae992b8f6410ed6d9789d49d9bb74fa77e7477cef9ac48d6ef",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/inc/wowkrn.h",
+      "sha256": "e4f70c604034b6352a0ca1a4866bc72690f3dbb216554cdf038f832762dbb3b6",
+      "classified_excluded": 12,
+      "found": 12
+    },
+    {
+      "path": "src/mvdm-host/inc/wowmmed.h",
+      "sha256": "cdbdd00ae2096fcc194072629312f105895e2b353ba999c9e276cc24991e095c",
+      "classified_excluded": 9,
+      "found": 9
+    },
+    {
+      "path": "src/mvdm-host/inc/wowsnd.h",
+      "sha256": "551d5b47d4fbc2f02fb1499cefc1bb6a6a515acf43949b2648d23dc04a159223",
+      "classified_excluded": 7,
+      "found": 7
+    },
+    {
+      "path": "src/mvdm-host/inc/wowusr.h",
+      "sha256": "ce4f2f8a6d337d962cffc6b4c99aa6e593856e32430335878a6798475e48abd3",
+      "classified_excluded": 41,
+      "found": 41
+    },
+    {
+      "path": "src/mvdm-host/oemuni/process.c",
+      "sha256": "179c07c8e1542ed304baebecdbd975431818fc1b7ea4494c22d35a433ed1f8e9",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "sha256": "ef9629e07f4ecd78ede30985f1b8fa4dc31c0e6981a9b2f3fe54afcdfeb76987",
+      "classified_excluded": 55,
+      "found": 55
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/cmos_bis.c",
+      "sha256": "8246b718d443d44c4651859a63ef31c9676e30303df54cc6e9eb7f2d3dbb076d",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+      "sha256": "812e8edc8bf1d70942c47990a3536865a2ca681d0ab5be0bff122d29980550db",
+      "classified_excluded": 8,
+      "found": 8
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "sha256": "35f65b92c0724addb70410895a21a87aa110450446fb4c39707b55f5be4523de",
+      "classified_excluded": 23,
+      "found": 23
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+      "sha256": "8b281254ad6b9aa1478070e4209dd76e859c70f5494c4a55c02cbdbc369f44a9",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+      "sha256": "6ec95ec46d9c6511b19c4e3338025be57ebdd3f289861f9be050e3cf29e95a0c",
+      "classified_excluded": 5,
+      "found": 5
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/mem_size.c",
+      "sha256": "58c3c6151854ed5cc1a49e448a21db7959bdfab349b4497e06965a1ffb58e267",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "sha256": "202bf3d58825732c9076b84df0c2bc19f9264b003a0ed8382a4b57925e46d8bb",
+      "classified_excluded": 40,
+      "found": 40
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/rom_basc.c",
+      "sha256": "5b03ffa5ba2ecb77f60c7f01d61a6ca96029c838d2b92ffcfba5cf00ee098c87",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+      "sha256": "6bd14417070148d1bea9febad34cc2e229c14cd513138c6cdea8b1a21208f354",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/slave_bs.c",
+      "sha256": "e737a62549a1c7c3a990b4de840b791506c8fdf4a245179efe9cb6304f5ef520",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "sha256": "84e4c94857da2af248a4f570385c9c2290cc21042ed03e9c86be52ee4b970e31",
+      "classified_excluded": 12,
+      "found": 12
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+      "sha256": "9469b54a27735977116dca86d54389eedb20f30cd795029a63167d531764a0d1",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/bound.c",
+      "sha256": "8ddd9738f9c3240ed9faea1b16c11218047ad0859ca8ab30fde75ad2bf136877",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/bswap.c",
+      "sha256": "5859c6f4480ab7db9d4a0f2cead39649478a9e28a490ce97df6a4d0ed0525c27",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+      "sha256": "e5e482a5acfea11e6406060b25f3f2a7630e5d057accc902e80133c44d4340a5",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_getset.c",
+      "sha256": "d6acab8b0a26dae1ea579c6da8313a054caa7bf812a939006477005074ace351",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_intr.c",
+      "sha256": "f647f9b957beee5591d0693bcbeb8130f0064d684441c8ed4d28151bed652828",
+      "classified_excluded": 11,
+      "found": 11
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "sha256": "a85cc75f5b51cc8bdd84c17bbbaea770aaace2cfb64882a1b173051a4abf82d7",
+      "classified_excluded": 76,
+      "found": 76
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.h",
+      "sha256": "24d7a95929e1ed4428ec8f749ba1229c91c27e675baf3d8c8ba6c347ba1de68e",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_mem.h",
+      "sha256": "e9f036f47e780525ca80d0a1af41823f998664b25209dc2d81c5198305fec8f6",
+      "classified_excluded": 5,
+      "found": 5
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_oprnd.h",
+      "sha256": "e28138c2d900f501b7fe9d1007ccd98c3788a36fa96fdeb1cea8e345a485b82e",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_page.c",
+      "sha256": "0de7a3fe2180d77441f127bd3462cadc3feffdd52249c8b0f3e98b2fe5cfe80e",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_page.h",
+      "sha256": "50e62c347f220ef41e863e4b47d011e09303abffd6b30fc2b5d8b52c00fc45fb",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "sha256": "72b3f8a37ccdd92bb7955cec625e10a31d9743d95c8534ff9acf30952f8ac946",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.h",
+      "sha256": "361aced5ce9afec12a540cca78099bc5858fcaca96e348eb788b2dd59d3b6a84",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+      "sha256": "a8b584a6fe3d8e3a2e433e9ce04d27ed2455bfafc52f4ff6c6b08b5faec2d939",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.c",
+      "sha256": "8460b74a7ff1e6d654c5d5561ab325dfdd46f3eb1cb3bdd572c76fbdcb2f0177",
+      "classified_excluded": 6,
+      "found": 6
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.h",
+      "sha256": "7c210c32a6ca46a4c9f3dbbfd19089d142c77f4b9a257b0361526ffdf7f75fe9",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "sha256": "3fb8e1146b4bb74be98a60120e51d7929a77c8fd066699274258208c893f5808",
+      "classified_excluded": 11,
+      "found": 11
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.c",
+      "sha256": "91fee998cf775d7aa16ff36921d0711485dc9a3a26a578b5ac59374106e5c8c7",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+      "sha256": "bd2899fb2c68a293ad2e951d4042d3ac2c397c786161e755d83430d11674bf8c",
+      "classified_excluded": 8,
+      "found": 8
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
+      "sha256": "b893efbe26b944614bce4cb5a5991d21b37fde1c92e564defc447347d27f87d9",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xtrn.c",
+      "sha256": "643b6f1f66588c8560815906507424e68de59178f82ca164e4546a9f228ac889",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "sha256": "4200e6d474e51b9e4c37234c4b6605d6c8118ba234f06199b73ef1997e7343f9",
+      "classified_excluded": 6,
+      "found": 6
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpupig.c",
+      "sha256": "2f8846d98caf9a9b059e70d8830fc6d74a181b485932a216765e48690651287b",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpupig.h",
+      "sha256": "8983ef54b45a03ebffef1bb78661d3a81c33ce4819e138be263eae66feddd225",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "sha256": "cdadad02799c68fbbb16516145ac7dfba31dbf53319eae10267d2052bcd24b42",
+      "classified_excluded": 10,
+      "found": 10
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.h",
+      "sha256": "ea9842a3d092fb68850c3155246779d174aa5423699b51d6ea9203617b39441e",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cmpxchg.c",
+      "sha256": "586fef62de0d56e81d1c2d675be00f7738f71226c4f1a7e770efe76255e8a6ed",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "sha256": "f2bc102075e0624cfe95a040c0608d97df5a8a198a0c0d08bf0271a71207b93a",
+      "classified_excluded": 215,
+      "found": 215
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "sha256": "9450c25c9566579ea53fb66a512f757c951dfdb665eb0c1e9bead18a790a50d5",
+      "classified_excluded": 6,
+      "found": 6
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/gdpvar.h",
+      "sha256": "c1f55eb9bf7c7c582f742a01fc462a13ec0f95927c8a6795a03db377fb0210dc",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/in.c",
+      "sha256": "21e9496ff93586b7f696bad8a6015027dcc2592a09e8d38b4abedb76a4e6aa72",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/invd.c",
+      "sha256": "0cb68c9ac8a34815fd07d71fcf7df5fab7c6fdf11701d1efe6f12e19f376324d",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/invlpg.c",
+      "sha256": "6363edd6b303e581cbc72e0432d059d9e932223849a858e4bee61a2937090f95",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/iret.c",
+      "sha256": "49bf538b29c800c726798b056f0e0fdfe7a87a023f638430299e6e3b68b89917",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/jmp.c",
+      "sha256": "1c5660ad0dbb88ccb808f155093b3821fbd91816a71d11f3de8e46d8ae2d05f6",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lgdt.c",
+      "sha256": "ebd809c4e812b38567818e46087fa18597ef93b3a1af186d07654e8a5983f778",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lidt.c",
+      "sha256": "81462ebf2073e147232e34ca39a4b2f61a6b1a2a6f6b943c7b8d222ea79c8e66",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lldt.c",
+      "sha256": "f7c791af8bda2ca0ce231a68555f0f18840fc28b3245732e569d9aea01d26f2a",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lxs.c",
+      "sha256": "e63ff95995c8fafd6e6fc49768b10ba5781e1c7b8a1f1720ce8682a4f4497c05",
+      "classified_excluded": 5,
+      "found": 5
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/mov.c",
+      "sha256": "58fe3be87395df048bd97772a752acf75352c026278ad827aaca990888583f9b",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/out.c",
+      "sha256": "6ea2193496697fda3b7206759306dd1e333d7a9eb098a66f7fcef4507e10116e",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ret.c",
+      "sha256": "e1e43eba1db580fd62d1e5b979559a93349691153c90659dfcc4144dc2c82ae4",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sgdt.c",
+      "sha256": "a67b1f8ceabd37a47eee75415555f0e2c2bc6daac3b700037f5268e2bbf6f15f",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/shld.c",
+      "sha256": "90ba81b32ef32db13b347cead10479129f32fee68d42c68eed65574ae9977730",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/shrd.c",
+      "sha256": "cbdd6cf16eedcd56132f4a8b353dc0a93143786e5cc0f3ee55ef2b4278f3fdcd",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sidt.c",
+      "sha256": "1afd7acb7e9feee970b068f1770ccc854def8f6745cf919e9bc7606f03a27de2",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/wbinvd.c",
+      "sha256": "20771f7ca8afcd24dad998d17b0ad8c2113d7bd772f10210a7c730c3521660a0",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/xadd.c",
+      "sha256": "35b58fb6e017ed57d710db9bcb925c39d0a1fa5d22ea7536dfb592da7d469046",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "sha256": "2feb3af8dc8fdf3d4ce7aa262c121b0fb80357a69bb266f8d1e1006709bac29b",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "sha256": "6979afbd90dda9b56a997412165f63dc8c6edc12e96048535016703a8db84823",
+      "classified_excluded": 87,
+      "found": 87
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "sha256": "ec6956b197159f60ca825f50e10931d3994e47e603674d91318f1ff9e6bc55b7",
+      "classified_excluded": 22,
+      "found": 22
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "sha256": "3ccf4236b39535ed37c16dfccddd2d0a36436d94d6585ea50ad6938356ab1b52",
+      "classified_excluded": 7,
+      "found": 7
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+      "sha256": "adc71a1f2f236f6fe0a478a2d7ac1f91d18c4e9aa70647c5ce3106b56ec65417",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/cpu4gen.h",
+      "sha256": "e0102639b6c90695353f3568592c29876e08c984f9d4996af89acd7630522435",
+      "classified_excluded": 209,
+      "found": 209
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c",
+      "sha256": "12af7726b0d966887aeb9b216a521f38dccbba86cfeee1e7186386f36f187ce3",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/j_c_lang.h",
+      "sha256": "f1fc8c6dbf5df7731ea2e28756dbfb16e504d58b81d8df4de4124d842f67eb3c",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/btrace.c",
+      "sha256": "2c1465908bdefee80bf1394a313efa6168697e14e7cc2f11d8dd05836f473adb",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/dasm.c",
+      "sha256": "1fbe2c8970dc308d6145dd37de69b7300425bd276eab93dab21946e9bbf1dbb3",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/debuggng.c",
+      "sha256": "c0206ca86ef8659c239c78de9d3f1c9ebf50bc11e3ef5f7df6119f3558c130d8",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/ega_dump.c",
+      "sha256": "a1562069aaf6a9ff00bb6f8a7890dc00a58367a23407162d344f261252772f14",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/pigyoda.c",
+      "sha256": "f351453f515087eec402ce1fbcf028526c158a7f472fe6c530165331c57f831f",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/profile.c",
+      "sha256": "fa65bdaae3f07dce263ff3c2307a51bd0520a4d3e1132860f86913562a4058fc",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "sha256": "ce6df65f98751c65d9f1e662c3b065b22903548e9a8331b900102d80fc81ca60",
+      "classified_excluded": 7,
+      "found": 7
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "sha256": "b5915770a1bdae5f8afc8aaad950f07b064156e08f1b05601d8e125cca972497",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "sha256": "5c7b58e229a4c6f40dc0f3b8e3e4164118d92ae9e642a3417d8af55308f15992",
+      "classified_excluded": 10,
+      "found": 10
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
+      "sha256": "aa27cf44088c5331ebc5ab5f40254920cbfb321c10482bc024b289a9dd2a3412",
+      "classified_excluded": 20,
+      "found": 20
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "sha256": "d076c39d5566c369dc2cdbec2718d2ef52523898dca2892e0daad1aef23ff63c",
+      "classified_excluded": 8,
+      "found": 8
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "sha256": "d9c57d64cd85cd50b0386fb65ac7988cdaf15c9906527486bfc6c3e40773971f",
+      "classified_excluded": 22,
+      "found": 22
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "sha256": "6543253ff7d404cd775969d1fae543ae4179074d1f2d4a43980e1a4fb28f573b",
+      "classified_excluded": 9,
+      "found": 9
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "sha256": "1c465622c09e1072dc1ab8f49edd366afbfc0419fd376ad7ea4bb19ebc68bcd8",
+      "classified_excluded": 14,
+      "found": 14
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "sha256": "c4824481efbd33a6db998ca8e96928820136c86daa0fa4e7b543feb4b7776ff5",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "sha256": "ea802079d1aac9b702cf73e0bbaa3387d6bf72a4cfd438fc8accae2d3d32033b",
+      "classified_excluded": 12,
+      "found": 12
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "sha256": "300702c4444d999a399614467b0b19f07f9be9e3553cc03cada6affdae353ab9",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_test.c",
+      "sha256": "ad0a3b57e944e56546161145b89d1608d1f77070e8813188678f41ca18d75f93",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "sha256": "07775984ef3fe7e1e362423caa18ee91cb71e46a28021be27680933718f98436",
+      "classified_excluded": 24,
+      "found": 24
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/base_def.h",
+      "sha256": "8145696480049e7aba5e79045a59a76bbf6042d35da109bb405e827394ca0953",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "sha256": "0afbf13726fcd1bbb2dfeac33ac3465f465c327227e5cdeef771d9e89c982c53",
+      "classified_excluded": 22,
+      "found": 22
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cga.h",
+      "sha256": "7a23149277449ecf629db3cf8596662938ed80f450b82dffb130bb577f48ed82",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cntlbop.h",
+      "sha256": "6c87e963d683f71bcdd8869a2324a158a94c3c05992d14b726af019ce6559ded",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/config.h",
+      "sha256": "1167d3a042b9c2692d09d96bdd947ce88ebecca9b13958a2fac22e4e281c6a74",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu4.h",
+      "sha256": "6c6b5f99d2e19ec21b2987646d6a22c4daed3896597c5cbce7a99442a1342427",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "sha256": "951d12ec9c14056c9269e5d10a773f2be3d4de1c7e646ce68cc7311887856b3d",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/debug.h",
+      "sha256": "9de0bb6700c06fa12f84ede05f0eeb54c30995c33981340a18232cfd74d46c33",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dma.h",
+      "sha256": "3b3c32d5746eb485ac6f0739214f6dfa1b098b698ca567478af0bfb4420dd996",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dsktrace.h",
+      "sha256": "9707c22d111a49e09235fd4287bdeca02e31840f5635961d4da2528c1aee817b",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+      "sha256": "ff732fd6c05bf24832a7099bb74e2fd96f7b3acb8032377726925b5dc080d25b",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egagraph.h",
+      "sha256": "5b8c4c54ee5ba5432180cd66ff2cfc74ab14baa9a65876d4039e0f506bf88f5d",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egaports.h",
+      "sha256": "4a7fc8597739224b19d4d33e422b77ee4efcfac5e7b13f0c1f97fcabcdde7b1b",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egaread.h",
+      "sha256": "d2f2078dc4c3f8281418b11502da7b27e79ba9de8e179d1c174629e098d641da",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "sha256": "9abd53e6feb5145c8b6e300ce1a28deac7f568c71c9c8603e574b67fe124d619",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "sha256": "3bcc3def41acf384273bc507564e6ab3efddb020fb3dccb8c76d7265e8b3c0b6",
+      "classified_excluded": 6,
+      "found": 6
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/equip.h",
+      "sha256": "d983a6294001ed8409399b04ca735da2cdf1bc64223584500b5b2ff13a64e72f",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/error.h",
+      "sha256": "29a32c1af04baf69723844b01fdbbdb8902db3837fdb701a4f641685fd779d05",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "sha256": "81c5978ffac33f187680f3e876e8409913491197da9c36b60b35f13f005550cf",
+      "classified_excluded": 5,
+      "found": 5
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gendrvr.h",
+      "sha256": "0b2dc7885e54f445f4950e324f9b51def42b0037d5c72b1c589693ca94683e2e",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
+      "sha256": "53b5da70251b70542c40a601edb354705559353ed3b3d05947c8de22fff5add8",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gisp_sas.h",
+      "sha256": "8a6e9ee2a17b879c88b829f1555b32ab4444d19d548047329b95e2e97afa0a23",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gispsvga.h",
+      "sha256": "5afbb02100a36baaf90731d50752fab72ac733092d84e7127688f4bbe42fce12",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gmi.h",
+      "sha256": "630653599afa008bc62d877b7eadb346b5e47b2ffdf80148dd4b0f5a24ee3e45",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+      "sha256": "9fd29126c9a54b492937193a58593a7c7fc8bd467eb73fdb9986bfc8075b32fa",
+      "classified_excluded": 6,
+      "found": 6
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hfx.h",
+      "sha256": "9c66c2992f4504aacda2fbdd19e31a943a96974d81f37fecf804217b26eac2ca",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host.h",
+      "sha256": "8fb42849d935c468c8abcd62db19dd3087b3374f2d633bafcaa9a79aae5b8e4b",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_com.h",
+      "sha256": "de187a1c80e136c77379bbce1cc9afda8d41e4f72605990ea7c91bdc987be6f1",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_lpt.h",
+      "sha256": "2a2dba16e6be9cc6264e13702c6c9c04b64182d14b3ff9825be68fbfa3135bd2",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_nls.h",
+      "sha256": "0893c9a73e82ee97d393381e8fb43010159f2c5f7eddca9ff593235d76acc412",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_sas.h",
+      "sha256": "2f8a9d4296d115f48a74eacdb91ad4b37367ef5043f865a91732753db2c8e1df",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hunter.h",
+      "sha256": "3ffb9e2b20d8632ef6c57787f9e99ddba1a9b33505e344f9ec1b2b9908001b64",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "sha256": "b525284d28990da14a61ea02d11f3b6b7f3e94726bef7b33db03c9dd8ff6841e",
+      "classified_excluded": 7,
+      "found": 7
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/idetect.h",
+      "sha256": "9ecccbd0516e7d7aca4fd7d60f09edb4a8a7d3ab9e077b166c470b5fcd656228",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
+      "sha256": "9b08e08ba77b3c8dfaffeec3efe8f1923b1495d30e79678e198cd52509643dd8",
+      "classified_excluded": 10,
+      "found": 10
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/keyba.h",
+      "sha256": "75ca6d2140e8457aad992d8e52dd2b9241dbf3720a3f13186306feef6261f43c",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/lock.h",
+      "sha256": "22c9f6823505537bb4d01958de71628c8bc3f556c247236196cc6bc587234082",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/mouse_io.h",
+      "sha256": "ad9fdf545b0fc2ce581b4f4b9c7555eb5af0c2739cbcb03135c8d5b3b3b2e729",
+      "classified_excluded": 8,
+      "found": 8
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ppi.h",
+      "sha256": "e6a3ef4be58abf41e5c3ad4fb37b5368ff3c5a555257d45b37a89f650316c2c6",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/printer.h",
+      "sha256": "2c822ac8f45912075a6ff869a5bee0ca62b0ebc6b6902408eff0af59dea6dd24",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/profile.h",
+      "sha256": "194f48ae5230f988148da4c75d5ae87b303e6c4967f46e5ca11fac573f928c53",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/quick_ev.h",
+      "sha256": "fc038d51d2945051b1ec35f92cb60a355c2e21bd145c9493b7b6f511d0b704b4",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/rs232.h",
+      "sha256": "26b15b12d4ca1162af6ca5881385e2435c81241bbcd868bd0e1755fa46786ba9",
+      "classified_excluded": 21,
+      "found": 21
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "sha256": "a5d3eef0bc9c43bcb20b1b38990f76f7fa4384c04ce981cea605a00108eae376",
+      "classified_excluded": 10,
+      "found": 10
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/suplib.h",
+      "sha256": "75392cd3538f20f0651e2e8bbd5c18942745f080cf035c6f7efefcdef8623f3d",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timer.h",
+      "sha256": "be96008c5c926a7c4847ac4edd9275b324484c81b0884743c82220581f24a351",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timeval.h",
+      "sha256": "ac244b148cb1220a147d08dc4162a8c7747e85a65404d89adcbd11aa3517dfa2",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/trace.h",
+      "sha256": "b62754aef01e5b60bf1f284f94021d7f457b641e26e35d44c1dcac7bc574803a",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/vgaports.h",
+      "sha256": "aa41c19b16d4d94a34acdbaaec5e6ba1583bf782ac7b3ee2e4a4ff2096b26d66",
+      "classified_excluded": 8,
+      "found": 8
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "sha256": "148d566184091358be4b40f6438dcc1f80965f2e571a8c86fabd02c1fc40d16e",
+      "classified_excluded": 6,
+      "found": 6
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/xt.h",
+      "sha256": "0c1bcb583a9899032ad16be357447660a25a1ca7b8875b65f21ef5a7110d8f85",
+      "classified_excluded": 5,
+      "found": 5
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/yoda.h",
+      "sha256": "5887ccb0be62271c5d5869ece416c55aafadf4bf75730ca1d9f1ce8b9d4a742e",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "sha256": "cad3bb755126c1b7f6970b065d6f4db258e081a32b83acdbf800d9eacaf63bef",
+      "classified_excluded": 69,
+      "found": 69
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "sha256": "235dccd77e38abd5397cc6b064ad297d7f0cc1406a6676801590b0bba739f510",
+      "classified_excluded": 26,
+      "found": 26
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "sha256": "c82031be6b27b472780c58209a474e589387d52e243b78e62a8f14c0e2780232",
+      "classified_excluded": 19,
+      "found": 19
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "sha256": "95b7f33652defcac6c1706d1fa67961131f0b396c4cc748ca251e517ffe6ce90",
+      "classified_excluded": 93,
+      "found": 93
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
+      "sha256": "1abc1fbba8149dc19343b5971f6b3db5cbab1c9c12eb32cdaabe210a2dc1c359",
+      "classified_excluded": 6,
+      "found": 6
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+      "sha256": "06045ffc85cffd259181e785b4efaf984ea56d8d08a854aad0d5c77cbaf5572f",
+      "classified_excluded": 11,
+      "found": 11
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "sha256": "632ca3bb954bf38a7537051f46590e73dd8479a17dfb3b8cf6be887d3f944add",
+      "classified_excluded": 24,
+      "found": 24
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "sha256": "8f625455d217e902ae808c6558b7e217ac2fd5aa8fee329f5eaa2e58fbe0e4a4",
+      "classified_excluded": 27,
+      "found": 27
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "sha256": "0b55f0aec8c42f623f329b985533a71c615cf6a493eddb32fa941b7ed679c869",
+      "classified_excluded": 14,
+      "found": 14
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "sha256": "469d7f498f27e70dcfd04b2e7596e7f7bbda69cdc94ca401a4716544d453a385",
+      "classified_excluded": 18,
+      "found": 18
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "sha256": "fbd2aaa1741bccc78af08334310f01a4563a7fd452f64142488703cdc529973b",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+      "sha256": "a9752b272d2c089e4a2e5bd256f8e9f7dcdc08a93e310ec85635c2bc636f3d0f",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/cmosnt.c",
+      "sha256": "3e94187916877a0ad20baebcd63cdc089034b0b047e3ac97263f4b9a26f39a80",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/dummy_nt.c",
+      "sha256": "0b3bed6358f116366f2a0f25b76f2a53b3d7fe6053142c0f4f52b10300512a1e",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "sha256": "6b7473b479944ec6abda115fcd306b2b0c3c839f728d20e3039a88e7c4917e61",
+      "classified_excluded": 73,
+      "found": 73
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+      "sha256": "15f7c04de7479ba122b2516c499f59ae01d598931881902a4b042c2ae649b398",
+      "classified_excluded": 12,
+      "found": 12
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "sha256": "704d408866fc2be8f0ba21e80d06032c18f2cf26a918b69ddb49f77eeff4a23e",
+      "classified_excluded": 9,
+      "found": 9
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "sha256": "df855fb85642e28effdde1b3c742e7b73e277b02edc89957df3f32d23907ce1c",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "sha256": "bacb75c018512cc2d70c3dde370aeb2e2057180b26162ab94560eaf5e9fa8cab",
+      "classified_excluded": 22,
+      "found": 22
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "sha256": "5d3c9f6443dbda483a0d44c097d8ff0676fc50e461d3b800aa6c5899b4bf8fce",
+      "classified_excluded": 67,
+      "found": 67
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timestrb.c",
+      "sha256": "8d3472bba03117e0378be943bdcaaf32403e418e828bc59737c43eb1608d1f39",
+      "classified_excluded": 6,
+      "found": 6
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/unexp_nt.c",
+      "sha256": "e5ad6ab2ba6b642c9e1648f2533c0ca06d9fbdbae07db0f299dd4087dd956ecd",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+      "sha256": "0a0ccb97bd0c9f55f01ce3dc7b0aaee8a9e15c42c9bb38a9c841670bd807810d",
+      "classified_excluded": 19,
+      "found": 19
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_dmmy.c",
+      "sha256": "93c6a1d8ea22ce7db09710b570f1856333e7ab4b56c292fac79103732c3e0909",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_mode.c",
+      "sha256": "c5ba228930bfe1e4dba970f4735b00041769592aacff4f224c836863e99f7c0c",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+      "sha256": "0f4e3a5e2d008ed1c4f5c85697bed569064845819d5fab62703cd266416196eb",
+      "classified_excluded": 20,
+      "found": 20
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "sha256": "14b1be5d756ff06c3578f5f12a111595afff50a5ea3aa9fa39df6c4e983011f8",
+      "classified_excluded": 23,
+      "found": 23
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_trcr.c",
+      "sha256": "45dd02a03795260a248ac62ec522a7199f339f070483eea23ea7dbbfbf5050be",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+      "sha256": "4707df970954edcae73ba0e47f9c46e76405bc7bb6271a24d359f2bd2af0024d",
+      "classified_excluded": 40,
+      "found": 40
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "sha256": "49b235efd0b6ccb1c226f63e17b5838c5ed441487bc68340f4d3b03179117474",
+      "classified_excluded": 16,
+      "found": 16
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "sha256": "cf18fb5933b15f5b1363759aba7f37a0e7ef60469f1f39ed56786a89786dcb24",
+      "classified_excluded": 9,
+      "found": 9
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "sha256": "151646a7b9ba9319b6ce683f7c49c899168fe94d0f97721b12b64430c83f4b0a",
+      "classified_excluded": 10,
+      "found": 10
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "sha256": "6343a51453f9df79db724e70cf09e82bcf6d738b9df7a650d40c36db1a134a08",
+      "classified_excluded": 59,
+      "found": 59
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "sha256": "fde48eaad3255332867c1560cf5a38e8f7f23df3e009691d93b93f870c893d68",
+      "classified_excluded": 19,
+      "found": 19
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_ports.c",
+      "sha256": "9eec47fab4481684b32dbdb34ed9c10766ff64c292078e52f704f5189d50c1a2",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+      "sha256": "7552e67cd37b75c0935ac054faf7076740d9231201a2944659e9cd7c047843b9",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
+      "sha256": "6024b359037fb812ddde5c63783fc534ea0b937b35d56ac06e872a89d0d45bd3",
+      "classified_excluded": 26,
+      "found": 26
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "sha256": "b53e53a6cfa3991a6ddcb830906eb6aa342cd74e8380ed426c9249ee385c8f2c",
+      "classified_excluded": 34,
+      "found": 34
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_vide.c",
+      "sha256": "9935aa8c68acf42cafc96a7a46403bcb015f347509b25780b7f56920d11756c3",
+      "classified_excluded": 15,
+      "found": 15
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "sha256": "33ad6f8273c53ebbaa5fe365d36b455c1ffca1527e25978d1a53875622b7c34b",
+      "classified_excluded": 59,
+      "found": 59
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video_io.c",
+      "sha256": "aec73147e8fb5112ff538409ae1d319c4b58294eea436fcd365f0c5a444ba913",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "sha256": "776905df4ae482b3920efdf4a568ac0c736036b6a247dcf129317a1297e1e748",
+      "classified_excluded": 8,
+      "found": 8
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/error.h",
+      "sha256": "e1f50719a32e302c9d2e91a49c651669407f4dcc731e625cafde2671b918ed87",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "sha256": "9974d509790f6b8185dd09242967298f34d8e93cc95b9e65ace1f9dd58f467ce",
+      "classified_excluded": 9,
+      "found": 9
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "sha256": "6eeac8f78a2d2b6928b372da0def9b9455ab1e0fa5e42cce63afc185f0b2eff7",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_hfx.h",
+      "sha256": "34e8910a1605eb0acc5e9e2a598146b5aa825be46bdaea44c849734d5746de08",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_inc.h",
+      "sha256": "d731e0f766148d434fc90c408d539a06247c733193269281c73422e671054616",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_rrr.h",
+      "sha256": "b48dbb4e7165d7002786542322da2b2f406dd78180ca8e476fd0f7a66509d0ba",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/insignia.h",
+      "sha256": "09bfda220052104997a13eb52354a39b7cd12684792da9e9dbe5e0ab7e755da4",
+      "classified_excluded": 7,
+      "found": 7
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_eoi.h",
+      "sha256": "3bc140cb9a26bfc6aba200b33c50e576f28fdca9811f8336fd6963a5e7bb0181",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_event.h",
+      "sha256": "c240ca9190ba7c14ac0e5e75e1c8e0a63cfee93221a9f7f601740316aa0878e5",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_fulsc.h",
+      "sha256": "2da1daa4fa1cc16433a74d8edfa678f89acc7fdaacffc534e453dcc9cab1163c",
+      "classified_excluded": 6,
+      "found": 6
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_graph.h",
+      "sha256": "2fceeae0ba9896df29af6df7d799a8da6bc8f4938d0078608534b6a5ca511ee3",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_pif.h",
+      "sha256": "6ee720b91a5697745e224313655cd514dac4887b1088a5af70ad705f4d0c0206",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_reset.h",
+      "sha256": "acdf0c2329ec0b2f63387ead6c988d459765b34a23212570294565b2ee394ef4",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/sim32.h",
+      "sha256": "55bb0fb88eace961f768c45a6717cf06caeda5322a657154c4c44ec5c25aad0e",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "sha256": "941078c44c2d12aec016392615e2348676a23e540f18d2cb023ca9fb27004282",
+      "classified_excluded": 17,
+      "found": 17
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "sha256": "9d659d4faec311c4a7d794a65a1667dd4cc479d67f4dc680c284cf3bbefe7378",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/cpucstbs.c",
+      "sha256": "9c5da3266f1f8729ed3dd80bfc74e748e28b23852372390385f399540abd45a7",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/fprt.c",
+      "sha256": "7fbbcb04f579717b581c4153e88caa82190b98f4e894af9f9720998561f6e282",
+      "classified_excluded": 7,
+      "found": 7
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "sha256": "8ea79491911b1a274c89771717062068df5c453e89648ee21dd588dffaf1e371",
+      "classified_excluded": 30,
+      "found": 30
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+      "sha256": "39a76118fb517efeaf152bcba60b29b8fe9a617c3e58c881aa27d67a5d249df8",
+      "classified_excluded": 6,
+      "found": 6
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "sha256": "230f41939cd9567887dfbe5764eb8f566c18850812e261f87807155881f8c881",
+      "classified_excluded": 9,
+      "found": 9
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "sha256": "8f88648e48aa473c9fbae93717b5a98c0630fb1b37480147f9ba8a5bc3fd260a",
+      "classified_excluded": 11,
+      "found": 11
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "sha256": "070cfee114fdb3c7277f6584bfc449e1d5737ea94aaf279a61f74237af48b86f",
+      "classified_excluded": 8,
+      "found": 8
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ega.c",
+      "sha256": "641961895f5a9ec88fb2e122dd16006d96687195b06c91df3f91e449cf4211f4",
+      "classified_excluded": 7,
+      "found": 7
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "sha256": "55c586fc69221068293a1db55c21b569ce34cef1526bb93e34cc8044b045ad5f",
+      "classified_excluded": 8,
+      "found": 8
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "sha256": "6c2cce038ce1e64a581fa93bc5d7cc625568658602e310762b3ed281750688ab",
+      "classified_excluded": 8,
+      "found": 8
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "sha256": "8481e0f36525676af18759ed14785092ba64740f5fcab44b05c59d0ec52f850f",
+      "classified_excluded": 6,
+      "found": 6
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "sha256": "63ce829ae4040ddea069a40bbc5b4ca31351ea1d6e7b138b4a2f40d5d8625cb3",
+      "classified_excluded": 14,
+      "found": 14
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "sha256": "6a2f2d4c8d38144418ddd9d4cdc002e862d198c9ba5dfc9fa60ad2f5e6777c63",
+      "classified_excluded": 36,
+      "found": 36
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "sha256": "628f895c90c814795e3ebb23e9aa2dc4fa59783fea8783360f66297723e5b895",
+      "classified_excluded": 25,
+      "found": 25
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_hosts.c",
+      "sha256": "9fde43cfebd448ff03be94b44ffef71fc039567e665524d40c1e144e8a282c1c",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_input.c",
+      "sha256": "e5116de0bc34641a431956bbb3dfaf06b7d5ba21ea8675715af0a425be639e23",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "sha256": "af1f7a46666b40366ef536931ea0d03c9c89e33420b3f059fff08681ef84951a",
+      "classified_excluded": 7,
+      "found": 7
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_lpt.c",
+      "sha256": "31d6e8c24e099ba16b2bc20b64e4bf3ce976f11a713177b3ba3fe3a790c2c73f",
+      "classified_excluded": 12,
+      "found": 12
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "sha256": "8f4ccdd0447f4c9d10d9a7752ca67c3a6a977a791b296289034ff4a30e910a77",
+      "classified_excluded": 26,
+      "found": 26
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "sha256": "4f493beeb6fe3ef9f2094269d50897daab0221fdd564fb16814045f51f2ace4c",
+      "classified_excluded": 17,
+      "found": 17
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "sha256": "394b6fdc6f9268345f3fc204f15c73dbc81a846d4d6b136fbde975d9e13d3c87",
+      "classified_excluded": 11,
+      "found": 11
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_nls.c",
+      "sha256": "e0147d7a5ac0c5863a24ea061c35c7b74a489d6a906320e1c4b4bbd3f10b42ea",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
+      "sha256": "14a734378272bf6cf08aafe072a427bf63cdde2eb7face818509ad07cfe6adf8",
+      "classified_excluded": 10,
+      "found": 10
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "sha256": "c345a04590804d528a75f7a300c09cd2dfe4178ba5a86adc5bf36fce4810a631",
+      "classified_excluded": 10,
+      "found": 10
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rez.c",
+      "sha256": "c94e1b9631e79306d4570470870de71b76df8f4e22646fc9e0ea16619ae32d15",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "sha256": "71456b963fb5b56472e8b3011a5e1cccae005374fd26992b9b114d50202becae",
+      "classified_excluded": 34,
+      "found": 34
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sas.c",
+      "sha256": "7a136999330a3fa6c10311bcd6c08f3701585a67bc8925c1510c20ab583b2d7c",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sec.c",
+      "sha256": "c07036b22cbd67a0aa6d65a9f81a235df5d862f40d87ce6a1b3afba32132db65",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sound.c",
+      "sha256": "b46824e044662437f8db7fd500cc09ce9be53dbac285d98523a3a3c3ed70dbbc",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_thred.c",
+      "sha256": "4bc1a569804cff7202e33a699cca49b55dea43c46eb10477929c6056fc1cbf58",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "sha256": "e3cd9c2880c18439f2e8a7b9dd10d9e42d25fa287490561509bbf356e86df2d8",
+      "classified_excluded": 11,
+      "found": 11
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "sha256": "16a8b32410aec2db3c9f4a00b109f4d81fa54a158cacfed86c883373e73e95d2",
+      "classified_excluded": 18,
+      "found": 18
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "sha256": "c2bf90ae275ee14e0f07435ed58a6df737d93a82cbd488c3a3b9e73e7a879156",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "sha256": "dd8d1716f5ba87960158367b2aabe5e9b486a5a50f95ebf6f716207380b3674a",
+      "classified_excluded": 9,
+      "found": 9
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vga.c",
+      "sha256": "1ebdafaf6e9ed6afc128b64d305233ca8f8b12c5dd77aa12052d8a57283f99af",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_wcom.c",
+      "sha256": "460fb69e94a9a3aa81cf2e622118f912c92694736970217c899a947b1758b4a8",
+      "classified_excluded": 6,
+      "found": 6
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "sha256": "20ada4729cbe0b891d3621870d826eb7dd0819fda3b4aaf8c17baf9d37f79204",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "sha256": "e60e708ba0b2900aa052153adf1e78d3f71d27d24e665cf1d77feac33bab1769",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "sha256": "036a3d66d5f0965e3e9e5f6fc8cf9fd2b1c7daa3c2cfc9002a6a6b75e3cff6dc",
+      "classified_excluded": 8,
+      "found": 8
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/x86_emm.c",
+      "sha256": "9846af750733fcd2b736ab3f95fe0e3e9ae3446e212592f7366b8bfddcef0fac",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "sha256": "ff11bc91ba70eb795f68c0e501588b9860f9677683d9c7a53e3915ff00292015",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/mvdm-host/suballoc/suballcp.h",
+      "sha256": "a03be40c18d75f3b361b428da8ddbae452898eddd11859154b327e7e238439e2",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/suballoc/suballoc.c",
+      "sha256": "dde9cb4e50aca817922649a8d6a7816f53b1c331a0fa7ed6055be23202871b32",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdebug.c",
+      "sha256": "a46eab9b3724ff69d9ab345ebd9e303fc4f59b028121561e956982d125ccdb80",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdebug.h",
+      "sha256": "08020f482521dd762dc053c9d195febb2096e12c719772521d18e5a553d37e57",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdisp.c",
+      "sha256": "ace77f81f45586b2700d5ce16149e8f791d88c8bc6b43e891423394a1f770c97",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc.h",
+      "sha256": "63be1f8951611150544104f986831c8d2a49844c6a064e904661f517ff9b0579",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "sha256": "268ba26a93f969ab08bb73668c165eeecfeed5e8dbe98e4f09c8d3c26f375022",
+      "classified_excluded": 5,
+      "found": 5
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "sha256": "0af68a587ff958e76ab5e0ae139c6e233aca39dfedbfeffcc1fd7ae35a6600da",
+      "classified_excluded": 7,
+      "found": 7
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcdbg.c",
+      "sha256": "8514683f311603f398605e339e642b592b24e31d60a457e57d4b2fe88d8a907f",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcdbg.h",
+      "sha256": "205baabd2d10ebeeb49a016c78634b7a4931c4ba961b009cd47cde0c1d53ebff",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "sha256": "dc48bd6f0ade800b1b8387cce259c1da41ae573d6214014fce72480157b674a3",
+      "classified_excluded": 19,
+      "found": 19
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdll.c",
+      "sha256": "146606d30cf36eae71ee91d194e250b8f3a78ddf3a6b7f81ae87dcde225f9a59",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrinit.c",
+      "sha256": "a2e4878558786715e56bda92357c5e1db94cef2949c1b0879bed44f1e7807866",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmisc.c",
+      "sha256": "e5e3e14c680375918a790dc39f2a42ebcc3a3a1c85170629f1fd46607b9098c1",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "sha256": "2c1b2079e410da6fe9950d6046a261a7d6920ebd57a86388866361cbb9fe6bc1",
+      "classified_excluded": 36,
+      "found": 36
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "sha256": "5b023bde04c9ccfb35252523f9d7d6c0b3400d3a6eabb87d1a12f0abbd58e528",
+      "classified_excluded": 64,
+      "found": 64
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetb.c",
+      "sha256": "5fff5e79500fd5dd734a91ec1f1342c625f50244ce9a8fc0533dd58a45649b6a",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "sha256": "9e12012c03e69c7ef7ba50d2cfb4918bfd21fe1b58e1593714fb10bf964e3d79",
+      "classified_excluded": 80,
+      "found": 80
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrputil.c",
+      "sha256": "ca92d822cc6626218ae76b957dac963711e9895c36072781a4c691e53c0b91a8",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "sha256": "f59963b1f71a67b65896d7d9af38c507e2bbca8da2d059defd76a6d6cb7ff3a2",
+      "classified_excluded": 8,
+      "found": 8
+    },
+    {
+      "path": "src/mvdm-host/wow32/fastwow.h",
+      "sha256": "8a1d959854751dcba6a8b9f624e28d92b41836ded4b406968de34f9a18852608",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/mvdm-host/wow32/mapembed.c",
+      "sha256": "21e5b1811d8be25289c87c4934edcb6738315049dae15a974daa6a6a8f0a8381",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/waccel.c",
+      "sha256": "b3677ef2ad59ae352ff4cb9fcbc8ef0cf0daa35933773274803c0983ab9d312e",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/wow32/walias.c",
+      "sha256": "13297f6adb9a720d9600e124e014b0102b352ddabbc063d7e6de28b9efd8f2c6",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/wow32/walias.h",
+      "sha256": "2782af53c411b739cc921b625b3a439df8b5bd33fb10fecf1ab23cc267f9462f",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "sha256": "e5234fca6a99ea1e66e9a2ab663c9020ff039e9a3fd170b802fd4861037e015e",
+      "classified_excluded": 9,
+      "found": 9
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcommdlg.c",
+      "sha256": "2ee34b92c91450d654f867e68ba792cc8ad3f9981850579b5e305381eaf533b0",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdib.c",
+      "sha256": "88ba7a3bbbd31154db9a509bf8b221eafc2d92af5417d0400ba8432387596942",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdos.c",
+      "sha256": "84f2c81add639d10c4b7274271b24e15508e65231872b508d0c774c696dd2219",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgdi.c",
+      "sha256": "dee0a0ecf5f73c013dc97d2cbaf12b85a56257038d3ce98e4a31ac11363bfa75",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgdi31.c",
+      "sha256": "10f6dd949339834b89e9347e50be30e6edfa78fae1d97624c3ffd5c5e794b931",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgmeta.c",
+      "sha256": "5612e2444464131427cfa33d6417a4057c099ab5ac0e684fef26f9527b296cf8",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgprnset.c",
+      "sha256": "ce61c0d318227aa3cc0d9cf453ac5cd88f8b49c7e7caff8eac7508f753113b86",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgtbl.h",
+      "sha256": "d848bc3fe0048aed0b4136512addd0f35b60322d2b63d7670dadee2b108eb7e9",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wheap.c",
+      "sha256": "087f929d0cbaa781849d4021ca6d9ed5afa5c0711b85b1c162102252108806cd",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkbtbl.h",
+      "sha256": "87fc3f1fdb63425861abbeea075a5cec5872b16bf023062a76678543262dabd6",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "sha256": "dc7083ca45c5d1f4f94ee7c07b2d87532e541dd2c0a259fd3cbf4dab9628aa2e",
+      "classified_excluded": 5,
+      "found": 5
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkfileio.c",
+      "sha256": "98ea817ace9cfa89418364c3935127ac6187ac1f6f8a8cb3d4f6ca2e1df93c12",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkgthunk.c",
+      "sha256": "68d0b83670589ca41c93aff76b03f7078f41a6aaaabf8a80463ea46d68c816aa",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "sha256": "1ce2e889b62d48130d99ac4e2ef80caa372efb82f71f2a107c799963e810ed2a",
+      "classified_excluded": 24,
+      "found": 24
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkmem.c",
+      "sha256": "4bbefbadaf423cfca5429b98fbb541fb9c84c6996b3e5c54b002d8c0adf96087",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkmem.h",
+      "sha256": "b5dfa8bba416e5be06599b09e21e4be922ffe00666b9e678ce298a719c7648d2",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wktbl.h",
+      "sha256": "292cbefc0c53e70039554d69d2b4ede507cc2c43e65f5cbd93e89537d1e11c0a",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "sha256": "2e648413b9f66bebb3217242cdcf5c74751c700d32e431b67901cb07ee6cf638",
+      "classified_excluded": 11,
+      "found": 11
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.h",
+      "sha256": "6652508bea431d3a115a5e68ad7e7d749089df58ba631f3a0e4482980cfbe187",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "sha256": "5b62144e8c93a794f7f64015517aff6d4654e020467a29132ad291a06b6a800f",
+      "classified_excluded": 10,
+      "found": 10
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.h",
+      "sha256": "7b9696ef8c12eaf2b917d6fd4c187426bdd7fdc258d77acf47f4984351ad42ac",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmedia.h",
+      "sha256": "4ae8c257ddae40dbc4be3660a6feed2d40de31c03e4f842b5c3bd4ca9ff52d44",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmedia1.c",
+      "sha256": "5f05fbe4943789d44b22c05f49f85cd4ca55fbbb340a6226adcc8d2e9a8795c5",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmedia2.c",
+      "sha256": "077191aa635f549fea29d453a9bf83a2bf6a0cf9b336a5d90ea72456f7193b82",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmstru1.c",
+      "sha256": "d97da12dff4e5c770a140ac68ceb000c8ea4bc14c201010a517c403e098cf525",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmstru2.c",
+      "sha256": "65e3db557ec21b82111532a0fa239c3802e03d53eefef2acf5ada8b82fdc7dc6",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmstruc.c",
+      "sha256": "992629a1e93a0b558b1b5d052b855f96f56367ff138ac40494153ab977881221",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmstruc.h",
+      "sha256": "7938034986ce5547725f9a1056f211310d3e6d0cca686dc3cf0f2d0a92e8bc15",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmtbl.h",
+      "sha256": "dd57825df62f5ff0a0280ec10cacbbed4cf4645cd15f2086d65ab36ef3467f07",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsg16.c",
+      "sha256": "fd125d80a62ad1307a9fa5f723c6bb4cf1b57cba35b1aaa80c67b62e81effda5",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsg16.h",
+      "sha256": "fea2358d3826640f1edfb17f24f3bbf39df713fbd0fe3208f03c184896a81b09",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgbm.c",
+      "sha256": "52fd5d7707b47d7d9ad99343c65f167d70e4fd15b0701a659ecbdf223d353356",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgbm.h",
+      "sha256": "335941f4ec8178aec2a738672a583a9ce90a2bb6473912bcd138dfb9a99f70ef",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgcb.c",
+      "sha256": "ddf674c72fe21108b2114e18b8a490901b67cd1743c7e37dae5971c285d3f346",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgem.c",
+      "sha256": "4369133404e654d8fd80c8fd1a293c5d230cb9471345da47974a40cebe966ff1",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsglb.c",
+      "sha256": "410569f80665c3eea87bba3cde6a8265647f9fc123ace234596f6e396c3c64e2",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgsbm.c",
+      "sha256": "7932d60818f79517f1de608ba021dd4d6d2aa2c9d1ef748ca30a7cf972b402af",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmtbl32.c",
+      "sha256": "64c6a20a35d69b9b26b04f72b1174c8440cb41d3ced37d5419e057a5dab454b6",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmtbl32.h",
+      "sha256": "f3634dc1bf55e7441f3108f56775a0ff986ed34e5b41197b7dbe68ed9ee6f24d",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/wow32/wole2.c",
+      "sha256": "54366e8dd55e18486094245d4d46fbc686a1a67c3f53e03aa3ac291278f9f146",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "sha256": "582f3a8ea5599cc9c0866fbdc6b6dcc0fbf8f9ce574f14d3feeda9f5ab95c5da",
+      "classified_excluded": 42,
+      "found": 42
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.h",
+      "sha256": "e160f50f8405d6302decec1ff46ff03c4a59f3a39cac8bce5a7d05e2581527cc",
+      "classified_excluded": 25,
+      "found": 25
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32fax.c",
+      "sha256": "289bc523ff8074bcf77d29b5404a706024ecfca81fdcdaf43f0673e98aac3a4a",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowhooks.c",
+      "sha256": "b401f6ce0464288e139ef3420f7a368ec02c9f5aa8fa77b6cf23eae3aa4465fb",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowtbl.c",
+      "sha256": "0fedfaf8c7ca77b7e8781717046ea211fc805627dc45bdc8c5f2c7acf524e2db",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowtbl.h",
+      "sha256": "6f0847322a1151fdce4f7dbc9aee24d4130358804259d9b10804ef96bb1c01c3",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "sha256": "34f7db5e3da071fbd15be8faf882422e4b5a24b27bf4abf4e123b79245a7323e",
+      "classified_excluded": 8,
+      "found": 8
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.h",
+      "sha256": "b667bafe7e4af4c42cd0d9d4113d1836f4c0bf7b0bf18bb930868d504750979c",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wres16.c",
+      "sha256": "822f6a9f232eadee4a6f8d3b12a3bc49f43e5c85d85c2574a328ec97f5ad1f9f",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wshltbl.h",
+      "sha256": "9c59d43c215d182bcf9edbeebe4f963db44d9d63c43464f25a6e4faf1a365247",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsocktbl.h",
+      "sha256": "128f2f07c612caf322e7134a77d3f6f6a889e819d664f014f0ffd91511100c9a",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wspool.h",
+      "sha256": "ef4c59e0e10a266f72e4bf4080ceb7429b17cf62b33086345d9c981eb761dc37",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wstbl.h",
+      "sha256": "8b83f7ee7f034df24996a7bc16874d5371b4186b07daf4daae8e6bac129cc136",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wstruc.c",
+      "sha256": "de82d10775e90274f9fd2fa0aec330f564c65b730abb892ab97a23b947091ffc",
+      "classified_excluded": 5,
+      "found": 5
+    },
+    {
+      "path": "src/mvdm-host/wow32/wstruc.h",
+      "sha256": "3ceffb625000f2546954f135cb8c13cb35f2e1a55347ec75cc533a583220f808",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsubcls.c",
+      "sha256": "e75b7cae0844a4503d1bf281e14393b9552ae495ef069f6c86366f59baa38c2b",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/wow32/wthtbl.h",
+      "sha256": "aeb4b3a9af904b6591f8df1955bad4d42dc6b0f4234e6cc5fcde8c541b1dae6a",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "sha256": "25165d4311060229d4792ff598b1bc66971b9f369777df28df0131117f4736ce",
+      "classified_excluded": 9,
+      "found": 9
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclip.c",
+      "sha256": "2d4b1ea2d876fcf1f2d3e26d7464814ead9c9b49a27b0a6cccf01fcebdbb5a94",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wucomm.c",
+      "sha256": "db0b755c83fccedc8a5c935e72ba12569d723df99f05986ed171e5dffe4214f2",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/wow32/wucomm.h",
+      "sha256": "a35cc588a1844c80f5818cc8ddcdde8f6dba64815d13393cb5cb6d6ad66512c2",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wudlg.c",
+      "sha256": "4e662a804b0ce6df9c11a30f6d510f8f50b7292321ca1d6c983d003c84a3711f",
+      "classified_excluded": 5,
+      "found": 5
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuman.c",
+      "sha256": "21f9af0dc34e639011eb90833e9d001e8dc3affe35ed31ca9e0d7303059eaadf",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.c",
+      "sha256": "bd8a84e403082ed9305b0f0051a5536a11f4e786713da2bb903e9b8dd4e2ba60",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "sha256": "5974aa25b4052803af37efee3fab2a0a3c9f32ce8e3baa3fbfd1492c5bd23353",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser31.c",
+      "sha256": "7f709e732b386efe708a28fcf705f429a137ccff2968d786a0efe9d72748a6dc",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/mvdm-host/wow32/wusercli.c",
+      "sha256": "265db11048df58488afa75b2d352355b1e6077841ab5bd0a8906ee63dcc7dfe9",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wusercli.h",
+      "sha256": "3fb024c93755563fb20cf94c0b4f10674970b5866a053ebd30591c68c92872f3",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wutbl.h",
+      "sha256": "cf01d59ab4dd25a74d67d00522ea859e5fa80fa575921671f9845c8e1da656d3",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "sha256": "a745afa2eb4179290b1db7c60c401f4874abf4b8de42bd0ffbcc18912aedf66c",
+      "classified_excluded": 8,
+      "found": 8
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "sha256": "6cc99e7bb7d7833b7f1b7475b97734830d3b7c395b22d1715b22fc787360b45f",
+      "classified_excluded": 7,
+      "found": 7
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsa20.c",
+      "sha256": "7ab0eb6d96560ccf4a7b8b5999d7f35fc301c923df2e6a7c6904dc5b74f6f929",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "sha256": "468a42c537dd5733b02dbf276bc1d49f000a5fab55e43d7403ed7e1439d2c04a",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsdisp.c",
+      "sha256": "f44b2c9cc2b4730f385e75694e83f0106a69cf399eac010da406fb0273d2212d",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsmemr.c",
+      "sha256": "aa83a34124d03d20a7979a79f7729a4d3c452ab9f4fb423b0e76ba3e56d37a44",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/ex/probe.c",
+      "sha256": "44053c4322b7dca6585e214285c7a5af6c1daee976b5a7f8b362bb979074209e",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/environ.c",
+      "sha256": "ea3a19b4cda1177297e2ec5d60d03bdc737aa38773698e81ed8755f6d5c67cf1",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.c",
+      "sha256": "1bbed0c19ef908b0e2a3145f8b47e8936597d39e06ed9282bd0058499d75f439",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/time.c",
+      "sha256": "8f14556a857abafc09bb1f56a02f018e04d1dee44b941444a8e5f3c4bd7dee6b",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "sha256": "06995f4ee3203dee288d7ee867b51b10333b48f6a1e9f9799ed9a742a96aef13",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/non-mvdm/base/win32/inc/base.h",
+      "sha256": "1ad50440e5ed8638de2a8426599bb524917444362cbe7e09eb6cb08eb8fd6571",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/basesrv.h",
+      "sha256": "2f45f0da601a5fef3f73c8f7808b3c1bdb147501b205545dd1cc272306675625",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "sha256": "7b37eb1ac88922a8ba0ff6106cb71f8d31697c04db95a38fef61f98140985cac",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "sha256": "62bf79c38fef56c60916ae36d4ea719b06a06873c88ea7cc361d41143cb0fcc0",
+      "classified_excluded": 7,
+      "found": 7
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+      "sha256": "a07a7fd2127ca6068ccdc31c9c079e1a0208d703eee6d5524a9416923750ede9",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "sha256": "8f793e4ef97e20cd9ed0e1ef35c39a94ef2745e4cf0122af182d56a61cf2baad",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/convert.c",
+      "sha256": "686fd07ff9b29e16e5600f24166aeb5f4ced4e0081f1555557c52e57523e94b1",
+      "classified_excluded": 7,
+      "found": 7
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "sha256": "43b6bc88920ff1a71046b42827065b25b45c277af010f903a13a4b393a9ed82d",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "sha256": "631162e50772f92b2526660245630bc178a3bb501cb6a92bb58f7605e76add83",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.h",
+      "sha256": "6cc4032705392183a1c5d38756b09dd70a3088fef421140f9ae3d26a7afe9867",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/non-mvdm/private/inc/dlcio.h",
+      "sha256": "b14a97c6c265598a24f96eb5fbde47853e3da7ad6ab22585cd1d657418347e00",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddbeep.h",
+      "sha256": "614f80ea9f69baecd162d7c727fe85054774974f13610dc94f7ea16d2d990ed5",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddkbd.h",
+      "sha256": "b395238663867747ea1032f19fcdb7ae919c7a859fd827c814abb70f2e1ee472",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddser.h",
+      "sha256": "d993fbfce54cfc3cf05fff55e59ce9331499491fe04035e7d6317a4be3f67735",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+      "sha256": "d44312ef1b0a3200051fc9fc27b3e1ded47b47eae8a6b2cff9baa126bb18f36a",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/align.h",
+      "sha256": "ab9c4ec4eb93424ca48ec557c13c66eb607a169260a0d4ca5efc1bb546e399f3",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbgtpt.h",
+      "sha256": "4b22eca70addbdfb0472e71ed0adfcfccfe846891af8863d3bb151c476716736",
+      "classified_excluded": 40,
+      "found": 40
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbmacro.h",
+      "sha256": "b8d477fc44cba472316e1bc9fe06dddc366960b5aa896d888bd0344792e30157",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbtypes.h",
+      "sha256": "8e8d555ed6877abe8aeb6e5e41e0061420764996617d372812d083e8508ffd12",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tstr.h",
+      "sha256": "e60bcda62151ea735f3d18d731a2d6da3be70c06fcb4c8c849943fa68f75292c",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "sha256": "46cde6f9ec047b4f5614fa8645ca009b7c038baaa0b639ed428c441c3e5abee8",
+      "classified_excluded": 5,
+      "found": 5
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/debuglib.h",
+      "sha256": "9650c3c246f82bc14c769189cc7f59aa702c8327b28da8e17a6825b7709c8914",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netdebug.h",
+      "sha256": "fa8fbaa548b0bc86126ac8b612bb0239f5d9be1f7ddf0cef0b853dd8cb149725",
+      "classified_excluded": 13,
+      "found": 13
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+      "sha256": "81e29a78112c13ea9fe9d285a9c03025cf876e076e98160c074dc01025f5dd71",
+      "classified_excluded": 5,
+      "found": 5
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlibnt.h",
+      "sha256": "d3b325d11e1deb0963efb3722c3add63a335452a227183b1187d9802692cc9c9",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rap.h",
+      "sha256": "4c54f51c544841e51b1b16781d7ab6fd156b156d98b9e947a6ab80ba7c7c2426",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rapdebug.h",
+      "sha256": "e75948dc2d8a6f94016c0aa3d2656f1a5eee774c97049ea7cee6466a8961e341",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/timelib.h",
+      "sha256": "2fd1270833ea0b825ab7443799b5cd86620d5146fed8034566dc5b2febddc059",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/xstypes.h",
+      "sha256": "12e60822cae0d06af26bb740113d0020111cdad4adf194f504a9640213723cf9",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "sha256": "1633d18b84205a1dd96a1730017261ca141b4f669fade1356ca575f90eeea122",
+      "classified_excluded": 7,
+      "found": 7
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/winconp.h",
+      "sha256": "9541cdd461cf1417749f18633965b2086bb59b21851a50aef84aef72054bb9f9",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/winddi.h",
+      "sha256": "9572d77cf8c9b94cd999b18d20e0a77597e1b3dd13285864bb05328f0a0fab9f",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+      "sha256": "71f027cf03fdc00b246770d8a5ee16f8bf7b2603d4807f41bc55688b9a4a0328",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/dlcapi.h",
+      "sha256": "46626c141240eb45934df272e3c174e3173e32412f4c19891056acdb2d33a716",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "sha256": "3a527fdf6274b858201f4f8729c74867cfad1b40799b50e29e937b89e6cdb1ab",
+      "classified_excluded": 9,
+      "found": 9
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "sha256": "58b390e7ecc062b2a01bc76a7c3abd570a82f44787dad1ceb55ba5eb1f4a9c5c",
+      "classified_excluded": 5,
+      "found": 5
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+      "sha256": "51e043c613163927f1edd896032ab18693276f936a741410f42e71b526d8f045",
+      "classified_excluded": 5,
+      "found": 5
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+      "sha256": "d25bb8f24789c19a6d4499fc0f7c84d3adac70413ef9ca8ed47ee92da215250f",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "classified_excluded": 9,
+      "found": 9
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+      "sha256": "49a5c12ac3f61bfd59d8f8d4dffaf50e5cf2fb8c8a3325c084b2fced9cc3971c",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+      "sha256": "896f3a004fc74d626e4010479ecc710db1847ee86a2955f7c4c822070d687494",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+      "sha256": "99fa1a275ea559b9630ed0798423ab9fddc739af121c7685bab01f8470ca1ecf",
+      "classified_excluded": 5,
+      "found": 5
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "sha256": "353134a2e0c43c88fd7b69db8d53ca3edc9363e68a2a4321c4c20e7745c3cf57",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+      "sha256": "092c8a21de74f7998a269811a66f1064f4bf8ce8eac5123a2b33dc305456f79f",
+      "classified_excluded": 7,
+      "found": 7
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "sha256": "a5bbfa44603c510760d005baeba2525daef972d7a9380a5e2fa3cdb1121a3e3e",
+      "classified_excluded": 16,
+      "found": 16
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "sha256": "9d09fd22d8a5047d258891b20d7583060f0287e4b24c0dd69eb9833d72ee2932",
+      "classified_excluded": 10,
+      "found": 10
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+      "sha256": "665d37b64355e9825974ab3b59a7870c7dccb1c93903b8b3a2334d42204451e1",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "sha256": "09ee1d52d500e352b027f57cb585cd91077c0693614a1259287986c710878ee8",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+      "sha256": "47d85ea9aa338c8bba1c0bab0346fdd3de12ae123d08e0d5ec60f2173c2952c1",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "sha256": "933243dec8d169d707b1c4d7bd314f309fd035d922797fcd65475a4a4c00c79a",
+      "classified_excluded": 5,
+      "found": 5
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "sha256": "4e4e2bcc90ff33aa6b8abc02f4f04f355945899d42a48156a0d1adbf1f0c87d0",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "sha256": "e9c3dc8ac2f6453d970869ef2e5007a50d914652cc615177110ccfe3ac90ab98",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+      "sha256": "67c9d0b3e2c68d3144db9953ef89d548808a240eaf88c21e65e5cbe6cab614f4",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+      "sha256": "f0f15a39cc233b6cbfb25b891af2e858f8e68eca735a5bcedf0e7396ecd7b9eb",
+      "classified_excluded": 6,
+      "found": 6
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "sha256": "fa407b77a11dddfecfbeb780140e679553f2fe8706c16adc13b25f82c1bb43e8",
+      "classified_excluded": 10,
+      "found": 10
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "sha256": "82aa1c7145f0c7857c22f06a0c8102e0141886c39647dfce7d9ff91c9e556bec",
+      "classified_excluded": 16,
+      "found": 16
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "sha256": "39b651554ffcc5a763fe7870a7a81cba99ae3f6b6066f3812df419a76372330f",
+      "classified_excluded": 14,
+      "found": 14
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edmlonce.c",
+      "sha256": "82c8d05db575da9d6e3ede1464b61a06a4f8f6aa17ecc9f1af87f605761e9ab9",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edmlrare.c",
+      "sha256": "6f580cc7ab234048548f5afb2829a519a5249c40eb6c418a6f1cec5b9e739274",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edslrare.c",
+      "sha256": "ad4c7aeb3dd736b89ae9d673057ab9169a41159e3ed4c223d81a96ee950eb2a8",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+      "sha256": "cf5b2b70ab27fecbdb7ff787e39a53c1982a01d2d25f45e351fe87d0cbc43995",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/handles.c",
+      "sha256": "188cf5ee53e4c32e591fac8e4aea93b09de736789328ed921423e590e8763e17",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl2.c",
+      "sha256": "495380be7c339b629f4eb543e34765c350c75e815b7743d88deff19c02e8da48",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
+      "sha256": "54d79ac2804e45da36760642a2d7af0c807cd119a65a228fd41ba23894bad078",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxrare.c",
+      "sha256": "4386d23269e920e2e883cd86f8136a495e8de79a9e6cb8b0f7faa36b82ce3796",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "sha256": "9b2713753efec2cd80c7d9cb25a283702169c66ea5c42b2837be8530964a3de2",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "sha256": "d4eead5ec6a4d2578db998685d6a0a176bc82cc907883eee11c4a8d7bdffae23",
+      "classified_excluded": 16,
+      "found": 16
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "sha256": "12fa8eb89d46fbb36abb4c6b0c88cfdbe9dde3463525780053eb333849b52a99",
+      "classified_excluded": 4,
+      "found": 4
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "sha256": "8cfe506634485fc2c11620f397c848450f9be7e45ca81afc58e79965ed6c7891",
+      "classified_excluded": 16,
+      "found": 16
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "sha256": "bfd2af514bb86619de9c20af416898b65e52ce4a8db8885135d7d4f9fb3a2b94",
+      "classified_excluded": 12,
+      "found": 12
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "sha256": "af265fc49e2fe5d9663560ef8a53a7474f18f0dac150bf6a4ee1b6141527e3cd",
+      "classified_excluded": 23,
+      "found": 23
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "sha256": "e7cbc1b7500ffc67bedc871c58c50e7781ff34391e3652b7590573d9fe206f16",
+      "classified_excluded": 22,
+      "found": 22
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "sha256": "48228ae52600fd1b777a6100254c70c6f6dfbcb31b0c91d34dd72bc55c3e2add",
+      "classified_excluded": 2,
+      "found": 2
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+      "sha256": "f233bda073e53e44e91c1eeae4c78b4afe0e238e17f476ab3f79f985b241ce40",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+      "sha256": "85faf2effa8c00a0fad977e23974d581e942a3ec510f77424a2c5eefad2e1464",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "sha256": "86455addef0d7c1e23e876e288e80d1eba31770c49fd15f5b35b4143e29b1a9d",
+      "classified_excluded": 6,
+      "found": 6
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "sha256": "1d3e06a8bbd902687e5aa4231e85bfb99eaebe0dc0a07b54e0eb33fb784cae9a",
+      "classified_excluded": 29,
+      "found": 29
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+      "sha256": "a4f04cdfa139c78bc761b5e78b39c727a128549b2702e9a7098d22b07dd38aeb",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "sha256": "6be9e92da0209bbaeae041d25b584ed42ee52ff492ba0b1b378c3a856ae64a6f",
+      "classified_excluded": 25,
+      "found": 25
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "classified_excluded": 73,
+      "found": 73
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+      "sha256": "6aac8d470176783b6ffaf1eff1e4af5a83d7b5aa265488b9733ded05165e9cc1",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "sha256": "83c7db3c8d115ecc44ffd49328c534badd98e9d23dab59532815c0a3af7c1a07",
+      "classified_excluded": 24,
+      "found": 24
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/random.c",
+      "sha256": "7ed9b09c117a0f703e3cd4d80ba36ddb0219930e1b74765f289333942b2b2291",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "sha256": "170c4933ba983fa3fe941ddf91dbbf2b8483830b1cccdf80798e020c5aa6b3cb",
+      "classified_excluded": 14,
+      "found": 14
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "sha256": "cd42111cedcc41c994c465fa4abfc9f2c7d83a283464dd98a561787e9353d0a1",
+      "classified_excluded": 37,
+      "found": 37
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "sha256": "de94ce38c9cd095af7535c3c957ab30a49acc56b5b5500dad592d250ebc02c9d",
+      "classified_excluded": 15,
+      "found": 15
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "sha256": "c42964ed702de00fc96322d76922bca0e34bad7ae7b306885ecd5b36de5b7988",
+      "classified_excluded": 1,
+      "found": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "sha256": "607f45d960e69da00470820ed0f2bd8337a17caab0815776d00cd4852e488eae",
+      "classified_excluded": 12,
+      "found": 12
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "classified_excluded": 3,
+      "found": 3
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "sha256": "8c677e6104dee8b06268c77688f0286e1095caccceb1e04d58c6d0fe4323b033",
+      "classified_excluded": 6,
+      "found": 6
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/server/exports.c",
+      "sha256": "d97433a478d69f07677b4bf33fec6e5158f3453fa94630805e277ae30ed5c2f5",
+      "classified_excluded": 1,
+      "found": 1
+    }
+  ]
+}
