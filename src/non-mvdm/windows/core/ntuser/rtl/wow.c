@@ -11,6 +11,24 @@
 #error Excluded unsupported original 16-bit WOW source branch
 #else
 #line 109
+
+//**************************************************************************
+// Stuff used when building for USER32
+//
+//**************************************************************************
+
+#define ClientSharedInfo()  (&gSharedInfo)
+#define ServerInfo()  (gpsi)
+
+//**************************************************************************
+// These definitions get resolved differently for USER32 and USER16
+//
+//**************************************************************************
+#define LPPOINTWOW                LPPOINT
+#define NORMALIZEDSHORTVALUE(x)   (x)
+#define WOWlstrlenA(x)            lstrlenA(x)
+#define WOWRtlCopyMemory(lpDest, lpSrc, cb) RtlCopyMemory(lpDest, lpSrc, cb)
+
 #endif  // WOW
 #line 128
 
@@ -26,6 +44,24 @@
 #error Excluded unsupported original _USERK_ desktop validation
 #else
 #line 151
+
+/* !!! LATER BUG 14263 remove 0xc000000 check */
+
+#define DESKTOPVALIDATE(pobj) \
+                                                                \
+    PCLIENTINFO pci = GetClientInfo();                          \
+    if (pci->pDeskInfo &&                                       \
+            pobj >= pci->pDeskInfo->pvDesktopBase &&            \
+            pobj < pci->pDeskInfo->pvDesktopLimit) {            \
+        pobj = (PVOID)((PBYTE)pobj -                            \
+                pci->ulClientDelta);                            \
+    } else {                                                    \
+        pobj = (PVOID)NtUserCallOneParam((DWORD)h,              \
+                SFI__MAPDESKTOPOBJECT);                         \
+        if ((pobj == NULL) || ((DWORD)pobj > 0xC0000000))       \
+            return NULL;                                        \
+                                                                \
+    }
 #endif
 #line 170
 #endif
@@ -33,6 +69,7 @@
 
 
 /* OPENNT-HOST-106: complete original relationship/coordinate leaves. */
+#line 682
 BOOL _IsChild(
     PWND pwndParent,
     PWND pwnd)
@@ -98,6 +135,7 @@ BOOL _IsWindowVisible(
     return TRUE;
 }
 
+#line 769
 BOOL _GetClientRect(
     PWND   pwnd,
     LPRECT prc)
@@ -153,12 +191,14 @@ BOOL _GetClientRect(
 #line 244
 #ifndef WOW
 #line 245
+#pragma optimize("t", on)
 #endif
 #line 247
 
 #line 344
 #ifndef WOW
 #line 345
+#pragma optimize("", on)
 #endif
 #line 347
 

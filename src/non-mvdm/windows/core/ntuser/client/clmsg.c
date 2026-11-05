@@ -46,6 +46,7 @@ DWORD GetCPD(
 #pragma hdrstop
 #include "wow_default_window_bindings.h"
 
+#line 555
 LONG DefWindowProcWorker(
     PWND pwnd,
     UINT message,
@@ -142,6 +143,7 @@ LONG DefWindowProcWorker(
         /* DIVERGENCE(OPENNT-HOST-089): a WM_MOVE callback can destroy the
          * native window; retained copied WND storage does not pin its HWND. */
         if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return 0;
+#line 647
         if ((ppos->flags & SWP_STATECHANGE) || !(ppos->flags & SWP_NOCLIENTSIZE)) {
             UINT cmd;
             RECT rc;

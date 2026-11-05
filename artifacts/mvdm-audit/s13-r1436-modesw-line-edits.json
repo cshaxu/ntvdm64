@@ -1,0 +1,35 @@
+{
+  "path": "src/mvdm-host/dpmi32/modesw.c",
+  "before_sha256": "b2c55d18e95d67d3db4bfa07f01849854d8b29172e804ad93dab8b1e8efae682",
+  "after_sha256": "c2029f913b9bec659a078fb64c7dadb1ec6a7ecb37e590f9750cb8d100f14b98",
+  "anchors": [
+    {
+      "original_line": 64,
+      "text": "setCS(DosxRmCodeSegment);",
+      "context": "retained original statement repositioned after CPU40 PE transition, local DIV-242"
+    },
+    {
+      "original_line": 76,
+      "text": "VOID before DpmiSwitchToProtectedMode",
+      "context": "original function declaration"
+    },
+    {
+      "original_line": 68,
+      "text": "#ifndef i386 for original real-mode segment-cache behavior"
+    },
+    {
+      "original_line": 114,
+      "text": "#ifndef i386 for original protected-mode segment behavior"
+    },
+    {
+      "original_line": 52,
+      "text": "#else of first original i386/non-i386 group"
+    },
+    {
+      "original_line": 100,
+      "text": "#else of second original i386/non-i386 group"
+    }
+  ],
+  "remaining": "Entire-file condition and diagnostic audit still in progress. Part of next ten-source build batch.",
+  "limitations": "Line anchors are source-derived; post-edit compiler preprocessing, negative controls and full per-file diagnostic evidence remain pending. Existing selected CPU40 adaptations are not changed."
+}

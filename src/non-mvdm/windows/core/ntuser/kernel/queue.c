@@ -122,6 +122,7 @@ void SetAppCompatFlags(
         if (UT_FastGetProfileStringW(PMAP_COMPAT, szKey, TEXT(""),
                 /* DIVERGENCE(OPENNT-HOST-054): cch is WCHAR count, not bytes. */
                 szHex, sizeof(szHex) / sizeof(szHex[0]))) {
+#line 608
             UNICODE_STRING strHex;
 
             /*
@@ -143,6 +144,7 @@ SACF_GotFlags:
 
 }
 
+#line 658
 NTSTATUS xxxInitTask(
     UINT dwExpWinVer,
     PUNICODE_STRING pstrAppName,
@@ -155,6 +157,7 @@ NTSTATUS xxxInitTask(
     DWORD dwYSize,
     WORD  wUnusedAndAvailable,
     PTHREADINFO currentThread)
+#line 669
 {
     PTHREADINFO pti;
     PTDB ptdb;

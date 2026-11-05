@@ -1,0 +1,9 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+  "before_sha256": "85faf2effa8c00a0fad977e23974d581e942a3ec510f77424a2c5eefad2e1464",
+  "after_sha256": "b42d5c29b94789df14fddcf2960a657d216a41d350908c8d496dd864ef05e284",
+  "edit": "Restore original body line 511 after the extra project-owned currentProcess parameter.",
+  "evidence": "Actual x86 preprocessor previously showed original body statements 1 line late; original/current function body comparison differs only in this parameter and PpiCurrent() replaced by currentProcess.",
+  "condition_boundary": "Original #ifndef LATER branch belongs to a separately omitted function; retained file-scope shell has no body and cannot be treated as an original-branch hit. See s13-r1363-empty-branch-context.json; do not assert complete file review.",
+  "status": "Pending ten-source batch compiler verification."
+}

@@ -1,0 +1,17 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+  "before_sha256": "a5bbfa44603c510760d005baeba2525daef972d7a9380a5e2fa3cdb1121a3e3e",
+  "after_sha256": "b4934bf910a7914ee9f30e043a952d0f0e8a604c3a7476c87a3134ef74cfc539",
+  "anchors": [
+    {
+      "original_line": 555,
+      "text": "LONG DefWindowProcWorker("
+    },
+    {
+      "original_line": 647,
+      "text": "        if ((ppos->flags & SWP_STATECHANGE) || !(ppos->flags & SWP_NOCLIENTSIZE)) {"
+    }
+  ],
+  "scope": "Retained original default-window function declaration and continuation after registered destruction-check adaptation. Existing original DEBUG/FE exclusions reviewed against branch checklist; FE_SB empty shell alternatives remain subject to omitted-body review.",
+  "status": "Ninth modified source; no post-edit compile yet."
+}

@@ -79,9 +79,11 @@ void AddAttachment(
     }
 }
 
+#line 5044
 void Recalc2(
     PQ pqAttach,
     PTHREADINFO ptiCurrent)
+#line 5046
 {
     PATTACHINFO pai;
     PTHREADINFO pti;
@@ -147,6 +149,7 @@ void Recalc2(
 
 /* DIVERGENCE(OPENNT-HOST-058): original queue selection; explicit thread
  * context is passed through to Recalc2. */
+#line 5110
 void RecalcThreadAttachment(PTHREADINFO ptiCurrent)
 {
     PTHREADINFO pti;

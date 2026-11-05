@@ -33,6 +33,7 @@ Revision History:
 #endif
 #line 143
 
+#line 146
 #undef ProbeForRead
 NTKERNELAPI
 VOID

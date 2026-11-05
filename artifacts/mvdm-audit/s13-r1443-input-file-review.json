@@ -1,0 +1,21 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+  "before_sha256": "6be9e92da0209bbaeae041d25b584ed42ee52ff492ba0b1b378c3a856ae64a6f",
+  "after_sha256": "d9a3a1fd5a8a00b0af2a3a673115c10d458730370b85f53bab6cabd516d9ac81",
+  "anchors": [
+    {
+      "original_line": 5044,
+      "location": "void Recalc2("
+    },
+    {
+      "original_line": 5046,
+      "location": "    PTHREADINFO ptiCurrent)\r\n{"
+    },
+    {
+      "original_line": 5110,
+      "location": "void RecalcThreadAttachment(PTHREADINFO ptiCurrent)"
+    }
+  ],
+  "condition_review": "MARKPATH alternatives and disabled branches checked against existing s13-r1308 list; original FE_IME empty else is attached to omitted code and still pending contextual disposition.",
+  "status": "Eighth modified file; post-edit compiler verification and full per-file closure pending batch build."
+}

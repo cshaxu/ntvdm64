@@ -1,0 +1,21 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+  "before_sha256": "83c7db3c8d115ecc44ffd49328c534badd98e9d23dab59532815c0a3af7c1a07",
+  "after_sha256": "2c4560861381157e03971f039d2b8b44112b363a1d76c80b39c61b91ee7b143a",
+  "anchors": [
+    {
+      "original_line": 608,
+      "location": "            UNICODE_STRING strHex;"
+    },
+    {
+      "original_line": 658,
+      "location": "NTSTATUS xxxInitTask("
+    },
+    {
+      "original_line": 669,
+      "location": "    PTHREADINFO currentThread)\r\n{"
+    }
+  ],
+  "conditions": "DEBUG/DBG excluded guards and selected DEBUG alternatives are recorded in s13-r1308; three FE_IME empty alternatives refer to removed code and remain pending context verification.",
+  "status": "Seventh modified file, pending batch compilation and compiler line verification."
+}

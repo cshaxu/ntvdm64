@@ -1,0 +1,12 @@
+{
+  "path": "src/non-mvdm/base/ntos/ex/probe.c",
+  "before_sha256": "44053c4322b7dca6585e214285c7a5af6c1daee976b5a7f8b362bb979074209e",
+  "after_sha256": "9333b95eb5a15d4bb07383ea121feaff594d08ed00044bb6d40799ac2f15cff0",
+  "anchor": {
+    "original_line": 146,
+    "text": "#undef ProbeForRead"
+  },
+  "reason": "Observed production preprocessor lines in ProbeForRead were two lines earlier than the original due to subset boundary; original source places #undef on line 146.",
+  "condition_boundary": "The Alpha conditional shell belongs to omitted ProbeForWrite; selected non-Alpha shell is not evidence that original function was compiled. Do not claim full file closure.",
+  "status": "Tenth modified file; pending batch compilation and line verification."
+}

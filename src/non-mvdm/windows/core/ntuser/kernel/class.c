@@ -21,6 +21,7 @@
  * explicit current-thread and required registration/CPD boundary bindings. */
 #include "wow_class_register_bindings.h"
 
+#line 80
 ATOM _RegisterClassEx(
     LPWNDCLASSEX pwc,
     PROC lpfnWorker,
@@ -29,6 +30,7 @@ ATOM _RegisterClassEx(
     DWORD dwFlags,
     LPDWORD pdwWOW,
     wow_class_register_context *context )
+#line 87
 {
     PCLS pcls;
 
@@ -85,6 +87,7 @@ BOOL _UnregisterClass(
     HANDLE hModule,
     PCLSMENUNAME pcmn,
     wow_class_remove_context *context)
+#line 504
 {
     ATOM atomT;
     PPCLS ppcls;
@@ -146,6 +149,7 @@ BOOL _UnregisterClass(
 #define WOW_ORIGINAL_CLASS_LOOKUP
 #include "wow_class_lookup_bindings.h"
 
+#line 891
 PPCLS _InnerGetClassPtr(
     ATOM atom,
     PPCLS ppcls,
@@ -185,6 +189,7 @@ PPCLS _InnerGetClassPtr(
                        and LoWord is 16-bit hInstance
 \***************************************************************************/
 
+#line 930
 PPCLS GetClassPtr(
     ATOM atom,
     PPROCESSINFO ppi,

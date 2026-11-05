@@ -1,0 +1,45 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+  "before_sha256": "e60e708ba0b2900aa052153adf1e78d3f71d27d24e665cf1d77feac33bab1769",
+  "after_sha256": "223e437f069bf601aa83b713cf848f939b228c36a58bba5130cfef53b69fbf16",
+  "anchors": [
+    {
+      "original_line": 64,
+      "text": "#ifndef MONITOR"
+    },
+    {
+      "original_line": 152,
+      "text": "        if (pm && (addr == 0))"
+    },
+    {
+      "original_line": 159,
+      "text": "            return GetVideoMemory(iaddr);"
+    },
+    {
+      "original_line": 162,
+      "text": "        return (NtGetPtrToLinAddrByte(iaddr));"
+    },
+    {
+      "original_line": 171,
+      "text": "UCHAR *ExpSim32GetVDMPointer IFN3"
+    },
+    {
+      "original_line": 426,
+      "text": "GLOBAL UTINY *host_sas_init IFN1(sys_addr, size)"
+    },
+    {
+      "original_line": 433,
+      "text": "#ifndef PROD"
+    },
+    {
+      "original_line": 440,
+      "text": "    Length_of_M_area = size;"
+    },
+    {
+      "original_line": 445,
+      "text": "GLOBAL UTINY *host_sas_term()"
+    }
+  ],
+  "condition_review": "Original non-CPU40 descriptor body and its nested non-PROD group are under an excluded CPU40 alternative, as recorded in s13-r1360-sim32-excluded-parent.json. Retained CPU40 provider adaptations remain unchanged.",
+  "status": "Fourth modified source; compiler line validation and full branch review pending batch build."
+}

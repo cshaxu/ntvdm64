@@ -8,7 +8,8 @@
     "historical-hit": 3199,
     "current-hit": 144,
     "current-context-no-hit": 10,
-    "empty-or-structural": 242
+    "empty-or-structural": 238,
+    "restored-unverified": 4
   },
   "line_checks": {
     "error-anchor-match": 3860,
@@ -113,5 +114,7 @@
   "r1421_multihit_reviewed": 4,
   "r1422_empty_shell_candidates_arms": 156,
   "r1422_empty_shell_candidates_files": 27,
-  "r1434_dpmi32p_full_file_reviewed": 1
+  "r1434_dpmi32p_full_file_reviewed": 1,
+  "r1446_unverified_restored_arms": 4,
+  "r1446_partial_files_not_closed": 10
 }

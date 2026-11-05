@@ -1,0 +1,25 @@
+{
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "old_line": 12,
+      "new_line": 12
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "old_line": 27,
+      "new_line": 45
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "old_line": 154,
+      "new_line": 192
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "old_line": 160,
+      "new_line": 199
+    }
+  ],
+  "limits": "Restored original bodies need actual marker verification; not treated as selected until observed."
+}

@@ -207,6 +207,7 @@ Return Value:
 #line 49
 #if defined(i386)
 #error DIVERGENCE MVDM-HOST-DIV-619: unsupported i386 kernel VDM host path
+#line 52
 #else
 #line 53
     PWORD16 Data;
@@ -235,8 +236,10 @@ Return Value:
     setCPL(0);
 #endif
     mvdm_softpc_fast_bop_sync_mode();
+#line 64
     setCS(DosxRmCodeSegment);
 
+#line 68
 #ifndef i386
     /* DIVERGENCE(MVDM-HOST-DIV-230): the kernel VDM obtains the real-mode
      * hidden segment caches from hardware.  CPU40 retains its protected-mode
@@ -256,6 +259,7 @@ Return Value:
         (unsigned long)c_getDS_BASE(), (unsigned long)c_getDS_LIMIT());
 }
 
+#line 76
 VOID
 DpmiSwitchToProtectedMode(
     VOID
@@ -280,6 +284,7 @@ Return Value:
 #line 97
 #if defined(i386)
 #error DIVERGENCE MVDM-HOST-DIV-619: unsupported i386 kernel VDM host path
+#line 100
 #else
 #line 101
     PWORD16 Data;
@@ -296,6 +301,7 @@ Return Value:
     setMSW(getMSW() | MSW_PE);
     mvdm_softpc_fast_bop_sync_mode();
 
+#line 114
 #ifndef i386
     //BUGBUG This is a workaround to make sure the emulator goes back
     // to privilege level 3 now that we are in protect mode.

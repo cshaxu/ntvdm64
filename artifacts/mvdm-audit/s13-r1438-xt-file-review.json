@@ -1,0 +1,10 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+  "before_sha256": "fbd2aaa1741bccc78af08334310f01a4563a7fd452f64142488703cdc529973b",
+  "after_sha256": "8bed82996166e7577f483bcef63d29532596fb0687be2d93ace08a080c0fb996",
+  "original_sha256": "a95cda1054b1840df73dbcec6e23cacbee1ddf2fd1ed071318c8c9252f21c0cc",
+  "finding": "Actual selected x86 MSVC preprocessing reports the final CsIsBig closing brace at line 653; pinned original brace is line 652. The #line 650 inside the rejected SPC386 alternative is not processed in the selected context.",
+  "edit": "Restore #line 652 after the conditional group before the closing brace.",
+  "branch_review": "Outer CCPU/CPU30 and parity selections carry existing DIV-147/155 CPU40 ownership, excluded nested alternatives retain #error; SPC386 observed selected, alternative excluded. Original nested MAC_LIKE group is under excluded non-CPU40 body. See s13-r1253-xt-condition-review.json and s13-r1427-excluded-body-audit.json.",
+  "status": "Pending batch build and actual compiler verification."
+}

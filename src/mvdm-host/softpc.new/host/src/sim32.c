@@ -66,6 +66,7 @@ IMPORT ULONG Sas_wrap_mask;
 
 
 
+#line 64
 #ifndef MONITOR
 //
 // Pointer to a scratch video buffer. Updated by sim32 routines
@@ -156,6 +157,7 @@ UCHAR *Sim32pGetVDMPointerWithLinear(ULONG addr, UCHAR pm, ULONG *linear)
 {
         sys_addr iaddr;
 
+#line 152
         if (pm && (addr == 0))
 	    return(NULL);
 
@@ -164,9 +166,11 @@ UCHAR *Sim32pGetVDMPointerWithLinear(ULONG addr, UCHAR pm, ULONG *linear)
 //STF - need sas_wrap_mask with PE....iaddr &= Sas_wrap_mask;
 
         if (IsVideoMemory(iaddr)) {
+#line 159
             return GetVideoMemory(iaddr);
             }
 
+#line 162
         return (NtGetPtrToLinAddrByte(iaddr));
 }
 
@@ -181,6 +185,7 @@ UCHAR *Sim32pGetVDMPointer(ULONG addr, UCHAR pm)
  *  This call must be maintaned as is because it is exported for VDD's
  *  in product 1.0.
  */
+#line 171
 UCHAR *ExpSim32GetVDMPointer IFN3(double_word, addr, double_word, size, UCHAR, pm)
 {
         return Sim32pGetVDMPointer(addr, (UCHAR)pm);
@@ -343,6 +348,7 @@ LOCAL UTINY *reserve_for_sas = NULL;
 
 // Intel space allocation and deallocation control function for the A4 CPU
 
+#line 426
 GLOBAL UTINY *host_sas_init IFN1(sys_addr, size)
 {
 
@@ -350,6 +356,7 @@ GLOBAL UTINY *host_sas_init IFN1(sys_addr, size)
     if(!(Start_of_M_area = InitIntelMemory(size)))
     {
 	/* Initialise function failed, exit */
+#line 433
 #ifndef PROD
 #line 434
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
@@ -363,11 +370,13 @@ GLOBAL UTINY *host_sas_init IFN1(sys_addr, size)
        return(NULL);
     }
 
+#line 440
     Length_of_M_area = size;
     return(Start_of_M_area);
 }
 
 
+#line 445
 GLOBAL UTINY *host_sas_term()
 {
     /* Has any Intel memory been allocated ? */

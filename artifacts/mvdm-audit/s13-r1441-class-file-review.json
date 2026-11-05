@@ -1,0 +1,29 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+  "before_sha256": "48228ae52600fd1b777a6100254c70c6f6dfbcb31b0c91d34dd72bc55c3e2add",
+  "after_sha256": "4ee500ad879f8c5bd4ee4f5efb41eb1116991ed86623358cc257420ab4e75eea",
+  "anchors": [
+    {
+      "original_line": 80,
+      "location": "ATOM _RegisterClassEx("
+    },
+    {
+      "original_line": 87,
+      "location": "    wow_class_register_context *context )\r\n{"
+    },
+    {
+      "original_line": 504,
+      "location": "    wow_class_remove_context *context)\r\n{"
+    },
+    {
+      "original_line": 891,
+      "location": "PPCLS _InnerGetClassPtr("
+    },
+    {
+      "original_line": 930,
+      "location": "PPCLS GetClassPtr("
+    }
+  ],
+  "condition_review": "Original FE_SB and DBG groups and project selector variants recorded in s13-r1240-kernel-class-review.json; empty FE_SB else requires original surrounding-function classification before file closure.",
+  "status": "Sixth modified file; compiler verification pending ten-file batch."
+}

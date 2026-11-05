@@ -169,4 +169,5 @@ CsIsBig IFN1(IU16, csVal)
 #line 650
 #error DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register.
 #endif /* SPC386 */
+#line 652
 }

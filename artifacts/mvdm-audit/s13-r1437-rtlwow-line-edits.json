@@ -1,0 +1,34 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+  "before_sha256": "665764436c3d024dc5cd8a3384f6230d9960e3d01490915660c43e75bfcb552d",
+  "after_sha256": "99bdd54f34825cce6b37e43c42e7b1f58a89042bff210b84ed3dbd37ae1d1b5a",
+  "anchors": [
+    {
+      "original_line": 682,
+      "text": "BOOL _IsChild("
+    },
+    {
+      "original_line": 769,
+      "text": "BOOL _GetClientRect("
+    }
+  ],
+  "limitations": "Restored selected original bodies and function line anchors are pending the next batch build, preprocessor hit verification, semantic/binary comparison and full per-file review.",
+  "restored_original_selected_bodies": [
+    {
+      "original_lines": "109-126",
+      "reason": "Original selected branch restored verbatim; retained subset references none of the restored macro names."
+    },
+    {
+      "original_lines": "151-168",
+      "reason": "Original selected branch restored verbatim; retained subset references none of the restored macro names."
+    },
+    {
+      "original_lines": "245-245",
+      "reason": "Original selected branch restored verbatim; retained subset references none of the restored macro names."
+    },
+    {
+      "original_lines": "345-345",
+      "reason": "Original selected branch restored verbatim; retained subset references none of the restored macro names."
+    }
+  ]
+}

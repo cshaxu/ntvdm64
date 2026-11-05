@@ -24,6 +24,7 @@ BOOL xxxRegisterUserHungAppHandlers(
     PFNW32ET pfnW32EndTask,
     HANDLE   hEventWowExec,
     PPROCESSINFO currentProcess)
+#line 511
 {
     BOOL   bRetVal;
     PPROCESSINFO    ppi;
