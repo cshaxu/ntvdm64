@@ -5,10 +5,10 @@
 On 2026-10-31 the owner initially requested that the multitasking-payload project be
 added at the end of the queue; the owner subsequently moved it as recorded in
 [Queue](../states/QUEUE.md). This proposal is
-unnumbered and is not an active task; it does not change the active packet or
-authorize production implementation. A numeric T and bounded S packets are
-assigned only when the project is admitted under the then-current execution
-and source policies.
+now admitted by the owner's 2026-11-05 direction; see
+[Current](../states/CURRENT.md) and the [mainline plan](../etc/operations/m0-t479-guest-bridge-plan.md).
+Only the bounded current S is active. Side-task imports are postponed by the
+owner's subsequent clarification.
 
 The owner split the former candidate into a preceding [host common frontend
 foundation](proposal-host-common-frontend-foundation-001.md) and this guest

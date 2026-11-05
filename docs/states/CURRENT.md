@@ -2,9 +2,32 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T477 closes after S4 P1 host-foundation delivery.
-The [T477 closure](../history/m0-t477-closure.md) records all four stages,
-acceptance evidence and the separately queued guest bridge boundary.
+**Active: M0 T479 S1** - guest multitasking bridge contract and implementation
+admission. Owner defers all side-task imports; focus on the guest mainline.
+T477 is closed in its [closure](../history/m0-t477-closure.md).
+
+## Active Packet
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T479 S1; Ordinary Mode, single executor/reviewer. |
+| Admission And Approval | Owner admits a mixed T for the guest multitasking payload, then explicitly defers side imports and directs mainline focus. |
+| Parallel Task Reservation | M0 T478; already allocated in the independent mirror-source-audit worktree, recorded in the linked admission plan. Not a local active packet or closure. |
+| Candidate Proposal | [Guest bridge](../proposals/proposal-multitask-guest-vdm-frontends-001.md); [stage plan](../etc/operations/m0-t479-guest-bridge-plan.md). |
+| Objective | Resolve the actual VMM identity, BOP continuation and legal wait/resume contract for 54:08 and 54:0A; freeze the smallest guest/host bridge before implementation. |
+| Non-goals | No side-branch import now; no Windows core/immutable guest modification, hardware V86 monitor, resident DOS agent or replacement frontend authority. |
+| Reference Baseline | cd8c8583e; T477 host foundation, protocol 67 and published ten-image package. |
+| Files And ABI Surface | Project-owned VxD design/toolchain and NTVDM VM bridge; inspect cmdExec32/BOP/CCPU/VMM callers and existing frontend-base/NTSRV contracts. No runtime change in this admission. |
+| Applicable Rules | Execution, architecture, coding, documentation and source policy; original-owner recovery and explicit mirror-diff registration. |
+| Verification | Trace both launch services through host stack return; identify exact VM/context and continuation ownership; source/provenance and isolated test matrix; documentation governance. |
+| Expected Markers | Finite call-chain/ABI/lifecycle decisions, concrete component/test plan, documented unresolved evidence without success claims. |
+| Asset Needs | Existing Win3.1 enhanced/Win95 research and owner media read-only; project-owned add-on built/staged separately. |
+| Reporting Requirements | Separate calling-VM wait from whole-payload suspension; record OS-specific proof and every unsupported boundary. |
+| Stop Conditions | Unproved VM identity or continuation safety; new semantic concessions or immutable guest changes require an explicit decision. |
+| Exit Criteria | Reviewed exact bridge contract, source/toolchain provenance, implementation/test sequencing and no hidden design assumptions. |
+| Original Owner Request | Implement guest multitasking: after loading 386/VxD, cmdExec32 creates a VM frontend and child chain without suspending the containing payload; defer side tasks for now. |
+| Similar-Issue Sweep | System/pre-existing VMs, handle reuse, both command services, reentrancy, unload, completion/cancel races, nested chains and NIDDB interaction. |
+| Temporary Evidence | build/t479-s1; owner S1; 60-minute phase, 2 GiB, 15-minute no-progress review budget. |
 
 ## S4 Closure Record
 

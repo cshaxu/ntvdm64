@@ -1165,3 +1165,5 @@ the direct NTVDM composition, scoped identity and retirement contract.
 
 [T477 S3 registry candidate](evidence/m0-t477-s3-registry-candidate.md) records
 the first cached build and bounded unit verification, with integration gaps explicit.
+
+[Guest bridge mainline plan](operations/m0-t479-guest-bridge-plan.md) records admission, stage boundaries and deferred side imports.

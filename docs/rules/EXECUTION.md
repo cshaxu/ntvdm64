@@ -59,6 +59,12 @@ run/evidence iterations, not T, S, or P identifiers. Their classification and
 the Td exception are in
 [task-identifier governance](../../artifacts/documentation-archive/20260910/strict-topology/etc/operations/task-identifier-governance.md).
 
+An owner-directed parallel-worktree admission may reserve the immediately
+preceding numeric T without declaring it closed. Record `Parallel Task
+Reservation` in Current and link the inspected worktree, revision and actual
+state in the admission evidence. Only the next number at S1 is admitted by
+this exception; it never creates a second local active packet.
+
 ## Active S Packet
 
 Before source, build, governance, or documentation implementation, Status

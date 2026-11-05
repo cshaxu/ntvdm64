@@ -271,6 +271,12 @@ if ($hasActivePacket) {
         if(!$baselinePacket.Success -and $activeTask -gt $latestClosedTask) {
             $baselineAdmission=Test-IntermissionContinuation $baselineStatus $activeTask $activeS
         }
+        $reservation = [regex]::Match($status, '(?m)^\| Parallel Task Reservation \| M\d+ T(?<task>\d+);')
+        if ($reservation.Success -and $activeS -eq 1 -and
+            [int]$reservation.Groups['task'].Value -eq $expectedTask -and
+            $activeTask -eq ($expectedTask + 1)) {
+            $baselineAdmission = $true
+        }
         $reopenedTask = $activeTask -eq $latestClosedTask
         $latestClosedS = 0
         if ($reopenedTask) {
