@@ -1,0 +1,404 @@
+{
+  "method": "Hash-bound original conditional-tree and line-projection audit with per-arm ledger and compiler observations; static leads were verified as comment-only or matching another identical original line at the recorded logical position. Unobserved configurations and runtime behavior not certified.",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "current_sha256": "d9c57d64cd85cd50b0386fb65ac7988cdaf15c9906527486bfc6c3e40773971f",
+      "original_sha256": "35efd26857a3f5c7960b0890a6ec3fd778dfde7dc8e74959fd3a8e3d41db424c",
+      "evidence": "s13-r1348-strict-ready.json",
+      "prior_method": "Original/current recursive conditional selector comparison. Each excluded arm must contain only #error with original branch and continuation anchors; retained leaves match original ignoring #line. Groups with no excluded arm are accepted only when recorded branch states select at most one alternative and all remaining alternatives are excluded. Matching code logical positions checked on observed selected projection. Hashes verified. Local code outside matched lines and unobserved configurations are not runtime certified. One file with only one matching line is held for review.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+        "before_sha256": "d9c57d64cd85cd50b0386fb65ac7988cdaf15c9906527486bfc6c3e40773971f",
+        "original_sha256": "35efd26857a3f5c7960b0890a6ec3fd778dfde7dc8e74959fd3a8e3d41db424c",
+        "anchors": {},
+        "matched_lines": 3063,
+        "strict_tree": {
+          "excluded": 22,
+          "groups": 27,
+          "retained": 21
+        }
+      },
+      "resolved_static_leads": [
+        {
+          "original": 1623,
+          "current": 1622,
+          "logical": 1683,
+          "text": "if ((disk_state & FS_MEDIA_DET) == 0)"
+        },
+        {
+          "original": 1647,
+          "current": 1625,
+          "logical": 1686,
+          "text": "if( cmos_type( drive, &drive_type ) != FAILURE ){"
+        },
+        {
+          "original": 1648,
+          "current": 1626,
+          "logical": 1687,
+          "text": "switch( drive_type ){"
+        },
+        {
+          "original": 1649,
+          "current": 1627,
+          "logical": 1688,
+          "text": "case GFI_DRIVE_TYPE_360:"
+        },
+        {
+          "original": 1650,
+          "current": 1633,
+          "logical": 1694,
+          "text": "case GFI_DRIVE_TYPE_12:"
+        },
+        {
+          "original": 1651,
+          "current": 1634,
+          "logical": 1695,
+          "text": "start_rate = RS_300;\t/* different to Real BIOS */"
+        },
+        {
+          "original": 1652,
+          "current": 1635,
+          "logical": 1696,
+          "text": "end_rate   = RS_500;"
+        },
+        {
+          "original": 1655,
+          "current": 1637,
+          "logical": 1698,
+          "text": "case GFI_DRIVE_TYPE_144:"
+        },
+        {
+          "original": 1656,
+          "current": 1638,
+          "logical": 1699,
+          "text": "start_rate = RS_500;\t/* same as Real BIOS */"
+        },
+        {
+          "original": 1666,
+          "current": 1648,
+          "logical": 1709,
+          "text": "case GFI_DRIVE_TYPE_288:"
+        },
+        {
+          "original": 1667,
+          "current": 1649,
+          "logical": 1710,
+          "text": "start_rate = RS_1000;"
+        },
+        {
+          "original": 1668,
+          "current": 1650,
+          "logical": 1711,
+          "text": "end_rate   = RS_300;"
+        },
+        {
+          "original": 1671,
+          "current": 1653,
+          "logical": 1714,
+          "text": "always_trace1( \"setup_state(): Bad Drive from CMOS:%x\","
+        },
+        {
+          "original": 1672,
+          "current": 1654,
+          "logical": 1715,
+          "text": "drive_type );"
+        },
+        {
+          "original": 1676,
+          "current": 1658,
+          "logical": 1719,
+          "text": "always_trace0( \"setup_state(): CMOS read failure: Drive Type\" );"
+        }
+      ],
+      "hit_arms": 21,
+      "excluded_arms": 22,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 99
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "current_sha256": "235dccd77e38abd5397cc6b064ad297d7f0cc1406a6676801590b0bba739f510",
+      "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896",
+      "evidence": "s13-r1392-registered-diffs.json",
+      "prior_method": "Review direct retained-arm differences against specific existing mirror registrations after original-tree and source-projection checks; full diffs listed.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+        "current_sha256": "235dccd77e38abd5397cc6b064ad297d7f0cc1406a6676801590b0bba739f510",
+        "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896",
+        "matched_lines": 1605,
+        "strict_tree": {
+          "excluded": 26,
+          "groups": 38,
+          "retained": 23,
+          "retained_leaf_differences": 1
+        },
+        "registered_differences": [
+          "MVDM-HOST-DIV-325",
+          "MVDM-HOST-DIV-059"
+        ],
+        "retained_arm_direct_differences": [
+          {
+            "branch_line": 661,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -18,2 +18,7 @@",
+              " sas_storew_no_check(BIOS_KB_BUFFER_TAIL, buffer_ptr);",
+              "+/* DIVERGENCE(MVDM-HOST-DIV-325): only the explicit Win3.1",
+              "+* Setup trace records a key after the original BIOS buffer",
+              "+* commit.  It cannot affect delivery, ownership or IRQs. */",
+              "+mvdm_softpc_report_setup_hardware_probe(\"keyboard-buffer-put\",",
+              "+(unsigned long)s, (unsigned long)v);",
+              " setAX(0x9102);"
+            ]
+          },
+          {
+            "branch_line": 1437,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -8,2 +8,5 @@",
+              " {",
+              "+/* DIVERGENCE(MVDM-HOST-DIV-325): register-only diagnostics. */",
+              "+mvdm_softpc_report_setup_hardware_probe(\"keyboard-bop-enter\",",
+              "+(unsigned long)getAH(), (unsigned long)getAL());",
+              " switch (getAH()) {",
+              "@@ -26,3 +29,7 @@",
+              " case 2:",
+              "+mvdm_softpc_report_setup_hardware_probe(\"keyboard-waitio-enter\",",
+              "+(unsigned long)getAH(), (unsigned long)getAL());",
+              " IDLE_waitio();",
+              "+mvdm_softpc_report_setup_hardware_probe(\"keyboard-waitio-leave\",",
+              "+(unsigned long)getAH(), (unsigned long)getAL());",
+              " break;"
+            ]
+          },
+          {
+            "branch_line": 1552,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -12,5 +12,13 @@",
+              " KbdSeg     = getDS();",
+              "-pkio_table = (word *) effective_addr(getCS(), getSI());",
+              "+/*",
+              "+* DIVERGENCE(MVDM-HOST-DIV-059): effective_addr is a fixed-width guest",
+              "+* physical number, not a host pointer.  The original function already",
+              "+* uses Start_of_M_area as the selected SoftPC SAS backing store below;",
+              "+* use that same native-width backing path for every table pointer rather",
+              "+* than converting the guest number directly to a host address.",
+              "+*/",
+              "+phy_base   = effective_addr(getCS(), getSI());",
+              "+pkio_table = (word *)(Start_of_M_area + phy_base);",
+              " /* IDLE variables */",
+              "-sas_loadw((sys_addr)(pkio_table + 12), &w);",
+              "+sas_loadw((sys_addr)(phy_base + 12 * sizeof(word)), &w);",
+              " pICounter\t\t  = (word *) (Start_of_M_area + ((KbdSeg<<4)+w));"
+            ]
+          },
+          {
+            "branch_line": 1592,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -59,4 +59,6 @@",
+              " stream_io_buffer_size = *pkio_table++;",
+              "-stream_io_buffer = (half_word *)effective_addr(*pkio_table++, 0);",
+              "-stream_io_dirty_count_ptr = (word *)effective_addr(KbdSeg, *pkio_table++);",
+              "+stream_io_buffer = (half_word *)(Start_of_M_area +",
+              "+effective_addr(*pkio_table++, 0));",
+              "+stream_io_dirty_count_ptr = (word *)(Start_of_M_area +",
+              "+effective_addr(KbdSeg, *pkio_table++));",
+              " stream_io_bios_busy_sysaddr = effective_addr(KbdSeg, *pkio_table++);"
+            ]
+          }
+        ]
+      },
+      "resolved_static_leads": [
+        {
+          "original": 706,
+          "current": 676,
+          "logical": 745,
+          "text": "buffer_tail = sas_w_at_no_check(BIOS_KB_BUFFER_TAIL);"
+        },
+        {
+          "original": 707,
+          "current": 677,
+          "logical": 746,
+          "text": "buffer_head = sas_w_at_no_check(BIOS_KB_BUFFER_HEAD);"
+        },
+        {
+          "original": 708,
+          "current": 678,
+          "logical": 747,
+          "text": "buffer_ptr = inc_buffer_ptr(/* from: */buffer_tail);"
+        },
+        {
+          "original": 710,
+          "current": 680,
+          "logical": 749,
+          "text": "if (buffer_ptr == buffer_head) {"
+        },
+        {
+          "original": 711,
+          "current": 681,
+          "logical": 750,
+          "text": "BEEP(\"BIOS keyboard buffer overflow\");"
+        },
+        {
+          "original": 714,
+          "current": 684,
+          "logical": 753,
+          "text": "sas_store_no_check(BIOS_VAR_START + buffer_tail, v);"
+        },
+        {
+          "original": 715,
+          "current": 685,
+          "logical": 754,
+          "text": "sas_store_no_check(BIOS_VAR_START + buffer_tail+1, s);"
+        },
+        {
+          "original": 716,
+          "current": 686,
+          "logical": 755,
+          "text": "sas_storew_no_check(BIOS_KB_BUFFER_TAIL, buffer_ptr);"
+        },
+        {
+          "original": 719,
+          "current": 693,
+          "logical": 756,
+          "text": "setAX(0x9102);"
+        }
+      ],
+      "hit_arms": 23,
+      "excluded_arms": 26,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 85
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "current_sha256": "6b7473b479944ec6abda115fcd306b2b0c3c839f728d20e3039a88e7c4917e61",
+      "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075",
+      "evidence": "s13-r1368-extra-strict.json",
+      "prior_method": "Pair original conditional groups recursively while separately classifying project-added groups. Original excluded arms require #error and a recorded verified error-line state. Retained original direct bodies must match the original outside nested groups. Added groups require recorded hit or exclusion. Matching code logical lines are checked on the observed selected projection; local additions, unobserved contexts and runtime behavior are not independently certified.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+        "current_sha256": "6b7473b479944ec6abda115fcd306b2b0c3c839f728d20e3039a88e7c4917e61",
+        "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075",
+        "matched_lines": 1162,
+        "groups": {
+          "excluded": 73,
+          "original_groups": 80,
+          "selected": 19,
+          "local_groups": 3
+        }
+      },
+      "resolved_static_leads": [
+        {
+          "original": 1771,
+          "current": 1438,
+          "logical": 1803,
+          "text": "GLOBAL void"
+        },
+        {
+          "original": 1772,
+          "current": 1439,
+          "logical": 1804,
+          "text": "ica_iret_hook_called IFN1(IU32, abs_line)"
+        }
+      ],
+      "hit_arms": 22,
+      "excluded_arms": 73,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 61
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "current_sha256": "bacb75c018512cc2d70c3dde370aeb2e2057180b26162ab94560eaf5e9fa8cab",
+      "original_sha256": "947f9fc49dbffad48b2d1668548d63e8d26197a35d72fd4c26e7ce1e4c96af6f",
+      "evidence": "s13-r1348-strict-ready.json",
+      "prior_method": "Original/current recursive conditional selector comparison. Each excluded arm must contain only #error with original branch and continuation anchors; retained leaves match original ignoring #line. Groups with no excluded arm are accepted only when recorded branch states select at most one alternative and all remaining alternatives are excluded. Matching code logical positions checked on observed selected projection. Hashes verified. Local code outside matched lines and unobserved configurations are not runtime certified. One file with only one matching line is held for review.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+        "before_sha256": "bacb75c018512cc2d70c3dde370aeb2e2057180b26162ab94560eaf5e9fa8cab",
+        "original_sha256": "947f9fc49dbffad48b2d1668548d63e8d26197a35d72fd4c26e7ce1e4c96af6f",
+        "anchors": {},
+        "matched_lines": 500,
+        "strict_tree": {
+          "excluded": 22,
+          "groups": 43,
+          "retained": 37
+        }
+      },
+      "resolved_static_leads": [
+        {
+          "original": 314,
+          "current": 326,
+          "logical": 325,
+          "text": "read_rom (BIOS1ROM_FILENAME, BIOS_START);"
+        },
+        {
+          "original": 315,
+          "current": 327,
+          "logical": 326,
+          "text": "read_rom (BIOS2ROM_FILENAME, BIOS2_START);"
+        }
+      ],
+      "hit_arms": 37,
+      "excluded_arms": 22,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 31
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "current_sha256": "9d659d4faec311c4a7d794a65a1667dd4cc479d67f4dc680c284cf3bbefe7378",
+      "original_sha256": "320d697e9969cf146d5b0f94813aa62b501b0eefeff31806b22d463912965518",
+      "evidence": "s13-r1391-registered-diffs.json",
+      "prior_method": "Review retained-arm direct differences against specific existing mirror registrations after original-tree and selected source-projection checks; full diffs listed.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+        "current_sha256": "9d659d4faec311c4a7d794a65a1667dd4cc479d67f4dc680c284cf3bbefe7378",
+        "original_sha256": "320d697e9969cf146d5b0f94813aa62b501b0eefeff31806b22d463912965518",
+        "matched_lines": 151,
+        "strict_tree": {
+          "excluded": 4,
+          "retained": 4,
+          "groups": 5,
+          "implicit_retained_anchor": 1,
+          "retained_leaf_differences": 1
+        },
+        "registered_differences": [
+          "MVDM-HOST-DIV-064"
+        ],
+        "retained_arm_direct_differences": [
+          {
+            "branch_line": 104,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -1,4 +1,2 @@",
+              "-count = h_addr4 - l_addr4;",
+              "-RtlFillMemoryUlong(l_addr4, count, data4);",
+              "+do *l_addr4++ = data4; while (h_addr4 > l_addr4);",
+              " l_addr = (unsigned char *)l_addr4;",
+              "-l_addr += count;"
+            ]
+          }
+        ]
+      },
+      "resolved_static_leads": [
+        {
+          "original": 117,
+          "current": 108,
+          "logical": 121,
+          "text": "l_addr = (unsigned char *)l_addr4;"
+        }
+      ],
+      "hit_arms": 4,
+      "excluded_arms": 4,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 22
+    }
+  ]
+}

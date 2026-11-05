@@ -1,0 +1,997 @@
+{
+  "method": "Hash-bound original conditional-tree and line-projection audit with per-arm ledger and compiler observations; static line scan yielded no leads and compiler observations showed no line mismatch. Unobserved configurations and runtime behavior not certified.",
+  "files": [
+    {
+      "path": "src/mvdm-host/inc/vrnmpipe.h",
+      "current_sha256": "6a4a0f46af3ab8e094e3e51e2c60316a7c6734a3b128d5ecd473a53e1d307f6d",
+      "original_sha256": "06e77e0e94ff590b0aef18577f53eda9987c6dc2331ac6e8c185cfd10fe79da6",
+      "evidence": "s13-r1361-vrnmpipe-multihit.json",
+      "prior_method": "Compare original/current selectors and excluded/retained leaves, then verify matching-code line positions across all four combinations of recorded hit arms; combinations may include conservatively overapproximated contexts. Runtime behavior is not certified.",
+      "prior_record": {
+        "path": "src/mvdm-host/inc/vrnmpipe.h",
+        "current_sha256": "6a4a0f46af3ab8e094e3e51e2c60316a7c6734a3b128d5ecd473a53e1d307f6d",
+        "original_sha256": "06e77e0e94ff590b0aef18577f53eda9987c6dc2331ac6e8c185cfd10fe79da6",
+        "multi_hit_groups": [
+          [
+            107,
+            [
+              0,
+              1
+            ]
+          ],
+          [
+            183,
+            [
+              0,
+              1
+            ]
+          ]
+        ],
+        "projections_checked": 4,
+        "tree": {
+          "retained": 4,
+          "groups": 3,
+          "excluded": 1
+        }
+      },
+      "static_leads": [],
+      "hit_arms": 4,
+      "excluded_arms": 1,
+      "compiler_contexts": 80,
+      "compiler_unique_line_samples": 47
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "current_sha256": "f2bc102075e0624cfe95a040c0608d97df5a8a198a0c0d08bf0271a71207b93a",
+      "original_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb",
+      "evidence": "s13-r1379-cpu4gen-review.json",
+      "prior_method": "Original conditional tree and excluded states checked across eight combinations of recorded hit arms. All 13 retained leaf differences are the registered MVDM-HOST-DIV-046 CCPU register/flag return-type contract corrections; observed matching-code logical positions match. Runtime equivalence and unobserved contexts are not certified.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+        "current_sha256": "f2bc102075e0624cfe95a040c0608d97df5a8a198a0c0d08bf0271a71207b93a",
+        "original_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb",
+        "multi_hit_groups": [
+          [
+            12,
+            [
+              0,
+              1
+            ]
+          ],
+          [
+            17,
+            [
+              0,
+              1
+            ]
+          ],
+          [
+            22,
+            [
+              0,
+              1
+            ]
+          ]
+        ],
+        "projections_checked": 8,
+        "tree": {
+          "retained": 222,
+          "groups": 219,
+          "excluded": 215,
+          "local_leaf_differences": 13
+        }
+      },
+      "static_leads": [],
+      "hit_arms": 222,
+      "excluded_arms": 215,
+      "compiler_contexts": 68,
+      "compiler_unique_line_samples": 11
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "current_sha256": "9450c25c9566579ea53fb66a512f757c951dfdb665eb0c1e9bead18a790a50d5",
+      "original_sha256": "1309239998f72b64583b184d33623c763c3c98ea185081f8d8b294cd9b8c524f",
+      "evidence": "s13-r1391-registered-diffs.json",
+      "prior_method": "Review retained-arm direct differences against specific existing mirror registrations after original-tree and selected source-projection checks; full diffs listed.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+        "current_sha256": "9450c25c9566579ea53fb66a512f757c951dfdb665eb0c1e9bead18a790a50d5",
+        "original_sha256": "1309239998f72b64583b184d33623c763c3c98ea185081f8d8b294cd9b8c524f",
+        "matched_lines": 5879,
+        "strict_tree": {
+          "excluded": 6,
+          "groups": 9,
+          "retained": 6,
+          "retained_leaf_differences": 1
+        },
+        "registered_differences": [
+          "MVDM-HOST-DIV-130"
+        ],
+        "retained_arm_direct_differences": [
+          {
+            "branch_line": 5789,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -60,3 +60,3 @@",
+              " {",
+              "-reg_num += TOSPtr - FPUStackBase;",
+              "+reg_num += (IU32)(TOSPtr - FPUStackBase);",
+              " NpxStackRegAsString (&FPUStackBase[reg_num&7], buffer, 12);"
+            ]
+          }
+        ]
+      },
+      "static_leads": [],
+      "hit_arms": 6,
+      "excluded_arms": 6,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 400
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+      "current_sha256": "15f7c04de7479ba122b2516c499f59ae01d598931881902a4b042c2ae649b398",
+      "original_sha256": "b93eb0784830446b53eeadb4b4f2dc5506787cd5313b313ecfc1ec14c5b7d160",
+      "evidence": "s13-r1391-registered-diffs.json",
+      "prior_method": "Review retained-arm direct differences against specific existing mirror registrations after original-tree and selected source-projection checks; full diffs listed.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+        "current_sha256": "15f7c04de7479ba122b2516c499f59ae01d598931881902a4b042c2ae649b398",
+        "original_sha256": "b93eb0784830446b53eeadb4b4f2dc5506787cd5313b313ecfc1ec14c5b7d160",
+        "matched_lines": 373,
+        "strict_tree": {
+          "retained": 9,
+          "groups": 13,
+          "excluded": 12,
+          "retained_leaf_differences": 1
+        },
+        "registered_differences": [
+          "MVDM-HOST-DIV-024"
+        ],
+        "retained_arm_direct_differences": [
+          {
+            "branch_line": 206,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -1,2 +1,2 @@",
+              "-#include \"..\\..\\..\\..\\inc\\vdm.h\"",
+              "+#include <vdm.h>",
+              " /*  NTVDM"
+            ]
+          }
+        ]
+      },
+      "static_leads": [],
+      "hit_arms": 9,
+      "excluded_arms": 12,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 23
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+      "current_sha256": "0f4e3a5e2d008ed1c4f5c85697bed569064845819d5fab62703cd266416196eb",
+      "original_sha256": "1dedadd482f631e9b82a0fde92b84ff74c724faaaac782ae538639e0738e7002",
+      "evidence": "s13-r1390-video-registered-diffs.json",
+      "prior_method": "Review every direct retained-arm difference against registered local changes after branch-tree and source-projection checks in r1389. Full direct diffs retained below.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+        "current_sha256": "0f4e3a5e2d008ed1c4f5c85697bed569064845819d5fab62703cd266416196eb",
+        "original_sha256": "1dedadd482f631e9b82a0fde92b84ff74c724faaaac782ae538639e0738e7002",
+        "matched_lines": 2723,
+        "strict_tree": {
+          "retained": 45,
+          "excluded": 20,
+          "groups": 58,
+          "implicit_retained_anchor": 1
+        },
+        "registered_differences": [
+          "MVDM-HOST-DIV-067"
+        ],
+        "retained_arm_direct_differences": [
+          {
+            "branch_line": 332,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -25,2 +25,5 @@",
+              " IMPORT void v7_get_banks IPT2(UTINY *, rd_bank, UTINY *, wrt_bank );",
+              "+/* DIVERGENCE(MVDM-HOST-DIV-067): retain the original cross-video calls with",
+              "+* their actual same-package declarations; NT4 accepted their implicit forms. */",
+              "+IMPORT void setMarkPointers IPT1(IUH, markset);",
+              " IMPORT void update_shift_count IPT0();",
+              "@@ -1109,2 +1112,3 @@",
+              " #include\t\"cpu_vid.h\"",
+              "+IMPORT VOID Glue_set_vid_wrt_ptrs IPT1(WRT_POINTERS *, handler);",
+              " GLOBAL VOID ega_mask_register_changed IFN1(BOOL, gotBitProtection)"
+            ]
+          }
+        ]
+      },
+      "static_leads": [],
+      "hit_arms": 45,
+      "excluded_arms": 20,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 245
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+      "current_sha256": "4707df970954edcae73ba0e47f9c46e76405bc7bb6271a24d359f2bd2af0024d",
+      "original_sha256": "049c4ea27ebb73296fdc96f932571598e76be8ebcf5165e5cf5815a5095de20f",
+      "evidence": "s13-r1391-registered-diffs.json",
+      "prior_method": "Review retained-arm direct differences against specific existing mirror registrations after original-tree and selected source-projection checks; full diffs listed.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+        "current_sha256": "4707df970954edcae73ba0e47f9c46e76405bc7bb6271a24d359f2bd2af0024d",
+        "original_sha256": "049c4ea27ebb73296fdc96f932571598e76be8ebcf5165e5cf5815a5095de20f",
+        "matched_lines": 1909,
+        "strict_tree": {
+          "retained": 73,
+          "excluded": 40,
+          "groups": 89,
+          "retained_leaf_differences": 2
+        },
+        "registered_differences": [
+          "MVDM-HOST-DIV-090"
+        ],
+        "retained_arm_direct_differences": [
+          {
+            "branch_line": 1959,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -14,3 +14,3 @@",
+              " {",
+              "-memset4( attr, (ULONG *)&EGA_planes[dest<<2], colsdiff );",
+              "+memset4( attr, (unsigned int *)&EGA_planes[dest<<2], colsdiff );",
+              " if(!screen_updated)"
+            ]
+          },
+          {
+            "branch_line": 2006,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -16,3 +16,3 @@",
+              " {",
+              "-memset4( attr, (ULONG *)&EGA_planes[dest<<2], colsdiff );",
+              "+memset4( attr, (unsigned int *)&EGA_planes[dest<<2], colsdiff );",
+              " if(!screen_updated)"
+            ]
+          }
+        ]
+      },
+      "static_leads": [],
+      "hit_arms": 73,
+      "excluded_arms": 40,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 170
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "current_sha256": "6343a51453f9df79db724e70cf09e82bcf6d738b9df7a650d40c36db1a134a08",
+      "original_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987",
+      "evidence": "s13-r1390-video-registered-diffs.json",
+      "prior_method": "Review every direct retained-arm difference against registered local changes after branch-tree and source-projection checks in r1389. Full direct diffs retained below.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+        "current_sha256": "6343a51453f9df79db724e70cf09e82bcf6d738b9df7a650d40c36db1a134a08",
+        "original_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987",
+        "matched_lines": 3629,
+        "strict_tree": {
+          "retained": 83,
+          "groups": 110,
+          "excluded": 59,
+          "implicit_retained_anchor": 6
+        },
+        "registered_differences": [
+          "MVDM-HOST-DIV-135"
+        ],
+        "retained_arm_direct_differences": [
+          {
+            "branch_line": 191,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -2,3 +2,5 @@",
+              " /* [5.1.3 PROCEDURE() DECLARATIONS]\t\t\t\t\t*/",
+              "-LOCAL boolean simple_update IPT0();",
+              "+/* DIVERGENCE(MVDM-HOST-DIV-135): selected marking dispatch is void; see",
+              "+* gfx_upd.h.  Original callers use only its dirty-state side effect. */",
+              "+LOCAL VOID simple_update IPT0();",
+              " boolean\tdummy_scroll IPT6(int,dummy1,int,dummy2,int,dummy3,"
+            ]
+          },
+          {
+            "branch_line": 687,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -17,7 +17,7 @@",
+              " set_mode_change_required(YES);",
+              "-update_alg.mark_byte = (T_mark_byte)simple_update;",
+              "-update_alg.mark_word = (T_mark_word)simple_update;",
+              "-update_alg.mark_fill = (T_mark_fill)simple_update;",
+              "-update_alg.mark_wfill = (T_mark_wfill)simple_update;",
+              "-update_alg.mark_string = (T_mark_string)simple_update;",
+              "+update_alg.mark_byte = simple_update;",
+              "+update_alg.mark_word = simple_update;",
+              "+update_alg.mark_fill = simple_update;",
+              "+update_alg.mark_wfill = simple_update;",
+              "+update_alg.mark_string = simple_update;",
+              " update_alg.scroll_up = dummy_scroll;"
+            ]
+          },
+          {
+            "branch_line": 3555,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -6,21 +6,21 @@",
+              " case\tSIMPLE_MARKING:",
+              "-update_alg.mark_byte = (T_mark_byte)simple_update;",
+              "-update_alg.mark_word = (T_mark_word)simple_update;",
+              "-update_alg.mark_fill = (T_mark_fill)simple_update;",
+              "-update_alg.mark_wfill = (T_mark_wfill)simple_update;",
+              "-update_alg.mark_string = (T_mark_string)simple_update;",
+              "+update_alg.mark_byte = simple_update;",
+              "+update_alg.mark_word = simple_update;",
+              "+update_alg.mark_fill = simple_update;",
+              "+update_alg.mark_wfill = simple_update;",
+              "+update_alg.mark_string = simple_update;",
+              " break;",
+              " case\tCGA_GRAPHICS_MARKING:",
+              "-update_alg.mark_byte = (boolean(*)())cga_mark_byte;",
+              "-update_alg.mark_word = (boolean(*)())cga_mark_word;",
+              "-update_alg.mark_fill = (boolean(*)())cga_mark_string;",
+              "-update_alg.mark_wfill = (boolean(*)())cga_mark_string;",
+              "-update_alg.mark_string = (boolean(*)())cga_mark_string;",
+              "+update_alg.mark_byte = cga_mark_byte;",
+              "+update_alg.mark_word = cga_mark_word;",
+              "+update_alg.mark_fill = cga_mark_string;",
+              "+update_alg.mark_wfill = cga_mark_string;",
+              "+update_alg.mark_string = cga_mark_string;",
+              " break;",
+              " case\tEGA_GRAPHICS_MARKING:",
+              "-update_alg.mark_byte = (boolean(*)())ega_mark_byte;",
+              "-update_alg.mark_word = (boolean(*)())ega_mark_word;",
+              "-update_alg.mark_fill = (boolean(*)())ega_mark_string;",
+              "-update_alg.mark_wfill = (boolean(*)())ega_mark_wfill;",
+              "-update_alg.mark_string = (boolean(*)())ega_mark_string;",
+              "+update_alg.mark_byte = ega_mark_byte;",
+              "+update_alg.mark_word = ega_mark_word;",
+              "+update_alg.mark_fill = ega_mark_string;",
+              "+update_alg.mark_wfill = ega_mark_wfill;",
+              "+update_alg.mark_string = ega_mark_string;",
+              " switch( EGA_CPU.chain )"
+            ]
+          },
+          {
+            "branch_line": 3782,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -31,7 +31,7 @@",
+              " gfx_update_routines_inhibited = TRUE;",
+              "-update_alg.mark_byte \t= (T_mark_byte)simple_update;",
+              "-update_alg.mark_word\t= (T_mark_word)simple_update;",
+              "-update_alg.mark_fill \t= (T_mark_fill)simple_update;",
+              "-update_alg.mark_wfill \t= (T_mark_wfill)simple_update;",
+              "-update_alg.mark_string \t= (T_mark_string)simple_update;",
+              "+update_alg.mark_byte \t= simple_update;",
+              "+update_alg.mark_word\t= simple_update;",
+              "+update_alg.mark_fill \t= simple_update;",
+              "+update_alg.mark_wfill \t= simple_update;",
+              "+update_alg.mark_string \t= simple_update;",
+              " update_alg.calc_update \t= dummy_calc;"
+            ]
+          }
+        ]
+      },
+      "static_leads": [],
+      "hit_arms": 83,
+      "excluded_arms": 59,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 220
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "current_sha256": "6eeac8f78a2d2b6928b372da0def9b9455ab1e0fa5e42cce63afc185f0b2eff7",
+      "original_sha256": "480c35aa09b40d75d82fe0e1fe3e6cb0f981e573549ea2e193e8a62be4816d10",
+      "evidence": "s13-r1421-multihit-review.json",
+      "prior_method": "Compare original condition structure, all recorded supported branch projections, direct retained-arm diffs and local group bodies. Where functions were reordered, reject spurious sequence matches only with function-body evidence.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+        "current_sha256": "6eeac8f78a2d2b6928b372da0def9b9455ab1e0fa5e42cce63afc185f0b2eff7",
+        "original_sha256": "480c35aa09b40d75d82fe0e1fe3e6cb0f981e573549ea2e193e8a62be4816d10",
+        "projection": {
+          "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+          "sha256": "6eeac8f78a2d2b6928b372da0def9b9455ab1e0fa5e42cce63afc185f0b2eff7",
+          "projections": 2,
+          "mismatches": []
+        },
+        "groups": {
+          "selected": 11,
+          "original_groups": 11,
+          "local_groups": 1,
+          "excluded": 2
+        },
+        "local_groups": [
+          {
+            "line": 42,
+            "arms": [
+              {
+                "kind": "if",
+                "arg": "defined(CPU_40_STYLE)",
+                "body": [
+                  "#line 40",
+                  "#define CpuH \"cpu4.h\""
+                ]
+              },
+              {
+                "kind": "else",
+                "arg": "",
+                "body": [
+                  "#line 40",
+                  "#error Excluded non-CPU40 MONITOR CPU interface"
+                ]
+              }
+            ]
+          }
+        ],
+        "direct_diffs": [
+          {
+            "branch_line": 41,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -1 +0,0 @@",
+              "-#define CpuH \"cpu.h\""
+            ]
+          }
+        ],
+        "issues": [],
+        "registered_differences": [
+          "MVDM-HOST-DIV-551",
+          "MVDM-HOST-DIV-044"
+        ]
+      },
+      "static_leads": [],
+      "hit_arms": 12,
+      "excluded_arms": 3,
+      "compiler_contexts": 194,
+      "compiler_unique_line_samples": 30
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/insignia.h",
+      "current_sha256": "09bfda220052104997a13eb52354a39b7cd12684792da9e9dbe5e0ab7e755da4",
+      "original_sha256": "26ed468f31ea44c8069300f150e5eefef3ba21c12eb2f2f68cca95bcc6f3ba02",
+      "evidence": "s13-r1377-multihit-review.json",
+      "prior_method": "Compare original/current conditional trees and leaf bodies; when retained-branch anchors are not adjacent, validate matching original code line positions in all combinations of observed hit branches. Excluded error anchors require explicit original line or an identical natural physical position without preceding line directives. Unobserved contexts and runtime behavior are not certified.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/host/inc/insignia.h",
+        "current_sha256": "09bfda220052104997a13eb52354a39b7cd12684792da9e9dbe5e0ab7e755da4",
+        "original_sha256": "26ed468f31ea44c8069300f150e5eefef3ba21c12eb2f2f68cca95bcc6f3ba02",
+        "multi_hit_groups": [
+          [
+            149,
+            [
+              0,
+              1
+            ]
+          ]
+        ],
+        "projections_checked": 2,
+        "tree": {
+          "retained": 6,
+          "groups": 11,
+          "excluded": 7
+        }
+      },
+      "static_leads": [],
+      "hit_arms": 6,
+      "excluded_arms": 7,
+      "compiler_contexts": 200,
+      "compiler_unique_line_samples": 2
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "current_sha256": "e5234fca6a99ea1e66e9a2ab663c9020ff039e9a3fd170b802fd4861037e015e",
+      "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0",
+      "evidence": "s13-r1391-registered-diffs.json",
+      "prior_method": "Review retained-arm direct differences against specific existing mirror registrations after original-tree and selected source-projection checks; full diffs listed.",
+      "prior_record": {
+        "path": "src/mvdm-host/wow32/wcall16.c",
+        "current_sha256": "e5234fca6a99ea1e66e9a2ab663c9020ff039e9a3fd170b802fd4861037e015e",
+        "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0",
+        "matched_lines": 629,
+        "strict_tree": {
+          "retained": 5,
+          "groups": 10,
+          "excluded": 9,
+          "implicit_continuation": 2,
+          "implicit_retained_anchor": 1,
+          "retained_leaf_differences": 1
+        },
+        "registered_differences": [
+          "MVDM-HOST-DIV-304"
+        ],
+        "retained_arm_direct_differences": [
+          {
+            "branch_line": 687,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -2,2 +2,9 @@",
+              " SaveIp = getIP();",
+              "+/* DIVERGENCE(MVDM-HOST-DIV-304): default-off witness after the original",
+              "+* stack selection and before the original CCPU reentry.  It copies no",
+              "+* guest state and does not alter the callback protocol. */",
+              "+wow_callback_frame_trace(\"simulate\", (DWORD)iRetID, ptd->vpStack,",
+              "+ptd->vpCBStack, 0, ptd->htask16, (DWORD)vpfnProc,",
+              "+pParm16 ? pParm16->WndProc.wMsg : 0,",
+              "+pParm16 ? pParm16->WndProc.lParam : 0);",
+              " host_simulate();"
+            ]
+          }
+        ]
+      },
+      "static_leads": [],
+      "hit_arms": 5,
+      "excluded_arms": 9,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 90
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "current_sha256": "6cc99e7bb7d7833b7f1b7475b97734830d3b7c395b22d1715b22fc787360b45f",
+      "original_sha256": "0fad52bf1e4c6db87bdc77cf9ec2f35540da2fc4972d2b32e32d57a46776a9fc",
+      "evidence": "s13-r1358-multihit.json",
+      "prior_method": "Compare original/current selectors and excluded/retained leaves, then check matching-code logical line positions across all combinations of recorded hit arms (including conservative combinations not independently proved realizable). Unknown arms, >128 combinations, local differing leaves and mapping mismatches remain pending. Does not prove runtime behavior.",
+      "prior_record": {
+        "path": "src/mvdm-host/xms.486/xms.h",
+        "current_sha256": "6cc99e7bb7d7833b7f1b7475b97734830d3b7c395b22d1715b22fc787360b45f",
+        "original_sha256": "0fad52bf1e4c6db87bdc77cf9ec2f35540da2fc4972d2b32e32d57a46776a9fc",
+        "multi_hit_groups": [
+          [
+            54,
+            [
+              0,
+              1
+            ]
+          ]
+        ],
+        "projections_checked": 2,
+        "tree": {
+          "excluded": 7,
+          "groups": 11,
+          "retained": 6
+        }
+      },
+      "static_leads": [],
+      "hit_arms": 6,
+      "excluded_arms": 7,
+      "compiler_contexts": 7,
+      "compiler_unique_line_samples": 17
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "current_sha256": "58b390e7ecc062b2a01bc76a7c3abd570a82f44787dad1ceb55ba5eb1f4a9c5c",
+      "original_sha256": "653097c73182630ce39183526334ae4027b1aef00e2d28812a0e5e84c6164db5",
+      "evidence": "s13-r1377-multihit-review.json",
+      "prior_method": "Compare original/current conditional trees and leaf bodies; when retained-branch anchors are not adjacent, validate matching original code line positions in all combinations of observed hit branches. Excluded error anchors require explicit original line or an identical natural physical position without preceding line directives. Unobserved contexts and runtime behavior are not certified.",
+      "prior_record": {
+        "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+        "current_sha256": "58b390e7ecc062b2a01bc76a7c3abd570a82f44787dad1ceb55ba5eb1f4a9c5c",
+        "original_sha256": "653097c73182630ce39183526334ae4027b1aef00e2d28812a0e5e84c6164db5",
+        "multi_hit_groups": [
+          [
+            127,
+            [
+              0,
+              1
+            ]
+          ]
+        ],
+        "projections_checked": 2,
+        "tree": {
+          "retained": 5,
+          "groups": 8,
+          "excluded": 5
+        }
+      },
+      "static_leads": [],
+      "hit_arms": 5,
+      "excluded_arms": 5,
+      "compiler_contexts": 4,
+      "compiler_unique_line_samples": 45
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "current_sha256": "12fa8eb89d46fbb36abb4c6b0c88cfdbe9dde3463525780053eb333849b52a99",
+      "original_sha256": "d8841bd2f13e5825a84f670ec7cc60923977bf80618d737cbac2208f94c6523c",
+      "evidence": "s13-r1421-multihit-review.json",
+      "prior_method": "Compare original condition structure, all recorded supported branch projections, direct retained-arm diffs and local group bodies. Where functions were reordered, reject spurious sequence matches only with function-body evidence.",
+      "prior_record": {
+        "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+        "current_sha256": "12fa8eb89d46fbb36abb4c6b0c88cfdbe9dde3463525780053eb333849b52a99",
+        "original_sha256": "d8841bd2f13e5825a84f670ec7cc60923977bf80618d737cbac2208f94c6523c",
+        "projection": {
+          "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+          "sha256": "12fa8eb89d46fbb36abb4c6b0c88cfdbe9dde3463525780053eb333849b52a99",
+          "projections": 2,
+          "mismatches": [
+            {
+              "line": 318,
+              "values": [
+                [
+                  365,
+                  82,
+                  "    }"
+                ]
+              ]
+            },
+            {
+              "line": 320,
+              "values": [
+                [
+                  366,
+                  84,
+                  "}"
+                ]
+              ]
+            }
+          ]
+        },
+        "registered_differences": [
+          "OPENNT-HOST-040",
+          "OPENNT-HOST-074"
+        ],
+        "local_groups": [
+          {
+            "line": 14,
+            "arms": [
+              {
+                "directive": "if",
+                "expression": "defined(WOW_ORIGINAL_EDIT_LOOKASIDE)",
+                "body": [
+                  "/* DIVERGENCE(OPENNT-HOST-074): unchanged original control lookaside bodies;",
+                  " * only their private USER environment is supplied by the finite binding. */",
+                  "#include \"wow_edit_lookaside_bindings.h\"",
+                  "",
+                  "//++",
+                  "//",
+                  "// PVOID",
+                  "// AllocateFromZone(",
+                  "//     IN PZONE_HEADER Zone",
+                  "//     )",
+                  "//",
+                  "// Routine Description:",
+                  "//",
+                  "//     This routine removes an entry from the zone and returns a pointer to it.",
+                  "//",
+                  "// Arguments:",
+                  "//",
+                  "//     Zone - Pointer to the zone header controlling the storage from which the",
+                  "//         entry is to be allocated.",
+                  "//",
+                  "// Return Value:",
+                  "//",
+                  "//     The function value is a pointer to the storage allocated from the zone.",
+                  "//",
+                  "/***************************************************************************\\",
+                  "\\***************************************************************************/",
+                  "",
+                  "#line 172",
+                  "#define AllocateFromZone(Zone) \\",
+                  "    (PVOID)((Zone)->FreeList.Next); \\",
+                  "    if ( (Zone)->FreeList.Next ) (Zone)->FreeList.Next = (Zone)->FreeList.Next->Next",
+                  "",
+                  "",
+                  "//++",
+                  "//",
+                  "// PVOID",
+                  "// FreeToZone(",
+                  "//     IN PZONE_HEADER Zone,",
+                  "//     IN PVOID Block",
+                  "//     )",
+                  "//",
+                  "// Routine Description:",
+                  "//",
+                  "//     This routine places the specified block of storage back onto the free",
+                  "//     list in the specified zone.",
+                  "//",
+                  "// Arguments:",
+                  "//",
+                  "//     Zone - Pointer to the zone header controlling the storage to which the",
+                  "//         entry is to be inserted.",
+                  "//",
+                  "//     Block - Pointer to the block of storage to be freed back to the zone.",
+                  "//",
+                  "// Return Value:",
+                  "//",
+                  "//     Pointer to previous block of storage that was at the head of the free",
+                  "//         list.  NULL implies the zone went from no available free blocks to",
+                  "//         at least one free block.",
+                  "//",
+                  "/***************************************************************************\\",
+                  "\\***************************************************************************/",
+                  "",
+                  "#define FreeToZone(Zone,Block)                                    \\",
+                  "    ( ((PSINGLE_LIST_ENTRY)(Block))->Next = (Zone)->FreeList.Next,  \\",
+                  "      (Zone)->FreeList.Next = ((PSINGLE_LIST_ENTRY)(Block)),        \\",
+                  "      ((PSINGLE_LIST_ENTRY)(Block))->Next                           \\",
+                  "    )",
+                  "",
+                  "/***************************************************************************\\",
+                  "* InitLookaside",
+                  "*",
+                  "* Initializes the lookaside list. This improves control locality",
+                  "* by keeping control entries in a single page",
+                  "*",
+                  "* 05-04-95 JimA         Created.",
+                  "\\***************************************************************************/",
+                  "",
+                  "NTSTATUS",
+                  "InitLookaside(",
+                  "    PLOOKASIDE pla,",
+                  "    DWORD cbEntry,",
+                  "    DWORD cEntries)",
+                  "{",
+                  "    ULONG i;",
+                  "    PCH p;",
+                  "    ULONG BlockSize;",
+                  "    PZONE_HEADER Zone;",
+                  "    PVOID InitialSegment;",
+                  "    ULONG InitialSegmentSize;",
+                  "",
+                  "    InitialSegmentSize = (cEntries * cbEntry) + sizeof(ZONE_SEGMENT_HEADER);",
+                  "",
+                  "    p = (PCH)UserLocalAlloc(0, InitialSegmentSize);",
+                  "",
+                  "    if ( !p ) {",
+                  "        return STATUS_NO_MEMORY;",
+                  "        }",
+                  "",
+                  "    RtlEnterCriticalSection(&gcsLookaside);",
+                  "",
+                  "    //",
+                  "    // If the lookaside list has already been initialized, we're done.",
+                  "    //",
+                  "",
+                  "    if (pla->LookasideBase != NULL && pla->EntrySize == cbEntry) {",
+                  "        RtlLeaveCriticalSection(&gcsLookaside);",
+                  "        UserLocalFree(p);",
+                  "        return STATUS_SUCCESS;",
+                  "    }",
+                  "",
+                  "    pla->LookasideBase = (PVOID)p;",
+                  "    pla->LookasideBounds = (PVOID)(p + InitialSegmentSize);",
+                  "    pla->EntrySize = cbEntry;",
+                  "",
+                  "    //",
+                  "    // Using the ExZone-like code, slice up the page into QMSG's",
+                  "    //",
+                  "",
+                  "    Zone = &pla->LookasideZone;",
+                  "    BlockSize = cbEntry;",
+                  "    InitialSegment = pla->LookasideBase;",
+                  "",
+                  "    Zone->BlockSize = BlockSize;",
+                  "",
+                  "    Zone->SegmentList.Next = &((PZONE_SEGMENT_HEADER) InitialSegment)->SegmentList;",
+                  "    ((PZONE_SEGMENT_HEADER) InitialSegment)->SegmentList.Next = NULL;",
+                  "    ((PZONE_SEGMENT_HEADER) InitialSegment)->Reserved = NULL;",
+                  "",
+                  "    Zone->FreeList.Next = NULL;",
+                  "",
+                  "    p = (PCH)InitialSegment + sizeof(ZONE_SEGMENT_HEADER);",
+                  "",
+                  "    for (i = sizeof(ZONE_SEGMENT_HEADER);",
+                  "         i <= InitialSegmentSize - BlockSize;",
+                  "         i += BlockSize",
+                  "        ) {",
+                  "        ((PSINGLE_LIST_ENTRY)p)->Next = Zone->FreeList.Next;",
+                  "        Zone->FreeList.Next = (PSINGLE_LIST_ENTRY)p;",
+                  "        p += BlockSize;",
+                  "    }",
+                  "    Zone->TotalSegmentSize = i;",
+                  "",
+                  "    RtlLeaveCriticalSection(&gcsLookaside);",
+                  "",
+                  "    return STATUS_SUCCESS;",
+                  "",
+                  "}",
+                  "",
+                  "/***************************************************************************\\",
+                  "* AllocLookasideEntry",
+                  "*",
+                  "* Allocates an entry from the lookaside list.",
+                  "*",
+                  "* 05-04-95 JimA         Created.",
+                  "\\***************************************************************************/",
+                  "",
+                  "PVOID AllocLookasideEntry(",
+                  "    PLOOKASIDE pla)",
+                  "{",
+                  "    PVOID pEntry;",
+                  "",
+                  "    //",
+                  "    // Attempt to get an entry from the zone. If this fails, then",
+                  "    // LocalAlloc the entry",
+                  "    //",
+                  "",
+                  "    RtlEnterCriticalSection(&gcsLookaside);",
+                  "    pEntry = AllocateFromZone(&pla->LookasideZone);",
+                  "    RtlLeaveCriticalSection(&gcsLookaside);",
+                  "",
+                  "    if ( !pEntry ) {",
+                  "",
+                  "        /*",
+                  "         * Allocate a local structure.",
+                  "         */"
+                ]
+              }
+            ]
+          },
+          {
+            "line": 197,
+            "arms": [
+              {
+                "directive": "if",
+                "expression": "defined(WOW_ORIGINAL_EDIT_LOOKASIDE)",
+                "body": [
+                  "#line 322",
+                  "        if ((pEntry = UserLocalAlloc(0, pla->EntrySize)) == NULL)",
+                  "            return NULL;",
+                  "        }",
+                  "    RtlZeroMemory(pEntry, pla->EntrySize);"
+                ]
+              }
+            ]
+          },
+          {
+            "line": 210,
+            "arms": [
+              {
+                "directive": "if",
+                "expression": "defined(WOW_ORIGINAL_EDIT_LOOKASIDE)",
+                "body": [
+                  "#line 333",
+                  "",
+                  "    return pEntry;",
+                  "}",
+                  "",
+                  "/***************************************************************************\\",
+                  "* FreeLookasideEntry",
+                  "*",
+                  "* Returns a qmsg to the lookaside buffer or free the memory.",
+                  "*",
+                  "* 05-04-95 JimA         Created.",
+                  "\\***************************************************************************/",
+                  "",
+                  "void FreeLookasideEntry(",
+                  "    PLOOKASIDE pla,",
+                  "    PVOID pEntry)",
+                  "{"
+                ]
+              }
+            ]
+          },
+          {
+            "line": 235,
+            "arms": [
+              {
+                "directive": "if",
+                "expression": "defined(WOW_ORIGINAL_EDIT_LOOKASIDE)",
+                "body": [
+                  "#line 352",
+                  "",
+                  "    //",
+                  "    // If the pEntry was from zone, then free to zone",
+                  "    //",
+                  "    if ( (PVOID)pEntry >= pla->LookasideBase && (PVOID)pEntry < pla->LookasideBounds ) {",
+                  "        RtlEnterCriticalSection(&gcsLookaside);",
+                  "        FreeToZone(&pla->LookasideZone,pEntry);",
+                  "        RtlLeaveCriticalSection(&gcsLookaside);",
+                  "    } else {"
+                ]
+              }
+            ]
+          },
+          {
+            "line": 253,
+            "arms": [
+              {
+                "directive": "if",
+                "expression": "defined(WOW_ORIGINAL_EDIT_LOOKASIDE)",
+                "body": [
+                  "#line 364",
+                  "        UserLocalFree(pEntry);",
+                  "    }",
+                  "}",
+                  ""
+                ]
+              },
+              {
+                "directive": "else",
+                "expression": "",
+                "body": [
+                  "/* DIVERGENCE(OPENNT-HOST-040): retain original RtlCaptureAnsiString.",
+                  " * Other USER initialization/capture routines and private precompiled headers",
+                  " * are excluded. The existing worker TLS/heap boundary supplies resources. */",
+                  "#include \"wow_user_capture_bindings.h\"",
+                  "",
+                  "#line 30",
+                  "BOOL RtlCaptureAnsiString(",
+                  "    PIN_STRING pstr,",
+                  "    LPCSTR psz,",
+                  "    BOOL fForceAlloc)",
+                  "{",
+                  "    int cbSrc;",
+                  "    int cbDst;",
+                  "",
+                  "    pstr->fAllocated = FALSE;",
+                  "    if (psz) {",
+                  "        cbSrc = strlen(psz) + 1;",
+                  "        if (cbSrc > MAXUSHORT) {",
+                  "            RIPMSG0(RIP_WARNING, \"String too long for standard string\");",
+                  "            return FALSE;",
+                  "        }",
+                  "",
+                  "        /*",
+                  "         * If the allocation is forced or if the string is",
+                  "         * too long to fit in the TEB, allocate a buffer.",
+                  "         * Otherwise, store the result in the TEB.",
+                  "         */",
+                  "        if (fForceAlloc ||",
+                  "                cbSrc > (STATIC_UNICODE_BUFFER_LENGTH / sizeof(WCHAR))) {",
+                  "            pstr->strCapture.Buffer = RtlAllocateHeap(RtlProcessHeap(),",
+                  "                    0, cbSrc * sizeof(WCHAR));",
+                  "            if (pstr->strCapture.Buffer == NULL)",
+                  "                return FALSE;",
+                  "            pstr->fAllocated = TRUE;",
+                  "            pstr->pstr = &pstr->strCapture;",
+                  "            pstr->strCapture.MaximumLength = (USHORT)(cbSrc * sizeof(WCHAR));",
+                  "        } else {",
+                  "            pstr->pstr = &NtCurrentTeb()->StaticUnicodeString;",
+                  "        }",
+                  "",
+                  "        /*",
+                  "         * Convert the string to Unicode",
+                  "         */",
+                  "        if (RtlMultiByteToUnicodeN(pstr->pstr->Buffer,",
+                  "                (ULONG)pstr->pstr->MaximumLength, &cbDst,",
+                  "                (LPSTR)psz, cbSrc)) {",
+                  "            RIPMSG0(RIP_WARNING, \"Unicode conversion failed\");",
+                  "            if (pstr->fAllocated) {",
+                  "                RtlFreeHeap(RtlProcessHeap(), 0, pstr->strCapture.Buffer);",
+                  "                pstr->fAllocated = FALSE;",
+                  "            }",
+                  "            return FALSE;",
+                  "        }",
+                  "        pstr->pstr->Length = (USHORT)cbDst - sizeof(WCHAR);",
+                  "    } else {",
+                  "        pstr->pstr = &pstr->strCapture;",
+                  "        pstr->strCapture.Length = pstr->strCapture.MaximumLength = 0;",
+                  "        pstr->strCapture.Buffer = NULL;",
+                  "    }",
+                  "    return TRUE;",
+                  "}",
+                  ""
+                ]
+              }
+            ]
+          }
+        ],
+        "false_matches": "Scanner paired the final braces of RtlCaptureAnsiString with the unrelated FreeLookasideEntry function. Function body matches original byte-for-byte after line-ending normalization; selected #line positions map them to original lines 82 and 84.",
+        "function_sha256": "0a25925e2f423bae3a315c85b3e9ee337bbf8c38396fc50da9753d2921568a99"
+      },
+      "static_leads": [],
+      "hit_arms": 6,
+      "excluded_arms": 4,
+      "compiler_contexts": 2,
+      "compiler_unique_line_samples": 47
+    }
+  ]
+}
