@@ -1440,6 +1440,7 @@ GLOBAL VOID	vga_crtc_outb IFN2(io_addr,port,half_word,value)
 #endif /* V7VGA */
 						new.value = value;
 						/* DIV-358: retain bit-only writes as well as geometry. */
+#line 1419
 						crt_controller.cursor_start.as.abyte = value;
 #line 1422
 						do_new_cursor();

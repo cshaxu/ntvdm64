@@ -654,6 +654,7 @@ HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pD
                             }
 
                             if (!fFailed) {
+#line 599
                                 lpMemMeta32->hMF = (HMETAFILE) hMF32;
                             }
 #line 600

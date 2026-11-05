@@ -973,6 +973,7 @@ NoCreate:
                 /* DIVERGENCE(OPENNT-HOST-081): focus callbacks may destroy. */
                 if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) goto CheckDialogAfterInit;
                 if (!pwndT || (!TestWF(pwndT, WFDESTROYED) && !(pwndT->fnid & FNID_STATUS_BITS)))
+#line 903
                     xxxCheckDefPushButton(pwnd, hwndEditFirst, hwndNewFocus);
 #line 904
             }

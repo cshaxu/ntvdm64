@@ -2278,6 +2278,7 @@ void timer_init IFN0()
 #line 2794
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else
+#line 2797
     RegisterEOIHook(CPU_TIMER_INT, TimerEoiHook);
 #endif
 #line 2799

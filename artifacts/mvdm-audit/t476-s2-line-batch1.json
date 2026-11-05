@@ -1,0 +1,95 @@
+{
+  "scope": "diagnostic #line source batch; not a completed file-level audit",
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "prechange_sha256": "f5273622f7a14219f7da6eff692e4ae54d7b46a2a220bdc6d8abfda3b960a1ca",
+      "current_sha256": "09234ab05f404574342767e94572734c735b73976629b411c9825e3320f19028",
+      "original_sha256": "98a941095d47ae73ef9731d389a433203c7184b0a016b62e24b202bb89f829d0",
+      "marker_file_hit": "True",
+      "hit_arms": "0",
+      "state": "pending-build-and-file-review"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "prechange_sha256": "15fd9ee90357a2ba89708e4315d41a23fcf5fb912b4e45b89b5fd2faeed466c6",
+      "current_sha256": "cb5e75063ceb75996d0d87caf77aff7acbde81a7e13f44f8c70db4e8c5ef42eb",
+      "original_sha256": "1ca036932368a0d0bf1848b078cc80cd66e67a4cc46ad26a0c1b236fe40f4281",
+      "marker_file_hit": "True",
+      "hit_arms": "0",
+      "state": "pending-build-and-file-review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "prechange_sha256": "84e4c94857da2af248a4f570385c9c2290cc21042ed03e9c86be52ee4b970e31",
+      "current_sha256": "6b45c5fc535d5344d01f8c6e4315b1f14dd618e7bc79d3bb1c7b527adcfa36ed",
+      "original_sha256": "3aa86f1faf07f68937629f1d6e410eb41f498e17dc6d747647c7d6e5697c80aa",
+      "marker_file_hit": "True",
+      "hit_arms": "10",
+      "state": "pending-build-and-file-review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "prechange_sha256": "5d3c9f6443dbda483a0d44c097d8ff0676fc50e461d3b800aa6c5899b4bf8fce",
+      "current_sha256": "000c65af5ddd124d7b0379782a909b79c96f258aaad75131e85e620dfa1ed4c0",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "marker_file_hit": "True",
+      "hit_arms": "27",
+      "state": "pending-build-and-file-review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "prechange_sha256": "b53e53a6cfa3991a6ddcb830906eb6aa342cd74e8380ed426c9249ee385c8f2c",
+      "current_sha256": "9710afc2c576fe810b26ee83f099a7ba34e6e9e00aff3d48570b529a1eee81bb",
+      "original_sha256": "16305a48051b980b4c9f8aba15dda7bd6801964bb02897b8c2290a1eff04fbbc",
+      "marker_file_hit": "True",
+      "hit_arms": "78",
+      "state": "pending-build-and-file-review"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdde.c",
+      "prechange_sha256": "bf8661c53d2cdd631a665931d63072bb8733c8fe26ef86bea508bb9267f709c4",
+      "current_sha256": "d46ec86968c0892dab8f2afdb910b7bfa08764d33b0852d903650b3be424b742",
+      "original_sha256": "859efd3356f46b646af8373112297212de2016de9a2587af580d6d99b64df6aa",
+      "marker_file_hit": "True",
+      "hit_arms": "0",
+      "state": "pending-build-and-file-review"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "prechange_sha256": "85ea047ab74ce6aba5a6d318cc57151d9ff6c51ca67fee75630cdd88ce84898a",
+      "current_sha256": "13dd415db787321bbc1b3c65cc07f51646f3145f6d9cf8c5a2e693d443d02767",
+      "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
+      "marker_file_hit": "True",
+      "hit_arms": "13",
+      "state": "pending-build-and-file-review"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.c",
+      "prechange_sha256": "bd8a84e403082ed9305b0f0051a5536a11f4e786713da2bb903e9b8dd4e2ba60",
+      "current_sha256": "efd09d864475678d3b81d22bf029cbc4b95a69247c420cf783d5a7b0974ef81e",
+      "original_sha256": "3404569a45421465a6b916975b978d9ede19ba3ee7f2534b20fad304e91bc7ff",
+      "marker_file_hit": "True",
+      "hit_arms": "1",
+      "state": "pending-build-and-file-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "prechange_sha256": "09ee1d52d500e352b027f57cb585cd91077c0693614a1259287986c710878ee8",
+      "current_sha256": "83b39c438d16306c1f8871585211466b37a11982158e6aee5eef1347b98cf94a",
+      "original_sha256": "c3df77a2987e97df8872c3dab8f6e7c10a08850c5ebcb439c0ec1dc88b0cdc44",
+      "marker_file_hit": "True",
+      "hit_arms": "2",
+      "state": "pending-build-and-file-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+      "prechange_sha256": "cf5b2b70ab27fecbdb7ff787e39a53c1982a01d2d25f45e351fe87d0cbc43995",
+      "current_sha256": "ab8c05f35ff69933d17bb32d3e0199a3b34820a9958ea8fa7dd12913e43b0b8b",
+      "original_sha256": "fd78200232574074f7ec68d2f5b851c27ee9d5024427310d18ebbcb048336e97",
+      "marker_file_hit": "True",
+      "hit_arms": "2",
+      "state": "pending-build-and-file-review"
+    }
+  ]
+}

@@ -109,3 +109,12 @@ The [no-emission exclusion review](../../../artifacts/mvdm-audit/t476-s2-exclude
 ## Conditional projections without emitted lines
 
 The [strict no-emission review](../../../artifacts/mvdm-audit/t476-s2-strict-no-emission-review.json) completes 15 files from the previous 30-file transformed-output group. Their full conditional projections and matching-code positions were already reviewed against hash-identical originals and current source. The 20 actual contexts cover each file marker and every hit arm; these 15 emit no source text, so no emitted-line claim is made. The remaining unexplained file from that group stays open. Current progress is 743 complete, 312 open. The two COMMAND line corrections remain an unbuilt source batch.
+
+
+### Ten-file diagnostic-line batch
+
+Ten host mirror files received only `#line` corrections, listed with original and before/after source hashes in [the batch record](../../../artifacts/mvdm-audit/t476-s2-line-batch1.json). The original file and S1 marker evidence remain the references; the changed files are **not** counted as complete per-file audits yet. The checklist current hashes were updated; completion remains 743 of 1,055.
+
+The x86 and x64 cached product builds succeeded, including the inner NTVDM and WOW32 Ninja targets. The first build attempt stopped before those targets because it invoked CMake on an inner Ninja tree; the corrected build exited zero. Candidate staging succeeded. The [ten-image PE comparison](../../../artifacts/mvdm-audit/t476-s2-batch1-pe-comparison.json) found eight identical images and two images differing exclusively in COFF and debug-directory timestamps; no executable bytes differed. The owner explicitly allows skipping repeat runtime tests for line-only changes with no substantive executable differences, so no runtime test was repeated for this batch.
+
+The coherent ten-image package and hook license were synchronized and SHA-256 checked at `assets/release` and `O:/winnt/system32`; the prior package is retained under `build/t476-s2/batch1-publish-backup`. Build logs and stage results are under `build/t476-s2`. No guest source or binary was rebuilt or changed.

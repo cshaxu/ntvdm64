@@ -639,6 +639,7 @@ BOOL W32Init(VOID)
     WK32InitWowIsKnownDLL(WowKey);
 
     if (WowKey != NULL) {
+#line 681
         RegCloseKey (WowKey);
     }
     // 

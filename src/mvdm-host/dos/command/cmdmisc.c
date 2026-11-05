@@ -611,6 +611,7 @@ LPSTR    pszCmdLine;
         pch = strstr(pszCmdLine, " -a ");
         if (pch != NULL) {
             pszCmdLine = pch + 4;
+#line 460
             while (*pszCmdLine && *pszCmdLine == ' ') {
                    pszCmdLine++;
             }
@@ -767,6 +768,7 @@ UINT  DriveType;
             setAX(0);
             return;
         }
+#line 574
 	setCF(0);
 #line 575
     }

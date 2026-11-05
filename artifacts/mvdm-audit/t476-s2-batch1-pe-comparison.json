@@ -1,0 +1,52 @@
+[
+  {
+    "name": "run16.exe",
+    "difference_bytes": 0,
+    "only_pe_and_debug_timestamps": true
+  },
+  {
+    "name": "ntsrv.exe",
+    "difference_bytes": 0,
+    "only_pe_and_debug_timestamps": true
+  },
+  {
+    "name": "ntcon.exe",
+    "difference_bytes": 0,
+    "only_pe_and_debug_timestamps": true
+  },
+  {
+    "name": "ntvdm.exe",
+    "difference_bytes": 4,
+    "only_pe_and_debug_timestamps": true
+  },
+  {
+    "name": "ntvwm.exe",
+    "difference_bytes": 0,
+    "only_pe_and_debug_timestamps": true
+  },
+  {
+    "name": "ntmon.exe",
+    "difference_bytes": 0,
+    "only_pe_and_debug_timestamps": true
+  },
+  {
+    "name": "WOW32.DLL",
+    "difference_bytes": 4,
+    "only_pe_and_debug_timestamps": true
+  },
+  {
+    "name": "VDMREDIR.DLL",
+    "difference_bytes": 0,
+    "only_pe_and_debug_timestamps": true
+  },
+  {
+    "name": "nthook32.dll",
+    "difference_bytes": 0,
+    "only_pe_and_debug_timestamps": true
+  },
+  {
+    "name": "nthook64.dll",
+    "difference_bytes": 0,
+    "only_pe_and_debug_timestamps": true
+  }
+]

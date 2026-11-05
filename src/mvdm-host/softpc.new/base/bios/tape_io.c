@@ -293,6 +293,7 @@ half_word target_AR;
 #line 276
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else
+#line 279
 		setES( getCS() );
 		setBX( CONF_TABLE_OFFSET );
 #endif

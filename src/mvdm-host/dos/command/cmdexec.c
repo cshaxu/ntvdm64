@@ -437,6 +437,7 @@ VOID cmdCreateProcess ( VOID )
         StdHandlesValid = FALSE;
     else {
         if ((hStd16In = (HANDLE)FETCHDWORD(pStdHandles->hStdIn)) != (HANDLE)-1)
+#line 344
             SetStdHandle (STD_INPUT_HANDLE, hStd16In);
 #line 345
 
@@ -465,20 +466,23 @@ VOID cmdCreateProcess ( VOID )
         Status = FALSE;
     }
     else {
+#line 363
         RtlInitString((PSTRING)&OemString, pCommand32);
         NtStatus = RtlOemStringToUnicodeString(&Unicode,&OemString,TRUE);
         if (NT_SUCCESS(NtStatus)) {
             NtStatus = RtlUnicodeStringToAnsiString((PANSI_STRING)&OemString,
                 &Unicode, FALSE);
+#line 367
             RtlFreeUnicodeString( &Unicode );
 	}
         if (!NT_SUCCESS(NtStatus)) {
             SetLastError(RtlNtStatusToDosError(NtStatus));
-#line 376
+#line 371
 	    Status = FALSE;
 	}
 	else if (pEnv32 != NULL) {
 
+#line 374
             if (!cmdXformEnvironment(pEnv32, &Env_A)) {
                 SetLastError(ERROR_NOT_ENOUGH_MEMORY);
                 Status = FALSE;
@@ -486,6 +490,7 @@ VOID cmdCreateProcess ( VOID )
             else {
 
 
+#line 380
                 Status = CreateProcess (
                                 NULL,
                                 (LPTSTR)pCommand32,

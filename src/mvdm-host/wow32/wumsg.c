@@ -907,10 +907,12 @@ get_next_dde_message:
         BOOL savedThunkDDE = fThunkDDEmsg;
         __try {
             fThunkDDEmsg = TRUE;
+#line 853
             ulReturn = putmsg16(vpMsg, &t1);
         } __finally { fThunkDDEmsg = savedThunkDDE; }
     }
 
+#line 855
     // NOTE: Call to putmsg16 could've caused 16-bit memory movement
 
     if (((t1.message == WM_DDE_DATA) || (t1.message == WM_DDE_POKE)) && (!ulReturn)) {

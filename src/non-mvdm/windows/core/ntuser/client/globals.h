@@ -9,6 +9,7 @@
 #line 43
 extern CONST BOOLEAN gabThunkMessage[];
 /* OPENNT-HOST-117: original clglobal.c owns the sizing exemplar. */
+#line 47
 extern WCHAR szOneChar[];
 
 /*
@@ -21,6 +22,7 @@ extern WCHAR szOneChar[];
  * (SAS 6-18-92) added hack for all macros
  */
 
+#line 104
 #define LOCALALLOC(dwFlags, dwBytes, hInstance)         \
                             (*pfnLocalAlloc)(dwFlags, dwBytes, hInstance)
 #define LOCALREALLOC(hMem, dwBytes, dwFlags, hInstance, ppv) \
