@@ -15,7 +15,7 @@
 #define __WOWCOMM__
 
 #ifndef UNALIGNED    // this makes UNALIGNED visible only to 32-bit stuff
-#define UNALIGNED    // and invisible to 16-bit stuff
+#error T476-S1: branch not selected by product build
 #endif
 
 /* XLATOFF */

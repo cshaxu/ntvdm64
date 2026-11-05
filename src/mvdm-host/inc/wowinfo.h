@@ -18,14 +18,14 @@
 //
 
 #ifndef UNALIGNED
+#error T476-S1: branch not selected by product build
 
-#if defined(MIPS) || defined(_ALPHA_) // winnt
 #line 23
 #error Excluded unsupported original MIPS/Alpha UNALIGNED fallback
-#else                         // winnt
+
 #line 25
-#define UNALIGNED             // winnt
-#endif                        // winnt
+
+
 #line 27
 
 #endif

@@ -27,6 +27,7 @@
 #line 30
 #ifdef _USERK_
 #line 31
+#error T476-S1: branch not selected by product build
 #else
 #line 36
 #endif
@@ -42,10 +43,12 @@
 #line 46
 #ifdef RIP_COMPONENT
 #line 47
+#error T476-S1: branch not selected by product build
 #endif
 #line 49
 #ifdef _USERK_
 #line 50
+#error T476-S1: branch not selected by product build
 #else
 #line 52
 #endif
@@ -54,6 +57,7 @@
 #line 68
 #ifdef _USERK_
 #line 69
+#error T476-S1: branch not selected by product build
 #else
 #line 78
 #ifndef WOW
@@ -67,6 +71,7 @@
 #line 89
 #else
 #line 90
+#error T476-S1: branch not selected by product build
 #endif
 #line 107
 #endif /* _USERK_ */
@@ -82,6 +87,7 @@
 #line 131
 #ifdef _USERK_
 #line 132
+#error T476-S1: branch not selected by product build
 #else
 #line 149
 #endif
@@ -90,6 +96,7 @@
 #line 177
 #ifdef _USERK_
 #line 178
+#error T476-S1: branch not selected by product build
 #else
 #line 217
 #endif

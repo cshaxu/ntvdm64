@@ -1,3 +1,5 @@
+#ifndef _USERCLI_
+#define _USERCLI_
 /* Copyright (c) 1985-91, Microsoft Corporation.
  * Original windows/core/ntuser/client/usercli.h declaration subset.
  * DIVERGENCE(OPENNT-HOST-072/074): retain original EDIT state, validation,
@@ -639,7 +641,7 @@ typedef struct tagCBox {
 #define LBUP_SUCCESS        0x0008
 #define LBUP_SELCHANGE      0x0010
 #ifndef OPENNT_COMBO_STATE_LAYOUT_H
-typedef struct tagCBox *PCBOX;
+#error T476-S1: branch not selected by product build
 #endif
 typedef struct _SCROLLPOS {
     INT cItems;
@@ -1090,49 +1092,6 @@ typedef struct tagMDIWND {
 #define DBT_TEXT            0x0001
 #define DBT_FOCUS           0x0002
 #endif
-#line 2307
-#if DBG
-#line 2308
-#error Excluded unsupported DBG HANDLE_WARNING profile
-#else
-#line 2317
-#define HANDLE_WARNING()
-#endif
-#line 2320
-#if DBG
-#line 2321
-#error Excluded unsupported DBG CHECK_HANDLE_WARNING profile
-#else
-#line 2337
-#define CHECK_HANDLE_WARNING(h,bZ)
-#endif
-#line 2342
-#if HANDLE_FIXUP
-#line 2343
-#error Excluded unsupported HANDLE_FIXUP FIXUP_HANDLE profile
-#else
-#line 2352
-#define FIXUP_HANDLE(h)                                 \
-{                                                       \
-    CHECK_HANDLE_WARNING(h,FALSE);                      \
-}
-#endif
-#line 2358
-#if HANDLE_FIXUP
-#line 2359
-#error Excluded unsupported HANDLE_FIXUP FIXUP_HANDLEZ profile
-#else
-#line 2368
-#define FIXUP_HANDLEZ(h)                                \
-{                                                       \
-    CHECK_HANDLE_WARNING(h,TRUE);                       \
-}
-#endif
-#line 2374
-#ifdef FE_SB // DBCS Messaging macros for client side.
-#error Excluded unsupported FE_SB client messaging macros
-#endif // FE_SB
-
 #line 22
 #if DBG
 #line 23
@@ -1142,6 +1101,7 @@ typedef struct tagMDIWND {
 #line 26
 #ifdef RIP_COMPONENT
 #line 27
+#error T476-S1: branch not selected by product build
 #endif
 #line 29
 #line 44
@@ -1215,3 +1175,48 @@ typedef struct tagMDIWND {
 #error Excluded unsupported original USER client condition
 #endif
 #line 2211
+
+#endif /* _USERCLI_ */
+#line 2307
+#if DBG
+#line 2308
+#error Excluded unsupported DBG HANDLE_WARNING profile
+#else
+#line 2317
+#define HANDLE_WARNING()
+#endif
+#line 2320
+#if DBG
+#line 2321
+#error Excluded unsupported DBG CHECK_HANDLE_WARNING profile
+#else
+#line 2337
+#define CHECK_HANDLE_WARNING(h,bZ)
+#endif
+#line 2342
+#if HANDLE_FIXUP
+#line 2343
+#error Excluded unsupported HANDLE_FIXUP FIXUP_HANDLE profile
+#else
+#line 2352
+#define FIXUP_HANDLE(h)                                 \
+{                                                       \
+    CHECK_HANDLE_WARNING(h,FALSE);                      \
+}
+#endif
+#line 2358
+#if HANDLE_FIXUP
+#line 2359
+#error Excluded unsupported HANDLE_FIXUP FIXUP_HANDLEZ profile
+#else
+#line 2368
+#define FIXUP_HANDLEZ(h)                                \
+{                                                       \
+    CHECK_HANDLE_WARNING(h,TRUE);                       \
+}
+#endif
+#line 2374
+#ifdef FE_SB // DBCS Messaging macros for client side.
+#error Excluded unsupported FE_SB client messaging macros
+#endif // FE_SB
+

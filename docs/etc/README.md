@@ -1,5 +1,7 @@
 # Supporting Material
 
+[T476 S1 mirror conditional audit](evidence/m0-t476-s1-mirror-conditional.md) records the identity checkpoint and current complete-file review evidence.
+
 [T474 S1 shared-ownership integration](evidence/m0-t474-s1-shared-range-integration.md) records the complete sibling range, integration fixes, full validation and published package.
 
 [T475 S5 process-hook import](evidence/m0-t475-s5-process-hook-import.md) records source identity, compatibility boundaries and evidence.
@@ -1135,3 +1137,5 @@ focused timer/hook witnesses, and the finite S2 dialog/input/caret handoff.
 [T474 S5 LF line endings](evidence/m0-t474-s5-lf-line-endings.md) records the line-ending boundary, normalization and verification.
 
 [T474 S6 public component tests](evidence/m0-t474-s6-public-component-tests.md) records test ownership, dependency direction and verification.
+
+[T476 S1 main integration](evidence/m0-t476-s1-main-integration.md) records the merged commits, complete selected gate and coherent publication.

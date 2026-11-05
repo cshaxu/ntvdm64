@@ -4,7 +4,7 @@
 #include "wow_user_task_lifecycle.h"
 #include "wow_edit_entry_bindings.h"
 #define WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
-#include "non-mvdm/windows/core/ntuser/inc/user.h"
+#include "compat/include/opennt_user_multipass.h"
 #undef WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
 
 /* OPENNT-HOST-117: logical cleanup stays original; reuse waits until the

@@ -11,7 +11,7 @@
 /* DIVERGENCE(OPENNT-HOST-063): unchanged object ownership table; native
  * USER remains the allocator. Do not allocate a second handle namespace. */
 #include <windows.h>
-#include "../inc/user.h"
+#include "compat/include/opennt_user_multipass.h"
 #define WOW_USER_OBJECT_FLAGS_ONLY
 #include "userk.h"
 

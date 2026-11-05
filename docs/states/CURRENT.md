@@ -2,29 +2,42 @@
 
 ## Current Work
 
-**No active numeric M/T/S packet.** T474 is owner-accepted and closed; see
-[closure](../history/m0-t474-closure.md). The owner directed integration of the
-independent mirror-conditional worktree as the next task.
+**Active: M0 T476 S1** — main integration verified and published; per-file audit boundaries remain recorded.
 
-## S5 Closure Record
+T474 was accepted and closed by the owner; its
+[closure](../history/m0-t474-closure.md) and S1–S6 evidence remain authoritative.
+The owner directed integration of the independent T476 mirror-conditional
+worktree into main, followed by coherent build, testing and publication.
 
-The [S5 LF rules and verification](../etc/evidence/m0-t474-s5-lf-line-endings.md) were delivered.
+## Active Packet
 
-## S4 Closure Record
+### M0 T476 S1 — inventory and recover missing conditional structure
 
-The [S4 delivery](../etc/evidence/m0-t474-s4-process-launch.md) passed verification and was published.
+The independent host C/H marker audit and 30 outermost exclusions have been
+integrated to main. The merged x86/x64 builds, exclusion check and full selected
+product integration gate passed, and the coherent ten-image package was
+published to both release destinations. See the [main integration record](../etc/evidence/m0-t476-s1-main-integration.md) and [original audit evidence](../etc/evidence/m0-t476-s1-mirror-conditional.md). The latter records the
+remaining per-file and line-mapping boundaries; they are not claimed complete.
 
-## S3 Closure Record
-
-The [S3 import](../etc/evidence/m0-t474-s3-process-image.md) passed verification and was delivered.
-
-## S2 Closure Record
-
-The [S2 and P1 delivery](../etc/evidence/m0-t474-s2-win32-library-split.md) passed the full selected gates and was published.
-
-## S1 Closure Record
-
-The [S1 integration](../etc/evidence/m0-t474-s1-shared-range-integration.md) was delivered as the S2 baseline.
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T476 S1, Ordinary Mode. |
+| Admission And Approval | Owner directed a new T in a worktree based on main's latest commit for the queued original mirror excluded-branch `#error` and `#line` audit. |
+| Objective | Enumerate host mirror C/H files and match original identities; recover missing original conditional boundaries without restoring bodies already replaced by #error or changing existing #line directives. Then instrument all remaining branches and collect full-build hits before any new exclusion decisions. |
+| Non-goals | Do not alter guest mirrors or enable unsupported profiles; preserve accepted T474 changes. |
+| Reference Baseline | Merged `fd221634b` and `0403e0d9b`; historical [S13 closure](../history/m0-t473-s13-closure.md) is inherited evidence, not proof of complete-file coverage. |
+| Files And ABI Surface | Host mirror `.c` and `.h` files in `src/mvdm-host` and `src/non-mvdm`, their product build contexts, necessary include adapters, focused tests and audit records; Guest and non-C/H mirrors are excluded. |
+| Applicable Rules | Source policy, original source provenance, per-file complete audit, preserve unrelated work. |
+| Verification | Pin original/current identities; verify recovered conditional structures and preserved existing guards, instrument remaining branches, full x86/x64 build and hit collection, and validate marker equivalence. Apply later exclusions from the complete hit ledger; run package comparison and required gates. |
+| Expected Markers | Every in-scope host C/H mirror file is inventoried and mapped to its recorded original; existing #error/#line retained; missing condition structures recovered; every not-yet-excluded arm marked and full-build hits recorded. |
+| Asset Needs | Existing pinned original sources and supported local compiler/build tools; no external fetch. |
+| Reporting Requirements | Report completed/identical/incomplete/deleted counts and tested contexts, limitations and local commits. |
+| Stop Conditions | Unavailable verified originals, unsupported profile selection, guest mutation or unapproved selected behavior change. |
+| Exit Criteria | Complete inventory and conditional-structure recovery, comprehensive marker build/hit ledger, and subsequent file-by-file unhit-arm exclusion; validate and deliver batches under the proposal. |
+| Original Owner Request | Owner specified: audit only host mirror C/H files; match original and recover conditional structure, preserving existing #error/#line; mark non-excluded branches; full build and register hits; replace unhit arms with #error and remove their nested branch structure. Guest and non-C/H mirrors are excluded. |
+| Similar-Issue Sweep | All in-scope host C/H mirror files and actual build contexts; preserve already excluded arms and line markers; use owner-directed full-build hit results for remaining branch decisions. |
+| Candidate Proposal | [Complete mirror conditional audit by file](../proposals/proposal-mirror-conditional-file-audit-001.md). |
+| Temporary Evidence | `build/t476-s1`, 90-minute phase, 4-GiB limit; build-owned caches only. |
 
 ## M0 T475 S5 Closure
 
@@ -191,7 +204,7 @@ T456 S1/S2 disposable evidence uses `build/t456-s1` and `build/t456-s2`.
 
 ## Recent M0 Closures
 
-[T474](../history/m0-t474-closure.md), [T460](../history/m0-t460-closure.md), [T454](../history/m0-t454-closure.md),
+[T460](../history/m0-t460-closure.md), [T454](../history/m0-t454-closure.md),
 [T453](../history/m0-t453-closure.md), T452,
 [T451](../history/m0-t451-closure.md), [T450](../history/m0-t450-closure.md),
 [T449](../history/m0-t449-closure.md), [T448](../history/m0-t448-closure.md).

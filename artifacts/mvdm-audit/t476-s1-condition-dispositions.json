@@ -1,0 +1,224 @@
+{
+  "src/mvdm-host/softpc.new/base/video/egawrtm0.c:522": {
+    "decision": "existing-exclusion",
+    "current_sha256": "cf18fb5933b15f5b1363759aba7f37a0e7ef60469f1f39ed56786a89786dcb24",
+    "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+    "evidence": "Original line 522 is inside prior removed source region 467-606; existing non-CPU40 #error is anchored at #line 467. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/base/video/egawrtm0.c:524": {
+    "decision": "existing-exclusion",
+    "current_sha256": "cf18fb5933b15f5b1363759aba7f37a0e7ef60469f1f39ed56786a89786dcb24",
+    "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+    "evidence": "Original line 524 is inside prior removed source region 467-606; existing non-CPU40 #error is anchored at #line 467. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/base/video/egawrtm0.c:533": {
+    "decision": "existing-exclusion",
+    "current_sha256": "cf18fb5933b15f5b1363759aba7f37a0e7ef60469f1f39ed56786a89786dcb24",
+    "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+    "evidence": "Original line 533 is inside prior removed source region 467-606; existing non-CPU40 #error is anchored at #line 467. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/base/video/egawrtm0.c:535": {
+    "decision": "existing-exclusion",
+    "current_sha256": "cf18fb5933b15f5b1363759aba7f37a0e7ef60469f1f39ed56786a89786dcb24",
+    "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+    "evidence": "Original line 535 is inside prior removed source region 467-606; existing non-CPU40 #error is anchored at #line 467. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/base/video/egawrtm0.c:542": {
+    "decision": "existing-exclusion",
+    "current_sha256": "cf18fb5933b15f5b1363759aba7f37a0e7ef60469f1f39ed56786a89786dcb24",
+    "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+    "evidence": "Original line 542 is inside prior removed source region 467-606; existing non-CPU40 #error is anchored at #line 467. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/base/video/egawrtm0.c:544": {
+    "decision": "existing-exclusion",
+    "current_sha256": "cf18fb5933b15f5b1363759aba7f37a0e7ef60469f1f39ed56786a89786dcb24",
+    "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+    "evidence": "Original line 544 is inside prior removed source region 467-606; existing non-CPU40 #error is anchored at #line 467. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/base/video/egawrtm0.c:1099": {
+    "decision": "existing-exclusion",
+    "current_sha256": "cf18fb5933b15f5b1363759aba7f37a0e7ef60469f1f39ed56786a89786dcb24",
+    "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+    "evidence": "Original line 1099 is inside prior removed source region 1085-1355; existing non-CPU40 #error is anchored at #line 1085. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/base/video/egawrtm0.c:1101": {
+    "decision": "existing-exclusion",
+    "current_sha256": "cf18fb5933b15f5b1363759aba7f37a0e7ef60469f1f39ed56786a89786dcb24",
+    "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+    "evidence": "Original line 1101 is inside prior removed source region 1085-1355; existing non-CPU40 #error is anchored at #line 1085. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/base/video/egawrtm0.c:1108": {
+    "decision": "existing-exclusion",
+    "current_sha256": "cf18fb5933b15f5b1363759aba7f37a0e7ef60469f1f39ed56786a89786dcb24",
+    "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+    "evidence": "Original line 1108 is inside prior removed source region 1085-1355; existing non-CPU40 #error is anchored at #line 1085. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/base/video/egawrtm0.c:1110": {
+    "decision": "existing-exclusion",
+    "current_sha256": "cf18fb5933b15f5b1363759aba7f37a0e7ef60469f1f39ed56786a89786dcb24",
+    "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+    "evidence": "Original line 1110 is inside prior removed source region 1085-1355; existing non-CPU40 #error is anchored at #line 1085. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/base/video/egawrtm0.c:1172": {
+    "decision": "existing-exclusion",
+    "current_sha256": "cf18fb5933b15f5b1363759aba7f37a0e7ef60469f1f39ed56786a89786dcb24",
+    "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+    "evidence": "Original line 1172 is inside prior removed source region 1085-1355; existing non-CPU40 #error is anchored at #line 1085. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/base/video/egawrtm0.c:1174": {
+    "decision": "existing-exclusion",
+    "current_sha256": "cf18fb5933b15f5b1363759aba7f37a0e7ef60469f1f39ed56786a89786dcb24",
+    "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+    "evidence": "Original line 1174 is inside prior removed source region 1085-1355; existing non-CPU40 #error is anchored at #line 1085. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/base/video/egawrtm0.c:1183": {
+    "decision": "existing-exclusion",
+    "current_sha256": "cf18fb5933b15f5b1363759aba7f37a0e7ef60469f1f39ed56786a89786dcb24",
+    "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+    "evidence": "Original line 1183 is inside prior removed source region 1085-1355; existing non-CPU40 #error is anchored at #line 1085. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/base/video/egawrtm0.c:1185": {
+    "decision": "existing-exclusion",
+    "current_sha256": "cf18fb5933b15f5b1363759aba7f37a0e7ef60469f1f39ed56786a89786dcb24",
+    "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+    "evidence": "Original line 1185 is inside prior removed source region 1085-1355; existing non-CPU40 #error is anchored at #line 1085. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/base/video/egawrtm0.c:1260": {
+    "decision": "existing-exclusion",
+    "current_sha256": "cf18fb5933b15f5b1363759aba7f37a0e7ef60469f1f39ed56786a89786dcb24",
+    "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+    "evidence": "Original line 1260 is inside prior removed source region 1085-1355; existing non-CPU40 #error is anchored at #line 1085. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/base/video/egawrtm0.c:1262": {
+    "decision": "existing-exclusion",
+    "current_sha256": "cf18fb5933b15f5b1363759aba7f37a0e7ef60469f1f39ed56786a89786dcb24",
+    "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+    "evidence": "Original line 1262 is inside prior removed source region 1085-1355; existing non-CPU40 #error is anchored at #line 1085. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/base/video/egawrtm0.c:1290": {
+    "decision": "existing-exclusion",
+    "current_sha256": "cf18fb5933b15f5b1363759aba7f37a0e7ef60469f1f39ed56786a89786dcb24",
+    "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+    "evidence": "Original line 1290 is inside prior removed source region 1085-1355; existing non-CPU40 #error is anchored at #line 1085. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/base/video/egawrtm0.c:1292": {
+    "decision": "existing-exclusion",
+    "current_sha256": "cf18fb5933b15f5b1363759aba7f37a0e7ef60469f1f39ed56786a89786dcb24",
+    "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+    "evidence": "Original line 1292 is inside prior removed source region 1085-1355; existing non-CPU40 #error is anchored at #line 1085. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/base/video/egwrtm12.c:1049": {
+    "decision": "existing-exclusion",
+    "current_sha256": "151646a7b9ba9319b6ce683f7c49c899168fe94d0f97721b12b64430c83f4b0a",
+    "original_sha256": "826aa1a6f685f7dc0d8b4362f3eb83899697d8a6e2a555739ff61e2388d254a1",
+    "evidence": "Original line 1049 is inside prior removed source region 1028-1219; existing non-CPU40 #error is anchored at #line 1028. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/base/video/egwrtm12.c:1052": {
+    "decision": "existing-exclusion",
+    "current_sha256": "151646a7b9ba9319b6ce683f7c49c899168fe94d0f97721b12b64430c83f4b0a",
+    "original_sha256": "826aa1a6f685f7dc0d8b4362f3eb83899697d8a6e2a555739ff61e2388d254a1",
+    "evidence": "Original line 1052 is inside prior removed source region 1028-1219; existing non-CPU40 #error is anchored at #line 1028. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/base/video/egwrtm12.c:1096": {
+    "decision": "existing-exclusion",
+    "current_sha256": "151646a7b9ba9319b6ce683f7c49c899168fe94d0f97721b12b64430c83f4b0a",
+    "original_sha256": "826aa1a6f685f7dc0d8b4362f3eb83899697d8a6e2a555739ff61e2388d254a1",
+    "evidence": "Original line 1096 is inside prior removed source region 1028-1219; existing non-CPU40 #error is anchored at #line 1028. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/base/video/egwrtm12.c:1098": {
+    "decision": "existing-exclusion",
+    "current_sha256": "151646a7b9ba9319b6ce683f7c49c899168fe94d0f97721b12b64430c83f4b0a",
+    "original_sha256": "826aa1a6f685f7dc0d8b4362f3eb83899697d8a6e2a555739ff61e2388d254a1",
+    "evidence": "Original line 1098 is inside prior removed source region 1028-1219; existing non-CPU40 #error is anchored at #line 1028. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/base/video/egwrtm12.c:1119": {
+    "decision": "existing-exclusion",
+    "current_sha256": "151646a7b9ba9319b6ce683f7c49c899168fe94d0f97721b12b64430c83f4b0a",
+    "original_sha256": "826aa1a6f685f7dc0d8b4362f3eb83899697d8a6e2a555739ff61e2388d254a1",
+    "evidence": "Original line 1119 is inside prior removed source region 1028-1219; existing non-CPU40 #error is anchored at #line 1028. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/base/video/egwrtm12.c:1121": {
+    "decision": "existing-exclusion",
+    "current_sha256": "151646a7b9ba9319b6ce683f7c49c899168fe94d0f97721b12b64430c83f4b0a",
+    "original_sha256": "826aa1a6f685f7dc0d8b4362f3eb83899697d8a6e2a555739ff61e2388d254a1",
+    "evidence": "Original line 1121 is inside prior removed source region 1028-1219; existing non-CPU40 #error is anchored at #line 1028. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/base/video/egwrtm12.c:1152": {
+    "decision": "existing-exclusion",
+    "current_sha256": "151646a7b9ba9319b6ce683f7c49c899168fe94d0f97721b12b64430c83f4b0a",
+    "original_sha256": "826aa1a6f685f7dc0d8b4362f3eb83899697d8a6e2a555739ff61e2388d254a1",
+    "evidence": "Original line 1152 is inside prior removed source region 1028-1219; existing non-CPU40 #error is anchored at #line 1028. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/base/video/egwrtm12.c:1154": {
+    "decision": "existing-exclusion",
+    "current_sha256": "151646a7b9ba9319b6ce683f7c49c899168fe94d0f97721b12b64430c83f4b0a",
+    "original_sha256": "826aa1a6f685f7dc0d8b4362f3eb83899697d8a6e2a555739ff61e2388d254a1",
+    "evidence": "Original line 1154 is inside prior removed source region 1028-1219; existing non-CPU40 #error is anchored at #line 1028. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/base/video/egwrtm12.c:1170": {
+    "decision": "existing-exclusion",
+    "current_sha256": "151646a7b9ba9319b6ce683f7c49c899168fe94d0f97721b12b64430c83f4b0a",
+    "original_sha256": "826aa1a6f685f7dc0d8b4362f3eb83899697d8a6e2a555739ff61e2388d254a1",
+    "evidence": "Original line 1170 is inside prior removed source region 1028-1219; existing non-CPU40 #error is anchored at #line 1028. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/base/video/egwrtm12.c:1172": {
+    "decision": "existing-exclusion",
+    "current_sha256": "151646a7b9ba9319b6ce683f7c49c899168fe94d0f97721b12b64430c83f4b0a",
+    "original_sha256": "826aa1a6f685f7dc0d8b4362f3eb83899697d8a6e2a555739ff61e2388d254a1",
+    "evidence": "Original line 1172 is inside prior removed source region 1028-1219; existing non-CPU40 #error is anchored at #line 1028. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/host/src/sim32.c:247": {
+    "decision": "existing-exclusion",
+    "current_sha256": "223e437f069bf601aa83b713cf848f939b228c36a58bba5130cfef53b69fbf16",
+    "original_sha256": "1f634b9d6c09d0f767a90ec9e577817800a07dc353cffa433ca2e0268d2cd42f",
+    "evidence": "Original line 247 is inside prior removed source region 239-258; existing non-CPU40 #error is anchored at #line 239. Retain existing guard and #line unchanged; see T476 S1 evidence."
+  },
+  "src/mvdm-host/softpc.new/base/video/egawrtm0.c:289": {
+    "decision": "existing-exclusion",
+    "current_sha256": "cf18fb5933b15f5b1363759aba7f37a0e7ef60469f1f39ed56786a89786dcb24",
+    "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+    "evidence": "The prior non-CPU40 writer-table body has an existing #error at original line anchor 264; the selected CPU40 path intentionally retains distinct empty table storage. Preserve the prior guard, line anchor and adaptation."
+  },
+  "src/mvdm-host/softpc.new/base/video/egawrtm0.c:306": {
+    "decision": "existing-exclusion",
+    "current_sha256": "cf18fb5933b15f5b1363759aba7f37a0e7ef60469f1f39ed56786a89786dcb24",
+    "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+    "evidence": "The prior non-CPU40 writer-table body has an existing #error at original line anchor 264; the selected CPU40 path intentionally retains distinct empty table storage. Preserve the prior guard, line anchor and adaptation."
+  },
+  "src/mvdm-host/softpc.new/base/video/egwrtm12.c:226": {
+    "decision": "existing-exclusion",
+    "current_sha256": "151646a7b9ba9319b6ce683f7c49c899168fe94d0f97721b12b64430c83f4b0a",
+    "original_sha256": "826aa1a6f685f7dc0d8b4362f3eb83899697d8a6e2a555739ff61e2388d254a1",
+    "evidence": "The prior non-CPU40 writer-table body has an existing #error at original line anchor 205; the selected CPU40 path intentionally retains distinct empty table storage. Preserve the prior guard, line anchor and adaptation."
+  },
+  "src/mvdm-host/softpc.new/base/video/egwrtm12.c:244": {
+    "decision": "existing-exclusion",
+    "current_sha256": "151646a7b9ba9319b6ce683f7c49c899168fe94d0f97721b12b64430c83f4b0a",
+    "original_sha256": "826aa1a6f685f7dc0d8b4362f3eb83899697d8a6e2a555739ff61e2388d254a1",
+    "evidence": "The prior non-CPU40 writer-table body has an existing #error at original line anchor 205; the selected CPU40 path intentionally retains distinct empty table storage. Preserve the prior guard, line anchor and adaptation."
+  },
+  "src/mvdm-host/softpc.new/base/support/xt.c:76": {
+    "decision": "existing-exclusion",
+    "current_sha256": "8bed82996166e7577f483bcef63d29532596fb0687be2d93ace08a080c0fb996",
+    "original_sha256": "a95cda1054b1840df73dbcec6e23cacbee1ddf2fd1ed071318c8c9252f21c0cc",
+    "evidence": "The original non-MAC legacy CCPU register block was already replaced by the pre-existing non-CPU40 #error anchored at original line 76; the CPU40 state is owned by the previously accepted separate store. Preserve the existing error, anchor and CPU40 adaptation."
+  },
+  "src/mvdm-host/dpmi32/dpmiint.c:859": {
+    "decision": "matched-existing",
+    "current_sha256": "1d44faf32b02b7d5aad62aa8d8f72800297669e4ab659a8beeb27648a722c7d7",
+    "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+    "evidence": "The original non-i386 function group is already represented by the prior broadened CPU40 guard around the same DpmiFaultHandler body; preserve the selected CPU40 adaptation. Existing guard differs from the original expression; this records the actual prior adaptation, not an exact-expression match."
+  },
+  "src/mvdm-host/softpc.new/base/dos/emm_mngr.c:1883": {
+    "decision": "matched-existing",
+    "current_sha256": "07775984ef3fe7e1e362423caa18ee91cb71e46a28021be27680933718f98436",
+    "original_sha256": "fd73ce7181f7dfb61432d63466c7641c3d010ca0c60bf446666b6c0118ddb8a9",
+    "evidence": "The original non-NTVDM writeback group is already represented by the prior guard including the admitted LIM writeback adapter; preserve the existing selected behavior. Existing guard differs from the original expression; this records the actual prior adaptation, not an exact-expression match."
+  },
+  "src/mvdm-host/softpc.new/base/video/video.c:1511": {
+    "decision": "matched-existing",
+    "current_sha256": "33ad6f8273c53ebbaa5fe365d36b455c1ffca1527e25978d1a53875622b7c34b",
+    "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+    "evidence": "The original video group is represented by the existing standalone-aware guard and its existing rejected arm; preserve the prior adapter and #error. Existing guard differs from the original expression; this records the actual prior adaptation, not an exact-expression match."
+  }
+}

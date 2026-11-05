@@ -3,7 +3,7 @@
 #include "wow_edit_lookaside_bindings.h"
 #include "wow_edit_memory_bindings.h"
 #include "wow_window_client_state_bindings.h"
-#include "non-mvdm/windows/core/ntuser/client/usercli.h"
+#include "compat/include/opennt_usercli_multipass.h"
 
 /* Caller retains task/borrow scope and HWND identity through the call.
  * After application destruction dispatch, before retirement; canonical

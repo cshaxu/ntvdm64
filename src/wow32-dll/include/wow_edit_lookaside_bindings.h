@@ -18,7 +18,7 @@ typedef struct _ZONE_HEADER {
 } ZONE_HEADER, *PZONE_HEADER;
 
 #define WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY
-#include "non-mvdm/windows/core/ntuser/client/usercli.h"
+#include "compat/include/opennt_usercli_multipass.h"
 #undef WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY
 
 /* Original USER initialized its global critical section before controls.

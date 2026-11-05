@@ -6,7 +6,7 @@
 #include "wow_edit_entry_bindings.h"
 #include "wow_dialog_state_bindings.h"
 #include "wow_user_client_view_layout.h"
-#include "non-mvdm/windows/core/ntuser/inc/user.h"
+#include "compat/include/opennt_user_multipass.h"
 #include "common/wow/page_domain.h"
 
 #include <stdio.h>

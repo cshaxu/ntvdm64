@@ -4,8 +4,8 @@
 #define WOW_ORIGINAL_DIALOG_GETSET_LAYOUT
 #define WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
 #define WOW_ORIGINAL_COMBO_STATE_LAYOUT
-#include "non-mvdm/windows/core/ntuser/client/usercli.h"
-#include "non-mvdm/windows/core/ntuser/inc/user.h"
+#include "compat/include/opennt_usercli_multipass.h"
+#include "compat/include/opennt_user_multipass.h"
 #undef WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
 #undef WOW_ORIGINAL_COMBO_STATE_LAYOUT
 #undef WOW_ORIGINAL_DIALOG_GETSET_LAYOUT

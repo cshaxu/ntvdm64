@@ -2,7 +2,7 @@
 #include "wow_edit_entry_bindings.h"
 #include "wow_edit_native_bindings.h"
 #include "wow_user_private_access.h"
-#include "non-mvdm/windows/core/ntuser/inc/user.h"
+#include "compat/include/opennt_user_multipass.h"
 
 LONG WINAPI EditWndProcA(HWND, UINT, WPARAM, LONG);
 LONG WINAPI EditWndProcW(HWND, UINT, WPARAM, LONG);
