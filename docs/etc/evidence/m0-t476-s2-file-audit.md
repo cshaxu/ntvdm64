@@ -123,3 +123,8 @@ The coherent ten-image package and hook license were synchronized and SHA-256 ch
 ### Post-publication compiler-line follow-up
 
 The ten changed files were reprocessed in 39 recorded product contexts; all commands succeeded. The [follow-up index](../../../artifacts/mvdm-audit/t476-s2-batch1-preprocess.json) binds each current source hash to matching original-line observations and unresolved lexical leads. Several apparent mismatches are repeated statements or project-added failure handling; these cannot be accepted or corrected automatically. This is sampled compiler evidence, not complete per-file certification, so the progress count remains unchanged.
+
+
+### Completed COMMAND line-batch files
+
+The [final COMMAND file review](../../../artifacts/mvdm-audit/t476-s2-command-final-review.json) completes `cmdexec.c` and `cmdmisc.c`. It binds both source versions to their original hashes, records every matched original source line and its logical location, checks the entire original conditional inventory and the single excluded `CHECK_IT_LATER` branch, and references the successful actual compiler observations. Both entire original/current diffs were reviewed; added guest-location, process, stream and environment adaptations remain under existing mirror divergence records. Macro and local-added duplicate statements were distinguished from original statements. The earlier ten-file production build and publication remain applicable because no source was modified in this review. Total: **745 of 1,055 complete; 310 open**. The other eight files from that earlier batch remain open.

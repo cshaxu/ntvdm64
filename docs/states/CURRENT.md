@@ -4,7 +4,7 @@
 
 **Active: M0 T476 S2** — complete the outstanding per-file mirror conditional and line audit.
 
-S1 integrated and published its marker build and 30 exclusions; its [main integration evidence](../etc/evidence/m0-t476-s1-main-integration.md) retains the limits. The owner directed S2 to finish them. The [S2 baseline](../etc/evidence/m0-t476-s2-file-audit.md) tracks all 1,055 files: 743 files have completed file-level review; 312 require further review. A ten-file diagnostic-line batch has been built and published; its files remain in the 312 pending full per-file review, rather than being counted complete.
+S1 integrated and published its marker build and 30 exclusions; its [main integration evidence](../etc/evidence/m0-t476-s1-main-integration.md) retains the limits. The owner directed S2 to finish them. The [S2 baseline](../etc/evidence/m0-t476-s2-file-audit.md) tracks all 1,055 files: 745 files have completed file-level review; 310 require further review. The prior ten-file diagnostic-line batch was built and published; two of those files are now individually reviewed, and eight remain open.
 
 ## Active Packet
 
