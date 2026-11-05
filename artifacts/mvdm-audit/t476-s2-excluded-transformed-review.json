@@ -1,0 +1,1108 @@
+{
+  "method": "hash-matched original excluded-branch tree and outside projection; all emitted compiler lines map to nonblank original lines or identical pragmas",
+  "contexts": [
+    35,
+    130,
+    134,
+    575,
+    11,
+    18,
+    27,
+    34,
+    61,
+    62,
+    121,
+    122,
+    133,
+    166,
+    168,
+    169,
+    254,
+    276,
+    300,
+    302,
+    305,
+    307,
+    482,
+    483,
+    576,
+    577,
+    578,
+    579
+  ],
+  "files": [
+    {
+      "path": "src/mvdm-host/dpmi32/debug.c",
+      "current_sha256": "ef8e04f3ea91d4c9ca87fbb034d745a28739ed1656a7dfebc1290b6e195e6b5d",
+      "original_sha256": "88a0fb538d88f8bee711bd2aa5390602394abe1fc1a577090f15183a3bfd1fb1",
+      "prior_evidence": "s13-r1334-excluded-only-review.json",
+      "contexts": [
+        276
+      ],
+      "emitted_line_samples": [
+        {
+          "logical_line": 20,
+          "emitted": "#pragma hdrstop"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_page.h",
+      "current_sha256": "50e62c347f220ef41e863e4b47d011e09303abffd6b30fc2b5d8b52c00fc45fb",
+      "original_sha256": "f89ead8f38886fd2be66d322bec8adf2e1be56108e35ef95f89063082da973f9",
+      "prior_evidence": "s13-r1334-excluded-only-review.json",
+      "contexts": [
+        35
+      ],
+      "emitted_line_samples": [
+        {
+          "logical_line": 26,
+          "emitted": "extern IU32 spr_chk_byte"
+        },
+        {
+          "logical_line": 28,
+          "emitted": "(IU32 lin_addr, ISM32 access_type);"
+        },
+        {
+          "logical_line": 34,
+          "emitted": "extern void spr_chk_dword"
+        },
+        {
+          "logical_line": 36,
+          "emitted": "(IU32 lin_addr, ISM32 access_type);"
+        },
+        {
+          "logical_line": 42,
+          "emitted": "extern void spr_chk_word"
+        },
+        {
+          "logical_line": 44,
+          "emitted": "(IU32 lin_addr, ISM32 access_type);"
+        },
+        {
+          "logical_line": 58,
+          "emitted": "extern IU32 usr_chk_byte"
+        },
+        {
+          "logical_line": 60,
+          "emitted": "(IU32 lin_addr, ISM32 access_type);"
+        },
+        {
+          "logical_line": 66,
+          "emitted": "extern IU32 usr_chk_dword"
+        },
+        {
+          "logical_line": 68,
+          "emitted": "(IU32 lin_addr, ISM32 access_type);"
+        },
+        {
+          "logical_line": 74,
+          "emitted": "extern IU32 usr_chk_word"
+        },
+        {
+          "logical_line": 76,
+          "emitted": "(IU32 lin_addr, ISM32 access_type);"
+        },
+        {
+          "logical_line": 90,
+          "emitted": "extern IU8 spr_read_byte"
+        },
+        {
+          "logical_line": 92,
+          "emitted": "(IU32 lin_addr);"
+        },
+        {
+          "logical_line": 97,
+          "emitted": "extern IU32 spr_read_dword"
+        },
+        {
+          "logical_line": 99,
+          "emitted": "(IU32 lin_addr);"
+        },
+        {
+          "logical_line": 104,
+          "emitted": "extern IU16 spr_read_word"
+        },
+        {
+          "logical_line": 106,
+          "emitted": "(IU32 lin_addr);"
+        },
+        {
+          "logical_line": 111,
+          "emitted": "extern void spr_write_byte"
+        },
+        {
+          "logical_line": 113,
+          "emitted": "(IU32 lin_addr, IU8 data);"
+        },
+        {
+          "logical_line": 119,
+          "emitted": "extern void spr_write_dword"
+        },
+        {
+          "logical_line": 121,
+          "emitted": "(IU32 lin_addr, IU32 data);"
+        },
+        {
+          "logical_line": 127,
+          "emitted": "extern void spr_write_word"
+        },
+        {
+          "logical_line": 129,
+          "emitted": "(IU32 lin_addr, IU16 data);"
+        },
+        {
+          "logical_line": 148,
+          "emitted": "extern IU8 vir_read_byte"
+        },
+        {
+          "logical_line": 150,
+          "emitted": "(IU32 lin_addr, IU32 phy_addr);"
+        },
+        {
+          "logical_line": 156,
+          "emitted": "extern IU32 vir_read_dword"
+        },
+        {
+          "logical_line": 158,
+          "emitted": "(IU32 lin_addr, IU32 phy_addr);"
+        },
+        {
+          "logical_line": 164,
+          "emitted": "extern IU16 vir_read_word"
+        },
+        {
+          "logical_line": 166,
+          "emitted": "(IU32 lin_addr, IU32 phy_addr);"
+        },
+        {
+          "logical_line": 172,
+          "emitted": "extern void vir_write_byte"
+        },
+        {
+          "logical_line": 174,
+          "emitted": "(IU32 lin_addr, IU32 phy_addr, IU8 data);"
+        },
+        {
+          "logical_line": 181,
+          "emitted": "extern void vir_write_dword"
+        },
+        {
+          "logical_line": 183,
+          "emitted": "(IU32 lin_addr, IU32 phy_addr, IU32 data);"
+        },
+        {
+          "logical_line": 190,
+          "emitted": "extern void vir_write_word"
+        },
+        {
+          "logical_line": 192,
+          "emitted": "(IU32 lin_addr, IU32 phy_addr, IU16 data);"
+        },
+        {
+          "logical_line": 225,
+          "emitted": "extern void vir_write_bytes (IU32 lin_addr, IU32 phy_addr, IU8 * data, IU32 num_bytes);"
+        },
+        {
+          "logical_line": 226,
+          "emitted": "extern void vir_read_bytes (IU8 * destbuff, IU32 lin_addr, IU32 phy_addr, IU32 num_bytes);"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.h",
+      "current_sha256": "7c210c32a6ca46a4c9f3dbbfd19089d142c77f4b9a257b0361526ffdf7f75fe9",
+      "original_sha256": "323384e4437fa1bba94994f6cd5a762bc74c9d35eb03d6966ac8df235e165f75",
+      "prior_evidence": "s13-r1334-excluded-only-review.json",
+      "contexts": [
+        11,
+        27,
+        35,
+        61,
+        62,
+        121,
+        122
+      ],
+      "emitted_line_samples": [
+        {
+          "logical_line": 45,
+          "emitted": "extern void byte_change_SP"
+        },
+        {
+          "logical_line": 47,
+          "emitted": "(IS32 delta);"
+        },
+        {
+          "logical_line": 52,
+          "emitted": "extern void change_SP"
+        },
+        {
+          "logical_line": 54,
+          "emitted": "(IS32 items);"
+        },
+        {
+          "logical_line": 59,
+          "emitted": "extern IU32 get_current_BP (void);"
+        },
+        {
+          "logical_line": 61,
+          "emitted": "extern IU32 GetStackPointer (void);"
+        },
+        {
+          "logical_line": 63,
+          "emitted": "extern void set_current_BP"
+        },
+        {
+          "logical_line": 65,
+          "emitted": "(IU32 new_bp);"
+        },
+        {
+          "logical_line": 70,
+          "emitted": "extern void set_current_SP"
+        },
+        {
+          "logical_line": 72,
+          "emitted": "(IU32 new_sp);"
+        },
+        {
+          "logical_line": 77,
+          "emitted": "extern IU32 spop (void);"
+        },
+        {
+          "logical_line": 79,
+          "emitted": "extern void spush"
+        },
+        {
+          "logical_line": 81,
+          "emitted": "(IU32 data);"
+        },
+        {
+          "logical_line": 95,
+          "emitted": "extern void spush16"
+        },
+        {
+          "logical_line": 97,
+          "emitted": "(IU32 data);"
+        },
+        {
+          "logical_line": 112,
+          "emitted": "extern IU32 tpop"
+        },
+        {
+          "logical_line": 114,
+          "emitted": "(IU32 item_offset, IU32 byte_offset);"
+        },
+        {
+          "logical_line": 120,
+          "emitted": "extern void validate_new_stack_space"
+        },
+        {
+          "logical_line": 122,
+          "emitted": "(IU32 bytes, IU32 stack_top, CPU_DESCR * entry, IU16 stack_sel);"
+        },
+        {
+          "logical_line": 130,
+          "emitted": "extern void validate_stack_exists"
+        },
+        {
+          "logical_line": 132,
+          "emitted": "(UINT use_bp, IU32 nr_items);"
+        },
+        {
+          "logical_line": 138,
+          "emitted": "extern void validate_stack_space"
+        },
+        {
+          "logical_line": 140,
+          "emitted": "(UINT use_bp, IU32 nr_items);"
+        },
+        {
+          "logical_line": 146,
+          "emitted": "extern void touch_flags_memory (void);"
+        },
+        {
+          "logical_line": 147,
+          "emitted": "extern void init_flags_esp_list (void);"
+        },
+        {
+          "logical_line": 148,
+          "emitted": "extern void record_flags_addr (IU32 addr);"
+        },
+        {
+          "logical_line": 45,
+          "emitted": "extern void byte_change_SP"
+        },
+        {
+          "logical_line": 47,
+          "emitted": "(IS32 delta);"
+        },
+        {
+          "logical_line": 52,
+          "emitted": "extern void change_SP"
+        },
+        {
+          "logical_line": 54,
+          "emitted": "(IS32 items);"
+        },
+        {
+          "logical_line": 59,
+          "emitted": "extern IU32 get_current_BP (void);"
+        },
+        {
+          "logical_line": 61,
+          "emitted": "extern IU32 GetStackPointer (void);"
+        },
+        {
+          "logical_line": 63,
+          "emitted": "extern void set_current_BP"
+        },
+        {
+          "logical_line": 65,
+          "emitted": "(IU32 new_bp);"
+        },
+        {
+          "logical_line": 70,
+          "emitted": "extern void set_current_SP"
+        },
+        {
+          "logical_line": 72,
+          "emitted": "(IU32 new_sp);"
+        },
+        {
+          "logical_line": 77,
+          "emitted": "extern IU32 spop (void);"
+        },
+        {
+          "logical_line": 79,
+          "emitted": "extern void spush"
+        },
+        {
+          "logical_line": 81,
+          "emitted": "(IU32 data);"
+        },
+        {
+          "logical_line": 95,
+          "emitted": "extern void spush16"
+        },
+        {
+          "logical_line": 97,
+          "emitted": "(IU32 data);"
+        },
+        {
+          "logical_line": 112,
+          "emitted": "extern IU32 tpop"
+        },
+        {
+          "logical_line": 114,
+          "emitted": "(IU32 item_offset, IU32 byte_offset);"
+        },
+        {
+          "logical_line": 120,
+          "emitted": "extern void validate_new_stack_space"
+        },
+        {
+          "logical_line": 122,
+          "emitted": "(IU32 bytes, IU32 stack_top, CPU_DESCR * entry, IU16 stack_sel);"
+        },
+        {
+          "logical_line": 130,
+          "emitted": "extern void validate_stack_exists"
+        },
+        {
+          "logical_line": 132,
+          "emitted": "(UINT use_bp, IU32 nr_items);"
+        },
+        {
+          "logical_line": 138,
+          "emitted": "extern void validate_stack_space"
+        },
+        {
+          "logical_line": 140,
+          "emitted": "(UINT use_bp, IU32 nr_items);"
+        },
+        {
+          "logical_line": 146,
+          "emitted": "extern void touch_flags_memory (void);"
+        },
+        {
+          "logical_line": 147,
+          "emitted": "extern void init_flags_esp_list (void);"
+        },
+        {
+          "logical_line": 148,
+          "emitted": "extern void record_flags_addr (IU32 addr);"
+        },
+        {
+          "logical_line": 45,
+          "emitted": "extern void byte_change_SP"
+        },
+        {
+          "logical_line": 47,
+          "emitted": "(IS32 delta);"
+        },
+        {
+          "logical_line": 52,
+          "emitted": "extern void change_SP"
+        },
+        {
+          "logical_line": 54,
+          "emitted": "(IS32 items);"
+        },
+        {
+          "logical_line": 59,
+          "emitted": "extern IU32 get_current_BP (void);"
+        },
+        {
+          "logical_line": 61,
+          "emitted": "extern IU32 GetStackPointer (void);"
+        },
+        {
+          "logical_line": 63,
+          "emitted": "extern void set_current_BP"
+        },
+        {
+          "logical_line": 65,
+          "emitted": "(IU32 new_bp);"
+        },
+        {
+          "logical_line": 70,
+          "emitted": "extern void set_current_SP"
+        },
+        {
+          "logical_line": 72,
+          "emitted": "(IU32 new_sp);"
+        },
+        {
+          "logical_line": 77,
+          "emitted": "extern IU32 spop (void);"
+        },
+        {
+          "logical_line": 79,
+          "emitted": "extern void spush"
+        },
+        {
+          "logical_line": 81,
+          "emitted": "(IU32 data);"
+        },
+        {
+          "logical_line": 95,
+          "emitted": "extern void spush16"
+        },
+        {
+          "logical_line": 97,
+          "emitted": "(IU32 data);"
+        },
+        {
+          "logical_line": 112,
+          "emitted": "extern IU32 tpop"
+        },
+        {
+          "logical_line": 114,
+          "emitted": "(IU32 item_offset, IU32 byte_offset);"
+        },
+        {
+          "logical_line": 120,
+          "emitted": "extern void validate_new_stack_space"
+        },
+        {
+          "logical_line": 122,
+          "emitted": "(IU32 bytes, IU32 stack_top, CPU_DESCR * entry, IU16 stack_sel);"
+        },
+        {
+          "logical_line": 130,
+          "emitted": "extern void validate_stack_exists"
+        },
+        {
+          "logical_line": 132,
+          "emitted": "(UINT use_bp, IU32 nr_items);"
+        },
+        {
+          "logical_line": 138,
+          "emitted": "extern void validate_stack_space"
+        },
+        {
+          "logical_line": 140,
+          "emitted": "(UINT use_bp, IU32 nr_items);"
+        },
+        {
+          "logical_line": 146,
+          "emitted": "extern void touch_flags_memory (void);"
+        },
+        {
+          "logical_line": 147,
+          "emitted": "extern void init_flags_esp_list (void);"
+        },
+        {
+          "logical_line": 148,
+          "emitted": "extern void record_flags_addr (IU32 addr);"
+        },
+        {
+          "logical_line": 45,
+          "emitted": "extern void byte_change_SP"
+        },
+        {
+          "logical_line": 47,
+          "emitted": "(IS32 delta);"
+        },
+        {
+          "logical_line": 52,
+          "emitted": "extern void change_SP"
+        },
+        {
+          "logical_line": 54,
+          "emitted": "(IS32 items);"
+        },
+        {
+          "logical_line": 59,
+          "emitted": "extern IU32 get_current_BP (void);"
+        },
+        {
+          "logical_line": 61,
+          "emitted": "extern IU32 GetStackPointer (void);"
+        },
+        {
+          "logical_line": 63,
+          "emitted": "extern void set_current_BP"
+        },
+        {
+          "logical_line": 65,
+          "emitted": "(IU32 new_bp);"
+        },
+        {
+          "logical_line": 70,
+          "emitted": "extern void set_current_SP"
+        },
+        {
+          "logical_line": 72,
+          "emitted": "(IU32 new_sp);"
+        },
+        {
+          "logical_line": 77,
+          "emitted": "extern IU32 spop (void);"
+        },
+        {
+          "logical_line": 79,
+          "emitted": "extern void spush"
+        },
+        {
+          "logical_line": 81,
+          "emitted": "(IU32 data);"
+        },
+        {
+          "logical_line": 95,
+          "emitted": "extern void spush16"
+        },
+        {
+          "logical_line": 97,
+          "emitted": "(IU32 data);"
+        },
+        {
+          "logical_line": 112,
+          "emitted": "extern IU32 tpop"
+        },
+        {
+          "logical_line": 114,
+          "emitted": "(IU32 item_offset, IU32 byte_offset);"
+        },
+        {
+          "logical_line": 120,
+          "emitted": "extern void validate_new_stack_space"
+        },
+        {
+          "logical_line": 122,
+          "emitted": "(IU32 bytes, IU32 stack_top, CPU_DESCR * entry, IU16 stack_sel);"
+        },
+        {
+          "logical_line": 130,
+          "emitted": "extern void validate_stack_exists"
+        },
+        {
+          "logical_line": 132,
+          "emitted": "(UINT use_bp, IU32 nr_items);"
+        },
+        {
+          "logical_line": 138,
+          "emitted": "extern void validate_stack_space"
+        },
+        {
+          "logical_line": 140,
+          "emitted": "(UINT use_bp, IU32 nr_items);"
+        },
+        {
+          "logical_line": 146,
+          "emitted": "extern void touch_flags_memory (void);"
+        },
+        {
+          "logical_line": 147,
+          "emitted": "extern void init_flags_esp_list (void);"
+        },
+        {
+          "logical_line": 148,
+          "emitted": "extern void record_flags_addr (IU32 addr);"
+        },
+        {
+          "logical_line": 45,
+          "emitted": "extern void byte_change_SP"
+        },
+        {
+          "logical_line": 47,
+          "emitted": "(IS32 delta);"
+        },
+        {
+          "logical_line": 52,
+          "emitted": "extern void change_SP"
+        },
+        {
+          "logical_line": 54,
+          "emitted": "(IS32 items);"
+        },
+        {
+          "logical_line": 59,
+          "emitted": "extern IU32 get_current_BP (void);"
+        },
+        {
+          "logical_line": 61,
+          "emitted": "extern IU32 GetStackPointer (void);"
+        },
+        {
+          "logical_line": 63,
+          "emitted": "extern void set_current_BP"
+        },
+        {
+          "logical_line": 65,
+          "emitted": "(IU32 new_bp);"
+        },
+        {
+          "logical_line": 70,
+          "emitted": "extern void set_current_SP"
+        },
+        {
+          "logical_line": 72,
+          "emitted": "(IU32 new_sp);"
+        },
+        {
+          "logical_line": 77,
+          "emitted": "extern IU32 spop (void);"
+        },
+        {
+          "logical_line": 79,
+          "emitted": "extern void spush"
+        },
+        {
+          "logical_line": 81,
+          "emitted": "(IU32 data);"
+        },
+        {
+          "logical_line": 95,
+          "emitted": "extern void spush16"
+        },
+        {
+          "logical_line": 97,
+          "emitted": "(IU32 data);"
+        },
+        {
+          "logical_line": 112,
+          "emitted": "extern IU32 tpop"
+        },
+        {
+          "logical_line": 114,
+          "emitted": "(IU32 item_offset, IU32 byte_offset);"
+        },
+        {
+          "logical_line": 120,
+          "emitted": "extern void validate_new_stack_space"
+        },
+        {
+          "logical_line": 122,
+          "emitted": "(IU32 bytes, IU32 stack_top, CPU_DESCR * entry, IU16 stack_sel);"
+        },
+        {
+          "logical_line": 130,
+          "emitted": "extern void validate_stack_exists"
+        },
+        {
+          "logical_line": 132,
+          "emitted": "(UINT use_bp, IU32 nr_items);"
+        },
+        {
+          "logical_line": 138,
+          "emitted": "extern void validate_stack_space"
+        },
+        {
+          "logical_line": 140,
+          "emitted": "(UINT use_bp, IU32 nr_items);"
+        },
+        {
+          "logical_line": 146,
+          "emitted": "extern void touch_flags_memory (void);"
+        },
+        {
+          "logical_line": 147,
+          "emitted": "extern void init_flags_esp_list (void);"
+        },
+        {
+          "logical_line": 148,
+          "emitted": "extern void record_flags_addr (IU32 addr);"
+        },
+        {
+          "logical_line": 45,
+          "emitted": "extern void byte_change_SP"
+        },
+        {
+          "logical_line": 47,
+          "emitted": "(IS32 delta);"
+        },
+        {
+          "logical_line": 52,
+          "emitted": "extern void change_SP"
+        },
+        {
+          "logical_line": 54,
+          "emitted": "(IS32 items);"
+        },
+        {
+          "logical_line": 59,
+          "emitted": "extern IU32 get_current_BP (void);"
+        },
+        {
+          "logical_line": 61,
+          "emitted": "extern IU32 GetStackPointer (void);"
+        },
+        {
+          "logical_line": 63,
+          "emitted": "extern void set_current_BP"
+        },
+        {
+          "logical_line": 65,
+          "emitted": "(IU32 new_bp);"
+        },
+        {
+          "logical_line": 70,
+          "emitted": "extern void set_current_SP"
+        },
+        {
+          "logical_line": 72,
+          "emitted": "(IU32 new_sp);"
+        },
+        {
+          "logical_line": 77,
+          "emitted": "extern IU32 spop (void);"
+        },
+        {
+          "logical_line": 79,
+          "emitted": "extern void spush"
+        },
+        {
+          "logical_line": 81,
+          "emitted": "(IU32 data);"
+        },
+        {
+          "logical_line": 95,
+          "emitted": "extern void spush16"
+        },
+        {
+          "logical_line": 97,
+          "emitted": "(IU32 data);"
+        },
+        {
+          "logical_line": 112,
+          "emitted": "extern IU32 tpop"
+        },
+        {
+          "logical_line": 114,
+          "emitted": "(IU32 item_offset, IU32 byte_offset);"
+        },
+        {
+          "logical_line": 120,
+          "emitted": "extern void validate_new_stack_space"
+        },
+        {
+          "logical_line": 122,
+          "emitted": "(IU32 bytes, IU32 stack_top, CPU_DESCR * entry, IU16 stack_sel);"
+        },
+        {
+          "logical_line": 130,
+          "emitted": "extern void validate_stack_exists"
+        },
+        {
+          "logical_line": 132,
+          "emitted": "(UINT use_bp, IU32 nr_items);"
+        },
+        {
+          "logical_line": 138,
+          "emitted": "extern void validate_stack_space"
+        },
+        {
+          "logical_line": 140,
+          "emitted": "(UINT use_bp, IU32 nr_items);"
+        },
+        {
+          "logical_line": 146,
+          "emitted": "extern void touch_flags_memory (void);"
+        },
+        {
+          "logical_line": 147,
+          "emitted": "extern void init_flags_esp_list (void);"
+        },
+        {
+          "logical_line": 148,
+          "emitted": "extern void record_flags_addr (IU32 addr);"
+        },
+        {
+          "logical_line": 45,
+          "emitted": "extern void byte_change_SP"
+        },
+        {
+          "logical_line": 47,
+          "emitted": "(IS32 delta);"
+        },
+        {
+          "logical_line": 52,
+          "emitted": "extern void change_SP"
+        },
+        {
+          "logical_line": 54,
+          "emitted": "(IS32 items);"
+        },
+        {
+          "logical_line": 59,
+          "emitted": "extern IU32 get_current_BP (void);"
+        },
+        {
+          "logical_line": 61,
+          "emitted": "extern IU32 GetStackPointer (void);"
+        },
+        {
+          "logical_line": 63,
+          "emitted": "extern void set_current_BP"
+        },
+        {
+          "logical_line": 65,
+          "emitted": "(IU32 new_bp);"
+        },
+        {
+          "logical_line": 70,
+          "emitted": "extern void set_current_SP"
+        },
+        {
+          "logical_line": 72,
+          "emitted": "(IU32 new_sp);"
+        },
+        {
+          "logical_line": 77,
+          "emitted": "extern IU32 spop (void);"
+        },
+        {
+          "logical_line": 79,
+          "emitted": "extern void spush"
+        },
+        {
+          "logical_line": 81,
+          "emitted": "(IU32 data);"
+        },
+        {
+          "logical_line": 95,
+          "emitted": "extern void spush16"
+        },
+        {
+          "logical_line": 97,
+          "emitted": "(IU32 data);"
+        },
+        {
+          "logical_line": 112,
+          "emitted": "extern IU32 tpop"
+        },
+        {
+          "logical_line": 114,
+          "emitted": "(IU32 item_offset, IU32 byte_offset);"
+        },
+        {
+          "logical_line": 120,
+          "emitted": "extern void validate_new_stack_space"
+        },
+        {
+          "logical_line": 122,
+          "emitted": "(IU32 bytes, IU32 stack_top, CPU_DESCR * entry, IU16 stack_sel);"
+        },
+        {
+          "logical_line": 130,
+          "emitted": "extern void validate_stack_exists"
+        },
+        {
+          "logical_line": 132,
+          "emitted": "(UINT use_bp, IU32 nr_items);"
+        },
+        {
+          "logical_line": 138,
+          "emitted": "extern void validate_stack_space"
+        },
+        {
+          "logical_line": 140,
+          "emitted": "(UINT use_bp, IU32 nr_items);"
+        },
+        {
+          "logical_line": 146,
+          "emitted": "extern void touch_flags_memory (void);"
+        },
+        {
+          "logical_line": 147,
+          "emitted": "extern void init_flags_esp_list (void);"
+        },
+        {
+          "logical_line": 148,
+          "emitted": "extern void record_flags_addr (IU32 addr);"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkmem.h",
+      "current_sha256": "b5dfa8bba416e5be06599b09e21e4be922ffe00666b9e678ce298a719c7648d2",
+      "original_sha256": "313bd585b854ddfa21d8029814d78a5560aef3564179cef82e5819fbf64da524",
+      "prior_evidence": "s13-r1334-excluded-only-review.json",
+      "contexts": [
+        575,
+        576,
+        577,
+        578,
+        579
+      ],
+      "emitted_line_samples": [
+        {
+          "logical_line": 14,
+          "emitted": "LPVOID  WK32VirtualAlloc(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 15,
+          "emitted": "BOOL    WK32VirtualFree(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 20,
+          "emitted": "void    WK32GlobalMemoryStatus(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 14,
+          "emitted": "LPVOID  WK32VirtualAlloc(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 15,
+          "emitted": "BOOL    WK32VirtualFree(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 20,
+          "emitted": "void    WK32GlobalMemoryStatus(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 14,
+          "emitted": "LPVOID  WK32VirtualAlloc(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 15,
+          "emitted": "BOOL    WK32VirtualFree(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 20,
+          "emitted": "void    WK32GlobalMemoryStatus(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 14,
+          "emitted": "LPVOID  WK32VirtualAlloc(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 15,
+          "emitted": "BOOL    WK32VirtualFree(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 20,
+          "emitted": "void    WK32GlobalMemoryStatus(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 14,
+          "emitted": "LPVOID  WK32VirtualAlloc(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 15,
+          "emitted": "BOOL    WK32VirtualFree(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 20,
+          "emitted": "void    WK32GlobalMemoryStatus(PVDMFRAME pFrame);"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmedia1.c",
+      "current_sha256": "5f05fbe4943789d44b22c05f49f85cd4ca55fbbb340a6226adcc8d2e9a8795c5",
+      "original_sha256": "74b1872bf1afff7a59721564f52b33c4fd74d9d7e329ccdbff33f6bd612778d2",
+      "prior_evidence": "s13-r1334-excluded-only-review.json",
+      "contexts": [
+        575
+      ],
+      "emitted_line_samples": [
+        {
+          "logical_line": 35,
+          "emitted": "#pragma hdrstop"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmedia2.c",
+      "current_sha256": "077191aa635f549fea29d453a9bf83a2bf6a0cf9b336a5d90ea72456f7193b82",
+      "original_sha256": "4a2a6e5e6c6e7172cb3fea4bb9035a18c7c5a292618b9eb507b71ae9f7d76856",
+      "prior_evidence": "s13-r1334-excluded-only-review.json",
+      "contexts": [
+        576
+      ],
+      "emitted_line_samples": [
+        {
+          "logical_line": 37,
+          "emitted": "#pragma hdrstop"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmstru1.c",
+      "current_sha256": "d97da12dff4e5c770a140ac68ceb000c8ea4bc14c201010a517c403e098cf525",
+      "original_sha256": "8480eec46ce4371647743d176d19709a9902a749a84452a5743f1a72ab675be9",
+      "prior_evidence": "s13-r1334-excluded-only-review.json",
+      "contexts": [
+        578
+      ],
+      "emitted_line_samples": [
+        {
+          "logical_line": 25,
+          "emitted": "#pragma hdrstop"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmstru2.c",
+      "current_sha256": "65e3db557ec21b82111532a0fa239c3802e03d53eefef2acf5ada8b82fdc7dc6",
+      "original_sha256": "f96ae87c3f0290b72c838b174b8efbe82bd727290451ba99650ecc85bf738632",
+      "prior_evidence": "s13-r1334-excluded-only-review.json",
+      "contexts": [
+        579
+      ],
+      "emitted_line_samples": [
+        {
+          "logical_line": 23,
+          "emitted": "#pragma hdrstop"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmstruc.c",
+      "current_sha256": "992629a1e93a0b558b1b5d052b855f96f56367ff138ac40494153ab977881221",
+      "original_sha256": "af5f3e85909f195c283d4c2d275b07b995e44e448e0decb2ee6fb06764fa1cc4",
+      "prior_evidence": "s13-r1334-excluded-only-review.json",
+      "contexts": [
+        577
+      ],
+      "emitted_line_samples": [
+        {
+          "logical_line": 31,
+          "emitted": "#pragma hdrstop"
+        }
+      ]
+    }
+  ]
+}

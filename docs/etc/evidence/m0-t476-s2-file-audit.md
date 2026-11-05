@@ -95,3 +95,9 @@ The [strict transformed-line review](../../../artifacts/mvdm-audit/t476-s2-stric
 The [COMMAND file review](../../../artifacts/mvdm-audit/t476-s2-command-file-reviews.json) completes `cmd.c`, `cmdconf.c`, `cmddata.c` and `cmdenv.c`, recording every local adaptation, branch disposition and compiler-line result. Repeated `TerminateVDM()` text in `cmdconf.c` was checked against its actual original line rather than counted as a false mismatch. The running partition is 691 complete and 364 open.
 
 The next file, `cmdexec.c`, is not complete: the original `RtlInitString` at line 363 appears at logical line 374 in the sampled product preprocessor output, and the static scan identifies additional possible offsets. Its surrounding added failure branch and duplicated `CreateProcess` paths require a complete file-level line audit before one grouped correction. No source change has yet been made.
+
+The same [COMMAND file review](../../../artifacts/mvdm-audit/t476-s2-command-file-reviews.json) additionally completes `cmdkeyb.c`, `cmdpif.c` and `cmdredir.c`. The keyboard directory adaptation was missing from the existing `MVDM-HOST-DIV-464` registry entry and has been added; the other local changes were already registered. The partition is 694 complete and 361 open. `cmdexec.c` and `cmdmisc.c` have grouped line-anchor candidate corrections in progress; no production build or publication is claimed for them yet.
+
+## Excluded-only files with transformed compiler output
+
+The [excluded transformed-line review](../../../artifacts/mvdm-audit/t476-s2-excluded-transformed-review.json) completes nine additional files with hash-matched complete excluded-branch and outside-projection evidence. Twenty-eight actual compiler contexts cover 34 candidates; nine emit lines and all those emitted lines map to nonblank original code or identical original pragmas. The other 25 emit no lines and remain open. The running partition is 703 complete and 352 open.

@@ -44,6 +44,39 @@
       "static_line_leads": 0,
       "s1_hit_arms": 0,
       "s1_previously_excluded_arms": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdkeyb.c",
+      "current_sha256": "d32313ee4993bf12135d62241eb2261188bd0696bf15846db73f80285fa0758a",
+      "original_sha256": "b945cd4a072b592211f6427ee526b2ca47be05ac6bef9a33956105749d899eba",
+      "source_decision": "No conditional groups. The only behavioral source difference maps the keyboard command directory to the selected product root, now explicitly included in MVDM-HOST-DIV-464. All surviving original matching-code positions align; the one apparent preprocessor mismatch is another original occurrence of `szAutoLine` at actual line 101 with a trailing original comment.",
+      "registered_adaptation": "MVDM-HOST-DIV-464",
+      "compiler_unique_line_samples": 39,
+      "static_line_leads": 0,
+      "s1_hit_arms": 0,
+      "s1_previously_excluded_arms": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdpif.c",
+      "current_sha256": "8177313a6c831a3499dd9caff7cf2347a734447553f4154293105968a16db09c",
+      "original_sha256": "6d3aac795c1c6275695e0b4b72dcbdbf7206456f27e07a11bc28bf5ce3438a9b",
+      "source_decision": "No conditional groups. The retained guest scalar write uses the registered session guest-location lease under MVDM-HOST-DIV-111; other matching original code and actual compiler samples align.",
+      "registered_adaptation": "MVDM-HOST-DIV-111",
+      "compiler_unique_line_samples": 59,
+      "static_line_leads": 0,
+      "s1_hit_arms": 0,
+      "s1_previously_excluded_arms": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdredir.c",
+      "current_sha256": "418423e0da31b95b08031883f70842fd5f5b4ea1b928d6c40b4ab33a03da1da5",
+      "original_sha256": "a403f15ba9ec33af85ab38aaa7c4fea301016c4bb09a1ccbd3adee71a07dcc49",
+      "source_decision": "No conditional groups. The original cdecl worker callbacks are passed through the registered session-aware thread bridge MVDM-HOST-DIV-120; retained original matching code and compiler line samples align.",
+      "registered_adaptation": "MVDM-HOST-DIV-120",
+      "compiler_unique_line_samples": 134,
+      "static_line_leads": 0,
+      "s1_hit_arms": 0,
+      "s1_previously_excluded_arms": 0
     }
   ]
 }

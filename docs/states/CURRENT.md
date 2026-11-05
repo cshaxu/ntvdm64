@@ -4,7 +4,7 @@
 
 **Active: M0 T476 S2** — complete the outstanding per-file mirror conditional and line audit.
 
-S1 integrated and published its marker build and 30 exclusions; its [main integration evidence](../etc/evidence/m0-t476-s1-main-integration.md) retains the limits. The owner directed S2 to finish them. The [S2 baseline](../etc/evidence/m0-t476-s2-file-audit.md) tracks all 1,055 files: 691 files have completed file-level review; 364 require further review. `cmdexec.c` has a confirmed retained-statement logical-line mismatch and remains open for complete-file correction.
+S1 integrated and published its marker build and 30 exclusions; its [main integration evidence](../etc/evidence/m0-t476-s1-main-integration.md) retains the limits. The owner directed S2 to finish them. The [S2 baseline](../etc/evidence/m0-t476-s2-file-audit.md) tracks all 1,055 files: 703 files have completed file-level review; 352 require further review. `cmdexec.c` and `cmdmisc.c` have grouped line-anchor corrections in progress, not yet built or published.
 
 ## Active Packet
 
