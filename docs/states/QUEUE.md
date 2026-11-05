@@ -20,11 +20,10 @@ active-packet transition does not change any candidate's proposed scope.
 | 3 | Independent project-wide implementation minimization — reassess original-owner choices and autonomous implementations across all components; correct earlier decisions where needed and preserve verified capabilities. | [Proposal](../proposals/proposal-original-source-implementation-minimization-review-001.md) |
 | 4 | Win3.1 interactive performance root-cause recovery — repair the failed active-interaction measurement path, attribute actual input/IRQ/CCPU/VGA/presentation cost, then change only a proved project-owned bottleneck while retaining independently correct optimizations. | [Proposal](../proposals/proposal-win31-interactive-performance-root-cause-001.md) |
 | 5 | WOW multi-window performance recovery — attribute and reduce the latency of SOL Options and other Win16 secondary windows while preserving original callback, identity and lifecycle behavior. | [Proposal](../proposals/proposal-wow-multiwindow-performance-recovery-001.md) |
-| 6 | Host common frontend foundation — extract `common/frontend-base` from NTCON and put worker-side I/O hosting in `worker-base`; initially connect NTVDM VM frontends, extend NTSRV handoff and show them in NTMON, retaining future NTVWM reuse. | [Proposal](../proposals/proposal-host-common-frontend-foundation-001.md) |
-| 7 | Guest Windows 386/VxD driver and NTVDM bridge — implement the guest-side driver and its NTVDM connection over the host frontend foundation, with precise VM identity, asynchronous I/O and lifecycle handling for Windows 3.1 386 enhanced mode and Windows 95. | [Proposal](../proposals/proposal-multitask-guest-vdm-frontends-001.md) |
-| 8 | Upgrade to a Windows XP NTVDM baseline — assess and recover XP-era capabilities including audio and long file names, update all guest components, and make required modern-host compatibility repairs. | [Proposal](../proposals/proposal-windows-xp-ntvdm-baseline-upgrade-001.md) |
-| 9 | Hardware-virtualized guest CPU acceleration — investigate and implement a modern hardware-virtualization execution backend for 16/32-bit guest instructions, subject to demonstrated feasibility and compatibility. | [Proposal](../proposals/proposal-hardware-virtualized-guest-cpu-001.md) |
-| 10 | Windows 1.01 application launch from the host — classify and launch a selected application through its matching Windows 1.01 guest environment, preserving arguments, environment selection and truthful application lifecycle results. | [Proposal](../proposals/proposal-win101-host-application-launch-001.md) |
+| 6 | Guest Windows 386/VxD driver and NTVDM bridge — implement the guest-side driver and its NTVDM connection over the host frontend foundation, with precise VM identity, asynchronous I/O and lifecycle handling for Windows 3.1 386 enhanced mode and Windows 95. | [Proposal](../proposals/proposal-multitask-guest-vdm-frontends-001.md) |
+| 7 | Upgrade to a Windows XP NTVDM baseline — assess and recover XP-era capabilities including audio and long file names, update all guest components, and make required modern-host compatibility repairs. | [Proposal](../proposals/proposal-windows-xp-ntvdm-baseline-upgrade-001.md) |
+| 8 | Hardware-virtualized guest CPU acceleration — investigate and implement a modern hardware-virtualization execution backend for 16/32-bit guest instructions, subject to demonstrated feasibility and compatibility. | [Proposal](../proposals/proposal-hardware-virtualized-guest-cpu-001.md) |
+| 9 | Windows 1.01 application launch from the host — classify and launch a selected application through its matching Windows 1.01 guest environment, preserving arguments, environment selection and truthful application lifecycle results. | [Proposal](../proposals/proposal-win101-host-application-launch-001.md) |
 
 The owner moved shared implementation ownership review to the front; it is
 now admitted in the independent worktree. The external system launch
@@ -38,8 +37,9 @@ retained as historical planning material and is not pending.
 
 The owner split the former multitasking frontend/VxD candidate into the host
 frontend foundation followed by the guest driver and NTVDM bridge. The split
-retains the remaining candidates' relative order and does not admit either
-candidate or change the active packet.
+retains the remaining candidates' relative order. The host foundation is now
+admitted in this independent worktree; see [Current](CURRENT.md). The guest
+driver remains queued.
 
 On 2026-10-29 the owner moved further SOL Options and related WOW multi-window
 performance optimization out of the active task and directed its candidate to

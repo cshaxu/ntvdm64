@@ -4,15 +4,16 @@
 #include "lib-win32/rpc/async_call.h"
 #include "common/protocol/frontend_lifecycle.h"
 
-DWORD common_rpc_retire_workerless_frontend(const common_rpc_connection *state,DWORD *retired)
+DWORD common_rpc_retire_workerless_frontend(const common_rpc_connection *state,const common_frontend_key *key,DWORD *retired)
 {
     RPC_ASYNC_STATE async;DWORD error=ERROR_INVALID_STATE,local=0;
     if(!retired)return ERROR_INVALID_PARAMETER;
     if(!state || !state->connection || !state->binding || !state->process)return error;
+    if(!key || !key->instance || !key->generation)return ERROR_INVALID_PARAMETER;
     error=common_rpc_begin_async(&async);if(error)return error;
     RpcTryExcept {
         Client_RetireWorkerlessFrontend(&async,state->binding,state->connection,
-            state->process,state->generation,&local);
+            state->process,state->generation,(LONGLONG)key->instance,key->generation,&local);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
@@ -21,7 +22,7 @@ DWORD common_rpc_retire_workerless_frontend(const common_rpc_connection *state,D
     return error;
 }
 
-DWORD common_rpc_frontend_state_changed(const common_rpc_connection *state,HANDLE *state_changed)
+DWORD common_rpc_frontend_state_changed(const common_rpc_connection *state,const common_frontend_key *key,HANDLE *state_changed)
 {
     RPC_ASYNC_STATE async;
     DWORD error=ERROR_INVALID_STATE;
@@ -29,10 +30,11 @@ DWORD common_rpc_frontend_state_changed(const common_rpc_connection *state,HANDL
     if(!state_changed)return ERROR_INVALID_PARAMETER;
     *state_changed=NULL;
     if(!state || !state->connection || !state->binding || !state->process)return error;
+    if(!key || !key->instance || !key->generation)return ERROR_INVALID_PARAMETER;
     error=common_rpc_begin_async(&async);if(error)return error;
     RpcTryExcept {
         Client_FrontendStateChanged(&async,state->binding,state->connection,state->process,
-            state->generation,&local);
+            state->generation,(LONGLONG)key->instance,key->generation,&local);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
@@ -68,14 +70,15 @@ DWORD common_rpc_start_frontend(const common_rpc_connection *state,uint64_t wind
 }
 
 
-DWORD common_rpc_frontend_console_restored(const common_rpc_connection *state)
+DWORD common_rpc_frontend_console_restored(const common_rpc_connection *state,const common_frontend_key *key)
 {
     RPC_ASYNC_STATE async;DWORD error=ERROR_INVALID_STATE;
     if(!state || !state->connection || !state->binding || !state->process)return error;
+    if(!key || !key->instance || !key->generation)return ERROR_INVALID_PARAMETER;
     error=common_rpc_begin_async(&async);if(error)return error;
     RpcTryExcept {
         Client_FrontendConsoleRestored(&async,state->binding,state->connection,
-            state->process,state->generation);
+            state->process,state->generation,(LONGLONG)key->instance,key->generation);
     }
     RpcExcept(1){error=RpcExceptionCode();}
     RpcEndExcept
@@ -105,6 +108,21 @@ DWORD common_rpc_wait_frontend_console_restored(const common_rpc_connection *sta
     RpcTryExcept {
         Client_WaitFrontendConsoleRestored(&async,state->binding,state->connection,
             state->process,state->generation);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    return common_rpc_end_async(&async,error,NULL,INFINITE);
+}
+
+DWORD common_rpc_frontend_io_disconnected(const common_rpc_connection *state,const common_frontend_key *key)
+{
+    RPC_ASYNC_STATE async;DWORD error=ERROR_INVALID_STATE;
+    if(!state || !state->connection || !state->binding || !state->process)return error;
+    if(!key || !key->instance || !key->generation)return ERROR_INVALID_PARAMETER;
+    error=common_rpc_begin_async(&async);if(error)return error;
+    RpcTryExcept {
+        Client_FrontendIoDisconnected(&async,state->binding,state->connection,state->process,
+            state->generation,(LONGLONG)key->instance,key->generation);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept

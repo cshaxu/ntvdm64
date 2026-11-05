@@ -1,7 +1,7 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(65.0),
+    version(66.0),
     pointer_default(unique)
 ]
 interface vdm_service
@@ -23,7 +23,8 @@ interface vdm_service
     error_status_t FrontendIoDisconnected(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation);
+        [in] unsigned long generation,
+        [in] hyper frontend_instance, [in] unsigned long frontend_generation);
     /* Copied native launch/control only; worker/frontend I/O stays direct.
      * operation is 1 (launch) or 2 (parent resume).  Frontend capability is
      * validated after reservation-exact CUI/GUI worker selection, not used to
@@ -86,11 +87,13 @@ interface vdm_service
     error_status_t FrontendConsoleRestored(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation);
+        [in] unsigned long generation,
+        [in] hyper frontend_instance, [in] unsigned long frontend_generation);
     error_status_t FrontendCloseQuiesced(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation);
+        [in] unsigned long generation,
+        [in] hyper frontend_instance, [in] unsigned long frontend_generation);
     error_status_t WaitFrontendConsoleRestored(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
@@ -165,11 +168,13 @@ interface vdm_service
         [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation,
-        [in, system_handle(sh_event)] HANDLE capability);
+        [in, system_handle(sh_event)] HANDLE capability,
+        [out] hyper *frontend_instance, [out] unsigned long *frontend_generation);
     error_status_t RegisterFrontendLease(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation, [in] hyper console_window,
+        [in] unsigned long generation,
+        [in] hyper frontend_instance, [in] unsigned long frontend_generation, [in] hyper console_window,
         [in] unsigned long creator_pid, [in] unsigned long borrowed,
         [in, system_handle(sh_event)] HANDLE retire,
         [in, system_handle(sh_event)] HANDLE restored);
@@ -177,16 +182,19 @@ interface vdm_service
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation,
+        [in] hyper frontend_instance, [in] unsigned long frontend_generation,
         [out] unsigned long *nonce, [out] unsigned long *candidate_pid);
     error_status_t FrontendJoinDecision(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation, [in] unsigned long nonce,
+        [in] unsigned long generation,
+        [in] hyper frontend_instance, [in] unsigned long frontend_generation, [in] unsigned long nonce,
         [in] unsigned long same_console);
     error_status_t FrontendLeaseReady(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation);
+        [in] unsigned long generation,
+        [in] hyper frontend_instance, [in] unsigned long frontend_generation);
     error_status_t RetainFrontendRoot(
         [in] handle_t binding,
         [in] VDM_CONNECTION connection,
@@ -207,12 +215,14 @@ interface vdm_service
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation,
+        [in] hyper frontend_instance, [in] unsigned long frontend_generation,
         [out] unsigned long *request,
         [out, system_handle(sh_process)] HANDLE *worker);
     error_status_t AttachFrontendRequest(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation, [in] unsigned long request,
+        [in] unsigned long generation,
+        [in] hyper frontend_instance, [in] unsigned long frontend_generation, [in] unsigned long request,
         [in, system_handle(sh_pipe)] HANDLE channel,
         [in, system_handle(sh_event)] HANDLE ready);
     /* Direct frontend channel attachments only. No input/frame payloads or
@@ -490,6 +500,7 @@ interface vdm_service
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation,
+        [in] hyper frontend_instance, [in] unsigned long frontend_generation,
         [out] unsigned long *retired);
     /* Root-private auto-reset state event. It is separate from the
      * request-ready capability and wakes retirement retry only. */
@@ -497,6 +508,7 @@ interface vdm_service
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation,
+        [in] hyper frontend_instance, [in] unsigned long frontend_generation,
         [out, system_handle(sh_event)] HANDLE *state_changed);
     error_status_t WowStarted(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
@@ -508,4 +520,19 @@ interface vdm_service
         [in] unsigned long generation, [in] unsigned long parent_receipt,
         [out, system_handle(sh_event)] HANDLE *event,
         [out] unsigned long *started);
+    error_status_t RegisterEmbeddedFrontend(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process, [in] unsigned long generation,
+        [in] hyper payload, [in] hyper vm, [in] hyper incarnation,
+        [out] hyper *frontend_instance, [out] unsigned long *frontend_generation,
+        [out, system_handle(sh_event)] HANDLE *notification,
+        [out, system_handle(sh_event)] HANDLE *retire);
+    error_status_t CloseFrontendInstance(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process, [in] unsigned long generation,
+        [in] hyper frontend_instance, [in] unsigned long frontend_generation);
+    error_status_t UnregisterFrontendInstance(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process, [in] unsigned long generation,
+        [in] hyper frontend_instance, [in] unsigned long frontend_generation);
 }

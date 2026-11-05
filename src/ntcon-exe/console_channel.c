@@ -1,16 +1,16 @@
+#include "common/base_srv/frontend_client.h"
 #include "console_channel.h"
 #include "console_frontend.h"
-#include "lib-win32/pipe/pipe_transfer.h"
-#include "lib-win32/pipe/pipe_pair.h"
+#include "common/frontend-base/channel.h"
 #include "common/protocol/frontend_lifecycle.h"
 #include "common/base_srv/base_rpc_client.h"
 #include <stddef.h>
 #include <stdio.h>
 
 struct frontend_io_channel {
+    common_frontend_key key;
     frontend_console console;
-    HANDLE pipe,worker,stop,thread,io_event,ready;
-    BOOL input_pending;
+    frontend_base_channel *base;
     BOOL snapshot_held;
     HANDLE publication_surface;
     DWORD publication_terminal_error;
@@ -235,8 +235,9 @@ static DWORD read_text_configuration(void *context,DWORD offset,DWORD revision,c
     return frontend_session_read_text_configuration(
         ((frontend_io_channel *)context)->root,offset,revision,reply);
 }
-static BOOL active(frontend_io_channel *channel)
+static BOOL active(void *context)
 {
+    frontend_io_channel *channel=context;
     if(enter(channel))return FALSE;
     leave(channel);return TRUE;
 }
@@ -256,76 +257,12 @@ static DWORD prepend_input(void *context,const INPUT_RECORD *records,const uint6
     return frontend_session_prepend_tagged(channel->root,records,receipts,count);
 }
 
-/* Explicit cancellation plus peer death. Never close an OVERLAPPED event or
- * buffer while the kernel may still complete its outstanding operation. */
-static DWORD transfer(frontend_io_channel *channel,BOOL write,void *buffer,DWORD bytes)
-{
-    BYTE *cursor=buffer;
-    while (bytes) {
-        common_pipe_operation io;
-        DWORD done=0,error,wait;
-        HANDLE waits[4]={channel->stop,channel->worker,channel->io_event,frontend_session_ready(channel->root)};
-        if (WaitForSingleObject(channel->stop,0)==WAIT_OBJECT_0) return ERROR_OPERATION_ABORTED;
-        error=common_pipe_begin(&io,channel->pipe,channel->io_event,write,cursor,bytes,bytes,&done);
-        if (error) {
-            if (error!=ERROR_IO_PENDING) return error;
-            for (;;) {
-                wait=WaitForMultipleObjects(!write && !channel->input_pending && active(channel) ? 4 : 3,waits,FALSE,INFINITE);
-                if (wait!=WAIT_OBJECT_0+3) break;
-                if (!SetEvent(channel->ready)) { wait=WAIT_FAILED;break; }
-                channel->input_pending=TRUE;
-            }
-            if (wait!=WAIT_OBJECT_0+2) {
-                error=wait==WAIT_FAILED ? GetLastError() :
-                    wait==WAIT_OBJECT_0 ? ERROR_OPERATION_ABORTED : ERROR_PROCESS_ABORTED;
-                common_pipe_cancel_drain(&io);
-                return error;
-            }
-            error=common_pipe_finish(&io,&done);
-            common_pipe_cancel_drain(&io);
-            if(error)return error;
-        }
-        if (!done || done>bytes) return ERROR_BROKEN_PIPE;
-        cursor+=done;bytes-=done;
-    }
-    return ERROR_SUCCESS;
-}
-
-static DWORD send_reply(frontend_io_channel *channel,const console_io_reply *reply)
-{
-    DWORD error;
-    const BYTE *payload=console_io_reply_payload((console_io_reply *)reply);
-    if(reply->bytes && !payload)return ERROR_INVALID_PARAMETER;
-    error=transfer(channel,TRUE,(void *)reply,CONSOLE_IO_REPLY_HEADER_BYTES);
-    if(!error && reply->bytes)error=transfer(channel,TRUE,(void *)payload,reply->bytes);
-    return error;
-}
-
-static DWORD WINAPI console_channel_main(void *context)
+static DWORD dispatch(void *context,const console_io_request *request,
+    console_io_reply *reply,frontend_base_result *result)
 {
     frontend_io_channel *channel=context;
-    console_io_request *request=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*request));
-    console_io_reply reply={0};
-    BYTE reply_data[CONSOLE_IO_TILE_BYTES];
-    BYTE *request_data=NULL;
-    DWORD request_capacity=0;
-    DWORD error=request ? ERROR_SUCCESS : ERROR_NOT_ENOUGH_MEMORY;
-    while (!error) {
-        BOOL video_locked=FALSE,video_part=FALSE,video_final=FALSE;
-        error=transfer(channel,FALSE,request,CONSOLE_IO_REQUEST_HEADER_BYTES);
-        if (error) break;
-        ZeroMemory(&reply,sizeof(reply));reply.data=reply_data;
-        if (request->reserved || request->bytes>CONSOLE_IO_MAX_DATA_BYTES) {
-            error=ERROR_INVALID_DATA;break;
-        }
-        if(request->bytes>request_capacity) {
-            BYTE *grown=request_data ? HeapReAlloc(GetProcessHeap(),0,request_data,request->bytes) :
-                HeapAlloc(GetProcessHeap(),0,request->bytes);
-            if(!grown) { error=ERROR_NOT_ENOUGH_MEMORY;break; }
-            request_data=grown;request_capacity=request->bytes;
-        }
-        request->data=request_data;
-        error=request->bytes ? transfer(channel,FALSE,(void *)console_io_request_payload(request),request->bytes) : ERROR_SUCCESS;
+    DWORD error=ERROR_SUCCESS;
+    BOOL video_locked=FALSE,video_part=FALSE,video_final=FALSE;
         /* No activation, input wait or publication is legal while this
          * channel holds the screen lock across the native read tiles. In
          * particular, an activation would wait for the presentation thread
@@ -353,7 +290,7 @@ static DWORD WINAPI console_channel_main(void *context)
          * endpoint.  Continuing would let a later payload complete a frame
          * after an out-of-order operation, which is neither a valid stream nor
          * a safe recovery point. */
-        if(error)break;
+        if(error)return error;
         video_part=request->operation==CONSOLE_IO_VIDEO_DATA;
         if(!error && video_part && channel->console.video.pending &&
             request->state.mode==channel->console.video.pending_serial &&
@@ -367,42 +304,45 @@ static DWORD WINAPI console_channel_main(void *context)
              * critical section; the renderer must not see new-frame/old-grid. */
             frontend_session_snapshot_begin(channel->root);video_locked=TRUE;
         }
-        if (!error) error=frontend_console_dispatch(&channel->console,request,&reply);
+        if (!error) error=frontend_console_dispatch(&channel->console,request,reply);
         /* Dispatch has released the frontend I/O lock before this event-driven
          * wait. Only final native CUI handoff asks the presentation thread to
          * acknowledge a particular complete VIDEO serial; ordinary barriers
          * retain their original logical ordering semantics. */
-        if(!error && reply.result && request->operation==CONSOLE_IO_PRESENT_BARRIER)
+        if(!error && reply->result && request->operation==CONSOLE_IO_PRESENT_BARRIER)
             error=frontend_session_present_barrier(channel->root,channel,&channel->console.video,
                 request->state.mode);
-        if(!error && reply.result && !channel->publication_surface && !channel->console.video.pending && (request->operation==CONSOLE_IO_VIDEO_BEGIN ||
+        if(!error && reply->result && !channel->publication_surface && !channel->console.video.pending && (request->operation==CONSOLE_IO_VIDEO_BEGIN ||
             request->operation==CONSOLE_IO_VIDEO_TEXT))
             error=frontend_session_video(channel->root,channel,&channel->console.video,TRUE);
         if(video_locked)frontend_session_snapshot_end(channel->root);
-        if (!error && (request->operation==CONSOLE_IO_READ_INPUT ||
-            request->operation==CONSOLE_IO_PEEK_INPUT)) {
-            INPUT_RECORD record;
-            DWORD count=0;
-            /* Reset before checking the frontend queue. Its stable readiness
-             * event covers arrivals after this peek, including Window input. */
-            if (!ResetEvent(channel->ready))error=GetLastError();
-            if(!error && !enter(channel)) {
-                error=read_input(channel,TRUE,FALSE,&record,NULL,1,&count,NULL,0);
-                leave(channel);
-            }
-            channel->input_pending=count!=0;
-            if (!error && count && !SetEvent(channel->ready)) error=GetLastError();
-        }
         /* Only the sender's final data part receives a reply, including its
          * frame-level failure. A malformed/interrupted non-final part closes
          * the byte stream rather than leaving an unread reply ahead of the
          * final frame result. */
-        if(!error && video_part && !video_final && !reply.result) {
-            error=reply.error ? reply.error : ERROR_INVALID_DATA;
+        if(!error && video_part && !video_final && !reply->result) {
+            error=reply->error ? reply->error : ERROR_INVALID_DATA;
         }
-        if (!error && (!video_part || video_final)) error=send_reply(channel,&reply);
-        if(!error && channel->publication_terminal_error)error=channel->publication_terminal_error;
+
+    result->reply=!video_part || video_final;
+    result->terminal_error=channel->publication_terminal_error;
+    return error;
+}
+static DWORD pending_input(void *context,BOOL *pending)
+{
+    frontend_io_channel *channel=context;
+    INPUT_RECORD record;
+    DWORD error=ERROR_SUCCESS,count=0;
+    if(!enter(channel)){
+        error=read_input(channel,TRUE,FALSE,&record,NULL,1,&count,NULL,0);
+        leave(channel);
     }
+    *pending=count!=0;
+    return error;
+}
+static void finish(void *context)
+{
+    frontend_io_channel *channel=context;
     if(channel->snapshot_held)(void)snapshot_end(channel);
     if(channel->publication_surface) {
         /* The endpoint is failed; abort staging even if it lost ownership.
@@ -411,63 +351,40 @@ static DWORD WINAPI console_channel_main(void *context)
         (void)publication(channel,CONSOLE_IO_PUBLICATION_ABORT);
         frontend_session_snapshot_end(channel->root);
     }
-    if (request) {
-        if(request_data)HeapFree(GetProcessHeap(),0,request_data);
-        HeapFree(GetProcessHeap(),0,request);
-    }
-    /* This thread owns the endpoint after creation. EOF must reach the worker
-     * even when the launcher is still waiting for its original task event. */
-    CloseHandle(channel->pipe);
-    SetEvent(channel->ready); /* Wake a worker waiter to observe endpoint EOF. */
-    return error;
-}
 
-HANDLE frontend_io_channel_thread(frontend_io_channel *channel)
+}
+static DWORD bind_channel(void *context){return activate(context,TRUE);}
+static DWORD attach_channel(void *context,DWORD request,HANDLE pipe,HANDLE ready,DWORD *generation)
 {
-    return channel ? channel->thread : NULL;
+    frontend_io_channel *channel=context;
+    return OpenNtBaseClientAttachFrontendRequest(&channel->key,request,pipe,ready,generation);
 }
-
+static void set_generation(void *context,DWORD generation)
+{((frontend_io_channel *)context)->console.generation=generation;}
+HANDLE frontend_io_channel_thread(frontend_io_channel *channel)
+{return channel ? frontend_base_channel_thread(channel->base) : NULL;}
 DWORD frontend_io_channel_stop(frontend_io_channel *channel)
 {
-    DWORD wait;
-    if (!channel) return ERROR_SUCCESS;
-    if (channel->stop) {
-        SetEvent(channel->stop);
-    }
-    if (channel->thread) {
-        /* Signal-driven pipe transfers observe stop and cancel/drain their
-         * own OVERLAPPED before closing the pipe. Cancel only synchronous
-         * Console work here: the thread may already have closed its pipe,
-         * so this borrowed handle value cannot safely be used for CancelIoEx.
-         * Join before releasing the channel/root storage still borrowed by
-         * that thread; elapsed time does not transfer its ownership. */
-        (void)CancelSynchronousIo(channel->thread);
-        wait=WaitForSingleObject(channel->thread,INFINITE);
-        if(wait!=WAIT_OBJECT_0)
-            return GetLastError();
-        CloseHandle(channel->thread);
-    } else if (channel->pipe && channel->pipe!=INVALID_HANDLE_VALUE) CloseHandle(channel->pipe);
+    DWORD error;
+    if(!channel)return ERROR_SUCCESS;
+    error=frontend_base_channel_stop(channel->base);
+    if(error)return error;
     frontend_session_forget(channel->root,channel);
     frontend_video_dispose(&channel->console.video);
     frontend_video_dispose(&channel->committed_video);
-    if (channel->io_event) CloseHandle(channel->io_event);
-    if (channel->ready) CloseHandle(channel->ready);
-    if (channel->stop) CloseHandle(channel->stop);
-    if (channel->worker) CloseHandle(channel->worker);
-    if (channel->console.input && channel->console.input!=INVALID_HANDLE_VALUE) CloseHandle(channel->console.input);
-    if (channel->console.output && channel->console.output!=INVALID_HANDLE_VALUE) CloseHandle(channel->console.output);
+    if(channel->console.input && channel->console.input!=INVALID_HANDLE_VALUE)CloseHandle(channel->console.input);
+    if(channel->console.output && channel->console.output!=INVALID_HANDLE_VALUE)CloseHandle(channel->console.output);
     HeapFree(GetProcessHeap(),0,channel);
     return ERROR_SUCCESS;
 }
-
-DWORD frontend_io_channel_start_request(DWORD request,HANDLE worker,frontend_session *root,frontend_io_channel **output)
+DWORD frontend_io_channel_start_request(const common_frontend_key *key,DWORD request,HANDLE worker,frontend_session *root,frontend_io_channel **output)
 {
     frontend_io_channel *channel;
-    HANDLE server=INVALID_HANDLE_VALUE;
-    WCHAR name[96];
-    DWORD error,client_pid=0,generation=0;
-    static LONG serial;
-    if (!output || !request || !root || !worker || worker==INVALID_HANDLE_VALUE) {
+    DWORD error;
+    static const frontend_base_channel_ops ops={
+        bind_channel,attach_channel,set_generation,active,dispatch,pending_input,finish
+    };
+    if (!key || !key->instance || !key->generation || !output || !request || !root || !worker || worker==INVALID_HANDLE_VALUE) {
         if (worker && worker!=INVALID_HANDLE_VALUE) CloseHandle(worker);
         if (output) *output=NULL;
         return ERROR_INVALID_PARAMETER;
@@ -475,7 +392,7 @@ DWORD frontend_io_channel_start_request(DWORD request,HANDLE worker,frontend_ses
     *output=NULL;
     channel=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*channel));
     if (!channel) { if (worker) CloseHandle(worker);return ERROR_NOT_ENOUGH_MEMORY; }
-    channel->worker=worker;
+    channel->key=*key;
     channel->root=root;
     channel->console.logical_window=frontend_session_text_region(root);
     channel->console.io_context=channel;
@@ -492,10 +409,6 @@ DWORD frontend_io_channel_start_request(DWORD request,HANDLE worker,frontend_ses
     channel->console.handoff_title=handoff_title;
     channel->console.read_text_configuration=read_text_configuration;
     channel->console.read_input=read_input;channel->console.prepend_input=prepend_input;
-    channel->stop=CreateEventW(NULL,TRUE,FALSE,NULL);
-    channel->io_event=CreateEventW(NULL,TRUE,FALSE,NULL);
-    channel->ready=CreateEventW(NULL,TRUE,FALSE,NULL);
-    if (!channel->stop || !channel->io_event || !channel->ready) { error=GetLastError();goto fail; }
     error=frontend_session_console(root,&channel->console.input,&channel->console.output);
     if (error) goto fail;
     CloseHandle(channel->console.output);channel->console.output=NULL;
@@ -503,28 +416,14 @@ DWORD frontend_io_channel_start_request(DWORD request,HANDLE worker,frontend_ses
     error=frontend_session_logical_console(root,&channel->console.output);
     frontend_session_snapshot_end(root);
     if(error)goto fail;
-    swprintf_s(name,96,L"\\\\.\\pipe\\ntvdm-console-%lu-%lu",GetCurrentProcessId(),
-        (DWORD)InterlockedIncrement(&serial));
-    error=win32_pipe_pair_create(name,channel->io_event,&server,&channel->pipe);
+    error=frontend_base_channel_start(request,worker,frontend_session_ready(root),
+        &ops,channel,&channel->base);
+    worker=NULL; /* Base consumes the reference even on failure. */
     if(error)goto fail;
-    if (!GetNamedPipeClientProcessId(server,&client_pid) || client_pid!=GetCurrentProcessId()) {
-        error=ERROR_ACCESS_DENIED;goto fail;
-    }
-    /* Bind the broker-authorized channel before exporting the pipe. A worker
-     * receiving the attachment must not race an unbound presentation. */
-    error=activate(channel,TRUE);
-    if(error)goto fail;
-    error=OpenNtBaseClientAttachFrontendRequest(request,server,channel->ready,
-        &generation);
-    if (error) goto fail;
-    channel->console.generation=generation;
-    CloseHandle(server);server=INVALID_HANDLE_VALUE;
-    channel->thread=CreateThread(NULL,0,console_channel_main,channel,0,NULL);
-    if (!channel->thread) { error=GetLastError();goto fail; }
     *output=channel;
     return ERROR_SUCCESS;
 fail:
-    if (server!=INVALID_HANDLE_VALUE) CloseHandle(server);
+    if(worker)CloseHandle(worker);
     (void)frontend_io_channel_stop(channel);
     return error;
 }

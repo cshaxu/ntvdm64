@@ -1,6 +1,6 @@
 /* NTSRV-private service core; project adaptation,
- * not an original OpenNT mirror. Physical separation only: existing function
- * bodies, state authority and lock/resource contracts are preserved. */
+ * not an original OpenNT mirror. Instance associations use the existing service
+ * lock; original task owners and direct frontend/backend I/O remain separate. */
 #include <service_internal.h>
 #include "lib-win32/handle/duplicate.h"
 
@@ -28,6 +28,7 @@ OPENNT_BASE_SERVICE *OpenNtBaseServiceStart(void)
     InitializeListHead(&service->retired_connections);
     InitializeListHead(&service->worker_watches);
     InitializeListHead(&service->frontend_routes);
+    InitializeListHead(&service->frontend_instances);
     InitializeListHead(&service->console_contexts);
     InitializeListHead(&service->gui_records);
     InitializeListHead(&service->observations);
@@ -99,10 +100,11 @@ BOOL OpenNtBaseServiceStop(OPENNT_BASE_SERVICE *service)
         OPENNT_BASE_CONNECTION *connection;
         entry=RemoveHeadList(&service->retired_connections);
         connection=CONTAINING_RECORD(entry,OPENNT_BASE_CONNECTION,retired_link);
-        if (connection->frontend_capability) CloseHandle(connection->frontend_capability);
-        if (connection->frontend_retire) CloseHandle(connection->frontend_retire);
-        if (connection->frontend_restored) CloseHandle(connection->frontend_restored);
-        if (connection->frontend_state_changed) CloseHandle(connection->frontend_state_changed);
+        service_release_frontend_instances(connection);
+        if (connection->frontend.capability) CloseHandle(connection->frontend.capability);
+        if (connection->frontend.retire) CloseHandle(connection->frontend.retire);
+        if (connection->frontend.native.restored) CloseHandle(connection->frontend.native.restored);
+        if (connection->frontend.state_changed) CloseHandle(connection->frontend.state_changed);
         if (connection->worker_io_release) CloseHandle(connection->worker_io_release);
         service_release_console_identities(connection);
         HeapFree(GetProcessHeap(),0,connection);
@@ -124,6 +126,7 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
     connection=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*connection));
     if (!connection) return ERROR_NOT_ENOUGH_MEMORY;
     connection->service=service;
+    connection->frontend.owner=connection;
     InitializeListHead(&connection->win32records);
     EnterCriticalSection(&service->lock);
     if (!OpenNtBaseRegisterProcess(&service->registry,&connection->process,process)) error=GetLastError();
@@ -196,7 +199,7 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
                  * delivery; DOS keeps the initial root for re-entry. */
                 if(!error && !shared_wow && console) {
                     LIST_ENTRY *root_link;
-                    OPENNT_BASE_CONNECTION *selected_root=NULL;
+                    OPENNT_FRONTEND_INSTANCE *selected_root=NULL;
                     BOOL route_found=FALSE;
                     SERVICE_COMPARE_HANDLES compare=service->compare_handles;
                     /* RequestFrontend can precede worker Connect. Consume its
@@ -207,15 +210,15 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
                         if(!compare(route->worker,watch->process.ProcessHandle))continue;
                         route_found=TRUE;
                         selected_root=route->root;
-                        if(!selected_root || selected_root->frontend_closing || selected_root->frontend_close_draining ||
-                            selected_root->frontend_terminal_retire) {
+                        if(!selected_root || selected_root->closing || selected_root->close_draining ||
+                            selected_root->terminal_retire) {
                             watch->close_kind=WORKER_CLOSE_CONSOLE;
                             /* A late binding joins the existing close transaction.
                              * Its frontend must quiesce before worker teardown,
                              * just as for workers present at acceptance. */
-                            if(!selected_root || !selected_root->frontend_close_draining ||
-                                selected_root->frontend_close_returned ||
-                                WaitForSingleObject(selected_root->process.ProcessHandle,0)!=WAIT_TIMEOUT)
+                            if(!selected_root || !selected_root->close_draining ||
+                                selected_root->embedded || selected_root->native.close_returned ||
+                                WaitForSingleObject(selected_root->owner->process.ProcessHandle,0)!=WAIT_TIMEOUT)
                                 (void)SetEvent(watch->console_close);
                         }
                         break;
@@ -224,18 +227,17 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
                         !error && !route_found && !selected_root && root_link!=&service->connections;root_link=root_link->Flink) {
                         OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(root_link,
                             OPENNT_BASE_CONNECTION,service_link);
-                        if(root->frontend_capability && service_root_console_matches(root,console) &&
-                            root->console_member_count && !root->frontend_closing && !root->frontend_close_draining &&
-                            !root->frontend_terminal_retire &&
+                        if(root->frontend.capability && service_root_console_matches(root,console) &&
+                            root->console_member_count && !root->frontend.closing && !root->frontend.close_draining &&
+                            !root->frontend.terminal_retire &&
                             WaitForSingleObject(root->process.ProcessHandle,0)==WAIT_TIMEOUT) {
-                            selected_root=root;
+                            selected_root=&root->frontend;
                             break;
                         }
                     }
                     if(selected_root) {
-                        error=service_copy_execution_console_members(connection,selected_root);
-                        watch->frontend_root_generation=selected_root->process.SequenceNumber;
-                        watch->frontend_root_pid=GetProcessId(selected_root->process.ProcessHandle);
+                        if(!selected_root->embedded)error=service_copy_execution_console_members(connection,selected_root->owner);
+                        if(!error)error=service_bind_frontend_watch(watch,selected_root);
                     }
                 }
                 if (error || !RegisterWaitForSingleObject(&watch->wait,watch->process.ProcessHandle,
@@ -244,6 +246,7 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
                     CloseHandle(watch->process.ProcessHandle);
                     if(watch->shutdown)CloseHandle(watch->shutdown);
                     if(watch->console_close)CloseHandle(watch->console_close);
+                    service_release_frontend_association(watch->frontend_association);
                     HeapFree(GetProcessHeap(),0,watch);
                     if(!connection->native_worker)BaseSrvCleanupVDMResources(&connection->process);
                 } else {
@@ -292,7 +295,10 @@ DWORD OpenNtBaseServiceDisconnect(OPENNT_BASE_CONNECTION *connection)
         broker_vdm_receipts_drain(&connection->streams);
         service_release_launcher_results(service,connection->process.SequenceNumber);
     }
-    if (!error) service_clear_frontend(connection);
+    if (!error) {
+        service_clear_frontend(connection);
+        service_release_frontend_instances(connection);
+    }
     if (!error) {
         LIST_ENTRY *link;
         /* Result latches and receipt signalling share the service lock with
@@ -301,9 +307,9 @@ DWORD OpenNtBaseServiceDisconnect(OPENNT_BASE_CONNECTION *connection)
         service_clear_win32records(connection);
         for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
             OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-            if(root->frontend_join_caller==connection) {
-                root->frontend_join_caller=NULL;
-                root->frontend_join_decision=-1;
+            if(root->frontend.native.join_caller==connection) {
+                root->frontend.native.join_caller=NULL;
+                root->frontend.native.join_decision=-1;
                 (void)service_refresh_frontend_work(root);
             }
         }
@@ -317,10 +323,10 @@ DWORD OpenNtBaseServiceDisconnect(OPENNT_BASE_CONNECTION *connection)
         if(connection->frontend_exit_watch)
             (void)UnregisterWaitEx(connection->frontend_exit_watch,INVALID_HANDLE_VALUE);
         if(connection->frontend_exit_process)CloseHandle(connection->frontend_exit_process);
-        if (connection->frontend_capability) CloseHandle(connection->frontend_capability);
-        if (connection->frontend_retire) CloseHandle(connection->frontend_retire);
-        if (connection->frontend_restored) CloseHandle(connection->frontend_restored);
-        if (connection->frontend_state_changed) CloseHandle(connection->frontend_state_changed);
+        if (connection->frontend.capability) CloseHandle(connection->frontend.capability);
+        if (connection->frontend.retire) CloseHandle(connection->frontend.retire);
+        if (connection->frontend.native.restored) CloseHandle(connection->frontend.native.restored);
+        if (connection->frontend.state_changed) CloseHandle(connection->frontend.state_changed);
         if (connection->worker_io_release) CloseHandle(connection->worker_io_release);
         if (connection->wow_start_event) CloseHandle(connection->wow_start_event);
         service_release_console_identities(connection);

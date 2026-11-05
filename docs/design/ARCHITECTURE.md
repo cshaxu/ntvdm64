@@ -1,5 +1,49 @@
 # System Architecture
 
+## Frontend/backend communication roles — T477
+
+Owner clarification distinguishes role from hosting process. A worker process
+has one backend role and may additionally host multiple independent VM frontend
+instances. NTCON has one native Console/Window frontend instance. NTVDM composes
+VM frontends directly; worker-base must never depend on frontend-base.
+
+| Role | Direct I/O owner | NTSRV control owner |
+| --- | --- | --- |
+| Worker backend | worker-base connects to its selected upstream frontend. | worker-base reports/receives backend execution and lifecycle control. |
+| VM frontend | NTVDM supplies per-VM adapters to common/frontend-base. | Its frontend adapter uses explicit per-instance control identity. |
+| Native frontend | NTCON supplies Console/Window adapters to common/frontend-base. | Its single frontend instance uses the same explicit control contract. |
+
+Frontend-base owns reusable frontend channel/service mechanics; executable
+adapters own presentation and input interpretation. A frontend control pump
+exists independently of its active I/O channel; the latter has a thread only
+while connected. Thread count does not imply separate process RPC connections.
+Frontend instances may share the authenticated process connection, with explicit
+instance selection on each call and no ambient current-frontend selector.
+
+Direct frontend/backend pipes carry user I/O and its protocol requests/replies,
+including input reads and presentation acknowledgements. NTSRV exclusively owns
+cross-component task admission, association, handoff and lifecycle control.
+There are no lateral component control RPCs. Endpoint retirement cannot become
+host/backend process exit. Actual implementation progress remains in Current;
+NTVDM VM adapters remain S3 scope, not an implied S2 implementation.
+
+## Frontend connection base — T477 S1
+
+The delivered frontend extraction places reusable channel and service mechanics
+in `common/frontend-base`. NTCON supplies its native Console/Window and
+operation-dispatch adapter; it retains screen transactions, input receipts and
+restoration. NTSRV remains association, handoff and retirement authority.
+Each base instance owns at most one active worker channel. The protocol and
+backend client remain in their existing common owners, with pipe primitives
+in lib-win32. Common never depends on executable-private code or worker-base.
+
+NTVDM will directly compose frontend-base in S3, alongside its worker-base
+backend role. Worker-base must not depend on frontend-base. Future NTVWM
+frontend adoption can use the same direct composition. Multi-instance service
+registration is S2 scope; local base instance isolation does not establish it.
+[Current](../states/CURRENT.md) and the
+[S1 evidence](../etc/evidence/m0-t477-s1-frontend-base.md) govern actual delivery.
+
 ## Generic integration libraries — T474 S3
 
 `lib-win32/rpc`, `lib-win32/io`, `lib-win32/file`, `lib-win32/process-attributes`, `lib-win32/process-observation`, `lib-win32/process-hook` and `lib-win32/handle` provide product-independent local RPC binding, async

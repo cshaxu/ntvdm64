@@ -46,6 +46,8 @@ struct OPENNT_BASE_SERVICE {
     ULONG next_console;
     ULONG next_wait_receipt;
     ULONG next_frontend_join;
+    uint64_t next_frontend_instance;
+    LIST_ENTRY frontend_instances;
     OPENNT_BASE_INTERACTIVE_SCOPE interactive;
     LIST_ENTRY connections;
     LIST_ENTRY retired_connections;
@@ -62,6 +64,69 @@ struct OPENNT_BASE_SERVICE {
     uint32_t observation_count;
     uint64_t next_observation;
 };
+/* The native frontend occupies one stable slot in its host.
+ * This is frontend state, not a second process/connection. Routes borrow this
+ * record until service_clear_frontend revokes them under the service lock. */
+/* Reference-counted containment identity. Holds no process, task or scheduling
+ * state. Watch/child references preserve ancestry after a host disconnects. */
+typedef struct OPENNT_FRONTEND_ASSOCIATION {
+    uint64_t identity;
+    ULONG references;
+    struct OPENNT_FRONTEND_ASSOCIATION *parent;
+} OPENNT_FRONTEND_ASSOCIATION;
+
+typedef struct OPENNT_FRONTEND_INSTANCE {
+    OPENNT_BASE_CONNECTION *owner;
+    LIST_ENTRY instance_link;
+    common_frontend_key key;
+    common_frontend_location location;
+    BOOL registered,embedded;
+    HANDLE console; /* Broker discriminator for a VM task chain, not a host Console. */
+    OPENNT_FRONTEND_ASSOCIATION *association;
+    /* Capability is independent of command lifetime. state_changed is a
+     * private auto-reset retirement wake, not an execution event. */
+    HANDLE capability,retire,state_changed;
+    /* Admission/close barriers, never task state. terminal_retire first
+     * closes idle carriers through existing worker commands and real exit.
+     * close_draining preserves the worker reset / Console return ordering. */
+    BOOL closing,terminal_retire,close_draining,close_requested;
+    struct OPENNT_FRONTEND_ROUTE *io_route; /* Borrowed under the service lock. */
+    struct {
+        /* HWND is an observation, not identity; zero remains a valid value.
+         * lease_registered is the separate registration discriminator. */
+        uint64_t console_window;
+        BOOL lease_registered,borrowed,idle;
+        HANDLE restored;
+        DWORD creator_generation;
+        OPENNT_BASE_CONNECTION *join_caller;
+        DWORD join_nonce,join_pid;
+        int join_decision;
+        /* Management's return-to-Console acknowledgement is local to close;
+         * it does not complete the launcher's return receipt. */
+        BOOL close_return_required,close_returned;
+        /* One-shot waits on initially authenticated external Console members
+         * only wake lifecycle arbitration; they do not observe tasks. */
+        HANDLE *console_member_watches;
+        DWORD console_member_watch_count;
+    } native;
+} OPENNT_FRONTEND_INSTANCE;
+
+/* All instance helpers require the existing service lock. */
+DWORD service_publish_frontend(OPENNT_FRONTEND_INSTANCE *);
+OPENNT_FRONTEND_INSTANCE *service_frontend_by_identity(OPENNT_BASE_SERVICE *,uint64_t);
+OPENNT_FRONTEND_INSTANCE *service_frontend_by_capability(OPENNT_BASE_SERVICE *,HANDLE);
+BOOL service_frontend_open(const OPENNT_FRONTEND_INSTANCE *);
+BOOL service_frontend_contains(const OPENNT_FRONTEND_ASSOCIATION *,const OPENNT_FRONTEND_ASSOCIATION *);
+void service_release_frontend_association(OPENNT_FRONTEND_ASSOCIATION *);
+struct OPENNT_BASE_WORKER_WATCH;
+DWORD service_bind_frontend_watch(struct OPENNT_BASE_WORKER_WATCH *,OPENNT_FRONTEND_INSTANCE *);
+BOOL service_drain_frontend(OPENNT_FRONTEND_INSTANCE *,BOOL);
+OPENNT_FRONTEND_INSTANCE *service_find_frontend(OPENNT_BASE_CONNECTION *,const common_frontend_key *);
+DWORD service_refresh_instance_work(OPENNT_FRONTEND_INSTANCE *);
+void service_release_frontend_instances(OPENNT_BASE_CONNECTION *);
+void service_reconcile_frontend_instances(OPENNT_BASE_SERVICE *);
+void service_revoke_host_frontends(OPENNT_BASE_CONNECTION *);
+
 struct OPENNT_BASE_CONNECTION {
     OPENNT_BASE_SERVICE *service;
     CSR_PROCESS process;
@@ -73,11 +138,6 @@ struct OPENNT_BASE_CONNECTION {
     DWORD *console_members;
     HANDLE *console_member_processes; /* Pinned process identities, not task state. */
     DWORD console_member_count;
-    /* NTSRV-owned one-shot waits for a borrowed frontend's initially
-     * authenticated external Console members.  They only wake lifecycle
-     * arbitration; they never create task or worker observations. */
-    HANDLE *frontend_console_member_watches;
-    DWORD frontend_console_member_watch_count;
     /* A resident worker outlives its direct launcher. Retain the
      * authenticated frontend root's visible-Console identity separately
      * from the worker's own hidden Console membership. This is only a local
@@ -114,47 +174,22 @@ struct OPENNT_BASE_CONNECTION {
     HANDLE wow_start_event;
     BOOL wow_started;
     BOOL separate_wow_delivered; /* Original GetNext consumed the one-shot record. */
-    HANDLE frontend_capability; /* Root lease, independent of command lifetime. */
-    /* An HWND is a best-effort host observation, not the frontend identity.
-     * A newly allocated Console may not expose one while its owner starts.
-     * Keep explicit state bits so zero is a valid observed value rather than
-     * an accidental "not registered" sentinel. */
-    uint64_t frontend_console_window,frontend_reserved_window;
-    BOOL frontend_lease_registered,frontend_reserved;
-    HANDLE frontend_retire,frontend_restored;
-    HANDLE frontend_start_process; /* Borrowed only during the active Start RPC. */
+    OPENNT_FRONTEND_INSTANCE frontend; /* Existing native registration slot. */
+    /* Startup reservation is owned by the launcher transaction, not by its
+     * eventual frontend instance. Process-exit watches remain host-owned. */
+    uint64_t frontend_reserved_window;
+    BOOL frontend_reserved;
+    HANDLE frontend_start_process; /* Borrowed during the active Start RPC. */
     HANDLE frontend_start_capability,frontend_start_retire,frontend_start_restored;
     HANDLE frontend_start_result; /* Start RPC owns event; never exported. */
     DWORD frontend_start_status;
-    BOOL frontend_start_reported;
-    BOOL frontend_starting;
-    BOOL frontend_return_pending,frontend_return_complete;
-    BOOL frontend_borrowed,frontend_idle;
-    DWORD frontend_creator_generation;
+    BOOL frontend_start_reported,frontend_starting;
+    BOOL frontend_return_pending,frontend_return_complete; /* Launcher return receipt. */
     HANDLE frontend_exit_watch,frontend_exit_process;
-    OPENNT_BASE_CONNECTION *frontend_join_caller;
-    DWORD frontend_join_nonce,frontend_join_pid;
-    int frontend_join_decision;
-    DWORD retained_frontend_root; /* Authenticated launcher association, not a task. */
-    HANDLE frontend_state_changed; /* Root-private auto-reset retirement wake. */
-    HANDLE worker_io_release; /* Service-owned auto-reset I/O instruction, not a task. */
-    BOOL frontend_closing; /* Admission barrier, never execution/task state. */
-    /* A completed root may leave only idle NTVWM-CUI carrier(s).  NTSRV
-     * closes those through the normal worker command, then turns this into
-     * the existing frontend-close transaction from their real exit rundown. */
-    BOOL frontend_terminal_retire;
-    /* An explicit frontend close must let an attached DOS worker complete its
-     * original Console reset before NTCON restores the borrowed parent mode.
-     * This is a close-order barrier, not another worker/task state. */
-    BOOL frontend_close_draining;
-    /* Management first asks NTCON to return a live CAF Window to Console,
-     * then sends the existing worker close instruction.  This acknowledgement
-     * is local to that close transaction; it never completes a launcher lease. */
-    BOOL frontend_close_return_required,frontend_close_returned;
-    BOOL frontend_close_requested; /* One close per authenticated root generation. */
-    struct OPENNT_FRONTEND_ROUTE *frontend_io_route; /* Borrowed, service-lock protected. */
-    DWORD frontend_request_root; /* Original pending command asks this root for I/O. */
-    DWORD frontend_channel_root; /* One pending direct launcher-to-root attachment. */
+    uint64_t retained_frontend_root; /* Authenticated association, not a task. */
+    HANDLE worker_io_release; /* Auto-reset I/O instruction, not a task. */
+    uint64_t frontend_request_root; /* Original pending command asks this root for I/O. */
+    uint64_t frontend_channel_root; /* One pending direct launcher-to-root attachment. */
     HANDLE frontend_execution;
     BYTE *native_command_payload;
     DWORD native_command_bytes;
@@ -167,7 +202,8 @@ struct OPENNT_BASE_CONNECTION {
     DWORD native_start_worker,native_start_request,native_start_status;
     BOOL native_start_reported;
     BOOL native_frontend_registered; /* Control registration, not root identity. */
-    DWORD native_inflight,native_activity_root;
+    DWORD native_inflight;
+    uint64_t native_activity_root;
     /* Project-owned native-text counterpart to BaseSrv's original DOSRECORD
      * projection.  The broker, not the native Console process list, owns
      * logical request depth and the active task label exposed to NTMON. */
@@ -197,7 +233,7 @@ typedef struct OPENNT_BASE_WIN32RECORD {
 } OPENNT_BASE_WIN32RECORD;
 typedef struct OPENNT_FRONTEND_ROUTE {
     LIST_ENTRY link;
-    OPENNT_BASE_CONNECTION *root; /* Removed before this connection is freed. */
+    OPENNT_FRONTEND_INSTANCE *root; /* Revoked before its owner is freed. */
     HANDLE worker;
     HANDLE pipe;
     HANDLE ready;
@@ -239,7 +275,8 @@ typedef struct OPENNT_BASE_WORKER_WATCH {
     HANDLE shutdown;
     HANDLE console_close;
     HANDLE wow_task_close;
-    DWORD frontend_root_generation,frontend_root_pid;
+    OPENNT_FRONTEND_ASSOCIATION *frontend_association;
+    DWORD frontend_root_generation,frontend_root_pid; /* Native management projection only. */
 } OPENNT_BASE_WORKER_WATCH;
 typedef struct OPENNT_BASE_MANAGEMENT_LABEL {
     LIST_ENTRY link;
@@ -262,7 +299,7 @@ typedef struct OPENNT_BASE_WOW_TASK_CLOSE {
 } OPENNT_BASE_WOW_TASK_CLOSE;
 typedef struct OPENNT_BASE_CONSOLE_CONTEXT {
     LIST_ENTRY link;
-    OPENNT_BASE_CONNECTION *root; /* Removed under service lock before root free. */
+    OPENNT_FRONTEND_INSTANCE *root; /* Borrowed under the service lock. */
     HANDLE capability,console;
     DWORD worker_generation; /* Origin only; not a task or lifetime owner. */
 } OPENNT_BASE_CONSOLE_CONTEXT;
@@ -285,10 +322,10 @@ void service_signal_worker_states(OPENNT_BASE_SERVICE *service);
 /* Process-watch callback is cross-module even without a direct call. */
 VOID CALLBACK service_worker_terminated(PVOID context,BOOLEAN fired);
 void service_delete_console_context(OPENNT_BASE_CONSOLE_CONTEXT *context);
-DWORD service_acquire_console_context(OPENNT_BASE_CONNECTION *root,HANDLE console,
+DWORD service_acquire_console_context(OPENNT_FRONTEND_INSTANCE *root,HANDLE console,
     DWORD worker_generation,HANDLE *capability);
 DWORD service_prepare_parent_resume(OPENNT_BASE_CONNECTION *caller,
-    DWORD root_generation,BOOL *native_parent);
+    uint64_t root_identity,BOOL *native_parent);
 BOOL service_root_console_matches(OPENNT_BASE_CONNECTION *root,HANDLE console);
 void service_release_console_identities(OPENNT_BASE_CONNECTION *connection);
 DWORD service_copy_execution_console_members(OPENNT_BASE_CONNECTION *destination,
@@ -314,9 +351,9 @@ void service_capture_checked_management_label(OPENNT_BASE_SERVICE *service,
     HANDLE console,const BASE_CHECKVDM_MSG *command);
 /* Caller holds service lock; capture only an already authenticated binding. */
 OPENNT_BASE_WORKER_WATCH *service_find_worker_watch(OPENNT_BASE_SERVICE *,DWORD generation);
-DWORD service_worker_root(OPENNT_BASE_CONNECTION *);
+uint64_t service_worker_root(OPENNT_BASE_CONNECTION *);
 DWORD service_bind_worker_root(OPENNT_BASE_SERVICE *,HANDLE worker,
-    OPENNT_BASE_CONNECTION *root);
+    OPENNT_FRONTEND_INSTANCE *root);
 BOOL service_root_has_worker(OPENNT_BASE_CONNECTION *root);
 DWORD service_queue_native_command(OPENNT_BASE_CONNECTION *connection,DWORD pid,
     DWORD generation,DWORD operation,HANDLE capability,const WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS],
@@ -327,7 +364,7 @@ DWORD service_take_native_command(OPENNT_BASE_CONNECTION *root,DWORD pid,
     HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request,DWORD *caller_generation);
 void service_retire_completed_root(OPENNT_BASE_CONNECTION *parent);
 /* Service lock held after a worker watch is removed. */
-void service_advance_terminal_root_retire(OPENNT_BASE_SERVICE *service,DWORD root_generation);
+void service_advance_terminal_root_retire(OPENNT_BASE_SERVICE *service,uint64_t root_generation);
 DWORD service_bind_existing_console(OPENNT_BASE_CONNECTION *connection);
 /* Policy-owner time inputs; production callers pass GetTickCount64 through
  * the public wrappers. No mutable clock or runtime timeout override. */

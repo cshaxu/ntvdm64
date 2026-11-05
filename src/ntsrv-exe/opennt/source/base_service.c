@@ -491,20 +491,8 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
         }
     }
     if(separate_dos && connection->retained_frontend_root) {
-        LIST_ENTRY *link;
-        OPENNT_BASE_CONNECTION *root=NULL;
-        for(link=connection->service->connections.Flink;
-            link!=&connection->service->connections;link=link->Flink) {
-            OPENNT_BASE_CONNECTION *candidate=CONTAINING_RECORD(link,
-                OPENNT_BASE_CONNECTION,service_link);
-            if(candidate->process.SequenceNumber==connection->retained_frontend_root &&
-                candidate->frontend_capability && !candidate->frontend_closing && !candidate->frontend_close_draining &&
-                !candidate->frontend_terminal_retire &&
-                WaitForSingleObject(candidate->process.ProcessHandle,0)==WAIT_TIMEOUT) {
-                root=candidate;break;
-            }
-        }
-        if(!root) {LeaveCriticalSection(&connection->service->lock);return ERROR_PIPE_NOT_CONNECTED;}
+        OPENNT_FRONTEND_INSTANCE *root=service_frontend_by_identity(connection->service,connection->retained_frontend_root);
+        if(!service_frontend_open(root)) {LeaveCriticalSection(&connection->service->lock);return ERROR_PIPE_NOT_CONNECTED;}
         /* Prepare the association before publishing the source record, so an
          * allocation failure cannot strand an admitted task. The new Console
          * is service-allocated, never an identity supplied by the launcher. */

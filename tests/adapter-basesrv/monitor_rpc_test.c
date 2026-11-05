@@ -223,7 +223,7 @@ static int console_context_rpc(RPC_BINDING_HANDLE binding,HANDLE self)
         {
             RPC_ASYNC_STATE async;DWORD error=common_rpc_begin_async(&async);
             CHECK(!error);
-            RpcTryExcept {Client_FrontendRequest(&async,binding,connection,self,generation,&request,&probe);}
+            RpcTryExcept {Client_FrontendRequest(&async,binding,connection,self,generation,1,1,&request,&probe);}
             RpcExcept(1){error=RpcExceptionCode();}
             RpcEndExcept
             CHECK(common_rpc_end_async(&async,error,NULL,10000)==ERROR_ACCESS_DENIED);

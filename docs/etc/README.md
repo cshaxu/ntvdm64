@@ -1,5 +1,15 @@
 # Supporting Material
 
+[T477 S2 implementation evidence](evidence/m0-t477-s2-frontend-instances.md) records ownership separation and per-part verification/publication.
+
+[T477 S2 frontend-instance design](operations/m0-t477-s2-frontend-instances-design.md) records host/instance separation, control identity and staged verification.
+
+[T477 S1 implementation evidence](evidence/m0-t477-s1-frontend-base.md) records extraction verification and publication status.
+
+[T477 S1 frontend-base design](operations/m0-t477-s1-frontend-base-design.md) records the source audit, extraction interfaces and P verification plan.
+
+[T477 host frontend sequence](operations/m0-t477-host-frontend-plan.md) records the admitted ownership, staged implementation and guest boundary.
+
 [T476 S1 mirror conditional audit](evidence/m0-t476-s1-mirror-conditional.md) records the identity checkpoint and current complete-file review evidence.
 
 [T474 S1 shared-ownership integration](evidence/m0-t474-s1-shared-range-integration.md) records the complete sibling range, integration fixes, full validation and published package.

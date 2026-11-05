@@ -2,7 +2,22 @@
 
 ## Current Work
 
-**No active M/T/S packet.** The owner directed [T476 closure](../history/m0-t476-closure.md), with its incomplete build and context evidence explicitly retained. Integrate the existing T477 worktree commits, then admit its integrated cached-build, test and publication P.
+**Active: M0 T477 S2 P4 — integrated delivery.** The owner closed T476 with its [evidence limitations](../history/m0-t476-closure.md), directed integration of all existing T477 commits, and admitted one P for the merged source.
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T477 S2 P4, Ordinary Mode. |
+| Admission And Approval | Owner directed integration of the existing T477 branch and a cached full build, tests, complete publication, commit and push. |
+| Objective | Deliver and verify a coherent ten-component package built from the combined T476 and T477 source. |
+| Non-goals | Do not modify or rebuild guest; do not claim unverified T476 audit coverage. |
+| Reference Baseline | T476 closure and [T477 S2 evidence](../etc/evidence/m0-t477-s2-frontend-instances.md); integration may change artifacts. |
+| Files And ABI Surface | Combined T476/T477 tracked changes, release artifacts, delivery and evidence records. |
+| Applicable Rules | Execution, source policy, architecture, coding and documentation authorities. |
+| Verification | Cached x86/x64 full builds, applicable Full gates, complete ten-image staging and publication with hash checks, review, commit and push. |
+| Exit Conditions | All required delivery gates pass; report any limitations honestly. |
+| Temporary Evidence | `build/t477-integration-p4`, 90-minute phase, 4 GiB, 15-minute no-progress budget. |
+
+T477 S3 direct NTVDM frontend-base/VM integration and S4 NTMON integration remain later work, not part of this delivery.
 
 ## M0 T475 S5 Closure
 
@@ -60,7 +75,7 @@ The [S2 acceptance](../etc/evidence/m0-t461-s2-binding-implementation.md)
 records the reviewed Registry bindings and product gate. S3 owns durable
 commit, restart tombstones and cross-worker serialization.
 
-## S1 Closure Record
+## T473 S1 Closure Record
 
 The [T473 baseline](../etc/evidence/m0-t473-s1-whole-closure-baseline.md) records original source and composition inventory.
 
@@ -120,9 +135,12 @@ packet above remains the only current S authority.
 
 ## Current Technical Baseline
 
-The [latest source delivery](../../artifacts/mvdm-audit/latest-source-release-review.md)
-builds all ten components from committed production code. Full selected
-product gates pass; both deployment targets match. Guest media is unchanged.
+This worktree's [T477 S2 delivery](../etc/evidence/m0-t477-s2-frontend-instances.md)
+builds the ten-image product at application version 0.0.477 and protocol 66.
+Full selected product gates pass and both publication targets match. Guest
+media is unchanged. Actual NTVDM VM composition remains the next S3 scope.
+The earlier [source release review](../../artifacts/mvdm-audit/latest-source-release-review.md)
+remains retained baseline evidence.
 
 ## Temporary Evidence
 

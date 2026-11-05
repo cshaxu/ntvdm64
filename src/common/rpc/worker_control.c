@@ -100,19 +100,7 @@ DWORD common_rpc_worker_io_transition(const common_rpc_connection *state,DWORD a
     RpcEndExcept
     return common_rpc_end_async(&async,error,NULL,INFINITE);
 }
-DWORD common_rpc_frontend_io_disconnected(const common_rpc_connection *state)
-{
-    RPC_ASYNC_STATE async;DWORD error=ERROR_INVALID_STATE;
-    if(!state || !state->connection || !state->binding || !state->process)return error;
-    error=common_rpc_begin_async(&async);if(error)return error;
-    RpcTryExcept {
-        Client_FrontendIoDisconnected(&async,state->binding,state->connection,state->process,
-            state->generation);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    return common_rpc_end_async(&async,error,NULL,INFINITE);
-}
+
 DWORD common_rpc_worker_io_release_event(const common_rpc_connection *state,HANDLE *release)
 { return worker_event(state,release,Client_WorkerIoReleaseEvent,TRUE); }
 

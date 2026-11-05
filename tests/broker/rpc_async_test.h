@@ -65,9 +65,10 @@ static __inline DWORD test_rpc_bind_console_context(handle_t binding,VDM_CONNECT
 static __inline DWORD test_rpc_register_frontend_root(handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation,HANDLE capability)
 {
+    LONGLONG instance=0;ULONG frontend_generation=0;
     RPC_ASYNC_STATE async;DWORD error=common_rpc_begin_async(&async);
     if(error)return error;
-    RpcTryExcept {Client_RegisterFrontendRoot(&async,binding,connection,process,generation,capability);}
+    RpcTryExcept {Client_RegisterFrontendRoot(&async,binding,connection,process,generation,capability,&instance,&frontend_generation);}
     RpcExcept(1){error=RpcExceptionCode();}
     RpcEndExcept
     return common_rpc_end_async(&async,error,NULL,10000);

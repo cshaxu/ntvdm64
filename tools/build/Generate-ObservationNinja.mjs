@@ -14,7 +14,7 @@ const source = (path) => `${root}/${path}`;
 mkdirSync(build, { recursive: true });
 writeFileSync(resolve(build, 'build.ninja'), [
   'ninja_required_version = 1.10',
-  'cflags = /nologo /TC /std:c11 /c /MT /W4 /WX /wd4201 /D_CRT_SECURE_NO_WARNINGS /showIncludes /I"' + source('src/ntcon-exe') + '"',
+  'cflags = /nologo /TC /std:c11 /c /MT /W4 /WX /wd4201 /D_CRT_SECURE_NO_WARNINGS /showIncludes /I"' + source('src') + '" /I"' + source('src/ntcon-exe') + '"',
   'rule cc',
   '  command = cl.exe $cflags /Fo$out $in',
   '  deps = msvc',

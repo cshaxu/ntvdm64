@@ -102,7 +102,7 @@ set_target_properties(wow_cross_worker_probe PROPERTIES
   OUTPUT_NAME MSGXHOST RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/message-probes")
 add_executable(wow_message_observer EXCLUDE_FROM_ALL
   "${CMAKE_SOURCE_DIR}/tests/observation/console_startup_observer.c")
-target_include_directories(wow_message_observer PRIVATE "${CMAKE_SOURCE_DIR}/src/ntcon-exe")
+target_include_directories(wow_message_observer PRIVATE "${CMAKE_SOURCE_DIR}/src" "${CMAKE_SOURCE_DIR}/src/ntcon-exe")
 target_compile_definitions(wow_message_observer PRIVATE _CRT_SECURE_NO_WARNINGS)
 target_compile_options(wow_message_observer PRIVATE /O2 /std:c11 /W4 /WX /wd4201)
 target_link_libraries(wow_message_observer PRIVATE user32 dbghelp)

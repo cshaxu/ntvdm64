@@ -41,13 +41,7 @@ error_status_t Client_WorkerIoTransition(PRPC_ASYNC_STATE async,handle_t binding
 {
     peer(binding,connection,process,generation);CHECK(action==1);return result();
 }
-error_status_t Client_FrontendIoDisconnected(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
-    HANDLE process,unsigned long generation)
-{
-    peer(binding,connection,process,generation);CHECK(async!=NULL);
-    RpcRaiseException(mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED);
-    return ERROR_SUCCESS;
-}
+
 error_status_t Client_AcquireConsoleContext(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,
     HANDLE process,unsigned long generation,HANDLE frontend,HANDLE *capability)
 {
@@ -115,7 +109,6 @@ int main(void)
     CHECK(common_rpc_worker_io_checkpoint(&expected,2,42,NULL)==ERROR_INVALID_PARAMETER);
     generation=99;
     CHECK(common_rpc_worker_io_checkpoint(NULL,2,42,&generation)==ERROR_INVALID_STATE && generation==WORKER_IO_KEEP);
-    CHECK(common_rpc_frontend_io_disconnected(NULL)==ERROR_INVALID_STATE);
     CHECK(common_rpc_take_frontend(&expected,NULL,&frontend,&generation,&ready,FALSE)==ERROR_INVALID_PARAMETER);
     pipe=frontend=ready=expected.process;generation=99;
     CHECK(common_rpc_take_frontend(NULL,&pipe,&frontend,&generation,&ready,TRUE)==ERROR_INVALID_STATE);
@@ -141,14 +134,13 @@ int main(void)
         CHECK(common_rpc_worker_io_transition(&expected,1)==want);
         /* Actual RPC/CAF exercises successful completion; this stub only
          * covers issuance failure and notification-event cleanup. */
-        CHECK(common_rpc_frontend_io_disconnected(&expected)==want);
         for(i=0;i<2;++i) {
             generation=99;
             error=common_rpc_take_frontend(&expected,&pipe,&frontend,&generation,&ready,i!=0);
             CHECK(error==want);
             CHECK(!pipe && !frontend && !ready && !generation);closed(3);
         }
-        CHECK(calls==initial+ARRAYSIZE(events)+7);
+        CHECK(calls==initial+ARRAYSIZE(events)+6);
     }
     CHECK(takes==2 && waits==2);
     mode=2;expected.binding=(RPC_BINDING_HANDLE)(ULONG_PTR)21;

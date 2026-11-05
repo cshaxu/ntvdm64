@@ -17,6 +17,31 @@ $graph = @($graph | ForEach-Object {
     } else { $_ }
 })
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
+function Assert-WorkerBackendRole([string]$Text) {
+    if($Text -match '#include\s*[<"](?:common/frontend-base/|common/base_srv/frontend_client\.h)' -or
+        $Text -match '\bOpenNtBaseClient(?:RegisterEmbeddedFrontend|RegisterFrontendRoot|FrontendRequest|AttachFrontendRequest|CloseFrontendInstance|UnregisterFrontendInstance)\s*\(') {
+        throw 'Worker Base cannot compose a frontend role; the executable owns VM frontend adapters'
+    }
+}
+foreach($file in Get-ChildItem (Join-Path $repo 'src/worker-base') -File -Recurse |
+        Where-Object Extension -in '.c','.h') {
+    Assert-WorkerBackendRole (Get-Content $file.FullName -Raw)
+}
+foreach($negative in @('#include "common/frontend-base/service.h"',
+        '#include "common/base_srv/frontend_client.h"',
+        'OpenNtBaseClientRegisterEmbeddedFrontend(location,key,notify,retire);')) {
+    $rejected=$false
+    try { Assert-WorkerBackendRole $negative } catch { $rejected=$true }
+    if(!$rejected){throw 'Worker/frontend role negative control was accepted'}
+}
+if((Get-Content (Join-Path $repo 'src/common/rpc/worker_control.c') -Raw) -match
+    '\bcommon_rpc_frontend_io_disconnected\s*\(') {
+    throw 'Frontend release acknowledgement belongs to frontend_control, not worker_control'
+}
+if((Get-Content (Join-Path $repo 'src/common/base_srv/base_rpc_client_core.c') -Raw) -match
+    '(?m)^DWORD OpenNtBaseClient(?:RegisterEmbeddedFrontend|RegisterFrontendRoot|FrontendRequest|AttachFrontendRequest|CloseFrontendInstance)\s*\(') {
+    throw 'Frontend role implementation belongs to frontend_client.c, not the process connection core'
+}
 foreach($owner in @('ntcon-exe','ntsrv-exe','ntvwm-exe')) {
     foreach($file in Get-ChildItem (Join-Path $repo "src/$owner") -File -Recurse |
             Where-Object Extension -in '.c','.h') {
@@ -51,6 +76,7 @@ if($graph -match '^build obj/run16/(?:native_console_frontend|frontend_session|c
 # A stale RPC method must not survive merely because no EXE calls it today.
 foreach ($path in @('src/common/protocol/service.idl',
         'src/common/base_srv/base_rpc_client_core.c',
+        'src/common/base_srv/frontend_client.c',
         'src/common/base_srv/base_rpc_client_launch.c',
         'src/ntsrv-exe/opennt/source/base_service.c',
         'src/ntsrv-exe/opennt/source/service_core.c',

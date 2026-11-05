@@ -1,3 +1,6 @@
+#include "common/base_srv/frontend_client.h"
+#include "common/protocol/frontend_instance.h"
+static const common_frontend_key fixture_frontend={7,11};
 /* Production channel/dispatcher, real pipes, threads and Console APIs.
  * Only broker attachment is substituted; this is not an RPC/authentication
  * or guest test. Run on an unswitched private-desktop Console. */
@@ -469,9 +472,9 @@ static void audit_handles(const char *stage)
     }
     HeapFree(GetProcessHeap(),0,info);
 }
-DWORD OpenNtBaseClientAttachFrontendRequest(DWORD request,HANDLE pipe,
+DWORD OpenNtBaseClientAttachFrontendRequest(const common_frontend_key *key,DWORD request,HANDLE pipe,
     HANDLE ready,DWORD *generation)
-{
+{CHECK(key && key->instance==fixture_frontend.instance && key->generation==fixture_frontend.generation);
     (void)ready;
     if(request!=expected_generation) return ERROR_INVALID_PARAMETER;
     if(!DuplicateHandle(GetCurrentProcess(),pipe,GetCurrentProcess(),&peer,
@@ -592,7 +595,7 @@ static void run_case(unsigned mode,unsigned round)
             &worker,SYNCHRONIZE,FALSE,0));
     } else CHECK(DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),
         &worker,SYNCHRONIZE,FALSE,0));
-    CHECK(!frontend_io_channel_start_request(expected_generation,worker,test_frontend,&channel));
+    CHECK(!frontend_io_channel_start_request(&fixture_frontend,expected_generation,worker,test_frontend,&channel));
     {
         WCHAR cell;DWORD count,flags;COORD origin={0,0};
         CHECK(ReadConsoleOutputCharacterW(channel->console.output,&cell,1,origin,&count) && count==1 &&
@@ -602,9 +605,9 @@ static void run_case(unsigned mode,unsigned round)
     }
     CHECK(!activate(channel,TRUE));
     if(mode<5)CHECK(!prepare_text(channel,(COORD){80,25}));
-    CHECK(DuplicateHandle(GetCurrentProcess(),channel->thread,GetCurrentProcess(),
+    CHECK(DuplicateHandle(GetCurrentProcess(),frontend_io_channel_thread(channel),GetCurrentProcess(),
         &thread,0,FALSE,DUPLICATE_SAME_ACCESS));
-    CHECK(DuplicateHandle(GetCurrentProcess(),channel->ready,GetCurrentProcess(),
+    CHECK(DuplicateHandle(GetCurrentProcess(),frontend_base_channel_ready(channel->base),GetCurrentProcess(),
         &ready,0,FALSE,DUPLICATE_SAME_ACCESS));
     {
         INPUT_RECORD stale[64];DWORD count;
@@ -1348,7 +1351,7 @@ static void test_projection_failure_pipe(BOOL batch)
     DWORD bytes,index,offset,count,code;WCHAR cell;
     expected_generation=batch ? 922 : 921;
     CHECK(DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),&worker,SYNCHRONIZE,FALSE,0));
-    CHECK(!frontend_io_channel_start_request(expected_generation,worker,test_frontend,&channel));
+    CHECK(!frontend_io_channel_start_request(&fixture_frontend,expected_generation,worker,test_frontend,&channel));
     CHECK(!activate(channel,TRUE));
     CHECK(!prepare_text(channel,(COORD){80,25}));
     request.version=CONSOLE_IO_VERSION;request.generation=expected_generation;
@@ -1392,8 +1395,8 @@ static void test_projection_failure_pipe(BOOL batch)
         peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));CHECK(!reply.result);
     }
     CHECK(reply.error==ERROR_WRITE_FAULT && !arm_pipe_projection);
-    CHECK(WaitForSingleObject(channel->thread,3000)==WAIT_OBJECT_0);
-    CHECK(GetExitCodeThread(channel->thread,&code) && code==ERROR_WRITE_FAULT);
+    CHECK(WaitForSingleObject(frontend_io_channel_thread(channel),3000)==WAIT_OBJECT_0);
+    CHECK(GetExitCodeThread(frontend_io_channel_thread(channel),&code) && code==ERROR_WRITE_FAULT);
     CHECK(channel->publication_terminal_error==ERROR_WRITE_FAULT && !channel->publication_surface);
     CHECK(!frontend_session_enter(test_frontend,channel));
     CHECK(test_frontend->video==&channel->console.video && channel->console.video.published_serial==1);
@@ -1874,7 +1877,7 @@ int main(int argc,char **argv)
         expected_generation=777;
         CHECK(DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),
             &worker,SYNCHRONIZE,FALSE,0));
-        CHECK(!frontend_io_channel_start_request(expected_generation,worker,test_frontend,&channel));
+        CHECK(!frontend_io_channel_start_request(&fixture_frontend,expected_generation,worker,test_frontend,&channel));
         CHECK(!test_bind(test_frontend,channel,TRUE,TRUE));
         request.version=CONSOLE_IO_VERSION;request.generation=expected_generation;
         request.sequence=1;request.operation=CONSOLE_IO_BARRIER;
