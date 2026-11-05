@@ -1,0 +1,1941 @@
+{
+  "method": "existing per-file recursive conditional projection and exact source/original hashes; fresh inventory shows no missing or conflict, all remaining arms hit, no static mapping leads, no mismatch in any compiler selected unique-line sample",
+  "files": [
+    {
+      "path": "src/mvdm-host/dbg/dbg.c",
+      "current_sha256": "f6c2da346f0a421620523036c1afa156852441a035e1407906616ae86e82bd27",
+      "original_sha256": "5a3a207eff1570908e270c737d12fb40fe66097895063136d17fe6b971494b90",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "excluded": 35,
+        "retained": 21,
+        "groups": 35
+      },
+      "matched_original_lines": 1259,
+      "observed_branches": 21,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 218,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "current_sha256": "94c1dced55b52c582322558cce2d72cae2a069fd437c72e48beb90caa5893cde",
+      "original_sha256": "ea707e7955198462f93a0e795ae1751d83749578e93653e9b0baf4594d069711",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "excluded": 9,
+        "groups": 9,
+        "retained": 1
+      },
+      "matched_original_lines": 244,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 106,
+      "compiler_contexts": 10,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demdasd.c",
+      "current_sha256": "81e1557a4e8b6065d17ef557df07b264b89340deb82fdb18df57f2a9fab49cf7",
+      "original_sha256": "7438f5d4df1803664e66f16b7464d719c8e4341d1d9c2e7721ce7184bdf08942",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "excluded": 4,
+        "groups": 5,
+        "retained": 1
+      },
+      "matched_original_lines": 708,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 163,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demmisc.c",
+      "current_sha256": "d5f98246059f0707a1e539d26cad8309e639dbb707accf3088d5742e0e4ba9ba",
+      "original_sha256": "19676fa5995555ec0b16c2923953b4e6236467dc42bf36cc7e746f45d0fcf912",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 4,
+        "groups": 5,
+        "excluded": 1
+      },
+      "matched_original_lines": 627,
+      "observed_branches": 4,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 178,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.h",
+      "current_sha256": "93ff578e59baa0d11ead3cf1d246c2fb89e50ffbb876e1bdca4b14fb52568a33",
+      "original_sha256": "245976d103b8dd3b918b008b85e9e94b3ec245fb9119c28b897f936a94b69b5e",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 1,
+        "groups": 1
+      },
+      "matched_original_lines": 68,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 16,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/demexp.h",
+      "current_sha256": "24662e12d46253915b351a80c37749fc48da212f6b219a782c84271a0145bf9b",
+      "original_sha256": "dfb912ee16a360e36d149bca01592a61ec11ff0f1d1b148edcffb42fda52d5c4",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 1,
+        "groups": 1
+      },
+      "matched_original_lines": 33,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 4,
+      "compiler_contexts": 19,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/dpmi.h",
+      "current_sha256": "a56f3292d2d42a7e3feeb060f8ab106ed119f5674e5a30548c1d36a3d8233008",
+      "original_sha256": "3425f64b805b8bab8086523288c8afe86eee8f183208aa863b49bb8fb962a154",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "excluded": 1,
+        "retained": 1,
+        "groups": 1
+      },
+      "matched_original_lines": 119,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 24,
+      "compiler_contexts": 13,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "current_sha256": "ef9629e07f4ecd78ede30985f1b8fa4dc31c0e6981a9b2f3fe54afcdfeb76987",
+      "original_sha256": "a8345e88db25332bdf008bdc730ffa15bdc6110ecf1a6c54ed7e59c95ca7085b",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "excluded": 55,
+        "groups": 59,
+        "retained": 48
+      },
+      "matched_original_lines": 357,
+      "observed_branches": 48,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 3,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+      "current_sha256": "6bd14417070148d1bea9febad34cc2e229c14cd513138c6cdea8b1a21208f354",
+      "original_sha256": "bc5e3a66a552e293ae1ec9653205f8432867b4290e3d4ecad6ae5cd1ccab4cb6",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 1,
+        "groups": 2
+      },
+      "matched_original_lines": 131,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 4,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/bound.c",
+      "current_sha256": "8ddd9738f9c3240ed9faea1b16c11218047ad0859ca8ab30fde75ad2bf136877",
+      "original_sha256": "c82ea948fafd97bbf2c99bf3ba681d485f9c38bef75493498a465b7f556fc1f2",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 1,
+        "groups": 1
+      },
+      "matched_original_lines": 70,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 8,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.h",
+      "current_sha256": "24d7a95929e1ed4428ec8f749ba1229c91c27e675baf3d8c8ba6c347ba1de68e",
+      "original_sha256": "c900712ad3c01e1e6ea6ee3b3ce597bf67f0ae1392576a8f60413af78a4742b6",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "excluded": 3,
+        "groups": 4,
+        "retained": 1
+      },
+      "matched_original_lines": 202,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 3,
+      "compiler_contexts": 42,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "current_sha256": "72b3f8a37ccdd92bb7955cec625e10a31d9743d95c8534ff9acf30952f8ac946",
+      "original_sha256": "54bac68daf938cc40dc69fb2b4277f7ae535daebea6a8a5a70f3113d30caa48c",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "excluded": 4,
+        "retained": 1,
+        "groups": 4
+      },
+      "matched_original_lines": 1749,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 121,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.h",
+      "current_sha256": "361aced5ce9afec12a540cca78099bc5858fcaca96e348eb788b2dd59d3b6a84",
+      "original_sha256": "968a23e991127bf74872c9ca48d37341a64a4732fe9fec397d78464644138a35",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "excluded": 1,
+        "retained": 1,
+        "groups": 1
+      },
+      "matched_original_lines": 492,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 3,
+      "compiler_contexts": 42,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.c",
+      "current_sha256": "8460b74a7ff1e6d654c5d5561ab325dfdd46f3eb1cb3bdd572c76fbdcb2f0177",
+      "original_sha256": "a038c8e79688b5e7430e3a9baf0c5e11848c4d2de89584ae71a4209c7ed54292",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "excluded": 6,
+        "groups": 6,
+        "retained": 1
+      },
+      "matched_original_lines": 535,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 31,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
+      "current_sha256": "b893efbe26b944614bce4cb5a5991d21b37fde1c92e564defc447347d27f87d9",
+      "original_sha256": "5f730f08b36a3a19cd1c682e080816d21e633b0f1b07f929b08e1d7e06ef4037",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "excluded": 2,
+        "retained": 1,
+        "groups": 2
+      },
+      "matched_original_lines": 392,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 26,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "current_sha256": "cdadad02799c68fbbb16516145ac7dfba31dbf53319eae10267d2052bcd24b42",
+      "original_sha256": "2802840ef84106ae0f99c6f17af370da66c9381a1355570f5998039fbb33534e",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 11,
+        "excluded": 10,
+        "groups": 17
+      },
+      "matched_original_lines": 1873,
+      "observed_branches": 11,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 150,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/in.c",
+      "current_sha256": "21e9496ff93586b7f696bad8a6015027dcc2592a09e8d38b4abedb76a4e6aa72",
+      "original_sha256": "5a6cb5699c84e6a25fc984aa9c5a4ee50cb22d4408ba3df57cd0cd95e41f23b0",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 4,
+        "groups": 4,
+        "excluded": 1
+      },
+      "matched_original_lines": 89,
+      "observed_branches": 4,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 5,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/jmp.c",
+      "current_sha256": "1c5660ad0dbb88ccb808f155093b3821fbd91816a71d11f3de8e46d8ae2d05f6",
+      "original_sha256": "470889ec4ca8311980f1b700e56d028009fc459c47eb484e1451a799ac7feb87",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 4,
+        "excluded": 3,
+        "groups": 4
+      },
+      "matched_original_lines": 173,
+      "observed_branches": 4,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 11,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lldt.c",
+      "current_sha256": "f7c791af8bda2ca0ce231a68555f0f18840fc28b3245732e569d9aea01d26f2a",
+      "original_sha256": "9b0077be47d4bb3f75e8f521a9db907ec42199c57ab59226e56d6b8013dfe6c6",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 2,
+        "excluded": 1,
+        "groups": 2
+      },
+      "matched_original_lines": 82,
+      "observed_branches": 2,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 6,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/mov.c",
+      "current_sha256": "58fe3be87395df048bd97772a752acf75352c026278ad827aaca990888583f9b",
+      "original_sha256": "d274ed1ad9f8114f8c7ff0c0d6d57f08116d70fd8e6b26f0d0051b70ba9f8348",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "excluded": 1,
+        "retained": 1,
+        "groups": 1
+      },
+      "matched_original_lines": 235,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 8,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/out.c",
+      "current_sha256": "6ea2193496697fda3b7206759306dd1e333d7a9eb098a66f7fcef4507e10116e",
+      "original_sha256": "520bdebe72dcb263bf2a8312ec543b0414a0456e07959891bddb7d083b52b91b",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 4,
+        "groups": 4,
+        "excluded": 1
+      },
+      "matched_original_lines": 80,
+      "observed_branches": 4,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 4,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ret.c",
+      "current_sha256": "e1e43eba1db580fd62d1e5b979559a93349691153c90659dfcc4144dc2c82ae4",
+      "original_sha256": "9531f24ac58029b3a7eb768a49b8e99242b6e9d9fbc5825b6982ae53687688f5",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "excluded": 1,
+        "retained": 2,
+        "groups": 2
+      },
+      "matched_original_lines": 257,
+      "observed_branches": 2,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 13,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/shld.c",
+      "current_sha256": "90ba81b32ef32db13b347cead10479129f32fee68d42c68eed65574ae9977730",
+      "original_sha256": "0454f3a15e286a17a61cd6d4ad8cc0ec42267e2cb50624b366b136962e3f855e",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 2,
+        "excluded": 1,
+        "groups": 2
+      },
+      "matched_original_lines": 120,
+      "observed_branches": 2,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 10,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/shrd.c",
+      "current_sha256": "cbdd6cf16eedcd56132f4a8b353dc0a93143786e5cc0f3ee55ef2b4278f3fdcd",
+      "original_sha256": "2d3351d8d4920d4691fd4035d6db11b97ab5ea3d15d10b0cac1403e68f9212cd",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 2,
+        "excluded": 1,
+        "groups": 2
+      },
+      "matched_original_lines": 122,
+      "observed_branches": 2,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 11,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "current_sha256": "ce6df65f98751c65d9f1e662c3b065b22903548e9a8331b900102d80fc81ca60",
+      "original_sha256": "b776bec19f7c7c615684711b915c7c7d1c56a124d37e14fc30a575681c83b2e3",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "excluded": 7,
+        "groups": 9,
+        "retained": 3
+      },
+      "matched_original_lines": 78,
+      "observed_branches": 3,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 7,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "current_sha256": "b5915770a1bdae5f8afc8aaad950f07b064156e08f1b05601d8e125cca972497",
+      "original_sha256": "444f1350d7c50b270652d7b062a375536e327952ebb5ba83937fba090db3c817",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "excluded": 4,
+        "groups": 7,
+        "retained": 3
+      },
+      "matched_original_lines": 45,
+      "observed_branches": 3,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 2,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
+      "current_sha256": "aa27cf44088c5331ebc5ab5f40254920cbfb321c10482bc024b289a9dd2a3412",
+      "original_sha256": "f95a9a26a9ef201e9552f2459a6ba85080e17fb8ccae3fb6280c63eb2fa78607",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "excluded": 20,
+        "groups": 23,
+        "retained": 7
+      },
+      "matched_original_lines": 1797,
+      "observed_branches": 7,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 114,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "current_sha256": "6543253ff7d404cd775969d1fae543ae4179074d1f2d4a43980e1a4fb28f573b",
+      "original_sha256": "22b503047688d4d1f2d4b99ffba29e71612a165bbc9069976ce7a8b8d62ba042",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "excluded": 9,
+        "groups": 12,
+        "retained": 5
+      },
+      "matched_original_lines": 208,
+      "observed_branches": 5,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 8,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "current_sha256": "ea802079d1aac9b702cf73e0bbaa3387d6bf72a4cfd438fc8accae2d3d32033b",
+      "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "excluded": 12,
+        "groups": 17,
+        "retained": 5
+      },
+      "matched_original_lines": 237,
+      "observed_branches": 5,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 10,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "current_sha256": "0afbf13726fcd1bbb2dfeac33ac3465f465c327227e5cdeef771d9e89c982c53",
+      "original_sha256": "a181e9ddddf9cbeeff03b63f733d282455b2f21b578c6c9cf772bf726b41d064",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 6,
+        "groups": 26,
+        "excluded": 22
+      },
+      "matched_original_lines": 294,
+      "observed_branches": 6,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 73,
+      "compiler_contexts": 41,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cga.h",
+      "current_sha256": "7a23149277449ecf629db3cf8596662938ed80f450b82dffb130bb577f48ed82",
+      "original_sha256": "683848966f4b5cb5667b9ae0ae140d9e08adcb62060bc77695db844c34b71b0b",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "excluded": 4,
+        "groups": 5,
+        "retained": 1
+      },
+      "matched_original_lines": 73,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 7,
+      "compiler_contexts": 7,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dma.h",
+      "current_sha256": "3b3c32d5746eb485ac6f0739214f6dfa1b098b698ca567478af0bfb4420dd996",
+      "original_sha256": "d69831cddb3de18bebe1532c659608b404686374324b3eeebed5607e15a774e4",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "excluded": 4,
+        "groups": 9,
+        "retained": 5
+      },
+      "matched_original_lines": 458,
+      "observed_branches": 5,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 11,
+      "compiler_contexts": 5,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egagraph.h",
+      "current_sha256": "5b8c4c54ee5ba5432180cd66ff2cfc74ab14baa9a65876d4039e0f506bf88f5d",
+      "original_sha256": "20c58d8fb126135214410b44cda85a9fb57c7644088e820ce979ad37e7681a39",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 8,
+        "excluded": 3,
+        "groups": 8
+      },
+      "matched_original_lines": 191,
+      "observed_branches": 8,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 27,
+      "compiler_contexts": 17,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egaports.h",
+      "current_sha256": "4a7fc8597739224b19d4d33e422b77ee4efcfac5e7b13f0c1f97fcabcdde7b1b",
+      "original_sha256": "9258473bc4f8c375852c51ea8d7eb71a0163e503bd371f779b78eeb6227146af",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 4,
+        "excluded": 3,
+        "groups": 5
+      },
+      "matched_original_lines": 60,
+      "observed_branches": 4,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 1,
+      "compiler_contexts": 21,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egaread.h",
+      "current_sha256": "d2f2078dc4c3f8281418b11502da7b27e79ba9de8e179d1c174629e098d641da",
+      "original_sha256": "d7a32e28259b5c25146a9e83feeae102be6815d937209a23c5ccf292aa1c0dac",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 1,
+        "groups": 1
+      },
+      "matched_original_lines": 16,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 5,
+      "compiler_contexts": 6,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "current_sha256": "9abd53e6feb5145c8b6e300ce1a28deac7f568c71c9c8603e574b67fe124d619",
+      "original_sha256": "5b47f5e3566927332de3c3f9474ba3595151758c0a8ff8fd6c9cc860f2f8e6cd",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "excluded": 3,
+        "groups": 7,
+        "retained": 5
+      },
+      "matched_original_lines": 111,
+      "observed_branches": 5,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 3,
+      "compiler_contexts": 6,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "current_sha256": "3bcc3def41acf384273bc507564e6ab3efddb020fb3dccb8c76d7265e8b3c0b6",
+      "original_sha256": "d92cc144f50e60de5042f76c67574a3fdc22b0ad38411d92d1459d4a02b17789",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 8,
+        "excluded": 6,
+        "groups": 10
+      },
+      "matched_original_lines": 269,
+      "observed_branches": 8,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 5,
+      "compiler_contexts": 9,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "current_sha256": "81c5978ffac33f187680f3e876e8409913491197da9c36b60b35f13f005550cf",
+      "original_sha256": "500e1a6e48950dc2c184a70c39b9606723133c6ab06affac898da89e24fbaca8",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 6,
+        "excluded": 5,
+        "groups": 6
+      },
+      "matched_original_lines": 540,
+      "observed_branches": 6,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 25,
+      "compiler_contexts": 5,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
+      "current_sha256": "53b5da70251b70542c40a601edb354705559353ed3b3d05947c8de22fff5add8",
+      "original_sha256": "a8577d81b26da6831e8d5dd496e41ebd40a947c3d641c39c77304d509ba2be61",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 10,
+        "groups": 13,
+        "excluded": 3
+      },
+      "matched_original_lines": 247,
+      "observed_branches": 10,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 53,
+      "compiler_contexts": 28,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+      "current_sha256": "9fd29126c9a54b492937193a58593a7c7fc8bd467eb73fdb9986bfc8075b32fa",
+      "original_sha256": "c4dfbf2bb2d6e8d79e9fd607f6ab50b149a5edb2768b25d2475002e2e9940716",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 12,
+        "excluded": 6,
+        "groups": 13
+      },
+      "matched_original_lines": 245,
+      "observed_branches": 12,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 7,
+      "compiler_contexts": 32,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_com.h",
+      "current_sha256": "de187a1c80e136c77379bbce1cc9afda8d41e4f72605990ea7c91bdc987be6f1",
+      "original_sha256": "d7085b215a923dc8df3a9dd44bdc3739d3035ac2fe8978f282b6a3cafd97b68b",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 5,
+        "excluded": 2,
+        "groups": 7
+      },
+      "matched_original_lines": 257,
+      "observed_branches": 5,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 5,
+      "compiler_contexts": 4,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_nls.h",
+      "current_sha256": "0893c9a73e82ee97d393381e8fb43010159f2c5f7eddca9ff593235d76acc412",
+      "original_sha256": "59a01bea1d8b7960f22093a61b4e0b1554393406b339dd182ef5dff5b9e88bfc",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 1,
+        "groups": 1
+      },
+      "matched_original_lines": 89,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 2,
+      "compiler_contexts": 6,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/idetect.h",
+      "current_sha256": "9ecccbd0516e7d7aca4fd7d60f09edb4a8a7d3ab9e077b166c470b5fcd656228",
+      "original_sha256": "204aa44f2d86e2a38eccbfc0bfbcf838252b101b2b085992cc9fbf744d41b799",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "excluded": 2,
+        "groups": 2,
+        "retained": 1
+      },
+      "matched_original_lines": 47,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 3,
+      "compiler_contexts": 23,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/lock.h",
+      "current_sha256": "22c9f6823505537bb4d01958de71628c8bc3f556c247236196cc6bc587234082",
+      "original_sha256": "bfca88d9c901515a44ea12290d10da19bdbcfb66227cc497aaf78d93950a022d",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 1,
+        "groups": 1
+      },
+      "matched_original_lines": 32,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 3,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/mouse_io.h",
+      "current_sha256": "ad9fdf545b0fc2ce581b4f4b9c7555eb5af0c2739cbcb03135c8d5b3b3b2e729",
+      "original_sha256": "6387d3317faaa0ab35c3652abc52283601a996bcb0f3019234a2cdb246a6662a",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 16,
+        "groups": 20,
+        "excluded": 8
+      },
+      "matched_original_lines": 1074,
+      "observed_branches": 16,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 67,
+      "compiler_contexts": 7,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ppi.h",
+      "current_sha256": "e6a3ef4be58abf41e5c3ad4fb37b5368ff3c5a555257d45b37a89f650316c2c6",
+      "original_sha256": "7967ae65e76cb00e58f350e87cd115b6ed7a97c81ff96e3b528f9740d3378612",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 1,
+        "groups": 1
+      },
+      "matched_original_lines": 32,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 1,
+      "compiler_contexts": 4,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/printer.h",
+      "current_sha256": "2c822ac8f45912075a6ff869a5bee0ca62b0ebc6b6902408eff0af59dea6dd24",
+      "original_sha256": "c4c064dd442805e2942a799d8c90b46d6f26e4fbe5bba58799f53bbbebb42092",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 3,
+        "excluded": 2,
+        "groups": 4
+      },
+      "matched_original_lines": 52,
+      "observed_branches": 3,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 4,
+      "compiler_contexts": 4,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/suplib.h",
+      "current_sha256": "75392cd3538f20f0651e2e8bbd5c18942745f080cf035c6f7efefcdef8623f3d",
+      "original_sha256": "012bcdd28b9d105a6d4bf9c01bbdfa8ccf855910cb00119ba7b1c45884237f7f",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 3,
+        "excluded": 2,
+        "groups": 5
+      },
+      "matched_original_lines": 59,
+      "observed_branches": 3,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 1,
+      "compiler_contexts": 4,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timer.h",
+      "current_sha256": "be96008c5c926a7c4847ac4edd9275b324484c81b0884743c82220581f24a351",
+      "original_sha256": "b5704cc3ec76cd4dc010eeecc07e4c78ff76428266f6719cf34a65c9dd4b1f2d",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 5,
+        "groups": 6,
+        "excluded": 3
+      },
+      "matched_original_lines": 106,
+      "observed_branches": 5,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 4,
+      "compiler_contexts": 28,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timeval.h",
+      "current_sha256": "ac244b148cb1220a147d08dc4162a8c7747e85a65404d89adcbd11aa3517dfa2",
+      "original_sha256": "49ab8b88c971a9da3d0cadc974f04f6c329aef23c25efd8bfd7e3d50b1a8dfc0",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "excluded": 2,
+        "groups": 2,
+        "retained": 1
+      },
+      "matched_original_lines": 48,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 7,
+      "compiler_contexts": 10,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/trace.h",
+      "current_sha256": "b62754aef01e5b60bf1f284f94021d7f457b641e26e35d44c1dcac7bc574803a",
+      "original_sha256": "d70092a47d833c0ec3d859ebe7963feb374f5f0abb9288a03f9ffea7198b275f",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 3,
+        "excluded": 2,
+        "groups": 4
+      },
+      "matched_original_lines": 130,
+      "observed_branches": 3,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 5,
+      "compiler_contexts": 41,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/vgaports.h",
+      "current_sha256": "aa41c19b16d4d94a34acdbaaec5e6ba1583bf782ac7b3ee2e4a4ff2096b26d66",
+      "original_sha256": "7d2c9ceadd144ea014757549ab83e8ff8e28b6e92c11f0cd379119d07c0bd2f2",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 15,
+        "excluded": 8,
+        "groups": 18
+      },
+      "matched_original_lines": 945,
+      "observed_branches": 15,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 63,
+      "compiler_contexts": 9,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "current_sha256": "148d566184091358be4b40f6438dcc1f80965f2e571a8c86fabd02c1fc40d16e",
+      "original_sha256": "3e701855e34a3ba9834c84ab39da5350ff375195aacea0d79692fba24e2b1059",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 15,
+        "excluded": 6,
+        "groups": 15
+      },
+      "matched_original_lines": 236,
+      "observed_branches": 15,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 2,
+      "compiler_contexts": 21,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
+      "current_sha256": "1abc1fbba8149dc19343b5971f6b3db5cbab1c9c12eb32cdaabe210a2dc1c359",
+      "original_sha256": "367cceaa88345e16b2e138faef9addd441da2cd39f95ea3ab6c359651bd8ebf5",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "excluded": 6,
+        "groups": 8,
+        "retained": 2
+      },
+      "matched_original_lines": 159,
+      "observed_branches": 2,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 6,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+      "current_sha256": "06045ffc85cffd259181e785b4efaf984ea56d8d08a854aad0d5c77cbaf5572f",
+      "original_sha256": "7e0fc5e63e423a6bfc0f29e871d55c60d95cc1319f621571317b8f5a73433a2f",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 3,
+        "groups": 12,
+        "excluded": 11
+      },
+      "matched_original_lines": 91,
+      "observed_branches": 3,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 7,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "current_sha256": "0b55f0aec8c42f623f329b985533a71c615cf6a493eddb32fa941b7ed679c869",
+      "original_sha256": "b085166424614a154a41f794bf3505f50a77a2ea60338bcefcb845be8e092e53",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "excluded": 14,
+        "groups": 15,
+        "retained": 2
+      },
+      "matched_original_lines": 89,
+      "observed_branches": 2,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 5,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "current_sha256": "469d7f498f27e70dcfd04b2e7596e7f7bbda69cdc94ca401a4716544d453a385",
+      "original_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "excluded": 18,
+        "groups": 19,
+        "retained": 5
+      },
+      "matched_original_lines": 301,
+      "observed_branches": 5,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 3,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+      "current_sha256": "a9752b272d2c089e4a2e5bd256f8e9f7dcdc08a93e310ec85635c2bc636f3d0f",
+      "original_sha256": "4867e3e03e0a5f49066963a37a957d231ec9addbc203789beed42bcf510f3f01",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "excluded": 4,
+        "groups": 9,
+        "retained": 5
+      },
+      "matched_original_lines": 861,
+      "observed_branches": 5,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 56,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_mode.c",
+      "current_sha256": "c5ba228930bfe1e4dba970f4735b00041769592aacff4f224c836863e99f7c0c",
+      "original_sha256": "1b73d0bdea339dc2a42f9674e04fd14575400070e8436149a84a2ac5510a057d",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 2,
+        "excluded": 3,
+        "groups": 5
+      },
+      "matched_original_lines": 659,
+      "observed_branches": 2,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 8,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "current_sha256": "fde48eaad3255332867c1560cf5a38e8f7f23df3e009691d93b93f870c893d68",
+      "original_sha256": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "excluded": 19,
+        "groups": 32,
+        "retained": 13
+      },
+      "matched_original_lines": 227,
+      "observed_branches": 13,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 7,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video_io.c",
+      "current_sha256": "aec73147e8fb5112ff538409ae1d319c4b58294eea436fcd365f0c5a444ba913",
+      "original_sha256": "92680ac402633dd5dd52bbccfff55f41a65a1485dc2736666a9da45b7ea6bf86",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "excluded": 1,
+        "groups": 2,
+        "retained": 1
+      },
+      "matched_original_lines": 61,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 2,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_rrr.h",
+      "current_sha256": "b48dbb4e7165d7002786542322da2b2f406dd78180ca8e476fd0f7a66509d0ba",
+      "original_sha256": "a849bf3b9c08d83ca3e21a386c6a45042494df82eeb28e4c8d0de3d7f14972ac",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 1,
+        "groups": 2
+      },
+      "matched_original_lines": 44,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 5,
+      "compiler_contexts": 19,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_event.h",
+      "current_sha256": "c240ca9190ba7c14ac0e5e75e1c8e0a63cfee93221a9f7f601740316aa0878e5",
+      "original_sha256": "f4353f69708952f3bdc0f0d26db0f667eda34abf04f8694d1af059a649f76969",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "excluded": 2,
+        "groups": 3,
+        "retained": 1
+      },
+      "matched_original_lines": 51,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 10,
+      "compiler_contexts": 13,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_fulsc.h",
+      "current_sha256": "2da1daa4fa1cc16433a74d8edfa678f89acc7fdaacffc534e453dcc9cab1163c",
+      "original_sha256": "733fe8aaef56e9febc5e2f35ac03057918df2bf75173779870e2b07dc673e1d0",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "excluded": 6,
+        "retained": 1,
+        "groups": 6
+      },
+      "matched_original_lines": 165,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 6,
+      "compiler_contexts": 9,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_graph.h",
+      "current_sha256": "2fceeae0ba9896df29af6df7d799a8da6bc8f4938d0078608534b6a5ca511ee3",
+      "original_sha256": "f23f9cf86756ca99f3204d505baa1d1197446851065f1849814647f5c4cdc6f3",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "excluded": 4,
+        "groups": 11,
+        "retained": 8
+      },
+      "matched_original_lines": 431,
+      "observed_branches": 8,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 107,
+      "compiler_contexts": 15,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_pif.h",
+      "current_sha256": "6ee720b91a5697745e224313655cd514dac4887b1088a5af70ad705f4d0c0206",
+      "original_sha256": "a8069d676141812cddc35adb0b29ea58e58bba0a7f29dcf287468108188b8d09",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 1,
+        "groups": 1
+      },
+      "matched_original_lines": 150,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 32,
+      "compiler_contexts": 9,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/fprt.c",
+      "current_sha256": "7fbbcb04f579717b581c4153e88caa82190b98f4e894af9f9720998561f6e282",
+      "original_sha256": "f7918f49be621c55f53c51c9ae6db756ff239768bb886b84fcfe39eeedb65424",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "excluded": 7,
+        "groups": 8,
+        "retained": 1
+      },
+      "matched_original_lines": 106,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 19,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "current_sha256": "070cfee114fdb3c7277f6584bfc449e1d5737ea94aaf279a61f74237af48b86f",
+      "original_sha256": "c58d15d58672440bf94e015f61a10b43311e601ae150dae5b1559f2399f9dadc",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "excluded": 8,
+        "groups": 8,
+        "retained": 2
+      },
+      "matched_original_lines": 216,
+      "observed_branches": 2,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 16,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ega.c",
+      "current_sha256": "641961895f5a9ec88fb2e122dd16006d96687195b06c91df3f91e449cf4211f4",
+      "original_sha256": "ebc58583cec7e257a997185a1ab83f3284dbd1efe6e06c99f680bcce93dca695",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "excluded": 7,
+        "groups": 24,
+        "retained": 17
+      },
+      "matched_original_lines": 1581,
+      "observed_branches": 17,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 351,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "current_sha256": "8481e0f36525676af18759ed14785092ba64740f5fcab44b05c59d0ec52f850f",
+      "original_sha256": "3305eaabac76e039dfe80aa0f2e15c48433edd95a74615e5db55b97d2b393228",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 2,
+        "excluded": 6,
+        "groups": 8
+      },
+      "matched_original_lines": 1143,
+      "observed_branches": 2,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 172,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rez.c",
+      "current_sha256": "c94e1b9631e79306d4570470870de71b76df8f4e22646fc9e0ea16619ae32d15",
+      "original_sha256": "12a6486b8cf81e2469b1acd7f9e9d03cada6b4690fad03ea171941802f0945fc",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "excluded": 1,
+        "groups": 7,
+        "retained": 6
+      },
+      "matched_original_lines": 169,
+      "observed_branches": 6,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 11,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_thred.c",
+      "current_sha256": "4bc1a569804cff7202e33a699cca49b55dea43c46eb10477929c6056fc1cbf58",
+      "original_sha256": "776330ea072cfd005ea05968dc676634385d1c9f349bd71ba1667ecd3be68438",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 2,
+        "groups": 4,
+        "excluded": 2
+      },
+      "matched_original_lines": 153,
+      "observed_branches": 2,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 32,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "current_sha256": "16a8b32410aec2db3c9f4a00b109f4d81fa54a158cacfed86c883373e73e95d2",
+      "original_sha256": "2a109f11985507463797e60b8b19fc12441bd18278b1444dde581cc351de72ed",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "excluded": 18,
+        "groups": 18,
+        "retained": 8
+      },
+      "matched_original_lines": 484,
+      "observed_branches": 8,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 51,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "current_sha256": "dd8d1716f5ba87960158367b2aabe5e9b486a5a50f95ebf6f716207380b3674a",
+      "original_sha256": "cb97f2c233b1062dae7942dfa3b2bc84d9f21b9d6527f6c993a99137c2c845e3",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 9,
+        "groups": 9
+      },
+      "matched_original_lines": 746,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 68,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "current_sha256": "ff11bc91ba70eb795f68c0e501588b9860f9677683d9c7a53e3915ff00292015",
+      "original_sha256": "693a169cf1e91435c326ee05a17c928e85af10982c2c3bb95a5631ae76415a0a",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "excluded": 4,
+        "groups": 5,
+        "retained": 1
+      },
+      "matched_original_lines": 333,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 62,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/suballoc/suballcp.h",
+      "current_sha256": "a03be40c18d75f3b361b428da8ddbae452898eddd11859154b327e7e238439e2",
+      "original_sha256": "25451aa0c293f3950107e81d81507e692e3db7b089655ceac320e4f3779fadb2",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "excluded": 3,
+        "retained": 2,
+        "groups": 3
+      },
+      "matched_original_lines": 164,
+      "observed_branches": 2,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 22,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdebug.h",
+      "current_sha256": "08020f482521dd762dc053c9d195febb2096e12c719772521d18e5a553d37e57",
+      "original_sha256": "1cc434fafa90e111f1726aa2444f24a04458da6efd2f218a80d48e03b4f3751b",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "excluded": 2,
+        "retained": 2,
+        "groups": 2
+      },
+      "matched_original_lines": 569,
+      "observed_branches": 2,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 58,
+      "compiler_contexts": 11,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "current_sha256": "268ba26a93f969ab08bb73668c165eeecfeed5e8dbe98e4f09c8d3c26f375022",
+      "original_sha256": "850f2f1a746eee3610f06ebf489cb662bcd628f556299e445daac7fdd24e9bbf",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "excluded": 5,
+        "groups": 5,
+        "retained": 2
+      },
+      "matched_original_lines": 3829,
+      "observed_branches": 2,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 298,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcdbg.h",
+      "current_sha256": "205baabd2d10ebeeb49a016c78634b7a4931c4ba961b009cd47cde0c1d53ebff",
+      "original_sha256": "2adbd4b0705a98bbb399c9b333551afa8999af1b27a008029b9fb871f787ff8c",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "excluded": 1,
+        "retained": 1,
+        "groups": 1
+      },
+      "matched_original_lines": 181,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 9,
+      "compiler_contexts": 3,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/walias.c",
+      "current_sha256": "13297f6adb9a720d9600e124e014b0102b352ddabbc063d7e6de28b9efd8f2c6",
+      "original_sha256": "6118b6837c7ed291cc9d70446b7d691699d49c9ef6f2be60d8e0fac478d93b65",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 1,
+        "groups": 3,
+        "excluded": 2
+      },
+      "matched_original_lines": 522,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 82,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdib.c",
+      "current_sha256": "88ba7a3bbbd31154db9a509bf8b221eafc2d92af5417d0400ba8432387596942",
+      "original_sha256": "d0bd4f9cb7bba0dc5e977a8c096337df0830e3804ef6aeb8759cf979176dd910",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 7,
+        "excluded": 2,
+        "groups": 7
+      },
+      "matched_original_lines": 842,
+      "observed_branches": 7,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 155,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkgthunk.c",
+      "current_sha256": "68d0b83670589ca41c93aff76b03f7078f41a6aaaabf8a80463ea46d68c816aa",
+      "original_sha256": "787dfd9d5135b71cdff6ca2bcc8145bd3edf5e2ea26b7e9c87b14176f82efeec",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "excluded": 3,
+        "groups": 3,
+        "retained": 1
+      },
+      "matched_original_lines": 531,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 67,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkmem.c",
+      "current_sha256": "4bbefbadaf423cfca5429b98fbb541fb9c84c6996b3e5c54b002d8c0adf96087",
+      "original_sha256": "9d0fae5e7719398d5d9776602664d5f9a0dd4bdd81e79616ad848035007d4722",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 6,
+        "groups": 8,
+        "excluded": 2
+      },
+      "matched_original_lines": 97,
+      "observed_branches": 6,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 14,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "current_sha256": "5b62144e8c93a794f7f64015517aff6d4654e020467a29132ad291a06b6a800f",
+      "original_sha256": "d4949206f261d22f80f96e769388aee94037b27092c69c68ec058619f843f4fb",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "excluded": 10,
+        "groups": 18,
+        "retained": 11
+      },
+      "matched_original_lines": 236,
+      "observed_branches": 11,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 44,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmedia.h",
+      "current_sha256": "4ae8c257ddae40dbc4be3660a6feed2d40de31c03e4f842b5c3bd4ca9ff52d44",
+      "original_sha256": "7b2e07ac7da3864922a65586539c19945344ed04df1d53d26e38119102a69801",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "excluded": 1,
+        "retained": 1,
+        "groups": 1
+      },
+      "matched_original_lines": 278,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 36,
+      "compiler_contexts": 74,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmstruc.h",
+      "current_sha256": "7938034986ce5547725f9a1056f211310d3e6d0cca686dc3cf0f2d0a92e8bc15",
+      "original_sha256": "8c8c764f500c47689f5d97c485e8d81c6361130c6ce744a3dbe8d2d26c1eaf5b",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 1,
+        "groups": 1
+      },
+      "matched_original_lines": 133,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 12,
+      "compiler_contexts": 74,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmtbl32.h",
+      "current_sha256": "f3634dc1bf55e7441f3108f56775a0ff986ed34e5b41197b7dbe68ed9ee6f24d",
+      "original_sha256": "c64cfbdd5b28db353fd24edd971044fe8f086d86b40aaffd648ffcfe4c653afb",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "excluded": 2,
+        "groups": 2,
+        "retained": 1
+      },
+      "matched_original_lines": 28,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 1,
+      "compiler_contexts": 74,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.h",
+      "current_sha256": "e160f50f8405d6302decec1ff46ff03c4a59f3a39cac8bce5a7d05e2581527cc",
+      "original_sha256": "06148a93a63faf7fc5480e4c9f80c98ddfe6e2a0a782eafe6a6fd1ccdd46de27",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 15,
+        "excluded": 25,
+        "groups": 29
+      },
+      "matched_original_lines": 483,
+      "observed_branches": 15,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 50,
+      "compiler_contexts": 74,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wspool.h",
+      "current_sha256": "ef4c59e0e10a266f72e4bf4080ceb7429b17cf62b33086345d9c981eb761dc37",
+      "original_sha256": "11e570db87246262c46c166a845e514edb08e02f8b0b107dfae1cfa41a375075",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "excluded": 1,
+        "retained": 1,
+        "groups": 1
+      },
+      "matched_original_lines": 60,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 9,
+      "compiler_contexts": 74,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wstruc.h",
+      "current_sha256": "3ceffb625000f2546954f135cb8c13cb35f2e1a55347ec75cc533a583220f808",
+      "original_sha256": "1e54905079db411f6bc17583a8943e4f8f5c870129ff7d5814f87d8a41be6a7c",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 1,
+        "groups": 2
+      },
+      "matched_original_lines": 309,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 11,
+      "compiler_contexts": 74,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wucomm.h",
+      "current_sha256": "a35cc588a1844c80f5818cc8ddcdde8f6dba64815d13393cb5cb6d6ad66512c2",
+      "original_sha256": "43d3f49fe9abb8fbbbe1a93e7725f7a368676dfadd764c8f0497a4218b23f77b",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "excluded": 1,
+        "retained": 1,
+        "groups": 1
+      },
+      "matched_original_lines": 292,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 6,
+      "compiler_contexts": 74,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wusercli.c",
+      "current_sha256": "265db11048df58488afa75b2d352355b1e6077841ab5bd0a8906ee63dcc7dfe9",
+      "original_sha256": "96b363ee882839a61d232dfbe145346d6e4d7ec7bfbaa4c97c4e0500a39b51ed",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 2,
+        "groups": 2,
+        "excluded": 1
+      },
+      "matched_original_lines": 706,
+      "observed_branches": 2,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 50,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/non-mvdm/base/win32/inc/base.h",
+      "current_sha256": "1ad50440e5ed8638de2a8426599bb524917444362cbe7e09eb6cb08eb8fd6571",
+      "original_sha256": "2df61cf7f17123235a340b6e802c4a998889db112cfd15399cec3cd107911cf7",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 3,
+        "groups": 3,
+        "excluded": 1
+      },
+      "matched_original_lines": 170,
+      "observed_branches": 3,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 44,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/convert.c",
+      "current_sha256": "686fd07ff9b29e16e5600f24166aeb5f4ced4e0081f1555557c52e57523e94b1",
+      "original_sha256": "3c6f6c878aefe962b0b93bf798569d9d8ed20e3f4112bd56e370989afdadf5d5",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "excluded": 7,
+        "retained": 7,
+        "groups": 7
+      },
+      "matched_original_lines": 2322,
+      "observed_branches": 7,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 93,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "current_sha256": "43b6bc88920ff1a71046b42827065b25b45c277af010f903a13a4b393a9ed82d",
+      "original_sha256": "1ed708dee1236ea6424610d2274830b651062ba602d4b2cfa60e49e33de4c186",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 2,
+        "excluded": 1,
+        "groups": 2
+      },
+      "matched_original_lines": 69,
+      "observed_branches": 2,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 10,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "current_sha256": "631162e50772f92b2526660245630bc178a3bb501cb6a92bb58f7605e76add83",
+      "original_sha256": "7a0681e0d01f173edd31afac52c0a35cf7e2fc6711abcb4e224de06f116bdaf8",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 3,
+        "excluded": 1,
+        "groups": 3
+      },
+      "matched_original_lines": 1013,
+      "observed_branches": 3,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 43,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+      "current_sha256": "65a0ae3d65923ad5292213cf2c0f84bae48d91daebc6e087462bad42ed73c266",
+      "original_sha256": "2bb7b7a8d86742123d3e246a940d22b2f0448c0afdce6a26204e78dd4a50ecc7",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 1,
+        "groups": 1
+      },
+      "matched_original_lines": 266,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 12,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.h",
+      "current_sha256": "6cc4032705392183a1c5d38756b09dd70a3088fef421140f9ae3d26a7afe9867",
+      "original_sha256": "9c9f23b07297d1292cbc1e3da1ed05956f767f684977a825fc4eb08bcba5295f",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 2,
+        "excluded": 1,
+        "groups": 2
+      },
+      "matched_original_lines": 110,
+      "observed_branches": 2,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 4,
+      "compiler_contexts": 6,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/non-mvdm/private/inc/dlcio.h",
+      "current_sha256": "b14a97c6c265598a24f96eb5fbde47853e3da7ad6ab22585cd1d657418347e00",
+      "original_sha256": "5059d127630e19906e973266e34ffe8b648181b0962900551964147e527602de",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "excluded": 2,
+        "groups": 2,
+        "retained": 1
+      },
+      "matched_original_lines": 728,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 129,
+      "compiler_contexts": 5,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddbeep.h",
+      "current_sha256": "614f80ea9f69baecd162d7c727fe85054774974f13610dc94f7ea16d2d990ed5",
+      "original_sha256": "4e9e17a77c0e173166ab528de3a68d0c53883f513d55a998329d14f207e4272a",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 2,
+        "groups": 4,
+        "excluded": 2
+      },
+      "matched_original_lines": 62,
+      "observed_branches": 2,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 4,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddkbd.h",
+      "current_sha256": "b395238663867747ea1032f19fcdb7ae919c7a859fd827c814abb70f2e1ee472",
+      "original_sha256": "f3bf258135d2853ebb77d6bc81e12499528c5b7efe1f58ead6f5c1315c5bf5c1",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 2,
+        "groups": 5,
+        "excluded": 3
+      },
+      "matched_original_lines": 344,
+      "observed_branches": 2,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 37,
+      "compiler_contexts": 2,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddser.h",
+      "current_sha256": "d993fbfce54cfc3cf05fff55e59ce9331499491fe04035e7d6317a4be3f67735",
+      "original_sha256": "707287adc6162093ebe5dd9608b6f4e528b4b94cb0e2caa0df930ecffd4d3b46",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 2,
+        "excluded": 3,
+        "groups": 5
+      },
+      "matched_original_lines": 675,
+      "observed_branches": 2,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 100,
+      "compiler_contexts": 2,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+      "current_sha256": "d44312ef1b0a3200051fc9fc27b3e1ded47b47eae8a6b2cff9baa126bb18f36a",
+      "original_sha256": "e81160b69920ee87d603fe593916994f8448a280b2a2adfefd34c190b1b3cb78",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 2,
+        "groups": 5,
+        "excluded": 3
+      },
+      "matched_original_lines": 1614,
+      "observed_branches": 2,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 251,
+      "compiler_contexts": 6,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbtypes.h",
+      "current_sha256": "8e8d555ed6877abe8aeb6e5e41e0061420764996617d372812d083e8508ffd12",
+      "original_sha256": "f04a563368f33bb6d8ba50a50e68d68f081aecce94ecc37b6d787cc6f38ea622",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 10,
+        "groups": 11,
+        "excluded": 4
+      },
+      "matched_original_lines": 339,
+      "observed_branches": 10,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 46,
+      "compiler_contexts": 13,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netdebug.h",
+      "current_sha256": "fa8fbaa548b0bc86126ac8b612bb0239f5d9be1f7ddf0cef0b853dd8cb149725",
+      "original_sha256": "6e6acf20d4dcf56f6a51f99152c6792e080ea21db74efc37b6c70f2f5e00ec72",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 12,
+        "excluded": 13,
+        "groups": 14
+      },
+      "matched_original_lines": 269,
+      "observed_branches": 12,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 1,
+      "compiler_contexts": 15,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlibnt.h",
+      "current_sha256": "d3b325d11e1deb0963efb3722c3add63a335452a227183b1187d9802692cc9c9",
+      "original_sha256": "8545a4ebfe8156e40405fd6a22d6c49b42aaf3b6df1b6254a52b63c330e11ba8",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 2,
+        "groups": 3
+      },
+      "matched_original_lines": 109,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 6,
+      "compiler_contexts": 2,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rap.h",
+      "current_sha256": "4c54f51c544841e51b1b16781d7ab6fd156b156d98b9e947a6ab80ba7c7c2426",
+      "original_sha256": "f1b132b2ab6d5b848303f27696fbcf4a78d8d937919b46dda004efb0930b9086",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 2,
+        "excluded": 1,
+        "groups": 2
+      },
+      "matched_original_lines": 342,
+      "observed_branches": 2,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 17,
+      "compiler_contexts": 15,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/timelib.h",
+      "current_sha256": "2fd1270833ea0b825ab7443799b5cd86620d5146fed8034566dc5b2febddc059",
+      "original_sha256": "6f44ad84f7119f62c58646f5c1f9405a8e2b6da7d6dc91503264aa4128bd3dcc",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 1,
+        "groups": 2
+      },
+      "matched_original_lines": 127,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 19,
+      "compiler_contexts": 3,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/xstypes.h",
+      "current_sha256": "12e60822cae0d06af26bb740113d0020111cdad4adf194f504a9640213723cf9",
+      "original_sha256": "b140254bef8ca8c871c6ca3a94a09c5f858ad9b5560cb687392af22e7c8d8539",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 1,
+        "groups": 2
+      },
+      "matched_original_lines": 168,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 60,
+      "compiler_contexts": 7,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+      "current_sha256": "71f027cf03fdc00b246770d8a5ee16f8bf7b2603d4807f41bc55688b9a4a0328",
+      "original_sha256": "fc35d359bf23f905916980740c56199d3627eb55b9c223091a75a8e4e606dd4d",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 1,
+        "excluded": 3,
+        "groups": 4
+      },
+      "matched_original_lines": 417,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 112,
+      "compiler_contexts": 109,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+      "current_sha256": "49a5c12ac3f61bfd59d8f8d4dffaf50e5cf2fb8c8a3325c084b2fced9cc3971c",
+      "original_sha256": "a3048cbcaa26e32ae542a73aae59356e9fa2eb85af00932a027ff4e8e47f225c",
+      "historical_strict_evidence": "s13-r1348-strict-ready.json",
+      "strict_tree": {
+        "retained": 3,
+        "excluded": 3,
+        "groups": 5
+      },
+      "matched_original_lines": 382,
+      "observed_branches": 3,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 62,
+      "compiler_contexts": 2,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edmlonce.c",
+      "current_sha256": "82c8d05db575da9d6e3ede1464b61a06a4f8f6aa17ecc9f1af87f605761e9ab9",
+      "original_sha256": "ac63e8b953b97c91fe4f0c7813919cf1fa482ea253e2edfd3ef7cf606e5940a2",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "excluded": 1,
+        "retained": 1,
+        "groups": 1
+      },
+      "matched_original_lines": 112,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 11,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edmlrare.c",
+      "current_sha256": "6f580cc7ab234048548f5afb2829a519a5249c40eb6c418a6f1cec5b9e739274",
+      "original_sha256": "fb9dd31919b7b90db2f713daa83684f1231558e7653ae72cd72458f1212000f1",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "excluded": 1,
+        "retained": 1,
+        "groups": 1
+      },
+      "matched_original_lines": 570,
+      "observed_branches": 1,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 123,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edslrare.c",
+      "current_sha256": "ad4c7aeb3dd736b89ae9d673057ab9169a41159e3ed4c223d81a96ee950eb2a8",
+      "original_sha256": "b33dea4aa66b7713b651b259a37d7f993802f40c042514122b73580baec4f0df",
+      "historical_strict_evidence": "s13-r1343-strict-ready.json",
+      "strict_tree": {
+        "excluded": 3,
+        "groups": 3,
+        "retained": 2
+      },
+      "matched_original_lines": 178,
+      "observed_branches": 2,
+      "unobserved_unexcluded_before_s1": 0,
+      "compiler_unique_line_samples": 25,
+      "compiler_contexts": 1,
+      "compiler_line_mismatches": 0
+    }
+  ]
+}

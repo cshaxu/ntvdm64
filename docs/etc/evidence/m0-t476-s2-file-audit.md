@@ -63,3 +63,9 @@ The [condition-free review](../../../artifacts/mvdm-audit/t476-s2-condition-free
 ## Source and logical-line equivalent files
 
 The [source/line review](../../../artifacts/mvdm-audit/t476-s2-code-line-equivalence.json) completes four more files. Every uncommented, nonblank line matches the pinned original in sequence and logical line after interpreting line directives; the inventory has no missing conditions or parser errors, all conditional arms are observed, and actual compiler line samples agree. No source was edited. The running partition is 180 byte-identical, 130 condition-free code-equivalent and four source/line-equivalent complete; 741 files remain open.
+
+## Completed strict conditional projections
+
+The [strict conditional review](../../../artifacts/mvdm-audit/t476-s2-strict-conditional-review.json) completes 114 additional differing files. Each reuses a hash-matched earlier recursive original/current conditional projection that checked exclusion boundaries and matching-code logical lines. The fresh inventory reports no missing structure, nesting conflicts or parser errors; S1 observed every remaining non-excluded branch, and no static or collected compiler-line mismatch was found. The stored record links the specific prior review and current marker evidence per file. These facts establish the requested conditional and line audit, not unrelated runtime behavior.
+
+The current partition is 180 byte-identical, 130 condition-free equivalent, four source/line-equivalent and 114 strict conditional files complete: 428 of 1,055. The other 627 remain open, including the generator input. No source was changed in this batch.
