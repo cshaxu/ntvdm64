@@ -4,7 +4,7 @@
 
 **Active: M0 T476 S2** — complete the outstanding per-file mirror conditional and line audit.
 
-S1 integrated and published its marker build and 30 exclusions; its [main integration evidence](../etc/evidence/m0-t476-s1-main-integration.md) retains the limits. The owner directed S2 to finish them. The [S2 baseline](../etc/evidence/m0-t476-s2-file-audit.md) tracks all 1,055 files: after rebinding stale hashes, reopening PIF and reviewing four headers, the review categories contain 984 files and 71 require file review. The earlier batch retains three open files. A separate exact-byte reconciliation has 180 original-line-ending restorations remaining after thirteen source batches.
+S1 integrated and published its marker build and 30 exclusions; its [main integration evidence](../etc/evidence/m0-t476-s1-main-integration.md) retains the limits. The owner directed S2 to finish them. The [S2 baseline](../etc/evidence/m0-t476-s2-file-audit.md) tracks all 1,055 files: after rebinding stale hashes, reopening PIF and completing further file reviews, the review categories contain 985 files and 70 require file review. The earlier batch retains three open files. A separate exact-byte reconciliation has 180 original-line-ending restorations remaining after thirteen source batches.
 
 The counts above predate discovery that the S1 product-only marker contexts omitted supported fixture and addon builds. Several recorded exclusions failed those builds; the current correction restores their selected arms. Previously reviewed counts cannot establish completeness across those omitted contexts until cross-checked; do not treat them as a final audit conclusion.
 
