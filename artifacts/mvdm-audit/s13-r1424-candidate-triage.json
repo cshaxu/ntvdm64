@@ -1,0 +1,88 @@
+{
+  "method": "Hash-verified original/current paired candidates checked against local source and existing registered adaptation evidence.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_sha256": "202bf3d58825732c9076b84df0c2bc19f9264b003a0ed8382a4b57925e46d8bb",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "directive": "ifndef",
+      "expression": "CPU_30_STYLE",
+      "current_line": 493,
+      "original_line": 619,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 620,
+          "text": "temp_word = temp_word + HOST_BOP_IP_FUDGE;"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 1,
+      "classification": "registered-cpu40-selected-adaptation-not-unclassified-empty-shell",
+      "evidence": [
+        "docs/etc/evidence/m0-t404-s3-p14-cpu40-dosx-direct-continuation-recovery-001.md",
+        "docs/etc/evidence/opennt-replacement-audit-20260912.md",
+        "src/mvdm-host/README.md (MVDM-HOST-DIV-265)"
+      ],
+      "qualification": "The CPU40 path deliberately omits the original adjustment for DOSX direct continuations; existing evidence states historical runtime coverage limits. This does not establish all file branches or line mappings."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_sha256": "202bf3d58825732c9076b84df0c2bc19f9264b003a0ed8382a4b57925e46d8bb",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "directive": "ifndef",
+      "expression": "CPU_30_STYLE",
+      "current_line": 564,
+      "original_line": 683,
+      "original_direct_code_count": 1,
+      "original_examples": [
+        {
+          "line": 684,
+          "text": "temp_word = temp_word + HOST_BOP_IP_FUDGE;"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 1,
+      "classification": "registered-cpu40-selected-adaptation-not-unclassified-empty-shell",
+      "evidence": [
+        "docs/etc/evidence/m0-t404-s3-p14-cpu40-dosx-direct-continuation-recovery-001.md",
+        "docs/etc/evidence/opennt-replacement-audit-20260912.md",
+        "src/mvdm-host/README.md (MVDM-HOST-DIV-265)"
+      ],
+      "qualification": "The CPU40 path deliberately omits the original adjustment for DOSX direct continuations; existing evidence states historical runtime coverage limits. This does not establish all file branches or line mappings."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "current_sha256": "b525284d28990da14a61ea02d11f3b6b7f3e94726bef7b33db03c9dd8ff6841e",
+      "original_sha256": "21109fa7e6b8d6a8ecfe8e733a16805829560e218be11e46e5a33dac28820316",
+      "directive": "ifndef",
+      "expression": "CPU_30_STYLE",
+      "current_line": 84,
+      "original_line": 78,
+      "original_direct_code_count": 4,
+      "original_examples": [
+        {
+          "line": 81,
+          "text": "#define CPU_HW_INT\t\t0"
+        },
+        {
+          "line": 82,
+          "text": "#define CPU_HW_INT_MASK\t\t(1 << CPU_HW_INT)"
+        },
+        {
+          "line": 88,
+          "text": "#define CPU_SW_INT              8"
+        }
+      ],
+      "original_children": 0,
+      "current_children": 1,
+      "classification": "registered-ccpu-selected-adaptation-not-unclassified-empty-shell",
+      "evidence": [
+        "src/mvdm-host/softpc.new/base/inc/ica.h (MVDM-HOST-DIV-146, MVDM-HOST-DIV-506)",
+        "src/mvdm-host/README.md"
+      ],
+      "qualification": "CPU_30_STYLE original arm contains non-CCPU interrupt bit macros; current CCPU path omits those declarations under the registered enum-conflict adaptation. This is not complete file certification."
+    }
+  ],
+  "remaining": "153 of 156 candidates remain untriaged; these classifications do not certify entire files or imply runtime tests were performed."
+}
