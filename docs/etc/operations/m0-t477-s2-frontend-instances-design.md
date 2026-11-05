@@ -2,8 +2,9 @@
 
 ## Admission and scope
 
-Owner admits S2 and requests a design. Baseline: 6caaf5d78. This is a design
-checkpoint, not implemented multi-frontend behavior. [Current](../../states/CURRENT.md)
+Owner admitted this design against baseline 6caaf5d78 and subsequently
+authorized P1/P2/P3 implementation. [Implementation evidence](../evidence/m0-t477-s2-frontend-instances.md)
+distinguishes delivered parts from remaining design. [Current](../../states/CURRENT.md)
 is the sole active packet; [the sequence](m0-t477-host-frontend-plan.md) retains
 S3 NTVDM composition and S4 management presentation. No source import is needed.
 
@@ -13,7 +14,7 @@ becomes the single-instance production consumer. Real NTVDM VM enumeration,
 VM existence checks and frontend-base adapters belong to S3; guest VxD and
 asynchronous guest execution remain separate work.
 
-## What is coupled today
+## Coupling at the design baseline
 
 A host control connection is an authenticated RPC participant record. It is
 not the direct input/output pipe between a frontend and worker. A frontend
@@ -169,8 +170,8 @@ Two frontend closures in either order must converge without deadlock.
 
 Each production P includes builds, owning tests, coherent publication to this
 worktree assets/release and O:/winnt/system32, hash checks and a local commit.
-No push. This design checkpoint changes documents only and does not rebuild or
-republish unchanged products. Implementation begins on owner direction.
+No push. The initial design checkpoint changed documents only. Implementation
+now proceeds under the owner's subsequent direction, with per-part evidence.
 
 ## Acceptance and retained boundaries
 

@@ -498,8 +498,8 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
             OPENNT_BASE_CONNECTION *candidate=CONTAINING_RECORD(link,
                 OPENNT_BASE_CONNECTION,service_link);
             if(candidate->process.SequenceNumber==connection->retained_frontend_root &&
-                candidate->frontend_capability && !candidate->frontend_closing && !candidate->frontend_close_draining &&
-                !candidate->frontend_terminal_retire &&
+                candidate->frontend.capability && !candidate->frontend.closing && !candidate->frontend.close_draining &&
+                !candidate->frontend.terminal_retire &&
                 WaitForSingleObject(candidate->process.ProcessHandle,0)==WAIT_TIMEOUT) {
                 root=candidate;break;
             }
@@ -515,7 +515,7 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
             DWORD error=GetLastError();HeapFree(GetProcessHeap(),0,separate_context);
             LeaveCriticalSection(&connection->service->lock);return error;
         }
-        separate_context->root=root;separate_context->console=separate_console;
+        separate_context->root=&root->frontend;separate_context->console=separate_console;
         InsertTailList(&connection->service->console_contexts,&separate_context->link);
     }
     thread.Process=&connection->process;

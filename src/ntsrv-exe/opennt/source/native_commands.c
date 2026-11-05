@@ -746,7 +746,7 @@ DWORD service_take_native_command(OPENNT_BASE_CONNECTION *root,DWORD pid,
                 OPENNT_BASE_CONNECTION *candidate=CONTAINING_RECORD(root_link,
                     OPENNT_BASE_CONNECTION,service_link);
                 if(candidate->process.SequenceNumber==caller->frontend_channel_root &&
-                    candidate->frontend_capability &&
+                    candidate->frontend.capability &&
                     WaitForSingleObject(candidate->process.ProcessHandle,0)==WAIT_TIMEOUT) {
                     frontend=candidate;break;
                 }

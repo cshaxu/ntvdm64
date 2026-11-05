@@ -214,23 +214,23 @@ static int frontend_completion_barrier(void)
     CHECK(!OpenNtBaseServiceRegisterFrontendRoot(root,child.dwProcessId,root_generation,capability));
     CHECK(OpenNtBaseServiceWaitFrontendConsoleRestored(caller,GetCurrentProcessId(),generation+1)==ERROR_ACCESS_DENIED);
     CHECK(!OpenNtBaseServiceWaitFrontendConsoleRestored(caller,GetCurrentProcessId(),generation));
-    root->frontend_creator_generation=generation;
-    root->frontend_retire=CreateEventW(NULL,TRUE,FALSE,NULL);
-    root->frontend_restored=CreateEventW(NULL,TRUE,FALSE,NULL);
-    CHECK(root->frontend_retire && root->frontend_restored);
+    root->frontend.native.creator_generation=generation;
+    root->frontend.retire=CreateEventW(NULL,TRUE,FALSE,NULL);
+    root->frontend.native.restored=CreateEventW(NULL,TRUE,FALSE,NULL);
+    CHECK(root->frontend.retire && root->frontend.native.restored);
     caller->retained_frontend_root=root_generation;
     /* A nested participant neither waits for nor retires the outer lease. */
     root->retained_frontend_root=root_generation;
     CHECK(!OpenNtBaseServiceWaitFrontendConsoleRestored(root,child.dwProcessId,root_generation));
-    CHECK(WaitForSingleObject(root->frontend_retire,0)==WAIT_TIMEOUT);
+    CHECK(WaitForSingleObject(root->frontend.retire,0)==WAIT_TIMEOUT);
     call.caller=caller;call.pid=GetCurrentProcessId();call.generation=generation;
     call.done=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(call.done);
     thread=CreateThread(NULL,0,call_frontend_completion,&call,0,NULL);CHECK(thread);
-    CHECK(WaitForSingleObject(root->frontend_retire,5000)==WAIT_OBJECT_0);
+    CHECK(WaitForSingleObject(root->frontend.retire,5000)==WAIT_OBJECT_0);
     CHECK(WaitForSingleObject(call.done,0)==WAIT_TIMEOUT);
     EnterCriticalSection(&service->lock);
-    root->frontend_close_draining=root->frontend_close_return_required=TRUE;
-    root->frontend_close_requested=TRUE;
+    root->frontend.close_draining=root->frontend.native.close_return_required=TRUE;
+    root->frontend.close_requested=TRUE;
     LeaveCriticalSection(&service->lock);
     CHECK(OpenNtBaseServiceFrontendConsoleRestored(root,child.dwProcessId,root_generation)==ERROR_INVALID_STATE);
     CHECK(!OpenNtBaseServiceFrontendCloseQuiesced(root,child.dwProcessId,root_generation));
@@ -243,8 +243,8 @@ static int frontend_completion_barrier(void)
     CHECK(!OpenNtBaseServiceFrontendCloseQuiesced(root,child.dwProcessId,root_generation));
     CHECK(WaitForSingleObject(call.done,0)==WAIT_TIMEOUT);
     EnterCriticalSection(&service->lock);
-    root->frontend_close_draining=root->frontend_close_return_required=FALSE;
-    root->frontend_closing=TRUE;
+    root->frontend.close_draining=root->frontend.native.close_return_required=FALSE;
+    root->frontend.closing=TRUE;
     LeaveCriticalSection(&service->lock);
     CHECK(!OpenNtBaseServiceFrontendConsoleRestored(root,child.dwProcessId,root_generation));
     CHECK(WaitForSingleObject(call.done,5000)==WAIT_OBJECT_0 && !call.error);
@@ -337,7 +337,7 @@ static int management_frontend_close_ordering(unsigned phase,unsigned competing)
         watch.native_gui_launcher=FALSE;watch.frontend_root_generation=0;
         CHECK(OpenNtBaseServiceRequestParticipantExit(worker,worker_child.dwProcessId,worker_generation,OPENNT_EXIT_CONSOLE)==ERROR_NOT_READY);
         watch.frontend_root_generation=root_generation;
-        CHECK(!root->frontend_close_requested);
+        CHECK(!root->frontend.close_requested);
         CHECK(watch.close_kind==WORKER_CLOSE_NONE);
     }
     if(competing==1) {
@@ -369,11 +369,11 @@ static int management_frontend_close_ordering(unsigned phase,unsigned competing)
         CHECK(!OpenNtBaseServiceRequestParticipantExit(worker,worker_child.dwProcessId,worker_generation,OPENNT_EXIT_PARTICIPANT));
         CHECK(!OpenNtBaseServiceRequestParticipantExit(root,root_child.dwProcessId,root_generation,OPENNT_EXIT_PARTICIPANT));
     }
-    CHECK(root->frontend_close_requested);
+    CHECK(root->frontend.close_requested);
     CHECK(!OpenNtBaseServiceCloseManagementNode(service,&key));
-    CHECK(root->frontend_close_requested); /* Duplicate preserves the same transaction. */
+    CHECK(root->frontend.close_requested); /* Duplicate preserves the same transaction. */
     CHECK(!OpenNtBaseServiceReconcileFrontends(service));
-    CHECK(root->frontend_close_draining);
+    CHECK(root->frontend.close_draining);
     CHECK(WaitForSingleObject(watch.console_close,0)==WAIT_TIMEOUT);
     CHECK(WaitForSingleObject(watch.shutdown,0)==(competing==1 ? WAIT_OBJECT_0 : WAIT_TIMEOUT));
     CHECK(!OpenNtBaseServiceRetireWorkerlessFrontend(root,root_child.dwProcessId,root_generation,&action));
@@ -382,7 +382,7 @@ static int management_frontend_close_ordering(unsigned phase,unsigned competing)
     CHECK(OpenNtBaseServiceFrontendCloseQuiesced(root,root_child.dwProcessId,root_generation+1)==ERROR_ACCESS_DENIED);
     if(phase==2) {
         CHECK(!OpenNtBaseServiceReconcileFrontends(service));
-        CHECK(root->frontend_close_requested && root->frontend_close_draining);
+        CHECK(root->frontend.close_requested && root->frontend.close_draining);
         CHECK(WaitForSingleObject(watch.console_close,0)==WAIT_TIMEOUT);
     }
     CHECK(!OpenNtBaseServiceFrontendCloseQuiesced(root,root_child.dwProcessId,root_generation));
@@ -392,7 +392,7 @@ static int management_frontend_close_ordering(unsigned phase,unsigned competing)
     CHECK(WaitForSingleObject(watch.shutdown,0)==(competing==1 ? WAIT_OBJECT_0 : WAIT_TIMEOUT));
     if(phase==1) {
         CHECK(!OpenNtBaseServiceReconcileFrontends(service));
-        CHECK(root->frontend_close_requested && root->frontend_close_draining);
+        CHECK(root->frontend.close_requested && root->frontend.close_draining);
         CHECK(TerminateProcess(root_child.hProcess,ERROR_CANCELLED));
         CHECK(WaitForSingleObject(root_child.hProcess,5000)==WAIT_OBJECT_0);
         /* Real context rundown removes the root, unlike merely marking its
@@ -405,7 +405,7 @@ static int management_frontend_close_ordering(unsigned phase,unsigned competing)
     CHECK(TerminateProcess(worker_child.hProcess,ERROR_CANCELLED));
     CHECK(WaitForSingleObject(worker_child.hProcess,5000)==WAIT_OBJECT_0);
     CHECK(!OpenNtBaseServiceReconcileFrontends(service));
-    if(root)CHECK(!root->frontend_close_draining && root->frontend_closing);
+    if(root)CHECK(!root->frontend.close_draining && root->frontend.closing);
     if(phase!=1) {
         CHECK(!OpenNtBaseServiceRetireWorkerlessFrontend(root,root_child.dwProcessId,root_generation,&action));
         CHECK(action==OPENNT_FRONTEND_RETIRE_FINAL_CLOSE);
@@ -413,7 +413,7 @@ static int management_frontend_close_ordering(unsigned phase,unsigned competing)
         CHECK(TerminateProcess(root_child.hProcess,ERROR_CANCELLED));
         CHECK(WaitForSingleObject(root_child.hProcess,5000)==WAIT_OBJECT_0);
     }
-    if(root)CHECK(root->frontend_close_requested);
+    if(root)CHECK(root->frontend.close_requested);
     CHECK(WaitForSingleObject(watch.shutdown,0)==(competing==1 ? WAIT_OBJECT_0 : WAIT_TIMEOUT));
     EnterCriticalSection(&service->lock);RemoveEntryList(&watch.link);LeaveCriticalSection(&service->lock);
     CloseHandle(watch.shutdown);CloseHandle(watch.console_close);CloseHandle(watch.wow_task_close);

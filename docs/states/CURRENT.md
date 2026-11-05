@@ -3,8 +3,12 @@
 ## Current Work
 
 **Active: M0 T477 S2** — NTSRV frontend-instance registration, identity and
-handoff. Owner admits S2 and requests a design on 2026-11-05. This checkpoint
-is audit/design only; no S2 production implementation or publication is claimed.
+handoff. Owner admits S2 and requests a design on 2026-11-05. Owner now authorizes the designed P1/P2/P3 implementation, each with builds,
+tests, publication to this worktree assets/release and O:/winnt/system32, and
+a local commit without push. P1 ownership separation passed both service matrices and Full verification,
+was published to both targets and is ready for its local delivery commit;
+[S2 evidence](../etc/evidence/m0-t477-s2-frontend-instances.md) records its scope
+and remaining delivery gates.
 
 S1 closed with P1 154a61877 and P2 6caaf5d78; [S1 evidence](../etc/evidence/m0-t477-s1-frontend-base.md)
 records builds, tests and both publications. The baseline is 6caaf5d78.
@@ -21,9 +25,9 @@ presentation; guest drivers remain separately queued. No push is authorized.
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T477 S2, Ordinary Mode. |
-| Admission And Approval | Owner: admit S2 and provide its design. This checkpoint is design-only; proposed production parts await implementation direction. |
+| Admission And Approval | Owner approved the S2 design and explicitly directs implementation. Execute P1, P2 and P3 sequentially with per-P verification/publication/local commit; no push. |
 | Candidate Proposal | [Host frontend foundation](../proposals/proposal-host-common-frontend-foundation-001.md). |
-| Objective | Design authenticated multiple frontend instances per host, isolated handoff and scoped teardown using existing NTSRV authorities. |
+| Objective | Implement authenticated multiple frontend instances per host, isolated handoff and scoped teardown using existing NTSRV authorities. |
 | Non-goals | No guest/VxD implementation, NTVDM VM adapter/registry implementation, worker-base dependency on frontend-base, NTMON new VM UI, or second scheduler. |
 | Reference Baseline | 6caaf5d78; completed S1 shared channel/service; existing frontend_registry, lifecycle, client and IDL. |
 | Files And ABI Surface | NTSRV private records/registry/lifecycle/transport; common protocol and BaseSrv clients; NTCON adapter; owning tests and design. Instance-addressed control RPC requires a protocol revision during implementation. |
@@ -33,7 +37,7 @@ presentation; guest drivers remain separately queued. No push is authorized.
 | Asset Needs | Existing project-owned code and unchanged S1 test/package inputs; no import. |
 | Reporting Requirements | Distinguish planned behavior, local fixtures and actual NTVDM/guest integration; record per-P validation and publication. |
 | Stop Conditions | Need to change guest execution/scheduling, introduce reverse component dependencies or bypass peer/capability authorization; revise scope before dependent work. |
-| Exit Criteria | Explicit-instance service/client path selected by NTCON; real service multi-instance fixtures, negative/lifecycle tests and product regression pass; both publication targets match; local commits, no push. Not met by this design checkpoint. |
+| Exit Criteria | Explicit-instance service/client path selected by NTCON; real service multi-instance fixtures, negative/lifecycle tests and product regression pass; both publication targets match; local commits, no push. Pending implementation and verification. |
 | Original Owner Request | Admit S2 and provide a design following completed S1; explain host connection versus frontend instance and control RPC. |
 | Similar-Issue Sweep | Root-generation references, route ownership, participant exit, startup reservations, retained capabilities, worker watches, management projection and connection rundown. |
 | Temporary Evidence | build/t477-s2; 90-minute phase, 4 GiB, 15-minute no-progress bound. S1 delivery/rollback records remain in build/t477-s1; caches remain .ninja/.ccache. |

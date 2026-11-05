@@ -42,9 +42,9 @@ DWORD service_bind_worker_root(OPENNT_BASE_SERVICE *service,HANDLE worker,
 {
     LIST_ENTRY *link;
     SERVICE_COMPARE_HANDLES compare=service ? service->compare_handles : NULL;
-    if(!worker || !root || !root->frontend_capability)return ERROR_INVALID_PARAMETER;
+    if(!worker || !root || !root->frontend.capability)return ERROR_INVALID_PARAMETER;
     if(!compare)return ERROR_INVALID_STATE;
-    if(root->frontend_closing || root->frontend_close_draining || root->frontend_terminal_retire ||
+    if(root->frontend.closing || root->frontend.close_draining || root->frontend.terminal_retire ||
         WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT)
         return ERROR_PIPE_NOT_CONNECTED;
     for(link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
@@ -78,8 +78,8 @@ static BOOL service_native_root_selectable(OPENNT_BASE_SERVICE *service,
         for(root_link=service->connections.Flink;root_link!=&service->connections;
             root_link=root_link->Flink) {
             OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(root_link,OPENNT_BASE_CONNECTION,service_link);
-            if(root->process.SequenceNumber==bound_root && root->frontend_capability &&
-                !root->frontend_closing && !root->frontend_close_draining && !root->frontend_terminal_retire &&
+            if(root->process.SequenceNumber==bound_root && root->frontend.capability &&
+                !root->frontend.closing && !root->frontend.close_draining && !root->frontend.terminal_retire &&
                 WaitForSingleObject(root->process.ProcessHandle,0)==WAIT_TIMEOUT)return TRUE;
         }
         return FALSE;
@@ -181,7 +181,7 @@ DWORD OpenNtBaseServiceRegisterNativeBackend(OPENNT_BASE_CONNECTION *connection,
         {error=ERROR_ACCESS_DENIED;goto done;}
     if(!connection->native_worker || connection->native_gui_launcher ||
         connection->reservation_kind!=OPENNT_BASE_WORKER_NATIVE ||
-        connection->frontend_capability || connection->process.fVDM)
+        connection->frontend.capability || connection->process.fVDM)
         {error=ERROR_INVALID_STATE;goto done;}
     /* Connect may already have associated the carrier with its authenticated
      * root.  A NULL frontend means retain that association, not invent root 0
@@ -478,7 +478,7 @@ DWORD OpenNtBaseServiceSelectNativeWorker(OPENNT_BASE_CONNECTION *connection,
     if(error)return error;
     service=connection->service;
     EnterCriticalSection(&service->lock);
-    requested_root=connection->frontend_capability ? generation : connection->retained_frontend_root;
+    requested_root=connection->frontend.capability ? generation : connection->retained_frontend_root;
     if(!OpenNtBaseServicePeer(connection,pid,generation)) {error=ERROR_ACCESS_DENIED;goto done;}
     if(connection->selected_native_generation) {
         error=OpenNtBaseServiceRetainCommandWorker(connection,pid,generation,worker);goto done;
