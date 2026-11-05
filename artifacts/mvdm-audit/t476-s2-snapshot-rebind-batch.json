@@ -1,0 +1,122 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+    "current_sha256": "f220e7bc12ac91cb614d1122645a7de4c697ca516694142ba367423b958f810a",
+    "snapshot_sha256": "07775984ef3fe7e1e362423caa18ee91cb71e46a28021be27680933718f98436",
+    "match": {
+      "snapshot_commit": "d08bd19f0e77712d55a3acc2abda08382d475658",
+      "non_line_text_equal": true
+    }
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+    "current_sha256": "000c65af5ddd124d7b0379782a909b79c96f258aaad75131e85e620dfa1ed4c0",
+    "snapshot_sha256": "5d3c9f6443dbda483a0d44c097d8ff0676fc50e461d3b800aa6c5899b4bf8fce",
+    "match": {
+      "snapshot_commit": "84184e71b26c4caffac72fe6d713f038e04aea83",
+      "non_line_text_equal": true
+    }
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+    "current_sha256": "171ee799e7ad006a106bfede7714bfb8d78724ccafaf983273a1e3403ff30d71",
+    "snapshot_sha256": "151646a7b9ba9319b6ce683f7c49c899168fe94d0f97721b12b64430c83f4b0a",
+    "match": {
+      "snapshot_commit": "b89b59af98f6b682564a93bb0e09d9ccb8542d86",
+      "non_line_text_equal": true
+    }
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+    "current_sha256": "9710afc2c576fe810b26ee83f099a7ba34e6e9e00aff3d48570b529a1eee81bb",
+    "snapshot_sha256": "b53e53a6cfa3991a6ddcb830906eb6aa342cd74e8380ed426c9249ee385c8f2c",
+    "match": {
+      "snapshot_commit": "f61b5a2bc381805fd6ee07c0c2ec4c53839fd760",
+      "non_line_text_equal": true
+    }
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+    "current_sha256": "b30cb25519194ebfb7bde02b0d672ab7ab40342d7f40d5c1b2e8ba1690f60e69",
+    "snapshot_sha256": "9974d509790f6b8185dd09242967298f34d8e93cc95b9e65ace1f9dd58f467ce",
+    "match": {
+      "snapshot_commit": "58ec640c8a5d3b705415288d4474ead1dca2348a",
+      "non_line_text_equal": true
+    }
+  },
+  {
+    "path": "src/mvdm-host/wow32/wow32.c",
+    "current_sha256": "13dd415db787321bbc1b3c65cc07f51646f3145f6d9cf8c5a2e693d443d02767",
+    "snapshot_sha256": "85ea047ab74ce6aba5a6d318cc57151d9ff6c51ca67fee75630cdd88ce84898a",
+    "match": {
+      "snapshot_commit": "0c62b3f579e639118f587b58e66014f4fc7203e4",
+      "non_line_text_equal": true
+    }
+  },
+  {
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "current_sha256": "3d46679e663b4fb35c8054370b2d5974ea92bf5aebe62cd4d50feb9e3a00244f",
+    "snapshot_sha256": "198145858d9f32e03152c079206c747c1e91b079ed4e7b6a939cbb82a1920555",
+    "match": {
+      "snapshot_commit": "09806ca9f480742e69c7b9d6d5230d398805e2fd",
+      "non_line_text_equal": false
+    }
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+    "current_sha256": "a546c5469edf64976220c1a2b7d7202de8c2d49093f6670b8610a3a759f91b1e",
+    "snapshot_sha256": "7175d1ce3e6d3cc10eaa1ee9845bd51df921d62a3133ca125e2e3e1736f7cefd",
+    "match": {
+      "snapshot_commit": "d69305e71685403326ed589e96356903549b67c8",
+      "non_line_text_equal": true
+    }
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+    "current_sha256": "b0c53f809f5da0001c6b92f25f3a300bea61010dcd970200903f324543835ae7",
+    "snapshot_sha256": "c7f57d2dca364ba5949c4fb9ec6694825435cb88f74cd26c1f8e20e9bb88860c",
+    "match": null
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+    "current_sha256": "6839fae1ee1a6914d1b7704f31206fa752cd0074237cacc0eda359973a1fc17f",
+    "snapshot_sha256": "bfd2af514bb86619de9c20af416898b65e52ce4a8db8885135d7d4f9fb3a2b94",
+    "match": {
+      "snapshot_commit": "12f254b28c16d615e4da782b90cf3cc8322977cc",
+      "non_line_text_equal": true
+    }
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+    "current_sha256": "c190414927cd0bdb0e142284e8285544480abf61458564f86784b4a53cd367d4",
+    "snapshot_sha256": "376b2a0bf3b2f1bc8fe5c32467de9ad8e416b022681ffd483d63fa6081fa121c",
+    "match": null
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+    "current_sha256": "880ee6bad2750e8308eebd87e2f127840f025dbbf3861f3ee09cef123e684562",
+    "snapshot_sha256": "cd42111cedcc41c994c465fa4abfc9f2c7d83a283464dd98a561787e9353d0a1",
+    "match": {
+      "snapshot_commit": "f340c1acf4612d9c60ed3403b8330863824319cd",
+      "non_line_text_equal": false
+    }
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+    "current_sha256": "24d007d177d4b326e5e60614daa2aaf70c7f0b6763bf644e31c8f1c63864afb9",
+    "snapshot_sha256": "de94ce38c9cd095af7535c3c957ab30a49acc56b5b5500dad592d250ebc02c9d",
+    "match": {
+      "snapshot_commit": "12f254b28c16d615e4da782b90cf3cc8322977cc",
+      "non_line_text_equal": true
+    }
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+    "current_sha256": "ff06d750dda7adef7f04e20b97f57f2c432f13e91e3af770a44aceed8c83b17c",
+    "snapshot_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+    "match": {
+      "snapshot_commit": "a7338bfc5e655b8b014fb6190b41107928a3f823",
+      "non_line_text_equal": false
+    }
+  }
+]

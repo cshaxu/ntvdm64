@@ -1,0 +1,22 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+  "original_sha256": "0e3999df8610405c990760ee1a417bf312e3b76744f8f9387bbd94583f9d800d",
+  "previous_sha256": "a4f04cdfa139c78bc761b5e78b39c727a128549b2702e9a7098d22b07dd38aeb",
+  "current_sha256": "d4e1283fd8b5297a8957a9ed13e8622504eaf16763aace581a8c5b78e9b6891e",
+  "condition_structure": "two original matched groups have corrected LF positions; KOREA selected shell is empty and remains open",
+  "corrected_original_lines": [
+    25,
+    272,
+    848
+  ],
+  "verification": "original sysBmpStyles lines 25-95 match all 69 table lines except registered static-to-external linkage adaptation",
+  "status": "individual review; grouped build and global context reconciliation pending",
+  "compiler_preprocessing_witness": {
+    "path": "build/t476-s2/batch22-inctlpan.i",
+    "sha256": "2c2a0f9560bedff5f329f2363358a1cf45567ca841213ae5b48d6f33d9162007",
+    "symbol": "sysBmpStyles",
+    "original_logical_line": 25,
+    "limit": "One actual product preprocessor context."
+  },
+  "korea_shell": "The retained #ifndef KOREA is within an original function omitted by the registered table-only adaptation; the shell hit does not establish original function execution or equivalence. Do not restore that unconnected behavior solely because shell is selected."
+}

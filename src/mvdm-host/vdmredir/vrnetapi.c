@@ -98,6 +98,7 @@ Revision History:
 #if DBG
 #line 97
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 104
 #endif
 #line 105
 
@@ -109,6 +110,7 @@ VrpTransactVdm(
 #if DBG
 #line 112
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 119
 #endif
 #line 120
 
@@ -206,8 +208,9 @@ Return Value:
 #if DBG
 #line 211
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 217
 #endif
-#line 236
+#line 218
 
 #line 219
     rc1 = NetWkstaGetInfo(NULL, 100, (LPBYTE*)&wkstaInfo);
@@ -267,6 +270,7 @@ Return Value:
 #if DBG
 #line 288
 #error DIVERGENCE MVDM-HOST-DIV-517: DBG debug branch is not selected; see mirror register.
+#line 301
 #endif
 #line 302
 }
@@ -302,6 +306,7 @@ Return Value:
 #if DBG
 #line 333
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 336
 #endif
 #line 337
 
@@ -315,6 +320,7 @@ Return Value:
 #if DBG
 #line 346
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 349
 #endif
 #line 350
         } else {
@@ -328,9 +334,11 @@ Return Value:
                 setAX(0);
                 setCF(0);
             }
+#line 354
 #if DBG
 #line 355
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 358
 #endif
 #line 359
         }
@@ -366,12 +374,14 @@ Return Value:
 #if DBG
 #line 390
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 396
 #endif
 #line 397
 
 #if DBG
 #line 399
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 402
 #endif
 #line 403
 
@@ -406,12 +416,14 @@ Return Value:
 #if DBG
 #line 433
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 439
 #endif
 #line 440
 
 #if DBG
 #line 442
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 445
 #endif
 #line 446
 
@@ -454,6 +466,7 @@ Return Value:
 #if DBG
 #line 484
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 490
 #endif
 #line 491
 
@@ -520,12 +533,14 @@ Return Value:
 #if DBG
 #line 540
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 546
 #endif
 #line 547
 
 #if DBG
 #line 549
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 552
 #endif
 #line 553
 
@@ -574,6 +589,7 @@ Return Value:
 #if DBG
 #line 597
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 603
 #endif
 #line 604
 
@@ -600,6 +616,7 @@ Return Value:
 #if DBG
 #line 626
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 629
 #endif
 #line 630
 
@@ -637,6 +654,7 @@ Return Value:
 #if DBG
 #line 663
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 669
 #endif
 #line 670
 
@@ -695,6 +713,7 @@ Return Value:
 #if DBG
 #line 724
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 734
 #endif
 #line 735
 
@@ -1113,6 +1132,7 @@ VrNetRemoteApi_exit:
 #if DBG
 #line 1149
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 1152
 #endif
 #line 1153
 
@@ -1263,6 +1283,7 @@ Return Value:
 #if DBG
 #line 1299
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 1305
 #endif
 #line 1306
 
@@ -1329,6 +1350,7 @@ Return Value:
 #if DBG
 #line 1368
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 1371
 #endif
 #line 1372
 
@@ -1345,6 +1367,7 @@ Return Value:
 #if DBG
 #line 1384
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 1392
 #endif
 #line 1393
 
@@ -1412,6 +1435,7 @@ Return Value:
 #if DBG
 #line 1456
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 1465
 #endif
 #line 1466
 
@@ -1478,6 +1502,7 @@ Return Value:
 #if DBG
 #line 1528
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 1538
 #endif
 #line 1539
 
@@ -1540,6 +1565,7 @@ Return Value:
 #if DBG
 #line 1597
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 1600
 #endif
 #line 1601
 
@@ -1615,6 +1641,7 @@ Return Value:
 #if DBG
 #line 1672
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 1678
 #endif
 #line 1679
 
@@ -1669,6 +1696,7 @@ Return Value:
 #if DBG
 #line 1729
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 1735
 #endif
 #line 1736
 
@@ -1752,6 +1780,7 @@ Return Value:
 #if DBG
 #line 1815
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 1818
 #endif
 #line 1819
         SET_ERROR((WORD)status);
@@ -1805,6 +1834,7 @@ Return Value:
 #if DBG
 #line 1868
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 1874
 #endif
 #line 1875
 
@@ -1886,6 +1916,7 @@ Return Value:
 #if DBG
 #line 1952
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 1958
 #endif
 #line 1959
 
@@ -1993,6 +2024,7 @@ Return Value:
 #if DBG
 #line 2062
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 2068
 #endif
 #line 2069
 
@@ -2014,6 +2046,7 @@ Return Value:
 #if DBG
 #line 2086
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 2089
 #endif
 #line 2090
 
@@ -2022,6 +2055,7 @@ Return Value:
 #if DBG
 #line 2094
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 2097
 #endif
 #line 2098
 
@@ -2030,6 +2064,7 @@ Return Value:
 #if DBG
 #line 2102
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 2105
 #endif
 #line 2106
 
@@ -2038,6 +2073,7 @@ Return Value:
 #if DBG
 #line 2110
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 2113
 #endif
 #line 2114
 
@@ -2047,6 +2083,7 @@ Return Value:
 #if DBG
 #line 2119
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 2122
 #endif
 #line 2123
 
@@ -2073,6 +2110,7 @@ Return Value:
 #if DBG
 #line 2145
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 2148
 #endif
 #line 2149
 
@@ -2152,6 +2190,7 @@ Return Value:
 #if DBG
 #line 2224
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 2230
 #endif
 #line 2231
 
@@ -2175,6 +2214,7 @@ Return Value:
 #if DBG
 #line 2250
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 2256
 #endif
 #line 2257
 
@@ -2192,6 +2232,7 @@ Return Value:
 #if DBG
 #line 2270
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 2273
 #endif
 #line 2274
 
@@ -2210,6 +2251,7 @@ Return Value:
 #if DBG
 #line 2288
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 2293
 #endif
 #line 2294
 
@@ -2239,6 +2281,7 @@ Return Value:
 #if DBG
 #line 2319
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 2326
 #endif
 #line 2327
 
@@ -2601,6 +2644,7 @@ Return Value:
 #if DBG
 #line 2685
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 2688
 #endif
 #line 2689
 
@@ -2616,6 +2660,7 @@ Return Value:
 #if DBG
 #line 2700
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 2703
 #endif
 #line 2704
 
@@ -2649,6 +2694,7 @@ Return Value:
 #if DBG
 #line 2733
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 2744
 #endif
 #line 2745
 
@@ -2657,6 +2703,7 @@ Return Value:
 #if DBG
 #line 2749
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 2931
 #endif
 #line 2932
 
@@ -2686,12 +2733,14 @@ Return Value:
 #if DBG
 #line 2957
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 2963
 #endif
 #line 2964
 
 #if DBG
 #line 2966
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 2969
 #endif
 #line 2970
 
@@ -2842,6 +2891,7 @@ Return Value:
 #if DBG
 #line 3116
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 3120
 #endif
 #line 3121
 
@@ -2891,6 +2941,7 @@ Return Value:
 #if DBG
 #line 3166
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 3177
 #endif
 #line 3178
 
@@ -2946,6 +2997,7 @@ Return Value:
 #if DBG
 #line 3229
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 3236
 #endif
 #line 3237
 
@@ -2962,6 +3014,7 @@ Return Value:
 #if DBG
 #line 3249
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 3256
 #endif
 #line 3257
 
@@ -3011,6 +3064,7 @@ Return Value:
 #if DBG
 #line 3302
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 3309
 #endif
 #line 3310
 
@@ -3027,6 +3081,7 @@ Return Value:
 #if DBG
 #line 3322
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 3327
 #endif
 #line 3328
 
@@ -3136,6 +3191,7 @@ Return Value:
 #if DBG
 #line 3433
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 3439
 #endif
 #line 3440
 
@@ -3239,6 +3295,7 @@ Return Value:
 #if DBG
 #line 3539
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 3544
 #endif
 #line 3545
 
@@ -3256,6 +3313,7 @@ Return Value:
 #if DBG
 #line 3558
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 3561
 #endif
 #line 3562
 
@@ -3328,6 +3386,7 @@ Return Value:
 #if DBG
 #line 3630
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 3633
 #endif
 #line 3634
 
@@ -3425,6 +3484,7 @@ Return Value:
 #if DBG
 #line 3727
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 3731
 #endif
 #line 3732
 
@@ -3433,6 +3493,7 @@ Return Value:
 #if DBG
 #line 3736
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 3739
 #endif
 #line 3740
 
@@ -3464,6 +3525,7 @@ Return Value:
 #if DBG
 #line 3767
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 3770
 #endif
 #line 3771
 
@@ -3474,6 +3536,7 @@ Return Value:
 #if DBG
 #line 3777
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 3780
 #endif
 #line 3781
 
@@ -3719,6 +3782,7 @@ Return Value:
 #if DBG
 #line 4022
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 4031
 #endif
 #line 4032
 
@@ -3784,5 +3848,6 @@ Return Value:
 #if DBG
 #line 4093
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 4213
 #endif
 #line 4214

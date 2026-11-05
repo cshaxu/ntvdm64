@@ -307,6 +307,7 @@ CONST WORD gawEditWndProc[] = {
     0
 };
 
+#line 504
 CONST WORD gawDefWindowMsgs[] = {
     WM_GETHOTKEY,
     WM_SETHOTKEY,
@@ -391,12 +392,14 @@ CONST WORD gawDefWindowSpecMsgs[] = {
 #ifdef FE_IME
 #line 584
 #error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
+#line 596
 #endif
 #if defined(WOW_ORIGINAL_DEFAULT_MESSAGES)
-#line 893
+#line 597
     0
 };
 
+#line 896
 VOID InitWindowMsgTable(
     PBYTE      *ppbyte,
     PUINT      pmax,
@@ -430,6 +433,7 @@ VOID InitWindowMsgTable(
 #ifdef FE_IME
 #line 482
 #error Excluded unsupported original FE_IME branch
+#line 498
 #endif
 #line 499
 
@@ -438,6 +442,7 @@ VOID InitWindowMsgTable(
 #ifdef FE_IME // amsgsSyncOnly[]
 #line 834
 #error Excluded unsupported original FE_IME branch
+#line 839
 #endif
 #line 840
 
@@ -462,6 +467,7 @@ VOID InitWindowMsgTable(
 #error Excluded unsupported original FE_IME branch
 #else
 #line 993
+#line 994
 #endif
 #line 995
 
@@ -478,6 +484,7 @@ VOID InitWindowMsgTable(
 #ifdef DEBUG
 #line 851
 #error Unsupported DEBUG original branch
+#line 877
 #endif // DEBUG
 #line 878
 
@@ -485,6 +492,7 @@ VOID InitWindowMsgTable(
 #ifdef DEBUG
 #line 935
 #error Unsupported DEBUG original branch
+#line 939
 #endif
 #line 940
 
@@ -492,6 +500,7 @@ VOID InitWindowMsgTable(
 #ifdef DEBUG
 #line 1003
 #error Unsupported DEBUG original branch
+#line 1019
 #endif
 #line 1020
 
@@ -499,6 +508,7 @@ VOID InitWindowMsgTable(
 #ifdef DEBUG
 #line 1164
 #error Unsupported DEBUG original branch
+#line 1209
 #endif
 #line 1210
 

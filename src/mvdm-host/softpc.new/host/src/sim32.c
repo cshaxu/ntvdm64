@@ -40,8 +40,10 @@
 #endif
 
 
+#line 38
 #ifdef CPU_40_STYLE
 #include "nt_mem.h"
+#line 40
 #endif /* CPU_40_STYLE */
 
 /********************************************************/
@@ -155,6 +157,7 @@ BOOL SetVideoMemory(ULONG iaddr)
  * numeric address as its SIM32 alias without walking the descriptor twice. */
 UCHAR *Sim32pGetVDMPointerWithLinear(ULONG addr, UCHAR pm, ULONG *linear)
 {
+#line 150
         sys_addr iaddr;
 
 #line 152
@@ -165,6 +168,7 @@ UCHAR *Sim32pGetVDMPointerWithLinear(ULONG addr, UCHAR pm, ULONG *linear)
         if (linear) *linear = (ULONG)iaddr;
 //STF - need sas_wrap_mask with PE....iaddr &= Sas_wrap_mask;
 
+#line 158
         if (IsVideoMemory(iaddr)) {
 #line 159
             return GetVideoMemory(iaddr);
@@ -249,6 +253,7 @@ GLOBAL sys_addr sim32_effective_addr IFN2(double_word, addr, BOOL, pm)
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 
+#line 232
     seg = (word)(addr>>16);
     off = (word)(addr & 0xffff);
 
@@ -342,6 +347,7 @@ LOCAL UTINY *reserve_for_sas = NULL;
 #ifndef CPU_40_STYLE
 #line 322
 #error Non-CPU40 SIM32 memory provider is not supported
+#line 421
 #else /* CPU_40_STYLE */
 #line 422
 

@@ -2535,3 +2535,41 @@ OPENNT-HOST-273: restore original logical positions of retained function entries
 OPENNT-HOST-274: restore original condition-directive and retained-source diagnostic line mappings in `windows/core/ntuser/client/ntstubs.c`, `windows/core/ntuser/client/wow.c`, `windows/core/ntuser/inc/ntsend.h`, `windows/core/ntuser/kernel/getset.c`, and `windows/core/ntuser/rtl/{draw,winmgr,wow}.c`. Existing selected branches and registered adaptations remain; T476 S2 records retain file review and grouped verification.
 
 OPENNT-HOST-275: restore original conditional and selected same-address rebase macro line mappings in `windows/core/ntuser/rtl/userrtl.h`, preserving OPENNT-HOST-104 behavior. T476 S2 records retain the review and grouped verification.
+
+OPENNT-HOST-276: restore original retained-function, data-table and conditional diagnostic lines in `windows/core/ntuser/kernel/profile.c` and `inctlpan.c`; existing registered profile and control resource adaptations remain. T476 S2 records retain the file review and grouped verification.
+
+OPENNT-HOST-277: correct original logical lines of reordered retained taskman.c functions using per-function source alignment; remove anchors previously matched to unrelated functions. Evidence: artifacts/mvdm-audit/t476-s2-taskman-line-repair.json. Final grouped build and supported-context reconciliation remain pending.
+
+OPENNT-HOST-278: restore original per-function diagnostic source positions and the excluded SYSMODALWINDOWS closing anchor in dlgmgr.c while preserving the registered local modal-dialog adaptation. Evidence: artifacts/mvdm-audit/t476-s2-dlgmgr-line-repair.json. Context review and the final grouped build remain pending.
+
+OPENNT-HOST-279: restore original logical line anchors for retained client subset functions and original conditional endings in windows/core/ntuser/client/client.c; original selected tokens and existing scoped adapters remain unchanged. Evidence: artifacts/mvdm-audit/t476-s2-client-line-repair.json. Final grouped build and cross-context reconciliation remain pending.
+
+OPENNT-HOST-280: restore original branch and retained call diagnostic lines in windows/core/ntuser/client/dlgmgr2.c; selected dialog keyboard behavior and tokens remain unchanged. Evidence: artifacts/mvdm-audit/t476-s2-dlgmgr2-review.json. Final grouped build and context reconciliation remain pending.
+
+OPENNT-HOST-281: restore original conditional directive and closing diagnostic lines in windows/core/ntuser/rtl/chartran.c after source-hash-bound branch comparison. Existing selected tokens remain unchanged. Evidence: artifacts/mvdm-audit/t476-s2-rebound-four-line-repair.json; unresolved mapping leads, grouped build and context reconciliation remain open.
+
+OPENNT-HOST-282: restore original conditional directive and closing source positions in windows/core/ntuser/kernel/ntstubs.c without changing selected code. Evidence: artifacts/mvdm-audit/t476-s2-four-more-line-repair.json. Final grouped build and context reconciliation remain pending.
+
+OPENNT-HOST-283: restore original source positions for the selected _ShowStartGlass body and original conditional boundaries in windows/core/ntuser/kernel/queue.c, without changing selected code. Evidence: artifacts/mvdm-audit/t476-s2-queue-review.json. Final grouped build and context reconciliation remain pending.
+
+OPENNT-HOST-284: restore original conditional directive source positions in public/internal/windows/inc/pif.h, retaining the formal PIF addon-supported branch. Evidence: artifacts/mvdm-audit/t476-s2-pif-review.json. Final grouped build and context reconciliation remain pending.
+
+OPENNT-HOST-285: restore original conditional and per-function diagnostic positions in windows/core/ntuser/client/clres.c; preserve the existing original-resource subset and registered copy-order correction. Evidence: artifacts/mvdm-audit/t476-s2-clres-review.json. Final grouped build and context reconciliation remain pending.
+
+OPENNT-HOST-286: restore original source positions of the retained object-ownership table and original conditional boundaries in windows/core/ntuser/kernel/handtabl.c without changing selected tokens. Evidence: artifacts/mvdm-audit/t476-s2-handtabl-review.json. Final grouped build and context reconciliation remain pending.
+
+OPENNT-HOST-287: restore original conditional and retained mnemonic drawing source positions in windows/core/ntuser/rtl/drawtext.c, preserving the registered exception-safe scratch lifetime. Evidence: artifacts/mvdm-audit/t476-s2-drawtext-review.json. Final grouped build and context reconciliation remain pending.
+
+OPENNT-HOST-288: restore original conditional, default-message table and retained InitWindowMsgTable source positions in windows/core/ntuser/kernel/server.c. Evidence: artifacts/mvdm-audit/t476-s2-server-review.json. Final grouped build and context reconciliation remain pending.
+
+OPENNT-HOST-289: restore original selected class-client declaration and conditional source positions in windows/core/ntuser/inc/ntcftxt.h, preserving multi-context branches and the registered cleanup adaptation. Evidence: artifacts/mvdm-audit/t476-s2-ntcftxt-review.json. Final grouped build and context reconciliation remain pending.
+
+OPENNT-HOST-290: restore original inline LUID conversion and conditional diagnostic line positions in public/sdk/inc/ntrtl.h without changing selected source tokens. Evidence: artifacts/mvdm-audit/t476-s2-ntrtl-review.json. Final grouped build and context reconciliation remain pending.
+
+OPENNT-HOST-291: place the unchanged same-address REBASE macro definitions inside the supported original _USERK_ else / non-WOW conditional branch in windows/core/ntuser/rtl/userrtl.h. Evidence: artifacts/mvdm-audit/t476-s2-userrtl-review.json. The S1 rejected _USERK_ and WOW contexts and final grouped build remain under review.
+
+OPENNT-HOST-292: restore original conditional and selected WOW scheduler inline source positions in windows/core/ntuser/kernel/userk.h while preserving the registered client-context adaptation. Evidence: artifacts/mvdm-audit/t476-s2-userk-review.json. Final grouped build and context reconciliation remain pending.
+
+OPENNT-HOST-293: restore sampled original source positions for retained declarations in windows/core/ntuser/inc/user.h. Evidence: artifacts/mvdm-audit/t476-s2-user-review.json. Supported-context and compiler validation remain pending.
+
+OPENNT-HOST-294: correct and restore original diagnostic positions in base/win32/client/vdm.c and windows/core/ntuser/client/usercli.h; retained code and approved adapters are preserved. Evidence: artifacts/mvdm-audit/t476-s2-vdm-worker.json and t476-s2-usercli-worker.json. Compiler and complete context validation remain pending.

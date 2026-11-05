@@ -22,6 +22,7 @@
 #define IsCurrentThreadForeground() \
     ((BOOL)NtUserGetThreadState(UserThreadStateIsForeground))
 
+#line 989
 int PASCAL DialogBox2(
     HWND hwnd,
     HWND hwndOwner,
@@ -73,6 +74,7 @@ int PASCAL DialogBox2(
      * Set the 'parent disabled' flag for EndDialog().
      * convert BOOL to definite bit 0 or 1
      */
+#line 1038
     PDLG(pwnd)->fDisabled = !!fDisabled;
 
     fShown = TestWF(pwnd, WFVISIBLE);
@@ -90,6 +92,7 @@ int PASCAL DialogBox2(
 ShowIt:
             /* DIVERGENCE(OPENNT-HOST-080): queue/dispatch can retire this HWND. */
             if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return 0;
+#line 1053
             if (!fShown) {
                 fShown = TRUE;
 
@@ -97,12 +100,14 @@ ShowIt:
 #ifdef SYSMODALWINDOWS
 #line 1057
 #error DIVERGENCE OPENNT-HOST-133: SYSMODALWINDOWS branch is not selected; see mirror register.
+#line 1065
 #endif
 #line 1066
 
                 NtUserShowWindow(hwnd, SHOW_OPENWINDOW);
                 /* DIVERGENCE(OPENNT-HOST-080): no update to a destroyed/reused HWND. */
                 if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return 0;
+#line 1068
                 UpdateWindow(hwnd);
             } else {
                 /*
@@ -142,6 +147,7 @@ ShowIt:
              * messages to be hooked for both modal and modeless dialog
              * boxes.
              */
+#line 1105
             if (!IsDialogMessage(hwnd, &msg)) {
                 TranslateMessage(&msg);
                 DispatchMessage(&msg);
@@ -167,6 +173,7 @@ ShowIt:
              * Bogus case - we've already been destroyed somehow (by app,
              * GP, etc.)
              */
+#line 1129
             RIPMSG0(RIP_WARNING,
                "Dialog should be dismissed with EndDialog, not DestroyWindow");
             return 0;
@@ -178,6 +185,7 @@ ShowIt:
      */
     /* DIVERGENCE(OPENNT-HOST-080): never destroy a replacement numeric HWND. */
     if (!RevalidateHwnd(hwnd) || TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) {
+#line 1139
         return 0;
     }
 
@@ -205,6 +213,7 @@ ShowIt:
     return result;
 }
 
+#line 1177
 int InternalDialogBox(
     HANDLE hModule,
     LPDLGTEMPLATE lpdt,
@@ -217,6 +226,7 @@ int InternalDialogBox(
     int i;
     /* DIVERGENCE(OPENNT-HOST-080): no owner means no prior disabled state. */
     BOOL fDisabled = FALSE;
+#line 1188
     HWND hwnd;
     PWND pwndOwner;
     BOOL fOwnerIsActiveWindow = FALSE;

@@ -1,0 +1,173 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+  "original_sha256": "787eda33785a87ce9e71202c97b5913e2857f7106fed5bb97103049b1d5e3472",
+  "before_sha256": "51a7df71bc18a51a779a3b38d555fc9e0380ded5180f1e7e965fe56fa9823a37",
+  "after_sha256": "c19d75256bc8521b87e277b32e0caff9c4e7517dbfd4e28384be28e05ed5494b",
+  "exact_original_function_ranges": [
+    [
+      2203,
+      2253
+    ],
+    [
+      2345,
+      2350
+    ],
+    [
+      2362,
+      2368
+    ],
+    [
+      2181,
+      2194
+    ]
+  ],
+  "added_line_anchors": {
+    "24": 2203,
+    "126": 2345,
+    "143": 2362,
+    "156": 2181,
+    "210": 3502,
+    "226": 2292
+  },
+  "non_line_directive_bytes_invariant": true,
+  "branch_evidence": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "snapshot_sha256": "51a7df71bc18a51a779a3b38d555fc9e0380ded5180f1e7e965fe56fa9823a37",
+      "current_sha256": "51a7df71bc18a51a779a3b38d555fc9e0380ded5180f1e7e965fe56fa9823a37",
+      "source_binding": "same",
+      "snapshot_line": "16",
+      "directive": "if",
+      "expression": "defined(WOW_ORIGINAL_DEF_WINDOW_BITS)",
+      "product_status": "hit",
+      "product_contexts": "647",
+      "historical_hit_sources": "unique-structure-historical",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "1",
+      "disposition": "retain-if-rebound"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "snapshot_sha256": "51a7df71bc18a51a779a3b38d555fc9e0380ded5180f1e7e965fe56fa9823a37",
+      "current_sha256": "51a7df71bc18a51a779a3b38d555fc9e0380ded5180f1e7e965fe56fa9823a37",
+      "source_binding": "same",
+      "snapshot_line": "76",
+      "directive": "elif",
+      "expression": "defined(WOW_ORIGINAL_CONTROL_STATE)",
+      "product_status": "hit",
+      "product_contexts": "638",
+      "historical_hit_sources": "unique-structure-historical",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "1",
+      "disposition": "retain-if-rebound"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "snapshot_sha256": "51a7df71bc18a51a779a3b38d555fc9e0380ded5180f1e7e965fe56fa9823a37",
+      "current_sha256": "51a7df71bc18a51a779a3b38d555fc9e0380ded5180f1e7e965fe56fa9823a37",
+      "source_binding": "same",
+      "snapshot_line": "100",
+      "directive": "elif",
+      "expression": "defined(WOW_ORIGINAL_DIALOG_EDIT)",
+      "product_status": "hit",
+      "product_contexts": "633",
+      "historical_hit_sources": "unique-structure-historical",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "1",
+      "disposition": "retain-if-rebound"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "snapshot_sha256": "51a7df71bc18a51a779a3b38d555fc9e0380ded5180f1e7e965fe56fa9823a37",
+      "current_sha256": "51a7df71bc18a51a779a3b38d555fc9e0380ded5180f1e7e965fe56fa9823a37",
+      "source_binding": "same",
+      "snapshot_line": "151",
+      "directive": "elif",
+      "expression": "defined(WOW_ORIGINAL_CLASS_CLIENT)",
+      "product_status": "hit",
+      "product_contexts": "669",
+      "historical_hit_sources": "unique-structure-historical",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "1",
+      "disposition": "retain-if-rebound"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "snapshot_sha256": "51a7df71bc18a51a779a3b38d555fc9e0380ded5180f1e7e965fe56fa9823a37",
+      "current_sha256": "51a7df71bc18a51a779a3b38d555fc9e0380ded5180f1e7e965fe56fa9823a37",
+      "source_binding": "same",
+      "snapshot_line": "170",
+      "directive": "else",
+      "expression": "",
+      "product_status": "hit",
+      "product_contexts": "626",
+      "historical_hit_sources": "unique-structure-historical",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "1",
+      "disposition": "retain-if-rebound"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "snapshot_sha256": "51a7df71bc18a51a779a3b38d555fc9e0380ded5180f1e7e965fe56fa9823a37",
+      "current_sha256": "51a7df71bc18a51a779a3b38d555fc9e0380ded5180f1e7e965fe56fa9823a37",
+      "source_binding": "same",
+      "snapshot_line": "207",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "product_status": "previously-excluded",
+      "product_contexts": "",
+      "historical_hit_sources": "",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "0",
+      "disposition": "existing-error-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "snapshot_sha256": "51a7df71bc18a51a779a3b38d555fc9e0380ded5180f1e7e965fe56fa9823a37",
+      "current_sha256": "51a7df71bc18a51a779a3b38d555fc9e0380ded5180f1e7e965fe56fa9823a37",
+      "source_binding": "same",
+      "snapshot_line": "214",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "product_status": "previously-excluded",
+      "product_contexts": "",
+      "historical_hit_sources": "",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "0",
+      "disposition": "existing-error-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "snapshot_sha256": "51a7df71bc18a51a779a3b38d555fc9e0380ded5180f1e7e965fe56fa9823a37",
+      "current_sha256": "51a7df71bc18a51a779a3b38d555fc9e0380ded5180f1e7e965fe56fa9823a37",
+      "source_binding": "same",
+      "snapshot_line": "221",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "product_status": "previously-excluded",
+      "product_contexts": "",
+      "historical_hit_sources": "",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "0",
+      "disposition": "existing-error-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "snapshot_sha256": "51a7df71bc18a51a779a3b38d555fc9e0380ded5180f1e7e965fe56fa9823a37",
+      "current_sha256": "51a7df71bc18a51a779a3b38d555fc9e0380ded5180f1e7e965fe56fa9823a37",
+      "source_binding": "same",
+      "snapshot_line": "224",
+      "directive": "else",
+      "expression": "",
+      "product_status": "hit",
+      "product_contexts": "626,633,638,647,669",
+      "historical_hit_sources": "",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "0",
+      "disposition": "retain-if-rebound"
+    }
+  ],
+  "status": "individual review; grouped build and global context reconciliation pending",
+  "unique_nontrivial_original_line_leads_after_repair": 0,
+  "empty_original_shell": "DEBUG else at original line 2290 belongs to omitted original UserRegisterWowHandlers; observed shell does not prove its omitted body is linked."
+}

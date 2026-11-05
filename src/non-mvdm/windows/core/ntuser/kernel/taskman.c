@@ -130,9 +130,11 @@ VOID DirectedScheduleTask(
 
 /* DIVERGENCE(OPENNT-HOST-048): caller supplies original current process
  * explicitly; no fake PpiCurrent thread environment is constructed. */
+#line 728
 DWORD CurrentTaskLock(
     DWORD hlck,
     PPROCESSINFO ppi)
+#line 730
 {
     PWOWPROCESSINFO pwpi = ppi->pwpi;
 
@@ -155,6 +157,7 @@ DWORD CurrentTaskLock(
 #undef gpsi
 #define gpsi (ppi->shared)
 #define gpwtiFirst (ppi->shared->pwtiFirst)
+#line 129
 void DestroyTask(
     PPROCESSINFO ppi,
     PTHREADINFO ptiToRemove)
@@ -244,10 +247,12 @@ void DestroyTask(
 
 /* DIVERGENCE(OPENNT-HOST-050): explicit current thread replaces PtiCurrent;
  * original wait/selection/message policy and UserYield ordering are retained. */
+#line 234
 BOOL xxxSleepTask(
     BOOL   fInputIdle,
     HANDLE hEvent,
     PTHREADINFO currentThread)
+#line 237
 {
     PTDB ptdb;
     PTHREADINFO     pti;
@@ -342,6 +347,7 @@ rescan:
                 for (ptdb = pwpi->ptdbHead; ptdb; ptdb = ptdb->ptdbNext) {
                     /* DIVERGENCE(OPENNT-HOST-123): native-stack readiness. */
                     if (ptdb->nEvents > 0 && wow_task_execution_ready(ptdb->pti) &&
+#line 330
                             !(hEvent == HEVENT_REMOVEME && ptdb->pti == pti)) {
                         pwpi->ptiScheduled = ptdb->pti;
                         break;
@@ -366,6 +372,7 @@ rescan:
                     /* DIVERGENCE(OPENNT-HOST-123): do not enter guest idle
                      * hooks on a suspended native stack. */
                     if (fInputIdle && wow_task_execution_ready(pti) &&
+#line 352
                             pwpi->ptiScheduled == NULL &&
                             IsHooked(pti, WHF_FOREGROUNDIDLE)) {
 
@@ -410,6 +417,7 @@ rescan:
                 /* DIVERGENCE(OPENNT-HOST-123): retain the real hardware
                  * branch only on a ready continuation. */
                 if (pwpi->hEventWowExecClient == hEvent && wow_task_execution_ready(pti)) {
+#line 394
                     pwpi->ptiScheduled = pti;
                     ppi->W32PF_Flags &= ~W32PF_WAKEWOWEXEC;
                     InsertTask(ppi, pti->ptdb);
@@ -432,6 +440,7 @@ rescan:
         } else if (pwpi->nTaskLock > 0 && pwpi->ptiScheduled == pti
                    /* DIVERGENCE(OPENNT-HOST-123): no false self wake. */
                    && pti->ptdb->nEvents > 0 && wow_task_execution_ready(pti)) {
+#line 415
              KeSetEvent(pwpi->ptiScheduled->pEventQueueServer,
                     EVENT_INCREMENT, FALSE);
         }
@@ -510,6 +519,7 @@ rescan:
      * Place ourselves at the far end of tasks in the same priority
      * so that next time we sleep someone else will run.
      */
+#line 491
     pti->ptdb->nEvents--;
     gpsi->nEvents--;
     UserAssert(gpsi->nEvents >= 0);
@@ -528,7 +538,7 @@ rescan:
 
 
 
-#line 665
+#line 509
 /***************************************************************************\
 * xxxUserYield
 *
@@ -537,7 +547,6 @@ rescan:
 * History:
 * 10-19-92 Scottlu      Created.
 \***************************************************************************/
-#line 671
 
 BOOL xxxUserYield(
     PTHREADINFO pti)
@@ -638,6 +647,7 @@ void xxxDirectedYield(
     xxxSleepTask(TRUE, NULL, ptiOld);
 }
 
+#line 60
 void InsertTask(
     PPROCESSINFO ppi,
     PTDB ptdbNew)
@@ -646,13 +656,10 @@ void InsertTask(
     PTDB ptdb;
     int nPriority;
     PWOWPROCESSINFO pwpi = ppi->pwpi;
-#line 715
 
     CheckCritIn();
-#line 732
 
     UserAssert(pwpi != NULL);
-#line 735
 
     pptdb = &pwpi->ptdbHead;
     nPriority = ptdbNew->nPriority;
@@ -693,7 +700,6 @@ void InsertTask(
         }
 
         pptdb = &(ptdb->ptdbNext);
-#line 741
     }
 
     /*
@@ -701,5 +707,4 @@ void InsertTask(
      */
     ptdbNew->ptdbNext = *pptdb;
     *pptdb = ptdbNew;
-#line 744
 }

@@ -956,6 +956,7 @@ VOID nt_process_keys(PKEY_EVENT_RECORD KeyEvent)
 #ifdef YODA
 #line 886
 #error Excluded unsupported YODA configuration
+#line 891
 #endif
 #line 892
 
@@ -1292,6 +1293,7 @@ GLOBAL void GetScaleEvent(void)
 #ifdef YODA
 #line 1210
 #error Excluded unsupported YODA configuration
+#line 1241
 #endif
 #line 1242
 
@@ -1382,8 +1384,8 @@ BOOL CntrlHandler(ULONG CtrlType)
 #ifndef PROD
 #line 1328
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
+#line 1332
 #endif
-#line 1328
 #line 1333
             if (CntrlHandlerState & CNTRL_PUSHEXIT) {
                 /* DIVERGENCE(MVDM-HOST-DIV-355): defer the original
@@ -1409,6 +1411,7 @@ BOOL CntrlHandler(ULONG CtrlType)
 #ifndef PROD
 #line 1349
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
+#line 1351
 #endif
 #line 1352
        }
@@ -1631,6 +1634,7 @@ void nt_resume_event_thread(void)
 #ifdef X86GFX
 #line 1526
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
+#line 1528
 #endif
 #line 1529
 

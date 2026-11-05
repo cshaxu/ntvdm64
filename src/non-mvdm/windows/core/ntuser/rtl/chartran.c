@@ -38,6 +38,7 @@ BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
 #ifdef FE_SB // RtlMBMessageWParamCharToWCS()
 #line 447
 #error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
+#line 449
 #endif // FE_SB
 #line 450
     WORD CodePage = THREAD_CODEPAGE();
@@ -51,6 +52,7 @@ BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
 #ifdef FE_SB // RtlMBMessageWParamCharToWCS()
 #line 458
 #error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
+#line 496
 #else
 #line 497
     case WM_CHAR:
@@ -76,6 +78,7 @@ BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
 #ifdef _USERK_
 #line 516
 #error DIVERGENCE OPENNT-HOST-136: _USERK_ branch is not selected; see mirror register.
+#line 519
 #else
 #line 520
             cwch = MultiByteToWideChar(CodePage, 0,
@@ -93,11 +96,13 @@ BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
 #ifdef FE_SB // RtlMBMessageWParamCharToWCS
 #line 531
 #error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
+#line 536
 #else
 #line 537
 #ifdef DEBUG
 #line 538
 #error Excluded unsupported original DEBUG branch
+#line 541
 #endif
 #line 542
 #endif // FE_SB
@@ -282,6 +287,7 @@ WCSToMBEx(
 #ifdef _USERK_
 #line 147
 #error DIVERGENCE OPENNT-HOST-136: _USERK_ branch is not selected; see mirror register.
+#line 165
 #else
 #line 166
         /*
@@ -393,6 +399,7 @@ int MBToWCSEx(
 #ifdef _USERK_
 #line 271
 #error DIVERGENCE OPENNT-HOST-136: _USERK_ branch is not selected; see mirror register.
+#line 290
 #else
 #line 291
         /*
@@ -433,8 +440,10 @@ int MBToWCSEx(
 #ifdef FE_SB // RtlWCSMessageWParamCharToMB()
 #line 352
 #error Excluded unsupported original FE_SB branch
+#line 362
 #else
 #line 363
+#line 364
 #endif // FE_SB
 #line 365
 
@@ -442,8 +451,10 @@ int MBToWCSEx(
 #ifdef _USERK_
 #line 379
 #error Excluded unsupported original _USERK_ branch
+#line 382
 #else
 #line 383
+#line 386
 #endif // _USERK_
 #line 387
 
@@ -451,13 +462,16 @@ int MBToWCSEx(
 #ifdef FE_SB // RtlWCSMessageWParamCharToMB()
 #line 394
 #error Excluded unsupported original FE_SB branch
+#line 416
 #else
 #line 418
 #ifdef DEBUG
 #line 419
 #error Excluded unsupported original DEBUG branch
+#line 422
 #endif
 #line 423
+#line 424
 #endif // FE_SB
 #line 425
 
@@ -466,5 +480,6 @@ int MBToWCSEx(
 #ifdef FE_IME // RtlWCSMessageWParamCharToMB()
 #line 338
 #error Unsupported FE_IME original branch
+#line 340
 #endif // FE_IME
 #line 341

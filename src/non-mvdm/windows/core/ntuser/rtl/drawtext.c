@@ -68,6 +68,7 @@ LONG GetPrefixCount(
 #ifdef FE_SB // GetPrefixCount()
 #line 812
 #error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
+#line 841
 #endif // FE_SB
 #line 842
         } else {
@@ -91,6 +92,7 @@ LONG GetPrefixCount(
 }
 
 #ifdef WOW_ORIGINAL_MNEMONIC_DRAWING
+#line 1867
 void PSMTextOut(
     HDC hdc,
     int xLeft,
@@ -116,11 +118,13 @@ void PSMTextOut(
     }
     if (cch >= sizeof(achWorkBuffer)/sizeof(WCHAR)) {
         pchOut = (WCHAR*)UserRtlAllocMem(((SIZE_T)cch+1) * sizeof(WCHAR));
+#line 1885
         if (pchOut == NULL)
             return;
     }
 
     __try {
+#line 1889
     result = GetPrefixCount(lpsz, cch, pchOut, cch);
 
     UserTextOutW(hdc, xLeft, yTop, pchOut,
@@ -130,6 +134,7 @@ void PSMTextOut(
      * Any true prefix characters to underline?
      */
     if (LOWORD(result) == 0xFFFF) {
+#line 1900
         return;
     }
 
@@ -181,6 +186,7 @@ void PSMTextOut(
     SetRect(&rc, xLeft, yTop, xLeft+cx, yTop+1);
     color = UserSetBkColor(hdc, UserGetTextColor(hdc));
     restoreColor = TRUE;
+#line 1950
     UserExtTextOutW(hdc, xLeft, yTop, ETO_OPAQUE, &rc, TEXT(""), 0, NULL);
     UserSetBkColor(hdc, color);
     restoreColor = FALSE;
@@ -192,6 +198,7 @@ void PSMTextOut(
             UserRtlFreeMem(pchOut);
         SetLastError(error);
     }
+#line 1956
 }
 #endif
 
@@ -199,6 +206,7 @@ void PSMTextOut(
 #ifdef FE_SB
 #line 23
 #error Excluded unsupported original FE_SB branch
+#line 25
 #endif
 #line 26
 
@@ -206,6 +214,7 @@ void PSMTextOut(
 #ifdef FE_SB
 #line 60
 #error Excluded unsupported original FE_SB branch
+#line 640
 #endif
 #line 641
 
@@ -215,6 +224,7 @@ void PSMTextOut(
 #ifdef FE_SB // GetNextWordbreak()
 #line 678
 #error Excluded unsupported original FE_SB branch
+#line 711
 #endif // FE_SB
 #line 712
 
@@ -230,8 +240,10 @@ void PSMTextOut(
 #ifdef FE_SB // GetNextWordbreak()
 #line 720
 #error Excluded unsupported original FE_SB branch
+#line 720
 #else
 #line 721
+#line 722
 #endif // FE_SB
 #line 723
 
@@ -239,8 +251,10 @@ void PSMTextOut(
 #ifdef FE_SB // DT_GetExtentMinusPrefixes()
 #line 876
 #error Excluded unsupported original FE_SB branch
+#line 881
 #else
 #line 882
+#line 885
 #endif // FE_SB
 #line 886
 
@@ -250,6 +264,7 @@ void PSMTextOut(
 #error Excluded unsupported original FE_SB branch
 #else
 #line 1227
+#line 1228
 #endif // FE_SB
 #line 1229
 
@@ -258,6 +273,7 @@ void PSMTextOut(
 #ifdef LATER
 #line 1623
 #error Excluded unsupported original LATER branch
+#line 1634
 #endif
 #line 1635
 
@@ -265,6 +281,7 @@ void PSMTextOut(
 #ifdef LATER
 #line 1674
 #error Excluded unsupported original LATER branch
+#line 1685
 #endif
 #line 1686
 
@@ -273,6 +290,7 @@ void PSMTextOut(
 #ifdef DEBUG
 #line 1599
 #error Unsupported DEBUG original branch
+#line 1601
 #endif
 #line 1602
 
@@ -282,5 +300,6 @@ void PSMTextOut(
 #error Unsupported _USERK_ original branch
 #else
 #line 1660
+#line 1661
 #endif
 #line 1662

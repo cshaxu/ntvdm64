@@ -1,0 +1,67 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+  "original_sha256": "7491e5b3331de8cb7a2189b8efbe91f56076f80a08338bf816d793e80a4faf76",
+  "current_sha256": "838177ce4be35707885d7ba54653400e23e86e91c840529e69925f279e148351",
+  "snapshot_sha256": "c42964ed702de00fc96322d76922bca0e34bad7ae7b306885ecd5b36de5b7988",
+  "snapshot_commit": "8c3fbd6fa08a",
+  "rebind": "all non-#line source text unchanged",
+  "exact_original_function_ranges": [
+    [
+      1004,
+      1059
+    ],
+    [
+      1067,
+      1128
+    ]
+  ],
+  "branch_evidence": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "snapshot_sha256": "c42964ed702de00fc96322d76922bca0e34bad7ae7b306885ecd5b36de5b7988",
+      "current_sha256": "c42964ed702de00fc96322d76922bca0e34bad7ae7b306885ecd5b36de5b7988",
+      "source_binding": "same",
+      "snapshot_line": "10",
+      "directive": "ifdef",
+      "expression": "WOW_ORIGINAL_BUTTON_DRAWING",
+      "product_status": "hit",
+      "product_contexts": "650",
+      "historical_hit_sources": "unique-structure-historical",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "1",
+      "disposition": "retain-if-rebound"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "snapshot_sha256": "c42964ed702de00fc96322d76922bca0e34bad7ae7b306885ecd5b36de5b7988",
+      "current_sha256": "c42964ed702de00fc96322d76922bca0e34bad7ae7b306885ecd5b36de5b7988",
+      "source_binding": "same",
+      "snapshot_line": "136",
+      "directive": "ifdef",
+      "expression": "WINDOWS_ME",
+      "product_status": "previously-excluded",
+      "product_contexts": "",
+      "historical_hit_sources": "",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "0",
+      "disposition": "existing-error-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "snapshot_sha256": "c42964ed702de00fc96322d76922bca0e34bad7ae7b306885ecd5b36de5b7988",
+      "current_sha256": "c42964ed702de00fc96322d76922bca0e34bad7ae7b306885ecd5b36de5b7988",
+      "source_binding": "same",
+      "snapshot_line": "139",
+      "directive": "else",
+      "expression": "",
+      "product_status": "hit",
+      "product_contexts": "650",
+      "historical_hit_sources": "",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "0",
+      "disposition": "retain-if-rebound"
+    }
+  ],
+  "empty_selected_else": "WINDOWS_ME else shell is from omitted original DrawFrameControl; its hit does not prove that function is imported. Existing target imports USER32 DrawFrameControl, documented in t476-s2-empty-shell-ownership-leads.json.",
+  "limits": "No claim host DrawFrameControl equals original; inherited compilation context reconciliation remains open."
+}

@@ -13,9 +13,11 @@
 
 #ifdef UNICODE
 #error Excluded unsupported Unicode class-client configuration
+#line 19
 #else
 #define IS_ANSI TRUE
 #undef _UNICODE
+#line 22
 #endif
 #line 23
 /* DIVERGENCE(OPENNT-HOST-036): retain the complete ANSI class client
@@ -107,6 +109,7 @@ BOOL InitClsMenuName (PCLSMENUNAME pcmn, LPCTSTR lpszMenuName, PIN_STRING pstrMe
 #ifdef UNICODE
 #line 602
 #error Excluded unsupported Unicode class-client menu-name profile
+#line 609
 #else
 #line 610
         if ((pcmn->pszClientAnsiMenuName = StringDuplicate(lpszMenuName)) == NULL) {
@@ -135,6 +138,7 @@ errorexit: /* Used by COPYLPTSTRID */
      * menu names have been allocated. No class owns them on this path. */
     LocalFree(pcmn->pszClientAnsiMenuName);
     LocalFree(pcmn->pwszClientUnicodeMenuName);
+#line 631
    return FALSE;
 }
 
@@ -144,6 +148,7 @@ errorexit: /* Used by COPYLPTSTRID */
 *
 * 03-22-96 GerardoB      Added Header
 \**************************************************************************/
+#line 701
 ATOM TEXT_FN(RegisterClassExWOW)(
     WNDCLASSEX *lpWndClass,
     LPDWORD pdwWOWstuff,
@@ -343,6 +348,7 @@ BOOL UnregisterClass(
 #ifdef UNICODE
 #line 363
 #error Excluded unsupported original UNICODE branch
+#line 365
 #endif
 #line 366
 
@@ -353,6 +359,7 @@ BOOL UnregisterClass(
 #error Excluded unsupported original UNICODE branch
 #else
 #line 209
+#line 210
 #endif
 #line 211
 
@@ -362,6 +369,7 @@ BOOL UnregisterClass(
 #error Excluded unsupported original UNICODE branch
 #else
 #line 246
+#line 247
 #endif
 #line 248
 
@@ -369,8 +377,10 @@ BOOL UnregisterClass(
 #ifdef UNICODE
 #line 354
 #error Excluded unsupported original UNICODE branch
+#line 356
 #else
 #line 357
+#line 358
 #endif
 #line 359
 
@@ -378,8 +388,10 @@ BOOL UnregisterClass(
 #ifdef UNICODE
 #line 993
 #error Excluded unsupported original UNICODE branch
+#line 995
 #else
 #line 996
+#line 1001
 #endif
 #line 1002
 
@@ -389,6 +401,7 @@ BOOL UnregisterClass(
 #error Excluded unsupported original UNICODE branch
 #else
 #line 1099
+#line 1100
 #endif // UNICODE
 #line 1101
 
@@ -398,6 +411,7 @@ BOOL UnregisterClass(
 #error Excluded unsupported original UNICODE branch
 #else
 #line 1125
+#line 1152
 #endif // UNICODE
 #line 1153
 
@@ -405,8 +419,10 @@ BOOL UnregisterClass(
 #ifdef UNICODE
 #line 1435
 #error Excluded unsupported original UNICODE branch
+#line 1449
 #else
 #line 1450
+#line 1468
 #endif
 #line 1469
 
@@ -415,6 +431,7 @@ BOOL UnregisterClass(
 #ifdef FE_SB // GetMessage()
 #line 294
 #error Unsupported FE_SB original branch
+#line 301
 #endif // FE_SB
 #line 302
 
@@ -422,6 +439,7 @@ BOOL UnregisterClass(
 #ifdef FE_SB // GetMessage()
 #line 341
 #error Unsupported FE_SB original branch
+#line 344
 #endif // FE_SB
 #line 345
 
@@ -432,72 +450,87 @@ BOOL UnregisterClass(
 #ifdef FE_SB // GetMessage()
 #line 316
 #error Excluded unsupported original text-client condition
+#line 325
 #else
 #line 326
+#line 329
 #endif
 #line 330
 #else
 #line 331
 #error Unsupported UNICODE original branch
+#line 338
 #endif // UNICODE
 #line 339
 
 #line 1191
 #ifndef UNICODE
 #line 1192
+#line 1207
 #else
 #line 1208
 #error Unsupported UNICODE original branch
+#line 1213
 #endif
 #line 1214
 
 #line 1317
 #ifndef UNICODE
 #line 1318
+#line 1349
 #else
 #line 1350
 #error Unsupported UNICODE original branch
+#line 1354
 #endif
 #line 1355
 
 #line 38
 #ifndef UNICODE
 #line 39
+#line 64
 #endif
 #line 65
 #line 217
 #ifndef UNICODE
 #line 218
+#line 228
 #endif
 #line 229
 #line 254
 #ifndef UNICODE
 #line 255
+#line 265
 #endif
 #line 266
 #line 271
 #ifndef UNICODE
 #line 272
+#line 274
 #endif
 #line 275
 #line 369
 #ifndef UNICODE
 #line 370
+#line 377
 #endif
 #line 378
 #line 395
 #ifndef UNICODE
 #line 396
+#line 402
 #endif
 #line 403
 #line 414
 #ifndef UNICODE
 #line 415
+#line 417
 #endif
 #line 418
 #line 431
 #ifndef UNICODE
 #line 432
+#line 465
 #endif
 #line 466
 #line 514
@@ -507,8 +540,10 @@ BOOL UnregisterClass(
 #ifdef FE_SB // PostMessage()
 #line 516
 #error Excluded unsupported original text-client condition
+#line 520
 #endif
 #line 521
+#line 523
 #endif
 #line 524
 #line 549
@@ -518,8 +553,10 @@ BOOL UnregisterClass(
 #ifdef FE_SB // PostThreadMessage()
 #line 551
 #error Excluded unsupported original text-client condition
+#line 556
 #endif
 #line 557
+#line 559
 #endif
 #line 560
 #line 934
@@ -529,8 +566,10 @@ BOOL UnregisterClass(
 #ifdef FE_SB // SendMessageCallBack()
 #line 936
 #error Excluded unsupported original text-client condition
+#line 940
 #endif
 #line 941
+#line 943
 #endif
 #line 944
 #line 976
@@ -540,18 +579,22 @@ BOOL UnregisterClass(
 #ifdef FE_SB // SendNotifyMessage()
 #line 978
 #error Excluded unsupported original text-client condition
+#line 982
 #endif
 #line 983
+#line 985
 #endif
 #line 986
 #line 1111
 #ifndef UNICODE
 #line 1112
+#line 1114
 #endif
 #line 1115
 #line 1295
 #ifndef UNICODE
 #line 1296
+#line 1297
 #endif
 #line 1298
 #line 1505
@@ -561,15 +604,19 @@ BOOL UnregisterClass(
 #ifdef FE_SB // CallMsgFilter()
 #line 1508
 #error Excluded unsupported original text-client condition
+#line 1517
 #else
 #line 1518
+#line 1520
 #endif
 #line 1521
 #line 1526
 #ifdef FE_IME // CallMsgFilter()
 #line 1527
 #error Excluded unsupported original text-client condition
+#line 1529
 #endif
 #line 1530
+#line 1534
 #endif
 #line 1535

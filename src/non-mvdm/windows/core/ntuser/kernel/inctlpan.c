@@ -4,6 +4,7 @@
  * factory, caption cache or system-settings behavior is imported. */
 #include "precomp.h"
 
+#line 25
 CONST WORD sysBmpStyles[OBI_COUNT][2] = {
 
     DFC_CAPTION,   DFCS_CAPTIONCLOSE,                               // OBI_CLOSE
@@ -79,11 +80,13 @@ CONST WORD sysBmpStyles[OBI_COUNT][2] = {
 #ifdef LATER
 #line 102
 #error Excluded original unsupported USER control-panel code
+#line 272
 #endif
 #line 273
 
 #line 840
 #ifndef KOREA
 #line 841
+#line 848
 #endif
 #line 849

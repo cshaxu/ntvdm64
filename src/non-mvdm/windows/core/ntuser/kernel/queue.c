@@ -21,6 +21,7 @@
 #ifdef DEBUG
 #line 31
 #error Excluded unsupported original DEBUG DDE tracing
+#line 36
 #else
 #line 37
 #define TraceDdeMsg(m, h1, h2, c)
@@ -31,6 +32,7 @@
 #ifdef DEBUG
 #line 55
 #error Excluded unsupported original DEBUG queue validation
+#line 114
 #else
 #line 115
 #define DebugValidateMLIST(pml)
@@ -278,6 +280,7 @@ NTSTATUS xxxInitTask(
 #ifdef DEBUG
 #line 786
 #error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
+#line 789
 #endif
 #line 790
         }
@@ -353,6 +356,7 @@ void _ShowStartGlass(
     DWORD dwTimeout,
     PPROCESSINFO currentProcess)
 {
+#line 870
     PPROCESSINFO ppi;
 
     /*
@@ -384,6 +388,7 @@ void _ShowStartGlass(
 #if DBG
 #line 44
 #error Excluded unsupported original DBG branch
+#line 49
 #endif
 #line 50
 
@@ -398,6 +403,7 @@ void _ShowStartGlass(
 #ifdef DEBUG
 #line 1481
 #error Excluded unsupported original DEBUG branch
+#line 1489
 #endif
 #line 1490
 
@@ -412,6 +418,7 @@ void _ShowStartGlass(
 #if DBG
 #line 1556
 #error Excluded unsupported original DBG branch
+#line 1558
 #endif
 #line 1559
 
@@ -419,6 +426,7 @@ void _ShowStartGlass(
 #if DBG
 #line 1599
 #error Excluded unsupported original DBG branch
+#line 1608
 #endif
 #line 1609
 
@@ -426,6 +434,7 @@ void _ShowStartGlass(
 #ifdef DEBUG
 #line 1627
 #error Excluded unsupported original DEBUG branch
+#line 1635
 #endif
 #line 1636
 
@@ -433,6 +442,7 @@ void _ShowStartGlass(
 #if DBG
 #line 1785
 #error Excluded unsupported original DBG branch
+#line 1787
 #endif
 #line 1788
 
@@ -447,6 +457,7 @@ void _ShowStartGlass(
 #if DBG
 #line 2283
 #error Excluded unsupported original DBG branch
+#line 2288
 #endif // DBG
 #line 2289
 
@@ -482,6 +493,7 @@ void _ShowStartGlass(
 #ifdef DEBUG
 #line 2650
 #error Excluded unsupported original DEBUG branch
+#line 2657
 #endif
 #line 2658
 
@@ -489,6 +501,7 @@ void _ShowStartGlass(
 #if DBG
 #line 3706
 #error Excluded unsupported original DBG branch
+#line 3727
 #endif
 #line 3728
 
@@ -497,6 +510,7 @@ void _ShowStartGlass(
 #ifdef FE_IME
 #line 993
 #error Unsupported FE_IME original branch
+#line 996
 #endif
 #line 997
 
@@ -504,6 +518,7 @@ void _ShowStartGlass(
 #ifdef FE_IME
 #line 1916
 #error Unsupported FE_IME original branch
+#line 1920
 #endif
 #line 1921
 
@@ -513,6 +528,7 @@ void _ShowStartGlass(
 #error Unsupported FE_IME original branch
 #else
 #line 960
+#line 961
 #endif
 #line 962
 
@@ -522,6 +538,7 @@ void _ShowStartGlass(
 #error Unsupported FE_IME original branch
 #else
 #line 966
+#line 967
 #endif
 #line 968
 
@@ -529,7 +546,9 @@ void _ShowStartGlass(
 #ifdef FE_IME
 #line 1204
 #error Unsupported FE_IME original branch
+#line 1208
 #else
 #line 1209
+#line 1210
 #endif
 #line 1211

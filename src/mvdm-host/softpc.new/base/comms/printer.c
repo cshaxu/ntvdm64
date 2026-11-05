@@ -89,6 +89,7 @@
 #ifdef SYSTEMV
 #line 90
 #error DIVERGENCE MVDM-HOST-DIV-529: SYSTEMV platform branch is not selected; see mirror register.
+#line 93
 #endif
 #line 94
 
@@ -214,11 +215,13 @@ sys_addr lp16BitPrtBusy;
  *	should be OK.
  */
 
+#line 212
 #ifdef PS_FLUSHING
 #line 213
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
+#line 215
 #endif	/* PS_FLUSHING */
-#line 213
+#line 216
 
 
 /*
@@ -259,6 +262,7 @@ static sys_addr state_addr;
 #else /* NTVDM && MONITOR */
 #line 253
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
+#line 263
 #endif /* NTVDM && MONITOR */
 #line 264
 
@@ -299,6 +303,7 @@ static void lpr_state_out_event IFN1(long,adapter)
 #else	/* NTVDM && MONITOR */
 #line 300
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
+#line 313
 #endif	/* NTVDM && MONITOR */
 #line 314
 
@@ -360,6 +365,7 @@ static void printer_inb IFN2(io_addr,port, half_word *,value)
 #else
 #line 369
 #error Unsupported excluded delayed printer interrupt configuration
+#line 371
 #endif /* DELAYED INTS */
 #line 372
 			break;
@@ -373,6 +379,7 @@ static void printer_inb IFN2(io_addr,port, half_word *,value)
 #else
 #line 380
 #error Unsupported excluded delayed printer interrupt configuration
+#line 382
 #endif
 #line 383
 			break;
@@ -403,6 +410,7 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 #ifdef PC_CONFIG
 #line 409
 #error DIVERGENCE MVDM-HOST-DIV-531: PC_CONFIG branch is not selected; see mirror register.
+#line 415
 #endif
 #line 416
 
@@ -491,6 +499,7 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 #ifdef PC_CONFIG
 #line 494
 #error DIVERGENCE MVDM-HOST-DIV-531: PC_CONFIG branch is not selected; see mirror register.
+#line 498
 #else
 #line 499
 				/* this was a call to host_print_doc - <chrisP 28Aug91> */
@@ -517,9 +526,11 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 #endif
 #line 488
 
+#line 521
 #ifdef PS_FLUSHING
 #line 522
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
+#line 530
 #endif	/* PS_FLUSHING */
 #line 531
 				       /*
@@ -587,9 +598,11 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 #endif
 #line 548
 
+#line 588
 #ifndef	PROD
 #line 589
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 592
 #endif
 #line 593
 			break;
@@ -659,9 +672,11 @@ static void notbusy_check IFN1(int,adapter)
 #endif /* NTVDM && !MONITOR */
 #line 614
 
+#line 656
 #ifndef	PROD
 #line 657
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 659
 #endif
 #line 660
 
@@ -745,7 +760,9 @@ void printer_setup_table(sys_addr table_addr)
 #else /* ANSI */
 #line 735
 #error Excluded unsupported non-ANSI printer configuration
+#line 737
 #endif /* ANSI */
+#line 738
 {
     int i;
     sys_addr lp16BufSize;
@@ -790,12 +807,15 @@ void printer_setup_table(sys_addr table_addr)
 	intel_setup = TRUE;
     }
 }
+#line 782
 #endif /* NTVDM && MONITOR */
-#line 741
+#line 783
 
+#line 784
 #endif 
-#line 743
+#line 785
 
+#line 786
 #ifdef NTVDM
 #line 787
 void printer_is_being_closed(int adapter)
@@ -806,9 +826,12 @@ void printer_is_being_closed(int adapter)
 #else
 #line 793
 #error Excluded unsupported non-MONITOR printer configuration
+#line 795
 #endif
+#line 796
 }
 
+#line 798
 #endif
 
 
@@ -816,5 +839,6 @@ void printer_is_being_closed(int adapter)
 #ifdef PS_FLUSHING
 #line 802
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
+#line 836
 #endif	/* PS_FLUSHING */
 #line 837

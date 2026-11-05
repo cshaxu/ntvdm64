@@ -1,0 +1,43 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\usercli.h",
+  "before_sha256": "b0c53f809f5da0001c6b92f25f3a300bea61010dcd970200903f324543835ae7",
+  "after_sha256": "a17cd0dc611cd312d93f0155dc1b9f23db0dcc984ad53c7f03d47e78c6c5682f",
+  "baseline_sha256": "11edc7c5b3f32ce40114bd0c4026e43381f2b131f036506376e23c8eb1db5bba",
+  "compiler_samples_unique_line_anchors": 226,
+  "inserted_line_anchors": {
+    "1": 15,
+    "1179": 2303,
+    "1221": 2671,
+    "80": 305,
+    "207": 621,
+    "395": 808,
+    "411": 1177,
+    "413": 1465,
+    "415": 1178,
+    "568": 449,
+    "646": 858,
+    "764": 1021,
+    "788": 1482,
+    "790": 1488,
+    "801": 2158,
+    "806": 2168,
+    "827": 2167,
+    "851": 1958,
+    "1040": 499,
+    "1045": 1042,
+    "1061": 2233
+  },
+  "matching_method": "Unique exact physical text match to original and existing actual compiler line samples; anchors grouped by equal physical offset. Conditional closure anchors manually compared to original. No source text changed.",
+  "branch_evidence": "S1 product 21 hit, 16 excluded, 2 unhit; original 28 conditional arms matched, no unmatched or ancestry conflicts in existing inventory. The prior product-only evidence is incomplete for formal fixtures; combo layout is retained because actual x86 WOW fixture hit is documented in t476-s2-batch16-context-repair.json.",
+  "limits": "Sample-based anchors are not proof of every retained line or every supported context. Original compiler samples are from before these changes. Existing conditional arm line anchors were not exhaustively revalidated; no build or compiler invocation performed. RIP_COMPONENT exclusion lacks independently completed all-context proof.",
+  "status": "partial audit; not closure-ready",
+  "additional_unique_original_anchors": {
+    "xxxRemoveDefaultButton": 2163,
+    "DlgSetFocus": 2166
+  },
+  "static_unique_line_review": "Read-only lexical scan of unique, exact original text lines with length > 16 found three further logical-line mismatches; corrected with two anchors. This is a linear projection, not per-context preprocessing; unmatched/non-unique and inactive-condition lines remain unproven.",
+  "original_condition_review": "Existing 28 matched original arms checked against current directive positions and adjacent line anchors; no unmatched or ancestry conflicts. Six else arms enter from error-excluded previous arm and have correct subsequent #line; do not insert #line into excluded previous body. FE_SB final group ends at original 2671, fixed.",
+  "unique_line_static_review_count": 362,
+  "unique_line_static_review_mismatches": []
+}

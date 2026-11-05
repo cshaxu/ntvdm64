@@ -52,6 +52,7 @@
 #ifdef SEGMENTATION
 #line 51
 #error Excluded unsupported SEGMENTATION configuration
+#line 57
 #endif
 #line 58
 
@@ -105,6 +106,7 @@ extern void mvdm_keyboard_reset_pending_irq(void); /* DIVERGENCE(MVDM-HOST-DIV-3
 ** See comments in kbd_inb() below for more details.
 */
 
+#line 100
 #ifndef	KBD_CONT_DELAY
 #line 101
 #define	KBD_CONT_DELAY	7000		/* microseconds */
@@ -210,6 +212,7 @@ ULONG LastKbdInt=0;
 #ifdef REAL_KBD
 #line 189
 #error DIVERGENCE MVDM-HOST-DIV-535: REAL_KBD branch is not selected; see mirror register.
+#line 191
 #endif
 #line 192
 
@@ -272,6 +275,7 @@ GLOBAL VOID ( *host_key_up_fn_ptr )();
 #else
 #line 248
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 251
 #endif	/* NTVDM */
 #line 252
 
@@ -294,6 +298,7 @@ void Reset6805and8042(void);
 #if defined(IRET_HOOKS) && defined(GISP_CPU)
 #line 268
 #error Excluded unsupported GISP_CPU configuration
+#line 272
 #endif /* IRET_HOOKS && GISP_CPU */
 #line 273
 
@@ -336,6 +341,7 @@ static int key_down_count [127];
 #else	/* macintosh */
 #line 311
 #error DIVERGENCE MVDM-HOST-DIV-521: macintosh alternative is not selected; see mirror register.
+#line 324
 #endif	/* macintosh */
 #line 325
 
@@ -357,6 +363,7 @@ int waiting_for_next_code, waiting_for_next_8042_code, num_lock_on;
 #else
 #line 342
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 345
 #endif	/* NTVDM */
 #line 346
 int shift_on, l_shift_on, r_shift_on;
@@ -390,6 +397,7 @@ half_word current_light_pattern;
 #ifdef macintosh
 #line 371
 #error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
+#line 384
 #else
 
 #line 386
@@ -519,6 +527,7 @@ static half_word trans_8042 [256] =
 #else
 #line 503
 #error Non-NTVDM keyboard table profile is not supported
+#line 505
 #endif
 #line 506
   0x52,0x53,0x50,0x4c,0x4d,0x48,0x01,0x45,0x57,0x4e,0x51,0x4a,0x37,0x49,0x46,0x54,		/* 70-7f */
@@ -753,6 +762,7 @@ static half_word buff_overrun_6805 [4]=
 #ifdef SECURE /* { */
 #line 705
 #error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register.
+#line 786
 #endif /* SECURE } */
 #line 787
 
@@ -770,6 +780,7 @@ LOCAL INT buffer_status_8042 IPT0();
 #ifdef SECURE /* { */
 #line 800
 #error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register.
+#line 904
 #endif /* SECURE } */
 #line 905
 
@@ -878,6 +889,7 @@ LOCAL VOID clear_buff_6805 IFN0()
 #ifdef macintosh
 #line 998
 #error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
+#line 1001
 #endif /* macintosh */
 #line 1002
 
@@ -1238,6 +1250,7 @@ GLOBAL VOID host_key_down IFN1(int,key)
 #ifdef SECURE /* { */
 #line 1333
 #error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register.
+#line 1351
 #endif /* SECURE } */
 #line 1352
 {
@@ -1273,6 +1286,7 @@ else if (!keyboard_disabled) {
 #else
 #line 1379
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 1383
 #endif
 #line 1384
 }
@@ -1281,6 +1295,7 @@ GLOBAL VOID host_key_up IFN1(int,key)
 #ifdef SECURE /* { */
 #line 1388
 #error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register.
+#line 1406
 #endif /* SECURE } */
 #line 1407
 {
@@ -1305,6 +1320,7 @@ else if (!keyboard_disabled && key_down_count[key]) {
 #else
 #line 1423
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 1425
 #endif
 #line 1426
 #ifdef NTVDM
@@ -1349,6 +1365,7 @@ if (!keyboard_disabled)
 #else
 #line 1466
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 1473
 #endif	/* NTVDM */
 #line 1474
 		keytype=keytypes[key];
@@ -1541,6 +1558,7 @@ if (!keyboard_disabled)
 #ifndef NTVDM	/* JonLe NTVDM Mod */
 #line 1662
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 1671
 #else
 #line 1672
 		mark_key_codes_6805_buff(FALSE);
@@ -1594,6 +1612,7 @@ if (!keyboard_disabled)
 #ifndef NTVDM 	/* JonLe NTVDM Mod */
 #line 1714
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 1718
 #endif	/* NTVDM */
 #line 1719
 
@@ -1835,6 +1854,7 @@ if (waiting_for_next_code)
 #else
 #line 1950
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 1953
 #endif
 #line 1954
 			}
@@ -1843,6 +1863,7 @@ if (waiting_for_next_code)
 #ifndef NTVDM	/* JonLe Mod */
 #line 1958
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 1971
 #else	/* NTVDM */
 
 #line 1973
@@ -1883,6 +1904,7 @@ if (waiting_for_next_code)
 #ifndef NTVDM 	/* JonLe NTVDM Mod */
 #line 2007
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 2010
 #endif	/* NTVDM */
 #line 2011
 
@@ -1973,6 +1995,7 @@ if (waiting_for_next_code)
 #ifndef NTVDM 	/* JonLe NTVDM Mod */
 #line 2093
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 2096
 #endif	/* NTVDM */
 #line 2097
 		keyboard_disabled=FALSE;
@@ -2025,6 +2048,7 @@ if (waiting_for_next_code)
 #else
 #line 2140
 #error DIVERGENCE MVDM-HOST-DIV-535: REAL_KBD branch is not selected; see mirror register.
+#line 2143
 #endif
 #line 2144
 	} /* end of switch */
@@ -2069,6 +2093,7 @@ if (scanning_discontinued && !waiting_for_next_code)
 #ifndef NTVDM
 #line 2174
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 2178
 #endif
 #line 2179
 
@@ -2212,6 +2237,7 @@ LOCAL VOID do_q_int(char scancode)
 #else   /* NTVDM */
 #line 2288
 #error Excluded unsupported non-NTVDM alternative
+#line 2360
 #endif	/* NTVDM */
 #line 2361
 
@@ -2448,6 +2474,7 @@ if (!waiting_for_next_8042_code)
 				 */
 #line 2569
 				cpu_interrupt(CPU_HW_RESET, 0);
+#line 2571
 #endif /* CPU_30_STYLE */
 #line 2572
 #endif
@@ -2488,9 +2515,11 @@ if (code_to_send_valid)
          * without generating an IRQ or entering the scan-code queue. */
         output_contents = (char)code_to_send;
         kbd_status |= 1;
+#line 2602
 #else /* NTVDM else */
 #line 2603
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 2610
 #endif /* end of NTVDM else */
 #line 2611
 	}
@@ -2558,6 +2587,7 @@ return (code);
 #ifdef HUNTER
 #line 2669
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
+#line 2707
 #endif /* HUNTER */
 #line 2708
 
@@ -2665,6 +2695,7 @@ GLOBAL VOID KbdResume(VOID)
 #ifndef NTVDM
 #line 2800
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 2817
 #endif
 #line 2818
 
@@ -2727,6 +2758,7 @@ GLOBAL VOID kbd_inb IFN2(io_addr,port,half_word *,val)
 #else	/* not NTVDM */
 #line 2866
 #error Excluded unsupported non-NTVDM alternative
+#line 2931
 #endif	/* NTVDM */
 #line 2932
 
@@ -2769,6 +2801,7 @@ GLOBAL VOID kbd_outb IFN2(io_addr,port,half_word,val)
 #ifndef NTVDM	/* JonLe NTVDM Mod */
 #line 2970
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 2974
 #else   /* NTVDM */
 
 #line 2976
@@ -2787,12 +2820,14 @@ GLOBAL VOID kbd_outb IFN2(io_addr,port,half_word,val)
 #ifndef NTVDM
 #line 2988
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 3034
 #endif /* ! NTVDM */
 #line 3035
 
 #ifdef SEGMENTATION
 #line 3037
 #error Excluded unsupported SEGMENTATION configuration
+#line 3043
 #endif
 #line 3044
 
@@ -2803,6 +2838,7 @@ GLOBAL VOID AT_kbd_post IFN0()
 #ifndef NTVDM
 #line 3050
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 3052
 #endif
 #line 3053
 }
@@ -2810,12 +2846,14 @@ GLOBAL VOID AT_kbd_post IFN0()
 #if defined(IRET_HOOKS) && defined(GISP_CPU)
 #line 3056
 #error Excluded unsupported GISP_CPU configuration
+#line 3095
 #endif /* IRET_HOOKS && GISP_CPU */
 #line 3096
 
 #ifndef NTVDM
 #line 3098
 #error DIVERGENCE MVDM-HOST-DIV-591: non-NTVDM branch is not selected
+#line 3202
 #else	/* NTVDM */
 #line 3203
 

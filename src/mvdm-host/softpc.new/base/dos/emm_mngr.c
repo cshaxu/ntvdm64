@@ -66,6 +66,7 @@ AMMENDMENTS	:
 #ifdef SEGMENTATION
 #line 67
 #error Excluded unsupported SEGMENTATION configuration
+#line 73
 #endif
 #line 74
 
@@ -78,6 +79,7 @@ AMMENDMENTS	:
  * The standard declaration preserves its native pointer result. */
 #include <stdlib.h>
 
+#line 80
 #if defined(NTVDM) && defined(MONITOR)
 #line 81
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
@@ -201,6 +203,7 @@ boolean lim_page_frame_init(PLIM_CONFIG_DATA lim_config_data)
 #else
 #line 196
 #error Non-NTVDM BIOS or EMS provider is not supported
+#line 232
 #endif
 #line 233
 
@@ -254,6 +257,7 @@ GLOBAL int init_expanded_memory IFN2(int, size, 	/* size of area in megabytes */
 #ifdef	macintosh
 #line 282
 #error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
+#line 286
 #endif	/* macintosh */
 #line 287
 
@@ -262,9 +266,12 @@ GLOBAL int init_expanded_memory IFN2(int, size, 	/* size of area in megabytes */
 #ifndef NTVDM
 #line 291
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 293
 #else
+#line 294
 	EM_start = physical_page[0];
 	EM_end =  physical_page[0] + EMM_PAGE_SIZE * 4;
+#line 296
 #endif
 #line 297
 	total_pages = unallocated_pages = size * 0x100000 / EMM_PAGE_SIZE;
@@ -294,6 +301,7 @@ GLOBAL int init_expanded_memory IFN2(int, size, 	/* size of area in megabytes */
 #else
 #line 322
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 362
 #endif	/* NTVDM */
 #line 363
 
@@ -320,6 +328,7 @@ GLOBAL int init_expanded_memory IFN2(int, size, 	/* size of area in megabytes */
 #else
 #line 385
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 387
 #endif
 #line 388
 
@@ -909,6 +918,7 @@ GLOBAL int free_page IFN1(short, EM_page_no)
 #ifndef NTVDM
 #line 971
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 1072
 #endif	/* !NTVDM */
 #line 1073
 
@@ -963,6 +973,7 @@ GLOBAL int map_page IFN2(short, EM_page_no,
 #ifndef NTVDM
 #line 1123
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 1150
 #endif
 #line 1151
 
@@ -970,6 +981,7 @@ GLOBAL int map_page IFN2(short, EM_page_no,
 #ifndef NTVDM
 #line 1154
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 1190
 #endif
 #line 1191
 	if(host_map_page(EM_page_no, segment) != SUCCESS)
@@ -1026,6 +1038,7 @@ GLOBAL int unmap_page IFN1(unsigned char, physical_page_no)
 #ifndef NTVDM
 #line 1243
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 1248
 #endif
 #line 1249
 
@@ -1197,6 +1210,7 @@ GLOBAL int restore_map (short handle_no,
 #else
 #line 1414
 #error Excluded unsupported non-ANSI or LARGE_FRAME host profile
+#line 1420
 #endif	/* ANSI */
 #line 1421
 {
@@ -1456,6 +1470,7 @@ DESCRIPTION	:
 #ifdef SEGMENTATION
 #line 1670
 #error Excluded unsupported SEGMENTATION configuration
+#line 1676
 #endif
 #line 1677
 
@@ -1467,6 +1482,7 @@ GLOBAL short get_total_pages IFN0()
 #ifdef SEGMENTATION
 #line 1684
 #error Excluded unsupported SEGMENTATION configuration
+#line 1690
 #endif
 #line 1691
 
@@ -1517,8 +1533,11 @@ GLOBAL short get_segment_page_no(unsigned short segment)
 #if defined(LARGE_FRAME) && !defined(MONITOR)
 #line 1735
 #error Excluded unsupported non-ANSI or LARGE_FRAME host profile
+#line 1740
 #else
+#line 1741
 	return((segment - physical_page[0]) / EMM_PAGE_SIZE);
+#line 1742
 #endif
 #line 1743
 
@@ -1543,6 +1562,7 @@ GLOBAL boolean altreg_set_ok(unsigned short set)
 #if defined (NTVDM) && defined(MONITOR) && !defined(PROD)
 #line 1763
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
+#line 1776
 #endif
 #line 1777
 
@@ -1652,7 +1672,12 @@ GLOBAL boolean activate_altreg_set(unsigned short set, short * page_in)
 #endif	/* NTVDM */
 #line 1665
 
-#if !defined(NTVDM) || defined(MVDM_SOFTPC_RECOVER_LIM_WRITEBACK)
+#line 1883
+#ifndef NTVDM
+#line 1884
+#error Excluded unsupported non-NTVDM LIM writeback profile
+#elif defined(MVDM_SOFTPC_RECOVER_LIM_WRITEBACK)
+#line 1884
 
 /*
 ========================================================================
@@ -1675,7 +1700,7 @@ DESCRIPTION	:
 ========================================================================
 */
 
-#line 1908
+#line 1906
 LOCAL VOID
 patch_one_page_partial IFN4( sys_addr, intel_addr, sys_addr, eff_addr,
 			MM_LIM_op_type, type, ULONG, data )
@@ -1844,13 +1869,16 @@ LIM_str_write IFN2( sys_addr, intel_addr, ULONG, length )
 
 	sas_overwrite_memory( intel_addr, length );
 }
+#line 2073
 #endif	/* !NTVDM || MVDM_SOFTPC_RECOVER_LIM_WRITEBACK */
-#line 1857
+#line 2074
 
+#line 2075
 #ifndef PROD
 #line 2076
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 2128
 #endif	/* !PROD	*/
 #line 2129
 #endif 	/* LIM		*/
-#line 1862
+#line 2130

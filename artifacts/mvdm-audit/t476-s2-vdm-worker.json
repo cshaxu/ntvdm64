@@ -1,0 +1,27 @@
+{
+  "path": "src\\non-mvdm\\base\\win32\\client\\vdm.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\win32\\client\\vdm.c",
+  "original_sha256": "3f03d0dbb08e0163f2d9cf415daad0981e42e1b1855f6f48a3b59022b7374173",
+  "current_sha256": "5622f66074cb994abdd5d85d0884b837fc17a24d182f00907e6df07db8c7d23f",
+  "evidence": "artifacts/mvdm-audit/t476-s2-merged-branch-evidence.csv",
+  "branch_summary": "Merged evidence lists 11 hit and 2 already excluded arms. Original conditional triage has no unmatched branches, but OLD_CFG_BASED is relocated to the end of the subset; it is top-level in the original and current but placement differs.",
+  "corrections": {
+    "68": 3179,
+    "85": 3272,
+    "88": 3275,
+    "2557": 180,
+    "2592": 223,
+    "2596": 284,
+    "2598": 292,
+    "2604": 301,
+    "2892": 2271
+  },
+  "limitations": [
+    "Runtime compilation contexts can skip #line directives, so a linear source walk cannot prove preprocessed diagnostic mappings across contexts; final compiler diagnostic verification remains required.",
+    "Compressed environment routines contain selected statements on the same physical line and local divergence; they cannot all be assigned separate original line numbers without reformatting or changing retained code.",
+    "No compiler, test, publication, or commit was run."
+  ],
+  "status": "static-audit-done-compiler-verification-pending",
+  "selected_function_audit": "Function-scoped SequenceMatcher normalized exact-line matches: 15 functions inspected; ten other functions have 100% matching lines already mapped, five reordered/compressed functions now have anchors for each matching retained line. Project-added or reformatted lines lack a unique original mapping and must not be claimed as proven.",
+  "added_line_anchors": 30
+}

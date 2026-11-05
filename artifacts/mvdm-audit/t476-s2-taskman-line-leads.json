@@ -1,0 +1,335 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/taskman.c",
+  "original_sha256": "e37f4d724650d5758ee05c54e181771aa584aead15f5a1376b322ecb7016e64e",
+  "current_sha256": "ea93a97ab34276e744476a6f6218483ebec88a50c14eed6d1d7f7667a6ef6496",
+  "original_function_order": [
+    "WakeWowTask",
+    "InsertTask",
+    "DestroyTask",
+    "xxxSleepTask",
+    "xxxUserYield",
+    "DirectedScheduleTask",
+    "xxxDirectedYield",
+    "CurrentTaskLock"
+  ],
+  "current_function_order": [
+    "WakeWowTask",
+    "DirectedScheduleTask",
+    "CurrentTaskLock",
+    "DestroyTask",
+    "xxxSleepTask",
+    "xxxUserYield",
+    "xxxDirectedYield",
+    "InsertTask"
+  ],
+  "unique_line_candidates": [
+    {
+      "physical": 144,
+      "original_line": 738,
+      "logical_line": 678,
+      "text": "return ~(DWORD)pwpi->ptiScheduled->ptdb;"
+    },
+    {
+      "physical": 145,
+      "original_line": 739,
+      "logical_line": 679,
+      "text": "} else if ((~hlck) == (DWORD)pwpi->ptiScheduled->ptdb) {"
+    },
+    {
+      "physical": 162,
+      "original_line": 133,
+      "logical_line": 696,
+      "text": "PTDB ptdbToRemove = ptiToRemove->ptdb;"
+    },
+    {
+      "physical": 175,
+      "original_line": 146,
+      "logical_line": 709,
+      "text": "PWOWTHREADINFO *ppwti = &gpwtiFirst;"
+    },
+    {
+      "physical": 176,
+      "original_line": 147,
+      "logical_line": 710,
+      "text": "while (*ppwti != ptdbToRemove->pwti && (*ppwti)->pwtiNext != NULL) {"
+    },
+    {
+      "physical": 179,
+      "original_line": 150,
+      "logical_line": 713,
+      "text": "if (*ppwti == ptdbToRemove->pwti) {"
+    },
+    {
+      "physical": 182,
+      "original_line": 153,
+      "logical_line": 716,
+      "text": "CLOSE_PSEUDO_EVENT(&ptdbToRemove->pwti->pIdleEvent);"
+    },
+    {
+      "physical": 183,
+      "original_line": 154,
+      "logical_line": 717,
+      "text": "UserFreePool(ptdbToRemove->pwti);"
+    },
+    {
+      "physical": 186,
+      "original_line": 157,
+      "logical_line": 720,
+      "text": "gpsi->nEvents -= ptdbToRemove->nEvents;"
+    },
+    {
+      "physical": 211,
+      "original_line": 182,
+      "logical_line": 745,
+      "text": "if (pwpi->ptiScheduled == ptiToRemove) {"
+    },
+    {
+      "physical": 213,
+      "original_line": 184,
+      "logical_line": 747,
+      "text": "ExitWowCritSect(ptiToRemove, pwpi);"
+    },
+    {
+      "physical": 230,
+      "original_line": 201,
+      "logical_line": 764,
+      "text": "KeSetEvent(ptdb->pti->pEventQueueServer,"
+    },
+    {
+      "physical": 241,
+      "original_line": 212,
+      "logical_line": 775,
+      "text": "UserAssert(ptiToRemove != pwpi->CSOwningThread);"
+    },
+    {
+      "physical": 284,
+      "original_line": 270,
+      "logical_line": 818,
+      "text": "if (psms && psms->ptiReceiver == pti &&"
+    },
+    {
+      "physical": 285,
+      "original_line": 271,
+      "logical_line": 819,
+      "text": "psms->ptiSender && !(psms->flags & SMF_REPLY) &&"
+    },
+    {
+      "physical": 286,
+      "original_line": 272,
+      "logical_line": 820,
+      "text": "psms->flags & (SMF_RECEIVERBUSY | SMF_RECEIVEDMESSAGE) &&"
+    },
+    {
+      "physical": 287,
+      "original_line": 273,
+      "logical_line": 821,
+      "text": "psms->ptiSender->TIF_flags & TIF_16BIT &&"
+    },
+    {
+      "physical": 288,
+      "original_line": 274,
+      "logical_line": 822,
+      "text": "(pwpi != psms->ptiSender->ppi->pwpi || !(pti->TIF_flags & TIF_16BIT)) ) {"
+    },
+    {
+      "physical": 289,
+      "original_line": 275,
+      "logical_line": 823,
+      "text": "DirectedScheduleTask(psms->ptiReceiver, psms->ptiSender, FALSE, psms);"
+    },
+    {
+      "physical": 304,
+      "original_line": 290,
+      "logical_line": 838,
+      "text": "if (pti == pwpi->ptiScheduled) {"
+    },
+    {
+      "physical": 310,
+      "original_line": 296,
+      "logical_line": 844,
+      "text": "UserAssert(pti != pwpi->CSOwningThread);"
+    },
+    {
+      "physical": 321,
+      "original_line": 307,
+      "logical_line": 855,
+      "text": "pti->pcti->fsWakeMask = QS_ALLINPUT | QS_EVENT;"
+    },
+    {
+      "physical": 322,
+      "original_line": 308,
+      "logical_line": 856,
+      "text": "if (pti->pcti->fsChangeBits & pti->pcti->fsWakeMask) {"
+    },
+    {
+      "physical": 339,
+      "original_line": 325,
+      "logical_line": 873,
+      "text": "if (pwpi->ptiScheduled == NULL) {"
+    },
+    {
+      "physical": 341,
+      "original_line": 327,
+      "logical_line": 875,
+      "text": "if (pwpi->nRecvLock >= pwpi->nSendLock) {"
+    },
+    {
+      "physical": 345,
+      "original_line": 330,
+      "logical_line": 879,
+      "text": "!(hEvent == HEVENT_REMOVEME && ptdb->pti == pti)) {"
+    },
+    {
+      "physical": 346,
+      "original_line": 331,
+      "logical_line": 880,
+      "text": "pwpi->ptiScheduled = ptdb->pti;"
+    },
+    {
+      "physical": 356,
+      "original_line": 341,
+      "logical_line": 890,
+      "text": "if (pwpi->ptiScheduled == pti) {"
+    },
+    {
+      "physical": 370,
+      "original_line": 353,
+      "logical_line": 904,
+      "text": "IsHooked(pti, WHF_FOREGROUNDIDLE)) {"
+    },
+    {
+      "physical": 378,
+      "original_line": 361,
+      "logical_line": 912,
+      "text": "xxxCallHook(HC_ACTION, 0, 0, WH_FOREGROUNDIDLE);"
+    },
+    {
+      "physical": 399,
+      "original_line": 382,
+      "logical_line": 933,
+      "text": "if (pwpi->ptiScheduled != NULL) {"
+    },
+    {
+      "physical": 409,
+      "original_line": 392,
+      "logical_line": 943,
+      "text": "} else if (ppi->W32PF_Flags & W32PF_WAKEWOWEXEC) {"
+    },
+    {
+      "physical": 422,
+      "original_line": 403,
+      "logical_line": 956,
+      "text": "} else if ((pti->TIF_flags & TIF_SHAREDWOW) && !bWaitedAtLeastOnce) {"
+    },
+    {
+      "physical": 432,
+      "original_line": 413,
+      "logical_line": 966,
+      "text": "} else if (pwpi->nTaskLock > 0 && pwpi->ptiScheduled == pti"
+    },
+    {
+      "physical": 444,
+      "original_line": 424,
+      "logical_line": 978,
+      "text": "} else if (hEvent == HEVENT_REMOVEME) {"
+    },
+    {
+      "physical": 446,
+      "original_line": 426,
+      "logical_line": 980,
+      "text": "KeClearEvent(pti->pEventQueueServer);"
+    },
+    {
+      "physical": 451,
+      "original_line": 431,
+      "logical_line": 985,
+      "text": "pti->apEvent = ExAllocatePoolWithTag(NonPagedPool,"
+    },
+    {
+      "physical": 452,
+      "original_line": 432,
+      "logical_line": 986,
+      "text": "POLL_EVENT_CNT * sizeof(PKEVENT), TAG_THREADINFO);"
+    },
+    {
+      "physical": 460,
+      "original_line": 440,
+      "logical_line": 994,
+      "text": "pti->apEvent[IEV_TASK] = pti->pEventQueueServer;"
+    },
+    {
+      "physical": 466,
+      "original_line": 446,
+      "logical_line": 1000,
+      "text": "pti->apEvent[IEV_WOWEXEC] = pwpi->pEventWowExec;"
+    },
+    {
+      "physical": 475,
+      "original_line": 455,
+      "logical_line": 1009,
+      "text": "Status = KeWaitForMultipleObjects(nHandles,"
+    },
+    {
+      "physical": 492,
+      "original_line": 472,
+      "logical_line": 1026,
+      "text": "ppi->W32PF_Flags |= W32PF_WAKEWOWEXEC;"
+    },
+    {
+      "physical": 493,
+      "original_line": 473,
+      "logical_line": 1027,
+      "text": "} else if (Status == STATUS_USER_APC) {"
+    },
+    {
+      "physical": 499,
+      "original_line": 479,
+      "logical_line": 1033,
+      "text": "UserAssert(PsIsThreadTerminating(PsGetCurrentThread()));"
+    },
+    {
+      "physical": 515,
+      "original_line": 493,
+      "logical_line": 1049,
+      "text": "UserAssert(gpsi->nEvents >= 0);"
+    },
+    {
+      "physical": 554,
+      "original_line": 530,
+      "logical_line": 684,
+      "text": "if (pti->TIF_flags & TIF_16BIT) {"
+    },
+    {
+      "physical": 555,
+      "original_line": 531,
+      "logical_line": 685,
+      "text": "if (pti == ppi->pwpi->ptiScheduled) {"
+    },
+    {
+      "physical": 568,
+      "original_line": 544,
+      "logical_line": 698,
+      "text": "if ((pti->TIF_flags & TIF_16BIT) && (pti->ptdb != NULL)) {"
+    },
+    {
+      "physical": 658,
+      "original_line": 74,
+      "logical_line": 737,
+      "text": "nPriority = ptdbNew->nPriority;"
+    },
+    {
+      "physical": 686,
+      "original_line": 102,
+      "logical_line": 765,
+      "text": "if (ptdb->ptdbNext == ptdbNew) {"
+    },
+    {
+      "physical": 687,
+      "original_line": 103,
+      "logical_line": 766,
+      "text": "ptdb->ptdbNext = ptdbNew->ptdbNext;"
+    }
+  ],
+  "status": "unresolved; function-specific matching required, not certified; automatic full-file sequence matching misses moved functions",
+  "limitations": "unique lines provide leads only, not independently proven semantic origin"
+}

@@ -1,4 +1,4 @@
-# Proposal — multitasking guest VDM frontends and VxD bridge
+# Proposal — guest Windows 386/VxD driver and NTVDM bridge
 
 ## Status and owner request
 
@@ -9,6 +9,15 @@ unnumbered and is not an active task; it does not change the active packet or
 authorize production implementation. A numeric T and bounded S packets are
 assigned only when the project is admitted under the then-current execution
 and source policies.
+
+The owner split the former candidate into a preceding [host common frontend
+foundation](proposal-host-common-frontend-foundation-001.md) and this guest
+driver/NTVDM connection candidate. This candidate builds on that host
+foundation; it does not absorb the preceding NTCON, NTSRV or NTMON work.
+Reusable worker-side I/O connection hosting belongs to `worker-base`; NTVDM
+owns the guest VM identity, driver connection and guest-specific adaptation.
+The initial consumer is NTVDM; future NTVWM adoption is possible but is not
+part of this candidate.
 
 The owner-directed candidate designs are the [host frontend and task-chain
 model](../../artifacts/multitask-compressed-io-model-zh.md) and the
@@ -37,14 +46,24 @@ environment retains control of its VMM, windows, focus and drawing. Nested
 multitasking payloads have separate worker/VMM scopes and their own VDM
 frontends; internal chains do not directly take over the outer NTCON.
 
+During a guest multitasking phase the payload remains the active task of its
+own upstream chain and its worker retains the I/O connection to that chain's
+frontend. That frontend can be NTCON or a VM frontend hosted by another
+worker, allowing nested payloads. The containing payload continues executing
+when a guest VM starts `cmdExec32`; it must not be paused or yield its upstream
+frontend for the new downstream task. An individual calling DOS VM may wait
+for its own child through a validated VMM mechanism while other VMs and the
+containing payload continue. Each VM's downstream chain uses its own frontend
+connection and cannot directly take over an ancestor's frontend.
+
 ## Required scope
 
-1. Audit the then-current NTSRV frontend identity, authentication and
-   capability model, task/worker associations, handoff protocol, NTCON,
-   NTVDM and NTVWM Console contracts. Specify and implement the smallest
-   justified extensions for concurrent VDM frontend branches and nested
-   task chains. Retain the existing single-task, GUI and redirection behavior;
-   do not assume byte pipes reproduce a native Console.
+1. Audit and consume the preceding host foundation's frontend identity,
+   authentication, VM registry, NTSRV task-chain association and handoff,
+   NTMON visibility and NTCON/NTVDM/NTVWM Console contracts. Connect the
+   guest driver and NTVDM bridge to these contracts, including concurrent
+   VDM branches and nested task chains. Retain existing single-task, GUI and
+   redirection behavior; do not assume byte pipes reproduce a native Console.
 2. Design and implement the project-owned guest VxD bridge with appropriate
    Win3.1 enhanced-mode and Win95 loading, registration, capabilities,
    failure and teardown. In the exact context of each guest call, obtain the
@@ -64,7 +83,9 @@ frontends; internal chains do not directly take over the outer NTCON.
    prove that waiting can leave any unreturned `host_simulate()` / BOP
    dispatch stack. If the existing boundary prevents this, change the
    appropriate boundary and prove it, rather than asserting that a queue or
-   additional threads solve the problem. No per-VM thread model is presumed.
+   additional threads solve the problem. The multitasking payload retains its
+   upstream frontend and continues running while the calling VM waits; the
+   child uses that VM's downstream frontend. No per-VM thread model is presumed.
 5. Bind asynchronous stdin, stdout, stderr and completion to the correct
    request and frontend. Background host I/O may notify the scheduler, but
    guest memory, CPU state, VMM services and display access must occur only

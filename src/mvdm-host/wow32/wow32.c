@@ -70,6 +70,7 @@ MODNAME(wow32.c);
 #ifdef DEBUG
 #line 54
 #error Excluded unsupported DEBUG WOW profile
+#line 58
 #endif
 #line 59
 
@@ -83,6 +84,7 @@ INT     flOptions = 0;           // command line optin
 #ifdef DEBUG
 #line 68
 #error Excluded unsupported DEBUG WOW profile
+#line 70
 #endif
 #line 71
 
@@ -91,6 +93,7 @@ HANDLE  hHostInstance = 0;
 #ifdef DEBUG
 #line 75
 #error Excluded unsupported DEBUG WOW profile
+#line 77
 #endif
 #line 78
 #ifdef i386
@@ -102,6 +105,7 @@ HANDLE  hHostInstance = 0;
 #ifdef DEBUG
 #line 83
 #error Excluded unsupported DEBUG WOW profile
+#line 91
 #endif
 #line 92
 
@@ -175,6 +179,7 @@ extern LIST_ENTRY TimerList;
 #if defined (_X86_)
 #line 163
 #error Unsupported excluded original configuration
+#line 180
 #endif
 #line 181
 
@@ -457,6 +462,7 @@ BOOL W32Init(VOID)
 #ifdef DEBUG
 #line 464
 #error DIVERGENCE MVDM-HOST-DIV-595: DEBUG initialization profile is not selected
+#line 467
 #endif
 #line 470
     PTD ptd;
@@ -628,6 +634,7 @@ BOOL W32Init(VOID)
 #ifdef DEBUG
 #line 612
 #error Excluded unsupported DEBUG WOW profile
+#line 672
 #endif
 #line 673
 
@@ -689,6 +696,7 @@ BOOL W32Init(VOID)
 #ifdef DEBUG
 #line 727
 #error Excluded unsupported DEBUG WOW profile
+#line 744
 #endif
 #line 745
 
@@ -722,12 +730,14 @@ BOOL W32Init(VOID)
 #ifdef DEBUG_OR_WOWPROFILE
 #line 774
 #error Excluded unsupported WOW profiling configuration
+#line 777
 #endif
 #line 778
 
 #ifdef DEBUG_OR_WOWPROFILE // define symbols for API profiling only (debugger extension)
 #line 780
 #error Excluded unsupported WOW profiling configuration
+#line 783
 #endif // WOWPROFILE
 #line 784
 
@@ -749,6 +759,7 @@ ULONG FASTCALL WOW32UnimplementedAPI(PVDMFRAME pFrame)
 #ifdef DEBUG
 #line 801
 #error Excluded unsupported DEBUG WOW profile
+#line 811
 #else
 #line 812
     UNREFERENCED_PARAMETER(pFrame);
@@ -761,6 +772,7 @@ ULONG FASTCALL WOW32UnimplementedAPI(PVDMFRAME pFrame)
 #ifdef DEBUG
 #line 819
 #error Excluded unsupported DEBUG WOW profile
+#line 870
 #endif // DEBUG
 #line 871
 
@@ -774,6 +786,7 @@ LPFNW32 FASTCALL W32PatchCodeWithLpfnw32(PVDMFRAME pFrame , INT iFun )
 #ifdef DEBUG_OR_WOWPROFILE
 #line 880
 #error Excluded unsupported WOW profiling configuration
+#line 894
 #endif
 #line 895
 
@@ -891,6 +904,7 @@ VOID W32Dispatch()
 #ifdef DEBUG_OR_WOWPROFILE
 #line 998
 #error Excluded unsupported WOW profiling configuration
+#line 1000
 #endif
 #line 1001
         iWOWTaskCur = pFrame->wTDB;                     // Record the task's current ID
@@ -899,6 +913,7 @@ VOID W32Dispatch()
 #ifdef DEBUG
 #line 1005
 #error Excluded unsupported DEBUG WOW profile
+#line 1010
 #endif
 #line 1011
             iFun = (INT)W32PatchCodeWithLpfnw32(pFrame, iFun);
@@ -929,6 +944,7 @@ VOID W32Dispatch()
 #ifdef WOWPROFILE // For API profiling only (debugger extension)
 #line 1033
 #error Excluded unsupported WOW profiling configuration
+#line 1038
 #endif // WOWPROFILE
 #line 1039
 
@@ -942,6 +958,7 @@ VOID W32Dispatch()
 #ifdef DEBUG
 #line 1048
 #error Excluded unsupported DEBUG WOW profile
+#line 1060
 #endif // DEBUG
 #line 1061
 
@@ -969,6 +986,7 @@ VOID W32Dispatch()
 #if NO_W32TRYCALL
 #line 1078
 #error Excluded unsupported NO_W32TRYCALL WOW profile
+#line 1124
 #else
 #line 1125
 
@@ -1366,6 +1384,7 @@ KillTask:
 #ifdef DEBUG
 #line 1517
 #error Excluded unsupported DEBUG WOW profile
+#line 1639
 #endif // DEBUG
 #line 1640
 
@@ -1556,6 +1575,7 @@ Return Value:
 #ifdef DEBUG
 #line 1822
 #error Excluded unsupported DEBUG WOW profile
+#line 1860
 #else
 #line 1861
     return GetPModeVDMPointerMacro(Address, 0);  // No limit check on free build.
@@ -1583,6 +1603,7 @@ ULONG FASTCALL W32GetFastAddress( PVDMFRAME pFrame )
 #line 1873
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
+#line 1874
 #endif
 #line 1875
 }
@@ -1604,6 +1625,7 @@ ULONG FASTCALL W32GetFastCbRetAddress( PVDMFRAME pFrame )
 #line 1882
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
+#line 1883
 #endif
 #line 1884
 }
@@ -1652,6 +1674,7 @@ ULONG FASTCALL W32GetFlatAddressArray( PVDMFRAME pFrame )
 #line 1913
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
+#line 1914
 #endif
 #line 1915
 }
@@ -1660,6 +1683,7 @@ ULONG FASTCALL W32GetFlatAddressArray( PVDMFRAME pFrame )
 #ifdef DEBUG
 #line 1919
 #error Excluded unsupported DEBUG WOW profile
+#line 2250
 #endif // DEBUG
 #line 2251
 
@@ -1748,5 +1772,6 @@ PVOID WOWStartupFailed(VOID)
 #ifdef DEBUG_OR_WOWPROFILE
 #line 2328
 #error Excluded unsupported WOW profiling configuration
+#line 2376
 #endif  // DEBUG_OR_WOWPROFILE
 #line 2377

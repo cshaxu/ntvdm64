@@ -1,0 +1,131 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/taskman.c",
+  "original_sha256": "e37f4d724650d5758ee05c54e181771aa584aead15f5a1376b322ecb7016e64e",
+  "before_sha256": "ea93a97ab34276e744476a6f6218483ebec88a50c14eed6d1d7f7667a6ef6496",
+  "after_sha256": "30e622392ea164fc3fd523c945bb3f0905d2cba39adcf6155d3350282d70d71b",
+  "method": "per-function exact equal blocks; existing original function order differs; only #line changed; no compiler invoked",
+  "changes": [
+    {
+      "kind": "restore logical position",
+      "physical": 133,
+      "original_line": 728,
+      "function": "CurrentTaskLock",
+      "token": "DWORD CurrentTaskLock("
+    },
+    {
+      "kind": "restore logical position",
+      "physical": 136,
+      "original_line": 730,
+      "function": "CurrentTaskLock",
+      "token": "{"
+    },
+    {
+      "kind": "restore logical position",
+      "physical": 158,
+      "original_line": 129,
+      "function": "DestroyTask",
+      "token": "void DestroyTask("
+    },
+    {
+      "kind": "restore logical position",
+      "physical": 247,
+      "original_line": 234,
+      "function": "xxxSleepTask",
+      "token": "BOOL xxxSleepTask("
+    },
+    {
+      "kind": "restore logical position",
+      "physical": 251,
+      "original_line": 237,
+      "function": "xxxSleepTask",
+      "token": "{"
+    },
+    {
+      "kind": "restore logical position",
+      "physical": 345,
+      "original_line": 330,
+      "function": "xxxSleepTask",
+      "token": "!(hEvent == HEVENT_REMOVEME && ptdb->pti == pti)) {"
+    },
+    {
+      "kind": "restore logical position",
+      "physical": 369,
+      "original_line": 352,
+      "function": "xxxSleepTask",
+      "token": "pwpi->ptiScheduled == NULL &&"
+    },
+    {
+      "kind": "restore logical position",
+      "physical": 413,
+      "original_line": 394,
+      "function": "xxxSleepTask",
+      "token": "pwpi->ptiScheduled = pti;"
+    },
+    {
+      "kind": "restore logical position",
+      "physical": 435,
+      "original_line": 415,
+      "function": "xxxSleepTask",
+      "token": "KeSetEvent(pwpi->ptiScheduled->pEventQueueServer,"
+    },
+    {
+      "kind": "restore logical position",
+      "physical": 513,
+      "original_line": 491,
+      "function": "xxxSleepTask",
+      "token": "pti->ptdb->nEvents--;"
+    },
+    {
+      "kind": "restore logical position",
+      "physical": 542,
+      "original_line": 518,
+      "function": "xxxUserYield",
+      "token": "BOOL xxxUserYield("
+    },
+    {
+      "kind": "restore logical position",
+      "physical": 641,
+      "original_line": 60,
+      "function": "InsertTask",
+      "token": "void InsertTask("
+    },
+    {
+      "kind": "remove incorrect cross-function anchor",
+      "physical": 649,
+      "old_line": 715
+    },
+    {
+      "kind": "remove incorrect cross-function anchor",
+      "physical": 652,
+      "old_line": 732
+    },
+    {
+      "kind": "remove incorrect cross-function anchor",
+      "physical": 655,
+      "old_line": 735
+    },
+    {
+      "kind": "remove incorrect cross-function anchor",
+      "physical": 696,
+      "old_line": 741
+    },
+    {
+      "kind": "remove incorrect cross-function anchor",
+      "physical": 704,
+      "old_line": 744
+    },
+    {
+      "kind": "fix moved original UserYield function comment anchor",
+      "original_line": 509,
+      "removed_redundant_anchors": [
+        671,
+        518
+      ]
+    }
+  ],
+  "matched_original_nontrivial_lines_unresolved": [],
+  "limit": "Other functions and supported compilation contexts still require final reconciliation and grouped build.",
+  "whole_file_unique_nontrivial_line_leads_after": 0,
+  "original_and_current_condition_arms": 0,
+  "status": "individual review; no compiler since source correction; grouped build pending"
+}

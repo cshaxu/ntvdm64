@@ -373,6 +373,7 @@ ERROR RECOVERY	  :	none.
 IMPORT void set_index_state IPT0();
 IMPORT boolean in_index_state IPT0();
 
+#line 371
 #ifdef GISP_SVGA 
 #line 372
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
@@ -390,6 +391,7 @@ VOID vote_vga_mode IPT0();
 #ifdef SEGMENTATION
 #line 384
 #error Excluded unsupported SEGMENTATION configuration
+#line 390
 #endif
 #line 391
 
@@ -1033,6 +1035,7 @@ GLOBAL VOID	vga_seq_outb_index IFN2(io_addr,port,half_word,value)
 #ifndef V7VGA
 #line 1016
 #error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
+#line 1022
 #endif /* !V7VGA */
 #line 1023
 	io_redefine_outb(EGA_SEQ_ADAP_DATA,ega_seq_regs[value & 0x07]);
@@ -2182,8 +2185,9 @@ GLOBAL VOID vga_mask_register_changed IFN1(BOOL, gotBitProtection)
 #ifdef A3CPU
 #line 2157
 #error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
+#line 2162
 #else
-#line 2156
+#line 2163
 #if !(defined(NTVDM) && defined(X86GFX))
 #line 2164
 	Glue_set_vid_wrt_ptrs(&mode_chain_handler_table[EGA_CPU.saved_mode_chain][state]);
@@ -2224,6 +2228,7 @@ GLOBAL VOID	vga_gc_mask IFN2(USHORT,port,FAST UTINY,value)
 #else
 #line 2198
 #error Unsupported excluded original configuration
+#line 2202
 #endif	/* USE_OLD_MASK_CODE */
 #line 2203
 
@@ -2233,6 +2238,7 @@ GLOBAL VOID	vga_gc_mask IFN2(USHORT,port,FAST UTINY,value)
 #ifndef CPU_40_STYLE	/* TEMPORARY */
 #line 2208
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
+#line 2212
 #endif
 #line 2213
 
@@ -2275,6 +2281,7 @@ GLOBAL VOID	vga_gc_mask_ff IFN2(USHORT,port,FAST UTINY,value)
 #else
 #line 2248
 #error Unsupported excluded original configuration
+#line 2252
 #endif	/* USE_OLD_MASK_CODE*/
 #line 2253
 
@@ -2284,6 +2291,7 @@ GLOBAL VOID	vga_gc_mask_ff IFN2(USHORT,port,FAST UTINY,value)
 #ifndef CPU_40_STYLE	/* TEMPORARY */
 #line 2258
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
+#line 2262
 #endif
 #line 2263
 
@@ -2375,6 +2383,7 @@ GLOBAL VOID	v_ret_intr_status IFN0()
 #else	/* NTVDM */
 #line 2347
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 2352
 #endif	/* NTVDM */
 #line 2353
 
@@ -2389,6 +2398,7 @@ GLOBAL VOID  vga_ipstat1_inb IFN2(io_addr,port,half_word *,value)
 #if defined(X86GFX)
 #line 2363
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
+#line 2376
 #endif
 #line 2377
 
@@ -2399,6 +2409,7 @@ GLOBAL VOID  vga_ipstat1_inb IFN2(io_addr,port,half_word *,value)
 #ifdef X86GFX
 #line 2383
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
+#line 2394
 #endif
 #line 2395
 
@@ -2437,6 +2448,7 @@ GLOBAL VOID  vga_ipstat1_inb IFN2(io_addr,port,half_word *,value)
 #else 	/* host_get_time_ms */
 #line 2425
 #error Unsupported excluded original configuration
+#line 2428
 #endif	/* host_get_time_ms */
 #line 2429
 
@@ -2467,6 +2479,7 @@ GLOBAL VOID  vga_ipstat1_inb IFN2(io_addr,port,half_word *,value)
 #else   /* !(NTVDM || host_get_time_ms || host_get_count_ms) */
 #line 2455
 #error Unsupported excluded original configuration
+#line 2555
 #endif /* !(NTVDM || host_get_time_ms || host_get_count_ms) */
 #line 2556
 
@@ -2928,6 +2941,7 @@ GLOBAL VOID	vga_dac_data_inb IFN2(io_addr,port,half_word *,value)
 #if defined(NTVDM) && defined(X86GFX)
 #line 3001
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
+#line 3009
 #endif	/* NTVDM & X86GFX */
 #line 3010
 
@@ -2985,6 +2999,7 @@ VOID    vote_vga_mode IFN0()
 #ifdef GISP_SVGA
 #line 3063
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
+#line 3266
 #endif 		/* GISP_SVGA */
 #line 3267
 
@@ -2992,9 +3007,10 @@ VOID    vote_vga_mode IFN0()
 #ifdef HUNTER
 #line 3270
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
+#line 3313
 #endif /* HUNTER */
 #line 3314
 #endif /* VGG */
-#line 3025
+#line 3315
 #endif /* REAL_VGA */
-#line 3026
+#line 3316

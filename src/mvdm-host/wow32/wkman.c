@@ -183,6 +183,7 @@ ULONG FASTCALL WK32KernelTrace(PVDMFRAME pFrame)
 #ifdef DEBUG
 #line 159
 #error Excluded unsupported DEBUG WOW profile
+#line 200
 #else
 #line 201
     UNREFERENCED_PARAMETER(pFrame);
@@ -582,6 +583,7 @@ ULONG FASTCALL WK32WOWInitTask(PVDMFRAME pFrame)
 #ifdef DEBUG
 #line 582
 #error Excluded unsupported DEBUG WOW profile
+#line 595
 #endif
 #line 596
 
@@ -816,6 +818,7 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
 #if FASTBOPPING
 #line 824
 #error Unsupported excluded original configuration
+#line 824
 #else
 #line 825
     USHORT SaveIp;
@@ -874,8 +877,8 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
 #if FASTBOPPING
 #line 875
 #error Unsupported excluded original configuration
+#line 877
 #else
-#line 904
 #line 878
         SaveIp = getIP();
         host_simulate();
@@ -1174,17 +1177,20 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
 #ifdef DEBUG
 #line 1161
 #error Excluded unsupported DEBUG WOW profile
+#line 1171
 #endif
 #line 1172
 
 #if NO_W32TRYCALL
 #line 1174
 #error Excluded unsupported NO_W32TRYCALL WOW profile
+#line 1178
 #endif
 #line 1179
 #if FASTBOPPING
 #line 1180
 #error Unsupported excluded original configuration
+#line 1182
 #else
 #line 1183
         SaveIp = getIP();
@@ -1195,6 +1201,7 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
 #if NO_W32TRYCALL
 #line 1188
 #error Excluded unsupported NO_W32TRYCALL WOW profile
+#line 1191
 #endif
 #line 1192
     //
@@ -1293,6 +1300,7 @@ DWORD W32RemoteThread(VOID)
 #if DBG
 #line 1282
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 1284
 #endif
 #line 1285
         return( 0 );
@@ -1319,6 +1327,7 @@ DWORD W32RemoteThread(VOID)
 #if DBG
 #line 1306
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 1308
 #endif
 #line 1309
         return( 0 );
@@ -1332,6 +1341,7 @@ DWORD W32RemoteThread(VOID)
 #if DBG
 #line 1317
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 1319
 #endif
 #line 1320
         return( 0 );
@@ -1358,6 +1368,7 @@ DWORD W32RemoteThread(VOID)
 #if FASTBOPPING
 #line 1342
 #error Unsupported excluded original configuration
+#line 1347
 #endif
 #line 1348
 
@@ -1381,6 +1392,7 @@ DWORD W32RemoteThread(VOID)
 #if FASTBOPPING
 #line 1367
 #error Unsupported excluded original configuration
+#line 1372
 #else
 #line 1373
     setIP( (WORD)vcRemote.Eip );
@@ -1423,6 +1435,7 @@ DWORD W32RemoteThread(VOID)
 #if FASTBOPPING
 #line 1410
 #error Unsupported excluded original configuration
+#line 1412
 #else
 #line 1413
     host_simulate();
@@ -1601,6 +1614,7 @@ VOID FASTCALL WK32KillRemoteTask(PVDMFRAME pFrame)
 #if FASTBOPPING
 #line 1578
 #error Unsupported excluded original configuration
+#line 1590
 #else
 #line 1591
     vcRemote.Eip   = getIP();
@@ -1646,6 +1660,7 @@ VOID FASTCALL WK32KillRemoteTask(PVDMFRAME pFrame)
 #if FASTBOPPING
 #line 1631
 #error Unsupported excluded original configuration
+#line 1636
 #endif
 #line 1637
     } else {
@@ -2474,6 +2489,7 @@ ULONG FASTCALL WK32WOWOutputDebugString(PVDMFRAME pFrame)
 #ifdef DEBUG            // So we can intermingle LOGGER output & WOW Logging
 #line 2452
 #error Excluded unsupported DEBUG WOW profile
+#line 2471
 #else
 #line 2472
     OutputDebugString(psz1);
@@ -4449,6 +4465,7 @@ ULONG FASTCALL WK32FatalExit(PVDMFRAME pFrame)
 #ifdef DEBUG
 #line 4411
 #error Excluded unsupported DEBUG WOW profile
+#line 4478
 #endif
 #line 4479
 

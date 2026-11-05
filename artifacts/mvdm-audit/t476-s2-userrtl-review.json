@@ -1,0 +1,440 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+  "original_sha256": "b632fc75232db7c2bc95baf758820c087a23f7e17a61c361e47c4687a4f543d3",
+  "before_sha256": "ff06d750dda7adef7f04e20b97f57f2c432f13e91e3af770a44aceed8c83b17c",
+  "after_sha256": "3e527cd8f999ffe76ed21f32980ba0b1b54fff5759dd982594414f52e52ce17f",
+  "change": "Relocate the unchanged four direct same-address REBASE macros beneath the selected original _USERK_ else / !WOW / #if 0 else structure, rather than defining them unconditionally before those groups.",
+  "registered_adapter": "OPENNT-HOST-104",
+  "supported_selection": "_USERK_ undefined, WOW undefined, literal #if 0 false: same four macros; previously rejected _USERK_ or WOW paths remain #error.",
+  "byte_identity": "The four definitions are byte-identical and occur once; there were no references before their new location.",
+  "status": "individual review; grouped build and global context reconciliation pending",
+  "original_condition_inventory": "18 original arms, 18 current arms; no missing arms or ancestry conflicts; all conditional line positions match after move",
+  "excluded_arms_checked": 10,
+  "excluded_non_directive_contents": 0,
+  "context_limit": "_USERK_ is defined by the separate userk.h header; recorded userrtl.h product/fixture hits do not show it set, but full supported include-context reconciliation is needed before concluding the S1 #error is universally safe.",
+  "branch_evidence": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "snapshot_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "current_sha256": "66f80c95513bb590ea8879e6df2be9734af25aa6886abd7fe89901a24d2e6144",
+      "source_binding": "changed-rebind-required",
+      "snapshot_line": "19",
+      "directive": "ifndef",
+      "expression": "_USERRTL_",
+      "product_status": "hit",
+      "product_contexts": "596,597,598,599,600,601,602,603,604,605,606,607,608,609,610,611,612,613,614,615,616,617,618,619,620,621,622,632,634,642,643,644,645,646,654,656,741",
+      "historical_hit_sources": "r1311-current-equivalent-preprocessing",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "1",
+      "disposition": "retain-if-rebound"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "snapshot_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "current_sha256": "66f80c95513bb590ea8879e6df2be9734af25aa6886abd7fe89901a24d2e6144",
+      "source_binding": "changed-rebind-required",
+      "snapshot_line": "28",
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "product_status": "unhit",
+      "product_contexts": "",
+      "historical_hit_sources": "",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "0",
+      "disposition": "unhit-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "snapshot_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "current_sha256": "66f80c95513bb590ea8879e6df2be9734af25aa6886abd7fe89901a24d2e6144",
+      "source_binding": "changed-rebind-required",
+      "snapshot_line": "30",
+      "directive": "else",
+      "expression": "",
+      "product_status": "hit",
+      "product_contexts": "596,597,598,599,600,601,602,603,604,605,606,607,608,609,610,611,612,613,614,615,616,617,618,619,620,621,622,632,634,642,643,644,645,646,654,656,741",
+      "historical_hit_sources": "",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "0",
+      "disposition": "retain-if-rebound"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "snapshot_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "current_sha256": "66f80c95513bb590ea8879e6df2be9734af25aa6886abd7fe89901a24d2e6144",
+      "source_binding": "changed-rebind-required",
+      "snapshot_line": "36",
+      "directive": "if",
+      "expression": "DBG",
+      "product_status": "previously-excluded",
+      "product_contexts": "",
+      "historical_hit_sources": "",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "0",
+      "disposition": "existing-error-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "snapshot_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "current_sha256": "66f80c95513bb590ea8879e6df2be9734af25aa6886abd7fe89901a24d2e6144",
+      "source_binding": "changed-rebind-required",
+      "snapshot_line": "43",
+      "directive": "ifdef",
+      "expression": "RIP_COMPONENT",
+      "product_status": "unhit",
+      "product_contexts": "",
+      "historical_hit_sources": "",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "0",
+      "disposition": "unhit-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "snapshot_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "current_sha256": "66f80c95513bb590ea8879e6df2be9734af25aa6886abd7fe89901a24d2e6144",
+      "source_binding": "changed-rebind-required",
+      "snapshot_line": "47",
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "product_status": "unhit",
+      "product_contexts": "",
+      "historical_hit_sources": "",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "0",
+      "disposition": "unhit-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "snapshot_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "current_sha256": "66f80c95513bb590ea8879e6df2be9734af25aa6886abd7fe89901a24d2e6144",
+      "source_binding": "changed-rebind-required",
+      "snapshot_line": "49",
+      "directive": "else",
+      "expression": "",
+      "product_status": "hit",
+      "product_contexts": "596,597,598,599,600,601,602,603,604,605,606,607,608,609,610,611,612,613,614,615,616,617,618,619,620,621,622,632,634,642,643,644,645,646,654,656,741",
+      "historical_hit_sources": "",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "0",
+      "disposition": "retain-if-rebound"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "snapshot_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "current_sha256": "66f80c95513bb590ea8879e6df2be9734af25aa6886abd7fe89901a24d2e6144",
+      "source_binding": "changed-rebind-required",
+      "snapshot_line": "55",
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "product_status": "unhit",
+      "product_contexts": "",
+      "historical_hit_sources": "",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "0",
+      "disposition": "unhit-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "snapshot_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "current_sha256": "66f80c95513bb590ea8879e6df2be9734af25aa6886abd7fe89901a24d2e6144",
+      "source_binding": "changed-rebind-required",
+      "snapshot_line": "57",
+      "directive": "else",
+      "expression": "",
+      "product_status": "hit",
+      "product_contexts": "596,597,598,599,600,601,602,603,604,605,606,607,608,609,610,611,612,613,614,615,616,617,618,619,620,621,622,632,634,642,643,644,645,646,654,656,741",
+      "historical_hit_sources": "",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "0",
+      "disposition": "retain-if-rebound"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "snapshot_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "current_sha256": "66f80c95513bb590ea8879e6df2be9734af25aa6886abd7fe89901a24d2e6144",
+      "source_binding": "changed-rebind-required",
+      "snapshot_line": "59",
+      "directive": "ifndef",
+      "expression": "WOW",
+      "product_status": "hit",
+      "product_contexts": "596,597,598,599,600,601,602,603,604,605,606,607,608,609,610,611,612,613,614,615,616,617,618,619,620,621,622,632,634,642,643,644,645,646,654,656,741",
+      "historical_hit_sources": "",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "0",
+      "disposition": "retain-if-rebound"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "snapshot_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "current_sha256": "66f80c95513bb590ea8879e6df2be9734af25aa6886abd7fe89901a24d2e6144",
+      "source_binding": "changed-rebind-required",
+      "snapshot_line": "61",
+      "directive": "if",
+      "expression": "0",
+      "product_status": "previously-excluded",
+      "product_contexts": "",
+      "historical_hit_sources": "",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "0",
+      "disposition": "existing-error-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "snapshot_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "current_sha256": "66f80c95513bb590ea8879e6df2be9734af25aa6886abd7fe89901a24d2e6144",
+      "source_binding": "changed-rebind-required",
+      "snapshot_line": "64",
+      "directive": "else",
+      "expression": "",
+      "product_status": "hit",
+      "product_contexts": "596,597,598,599,600,601,602,603,604,605,606,607,608,609,610,611,612,613,614,615,616,617,618,619,620,621,622,632,634,642,643,644,645,646,654,656,741",
+      "historical_hit_sources": "",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "0",
+      "disposition": "retain-if-rebound"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "snapshot_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "current_sha256": "66f80c95513bb590ea8879e6df2be9734af25aa6886abd7fe89901a24d2e6144",
+      "source_binding": "changed-rebind-required",
+      "snapshot_line": "68",
+      "directive": "else",
+      "expression": "",
+      "product_status": "unhit",
+      "product_contexts": "",
+      "historical_hit_sources": "",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "0",
+      "disposition": "unhit-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "snapshot_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "current_sha256": "66f80c95513bb590ea8879e6df2be9734af25aa6886abd7fe89901a24d2e6144",
+      "source_binding": "changed-rebind-required",
+      "snapshot_line": "76",
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "product_status": "previously-excluded",
+      "product_contexts": "",
+      "historical_hit_sources": "",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "0",
+      "disposition": "existing-error-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "snapshot_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "current_sha256": "66f80c95513bb590ea8879e6df2be9734af25aa6886abd7fe89901a24d2e6144",
+      "source_binding": "changed-rebind-required",
+      "snapshot_line": "83",
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "product_status": "unhit",
+      "product_contexts": "",
+      "historical_hit_sources": "",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "0",
+      "disposition": "unhit-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "snapshot_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "current_sha256": "66f80c95513bb590ea8879e6df2be9734af25aa6886abd7fe89901a24d2e6144",
+      "source_binding": "changed-rebind-required",
+      "snapshot_line": "85",
+      "directive": "else",
+      "expression": "",
+      "product_status": "hit",
+      "product_contexts": "596,597,598,599,600,601,602,603,604,605,606,607,608,609,610,611,612,613,614,615,616,617,618,619,620,621,622,632,634,642,643,644,645,646,654,656,741",
+      "historical_hit_sources": "",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "0",
+      "disposition": "retain-if-rebound"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "snapshot_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "current_sha256": "66f80c95513bb590ea8879e6df2be9734af25aa6886abd7fe89901a24d2e6144",
+      "source_binding": "changed-rebind-required",
+      "snapshot_line": "91",
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "product_status": "unhit",
+      "product_contexts": "",
+      "historical_hit_sources": "",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "0",
+      "disposition": "unhit-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "snapshot_sha256": "b8131fb3442270b7a4a0cc28d7ad67ec67912a19d928eefc8e00d08e9af6744d",
+      "current_sha256": "66f80c95513bb590ea8879e6df2be9734af25aa6886abd7fe89901a24d2e6144",
+      "source_binding": "changed-rebind-required",
+      "snapshot_line": "93",
+      "directive": "else",
+      "expression": "",
+      "product_status": "hit",
+      "product_contexts": "596,597,598,599,600,601,602,603,604,605,606,607,608,609,610,611,612,613,614,615,616,617,618,619,620,621,622,632,634,642,643,644,645,646,654,656,741",
+      "historical_hit_sources": "",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "0",
+      "disposition": "retain-if-rebound"
+    }
+  ],
+  "observed_product_contexts": [
+    {
+      "index": 596,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/editec.c"
+    },
+    {
+      "index": 597,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/edecrare.c"
+    },
+    {
+      "index": 598,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/editsl.c"
+    },
+    {
+      "index": 599,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/editml.c"
+    },
+    {
+      "index": 600,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/edmlonce.c"
+    },
+    {
+      "index": 601,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/edmlrare.c"
+    },
+    {
+      "index": 602,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/edslrare.c"
+    },
+    {
+      "index": 603,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/combo.c"
+    },
+    {
+      "index": 604,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/combodir.c"
+    },
+    {
+      "index": 605,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/comboini.c"
+    },
+    {
+      "index": 606,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/lb1.c"
+    },
+    {
+      "index": 607,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/lboxctl1.c"
+    },
+    {
+      "index": 608,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/lboxctl2.c"
+    },
+    {
+      "index": 609,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/lboxctl3.c"
+    },
+    {
+      "index": 610,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/lboxmult.c"
+    },
+    {
+      "index": 611,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/lboxrare.c"
+    },
+    {
+      "index": 612,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/lboxvar.c"
+    },
+    {
+      "index": 613,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/dlgbegin.c"
+    },
+    {
+      "index": 614,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/dlgend.c"
+    },
+    {
+      "index": 615,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/dlgmgr.c"
+    },
+    {
+      "index": 616,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c"
+    },
+    {
+      "index": 617,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c"
+    },
+    {
+      "index": 618,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/dmmnem.c"
+    },
+    {
+      "index": 619,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/wow.c"
+    },
+    {
+      "index": 620,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/winmgrc.c"
+    },
+    {
+      "index": 621,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/rtl/winmgr.c"
+    },
+    {
+      "index": 622,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/rtl/wow.c"
+    },
+    {
+      "index": 632,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/clres.c"
+    },
+    {
+      "index": 634,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/ntstubs.c"
+    },
+    {
+      "index": 642,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/clmsg.c"
+    },
+    {
+      "index": 643,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/rtl/getset.c"
+    },
+    {
+      "index": 644,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/ntstubs.c"
+    },
+    {
+      "index": 645,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/kernel/getset.c"
+    },
+    {
+      "index": 646,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/clmsg.c"
+    },
+    {
+      "index": 654,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/draw.c"
+    },
+    {
+      "index": 656,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/client/btnctl.c"
+    },
+    {
+      "index": 741,
+      "source": "O:/repos.hobby/ntvdm64/.worktrees/mirror-conditional/src/non-mvdm/windows/core/ntuser/rtl/help.c"
+    }
+  ],
+  "conditional_line_leads": 0,
+  "original_condition_postcheck": "18 original arms and 18 current arms; no unmatched arms or ancestry conflicts",
+  "limits": "The 37 observed product contexts take non-_USERK_, non-WOW selected paths. A separate header defines _USERK_, so unobserved supported include contexts still require global reconciliation; the source move itself does not relax the S1 #error."
+}

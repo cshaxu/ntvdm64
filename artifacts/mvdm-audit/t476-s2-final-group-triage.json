@@ -1,0 +1,5747 @@
+{
+  "status": "triage only; no file certified",
+  "owner_policy": "complete all files before final grouped build",
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/taskman.c",
+      "current_sha256": "ea93a97ab34276e744476a6f6218483ebec88a50c14eed6d1d7f7667a6ef6496",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [],
+      "original_size": 22165,
+      "current_size": 21556,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsdata.c",
+      "current_sha256": "3ae3ad7992ba726c8a3988a8cb3aebba07fa7c7c2a63f21c69026462683f93a0",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [],
+      "original_size": 48072,
+      "current_size": 51992,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "current_sha256": "933243dec8d169d707b1c4d7bd314f309fd035d922797fcd65475a4a4c00c79a",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [
+        {
+          "kind": "endif",
+          "original": 1065,
+          "current": 1058,
+          "physical": 100
+        }
+      ],
+      "original_size": 40349,
+      "current_size": 35389,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclip.c",
+      "current_sha256": "2d4b1ea2d876fcf1f2d3e26d7464814ead9c9b49a27b0a6cccf01fcebdbb5a94",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [
+        {
+          "kind": "endif",
+          "original": 1226,
+          "current": 1217,
+          "physical": 1312
+        }
+      ],
+      "original_size": 40405,
+      "current_size": 44069,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/gdpvar.h",
+      "current_sha256": "c1f55eb9bf7c7c582f742a01fc462a13ec0f95927c8a6795a03db377fb0210dc",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [
+        {
+          "kind": "endif",
+          "original": 1857,
+          "current": 3,
+          "physical": 4
+        }
+      ],
+      "original_size": 122635,
+      "current_size": 107,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "current_sha256": "51a7df71bc18a51a779a3b38d555fc9e0380ded5180f1e7e965fe56fa9823a37",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [
+        {
+          "kind": "endif",
+          "original": 2292,
+          "current": 2291,
+          "physical": 226
+        },
+        {
+          "kind": "endif",
+          "original": 3502,
+          "current": 3496,
+          "physical": 210
+        }
+      ],
+      "original_size": 107828,
+      "current_size": 6599,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_oprnd.h",
+      "current_sha256": "e28138c2d900f501b7fe9d1007ccd98c3788a36fa96fdeb1cea8e345a485b82e",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [
+        {
+          "kind": "arm",
+          "original": 707,
+          "current": 706,
+          "physical": 725
+        },
+        {
+          "kind": "arm",
+          "original": 755,
+          "current": 754,
+          "physical": 775
+        },
+        {
+          "kind": "arm",
+          "original": 1057,
+          "current": 1056,
+          "physical": 1079
+        }
+      ],
+      "original_size": 38103,
+      "current_size": 38142,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "current_sha256": "4e4e2bcc90ff33aa6b8abc02f4f04f355945899d42a48156a0d1adbf1f0c87d0",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [
+        {
+          "kind": "endif",
+          "original": 234,
+          "current": 235,
+          "physical": 270
+        },
+        {
+          "kind": "endif",
+          "original": 243,
+          "current": 242,
+          "physical": 283
+        },
+        {
+          "kind": "endif",
+          "original": 308,
+          "current": 283,
+          "physical": 331
+        },
+        {
+          "kind": "arm",
+          "original": 231,
+          "current": 223,
+          "physical": 264
+        }
+      ],
+      "original_size": 20348,
+      "current_size": 25925,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "current_sha256": "c2d8ef57ab85842262c228d16665c33818d49513a229a5de42ff5fa120e141df",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [
+        {
+          "kind": "endif",
+          "original": 208,
+          "current": 209,
+          "physical": 2233
+        },
+        {
+          "kind": "endif",
+          "original": 271,
+          "current": 272,
+          "physical": 2298
+        },
+        {
+          "kind": "endif",
+          "original": 1149,
+          "current": 1086,
+          "physical": 2402
+        },
+        {
+          "kind": "arm",
+          "original": 268,
+          "current": 261,
+          "physical": 2292
+        }
+      ],
+      "original_size": 93237,
+      "current_size": 69388,
+      "status": "pending whole-file review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "current_sha256": "63ce829ae4040ddea069a40bbc5b4ca31351ea1d6e7b138b4a2f40d5d8625cb3",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [
+        {
+          "kind": "endif",
+          "original": 891,
+          "current": 887,
+          "physical": 959
+        },
+        {
+          "kind": "endif",
+          "original": 1241,
+          "current": 1211,
+          "physical": 1295
+        },
+        {
+          "kind": "endif",
+          "original": 1332,
+          "current": 1329,
+          "physical": 1385
+        },
+        {
+          "kind": "endif",
+          "original": 1351,
+          "current": 1350,
+          "physical": 1412
+        },
+        {
+          "kind": "endif",
+          "original": 1528,
+          "current": 1527,
+          "physical": 1634
+        }
+      ],
+      "original_size": 57065,
+      "current_size": 64320,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "current_sha256": "2e648413b9f66bebb3217242cdcf5c74751c700d32e431b67901cb07ee6cf638",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [
+        {
+          "kind": "endif",
+          "original": 140,
+          "current": 138,
+          "physical": 165
+        },
+        {
+          "kind": "endif",
+          "original": 176,
+          "current": 174,
+          "physical": 203
+        },
+        {
+          "kind": "endif",
+          "original": 219,
+          "current": 217,
+          "physical": 255
+        },
+        {
+          "kind": "endif",
+          "original": 227,
+          "current": 225,
+          "physical": 263
+        },
+        {
+          "kind": "endif",
+          "original": 235,
+          "current": 234,
+          "physical": 272
+        },
+        {
+          "kind": "endif",
+          "original": 381,
+          "current": 360,
+          "physical": 408
+        },
+        {
+          "kind": "endif",
+          "original": 410,
+          "current": 393,
+          "physical": 423
+        }
+      ],
+      "original_size": 80122,
+      "current_size": 84380,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "current_sha256": "170c4933ba983fa3fe941ddf91dbbf2b8483830b1cccdf80798e020c5aa6b3cb",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [
+        {
+          "kind": "endif",
+          "original": 498,
+          "current": 483,
+          "physical": 433
+        },
+        {
+          "kind": "endif",
+          "original": 596,
+          "current": 585,
+          "physical": 394
+        },
+        {
+          "kind": "endif",
+          "original": 839,
+          "current": 835,
+          "physical": 441
+        },
+        {
+          "kind": "endif",
+          "original": 877,
+          "current": 852,
+          "physical": 481
+        },
+        {
+          "kind": "endif",
+          "original": 939,
+          "current": 936,
+          "physical": 488
+        },
+        {
+          "kind": "endif",
+          "original": 994,
+          "current": 993,
+          "physical": 465
+        },
+        {
+          "kind": "endif",
+          "original": 1019,
+          "current": 1004,
+          "physical": 495
+        },
+        {
+          "kind": "endif",
+          "original": 1209,
+          "current": 1165,
+          "physical": 502
+        }
+      ],
+      "original_size": 67395,
+      "current_size": 9551,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "current_sha256": "3c43ed7e2b5cfcc1b09b910fe96b779c55f544385176d90eddb11c6eb2433926",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [
+        {
+          "kind": "endif",
+          "original": 896,
+          "current": 883,
+          "physical": 1129
+        },
+        {
+          "kind": "endif",
+          "original": 1483,
+          "current": 1482,
+          "physical": 1075
+        },
+        {
+          "kind": "endif",
+          "original": 1702,
+          "current": 1703,
+          "physical": 694
+        },
+        {
+          "kind": "endif",
+          "original": 2301,
+          "current": 2300,
+          "physical": 1082
+        },
+        {
+          "kind": "endif",
+          "original": 2628,
+          "current": 2627,
+          "physical": 1091
+        },
+        {
+          "kind": "endif",
+          "original": 2667,
+          "current": 2642,
+          "physical": 1121
+        },
+        {
+          "kind": "endif",
+          "original": 3762,
+          "current": 3758,
+          "physical": 1100
+        },
+        {
+          "kind": "arm",
+          "original": 3757,
+          "current": 3753,
+          "physical": 1098
+        },
+        {
+          "kind": "endif",
+          "original": 3905,
+          "current": 3903,
+          "physical": 1136
+        },
+        {
+          "kind": "endif",
+          "original": 4519,
+          "current": 4518,
+          "physical": 1107
+        },
+        {
+          "kind": "endif",
+          "original": 4577,
+          "current": 4576,
+          "physical": 1114
+        },
+        {
+          "kind": "arm",
+          "original": 1691,
+          "current": 1676,
+          "physical": 680
+        }
+      ],
+      "original_size": 135624,
+      "current_size": 31724,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_sha256": "00d0e2a65c0dcd737b2305a25aa04c2bbec30892165b05fd19758cd03736de20",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [
+        {
+          "kind": "endif",
+          "original": 25,
+          "current": 24,
+          "physical": 202
+        },
+        {
+          "kind": "endif",
+          "original": 640,
+          "current": 61,
+          "physical": 209
+        },
+        {
+          "kind": "endif",
+          "original": 711,
+          "current": 679,
+          "physical": 218
+        },
+        {
+          "kind": "endif",
+          "original": 722,
+          "current": 721,
+          "physical": 235
+        },
+        {
+          "kind": "arm",
+          "original": 720,
+          "current": 721,
+          "physical": 233
+        },
+        {
+          "kind": "endif",
+          "original": 841,
+          "current": 813,
+          "physical": 71
+        },
+        {
+          "kind": "endif",
+          "original": 885,
+          "current": 882,
+          "physical": 244
+        },
+        {
+          "kind": "arm",
+          "original": 881,
+          "current": 877,
+          "physical": 242
+        },
+        {
+          "kind": "endif",
+          "original": 1228,
+          "current": 1227,
+          "physical": 253
+        },
+        {
+          "kind": "endif",
+          "original": 1601,
+          "current": 1600,
+          "physical": 276
+        },
+        {
+          "kind": "endif",
+          "original": 1634,
+          "current": 1624,
+          "physical": 261
+        },
+        {
+          "kind": "endif",
+          "original": 1661,
+          "current": 1660,
+          "physical": 285
+        },
+        {
+          "kind": "endif",
+          "original": 1685,
+          "current": 1675,
+          "physical": 268
+        }
+      ],
+      "original_size": 74163,
+      "current_size": 6642,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "current_sha256": "c492d1d1da66b913e0f36ca0ff3d81ddd6a6d90dbc6c3b1958d91461955f3520",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [
+        {
+          "kind": "arm",
+          "original": 200,
+          "current": 160,
+          "physical": 186
+        },
+        {
+          "kind": "endif",
+          "original": 595,
+          "current": 583,
+          "physical": 585
+        },
+        {
+          "kind": "arm",
+          "original": 824,
+          "current": 825,
+          "physical": 819
+        },
+        {
+          "kind": "endif",
+          "original": 1171,
+          "current": 1162,
+          "physical": 1177
+        },
+        {
+          "kind": "endif",
+          "original": 1178,
+          "current": 1175,
+          "physical": 1183
+        },
+        {
+          "kind": "arm",
+          "original": 1182,
+          "current": 1181,
+          "physical": 1188
+        },
+        {
+          "kind": "endif",
+          "original": 1191,
+          "current": 1189,
+          "physical": 1198
+        },
+        {
+          "kind": "endif",
+          "original": 1284,
+          "current": 1283,
+          "physical": 1296
+        },
+        {
+          "kind": "endif",
+          "original": 1308,
+          "current": 1307,
+          "physical": 1322
+        },
+        {
+          "kind": "endif",
+          "original": 1319,
+          "current": 1318,
+          "physical": 1335
+        },
+        {
+          "kind": "endif",
+          "original": 1347,
+          "current": 1343,
+          "physical": 1361
+        },
+        {
+          "kind": "arm",
+          "original": 1372,
+          "current": 1368,
+          "physical": 1384
+        },
+        {
+          "kind": "arm",
+          "original": 1412,
+          "current": 1411,
+          "physical": 1426
+        },
+        {
+          "kind": "arm",
+          "original": 1590,
+          "current": 1579,
+          "physical": 1604
+        },
+        {
+          "kind": "endif",
+          "original": 1636,
+          "current": 1632,
+          "physical": 1649
+        },
+        {
+          "kind": "arm",
+          "original": 2471,
+          "current": 2453,
+          "physical": 2477
+        },
+        {
+          "kind": "endif",
+          "original": 4478,
+          "current": 4412,
+          "physical": 4452
+        },
+        {
+          "kind": "arm",
+          "original": 877,
+          "current": 876,
+          "physical": 877
+        }
+      ],
+      "original_size": 144865,
+      "current_size": 139620,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_sha256": "2c4560861381157e03971f039d2b8b44112b363a1d76c80b39c61b91ee7b143a",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [
+        {
+          "kind": "arm",
+          "original": 36,
+          "current": 32,
+          "physical": 24
+        },
+        {
+          "kind": "endif",
+          "original": 49,
+          "current": 45,
+          "physical": 387
+        },
+        {
+          "kind": "arm",
+          "original": 114,
+          "current": 56,
+          "physical": 34
+        },
+        {
+          "kind": "endif",
+          "original": 789,
+          "current": 787,
+          "physical": 281
+        },
+        {
+          "kind": "endif",
+          "original": 961,
+          "current": 960,
+          "physical": 516
+        },
+        {
+          "kind": "endif",
+          "original": 967,
+          "current": 966,
+          "physical": 525
+        },
+        {
+          "kind": "endif",
+          "original": 996,
+          "current": 994,
+          "physical": 500
+        },
+        {
+          "kind": "endif",
+          "original": 1210,
+          "current": 1209,
+          "physical": 534
+        },
+        {
+          "kind": "arm",
+          "original": 1208,
+          "current": 1205,
+          "physical": 532
+        },
+        {
+          "kind": "endif",
+          "original": 1489,
+          "current": 1482,
+          "physical": 401
+        },
+        {
+          "kind": "endif",
+          "original": 1558,
+          "current": 1557,
+          "physical": 415
+        },
+        {
+          "kind": "endif",
+          "original": 1608,
+          "current": 1600,
+          "physical": 422
+        },
+        {
+          "kind": "endif",
+          "original": 1635,
+          "current": 1628,
+          "physical": 429
+        },
+        {
+          "kind": "endif",
+          "original": 1787,
+          "current": 1786,
+          "physical": 436
+        },
+        {
+          "kind": "endif",
+          "original": 1920,
+          "current": 1917,
+          "physical": 507
+        },
+        {
+          "kind": "endif",
+          "original": 2288,
+          "current": 2284,
+          "physical": 450
+        },
+        {
+          "kind": "endif",
+          "original": 2657,
+          "current": 2651,
+          "physical": 485
+        },
+        {
+          "kind": "endif",
+          "original": 3727,
+          "current": 3707,
+          "physical": 492
+        }
+      ],
+      "original_size": 148137,
+      "current_size": 13289,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "current_sha256": "ec6956b197159f60ca825f50e10931d3994e47e603674d91318f1ff9e6bc55b7",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [
+        {
+          "kind": "endif",
+          "original": 784,
+          "current": 742,
+          "physical": 796
+        },
+        {
+          "kind": "endif",
+          "original": 93,
+          "current": 91,
+          "physical": 92
+        },
+        {
+          "kind": "arm",
+          "original": 212,
+          "current": 210,
+          "physical": 217
+        },
+        {
+          "kind": "endif",
+          "original": 215,
+          "current": 214,
+          "physical": 220
+        },
+        {
+          "kind": "endif",
+          "original": 263,
+          "current": 254,
+          "physical": 262
+        },
+        {
+          "kind": "endif",
+          "original": 313,
+          "current": 301,
+          "physical": 302
+        },
+        {
+          "kind": "endif",
+          "original": 371,
+          "current": 370,
+          "physical": 363
+        },
+        {
+          "kind": "endif",
+          "original": 382,
+          "current": 381,
+          "physical": 376
+        },
+        {
+          "kind": "endif",
+          "original": 415,
+          "current": 410,
+          "physical": 406
+        },
+        {
+          "kind": "arm",
+          "original": 498,
+          "current": 495,
+          "physical": 494
+        },
+        {
+          "kind": "arm",
+          "original": 521,
+          "current": 489,
+          "physical": 520
+        },
+        {
+          "kind": "endif",
+          "original": 530,
+          "current": 523,
+          "physical": 523
+        },
+        {
+          "kind": "arm",
+          "original": 588,
+          "current": 549,
+          "physical": 590
+        },
+        {
+          "kind": "endif",
+          "original": 592,
+          "current": 590,
+          "physical": 593
+        },
+        {
+          "kind": "arm",
+          "original": 656,
+          "current": 615,
+          "physical": 662
+        },
+        {
+          "kind": "endif",
+          "original": 659,
+          "current": 658,
+          "physical": 665
+        },
+        {
+          "kind": "endif",
+          "original": 782,
+          "current": 781,
+          "physical": 793
+        },
+        {
+          "kind": "endif",
+          "original": 737,
+          "current": 736,
+          "physical": 748
+        },
+        {
+          "kind": "arm",
+          "original": 786,
+          "current": 744,
+          "physical": 799
+        },
+        {
+          "kind": "endif",
+          "original": 798,
+          "current": 797,
+          "physical": 812
+        },
+        {
+          "kind": "endif",
+          "original": 795,
+          "current": 794,
+          "physical": 809
+        },
+        {
+          "kind": "endif",
+          "original": 836,
+          "current": 803,
+          "physical": 819
+        }
+      ],
+      "original_size": 24973,
+      "current_size": 23198,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "current_sha256": "d6c54444c8d2ccd75d59482eb0c367b98270ec8edfca3edcd66df94f550a2acf",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [
+        {
+          "kind": "endif",
+          "original": 22,
+          "current": 21,
+          "physical": 57
+        },
+        {
+          "kind": "endif",
+          "original": 98,
+          "current": 88,
+          "physical": 64
+        },
+        {
+          "kind": "endif",
+          "original": 137,
+          "current": 136,
+          "physical": 157
+        },
+        {
+          "kind": "endif",
+          "original": 302,
+          "current": 288,
+          "physical": 143
+        },
+        {
+          "kind": "endif",
+          "original": 563,
+          "current": 546,
+          "physical": 47
+        },
+        {
+          "kind": "endif",
+          "original": 712,
+          "current": 624,
+          "physical": 243
+        },
+        {
+          "kind": "arm",
+          "original": 622,
+          "current": 603,
+          "physical": 240
+        },
+        {
+          "kind": "endif",
+          "original": 776,
+          "current": 766,
+          "physical": 178
+        },
+        {
+          "kind": "endif",
+          "original": 803,
+          "current": 799,
+          "physical": 185
+        },
+        {
+          "kind": "endif",
+          "original": 952,
+          "current": 854,
+          "physical": 71
+        },
+        {
+          "kind": "endif",
+          "original": 994,
+          "current": 965,
+          "physical": 78
+        },
+        {
+          "kind": "endif",
+          "original": 1069,
+          "current": 1058,
+          "physical": 192
+        },
+        {
+          "kind": "endif",
+          "original": 1098,
+          "current": 1086,
+          "physical": 199
+        },
+        {
+          "kind": "endif",
+          "original": 1152,
+          "current": 1141,
+          "physical": 206
+        },
+        {
+          "kind": "endif",
+          "original": 1188,
+          "current": 1171,
+          "physical": 85
+        },
+        {
+          "kind": "endif",
+          "original": 1239,
+          "current": 1200,
+          "physical": 92
+        },
+        {
+          "kind": "endif",
+          "original": 1301,
+          "current": 1252,
+          "physical": 99
+        },
+        {
+          "kind": "endif",
+          "original": 1329,
+          "current": 1326,
+          "physical": 108
+        },
+        {
+          "kind": "arm",
+          "original": 1325,
+          "current": 1323,
+          "physical": 106
+        },
+        {
+          "kind": "endif",
+          "original": 1361,
+          "current": 1355,
+          "physical": 213
+        },
+        {
+          "kind": "endif",
+          "original": 1423,
+          "current": 1396,
+          "physical": 115
+        },
+        {
+          "kind": "endif",
+          "original": 1523,
+          "current": 1521,
+          "physical": 220
+        },
+        {
+          "kind": "endif",
+          "original": 1712,
+          "current": 1693,
+          "physical": 122
+        },
+        {
+          "kind": "endif",
+          "original": 1794,
+          "current": 1716,
+          "physical": 129
+        },
+        {
+          "kind": "endif",
+          "original": 1911,
+          "current": 1888,
+          "physical": 227
+        },
+        {
+          "kind": "endif",
+          "original": 2013,
+          "current": 1935,
+          "physical": 136
+        }
+      ],
+      "original_size": 62117,
+      "current_size": 5188,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_sha256": "196593d19f59a96efd6b40441aeeb4dcc019bb4670277fa49d2281df9b6f96b8",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [
+        {
+          "kind": "endif",
+          "original": 28,
+          "current": 23,
+          "physical": 24
+        },
+        {
+          "kind": "endif",
+          "original": 115,
+          "current": 114,
+          "physical": 122
+        },
+        {
+          "kind": "arm",
+          "original": 117,
+          "current": 116,
+          "physical": 124
+        },
+        {
+          "kind": "endif",
+          "original": 213,
+          "current": 204,
+          "physical": 215
+        },
+        {
+          "kind": "arm",
+          "original": 319,
+          "current": 302,
+          "physical": 306
+        },
+        {
+          "kind": "arm",
+          "original": 329,
+          "current": 325,
+          "physical": 315
+        },
+        {
+          "kind": "endif",
+          "original": 507,
+          "current": 387,
+          "physical": 383
+        },
+        {
+          "kind": "endif",
+          "original": 517,
+          "current": 513,
+          "physical": 391
+        },
+        {
+          "kind": "endif",
+          "original": 706,
+          "current": 705,
+          "physical": 593
+        },
+        {
+          "kind": "arm",
+          "original": 721,
+          "current": 720,
+          "physical": 608
+        },
+        {
+          "kind": "endif",
+          "original": 764,
+          "current": 723,
+          "physical": 611
+        },
+        {
+          "kind": "arm",
+          "original": 769,
+          "current": 728,
+          "physical": 616
+        },
+        {
+          "kind": "endif",
+          "original": 798,
+          "current": 791,
+          "physical": 641
+        },
+        {
+          "kind": "endif",
+          "original": 850,
+          "current": 844,
+          "physical": 693
+        },
+        {
+          "kind": "arm",
+          "original": 859,
+          "current": 853,
+          "physical": 702
+        },
+        {
+          "kind": "endif",
+          "original": 867,
+          "current": 861,
+          "physical": 705
+        },
+        {
+          "kind": "arm",
+          "original": 870,
+          "current": 864,
+          "physical": 708
+        },
+        {
+          "kind": "endif",
+          "original": 873,
+          "current": 872,
+          "physical": 711
+        },
+        {
+          "kind": "arm",
+          "original": 886,
+          "current": 885,
+          "physical": 724
+        },
+        {
+          "kind": "endif",
+          "original": 984,
+          "current": 892,
+          "physical": 732
+        },
+        {
+          "kind": "endif",
+          "original": 1024,
+          "current": 1023,
+          "physical": 779
+        },
+        {
+          "kind": "endif",
+          "original": 1029,
+          "current": 1028,
+          "physical": 785
+        },
+        {
+          "kind": "endif",
+          "original": 1062,
+          "current": 1034,
+          "physical": 792
+        },
+        {
+          "kind": "arm",
+          "original": 210,
+          "current": 201,
+          "physical": 212
+        },
+        {
+          "kind": "arm",
+          "original": 522,
+          "current": 518,
+          "physical": 396
+        },
+        {
+          "kind": "endif",
+          "original": 707,
+          "current": 706,
+          "physical": 594
+        },
+        {
+          "kind": "arm",
+          "original": 527,
+          "current": 523,
+          "physical": 401
+        },
+        {
+          "kind": "endif",
+          "original": 529,
+          "current": 525,
+          "physical": 403
+        }
+      ],
+      "original_size": 27338,
+      "current_size": 22681,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "2c1b2079e410da6fe9950d6046a261a7d6920ebd57a86388866361cbb9fe6bc1",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [
+        {
+          "kind": "endif",
+          "original": 231,
+          "current": 228,
+          "physical": 233
+        },
+        {
+          "kind": "endif",
+          "original": 308,
+          "current": 305,
+          "physical": 310
+        },
+        {
+          "kind": "endif",
+          "original": 385,
+          "current": 382,
+          "physical": 387
+        },
+        {
+          "kind": "endif",
+          "original": 410,
+          "current": 408,
+          "physical": 413
+        },
+        {
+          "kind": "endif",
+          "original": 466,
+          "current": 460,
+          "physical": 466
+        },
+        {
+          "kind": "endif",
+          "original": 482,
+          "current": 478,
+          "physical": 481
+        },
+        {
+          "kind": "endif",
+          "original": 492,
+          "current": 490,
+          "physical": 492
+        },
+        {
+          "kind": "endif",
+          "original": 526,
+          "current": 522,
+          "physical": 525
+        },
+        {
+          "kind": "endif",
+          "original": 583,
+          "current": 578,
+          "physical": 580
+        },
+        {
+          "kind": "endif",
+          "original": 626,
+          "current": 623,
+          "physical": 623
+        },
+        {
+          "kind": "endif",
+          "original": 647,
+          "current": 645,
+          "physical": 645
+        },
+        {
+          "kind": "endif",
+          "original": 667,
+          "current": 661,
+          "physical": 662
+        },
+        {
+          "kind": "endif",
+          "original": 692,
+          "current": 690,
+          "physical": 688
+        },
+        {
+          "kind": "endif",
+          "original": 748,
+          "current": 745,
+          "physical": 744
+        },
+        {
+          "kind": "endif",
+          "original": 756,
+          "current": 754,
+          "physical": 753
+        },
+        {
+          "kind": "endif",
+          "original": 781,
+          "current": 779,
+          "physical": 779
+        },
+        {
+          "kind": "endif",
+          "original": 806,
+          "current": 798,
+          "physical": 799
+        },
+        {
+          "kind": "endif",
+          "original": 821,
+          "current": 819,
+          "physical": 815
+        },
+        {
+          "kind": "endif",
+          "original": 832,
+          "current": 827,
+          "physical": 824
+        },
+        {
+          "kind": "endif",
+          "original": 875,
+          "current": 873,
+          "physical": 868
+        },
+        {
+          "kind": "endif",
+          "original": 940,
+          "current": 938,
+          "physical": 937
+        },
+        {
+          "kind": "endif",
+          "original": 960,
+          "current": 958,
+          "physical": 958
+        },
+        {
+          "kind": "endif",
+          "original": 971,
+          "current": 969,
+          "physical": 970
+        },
+        {
+          "kind": "endif",
+          "original": 1019,
+          "current": 1017,
+          "physical": 1019
+        },
+        {
+          "kind": "endif",
+          "original": 1133,
+          "current": 1122,
+          "physical": 1125
+        },
+        {
+          "kind": "endif",
+          "original": 1190,
+          "current": 1179,
+          "physical": 1174
+        },
+        {
+          "kind": "endif",
+          "original": 1243,
+          "current": 1235,
+          "physical": 1222
+        },
+        {
+          "kind": "endif",
+          "original": 1284,
+          "current": 1280,
+          "physical": 1262
+        },
+        {
+          "kind": "endif",
+          "original": 1305,
+          "current": 1297,
+          "physical": 1278
+        },
+        {
+          "kind": "endif",
+          "original": 1319,
+          "current": 1311,
+          "physical": 1287
+        },
+        {
+          "kind": "endif",
+          "original": 1441,
+          "current": 1435,
+          "physical": 1406
+        },
+        {
+          "kind": "endif",
+          "original": 1456,
+          "current": 1453,
+          "physical": 1421
+        },
+        {
+          "kind": "endif",
+          "original": 1504,
+          "current": 1499,
+          "physical": 1467
+        },
+        {
+          "kind": "endif",
+          "original": 1512,
+          "current": 1510,
+          "physical": 1476
+        }
+      ],
+      "original_size": 36508,
+      "current_size": 34529,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "current_sha256": "cad3bb755126c1b7f6970b065d6f4db258e081a32b83acdbf800d9eacaf63bef",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [
+        {
+          "kind": "endif",
+          "original": 57,
+          "current": 52,
+          "physical": 55
+        },
+        {
+          "kind": "arm",
+          "original": 100,
+          "current": 107,
+          "physical": 108
+        },
+        {
+          "kind": "endif",
+          "original": 191,
+          "current": 190,
+          "physical": 213
+        },
+        {
+          "kind": "endif",
+          "original": 251,
+          "current": 249,
+          "physical": 275
+        },
+        {
+          "kind": "endif",
+          "original": 272,
+          "current": 269,
+          "physical": 297
+        },
+        {
+          "kind": "endif",
+          "original": 324,
+          "current": 312,
+          "physical": 339
+        },
+        {
+          "kind": "endif",
+          "original": 345,
+          "current": 343,
+          "physical": 360
+        },
+        {
+          "kind": "endif",
+          "original": 505,
+          "current": 504,
+          "physical": 522
+        },
+        {
+          "kind": "endif",
+          "original": 786,
+          "current": 706,
+          "physical": 756
+        },
+        {
+          "kind": "endif",
+          "original": 904,
+          "current": 801,
+          "physical": 773
+        },
+        {
+          "kind": "endif",
+          "original": 1001,
+          "current": 999,
+          "physical": 881
+        },
+        {
+          "kind": "endif",
+          "original": 1351,
+          "current": 1334,
+          "physical": 1241
+        },
+        {
+          "kind": "endif",
+          "original": 1383,
+          "current": 1380,
+          "physical": 1276
+        },
+        {
+          "kind": "endif",
+          "original": 1406,
+          "current": 1389,
+          "physical": 1284
+        },
+        {
+          "kind": "endif",
+          "original": 1425,
+          "current": 1424,
+          "physical": 1308
+        },
+        {
+          "kind": "endif",
+          "original": 1473,
+          "current": 1467,
+          "physical": 1352
+        },
+        {
+          "kind": "arm",
+          "original": 1671,
+          "current": 1663,
+          "physical": 1544
+        },
+        {
+          "kind": "endif",
+          "original": 1718,
+          "current": 1715,
+          "physical": 1597
+        },
+        {
+          "kind": "endif",
+          "original": 1953,
+          "current": 1951,
+          "physical": 1838
+        },
+        {
+          "kind": "endif",
+          "original": 2010,
+          "current": 2008,
+          "physical": 1886
+        },
+        {
+          "kind": "endif",
+          "original": 2143,
+          "current": 2141,
+          "physical": 2028
+        },
+        {
+          "kind": "endif",
+          "original": 2096,
+          "current": 2094,
+          "physical": 1976
+        },
+        {
+          "kind": "endif",
+          "original": 2178,
+          "current": 2175,
+          "physical": 2072
+        },
+        {
+          "kind": "endif",
+          "original": 2360,
+          "current": 2289,
+          "physical": 2215
+        },
+        {
+          "kind": "endif",
+          "original": 2571,
+          "current": 2570,
+          "physical": 2451
+        },
+        {
+          "kind": "endif",
+          "original": 2610,
+          "current": 2604,
+          "physical": 2494
+        },
+        {
+          "kind": "arm",
+          "original": 2602,
+          "current": 2607,
+          "physical": 2491
+        },
+        {
+          "kind": "endif",
+          "original": 2707,
+          "current": 2670,
+          "physical": 2561
+        },
+        {
+          "kind": "endif",
+          "original": 2817,
+          "current": 2801,
+          "physical": 2668
+        },
+        {
+          "kind": "endif",
+          "original": 2931,
+          "current": 2867,
+          "physical": 2730
+        },
+        {
+          "kind": "endif",
+          "original": 3034,
+          "current": 2989,
+          "physical": 2790
+        },
+        {
+          "kind": "endif",
+          "original": 3043,
+          "current": 3038,
+          "physical": 2796
+        },
+        {
+          "kind": "endif",
+          "original": 3052,
+          "current": 3051,
+          "physical": 2806
+        },
+        {
+          "kind": "endif",
+          "original": 3095,
+          "current": 3057,
+          "physical": 2813
+        },
+        {
+          "kind": "arm",
+          "original": 3202,
+          "current": 3099,
+          "physical": 2819
+        },
+        {
+          "kind": "arm",
+          "original": 384,
+          "current": 372,
+          "physical": 393
+        },
+        {
+          "kind": "arm",
+          "original": 1971,
+          "current": 1959,
+          "physical": 1846
+        },
+        {
+          "kind": "arm",
+          "original": 2974,
+          "current": 2971,
+          "physical": 2772
+        }
+      ],
+      "original_size": 89633,
+      "current_size": 76508,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "current_sha256": "9ac08ae68fcccd4a1d4eedf7d74510086c1052e80cb37502424f798987f2734f",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [
+        {
+          "kind": "arm",
+          "original": 213,
+          "current": 216,
+          "physical": 234
+        },
+        {
+          "kind": "endif",
+          "original": 264,
+          "current": 215,
+          "physical": 237
+        },
+        {
+          "kind": "endif",
+          "original": 302,
+          "current": 292,
+          "physical": 267
+        },
+        {
+          "kind": "endif",
+          "original": 570,
+          "current": 564,
+          "physical": 531
+        },
+        {
+          "kind": "endif",
+          "original": 685,
+          "current": 661,
+          "physical": 628
+        },
+        {
+          "kind": "endif",
+          "original": 789,
+          "current": 784,
+          "physical": 732
+        },
+        {
+          "kind": "arm",
+          "original": 802,
+          "current": 866,
+          "physical": 785
+        },
+        {
+          "kind": "arm",
+          "original": 875,
+          "current": 879,
+          "physical": 888
+        },
+        {
+          "kind": "arm",
+          "original": 902,
+          "current": 905,
+          "physical": 920
+        },
+        {
+          "kind": "arm",
+          "original": 1287,
+          "current": 1319,
+          "physical": 1339
+        },
+        {
+          "kind": "endif",
+          "original": 1294,
+          "current": 1289,
+          "physical": 1342
+        },
+        {
+          "kind": "endif",
+          "original": 1375,
+          "current": 1350,
+          "physical": 1400
+        },
+        {
+          "kind": "endif",
+          "original": 1491,
+          "current": 1481,
+          "physical": 1508
+        },
+        {
+          "kind": "arm",
+          "original": 1891,
+          "current": 1907,
+          "physical": 1925
+        },
+        {
+          "kind": "endif",
+          "original": 1970,
+          "current": 1967,
+          "physical": 2006
+        },
+        {
+          "kind": "arm",
+          "original": 1371,
+          "current": 1346,
+          "physical": 1396
+        },
+        {
+          "kind": "arm",
+          "original": 77,
+          "current": 78,
+          "physical": 86
+        },
+        {
+          "kind": "endif",
+          "original": 79,
+          "current": 80,
+          "physical": 88
+        },
+        {
+          "kind": "arm",
+          "original": 94,
+          "current": 97,
+          "physical": 115
+        },
+        {
+          "kind": "endif",
+          "original": 96,
+          "current": 99,
+          "physical": 117
+        },
+        {
+          "kind": "arm",
+          "original": 123,
+          "current": 126,
+          "physical": 144
+        },
+        {
+          "kind": "endif",
+          "original": 125,
+          "current": 128,
+          "physical": 146
+        },
+        {
+          "kind": "arm",
+          "original": 140,
+          "current": 143,
+          "physical": 161
+        },
+        {
+          "kind": "endif",
+          "original": 142,
+          "current": 145,
+          "physical": 163
+        },
+        {
+          "kind": "arm",
+          "original": 157,
+          "current": 160,
+          "physical": 178
+        },
+        {
+          "kind": "endif",
+          "original": 159,
+          "current": 162,
+          "physical": 180
+        },
+        {
+          "kind": "arm",
+          "original": 174,
+          "current": 177,
+          "physical": 195
+        },
+        {
+          "kind": "endif",
+          "original": 176,
+          "current": 179,
+          "physical": 197
+        },
+        {
+          "kind": "arm",
+          "original": 191,
+          "current": 194,
+          "physical": 212
+        },
+        {
+          "kind": "endif",
+          "original": 193,
+          "current": 196,
+          "physical": 214
+        },
+        {
+          "kind": "arm",
+          "original": 208,
+          "current": 211,
+          "physical": 229
+        },
+        {
+          "kind": "endif",
+          "original": 210,
+          "current": 213,
+          "physical": 231
+        },
+        {
+          "kind": "arm",
+          "original": 835,
+          "current": 839,
+          "physical": 848
+        },
+        {
+          "kind": "endif",
+          "original": 893,
+          "current": 896,
+          "physical": 911
+        },
+        {
+          "kind": "arm",
+          "original": 950,
+          "current": 973,
+          "physical": 993
+        },
+        {
+          "kind": "endif",
+          "original": 958,
+          "current": 981,
+          "physical": 1001
+        },
+        {
+          "kind": "arm",
+          "original": 1023,
+          "current": 1046,
+          "physical": 1066
+        },
+        {
+          "kind": "endif",
+          "original": 1031,
+          "current": 1054,
+          "physical": 1074
+        },
+        {
+          "kind": "arm",
+          "original": 1276,
+          "current": 1308,
+          "physical": 1328
+        },
+        {
+          "kind": "endif",
+          "original": 1283,
+          "current": 1315,
+          "physical": 1335
+        }
+      ],
+      "original_size": 75645,
+      "current_size": 79927,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "3d46679e663b4fb35c8054370b2d5974ea92bf5aebe62cd4d50feb9e3a00244f",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [
+        {
+          "kind": "endif",
+          "original": 43,
+          "current": 40,
+          "physical": 168
+        },
+        {
+          "kind": "endif",
+          "original": 39,
+          "current": 38,
+          "physical": 166
+        },
+        {
+          "kind": "endif",
+          "original": 46,
+          "current": 45,
+          "physical": 173
+        },
+        {
+          "kind": "endif",
+          "original": 89,
+          "current": 87,
+          "physical": 183
+        },
+        {
+          "kind": "arm",
+          "original": 86,
+          "current": 69,
+          "physical": 181
+        },
+        {
+          "kind": "endif",
+          "original": 1055,
+          "current": 1046,
+          "physical": 191
+        },
+        {
+          "kind": "arm",
+          "original": 1045,
+          "current": 1034,
+          "physical": 189
+        },
+        {
+          "kind": "endif",
+          "original": 1579,
+          "current": 1578,
+          "physical": 198
+        },
+        {
+          "kind": "arm",
+          "original": 1577,
+          "current": 1576,
+          "physical": 196
+        },
+        {
+          "kind": "endif",
+          "original": 1604,
+          "current": 1600,
+          "physical": 206
+        },
+        {
+          "kind": "arm",
+          "original": 1599,
+          "current": 1596,
+          "physical": 204
+        },
+        {
+          "kind": "endif",
+          "original": 2236,
+          "current": 2235,
+          "physical": 211
+        },
+        {
+          "kind": "endif",
+          "original": 2240,
+          "current": 2239,
+          "physical": 216
+        },
+        {
+          "kind": "endif",
+          "original": 2252,
+          "current": 2250,
+          "physical": 227
+        },
+        {
+          "kind": "arm",
+          "original": 2249,
+          "current": 2246,
+          "physical": 225
+        },
+        {
+          "kind": "endif",
+          "original": 2862,
+          "current": 2815,
+          "physical": 234
+        },
+        {
+          "kind": "endif",
+          "original": 2912,
+          "current": 2865,
+          "physical": 239
+        },
+        {
+          "kind": "endif",
+          "original": 3096,
+          "current": 3094,
+          "physical": 249
+        },
+        {
+          "kind": "endif",
+          "original": 3093,
+          "current": 3079,
+          "physical": 247
+        },
+        {
+          "kind": "endif",
+          "original": 3137,
+          "current": 3136,
+          "physical": 256
+        },
+        {
+          "kind": "arm",
+          "original": 3135,
+          "current": 3127,
+          "physical": 254
+        },
+        {
+          "kind": "endif",
+          "original": 3239,
+          "current": 3186,
+          "physical": 271
+        },
+        {
+          "kind": "endif",
+          "original": 3178,
+          "current": 3177,
+          "physical": 267
+        },
+        {
+          "kind": "arm",
+          "original": 3176,
+          "current": 3168,
+          "physical": 265
+        },
+        {
+          "kind": "arm",
+          "original": 3185,
+          "current": 3179,
+          "physical": 269
+        },
+        {
+          "kind": "endif",
+          "original": 3297,
+          "current": 3292,
+          "physical": 279
+        },
+        {
+          "kind": "arm",
+          "original": 3291,
+          "current": 3253,
+          "physical": 277
+        },
+        {
+          "kind": "endif",
+          "original": 3434,
+          "current": 3429,
+          "physical": 287
+        },
+        {
+          "kind": "arm",
+          "original": 3428,
+          "current": 3424,
+          "physical": 285
+        },
+        {
+          "kind": "endif",
+          "original": 3451,
+          "current": 3437,
+          "physical": 292
+        },
+        {
+          "kind": "endif",
+          "original": 3683,
+          "current": 3562,
+          "physical": 299
+        },
+        {
+          "kind": "arm",
+          "original": 3561,
+          "current": 3487,
+          "physical": 297
+        },
+        {
+          "kind": "endif",
+          "original": 3932,
+          "current": 3805,
+          "physical": 306
+        },
+        {
+          "kind": "arm",
+          "original": 3804,
+          "current": 3752,
+          "physical": 304
+        },
+        {
+          "kind": "endif",
+          "original": 4969,
+          "current": 4961,
+          "physical": 154
+        },
+        {
+          "kind": "endif",
+          "original": 5693,
+          "current": 5692,
+          "physical": 311
+        },
+        {
+          "kind": "endif",
+          "original": 6174,
+          "current": 6171,
+          "physical": 318
+        },
+        {
+          "kind": "arm",
+          "original": 6170,
+          "current": 6167,
+          "physical": 316
+        },
+        {
+          "kind": "endif",
+          "original": 6211,
+          "current": 6208,
+          "physical": 325
+        },
+        {
+          "kind": "arm",
+          "original": 6207,
+          "current": 6204,
+          "physical": 323
+        },
+        {
+          "kind": "endif",
+          "original": 6344,
+          "current": 6342,
+          "physical": 336
+        },
+        {
+          "kind": "arm",
+          "original": 6340,
+          "current": 6339,
+          "physical": 333
+        }
+      ],
+      "original_size": 148355,
+      "current_size": 10667,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "af265fc49e2fe5d9663560ef8a53a7474f18f0dac150bf6a4ee1b6141527e3cd",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [
+        {
+          "kind": "endif",
+          "original": 22,
+          "current": 19,
+          "physical": 19
+        },
+        {
+          "kind": "endif",
+          "original": 64,
+          "current": 39,
+          "physical": 466
+        },
+        {
+          "kind": "endif",
+          "original": 210,
+          "current": 209,
+          "physical": 356
+        },
+        {
+          "kind": "endif",
+          "original": 228,
+          "current": 218,
+          "physical": 471
+        },
+        {
+          "kind": "endif",
+          "original": 247,
+          "current": 246,
+          "physical": 365
+        },
+        {
+          "kind": "endif",
+          "original": 265,
+          "current": 255,
+          "physical": 476
+        },
+        {
+          "kind": "endif",
+          "original": 274,
+          "current": 272,
+          "physical": 481
+        },
+        {
+          "kind": "endif",
+          "original": 301,
+          "current": 295,
+          "physical": 418
+        },
+        {
+          "kind": "endif",
+          "original": 338,
+          "current": 332,
+          "physical": 442
+        },
+        {
+          "kind": "endif",
+          "original": 329,
+          "current": 326,
+          "physical": 437
+        },
+        {
+          "kind": "arm",
+          "original": 325,
+          "current": 317,
+          "physical": 435
+        },
+        {
+          "kind": "endif",
+          "original": 344,
+          "current": 342,
+          "physical": 425
+        },
+        {
+          "kind": "endif",
+          "original": 358,
+          "current": 357,
+          "physical": 374
+        },
+        {
+          "kind": "arm",
+          "original": 356,
+          "current": 355,
+          "physical": 372
+        },
+        {
+          "kind": "endif",
+          "original": 365,
+          "current": 364,
+          "physical": 346
+        },
+        {
+          "kind": "endif",
+          "original": 377,
+          "current": 370,
+          "physical": 486
+        },
+        {
+          "kind": "endif",
+          "original": 402,
+          "current": 396,
+          "physical": 491
+        },
+        {
+          "kind": "endif",
+          "original": 417,
+          "current": 415,
+          "physical": 496
+        },
+        {
+          "kind": "endif",
+          "original": 465,
+          "current": 432,
+          "physical": 501
+        },
+        {
+          "kind": "endif",
+          "original": 523,
+          "current": 521,
+          "physical": 512
+        },
+        {
+          "kind": "endif",
+          "original": 520,
+          "current": 517,
+          "physical": 510
+        },
+        {
+          "kind": "endif",
+          "original": 559,
+          "current": 557,
+          "physical": 523
+        },
+        {
+          "kind": "endif",
+          "original": 556,
+          "current": 552,
+          "physical": 521
+        },
+        {
+          "kind": "arm",
+          "original": 609,
+          "current": 603,
+          "physical": 110
+        },
+        {
+          "kind": "endif",
+          "original": 943,
+          "current": 941,
+          "physical": 534
+        },
+        {
+          "kind": "endif",
+          "original": 940,
+          "current": 937,
+          "physical": 532
+        },
+        {
+          "kind": "endif",
+          "original": 985,
+          "current": 983,
+          "physical": 545
+        },
+        {
+          "kind": "endif",
+          "original": 982,
+          "current": 979,
+          "physical": 543
+        },
+        {
+          "kind": "endif",
+          "original": 1001,
+          "current": 996,
+          "physical": 383
+        },
+        {
+          "kind": "arm",
+          "original": 995,
+          "current": 994,
+          "physical": 381
+        },
+        {
+          "kind": "endif",
+          "original": 1100,
+          "current": 1099,
+          "physical": 392
+        },
+        {
+          "kind": "endif",
+          "original": 1114,
+          "current": 1112,
+          "physical": 550
+        },
+        {
+          "kind": "endif",
+          "original": 1152,
+          "current": 1125,
+          "physical": 401
+        },
+        {
+          "kind": "endif",
+          "original": 1213,
+          "current": 1209,
+          "physical": 451
+        },
+        {
+          "kind": "arm",
+          "original": 1207,
+          "current": 1192,
+          "physical": 448
+        },
+        {
+          "kind": "endif",
+          "original": 1297,
+          "current": 1296,
+          "physical": 555
+        },
+        {
+          "kind": "endif",
+          "original": 1354,
+          "current": 1351,
+          "physical": 460
+        },
+        {
+          "kind": "arm",
+          "original": 1349,
+          "current": 1318,
+          "physical": 457
+        },
+        {
+          "kind": "endif",
+          "original": 1468,
+          "current": 1450,
+          "physical": 410
+        },
+        {
+          "kind": "arm",
+          "original": 1449,
+          "current": 1436,
+          "physical": 408
+        },
+        {
+          "kind": "endif",
+          "original": 1534,
+          "current": 1530,
+          "physical": 574
+        },
+        {
+          "kind": "endif",
+          "original": 1520,
+          "current": 1518,
+          "physical": 566
+        },
+        {
+          "kind": "arm",
+          "original": 1517,
+          "current": 1509,
+          "physical": 564
+        },
+        {
+          "kind": "endif",
+          "original": 1529,
+          "current": 1528,
+          "physical": 572
+        },
+        {
+          "kind": "arm",
+          "original": 19,
+          "current": 16,
+          "physical": 16
+        }
+      ],
+      "original_size": 42158,
+      "current_size": 13775,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "5b023bde04c9ccfb35252523f9d7d6c0b3400d3a6eabb87d1a12f0abbd58e528",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [
+        {
+          "kind": "endif",
+          "original": 104,
+          "current": 98,
+          "physical": 101
+        },
+        {
+          "kind": "endif",
+          "original": 119,
+          "current": 113,
+          "physical": 112
+        },
+        {
+          "kind": "endif",
+          "original": 217,
+          "current": 212,
+          "physical": 209
+        },
+        {
+          "kind": "endif",
+          "original": 301,
+          "current": 289,
+          "physical": 270
+        },
+        {
+          "kind": "endif",
+          "original": 336,
+          "current": 334,
+          "physical": 305
+        },
+        {
+          "kind": "endif",
+          "original": 349,
+          "current": 347,
+          "physical": 318
+        },
+        {
+          "kind": "arm",
+          "original": 354,
+          "current": 361,
+          "physical": 331
+        },
+        {
+          "kind": "endif",
+          "original": 358,
+          "current": 356,
+          "physical": 334
+        },
+        {
+          "kind": "endif",
+          "original": 396,
+          "current": 391,
+          "physical": 369
+        },
+        {
+          "kind": "endif",
+          "original": 402,
+          "current": 400,
+          "physical": 375
+        },
+        {
+          "kind": "endif",
+          "original": 439,
+          "current": 434,
+          "physical": 409
+        },
+        {
+          "kind": "endif",
+          "original": 445,
+          "current": 443,
+          "physical": 415
+        },
+        {
+          "kind": "endif",
+          "original": 490,
+          "current": 485,
+          "physical": 457
+        },
+        {
+          "kind": "endif",
+          "original": 546,
+          "current": 541,
+          "physical": 523
+        },
+        {
+          "kind": "endif",
+          "original": 552,
+          "current": 550,
+          "physical": 529
+        },
+        {
+          "kind": "endif",
+          "original": 603,
+          "current": 598,
+          "physical": 577
+        },
+        {
+          "kind": "endif",
+          "original": 629,
+          "current": 627,
+          "physical": 603
+        },
+        {
+          "kind": "endif",
+          "original": 669,
+          "current": 664,
+          "physical": 640
+        },
+        {
+          "kind": "endif",
+          "original": 734,
+          "current": 725,
+          "physical": 698
+        },
+        {
+          "kind": "endif",
+          "original": 1152,
+          "current": 1150,
+          "physical": 1116
+        },
+        {
+          "kind": "endif",
+          "original": 1305,
+          "current": 1300,
+          "physical": 1266
+        },
+        {
+          "kind": "endif",
+          "original": 1371,
+          "current": 1369,
+          "physical": 1332
+        },
+        {
+          "kind": "endif",
+          "original": 1392,
+          "current": 1385,
+          "physical": 1348
+        },
+        {
+          "kind": "endif",
+          "original": 1465,
+          "current": 1457,
+          "physical": 1415
+        },
+        {
+          "kind": "endif",
+          "original": 1538,
+          "current": 1529,
+          "physical": 1481
+        },
+        {
+          "kind": "endif",
+          "original": 1600,
+          "current": 1598,
+          "physical": 1543
+        },
+        {
+          "kind": "endif",
+          "original": 1678,
+          "current": 1673,
+          "physical": 1618
+        },
+        {
+          "kind": "endif",
+          "original": 1735,
+          "current": 1730,
+          "physical": 1672
+        },
+        {
+          "kind": "endif",
+          "original": 1818,
+          "current": 1816,
+          "physical": 1755
+        },
+        {
+          "kind": "endif",
+          "original": 1874,
+          "current": 1869,
+          "physical": 1808
+        },
+        {
+          "kind": "endif",
+          "original": 1958,
+          "current": 1953,
+          "physical": 1889
+        },
+        {
+          "kind": "endif",
+          "original": 2068,
+          "current": 2063,
+          "physical": 1996
+        },
+        {
+          "kind": "endif",
+          "original": 2089,
+          "current": 2087,
+          "physical": 2017
+        },
+        {
+          "kind": "endif",
+          "original": 2097,
+          "current": 2095,
+          "physical": 2025
+        },
+        {
+          "kind": "endif",
+          "original": 2105,
+          "current": 2103,
+          "physical": 2033
+        },
+        {
+          "kind": "endif",
+          "original": 2113,
+          "current": 2111,
+          "physical": 2041
+        },
+        {
+          "kind": "endif",
+          "original": 2122,
+          "current": 2120,
+          "physical": 2050
+        },
+        {
+          "kind": "endif",
+          "original": 2148,
+          "current": 2146,
+          "physical": 2076
+        },
+        {
+          "kind": "endif",
+          "original": 2230,
+          "current": 2225,
+          "physical": 2155
+        },
+        {
+          "kind": "endif",
+          "original": 2256,
+          "current": 2251,
+          "physical": 2178
+        },
+        {
+          "kind": "endif",
+          "original": 2273,
+          "current": 2271,
+          "physical": 2195
+        },
+        {
+          "kind": "endif",
+          "original": 2293,
+          "current": 2289,
+          "physical": 2213
+        },
+        {
+          "kind": "endif",
+          "original": 2326,
+          "current": 2320,
+          "physical": 2242
+        },
+        {
+          "kind": "endif",
+          "original": 2688,
+          "current": 2686,
+          "physical": 2604
+        },
+        {
+          "kind": "endif",
+          "original": 2703,
+          "current": 2701,
+          "physical": 2619
+        },
+        {
+          "kind": "endif",
+          "original": 2744,
+          "current": 2734,
+          "physical": 2652
+        },
+        {
+          "kind": "endif",
+          "original": 2931,
+          "current": 2750,
+          "physical": 2660
+        },
+        {
+          "kind": "endif",
+          "original": 2963,
+          "current": 2958,
+          "physical": 2689
+        },
+        {
+          "kind": "endif",
+          "original": 2969,
+          "current": 2967,
+          "physical": 2695
+        },
+        {
+          "kind": "endif",
+          "original": 3120,
+          "current": 3117,
+          "physical": 2845
+        },
+        {
+          "kind": "endif",
+          "original": 3177,
+          "current": 3167,
+          "physical": 2894
+        },
+        {
+          "kind": "endif",
+          "original": 3236,
+          "current": 3230,
+          "physical": 2949
+        },
+        {
+          "kind": "endif",
+          "original": 3256,
+          "current": 3250,
+          "physical": 2965
+        },
+        {
+          "kind": "endif",
+          "original": 3309,
+          "current": 3303,
+          "physical": 3014
+        },
+        {
+          "kind": "endif",
+          "original": 3327,
+          "current": 3323,
+          "physical": 3030
+        },
+        {
+          "kind": "endif",
+          "original": 3439,
+          "current": 3434,
+          "physical": 3139
+        },
+        {
+          "kind": "endif",
+          "original": 3544,
+          "current": 3540,
+          "physical": 3242
+        },
+        {
+          "kind": "endif",
+          "original": 3561,
+          "current": 3559,
+          "physical": 3259
+        },
+        {
+          "kind": "endif",
+          "original": 3633,
+          "current": 3631,
+          "physical": 3331
+        },
+        {
+          "kind": "endif",
+          "original": 3731,
+          "current": 3728,
+          "physical": 3428
+        },
+        {
+          "kind": "endif",
+          "original": 3739,
+          "current": 3737,
+          "physical": 3436
+        },
+        {
+          "kind": "endif",
+          "original": 3770,
+          "current": 3768,
+          "physical": 3467
+        },
+        {
+          "kind": "endif",
+          "original": 3780,
+          "current": 3778,
+          "physical": 3477
+        },
+        {
+          "kind": "endif",
+          "original": 4031,
+          "current": 4023,
+          "physical": 3722
+        },
+        {
+          "kind": "endif",
+          "original": 4213,
+          "current": 4094,
+          "physical": 3787
+        }
+      ],
+      "original_size": 124627,
+      "current_size": 104473,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [
+        {
+          "kind": "endif",
+          "original": 280,
+          "current": 270,
+          "physical": 74
+        },
+        {
+          "kind": "endif",
+          "original": 300,
+          "current": 284,
+          "physical": 98
+        },
+        {
+          "kind": "endif",
+          "original": 359,
+          "current": 356,
+          "physical": 149
+        },
+        {
+          "kind": "arm",
+          "original": 354,
+          "current": 353,
+          "physical": 146
+        },
+        {
+          "kind": "arm",
+          "original": 392,
+          "current": 391,
+          "physical": 155
+        },
+        {
+          "kind": "arm",
+          "original": 565,
+          "current": 564,
+          "physical": 164
+        },
+        {
+          "kind": "arm",
+          "original": 717,
+          "current": 716,
+          "physical": 173
+        },
+        {
+          "kind": "arm",
+          "original": 740,
+          "current": 739,
+          "physical": 182
+        },
+        {
+          "kind": "arm",
+          "original": 966,
+          "current": 965,
+          "physical": 191
+        },
+        {
+          "kind": "endif",
+          "original": 1141,
+          "current": 1140,
+          "physical": 203
+        },
+        {
+          "kind": "arm",
+          "original": 1138,
+          "current": 1136,
+          "physical": 200
+        },
+        {
+          "kind": "arm",
+          "original": 1231,
+          "current": 1230,
+          "physical": 209
+        },
+        {
+          "kind": "arm",
+          "original": 1314,
+          "current": 1313,
+          "physical": 218
+        },
+        {
+          "kind": "endif",
+          "original": 1427,
+          "current": 1407,
+          "physical": 20
+        },
+        {
+          "kind": "endif",
+          "original": 1563,
+          "current": 1545,
+          "physical": 25
+        },
+        {
+          "kind": "endif",
+          "original": 1815,
+          "current": 1795,
+          "physical": 30
+        },
+        {
+          "kind": "arm",
+          "original": 1959,
+          "current": 1958,
+          "physical": 227
+        },
+        {
+          "kind": "arm",
+          "original": 2029,
+          "current": 2028,
+          "physical": 236
+        },
+        {
+          "kind": "arm",
+          "original": 2114,
+          "current": 2113,
+          "physical": 245
+        },
+        {
+          "kind": "arm",
+          "original": 2290,
+          "current": 2289,
+          "physical": 254
+        },
+        {
+          "kind": "arm",
+          "original": 2371,
+          "current": 2370,
+          "physical": 263
+        },
+        {
+          "kind": "arm",
+          "original": 2725,
+          "current": 2724,
+          "physical": 272
+        },
+        {
+          "kind": "endif",
+          "original": 2768,
+          "current": 2764,
+          "physical": 608
+        },
+        {
+          "kind": "arm",
+          "original": 2763,
+          "current": 2758,
+          "physical": 606
+        },
+        {
+          "kind": "arm",
+          "original": 3109,
+          "current": 3108,
+          "physical": 281
+        },
+        {
+          "kind": "arm",
+          "original": 3160,
+          "current": 3159,
+          "physical": 290
+        },
+        {
+          "kind": "arm",
+          "original": 3448,
+          "current": 3447,
+          "physical": 299
+        },
+        {
+          "kind": "endif",
+          "original": 3469,
+          "current": 3468,
+          "physical": 617
+        },
+        {
+          "kind": "endif",
+          "original": 3480,
+          "current": 3479,
+          "physical": 626
+        },
+        {
+          "kind": "endif",
+          "original": 3528,
+          "current": 3496,
+          "physical": 140
+        },
+        {
+          "kind": "arm",
+          "original": 3974,
+          "current": 3973,
+          "physical": 308
+        },
+        {
+          "kind": "endif",
+          "original": 4323,
+          "current": 4322,
+          "physical": 320
+        },
+        {
+          "kind": "arm",
+          "original": 4320,
+          "current": 4319,
+          "physical": 317
+        },
+        {
+          "kind": "endif",
+          "original": 4432,
+          "current": 4428,
+          "physical": 635
+        },
+        {
+          "kind": "arm",
+          "original": 4427,
+          "current": 4422,
+          "physical": 633
+        },
+        {
+          "kind": "endif",
+          "original": 4733,
+          "current": 4732,
+          "physical": 329
+        },
+        {
+          "kind": "arm",
+          "original": 4730,
+          "current": 4728,
+          "physical": 326
+        },
+        {
+          "kind": "arm",
+          "original": 5474,
+          "current": 5473,
+          "physical": 335
+        },
+        {
+          "kind": "arm",
+          "original": 5508,
+          "current": 5507,
+          "physical": 344
+        },
+        {
+          "kind": "arm",
+          "original": 5770,
+          "current": 5769,
+          "physical": 353
+        },
+        {
+          "kind": "arm",
+          "original": 5825,
+          "current": 5824,
+          "physical": 362
+        },
+        {
+          "kind": "endif",
+          "original": 5991,
+          "current": 5990,
+          "physical": 374
+        },
+        {
+          "kind": "arm",
+          "original": 5988,
+          "current": 5987,
+          "physical": 371
+        },
+        {
+          "kind": "endif",
+          "original": 6248,
+          "current": 6243,
+          "physical": 80
+        },
+        {
+          "kind": "endif",
+          "original": 6317,
+          "current": 6316,
+          "physical": 383
+        },
+        {
+          "kind": "arm",
+          "original": 6314,
+          "current": 6313,
+          "physical": 380
+        },
+        {
+          "kind": "endif",
+          "original": 6453,
+          "current": 6437,
+          "physical": 392
+        },
+        {
+          "kind": "arm",
+          "original": 6435,
+          "current": 6418,
+          "physical": 389
+        },
+        {
+          "kind": "arm",
+          "original": 6691,
+          "current": 6690,
+          "physical": 398
+        },
+        {
+          "kind": "endif",
+          "original": 6935,
+          "current": 6934,
+          "physical": 410
+        },
+        {
+          "kind": "arm",
+          "original": 6932,
+          "current": 6930,
+          "physical": 407
+        },
+        {
+          "kind": "endif",
+          "original": 6983,
+          "current": 6982,
+          "physical": 419
+        },
+        {
+          "kind": "arm",
+          "original": 6980,
+          "current": 6978,
+          "physical": 416
+        },
+        {
+          "kind": "endif",
+          "original": 7036,
+          "current": 7033,
+          "physical": 428
+        },
+        {
+          "kind": "arm",
+          "original": 7031,
+          "current": 7027,
+          "physical": 425
+        },
+        {
+          "kind": "endif",
+          "original": 7077,
+          "current": 7076,
+          "physical": 437
+        },
+        {
+          "kind": "arm",
+          "original": 7074,
+          "current": 7072,
+          "physical": 434
+        },
+        {
+          "kind": "arm",
+          "original": 7104,
+          "current": 7103,
+          "physical": 443
+        },
+        {
+          "kind": "arm",
+          "original": 7133,
+          "current": 7132,
+          "physical": 452
+        },
+        {
+          "kind": "arm",
+          "original": 7163,
+          "current": 7162,
+          "physical": 461
+        },
+        {
+          "kind": "arm",
+          "original": 7190,
+          "current": 7189,
+          "physical": 470
+        },
+        {
+          "kind": "endif",
+          "original": 7267,
+          "current": 7266,
+          "physical": 60
+        },
+        {
+          "kind": "arm",
+          "original": 7335,
+          "current": 7334,
+          "physical": 479
+        },
+        {
+          "kind": "arm",
+          "original": 7365,
+          "current": 7364,
+          "physical": 488
+        },
+        {
+          "kind": "arm",
+          "original": 7441,
+          "current": 7440,
+          "physical": 497
+        },
+        {
+          "kind": "endif",
+          "original": 7857,
+          "current": 7851,
+          "physical": 86
+        },
+        {
+          "kind": "arm",
+          "original": 7919,
+          "current": 7918,
+          "physical": 506
+        },
+        {
+          "kind": "endif",
+          "original": 8411,
+          "current": 8379,
+          "physical": 68
+        },
+        {
+          "kind": "endif",
+          "original": 8564,
+          "current": 8563,
+          "physical": 518
+        },
+        {
+          "kind": "arm",
+          "original": 8561,
+          "current": 8559,
+          "physical": 515
+        },
+        {
+          "kind": "endif",
+          "original": 8577,
+          "current": 8576,
+          "physical": 527
+        },
+        {
+          "kind": "arm",
+          "original": 8574,
+          "current": 8572,
+          "physical": 524
+        },
+        {
+          "kind": "endif",
+          "original": 8692,
+          "current": 8691,
+          "physical": 536
+        },
+        {
+          "kind": "arm",
+          "original": 8689,
+          "current": 8688,
+          "physical": 533
+        },
+        {
+          "kind": "endif",
+          "original": 8752,
+          "current": 8751,
+          "physical": 545
+        },
+        {
+          "kind": "arm",
+          "original": 8749,
+          "current": 8748,
+          "physical": 542
+        },
+        {
+          "kind": "endif",
+          "original": 9242,
+          "current": 9241,
+          "physical": 554
+        },
+        {
+          "kind": "arm",
+          "original": 9239,
+          "current": 9238,
+          "physical": 551
+        },
+        {
+          "kind": "endif",
+          "original": 9308,
+          "current": 9307,
+          "physical": 563
+        },
+        {
+          "kind": "arm",
+          "original": 9305,
+          "current": 9304,
+          "physical": 560
+        },
+        {
+          "kind": "endif",
+          "original": 9359,
+          "current": 9358,
+          "physical": 572
+        },
+        {
+          "kind": "arm",
+          "original": 9356,
+          "current": 9355,
+          "physical": 569
+        },
+        {
+          "kind": "arm",
+          "original": 9397,
+          "current": 9396,
+          "physical": 578
+        },
+        {
+          "kind": "endif",
+          "original": 9441,
+          "current": 9440,
+          "physical": 590
+        },
+        {
+          "kind": "arm",
+          "original": 9438,
+          "current": 9436,
+          "physical": 587
+        },
+        {
+          "kind": "endif",
+          "original": 9564,
+          "current": 9563,
+          "physical": 599
+        },
+        {
+          "kind": "arm",
+          "original": 9561,
+          "current": 9559,
+          "physical": 596
+        },
+        {
+          "kind": "endif",
+          "original": 9855,
+          "current": 9853,
+          "physical": 104
+        },
+        {
+          "kind": "endif",
+          "original": 10309,
+          "current": 9995,
+          "physical": 92
+        }
+      ],
+      "original_size": 249958,
+      "current_size": 10665,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "current_sha256": "c190414927cd0bdb0e142284e8285544480abf61458564f86784b4a53cd367d4",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [
+        {
+          "original_arm": 5,
+          "current_arm": 2,
+          "original_parent": 0,
+          "expected_current_parent": 0,
+          "actual_current_parent": 1
+        },
+        {
+          "original_arm": 6,
+          "current_arm": 3,
+          "original_parent": 0,
+          "expected_current_parent": 0,
+          "actual_current_parent": 1
+        },
+        {
+          "original_arm": 9,
+          "current_arm": 4,
+          "original_parent": 0,
+          "expected_current_parent": 0,
+          "actual_current_parent": 1
+        },
+        {
+          "original_arm": 10,
+          "current_arm": 5,
+          "original_parent": 0,
+          "expected_current_parent": 0,
+          "actual_current_parent": 1
+        },
+        {
+          "original_arm": 25,
+          "current_arm": 6,
+          "original_parent": 0,
+          "expected_current_parent": 0,
+          "actual_current_parent": 1
+        },
+        {
+          "original_arm": 26,
+          "current_arm": 7,
+          "original_parent": 0,
+          "expected_current_parent": 0,
+          "actual_current_parent": 1
+        },
+        {
+          "original_arm": 32,
+          "current_arm": 14,
+          "original_parent": 0,
+          "expected_current_parent": 0,
+          "actual_current_parent": 10
+        },
+        {
+          "original_arm": 36,
+          "current_arm": 11,
+          "original_parent": 0,
+          "expected_current_parent": 0,
+          "actual_current_parent": 10
+        },
+        {
+          "original_arm": 37,
+          "current_arm": 12,
+          "original_parent": 0,
+          "expected_current_parent": 0,
+          "actual_current_parent": 10
+        },
+        {
+          "original_arm": 38,
+          "current_arm": 13,
+          "original_parent": 0,
+          "expected_current_parent": 0,
+          "actual_current_parent": 10
+        }
+      ],
+      "directive_line_leads": [
+        {
+          "kind": "endif",
+          "original": 32,
+          "current": 31,
+          "physical": 591
+        },
+        {
+          "kind": "arm",
+          "original": 38,
+          "current": 37,
+          "physical": 599
+        },
+        {
+          "kind": "endif",
+          "original": 114,
+          "current": 113,
+          "physical": 611
+        },
+        {
+          "kind": "arm",
+          "original": 112,
+          "current": 111,
+          "physical": 609
+        },
+        {
+          "kind": "endif",
+          "original": 203,
+          "current": 202,
+          "physical": 619
+        },
+        {
+          "kind": "arm",
+          "original": 201,
+          "current": 200,
+          "physical": 617
+        },
+        {
+          "kind": "endif",
+          "original": 232,
+          "current": 231,
+          "physical": 627
+        },
+        {
+          "kind": "arm",
+          "original": 230,
+          "current": 229,
+          "physical": 625
+        },
+        {
+          "kind": "endif",
+          "original": 328,
+          "current": 311,
+          "physical": 633
+        },
+        {
+          "kind": "endif",
+          "original": 402,
+          "current": 397,
+          "physical": 639
+        },
+        {
+          "kind": "endif",
+          "original": 414,
+          "current": 413,
+          "physical": 644
+        },
+        {
+          "kind": "endif",
+          "original": 440,
+          "current": 418,
+          "physical": 650
+        },
+        {
+          "kind": "endif",
+          "original": 505,
+          "current": 497,
+          "physical": 662
+        },
+        {
+          "kind": "endif",
+          "original": 685,
+          "current": 675,
+          "physical": 670
+        },
+        {
+          "kind": "arm",
+          "original": 674,
+          "current": 665,
+          "physical": 668
+        },
+        {
+          "kind": "endif",
+          "original": 1206,
+          "current": 1198,
+          "physical": 694
+        },
+        {
+          "kind": "endif",
+          "original": 1221,
+          "current": 1220,
+          "physical": 702
+        },
+        {
+          "kind": "endif",
+          "original": 1464,
+          "current": 1456,
+          "physical": 714
+        },
+        {
+          "kind": "endif",
+          "original": 1484,
+          "current": 1481,
+          "physical": 720
+        },
+        {
+          "kind": "endif",
+          "original": 1918,
+          "current": 1917,
+          "physical": 725
+        },
+        {
+          "kind": "endif",
+          "original": 2432,
+          "current": 2410,
+          "physical": 743
+        },
+        {
+          "kind": "arm",
+          "original": 15,
+          "current": 1,
+          "physical": 1
+        },
+        {
+          "kind": "endif",
+          "original": 2640,
+          "current": 2434,
+          "physical": 746
+        }
+      ],
+      "original_size": 93685,
+      "current_size": 27296,
+      "status": "pending whole-file review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_sha256": "880ee6bad2750e8308eebd87e2f127840f025dbbf3861f3ee09cef123e684562",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [
+        {
+          "original_arm": 54,
+          "current_arm": 2,
+          "original_parent": 0,
+          "expected_current_parent": 0,
+          "actual_current_parent": 1
+        }
+      ],
+      "directive_line_leads": [
+        {
+          "kind": "endif",
+          "original": 58,
+          "current": 57,
+          "physical": 99
+        },
+        {
+          "kind": "endif",
+          "original": 87,
+          "current": 85,
+          "physical": 119
+        },
+        {
+          "kind": "arm",
+          "original": 84,
+          "current": 83,
+          "physical": 117
+        },
+        {
+          "kind": "endif",
+          "original": 119,
+          "current": 117,
+          "physical": 127
+        },
+        {
+          "kind": "arm",
+          "original": 116,
+          "current": 115,
+          "physical": 125
+        },
+        {
+          "kind": "endif",
+          "original": 266,
+          "current": 255,
+          "physical": 133
+        },
+        {
+          "kind": "endif",
+          "original": 794,
+          "current": 793,
+          "physical": 141
+        },
+        {
+          "kind": "endif",
+          "original": 852,
+          "current": 843,
+          "physical": 149
+        },
+        {
+          "kind": "arm",
+          "original": 842,
+          "current": 801,
+          "physical": 147
+        },
+        {
+          "kind": "endif",
+          "original": 909,
+          "current": 896,
+          "physical": 157
+        },
+        {
+          "kind": "endif",
+          "original": 929,
+          "current": 918,
+          "physical": 165
+        },
+        {
+          "kind": "arm",
+          "original": 917,
+          "current": 913,
+          "physical": 163
+        },
+        {
+          "kind": "endif",
+          "original": 946,
+          "current": 939,
+          "physical": 173
+        },
+        {
+          "kind": "arm",
+          "original": 938,
+          "current": 933,
+          "physical": 171
+        },
+        {
+          "kind": "endif",
+          "original": 964,
+          "current": 955,
+          "physical": 181
+        },
+        {
+          "kind": "arm",
+          "original": 954,
+          "current": 950,
+          "physical": 179
+        },
+        {
+          "kind": "endif",
+          "original": 972,
+          "current": 970,
+          "physical": 189
+        },
+        {
+          "kind": "arm",
+          "original": 969,
+          "current": 968,
+          "physical": 187
+        },
+        {
+          "kind": "endif",
+          "original": 984,
+          "current": 983,
+          "physical": 197
+        },
+        {
+          "kind": "arm",
+          "original": 982,
+          "current": 981,
+          "physical": 195
+        },
+        {
+          "kind": "endif",
+          "original": 1061,
+          "current": 1056,
+          "physical": 205
+        },
+        {
+          "kind": "arm",
+          "original": 1055,
+          "current": 1050,
+          "physical": 203
+        },
+        {
+          "kind": "endif",
+          "original": 1101,
+          "current": 1096,
+          "physical": 213
+        },
+        {
+          "kind": "arm",
+          "original": 1095,
+          "current": 1086,
+          "physical": 211
+        },
+        {
+          "kind": "endif",
+          "original": 1269,
+          "current": 1246,
+          "physical": 221
+        },
+        {
+          "kind": "arm",
+          "original": 1245,
+          "current": 1221,
+          "physical": 219
+        },
+        {
+          "kind": "endif",
+          "original": 1280,
+          "current": 1279,
+          "physical": 229
+        },
+        {
+          "kind": "arm",
+          "original": 1278,
+          "current": 1273,
+          "physical": 227
+        },
+        {
+          "kind": "endif",
+          "original": 1538,
+          "current": 1537,
+          "physical": 235
+        },
+        {
+          "kind": "endif",
+          "original": 1559,
+          "current": 1557,
+          "physical": 241
+        },
+        {
+          "kind": "endif",
+          "original": 1633,
+          "current": 1624,
+          "physical": 247
+        },
+        {
+          "kind": "endif",
+          "original": 1878,
+          "current": 1877,
+          "physical": 265
+        },
+        {
+          "kind": "endif",
+          "original": 2347,
+          "current": 2345,
+          "physical": 277
+        },
+        {
+          "kind": "endif",
+          "original": 2598,
+          "current": 2597,
+          "physical": 283
+        },
+        {
+          "kind": "endif",
+          "original": 2742,
+          "current": 2740,
+          "physical": 289
+        },
+        {
+          "kind": "endif",
+          "original": 3026,
+          "current": 3024,
+          "physical": 307
+        },
+        {
+          "kind": "endif",
+          "original": 3553,
+          "current": 3549,
+          "physical": 313
+        },
+        {
+          "kind": "endif",
+          "original": 3572,
+          "current": 3571,
+          "physical": 321
+        },
+        {
+          "kind": "endif",
+          "original": 3773,
+          "current": 3765,
+          "physical": 332
+        },
+        {
+          "kind": "endif",
+          "original": 3764,
+          "current": 3763,
+          "physical": 330
+        },
+        {
+          "kind": "endif",
+          "original": 3898,
+          "current": 3803,
+          "physical": 343
+        },
+        {
+          "kind": "endif",
+          "original": 3802,
+          "current": 3796,
+          "physical": 341
+        },
+        {
+          "kind": "endif",
+          "original": 4120,
+          "current": 4113,
+          "physical": 74
+        },
+        {
+          "kind": "arm",
+          "original": 4112,
+          "current": 4106,
+          "physical": 72
+        },
+        {
+          "kind": "endif",
+          "original": 4792,
+          "current": 4790,
+          "physical": 86
+        },
+        {
+          "kind": "endif",
+          "original": 5028,
+          "current": 5027,
+          "physical": 351
+        },
+        {
+          "kind": "arm",
+          "original": 5026,
+          "current": 5025,
+          "physical": 349
+        },
+        {
+          "kind": "endif",
+          "original": 5215,
+          "current": 5107,
+          "physical": 357
+        }
+      ],
+      "original_size": 179460,
+      "current_size": 7419,
+      "status": "pending whole-file review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "95b7f33652defcac6c1706d1fa67961131f0b396c4cc748ca251e517ffe6ce90",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [],
+      "ancestry_conflicts": [
+        {
+          "original_arm": 84,
+          "current_arm": 84,
+          "original_parent": 83,
+          "expected_current_parent": 81,
+          "actual_current_parent": 83
+        },
+        {
+          "original_arm": 92,
+          "current_arm": 94,
+          "original_parent": 91,
+          "expected_current_parent": 91,
+          "actual_current_parent": 93
+        },
+        {
+          "original_arm": 95,
+          "current_arm": 99,
+          "original_parent": 94,
+          "expected_current_parent": 96,
+          "actual_current_parent": 98
+        },
+        {
+          "original_arm": 102,
+          "current_arm": 108,
+          "original_parent": 101,
+          "expected_current_parent": 105,
+          "actual_current_parent": 107
+        },
+        {
+          "original_arm": 103,
+          "current_arm": 109,
+          "original_parent": 101,
+          "expected_current_parent": 105,
+          "actual_current_parent": 107
+        },
+        {
+          "original_arm": 134,
+          "current_arm": 148,
+          "original_parent": 133,
+          "expected_current_parent": 144,
+          "actual_current_parent": 146
+        },
+        {
+          "original_arm": 136,
+          "current_arm": 150,
+          "original_parent": 133,
+          "expected_current_parent": 144,
+          "actual_current_parent": 146
+        },
+        {
+          "original_arm": 137,
+          "current_arm": 151,
+          "original_parent": 133,
+          "expected_current_parent": 144,
+          "actual_current_parent": 146
+        },
+        {
+          "original_arm": 143,
+          "current_arm": 160,
+          "original_parent": 142,
+          "expected_current_parent": 157,
+          "actual_current_parent": 159
+        },
+        {
+          "original_arm": 145,
+          "current_arm": 163,
+          "original_parent": 142,
+          "expected_current_parent": 157,
+          "actual_current_parent": 159
+        },
+        {
+          "original_arm": 146,
+          "current_arm": 164,
+          "original_parent": 142,
+          "expected_current_parent": 157,
+          "actual_current_parent": 159
+        },
+        {
+          "original_arm": 135,
+          "current_arm": 149,
+          "original_parent": 133,
+          "expected_current_parent": 144,
+          "actual_current_parent": 146
+        },
+        {
+          "original_arm": 144,
+          "current_arm": 162,
+          "original_parent": 142,
+          "expected_current_parent": 157,
+          "actual_current_parent": 159
+        }
+      ],
+      "directive_line_leads": [
+        {
+          "kind": "endif",
+          "original": 66,
+          "current": 61,
+          "physical": 62
+        },
+        {
+          "kind": "arm",
+          "original": 110,
+          "current": 111,
+          "physical": 108
+        },
+        {
+          "kind": "endif",
+          "original": 160,
+          "current": 112,
+          "physical": 111
+        },
+        {
+          "kind": "endif",
+          "original": 179,
+          "current": 177,
+          "physical": 133
+        },
+        {
+          "kind": "endif",
+          "original": 196,
+          "current": 193,
+          "physical": 149
+        },
+        {
+          "kind": "endif",
+          "original": 477,
+          "current": 476,
+          "physical": 431
+        },
+        {
+          "kind": "endif",
+          "original": 943,
+          "current": 940,
+          "physical": 896
+        },
+        {
+          "kind": "endif",
+          "original": 1039,
+          "current": 986,
+          "physical": 942
+        },
+        {
+          "kind": "endif",
+          "original": 1064,
+          "current": 1060,
+          "physical": 965
+        },
+        {
+          "kind": "endif",
+          "original": 1092,
+          "current": 1088,
+          "physical": 991
+        },
+        {
+          "kind": "endif",
+          "original": 1099,
+          "current": 1096,
+          "physical": 997
+        },
+        {
+          "kind": "endif",
+          "original": 1367,
+          "current": 1328,
+          "physical": 1232
+        },
+        {
+          "kind": "endif",
+          "original": 1382,
+          "current": 1373,
+          "physical": 1240
+        },
+        {
+          "kind": "endif",
+          "original": 1578,
+          "current": 1525,
+          "physical": 1385
+        },
+        {
+          "kind": "endif",
+          "original": 1708,
+          "current": 1710,
+          "physical": 1518
+        },
+        {
+          "kind": "endif",
+          "original": 1733,
+          "current": 1726,
+          "physical": 1538
+        },
+        {
+          "kind": "endif",
+          "original": 1823,
+          "current": 1819,
+          "physical": 1639
+        },
+        {
+          "kind": "endif",
+          "original": 1870,
+          "current": 1861,
+          "physical": 1679
+        },
+        {
+          "kind": "endif",
+          "original": 2106,
+          "current": 2105,
+          "physical": 1920
+        },
+        {
+          "kind": "endif",
+          "original": 2220,
+          "current": 2219,
+          "physical": 2043
+        },
+        {
+          "kind": "endif",
+          "original": 2242,
+          "current": 2240,
+          "physical": 2069
+        },
+        {
+          "kind": "endif",
+          "original": 2355,
+          "current": 2354,
+          "physical": 2183
+        },
+        {
+          "kind": "endif",
+          "original": 2559,
+          "current": 2439,
+          "physical": 2272
+        },
+        {
+          "kind": "arm",
+          "original": 2437,
+          "current": 2440,
+          "physical": 2269
+        },
+        {
+          "kind": "endif",
+          "original": 2633,
+          "current": 2613,
+          "physical": 2328
+        },
+        {
+          "kind": "arm",
+          "original": 2641,
+          "current": 2642,
+          "physical": 2338
+        },
+        {
+          "kind": "endif",
+          "original": 2656,
+          "current": 2655,
+          "physical": 2358
+        },
+        {
+          "kind": "endif",
+          "original": 2695,
+          "current": 2693,
+          "physical": 2399
+        },
+        {
+          "kind": "arm",
+          "original": 2950,
+          "current": 2952,
+          "physical": 2661
+        },
+        {
+          "kind": "endif",
+          "original": 2969,
+          "current": 2968,
+          "physical": 2685
+        },
+        {
+          "kind": "arm",
+          "original": 2996,
+          "current": 2997,
+          "physical": 2716
+        },
+        {
+          "kind": "endif",
+          "original": 3006,
+          "current": 3005,
+          "physical": 2731
+        },
+        {
+          "kind": "endif",
+          "original": 3078,
+          "current": 3086,
+          "physical": 2814
+        },
+        {
+          "kind": "arm",
+          "original": 3310,
+          "current": 3311,
+          "physical": 3048
+        },
+        {
+          "kind": "endif",
+          "original": 3371,
+          "current": 3370,
+          "physical": 3114
+        },
+        {
+          "kind": "endif",
+          "original": 3401,
+          "current": 3391,
+          "physical": 3136
+        },
+        {
+          "kind": "endif",
+          "original": 3655,
+          "current": 3646,
+          "physical": 3383
+        },
+        {
+          "kind": "endif",
+          "original": 3664,
+          "current": 3662,
+          "physical": 3393
+        },
+        {
+          "kind": "arm",
+          "original": 3702,
+          "current": 3703,
+          "physical": 3433
+        },
+        {
+          "kind": "endif",
+          "original": 3708,
+          "current": 3704,
+          "physical": 3436
+        },
+        {
+          "kind": "endif",
+          "original": 3717,
+          "current": 3716,
+          "physical": 3446
+        },
+        {
+          "kind": "endif",
+          "original": 3798,
+          "current": 3795,
+          "physical": 3534
+        },
+        {
+          "kind": "endif",
+          "original": 4052,
+          "current": 4051,
+          "physical": 3793
+        },
+        {
+          "kind": "endif",
+          "original": 4075,
+          "current": 4068,
+          "physical": 3811
+        },
+        {
+          "kind": "endif",
+          "original": 4099,
+          "current": 4096,
+          "physical": 3834
+        },
+        {
+          "kind": "endif",
+          "original": 4155,
+          "current": 4152,
+          "physical": 3889
+        },
+        {
+          "kind": "endif",
+          "original": 4185,
+          "current": 4173,
+          "physical": 3909
+        },
+        {
+          "kind": "endif",
+          "original": 4284,
+          "current": 4282,
+          "physical": 4008
+        },
+        {
+          "kind": "endif",
+          "original": 4379,
+          "current": 4377,
+          "physical": 4103
+        },
+        {
+          "kind": "endif",
+          "original": 5064,
+          "current": 5057,
+          "physical": 4783
+        },
+        {
+          "kind": "endif",
+          "original": 5185,
+          "current": 5156,
+          "physical": 4877
+        },
+        {
+          "kind": "arm",
+          "original": 5227,
+          "current": 5228,
+          "physical": 4921
+        },
+        {
+          "kind": "endif",
+          "original": 5242,
+          "current": 4782,
+          "physical": 4945
+        },
+        {
+          "kind": "arm",
+          "original": 5250,
+          "current": 5251,
+          "physical": 4955
+        },
+        {
+          "kind": "endif",
+          "original": 5343,
+          "current": 5342,
+          "physical": 5050
+        },
+        {
+          "kind": "arm",
+          "original": 5321,
+          "current": 5313,
+          "physical": 5027
+        },
+        {
+          "kind": "endif",
+          "original": 5331,
+          "current": 5329,
+          "physical": 5037
+        },
+        {
+          "kind": "arm",
+          "original": 5351,
+          "current": 5353,
+          "physical": 5061
+        },
+        {
+          "kind": "endif",
+          "original": 5429,
+          "current": 5428,
+          "physical": 5144
+        },
+        {
+          "kind": "endif",
+          "original": 5423,
+          "current": 5421,
+          "physical": 5137
+        },
+        {
+          "kind": "arm",
+          "original": 5603,
+          "current": 5614,
+          "physical": 5330
+        },
+        {
+          "kind": "endif",
+          "original": 5787,
+          "current": 5784,
+          "physical": 5512
+        },
+        {
+          "kind": "endif",
+          "original": 5868,
+          "current": 5865,
+          "physical": 5592
+        },
+        {
+          "kind": "endif",
+          "original": 5959,
+          "current": 5956,
+          "physical": 5682
+        },
+        {
+          "kind": "endif",
+          "original": 6009,
+          "current": 6006,
+          "physical": 5731
+        },
+        {
+          "kind": "endif",
+          "original": 6309,
+          "current": 6159,
+          "physical": 5883
+        },
+        {
+          "kind": "endif",
+          "original": 6529,
+          "current": 6418,
+          "physical": 5994
+        },
+        {
+          "kind": "arm",
+          "original": 6625,
+          "current": 6621,
+          "physical": 6087
+        },
+        {
+          "kind": "endif",
+          "original": 6629,
+          "current": 6630,
+          "physical": 6102
+        },
+        {
+          "kind": "arm",
+          "original": 2101,
+          "current": 2100,
+          "physical": 1915
+        },
+        {
+          "kind": "arm",
+          "original": 2353,
+          "current": 2352,
+          "physical": 2181
+        },
+        {
+          "kind": "arm",
+          "original": 2610,
+          "current": 2591,
+          "physical": 2306
+        },
+        {
+          "kind": "arm",
+          "original": 5059,
+          "current": 5052,
+          "physical": 4778
+        },
+        {
+          "kind": "arm",
+          "original": 5608,
+          "current": 5605,
+          "physical": 5333
+        },
+        {
+          "kind": "arm",
+          "original": 5799,
+          "current": 5796,
+          "physical": 5523
+        },
+        {
+          "kind": "arm",
+          "original": 5882,
+          "current": 5879,
+          "physical": 5605
+        },
+        {
+          "kind": "arm",
+          "original": 5969,
+          "current": 5966,
+          "physical": 5691
+        },
+        {
+          "kind": "arm",
+          "original": 3054,
+          "current": 3057,
+          "physical": 2785
+        },
+        {
+          "kind": "endif",
+          "original": 3067,
+          "current": 3070,
+          "physical": 2798
+        },
+        {
+          "kind": "arm",
+          "original": 5313,
+          "current": 5305,
+          "physical": 5019
+        },
+        {
+          "kind": "arm",
+          "original": 5316,
+          "current": 5308,
+          "physical": 5022
+        },
+        {
+          "kind": "arm",
+          "original": 5441,
+          "current": 5452,
+          "physical": 5168
+        },
+        {
+          "kind": "endif",
+          "original": 5454,
+          "current": 5465,
+          "physical": 5181
+        },
+        {
+          "kind": "arm",
+          "original": 5599,
+          "current": 5610,
+          "physical": 5326
+        },
+        {
+          "kind": "arm",
+          "original": 5773,
+          "current": 5770,
+          "physical": 5498
+        },
+        {
+          "kind": "endif",
+          "original": 5777,
+          "current": 5774,
+          "physical": 5502
+        },
+        {
+          "kind": "arm",
+          "original": 5860,
+          "current": 5857,
+          "physical": 5584
+        },
+        {
+          "kind": "endif",
+          "original": 5864,
+          "current": 5861,
+          "physical": 5588
+        }
+      ],
+      "original_size": 180718,
+      "current_size": 167208,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "current_sha256": "223e437f069bf601aa83b713cf848f939b228c36a58bba5130cfef53b69fbf16",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [
+        5
+      ],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [
+        {
+          "kind": "arm",
+          "original": 421,
+          "current": 323,
+          "physical": 345
+        },
+        {
+          "kind": "arm",
+          "original": 38,
+          "current": 41,
+          "physical": 43
+        },
+        {
+          "kind": "endif",
+          "original": 40,
+          "current": 43,
+          "physical": 45
+        }
+      ],
+      "original_size": 12490,
+      "current_size": 10575,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "current_sha256": "cf18fb5933b15f5b1363759aba7f37a0e7ef60469f1f39ed56786a89786dcb24",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [
+        11,
+        12,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33
+      ],
+      "ancestry_conflicts": [
+        {
+          "original_arm": 4,
+          "current_arm": 10,
+          "original_parent": 2,
+          "expected_current_parent": 2,
+          "actual_current_parent": 6
+        }
+      ],
+      "directive_line_leads": [
+        {
+          "kind": "endif",
+          "original": 1366,
+          "current": 1099,
+          "physical": 911
+        },
+        {
+          "kind": "endif",
+          "original": 1364,
+          "current": 1097,
+          "physical": 909
+        },
+        {
+          "kind": "arm",
+          "original": 182,
+          "current": 181,
+          "physical": 182
+        },
+        {
+          "kind": "endif",
+          "original": 317,
+          "current": 266,
+          "physical": 254
+        },
+        {
+          "kind": "arm",
+          "original": 263,
+          "current": 211,
+          "physical": 217
+        },
+        {
+          "kind": "endif",
+          "original": 416,
+          "current": 415,
+          "physical": 354
+        },
+        {
+          "kind": "arm",
+          "original": 413,
+          "current": 412,
+          "physical": 351
+        }
+      ],
+      "original_size": 30036,
+      "current_size": 20041,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "current_sha256": "1d44faf32b02b7d5aad62aa8d8f72800297669e4ab659a8beeb27648a722c7d7",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [
+        10
+      ],
+      "ancestry_conflicts": [
+        {
+          "original_arm": 11,
+          "current_arm": 26,
+          "original_parent": 10,
+          "expected_current_parent": "unmapped",
+          "actual_current_parent": 23
+        }
+      ],
+      "directive_line_leads": [
+        {
+          "kind": "endif",
+          "original": 106,
+          "current": 90,
+          "physical": 99
+        },
+        {
+          "kind": "endif",
+          "original": 396,
+          "current": 389,
+          "physical": 428
+        },
+        {
+          "kind": "endif",
+          "original": 572,
+          "current": 566,
+          "physical": 669
+        },
+        {
+          "kind": "arm",
+          "original": 716,
+          "current": 691,
+          "physical": 805
+        },
+        {
+          "kind": "arm",
+          "original": 821,
+          "current": 800,
+          "physical": 900
+        },
+        {
+          "kind": "arm",
+          "original": 1167,
+          "current": 1196,
+          "physical": 1327
+        },
+        {
+          "kind": "endif",
+          "original": 1174,
+          "current": 1175,
+          "physical": 1338
+        },
+        {
+          "kind": "endif",
+          "original": 1208,
+          "current": 1209,
+          "physical": 1377
+        },
+        {
+          "kind": "endif",
+          "original": 1383,
+          "current": 1423,
+          "physical": 1670
+        }
+      ],
+      "original_size": 33570,
+      "current_size": 45566,
+      "status": "pending whole-file review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "current_sha256": "33ad6f8273c53ebbaa5fe365d36b455c1ffca1527e25978d1a53875622b7c34b",
+      "condition_snapshot_reusable": true,
+      "unmatched_original": [
+        83
+      ],
+      "ancestry_conflicts": [
+        {
+          "original_arm": 91,
+          "current_arm": 91,
+          "original_parent": 90,
+          "expected_current_parent": 94,
+          "actual_current_parent": 90
+        },
+        {
+          "original_arm": 118,
+          "current_arm": 118,
+          "original_parent": 117,
+          "expected_current_parent": 121,
+          "actual_current_parent": 117
+        }
+      ],
+      "directive_line_leads": [
+        {
+          "kind": "arm",
+          "original": 142,
+          "current": 151,
+          "physical": 157
+        },
+        {
+          "kind": "endif",
+          "original": 146,
+          "current": 144,
+          "physical": 160
+        },
+        {
+          "kind": "arm",
+          "original": 166,
+          "current": 164,
+          "physical": 180
+        },
+        {
+          "kind": "endif",
+          "original": 172,
+          "current": 171,
+          "physical": 186
+        },
+        {
+          "kind": "arm",
+          "original": 183,
+          "current": 182,
+          "physical": 197
+        },
+        {
+          "kind": "endif",
+          "original": 378,
+          "current": 376,
+          "physical": 397
+        },
+        {
+          "kind": "arm",
+          "original": 424,
+          "current": 422,
+          "physical": 443
+        },
+        {
+          "kind": "endif",
+          "original": 430,
+          "current": 429,
+          "physical": 449
+        },
+        {
+          "kind": "arm",
+          "original": 582,
+          "current": 581,
+          "physical": 601
+        },
+        {
+          "kind": "endif",
+          "original": 759,
+          "current": 758,
+          "physical": 779
+        },
+        {
+          "kind": "arm",
+          "original": 804,
+          "current": 803,
+          "physical": 824
+        },
+        {
+          "kind": "endif",
+          "original": 903,
+          "current": 902,
+          "physical": 927
+        },
+        {
+          "kind": "arm",
+          "original": 946,
+          "current": 945,
+          "physical": 970
+        },
+        {
+          "kind": "endif",
+          "original": 1020,
+          "current": 1019,
+          "physical": 1049
+        },
+        {
+          "kind": "arm",
+          "original": 1109,
+          "current": 1108,
+          "physical": 1138
+        },
+        {
+          "kind": "endif",
+          "original": 1112,
+          "current": 1111,
+          "physical": 1141
+        },
+        {
+          "kind": "arm",
+          "original": 1147,
+          "current": 1146,
+          "physical": 1176
+        },
+        {
+          "kind": "endif",
+          "original": 1220,
+          "current": 1219,
+          "physical": 1251
+        },
+        {
+          "kind": "arm",
+          "original": 1229,
+          "current": 1228,
+          "physical": 1260
+        },
+        {
+          "kind": "endif",
+          "original": 1235,
+          "current": 1234,
+          "physical": 1266
+        },
+        {
+          "kind": "arm",
+          "original": 1270,
+          "current": 1269,
+          "physical": 1301
+        },
+        {
+          "kind": "endif",
+          "original": 1337,
+          "current": 1336,
+          "physical": 1373
+        },
+        {
+          "kind": "arm",
+          "original": 1374,
+          "current": 1373,
+          "physical": 1410
+        },
+        {
+          "kind": "endif",
+          "original": 1380,
+          "current": 1378,
+          "physical": 1415
+        },
+        {
+          "kind": "arm",
+          "original": 1436,
+          "current": 1434,
+          "physical": 1471
+        },
+        {
+          "kind": "endif",
+          "original": 1592,
+          "current": 1583,
+          "physical": 1640
+        },
+        {
+          "kind": "arm",
+          "original": 1581,
+          "current": 1582,
+          "physical": 1637
+        },
+        {
+          "kind": "arm",
+          "original": 1886,
+          "current": 1883,
+          "physical": 1935
+        },
+        {
+          "kind": "endif",
+          "original": 1895,
+          "current": 1888,
+          "physical": 1938
+        },
+        {
+          "kind": "endif",
+          "original": 2021,
+          "current": 2018,
+          "physical": 2066
+        },
+        {
+          "kind": "arm",
+          "original": 2044,
+          "current": 2045,
+          "physical": 2104
+        },
+        {
+          "kind": "endif",
+          "original": 2055,
+          "current": 2046,
+          "physical": 2107
+        },
+        {
+          "kind": "endif",
+          "original": 2184,
+          "current": 2181,
+          "physical": 2223
+        },
+        {
+          "kind": "arm",
+          "original": 2143,
+          "current": 2130,
+          "physical": 2184
+        },
+        {
+          "kind": "endif",
+          "original": 2148,
+          "current": 2145,
+          "physical": 2187
+        },
+        {
+          "kind": "arm",
+          "original": 2201,
+          "current": 2198,
+          "physical": 2240
+        },
+        {
+          "kind": "endif",
+          "original": 2207,
+          "current": 2205,
+          "physical": 2245
+        },
+        {
+          "kind": "arm",
+          "original": 2224,
+          "current": 2222,
+          "physical": 2262
+        },
+        {
+          "kind": "endif",
+          "original": 2228,
+          "current": 2226,
+          "physical": 2265
+        },
+        {
+          "kind": "arm",
+          "original": 2485,
+          "current": 2483,
+          "physical": 2522
+        },
+        {
+          "kind": "endif",
+          "original": 2633,
+          "current": 2609,
+          "physical": 2648
+        },
+        {
+          "kind": "arm",
+          "original": 2635,
+          "current": 2611,
+          "physical": 2650
+        },
+        {
+          "kind": "endif",
+          "original": 2681,
+          "current": 2670,
+          "physical": 2688
+        },
+        {
+          "kind": "arm",
+          "original": 2712,
+          "current": 2701,
+          "physical": 2719
+        },
+        {
+          "kind": "endif",
+          "original": 2829,
+          "current": 2714,
+          "physical": 2722
+        },
+        {
+          "kind": "arm",
+          "original": 2831,
+          "current": 2648,
+          "physical": 2725
+        },
+        {
+          "kind": "endif",
+          "original": 2847,
+          "current": 2840,
+          "physical": 2737
+        },
+        {
+          "kind": "arm",
+          "original": 169,
+          "current": 168,
+          "physical": 183
+        },
+        {
+          "kind": "arm",
+          "original": 374,
+          "current": 372,
+          "physical": 393
+        },
+        {
+          "kind": "arm",
+          "original": 427,
+          "current": 426,
+          "physical": 446
+        },
+        {
+          "kind": "arm",
+          "original": 900,
+          "current": 899,
+          "physical": 924
+        },
+        {
+          "kind": "arm",
+          "original": 1017,
+          "current": 1016,
+          "physical": 1046
+        },
+        {
+          "kind": "arm",
+          "original": 1217,
+          "current": 1216,
+          "physical": 1248
+        },
+        {
+          "kind": "arm",
+          "original": 1232,
+          "current": 1231,
+          "physical": 1263
+        },
+        {
+          "kind": "arm",
+          "original": 1334,
+          "current": 1333,
+          "physical": 1370
+        },
+        {
+          "kind": "arm",
+          "original": 1378,
+          "current": 1376,
+          "physical": 1413
+        },
+        {
+          "kind": "arm",
+          "original": 2119,
+          "current": 2106,
+          "physical": 2160
+        },
+        {
+          "kind": "arm",
+          "original": 2205,
+          "current": 2203,
+          "physical": 2243
+        },
+        {
+          "kind": "arm",
+          "original": 181,
+          "current": 180,
+          "physical": 195
+        },
+        {
+          "kind": "arm",
+          "original": 396,
+          "current": 394,
+          "physical": 415
+        },
+        {
+          "kind": "endif",
+          "original": 398,
+          "current": 396,
+          "physical": 417
+        },
+        {
+          "kind": "arm",
+          "original": 1085,
+          "current": 1084,
+          "physical": 1114
+        },
+        {
+          "kind": "endif",
+          "original": 1093,
+          "current": 1092,
+          "physical": 1122
+        },
+        {
+          "kind": "arm",
+          "original": 1088,
+          "current": 1087,
+          "physical": 1117
+        },
+        {
+          "kind": "endif",
+          "original": 1091,
+          "current": 1090,
+          "physical": 1120
+        },
+        {
+          "kind": "arm",
+          "original": 1099,
+          "current": 1098,
+          "physical": 1128
+        },
+        {
+          "kind": "endif",
+          "original": 1106,
+          "current": 1105,
+          "physical": 1135
+        },
+        {
+          "kind": "arm",
+          "original": 1102,
+          "current": 1101,
+          "physical": 1131
+        },
+        {
+          "kind": "endif",
+          "original": 1105,
+          "current": 1104,
+          "physical": 1134
+        },
+        {
+          "kind": "arm",
+          "original": 1383,
+          "current": 1381,
+          "physical": 1418
+        },
+        {
+          "kind": "endif",
+          "original": 1390,
+          "current": 1388,
+          "physical": 1425
+        },
+        {
+          "kind": "arm",
+          "original": 1386,
+          "current": 1384,
+          "physical": 1421
+        },
+        {
+          "kind": "endif",
+          "original": 1389,
+          "current": 1387,
+          "physical": 1424
+        },
+        {
+          "kind": "arm",
+          "original": 1431,
+          "current": 1429,
+          "physical": 1466
+        },
+        {
+          "kind": "arm",
+          "original": 1584,
+          "current": 1581,
+          "physical": 1625
+        },
+        {
+          "kind": "endif",
+          "original": 1586,
+          "current": 1583,
+          "physical": 1627
+        },
+        {
+          "kind": "arm",
+          "original": 1604,
+          "current": 1601,
+          "physical": 1653
+        },
+        {
+          "kind": "endif",
+          "original": 1611,
+          "current": 1608,
+          "physical": 1660
+        },
+        {
+          "kind": "arm",
+          "original": 1607,
+          "current": 1604,
+          "physical": 1656
+        },
+        {
+          "kind": "endif",
+          "original": 1610,
+          "current": 1607,
+          "physical": 1659
+        },
+        {
+          "kind": "arm",
+          "original": 1663,
+          "current": 1660,
+          "physical": 1712
+        },
+        {
+          "kind": "endif",
+          "original": 1676,
+          "current": 1673,
+          "physical": 1725
+        },
+        {
+          "kind": "arm",
+          "original": 1669,
+          "current": 1666,
+          "physical": 1718
+        },
+        {
+          "kind": "endif",
+          "original": 1675,
+          "current": 1672,
+          "physical": 1724
+        },
+        {
+          "kind": "arm",
+          "original": 1701,
+          "current": 1698,
+          "physical": 1750
+        },
+        {
+          "kind": "endif",
+          "original": 1709,
+          "current": 1706,
+          "physical": 1758
+        },
+        {
+          "kind": "arm",
+          "original": 1719,
+          "current": 1716,
+          "physical": 1768
+        },
+        {
+          "kind": "endif",
+          "original": 1730,
+          "current": 1727,
+          "physical": 1779
+        },
+        {
+          "kind": "arm",
+          "original": 1739,
+          "current": 1736,
+          "physical": 1788
+        },
+        {
+          "kind": "endif",
+          "original": 1751,
+          "current": 1748,
+          "physical": 1800
+        },
+        {
+          "kind": "arm",
+          "original": 1769,
+          "current": 1766,
+          "physical": 1818
+        },
+        {
+          "kind": "endif",
+          "original": 1777,
+          "current": 1774,
+          "physical": 1826
+        },
+        {
+          "kind": "arm",
+          "original": 1787,
+          "current": 1784,
+          "physical": 1836
+        },
+        {
+          "kind": "endif",
+          "original": 1794,
+          "current": 1791,
+          "physical": 1843
+        },
+        {
+          "kind": "arm",
+          "original": 1803,
+          "current": 1800,
+          "physical": 1852
+        },
+        {
+          "kind": "endif",
+          "original": 1811,
+          "current": 1808,
+          "physical": 1860
+        },
+        {
+          "kind": "arm",
+          "original": 1837,
+          "current": 1834,
+          "physical": 1886
+        },
+        {
+          "kind": "endif",
+          "original": 1850,
+          "current": 1847,
+          "physical": 1899
+        },
+        {
+          "kind": "arm",
+          "original": 1843,
+          "current": 1840,
+          "physical": 1892
+        },
+        {
+          "kind": "endif",
+          "original": 1849,
+          "current": 1846,
+          "physical": 1898
+        },
+        {
+          "kind": "arm",
+          "original": 1881,
+          "current": 1878,
+          "physical": 1930
+        },
+        {
+          "kind": "arm",
+          "original": 2042,
+          "current": 2039,
+          "physical": 2087
+        },
+        {
+          "kind": "arm",
+          "original": 2047,
+          "current": 2034,
+          "physical": 2092
+        },
+        {
+          "kind": "endif",
+          "original": 2049,
+          "current": 2036,
+          "physical": 2094
+        },
+        {
+          "kind": "arm",
+          "original": 2133,
+          "current": 2120,
+          "physical": 2174
+        },
+        {
+          "kind": "arm",
+          "original": 2212,
+          "current": 2210,
+          "physical": 2250
+        },
+        {
+          "kind": "endif",
+          "original": 2219,
+          "current": 2217,
+          "physical": 2257
+        },
+        {
+          "kind": "arm",
+          "original": 2215,
+          "current": 2213,
+          "physical": 2253
+        },
+        {
+          "kind": "endif",
+          "original": 2218,
+          "current": 2216,
+          "physical": 2256
+        },
+        {
+          "kind": "arm",
+          "original": 2253,
+          "current": 2251,
+          "physical": 2290
+        },
+        {
+          "kind": "endif",
+          "original": 2255,
+          "current": 2253,
+          "physical": 2292
+        },
+        {
+          "kind": "arm",
+          "original": 2259,
+          "current": 2257,
+          "physical": 2296
+        },
+        {
+          "kind": "endif",
+          "original": 2322,
+          "current": 2320,
+          "physical": 2359
+        },
+        {
+          "kind": "arm",
+          "original": 2315,
+          "current": 2313,
+          "physical": 2352
+        },
+        {
+          "kind": "endif",
+          "original": 2320,
+          "current": 2318,
+          "physical": 2357
+        },
+        {
+          "kind": "arm",
+          "original": 2682,
+          "current": 2671,
+          "physical": 2689
+        },
+        {
+          "kind": "endif",
+          "original": 2694,
+          "current": 2683,
+          "physical": 2701
+        }
+      ],
+      "original_size": 81255,
+      "current_size": 75919,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_sha256": "ff06d750dda7adef7f04e20b97f57f2c432f13e91e3af770a44aceed8c83b17c",
+      "condition_snapshot_reusable": false,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [],
+      "original_size": 7249,
+      "current_size": 2222,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "current_sha256": "b30cb25519194ebfb7bde02b0d672ab7ab40342d7f40d5c1b2e8ba1690f60e69",
+      "condition_snapshot_reusable": false,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [],
+      "original_size": 16279,
+      "current_size": 3074,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "current_sha256": "24d007d177d4b326e5e60614daa2aaf70c7f0b6763bf644e31c8f1c63864afb9",
+      "condition_snapshot_reusable": false,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [],
+      "original_size": 19497,
+      "current_size": 13438,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "6839fae1ee1a6914d1b7704f31206fa752cd0074237cacc0eda359973a1fc17f",
+      "condition_snapshot_reusable": false,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [],
+      "original_size": 26998,
+      "current_size": 2395,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "current_sha256": "838177ce4be35707885d7ba54653400e23e86e91c840529e69925f279e148351",
+      "condition_snapshot_reusable": false,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [],
+      "original_size": 32572,
+      "current_size": 3464,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+      "current_sha256": "56f7e0030282e8d7c5d1ebcae4c2e8bd52572e4145653e71f813864ec46b1cb6",
+      "condition_snapshot_reusable": false,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [],
+      "original_size": 34141,
+      "current_size": 4388,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+      "current_sha256": "d4e1283fd8b5297a8957a9ed13e8622504eaf16763aace581a8c5b78e9b6891e",
+      "condition_snapshot_reusable": false,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [],
+      "original_size": 37811,
+      "current_size": 6300,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "current_sha256": "1633d18b84205a1dd96a1730017261ca141b4f669fade1356ca575f90eeea122",
+      "condition_snapshot_reusable": false,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [],
+      "original_size": 49067,
+      "current_size": 43984,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_sha256": "a546c5469edf64976220c1a2b7d7202de8c2d49093f6670b8610a3a759f91b1e",
+      "condition_snapshot_reusable": false,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [],
+      "original_size": 57671,
+      "current_size": 11107,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "current_sha256": "13dd415db787321bbc1b3c65cc07f51646f3145f6d9cf8c5a2e693d443d02767",
+      "condition_snapshot_reusable": false,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [],
+      "original_size": 64584,
+      "current_size": 46679,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_sha256": "000c65af5ddd124d7b0379782a909b79c96f258aaad75131e85e620dfa1ed4c0",
+      "condition_snapshot_reusable": false,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [],
+      "original_size": 75733,
+      "current_size": 57745,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "current_sha256": "9710afc2c576fe810b26ee83f099a7ba34e6e9e00aff3d48570b529a1eee81bb",
+      "condition_snapshot_reusable": false,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [],
+      "original_size": 98340,
+      "current_size": 86935,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "current_sha256": "b0c53f809f5da0001c6b92f25f3a300bea61010dcd970200903f324543835ae7",
+      "condition_snapshot_reusable": false,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [],
+      "original_size": 109513,
+      "current_size": 47532,
+      "status": "pending whole-file review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_sha256": "a85cc75f5b51cc8bdd84c17bbbaea770aaace2cfb64882a1b173051a4abf82d7",
+      "condition_snapshot_reusable": false,
+      "unmatched_original": [],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [],
+      "original_size": 121548,
+      "current_size": 123393,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "current_sha256": "171ee799e7ad006a106bfede7714bfb8d78724ccafaf983273a1e3403ff30d71",
+      "condition_snapshot_reusable": false,
+      "unmatched_original": [
+        9,
+        10,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [],
+      "original_size": 29259,
+      "current_size": 18171,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "current_sha256": "f220e7bc12ac91cb614d1122645a7de4c697ca516694142ba367423b958f810a",
+      "condition_snapshot_reusable": false,
+      "unmatched_original": [
+        43
+      ],
+      "ancestry_conflicts": [],
+      "directive_line_leads": [],
+      "original_size": 53163,
+      "current_size": 46462,
+      "status": "individual review recorded; final validation and global context reconciliation pending"
+    }
+  ],
+  "pending_whole_file_or_verification": 5
+}

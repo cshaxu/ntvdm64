@@ -162,6 +162,7 @@ SIGNALS ISSUED	  :	NONE
 #ifdef A_VID
 #line 157
 #error Excluded unsupported original A_VID writer-table profile
+#line 204
 #else
 #line 205
 #if defined(CPU_40_STYLE)
@@ -187,6 +188,7 @@ WRT_POINTERS mode2_handlers;
 #line 205
 #error Excluded unsupported non-CPU40 writer-table profile
 #endif
+#line 256
 #endif /* A_VID */
 #line 257
 
@@ -215,9 +217,12 @@ fill_alternate_bytes IFN3(byte *, start, byte *, end, byte, value )
 #ifdef  BIGEND
 #line 281
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
+#line 283
 #else
+#line 284
 #define first_half(wd)      (wd & 0xff)
 #define sec_half(wd)        ((wd & 0xff00) >> 8)
+#line 286
 #endif
 
 GLOBAL VOID
@@ -738,6 +743,8 @@ ega_mode2_chn_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
 
+#line 1216
 #endif
 
+#line 1218
 #endif	/* !NTVDM | (NTVDM & !X86GFX) */

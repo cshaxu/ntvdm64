@@ -3179,3 +3179,37 @@ MVDM-HOST-DIV-850: restore original condition-directive and retained-source diag
 MVDM-HOST-DIV-851: restore original retained-source and DEBUG conditional diagnostic line mappings in `wow32/wole2.c`, preserving the registered process-list and selected behavior. T476 S2 records contain the file review and grouped verification.
 
 MVDM-HOST-DIV-852: restore original conditional and selected register-layout line mappings in `softpc.new/host/inc/host_cpu.h`, preserving the registered CPU40 little-endian layout and excluded CPU30 body. A similar CPU30-only LITTLEND condition is not the CPU40 adapter condition. T476 S2 records retain the review and grouped verification.
+
+MVDM-HOST-DIV-853: restore original diagnostic line anchors in `softpc.new/base/ccpu386/gdpvar.h` and `wow32/wuclip.c` after the existing excluded body and registered adapter. Evidence: `artifacts/mvdm-audit/t476-s2-gdpvar-line-candidate.json` and `artifacts/mvdm-audit/t476-s2-wuclip-review.json`. Final grouped build and supported-context reconciliation remain pending.
+
+MVDM-HOST-DIV-854: restore the seven original excluded-condition closing logical lines in wow32/wmdisp32.c; retained logic and observed XTALKHACK are unchanged. Evidence: artifacts/mvdm-audit/t476-s2-wmdisp32-line-repair.json. Final grouped build and context reconciliation remain pending.
+
+MVDM-HOST-DIV-855: restore original conditional directive and closing diagnostic lines in softpc.new/base/system/timer.c, softpc.new/base/video/vga_prts.c and wow32/wow32.c after source-hash-bound branch comparison. Existing selected tokens remain unchanged. Evidence: artifacts/mvdm-audit/t476-s2-rebound-four-line-repair.json; unresolved mapping leads, grouped build and context reconciliation remain open.
+
+MVDM-HOST-DIV-856: restore original conditional directive and closing source positions in vdmredir/vrmslot.c, vdmredir/vrnetapi.c and wow32/wkman.c without changing selected code. Evidence: artifacts/mvdm-audit/t476-s2-four-more-line-repair.json. Final grouped build and context reconciliation remain pending.
+
+MVDM-HOST-DIV-857: restore the original conditional closing logical positions in softpc.new/host/src/nt_event.c, preserving selected behavior and existing adaptations. Evidence: artifacts/mvdm-audit/t476-s2-nt-event-review.json. Final grouped build and context reconciliation remain pending.
+
+MVDM-HOST-DIV-858: restore original conditional source positions in softpc.new/base/keymouse/keyba.c while preserving the selected keyboard controller and CPU40 reset adaptation. Evidence: artifacts/mvdm-audit/t476-s2-keyba-review.json. Final grouped build and context reconciliation remain pending.
+
+MVDM-HOST-DIV-859: restore original conditional and selected printer_setup_table source positions in softpc.new/base/comms/printer.c; retain existing selected behavior. Evidence: artifacts/mvdm-audit/t476-s2-printer-review.json. Final grouped build and context reconciliation remain pending.
+
+MVDM-HOST-DIV-860: restore original conditional source positions in softpc.new/base/video/egwrtm12.c while retaining the registered CPU40 EVID carrier and excluded legacy mover bodies. Evidence: artifacts/mvdm-audit/t476-s2-egwrtm12-review.json. Final grouped build and context reconciliation remain pending.
+
+MVDM-HOST-DIV-861: restore original conditional and selected function source positions in softpc.new/base/video/egawrtm0.c while retaining the registered CPU40 EVID carrier and excluded legacy movers. Evidence: artifacts/mvdm-audit/t476-s2-egawrtm0-review.json. Final grouped build and context reconciliation remain pending.
+
+MVDM-HOST-DIV-862: restore original conditional and retained reset source positions in softpc.new/base/bios/reset.c, without changing selected tokens. Evidence: artifacts/mvdm-audit/t476-s2-reset-review.json. Final grouped build and context reconciliation remain pending.
+
+MVDM-HOST-DIV-863: restore the original non-NTVDM conditional framework and diagnostic positions in softpc.new/base/dos/emm_mngr.c; the supported CPU40 LIM writeback remains selected through the existing explicit recovery macro under MVDM-HOST-DIV-148. Evidence: artifacts/mvdm-audit/t476-s2-emm-review.json. Final grouped build and context reconciliation remain pending.
+
+MVDM-HOST-DIV-864: restore original conditional and retained SIM32 source positions in softpc.new/host/src/sim32.c, preserving the existing CPU40 descriptor adapter. Evidence: artifacts/mvdm-audit/t476-s2-sim32-review.json. Final grouped build and context reconciliation remain pending.
+
+MVDM-HOST-DIV-865: restore original conditional and retained execution source positions in softpc.new/base/ccpu386/c_main.c while preserving explicitly compiled diagnostics and all selected execution tokens. Evidence: artifacts/mvdm-audit/t476-s2-cmain-review.json. Final grouped build and context reconciliation remain pending.
+
+MVDM-HOST-DIV-866: restore original conditional and selected graphics-host source positions in softpc.new/host/src/nt_graph.c while retaining the registered presentation and V7VGA adaptations. Evidence: artifacts/mvdm-audit/t476-s2-ntgraph-review.json. Final grouped build and context reconciliation remain pending.
+
+MVDM-HOST-DIV-867: restore the original monitor/GISP conditional framework, nesting and diagnostic positions in softpc.new/base/video/video.c while retaining the selected standalone SAS adaptation. Two identical mutually exclusive SAS blocks preserve all prior condition outcomes without a new helper or shared macro. Evidence: artifacts/mvdm-audit/t476-s2-video-review.json. Final grouped build and context reconciliation remain pending.
+
+MVDM-HOST-DIV-868: restore original conditional and selected mouse-host source positions in softpc.new/base/keymouse/mouse_io.c while preserving the registered host routing and existing selected tokens. Evidence: artifacts/mvdm-audit/t476-s2-mouse-review.json. Final grouped build and context reconciliation remain pending.
+
+DIV-869: restore sampled original diagnostic line positions in dpmi32/dpmiint.c while retaining the existing DIV-582 CPU40 selector. Evidence: artifacts/mvdm-audit/t476-s2-dpmi-worker.json. Compiler and complete context validation remain pending.

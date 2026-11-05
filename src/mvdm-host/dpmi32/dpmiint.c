@@ -81,6 +81,7 @@ Routine Description:
         (UCHAR) (getMSW() & MSW_PE)
         );
 
+#line 78
     IntNumber = *(PWORD16)(StackPointer + 6);
 
     Handlers[IntNumber].Flags = *(PWORD16)(StackPointer + 8);
@@ -128,6 +129,7 @@ Routine Description:
         (UCHAR) (getMSW() & MSW_PE)
         );
 
+#line 138
     IntNumber = *(PWORD16)(StackPointer + 12);
 
     Handlers[IntNumber].Flags = *(PDWORD16)(StackPointer + 14);
@@ -238,6 +240,7 @@ Arguments:
 
     } else {
 
+#line 245
         USHORT FrameSS, FrameSP, FrameCS, FrameIP, FrameFlags;
         FrameSS = *(PWORD16) (VdmStackPointer+14);
         FrameCS = *(PWORD16) (VdmStackPointer+8);
@@ -530,6 +533,7 @@ static BOOL BuildStackFrameWithWidth(ULONG StackUnits, BOOL WideFrame, BOOL Nati
 #endif
 
 BOOL
+#line 495
 DpmiSwIntHandler(
     ULONG IntNumber
     )
@@ -758,6 +762,7 @@ Return Value:
 
 
 VOID
+#line 655
 DpmiIntHandlerIret16(
     VOID
     )
@@ -861,6 +866,7 @@ Routine Description:
 }
 
 VOID
+#line 767
 DpmiIntHandlerIret32(
     VOID
     )
@@ -946,6 +952,7 @@ Routine Description:
 #if !defined(i386) || defined(CPU_40_STYLE)
 
 BOOL
+#line 862
 DpmiFaultHandler(
     ULONG IntNumber,
     ULONG ErrorCode
@@ -979,6 +986,7 @@ Return Value:
 
     DBGTRACE(DPMI_FAULT, IntNumber, ErrorCode, 0);
 
+#line 893
     SaveSS = getSS();
     SaveESP = getESP();
     SaveEFLAGS = getEFLAGS();
@@ -1017,6 +1025,7 @@ Return Value:
     // stack. Krnl386 sticks stuff in there, so we emulate the behavior here.
     //
 
+#line 926
     setESP(getESP()-0x20);
 
     //
@@ -1085,6 +1094,7 @@ Return Value:
 #endif // i386
 
 VOID
+#line 980
 DpmiFaultHandlerIret16(
     VOID
     )
@@ -1122,6 +1132,7 @@ Routine Description:
 
     EndUseLockedPMStack();
 
+#line 1008
     setEIP((DWORD)*(PWORD16)(VdmStackPointer+2));
     setCS(*(PWORD16)(VdmStackPointer+4));
     setSTATUS(*(PWORD16)(VdmStackPointer+6));
@@ -1174,6 +1185,7 @@ Routine Description:
 #if defined(CPU_40_STYLE)
 static BOOL
 BuildStackFrameWithWidth(
+#line 1059
     ULONG StackUnits,
     BOOL WideFrame,
     BOOL NativePushInt,
@@ -1181,6 +1193,7 @@ BuildStackFrameWithWidth(
 #line 1058
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
+#line 1060
     PUCHAR *pVdmStackPointer,
     ULONG *pNewSP
     )
@@ -1234,6 +1247,7 @@ Notes:
     if (!NativePushInt)
     #endif
         Limit++;
+#line 1110
     if (Ldt[SelIndex].HighWord.Bits.Granularity) {
         Limit = (Limit << 12) | 0xfff;
     }
@@ -1251,6 +1265,7 @@ Notes:
 #line 1121
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
     #endif
+#line 1122
         StackOffset = StackUnits*sizeof(DWORD);
     } else {
         StackOffset = StackUnits*sizeof(WORD);
@@ -1268,6 +1283,7 @@ Notes:
             return FALSE;
     } else
     #endif
+#line 1129
     if ((StackOffset > VdmSp) || 
         (!bExpandDown && (VdmSp > Limit)) ||
         (bExpandDown && (NewSP < Limit))) {
@@ -1287,6 +1303,7 @@ Notes:
             return FALSE;
     }
     #endif
+#line 1138
     VdmStackPointer += VdmSp;
     *pVdmStackPointer = VdmStackPointer;
     return(TRUE);
@@ -1302,6 +1319,7 @@ BuildStackFrame(ULONG StackUnits, PUCHAR *pVdmStackPointer, ULONG *pNewSP)
 #endif
 
 VOID
+#line 1145
 EnableIntHooks(
     VOID
     )
@@ -1478,6 +1496,7 @@ Return Value:
 #endif
 #endif
 
+#line 1267
     SegCS = getCS();
 #if defined(CPU_40_STYLE) && defined(CCPU)
     pCode = Sim32pGetVDMPointerWithLinear(SegCS<<16, TRUE, &CodeBase);
@@ -1533,6 +1552,7 @@ DecodeInstruction:
 #endif
         Opcode = *pCode;
     pCode++;
+#line 1277
     switch (Opcode) {
         case 0xf:
             if (!CheckEIP(1)) {
@@ -1556,6 +1576,7 @@ DecodeInstruction:
                 break;
             }
 #endif
+#line 1282
             bReturn = DpmiOp0f(pCode);
             break;
 
@@ -1582,6 +1603,7 @@ DecodeInstruction:
             //
             // Look for code in dxutil.asm EnterProtectedMode
             //
+#line 1298
             if ((SegCS == DosxRmCodeSelector) &&
                 ((*pCode == 0xe0)  ||               // mov fs, ax
                  (*pCode == 0xe8))                  // mov gs, ax

@@ -1,0 +1,47 @@
+{
+  "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+  "source_sha256": "8f793e4ef97e20cd9ed0e1ef35c39a94ef2745e4cf0122af182d56a61cf2baad",
+  "original_sha256": "552ab1d7c2b5de620609312a6c500afa504d22b3852bebb3582eafb524c6c115",
+  "original_condition_count": 0,
+  "retained_function": "NetpCopyStringToBuffer",
+  "original_line": 159,
+  "matching_function_lines": 125,
+  "local_excluded_guards": [
+    {
+      "file": 894,
+      "index": 0,
+      "line": 60,
+      "directive": "if",
+      "expression": "!defined(MVDM_XACTSRV_PACKSTR_COPY_ONLY)",
+      "parent": null,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 894,
+      "index": 1,
+      "line": 195,
+      "directive": "if",
+      "expression": "!defined(MVDM_XACTSRV_PACKSTR_COPY_ONLY)",
+      "parent": null,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 894,
+      "index": 2,
+      "line": 202,
+      "directive": "if",
+      "expression": "!defined(MVDM_XACTSRV_PACKSTR_COPY_ONLY)",
+      "parent": null,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    }
+  ],
+  "compiler_witness": "actual x86 product preprocessing: NetpCopyStringToBuffer at LF line 159",
+  "compiler_output_sha256": "5e97fe931f60b1550020f234af149dfeb1e0529d8aab80831b6e9781ecea2d01",
+  "limit": "Other original functions are omitted under registered copy-only restriction; no claim they are linked."
+}

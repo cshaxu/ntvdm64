@@ -1,0 +1,89 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+  "baseline": "O:/repos.external/OpenNT/windows/core/ntuser/inc/user.h",
+  "before_sha256": "c190414927cd0bdb0e142284e8285544480abf61458564f86784b4a53cd367d4",
+  "after_sha256": "a8ed6fea183399990c012e81ba1ce9aa3ac798f9d60edaf4f5c8766c85ed14a6",
+  "anchors": [
+    {
+      "physical_before": 54,
+      "original_line": 469,
+      "source": "typedef DWORD  ICH;"
+    },
+    {
+      "physical_before": 161,
+      "original_line": 266,
+      "source": "typedef struct _LARGE_STRING {"
+    },
+    {
+      "physical_before": 257,
+      "original_line": 1127,
+      "source": "typedef struct _HEAD {"
+    },
+    {
+      "physical_before": 281,
+      "original_line": 1958,
+      "source": "typedef struct tagITEM {"
+    },
+    {
+      "physical_before": 396,
+      "original_line": 1599,
+      "source": "typedef struct tagDESKTOPINFO {"
+    },
+    {
+      "physical_before": 417,
+      "original_line": 1289,
+      "source": "typedef struct tagCOMMON_WNDCLASS"
+    },
+    {
+      "physical_before": 432,
+      "original_line": 1323,
+      "source": "typedef struct tagCLS {"
+    },
+    {
+      "physical_before": 433,
+      "original_line": 1325,
+      "source": "struct tagCLS *pclsNext;"
+    },
+    {
+      "physical_before": 443,
+      "original_line": 1342,
+      "source": "DWORD       adwWOW[2];"
+    },
+    {
+      "physical_before": 449,
+      "original_line": 1351,
+      "source": "COMMON_WNDCLASS;"
+    },
+    {
+      "physical_before": 458,
+      "original_line": 2146,
+      "source": "typedef struct _DLG {"
+    },
+    {
+      "physical_before": 494,
+      "original_line": 1247,
+      "source": "typedef struct _CALLPROCDATA {"
+    },
+    {
+      "physical_before": 505,
+      "original_line": 2396,
+      "source": "typedef struct tagBUTN {"
+    },
+    {
+      "physical_before": 551,
+      "original_line": 802,
+      "source": "typedef struct tagOEMBITMAPINFO"
+    }
+  ],
+  "evidence": "existing compiler-lines.json, unique exact text matches in original and current",
+  "limitations": [
+    "sample-based anchors; all contexts require final compiler validation",
+    "ten original ancestry differences are documented local opt-in subset wrappers; original structures remain",
+    "prior product-only no-hit exclusions require merged tool and fixture context verification"
+  ],
+  "unique_static_original_line_projection": {
+    "unique_comparable_lines": 151,
+    "mismatches": 0,
+    "limitations": "linear projection only, not preprocessed contexts; excludes duplicates"
+  }
+}

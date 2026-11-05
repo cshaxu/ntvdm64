@@ -13,17 +13,16 @@
 #define WOW_ORIGINAL_PROFILE
 #include "wow_task_profile_bindings.h"
 
+#line 548
 UINT FastGetProfileIntW(
     UINT    idSection,
     LPCWSTR lpKeyName,
     UINT    nDefault)
-#line 94
 {
     WCHAR          ValueBuf[40];
     UNICODE_STRING Value;
     UINT           ReturnValue;
 
-#line 104
     UserAssert(idSection <= PMAP_LAST);
 
     Value.Length        = 0;
@@ -37,7 +36,6 @@ UINT FastGetProfileIntW(
                                Value.Buffer,
                                sizeof(ValueBuf) / sizeof(WCHAR))) {
         return nDefault;
-#line 390
     }
 
     /*
@@ -47,7 +45,6 @@ UINT FastGetProfileIntW(
     RtlUnicodeStringToInteger(&Value, 10, &ReturnValue);
 
     return ReturnValue;
-#line 429
 }
 
 #line 444
@@ -158,6 +155,7 @@ DefExit:
 #ifdef DEBUG
 #line 746
 #error Unsupported DEBUG original branch
+#line 750
 #endif
 #line 751
 
@@ -165,5 +163,6 @@ DefExit:
 #ifdef DEBUG
 #line 828
 #error Unsupported DEBUG original branch
+#line 832
 #endif
 #line 833

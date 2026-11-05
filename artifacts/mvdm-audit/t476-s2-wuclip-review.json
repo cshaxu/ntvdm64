@@ -1,0 +1,17 @@
+{
+  "path": "src/mvdm-host/wow32/wuclip.c",
+  "original_sha256": "c386af38376945cb4fd141d878bca8ef5140b15dccc9695a0adcb0941fbb0083",
+  "current_sha256": "84f16b83e8d616cb56a7acdd9f93eb1d0b8eee38ca212ae613ee11da7cec04a4",
+  "previous_snapshot_sha256": "2d4b1ea2d876fcf1f2d3e26d7464814ead9c9b49a27b0a6cccf01fcebdbb5a94",
+  "original_condition": "DEBUG at LF 1215-1226",
+  "current_condition": "DEBUG excluded; structure retained",
+  "changes": [
+    "restore logical line 33 after registered host helper",
+    "restore original excluded-branch endif logical line 1226"
+  ],
+  "matching_nontrivial_lines_checked": 734,
+  "logical_line_mismatches": [],
+  "product_compiler_samples_prechange": "77",
+  "product_compiler_line_leads_prechange": "0",
+  "limits": "No new compiler run; DEBUG exclusion and all test/addon contexts remain subject to global reconciliation."
+}

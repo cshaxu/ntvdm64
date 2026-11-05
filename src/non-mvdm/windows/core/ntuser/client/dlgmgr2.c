@@ -261,12 +261,14 @@ BOOL IsDialogMessageA(
 #ifdef FE_SB // IsDialogMessageA()
 #line 222
 #error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
+#line 231
 #else
 #ifdef WOW_ORIGINAL_DIALOG_KEYBOARD
 #line 232
     case WM_CHAR:
     case EM_SETPASSWORDCHAR:
 #endif /* WOW_ORIGINAL_DIALOG_KEYBOARD */
+#line 234
 #endif // FE_SB
 #ifdef WOW_ORIGINAL_DIALOG_KEYBOARD
 #line 235
@@ -280,6 +282,7 @@ BOOL IsDialogMessageA(
 #ifdef FE_IME // IsDialogMessageA()
 #line 241
 #error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
+#line 243
 #endif // FE_IME
 #ifdef WOW_ORIGINAL_DIALOG_KEYBOARD
 #line 243
@@ -290,6 +293,7 @@ BOOL IsDialogMessageA(
 
     /* DIVERGENCE(OPENNT-HOST-119): restore caller input on callback exception. */
     __try {
+#line 248
         bRet = IsDialogMessageW(hwndDlg, lpmsg);
     } __finally {
         /* Restore the original ANSI char. */
@@ -328,6 +332,7 @@ BOOL IsDialogMessageW(
 #ifdef LATER // JerrySh - we shouldn't need this on the client-side
 #line 282
 #error DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register.
+#line 308
 #endif
 #ifdef WOW_ORIGINAL_DIALOG_KEYBOARD
 #line 309

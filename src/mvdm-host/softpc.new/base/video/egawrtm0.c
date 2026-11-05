@@ -179,6 +179,7 @@ typedef	union {
 #ifdef	BIGEND
 #line 180
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
+#line 182
 #else
 #line 183
 		unsigned char	lo_byte;
@@ -214,6 +215,7 @@ typedef	union {
 #ifdef A_VID
 #line 210
 #error Excluded unsupported original A_VID writer-table profile
+#line 263
 #else
 #line 264
 #if defined(CPU_40_STYLE)
@@ -251,6 +253,7 @@ WRT_POINTERS mode0_gen_handlers;
 #line 264
 #error Excluded unsupported non-CPU40 writer-table profile
 #endif
+#line 317
 #endif /* A_VID */
 #line 318
 
@@ -348,11 +351,14 @@ ega_copy_b_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 #ifdef  BIGEND
 #line 411
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
+#line 413
 #else
 #define first_half(wd)      ((wd) & 0xff)
 #define sec_half(wd)        (((wd) & 0xff00) >> 8)
+#line 416
 #endif
 
+#line 418
 VOID
 ega_copy_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 {
@@ -412,6 +418,7 @@ ega_copy_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
 
+#line 606
 VOID
 ega_mode0_chn_b_write IFN2(ULONG, value, ULONG, offset )
 {
@@ -897,6 +904,7 @@ ega_mode0_chn_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
 
+#line 1355
 VOID
 ega_mode0_chn_w_write IFN2(ULONG, value, ULONG, offset )
 {
@@ -906,6 +914,8 @@ ega_mode0_chn_w_write IFN2(ULONG, value, ULONG, offset )
    ega_mode0_chn_b_write( value >> 8, offset + 1 );
 }
 
+#line 1364
 #endif
 
+#line 1366
 #endif	/* !(NTVDM && MONITOR) */

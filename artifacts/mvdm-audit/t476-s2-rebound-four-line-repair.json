@@ -1,0 +1,489 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+    "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+    "before_sha256": "000c65af5ddd124d7b0379782a909b79c96f258aaad75131e85e620dfa1ed4c0",
+    "after_sha256": "3038e0ec4ac649040b7a269ae0e46904e088ca2d90fdd30bddfeca7067739150",
+    "anchors": {
+      "43": {
+        "line": 45,
+        "reason": "matched group with original continuation anchor"
+      },
+      "119": {
+        "line": 116,
+        "reason": "matched group with original continuation anchor"
+      },
+      "257": {
+        "line": 253,
+        "reason": "matched group with original continuation anchor"
+      },
+      "377": {
+        "line": 372,
+        "reason": "matched group with original continuation anchor"
+      },
+      "388": {
+        "line": 382,
+        "reason": "matched group with original continuation anchor"
+      },
+      "403": {
+        "line": 393,
+        "reason": "matched group with original continuation anchor"
+      },
+      "411": {
+        "line": 407,
+        "reason": "matched group with original continuation anchor"
+      },
+      "446": {
+        "line": 474,
+        "reason": "matched group with original continuation anchor"
+      },
+      "432": {
+        "line": 428,
+        "reason": "matched group with original continuation anchor"
+      },
+      "452": {
+        "line": 480,
+        "reason": "matched group with original continuation anchor"
+      },
+      "458": {
+        "line": 489,
+        "reason": "matched group with original continuation anchor"
+      },
+      "497": {
+        "line": 534,
+        "reason": "matched group with original continuation anchor"
+      },
+      "511": {
+        "line": 547,
+        "reason": "matched group with original continuation anchor"
+      },
+      "522": {
+        "line": 564,
+        "reason": "matched group with original continuation anchor"
+      },
+      "578": {
+        "line": 620,
+        "reason": "matched group with original continuation anchor"
+      },
+      "637": {
+        "line": 677,
+        "reason": "matched group with original continuation anchor"
+      },
+      "672": {
+        "line": 710,
+        "reason": "matched group with original continuation anchor"
+      },
+      "695": {
+        "line": 732,
+        "reason": "matched group with original continuation anchor"
+      },
+      "736": {
+        "line": 785,
+        "reason": "matched group with original continuation anchor"
+      },
+      "879": {
+        "line": 927,
+        "reason": "matched group with original continuation anchor"
+      },
+      "983": {
+        "line": 1036,
+        "reason": "matched group with original continuation anchor"
+      },
+      "992": {
+        "line": 1045,
+        "reason": "matched group with original continuation anchor"
+      },
+      "1018": {
+        "line": 1072,
+        "reason": "matched group with original continuation anchor"
+      },
+      "1252": {
+        "line": 1310,
+        "reason": "matched group with original continuation anchor"
+      },
+      "1269": {
+        "line": 1327,
+        "reason": "matched group with original continuation anchor"
+      },
+      "1592": {
+        "line": 1657,
+        "reason": "matched group with original continuation anchor"
+      },
+      "1676": {
+        "line": 1783,
+        "reason": "matched group with original continuation anchor"
+      },
+      "1685": {
+        "line": 1791,
+        "reason": "matched group with original continuation anchor"
+      },
+      "1701": {
+        "line": 1806,
+        "reason": "matched group with original continuation anchor"
+      },
+      "1730": {
+        "line": 1832,
+        "reason": "matched group with original continuation anchor"
+      },
+      "1744": {
+        "line": 1846,
+        "reason": "matched group with original continuation anchor"
+      },
+      "1754": {
+        "line": 1949,
+        "reason": "matched original directive and immediate body anchor"
+      },
+      "1906": {
+        "line": 2135,
+        "reason": "matched group with original continuation anchor"
+      },
+      "1917": {
+        "line": 2145,
+        "reason": "matched group with original continuation anchor"
+      },
+      "1929": {
+        "line": 2174,
+        "reason": "matched group with original continuation anchor"
+      },
+      "1937": {
+        "line": 2185,
+        "reason": "matched group with original continuation anchor"
+      },
+      "1947": {
+        "line": 2193,
+        "reason": "matched original directive and immediate body anchor"
+      },
+      "1961": {
+        "line": 2233,
+        "reason": "matched group with original continuation anchor"
+      },
+      "2079": {
+        "line": 2451,
+        "reason": "matched group with original continuation anchor"
+      },
+      "2087": {
+        "line": 2533,
+        "reason": "matched group with original continuation anchor"
+      },
+      "2172": {
+        "line": 2647,
+        "reason": "matched group with original continuation anchor"
+      },
+      "2186": {
+        "line": 2663,
+        "reason": "matched group with original continuation anchor"
+      },
+      "2197": {
+        "line": 2677,
+        "reason": "matched group with original continuation anchor"
+      },
+      "2216": {
+        "line": 2699,
+        "reason": "matched group with original continuation anchor"
+      },
+      "2232": {
+        "line": 2715,
+        "reason": "matched group with original continuation anchor"
+      },
+      "2243": {
+        "line": 2725,
+        "reason": "matched group with original continuation anchor"
+      },
+      "2251": {
+        "line": 2768,
+        "reason": "matched group with original continuation anchor"
+      },
+      "2280": {
+        "line": 2796,
+        "reason": "matched original directive and immediate body anchor"
+      },
+      "2295": {
+        "line": 2828,
+        "reason": "matched group with original continuation anchor"
+      },
+      "2321": {
+        "line": 2881,
+        "reason": "matched group with original continuation anchor"
+      }
+    },
+    "unresolved_mapping_leads": [],
+    "non_line_bytes_invariant": true,
+    "manual_reconciliations": 2,
+    "source_bound_branch_hits": 27,
+    "excluded_arms_checked": 67,
+    "excluded_arms_with_non_directive_contents": 0,
+    "original_matched_nontrivial_lines_checked": 812,
+    "line_match_limit": "matching blocks do not establish equivalence of original omitted or adapted behavior",
+    "status": "individual review; final build and supported-context reconciliation pending"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+    "original_sha256": "16305a48051b980b4c9f8aba15dda7bd6801964bb02897b8c2290a1eff04fbbc",
+    "before_sha256": "9710afc2c576fe810b26ee83f099a7ba34e6e9e00aff3d48570b529a1eee81bb",
+    "after_sha256": "1cdb3c5b166953b8e75c9169e9ab8230c7576a4c17065c70da8851282f801b6c",
+    "anchors": {
+      "376": {
+        "line": 371,
+        "reason": "matched original directive and immediate body anchor"
+      },
+      "393": {
+        "line": 390,
+        "reason": "matched group with original continuation anchor"
+      },
+      "1036": {
+        "line": 1022,
+        "reason": "matched group with original continuation anchor"
+      },
+      "2187": {
+        "line": 2163,
+        "reason": "matched original directive and immediate body anchor"
+      },
+      "2227": {
+        "line": 2202,
+        "reason": "matched group with original continuation anchor"
+      },
+      "2236": {
+        "line": 2212,
+        "reason": "matched group with original continuation anchor"
+      },
+      "2278": {
+        "line": 2252,
+        "reason": "matched group with original continuation anchor"
+      },
+      "2287": {
+        "line": 2262,
+        "reason": "matched group with original continuation anchor"
+      },
+      "2470": {
+        "line": 2555,
+        "reason": "matched group with original continuation anchor"
+      },
+      "2378": {
+        "line": 2352,
+        "reason": "matched group with original continuation anchor"
+      },
+      "2392": {
+        "line": 2376,
+        "reason": "matched group with original continuation anchor"
+      },
+      "2402": {
+        "line": 2394,
+        "reason": "matched group with original continuation anchor"
+      },
+      "2440": {
+        "line": 2428,
+        "reason": "matched group with original continuation anchor"
+      },
+      "2931": {
+        "line": 3009,
+        "reason": "matched group with original continuation anchor"
+      },
+      "2988": {
+        "line": 3266,
+        "reason": "matched group with original continuation anchor"
+      },
+      "2995": {
+        "line": 3313,
+        "reason": "matched group with original continuation anchor"
+      }
+    },
+    "unresolved_mapping_leads": [],
+    "non_line_bytes_invariant": true,
+    "manual_reconciliations": 2,
+    "source_bound_branch_hits": 78,
+    "excluded_arms_checked": 34,
+    "excluded_arms_with_non_directive_contents": 0,
+    "original_matched_nontrivial_lines_checked": 1561,
+    "line_match_limit": "matching blocks do not establish equivalence of original omitted or adapted behavior",
+    "status": "individual review; final build and supported-context reconciliation pending"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wow32.c",
+    "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
+    "before_sha256": "13dd415db787321bbc1b3c65cc07f51646f3145f6d9cf8c5a2e693d443d02767",
+    "after_sha256": "01c600795a733e090c6ced0c68ce82cfa2d75d15e7bd7d0b5615e78375b59a21",
+    "anchors": {
+      "73": {
+        "line": 58,
+        "reason": "matched group with original continuation anchor"
+      },
+      "86": {
+        "line": 70,
+        "reason": "matched group with original continuation anchor"
+      },
+      "94": {
+        "line": 77,
+        "reason": "matched group with original continuation anchor"
+      },
+      "105": {
+        "line": 91,
+        "reason": "matched group with original continuation anchor"
+      },
+      "178": {
+        "line": 180,
+        "reason": "matched group with original continuation anchor"
+      },
+      "631": {
+        "line": 672,
+        "reason": "matched group with original continuation anchor"
+      },
+      "692": {
+        "line": 744,
+        "reason": "matched group with original continuation anchor"
+      },
+      "725": {
+        "line": 777,
+        "reason": "matched group with original continuation anchor"
+      },
+      "731": {
+        "line": 783,
+        "reason": "matched group with original continuation anchor"
+      },
+      "752": {
+        "line": 811,
+        "reason": "matched original directive and immediate body anchor"
+      },
+      "764": {
+        "line": 870,
+        "reason": "matched group with original continuation anchor"
+      },
+      "777": {
+        "line": 894,
+        "reason": "matched group with original continuation anchor"
+      },
+      "894": {
+        "line": 1000,
+        "reason": "matched group with original continuation anchor"
+      },
+      "902": {
+        "line": 1010,
+        "reason": "matched group with original continuation anchor"
+      },
+      "932": {
+        "line": 1038,
+        "reason": "matched group with original continuation anchor"
+      },
+      "945": {
+        "line": 1060,
+        "reason": "matched group with original continuation anchor"
+      },
+      "972": {
+        "line": 1124,
+        "reason": "matched original directive and immediate body anchor"
+      },
+      "1369": {
+        "line": 1639,
+        "reason": "matched group with original continuation anchor"
+      },
+      "1559": {
+        "line": 1860,
+        "reason": "matched original directive and immediate body anchor"
+      },
+      "1586": {
+        "line": 1874,
+        "reason": "matched group with original continuation anchor"
+      },
+      "1607": {
+        "line": 1883,
+        "reason": "matched group with original continuation anchor"
+      },
+      "1655": {
+        "line": 1914,
+        "reason": "matched group with original continuation anchor"
+      },
+      "1663": {
+        "line": 2250,
+        "reason": "matched group with original continuation anchor"
+      },
+      "1751": {
+        "line": 2376,
+        "reason": "matched group with original continuation anchor"
+      }
+    },
+    "unresolved_mapping_leads": [],
+    "non_line_bytes_invariant": true,
+    "manual_reconciliations": 1,
+    "source_bound_branch_hits": 13,
+    "excluded_arms_checked": 42,
+    "excluded_arms_with_non_directive_contents": 0,
+    "original_matched_nontrivial_lines_checked": 625,
+    "line_match_limit": "matching blocks do not establish equivalence of original omitted or adapted behavior",
+    "status": "individual review; final build and supported-context reconciliation pending"
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+    "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+    "before_sha256": "24d007d177d4b326e5e60614daa2aaf70c7f0b6763bf644e31c8f1c63864afb9",
+    "after_sha256": "9f6cc2803fb6d93b867fc60c2f0f6e95eaa564550ece59f3923bb83e834f67c7",
+    "anchors": {
+      "285": {
+        "line": 165,
+        "reason": "matched original directive and immediate body anchor"
+      },
+      "396": {
+        "line": 290,
+        "reason": "matched original directive and immediate body anchor"
+      },
+      "469": {
+        "line": 340,
+        "reason": "matched group with original continuation anchor"
+      },
+      "438": {
+        "line": 364,
+        "reason": "matched group with original continuation anchor"
+      },
+      "436": {
+        "line": 362,
+        "reason": "matched original directive and immediate body anchor"
+      },
+      "447": {
+        "line": 386,
+        "reason": "matched group with original continuation anchor"
+      },
+      "445": {
+        "line": 382,
+        "reason": "matched original directive and immediate body anchor"
+      },
+      "461": {
+        "line": 424,
+        "reason": "matched group with original continuation anchor"
+      },
+      "459": {
+        "line": 422,
+        "reason": "matched group with original continuation anchor"
+      },
+      "41": {
+        "line": 449,
+        "reason": "matched group with original continuation anchor"
+      },
+      "54": {
+        "line": 496,
+        "reason": "matched original directive and immediate body anchor"
+      },
+      "79": {
+        "line": 519,
+        "reason": "matched original directive and immediate body anchor"
+      },
+      "96": {
+        "line": 536,
+        "reason": "matched original directive and immediate body anchor"
+      },
+      "101": {
+        "line": 541,
+        "reason": "matched group with original continuation anchor"
+      },
+      "454": {
+        "line": 416,
+        "reason": "matched original directive and immediate body anchor"
+      }
+    },
+    "unresolved_mapping_leads": [],
+    "non_line_bytes_invariant": true,
+    "source_bound_branch_hits": 9,
+    "excluded_arms_checked": 15,
+    "excluded_arms_with_non_directive_contents": 0,
+    "original_matched_nontrivial_lines_checked": 90,
+    "line_match_limit": "matching blocks do not establish equivalence of original omitted or adapted behavior",
+    "status": "individual review; final build and supported-context reconciliation pending"
+  }
+]

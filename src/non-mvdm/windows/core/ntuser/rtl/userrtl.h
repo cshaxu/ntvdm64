@@ -20,11 +20,6 @@
 #ifndef _USERRTL_
 #define _USERRTL_
 
-#line 71
-#define REBASEALWAYS(p, elem) ((p)->elem)
-#define REBASEPTR(obj, p) (p)
-#define REBASE(p, elem) ((p)->elem)
-#define REBASEPWND(p, elem) ((p)->elem)
 
 #line 30
 #ifdef _USERK_
@@ -74,6 +69,11 @@
 #line 85
 #else
 #line 86
+#line 71
+#define REBASEALWAYS(p, elem) ((p)->elem)
+#define REBASEPTR(obj, p) (p)
+#define REBASE(p, elem) ((p)->elem)
+#define REBASEPWND(p, elem) ((p)->elem)
 #line 88
 #endif
 #line 89

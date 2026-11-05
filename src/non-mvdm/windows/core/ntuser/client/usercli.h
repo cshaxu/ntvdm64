@@ -1,3 +1,4 @@
+#line 15
 #ifndef _USERCLI_
 #define _USERCLI_
 /* Copyright (c) 1985-91, Microsoft Corporation.
@@ -77,6 +78,7 @@ typedef struct _TL {
 /*
  * Lookaside definitions
  */
+#line 305
 typedef struct _LOOKASIDE {
     PVOID LookasideBase;
     PVOID LookasideBounds;
@@ -204,6 +206,7 @@ typedef LRESULT (cdecl *EDITCHARSETPROC)(struct tagED *, UINT, ...);
         (* pfnWowEditNextWord)(pText, iStart, cch, iAction, (DWORD)proc) :  \
         (* proc)(pText, iStart, cch, iAction))
 
+#line 621
 typedef struct tagUNDO {
     UINT    undoType;          /* Current type of undo we support */
     PBYTE   hDeletedText;      /* Pointer to text which has been deleted (for
@@ -392,6 +395,7 @@ typedef struct tagEDITWND {
  * lines of the block. In Single line edit controls, "StPos" and "EndPos"
  * contain the Starting and Ending character positions of the block;
  */
+#line 808
 typedef struct tagBLOCK {
     ICH StPos;
     ICH EndPos;
@@ -408,10 +412,13 @@ typedef  struct {
 }  STRIPINFO;
 typedef  STRIPINFO FAR *LPSTRIPINFO;
 
+#line 1177
 PSTR ECLock(PED ped);
 /* OPENNT-HOST-088: original client state-operation declarations. */
+#line 1465
 void SetWindowState(PWND pwnd, UINT flags);
 void ClearWindowState(PWND pwnd, UINT flags);
+#line 1178
 void ECUnlock(PED ped);
 BOOL ECNcCreate(PED, PWND, LPCREATESTRUCT);
 void ECInvalidateClient(PED ped, BOOL fErase);
@@ -565,6 +572,7 @@ LONG EditWndProc(PWND, UINT, DWORD, LONG);
  */
 #define LBS_COMBOBOX    0x8000L
 
+#line 449
 typedef struct tagCBox {
     struct tagWND *spwnd;      /* Window for the combo box */
     struct tagWND *spwndParent;/* Parent of the combo box */
@@ -643,6 +651,7 @@ typedef struct tagCBox {
 #ifndef OPENNT_COMBO_STATE_LAYOUT_H
 typedef struct tagCBox *PCBOX;
 #endif
+#line 858
 typedef struct _SCROLLPOS {
     INT cItems;
     UINT iPage;
@@ -761,6 +770,7 @@ typedef struct tagLBIV {
     SCROLLPOS VPos;
 } LBIV, *PLBIV;
 
+#line 1021
 typedef struct tagLBItem {
     LONG offsz;
     DWORD itemData;
@@ -785,8 +795,10 @@ typedef struct tagLBWND {
 #define IsComboVisible(pcbox) (!pcbox->fNoRedraw && IsVisible(pcbox->spwnd))
 #define IsLBoxVisible(plb)  (plb->fRedraw && IsVisible(plb->spwnd))
 #define SAMEWOWHANDLE(h1, h2)  ((BOOL)!(((UINT)(h1) ^ (UINT)(h2)) & 0xffff))
+#line 1482
 LONG ComboBoxWndProcWorker(PWND pwnd, UINT msg, WPARAM wParam,
         LPARAM lParam, DWORD fAnsi);
+#line 1488
 LONG EditWndProcWorker(PWND pwnd, UINT msg, WPARAM wParam,
         LPARAM lParam, DWORD fAnsi);
 BOOL _GetClientRect(PWND pwnd, LPRECT prc);
@@ -798,11 +810,15 @@ BOOL _IsWindowVisible(PWND pwnd);
 BOOL IsVisible(PWND pwnd);
 HWND InternalCreateDialog(HANDLE hmod, LPDLGTEMPLATE lpDlgTemplate, DWORD cb,
         HWND hwndOwner, DLGPROC pfnWndProc, LONG dwInitParam, UINT fFlags);
+#line 2158
 PWND _FindDlgItem(PWND pwndParent, DWORD id);
 PWND _GetDlgItem(PWND, int);
+#line 2163
 VOID xxxRemoveDefaultButton(PWND pwndDlg, PWND pwndStart);
 VOID xxxCheckDefPushButton(PWND pwndDlg, HWND hwndOldFocus, HWND hwndNewFocus);
+#line 2166
 VOID DlgSetFocus(HWND hwnd);
+#line 2168
 BOOL ValidateDialogPwnd(PWND pwnd);
 PWND GetTopLevelWindow(PWND pwnd);
 /* OPENNT-HOST-106: original Tab-navigation collaborator declarations. */
@@ -824,6 +840,7 @@ VOID RtlInitLargeUnicodeString(PLARGE_UNICODE_STRING plstr, LPCWSTR psz,
 #define NextWordBoundary(p)     ((PBYTE)(p) + ((DWORD)(p) & 1))
 #endif
 #define NextDWordBoundary(p)    ((PBYTE)(p) + ((DWORD)(-(LONG)(p)) & 3))
+#line 2167
 void RepositionRect(LPRECT lprc, DWORD dwStyle, DWORD dwExStyle);
 #define CCHFILEMAX      MAX_PATH
 #define MSGFLAG_SPECIAL_THUNK       0x10000000
@@ -848,6 +865,7 @@ extern WCHAR szSLASHSTARDOTSTAR[];
 /*
  * Procedures for combo boxes.
  */
+#line 1958
 LONG  xxxCBCommandHandler(PCBOX, DWORD, HWND);
 long  xxxCBMessageItemHandler(PCBOX, UINT, LPVOID);
 int   xxxCBDir(PCBOX, UINT, LPWSTR);
@@ -1037,11 +1055,13 @@ UINT LBCalcAllocNeeded(PLBIV, INT);
 /* OPENNT-HOST-093: original canonical client-control extent declarations. */
 #if defined(WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT) && !defined(OPENNT_CONTROL_EXTENT_CLIENT_LAYOUT_H)
 #define OPENNT_CONTROL_EXTENT_CLIENT_LAYOUT_H
+#line 499
 typedef struct tagCOMBOWND {
     WND wnd;
     PCBOX pcbox;
 } COMBOWND, *PCOMBOWND;
 
+#line 1042
 typedef struct tagSTAT {
     PWND spwnd;
     union {
@@ -1058,6 +1078,7 @@ typedef struct tagSTATWND {
     PSTAT pstat;
 } STATWND, *PSTATWND;
 
+#line 2233
 typedef struct tagMDI {
     UINT    cKids;
     HWND    hwndMaxedChild;
@@ -1176,6 +1197,7 @@ typedef struct tagMDIWND {
 #endif
 #line 2211
 
+#line 2303
 #endif /* _USERCLI_ */
 #line 2307
 #if DBG
@@ -1218,5 +1240,7 @@ typedef struct tagMDIWND {
 #line 2374
 #ifdef FE_SB // DBCS Messaging macros for client side.
 #error Excluded unsupported FE_SB client messaging macros
+#line 2671
 #endif // FE_SB
+#line 2672
 

@@ -1,0 +1,674 @@
+{
+  "path": "src/mvdm-host/dpmi32/dpmiint.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+  "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+  "status": "incomplete",
+  "modified": true,
+  "branch_evidence": {
+    "source": "artifacts/mvdm-audit/t476-s2-merged-branch-evidence.csv",
+    "counts": {
+      "hit": 32,
+      "previously-excluded": 19
+    },
+    "selected_guard_exception": "Original line 859 #ifndef i386 is widened to !defined(i386) || defined(CPU_40_STYLE), retained local adaptation DIV-582; selected software CPU path must not be removed. Structure-matcher ancestry warning is caused by this changed expression, not proof of an independently missing nested branch.",
+    "caveat": "Existing #error bodies and all supported inclusion contexts still require final independent checks."
+  },
+  "compiler_line_evidence": {
+    "source": "build/t476-s2/compiler-lines.json",
+    "context": 278,
+    "sample_count": 156,
+    "mismatch_count": 96,
+    "sample_semantics": "[observed compiler logical line, pinned-original line, source text]",
+    "mismatches": [
+      [
+        77,
+        78,
+        "IntNumber = *(PWORD16)(StackPointer + 6);"
+      ],
+      [
+        79,
+        80,
+        "Handlers[IntNumber].Flags = *(PWORD16)(StackPointer + 8);"
+      ],
+      [
+        80,
+        81,
+        "Handlers[IntNumber].CsSelector = *(PWORD16)(StackPointer + 4);"
+      ],
+      [
+        81,
+        82,
+        "Handlers[IntNumber].Eip = *(PDWORD16)(StackPointer);"
+      ],
+      [
+        137,
+        138,
+        "IntNumber = *(PWORD16)(StackPointer + 12);"
+      ],
+      [
+        139,
+        140,
+        "Handlers[IntNumber].Flags = *(PDWORD16)(StackPointer + 14);"
+      ],
+      [
+        140,
+        141,
+        "Handlers[IntNumber].CsSelector = *(PWORD16)(StackPointer + 10);"
+      ],
+      [
+        141,
+        142,
+        "Handlers[IntNumber].Eip = *(PDWORD16)(StackPointer + 6);"
+      ],
+      [
+        142,
+        143,
+        "Handlers[IntNumber].SsSelector = *(PWORD16)(StackPointer + 4);"
+      ],
+      [
+        143,
+        144,
+        "Handlers[IntNumber].Esp = *(PDWORD16)(StackPointer);"
+      ],
+      [
+        153,
+        154,
+        "DpmiUnhandledExceptionHandler("
+      ],
+      [
+        247,
+        245,
+        "USHORT FrameSS, FrameSP, FrameCS, FrameIP, FrameFlags;"
+      ],
+      [
+        248,
+        246,
+        "FrameSS = *(PWORD16) (VdmStackPointer+14);"
+      ],
+      [
+        249,
+        247,
+        "FrameCS = *(PWORD16) (VdmStackPointer+8);"
+      ],
+      [
+        250,
+        248,
+        "FrameFlags = *(PWORD16) (VdmStackPointer+10);"
+      ],
+      [
+        259,
+        257,
+        "FrameSP = *(PWORD16) (VdmStackPointer+12) - 6;"
+      ],
+      [
+        263,
+        261,
+        "FrameIP = *(PWORD16) (VdmStackPointer+6);"
+      ],
+      [
+        286,
+        284,
+        "FrameCS = *(PWORD16) (VdmStackPointer+2);"
+      ],
+      [
+        287,
+        285,
+        "FrameIP = *(PWORD16) (VdmStackPointer);"
+      ],
+      [
+        290,
+        288,
+        "setSP(getSP() - 2);"
+      ],
+      [
+        295,
+        293,
+        "setCS(Handlers[XNumber].CsSelector);"
+      ],
+      [
+        327,
+        325,
+        "char szBuffer[255];"
+      ],
+      [
+        332,
+        330,
+        "FaultingCS  = (USHORT)*(PDWORD16)(VdmStackPointer+16);"
+      ],
+      [
+        333,
+        331,
+        "FaultingEip = *(PDWORD16)(VdmStackPointer+12);"
+      ],
+      [
+        335,
+        333,
+        "FaultingCS  = *(PWORD16)(VdmStackPointer+8);"
+      ],
+      [
+        336,
+        334,
+        "FaultingEip = (ULONG)*(PWORD16)(VdmStackPointer+6);"
+      ],
+      [
+        340,
+        338,
+        "XNumber, FaultingCS, FaultingEip);"
+      ],
+      [
+        360,
+        358,
+        "DpmiPassPmStackInfo("
+      ],
+      [
+        386,
+        384,
+        "LockedPMStackSel = getES();"
+      ],
+      [
+        387,
+        385,
+        "LockedPMStackCount = 0;"
+      ],
+      [
+        392,
+        92,
+        "NTSTATUS Status;"
+      ],
+      [
+        500,
+        495,
+        "DpmiSwIntHandler("
+      ],
+      [
+        663,
+        655,
+        "DpmiIntHandlerIret16("
+      ],
+      [
+        771,
+        767,
+        "DpmiIntHandlerIret32("
+      ],
+      [
+        866,
+        862,
+        "DpmiFaultHandler("
+      ],
+      [
+        868,
+        864,
+        "ULONG ErrorCode"
+      ],
+      [
+        891,
+        887,
+        "ULONG SaveSS, SaveESP, SaveEFLAGS, SaveCS, SaveEIP;"
+      ],
+      [
+        899,
+        893,
+        "SaveSS = getSS();"
+      ],
+      [
+        900,
+        894,
+        "SaveESP = getESP();"
+      ],
+      [
+        902,
+        896,
+        "SaveEIP = getEIP();"
+      ],
+      [
+        903,
+        897,
+        "SaveCS  = getCS();"
+      ],
+      [
+        907,
+        901,
+        "ReflectV86Int(IntNumber, getEFLAGS());"
+      ],
+      [
+        911,
+        905,
+        "if ((IntNumber == 13) || (IntNumber == 6)) {"
+      ],
+      [
+        912,
+        906,
+        "if (DpmiEmulateInstruction()) {"
+      ],
+      [
+        933,
+        926,
+        "setESP(getESP()-0x20);"
+      ],
+      [
+        939,
+        932,
+        "if (!BuildStackFrame(8, &VdmStackPointer, &NewSP)) {"
+      ],
+      [
+        1001,
+        980,
+        "DpmiFaultHandlerIret16("
+      ],
+      [
+        1038,
+        1008,
+        "setEIP((DWORD)*(PWORD16)(VdmStackPointer+2));"
+      ],
+      [
+        1039,
+        1009,
+        "setCS(*(PWORD16)(VdmStackPointer+4));"
+      ],
+      [
+        1040,
+        1010,
+        "setSTATUS(*(PWORD16)(VdmStackPointer+6));"
+      ],
+      [
+        1041,
+        1011,
+        "setSP(*(PWORD16)(VdmStackPointer+8));"
+      ],
+      [
+        1042,
+        1012,
+        "setSS(*(PWORD16)(VdmStackPointer+10));"
+      ],
+      [
+        1048,
+        1018,
+        "DpmiFaultHandlerIret32("
+      ],
+      [
+        1077,
+        1047,
+        "setEIP(*(PDWORD16)(VdmStackPointer+4));"
+      ],
+      [
+        1078,
+        1048,
+        "setCS((USHORT)*(PDWORD16)(VdmStackPointer+8));"
+      ],
+      [
+        1079,
+        1049,
+        "setEFLAGS(*(PDWORD16)(VdmStackPointer+12));"
+      ],
+      [
+        1080,
+        1050,
+        "setESP(*(PDWORD16)(VdmStackPointer+16));"
+      ],
+      [
+        1081,
+        1051,
+        "setSS((USHORT)*(PWORD16)(VdmStackPointer+20));"
+      ],
+      [
+        1090,
+        1059,
+        "ULONG StackUnits,"
+      ],
+      [
+        1097,
+        1060,
+        "PUCHAR *pVdmStackPointer,"
+      ],
+      [
+        1098,
+        1061,
+        "ULONG *pNewSP"
+      ],
+      [
+        1129,
+        1092,
+        "ULONG VdmSp;"
+      ],
+      [
+        1132,
+        1095,
+        "ULONG Limit;"
+      ],
+      [
+        1133,
+        1096,
+        "ULONG SelIndex;"
+      ],
+      [
+        1135,
+        1098,
+        "BOOL bExpandDown;"
+      ],
+      [
+        1138,
+        1101,
+        "SelIndex = (SegSs & ~0x7)/sizeof(LDT_ENTRY);"
+      ],
+      [
+        1140,
+        1103,
+        "Limit = (ULONG) (Ldt[SelIndex].HighWord.Bits.LimitHi << 16) |"
+      ],
+      [
+        1141,
+        1104,
+        "Ldt[SelIndex].LimitLow;"
+      ],
+      [
+        1150,
+        1110,
+        "if (Ldt[SelIndex].HighWord.Bits.Granularity) {"
+      ],
+      [
+        1151,
+        1111,
+        "Limit = (Limit << 12) | 0xfff;"
+      ],
+      [
+        1155,
+        1115,
+        "if (Ldt[SelIndex].HighWord.Bits.Default_Big) {"
+      ],
+      [
+        1156,
+        1116,
+        "VdmSp = getESP();"
+      ],
+      [
+        1158,
+        1118,
+        "VdmSp = getSP();"
+      ],
+      [
+        1167,
+        1122,
+        "StackOffset = StackUnits*sizeof(DWORD);"
+      ],
+      [
+        1169,
+        1124,
+        "StackOffset = StackUnits*sizeof(WORD);"
+      ],
+      [
+        1172,
+        1127,
+        "NewSP = VdmSp - StackOffset;"
+      ],
+      [
+        1173,
+        1128,
+        "bExpandDown = (BOOL) (Ldt[SelIndex].HighWord.Bits.Type & 4);"
+      ],
+      [
+        1184,
+        1129,
+        "if ((StackOffset > VdmSp) ||"
+      ],
+      [
+        1185,
+        1130,
+        "(!bExpandDown && (VdmSp > Limit)) ||"
+      ],
+      [
+        1186,
+        1131,
+        "(bExpandDown && (NewSP < Limit))) {"
+      ],
+      [
+        1203,
+        1138,
+        "VdmStackPointer += VdmSp;"
+      ],
+      [
+        1218,
+        1145,
+        "EnableIntHooks("
+      ],
+      [
+        1278,
+        1267,
+        "SegCS = getCS();"
+      ],
+      [
+        1289,
+        1277,
+        "switch (Opcode) {"
+      ],
+      [
+        1290,
+        1278,
+        "case 0xf:"
+      ],
+      [
+        1291,
+        1279,
+        "if (!CheckEIP(1)) {"
+      ],
+      [
+        1312,
+        1282,
+        "bReturn = DpmiOp0f(pCode);"
+      ],
+      [
+        1315,
+        1285,
+        "case 0x8e:"
+      ],
+      [
+        1338,
+        1298,
+        "if ((SegCS == DosxRmCodeSelector) &&"
+      ],
+      [
+        1342,
+        1302,
+        "setEIP(getEIP()+2);"
+      ],
+      [
+        1349,
+        1309,
+        "return bReturn;"
+      ],
+      [
+        1360,
+        1320,
+        "DpmiOp0f("
+      ],
+      [
+        1361,
+        1321,
+        "PUCHAR pCode"
+      ],
+      [
+        1379,
+        1339,
+        "ULONG Value;"
+      ],
+      [
+        1381,
+        1341,
+        "switch (*pCode++) {"
+      ],
+      [
+        1395,
+        1355,
+        "Value = getCR0();"
+      ]
+    ],
+    "caveat": "Historical compiler evidence before candidate; anchors require real compiler verification across supported contexts, including inactive-branch transitions."
+  },
+  "unresolved": [
+    "Verify candidate diagnostic anchors by compiling supported contexts; audit unsampled retained lines and potential ambiguous compiler samples.",
+    "Review DIV-582 widened selector as explicitly retained adaptation against original-frame requirement without deleting selected behavior."
+  ],
+  "verification": "No build, tests, publication, commit or push performed by worker.",
+  "source_sha256_before": "1d44faf32b02b7d5aad62aa8d8f72800297669e4ab659a8beeb27648a722c7d7",
+  "source_sha256_after": "68191102c83aab4f54c51409e851e3e6cb2fc10fa9300e10854793831a7f2b64",
+  "candidate_line_anchors": [
+    {
+      "physical_before": 84,
+      "original_line": 78,
+      "observed_line_before": 77,
+      "witness": "IntNumber = *(PWORD16)(StackPointer + 6);"
+    },
+    {
+      "physical_before": 131,
+      "original_line": 138,
+      "observed_line_before": 137,
+      "witness": "IntNumber = *(PWORD16)(StackPointer + 12);"
+    },
+    {
+      "physical_before": 241,
+      "original_line": 245,
+      "observed_line_before": 247,
+      "witness": "USHORT FrameSS, FrameSP, FrameCS, FrameIP, FrameFlags;"
+    },
+    {
+      "physical_before": 533,
+      "original_line": 495,
+      "observed_line_before": 500,
+      "witness": "DpmiSwIntHandler("
+    },
+    {
+      "physical_before": 761,
+      "original_line": 655,
+      "observed_line_before": 663,
+      "witness": "DpmiIntHandlerIret16("
+    },
+    {
+      "physical_before": 864,
+      "original_line": 767,
+      "observed_line_before": 771,
+      "witness": "DpmiIntHandlerIret32("
+    },
+    {
+      "physical_before": 949,
+      "original_line": 862,
+      "observed_line_before": 866,
+      "witness": "DpmiFaultHandler("
+    },
+    {
+      "physical_before": 982,
+      "original_line": 893,
+      "observed_line_before": 899,
+      "witness": "SaveSS = getSS();"
+    },
+    {
+      "physical_before": 1020,
+      "original_line": 926,
+      "observed_line_before": 933,
+      "witness": "setESP(getESP()-0x20);"
+    },
+    {
+      "physical_before": 1088,
+      "original_line": 980,
+      "observed_line_before": 1001,
+      "witness": "DpmiFaultHandlerIret16("
+    },
+    {
+      "physical_before": 1125,
+      "original_line": 1008,
+      "observed_line_before": 1038,
+      "witness": "setEIP((DWORD)*(PWORD16)(VdmStackPointer+2));"
+    },
+    {
+      "physical_before": 1177,
+      "original_line": 1059,
+      "observed_line_before": 1090,
+      "witness": "ULONG StackUnits,"
+    },
+    {
+      "physical_before": 1184,
+      "original_line": 1060,
+      "observed_line_before": 1097,
+      "witness": "PUCHAR *pVdmStackPointer,"
+    },
+    {
+      "physical_before": 1237,
+      "original_line": 1110,
+      "observed_line_before": 1150,
+      "witness": "if (Ldt[SelIndex].HighWord.Bits.Granularity) {"
+    },
+    {
+      "physical_before": 1254,
+      "original_line": 1122,
+      "observed_line_before": 1167,
+      "witness": "StackOffset = StackUnits*sizeof(DWORD);"
+    },
+    {
+      "physical_before": 1271,
+      "original_line": 1129,
+      "observed_line_before": 1184,
+      "witness": "if ((StackOffset > VdmSp) ||"
+    },
+    {
+      "physical_before": 1290,
+      "original_line": 1138,
+      "observed_line_before": 1203,
+      "witness": "VdmStackPointer += VdmSp;"
+    },
+    {
+      "physical_before": 1305,
+      "original_line": 1145,
+      "observed_line_before": 1218,
+      "witness": "EnableIntHooks("
+    },
+    {
+      "physical_before": 1481,
+      "original_line": 1267,
+      "observed_line_before": 1278,
+      "witness": "SegCS = getCS();"
+    },
+    {
+      "physical_before": 1536,
+      "original_line": 1277,
+      "observed_line_before": 1289,
+      "witness": "switch (Opcode) {"
+    },
+    {
+      "physical_before": 1559,
+      "original_line": 1282,
+      "observed_line_before": 1312,
+      "witness": "bReturn = DpmiOp0f(pCode);"
+    },
+    {
+      "physical_before": 1585,
+      "original_line": 1298,
+      "observed_line_before": 1338,
+      "witness": "if ((SegCS == DosxRmCodeSelector) &&"
+    }
+  ],
+  "excluded_body_audit": {
+    "count": 19,
+    "arm_lines": [
+      97,
+      429,
+      602,
+      625,
+      636,
+      647,
+      662,
+      670,
+      807,
+      828,
+      903,
+      918,
+      1085,
+      1192,
+      1264,
+      1353,
+      1392,
+      1503,
+      1532
+    ],
+    "parser_errors": [],
+    "residual_code_or_nested": [],
+    "method": "comment-aware line and nested directive scan; allows only #error/#line in excluded arm"
+  }
+}

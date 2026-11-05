@@ -94,7 +94,7 @@
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/gdpvar.h",
       "group": "C: matching line leads",
-      "current_sha256": "c1f55eb9bf7c7c582f742a01fc462a13ec0f95927c8a6795a03db377fb0210dc",
+      "current_sha256": "aeb5eb926407637f2fbd972638ec357663312c0602859f7577de6cc2854e195c",
       "original_sha256": "a8fc9f81af3c06eb4263cc5acb3005a41f849677cba4d09ae171ab450f7fb3ec",
       "s1_hits": 0,
       "prior_exclusions": 1,
@@ -109,7 +109,7 @@
       "raw_matching_line_leads": 1,
       "sampled_compiler_contexts": 0,
       "original_lines": 1859,
-      "status": "pending whole-file audit",
+      "status": "modified; final grouped build and empty include ownership pending",
       "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
     },
     {
@@ -803,7 +803,7 @@
       "raw_matching_line_leads": 92,
       "sampled_compiler_contexts": 1,
       "original_lines": 672,
-      "status": "pending whole-file audit",
+      "status": "reviewed; evidence t476-s2-packstr-review.json",
       "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
     },
     {
@@ -1166,7 +1166,7 @@
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
       "group": "C: matching line leads",
-      "current_sha256": "a4f04cdfa139c78bc761b5e78b39c727a128549b2702e9a7098d22b07dd38aeb",
+      "current_sha256": "d4e1283fd8b5297a8957a9ed13e8622504eaf16763aace581a8c5b78e9b6891e",
       "original_sha256": "0e3999df8610405c990760ee1a417bf312e3b76744f8f9387bbd94583f9d800d",
       "s1_hits": 1,
       "prior_exclusions": 1,
@@ -1181,7 +1181,7 @@
       "raw_matching_line_leads": 70,
       "sampled_compiler_contexts": 0,
       "original_lines": 1155,
-      "status": "pending whole-file audit",
+      "status": "modified, awaiting ten-file build; selected empty KOREA shell remains under review",
       "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
     },
     {
@@ -1208,7 +1208,7 @@
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
       "group": "C: matching line leads",
-      "current_sha256": "6aac8d470176783b6ffaf1eff1e4af5a83d7b5aa265488b9733ded05165e9cc1",
+      "current_sha256": "56f7e0030282e8d7c5d1ebcae4c2e8bd52572e4145653e71f813864ec46b1cb6",
       "original_sha256": "8ecbb58954eca0fece4ab180bb56a3953b8b4408400d3c7aa01d50b62caaa531",
       "s1_hits": 0,
       "prior_exclusions": 3,
@@ -1223,7 +1223,7 @@
       "raw_matching_line_leads": 2,
       "sampled_compiler_contexts": 1,
       "original_lines": 1095,
-      "status": "pending whole-file audit",
+      "status": "modified, awaiting ten-file build and compiler-line confirmation",
       "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
     },
     {
@@ -1459,10 +1459,10 @@
     }
   ],
   "method": "Hash-checked prior S1 branch ledger, source/original condition comparison and raw line-match triage; these are leads, not exclusion or completion proofs.",
-  "pending_count": 50,
+  "pending_count": 49,
   "pending_groups": {
     "B: original structure leads": 3,
-    "C: matching line leads": 32,
+    "C: matching line leads": 31,
     "A: changed evidence or unhit arms": 14,
     "D: full-file review with no automated leads": 1
   }

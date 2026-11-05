@@ -19,6 +19,7 @@
 #line 13
 #include "precomp.h"
 
+#line 418
 PBYTE SkipIDorString(
     LPBYTE pb)
 {
@@ -246,6 +247,7 @@ typedef struct _OLDCURSOR {
 } OLDCURSOR, *POLDCURSOR;
 typedef OLDCURSOR UNALIGNED *UPOLDCURSOR;
 
+#line 2991
 DWORD HowManyColors(
     IN  UPBITMAPINFOHEADER upbih,
     IN  BOOL               fOldFormat,
@@ -275,6 +277,7 @@ DWORD HowManyColors(
 #undef upbch
 }
 
+#line 3299
 BOOL TrulyMonochrome(
     LPVOID lpColorTable,
     BOOL   fOldFormat)
@@ -309,6 +312,7 @@ BOOL TrulyMonochrome(
     return FALSE;
 }
 
+#line 3029
 VOID ChangeDibColors(
     IN LPBITMAPINFOHEADER lpbih,
     IN UINT               LR_flags)
@@ -404,6 +408,7 @@ ChangeColor:
     }
 }
 
+#line 3355
 LPBITMAPINFOHEADER CopyDibHdr(
     IN  UPBITMAPINFOHEADER upbih,
     OUT LPSTR             *lplpBits,
@@ -492,7 +497,9 @@ LPBITMAPINFOHEADER CopyDibHdr(
             /* DIVERGENCE(OPENNT-HOST-034): capture input bits before
              * redirecting upbih, which upOldIcoCur aliases, to local Fake. */
             *lplpBits                = upOldIcoCur->abBitmap;
+#line 3440
             upbih                    = (LPBITMAPINFOHEADER)&Fake;
+#line 3442
             Fake.rgb[2]              = *((LPDWORD)*lplpBits);  // For LR_LOADTRANSPARENT
 
         } else {
@@ -520,6 +527,7 @@ LPBITMAPINFOHEADER CopyDibHdr(
 
 }
 
+#line 1513
 HBITMAP Convert1BppToMonoBitmap(
     HDC     hdcSrc,
     HBITMAP hbm1Bpp)
@@ -563,6 +571,7 @@ HBITMAP Convert1BppToMonoBitmap(
     return hbmMono;
 }
 
+#line 1565
 HBITMAP CreateScreenBitmap(
     int    cx,
     int    cy,
@@ -677,6 +686,7 @@ HBITMAP CreateScreenBitmap(
 #if 0 // We use to do the dib-section create, but this breaks icons
 #line 1675
 #error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
+#line 1691
 #else
 #if !defined(WOW_ORIGINAL_DIALOG_TEMPLATE)
 #line 1692
@@ -691,6 +701,7 @@ HBITMAP CreateScreenBitmap(
                                      (LPBITMAPINFO)&dib1Vga,
                                      DIB_RGB_COLORS);
 #endif
+#line 1702
 #endif
 #if !defined(WOW_ORIGINAL_DIALOG_TEMPLATE)
 #line 1703
@@ -906,6 +917,7 @@ HBITMAP BitmapFromDIB(
     return hbmpNew;
 }
 
+#line 3488
 HBITMAP ConvertDIBBitmap(
     IN  UPBITMAPINFOHEADER           upbih,
     IN  DWORD                        cxDesired,
@@ -1032,6 +1044,7 @@ HBITMAP ConvertDIBBitmap(
 
 /* DIVERGENCE(OPENNT-HOST-033): other original resource owners omitted. */
 
+#line 3954
 HBITMAP WOWLoadBitmapA(
     HINSTANCE hmod,
     LPCSTR    lpName,
@@ -1072,6 +1085,7 @@ HBITMAP WOWLoadBitmapA(
 #if 0 //CHRISWIL : oemInfo.fColorCursors doesn't exist on NT.
 #line 1481
 #error Excluded original disabled cursor branch
+#line 1483
 #endif
 #line 1484
 
@@ -1079,6 +1093,7 @@ HBITMAP WOWLoadBitmapA(
 #if 0 //CHRISWIL : oemInfo.fColorCursors doesn't exist on NT.
 #line 2299
 #error Excluded original disabled image branch
+#line 2301
 #endif
 #line 2302
 
@@ -1088,6 +1103,7 @@ HBITMAP WOWLoadBitmapA(
 #error Excluded original disabled icon-loading branch
 #else
 #line 2627
+#line 2628
 #endif
 #line 2629
 
@@ -1095,8 +1111,10 @@ HBITMAP WOWLoadBitmapA(
 #if 0 //CHRISWIL: Not in Win95
 #line 3752
 #error Excluded original disabled image-matching branch
+#line 3757
 #else
 #line 3758
+#line 3762
 #endif
 #line 3763
 
@@ -1104,6 +1122,7 @@ HBITMAP WOWLoadBitmapA(
 #if 0 //CHRISWIL : oemInfo.fColorCursors doesn't exist on NT.
 #line 4517
 #error Excluded original disabled image-copy branch
+#line 4519
 #endif
 #line 4520
 
@@ -1111,6 +1130,7 @@ HBITMAP WOWLoadBitmapA(
 #if 0 //CHRISWIL : oemInfo.fColorCursors doesn't exist on NT.
 #line 4575
 #error Excluded original disabled directory branch
+#line 4577
 #endif
 #line 4578
 
@@ -1118,6 +1138,7 @@ HBITMAP WOWLoadBitmapA(
 #ifdef LATER // SanfordS
 #line 2641
 #error Excluded unsupported original LATER branch
+#line 2667
 #endif
 #line 2668
 
@@ -1126,6 +1147,7 @@ HBITMAP WOWLoadBitmapA(
 #ifdef DEBUG
 #line 882
 #error Unsupported DEBUG original branch
+#line 896
 #endif
 #line 897
 
@@ -1133,5 +1155,6 @@ HBITMAP WOWLoadBitmapA(
 #ifdef DEBUG
 #line 3902
 #error Unsupported DEBUG original branch
+#line 3905
 #endif
 #line 3906

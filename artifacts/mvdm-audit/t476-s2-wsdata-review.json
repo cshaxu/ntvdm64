@@ -1,0 +1,249 @@
+{
+  "path": "src/mvdm-host/wow32/wsdata.c",
+  "original_sha256": "f8f95c4cb6ec3aca607e66d615900129497738617b9a6a192880dc66beb5e63b",
+  "current_sha256": "3ae3ad7992ba726c8a3988a8cb3aebba07fa7c7c2a63f21c69026462683f93a0",
+  "original_condition_arms": 0,
+  "current_condition_arms": 0,
+  "matching_nontrivial_lines_checked": 979,
+  "logical_line_mismatches": [],
+  "diff_blocks": [
+    {
+      "tag": "replace",
+      "original": [
+        326,
+        326
+      ],
+      "current": [
+        326,
+        326
+      ]
+    },
+    {
+      "tag": "insert",
+      "original": [
+        338,
+        337
+      ],
+      "current": [
+        338,
+        339
+      ]
+    },
+    {
+      "tag": "replace",
+      "original": [
+        430,
+        430
+      ],
+      "current": [
+        432,
+        432
+      ]
+    },
+    {
+      "tag": "insert",
+      "original": [
+        442,
+        441
+      ],
+      "current": [
+        444,
+        445
+      ]
+    },
+    {
+      "tag": "replace",
+      "original": [
+        513,
+        513
+      ],
+      "current": [
+        517,
+        523
+      ]
+    },
+    {
+      "tag": "replace",
+      "original": [
+        890,
+        890
+      ],
+      "current": [
+        900,
+        900
+      ]
+    },
+    {
+      "tag": "insert",
+      "original": [
+        902,
+        901
+      ],
+      "current": [
+        912,
+        913
+      ]
+    },
+    {
+      "tag": "replace",
+      "original": [
+        991,
+        991
+      ],
+      "current": [
+        1003,
+        1003
+      ]
+    },
+    {
+      "tag": "insert",
+      "original": [
+        1003,
+        1002
+      ],
+      "current": [
+        1015,
+        1016
+      ]
+    },
+    {
+      "tag": "replace",
+      "original": [
+        1073,
+        1073
+      ],
+      "current": [
+        1087,
+        1090
+      ]
+    },
+    {
+      "tag": "replace",
+      "original": [
+        1385,
+        1385
+      ],
+      "current": [
+        1402,
+        1402
+      ]
+    },
+    {
+      "tag": "insert",
+      "original": [
+        1397,
+        1396
+      ],
+      "current": [
+        1414,
+        1415
+      ]
+    },
+    {
+      "tag": "replace",
+      "original": [
+        1491,
+        1491
+      ],
+      "current": [
+        1510,
+        1510
+      ]
+    },
+    {
+      "tag": "insert",
+      "original": [
+        1503,
+        1502
+      ],
+      "current": [
+        1522,
+        1523
+      ]
+    },
+    {
+      "tag": "replace",
+      "original": [
+        1576,
+        1576
+      ],
+      "current": [
+        1597,
+        1600
+      ]
+    },
+    {
+      "tag": "insert",
+      "original": [
+        1775,
+        1774
+      ],
+      "current": [
+        1799,
+        1802
+      ]
+    },
+    {
+      "tag": "insert",
+      "original": [
+        1777,
+        1776
+      ],
+      "current": [
+        1805,
+        1808
+      ]
+    },
+    {
+      "tag": "insert",
+      "original": [
+        1784,
+        1783
+      ],
+      "current": [
+        1816,
+        1817
+      ]
+    },
+    {
+      "tag": "replace",
+      "original": [
+        1785,
+        1786
+      ],
+      "current": [
+        1819,
+        1833
+      ]
+    },
+    {
+      "tag": "replace",
+      "original": [
+        1790,
+        1791
+      ],
+      "current": [
+        1837,
+        1850
+      ]
+    },
+    {
+      "tag": "insert",
+      "original": [
+        1796,
+        1795
+      ],
+      "current": [
+        1855,
+        1986
+      ]
+    }
+  ],
+  "product_compiler_evidence": {
+    "sampled_contexts": "1",
+    "unique_line_samples": "95",
+    "compiler_line_leads": "0"
+  },
+  "registered_local_changes": "MVDM-HOST-DIV-463",
+  "limitation": "Historical actual product compiler witness; full supported context reconciliation remains open."
+}

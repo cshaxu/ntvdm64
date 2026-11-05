@@ -468,8 +468,10 @@ typedef UNALIGNED PROPNT31 FAR *LPPROPNT31;
 #ifdef UNICODE
 #line 465
 #error Unsupported excluded original configuration
+#line 519
 #else
 
+#line 521
 #ifndef WINNT
 #line 522
 #error Unsupported non-WINNT PIF profile
@@ -785,6 +787,7 @@ typedef UNALIGNED WNTPIF31 FAR *LPWNTPIF31;                                 /* ;
 #ifdef UNICODE
 #line 831
 #error Unsupported excluded original configuration
+#line 837
 #endif
 #line 838
                                                                             /* ;Internal */
@@ -852,6 +855,7 @@ typedef struct PIFDATA {                    /* pd */  //Examples            /* ;
 #ifdef UNICODE
 #line 901
 #error Unsupported excluded original configuration
+#line 909
 #endif
 #line 910
                                                                             /* ;Internal */
@@ -931,6 +935,7 @@ BOOL WINAPI PifPropGetPages(LPVOID lpv, LPFNADDPROPSHEETPAGE lpfnAddPage, LPARAM
 #ifdef  PIF_PROPERTY_SHEETS
 #line 985
 #error DIVERGENCE OPENNT-HOST-133: PIF_PROPERTY_SHEETS branch is not selected; see mirror register.
+#line 993
 #endif  /* PIF_PROPERTY_SHEETS */
 #line 994
 

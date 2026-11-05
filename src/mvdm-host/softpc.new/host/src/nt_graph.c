@@ -83,8 +83,11 @@
 
 /* Globals used in various functions to synchronise the display */
 
+#line 77
 #ifdef EGG
+#line 78
 extern int  ega_int_enable;
+#line 79
 #endif
 
 #ifdef V7VGA
@@ -106,14 +109,18 @@ static BOOL presentation_updated = FALSE;
 // DIB_PAL_INDICES shouldn't be used, use CreateDIBSECTION to get better
 // performance characteristics.
 
+#line 88
 #define DIB_PAL_INDICES 2
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: EXPORTS */
 
+#line 92
 SCREEN_DESCRIPTION sc;
 
+#line 94
 #ifdef BIGWIN
 int             horiz_lut[256];
+#line 96
 #endif
 int             host_screen_scale;
 int             host_display_depth = 8;
@@ -141,8 +148,10 @@ static PAINTFUNCS std_mono_paint_funcs =
         nt_vga_mono_graph_std,
         nt_vga_mono_med_graph_std,
         nt_vga_mono_hi_graph_std,
+#line 123
 #ifdef V7VGA
         nt_v7vga_mono_hi_graph_std,
+#line 125
 #endif /* V7VGA */
 };
 
@@ -158,8 +167,10 @@ static PAINTFUNCS big_mono_paint_funcs =
         nt_vga_mono_graph_big,
         nt_vga_mono_med_graph_big,
         nt_vga_mono_hi_graph_big,
+#line 140
 #ifdef V7VGA
         nt_v7vga_mono_hi_graph_big,
+#line 142
 #endif /* V7VGA */
 };
 
@@ -175,8 +186,10 @@ static PAINTFUNCS huge_mono_paint_funcs =
         nt_vga_mono_graph_huge,
         nt_vga_mono_med_graph_huge,
         nt_vga_mono_hi_graph_huge,
+#line 157
 #ifdef V7VGA
         nt_v7vga_mono_hi_graph_huge,
+#line 159
 #endif /* V7VGA */
 };
 
@@ -192,8 +205,10 @@ static PAINTFUNCS std_colour_paint_funcs =
         nt_vga_graph_std,
         nt_vga_med_graph_std,
         nt_vga_hi_graph_std,
+#line 174
 #ifdef V7VGA
         nt_v7vga_hi_graph_std,
+#line 176
 #endif /* V7VGA */
 };
 
@@ -209,8 +224,10 @@ static PAINTFUNCS big_colour_paint_funcs =
         nt_vga_graph_big,
         nt_vga_med_graph_big,
         nt_vga_hi_graph_big,
+#line 191
 #ifdef V7VGA
         nt_v7vga_hi_graph_big,
+#line 193
 #endif /* V7VGA */
 };
 
@@ -226,14 +243,18 @@ static PAINTFUNCS huge_colour_paint_funcs =
         nt_vga_graph_huge,
         nt_vga_med_graph_huge,
         nt_vga_hi_graph_huge,
+#line 208
 #ifdef V7VGA
         nt_v7vga_hi_graph_huge,
+#line 210
 #endif /* V7VGA */
 };
 
+#line 213
 #ifdef MONITOR
 #line 214
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
+#line 264
 #endif /* MONITOR */
 #line 265
 
@@ -264,6 +285,7 @@ static INITFUNCS colour_init_funcs =
 #ifdef MONITOR
 #line 291
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
+#line 302
 #endif /* MONITOR */
 #line 303
 
@@ -528,6 +550,7 @@ GLOBAL VOID closeGraphicsBuffer IFN0()
 #ifdef X86GFX
 #line 563
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
+#line 570
 #endif /* X86GFX */
 #line 571
 	}
@@ -625,6 +648,7 @@ void nt_init_screen(void)
 #ifdef MONITOR
 #line 660
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
+#line 685
 #endif /* MONITOR */
 #line 686
 
@@ -729,6 +753,7 @@ void nt_clear_screen(void)
 #ifdef MONITOR
 #line 783
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
+#line 789
 #endif
 #line 790
 }
@@ -780,18 +805,22 @@ void nt_flush_screen(void)
     }
 #endif
 
+#line 800
     if (ConsoleInitialised == TRUE && ConsoleNoUpdates == FALSE &&
 	!get_mode_change_required())
+#line 802
 #ifdef X86GFX
 #line 803
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 #line 801
         {
+#line 805
             (void)(*update_alg.calc_update)();
             /* DIVERGENCE(MVDM-HOST-DIV-314): preserve the notification until
                the video owner publishes; do not perform transport in an IRQ. */
         }
+#line 806
 }
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -840,11 +869,13 @@ void nt_graphics_tick(void)
                forcing the original stream-to-video transition. */
             if (!NtvdmConsoleUpdateTextConfiguration(sc.ColPalette))
                 DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
+#line 830
 	    flush_count = 0;
 	}
 	return;
     }
 
+#line 835
 #ifdef EGG
     if((video_adapter == EGA) || (video_adapter == VGA))
     {
@@ -885,15 +916,18 @@ void nt_graphics_tick(void)
                     set_the_vlt();
 
                 if (ConsoleInitialised == TRUE && ConsoleNoUpdates == FALSE)
+#line 875
 #ifdef X86GFX
 #line 876
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 #line 878
                     {
+#line 878
                         (void)(*update_alg.calc_update)();
                     }
 
+#line 880
                 ega_tick_delay = EGA_TICK_DELAY;
 
 		/* batch cursor changes as some naffola apps (Word) change
@@ -903,11 +937,13 @@ void nt_graphics_tick(void)
 		    make_cursor_change();
 
                 software_update_completed = TRUE;
+#line 888
                 flush_count = 0;
              }
         }
     }
     else
+#line 893
 #endif /* EGG */
     {
         /*:::::::::: Update the screen as required for mda and cga and herc */
@@ -917,22 +953,26 @@ void nt_graphics_tick(void)
             if(update_vlt) set_the_vlt();
 
             if (ConsoleInitialised == TRUE && ConsoleNoUpdates == FALSE)
+#line 902
 #ifdef X86GFX
 #line 903
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 #line 905
                 {
+#line 905
                     (void)(*update_alg.calc_update)();
                 }
 
             software_update_completed = TRUE;
+#line 907
             flush_count = 0;
         }
     }
     /* DIVERGENCE(MVDM-HOST-DIV-314): Window consumers receive a completed
        copy, never the mutable original painter or EGA storage. */
     if (software_update_completed) publish_text_update();
+#line 910
 }
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -947,6 +987,7 @@ void nt_start_update(void)
    ntvdm_console_graphics_begin_update();
    /* DIVERGENCE(MVDM-HOST-DIV-314): original painter began an update. */
    presentation_updated = TRUE;
+#line 918
    IDLE_video();
 }
 
@@ -971,6 +1012,7 @@ void nt_end_update(void) {
 /*::::::::::::::::::::::::::: Scroll screen up :::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
+#line 931
 boolean nt_scroll_up(int tlx, int tly, int brx, int bry, int amount, int col)
 {
     CONSOLE_SCREEN_BUFFER_INFO ScreenInfo;
@@ -990,6 +1032,7 @@ boolean nt_scroll_up(int tlx, int tly, int brx, int bry, int amount, int col)
         return(FALSE);     //Screen buffer undefined or in graphics mode
 
     /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+#line 950
 #ifdef BIGWIN
         tlx = SCALE(tlx);
         tly = SCALE(tly);
@@ -998,6 +1041,7 @@ boolean nt_scroll_up(int tlx, int tly, int brx, int bry, int amount, int col)
 
         /* odd numbers don't multiply by 1.5 very accurately */
         amount = SCALE(amount);
+#line 958
 #endif
 
 
@@ -1063,6 +1107,7 @@ boolean nt_scroll_down(int tlx,int tly,int brx,int bry,int amount,int col)
 
     if(sc.ScreenBufHandle) return(FALSE);
 
+#line 1023
 #ifdef BIGWIN
         tlx = SCALE(tlx);
         tly = SCALE(tly);
@@ -1071,6 +1116,7 @@ boolean nt_scroll_down(int tlx,int tly,int brx,int bry,int amount,int col)
 
         /* odd numbers don't multiply by 1.5 very accurately */
         amount = SCALE(amount);
+#line 1031
 #endif
     if (sc.ModeType == GRAPHICS)
         return(FALSE);  // don't think console can scroll graphics
@@ -1128,6 +1174,7 @@ void nt_paint_cursor IFN3(int, cursor_x, int, cursor_y, half_word, attr)
 
     /*::::::::::::::::::::::::::::::::::::::::::::::::::: Guess where we are */
 
+#line 1083
     sub_note_trace3(ALL_ADAPT_VERBOSE, "nt_paint_cursor x=%d, y=%d, attr=%d\n",
 		    cursor_x, cursor_y, attr);
 
@@ -1155,6 +1202,7 @@ void nt_cursor_size_changed(int lo, int hi)
     CursorResizeNeeded = TRUE;
     /* DIVERGENCE(MVDM-HOST-DIV-314): register-only shape/visibility change. */
     presentation_updated = TRUE;
+#line 1108
 }
 
 void make_cursor_change(void)
@@ -1170,10 +1218,12 @@ void make_cursor_change(void)
 
     /* DIVERGENCE(MVDM-HOST-DIV-322): clear the consumed software notification
        even when no host Console caret operation is applicable. */
+#line 1119
     if(sc.ScreenState == FULLSCREEN) return;
 
     /*::::::::::::::::::::::::::::::::::::::::::::::::::::::: Update cursor */
 
+#line 1125
     if(is_cursor_visible())
     {
 
@@ -1325,6 +1375,7 @@ void nt_set_paint_routine(DISPLAY_MODE mode, int height)
             sc.ModeType = GRAPHICS;
             if(get_256_colour_mode())
             {
+#line 1276
 #ifdef V7VGA
                 if (get_seq_chain4_mode())
                 {
@@ -1332,13 +1383,16 @@ void nt_set_paint_routine(DISPLAY_MODE mode, int height)
                     (*nt_init_funcs->vga_hi_graph)();
                 }
                 else
+#line 1283
 #endif /* V7VGA */
                 {
                     if (get_chain4_mode())
                     {
+#line 1287
 #ifdef MONITOR
 #line 1288
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
+#line 1294
 #endif /* MONITOR */
 #line 1295
                             paint_screen = nt_paint_funcs->vga_graph;
@@ -1393,10 +1447,12 @@ void nt_set_paint_routine(DISPLAY_MODE mode, int height)
 #ifdef X86GFX
 #line 1345
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
+#line 1371
 #else
 
     /*................................................... Apply mode change */
     check_win_size(height);
+#line 1375
 #endif  /* X86GFX */
 #line 1376
     current_mode = mode;
@@ -1505,6 +1561,7 @@ static void select_paint_routines(void)
 #ifdef MONITOR
 #line 1480
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
+#line 1491
 #endif /* MONITOR */
 #line 1492
 
@@ -1567,6 +1624,7 @@ half_word reverser(register half_word value)
 /*::::::::::::::::::::::::: Check window size ::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
+#line 1552
 static void check_win_size(register int height)
 {
     register int width;
@@ -1599,6 +1657,7 @@ static void check_win_size(register int height)
 
     /*::::::::::::::::::::::::::::::::::::::::::::::::::::::: Resize window */
 
+#line 1577
     if (sc.ModeType == TEXT)
     {
 	if((current_mode_type != TEXT) ||
@@ -1652,6 +1711,7 @@ static void check_win_size(register int height)
 /*::::::::::::::::::::::::::: Set the VLT ??? ::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
+#line 1630
 void set_the_vlt(void)
 {
     PALETTEENTRY vga_color[VGA_DAC_SIZE];
@@ -1678,6 +1738,7 @@ void set_the_vlt(void)
                     DAC[ind].green : DAC[ind].green * 4);
                 vga_color[i].peBlue = (BYTE)(DAC_data_bits == 8 ?
                     DAC[ind].blue : DAC[ind].blue * 4);
+#line 1653
             }
 
             /*..................... Apply new colours to output palette */
@@ -1741,6 +1802,7 @@ void set_the_vlt(void)
                     DAC[ind].green : DAC[ind].green * 4);
                 vga_color[i].peBlue = (BYTE)(DAC_data_bits == 8 ?
                     DAC[ind].blue : DAC[ind].blue * 4);
+#line 1713
             }
 
             SetPaletteEntries(sc.ColPalette, 0, VGA_DAC_SIZE, &vga_color[0]);
@@ -1749,6 +1811,7 @@ void set_the_vlt(void)
         /* DIVERGENCE(MVDM-HOST-DIV-314): retain resolved text colours even
            when the original graphics palette handle is later retired. */
         if (sc.ModeType == TEXT) NtvdmConsoleTextColours(vga_color);
+#line 1718
         set_palette_change_required(FALSE);
     }
 
@@ -1922,6 +1985,7 @@ VOID windowSize IFN4( int, w, int, h, int, top, int, left )
 	WinSize.Bottom = top  + h - 1;
 	WinSize.Right  = left + w - 1;
 
+#line 1891
 #ifndef	PROD
 #line 1892
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
@@ -2003,6 +2067,7 @@ VOID resizeWindow IFN2( int, w, int, h )
 #ifndef	PROD
 #line 1966
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
+#line 1970
 #endif
 #line 1971
 	/*

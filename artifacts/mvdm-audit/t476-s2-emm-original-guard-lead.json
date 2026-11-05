@@ -1,0 +1,16 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+  "current_sha256": "f220e7bc12ac91cb614d1122645a7de4c697ca516694142ba367423b958f810a",
+  "original_sha256": "fd73ce7181f7dfb61432d63466c7641c3d010ca0c60bf446666b6c0118ddb8a9",
+  "missing_original_condition": {
+    "original_line": 1883,
+    "original_expression": "#ifndef NTVDM",
+    "original_endif": 2073,
+    "current_expression": "#if !defined(NTVDM) || defined(MVDM_SOFTPC_RECOVER_LIM_WRITEBACK)",
+    "registered_exception": "MVDM-HOST-DIV-148",
+    "reason": "Existing original LIM writeback body is deliberately selected for the CPU40 recovery profile; the original branch was widened and cannot be replaced wholesale with #error without removing selected functionality.",
+    "candidate": "Preserve the original #ifndef NTVDM arm with #error for the excluded non-NTVDM profile, followed by a local #elif defined(MVDM_SOFTPC_RECOVER_LIM_WRITEBACK) retaining the actual original writeback body. Validate all supported contexts and the remaining line anchors before applying."
+  },
+  "line_issue": "#line 1908 precedes original LOCAL VOID at line 1906; follow-on branch/continuation positions also need whole-file reconciliation.",
+  "status": "pending; no source change made; do not infer completed body or behavior from the current hit record"
+}

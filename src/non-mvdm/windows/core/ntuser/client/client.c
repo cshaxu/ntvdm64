@@ -21,6 +21,7 @@
 #define gSharedInfo wow_default_message_state
 #define UserAssert(expression) assert(expression)
 
+#line 2203
 WORD WowGetDefWindowProcBits(
     PBYTE    pDefWindowProcBits,
     WORD     cbDefWindowProcBits)
@@ -123,6 +124,7 @@ LONG lParam)
 *
 * 06-19-92 sanfords Created
 \***************************************************************************/
+#line 2345
 HANDLE GetEditDS()
 {
     UserAssert(pfn16GlobalAlloc != NULL);
@@ -140,6 +142,7 @@ HANDLE GetEditDS()
 *
 * 06-19-92 sanfords Created
 \***************************************************************************/
+#line 2362
 VOID ReleaseEditDS(
 HANDLE h)
 {
@@ -153,6 +156,7 @@ HANDLE h)
  * client closure; bindings supply version/context and native publication. */
 #include "wow_class_client_bindings.h"
 #include "../inc/ntcftxt.h"
+#line 2181
 ATOM
 WINAPI
 RegisterClassWOWA(
@@ -207,6 +211,7 @@ LONG DispatchClientMessage(
 #ifdef FE_IME
 #line 3495
 #error Unsupported FE_IME original branch
+#line 3502
 #endif
 #line 3503
 
@@ -223,5 +228,6 @@ LONG DispatchClientMessage(
 #error Unsupported DEBUG original branch
 #else
 #line 2291
+#line 2292
 #endif
 #line 2293

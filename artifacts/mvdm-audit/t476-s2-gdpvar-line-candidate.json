@@ -1,0 +1,11 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/gdpvar.h",
+  "original_sha256": "a8fc9f81af3c06eb4263cc5acb3005a41f849677cba4d09ae171ab450f7fb3ec",
+  "previous_sha256": "c1f55eb9bf7c7c582f742a01fc462a13ec0f95927c8a6795a03db377fb0210dc",
+  "current_sha256": "aeb5eb926407637f2fbd972638ec357663312c0602859f7577de6cc2854e195c",
+  "original_condition": "entire 1,855-line body is under original #ifndef _gdpvar_h; existing #error preserved; original endif LF line 1857 corrected",
+  "status": "individual review; pending grouped build",
+  "limit": "Only observed x86 product include order and prior marker context proven; other supported contexts require final reconciliation.",
+  "product_include_witness": "artifacts/mvdm-audit/s13-r1354-gdp-guard-review.json",
+  "ownership": "real product sasCdef.c includes this physical header after the generated GDP header; prior include already defines _gdpvar_h, hence body remains excluded. File is needed by the quoted include resolution, and is not a test-only source."
+}

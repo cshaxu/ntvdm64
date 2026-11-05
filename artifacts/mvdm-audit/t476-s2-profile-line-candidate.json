@@ -1,0 +1,29 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+  "original_sha256": "8ecbb58954eca0fece4ab180bb56a3953b8b4408400d3c7aa01d50b62caaa531",
+  "previous_sha256": "6aac8d470176783b6ffaf1eff1e4af5a83d7b5aa265488b9733ded05165e9cc1",
+  "current_sha256": "56f7e0030282e8d7c5d1ebcae4c2e8bd52572e4145653e71f813864ec46b1cb6",
+  "condition_structure": "three original matched FE_SB/DEBUG groups retain excluded bodies; two endif line anchors restored",
+  "retained_functions": {
+    "FastGetProfileIntW": {
+      "original_line": 548,
+      "body_lines": 32
+    },
+    "FastGetProfileStringW": {
+      "original_line": 444,
+      "body_lines": 92
+    }
+  },
+  "verification": "both complete function bodies match original LF positions after removing four incorrect duplicate-match anchors",
+  "status": "individual review complete; final grouped build pending",
+  "compiler_preprocessing_witness": {
+    "path": "build/t476-s2/batch22-profile.i",
+    "sha256": "94131a1bcdd4ae88e470b097d15900285fd3732c1d918fd6d1bdf9c71f299c94",
+    "lines": {
+      "FastGetProfileIntW": 548,
+      "FastGetProfileStringW": 444
+    },
+    "purpose": "actual product preprocessor emitted #line directives after this candidate correction",
+    "limitation": "One product context, not proof of all supported contexts."
+  }
+}

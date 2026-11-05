@@ -21,6 +21,7 @@
 #ifdef SEGMENTATION
 #line 22
 #error Excluded unsupported SEGMENTATION configuration
+#line 28
 #endif
 
 
@@ -119,8 +120,10 @@ HOSTMOUSEFUNCS	*working_mouse_funcs;
 #ifdef GISP_SVGA
 #line 113
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
+#line 115
 #endif /* GISP_SVGA */
 
+#line 117
 #if	defined(DELTA) && defined(A2CPU)
 #line 118
 #error Excluded unsupported A2CPU configuration
@@ -209,9 +212,11 @@ static void setup_ivt()
 #ifdef	GISP_SVGA
 #line 200
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
+#line 210
 #else		/* GISP_SVGA */
 	sas_storew(int_addr(0x10), VIDEO_IO_OFFSET);
 	sas_storew(int_addr(0x10) + 2, VIDEO_IO_SEGMENT);
+#line 213
 #endif		/* GISP_SVGA */
 	sas_storew(int_addr(0x11), EQUIPMENT_OFFSET);
 	sas_storew(int_addr(0x11) + 2, EQUIPMENT_SEGMENT);
@@ -303,6 +308,7 @@ half_word *low, *high;
 #ifdef	NPX
 #line 301
 #error Unsupported excluded original configuration
+#line 319
 #else
 #line 320
 	low_switches |= (RAM_256KB | PPI_CO_PROCESSOR_NOT_PRESENT | NO_LOOP_ON_POST);
@@ -312,6 +318,7 @@ half_word *low, *high;
 #ifdef FLOPPY_B
 #line 324
 #error Unsupported excluded original configuration
+#line 329
 #else
 #line 330
 	high_switches |= (PPI_ONE_DRIVE);
@@ -380,6 +387,7 @@ GLOBAL CHAR *get_copyright IFN0()
 #ifndef PROD
 #line 386
 #error DIVERGENCE MVDM-HOST-DIV-590: non-PROD branch is not selected
+#line 507
 #endif /* PROD */
 #line 508
 
@@ -388,18 +396,22 @@ void reset()
 #ifndef	NTVDM
 #line 512
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 517
 #endif /* NTVDM */
 	EQUIPMENT_WORD equip_flag;
 	half_word low_switches, high_switches;
 	SHORT gfxAdapt;
 	int adapter;
+#line 522
 #ifdef PM
 	half_word status_byte;
 	half_word cmos_shutdown;
 	sys_addr user_stack;
 	word temp_word;
+#line 527
 #ifdef NTVDM
         half_word cmos_diskette;
+#line 529
 #endif
 
 	/* iff not first time thru find out reset cause */
@@ -590,7 +602,9 @@ void reset()
 #ifdef DPMI
 #line 704
 #error Excluded unsupported DPMI configuration
+#line 706
 #endif /* DPMI */
+#line 707
 #endif /* PM */
 
 	/*
@@ -605,14 +619,17 @@ void reset()
 	/*
 	 * NTVDM: if soft reset We will never get here...
 	 */
+#line 721
 #ifndef NTVDM
 #line 722
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 764
 #endif /* NTVDM */
 
 	/*
 	 * Shutdown ODI network driver in case it was running
 	 */
+#line 769
 #ifdef NOVELL
 #line 770
 #error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register.
@@ -638,6 +655,7 @@ void reset()
 #ifndef NTVDM
 #line 790
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 798
 #endif /* NTVDM */
 
 	ica0_init();
@@ -690,6 +708,7 @@ void reset()
 #else
 #line 843
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 850
 #endif /* NTVDM */
 
 	sas_storew(EQUIP_FLAG, equip_flag.all);
@@ -699,15 +718,19 @@ void reset()
 
 	gfxAdapt = (ULONG)config_inquire(C_GFX_ADAPTER, NULL);
 
+#line 859
 #ifdef GISP_SVGA
 #line 860
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
+#line 867
 #endif          /* GISP_SVGA */
 
 	gvi_init((half_word) gfxAdapt);
+#line 870
 #ifdef PIG
 #line 871
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
+#line 873
 #endif
 
 	SWTMR_init_funcptrs ();
@@ -721,6 +744,7 @@ void reset()
 
 	video_init();
 
+#line 886
 #ifdef SWIN_SNDBLST_NULL
 #line 887
 #error DIVERGENCE MVDM-HOST-DIV-528: SWIN_SNDBLST_NULL platform branch is not selected; see mirror register.
@@ -729,6 +753,7 @@ void reset()
 #ifndef NTVDM	/* No signon for NTVDM - transparent integration */
 #line 891
 #error Excluded unsupported non-NTVDM BIOS signon profile
+#line 984
 #endif	/* NTVDM */
 #line 985
 
@@ -776,12 +801,14 @@ void reset()
 #ifdef SOFTWIN_API
 #line 1022
 #error DIVERGENCE MVDM-HOST-DIV-528: SOFTWIN_API platform branch is not selected; see mirror register.
+#line 1024
 #endif
 
 #line 1026
 #ifdef HUNTER
 #line 1027
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
+#line 1029
 #endif
 #line 1030
 
@@ -789,6 +816,7 @@ void reset()
 #if !defined(SUN_VA) && !defined(NTVDM)
 #line 1033
 #error Unsupported non-NTVDM LIM reset profile
+#line 1062
 #endif /* !SUN_VA & !NTVDM */
 #line 1063
 

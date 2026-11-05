@@ -147,6 +147,7 @@ LOCAL sys_addr text_regen_base IFN0()
  */
 
 /* internal function declarations */
+#line 135
 LOCAL sys_addr 	extend_addr IPT1(sys_addr,addr);
 LOCAL half_word fgcolmask IPT1(word, rawchar);
 LOCAL word 	expand_byte IPT1(word, lobyte);
@@ -154,9 +155,11 @@ GLOBAL void 	graphics_write_char IPT5(half_word, x, half_word, y, half_word, wch
 LOCAL void 	M6845_reg_init IPT2(half_word, mode, word, base);
 LOCAL void 	vd_dummy IPT0();
 
+#line 142
 #ifdef HERC
 #line 143
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
+#line 146
 #endif /* HERC */
 
 void (*video_func[]) () = {
@@ -177,12 +180,15 @@ void (*video_func[]) () = {
 				vd_write_teletype,
 				vd_get_mode,
 				vd_dummy,
+#line 166
 #ifdef HERC
 #line 167
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
+#line 169
 #else /* !HERC */
 				vd_dummy,
 				vd_dummy,
+#line 172
 #endif /* HERC */
 				vd_write_string,
 				vd_dummy,
@@ -192,8 +198,10 @@ void (*video_func[]) () = {
 				vd_dummy,
 				vd_dummy,
 				vd_dummy,
+#line 181
 #ifdef VGG
 				vga_disp_func,
+#line 183
 #else /* !VGG */
 #line 184
 #error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
@@ -390,10 +398,12 @@ GLOBAL void vd_set_mode IFN0()
 #ifdef REAL_VGA
 #line 371
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
+#line 374
 #else
 	    sas_fillsw(video_pc_low_regen,
 				vd_mode_table[sas_hw_at_no_check(vd_video_mode)].clear_char,
 				 (video_pc_high_regen - video_pc_low_regen)/ 2 + 1);
+#line 378
 #endif
 
 	    /*
@@ -412,8 +422,10 @@ GLOBAL void vd_set_mode IFN0()
         sas_store_no_check (vd_video_mode , current_video_mode);
     }
 
+#line 396
 #ifdef EGG
     sas_store_no_check(vd_rows_on_screen, 24);
+#line 398
 #endif
     sas_store_no_check (vd_current_page , 0);
 
@@ -440,12 +452,15 @@ GLOBAL void vd_set_mode IFN0()
     /*
      * Clear the video area
      */
+#line 424
 #ifdef REAL_VGA
 #line 425
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
+#line 427
 #else
     sas_fillsw(video_pc_low_regen, vd_mode_table[sas_hw_at_no_check(vd_video_mode)].clear_char,
 				 (video_pc_high_regen - video_pc_low_regen)/ 2 + 1);
+#line 430
 #endif
 
     /*
@@ -598,6 +613,7 @@ GLOBAL void vd_get_light_pen IFN0()
 	return;
     }
     else {		        /* not supported */
+#line 582
 #ifndef PROD
 #line 583
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
@@ -776,6 +792,7 @@ GLOBAL void vd_scroll_up IFN0()
 #ifdef EGA_DUMP
 #line 757
 #error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register.
+#line 759
 #endif
     /*
      * re-enable video for this mode, if on a CGA adaptor (fixes ROUND42 bug).
@@ -821,6 +838,7 @@ LOCAL void sensible_text_scroll_up IFN6(int, t_row, int, l_col, int, rowsdiff, i
     source += lines*col_incr;	
     for(i = 0; i < rowsdiff-lines; i++)
     {
+#line 804
 #ifdef REAL_VGA
 #line 805
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
@@ -921,9 +939,11 @@ LOCAL void sensible_graph_scroll_up IFN6(int, t_row, int, l_col, int, rowsdiff, 
 #ifdef REAL_VGA
 #line 898
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
+#line 900
 #else
 		sas_fills(dest, attr, colsdiff);
 		sas_fills(dest+ODD_OFF, attr, colsdiff);
+#line 903
 #endif
 		dest += SCAN_LINE_LENGTH;
 	}
@@ -967,6 +987,7 @@ LOCAL void kinky_scroll_up IFN7(int, t_row, int, l_col, int, rowsdiff, int, cols
 	break;
 
     default:
+#line 946
 #ifndef PROD
 #line 947
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
@@ -1043,9 +1064,11 @@ LOCAL void kinky_scroll_up IFN7(int, t_row, int, l_col, int, rowsdiff, int, cols
 #ifdef REAL_VGA
 #line 1015
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
+#line 1017
 #else
 	    sas_fills(dest, attr, colsdiff);
 	    sas_fills(dest+ODD_OFF, attr, colsdiff);
+#line 1020
 #endif
 	    dest += SCAN_LINE_LENGTH;
 	}
@@ -1111,33 +1134,43 @@ GLOBAL void vd_scroll_down IFN0()
 	lines = rowsdiff;
     }
     if(r_col == vd_cols_on_screen-1)
+#line 1085
 #ifdef EGG
 	if(ega_mode())
     		ega_sensible_graph_scroll_down(t_row,l_col,rowsdiff,colsdiff,lines,attr);
+#line 1088
 #  ifdef VGG
 	else if(vga_256_mode())
     		vga_sensible_graph_scroll_down(t_row,l_col,rowsdiff,colsdiff,lines,attr);
+#line 1091
 #  endif
 	else
+#line 1093
 #endif
     	kinky_scroll_down(t_row,l_col,rowsdiff,colsdiff,lines,attr,vd_cols_on_screen);
     else
     {
 	if(alpha_num_mode())
     		sensible_text_scroll_down(t_row,l_col,rowsdiff,colsdiff,lines,attr);
+#line 1099
 #ifdef EGG
 	else if(ega_mode())
     		ega_sensible_graph_scroll_down(t_row,l_col,rowsdiff,colsdiff,lines,attr);
+#line 1102
 #  ifdef VGG
 	else if(vga_256_mode())
     		vga_sensible_graph_scroll_down(t_row,l_col,rowsdiff,colsdiff,lines,attr);
+#line 1105
 #  endif
+#line 1106
 #endif
 	else
     		sensible_graph_scroll_down(t_row,l_col,rowsdiff,colsdiff,lines,attr);
+#line 1109
 #ifdef EGA_DUMP
 #line 1110
 #error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register.
+#line 1112
 #endif
     /*
      * re-enable video for this mode, if on a CGA adaptor (fixes ROUND42 bug).
@@ -1173,6 +1206,7 @@ LOCAL void sensible_text_scroll_down IFN6(int, t_row, int, l_col, int, rowsdiff,
 
 	for(i = 0; i < rowsdiff-lines; i++)
 	{
+#line 1147
 #ifdef REAL_VGA
 #line 1148
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
@@ -1245,9 +1279,11 @@ LOCAL void sensible_graph_scroll_down IFN6(int, t_row, int, l_col, int, rowsdiff
 #ifdef REAL_VGA
 #line 1215
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
+#line 1217
 #else
 		sas_move_bytes_forward (source, dest, colsdiff);
 		sas_move_bytes_forward (source+ODD_OFF, dest+ODD_OFF, colsdiff);
+#line 1220
 #endif
 		source -= SCAN_LINE_LENGTH;
 		dest -= SCAN_LINE_LENGTH;
@@ -1257,12 +1293,15 @@ LOCAL void sensible_graph_scroll_down IFN6(int, t_row, int, l_col, int, rowsdiff
 
 	while( lines-- )
 	{
+#line 1229
 #ifdef REAL_VGA
 #line 1230
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
+#line 1232
 #else
 		sas_fills(dest, attr, colsdiff);
 		sas_fills(dest+ODD_OFF, attr, colsdiff);
+#line 1235
 #endif
 		dest -= SCAN_LINE_LENGTH;
 	}
@@ -1298,6 +1337,7 @@ LOCAL void kinky_scroll_down IFN7(int, t_row, int, l_col, int, rowsdiff, int, co
 	break;
 
     default:
+#line 1270
 #ifndef PROD
 #line 1271
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
@@ -1367,9 +1407,11 @@ LOCAL void kinky_scroll_down IFN7(int, t_row, int, l_col, int, rowsdiff, int, co
 #ifdef REAL_VGA
 #line 1332
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
+#line 1334
 #else
 	    sas_fills(dest, attr, colsdiff);
 	    sas_fills(dest+ODD_OFF, attr, colsdiff);
+#line 1337
 #endif
 	    dest -= col_incr;
 	}
@@ -1407,21 +1449,28 @@ GLOBAL void vd_read_attrib_char IFN0()
 
    if (alpha_num_mode()) {		/* alpha */
 	cpos = text_regen_base() + vd_cursor_offset(getBH());
+#line 1374
 #ifdef A2CPU
 #line 1375
 #error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
+#line 1378
 #else
 	sas_loadw(cpos,&chattr);
+#line 1380
 #endif /* A2CPU */
 	setAX(chattr);			/* hmm that was easy */
     }
+#line 1383
 #ifdef EGG
     else if(ega_mode())
 	ega_read_attrib_char(vd_cursor_col,vd_cursor_row,getBH());
+#line 1386
 #  ifdef VGG
     else if(vga_256_mode())
 	vga_read_attrib_char(vd_cursor_col,vd_cursor_row,getBH());
+#line 1389
 #  endif
+#line 1390
 #endif
     else {
 	/*
@@ -1463,11 +1512,13 @@ GLOBAL void vd_read_attrib_char IFN0()
 		cpos += 80;
 	    }
 	}
+#line 1431
 #ifdef EGG
 	if(video_adapter == EGA || video_adapter == VGA)
 	    cgen = extend_addr(EGA_FONT_INT*4);
 	else
 	    cgen = CHAR_GEN_ADDR;			/* match in char generator */
+#line 1436
 #else
 #line 1437
 #error DIVERGENCE MVDM-HOST-DIV-540: non-EGG branch is not selected; see mirror register.
@@ -1546,7 +1597,8 @@ GLOBAL void vd_write_char_attrib IFN0()
 		for(i = 0; i < getCX(); i++)
 		{
 #line 1511
-#if ( defined(NTVDM) && defined(MONITOR) && !defined(MVDM_STANDALONE_SAS_VIDEO) ) || defined(GISP_SVGA)/* No Ega planes... */
+#if ( defined(NTVDM) && defined(MONITOR) ) || defined(GISP_SVGA)/* No Ega planes... */
+#if !defined(MVDM_STANDALONE_SAS_VIDEO) || defined(GISP_SVGA)
 #line 1512
 #error Excluded unsupported original monitor or GISP video pointer
 #else
@@ -1561,7 +1613,22 @@ GLOBAL void vd_write_char_attrib IFN0()
 			else
 #endif	/* EGG */
 				(*bios_ch2_word_wrt_fn)( (getBL() << 8) | getAL(), cpos );
-#endif	/* NTVDM & MONITOR */
+#endif
+#line 1513
+#else
+#line 1514
+#ifdef	EGG
+			if ( ( (video_adapter != CGA) && (EGA_CPU.chain != CHAIN2) )
+#ifdef CPU_40_STYLE
+				|| (getVM())	/* if we are in V86 mode, the memory may be mapped... */
+#endif
+				)
+				sas_storew(text_regen_base() + cpos, (getBL() << 8) | getAL());
+			else
+#endif	/* EGG */
+				(*bios_ch2_word_wrt_fn)( (getBL() << 8) | getAL(), cpos );
+#line 1524
+#endif /* NTVDM & MONITOR */
 #line 1525
 			cpos += 2;
 		}
@@ -1617,28 +1684,35 @@ GLOBAL void vd_write_char IFN0()
 
 		for(i = 0; i < getCX(); i++)
 		{
+#line 1579
 #if ( defined(NTVDM) && defined(MONITOR) ) || defined( GISP_SVGA )
 #if defined(MVDM_STANDALONE_SAS_VIDEO)
-#line 1579
+#line 1582
 #ifdef	EGG
 			if ( ( (video_adapter != CGA) && (EGA_CPU.chain != CHAIN2) )
+#line 1584
 #ifdef CPU_40_STYLE
 				|| (getVM())	/* if we are in V86 mode, the memory may be mapped... */
+#line 1586
 #endif
 				)
 				sas_store(text_regen_base() + cpos, getAL());
 			else
+#line 1590
 #endif	/* EGG */
+#line 1591
 				(*bios_ch2_byte_wrt_fn)( getAL(), cpos );
 #else
 #line 1580
 #error DIVERGENCE MVDM-HOST-DIV-581: standalone SAS excludes direct video memory writes
 #endif
+#line 1581
 #else
 #line 1582
 #error Excluded unsupported non-monitor video profile
+#line 1592
 #endif
-#line 1590
+#line 1593
 			cpos += 2;
 		}
 	}
@@ -1650,13 +1724,17 @@ GLOBAL void vd_write_char IFN0()
      * problems then we'll need to do a vd_read_char_attr here and then pass the
      * attribute gleaned from that.
      */
+#line 1604
 #ifdef EGG
     else if(ega_mode())
 	ega_graphics_write_char(vd_cursor_col,vd_cursor_row,getAL(),getBL(),getBH(),getCX());
+#line 1607
 #  ifdef VGG
     else if(vga_256_mode())
 	vga_graphics_write_char(vd_cursor_col,vd_cursor_row,getAL(),getBL(),getBH(),getCX());
+#line 1610
 #  endif
+#line 1611
 #endif
     else
 	graphics_write_char(vd_cursor_col, vd_cursor_row, getAL(), getBL(), getCX());
@@ -1709,19 +1787,23 @@ GLOBAL void vd_write_dot IFN0()
     int	dotpos, lsb;			/* dot posn in memory */
     half_word  right_just, bitmask;
 
+#line 1663
 #ifdef EGG
     if(ega_mode())
     {
 	ega_write_dot(getAL(),getBH(),getCX(),getDX());
 	return;
     }
+#line 1669
 #  ifdef VGG
     else if(vga_256_mode())
     {
 	vga_write_dot(getAL(),getBH(),getCX(),getDX());
 	return;
     }
+#line 1675
 #  endif
+#line 1676
 #endif
     dotpos = getDL();			/* row */
 
@@ -1747,6 +1829,7 @@ GLOBAL void vd_write_dot IFN0()
 		dotval = (dotval & 3) << (6-right_just);
 		bitmask = (0xC0 >> right_just); /* bits of interest */
 
+#line 1701
 #ifdef EGG
 		/*
 		 * EGA & VGA can be told which byte has changed, CGA is
@@ -1755,6 +1838,7 @@ GLOBAL void vd_write_dot IFN0()
 		if ( video_adapter != CGA )
     			(*update_alg.mark_byte) ( dotpos );
 		else
+#line 1709
 #endif
 			setVideodirty_total(getVideodirty_total() + 2);
 
@@ -1765,6 +1849,7 @@ GLOBAL void vd_write_dot IFN0()
 
 		if( getAL() & 0x80 )
 		{
+#line 1719
 #ifdef	EGG
 			if( video_adapter != CGA )
 			{
@@ -1776,6 +1861,7 @@ GLOBAL void vd_write_dot IFN0()
 				EGA_planes[dotpos] =  data ^ dotval;
 			}
 			else
+#line 1730
 #endif	/* EGG */
 			{
 				data = *(UTINY *) get_screen_ptr( dotpos );	
@@ -1785,6 +1871,7 @@ GLOBAL void vd_write_dot IFN0()
 		}
 		else
 		{
+#line 1739
 #ifdef	EGG
 			if( video_adapter != CGA )
 			{
@@ -1797,6 +1884,7 @@ GLOBAL void vd_write_dot IFN0()
 					dotval;
 			}
 			else
+#line 1751
 #endif	/* EGG */
 			{
 				data = *(UTINY *) get_screen_ptr( dotpos );	
@@ -1815,6 +1903,7 @@ GLOBAL void vd_write_dot IFN0()
 		dotval = (dotval & 1) << (7-right_just);
 		bitmask = (0x80 >> right_just);
 
+#line 1769
 #ifdef EGG
 		/*
 		 * EGA & VGA can be told which byte has changed, CGA is
@@ -1823,6 +1912,7 @@ GLOBAL void vd_write_dot IFN0()
 		if ( video_adapter != CGA )
     			(*update_alg.mark_byte) ( dotpos );
 		else
+#line 1777
 #endif
 			setVideodirty_total(getVideodirty_total() + 2);
 
@@ -1833,6 +1923,7 @@ GLOBAL void vd_write_dot IFN0()
 
 		if( getAL() & 0x80 )
 		{
+#line 1787
 #ifdef	EGG
 			if( video_adapter != CGA )
 			{
@@ -1840,6 +1931,7 @@ GLOBAL void vd_write_dot IFN0()
 				EGA_planes[dotpos << 2] =  data ^ dotval;
 			}
 			else
+#line 1794
 #endif	/* EGG */
 			{
 				data = *(UTINY *) get_screen_ptr( dotpos );	
@@ -1849,6 +1941,7 @@ GLOBAL void vd_write_dot IFN0()
 		}
 		else
 		{
+#line 1803
 #ifdef	EGG
 			if( video_adapter != CGA )
 			{
@@ -1857,6 +1950,7 @@ GLOBAL void vd_write_dot IFN0()
 					dotval;
 			}
 			else
+#line 1811
 #endif	/* EGG */
 			{
 				data = *(UTINY *) get_screen_ptr( dotpos );	
@@ -1883,19 +1977,23 @@ GLOBAL void vd_read_dot IFN0()
     int	dotpos;			/* dot posn in memory */
     half_word  right_just, bitmask, data;
 
+#line 1837
 #ifdef EGG
     if(ega_mode())
     {
 	ega_read_dot(getBH(),getCX(),getDX());
 	return;
     }
+#line 1843
 #  ifdef VGG
     else if(vga_256_mode())
     {
 	vga_read_dot(getBH(),getCX(),getDX());
 	return;
     }
+#line 1849
 #  endif
+#line 1850
 #endif
     dotpos = getDL();			/* row */
     if (dotpos & 1)			/* set up for odd or even banks */
@@ -1927,14 +2025,17 @@ GLOBAL void vd_read_dot IFN0()
 }
 
 
+#line 1881
 #ifdef CPU_40_STYLE
 
 /* Optimisations are not possible, IO virtualisation may be active. */
 #define OUTB(port, val) outb(port, val)
 
+#line 1886
 #else
 #line 1887
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
+#line 1895
 #endif /* CPU_40_STYLE */
 #line 1896
 
@@ -2063,6 +2164,7 @@ GLOBAL void vd_write_teletype IFN0()
 #else
 #line 2017
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
+#line 2021
 #endif	/* NTVDM & MONITOR */
 
 		/*
@@ -2084,26 +2186,33 @@ GLOBAL void vd_write_teletype IFN0()
 		 *	around in SAS.
 		 */
 
+#line 2042
 #if ( defined(NTVDM) && defined(MONITOR) ) || defined( GISP_SVGA )
 #if defined(MVDM_STANDALONE_SAS_VIDEO)
-#line 2032
+#line 2045
 #ifdef	EGG
 			if ( ( (video_adapter != CGA) && (EGA_CPU.chain != CHAIN2) )
+#line 2047
 #ifdef CPU_40_STYLE
 				|| (getVM())	/* if we are in V86 mode, the memory may be mapped... */
+#line 2049
 #endif
 				)
 				sas_store(text_regen_base() + ch_addr, ch);
 			else
+#line 2053
 #endif	/* EGG */
+#line 2054
 				(*bios_ch2_byte_wrt_fn)( ch, ch_addr );
 #else
 #line 2043
 #error DIVERGENCE MVDM-HOST-DIV-581: standalone SAS excludes direct video memory writes
 #endif
+#line 2044
 #else
 #line 2045
 #error Excluded unsupported non-monitor video profile
+#line 2055
 #endif
 #line 2056
 	    }
@@ -2157,6 +2266,7 @@ GLOBAL void vd_write_teletype IFN0()
 #ifdef REAL_VGA
 #line 2105
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
+#line 2119
 #else
 	if(re_entrant)
         {
@@ -2171,6 +2281,7 @@ GLOBAL void vd_write_teletype IFN0()
              setDH(vd_cursor_row);
              setDL(vd_cursor_col);
 
+#line 2133
 #if defined(NTVDM) && defined(X86GFX)
                 /*
                 ** Tim August 92 Microsoft. INT 10 caller code is now
@@ -2181,9 +2292,11 @@ GLOBAL void vd_write_teletype IFN0()
 
                         exec_sw_interrupt( int10_seg, int10_caller );
                 }
+#line 2143
 #else
 #line 2144
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
+#line 2148
 #endif	/* NTVDM & MONITOR */
 
 		/*
@@ -2220,6 +2333,7 @@ GLOBAL void vd_write_teletype IFN0()
 		sas_store_no_check (current_cursor_row , vd_cursor_row);
 
         }
+#line 2184
 #endif
     }
     else {
@@ -2237,31 +2351,40 @@ GLOBAL void vd_write_teletype IFN0()
 	 * Update the memory to be scrolled
 	 */
 	if (alpha_num_mode()) {
+#line 2201
 #ifdef A2CPU
 #line 2202
 #error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
+#line 2205
 #else
 		sas_load( text_regen_base() + sas_w_at_no_check(VID_ADDR)+vd_page_offset(vd_cursor_col,vd_cursor_row) + 1, &attrib);
+#line 2207
 #endif /* A2CPU */
 
 		sensible_text_scroll_up(0,0, VD_ROWS_ON_SCREEN+1,vd_cols_on_screen,1,attrib);
 
 	}
+#line 2212
 #ifdef EGG
 	else if(ega_mode())
 		ega_sensible_graph_scroll_up(0,0, VD_ROWS_ON_SCREEN+1,vd_cols_on_screen,1,0);
+#line 2215
 #  ifdef VGG
 	else if(vga_256_mode())
 		vga_sensible_graph_scroll_up(0,0, VD_ROWS_ON_SCREEN+1,vd_cols_on_screen,1,0);
+#line 2218
 #  endif
+#line 2219
 #endif
 	else 	/* graphics mode */
 
 		sensible_graph_scroll_up(0,0, VD_ROWS_ON_SCREEN+1,vd_cols_on_screen,1,0);
 
+#line 2224
 #ifdef EGA_DUMP
 #line 2225
 #error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register.
+#line 2228
 #endif
 
     }
@@ -2287,12 +2410,15 @@ GLOBAL void vd_write_string IFN0()
 	int save_col,save_row;
 	sys_addr ptr;
 	boolean ctl;
+#line 2253
 #ifdef NTVDM
 	word	count, avail;
+#line 2255
 #endif
 
 	op = getAL();
 
+#line 2259
 #ifdef NTVDM
         if (op == 0xff)                 /* Special for MS */
         {
@@ -2349,13 +2475,16 @@ GLOBAL void vd_write_string IFN0()
             return;
         }
 
+#line 2315
 #ifdef X86GFX
     else if (op == 0xfe) {
 	    disable_stream_io();
 	    return;
 	}
+#line 2320
 #endif
 
+#line 2322
 #endif	/* NTVDM */
 
 	ptr =  effective_addr(getES(),getBP()) ;
@@ -2519,6 +2648,7 @@ GLOBAL void graphics_write_char IFN5(half_word, x, half_word, y, half_word, wcha
     {   /* must be in user installed extended char set */
         if ( (char_addr = extend_addr(4*BIOS_EXTEND_CHAR)) == 0)
         {
+#line 2485
 #ifndef PROD
 #line 2486
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
@@ -2645,8 +2775,10 @@ LOCAL void vd_dummy IFN0()
 #ifdef REAL_VGA
 #line 2608
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
+#line 2633
 #endif
 
+#line 2635
 #ifdef SEGMENTATION
 #line 2636
 #error Excluded unsupported SEGMENTATION configuration
@@ -2685,7 +2817,9 @@ GLOBAL void video_init IFN0()
 #ifdef HERC
 #line 2669
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
+#line 2681
 #endif /* HERC */
+#line 2682
 #ifdef EGG
     	case EGA:
     	case VGA:
@@ -2698,6 +2832,7 @@ GLOBAL void video_init IFN0()
 		ega_video_init();
 		return;
 		break;
+#line 2694
 #endif
 	default:	/* Presumably CGA */
 		video_pc_low_regen = CGA_REGEN_START;
@@ -2716,12 +2851,15 @@ GLOBAL void video_init IFN0()
     (video_func[SET_MODE])();
 }
 
+#line 2712
 #ifdef HERC
 #line 2713
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
+#line 2829
 #endif /* HERC */
 #line 2647
 
+#line 2831
 #ifdef NTVDM
 #line 2832
 void enable_stream_io(void)
@@ -2734,6 +2872,7 @@ void enable_stream_io(void)
 #else
 #line 2839
 #error Excluded unsupported original non-MONITOR stream buffer allocation
+#line 2847
 #endif
 #line 2848
 

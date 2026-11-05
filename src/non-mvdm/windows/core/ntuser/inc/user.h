@@ -51,6 +51,7 @@ typedef struct _WNDMSG {
     BYTE *abMsgs;
 } WNDMSG, *PWNDMSG;
 /* DIVERGENCE(OPENNT-HOST-072): original EDIT index declarations. */
+#line 469
 typedef DWORD  ICH;
 typedef ICH *LPICH;
 /* OPENNT-HOST-077: original DrawFrame command declarations. */
@@ -158,6 +159,7 @@ typedef ICH *LPICH;
 #ifndef WS_EX_ANSICREATOR
 #define WS_EX_ANSICREATOR   0x80000000L         // Internal
 #endif
+#line 266
 typedef struct _LARGE_STRING {
     ULONG Length;
     ULONG MaximumLength : 31;
@@ -254,6 +256,7 @@ typedef struct _LARGE_UNICODE_STRING {
 #define TestWF(hwnd, flag)   (*(((BYTE *)(hwnd)) + STATEOFFSET + (int)HIBYTE(flag)) & LOBYTE(flag))
 #define SetWF(hwnd, flag)    (*(((BYTE *)(hwnd)) + STATEOFFSET + (int)HIBYTE(flag)) |= LOBYTE(flag))
 #define ClrWF(hwnd, flag)    (*(((BYTE *)(hwnd)) + STATEOFFSET + (int)HIBYTE(flag)) &= ~LOBYTE(flag))
+#line 1127
 typedef struct _HEAD {
     HANDLE h;
     DWORD cLockObj;
@@ -278,6 +281,7 @@ typedef struct _PROCOBJHEAD {
 
 /* Original MENU/ITEM declarations, selected for the immutable USER16 client
  * view under OPENNT-HOST-063. No menu-server implementation is imported. */
+#line 1958
 typedef struct tagITEM {
     UINT    fType;          // Item Type  Flags
     UINT    fState;         // Item State Flags
@@ -393,6 +397,7 @@ typedef struct tagWND {          // wnd
                 //  last "field" of WND.
 } WND;
 
+#line 1599
 typedef struct tagDESKTOPINFO {
 
     PVOID                 pvDesktopBase;          // For handle validation
@@ -414,6 +419,7 @@ typedef struct tagDESKTOPINFO {
  * surrounding build supplies its historical forward declarations; this is
  * deliberately opt-in so the type-only cleanup imports keep their existing
  * narrow declaration surface. */
+#line 1289
 typedef struct tagCOMMON_WNDCLASS
 {
     UINT        style;
@@ -429,7 +435,9 @@ typedef struct tagCOMMON_WNDCLASS
     struct tagCURSOR *spicnSm;
 } COMMON_WNDCLASS;
 
+#line 1323
 typedef struct tagCLS {
+#line 1325
     struct tagCLS *pclsNext;
     ATOM        atomClassName;
     WORD        fnid;
@@ -440,12 +448,14 @@ typedef struct tagCLS {
     DWORD       flags;
     LPSTR       lpszClientAnsiMenuName;
     LPWSTR      lpszClientUnicodeMenuName;
+#line 1342
     DWORD       adwWOW[2];
     DWORD       hTaskWow;
     struct tagCALLPROCDATA *spcpdFirst;
     struct tagCLS *pclsBase;
     struct tagCLS *pclsClone;
     PROC        lpfnWorker;
+#line 1351
     COMMON_WNDCLASS;
 } CLS, *LPCLS, **PPCLS;
 #endif
@@ -455,6 +465,7 @@ typedef struct tagCLS {
  * never an overlay of modern USER storage or a guest-memory allocation. */
 #if defined(WOW_ORIGINAL_DIALOG_LAYOUT) && !defined(OPENNT_USER_DIALOG_LAYOUT_H)
 #define OPENNT_USER_DIALOG_LAYOUT_H
+#line 2146
 typedef struct _DLG {
     WNDPROC lpfnDlg;
     DWORD   flags;          /* Various useful flags -- see definitions below */
@@ -491,6 +502,7 @@ typedef struct _DIALOG {
 #define CPDHANDLE_HI            0xFFFF
 #define MAKE_CPDHANDLE(h)       (MAKELONG((WORD)h,CPDHANDLE_HI))
 #define ISCPDTAG(x)             (HIWORD(x) == CPDHANDLE_HI)
+#line 1247
 typedef struct _CALLPROCDATA {
     THROBJHEAD      head;
     struct _CALLPROCDATA *pcpdNext;
@@ -502,6 +514,7 @@ typedef struct _CALLPROCDATA {
 /* OPENNT-HOST-093: original canonical client-control extent declarations. */
 #if defined(WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT) && !defined(OPENNT_CONTROL_EXTENT_BUTTON_LAYOUT_H)
 #define OPENNT_CONTROL_EXTENT_BUTTON_LAYOUT_H
+#line 2396
 typedef struct tagBUTN {
     PWND spwnd;
     UINT buttonState;   // Leave this a word for compatibility with SetWindowWord( 0L )
@@ -548,6 +561,7 @@ typedef struct tagBUTNWND {
 #if defined(WOW_ORIGINAL_BUTTON_RESOURCES) && !defined(OPENNT_BUTTON_RESOURCE_LAYOUT_H)
 #define OPENNT_BUTTON_RESOURCE_LAYOUT_H
 /* OPENNT-HOST-113: original resource metadata, not a modern USER overlay. */
+#line 802
 typedef struct tagOEMBITMAPINFO
 {
     int x;

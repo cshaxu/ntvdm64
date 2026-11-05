@@ -63,6 +63,7 @@ static HWND WU32GuestClipboardWindow(HWND hwnd)
     return wow_user_window_public_guest_handle(hwnd);
 }
 
+#line 33
 /*++
     BOOL ChangeClipboardChain(<hwnd>, <hwndNext>)
     HWND <hwnd>;
@@ -1309,6 +1310,7 @@ VOID InitCBFormats ()
 #ifdef DEBUG
 #line 1216
 #error Excluded unsupported DEBUG WOW profile
+#line 1226
 #endif
 #line 1227
 

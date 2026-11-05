@@ -2,45 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T476 S2** — complete the outstanding per-file mirror conditional and line audit.
-
-S1 integrated and published its marker build and 30 exclusions; its [main integration evidence](../etc/evidence/m0-t476-s1-main-integration.md) retains the limits. The owner directed S2 to finish them. The [S2 baseline](../etc/evidence/m0-t476-s2-file-audit.md) tracks all 1,055 files: after rebinding stale hashes, reopening PIF and completing further file reviews, the review categories contain 1,005 files and 50 require file review. The earlier batch retains three open files. A separate exact-byte reconciliation has 159 restorations not yet started.
-
-The counts above predate discovery that the S1 product-only marker contexts omitted supported fixture and addon builds. Several recorded exclusions failed those builds; the current correction restores their selected arms. Previously reviewed counts cannot establish completeness across those omitted contexts until cross-checked; do not treat them as a final audit conclusion.
-
-The [merged branch evidence](../../artifacts/mvdm-audit/t476-s2-merged-branch-evidence.json) combines S1, historical marker hits and the separately verified addon/fixture hits, retaining source-hash binding and explicit coverage limits. The [remaining-file groups](../../artifacts/mvdm-audit/t476-s2-remaining-groups.json) track the initially 69-file queue and current pending subset; groups are leads, not completed dispositions. Process smaller files first, handle large files separately, build per ten actual mirror-file modifications, and finally cross-check prior reviews against omitted contexts.
-
-The [previous ten-source batch](../../artifacts/mvdm-audit/t476-s2-batch18-line-repair.json) comprises nine whole-file line fixes and the byte restoration of `das.h`; cached builds, line witnesses and full publication passed, with only two PE timestamp differences. The `nturtl.h` candidate was withdrawn: its original anchors were correct when counted using LF rather than Python `splitlines()`. The [line-count reconciliation](../../artifacts/mvdm-audit/t476-s2-line-count-reconciliation.json) records 39 original files with divergent split counts; 19 previously reviewed files have raw comparison leads requiring triage, not established defects. No guest was changed or rebuilt.
-
-The [previous ten-source batch](../../artifacts/mvdm-audit/t476-s2-batch19-line-repair.json) has eight line-corrected files and restores original bytes to `dec.h` and `div.h`; cached builds and full publication passed, with only two PE timestamp differences. The selected empty shells in `draw.c`, client `wow.c` and `ntstubs.c` remain open and are not evidence that omitted original functions are implemented.
-
-The [latest ten-source batch](../../artifacts/mvdm-audit/t476-s2-batch20-line-repair.json) contains line fixes to `userrtl.h` and `host_cpu.h` and eight exact-original byte restorations; cached build and complete publication passed with only two PE timestamp differences. Both files remain open for selected original empty-shell ownership. `host_cpu.h` rejects a false scanner match between disabled CPU30 and selected CPU40 `LITTLEND` conditions; selected layout behavior is retained. The [empty-shell ownership leads](../../artifacts/mvdm-audit/t476-s2-empty-shell-ownership-leads.json) identify 16 historical shells and real link owners, without treating provider identity as proof of original semantic equivalence.
-
-The [host CPU accessor inventory](../../artifacts/mvdm-audit/t476-s2-host-cpu-accessor-inventory.json) records all 29 original CCPU macros: 15 have same-named CPU40 direct macros, and 14 have no C/H references in the scanned current source roots. This is static ownership evidence, not proof of semantic equivalence or complete product reachability. The [next ten exact-original byte restorations](../../artifacts/mvdm-audit/t476-s2-batch21-original-bytes.json) built and published as one batch; nine images were identical and NTVDM differed only by timestamp.
-
-## Active Packet
-
-### M0 T476 S2 — complete per-file verification
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T476 S2, Ordinary Mode. |
-| Admission And Approval | Owner admitted S2 to finish the outstanding mirror conditional and line audit. |
-| Candidate Proposal | [Complete mirror conditional audit by file](../proposals/proposal-mirror-conditional-file-audit-001.md). |
-| Objective | Produce a trustworthy per-file account and complete original-structure, branch and diagnostic-line checks, correcting proven defects. |
-| Non-goals | Do not modify or rebuild guest, alter unsupported profiles, or claim unproven results. |
-| Reference Baseline | `2f9e2aea7`, S1 branch ledger and its recorded 1,018 supported contexts. |
-| Files And ABI Surface | Production host mirror C/H, exact original identities, associated audit evidence and minimal selected adaptations. |
-| Applicable Rules | Source policy, complete-file review, no unsupported selected-behavior change and preserved unrelated work. |
-| Verification | Validate source and original identities, actual hit provenance, exclusion structure and compiler line mappings; build and test batches per proposal. |
-| Expected Markers | File-level complete/incomplete decisions with explicit evidence and finite unresolved cases. |
-| Asset Needs | Existing original sources, recorded S1 contexts, cached builds and owned temporary evidence. |
-| Reporting Requirements | Exact per-file progress and findings, changes, tests, publication and remaining uncertainty. |
-| Stop Conditions | Unavailable pinned original, incompatible selected behavior or lack of required semantic authority. |
-| Exit Criteria | All in-scope production files reviewed to the contract, corrections verified, published when required, committed and pushed. |
-| Original Owner Request | Admit a new S to complete the remaining branch-structure and line-number audit. |
-| Similar-Issue Sweep | Include byte-identical files, changed files, prior exclusions and recorded mode/WOW cases. |
-| Temporary Evidence | `build/t476-s2`, 90-minute phase, 4 GiB, 15-minute no-progress budget. |
+**No active M/T/S packet.** The owner directed [T476 closure](../history/m0-t476-closure.md), with its incomplete build and context evidence explicitly retained. Integrate the existing T477 worktree commits, then admit its integrated cached-build, test and publication P.
 
 ## M0 T475 S5 Closure
 

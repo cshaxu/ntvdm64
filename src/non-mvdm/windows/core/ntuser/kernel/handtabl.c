@@ -15,6 +15,7 @@
 #define WOW_USER_OBJECT_FLAGS_ONLY
 #include "userk.h"
 
+#line 39
 CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
     0,                                                  /* free */
     OCF_THREADOWNED | OCF_MARKTHREAD | OCF_USEQUOTA,    /* window */
@@ -44,6 +45,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #if 0
 #line 545
 #error Excluded original disabled USER handle-table check
+#line 563
 #endif
 #line 564
 
@@ -54,6 +56,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #error Excluded unsupported original DEBUG_LOCKS branch
 #else
 #line 21
+#line 22
 #endif
 #line 23
 
@@ -61,6 +64,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #ifdef DEBUG
 #line 87
 #error Excluded unsupported original DEBUG branch
+#line 98
 #endif
 #line 99
 
@@ -68,6 +72,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #ifdef DEBUG
 #line 853
 #error Excluded unsupported original DEBUG branch
+#line 952
 #endif
 #line 953
 
@@ -75,6 +80,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #ifdef DEBUG
 #line 964
 #error Excluded unsupported original DEBUG branch
+#line 994
 #endif
 #line 995
 
@@ -82,6 +88,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #ifdef DEBUG
 #line 1170
 #error Excluded unsupported original DEBUG branch
+#line 1188
 #endif
 #line 1189
 
@@ -89,6 +96,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #ifdef DEBUG
 #line 1199
 #error Excluded unsupported original DEBUG branch
+#line 1239
 #endif
 #line 1240
 
@@ -96,6 +104,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #ifdef DEBUG
 #line 1251
 #error Excluded unsupported original DEBUG branch
+#line 1301
 #endif
 #line 1302
 
@@ -103,8 +112,10 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #ifdef DEBUG
 #line 1322
 #error Excluded unsupported original DEBUG branch
+#line 1325
 #else
 #line 1326
+#line 1329
 #endif
 #line 1330
 
@@ -112,6 +123,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #ifdef DEBUG
 #line 1395
 #error Excluded unsupported original DEBUG branch
+#line 1423
 #endif
 #line 1424
 
@@ -119,6 +131,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #ifdef DEBUG
 #line 1692
 #error Excluded unsupported original DEBUG branch
+#line 1712
 #endif
 #line 1713
 
@@ -126,6 +139,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #ifdef DEBUG
 #line 1715
 #error Excluded unsupported original DEBUG branch
+#line 1794
 #endif
 #line 1795
 
@@ -133,6 +147,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #ifdef DEBUG
 #line 1934
 #error Excluded unsupported original DEBUG branch
+#line 2013
 #endif
 #line 2014
 
@@ -140,6 +155,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #if (DBG || TRACE_OBJECT_ALLOCS)
 #line 287
 #error Excluded unsupported original TRACE_OBJECT_ALLOCS branch
+#line 302
 #endif
 #line 303
 
@@ -154,6 +170,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #ifdef DEBUG
 #line 135
 #error Excluded unsupported original DEBUG branch
+#line 137
 #endif
 #line 138
 
@@ -175,6 +192,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #ifdef DEBUG
 #line 765
 #error Excluded unsupported original DEBUG branch
+#line 776
 #endif
 #line 777
 
@@ -182,6 +200,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #ifdef DEBUG
 #line 798
 #error Excluded unsupported original DEBUG branch
+#line 803
 #endif
 #line 804
 
@@ -189,6 +208,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #ifdef DEBUG
 #line 1057
 #error Excluded unsupported original DEBUG branch
+#line 1069
 #endif
 #line 1070
 
@@ -196,6 +216,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #ifdef DEBUG
 #line 1085
 #error Excluded unsupported original DEBUG branch
+#line 1098
 #endif
 #line 1099
 
@@ -203,6 +224,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #ifdef DEBUG
 #line 1140
 #error Excluded unsupported original DEBUG branch
+#line 1152
 #endif
 #line 1153
 
@@ -210,6 +232,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #ifdef DEBUG
 #line 1354
 #error Excluded unsupported original DEBUG branch
+#line 1361
 #endif
 #line 1362
 
@@ -217,6 +240,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #ifdef FE_IME
 #line 1520
 #error Excluded unsupported original FE_IME branch
+#line 1523
 #endif
 #line 1524
 
@@ -224,6 +248,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #ifdef DEBUG
 #line 1887
 #error Excluded unsupported original DEBUG branch
+#line 1911
 #endif // DEBUG
 #line 1912
 
@@ -237,8 +262,10 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #error Unsupported FE_IME original branch
 #endif
 #line 603
+#line 622
 #else // DEBUG
 #line 623
 #error Unsupported DEBUG original branch
+#line 712
 #endif
 #line 713

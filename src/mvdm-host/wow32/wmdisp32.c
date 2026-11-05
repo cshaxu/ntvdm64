@@ -162,6 +162,7 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
 #ifdef DEBUG
 #line 137
 #error Excluded unsupported DEBUG WOW profile
+#line 140
 #endif
 #line 141
 
@@ -200,6 +201,7 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
 #line 173
 #error Excluded unsupported WOW profiling configuration
+#line 176
 #endif
 #line 177
 
@@ -252,6 +254,7 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
 #ifdef DEBUG
 #line 216
 #error Excluded unsupported DEBUG WOW profile
+#line 219
 #endif
 #line 220
 
@@ -260,6 +263,7 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
 #line 224
 #error Excluded unsupported WOW profiling configuration
+#line 227
 #endif
 #line 228
 
@@ -269,6 +273,7 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
 #line 233
 #error Excluded unsupported WOW profiling configuration
+#line 235
 #endif
 #line 236
 
@@ -405,6 +410,7 @@ BOOL FASTCALL WM32NoThunking(LPWM32MSGPARAMEX lpwm32mpex)
 #if 0
 #line 359
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
+#line 381
 #endif
 #line 382
 
@@ -420,6 +426,7 @@ BOOL FASTCALL WM32NoThunking(LPWM32MSGPARAMEX lpwm32mpex)
 #ifdef DEBUG         // see the macro WM32UNDOCUMENTED
 #line 392
 #error Excluded unsupported DEBUG WOW profile
+#line 410
 #endif
 #line 411
 

@@ -1,0 +1,246 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+  "original_sha256": "8e2383f52e4e3f65f656bd492143d7a8ed5d0a2526ad8e6af10d242465ff8d7a",
+  "before_sha256": "933243dec8d169d707b1c4d7bd314f309fd035d922797fcd65475a4a4c00c79a",
+  "after_sha256": "3d3e824d2c517eecb87dc66e7dfbabf8f20884dbb08d3020d77443bd784267e8",
+  "method": "per-function matching of retained original statements with retained local adaptations; preprocessor line directives only; no compiler run",
+  "functions": [
+    "DialogBox2",
+    "InternalDialogBox",
+    "xxxSaveDlgFocus",
+    "xxxRestoreDlgFocus",
+    "DlgSetFocus",
+    "ValidateDialogPwnd",
+    "DefDlgProcWorker",
+    "DefDlgProcW",
+    "DefDlgProcA",
+    "RepositionRect",
+    "MapDialogRect"
+  ],
+  "changes": [
+    {
+      "kind": "retained original statement",
+      "physical": 25,
+      "original_line": 989,
+      "function": "DialogBox2",
+      "token": "int PASCAL DialogBox2("
+    },
+    {
+      "kind": "retained original statement",
+      "physical": 76,
+      "original_line": 1038,
+      "function": "DialogBox2",
+      "token": "PDLG(pwnd)->fDisabled = !!fDisabled;"
+    },
+    {
+      "kind": "retained original statement",
+      "physical": 93,
+      "original_line": 1053,
+      "function": "DialogBox2",
+      "token": "if (!fShown) {"
+    },
+    {
+      "kind": "excluded conditional end",
+      "physical": 100,
+      "original_line": 1065
+    },
+    {
+      "kind": "retained original statement",
+      "physical": 106,
+      "original_line": 1068,
+      "function": "DialogBox2",
+      "token": "UpdateWindow(hwnd);"
+    },
+    {
+      "kind": "retained original statement",
+      "physical": 145,
+      "original_line": 1105,
+      "function": "DialogBox2",
+      "token": "if (!IsDialogMessage(hwnd, &msg)) {"
+    },
+    {
+      "kind": "retained original statement",
+      "physical": 170,
+      "original_line": 1129,
+      "function": "DialogBox2",
+      "token": "RIPMSG0(RIP_WARNING,"
+    },
+    {
+      "kind": "retained original statement",
+      "physical": 181,
+      "original_line": 1139,
+      "function": "DialogBox2",
+      "token": "return 0;"
+    },
+    {
+      "kind": "retained original statement",
+      "physical": 208,
+      "original_line": 1177,
+      "function": "InternalDialogBox",
+      "token": "int InternalDialogBox("
+    },
+    {
+      "kind": "retained original statement",
+      "physical": 220,
+      "original_line": 1188,
+      "function": "InternalDialogBox",
+      "token": "HWND hwnd;"
+    }
+  ],
+  "status": "individual review; grouped build and cross-context reconciliation pending",
+  "branch_evidence": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "snapshot_sha256": "933243dec8d169d707b1c4d7bd314f309fd035d922797fcd65475a4a4c00c79a",
+      "current_sha256": "933243dec8d169d707b1c4d7bd314f309fd035d922797fcd65475a4a4c00c79a",
+      "source_binding": "same",
+      "snapshot_line": "97",
+      "directive": "ifdef",
+      "expression": "SYSMODALWINDOWS",
+      "product_status": "previously-excluded",
+      "product_contexts": "",
+      "historical_hit_sources": "",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "0",
+      "disposition": "existing-error-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "snapshot_sha256": "933243dec8d169d707b1c4d7bd314f309fd035d922797fcd65475a4a4c00c79a",
+      "current_sha256": "933243dec8d169d707b1c4d7bd314f309fd035d922797fcd65475a4a4c00c79a",
+      "source_binding": "same",
+      "snapshot_line": "320",
+      "directive": "if",
+      "expression": "defined(WOW_ORIGINAL_DIALOG_MANAGER)",
+      "product_status": "hit",
+      "product_contexts": "615",
+      "historical_hit_sources": "unique-structure-historical",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "1",
+      "disposition": "retain-if-rebound"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "snapshot_sha256": "933243dec8d169d707b1c4d7bd314f309fd035d922797fcd65475a4a4c00c79a",
+      "current_sha256": "933243dec8d169d707b1c4d7bd314f309fd035d922797fcd65475a4a4c00c79a",
+      "source_binding": "same",
+      "snapshot_line": "463",
+      "directive": "ifdef",
+      "expression": "WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+      "product_status": "hit",
+      "product_contexts": "615",
+      "historical_hit_sources": "unique-structure-historical",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "1",
+      "disposition": "retain-if-rebound"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "snapshot_sha256": "933243dec8d169d707b1c4d7bd314f309fd035d922797fcd65475a4a4c00c79a",
+      "current_sha256": "933243dec8d169d707b1c4d7bd314f309fd035d922797fcd65475a4a4c00c79a",
+      "source_binding": "same",
+      "snapshot_line": "526",
+      "directive": "ifdef",
+      "expression": "WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+      "product_status": "hit",
+      "product_contexts": "615",
+      "historical_hit_sources": "unchanged-directive-git-line-map",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "1",
+      "disposition": "retain-if-rebound"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "snapshot_sha256": "933243dec8d169d707b1c4d7bd314f309fd035d922797fcd65475a4a4c00c79a",
+      "current_sha256": "933243dec8d169d707b1c4d7bd314f309fd035d922797fcd65475a4a4c00c79a",
+      "source_binding": "same",
+      "snapshot_line": "531",
+      "directive": "else",
+      "expression": "",
+      "product_status": "previously-excluded",
+      "product_contexts": "",
+      "historical_hit_sources": "",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "0",
+      "disposition": "existing-error-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "snapshot_sha256": "933243dec8d169d707b1c4d7bd314f309fd035d922797fcd65475a4a4c00c79a",
+      "current_sha256": "933243dec8d169d707b1c4d7bd314f309fd035d922797fcd65475a4a4c00c79a",
+      "source_binding": "same",
+      "snapshot_line": "543",
+      "directive": "ifdef",
+      "expression": "WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+      "product_status": "hit",
+      "product_contexts": "615",
+      "historical_hit_sources": "unchanged-directive-git-line-map",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "1",
+      "disposition": "retain-if-rebound"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "snapshot_sha256": "933243dec8d169d707b1c4d7bd314f309fd035d922797fcd65475a4a4c00c79a",
+      "current_sha256": "933243dec8d169d707b1c4d7bd314f309fd035d922797fcd65475a4a4c00c79a",
+      "source_binding": "same",
+      "snapshot_line": "546",
+      "directive": "else",
+      "expression": "",
+      "product_status": "previously-excluded",
+      "product_contexts": "",
+      "historical_hit_sources": "",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "0",
+      "disposition": "existing-error-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "snapshot_sha256": "933243dec8d169d707b1c4d7bd314f309fd035d922797fcd65475a4a4c00c79a",
+      "current_sha256": "933243dec8d169d707b1c4d7bd314f309fd035d922797fcd65475a4a4c00c79a",
+      "source_binding": "same",
+      "snapshot_line": "963",
+      "directive": "ifndef",
+      "expression": "WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+      "product_status": "previously-excluded",
+      "product_contexts": "",
+      "historical_hit_sources": "",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "0",
+      "disposition": "existing-error-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "snapshot_sha256": "933243dec8d169d707b1c4d7bd314f309fd035d922797fcd65475a4a4c00c79a",
+      "current_sha256": "933243dec8d169d707b1c4d7bd314f309fd035d922797fcd65475a4a4c00c79a",
+      "source_binding": "same",
+      "snapshot_line": "1019",
+      "directive": "ifdef",
+      "expression": "WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+      "product_status": "hit",
+      "product_contexts": "615",
+      "historical_hit_sources": "unchanged-directive-git-line-map",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "1",
+      "disposition": "retain-if-rebound"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "snapshot_sha256": "933243dec8d169d707b1c4d7bd314f309fd035d922797fcd65475a4a4c00c79a",
+      "current_sha256": "933243dec8d169d707b1c4d7bd314f309fd035d922797fcd65475a4a4c00c79a",
+      "source_binding": "same",
+      "snapshot_line": "1021",
+      "directive": "else",
+      "expression": "",
+      "product_status": "previously-excluded",
+      "product_contexts": "",
+      "historical_hit_sources": "",
+      "additional_actual_hit": "",
+      "historical_hit_record_count": "0",
+      "disposition": "existing-error-review"
+    }
+  ],
+  "matching_nontrivial_original_function_lines_checked": 450,
+  "logical_line_leads_after_repair": 0,
+  "limitations": "Existing local WOW manager owner adapters and omitted original functions are not claimed behavior-equivalent; conditions reached by selected fixture are preserved."
+}

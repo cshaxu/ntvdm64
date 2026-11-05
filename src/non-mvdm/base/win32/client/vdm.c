@@ -53,46 +53,60 @@ BOOL BaseCreateVDMEnvironment(
         return FALSE;
     }
     try {
+#line 3053
         if (lpEnvironment == NULL) {
+#line 3055
             Status = RtlCreateEnvironment(TRUE, (PVOID *)&EnvStrings);
             if (!NT_SUCCESS(Status)) goto bveTryExit;
         } else EnvStrings = lpEnvironment;
+#line 3062
         if (EnvStrings == NULL) {
             SetLastError(ERROR_BAD_ENVIRONMENT);
             goto bveTryExit;
         }
+#line 3069
         cchEnv = 0;
         pEnv = EnvStrings;
         while (!(*pEnv++ == UNICODE_NULL && *pEnv == UNICODE_NULL)) cchEnv++;
+#line 3075
         cchEnv += 2;
+#line 3078
         pNewEnv = (LPWSTR)RtlAllocateHeap(RtlProcessHeap(), MAKE_TAG(VDM_TAG),
             (cchEnv + MAX_PATH) * sizeof(WCHAR));
         if (pNewEnv == NULL) {
             SetLastError(ERROR_NOT_ENOUGH_MEMORY);
             goto bveTryExit;
         }
+#line 3085
         dwRemain = MAX_PATH - 2;
+#line 3087
         pEnv = EnvStrings;
+#line 3089
         pDst = pNewEnv;
         while (*pEnv != UNICODE_NULL) {
             pTmp = pEnv;
+#line 3094
             if (pEnv[0] == (WCHAR)'=') {
                 if (((pEnv[1] >= (WCHAR)'A' && pEnv[1] <= (WCHAR)'Z') ||
                      (pEnv[1] >= (WCHAR)'a' && pEnv[1] <= (WCHAR)'z')) &&
                     pEnv[2] == (WCHAR)':' && pEnv[3] == (WCHAR)'=') {
                     *pDst++ = *pEnv++; *pDst++ = *pEnv++;
                     *pDst++ = *pEnv++; *pDst++ = *pEnv++;
+#line 3103
                     NameType = ENV_NAME_TYPE_SINGLE_PATH;
                 } else NameType = ENV_NAME_TYPE_NO_PATH;
             } else {
                 while (*pEnv && (*pDst++ = *pEnv++) != (WCHAR)'=') ;
+#line 3117
                 NameType = BaseGetEnvNameType_U(pTmp, (DWORD)(pEnv - pTmp) - 1);
             }
             if (NameType == ENV_NAME_TYPE_NO_PATH) {
                 while ((*pDst++ = *pEnv++) != UNICODE_NULL) ;
             } else if (NameType == ENV_NAME_TYPE_SINGLE_PATH) {
+#line 3124
                 Length = wcslen(pEnv) + 1;
                 dw = GetShortPathNameW(pEnv, pDst, Length + dwRemain);
+#line 3129
                 if (dw == 0 || dw >= Length + dwRemain) {
                     RtlMoveMemory(pDst, pEnv, Length * sizeof(WCHAR));
                     dw = Length - 1;
@@ -101,13 +115,16 @@ BOOL BaseCreateVDMEnvironment(
                 pEnv += Length;
                 if (dw > Length) dwRemain -= dw - Length;
             } else {
+#line 3141
                 pTmp = pEnv;
                 while (*pEnv != UNICODE_NULL) {
                     if (*pEnv == (WCHAR)';') {
+#line 3145
                         Length = (DWORD)(pEnv - pTmp);
                         if (Length > 0) {
                             *pEnv = UNICODE_NULL;
                             dw = GetShortPathNameW(pTmp, pDst, Length + 1 + dwRemain);
+#line 3150
                             if (dw == 0 || dw > Length + dwRemain) {
                                 RtlMoveMemory(pDst, pTmp, Length * sizeof(WCHAR));
                                 dw = Length;
@@ -117,9 +134,11 @@ BOOL BaseCreateVDMEnvironment(
                             if (dw > Length) dwRemain -= dw - Length;
                         }
                         while (*pEnv == (WCHAR)';') *pDst++ = *pEnv++;
+#line 3162
                         pTmp = pEnv;
                     } else pEnv++;
                 }
+#line 3168
                 if ((Length = (DWORD)(pEnv - pTmp)) != 0) {
                     dw = GetShortPathNameW(pTmp, pDst, Length + 1 + dwRemain);
                     if (dw == 0 || dw > Length) {
@@ -130,34 +149,41 @@ BOOL BaseCreateVDMEnvironment(
                     if (dw > Length) dwRemain -= dw - Length;
                 }
                 *pDst++ = *pEnv++;
-#line 68
+#line 3179
             }
         }
         *pDst++ = UNICODE_NULL;
         /* DIVERGENCE(OPENNT-HOST-065): byte distance, not truncated addresses;
          * retain the original bounded DWORD/USHORT environment lengths. */
         cchEnv = (DWORD)((PCHAR)pDst - (PCHAR)pNewEnv);
+#line 3183
         pUStringEnv->MaximumLength = pUStringEnv->Length = (USHORT)cchEnv;
         pUStringEnv->Buffer = pNewEnv;
         Status = RtlUnicodeStringToAnsiString(pAStringEnv, pUStringEnv, TRUE);
         if (!NT_SUCCESS(Status)) BaseSetLastNTError(Status); else bRet = TRUE;
+#line 3195
 bveTryExit:;
     }
     finally {
         if (lpEnvironment == NULL && EnvStrings != NULL) RtlDestroyEnvironment(EnvStrings);
     }
+#line 3201
     return bRet;
 }
 
+#line 3216
 BOOL BaseDestroyVDMEnvironment(ANSI_STRING *pAStringEnv, UNICODE_STRING *pUStringEnv)
 {
     if (pAStringEnv->Buffer) RtlFreeAnsiString(pAStringEnv);
     if (pUStringEnv->Buffer) RtlFreeHeap(RtlProcessHeap(), 0, pUStringEnv->Buffer);
+#line 3225
     return TRUE;
 }
 
+#line 3244
 UINT BaseGetEnvNameType_U(WCHAR *Name, DWORD NameLength)
 {
+#line 3253
     static ENV_INFO EnvInfoTable[STD_ENV_NAME_COUNT] = {
         {ENV_NAME_TYPE_MULTIPLE_PATH, 4, ENV_NAME_PATH},
         {ENV_NAME_TYPE_SINGLE_PATH, 6, ENV_NAME_WINDIR},
@@ -165,16 +191,18 @@ UINT BaseGetEnvNameType_U(WCHAR *Name, DWORD NameLength)
     };
     UINT NameType = ENV_NAME_TYPE_NO_PATH;
     int i;
+#line 3267
     for (i = 0; i < STD_ENV_NAME_COUNT; i++) {
         if (EnvInfoTable[i].NameLength == NameLength &&
             !_wcsnicmp(EnvInfoTable[i].Name, Name, NameLength)) {
             NameType = EnvInfoTable[i].NameType;
             break;
         }
-#line 85
+#line 3272
     }
+#line 3274
     return NameType;
-#line 88
+#line 3275
 }
 
 #endif
@@ -2109,6 +2137,7 @@ BaseCheckForVDM(
 #include <base_classifier.h>
 BOOL
 WINAPI
+#line 93
 GetBinaryTypeW(
     IN  LPCWSTR  lpApplicationName,
     OUT LPDWORD  lpBinaryType
@@ -2196,7 +2225,7 @@ Return Value:
                     FILE_SYNCHRONOUS_IO_NONALERT | FILE_NON_DIRECTORY_FILE
                     );
         if (!NT_SUCCESS(Status) ) {
-#line 2557
+#line 180
             BaseSetLastNTError(Status);
             goto GBTtryexit;
             }
@@ -2247,7 +2276,7 @@ Return Value:
                     if (!fBinaryType){
                         BaseSetLastNTError(Status);
                         goto GBTtryexit;
-#line 2592
+#line 223
 		    }
 		    fBinaryType = (fBinaryType	== BINARY_TYPE_DOS_PIF) ?
 				  SCS_PIF_BINARY : SCS_DOS_BINARY;
@@ -2310,7 +2339,7 @@ Return Value:
             }
 
 
-#line 2596
+#line 284
         }
 
 	*lpBinaryType = fBinaryType;
@@ -2319,7 +2348,7 @@ Return Value:
 
 GBTtryexit:;
 	}
-#line 2598
+#line 292
     finally {
 
         if (SectionHandle)
@@ -2329,10 +2358,11 @@ GBTtryexit:;
             RtlFreeHeap(RtlProcessHeap(), 0,FreeBuffer);
     }
     return bReturn;
-#line 2604
+#line 301
 }
 
 ULONG
+#line 2213
 BaseIsDosApplication(
     IN PUNICODE_STRING PathName,
     IN NTSTATUS Status
@@ -2391,7 +2421,7 @@ Return Value:
 	return BINARY_TYPE_DOS_EXE;
 
     return 0;
-#line 2892
+#line 2271
 }
 #endif
 

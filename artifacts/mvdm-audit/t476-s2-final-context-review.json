@@ -1,0 +1,12 @@
+{
+  "purpose": "existing supported build context review for remaining USER headers",
+  "method": "repository source and fixture-script inspection plus prior actual-hit evidence; grouped builds remain required",
+  "findings": [
+    "RIP_COMPONENT has no repository C/H definition or setting in four inspected Ninja release configurations; SDK and future configurations not proven.",
+    "_USERK_ is defined by userk.h include guard; a later first include of userrtl.h would hit existing errors. The investigated wow_page_domain_fixture path does not enable WOW_ORIGINAL_CLEANUP, so the hypothetical include-order conflict was not demonstrated in that fixture.",
+    "_NTCSRMSG_ is a real include guard in ntcsrmsg.h and DBG may be defined to 0 by base.h; no actual supported translation unit triggering user.h errors was identified by source search. Include order requires build/preprocessor evidence.",
+    "_NTSYSTEM_ was not found defined by repository C/H or inspected build settings; do not infer unsupported external configurations.",
+    "Merged branch table has 7604 records, 4007 previously excluded and 1275 changed-hash exclusions requiring identity rebinding; absence of a hit is not proof of exclusion. Nine product-unhit branches are observed in supported supplemental contexts."
+  ],
+  "status": "static review; grouped build and context verification pending"
+}

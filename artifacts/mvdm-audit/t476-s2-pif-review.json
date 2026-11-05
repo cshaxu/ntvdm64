@@ -1,0 +1,21 @@
+{
+  "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+  "original_sha256": "224f6bdf5cfa15a37d95f97e24c30d37d947d5f7f5199d50aeab65b39d150c55",
+  "before_sha256": "1633d18b84205a1dd96a1730017261ca141b4f669fade1356ca575f90eeea122",
+  "after_sha256": "b1b5888072c62706c79b2ca8ee64a3e0e9abe627560286299e2eb43c2f40df82",
+  "anchors": {
+    "471": 519,
+    "473": 521,
+    "788": 837,
+    "855": 909,
+    "934": 993
+  },
+  "additional_context": "T476 S2 batch16 formal PIF x64 addon build source-bound success: artifacts/mvdm-audit/t476-s2-batch16-context-repair.json",
+  "matched_original_nontrivial_lines": 239,
+  "matching_line_leads_before": 0,
+  "token_invariant": true,
+  "status": "individual review; final build and global context reconciliation pending",
+  "original_structure_match": "all original arms matched or inside rejected enclosing branches; no ancestry conflicts",
+  "excluded_arms_checked": 7,
+  "excluded_non_directive_contents": 0
+}
