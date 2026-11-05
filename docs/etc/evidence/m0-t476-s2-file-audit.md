@@ -45,3 +45,13 @@ with slash normalization; only the corrected run is recorded.
 These samples prioritize complete-file review and do not establish that every
 selected statement or all contexts have correct diagnostic lines. No file has
 been promoted solely on the absence of a sampled mismatch.
+
+## Expanded compiler-line index
+
+The [compiler-line index](../../../artifacts/mvdm-audit/t476-s2-compiler-line-index.json) records 433 successful real preprocessing commands: 230 cover all recorded hit branches of the 874 differing files, and 203 additional contexts cover their remaining S1 file markers. All 874 have a recorded file-marker context; 604 yielded uniquely matching original text and 270 did not. Forty-eight files contain 1,152 possible line mismatches under this lexical sampling. Original text expanded more than once, local adaptations and macro transformations require review; these are leads, not confirmed defects. Source and original hashes, matching context IDs, commands and the plan hash are retained per record.
+
+No source was changed by these preprocessing runs. A branch/file marker proves
+that a context selected the indicated source region, not that each original
+statement was preserved or that every logical line is correct. The 180
+byte-identical files remain the only completed category at this checkpoint;
+the 874 different files and generator input remain open.
