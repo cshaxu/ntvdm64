@@ -128,3 +128,8 @@ The ten changed files were reprocessed in 39 recorded product contexts; all comm
 ### Completed COMMAND line-batch files
 
 The [final COMMAND file review](../../../artifacts/mvdm-audit/t476-s2-command-final-review.json) completes `cmdexec.c` and `cmdmisc.c`. It binds both source versions to their original hashes, records every matched original source line and its logical location, checks the entire original conditional inventory and the single excluded `CHECK_IT_LATER` branch, and references the successful actual compiler observations. Both entire original/current diffs were reviewed; added guest-location, process, stream and environment adaptations remain under existing mirror divergence records. Macro and local-added duplicate statements were distinguished from original statements. The earlier ten-file production build and publication remain applicable because no source was modified in this review. Total: **745 of 1,055 complete; 310 open**. The other eight files from that earlier batch remain open.
+
+
+### Completed WOW DDE line-batch file
+
+The [DDE file review](../../../artifacts/mvdm-audit/t476-s2-wdde-final-review.json) completes `wdde.c`. Neither source has a conditional group; the full original/current diff and retained matching line positions were reviewed, with 143 actual compiler observations. The apparent mismatch arose from two original comparisons that become text-identical after a trailing comment is stripped. Existing local DDE lifecycle changes remain registered. The prior ten-file product build and publication are unchanged. Total: **746 of 1,055 complete; 309 open**.
