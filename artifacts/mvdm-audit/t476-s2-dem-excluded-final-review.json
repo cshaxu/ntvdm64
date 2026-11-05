@@ -1,0 +1,56 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/dem/dem.c",
+      "current_sha256": "7f2f34ff27f71dd14fd6f9c8d0811b4c0a149be9c9ec48c80f4db00c339098b8",
+      "original_sha256": "2573da2dbf964c5e75102145b031766113cfc4e914dc00f0d80fdc6d98f5a2de",
+      "s13_complete_tree_projection": "artifacts/mvdm-audit/s13-r1335-tree-recheck.json",
+      "s13_matching_code_lines": 30,
+      "excluded_arms": 2,
+      "compiler_contexts": [
+        242
+      ],
+      "compiler_unique_original_lines_seen": 10,
+      "local_diff_review": "Complete original/current diff reviewed; Registered immutable DOS system directory binding; original DBG bodies excluded."
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demfile.c",
+      "current_sha256": "ded7c3b4eb49c18fb4e947a1cfb005f61c8494fb0a09c9dd2d4f2975787897b6",
+      "original_sha256": "701c7ce94b6317f23d73d847c681338ddb522d0216cf6373713e542c34236620",
+      "s13_complete_tree_projection": "artifacts/mvdm-audit/s13-r1335-tree-recheck.json",
+      "s13_matching_code_lines": 517,
+      "excluded_arms": 6,
+      "compiler_contexts": [
+        248
+      ],
+      "compiler_unique_original_lines_seen": 128,
+      "local_diff_review": "Complete original/current diff reviewed; Registered numeric guest filename/PDB/SFT access and bounded session leases; original DBG bodies excluded."
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "current_sha256": "e0c9e9eba2017053fd2530fc07a2d9bba3e45c6edc97b744ff7940e30c64f7eb",
+      "original_sha256": "5e951e14d7c88357dc25933b602cb756fbaf4cf47125a46d740135491b4eb958",
+      "s13_complete_tree_projection": "artifacts/mvdm-audit/s13-r1335-tree-recheck.json",
+      "s13_matching_code_lines": 276,
+      "excluded_arms": 2,
+      "compiler_contexts": [
+        250
+      ],
+      "compiler_unique_original_lines_seen": 70,
+      "local_diff_review": "Complete original/current diff reviewed; Registered guest buffer and extended-error leases and signed high-offset ABI; original unused/debug branches excluded."
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "current_sha256": "cb60c06af4075c049d66639ee42c6ea9c57d7019c5651f3f3f97fc8bb5890241",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "s13_complete_tree_projection": "artifacts/mvdm-audit/s13-r1335-tree-recheck.json",
+      "s13_matching_code_lines": 1431,
+      "excluded_arms": 11,
+      "compiler_contexts": [
+        255
+      ],
+      "compiler_unique_original_lines_seen": 327,
+      "local_diff_review": "Complete original/current diff reviewed; Registered bounded DTA leases, DOS find restart hints and current-PDB access; original DBG bodies excluded."
+    }
+  ]
+}

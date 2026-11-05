@@ -1,0 +1,56 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/dpmi32/xmem.c",
+      "current_sha256": "14d221508789b51e026bd93e2b75669424d4eef0866fd8cea76b4c68d88d2220",
+      "original_sha256": "50babb31bcd739318e189e88567ed27d6c89af908b8b590bbeb3e8f1377d13d5",
+      "s13_tree_projection": "artifacts/mvdm-audit/s13-r1335-tree-recheck.json",
+      "s13_matching_code_lines": 162,
+      "excluded_arms": 5,
+      "compiler_contexts": [
+        288
+      ],
+      "compiler_unique_original_lines_seen": 41,
+      "local_diff_review": "Complete original/current diff reviewed; DIV-272 corrects BOOL provider status; DBG paths excluded."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.c",
+      "current_sha256": "91fee998cf775d7aa16ff36921d0711485dc9a3a26a578b5ac59374106e5c8c7",
+      "original_sha256": "5713c9351942c0c4dddb00d9ef337abf2974d3236e9aea169117d0a38fe0ad49",
+      "s13_tree_projection": "artifacts/mvdm-audit/s13-r1335-tree-recheck.json",
+      "s13_matching_code_lines": 335,
+      "excluded_arms": 3,
+      "compiler_contexts": [
+        45
+      ],
+      "compiler_unique_original_lines_seen": 45,
+      "local_diff_review": "Complete original/current diff reviewed; DIV-282 publishes the original task-switch T-bit debug event; PIG and literal-zero arms excluded."
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/environ.c",
+      "current_sha256": "ea3a19b4cda1177297e2ec5d60d03bdc737aa38773698e81ed8755f6d5c67cf1",
+      "original_sha256": "6c67b0c09c40e9186ce28a735221634bade1d9402be085d965223092aa7d4f00",
+      "s13_tree_projection": "artifacts/mvdm-audit/s13-r1337-tree-recheck.json",
+      "s13_matching_code_lines": 464,
+      "excluded_arms": 2,
+      "compiler_contexts": [
+        408
+      ],
+      "compiler_unique_original_lines_seen": 66,
+      "local_diff_review": "Complete original/current diff reviewed; Original environment implementation retained with selected header binding; debug and alternate branches excluded."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxrare.c",
+      "current_sha256": "4386d23269e920e2e883cd86f8136a495e8de79a9e6cb8b0f7faa36b82ce3796",
+      "original_sha256": "e8914f4761ade70a1a7357b5dc8c17744ce1bc49379d03a99470f815ef85f64d",
+      "s13_tree_projection": "artifacts/mvdm-audit/s13-r1337-tree-recheck.json",
+      "s13_matching_code_lines": 381,
+      "excluded_arms": 1,
+      "compiler_contexts": [
+        611
+      ],
+      "compiler_unique_original_lines_seen": 129,
+      "local_diff_review": "Complete original/current diff reviewed; OPENNT-HOST-125 handles public HeapFree success; NEVER branch excluded."
+    }
+  ]
+}

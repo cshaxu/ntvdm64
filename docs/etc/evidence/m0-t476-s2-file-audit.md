@@ -251,3 +251,18 @@ The [three source reviews](../../../artifacts/mvdm-audit/t476-s2-batch2-source-r
 ### Completed probe and native declaration subset reviews
 
 The [three subset reviews](../../../artifacts/mvdm-audit/t476-s2-batch2-sdk-reviews.json) complete `probe.c`, `ntexapi.h` and `ntpsapi.h`. They record the original condition structures and S1 arm dispositions, exact selected declaration/compiler lines, registered selected subsets and the specific omitted NT4 function or declaration groups. Empty frames correspond to removed code outside those subsets; they are not claimed to reproduce the omitted functionality. The two original `NtGetTickCount` variants were distinguished by their actual branches. All ten files in the second source batch are now reviewed; total: **803 of 1,055 complete; 252 open**.
+
+
+### Completed WOW communication header review
+
+The [WOW communication header review](../../../artifacts/mvdm-audit/t476-s2-wowcomm-final-review.json) completes `wowcomm.h`. Apart from the S1 `#error` replacing the unhit `UNALIGNED` fallback on the same physical line, all original and current lines are identical after CRLF normalization. The enclosing guard was hit and actual compiler observations agree; no `#line` continuation adjustment is needed. Total: **804 of 1,055 complete; 251 open**.
+
+
+### Completed DEM excluded-branch reviews
+
+The [four DEM file reviews](../../../artifacts/mvdm-audit/t476-s2-dem-excluded-final-review.json) complete `dem.c`, `demfile.c`, `demhndl.c` and `demsrch.c`. Each binds the entire original/current excluded-branch tree and matching-code projection to both source hashes, checks the complete local diff and registered adaptations, and corroborates the result against selected compiler observations. This proves the stated conditional and line checks, not unrelated runtime behavior. Total: **808 of 1,055 complete; 247 open**.
+
+
+### Additional excluded-branch reviews
+
+The [four file reviews](../../../artifacts/mvdm-audit/t476-s2-excluded-four-final-review.json) complete `xmem.c`, `c_tsksw.c`, `environ.c` and `lboxrare.c` using hash-matched full original conditional-tree and selected-code line evidence, the complete local diffs and recorded compiler observations. `wuman.c` remains open because the older tree evidence does not match its current source hash. Total: **812 of 1,055 complete; 243 open**.
