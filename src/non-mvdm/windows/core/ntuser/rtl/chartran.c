@@ -177,6 +177,7 @@ VOID RtlInitLargeUnicodeString(
 *  1993-01-07 IanJa      fix memory leak on error case.
 \***************************************************************************/
 
+#line 49
 int
 WCSToMBEx(
     WORD wCodePage,

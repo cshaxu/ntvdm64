@@ -1675,6 +1675,7 @@ DESCRIPTION	:
 ========================================================================
 */
 
+#line 1908
 LOCAL VOID
 patch_one_page_partial IFN4( sys_addr, intel_addr, sys_addr, eff_addr,
 			MM_LIM_op_type, type, ULONG, data )
@@ -1699,6 +1700,7 @@ patch_one_page_partial IFN4( sys_addr, intel_addr, sys_addr, eff_addr,
 			break;
 	}
 
+#line 1930
 	sas_overwrite_memory( eff_addr, check_len );
 }
 

@@ -21,7 +21,7 @@
 #error T476-S1: branch not selected by product build
 
 #line 23
-#error Excluded unsupported original MIPS/Alpha UNALIGNED fallback
+
 
 #line 25
 

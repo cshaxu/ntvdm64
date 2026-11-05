@@ -930,7 +930,7 @@ typedef UINT PIFWIZERR;
 
 
 #line 985
-#error DIVERGENCE OPENNT-HOST-133: PIF_PROPERTY_SHEETS branch is not selected; see mirror register.
+
 
 #line 994
 

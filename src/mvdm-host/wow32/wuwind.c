@@ -2817,6 +2817,7 @@ ULONG FASTCALL WU32SetWindowText(PVDMFRAME pFrame)
     } __finally {
         error = GetLastError();
         if (mapped) DeleteParamMap(text16, PARAM_16, NULL);
+#line 2764
         FREEPSZPTR(psz2);
         FREEARGPTR(parg16);
         SetLastError(error);

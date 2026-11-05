@@ -39,6 +39,7 @@ int gcWheelDelta;
 #line 36
 WCHAR awchSlashStar[] = L"\\*";
 CHAR achSlashStar[] = "\\*";
+#line 52
 WCHAR szOneChar[] = TEXT("0");
 WCHAR szSLASHSTARDOTSTAR[] = TEXT("\\*");
 

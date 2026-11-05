@@ -223,7 +223,7 @@ conditional and the selected external declaration. Source range and body
 hash are in `../../artifacts/mvdm-audit/s12-dlcio.jsonl`.
 
 OPENNT-HOST-133: replace unselected CDEBUG, SYSMODALWINDOWS,
-MEMPHIS_MENU_WATERMARKS, PIF_PROPERTY_SHEETS and UNDO_CLEANUP branches with
+MEMPHIS_MENU_WATERMARKS and UNDO_CLEANUP branches with
 markers, retaining conditionals. Their source ranges and hashes are in
 `../../artifacts/mvdm-audit/s12-nonmvdm-features.jsonl`.
 

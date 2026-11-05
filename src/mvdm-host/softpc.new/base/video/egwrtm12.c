@@ -357,6 +357,7 @@ ega_mode1_chn_w_write IFN2(ULONG, value, ULONG, offset )
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
 
+#line 654
 VOID
 ega_mode2_chn_b_write IFN2(ULONG, value, ULONG, offset )
 {

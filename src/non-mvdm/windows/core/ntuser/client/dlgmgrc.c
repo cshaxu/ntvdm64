@@ -65,6 +65,7 @@ PWND UT_NextGroupItem(
     return pwndNext;
 }
 
+#line 427
 PWND _GetNextDlgGroupItem(
     PWND pwndDlg,
     PWND pwnd,

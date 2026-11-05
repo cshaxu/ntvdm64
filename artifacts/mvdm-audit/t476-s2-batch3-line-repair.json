@@ -1,0 +1,294 @@
+{
+  "scope": "Ten host mirror source files; remove redundant nested errors and restore line positions. Guest untouched. Full file completion remains separately pending.",
+  "files": [
+    {
+      "path": "src/mvdm-host/inc/wowfax.h",
+      "before_sha256": "32ec0264635999a628d674b92a57cf6807323bc5e2b6cf52b25d65206e2336cb",
+      "after_sha256": "d69b551c2389ebe9f07d07a6e9b9072ba106e904aa4425a99b0313e177c114bc",
+      "original_sha256": "97c6c40dc2d0565a21dc1be4112fe24f138b10ddbb55fbd29e55da972a2a2c84",
+      "contexts": [
+        550
+      ],
+      "previous_compiler_mismatch_candidates": 77,
+      "matched_at_original_line": 77
+    },
+    {
+      "path": "src/mvdm-host/inc/wowinfo.h",
+      "before_sha256": "0809d1a4c26b21930c99ecb570d2eabe938a7db39e19deefa797b92bf50c8629",
+      "after_sha256": "e577d1884d282e6383e9f58928a76b12fc61eeb973c355fb89211fd060bb3a21",
+      "original_sha256": "a0a125eedf4138d353fea1f97316331fd5a8acfb82dbd80d7abfe5dedf350026",
+      "contexts": [
+        568,
+        550
+      ],
+      "previous_compiler_mismatch_candidates": 0,
+      "matched_at_original_line": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "before_sha256": "7727b221f713bcde5589f02be3a523cfb23feb778b46a56759e72b092abc293a",
+      "after_sha256": "f6ee41123d29fc02d6c9403b83547ddea97d5f5361743022296f5d8037c89e64",
+      "original_sha256": "224f6bdf5cfa15a37d95f97e24c30d37d947d5f7f5199d50aeab65b39d150c55",
+      "contexts": [
+        264
+      ],
+      "previous_compiler_mismatch_candidates": 0,
+      "matched_at_original_line": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "before_sha256": "07775984ef3fe7e1e362423caa18ee91cb71e46a28021be27680933718f98436",
+      "after_sha256": "f220e7bc12ac91cb614d1122645a7de4c697ca516694142ba367423b958f810a",
+      "original_sha256": "fd73ce7181f7dfb61432d63466c7641c3d010ca0c60bf446666b6c0118ddb8a9",
+      "contexts": [
+        241
+      ],
+      "previous_compiler_mismatch_candidates": 15,
+      "matched_at_original_line": 15
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "before_sha256": "151646a7b9ba9319b6ce683f7c49c899168fe94d0f97721b12b64430c83f4b0a",
+      "after_sha256": "171ee799e7ad006a106bfede7714bfb8d78724ccafaf983273a1e3403ff30d71",
+      "original_sha256": "826aa1a6f685f7dc0d8b4362f3eb83899697d8a6e2a555739ff61e2388d254a1",
+      "contexts": [
+        193
+      ],
+      "previous_compiler_mismatch_candidates": 29,
+      "matched_at_original_line": 29
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "before_sha256": "e9c3dc8ac2f6453d970869ef2e5007a50d914652cc615177110ccfe3ac90ab98",
+      "after_sha256": "ed2559bf93da5964d35de20fe2aed18e009810561f0b59d111778fc8b155de27",
+      "original_sha256": "678d2cd4b79a15a79e6c0257b4bd93ad69fa7be95a513b627565490256cb1afc",
+      "contexts": [
+        616
+      ],
+      "previous_compiler_mismatch_candidates": 7,
+      "matched_at_original_line": 7
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "before_sha256": "de94ce38c9cd095af7535c3c957ab30a49acc56b5b5500dad592d250ebc02c9d",
+      "after_sha256": "24d007d177d4b326e5e60614daa2aaf70c7f0b6763bf644e31c8f1c63864afb9",
+      "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+      "contexts": [
+        739
+      ],
+      "previous_compiler_mismatch_candidates": 4,
+      "matched_at_original_line": 4
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "before_sha256": "a745afa2eb4179290b1db7c60c401f4874abf4b8de42bd0ffbcc18912aedf66c",
+      "after_sha256": "7937b35a43a66aad18e888b50cabf24c25ac9d2f10a88e340877e2480deaa23d",
+      "original_sha256": "ab270e2669cfd383da4baac471bb63e7c9c603581f4f7592ad447e8a783953dc",
+      "contexts": [
+        568
+      ],
+      "previous_compiler_mismatch_candidates": 0,
+      "matched_at_original_line": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "before_sha256": "9b2713753efec2cd80c7d9cb25a283702169c66ea5c42b2837be8530964a3de2",
+      "after_sha256": "8814fe1cef49b3914c612703f4b136c41d8b9f73ab2e1f083018dadcd6242217",
+      "original_sha256": "171ef0b7cd668cf51db86d9ae2fea4269cc002f0aba17033bf968d84c10f0f3d",
+      "contexts": [
+        655
+      ],
+      "previous_compiler_mismatch_candidates": 0,
+      "matched_at_original_line": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+      "before_sha256": "99fa1a275ea559b9630ed0798423ab9fddc739af121c7685bab01f8470ca1ecf",
+      "after_sha256": "0e072d983c0b8f233acb472248ed6b49c2060efbf7676f5a8e23d978eca7f931",
+      "original_sha256": "d8fe5a80d5848f2951843d7ba94752cb3223945a48630350835422389cd1da6f",
+      "contexts": [
+        630
+      ],
+      "previous_compiler_mismatch_candidates": 0,
+      "matched_at_original_line": 0
+    }
+  ],
+  "preprocessor_contexts": [
+    241,
+    568,
+    739,
+    264,
+    193,
+    655,
+    630,
+    550,
+    616
+  ],
+  "preprocessor_exit_codes": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "outer_exclusion_verifier": "30 passed in 15 files",
+  "cached_build": "x86 product, worker, wow32 and x64 product passed",
+  "release_comparison": [
+    {
+      "name": "run16.exe",
+      "old_sha256": "0a3e67504fec93eb6c89b8f89c560a8a2e201b0ed15efdfe3f2778c7522eb05a",
+      "new_sha256": "0a3e67504fec93eb6c89b8f89c560a8a2e201b0ed15efdfe3f2778c7522eb05a",
+      "old_size": 306176,
+      "new_size": 306176,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "first_offsets": [],
+      "timestamp_field_offsets": [
+        264,
+        209540
+      ]
+    },
+    {
+      "name": "ntsrv.exe",
+      "old_sha256": "d6c3005c28cb0d02984866f144cc8b3c5f5de6be9c9c2f250fff3d37e8cdd609",
+      "new_sha256": "d6c3005c28cb0d02984866f144cc8b3c5f5de6be9c9c2f250fff3d37e8cdd609",
+      "old_size": 400384,
+      "new_size": 400384,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "first_offsets": [],
+      "timestamp_field_offsets": [
+        248,
+        290436
+      ]
+    },
+    {
+      "name": "ntcon.exe",
+      "old_sha256": "9faf706da2901ca65a638d7a0da9d1d474b10c59f59edfc852d49d63a2aa99b7",
+      "new_sha256": "9faf706da2901ca65a638d7a0da9d1d474b10c59f59edfc852d49d63a2aa99b7",
+      "old_size": 352256,
+      "new_size": 352256,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "first_offsets": [],
+      "timestamp_field_offsets": [
+        264,
+        246004
+      ]
+    },
+    {
+      "name": "ntvdm.exe",
+      "old_sha256": "ce703d95358e7ec83adb6eb72610cf5ffcd9db81a763f1d3b419a36886d03989",
+      "new_sha256": "7a6f23f17ff0080e6945fedbb5d65341c4f213d32c4c9a20816e10824d3fa437",
+      "old_size": 2094080,
+      "new_size": 2094080,
+      "difference_count": 4,
+      "timestamp_only": true,
+      "first_offsets": [
+        288,
+        289,
+        1695252,
+        1695253
+      ],
+      "timestamp_field_offsets": [
+        288,
+        1695252
+      ]
+    },
+    {
+      "name": "ntvwm.exe",
+      "old_sha256": "36086cfa5c6a0efecb0cbd6d0a28d05a773c4f850d5e9a8615203fdc22354c57",
+      "new_sha256": "36086cfa5c6a0efecb0cbd6d0a28d05a773c4f850d5e9a8615203fdc22354c57",
+      "old_size": 323584,
+      "new_size": 323584,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "first_offsets": [],
+      "timestamp_field_offsets": [
+        248,
+        223812
+      ]
+    },
+    {
+      "name": "ntmon.exe",
+      "old_sha256": "d1c124173c69da6bf44e8f86a11efdb37e1e15d10ffd45ba29e33f78c3e1bfda",
+      "new_sha256": "d1c124173c69da6bf44e8f86a11efdb37e1e15d10ffd45ba29e33f78c3e1bfda",
+      "old_size": 167936,
+      "new_size": 167936,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "first_offsets": [],
+      "timestamp_field_offsets": [
+        248,
+        146260
+      ]
+    },
+    {
+      "name": "WOW32.DLL",
+      "old_sha256": "5e3be5eb6fb8949067cbb3c35d2579a5f0deca02865e23e6adefc41952e5eaaa",
+      "new_sha256": "3d605db739543093fd5593037e7ded9ac6cdaadea0bd9fb2807203ed148abe5c",
+      "old_size": 712192,
+      "new_size": 712192,
+      "difference_count": 4,
+      "timestamp_only": true,
+      "first_offsets": [
+        280,
+        281,
+        625412,
+        625413
+      ],
+      "timestamp_field_offsets": [
+        280,
+        625412
+      ]
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "old_sha256": "bd3f123454c5c205f165906cecbe9bb207c2bae3d8537bd2c6d7d76af895a2b5",
+      "new_sha256": "bd3f123454c5c205f165906cecbe9bb207c2bae3d8537bd2c6d7d76af895a2b5",
+      "old_size": 208896,
+      "new_size": 208896,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "first_offsets": [],
+      "timestamp_field_offsets": [
+        280,
+        125108
+      ]
+    },
+    {
+      "name": "nthook32.dll",
+      "old_sha256": "4dfc6a769a9b56149e74450b33856a991312230c414e67314687a3cdad0255d2",
+      "new_sha256": "4dfc6a769a9b56149e74450b33856a991312230c414e67314687a3cdad0255d2",
+      "old_size": 215040,
+      "new_size": 215040,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "first_offsets": [],
+      "timestamp_field_offsets": [
+        272,
+        133348
+      ]
+    },
+    {
+      "name": "nthook64.dll",
+      "old_sha256": "544c2270858ac062f8b789c5307d53a822da1d4c2e131d28dd17848c0ecbe10e",
+      "new_sha256": "544c2270858ac062f8b789c5307d53a822da1d4c2e131d28dd17848c0ecbe10e",
+      "old_size": 259584,
+      "new_size": 259584,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "first_offsets": [],
+      "timestamp_field_offsets": [
+        272,
+        166468
+      ]
+    }
+  ],
+  "release": "Ten components and nthook license staged and SHA256 verified in assets/release and O:/winnt/system32.",
+  "tests": "Product regressions not rerun under owner-approved exemption: all image byte differences are confined to COFF and PE debug-directory timestamp fields. This does not prove complete per-file review."
+}

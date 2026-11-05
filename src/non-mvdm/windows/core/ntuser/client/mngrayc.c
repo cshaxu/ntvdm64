@@ -434,6 +434,7 @@ DrawNormal:
 CDS_Leave:
     ; /* DIVERGENCE(OPENNT-HOST-116): label precedes the try-block end. */
     } __finally {
+#line 487
         RtlLeaveCriticalSection(&gcsHdc);
     }
 

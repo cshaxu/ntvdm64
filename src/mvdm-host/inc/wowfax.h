@@ -91,7 +91,7 @@
 
 
 #line 93
-#error Excluded unsupported original MIPS/Alpha UNALIGNED fallback
+
 
 #line 95
 
@@ -103,6 +103,7 @@
 
 
 #endif       // defined(wowfax16)
+#line 102
 
 //***************************************************************************
 // WOWFAXINFO16  common to wow16 and wow32
