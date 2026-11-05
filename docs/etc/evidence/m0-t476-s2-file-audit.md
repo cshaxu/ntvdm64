@@ -241,4 +241,3 @@ The prior temporary S1 worktree had been removed, so the first reconstruction at
 The [ten-component comparison](../../../artifacts/mvdm-audit/t476-s2-batch2-pe-comparison.json) found eight byte-identical images and only COFF/debug timestamp changes in NTVDM and WOW32. As authorized, runtime tests were not repeated. The complete package and hook license were published and SHA-256 verified at `assets/release` and `O:/winnt/system32`; the previous package is backed up under `build/t476-s2/batch2-publish-backup`.
 
 The [four completed header reviews](../../../artifacts/mvdm-audit/t476-s2-batch2-final-reviews.json) cover `wowmmcb.h`, `cfpu_def.h`, `nt_inthk.h` and `client/globals.h`, with original condition inventories, observed arm dispositions, candidate hashes and compiler observations. The other six candidates are built and published but remain open for full-file review. Total: **797 of 1,055 complete; 258 open**.
-
