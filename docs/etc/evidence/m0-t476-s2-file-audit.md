@@ -73,3 +73,7 @@ The current partition is 180 byte-identical, 130 condition-free equivalent, four
 ## Generator-only metadata
 
 The [generator-input review](../../../artifacts/mvdm-audit/t476-s2-generator-input-review.json) completes `c2cpusad.h`: original and current bytes are identical after CRLF normalization, neither has conditional groups, and the production generator uses the metadata. The C-VID contract audit and actual NTVDM link map passed for 154 public and 55 private slots. Its old test had expected removed CPU30 code and ignored an allowed line directive; the test now checks CPU30 exclusion and accepts the line directive. This is a test-only fix. The running partition is 429 complete and 626 open.
+
+## Directive-only files
+
+The [directive-only review](../../../artifacts/mvdm-audit/t476-s2-directive-only-review.json) completes 22 more headers. They contain no conditional groups or non-directive source; their original and current directive sequences and logical positions match, their earlier per-file review is bound by both hashes, and the compiler file marker was observed. There were no unique executable source lines to compare in those files, so this is source/directive-line evidence plus actual inclusion evidence, not a claim of emitted-line sampling. The current partition is 451 complete and 604 open. No source was modified.

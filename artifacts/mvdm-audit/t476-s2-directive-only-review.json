@@ -1,0 +1,203 @@
+{
+  "method": "no condition groups or non-directive code; all original/current directives and logical positions equal; original/current hashes match prior file-level review and compiler file marker was observed; no executable source lines emitted in unique-line sample",
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdkeyb.h",
+      "current_sha256": "cd43059df3242720f3de6ac7e7ddec219ebdd10d69f719e4207a9d766da0ddc6",
+      "original_sha256": "b83738295ed02d762748eef550058332078ce24b94ed76fd1a77c2eb8f77a361",
+      "original_current_directives_and_logical_lines": "identical",
+      "compiler_file_marker_seen": true,
+      "prior_evidence": "s13-r1327-condition-free-code-review.json",
+      "emitted_unique_source_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demmsg.h",
+      "current_sha256": "05233aa69beefb51c17cbe60c6c321251ffa332c792034c6ac14b72773399aa7",
+      "original_sha256": "de14973d8c9a5ee9e76111c52b687f30321955eef623b79a01345cdd78942e43",
+      "original_current_directives_and_logical_lines": "identical",
+      "compiler_file_marker_seen": true,
+      "prior_evidence": "s13-r1327-condition-free-code-review.json",
+      "emitted_unique_source_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/precomp.h",
+      "current_sha256": "ef706555039d9dc1373362c6c1de5342f968c3ee0cff96988994c5caaaa9fa70",
+      "original_sha256": "f3111325cdff8671464b6c457d7b04e3f666282df638d200908a57af2cc6491e",
+      "original_current_directives_and_logical_lines": "identical",
+      "compiler_file_marker_seen": true,
+      "prior_evidence": "s13-r1327-condition-free-code-review.json",
+      "emitted_unique_source_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/xlathlp.h",
+      "current_sha256": "9ba5fce186bbba1d55e3c68710c22e24f2726734f4129388e941311d27cf9d3f",
+      "original_sha256": "e6fccd865a2701e58536f69381525a41f89007c22cb8866d21039e5e457df431",
+      "original_current_directives_and_logical_lines": "identical",
+      "compiler_file_marker_seen": true,
+      "prior_evidence": "s13-r1327-condition-free-code-review.json",
+      "emitted_unique_source_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/bop.h",
+      "current_sha256": "a1926ed2af9198fc9b9315de3d6cfb2a695cc2e4c2a0c42025a75ef40100271c",
+      "original_sha256": "7b16c577f3c478ac0df9e982d727a1469352727d970b5889688880026cce97a0",
+      "original_current_directives_and_logical_lines": "identical",
+      "compiler_file_marker_seen": true,
+      "prior_evidence": "s13-r1327-condition-free-code-review.json",
+      "emitted_unique_source_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/exterr.h",
+      "current_sha256": "fff619ee99bc3cd302756f5bb3085222f8a80d8b2cb7033dad3cd2a95e738a9b",
+      "original_sha256": "b2ac4a77324abed1774e2cd8f2a88276e45b63f2321ba4579b499f36846aeb54",
+      "original_current_directives_and_logical_lines": "identical",
+      "compiler_file_marker_seen": true,
+      "prior_evidence": "s13-r1327-condition-free-code-review.json",
+      "emitted_unique_source_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/rdrsvc.h",
+      "current_sha256": "9b2c649bdc248661554b67efbe5d5de24c9c6f1a25cdb4ecd809d463930681a6",
+      "original_sha256": "c8bc9db22634adb5e3dc85d30f721e602ff1c6a28221958587d0804f8e96e45e",
+      "original_current_directives_and_logical_lines": "identical",
+      "compiler_file_marker_seen": true,
+      "prior_evidence": "s13-r1327-condition-free-code-review.json",
+      "emitted_unique_source_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/vint.h",
+      "current_sha256": "db4cf3c07ad5989dc15b979f353b2e917bdadfa07eb2aa630ac8555ad9672aa9",
+      "original_sha256": "e88cc5f8624a4a899095a4f1794c697754c71aeb7e480d20d51fd6a976d612d1",
+      "original_current_directives_and_logical_lines": "identical",
+      "compiler_file_marker_seen": true,
+      "prior_evidence": "s13-r1327-condition-free-code-review.json",
+      "emitted_unique_source_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/wowcmpat.h",
+      "current_sha256": "9856b8d1ead162cd9bf89ed2b6f201c9fc82a6ac4ba6a7196bf54c56376952f7",
+      "original_sha256": "0d0bab4df27031fdc35a39e7d3eb704b7f77ec25d981a215e30fb218aac9ee92",
+      "original_current_directives_and_logical_lines": "identical",
+      "compiler_file_marker_seen": true,
+      "prior_evidence": "s13-r1327-condition-free-code-review.json",
+      "emitted_unique_source_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/oemuni/oem.h",
+      "current_sha256": "e08155e3afde8fde6b8af8f499476846ba7104e16d95c8e3e0b69aa81101e4f2",
+      "original_sha256": "a3add27675252cdd72e413de9e897a123adf2f426d292cd0b252cb389a23f91a",
+      "original_current_directives_and_logical_lines": "identical",
+      "compiler_file_marker_seen": true,
+      "prior_evidence": "s13-r1327-condition-free-code-review.json",
+      "emitted_unique_source_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fault.h",
+      "current_sha256": "ea199c0cb1cb99540af3408a29ca6d5c32a0eded3f0a84f2d98d6bf92b61c911",
+      "original_sha256": "120771ed9eaba525f18ac81d62b0e868d4655a4071db1d8e48c8a7561924169f",
+      "original_current_directives_and_logical_lines": "identical",
+      "compiler_file_marker_seen": true,
+      "prior_evidence": "s13-r1327-condition-free-code-review.json",
+      "emitted_unique_source_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/build_id.h",
+      "current_sha256": "6b140e5550335468ba615ea7f911da2b425bc2c7a1b467ea9260c5920ca8e970",
+      "original_sha256": "72c5484bf3eecc5a6c8a98c64e256c7a4d98e06c3a6172c8d9638be64b6dc3e6",
+      "original_current_directives_and_logical_lines": "identical",
+      "compiler_file_marker_seen": true,
+      "prior_evidence": "s13-r1327-condition-free-code-review.json",
+      "emitted_unique_source_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/chkmallc.h",
+      "current_sha256": "7a260e4ffcc83b12ca51a92c5581c0e56566fcfcdab3f41a3857187d728df049",
+      "original_sha256": "a73066eace8bb5104696355c34d741205779cb53472595b58812798210d513e7",
+      "original_current_directives_and_logical_lines": "identical",
+      "compiler_file_marker_seen": true,
+      "prior_evidence": "s13-r1327-condition-free-code-review.json",
+      "emitted_unique_source_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_trc.h",
+      "current_sha256": "88e86923698a2cd60bf3aa598811082ac2f6d6e87acd05cfa68323c61380c762",
+      "original_sha256": "81c80fa61476745303c3cc7753c85ca876f2b33e269aca8d96db779135f7791f",
+      "original_current_directives_and_logical_lines": "identical",
+      "compiler_file_marker_seen": true,
+      "prior_evidence": "s13-r1327-condition-free-code-review.json",
+      "emitted_unique_source_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_cga.h",
+      "current_sha256": "f4f3cbb510975edfc3de23d513f6c25568d52865bfc9ba51bb262323d875a59e",
+      "original_sha256": "8e92a1b59d9737f1753ccba9f22d17af6c6a3dd2f518a414957123afb69ce57e",
+      "original_current_directives_and_logical_lines": "identical",
+      "compiler_file_marker_seen": true,
+      "prior_evidence": "s13-r1327-condition-free-code-review.json",
+      "emitted_unique_source_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_ega.h",
+      "current_sha256": "5681131039a17c68b93adcd73e61e4092166581ab3846c7772d6b63254c36cdb",
+      "original_sha256": "d60c53fef1c7403cfb534c45bae48a9524ea4dd218adc48b68f7183b35461e7e",
+      "original_current_directives_and_logical_lines": "identical",
+      "compiler_file_marker_seen": true,
+      "prior_evidence": "s13-r1327-condition-free-code-review.json",
+      "emitted_unique_source_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/base/win32/inc/basevdm.h",
+      "current_sha256": "3e0e4ded69bb430ceaa0b057103ff68e0b2b5fc8dffe3d4898cf7ab8430f2eaf",
+      "original_sha256": "d0f0fd38ba8458e438cb9ee405f43a4fc9897bf0972d31bbdd59a1b15181d093",
+      "original_current_directives_and_logical_lines": "identical",
+      "compiler_file_marker_seen": true,
+      "prior_evidence": "s13-r1327-condition-free-code-review.json",
+      "emitted_unique_source_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/wkstadef.h",
+      "current_sha256": "79b7d37e93d0f1d650cdc0d88becc0b960740e9e5c22f5c7e9ec9f32d1d3f97f",
+      "original_sha256": "4f3bacc8b97586e3f0a32e6738480335382a6876d552598b9b900546480eb7b4",
+      "original_current_directives_and_logical_lines": "identical",
+      "compiler_file_marker_seen": true,
+      "prior_evidence": "s13-r1327-condition-free-code-review.json",
+      "emitted_unique_source_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntdddlc.h",
+      "current_sha256": "37ef574eeb47ceea14a898b7c35b2f9360660e6778ab1126cbb7f480ffa9247e",
+      "original_sha256": "a2fea077682752262c6ad78a1119aad6cb60f816cf14c8c68f05aa9e281d8077",
+      "original_current_directives_and_logical_lines": "identical",
+      "compiler_file_marker_seen": true,
+      "prior_evidence": "s13-r1327-condition-free-code-review.json",
+      "emitted_unique_source_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/ntddvdm.h",
+      "current_sha256": "80632e1f59e55d749fd7ed17f32632835364937cee329b792bb85e154e67eba3",
+      "original_sha256": "331d0c96dfbeae77768b1d6d8b6a65a2207135bc18c5a3c8ecd26835f10fe780",
+      "original_current_directives_and_logical_lines": "identical",
+      "compiler_file_marker_seen": true,
+      "prior_evidence": "s13-r1327-condition-free-code-review.json",
+      "emitted_unique_source_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/winss.h",
+      "current_sha256": "928a7c46ca17af942fc9f20d28bef66088e49dac950d6d605af711bed112a780",
+      "original_sha256": "3e6308c51d093958c8698e47612ba65f59278bae3f05276dffb02d9232f08d48",
+      "original_current_directives_and_logical_lines": "identical",
+      "compiler_file_marker_seen": true,
+      "prior_evidence": "s13-r1327-condition-free-code-review.json",
+      "emitted_unique_source_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/apinums.h",
+      "current_sha256": "1c8148b6b4becde82dba2604c9a34e7d09b8a3c2ac9e59981183fae270b368f7",
+      "original_sha256": "bed7ba3bb424fcfaf7d9b498c7f298f1563bd7abaa1c0198aa8cf10dce54d0e6",
+      "original_current_directives_and_logical_lines": "identical",
+      "compiler_file_marker_seen": true,
+      "prior_evidence": "s13-r1327-condition-free-code-review.json",
+      "emitted_unique_source_lines": 0
+    }
+  ]
+}
