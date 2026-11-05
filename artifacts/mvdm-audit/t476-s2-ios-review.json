@@ -1,0 +1,946 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+  "current_sha256": "632ca3bb954bf38a7537051f46590e73dd8479a17dfb3b8cf6be887d3f944add",
+  "original_sha256": "e4f39908ff9534adde52e46def732a93790ac48f2bb481590622c537c2f3b205",
+  "prior_sha256": "a79efd4d687d5edc476974f7593c1356c5cd663d9d9e75ccfdaa7fe0b034e4f4",
+  "prior_full_original_tree_review": "s13-r1175-ios-full-file.json",
+  "intervening_change": "Only #line 72 inserted before the retained original adapter table declarations.",
+  "original_conditional_arms": 59,
+  "matched_original_arms": {
+    "0": 0,
+    "1": 1,
+    "2": 2,
+    "3": 3,
+    "4": 4,
+    "5": 5,
+    "6": 6,
+    "7": 7,
+    "8": 8,
+    "9": 9,
+    "10": 10,
+    "11": 11,
+    "12": 12,
+    "13": 13,
+    "14": 14,
+    "15": 15,
+    "16": 16,
+    "17": 17,
+    "18": 18,
+    "19": 19,
+    "20": 20,
+    "21": 21,
+    "22": 22,
+    "23": 25,
+    "24": 26,
+    "25": 27,
+    "26": 28,
+    "27": 29,
+    "28": 30,
+    "29": 31,
+    "30": 32,
+    "31": 33,
+    "32": 34,
+    "33": 35,
+    "34": 36,
+    "35": 37,
+    "36": 38,
+    "37": 39,
+    "38": 40,
+    "39": 41,
+    "40": 42,
+    "41": 43,
+    "42": 44,
+    "43": 45,
+    "44": 46,
+    "45": 47,
+    "46": 48,
+    "47": 49,
+    "48": 50,
+    "49": 51,
+    "50": 52,
+    "51": 53,
+    "52": 54,
+    "53": 55,
+    "54": 56,
+    "55": 57,
+    "56": 58,
+    "57": 59,
+    "58": 60
+  },
+  "nested_excluded_arms": [],
+  "arm_observations": [
+    {
+      "file": 553,
+      "index": 0,
+      "line": 18,
+      "directive": "ifdef",
+      "expression": "SEGMENTATION",
+      "parent": null,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 1,
+      "line": 38,
+      "directive": "if",
+      "expression": "defined(SPC386) && !defined(GISP_CPU)",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 2,
+      "line": 42,
+      "directive": "ifdef",
+      "expression": "NTVDM",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 3,
+      "line": 65,
+      "directive": "ifdef",
+      "expression": "MAC68K",
+      "parent": null,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 4,
+      "line": 68,
+      "directive": "else",
+      "expression": "",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 5,
+      "line": 74,
+      "directive": "ifndef",
+      "expression": "PROD",
+      "parent": null,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 6,
+      "line": 93,
+      "directive": "ifdef",
+      "expression": "SPC386",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 7,
+      "line": 106,
+      "directive": "ifdef",
+      "expression": "SPC386",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 8,
+      "line": 123,
+      "directive": "ifdef",
+      "expression": "SPC386",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 9,
+      "line": 159,
+      "directive": "ifdef",
+      "expression": "PROD",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 10,
+      "line": 162,
+      "directive": "else",
+      "expression": "",
+      "parent": null,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 11,
+      "line": 181,
+      "directive": "ifdef",
+      "expression": "PROD",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 12,
+      "line": 183,
+      "directive": "else",
+      "expression": "",
+      "parent": null,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 13,
+      "line": 208,
+      "directive": "ifdef",
+      "expression": "LITTLEND",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 14,
+      "line": 214,
+      "directive": "ifdef",
+      "expression": "BIGEND",
+      "parent": null,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 15,
+      "line": 242,
+      "directive": "ifdef",
+      "expression": "SPC386",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 16,
+      "line": 258,
+      "directive": "ifdef",
+      "expression": "LITTLEND",
+      "parent": 15,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 17,
+      "line": 263,
+      "directive": "ifdef",
+      "expression": "BIGEND",
+      "parent": 15,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 18,
+      "line": 271,
+      "directive": "ifdef",
+      "expression": "SPC386",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 19,
+      "line": 304,
+      "directive": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "parent": null,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 20,
+      "line": 371,
+      "directive": "ifdef",
+      "expression": "SPC386",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 21,
+      "line": 390,
+      "directive": "ifdef",
+      "expression": "SPC386",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 22,
+      "line": 411,
+      "directive": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "parent": null,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 23,
+      "line": 414,
+      "directive": "else",
+      "expression": "",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 24,
+      "line": 415,
+      "directive": "if",
+      "expression": "defined(NTVDM) && defined(CCPU)",
+      "parent": 23,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 25,
+      "line": 474,
+      "directive": "ifdef",
+      "expression": "VIRTUALISATION",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 26,
+      "line": 478,
+      "directive": "ifdef",
+      "expression": "EGA_DUMP",
+      "parent": null,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 27,
+      "line": 484,
+      "directive": "ifdef",
+      "expression": "VIRTUALISATION",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 28,
+      "line": 486,
+      "directive": "ifdef",
+      "expression": "SYNCH_TIMERS",
+      "parent": 27,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 29,
+      "line": 518,
+      "directive": "ifdef",
+      "expression": "VIRTUALISATION",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 30,
+      "line": 522,
+      "directive": "ifdef",
+      "expression": "EGA_DUMP",
+      "parent": null,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 31,
+      "line": 530,
+      "directive": "ifdef",
+      "expression": "VIRTUALISATION",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 32,
+      "line": 556,
+      "directive": "ifdef",
+      "expression": "VIRTUALISATION",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 33,
+      "line": 560,
+      "directive": "ifdef",
+      "expression": "EGA_DUMP",
+      "parent": null,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 34,
+      "line": 566,
+      "directive": "ifdef",
+      "expression": "VIRTUALISATION",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 35,
+      "line": 568,
+      "directive": "ifdef",
+      "expression": "SYNCH_TIMERS",
+      "parent": 34,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 36,
+      "line": 599,
+      "directive": "ifdef",
+      "expression": "VIRTUALISATION",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 37,
+      "line": 603,
+      "directive": "ifdef",
+      "expression": "EGA_DUMP",
+      "parent": null,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 38,
+      "line": 611,
+      "directive": "ifdef",
+      "expression": "VIRTUALISATION",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 39,
+      "line": 625,
+      "directive": "ifdef",
+      "expression": "SPC386",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 40,
+      "line": 641,
+      "directive": "ifdef",
+      "expression": "VIRTUALISATION",
+      "parent": 39,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 41,
+      "line": 644,
+      "directive": "ifdef",
+      "expression": "SYNCH_TIMERS",
+      "parent": 40,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 42,
+      "line": 680,
+      "directive": "ifdef",
+      "expression": "VIRTUALISATION",
+      "parent": 39,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 43,
+      "line": 706,
+      "directive": "ifdef",
+      "expression": "ANSI",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 44,
+      "line": 709,
+      "directive": "else",
+      "expression": "",
+      "parent": null,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 45,
+      "line": 719,
+      "directive": "ifdef",
+      "expression": "SPC386",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 46,
+      "line": 745,
+      "directive": "ifdef",
+      "expression": "SPC386",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 47,
+      "line": 773,
+      "directive": "ifdef",
+      "expression": "SPC386",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 48,
+      "line": 800,
+      "directive": "ifdef",
+      "expression": "SPC386",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 49,
+      "line": 814,
+      "directive": "ifdef",
+      "expression": "SPC386",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 50,
+      "line": 844,
+      "directive": "ifdef",
+      "expression": "SPC386",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 51,
+      "line": 882,
+      "directive": "ifdef",
+      "expression": "NTVDM",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 52,
+      "line": 894,
+      "directive": "else",
+      "expression": "",
+      "parent": null,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 53,
+      "line": 909,
+      "directive": "ifdef",
+      "expression": "NTVDM",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 54,
+      "line": 921,
+      "directive": "else",
+      "expression": "",
+      "parent": null,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 55,
+      "line": 954,
+      "directive": "ifdef",
+      "expression": "SEGMENTATION",
+      "parent": null,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 56,
+      "line": 979,
+      "directive": "ifdef",
+      "expression": "MAC68K",
+      "parent": null,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 57,
+      "line": 985,
+      "directive": "ifndef",
+      "expression": "PROD",
+      "parent": null,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 58,
+      "line": 998,
+      "directive": "ifdef",
+      "expression": "NTVDM",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        172
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 59,
+      "line": 1001,
+      "directive": "ifndef",
+      "expression": "PROD",
+      "parent": 58,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 553,
+      "index": 60,
+      "line": 1011,
+      "directive": "ifndef",
+      "expression": "PROD",
+      "parent": 58,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    }
+  ],
+  "error_anchors": [
+    {
+      "line": 20,
+      "original_anchor": 19,
+      "directive": "#error Excluded unsupported SEGMENTATION configuration"
+    },
+    {
+      "line": 67,
+      "original_anchor": 69,
+      "directive": "#error DIVERGENCE MVDM-HOST-DIV-529: MAC68K platform branch is not selected; see mirror register."
+    },
+    {
+      "line": 76,
+      "original_anchor": 76,
+      "directive": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "line": 164,
+      "original_anchor": 163,
+      "directive": "#error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register."
+    },
+    {
+      "line": 185,
+      "original_anchor": 187,
+      "directive": "#error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register."
+    },
+    {
+      "line": 216,
+      "original_anchor": 221,
+      "directive": "#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register."
+    },
+    {
+      "line": 265,
+      "original_anchor": 269,
+      "directive": "#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register."
+    },
+    {
+      "line": 306,
+      "original_anchor": 309,
+      "directive": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+    },
+    {
+      "line": 413,
+      "original_anchor": 414,
+      "directive": "#error Excluded unsupported monitor IOS carrier"
+    },
+    {
+      "line": 480,
+      "original_anchor": 474,
+      "directive": "#error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register."
+    },
+    {
+      "line": 488,
+      "original_anchor": 481,
+      "directive": "#error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register."
+    },
+    {
+      "line": 524,
+      "original_anchor": 515,
+      "directive": "#error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register."
+    },
+    {
+      "line": 562,
+      "original_anchor": 552,
+      "directive": "#error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register."
+    },
+    {
+      "line": 570,
+      "original_anchor": 559,
+      "directive": "#error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register."
+    },
+    {
+      "line": 605,
+      "original_anchor": 592,
+      "directive": "#error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register."
+    },
+    {
+      "line": 646,
+      "original_anchor": 632,
+      "directive": "#error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register."
+    },
+    {
+      "line": 711,
+      "original_anchor": 695,
+      "directive": "#error Unsupported excluded original configuration"
+    },
+    {
+      "line": 896,
+      "original_anchor": 880,
+      "directive": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+    },
+    {
+      "line": 923,
+      "original_anchor": 914,
+      "directive": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+    },
+    {
+      "line": 956,
+      "original_anchor": 950,
+      "directive": "#error Excluded unsupported SEGMENTATION configuration"
+    },
+    {
+      "line": 981,
+      "original_anchor": 978,
+      "directive": "#error DIVERGENCE MVDM-HOST-DIV-529: MAC68K platform branch is not selected; see mirror register."
+    },
+    {
+      "line": 987,
+      "original_anchor": 985,
+      "directive": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "line": 1003,
+      "original_anchor": 1009,
+      "directive": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "line": 1013,
+      "original_anchor": 1017,
+      "directive": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    }
+  ],
+  "compiler_contexts": [
+    172
+  ],
+  "compiler_unique_line_samples": 22,
+  "static_line_leads": 0,
+  "limits": "Recorded selected contexts and line projection do not certify unobserved profiles or runtime behavior."
+}

@@ -1,0 +1,216 @@
+{
+  "method": "Ten previously reviewed host headers restored to exact pinned originals; each has no original/current conditional groups and differs from its prior marker-bound source only by CRLF.",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_intr.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_intr.h",
+      "before_sha256": "a33703b859e11615d9644d9f80bf46ef6bc30e90098dcb85a6b93058f9952ed4",
+      "after_sha256": "e672bd15baf1acf7673635d0f84e3892805e882278065a67b3e8100c7f7585d2",
+      "prior_state": "compiler-transformed-confirmed"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_mul64.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_mul64.h",
+      "before_sha256": "21382d6662688e92298215868c21bb1807439e0be73ccf41a88b8aa528b4d80a",
+      "after_sha256": "3829dbf447790d4bfcfe01858448c6a4b21e1d486f7a12502f1d6a9260c1a70e",
+      "prior_state": "compiler-transformed-confirmed"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_neg64.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_neg64.h",
+      "before_sha256": "8448aa179e9f07e6dba5637f252162db45ac0387ad1d0028bfa597146156d8d6",
+      "after_sha256": "03484d5c7e59d9a25b1e466cc78d411836f9a52e7d893a056d4842167d328d1c",
+      "prior_state": "compiler-transformed-confirmed"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_prot.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_prot.h",
+      "before_sha256": "ab0e89cf4a41d382068995a0e6c053d26df9c1bea9682f8a9785ef0f3351aa3d",
+      "after_sha256": "35474895b189c0a682f7b014698ee39e1d6954fcf8de88ebb26bb1f1628b9e19",
+      "prior_state": "compiler-transformed-confirmed"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_seg.h",
+      "before_sha256": "a727b893c33d74d237860f73ce7b8968d73fa21faeea2abc33869a5f560c7076",
+      "after_sha256": "f1ba9f11b572c9a9b496a8ae35bd79c82abd01442fe545f698da9abb70d4a04e",
+      "prior_state": "compiler-transformed-confirmed"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_tlb.h",
+      "before_sha256": "dddc04d664a5feff62fb24db3d5ddf1b41e8aecd3bea899d88e72fa5d6c7853b",
+      "after_sha256": "fbe5b60ee74699df9c44a3caa728035f92c9300cf53c4be51fb67b00565c1f36",
+      "prior_state": "compiler-transformed-confirmed"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_tsksw.h",
+      "before_sha256": "da6074ee26896114befe570285895c2f7c602cf1225ee959798a43c5c4808e09",
+      "after_sha256": "d95d976a8ade5fddc6992649cb4897e41b6b1937be08fc61eac709aa95b38635",
+      "prior_state": "compiler-transformed-confirmed"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_xcptn.h",
+      "before_sha256": "da8da98bdd6d3fbb56d9b96007f0fba93c588b466681e1af0348934c66df2c99",
+      "after_sha256": "95d1ea4929b3d24e18644849ff6592e4f901e5ccbf86225af95750476021aace",
+      "prior_state": "compiler-transformed-confirmed"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_xfer.h",
+      "before_sha256": "0db3b774cbeeddb6b4f8abfde69e56b294a4c828534dbb943f584925f9ccc729",
+      "after_sha256": "f6c8c6ea9e20ae50f80a2b78c1cd8a2dd7235d2b90ca6b92639b69d1ff5633c1",
+      "prior_state": "compiler-transformed-confirmed"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xtrn.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_xtrn.h",
+      "before_sha256": "047c3061505cede83e74ea607310adc8aec1c5fb3fb5a81c65353d3b1c2ae50a",
+      "after_sha256": "8a2481c44fb3c03c6f87b60e5c6d9c5ee2974068b0cbfb47434dbd8f1d6de71d",
+      "prior_state": "compiler-transformed-confirmed"
+    }
+  ],
+  "cached_build": "x86 and x64 product, NTVDM and WOW32 passed",
+  "release_comparison": [
+    {
+      "name": "run16.exe",
+      "old_sha256": "0a3e67504fec93eb6c89b8f89c560a8a2e201b0ed15efdfe3f2778c7522eb05a",
+      "new_sha256": "0a3e67504fec93eb6c89b8f89c560a8a2e201b0ed15efdfe3f2778c7522eb05a",
+      "size_equal": true,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        264,
+        209540
+      ],
+      "first_offsets": []
+    },
+    {
+      "name": "ntsrv.exe",
+      "old_sha256": "d6c3005c28cb0d02984866f144cc8b3c5f5de6be9c9c2f250fff3d37e8cdd609",
+      "new_sha256": "d6c3005c28cb0d02984866f144cc8b3c5f5de6be9c9c2f250fff3d37e8cdd609",
+      "size_equal": true,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        248,
+        290436
+      ],
+      "first_offsets": []
+    },
+    {
+      "name": "ntcon.exe",
+      "old_sha256": "9faf706da2901ca65a638d7a0da9d1d474b10c59f59edfc852d49d63a2aa99b7",
+      "new_sha256": "9faf706da2901ca65a638d7a0da9d1d474b10c59f59edfc852d49d63a2aa99b7",
+      "size_equal": true,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        264,
+        246004
+      ],
+      "first_offsets": []
+    },
+    {
+      "name": "ntvdm.exe",
+      "old_sha256": "edfc4849256cdc622f095177743c808b39da86d6b1c8018eb2939c4cf532af4b",
+      "new_sha256": "739d58dca0e5decb78c2c55dc54c15449e6a711066b5051884d0cbaea258ef7a",
+      "size_equal": true,
+      "difference_count": 4,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        288,
+        1695252
+      ],
+      "first_offsets": [
+        288,
+        289,
+        1695252,
+        1695253
+      ]
+    },
+    {
+      "name": "ntvwm.exe",
+      "old_sha256": "36086cfa5c6a0efecb0cbd6d0a28d05a773c4f850d5e9a8615203fdc22354c57",
+      "new_sha256": "36086cfa5c6a0efecb0cbd6d0a28d05a773c4f850d5e9a8615203fdc22354c57",
+      "size_equal": true,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        248,
+        223812
+      ],
+      "first_offsets": []
+    },
+    {
+      "name": "ntmon.exe",
+      "old_sha256": "d1c124173c69da6bf44e8f86a11efdb37e1e15d10ffd45ba29e33f78c3e1bfda",
+      "new_sha256": "d1c124173c69da6bf44e8f86a11efdb37e1e15d10ffd45ba29e33f78c3e1bfda",
+      "size_equal": true,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        248,
+        146260
+      ],
+      "first_offsets": []
+    },
+    {
+      "name": "WOW32.DLL",
+      "old_sha256": "c688c5a1063fea8e7c02e424d6ffc7801068f48fa847a58f76981ab78f7ef1e0",
+      "new_sha256": "c688c5a1063fea8e7c02e424d6ffc7801068f48fa847a58f76981ab78f7ef1e0",
+      "size_equal": true,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        280,
+        625412
+      ],
+      "first_offsets": []
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "old_sha256": "bd3f123454c5c205f165906cecbe9bb207c2bae3d8537bd2c6d7d76af895a2b5",
+      "new_sha256": "bd3f123454c5c205f165906cecbe9bb207c2bae3d8537bd2c6d7d76af895a2b5",
+      "size_equal": true,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        280,
+        125108
+      ],
+      "first_offsets": []
+    },
+    {
+      "name": "nthook32.dll",
+      "old_sha256": "4dfc6a769a9b56149e74450b33856a991312230c414e67314687a3cdad0255d2",
+      "new_sha256": "4dfc6a769a9b56149e74450b33856a991312230c414e67314687a3cdad0255d2",
+      "size_equal": true,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        272,
+        133348
+      ],
+      "first_offsets": []
+    },
+    {
+      "name": "nthook64.dll",
+      "old_sha256": "544c2270858ac062f8b789c5307d53a822da1d4c2e131d28dd17848c0ecbe10e",
+      "new_sha256": "544c2270858ac062f8b789c5307d53a822da1d4c2e131d28dd17848c0ecbe10e",
+      "size_equal": true,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        272,
+        166468
+      ],
+      "first_offsets": []
+    }
+  ],
+  "release": "Ten host images and hook license published and verified at assets/release and O:/winnt/system32.",
+  "tests": "Product regressions not repeated because byte differences are limited to PE COFF/debug timestamps, as instructed.",
+  "remaining_original_byte_restorations": 193
+}
