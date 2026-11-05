@@ -133,3 +133,13 @@ The [final COMMAND file review](../../../artifacts/mvdm-audit/t476-s2-command-fi
 ### Completed WOW DDE line-batch file
 
 The [DDE file review](../../../artifacts/mvdm-audit/t476-s2-wdde-final-review.json) completes `wdde.c`. Neither source has a conditional group; the full original/current diff and retained matching line positions were reviewed, with 143 actual compiler observations. The apparent mismatch arose from two original comparisons that become text-identical after a trailing comment is stripped. Existing local DDE lifecycle changes remain registered. The prior ten-file product build and publication are unchanged. Total: **746 of 1,055 complete; 309 open**.
+
+
+### Selected globals header branch under repair
+
+The original `client/globals.h` `#ifndef RC_INVOKED` arm is selected in 39 recorded S1 product contexts, but its original `LHND` and `LMHtoP` definitions were absent from the retained frame. The current supported SDK independently defines `LHND` as the same flags; selected EDIT sources use it. An in-progress restoration puts the original definitions back inside that reached arm. It has not yet been compiled or published; it remains an open file and must join the next ten-file source batch. No conclusion about build or runtime equivalence is claimed yet.
+
+
+### Completed INT 15 host source review
+
+The [tape I/O file review](../../../artifacts/mvdm-audit/t476-s2-tape-io-final-review.json) completes `tape_io.c` against its pinned original. The complete diff, all recorded condition dispositions and selected PM/CPU40/NTVDM code were reviewed; unsupported paths retain `#error`. All matching original source lines retain their logical positions, and selected compiler contexts corroborate them. Existing XMS and register-only observation adaptations remain registered. Total: **747 of 1,055 complete; 308 open**.
