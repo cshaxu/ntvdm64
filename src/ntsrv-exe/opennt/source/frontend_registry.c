@@ -1,4 +1,5 @@
-#include "lib-win32/process-attributes/attributes.h"
+#include "lib-win32/process-launch/attributes.h"
+#include "lib-win32/process-launch/process.h"
 /* NTSRV-private frontend registry; project adaptation,
  * not an original OpenNT mirror. Physical separation only: existing function
  * bodies, state authority and lock/resource contracts are preserved. */
@@ -677,7 +678,7 @@ DWORD OpenNtBaseServiceStartFrontend(OPENNT_BASE_CONNECTION *caller,DWORD pid,
     if(swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" --session %Ix %Ix %Ix %Ix %u %I64x",
         image,(UINT_PTR)creator,(UINT_PTR)notification,(UINT_PTR)retire,
         (UINT_PTR)ack,borrowed!=FALSE,window)<0){error=ERROR_FILENAME_EXCED_RANGE;goto done;}
-    if(!CreateProcessW(image,command,NULL,NULL,TRUE,
+    if(!win32_process_create(image,command,NULL,NULL,TRUE,
         CREATE_SUSPENDED|EXTENDED_STARTUPINFO_PRESENT|DETACHED_PROCESS,NULL,NULL,
         &startup.StartupInfo,&process)){error=GetLastError();goto done;}
     error=broker_frontend_admit(caller,pid,generation,process.hProcess,notification,retire,ack,event);

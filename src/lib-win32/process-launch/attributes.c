@@ -10,7 +10,7 @@ DWORD win32_process_attributes_init(win32_process_attributes *state, DWORD_PTR a
     if(!state->list)return ERROR_NOT_ENOUGH_MEMORY;
     if(!InitializeProcThreadAttributeList(state->list,1,0,&bytes))return GetLastError();
     state->initialized=TRUE;
-    if(!UpdateProcThreadAttribute(state->list,0,attribute,value,size,NULL,NULL))return GetLastError();
+    if(attribute && !UpdateProcThreadAttribute(state->list,0,attribute,value,size,NULL,NULL))return GetLastError();
     return ERROR_SUCCESS;
 }
 void win32_process_attributes_destroy(win32_process_attributes *state)

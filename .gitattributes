@@ -65,3 +65,6 @@ assets/release/nthook32-LICENSE.txt -text whitespace=cr-at-eol
 
 # Preserve the shared Win16-style process-image source byte-for-byte.
 src/lib-win32/process-image/** -text
+
+# Preserve the shared process-launch component byte-for-byte.
+src/lib-win32/process-launch/** -text

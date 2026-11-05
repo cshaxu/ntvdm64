@@ -4,7 +4,7 @@
 These libraries do not depend on common, worker-base or product components.
 Protocol and authorization policy remain with their respective owners.
 
-`process-attributes/` owns Win32 process attribute-list allocation and cleanup; callers
+`process-launch/` owns Win32 process startup primitives, command-line traversal, and attribute-list allocation and cleanup; callers
 retain attribute values and all process creation, admission and lifetime policy.
 
 `handle/` provides explicit-process same-access duplication and best-effort

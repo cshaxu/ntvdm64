@@ -1554,9 +1554,16 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/lib-win32/rpc/peer.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/rpc/peer.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build lib-rpc.lib: lib obj/lib-win32/rpc/local_binding.obj obj/lib-win32/rpc/peer.obj')
-    $graph.Add('build obj/lib-win32/process-attributes/attributes.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/process-attributes/attributes.c')))
+    $graph.Add('build obj/lib-win32/process-launch/attributes.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/process-launch/attributes.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build lib-process-attributes.lib: lib obj/lib-win32/process-attributes/attributes.obj')
+    $graph.Add('build obj/lib-win32/process-launch/process.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/process-launch/process.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build obj/lib-win32/process-launch/command_line.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/process-launch/command_line.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build lib-process-launch.lib: lib obj/lib-win32/process-launch/attributes.obj obj/lib-win32/process-launch/process.obj obj/lib-win32/process-launch/command_line.obj')
+    $graph.Add('build obj/tests/win32_process_launch.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/win32_process_launch_test.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build win32-process-launch-test.exe: broker_test_link obj/tests/win32_process_launch.obj lib-process-launch.lib')
     $graph.Add('build obj/lib-win32/process-image/image.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/process-image/image.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build lib-process-image.lib: lib obj/lib-win32/process-image/image.obj')
@@ -1723,7 +1730,7 @@ if ($Architecture -eq 'x86') {
     $nativeBinding = ' obj/run16/support.obj base-rpc-client-core.lib obj/run16/stub.obj opennt-base-client.lib common-base-srv-bindings.lib common-base-srv-transport.lib original-opennt-rtl-x86.lib'
     # One declared source closure, consumed by the isolated native builder.
     # The x86 product graph must never silently link another worker carrier.
-    $graph.Add('build ntvwm-source-closure: phony worker-base.lib obj/ntvwm/next_command.obj obj/ntvwm/main.obj obj/ntvwm/presentation.obj obj/ntvwm/text_frame.obj obj/ntvwm/console_state.obj obj/ntvwm/execution.obj obj/common/native_process.obj common-native-hook-installer.lib common-native-hook-context.lib lib-process-image.lib lib-process-hook.lib lib-handle.lib lib-file.lib' + $nativeBinding + ' common-root.lib common-rpc.lib lib-rpc.lib lib-pipe.lib lib-process-observation.lib lib-file.lib common-codec.lib common-console.lib')
+    $graph.Add('build ntvwm-source-closure: phony worker-base.lib obj/ntvwm/next_command.obj obj/ntvwm/main.obj obj/ntvwm/presentation.obj obj/ntvwm/text_frame.obj obj/ntvwm/console_state.obj obj/ntvwm/execution.obj obj/common/native_process.obj common-native-hook-installer.lib common-native-hook-context.lib lib-process-launch.lib lib-process-image.lib lib-process-hook.lib lib-handle.lib lib-file.lib' + $nativeBinding + ' common-root.lib common-rpc.lib lib-rpc.lib lib-pipe.lib lib-process-observation.lib lib-file.lib common-codec.lib common-console.lib')
     $graph.Add('rule native_worker_import')
     if($NativeWorker){
         $nativeWorkerInput=(Resolve-Path -LiteralPath $NativeWorker).Path
@@ -2188,9 +2195,9 @@ if ($Architecture -eq 'x86') {
             $barrier=$graph[$i].IndexOf(' |',$graph[$i].IndexOf(':')+1)
             if($barrier -ge 0){$graph[$i]=$graph[$i].Insert($barrier,' lib-process-observation.lib')}else{$graph[$i]+=' lib-process-observation.lib'}
         }
-        if($graph[$i] -match '^build .*: \S*link ' -and $graph[$i].Contains('broker-transport.lib')) {
+        if($graph[$i] -match '^build .*: \S*link ' -and ($graph[$i].Contains('broker-transport.lib') -or $graph[$i].Contains('obj/common/native_process.obj'))) {
             $barrier=$graph[$i].IndexOf(' |',$graph[$i].IndexOf(':')+1)
-            if($barrier -ge 0){$graph[$i]=$graph[$i].Insert($barrier,' lib-process-attributes.lib')}else{$graph[$i]+=' lib-process-attributes.lib'}
+            if($barrier -ge 0){$graph[$i]=$graph[$i].Insert($barrier,' lib-process-launch.lib')}else{$graph[$i]+=' lib-process-launch.lib'}
         }
     }
 }

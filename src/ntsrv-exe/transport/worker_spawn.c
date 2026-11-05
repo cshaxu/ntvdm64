@@ -1,5 +1,6 @@
 #include "worker_spawn.h"
-#include "lib-win32/process-attributes/attributes.h"
+#include "lib-win32/process-launch/attributes.h"
+#include "lib-win32/process-launch/process.h"
 
 /* Project-added startup transaction recovered from run16_worker_prepare.
  * The transient Job protects only unaccepted startup, not target lifetime.
@@ -27,7 +28,7 @@ DWORD broker_worker_start_admitted(OPENNT_BASE_CONNECTION *connection,DWORD pid,
     startup.StartupInfo.dwFlags&=~STARTF_USESTDHANDLES;
     startup.StartupInfo.hStdInput=NULL;startup.StartupInfo.hStdOutput=NULL;
     startup.StartupInfo.hStdError=NULL;
-    if(!CreateProcessW(image,command,NULL,NULL,FALSE,
+    if(!win32_process_create(image,command,NULL,NULL,FALSE,
         flags|CREATE_SUSPENDED|EXTENDED_STARTUPINFO_PRESENT,environment,NULL,
         &startup.StartupInfo,&process)){error=GetLastError();goto done;}
     error=OpenNtBaseServicePrepareWorker(connection,pid,generation,reservation,process.hProcess);

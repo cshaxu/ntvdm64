@@ -2,6 +2,7 @@
 #define LIB_WIN32_PROCESS_ATTRIBUTES_H
 #include <windows.h>
 /* Initialize a zeroed state; the attribute value is borrowed until destroy.
+ * Pass attribute 0 with NULL value and size 0 to leave the list empty.
  * After any attempted initialization the caller must destroy the state. */
 typedef struct win32_process_attributes {
     LPPROC_THREAD_ATTRIBUTE_LIST list;

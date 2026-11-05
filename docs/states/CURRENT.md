@@ -2,37 +2,39 @@
 
 ## Current Work
 
-**Active: M0 T474 S3** — import the shared Win32 process-image component.
+**Active: M0 T474 S4** — unify reusable Win32 process-launch mechanisms.
 
-T473 was closed by owner direction. S1 integrated the shared ownership range;
-S2 split generic libraries and P1 consolidated Console membership into process
-observation. Their [S1 evidence](../etc/evidence/m0-t474-s1-shared-range-integration.md)
-and [S2 evidence](../etc/evidence/m0-t474-s2-win32-library-split.md) are retained.
+S1–S3 evidence is retained below. The owner approved a shared process-launch
+component for this project first; the neighboring project may import it later.
 
 ## Active Packet
 
-### M0 T474 S3 — shared process architecture query
+### M0 T474 S4 — process launch and startup attributes
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T474 S3, Ordinary Mode. |
-| Admission And Approval | Owner approved importing Win16-style process-image unchanged, using its target-process architecture query in the hook installer and retaining existing image classification. |
+| Identifier Mode | M0 T474 S4, Ordinary Mode. |
+| Admission And Approval | Owner approved the proposed shared process-launch design, cached build, full verification, publication and push. |
 | Candidate Proposal | [Shared implementation ownership](../proposals/proposal-shared-implementation-ownership-001.md). |
-| Objective | Share identical process-image source and use its process-machine query for hook width and helper selection. |
-| Non-goals | No guest changes, no product policy in generic process-hook, no removal of native GUI/CUI classification or target revalidation. |
-| Reference Baseline | NTVDM64 `05eb0f4ab`; source identity to be recorded from Win16-style. |
-| Files And ABI Surface | Win32 process-image, hook installer, build graph, focused tests and documentation. |
-| Applicable Rules | Source-policy provenance, cached builds, complete coherent delivery, preserve unrelated changes. |
-| Verification | x86/x64 source identity, process-machine and installer tests including cross-width/failures, Full product suite, package hash checks. |
-| Delivery State | Cached x86/x64 builds, cross-width hook and process-image checks, Full selected gates and ten-component publication passed; [evidence](../etc/evidence/m0-t474-s3-process-image.md). Awaiting owner acceptance. |
-| Expected Markers | Exact imported source; both installer paths select target architecture without reopening its image solely for hook width; existing NTSRV target and GUI/CUI validation remains. |
-| Asset Needs | Existing caches, immutable source and isolated test fixtures. |
-| Reporting Requirements | Source commit/hash, semantics and limitations, build/tests, publication and push. |
-| Stop Conditions | Unsupported semantic regression without authorized solution, guest modifications. |
-| Exit Criteria | Audit, cached build, meaningful tests, full coherent publication, commit and push. |
-| Original Owner Request | Import process-image unchanged; installer uses target process width; admit a new S. |
-| Similar-Issue Sweep | Inspect same-width, cross-width, helper, failure and product admission paths. |
-| Temporary Evidence | `build/t474-s3`, 90-minute phase, 4-GiB and 15-minute no-progress budget; caches retained. |
+| Objective | Consolidate generic process creation and startup attributes without moving product lifecycle or authorization policy into the library. |
+| Non-goals | No guest modification; no changes to NTSRV authority, inherited handle semantics, rollback, or hook policy. |
+| Reference Baseline | `042a223a6`; Win16-style source audited read-only. |
+| Files And ABI Surface | `src/lib-win32/process-launch`, launch callers, build, tests and evidence. |
+| Applicable Rules | Source provenance, ownership boundaries, cached builds, complete coherent delivery. |
+| Verification | Attribute failure and empty cases, launch and command-line cases, x86/x64 builds, Full selected gates, published hashes. |
+| Delivery State | Cached x86/x64 builds, focused attribute, command-line and real process checks, Full selected gates and coherent ten-component publication passed; [evidence](../etc/evidence/m0-t474-s4-process-launch.md). Awaiting owner acceptance. |
+| Expected Markers | One process-launch component; NTVWM uses shared attribute lifecycle; callers retain admission and rollback. |
+| Asset Needs | Existing build caches and isolated test fixtures. |
+| Reporting Requirements | Scope, interfaces, proofs and limits, release hashes, commit and push. |
+| Stop Conditions | Unapproved observable change or guest modification. |
+| Exit Criteria | Build, tests, coherent publication, commit and push; owner acceptance. |
+| Original Owner Request | Unify process-launch for current project; neighboring project may later import it unchanged. |
+| Similar-Issue Sweep | Review NTSRV worker/frontend, NTVWM native and Run16 command-line paths. |
+| Temporary Evidence | `build/t474-s4`; 90-minute phase, 4-GiB size and 15-minute no-progress budget. |
+
+## S3 Closure Record
+
+The [S3 import](../etc/evidence/m0-t474-s3-process-image.md) passed verification and was delivered.
 
 ## S2 Closure Record
 

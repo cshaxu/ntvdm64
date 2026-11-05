@@ -24,7 +24,7 @@ static DWORD fake_error(void) { return error_code; }
 #define HeapAlloc fake_alloc
 #define HeapFree fake_free
 #define GetLastError fake_error
-#include "lib-win32/process-attributes/attributes.c"
+#include "lib-win32/process-launch/attributes.c"
 #define CHECK(x) do{if(!(x)){fprintf(stderr,"process attributes failed line %d\n",__LINE__);return 1;}++checks;}while(0)
 int main(void)
 {
@@ -45,6 +45,11 @@ int main(void)
         win32_process_attributes_destroy(&state);
         CHECK(release==(mode==0 || mode==3) && freed==(mode!=1));
     }
+    mode=0;probe=init=update=release=freed=0;
+    CHECK(win32_process_attributes_init(&state,0,NULL,0)==ERROR_SUCCESS);
+    CHECK(probe==1 && init==1 && update==0);
+    win32_process_attributes_destroy(&state);
+    CHECK(release==1 && freed==1 && !state.list && !state.initialized);
     win32_process_attributes_destroy(NULL);
     printf("PASS process attribute lifecycle checks=%d\n",checks);return 0;
 }

@@ -5,6 +5,8 @@
 #define _WIN32_WINNT 0x0A00
 #endif
 #include "common/native_process.h"
+#include "lib-win32/process-launch/attributes.h"
+#include "lib-win32/process-launch/process.h"
 #include "common/protocol/console_io.h"
 #include <stdio.h>
 #include <string.h>
@@ -52,8 +54,7 @@ static DWORD native_launch_start(BYTE *payload,DWORD bytes,PROCESS_INFORMATION *
     HANDLE source[5],inherited[5]={0},unique[5];
     DWORD error,i,j,used=0;
     STARTUPINFOEXW startup={0};
-    SIZE_T attributes=0;
-    BOOL initialized=FALSE;
+    win32_process_attributes attributes={0};
     if(!process) return ERROR_INVALID_PARAMETER;
     ZeroMemory(process,sizeof(*process));
     error=run16_native_launch_unpack(payload,bytes,&header,strings);
@@ -83,19 +84,16 @@ static DWORD native_launch_start(BYTE *payload,DWORD bytes,PROCESS_INFORMATION *
     startup.StartupInfo.hStdInput=inherited[0];startup.StartupInfo.hStdOutput=inherited[1];startup.StartupInfo.hStdError=inherited[2];
     /* Only requested standard streams and the two authenticated capabilities
      * cross this creation. No protocol pipe or earlier target handle escapes. */
-    InitializeProcThreadAttributeList(NULL,1,0,&attributes);
-    startup.lpAttributeList=HeapAlloc(GetProcessHeap(),0,attributes);
-    if(!startup.lpAttributeList) { error=ERROR_NOT_ENOUGH_MEMORY;goto done; }
-    if(!InitializeProcThreadAttributeList(startup.lpAttributeList,1,0,&attributes)) { error=GetLastError();goto done; }
-    initialized=TRUE;
-    if(used && !UpdateProcThreadAttribute(startup.lpAttributeList,0,PROC_THREAD_ATTRIBUTE_HANDLE_LIST,
-        unique,used*sizeof(HANDLE),NULL,NULL)) { error=GetLastError();goto done; }
-    if(!CreateProcessW(*strings[0] ? strings[0] : NULL,strings[1],NULL,NULL,used!=0,
+    error=win32_process_attributes_init(&attributes,
+        used ? PROC_THREAD_ATTRIBUTE_HANDLE_LIST : 0, used ? unique : NULL,
+        used ? used*sizeof(HANDLE) : 0);
+    if(error)goto done;
+    startup.lpAttributeList=attributes.list;
+    if(!win32_process_create(*strings[0] ? strings[0] : NULL,strings[1],NULL,NULL,used!=0,
         CREATE_UNICODE_ENVIRONMENT|EXTENDED_STARTUPINFO_PRESENT|(suspended ? CREATE_SUSPENDED : 0),
         environment,strings[2],&startup.StartupInfo,process)) error=GetLastError();
 done:
-    if(initialized) DeleteProcThreadAttributeList(startup.lpAttributeList);
-    if(startup.lpAttributeList) HeapFree(GetProcessHeap(),0,startup.lpAttributeList);
+    win32_process_attributes_destroy(&attributes);
     if(environment) HeapFree(GetProcessHeap(),0,environment);
     for(i=0;i<used;++i) CloseHandle(unique[i]);
     return error;
