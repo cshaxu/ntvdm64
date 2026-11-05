@@ -1,12 +1,18 @@
+* text=auto eol=lf
+
+# Asset and archive checkout behavior remains unchanged; specific pinned inputs below are byte-preserved.
+assets/** !text !eol
+artifacts/** !text !eol
+
 # Imported historical and third-party trees are preserved byte-for-byte.
 # Their upstream whitespace is not a project-authored formatting violation.
-src/archived/** -whitespace
-src/bochs/** -whitespace
+src/archived/** -text -whitespace
+src/bochs/** -text -whitespace
 src/bochs-core/** -text -whitespace
-src/ms-dos-6/** -whitespace
-src/ntvdmx64/** -whitespace
-src/opennt/** -whitespace
-src/opennt-45/** -whitespace
+src/ms-dos-6/** -text -whitespace
+src/ntvdmx64/** -text -whitespace
+src/opennt/** -text -whitespace
+src/opennt-45/** -text -whitespace
 
 # Imported historical tooling and retained historical evidence are likewise
 # preserved without mechanical whitespace rewriting during baseline recovery.
@@ -31,12 +37,12 @@ src/lib-nxvm/kvm-window/** -text
 src/lib-nxvm/LICENSE.nxvm -text
 src/lib-nxvm/LICENSE.libvterm -text
 src/lib-nxvm/libvterm-0.3.3.tar.gz -text
-# Owner-supplied win16style process-hook slice retains byte-exact source.
-src/lib-win32/process-hook/helper.[ch] -text
-src/lib-win32/process-hook/late_guard.[ch] -text
-src/lib-win32/process-hook/late_patch.[ch] -text
-src/lib-win32/process-hook/staging.[ch] -text
-src/lib-win32/process-hook/startup_hooks.[ch] -text
+# Shared project-owned process-hook source uses LF; vendored MinHook stays byte-exact.
+src/lib-win32/process-hook/helper.[ch] text eol=lf
+src/lib-win32/process-hook/late_guard.[ch] text eol=lf
+src/lib-win32/process-hook/late_patch.[ch] text eol=lf
+src/lib-win32/process-hook/staging.[ch] text eol=lf
+src/lib-win32/process-hook/startup_hooks.[ch] text eol=lf
 src/lib-win32/process-hook/minhook/** -text
 src/lib-win32/process-hook/LICENSE.win16style -text whitespace=cr-at-eol
 # New shared payload extension uses the upstream project C source line endings.
@@ -63,8 +69,14 @@ artifacts/mvdm-audit/ccpu-control/initial-narrow-nonpass/failure.txt whitespace=
 # Preserve the exact combined hook redistribution notices from the staged package.
 assets/release/nthook32-LICENSE.txt -text whitespace=cr-at-eol
 
-# Preserve the shared Win16-style process-image source byte-for-byte.
-src/lib-win32/process-image/** -text
+# Shared Win16-style process-image source uses LF.
+src/lib-win32/process-image/** text eol=lf
 
-# Preserve the shared process-launch component byte-for-byte.
-src/lib-win32/process-launch/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Shared process-launch source uses LF.
+src/lib-win32/process-launch/** text eol=lf
+
+# Historical tools were checked out with CRLF; retain their existing form.
+tools/historical/msdos400/** text=auto eol=crlf
+tools/historical/msdos6-qb45/** text=auto eol=crlf
+tools/historical/opennt-4.5/** text=auto eol=crlf
+tools/opennt/tools16/** text=auto eol=crlf

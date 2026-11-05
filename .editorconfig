@@ -2,7 +2,7 @@ root = true
 
 [*]
 charset = utf-8
-end_of_line = crlf
+end_of_line = lf
 insert_final_newline = true
 
 [*.{c,h,md,ps1,cmake}]
@@ -12,3 +12,24 @@ indent_size = 4
 [CMakeLists.txt]
 indent_style = space
 indent_size = 4
+
+# Original mirrors and pinned third-party material retain their source bytes.
+[src/{mvdm-host,mvdm-guest,non-mvdm,lib-nxvm,bochs-core}/**]
+end_of_line = unset
+charset = unset
+insert_final_newline = unset
+
+[src/lib-win32/process-hook/minhook/**]
+end_of_line = unset
+charset = unset
+insert_final_newline = unset
+
+[tools/{historical/msdos400,historical/msdos6-qb45,historical/opennt-4.5,opennt/tools16}/**]
+end_of_line = unset
+charset = unset
+insert_final_newline = unset
+
+[artifacts/**]
+end_of_line = unset
+charset = unset
+insert_final_newline = unset

@@ -2,35 +2,39 @@
 
 ## Current Work
 
-**Active: M0 T474 S4** — unify reusable Win32 process-launch mechanisms.
+**Active: M0 T474 S5** — use LF for non-mirror project text.
 
-S1–S3 evidence is retained below. The owner approved a shared process-launch
-component for this project first; the neighboring project may import it later.
+The owner directed LF for all non-mirror components while preserving original
+mirror bytes. S4 was delivered; its [evidence](../etc/evidence/m0-t474-s4-process-launch.md) remains available.
 
 ## Active Packet
 
-### M0 T474 S4 — process launch and startup attributes
+### M0 T474 S5 — project line endings
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T474 S4, Ordinary Mode. |
-| Admission And Approval | Owner approved the proposed shared process-launch design, cached build, full verification, publication and push. |
-| Candidate Proposal | [Shared implementation ownership](../proposals/proposal-shared-implementation-ownership-001.md). |
-| Objective | Consolidate generic process creation and startup attributes without moving product lifecycle or authorization policy into the library. |
-| Non-goals | No guest modification; no changes to NTSRV authority, inherited handle semantics, rollback, or hook policy. |
-| Reference Baseline | `042a223a6`; Win16-style source audited read-only. |
-| Files And ABI Surface | `src/lib-win32/process-launch`, launch callers, build, tests and evidence. |
-| Applicable Rules | Source provenance, ownership boundaries, cached builds, complete coherent delivery. |
-| Verification | Attribute failure and empty cases, launch and command-line cases, x86/x64 builds, Full selected gates, published hashes. |
-| Delivery State | Cached x86/x64 builds, focused attribute, command-line and real process checks, Full selected gates and coherent ten-component publication passed; [evidence](../etc/evidence/m0-t474-s4-process-launch.md). Awaiting owner acceptance. |
-| Expected Markers | One process-launch component; NTVWM uses shared attribute lifecycle; callers retain admission and rollback. |
-| Asset Needs | Existing build caches and isolated test fixtures. |
-| Reporting Requirements | Scope, interfaces, proofs and limits, release hashes, commit and push. |
-| Stop Conditions | Unapproved observable change or guest modification. |
-| Exit Criteria | Build, tests, coherent publication, commit and push; owner acceptance. |
-| Original Owner Request | Unify process-launch for current project; neighboring project may later import it unchanged. |
-| Similar-Issue Sweep | Review NTSRV worker/frontend, NTVWM native and Run16 command-line paths. |
-| Temporary Evidence | `build/t474-s4`; 90-minute phase, 4-GiB size and 15-minute no-progress budget. |
+| Identifier Mode | M0 T474 S5, Ordinary Mode. |
+| Admission And Approval | Owner directs LF for non-mirror components and original byte retention for mirrors. |
+| Candidate Proposal | [Shared implementation ownership](../proposals/proposal-shared-implementation-ownership-001.md); owner line-ending direction applies project-wide. |
+| Objective | Configure project text and normalize owned text to LF; preserve imported mirror and pinned third-party bytes. |
+| Non-goals | No behavioral changes, guest modifications, or rewriting immutable evidence or media. |
+| Reference Baseline | `ac8bb9864`; S4 delivered. |
+| Files And ABI Surface | Project text, `.gitattributes`, `.editorconfig` and documentation; no API changes. |
+| Applicable Rules | Preserve source provenance, original mirror bytes, user files and shared source identity. |
+| Verification | Tracked text inventory, mirror byte verification, Git attributes, script and build checks appropriate to line-ending-only changes. |
+| Delivery State | Owned UTF-8 text normalized; original mirrors retained; cached builds, focused checks and governance passed. Rebuilt product differences were PE/debug timestamps only, so the previously tested package remains published. [Evidence](../etc/evidence/m0-t474-s5-lf-line-endings.md). Awaiting owner acceptance. |
+| Expected Markers | Owned text LF in worktree and Git; mirrors and pinned imports unchanged. |
+| Asset Needs | Existing repository and cached build; no guest modification. |
+| Reporting Requirements | Counts, exclusions, build and tests, and identity impact on shared libraries. |
+| Stop Conditions | Non-text ambiguity, required behavior change, or inability to preserve original mirror. |
+| Exit Criteria | All classified owned text LF, mirror bytes unchanged, validation, commit and push. |
+| Original Owner Request | All non-mirror components must use LF; mirror components keep original bytes. |
+| Similar-Issue Sweep | Source, tools, tests, docs, shared components, editor and Git configuration. |
+| Temporary Evidence | `build/t474-s5`; 90 minutes, 4 GiB and 15-minute no-progress budget. |
+
+## S4 Closure Record
+
+The [S4 delivery](../etc/evidence/m0-t474-s4-process-launch.md) passed verification and was published.
 
 ## S3 Closure Record
 

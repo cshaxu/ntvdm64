@@ -1131,3 +1131,5 @@ focused timer/hook witnesses, and the finite S2 dialog/input/caret handoff.
 [T474 S3 process-image import](evidence/m0-t474-s3-process-image.md) records provenance, boundaries and verification.
 
 [T474 S4 process-launch](evidence/m0-t474-s4-process-launch.md) records the shared launch boundary and verification.
+
+[T474 S5 LF line endings](evidence/m0-t474-s5-lf-line-endings.md) records the line-ending boundary, normalization and verification.
