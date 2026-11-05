@@ -64,7 +64,8 @@
           398,
           "cchVDMEnv32 = 0;"
         ]
-      ]
+      ],
+      "lead_review": "Local cleanup additions duplicate assignments occurring earlier in the original; their surrounding code differs."
     },
     {
       "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
@@ -92,7 +93,8 @@
           921,
           "pcu->countlatched = 0;"
         ]
-      ]
+      ],
+      "lead_review": "The sole matching source statement is in a macro; expansion sites have their own attributed lines."
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
@@ -109,7 +111,8 @@
           1881,
           "value &= 0xf;"
         ]
-      ]
+      ],
+      "lead_review": "DIV-358 adds a duplicate cursor test; value masking also occurs twice with different original comments."
     },
     {
       "path": "src/mvdm-host/wow32/wdde.c",
@@ -121,7 +124,8 @@
           688,
           "if ((phTemp1->hMem16 == h16) && (phTemp1->hMem32 == h32)) {"
         ]
-      ]
+      ],
+      "lead_review": "Two original comparisons differ only by trailing comment, removed by preprocessing."
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -153,7 +157,8 @@
           1905,
           "return 1;"
         ]
-      ]
+      ],
+      "lead_review": "Preprocessed return statements also arise from macro expansions; original and current contain the same single literal source statement."
     },
     {
       "path": "src/mvdm-host/wow32/wumsg.c",
