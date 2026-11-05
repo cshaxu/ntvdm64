@@ -266,3 +266,8 @@ The [four DEM file reviews](../../../artifacts/mvdm-audit/t476-s2-dem-excluded-f
 ### Additional excluded-branch reviews
 
 The [four file reviews](../../../artifacts/mvdm-audit/t476-s2-excluded-four-final-review.json) complete `xmem.c`, `c_tsksw.c`, `environ.c` and `lboxrare.c` using hash-matched full original conditional-tree and selected-code line evidence, the complete local diffs and recorded compiler observations. `wuman.c` remains open because the older tree evidence does not match its current source hash. Total: **812 of 1,055 complete; 243 open**.
+
+
+### WOW shared-domain header migration reconciliation
+
+The [wuman.c review](../../../artifacts/mvdm-audit/t476-s2-wuman-final-review.json) binds the prior full-tree audit to its exact historical Git blob and establishes that the only subsequent source change is the shared-domain header path. The two declarations used by this file match in the previous and current headers; the current compiler observations match original line positions. The file is complete for the conditional and line audit. Total: **813 of 1,055 complete; 242 open**.

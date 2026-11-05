@@ -1,0 +1,15 @@
+{
+  "path": "src/mvdm-host/wow32/wuman.c",
+  "original_sha256": "d96fc214141973b12045669ae2a0d21cf4040ab928be1a309ad687456b473698",
+  "current_sha256": "326a90ca1cb9b02c5843d4df2da113a939a0fc978fccb97c4757dacd81c682a4",
+  "prior_source_sha256": "21f9af0dc34e639011eb90833e9d001e8dc3affe35ed31ca9e0d7303059eaadf",
+  "prior_tree_evidence": "s13-r1337-tree-recheck.json",
+  "matching_code_lines": 141,
+  "excluded_arms": 2,
+  "post_evidence_change": "Exactly one include path moved in 0c62b3f57; declarations of the two functions used here are identical in old and new headers.",
+  "compiler_contexts": [
+    554
+  ],
+  "compiler_unique_original_lines_seen": 29,
+  "local_diff_review": "DIV-300 maps original shared information to worker guest domain; DEBUG branches excluded."
+}
