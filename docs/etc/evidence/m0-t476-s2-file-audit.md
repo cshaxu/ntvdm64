@@ -89,3 +89,9 @@ The [transformed-line review](../../../artifacts/mvdm-audit/t476-s2-transformed-
 ## Conditional files with transformed compiler output
 
 The [strict transformed-line review](../../../artifacts/mvdm-audit/t476-s2-strict-transformed-review.json) completes 14 conditional files with hash-matched recursive original/current projections. Twenty real compiler contexts cover the candidate file and hit-branch markers; for these 14 files every emitted line is attributed to a nonblank original source line or identical original pragma. Fifteen candidate files emitted no source lines and one has an unexplained emitted line; those remain open. The running partition is 687 complete and 368 open. No mirror source was modified.
+
+## First COMMAND file reviews and remaining lead
+
+The [COMMAND file review](../../../artifacts/mvdm-audit/t476-s2-command-file-reviews.json) completes `cmd.c`, `cmdconf.c`, `cmddata.c` and `cmdenv.c`, recording every local adaptation, branch disposition and compiler-line result. Repeated `TerminateVDM()` text in `cmdconf.c` was checked against its actual original line rather than counted as a false mismatch. The running partition is 691 complete and 364 open.
+
+The next file, `cmdexec.c`, is not complete: the original `RtlInitString` at line 363 appears at logical line 374 in the sampled product preprocessor output, and the static scan identifies additional possible offsets. Its surrounding added failure branch and duplicated `CreateProcess` paths require a complete file-level line audit before one grouped correction. No source change has yet been made.

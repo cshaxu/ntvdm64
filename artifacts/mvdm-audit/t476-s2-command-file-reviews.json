@@ -1,0 +1,49 @@
+{
+  "method": "complete original/current diff and conditional inventory; registered local changes; S1 branch hits and static original-line matching; actual preprocessor sample ambiguities checked against original source at the reported line",
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/command/cmd.c",
+      "current_sha256": "ecd43471f699e3172f50b08a871d94256841651799e37fe1e0eb0454e5de5253",
+      "original_sha256": "9d0a773fcc8d7765b0fe3fe3750b5c9a29a596362f78a221161318fd83cc0262",
+      "source_decision": "No conditional groups; two local changes select the package system directory, recorded as MVDM-HOST-DIV-464. All retained original matching code lines align; five actual compiler samples have no unresolved mismatch.",
+      "registered_adaptation": "MVDM-HOST-DIV-464",
+      "compiler_unique_line_samples": 5,
+      "static_line_leads": 0,
+      "s1_hit_arms": 0,
+      "s1_previously_excluded_arms": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdconf.c",
+      "current_sha256": "69d346b5665d6755eb63d2e012027d3861894bd39b4f18dfb217959532491e76",
+      "original_sha256": "32892c8c489bed9e4be8faed12e1bafbc6c580ba81a509425e8493de1e6ffc0a",
+      "source_decision": "Both original DBG arms retain their boundaries and excluded bodies under MVDM-HOST-DIV-516; the product-root adapter is MVDM-HOST-DIV-158. Original/current conditional and outside-arm projection and matching-code line positions were hash-verified in S13, and the six apparent compiler mismatches are repeated TerminateVDM statements whose actual attributed lines contain the same statement in the original after removing trailing comments.",
+      "registered_adaptation": "MVDM-HOST-DIV-516; MVDM-HOST-DIV-158",
+      "compiler_unique_line_samples": 137,
+      "static_line_leads": 0,
+      "s1_hit_arms": 0,
+      "s1_previously_excluded_arms": 2
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmddata.c",
+      "current_sha256": "68dae0c1d1197b299cbb54a882df828af3a50ab9f4b60f7a0748dfe93aee06b8",
+      "original_sha256": "937c134e46b5c714b9106d85fd0250b88fca5958e69a1e60fdeab558d4f4f8d2",
+      "source_decision": "No conditional groups. Removed legacy SCS pointer declarations are covered by the session guest-location adaptation MVDM-HOST-DIV-111; surviving original matching code and actual compiler samples have aligned lines.",
+      "registered_adaptation": "MVDM-HOST-DIV-111",
+      "compiler_unique_line_samples": 17,
+      "static_line_leads": 0,
+      "s1_hit_arms": 0,
+      "s1_previously_excluded_arms": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdenv.c",
+      "current_sha256": "fa608e4f3f5b9379f2b38b6a03a193aca8ee5ce4edbf151c148967cba6406fc1",
+      "original_sha256": "afc71d306491fe6a7f8cd7356b8682176a33a05f3652bae735be079b3cd0a32b",
+      "source_decision": "No conditional groups. Guest environment address handling is the registered bounded lease adaptation MVDM-HOST-DIV-193; all surviving original matching code lines and actual compiler samples align.",
+      "registered_adaptation": "MVDM-HOST-DIV-193",
+      "compiler_unique_line_samples": 201,
+      "static_line_leads": 0,
+      "s1_hit_arms": 0,
+      "s1_previously_excluded_arms": 0
+    }
+  ]
+}
