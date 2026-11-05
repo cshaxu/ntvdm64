@@ -1,0 +1,49 @@
+{
+  "file": "src/mvdm-host/dpmi32/dpmi32p.h",
+  "snapshot_commit": "14e5638c415037c50e9099f697e496293948b0aa",
+  "snapshot_sha256": "c37cbc2e860fdfcb38793020e283b5babc55c46324a753aa0220aba8f67902b4",
+  "current_sha256": "3f0dd6648c072517cc51e552c4357d0558112c891b6961ca24bab8aeb5859b9e",
+  "method": "Verify snapshot blob hash against recorded preprocessing inventory and pair each selected current directive by its unique directive, expression and nesting depth. Actual preprocessing evidence is compile-branch-selection/contexts.json.gz and its README. This is historical mapped evidence, not a fresh compiler run or proof that duplicate expressions elsewhere are semantically equivalent.",
+  "mapped_selected_arms": [
+    {
+      "current_line": 28,
+      "snapshot_line": 27,
+      "directive": "else",
+      "expression": "",
+      "depth": 1,
+      "x86": "selected",
+      "x64": "unobserved",
+      "snapshot_sha256": "c37cbc2e860fdfcb38793020e283b5babc55c46324a753aa0220aba8f67902b4"
+    },
+    {
+      "current_line": 33,
+      "snapshot_line": 38,
+      "directive": "else",
+      "expression": "",
+      "depth": 2,
+      "x86": "selected",
+      "x64": "unobserved",
+      "snapshot_sha256": "c37cbc2e860fdfcb38793020e283b5babc55c46324a753aa0220aba8f67902b4"
+    },
+    {
+      "current_line": 104,
+      "snapshot_line": 108,
+      "directive": "ifndef",
+      "expression": "i386",
+      "depth": 1,
+      "x86": "selected",
+      "x64": "unobserved",
+      "snapshot_sha256": "c37cbc2e860fdfcb38793020e283b5babc55c46324a753aa0220aba8f67902b4"
+    },
+    {
+      "current_line": 115,
+      "snapshot_line": 119,
+      "directive": "if",
+      "expression": "defined(CPU_40_STYLE)",
+      "depth": 2,
+      "x86": "selected",
+      "x64": "unobserved",
+      "snapshot_sha256": "c37cbc2e860fdfcb38793020e283b5babc55c46324a753aa0220aba8f67902b4"
+    }
+  ]
+}
