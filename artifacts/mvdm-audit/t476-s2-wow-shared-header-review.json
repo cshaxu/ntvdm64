@@ -1,0 +1,68 @@
+{
+  "method": "Compare every nonblank source line against pinned original after masking the recorded excluded outer arms and #line directives; check mapped original logical lines, all surviving recorded arm hits in product preprocessor, and excluded body shape. Non-emitted #endif physical directive positions differ; no claim for guest compilation or runtime.",
+  "files": [
+    {
+      "path": "src/mvdm-host/inc/wowfax.h",
+      "current_sha256": "d69b551c2389ebe9f07d07a6e9b9072ba106e904aa4425a99b0313e177c114bc",
+      "original_sha256": "97c6c40dc2d0565a21dc1be4112fe24f138b10ddbb55fbd29e55da972a2a2c84",
+      "excluded_outer_arms": [
+        {
+          "directive": "ifdef",
+          "expression": "DEBUG",
+          "error": "#error T476-S1: branch not selected by product build"
+        },
+        {
+          "directive": "if",
+          "expression": "defined(_WOWFAX16_)",
+          "error": "#error T476-S1: branch not selected by product build"
+        },
+        {
+          "directive": "ifndef",
+          "expression": "_DEF_WOW32_",
+          "error": "#error T476-S1: branch not selected by product build"
+        }
+      ],
+      "projected_identical_nonblank_lines": 208,
+      "non_emitted_endif_line_differences": [
+        {
+          "original": 101,
+          "current": 105,
+          "text": "#endif       // defined(wowfax16)"
+        }
+      ],
+      "hit_arms": 2,
+      "compiler_contexts": [
+        550
+      ],
+      "compiler_unique_original_line_matches": 77,
+      "guest_boundary": "No guest source or image modified or rebuilt; guest test source may include this shared header."
+    },
+    {
+      "path": "src/mvdm-host/inc/wowinfo.h",
+      "current_sha256": "e577d1884d282e6383e9f58928a76b12fc61eeb973c355fb89211fd060bb3a21",
+      "original_sha256": "a0a125eedf4138d353fea1f97316331fd5a8acfb82dbd80d7abfe5dedf350026",
+      "excluded_outer_arms": [
+        {
+          "directive": "ifndef",
+          "expression": "UNALIGNED",
+          "error": "#error T476-S1: branch not selected by product build"
+        }
+      ],
+      "projected_identical_nonblank_lines": 43,
+      "non_emitted_endif_line_differences": [
+        {
+          "original": 28,
+          "current": 31,
+          "text": "#endif"
+        }
+      ],
+      "hit_arms": 0,
+      "compiler_contexts": [
+        550,
+        568
+      ],
+      "compiler_unique_original_line_matches": 12,
+      "guest_boundary": "No guest source or image modified or rebuilt; guest test source may include this shared header."
+    }
+  ]
+}
