@@ -4,7 +4,7 @@
 
 **Active: M0 T476 S2** — complete the outstanding per-file mirror conditional and line audit.
 
-S1 integrated and published its marker build and 30 exclusions; its [main integration evidence](../etc/evidence/m0-t476-s1-main-integration.md) retains the limits. The owner directed S2 to finish them. The [S2 baseline](../etc/evidence/m0-t476-s2-file-audit.md) tracks all 1,055 files: after rebinding stale hashes, reopening PIF and completing further file reviews, the review categories contain 1,005 files and 50 require file review. The earlier batch retains three open files. A separate exact-byte reconciliation has 169 restorations not yet started.
+S1 integrated and published its marker build and 30 exclusions; its [main integration evidence](../etc/evidence/m0-t476-s1-main-integration.md) retains the limits. The owner directed S2 to finish them. The [S2 baseline](../etc/evidence/m0-t476-s2-file-audit.md) tracks all 1,055 files: after rebinding stale hashes, reopening PIF and completing further file reviews, the review categories contain 1,005 files and 50 require file review. The earlier batch retains three open files. A separate exact-byte reconciliation has 159 restorations not yet started.
 
 The counts above predate discovery that the S1 product-only marker contexts omitted supported fixture and addon builds. Several recorded exclusions failed those builds; the current correction restores their selected arms. Previously reviewed counts cannot establish completeness across those omitted contexts until cross-checked; do not treat them as a final audit conclusion.
 
@@ -15,6 +15,8 @@ The [previous ten-source batch](../../artifacts/mvdm-audit/t476-s2-batch18-line-
 The [previous ten-source batch](../../artifacts/mvdm-audit/t476-s2-batch19-line-repair.json) has eight line-corrected files and restores original bytes to `dec.h` and `div.h`; cached builds and full publication passed, with only two PE timestamp differences. The selected empty shells in `draw.c`, client `wow.c` and `ntstubs.c` remain open and are not evidence that omitted original functions are implemented.
 
 The [latest ten-source batch](../../artifacts/mvdm-audit/t476-s2-batch20-line-repair.json) contains line fixes to `userrtl.h` and `host_cpu.h` and eight exact-original byte restorations; cached build and complete publication passed with only two PE timestamp differences. Both files remain open for selected original empty-shell ownership. `host_cpu.h` rejects a false scanner match between disabled CPU30 and selected CPU40 `LITTLEND` conditions; selected layout behavior is retained. The [empty-shell ownership leads](../../artifacts/mvdm-audit/t476-s2-empty-shell-ownership-leads.json) identify 16 historical shells and real link owners, without treating provider identity as proof of original semantic equivalence.
+
+The [host CPU accessor inventory](../../artifacts/mvdm-audit/t476-s2-host-cpu-accessor-inventory.json) records all 29 original CCPU macros: 15 have same-named CPU40 direct macros, and 14 have no C/H references in the scanned current source roots. This is static ownership evidence, not proof of semantic equivalence or complete product reachability. The [next ten exact-original byte restorations](../../artifacts/mvdm-audit/t476-s2-batch21-original-bytes.json) built and published as one batch; nine images were identical and NTVDM differed only by timestamp.
 
 ## Active Packet
 

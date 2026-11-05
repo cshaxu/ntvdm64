@@ -1,0 +1,466 @@
+{
+  "source_sha256": "e79dd6aa79d24e37ad8390c8879abf3436674ee101037f0e09415148a938ac95",
+  "ccpu40_sha256": "f2bc102075e0624cfe95a040c0608d97df5a8a198a0c0d08bf0271a71207b93a",
+  "count": 29,
+  "with_current_direct_macro": 15,
+  "without_current_direct_macro": 14,
+  "items": [
+    {
+      "name": "getCPL",
+      "original_line": 231,
+      "original_definition": "#define getCPL()                ((*getCPL_func) ())",
+      "ccpu40_definitions": [
+        {
+          "line": 2045,
+          "definition": "#define\tgetCPL()\tc_getCPL()"
+        }
+      ],
+      "static_references": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "line": 1603,
+          "source": "if ( getCPL() != 3 )"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "line": 1668,
+          "source": "if ( getCPL() != 3 )"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "line": 1732,
+          "source": "if ( getCPL() != 3 )"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "line": 1797,
+          "source": "if ( getCPL() != 3 )"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "line": 1861,
+          "source": "if ( getCPL() != 3 )"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "line": 1925,
+          "source": "if ( getCPL() != 3 )"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+          "line": 265,
+          "source": "UCHAR access=(getCPL()==3 ? 2 : 0) | (write ? 1 : 0);"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+          "line": 287,
+          "source": "UCHAR access=(getCPL()==3 ? 2 : 0) | (write ? 1 : 0) | 4;"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+          "line": 431,
+          "source": "if (handlerInstalled && exp_no == 13 && getCPL() != 0 && !getVM()) {"
+        }
+      ]
+    },
+    {
+      "name": "getGDTR_base",
+      "original_line": 232,
+      "original_definition": "#define getGDTR_base()          ((*getGDTR_base_func) ())",
+      "ccpu40_definitions": [],
+      "static_references": []
+    },
+    {
+      "name": "getGDTR_limit",
+      "original_line": 233,
+      "original_definition": "#define getGDTR_limit()         ((*getGDTR_limit_func) ())",
+      "ccpu40_definitions": [],
+      "static_references": []
+    },
+    {
+      "name": "getIDTR_base",
+      "original_line": 234,
+      "original_definition": "#define getIDTR_base()          ((*getIDTR_base_func) ())",
+      "ccpu40_definitions": [],
+      "static_references": []
+    },
+    {
+      "name": "getIDTR_limit",
+      "original_line": 235,
+      "original_definition": "#define getIDTR_limit()         ((*getIDTR_limit_func) ())",
+      "ccpu40_definitions": [],
+      "static_references": []
+    },
+    {
+      "name": "getLDTR",
+      "original_line": 236,
+      "original_definition": "#define getLDTR()               ((*getLDTR_func) ())",
+      "ccpu40_definitions": [],
+      "static_references": []
+    },
+    {
+      "name": "getTR",
+      "original_line": 237,
+      "original_definition": "#define getTR()                 ((*getTR_func) ())",
+      "ccpu40_definitions": [],
+      "static_references": []
+    },
+    {
+      "name": "getMSW_reserved",
+      "original_line": 238,
+      "original_definition": "#define getMSW_reserved()       ((*getMSW_reserved_func) ())",
+      "ccpu40_definitions": [],
+      "static_references": []
+    },
+    {
+      "name": "getTS",
+      "original_line": 239,
+      "original_definition": "#define getTS()         ((*getTS_func) ())",
+      "ccpu40_definitions": [
+        {
+          "line": 1367,
+          "definition": "#define\tgetTS()\tc_getTS()"
+        }
+      ],
+      "static_references": []
+    },
+    {
+      "name": "getEM",
+      "original_line": 240,
+      "original_definition": "#define getEM()         ((*getEM_func) ())",
+      "ccpu40_definitions": [
+        {
+          "line": 1358,
+          "definition": "#define\tgetEM()\tc_getEM()"
+        }
+      ],
+      "static_references": []
+    },
+    {
+      "name": "getMP",
+      "original_line": 241,
+      "original_definition": "#define getMP()         ((*getMP_func) ())",
+      "ccpu40_definitions": [
+        {
+          "line": 1349,
+          "definition": "#define\tgetMP()\tc_getMP()"
+        }
+      ],
+      "static_references": []
+    },
+    {
+      "name": "getPE",
+      "original_line": 242,
+      "original_definition": "#define getPE()         ((*getPE_func) ())",
+      "ccpu40_definitions": [
+        {
+          "line": 1340,
+          "definition": "#define\tgetPE()\tc_getPE()"
+        }
+      ],
+      "static_references": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+          "line": 152,
+          "source": "if(getVM() || !getPE()) {"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "line": 1624,
+          "source": "if(getPE() && !getVM())"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "line": 1689,
+          "source": "if(getPE() && !getVM())"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "line": 1753,
+          "source": "if(getPE() && !getVM())"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "line": 1817,
+          "source": "if(getPE() && !getVM())"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "line": 1881,
+          "source": "if(getPE() && !getVM())"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "line": 1945,
+          "source": "if(getPE() && !getVM())"
+        }
+      ]
+    },
+    {
+      "name": "getNT",
+      "original_line": 243,
+      "original_definition": "#define getNT()         ((*getNT_func) ())",
+      "ccpu40_definitions": [
+        {
+          "line": 1304,
+          "definition": "#define\tgetNT()\tc_getNT()"
+        }
+      ],
+      "static_references": [
+        {
+          "path": "src/mvdm-host/inc/softpc.h",
+          "line": 338,
+          "source": "extern ULONG getNT(VOID);"
+        }
+      ]
+    },
+    {
+      "name": "getIOPL",
+      "original_line": 244,
+      "original_definition": "#define getIOPL()       ((*getIOPL_func) ())",
+      "ccpu40_definitions": [
+        {
+          "line": 1174,
+          "definition": "#define\tgetIOPL()\tc_getIOPL()"
+        }
+      ],
+      "static_references": [
+        {
+          "path": "src/mvdm-host/inc/softpc.h",
+          "line": 337,
+          "source": "extern ULONG getIOPL(VOID);"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "line": 1498,
+          "source": "if ( c_getCPL() > getIOPL() ) {"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "line": 1510,
+          "source": "if ( c_getCPL() > getIOPL() ) {"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "line": 1553,
+          "source": "} else if ( c_getCPL() > getIOPL()) {"
+        }
+      ]
+    },
+    {
+      "name": "getSTATUS",
+      "original_line": 245,
+      "original_definition": "#define  getSTATUS()    ((*getSTATUS_func) ())",
+      "ccpu40_definitions": [
+        {
+          "line": 1165,
+          "definition": "#define\tgetSTATUS()\tc_getSTATUS()"
+        }
+      ],
+      "static_references": [
+        {
+          "path": "src/mvdm-host/dpmi32/stack.c",
+          "line": 116,
+          "source": "*(StackPointer - 1) = getSTATUS();"
+        },
+        {
+          "path": "src/mvdm-host/dpmi32/stack.c",
+          "line": 169,
+          "source": "setSTATUS((*(StackPointer + 2) & ~1) | (getSTATUS() & 1));"
+        },
+        {
+          "path": "src/mvdm-host/inc/softpc.h",
+          "line": 339,
+          "source": "extern USHORT getSTATUS(VOID);"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+          "line": 1631,
+          "source": "push_word((word)getSTATUS());"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+          "line": 1807,
+          "source": "push_word((word)getSTATUS());"
+        }
+      ]
+    },
+    {
+      "name": "setCPL",
+      "original_line": 292,
+      "original_definition": "#define setCPL(val)             ((*setCPL_func) (val))",
+      "ccpu40_definitions": [
+        {
+          "line": 2054,
+          "definition": "#define\tsetCPL(prot)\tc_setCPL(prot)"
+        }
+      ],
+      "static_references": [
+        {
+          "path": "src/mvdm-host/dpmi32/modesw.c",
+          "line": 107,
+          "source": "setCPL(3);"
+        },
+        {
+          "path": "src/mvdm-host/dpmi32/modesw.c",
+          "line": 168,
+          "source": "setCPL(0);"
+        },
+        {
+          "path": "src/mvdm-host/dpmi32/modesw.c",
+          "line": 237,
+          "source": "setCPL(0);"
+        },
+        {
+          "path": "src/mvdm-host/dpmi32/modesw.c",
+          "line": 311,
+          "source": "setCPL(3);"
+        },
+        {
+          "path": "src/mvdm-host/inc/softpc.h",
+          "line": 363,
+          "source": "extern VOID setCPL(ULONG val);"
+        }
+      ]
+    },
+    {
+      "name": "setGDTR_base",
+      "original_line": 293,
+      "original_definition": "#define setGDTR_base(val)       ((*setGDTR_base_func) (val))",
+      "ccpu40_definitions": [],
+      "static_references": []
+    },
+    {
+      "name": "setGDTR_limit",
+      "original_line": 294,
+      "original_definition": "#define setGDTR_limit(val)      ((*setGDTR_limit_func) (val))",
+      "ccpu40_definitions": [],
+      "static_references": []
+    },
+    {
+      "name": "setIDTR_base",
+      "original_line": 295,
+      "original_definition": "#define setIDTR_base(val)       ((*setIDTR_base_func) (val))",
+      "ccpu40_definitions": [],
+      "static_references": []
+    },
+    {
+      "name": "setIDTR_limit",
+      "original_line": 296,
+      "original_definition": "#define setIDTR_limit(val)      ((*setIDTR_limit_func) (val))",
+      "ccpu40_definitions": [],
+      "static_references": []
+    },
+    {
+      "name": "setLDTR",
+      "original_line": 297,
+      "original_definition": "#define setLDTR(val)            ((*setLDTR_func) (val))",
+      "ccpu40_definitions": [],
+      "static_references": []
+    },
+    {
+      "name": "setTR",
+      "original_line": 298,
+      "original_definition": "#define setTR(val)              ((*setTR_func) (val))",
+      "ccpu40_definitions": [],
+      "static_references": []
+    },
+    {
+      "name": "setMSW_reserved",
+      "original_line": 299,
+      "original_definition": "#define setMSW_reserved(val)    ((*setMSW_reserved_func) (val))",
+      "ccpu40_definitions": [],
+      "static_references": []
+    },
+    {
+      "name": "setTS",
+      "original_line": 300,
+      "original_definition": "#define setTS(val)              ((*setTS_func) (val))",
+      "ccpu40_definitions": [
+        {
+          "line": 832,
+          "definition": "#define\tsetTS(val)\tc_setTS(val)"
+        }
+      ],
+      "static_references": []
+    },
+    {
+      "name": "setEM",
+      "original_line": 301,
+      "original_definition": "#define setEM(val)              ((*setEM_func) (val))",
+      "ccpu40_definitions": [
+        {
+          "line": 823,
+          "definition": "#define\tsetEM(val)\tc_setEM(val)"
+        }
+      ],
+      "static_references": []
+    },
+    {
+      "name": "setMP",
+      "original_line": 302,
+      "original_definition": "#define setMP(val)              ((*setMP_func) (val))",
+      "ccpu40_definitions": [
+        {
+          "line": 814,
+          "definition": "#define\tsetMP(val)\tc_setMP(val)"
+        }
+      ],
+      "static_references": []
+    },
+    {
+      "name": "setPE",
+      "original_line": 303,
+      "original_definition": "#define setPE(val)              ((*setPE_func) (val))",
+      "ccpu40_definitions": [
+        {
+          "line": 805,
+          "definition": "#define\tsetPE(val)\tc_setPE(val)"
+        }
+      ],
+      "static_references": []
+    },
+    {
+      "name": "setNT",
+      "original_line": 304,
+      "original_definition": "#define setNT(val)              ((*setNT_func) (val))",
+      "ccpu40_definitions": [
+        {
+          "line": 769,
+          "definition": "#define\tsetNT(val)\tc_setNT(val)"
+        }
+      ],
+      "static_references": [
+        {
+          "path": "src/mvdm-host/inc/softpc.h",
+          "line": 353,
+          "source": "extern VOID setNT(ULONG val);"
+        }
+      ]
+    },
+    {
+      "name": "setIOPL",
+      "original_line": 305,
+      "original_definition": "#define setIOPL(val)    ((*setIOPL_func) (val))",
+      "ccpu40_definitions": [
+        {
+          "line": 643,
+          "definition": "#define\tsetIOPL(val)\tc_setIOPL(val)"
+        }
+      ],
+      "static_references": [
+        {
+          "path": "src/mvdm-host/inc/softpc.h",
+          "line": 352,
+          "source": "extern VOID setIOPL(ULONG val);"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Static references include excluded or nonproduct code and cannot prove live calls.",
+    "Direct macro presence does not prove semantic equivalence to the original indirect host implementation.",
+    "Search is limited to listed source roots and C/H syntax."
+  ],
+  "status": "ownership evidence; original function-pointer table and current CPU40 behavior remain subject to per-accessor semantic and caller verification"
+}
