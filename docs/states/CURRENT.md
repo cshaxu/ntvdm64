@@ -4,7 +4,7 @@
 
 **Active: M0 T476 S2** — complete the outstanding per-file mirror conditional and line audit.
 
-S1 integrated and published its marker build and 30 exclusions; its [main integration evidence](../etc/evidence/m0-t476-s1-main-integration.md) retains the limits. The owner directed S2 to finish them. The [S2 baseline](../etc/evidence/m0-t476-s2-file-audit.md) tracks all 1,055 files: 753 files have completed file-level review; 302 require further review. The prior ten-file diagnostic-line batch was built and published; six of those files are now individually reviewed, and four remain open. `globals.h` has an unbuilt candidate restoration of the original selected `RC_INVOKED`-guarded memory macros; it remains open until the next owner-directed source batch build and review.
+S1 integrated and published its marker build and 30 exclusions; its [main integration evidence](../etc/evidence/m0-t476-s1-main-integration.md) retains the limits. The owner directed S2 to finish them. The [S2 baseline](../etc/evidence/m0-t476-s2-file-audit.md) tracks all 1,055 files: 754 files have completed file-level review; 301 require further review. The prior ten-file diagnostic-line batch was built and published; six of those files are now individually reviewed, and four remain open. `globals.h` has an unbuilt candidate restoration of the original selected `RC_INVOKED`-guarded memory macros; it remains open until the next owner-directed source batch build and review.
 
 ## Active Packet
 

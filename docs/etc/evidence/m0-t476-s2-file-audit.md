@@ -168,3 +168,8 @@ The [DEM state file review](../../../artifacts/mvdm-audit/t476-s2-demdata-final-
 ### Completed DOS state access source review
 
 The [DEM state access review](../../../artifacts/mvdm-audit/t476-s2-demgset-final-review.json) completes `demgset.c`. Neither source has conditional groups. The full original/current diff, registered numeric guest-state ownership, DPB representation and filesystem-field repair were checked along with matching source positions and 197 unique compiler-observed original lines. Total: **753 of 1,055 complete; 302 open**.
+
+
+### Completed OEM file helper review
+
+The [OEM file helper review](../../../artifacts/mvdm-audit/t476-s2-oem-file-final-review.json) completes `oemuni/file.c`: there are no original or current conditional groups, the full diff consists of registered output initialization and OEM encoded-byte/capacity fixes, and matching source line positions and 161 unique compiler-observed original lines agree. Total: **754 of 1,055 complete; 301 open**.
