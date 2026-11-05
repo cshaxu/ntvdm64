@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**No active M/T/S packet.** T473 is closed by owner direction.
+**Active: M0 T476 S1** — integrate the shared-ownership worktree commit range.
 
 S13 is closed by owner direction with its unfinished mirror-condition work
 transferred to the [queued complete-file audit](../proposals/proposal-mirror-conditional-file-audit-001.md).
@@ -80,11 +80,33 @@ r477 package is [published](../../artifacts/mvdm-audit/s13-r483-publication.json
 NIDDB multi-VM semantics remain [unproved](../../artifacts/mvdm-audit/s13-test-failure-recheck.md).
 Earlier versions remain in [held patches](../../artifacts/mvdm-audit/s11-held-cpu/).
 
+## Active Packet
+
+### M0 T476 S1 — shared-ownership commit integration
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T476 S1, Ordinary Mode. |
+| Admission And Approval | Owner directed admission after T473 closure and requested the entire sibling commit range with history preserved. |
+| Objective | Apply all commits after common ancestor `09b58f5c646cbcbf797748c45f32833a28a48b1d` through sibling head `5ccff9f0d216295ad390b795e4c43c5db7f7b0c1` onto the latest main baseline. |
+| Non-goals | No guest source or image modification or rebuilding; do not silently drop commits. |
+| Reference Baseline | T473 closure `5ed4e560d`; sibling `review/shared-ownership` clean at the head above. |
+| Files And ABI Surface | Shared libraries, component boundaries, build/test infrastructure and source files in the sibling commit range. |
+| Applicable Rules | Source policy, minimal guest diff, preserve unrelated work, owner conflict directions. |
+| Verification | Review every conflict and applied range; verify build and affected checks after integration as appropriate. |
+| Expected Markers | All 51 commits accounted for; commit ordering and provenance retained. |
+| Asset Needs | Existing local repository and shared-ownership worktree. |
+| Reporting Requirements | Report common ancestor, imported commits, resolutions and verification. |
+| Stop Conditions | Guest changes, unrecoverable conflict or an actual incompatible requirement. |
+| Exit Criteria | Complete range integration, review, verification and normal delivery. |
+| Original Owner Request | Integrate the whole post-ancestor range in one operation, keep history; keep current assets on conflicts and choose sibling current documentation on conflicts, resolve source conflicts independently. |
+| Similar-Issue Sweep | Check all conflict categories and preserve the newly queued mirror audit. |
+
 ## S13 Closure Record
 
 Owner stopped the condition audit and transferred it to the queued future T.
 The [closure](../history/m0-t473-s13-closure.md) records the published baseline,
-incomplete per-file verification and remaining input-handoff limits. T473 is closed; no next T or S is active or admitted.
+incomplete per-file verification and remaining input-handoff limits. T473 is closed; the next active packet is T476 S1.
 
 ## S12 Closure Record
 
