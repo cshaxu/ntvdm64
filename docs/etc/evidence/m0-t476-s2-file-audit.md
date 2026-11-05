@@ -286,3 +286,8 @@ The [DEM dispatch review](../../../artifacts/mvdm-audit/t476-s2-demdisp-final-re
 ### C-video, host and CSR declaration reviews
 
 The [three file reviews](../../../artifacts/mvdm-audit/t476-s2-host-cvidc-csr-review.json) complete `ev_glue.c`, `host.h` and `ntcsrmsg.h`: full original diffs, original conditions and S1 arm observations, hash-matched prior line projections and actual compiler samples were checked. Existing vector, native ABI and capture-metadata adaptations remain registered. Total: **819 of 1,055 complete; 236 open**.
+
+
+### DPMI data and dispatch source reviews
+
+The [two DPMI file reviews](../../../artifacts/mvdm-audit/t476-s2-dpmi-data-dispatch-review.json) complete `data.c` and `dpmi32.c`. Their full original/current differences, original and local branch dispositions, hash-matched recursive projection and selected compiler line observations were checked. This establishes the conditional and line audit, not independent proof of the CPU40 descriptor adaptation's runtime semantics. Total: **821 of 1,055 complete; 234 open**.

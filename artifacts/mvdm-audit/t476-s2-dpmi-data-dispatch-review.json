@@ -1,0 +1,93 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/dpmi32/data.c",
+      "current_sha256": "7e1161e8dcff68b40405d04301b995bd6d8b029715cac5c0ae667bbb52e327a8",
+      "original_sha256": "fa3b44b0f6a5ea6165063bae35fe66063e23e518dad8c0cdf3de16d353c54cde",
+      "prior_recursive_evidence": "s13-r1368-extra-strict.json",
+      "matched_original_lines": 134,
+      "group_summary": {
+        "excluded": 1,
+        "selected": 2,
+        "original_groups": 2,
+        "local_groups": 1
+      },
+      "arms": [
+        {
+          "directive": "if",
+          "expression": "DBG",
+          "status": "previously-excluded",
+          "contexts": []
+        },
+        {
+          "directive": "else",
+          "expression": "",
+          "status": "hit",
+          "contexts": [
+            281
+          ]
+        },
+        {
+          "directive": "ifndef",
+          "expression": "i386",
+          "status": "hit",
+          "contexts": [
+            281
+          ]
+        },
+        {
+          "directive": "if",
+          "expression": "defined(CPU_40_STYLE)",
+          "status": "hit",
+          "contexts": [
+            281
+          ]
+        }
+      ],
+      "compiler_contexts": [
+        281
+      ],
+      "unique_compiler_samples": 31,
+      "local_diff_review": "Full original/current diff examined; selected DPMI data owner retains registered CPU40 guest descriptor projection, with DBG group excluded."
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "current_sha256": "b518ac43247d583a62e50130791784c633338ff638626545ff36c4caae22e0d4",
+      "original_sha256": "c271daf86bdfa846c9602f74bd2a4059b98c2ad1f12676e966bcfd427ba93dca",
+      "prior_recursive_evidence": "s13-r1368-extra-strict.json",
+      "matched_original_lines": 288,
+      "group_summary": {
+        "excluded": 2,
+        "original_groups": 2,
+        "local_groups": 1
+      },
+      "arms": [
+        {
+          "directive": "if",
+          "expression": "DBG",
+          "status": "previously-excluded",
+          "contexts": []
+        },
+        {
+          "directive": "if",
+          "expression": "defined(i386)",
+          "status": "previously-excluded",
+          "contexts": []
+        },
+        {
+          "directive": "if",
+          "expression": "defined(CPU_40_STYLE)",
+          "status": "hit",
+          "contexts": [
+            277
+          ]
+        }
+      ],
+      "compiler_contexts": [
+        277
+      ],
+      "unique_compiler_samples": 31,
+      "local_diff_review": "Full original/current diff examined; CPU40 descriptor publication and diagnostics are local additions while original DBG and i386 kernel VDM branches are excluded."
+    }
+  ]
+}
