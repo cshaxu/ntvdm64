@@ -59,3 +59,7 @@ the 874 different files and generator input remain open.
 ## Completed condition-free files
 
 The [condition-free review](../../../artifacts/mvdm-audit/t476-s2-condition-free-review.json) completes 130 differing files. Each has no original or current conditional group, identical non-comment code after removing line directives and indentation, matching original/current hashes in the earlier full matched-code line review with no mismatch, and at least one actual compiler line sample with no observed mismatch. The comparison retains string contents and does not equate changed code with comment-only differences. These results add 130 completed files to the 180 byte-identical files: 310 completed and 745 still open, including the generated-binding input. Source files were not modified in this batch.
+
+## Source and logical-line equivalent files
+
+The [source/line review](../../../artifacts/mvdm-audit/t476-s2-code-line-equivalence.json) completes four more files. Every uncommented, nonblank line matches the pinned original in sequence and logical line after interpreting line directives; the inventory has no missing conditions or parser errors, all conditional arms are observed, and actual compiler line samples agree. No source was edited. The running partition is 180 byte-identical, 130 condition-free code-equivalent and four source/line-equivalent complete; 741 files remain open.
