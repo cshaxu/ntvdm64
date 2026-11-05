@@ -1,0 +1,198 @@
+{
+  "method": "hash-matched full recursive original/current conditional projection and matching original-line evidence; actual contexts cover each selected branch and file marker, with no emitted source text",
+  "contexts": [
+    503,
+    134,
+    39,
+    78,
+    587,
+    174,
+    71,
+    72,
+    103,
+    108,
+    190,
+    351,
+    492,
+    508,
+    301,
+    304,
+    162,
+    191,
+    342,
+    237
+  ],
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/ega_dump.c",
+      "current_sha256": "a1562069aaf6a9ff00bb6f8a7890dc00a58367a23407162d344f261252772f14",
+      "original_sha256": "18c7205169a62e40e80122deba5645f1cd7ce0d760ea71d95e9688a5a1da98aa",
+      "prior_strict_evidence": "s13-r1348-strict-ready.json",
+      "file_marker_contexts": [
+        301
+      ],
+      "hit_arms": 1,
+      "emitted_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dsktrace.h",
+      "current_sha256": "9707c22d111a49e09235fd4287bdeca02e31840f5635961d4da2528c1aee817b",
+      "original_sha256": "f5e99686a7c84d8a1b1b25db57c35d459c88c1b6dec395c332f027647474d082",
+      "prior_strict_evidence": "s13-r1343-strict-ready.json",
+      "file_marker_contexts": [
+        162
+      ],
+      "hit_arms": 1,
+      "emitted_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/error.h",
+      "current_sha256": "29a32c1af04baf69723844b01fdbbdb8902db3837fdb701a4f641685fd779d05",
+      "original_sha256": "1adf0532f1ef298d7491e01714624e394ea795a308695bc1b05376a9b16ca7a3",
+      "prior_strict_evidence": "s13-r1343-strict-ready.json",
+      "file_marker_contexts": [
+        134,
+        162,
+        174,
+        237
+      ],
+      "hit_arms": 1,
+      "emitted_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/yoda.h",
+      "current_sha256": "5887ccb0be62271c5d5869ece416c55aafadf4bf75730ca1d9f1ce8b9d4a742e",
+      "original_sha256": "9488860e836e9b4fb17ec69558bc65ce1a8afb99286f62e6092759c959569fc1",
+      "prior_strict_evidence": "s13-r1343-strict-ready.json",
+      "file_marker_contexts": [
+        39
+      ],
+      "hit_arms": 2,
+      "emitted_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_trcr.c",
+      "current_sha256": "45dd02a03795260a248ac62ec522a7199f339f070483eea23ea7dbbfbf5050be",
+      "original_sha256": "f69389e877975d277405c21af95b5fea6fe2794b5ac7928d8634efbbbd432e9c",
+      "prior_strict_evidence": "s13-r1348-strict-ready.json",
+      "file_marker_contexts": [
+        191
+      ],
+      "hit_arms": 1,
+      "emitted_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_inc.h",
+      "current_sha256": "d731e0f766148d434fc90c408d539a06247c733193269281c73422e671054616",
+      "original_sha256": "c78271903a7a00e13a8756b47f25a91993ab962c39c5fb89435783ee3d411efe",
+      "prior_strict_evidence": "s13-r1348-strict-ready.json",
+      "file_marker_contexts": [
+        174
+      ],
+      "hit_arms": 4,
+      "emitted_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/x86_emm.c",
+      "current_sha256": "9846af750733fcd2b736ab3f95fe0e3e9ae3446e212592f7366b8bfddcef0fac",
+      "original_sha256": "117d119314787e09b853e05de0e35bb6935fb2d763f4fec7eef6b1d804e3d189",
+      "prior_strict_evidence": "s13-r1348-strict-ready.json",
+      "file_marker_contexts": [
+        342
+      ],
+      "hit_arms": 1,
+      "emitted_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsconst.h",
+      "current_sha256": "dd594532c0618ab4acdc637baddf131c0ff0b95bc736cfbc821408c4317e2b9d",
+      "original_sha256": "ca80cdb6c115f513166145531225e4eb6710b9d4e87e5a99655d0fb5bef779e8",
+      "prior_strict_evidence": "s13-r1348-strict-ready.json",
+      "file_marker_contexts": [
+        503
+      ],
+      "hit_arms": 1,
+      "emitted_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsparm16.h",
+      "current_sha256": "8daf8b94feade0b0518b66d4f477901d3b02274d657f78103ca9be6fd07eaa6b",
+      "original_sha256": "c6179ce7662c012a345aed4278b94b59c50ceaf396eceb7f768b62ce454f2b7c",
+      "prior_strict_evidence": "s13-r1348-strict-ready.json",
+      "file_marker_contexts": [
+        503
+      ],
+      "hit_arms": 1,
+      "emitted_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/align.h",
+      "current_sha256": "ab9c4ec4eb93424ca48ec557c13c66eb607a169260a0d4ca5efc1bb546e399f3",
+      "original_sha256": "b2922ca133bfd608bf86f33595c1dfb2b325cb31a0e83d4bfe18f0d91795e28f",
+      "prior_strict_evidence": "s13-r1348-strict-ready.json",
+      "file_marker_contexts": [
+        492,
+        503,
+        508
+      ],
+      "hit_arms": 2,
+      "emitted_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbgtpt.h",
+      "current_sha256": "4b22eca70addbdfb0472e71ed0adfcfccfe846891af8863d3bb151c476716736",
+      "original_sha256": "d2ab723bc1f95cb53ae6970f950f5ce50d4b0d177ba31c8b7d7c8d83a5262d75",
+      "prior_strict_evidence": "s13-r1348-strict-ready.json",
+      "file_marker_contexts": [
+        503,
+        508
+      ],
+      "hit_arms": 42,
+      "emitted_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbmacro.h",
+      "current_sha256": "b8d477fc44cba472316e1bc9fe06dddc366960b5aa896d888bd0344792e30157",
+      "original_sha256": "e7a4ff096b5e2fdd0a81cd1c080e57253231664f87cb329c17a25c694282d8d1",
+      "prior_strict_evidence": "s13-r1348-strict-ready.json",
+      "file_marker_contexts": [
+        503
+      ],
+      "hit_arms": 2,
+      "emitted_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/debuglib.h",
+      "current_sha256": "9650c3c246f82bc14c769189cc7f59aa702c8327b28da8e17a6825b7709c8914",
+      "original_sha256": "d3f73f4317c039937ba51ef439cff38a721328e5ae7c0a7bccce290e2031ac51",
+      "prior_strict_evidence": "s13-r1348-strict-ready.json",
+      "file_marker_contexts": [
+        492
+      ],
+      "hit_arms": 2,
+      "emitted_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rapdebug.h",
+      "current_sha256": "e75948dc2d8a6f94016c0aa3d2656f1a5eee774c97049ea7cee6466a8961e341",
+      "original_sha256": "ffc0d0378b56e4ef1a7b4356f7c00749f6cc4ef459df4a59af2d3bcf64728003",
+      "prior_strict_evidence": "s13-r1348-strict-ready.json",
+      "file_marker_contexts": [
+        508
+      ],
+      "hit_arms": 2,
+      "emitted_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/shell/inc/wowcmndg.h",
+      "current_sha256": "92c3ad8d3b8113edd7b4e8282294f5d1269a6ce25c98a50602422cf116666424",
+      "original_sha256": "ce25c125139070ba30b2a99d670bdac09ff614c14a08ce5ef0cce2d99b43a52c",
+      "prior_strict_evidence": "s13-r1348-strict-ready.json",
+      "file_marker_contexts": [
+        587
+      ],
+      "hit_arms": 1,
+      "emitted_lines": 0
+    }
+  ]
+}
