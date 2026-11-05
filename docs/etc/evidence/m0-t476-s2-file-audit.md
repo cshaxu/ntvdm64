@@ -85,3 +85,7 @@ The [excluded-only projection review](../../../artifacts/mvdm-audit/t476-s2-excl
 ## Compiler-transformed original-equivalent files
 
 The [transformed-line review](../../../artifacts/mvdm-audit/t476-s2-transformed-lines-review.json) completes 157 further condition-free files. Their complete uncommented original/current source and logical line positions match, but macros caused the earlier exact-text sampling to find no unique source line. Twenty-one real compiler contexts cover all 157 file markers. Each file emitted preprocessed text, and every emitted line maps to a nonblank original source line or an identical original pragma. This checks the transformed compiler output without assuming macro expansion preserves its literal text. The running partition is 673 complete and 382 open; no mirror source was changed.
+
+## Conditional files with transformed compiler output
+
+The [strict transformed-line review](../../../artifacts/mvdm-audit/t476-s2-strict-transformed-review.json) completes 14 conditional files with hash-matched recursive original/current projections. Twenty real compiler contexts cover the candidate file and hit-branch markers; for these 14 files every emitted line is attributed to a nonblank original source line or identical original pragma. Fifteen candidate files emitted no source lines and one has an unexplained emitted line; those remain open. The running partition is 687 complete and 368 open. No mirror source was modified.

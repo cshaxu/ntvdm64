@@ -1,0 +1,1119 @@
+{
+  "method": "hash-matched strict original/current conditional projection and matched-line review, all selected branches covered by compiler contexts; every emitted source line attributed to a nonblank original source line or identical pragma",
+  "contexts": [
+    503,
+    134,
+    39,
+    78,
+    587,
+    174,
+    71,
+    72,
+    103,
+    108,
+    190,
+    351,
+    492,
+    508,
+    301,
+    304,
+    162,
+    191,
+    342,
+    237
+  ],
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_mem.h",
+      "current_sha256": "e9f036f47e780525ca80d0a1af41823f998664b25209dc2d81c5198305fec8f6",
+      "original_sha256": "ed6b66363a1722415a7779879827126bb8ab2fc1df331435c3e587aef5189560",
+      "prior_strict_evidence": "s13-r1343-strict-ready.json",
+      "contexts": [
+        39
+      ],
+      "emitted_line_samples": [
+        {
+          "logical_line": 17,
+          "emitted": "extern IU8 ccpu_new_code_page (IU8 ** q);"
+        },
+        {
+          "logical_line": 19,
+          "emitted": "extern IU8 *pg_end;"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lgdt.c",
+      "current_sha256": "ebd809c4e812b38567818e46087fa18597ef93b3a1af186d07654e8a5983f778",
+      "original_sha256": "9a5d97d05b20a1c3e6a7e065168c1965bdcdee061fd9ca683f55896d4edf1f2c",
+      "prior_strict_evidence": "s13-r1343-strict-ready.json",
+      "contexts": [
+        71
+      ],
+      "emitted_line_samples": [
+        {
+          "logical_line": 34,
+          "emitted": "void"
+        },
+        {
+          "logical_line": 35,
+          "emitted": "LGDT16"
+        },
+        {
+          "logical_line": 37,
+          "emitted": "("
+        },
+        {
+          "logical_line": 38,
+          "emitted": "IU32 op1[2]"
+        },
+        {
+          "logical_line": 39,
+          "emitted": ")"
+        },
+        {
+          "logical_line": 44,
+          "emitted": "{"
+        },
+        {
+          "logical_line": 45,
+          "emitted": "CCPU_STAR[(0)].limit = (op1[0]);"
+        },
+        {
+          "logical_line": 46,
+          "emitted": "CCPU_STAR[(0)].base = (op1[1] & 0xffffff);"
+        },
+        {
+          "logical_line": 50,
+          "emitted": "}"
+        },
+        {
+          "logical_line": 52,
+          "emitted": "void"
+        },
+        {
+          "logical_line": 53,
+          "emitted": "LGDT32"
+        },
+        {
+          "logical_line": 55,
+          "emitted": "("
+        },
+        {
+          "logical_line": 56,
+          "emitted": "IU32 op1[2]"
+        },
+        {
+          "logical_line": 57,
+          "emitted": ")"
+        },
+        {
+          "logical_line": 62,
+          "emitted": "{"
+        },
+        {
+          "logical_line": 63,
+          "emitted": "CCPU_STAR[(0)].limit = (op1[0]);"
+        },
+        {
+          "logical_line": 64,
+          "emitted": "CCPU_STAR[(0)].base = (op1[1]);"
+        },
+        {
+          "logical_line": 68,
+          "emitted": "}"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lidt.c",
+      "current_sha256": "81462ebf2073e147232e34ca39a4b2f61a6b1a2a6f6b943c7b8d222ea79c8e66",
+      "original_sha256": "00305675f2235c4211471587a50a2f45c02bc93bc4faebcd857e4a96cc045fcb",
+      "prior_strict_evidence": "s13-r1343-strict-ready.json",
+      "contexts": [
+        72
+      ],
+      "emitted_line_samples": [
+        {
+          "logical_line": 35,
+          "emitted": "void"
+        },
+        {
+          "logical_line": 36,
+          "emitted": "LIDT16"
+        },
+        {
+          "logical_line": 38,
+          "emitted": "("
+        },
+        {
+          "logical_line": 39,
+          "emitted": "IU32 op1[2]"
+        },
+        {
+          "logical_line": 40,
+          "emitted": ")"
+        },
+        {
+          "logical_line": 45,
+          "emitted": "{"
+        },
+        {
+          "logical_line": 46,
+          "emitted": "CCPU_STAR[(1)].limit = (op1[0]);"
+        },
+        {
+          "logical_line": 47,
+          "emitted": "CCPU_STAR[(1)].base = (op1[1] & 0xffffff);"
+        },
+        {
+          "logical_line": 48,
+          "emitted": "}"
+        },
+        {
+          "logical_line": 50,
+          "emitted": "void"
+        },
+        {
+          "logical_line": 51,
+          "emitted": "LIDT32"
+        },
+        {
+          "logical_line": 53,
+          "emitted": "("
+        },
+        {
+          "logical_line": 54,
+          "emitted": "IU32 op1[2]"
+        },
+        {
+          "logical_line": 55,
+          "emitted": ")"
+        },
+        {
+          "logical_line": 60,
+          "emitted": "{"
+        },
+        {
+          "logical_line": 61,
+          "emitted": "CCPU_STAR[(1)].limit = (op1[0]);"
+        },
+        {
+          "logical_line": 62,
+          "emitted": "CCPU_STAR[(1)].base = (op1[1]);"
+        },
+        {
+          "logical_line": 63,
+          "emitted": "}"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lxs.c",
+      "current_sha256": "e63ff95995c8fafd6e6fc49768b10ba5781e1c7b8a1f1720ce8682a4f4497c05",
+      "original_sha256": "5e2aab7a7bed12022ba136337f8ce289ba3155f2df7d1ad2c42ca8cd065ccfef",
+      "prior_strict_evidence": "s13-r1343-strict-ready.json",
+      "contexts": [
+        78
+      ],
+      "emitted_line_samples": [
+        {
+          "logical_line": 39,
+          "emitted": "void"
+        },
+        {
+          "logical_line": 40,
+          "emitted": "LDS"
+        },
+        {
+          "logical_line": 42,
+          "emitted": "("
+        },
+        {
+          "logical_line": 43,
+          "emitted": "IU32 *pop1,"
+        },
+        {
+          "logical_line": 44,
+          "emitted": "IU32 op2[2]"
+        },
+        {
+          "logical_line": 45,
+          "emitted": ")"
+        },
+        {
+          "logical_line": 51,
+          "emitted": "{"
+        },
+        {
+          "logical_line": 53,
+          "emitted": "MOV_SR((IU32)3, op2[1]);"
+        },
+        {
+          "logical_line": 56,
+          "emitted": "*pop1 = op2[0];"
+        },
+        {
+          "logical_line": 57,
+          "emitted": "}"
+        },
+        {
+          "logical_line": 62,
+          "emitted": "void"
+        },
+        {
+          "logical_line": 63,
+          "emitted": "LES"
+        },
+        {
+          "logical_line": 65,
+          "emitted": "("
+        },
+        {
+          "logical_line": 66,
+          "emitted": "IU32 *pop1,"
+        },
+        {
+          "logical_line": 67,
+          "emitted": "IU32 op2[2]"
+        },
+        {
+          "logical_line": 68,
+          "emitted": ")"
+        },
+        {
+          "logical_line": 74,
+          "emitted": "{"
+        },
+        {
+          "logical_line": 76,
+          "emitted": "MOV_SR((IU32)0, op2[1]);"
+        },
+        {
+          "logical_line": 79,
+          "emitted": "*pop1 = op2[0];"
+        },
+        {
+          "logical_line": 80,
+          "emitted": "}"
+        },
+        {
+          "logical_line": 85,
+          "emitted": "void"
+        },
+        {
+          "logical_line": 86,
+          "emitted": "LFS"
+        },
+        {
+          "logical_line": 88,
+          "emitted": "("
+        },
+        {
+          "logical_line": 89,
+          "emitted": "IU32 *pop1,"
+        },
+        {
+          "logical_line": 90,
+          "emitted": "IU32 op2[2]"
+        },
+        {
+          "logical_line": 91,
+          "emitted": ")"
+        },
+        {
+          "logical_line": 97,
+          "emitted": "{"
+        },
+        {
+          "logical_line": 99,
+          "emitted": "MOV_SR((IU32)4, op2[1]);"
+        },
+        {
+          "logical_line": 102,
+          "emitted": "*pop1 = op2[0];"
+        },
+        {
+          "logical_line": 103,
+          "emitted": "}"
+        },
+        {
+          "logical_line": 108,
+          "emitted": "void"
+        },
+        {
+          "logical_line": 109,
+          "emitted": "LGS"
+        },
+        {
+          "logical_line": 111,
+          "emitted": "("
+        },
+        {
+          "logical_line": 112,
+          "emitted": "IU32 *pop1,"
+        },
+        {
+          "logical_line": 113,
+          "emitted": "IU32 op2[2]"
+        },
+        {
+          "logical_line": 114,
+          "emitted": ")"
+        },
+        {
+          "logical_line": 120,
+          "emitted": "{"
+        },
+        {
+          "logical_line": 122,
+          "emitted": "MOV_SR((IU32)5, op2[1]);"
+        },
+        {
+          "logical_line": 125,
+          "emitted": "*pop1 = op2[0];"
+        },
+        {
+          "logical_line": 126,
+          "emitted": "}"
+        },
+        {
+          "logical_line": 131,
+          "emitted": "void"
+        },
+        {
+          "logical_line": 132,
+          "emitted": "LSS"
+        },
+        {
+          "logical_line": 134,
+          "emitted": "("
+        },
+        {
+          "logical_line": 135,
+          "emitted": "IU32 *pop1,"
+        },
+        {
+          "logical_line": 136,
+          "emitted": "IU32 op2[2]"
+        },
+        {
+          "logical_line": 137,
+          "emitted": ")"
+        },
+        {
+          "logical_line": 143,
+          "emitted": "{"
+        },
+        {
+          "logical_line": 145,
+          "emitted": "MOV_SR((IU32)2, op2[1]);"
+        },
+        {
+          "logical_line": 148,
+          "emitted": "*pop1 = op2[0];"
+        },
+        {
+          "logical_line": 149,
+          "emitted": "}"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sgdt.c",
+      "current_sha256": "a67b1f8ceabd37a47eee75415555f0e2c2bc6daac3b700037f5268e2bbf6f15f",
+      "original_sha256": "b4af0fcc8d824d8fc3c2e7d40659844e66e45ee5026ffc17b43d150e513d41fc",
+      "prior_strict_evidence": "s13-r1343-strict-ready.json",
+      "contexts": [
+        103
+      ],
+      "emitted_line_samples": [
+        {
+          "logical_line": 35,
+          "emitted": "void"
+        },
+        {
+          "logical_line": 36,
+          "emitted": "SGDT16"
+        },
+        {
+          "logical_line": 38,
+          "emitted": "("
+        },
+        {
+          "logical_line": 39,
+          "emitted": "IU32 op1[2]"
+        },
+        {
+          "logical_line": 40,
+          "emitted": ")"
+        },
+        {
+          "logical_line": 45,
+          "emitted": "{"
+        },
+        {
+          "logical_line": 53,
+          "emitted": "op1[0] = CCPU_STAR[(0)].limit;"
+        },
+        {
+          "logical_line": 54,
+          "emitted": "op1[1] = CCPU_STAR[(0)].base;"
+        },
+        {
+          "logical_line": 55,
+          "emitted": "}"
+        },
+        {
+          "logical_line": 57,
+          "emitted": "void"
+        },
+        {
+          "logical_line": 58,
+          "emitted": "SGDT32"
+        },
+        {
+          "logical_line": 60,
+          "emitted": "("
+        },
+        {
+          "logical_line": 61,
+          "emitted": "IU32 op1[2]"
+        },
+        {
+          "logical_line": 62,
+          "emitted": ")"
+        },
+        {
+          "logical_line": 67,
+          "emitted": "{"
+        },
+        {
+          "logical_line": 68,
+          "emitted": "op1[0] = CCPU_STAR[(0)].limit;"
+        },
+        {
+          "logical_line": 69,
+          "emitted": "op1[1] = CCPU_STAR[(0)].base;"
+        },
+        {
+          "logical_line": 70,
+          "emitted": "}"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sidt.c",
+      "current_sha256": "1afd7acb7e9feee970b068f1770ccc854def8f6745cf919e9bc7606f03a27de2",
+      "original_sha256": "d6882f92a0171ebd6f5137d401e2af4f89c0e854f0349d51650096d755b1a9a0",
+      "prior_strict_evidence": "s13-r1343-strict-ready.json",
+      "contexts": [
+        108
+      ],
+      "emitted_line_samples": [
+        {
+          "logical_line": 35,
+          "emitted": "void"
+        },
+        {
+          "logical_line": 36,
+          "emitted": "SIDT16"
+        },
+        {
+          "logical_line": 38,
+          "emitted": "("
+        },
+        {
+          "logical_line": 39,
+          "emitted": "IU32 op1[2]"
+        },
+        {
+          "logical_line": 40,
+          "emitted": ")"
+        },
+        {
+          "logical_line": 45,
+          "emitted": "{"
+        },
+        {
+          "logical_line": 54,
+          "emitted": "op1[0] = CCPU_STAR[(1)].limit;"
+        },
+        {
+          "logical_line": 55,
+          "emitted": "op1[1] = CCPU_STAR[(1)].base;"
+        },
+        {
+          "logical_line": 56,
+          "emitted": "}"
+        },
+        {
+          "logical_line": 58,
+          "emitted": "void"
+        },
+        {
+          "logical_line": 59,
+          "emitted": "SIDT32"
+        },
+        {
+          "logical_line": 61,
+          "emitted": "("
+        },
+        {
+          "logical_line": 62,
+          "emitted": "IU32 op1[2]"
+        },
+        {
+          "logical_line": 63,
+          "emitted": ")"
+        },
+        {
+          "logical_line": 68,
+          "emitted": "{"
+        },
+        {
+          "logical_line": 69,
+          "emitted": "op1[0] = CCPU_STAR[(1)].limit;"
+        },
+        {
+          "logical_line": 70,
+          "emitted": "op1[1] = CCPU_STAR[(1)].base;"
+        },
+        {
+          "logical_line": 71,
+          "emitted": "}"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/profile.c",
+      "current_sha256": "fa65bdaae3f07dce263ff3c2307a51bd0520a4d3e1132860f86913562a4058fc",
+      "original_sha256": "93a1891b0a27b336ccecd99a4b198e1d26f769fe31ed83023df52178e3364a51",
+      "prior_strict_evidence": "s13-r1343-strict-ready.json",
+      "contexts": [
+        304
+      ],
+      "emitted_line_samples": [
+        {
+          "logical_line": 3325,
+          "emitted": "void EnableAllEOIs (void) { ; }"
+        },
+        {
+          "logical_line": 3326,
+          "emitted": "void DisableAllEOIs (void) { ; }"
+        },
+        {
+          "logical_line": 3327,
+          "emitted": "void ProcessProfBuffer (void) { ; }"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/equip.h",
+      "current_sha256": "d983a6294001ed8409399b04ca735da2cdf1bc64223584500b5b2ff13a64e72f",
+      "original_sha256": "9530d21a819d9e3ff63d9fd8173f2c0df049cc48aa9ee49a740bad6db921e8aa",
+      "prior_strict_evidence": "s13-r1348-strict-ready.json",
+      "contexts": [
+        134
+      ],
+      "emitted_line_samples": [
+        {
+          "logical_line": 85,
+          "emitted": "typedef union"
+        },
+        {
+          "logical_line": 86,
+          "emitted": "{"
+        },
+        {
+          "logical_line": 87,
+          "emitted": "IU16 all;"
+        },
+        {
+          "logical_line": 88,
+          "emitted": "struct {"
+        },
+        {
+          "logical_line": 89,
+          "emitted": "HALF_WORD_BIT_FIELD diskette_present:1;"
+        },
+        {
+          "logical_line": 90,
+          "emitted": "HALF_WORD_BIT_FIELD coprocessor_present:1;"
+        },
+        {
+          "logical_line": 91,
+          "emitted": "HALF_WORD_BIT_FIELD ram_size:2;"
+        },
+        {
+          "logical_line": 92,
+          "emitted": "HALF_WORD_BIT_FIELD video_mode:2;"
+        },
+        {
+          "logical_line": 93,
+          "emitted": "HALF_WORD_BIT_FIELD max_diskette:2;"
+        },
+        {
+          "logical_line": 95,
+          "emitted": "HALF_WORD_BIT_FIELD unused:1;"
+        },
+        {
+          "logical_line": 96,
+          "emitted": "HALF_WORD_BIT_FIELD rs232_count:3;"
+        },
+        {
+          "logical_line": 97,
+          "emitted": "HALF_WORD_BIT_FIELD game_io_present:1;"
+        },
+        {
+          "logical_line": 98,
+          "emitted": "HALF_WORD_BIT_FIELD not_used:1;"
+        },
+        {
+          "logical_line": 99,
+          "emitted": "HALF_WORD_BIT_FIELD printer_count:2;"
+        },
+        {
+          "logical_line": 100,
+          "emitted": "} bits;"
+        },
+        {
+          "logical_line": 101,
+          "emitted": "} EQUIPMENT_WORD;"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_lpt.h",
+      "current_sha256": "2a2dba16e6be9cc6264e13702c6c9c04b64182d14b3ff9825be68fbfa3135bd2",
+      "original_sha256": "8fdfe8fbd8e8dd4a9746a50851410a051f640365e3d59d9ed8024dfb397da820",
+      "prior_strict_evidence": "s13-r1348-strict-ready.json",
+      "contexts": [
+        134,
+        237
+      ],
+      "emitted_line_samples": [
+        {
+          "logical_line": 124,
+          "emitted": "extern\tIS16\t\thost_lpt_valid"
+        },
+        {
+          "logical_line": 125,
+          "emitted": "(IU8 hostID, ConfigValues * val, ntable * dummy, CHAR * errString);"
+        },
+        {
+          "logical_line": 126,
+          "emitted": "extern\tvoid\t\thost_lpt_change (IU8 hostID, UINT apply);"
+        },
+        {
+          "logical_line": 127,
+          "emitted": "extern\tIS16\t\thost_lpt_active"
+        },
+        {
+          "logical_line": 128,
+          "emitted": "(IU8 hostID, UINT active, CHAR * errString);"
+        },
+        {
+          "logical_line": 129,
+          "emitted": "extern\tvoid\t\thost_lpt_close (int adapter);"
+        },
+        {
+          "logical_line": 130,
+          "emitted": "extern\tunsigned long\thost_lpt_status (int adapter);"
+        },
+        {
+          "logical_line": 131,
+          "emitted": "extern\tUINT\t\thost_print_byte (int adapter, IU8 value);"
+        },
+        {
+          "logical_line": 132,
+          "emitted": "extern\tUINT\t\thost_print_doc (int adapter);"
+        },
+        {
+          "logical_line": 133,
+          "emitted": "extern\tvoid\t\thost_reset_print (int adapter);"
+        },
+        {
+          "logical_line": 134,
+          "emitted": "extern\tvoid\t\thost_print_auto_feed (int adapter, UINT auto_feed);"
+        },
+        {
+          "logical_line": 137,
+          "emitted": "extern\tBOOLEAN \thost_set_lpt_direct_access(int adapter, BOOLEAN direct_access);"
+        },
+        {
+          "logical_line": 138,
+          "emitted": "extern\tUCHAR\t\thost_read_printer_status_port(int adapter);"
+        },
+        {
+          "logical_line": 124,
+          "emitted": "extern\tIS16\t\thost_lpt_valid"
+        },
+        {
+          "logical_line": 125,
+          "emitted": "(IU8 hostID, ConfigValues * val, ntable * dummy, CHAR * errString);"
+        },
+        {
+          "logical_line": 126,
+          "emitted": "extern\tvoid\t\thost_lpt_change (IU8 hostID, UINT apply);"
+        },
+        {
+          "logical_line": 127,
+          "emitted": "extern\tIS16\t\thost_lpt_active"
+        },
+        {
+          "logical_line": 128,
+          "emitted": "(IU8 hostID, UINT active, CHAR * errString);"
+        },
+        {
+          "logical_line": 129,
+          "emitted": "extern\tvoid\t\thost_lpt_close (int adapter);"
+        },
+        {
+          "logical_line": 130,
+          "emitted": "extern\tunsigned long\thost_lpt_status (int adapter);"
+        },
+        {
+          "logical_line": 131,
+          "emitted": "extern\tUINT\t\thost_print_byte (int adapter, IU8 value);"
+        },
+        {
+          "logical_line": 132,
+          "emitted": "extern\tUINT\t\thost_print_doc (int adapter);"
+        },
+        {
+          "logical_line": 133,
+          "emitted": "extern\tvoid\t\thost_reset_print (int adapter);"
+        },
+        {
+          "logical_line": 134,
+          "emitted": "extern\tvoid\t\thost_print_auto_feed (int adapter, UINT auto_feed);"
+        },
+        {
+          "logical_line": 137,
+          "emitted": "extern\tBOOLEAN \thost_set_lpt_direct_access(int adapter, BOOLEAN direct_access);"
+        },
+        {
+          "logical_line": 138,
+          "emitted": "extern\tUCHAR\t\thost_read_printer_status_port(int adapter);"
+        },
+        {
+          "logical_line": 147,
+          "emitted": "extern void host_printer_setup_table(IU32 table_addr, IU16 nPorts, IU16 * lptStatusPortAddr);"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/keyba.h",
+      "current_sha256": "75ca6d2140e8457aad992d8e52dd2b9241dbf3720a3f13186306feef6261f43c",
+      "original_sha256": "619a9be301eb3a4ca8632d2f2459413e8285c4796e3de35e20aba2488aa7a0b9",
+      "prior_strict_evidence": "s13-r1348-strict-ready.json",
+      "contexts": [
+        134
+      ],
+      "emitted_line_samples": [
+        {
+          "logical_line": 23,
+          "emitted": "extern void kbd_inb (IU16 port, IU8 * val);"
+        },
+        {
+          "logical_line": 24,
+          "emitted": "extern void kbd_outb (IU16 port, IU8 val);"
+        },
+        {
+          "logical_line": 26,
+          "emitted": "extern void ( *host_key_down_fn_ptr ) (int key);"
+        },
+        {
+          "logical_line": 27,
+          "emitted": "extern void ( *host_key_up_fn_ptr ) (int key);"
+        },
+        {
+          "logical_line": 29,
+          "emitted": "extern void ( *do_key_repeats_fn_ptr ) (void);"
+        },
+        {
+          "logical_line": 30,
+          "emitted": "extern void keyboard_init (void);"
+        },
+        {
+          "logical_line": 31,
+          "emitted": "extern void keyboard_post (void);"
+        },
+        {
+          "logical_line": 32,
+          "emitted": "extern void AT_kbd_init (void);"
+        },
+        {
+          "logical_line": 33,
+          "emitted": "extern void AT_kbd_post (void);"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/quick_ev.h",
+      "current_sha256": "fc038d51d2945051b1ec35f92cb60a355c2e21bd145c9493b7b6f511d0b704b4",
+      "original_sha256": "c59fec315058b2cc03394d02d9c3756350357f7eb8cb48a541e56aae1b7939a2",
+      "prior_strict_evidence": "s13-r1343-strict-ready.json",
+      "contexts": [
+        134,
+        237
+      ],
+      "emitted_line_samples": [
+        {
+          "logical_line": 19,
+          "emitted": "typedef void (*Q_CALLBACK_FN) (long parm);"
+        },
+        {
+          "logical_line": 21,
+          "emitted": "extern void q_event_init (void);"
+        },
+        {
+          "logical_line": 22,
+          "emitted": "extern void delete_q_event (q_ev_handle handle);"
+        },
+        {
+          "logical_line": 23,
+          "emitted": "extern void dispatch_q_event (void);"
+        },
+        {
+          "logical_line": 24,
+          "emitted": "extern void delete_tic_event (q_ev_handle handle);"
+        },
+        {
+          "logical_line": 25,
+          "emitted": "extern void tic_event_init (void);"
+        },
+        {
+          "logical_line": 26,
+          "emitted": "extern q_ev_handle add_tic_event (Q_CALLBACK_FN func, unsigned long time, long param);"
+        },
+        {
+          "logical_line": 27,
+          "emitted": "extern q_ev_handle add_q_event_i (Q_CALLBACK_FN func, unsigned long time, long param);"
+        },
+        {
+          "logical_line": 28,
+          "emitted": "extern q_ev_handle add_q_event_t (Q_CALLBACK_FN func, unsigned long time, long param);"
+        },
+        {
+          "logical_line": 50,
+          "emitted": "extern IU32 calc_q_inst_for_time (IU32 time);"
+        },
+        {
+          "logical_line": 51,
+          "emitted": "extern IU32 calc_q_time_for_inst (IU32 inst);"
+        },
+        {
+          "logical_line": 19,
+          "emitted": "typedef void (*Q_CALLBACK_FN) (long parm);"
+        },
+        {
+          "logical_line": 21,
+          "emitted": "extern void q_event_init (void);"
+        },
+        {
+          "logical_line": 22,
+          "emitted": "extern void delete_q_event (q_ev_handle handle);"
+        },
+        {
+          "logical_line": 23,
+          "emitted": "extern void dispatch_q_event (void);"
+        },
+        {
+          "logical_line": 24,
+          "emitted": "extern void delete_tic_event (q_ev_handle handle);"
+        },
+        {
+          "logical_line": 25,
+          "emitted": "extern void tic_event_init (void);"
+        },
+        {
+          "logical_line": 26,
+          "emitted": "extern q_ev_handle add_tic_event (Q_CALLBACK_FN func, unsigned long time, long param);"
+        },
+        {
+          "logical_line": 27,
+          "emitted": "extern q_ev_handle add_q_event_i (Q_CALLBACK_FN func, unsigned long time, long param);"
+        },
+        {
+          "logical_line": 28,
+          "emitted": "extern q_ev_handle add_q_event_t (Q_CALLBACK_FN func, unsigned long time, long param);"
+        },
+        {
+          "logical_line": 50,
+          "emitted": "extern IU32 calc_q_inst_for_time (IU32 time);"
+        },
+        {
+          "logical_line": 51,
+          "emitted": "extern IU32 calc_q_time_for_inst (IU32 inst);"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_dmmy.c",
+      "current_sha256": "93c6a1d8ea22ce7db09710b570f1856333e7ab4b56c292fac79103732c3e0909",
+      "original_sha256": "4f7aaa63fb26f4fb556ea90183149cee7dfd048b954922ae335e17ae3cafc40d",
+      "prior_strict_evidence": "s13-r1348-strict-ready.json",
+      "contexts": [
+        190
+      ],
+      "emitted_line_samples": [
+        {
+          "logical_line": 39,
+          "emitted": "int get_ega_switch_setting() { ;return 0; }"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/fastwow.h",
+      "current_sha256": "8a1d959854751dcba6a8b9f624e28d92b41836ded4b406968de34f9a18852608",
+      "original_sha256": "0a59ccbb6b0bf66982352bfefda5c08867ec44dd9ff55731d2b701035d684520",
+      "prior_strict_evidence": "s13-r1343-strict-ready.json",
+      "contexts": [
+        587
+      ],
+      "emitted_line_samples": [
+        {
+          "logical_line": 44,
+          "emitted": "extern void FastWowFirstCode(void);"
+        },
+        {
+          "logical_line": 45,
+          "emitted": "extern void FixLocks(void);"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wusercli.h",
+      "current_sha256": "3fb024c93755563fb20cf94c0b4f10674970b5866a053ebd30591c68c92872f3",
+      "original_sha256": "2731955b6f6d24419575806304481b7d866c99b552ec8da756fc956b5dfa4b2e",
+      "prior_strict_evidence": "s13-r1343-strict-ready.json",
+      "contexts": [
+        587
+      ],
+      "emitted_line_samples": [
+        {
+          "logical_line": 6,
+          "emitted": "ULONG  WU32DefHookProc(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 7,
+          "emitted": "ULONG  WU32EnableMenuItem(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 8,
+          "emitted": "ULONG  WU32GetKeyState(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 9,
+          "emitted": "ULONG  WU32GetKeyboardState(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 70,
+          "emitted": "ULONG  WU32ClientToScreen(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 71,
+          "emitted": "ULONG  WU32GetClassName(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 72,
+          "emitted": "ULONG  WU32GetClientRect(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 73,
+          "emitted": "ULONG  WU32GetCursorPos(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 74,
+          "emitted": "ULONG  WU32GetDesktopWindow(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 75,
+          "emitted": "ULONG  WU32GetDlgItem(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 76,
+          "emitted": "ULONG  WU32GetMenu(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 77,
+          "emitted": "ULONG  WU32GetMenuItemCount(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 78,
+          "emitted": "ULONG  WU32GetMenuItemID(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 79,
+          "emitted": "ULONG  WU32GetMenuState(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 80,
+          "emitted": "ULONG  WU32GetNextWindow(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 81,
+          "emitted": "ULONG  WU32GetParent(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 82,
+          "emitted": "ULONG  WU32GetSubMenu(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 83,
+          "emitted": "ULONG  WU32GetSysColor(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 84,
+          "emitted": "ULONG  WU32GetSystemMetrics(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 85,
+          "emitted": "ULONG  WU32GetTopWindow(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 86,
+          "emitted": "ULONG  WU32GetWindow(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 87,
+          "emitted": "ULONG  WU32GetWindowRect(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 88,
+          "emitted": "ULONG  WU32IsWindow(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 89,
+          "emitted": "ULONG  WU32ScreenToClient(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 90,
+          "emitted": "ULONG  WU32IsChild(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 91,
+          "emitted": "ULONG  WU32IsIconic(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 92,
+          "emitted": "ULONG  WU32IsWindowEnabled(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 93,
+          "emitted": "ULONG  WU32IsWindowVisible(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 94,
+          "emitted": "ULONG  WU32IsZoomed(PVDMFRAME pFrame);"
+        },
+        {
+          "logical_line": 95,
+          "emitted": "ULONG  WU32GetTickCount(PVDMFRAME pFrame);"
+        }
+      ]
+    }
+  ]
+}
