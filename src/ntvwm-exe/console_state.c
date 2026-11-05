@@ -1,6 +1,6 @@
 /* Recovered from S8 d253e55af native_console_capture.c; see component README. */
 #include "console_state.h"
-#include "lib-win32/io/console_members.h"
+#include "lib-win32/console/console_members.h"
 #include "common/protocol/frontend_lifecycle.h"
 #include <string.h>
 #include <stdio.h>

@@ -1125,3 +1125,5 @@ focused timer/hook witnesses, and the finite S2 dialog/input/caret handoff.
 [T473 original declaration provenance](evidence/m0-t473-original-abi-provenance.md) preserves the imported declaration-cohort record.
 
 [T473 original-path correction](evidence/m0-t473-s12-original-path-correction.md) records the flat source layout and header selection evidence.
+
+[T474 S2 Win32 library split](evidence/m0-t474-s2-win32-library-split.md) records the ownership split, validation and delivery.

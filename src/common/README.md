@@ -127,7 +127,7 @@ snapshot allocations are freed; successful copied records belong to the caller.
 NTMON retains reconnect, selection, confirmation, UI and resource lifetime.
 NTSRV remains snapshot and termination authority; common never enumerates tasks.
 
-`lib-win32/io/console_members` shares allocation, bounded capacity growth, current-Console
+`lib-win32/console/console_members` shares allocation, bounded capacity growth, current-Console
 sampling and release only. The caller explicitly supplies its initial/maximum
 capacity and API-read ceiling. A failure exposes neither partial data nor an
 allocation. Growth retries are immediate size negotiation, not timer polling.
@@ -136,7 +136,7 @@ checks retain 4096, native quiescence/launcher resume retain 65536. Authenticati
 member liveness, join acceptance, resume and quiescence remain local policies.
 Single-member launcher cleanup remains its local stack-buffer query.
 
-`lib-win32/io/pipe_transfer` is project-added byte transport, not a third message
+`lib-win32/pipe/pipe_transfer` is project-added byte transport, not a third message
 protocol. It is shared by the worker frontend client, frontend channel and
 transport fixtures. The native command/startup control pipes and their reply
 DTOs are removed; these operations use authenticated NTSRV RPC.

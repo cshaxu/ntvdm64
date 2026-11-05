@@ -2,36 +2,39 @@
 
 ## Current Work
 
-**Active: M0 T474 S1** — integrate the shared-ownership worktree commit range.
+**Active: M0 T474 S2** — split generic Win32 I/O ownership.
 
 T473 was closed by owner direction; its [closure](../history/m0-t473-closure.md)
-and queued mirror audit remain authoritative. The 51-commit sibling range has
-been applied and is undergoing integration review.
+and queued mirror audit remain authoritative. The 51-commit sibling range was integrated and delivered in S1; [evidence](../etc/evidence/m0-t474-s1-shared-range-integration.md).
 
 ## Active Packet
 
-### M0 T474 S1 — shared-ownership commit integration
+### M0 T474 S2 — Win32 pipe, console and file ownership
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T474 S1, Ordinary Mode. |
-| Admission And Approval | Owner directed admission after T473 closure and requested the entire sibling commit range with history preserved. |
-| Objective | Apply all commits after common ancestor `09b58f5c646cbcbf797748c45f32833a28a48b1d` through sibling head `5ccff9f0d216295ad390b795e4c43c5db7f7b0c1` onto the latest main baseline. |
-| Non-goals | No guest source or image modification or rebuilding; do not silently drop commits. |
-| Reference Baseline | T473 closure `5ed4e560d`; sibling `review/shared-ownership` clean at the head above. |
-| Files And ABI Surface | Shared libraries, component boundaries, build/test infrastructure and source files in the sibling commit range. |
-| Applicable Rules | Source policy, minimal guest diff, preserve unrelated work, owner conflict directions. |
-| Verification | Review every conflict and applied range; verify build and affected checks after integration as appropriate. |
-| Delivery State | 51 commits applied in order; coherent ten-component package built, Full selected gates and shared-library checks passed, and both destinations hash-verified. [Evidence](../etc/evidence/m0-t474-s1-shared-range-integration.md). Awaiting review. |
-| Expected Markers | All 51 commits accounted for; commit ordering and provenance retained. |
-| Asset Needs | Existing local repository and shared-ownership worktree. |
-| Reporting Requirements | Report common ancestor, imported commits, resolutions and verification. |
-| Stop Conditions | Guest changes, unrecoverable conflict or an actual incompatible requirement. |
-| Exit Criteria | Complete range integration, review, verification and normal delivery. |
-| Original Owner Request | Integrate the whole post-ancestor range in one operation, keep history; keep current assets on conflicts and choose sibling current documentation on conflicts, resolve source conflicts independently. |
-| Similar-Issue Sweep | Check all conflict categories and preserve the newly queued mirror audit. |
-| Candidate Proposal | [Shared implementation ownership](../proposals/proposal-shared-implementation-ownership-001.md). |
+| Identifier Mode | M0 T474 S2, Ordinary Mode. |
+| Admission And Approval | Owner directed moving lib-win32/io into pipe, console and file and splitting their static libraries. S1 delivery is [recorded](../etc/evidence/m0-t474-s1-shared-range-integration.md). |
+| Candidate Proposal | [Shared implementation ownership](../proposals/proposal-shared-implementation-ownership-001.md); S2 split is owner-directed. |
+| Objective | Separate shared Win32 libraries by responsibility without changing behavior or protocols; retain existing common aggregate link edges. |
+| Non-goals | Guest changes, lifecycle changes, introducing duplicate implementations, unrelated refactors. |
+| Reference Baseline | `eac2932d5`; S1 Full and process-hook checks passed. |
+| Files And ABI Surface | `src/lib-win32`, consumers, build generators, tests and documentation; internal static interfaces only. |
+| Applicable Rules | Preserve authorized source, use cached builds, coherent publication, lifecycle and RPC boundaries. |
+| Verification | x86/x64 full cached build, relevant focused checks, Full selected product suite, release hash validation. |
+| Delivery State | Complete candidate built, focused checks and Full selected gates passed, ten components and hook license published and hash verified at both destinations; [evidence](../etc/evidence/m0-t474-s2-win32-library-split.md). Awaiting owner acceptance. |
+| Expected Markers | No lib-win32/io references or lib-io archive; pipe, console and file consumers link and operate correctly. |
+| Asset Needs | Existing caches, candidate runtime package, unchanged guest media and isolated test resources. |
+| Reporting Requirements | Ownership and build changes, test results, full release and commit identities. |
+| Stop Conditions | Unapproved observable semantic change or guest modifications. |
+| Exit Criteria | Review, cached build, Full tests, complete publication, commit and push. |
+| Original Owner Request | Admit S to split lib-win32/io into pipe, console and file with distinct static libraries; build, test, publish, commit and push. |
+| Similar-Issue Sweep | All build graphs and archive consumers including fixtures, x86 and x64. |
+| Temporary Evidence | `build/t474-s2`, 90-minute phase, 4-GiB and 15-minute no-progress budget; stable caches retained. |
 
+## S1 Closure Record
+
+The [S1 integration](../etc/evidence/m0-t474-s1-shared-range-integration.md) was delivered and accepted as the S2 baseline.
 
 ## M0 T475 S5 Closure
 

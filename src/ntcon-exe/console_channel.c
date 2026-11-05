@@ -1,7 +1,7 @@
 #include "console_channel.h"
 #include "console_frontend.h"
-#include "lib-win32/io/pipe_transfer.h"
-#include "lib-win32/io/pipe_pair.h"
+#include "lib-win32/pipe/pipe_transfer.h"
+#include "lib-win32/pipe/pipe_pair.h"
 #include "common/protocol/frontend_lifecycle.h"
 #include "common/base_srv/base_rpc_client.h"
 #include <stddef.h>

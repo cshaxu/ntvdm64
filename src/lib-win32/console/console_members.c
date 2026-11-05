@@ -1,4 +1,4 @@
-#include "lib-win32/io/console_members.h"
+#include "lib-win32/console/console_members.h"
 
 DWORD common_console_members_read(DWORD initial,DWORD limit,DWORD reads,
     DWORD **members,DWORD *count)

@@ -11,7 +11,7 @@
 #include "common/protocol/version.h" /* Shared metadata, no product behavior. */
 #include "common/protocol/frontend_lifecycle.h"
 #include "common/protocol/frontend_protocol.h"
-#include "lib-win32/io/console_members.h"
+#include "lib-win32/console/console_members.h"
 #include "lib-win32/rpc/local_binding.h"
 #include "common/rpc/native_command.h"
 #include "common/rpc/frontend_control.h"

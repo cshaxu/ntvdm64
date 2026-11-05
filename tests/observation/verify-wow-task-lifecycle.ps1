@@ -189,7 +189,7 @@ $fixtureLibraries = @(
     'worker-base.lib', 'common-root.lib', 'common-rpc.lib', 'lib-rpc.lib',
     'common-native-hook-installer.lib', 'common-native-hook-context.lib', 'lib-process-hook.lib', 'lib-handle.lib',
     'lib-file.lib', 'lib-crt-compat.lib', 'common-worker-thread.lib', 'lib-thread.lib',
-    'lib-io.lib', 'common-codec.lib', 'common-console.lib',
+    'lib-pipe.lib','lib-console.lib','lib-file.lib', 'common-codec.lib', 'common-console.lib',
     'opennt-base-client.lib', 'opennt-base-bindings.lib', 'common-base-srv-bindings.lib', 'broker-transport.lib', 'common-base-srv-transport.lib',
     'worker-shell.lib', 'worker-command-bindings.lib',
     'original-softpc-host-fixture-roots.lib', 'original-softpc-support.lib',

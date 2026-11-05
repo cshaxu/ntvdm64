@@ -1,6 +1,6 @@
 /* File identity for cross-width creation; no search/classifier or native RTL
  * dependency. Kept separate from the image-section metadata object. */
-#include "lib-win32/io/native_path.h"
+#include "lib-win32/file/native_path.h"
 #include <string.h>
 #include <wchar.h>
 

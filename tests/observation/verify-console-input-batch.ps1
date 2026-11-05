@@ -15,7 +15,7 @@ $sources=@('tests/app/console_input_batch_test.c',
  'tests/app/console_input_batch_stubs.c',
  'src/ntvdm-exe/softpc/mvdm_keyboard_history.c',
  'src/common/console/client.c',
- 'src/lib-win32/io/pipe_transfer.c',
+ 'src/lib-win32/pipe/pipe_transfer.c',
  'src/ntvdm-exe/win32/console_client.c','src/ntvdm-exe/win32/console_graphics.c',
  'src/ntvdm-exe/win32/console_bitmap.c','src/ntvdm-exe/softpc/v7_pointer.c','src/compat/console_grid.c',
  'src/ntvdm-exe/session/session.c','src/ntvdm-exe/session/guest_memory_lease.c') |

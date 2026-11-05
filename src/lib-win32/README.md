@@ -1,9 +1,6 @@
 # Win32 integration libraries
 
-`rpc/` owns generic local Windows RPC binding, asynchronous call, and authenticated local peer process matching mechanisms. `io/` owns bounded pipe
-transfers, Console process-list sampling and final native path resolution.
-It also creates connected local overlapped byte-pipe pairs; client identity
-validation, protocol and channel admission remain caller-owned.
+`rpc/` owns generic local Windows RPC binding, asynchronous calls and local peer process matching. `pipe/` provides connected local overlapped byte-pipe pairs and bounded transfers. `console/` samples Console process membership. `file/` owns final native path resolution and file identity comparisons. Client identity validation, protocol and channel admission remain caller-owned.
 These libraries do not depend on common, worker-base or product components.
 Protocol and authorization policy remain with their respective owners.
 

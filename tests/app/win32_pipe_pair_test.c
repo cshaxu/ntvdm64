@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <wchar.h>
 #include <string.h>
-#include "lib-win32/io/pipe_pair.h"
-#include "lib-win32/io/pipe_transfer.h"
+#include "lib-win32/pipe/pipe_pair.h"
+#include "lib-win32/pipe/pipe_transfer.h"
 #define CHECK(x) do { ++checks; if(!(x)){fprintf(stderr,"pipe pair failure line %d error=%lu\n",__LINE__,GetLastError());result=1;goto done;} } while(0)
 int main(void)
 {
