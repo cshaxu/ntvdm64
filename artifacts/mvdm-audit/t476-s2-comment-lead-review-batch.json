@@ -1,0 +1,2173 @@
+{
+  "method": "Hash-bound original conditional-tree and line-projection audit with per-arm ledger and compiler observations; static leads were lexically verified as comment-only on at least one side. Unobserved configurations and runtime behavior not certified.",
+  "files": [
+    {
+      "path": "src/mvdm-host/inc/softpc.h",
+      "current_sha256": "4bb85e0a70526b1bbf67ac5ac4531afb1c649efcda65d05ade6280029b18c75b",
+      "original_sha256": "1e6fbd5f67aa04749d7896bd0109fe45daa22e691839d1261bbc3f039924bd9b",
+      "evidence": "s13-r1392-registered-diffs.json",
+      "prior_method": "Review direct retained-arm differences against specific existing mirror registrations after original-tree and source-projection checks; full diffs listed.",
+      "prior_record": {
+        "path": "src/mvdm-host/inc/softpc.h",
+        "current_sha256": "4bb85e0a70526b1bbf67ac5ac4531afb1c649efcda65d05ade6280029b18c75b",
+        "original_sha256": "1e6fbd5f67aa04749d7896bd0109fe45daa22e691839d1261bbc3f039924bd9b",
+        "matched_lines": 311,
+        "strict_tree": {
+          "excluded": 2,
+          "groups": 2,
+          "implicit_retained_anchor": 1,
+          "retained_leaf_differences": 1,
+          "retained": 1,
+          "implicit_continuation": 1
+        },
+        "registered_differences": [
+          "MVDM-HOST-DIV-294"
+        ],
+        "retained_arm_direct_differences": [
+          {
+            "branch_line": 239,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -24,20 +24,20 @@",
+              " extern VOID setBH(UCHAR val);",
+              "-extern USHORT getAX(VOID);",
+              "-extern USHORT getCX(VOID);",
+              "-extern USHORT getDX(VOID);",
+              "-extern USHORT getBX(VOID);",
+              "-extern USHORT getSP(VOID);",
+              "-extern USHORT getBP(VOID);",
+              "-extern USHORT getSI(VOID);",
+              "-extern USHORT getDI(VOID);",
+              "-extern USHORT getIP(VOID);",
+              "-extern VOID setAX(USHORT val);",
+              "-extern VOID setCX(USHORT val);",
+              "-extern VOID setDX(USHORT val);",
+              "-extern VOID setBX(USHORT val);",
+              "-extern VOID setSP(USHORT val);",
+              "-extern VOID setBP(USHORT val);",
+              "-extern VOID setSI(USHORT val);",
+              "-extern VOID setDI(USHORT val);",
+              "-extern VOID setIP(USHORT val);",
+              "+extern USHORT __cdecl getAX(VOID);",
+              "+extern USHORT __cdecl getCX(VOID);",
+              "+extern USHORT __cdecl getDX(VOID);",
+              "+extern USHORT __cdecl getBX(VOID);",
+              "+extern USHORT __cdecl getSP(VOID);",
+              "+extern USHORT __cdecl getBP(VOID);",
+              "+extern USHORT __cdecl getSI(VOID);",
+              "+extern USHORT __cdecl getDI(VOID);",
+              "+extern USHORT __cdecl getIP(VOID);",
+              "+extern VOID __cdecl setAX(USHORT val);",
+              "+extern VOID __cdecl setCX(USHORT val);",
+              "+extern VOID __cdecl setDX(USHORT val);",
+              "+extern VOID __cdecl setBX(USHORT val);",
+              "+extern VOID __cdecl setSP(USHORT val);",
+              "+extern VOID __cdecl setBP(USHORT val);",
+              "+extern VOID __cdecl setSI(USHORT val);",
+              "+extern VOID __cdecl setDI(USHORT val);",
+              "+extern VOID __cdecl setIP(USHORT val);",
+              " extern ULONG getEAX(VOID);",
+              "@@ -60,12 +60,12 @@",
+              " extern VOID setEIP(ULONG val);",
+              "-extern USHORT getES(VOID);",
+              "-extern USHORT getCS(VOID);",
+              "-extern USHORT getSS(VOID);",
+              "-extern USHORT getDS(VOID);",
+              "+extern USHORT __cdecl getES(VOID);",
+              "+extern USHORT __cdecl getCS(VOID);",
+              "+extern USHORT __cdecl getSS(VOID);",
+              "+extern USHORT __cdecl getDS(VOID);",
+              " extern USHORT getFS(VOID);",
+              " extern USHORT getGS(VOID);",
+              "-extern VOID setES(USHORT val);",
+              "-extern VOID setCS(USHORT val);",
+              "-extern VOID setSS(USHORT val);",
+              "-extern VOID setDS(USHORT val);",
+              "+extern VOID __cdecl setES(USHORT val);",
+              "+extern VOID __cdecl setCS(USHORT val);",
+              "+extern VOID __cdecl setSS(USHORT val);",
+              "+extern VOID __cdecl setDS(USHORT val);",
+              " extern VOID setFS(USHORT val);",
+              "@@ -85,3 +85,3 @@",
+              " extern ULONG getEFLAGS(VOID);",
+              "-extern USHORT getMSW(VOID);",
+              "+extern USHORT __cdecl getMSW(VOID);",
+              " extern VOID setAF(ULONG val);"
+            ]
+          }
+        ]
+      },
+      "comment_only_static_leads": [
+        {
+          "original": 3,
+          "current": 6,
+          "logical": 6,
+          "text": "Copyright (c) 1990  Microsoft Corporation"
+        },
+        {
+          "original": 5,
+          "current": 8,
+          "logical": 8,
+          "text": "Module Name:"
+        },
+        {
+          "original": 9,
+          "current": 12,
+          "logical": 12,
+          "text": "Abstract:"
+        },
+        {
+          "original": 11,
+          "current": 14,
+          "logical": 14,
+          "text": "High-level include file for components interfacing to SoftPC"
+        },
+        {
+          "original": 15,
+          "current": 18,
+          "logical": 18,
+          "text": "Dave Hastings (daveh) 25-Apr-1991"
+        },
+        {
+          "original": 17,
+          "current": 20,
+          "logical": 20,
+          "text": "Revision History:"
+        },
+        {
+          "original": 18,
+          "current": 21,
+          "logical": 21,
+          "text": "Sudeep Bharati        23-Aug-1991  Added SOFTPC_BLD"
+        },
+        {
+          "original": 19,
+          "current": 22,
+          "logical": 22,
+          "text": "Matt Felton            8-FEB-1992  Added getIntelRegistersPointer"
+        },
+        {
+          "original": 20,
+          "current": 23,
+          "logical": 23,
+          "text": "Jonle                 18-Sep-1992  Add popup for unsupported functionality"
+        },
+        {
+          "original": 21,
+          "current": 24,
+          "logical": 24,
+          "text": "Jonle                 21-Nov-1992  Add Standard Resource Error Dialog Box"
+        },
+        {
+          "original": 22,
+          "current": 25,
+          "logical": 25,
+          "text": "GetPIFConfigFiles"
+        }
+      ],
+      "hit_arms": 1,
+      "excluded_arms": 2,
+      "compiler_contexts": 121,
+      "compiler_unique_line_samples": 27
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+      "current_sha256": "9469b54a27735977116dca86d54389eedb20f30cd795029a63167d531764a0d1",
+      "original_sha256": "346e2186fe608c318a25796c7d6a35bbc8de6f21c255b212c2ddfc2bc3c89f40",
+      "evidence": "s13-r1348-strict-ready.json",
+      "prior_method": "Original/current recursive conditional selector comparison. Each excluded arm must contain only #error with original branch and continuation anchors; retained leaves match original ignoring #line. Groups with no excluded arm are accepted only when recorded branch states select at most one alternative and all remaining alternatives are excluded. Matching code logical positions checked on observed selected projection. Hashes verified. Local code outside matched lines and unobserved configurations are not runtime certified. One file with only one matching line is held for review.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+        "before_sha256": "9469b54a27735977116dca86d54389eedb20f30cd795029a63167d531764a0d1",
+        "original_sha256": "346e2186fe608c318a25796c7d6a35bbc8de6f21c255b212c2ddfc2bc3c89f40",
+        "anchors": {},
+        "matched_lines": 832,
+        "strict_tree": {
+          "excluded": 3,
+          "groups": 5,
+          "retained": 2
+        }
+      },
+      "comment_only_static_leads": [
+        {
+          "original": 40,
+          "current": 55,
+          "logical": 47,
+          "text": "This file implements the Non-Intel Driver Data Block (NIDDB) Manager. This"
+        },
+        {
+          "original": 41,
+          "current": 56,
+          "logical": 48,
+          "text": "service allows Insignia DOS Device Drivers or TSRs with C code and data to"
+        },
+        {
+          "original": 42,
+          "current": 57,
+          "logical": 49,
+          "text": "operate correctly under the Virtual Machines of Windows 3.x Enhanced Mode."
+        },
+        {
+          "original": 43,
+          "current": 58,
+          "logical": 50,
+          "text": "Essentially the Device Driver informs this manager of the C (or Non-Intel)"
+        },
+        {
+          "original": 44,
+          "current": 59,
+          "logical": 51,
+          "text": "data area associated with the Driver and this manager does the rest, providing"
+        },
+        {
+          "original": 45,
+          "current": 60,
+          "logical": 52,
+          "text": "specific instances (copies) of the data area for each Virtual Machine. It"
+        },
+        {
+          "original": 46,
+          "current": 61,
+          "logical": 53,
+          "text": "performs it's work in cooperation with INSIGNIA.386 a Virtual Device Driver"
+        },
+        {
+          "original": 47,
+          "current": 62,
+          "logical": 54,
+          "text": "(VxD) written for the Windows 3.x enviroment."
+        },
+        {
+          "original": 49,
+          "current": 64,
+          "logical": 56,
+          "text": "First a quick summary of the Device Drivers viewpoint. All driver data is"
+        },
+        {
+          "original": 50,
+          "current": 65,
+          "logical": 57,
+          "text": "assembled into one data structure:-"
+        },
+        {
+          "original": 52,
+          "current": 67,
+          "logical": 59,
+          "text": "typedef struct"
+        },
+        {
+          "original": 54,
+          "current": 69,
+          "logical": 61,
+          "text": "IU32 my_var_1;"
+        },
+        {
+          "original": 55,
+          "current": 70,
+          "logical": 62,
+          "text": "IU8  my_var_2;"
+        },
+        {
+          "original": 58,
+          "current": 73,
+          "logical": 65,
+          "text": "and a variable is reserved to hold a handle (a handle is merely a pointer to"
+        },
+        {
+          "original": 59,
+          "current": 74,
+          "logical": 66,
+          "text": "a pointer) to the data structure:-"
+        },
+        {
+          "original": 61,
+          "current": 76,
+          "logical": 68,
+          "text": "MY_INSTANCE_DATA_HANDLE my_handle;"
+        },
+        {
+          "original": 63,
+          "current": 78,
+          "logical": 70,
+          "text": "Optionally a create callback procedure can be defined:-"
+        },
+        {
+          "original": 65,
+          "current": 80,
+          "logical": 72,
+          "text": "void create_callback IFN1"
+        },
+        {
+          "original": 67,
+          "current": 82,
+          "logical": 74,
+          "text": "MY_INSTANCE_DATA_HANDLE, orig_handle"
+        },
+        {
+          "original": 73,
+          "current": 88,
+          "logical": 80,
+          "text": "Optionally a terminate callback procedure can be defined:-"
+        },
+        {
+          "original": 75,
+          "current": 90,
+          "logical": 82,
+          "text": "void terminate_callback IFN0()"
+        },
+        {
+          "original": 80,
+          "current": 95,
+          "logical": 87,
+          "text": "When the driver is initialised (as DOS boots) the initial data area is"
+        },
+        {
+          "original": 81,
+          "current": 96,
+          "logical": 88,
+          "text": "requested from the NIDDB Manager:-"
+        },
+        {
+          "original": 83,
+          "current": 98,
+          "logical": 90,
+          "text": "my_handle = (MY_INSTANCE_DATA_HANDLE)NIDDB_Allocate_Instance_Data("
+        },
+        {
+          "original": 84,
+          "current": 99,
+          "logical": 91,
+          "text": "sizeof(MY_INSTANCE_DATA),"
+        },
+        {
+          "original": 85,
+          "current": 100,
+          "logical": 92,
+          "text": "create_callback,       (0 if no callback required)"
+        },
+        {
+          "original": 86,
+          "current": 101,
+          "logical": 93,
+          "text": "terminate_callback);   (0 if no callback required)"
+        },
+        {
+          "original": 88,
+          "current": 103,
+          "logical": 95,
+          "text": "A return value of 0 indicates an error has occured and the data area can't be"
+        },
+        {
+          "original": 89,
+          "current": 104,
+          "logical": 96,
+          "text": "supported, otherwise the NIDDB Manager has taken control of the data area."
+        },
+        {
+          "original": 90,
+          "current": 105,
+          "logical": 97,
+          "text": "After this all accesses to the data area should be via the handle, further"
+        },
+        {
+          "original": 91,
+          "current": 106,
+          "logical": 98,
+          "text": "dereferenced variables within the data area should not be saved over BOP"
+        },
+        {
+          "original": 92,
+          "current": 107,
+          "logical": 99,
+          "text": "invocations. Correct access is as follows:-"
+        },
+        {
+          "original": 94,
+          "current": 109,
+          "logical": 101,
+          "text": "(*my_handle)->my_var_1 = 1;"
+        },
+        {
+          "original": 95,
+          "current": 110,
+          "logical": 102,
+          "text": "(*my_handle)->my_var_2 = 2;"
+        },
+        {
+          "original": 97,
+          "current": 112,
+          "logical": 104,
+          "text": "The NIDDB Manager will call the create_callback function during the initial"
+        },
+        {
+          "original": 98,
+          "current": 113,
+          "logical": 105,
+          "text": "NIDDB_Allocate_Instance_Data call (initial_instance is TRUE) or during the"
+        },
+        {
+          "original": 99,
+          "current": 114,
+          "logical": 106,
+          "text": "creation of each Virtual Machine (initial_instance is FALSE). Typically the"
+        },
+        {
+          "original": 100,
+          "current": 115,
+          "logical": 107,
+          "text": "create callback is used to initialise any data variables for the new instance."
+        },
+        {
+          "original": 101,
+          "current": 116,
+          "logical": 108,
+          "text": "It is particularly important that, for example, pointers to dynamically"
+        },
+        {
+          "original": 102,
+          "current": 117,
+          "logical": 109,
+          "text": "allocated host memory are initialised, otherwise duplicate host pointers may"
+        },
+        {
+          "original": 103,
+          "current": 118,
+          "logical": 110,
+          "text": "result. Note for the creation of Virtual Machines all variables will have"
+        },
+        {
+          "original": 104,
+          "current": 119,
+          "logical": 111,
+          "text": "been copied from the initial instance before the create callback routine is"
+        },
+        {
+          "original": 105,
+          "current": 120,
+          "logical": 112,
+          "text": "called. However the create_callback function must copy any dynamically"
+        },
+        {
+          "original": 106,
+          "current": 121,
+          "logical": 113,
+          "text": "allocated data structures referenced from the instanced variables, the"
+        },
+        {
+          "original": 107,
+          "current": 122,
+          "logical": 114,
+          "text": "parameter 'orig_handle' points to the source instance."
+        },
+        {
+          "original": 109,
+          "current": 124,
+          "logical": 116,
+          "text": "The NIDDB Manager will call the terminate_callback function just before a"
+        },
+        {
+          "original": 110,
+          "current": 125,
+          "logical": 117,
+          "text": "Virtual Machine (and hence its associated data) is terminated. The data"
+        },
+        {
+          "original": 111,
+          "current": 126,
+          "logical": 118,
+          "text": "variables active will be those of the terminating Virtual Machine. During"
+        },
+        {
+          "original": 112,
+          "current": 127,
+          "logical": 119,
+          "text": "the terminate callback the device driver can perform housekeeping as required."
+        },
+        {
+          "original": 113,
+          "current": 128,
+          "logical": 120,
+          "text": "For example, if a variable is a pointer to dynamically allocated host memory,"
+        },
+        {
+          "original": 114,
+          "current": 129,
+          "logical": 121,
+          "text": "then the host memory may be freed."
+        },
+        {
+          "original": 116,
+          "current": 131,
+          "logical": 123,
+          "text": "When the device driver terminates (just ahead of reboot) it should inform the"
+        },
+        {
+          "original": 117,
+          "current": 132,
+          "logical": 124,
+          "text": "NIDDB Manager that the data area is no longer required:-"
+        },
+        {
+          "original": 119,
+          "current": 134,
+          "logical": 126,
+          "text": "NIDDB_Deallocate_Instance_Data(my_handle);"
+        },
+        {
+          "original": 122,
+          "current": 137,
+          "logical": 129,
+          "text": "Now an internal viewpoint. We are driven by two masters, firstly the"
+        },
+        {
+          "original": 123,
+          "current": 138,
+          "logical": 130,
+          "text": "NIDDB_Allocate_Instance_Data and NIDDB_Deallocate_Instance_Data calls which"
+        },
+        {
+          "original": 124,
+          "current": 139,
+          "logical": 131,
+          "text": "require memory allocation and freeing, and secondly the VxD messages (from"
+        },
+        {
+          "original": 125,
+          "current": 140,
+          "logical": 132,
+          "text": "INSIGNIA.386) which require creation, swapping and deletion of any defined"
+        },
+        {
+          "original": 126,
+          "current": 141,
+          "logical": 133,
+          "text": "data areas. It is possible that these two masters make contradictory requests."
+        },
+        {
+          "original": 128,
+          "current": 143,
+          "logical": 135,
+          "text": "The NIDDB Manager makes a couple of simplyfing assumptions to ease the"
+        },
+        {
+          "original": 129,
+          "current": 144,
+          "logical": 136,
+          "text": "implementation and clarify it's responses to conflicting requests."
+        },
+        {
+          "original": 131,
+          "current": 146,
+          "logical": 138,
+          "text": "1) Only a very small number of data areas are expected to be allocated, there"
+        },
+        {
+          "original": 132,
+          "current": 147,
+          "logical": 139,
+          "text": "being only a few Insignia device drivers. Hence a very small fixed table is"
+        },
+        {
+          "original": 133,
+          "current": 148,
+          "logical": 140,
+          "text": "used to hold each allocated handle. This avoids the slightly more complex"
+        },
+        {
+          "original": 134,
+          "current": 149,
+          "logical": 141,
+          "text": "use of linked lists."
+        },
+        {
+          "original": 136,
+          "current": 151,
+          "logical": 143,
+          "text": "2) Once we have started instancing the data areas (Sys_VM_Init) no new data"
+        },
+        {
+          "original": 137,
+          "current": 152,
+          "logical": 144,
+          "text": "areas may be allocated or deallocated until after all instancing has been"
+        },
+        {
+          "original": 138,
+          "current": 153,
+          "logical": 145,
+          "text": "terminated (System_Exit, Device_Reboot_Notify)."
+        },
+        {
+          "original": 140,
+          "current": 155,
+          "logical": 147,
+          "text": "3) A specific entry point (NIDDB_System_Reboot) is used to catch reboots"
+        },
+        {
+          "original": 141,
+          "current": 156,
+          "logical": 148,
+          "text": "(usually from User Interface) which bypass the normal Windows exit sequence."
+        },
+        {
+          "original": 144,
+          "current": 159,
+          "logical": 151,
+          "text": "Now an overview of of the data structures employed:-"
+        },
+        {
+          "original": 146,
+          "current": 161,
+          "logical": 153,
+          "text": "master_ptrs     Fixed length table of master pointers."
+        },
+        {
+          "original": 147,
+          "current": 162,
+          "logical": 154,
+          "text": "Pointed to by handles returned to Device Driver, hence can"
+        },
+        {
+          "original": 148,
+          "current": 163,
+          "logical": 155,
+          "text": "not be moved or have entries re-assigned. A zero entry"
+        },
+        {
+          "original": 149,
+          "current": 164,
+          "logical": 156,
+          "text": "indicates that the handle is free for allocation. It in"
+        },
+        {
+          "original": 150,
+          "current": 165,
+          "logical": 157,
+          "text": "effect holds the current pointers for the exported handles."
+        },
+        {
+          "original": 152,
+          "current": 167,
+          "logical": 159,
+          "text": "snapshot_ptrs   Fixed length table of snapshot pointers."
+        },
+        {
+          "original": 153,
+          "current": 168,
+          "logical": 160,
+          "text": "While initial allocation is in progress, this table mirrors"
+        },
+        {
+          "original": 154,
+          "current": 169,
+          "logical": 161,
+          "text": "the master_ptrs table. Once instancing starts the table"
+        },
+        {
+          "original": 155,
+          "current": 170,
+          "logical": 162,
+          "text": "holds the pointers to the initial data. This data is used"
+        },
+        {
+          "original": 156,
+          "current": 171,
+          "logical": 163,
+          "text": "to initialise each new instance, it is also restored as"
+        },
+        {
+          "original": 157,
+          "current": 172,
+          "logical": 164,
+          "text": "the current data when instancing terminates."
+        },
+        {
+          "original": 159,
+          "current": 174,
+          "logical": 166,
+          "text": "instance_size   Fixed length table of byte sizes."
+        },
+        {
+          "original": 160,
+          "current": 175,
+          "logical": 167,
+          "text": "Holds data area size for each allocated data area."
+        },
+        {
+          "original": 162,
+          "current": 177,
+          "logical": 169,
+          "text": "create_callback      Fixed length table of function pointers."
+        },
+        {
+          "original": 163,
+          "current": 178,
+          "logical": 170,
+          "text": "Holds create callback function pointer for each"
+        },
+        {
+          "original": 164,
+          "current": 179,
+          "logical": 171,
+          "text": "allocated data area. A zero value indicates no"
+        },
+        {
+          "original": 165,
+          "current": 180,
+          "logical": 172,
+          "text": "callback exists."
+        },
+        {
+          "original": 167,
+          "current": 182,
+          "logical": 174,
+          "text": "terminate_callback   Fixed length table of function pointers."
+        },
+        {
+          "original": 168,
+          "current": 183,
+          "logical": 175,
+          "text": "Holds terminate callback function pointer for each"
+        },
+        {
+          "original": 169,
+          "current": 184,
+          "logical": 176,
+          "text": "allocated data area. A zero value indicates no"
+        },
+        {
+          "original": 170,
+          "current": 185,
+          "logical": 177,
+          "text": "callback exists."
+        },
+        {
+          "original": 172,
+          "current": 187,
+          "logical": 179,
+          "text": "vrecs           Fixed length table of 'virtual records'."
+        },
+        {
+          "original": 173,
+          "current": 188,
+          "logical": 180,
+          "text": "Each virtual record hold two entries, the instance handle"
+        },
+        {
+          "original": 174,
+          "current": 189,
+          "logical": 181,
+          "text": "of the Windows Virtual Machine and a pointer to the"
+        },
+        {
+          "original": 175,
+          "current": 190,
+          "logical": 182,
+          "text": "associated instance_ptrs. It is indexed via the BIOS"
+        },
+        {
+          "original": 176,
+          "current": 191,
+          "logical": 183,
+          "text": "virtualising byte value. It hooks together the Virtual"
+        },
+        {
+          "original": 177,
+          "current": 192,
+          "logical": 184,
+          "text": "Machine messages and our native data area allocations."
+        },
+        {
+          "original": 179,
+          "current": 194,
+          "logical": 186,
+          "text": "instance_ptrs   Fixed length table which is dynamically allocated for"
+        },
+        {
+          "original": 180,
+          "current": 195,
+          "logical": 187,
+          "text": "each new instance, its layout and meaning follows that of"
+        },
+        {
+          "original": 181,
+          "current": 196,
+          "logical": 188,
+          "text": "the master_ptrs, except the pointers are to the instance"
+        },
+        {
+          "original": 182,
+          "current": 197,
+          "logical": 189,
+          "text": "copy of the data areas. When an instance is swapped to, the"
+        },
+        {
+          "original": 183,
+          "current": 198,
+          "logical": 190,
+          "text": "pointers held here are copied to master_ptrs."
+        },
+        {
+          "original": 185,
+          "current": 200,
+          "logical": 192,
+          "text": "allocation_allowed   Boolean which controls Device Driver allocation and"
+        },
+        {
+          "original": 186,
+          "current": 201,
+          "logical": 193,
+          "text": "deallocation requests."
+        },
+        {
+          "original": 188,
+          "current": 203,
+          "logical": 195,
+          "text": "And an overview of the functions employed (minus error handling):-"
+        },
+        {
+          "original": 190,
+          "current": 205,
+          "logical": 197,
+          "text": "NIDDB_Allocate_Instance_Data"
+        },
+        {
+          "original": 192,
+          "current": 207,
+          "logical": 199,
+          "text": "Allocate (host_malloc) data area of requested size."
+        },
+        {
+          "original": 193,
+          "current": 208,
+          "logical": 200,
+          "text": "Find entry in master_ptrs(and snapshot_ptrs) and set to pointer to"
+        },
+        {
+          "original": 194,
+          "current": 209,
+          "logical": 201,
+          "text": "allocated data area."
+        },
+        {
+          "original": 195,
+          "current": 210,
+          "logical": 202,
+          "text": "Save size of data area in instance_size."
+        },
+        {
+          "original": 196,
+          "current": 211,
+          "logical": 203,
+          "text": "Save create and terminate callbacks."
+        },
+        {
+          "original": 197,
+          "current": 212,
+          "logical": 204,
+          "text": "Return pointer to master_ptrs entry, ie the handle."
+        },
+        {
+          "original": 199,
+          "current": 214,
+          "logical": 206,
+          "text": "NIDDB_Deallocate_Instance_Data"
+        },
+        {
+          "original": 201,
+          "current": 216,
+          "logical": 208,
+          "text": "Deallocate (host_free) data area given by input handle."
+        },
+        {
+          "original": 202,
+          "current": 217,
+          "logical": 209,
+          "text": "Set master_ptrs(and snapshot_ptrs) entry to 0."
+        },
+        {
+          "original": 204,
+          "current": 219,
+          "logical": 211,
+          "text": "allocate_NIDDB"
+        },
+        {
+          "original": 206,
+          "current": 221,
+          "logical": 213,
+          "text": "Allocate new instance_ptrs table."
+        },
+        {
+          "original": 207,
+          "current": 222,
+          "logical": 214,
+          "text": "Allocate space for all data areas requested for instancing, storing"
+        },
+        {
+          "original": 208,
+          "current": 223,
+          "logical": 215,
+          "text": "pointers in new instance_ptrs table."
+        },
+        {
+          "original": 209,
+          "current": 224,
+          "logical": 216,
+          "text": "Set up new entry in vrecs and return index to it."
+        },
+        {
+          "original": 211,
+          "current": 226,
+          "logical": 218,
+          "text": "copy_instance_data"
+        },
+        {
+          "original": 213,
+          "current": 228,
+          "logical": 220,
+          "text": "Copy data in one instanced data block (typically the snapshot, ie"
+        },
+        {
+          "original": 214,
+          "current": 229,
+          "logical": 221,
+          "text": "using the pointers in snapshot_ptrs) to another instanced data block"
+        },
+        {
+          "original": 215,
+          "current": 230,
+          "logical": 222,
+          "text": "(typically a new instance, ie using the pointers in instance_ptrs)."
+        },
+        {
+          "original": 217,
+          "current": 232,
+          "logical": 224,
+          "text": "restore_snapshot"
+        },
+        {
+          "original": 219,
+          "current": 234,
+          "logical": 226,
+          "text": "Copy snapshot_ptrs to master_ptrs."
+        },
+        {
+          "original": 221,
+          "current": 236,
+          "logical": 228,
+          "text": "NIDDB_is_active"
+        },
+        {
+          "original": 223,
+          "current": 238,
+          "logical": 230,
+          "text": "Return true if the driver is active (ie allocation is disallowed)"
+        },
+        {
+          "original": 225,
+          "current": 240,
+          "logical": 232,
+          "text": "NIDDB_present"
+        },
+        {
+          "original": 227,
+          "current": 242,
+          "logical": 234,
+          "text": "Return true if any vrec is active (ie holds non zero pointer)."
+        },
+        {
+          "original": 229,
+          "current": 244,
+          "logical": 236,
+          "text": "delete_NIDDB"
+        },
+        {
+          "original": 231,
+          "current": 246,
+          "logical": 238,
+          "text": "Given index to vrecs, access instance_ptrs table."
+        },
+        {
+          "original": 232,
+          "current": 247,
+          "logical": 239,
+          "text": "Call terminate callbacks."
+        },
+        {
+          "original": 233,
+          "current": 248,
+          "logical": 240,
+          "text": "Deallocate (host_free) all data areas in instance_ptrs table."
+        },
+        {
+          "original": 234,
+          "current": 249,
+          "logical": 241,
+          "text": "Deallocate (host_free) instance_ptrs table."
+        },
+        {
+          "original": 235,
+          "current": 250,
+          "logical": 242,
+          "text": "Zero vrec entry."
+        },
+        {
+          "original": 237,
+          "current": 252,
+          "logical": 244,
+          "text": "deallocate_specific_NIDDB"
+        },
+        {
+          "original": 239,
+          "current": 254,
+          "logical": 246,
+          "text": "Search vrec table for given instance handle to Windows Virtual Machine,"
+        },
+        {
+          "original": 240,
+          "current": 255,
+          "logical": 247,
+          "text": "then call delete_NIDDB to remove the instance."
+        },
+        {
+          "original": 242,
+          "current": 257,
+          "logical": 249,
+          "text": "deallocate_all_NIDDB"
+        },
+        {
+          "original": 244,
+          "current": 259,
+          "logical": 251,
+          "text": "Search vrec table for all active instance handles to Windows Virtual"
+        },
+        {
+          "original": 245,
+          "current": 260,
+          "logical": 252,
+          "text": "Machines, calling delete_NIDDB to remove each instance."
+        },
+        {
+          "original": 247,
+          "current": 262,
+          "logical": 254,
+          "text": "swap_NIDDB"
+        },
+        {
+          "original": 249,
+          "current": 264,
+          "logical": 256,
+          "text": "Given current virtualising byte, look up appropriate vrec entry for"
+        },
+        {
+          "original": 250,
+          "current": 265,
+          "logical": 257,
+          "text": "pointer to instance_ptrs table."
+        },
+        {
+          "original": 251,
+          "current": 266,
+          "logical": 258,
+          "text": "Copy instance_ptrs to master_ptrs."
+        }
+      ],
+      "hit_arms": 2,
+      "excluded_arms": 3,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 44
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_page.c",
+      "current_sha256": "0de7a3fe2180d77441f127bd3462cadc3feffdd52249c8b0f3e98b2fe5cfe80e",
+      "original_sha256": "f29e441f3940002924413f3bea791d12e96d65baa3931330e92878e5e71a97ee",
+      "evidence": "s13-r1335-tree-recheck.json",
+      "prior_method": "Conservative direct tree match against recorded original: every current arm must be an excluded-error with the original #line and continuation; no retained or structural arms. Original/current outside-arm code projected, matching code line positions compared. This does not establish local-patch runtime behavior.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/c_page.c",
+        "status": "pass",
+        "current_sha256": "0de7a3fe2180d77441f127bd3462cadc3feffdd52249c8b0f3e98b2fe5cfe80e",
+        "original_sha256": "f29e441f3940002924413f3bea791d12e96d65baa3931330e92878e5e71a97ee",
+        "excluded_arms": 2,
+        "matching_code_lines": 428
+      },
+      "comment_only_static_leads": [
+        {
+          "original": 34,
+          "current": 38,
+          "logical": 38,
+          "text": "Various levels of interface are provided to the paging system (to"
+        },
+        {
+          "original": 35,
+          "current": 39,
+          "logical": 39,
+          "text": "allow fairly optimal emulation) these levels are:-"
+        },
+        {
+          "original": 37,
+          "current": 41,
+          "logical": 41,
+          "text": "spr_chk_\tChecks Supervisor Access to given data item, caller"
+        },
+        {
+          "original": 38,
+          "current": 42,
+          "logical": 42,
+          "text": "aware that #PF may occur. 'A/D' bits will be set. No"
+        },
+        {
+          "original": 39,
+          "current": 43,
+          "logical": 43,
+          "text": "other action is taken."
+        },
+        {
+          "original": 41,
+          "current": 45,
+          "logical": 45,
+          "text": "usr_chk_\tChecks User Access to given data item, caller aware"
+        },
+        {
+          "original": 42,
+          "current": 46,
+          "logical": 46,
+          "text": "that #PF may occur. 'A/D' bits will be set. No other"
+        },
+        {
+          "original": 43,
+          "current": 47,
+          "logical": 47,
+          "text": "action is taken."
+        },
+        {
+          "original": 45,
+          "current": 49,
+          "logical": 49,
+          "text": "spr_\tPerform Supervisor Access, caller aware that #PF may"
+        },
+        {
+          "original": 46,
+          "current": 50,
+          "logical": 50,
+          "text": "occur. Action (Read/Write) is performed immediately."
+        },
+        {
+          "original": 47,
+          "current": 51,
+          "logical": 51,
+          "text": "Will update A/D bits."
+        },
+        {
+          "original": 49,
+          "current": 53,
+          "logical": 53,
+          "text": "vir_\tPerform Virtual Memory Operation (Read/Write). No checks"
+        },
+        {
+          "original": 50,
+          "current": 54,
+          "logical": 54,
+          "text": "are made and no fault will be generated, only call after"
+        },
+        {
+          "original": 51,
+          "current": 55,
+          "logical": 55,
+          "text": "a spr_chk or usr_chk function."
+        },
+        {
+          "original": 53,
+          "current": 57,
+          "logical": 57,
+          "text": "NB. At present no super optimal vir_ implementation"
+        },
+        {
+          "original": 54,
+          "current": 58,
+          "logical": 58,
+          "text": "exists. If a spr_chk or usr_chk function is not"
+        },
+        {
+          "original": 55,
+          "current": 59,
+          "logical": 59,
+          "text": "called before a vir_ function, then the vir_"
+        },
+        {
+          "original": 56,
+          "current": 60,
+          "logical": 60,
+          "text": "function may cause #PF, this condition will become"
+        },
+        {
+          "original": 57,
+          "current": 61,
+          "logical": 61,
+          "text": "a fatal error in an optimised implementation."
+        },
+        {
+          "original": 58,
+          "current": 62,
+          "logical": 62,
+          "text": "For the moment we assume that after a 'chk' call it"
+        },
+        {
+          "original": 59,
+          "current": 63,
+          "logical": 63,
+          "text": "is virtually 100% certain that the 'vir' call will"
+        },
+        {
+          "original": 60,
+          "current": 64,
+          "logical": 64,
+          "text": "get a cache hit."
+        }
+      ],
+      "hit_arms": 0,
+      "excluded_arms": 2,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 49
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+      "current_sha256": "a8b584a6fe3d8e3a2e433e9ce04d27ed2455bfafc52f4ff6c6b08b5faec2d939",
+      "original_sha256": "6e5f4607f259d50abe7ad27741e48d6110737097da88ea46627fa275903135c9",
+      "evidence": "s13-r1368-extra-strict.json",
+      "prior_method": "Pair original conditional groups recursively while separately classifying project-added groups. Original excluded arms require #error and a recorded verified error-line state. Retained original direct bodies must match the original outside nested groups. Added groups require recorded hit or exclusion. Matching code logical lines are checked on the observed selected projection; local additions, unobserved contexts and runtime behavior are not independently certified.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+        "current_sha256": "a8b584a6fe3d8e3a2e433e9ce04d27ed2455bfafc52f4ff6c6b08b5faec2d939",
+        "original_sha256": "6e5f4607f259d50abe7ad27741e48d6110737097da88ea46627fa275903135c9",
+        "matched_lines": 388,
+        "groups": {
+          "excluded": 3,
+          "original_groups": 3,
+          "local_groups": 1
+        }
+      },
+      "comment_only_static_leads": [
+        {
+          "original": 32,
+          "current": 33,
+          "logical": 33,
+          "text": "EXTERNAL ROUTINES STARTS HERE."
+        }
+      ],
+      "hit_arms": 1,
+      "excluded_arms": 3,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 19
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+      "current_sha256": "bd2899fb2c68a293ad2e951d4042d3ac2c397c786161e755d83430d11674bf8c",
+      "original_sha256": "e1f8f19a1f513402a10dc13eaf3b43d45a208fd71a72692f690f808a7e7762b2",
+      "evidence": "s13-r1370-registered-groups.json",
+      "prior_method": "Original groups paired separately from local groups; selected direct differences compared to the exact inline registered adaptation and ledger; excluded arms require verified #error state. Matching original code line mapping uses existing observed-projection recheck. This confirms structural provenance, not independent runtime behavior or unobserved contexts.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+        "current_sha256": "bd2899fb2c68a293ad2e951d4042d3ac2c397c786161e755d83430d11674bf8c",
+        "original_sha256": "e1f8f19a1f513402a10dc13eaf3b43d45a208fd71a72692f690f808a7e7762b2",
+        "matched_lines": 586,
+        "groups": {
+          "local_groups": 1,
+          "excluded": 7,
+          "original_groups": 13,
+          "selected": 6
+        },
+        "selected_differences": [
+          {
+            "original_line": 248,
+            "current_line": 247,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -1,6 +1,8 @@",
+              " {",
+              " extern BOOL host_exint_hook IPT2(IS32, exp_no, IS32, error_code);",
+              "-if(GET_PE() && host_exint_hook((IS32) nmbr, (IS32)error_code))",
+              "+/* DIVERGENCE: MVDM-HOST-DIV-268: NTVDMx64 handled-hook scope. */",
+              "+if(GET_PE() && host_exint_hook((IS32) nmbr, (IS32)error_code)) {",
+              " doing_contributory = FALSE;",
+              " c_cpu_continue();\t    /* DOES NOT RETURN */",
+              " }",
+              "+}"
+            ]
+          },
+          {
+            "original_line": 308,
+            "current_line": 313,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -1,6 +1,8 @@",
+              " {",
+              " extern BOOL host_exint_hook IPT2(IS32, exp_no, IS32, error_code);",
+              "-if(GET_PE() && host_exint_hook((IS32) nmbr, (IS32)error_code))",
+              "+/* DIVERGENCE: MVDM-HOST-DIV-268: NTVDMx64 handled-hook scope. */",
+              "+if(GET_PE() && host_exint_hook((IS32) nmbr, (IS32)error_code)) {",
+              " doing_contributory = FALSE;",
+              " c_cpu_continue();\t/* DOES NOT RETURN */",
+              " }",
+              "+}"
+            ]
+          },
+          {
+            "original_line": 369,
+            "current_line": 380,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -1,6 +1,8 @@",
+              " {",
+              " extern BOOL host_exint_hook IPT2(IS32, exp_no, IS32, error_code);",
+              "-if(GET_PE() && host_exint_hook((IS32) DF_INT_NR, (IS32)NULL_ERROR_CODE))",
+              "+/* DIVERGENCE: MVDM-HOST-DIV-268: NTVDMx64 handled-hook scope. */",
+              "+if(GET_PE() && host_exint_hook((IS32) DF_INT_NR, (IS32)NULL_ERROR_CODE)) {",
+              " doing_double_fault = FALSE;",
+              " c_cpu_continue(); /* DOES NOT RETURN */",
+              " }",
+              "+}"
+            ]
+          },
+          {
+            "original_line": 433,
+            "current_line": 450,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -1,7 +1,9 @@",
+              " {",
+              " extern BOOL host_exint_hook IPT2(IS32, exp_no, IS32, error_code);",
+              "-if(GET_PE() && host_exint_hook((IS32) I0_INT_NR, (IS32)NULL_ERROR_CODE))",
+              "+/* DIVERGENCE: MVDM-HOST-DIV-268: NTVDMx64 handled-hook scope. */",
+              "+if(GET_PE() && host_exint_hook((IS32) I0_INT_NR, (IS32)NULL_ERROR_CODE)) {",
+              " doing_fault = FALSE;",
+              " doing_contributory = FALSE;",
+              " c_cpu_continue(); /* DOES NOT RETURN */",
+              " }",
+              "+}"
+            ]
+          },
+          {
+            "original_line": 579,
+            "current_line": 602,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -1,7 +1,9 @@",
+              " {",
+              " extern BOOL host_exint_hook IPT2(IS32, exp_no, IS32, error_code);",
+              "-if(GET_PE() && host_exint_hook((IS32) PF_INT_NR, (IS32)page_error))",
+              "+/* DIVERGENCE: MVDM-HOST-DIV-268: NTVDMx64 handled-hook scope. */",
+              "+if(GET_PE() && host_exint_hook((IS32) PF_INT_NR, (IS32)page_error)) {",
+              " doing_fault = FALSE;",
+              " doing_page_fault = FALSE;",
+              " c_cpu_continue(); /* DOES NOT RETURN */",
+              " }",
+              "+}"
+            ]
+          }
+        ],
+        "reviewed_registration": "MVDM-HOST-DIV-268"
+      },
+      "comment_only_static_leads": [
+        {
+          "original": 34,
+          "current": 35,
+          "logical": 35,
+          "text": "Allow print out of exceptions or disallow it."
+        }
+      ],
+      "hit_arms": 7,
+      "excluded_arms": 8,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 19
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "current_sha256": "4200e6d474e51b9e4c37234c4b6605d6c8118ba234f06199b73ef1997e7343f9",
+      "original_sha256": "ce5f56ea27239d0c85243cee23e01de34b1f82d3ba92eced687e2b3bd90a2a94",
+      "evidence": "s13-r1343-strict-ready.json",
+      "prior_method": "Original/current recursive conditional selector comparison; each excluded arm must contain only #error with original branch and continuation anchors; retained leaves must match original ignoring #line; recorded hit selects at most one alternative per group, other arms explicitly excluded. Matching code logical line positions checked for the selected projection. Hashes independently verified. Local changes outside matched original lines and contexts not observed are not runtime certified.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+        "before_sha256": "4200e6d474e51b9e4c37234c4b6605d6c8118ba234f06199b73ef1997e7343f9",
+        "original_sha256": "ce5f56ea27239d0c85243cee23e01de34b1f82d3ba92eced687e2b3bd90a2a94",
+        "anchors": {},
+        "matched_lines": 309,
+        "strict_tree": {
+          "retained": 4,
+          "excluded": 6,
+          "groups": 6
+        }
+      },
+      "comment_only_static_leads": [
+        {
+          "original": 32,
+          "current": 40,
+          "logical": 40,
+          "text": "EXTERNAL ROUTINES STARTS HERE."
+        },
+        {
+          "original": 206,
+          "current": 258,
+          "logical": 203,
+          "text": "FORM NEW STACK, VIZ"
+        },
+        {
+          "original": 209,
+          "current": 261,
+          "logical": 206,
+          "text": "old SS:SP  -> | parm 1 |  new SS:SP  -> | old IP |"
+        },
+        {
+          "original": 210,
+          "current": 262,
+          "logical": 207,
+          "text": "| parm 2 |                | old CS |"
+        },
+        {
+          "original": 211,
+          "current": 263,
+          "logical": 208,
+          "text": "| parm 3 |                | parm 1 |"
+        },
+        {
+          "original": 212,
+          "current": 264,
+          "logical": 209,
+          "text": "==========                | parm 2 |"
+        },
+        {
+          "original": 213,
+          "current": 265,
+          "logical": 210,
+          "text": "| parm 3 |"
+        },
+        {
+          "original": 214,
+          "current": 266,
+          "logical": 211,
+          "text": "| old SP |"
+        },
+        {
+          "original": 215,
+          "current": 267,
+          "logical": 212,
+          "text": "| old SS |"
+        }
+      ],
+      "hit_arms": 4,
+      "excluded_arms": 6,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 27
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "current_sha256": "14b1be5d756ff06c3578f5f12a111595afff50a5ea3aa9fa39df6c4e983011f8",
+      "original_sha256": "8908c3a4445c788eec0fcfa050cf18cac5f79413e03c5ddbdcca259779bf2860",
+      "evidence": "s13-r1392-registered-diffs.json",
+      "prior_method": "Review direct retained-arm differences against specific existing mirror registrations after original-tree and source-projection checks; full diffs listed.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+        "current_sha256": "14b1be5d756ff06c3578f5f12a111595afff50a5ea3aa9fa39df6c4e983011f8",
+        "original_sha256": "8908c3a4445c788eec0fcfa050cf18cac5f79413e03c5ddbdcca259779bf2860",
+        "matched_lines": 573,
+        "strict_tree": {
+          "retained": 30,
+          "excluded": 23,
+          "groups": 37,
+          "retained_leaf_differences": 1
+        },
+        "registered_differences": [
+          "MVDM-HOST-DIV-067",
+          "MVDM-HOST-DIV-089"
+        ],
+        "retained_arm_direct_differences": [
+          {
+            "branch_line": 123,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -13,2 +13,5 @@",
+              " #include\t\"cpu_vid.h\"",
+              "+/* DIVERGENCE(MVDM-HOST-DIV-067): the selected C_VID function has an",
+              "+* original `void (IUH)` shape; do not use an implicit C declaration. */",
+              "+IMPORT void setReadPointers IPT1(IUH, readset);",
+              " /* [3.1.2 DECLARATIONS]                                                 */"
+            ]
+          },
+          {
+            "branch_line": 286,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -1,5 +1,7 @@",
+              " /* C_Evid glue */",
+              "-extern read_byte_ev_glue IPT1(IU32, eaOff);",
+              "-extern read_word_ev_glue IPT1(IU32, eaOff);",
+              "-extern read_str_fwd_ev_glue IPT3(IU8 *, dest, IU32, eaOff, IU32, count);",
+              "+/* DIVERGENCE MVDM-HOST-DIV-089: retain the concrete original C-video read",
+              "+* glue contracts instead of implicit host-int declarations. */",
+              "+extern IU32 read_byte_ev_glue IPT1(IU32, eaOff);",
+              "+extern IU32 read_word_ev_glue IPT1(IU32, eaOff);",
+              "+extern void read_str_fwd_ev_glue IPT3(IU8 *, dest, IU32, eaOff, IU32, count);",
+              " READ_POINTERS Glue_reads ="
+            ]
+          }
+        ]
+      },
+      "comment_only_static_leads": [
+        {
+          "original": 144,
+          "current": 147,
+          "logical": 147,
+          "text": "5.0 MODULE INTERNALS   :   (not visible externally, global internally)]"
+        },
+        {
+          "original": 146,
+          "current": 149,
+          "logical": 149,
+          "text": "[5.1 LOCAL DECLARATIONS]\t\t\t\t\t\t*/"
+        }
+      ],
+      "hit_arms": 30,
+      "excluded_arms": 23,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 56
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "current_sha256": "8ea79491911b1a274c89771717062068df5c453e89648ee21dd588dffaf1e371",
+      "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+      "evidence": "s13-r1391-registered-diffs.json",
+      "prior_method": "Review retained-arm direct differences against specific existing mirror registrations after original-tree and selected source-projection checks; full diffs listed.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+        "current_sha256": "8ea79491911b1a274c89771717062068df5c453e89648ee21dd588dffaf1e371",
+        "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+        "matched_lines": 768,
+        "strict_tree": {
+          "retained": 5,
+          "groups": 31,
+          "excluded": 30,
+          "retained_leaf_differences": 1
+        },
+        "registered_differences": [
+          "MVDM-HOST-DIV-770"
+        ],
+        "retained_arm_direct_differences": [
+          {
+            "branch_line": 349,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -1 +1,3 @@",
+              "+mvdm_softpc_report_wow_stage(\"dispatch-begin\",",
+              "+(unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());",
+              " (*WOWDispatchEntry)();"
+            ]
+          }
+        ]
+      },
+      "comment_only_static_leads": [
+        {
+          "original": 18,
+          "current": 22,
+          "logical": 17,
+          "text": "THIS PROGRAM SOURCE FILE  IS  SUPPLIED IN CONFIDENCE TO THE"
+        },
+        {
+          "original": 19,
+          "current": 23,
+          "logical": 18,
+          "text": "CUSTOMER, THE CONTENTS  OR  DETAILS  OF  ITS OPERATION MUST"
+        },
+        {
+          "original": 20,
+          "current": 24,
+          "logical": 19,
+          "text": "NOT BE DISCLOSED TO ANY  OTHER PARTIES  WITHOUT THE EXPRESS"
+        },
+        {
+          "original": 21,
+          "current": 25,
+          "logical": 20,
+          "text": "AUTHORISATION FROM THE DIRECTORS OF INSIGNIA SOLUTIONS LTD."
+        },
+        {
+          "original": 24,
+          "current": 28,
+          "logical": 23,
+          "text": "DESIGNER        : Jim Hatfield"
+        },
+        {
+          "original": 26,
+          "current": 30,
+          "logical": 25,
+          "text": "REVISION HISTORY    :"
+        },
+        {
+          "original": 27,
+          "current": 31,
+          "logical": 26,
+          "text": "First version       : 29th August 1988"
+        },
+        {
+          "original": 28,
+          "current": 32,
+          "logical": 27,
+          "text": "Second version      : 18th May    1991"
+        },
+        {
+          "original": 30,
+          "current": 34,
+          "logical": 29,
+          "text": "MODULE NAME     : nt_bop"
+        },
+        {
+          "original": 32,
+          "current": 36,
+          "logical": 31,
+          "text": "SOURCE FILE NAME    : nt_bop.c"
+        },
+        {
+          "original": 34,
+          "current": 38,
+          "logical": 33,
+          "text": "PURPOSE         : Supply the NT-specific BOP FF operations."
+        },
+        {
+          "original": 37,
+          "current": 41,
+          "logical": 36,
+          "text": "[1.2 DATATYPES FOR [1.1] (if not basic C types)]"
+        },
+        {
+          "original": 39,
+          "current": 43,
+          "logical": 38,
+          "text": "STRUCTURES/TYPEDEFS/ENUMS:"
+        },
+        {
+          "original": 42,
+          "current": 46,
+          "logical": 41,
+          "text": "[1.3 INTERMODULE IMPORTS]"
+        },
+        {
+          "original": 44,
+          "current": 48,
+          "logical": 43,
+          "text": "PROCEDURES: None"
+        },
+        {
+          "original": 45,
+          "current": 49,
+          "logical": 44,
+          "text": "DATA:       None"
+        },
+        {
+          "original": 48,
+          "current": 52,
+          "logical": 47,
+          "text": "[1.4 DESCRIPTION OF INTERMODULE INTERFACE]"
+        },
+        {
+          "original": 50,
+          "current": 54,
+          "logical": 49,
+          "text": "[1.4.1 IMPORTED OBJECTS]"
+        },
+        {
+          "original": 52,
+          "current": 56,
+          "logical": 51,
+          "text": "DATA OBJECTS      : None"
+        },
+        {
+          "original": 56,
+          "current": 60,
+          "logical": 55,
+          "text": "[3.INTERMODULE INTERFACE DECLARATIONS]"
+        },
+        {
+          "original": 59,
+          "current": 63,
+          "logical": 58,
+          "text": "[3.1 INTERMODULE IMPORTS]                       */"
+        }
+      ],
+      "hit_arms": 5,
+      "excluded_arms": 30,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 96
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "current_sha256": "8f88648e48aa473c9fbae93717b5a98c0630fb1b37480147f9ba8a5bc3fd260a",
+      "original_sha256": "3f77f06e497854b00f58acde8bfe7b5e67af7c5e67174deb579cd76e13f5830f",
+      "evidence": "s13-r1397-local-groups-review.json",
+      "prior_method": "Compare reachable original trees and retained direct diffs; local groups retain recorded states and complete bodies are recorded. Matching original lines use selected source projection.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+        "current_sha256": "8f88648e48aa473c9fbae93717b5a98c0630fb1b37480147f9ba8a5bc3fd260a",
+        "original_sha256": "3f77f06e497854b00f58acde8bfe7b5e67af7c5e67174deb579cd76e13f5830f",
+        "matched_lines": 197,
+        "groups": {
+          "selected": 6,
+          "original_groups": 14,
+          "local_groups": 2,
+          "excluded": 10
+        },
+        "local_groups": [
+          {
+            "line": 54,
+            "signature": [
+              [
+                "ifndef",
+                "CCPU"
+              ]
+            ]
+          },
+          {
+            "line": 126,
+            "signature": [
+              [
+                "ifdef",
+                "CCPU"
+              ]
+            ]
+          }
+        ],
+        "direct_diffs": [
+          {
+            "branch_line": 35,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -1 +1,6 @@",
+              " #include \"cpu_c.h\"",
+              "+/* DIVERGENCE(MVDM-HOST-DIV-048): fm_c.h is",
+              "+* the selected generated definition of CleanedREC, which this host carrier",
+              "+* needs to name the original EIP member rather than treating the record as",
+              "+* an untyped 32-bit word. */",
+              "+#include \"fm_c.h\""
+            ]
+          },
+          {
+            "branch_line": 186,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -46,3 +46,2 @@",
+              " {",
+              "-BOOL *gdp_bool;",
+              " /* Variables for deciding what mode we're in, and hence where the */",
+              "@@ -50,6 +49,13 @@",
+              " /* Horrible hack, part 1. InNanoCpu is a BOOL, so GLOBAL_InNanoCpu */",
+              "-/* is not an l-value, hence we can't take its address. */",
+              "-nt_cpu_info.universe = &GLOBAL_CurrentUniverse;",
+              "+/* DIVERGENCE(MVDM-HOST-DIV-048): the historical non-PROD assertion",
+              "+* compared against GdpOffsetFromName(), an undeclared NT4 packed-GDP",
+              "+* debug helper.  The selected GDP is now a generated native-width",
+              "+* carrier, so that numeric packed-offset comparison has no valid target.",
+              "+* The source-named field above is the single checked representation. */",
+              "+/* DIVERGENCE(MVDM-HOST-DIV-048): these CCPU control/register cells are",
+              "+* fixed 32-bit Intel values.  The original IUH spelling happened to be",
+              "+* identical to IU32 on NT4; state that source contract explicitly. */",
+              "+nt_cpu_info.universe = (IU32 *)&GLOBAL_CurrentUniverse;",
+              " /* Variables needed to get the value SP or ESP. */",
+              "-/* Horrible hack, part 2: as for InNanoCpu, so for stackIsBig. */",
+              "+/* DIVERGENCE(MVDM-HOST-DIV-048): see the InNanoCpu note above. */",
+              " nt_cpu_info.nano_esp = &GLOBAL_nanoEsp;",
+              "@@ -66,24 +72,24 @@",
+              " /* EIP & flags, neither of which are likely to be very reliable. */",
+              "-nt_cpu_info.eip = &GLOBAL_CleanedRec;",
+              "-nt_cpu_info.flags = &GLOBAL_EFLAGS;",
+              "-nt_cpu_info.cr0 = &GLOBAL_R_CR0;",
+              "+nt_cpu_info.eip = &GLOBAL_CleanedRec.EIP;",
+              "+nt_cpu_info.flags = (IU32 *)&GLOBAL_EFLAGS;",
+              "+nt_cpu_info.cr0 = (IU32 *)&GLOBAL_R_CR0;",
+              " /* General purpose registers. */",
+              "-initNtCpuRegInfo(&nt_cpu_info.eax, &GLOBAL_nanoEax, &GLOBAL_R_EAX,",
+              "-&GLOBAL_EAXsaved, 1 << ConstraintRAL_LS8,",
+              "+initNtCpuRegInfo(&nt_cpu_info.eax, &GLOBAL_nanoEax, (IU32 *)&GLOBAL_R_EAX,",
+              "+(IU32 *)&GLOBAL_EAXsaved, 1 << ConstraintRAL_LS8,",
+              " 1 << ConstraintRAX_LS16);",
+              "-initNtCpuRegInfo(&nt_cpu_info.ebx, &GLOBAL_nanoEbx, &GLOBAL_R_EBX,",
+              "-&GLOBAL_EBXsaved, 1 << ConstraintRBL_LS8,",
+              "+initNtCpuRegInfo(&nt_cpu_info.ebx, &GLOBAL_nanoEbx, (IU32 *)&GLOBAL_R_EBX,",
+              "+(IU32 *)&GLOBAL_EBXsaved, 1 << ConstraintRBL_LS8,",
+              " 1 << ConstraintRBX_LS16);",
+              "-initNtCpuRegInfo(&nt_cpu_info.ecx, &GLOBAL_nanoEcx, &GLOBAL_R_ECX,",
+              "-&GLOBAL_ECXsaved, 1 << ConstraintRCL_LS8,",
+              "+initNtCpuRegInfo(&nt_cpu_info.ecx, &GLOBAL_nanoEcx, (IU32 *)&GLOBAL_R_ECX,",
+              "+(IU32 *)&GLOBAL_ECXsaved, 1 << ConstraintRCL_LS8,",
+              " 1 << ConstraintRCX_LS16);",
+              "-initNtCpuRegInfo(&nt_cpu_info.edx, &GLOBAL_nanoEdx, &GLOBAL_R_EDX,",
+              "-&GLOBAL_EDXsaved, 1 << ConstraintRDL_LS8,",
+              "+initNtCpuRegInfo(&nt_cpu_info.edx, &GLOBAL_nanoEdx, (IU32 *)&GLOBAL_R_EDX,",
+              "+(IU32 *)&GLOBAL_EDXsaved, 1 << ConstraintRDL_LS8,",
+              " 1 << ConstraintRDX_LS16);",
+              "-initNtCpuRegInfo(&nt_cpu_info.esi, &GLOBAL_nanoEsi, &GLOBAL_R_ESI,",
+              "-&GLOBAL_ESIsaved, 0, 1 << ConstraintRSI_LS16);",
+              "-initNtCpuRegInfo(&nt_cpu_info.edi, &GLOBAL_nanoEdi, &GLOBAL_R_EDI,",
+              "-&GLOBAL_EDIsaved, 0, 1 << ConstraintRDI_LS16);",
+              "-initNtCpuRegInfo(&nt_cpu_info.ebp, &GLOBAL_nanoEbp, &GLOBAL_R_EBP,",
+              "-&GLOBAL_EBPsaved, 0, 1 << ConstraintRBP_LS16);",
+              "+initNtCpuRegInfo(&nt_cpu_info.esi, &GLOBAL_nanoEsi, (IU32 *)&GLOBAL_R_ESI,",
+              "+(IU32 *)&GLOBAL_ESIsaved, 0, 1 << ConstraintRSI_LS16);",
+              "+initNtCpuRegInfo(&nt_cpu_info.edi, &GLOBAL_nanoEdi, (IU32 *)&GLOBAL_R_EDI,",
+              "+(IU32 *)&GLOBAL_EDIsaved, 0, 1 << ConstraintRDI_LS16);",
+              "+initNtCpuRegInfo(&nt_cpu_info.ebp, &GLOBAL_nanoEbp, (IU32 *)&GLOBAL_R_EBP,",
+              "+(IU32 *)&GLOBAL_EBPsaved, 0, 1 << ConstraintRBP_LS16);",
+              " }"
+            ]
+          },
+          {
+            "branch_line": 253,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -1 +1,3 @@",
+              "-nt_cpu_info.in_nano_cpu = (BOOL *) ((IHPE) GDP_PTR + 631);",
+              "+/* DIVERGENCE(MVDM-HOST-DIV-048): the generated field is an lvalue in the",
+              "+* private GDP carrier; avoid a historical hard-coded native offset. */",
+              "+nt_cpu_info.in_nano_cpu = (BOOL *)&GLOBAL_InNanoCpu;"
+            ]
+          },
+          {
+            "branch_line": 281,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -1 +1,3 @@",
+              "-nt_cpu_info.stack_is_big = (BOOL *) ((IHPE) GDP_PTR + 4355);",
+              "+/* DIVERGENCE(MVDM-HOST-DIV-048): use the generated source field rather",
+              "+* than an architecture-specific byte offset into the old packed GDP. */",
+              "+nt_cpu_info.stack_is_big = (BOOL *)&GLOBAL_stackIsBig;"
+            ]
+          }
+        ],
+        "issues": [],
+        "registered_differences": [
+          "MVDM-HOST-DIV-048"
+        ],
+        "local_group_bodies": [
+          {
+            "line": 54,
+            "arms": [
+              {
+                "directive": "ifndef",
+                "expression": "CCPU",
+                "body": [
+                  "#line 40",
+                  "#error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register."
+                ]
+              }
+            ]
+          },
+          {
+            "line": 126,
+            "arms": [
+              {
+                "directive": "ifdef",
+                "expression": "CCPU",
+                "body": [
+                  "extern void c_cpu_unsimulate(void);",
+                  "void host_unsimulate()",
+                  "{",
+                  "    c_cpu_unsimulate();",
+                  "#line 105",
+                  "}"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "comment_only_static_leads": [
+        {
+          "original": 109,
+          "current": 137,
+          "logical": 110,
+          "text": "Host_set_hw_int: Cause a hardware interrupt to be generated. For"
+        },
+        {
+          "original": 110,
+          "current": 138,
+          "logical": 111,
+          "text": "software cpu this just means setting a bit in cpu_interrupt_map."
+        }
+      ],
+      "hit_arms": 7,
+      "excluded_arms": 11,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 26
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "current_sha256": "55c586fc69221068293a1db55c21b569ce34cef1526bb93e34cc8044b045ad5f",
+      "original_sha256": "d51310af362e60023feb59c89afb21ff6fae8e1bb74ae8614231f4ec3a001729",
+      "evidence": "s13-r1397-local-groups-review.json",
+      "prior_method": "Compare reachable original trees and retained direct diffs; local groups retain recorded states and complete bodies are recorded. Matching original lines use selected source projection.",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+        "current_sha256": "55c586fc69221068293a1db55c21b569ce34cef1526bb93e34cc8044b045ad5f",
+        "original_sha256": "d51310af362e60023feb59c89afb21ff6fae8e1bb74ae8614231f4ec3a001729",
+        "matched_lines": 776,
+        "groups": {
+          "excluded": 5,
+          "selected": 3,
+          "original_groups": 7,
+          "local_groups": 3
+        },
+        "local_groups": [
+          {
+            "line": 141,
+            "signature": [
+              [
+                "ifdef",
+                "BACK_M"
+              ]
+            ]
+          },
+          {
+            "line": 165,
+            "signature": [
+              [
+                "ifdef",
+                "BACK_M"
+              ]
+            ]
+          },
+          {
+            "line": 192,
+            "signature": [
+              [
+                "ifdef",
+                "BACK_M"
+              ]
+            ]
+          }
+        ],
+        "direct_diffs": [
+          {
+            "branch_line": 47,
+            "diff": [
+              "--- ",
+              "+++ ",
+              "@@ -11,2 +11,11 @@",
+              " #include \"nt_mem.h\"",
+              "+/* DIVERGENCE(MVDM-HOST-DIV-096): the original calls NT4 kernel-VDM page",
+              "+* alias services.  Keep those exact public calls and page-number ABI, but",
+              "+* bind their user-mode replacement through the selected SoftPC adapter. */",
+              "+#include \"mvdm_softpc_physical_mapping.h\"",
+              "+/* DIVERGENCE(MVDM-HOST-DIV-267): kernel VDM supplied contiguous host aliases",
+              "+* for EMS windows. CCPU40 resolves every guest byte but intentionally does",
+              "+* not publish a span pointer. Keep the original fast macros for ordinary RAM;",
+              "+* the smallest bounded lease binding covers only an alias-backed span. */",
+              "+#include \"mvdm_softpc_guest_memory.h\"",
+              " /*\tGlobal Variables\t\t*/",
+              "@@ -40,2 +49,55 @@",
+              " #define EM_PAGE_ADDRESS(page_no)    (EM_base_address + page_no * EMM_PAGE_SIZE)",
+              "+static int em_loads(sys_addr from, unsigned char *to, int length)",
+              "+{",
+              "+uint32_t count;",
+              "+sys_addr guest_from;",
+              "+int result;",
+              "+if (length < 0) return FAILURE;",
+              "+count = (uint32_t)length;",
+              "+guest_from = from;",
+              "+if (!mvdm_softpc_physical_mapping_span_is_aliased(guest_from, count)) {",
+              "+EM_loads(from, to, length);",
+              "+return SUCCESS;",
+              "+}",
+              "+result = mvdm_softpc_guest_memory_copy_from(guest_from, to, count) ?",
+              "+SUCCESS : FAILURE;",
+              "+return result;",
+              "+}",
+              "+static int em_stores(sys_addr to, unsigned char *from, int length)",
+              "+{",
+              "+uint32_t count;",
+              "+sys_addr guest_to;",
+              "+int result;",
+              "+if (length < 0) return FAILURE;",
+              "+count = (uint32_t)length;",
+              "+guest_to = to;",
+              "+if (!mvdm_softpc_physical_mapping_span_is_aliased(guest_to, count)) {",
+              "+EM_stores(to, from, length);",
+              "+return SUCCESS;",
+              "+}",
+              "+sas_overwrite_memory(guest_to, count);",
+              "+result = mvdm_softpc_guest_memory_copy_to(guest_to, from, count) ?",
+              "+SUCCESS : FAILURE;",
+              "+return result;",
+              "+}",
+              "+static int em_moves(sys_addr from, sys_addr to, int length)",
+              "+{",
+              "+uint32_t count;",
+              "+sys_addr guest_from;",
+              "+sys_addr guest_to;",
+              "+int result;",
+              "+if (length < 0) return FAILURE;",
+              "+count = (uint32_t)length;",
+              "+guest_from = from;",
+              "+guest_to = to;",
+              "+if (!mvdm_softpc_physical_mapping_span_is_aliased(guest_from, count) &&",
+              "+!mvdm_softpc_physical_mapping_span_is_aliased(guest_to, count)) {",
+              "+EM_moves(from, to, length);",
+              "+return SUCCESS;",
+              "+}",
+              "+sas_overwrite_memory(guest_to, count);",
+              "+result = mvdm_softpc_guest_memory_move(guest_to, guest_from, count) ?",
+              "+SUCCESS : FAILURE;",
+              "+return result;",
+              "+}",
+              " /*",
+              "@@ -345,3 +407,4 @@",
+              " to = effective_addr(dst_seg, dst_off);",
+              "-EM_moves(from, to, length);",
+              "+if (em_moves(from, to, length) != SUCCESS)",
+              "+return(FAILURE);",
+              " return(SUCCESS);",
+              "@@ -363,3 +426,4 @@",
+              " to = EM_host_address(dst_page * EMM_PAGE_SIZE + dst_off);",
+              "-EM_loads(from, to, length);",
+              "+if (em_loads(from, to, length) != SUCCESS)",
+              "+return(FAILURE);",
+              " return(SUCCESS);",
+              "@@ -381,3 +445,4 @@",
+              " to = effective_addr(dst_seg, dst_off);",
+              "-EM_stores(to, from, length);",
+              "+if (em_stores(to, from, length) != SUCCESS)",
+              "+return(FAILURE);",
+              " return(SUCCESS);",
+              "@@ -432,5 +497,8 @@",
+              " to = effective_addr(dst_seg, dst_off);",
+              "-EM_loads(from, pointer, length);    /* source -> temp */",
+              "-EM_moves(to, from, length);\t    /* dst -> source */",
+              "-EM_stores(to, pointer, length);     /* temp -> dst */",
+              "+if (em_loads(from, pointer, length) != SUCCESS ||    /* source -> temp */",
+              "+em_moves(to, from, length) != SUCCESS ||\t    /* dst -> source */",
+              "+em_stores(to, pointer, length) != SUCCESS) {     /* temp -> dst */",
+              "+free(temp);",
+              "+return(FAILURE);",
+              "+}",
+              " free(temp);",
+              "@@ -456,4 +524,7 @@",
+              " to = EM_host_address(dst_page * EMM_PAGE_SIZE + dst_off);",
+              "-EM_loads(from, pointer, length);",
+              "-EM_stores(from, to, length);",
+              "+if (em_loads(from, pointer, length) != SUCCESS ||",
+              "+em_stores(from, to, length) != SUCCESS) {",
+              "+free(temp);",
+              "+return(FAILURE);",
+              "+}",
+              " EM_memcpy(to, pointer, length);"
+            ]
+          }
+        ],
+        "issues": [],
+        "registered_differences": [
+          "MVDM-HOST-DIV-096",
+          "MVDM-HOST-DIV-267"
+        ],
+        "local_group_bodies": [
+          {
+            "line": 141,
+            "arms": [
+              {
+                "directive": "ifdef",
+                "expression": "BACK_M",
+                "body": [
+                  "#line 103",
+                  "#error DIVERGENCE MVDM-HOST-DIV-526: BACK_M branch is not selected; see mirror register."
+                ]
+              }
+            ]
+          },
+          {
+            "line": 165,
+            "arms": [
+              {
+                "directive": "ifdef",
+                "expression": "BACK_M",
+                "body": [
+                  "#line 104",
+                  "#error DIVERGENCE MVDM-HOST-DIV-526: BACK_M branch is not selected; see mirror register."
+                ]
+              }
+            ]
+          },
+          {
+            "line": 192,
+            "arms": [
+              {
+                "directive": "ifdef",
+                "expression": "BACK_M",
+                "body": [
+                  "#line 107",
+                  "#error DIVERGENCE MVDM-HOST-DIV-526: BACK_M branch is not selected; see mirror register."
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "comment_only_static_leads": [
+        {
+          "original": 133,
+          "current": 213,
+          "logical": 126,
+          "text": "FUNCTION\t: host_initialise_EM"
+        },
+        {
+          "original": 135,
+          "current": 215,
+          "logical": 128,
+          "text": "PURPOSE\t\t: allocates the area of memory that is used for"
+        },
+        {
+          "original": 136,
+          "current": 216,
+          "logical": 129,
+          "text": "expanded memory and sets up an area of memory to be used"
+        },
+        {
+          "original": 137,
+          "current": 217,
+          "logical": 130,
+          "text": "for the logical pagemap allocation table."
+        },
+        {
+          "original": 140,
+          "current": 220,
+          "logical": 133,
+          "text": "RETURNED STATUS\t: SUCCESS - memory allocated successfully"
+        },
+        {
+          "original": 141,
+          "current": 221,
+          "logical": 134,
+          "text": "FAILURE - unable to allocate required space"
+        },
+        {
+          "original": 143,
+          "current": 223,
+          "logical": 136,
+          "text": "DESCRIPTION\t:"
+        }
+      ],
+      "hit_arms": 3,
+      "excluded_arms": 8,
+      "compiler_contexts": 1,
+      "compiler_unique_line_samples": 46
+    }
+  ]
+}
