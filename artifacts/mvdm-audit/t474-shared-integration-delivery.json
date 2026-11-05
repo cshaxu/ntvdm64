@@ -1,0 +1,370 @@
+{
+  "common_ancestor": "09b58f5c646cbcbf797748c45f32833a28a48b1d",
+  "source_head": "5ccff9f0d216295ad390b795e4c43c5db7f7b0c1",
+  "integration_base": "e39418656",
+  "cherry_picks": [
+    {
+      "source": "8e81725a7eca9de0bba0c46936ded0af53b574ee",
+      "applied": "06d49db250099a1a0e9565b886c6c1bc0428fd94",
+      "subject": "Separate Run16 from frontend and hook source ownership"
+    },
+    {
+      "source": "e9b895ff701e2d0254058a9e45438970a947b61d",
+      "applied": "1cf3536e1b1e7ef25dc32b08d368a7017655fc34",
+      "subject": "Publish local Run16 ownership package"
+    },
+    {
+      "source": "ce26bd614cad3630e5acab180cfa56b882a227a4",
+      "applied": "3d578f65df7db0e4cb587b072f082189c18af1a9",
+      "subject": "Extract shared BaseSrv clients and transport"
+    },
+    {
+      "source": "133d7f01dc404074dfe8abb0c34c00130418d1c2",
+      "applied": "99e328b7fc7e7b7369596c07cbaea0c51929179b",
+      "subject": "Fix isolated window handoff test setup"
+    },
+    {
+      "source": "2395f445d5b08da9973bea892e58d72a6814a1e5",
+      "applied": "d51633d4d9068a5856723aa6bac1164efab5c89f",
+      "subject": "Extract generic RPC and IO libraries"
+    },
+    {
+      "source": "59aa13a6bde5b16edad286acc29f48b0d14db66b",
+      "applied": "de2ade60285ac093612f4202e3774feba4eeaa21",
+      "subject": "Move NTCON shared libraries to lib"
+    },
+    {
+      "source": "e87e655ea22b82872fa3de400612a07ade2e9bff",
+      "applied": "c96f60ef4faf0b9d8d865ad23c3bd11dfdb58635",
+      "subject": "Rebuild local release after main rebase"
+    },
+    {
+      "source": "17a4f1735b2760922256eca0115f39c448ecb638",
+      "applied": "19fb60456ddcd09a497143f930cdd7d4637ff8a9",
+      "subject": "Separate NXVM and Win32 libraries"
+    },
+    {
+      "source": "f0f448269f0d3646d103fb2666f930567c69140c",
+      "applied": "3ca2ede31e98f409dcce00c87a31d7985d01a49b",
+      "subject": "Extract Win32 process attribute management"
+    },
+    {
+      "source": "9af0c6a0e763e89e60e65737b34a11ec14c34c3a",
+      "applied": "bb4ac7ec3e17a2a1c75cbfce3bce99771c38ecf1",
+      "subject": "Share Win32 handle duplication and remote cleanup"
+    },
+    {
+      "source": "713525ac8900659fdc87deb157c601aa8be408b2",
+      "applied": "1f4a3b8949e9fe6bedbb81053e89ff0c466f50fe",
+      "subject": "Extract Win32 suspended process hook installation"
+    },
+    {
+      "source": "759c43b419dfa2ff49db653f315856661409b335",
+      "applied": "d47a1727191b337f672bb57f19c31431af3c254f",
+      "subject": "Extract Win32 process observation"
+    },
+    {
+      "source": "8362fb88bae9155e404822992fe8205538a2dd26",
+      "applied": "aed80e9df996cc3b2cb795b17ddc82e4627b4183",
+      "subject": "Share Win32 object handle comparison"
+    },
+    {
+      "source": "a1f9a96d28c4e43acab15373755c0ceb1446b1de",
+      "applied": "e0c5f5eabfede91be7b48b355e4d11fd2bb40b85",
+      "subject": "Extract local overlapped pipe pair creation"
+    },
+    {
+      "source": "9adfc8dfdf758c88efdcd0972f43cf1455302e05",
+      "applied": "5c3c7b1b2fd7f5ffc8badfc16fc5396a4269725b",
+      "subject": "Extract parent process observation"
+    },
+    {
+      "source": "3c969f7f54a338a6c8edd3018031094093d910c0",
+      "applied": "c6d0724e355815c08c1db4d04f488d940528ab61",
+      "subject": "Extract Win32 file identity comparison"
+    },
+    {
+      "source": "4d46ccff5a7a327a05b978ece69f2e4dfb294eb5",
+      "applied": "4fa38dae2478f9b9c24fb5ef8788efd61eb140da",
+      "subject": "Close library audit and admit NTCON ownership review"
+    },
+    {
+      "source": "4cfbf5624d7cb48fe2d02ea8f5fc7456d1605ca0",
+      "applied": "081937b89165c2781d1d4193c0a8068503736f0d",
+      "subject": "Inventory cross-component implementation dependencies"
+    },
+    {
+      "source": "4d20db38a34ca7157aa1b2c5bb8da26da5331df3",
+      "applied": "1da31555bace1c80bb33ba93cc7d4a3a6450b7c3",
+      "subject": "Admit worker and NTVDM dependency removal design"
+    },
+    {
+      "source": "4c9b887b849343dc52315c32d3b18a1314751316",
+      "applied": "d301e6414c7ae587252a49463031818f07a182fe",
+      "subject": "Refine Redir and shared dependency work plan"
+    },
+    {
+      "source": "59ec74bd68be40ef426ddfddd5ee2b93e236d626",
+      "applied": "15eb4f8669ed2646a3b694b752e542fa2e324aba",
+      "subject": "Remove redirector worker-base dependency"
+    },
+    {
+      "source": "e3d457c5cc69f9748d91d4ba749de6b92508f58b",
+      "applied": "10257b4893b1feb4d84683f062cbbe1579c7bc70",
+      "subject": "Share guest memory consumer contracts"
+    },
+    {
+      "source": "10b9fc51a9712b0e27cbe9d52574d82b97cb94dc",
+      "applied": "3a7f9c7069e1201f3513736515176330e6b02023",
+      "subject": "Move redirector guest copy workflow into VDMREDIR"
+    },
+    {
+      "source": "35d1c954fa1bb8b50f34e0677e1c675d4a95da7f",
+      "applied": "8b066cab9b532fa417841909515453be6cae3ab1",
+      "subject": "Extract Win32 CRT compatibility library"
+    },
+    {
+      "source": "83e7f8576b83e3d877b5e283b0d74a928edfd997",
+      "applied": "0c62b3f579e639118f587b58e66014f4fc7203e4",
+      "subject": "Share WOW consumer contracts"
+    },
+    {
+      "source": "88bd9552ab1ee7ed1f3b9922ea47e2feda02c224",
+      "applied": "794d73e13f695cb7897d37dd841735e22d0f787a",
+      "subject": "Share worker thread binding and Win32 thunk"
+    },
+    {
+      "source": "95c2b51091d6e20b50bad931d52a53ec06718ad2",
+      "applied": "dfc884507b234e6c8b326ea8a6ac4db3538c1aab",
+      "subject": "Close worker source and static dependency boundaries"
+    },
+    {
+      "source": "bc6acc28a588dc59fbdbe065980911cea295add5",
+      "applied": "e82d41bc39f662683f8d4757a88e41843b3e7363",
+      "subject": "Share native hook context with launcher"
+    },
+    {
+      "source": "17f03d1eb78cf8741c0cec331747adabe70c8897",
+      "applied": "310f651d93d7fde58f53dcabf8cbe4df5e819f5d",
+      "subject": "Share native hook installation coordination"
+    },
+    {
+      "source": "445e93a75cd1953a2c7da37c67289d767455e893",
+      "applied": "bb1320bc0a955d86d976b3e113c51be29bc43592",
+      "subject": "Remove private SoftPC header from shared closures"
+    },
+    {
+      "source": "f78071bc40783aa259de779e205a13a61b36a09e",
+      "applied": "b224d067023ddc7e243903e17f614ff50d1d57de",
+      "subject": "Share native classifier architecture binding"
+    },
+    {
+      "source": "9ebf47f889dd34f4b1f9308f3afdc1b5edcd1d99",
+      "applied": "fb11a1e33b3fec0e8081d96ca042dee2d0708236",
+      "subject": "Rebuild local release after main rebase"
+    },
+    {
+      "source": "900c204846ba36313efaaa20bca039440d586d57",
+      "applied": "4dad52e2d61e475188090fc801dc658d2040105f",
+      "subject": "Rebuild local release on updated main baseline"
+    },
+    {
+      "source": "cdbd8b9b6fbed1ff4c5d74ca1eada97d7536a7e5",
+      "applied": "dea9eaa8a0b2898ba8e3ea1f8783ac673c559bc7",
+      "subject": "Import shared pure C process hook library"
+    },
+    {
+      "source": "0ef48e2b63031b77372be28d4615933732169402",
+      "applied": "d4b294939c73a18e4c5e7ff52c8bd6d22dbe7ed9",
+      "subject": "Add cross-width payload transport without helper DLL"
+    },
+    {
+      "source": "9128228b077a9c3011de45a18793911ebd6148c1",
+      "applied": "6ea2f223d191e9de83f941dbc7f614dd2901cdb8",
+      "subject": "Migrate native hook product paths to C"
+    },
+    {
+      "source": "2b58bcd2f75c923669f6b4f767832d6ed121d3e4",
+      "applied": "574e8ac777ae1285b1cde7f01af2b4d85ab121a3",
+      "subject": "Convert native hook regression fixtures to C"
+    },
+    {
+      "source": "d880613e6975780a723d324ad333d2fd82be4780",
+      "applied": "917afe5666d8d14a72f391cdbf598d5ce8128079",
+      "subject": "Convert startup console trace to C"
+    },
+    {
+      "source": "afd1e09208a5cbf2afdf8d7ed79ff57b12a033a9",
+      "applied": "075546beacd3d94193254c8efee4a983d8dae264",
+      "subject": "Convert palette observation to C process hooks"
+    },
+    {
+      "source": "3f116af58f46e113ec3a6af3773505f7b0abe681",
+      "applied": "e1953779dab670f9e0c434cbbe21f56aed0bd801",
+      "subject": "Replace obsolete Detours mechanism fixture with C payload test"
+    },
+    {
+      "source": "7c4c8b64ec66202f93a58744e5fa74e544cfb7a5",
+      "applied": "729364d8ad9518c29a8a2513e6747a67a9cf6206",
+      "subject": "Convert restricted install guards to C process hooks"
+    },
+    {
+      "source": "bd891f96262e5553765be659e616bc33a93b66d9",
+      "applied": "bc2a0788a6d7ab551ab9fe47cae4350cc6de8b13",
+      "subject": "Use C late process hooks for console observation"
+    },
+    {
+      "source": "f5a157d032becdea2fa50c80c49f802ce82237e3",
+      "applied": "6a4a80c4fa6bc4ba86ce1a5f1e37bfab4e0babee",
+      "subject": "Remove unused vendored Detours sources"
+    },
+    {
+      "source": "ddf4a2ec8d425efe4bac83ef80aa90027a8b06f3",
+      "applied": "80144f341ad295ffcecbd0286a687514d8d72692",
+      "subject": "Enforce C native graphs and isolate library compiler flags"
+    },
+    {
+      "source": "4981bac704abc71cb45ce9b74de52fabbb4d4fed",
+      "applied": "c912a89e0c252320ea39562ab182694f8b3c2d03",
+      "subject": "Retire inactive C++ sources with provenance index"
+    },
+    {
+      "source": "bbab6038b84a0e90189dacfc1b9262d3a03418a9",
+      "applied": "0b8161554fb541e27430d1245f32e8bede619001",
+      "subject": "Convert historical array emitters to C"
+    },
+    {
+      "source": "e07e6455837ad0bfd761008653604a2718afbed7",
+      "applied": "72ca148ae67a1debb1d766dfc0f43bf2d976de6f",
+      "subject": "Configure C-only toolchains and retire obsolete C++ graphs"
+    },
+    {
+      "source": "0b501d16bb46d91c4f92d9cfa5a509413143e7b1",
+      "applied": "f2e78f33b91caf1c593751005c9cbfbe8a66b2c1",
+      "subject": "Record final process-hook package verification"
+    },
+    {
+      "source": "c02c3537c19d3af4fbb8830b2f18026c3757bf72",
+      "applied": "b73ebeb6a8ba5ae900b6603ccf5869fca05adda6",
+      "subject": "Record WRITE close and restart verification"
+    },
+    {
+      "source": "af9e263510a7feac5af16f5722f33ca164aa336a",
+      "applied": "463f929eb57835a14985784bf2880b7b2f7d814f",
+      "subject": "Verify WRITE edit and save across hook replacement"
+    },
+    {
+      "source": "5ccff9f0d216295ad390b795e4c43c5db7f7b0c1",
+      "applied": "66189d2c7e6344c155cc688c6b7e6ff768c38fad",
+      "subject": "Close process-hook replacement with verified local release"
+    }
+  ],
+  "source_conflict": "wuman.c uses shared WOW header while preserving original #line; mirror divergence ledger kept both sides.",
+  "asset_conflicts": "current side retained as directed; temporary mixed release restored to prior coherent package before full rebuild.",
+  "build": "cached x86 NTVDM, WOW32, VDMREDIR, nthook32 and all native x64 targets passed after PROD rcflags repair",
+  "full_suite": "run3 exit 0; PASS Full selected gates; identical 10-file package",
+  "failed_initial_suite": "run2 version gate: APP_VERSION 0.0.473 vs admitted T474; corrected to 0.0.474 with protocol unchanged and rebuilt",
+  "process_hook_tests": [
+    "MSVC x86/x64 same-width PASS",
+    "all four x86/x64 cross-width pairs PASS",
+    "late-guard thread-set change x86/x64 PASS"
+  ],
+  "boundary_tests": [
+    "guest memory PASS",
+    "VDMREDIR shared boundary 18 objects PASS",
+    "shared thread PASS",
+    "WOW boundary 147 objects PASS"
+  ],
+  "published_manifest": [
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "1F1275961BF1E840124A2D713FB4BFE1C34B1C7E9688EBFA49D8BB1A63DCFF36",
+      "Machine": 34404,
+      "PackageId": "ee3df81e-ca78-4406-a273-9a757530d1b3",
+      "InputSha256": "D3B5AA90E25D7F99EE600D200ABAA148989A183AD773F43947CE82C5102B3784"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "4E3D940311D24B0C43D977482FABBF9AFCFA522992CD582B801E2FB460C7EAA9",
+      "Machine": 34404,
+      "PackageId": "ee3df81e-ca78-4406-a273-9a757530d1b3",
+      "InputSha256": "A3DFA8A814F139C72D9F36A9C320A6EE3AAD554383B2B49FFB3AE4CA0EFF15CD"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "4BEDEA70E27C98C30B1FC264CD61D03CB349B3E28D962B840B72F6B5B5A58CB4",
+      "Machine": 34404,
+      "PackageId": "ee3df81e-ca78-4406-a273-9a757530d1b3",
+      "InputSha256": "DA528027BCE211C2C027AE34CCDE910E1A1614269BE0A7D27BEA44E86D2BB77B"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "CF956EF8945AFE05720541A38FDC4767DA5C04BF52E0A5EED40ED6ADC115B709",
+      "Machine": 332,
+      "PackageId": "ee3df81e-ca78-4406-a273-9a757530d1b3",
+      "InputSha256": "E22EBBAE6849A07268DB2D22D03CC4D44FFBB5C0E8D92B846C8843EB81F68306"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "5DEA7D23A620B7F5B4E2D0C3BDEC2F50AC08D9BEFDC51756B315F754006D3B49",
+      "Machine": 34404,
+      "PackageId": "ee3df81e-ca78-4406-a273-9a757530d1b3",
+      "InputSha256": "1A390C1BF3A15892A0673F159A937462F148026C16CADADC41E08C704CB2C490"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "5AA5F547DB4F53C7C40B5AF437BE671ED73F0BE0D0FF5CBFDD5DA04A57BBE92D",
+      "Machine": 34404,
+      "PackageId": "ee3df81e-ca78-4406-a273-9a757530d1b3",
+      "InputSha256": "219FF68EDC45CE3A2092762882B763F7ACEA8112C4D81714BB54B4E31FAAEE66"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "A83EAEE0A410CCF7F6D883E87899B8255D41BCB7DAECCABD6D774DCA60F4DF82",
+      "Machine": 332,
+      "PackageId": "ee3df81e-ca78-4406-a273-9a757530d1b3",
+      "InputSha256": "92DE26926F668488D872733E3E59F8B72F0D41A6565622E0760BA534DD1D089C"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "4916FC3E4184B819918DAA76C8AA7716D29B6BA6AADFCC19F105B03E13E09988",
+      "Machine": 332,
+      "PackageId": "ee3df81e-ca78-4406-a273-9a757530d1b3",
+      "InputSha256": "C5889ECB6A386277C6BD742E0A4BB5288AD097AA55C9F9C2E643352CEBFA183C"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "F7A47D487F2B72ED393596859D189D9927F2A5495D9AD5E8183DAD17E5233B65",
+      "Machine": 332,
+      "PackageId": "ee3df81e-ca78-4406-a273-9a757530d1b3",
+      "InputSha256": "17063B71FB7C11B8A2DC9465281ADA2DB363499AA9DDB19B201ADDC7529B4688"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "C92EE33D970BEA158462101EFF67C505D5107F9658F26846CA582CE00EA8E13E",
+      "Machine": 34404,
+      "PackageId": "ee3df81e-ca78-4406-a273-9a757530d1b3",
+      "InputSha256": "514EF6A3FD846A901A46224F9B3709FF432289721D6EBD8824963FF2834386FA"
+    }
+  ],
+  "log_hashes": {
+    "build\\t474-s1\\full-run3\\full\\timings.json": "11196b280e4f622f88b8445b7f351dc1e90522a8d4575eaf2a79d6e0454ef8a2",
+    "build\\t473-s13\\t474-wow-build.log": "c82945c10de074a27c745ab236d714e55874c3849f4d4441bebc2dcb4bb44966",
+    "build\\t473-s13\\t474-native-build.log": "b062b0eb2cd21a0f210b6e0598ed5d3754f5ef629433c34e5fa28c4ef025e10b",
+    "build\\t473-s13\\t474-x86-dll-build.log": "cbeaebe612d3d7611f9a0999ee24306e7fb2752d6ea78eb0d1a3e249268ba8d9"
+  },
+  "limits": [
+    "WOW window startup observation is not gameplay acceptance",
+    "Full suite is the repository selected gate, not a claim that all possible configurations were tested"
+  ]
+}

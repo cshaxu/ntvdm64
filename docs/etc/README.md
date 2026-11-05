@@ -1,5 +1,7 @@
 # Supporting Material
 
+[T474 S1 shared-ownership integration](evidence/m0-t474-s1-shared-range-integration.md) records the complete sibling range, integration fixes, full validation and published package.
+
 [T475 S5 process-hook import](evidence/m0-t475-s5-process-hook-import.md) records source identity, compatibility boundaries and evidence.
 
 [T475 S4 NTHook dependency cleanup](evidence/m0-t475-s4-nthook-dependency-cleanup.md) records admission, ownership decisions and local P evidence.

@@ -25,6 +25,7 @@ active-packet transition does not change any candidate's proposed scope.
 | 8 | Hardware-virtualized guest CPU acceleration — investigate and implement a modern hardware-virtualization execution backend for 16/32-bit guest instructions, subject to demonstrated feasibility and compatibility. | [Proposal](../proposals/proposal-hardware-virtualized-guest-cpu-001.md) |
 | 9 | Windows 1.01 application launch from the host — classify and launch a selected application through its matching Windows 1.01 guest environment, preserving arguments, environment selection and truthful application lifecycle results. | [Proposal](../proposals/proposal-win101-host-application-launch-001.md) |
 | 10 | Remove WOW32 and VDMREDIR PE runtime imports from NTVDM while retaining one worker-owned state and the required original ABI. | [Proposal](../proposals/proposal-worker-runtime-import-boundary-001.md) |
+| 11 | Complete mirror conditional and diagnostic-line audit — audit and correct each compiled mirror file as a complete unit, using actual supported contexts and registered evidence. | [Proposal](../proposals/proposal-mirror-conditional-file-audit-001.md) |
 
 The owner moved shared implementation ownership review to the front; it is
 now admitted in the independent worktree. The external system launch

@@ -2,9 +2,36 @@
 
 ## Current Work
 
-**No active M/T/S packet.** The owner closes M0 T475 S5 after local delivery
-and verification of the C process-hook replacement. The next task requires
-separate admission. The ordered candidates remain in [Queue](QUEUE.md).
+**Active: M0 T474 S1** — integrate the shared-ownership worktree commit range.
+
+T473 was closed by owner direction; its [closure](../history/m0-t473-closure.md)
+and queued mirror audit remain authoritative. The 51-commit sibling range has
+been applied and is undergoing integration review.
+
+## Active Packet
+
+### M0 T474 S1 — shared-ownership commit integration
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T474 S1, Ordinary Mode. |
+| Admission And Approval | Owner directed admission after T473 closure and requested the entire sibling commit range with history preserved. |
+| Objective | Apply all commits after common ancestor `09b58f5c646cbcbf797748c45f32833a28a48b1d` through sibling head `5ccff9f0d216295ad390b795e4c43c5db7f7b0c1` onto the latest main baseline. |
+| Non-goals | No guest source or image modification or rebuilding; do not silently drop commits. |
+| Reference Baseline | T473 closure `5ed4e560d`; sibling `review/shared-ownership` clean at the head above. |
+| Files And ABI Surface | Shared libraries, component boundaries, build/test infrastructure and source files in the sibling commit range. |
+| Applicable Rules | Source policy, minimal guest diff, preserve unrelated work, owner conflict directions. |
+| Verification | Review every conflict and applied range; verify build and affected checks after integration as appropriate. |
+| Delivery State | 51 commits applied in order; coherent ten-component package built, Full selected gates and shared-library checks passed, and both destinations hash-verified. [Evidence](../etc/evidence/m0-t474-s1-shared-range-integration.md). Awaiting review. |
+| Expected Markers | All 51 commits accounted for; commit ordering and provenance retained. |
+| Asset Needs | Existing local repository and shared-ownership worktree. |
+| Reporting Requirements | Report common ancestor, imported commits, resolutions and verification. |
+| Stop Conditions | Guest changes, unrecoverable conflict or an actual incompatible requirement. |
+| Exit Criteria | Complete range integration, review, verification and normal delivery. |
+| Original Owner Request | Integrate the whole post-ancestor range in one operation, keep history; keep current assets on conflicts and choose sibling current documentation on conflicts, resolve source conflicts independently. |
+| Similar-Issue Sweep | Check all conflict categories and preserve the newly queued mirror audit. |
+| Candidate Proposal | [Shared implementation ownership](../proposals/proposal-shared-implementation-ownership-001.md). |
+
 
 ## M0 T475 S5 Closure
 
