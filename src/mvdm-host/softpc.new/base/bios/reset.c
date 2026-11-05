@@ -170,6 +170,7 @@ IMPORT	CHAR	*host_get_copyright IPT0();
 #define IO_ROM_SEG    0x69   /* User Stack Pointer(SS) */
 #define IO_ROM_INIT   0x67   /* User Stack Pointer(SP) */
 
+#line 164
 static void setup_ivt()
 {
 	IUH count;

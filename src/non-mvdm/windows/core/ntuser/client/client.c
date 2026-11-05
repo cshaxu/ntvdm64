@@ -172,6 +172,7 @@ RegisterClassWOWA(
 #include "wow_window_dispatch_bindings.h"
 #define WNDPROC_WOW WOW_WINDOW_PROC_TAG
 
+#line 2383
 LONG DispatchClientMessage(
     PWND pwnd,
     UINT message,

@@ -749,6 +749,7 @@ static void publish_text_update(void)
     }
 }
 
+#line 796
 void nt_flush_screen(void)
 {
     sub_note_trace0(ALL_ADAPT_VERBOSE, "nt_flush_screen");

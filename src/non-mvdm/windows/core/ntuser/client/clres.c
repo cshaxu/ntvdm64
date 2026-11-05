@@ -194,6 +194,7 @@ int WINAPI DialogBoxIndirectParamAorW(
 #include "wow_menu_resource_bindings.h"
 #define WCSToMB(text, count, output, capacity, allocate) \
     WCSToMBEx(0, text, count, output, capacity, allocate)
+#line 3923
 HANDLE WOWFindResourceExWCover(
     HANDLE  hmod,
     LPCWSTR rt,

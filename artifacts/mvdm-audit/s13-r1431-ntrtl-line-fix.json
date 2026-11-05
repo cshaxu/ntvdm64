@@ -1,0 +1,9 @@
+{
+  "file": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+  "before_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+  "after_sha256": "198145858d9f32e03152c079206c747c1e91b079ed4e7b6a939cbb82a1920555",
+  "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+  "edit": "Change #line preceding __inline LUID from 4940 to 4946; original function starts at line 4946. No other bytes changed.",
+  "witness": "s13-r1430-production-context-lines.json: MSVC /E reports function at 4942 versus original 4948; six-line difference on function body.",
+  "state": "Pending batch; no post-change compile or publication performed."
+}

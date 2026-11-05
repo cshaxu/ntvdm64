@@ -1,0 +1,3386 @@
+{
+  "method": "MSVC /E for actual x86 production compile commands; compare exact, nontrivial, original-unique output lines attributed by compiler #line to primary source. Candidates may include unrelated text, local modifications or conditional line-state differences; human audit required. No claim for unobserved branches or lines.",
+  "jobs": 32,
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_sha256": "202bf3d58825732c9076b84df0c2bc19f9264b003a0ed8382a4b57925e46d8bb",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "graph": "worker",
+      "preprocess_sha256": "eceb6798cd10152a322cf1aa5c960a8a2e5e51a8eeed101a746be05b88d7e13c",
+      "aligned_unique_lines": 17,
+      "candidate_mismatches": [
+        {
+          "compiler_line": 102,
+          "original_line": 101,
+          "text": "HOSTMOUSEFUNCS\t*working_mouse_funcs;"
+        },
+        {
+          "compiler_line": 166,
+          "original_line": 164,
+          "text": "static void setup_ivt()"
+        },
+        {
+          "compiler_line": 174,
+          "original_line": 172,
+          "text": "for (count=0; count<=0x78; count++)"
+        },
+        {
+          "compiler_line": 179,
+          "original_line": 177,
+          "text": "for (count=0x60; count<=0x67; count++)"
+        },
+        {
+          "compiler_line": 515,
+          "original_line": 518,
+          "text": "EQUIPMENT_WORD equip_flag;"
+        },
+        {
+          "compiler_line": 541,
+          "original_line": 544,
+          "text": "switch (cmos_shutdown)"
+        },
+        {
+          "compiler_line": 669,
+          "original_line": 668,
+          "text": "host_clear_hw_int();"
+        },
+        {
+          "compiler_line": 865,
+          "original_line": 875,
+          "text": "SWTMR_init_funcptrs ();"
+        }
+      ],
+      "ambiguous_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "95b7f33652defcac6c1706d1fa67961131f0b396c4cc748ca251e517ffe6ce90",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "graph": "worker",
+      "preprocess_sha256": "def3867ea125726317b278ec32742cae81b3eb1a5085d0a4b85b376a849c4ccd",
+      "aligned_unique_lines": 75,
+      "candidate_mismatches": [
+        {
+          "compiler_line": 2946,
+          "original_line": 3322,
+          "text": "MOUSE_SCREEN_DATA *mask_address;"
+        },
+        {
+          "compiler_line": 4832,
+          "original_line": 5289,
+          "text": "software_text_cursor_display();"
+        },
+        {
+          "compiler_line": 4836,
+          "original_line": 5293,
+          "text": "hardware_text_cursor_display();"
+        },
+        {
+          "compiler_line": 4856,
+          "original_line": 5320,
+          "text": "VGA_graphics_cursor_display();"
+        },
+        {
+          "compiler_line": 4868,
+          "original_line": 5332,
+          "text": "graphics_cursor_display();"
+        },
+        {
+          "compiler_line": 4925,
+          "original_line": 5393,
+          "text": "software_text_cursor_undisplay();"
+        },
+        {
+          "compiler_line": 4929,
+          "original_line": 5397,
+          "text": "hardware_text_cursor_undisplay();"
+        },
+        {
+          "compiler_line": 4945,
+          "original_line": 5412,
+          "text": "VGA_graphics_cursor_undisplay();"
+        },
+        {
+          "compiler_line": 4957,
+          "original_line": 5424,
+          "text": "graphics_cursor_undisplay();"
+        },
+        {
+          "compiler_line": 5453,
+          "original_line": 5442,
+          "text": "if (new_mode >= 0x40)"
+        },
+        {
+          "compiler_line": 5454,
+          "original_line": 5443,
+          "text": "if (new_mode >= 0x60)"
+        },
+        {
+          "compiler_line": 5508,
+          "original_line": 5497,
+          "text": "point_as_text_cell_address(&cursor_area.top_left);"
+        },
+        {
+          "compiler_line": 5589,
+          "original_line": 5578,
+          "text": "outb(card_address--, text_address >> 8);"
+        },
+        {
+          "compiler_line": 5595,
+          "original_line": 5584,
+          "text": "outb(card_address--, text_address);"
+        },
+        {
+          "compiler_line": 5628,
+          "original_line": 5619,
+          "text": "IU32 strip_lo, strip_mid, strip_hi;"
+        },
+        {
+          "compiler_line": 5629,
+          "original_line": 5620,
+          "text": "IU32 mask_lo, mask_hi;"
+        },
+        {
+          "compiler_line": 5631,
+          "original_line": 5622,
+          "text": "MOUSE_SCALAR saved_cursor_pos;"
+        },
+        {
+          "compiler_line": 5632,
+          "original_line": 5623,
+          "text": "MOUSE_SCALAR saved_bottom_right;"
+        },
+        {
+          "compiler_line": 5689,
+          "original_line": 5680,
+          "text": "mask_lo = 0xff >> bit_shift;"
+        },
+        {
+          "compiler_line": 5690,
+          "original_line": 5681,
+          "text": "mask_lo = ( mask_lo << 8 ) | mask_lo;"
+        },
+        {
+          "compiler_line": 5691,
+          "original_line": 5682,
+          "text": "mask_lo = ~(( mask_lo << 16 ) | mask_lo);"
+        },
+        {
+          "compiler_line": 5693,
+          "original_line": 5684,
+          "text": "mask_hi = 0xff >> bit_shift;"
+        },
+        {
+          "compiler_line": 5694,
+          "original_line": 5685,
+          "text": "mask_hi = ( mask_hi << 8 ) | mask_hi;"
+        },
+        {
+          "compiler_line": 5695,
+          "original_line": 5686,
+          "text": "mask_hi = ( mask_hi << 16 ) | mask_hi;"
+        },
+        {
+          "compiler_line": 5927,
+          "original_line": 5929,
+          "text": "for(index=0;index<index_max;index++)"
+        },
+        {
+          "compiler_line": 5998,
+          "original_line": 6000,
+          "text": "for (index=0;index<index_max;index++)"
+        }
+      ],
+      "ambiguous_lines": 114
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "current_sha256": "632ca3bb954bf38a7537051f46590e73dd8479a17dfb3b8cf6be887d3f944add",
+      "original_sha256": "e4f39908ff9534adde52e46def732a93790ac48f2bb481590622c537c2f3b205",
+      "graph": "worker",
+      "preprocess_sha256": "f3ab39a7cb8e933c334b540592dfd797398c639310afff60508ed550ac809763",
+      "aligned_unique_lines": 17,
+      "candidate_mismatches": [
+        {
+          "compiler_line": 701,
+          "original_line": 845,
+          "text": "Ios_inw_function[adapter]  = generic_inw;"
+        },
+        {
+          "compiler_line": 727,
+          "original_line": 845,
+          "text": "Ios_inw_function[adapter]  = generic_inw;"
+        },
+        {
+          "compiler_line": 755,
+          "original_line": 815,
+          "text": "Ios_outw_function[adapter]  = generic_outw;"
+        },
+        {
+          "compiler_line": 782,
+          "original_line": 815,
+          "text": "Ios_outw_function[adapter]  = generic_outw;"
+        }
+      ],
+      "ambiguous_lines": 43
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "current_sha256": "8f625455d217e902ae808c6558b7e217ac2fd5aa8fee329f5eaa2e58fbe0e4a4",
+      "original_sha256": "5dfdca835f1ca6fddf07826f2b4aa9e25f4c8bd0ceef21b2dce9884de721376c",
+      "graph": "worker",
+      "preprocess_sha256": "0c1343650c983a912e6f201e0a34a45c4549dab6c136fa6c51819ecf101b5aa8",
+      "aligned_unique_lines": 4,
+      "candidate_mismatches": [
+        {
+          "compiler_line": 206,
+          "original_line": 201,
+          "text": "init_virtual_drivers();"
+        }
+      ],
+      "ambiguous_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "current_sha256": "fbd2aaa1741bccc78af08334310f01a4563a7fd452f64142488703cdc529973b",
+      "original_sha256": "a95cda1054b1840df73dbcec6e23cacbee1ddf2fd1ed071318c8c9252f21c0cc",
+      "graph": "worker",
+      "preprocess_sha256": "94e29dba9ae7ddf7f978d47e111e8e1fe64d3bd00bbe4f61322ef1ca52a97022",
+      "aligned_unique_lines": 1,
+      "candidate_mismatches": [],
+      "ambiguous_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "current_sha256": "33ad6f8273c53ebbaa5fe365d36b455c1ffca1527e25978d1a53875622b7c34b",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+      "graph": "worker",
+      "preprocess_sha256": "d8707547d4044ab4fda0d9f414dfa79ce08efa11212f0de2f4d8965a5e6a4acf",
+      "aligned_unique_lines": 10,
+      "candidate_mismatches": [
+        {
+          "compiler_line": 156,
+          "original_line": 148,
+          "text": "void (*video_func[]) () = {"
+        },
+        {
+          "compiler_line": 159,
+          "original_line": 151,
+          "text": "vd_set_cursor_position,"
+        },
+        {
+          "compiler_line": 160,
+          "original_line": 152,
+          "text": "vd_get_cursor_position,"
+        },
+        {
+          "compiler_line": 165,
+          "original_line": 157,
+          "text": "vd_read_attrib_char,"
+        },
+        {
+          "compiler_line": 166,
+          "original_line": 158,
+          "text": "vd_write_char_attrib,"
+        },
+        {
+          "compiler_line": 168,
+          "original_line": 160,
+          "text": "vd_set_colour_palette,"
+        },
+        {
+          "compiler_line": 198,
+          "original_line": 189,
+          "text": "unsigned char   valid_modes[] ="
+        },
+        {
+          "compiler_line": 222,
+          "original_line": 213,
+          "text": "MODE_ENTRY vd_mode_table[] = {"
+        },
+        {
+          "compiler_line": 248,
+          "original_line": 239,
+          "text": "MODE_ENTRY vd_ext_text_table[] = {"
+        },
+        {
+          "compiler_line": 257,
+          "original_line": 248,
+          "text": "MODE_ENTRY vd_ext_graph_table[] = {"
+        },
+        {
+          "compiler_line": 357,
+          "original_line": 356,
+          "text": "vd_addr_6845 = 0x3D4;"
+        },
+        {
+          "compiler_line": 358,
+          "original_line": 357,
+          "text": "if (current_video_mode == 7) {"
+        },
+        {
+          "compiler_line": 630,
+          "original_line": 629,
+          "text": "set_banking( bank, bank );"
+        },
+        {
+          "compiler_line": 741,
+          "original_line": 740,
+          "text": "kinky_scroll_up(t_row,l_col,rowsdiff,colsdiff,lines,attr,vd_cols_on_screen);"
+        },
+        {
+          "compiler_line": 746,
+          "original_line": 745,
+          "text": "sensible_text_scroll_up(t_row,l_col,rowsdiff,colsdiff,lines,attr);"
+        },
+        {
+          "compiler_line": 756,
+          "original_line": 755,
+          "text": "sensible_graph_scroll_up(t_row,l_col,rowsdiff,colsdiff,lines,attr);"
+        },
+        {
+          "compiler_line": 776,
+          "original_line": 775,
+          "text": "register int\tcol_incr,i;"
+        },
+        {
+          "compiler_line": 790,
+          "original_line": 789,
+          "text": "screen_updated = (*update_alg.scroll_up)(source,2*colsdiff,rowsdiff,attr,lines,0);"
+        },
+        {
+          "compiler_line": 859,
+          "original_line": 856,
+          "text": "screen_updated = (*update_alg.scroll_up)(source,colsdiff,rowsdiff,attr,lines,colour);"
+        },
+        {
+          "compiler_line": 927,
+          "original_line": 1249,
+          "text": "case 0: case 1: case 2:"
+        },
+        {
+          "compiler_line": 932,
+          "original_line": 1252,
+          "text": "col_incr = vd_cols_on_screen * 2;"
+        },
+        {
+          "compiler_line": 935,
+          "original_line": 930,
+          "text": "case 6: case 4: case 5:"
+        },
+        {
+          "compiler_line": 1007,
+          "original_line": 998,
+          "text": "if((dest + 2*colsdiff) > video_pc_high_regen+1)"
+        },
+        {
+          "compiler_line": 1009,
+          "original_line": 1000,
+          "text": "colsdiff = (int)((video_pc_high_regen+1-dest)/2);"
+        },
+        {
+          "compiler_line": 1104,
+          "original_line": 1094,
+          "text": "kinky_scroll_down(t_row,l_col,rowsdiff,colsdiff,lines,attr,vd_cols_on_screen);"
+        },
+        {
+          "compiler_line": 1108,
+          "original_line": 1098,
+          "text": "sensible_text_scroll_down(t_row,l_col,rowsdiff,colsdiff,lines,attr);"
+        },
+        {
+          "compiler_line": 1118,
+          "original_line": 1108,
+          "text": "sensible_graph_scroll_down(t_row,l_col,rowsdiff,colsdiff,lines,attr);"
+        },
+        {
+          "compiler_line": 1146,
+          "original_line": 1136,
+          "text": "screen_updated = (*update_alg.scroll_down)(source,2*colsdiff,rowsdiff,attr,lines,0);"
+        },
+        {
+          "compiler_line": 1150,
+          "original_line": 1140,
+          "text": "source = dest - lines*col_incr;"
+        },
+        {
+          "compiler_line": 1207,
+          "original_line": 1195,
+          "text": "screen_updated = (*update_alg.scroll_down)(source,colsdiff,rowsdiff,attr,lines,colour);"
+        },
+        {
+          "compiler_line": 1220,
+          "original_line": 1208,
+          "text": "for( i = 0; i < rowsdiff-lines; i++ )"
+        },
+        {
+          "compiler_line": 1261,
+          "original_line": 1249,
+          "text": "case 0: case 1: case 2:"
+        },
+        {
+          "compiler_line": 1264,
+          "original_line": 1252,
+          "text": "col_incr = vd_cols_on_screen * 2;"
+        },
+        {
+          "compiler_line": 1268,
+          "original_line": 1256,
+          "text": "case 4: case 5: case 6:"
+        },
+        {
+          "compiler_line": 1291,
+          "original_line": 1278,
+          "text": "source = dest -lines*col_incr;"
+        },
+        {
+          "compiler_line": 1415,
+          "original_line": 1399,
+          "text": "+ 2 * (((vd_cursor_row * vd_cols_on_screen) << 2) + vd_cursor_col);"
+        },
+        {
+          "compiler_line": 1437,
+          "original_line": 1421,
+          "text": "match[i*2] = fgcolmask(chattr);"
+        },
+        {
+          "compiler_line": 1443,
+          "original_line": 1427,
+          "text": "match[i*2+1] = fgcolmask(chattr);"
+        },
+        {
+          "compiler_line": 1695,
+          "original_line": 1698,
+          "text": "dotval = (dotval & 3) << (6-right_just);"
+        },
+        {
+          "compiler_line": 1724,
+          "original_line": 1727,
+          "text": "EGA_planes[dotpos] =  data ^ dotval;"
+        },
+        {
+          "compiler_line": 1744,
+          "original_line": 1747,
+          "text": "EGA_planes[dotpos] = (data & ~bitmask) |"
+        },
+        {
+          "compiler_line": 1763,
+          "original_line": 1766,
+          "text": "dotval = (dotval & 1) << (7-right_just);"
+        },
+        {
+          "compiler_line": 1764,
+          "original_line": 1767,
+          "text": "bitmask = (0x80 >> right_just);"
+        },
+        {
+          "compiler_line": 1788,
+          "original_line": 1791,
+          "text": "EGA_planes[dotpos << 2] =  data ^ dotval;"
+        },
+        {
+          "compiler_line": 1804,
+          "original_line": 1807,
+          "text": "EGA_planes[dotpos << 2] = (data & ~bitmask) |"
+        },
+        {
+          "compiler_line": 1966,
+          "original_line": 1965,
+          "text": "if (vd_cursor_col != 0) {"
+        },
+        {
+          "compiler_line": 2041,
+          "original_line": 2054,
+          "text": "(*bios_ch2_byte_wrt_fn)( ch, ch_addr );"
+        },
+        {
+          "compiler_line": 2181,
+          "original_line": 2195,
+          "text": "if (scroll_required)"
+        },
+        {
+          "compiler_line": 2233,
+          "original_line": 2249,
+          "text": "int i,op,col,row,len;"
+        },
+        {
+          "compiler_line": 2234,
+          "original_line": 2250,
+          "text": "int save_col,save_row;"
+        },
+        {
+          "compiler_line": 2247,
+          "original_line": 2263,
+          "text": "if (stream_io_enabled){"
+        },
+        {
+          "compiler_line": 2249,
+          "original_line": 2265,
+          "text": "avail = stream_io_buffer_size - *stream_io_dirty_count_ptr;"
+        },
+        {
+          "compiler_line": 2251,
+          "original_line": 2267,
+          "text": "if (count <= avail) {"
+        },
+        {
+          "compiler_line": 2256,
+          "original_line": 2272,
+          "text": "if (*stream_io_dirty_count_ptr) {"
+        },
+        {
+          "compiler_line": 2260,
+          "original_line": 2276,
+          "text": "if (count >= stream_io_buffer_size) {"
+        },
+        {
+          "compiler_line": 2264,
+          "original_line": 2280,
+          "text": "count -= stream_io_buffer_size;"
+        },
+        {
+          "compiler_line": 2265,
+          "original_line": 2281,
+          "text": "ptr += stream_io_buffer_size;"
+        },
+        {
+          "compiler_line": 2300,
+          "original_line": 2316,
+          "text": "else if (op == 0xfe) {"
+        },
+        {
+          "compiler_line": 2301,
+          "original_line": 2317,
+          "text": "disable_stream_io();"
+        },
+        {
+          "compiler_line": 2331,
+          "original_line": 2347,
+          "text": "vd_write_char_attrib();"
+        },
+        {
+          "compiler_line": 2401,
+          "original_line": 2417,
+          "text": "return( effective_addr( ext_seg , ext_off ) );"
+        },
+        {
+          "compiler_line": 2464,
+          "original_line": 2480,
+          "text": "xor = (attr & 0x80) ? 1 : 0;"
+        },
+        {
+          "compiler_line": 2490,
+          "original_line": 2536,
+          "text": "for(j = 0; j < how_many; j++) {"
+        },
+        {
+          "compiler_line": 2517,
+          "original_line": 2532,
+          "text": "for(i = 0; i < 3; i++)"
+        },
+        {
+          "compiler_line": 2518,
+          "original_line": 2533,
+          "text": "colmask = (colmask << 2) | attr;"
+        },
+        {
+          "compiler_line": 2519,
+          "original_line": 2534,
+          "text": "colmask = (colmask << 8) | colmask;"
+        },
+        {
+          "compiler_line": 2521,
+          "original_line": 2536,
+          "text": "for(j = 0; j < how_many; j++) {"
+        },
+        {
+          "compiler_line": 2563,
+          "original_line": 2578,
+          "text": "case 1:  table_index = 0;"
+        },
+        {
+          "compiler_line": 2624,
+          "original_line": 2660,
+          "text": "switch (video_adapter)"
+        }
+      ],
+      "ambiguous_lines": 81
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "current_sha256": "cf18fb5933b15f5b1363759aba7f37a0e7ef60469f1f39ed56786a89786dcb24",
+      "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+      "graph": "worker",
+      "preprocess_sha256": "5eedccff407057b92a84def595d1c84c82aa7cd3da2cee908bd66a417c6cf76d",
+      "aligned_unique_lines": 9,
+      "candidate_mismatches": [
+        {
+          "compiler_line": 434,
+          "original_line": 433,
+          "text": "(*update_alg.mark_wfill)( offset, offset + count - 1, 0 );"
+        },
+        {
+          "compiler_line": 502,
+          "original_line": 632,
+          "text": "if( EGA_CPU.sr_enable & 2 )"
+        },
+        {
+          "compiler_line": 563,
+          "original_line": 693,
+          "text": "if(( EGA_CPU.sr_enable & 1 ))"
+        },
+        {
+          "compiler_line": 593,
+          "original_line": 723,
+          "text": "if(( EGA_CPU.sr_enable & 4 ))"
+        },
+        {
+          "compiler_line": 638,
+          "original_line": 768,
+          "text": "ega_mode0_chn_b_write( value, offset + count - 1 );"
+        },
+        {
+          "compiler_line": 644,
+          "original_line": 774,
+          "text": "(*update_alg.mark_fill)( offset, high_offset );"
+        },
+        {
+          "compiler_line": 699,
+          "original_line": 829,
+          "text": "value2 = rotate(value,getVideorotate());"
+        },
+        {
+          "compiler_line": 760,
+          "original_line": 890,
+          "text": "value2 = rotate( value, getVideorotate() );"
+        },
+        {
+          "compiler_line": 792,
+          "original_line": 922,
+          "text": "ega_mode0_chn_b_write( value >> 8, offset + count );"
+        },
+        {
+          "compiler_line": 798,
+          "original_line": 928,
+          "text": "(*update_alg.mark_wfill)( offset, high_offset, 0 );"
+        },
+        {
+          "compiler_line": 832,
+          "original_line": 962,
+          "text": "value1 = odd ? value : value >> 8;"
+        },
+        {
+          "compiler_line": 966,
+          "original_line": 1360,
+          "text": "ega_mode0_chn_b_write( value, offset );"
+        },
+        {
+          "compiler_line": 967,
+          "original_line": 1361,
+          "text": "ega_mode0_chn_b_write( value >> 8, offset + 1 );"
+        }
+      ],
+      "ambiguous_lines": 87
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "current_sha256": "151646a7b9ba9319b6ce683f7c49c899168fe94d0f97721b12b64430c83f4b0a",
+      "original_sha256": "826aa1a6f685f7dc0d8b4362f3eb83899697d8a6e2a555739ff61e2388d254a1",
+      "graph": "worker",
+      "preprocess_sha256": "a94a32b7717d595fbdfdb65a5fe5a30e0b99b8befdf0598491674e0234b4a525",
+      "aligned_unique_lines": 2,
+      "candidate_mismatches": [
+        {
+          "compiler_line": 441,
+          "original_line": 671,
+          "text": "value1 = value & 2 ? 0xff : 0;"
+        },
+        {
+          "compiler_line": 447,
+          "original_line": 677,
+          "text": "value1 = value & 8 ? 0xff : 0;"
+        },
+        {
+          "compiler_line": 510,
+          "original_line": 740,
+          "text": "value2 = low & 2 ? 0xff : 0;"
+        },
+        {
+          "compiler_line": 516,
+          "original_line": 746,
+          "text": "value2 = high & 1 ? 0xff : 0;"
+        },
+        {
+          "compiler_line": 522,
+          "original_line": 752,
+          "text": "value2 = low & 8 ? 0xff : 0;"
+        },
+        {
+          "compiler_line": 528,
+          "original_line": 758,
+          "text": "value2 = high & 4 ? 0xff : 0;"
+        },
+        {
+          "compiler_line": 536,
+          "original_line": 766,
+          "text": "value2 = low & 1 ? 0xff : 0;"
+        },
+        {
+          "compiler_line": 542,
+          "original_line": 772,
+          "text": "value2 = high & 2 ? 0xff : 0;"
+        },
+        {
+          "compiler_line": 548,
+          "original_line": 778,
+          "text": "value2 = low & 4 ? 0xff : 0;"
+        },
+        {
+          "compiler_line": 554,
+          "original_line": 784,
+          "text": "value2 = high & 8 ? 0xff : 0;"
+        },
+        {
+          "compiler_line": 612,
+          "original_line": 842,
+          "text": "ega_mode2_chn_b_write(value, offset++ );"
+        },
+        {
+          "compiler_line": 620,
+          "original_line": 850,
+          "text": "ega_mode2_chn_b_write(value, offset + count - 1 );"
+        },
+        {
+          "compiler_line": 630,
+          "original_line": 860,
+          "text": "value = value & 1 ? 0xff : 0;"
+        },
+        {
+          "compiler_line": 640,
+          "original_line": 870,
+          "text": "value = value & 2 ? 0xff : 0;"
+        },
+        {
+          "compiler_line": 650,
+          "original_line": 880,
+          "text": "new_value = ( value & 1 ? 0xff : 0) | (value & 2 ? 0xff00: 0);"
+        },
+        {
+          "compiler_line": 663,
+          "original_line": 893,
+          "text": "value = value & 4 ? 0xff : 0;"
+        },
+        {
+          "compiler_line": 673,
+          "original_line": 903,
+          "text": "value = value & 8 ? 0xff : 0;"
+        },
+        {
+          "compiler_line": 683,
+          "original_line": 913,
+          "text": "new_value = ( value & 4 ? 0xff : 0) | (value & 8 ? 0xff00: 0);"
+        },
+        {
+          "compiler_line": 713,
+          "original_line": 943,
+          "text": "ega_mode2_chn_b_write( value, offset++);"
+        },
+        {
+          "compiler_line": 718,
+          "original_line": 948,
+          "text": "ega_mode2_chn_b_write( value >> 8, offset + count - 1 );"
+        },
+        {
+          "compiler_line": 722,
+          "original_line": 952,
+          "text": "value = ( value << 8 ) | ( value >> 8 );"
+        },
+        {
+          "compiler_line": 741,
+          "original_line": 971,
+          "text": "value1 = ( value >> 8 ) & 2 ? 0xff : 0;"
+        },
+        {
+          "compiler_line": 752,
+          "original_line": 982,
+          "text": "value1 = ( value & 1 ? 0xff : 0 ) | (( value >> 8 ) & 2 ? 0xff00: 0 );"
+        },
+        {
+          "compiler_line": 774,
+          "original_line": 1004,
+          "text": "value1 = ( value >> 8 ) & 8 ? 0xff : 0;"
+        },
+        {
+          "compiler_line": 785,
+          "original_line": 1015,
+          "text": "value1 = ( value & 4 ? 0xff : 0 ) | (( value >> 8 ) & 8 ? 0xff00: 0 );"
+        },
+        {
+          "compiler_line": 795,
+          "original_line": 1025,
+          "text": "update_alg.mark_wfill( offset, offset + count - 1, 0 );"
+        }
+      ],
+      "ambiguous_lines": 65
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "current_sha256": "07775984ef3fe7e1e362423caa18ee91cb71e46a28021be27680933718f98436",
+      "original_sha256": "fd73ce7181f7dfb61432d63466c7641c3d010ca0c60bf446666b6c0118ddb8a9",
+      "graph": "worker",
+      "preprocess_sha256": "a6af281be4ffde074e6d828eba9024b7ac9648e8eed6944e0cac30f6d4fbc18e",
+      "aligned_unique_lines": 34,
+      "candidate_mismatches": [
+        {
+          "compiler_line": 1095,
+          "original_line": 1096,
+          "text": "unsigned char\tphys_page;"
+        },
+        {
+          "compiler_line": 1114,
+          "original_line": 1115,
+          "text": "if(EM_page_mapped[physical_page_no] == EM_page_no)"
+        },
+        {
+          "compiler_line": 1194,
+          "original_line": 1195,
+          "text": "EM_page_mapped[physical_page_no] = EM_page_no;"
+        },
+        {
+          "compiler_line": 1290,
+          "original_line": 1291,
+          "text": "status = *(short *)ptr;"
+        },
+        {
+          "compiler_line": 1335,
+          "original_line": 1336,
+          "text": "set_map_no(handle_no, i, EM_page_mapped[i]);"
+        },
+        {
+          "compiler_line": 1337,
+          "original_line": 1338,
+          "text": "else if(handle_no == -1)"
+        },
+        {
+          "compiler_line": 1344,
+          "original_line": 1345,
+          "text": "else if(handle_no == -2)"
+        },
+        {
+          "compiler_line": 1346,
+          "original_line": 1347,
+          "text": "offset = dst_offset;"
+        },
+        {
+          "compiler_line": 1347,
+          "original_line": 1348,
+          "text": "for(i  = 0; i < no_phys_pages; i++)"
+        },
+        {
+          "compiler_line": 1357,
+          "original_line": 1358,
+          "text": "for (i = 0; i < no_to_save; i++)"
+        },
+        {
+          "compiler_line": 1366,
+          "original_line": 1367,
+          "text": "if(segment == physical_page[page_no])"
+        },
+        {
+          "compiler_line": 1368,
+          "original_line": 1369,
+          "text": "while(++page_no < no_phys_pages);"
+        },
+        {
+          "compiler_line": 1370,
+          "original_line": 1371,
+          "text": "if(page_no >= no_phys_pages)"
+        },
+        {
+          "compiler_line": 1375,
+          "original_line": 1376,
+          "text": "offset = dst_offset + (page_no * 2);"
+        },
+        {
+          "compiler_line": 1409,
+          "original_line": 1410,
+          "text": "unsigned short segment,"
+        },
+        {
+          "compiler_line": 1410,
+          "original_line": 1411,
+          "text": "unsigned short offset,"
+        },
+        {
+          "compiler_line": 1429,
+          "original_line": 1430,
+          "text": "new_page = get_map_no(handle_no, i);"
+        },
+        {
+          "compiler_line": 1441,
+          "original_line": 1442,
+          "text": "old_page = EM_page_mapped[i];"
+        },
+        {
+          "compiler_line": 1453,
+          "original_line": 1454,
+          "text": "pages_out[i] = old_page;"
+        },
+        {
+          "compiler_line": 1462,
+          "original_line": 1463,
+          "text": "pages_in[i] = new_page;"
+        },
+        {
+          "compiler_line": 1516,
+          "original_line": 1517,
+          "text": "dst_EMpage = get_EMpage_no(dst_handle, dst_seg_page);"
+        },
+        {
+          "compiler_line": 1519,
+          "original_line": 1520,
+          "text": "dst_seg_page = physical_page[page_no];"
+        },
+        {
+          "compiler_line": 1525,
+          "original_line": 1526,
+          "text": "src_EMpage = get_EMpage_no(src_handle, src_seg_page);"
+        },
+        {
+          "compiler_line": 1528,
+          "original_line": 1529,
+          "text": "src_seg_page = physical_page[page_no];"
+        },
+        {
+          "compiler_line": 1535,
+          "original_line": 1536,
+          "text": "case 0:\tif(host_copy_con_to_con(length, src_seg_page, src_offset,"
+        },
+        {
+          "compiler_line": 1540,
+          "original_line": 1541,
+          "text": "case 1:\tif(host_copy_con_to_EM(length, src_seg_page, src_offset,"
+        },
+        {
+          "compiler_line": 1545,
+          "original_line": 1546,
+          "text": "case 2:\tif(host_copy_EM_to_con(length, src_EMpage, src_offset,"
+        },
+        {
+          "compiler_line": 1550,
+          "original_line": 1551,
+          "text": "case 3:\tif(host_copy_EM_to_EM(length, src_EMpage, src_offset,"
+        },
+        {
+          "compiler_line": 1555,
+          "original_line": 1556,
+          "text": "case 4:\tif(host_exchg_con_to_con(length, src_seg_page, src_offset,"
+        },
+        {
+          "compiler_line": 1560,
+          "original_line": 1561,
+          "text": "case 5:\tif(host_exchg_con_to_EM(length, src_seg_page, src_offset,"
+        },
+        {
+          "compiler_line": 1565,
+          "original_line": 1566,
+          "text": "case 6:\tif(host_exchg_con_to_EM(length, dst_seg_page, dst_offset,"
+        },
+        {
+          "compiler_line": 1570,
+          "original_line": 1571,
+          "text": "case 7:\tif(host_exchg_EM_to_EM(length, src_EMpage, src_offset,"
+        },
+        {
+          "compiler_line": 1597,
+          "original_line": 1598,
+          "text": "short physical_page_no = 0;"
+        },
+        {
+          "compiler_line": 1601,
+          "original_line": 1602,
+          "text": "if(EM_page_mapped[physical_page_no] == EMpage_no)"
+        },
+        {
+          "compiler_line": 1603,
+          "original_line": 1604,
+          "text": "while(++physical_page_no < no_phys_pages );"
+        },
+        {
+          "compiler_line": 1605,
+          "original_line": 1606,
+          "text": "if(physical_page_no >= no_phys_pages)"
+        },
+        {
+          "compiler_line": 1608,
+          "original_line": 1609,
+          "text": "return(physical_page_no);"
+        },
+        {
+          "compiler_line": 1680,
+          "original_line": 1682,
+          "text": "return(total_pages);"
+        },
+        {
+          "compiler_line": 1694,
+          "original_line": 1696,
+          "text": "return(unallocated_pages);"
+        },
+        {
+          "compiler_line": 1700,
+          "original_line": 1702,
+          "text": "return(physical_page[0]);"
+        },
+        {
+          "compiler_line": 1708,
+          "original_line": 1710,
+          "text": "return(total_handles);"
+        },
+        {
+          "compiler_line": 1713,
+          "original_line": 1715,
+          "text": "return(total_open_handles);"
+        },
+        {
+          "compiler_line": 1718,
+          "original_line": 1720,
+          "text": "return(no_phys_pages);"
+        },
+        {
+          "compiler_line": 1723,
+          "original_line": 1725,
+          "text": "return(physical_page[page_no]);"
+        },
+        {
+          "compiler_line": 1747,
+          "original_line": 1749,
+          "text": "return(no_altreg_sets);"
+        },
+        {
+          "compiler_line": 1752,
+          "original_line": 1754,
+          "text": "return(active_altreg_set);"
+        },
+        {
+          "compiler_line": 1757,
+          "original_line": 1759,
+          "text": "return(set < no_altreg_sets &&"
+        },
+        {
+          "compiler_line": 1758,
+          "original_line": 1760,
+          "text": "(altreg_alloc_mask[set >> 3] & (1 << (set & 0x07))));"
+        },
+        {
+          "compiler_line": 1782,
+          "original_line": 1784,
+          "text": "short byte_offset, bit_offset;"
+        },
+        {
+          "compiler_line": 1783,
+          "original_line": 1785,
+          "text": "short  *page_mapped_ptr;"
+        },
+        {
+          "compiler_line": 1789,
+          "original_line": 1791,
+          "text": "if (free_altreg_sets == 0)"
+        },
+        {
+          "compiler_line": 1793,
+          "original_line": 1795,
+          "text": "if (next_free_altreg_set < no_altreg_sets) {"
+        },
+        {
+          "compiler_line": 1794,
+          "original_line": 1796,
+          "text": "altreg_alloc_mask[next_free_altreg_set >> 3] |="
+        },
+        {
+          "compiler_line": 1795,
+          "original_line": 1797,
+          "text": "(0x1 << (next_free_altreg_set & 0x07));"
+        },
+        {
+          "compiler_line": 1799,
+          "original_line": 1801,
+          "text": "for (byte_offset = 0; byte_offset < no_altreg_sets; byte_offset++) {"
+        },
+        {
+          "compiler_line": 1800,
+          "original_line": 1802,
+          "text": "if (altreg_alloc_mask[byte_offset] != 0xFF) {"
+        },
+        {
+          "compiler_line": 1801,
+          "original_line": 1803,
+          "text": "mask = altreg_alloc_mask[byte_offset];"
+        },
+        {
+          "compiler_line": 1803,
+          "original_line": 1805,
+          "text": "while (mask & (1 << bit_offset))"
+        },
+        {
+          "compiler_line": 1808,
+          "original_line": 1810,
+          "text": "altreg_alloc_mask[byte_offset] |= (1 << bit_offset);"
+        },
+        {
+          "compiler_line": 1816,
+          "original_line": 1818,
+          "text": "page_mapped_ptr[i] = EM_page_mapped[i];"
+        },
+        {
+          "compiler_line": 1824,
+          "original_line": 1826,
+          "text": "if (set != 0 && set != active_altreg_set && set < no_altreg_sets &&"
+        },
+        {
+          "compiler_line": 1825,
+          "original_line": 1827,
+          "text": "altreg_alloc_mask[set >> 3] & (1 << (set &0x07))) {"
+        },
+        {
+          "compiler_line": 1827,
+          "original_line": 1829,
+          "text": "altreg_alloc_mask[set >> 3] &= (0xFE << (set & 0x07));"
+        },
+        {
+          "compiler_line": 1829,
+          "original_line": 1831,
+          "text": "if (free_altreg_sets == (no_altreg_sets - 1))"
+        },
+        {
+          "compiler_line": 1830,
+          "original_line": 1832,
+          "text": "next_free_altreg_set = 1;"
+        },
+        {
+          "compiler_line": 1845,
+          "original_line": 1847,
+          "text": "short * page_out, *page_in_ptr;"
+        },
+        {
+          "compiler_line": 1846,
+          "original_line": 1848,
+          "text": "short new_page, old_page, segment;"
+        },
+        {
+          "compiler_line": 1857,
+          "original_line": 1859,
+          "text": "page_in = page_in_ptr;"
+        },
+        {
+          "compiler_line": 1861,
+          "original_line": 1863,
+          "text": "for ( i = 0; i < no_phys_pages; i++) {"
+        },
+        {
+          "compiler_line": 1862,
+          "original_line": 1864,
+          "text": "new_page = page_in[i];"
+        },
+        {
+          "compiler_line": 1863,
+          "original_line": 1865,
+          "text": "old_page = page_out[i];"
+        },
+        {
+          "compiler_line": 1864,
+          "original_line": 1866,
+          "text": "segment = physical_page[i];"
+        },
+        {
+          "compiler_line": 1875,
+          "original_line": 1877,
+          "text": "page_in_ptr[i] = new_page;"
+        },
+        {
+          "compiler_line": 1877,
+          "original_line": 1879,
+          "text": "active_altreg_set = set;"
+        },
+        {
+          "compiler_line": 1878,
+          "original_line": 1880,
+          "text": "EM_page_mapped = page_in_ptr;"
+        },
+        {
+          "compiler_line": 1713,
+          "original_line": 1932,
+          "text": "sas_overwrite_memory( eff_addr, check_len );"
+        },
+        {
+          "compiler_line": 1753,
+          "original_line": 1972,
+          "text": "sas_overwrite_memory( check_addr, check_len );"
+        },
+        {
+          "compiler_line": 1765,
+          "original_line": 1984,
+          "text": "for( cnt01 = 0; cnt01 < get_no_phys_pages(); cnt01++ )"
+        },
+        {
+          "compiler_line": 1767,
+          "original_line": 1986,
+          "text": "if(( EM_page_mapped[cnt01] == EM_page_no ) &&"
+        },
+        {
+          "compiler_line": 1768,
+          "original_line": 1987,
+          "text": "( cnt01 != phys_page_no ))"
+        },
+        {
+          "compiler_line": 1805,
+          "original_line": 2024,
+          "text": "patch_pages( BYTE_OP, offset, EM_page_no, phys_page_no,"
+        },
+        {
+          "compiler_line": 1812,
+          "original_line": 2031,
+          "text": "sas_overwrite_memory( intel_addr, 1 );"
+        },
+        {
+          "compiler_line": 1831,
+          "original_line": 2050,
+          "text": "patch_pages( WORD_OP, offset, EM_page_no, phys_page_no,"
+        },
+        {
+          "compiler_line": 1834,
+          "original_line": 2053,
+          "text": "sas_overwrite_memory( intel_addr, 2 );"
+        },
+        {
+          "compiler_line": 1851,
+          "original_line": 2070,
+          "text": "patch_pages( STR_OP, offset, EM_page_no, phys_page_no,"
+        },
+        {
+          "compiler_line": 1852,
+          "original_line": 2071,
+          "text": "length, intel_addr );"
+        },
+        {
+          "compiler_line": 1854,
+          "original_line": 2073,
+          "text": "sas_overwrite_memory( intel_addr, length );"
+        }
+      ],
+      "ambiguous_lines": 42
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "current_sha256": "d7003eba361a1a7b99398795a06a91b37896a7b2af5e26b6dd46e29fcf33bdd6",
+      "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+      "graph": "worker",
+      "preprocess_sha256": "effb2bd58e6d68a8e7314f4738a076aaec7861666955c0a81f371c8d28f3e1b7",
+      "aligned_unique_lines": 43,
+      "candidate_mismatches": [
+        {
+          "compiler_line": 58,
+          "original_line": 52,
+          "text": "DpmiSetProtectedmodeInterrupt("
+        },
+        {
+          "compiler_line": 83,
+          "original_line": 78,
+          "text": "IntNumber = *(PWORD16)(StackPointer + 6);"
+        },
+        {
+          "compiler_line": 85,
+          "original_line": 80,
+          "text": "Handlers[IntNumber].Flags = *(PWORD16)(StackPointer + 8);"
+        },
+        {
+          "compiler_line": 86,
+          "original_line": 81,
+          "text": "Handlers[IntNumber].CsSelector = *(PWORD16)(StackPointer + 4);"
+        },
+        {
+          "compiler_line": 87,
+          "original_line": 82,
+          "text": "Handlers[IntNumber].Eip = *(PDWORD16)(StackPointer);"
+        },
+        {
+          "compiler_line": 137,
+          "original_line": 138,
+          "text": "IntNumber = *(PWORD16)(StackPointer + 12);"
+        },
+        {
+          "compiler_line": 139,
+          "original_line": 140,
+          "text": "Handlers[IntNumber].Flags = *(PDWORD16)(StackPointer + 14);"
+        },
+        {
+          "compiler_line": 140,
+          "original_line": 141,
+          "text": "Handlers[IntNumber].CsSelector = *(PWORD16)(StackPointer + 10);"
+        },
+        {
+          "compiler_line": 141,
+          "original_line": 142,
+          "text": "Handlers[IntNumber].Eip = *(PDWORD16)(StackPointer + 6);"
+        },
+        {
+          "compiler_line": 142,
+          "original_line": 143,
+          "text": "Handlers[IntNumber].SsSelector = *(PWORD16)(StackPointer + 4);"
+        },
+        {
+          "compiler_line": 143,
+          "original_line": 144,
+          "text": "Handlers[IntNumber].Esp = *(PDWORD16)(StackPointer);"
+        },
+        {
+          "compiler_line": 153,
+          "original_line": 154,
+          "text": "DpmiUnhandledExceptionHandler("
+        },
+        {
+          "compiler_line": 247,
+          "original_line": 245,
+          "text": "USHORT FrameSS, FrameSP, FrameCS, FrameIP, FrameFlags;"
+        },
+        {
+          "compiler_line": 248,
+          "original_line": 246,
+          "text": "FrameSS = *(PWORD16) (VdmStackPointer+14);"
+        },
+        {
+          "compiler_line": 249,
+          "original_line": 247,
+          "text": "FrameCS = *(PWORD16) (VdmStackPointer+8);"
+        },
+        {
+          "compiler_line": 250,
+          "original_line": 248,
+          "text": "FrameFlags = *(PWORD16) (VdmStackPointer+10);"
+        },
+        {
+          "compiler_line": 259,
+          "original_line": 257,
+          "text": "FrameSP = *(PWORD16) (VdmStackPointer+12) - 6;"
+        },
+        {
+          "compiler_line": 263,
+          "original_line": 261,
+          "text": "FrameIP = *(PWORD16) (VdmStackPointer+6);"
+        },
+        {
+          "compiler_line": 286,
+          "original_line": 284,
+          "text": "FrameCS = *(PWORD16) (VdmStackPointer+2);"
+        },
+        {
+          "compiler_line": 287,
+          "original_line": 285,
+          "text": "FrameIP = *(PWORD16) (VdmStackPointer);"
+        },
+        {
+          "compiler_line": 295,
+          "original_line": 293,
+          "text": "setCS(Handlers[XNumber].CsSelector);"
+        },
+        {
+          "compiler_line": 332,
+          "original_line": 330,
+          "text": "FaultingCS  = (USHORT)*(PDWORD16)(VdmStackPointer+16);"
+        },
+        {
+          "compiler_line": 333,
+          "original_line": 331,
+          "text": "FaultingEip = *(PDWORD16)(VdmStackPointer+12);"
+        },
+        {
+          "compiler_line": 335,
+          "original_line": 333,
+          "text": "FaultingCS  = *(PWORD16)(VdmStackPointer+8);"
+        },
+        {
+          "compiler_line": 336,
+          "original_line": 334,
+          "text": "FaultingEip = (ULONG)*(PWORD16)(VdmStackPointer+6);"
+        },
+        {
+          "compiler_line": 340,
+          "original_line": 338,
+          "text": "XNumber, FaultingCS, FaultingEip);"
+        },
+        {
+          "compiler_line": 360,
+          "original_line": 358,
+          "text": "DpmiPassPmStackInfo("
+        },
+        {
+          "compiler_line": 386,
+          "original_line": 384,
+          "text": "LockedPMStackSel = getES();"
+        },
+        {
+          "compiler_line": 387,
+          "original_line": 385,
+          "text": "LockedPMStackCount = 0;"
+        },
+        {
+          "compiler_line": 663,
+          "original_line": 655,
+          "text": "DpmiIntHandlerIret16("
+        },
+        {
+          "compiler_line": 903,
+          "original_line": 901,
+          "text": "ReflectV86Int(IntNumber, getEFLAGS());"
+        },
+        {
+          "compiler_line": 907,
+          "original_line": 905,
+          "text": "if ((IntNumber == 13) || (IntNumber == 6)) {"
+        },
+        {
+          "compiler_line": 908,
+          "original_line": 906,
+          "text": "if (DpmiEmulateInstruction()) {"
+        },
+        {
+          "compiler_line": 933,
+          "original_line": 926,
+          "text": "setESP(getESP()-0x20);"
+        },
+        {
+          "compiler_line": 939,
+          "original_line": 932,
+          "text": "if (!BuildStackFrame(8, &VdmStackPointer, &NewSP)) {"
+        },
+        {
+          "compiler_line": 1001,
+          "original_line": 980,
+          "text": "DpmiFaultHandlerIret16("
+        },
+        {
+          "compiler_line": 1038,
+          "original_line": 1008,
+          "text": "setEIP((DWORD)*(PWORD16)(VdmStackPointer+2));"
+        },
+        {
+          "compiler_line": 1039,
+          "original_line": 1009,
+          "text": "setCS(*(PWORD16)(VdmStackPointer+4));"
+        },
+        {
+          "compiler_line": 1040,
+          "original_line": 1010,
+          "text": "setSTATUS(*(PWORD16)(VdmStackPointer+6));"
+        },
+        {
+          "compiler_line": 1041,
+          "original_line": 1011,
+          "text": "setSP(*(PWORD16)(VdmStackPointer+8));"
+        },
+        {
+          "compiler_line": 1042,
+          "original_line": 1012,
+          "text": "setSS(*(PWORD16)(VdmStackPointer+10));"
+        },
+        {
+          "compiler_line": 1048,
+          "original_line": 1018,
+          "text": "DpmiFaultHandlerIret32("
+        },
+        {
+          "compiler_line": 1077,
+          "original_line": 1047,
+          "text": "setEIP(*(PDWORD16)(VdmStackPointer+4));"
+        },
+        {
+          "compiler_line": 1078,
+          "original_line": 1048,
+          "text": "setCS((USHORT)*(PDWORD16)(VdmStackPointer+8));"
+        },
+        {
+          "compiler_line": 1079,
+          "original_line": 1049,
+          "text": "setEFLAGS(*(PDWORD16)(VdmStackPointer+12));"
+        },
+        {
+          "compiler_line": 1080,
+          "original_line": 1050,
+          "text": "setESP(*(PDWORD16)(VdmStackPointer+16));"
+        },
+        {
+          "compiler_line": 1081,
+          "original_line": 1051,
+          "text": "setSS((USHORT)*(PWORD16)(VdmStackPointer+20));"
+        },
+        {
+          "compiler_line": 1097,
+          "original_line": 1060,
+          "text": "PUCHAR *pVdmStackPointer,"
+        },
+        {
+          "compiler_line": 1138,
+          "original_line": 1101,
+          "text": "SelIndex = (SegSs & ~0x7)/sizeof(LDT_ENTRY);"
+        },
+        {
+          "compiler_line": 1140,
+          "original_line": 1103,
+          "text": "Limit = (ULONG) (Ldt[SelIndex].HighWord.Bits.LimitHi << 16) |"
+        },
+        {
+          "compiler_line": 1141,
+          "original_line": 1104,
+          "text": "Ldt[SelIndex].LimitLow;"
+        },
+        {
+          "compiler_line": 1150,
+          "original_line": 1110,
+          "text": "if (Ldt[SelIndex].HighWord.Bits.Granularity) {"
+        },
+        {
+          "compiler_line": 1151,
+          "original_line": 1111,
+          "text": "Limit = (Limit << 12) | 0xfff;"
+        },
+        {
+          "compiler_line": 1155,
+          "original_line": 1115,
+          "text": "if (Ldt[SelIndex].HighWord.Bits.Default_Big) {"
+        },
+        {
+          "compiler_line": 1167,
+          "original_line": 1122,
+          "text": "StackOffset = StackUnits*sizeof(DWORD);"
+        },
+        {
+          "compiler_line": 1169,
+          "original_line": 1124,
+          "text": "StackOffset = StackUnits*sizeof(WORD);"
+        },
+        {
+          "compiler_line": 1172,
+          "original_line": 1127,
+          "text": "NewSP = VdmSp - StackOffset;"
+        },
+        {
+          "compiler_line": 1173,
+          "original_line": 1128,
+          "text": "bExpandDown = (BOOL) (Ldt[SelIndex].HighWord.Bits.Type & 4);"
+        },
+        {
+          "compiler_line": 1184,
+          "original_line": 1129,
+          "text": "if ((StackOffset > VdmSp) ||"
+        },
+        {
+          "compiler_line": 1185,
+          "original_line": 1130,
+          "text": "(!bExpandDown && (VdmSp > Limit)) ||"
+        },
+        {
+          "compiler_line": 1186,
+          "original_line": 1131,
+          "text": "(bExpandDown && (NewSP < Limit))) {"
+        },
+        {
+          "compiler_line": 1203,
+          "original_line": 1138,
+          "text": "VdmStackPointer += VdmSp;"
+        },
+        {
+          "compiler_line": 1312,
+          "original_line": 1282,
+          "text": "bReturn = DpmiOp0f(pCode);"
+        },
+        {
+          "compiler_line": 1338,
+          "original_line": 1298,
+          "text": "if ((SegCS == DosxRmCodeSelector) &&"
+        }
+      ],
+      "ambiguous_lines": 69
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "current_sha256": "178f7b6d8d71d56401f2b614daa17f6188d883c146b76531b7a2d18b4c96ef70",
+      "original_sha256": "aa7157e2a39fead41e42e87f87e332e9464bf69a668671de976c69637ce06a67",
+      "graph": "worker",
+      "preprocess_sha256": "a4b69401299adb58fdbcec755402c1c6f2390b0cabe6ab1f198c91aad15b42b8",
+      "aligned_unique_lines": 0,
+      "candidate_mismatches": [
+        {
+          "compiler_line": 185,
+          "original_line": 28,
+          "text": "DpmiSwitchToRealMode("
+        },
+        {
+          "compiler_line": 79,
+          "original_line": 64,
+          "text": "setCS(DosxRmCodeSegment);"
+        },
+        {
+          "compiler_line": 101,
+          "original_line": 77,
+          "text": "DpmiSwitchToProtectedMode("
+        }
+      ],
+      "ambiguous_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "current_sha256": "e60e708ba0b2900aa052153adf1e78d3f71d27d24e665cf1d77feac33bab1769",
+      "original_sha256": "1f634b9d6c09d0f767a90ec9e577817800a07dc353cffa433ca2e0268d2cd42f",
+      "graph": "worker",
+      "preprocess_sha256": "88e831b8a2013552608235687b94443fcf32d7030070bd429d2e69a6fdbdc40e",
+      "aligned_unique_lines": 11,
+      "candidate_mismatches": [
+        {
+          "compiler_line": 72,
+          "original_line": 69,
+          "text": "IU8 *ScratchVideoBuffer = 0;"
+        },
+        {
+          "compiler_line": 157,
+          "original_line": 152,
+          "text": "if (pm && (addr == 0))"
+        },
+        {
+          "compiler_line": 165,
+          "original_line": 159,
+          "text": "return GetVideoMemory(iaddr);"
+        },
+        {
+          "compiler_line": 184,
+          "original_line": 173,
+          "text": "return Sim32pGetVDMPointer(addr, (UCHAR)pm);"
+        },
+        {
+          "compiler_line": 446,
+          "original_line": 440,
+          "text": "Length_of_M_area = size;"
+        },
+        {
+          "compiler_line": 447,
+          "original_line": 441,
+          "text": "return(Start_of_M_area);"
+        },
+        {
+          "compiler_line": 460,
+          "original_line": 454,
+          "text": "Length_of_M_area = 0;"
+        }
+      ],
+      "ambiguous_lines": 5
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "current_sha256": "628f895c90c814795e3ebb23e9aa2dc4fa59783fea8783360f66297723e5b895",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "graph": "worker",
+      "preprocess_sha256": "fbde0cf734602bfa2e89dd0bd050c017791aae371b53e28482ab03bac0c19a68",
+      "aligned_unique_lines": 216,
+      "candidate_mismatches": [
+        {
+          "compiler_line": 79,
+          "original_line": 78,
+          "text": "extern int  ega_int_enable;"
+        },
+        {
+          "compiler_line": 95,
+          "original_line": 92,
+          "text": "SCREEN_DESCRIPTION sc;"
+        },
+        {
+          "compiler_line": 98,
+          "original_line": 95,
+          "text": "int             horiz_lut[256];"
+        },
+        {
+          "compiler_line": 100,
+          "original_line": 97,
+          "text": "int             host_screen_scale;"
+        },
+        {
+          "compiler_line": 101,
+          "original_line": 98,
+          "text": "int             host_display_depth = 8;"
+        },
+        {
+          "compiler_line": 102,
+          "original_line": 99,
+          "text": "int             top_plane;"
+        },
+        {
+          "compiler_line": 103,
+          "original_line": 100,
+          "text": "char            *DIBData;"
+        },
+        {
+          "compiler_line": 104,
+          "original_line": 101,
+          "text": "PBITMAPINFO     MonoDIB;"
+        },
+        {
+          "compiler_line": 105,
+          "original_line": 102,
+          "text": "PBITMAPINFO     CGADIB;"
+        },
+        {
+          "compiler_line": 106,
+          "original_line": 103,
+          "text": "PBITMAPINFO     EGADIB;"
+        },
+        {
+          "compiler_line": 107,
+          "original_line": 104,
+          "text": "PBITMAPINFO     VGADIB;"
+        },
+        {
+          "compiler_line": 109,
+          "original_line": 106,
+          "text": "void            (*paint_screen)();"
+        },
+        {
+          "compiler_line": 114,
+          "original_line": 111,
+          "text": "static PAINTFUNCS std_mono_paint_funcs ="
+        },
+        {
+          "compiler_line": 120,
+          "original_line": 117,
+          "text": "nt_ega_mono_lo_graph_std,"
+        },
+        {
+          "compiler_line": 121,
+          "original_line": 118,
+          "text": "nt_ega_mono_med_graph_std,"
+        },
+        {
+          "compiler_line": 122,
+          "original_line": 119,
+          "text": "nt_ega_mono_hi_graph_std,"
+        },
+        {
+          "compiler_line": 123,
+          "original_line": 120,
+          "text": "nt_vga_mono_graph_std,"
+        },
+        {
+          "compiler_line": 124,
+          "original_line": 121,
+          "text": "nt_vga_mono_med_graph_std,"
+        },
+        {
+          "compiler_line": 125,
+          "original_line": 122,
+          "text": "nt_vga_mono_hi_graph_std,"
+        },
+        {
+          "compiler_line": 127,
+          "original_line": 124,
+          "text": "nt_v7vga_mono_hi_graph_std,"
+        },
+        {
+          "compiler_line": 131,
+          "original_line": 128,
+          "text": "static PAINTFUNCS big_mono_paint_funcs ="
+        },
+        {
+          "compiler_line": 137,
+          "original_line": 134,
+          "text": "nt_ega_mono_lo_graph_big,"
+        },
+        {
+          "compiler_line": 138,
+          "original_line": 135,
+          "text": "nt_ega_mono_med_graph_big,"
+        },
+        {
+          "compiler_line": 139,
+          "original_line": 136,
+          "text": "nt_ega_mono_hi_graph_big,"
+        },
+        {
+          "compiler_line": 140,
+          "original_line": 137,
+          "text": "nt_vga_mono_graph_big,"
+        },
+        {
+          "compiler_line": 141,
+          "original_line": 138,
+          "text": "nt_vga_mono_med_graph_big,"
+        },
+        {
+          "compiler_line": 142,
+          "original_line": 139,
+          "text": "nt_vga_mono_hi_graph_big,"
+        },
+        {
+          "compiler_line": 144,
+          "original_line": 141,
+          "text": "nt_v7vga_mono_hi_graph_big,"
+        },
+        {
+          "compiler_line": 148,
+          "original_line": 145,
+          "text": "static PAINTFUNCS huge_mono_paint_funcs ="
+        },
+        {
+          "compiler_line": 154,
+          "original_line": 151,
+          "text": "nt_ega_mono_lo_graph_huge,"
+        },
+        {
+          "compiler_line": 155,
+          "original_line": 152,
+          "text": "nt_ega_mono_med_graph_huge,"
+        },
+        {
+          "compiler_line": 156,
+          "original_line": 153,
+          "text": "nt_ega_mono_hi_graph_huge,"
+        },
+        {
+          "compiler_line": 157,
+          "original_line": 154,
+          "text": "nt_vga_mono_graph_huge,"
+        },
+        {
+          "compiler_line": 158,
+          "original_line": 155,
+          "text": "nt_vga_mono_med_graph_huge,"
+        },
+        {
+          "compiler_line": 159,
+          "original_line": 156,
+          "text": "nt_vga_mono_hi_graph_huge,"
+        },
+        {
+          "compiler_line": 161,
+          "original_line": 158,
+          "text": "nt_v7vga_mono_hi_graph_huge,"
+        },
+        {
+          "compiler_line": 165,
+          "original_line": 162,
+          "text": "static PAINTFUNCS std_colour_paint_funcs ="
+        },
+        {
+          "compiler_line": 168,
+          "original_line": 165,
+          "text": "nt_cga_colour_med_graph_std,"
+        },
+        {
+          "compiler_line": 169,
+          "original_line": 166,
+          "text": "nt_cga_colour_hi_graph_std,"
+        },
+        {
+          "compiler_line": 171,
+          "original_line": 168,
+          "text": "nt_ega_lo_graph_std,"
+        },
+        {
+          "compiler_line": 172,
+          "original_line": 169,
+          "text": "nt_ega_med_graph_std,"
+        },
+        {
+          "compiler_line": 173,
+          "original_line": 170,
+          "text": "nt_ega_hi_graph_std,"
+        },
+        {
+          "compiler_line": 175,
+          "original_line": 172,
+          "text": "nt_vga_med_graph_std,"
+        },
+        {
+          "compiler_line": 176,
+          "original_line": 173,
+          "text": "nt_vga_hi_graph_std,"
+        },
+        {
+          "compiler_line": 178,
+          "original_line": 175,
+          "text": "nt_v7vga_hi_graph_std,"
+        },
+        {
+          "compiler_line": 182,
+          "original_line": 179,
+          "text": "static PAINTFUNCS big_colour_paint_funcs ="
+        },
+        {
+          "compiler_line": 185,
+          "original_line": 182,
+          "text": "nt_cga_colour_med_graph_big,"
+        },
+        {
+          "compiler_line": 186,
+          "original_line": 183,
+          "text": "nt_cga_colour_hi_graph_big,"
+        },
+        {
+          "compiler_line": 188,
+          "original_line": 185,
+          "text": "nt_ega_lo_graph_big,"
+        },
+        {
+          "compiler_line": 189,
+          "original_line": 186,
+          "text": "nt_ega_med_graph_big,"
+        },
+        {
+          "compiler_line": 190,
+          "original_line": 187,
+          "text": "nt_ega_hi_graph_big,"
+        },
+        {
+          "compiler_line": 192,
+          "original_line": 189,
+          "text": "nt_vga_med_graph_big,"
+        },
+        {
+          "compiler_line": 193,
+          "original_line": 190,
+          "text": "nt_vga_hi_graph_big,"
+        },
+        {
+          "compiler_line": 195,
+          "original_line": 192,
+          "text": "nt_v7vga_hi_graph_big,"
+        },
+        {
+          "compiler_line": 199,
+          "original_line": 196,
+          "text": "static PAINTFUNCS huge_colour_paint_funcs ="
+        },
+        {
+          "compiler_line": 202,
+          "original_line": 199,
+          "text": "nt_cga_colour_med_graph_huge,"
+        },
+        {
+          "compiler_line": 203,
+          "original_line": 200,
+          "text": "nt_cga_colour_hi_graph_huge,"
+        },
+        {
+          "compiler_line": 205,
+          "original_line": 202,
+          "text": "nt_ega_lo_graph_huge,"
+        },
+        {
+          "compiler_line": 206,
+          "original_line": 203,
+          "text": "nt_ega_med_graph_huge,"
+        },
+        {
+          "compiler_line": 207,
+          "original_line": 204,
+          "text": "nt_ega_hi_graph_huge,"
+        },
+        {
+          "compiler_line": 209,
+          "original_line": 206,
+          "text": "nt_vga_med_graph_huge,"
+        },
+        {
+          "compiler_line": 210,
+          "original_line": 207,
+          "text": "nt_vga_hi_graph_huge,"
+        },
+        {
+          "compiler_line": 212,
+          "original_line": 209,
+          "text": "nt_v7vga_hi_graph_huge,"
+        },
+        {
+          "compiler_line": 748,
+          "original_line": 1555,
+          "text": "extern int soft_reset;"
+        },
+        {
+          "compiler_line": 808,
+          "original_line": 796,
+          "text": "void nt_flush_screen(void)"
+        },
+        {
+          "compiler_line": 854,
+          "original_line": 850,
+          "text": "if (mode_change_now) {"
+        },
+        {
+          "compiler_line": 855,
+          "original_line": 851,
+          "text": "if (--mode_change_now == 0) {"
+        },
+        {
+          "compiler_line": 856,
+          "original_line": 852,
+          "text": "(void)(*choose_display_mode)();"
+        },
+        {
+          "compiler_line": 887,
+          "original_line": 885,
+          "text": "if (CursorResizeNeeded)"
+        },
+        {
+          "compiler_line": 888,
+          "original_line": 886,
+          "text": "make_cursor_change();"
+        },
+        {
+          "compiler_line": 902,
+          "original_line": 899,
+          "text": "if(update_vlt) set_the_vlt();"
+        },
+        {
+          "compiler_line": 922,
+          "original_line": 916,
+          "text": "void nt_start_update(void)"
+        },
+        {
+          "compiler_line": 985,
+          "original_line": 962,
+          "text": "if (bry - tly - amount + 1 == 0)"
+        },
+        {
+          "compiler_line": 1059,
+          "original_line": 1036,
+          "text": "if (bry - tly - amount + 1 == 0) {"
+        },
+        {
+          "compiler_line": 1125,
+          "original_line": 1097,
+          "text": "CursorPos.X = cursor_x;  CursorPos.Y = cursor_y;"
+        },
+        {
+          "compiler_line": 1131,
+          "original_line": 1103,
+          "text": "void nt_cursor_size_changed(int lo, int hi)"
+        },
+        {
+          "compiler_line": 1140,
+          "original_line": 1110,
+          "text": "void make_cursor_change(void)"
+        },
+        {
+          "compiler_line": 1142,
+          "original_line": 1112,
+          "text": "CONSOLE_CURSOR_INFO CursorInfo;"
+        },
+        {
+          "compiler_line": 1143,
+          "original_line": 1113,
+          "text": "CONSOLE_FONT_INFO font;"
+        },
+        {
+          "compiler_line": 1171,
+          "original_line": 1139,
+          "text": "fontsize.X = fontsize.Y = 0;"
+        },
+        {
+          "compiler_line": 1182,
+          "original_line": 1150,
+          "text": "CursorInfo.dwSize = (DWORD) (100/fontsize.Y + 1);"
+        },
+        {
+          "compiler_line": 1188,
+          "original_line": 1156,
+          "text": "if(CurrentCursorSize != CursorInfo.dwSize || CurNowOff)"
+        },
+        {
+          "compiler_line": 1190,
+          "original_line": 1158,
+          "text": "CurrentCursorSize = CursorInfo.dwSize;"
+        },
+        {
+          "compiler_line": 1202,
+          "original_line": 1170,
+          "text": "CursorInfo.dwSize = 1;"
+        },
+        {
+          "compiler_line": 1215,
+          "original_line": 1183,
+          "text": "void nt_set_paint_routine(DISPLAY_MODE mode, int height)"
+        },
+        {
+          "compiler_line": 1223,
+          "original_line": 1191,
+          "text": "oldModeType = sc.ModeType;"
+        },
+        {
+          "compiler_line": 1236,
+          "original_line": 1204,
+          "text": "case CGA_TEXT_40_SP:"
+        },
+        {
+          "compiler_line": 1237,
+          "original_line": 1205,
+          "text": "case CGA_TEXT_40_SP_WR:"
+        },
+        {
+          "compiler_line": 1239,
+          "original_line": 1207,
+          "text": "case CGA_TEXT_40_WR:"
+        },
+        {
+          "compiler_line": 1249,
+          "original_line": 1217,
+          "text": "case CGA_TEXT_80_SP:"
+        },
+        {
+          "compiler_line": 1250,
+          "original_line": 1218,
+          "text": "case CGA_TEXT_80_SP_WR:"
+        },
+        {
+          "compiler_line": 1252,
+          "original_line": 1220,
+          "text": "case CGA_TEXT_80_WR:"
+        },
+        {
+          "compiler_line": 1264,
+          "original_line": 1232,
+          "text": "paint_screen = nt_paint_funcs->cga_med_graph;"
+        },
+        {
+          "compiler_line": 1265,
+          "original_line": 1233,
+          "text": "(*nt_init_funcs->cga_med_graph)();"
+        },
+        {
+          "compiler_line": 1273,
+          "original_line": 1241,
+          "text": "paint_screen = nt_paint_funcs->cga_hi_graph;"
+        },
+        {
+          "compiler_line": 1274,
+          "original_line": 1242,
+          "text": "(*nt_init_funcs->cga_hi_graph)();"
+        },
+        {
+          "compiler_line": 1278,
+          "original_line": 1246,
+          "text": "case EGA_TEXT_40_SP:"
+        },
+        {
+          "compiler_line": 1279,
+          "original_line": 1247,
+          "text": "case EGA_TEXT_40_SP_WR:"
+        },
+        {
+          "compiler_line": 1281,
+          "original_line": 1249,
+          "text": "case EGA_TEXT_40_WR:"
+        },
+        {
+          "compiler_line": 1288,
+          "original_line": 1256,
+          "text": "case EGA_TEXT_80_SP:"
+        },
+        {
+          "compiler_line": 1289,
+          "original_line": 1257,
+          "text": "case EGA_TEXT_80_SP_WR:"
+        },
+        {
+          "compiler_line": 1291,
+          "original_line": 1259,
+          "text": "case EGA_TEXT_80_WR:"
+        },
+        {
+          "compiler_line": 1311,
+          "original_line": 1279,
+          "text": "paint_screen = nt_paint_funcs->v7vga_hi_graph;"
+        },
+        {
+          "compiler_line": 1588,
+          "original_line": 1581,
+          "text": "(current_height != height)  ||"
+        },
+        {
+          "compiler_line": 1589,
+          "original_line": 1582,
+          "text": "(current_width != width))"
+        },
+        {
+          "compiler_line": 1593,
+          "original_line": 1586,
+          "text": "sc.PC_W_Width = width;"
+        },
+        {
+          "compiler_line": 1606,
+          "original_line": 1599,
+          "text": "(current_height != height) ||"
+        },
+        {
+          "compiler_line": 1607,
+          "original_line": 1600,
+          "text": "(current_width != width) ||"
+        },
+        {
+          "compiler_line": 1608,
+          "original_line": 1601,
+          "text": "(current_bits_per_pixel != sc.BitsPerPixel) ||"
+        },
+        {
+          "compiler_line": 1609,
+          "original_line": 1602,
+          "text": "(current_scale != host_screen_scale))"
+        },
+        {
+          "compiler_line": 1618,
+          "original_line": 1611,
+          "text": "current_bits_per_pixel = sc.BitsPerPixel;"
+        },
+        {
+          "compiler_line": 1619,
+          "original_line": 1612,
+          "text": "current_scale = host_screen_scale;"
+        },
+        {
+          "compiler_line": 1623,
+          "original_line": 1616,
+          "text": "sc.CharHeight = current_char_height;"
+        },
+        {
+          "compiler_line": 1637,
+          "original_line": 1630,
+          "text": "void set_the_vlt(void)"
+        },
+        {
+          "compiler_line": 1703,
+          "original_line": 1693,
+          "text": "ind = i & host_plane_mask;"
+        },
+        {
+          "compiler_line": 1714,
+          "original_line": 1704,
+          "text": "ind = top_bit | (ind & mask);"
+        },
+        {
+          "compiler_line": 1761,
+          "original_line": 1745,
+          "text": "static void set_screen_sizes(int adaptor)"
+        },
+        {
+          "compiler_line": 1775,
+          "original_line": 1759,
+          "text": "void nt_change_plane_mask(int plane_mask)"
+        },
+        {
+          "compiler_line": 1777,
+          "original_line": 1761,
+          "text": "if (host_plane_mask != plane_mask)  host_plane_mask = 0xf;"
+        },
+        {
+          "compiler_line": 1786,
+          "original_line": 1770,
+          "text": "static void dummy_paint_screen(int offset, int host_x, int host_y,"
+        },
+        {
+          "compiler_line": 1787,
+          "original_line": 1771,
+          "text": "int width, int height)"
+        },
+        {
+          "compiler_line": 1804,
+          "original_line": 1788,
+          "text": "void nt_set_downloaded_font(int value)"
+        },
+        {
+          "compiler_line": 1816,
+          "original_line": 1800,
+          "text": "void nt_free_font(int index)"
+        },
+        {
+          "compiler_line": 1827,
+          "original_line": 1811,
+          "text": "void nt_select_fonts(int font1, int font2)"
+        },
+        {
+          "compiler_line": 1839,
+          "original_line": 1823,
+          "text": "void nt_update_fonts(void) { }"
+        },
+        {
+          "compiler_line": 1845,
+          "original_line": 1829,
+          "text": "void nt_set_palette(PC_palette *palette, int size)"
+        },
+        {
+          "compiler_line": 1857,
+          "original_line": 1841,
+          "text": "void nt_set_screen_scale(int scale)"
+        },
+        {
+          "compiler_line": 1859,
+          "original_line": 1843,
+          "text": "if (scale != host_screen_scale)"
+        },
+        {
+          "compiler_line": 1861,
+          "original_line": 1845,
+          "text": "host_screen_scale = scale;"
+        },
+        {
+          "compiler_line": 1870,
+          "original_line": 1854,
+          "text": "nt_set_paint_routine(current_mode, current_height);"
+        },
+        {
+          "compiler_line": 1871,
+          "original_line": 1855,
+          "text": "nt_mark_screen_refresh();"
+        },
+        {
+          "compiler_line": 1880,
+          "original_line": 1864,
+          "text": "void nt_set_border_colour(int colour)"
+        },
+        {
+          "compiler_line": 1902,
+          "original_line": 1886,
+          "text": "WinSize.Top    = top;"
+        },
+        {
+          "compiler_line": 1903,
+          "original_line": 1887,
+          "text": "WinSize.Left   = left;"
+        },
+        {
+          "compiler_line": 1904,
+          "original_line": 1888,
+          "text": "WinSize.Bottom = top  + h - 1;"
+        },
+        {
+          "compiler_line": 1905,
+          "original_line": 1889,
+          "text": "WinSize.Right  = left + w - 1;"
+        }
+      ],
+      "ambiguous_lines": 69
+    },
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "current_sha256": "06995f4ee3203dee288d7ee867b51b10333b48f6a1e9f9799ed9a742a96aef13",
+      "original_sha256": "3f03d0dbb08e0163f2d9cf415daad0981e42e1b1855f6f48a3b59022b7374173",
+      "graph": "worker",
+      "preprocess_sha256": "7546c69410a87d141c5f0c7afa3ded443f5b7b077de9037d4af008a40f3e628f",
+      "aligned_unique_lines": 3,
+      "candidate_mismatches": [
+        {
+          "compiler_line": 3025,
+          "original_line": 3218,
+          "text": "UNICODE_STRING *pUStringEnv"
+        },
+        {
+          "compiler_line": 3072,
+          "original_line": 3117,
+          "text": "NameType = BaseGetEnvNameType_U(pTmp, (DWORD)(pEnv - pTmp) - 1);"
+        },
+        {
+          "compiler_line": 3077,
+          "original_line": 3124,
+          "text": "Length = wcslen(pEnv) + 1;"
+        },
+        {
+          "compiler_line": 3078,
+          "original_line": 3125,
+          "text": "dw = GetShortPathNameW(pEnv, pDst, Length + dwRemain);"
+        },
+        {
+          "compiler_line": 3090,
+          "original_line": 3145,
+          "text": "Length = (DWORD)(pEnv - pTmp);"
+        },
+        {
+          "compiler_line": 3093,
+          "original_line": 3148,
+          "text": "dw = GetShortPathNameW(pTmp, pDst, Length + 1 + dwRemain);"
+        },
+        {
+          "compiler_line": 3094,
+          "original_line": 3150,
+          "text": "if (dw == 0 || dw > Length + dwRemain) {"
+        },
+        {
+          "compiler_line": 3106,
+          "original_line": 3168,
+          "text": "if ((Length = (DWORD)(pEnv - pTmp)) != 0) {"
+        },
+        {
+          "compiler_line": 3107,
+          "original_line": 3148,
+          "text": "dw = GetShortPathNameW(pTmp, pDst, Length + 1 + dwRemain);"
+        },
+        {
+          "compiler_line": 3108,
+          "original_line": 3170,
+          "text": "if (dw == 0 || dw > Length) {"
+        },
+        {
+          "compiler_line": 74,
+          "original_line": 3183,
+          "text": "pUStringEnv->MaximumLength = pUStringEnv->Length = (USHORT)cchEnv;"
+        },
+        {
+          "compiler_line": 75,
+          "original_line": 3184,
+          "text": "pUStringEnv->Buffer = pNewEnv;"
+        },
+        {
+          "compiler_line": 103,
+          "original_line": 3268,
+          "text": "if (EnvInfoTable[i].NameLength == NameLength &&"
+        },
+        {
+          "compiler_line": 104,
+          "original_line": 3269,
+          "text": "!_wcsnicmp(EnvInfoTable[i].Name, Name, NameLength)) {"
+        },
+        {
+          "compiler_line": 105,
+          "original_line": 3270,
+          "text": "NameType = EnvInfoTable[i].NameType;"
+        }
+      ],
+      "ambiguous_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "bfd2af514bb86619de9c20af416898b65e52ce4a8db8885135d7d4f9fb3a2b94",
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "graph": "wow32",
+      "preprocess_sha256": "499d68321bf8b27cc86757c906e0442228b7eb59b62ee90bf42e77a950a25053",
+      "aligned_unique_lines": 1,
+      "candidate_mismatches": [],
+      "ambiguous_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "current_sha256": "8c677e6104dee8b06268c77688f0286e1095caccceb1e04d58c6d0fe4323b033",
+      "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+      "graph": "wow32",
+      "preprocess_sha256": "7ab06657608dfaba1b29ea6670cf7d52df4a63bc94f638ef577b1f356446fa5e",
+      "aligned_unique_lines": 8,
+      "candidate_mismatches": [
+        {
+          "compiler_line": 846,
+          "original_line": 716,
+          "text": "BOOL _IsWindowVisible("
+        },
+        {
+          "compiler_line": 869,
+          "original_line": 769,
+          "text": "BOOL _GetClientRect("
+        }
+      ],
+      "ambiguous_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "current_sha256": "9d09fd22d8a5047d258891b20d7583060f0287e4b24c0dd69eb9833d72ee2932",
+      "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
+      "graph": "wow32",
+      "preprocess_sha256": "72b184d53cce408c8cb86b670929e131ae38aea6f7b05e2128f34fd103a51d36",
+      "aligned_unique_lines": 22,
+      "candidate_mismatches": [
+        {
+          "compiler_line": 197,
+          "original_line": 3923,
+          "text": "HANDLE WOWFindResourceExWCover("
+        },
+        {
+          "compiler_line": 235,
+          "original_line": 38,
+          "text": "typedef struct _OLDCURSOR {"
+        },
+        {
+          "compiler_line": 245,
+          "original_line": 48,
+          "text": "} OLDCURSOR, *POLDCURSOR;"
+        },
+        {
+          "compiler_line": 248,
+          "original_line": 2991,
+          "text": "DWORD HowManyColors("
+        },
+        {
+          "compiler_line": 265,
+          "original_line": 3008,
+          "text": "if (upbih->biClrUsed)"
+        },
+        {
+          "compiler_line": 266,
+          "original_line": 3009,
+          "text": "return (DWORD)upbih->biClrUsed;"
+        },
+        {
+          "compiler_line": 267,
+          "original_line": 3010,
+          "text": "else if (upbih->biBitCount <= 8)"
+        },
+        {
+          "compiler_line": 268,
+          "original_line": 3011,
+          "text": "return (1 << upbih->biBitCount);"
+        },
+        {
+          "compiler_line": 269,
+          "original_line": 3012,
+          "text": "else if ((upbih->biBitCount == 16) || (upbih->biBitCount == 32))"
+        },
+        {
+          "compiler_line": 277,
+          "original_line": 3299,
+          "text": "BOOL TrulyMonochrome("
+        },
+        {
+          "compiler_line": 278,
+          "original_line": 3300,
+          "text": "LPVOID lpColorTable,"
+        },
+        {
+          "compiler_line": 312,
+          "original_line": 3154,
+          "text": "LPBITMAPINFOHEADER lpbih,"
+        },
+        {
+          "compiler_line": 313,
+          "original_line": 3161,
+          "text": "UINT               LR_flags)"
+        },
+        {
+          "compiler_line": 315,
+          "original_line": 3033,
+          "text": "LPDWORD lpColorTable;"
+        },
+        {
+          "compiler_line": 335,
+          "original_line": 3053,
+          "text": "lpbih->biBitCount = lpbih->biPlanes = 1;"
+        },
+        {
+          "compiler_line": 341,
+          "original_line": 3059,
+          "text": "LPBYTE pb = (LPBYTE)(lpColorTable + cColors);"
+        },
+        {
+          "compiler_line": 347,
+          "original_line": 3065,
+          "text": "if (lpbih->biCompression == 0)"
+        },
+        {
+          "compiler_line": 348,
+          "original_line": 3066,
+          "text": "iColor = (UINT)pb[0];"
+        },
+        {
+          "compiler_line": 353,
+          "original_line": 3071,
+          "text": "iColor = (UINT)(pb[0] == 0 ? pb[2] : pb[1]);"
+        },
+        {
+          "compiler_line": 379,
+          "original_line": 3097,
+          "text": "for (iColor = 0; iColor < cColors; iColor++) {"
+        },
+        {
+          "compiler_line": 381,
+          "original_line": 3099,
+          "text": "switch (*lpColorTable & 0x00FFFFFF) {"
+        },
+        {
+          "compiler_line": 406,
+          "original_line": 3355,
+          "text": "LPBITMAPINFOHEADER CopyDibHdr("
+        },
+        {
+          "compiler_line": 414,
+          "original_line": 3363,
+          "text": "DWORD              cColors;"
+        },
+        {
+          "compiler_line": 415,
+          "original_line": 3364,
+          "text": "DWORD              i;"
+        },
+        {
+          "compiler_line": 417,
+          "original_line": 3366,
+          "text": "DWORD              cbAlloc;"
+        },
+        {
+          "compiler_line": 418,
+          "original_line": 3367,
+          "text": "LPBYTE             lpColorTable;"
+        },
+        {
+          "compiler_line": 420,
+          "original_line": 3369,
+          "text": "BITMAPINFOHEADER   bih;"
+        },
+        {
+          "compiler_line": 421,
+          "original_line": 3370,
+          "text": "DWORD              rgb[256];"
+        },
+        {
+          "compiler_line": 422,
+          "original_line": 3371,
+          "text": "DWORD              dwBuffer;"
+        },
+        {
+          "compiler_line": 425,
+          "original_line": 3374,
+          "text": "switch (upbih->biSize) {"
+        },
+        {
+          "compiler_line": 426,
+          "original_line": 3375,
+          "text": "case sizeof(BITMAPINFOHEADER):"
+        },
+        {
+          "compiler_line": 434,
+          "original_line": 3383,
+          "text": "case sizeof(BITMAPCOREHEADER):"
+        },
+        {
+          "compiler_line": 447,
+          "original_line": 3396,
+          "text": "Fake.bih.biClrUsed       = cColors ="
+        },
+        {
+          "compiler_line": 455,
+          "original_line": 3404,
+          "text": "for (i = 0; i < cColors; i++, lpColorTable += 3) {"
+        },
+        {
+          "compiler_line": 457,
+          "original_line": 3406,
+          "text": "Fake.rgb[i] = lpColorTable[0]        +"
+        },
+        {
+          "compiler_line": 458,
+          "original_line": 3407,
+          "text": "(lpColorTable[1] << 8) +"
+        },
+        {
+          "compiler_line": 459,
+          "original_line": 3408,
+          "text": "(lpColorTable[2] << 16);"
+        },
+        {
+          "compiler_line": 463,
+          "original_line": 3412,
+          "text": "upbih       = (UPBITMAPINFOHEADER)&Fake;"
+        },
+        {
+          "compiler_line": 480,
+          "original_line": 3429,
+          "text": "Fake.bih.biPlanes        ="
+        },
+        {
+          "compiler_line": 481,
+          "original_line": 3430,
+          "text": "Fake.bih.biBitCount      = 1;"
+        },
+        {
+          "compiler_line": 494,
+          "original_line": 3440,
+          "text": "upbih                    = (LPBITMAPINFOHEADER)&Fake;"
+        },
+        {
+          "compiler_line": 511,
+          "original_line": 3458,
+          "text": "cbAlloc = sizeof(BITMAPINFOHEADER) + (cColors * sizeof(RGBQUAD)) + 4;"
+        },
+        {
+          "compiler_line": 522,
+          "original_line": 1513,
+          "text": "HBITMAP Convert1BppToMonoBitmap("
+        },
+        {
+          "compiler_line": 526,
+          "original_line": 1517,
+          "text": "HBITMAP hbmMono = hbm1Bpp;"
+        },
+        {
+          "compiler_line": 533,
+          "original_line": 1524,
+          "text": "if (hdcDst = CreateCompatibleDC(hdcSrc)) {"
+        },
+        {
+          "compiler_line": 556,
+          "original_line": 1547,
+          "text": "DeleteObject(hbm1Bpp);"
+        },
+        {
+          "compiler_line": 565,
+          "original_line": 1565,
+          "text": "HBITMAP CreateScreenBitmap("
+        },
+        {
+          "compiler_line": 579,
+          "original_line": 1579,
+          "text": "DWORD            ct[16];"
+        },
+        {
+          "compiler_line": 580,
+          "original_line": 1580,
+          "text": "} dib4Vga = {{sizeof(BITMAPINFOHEADER),"
+        },
+        {
+          "compiler_line": 613,
+          "original_line": 1613,
+          "text": "DWORD            ct[2];"
+        },
+        {
+          "compiler_line": 614,
+          "original_line": 1614,
+          "text": "} dib1Vga = {{sizeof(BITMAPINFOHEADER),"
+        },
+        {
+          "compiler_line": 649,
+          "original_line": 1649,
+          "text": "if ((bpp == 1) && (planes == 1)) {"
+        },
+        {
+          "compiler_line": 668,
+          "original_line": 1668,
+          "text": "hbm = CreateCompatibleBitmap(hdcScreen, cx, cy);"
+        },
+        {
+          "compiler_line": 2985,
+          "original_line": 3488,
+          "text": "HBITMAP ConvertDIBBitmap("
+        },
+        {
+          "compiler_line": 2994,
+          "original_line": 3497,
+          "text": "BOOL               fMono, fMonoGiven;"
+        },
+        {
+          "compiler_line": 2995,
+          "original_line": 3498,
+          "text": "BYTE               bPlanesDesired;"
+        },
+        {
+          "compiler_line": 2996,
+          "original_line": 3499,
+          "text": "BYTE               bppDesired;"
+        },
+        {
+          "compiler_line": 2997,
+          "original_line": 3500,
+          "text": "LPSTR              lpBits;"
+        },
+        {
+          "compiler_line": 2998,
+          "original_line": 3501,
+          "text": "HBITMAP            hBmpRet;"
+        },
+        {
+          "compiler_line": 3012,
+          "original_line": 3515,
+          "text": "if (lplpBits && *lplpBits)"
+        },
+        {
+          "compiler_line": 3083,
+          "original_line": 3586,
+          "text": "cxDesired = lpbihNew->biWidth;"
+        },
+        {
+          "compiler_line": 3086,
+          "original_line": 3589,
+          "text": "cyDesired = lpbihNew->biHeight;"
+        },
+        {
+          "compiler_line": 3088,
+          "original_line": 3591,
+          "text": "hBmpRet = BitmapFromDIB(cxDesired,"
+        },
+        {
+          "compiler_line": 3101,
+          "original_line": 3604,
+          "text": "} else if (!fMonoGiven) {"
+        },
+        {
+          "compiler_line": 3111,
+          "original_line": 3954,
+          "text": "HBITMAP WOWLoadBitmapA("
+        },
+        {
+          "compiler_line": 3115,
+          "original_line": 3958,
+          "text": "DWORD     cbResData)"
+        },
+        {
+          "compiler_line": 3134,
+          "original_line": 3977,
+          "text": "hRet = ConvertDIBBitmap((LPBITMAPINFOHEADER)pResData,"
+        }
+      ],
+      "ambiguous_lines": 27
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "current_sha256": "353134a2e0c43c88fd7b69db8d53ca3edc9363e68a2a4321c4c20e7745c3cf57",
+      "original_sha256": "787eda33785a87ce9e71202c97b5913e2857f7106fed5bb97103049b1d5e3472",
+      "graph": "wow32",
+      "preprocess_sha256": "b6e7e4c18c160914a8f562012ebb81cdb37c0e920456d67319b8fc6817c58b3f",
+      "aligned_unique_lines": 0,
+      "candidate_mismatches": [
+        {
+          "compiler_line": 175,
+          "original_line": 2383,
+          "text": "LONG DispatchClientMessage("
+        }
+      ],
+      "ambiguous_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_sha256": "d4eead5ec6a4d2578db998685d6a0a176bc82cc907883eee11c4a8d7bdffae23",
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "graph": "wow32",
+      "preprocess_sha256": "e0f6671f2bd1e62964891f9602518e7e6646ea0ac5847a7f8a99e69fd9cc484f",
+      "aligned_unique_lines": 0,
+      "candidate_mismatches": [
+        {
+          "compiler_line": 1002,
+          "original_line": 138,
+          "text": "LONG GetClassWOWWords("
+        },
+        {
+          "compiler_line": 1003,
+          "original_line": 139,
+          "text": "HINSTANCE hInstance,"
+        }
+      ],
+      "ambiguous_lines": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "graph": "wow32",
+      "preprocess_sha256": "4b2800905c826b36a84096125b229810058678c74c750fb59a12da9ef5d0ee7c",
+      "aligned_unique_lines": 0,
+      "candidate_mismatches": [],
+      "ambiguous_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "current_sha256": "a5bbfa44603c510760d005baeba2525daef972d7a9380a5e2fa3cdb1121a3e3e",
+      "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+      "graph": "wow32",
+      "preprocess_sha256": "104e2ea1dd2204e99d579b5b4c59c3131b8b782c3c8229eb396cbc10a082aad2",
+      "aligned_unique_lines": 2,
+      "candidate_mismatches": [
+        {
+          "compiler_line": 669,
+          "original_line": 666,
+          "text": "_GetClientRect(pwnd, &rc);"
+        },
+        {
+          "compiler_line": 772,
+          "original_line": 769,
+          "text": "cchSrc = (UINT)pwnd->strName.Length / sizeof(WCHAR);"
+        },
+        {
+          "compiler_line": 776,
+          "original_line": 773,
+          "text": "LPSTR lpName = (LPSTR)lParam;"
+        },
+        {
+          "compiler_line": 789,
+          "original_line": 786,
+          "text": "lpName[cchSrc] = '\\0';"
+        },
+        {
+          "compiler_line": 793,
+          "original_line": 790,
+          "text": "LPWSTR lpwName = (LPWSTR)lParam;"
+        },
+        {
+          "compiler_line": 797,
+          "original_line": 794,
+          "text": "lpwName[cchSrc] = 0;"
+        },
+        {
+          "compiler_line": 807,
+          "original_line": 804,
+          "text": "((LPSTR)lParam)[0] = 0;"
+        },
+        {
+          "compiler_line": 809,
+          "original_line": 806,
+          "text": "((LPWSTR)lParam)[0] = 0;"
+        },
+        {
+          "compiler_line": 819,
+          "original_line": 816,
+          "text": "RtlUnicodeToMultiByteSize(&cch,"
+        },
+        {
+          "compiler_line": 821,
+          "original_line": 818,
+          "text": "pwnd->strName.Length);"
+        },
+        {
+          "compiler_line": 823,
+          "original_line": 820,
+          "text": "cch = pwnd->strName.Length / sizeof(WCHAR);"
+        },
+        {
+          "compiler_line": 884,
+          "original_line": 881,
+          "text": "LPRECT lprc = (LPRECT)lParam;"
+        },
+        {
+          "compiler_line": 886,
+          "original_line": 883,
+          "text": "shi.hwnd = (HWND)wParam;"
+        },
+        {
+          "compiler_line": 887,
+          "original_line": 884,
+          "text": "CopyRect(&(shi.rc),(LPRECT)lParam);"
+        },
+        {
+          "compiler_line": 891,
+          "original_line": 888,
+          "text": "(LPARAM)&shi, fAnsi);"
+        }
+      ],
+      "ambiguous_lines": 2
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "current_sha256": "170c4933ba983fa3fe941ddf91dbbf2b8483830b1cccdf80798e020c5aa6b3cb",
+      "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+      "graph": "wow32",
+      "preprocess_sha256": "7a9dc0fd8178ce13f7f0e309bbdf949da89de7243349111df768d86cfab1fe90",
+      "aligned_unique_lines": 4,
+      "candidate_mismatches": [],
+      "ambiguous_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "current_sha256": "c42964ed702de00fc96322d76922bca0e34bad7ae7b306885ecd5b36de5b7988",
+      "original_sha256": "7491e5b3331de8cb7a2189b8efbe91f56076f80a08338bf816d793e80a4faf76",
+      "graph": "wow32",
+      "preprocess_sha256": "1a9d32743c76c75015befad73077b9607c35a42fc3fc6e9547badf2d6b6f589e",
+      "aligned_unique_lines": 23,
+      "candidate_mismatches": [],
+      "ambiguous_lines": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_sha256": "607f45d960e69da00470820ed0f2bd8337a17caab0815776d00cd4852e488eae",
+      "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+      "graph": "wow32",
+      "preprocess_sha256": "23a2a6eaac7cd450b9a1f05547c12ef402b3ad22090573403df952f0b116fbbe",
+      "aligned_unique_lines": 1,
+      "candidate_mismatches": [
+        {
+          "compiler_line": 1978,
+          "original_line": 761,
+          "text": "LONG GetPrefixCount("
+        },
+        {
+          "compiler_line": 1993,
+          "original_line": 776,
+          "text": "charcopycount = 32767;"
+        },
+        {
+          "compiler_line": 1995,
+          "original_line": 778,
+          "text": "while ((cch-- > 0) && *lpstr && charcopycount-- != 0) {"
+        },
+        {
+          "compiler_line": 871,
+          "original_line": 1875,
+          "text": "LONG textsize, result;"
+        },
+        {
+          "compiler_line": 873,
+          "original_line": 1877,
+          "text": "WCHAR *pchOut = achWorkBuffer;"
+        },
+        {
+          "compiler_line": 874,
+          "original_line": 1878,
+          "text": "TEXTMETRICW textMetric;"
+        },
+        {
+          "compiler_line": 893,
+          "original_line": 1889,
+          "text": "result = GetPrefixCount(lpsz, cch, pchOut, cch);"
+        },
+        {
+          "compiler_line": 906,
+          "original_line": 1904,
+          "text": "textMetric.tmOverhang = 0;"
+        },
+        {
+          "compiler_line": 907,
+          "original_line": 1905,
+          "text": "textMetric.tmAscent = 0;"
+        },
+        {
+          "compiler_line": 925,
+          "original_line": 1923,
+          "text": "xLeft = xLeft - textMetric.tmOverhang;"
+        },
+        {
+          "compiler_line": 945,
+          "original_line": 1943,
+          "text": "yTop += textMetric.tmAscent + 1;"
+        },
+        {
+          "compiler_line": 950,
+          "original_line": 1948,
+          "text": "SetRect(&rc, xLeft, yTop, xLeft+cx, yTop+1);"
+        },
+        {
+          "compiler_line": 960,
+          "original_line": 1898,
+          "text": "if (pchOut != achWorkBuffer)"
+        }
+      ],
+      "ambiguous_lines": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+      "current_sha256": "a4f04cdfa139c78bc761b5e78b39c727a128549b2702e9a7098d22b07dd38aeb",
+      "original_sha256": "0e3999df8610405c990760ee1a417bf312e3b76744f8f9387bbd94583f9d800d",
+      "graph": "wow32",
+      "preprocess_sha256": "6b5ec8970f204a0cc086468b92631bd6399fda9867bdb8a6d2701dac11725fc9",
+      "aligned_unique_lines": 0,
+      "candidate_mismatches": [],
+      "ambiguous_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "current_sha256": "1d3e06a8bbd902687e5aa4231e85bfb99eaebe0dc0a07b54e0eb33fb784cae9a",
+      "original_sha256": "f0b56314a93423599f06645d17104391f19a0ca07c3944853b065d8866493f7c",
+      "graph": "wow32",
+      "preprocess_sha256": "e050c16b5522a523e498666d938d98272ab77c11afa944b350be05d6f26ddcec",
+      "aligned_unique_lines": 0,
+      "candidate_mismatches": [],
+      "ambiguous_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/ex/probe.c",
+      "current_sha256": "44053c4322b7dca6585e214285c7a5af6c1daee976b5a7f8b362bb979074209e",
+      "original_sha256": "0d1cae414b609c624e6bdf04fa28ebd84ff38dbb9687a63d8bc9e840c2f2372b",
+      "graph": "wow32",
+      "preprocess_sha256": "06495605a38b2ac868af1581b7b2d285648788966e0373b76235e78b52273be8",
+      "aligned_unique_lines": 0,
+      "candidate_mismatches": [
+        {
+          "compiler_line": 184,
+          "original_line": 186,
+          "text": "if ((Length) != 0) {"
+        },
+        {
+          "compiler_line": 185,
+          "original_line": 187,
+          "text": "if (((ULONG_PTR)(Address) & ((Alignment) - 1)) != 0) {"
+        },
+        {
+          "compiler_line": 188,
+          "original_line": 190,
+          "text": "} else if ((((ULONG_PTR)(Address) + (Length)) < (ULONG_PTR)(Address)) ||"
+        }
+      ],
+      "ambiguous_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "current_sha256": "48228ae52600fd1b777a6100254c70c6f6dfbcb31b0c91d34dd72bc55c3e2add",
+      "original_sha256": "82528443bc5f6c227e0e14fe8a9dbc928ba735f98cf3891744c20c8e1604939a",
+      "graph": "wow32",
+      "preprocess_sha256": "52c1580ca80797fa4b518db4544f5ae11e79838570ef1c5e60095f2a118fc004",
+      "aligned_unique_lines": 1,
+      "candidate_mismatches": [
+        {
+          "compiler_line": 526,
+          "original_line": 525,
+          "text": "ppcls = _InnerGetClassPtr(atomT, &ptiCurrent->ppi->pclsPrivateList, hModule);"
+        },
+        {
+          "compiler_line": 541,
+          "original_line": 540,
+          "text": "if ((*ppcls)->cWndReferenceCount != 0) {"
+        },
+        {
+          "compiler_line": 549,
+          "original_line": 548,
+          "text": "pcmn->pszClientAnsiMenuName = (*ppcls)->lpszClientAnsiMenuName;"
+        },
+        {
+          "compiler_line": 550,
+          "original_line": 549,
+          "text": "pcmn->pwszClientUnicodeMenuName = (*ppcls)->lpszClientUnicodeMenuName;"
+        }
+      ],
+      "ambiguous_lines": 2
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "current_sha256": "6be9e92da0209bbaeae041d25b584ed42ee52ff492ba0b1b378c3a856ae64a6f",
+      "original_sha256": "b7656bca55e892a42ba825be0324211450ad298c40717e1ae5a889d084467529",
+      "graph": "wow32",
+      "preprocess_sha256": "aef41848827894be06b99e8381b8cd22344842189e534ae934053784338da84f",
+      "aligned_unique_lines": 4,
+      "candidate_mismatches": [
+        {
+          "compiler_line": 5064,
+          "original_line": 5778,
+          "text": "pHead = &ptiCurrent->rpdesk->PtiList;"
+        },
+        {
+          "compiler_line": 5068,
+          "original_line": 5067,
+          "text": "if (pti->pqAttach == pqAttach) {"
+        },
+        {
+          "compiler_line": 5077,
+          "original_line": 5076,
+          "text": "if (pai->pti1 == pti || pai->pti2 == pti) {"
+        },
+        {
+          "compiler_line": 5079,
+          "original_line": 5078,
+          "text": "(pai->pti1 == pti) ? pai->pti2 : pai->pti1,"
+        },
+        {
+          "compiler_line": 5090,
+          "original_line": 5089,
+          "text": "PTHREADINFO ptiAttach;"
+        },
+        {
+          "compiler_line": 5091,
+          "original_line": 5090,
+          "text": "PLIST_ENTRY pHeadAttach, pEntryAttach;"
+        },
+        {
+          "compiler_line": 5093,
+          "original_line": 5092,
+          "text": "pHeadAttach = &pti->rpdesk->PtiList;"
+        },
+        {
+          "compiler_line": 5094,
+          "original_line": 5093,
+          "text": "for (pEntryAttach = pHeadAttach->Flink;"
+        },
+        {
+          "compiler_line": 5095,
+          "original_line": 5094,
+          "text": "pEntryAttach != pHeadAttach;"
+        },
+        {
+          "compiler_line": 5096,
+          "original_line": 5095,
+          "text": "pEntryAttach = pEntryAttach->Flink) {"
+        },
+        {
+          "compiler_line": 5100,
+          "original_line": 5099,
+          "text": "ptiAttach->ppi == pti->ppi) {"
+        },
+        {
+          "compiler_line": 5101,
+          "original_line": 5100,
+          "text": "AddAttachment(ptiAttach, pqAttach, &fChanged);"
+        },
+        {
+          "compiler_line": 5121,
+          "original_line": 5778,
+          "text": "pHead = &ptiCurrent->rpdesk->PtiList;"
+        },
+        {
+          "compiler_line": 5135,
+          "original_line": 5133,
+          "text": "if (pti->pq->cThreads > 1) {"
+        },
+        {
+          "compiler_line": 5142,
+          "original_line": 5140,
+          "text": "pti->pqAttach->cThreads++;"
+        },
+        {
+          "compiler_line": 5144,
+          "original_line": 5142,
+          "text": "pti->pqAttach = pti->pq;"
+        }
+      ],
+      "ambiguous_lines": 4
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_sha256": "83c7db3c8d115ecc44ffd49328c534badd98e9d23dab59532815c0a3af7c1a07",
+      "original_sha256": "0400c034bb5a782e81777e9fd805c07dbcd18d60ec9f1a876cfa67444577e0f8",
+      "graph": "wow32",
+      "preprocess_sha256": "28b4981ce05a6b2362e91743de5196de9a1d556ed75a0562b01749fd3092943f",
+      "aligned_unique_lines": 23,
+      "candidate_mismatches": [
+        {
+          "compiler_line": 609,
+          "original_line": 608,
+          "text": "UNICODE_STRING strHex;"
+        },
+        {
+          "compiler_line": 616,
+          "original_line": 615,
+          "text": "RtlInitUnicodeString(&strHex, szHex);"
+        },
+        {
+          "compiler_line": 617,
+          "original_line": 616,
+          "text": "RtlUnicodeStringToInteger(&strHex, 0, (PULONG)&dwFlags);"
+        },
+        {
+          "compiler_line": 622,
+          "original_line": 621,
+          "text": "pti->dwCompatFlags = dwFlags;"
+        },
+        {
+          "compiler_line": 623,
+          "original_line": 622,
+          "text": "pti->pClientInfo->dwCompatFlags = dwFlags;"
+        },
+        {
+          "compiler_line": 625,
+          "original_line": 624,
+          "text": "pti->ppi->dwCompatFlags = dwFlags;"
+        },
+        {
+          "compiler_line": 630,
+          "original_line": 658,
+          "text": "NTSTATUS xxxInitTask("
+        },
+        {
+          "compiler_line": 632,
+          "original_line": 660,
+          "text": "PUNICODE_STRING pstrAppName,"
+        },
+        {
+          "compiler_line": 661,
+          "original_line": 688,
+          "text": "pti->pstrAppName->Buffer = (PWCHAR)(pti->pstrAppName + 1);"
+        },
+        {
+          "compiler_line": 670,
+          "original_line": 697,
+          "text": "pti->pstrAppName->MaximumLength = pstrAppName->MaximumLength;"
+        },
+        {
+          "compiler_line": 671,
+          "original_line": 698,
+          "text": "pti->pstrAppName->Length = pstrAppName->Length;"
+        },
+        {
+          "compiler_line": 695,
+          "original_line": 722,
+          "text": "if (dwHotkey != 0) {"
+        },
+        {
+          "compiler_line": 696,
+          "original_line": 723,
+          "text": "ppi->dwHotkey = dwHotkey;"
+        },
+        {
+          "compiler_line": 702,
+          "original_line": 729,
+          "text": "ppi->usi.cb = sizeof(ppi->usi);"
+        },
+        {
+          "compiler_line": 719,
+          "original_line": 746,
+          "text": "ppi->usi.dwXSize = dwXSize;"
+        },
+        {
+          "compiler_line": 720,
+          "original_line": 747,
+          "text": "ppi->usi.dwYSize = dwYSize;"
+        },
+        {
+          "compiler_line": 751,
+          "original_line": 778,
+          "text": "if (idTask != (DWORD)-1) {"
+        },
+        {
+          "compiler_line": 753,
+          "original_line": 780,
+          "text": "if (pwti->idTask == idTask) {"
+        }
+      ],
+      "ambiguous_lines": 2
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+      "current_sha256": "85faf2effa8c00a0fad977e23974d581e942a3ec510f77424a2c5eefad2e1464",
+      "original_sha256": "45b92f7236fba49d58e2c3d912126067c3843ec560c28cdd8a20167c62aaef65",
+      "graph": "wow32",
+      "preprocess_sha256": "a05d259740ddfaf816e3e9515a0ef6c15489f845af4fc32d92af51c4591218ce",
+      "aligned_unique_lines": 2,
+      "candidate_mismatches": [
+        {
+          "compiler_line": 514,
+          "original_line": 513,
+          "text": "PPROCESSINFO    ppi;"
+        },
+        {
+          "compiler_line": 515,
+          "original_line": 514,
+          "text": "PWOWPROCESSINFO pwpi;"
+        },
+        {
+          "compiler_line": 543,
+          "original_line": 542,
+          "text": "pwpi->hEventWowExecClient = hEventWowExec;"
+        },
+        {
+          "compiler_line": 544,
+          "original_line": 543,
+          "text": "pwpi->lpfnWowExitTask = (DWORD)pfnW32EndTask;"
+        }
+      ],
+      "ambiguous_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "current_sha256": "de94ce38c9cd095af7535c3c957ab30a49acc56b5b5500dad592d250ebc02c9d",
+      "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+      "graph": "wow32",
+      "preprocess_sha256": "6d4c3556b3d82de752136a52fbba26ae5d7b8567cd474d34d7b5e9f4e08a373b",
+      "aligned_unique_lines": 29,
+      "candidate_mismatches": [
+        {
+          "compiler_line": 634,
+          "original_line": 52,
+          "text": "LPCWSTR pUnicodeString,"
+        },
+        {
+          "compiler_line": 636,
+          "original_line": 54,
+          "text": "LPSTR *ppAnsiString,"
+        },
+        {
+          "compiler_line": 640,
+          "original_line": 58,
+          "text": "ULONG nCharsInAnsiString;"
+        }
+      ],
+      "ambiguous_lines": 18
+    }
+  ]
+}

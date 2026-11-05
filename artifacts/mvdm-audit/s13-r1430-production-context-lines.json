@@ -1,0 +1,147 @@
+{
+  "method": "One successful repeatable MSVC /E invocation of the actual x86 NTVDM dpmi32.c production command. Attribute emitted output to source via compiler #line directives; compare nontrivial exact output text unique in the recorded original. Mismatches are candidates only: local changes, repeated files, macro expansion and accidental text matches can mispair. A match does not certify other lines, branches or supported contexts.",
+  "preprocessed_sha256": "497a0a189f97041d02bf66252f0ffdcfbe15555dfdf3a75d1cf437760eb59d4b",
+  "files_with_output": 13,
+  "files": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "current_sha256": "b518ac43247d583a62e50130791784c633338ff638626545ff36c4caae22e0d4",
+      "original_sha256": "c271daf86bdfa846c9602f74bd2a4059b98c2ad1f12676e966bcfd427ba93dca",
+      "unique_matching": 23,
+      "candidate_mismatches": [],
+      "ambiguous_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/devioctl.h",
+      "current_sha256": "87098d18c8afaf1265522380b682662125c59af17d775f9ab062e5b1e17db33b",
+      "original_sha256": "87098d18c8afaf1265522380b682662125c59af17d775f9ab062e5b1e17db33b",
+      "unique_matching": 0,
+      "candidate_mismatches": [],
+      "ambiguous_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+      "current_sha256": "51e043c613163927f1edd896032ab18693276f936a741410f42e71b526d8f045",
+      "original_sha256": "cafd48b3a9c672c6a18503d4565e7864a284ec029f63ae04ff221c58a2db5148",
+      "unique_matching": 0,
+      "candidate_mismatches": [],
+      "ambiguous_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_sha256": "32824e1d47e94c287af0d61126bba98e72c6412d9e5dbc3b25d84a4172298b55",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "unique_matching": 0,
+      "candidate_mismatches": [
+        {
+          "compiler_line": 127,
+          "original_line": 4065,
+          "text": "typedef struct _TIME_FIELDS {"
+        },
+        {
+          "compiler_line": 152,
+          "original_line": 3737,
+          "text": "LARGE_INTEGER Multiplicand,"
+        },
+        {
+          "compiler_line": 4942,
+          "original_line": 4948,
+          "text": "RtlConvertLongToLuid("
+        },
+        {
+          "compiler_line": 4947,
+          "original_line": 4953,
+          "text": "LARGE_INTEGER TempLi;"
+        },
+        {
+          "compiler_line": 4949,
+          "original_line": 4955,
+          "text": "TempLi.QuadPart = Long;"
+        },
+        {
+          "compiler_line": 4950,
+          "original_line": 4956,
+          "text": "TempLuid.LowPart = TempLi.LowPart;"
+        },
+        {
+          "compiler_line": 4951,
+          "original_line": 4957,
+          "text": "TempLuid.HighPart = TempLi.HighPart;"
+        }
+      ],
+      "ambiguous_lines": 3
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/precomp.h",
+      "current_sha256": "ef706555039d9dc1373362c6c1de5342f968c3ee0cff96988994c5caaaa9fa70",
+      "original_sha256": "f3111325cdff8671464b6c457d7b04e3f666282df638d200908a57af2cc6491e",
+      "unique_matching": 0,
+      "candidate_mismatches": [],
+      "ambiguous_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+      "current_sha256": "9db2ed0cd6cb791cd9d53b9eff623b3d02a7010ccd858c7ab7aa7cdc07f142ef",
+      "original_sha256": "c6b7844e2e1248ac38ee90dd8173f95ab0f7997d7a7cfbafda851cc07cc80921",
+      "unique_matching": 0,
+      "candidate_mismatches": [],
+      "ambiguous_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "current_sha256": "46cde6f9ec047b4f5614fa8645ca009b7c038baaa0b639ed428c441c3e5abee8",
+      "original_sha256": "c614c03a004f974c1eef37f1b29d3a8e1d7cfc33d04e7e7304befcbd6faafd18",
+      "unique_matching": 94,
+      "candidate_mismatches": [],
+      "ambiguous_lines": 11
+    },
+    {
+      "path": "src/mvdm-host/inc/dpmi.h",
+      "current_sha256": "a56f3292d2d42a7e3feeb060f8ab106ed119f5674e5a30548c1d36a3d8233008",
+      "original_sha256": "3425f64b805b8bab8086523288c8afe86eee8f183208aa863b49bb8fb962a154",
+      "unique_matching": 1,
+      "candidate_mismatches": [],
+      "ambiguous_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/vint.h",
+      "current_sha256": "db4cf3c07ad5989dc15b979f353b2e917bdadfa07eb2aa630ac8555ad9672aa9",
+      "original_sha256": "e88cc5f8624a4a899095a4f1794c697754c71aeb7e480d20d51fd6a976d612d1",
+      "unique_matching": 0,
+      "candidate_mismatches": [],
+      "ambiguous_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/mvdm.h",
+      "current_sha256": "70a9ae9350c3a0cf1943f292fdad02f2d712c0ed855e48dd90788f701f051380",
+      "original_sha256": "9f450f2eb6ee684763f7f9e27ee43c80e7e24d1e5a87ff254fbd7da4fcd1cdb7",
+      "unique_matching": 4,
+      "candidate_mismatches": [],
+      "ambiguous_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmidata.h",
+      "current_sha256": "82c2955d7bfed6b7f8638f493d99c0950f4be4a8e86d7e28b26af067ef3cc0c8",
+      "original_sha256": "f9772482513601c2e316e097a92485864557af77010e77285d725d903a0fd7b2",
+      "unique_matching": 80,
+      "candidate_mismatches": [],
+      "ambiguous_lines": 6
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "current_sha256": "3f0dd6648c072517cc51e552c4357d0558112c891b6961ca24bab8aeb5859b9e",
+      "original_sha256": "c5734d7842c34ae436cd12a5b52ad76d4fab88940a64f3af7e5fdc6fbc92e4a9",
+      "unique_matching": 41,
+      "candidate_mismatches": [],
+      "ambiguous_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/softpc.h",
+      "current_sha256": "4bb85e0a70526b1bbf67ac5ac4531afb1c649efcda65d05ade6280029b18c75b",
+      "original_sha256": "1e6fbd5f67aa04749d7896bd0109fe45daa22e691839d1261bbc3f039924bd9b",
+      "unique_matching": 20,
+      "candidate_mismatches": [],
+      "ambiguous_lines": 0
+    }
+  ]
+}

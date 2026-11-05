@@ -54,6 +54,7 @@ DpmiFatalExceptionHandler(
     PCHAR VdmStackPointer
     );
 
+#line 51
 VOID
 DpmiSetProtectedmodeInterrupt(
     VOID

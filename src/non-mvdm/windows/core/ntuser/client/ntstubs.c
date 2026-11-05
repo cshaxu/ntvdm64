@@ -268,6 +268,7 @@ LONG _SetWindowLong(
 #include "wow_class_query_bindings.h"
 #include "../inc/ntsend.h"
 
+#line 138
 LONG GetClassWOWWords(
     HINSTANCE hInstance,
     LPCTSTR pString)

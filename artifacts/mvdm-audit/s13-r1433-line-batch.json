@@ -1,0 +1,104 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "before_sha256": "202bf3d58825732c9076b84df0c2bc19f9264b003a0ed8382a4b57925e46d8bb",
+      "after_sha256": "196593d19f59a96efd6b40441aeeb4dcc019bb4670277fa49d2281df9b6f96b8",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "function": "static void setup_ivt()",
+      "original_function_line": 164,
+      "anchor_line": 164,
+      "previous_compiler_line": 166,
+      "method": "Unique exact function signature and next three source lines verified against original; insert diagnostic anchor before complete declaration."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "before_sha256": "628f895c90c814795e3ebb23e9aa2dc4fa59783fea8783360f66297723e5b895",
+      "after_sha256": "9ac08ae68fcccd4a1d4eedf7d74510086c1052e80cb37502424f798987f2734f",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "function": "void nt_flush_screen(void)",
+      "original_function_line": 796,
+      "anchor_line": 796,
+      "previous_compiler_line": 808,
+      "method": "Unique exact function signature and next three source lines verified against original; insert diagnostic anchor before complete declaration."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "before_sha256": "8c677e6104dee8b06268c77688f0286e1095caccceb1e04d58c6d0fe4323b033",
+      "after_sha256": "665764436c3d024dc5cd8a3384f6230d9960e3d01490915660c43e75bfcb552d",
+      "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+      "function": "BOOL _IsWindowVisible(",
+      "original_function_line": 716,
+      "anchor_line": 716,
+      "previous_compiler_line": 846,
+      "method": "Unique exact function signature and next three source lines verified against original; insert diagnostic anchor before complete declaration."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "before_sha256": "9d09fd22d8a5047d258891b20d7583060f0287e4b24c0dd69eb9833d72ee2932",
+      "after_sha256": "3c43ed7e2b5cfcc1b09b910fe96b779c55f544385176d90eddb11c6eb2433926",
+      "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
+      "function": "HANDLE WOWFindResourceExWCover(",
+      "original_function_line": 3923,
+      "anchor_line": 3923,
+      "previous_compiler_line": 197,
+      "method": "Unique exact function signature and next three source lines verified against original; insert diagnostic anchor before complete declaration."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "before_sha256": "353134a2e0c43c88fd7b69db8d53ca3edc9363e68a2a4321c4c20e7745c3cf57",
+      "after_sha256": "51a7df71bc18a51a779a3b38d555fc9e0380ded5180f1e7e965fe56fa9823a37",
+      "original_sha256": "787eda33785a87ce9e71202c97b5913e2857f7106fed5bb97103049b1d5e3472",
+      "function": "LONG DispatchClientMessage(",
+      "original_function_line": 2383,
+      "anchor_line": 2383,
+      "previous_compiler_line": 175,
+      "method": "Unique exact function signature and next three source lines verified against original; insert diagnostic anchor before complete declaration."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "before_sha256": "d4eead5ec6a4d2578db998685d6a0a176bc82cc907883eee11c4a8d7bdffae23",
+      "after_sha256": "7175d1ce3e6d3cc10eaa1ee9845bd51df921d62a3133ca125e2e3e1736f7cefd",
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "function": "LONG GetClassWOWWords(",
+      "original_function_line": 138,
+      "anchor_line": 138,
+      "previous_compiler_line": 1002,
+      "method": "Unique exact function signature and next three source lines verified against original; insert diagnostic anchor before complete declaration."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "before_sha256": "607f45d960e69da00470820ed0f2bd8337a17caab0815776d00cd4852e488eae",
+      "after_sha256": "00d0e2a65c0dcd737b2305a25aa04c2bbec30892165b05fd19758cd03736de20",
+      "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+      "function": "LONG GetPrefixCount(",
+      "original_function_line": 761,
+      "anchor_line": 761,
+      "previous_compiler_line": 1978,
+      "method": "Unique exact function signature and next three source lines verified against original; insert diagnostic anchor before complete declaration."
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "before_sha256": "d7003eba361a1a7b99398795a06a91b37896a7b2af5e26b6dd46e29fcf33bdd6",
+      "after_sha256": "1d44faf32b02b7d5aad62aa8d8f72800297669e4ab659a8beeb27648a722c7d7",
+      "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+      "function": "DpmiSetProtectedmodeInterrupt(",
+      "original_function_line": 52,
+      "anchor_line": 51,
+      "previous_compiler_line": 58,
+      "method": "Unique exact function signature and next three source lines verified against original; insert diagnostic anchor before complete declaration."
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "before_sha256": "178f7b6d8d71d56401f2b614daa17f6188d883c146b76531b7a2d18b4c96ef70",
+      "after_sha256": "b2c55d18e95d67d3db4bfa07f01849854d8b29172e804ad93dab8b1e8efae682",
+      "original_sha256": "aa7157e2a39fead41e42e87f87e332e9464bf69a668671de976c69637ce06a67",
+      "function": "DpmiSwitchToRealMode(",
+      "original_function_line": 28,
+      "anchor_line": 27,
+      "previous_compiler_line": 185,
+      "method": "Unique exact function signature and next three source lines verified against original; insert diagnostic anchor before complete declaration."
+    }
+  ],
+  "note": "Nine function anchors plus ntrtl.h form ten modified mirror sources. Existing marker and per-file review data need refresh after build; product runtime equivalence is not yet asserted."
+}

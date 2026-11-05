@@ -181,6 +181,7 @@ Routine Description:
         (unsigned long)c_getDS_BASE(), (unsigned long)c_getDS_LIMIT());
 }
 
+#line 27
 VOID
 DpmiSwitchToRealMode(
     VOID

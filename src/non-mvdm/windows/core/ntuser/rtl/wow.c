@@ -74,6 +74,7 @@ BOOL _ScreenToClient(
     return TRUE;
 }
 
+#line 716
 BOOL _IsWindowVisible(
     PWND pwnd)
 {

@@ -1,0 +1,95 @@
+{
+  "method": "Post-edit actual production MSVC /E output; match function signature and compare compiler line to pinned original.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "function": "static void setup_ivt()",
+      "expected_original_line": 164,
+      "compiler_lines": [
+        164
+      ],
+      "pass": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "function": "void nt_flush_screen(void)",
+      "expected_original_line": 796,
+      "compiler_lines": [
+        796
+      ],
+      "pass": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "function": "BOOL _IsWindowVisible(",
+      "expected_original_line": 716,
+      "compiler_lines": [
+        716
+      ],
+      "pass": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "function": "HANDLE WOWFindResourceExWCover(",
+      "expected_original_line": 3923,
+      "compiler_lines": [
+        3923
+      ],
+      "pass": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "function": "LONG DispatchClientMessage(",
+      "expected_original_line": 2383,
+      "compiler_lines": [
+        2383
+      ],
+      "pass": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "function": "LONG GetClassWOWWords(",
+      "expected_original_line": 138,
+      "compiler_lines": [
+        138
+      ],
+      "pass": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "function": "LONG GetPrefixCount(",
+      "expected_original_line": 761,
+      "compiler_lines": [
+        761
+      ],
+      "pass": true
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "function": "DpmiSetProtectedmodeInterrupt(",
+      "expected_original_line": 52,
+      "compiler_lines": [
+        52
+      ],
+      "pass": true
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "function": "DpmiSwitchToRealMode(",
+      "expected_original_line": 28,
+      "compiler_lines": [
+        28
+      ],
+      "pass": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "function": "RtlConvertLongToLuid(",
+      "expected_original_line": 4948,
+      "compiler_lines": [
+        4948
+      ],
+      "pass": true
+    }
+  ]
+}

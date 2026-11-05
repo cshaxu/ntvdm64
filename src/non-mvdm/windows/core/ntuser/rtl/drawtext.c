@@ -13,6 +13,7 @@ BOOL IsSysFontAndDefaultMode(HDC hdc)
 
 /* DIVERGENCE(OPENNT-HOST-110): additional unchanged original body;
  * unrelated text engines remain excluded. */
+#line 761
 LONG GetPrefixCount(
     LPCWSTR lpstr,
     int cch,
