@@ -143,6 +143,7 @@ BOOL _UnregisterClass(
     if (!DestroyClass(ppcls))
         return FALSE;
 
+#line 557
     return TRUE;
 }
 #else
