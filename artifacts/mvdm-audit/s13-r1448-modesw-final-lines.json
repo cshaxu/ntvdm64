@@ -1,0 +1,21 @@
+{
+  "path": "src/mvdm-host/dpmi32/modesw.c",
+  "before_sha256": "c2029f913b9bec659a078fb64c7dadb1ec6a7ecb37e590f9750cb8d100f14b98",
+  "after_sha256": "7dd7d5fe43e2ba7ced3855e36df2bdbebd26603cf637439d7a6fc59c4ecee280",
+  "anchors": [
+    {
+      "original_line": 74,
+      "location": "DpmiSwitchToRealMode closing brace"
+    },
+    {
+      "original_line": 120,
+      "location": "DpmiSwitchToProtectedMode closing brace"
+    },
+    {
+      "original_line": 66,
+      "location": "original setMSW statement relocated in CPU40 adapter"
+    }
+  ],
+  "proof": "Actual production MSVC output from successful post-r1446 preprocessing showed closing braces at logical 85 and 138; original braces are 74 and 120. CPU40-local statements are registered adaptations. The retained original setMSW statement is relocated before setCS by DIV-242; it now has its own original line anchor.",
+  "status": "Pending next ten-source build and post-change validation."
+}

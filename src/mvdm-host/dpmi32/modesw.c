@@ -230,6 +230,7 @@ Return Value:
      * Clear PE first, then load the identical source-supplied CS through the
      * CCPU real-mode cache path. */
     mvdm_softpc_wow_page_domain_leave_protected();
+#line 66
     setMSW(getMSW() & ~MSW_PE);
 #ifndef i386
     /* Match the real-mode privilege before executing the DOSX continuation. */
@@ -257,6 +258,7 @@ Return Value:
     mvdm_softpc_report_dpmi_mode_state("switch-real", (unsigned long)getCR0(),
         (unsigned long)c_getCR3(), getCS(), getIP(),
         (unsigned long)c_getDS_BASE(), (unsigned long)c_getDS_LIMIT());
+#line 74
 }
 
 #line 76
@@ -326,4 +328,5 @@ Return Value:
     mvdm_softpc_report_dpmi_mode_state("switch-protected", (unsigned long)getCR0(),
         (unsigned long)c_getCR3(), getCS(), getIP(),
         (unsigned long)c_getDS_BASE(), (unsigned long)c_getDS_LIMIT());
+#line 120
 }

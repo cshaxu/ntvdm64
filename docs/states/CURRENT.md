@@ -2,18 +2,13 @@
 
 ## Current Work
 
-**Active: M0 T473 S13**
+**No active M/T/S packet.** T473 is closed by owner direction.
 
-Mirror-condition audit: compare each compiled mirror file against its original
-and finish all its conditional branches before marking that file complete;
-build each batch of 10 modified code files. The earlier per-depth BFS is superseded. Process the pending per-file inventory in its existing order; review
-and register files even when no source edit is needed. If binary differences are limited to timestamps or verified diagnostic line-number constants, reuse prior test evidence; otherwise run Full before publication. [Progress](../../artifacts/mvdm-audit/s13-bfs-progress.md);
-[observed per-file inventory](../../artifacts/mvdm-audit/s13-r489-per-file-observed-inventory.json).
-Latest checkpoint: [r1307](../../artifacts/mvdm-audit/s13-r1307-delivery.md).
-[Global audit checkpoint](../../artifacts/mvdm-audit/s13-r1314-final-audit.md): unobserved arms and unresolved lines remain open.
-[Inventory and condition cross-check index](../../artifacts/mvdm-audit/s13-r1305-evidence-index.md).
-The 1,056-file [census](../../artifacts/mvdm-audit/s13-r624-current-file-census.json)
-includes one product-generator input; supported-context verification remains open. Current product-object dependency closure: [r1304](../../artifacts/mvdm-audit/s13-r1304-product-source-closure.json).
+S13 is closed by owner direction with its unfinished mirror-condition work
+transferred to the [queued complete-file audit](../proposals/proposal-mirror-conditional-file-audit-001.md).
+The [T473 closure](../history/m0-t473-closure.md) and [S13 debt record](../history/m0-t473-s13-closure.md) preserve
+the actual evidence, boundaries and outstanding input-handoff risks. No next
+S is admitted.
 
 Prior owner-approved delivery: restore the four MVDM ANSI-profile files changed
 by MVDM-HOST-DIV-479, preserving authored build boundaries; verify actual
@@ -23,7 +18,7 @@ is published; [evidence](../../artifacts/mvdm-audit/condition-inventory/ansi-res
 S11 closed its owner-narrowed non-MVDM compilation-condition audit and
 cleanup; see [closure evidence](../etc/evidence/m0-t473-s11-condition-cleanup-closure.md).
 Unfinished original foundation and later recovery work is transferred to the
-first queued recovery proposal. The NTCON input-source handoff moves to S13;
+first queued recovery proposal. The NTCON input-source handoff was handled in S13;
 its original S12 evidence and scope remain in the handoff document.
 The DOS4GW/NESticle integration case and its unresolved environment-sensitive
 startup issue are recorded in [TODO](TODO.md) and [evidence](../../artifacts/mvdm-audit/dos4gw-nesticle-integration.md).
@@ -85,30 +80,11 @@ r477 package is [published](../../artifacts/mvdm-audit/s13-r483-publication.json
 NIDDB multi-VM semantics remain [unproved](../../artifacts/mvdm-audit/s13-test-failure-recheck.md).
 Earlier versions remain in [held patches](../../artifacts/mvdm-audit/s11-held-cpu/).
 
-## Active Packet
+## S13 Closure Record
 
-### M0 T473 S13 — NTCON input-source handoff
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T473 S13, Ordinary Mode. |
-| Admission And Approval | Owner accepted and closed S12 and admitted S13. [S12 evidence](../../artifacts/mvdm-audit/s12-excluded-branch-errors.md). |
-| Objective | Input handoff; owner adds [mirror conditional reconciliation](../../artifacts/mvdm-audit/s13-mirror-conditional-plan.md). |
-| Delivery State | Handoff published; review active. Checkpoint [r1082](../../artifacts/mvdm-audit/s13-r1082-delivery.md) was built and published; 162 files remain incomplete. Full 16 gates, DOS4GW startup, four Win3.1 modes and synthetic DOS/native three-CAF and Alt+Enter return passed. Physical input and injected handoff failures remain unverified; command output is in TODO. [Compile-branch evidence](../../artifacts/mvdm-audit/compile-branch-selection/README.md). [Evidence](../etc/evidence/m0-t473-s13-input-handoff.md). |
-| Non-goals | Guest modification or rebuilding; DOS-specific shortcut workarounds; unrelated performance work. |
-| Reference Baseline | Published ten-image package at 1d2ddfb18; [handoff scope and prior observations](../etc/operations/m0-t473-s12-ntcon-input-source-handoff.md). |
-| Files And ABI Surface | NTCON frontend session, keyboard and channel; worker input client and original DOS scan-code handling; tests and evidence. |
-| Applicable Rules | Source policy, immutable guest, original input semantics and centrally coordinated lifecycle. |
-| Verification | Baseline and post-fix product probes for DOS and native CUI, source-switch and input ordering controls, Win3.1 Alt+Enter, cached build, Full and coherent publication. |
-| Expected Markers | No stranded delivered keys or duplicate releases across source transitions; faithful input and preserved ordering. |
-| Asset Needs | Existing build caches, isolated test-owned process/desktop and unchanged Win3.1 copy. |
-| Reporting Requirements | Root cause, observed behavior, negative and lifecycle evidence, image hashes and unverified physical-input boundaries. |
-| Stop Conditions | Guest modification or unapproved observable semantic change. |
-| Exit Criteria | Scoped review, regression evidence, coherent publication, commit and push; await owner acceptance. |
-| Original Owner Request | Execute S13 input handoff; comprehensively reconcile mirror conditionals under the adopted rule, then build, test, publish, commit and push. |
-| Similar-Issue Sweep | Console-to-Window and Window-to-Console, DOS and native CUI, modifiers, focus and lifecycle. |
-| Candidate Proposal | [NTCON input handoff](../proposals/proposal-ntcon-input-source-handoff-001.md). |
-| Temporary Evidence | `build/t473-s13`, owner S13, 60-minute phase, 3-GiB size and 10-minute no-progress budget; stable caches retained. |
+Owner stopped the condition audit and transferred it to the queued future T.
+The [closure](../history/m0-t473-s13-closure.md) records the published baseline,
+incomplete per-file verification and remaining input-handoff limits. T473 is closed; no next T or S is active or admitted.
 
 ## S12 Closure Record
 

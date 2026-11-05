@@ -238,11 +238,11 @@ src/mvdm-host/dpmi32/int21map.c,2664,1,if,DBG,excluded-error,none,error-anchor-m
 src/mvdm-host/dpmi32/modesw.c,166,1,ifndef,i386,historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/dpmi32/modesw.c,208,1,if,defined(i386),excluded-error,none,error-preceding-line-anchor-verified
 src/mvdm-host/dpmi32/modesw.c,211,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dpmi32/modesw.c,234,1,ifndef,i386,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dpmi32/modesw.c,243,1,ifndef,i386,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dpmi32/modesw.c,285,1,if,defined(i386),excluded-error,none,error-preceding-line-anchor-verified
-src/mvdm-host/dpmi32/modesw.c,288,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
-src/mvdm-host/dpmi32/modesw.c,305,1,ifndef,i386,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dpmi32/modesw.c,235,1,ifndef,i386,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dpmi32/modesw.c,244,1,ifndef,i386,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dpmi32/modesw.c,287,1,if,defined(i386),excluded-error,none,error-preceding-line-anchor-verified
+src/mvdm-host/dpmi32/modesw.c,290,1,else,,historical-hit,unchanged-directive-git-line-map,not-applicable
+src/mvdm-host/dpmi32/modesw.c,307,1,ifndef,i386,historical-hit,unchanged-directive-git-line-map,not-applicable
 src/mvdm-host/dpmi32/savestat.c,117,1,if,0,excluded-error,unique-structure-historical,error-anchor-match
 src/mvdm-host/dpmi32/xmem.c,93,1,if,DBG,excluded-error,none,error-anchor-match
 src/mvdm-host/dpmi32/xmem.c,165,1,if,DBG,excluded-error,none,error-anchor-match

@@ -25,6 +25,7 @@ active-packet transition does not change any candidate's proposed scope.
 | 8 | Upgrade to a Windows XP NTVDM baseline — assess and recover XP-era capabilities including audio and long file names, update all guest components, and make required modern-host compatibility repairs. | [Proposal](../proposals/proposal-windows-xp-ntvdm-baseline-upgrade-001.md) |
 | 9 | Hardware-virtualized guest CPU acceleration — investigate and implement a modern hardware-virtualization execution backend for 16/32-bit guest instructions, subject to demonstrated feasibility and compatibility. | [Proposal](../proposals/proposal-hardware-virtualized-guest-cpu-001.md) |
 | 10 | Windows 1.01 application launch from the host — classify and launch a selected application through its matching Windows 1.01 guest environment, preserving arguments, environment selection and truthful application lifecycle results. | [Proposal](../proposals/proposal-win101-host-application-launch-001.md) |
+| 11 | Complete mirror conditional and diagnostic-line audit — audit and correct each compiled mirror file as a complete unit, using actual supported contexts and registered evidence. | [Proposal](../proposals/proposal-mirror-conditional-file-audit-001.md) |
 
 The owner subsequently moved shared implementation ownership review to the
 front and removed the external system launch loader candidate from the queue.

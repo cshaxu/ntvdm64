@@ -1,0 +1,19 @@
+# Proposal — complete mirror conditional audit by file
+
+## Purpose and scope
+
+On owner direction, inherit the unfinished T473 S13 mirror conditional audit as a separate future T candidate. Cover every production-compiled mirror source and header under `src/mvdm-host` and `src/non-mvdm`, including actual supported include contexts and generated-source inputs where applicable. Reconcile the historical 1,055 retained-file census with the real admission-time production closure and record additions or removals; do not assume a historical count is complete. Retain executable tools, guest binaries, fonts and other independently useful assets. Do not modify or rebuild guest images.
+
+## Per-file contract
+
+For each file, identify and hash its pinned original OpenNT counterpart and all real supported build/include contexts. Compare the entire original and current conditional structure, including prior missing frames. A branch observed at least once is retained; absence of a hit is a lead, not by itself proof of exclusion. If all supported contexts explicitly exclude a branch, retain its original conditional boundary and replace that entire body with `#error` and the appropriate `#line`; do not retain nested structure within the rejected body. Preserve selected original behavior, justified registered adaptations, and current diagnostic line mappings. Audit source, original identities, selected and excluded branches, marker provenance, and actual compiler line evidence per file. Empty shell hits do not prove the original body was compiled.
+
+Complete and register a file as a whole before moving on: identify every branch and line issue, make all required corrections together, and retain an explicit file-level evidence record. Do not count partial edits as complete or repeatedly revisit files to make piecemeal changes. A later independently discovered defect must be recorded rather than concealed. Persist uncertainties as open, never as a pass. In particular, investigate selected empty shells in omitted original functions without introducing an unconditional failure or fabricating selected-body evidence.
+
+## Delivery and inherited evidence
+
+Group ten fully corrected source files per cached build; the previously approved last batch may be smaller. Compare the complete ten-component package against the prior release. Per owner approval, timestamp-only, identical, or verified diagnostic-line-only differences do not require repeated runtime tests; other substantive differences require the applicable Full suite before coherent publication. Publish to the established destinations, verify hashes, commit and push. Report the exact counts of byte-identical originals, completely reviewed differing files, total files, incomplete and deleted files, and the build/test evidence after each push. Do not call historical source-derived reviews complete under the stricter file-level contract without checking their actual coverage.
+
+Start with the published T473 S13 state and [per-file audit](../../artifacts/mvdm-audit/s13-r1314-file-audit.csv), [branch checklist](../../artifacts/mvdm-audit/s13-r1308-branch-checklist.csv), [summary](../../artifacts/mvdm-audit/s13-r1314-summary.json), [audit history](../../artifacts/mvdm-audit/s13-r1314-final-audit.md), and [marker evidence](../../artifacts/mvdm-audit/compile-branch-selection/README.md). Validate hashes and context identities before reusing prior evidence. The 181 / 828 / 1,055 checkpoint is an historical inventory and prior-review count, not a claim that all 828 meet the owner's complete-file standard. S13's [closure](../history/m0-t473-s13-closure.md) records the handoff and unverified cases.
+
+This candidate allocates no numeric T and becomes active only through the normal admission procedure. It supplements rather than replaces the separate mirror-diff minimization and WOW foundation candidates.
