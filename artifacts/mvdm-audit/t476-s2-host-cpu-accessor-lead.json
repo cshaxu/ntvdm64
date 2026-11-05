@@ -1,0 +1,28 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "sha256": "b30cb25519194ebfb7bde02b0d672ab7ab40342d7f40d5c1b2e8ba1690f60e69"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "sha256": "f2bc102075e0624cfe95a040c0608d97df5a8a198a0c0d08bf0271a71207b93a"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "sha256": "72b3f8a37ccdd92bb7955cec625e10a31d9743d95c8534ff9acf30952f8ac946"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.h",
+      "sha256": "361aced5ce9afec12a540cca78099bc5858fcaca96e348eb788b2dd59d3b6a84"
+    },
+    {
+      "path": "O:/repos.external/OpenNT/base/mvdm/softpc.new/host/src/nt_cprgs.c",
+      "sha256": "cbf9ee8a199d48ee74171b2e23d55bb1e5d019710fdea2a917762739d6a49044"
+    }
+  ],
+  "original_example": "Original host_cpu.h CCPU getCPL/setCPL use function pointers; OpenNT nt_cprgs.c assigns them to soft_ccpu_getCPL/soft_ccpu_setCPL, which read/write CPL.",
+  "current_example": "Selected cpu4gen.h maps getCPL/setCPL to c_getCPL/c_setCPL; c_reg.c uses GET_CPL/SET_CPL, defined on CCPU_CPL in c_reg.h.",
+  "conclusion": "Both provide read/write of a current-privilege state in their respective CPU implementations; this sample does not prove state identity, initialization equivalence, or equivalence of the full original pointer table.",
+  "status": "open: enumerate original and selected accessor families and their actual callers before resolving CCPU empty shells"
+}

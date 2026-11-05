@@ -409,7 +409,7 @@
     {
       "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
       "group": "C: matching line leads",
-      "current_sha256": "9974d509790f6b8185dd09242967298f34d8e93cc95b9e65ace1f9dd58f467ce",
+      "current_sha256": "b30cb25519194ebfb7bde02b0d672ab7ab40342d7f40d5c1b2e8ba1690f60e69",
       "original_sha256": "e79dd6aa79d24e37ad8390c8879abf3436674ee101037f0e09415148a938ac95",
       "s1_hits": 7,
       "prior_exclusions": 9,
@@ -424,7 +424,7 @@
       "raw_matching_line_leads": 43,
       "sampled_compiler_contexts": 0,
       "original_lines": 506,
-      "status": "pending whole-file audit",
+      "status": "pending selected original empty-shell ownership; line fix published",
       "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
     },
     {
@@ -534,14 +534,14 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
-      "group": "B: original structure leads",
+      "group": "C: matching line leads",
       "current_sha256": "223e437f069bf601aa83b713cf848f939b228c36a58bba5130cfef53b69fbf16",
       "original_sha256": "1f634b9d6c09d0f767a90ec9e577817800a07dc353cffa433ca2e0268d2cd42f",
       "s1_hits": 8,
       "prior_exclusions": 4,
       "s1_unhit": 0,
       "condition_evidence_hash_matches": true,
-      "original_structure_leads": 1,
+      "original_structure_leads": 0,
       "ancestry_conflicts": 0,
       "parser_errors": {
         "original": [],
@@ -551,7 +551,8 @@
       "sampled_compiler_contexts": 1,
       "original_lines": 462,
       "status": "pending whole-file audit",
-      "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
+      "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts.",
+      "resolved_structure_evidence": "t476-s2-sim32-structure-lead.json"
     },
     {
       "path": "src/mvdm-host/vdmredir/vrmslot.c",
@@ -1396,7 +1397,7 @@
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
       "group": "A: changed evidence or unhit arms",
-      "current_sha256": "66f80c95513bb590ea8879e6df2be9734af25aa6886abd7fe89901a24d2e6144",
+      "current_sha256": "ff06d750dda7adef7f04e20b97f57f2c432f13e91e3af770a44aceed8c83b17c",
       "original_sha256": "b632fc75232db7c2bc95baf758820c087a23f7e17a61c361e47c4687a4f543d3",
       "s1_hits": 8,
       "prior_exclusions": 3,
@@ -1411,7 +1412,7 @@
       "raw_matching_line_leads": 13,
       "sampled_compiler_contexts": 0,
       "original_lines": 247,
-      "status": "pending whole-file audit",
+      "status": "pending selected original empty-shell ownership; line fix published",
       "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
     },
     {
@@ -1460,8 +1461,8 @@
   "method": "Hash-checked prior S1 branch ledger, source/original condition comparison and raw line-match triage; these are leads, not exclusion or completion proofs.",
   "pending_count": 50,
   "pending_groups": {
-    "B: original structure leads": 4,
-    "C: matching line leads": 31,
+    "B: original structure leads": 3,
+    "C: matching line leads": 32,
     "A: changed evidence or unhit arms": 14,
     "D: full-file review with no automated leads": 1
   }

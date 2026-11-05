@@ -1,0 +1,17 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+  "original_sha256": "b632fc75232db7c2bc95baf758820c087a23f7e17a61c361e47c4687a4f543d3",
+  "previous_sha256": "66f80c95513bb590ea8879e6df2be9734af25aa6886abd7fe89901a24d2e6144",
+  "current_sha256": "ff06d750dda7adef7f04e20b97f57f2c432f13e91e3af770a44aceed8c83b17c",
+  "condition_structure": "all 11 matched original groups retain structure and corrected LF positions",
+  "corrected_anchor_count": 14,
+  "retained_macro_original_lines": [
+    71,
+    72,
+    73,
+    74
+  ],
+  "adaptation": "OPENNT-HOST-104 retains original same-address _USERK_ rebase macros outside their original branch; the project uses those forms for its selected representation",
+  "status": "anchor fixes built and published; selected original empty-shell disposition remains open",
+  "limit": "empty shells are not evidence that omitted original declarations or behavior are present"
+}

@@ -1,0 +1,8 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+  "current_sha256": "223e437f069bf601aa83b713cf848f939b228c36a58bba5130cfef53b69fbf16",
+  "original_sha256": "1f634b9d6c09d0f767a90ec9e577817800a07dc353cffa433ca2e0268d2cd42f",
+  "lead": "original #ifndef PROD at LF line 247",
+  "disposition": "The original selector_outside_table branch containing this nested debug conditional is covered by the current non-CPU40 #else #error. The selected CPU40 path is the separately registered DIV-177 adapter. Do not restore nested structure inside the excluded body.",
+  "limit": "Only this conditional-structure lead is resolved; complete file, line positions and adapter semantics remain separately pending."
+}

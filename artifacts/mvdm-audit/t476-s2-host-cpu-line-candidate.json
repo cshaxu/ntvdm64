@@ -1,0 +1,11 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+  "original_sha256": "e79dd6aa79d24e37ad8390c8879abf3436674ee101037f0e09415148a938ac95",
+  "previous_sha256": "9974d509790f6b8185dd09242967298f34d8e93cc95b9e65ace1f9dd58f467ce",
+  "current_sha256": "b30cb25519194ebfb7bde02b0d672ab7ab40342d7f40d5c1b2e8ba1690f60e69",
+  "condition_structure": "13 original groups matched with correct LF anchors; a spurious LITTLEND match was excluded because original line 92 is under disabled CPU30 while current branch is a registered CPU40 layout adaptation",
+  "selected_layout": "CPU40 original high/low fields at lines 129/130 use existing registered DIV-620 little-endian ordering",
+  "corrected_anchor_count": 15,
+  "status": "anchor fixes built and published; selected original empty-shell disposition remains open",
+  "limit": "CPU30 inner conditions remain removed under the outer #error, as required; no CPU30 runtime claim"
+}

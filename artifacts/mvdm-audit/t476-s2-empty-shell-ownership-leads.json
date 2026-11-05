@@ -1,0 +1,125 @@
+{
+  "sources": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "current_sha256": "838177ce4be35707885d7ba54653400e23e86e91c840529e69925f279e148351",
+      "historical_empty_shells": [
+        {
+          "snapshot_line": 139,
+          "directive": "else",
+          "expression": ""
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "6839fae1ee1a6914d1b7704f31206fa752cd0074237cacc0eda359973a1fc17f",
+      "historical_empty_shells": [
+        {
+          "snapshot_line": 10,
+          "directive": "ifndef",
+          "expression": "WOW"
+        },
+        {
+          "snapshot_line": 19,
+          "directive": "else",
+          "expression": ""
+        },
+        {
+          "snapshot_line": 60,
+          "directive": "else",
+          "expression": ""
+        },
+        {
+          "snapshot_line": 69,
+          "directive": "else",
+          "expression": ""
+        },
+        {
+          "snapshot_line": 78,
+          "directive": "else",
+          "expression": ""
+        },
+        {
+          "snapshot_line": 87,
+          "directive": "else",
+          "expression": ""
+        },
+        {
+          "snapshot_line": 96,
+          "directive": "else",
+          "expression": ""
+        },
+        {
+          "snapshot_line": 105,
+          "directive": "else",
+          "expression": ""
+        },
+        {
+          "snapshot_line": 111,
+          "directive": "ifndef",
+          "expression": "WOW"
+        },
+        {
+          "snapshot_line": 120,
+          "directive": "else",
+          "expression": ""
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_sha256": "a546c5469edf64976220c1a2b7d7202de8c2d49093f6670b8610a3a759f91b1e",
+      "historical_empty_shells": [
+        {
+          "snapshot_line": 306,
+          "directive": "else",
+          "expression": ""
+        },
+        {
+          "snapshot_line": 342,
+          "directive": "else",
+          "expression": ""
+        },
+        {
+          "snapshot_line": 357,
+          "directive": "else",
+          "expression": ""
+        },
+        {
+          "snapshot_line": 366,
+          "directive": "else",
+          "expression": ""
+        },
+        {
+          "snapshot_line": 398,
+          "directive": "else",
+          "expression": ""
+        }
+      ]
+    }
+  ],
+  "link_map_sha256": "3ffcb09fdcde5ed96da6f7118c71ad04b1be0b50e27346033dcbded67b09b5b7",
+  "link_evidence": {
+    "__imp__DrawFrameControl@16": [
+      "0002:00000988       __imp__DrawFrameControl@16 10090988     user32:USER32.dll"
+    ],
+    "__GetDlgItem@8": [
+      "0001:0004b120       __GetDlgItem@8             1004c120 f   control-body-wow.obj",
+      "0002:00000c10       __imp__GetDlgItem@8        10090c10     user32:USER32.dll"
+    ],
+    "_GetControlBrush@12": [
+      "0001:0004dad0       _GetControlBrush@12        1004ead0 f   control-brush-client.obj"
+    ],
+    "_xxxGetControlBrush@12": [
+      "0001:0004daf0       _xxxGetControlBrush@12     1004eaf0 f   control-brush.obj"
+    ]
+  },
+  "findings": [
+    "Original DrawFrameControl body containing the WINDOWS_ME shell is omitted from rtl/draw.c; current WOW32 imports USER32 DrawFrameControl.",
+    "Original _GetDlgItem is retained by client/wow.c and linked from control-body-wow.obj.",
+    "GetControlBrush and xxxGetControlBrush are linked from explicit client and kernel objects.",
+    "Historical empty shell marker records do not themselves demonstrate original omitted function execution."
+  ],
+  "limit": "The import proves provider identity, not semantic equivalence. Remaining omitted shells still need function-by-function ownership disposition; no runtime fix is claimed."
+}

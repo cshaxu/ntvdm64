@@ -16,9 +16,11 @@
  * DIVERGENCE: retain only the unchanged same-address _USERK_ REBASE
  * definitions; omit unrelated RTL declarations and cross-address forms.
  * Selection describes pointer representation, not kernel execution. */
+#line 15
 #ifndef _USERRTL_
 #define _USERRTL_
 
+#line 71
 #define REBASEALWAYS(p, elem) ((p)->elem)
 #define REBASEPTR(obj, p) (p)
 #define REBASE(p, elem) ((p)->elem)
@@ -28,8 +30,10 @@
 #ifdef _USERK_
 #line 31
 #error T476-S1: branch not selected by product build
+#line 35
 #else
 #line 36
+#line 40
 #endif
 #line 41
 
@@ -51,6 +55,7 @@
 #error T476-S1: branch not selected by product build
 #else
 #line 52
+#line 53
 #endif
 #line 54
 
@@ -58,6 +63,7 @@
 #ifdef _USERK_
 #line 69
 #error T476-S1: branch not selected by product build
+#line 76
 #else
 #line 78
 #ifndef WOW
@@ -65,13 +71,16 @@
 #if 0
 #line 80
 #error Excluded original disabled user RTL rebase branch
+#line 85
 #else
 #line 86
+#line 88
 #endif
 #line 89
 #else
 #line 90
 #error T476-S1: branch not selected by product build
+#line 92
 #endif
 #line 107
 #endif /* _USERK_ */
@@ -81,6 +90,7 @@
 #ifdef FE_SB
 #line 119
 #error Excluded unsupported original FE_SB user RTL profile
+#line 129
 #endif
 #line 130
 
@@ -88,8 +98,10 @@
 #ifdef _USERK_
 #line 132
 #error T476-S1: branch not selected by product build
+#line 148
 #else
 #line 149
+#line 168
 #endif
 #line 169
 
@@ -97,8 +109,10 @@
 #ifdef _USERK_
 #line 178
 #error T476-S1: branch not selected by product build
+#line 216
 #else
 #line 217
+#line 242
 #endif
 #line 243
 

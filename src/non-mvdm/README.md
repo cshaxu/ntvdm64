@@ -2533,3 +2533,5 @@ OPENNT-HOST-272: restore original logical locations within retained native-dialo
 OPENNT-HOST-273: restore original logical positions of retained function entries. Evidence: artifacts/mvdm-audit/s13-r1420-function-lines.json. Remaining paths under review; cached x86/x64 build passed; ten images published, eight identical and two timestamp-only.
 
 OPENNT-HOST-274: restore original condition-directive and retained-source diagnostic line mappings in `windows/core/ntuser/client/ntstubs.c`, `windows/core/ntuser/client/wow.c`, `windows/core/ntuser/inc/ntsend.h`, `windows/core/ntuser/kernel/getset.c`, and `windows/core/ntuser/rtl/{draw,winmgr,wow}.c`. Existing selected branches and registered adaptations remain; T476 S2 records retain file review and grouped verification.
+
+OPENNT-HOST-275: restore original conditional and selected same-address rebase macro line mappings in `windows/core/ntuser/rtl/userrtl.h`, preserving OPENNT-HOST-104 behavior. T476 S2 records retain the review and grouped verification.

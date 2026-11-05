@@ -13,9 +13,11 @@
  */
 
 /* SccsID[]="@(#)host_cpu.h     1.22 4/15/91 Copyright Insignia Solutions Ltd."; */
+#line 17
 #ifdef CPU_30_STYLE
 #line 18
 #error Excluded original conditional branch
+#line 112
 #else /* CPU_30_STYLE */
 #line 113
 
@@ -38,6 +40,7 @@ typedef union
         {                               /* as two bytes */
         /* DIVERGENCE: word port I/O overlays X with these host-order bytes. */
 #ifdef LITTLEND
+#line 130
         half_word low;
 #line 129
         half_word high;
@@ -82,6 +85,7 @@ typedef union
 #ifdef A2CPU
 #line 164
 #error Excluded unsupported original A2CPU register carrier
+#line 178
 #endif
 #line 179
 
@@ -92,28 +96,33 @@ typedef union
 #ifdef A2CPU
 #line 189
 #error Excluded unsupported original A2CPU register carrier
+#line 193
 #endif
 #line 194
 #line 229
 #ifdef CCPU
 #line 230
+#line 246
 #endif
 #line 247
 #line 248
 #ifdef A2CPU
 #line 249
 #error Excluded unsupported original A2CPU register carrier
+#line 255
 #endif
 #line 256
 #line 290
 #ifdef CCPU
 #line 291
+#line 306
 #endif
 #line 307
 #line 308
 #ifdef A2CPU
 #line 309
 #error Excluded unsupported original A2CPU register carrier
+#line 314
 #endif
 #line 315
 #endif /* EGATEST */
@@ -122,6 +131,7 @@ typedef union
 #line 357
 #ifdef CCPU
 #line 358
+#line 373
 #endif
 #line 374
 
@@ -129,12 +139,14 @@ typedef union
 #ifdef A2CPU
 #line 376
 #error Excluded unsupported original A2CPU register carrier
+#line 382
 #endif
 #line 383
 
 #line 419
 #ifdef CCPU
 #line 420
+#line 435
 #endif
 #line 436
 
@@ -142,6 +154,7 @@ typedef union
 #ifdef A2CPU
 #line 438
 #error Excluded unsupported original A2CPU register carrier
+#line 443
 #endif
 #line 444
 
@@ -149,7 +162,9 @@ typedef union
 #ifdef A2CPU
 #line 457
 #error Excluded unsupported original A2CPU register carrier
+#line 504
 #endif
 #line 505
+#line 506
 #endif /* CPU_30_STYLE */
 #line 507
