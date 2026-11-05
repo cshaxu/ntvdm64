@@ -316,3 +316,7 @@ The [INT 21 translation review](../../../artifacts/mvdm-audit/t476-s2-int21map-r
 ### DPMI mode-switch source review
 
 The [mode-switch review](../../../artifacts/mvdm-audit/t476-s2-modesw-review.json) completes `modesw.c` for conditional and diagnostic-line scope. The full original/current diff, S1 branch dispositions, registered CPU40 transition changes and current selected preprocessor output were checked. The actual output confirms original anchors for both transition functions, including relocated MSW/CS operations and closing braces; project-added statements that happen to share original logical positions are not counted as original matches. This review does not independently prove CPU40 runtime equivalence. Total: **828 of 1,055 complete; 227 open**.
+
+## Reused strict file reviews
+
+A further 44 files have hash-matched recursive original-structure and logical-line reviews corroborated by the S1 per-arm ledger and compiler line observations, with no static line leads. Their identities and evidence links are recorded in [the batch](../../../artifacts/mvdm-audit/t476-s2-strict-reused-batch.json). This brings the checklist to 872 reviewed and 183 pending. These records do not establish behavior in unobserved configurations or certify local runtime behavior. No source or product binary changed in this batch.
