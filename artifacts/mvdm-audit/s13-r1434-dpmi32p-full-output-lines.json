@@ -1,0 +1,899 @@
+{
+  "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+  "current_sha256": "3f0dd6648c072517cc51e552c4357d0558112c891b6961ca24bab8aeb5859b9e",
+  "original_sha256": "c5734d7842c34ae436cd12a5b52ad76d4fab88940a64f3af7e5fdc6fbc92e4a9",
+  "preprocessed_sha256": "497a0a189f97041d02bf66252f0ffdcfbe15555dfdf3a75d1cf437760eb59d4b",
+  "method": "Classify each nonblank selected header output line in successful actual x86 production preprocessing against original at the compiler-reported logical line. Explicitly classify known macro expansions and registered local declarations. This is one production context; other contexts and branch semantics require their separate evidence.",
+  "counts": {
+    "exact-original-line": 81,
+    "macro-expansion": 1,
+    "registered-local-cpu40-declaration": 12,
+    "void-macro-expansion": 46,
+    "registered-local-wow-declaration": 6,
+    "registered-cpu40-symbol-mapping": 1
+  },
+  "records": [
+    {
+      "line": 77,
+      "output": "typedef struct _DpmiMemInfo {",
+      "original_at_line": "typedef struct _DpmiMemInfo {",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 78,
+      "output": "DWORD LargestFree;",
+      "original_at_line": "DWORD LargestFree;",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 79,
+      "output": "DWORD MaxUnlocked;",
+      "original_at_line": "DWORD MaxUnlocked;",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 80,
+      "output": "DWORD MaxLocked;",
+      "original_at_line": "DWORD MaxLocked;",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 81,
+      "output": "DWORD AddressSpaceSize;",
+      "original_at_line": "DWORD AddressSpaceSize;",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 82,
+      "output": "DWORD UnlockedPages;",
+      "original_at_line": "DWORD UnlockedPages;",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 83,
+      "output": "DWORD FreePages;",
+      "original_at_line": "DWORD FreePages;",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 84,
+      "output": "DWORD PhysicalPages;",
+      "original_at_line": "DWORD PhysicalPages;",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 85,
+      "output": "DWORD FreeAddressSpace;",
+      "original_at_line": "DWORD FreeAddressSpace;",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 86,
+      "output": "DWORD PageFileSize;",
+      "original_at_line": "DWORD PageFileSize;",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 87,
+      "output": "} DPMIMEMINFO, *PDPMIMEMINFO;",
+      "original_at_line": "} DPMIMEMINFO, *PDPMIMEMINFO;",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 93,
+      "output": "extern USHORT CurrentPSPSelector;",
+      "original_at_line": "extern USHORT CurrentPSPSelector;",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 98,
+      "output": "extern ULONG FlatAddress[0x1FFF];",
+      "original_at_line": "extern ULONG FlatAddress[LDT_SIZE];",
+      "classification": "macro-expansion"
+    },
+    {
+      "line": 104,
+      "output": "extern ULONG Index;",
+      "original_at_line": "extern ULONG Index;",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 110,
+      "output": "extern USHORT LockedPMStackSel;",
+      "original_at_line": "extern USHORT LockedPMStackSel;",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 111,
+      "output": "extern ULONG LockedPMStackCount;",
+      "original_at_line": "extern ULONG LockedPMStackCount;",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 112,
+      "output": "extern ULONG PMLockOrigEIP;",
+      "original_at_line": "extern ULONG PMLockOrigEIP;",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 113,
+      "output": "extern ULONG PMLockOrigSS;",
+      "original_at_line": "extern ULONG PMLockOrigSS;",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 114,
+      "output": "extern ULONG PMLockOrigESP;",
+      "original_at_line": "extern ULONG PMLockOrigESP;",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 116,
+      "output": "extern ULONG DosxFaultHandlerIret;",
+      "original_at_line": "extern ULONG DosxFaultHandlerIret;",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 117,
+      "output": "extern ULONG DosxFaultHandlerIretd;",
+      "original_at_line": "extern ULONG DosxFaultHandlerIretd;",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 118,
+      "output": "extern ULONG DosxIntHandlerIret;",
+      "original_at_line": "extern ULONG DosxIntHandlerIret;",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 119,
+      "output": "extern ULONG DosxIntHandlerIretd;",
+      "original_at_line": "extern ULONG DosxIntHandlerIretd;",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 121,
+      "output": "extern ULONG Cpu40PmStackInfoAddress;",
+      "original_at_line": "extern ULONG DosxIret;",
+      "classification": "registered-local-cpu40-declaration"
+    },
+    {
+      "line": 122,
+      "output": "extern ULONG Cpu40GdtShadowAddress;",
+      "original_at_line": "extern ULONG DosxIretd;",
+      "classification": "registered-local-cpu40-declaration"
+    },
+    {
+      "line": 123,
+      "output": "extern ULONG Cpu40LdtShadowAddress;",
+      "original_at_line": "",
+      "classification": "registered-local-cpu40-declaration"
+    },
+    {
+      "line": 125,
+      "output": "ULONG",
+      "original_at_line": "// Internal functions",
+      "classification": "registered-local-cpu40-declaration"
+    },
+    {
+      "line": 126,
+      "output": "DpmiCpu40DescriptorShadowAddress(",
+      "original_at_line": "//",
+      "classification": "registered-local-cpu40-declaration"
+    },
+    {
+      "line": 127,
+      "output": "USHORT Selector",
+      "original_at_line": "",
+      "classification": "registered-local-cpu40-declaration"
+    },
+    {
+      "line": 128,
+      "output": ");",
+      "original_at_line": "VOID",
+      "classification": "registered-local-cpu40-declaration"
+    },
+    {
+      "line": 130,
+      "output": "BOOL",
+      "original_at_line": "VOID",
+      "classification": "registered-local-cpu40-declaration"
+    },
+    {
+      "line": 131,
+      "output": "DpmiCpu40GetDosxIdtDescriptor(",
+      "original_at_line": ");",
+      "classification": "registered-local-cpu40-declaration"
+    },
+    {
+      "line": 132,
+      "output": "PULONG Base,",
+      "original_at_line": "",
+      "classification": "registered-local-cpu40-declaration"
+    },
+    {
+      "line": 133,
+      "output": "PUSHORT Limit",
+      "original_at_line": "VOID",
+      "classification": "registered-local-cpu40-declaration"
+    },
+    {
+      "line": 134,
+      "output": ");",
+      "original_at_line": "DpmiSetDescriptorEntry(",
+      "classification": "registered-local-cpu40-declaration"
+    },
+    {
+      "line": 121,
+      "output": "extern ULONG DosxIret;",
+      "original_at_line": "extern ULONG DosxIret;",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 122,
+      "output": "extern ULONG DosxIretd;",
+      "original_at_line": "extern ULONG DosxIretd;",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 128,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 129,
+      "output": "DpmiInitApp(",
+      "original_at_line": "DpmiInitApp(",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 130,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 131,
+      "output": ");",
+      "original_at_line": ");",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 133,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 134,
+      "output": "DpmiSetDescriptorEntry(",
+      "original_at_line": "DpmiSetDescriptorEntry(",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 135,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 136,
+      "output": ");",
+      "original_at_line": ");",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 138,
+      "output": "NTSTATUS",
+      "original_at_line": "VOID",
+      "classification": "registered-local-wow-declaration"
+    },
+    {
+      "line": 139,
+      "output": "DpmiSetWowLdtEntry(",
+      "original_at_line": "DpmiGetFastBopEntry(",
+      "classification": "registered-local-wow-declaration"
+    },
+    {
+      "line": 140,
+      "output": "ULONG Selector,",
+      "original_at_line": "VOID",
+      "classification": "registered-local-wow-declaration"
+    },
+    {
+      "line": 141,
+      "output": "ULONG EntryLow,",
+      "original_at_line": ");",
+      "classification": "registered-local-wow-declaration"
+    },
+    {
+      "line": 142,
+      "output": "ULONG EntryHigh",
+      "original_at_line": "",
+      "classification": "registered-local-wow-declaration"
+    },
+    {
+      "line": 143,
+      "output": ");",
+      "original_at_line": "VOID",
+      "classification": "registered-local-wow-declaration"
+    },
+    {
+      "line": 138,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 139,
+      "output": "DpmiGetFastBopEntry(",
+      "original_at_line": "DpmiGetFastBopEntry(",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 140,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 141,
+      "output": ");",
+      "original_at_line": ");",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 143,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 144,
+      "output": "DpmiGetMemoryInfo(",
+      "original_at_line": "DpmiGetMemoryInfo(",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 145,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 146,
+      "output": ");",
+      "original_at_line": ");",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 148,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 149,
+      "output": "DpmiDpmiInUse(",
+      "original_at_line": "DpmiDpmiInUse(",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 150,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 151,
+      "output": ");",
+      "original_at_line": ");",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 153,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 154,
+      "output": "DpmiDpmiNoLongerInUse(",
+      "original_at_line": "DpmiDpmiNoLongerInUse(",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 155,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 156,
+      "output": ");",
+      "original_at_line": ");",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 158,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 159,
+      "output": "DpmiFreeAppXmem(",
+      "original_at_line": "DpmiFreeAppXmem(",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 160,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 161,
+      "output": ");",
+      "original_at_line": ");",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 163,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 164,
+      "output": "DpmiInitDosx(",
+      "original_at_line": "DpmiInitDosx(",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 165,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 166,
+      "output": ");",
+      "original_at_line": ");",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 168,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 169,
+      "output": "DpmiPassPmStackInfo(",
+      "original_at_line": "DpmiPassPmStackInfo(",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 170,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 171,
+      "output": ");",
+      "original_at_line": ");",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 173,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 174,
+      "output": "DpmiAllocateXmem(",
+      "original_at_line": "DpmiAllocateXmem(",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 175,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 176,
+      "output": ");",
+      "original_at_line": ");",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 178,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 179,
+      "output": "DpmiFreeXmem(",
+      "original_at_line": "DpmiFreeXmem(",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 180,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 181,
+      "output": ");",
+      "original_at_line": ");",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 183,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 184,
+      "output": "DpmiReallocateXmem(",
+      "original_at_line": "DpmiReallocateXmem(",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 185,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 186,
+      "output": ");",
+      "original_at_line": ");",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 188,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 189,
+      "output": "DpmiFreeAllXmem(",
+      "original_at_line": "DpmiFreeAllXmem(",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 190,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 191,
+      "output": ");",
+      "original_at_line": ");",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 193,
+      "output": "NTSTATUS",
+      "original_at_line": "NTSTATUS",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 194,
+      "output": "DpmiAllocateVirtualMemory(",
+      "original_at_line": "DpmiAllocateVirtualMemory(",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 195,
+      "output": "PVOID *Address,",
+      "original_at_line": "PVOID *Address,",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 196,
+      "output": "PULONG Size",
+      "original_at_line": "PULONG Size",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 197,
+      "output": ");",
+      "original_at_line": ");",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 199,
+      "output": "NTSTATUS",
+      "original_at_line": "NTSTATUS",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 200,
+      "output": "DpmiFreeVirtualMemory(",
+      "original_at_line": "DpmiFreeVirtualMemory(",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 201,
+      "output": "PVOID *Address,",
+      "original_at_line": "PVOID *Address,",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 202,
+      "output": "PULONG Size",
+      "original_at_line": "PULONG Size",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 203,
+      "output": ");",
+      "original_at_line": ");",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 205,
+      "output": "BOOL",
+      "original_at_line": "BOOL",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 206,
+      "output": "DpmiReallocateVirtualMemory(",
+      "original_at_line": "DpmiReallocateVirtualMemory(",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 207,
+      "output": "PVOID OldAddress,",
+      "original_at_line": "PVOID OldAddress,",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 208,
+      "output": "ULONG OldSize,",
+      "original_at_line": "ULONG OldSize,",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 209,
+      "output": "PVOID *NewAddress,",
+      "original_at_line": "PVOID *NewAddress,",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 210,
+      "output": "PULONG NewSize",
+      "original_at_line": "PULONG NewSize",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 211,
+      "output": ");",
+      "original_at_line": ");",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 213,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 214,
+      "output": "DpmiPassTableAddress(",
+      "original_at_line": "DpmiPassTableAddress(",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 215,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 216,
+      "output": ");",
+      "original_at_line": ");",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 218,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 219,
+      "output": "DpmiVcdPmSvcCall32(",
+      "original_at_line": "DpmiVcdPmSvcCall32(",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 220,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 221,
+      "output": ");",
+      "original_at_line": ");",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 223,
+      "output": "void DpmiCpu40SwitchToProtectedMode(",
+      "original_at_line": "VOID switch_to_protected_mode(",
+      "classification": "registered-cpu40-symbol-mapping"
+    },
+    {
+      "line": 224,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 225,
+      "output": ");",
+      "original_at_line": ");",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 227,
+      "output": "void DpmiSetProtectedmodeInterrupt(",
+      "original_at_line": "VOID DpmiSetProtectedmodeInterrupt(",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 228,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 229,
+      "output": ");",
+      "original_at_line": ");",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 231,
+      "output": "void DpmiSetFaultHandler(",
+      "original_at_line": "VOID DpmiSetFaultHandler(",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 232,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 233,
+      "output": ");",
+      "original_at_line": ");",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 235,
+      "output": "void DpmiFaultHandlerIret16(",
+      "original_at_line": "VOID DpmiFaultHandlerIret16(",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 236,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 237,
+      "output": ");",
+      "original_at_line": ");",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 239,
+      "output": "void DpmiFaultHandlerIret32(",
+      "original_at_line": "VOID DpmiFaultHandlerIret32(",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 240,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 241,
+      "output": ");",
+      "original_at_line": ");",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 243,
+      "output": "void DpmiIntHandlerIret16(",
+      "original_at_line": "VOID DpmiIntHandlerIret16(",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 244,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 245,
+      "output": ");",
+      "original_at_line": ");",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 247,
+      "output": "void DpmiIntHandlerIret32(",
+      "original_at_line": "VOID DpmiIntHandlerIret32(",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 248,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 249,
+      "output": ");",
+      "original_at_line": ");",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 251,
+      "output": "void DpmiUnhandledExceptionHandler(",
+      "original_at_line": "VOID DpmiUnhandledExceptionHandler(",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 252,
+      "output": "void",
+      "original_at_line": "VOID",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 253,
+      "output": ");",
+      "original_at_line": ");",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 255,
+      "output": "void GetFastBopEntryAddress(",
+      "original_at_line": "VOID GetFastBopEntryAddress(",
+      "classification": "void-macro-expansion"
+    },
+    {
+      "line": 256,
+      "output": "PCONTEXT VdmContext",
+      "original_at_line": "PCONTEXT VdmContext",
+      "classification": "exact-original-line"
+    },
+    {
+      "line": 257,
+      "output": ");",
+      "original_at_line": ");",
+      "classification": "exact-original-line"
+    }
+  ]
+}
