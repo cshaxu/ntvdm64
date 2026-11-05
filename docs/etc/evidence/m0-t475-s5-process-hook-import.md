@@ -550,3 +550,8 @@ again rejected Detours; the identity audit confirmed 22 byte-exact imported
 files and the one documented local helper fix; and all 971 selected compiler
 commands were C-only. These checks do not prove every application's behavior,
 Win16 editing or save, or general late-hook new-thread and removal safety.
+
+The P14 package subsequently passed the existing private-desktop WRITE
+lifecycle probe (`write-lifecycle/current.process`, exit 0): both the initial
+launch and clean restart reached the visible WRITE window, accepted normal
+close and returned exit code 0. This probe does not edit or save a document.

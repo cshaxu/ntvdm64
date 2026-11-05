@@ -113,8 +113,9 @@ compiler. Product build, profile checks and Control passed; local package
 `8e4a9c29-e13d-4bd3-979a-4e0ed94e1d52` has ten verified hashes. Subsequent
 Full selected gates passed on that package against the P2 baseline; four-pair
 payload-only and missing-DLL tests also passed. External DOS4GW/NESticle,
-Win16 editing and save, and general late-hook concurrency remain unverified;
-no untested semantic equivalence is assumed. Prior [S4 evidence](../etc/evidence/m0-t475-s4-nthook-dependency-cleanup.md),
+Win16 editing and save, and general late-hook concurrency remain unverified.
+WRITE normal close and clean restart passed in a subsequent two-round probe.
+No untested semantic equivalence is assumed. Prior [S4 evidence](../etc/evidence/m0-t475-s4-nthook-dependency-cleanup.md),
 [S3 evidence](../etc/evidence/m0-t475-s3-worker-ntvdm-remediation.md),
 [S2 inventory](../etc/evidence/m0-t475-s2-component-dependency-inventory.md),
 and [S1 evidence](../etc/evidence/m0-t475-s1-win32-rpc.md) retain the preceding
