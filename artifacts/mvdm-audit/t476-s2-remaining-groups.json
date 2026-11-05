@@ -661,7 +661,7 @@
     {
       "path": "src/mvdm-host/wow32/wole2.c",
       "group": "C: matching line leads",
-      "current_sha256": "54366e8dd55e18486094245d4d46fbc686a1a67c3f53e03aa3ac291278f9f146",
+      "current_sha256": "78d49c329057a5869be53c7e0c153668927f60607b30a11c07b93ad5465b093e",
       "original_sha256": "85fab0277735cff414d0f339557f110bf1501cbbe0f933dcf95232d9a61fd5e9",
       "s1_hits": 1,
       "prior_exclusions": 2,
@@ -676,7 +676,7 @@
       "raw_matching_line_leads": 31,
       "sampled_compiler_contexts": 1,
       "original_lines": 371,
-      "status": "pending whole-file audit",
+      "status": "reviewed; batch19 published, see per-file evidence",
       "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
     },
     {
@@ -886,7 +886,7 @@
       "raw_matching_line_leads": 0,
       "sampled_compiler_contexts": 0,
       "original_lines": 1105,
-      "status": "pending whole-file audit; erroneous line candidate withdrawn",
+      "status": "reviewed; evidence t476-s2-nturtl-review.json",
       "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
     },
     {
@@ -976,7 +976,7 @@
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
       "group": "A: changed evidence or unhit arms",
-      "current_sha256": "7175d1ce3e6d3cc10eaa1ee9845bd51df921d62a3133ca125e2e3e1736f7cefd",
+      "current_sha256": "a546c5469edf64976220c1a2b7d7202de8c2d49093f6670b8610a3a759f91b1e",
       "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
       "s1_hits": 14,
       "prior_exclusions": 16,
@@ -991,7 +991,7 @@
       "raw_matching_line_leads": 11,
       "sampled_compiler_contexts": 5,
       "original_lines": 2261,
-      "status": "pending whole-file audit",
+      "status": "pending empty-shell original-function disposition; line fix published",
       "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
     },
     {
@@ -1033,13 +1033,13 @@
       "raw_matching_line_leads": 0,
       "sampled_compiler_contexts": 1,
       "original_lines": 601,
-      "status": "pending whole-file audit",
+      "status": "reviewed; evidence t476-s2-client-winmgr-review.json",
       "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
       "group": "C: matching line leads",
-      "current_sha256": "bfd2af514bb86619de9c20af416898b65e52ce4a8db8885135d7d4f9fb3a2b94",
+      "current_sha256": "6839fae1ee1a6914d1b7704f31206fa752cd0074237cacc0eda359973a1fc17f",
       "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
       "s1_hits": 10,
       "prior_exclusions": 12,
@@ -1054,7 +1054,7 @@
       "raw_matching_line_leads": 7,
       "sampled_compiler_contexts": 1,
       "original_lines": 1076,
-      "status": "pending whole-file audit",
+      "status": "pending empty-shell original-function disposition; line fix published",
       "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
     },
     {
@@ -1081,7 +1081,7 @@
     {
       "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
       "group": "D: full-file review with no automated leads",
-      "current_sha256": "9b84840699856115faeee87618c4c79ccdb0ae45463619aab79882a5d5aec138",
+      "current_sha256": "18d5fd5f09417d33e0ee3f4be294707ec1bee76c7bd3e3b63c97beaafa22cc6a",
       "original_sha256": "b708f1fee46e93735c4c931d556e16daa9679e6352d72620904d18ad21396abf",
       "s1_hits": 2,
       "prior_exclusions": 0,
@@ -1096,7 +1096,7 @@
       "raw_matching_line_leads": 0,
       "sampled_compiler_contexts": 0,
       "original_lines": 286,
-      "status": "pending whole-file audit",
+      "status": "reviewed; batch19 published, see per-file evidence",
       "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
     },
     {
@@ -1123,7 +1123,7 @@
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
       "group": "A: changed evidence or unhit arms",
-      "current_sha256": "86455addef0d7c1e23e876e288e80d1eba31770c49fd15f5b35b4143e29b1a9d",
+      "current_sha256": "c341f93751ac817fdedb508b94ab242f81fdffd0ffca1bc21a24fe6cc89ea3c0",
       "original_sha256": "f0d22e4285e8b33b873854913a11587c67d78e50e1f5db28ec89ef8b6ff06d3d",
       "s1_hits": 1,
       "prior_exclusions": 6,
@@ -1138,7 +1138,7 @@
       "raw_matching_line_leads": 1,
       "sampled_compiler_contexts": 1,
       "original_lines": 860,
-      "status": "pending whole-file audit",
+      "status": "reviewed; batch19 published, see per-file evidence",
       "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
     },
     {
@@ -1333,7 +1333,7 @@
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
       "group": "D: full-file review with no automated leads",
-      "current_sha256": "c42964ed702de00fc96322d76922bca0e34bad7ae7b306885ecd5b36de5b7988",
+      "current_sha256": "838177ce4be35707885d7ba54653400e23e86e91c840529e69925f279e148351",
       "original_sha256": "7491e5b3331de8cb7a2189b8efbe91f56076f80a08338bf816d793e80a4faf76",
       "s1_hits": 2,
       "prior_exclusions": 1,
@@ -1348,7 +1348,7 @@
       "raw_matching_line_leads": 0,
       "sampled_compiler_contexts": 1,
       "original_lines": 1231,
-      "status": "pending whole-file audit",
+      "status": "pending empty-shell original-function disposition; line fix published",
       "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
     },
     {
@@ -1390,7 +1390,7 @@
       "raw_matching_line_leads": 0,
       "sampled_compiler_contexts": 1,
       "original_lines": 386,
-      "status": "pending whole-file audit",
+      "status": "reviewed; evidence t476-s2-rtl-getset-review.json",
       "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
     },
     {
@@ -1417,7 +1417,7 @@
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
       "group": "D: full-file review with no automated leads",
-      "current_sha256": "b33e839ce75cb2aabf205d786097de36c693b9f09e497899b8dc71880d2acea0",
+      "current_sha256": "7d1f0f4331109602568c7182111482227bdb446597c906c0f69d4932b54523c4",
       "original_sha256": "d7e87476cc3e703c94b88d53b9a0761642b284a6776c0152738daf4c74290d2b",
       "s1_hits": 3,
       "prior_exclusions": 0,
@@ -1432,13 +1432,13 @@
       "raw_matching_line_leads": 0,
       "sampled_compiler_contexts": 2,
       "original_lines": 712,
-      "status": "pending whole-file audit",
+      "status": "reviewed; batch19 published, see per-file evidence",
       "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
       "group": "D: full-file review with no automated leads",
-      "current_sha256": "99bdd54f34825cce6b37e43c42e7b1f58a89042bff210b84ed3dbd37ae1d1b5a",
+      "current_sha256": "9b2c8b3e68218c69f6cd9449aa1185bbeb1e6bbae4f9a36f31e833092b0adf32",
       "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
       "s1_hits": 7,
       "prior_exclusions": 6,
@@ -1453,16 +1453,16 @@
       "raw_matching_line_leads": 0,
       "sampled_compiler_contexts": 1,
       "original_lines": 844,
-      "status": "pending whole-file audit",
+      "status": "reviewed; batch19 published, see per-file evidence",
       "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
     }
   ],
   "method": "Hash-checked prior S1 branch ledger, source/original condition comparison and raw line-match triage; these are leads, not exclusion or completion proofs.",
-  "pending_count": 58,
+  "pending_count": 50,
   "pending_groups": {
     "B: original structure leads": 4,
-    "C: matching line leads": 32,
-    "A: changed evidence or unhit arms": 16,
-    "D: full-file review with no automated leads": 6
+    "C: matching line leads": 31,
+    "A: changed evidence or unhit arms": 14,
+    "D: full-file review with no automated leads": 1
   }
 }

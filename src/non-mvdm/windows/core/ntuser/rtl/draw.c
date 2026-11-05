@@ -136,8 +136,10 @@ BOOL DrawFrame(
 #ifdef WINDOWS_ME
 #line 681
 #error Excluded unsupported original WINDOWS_ME branch
+#line 683
 #else
 #line 684
+#line 685
 #endif
 #line 686
 

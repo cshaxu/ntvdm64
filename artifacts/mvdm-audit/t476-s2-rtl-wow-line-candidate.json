@@ -1,0 +1,17 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+  "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+  "previous_sha256": "99bdd54f34825cce6b37e43c42e7b1f58a89042bff210b84ed3dbd37ae1d1b5a",
+  "current_sha256": "9b2c8b3e68218c69f6cd9449aa1185bbeb1e6bbae4f9a36f31e833092b0adf32",
+  "condition_structure": "all original matched condition groups retained; original WOW16, private kernel and DEBUG bodies excluded; selected branches retained",
+  "corrected_original_lines": [
+    108,
+    144,
+    150,
+    274,
+    785,
+    798
+  ],
+  "verification": "five retained original function bodies matched including line positions; previous S1 hit contexts retained",
+  "status": "validated: LF-based original condition and line comparison, grouped cached build, product comparison and publication"
+}

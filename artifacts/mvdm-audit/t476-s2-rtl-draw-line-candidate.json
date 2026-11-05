@@ -1,0 +1,13 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+  "original_sha256": "7491e5b3331de8cb7a2189b8efbe91f56076f80a08338bf816d793e80a4faf76",
+  "previous_sha256": "c42964ed702de00fc96322d76922bca0e34bad7ae7b306885ecd5b36de5b7988",
+  "current_sha256": "838177ce4be35707885d7ba54653400e23e86e91c840529e69925f279e148351",
+  "condition_structure": "original WINDOWS_ME conditional framework preserved; original function containing it is omitted from this source subset",
+  "corrected_original_lines": [
+    683,
+    685
+  ],
+  "status": "anchor fixes built and published; empty-shell original-function disposition remains open",
+  "limit": "S1 else hit is an empty shell and does not prove original DrawFrameControl was reached or its semantics preserved."
+}

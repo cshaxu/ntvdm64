@@ -1,0 +1,14 @@
+{
+  "path": "src/mvdm-host/wow32/wole2.c",
+  "original_sha256": "85fab0277735cff414d0f339557f110bf1501cbbe0f933dcf95232d9a61fd5e9",
+  "previous_sha256": "54366e8dd55e18486094245d4d46fbc686a1a67c3f53e03aa3ac291278f9f146",
+  "current_sha256": "78d49c329057a5869be53c7e0c153668927f60607b30a11c07b93ad5465b093e",
+  "condition_structure": "both original DBG groups retained and disabled; local status compatibility guard hit; selected process-list code retained",
+  "corrected_original_lines": [
+    19,
+    118,
+    323
+  ],
+  "verification": "zero mismatches across all matching nonblank original lines using LF; registered DIV-450 behavior retained",
+  "status": "validated: LF-based original condition and line comparison, grouped cached build, product comparison and publication"
+}

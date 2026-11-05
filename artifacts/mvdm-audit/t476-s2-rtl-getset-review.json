@@ -1,0 +1,43 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+  "source_sha256": "472394e41f56144d855c82e46fedc8df2ed8b14a99a939b59714e7ce1f777ded",
+  "original_sha256": "4a2cb2067f5dd776676d7f808f40f6468082db018e16bcf9a77daf00bddb34c9",
+  "original_lines_matched": 152,
+  "original_condition": [
+    {
+      "line": 139,
+      "logical_line": 139,
+      "directive": "ifndef",
+      "expression": "_USERK_",
+      "parent": null,
+      "group": 0,
+      "body_line_marker": null,
+      "excluded": false
+    }
+  ],
+  "selected_local_alternatives": "three S1 else arms restored and verified by original-getset fixture in batch16",
+  "compiler_witnesses": [
+    {
+      "line": 28,
+      "text": "DWORD _GetWindowLong("
+    },
+    {
+      "line": 57,
+      "text": "dwProc = (DWORD)(((PDIALOG)pwnd)->pdlg)->lpfnDlg;"
+    },
+    {
+      "line": 78,
+      "text": "dwProc = cpd;"
+    },
+    {
+      "line": 91,
+      "text": "return (DWORD)((PDIALOG)pwnd)->resultWP;"
+    },
+    {
+      "line": 151,
+      "text": "return GetWindowData(pwnd, index, bAnsi);"
+    }
+  ],
+  "compiler_output_sha256": "0dbb1ec74324a1c95af06e41e0ab02be60b265c7fabf67744c857c4587eeb0ee",
+  "limit": "Original GetWindowData and other functions outside the retained _GetWindowLong subset are omitted; this audit does not claim whole original USER behavior."
+}

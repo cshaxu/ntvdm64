@@ -34,6 +34,7 @@ DWORD xxxSetWindowLong(
 #ifdef DEBUG
 #line 269
 #error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
+#line 272
 #endif
 #line 273
 
@@ -167,6 +168,7 @@ SetData:
 #ifdef DEBUG
 #line 760
 #error Excluded unsupported original DEBUG branch
+#line 769
 #endif
 #line 770
 
@@ -181,6 +183,7 @@ SetData:
 #ifdef DEBUG
 #line 782
 #error Excluded unsupported original DEBUG branch
+#line 793
 #endif // DEBUG
 #line 794
 

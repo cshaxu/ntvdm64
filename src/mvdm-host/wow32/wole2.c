@@ -20,6 +20,7 @@ MODNAME(wole.c);
 #define STATUS_INFO_LENGTH_MISMATCH ((NTSTATUS)0xC0000004L)
 #endif
 
+#line 19
 /*
 ** Under OLE 2.0, the IMessageFilter interface passes HTASKs/THREADIDs.  It
 ** passes HTASKs in the 16-bit world, and THREADIDs in the 32-bit world. The
@@ -124,6 +125,7 @@ BOOL GetThreadIDHTASKALIAS(
 #if DBG
 #line 116
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 118
 #endif
 #line 119
         return( FALSE );
@@ -345,6 +347,7 @@ UINT GetHtaskAliasProcessName(
      * snapshot and unbounded strcpy with one transient, exact-size query and
      * a caller-bounded copy.  A changing process list is an unavailable
      * observation, not a polling/retry protocol. */
+#line 323
     status = NtQuerySystemInformation(
                 SystemProcessInformation,
                 NULL,

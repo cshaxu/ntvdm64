@@ -1,0 +1,27 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+  "source_sha256": "95d079adb6003257491878a40822c0c52a994217d5e21dce11b93f4ba838430c",
+  "original_sha256": "26f0174e6a0db53d942506cbdc12efbfebc34a943d780170e7bf9d95775514a4",
+  "original_conditions": 0,
+  "local_condition": [
+    {
+      "file": 1022,
+      "index": 0,
+      "line": 8,
+      "directive": "ifdef",
+      "expression": "WOW_ORIGINAL_EDIT_CLIENT",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        620
+      ],
+      "outermost_new_exclusion": false
+    }
+  ],
+  "retained_function": "_AdjustWindowRectEx",
+  "original_line": 550,
+  "matching_body_lines": 52,
+  "compiler_witness": "BOOL _AdjustWindowRectEx at line 550",
+  "compiler_output_sha256": "1ae389a59007aabd0892f9f8051b43efe1b3de60dccff2b2aae7beb3dbb0443b",
+  "limit": "Other original functions are outside this retained subset; no claim that their behavior is implemented by this file."
+}

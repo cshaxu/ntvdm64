@@ -9,6 +9,7 @@
 #ifdef WOW
 #line 16
 #error Excluded unsupported original 16-bit WOW source branch
+#line 108
 #else
 #line 109
 
@@ -36,12 +37,14 @@
 #ifdef WOW
 #line 136
 #error Excluded unsupported original 16-bit WOW source branch
+#line 144
 #else
 #line 145
 #line 146
 #ifdef _USERK_
 #line 147
 #error Excluded unsupported original _USERK_ desktop validation
+#line 150
 #else
 #line 151
 
@@ -152,6 +155,7 @@ BOOL _GetClientRect(
 #ifdef WOW
 #line 782
 #error DIVERGENCE OPENNT-HOST-135: 16-bit WOW rectangle layout is not selected here; see mirror register.
+#line 785
 #else
 #line 786
         prc->left   = 0;
@@ -167,6 +171,7 @@ BOOL _GetClientRect(
 #ifdef WOW
 #line 795
 #error DIVERGENCE OPENNT-HOST-135: 16-bit WOW rectangle layout is not selected here; see mirror register.
+#line 798
 #else
 #line 799
         *prc = pwnd->rcClient;
@@ -185,6 +190,7 @@ BOOL _GetClientRect(
 #if defined(DEBUG) && !defined(_USERK_) && !defined(WOW)
 #line 263
 #error Unsupported DEBUG original branch
+#line 274
 #endif
 #line 275
 

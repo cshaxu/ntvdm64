@@ -1,0 +1,175 @@
+{
+  "witnesses": [
+    {
+      "context": "winmgr",
+      "file": "winmgr.c",
+      "output_sha256": "1e75d2521ae88690d88d6fde31bb241bdd816f9be58b1b061bf0b783fed78351",
+      "witnesses": [
+        {
+          "line": 613,
+          "symbol": "NeedsWindowEdge",
+          "output": "BOOL NeedsWindowEdge(DWORD dwStyle, DWORD dwExStyle, BOOL fNewApp)"
+        },
+        {
+          "line": 703,
+          "symbol": "GetTopLevelWindow",
+          "output": "PWND GetTopLevelWindow("
+        },
+        {
+          "line": 456,
+          "symbol": "IsVisible",
+          "output": "BOOL IsVisible("
+        },
+        {
+          "line": 432,
+          "symbol": "_IsDescendant",
+          "output": "BOOL _IsDescendant("
+        },
+        {
+          "line": 258,
+          "symbol": "_FChildVisible",
+          "output": "BOOL _FChildVisible("
+        }
+      ]
+    },
+    {
+      "context": "borders",
+      "file": "winmgr.c",
+      "output_sha256": "43f9bcb05339360adeb4674bd0f4d4e6d95f5a84acb3d3068d682713b0c68f5c",
+      "witnesses": [
+        {
+          "line": 501,
+          "symbol": "GetWindowBorders",
+          "output": "int GetWindowBorders(LONG lStyle, DWORD dwExStyle, BOOL fWindow, BOOL fClient)"
+        }
+      ]
+    },
+    {
+      "context": "wow",
+      "file": "wow.c",
+      "output_sha256": "f8a06c6a8cb85fdb616601b37bad8111ca33556fef87c87ad5daaca9366bca4d",
+      "witnesses": [
+        {
+          "line": 682,
+          "symbol": "_IsChild",
+          "output": "BOOL _IsChild("
+        },
+        {
+          "line": 749,
+          "symbol": "_ClientToScreen",
+          "output": "BOOL _ClientToScreen("
+        },
+        {
+          "line": 836,
+          "symbol": "_ScreenToClient",
+          "output": "BOOL _ScreenToClient("
+        },
+        {
+          "line": 716,
+          "symbol": "_IsWindowVisible",
+          "output": "BOOL _IsWindowVisible("
+        },
+        {
+          "line": 769,
+          "symbol": "_GetClientRect",
+          "output": "BOOL _GetClientRect("
+        }
+      ]
+    },
+    {
+      "context": "cwow",
+      "file": "wow.c",
+      "output_sha256": "0740a27295a1cf9083a873f8d755320f3d91fd593f7f621592df3f7b6d162082",
+      "witnesses": [
+        {
+          "line": 251,
+          "symbol": "_GetDlgItem",
+          "output": "PWND _GetDlgItem("
+        }
+      ]
+    },
+    {
+      "context": "stubs",
+      "file": "ntstubs.c",
+      "output_sha256": "f61f7865ac1a399bdbacacaa0a77c9df211ab5dd2e799d58793d82aec54e1648",
+      "witnesses": [
+        {
+          "line": 1291,
+          "symbol": "_DefSetText",
+          "output": "BOOL _DefSetText("
+        }
+      ]
+    },
+    {
+      "context": "setter",
+      "file": "getset.c",
+      "output_sha256": "3798450eae187d65cd6cf44a4df6269e5a79207464a042598e38d4826b9d4ee7",
+      "witnesses": [
+        {
+          "line": 256,
+          "symbol": "xxxSetWindowLong",
+          "output": "DWORD xxxSetWindowLong("
+        }
+      ]
+    },
+    {
+      "context": "ole",
+      "file": "wole2.c",
+      "output_sha256": "ee1ab8c22cb328a2d28116d20e08b8ea0c1562d3dd72ae33a99bb07eeb3279b2",
+      "witnesses": [
+        {
+          "line": 323,
+          "symbol": "NtQuerySystemInformation",
+          "output": "status = NtQuerySystemInformation("
+        },
+        {
+          "line": 323,
+          "symbol": "NtQuerySystemInformation",
+          "output": "status = NtQuerySystemInformation("
+        }
+      ]
+    },
+    {
+      "context": "brush",
+      "file": "ntstubs.c",
+      "output_sha256": "9a9df7b5ed2c70f48687fe13a5546afa185d173eccafcffb76a4950182790f5d",
+      "witnesses": [
+        {
+          "line": 623,
+          "symbol": "GetControlBrush",
+          "output": "HBRUSH GetControlBrush("
+        }
+      ]
+    },
+    {
+      "context": "color",
+      "file": "ntstubs.c",
+      "output_sha256": "e10acce73c58e7d5a147093333edfe84e49dd093e432e06c4401dd2c0efc0ac8",
+      "witnesses": [
+        {
+          "line": 641,
+          "symbol": "GetControlColor",
+          "output": "HBRUSH GetControlColor("
+        }
+      ]
+    },
+    {
+      "context": "setterclient",
+      "file": "ntstubs.c",
+      "output_sha256": "355551a9d312dcc67e8ec2791d521ab4defe4cea5491b871ec3259d7f3716e3e",
+      "witnesses": [
+        {
+          "line": 827,
+          "symbol": "_SetWindowLong",
+          "output": "LONG _SetWindowLong("
+        },
+        {
+          "line": 861,
+          "symbol": "dwOldLong = (LONG)",
+          "output": "dwOldLong = (LONG)(((PDIALOG)pwnd)->pdlg)->lpfnDlg;"
+        }
+      ]
+    }
+  ],
+  "scope": "actual x86 product preprocessing; inactive condition markers and macro-only headers are statically reviewed"
+}

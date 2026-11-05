@@ -37,6 +37,7 @@ BOOL _DefSetText(
 
 #ifdef WOW_ORIGINAL_CONTROL_BRUSH_CLIENT
 /* OPENNT-HOST-102: unchanged implicit-recipient client wrapper. */
+#line 623
 HBRUSH GetControlBrush(
     HWND hwnd,
     HDC hdc,
@@ -56,6 +57,7 @@ HBRUSH GetControlBrush(
 }
 
 #else
+#line 641
 HBRUSH GetControlColor(
     HWND hwndParent,
     HWND hwndCtl,
@@ -81,6 +83,7 @@ HBRUSH GetControlColor(
 #include "precomp.h"
 #pragma hdrstop
 
+#line 827
 LONG _SetWindowLong(
     HWND hwnd,
     int nIndex,
@@ -117,6 +120,7 @@ LONG _SetWindowLong(
              * procedure storage. Never decode a modern token as NT4 CPD. */
             return wow_dialog_host_set(hwnd, nIndex, dwNewLong, bAnsi);
 #else
+#line 858
             /*
              * Get the old window proc address
              */
@@ -184,6 +188,7 @@ LONG _SetWindowLong(
 
             return dwOldLong;
 #endif
+#line 925
         case DWL_MSGRESULT:
         case DWL_USER:
             break;
@@ -234,6 +239,7 @@ LONG _SetWindowLong(
 #ifdef DEBUG
 #line 966
 #error Excluded unsupported original DEBUG window-style tracing
+#line 969
 #endif
 #if defined(WOW_ORIGINAL_DIALOG_GETSET) && !defined(WOW_ORIGINAL_CONTROL_TEXT) && !defined(WOW_ORIGINAL_CONTROL_COLOR) && !defined(WOW_ORIGINAL_CONTROL_BRUSH_CLIENT)
 #line 970
@@ -303,19 +309,23 @@ LONG GetClassWOWWords(
 #ifdef MEMPHIS_MENUS
 #line 381
 #error Excluded unsupported MEMPHIS_MENUS client owner
+#line 439
 #else // MEMPHIS_MENUS
 #line 440
+#line 498
 #endif // MEMPHIS_MENUS
 #line 500
 #ifdef MEMPHIS_MENU_WATERMARKS
 #line 501
 #error Excluded unsupported MEMPHIS_MENU_WATERMARKS client owner
+#line 522
 #endif // MEMPHIS_MENU_WATERMARKS
 #line 523
 #line 1611
 #ifdef FE_SB // fnINWPARAMDBCSCHAR()
 #line 1612
 #error Excluded unsupported FE_SB client message owner
+#line 1645
 #endif // FE_SB
 #line 1646
 
@@ -324,6 +334,7 @@ LONG GetClassWOWWords(
 #ifdef FE_SB // _PeekMessage()
 #line 694
 #error Excluded unsupported original FE_SB branch
+#line 701
 #endif // FE_SB
 #line 702
 
@@ -339,14 +350,17 @@ LONG GetClassWOWWords(
 #ifdef FE_SB // _PeekMessage()
 #line 754
 #error Excluded unsupported original FE_SB branch
+#line 758
 #else
 #line 759
 #line 760
 #ifdef DEBUG
 #line 761
 #error Excluded unsupported original DEBUG message tracing
+#line 764
 #endif
 #line 765
+#line 766
 #endif // FE_SB
 #line 767
 
@@ -354,8 +368,10 @@ LONG GetClassWOWWords(
 #ifdef FE_SB // _PeekMessage()
 #line 770
 #error Excluded unsupported original FE_SB branch
+#line 779
 #else
 #line 780
+#line 782
 #endif // FE_SB
 #line 783
 
@@ -363,8 +379,10 @@ LONG GetClassWOWWords(
 #ifdef FE_SB // _PeekMessage()
 #line 785
 #error Excluded unsupported original FE_SB branch
+#line 792
 #else
 #line 793
+#line 794
 #endif // FE_SB
 #line 795
 
@@ -373,6 +391,7 @@ LONG GetClassWOWWords(
 #ifdef LATER
 #line 359
 #error Excluded unsupported original LATER branch
+#line 368
 #endif
 #line 369
 
@@ -381,6 +400,7 @@ LONG GetClassWOWWords(
 #ifdef DEBUG
 #line 2205
 #error Unsupported DEBUG original branch
+#line 2209
 #endif
 #line 2210
 
@@ -388,6 +408,7 @@ LONG GetClassWOWWords(
 #ifdef FE_IME
 #line 78
 #error Unsupported FE_IME original branch
+#line 83
 #endif
 #line 84
 
@@ -395,8 +416,10 @@ LONG GetClassWOWWords(
 #ifdef FE_IME // _PeekMessage()
 #line 718
 #error Unsupported FE_IME original branch
+#line 720
 #else
 #line 721
+#line 722
 #endif // FE_IME
 #line 723
 
@@ -404,5 +427,6 @@ LONG GetClassWOWWords(
 #ifdef FE_IME //@TK
 #line 1021
 #error Unsupported FE_IME original branch
+#line 1033
 #endif
 #line 1034

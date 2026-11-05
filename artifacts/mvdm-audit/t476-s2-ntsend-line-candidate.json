@@ -1,0 +1,13 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+  "original_sha256": "b708f1fee46e93735c4c931d556e16daa9679e6352d72620904d18ad21396abf",
+  "previous_sha256": "9b84840699856115faeee87618c4c79ccdb0ae45463619aab79882a5d5aec138",
+  "current_sha256": "18d5fd5f09417d33e0ee3f4be294707ec1bee76c7bd3e3b63c97beaafa22cc6a",
+  "condition_structure": "sole original UNICODE conditional has both arms hit and retained; no other original condition groups",
+  "corrected_original_lines": [
+    270,
+    286
+  ],
+  "verification": "62 matching lines checked with LF counts and no nonblank retained-line mismatches",
+  "status": "validated: LF-based original condition and line comparison, grouped cached build, product comparison and publication"
+}

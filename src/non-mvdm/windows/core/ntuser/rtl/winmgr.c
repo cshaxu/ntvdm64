@@ -7,6 +7,7 @@
 
 #if !defined(WOW_ORIGINAL_DEFAULT_GEOMETRY)
 /* OPENNT-HOST-108: original style/version predicate, unchanged. */
+#line 613
 BOOL NeedsWindowEdge(DWORD dwStyle, DWORD dwExStyle, BOOL fNewApp)
 {
     BOOL    fGetsWindowEdge;
@@ -27,7 +28,6 @@ BOOL NeedsWindowEdge(DWORD dwStyle, DWORD dwExStyle, BOOL fNewApp)
 
         case WS_CAPTION:
             fGetsWindowEdge = fNewApp;
-#line 482
             break;
     }
 
@@ -93,6 +93,7 @@ PWND GetTopLevelWindow(
     return pwnd;
 }
 
+#line 456
 BOOL IsVisible(
     PWND pwnd)
 {
@@ -126,6 +127,7 @@ BOOL IsVisible(
 }
 
 /* OPENNT-HOST-106: original graph predicate used by Tab traversal. */
+#line 432
 BOOL _IsDescendant(
     PWND pwndParent,
     PWND pwndChild)
@@ -141,6 +143,7 @@ BOOL _IsDescendant(
     return FALSE;
 }
 
+#line 258
 BOOL _FChildVisible(
     PWND pwnd)
 {

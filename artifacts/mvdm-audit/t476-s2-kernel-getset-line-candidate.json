@@ -1,0 +1,14 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+  "original_sha256": "f0d22e4285e8b33b873854913a11587c67d78e50e1f5db28ec89ef8b6ff06d3d",
+  "previous_sha256": "86455addef0d7c1e23e876e288e80d1eba31770c49fd15f5b35b4143e29b1a9d",
+  "current_sha256": "c341f93751ac817fdedb508b94ab242f81fdffd0ffca1bc21a24fe6cc89ea3c0",
+  "condition_structure": "all six original condition groups retained; selected native/legacy owner branches preserved; DEBUG excluded bodies remain guarded",
+  "corrected_original_lines": [
+    272,
+    769,
+    793
+  ],
+  "fixture_evidence": "t476-s2-batch16-context-repair.json",
+  "status": "validated: LF-based original condition and line comparison, grouped cached build, product comparison and publication"
+}

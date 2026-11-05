@@ -1,0 +1,17 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+  "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+  "previous_sha256": "7175d1ce3e6d3cc10eaa1ee9845bd51df921d62a3133ca125e2e3e1736f7cefd",
+  "current_sha256": "a546c5469edf64976220c1a2b7d7202de8c2d49093f6670b8610a3a759f91b1e",
+  "condition_structure": "16 original matched condition groups checked including all endif and else positions; selected owner alternatives retained",
+  "function_positions": {
+    "_DefSetText": 1291,
+    "GetControlBrush": 623,
+    "GetControlColor": 641,
+    "_SetWindowLong": 827,
+    "GetClassWOWWords": 138
+  },
+  "verification": "all 240 unchanged original function lines matched after local adaptations; 19 original directive anchors corrected",
+  "status": "anchor fixes built and published; empty-shell original-function disposition remains open",
+  "limit": "Hits on empty condition shells do not establish omitted original functions are implemented."
+}

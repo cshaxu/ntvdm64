@@ -78,6 +78,7 @@ cleanup:
 #define FIRSTCOPYLPTSTRID           COPYLPWSTRID
 #line 268
 #define CLEANUPLPTSTR               CLEANUPLPWSTR
+#line 270
 #else
 #line 273
 #define COPYLPTSTRID                COPYLPSTRIDW
@@ -85,6 +86,7 @@ cleanup:
 #define FIRSTCOPYLPTSTRID           COPYLPSTRIDW
 #line 284
 #define CLEANUPLPTSTR               CLEANUPLPSTRW
+#line 286
 #endif
 #line 287
 

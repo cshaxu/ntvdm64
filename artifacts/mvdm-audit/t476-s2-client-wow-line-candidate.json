@@ -1,0 +1,15 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+  "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+  "previous_sha256": "bfd2af514bb86619de9c20af416898b65e52ce4a8db8885135d7d4f9fb3a2b94",
+  "current_sha256": "6839fae1ee1a6914d1b7704f31206fa752cd0074237cacc0eda359973a1fc17f",
+  "condition_structure": "original condition shells retained; existing selected/disabled arms unchanged",
+  "corrected_directive_anchors": 20,
+  "retained_original_function": {
+    "name": "_GetDlgItem",
+    "line": 251,
+    "body_lines": 15
+  },
+  "status": "anchor fixes built and published; empty-shell original-function disposition remains open",
+  "limit": "Hits on empty condition shells do not establish that omitted original WOW client functions are implemented."
+}
