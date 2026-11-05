@@ -81,3 +81,7 @@ The [directive-only review](../../../artifacts/mvdm-audit/t476-s2-directive-only
 ## Completed excluded-only projections
 
 The [excluded-only projection review](../../../artifacts/mvdm-audit/t476-s2-excluded-projection-review.json) completes another 65 files. Each has a hash-matched prior complete original/current conditional-tree and outside-branch projection review, with original exclusion and continuation anchors; fresh structure checks find no unresolved original group, and the actual compiler samples have no line mismatch. This confirms the conditional and line contract, not unrelated runtime behavior. The running partition is 516 complete and 539 open. No source was modified.
+
+## Compiler-transformed original-equivalent files
+
+The [transformed-line review](../../../artifacts/mvdm-audit/t476-s2-transformed-lines-review.json) completes 157 further condition-free files. Their complete uncommented original/current source and logical line positions match, but macros caused the earlier exact-text sampling to find no unique source line. Twenty-one real compiler contexts cover all 157 file markers. Each file emitted preprocessed text, and every emitted line maps to a nonblank original source line or an identical original pragma. This checks the transformed compiler output without assuming macro expansion preserves its literal text. The running partition is 673 complete and 382 open; no mirror source was changed.
