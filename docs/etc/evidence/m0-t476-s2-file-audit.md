@@ -306,3 +306,8 @@ The [DPMI memory and debug reviews](../../../artifacts/mvdm-audit/t476-s2-dpmi-m
 ### DPMI selector source review
 
 The [DPMI selector review](../../../artifacts/mvdm-audit/t476-s2-dpmiselr-review.json) completes `dpmiselr.c` for conditional structures and original diagnostic lines. Its full diff, S1 branch observations, hash-bound recursive projection and selected compiler samples were checked; existing CPU40 descriptor-domain adaptations are identified but their independent runtime equivalence is not claimed. Total: **826 of 1,055 complete; 229 open**.
+
+
+### DPMI DOS interrupt translation review
+
+The [INT 21 translation review](../../../artifacts/mvdm-audit/t476-s2-int21map-review.json) completes `int21map.c` for original conditional structures and diagnostic lines. The entire original/current diff, registered protected DOS adaptations, 14 excluded and one selected original arm, prior hash-bound 2,987-line projection and actual compiler samples were checked. This does not independently establish runtime equivalence of the local adaptations. Total: **827 of 1,055 complete; 228 open**.
