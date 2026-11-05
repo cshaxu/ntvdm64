@@ -7,5 +7,5 @@
   "baseline": "The script advertises x64. Real x64 fixture build fails in suballoc.c and xmsmemr.c at S1 #error in suballoc.h line 35.",
   "candidate": "Isolated include override restores COMMIT_GRANULARITY 65536 in the previously hit x64 branch; fixture builds. Original unmodified test fails at line 68, whose count assumes x86 4096-byte commit granularity.",
   "diagnostic": "Task-local fixture copy printed commits=2 decommits=0 granularity=65536 and bypassed only that count assertion; remaining checks and both success markers passed. This diagnostic does not count as the unmodified fixture passing.",
-  "status": "Pending: restore the previously witnessed test-context branch, make the fixture assert the correct granularities, run x86/x64 fixture and required build/publication. No guest modified."
+  "status": "Resolved by t476-s2-batch15-suballoc-repair.json; retained here as the pre-fix investigation."
 }

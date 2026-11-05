@@ -28,7 +28,16 @@ expected = collections.Counter()
 for arm in ledger["arms"]:
     if arm["outermost_new_exclusion"]:
         path = ledger["files"][arm["file"]]["path"]
+        # S2 restored this arm after the supported x64 XMS fixture hit it.
+        if (path, arm["line"], arm["directive"]) == (
+            "src/mvdm-host/inc/suballoc.h", 40, "else"
+        ):
+            continue
         expected[(path, arm["directive"], arm["expression"])] += 1
+
+suballoc = (root / "src/mvdm-host/inc/suballoc.h").read_text(encoding="utf-8")
+if not re.search(r"#if defined\(_M_IX86\)\s*\n#line 33\s*\n#define COMMIT_GRANULARITY 4096\s*\n#else\s*\n#line 35\s*\n#define COMMIT_GRANULARITY 65536", suballoc):
+    raise SystemExit("restored x86/x64 suballocator granularities missing")
 
 actual = collections.Counter()
 for path in sorted({key[0] for key in expected}):

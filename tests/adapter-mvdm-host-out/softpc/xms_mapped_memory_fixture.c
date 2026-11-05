@@ -65,7 +65,8 @@ int main(void)
     CHECK(SAQueryFree(pool, &available, &largest) && available == 8192 && largest == 8192);
     CHECK(SAAllocate(pool, 8192, &a) && a == 65536);
     CHECK(reads == 0 && writes == 0 && memory[65536] == 0x5a && memory[69632] == 0x5a);
-    CHECK(commits == 34 && decommits == 2);
+    CHECK(commits == MEMORY_SIZE / COMMIT_GRANULARITY + 8192u / COMMIT_GRANULARITY &&
+        decommits == 8192u / COMMIT_GRANULARITY);
     for (i=0; i<GUEST_MEMORY_LEASE_MAXIMUM; ++i)
         CHECK(session_guest_memory_release(&owner, held[i], 0));
     reject_io = 0;

@@ -39,7 +39,7 @@ Revision History:
 #define COMMIT_GRANULARITY 4096
 #else
 #line 35
-#error T476-S1: branch not selected by product build
+#define COMMIT_GRANULARITY 65536
 #endif
 #endif
 #line 37
