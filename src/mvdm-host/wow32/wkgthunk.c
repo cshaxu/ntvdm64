@@ -165,9 +165,42 @@ DWORD FASTCALL WK32ICallProc32(PVDMFRAME pFrame)
     UpdateDosCurrentDirectory(DIR_DOS_TO_NT);
 
 
-#ifdef i386
-#line 175
-#error DIVERGENCE MVDM-HOST-DIV-589: historical i386 WOW branch is not selected
+#if defined(i386) || defined(WOW_X86_GENERIC_CALL)
+/* DIVERGENCE: MVDM-HOST-DIV-674: select only the x86 generic-call helper. */
+
+    {
+        extern DWORD WK32ICallProc32MakeCall(DWORD pfn, DWORD cArgs, VOID *pArgs);
+
+        //
+        // On x86 we call an assembly routine to actually make the call to
+        // the client's Win32 routine.  The code is much more compact
+        // this way, and it's the only way we can be compatible with
+        // Win95's implementation, which cleans up the stack if the
+        // routine doesn't.
+        //
+        // This assembly routine "pushes" the arguments by copying
+        // them as a block, so they must be in the proper order for
+        // the destination calling convention.
+        //
+
+        if ( ! fSourceCDECL) {
+            //
+            // Invert the parameters
+            //
+            pArg = lpArgs;
+            lpArgs = dwTemp;
+
+            nParam = cParams;
+            while ( nParam != 0 ) {
+                --nParam;
+                lpArgs[nParam] = *pArg;
+                pArg++;
+            }
+        }
+
+        dwReturn = WK32ICallProc32MakeCall(parg16->lpProcAddress, cParams, lpArgs);
+    }
+
 #else
 #line 210
 

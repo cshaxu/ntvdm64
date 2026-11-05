@@ -85,12 +85,14 @@ _TEXT   SEGMENT
 ALIGN 16
 cPublicProc _WK32ICallProc32MakeCall,3
 
+; DIVERGENCE: MVDM-HOST-DIV-675: preserve the x86 nonvolatile EBX register.
+        push    ebx
         push    edi
         push    esi
 
-pfn     equ     [esp+0Ch]
-cArgs   equ     [esp+10h]
-pArgs   equ     [esp+14h]
+pfn     equ     [esp+10h]
+cArgs   equ     [esp+14h]
+pArgs   equ     [esp+18h]
 
         mov     edx,pfn
         mov     ecx,cArgs
@@ -113,6 +115,7 @@ DoneArgs:
 
         pop     esi
         pop     edi
+        pop     ebx
         stdRET  _WK32ICallProc32MakeCall
 
 stdENDP _WK32ICallProc32MakeCall

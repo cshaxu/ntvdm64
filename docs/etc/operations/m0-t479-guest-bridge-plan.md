@@ -63,3 +63,17 @@ Admission validation: owned background PID 18504 started at
 self-test and verification passed, including the explicit adjacent-task
 reservation at S1. git diff --check passed. No runtime source or released
 image changed; this is an admission checkpoint, not S1 capability closure.
+
+## Superseding owner direction: committed side work and duplicate S labels
+
+The owner subsequently authorizes importing all adjacent commits and permits
+one S number to describe different content within this mixed T. Qualify each
+record with its workline/topic (S1/guest-bridge versus S1/generic-thunk-import),
+its source T/S/P and commit range. Never combine their acceptance or silently
+mark the mainline done. This replaces the earlier deferral above.
+The imported range is e1867aaa2 through cd91c8a57, based on cd8c8583e;
+see [integration evidence](../evidence/m0-t479-s1-thunk-import.md).
+
+S1/generic-thunk-import is delivered with coherent 0.0.479 publication and
+Full 16/16 acceptance. S1/guest-bridge remains the active mainline; all later
+guest stages retain their planned status. See the integration evidence above.

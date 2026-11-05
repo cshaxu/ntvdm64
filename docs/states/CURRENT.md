@@ -3,7 +3,8 @@
 ## Current Work
 
 **Active: M0 T479 S1** - guest multitasking bridge contract and implementation
-admission. Owner defers all side-task imports; focus on the guest mainline.
+admission, with delivered S1/generic-thunk side integration. Guest S1
+remains the mainline; workline-qualified S labels distinguish the two scopes.
 T477 is closed in its [closure](../history/m0-t477-closure.md).
 
 ## Active Packet
@@ -11,23 +12,29 @@ T477 is closed in its [closure](../history/m0-t477-closure.md).
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T479 S1; Ordinary Mode, single executor/reviewer. |
-| Admission And Approval | Owner admits a mixed T for the guest multitasking payload, then explicitly defers side imports and directs mainline focus. |
+| Admission And Approval | Owner admits a mixed T for the guest multitasking payload, now explicitly authorizes all committed adjacent work and duplicate S numbers distinguished by content. |
 | Parallel Task Reservation | M0 T478; already allocated in the independent mirror-source-audit worktree, recorded in the linked admission plan. Not a local active packet or closure. |
 | Candidate Proposal | [Guest bridge](../proposals/proposal-multitask-guest-vdm-frontends-001.md); [stage plan](../etc/operations/m0-t479-guest-bridge-plan.md). |
 | Objective | Resolve the actual VMM identity, BOP continuation and legal wait/resume contract for 54:08 and 54:0A; freeze the smallest guest/host bridge before implementation. |
-| Non-goals | No side-branch import now; no Windows core/immutable guest modification, hardware V86 monitor, resident DOS agent or replacement frontend authority. |
+| Non-goals | No Windows core/immutable guest modification, hardware V86 monitor, resident DOS agent or replacement frontend authority. |
 | Reference Baseline | cd8c8583e; T477 host foundation, protocol 67 and published ten-image package. |
-| Files And ABI Surface | Project-owned VxD design/toolchain and NTVDM VM bridge; inspect cmdExec32/BOP/CCPU/VMM callers and existing frontend-base/NTSRV contracts. No runtime change in this admission. |
+| Files And ABI Surface | Project-owned VxD design/toolchain and NTVDM VM bridge; inspect cmdExec32/BOP/CCPU/VMM callers and existing frontend-base/NTSRV contracts. Side integration includes original WOW generic-call helper, its build selection and tests. |
 | Applicable Rules | Execution, architecture, coding, documentation and source policy; original-owner recovery and explicit mirror-diff registration. |
-| Verification | Trace both launch services through host stack return; identify exact VM/context and continuation ownership; source/provenance and isolated test matrix; documentation governance. |
+| Verification | Trace both launch services through host stack return; identify exact VM/context and continuation ownership; source/provenance and isolated test matrix; side-import cached builds, focused thunk/guest checks, Full and coherent publication; documentation governance. |
 | Expected Markers | Finite call-chain/ABI/lifecycle decisions, concrete component/test plan, documented unresolved evidence without success claims. |
 | Asset Needs | Existing Win3.1 enhanced/Win95 research and owner media read-only; project-owned add-on built/staged separately. |
 | Reporting Requirements | Separate calling-VM wait from whole-payload suspension; record OS-specific proof and every unsupported boundary. |
 | Stop Conditions | Unproved VM identity or continuation safety; new semantic concessions or immutable guest changes require an explicit decision. |
 | Exit Criteria | Reviewed exact bridge contract, source/toolchain provenance, implementation/test sequencing and no hidden design assumptions. |
-| Original Owner Request | Implement guest multitasking: after loading 386/VxD, cmdExec32 creates a VM frontend and child chain without suspending the containing payload; defer side tasks for now. |
+| Original Owner Request | Implement guest multitasking: after loading 386/VxD, cmdExec32 creates a VM frontend and child chain without suspending the containing payload; also integrate the adjacent committed S1/S2 work. |
 | Similar-Issue Sweep | System/pre-existing VMs, handle reuse, both command services, reentrancy, unload, completion/cancel races, nested chains and NIDDB interaction. |
-| Temporary Evidence | build/t479-s1; owner S1; 60-minute phase, 2 GiB, 15-minute no-progress review budget. |
+| Temporary Evidence | build/t479-s1; owner S1; 60-minute phase, 2 GiB, 15-minute no-progress review budget; side integration uses build/t479-s1-import, 90 minutes/4 GiB. |
+
+## Imported side-work record
+
+[S1/generic-thunk integration](../etc/evidence/m0-t479-s1-thunk-import.md)
+retains T478 source S1/S2 identities. The imported S1 inventory is explicitly
+incomplete; no guest mainline milestone is closed by importing it.
 
 ## S4 Closure Record
 
@@ -168,9 +175,9 @@ packet above remains the only current S authority.
 
 ## Current Technical Baseline
 
-The [T477 S4 delivery](../etc/evidence/m0-t477-s4-vm-groups.md) publishes the
-ten-image product at application version 0.0.477 and protocol 67. Full selected
-product gates pass and both publication targets match. Guest media is unchanged.
+The [T479 side integration](../etc/evidence/m0-t479-s1-thunk-import.md) publishes
+the ten-image product at application version 0.0.479 and protocol 67. Full
+16/16 selected gates pass and both publication targets match. Guest media is unchanged.
 Actual guest VM discovery and driver integration remain separately queued.
 The earlier [source release review](../../artifacts/mvdm-audit/latest-source-release-review.md)
 remains retained baseline evidence.

@@ -15,14 +15,13 @@ active-packet transition does not change any candidate's proposed scope.
 
 | Remaining stable order | Candidate implementation package | Proposal |
 | --- | --- | --- |
-| 1 | Implement the existing DOS16 and WOW32 audit inventories — inherit unfinished foundation and later recovery scopes; implement actionable audited rows, preserve exclusions and remove displaced local providers without repeating the audit. | [Proposal](../proposals/proposal-mvdm-whole-closure-recovery-001.md) |
-| 2 | Independent mirror-diff audit and minimization — audit connected and unconnected mirror differences and prior decisions; restore or minimize changes with evidence. Runtime trace coverage is not a connection criterion. | [Proposal](../proposals/proposal-unconnected-mirror-diff-cleanup-001.md) |
-| 3 | Independent project-wide implementation minimization — reassess original-owner choices and autonomous implementations across all components; correct earlier decisions where needed and preserve verified capabilities. | [Proposal](../proposals/proposal-original-source-implementation-minimization-review-001.md) |
-| 4 | Win3.1 interactive performance root-cause recovery — repair the failed active-interaction measurement path, attribute actual input/IRQ/CCPU/VGA/presentation cost, then change only a proved project-owned bottleneck while retaining independently correct optimizations. | [Proposal](../proposals/proposal-win31-interactive-performance-root-cause-001.md) |
-| 5 | WOW multi-window performance recovery — attribute and reduce the latency of SOL Options and other Win16 secondary windows while preserving original callback, identity and lifecycle behavior. | [Proposal](../proposals/proposal-wow-multiwindow-performance-recovery-001.md) |
-| 6 | Upgrade to a Windows XP NTVDM baseline — assess and recover XP-era capabilities including audio and long file names, update all guest components, and make required modern-host compatibility repairs. | [Proposal](../proposals/proposal-windows-xp-ntvdm-baseline-upgrade-001.md) |
-| 7 | Hardware-virtualized guest CPU acceleration — investigate and implement a modern hardware-virtualization execution backend for 16/32-bit guest instructions, subject to demonstrated feasibility and compatibility. | [Proposal](../proposals/proposal-hardware-virtualized-guest-cpu-001.md) |
-| 8 | Windows 1.01 application launch from the host — classify and launch a selected application through its matching Windows 1.01 guest environment, preserving arguments, environment selection and truthful application lifecycle results. | [Proposal](../proposals/proposal-win101-host-application-launch-001.md) |
+| 1 | Independent mirror-diff audit and minimization — audit connected and unconnected mirror differences and prior decisions; restore or minimize changes with evidence. Runtime trace coverage is not a connection criterion. | [Proposal](../proposals/proposal-unconnected-mirror-diff-cleanup-001.md) |
+| 2 | Independent project-wide implementation minimization — reassess original-owner choices and autonomous implementations across all components; correct earlier decisions where needed and preserve verified capabilities. | [Proposal](../proposals/proposal-original-source-implementation-minimization-review-001.md) |
+| 3 | Win3.1 interactive performance root-cause recovery — repair the failed active-interaction measurement path, attribute actual input/IRQ/CCPU/VGA/presentation cost, then change only a proved project-owned bottleneck while retaining independently correct optimizations. | [Proposal](../proposals/proposal-win31-interactive-performance-root-cause-001.md) |
+| 4 | WOW multi-window performance recovery — attribute and reduce the latency of SOL Options and other Win16 secondary windows while preserving original callback, identity and lifecycle behavior. | [Proposal](../proposals/proposal-wow-multiwindow-performance-recovery-001.md) |
+| 5 | Upgrade to a Windows XP NTVDM baseline — assess and recover XP-era capabilities including audio and long file names, update all guest components, and make required modern-host compatibility repairs. | [Proposal](../proposals/proposal-windows-xp-ntvdm-baseline-upgrade-001.md) |
+| 6 | Hardware-virtualized guest CPU acceleration — investigate and implement a modern hardware-virtualization execution backend for 16/32-bit guest instructions, subject to demonstrated feasibility and compatibility. | [Proposal](../proposals/proposal-hardware-virtualized-guest-cpu-001.md) |
+| 7 | Windows 1.01 application launch from the host — classify and launch a selected application through its matching Windows 1.01 guest environment, preserving arguments, environment selection and truthful application lifecycle results. | [Proposal](../proposals/proposal-win101-host-application-launch-001.md) |
 
 The owner moved shared implementation ownership review to the front; it is
 now admitted in the independent worktree. The external system launch
@@ -65,4 +64,9 @@ The [closed broker proposal](../proposals/proposal-cross-process-broker-closure-
 also remains linked for requirement traceability; it is not a queued candidate.
 
 The owner prioritizes the guest multitasking bridge as the active mainline;
-other candidates retain their relative order. Side-task imports are deferred.
+other candidates retain their relative order. Committed side-task imports are admitted separately within the mixed active task.
+
+The audit-inventory recovery package remains allocated in the independent
+worktree; its imported findings and remaining plan are linked by the
+[recovery proposal](../proposals/proposal-mvdm-whole-closure-recovery-001.md).
+Importing completed work does not close its outstanding inventory.

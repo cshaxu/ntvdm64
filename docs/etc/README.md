@@ -1167,3 +1167,14 @@ the direct NTVDM composition, scoped identity and retirement contract.
 the first cached build and bounded unit verification, with integration gaps explicit.
 
 [Guest bridge mainline plan](operations/m0-t479-guest-bridge-plan.md) records admission, stage boundaries and deferred side imports.
+
+- [T478 S1 inventory reconciliation (in progress)](evidence/m0-t478-s1-inventory-reconciliation.md)
+- [T478 S1 prior findings reconciliation (in progress)](evidence/m0-t478-s1-prior-findings.md)
+- [T478 S1 source-anchor comparisons](evidence/m0-t478-s1-source-anchors.md)
+- [T478 S1 classified 69 findings](evidence/m0-t478-s1-classified-findings.md)
+
+- [T478 finding-stage plan](operations/m0-t478-finding-stage-plan.md): ordered per-finding S proposals and host-only scope.
+
+- [T478 S2 generic thunk investigation](evidence/m0-t478-s2-generic-thunk.md): source selection, ABI issue and pending recovery.
+
+[Mixed-task import](evidence/m0-t479-s1-thunk-import.md) records the source merge and integrated validation.

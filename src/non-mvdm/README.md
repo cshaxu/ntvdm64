@@ -2573,3 +2573,5 @@ OPENNT-HOST-292: restore original conditional and selected WOW scheduler inline 
 OPENNT-HOST-293: restore sampled original source positions for retained declarations in windows/core/ntuser/inc/user.h. Evidence: artifacts/mvdm-audit/t476-s2-user-review.json. Supported-context and compiler validation remain pending.
 
 OPENNT-HOST-294: correct and restore original diagnostic positions in base/win32/client/vdm.c and windows/core/ntuser/client/usercli.h; retained code and approved adapters are preserved. Evidence: artifacts/mvdm-audit/t476-s2-vdm-worker.json and t476-s2-usercli-worker.json. Compiler and complete context validation remain pending.
+
+OPENNT-HOST-295: public/sdk/inc/callconv.inc is imported byte-exact from pinned OpenNT for mvdm-host/wow32/i386/callpr32.asm. It supplies assembly calling-convention macros only, with no runtime dependency or further includes. S2 evidence records provenance and validation.

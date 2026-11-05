@@ -413,6 +413,8 @@ $ninja.Add('rule cc')
 $ninja.Add('  command = ' + $compilerCommand + ' $cflags $release_cflags /Fo$out $in')
 $ninja.Add('  deps = msvc')
 $ninja.Add('  description = CC $in')
+$ninja.Add('rule generic_call_asm')
+$ninja.Add('  command = ml /nologo /c /DDBG=0 /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc')) + '" /Fo$out $in')
 $ninja.Add('rule rc')
 $ninja.Add('  command = rc /nologo /fo$out $in')
 $ninja.Add('  description = RC $in')
@@ -441,7 +443,7 @@ foreach ($source in $sources) {
         $hardErrorBinding = if ($source -eq 'wuser.c') {' /DWOWSysErrorBox=wow_user_sys_error_box'} else {''}
         $ninja.Add('  cflags = $wow_cflags' + $hardErrorBinding)
     } elseif ($source -eq 'wkgthunk.c') {
-        $ninja.Add('  cflags = $wow_cflags /DWK32ICallProc32=wow_original_WK32ICallProc32 /DWOWYield16=wow_original_WOWYield16 /DWOWDirectedYield16=wow_original_WOWDirectedYield16 /DWOW_NATIVE_EXTENSION_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_user_native_extension.h')) + '"')
+        $ninja.Add('  cflags = $wow_cflags /DWOW_X86_GENERIC_CALL /DWK32ICallProc32=wow_original_WK32ICallProc32 /DWOWYield16=wow_original_WOWYield16 /DWOWDirectedYield16=wow_original_WOWDirectedYield16 /DWOW_NATIVE_EXTENSION_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_user_native_extension.h')) + '"')
     } elseif ($source -eq 'wmmedia.c') {
         $ninja.Add('  cflags = $wow_cflags /DWMM32CallProc32=wow_original_WMM32CallProc32')
     } elseif ($source -eq 'wshell.c') {
@@ -452,6 +454,8 @@ foreach ($source in $sources) {
         $ninja.Add('  cflags = $wow_cflags')
     }
 }
+$objects.Add('obj/callpr32.obj')
+$ninja.Add('build obj/callpr32.obj: generic_call_asm ' + (ConvertTo-NinjaPath (Join-Path $wow 'i386/callpr32.asm')) + ' | ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc/callconv.inc')))
 $supportObjects = [System.Collections.Generic.List[string]]::new()
 $boundaryTest = ConvertTo-NinjaPath (Join-Path $root 'tests/build/wow_thunk_macro_boundary.c')
 $ninja.Add('build obj/tests/wow-boundary-adapter.obj: cc ' + $boundaryTest)

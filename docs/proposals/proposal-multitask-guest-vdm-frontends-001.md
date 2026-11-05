@@ -7,8 +7,8 @@ added at the end of the queue; the owner subsequently moved it as recorded in
 [Queue](../states/QUEUE.md). This proposal is
 now admitted by the owner's 2026-11-05 direction; see
 [Current](../states/CURRENT.md) and the [mainline plan](../etc/operations/m0-t479-guest-bridge-plan.md).
-Only the bounded current S is active. Side-task imports are postponed by the
-owner's subsequent clarification.
+Only the bounded current S is active. Side-task imports are tracked separately under the mixed-task plan and
+do not change this guest scope.
 
 The owner split the former candidate into a preceding [host common frontend
 foundation](proposal-host-common-frontend-foundation-001.md) and this guest

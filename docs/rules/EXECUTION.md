@@ -680,3 +680,12 @@ CRT-owned memory, FILE*, or implicit Windows-handle ownership. Before a new
 bridge or artifact is admitted, the active packet records toolchain,
 architecture, CRT, build command, artifact hash, ABI surface, dependency
 direction, and positive/negative boundary tests.
+
+## Owner-approved mixed task labels
+
+For the current owner-approved mixed T, the same S number may identify
+separate topics. Every such record must include a workline/topic and retain
+its original source T/S/P and commits when imported. Keep one consolidated
+Current packet and separate scope, evidence, progress and closure per topic.
+A bare S number cannot identify a delivery or prove another topic complete.
+This exception does not waive build, regression, publication or review gates.
