@@ -1,0 +1,248 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "current_sha256": "3f0dd6648c072517cc51e552c4357d0558112c891b6961ca24bab8aeb5859b9e",
+      "original_sha256": "c5734d7842c34ae436cd12a5b52ad76d4fab88940a64f3af7e5fdc6fbc92e4a9",
+      "prior_detailed_review": "artifacts/mvdm-audit/s13-r1434-dpmi32p-full-output-lines.json",
+      "arms": [
+        {
+          "directive": "if",
+          "expression": "DBG",
+          "status": "previously-excluded",
+          "contexts": []
+        },
+        {
+          "directive": "else",
+          "expression": "",
+          "status": "hit",
+          "contexts": [
+            276,
+            277,
+            278,
+            279,
+            280,
+            281,
+            282,
+            283,
+            284,
+            285,
+            286,
+            287,
+            288,
+            289,
+            290,
+            291,
+            391
+          ]
+        },
+        {
+          "directive": "ifdef",
+          "expression": "i386",
+          "status": "previously-excluded",
+          "contexts": []
+        },
+        {
+          "directive": "else",
+          "expression": "",
+          "status": "hit",
+          "contexts": [
+            276,
+            277,
+            278,
+            279,
+            280,
+            281,
+            282,
+            283,
+            284,
+            285,
+            286,
+            287,
+            288,
+            289,
+            290,
+            291,
+            391
+          ]
+        },
+        {
+          "directive": "ifdef",
+          "expression": "i386",
+          "status": "previously-excluded",
+          "contexts": []
+        },
+        {
+          "directive": "ifndef",
+          "expression": "i386",
+          "status": "hit",
+          "contexts": [
+            276,
+            277,
+            278,
+            279,
+            280,
+            281,
+            282,
+            283,
+            284,
+            285,
+            286,
+            287,
+            288,
+            289,
+            290,
+            291,
+            391
+          ]
+        },
+        {
+          "directive": "if",
+          "expression": "defined(CPU_40_STYLE)",
+          "status": "hit",
+          "contexts": [
+            276,
+            277,
+            278,
+            279,
+            280,
+            281,
+            282,
+            283,
+            284,
+            285,
+            286,
+            287,
+            288,
+            289,
+            290,
+            291
+          ]
+        }
+      ],
+      "compiler_contexts": [
+        276,
+        277,
+        278,
+        279,
+        281,
+        282,
+        283,
+        285,
+        288,
+        289,
+        290,
+        291,
+        391
+      ],
+      "compiler_unique_original_lines_seen": 47,
+      "local_diff_review": "Full diff reviewed; original debug and kernel VDM branches excluded; selected descriptor declarations and registered CPU40 DPMI entries retained. Prior full-output line evidence covers one selected x86 context; marker observations cover the selected arms."
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmidata.h",
+      "current_sha256": "82c2955d7bfed6b7f8638f493d99c0950f4be4a8e86d7e28b26af067ef3cc0c8",
+      "original_sha256": "f9772482513601c2e316e097a92485864557af77010e77285d725d903a0fd7b2",
+      "prior_detailed_review": "artifacts/mvdm-audit/s13-r1416-dpmidata-review.json",
+      "arms": [
+        {
+          "directive": "ifdef",
+          "expression": "i386",
+          "status": "previously-excluded",
+          "contexts": []
+        },
+        {
+          "directive": "else",
+          "expression": "",
+          "status": "hit",
+          "contexts": [
+            276,
+            277,
+            278,
+            279,
+            280,
+            281,
+            282,
+            283,
+            284,
+            285,
+            286,
+            287,
+            288,
+            289,
+            290,
+            291,
+            391
+          ]
+        },
+        {
+          "directive": "if",
+          "expression": "defined(CPU_40_STYLE)",
+          "status": "hit",
+          "contexts": [
+            276,
+            277,
+            278,
+            279,
+            280,
+            281,
+            282,
+            283,
+            284,
+            285,
+            286,
+            287,
+            288,
+            289,
+            290,
+            291
+          ]
+        },
+        {
+          "directive": "else",
+          "expression": "",
+          "status": "hit",
+          "contexts": [
+            391
+          ]
+        },
+        {
+          "directive": "if",
+          "expression": "!defined(CPU_40_STYLE)",
+          "status": "hit",
+          "contexts": [
+            391
+          ]
+        },
+        {
+          "directive": "if",
+          "expression": "!defined(_WINNT_)",
+          "status": "previously-excluded",
+          "contexts": []
+        },
+        {
+          "directive": "if",
+          "expression": "DBG",
+          "status": "previously-excluded",
+          "contexts": []
+        }
+      ],
+      "compiler_contexts": [
+        276,
+        277,
+        278,
+        279,
+        281,
+        282,
+        283,
+        285,
+        288,
+        289,
+        290,
+        291,
+        391
+      ],
+      "compiler_unique_original_lines_seen": 116,
+      "local_diff_review": "Full diff reviewed; original i386 and debug branches excluded, original selected state and registered CPU40 debug and descriptor bindings retained. Historical S1 hit contexts for local conditional arms are recorded without claiming every configuration uses them."
+    }
+  ]
+}

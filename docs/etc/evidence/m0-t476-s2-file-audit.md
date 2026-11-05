@@ -291,3 +291,8 @@ The [three file reviews](../../../artifacts/mvdm-audit/t476-s2-host-cvidc-csr-re
 ### DPMI data and dispatch source reviews
 
 The [two DPMI file reviews](../../../artifacts/mvdm-audit/t476-s2-dpmi-data-dispatch-review.json) complete `data.c` and `dpmi32.c`. Their full original/current differences, original and local branch dispositions, hash-matched recursive projection and selected compiler line observations were checked. This establishes the conditional and line audit, not independent proof of the CPU40 descriptor adaptation's runtime semantics. Total: **821 of 1,055 complete; 234 open**.
+
+
+### DPMI header reviews
+
+The [DPMI header reviews](../../../artifacts/mvdm-audit/t476-s2-dpmi-headers-review.json) complete `dpmi32p.h` and `dpmidata.h`. The full original/current diffs, registered CPU40 bindings, S1 observed arm dispositions, prior hash-bound detailed line evidence and selected compiler samples were checked. The full preprocessed-output evidence for `dpmi32p.h` is one x86 context; other context coverage is identified separately by markers. Total: **823 of 1,055 complete; 232 open**.
