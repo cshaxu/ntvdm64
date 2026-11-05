@@ -61,11 +61,13 @@ DWORD xxxSetWindowLong(
                  /* DIVERGENCE(OPENNT-HOST-121): same slot as native callbacks. */
                  return wow_dialog_host_set(HW(pwnd), index, dwData, bAnsi);
 #else
+#line 294
                  dwOld = (DWORD)((PDIALOG)(pwnd))->resultWP;
                  ((PDIALOG)(pwnd))->resultWP = (long)dwData;
                  return dwOld;
 #endif
 
+#line 298
             case DWL_USER:
                  dwOld = (DWORD)((PDIALOG)(pwnd))->unused;
                  ((PDIALOG)(pwnd))->unused = (long)dwData;

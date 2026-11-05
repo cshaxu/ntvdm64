@@ -1,0 +1,54 @@
+{
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "before_sha256": "e9fcb40a2e0fb80668b331c46abbd3f323deaab2f3fca85cd2d520df1e914754",
+      "after_sha256": "86455addef0d7c1e23e876e288e80d1eba31770c49fd15f5b35b4143e29b1a9d",
+      "original_sha256": "f0d22e4285e8b33b873854913a11587c67d78e50e1f5db28ec89ef8b6ff06d3d",
+      "anchors": [
+        {
+          "text": "dwOld = (DWORD)((PDIALOG)(pwnd))->resultWP;",
+          "original_line": 294
+        },
+        {
+          "text": "case DWL_USER:",
+          "original_line": 298
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "before_sha256": "2e98d74503d5f85a20c82647cea94198ba8657471d8fb66b247785a0f9eb78bc",
+      "after_sha256": "472394e41f56144d855c82e46fedc8df2ed8b14a99a939b59714e7ce1f777ded",
+      "original_sha256": "4a2cb2067f5dd776676d7f808f40f6468082db018e16bcf9a77daf00bddb34c9",
+      "anchors": [
+        {
+          "text": "dwProc = (DWORD)PDLG(pwnd)->lpfnDlg;",
+          "original_line": 57
+        },
+        {
+          "text": "case DWL_MSGRESULT:",
+          "original_line": 90
+        },
+        {
+          "text": "return (DWORD)((PDIALOG)pwnd)->resultWP;",
+          "original_line": 91
+        },
+        {
+          "text": "case DWL_USER:",
+          "original_line": 93
+        },
+        {
+          "text": "return GetWindowData(pwnd, index, bAnsi);",
+          "original_line": 151
+        },
+        {
+          "text": "} else { continuation",
+          "original_line": 152
+        }
+      ]
+    }
+  ],
+  "scope": "Only #line directives; original physical positions checked. Restore original branch and continuation locations for owner and fallback selections; other paths and batch build passed.",
+  "batch_verification": "Cached x86 root, NTVDM, WOW32 and x64 builds passed; ten images published and verified; eight byte-identical and two PE timestamp-only. See s13-r1420-build-image-compare.json. No runtime retest per owner instruction."
+}

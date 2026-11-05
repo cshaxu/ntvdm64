@@ -147,6 +147,7 @@ DWORD GetSizeDialogTemplate(
     return (pb - (LPBYTE)pdt);
 }
 
+#line 593
 int WINAPI DialogBoxIndirectParamAorW(
     HINSTANCE       hmod,
     LPCDLGTEMPLATEW lpDlgTemplate,

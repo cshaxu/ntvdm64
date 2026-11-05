@@ -1,0 +1,10 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+  "before_sha256": "a8bcf27d5d4649436b3d14cf32e78f320cd0157a807e8fa4414cb2e4cfc945e4",
+  "after_sha256": "12fa8eb89d46fbb36abb4c6b0c88cfdbe9dde3463525780053eb333849b52a99",
+  "original_sha256": "d8841bd2f13e5825a84f670ec7cc60923977bf80618d737cbac2208f94c6523c",
+  "anchor": "RtlCaptureAnsiString",
+  "original_line": 30,
+  "scope": "Only #line added. Selected body relocated under local alternative, #line restores original function position. Other paths and batch build passed.",
+  "batch_verification": "Cached x86 root, NTVDM, WOW32 and x64 builds passed; ten images published and verified; eight byte-identical and two PE timestamp-only. See s13-r1420-build-image-compare.json. No runtime retest per owner instruction."
+}

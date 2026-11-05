@@ -2833,6 +2833,7 @@ LOCAL void mouse_set_position IFN4(word *,junk1,word *,junk2,MOUSE_SCALAR *,curs
 
 
 
+#line 3100
 LOCAL void mouse_get_press IFN4(MOUSE_STATE *,button_status_ptr,MOUSE_COUNT *,button_ptr,MOUSE_SCALAR *,cursor_x_ptr,MOUSE_SCALAR *,cursor_y_ptr)
 {
 	/*

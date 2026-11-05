@@ -1,0 +1,66 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "before_sha256": "0a0691c04bb23e1a6e17ea908dda7306d8d2a73d6285179eae4c22667b6a17ae",
+      "after_sha256": "202bf3d58825732c9076b84df0c2bc19f9264b003a0ed8382a4b57925e46d8bb",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "anchor": {
+        "text": "static void ppi_get_switches(low,high)",
+        "original_line": 295
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "before_sha256": "41bf9769e5d124976f8a4c12972badabaf4c6b3c3234e9210902ee56f36402a7",
+      "after_sha256": "95b7f33652defcac6c1706d1fa67961131f0b396c4cc748ca251e517ffe6ce90",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "anchor": {
+        "text": "LOCAL void mouse_get_press IFN4(",
+        "original_line": 3100
+      }
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "before_sha256": "95eb4d2599de1333ca50c7bbcd780d58bc9c45bf5f0d0b02d591ad993643c7f1",
+      "after_sha256": "353134a2e0c43c88fd7b69db8d53ca3edc9363e68a2a4321c4c20e7745c3cf57",
+      "original_sha256": "787eda33785a87ce9e71202c97b5913e2857f7106fed5bb97103049b1d5e3472",
+      "anchor": {
+        "text": "DWORD WOWDlgInit(",
+        "original_line": 2326
+      }
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "before_sha256": "1e222b3ee36a92b1a7f5f75d8ad2af959ba80db9df407fb98c611ffdf755d077",
+      "after_sha256": "9d09fd22d8a5047d258891b20d7583060f0287e4b24c0dd69eb9833d72ee2932",
+      "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
+      "anchor": {
+        "text": "int WINAPI DialogBoxIndirectParamAorW(",
+        "original_line": 593
+      }
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "before_sha256": "df24a51494f20cbd23a359e4f3c01067ca50987b0ebb6b642eccd7402b87640f",
+      "after_sha256": "83c7db3c8d115ecc44ffd49328c534badd98e9d23dab59532815c0a3af7c1a07",
+      "original_sha256": "0400c034bb5a782e81777e9fd805c07dbcd18d60ec9f1a876cfa67444577e0f8",
+      "anchor": {
+        "text": "void _ShowStartGlass(",
+        "original_line": 867
+      }
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "before_sha256": "9a7dc6cc1c0e13dad1d754e46cc58a9d77a9742e06e65b8c58f31ffafe7500e0",
+      "after_sha256": "c42964ed702de00fc96322d76922bca0e34bad7ae7b306885ecd5b36de5b7988",
+      "original_sha256": "7491e5b3331de8cb7a2189b8efbe91f56076f80a08338bf816d793e80a4faf76",
+      "anchor": {
+        "text": "BOOL DrawFrame(",
+        "original_line": 1067
+      }
+    }
+  ],
+  "scope": "Only #line directives; exact original physical positions checked. Other branch and line paths remain under review; batch build passed.",
+  "batch_verification": "Cached x86 root, NTVDM, WOW32 and x64 builds passed; ten images published and verified; eight byte-identical and two PE timestamp-only. See s13-r1420-build-image-compare.json. No runtime retest per owner instruction."
+}

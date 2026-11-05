@@ -168,6 +168,7 @@ extern void host_simulate(void);
  * NT4 kernel-VDM V86 monitor contract, which this non-invasive product cannot
  * provide; it must never be selected implicitly by a common host header.
  */
+#line 142
 #define PM
 
 #if !defined(MONITOR) && !defined(PROD)

@@ -67,6 +67,7 @@ VOID DrawPushButton(
 }
 #endif
 
+#line 1067
 BOOL DrawFrame(
     HDC   hdc,
     PRECT prc,

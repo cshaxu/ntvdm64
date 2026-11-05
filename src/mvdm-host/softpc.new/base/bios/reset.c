@@ -293,6 +293,7 @@ static void setup_ivt()
 #define MDA_OR_MULTI 0x3
 #define EGA_INSTALLED 0x0
 
+#line 295
 static void ppi_get_switches(low,high)
 half_word *low, *high;
 {

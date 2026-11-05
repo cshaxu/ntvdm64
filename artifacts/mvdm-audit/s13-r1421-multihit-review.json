@@ -1,0 +1,605 @@
+{
+  "method": "Compare original condition structure, all recorded supported branch projections, direct retained-arm diffs and local group bodies. Where functions were reordered, reject spurious sequence matches only with function-body evidence.",
+  "limits": "Source-derived matching-line projection and historical/current preprocessing evidence; no new runtime test or full semantic equivalence claim.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "current_sha256": "6eeac8f78a2d2b6928b372da0def9b9455ab1e0fa5e42cce63afc185f0b2eff7",
+      "original_sha256": "480c35aa09b40d75d82fe0e1fe3e6cb0f981e573549ea2e193e8a62be4816d10",
+      "projection": {
+        "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+        "sha256": "6eeac8f78a2d2b6928b372da0def9b9455ab1e0fa5e42cce63afc185f0b2eff7",
+        "projections": 2,
+        "mismatches": []
+      },
+      "groups": {
+        "selected": 11,
+        "original_groups": 11,
+        "local_groups": 1,
+        "excluded": 2
+      },
+      "local_groups": [
+        {
+          "line": 42,
+          "arms": [
+            {
+              "kind": "if",
+              "arg": "defined(CPU_40_STYLE)",
+              "body": [
+                "#line 40",
+                "#define CpuH \"cpu4.h\""
+              ]
+            },
+            {
+              "kind": "else",
+              "arg": "",
+              "body": [
+                "#line 40",
+                "#error Excluded non-CPU40 MONITOR CPU interface"
+              ]
+            }
+          ]
+        }
+      ],
+      "direct_diffs": [
+        {
+          "branch_line": 41,
+          "diff": [
+            "--- ",
+            "+++ ",
+            "@@ -1 +0,0 @@",
+            "-#define CpuH \"cpu.h\""
+          ]
+        }
+      ],
+      "issues": [],
+      "registered_differences": [
+        "MVDM-HOST-DIV-551",
+        "MVDM-HOST-DIV-044"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "current_sha256": "86455addef0d7c1e23e876e288e80d1eba31770c49fd15f5b35b4143e29b1a9d",
+      "original_sha256": "f0d22e4285e8b33b873854913a11587c67d78e50e1f5db28ec89ef8b6ff06d3d",
+      "projection": {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+        "sha256": "86455addef0d7c1e23e876e288e80d1eba31770c49fd15f5b35b4143e29b1a9d",
+        "projections": 2,
+        "mismatches": []
+      },
+      "groups": {
+        "excluded": 6,
+        "original_groups": 6,
+        "local_groups": 1
+      },
+      "local_groups": [
+        {
+          "line": 60,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "arg": "WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+              "body": [
+                "                 /* DIVERGENCE(OPENNT-HOST-121): same slot as native callbacks. */",
+                "                 return wow_dialog_host_set(HW(pwnd), index, dwData, bAnsi);"
+              ]
+            },
+            {
+              "kind": "else",
+              "arg": "",
+              "body": [
+                "#line 294",
+                "                 dwOld = (DWORD)((PDIALOG)(pwnd))->resultWP;",
+                "                 ((PDIALOG)(pwnd))->resultWP = (long)dwData;",
+                "                 return dwOld;"
+              ]
+            }
+          ]
+        }
+      ],
+      "direct_diffs": [],
+      "issues": [],
+      "registered_differences": [
+        "OPENNT-HOST-086",
+        "OPENNT-HOST-121"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "current_sha256": "472394e41f56144d855c82e46fedc8df2ed8b14a99a939b59714e7ce1f777ded",
+      "original_sha256": "4a2cb2067f5dd776676d7f808f40f6468082db018e16bcf9a77daf00bddb34c9",
+      "projection": {
+        "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+        "sha256": "472394e41f56144d855c82e46fedc8df2ed8b14a99a939b59714e7ce1f777ded",
+        "projections": 8,
+        "mismatches": []
+      },
+      "groups": {
+        "local_groups": 3,
+        "selected": 1,
+        "original_groups": 1
+      },
+      "local_groups": [
+        {
+          "line": 53,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "arg": "WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+              "body": [
+                "                /* DIVERGENCE(OPENNT-HOST-121): public native slot, not CPD layout. */",
+                "                return wow_dialog_host_get(HW(pwnd), index, bAnsi);"
+              ]
+            },
+            {
+              "kind": "else",
+              "arg": "",
+              "body": [
+                "#line 57",
+                "                dwProc = (DWORD)PDLG(pwnd)->lpfnDlg;",
+                "",
+                "                /*",
+                "                 * If a proc exists check it to see if we need a translation",
+                "                 */",
+                "                if (dwProc) {",
+                "",
+                "                    /*",
+                "                     * May need to return a CallProc handle if there is an",
+                "                     * Ansi/Unicode transition",
+                "                     */",
+                "                    if (bAnsi != ((PDLG(pwnd)->flags & DLGF_ANSI) ? TRUE : FALSE)) {",
+                "                        dwCPDType |= bAnsi ? CPD_ANSI_TO_UNICODE : CPD_UNICODE_TO_ANSI;",
+                "                    }",
+                "",
+                "                    if (dwCPDType) {",
+                "                        DWORD cpd;",
+                "",
+                "                        cpd = (DWORD)GetCPD(pwnd, dwCPDType | CPD_DIALOG, dwProc);",
+                "",
+                "                        if (cpd) {",
+                "                            dwProc = cpd;",
+                "                        } else {",
+                "                            RIPMSG0(RIP_WARNING, \"GetWindowLong unable to alloc CPD returning handle\\n\");",
+                "                        }",
+                "                    }",
+                "                }",
+                "",
+                "                /*",
+                "                 * return proc (or CPD handle)",
+                "                 */",
+                "                return dwProc;"
+              ]
+            }
+          ]
+        },
+        {
+          "line": 94,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "arg": "WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+              "body": [
+                "                 return wow_dialog_host_get(HW(pwnd), index, bAnsi);"
+              ]
+            },
+            {
+              "kind": "else",
+              "arg": "",
+              "body": [
+                "#line 91",
+                "                 return (DWORD)((PDIALOG)pwnd)->resultWP;"
+              ]
+            }
+          ]
+        },
+        {
+          "line": 160,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "arg": "WOW_ORIGINAL_PRIVATE_WORD_GETTER",
+              "body": [
+                "        /* DIVERGENCE(OPENNT-HOST-085): production selects only private",
+                "         * extra-word access. Its sole caller rejects negative indices;",
+                "         * public negative access keeps its existing owner. Do not import",
+                "         * the unused NT4 server/client-procedure mapping closure. */",
+                "        RIPERR0(ERROR_INVALID_INDEX, RIP_VERBOSE, \"\");",
+                "        return 0;"
+              ]
+            },
+            {
+              "kind": "else",
+              "arg": "",
+              "body": [
+                "#line 151",
+                "        return GetWindowData(pwnd, index, bAnsi);"
+              ]
+            }
+          ]
+        }
+      ],
+      "direct_diffs": [],
+      "issues": [],
+      "registered_differences": [
+        "OPENNT-HOST-085",
+        "OPENNT-HOST-121"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "current_sha256": "12fa8eb89d46fbb36abb4c6b0c88cfdbe9dde3463525780053eb333849b52a99",
+      "original_sha256": "d8841bd2f13e5825a84f670ec7cc60923977bf80618d737cbac2208f94c6523c",
+      "projection": {
+        "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+        "sha256": "12fa8eb89d46fbb36abb4c6b0c88cfdbe9dde3463525780053eb333849b52a99",
+        "projections": 2,
+        "mismatches": [
+          {
+            "line": 318,
+            "values": [
+              [
+                365,
+                82,
+                "    }"
+              ]
+            ]
+          },
+          {
+            "line": 320,
+            "values": [
+              [
+                366,
+                84,
+                "}"
+              ]
+            ]
+          }
+        ]
+      },
+      "registered_differences": [
+        "OPENNT-HOST-040",
+        "OPENNT-HOST-074"
+      ],
+      "local_groups": [
+        {
+          "line": 14,
+          "arms": [
+            {
+              "directive": "if",
+              "expression": "defined(WOW_ORIGINAL_EDIT_LOOKASIDE)",
+              "body": [
+                "/* DIVERGENCE(OPENNT-HOST-074): unchanged original control lookaside bodies;",
+                " * only their private USER environment is supplied by the finite binding. */",
+                "#include \"wow_edit_lookaside_bindings.h\"",
+                "",
+                "//++",
+                "//",
+                "// PVOID",
+                "// AllocateFromZone(",
+                "//     IN PZONE_HEADER Zone",
+                "//     )",
+                "//",
+                "// Routine Description:",
+                "//",
+                "//     This routine removes an entry from the zone and returns a pointer to it.",
+                "//",
+                "// Arguments:",
+                "//",
+                "//     Zone - Pointer to the zone header controlling the storage from which the",
+                "//         entry is to be allocated.",
+                "//",
+                "// Return Value:",
+                "//",
+                "//     The function value is a pointer to the storage allocated from the zone.",
+                "//",
+                "/***************************************************************************\\",
+                "\\***************************************************************************/",
+                "",
+                "#line 172",
+                "#define AllocateFromZone(Zone) \\",
+                "    (PVOID)((Zone)->FreeList.Next); \\",
+                "    if ( (Zone)->FreeList.Next ) (Zone)->FreeList.Next = (Zone)->FreeList.Next->Next",
+                "",
+                "",
+                "//++",
+                "//",
+                "// PVOID",
+                "// FreeToZone(",
+                "//     IN PZONE_HEADER Zone,",
+                "//     IN PVOID Block",
+                "//     )",
+                "//",
+                "// Routine Description:",
+                "//",
+                "//     This routine places the specified block of storage back onto the free",
+                "//     list in the specified zone.",
+                "//",
+                "// Arguments:",
+                "//",
+                "//     Zone - Pointer to the zone header controlling the storage to which the",
+                "//         entry is to be inserted.",
+                "//",
+                "//     Block - Pointer to the block of storage to be freed back to the zone.",
+                "//",
+                "// Return Value:",
+                "//",
+                "//     Pointer to previous block of storage that was at the head of the free",
+                "//         list.  NULL implies the zone went from no available free blocks to",
+                "//         at least one free block.",
+                "//",
+                "/***************************************************************************\\",
+                "\\***************************************************************************/",
+                "",
+                "#define FreeToZone(Zone,Block)                                    \\",
+                "    ( ((PSINGLE_LIST_ENTRY)(Block))->Next = (Zone)->FreeList.Next,  \\",
+                "      (Zone)->FreeList.Next = ((PSINGLE_LIST_ENTRY)(Block)),        \\",
+                "      ((PSINGLE_LIST_ENTRY)(Block))->Next                           \\",
+                "    )",
+                "",
+                "/***************************************************************************\\",
+                "* InitLookaside",
+                "*",
+                "* Initializes the lookaside list. This improves control locality",
+                "* by keeping control entries in a single page",
+                "*",
+                "* 05-04-95 JimA         Created.",
+                "\\***************************************************************************/",
+                "",
+                "NTSTATUS",
+                "InitLookaside(",
+                "    PLOOKASIDE pla,",
+                "    DWORD cbEntry,",
+                "    DWORD cEntries)",
+                "{",
+                "    ULONG i;",
+                "    PCH p;",
+                "    ULONG BlockSize;",
+                "    PZONE_HEADER Zone;",
+                "    PVOID InitialSegment;",
+                "    ULONG InitialSegmentSize;",
+                "",
+                "    InitialSegmentSize = (cEntries * cbEntry) + sizeof(ZONE_SEGMENT_HEADER);",
+                "",
+                "    p = (PCH)UserLocalAlloc(0, InitialSegmentSize);",
+                "",
+                "    if ( !p ) {",
+                "        return STATUS_NO_MEMORY;",
+                "        }",
+                "",
+                "    RtlEnterCriticalSection(&gcsLookaside);",
+                "",
+                "    //",
+                "    // If the lookaside list has already been initialized, we're done.",
+                "    //",
+                "",
+                "    if (pla->LookasideBase != NULL && pla->EntrySize == cbEntry) {",
+                "        RtlLeaveCriticalSection(&gcsLookaside);",
+                "        UserLocalFree(p);",
+                "        return STATUS_SUCCESS;",
+                "    }",
+                "",
+                "    pla->LookasideBase = (PVOID)p;",
+                "    pla->LookasideBounds = (PVOID)(p + InitialSegmentSize);",
+                "    pla->EntrySize = cbEntry;",
+                "",
+                "    //",
+                "    // Using the ExZone-like code, slice up the page into QMSG's",
+                "    //",
+                "",
+                "    Zone = &pla->LookasideZone;",
+                "    BlockSize = cbEntry;",
+                "    InitialSegment = pla->LookasideBase;",
+                "",
+                "    Zone->BlockSize = BlockSize;",
+                "",
+                "    Zone->SegmentList.Next = &((PZONE_SEGMENT_HEADER) InitialSegment)->SegmentList;",
+                "    ((PZONE_SEGMENT_HEADER) InitialSegment)->SegmentList.Next = NULL;",
+                "    ((PZONE_SEGMENT_HEADER) InitialSegment)->Reserved = NULL;",
+                "",
+                "    Zone->FreeList.Next = NULL;",
+                "",
+                "    p = (PCH)InitialSegment + sizeof(ZONE_SEGMENT_HEADER);",
+                "",
+                "    for (i = sizeof(ZONE_SEGMENT_HEADER);",
+                "         i <= InitialSegmentSize - BlockSize;",
+                "         i += BlockSize",
+                "        ) {",
+                "        ((PSINGLE_LIST_ENTRY)p)->Next = Zone->FreeList.Next;",
+                "        Zone->FreeList.Next = (PSINGLE_LIST_ENTRY)p;",
+                "        p += BlockSize;",
+                "    }",
+                "    Zone->TotalSegmentSize = i;",
+                "",
+                "    RtlLeaveCriticalSection(&gcsLookaside);",
+                "",
+                "    return STATUS_SUCCESS;",
+                "",
+                "}",
+                "",
+                "/***************************************************************************\\",
+                "* AllocLookasideEntry",
+                "*",
+                "* Allocates an entry from the lookaside list.",
+                "*",
+                "* 05-04-95 JimA         Created.",
+                "\\***************************************************************************/",
+                "",
+                "PVOID AllocLookasideEntry(",
+                "    PLOOKASIDE pla)",
+                "{",
+                "    PVOID pEntry;",
+                "",
+                "    //",
+                "    // Attempt to get an entry from the zone. If this fails, then",
+                "    // LocalAlloc the entry",
+                "    //",
+                "",
+                "    RtlEnterCriticalSection(&gcsLookaside);",
+                "    pEntry = AllocateFromZone(&pla->LookasideZone);",
+                "    RtlLeaveCriticalSection(&gcsLookaside);",
+                "",
+                "    if ( !pEntry ) {",
+                "",
+                "        /*",
+                "         * Allocate a local structure.",
+                "         */"
+              ]
+            }
+          ]
+        },
+        {
+          "line": 197,
+          "arms": [
+            {
+              "directive": "if",
+              "expression": "defined(WOW_ORIGINAL_EDIT_LOOKASIDE)",
+              "body": [
+                "#line 322",
+                "        if ((pEntry = UserLocalAlloc(0, pla->EntrySize)) == NULL)",
+                "            return NULL;",
+                "        }",
+                "    RtlZeroMemory(pEntry, pla->EntrySize);"
+              ]
+            }
+          ]
+        },
+        {
+          "line": 210,
+          "arms": [
+            {
+              "directive": "if",
+              "expression": "defined(WOW_ORIGINAL_EDIT_LOOKASIDE)",
+              "body": [
+                "#line 333",
+                "",
+                "    return pEntry;",
+                "}",
+                "",
+                "/***************************************************************************\\",
+                "* FreeLookasideEntry",
+                "*",
+                "* Returns a qmsg to the lookaside buffer or free the memory.",
+                "*",
+                "* 05-04-95 JimA         Created.",
+                "\\***************************************************************************/",
+                "",
+                "void FreeLookasideEntry(",
+                "    PLOOKASIDE pla,",
+                "    PVOID pEntry)",
+                "{"
+              ]
+            }
+          ]
+        },
+        {
+          "line": 235,
+          "arms": [
+            {
+              "directive": "if",
+              "expression": "defined(WOW_ORIGINAL_EDIT_LOOKASIDE)",
+              "body": [
+                "#line 352",
+                "",
+                "    //",
+                "    // If the pEntry was from zone, then free to zone",
+                "    //",
+                "    if ( (PVOID)pEntry >= pla->LookasideBase && (PVOID)pEntry < pla->LookasideBounds ) {",
+                "        RtlEnterCriticalSection(&gcsLookaside);",
+                "        FreeToZone(&pla->LookasideZone,pEntry);",
+                "        RtlLeaveCriticalSection(&gcsLookaside);",
+                "    } else {"
+              ]
+            }
+          ]
+        },
+        {
+          "line": 253,
+          "arms": [
+            {
+              "directive": "if",
+              "expression": "defined(WOW_ORIGINAL_EDIT_LOOKASIDE)",
+              "body": [
+                "#line 364",
+                "        UserLocalFree(pEntry);",
+                "    }",
+                "}",
+                ""
+              ]
+            },
+            {
+              "directive": "else",
+              "expression": "",
+              "body": [
+                "/* DIVERGENCE(OPENNT-HOST-040): retain original RtlCaptureAnsiString.",
+                " * Other USER initialization/capture routines and private precompiled headers",
+                " * are excluded. The existing worker TLS/heap boundary supplies resources. */",
+                "#include \"wow_user_capture_bindings.h\"",
+                "",
+                "#line 30",
+                "BOOL RtlCaptureAnsiString(",
+                "    PIN_STRING pstr,",
+                "    LPCSTR psz,",
+                "    BOOL fForceAlloc)",
+                "{",
+                "    int cbSrc;",
+                "    int cbDst;",
+                "",
+                "    pstr->fAllocated = FALSE;",
+                "    if (psz) {",
+                "        cbSrc = strlen(psz) + 1;",
+                "        if (cbSrc > MAXUSHORT) {",
+                "            RIPMSG0(RIP_WARNING, \"String too long for standard string\");",
+                "            return FALSE;",
+                "        }",
+                "",
+                "        /*",
+                "         * If the allocation is forced or if the string is",
+                "         * too long to fit in the TEB, allocate a buffer.",
+                "         * Otherwise, store the result in the TEB.",
+                "         */",
+                "        if (fForceAlloc ||",
+                "                cbSrc > (STATIC_UNICODE_BUFFER_LENGTH / sizeof(WCHAR))) {",
+                "            pstr->strCapture.Buffer = RtlAllocateHeap(RtlProcessHeap(),",
+                "                    0, cbSrc * sizeof(WCHAR));",
+                "            if (pstr->strCapture.Buffer == NULL)",
+                "                return FALSE;",
+                "            pstr->fAllocated = TRUE;",
+                "            pstr->pstr = &pstr->strCapture;",
+                "            pstr->strCapture.MaximumLength = (USHORT)(cbSrc * sizeof(WCHAR));",
+                "        } else {",
+                "            pstr->pstr = &NtCurrentTeb()->StaticUnicodeString;",
+                "        }",
+                "",
+                "        /*",
+                "         * Convert the string to Unicode",
+                "         */",
+                "        if (RtlMultiByteToUnicodeN(pstr->pstr->Buffer,",
+                "                (ULONG)pstr->pstr->MaximumLength, &cbDst,",
+                "                (LPSTR)psz, cbSrc)) {",
+                "            RIPMSG0(RIP_WARNING, \"Unicode conversion failed\");",
+                "            if (pstr->fAllocated) {",
+                "                RtlFreeHeap(RtlProcessHeap(), 0, pstr->strCapture.Buffer);",
+                "                pstr->fAllocated = FALSE;",
+                "            }",
+                "            return FALSE;",
+                "        }",
+                "        pstr->pstr->Length = (USHORT)cbDst - sizeof(WCHAR);",
+                "    } else {",
+                "        pstr->pstr = &pstr->strCapture;",
+                "        pstr->strCapture.Length = pstr->strCapture.MaximumLength = 0;",
+                "        pstr->strCapture.Buffer = NULL;",
+                "    }",
+                "    return TRUE;",
+                "}",
+                ""
+              ]
+            }
+          ]
+        }
+      ],
+      "false_matches": "Scanner paired the final braces of RtlCaptureAnsiString with the unrelated FreeLookasideEntry function. Function body matches original byte-for-byte after line-ending normalization; selected #line positions map them to original lines 82 and 84.",
+      "function_sha256": "0a25925e2f423bae3a315c85b3e9ee337bbf8c38396fc50da9753d2921568a99"
+    }
+  ]
+}

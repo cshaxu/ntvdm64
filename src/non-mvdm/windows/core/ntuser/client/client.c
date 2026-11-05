@@ -105,6 +105,7 @@ void ClearWindowState(
 
 /* DIVERGENCE(OPENNT-HOST-081): complete original registration-based
  * dialog initializer; no direct private WOW entry replaces this callback. */
+#line 2326
 DWORD WOWDlgInit(
 HWND hwndDlg,
 LONG lParam)

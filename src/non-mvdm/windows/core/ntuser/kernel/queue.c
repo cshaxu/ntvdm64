@@ -345,6 +345,7 @@ NTSTATUS xxxInitTask(
     return STATUS_SUCCESS;
 }
 
+#line 867
 void _ShowStartGlass(
     DWORD dwTimeout,
     PPROCESSINFO currentProcess)

@@ -54,6 +54,7 @@ DWORD _GetWindowLong(
                 /* DIVERGENCE(OPENNT-HOST-121): public native slot, not CPD layout. */
                 return wow_dialog_host_get(HW(pwnd), index, bAnsi);
 #else
+#line 57
                 dwProc = (DWORD)PDLG(pwnd)->lpfnDlg;
 
                 /*
@@ -88,13 +89,16 @@ DWORD _GetWindowLong(
                 return dwProc;
 #endif
 
+#line 90
             case DWL_MSGRESULT:
 #ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER
                  return wow_dialog_host_get(HW(pwnd), index, bAnsi);
 #else
+#line 91
                  return (DWORD)((PDIALOG)pwnd)->resultWP;
 #endif
 
+#line 93
             case DWL_USER:
                  return (DWORD)((PDIALOG)pwnd)->unused;
 
@@ -161,8 +165,10 @@ DWORD _GetWindowLong(
         RIPERR0(ERROR_INVALID_INDEX, RIP_VERBOSE, "");
         return 0;
 #else
+#line 151
         return GetWindowData(pwnd, index, bAnsi);
 #endif
+#line 152
     } else {
         if (index + (int)sizeof(DWORD) > pwnd->cbwndExtra) {
             RIPERR0(ERROR_INVALID_INDEX, RIP_VERBOSE, "");

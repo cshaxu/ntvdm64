@@ -262,6 +262,7 @@ void FreeLookasideEntry(
  * are excluded. The existing worker TLS/heap boundary supplies resources. */
 #include "wow_user_capture_bindings.h"
 
+#line 30
 BOOL RtlCaptureAnsiString(
     PIN_STRING pstr,
     LPCSTR psz,
