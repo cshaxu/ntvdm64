@@ -143,3 +143,13 @@ The original `client/globals.h` `#ifndef RC_INVOKED` arm is selected in 39 recor
 ### Completed INT 15 host source review
 
 The [tape I/O file review](../../../artifacts/mvdm-audit/t476-s2-tape-io-final-review.json) completes `tape_io.c` against its pinned original. The complete diff, all recorded condition dispositions and selected PM/CPU40/NTVDM code were reviewed; unsupported paths retain `#error`. All matching original source lines retain their logical positions, and selected compiler contexts corroborate them. Existing XMS and register-only observation adaptations remain registered. Total: **747 of 1,055 complete; 308 open**.
+
+
+### Completed WOW message source review
+
+The [WOW message file review](../../../artifacts/mvdm-audit/t476-s2-wumsg-final-review.json) completes `wumsg.c`. Its complete original/current diff and conditional-arm dispositions were checked, including the selected non-API16 implementation and excluded DEBUG and API16 branches. Matching source-line positions and 101 preprocessed observations agree; the existing message and DDE ownership adaptations remain registered. Total: **748 of 1,055 complete; 307 open**.
+
+
+### Completed original dialog creator review
+
+The [dialog creator review](../../../artifacts/mvdm-audit/t476-s2-dlgbegin-final-review.json) completes `dlgbegin.c`. Its complete diff, original DEBUG branch and local dialog-procedure ownership conditions were checked against hit records; the existing ownership and lifecycle adaptations remain registered. Matching source positions and 140 actual compiler observations agree. Total: **749 of 1,055 complete; 306 open**.
