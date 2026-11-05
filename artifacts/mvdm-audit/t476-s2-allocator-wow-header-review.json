@@ -1,0 +1,194 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ckmalloc.h",
+      "current_sha256": "c1bd3ef5697fe2c07433170407a2141b287168f5b7c4e7bd22fcd5bf0623f9d1",
+      "original_sha256": "49d55eba11bc663e678544a40536d1a799261c1cf67eb25b779a8c23465c81e3",
+      "original_lines_checked": 50,
+      "local_diff": [
+        {
+          "kind": "insert",
+          "original": [
+            22,
+            21
+          ],
+          "current": [
+            22,
+            26
+          ],
+          "original_body": [],
+          "current_body": [
+            "/* DIVERGENCE: historical NT CRT headers exposed malloc through MemoryH.",
+            " * Modern MSVC declares the same allocator contract in stdlib.h; include it",
+            " * so host_malloc's existing macro spelling preserves a pointer-width return. */",
+            "#include <stdlib.h>",
+            "#line 22"
+          ]
+        }
+      ],
+      "compiler_witnesses": [
+        {
+          "directive_line": 1
+        },
+        {
+          "directive_line": 21
+        },
+        {
+          "directive_line": 22
+        },
+        {
+          "directive_line": 1
+        },
+        {
+          "directive_line": 21
+        },
+        {
+          "directive_line": 22
+        }
+      ],
+      "compiler_output_sha256": "7232ae7b2e06455979f612a24a2ec22f131d7eb3e1e4c58eae67463a971d4fcb",
+      "coverage_note": "no conditional arms; macro-only ckmalloc has no emitted text"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.h",
+      "current_sha256": "950f8b060f56a1d42131d5b4cb35ae16d1cea043f50cda83c890bd015f88b52f",
+      "original_sha256": "1f18e9770131f758947986de78dcb6c974730bcbaad3137e3c69a615f0f79324",
+      "original_lines_checked": 42,
+      "local_diff": [
+        {
+          "kind": "replace",
+          "original": [
+            16,
+            16
+          ],
+          "current": [
+            16,
+            18
+          ],
+          "original_body": [
+            "extern BOOL fWhoCalled;"
+          ],
+          "current_body": [
+            "/* DIVERGENCE(MVDM-HOST-DIV-344): matches the private native-thread mode. */",
+            "extern __declspec(thread) BOOL fWhoCalled;",
+            "#line 17"
+          ]
+        }
+      ],
+      "compiler_witnesses": [
+        {
+          "directive_line": 1
+        },
+        {
+          "line": 17,
+          "text": "extern __declspec(thread) BOOL fWhoCalled;"
+        },
+        {
+          "directive_line": 17
+        },
+        {
+          "line": 18,
+          "text": "ULONG    WU32CallMsgFilter(PVDMFRAME pFrame);"
+        },
+        {
+          "line": 19,
+          "text": "ULONG    WU32CallWindowProc(PVDMFRAME pFrame);"
+        },
+        {
+          "line": 20,
+          "text": "ULONG    WU32DefDlgProc(PVDMFRAME pFrame);"
+        },
+        {
+          "line": 21,
+          "text": "ULONG    WU32DefFrameProc(PVDMFRAME pFrame);"
+        },
+        {
+          "line": 22,
+          "text": "ULONG    WU32DefMDIChildProc(PVDMFRAME pFrame);"
+        },
+        {
+          "line": 23,
+          "text": "ULONG    WU32DefWindowProc(PVDMFRAME pFrame);"
+        },
+        {
+          "line": 24,
+          "text": "ULONG    WU32DispatchMessage(PVDMFRAME pFrame);"
+        },
+        {
+          "line": 25,
+          "text": "ULONG    WU32GetMessage(PVDMFRAME pFrame);"
+        },
+        {
+          "line": 26,
+          "text": "ULONG    WU32GetMessagePos(PVDMFRAME pFrame);"
+        },
+        {
+          "line": 27,
+          "text": "ULONG    WU32GetMessageTime(PVDMFRAME pFrame);"
+        },
+        {
+          "line": 28,
+          "text": "ULONG    WU32InSendMessage(PVDMFRAME pFrame);"
+        },
+        {
+          "line": 29,
+          "text": "ULONG    WU32PeekMessage(PVDMFRAME pFrame);"
+        },
+        {
+          "line": 30,
+          "text": "ULONG    WU32PostAppMessage(PVDMFRAME pFrame);"
+        },
+        {
+          "line": 31,
+          "text": "ULONG    WU32PostMessage(PVDMFRAME pFrame);"
+        },
+        {
+          "line": 32,
+          "text": "ULONG    WU32PostQuitMessage(PVDMFRAME pFrame);"
+        },
+        {
+          "line": 33,
+          "text": "ULONG    WU32RegisterWindowMessage(PVDMFRAME pFrame);"
+        },
+        {
+          "line": 34,
+          "text": "ULONG    WU32ReplyMessage(PVDMFRAME pFrame);"
+        },
+        {
+          "line": 35,
+          "text": "ULONG    WU32SendDlgItemMessage(PVDMFRAME pFrame);"
+        },
+        {
+          "line": 36,
+          "text": "ULONG    WU32SendMessage(PVDMFRAME pFrame);"
+        },
+        {
+          "line": 37,
+          "text": "ULONG    WU32SetMessageQueue(PVDMFRAME pFrame);"
+        },
+        {
+          "line": 38,
+          "text": "ULONG    WU32TranslateAccelerator(PVDMFRAME pFrame);"
+        },
+        {
+          "line": 39,
+          "text": "ULONG    WU32TranslateMDISysAccel(PVDMFRAME pFrame);"
+        },
+        {
+          "line": 40,
+          "text": "ULONG    WU32TranslateMessage(PVDMFRAME pFrame);"
+        },
+        {
+          "line": 41,
+          "text": "ULONG    WU32WaitMessage(PVDMFRAME pFrame);"
+        },
+        {
+          "line": 43,
+          "text": "void    SetFakeDialogClass(HWND hwnd);"
+        }
+      ],
+      "compiler_output_sha256": "e26a5055128b29ac4de23971ef14abce47f4ab04a959f0b6047963b03da534d9",
+      "coverage_note": "no conditional arms; active declarations checked"
+    }
+  ]
+}
