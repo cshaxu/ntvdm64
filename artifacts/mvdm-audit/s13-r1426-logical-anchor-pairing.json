@@ -1,0 +1,1571 @@
+{
+  "method": "Recalculate effective logical line at each current directive, then compare the directive at that line in its pinned original. This checks candidate pairing only; duplicate matching text and edited line directives require further review.",
+  "counts": {
+    "(True, True)": 34,
+    "(False, False)": 62,
+    "(False, True)": 22,
+    "(True, False)": 38
+  },
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_line": 493,
+      "old_pair_line": 619,
+      "logical_original_line": 619,
+      "directive_match": true,
+      "current_directive": "#ifndef CPU_30_STYLE",
+      "original_directive": "#ifndef CPU_30_STYLE",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_line": 564,
+      "old_pair_line": 683,
+      "logical_original_line": 683,
+      "directive_match": true,
+      "current_directive": "#ifndef CPU_30_STYLE",
+      "original_directive": "#ifndef CPU_30_STYLE",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "current_line": 84,
+      "old_pair_line": 78,
+      "logical_original_line": 77,
+      "directive_match": false,
+      "current_directive": "#ifndef CPU_30_STYLE",
+      "original_directive": "",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "current_line": 83,
+      "old_pair_line": 75,
+      "logical_original_line": 83,
+      "directive_match": false,
+      "current_directive": "#if defined(CCPU) && !defined(CPU_30_STYLE)",
+      "original_directive": "reg DI;\t\t/* Destination Index\t*/",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "current_line": 119,
+      "old_pair_line": 346,
+      "logical_original_line": 350,
+      "directive_match": false,
+      "current_directive": "#if !defined(MAC_LIKE) && !defined(CPU_30_STYLE)",
+      "original_directive": "0,\t/* 01 */",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "current_line": 704,
+      "old_pair_line": 760,
+      "logical_original_line": 760,
+      "directive_match": true,
+      "current_directive": "#ifndef X86GFX",
+      "original_directive": "#ifndef X86GFX",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/ex/probe.c",
+      "current_line": 91,
+      "old_pair_line": 121,
+      "logical_original_line": 108,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "current_line": 44,
+      "old_pair_line": 1411,
+      "logical_original_line": 1411,
+      "directive_match": false,
+      "current_directive": "#ifndef IsNEC_98",
+      "original_directive": "#define PF_3DNOW_INSTRUCTIONS_AVAILABLE     7   // winnt",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "current_line": 47,
+      "old_pair_line": 1415,
+      "logical_original_line": 1415,
+      "directive_match": false,
+      "current_directive": "#ifndef IsNotNEC_98",
+      "original_directive": "typedef enum _ALTERNATIVE_ARCHITECTURE_TYPE {",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "current_line": 50,
+      "old_pair_line": 1419,
+      "logical_original_line": 1419,
+      "directive_match": false,
+      "current_directive": "#ifndef SetNEC_98",
+      "original_directive": "} ALTERNATIVE_ARCHITECTURE_TYPE;",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "current_line": 53,
+      "old_pair_line": 1423,
+      "logical_original_line": 1423,
+      "directive_match": false,
+      "current_directive": "#ifndef SetNotNEC_98",
+      "original_directive": "#ifndef _X86_",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "current_line": 70,
+      "old_pair_line": 1471,
+      "logical_original_line": 1469,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "// Current 64-bit interrupt time in 100ns units.",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+      "current_line": 39,
+      "old_pair_line": 138,
+      "logical_original_line": 138,
+      "directive_match": true,
+      "current_directive": "#ifndef CLIENT_ID64_DEFINED",
+      "original_directive": "#ifndef CLIENT_ID64_DEFINED",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+      "current_line": 52,
+      "old_pair_line": 396,
+      "logical_original_line": 396,
+      "directive_match": true,
+      "current_directive": "#if !defined(_X86_)",
+      "original_directive": "#if !defined(_X86_)",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+      "current_line": 54,
+      "old_pair_line": 419,
+      "logical_original_line": 397,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "#define Wx86CurrentTib()  (  \\",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 161,
+      "old_pair_line": 35,
+      "logical_original_line": 35,
+      "directive_match": true,
+      "current_directive": "#if ( _MSC_VER >= 800 )",
+      "original_directive": "#if ( _MSC_VER >= 800 )",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 164,
+      "old_pair_line": 37,
+      "logical_original_line": 37,
+      "directive_match": true,
+      "current_directive": "#if _MSC_VER >= 1200",
+      "original_directive": "#if _MSC_VER >= 1200",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 171,
+      "old_pair_line": 44,
+      "logical_original_line": 44,
+      "directive_match": true,
+      "current_directive": "#if (_MSC_VER > 1020)",
+      "original_directive": "#if (_MSC_VER > 1020)",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 181,
+      "old_pair_line": 86,
+      "logical_original_line": 69,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "NTSYSAPI",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 189,
+      "old_pair_line": 1045,
+      "logical_original_line": 1034,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "#if defined(_M_MRX000) || defined(_M_ALPHA)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 194,
+      "old_pair_line": 1575,
+      "logical_original_line": 1575,
+      "directive_match": false,
+      "current_directive": "#ifdef _WIN64",
+      "original_directive": ");",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 196,
+      "old_pair_line": 1577,
+      "logical_original_line": 1576,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 201,
+      "old_pair_line": 1594,
+      "logical_original_line": 1594,
+      "directive_match": false,
+      "current_directive": "#ifdef _NTSYSTEM_",
+      "original_directive": "//",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 203,
+      "old_pair_line": 1599,
+      "logical_original_line": 1595,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 208,
+      "old_pair_line": 2234,
+      "logical_original_line": 2234,
+      "directive_match": false,
+      "current_directive": "#ifndef DEFINE_GUIDEX",
+      "original_directive": "// end_ntminiport",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 213,
+      "old_pair_line": 2238,
+      "logical_original_line": 2238,
+      "directive_match": false,
+      "current_directive": "#ifndef STATICGUIDOF",
+      "original_directive": "#endif // !defined(DEFINE_GUIDEX)",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 218,
+      "old_pair_line": 2242,
+      "logical_original_line": 2242,
+      "directive_match": false,
+      "current_directive": "#ifndef __IID_ALIGNED__",
+      "original_directive": "#endif // !defined(STATICGUIDOF)",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 224,
+      "old_pair_line": 2249,
+      "logical_original_line": 2246,
+      "directive_match": false,
+      "current_directive": "#else // !__cplusplus",
+      "original_directive": "#ifdef __cplusplus",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 231,
+      "old_pair_line": 2814,
+      "logical_original_line": 2814,
+      "directive_match": false,
+      "current_directive": "#if defined(_WIN64)",
+      "original_directive": "UNICODE_STRING RuntimeData;     // ProcessParameters",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 236,
+      "old_pair_line": 2864,
+      "logical_original_line": 2864,
+      "directive_match": false,
+      "current_directive": "#if defined(_X86_)",
+      "original_directive": "RTL_DRIVE_LETTER_CURDIR32 CurrentDirectores[ RTL_MAX_DRIVE_LETTERS ];",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 241,
+      "old_pair_line": 3052,
+      "logical_original_line": 3052,
+      "directive_match": false,
+      "current_directive": "#if !defined(MIDL_PASS)",
+      "original_directive": "RtlImageNtHeader(",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 244,
+      "old_pair_line": 3078,
+      "logical_original_line": 3078,
+      "directive_match": false,
+      "current_directive": "#ifndef _MAC",
+      "original_directive": "--*/",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 251,
+      "old_pair_line": 3126,
+      "logical_original_line": 3126,
+      "directive_match": false,
+      "current_directive": "#if defined(_WIN64)",
+      "original_directive": "USHORT DirectoryEntry,",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 253,
+      "old_pair_line": 3135,
+      "logical_original_line": 3127,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "PULONG Size",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 258,
+      "old_pair_line": 3164,
+      "logical_original_line": 3164,
+      "directive_match": false,
+      "current_directive": "#if defined(_M_IX86) || defined(_M_MRX000) || defined(_M_ALPHA)",
+      "original_directive": "// Fast primitives to compare, move, and zero memory",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 264,
+      "old_pair_line": 3176,
+      "logical_original_line": 3168,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "#if defined(_M_IX86) || defined(_M_MRX000) || defined(_M_ALPHA)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 268,
+      "old_pair_line": 3185,
+      "logical_original_line": 3179,
+      "directive_match": false,
+      "current_directive": "#else // _M_PPC",
+      "original_directive": "",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 276,
+      "old_pair_line": 3291,
+      "logical_original_line": 3253,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": ");",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 284,
+      "old_pair_line": 3428,
+      "logical_original_line": 3424,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "#define DBG_STATUS_WORKER           7",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 289,
+      "old_pair_line": 3436,
+      "logical_original_line": 3436,
+      "directive_match": false,
+      "current_directive": "#ifndef _DBGNT_",
+      "original_directive": "#define KdBreakPointWithStatus(s)",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 294,
+      "old_pair_line": 3486,
+      "logical_original_line": 3486,
+      "directive_match": false,
+      "current_directive": "#if defined(MIDL_PASS) || defined(__cplusplus) || !defined(_M_IX86)",
+      "original_directive": "//",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 296,
+      "old_pair_line": 3561,
+      "logical_original_line": 3487,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "// Large integer arithmetic routines.",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 301,
+      "old_pair_line": 3751,
+      "logical_original_line": 3751,
+      "directive_match": false,
+      "current_directive": "#if defined(MIDL_PASS) || defined(__cplusplus) || !defined(_M_IX86)",
+      "original_directive": "//",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 303,
+      "old_pair_line": 3804,
+      "logical_original_line": 3752,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "// Large integer conversion routines.",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 308,
+      "old_pair_line": 5691,
+      "logical_original_line": 5691,
+      "directive_match": false,
+      "current_directive": "#if defined(_WIN64)",
+      "original_directive": "} RTL_RXACT_OPERATION, *PRTL_RXACT_OPERATION;",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 313,
+      "old_pair_line": 6166,
+      "logical_original_line": 6166,
+      "directive_match": false,
+      "current_directive": "#ifdef UNICODE",
+      "original_directive": "ULONG dwMinorVersion;",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 315,
+      "old_pair_line": 6170,
+      "logical_original_line": 6167,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "ULONG dwBuildNumber;",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 320,
+      "old_pair_line": 6203,
+      "logical_original_line": 6203,
+      "directive_match": false,
+      "current_directive": "#ifdef UNICODE",
+      "original_directive": "USHORT wServicePackMinor;",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_line": 322,
+      "old_pair_line": 6207,
+      "logical_original_line": 6204,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "USHORT wSuiteMask;",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "current_line": 223,
+      "old_pair_line": 2290,
+      "logical_original_line": 2290,
+      "directive_match": true,
+      "current_directive": "#else",
+      "original_directive": "#else",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "current_line": 461,
+      "old_pair_line": 1789,
+      "logical_original_line": 333,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "/*",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "current_line": 470,
+      "old_pair_line": 1840,
+      "logical_original_line": 455,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "* Call Client Windows procudure.",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "current_line": 1088,
+      "old_pair_line": 1691,
+      "logical_original_line": 2626,
+      "directive_match": true,
+      "current_directive": "#else",
+      "original_directive": "#else",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "current_line": 1097,
+      "old_pair_line": 2626,
+      "logical_original_line": 3753,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "return (MagnitudeDiff(uColorsWant, uColorsNew) +",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+      "current_line": 45,
+      "old_pair_line": 85,
+      "logical_original_line": 85,
+      "directive_match": false,
+      "current_directive": "#ifndef RC_INVOKED",
+      "original_directive": "#ifndef RC_INVOKED       // RC can't handle #pragmas",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_line": 305,
+      "old_pair_line": 439,
+      "logical_original_line": 382,
+      "directive_match": false,
+      "current_directive": "#else // MEMPHIS_MENUS",
+      "original_directive": "HMENU hMenu,",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_line": 341,
+      "old_pair_line": 758,
+      "logical_original_line": 755,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "// Build DBCS-ware wParam. (for WM_CHAR...)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_line": 356,
+      "old_pair_line": 779,
+      "logical_original_line": 771,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "dwAnsi = pmsg->wParam;",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_line": 365,
+      "old_pair_line": 792,
+      "logical_original_line": 786,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "//",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_line": 10,
+      "old_pair_line": 15,
+      "logical_original_line": 15,
+      "directive_match": true,
+      "current_directive": "#ifndef WOW",
+      "original_directive": "#ifndef WOW",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_line": 19,
+      "old_pair_line": 119,
+      "logical_original_line": 21,
+      "directive_match": false,
+      "current_directive": "#else // WOW",
+      "original_directive": "#error \"WOW does not match WINVER\"",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_line": 60,
+      "old_pair_line": 442,
+      "logical_original_line": 306,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "return FALSE;",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_line": 69,
+      "old_pair_line": 726,
+      "logical_original_line": 437,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_line": 87,
+      "old_pair_line": 779,
+      "logical_original_line": 778,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "return  (BOOL) &pwnd->rcWindow;    // return pointer to rect.",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_line": 96,
+      "old_pair_line": 802,
+      "logical_original_line": 797,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "LPPOINT16 lpT = (LPPOINT16)ppoint;",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_line": 105,
+      "old_pair_line": 837,
+      "logical_original_line": 837,
+      "directive_match": true,
+      "current_directive": "#else",
+      "original_directive": "#else",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_line": 111,
+      "old_pair_line": 890,
+      "logical_original_line": 890,
+      "directive_match": true,
+      "current_directive": "#ifndef WOW",
+      "original_directive": "#ifndef WOW",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_line": 120,
+      "old_pair_line": 913,
+      "logical_original_line": 913,
+      "directive_match": true,
+      "current_directive": "#else",
+      "original_directive": "#else",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_line": 435,
+      "old_pair_line": 325,
+      "logical_original_line": 317,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "DWORD dwAnsi = pmsg->wParam;",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_line": 464,
+      "old_pair_line": 369,
+      "logical_original_line": 38,
+      "directive_match": true,
+      "current_directive": "#ifndef UNICODE",
+      "original_directive": "#ifndef UNICODE",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_line": 469,
+      "old_pair_line": 395,
+      "logical_original_line": 217,
+      "directive_match": true,
+      "current_directive": "#ifndef UNICODE",
+      "original_directive": "#ifndef UNICODE",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_line": 474,
+      "old_pair_line": 414,
+      "logical_original_line": 254,
+      "directive_match": true,
+      "current_directive": "#ifndef UNICODE",
+      "original_directive": "#ifndef UNICODE",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_line": 479,
+      "old_pair_line": 431,
+      "logical_original_line": 271,
+      "directive_match": true,
+      "current_directive": "#ifndef UNICODE",
+      "original_directive": "#ifndef UNICODE",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_line": 484,
+      "old_pair_line": 514,
+      "logical_original_line": 369,
+      "directive_match": true,
+      "current_directive": "#ifndef UNICODE",
+      "original_directive": "#ifndef UNICODE",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_line": 489,
+      "old_pair_line": 549,
+      "logical_original_line": 395,
+      "directive_match": true,
+      "current_directive": "#ifndef UNICODE",
+      "original_directive": "#ifndef UNICODE",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_line": 494,
+      "old_pair_line": 934,
+      "logical_original_line": 414,
+      "directive_match": true,
+      "current_directive": "#ifndef UNICODE",
+      "original_directive": "#ifndef UNICODE",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_line": 499,
+      "old_pair_line": 976,
+      "logical_original_line": 431,
+      "directive_match": true,
+      "current_directive": "#ifndef UNICODE",
+      "original_directive": "#ifndef UNICODE",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_line": 504,
+      "old_pair_line": 1111,
+      "logical_original_line": 514,
+      "directive_match": true,
+      "current_directive": "#ifndef UNICODE",
+      "original_directive": "#ifndef UNICODE",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_line": 515,
+      "old_pair_line": 1295,
+      "logical_original_line": 549,
+      "directive_match": true,
+      "current_directive": "#ifndef UNICODE",
+      "original_directive": "#ifndef UNICODE",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_line": 526,
+      "old_pair_line": 1505,
+      "logical_original_line": 934,
+      "directive_match": true,
+      "current_directive": "#ifndef UNICODE",
+      "original_directive": "#ifndef UNICODE",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "current_line": 248,
+      "old_pair_line": 377,
+      "logical_original_line": 377,
+      "directive_match": true,
+      "current_directive": "#else",
+      "original_directive": "#else",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+      "current_line": 77,
+      "old_pair_line": 134,
+      "logical_original_line": 134,
+      "directive_match": true,
+      "current_directive": "#ifndef LATER",
+      "original_directive": "#ifndef LATER",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "current_line": 106,
+      "old_pair_line": 1325,
+      "logical_original_line": 1323,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "ThreadUnlock1(",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+      "current_line": 86,
+      "old_pair_line": 840,
+      "logical_original_line": 840,
+      "directive_match": true,
+      "current_directive": "#ifndef KOREA",
+      "original_directive": "#ifndef KOREA",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "current_line": 340,
+      "old_pair_line": 4757,
+      "logical_original_line": 4752,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "* If the IME claims that it needs this vkey, replace it",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 144,
+      "old_pair_line": 6312,
+      "logical_original_line": 352,
+      "directive_match": true,
+      "current_directive": "#if defined(_X86_)",
+      "original_directive": "#if defined(_X86_)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 153,
+      "old_pair_line": 6417,
+      "logical_original_line": 390,
+      "directive_match": true,
+      "current_directive": "#if defined(_X86_)",
+      "original_directive": "#if defined(_X86_)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 162,
+      "old_pair_line": 6689,
+      "logical_original_line": 563,
+      "directive_match": true,
+      "current_directive": "#if defined(_X86_)",
+      "original_directive": "#if defined(_X86_)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 171,
+      "old_pair_line": 6929,
+      "logical_original_line": 715,
+      "directive_match": true,
+      "current_directive": "#if defined(_X86_)",
+      "original_directive": "#if defined(_X86_)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 180,
+      "old_pair_line": 6977,
+      "logical_original_line": 738,
+      "directive_match": true,
+      "current_directive": "#if defined(_X86_)",
+      "original_directive": "#if defined(_X86_)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 189,
+      "old_pair_line": 7026,
+      "logical_original_line": 964,
+      "directive_match": true,
+      "current_directive": "#if defined(_X86_)",
+      "original_directive": "#if defined(_X86_)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 198,
+      "old_pair_line": 7071,
+      "logical_original_line": 1135,
+      "directive_match": true,
+      "current_directive": "#if defined(_X86_)",
+      "original_directive": "#if defined(_X86_)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 207,
+      "old_pair_line": 7102,
+      "logical_original_line": 1229,
+      "directive_match": true,
+      "current_directive": "#if defined(_X86_)",
+      "original_directive": "#if defined(_X86_)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 216,
+      "old_pair_line": 7131,
+      "logical_original_line": 1312,
+      "directive_match": true,
+      "current_directive": "#if defined(_X86_)",
+      "original_directive": "#if defined(_X86_)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 225,
+      "old_pair_line": 7161,
+      "logical_original_line": 1957,
+      "directive_match": true,
+      "current_directive": "#if defined(_X86_)",
+      "original_directive": "#if defined(_X86_)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 234,
+      "old_pair_line": 7188,
+      "logical_original_line": 2027,
+      "directive_match": true,
+      "current_directive": "#if defined(_X86_)",
+      "original_directive": "#if defined(_X86_)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 243,
+      "old_pair_line": 7261,
+      "logical_original_line": 2112,
+      "directive_match": true,
+      "current_directive": "#if defined(_X86_)",
+      "original_directive": "#if defined(_X86_)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 252,
+      "old_pair_line": 7333,
+      "logical_original_line": 2288,
+      "directive_match": true,
+      "current_directive": "#if defined(_X86_)",
+      "original_directive": "#if defined(_X86_)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 261,
+      "old_pair_line": 7363,
+      "logical_original_line": 2369,
+      "directive_match": true,
+      "current_directive": "#if defined(_X86_)",
+      "original_directive": "#if defined(_X86_)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 270,
+      "old_pair_line": 7439,
+      "logical_original_line": 2723,
+      "directive_match": true,
+      "current_directive": "#if defined(_X86_)",
+      "original_directive": "#if defined(_X86_)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 279,
+      "old_pair_line": 8558,
+      "logical_original_line": 3107,
+      "directive_match": true,
+      "current_directive": "#if defined(_X86_)",
+      "original_directive": "#if defined(_X86_)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 288,
+      "old_pair_line": 8571,
+      "logical_original_line": 3158,
+      "directive_match": true,
+      "current_directive": "#if defined(_X86_)",
+      "original_directive": "#if defined(_X86_)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 297,
+      "old_pair_line": 8687,
+      "logical_original_line": 3446,
+      "directive_match": true,
+      "current_directive": "#if defined(_X86_)",
+      "original_directive": "#if defined(_X86_)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 306,
+      "old_pair_line": 8747,
+      "logical_original_line": 3972,
+      "directive_match": true,
+      "current_directive": "#if defined(_X86_)",
+      "original_directive": "#if defined(_X86_)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 315,
+      "old_pair_line": 9237,
+      "logical_original_line": 4318,
+      "directive_match": true,
+      "current_directive": "#if defined(_X86_)",
+      "original_directive": "#if defined(_X86_)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 324,
+      "old_pair_line": 9303,
+      "logical_original_line": 4727,
+      "directive_match": true,
+      "current_directive": "#if defined(_X86_)",
+      "original_directive": "#if defined(_X86_)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 333,
+      "old_pair_line": 9354,
+      "logical_original_line": 5472,
+      "directive_match": true,
+      "current_directive": "#if defined(_X86_)",
+      "original_directive": "#if defined(_X86_)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 342,
+      "old_pair_line": 9395,
+      "logical_original_line": 5506,
+      "directive_match": true,
+      "current_directive": "#if defined(_X86_)",
+      "original_directive": "#if defined(_X86_)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 351,
+      "old_pair_line": 9435,
+      "logical_original_line": 5768,
+      "directive_match": true,
+      "current_directive": "#if defined(_X86_)",
+      "original_directive": "#if defined(_X86_)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_line": 360,
+      "old_pair_line": 9558,
+      "logical_original_line": 5823,
+      "directive_match": true,
+      "current_directive": "#if defined(_X86_)",
+      "original_directive": "#if defined(_X86_)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_line": 92,
+      "old_pair_line": 22,
+      "logical_original_line": 22,
+      "directive_match": true,
+      "current_directive": "#ifndef _WINBASE_",
+      "original_directive": "#ifndef _WINBASE_",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_line": 95,
+      "old_pair_line": 54,
+      "logical_original_line": 54,
+      "directive_match": true,
+      "current_directive": "#if(WINVER >= 0x0400)",
+      "original_directive": "#if(WINVER >= 0x0400)",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_line": 108,
+      "old_pair_line": 65,
+      "logical_original_line": 65,
+      "directive_match": true,
+      "current_directive": "#ifdef RIP_COMPONENT",
+      "original_directive": "#ifdef RIP_COMPONENT",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_line": 116,
+      "old_pair_line": 84,
+      "logical_original_line": 83,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "void CheckSysLock(int where, PQ pq, PTHREADINFO pti);",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_line": 124,
+      "old_pair_line": 116,
+      "logical_original_line": 115,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "#define PtiCurrentShared() _ptiCritShared()",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_line": 138,
+      "old_pair_line": 792,
+      "logical_original_line": 792,
+      "directive_match": true,
+      "current_directive": "#else",
+      "original_directive": "#else",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_line": 146,
+      "old_pair_line": 842,
+      "logical_original_line": 801,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "#define TRACE_INIT(str)    { if (TraceDisplayDriverLoad > 0) {  KdPrint(str); }}",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_line": 154,
+      "old_pair_line": 895,
+      "logical_original_line": 895,
+      "directive_match": true,
+      "current_directive": "#else",
+      "original_directive": "#else",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_line": 162,
+      "old_pair_line": 917,
+      "logical_original_line": 913,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "{                                          \\",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_line": 170,
+      "old_pair_line": 938,
+      "logical_original_line": 933,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "{                                          \\",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_line": 178,
+      "old_pair_line": 954,
+      "logical_original_line": 950,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "{                                          \\",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_line": 186,
+      "old_pair_line": 969,
+      "logical_original_line": 968,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "PVOID ThreadUnlock1(PTL ptl);",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_line": 194,
+      "old_pair_line": 982,
+      "logical_original_line": 981,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "BOOL HMRelocateLockRecord(PVOID ppobjOld, int cbDelta);",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_line": 202,
+      "old_pair_line": 1055,
+      "logical_original_line": 1050,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "{                                           \\",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_line": 210,
+      "old_pair_line": 1095,
+      "logical_original_line": 1086,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "#define CheckCritIn()           _AssertCritIn()",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_line": 215,
+      "old_pair_line": 1219,
+      "logical_original_line": 1219,
+      "directive_match": true,
+      "current_directive": "#ifdef POOL_TAGGING",
+      "original_directive": "#ifdef POOL_TAGGING",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_line": 217,
+      "old_pair_line": 1245,
+      "logical_original_line": 1220,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_line": 225,
+      "old_pair_line": 1278,
+      "logical_original_line": 1273,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_line": 317,
+      "old_pair_line": 3570,
+      "logical_original_line": 3570,
+      "directive_match": true,
+      "current_directive": "#else",
+      "original_directive": "#else",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_line": 322,
+      "old_pair_line": 3712,
+      "logical_original_line": 3712,
+      "directive_match": true,
+      "current_directive": "#ifndef MSDWP",
+      "original_directive": "#ifndef MSDWP",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_line": 333,
+      "old_pair_line": 3781,
+      "logical_original_line": 3781,
+      "directive_match": true,
+      "current_directive": "#ifndef MSDWP",
+      "original_directive": "#ifndef MSDWP",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_line": 347,
+      "old_pair_line": 5026,
+      "logical_original_line": 5025,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "#define PMAP_LAST              37",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "current_line": 435,
+      "old_pair_line": 362,
+      "logical_original_line": 353,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "// Format of *pWParam here...",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "current_line": 444,
+      "old_pair_line": 382,
+      "logical_original_line": 380,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "(LPWSTR)pWParam, NWCH,",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "current_line": 453,
+      "old_pair_line": 416,
+      "logical_original_line": 395,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "//",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "current_line": 139,
+      "old_pair_line": 683,
+      "logical_original_line": 682,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "!(wState & (DFCS_SCROLLSIZEGRIP | DFCS_SCROLLSIZEGRIPRIGHT))))",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_line": 232,
+      "old_pair_line": 720,
+      "logical_original_line": 721,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "UNREFERENCED_PARAMETER(dwCodePage);",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_line": 241,
+      "old_pair_line": 881,
+      "logical_original_line": 877,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "// Kanji Windows has three shortcut prefixes...",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_line": 250,
+      "old_pair_line": 1226,
+      "logical_original_line": 1226,
+      "directive_match": true,
+      "current_directive": "#else",
+      "original_directive": "#else",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_line": 282,
+      "old_pair_line": 1659,
+      "logical_original_line": 1659,
+      "directive_match": true,
+      "current_directive": "#else",
+      "original_directive": "#else",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_line": 28,
+      "old_pair_line": 30,
+      "logical_original_line": 30,
+      "directive_match": true,
+      "current_directive": "#ifdef _USERK_",
+      "original_directive": "#ifdef _USERK_",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_line": 30,
+      "old_pair_line": 35,
+      "logical_original_line": 31,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "#include <w32p.h>",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_line": 43,
+      "old_pair_line": 46,
+      "logical_original_line": 46,
+      "directive_match": true,
+      "current_directive": "#ifdef RIP_COMPONENT",
+      "original_directive": "#ifdef RIP_COMPONENT",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_line": 47,
+      "old_pair_line": 49,
+      "logical_original_line": 49,
+      "directive_match": true,
+      "current_directive": "#ifdef _USERK_",
+      "original_directive": "#ifdef _USERK_",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_line": 49,
+      "old_pair_line": 51,
+      "logical_original_line": 50,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "#define RIP_COMPONENT RIP_USERKRNL",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_line": 55,
+      "old_pair_line": 68,
+      "logical_original_line": 68,
+      "directive_match": true,
+      "current_directive": "#ifdef _USERK_",
+      "original_directive": "#ifdef _USERK_",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_line": 57,
+      "old_pair_line": 76,
+      "logical_original_line": 69,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_line": 64,
+      "old_pair_line": 85,
+      "logical_original_line": 81,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "#define REBASEALWAYS(p, elem) ((PVOID)(CheckCurrentDesktop((p)->elem),  \\",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_line": 68,
+      "old_pair_line": 89,
+      "logical_original_line": 89,
+      "directive_match": true,
+      "current_directive": "#else",
+      "original_directive": "#else",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_line": 83,
+      "old_pair_line": 131,
+      "logical_original_line": 131,
+      "directive_match": true,
+      "current_directive": "#ifdef _USERK_",
+      "original_directive": "#ifdef _USERK_",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_line": 85,
+      "old_pair_line": 148,
+      "logical_original_line": 132,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "/* From ntgdi\\inc\\ntgdi.h */",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_line": 91,
+      "old_pair_line": 177,
+      "logical_original_line": 177,
+      "directive_match": true,
+      "current_directive": "#ifdef _USERK_",
+      "original_directive": "#ifdef _USERK_",
+      "old_pair_matches_logical": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_line": 93,
+      "old_pair_line": 216,
+      "logical_original_line": 178,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "current_line": 12,
+      "old_pair_line": 108,
+      "logical_original_line": 17,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "/*",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "current_line": 27,
+      "old_pair_line": 150,
+      "logical_original_line": 148,
+      "directive_match": false,
+      "current_directive": "#else",
+      "original_directive": "#define DESKTOPVALIDATE(pobj)",
+      "old_pair_matches_logical": false
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "current_line": 153,
+      "old_pair_line": 344,
+      "logical_original_line": 244,
+      "directive_match": true,
+      "current_directive": "#ifndef WOW",
+      "original_directive": "#ifndef WOW",
+      "old_pair_matches_logical": false
+    }
+  ]
+}

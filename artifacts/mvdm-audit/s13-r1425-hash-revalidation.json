@@ -1,0 +1,6 @@
+{
+  "method": "SHA-256 current source and pinned original bytes independently reread for all inventory rows, no compilation or branch assertions.",
+  "total": 1055,
+  "identical": 181,
+  "changed_or_missing": []
+}
