@@ -301,3 +301,8 @@ The [DPMI header reviews](../../../artifacts/mvdm-audit/t476-s2-dpmi-headers-rev
 ### DPMI memory and debug service reviews
 
 The [DPMI memory and debug reviews](../../../artifacts/mvdm-audit/t476-s2-dpmi-memory-debug-review.json) complete `dpmimemr.c` and `i386/dpmi386.c`. Full original/current differences, recorded CPU40 branch observations, hash-bound recursive projection and selected compiler line samples were checked. Existing shared-XMS allocation and debug-register lease adaptations remain registered; this does not independently prove their runtime behavior. Total: **825 of 1,055 complete; 230 open**.
+
+
+### DPMI selector source review
+
+The [DPMI selector review](../../../artifacts/mvdm-audit/t476-s2-dpmiselr-review.json) completes `dpmiselr.c` for conditional structures and original diagnostic lines. Its full diff, S1 branch observations, hash-bound recursive projection and selected compiler samples were checked; existing CPU40 descriptor-domain adaptations are identified but their independent runtime equivalence is not claimed. Total: **826 of 1,055 complete; 229 open**.
