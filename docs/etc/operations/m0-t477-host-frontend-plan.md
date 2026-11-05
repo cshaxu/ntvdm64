@@ -41,8 +41,9 @@ retains the approved requirements.
 
 S1 is closed in the [S1 evidence](../evidence/m0-t477-s1-frontend-base.md).
 S2 is closed in the [S2 evidence](../evidence/m0-t477-s2-frontend-instances.md),
-implementing its [design](m0-t477-s2-frontend-instances-design.md). S3 and S4
-require sequential admission. Each production P includes implementation,
+implementing its [design](m0-t477-s2-frontend-instances-design.md). S3 closes
+with [host composition evidence](../evidence/m0-t477-s3-host-composition.md).
+S4 requires sequential admission. Each production P includes implementation,
 reproducible tests, build, review, coherent publication and delivery evidence
 under the execution rules; a preparatory source move alone is not a completed
 frontend capability. Exact P splits follow the audited source boundaries.

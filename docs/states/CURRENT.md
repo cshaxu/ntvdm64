@@ -2,35 +2,24 @@
 
 ## Current Work
 
-**Active: M0 T477 S3** — direct NTVDM frontend composition and scoped VM registry. The owner admitted S3 after [S2 P4 integrated delivery](../etc/evidence/m0-t477-s2-p4-integration.md).
+**No active M/T/S packet.** T477 S3 P1 completes the direct NTVDM frontend
+composition, scoped VM registry and worker retirement integration. Cached
+x86/x64 builds, focused fixtures and 16/16 Full gates passed; the coherent
+ten-image package was published and hash-verified at both release locations.
+The [S3 evidence](../etc/evidence/m0-t477-s3-host-composition.md) records the
+implementation, delivery and guest-bridge limits. T477 S4 remains subsequent
+work for NTMON typed frontend display and integrated host acceptance.
 
-## Active Packet
+## S3 Closure Record
 
-### M0 T477 S3 — NTVDM VM frontends
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T477 S3, Ordinary Mode. |
-| Admission And Approval | Owner admitted S3 after S2 integrated build, tests, publication and push. |
-| Candidate Proposal | [Host common frontend foundation](../proposals/proposal-host-common-frontend-foundation-001.md); [stage sequence](../etc/operations/m0-t477-host-frontend-plan.md). |
-| Objective | Connect NTVDM directly to common/frontend-base and implement a payload-scoped VM frontend registry with independent downstream instances. |
-| Non-goals | Do not modify or rebuild guest; do not implement the queued guest VxD or S4 NTMON UI; do not claim guest-side multitasking. |
-| Reference Baseline | T477 S2 P4 delivery and the S1/S2 evidence; NTSRV owns authenticated association and lifecycle. |
-| Files And ABI Surface | NTVDM frontend composition and VM registry, existing common/frontend-base and NTSRV interfaces as needed, focused host fixtures, build and evidence. |
-| Applicable Rules | Execution, source policy, architecture, coding and documentation authorities. |
-| Verification | Audit full call chains; verify 1+N isolation, dependency direction, scoped identity and handle reuse, retirement, upstream ownership, nested host-fixture chains and failure cancellation; run applicable full regressions. |
-| Expected Markers | Actual production-path fixture assertions, build and test exits, package and destination hashes, reviewed commits and push. |
-| Asset Needs | Existing approved host and guest test fixtures; no guest modification. |
-| Reporting Requirements | Distinguish proven host behavior from guest-driver-dependent behavior and report residual boundaries. |
-| Stop Conditions | Preserve state and report failing acceptance gates or unapproved semantic changes. |
-| Exit Criteria | Required tests pass, coherent package published and verified, changes reviewed, committed and pushed. |
-| Original Owner Request | Admit S3 of the previously approved frontend foundation sequence. |
-| Similar-Issue Sweep | Cover VM reuse, independent sibling chains, nesting, host loss and cancellation without worker-base/frontend-base coupling. |
-| Temporary Evidence | `build/t477-s3`, 90-minute phase, 4 GiB and 15-minute no-progress budget. |
+[T477 S3 host composition evidence](../etc/evidence/m0-t477-s3-host-composition.md)
+and its [design](../etc/operations/m0-t477-s3-vm-frontends-design.md).
+No guest driver or actual guest multitasking capability is claimed.
 
 ## S2 Closure Record
 
-[T477 S2 P4 integrated delivery](../etc/evidence/m0-t477-s2-p4-integration.md) and [S2 implementation evidence](../etc/evidence/m0-t477-s2-frontend-instances.md).
+[T477 S2 P4 integrated delivery](../etc/evidence/m0-t477-s2-p4-integration.md)
+and [S2 implementation evidence](../etc/evidence/m0-t477-s2-frontend-instances.md).
 
 ## S1 Closure Record
 

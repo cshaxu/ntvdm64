@@ -1,5 +1,7 @@
 # Supporting Material
 
+[T477 S3 host composition evidence](evidence/m0-t477-s3-host-composition.md) records implementation review and layered verification.
+
 [T477 S2 P4 integration evidence](evidence/m0-t477-s2-p4-integration.md) records the merged-source build, tests and publication.
 
 [T477 S2 implementation evidence](evidence/m0-t477-s2-frontend-instances.md) records ownership separation and per-part verification/publication.
@@ -1153,3 +1155,9 @@ focused timer/hook witnesses, and the finite S2 dialog/input/caret handoff.
 [T476 S1 main integration](evidence/m0-t476-s1-main-integration.md) records the merged commits, complete selected gate and coherent publication.
 
 [T476 S2 per-file audit](evidence/m0-t476-s2-file-audit.md) records the active source-identity and per-file progress baseline.
+
+[T477 S3 VM frontend design](operations/m0-t477-s3-vm-frontends-design.md) records
+the direct NTVDM composition, scoped identity and retirement contract.
+
+[T477 S3 registry candidate](evidence/m0-t477-s3-registry-candidate.md) records
+the first cached build and bounded unit verification, with integration gaps explicit.

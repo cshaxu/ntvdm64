@@ -48,6 +48,9 @@ static void create_transport(void);
 static HANDLE broker_shutdown,broker_console_close,broker_wow_task_close;
 static HANDLE broker_lifetime;
 static BOOL lifecycle_wow;
+static LONG vm_frontend_closes;
+DWORD mvdm_standalone_worker_close_frontends(void)
+{InterlockedIncrement(&vm_frontend_closes);return ERROR_SUCCESS;}
 DWORD worker_base_take_wow_task_close(uint64_t *identity)
 { (void)identity;return ERROR_NOT_FOUND; }
 DWORD worker_base_fail_wow_task_close(uint64_t identity)
@@ -122,6 +125,7 @@ BOOL CntrlHandler(ULONG type)
 {
     CHECK(type==CTRL_CLOSE_EVENT && bound==&owner);
     ntvdm_worker_lifecycle_authorize_exit();
+    CHECK(vm_frontend_closes);
     puts("PASS authenticated root death dispatches original-shape close callback");
     fflush(stdout);
     if (hang_close) Sleep(INFINITE);
@@ -131,6 +135,7 @@ void TerminateVDM(void)
 {
     CHECK(bound==&owner);
     ntvdm_worker_lifecycle_authorize_exit();
+    CHECK(vm_frontend_closes);
     if(expect_loss){CHECK(VdmExitCode==ERROR_INVALID_HANDLE);puts("PASS service loss reaches original worker cleanup entry with disconnected-port result");fflush(stdout);}
     ExitProcess(74); /* Separate worker-close source entry. */
 }
@@ -346,10 +351,12 @@ int main(int argc,char **argv)
         thread=CreateThread(NULL,0,natural_exit,NULL,0,NULL);CHECK(thread);
         CHECK(WaitForSingleObject(fault_reported,5000)==WAIT_OBJECT_0);
         CHECK(fault_reports==1 && WaitForSingleObject(thread,0)==WAIT_TIMEOUT);
+        CHECK(vm_frontend_closes==0);
         CHECK(SetEvent(loss ? broker_lifetime : text ? broker_console_close : broker_shutdown));
         CHECK(WaitForSingleObject(thread,5000)==WAIT_OBJECT_0);
         CHECK(GetExitCodeThread(thread,&result) && result==(loss ? ERROR_INVALID_HANDLE : 131) && fault_reports==1);
         CHECK(!loss || VdmExitCode==ERROR_INVALID_HANDLE);
+        CHECK(vm_frontend_closes==3);
         CloseHandle(thread);ntvdm_worker_lifecycle_end();
         puts("PASS natural pre-cleanup permission waits for instruction/loss; same-thread recursion reports once");
         return 0;

@@ -4,6 +4,7 @@
 #include "worker-base/input_watch.h"
 #include "common/protocol/frontend_lifecycle.h"
 #include "common/base_srv/base_rpc_client.h"
+#include "ntvdm-exe/softpc/include/mvdm_standalone_worker.h"
 
 extern BOOL CntrlHandler(ULONG type);
 extern VOID TerminateVDM(VOID);
@@ -88,6 +89,13 @@ static void service_lost(void *context)
     VdmExitCode=ERROR_INVALID_HANDLE;
     worker_base_shutdown_close(close_worker,context,INFINITE,ERROR_INVALID_HANDLE,NULL);
 }
+static void quiesce_vm_frontends(void)
+{
+    DWORD error=mvdm_standalone_worker_close_frontends();
+    /* Whole-worker exit is already authorized here. If joining local users
+     * fails, fail the process without freeing resources under live callbacks. */
+    if(error)ExitProcess(error);
+}
 void ntvdm_worker_lifecycle_authorize_exit(void)
 {
     HANDLE waits[3];DWORD count=2,wait;
@@ -95,7 +103,7 @@ void ntvdm_worker_lifecycle_authorize_exit(void)
     /* In-process source fixtures do not establish a standalone worker. */
     if(!lifecycle.owner)return;
     previous=InterlockedCompareExchange(&lifecycle.closing,thread,0);
-    if(previous==thread)return;
+    if(previous==thread){quiesce_vm_frontends();return;}
     if(previous) {
         /* Another owner is already performing terminal cleanup. Do not enter
          * terminate's non-atomic repeated-call shortcut and kill it midway. */
@@ -108,10 +116,11 @@ void ntvdm_worker_lifecycle_authorize_exit(void)
     wait=WaitForMultipleObjects(count,waits,FALSE,INFINITE);
     if(wait==WAIT_OBJECT_0) {
         VdmExitCode=ERROR_INVALID_HANDLE;
+        quiesce_vm_frontends();
         return;
     }
-    if(wait==WAIT_OBJECT_0+1)return;
-    if(count==3 && wait==WAIT_OBJECT_0+2 && !lifecycle.original_ready)return;
+    if(wait==WAIT_OBJECT_0+1){quiesce_vm_frontends();return;}
+    if(count==3 && wait==WAIT_OBJECT_0+2 && !lifecycle.original_ready){quiesce_vm_frontends();return;}
     if(count==3 && wait==WAIT_OBJECT_0+2)
         worker_base_shutdown_close(close_console,lifecycle.owner,
             OPENNT_LIFECYCLE_GRACE_MS,CONTROL_C_EXIT,NULL);

@@ -32,6 +32,16 @@ static BOOL worker_session_initialized;
 static wow_user_runtime worker_wow_runtime = WOW_USER_RUNTIME_INITIALIZER;
 static wow_user_session_binding worker_wow_binding;
 static BOOL worker_wow_attached;
+static ntvdm_vm_host *worker_frontends;
+
+ntvdm_vm_host *mvdm_standalone_worker_frontends(void)
+{
+    return worker_started && worker_character_io ? worker_frontends : NULL;
+}
+DWORD mvdm_standalone_worker_close_frontends(void)
+{
+    return ntvdm_vm_host_close(worker_frontends);
+}
 static DWORD begin_character_io(void *owner,HANDLE stop)
 {
     (void)stop;
@@ -47,6 +57,10 @@ static int mvdm_standalone_worker_cleanup(int result)
 
     ntvdm_dos_observer_stop(&worker_observer);
     ntvdm_worker_lifecycle_end();
+    /* Authorization already joined VM I/O before original host cleanup.
+     * The registry object remained alive for concurrent rejected callers. */
+    if (ntvdm_vm_host_destroy(worker_frontends)) return ERROR_BUSY;
+    worker_frontends=NULL;
 
     /* The original host has already stopped its timer/event producers before
      * this process-level worker cleanup runs. */
@@ -130,6 +144,10 @@ DWORD mvdm_standalone_worker_begin(void)
     }
     error=ntvdm_worker_lifecycle_begin(&worker_session,character_io);
     if(error)goto fail;
+    if(character_io) {
+        error=ntvdm_vm_host_create(&worker_frontends);
+        if(error)goto fail;
+    }
     if (!session_select_machine_backend(&worker_session,
             SESSION_MACHINE_BACKEND_SOFTPC) || !session_activate(&worker_session) ||
         !session_thread_bind_owned(&worker_session,

@@ -1673,6 +1673,13 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/common/frontend_base_service.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/frontend-base/service.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build common-frontend-base.lib: lib obj/common/frontend_base_channel.obj obj/common/frontend_base_service.obj')
+    $graph.Add('build obj/worker/vm_frontend.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/frontend/vm_frontend.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build obj/worker/vm_host.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/frontend/vm_host.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build ntvdm-vm-frontend.lib: lib obj/worker/vm_frontend.obj obj/worker/vm_host.obj')
+    $graph.Add('build obj/tests/vm_frontend.obj: cc ' + (NinjaPath (Join-Path $root 'test/ntvdm-exe/frontend/vm_frontend_test.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/tests/frontend_base_channel.obj: cc ' + (NinjaPath (Join-Path $root 'test/common/frontend-base/channel_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/frontend/console_channel.obj: cc ' + (NinjaPath (Join-Path $frontendRoot 'console_channel.c')))
@@ -1700,6 +1707,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/tests/console_video.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/console_video_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build frontend-base-channel-test.exe: console_test_link obj/tests/frontend_base_channel.obj common-frontend-base.lib lib-pipe.lib')
+    $graph.Add('build ntvdm-vm-frontend-test.exe: console_test_link obj/tests/vm_frontend.obj ntvdm-vm-frontend.lib common-frontend-base.lib lib-pipe.lib')
     $graph.Add('build obj/tests/frontend_base_service.obj: cc ' + (NinjaPath (Join-Path $root 'test/common/frontend-base/service_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build frontend-base-service-test.exe: console_test_link obj/tests/frontend_base_service.obj common-frontend-base.lib')
@@ -1868,7 +1876,7 @@ $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthoo
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     # This fixture is also a launcher: it calls StartVdmWorker to exercise
     # execution/startup failures. Production NTCON remains core-only.
-    $graph.Add('build broker-frontend-bootstrap-test.exe: frontend_link obj/tests/broker_frontend_bootstrap.obj frontend-client.lib obj/run16/support.obj base-rpc-client-core.lib base-rpc-client-launch.lib obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib common-base-srv-bindings.lib broker-transport.lib common-base-srv-transport.lib original-opennt-rtl-x86.lib | ntcon.exe ntsrv.exe')
+    $graph.Add('build broker-frontend-bootstrap-test.exe: frontend_link obj/tests/broker_frontend_bootstrap.obj ntvdm-vm-frontend.lib common-frontend-base.lib lib-pipe.lib frontend-client.lib obj/run16/support.obj base-rpc-client-core.lib base-rpc-client-launch.lib obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib common-base-srv-bindings.lib broker-transport.lib common-base-srv-transport.lib original-opennt-rtl-x86.lib | ntcon.exe ntsrv.exe')
     $graph.Add('build obj/tests/native_console_capture.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/native_console_capture_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build native-console-capture-test.exe: console_test_link obj/tests/native_console_capture.obj obj/ntvwm/console_state.obj')
@@ -1975,7 +1983,7 @@ $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthoo
     # This import library is the one worker parent ABI.  Late-loaded original
     # providers import it rather than a retired second `original-softpc-process`
     # image with its own local BaseVDM queue.
-$graph.Add('build ntvdm.exe | ntvdm.lib: worker_link worker-base.lib common-native-hook-installer.lib common-native-hook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj ' + ($adapterRedirWorkerObjects -join ' ') + ' ' + ($adapterWowWorkerObjects -join ' ') + ' worker-shell.lib worker-command-bindings.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib opennt-base-client.lib common-base-srv-bindings.lib original-opennt-rtl-x86.lib softpc-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib common-base-srv-transport.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib original-softpc-host-roots.lib obj/host/softpc-resource.res | generated/ntvdm-wow32-provider.def')
+$graph.Add('build ntvdm.exe | ntvdm.lib: worker_link worker-base.lib ntvdm-vm-frontend.lib common-frontend-base.lib lib-pipe.lib common-native-hook-installer.lib common-native-hook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj ' + ($adapterRedirWorkerObjects -join ' ') + ' ' + ($adapterWowWorkerObjects -join ' ') + ' worker-shell.lib worker-command-bindings.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib opennt-base-client.lib common-base-srv-bindings.lib original-opennt-rtl-x86.lib softpc-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib common-base-srv-transport.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib original-softpc-host-roots.lib obj/host/softpc-resource.res | generated/ntvdm-wow32-provider.def')
 }
 # Test-only original keyboard-state observation; reuse the exact worker link
 # inputs, substituting the keyba object before the original archive is scanned.

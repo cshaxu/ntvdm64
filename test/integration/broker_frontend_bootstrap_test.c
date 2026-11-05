@@ -11,6 +11,7 @@ static const common_frontend_key forged_frontend={0x7fffffff,0x7fffffff};
 #include "common/base_srv/base_rpc_client.h"
 #include "common/codec/native_launch.h"
 #include "common/protocol/frontend_lifecycle.h"
+#include "ntvdm-exe/frontend/vm_host.h"
 
 PVOID CsrPortHeap;
 /* Adversarial peers still need a complete coherent package: RPC identity is
@@ -278,8 +279,56 @@ static DWORD instance_rpc_close_first(common_frontend_key keys[2])
         WaitForSingleObject(shutdown,0)!=WAIT_TIMEOUT || WaitForSingleObject(console,0)!=WAIT_TIMEOUT)return ERROR_INVALID_DATA;
     return ERROR_SUCCESS;
 }
+typedef struct vm_host_fixture {
+    ntvdm_vm_host *host;
+    HANDLE input;
+    uint64_t payload;
+    common_frontend_location first,second;
+} vm_host_fixture;
+static DWORD vm_dispatch(void *context,const console_io_request *request,
+    console_io_reply *reply,frontend_base_result *result)
+{(void)context;(void)request;(void)reply;(void)result;return ERROR_NOT_SUPPORTED;}
+static DWORD vm_pending(void *context,BOOL *pending)
+{(void)context;*pending=FALSE;return ERROR_SUCCESS;}
+static void vm_finish(void *context){(void)context;}
+static DWORD vm_host_begin(vm_host_fixture *fixture)
+{
+    const ntvdm_vm_io io={vm_dispatch,vm_pending,vm_finish};
+    HANDLE origins[2]={0},contexts[2]={0};
+    DWORD error,i;
+    typedef BOOL (WINAPI *COMPARE_OBJECTS)(HANDLE,HANDLE);
+    COMPARE_OBJECTS compare=(COMPARE_OBJECTS)GetProcAddress(GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
+    if(!compare)return ERROR_CALL_NOT_IMPLEMENTED;
+    fixture->input=CreateEventW(NULL,TRUE,FALSE,NULL);
+    if(!fixture->input)return GetLastError();
+    error=ntvdm_vm_host_create(&fixture->host);
+    if(!error)error=ntvdm_vm_payload_begin(fixture->host,&fixture->payload);
+    if(!error)error=ntvdm_vm_host_register(fixture->host,fixture->payload,10,fixture->input,&io,NULL,&fixture->first);
+    if(!error)error=ntvdm_vm_host_register(fixture->host,fixture->payload,11,fixture->input,&io,NULL,&fixture->second);
+    if(!error)error=ntvdm_vm_host_origin(fixture->host,&fixture->first,&origins[0]);
+    if(!error)error=ntvdm_vm_host_origin(fixture->host,&fixture->second,&origins[1]);
+    for(i=0;i<2 && !error;++i)error=OpenNtBaseClientAcquireConsoleContext(origins[i],&contexts[i]);
+    if(!error && compare(contexts[0],contexts[1]))error=ERROR_INVALID_DATA;
+    for(i=0;i<2;++i){if(origins[i])CloseHandle(origins[i]);if(contexts[i])CloseHandle(contexts[i]);}
+    return error;
+}
+static DWORD vm_host_retire_first(vm_host_fixture *fixture)
+{
+    const ntvdm_vm_io io={vm_dispatch,vm_pending,vm_finish};
+    common_frontend_location replacement;
+    HANDLE origin=NULL;
+    DWORD error=ntvdm_vm_host_retire(fixture->host,&fixture->first);
+    if(!error && ntvdm_vm_host_origin(fixture->host,&fixture->first,&origin)!=ERROR_NOT_FOUND)error=ERROR_INVALID_DATA;
+    if(!error)error=ntvdm_vm_host_register(fixture->host,fixture->payload,10,fixture->input,&io,NULL,&replacement);
+    if(!error && replacement.incarnation==fixture->first.incarnation)error=ERROR_INVALID_DATA;
+    if(!error)error=ntvdm_vm_host_retire(fixture->host,&replacement);
+    if(!error)error=ntvdm_vm_host_origin(fixture->host,&fixture->second,&origin);
+    if(origin)CloseHandle(origin);
+    return error;
+}
 static int result_worker(void)
 {
+    vm_host_fixture vm={0};
     common_frontend_key keys[2]={{0}};HANDLE instance_events[4]={0};
     WCHAR mode[2];BOOL instances=GetEnvironmentVariableW(L"T477_FRONTEND_INSTANCE_FIXTURE",mode,2)!=0;
     DWORD index;
@@ -292,6 +341,7 @@ static int result_worker(void)
     error=OpenNtBaseClientConnectCurrent();
     if(!error)error=OpenNtBaseClientRegisterNativeBackend(NULL);
     if(!error && instances)error=instance_rpc_begin(keys,instance_events);
+    if(!error && instances)error=vm_host_begin(&vm);
     if(!error)error=OpenNtBaseClientGetNextNativeCommand(NATIVE_LAUNCH_MAX_BYTES,payload,
         &bytes,&caller,&execution,&frontend,&request,&generation);
     if(!error)error=run16_native_launch_unpack(payload,bytes,&packet,strings);
@@ -305,11 +355,20 @@ static int result_worker(void)
     if(!error && ResumeThread(target.hThread)==(DWORD)-1)error=GetLastError();
     if(!error)error=OpenNtBaseClientNativeStartupResult(generation,request,0,target.hProcess,receipt);
     if(!error && instances)error=instance_rpc_close_first(keys);
+    if(!error && instances)error=vm_host_retire_first(&vm);
     if(!error && WaitForSingleObject(target.hProcess,10000)!=WAIT_OBJECT_0)error=ERROR_TIMEOUT;
     if(!error && !GetExitCodeProcess(target.hProcess,&exit_code))error=GetLastError();
     if(!error)error=OpenNtBaseClientCompleteNativeRequest(request,exit_code,ERROR_WRITE_FAULT,0);
     if(!error && instances)error=OpenNtBaseClientCloseFrontendInstance(&keys[1]);
     if(!error && instances)error=OpenNtBaseClientUnregisterFrontendInstance(&keys[1]);
+    if(vm.host) {
+        DWORD close_error=ntvdm_vm_host_destroy(vm.host);
+        if(close_error) {
+            fprintf(stderr,"FAIL VM host teardown %lu; retaining live callback resources until process exit\n",close_error);
+            ExitProcess(error ? error : close_error);
+        }
+    }
+    if(vm.input)CloseHandle(vm.input);
     for(index=0;index<4;++index)if(instance_events[index])CloseHandle(instance_events[index]);
     if(target.hProcess) {
         if(WaitForSingleObject(target.hProcess,0)!=WAIT_OBJECT_0) {
@@ -369,7 +428,7 @@ done:
     }
     if(root){if(WaitForSingleObject(root,10000)!=WAIT_OBJECT_0)failed=1;CloseHandle(root);}
     if(capability)CloseHandle(capability);if(restored)CloseHandle(restored);
-    if(instances && !failed)puts("PASS actual RPC two frontend instances; duplicate/stale identities denied; first close preserves sibling and backend completion");
+    if(instances && !failed)puts("PASS actual RPC frontend identities and NTVDM VM host registry; handle reuse/retirement preserve sibling and backend completion");
     HeapDestroy(CsrPortHeap);CsrPortHeap=NULL;return failed;
 }
 int wmain(int argc,WCHAR **argv)
