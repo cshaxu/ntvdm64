@@ -166,17 +166,18 @@ they must not be replaced with fake-success behavior.
 
 ## Planned S decomposition
 
-| S | Scope | Required outcome |
-| --- | --- | --- |
-| S1 | Pin and reconcile both existing audit inventories and inherited T473 work against the actual product and delivered evidence; check established exclusions before selecting code. | Stable source-row mapping and dependency-ordered implementation worklist distinguish delivered, actionable, excluded, pending-audit and unresolved items; no inherited item silently dropped or fresh global audit substituted. |
-| S2 | Implement evidenced source and build admission/exclusion decisions, including missing or cropped original owners. | Correct original paths, edition and provenance; correct product selection and explicit exclusions; source presence alone is not runtime proof. |
-| S3 | Recover admitted runtime owners and their lifecycle/dependency boundaries, and remove the local providers each recovery displaces. | Per-owner normal, negative and teardown proof through real callers; split into sequential complete-owner S packets as needed. |
-| S4 | Finish mirror boundaries and local implementations affected by the listed recovery; preserve working capabilities and register necessary exceptions. | Every recovery-related diff and duplicate is resolved or evidenced; broader audit candidates retain stable IDs for later tasks. |
-| S5 | Reconcile implementation status for all applicable existing audit rows and inherited work, run integrated acceptance, and prepare handoff. | Actionable rows are implemented and verified, exclusions preserved, and pending audit work and limitations explicit; identities and evidence are available for later independent audits. |
-
-These are planned phases, not an allocation of active S identifiers. Any
-renumbering after package-level decomposition must retain all obligations.
-S1 may not silently defer difficult packages merely to finish the report.
+The owner directs one S per unresolved host finding, in this priority order:
+(1) original code that can replace a duplicate local implementation;
+(2) missing original integration without a local equivalent; and (3) known
+problems and partially completed fixes. The detailed numbered mapping and
+per-item gates are in the [T478 finding-stage plan](../etc/operations/m0-t478-finding-stage-plan.md).
+CURRENT.md controls the sole active packet; future S numbers are a plan, not admission.
+No item in the 69-row report yet proves priority (1), so none is invented.
+The 40 planned S2–S41 packets cover applicable candidates from that report;
+S1 must still reconcile the larger existing inventories and inherited
+handoffs and incorporate any further applicable findings. Guest source,
+media, tools and packaging are outside scope; guest material is read-only
+supporting evidence of an identifiable mvdm-host gap only.
 
 ## Verification and exit criteria
 

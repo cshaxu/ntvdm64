@@ -2,32 +2,19 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T477 closes after S4 P1 host-foundation delivery.
-The [T477 closure](../history/m0-t477-closure.md) records all four stages,
-acceptance evidence and the separately queued guest bridge boundary.
+**No active M/T/S packet.** M0 T478 S2 is closed at its
+[generic-thunk recovery and local delivery](../etc/evidence/m0-t478-s2-generic-thunk.md).
+The original x86 helper is connected with EBX preservation; actual-object,
+real Win16 normal/mismatched calls, exception retirement and all 16 selected
+Full gates passed before the rebase. That S2 package was published and hash-verified
+in this worktree assets/release; the rebase now retains main release binaries. The owner prohibits O:/winnt publication;
+no push is authorized for this delivery.
 
-## S4 Closure Record
-
-[VM groups and integrated delivery](../etc/evidence/m0-t477-s4-vm-groups.md):
-CONSOLE and VM frontend groups preserve independent worker chains; VM PID is
-hostPID-VMID, TASK is empty, and VM management remains read-only. Cached
-builds, actual RPC/renderer/service tests and Full 16/16 gates passed. All ten
-images are hash-verified at both publication destinations.
-
-## S3 Closure Record
-
-[T477 S3 host composition evidence](../etc/evidence/m0-t477-s3-host-composition.md)
-and its [design](../etc/operations/m0-t477-s3-vm-frontends-design.md).
-No guest driver or actual guest multitasking capability is claimed.
-
-## S2 Closure Record
-
-[T477 S2 P4 integrated delivery](../etc/evidence/m0-t477-s2-p4-integration.md)
-and [S2 implementation evidence](../etc/evidence/m0-t477-s2-frontend-instances.md).
-
-## S1 Closure Record
-
-[T477 S1 closure evidence](../etc/evidence/m0-t477-s1-frontend-base.md).
+The owner accepted the [per-finding plan](../etc/operations/m0-t478-finding-stage-plan.md).
+S1's broader inventory reconciliation remains explicitly incomplete in its
+[evidence](../etc/evidence/m0-t478-s1-inventory-reconciliation.md); the bounded
+planning and S2 closure do not claim complete T478 closure. Deferred S1
+planning records accompany S2 P1. S3/finding 20 is planned, not admitted.
 
 ## M0 T475 S5 Closure
 
@@ -145,12 +132,15 @@ packet above remains the only current S authority.
 
 ## Current Technical Baseline
 
-The [T477 S4 delivery](../etc/evidence/m0-t477-s4-vm-groups.md) publishes the
-ten-image product at application version 0.0.477 and protocol 67. Full selected
-product gates pass and both publication targets match. Guest media is unchanged.
-Actual guest VM discovery and driver integration remain separately queued.
-The earlier [source release review](../../artifacts/mvdm-audit/latest-source-release-review.md)
-remains retained baseline evidence.
+This worktree rebases its two T478 S2 commits onto main cd8c8583e
+([T477 closure](../history/m0-t477-closure.md)). Source contains the S2
+generic-call recovery and EBX fix, plus the main VM frontend changes.
+Task-number overlap is explicitly accepted by the owner; no renumbering.
+Release binaries are taken from main, application 0.0.477/protocol 67;
+they are not claimed to contain the S2 repair. The pre-rebase S2 test and
+publication hashes remain historical evidence only. No combined-source
+build/runtime acceptance or new publication is claimed by this rebase.
+O:/winnt remains untouched. Guest inputs remain immutable.
 
 ## Temporary Evidence
 

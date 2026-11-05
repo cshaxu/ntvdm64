@@ -3213,3 +3213,7 @@ MVDM-HOST-DIV-867: restore the original monitor/GISP conditional framework, nest
 MVDM-HOST-DIV-868: restore original conditional and selected mouse-host source positions in softpc.new/base/keymouse/mouse_io.c while preserving the registered host routing and existing selected tokens. Evidence: artifacts/mvdm-audit/t476-s2-mouse-review.json. Final grouped build and context reconciliation remain pending.
 
 DIV-869: restore sampled original diagnostic line positions in dpmi32/dpmiint.c while retaining the existing DIV-582 CPU40 selector. Evidence: artifacts/mvdm-audit/t476-s2-dpmi-worker.json. Compiler and complete context validation remain pending.
+
+MVDM-HOST-DIV-674: restore only the original generic-call branch in wow32/wkgthunk.c under WOW_X86_GENERIC_CALL; other i386 exclusions remain.
+
+MVDM-HOST-DIV-675: wow32/i386/callpr32.asm saves/restores EBX and adjusts its three parameter offsets by four bytes. Original dynamic stack restoration is unchanged. S2 actual-thunk, real Win16 normal/mismatch and exception-retirement tests passed; see docs/etc/evidence/m0-t478-s2-generic-thunk.md.

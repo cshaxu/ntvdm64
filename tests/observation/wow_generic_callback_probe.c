@@ -24,7 +24,12 @@ DWORD WINAPI ResolveGenericSegment(DWORD address)
     return 0x447a0001;
 }
 
-DWORD WINAPI RunGenericProbe(DWORD pascal_proc, DWORD cdecl_proc, DWORD nested)
+#ifdef TEST_GENERIC_CDECL
+#define GENERIC_CALL __cdecl
+#else
+#define GENERIC_CALL WINAPI
+#endif
+DWORD GENERIC_CALL RunGenericProbe(DWORD pascal_proc, DWORD cdecl_proc, DWORD nested)
 {
 #ifdef TEST_GUEST_EXCEPTION
     /* Fault within the real original generic thunk, not directly across a
