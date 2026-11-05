@@ -198,3 +198,30 @@ Eight further unconditional pairs were fully reviewed: `wreldc.c`, `wreldc.h`, `
 ### Completed USER drawing, help and text reviews
 
 The unconditional `client/draw.c`, `rtl/help.c` and `rtl/text.c` pairs were reviewed against their originals. The full diffs preserve the registered PaintRect subset, help property binding and text buffer ownership adaptations. Individual `t476-s2-final-*` records bind the current and original hashes, compiler observations and matching line positions. Total: **786 of 1,055 complete; 269 open**.
+
+
+### LF-count correction and additional selected subsets
+
+A review helper had used a generic line splitter that treated form-feed as a line boundary. This affected the recorded physical indexes of four individually reviewed files (`wsext.c`, `apiuse.c`, `apiwksta.c`, `xssubs.c`); their individual records were regenerated using LF-only physical lines, their original/current hashes and matching-position checks passed, and the per-file completion decisions remain unchanged. A separate earlier LF-based scan reported no leads in any of the 21 completed files containing form-feed; this observation does not add compiler coverage.
+
+Four more original/current unconditional files were fully checked: `apibuff.c`, `drawtext.c`, `hdata.c` and `csrutil.c`. Their `t476-s2-final-*` records retain the selected subset, registered adaptations, hashes, matching positions and actual compiler observations. Total: **790 of 1,055 complete; 265 open**.
+
+
+### Additional USER subset reviews
+
+Complete original/current comparisons additionally finish `miscutil.c`, `rtl/random.c` and `rtl/rect.c`. Each has no conditional group in either version; the original selected function bodies and registered subset boundaries were checked with LF-based source positions and existing compiler samples. Their individual `t476-s2-final-*` records retain the evidence. Total: **793 of 1,055 complete; 262 open**.
+
+
+### Interrupt hook declaration line under repair
+
+The `nt_inthk.h` full original/current comparison has two `CCPU` branches and both were hit in the recorded product context. The emitted declaration for `VdmInstallSoftwareIntHandler` was attributed to line 30, while the pinned original declaration is line 31; the previously transformed-output index retained this as an unresolved line. A candidate `#line 31` is now present. It is not built or published and the file remains open until the next owner-directed source batch and actual compiler-line verification.
+
+
+### FPU layout declaration lines under repair
+
+The recorded compiler observations identify four original `cfpu_def.h` fields whose selected little-endian reordering changed their diagnostic attribution. Full comparison also identified related reordered fields in the same six declarations; candidate `#line` anchors now point each retained field to its original line while leaving the approved layout and branch conditions intact. This is an unbuilt candidate, not a completed file or an assertion of compiler equivalence.
+
+
+### Additional candidate line anchors
+
+The existing selected-context compiler index identifies `support/main.c` startup calls displaced by the registered vector-binding insertion, `nt_unix.c`'s retained error formatting moved by a registered CRT adaptation, and `wowmmcb.h` declarations displaced by an added ABI notice. Their candidate original-line anchors are unbuilt and unpublished; these files remain open until the next source batch and post-build checks.

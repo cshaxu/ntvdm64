@@ -1,0 +1,54 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/miscutil.c",
+  "current_sha256": "da1796ff7d6857acd766499dc4cdaf39bba649e989f5f386870e453f720b4e11",
+  "original_sha256": "3ee6d2ec087b1c6e32de266861ff2111514da909b40ec4914105b0f4480e8ae1",
+  "original_and_current_conditional_arms": 0,
+  "matching_original_source_lines": 8,
+  "matched_line_positions": [
+    [
+      24,
+      20,
+      24
+    ],
+    [
+      26,
+      22,
+      26
+    ],
+    [
+      28,
+      24,
+      28
+    ],
+    [
+      29,
+      25,
+      29
+    ],
+    [
+      30,
+      26,
+      30
+    ],
+    [
+      32,
+      28,
+      32
+    ],
+    [
+      33,
+      29,
+      33
+    ],
+    [
+      35,
+      31,
+      35
+    ]
+  ],
+  "compiler_contexts": [
+    640
+  ],
+  "compiler_unique_original_lines_seen": 3,
+  "local_diff_review": "Complete original/current diff reviewed. OPENNT-HOST-083 retains the original SetDialogPointer body as the selected host subset."
+}

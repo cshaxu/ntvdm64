@@ -1,0 +1,59 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/rect.c",
+  "current_sha256": "2761eb922e6de3cde93a7a6ff8e8543d8ede7065055af9e2e85196de5c7ec199",
+  "original_sha256": "7eb718ce4671ba8f1f50f891f61d4bb1ef2a1ebef5f55c09dd145310ed496354",
+  "original_and_current_conditional_arms": 0,
+  "matching_original_source_lines": 9,
+  "matched_line_positions": [
+    [
+      46,
+      9,
+      46
+    ],
+    [
+      47,
+      10,
+      47
+    ],
+    [
+      48,
+      11,
+      48
+    ],
+    [
+      49,
+      12,
+      49
+    ],
+    [
+      51,
+      14,
+      51
+    ],
+    [
+      52,
+      15,
+      52
+    ],
+    [
+      53,
+      16,
+      53
+    ],
+    [
+      54,
+      17,
+      54
+    ],
+    [
+      55,
+      18,
+      55
+    ]
+  ],
+  "compiler_contexts": [
+    641
+  ],
+  "compiler_unique_original_lines_seen": 2,
+  "local_diff_review": "Complete original/current diff reviewed. OPENNT-HOST-077 retains the original CopyInflateRect body with target-private precompiled-header binding."
+}

@@ -1,0 +1,99 @@
+{
+  "path": "src/non-mvdm/ds/netapi/api/apibuff.c",
+  "current_sha256": "6e60356dc9395c548ed7487a4c16dbdc95915fee15220f60af08f996a576360a",
+  "original_sha256": "420a2973fd10924de9d6f709a88a79ef05bad74c61eaea1ea5b678b181c31161",
+  "original_and_current_conditional_arms": 0,
+  "matching_original_source_lines": 17,
+  "matched_line_positions": [
+    [
+      3,
+      3,
+      3
+    ],
+    [
+      5,
+      5,
+      5
+    ],
+    [
+      7,
+      7,
+      7
+    ],
+    [
+      9,
+      9,
+      9
+    ],
+    [
+      231,
+      29,
+      231
+    ],
+    [
+      232,
+      30,
+      232
+    ],
+    [
+      233,
+      31,
+      233
+    ],
+    [
+      234,
+      32,
+      234
+    ],
+    [
+      239,
+      37,
+      239
+    ],
+    [
+      241,
+      39,
+      241
+    ],
+    [
+      242,
+      40,
+      242
+    ],
+    [
+      243,
+      41,
+      243
+    ],
+    [
+      245,
+      43,
+      245
+    ],
+    [
+      247,
+      45,
+      247
+    ],
+    [
+      249,
+      47,
+      249
+    ],
+    [
+      251,
+      49,
+      251
+    ],
+    [
+      256,
+      54,
+      256
+    ]
+  ],
+  "compiler_contexts": [
+    498
+  ],
+  "compiler_unique_original_lines_seen": 2,
+  "local_diff_review": "Complete original/current diff reviewed. OPENNT-HOST-013 retains NetapipBufferAllocate as the admitted NetLib subset."
+}
