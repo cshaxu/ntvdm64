@@ -1,0 +1,106 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmimemr.c",
+      "current_sha256": "5102e5e1a0bac15ed2cacc4d5e6c276ee33f03e456562a0c0465f55e52e1459f",
+      "original_sha256": "a21e43830622d5d04bfcd018c6751cdc7a3de54c166621731494363c8d5a60ae",
+      "prior_recursive_evidence": "s13-r1368-extra-strict.json",
+      "matched_original_lines": 267,
+      "group_summary": {
+        "local_groups": 4
+      },
+      "arms": [
+        {
+          "directive": "if",
+          "expression": "defined(CPU_40_STYLE)",
+          "status": "hit",
+          "contexts": [
+            289
+          ]
+        },
+        {
+          "directive": "if",
+          "expression": "defined(CPU_40_STYLE)",
+          "status": "hit",
+          "contexts": [
+            289
+          ]
+        },
+        {
+          "directive": "if",
+          "expression": "defined(CPU_40_STYLE)",
+          "status": "hit",
+          "contexts": [
+            289
+          ]
+        },
+        {
+          "directive": "if",
+          "expression": "defined(CPU_40_STYLE)",
+          "status": "hit",
+          "contexts": [
+            289
+          ]
+        },
+        {
+          "directive": "else",
+          "expression": "",
+          "status": "previously-excluded",
+          "contexts": []
+        }
+      ],
+      "compiler_contexts": [
+        289
+      ],
+      "unique_compiler_samples": 32,
+      "local_diff_review": "DIV-224 routes selected CPU40 allocation and free to the existing shared XMS allocator; non-CPU40 alternative is excluded."
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
+      "current_sha256": "61dd2c2b28e2095cec941b91f4ddd0434f3872d92e8e7260dfa89580990c5a3f",
+      "original_sha256": "e47bd6f7a1f48ba94022c9d5ed78714c269f751737f8f69711fc44c06523f8f0",
+      "prior_recursive_evidence": "s13-r1368-extra-strict.json",
+      "matched_original_lines": 73,
+      "group_summary": {
+        "local_groups": 3
+      },
+      "arms": [
+        {
+          "directive": "if",
+          "expression": "defined(CPU_40_STYLE)",
+          "status": "hit",
+          "contexts": [
+            291
+          ]
+        },
+        {
+          "directive": "if",
+          "expression": "defined(CPU_40_STYLE)",
+          "status": "hit",
+          "contexts": [
+            291
+          ]
+        },
+        {
+          "directive": "if",
+          "expression": "defined(CPU_40_STYLE)",
+          "status": "hit",
+          "contexts": [
+            291
+          ]
+        },
+        {
+          "directive": "else",
+          "expression": "",
+          "status": "previously-excluded",
+          "contexts": []
+        }
+      ],
+      "compiler_contexts": [
+        291
+      ],
+      "unique_compiler_samples": 6,
+      "local_diff_review": "DIV-281 retains the original debug-register service under CPU40 with a copied guest-memory lease; original unrelated provider bodies remain omitted."
+    }
+  ]
+}

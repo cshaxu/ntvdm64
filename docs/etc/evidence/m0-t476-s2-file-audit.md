@@ -296,3 +296,8 @@ The [two DPMI file reviews](../../../artifacts/mvdm-audit/t476-s2-dpmi-data-disp
 ### DPMI header reviews
 
 The [DPMI header reviews](../../../artifacts/mvdm-audit/t476-s2-dpmi-headers-review.json) complete `dpmi32p.h` and `dpmidata.h`. The full original/current diffs, registered CPU40 bindings, S1 observed arm dispositions, prior hash-bound detailed line evidence and selected compiler samples were checked. The full preprocessed-output evidence for `dpmi32p.h` is one x86 context; other context coverage is identified separately by markers. Total: **823 of 1,055 complete; 232 open**.
+
+
+### DPMI memory and debug service reviews
+
+The [DPMI memory and debug reviews](../../../artifacts/mvdm-audit/t476-s2-dpmi-memory-debug-review.json) complete `dpmimemr.c` and `i386/dpmi386.c`. Full original/current differences, recorded CPU40 branch observations, hash-bound recursive projection and selected compiler line samples were checked. Existing shared-XMS allocation and debug-register lease adaptations remain registered; this does not independently prove their runtime behavior. Total: **825 of 1,055 complete; 230 open**.
