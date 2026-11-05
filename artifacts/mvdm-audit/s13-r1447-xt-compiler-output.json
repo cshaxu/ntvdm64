@@ -1,0 +1,144 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+  "current_sha256": "8bed82996166e7577f483bcef63d29532596fb0687be2d93ace08a080c0fb996",
+  "original_sha256": "a95cda1054b1840df73dbcec6e23cacbee1ddf2fd1ed071318c8c9252f21c0cc",
+  "preprocessed_sha256": "3839b8ccea25b8209f7d6250a663de0fe9e9eee06abe021840de8d1c32c2b150",
+  "method": "All nonblank emitted lines in x86 production context compared at compiler-reported logical line with original, accounting explicitly for selected compiler macros. Branch and local state ownership evidence is separate.",
+  "counts": {
+    "exact-or-compiler-macro-expansion": 22
+  },
+  "records": [
+    {
+      "line": 44,
+      "output": "IU16  cpu_interrupt_map;",
+      "original": "word  cpu_interrupt_map;                /* Bit map of ints outstanding  */",
+      "classification": "exact-or-compiler-macro-expansion"
+    },
+    {
+      "line": 46,
+      "output": "IU8 cpu_int_translate[16];",
+      "original": "half_word cpu_int_translate[16];        /* this will go very soon!      */",
+      "classification": "exact-or-compiler-macro-expansion"
+    },
+    {
+      "line": 60,
+      "output": "IU16 cpu_int_delay;",
+      "original": "word cpu_int_delay;                     /* Delay before pending interrupt */",
+      "classification": "exact-or-compiler-macro-expansion"
+    },
+    {
+      "line": 62,
+      "output": "int trap_delay_count;",
+      "original": "int trap_delay_count;",
+      "classification": "exact-or-compiler-macro-expansion"
+    },
+    {
+      "line": 69,
+      "output": "IU8 ica_lock;",
+      "original": "half_word ica_lock;",
+      "classification": "exact-or-compiler-macro-expansion"
+    },
+    {
+      "line": 152,
+      "output": "int verbose;",
+      "original": "int verbose;\t\t\t/* TRUE => trace instructions   */",
+      "classification": "exact-or-compiler-macro-expansion"
+    },
+    {
+      "line": 627,
+      "output": "IBOOL",
+      "original": "GLOBAL IBOOL",
+      "classification": "exact-or-compiler-macro-expansion"
+    },
+    {
+      "line": 628,
+      "output": "CsIsBig (IU16 csVal)",
+      "original": "CsIsBig IFN1(IU16, csVal)",
+      "classification": "exact-or-compiler-macro-expansion"
+    },
+    {
+      "line": 629,
+      "output": "{",
+      "original": "{",
+      "classification": "exact-or-compiler-macro-expansion"
+    },
+    {
+      "line": 631,
+      "output": "IU32 base, offset;",
+      "original": "LIN_ADDR base, offset;\t/* Of the descriptor to use */",
+      "classification": "exact-or-compiler-macro-expansion"
+    },
+    {
+      "line": 633,
+      "output": "if(c_getVM() || !c_getPE()) {",
+      "original": "if(getVM() || !getPE()) {",
+      "classification": "exact-or-compiler-macro-expansion"
+    },
+    {
+      "line": 634,
+      "output": "return(0);",
+      "original": "return(FALSE);\t/* no 32 bit CS in V86 or real modes */",
+      "classification": "exact-or-compiler-macro-expansion"
+    },
+    {
+      "line": 635,
+      "output": "} else {",
+      "original": "} else {",
+      "classification": "exact-or-compiler-macro-expansion"
+    },
+    {
+      "line": 636,
+      "output": "offset = csVal & (~7);",
+      "original": "offset = csVal & (~7);\t/* remove the RPL and TI gives offset */",
+      "classification": "exact-or-compiler-macro-expansion"
+    },
+    {
+      "line": 637,
+      "output": "if (csVal & 4) {",
+      "original": "if (csVal & 4) {\t/* check TI bit */",
+      "classification": "exact-or-compiler-macro-expansion"
+    },
+    {
+      "line": 638,
+      "output": "base = c_getLDT_BASE();",
+      "original": "base = getLDT_BASE();",
+      "classification": "exact-or-compiler-macro-expansion"
+    },
+    {
+      "line": 639,
+      "output": "} else {",
+      "original": "} else {",
+      "classification": "exact-or-compiler-macro-expansion"
+    },
+    {
+      "line": 640,
+      "output": "base = c_getGDT_BASE();",
+      "original": "base = getGDT_BASE();",
+      "classification": "exact-or-compiler-macro-expansion"
+    },
+    {
+      "line": 641,
+      "output": "}",
+      "original": "}",
+      "classification": "exact-or-compiler-macro-expansion"
+    },
+    {
+      "line": 647,
+      "output": "return(c_sas_hw_at(base + offset + 6) & 0x40);",
+      "original": "return(sas_hw_at(base + offset + 6) & 0x40);",
+      "classification": "exact-or-compiler-macro-expansion"
+    },
+    {
+      "line": 648,
+      "output": "}",
+      "original": "}",
+      "classification": "exact-or-compiler-macro-expansion"
+    },
+    {
+      "line": 652,
+      "output": "}",
+      "original": "}",
+      "classification": "exact-or-compiler-macro-expansion"
+    }
+  ]
+}
