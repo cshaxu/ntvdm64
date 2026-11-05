@@ -1,0 +1,794 @@
+{
+  "path": "src/mvdm-host/wow32/precomp.h",
+  "current_sha256": "b4390bf63c220581e96155e46271d28b8ad0222f7a83129b7b04313d105be072",
+  "original_sha256": "b4841d516682f6677332fede6ca47187bfdc132a288f71564378a1c87f7bb314",
+  "original_lines_matched": 115,
+  "diff": [
+    {
+      "kind": "insert",
+      "old": [],
+      "new": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-180): modern `windows.h` includes its incompatible",
+        " * post-NT4 WOW export declarations. The original WOW32 body remains the",
+        " * selected provider, so keep that unrelated SDK declaration carrier out. */",
+        "#ifndef _WOWNT32_",
+        "#define _WOWNT32_",
+        "#endif",
+        "#line 21"
+      ],
+      "original_lines": [
+        21,
+        20
+      ],
+      "current_lines": [
+        21,
+        27
+      ]
+    },
+    {
+      "kind": "insert",
+      "old": [],
+      "new": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-179): the original build's private include-root",
+        " * made these declaration carriers implicit.  The split mirror uses the",
+        " * byte-identical opennt-abi carriers; this selects no USER/GDI behavior. */",
+        "#include <winuserp.h>",
+        "/* Provider-local declarations preserve the original WOW32 callers while",
+        " * binding only the unavailable NT4-private host edges. */",
+        "#include <wow32_provider_private.h>",
+        "#include <wow_private_user_compat.h>",
+        "#include <wow_clipboard_epoch.h>",
+        "#include <common/wow/paths.h>",
+        "#include <ntpsapi_wow32.h>",
+        "#include <nturtl_wow32.h>",
+        "#include <ntrtl_wow32.h>",
+        "/* DIVERGENCE(MVDM-HOST-DIV-181): the SDK's host-architecture `_X86_` marker",
+        " * selects a native-VDM register alias in original WOW32. The selected",
+        " * CPU40 SoftPC path is emulated on both host widths and must retain the",
+        " * original simulator `getSS`/`setSS` stack form instead. */",
+        "#ifdef _X86_",
+        "#undef _X86_",
+        "#endif",
+        "#line 22"
+      ],
+      "original_lines": [
+        22,
+        21
+      ],
+      "current_lines": [
+        29,
+        49
+      ]
+    },
+    {
+      "kind": "replace",
+      "old": [
+        "#include \"..\\..\\inc\\vdm.h\""
+      ],
+      "new": [
+        "#include <vdm.h>"
+      ],
+      "original_lines": [
+        95,
+        95
+      ],
+      "current_lines": [
+        123,
+        123
+      ]
+    },
+    {
+      "kind": "insert",
+      "old": [],
+      "new": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-542): project-owned clients do not inherit",
+        " * the original WOW thunk redirects. */",
+        "#ifdef WOW_ORIGINAL_THUNK_BUILD",
+        "/* DIVERGENCE(MVDM-HOST-DIV-297): private WW/WC indices use scoped native",
+        " * storage; ordinary USER indices retain their public API calls. */",
+        "#define WOW_USER_PRIVATE_REDIRECT",
+        "#include \"wow_user_private_access.h\"",
+        "/* DIVERGENCE(MVDM-HOST-DIV-298): original WOW menu thunks consume the",
+        " * ConvertMenu16 private owner-draw format, not native USER32 templates. */",
+        "#include \"wow_menu_parser_bindings.h\"",
+        "#undef LoadMenuIndirect",
+        "#define LoadMenuIndirect wow_user_load_menu_indirect",
+        "#endif"
+      ],
+      "original_lines": [
+        116,
+        115
+      ],
+      "current_lines": [
+        144,
+        156
+      ]
+    }
+  ],
+  "local_arms": [
+    {
+      "file": 701,
+      "index": 0,
+      "line": 24,
+      "directive": "ifndef",
+      "expression": "_WOWNT32_",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        517,
+        518,
+        519,
+        520,
+        521,
+        522,
+        523,
+        524,
+        525,
+        526,
+        527,
+        528,
+        529,
+        530,
+        531,
+        532,
+        533,
+        534,
+        535,
+        536,
+        537,
+        538,
+        539,
+        540,
+        541,
+        542,
+        543,
+        544,
+        545,
+        546,
+        547,
+        548,
+        549,
+        550,
+        551,
+        552,
+        553,
+        554,
+        555,
+        556,
+        557,
+        558,
+        559,
+        560,
+        561,
+        562,
+        563,
+        564,
+        565,
+        566,
+        567,
+        568,
+        569,
+        570,
+        571,
+        572,
+        573,
+        574,
+        575,
+        576,
+        577,
+        578,
+        579,
+        580,
+        581,
+        582,
+        583,
+        584,
+        585,
+        586,
+        587,
+        588,
+        589,
+        590,
+        591,
+        592,
+        593,
+        594,
+        595,
+        687,
+        689,
+        722,
+        724,
+        725,
+        726,
+        727,
+        729,
+        730,
+        731,
+        732
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 701,
+      "index": 1,
+      "line": 46,
+      "directive": "ifdef",
+      "expression": "_X86_",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        517,
+        518,
+        519,
+        520,
+        521,
+        522,
+        523,
+        524,
+        525,
+        526,
+        527,
+        528,
+        529,
+        530,
+        531,
+        532,
+        533,
+        534,
+        535,
+        536,
+        537,
+        538,
+        539,
+        540,
+        541,
+        542,
+        543,
+        544,
+        545,
+        546,
+        547,
+        548,
+        549,
+        550,
+        551,
+        552,
+        553,
+        554,
+        555,
+        556,
+        557,
+        558,
+        559,
+        560,
+        561,
+        562,
+        563,
+        564,
+        565,
+        566,
+        567,
+        568,
+        569,
+        570,
+        571,
+        572,
+        573,
+        574,
+        575,
+        576,
+        577,
+        578,
+        579,
+        580,
+        581,
+        582,
+        583,
+        584,
+        585,
+        586,
+        587,
+        588,
+        589,
+        590,
+        591,
+        592,
+        593,
+        594,
+        595,
+        687,
+        689,
+        722,
+        724,
+        725,
+        726,
+        727,
+        729,
+        730,
+        731,
+        732
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 701,
+      "index": 2,
+      "line": 146,
+      "directive": "ifdef",
+      "expression": "WOW_ORIGINAL_THUNK_BUILD",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        517,
+        518,
+        519,
+        520,
+        521,
+        522,
+        523,
+        524,
+        525,
+        526,
+        527,
+        528,
+        529,
+        530,
+        531,
+        532,
+        533,
+        534,
+        535,
+        536,
+        537,
+        538,
+        539,
+        540,
+        541,
+        542,
+        543,
+        544,
+        545,
+        546,
+        547,
+        548,
+        549,
+        550,
+        551,
+        552,
+        553,
+        554,
+        555,
+        556,
+        557,
+        558,
+        559,
+        560,
+        561,
+        562,
+        563,
+        564,
+        565,
+        566,
+        567,
+        568,
+        569,
+        570,
+        571,
+        572,
+        573,
+        574,
+        575,
+        576,
+        577,
+        578,
+        579,
+        580,
+        581,
+        582,
+        583,
+        584,
+        585,
+        586,
+        587,
+        588,
+        589,
+        590,
+        591,
+        592,
+        593,
+        595
+      ],
+      "outermost_new_exclusion": false
+    }
+  ],
+  "compiler_include_witnesses": [
+    {
+      "original_include_line": 20,
+      "compiler_resumed_at": 21
+    },
+    {
+      "original_include_line": 21,
+      "compiler_resumed_at": 22
+    },
+    {
+      "original_include_line": 22,
+      "compiler_resumed_at": 23
+    },
+    {
+      "original_include_line": 23,
+      "compiler_resumed_at": 24
+    },
+    {
+      "original_include_line": 24,
+      "compiler_resumed_at": 25
+    },
+    {
+      "original_include_line": 25,
+      "compiler_resumed_at": 26
+    },
+    {
+      "original_include_line": 26,
+      "compiler_resumed_at": 27
+    },
+    {
+      "original_include_line": 27,
+      "compiler_resumed_at": 28
+    },
+    {
+      "original_include_line": 28,
+      "compiler_resumed_at": 29
+    },
+    {
+      "original_include_line": 29,
+      "compiler_resumed_at": 30
+    },
+    {
+      "original_include_line": 30,
+      "compiler_resumed_at": 31
+    },
+    {
+      "original_include_line": 31,
+      "compiler_resumed_at": 32
+    },
+    {
+      "original_include_line": 32,
+      "compiler_resumed_at": 33
+    },
+    {
+      "original_include_line": 33,
+      "compiler_resumed_at": 34
+    },
+    {
+      "original_include_line": 34,
+      "compiler_resumed_at": 35
+    },
+    {
+      "original_include_line": 35,
+      "compiler_resumed_at": 36
+    },
+    {
+      "original_include_line": 36,
+      "compiler_resumed_at": 37
+    },
+    {
+      "original_include_line": 37,
+      "compiler_resumed_at": 38
+    },
+    {
+      "original_include_line": 38,
+      "compiler_resumed_at": 39
+    },
+    {
+      "original_include_line": 39,
+      "compiler_resumed_at": 40
+    },
+    {
+      "original_include_line": 40,
+      "compiler_resumed_at": 41
+    },
+    {
+      "original_include_line": 41,
+      "compiler_resumed_at": 42
+    },
+    {
+      "original_include_line": 42,
+      "compiler_resumed_at": 43
+    },
+    {
+      "original_include_line": 43,
+      "compiler_resumed_at": 44
+    },
+    {
+      "original_include_line": 44,
+      "compiler_resumed_at": 45
+    },
+    {
+      "original_include_line": 45,
+      "compiler_resumed_at": 46
+    },
+    {
+      "original_include_line": 46,
+      "compiler_resumed_at": 47
+    },
+    {
+      "original_include_line": 47,
+      "compiler_resumed_at": 48
+    },
+    {
+      "original_include_line": 48,
+      "compiler_resumed_at": 49
+    },
+    {
+      "original_include_line": 49,
+      "compiler_resumed_at": 50
+    },
+    {
+      "original_include_line": 50,
+      "compiler_resumed_at": 51
+    },
+    {
+      "original_include_line": 51,
+      "compiler_resumed_at": 52
+    },
+    {
+      "original_include_line": 52,
+      "compiler_resumed_at": 53
+    },
+    {
+      "original_include_line": 53,
+      "compiler_resumed_at": 54
+    },
+    {
+      "original_include_line": 54,
+      "compiler_resumed_at": 55
+    },
+    {
+      "original_include_line": 55,
+      "compiler_resumed_at": 56
+    },
+    {
+      "original_include_line": 56,
+      "compiler_resumed_at": 57
+    },
+    {
+      "original_include_line": 57,
+      "compiler_resumed_at": 58
+    },
+    {
+      "original_include_line": 58,
+      "compiler_resumed_at": 59
+    },
+    {
+      "original_include_line": 59,
+      "compiler_resumed_at": 60
+    },
+    {
+      "original_include_line": 60,
+      "compiler_resumed_at": 61
+    },
+    {
+      "original_include_line": 61,
+      "compiler_resumed_at": 62
+    },
+    {
+      "original_include_line": 62,
+      "compiler_resumed_at": 63
+    },
+    {
+      "original_include_line": 63,
+      "compiler_resumed_at": 64
+    },
+    {
+      "original_include_line": 64,
+      "compiler_resumed_at": 65
+    },
+    {
+      "original_include_line": 65,
+      "compiler_resumed_at": 66
+    },
+    {
+      "original_include_line": 66,
+      "compiler_resumed_at": 67
+    },
+    {
+      "original_include_line": 68,
+      "compiler_resumed_at": 69
+    },
+    {
+      "original_include_line": 69,
+      "compiler_resumed_at": 70
+    },
+    {
+      "original_include_line": 70,
+      "compiler_resumed_at": 71
+    },
+    {
+      "original_include_line": 71,
+      "compiler_resumed_at": 72
+    },
+    {
+      "original_include_line": 72,
+      "compiler_resumed_at": 73
+    },
+    {
+      "original_include_line": 73,
+      "compiler_resumed_at": 74
+    },
+    {
+      "original_include_line": 74,
+      "compiler_resumed_at": 75
+    },
+    {
+      "original_include_line": 75,
+      "compiler_resumed_at": 76
+    },
+    {
+      "original_include_line": 76,
+      "compiler_resumed_at": 77
+    },
+    {
+      "original_include_line": 77,
+      "compiler_resumed_at": 78
+    },
+    {
+      "original_include_line": 78,
+      "compiler_resumed_at": 79
+    },
+    {
+      "original_include_line": 79,
+      "compiler_resumed_at": 80
+    },
+    {
+      "original_include_line": 80,
+      "compiler_resumed_at": 81
+    },
+    {
+      "original_include_line": 81,
+      "compiler_resumed_at": 82
+    },
+    {
+      "original_include_line": 82,
+      "compiler_resumed_at": 83
+    },
+    {
+      "original_include_line": 83,
+      "compiler_resumed_at": 84
+    },
+    {
+      "original_include_line": 84,
+      "compiler_resumed_at": 85
+    },
+    {
+      "original_include_line": 85,
+      "compiler_resumed_at": 86
+    },
+    {
+      "original_include_line": 86,
+      "compiler_resumed_at": 87
+    },
+    {
+      "original_include_line": 88,
+      "compiler_resumed_at": 89
+    },
+    {
+      "original_include_line": 89,
+      "compiler_resumed_at": 90
+    },
+    {
+      "original_include_line": 90,
+      "compiler_resumed_at": 91
+    },
+    {
+      "original_include_line": 91,
+      "compiler_resumed_at": 92
+    },
+    {
+      "original_include_line": 92,
+      "compiler_resumed_at": 93
+    },
+    {
+      "original_include_line": 93,
+      "compiler_resumed_at": 94
+    },
+    {
+      "original_include_line": 94,
+      "compiler_resumed_at": 95
+    },
+    {
+      "original_include_line": 95,
+      "compiler_resumed_at": 96
+    },
+    {
+      "original_include_line": 96,
+      "compiler_resumed_at": 97
+    },
+    {
+      "original_include_line": 97,
+      "compiler_resumed_at": 98
+    },
+    {
+      "original_include_line": 98,
+      "compiler_resumed_at": 99
+    },
+    {
+      "original_include_line": 99,
+      "compiler_resumed_at": 100
+    },
+    {
+      "original_include_line": 100,
+      "compiler_resumed_at": 101
+    },
+    {
+      "original_include_line": 101,
+      "compiler_resumed_at": 102
+    },
+    {
+      "original_include_line": 102,
+      "compiler_resumed_at": 103
+    },
+    {
+      "original_include_line": 103,
+      "compiler_resumed_at": 104
+    },
+    {
+      "original_include_line": 104,
+      "compiler_resumed_at": 105
+    },
+    {
+      "original_include_line": 105,
+      "compiler_resumed_at": 106
+    },
+    {
+      "original_include_line": 106,
+      "compiler_resumed_at": 107
+    },
+    {
+      "original_include_line": 107,
+      "compiler_resumed_at": 108
+    },
+    {
+      "original_include_line": 108,
+      "compiler_resumed_at": 109
+    },
+    {
+      "original_include_line": 109,
+      "compiler_resumed_at": 110
+    },
+    {
+      "original_include_line": 110,
+      "compiler_resumed_at": 111
+    },
+    {
+      "original_include_line": 111,
+      "compiler_resumed_at": 112
+    },
+    {
+      "original_include_line": 112,
+      "compiler_resumed_at": 113
+    },
+    {
+      "original_include_line": 113,
+      "compiler_resumed_at": 114
+    },
+    {
+      "original_include_line": 114,
+      "compiler_resumed_at": 115
+    }
+  ],
+  "compiler_include_no_resumption": [
+    {
+      "original_line": 67,
+      "include": "#include <winbase.h>"
+    },
+    {
+      "original_line": 87,
+      "include": "#include <string.h>"
+    },
+    {
+      "original_line": 115,
+      "include": "#include <limits.h>"
+    }
+  ],
+  "compiler_output_sha256": "e26a5055128b29ac4de23971ef14abce47f4ab04a959f0b6047963b03da534d9",
+  "limit": "Three include resumptions not directly observed, static whole-file mapping checked; additional supported contexts remain subject to global reconciliation."
+}

@@ -1,0 +1,63 @@
+{
+  "source_ledger": "artifacts/mvdm-audit/t476-s1-branch-ledger.json",
+  "historical_branch_evidence": "artifacts/mvdm-audit/s13-r1308-branch-checklist.csv",
+  "additional_actual_contexts": [
+    "artifacts/mvdm-audit/t476-s2-suballoc-x64-finding.json",
+    "artifacts/mvdm-audit/t476-s2-batch15-suballoc-repair.json",
+    "artifacts/mvdm-audit/t476-s2-batch16-context-repair.json"
+  ],
+  "record_count": 7604,
+  "files": 1055,
+  "counts": [
+    {
+      "product_status": "hit",
+      "has_hit_evidence": true,
+      "source_binding": "changed-rebind-required",
+      "count": 351
+    },
+    {
+      "product_status": "hit",
+      "has_hit_evidence": true,
+      "source_binding": "same",
+      "count": 3211
+    },
+    {
+      "product_status": "previously-excluded",
+      "has_hit_evidence": false,
+      "source_binding": "changed-rebind-required",
+      "count": 375
+    },
+    {
+      "product_status": "previously-excluded",
+      "has_hit_evidence": false,
+      "source_binding": "same",
+      "count": 3632
+    },
+    {
+      "product_status": "unhit",
+      "has_hit_evidence": false,
+      "source_binding": "changed-rebind-required",
+      "count": 26
+    },
+    {
+      "product_status": "unhit",
+      "has_hit_evidence": true,
+      "source_binding": "changed-rebind-required",
+      "count": 1
+    },
+    {
+      "product_status": "unhit",
+      "has_hit_evidence": true,
+      "source_binding": "same",
+      "count": 8
+    }
+  ],
+  "historical_join": "Exact S1 snapshot path, physical line, directive and expression only. Product context indices refer to S1 ledger contexts. Additional proven hits are recorded explicitly.",
+  "limitations": [
+    "This is an evidence merge, not a complete inventory of every supported addon or fixture context.",
+    "Changed source needs line and branch identity rebinding before treating a snapshot hit as a current-branch hit.",
+    "No hit is not evidence of exclusion.",
+    "Existing excluded bodies are not proven safe merely by the lack of a historical hit."
+  ],
+  "csv_sha256": "541ebce665c4bd733f1873ac4cde879efd5455b2c8102691310995592cd4ef5a"
+}
