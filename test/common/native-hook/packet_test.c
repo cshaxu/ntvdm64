@@ -35,5 +35,15 @@ int main(void)
             fprintf(stderr,"packet mutation %u returned %lu\n",mutation,error);return 1;
         }
     }
-    printf("CONTEXT_PACKET_PASS bits=%u valid=1 rejected=10\n",(unsigned)(sizeof(void*)*8));return 0;
+    {
+        const DWORD flags[]={NATIVE_HOOK_FORCE_DOS,NATIVE_HOOK_SEPARATE_WOW,NATIVE_HOOK_CREATION_FLAGS};
+        for(unsigned i=0;i<ARRAYSIZE(flags);++i) {
+            DWORD bytes=packet(data,machine);native_hook_packet *h=(native_hook_packet *)data;
+            h->flags=flags[i];
+            if(nthook_context_parse(&result,data,bytes,machine) || result.creation_flags!=flags[i])return 2;
+            h->mode=NATIVE_HOOK_INTERCEPT;
+            if(nthook_context_parse(&result,data,bytes,machine)!=ERROR_INVALID_DATA)return 3;
+        }
+    }
+    printf("CONTEXT_PACKET_PASS bits=%u valid=4 rejected=13\n",(unsigned)(sizeof(void*)*8));return 0;
 }

@@ -56,7 +56,27 @@ void run16_frontend_scope_end(run16_frontend_scope *scope)
     if(scope->receipt)CloseHandle(scope->receipt);
     HeapFree(GetProcessHeap(),0,scope);
 }
-static DWORD scope_begin(run16_frontend_scope **output,BOOL lease,BOOL console_owned,BOOL acquire_frontend)
+void run16_frontend_seed_release(run16_frontend_seed *seed)
+{
+    if(!seed)return;
+    if(seed->found) {
+        if(seed->context.frontend)CloseHandle(seed->context.frontend);
+        if(seed->context.execution)CloseHandle(seed->context.execution);
+    }
+    ZeroMemory(seed,sizeof(*seed));
+}
+DWORD run16_frontend_seed_read(run16_frontend_seed *seed)
+{
+    DWORD error;
+    if(!seed)return ERROR_INVALID_PARAMETER;
+    ZeroMemory(seed,sizeof(*seed));
+    error=nthook_context_read(&seed->context,&seed->found);
+    if(!error && seed->found && seed->context.mode!=NATIVE_HOOK_LAUNCHER)
+        error=ERROR_INVALID_DATA;
+    if(error)run16_frontend_seed_release(seed);
+    return error;
+}
+static DWORD scope_begin(run16_frontend_scope **output,BOOL lease,BOOL console_owned,BOOL acquire_frontend,const run16_frontend_seed *provided)
 {
     run16_frontend_scope *scope;
     char text[32];
@@ -65,7 +85,8 @@ static DWORD scope_begin(run16_frontend_scope **output,BOOL lease,BOOL console_o
     nthook_context seed;BOOL seeded=FALSE;
     if (!output) return ERROR_INVALID_PARAMETER;
     *output=NULL;
-    error=nthook_context_read(&seed,&seeded);
+    if(provided) {seed=provided->context;seeded=provided->found;}
+    else error=nthook_context_read(&seed,&seeded);
     if(!error && seeded) {
         if(seed.mode!=NATIVE_HOOK_LAUNCHER)error=ERROR_INVALID_DATA;
         else { inherited_frontend=seed.frontend;inherited_execution=seed.execution; }
@@ -78,7 +99,7 @@ static DWORD scope_begin(run16_frontend_scope **output,BOOL lease,BOOL console_o
     if (inherited_execution && !inherited_frontend) return ERROR_INVALID_DATA;
     scope=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*scope));
     if (!scope) {
-        if(seeded) {
+        if(seeded && !provided) {
             if(inherited_frontend)CloseHandle(inherited_frontend);
             if(inherited_execution)CloseHandle(inherited_execution);
         }
@@ -126,14 +147,14 @@ static DWORD scope_begin(run16_frontend_scope **output,BOOL lease,BOOL console_o
             }
         }else if(GetLastError()!=ERROR_ENVVAR_NOT_FOUND){error=ERROR_INVALID_DATA;goto fail;}
     }
-    if(seeded) {
+    if(seeded && !provided) {
         if(inherited_frontend)CloseHandle(inherited_frontend);
         if(inherited_execution)CloseHandle(inherited_execution);
     }
     *output=scope;
     return ERROR_SUCCESS;
 fail:
-    if(seeded) {
+    if(seeded && !provided) {
         if(inherited_frontend)CloseHandle(inherited_frontend);
         if(inherited_execution)CloseHandle(inherited_execution);
     }
@@ -145,11 +166,15 @@ fail:
     return error;
 }
 DWORD run16_frontend_scope_begin(run16_frontend_scope **output)
-{ return scope_begin(output,FALSE,FALSE,TRUE); }
+{ return scope_begin(output,FALSE,FALSE,TRUE,NULL); }
 DWORD run16_frontend_scope_begin_lease(run16_frontend_scope **output,BOOL console_owned)
-{ return scope_begin(output,TRUE,console_owned,TRUE); }
+{ return scope_begin(output,TRUE,console_owned,TRUE,NULL); }
 DWORD run16_frontend_scope_begin_gui(run16_frontend_scope **output)
-{ return scope_begin(output,FALSE,FALSE,FALSE); }
+{ return scope_begin(output,FALSE,FALSE,FALSE,NULL); }
+
+DWORD run16_frontend_scope_begin_seeded(run16_frontend_scope **output,
+    const run16_frontend_seed *seed,BOOL gui,BOOL console_owned)
+{ return scope_begin(output,!gui,console_owned,!gui,seed); }
 
 HANDLE run16_frontend_scope_capability(run16_frontend_scope *scope)
 {

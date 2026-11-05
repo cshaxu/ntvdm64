@@ -9,15 +9,18 @@
 UNICODE_STRING BaseDotComSuffixName={8,10,L".com"};
 UNICODE_STRING BaseDotPifSuffixName={8,10,L".pif"};
 UNICODE_STRING BaseDotExeSuffixName={8,10,L".exe"};
-DWORD nthook_legacy_type(PCWSTR application,DWORD *type)
+DWORD nthook_legacy_type_flags(PCWSTR application,DWORD flags,DWORD *type)
 {
     DWORD candidate;
     if(!application || !type)return ERROR_INVALID_PARAMETER;
     if(!OpenNtBaseGetBinaryTypeW(application,&candidate))return GetLastError();
-    if(candidate!=SCS_DOS_BINARY && candidate!=SCS_WOW_BINARY && candidate!=SCS_PIF_BINARY)
+    if(candidate!=SCS_DOS_BINARY && candidate!=SCS_WOW_BINARY && candidate!=SCS_PIF_BINARY &&
+       !(candidate==SCS_OS216_BINARY && (flags & NATIVE_HOOK_FORCE_DOS)))
         return ERROR_NOT_SUPPORTED;
     *type=candidate;return ERROR_SUCCESS;
 }
+DWORD nthook_legacy_type(PCWSTR application,DWORD *type)
+{ return nthook_legacy_type_flags(application,0,type); }
 DWORD nthook_native_subsystem(HANDLE child,DWORD *subsystem)
 {
     DWORD machine;

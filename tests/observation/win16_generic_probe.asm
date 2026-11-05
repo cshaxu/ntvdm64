@@ -6,6 +6,54 @@ db 'MZ'
 dw (image_end-$$) % 512,((image_end-$$)+511)/512,0,4,0,0xffff,0,0x100,0,0,0,0x40,0
 times 0x3c-($-$$) db 0
 dd ne
+%ifdef FORCEDOS_STUB
+; Authored dual-mode witness: normal NE runs the existing callback probe;
+; CREATE_FORCEDOS must execute this distinct DOS entry and return 53.
+dos_stub:
+push cs
+pop ds
+mov dx,dos_message-dos_stub
+mov ah,9
+int 0x21
+%ifdef FORCEDOS_PARENT
+; Free surplus DOS memory before EXEC; ES initially names the PSP.
+mov bx,0x400
+mov ah,0x4a
+int 0x21
+jc dos_failed
+mov [dos_parameters-dos_stub+8],es
+mov [dos_parameters-dos_stub+12],es
+mov ax,cs
+mov [dos_parameters-dos_stub+4],ax
+mov es,ax
+mov bx,dos_parameters-dos_stub
+mov dx,dos_child-dos_stub
+push ds
+push es
+mov ax,0x4b00
+int 0x21
+pop es
+pop ds
+jc dos_failed
+mov ah,0x4d
+int 0x21
+cmp al,53
+jne dos_failed
+mov ax,0x4c37
+int 0x21
+dos_failed:
+mov ax,0x4c36
+int 0x21
+dos_child: db 'FCHILD.EXE',0
+dos_tail: db 0,13
+dos_parameters: dw 0,dos_tail-dos_stub,0,0x5c,0,0x6c,0
+%else
+mov ax,0x4c35
+int 0x21
+%endif
+dos_message: db 'FORCEDOS_STUB_MARKER',13,10,'$'
+align 16,db 0
+%endif
 ne:
 db 'NE',5,1
 dw entries-ne,entries_end-entries

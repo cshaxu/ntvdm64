@@ -40,7 +40,7 @@ DWORD nthook_install(HANDLE child,const nthook_context *context,DWORD mode)
     char dll[MAX_PATH*2];BOOL default_char=FALSE;WORD machine=0;PCWSTR hook;
     if(!child || !context || (mode!=NATIVE_HOOK_INTERCEPT && mode!=NATIVE_HOOK_LAUNCHER) ||
         !!context->frontend!=!!context->execution ||
-        (context->creation_flags & ~NATIVE_HOOK_SEPARATE_WOW))return ERROR_INVALID_PARAMETER;
+        (context->creation_flags & ~NATIVE_HOOK_CREATION_FLAGS))return ERROR_INVALID_PARAMETER;
     error=win32_process_image_machine(child,&machine);
     if(error)return error;
     hook=machine==IMAGE_FILE_MACHINE_AMD64 ? context->hook64 : context->hook;

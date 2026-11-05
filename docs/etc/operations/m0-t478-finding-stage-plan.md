@@ -103,3 +103,12 @@ delivery follow the active packet and owner instructions. An evidence-only
 disposition must document why no production change is justified. Preserve
 existing regression and immutable guest boundaries. S1's complete inventory
 and inherited handoffs remain open, so this plan cannot by itself close T478.
+
+## S3 disposition
+
+Finding 20's missing host flag producer and Run16 dispatch are resolved by
+[S3](../evidence/m0-t478-s3-forcedos.md). The existing original broker/COMMAND
+implementation is reused. Independent utilities, guest modifications and
+unproved PIF issues remain outside this bounded repair. S4 is the next proposed
+packet; this record does not admit it. Publication follows the owner's current
+worktree-assets-only, local-commit, no-push instruction.

@@ -37,7 +37,7 @@ static BOOL finish(BOOL created,DWORD flags,PROCESS_INFORMATION *child,BOOL laun
     DWORD saved=GetLastError(),error=ERROR_SUCCESS;
     nthook_context context=nthook_process_context;
     /* One redirected request, not a persistent descendant policy. */
-    context.creation_flags=launcher ? flags & CREATE_SEPARATE_WOW_VDM : 0;
+    context.creation_flags=launcher ? flags & NATIVE_HOOK_CREATION_FLAGS : 0;
     {
         BOOL actual_launcher=FALSE;
         error=nthook_launcher_target(child->hProcess,&context,&actual_launcher);
@@ -172,7 +172,7 @@ static BOOL legacy_application(PCWSTR application,PCWSTR command,DWORD flags,
         if(!selected_image(application,resolved,capacity))return FALSE;
     } else if(!select_command_image(command,resolved,capacity))return FALSE;
     if(flags&(CREATE_NEW_CONSOLE|DETACHED_PROCESS|CREATE_NO_WINDOW))return FALSE;
-    return !nthook_legacy_type(resolved,&type);
+    return !nthook_legacy_type_flags(resolved,flags,&type);
 }
 static WCHAR *redirect_command(PCWSTR application,PCWSTR command)
 {

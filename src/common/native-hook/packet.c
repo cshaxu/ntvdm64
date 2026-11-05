@@ -21,7 +21,7 @@ DWORD nthook_context_parse(nthook_context *context,const void *packet,DWORD byte
     if(header.bytes!=bytes || header.version!=NATIVE_HOOK_VERSION ||
        (header.mode!=NATIVE_HOOK_INTERCEPT && header.mode!=NATIVE_HOOK_LAUNCHER) ||
        header.machine!=machine ||
-       (header.flags & ~NATIVE_HOOK_SEPARATE_WOW) ||
+       (header.flags & ~NATIVE_HOOK_CREATION_FLAGS) ||
        (header.flags && header.mode!=NATIVE_HOOK_LAUNCHER) ||
        header.reserved ||
        !!header.frontend!=!!header.execution ||

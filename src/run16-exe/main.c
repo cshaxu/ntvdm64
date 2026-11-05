@@ -243,6 +243,7 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
     DWORD check_creation_flags=(binary & BINARY_SUBTYPE_MASK)==BINARY_TYPE_DOS_PIF ?
         CREATE_NEW_CONSOLE : 0;
     HANDLE saved_console=NtCurrentPeb()->ProcessParameters->ConsoleHandle;
+    check_creation_flags |= run16_frontend_scope_creation_flags(frontend_scope) & NATIVE_HOOK_FORCE_DOS;
     if (launcher_console_only) check_creation_flags |= CREATE_NEW_CONSOLE;
     if (binary==BINARY_TYPE_SEPWOW) check_creation_flags |= CREATE_SEPARATE_WOW_VDM;
     /* Original BaseCheckVDM reads the private NT4 PEB projection, not the
@@ -442,6 +443,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
     PCWSTR launch_command;
     PCWSTR option, tail;
     run16_frontend_scope *frontend_scope=NULL;
+    run16_frontend_seed seed={0};
     run16_launch_options options;
     WCHAR application[MAX_PATH];
     WCHAR split_image[MAX_PATH];
@@ -465,6 +467,8 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
     arguments = CommandLineToArgvW(command, &count);
     if (!arguments)
         return (int)GetLastError();
+    result=run16_frontend_seed_read(&seed);
+    if(result)goto done;
     if (!SetConsoleCtrlHandler(launcher_control, TRUE))
     {
         result = GetLastError();
@@ -542,12 +546,15 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
             goto done;
         }
         result=connect_broker();
-        if (!result) result=run16_frontend_scope_begin_lease(&frontend_scope,initial_console_only);
+        if (!result) result=run16_frontend_scope_begin_seeded(&frontend_scope,&seed,FALSE,initial_console_only);
         if (result) goto done;
         result=run16_classify_native_launch_type(application,&native_type);
         if(!result)result=launch_native(frontend_scope,application,shell_command,native_type,TRUE,&options);
         goto done;
     }
+    if ((seed.context.creation_flags & NATIVE_HOOK_FORCE_DOS) &&
+        (type==SCS_WOW_BINARY || type==SCS_OS216_BINARY))
+        type=SCS_DOS_BINARY;
     if (type == SCS_DOS_BINARY)
         binary = BINARY_TYPE_DOS;
     else if (type == SCS_PIF_BINARY)
@@ -587,8 +594,8 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         if (!result)
         {
             if ((binary & ~BINARY_SUBTYPE_MASK)==BINARY_TYPE_DOS)
-                result=run16_frontend_scope_begin_lease(&frontend_scope,initial_console_only);
-            else result=run16_frontend_scope_begin_gui(&frontend_scope);
+                result=run16_frontend_scope_begin_seeded(&frontend_scope,&seed,FALSE,initial_console_only);
+            else result=run16_frontend_scope_begin_seeded(&frontend_scope,&seed,TRUE,FALSE);
             if (!result && binary==BINARY_TYPE_WIN16 &&
                 (run16_frontend_scope_creation_flags(frontend_scope) & CREATE_SEPARATE_WOW_VDM))
                 binary=BINARY_TYPE_SEPWOW;
@@ -621,7 +628,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         if(result)goto done;
         if (OpenNtBaseNativeLaunchTypeIsText(native_type)) {
             result=connect_broker();
-            if (!result) result=run16_frontend_scope_begin_lease(&frontend_scope,initial_console_only);
+            if (!result) result=run16_frontend_scope_begin_seeded(&frontend_scope,&seed,FALSE,initial_console_only);
             if (result) goto done;
         }
     }
@@ -630,7 +637,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         goto done;
     }
     result=connect_broker();
-    if(!result)result=run16_frontend_scope_begin_gui(&frontend_scope);
+    if(!result)result=run16_frontend_scope_begin_seeded(&frontend_scope,&seed,TRUE,FALSE);
     if(!result)result=launch_native(frontend_scope,image_resolved ? application : image_argument,launch_command,native_type,options.wait,&options);
 done:
     {
@@ -641,6 +648,7 @@ done:
     }
     run16_frontend_scope_end(frontend_scope);
     OpenNtBaseClientDisconnectCurrent();
+    run16_frontend_seed_release(&seed);
     LocalFree(arguments);
     return (int)result;
 }
