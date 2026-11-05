@@ -1178,3 +1178,6 @@ the first cached build and bounded unit verification, with integration gaps expl
 - [T478 S2 generic thunk investigation](evidence/m0-t478-s2-generic-thunk.md): source selection, ABI issue and pending recovery.
 
 [Mixed-task import](evidence/m0-t479-s1-thunk-import.md) records the source merge and integrated validation.
+
+[Guest call-chain audit](operations/m0-t479-s1-guest-callchain.md) records the
+current S1 source findings, ownership decisions and bounded ABI proof tasks.

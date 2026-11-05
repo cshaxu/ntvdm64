@@ -32,6 +32,13 @@ T477 is closed in its [closure](../history/m0-t477-closure.md).
 
 ## Imported side-work record
 
+Mainline source work is recorded in the
+[S1 guest call-chain audit](../etc/operations/m0-t479-s1-guest-callchain.md).
+The existing command wait blocks the whole worker; independent VM continuations
+must leave that host stack. Historical two-VM evidence was recovered from Git,
+including its duplicate-input failure. Seven bounded design decisions remain;
+no guest bridge runtime or new publication is claimed.
+
 [S1/generic-thunk integration](../etc/evidence/m0-t479-s1-thunk-import.md)
 retains T478 source S1/S2 identities. The imported S1 inventory is explicitly
 incomplete; no guest mainline milestone is closed by importing it.
