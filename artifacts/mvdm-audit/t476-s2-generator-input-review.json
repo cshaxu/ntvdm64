@@ -1,0 +1,13 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/c2cpusad.h",
+  "current_sha256": "7b70935efed5a821be90905a48b282d60872ac1f2e1a441df04b1e4ed275902b",
+  "original_sha256": "6f73c73102647669a8db411c8a6a2ac6412fe2ccbb3daa6331b7b8fd2717260b",
+  "normalized_sha256": "7b70935efed5a821be90905a48b282d60872ac1f2e1a441df04b1e4ed275902b",
+  "original_condition_groups": 0,
+  "current_condition_groups": 0,
+  "production_reader": "tools/build/GenerateCvidcCpuBinding.mjs",
+  "verification": "node tools/audit/Verify-T411CvidcVectorContract.mjs . build/.ninja/msvc-x86-release/worker/ntvdm.exe.map",
+  "public_slots": 154,
+  "private_slots": 55,
+  "map_verified": true
+}

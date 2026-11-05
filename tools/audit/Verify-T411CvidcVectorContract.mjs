@@ -36,7 +36,7 @@ const ccpuHeader = requireText(root,
   'src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h',
   /#define\s+effective_addr\(seg, offset\)\s+c_effective_addr\(seg, offset\)/);
 const xt = requireText(root, 'src/mvdm-host/softpc.new/base/support/xt.c',
-  /#ifdef CPU_30_STYLE[\s\S]*Cpu\.EffectiveAddr/);
+  /#ifdef CPU_30_STYLE\s*(?:#line\s+\d+\s*)?#error Excluded original conditional branch/);
 const evGlue = requireText(root, 'src/mvdm-host/softpc.new/base/cvidc/ev_glue.c',
   /setup_vga_globals[\s\S]*mvdm_cvidc_bind_vectors\(\)/);
 const localfm = requireText(root, 'src/mvdm-host/softpc.new/base/ccpu386/localfm.c',
@@ -44,7 +44,7 @@ const localfm = requireText(root, 'src/mvdm-host/softpc.new/base/ccpu386/localfm
 const main = requireText(root, 'src/mvdm-host/softpc.new/base/support/main.c',
   /mvdm_cvidc_bind_video_vector\(\)[\s\S]*config\(/);
 requireText(root, 'src/mvdm-host/softpc.new/base/cvidc/evidgen.h',
-  /#ifndef CPU_40_STYLE\s+#define\s+getVideorplane/);
+  /#ifndef CPU_40_STYLE\s+(?:#line\s+\d+\s+)?#define\s+getVideorplane/);
 requireText(root, 'src/mvdm-host/softpc.new/base/inc/egacpu.h',
   /extern IS32 getVideodirty_low IPT0\(\)/);
 if (/video_get_|video_set_|MVDM_CVIDC_VIDEO_BIND|boundVideo/.test(binder + generator)) {
@@ -67,7 +67,7 @@ if (!publicSlots.includes('CalcQuickEventInstTime') ||
 if (!binder.includes('mvdm_cvidc_bind_video_vector();') ||
     !cvidAccess.includes('result = (*(Cpu.CalcQuickEventInstTime))(val);') ||
     !ccpuHeader.includes('c_effective_addr(seg, offset)') ||
-    !xt.includes('#ifdef CPU_30_STYLE') || !evGlue.includes('mvdm_cvidc_bind_vectors();') ||
+    !xt.includes('#ifdef CPU_30_STYLE') || /Cpu\.EffectiveAddr/.test(xt) || !evGlue.includes('mvdm_cvidc_bind_vectors();') ||
     !main.includes('mvdm_cvidc_bind_video_vector();')) {
   throw new Error('CCPU/C-VID profile-routing contract drifted');
 }
@@ -87,7 +87,7 @@ console.log(JSON.stringify({
   private_slots: privateSlots.length,
   quick_event_slot: 'c_cpu_calc_q_ev_inst_for_time',
   ccpu_effective_address: 'direct-c_effective_addr',
-  cpu30_only_indirection: true,
+  cpu30_indirection_excluded: true,
   early_video_bind: true,
   setup_bind: true,
   quick_event_restart_owner: 'system/qevnt.c::qevJumpRestart',
