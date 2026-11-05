@@ -1,0 +1,156 @@
+{
+  "method": "Complete hash-bound original-tree review and source line projection rebound across a single #line insertion; all recorded hit arms rerun in production preprocessing, changed anchors observed at original lines. Runtime and unobserved configurations are not certified.",
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "before_sha256": "a745afa2eb4179290b1db7c60c401f4874abf4b8de42bd0ffbcc18912aedf66c",
+      "current_sha256": "7937b35a43a66aad18e888b50cabf24c25ac9d2f10a88e340877e2480deaa23d",
+      "original_sha256": "ab270e2669cfd383da4baac471bb63e7c9c603581f4f7592ad447e8a783953dc",
+      "line_insertion": 2764,
+      "prior_strict_review": "s13-r1369-extra-strict.json",
+      "prior_record": {
+        "path": "src/mvdm-host/wow32/wuwind.c",
+        "current_sha256": "a745afa2eb4179290b1db7c60c401f4874abf4b8de42bd0ffbcc18912aedf66c",
+        "original_sha256": "ab270e2669cfd383da4baac471bb63e7c9c603581f4f7592ad447e8a783953dc",
+        "matched_lines": 3051,
+        "groups": {
+          "excluded": 5,
+          "original_groups": 6,
+          "selected": 1,
+          "local_groups": 8
+        }
+      },
+      "hit_arms": 9,
+      "excluded_arms": 8,
+      "preprocessor_anchor_observations": [
+        {
+          "context": 568,
+          "lines": [
+            [
+              2764,
+              ";"
+            ],
+            [
+              2765,
+              ";"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "before_sha256": "9b2713753efec2cd80c7d9cb25a283702169c66ea5c42b2837be8530964a3de2",
+      "current_sha256": "8814fe1cef49b3914c612703f4b136c41d8b9f73ab2e1f083018dadcd6242217",
+      "original_sha256": "171ef0b7cd668cf51db86d9ae2fea4269cc002f0aba17033bf968d84c10f0f3d",
+      "line_insertion": 487,
+      "prior_strict_review": "s13-r1371-extra-strict.json",
+      "prior_record": {
+        "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+        "current_sha256": "9b2713753efec2cd80c7d9cb25a283702169c66ea5c42b2837be8530964a3de2",
+        "original_sha256": "171ef0b7cd668cf51db86d9ae2fea4269cc002f0aba17033bf968d84c10f0f3d",
+        "matched_lines": 457,
+        "groups": {
+          "local_groups": 5,
+          "excluded": 2,
+          "original_groups": 2
+        }
+      },
+      "hit_arms": 5,
+      "excluded_arms": 2,
+      "preprocessor_anchor_observations": [
+        {
+          "context": 655,
+          "lines": [
+            [
+              487,
+              "} __finally {"
+            ],
+            [
+              487,
+              "LeaveCriticalSection(&(wow_control_draw_current->lock));"
+            ],
+            [
+              488,
+              "}"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+      "before_sha256": "99fa1a275ea559b9630ed0798423ab9fddc739af121c7685bab01f8470ca1ecf",
+      "current_sha256": "0e072d983c0b8f233acb472248ed6b49c2060efbf7676f5a8e23d978eca7f931",
+      "original_sha256": "d8fe5a80d5848f2951843d7ba94752cb3223945a48630350835422389cd1da6f",
+      "line_insertion": 52,
+      "prior_strict_review": "s13-r1346-strict-review.json",
+      "prior_record": {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+        "before_sha256": "99fa1a275ea559b9630ed0798423ab9fddc739af121c7685bab01f8470ca1ecf",
+        "original_sha256": "d8fe5a80d5848f2951843d7ba94752cb3223945a48630350835422389cd1da6f",
+        "anchors": {},
+        "matched_lines": 1179,
+        "strict_tree": {
+          "excluded": 5,
+          "groups": 5,
+          "retained": 3
+        }
+      },
+      "hit_arms": 3,
+      "excluded_arms": 5,
+      "preprocessor_anchor_observations": [
+        {
+          "context": 630,
+          "lines": [
+            [
+              52,
+              "WCHAR szOneChar[] = L\"0\";"
+            ],
+            [
+              53,
+              "WCHAR szSLASHSTARDOTSTAR[] = L\"\\\\*\";"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "before_sha256": "e9c3dc8ac2f6453d970869ef2e5007a50d914652cc615177110ccfe3ac90ab98",
+      "current_sha256": "ed2559bf93da5964d35de20fe2aed18e009810561f0b59d111778fc8b155de27",
+      "original_sha256": "678d2cd4b79a15a79e6c0257b4bd93ad69fa7be95a513b627565490256cb1afc",
+      "line_insertion": 427,
+      "prior_strict_review": "s13-r1352-strict-review.json",
+      "prior_record": {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+        "before_sha256": "e9c3dc8ac2f6453d970869ef2e5007a50d914652cc615177110ccfe3ac90ab98",
+        "original_sha256": "678d2cd4b79a15a79e6c0257b4bd93ad69fa7be95a513b627565490256cb1afc",
+        "anchors": {},
+        "matched_lines": 281,
+        "strict_tree": {
+          "excluded": 3,
+          "groups": 3,
+          "retained": 1
+        }
+      },
+      "hit_arms": 1,
+      "excluded_arms": 3,
+      "preprocessor_anchor_observations": [
+        {
+          "context": 616,
+          "lines": [
+            [
+              427,
+              "PWND _GetNextDlgGroupItem("
+            ],
+            [
+              428,
+              "PWND pwndDlg,"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

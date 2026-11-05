@@ -1,0 +1,30 @@
+{
+  "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+  "before_s1_sha256": "1633d18b84205a1dd96a1730017261ca141b4f669fade1356ca575f90eeea122",
+  "current_sha256": "f6ee41123d29fc02d6c9403b83547ddea97d5f5361743022296f5d8037c89e64",
+  "original_sha256": "224f6bdf5cfa15a37d95f97e24c30d37d947d5f7f5199d50aeab65b39d150c55",
+  "prior_full_tree_review": "s13-r1389-natural-line-review.json",
+  "prior_record": {
+    "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+    "current_sha256": "1633d18b84205a1dd96a1730017261ca141b4f669fade1356ca575f90eeea122",
+    "original_sha256": "224f6bdf5cfa15a37d95f97e24c30d37d947d5f7f5199d50aeab65b39d150c55",
+    "matched_lines": 894,
+    "strict_tree": {
+      "retained": 9,
+      "groups": 15,
+      "excluded": 7,
+      "implicit_retained_anchor": 1
+    },
+    "arm_states": {
+      "historical-hit": 8,
+      "excluded-error": 7,
+      "current-hit": 1
+    }
+  },
+  "change": "Only the recorded unhit outer arm changed; removed nested old #error. Prefix and suffix outside that arm are byte-identical to the prior proof.",
+  "hit_arms": 8,
+  "hit_contexts_rechecked": [
+    264
+  ],
+  "verification": "Current selected original lines and #error checked in batch3; 30 S1 outer exclusions pass."
+}
