@@ -271,3 +271,8 @@ The [four file reviews](../../../artifacts/mvdm-audit/t476-s2-excluded-four-fina
 ### WOW shared-domain header migration reconciliation
 
 The [wuman.c review](../../../artifacts/mvdm-audit/t476-s2-wuman-final-review.json) binds the prior full-tree audit to its exact historical Git blob and establishes that the only subsequent source change is the shared-domain header path. The two declarations used by this file match in the previous and current headers; the current compiler observations match original line positions. The file is complete for the conditional and line audit. Total: **813 of 1,055 complete; 242 open**.
+
+
+### EOI and sound source reviews
+
+The [EOI and sound reviews](../../../artifacts/mvdm-audit/t476-s2-eoi-sound-final-review.json) complete `nt_eoi.h` and `nt_sound.c`: each full original/current diff, hash-matched original branch tree and line projection, and real compiler observations were checked. Original MONITOR-only and non-PROD diagnostic branches remain excluded; the original lock declarations remain available through the registered sound binding. Total: **815 of 1,055 complete; 240 open**.

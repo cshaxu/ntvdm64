@@ -1,0 +1,45 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_eoi.h",
+      "current_sha256": "3bc140cb9a26bfc6aba200b33c50e576f28fdca9811f8336fd6963a5e7bb0181",
+      "original_sha256": "57ae39f20535e93b451e83a0e54e6e45f43512e12d99ae3ffc6a58e4f1ada8e3",
+      "s13_tree_projection": "artifacts/mvdm-audit/s13-r1336-tree-recheck.json",
+      "matching_code_lines": 21,
+      "excluded_arms": 1,
+      "compiler_contexts": [
+        144,
+        150,
+        151,
+        154,
+        156,
+        310,
+        312,
+        321,
+        322,
+        332,
+        333,
+        340,
+        343,
+        345,
+        347,
+        352
+      ],
+      "compiler_unique_original_lines_seen": 6,
+      "local_diff_review": "MONITOR-only declarations excluded; obsolete WaitIcaLockFullyInitialized declaration removed with continuation anchor."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sound.c",
+      "current_sha256": "b46824e044662437f8db7fd500cc09ce9be53dbac285d98523a3a3c3ed70dbbc",
+      "original_sha256": "19e602c67a87241daf66e8613f4897d632acc7c6765f74c2b1eb09cf080e53f6",
+      "s13_tree_projection": "artifacts/mvdm-audit/s13-r1336-tree-recheck.json",
+      "matching_code_lines": 260,
+      "excluded_arms": 1,
+      "compiler_contexts": [
+        320
+      ],
+      "compiler_unique_original_lines_seen": 81,
+      "local_diff_review": "DIV-098 adds the two original lock declarations and PROD-disabled diagnostic is excluded."
+    }
+  ]
+}
