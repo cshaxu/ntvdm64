@@ -153,3 +153,18 @@ The [WOW message file review](../../../artifacts/mvdm-audit/t476-s2-wumsg-final-
 ### Completed original dialog creator review
 
 The [dialog creator review](../../../artifacts/mvdm-audit/t476-s2-dlgbegin-final-review.json) completes `dlgbegin.c`. Its complete diff, original DEBUG branch and local dialog-procedure ownership conditions were checked against hit records; the existing ownership and lifecycle adaptations remain registered. Matching source positions and 140 actual compiler observations agree. Total: **749 of 1,055 complete; 306 open**.
+
+
+### Completed DOS data and FCB source reviews
+
+The [DEM file reviews](../../../artifacts/mvdm-audit/t476-s2-dem-final-review.json) complete `demdasd.h` and `demfcb.c`. Neither original nor current file has conditional groups. The full source diffs, fixed guest DPB address and scoped DTA lease adaptations, matching original source lines, and actual compiler samples were checked against the pinned hashes. Total: **751 of 1,055 complete; 304 open**.
+
+
+### Completed DOS state source review
+
+The [DEM state file review](../../../artifacts/mvdm-audit/t476-s2-demdata-final-review.json) completes `demdata.c`. Neither source has conditional groups. Its only retained original directive is at its original line; the four original data declarations are replaced by registered guest-location owners, and continuation anchors were checked. The product included the file in recorded compiler contexts, but no matching original executable statement exists to sample; this evidence does not claim one. Total: **752 of 1,055 complete; 303 open**.
+
+
+### Completed DOS state access source review
+
+The [DEM state access review](../../../artifacts/mvdm-audit/t476-s2-demgset-final-review.json) completes `demgset.c`. Neither source has conditional groups. The full original/current diff, registered numeric guest-state ownership, DPB representation and filesystem-field repair were checked along with matching source positions and 197 unique compiler-observed original lines. Total: **753 of 1,055 complete; 302 open**.

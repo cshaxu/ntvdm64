@@ -1,0 +1,12 @@
+{
+  "path": "src/mvdm-host/dos/dem/demdata.c",
+  "current_sha256": "e2089f9585db09abb1e6171fcf5b890c9a7879c0c0a2d806514c9f12c3b4b778",
+  "original_sha256": "366a350bc31579dc48764b81d28b26f4d2a5c69c66ec42d742ddaaf739e6a566",
+  "conditional_arms": 0,
+  "file_marker_contexts": [
+    244
+  ],
+  "compiler_original_statement_samples": 0,
+  "line_review": "Only original include remains source-identical at line 6. All four original data declarations are replaced by registered DIV-005/006/007 guest-location objects; continuation anchors are 10, 15 and 19. No further retained original statement needs a line mapping.",
+  "local_diff_review": "Entire original/current diff reviewed; the four data declarations have registered guest-location ownership replacements."
+}
