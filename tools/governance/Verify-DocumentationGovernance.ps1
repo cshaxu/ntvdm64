@@ -237,6 +237,18 @@ if ($hasActivePacket) {
         $expectedTask = $latestClosedTask + 1
         $activeTask = [int]$numericMatch.Groups['task'].Value
         $activeS = [int]$numericMatch.Groups['subtask'].Value
+        # Independent worktrees may admit the next T while the committed
+        # baseline's task is still active elsewhere. Admission is not closure.
+        $baselineStatus = (git -C $RepositoryRoot show HEAD:docs/states/CURRENT.md 2>$null) -join "`n"
+        $baselinePacket = [regex]::Match($baselineStatus, '\*\*Active:\s+M\d+ T(?<task>\d+) S(?<subtask>\d+)\*\*')
+        $baselineAdmission = $false
+        if ($baselinePacket.Success) {
+            $baselineTask = [int]$baselinePacket.Groups['task'].Value
+            $baselineS = [int]$baselinePacket.Groups['subtask'].Value
+            $baselineAdmission = $baselineTask -gt $latestClosedTask -and (
+                ($activeTask -eq $baselineTask -and $activeS -ge $baselineS) -or
+                ($activeTask -eq ($baselineTask + 1) -and $activeS -eq 1))
+        }
         $reopenedTask = $activeTask -eq $latestClosedTask
         $latestClosedS = 0
         if ($reopenedTask) {
@@ -254,9 +266,9 @@ if ($hasActivePacket) {
         # the next.  Its prior S closure records are checked below.  History
         # is reserved for closed T packages, so requiring it here would make
         # the execution rule's in-place S continuation impossible.
-        if ((-not $reopenedTask -and
+        if (-not $baselineAdmission -and ((-not $reopenedTask -and
              ($activeTask -ne $expectedTask -or $activeS -lt 1)) -or
-            ($reopenedTask -and $activeS -lt ($latestClosedS + 1))) {
+            ($reopenedTask -and $activeS -lt ($latestClosedS + 1)))) {
             throw "New numeric packet must allocate T$expectedTask S1, or reopen T$latestClosedTask at its next S."
         }
         if ($activeS -gt 1) {

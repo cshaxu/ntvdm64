@@ -2,33 +2,44 @@
 
 ## Current Work
 
-**Active: M0 T476 S2** — complete the outstanding per-file mirror conditional and line audit.
+**Active: M0 T477 S1** — extract the shared frontend connection foundation
+and reconnect NTCON without changing its existing presentation or lifecycle.
 
-S1 integrated and published its marker build and 30 exclusions; its [main integration evidence](../etc/evidence/m0-t476-s1-main-integration.md) retains the limits. The owner directed S2 to finish them. The [S2 baseline](../etc/evidence/m0-t476-s2-file-audit.md) tracks all 1,055 files: 812 files have completed file-level review; 243 require further review. The second ten-file source batch was built, line-checked, published and fully reviewed. The earlier batch retains three open files.
+Owner admitted the host frontend foundation in a new branch worktree on
+2026-11-05, using the current main task number plus one. This worktree starts
+at main commit `869f001e6719cc77e35b44197a75dbd2d3addc72`.
+Main's T476 S2 mirror audit remains independent and is not closed by this
+admission. Only T477 S1 is active here.
+
+The [implementation sequence](../etc/operations/m0-t477-host-frontend-plan.md)
+retains the complete approved host scope. The guest 386/VxD driver and actual
+guest bridge remain a separate queued package. Admission is complete;
+production implementation, build, runtime verification and publication are
+not yet performed in this worktree.
 
 ## Active Packet
 
-### M0 T476 S2 — complete per-file verification
+### M0 T477 S1 — shared frontend foundation and NTCON integration
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T476 S2, Ordinary Mode. |
-| Admission And Approval | Owner admitted S2 to finish the outstanding mirror conditional and line audit. |
-| Candidate Proposal | [Complete mirror conditional audit by file](../proposals/proposal-mirror-conditional-file-audit-001.md). |
-| Objective | Produce a trustworthy per-file account and complete original-structure, branch and diagnostic-line checks, correcting proven defects. |
-| Non-goals | Do not modify or rebuild guest, alter unsupported profiles, or claim unproven results. |
-| Reference Baseline | `2f9e2aea7`, S1 branch ledger and its recorded 1,018 supported contexts. |
-| Files And ABI Surface | Production host mirror C/H, exact original identities, associated audit evidence and minimal selected adaptations. |
-| Applicable Rules | Source policy, complete-file review, no unsupported selected-behavior change and preserved unrelated work. |
-| Verification | Validate source and original identities, actual hit provenance, exclusion structure and compiler line mappings; build and test batches per proposal. |
-| Expected Markers | File-level complete/incomplete decisions with explicit evidence and finite unresolved cases. |
-| Asset Needs | Existing original sources, recorded S1 contexts, cached builds and owned temporary evidence. |
-| Reporting Requirements | Exact per-file progress and findings, changes, tests, publication and remaining uncertainty. |
-| Stop Conditions | Unavailable pinned original, incompatible selected behavior or lack of required semantic authority. |
-| Exit Criteria | All in-scope production files reviewed to the contract, corrections verified, published when required, committed and pushed. |
-| Original Owner Request | Admit a new S to complete the remaining branch-structure and line-number audit. |
-| Similar-Issue Sweep | Include byte-identical files, changed files, prior exclusions and recorded mode/WOW cases. |
-| Temporary Evidence | `build/t476-s2`, 90-minute phase, 4 GiB, 15-minute no-progress budget. |
+| Identifier Mode | M0 T477 S1, Ordinary Mode. |
+| Admission And Approval | Owner: create a branch worktree from main and admit implementation using the next T number. Prior owner decisions define frontend-base and worker-base ownership and the 1+N connection model. |
+| Candidate Proposal | [Host common frontend foundation](../proposals/proposal-host-common-frontend-foundation-001.md). |
+| Objective | Extract reusable per-instance frontend connection and channel lifecycle into common/frontend-base and make NTCON use it with unchanged Console/Window and handoff behavior. |
+| Non-goals | No guest driver/media changes, NTVWM frontend enablement, new scheduler, I/O relay through NTSRV, or implementation of later S scopes during S1. |
+| Reference Baseline | Main 869f001e6719cc77e35b44197a75dbd2d3addc72; owner-approved proposal and existing NTCON/common I/O and BaseSrv clients. |
+| Files And ABI Surface | src/ntcon-exe; new src/common/frontend-base; selected common protocol/client and build composition; owning tests; architecture and evidence. Preserve current wire ABI in S1 unless an evidenced scope revision is recorded. |
+| Applicable Rules | Architecture and coding ownership, source-first reuse, immutable guests, existing NTSRV lifecycle authority, execution and documentation gates. |
+| Verification | Audit complete moved units and resource/lock ownership; build affected x64 frontend/shared and x86 worker consumers; unit cancellation/disconnect/rollback tests; actual NTCON DOS/native handoff, input/output, GUI and redirection regressions; coherent package publication and hash checks. Run git diff --check and tools/governance/Verify-DocumentationGovernance.ps1 including relative-link checks. |
+| Expected Markers | Production NTCON links frontend-base; no common-to-worker/executable dependency; one active worker per frontend; unchanged handoff ordering and deterministic cleanup; reproducible test evidence. |
+| Asset Needs | Existing checked-in project code, selected compiler islands, unchanged guest/package inputs and existing regression runners. No external source import is admitted. |
+| Reporting Requirements | Per-P changed ownership, exact tests/results, package/hash evidence, source revision and remaining limits; distinguish host fixtures from real guest driver acceptance. |
+| Stop Conditions | Required guest mutation, lifecycle authority change, unaudited mirror replacement or material contract expansion; record the issue and revise admission before dependent implementation. |
+| Exit Criteria | NTCON uses the shared production implementation, displaced duplicates removed, required tests and coherent publication verified, reviewed commit and delivery disposition recorded under execution rules. |
+| Original Owner Request | Create a new branch worktree from main and admit the host frontend task as the current T number plus one; reusable worker I/O hosting belongs in worker-base, initially used by NTVDM and reusable by NTVWM. |
+| Similar-Issue Sweep | NTCON frontend_session/session_service/console_channel, common console client/protocol, both workers' I/O cleanup and NTSRV handoff assumptions. |
+| Temporary Evidence | Worktree-local build/t477-s1; 90-minute phase, 4 GiB, 15-minute no-progress budget. Stable .ninja/.ccache are caches, not evidence. |
 
 ## M0 T475 S5 Closure
 
