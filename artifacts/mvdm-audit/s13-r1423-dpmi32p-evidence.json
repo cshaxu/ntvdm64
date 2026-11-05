@@ -1,0 +1,91 @@
+{
+  "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmi32p.h",
+  "original_sha256": "c5734d7842c34ae436cd12a5b52ad76d4fab88940a64f3af7e5fdc6fbc92e4a9",
+  "current_sha256": "3f0dd6648c072517cc51e552c4357d0558112c891b6961ca24bab8aeb5859b9e",
+  "original_condition_tree": "No original condition group unmatched in s13 r1360 comparison; current additional group at line 115 contains CPU40 declarations.",
+  "branch_records": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "line": "25",
+      "depth": "1",
+      "directive": "if",
+      "expression": "DBG",
+      "state": "excluded-error",
+      "marker_basis": "unique-structure-historical",
+      "line_check": "error-anchor-match"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "line": "28",
+      "depth": "1",
+      "directive": "else",
+      "expression": "",
+      "state": "historical-hit",
+      "marker_basis": "unique-structure-historical",
+      "line_check": "not-applicable"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "line": "30",
+      "depth": "2",
+      "directive": "ifdef",
+      "expression": "i386",
+      "state": "excluded-error",
+      "marker_basis": "unique-structure-historical",
+      "line_check": "error-anchor-match"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "line": "33",
+      "depth": "2",
+      "directive": "else",
+      "expression": "",
+      "state": "historical-hit",
+      "marker_basis": "unique-structure-historical",
+      "line_check": "not-applicable"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "line": "49",
+      "depth": "1",
+      "directive": "ifdef",
+      "expression": "i386",
+      "state": "excluded-error",
+      "marker_basis": "unique-structure-historical",
+      "line_check": "error-anchor-match"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "line": "104",
+      "depth": "1",
+      "directive": "ifndef",
+      "expression": "i386",
+      "state": "historical-hit",
+      "marker_basis": "unique-structure-historical",
+      "line_check": "not-applicable"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "line": "115",
+      "depth": "2",
+      "directive": "if",
+      "expression": "defined(CPU_40_STYLE)",
+      "state": "historical-hit",
+      "marker_basis": "unique-structure-historical",
+      "line_check": "not-applicable"
+    }
+  ],
+  "local_declarations": {
+    "lines": "115-134",
+    "consumers": [
+      "src/mvdm-host/dpmi32/dpmiint.c",
+      "src/mvdm-host/dpmi32/dpmiselr.c",
+      "src/mvdm-host/dpmi32/modesw.c",
+      "src/mvdm-host/dpmi32/data.c"
+    ],
+    "registration": "docs/etc/evidence/m0-t473-s1-semantic-delta-ledger.md"
+  },
+  "line_evidence": "s13-r1374-dpmiheader-recheck.json records 232 matched lines and no unresolved matched anchors; this is source-derived, not a fresh compiler diagnostic comparison.",
+  "limitations": "Historical marker attribution for current code needs independent check; original differences beyond matching projection are not thereby semantically certified. No guest compilation."
+}
