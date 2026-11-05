@@ -276,3 +276,8 @@ The [wuman.c review](../../../artifacts/mvdm-audit/t476-s2-wuman-final-review.js
 ### EOI and sound source reviews
 
 The [EOI and sound reviews](../../../artifacts/mvdm-audit/t476-s2-eoi-sound-final-review.json) complete `nt_eoi.h` and `nt_sound.c`: each full original/current diff, hash-matched original branch tree and line projection, and real compiler observations were checked. Original MONITOR-only and non-PROD diagnostic branches remain excluded; the original lock declarations remain available through the registered sound binding. Total: **815 of 1,055 complete; 240 open**.
+
+
+### DEM dispatch review
+
+The [DEM dispatch review](../../../artifacts/mvdm-audit/t476-s2-demdisp-final-review.json) completes `demdisp.c`, checking its complete original diff, four excluded DBG groups, hash-bound conditional and line projection, and selected compiler observations. The existing fast-I/O fallback remains registered under DIV-188. Total: **816 of 1,055 complete; 239 open**.

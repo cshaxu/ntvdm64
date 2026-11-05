@@ -1,0 +1,13 @@
+{
+  "path": "src/mvdm-host/dos/dem/demdisp.c",
+  "current_sha256": "95f0e3397e7f876d1bd57d3bc375401103482e503f4a61b26368be3fa82d98c3",
+  "original_sha256": "7ea3a829e3f8aad2dfe644d101cabaff514de25909db937675fc323dfce8fe3c",
+  "prior_tree_evidence": "s13-r1343-strict-ready.json",
+  "matched_original_code_lines": 140,
+  "excluded_dbg_groups": 4,
+  "compiler_contexts": [
+    246
+  ],
+  "compiler_unique_original_lines_seen": 12,
+  "local_diff_review": "Full diff reviewed. Registered DIV-188 replaces the unavailable fast I/O handlers with the original guest fallback signal; all DBG branches excluded."
+}
