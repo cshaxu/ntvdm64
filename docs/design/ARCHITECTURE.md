@@ -1,5 +1,22 @@
 # System Architecture
 
+## Frontend connection base — T477 S1
+
+The admitted frontend extraction places reusable channel and service mechanics
+in `common/frontend-base`. NTCON supplies its native Console/Window and
+operation-dispatch adapter; it retains screen transactions, input receipts and
+restoration. NTSRV remains association, handoff and retirement authority.
+Each base instance owns at most one active worker channel. The protocol and
+backend client remain in their existing common owners, with pipe primitives
+in lib-win32. Common never depends on executable-private code or worker-base.
+
+NTVDM will directly compose frontend-base in S3, alongside its worker-base
+backend role. Worker-base must not depend on frontend-base. Future NTVWM
+frontend adoption can use the same direct composition. Multi-instance service
+registration is S2 scope; local base instance isolation does not establish it.
+[Current](../states/CURRENT.md) and the
+[S1 evidence](../etc/evidence/m0-t477-s1-frontend-base.md) govern actual delivery.
+
 ## Generic integration libraries — T474 S3
 
 `lib-win32/rpc`, `lib-win32/io`, `lib-win32/file`, `lib-win32/process-attributes`, `lib-win32/process-observation`, `lib-win32/process-hook` and `lib-win32/handle` provide product-independent local RPC binding, async

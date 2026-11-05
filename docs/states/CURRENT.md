@@ -14,8 +14,12 @@ admission. Only T477 S1 is active here.
 The [implementation sequence](../etc/operations/m0-t477-host-frontend-plan.md)
 retains the complete approved host scope. The guest 386/VxD driver and actual
 guest bridge remain a separate queued package. Admission is complete;
-production implementation, build, runtime verification and publication are
-not yet performed in this worktree. The owner explicitly confirms S1 admission
+The owner now authorizes S1 implementation, build, tests and publication to
+this worktree assets/release and O:/winnt/system32, followed by local commits
+without pushing. P1 channel extraction passed x86/x64 fixtures and all 16 Full gates, then
+published the coherent ten-image package to both targets with matching hashes.
+See [S1 evidence](../etc/evidence/m0-t477-s1-frontend-base.md). P2 service-pump
+extraction remains active. The owner explicitly confirms S1 admission
 and requests the [S1 design](../etc/operations/m0-t477-s1-frontend-base-design.md);
 it defines two production P deliveries, channel extraction then service extraction.
 
@@ -38,7 +42,7 @@ it defines two production P deliveries, channel extraction then service extracti
 | Asset Needs | Existing checked-in project code, selected compiler islands, unchanged guest/package inputs and existing regression runners. No external source import is admitted. |
 | Reporting Requirements | Per-P changed ownership, exact tests/results, package/hash evidence, source revision and remaining limits; distinguish host fixtures from real guest driver acceptance. |
 | Stop Conditions | Required guest mutation, lifecycle authority change, unaudited mirror replacement or material contract expansion; record the issue and revise admission before dependent implementation. |
-| Exit Criteria | NTCON uses the shared production implementation, displaced duplicates removed, required tests and coherent publication verified, reviewed commit and delivery disposition recorded under execution rules. |
+| Exit Criteria | NTCON uses the shared production implementation, displaced duplicates removed, required tests and coherent publication verified, reviewed local commit; owner explicitly defers push and requires both this worktree assets/release and O:/winnt/system32 publication. |
 | Original Owner Request | Create a new branch worktree from main and admit the host frontend task as the current T number plus one; latest correction: S3 connects NTVDM directly to common/frontend-base, with no worker-base dependency on frontend-base; future NTVWM can use the same direct composition. |
 | Similar-Issue Sweep | NTCON frontend_session/session_service/console_channel, common console client/protocol, both workers' I/O cleanup and NTSRV handoff assumptions. |
 | Temporary Evidence | Worktree-local build/t477-s1; 90-minute phase, 4 GiB, 15-minute no-progress budget. Stable .ninja/.ccache are caches, not evidence. |

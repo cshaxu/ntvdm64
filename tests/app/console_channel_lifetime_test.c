@@ -602,9 +602,9 @@ static void run_case(unsigned mode,unsigned round)
     }
     CHECK(!activate(channel,TRUE));
     if(mode<5)CHECK(!prepare_text(channel,(COORD){80,25}));
-    CHECK(DuplicateHandle(GetCurrentProcess(),channel->thread,GetCurrentProcess(),
+    CHECK(DuplicateHandle(GetCurrentProcess(),frontend_io_channel_thread(channel),GetCurrentProcess(),
         &thread,0,FALSE,DUPLICATE_SAME_ACCESS));
-    CHECK(DuplicateHandle(GetCurrentProcess(),channel->ready,GetCurrentProcess(),
+    CHECK(DuplicateHandle(GetCurrentProcess(),frontend_base_channel_ready(channel->base),GetCurrentProcess(),
         &ready,0,FALSE,DUPLICATE_SAME_ACCESS));
     {
         INPUT_RECORD stale[64];DWORD count;
@@ -1392,8 +1392,8 @@ static void test_projection_failure_pipe(BOOL batch)
         peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));CHECK(!reply.result);
     }
     CHECK(reply.error==ERROR_WRITE_FAULT && !arm_pipe_projection);
-    CHECK(WaitForSingleObject(channel->thread,3000)==WAIT_OBJECT_0);
-    CHECK(GetExitCodeThread(channel->thread,&code) && code==ERROR_WRITE_FAULT);
+    CHECK(WaitForSingleObject(frontend_io_channel_thread(channel),3000)==WAIT_OBJECT_0);
+    CHECK(GetExitCodeThread(frontend_io_channel_thread(channel),&code) && code==ERROR_WRITE_FAULT);
     CHECK(channel->publication_terminal_error==ERROR_WRITE_FAULT && !channel->publication_surface);
     CHECK(!frontend_session_enter(test_frontend,channel));
     CHECK(test_frontend->video==&channel->console.video && channel->console.video.published_serial==1);
