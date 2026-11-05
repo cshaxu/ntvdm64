@@ -92,6 +92,12 @@ commands, 971 selected compiler commands were C-only, and three C++ extension
 negative cases were rejected. Product build and Control passed; local package
 `2edc8463-29b6-49b2-a9e6-c369ecd28ac8` has ten verified hashes. Historical
 sources and late-hook concurrency limits remain open.
+P12 retires six unbuildable historical C++ fixtures, one historical audit
+probe and two unreferenced OpenNT C++ declarations; their exact Git objects
+and provenance remain indexed in the S5 evidence. The tracked working-tree
+C++ extension scan, selected graphs, product build and Control passed. Local
+package `3ae63090-eba4-445c-b264-edf54f09b56f` has ten verified hashes.
+Historical C++-generating tools and late-hook concurrency remain open.
 The adjacent library's same-width payload-only mechanism, non-Detours payload
 format, helper ordinal and startup-only transaction require compatibility proof;
 no untested semantic equivalence is assumed. Prior [S4 evidence](../etc/evidence/m0-t475-s4-nthook-dependency-cleanup.md),

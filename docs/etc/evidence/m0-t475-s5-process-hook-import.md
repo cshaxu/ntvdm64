@@ -393,3 +393,52 @@ Ten local release image hashes and the license match package
 `2edc8463-29b6-49b2-a9e6-c369ecd28ac8`. Full and DOS4GW/NESticle were not
 run. Historical C++ artifacts and the late-hook concurrency boundary remain
 open in S5.
+
+## P12 historical C++ source index
+
+The following inactive files were removed from the working tree under the
+owner's C++ removal request. Their original Git blobs remain reachable in
+commit `09b58f5c6`; retrieve an exact blob with `git cat-file blob <blob-id>`.
+The audit probe blob is byte-identical to its previously recorded SHA-256; the
+six fixture working copies differed from their stored blobs only by CRLF/LF.
+`p11/archive-audit-nine.process` verified those identities before removal.
+The old Bochs fixtures have no references from active `src`, `tests` or
+`tools` and their required Bochs and adapter headers are absent. This is not
+a claim that they passed or that their historical behavior was recreated.
+
+The two OpenNT `.hxx` files retain their original provenance as deselected
+mirror declarations. They reference each other, have no other source/tool/test
+references, and appeared in none of the eight current Ninja dependency logs
+(`p11/header-deps.process`). No original source content was rewritten; the
+exact original blobs remain in the same commit. The selected-graph evidence
+does not prove these declarations useless in other OpenNT configurations.
+
+| Former path | Git blob | Blob SHA-256 |
+| --- | --- | --- |
+| `tests/component-integration/fixtures/t198_s12_native_composed_ud_fixture.cc` | `8fdea05006f4acb2567e2d6d4c19e184ce9c699c` | `f92856c62d314a9e9304947d994fd08f59faaad01096b0673968716a66ebebd6` |
+| `tests/component-integration/fixtures/t198_s18_native_dem_lifecycle_fixture.cc` | `ae67876c1fb0073acc6d7f071a88f8232526c37d` | `23044fbde5f00d0a081be886de0f657f791aba39d2308f1904f8b80a7def704b` |
+| `tests/component-integration/fixtures/t198_s18_native_dta_search_fixture.cc` | `90934f35db0e247c46f100cb6734f4d215dccf33` | `df3899458699cbe3e129066b83306236a234bfebe9d2f0ee17b78f1cca0b064b` |
+| `tests/component-integration/fixtures/t198_s20_native_dem_load_dos_fixture.cc` | `94a64b7dd92badd5494fc9e67cdb9993c4a8451b` | `9088743c8ab1cb7b75cbc703011e2fbfa933b946c9e3df45ae0dec3659131bc1` |
+| `tests/component-integration/fixtures/t198_s23_ntio_preentry_request_fixture.cc` | `181247580486126c43f9add512cea9f234287473` | `ad63116e63ac4ddf257d74aa61ed4de4bb815e8e638307aa3e75703f10fcf26f` |
+| `tests/legacy/opennt-bop/dpmi/t257_s3_dpmi_startup_session_fixture.cc` | `bdb159dee6b899e793cdc57d8f6547da7a2a2c91` | `5200329f13d8f5a5d15350a01254fc24edeb1b70273961a11d7fe507bc5e0bc0` |
+| `artifacts/mvdm-audit/shard-3/forcedos-context-probe.cpp` | `1ff025d17b42a51efcc126a5491e904b1d80a52b` | `030602a205746ee0cc867a87fc537791c23942e8d3ae16e627e15e0b4102d873` |
+| `src/non-mvdm/public/internal/base/inc/byteordr.hxx` | `009f56c5e0998f8a1aa331bb90bf937ad47be8ec` | `65c4e21cd6afbad1110847bc8398916b373e0fe9e848846dda9f4fe39d9d7589` |
+| `src/non-mvdm/public/internal/base/inc/propmac.hxx` | `30facf4a91f293b4a4a765c4f5d4885a577dcc16` | `59cdc637b1f9d7db0706d0292b2e5a9146ba270ea20b3014f201a1f50a1c2a41` |
+
+After removal, the nine indexed Git objects still matched their recorded
+SHA-256 (`p12/archive-check.process`, exit 0). The tracked working tree had
+no remaining `.cpp`, `.cc`, `.cxx`, `.c++`, `.hpp`, `.hh`, `.hxx`, `.ipp`
+or `.tpp` files (`p12/source-scan.process`, exit 0); this scan does not
+classify untracked build outputs or scripts that can generate C++ source.
+The product graphs retained 971 C-only compiler commands and the five product
+maps rejected Detours (`p12/selected-c.process`, `p12/product-maps.process`,
+exit 0). The 443-command SoftPC profile audit remained clean
+(`p12/profile.process`, exit 0).
+
+The x86/x64 product build and focused checks passed (`p12/build.process`);
+staging checked 63 immutable guest files and 274 exports (`p12/stage.process`)
+and Control passed (`p12/control.process`). Ten local release image hashes
+and the license match package `3ae63090-eba4-445c-b264-edf54f09b56f`.
+Full and DOS4GW/NESticle were not run. Historical scripts capable of emitting
+C++ or referring to retired C++ inputs, and late-hook concurrency, remain
+open; no full-codebase completion is claimed.
