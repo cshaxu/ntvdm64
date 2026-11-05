@@ -1,0 +1,155 @@
+{
+  "method": "Rebind prior hash-bound complete original-tree and source-line evidence to current file through independently verified exact single include-path rename. Cross-check S1 arm ledger, static line scan and product compiler observations; no runtime-equivalence or unobserved-profile claim.",
+  "files": [
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "f727e75b675462ff383c59c92534f6925be7648b28cb364922839cbf592d6a82",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "previous_review": "s13-r1353-continuation-proof.json",
+      "previous_commit": "987c5a262",
+      "previous_sha256": "9e12012c03e69c7ef7ba50d2cfb4918bfd21fe1b58e1593714fb10bf964e3d79",
+      "previous_record": {
+        "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+        "current_sha256": "9e12012c03e69c7ef7ba50d2cfb4918bfd21fe1b58e1593714fb10bf964e3d79",
+        "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+        "groups": [
+          {
+            "original_endif": 1677,
+            "current_endif": 1586,
+            "next_matched_code": [
+              1683,
+              1594,
+              1684,
+              1684
+            ]
+          },
+          {
+            "original_endif": 1758,
+            "current_endif": 1667,
+            "next_matched_code": [
+              1758,
+              1669,
+              1759,
+              1759
+            ]
+          }
+        ],
+        "passed": true,
+        "matched_lines": 2703
+      },
+      "only_intervening_change": {
+        "old_include": "ntvdm-exe/redir/include/mvdm_redirector_async.h",
+        "new_include": "common/redirector/async.h"
+      },
+      "hit_arms": 2,
+      "excluded_arms": 80,
+      "compiler_contexts": [
+        471
+      ],
+      "compiler_unique_line_samples": 190
+    },
+    {
+      "path": "src/mvdm-host/wow32/walias.h",
+      "current_sha256": "a70043dc23477361031e427f555a11abff2218a74878258981110b70e35d4fdd",
+      "original_sha256": "c87ae2f07b48f09276d205e2236d97f084f75f21706c524cb27734a3e36001cc",
+      "previous_review": "s13-r1346-strict-review.json",
+      "previous_commit": "3c99b72dc",
+      "previous_sha256": "2782af53c411b739cc921b625b3a439df8b5bd33fb10fecf1ab23cc267f9462f",
+      "previous_record": {
+        "path": "src/mvdm-host/wow32/walias.h",
+        "before_sha256": "2782af53c411b739cc921b625b3a439df8b5bd33fb10fecf1ab23cc267f9462f",
+        "original_sha256": "c87ae2f07b48f09276d205e2236d97f084f75f21706c524cb27734a3e36001cc",
+        "anchors": {},
+        "matched_lines": 389,
+        "strict_tree": {
+          "excluded": 1,
+          "retained": 1,
+          "groups": 1
+        }
+      },
+      "only_intervening_change": {
+        "old_include": "ntvdm-exe/wow/include/wow_gdi_alias.h",
+        "new_include": "common/wow/gdi_alias.h"
+      },
+      "hit_arms": 1,
+      "excluded_arms": 1,
+      "compiler_contexts": [
+        517,
+        518,
+        519,
+        520,
+        521,
+        522,
+        524,
+        525,
+        526,
+        527,
+        528,
+        529,
+        530,
+        531,
+        532,
+        533,
+        534,
+        535,
+        536,
+        537,
+        538,
+        540,
+        541,
+        542,
+        543,
+        544,
+        545,
+        546,
+        547,
+        548,
+        549,
+        550,
+        551,
+        553,
+        554,
+        555,
+        556,
+        557,
+        558,
+        559,
+        560,
+        561,
+        562,
+        563,
+        564,
+        565,
+        566,
+        567,
+        568,
+        569,
+        570,
+        571,
+        572,
+        573,
+        574,
+        575,
+        576,
+        577,
+        578,
+        579,
+        580,
+        581,
+        582,
+        583,
+        584,
+        585,
+        586,
+        587,
+        588,
+        589,
+        590,
+        591,
+        592,
+        593
+      ],
+      "compiler_unique_line_samples": 58
+    }
+  ]
+}
