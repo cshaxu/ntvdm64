@@ -1,0 +1,108 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+  "current_sha256": "b42d5c29b94789df14fddcf2960a657d216a41d350908c8d496dd864ef05e284",
+  "original_sha256": "45b92f7236fba49d58e2c3d912126067c3843ec560c28cdd8a20167c62aaef65",
+  "prior_line_review": {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+    "before_sha256": "85faf2effa8c00a0fad977e23974d581e942a3ec510f77424a2c5eefad2e1464",
+    "after_sha256": "b42d5c29b94789df14fddcf2960a657d216a41d350908c8d496dd864ef05e284",
+    "edit": "Restore original body line 511 after the extra project-owned currentProcess parameter.",
+    "evidence": "Actual x86 preprocessor previously showed original body statements 1 line late; original/current function body comparison differs only in this parameter and PpiCurrent() replaced by currentProcess.",
+    "condition_boundary": "Original #ifndef LATER branch belongs to a separately omitted function; retained file-scope shell has no body and cannot be treated as an original-branch hit. See s13-r1363-empty-branch-context.json; do not assert complete file review.",
+    "status": "Pending ten-source batch compiler verification."
+  },
+  "original_conditional_structure": [
+    {
+      "line": 134,
+      "logical_line": 134,
+      "directive": "ifndef",
+      "expression": "LATER",
+      "parent": null,
+      "group": 0,
+      "body_line_marker": null,
+      "excluded": false
+    },
+    {
+      "line": 136,
+      "logical_line": 136,
+      "directive": "else",
+      "expression": "",
+      "parent": null,
+      "group": 0,
+      "body_line_marker": null,
+      "excluded": false
+    }
+  ],
+  "current_conditional_structure": [
+    {
+      "line": 78,
+      "logical_line": 134,
+      "directive": "ifndef",
+      "expression": "LATER",
+      "parent": null,
+      "group": 0,
+      "body_line_marker": 135,
+      "excluded": false
+    },
+    {
+      "line": 80,
+      "logical_line": 135,
+      "directive": "else",
+      "expression": "",
+      "parent": null,
+      "group": 0,
+      "body_line_marker": 137,
+      "excluded": true
+    }
+  ],
+  "ledger_arms": [
+    {
+      "file": 1029,
+      "index": 0,
+      "line": 78,
+      "directive": "ifndef",
+      "expression": "LATER",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        668
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 1029,
+      "index": 1,
+      "line": 80,
+      "directive": "else",
+      "expression": "",
+      "parent": null,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    }
+  ],
+  "compiler_unique_line_samples": 11,
+  "matching_static_line_leads": 0,
+  "retained_function_diff": [
+    "--- \n",
+    "+++ \n",
+    "@@ -1,5 +1,7 @@\n",
+    " BOOL xxxRegisterUserHungAppHandlers(",
+    "     PFNW32ET pfnW32EndTask,",
+    "-    HANDLE   hEventWowExec)",
+    "+    HANDLE   hEventWowExec,",
+    "+    PPROCESSINFO currentProcess)",
+    "+#line 511",
+    " {",
+    "     BOOL   bRetVal;",
+    "@@ -35,5 +37,5 @@\n",
+    "         pwpi->hEventWowExecClient = hEventWowExec;",
+    "         pwpi->lpfnWowExitTask = (DWORD)pfnW32EndTask;",
+    "-        ppi = PpiCurrent();",
+    "+        ppi = currentProcess;",
+    "         ppi->pwpi = pwpi;",
+    " "
+  ],
+  "empty_guard_boundary": "The #ifndef LATER body at original 134-142 belongs to InitiateShutdown, a separately omitted original function; current file-scope structural shell hit is not a hit of that omitted function or evidence of its behavior. The else retains #error at original line 137.",
+  "limits": "Retained function binds project-owned process/event services; this is a condition and diagnostic-line review, not runtime equivalence or a claim of InitiateShutdown support."
+}
