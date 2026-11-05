@@ -36,7 +36,7 @@ try {
     } | ConvertTo-Json | Set-Content "$root\inputs.json"
     & "$root\probe.exe" $runtime *> "$root\probe.txt"
     if($LASTEXITCODE){throw "WRITE restart lifecycle probe failed: $LASTEXITCODE"}
-    'PASS WRITE normal close followed by clean restart and second normal close' | Set-Content "$root\result.txt"
+    'PASS WRITE edit, save with content verification and normal close across clean restart' | Set-Content "$root\result.txt"
 } finally {
     if($scope){Stop-IsolatedPackageScope $scope};if($runtime){Remove-PhysicalRuntimeStage $runtime}
     foreach($name in $saved.Keys){[Environment]::SetEnvironmentVariable($name,$saved[$name])}

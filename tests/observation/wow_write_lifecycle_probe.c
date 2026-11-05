@@ -1,10 +1,10 @@
-/* Private-desktop WRITE lifecycle witness.  It sends WM_CLOSE only to the
- * test-owned visible MSWRITE_MENU window and observes its disappearance. */
+/* Private-desktop WRITE edit, save, close and restart witness. */
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <tlhelp32.h>
 #include <stdio.h>
 #include <wchar.h>
+#include <string.h>
 
 typedef struct write_window {
     DWORD process_id;
@@ -64,6 +64,93 @@ static DWORD find_owned_worker(LPCWSTR runtime)
     return result;
 }
 
+typedef struct write_controls {
+    HWND document;
+    HWND save_dialog;
+    DWORD worker;
+} write_controls;
+
+static BOOL CALLBACK find_document(HWND window, LPARAM parameter)
+{
+    write_controls *controls = (write_controls *)parameter;
+    WCHAR name[64];
+    if (GetClassNameW(window, name, ARRAYSIZE(name)) && !wcscmp(name, L"MSWRITE_DOC"))
+        controls->document = window;
+    return TRUE;
+}
+
+static BOOL CALLBACK find_save_dialog(HWND window, LPARAM parameter)
+{
+    write_controls *controls = (write_controls *)parameter;
+    WCHAR name[64], title[64];
+    DWORD pid = 0;
+    GetWindowThreadProcessId(window, &pid);
+    if (pid == controls->worker && IsWindowVisible(window) &&
+            GetClassNameW(window, name, ARRAYSIZE(name)) && !wcscmp(name, L"#32770") &&
+            GetWindowTextW(window, title, ARRAYSIZE(title)) && !wcscmp(title, L"Save As")) {
+        controls->save_dialog = window;
+        return FALSE;
+    }
+    return TRUE;
+}
+
+static BOOL edit_and_save(HDESK desktop, HWND window, DWORD worker, LPCWSTR runtime, DWORD round)
+{
+    static const char marker[] = "S5_WRITE_PAYLOAD_7E91";
+    write_controls controls = { 0 };
+    WCHAR path[MAX_PATH];
+    HWND edit, ok;
+    HANDLE file;
+    BYTE bytes[65536];
+    DWORD n = 0, i;
+    DWORD_PTR sent = 0;
+    ULONGLONG deadline;
+    BOOL found = FALSE;
+    const char *ch;
+    controls.worker = worker;
+    EnumChildWindows(window, find_document, (LPARAM)&controls);
+    if (!controls.document || swprintf_s(path, ARRAYSIZE(path), L"%ls\\S5T%lu.WRI",
+            runtime, (unsigned long)round) < 0 || GetFileAttributesW(path) != INVALID_FILE_ATTRIBUTES)
+        return FALSE;
+    for (ch = marker; *ch; ++ch) {
+        if (!PostMessageW(controls.document, WM_CHAR, (WPARAM)(BYTE)*ch, 1)) return FALSE;
+        Sleep(20);
+    }
+    if (!PostMessageW(window, WM_COMMAND, 4099, 0)) return FALSE; /* File > Save */
+    deadline = GetTickCount64() + 15000;
+    do {
+        EnumDesktopWindows(desktop, find_save_dialog, (LPARAM)&controls);
+        if (controls.save_dialog) break;
+        Sleep(50);
+    } while (GetTickCount64() < deadline);
+    if (!controls.save_dialog) return FALSE;
+    edit = GetDlgItem(controls.save_dialog, 1152);
+    ok = GetDlgItem(controls.save_dialog, IDOK);
+    if (!edit || !ok || !SendMessageTimeoutW(edit, WM_SETTEXT, 0, (LPARAM)path,
+            SMTO_ABORTIFHUNG, 5000, &sent) || !sent || !PostMessageW(ok, BM_CLICK, 0, 0))
+        return FALSE;
+    deadline = GetTickCount64() + 15000;
+    while (GetTickCount64() < deadline && !found) {
+        file = CreateFileW(path, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL,
+            OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+        if (file != INVALID_HANDLE_VALUE) {
+            if (ReadFile(file, bytes, sizeof(bytes), &n, NULL)) {
+                for (i = 0; i + sizeof(marker) - 1 <= n; ++i) {
+                    if (!memcmp(bytes + i, marker, sizeof(marker) - 1)) {
+                        found = TRUE;
+                        break;
+                    }
+                }
+            }
+            CloseHandle(file);
+        }
+        if (!found) Sleep(50);
+    }
+    if (found) wprintf(L"PASS WRITE round=%lu saved-bytes=%lu marker=present\n",
+        (unsigned long)round, (unsigned long)n);
+    return found;
+}
+
 static BOOL run_write_round(HDESK desktop, LPCWSTR desktop_name,
     LPCWSTR runtime, DWORD round)
 {
@@ -93,7 +180,8 @@ static BOOL run_write_round(HDESK desktop, LPCWSTR desktop_name,
         Sleep(25);
     }
     if (!window) SetLastError(ERROR_TIMEOUT);
-    if (!window || !PostMessageW(window, WM_CLOSE, 0, 0)) goto done;
+    if (!window || !edit_and_save(desktop, window, worker, runtime, round) ||
+            !PostMessageW(window, WM_CLOSE, 0, 0)) goto done;
     deadline = GetTickCount64() + 20000;
     while (GetTickCount64() < deadline) {
         if (!find_write_window_on(desktop, worker, &window)) goto done;

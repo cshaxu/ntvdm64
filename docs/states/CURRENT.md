@@ -28,31 +28,11 @@ the delivery policy; no push or main-runtime publication.
 | Original Owner Request | Add an S to import win16style process-hook verbatim and completely eliminate C++ and Detours while keeping product functionality identical. |
 | Similar-Issue Sweep | Product and test-only C++/Detours, scripts, generated graphs, archives, helper and diagnostic fixtures. |
 
-P1 imports 23 byte-pinned library files and independent x86/x64 MSVC link and
-payload fixtures; local package `8ab5e971-e071-41f7-bf24-c5e694fcbbff`
-passed Control and ten hash checks. The existing Detours product path remains.
-Full and DOS4GW/NESticle were not run. [S5 evidence](../etc/evidence/m0-t475-s5-process-hook-import.md).
-
-P2 moves native Hook packet validation to selected C code and adds an isolated,
-helper-free cross-width direct-payload candidate. MSVC and MinGW four-pair,
-error, retry and release tests passed; the original Hook regressions and Control
-passed with local package `b8fbc836-9f8c-482d-80c7-7861110808ed`. The new
-payload API is not yet used by product code. The owner directs changes only
-in this worktree; other repositories and worktrees are out of scope. Full and
-DOS4GW/NESticle were not run.
-
-P3 selects pure C native Hook/context/installer and direct payload transport;
-product link maps contain no Detours. Four actual missing-DLL width pairs,
-118 x86, 118 x64 and 168 cross-width Hook assertions, Control and real WRITE
-startup snapshots passed. Local package `144d08b7-5c28-49ba-b41f-85d58908098a`
-has ten verified hashes. One imported helper has a recorded local cleanup fix;
-remaining diagnostic/test C++ and Detours, Full, OS/2 NE and WRITE editing/exit
-remain open or unverified. See [S5 evidence](../etc/evidence/m0-t475-s5-process-hook-import.md).
-
-P4 converts the Hook and native observation fixtures to C; 118/118/168 Hook
-checks and actual x86/x64 ChildFirst observation passed, as did Control.
-Local package `845cebf2-9632-40b0-8509-912517e8fad0` has ten verified hashes.
-Diagnostic and legacy C++/Detours sources remain within S5.
+P1–P4 imported the pinned C library, proved four-width direct payloads, switched
+the product Hook path and converted initial fixtures. Each package passed its
+recorded local checks; one imported helper has a documented local fix. Exact
+package IDs, results and limits are in [S5 evidence](../etc/evidence/m0-t475-s5-process-hook-import.md).
+Other repositories and worktrees remain out of scope.
 
 P5 converts the startup Console trace to C; x86/x64 interception, original
 call and LastError checks, an actual NTVDM diagnostic relink, product build and
@@ -112,14 +92,20 @@ C-only configurations built the C observation peer without detecting a C++
 compiler. Product build, profile checks and Control passed; local package
 `8e4a9c29-e13d-4bd3-979a-4e0ed94e1d52` has ten verified hashes. Subsequent
 Full selected gates passed on that package against the P2 baseline; four-pair
-payload-only and missing-DLL tests also passed. External DOS4GW/NESticle,
-Win16 editing and save, and general late-hook concurrency remain unverified.
-WRITE normal close and clean restart passed in a subsequent two-round probe.
+payload-only and missing-DLL tests also passed. A two-round WRITE test passed
+edit, save, content verification, close and restart for both packages. General
+late-hook concurrency remains unverified; the owner excludes DOS4GW/NESticle.
 No untested semantic equivalence is assumed. Prior [S4 evidence](../etc/evidence/m0-t475-s4-nthook-dependency-cleanup.md),
 [S3 evidence](../etc/evidence/m0-t475-s3-worker-ntvdm-remediation.md),
 [S2 inventory](../etc/evidence/m0-t475-s2-component-dependency-inventory.md),
 and [S1 evidence](../etc/evidence/m0-t475-s1-win32-rpc.md) retain the preceding
 local closures. NTVDM PE runtime imports remain separately queued.
+
+P15 adds a repeatable two-round WRITE edit/save/content/close/restart test.
+The P2 baseline, P14 package and P15 package all passed. Product build,
+Control and local release hash checks passed for package
+`6a0098af-e723-401d-8b47-83ab82796cad`; see S5 evidence for the initial
+sandboxed process-observation failure and successful authorized retry.
 
 ## S12 Closure Record
 

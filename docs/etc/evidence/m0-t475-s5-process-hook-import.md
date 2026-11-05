@@ -555,3 +555,27 @@ The P14 package subsequently passed the existing private-desktop WRITE
 lifecycle probe (`write-lifecycle/current.process`, exit 0): both the initial
 launch and clean restart reached the visible WRITE window, accepted normal
 close and returned exit code 0. This probe does not edit or save a document.
+
+## WRITE edit and save comparison
+
+The owner excludes DOS4GW/NESticle from this acceptance. The enhanced
+`tests/observation/verify-wow-write-lifecycle.ps1` uses a private desktop and
+fresh physical package stage. For each of two successive WRITE sessions it
+posts a distinctive text marker to the document, invokes Save, enters a
+unique path within that stage, checks the resulting file bytes for the marker,
+closes WRITE and requires launcher exit 0. It passed on both the retained P2
+pre-replacement package and the P14 package (`write-final-r2/baseline.process`
+and `write-final-r2/current.process`, both exit 0). The text and save dialog
+were real guest operations; this verifies the exercised path, not all WRITE
+features or all possible applications.
+
+The final test also passed against the newly built P15 package
+(`p15/write.process`, exit 0). The initial product build completed compilation
+but its process-observation test exited with `0xc0000008` under the sandbox
+(`p15/build-r1.process`, exit 1); the same test passed separately with normal
+test permissions, and the complete build plus component tests passed with
+those permissions (`p15/build-r2.process`, exit 0). Staging verified 63 guest
+files and 274 exports; Control passed (`p15/stage.process` and
+`p15/control.process`, exit 0). Local release package
+`6a0098af-e723-401d-8b47-83ab82796cad` has ten verified image hashes and a
+matching license (`p15/release.log`).
