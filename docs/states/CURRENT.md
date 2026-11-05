@@ -4,7 +4,7 @@
 
 **Active: M0 T476 S2** — complete the outstanding per-file mirror conditional and line audit.
 
-S1 integrated and published its marker build and 30 exclusions; its [main integration evidence](../etc/evidence/m0-t476-s1-main-integration.md) retains the limits. The owner directed S2 to finish them. The [S2 baseline](../etc/evidence/m0-t476-s2-file-audit.md) tracks all 1,055 files: 966 files have completed file-level review; 89 require further review. The second ten-file source batch was built, line-checked, published and fully reviewed. The earlier batch retains three open files.
+S1 integrated and published its marker build and 30 exclusions; its [main integration evidence](../etc/evidence/m0-t476-s1-main-integration.md) retains the limits. The owner directed S2 to finish them. The [S2 baseline](../etc/evidence/m0-t476-s2-file-audit.md) tracks all 1,055 files: 969 files have completed file-level review; 86 require further review. The second ten-file source batch was built, line-checked, published and fully reviewed. The earlier batch retains three open files. A separate exact-byte reconciliation has 292 original-line-ending restorations remaining after its first ten-file batch.
 
 ## Active Packet
 
