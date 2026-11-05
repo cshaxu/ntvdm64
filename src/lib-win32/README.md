@@ -28,3 +28,5 @@ per-thread lifecycle callbacks; it owns no product session or policy.
 `process-observation/` samples Console process membership, retains an observation handle, reads process identity
 and image information, queries inherited parent identity, and registers/drains a one-shot exit wait; callbacks,
 process ownership, task identity and decisions remain caller-owned.
+
+`process-image/` provides Win32 target-process machine queries and image file validation; hook installers own selection policy. The imported component is shared byte-for-byte with Win16-style.

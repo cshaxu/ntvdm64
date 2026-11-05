@@ -1557,6 +1557,12 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/lib-win32/process-attributes/attributes.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/process-attributes/attributes.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build lib-process-attributes.lib: lib obj/lib-win32/process-attributes/attributes.obj')
+    $graph.Add('build obj/lib-win32/process-image/image.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/process-image/image.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build lib-process-image.lib: lib obj/lib-win32/process-image/image.obj')
+    $graph.Add('build obj/tests/process_image_machine.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/process_image_machine_test.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build process-image-machine-test.exe: broker_test_link obj/tests/process_image_machine.obj lib-process-image.lib')
     $graph.Add('build obj/lib-win32/process-observation/observation.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/process-observation/observation.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build lib-process-observation.lib: lib obj/lib-win32/process-observation/observation.obj obj/lib-win32/process-observation/console_members.obj')
@@ -1717,7 +1723,7 @@ if ($Architecture -eq 'x86') {
     $nativeBinding = ' obj/run16/support.obj base-rpc-client-core.lib obj/run16/stub.obj opennt-base-client.lib common-base-srv-bindings.lib common-base-srv-transport.lib original-opennt-rtl-x86.lib'
     # One declared source closure, consumed by the isolated native builder.
     # The x86 product graph must never silently link another worker carrier.
-    $graph.Add('build ntvwm-source-closure: phony worker-base.lib obj/ntvwm/next_command.obj obj/ntvwm/main.obj obj/ntvwm/presentation.obj obj/ntvwm/text_frame.obj obj/ntvwm/console_state.obj obj/ntvwm/execution.obj obj/common/native_process.obj common-native-hook-installer.lib common-native-hook-context.lib lib-process-hook.lib lib-handle.lib lib-file.lib' + $nativeBinding + ' common-root.lib common-rpc.lib lib-rpc.lib lib-pipe.lib lib-process-observation.lib lib-file.lib common-codec.lib common-console.lib')
+    $graph.Add('build ntvwm-source-closure: phony worker-base.lib obj/ntvwm/next_command.obj obj/ntvwm/main.obj obj/ntvwm/presentation.obj obj/ntvwm/text_frame.obj obj/ntvwm/console_state.obj obj/ntvwm/execution.obj obj/common/native_process.obj common-native-hook-installer.lib common-native-hook-context.lib lib-process-image.lib lib-process-hook.lib lib-handle.lib lib-file.lib' + $nativeBinding + ' common-root.lib common-rpc.lib lib-rpc.lib lib-pipe.lib lib-process-observation.lib lib-file.lib common-codec.lib common-console.lib')
     $graph.Add('rule native_worker_import')
     if($NativeWorker){
         $nativeWorkerInput=(Resolve-Path -LiteralPath $NativeWorker).Path
@@ -2196,7 +2202,7 @@ if ($Architecture -eq 'x86') {
         }
         if($graph[$i] -match '^build .*: \S*link ' -and ($graph[$i].Contains('common-native-hook-installer.lib') -or $graph[$i].Contains('common-native-hook-context.lib'))) {
             $barrier=$graph[$i].IndexOf(' |',$graph[$i].IndexOf(':')+1)
-            if($barrier -ge 0){$graph[$i]=$graph[$i].Insert($barrier,' lib-process-hook.lib lib-file.lib')}else{$graph[$i]+=' lib-process-hook.lib lib-file.lib'}
+            if($barrier -ge 0){$graph[$i]=$graph[$i].Insert($barrier,' lib-process-hook.lib lib-file.lib lib-process-image.lib')}else{$graph[$i]+=' lib-process-hook.lib lib-file.lib lib-process-image.lib'}
         }
         if($graph[$i] -match '^build .*: \S*link ' -and ($graph[$i].Contains('common-native-hook-installer.lib') -or $graph[$i].Contains('broker-transport.lib'))) {
             $barrier=$graph[$i].IndexOf(' |',$graph[$i].IndexOf(':')+1)

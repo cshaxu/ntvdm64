@@ -5,6 +5,7 @@
 #include "lib-win32/process-hook/payload.h"
 #include "lib-win32/process-hook/helper.h"
 #include "common/native_image.h"
+#include "lib-win32/process-image/image.h"
 #include <wchar.h>
 DWORD nthook_launcher_target(HANDLE child,const nthook_context *context,BOOL *launcher)
 {
@@ -19,9 +20,9 @@ DWORD nthook_launcher_target(HANDLE child,const nthook_context *context,BOOL *la
  * generic handoff and must already identify the still-suspended child. */
 DWORD nthook_helper_apply(HANDLE child,const void *packet,DWORD bytes,PCWSTR dll,void *unused)
 {
-    nthook_context context;DWORD machine=0,subsystem=0,error;char path[MAX_PATH*2];BOOL lossy=FALSE;
+    nthook_context context;WORD machine=0;DWORD error;char path[MAX_PATH*2];BOOL lossy=FALSE;
     PCWSTR expected;(void)unused;
-    error=common_native_process_image(child,&machine,&subsystem);if(error)return error;
+    error=win32_process_image_machine(child,&machine);if(error)return error;
     if(machine!=(sizeof(void *)==8?IMAGE_FILE_MACHINE_AMD64:IMAGE_FILE_MACHINE_I386))return ERROR_BAD_EXE_FORMAT;
     error=nthook_context_parse(&context,packet,bytes,machine);if(error)return error;
     expected=machine==IMAGE_FILE_MACHINE_AMD64?context.hook64:context.hook;
@@ -36,11 +37,11 @@ DWORD nthook_install(HANDLE child,const nthook_context *context,DWORD mode)
     BYTE data[sizeof(native_hook_packet)+3*MAX_PATH*sizeof(WCHAR)]={0};
     native_hook_packet *header=(native_hook_packet *)data;
     HANDLE attached[2]={NULL,NULL};DWORD error=ERROR_SUCCESS,flags;
-    char dll[MAX_PATH*2];BOOL default_char=FALSE;DWORD machine=0,subsystem=0;PCWSTR hook;
+    char dll[MAX_PATH*2];BOOL default_char=FALSE;WORD machine=0;PCWSTR hook;
     if(!child || !context || (mode!=NATIVE_HOOK_INTERCEPT && mode!=NATIVE_HOOK_LAUNCHER) ||
         !!context->frontend!=!!context->execution ||
         (context->creation_flags & ~NATIVE_HOOK_SEPARATE_WOW))return ERROR_INVALID_PARAMETER;
-    error=common_native_process_image(child,&machine,&subsystem);
+    error=win32_process_image_machine(child,&machine);
     if(error)return error;
     hook=machine==IMAGE_FILE_MACHINE_AMD64 ? context->hook64 : context->hook;
     if(!context->launcher[0] || !context->hook[0] || !context->hook64[0] ||

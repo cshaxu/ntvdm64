@@ -62,3 +62,6 @@ artifacts/mvdm-audit/ccpu-control/initial-narrow-nonpass/failure.txt whitespace=
 
 # Preserve the exact combined hook redistribution notices from the staged package.
 assets/release/nthook32-LICENSE.txt -text whitespace=cr-at-eol
+
+# Preserve the shared Win16-style process-image source byte-for-byte.
+src/lib-win32/process-image/** -text

@@ -2,40 +2,45 @@
 
 ## Current Work
 
-**Active: M0 T474 S2 P1** — consolidate Console process snapshots into process observation.
+**Active: M0 T474 S3** — import the shared Win32 process-image component.
 
-T473 was closed by owner direction; its [closure](../history/m0-t473-closure.md)
-and queued mirror audit remain authoritative. The 51-commit sibling range was integrated and delivered in S1; [evidence](../etc/evidence/m0-t474-s1-shared-range-integration.md).
+T473 was closed by owner direction. S1 integrated the shared ownership range;
+S2 split generic libraries and P1 consolidated Console membership into process
+observation. Their [S1 evidence](../etc/evidence/m0-t474-s1-shared-range-integration.md)
+and [S2 evidence](../etc/evidence/m0-t474-s2-win32-library-split.md) are retained.
 
 ## Active Packet
 
-### M0 T474 S2 — Win32 pipe, console and file ownership
+### M0 T474 S3 — shared process architecture query
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T474 S2, Ordinary Mode. |
-| Admission And Approval | Owner directed moving lib-win32/io into pipe, console and file and splitting their static libraries. S1 delivery is [recorded](../etc/evidence/m0-t474-s1-shared-range-integration.md). |
-| Candidate Proposal | [Shared implementation ownership](../proposals/proposal-shared-implementation-ownership-001.md); S2 split is owner-directed. |
-| Objective | Separate shared Win32 libraries by responsibility without changing behavior or protocols; retain existing common aggregate link edges. |
-| Non-goals | Guest changes, lifecycle changes, introducing duplicate implementations, unrelated refactors. |
-| Reference Baseline | `eac2932d5`; S1 Full and process-hook checks passed. |
-| Files And ABI Surface | `src/lib-win32`, consumers, build generators, tests and documentation; internal static interfaces only. |
-| Applicable Rules | Preserve authorized source, use cached builds, coherent publication, lifecycle and RPC boundaries. |
-| Verification | x86/x64 full cached build, relevant focused checks, Full selected product suite, release hash validation. |
-| P1 Admission | Owner approved moving Console member snapshots into `process-observation`, retiring the separate Console library without changing behavior. Preserve the prior S2 delivery [evidence](../etc/evidence/m0-t474-s2-win32-library-split.md). |
-| Delivery State | P1 cached x86/x64 builds, focused checks and Full selected gates passed; ten-component candidate and hook license published and verified at both destinations. [Evidence](../etc/evidence/m0-t474-s2-win32-library-split.md). Awaiting owner acceptance. |
-| Expected Markers | Console membership is owned by process-observation; no separate lib-console archive; all consumers link and operate correctly. |
-| Asset Needs | Existing caches, candidate runtime package, unchanged guest media and isolated test resources. |
-| Reporting Requirements | Ownership and build changes, test results, full release and commit identities. |
-| Stop Conditions | Unapproved observable semantic change or guest modifications. |
-| Exit Criteria | Review, cached build, Full tests, complete publication, commit and push. |
-| Original Owner Request | Admit S to split lib-win32/io into pipe, console and file with distinct static libraries; build, test, publish, commit and push. |
-| Similar-Issue Sweep | All build graphs and archive consumers including fixtures, x86 and x64. |
-| Temporary Evidence | `build/t474-s2`, 90-minute phase, 4-GiB and 15-minute no-progress budget; stable caches retained. |
+| Identifier Mode | M0 T474 S3, Ordinary Mode. |
+| Admission And Approval | Owner approved importing Win16-style process-image unchanged, using its target-process architecture query in the hook installer and retaining existing image classification. |
+| Candidate Proposal | [Shared implementation ownership](../proposals/proposal-shared-implementation-ownership-001.md). |
+| Objective | Share identical process-image source and use its process-machine query for hook width and helper selection. |
+| Non-goals | No guest changes, no product policy in generic process-hook, no removal of native GUI/CUI classification or target revalidation. |
+| Reference Baseline | NTVDM64 `05eb0f4ab`; source identity to be recorded from Win16-style. |
+| Files And ABI Surface | Win32 process-image, hook installer, build graph, focused tests and documentation. |
+| Applicable Rules | Source-policy provenance, cached builds, complete coherent delivery, preserve unrelated changes. |
+| Verification | x86/x64 source identity, process-machine and installer tests including cross-width/failures, Full product suite, package hash checks. |
+| Delivery State | Cached x86/x64 builds, cross-width hook and process-image checks, Full selected gates and ten-component publication passed; [evidence](../etc/evidence/m0-t474-s3-process-image.md). Awaiting owner acceptance. |
+| Expected Markers | Exact imported source; both installer paths select target architecture without reopening its image solely for hook width; existing NTSRV target and GUI/CUI validation remains. |
+| Asset Needs | Existing caches, immutable source and isolated test fixtures. |
+| Reporting Requirements | Source commit/hash, semantics and limitations, build/tests, publication and push. |
+| Stop Conditions | Unsupported semantic regression without authorized solution, guest modifications. |
+| Exit Criteria | Audit, cached build, meaningful tests, full coherent publication, commit and push. |
+| Original Owner Request | Import process-image unchanged; installer uses target process width; admit a new S. |
+| Similar-Issue Sweep | Inspect same-width, cross-width, helper, failure and product admission paths. |
+| Temporary Evidence | `build/t474-s3`, 90-minute phase, 4-GiB and 15-minute no-progress budget; caches retained. |
+
+## S2 Closure Record
+
+The [S2 and P1 delivery](../etc/evidence/m0-t474-s2-win32-library-split.md) passed the full selected gates and was published.
 
 ## S1 Closure Record
 
-The [S1 integration](../etc/evidence/m0-t474-s1-shared-range-integration.md) was delivered and accepted as the S2 baseline.
+The [S1 integration](../etc/evidence/m0-t474-s1-shared-range-integration.md) was delivered as the S2 baseline.
 
 ## M0 T475 S5 Closure
 

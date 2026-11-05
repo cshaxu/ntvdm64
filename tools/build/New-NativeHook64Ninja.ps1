@@ -48,7 +48,7 @@ $sources=@('src/nthook32-dll/entry.c','src/common/native-hook/context.c','src/co
     'src/lib-win32/process-hook/staging.c','src/lib-win32/process-hook/helper.c','src/lib-win32/process-hook/payload.c',
     'src/lib-win32/process-hook/startup_hooks.c','src/lib-win32/process-hook/minhook/src/buffer.c',
     'src/lib-win32/process-hook/minhook/src/trampoline.c','src/lib-win32/process-hook/minhook/src/hde/hde64.c',
-    'src/common/native_image.c','src/lib-win32/handle/duplicate.c','src/lib-win32/file/identity.c',
+    'src/common/native_image.c','src/lib-win32/process-image/image.c','src/lib-win32/handle/duplicate.c','src/lib-win32/file/identity.c',
     'src/nthook32-dll/hook_classification.c',
     'src/non-mvdm/base/win32/client/vdm.c',
     'src/common/base_srv/base_classifier_path.c',
@@ -72,6 +72,10 @@ foreach($source in $sources) {
 $graph.Add('build nthook64.dll: dll '+($objects -join ' ')+' observation-stub.obj | '+(NP (Join-Path $root 'src/nthook32-dll/nthook64.def')))
 $graph.Add('rule test')
 $graph.Add('  command = link.exe /nologo /subsystem:$subsystem /entry:wmainCRTStartup /opt:ref /out:$out /map:$out.map $in kernel32.lib ntdll.lib advapi32.lib user32.lib rpcrt4.lib legacy_stdio_definitions.lib')
+$graph.Add('build process-image-machine-test.obj: cc '+(NP (Join-Path $root 'tests/observation/process_image_machine_test.c')))
+$imageObject=$objects[[Array]::IndexOf($sources,'src/lib-win32/process-image/image.c')]
+$graph.Add('build process-image-machine-test.exe: test process-image-machine-test.obj '+$imageObject)
+$graph.Add('  subsystem = console')
 $graph.Add('build fixture.obj: cc '+(NP (Join-Path $root 'tests/component-integration/nthook_install_test.c')))
 $graph.Add('  cflags = $cflags /std:c11')
 $testObjects=$objects
