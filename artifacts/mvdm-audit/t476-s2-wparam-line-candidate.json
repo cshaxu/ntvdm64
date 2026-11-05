@@ -1,0 +1,17 @@
+{
+  "path": "src/mvdm-host/wow32/wparam.c",
+  "original_sha256": "939785d0aee348459e02136efafdcbdac7aa1d7612f4bfcf8c4f21acf677271a",
+  "previous_sha256": "34f7db5e3da071fbd15be8faf882422e4b5a24b27bf4abf4e123b79245a7323e",
+  "current_sha256": "0131ce3113859ab30c69ce29d9977252c9f856ac04f7a70d7a5d45cab06230ff",
+  "condition_structure": "all 19 original if/else/endif directives match current structure and logical lines after correction; selected branch bodies retained",
+  "corrected_original_directive_lines": [
+    253,
+    289,
+    470,
+    533,
+    581
+  ],
+  "status": "validated: original LF-based condition/line comparison, grouped cached build, product comparison and publication; see batch18 evidence",
+  "note": "Registered DIV-347 behavior retained",
+  "followup": "Additional end-directive anchors verified using LF-based original condition parser; included before batch completion."
+}

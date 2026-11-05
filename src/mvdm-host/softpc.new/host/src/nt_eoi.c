@@ -36,6 +36,7 @@
 #include "nt_reset.h"
 #include "nt_eoi.h"
 
+#line 43
 // from nt_timer.c
 #line 44
 extern ULONG GetPerfCounter(VOID);
@@ -48,6 +49,7 @@ ULONG DelayIrqLine=0xffffffff;  // all ints are blocked until, spckbd loaded
 #ifdef MONITOR
 #line 52
 #error Excluded original conditional branch
+#line 55
 #endif
 #line 56
 
@@ -241,6 +243,7 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
 #ifdef MONITOR
 #line 235
 #error Excluded unsupported delayed-interrupt monitor declarations
+#line 237
 #else
 #line 238
    ULONG TicCount;
@@ -264,9 +267,11 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
            }
 
 
+#line 257
 #ifdef MONITOR
 #line 258
 #error Excluded unsupported delayed-interrupt monitor dispatch
+#line 277
 #else
 #line 279
         //
@@ -292,11 +297,13 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
                                                 Delay - 200,
                                                 IrqLineNum
                                                 );
+#line 303
         //
         // Keep Wow Tasks active
         //
 #line 306
         WOWIdle(TRUE);
+#line 310
 #endif
 #line 311
         }
@@ -324,6 +331,7 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
  * QuickEvent call back function
  *
  */
+#line 332
 #ifndef MONITOR
 #line 333
 /*
@@ -378,6 +386,7 @@ void InitializeIcaLock(void)
 #ifdef MONITOR
 #line 382
 #error Excluded original conditional branch
+#line 404
 #endif
 #line 405
 
@@ -489,6 +498,7 @@ VOID ica_RestartInterrupts(ULONG IrqLine)
 #ifdef MONITOR
 #line 501
 #error Excluded unsupported monitor interrupt restart
+#line 510
 #else
 #line 511
     host_ica_lock();
@@ -505,5 +515,6 @@ VOID ica_RestartInterrupts(ULONG IrqLine)
 #ifdef MONITOR
 #line 522
 #error Excluded unsupported monitor IRET table
+#line 545
 #endif
 #line 546

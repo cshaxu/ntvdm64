@@ -260,6 +260,7 @@ SHORT host_error(int error_num, int options, char *extra_char);
 #else
 #line 261
 #error Unsupported excluded original configuration
+#line 272
 #endif
 #line 273
 

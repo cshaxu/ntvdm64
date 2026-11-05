@@ -1,0 +1,22 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
+  "original_sha256": "d0ea64ba445b8a7c8cb4b11963cece808793b0595183f8be7f115c060eb1f0d9",
+  "previous_sha256": "6024b359037fb812ddde5c63783fc534ea0b937b35d56ac06e872a89d0d45bd3",
+  "current_sha256": "dd014193d8f213dffa82a328b72a3a560af874693180b3e198366770c24f1e70",
+  "condition_structure": "original structure retained; selected GISP_SVGA else arms retained and corrected; no unmatched original condition leads in baseline",
+  "corrected_original_lines": [
+    141,
+    241,
+    254,
+    255,
+    267,
+    268,
+    278,
+    279,
+    299,
+    359
+  ],
+  "verification": "zero mismatches across all nonblank original lines matched by source comparison",
+  "status": "validated: original LF-based condition/line comparison, grouped cached build, product comparison and publication; see batch18 evidence",
+  "followup": "Additional end-directive anchors verified using LF-based original condition parser; included before batch completion."
+}

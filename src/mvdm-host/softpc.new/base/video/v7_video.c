@@ -48,9 +48,11 @@
 #endif
 
 
+#line 48
 #ifdef SEGMENTATION
 #line 49
 #error Excluded unsupported SEGMENTATION configuration
+#line 55
 #endif
 #line 56
 
@@ -291,6 +293,7 @@ v7vga_extended_set_mode()
 #line 286
 		return;
 
+	#line 290
 	/*
 	 * The method of storing an extended video mode according to a real BIOS is
 	 * if it is an text mode then put 1 in the BIOS mode variable and store
@@ -451,7 +454,9 @@ v7vga_extended_set_mode()
 #ifdef REAL_VGA
 #line 447
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
+#line 449
 #else
+#line 450
     	sas_fillsw(video_pc_low_regen, clr_char,
 				 (video_pc_high_regen - video_pc_low_regen)/ 2 + 1);
 #endif
@@ -464,6 +469,7 @@ v7vga_extended_set_mode()
      * must observe the actual Video 7 extent after an extended mode set. */
     mouse_video_mode_changed(video_mode);
 #endif
+#line 456
 #ifndef PROD
 #line 457
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.

@@ -1,0 +1,10 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+  "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
+  "previous_sha256": "6c2cce038ce1e64a581fa93bc5d7cc625568658602e310762b3ed281750688ab",
+  "current_sha256": "41a57d7292c39b5ba4b2b60c2ecfb08fe922c568aaf21b8bad01ce70b8563694",
+  "condition_structure": "12 original matched condition groups: all arm and closing-endif logical lines match after correction",
+  "verification": "zero mismatches across nonblank original lines retained by source comparison",
+  "status": "validated: original LF-based condition/line comparison, grouped cached build, product comparison and publication; see batch18 evidence",
+  "risk": "source uses __LINE__; compare product output and isolate any diagnostic-only differences before waiving regression"
+}

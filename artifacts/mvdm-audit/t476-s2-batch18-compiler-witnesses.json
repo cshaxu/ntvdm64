@@ -1,0 +1,114 @@
+{
+  "witnesses": [
+    {
+      "context": "vga",
+      "file": "vga_mode.c",
+      "output_sha256": "df8a8e72f7c87b95bd9969726fa5475c49df2da4b8d4433698c8c0ba433d529e",
+      "witnesses": [
+        {
+          "line": 255,
+          "symbol": "ega_wrap_split_text_update",
+          "output": "set_gfx_update_routines( ega_wrap_split_text_update, SIMPLE_MARKING, NO_SCROLL );"
+        },
+        {
+          "line": 268,
+          "symbol": "ega_split_text_update",
+          "output": "set_gfx_update_routines( ega_split_text_update, SIMPLE_MARKING, NO_SCROLL );"
+        },
+        {
+          "line": 279,
+          "symbol": "ega_wrap_text_update",
+          "output": "set_gfx_update_routines( ega_wrap_text_update, SIMPLE_MARKING, NO_SCROLL );"
+        }
+      ]
+    },
+    {
+      "context": "v7",
+      "file": "v7_video.c",
+      "output_sha256": "14a6d459aedb6cd0dbbd669c1c0270c2f0ec49095bf3df99b4968a372345be16",
+      "witnesses": [
+        {
+          "line": 450,
+          "symbol": "sas_fillsw",
+          "output": "c_sas_fillsw(video_pc_low_regen, clr_char, (video_pc_high_regen - video_pc_low_regen)/ 2 + 1);"
+        }
+      ]
+    },
+    {
+      "context": "v7",
+      "file": "ios.h",
+      "output_sha256": "14a6d459aedb6cd0dbbd669c1c0270c2f0ec49095bf3df99b4968a372345be16",
+      "witnesses": [
+        {
+          "line": 568,
+          "symbol": "Ios_in_adapter_table",
+          "output": "extern char\tIos_in_adapter_table[];"
+        },
+        {
+          "line": 569,
+          "symbol": "Ios_out_adapter_table",
+          "output": "extern char\tIos_out_adapter_table[];"
+        }
+      ]
+    },
+    {
+      "context": "eoi",
+      "file": "nt_eoi.c",
+      "output_sha256": "0d1257011e67e9b52f9600459ac1e395499f90e3e3214a30403d31df8a751756",
+      "witnesses": [
+        {
+          "line": 306,
+          "symbol": "WOWIdle",
+          "output": "WOWIdle(1);"
+        }
+      ]
+    },
+    {
+      "context": "timer",
+      "file": "nt_timer.c",
+      "output_sha256": "ce48c25ce6f78175965d544478796ebeed035e951402699f570e9cba80b6d7c6",
+      "witnesses": [
+        {
+          "line": 844,
+          "symbol": "CloseConsoleHandle",
+          "output": "MvdmCloseConsoleHandle(ThreadInfo.HeartBeat.Handle);"
+        },
+        {
+          "line": 852,
+          "symbol": "DisplayErrorTerm",
+          "output": "DisplayErrorTerm(1001, status,\"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_timer.c\",852);"
+        }
+      ]
+    },
+    {
+      "context": "wparam",
+      "file": "wparam.c",
+      "output_sha256": "a2e77fac8190fe4b10c78838fc36028f4ab219829ba23f94d41c84519c7c162b",
+      "witnesses": [
+        {
+          "line": 582,
+          "symbol": "PBLKHEADER",
+          "output": "PBLKHEADER pbhf = pc->pCacheFree;"
+        }
+      ]
+    },
+    {
+      "context": "wkman2",
+      "file": "nturtl.h",
+      "output_sha256": "e26a5055128b29ac4de23971ef14abce47f4ab04a959f0b6047963b03da534d9",
+      "witnesses": [
+        {
+          "line": 257,
+          "symbol": "RtlIsDosDeviceName_U",
+          "output": "ULONG __stdcall RtlIsDosDeviceName_U(PWSTR DosFileName);"
+        },
+        {
+          "line": 294,
+          "symbol": "RtlDosPathNameToNtPathName_U",
+          "output": "BOOLEAN __stdcall RtlDosPathNameToNtPathName_U(PCWSTR DosFileName, PUNICODE_STRING NtFileName, PWSTR *FilePart, PVOID RelativeName);"
+        }
+      ]
+    }
+  ],
+  "scope": "actual x86 product preprocessing; excluded condition markers and non-emitting macro-only headers are verified statically, not exercised"
+}

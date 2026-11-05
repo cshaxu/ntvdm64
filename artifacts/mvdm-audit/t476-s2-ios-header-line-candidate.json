@@ -1,0 +1,19 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
+  "original_sha256": "ae58169de7aa969000f7cf4374d3d850b55d352c3d4c6edcf52dec0e985620a4",
+  "previous_sha256": "9b08e08ba77b3c8dfaffeec3efe8f1923b1495d30e79678e198cd52509643dd8",
+  "current_sha256": "216f3a4503ec8bfb4f35cba328d15231eb892357310baa426228d6313dc2ab94",
+  "condition_structure": "original condition structure retained; selected MAC68K else declarations retained and corrected; no unmatched original condition leads in baseline",
+  "corrected_original_lines": [
+    412,
+    441,
+    498,
+    537,
+    558,
+    567,
+    568
+  ],
+  "verification": "zero mismatches across all nonblank original lines matched by source comparison",
+  "status": "validated: original LF-based condition/line comparison, grouped cached build, product comparison and publication; see batch18 evidence",
+  "followup": "Additional end-directive anchors verified using LF-based original condition parser; included before batch completion."
+}

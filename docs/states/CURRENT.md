@@ -4,11 +4,13 @@
 
 **Active: M0 T476 S2** — complete the outstanding per-file mirror conditional and line audit.
 
-S1 integrated and published its marker build and 30 exclusions; its [main integration evidence](../etc/evidence/m0-t476-s1-main-integration.md) retains the limits. The owner directed S2 to finish them. The [S2 baseline](../etc/evidence/m0-t476-s2-file-audit.md) tracks all 1,055 files: after rebinding stale hashes, reopening PIF and completing further file reviews, the review categories contain 987 files and 68 require file review. The earlier batch retains three open files. A separate exact-byte reconciliation has 180 original-line-ending restorations remaining after thirteen source batches.
+S1 integrated and published its marker build and 30 exclusions; its [main integration evidence](../etc/evidence/m0-t476-s1-main-integration.md) retains the limits. The owner directed S2 to finish them. The [S2 baseline](../etc/evidence/m0-t476-s2-file-audit.md) tracks all 1,055 files: after rebinding stale hashes, reopening PIF and completing further file reviews, the review categories contain 997 files and 58 require file review. The earlier batch retains three open files. A separate exact-byte reconciliation has 179 restorations not yet started.
 
 The counts above predate discovery that the S1 product-only marker contexts omitted supported fixture and addon builds. Several recorded exclusions failed those builds; the current correction restores their selected arms. Previously reviewed counts cannot establish completeness across those omitted contexts until cross-checked; do not treat them as a final audit conclusion.
 
 The [merged branch evidence](../../artifacts/mvdm-audit/t476-s2-merged-branch-evidence.json) combines S1, historical marker hits and the separately verified addon/fixture hits, retaining source-hash binding and explicit coverage limits. The [remaining-file groups](../../artifacts/mvdm-audit/t476-s2-remaining-groups.json) track the initially 69-file queue and current pending subset; groups are leads, not completed dispositions. Process smaller files first, handle large files separately, build per ten actual mirror-file modifications, and finally cross-check prior reviews against omitted contexts.
+
+The [latest ten-source batch](../../artifacts/mvdm-audit/t476-s2-batch18-line-repair.json) comprises nine whole-file line fixes and the byte restoration of `das.h`; cached builds, line witnesses and full publication passed, with only two PE timestamp differences. The `nturtl.h` candidate was withdrawn: its original anchors were correct when counted using LF rather than Python `splitlines()`. The [line-count reconciliation](../../artifacts/mvdm-audit/t476-s2-line-count-reconciliation.json) records 39 original files with divergent split counts; 19 previously reviewed files have raw comparison leads requiring triage, not established defects. No guest was changed or rebuilt.
 
 ## Active Packet
 

@@ -21,6 +21,7 @@
 #if defined(BASE_SAS) && defined(HOST_SAS)
 #line 21
 #error Unsupported excluded original configuration
+#line 66
 #endif /* BASE_SAS && HOST_SAS */
 #line 67
 
@@ -29,6 +30,8 @@
 #ifdef HOST_SAS
 #line 71
 #error Excluded unsupported HOST_SAS interface profile
+#line 199
 #endif /* HOST_SAS */
 
+#line 201
 #endif /* BASE_SAS */

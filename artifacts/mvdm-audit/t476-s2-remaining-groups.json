@@ -157,7 +157,7 @@
     {
       "path": "src/mvdm-host/softpc.new/base/inc/host_sas.h",
       "group": "C: matching line leads",
-      "current_sha256": "2f8a9d4296d115f48a74eacdb91ad4b37367ef5043f865a91732753db2c8e1df",
+      "current_sha256": "7c313552f0116e4073b25721bc4cd45eba237f33188fd897b0d6e1c90f78a4a3",
       "original_sha256": "42f3e8b6a7ad9f4628ae35cd133b6747a19b840c0d3ead23d2d1567874c4e717",
       "s1_hits": 1,
       "prior_exclusions": 2,
@@ -172,13 +172,13 @@
       "raw_matching_line_leads": 3,
       "sampled_compiler_contexts": 0,
       "original_lines": 201,
-      "status": "pending whole-file audit",
+      "status": "reviewed; batch18 published, see per-file candidate and compiler witnesses",
       "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
       "group": "C: matching line leads",
-      "current_sha256": "9b08e08ba77b3c8dfaffeec3efe8f1923b1495d30e79678e198cd52509643dd8",
+      "current_sha256": "216f3a4503ec8bfb4f35cba328d15231eb892357310baa426228d6313dc2ab94",
       "original_sha256": "ae58169de7aa969000f7cf4374d3d850b55d352c3d4c6edcf52dec0e985620a4",
       "s1_hits": 17,
       "prior_exclusions": 10,
@@ -193,7 +193,7 @@
       "raw_matching_line_leads": 9,
       "sampled_compiler_contexts": 50,
       "original_lines": 600,
-      "status": "pending whole-file audit",
+      "status": "reviewed; batch18 published, see per-file candidate and compiler witnesses",
       "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
     },
     {
@@ -304,7 +304,7 @@
     {
       "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
       "group": "C: matching line leads",
-      "current_sha256": "7552e67cd37b75c0935ac054faf7076740d9231201a2944659e9cd7c047843b9",
+      "current_sha256": "a06d4ce01a61573a3e7ca53ab2cc8dce09c8b06c54bab46d5a679c9d56a4a849",
       "original_sha256": "ce5c8812c1bd5f125f007521b2c1c815739e4969fed1ff2e39600a5a47af0525",
       "s1_hits": 5,
       "prior_exclusions": 4,
@@ -319,13 +319,13 @@
       "raw_matching_line_leads": 13,
       "sampled_compiler_contexts": 1,
       "original_lines": 524,
-      "status": "pending whole-file audit",
+      "status": "reviewed; batch18 published, see per-file candidate and compiler witnesses",
       "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
       "group": "C: matching line leads",
-      "current_sha256": "6024b359037fb812ddde5c63783fc534ea0b937b35d56ac06e872a89d0d45bd3",
+      "current_sha256": "dd014193d8f213dffa82a328b72a3a560af874693180b3e198366770c24f1e70",
       "original_sha256": "d0ea64ba445b8a7c8cb4b11963cece808793b0595183f8be7f115c060eb1f0d9",
       "s1_hits": 11,
       "prior_exclusions": 26,
@@ -340,7 +340,7 @@
       "raw_matching_line_leads": 13,
       "sampled_compiler_contexts": 1,
       "original_lines": 575,
-      "status": "pending whole-file audit",
+      "status": "reviewed; batch18 published, see per-file candidate and compiler witnesses",
       "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
     },
     {
@@ -388,7 +388,7 @@
     {
       "path": "src/mvdm-host/softpc.new/host/inc/error.h",
       "group": "C: matching line leads",
-      "current_sha256": "e1f50719a32e302c9d2e91a49c651669407f4dcc731e625cafde2671b918ed87",
+      "current_sha256": "6831c35fa7c81efec8c3beb0e1dd2eb95839a382d8938dc559dd7c04a2fdc469",
       "original_sha256": "40953fbb22a9c6a5bff875414e4dd6822340ec4a2501edec79415573fea16ab3",
       "s1_hits": 5,
       "prior_exclusions": 2,
@@ -403,7 +403,7 @@
       "raw_matching_line_leads": 1,
       "sampled_compiler_contexts": 0,
       "original_lines": 338,
-      "status": "pending whole-file audit",
+      "status": "reviewed; batch18 published, see per-file candidate and compiler witnesses",
       "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
     },
     {
@@ -430,7 +430,7 @@
     {
       "path": "src/mvdm-host/softpc.new/host/src/cpucstbs.c",
       "group": "C: matching line leads",
-      "current_sha256": "9c5da3266f1f8729ed3dd80bfc74e748e28b23852372390385f399540abd45a7",
+      "current_sha256": "8aa6950c9a7694c8adcb50b304e411121595278e699ad1bb233f4d417dc49a2d",
       "original_sha256": "0e114c6368a616dc87cdf4311aff19d50283e38a51b3f0e3301cbc45487ddaeb",
       "s1_hits": 1,
       "prior_exclusions": 1,
@@ -445,13 +445,13 @@
       "raw_matching_line_leads": 1,
       "sampled_compiler_contexts": 0,
       "original_lines": 32,
-      "status": "pending whole-file audit",
+      "status": "reviewed; batch18 published, see per-file candidate and compiler witnesses",
       "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
       "group": "C: matching line leads",
-      "current_sha256": "6c2cce038ce1e64a581fa93bc5d7cc625568658602e310762b3ed281750688ab",
+      "current_sha256": "41a57d7292c39b5ba4b2b60c2ecfb08fe922c568aaf21b8bad01ce70b8563694",
       "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
       "s1_hits": 7,
       "prior_exclusions": 8,
@@ -466,7 +466,7 @@
       "raw_matching_line_leads": 8,
       "sampled_compiler_contexts": 1,
       "original_lines": 545,
-      "status": "pending whole-file audit",
+      "status": "reviewed; batch18 published, see per-file candidate and compiler witnesses",
       "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
     },
     {
@@ -514,7 +514,7 @@
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
       "group": "C: matching line leads",
-      "current_sha256": "e3cd9c2880c18439f2e8a7b9dd10d9e42d25fa287490561509bbf356e86df2d8",
+      "current_sha256": "16b1f625aecc8b96a86ddf57abc095512f18aa646243a68c75cffcf3d49d5f9e",
       "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33",
       "s1_hits": 6,
       "prior_exclusions": 11,
@@ -529,7 +529,7 @@
       "raw_matching_line_leads": 10,
       "sampled_compiler_contexts": 1,
       "original_lines": 982,
-      "status": "pending whole-file audit",
+      "status": "reviewed; batch18 published, see per-file candidate and compiler witnesses",
       "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
     },
     {
@@ -703,7 +703,7 @@
     {
       "path": "src/mvdm-host/wow32/wparam.c",
       "group": "C: matching line leads",
-      "current_sha256": "34f7db5e3da071fbd15be8faf882422e4b5a24b27bf4abf4e123b79245a7323e",
+      "current_sha256": "0131ce3113859ab30c69ce29d9977252c9f856ac04f7a70d7a5d45cab06230ff",
       "original_sha256": "939785d0aee348459e02136efafdcbdac7aa1d7612f4bfcf8c4f21acf677271a",
       "s1_hits": 3,
       "prior_exclusions": 8,
@@ -718,7 +718,7 @@
       "raw_matching_line_leads": 3,
       "sampled_compiler_contexts": 1,
       "original_lines": 666,
-      "status": "pending whole-file audit",
+      "status": "reviewed; batch18 published, see per-file candidate and compiler witnesses",
       "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
     },
     {
@@ -823,7 +823,7 @@
       "raw_matching_line_leads": 11,
       "sampled_compiler_contexts": 0,
       "original_lines": 141,
-      "status": "pending whole-file audit",
+      "status": "reviewed; evidence t476-s2-vdmapi-review.json",
       "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
     },
     {
@@ -886,7 +886,7 @@
       "raw_matching_line_leads": 0,
       "sampled_compiler_contexts": 0,
       "original_lines": 1105,
-      "status": "pending whole-file audit",
+      "status": "pending whole-file audit; erroneous line candidate withdrawn",
       "limits": "Group is a triage lead; S1 product contexts do not cover all supported addon/test contexts."
     },
     {
@@ -1458,10 +1458,10 @@
     }
   ],
   "method": "Hash-checked prior S1 branch ledger, source/original condition comparison and raw line-match triage; these are leads, not exclusion or completion proofs.",
-  "pending_count": 68,
+  "pending_count": 58,
   "pending_groups": {
     "B: original structure leads": 4,
-    "C: matching line leads": 42,
+    "C: matching line leads": 32,
     "A: changed evidence or unhit arms": 16,
     "D: full-file review with no automated leads": 6
   }

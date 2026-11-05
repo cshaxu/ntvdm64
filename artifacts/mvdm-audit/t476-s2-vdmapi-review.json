@@ -1,0 +1,258 @@
+{
+  "path": "src/non-mvdm/public/internal/base/inc/vdmapi.h",
+  "current_sha256": "a177edfb7bfa754e95c09d992870ccfa57e9a606a10995a30eb4206116643118",
+  "original_sha256": "b942656ba8761ddb9325a7eea7997394562d2e57797c923ff5688d7be86426de",
+  "original_lines_matched": 140,
+  "diff": [
+    {
+      "kind": "insert",
+      "old": [],
+      "new": [
+        "/* DIVERGENCE(OPENNT-ABI-001): the original header is retained byte-for-byte",
+        " * below this guard.  The modern broker and Base VDM adapter can both include",
+        " * this declaration carrier in one translation unit, while upstream provides",
+        " * no multiple-inclusion protection. */",
+        "#ifndef MVDM_OPENNT_VDMAPI_H",
+        "#define MVDM_OPENNT_VDMAPI_H",
+        ""
+      ],
+      "original_lines": [
+        1,
+        0
+      ],
+      "current_lines": [
+        1,
+        7
+      ]
+    },
+    {
+      "kind": "insert",
+      "old": [],
+      "new": [
+        "#line 23"
+      ],
+      "original_lines": [
+        23,
+        22
+      ],
+      "current_lines": [
+        30,
+        30
+      ]
+    },
+    {
+      "kind": "replace",
+      "old": [
+        ");"
+      ],
+      "new": [
+        "    );",
+        "",
+        "#endif /* MVDM_OPENNT_VDMAPI_H */"
+      ],
+      "original_lines": [
+        141,
+        141
+      ],
+      "current_lines": [
+        149,
+        151
+      ]
+    }
+  ],
+  "preamble_comment_lines_with_offset": [
+    1,
+    3,
+    5,
+    7,
+    9,
+    11,
+    13,
+    15,
+    17,
+    19,
+    21
+  ],
+  "local_guard": [
+    {
+      "file": 939,
+      "index": 0,
+      "line": 5,
+      "directive": "ifndef",
+      "expression": "MVDM_OPENNT_VDMAPI_H",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        253,
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        294,
+        312,
+        326,
+        333,
+        335,
+        350,
+        352,
+        364,
+        374,
+        414,
+        417,
+        450,
+        517,
+        518,
+        519,
+        520,
+        521,
+        522,
+        523,
+        524,
+        525,
+        526,
+        527,
+        528,
+        529,
+        530,
+        531,
+        532,
+        533,
+        534,
+        535,
+        536,
+        537,
+        538,
+        539,
+        540,
+        541,
+        542,
+        543,
+        544,
+        545,
+        546,
+        547,
+        548,
+        549,
+        550,
+        551,
+        552,
+        553,
+        554,
+        555,
+        556,
+        557,
+        558,
+        559,
+        560,
+        561,
+        562,
+        563,
+        564,
+        565,
+        566,
+        567,
+        568,
+        569,
+        570,
+        571,
+        572,
+        573,
+        574,
+        575,
+        576,
+        577,
+        578,
+        579,
+        580,
+        581,
+        582,
+        583,
+        584,
+        585,
+        586,
+        587,
+        588,
+        589,
+        590,
+        591,
+        592,
+        593,
+        594,
+        595,
+        687,
+        689,
+        722,
+        724,
+        725,
+        726,
+        727,
+        729,
+        730,
+        731,
+        732,
+        776,
+        839,
+        881,
+        891,
+        893,
+        896,
+        936,
+        939,
+        941,
+        942,
+        943,
+        944,
+        945,
+        946,
+        947,
+        948,
+        950,
+        958
+      ],
+      "outermost_new_exclusion": false
+    }
+  ],
+  "compiler_witnesses": [
+    {
+      "name": "_VDMINFO",
+      "original_line": 50
+    },
+    {
+      "name": "VDMOperationStarted",
+      "original_line": 100
+    },
+    {
+      "name": "GetNextVDMCommand",
+      "original_line": 106
+    },
+    {
+      "name": "ExitVDM",
+      "original_line": 112
+    },
+    {
+      "name": "SetVDMCurrentDirectories",
+      "original_line": 119
+    },
+    {
+      "name": "GetVDMCurrentDirectories",
+      "original_line": 126
+    },
+    {
+      "name": "CmdBatNotification",
+      "original_line": 133
+    },
+    {
+      "name": "RegisterWowExec",
+      "original_line": 139
+    }
+  ],
+  "compiler_output_sha256": "212931614232b4dd682266087882928d3b7d5d6cee780d18c1a73f600ac71b9c",
+  "limit": "Original preamble comments have shifted positions; retained source and compiler declaration positions match."
+}

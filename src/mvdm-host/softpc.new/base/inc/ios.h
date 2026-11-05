@@ -49,6 +49,7 @@ typedef struct _extioentry {
 #ifdef HERC
 #line 47
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
+#line 49
 #endif
 #line 50
 
@@ -317,6 +318,7 @@ typedef struct _extioentry {
 #ifdef SWIN_SNDBLST_NULL
 #line 313
 #error DIVERGENCE MVDM-HOST-DIV-528: SWIN_SNDBLST_NULL platform branch is not selected; see mirror register.
+#line 317
 #endif
 #line 318
 
@@ -400,11 +402,13 @@ typedef struct _extioentry {
 #else	/* NTVDM */
 #line 395
 #error Unsupported excluded original configuration
+#line 412
 #endif	/* NTVDM */
 #line 413
 #else	/* SFELLOW */
 #line 414
 #error DIVERGENCE MVDM-HOST-DIV-521: SFELLOW alternative is not selected; see mirror register.
+#line 441
 #endif /*SFELLOW */
 #line 442
 
@@ -450,6 +454,7 @@ IMPORT void	io_define_inb
 #ifdef SFELLOW
 #line 483
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
+#line 498
 #endif	/* SFELLOW */
 #line 499
 
@@ -477,6 +482,7 @@ IMPORT void	io_define_outb
 #ifdef SFELLOW
 #line 522
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
+#line 537
 #endif	/* SFELLOW */
 #line 538
 
@@ -499,6 +505,7 @@ IMPORT IBOOL	io_connect_port IPT3(io_addr, io_address, half_word, adapter,
 #else
 #line 556
 #error Unsupported excluded original configuration
+#line 558
 #endif	/* NTVDM */
 #line 559
 
@@ -509,7 +516,9 @@ IMPORT void	io_init IPT0();
 #ifdef MAC68K
 #line 565
 #error DIVERGENCE MVDM-HOST-DIV-529: MAC68K platform branch is not selected; see mirror register.
+#line 567
 #else
+#line 568
 IMPORT char	Ios_in_adapter_table[];
 IMPORT char	Ios_out_adapter_table[];
 #endif

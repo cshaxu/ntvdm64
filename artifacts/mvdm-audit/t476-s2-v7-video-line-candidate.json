@@ -1,0 +1,18 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+  "original_sha256": "ce5c8812c1bd5f125f007521b2c1c815739e4969fed1ff2e39600a5a47af0525",
+  "previous_sha256": "7552e67cd37b75c0935ac054faf7076740d9231201a2944659e9cd7c047843b9",
+  "current_sha256": "a06d4ce01a61573a3e7ca53ab2cc8dce09c8b06c54bab46d5a679c9d56a4a849",
+  "condition_structure": "six original matched condition groups: all arm and closing-endif logical lines match after correction; selected REAL_VGA else retained",
+  "corrected_original_lines": [
+    48,
+    55,
+    290,
+    449,
+    450,
+    456
+  ],
+  "verification": "zero mismatches across nonblank original lines retained by source comparison",
+  "status": "validated: original LF-based condition/line comparison, grouped cached build, product comparison and publication; see batch18 evidence",
+  "note": "existing Video 7 preserve-mode and mouse adaptations retained"
+}

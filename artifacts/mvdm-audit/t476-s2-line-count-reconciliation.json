@@ -1,0 +1,786 @@
+{
+  "count": 39,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "state_at_detection": "different-file-review",
+      "original_sha256": "fd73ce7181f7dfb61432d63466c7641c3d010ca0c60bf446666b6c0118ddb8a9",
+      "splitlines_extra": 2,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/vgaports.h",
+      "state_at_detection": "strict-conditional-confirmed",
+      "original_sha256": "7d2c9ceadd144ea014757549ab83e8ff8e28b6e92c11f0cd379119d07c0bd2f2",
+      "splitlines_extra": 6,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "state_at_detection": "individual-review-confirmed",
+      "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+      "splitlines_extra": 2,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "state_at_detection": "strict-conditional-confirmed",
+      "original_sha256": "850f2f1a746eee3610f06ebf489cb662bcd628f556299e445daac7fdd24e9bbf",
+      "splitlines_extra": 28,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "state_at_detection": "individual-review-confirmed",
+      "original_sha256": "90e6dc8f5625c371c8c14a2a111c3403d0f4b24597eacce8549049138f5721a6",
+      "splitlines_extra": 8,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "state_at_detection": "strict-conditional-confirmed",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "splitlines_extra": 24,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrinit.c",
+      "state_at_detection": "excluded-projection-confirmed",
+      "original_sha256": "088ecff80459ed358ebf4f7dd291821748475a8fbdccaf27a1ee1df2b6648273",
+      "splitlines_extra": 12,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmisc.c",
+      "state_at_detection": "excluded-projection-confirmed",
+      "original_sha256": "1af57aba3be6a1425eb18187a73c579f56619a2593bce3b2c20be8cf67216b6d",
+      "splitlines_extra": 2,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "state_at_detection": "different-file-review",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "splitlines_extra": 17,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "state_at_detection": "different-file-review",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "splitlines_extra": 26,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "state_at_detection": "individual-review-confirmed",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "splitlines_extra": 35,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrputil.c",
+      "state_at_detection": "excluded-projection-confirmed",
+      "original_sha256": "1440cd1379dee1bbe65b0a1e6f6a637a3de48765da85cfd94153e8876a66fe16",
+      "splitlines_extra": 3,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "state_at_detection": "individual-review-confirmed",
+      "original_sha256": "f75d2984624cee1a77b6f5bf6a18fe4a7f38a059d32b0e711edb97d03a08c9b8",
+      "splitlines_extra": 8,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/mvdm-host/wow32/mapembed.c",
+      "state_at_detection": "excluded-projection-confirmed",
+      "original_sha256": "55c13643489f5bcc9419ce0341accb284f946d8d75352527a3b9181dfeb4a385",
+      "splitlines_extra": 6,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcommdlg.c",
+      "state_at_detection": "strict-conditional-confirmed",
+      "original_sha256": "01ce83329ae37a3e987971398115b8c7b5d9dcbc3320bdffaaa595244740a7d0",
+      "splitlines_extra": 12,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsdata.c",
+      "state_at_detection": "different-file-review",
+      "original_sha256": "f8f95c4cb6ec3aca607e66d615900129497738617b9a6a192880dc66beb5e63b",
+      "splitlines_extra": 11,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsext.c",
+      "state_at_detection": "individual-review-confirmed",
+      "original_sha256": "13a04aa32c045b6dfde4a12099d06c99ce2ec84362f30f296d677f7c47b200f7",
+      "splitlines_extra": 4,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wshell.c",
+      "state_at_detection": "identical-confirmed",
+      "original_sha256": "1daa7860c95a0e374566b900d2da01e7459e7b88c0dfbe8e84b23f68bdf3ad40",
+      "splitlines_extra": 1,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/ex/probe.c",
+      "state_at_detection": "individual-review-confirmed",
+      "original_sha256": "0d1cae414b609c624e6bdf04fa28ebd84ff38dbb9687a63d8bc9e840c2f2372b",
+      "splitlines_extra": 2,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.c",
+      "state_at_detection": "excluded-projection-confirmed",
+      "original_sha256": "88bf09ab98778e0ca58d9d232d3b7aba6115223f43eddf981f6e06b786e77e48",
+      "splitlines_extra": 2,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/time.c",
+      "state_at_detection": "strict-conditional-confirmed",
+      "original_sha256": "ac422e072432aff83c17b03c2127a80d067e801170eba9216ab86d2520767d40",
+      "splitlines_extra": 13,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/api/apibuff.c",
+      "state_at_detection": "individual-review-confirmed",
+      "original_sha256": "420a2973fd10924de9d6f709a88a79ef05bad74c61eaea1ea5b678b181c31161",
+      "splitlines_extra": 2,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+      "state_at_detection": "excluded-projection-confirmed",
+      "original_sha256": "3db640c6cdc48e0835cc6a54c69bd12196245fba3feeb486a79e45a7c9abbf86",
+      "splitlines_extra": 3,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "state_at_detection": "different-file-review",
+      "original_sha256": "552ab1d7c2b5de620609312a6c500afa504d22b3852bebb3582eafb524c6c115",
+      "splitlines_extra": 4,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/time.c",
+      "state_at_detection": "code-equivalent-confirmed",
+      "original_sha256": "9ffc9d6f042f5c2d58069e2d53b4bbe8bb73c08888f79edfd532ab679ddbdf82",
+      "splitlines_extra": 12,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "state_at_detection": "strict-conditional-confirmed",
+      "original_sha256": "1ed708dee1236ea6424610d2274830b651062ba602d4b2cfa60e49e33de4c186",
+      "splitlines_extra": 5,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "state_at_detection": "strict-conditional-confirmed",
+      "original_sha256": "7a0681e0d01f173edd31afac52c0a35cf7e2fc6711abcb4e224de06f116bdaf8",
+      "splitlines_extra": 4,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
+      "state_at_detection": "individual-review-confirmed",
+      "original_sha256": "93d368f24f2b8fdf82e7f3459dbd53d028ccf6059db5e0f7fb621826135e96c4",
+      "splitlines_extra": 5,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apiwksta.c",
+      "state_at_detection": "individual-review-confirmed",
+      "original_sha256": "8e0dbc5c1759aef57765c63ca8942550370bb260bfcd67d97f8b2e67281cd664",
+      "splitlines_extra": 3,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xssubs.c",
+      "state_at_detection": "individual-review-confirmed",
+      "original_sha256": "b3f3831e4a3a1eee6624b28fadaa48742465e1c51a093d6a75ffd9fefaecdd95",
+      "splitlines_extra": 13,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+      "state_at_detection": "strict-conditional-confirmed",
+      "original_sha256": "2bb7b7a8d86742123d3e246a940d22b2f0448c0afdce6a26204e78dd4a50ecc7",
+      "splitlines_extra": 5,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+      "state_at_detection": "strict-conditional-confirmed",
+      "original_sha256": "e81160b69920ee87d603fe593916994f8448a280b2a2adfefd34c190b1b3cb78",
+      "splitlines_extra": 26,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbmacro.h",
+      "state_at_detection": "strict-no-emission-confirmed",
+      "original_sha256": "e7a4ff096b5e2fdd0a81cd1c080e57253231664f87cb329c17a25c694282d8d1",
+      "splitlines_extra": 2,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbtypes.h",
+      "state_at_detection": "strict-conditional-confirmed",
+      "original_sha256": "f04a563368f33bb6d8ba50a50e68d68f081aecce94ecc37b6d787cc6f38ea622",
+      "splitlines_extra": 4,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/crypt.h",
+      "state_at_detection": "identical-confirmed",
+      "original_sha256": "0a325a131b109964594681317389ac7b7e4dce8f05f6dc553c499203f296c3ed",
+      "splitlines_extra": 7,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "state_at_detection": "individual-review-confirmed",
+      "original_sha256": "d4bddfbf3eadd81cbf913a60108f1c7cb3362c6c51b042701bba43da6bb8e52a",
+      "splitlines_extra": 15,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+      "state_at_detection": "individual-review-confirmed",
+      "original_sha256": "0fb164317335d8b48c51122182922259c902c7f60afb28111bafa9fb75735a6a",
+      "splitlines_extra": 1,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "state_at_detection": "different-file-review",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "splitlines_extra": 6,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+      "state_at_detection": "different-file-review",
+      "original_sha256": "c6b7844e2e1248ac38ee90dd8173f95ab0f7997d7a7cfbafda851cc07cc80921",
+      "splitlines_extra": 2,
+      "disposition": "recheck previous line review if it relied on splitlines; exact-original byte matches retain exact original line layout"
+    }
+  ],
+  "rule": "C preprocessor source logical line analysis must count LF, not Python splitlines control characters",
+  "scope": "candidate list; not all entries necessarily have an actual line error",
+  "lf_matching_line_triage": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "prior_state": "different-file-review",
+      "line_mismatch_leads": 56,
+      "examples": [
+        [
+          73,
+          68,
+          "#endif"
+        ],
+        [
+          80,
+          84,
+          "#if defined(NTVDM) && defined(MONITOR)"
+        ],
+        [
+          232,
+          197,
+          "#endif"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/vgaports.h",
+      "prior_state": "strict-conditional-confirmed",
+      "line_mismatch_leads": 12,
+      "examples": [
+        [
+          393,
+          18,
+          "#endif /* BIT_ORDER1 */"
+        ],
+        [
+          767,
+          392,
+          "/* The Sequencer Registers */"
+        ],
+        [
+          768,
+          393,
+          "#ifdef BIT_ORDER1"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "prior_state": "individual-review-confirmed",
+      "line_mismatch_leads": 34,
+      "examples": [
+        [
+          14,
+          13,
+          "/*          INSIGNIA MODULE SPECIFICATION"
+        ],
+        [
+          15,
+          14,
+          "-----------------------------"
+        ],
+        [
+          18,
+          17,
+          "THIS PROGRAM SOURCE FILE  IS  SUPPLIED IN CONFIDENCE TO THE"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "prior_state": "strict-conditional-confirmed",
+      "line_mismatch_leads": 5,
+      "examples": [
+        [
+          802,
+          767,
+          "#endif"
+        ],
+        [
+          1241,
+          1239,
+          "#endif"
+        ],
+        [
+          1995,
+          1988,
+          "#endif"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "prior_state": "individual-review-confirmed",
+      "line_mismatch_leads": 5,
+      "examples": [
+        [
+          357,
+          355,
+          "#endif"
+        ],
+        [
+          462,
+          458,
+          "#endif"
+        ],
+        [
+          567,
+          565,
+          "#endif"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "prior_state": "strict-conditional-confirmed",
+      "line_mismatch_leads": 18,
+      "examples": [
+        [
+          409,
+          406,
+          "#endif"
+        ],
+        [
+          614,
+          611,
+          "#endif"
+        ],
+        [
+          1186,
+          1167,
+          "#else"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrinit.c",
+      "prior_state": "excluded-projection-confirmed",
+      "line_mismatch_leads": 1,
+      "examples": [
+        [
+          187,
+          184,
+          "#endif"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmisc.c",
+      "prior_state": "excluded-projection-confirmed",
+      "line_mismatch_leads": 2,
+      "examples": [
+        [
+          77,
+          73,
+          "#endif"
+        ],
+        [
+          113,
+          110,
+          "#endif"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "prior_state": "different-file-review",
+      "line_mismatch_leads": 0,
+      "examples": []
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "prior_state": "different-file-review",
+      "line_mismatch_leads": 6,
+      "examples": [
+        [
+          242,
+          232,
+          "}"
+        ],
+        [
+          259,
+          242,
+          "}"
+        ],
+        [
+          260,
+          243,
+          "}"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "prior_state": "individual-review-confirmed",
+      "line_mismatch_leads": 25,
+      "examples": [
+        [
+          141,
+          144,
+          "//"
+        ],
+        [
+          142,
+          145,
+          "// manifests"
+        ],
+        [
+          143,
+          146,
+          "//"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrputil.c",
+      "prior_state": "excluded-projection-confirmed",
+      "line_mismatch_leads": 0,
+      "examples": []
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "prior_state": "individual-review-confirmed",
+      "line_mismatch_leads": 7,
+      "examples": [
+        [
+          351,
+          352,
+          "//"
+        ],
+        [
+          352,
+          353,
+          "// Clear the internal error flag"
+        ],
+        [
+          353,
+          354,
+          "//"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/mapembed.c",
+      "prior_state": "excluded-projection-confirmed",
+      "line_mismatch_leads": 1,
+      "examples": [
+        [
+          93,
+          82,
+          "#endif"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcommdlg.c",
+      "prior_state": "strict-conditional-confirmed",
+      "line_mismatch_leads": 7,
+      "examples": [
+        [
+          233,
+          36,
+          "#else"
+        ],
+        [
+          654,
+          657,
+          "// If the app has GP Faulted we don't want to pass it any more input"
+        ],
+        [
+          655,
+          658,
+          "// This should be removed when USER32 does clean up on task death so"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsdata.c",
+      "prior_state": "different-file-review",
+      "line_mismatch_leads": 0,
+      "examples": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsext.c",
+      "prior_state": "individual-review-confirmed",
+      "line_mismatch_leads": 0,
+      "examples": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/wshell.c",
+      "prior_state": "identical-confirmed",
+      "line_mismatch_leads": 0,
+      "examples": []
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/ex/probe.c",
+      "prior_state": "individual-review-confirmed",
+      "line_mismatch_leads": 0,
+      "examples": []
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.c",
+      "prior_state": "excluded-projection-confirmed",
+      "line_mismatch_leads": 1,
+      "examples": [
+        [
+          184,
+          177,
+          "#endif // NTOS_KERNEL_RUNTIME"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/time.c",
+      "prior_state": "strict-conditional-confirmed",
+      "line_mismatch_leads": 0,
+      "examples": []
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/api/apibuff.c",
+      "prior_state": "individual-review-confirmed",
+      "line_mismatch_leads": 1,
+      "examples": [
+        [
+          47,
+          14,
+          "--*/"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+      "prior_state": "excluded-projection-confirmed",
+      "line_mismatch_leads": 0,
+      "examples": []
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "prior_state": "different-file-review",
+      "line_mismatch_leads": 0,
+      "examples": []
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/time.c",
+      "prior_state": "code-equivalent-confirmed",
+      "line_mismatch_leads": 0,
+      "examples": []
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "prior_state": "strict-conditional-confirmed",
+      "line_mismatch_leads": 3,
+      "examples": [
+        [
+          22,
+          13,
+          "--*/"
+        ],
+        [
+          107,
+          108,
+          "#else"
+        ],
+        [
+          112,
+          109,
+          "#endif // def UNICODE"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "prior_state": "strict-conditional-confirmed",
+      "line_mismatch_leads": 0,
+      "examples": []
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
+      "prior_state": "individual-review-confirmed",
+      "line_mismatch_leads": 0,
+      "examples": []
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apiwksta.c",
+      "prior_state": "individual-review-confirmed",
+      "line_mismatch_leads": 0,
+      "examples": []
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xssubs.c",
+      "prior_state": "individual-review-confirmed",
+      "line_mismatch_leads": 0,
+      "examples": []
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+      "prior_state": "strict-conditional-confirmed",
+      "line_mismatch_leads": 0,
+      "examples": []
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+      "prior_state": "strict-conditional-confirmed",
+      "line_mismatch_leads": 1,
+      "examples": [
+        [
+          1580,
+          1520,
+          "#endif // _WINCON_"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbmacro.h",
+      "prior_state": "strict-no-emission-confirmed",
+      "line_mismatch_leads": 1,
+      "examples": [
+        [
+          99,
+          95,
+          "#endif"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbtypes.h",
+      "prior_state": "strict-conditional-confirmed",
+      "line_mismatch_leads": 1,
+      "examples": [
+        [
+          112,
+          109,
+          "#else"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/crypt.h",
+      "prior_state": "identical-confirmed",
+      "line_mismatch_leads": 0,
+      "examples": []
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "prior_state": "individual-review-confirmed",
+      "line_mismatch_leads": 9,
+      "examples": [
+        [
+          1413,
+          1412,
+          "#endif"
+        ],
+        [
+          1417,
+          1416,
+          "#endif"
+        ],
+        [
+          1421,
+          1420,
+          "#endif"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+      "prior_state": "individual-review-confirmed",
+      "line_mismatch_leads": 1,
+      "examples": [
+        [
+          522,
+          524,
+          "#endif"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "prior_state": "different-file-review",
+      "line_mismatch_leads": 16,
+      "examples": [
+        [
+          3323,
+          155,
+          "PVOID Destination,"
+        ],
+        [
+          3324,
+          156,
+          "SIZE_T Length,"
+        ],
+        [
+          4940,
+          4946,
+          "__inline LUID"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+      "prior_state": "different-file-review",
+      "line_mismatch_leads": 0,
+      "examples": []
+    }
+  ],
+  "lf_matching_line_triage_with_leads": 22,
+  "prior_review_with_leads": 19,
+  "triage_limit": "Raw matching lines include repeated, excluded and comment-only candidates; these counts are leads and do not establish actual defects."
+}

@@ -163,6 +163,7 @@ ERROR RECOVERY    :     errors are ignored
 #ifndef PROD
 #line 163
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
+#line 165
 #endif
 #line 166
 
@@ -185,6 +186,7 @@ ERROR RECOVERY    :     errors are ignored
 #include "mvdm_softpc_termination.h"
 
 
+#line 182
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::: INTERMODULE EXPORTS */
 
 #line 184
@@ -256,6 +258,7 @@ BOOL   bUpdateRtc;
 
 
 
+#line 247
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::: NT timer initialise ::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -403,6 +406,7 @@ void host_timer_event()
 #ifdef X86GFX
 #line 391
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
+#line 398
 #endif /* X86GFX */
 #line 399
 
@@ -533,6 +537,7 @@ void host_GetSysTime(struct host_timeval *time)
     LARGE_INTEGER liTime;
     ULONG remainder;
 
+#line 518
         // Don't call kernel unless we have to.
 #line 519
     if (bDoingTicInterrupt) {
@@ -591,9 +596,11 @@ DWORD HeartBeatThread(PVOID pv)
    DWORD dwRet = (DWORD)-1;
 
    try {
+#line 571
 #ifdef MONITOR
 #line 572
 #error Excluded unsupported monitor timer lock setup
+#line 578
 #endif
 #line 578
 
@@ -617,10 +624,12 @@ DWORD HeartBeatThread(PVOID pv)
 #ifdef X86GFX
 #line 597
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
+#line 606
 #endif
 #line 607
 
 
+#line 608
 #ifdef MONITOR
 #line 609
 #error Excluded unsupported monitor timer lock release
@@ -733,6 +742,7 @@ HBresume:
 #ifdef PIG
 #line 713
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
+#line 718
 #else
 #line 719
        time_tick();
@@ -788,6 +798,7 @@ NTSTATUS DelayHeartBeat(LONG Delay)
 #ifdef MONITOR
 #line 769
 #error Excluded unsupported monitor heartbeat wait
+#line 819
 #else
 #line 820
 //
@@ -811,14 +822,16 @@ NTSTATUS DelayHeartBeat(LONG Delay)
          }
 
 
+#line 840
 #endif
-#line 838
+#line 842
          // alerted to die
      /* DIVERGENCE: MVDM-HOST-DIV-040. The same-shaped public Win32 adapter
       * wakes this alertable wait through QueueUserAPC.  Modern user-mode
       * wait completion is STATUS_USER_APC rather than NT4's private
       * STATUS_ALERTED; both mean the original heartbeat must terminate. */
      if (status == STATUS_ALERTED || status == STATUS_USER_APC)  {
+#line 844
          CloseHandle(ThreadInfo.HeartBeat.Handle);
          ThreadInfo.HeartBeat.Handle = NULL;
          ThreadInfo.HeartBeat.ID = 0;
@@ -826,6 +839,7 @@ NTSTATUS DelayHeartBeat(LONG Delay)
          }
 
 
+#line 851
       // Must be an error, announce it to the world
 #line 852
      DisplayErrorTerm(EHS_FUNC_FAILED, status,__FILE__,__LINE__);

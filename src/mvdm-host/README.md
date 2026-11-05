@@ -3173,3 +3173,5 @@ changes the location of declarations at the existing adaptation boundaries.
 T475 S3 P7 retargets the existing async request include in
 `vdmredir/vrnmpipe.c` to the shared redirector/worker contract. The original
 queue and completion calls and the worker-owned session state are unchanged.
+
+MVDM-HOST-DIV-850: restore original condition-directive and retained-source diagnostic line mappings in `softpc.new/base/inc/host_sas.h`, `softpc.new/base/inc/ios.h`, `softpc.new/base/video/v7_video.c`, `softpc.new/base/video/vga_mode.c`, `softpc.new/host/inc/error.h`, `softpc.new/host/src/cpucstbs.c`, `softpc.new/host/src/nt_eoi.c`, `softpc.new/host/src/nt_timer.c` and `wow32/wparam.c`. Existing selected branches and registered adaptations remain; per-file evidence and batch verification are in the T476 S2 records.

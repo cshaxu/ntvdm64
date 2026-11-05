@@ -200,6 +200,7 @@ PVOID AddParamMap(DWORD dwPtr32, DWORD dwPtr16)
     /* DIVERGENCE(MVDM-HOST-DIV-347): preserve the nonzero map invariant. */
     if (!dwPtr32 || !dwPtr16) return NULL;
 
+#line 193
      // see if it's there already
 #line 194
     if (FindParamMap(&fp, dwPtr16, PARAM_16)) {
@@ -249,6 +250,7 @@ PVOID AddParamMap(DWORD dwPtr32, DWORD dwPtr16)
 #ifdef MAPPARAM_EXTRA
 #line 221
 #error Unsupported excluded original configuration
+#line 253
 #endif
 #line 254
 
@@ -284,6 +286,7 @@ PVOID ParamMapUpdateNode(DWORD dwPtr, UINT fMode, VOID* lpNode)
 #ifdef MAPPARAM_EXTRA
 #line 285
 #error Unsupported excluded original configuration
+#line 289
 #endif
 #line 287
 
@@ -467,6 +470,7 @@ else { \
 #ifdef DEBUG
 #line 463
 #error Excluded unsupported DEBUG WOW profile
+#line 470
 #else 
 #line 471
 #define LINK_WORKLIST(pc, pNew, pLast)
@@ -533,6 +537,7 @@ LPVOID CacheBlockAllocate(PBLKCACHE pc, DWORD dwSize)
 #ifdef DEBUG
 #line 531
 #error Excluded unsupported DEBUG WOW profile
+#line 533
 #endif
 #line 534
                 return (LPVOID)(pbh+1);
@@ -561,6 +566,7 @@ VOID CacheBlockFree(PBLKCACHE pc, LPVOID lpv)
 #ifdef DEBUG
 #line 558
 #error Excluded unsupported DEBUG WOW profile
+#line 581
 #else
 #line 582
         PBLKHEADER pbhf = pc->pCacheFree;

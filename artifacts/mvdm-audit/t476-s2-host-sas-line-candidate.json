@@ -1,0 +1,13 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/host_sas.h",
+  "original_sha256": "42f3e8b6a7ad9f4628ae35cd133b6747a19b840c0d3ead23d2d1567874c4e717",
+  "previous_sha256": "2f8a9d4296d115f48a74eacdb91ad4b37367ef5043f865a91732753db2c8e1df",
+  "current_sha256": "7c313552f0116e4073b25721bc4cd45eba237f33188fd897b0d6e1c90f78a4a3",
+  "condition_structure": "original #if BASE_SAS && HOST_SAS and #ifndef BASE_SAS / #ifdef HOST_SAS retained; entire unsupported bodies rejected without preserving inner groups",
+  "corrected_endif_original_lines": [
+    66,
+    199,
+    201
+  ],
+  "status": "validated: original LF-based condition/line comparison, grouped cached build, product comparison and publication; see batch18 evidence"
+}

@@ -1,0 +1,10 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+  "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33",
+  "previous_sha256": "e3cd9c2880c18439f2e8a7b9dd10d9e42d25fa287490561509bbf356e86df2d8",
+  "current_sha256": "16b1f625aecc8b96a86ddf57abc095512f18aa646243a68c75cffcf3d49d5f9e",
+  "condition_structure": "15 matched original condition groups: all arm and closing-endif logical lines match after correction",
+  "verification": "zero mismatches across nonblank original lines retained by source comparison",
+  "status": "validated: original LF-based condition/line comparison, grouped cached build, product comparison and publication; see batch18 evidence",
+  "risk": "source uses __LINE__; compare product output and isolate diagnostic-only differences before waiving regression"
+}

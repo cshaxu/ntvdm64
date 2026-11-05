@@ -1,0 +1,11 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/cpucstbs.c",
+  "original_sha256": "0e114c6368a616dc87cdf4311aff19d50283e38a51b3f0e3301cbc45487ddaeb",
+  "previous_sha256": "9c5da3266f1f8729ed3dd80bfc74e748e28b23852372390385f399540abd45a7",
+  "current_sha256": "8aa6950c9a7694c8adcb50b304e411121595278e699ad1bb233f4d417dc49a2d",
+  "condition_structure": "original #ifndef MONITOR / #ifdef A3CPU retained; selected outer arm has no emitted body, A3CPU body rejected",
+  "correction": "#line 31 before inner #endif; outer #endif already anchored at original line 32",
+  "production_context": "worker obj/host/cpucstbs.obj",
+  "status": "validated: original LF-based condition/line comparison, grouped cached build, product comparison and publication; see batch18 evidence",
+  "limits": "production compilation retains an empty translation unit; no runtime A3CPU behavior is claimed"
+}

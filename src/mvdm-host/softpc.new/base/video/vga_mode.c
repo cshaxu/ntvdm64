@@ -125,6 +125,7 @@ GLOBALS		  :	uses EGA_GRAPH struct, specially display_state to
 #ifdef GISP_SVGA 
 #line 124
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
+#line 126
 #endif /* GISP_SVGA */
 #line 127
 
@@ -137,6 +138,7 @@ GLOBALS		  :	uses EGA_GRAPH struct, specially display_state to
 #ifdef SEGMENTATION
 #line 135
 #error Excluded unsupported SEGMENTATION configuration
+#line 141
 #endif
 #line 142
 
@@ -210,6 +212,7 @@ DISPLAY_MODE	mode;
 #if defined(NTVDM) && defined(MONITOR)
 #line 209
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
+#line 241
 #endif	/* MONITOR */
 #line 242
 /* NTVDM monitor: All text monitor cases dealt with. For frozen graphics */
@@ -224,7 +227,9 @@ DISPLAY_MODE	mode;
 #ifdef GISP_SVGA
 #line 252
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
+#line 254
 #else /* GISP_SVGA */
+#line 255
 			set_gfx_update_routines( ega_wrap_split_text_update, SIMPLE_MARKING, NO_SCROLL );
 #endif /* GISP_SVGA */
 #line 257
@@ -238,7 +243,9 @@ DISPLAY_MODE	mode;
 #ifdef GISP_SVGA
 #line 265
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
+#line 267
 #else /* GISP_SVGA */
+#line 268
 			set_gfx_update_routines( ega_split_text_update, SIMPLE_MARKING, NO_SCROLL );
 #endif /* GISP_SVGA */
 #line 270
@@ -250,7 +257,9 @@ DISPLAY_MODE	mode;
 #ifdef GISP_SVGA
 #line 276
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
+#line 278
 #else /* GISP_SVGA */
+#line 279
 			set_gfx_update_routines( ega_wrap_text_update, SIMPLE_MARKING, NO_SCROLL );
 #endif /* GISP_SVGA */
 #line 281
@@ -267,6 +276,7 @@ DISPLAY_MODE	mode;
 #else
 #line 292
 #error Unsupported excluded original configuration
+#line 299
 #endif	/* NTVDM */
 #line 300
 			break;
@@ -298,6 +308,7 @@ DISPLAY_MODE	mode;
 #ifdef GISP_SVGA
 #line 323
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
+#line 325
 #endif /* GISP_SVGA */
 #line 326
 			set_gfx_update_routines( cga_med_graph_update, CGA_GRAPHICS_MARKING, CGA_GRAPH_SCROLL );
@@ -307,6 +318,7 @@ DISPLAY_MODE	mode;
 #ifdef GISP_SVGA
 #line 331
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
+#line 333
 #endif /* GISP_SVGA */
 #line 334
 			set_gfx_update_routines( cga_hi_graph_update, CGA_GRAPHICS_MARKING, CGA_GRAPH_SCROLL );
@@ -318,6 +330,7 @@ DISPLAY_MODE	mode;
 #ifdef GISP_SVGA
 #line 341
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
+#line 343
 #endif /* GISP_SVGA */
 #line 344
 			set_gfx_update_routines( ega_wrap_graph_update, EGA_GRAPHICS_MARKING, NO_SCROLL );
@@ -329,11 +342,13 @@ DISPLAY_MODE	mode;
 #ifdef GISP_SVGA
 #line 351
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
+#line 353
 #endif /* GISP_SVGA */
 #line 354
 #ifdef GORE
 #line 355
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
+#line 359
 #else
 #line 360
 			if (get_256_colour_mode())
@@ -350,6 +365,7 @@ DISPLAY_MODE	mode;
 #ifdef GISP_SVGA
 #line 371
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
+#line 373
 #endif /* GISP_SVGA */
 #line 374
 			set_gfx_update_routines( ega_wrap_split_graph_update, EGA_GRAPHICS_MARKING, NO_SCROLL );
@@ -399,6 +415,7 @@ DISPLAY_MODE	mode;
 #ifdef GISP_SVGA
 #line 413
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
+#line 415
 #endif /* GISP_SVGA */
 #line 416
 			do_display_trace("dumping EGA_GRAPH struct ...", dump_EGA_GRAPH());
@@ -411,6 +428,7 @@ DISPLAY_MODE	mode;
 #ifdef GISP_SVGA
 #line 424
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
+#line 426
 #endif /* GISP_SVGA */
 #line 427
 			do_display_trace("dumping EGA_GRAPH struct ...", dump_EGA_GRAPH());

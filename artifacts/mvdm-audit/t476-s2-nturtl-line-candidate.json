@@ -1,0 +1,28 @@
+{
+  "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+  "original_sha256": "c6b7844e2e1248ac38ee90dd8173f95ab0f7997d7a7cfbafda851cc07cc80921",
+  "previous_sha256": "9db2ed0cd6cb791cd9d53b9eff623b3d02a7010ccd858c7ab7aa7cdc07f142ef",
+  "current_sha256": "9db2ed0cd6cb791cd9d53b9eff623b3d02a7010ccd858c7ab7aa7cdc07f142ef",
+  "changes": [
+    {
+      "entity": "RtlIsDosDeviceName_U",
+      "was": 257,
+      "original": 258
+    },
+    {
+      "entity": "RtlDosPathNameToNtPathName_U",
+      "was": 294,
+      "original": 295
+    },
+    {
+      "entity": "_NTURTL_ closing endif",
+      "was": 1103,
+      "original": 1105
+    }
+  ],
+  "before_compiler_evidence": "build/t476-s2/wkman-header-preprocess.txt",
+  "branch_evidence": "sole original _NTURTL_ guard hit in S1; no other original condition groups",
+  "status": "withdrawn: source restored; original physical LF lines are 257, 294, 1103",
+  "scope": "Declarations are pre-existing registered OPENNT-HOST-007 subset; no behavioral change claimed",
+  "correction_reason": "Python splitlines counted non-LF control characters as line breaks; MSVC counts LF"
+}
