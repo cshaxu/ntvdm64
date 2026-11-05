@@ -241,3 +241,13 @@ The prior temporary S1 worktree had been removed, so the first reconstruction at
 The [ten-component comparison](../../../artifacts/mvdm-audit/t476-s2-batch2-pe-comparison.json) found eight byte-identical images and only COFF/debug timestamp changes in NTVDM and WOW32. As authorized, runtime tests were not repeated. The complete package and hook license were published and SHA-256 verified at `assets/release` and `O:/winnt/system32`; the previous package is backed up under `build/t476-s2/batch2-publish-backup`.
 
 The [four completed header reviews](../../../artifacts/mvdm-audit/t476-s2-batch2-final-reviews.json) cover `wowmmcb.h`, `cfpu_def.h`, `nt_inthk.h` and `client/globals.h`, with original condition inventories, observed arm dispositions, candidate hashes and compiler observations. The other six candidates are built and published but remain open for full-file review. Total: **797 of 1,055 complete; 258 open**.
+
+
+### Completed startup, host utility and WOW control reviews
+
+The [three source reviews](../../../artifacts/mvdm-audit/t476-s2-batch2-source-reviews.json) complete `support/main.c`, `host/nt_unix.c` and `wow32/wcntl32.c`. Full original/current diffs, branch dispositions and registered adaptations were checked. In `main.c`, actual expanded compiler output also confirms the two SoftPC globals and both startup calls at their original lines; an earlier naive static scan had treated an inactive branch's `#line` as active. The second batch now has seven completed files and three still open. Total: **800 of 1,055 complete; 255 open**.
+
+
+### Completed probe and native declaration subset reviews
+
+The [three subset reviews](../../../artifacts/mvdm-audit/t476-s2-batch2-sdk-reviews.json) complete `probe.c`, `ntexapi.h` and `ntpsapi.h`. They record the original condition structures and S1 arm dispositions, exact selected declaration/compiler lines, registered selected subsets and the specific omitted NT4 function or declaration groups. Empty frames correspond to removed code outside those subsets; they are not claimed to reproduce the omitted functionality. The two original `NtGetTickCount` variants were distinguished by their actual branches. All ten files in the second source batch are now reviewed; total: **803 of 1,055 complete; 252 open**.

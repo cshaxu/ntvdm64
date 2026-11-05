@@ -1,0 +1,324 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "current_sha256": "193d9b780feb1557cd029ff2d5c265e9540d3b16339072ab92e08869d5b77fd0",
+      "original_sha256": "5dfdca835f1ca6fddf07826f2b4aa9e25f4c8bd0ceef21b2dce9884de721376c",
+      "arm_dispositions": [
+        {
+          "directive": "ifdef",
+          "expression": "SECURE",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifndef",
+          "expression": "CPU_40_STYLE",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "else",
+          "expression": "",
+          "status_before_s1": "hit",
+          "hit_contexts": [
+            173
+          ]
+        },
+        {
+          "directive": "ifdef",
+          "expression": "ANSI",
+          "status_before_s1": "hit",
+          "hit_contexts": [
+            173
+          ]
+        },
+        {
+          "directive": "else",
+          "expression": "",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifdef",
+          "expression": "REAL_VGA",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifdef",
+          "expression": "SOFTWINDOWS",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "else",
+          "expression": "",
+          "status_before_s1": "hit",
+          "hit_contexts": [
+            173
+          ]
+        },
+        {
+          "directive": "ifndef",
+          "expression": "NTVDM",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "if",
+          "expression": "defined(NTVDM) || defined(host_main)",
+          "status_before_s1": "hit",
+          "hit_contexts": [
+            173
+          ]
+        },
+        {
+          "directive": "else",
+          "expression": "",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifndef",
+          "expression": "CPU_40_STYLE",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifdef",
+          "expression": "SECURE",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifdef",
+          "expression": "SETUID_ROOT",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "if",
+          "expression": "!defined(PROD) || defined(HUNTER)",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "if",
+          "expression": "!defined(NTVDM) && !defined(macintosh) && !defined(VMS)",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifndef",
+          "expression": "PROD",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifdef",
+          "expression": "SECURE",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifndef",
+          "expression": "NTVDM",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifdef",
+          "expression": "SECURE",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "if",
+          "expression": "defined(CPU_40_STYLE) && !defined(CCPU)",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifndef",
+          "expression": "PROD",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifndef",
+          "expression": "macintosh",
+          "status_before_s1": "hit",
+          "hit_contexts": [
+            173
+          ]
+        },
+        {
+          "directive": "if",
+          "expression": "defined(PROFILE) && !defined(CPU_40_STYLE)",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "if",
+          "expression": "defined(NTVDM) || defined(macintosh)",
+          "status_before_s1": "hit",
+          "hit_contexts": [
+            173
+          ]
+        },
+        {
+          "directive": "if",
+          "expression": "!defined(PROD) || defined(HUNTER)",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifndef",
+          "expression": "PROD",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifdef",
+          "expression": "GISP_SVGA",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifndef",
+          "expression": "A3CPU",
+          "status_before_s1": "hit",
+          "hit_contexts": [
+            173
+          ]
+        },
+        {
+          "directive": "ifndef",
+          "expression": "GISP_SVGA",
+          "status_before_s1": "hit",
+          "hit_contexts": [
+            173
+          ]
+        },
+        {
+          "directive": "else",
+          "expression": "",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifdef",
+          "expression": "REAL_VGA",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifdef",
+          "expression": "REAL_VGA",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifdef",
+          "expression": "IPC",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifdef",
+          "expression": "NTVDM",
+          "status_before_s1": "hit",
+          "hit_contexts": [
+            173
+          ]
+        },
+        {
+          "directive": "ifdef",
+          "expression": "HFX",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        }
+      ],
+      "compiler_line_observations": 12,
+      "transformed_startup_controls": [
+        [
+          79,
+          79,
+          "IBOOL Running_SoftWindows = 0;"
+        ],
+        [
+          80,
+          80,
+          "CHAR *SPC_Product_Name = \"SoftPC\";"
+        ],
+        [
+          201,
+          201,
+          "init_virtual_drivers();"
+        ],
+        [
+          208,
+          208,
+          "config();"
+        ]
+      ],
+      "local_diff_review": "Full original/current diff reviewed. Registered C-VID vector binding and selected startup providers remain; every observed arm is hit or excluded."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "current_sha256": "6937966cf58120b3c40caf0f822abf7d7703112a35dc2d337e9517f9d69c5a02",
+      "original_sha256": "f2ab1f40420a0928884cf524305a9b87b8c65b0c3440ab97367aa1cbce6417a7",
+      "arm_dispositions": [
+        {
+          "directive": "ifndef",
+          "expression": "PROD",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        },
+        {
+          "directive": "ifndef",
+          "expression": "MONITOR",
+          "status_before_s1": "hit",
+          "hit_contexts": [
+            327
+          ]
+        },
+        {
+          "directive": "ifndef",
+          "expression": "MONITOR",
+          "status_before_s1": "hit",
+          "hit_contexts": [
+            327
+          ]
+        },
+        {
+          "directive": "ifndef",
+          "expression": "MONITOR",
+          "status_before_s1": "hit",
+          "hit_contexts": [
+            327
+          ]
+        },
+        {
+          "directive": "ifdef",
+          "expression": "NO_LONGER_USED",
+          "status_before_s1": "previously-excluded",
+          "hit_contexts": []
+        }
+      ],
+      "compiler_line_observations": 52,
+      "transformed_startup_controls": [],
+      "local_diff_review": "Full original/current diff reviewed. Registered CRT error, idle wake and firmware lookup boundaries remain; non-product branches excluded."
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcntl32.c",
+      "current_sha256": "185fc06a91d733ed3854db3d0b2f4124ea65c339f4b50a0f0148923212d20c68",
+      "original_sha256": "36c8cb9a46f13998d0459bc4869dc6dd4191423c0429a7335ebd26f68c804b59",
+      "arm_dispositions": [],
+      "compiler_line_observations": 24,
+      "transformed_startup_controls": [],
+      "local_diff_review": "Full original/current diff reviewed. DIV-347/349 retain original control-message conversion with scoped resource ownership."
+    }
+  ]
+}
