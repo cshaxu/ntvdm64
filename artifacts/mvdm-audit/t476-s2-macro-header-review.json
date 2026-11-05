@@ -1,0 +1,266 @@
+{
+  "method": "Hash-bound original tree and source-line projections, all recorded hit arms covered in actual product preprocessing; compare emitted declarations at original line positions or note no emitted code. No runtime or unobserved configuration claim.",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.h",
+      "current_sha256": "ea9842a3d092fb68850c3155246779d174aa5423699b51d6ea9203617b39441e",
+      "original_sha256": "8b4622e066f61c6815dbadf3f3c735d7dd29210673a6930f354aaf0e2be880e8",
+      "original_tree_and_line_evidence": "s13-r1355-eof-continuation-review.json",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.h",
+        "current_sha256": "ea9842a3d092fb68850c3155246779d174aa5423699b51d6ea9203617b39441e",
+        "original_sha256": "8b4622e066f61c6815dbadf3f3c735d7dd29210673a6930f354aaf0e2be880e8",
+        "groups": [
+          {
+            "original_endif": 33,
+            "current_endif": 35,
+            "next_matched_code": null
+          }
+        ],
+        "passed": false,
+        "matched_lines": 29
+      },
+      "hit_arms": 2,
+      "excluded_arms": 1,
+      "preprocessor_observations": [
+        {
+          "context": 19,
+          "lines": [
+            [
+              19,
+              "extern IU8 phy_r8 (IU32 addr);"
+            ],
+            [
+              20,
+              "extern IU16 phy_r16 (IU32 addr);"
+            ],
+            [
+              21,
+              "extern IU32 phy_r32 (IU32 addr);"
+            ],
+            [
+              22,
+              "extern void phy_w8 (IU32 addr, IU8 value);"
+            ],
+            [
+              23,
+              "extern void phy_w16 (IU32 addr, IU16 value);"
+            ],
+            [
+              24,
+              "extern void phy_w32 (IU32 addr, IU32 value);"
+            ],
+            [
+              26,
+              "extern IU32 SasWrapMask;"
+            ]
+          ]
+        }
+      ],
+      "line_review": "Macro-expanded declarations correspond to original line positions; type and annotation macro expansions account for text differences."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/base_def.h",
+      "current_sha256": "8145696480049e7aba5e79045a59a76bbf6042d35da109bb405e827394ca0953",
+      "original_sha256": "084991cfc23dc79529cc67a43488ec114be882fb62a9f95b879e1b6995f7afae",
+      "original_tree_and_line_evidence": "s13-r1381-basedef-review.json",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/base/inc/base_def.h",
+        "current_sha256": "8145696480049e7aba5e79045a59a76bbf6042d35da109bb405e827394ca0953",
+        "original_sha256": "084991cfc23dc79529cc67a43488ec114be882fb62a9f95b879e1b6995f7afae",
+        "multi_hit_groups": [
+          [
+            39,
+            [
+              0,
+              1
+            ]
+          ],
+          [
+            123,
+            [
+              0,
+              1
+            ]
+          ]
+        ],
+        "projections_checked": 4,
+        "tree": {
+          "retained": 6,
+          "excluded": 3,
+          "implicit_continuation": 1,
+          "groups": 6
+        }
+      },
+      "hit_arms": 6,
+      "excluded_arms": 3,
+      "preprocessor_observations": [
+        {
+          "context": 19,
+          "lines": []
+        },
+        {
+          "context": 338,
+          "lines": []
+        }
+      ],
+      "line_review": "Included in marked contexts; no emitted code lines. Logical source projection and original anchors are recorded in prior evidence."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/debug.h",
+      "current_sha256": "9de0bb6700c06fa12f84ede05f0eeb54c30995c33981340a18232cfd74d46c33",
+      "original_sha256": "59246b3c18bf6dfcd79b4e61bf961bc0382800deb4d968c198ceb415c284f21b",
+      "original_tree_and_line_evidence": "s13-r1389-natural-line-review.json",
+      "prior_record": {
+        "path": "src/mvdm-host/softpc.new/base/inc/debug.h",
+        "current_sha256": "9de0bb6700c06fa12f84ede05f0eeb54c30995c33981340a18232cfd74d46c33",
+        "original_sha256": "59246b3c18bf6dfcd79b4e61bf961bc0382800deb4d968c198ceb415c284f21b",
+        "matched_lines": 106,
+        "strict_tree": {
+          "retained": 3,
+          "groups": 4,
+          "excluded": 3,
+          "implicit_retained_anchor": 1
+        },
+        "arm_states": {
+          "historical-hit": 3,
+          "excluded-error": 3
+        }
+      },
+      "hit_arms": 3,
+      "excluded_arms": 3,
+      "preprocessor_observations": [
+        {
+          "context": 19,
+          "lines": []
+        },
+        {
+          "context": 338,
+          "lines": []
+        }
+      ],
+      "line_review": "Included in marked contexts; no emitted code lines. Logical source projection and original anchors are recorded in prior evidence."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tstr.h",
+      "current_sha256": "e60bcda62151ea735f3d18d731a2d6da3be70c06fcb4c8c849943fa68f75292c",
+      "original_sha256": "dfc0a04bbeb35130d655e20521c972d43df3500efda32d7de6ddcea53be791c6",
+      "original_tree_and_line_evidence": "s13-r1377-multihit-review.json",
+      "prior_record": {
+        "path": "src/non-mvdm/public/internal/base/inc/tstr.h",
+        "current_sha256": "e60bcda62151ea735f3d18d731a2d6da3be70c06fcb4c8c849943fa68f75292c",
+        "original_sha256": "dfc0a04bbeb35130d655e20521c972d43df3500efda32d7de6ddcea53be791c6",
+        "multi_hit_groups": [
+          [
+            110,
+            [
+              0,
+              1
+            ]
+          ]
+        ],
+        "projections_checked": 2,
+        "tree": {
+          "retained": 4,
+          "excluded": 3,
+          "groups": 5
+        }
+      },
+      "hit_arms": 4,
+      "excluded_arms": 3,
+      "preprocessor_observations": [
+        {
+          "context": 475,
+          "lines": [
+            [
+              85,
+              "LPWSTR"
+            ],
+            [
+              86,
+              "ultow ("
+            ],
+            [
+              87,
+              "DWORD Value,"
+            ],
+            [
+              88,
+              "LPWSTR Area,"
+            ],
+            [
+              89,
+              "DWORD Radix"
+            ],
+            [
+              90,
+              ");"
+            ],
+            [
+              92,
+              "LONG"
+            ],
+            [
+              93,
+              "wtol ("
+            ],
+            [
+              94,
+              "LPWSTR Src"
+            ],
+            [
+              95,
+              ");"
+            ]
+          ]
+        },
+        {
+          "context": 499,
+          "lines": [
+            [
+              85,
+              "LPWSTR"
+            ],
+            [
+              86,
+              "ultow ("
+            ],
+            [
+              87,
+              "DWORD Value,"
+            ],
+            [
+              88,
+              "LPWSTR Area,"
+            ],
+            [
+              89,
+              "DWORD Radix"
+            ],
+            [
+              90,
+              ");"
+            ],
+            [
+              92,
+              "LONG"
+            ],
+            [
+              93,
+              "wtol ("
+            ],
+            [
+              94,
+              "LPWSTR Src"
+            ],
+            [
+              95,
+              ");"
+            ]
+          ]
+        }
+      ],
+      "line_review": "Macro-expanded declarations correspond to original line positions; type and annotation macro expansions account for text differences."
+    }
+  ]
+}
