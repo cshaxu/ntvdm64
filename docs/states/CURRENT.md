@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T474 S2** — split generic Win32 I/O ownership.
+**Active: M0 T474 S2 P1** — consolidate Console process snapshots into process observation.
 
 T473 was closed by owner direction; its [closure](../history/m0-t473-closure.md)
 and queued mirror audit remain authoritative. The 51-commit sibling range was integrated and delivered in S1; [evidence](../etc/evidence/m0-t474-s1-shared-range-integration.md).
@@ -22,8 +22,9 @@ and queued mirror audit remain authoritative. The 51-commit sibling range was in
 | Files And ABI Surface | `src/lib-win32`, consumers, build generators, tests and documentation; internal static interfaces only. |
 | Applicable Rules | Preserve authorized source, use cached builds, coherent publication, lifecycle and RPC boundaries. |
 | Verification | x86/x64 full cached build, relevant focused checks, Full selected product suite, release hash validation. |
-| Delivery State | Complete candidate built, focused checks and Full selected gates passed, ten components and hook license published and hash verified at both destinations; [evidence](../etc/evidence/m0-t474-s2-win32-library-split.md). Awaiting owner acceptance. |
-| Expected Markers | No lib-win32/io references or lib-io archive; pipe, console and file consumers link and operate correctly. |
+| P1 Admission | Owner approved moving Console member snapshots into `process-observation`, retiring the separate Console library without changing behavior. Preserve the prior S2 delivery [evidence](../etc/evidence/m0-t474-s2-win32-library-split.md). |
+| Delivery State | P1 cached x86/x64 builds, focused checks and Full selected gates passed; ten-component candidate and hook license published and verified at both destinations. [Evidence](../etc/evidence/m0-t474-s2-win32-library-split.md). Awaiting owner acceptance. |
+| Expected Markers | Console membership is owned by process-observation; no separate lib-console archive; all consumers link and operate correctly. |
 | Asset Needs | Existing caches, candidate runtime package, unchanged guest media and isolated test resources. |
 | Reporting Requirements | Ownership and build changes, test results, full release and commit identities. |
 | Stop Conditions | Unapproved observable semantic change or guest modifications. |

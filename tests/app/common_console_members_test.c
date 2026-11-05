@@ -3,7 +3,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "lib-win32/console/console_members.h"
+#include "lib-win32/process-observation/console_members.h"
 
 static DWORD sequence[8],errors[8],calls,allocations,frees,live,fail_alloc;
 static DWORD checks,failures;
@@ -31,7 +31,7 @@ static DWORD fake_members(LPDWORD buffer,DWORD capacity)
 #define HeapAlloc fake_alloc
 #define HeapFree fake_free
 #define GetConsoleProcessList fake_members
-#include "../../src/lib-win32/console/console_members.c"
+#include "../../src/lib-win32/process-observation/console_members.c"
 #undef GetConsoleProcessList
 #undef HeapFree
 #undef HeapAlloc

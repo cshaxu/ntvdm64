@@ -195,14 +195,14 @@ function Assert-FrontendOwnership([string[]]$Lines) {
             throw "$archive must not embed neutral common providers"
         }
     }
-    foreach($archive in @('common-codec.lib','lib-pipe.lib','lib-console.lib','lib-rpc.lib','lib-process-attributes.lib','lib-process-observation.lib','lib-handle.lib','lib-file.lib','lib-process-hook.lib','common-console.lib','common-rpc.lib')) {
+    foreach($archive in @('common-codec.lib','lib-pipe.lib','lib-rpc.lib','lib-process-attributes.lib','lib-process-observation.lib','lib-handle.lib','lib-file.lib','lib-process-hook.lib','common-console.lib','common-rpc.lib')) {
         foreach($owner in @('run16-exe','ntsrv-exe','ntcon-exe','ntvwm-exe','ntvdm-exe','worker-base')) {
             if(@(Get-FrontendSources $archive $owner).Count) {
                 throw "$archive reverse-depends on $owner"
             }
         }
     }
-    foreach($archive in @('lib-rpc.lib','lib-pipe.lib','lib-console.lib','lib-process-attributes.lib','lib-process-observation.lib','lib-handle.lib','lib-file.lib','lib-process-hook.lib')) {
+    foreach($archive in @('lib-rpc.lib','lib-pipe.lib','lib-process-attributes.lib','lib-process-observation.lib','lib-handle.lib','lib-file.lib','lib-process-hook.lib')) {
         if(@(Get-FrontendSources $archive 'common').Count) {
             throw "$archive must not depend on product common sources"
         }
@@ -211,14 +211,13 @@ function Assert-FrontendOwnership([string[]]$Lines) {
         throw 'Common native packet codec must have exactly one provider'
     }
     if(@(Compare-Object @('pipe/pipe_transfer.c','pipe/pipe_pair.c') @(Get-FrontendSources 'lib-pipe.lib' 'lib-win32')).Count) { throw 'Pipe mechanisms must have one provider' }
-    if(@(Compare-Object @('console/console_members.c') @(Get-FrontendSources 'lib-console.lib' 'lib-win32')).Count) { throw 'Console membership must have one provider' }
     if(@(Compare-Object @('console/client.c') @(Get-FrontendSources 'common-console.lib' 'common')).Count) {
         throw 'Common Console client must have exactly one provider'
     }
     if ('process-hook/payload.c' -notin @(Get-FrontendSources 'lib-process-hook.lib' 'lib-win32')) { throw 'Win32 process-hook payload provider missing' }
     if(@(Compare-Object @('handle/duplicate.c') @(Get-FrontendSources 'lib-handle.lib' 'lib-win32')).Count) { throw 'Win32 handle library must own the duplication implementation' }
     if(@(Compare-Object @('file/identity.c','file/native_path.c') @(Get-FrontendSources 'lib-file.lib' 'lib-win32')).Count) { throw 'Win32 file library must own file identity' }
-    if(@(Compare-Object @('process-observation/observation.c') @(Get-FrontendSources 'lib-process-observation.lib' 'lib-win32')).Count) { throw 'Win32 process observation provider missing' }
+    if(@(Compare-Object @('process-observation/observation.c','process-observation/console_members.c') @(Get-FrontendSources 'lib-process-observation.lib' 'lib-win32')).Count) { throw 'Win32 process observation provider missing' }
     if(@(Compare-Object @('process-attributes/attributes.c') @(Get-FrontendSources 'lib-process-attributes.lib' 'lib-win32')).Count) { throw 'Win32 process library must own the attribute-list implementation' }
     if(@(Compare-Object @('rpc/local_binding.c','rpc/peer.c') @(Get-FrontendSources 'lib-rpc.lib' 'lib-win32')).Count) {
         throw 'Generic RPC binding must have exactly one provider'
@@ -235,7 +234,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
         if('codec/native_launch.c' -notin @(Get-FrontendSources $target 'common')) {
             throw "$target omits the common native packet codec"
         }
-        if('console/console_members.c' -notin @(Get-FrontendSources $target 'lib-win32')) {
+        if('process-observation/console_members.c' -notin @(Get-FrontendSources $target 'lib-win32')) {
             throw "$target omits the common Console snapshot implementation"
         }
     }
@@ -320,7 +319,7 @@ foreach($archive in @('frontend-client.lib','opennt-base-bindings.lib','worker-b
     try { Assert-FrontendOwnership $mutated } catch { $rejected=$true }
     if(!$rejected){throw "Common provider embedding accepted: $archive"}
 }
-foreach($archive in @('common-codec.lib','lib-pipe.lib','lib-console.lib','lib-rpc.lib','lib-process-attributes.lib','lib-process-observation.lib','lib-handle.lib','lib-file.lib','lib-process-hook.lib','common-console.lib','common-rpc.lib')) {
+foreach($archive in @('common-codec.lib','lib-pipe.lib','lib-rpc.lib','lib-process-attributes.lib','lib-process-observation.lib','lib-handle.lib','lib-file.lib','lib-process-hook.lib','common-console.lib','common-rpc.lib')) {
     $mutated=@($graph | ForEach-Object {
         if($_ -match ('^build '+[regex]::Escape($archive)+':')) {
             $_ -replace ': (\S+) ', ': $1 obj/run16/frontend_scope.obj '

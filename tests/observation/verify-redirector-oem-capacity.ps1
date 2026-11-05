@@ -70,7 +70,7 @@ if ($OriginalProviders) {
         $extraFixture.Groups[1].Value.Trim().Split(' ') +
         @('original-mvdm-redir.lib','original-opennt-netlib.lib',
         'original-opennt-netapi-api.lib','original-opennt-xactsrv.lib',
-        'common-root.lib','common-rpc.lib', 'lib-rpc.lib','lib-pipe.lib','lib-console.lib','lib-file.lib',
+        'common-root.lib','common-rpc.lib', 'lib-rpc.lib','lib-pipe.lib','lib-process-observation.lib','lib-file.lib',
         'common-codec.lib','common-console.lib','lib-handle.lib','lib-file.lib',
         'lib-process-hook.lib','lib-crt-compat.lib','common-worker-thread.lib','lib-thread.lib')
     $libraries = $dependencies | ForEach-Object {

@@ -1,6 +1,6 @@
 # Win32 integration libraries
 
-`rpc/` owns generic local Windows RPC binding, asynchronous calls and local peer process matching. `pipe/` provides connected local overlapped byte-pipe pairs and bounded transfers. `console/` samples Console process membership. `file/` owns final native path resolution and file identity comparisons. Client identity validation, protocol and channel admission remain caller-owned.
+`rpc/` owns generic local Windows RPC binding, asynchronous calls and local peer process matching. `pipe/` provides connected local overlapped byte-pipe pairs and bounded transfers. `file/` owns final native path resolution and file identity comparisons. Client identity validation, protocol and channel admission remain caller-owned.
 These libraries do not depend on common, worker-base or product components.
 Protocol and authorization policy remain with their respective owners.
 
@@ -25,6 +25,6 @@ points for callers that require those spellings, using the modern UCRT ABI.
 `thread/` provides the generic x86-compatible thread entry and optional
 per-thread lifecycle callbacks; it owns no product session or policy.
 
-`process-observation/` retains an observation handle, reads process identity
+`process-observation/` samples Console process membership, retains an observation handle, reads process identity
 and image information, queries inherited parent identity, and registers/drains a one-shot exit wait; callbacks,
 process ownership, task identity and decisions remain caller-owned.

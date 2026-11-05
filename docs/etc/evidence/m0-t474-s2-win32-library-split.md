@@ -23,3 +23,17 @@ fixed and Full rerun completed successfully. All ten package images and hook
 license were installed and SHA-256 verified against the candidate manifest at
 `assets/release` and `O:/winnt/system32`. The release manifest records hashes.
 No guest source or guest image was modified. Awaiting owner acceptance.
+
+
+## P1 — Console membership ownership consolidation
+
+The owner approved moving the Console process-membership snapshot into
+`lib-win32/process-observation` and removing `lib-console.lib`. The original
+snapshot API and algorithm remain unchanged. Cached x86 and x64 product builds,
+frontend link-ownership verification, 66 Console snapshot checks and 19 process
+observation lifecycle checks passed. The Full selected product gates passed on
+the staged candidate, including DOS/native nesting, frontend loss, Console
+return, version negative controls and DOS4GW launch. WOW application checks
+observed windows only; they are not gameplay acceptance. The ten candidate
+images and hook license were published and verified against the manifest in
+both `assets/release` and `O:/winnt/system32`. No guest was changed.

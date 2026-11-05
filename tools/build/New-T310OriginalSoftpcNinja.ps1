@@ -1537,17 +1537,16 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/lib-win32/pipe/pipe_pair.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/pipe/pipe_pair.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build lib-pipe.lib: lib obj/lib-win32/pipe/pipe_transfer.obj obj/lib-win32/pipe/pipe_pair.obj' )
-    $graph.Add('build lib-console.lib: lib obj/lib-win32/console/console_members.obj')
     $graph.Add('build obj/tests/win32_pipe_pair.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/win32_pipe_pair_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build win32-pipe-pair-test.exe: broker_test_link obj/tests/win32_pipe_pair.obj lib-pipe.lib lib-console.lib lib-file.lib')
+    $graph.Add('build win32-pipe-pair-test.exe: broker_test_link obj/tests/win32_pipe_pair.obj lib-pipe.lib lib-process-observation.lib lib-file.lib')
     $graph.Add('build obj/common/system_root.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/system_root.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build common-root.lib: lib obj/common/system_root.obj obj/common/guest_environment.obj')
     $graph.Add('build obj/tests/common_system_root.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/common_system_root_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build common-system-root-test.exe: broker_test_link obj/tests/common_system_root.obj common-root.lib')
-    $graph.Add('build obj/lib-win32/console/console_members.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/console/console_members.c')))
+    $graph.Add('build obj/lib-win32/process-observation/console_members.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/process-observation/console_members.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build common-console.lib: lib obj/common/console_client.obj')
     $graph.Add('build obj/lib-win32/rpc/local_binding.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/rpc/local_binding.c')))
@@ -1560,7 +1559,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build lib-process-attributes.lib: lib obj/lib-win32/process-attributes/attributes.obj')
     $graph.Add('build obj/lib-win32/process-observation/observation.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/process-observation/observation.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build lib-process-observation.lib: lib obj/lib-win32/process-observation/observation.obj')
+    $graph.Add('build lib-process-observation.lib: lib obj/lib-win32/process-observation/observation.obj obj/lib-win32/process-observation/console_members.obj')
     $graph.Add('build obj/tests/win32_process_observation.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/win32_process_observation_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build win32-process-observation-test.exe: broker_test_link obj/tests/win32_process_observation.obj lib-process-observation.lib')
@@ -1718,7 +1717,7 @@ if ($Architecture -eq 'x86') {
     $nativeBinding = ' obj/run16/support.obj base-rpc-client-core.lib obj/run16/stub.obj opennt-base-client.lib common-base-srv-bindings.lib common-base-srv-transport.lib original-opennt-rtl-x86.lib'
     # One declared source closure, consumed by the isolated native builder.
     # The x86 product graph must never silently link another worker carrier.
-    $graph.Add('build ntvwm-source-closure: phony worker-base.lib obj/ntvwm/next_command.obj obj/ntvwm/main.obj obj/ntvwm/presentation.obj obj/ntvwm/text_frame.obj obj/ntvwm/console_state.obj obj/ntvwm/execution.obj obj/common/native_process.obj common-native-hook-installer.lib common-native-hook-context.lib lib-process-hook.lib lib-handle.lib lib-file.lib' + $nativeBinding + ' common-root.lib common-rpc.lib lib-rpc.lib lib-pipe.lib lib-console.lib lib-file.lib common-codec.lib common-console.lib')
+    $graph.Add('build ntvwm-source-closure: phony worker-base.lib obj/ntvwm/next_command.obj obj/ntvwm/main.obj obj/ntvwm/presentation.obj obj/ntvwm/text_frame.obj obj/ntvwm/console_state.obj obj/ntvwm/execution.obj obj/common/native_process.obj common-native-hook-installer.lib common-native-hook-context.lib lib-process-hook.lib lib-handle.lib lib-file.lib' + $nativeBinding + ' common-root.lib common-rpc.lib lib-rpc.lib lib-pipe.lib lib-process-observation.lib lib-file.lib common-codec.lib common-console.lib')
     $graph.Add('rule native_worker_import')
     if($NativeWorker){
         $nativeWorkerInput=(Resolve-Path -LiteralPath $NativeWorker).Path
@@ -1774,7 +1773,7 @@ $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthoo
     $graph.Add('  subsystem = windows')
     $graph.Add('build obj/tests/run16_image_classification.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/run16_image_classification_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build run16-image-classification-test.exe: frontend_link obj/tests/run16_image_classification.obj obj/run16/image_classification.obj obj/common/native_image.obj lib-pipe.lib lib-console.lib lib-file.lib obj/run16/support.obj original-opennt-rtl-x86.lib')
+    $graph.Add('build run16-image-classification-test.exe: frontend_link obj/tests/run16_image_classification.obj obj/run16/image_classification.obj obj/common/native_image.obj lib-pipe.lib lib-process-observation.lib lib-file.lib obj/run16/support.obj original-opennt-rtl-x86.lib')
     $graph.Add('build obj/tests/native_gui_startup_probe.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/native_gui_startup_probe.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('rule native_gui_probe_link')
@@ -1851,10 +1850,10 @@ $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthoo
     $graph.Add('build ntvwm-geometry-handoff-probe.exe: console_test_link obj/tests/ntvwm_geometry_handoff.obj')
     $graph.Add('build obj/tests/console_channel_lifetime.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/console_channel_lifetime_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build console-channel-lifetime-test.exe: console_test_link obj/tests/console_channel_lifetime.obj obj/frontend/frontend_session.obj frontend-window.lib lib-pipe.lib lib-console.lib lib-file.lib ' + $consoleGridObject)
+    $graph.Add('build console-channel-lifetime-test.exe: console_test_link obj/tests/console_channel_lifetime.obj obj/frontend/frontend_session.obj frontend-window.lib lib-pipe.lib lib-process-observation.lib lib-file.lib ' + $consoleGridObject)
     $graph.Add('build obj/tests/console_frame_failure.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/console_frame_failure_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags + ' /std:c11 /I "' + (NinjaPath (Join-Path $root 'src/ntcon-exe')) + '"')
-    $graph.Add('build console-frame-failure-test.exe: console_test_link obj/tests/console_frame_failure.obj frontend-window.lib lib-pipe.lib lib-console.lib lib-file.lib ' + $consoleGridObject)
+    $graph.Add('build console-frame-failure-test.exe: console_test_link obj/tests/console_frame_failure.obj frontend-window.lib lib-pipe.lib lib-process-observation.lib lib-file.lib ' + $consoleGridObject)
     $graph.Add('build obj/tests/console_pointer_dispatch_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/console_pointer_dispatch_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('rule pointer_test_link')
@@ -2173,8 +2172,8 @@ for ($commonIndex = 0; $commonIndex -lt $graph.Count; ++$commonIndex) {
         $commonEdge -match '(worker-base\.lib|frontend-client\.lib|opennt-base-bindings\.lib|common-base-srv-bindings\.lib|console_client\.obj|console_channel\.obj|native_request_io\.obj|session_service\.obj|frontend_scope\.obj|console_state\.obj)') {
         $commonBoundary = $commonEdge.IndexOf(' |', $commonLink.Length)
         if ($commonBoundary -ge 0) {
-            $graph[$commonIndex] = $commonEdge.Insert($commonBoundary, ' lib-pipe.lib lib-console.lib lib-file.lib common-codec.lib common-console.lib')
-        } else { $graph[$commonIndex] = $commonEdge + ' lib-pipe.lib lib-console.lib lib-file.lib common-codec.lib common-console.lib' }
+            $graph[$commonIndex] = $commonEdge.Insert($commonBoundary, ' lib-pipe.lib lib-process-observation.lib lib-file.lib common-codec.lib common-console.lib')
+        } else { $graph[$commonIndex] = $commonEdge + ' lib-pipe.lib lib-process-observation.lib lib-file.lib common-codec.lib common-console.lib' }
     }
 }
 if ($Architecture -eq 'x86') {
@@ -2368,14 +2367,6 @@ if ($objectOutputDirectories.Count -gt 0) {
         selected = ($Architecture -eq 'x86')
         disposition = 'connected pipe pairs and bounded byte transfers'
         sources = @('src/lib-win32/pipe/pipe_transfer.c', 'src/lib-win32/pipe/pipe_transfer.h', 'src/lib-win32/pipe/pipe_pair.c', 'src/lib-win32/pipe/pipe_pair.h' | ForEach-Object {
-            [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
-        })
-    }
-    libConsoleComposition = [ordered]@{
-        target = 'lib-console.lib'
-        selected = ($Architecture -eq 'x86')
-        disposition = 'Console process membership sampling'
-        sources = @('src/lib-win32/console/console_members.c', 'src/lib-win32/console/console_members.h' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
     }

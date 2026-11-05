@@ -127,7 +127,7 @@ snapshot allocations are freed; successful copied records belong to the caller.
 NTMON retains reconnect, selection, confirmation, UI and resource lifetime.
 NTSRV remains snapshot and termination authority; common never enumerates tasks.
 
-`lib-win32/console/console_members` shares allocation, bounded capacity growth, current-Console
+`lib-win32/process-observation/console_members` shares allocation, bounded capacity growth, current-Console
 sampling and release only. The caller explicitly supplies its initial/maximum
 capacity and API-read ceiling. A failure exposes neither partial data nor an
 allocation. Growth retries are immediate size negotiation, not timer polling.
