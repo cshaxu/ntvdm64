@@ -28,3 +28,20 @@ lines agree with the original, but that sample is not full-file proof.
 
 At this checkpoint the remaining 875 files have not been certified complete.
 No mirror or guest file was modified and no runtime artifact was republished.
+
+## Initial compiler-line samples
+
+For the 78 files with static leads, a greedy selection of 63 S1 compile
+contexts covers every previously observed branch marker in those files. All
+63 `/E` commands exited successfully with the current source root. The
+[selected compiler-line samples](../../../artifacts/mvdm-audit/t476-s2-compiler-line-samples.json) retain selected commands, their plan identity and raw matched lines.
+They contain uniquely occurring original-line matches for 62 files; 30 have
+1,055 candidate mismatched statements. Duplicate expansions, local adapters,
+conditional removal and incomplete matching can create false leads. The other
+16 files have no matching unique statement in this sample; none is a pass on
+that basis. The initial run had a source-prefix parsing defect and was repeated
+with slash normalization; only the corrected run is recorded.
+
+These samples prioritize complete-file review and do not establish that every
+selected statement or all contexts have correct diagnostic lines. No file has
+been promoted solely on the absence of a sampled mismatch.
