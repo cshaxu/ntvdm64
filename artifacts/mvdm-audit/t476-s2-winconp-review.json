@@ -1,0 +1,200 @@
+{
+  "path": "src/non-mvdm/public/internal/windows/inc/winconp.h",
+  "current_sha256": "9541cdd461cf1417749f18633965b2086bb59b21851a50aef84aef72054bb9f9",
+  "original_sha256": "26b1b3cff877ee2802aeff0eeab04f1daf7127e63279bcaa990c8b4f97384f2d",
+  "original_lines_matched": 88,
+  "diff": [
+    {
+      "kind": "replace",
+      "old": [
+        "extern \"C\" {"
+      ],
+      "new": [
+        "#line 5",
+        "#error Unsupported excluded original configuration"
+      ],
+      "original_lines": [
+        5,
+        5
+      ],
+      "current_lines": [
+        5,
+        6
+      ]
+    },
+    {
+      "kind": "insert",
+      "old": [],
+      "new": [
+        "#line 7"
+      ],
+      "original_lines": [
+        7,
+        6
+      ],
+      "current_lines": [
+        8,
+        8
+      ]
+    },
+    {
+      "kind": "replace",
+      "old": [
+        "#define GetConsoleKeyboardLayoutName  GetConsoleKeyboardLayoutNameW"
+      ],
+      "new": [
+        "#line 20",
+        "#error Unsupported excluded original configuration"
+      ],
+      "original_lines": [
+        20,
+        20
+      ],
+      "current_lines": [
+        22,
+        23
+      ]
+    },
+    {
+      "kind": "insert",
+      "old": [],
+      "new": [
+        "#line 22"
+      ],
+      "original_lines": [
+        22,
+        21
+      ],
+      "current_lines": [
+        25,
+        25
+      ]
+    },
+    {
+      "kind": "insert",
+      "old": [],
+      "new": [
+        "#line 24"
+      ],
+      "original_lines": [
+        24,
+        23
+      ],
+      "current_lines": [
+        28,
+        28
+      ]
+    },
+    {
+      "kind": "replace",
+      "old": [
+        "}"
+      ],
+      "new": [
+        "#line 88",
+        "#error Unsupported excluded original configuration"
+      ],
+      "original_lines": [
+        88,
+        88
+      ],
+      "current_lines": [
+        93,
+        94
+      ]
+    },
+    {
+      "kind": "insert",
+      "old": [],
+      "new": [
+        "#line 90"
+      ],
+      "original_lines": [
+        90,
+        89
+      ],
+      "current_lines": [
+        96,
+        96
+      ]
+    }
+  ],
+  "s1_arms": [
+    {
+      "file": 964,
+      "index": 0,
+      "line": 1,
+      "directive": "ifndef",
+      "expression": "_WINCONP_",
+      "parent": null,
+      "status": "hit",
+      "hit_contexts": [
+        267
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 964,
+      "index": 1,
+      "line": 4,
+      "directive": "ifdef",
+      "expression": "__cplusplus",
+      "parent": 0,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 964,
+      "index": 2,
+      "line": 21,
+      "directive": "ifdef",
+      "expression": "UNICODE",
+      "parent": 0,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 964,
+      "index": 3,
+      "line": 24,
+      "directive": "else",
+      "expression": "",
+      "parent": 0,
+      "status": "hit",
+      "hit_contexts": [
+        267
+      ],
+      "outermost_new_exclusion": false
+    },
+    {
+      "file": 964,
+      "index": 4,
+      "line": 92,
+      "directive": "ifdef",
+      "expression": "__cplusplus",
+      "parent": 0,
+      "status": "previously-excluded",
+      "hit_contexts": [],
+      "outermost_new_exclusion": false
+    }
+  ],
+  "preprocessor_witnesses": [
+    {
+      "term": "_CONSOLE_STATE_INFO",
+      "original_line": 53
+    },
+    {
+      "term": "HistoryBufferSize",
+      "original_line": 71
+    },
+    {
+      "term": "ConsoleTitle[1]",
+      "original_line": 75
+    }
+  ],
+  "consumer": "original cmdkeyb.c via compat/include/winconp.h; ANSI product x86 command",
+  "compiler_output_sha256": "212931614232b4dd682266087882928d3b7d5d6cee780d18c1a73f600ac71b9c",
+  "limit": "Prior product marker coverage only; other fixture or addon contexts still require global reconciliation."
+}
