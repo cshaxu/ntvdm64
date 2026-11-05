@@ -1,0 +1,59 @@
+{
+  "method": "Enumerate the innermost conditional arm containing each direct #error across 1055 host C/H files, reporting arms with multiple direct #error directives and no nested conditional. Other issues are outside this check.",
+  "files_scanned": 1055,
+  "findings": [
+    {
+      "path": "src/mvdm-host/inc/wowfax.h",
+      "state": "different-file-review",
+      "line": 76,
+      "errors": [
+        [
+          77,
+          "#error T476-S1: branch not selected by product build"
+        ],
+        [
+          94,
+          "#error Excluded unsupported original MIPS/Alpha UNALIGNED fallback"
+        ]
+      ],
+      "current_sha256": "32ec0264635999a628d674b92a57cf6807323bc5e2b6cf52b25d65206e2336cb",
+      "original_sha256": "97c6c40dc2d0565a21dc1be4112fe24f138b10ddbb55fbd29e55da972a2a2c84"
+    },
+    {
+      "path": "src/mvdm-host/inc/wowinfo.h",
+      "state": "different-file-review",
+      "line": 20,
+      "errors": [
+        [
+          21,
+          "#error T476-S1: branch not selected by product build"
+        ],
+        [
+          24,
+          "#error Excluded unsupported original MIPS/Alpha UNALIGNED fallback"
+        ]
+      ],
+      "current_sha256": "0809d1a4c26b21930c99ecb570d2eabe938a7db39e19deefa797b92bf50c8629",
+      "original_sha256": "a0a125eedf4138d353fea1f97316331fd5a8acfb82dbd80d7abfe5dedf350026"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "state": "different-file-review",
+      "line": 915,
+      "errors": [
+        [
+          916,
+          "#error T476-S1: branch not selected by product build"
+        ],
+        [
+          933,
+          "#error DIVERGENCE OPENNT-HOST-133: PIF_PROPERTY_SHEETS branch is not selected; see mirror register."
+        ]
+      ],
+      "current_sha256": "7727b221f713bcde5589f02be3a523cfb23feb778b46a56759e72b092abc293a",
+      "original_sha256": "224f6bdf5cfa15a37d95f97e24c30d37d947d5f7f5199d50aeab65b39d150c55"
+    }
+  ],
+  "required_action": "Complete each affected file review then remove superseded inner error while retaining the outer rejection and required line mapping. Do not count these files reviewed before completion.",
+  "limits": "Does not certify every branch or line, nor classify all other pending issues."
+}
