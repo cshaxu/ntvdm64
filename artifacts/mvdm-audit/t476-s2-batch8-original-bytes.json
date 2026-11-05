@@ -1,0 +1,221 @@
+{
+  "method": "Ten previously reviewed host C sources restored to exact pinned originals; each has no original/current conditional groups and differs from its prior marker-bound source only by CRLF.",
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wmmedia.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmmedia.c",
+      "before_sha256": "50884419da7dd6817b9d023256cb36073dc5d4f915aa509f5d6f3c1813ecde20",
+      "after_sha256": "fbc4695791937fea487c91a0ba964e19625ebf4793c0123238100628fa95fd08",
+      "prior_state": "code-equivalent-confirmed"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wres32.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wres32.c",
+      "before_sha256": "18854a97f91ff3681826cf740dcef7f190078a4ed65644ed5784e097ee377e4b",
+      "after_sha256": "1217c5fa87b808329826d4ef2e785a5eb574de9cb1e9691de99680844f5bd13a",
+      "prior_state": "code-equivalent-confirmed"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsman.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wsman.c",
+      "before_sha256": "7f918f0c015380fe8404083498e00839744abfbe9386d215a634ec79b6005d94",
+      "after_sha256": "3481808a0c62754b72b5338680fb7e1a5dfc81722996cbf81400b2963771a913",
+      "prior_state": "code-equivalent-confirmed"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wspool.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wspool.c",
+      "before_sha256": "b18a49fc5627649b9ada9f5dd1076cc5edd00ffa4e8dc3efef09eb0405a1217e",
+      "after_sha256": "c76bec31ae9020ea0173c20d42986f36e6888a315a5d27e91e5cbf2579cb2ad8",
+      "prior_state": "code-equivalent-confirmed"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsraw.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wsraw.c",
+      "before_sha256": "0d511f187bb4f46e20289073d9a17b5dc713fec609d9d9e6202637d3db73e22b",
+      "after_sha256": "671210892e0ac174860ef9b2da141c471dc45b20e48dcc5b40a5185164262ce0",
+      "prior_state": "code-equivalent-confirmed"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wthman.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wthman.c",
+      "before_sha256": "109470b426c74865dc6fff04f8113c35a9be1716ad12937cf801b0b158af002f",
+      "after_sha256": "fb2a9e5fb2f06a20daf67c90cb21621d649f128a3f739697deb7a13506025286",
+      "prior_state": "compiler-transformed-confirmed"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wucaret.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wucaret.c",
+      "before_sha256": "f0f238e0e8c6848b2fccb69b4d67cb738eddac07be38678a84d22e3a1b3f4cb1",
+      "after_sha256": "e31545f6ddaad250517b0566287fb6b99c6f5ce3da2517d55a25536a046ac4d8",
+      "prior_state": "code-equivalent-confirmed"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wucursor.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wucursor.c",
+      "before_sha256": "a8c495bc2720411472074dd3776ab3e6d44f9319b5cc944e575714bab70aa14c",
+      "after_sha256": "78943c10afecbbdedd57408a5417a2d342d5a0a5dd354b321c773bd18916af31",
+      "prior_state": "code-equivalent-confirmed"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuhook.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuhook.c",
+      "before_sha256": "3b7072d6376d762c46fb65e872d08936595390f2d42fbf5cf922c820e404a599",
+      "after_sha256": "a4f31ee8cc2258fb177471647066238f7bb406b2466dca0249f4d6e6a98022b2",
+      "prior_state": "code-equivalent-confirmed"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wulang.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wulang.c",
+      "before_sha256": "46ddef8f7c7f7aa0ac96308bb33b0e765a7e13eafcb8915ed1a9e4657ea7cfd5",
+      "after_sha256": "f6eeb696a1f2878e52586d9496924c5c8064c63f800f5a25e55f7848aa68d13c",
+      "prior_state": "code-equivalent-confirmed"
+    }
+  ],
+  "cached_build": "x86 and x64 product, NTVDM and WOW32 passed",
+  "release_comparison": [
+    {
+      "name": "run16.exe",
+      "old_sha256": "0a3e67504fec93eb6c89b8f89c560a8a2e201b0ed15efdfe3f2778c7522eb05a",
+      "new_sha256": "0a3e67504fec93eb6c89b8f89c560a8a2e201b0ed15efdfe3f2778c7522eb05a",
+      "size_equal": true,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        264,
+        209540
+      ],
+      "first_offsets": []
+    },
+    {
+      "name": "ntsrv.exe",
+      "old_sha256": "d6c3005c28cb0d02984866f144cc8b3c5f5de6be9c9c2f250fff3d37e8cdd609",
+      "new_sha256": "d6c3005c28cb0d02984866f144cc8b3c5f5de6be9c9c2f250fff3d37e8cdd609",
+      "size_equal": true,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        248,
+        290436
+      ],
+      "first_offsets": []
+    },
+    {
+      "name": "ntcon.exe",
+      "old_sha256": "9faf706da2901ca65a638d7a0da9d1d474b10c59f59edfc852d49d63a2aa99b7",
+      "new_sha256": "9faf706da2901ca65a638d7a0da9d1d474b10c59f59edfc852d49d63a2aa99b7",
+      "size_equal": true,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        264,
+        246004
+      ],
+      "first_offsets": []
+    },
+    {
+      "name": "ntvdm.exe",
+      "old_sha256": "1f7c83438cb8ea037aebd07ea08f40f4312bc287695af22488d8b99fa88bbd44",
+      "new_sha256": "5d33aa53b6db264429180743d6558b7d0271af325dbd8816e9aa67bfc7246e90",
+      "size_equal": true,
+      "difference_count": 4,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        288,
+        1695252
+      ],
+      "first_offsets": [
+        288,
+        289,
+        1695252,
+        1695253
+      ]
+    },
+    {
+      "name": "ntvwm.exe",
+      "old_sha256": "36086cfa5c6a0efecb0cbd6d0a28d05a773c4f850d5e9a8615203fdc22354c57",
+      "new_sha256": "36086cfa5c6a0efecb0cbd6d0a28d05a773c4f850d5e9a8615203fdc22354c57",
+      "size_equal": true,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        248,
+        223812
+      ],
+      "first_offsets": []
+    },
+    {
+      "name": "ntmon.exe",
+      "old_sha256": "d1c124173c69da6bf44e8f86a11efdb37e1e15d10ffd45ba29e33f78c3e1bfda",
+      "new_sha256": "d1c124173c69da6bf44e8f86a11efdb37e1e15d10ffd45ba29e33f78c3e1bfda",
+      "size_equal": true,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        248,
+        146260
+      ],
+      "first_offsets": []
+    },
+    {
+      "name": "WOW32.DLL",
+      "old_sha256": "180d0fc34796be467caa06dfb52efa22d14c8b0acebf40244ef7c1e9d4670716",
+      "new_sha256": "b4e6e1fc3914545830dbee4c7f87e6720fb51ae0ba0f07057825a23073245050",
+      "size_equal": true,
+      "difference_count": 4,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        280,
+        625412
+      ],
+      "first_offsets": [
+        280,
+        281,
+        625412,
+        625413
+      ]
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "old_sha256": "bd3f123454c5c205f165906cecbe9bb207c2bae3d8537bd2c6d7d76af895a2b5",
+      "new_sha256": "bd3f123454c5c205f165906cecbe9bb207c2bae3d8537bd2c6d7d76af895a2b5",
+      "size_equal": true,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        280,
+        125108
+      ],
+      "first_offsets": []
+    },
+    {
+      "name": "nthook32.dll",
+      "old_sha256": "4dfc6a769a9b56149e74450b33856a991312230c414e67314687a3cdad0255d2",
+      "new_sha256": "4dfc6a769a9b56149e74450b33856a991312230c414e67314687a3cdad0255d2",
+      "size_equal": true,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        272,
+        133348
+      ],
+      "first_offsets": []
+    },
+    {
+      "name": "nthook64.dll",
+      "old_sha256": "544c2270858ac062f8b789c5307d53a822da1d4c2e131d28dd17848c0ecbe10e",
+      "new_sha256": "544c2270858ac062f8b789c5307d53a822da1d4c2e131d28dd17848c0ecbe10e",
+      "size_equal": true,
+      "difference_count": 0,
+      "timestamp_only": true,
+      "timestamp_fields": [
+        272,
+        166468
+      ],
+      "first_offsets": []
+    }
+  ],
+  "release": "Ten host images and hook license published and verified at assets/release and O:/winnt/system32.",
+  "tests": "Product regressions not repeated because byte differences are limited to the PE COFF/debug timestamps, as instructed.",
+  "remaining_original_byte_restorations": 252
+}
