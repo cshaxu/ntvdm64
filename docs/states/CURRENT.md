@@ -2,30 +2,47 @@
 
 ## Current Work
 
-**No active M/T/S packet.** T477 S1 is closed in this independent worktree.
-The approved frontend-base design was implemented in two local P deliveries:
-P1 154a61877 extracted the channel; P2 (this closure commit) extracted the
-service pump. NTCON uses both, preserving its Console/Window presentation,
-existing wire ABI and NTSRV lifecycle authority. Worker-base has no dependency
-on frontend-base.
+**Active: M0 T477 S2** — NTSRV frontend-instance registration, identity and
+handoff. Owner admits S2 and requests a design on 2026-11-05. This checkpoint
+is audit/design only; no S2 production implementation or publication is claimed.
 
-[S1 evidence](../etc/evidence/m0-t477-s1-frontend-base.md) records x86/x64 builds,
-channel/service units, existing integration fixtures and all 16 Full gates for
-each P, plus exact published hashes. The final coherent package was published
-to this worktree assets/release and O:/winnt/system32. The owner requires local
-commits and explicitly defers push; no push was performed. Guest media and
-installed configuration are unchanged.
+S1 closed with P1 154a61877 and P2 6caaf5d78; [S1 evidence](../etc/evidence/m0-t477-s1-frontend-base.md)
+records builds, tests and both publications. The baseline is 6caaf5d78.
+The [S2 design](../etc/operations/m0-t477-s2-frontend-instances-design.md)
+separates authenticated host connections from frontend instances while reusing
+the existing NTSRV lifecycle and direct frontend/worker I/O. Worker-base must
+not depend on frontend-base. S3 owns direct NTVDM VM integration; S4 owns NTMON
+presentation; guest drivers remain separately queued. No push is authorized.
 
-T477 remains open. The [implementation sequence](../etc/operations/m0-t477-host-frontend-plan.md)
-retains S2 NTSRV multi-frontend registration, S3 direct NTVDM frontend-base
-integration and S4 NTMON integration; none is active or implemented here.
-The guest 386/VxD driver remains a separate queued package. Main worktree's
-independent T476 task/source is untouched by this S1 closure.
+## Active Packet
 
-Temporary delivery evidence is retained in build/t477-s1 for rollback/review,
-with the existing 90-minute phase, 4-GiB and 15-minute no-progress bounds.
-All owned build/test/publication processes are joined at delivery; .ninja and
-.ccache are reusable caches, not acceptance evidence.
+### M0 T477 S2 — instance-addressed frontend control
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T477 S2, Ordinary Mode. |
+| Admission And Approval | Owner: admit S2 and provide its design. This checkpoint is design-only; proposed production parts await implementation direction. |
+| Candidate Proposal | [Host frontend foundation](../proposals/proposal-host-common-frontend-foundation-001.md). |
+| Objective | Design authenticated multiple frontend instances per host, isolated handoff and scoped teardown using existing NTSRV authorities. |
+| Non-goals | No guest/VxD implementation, NTVDM VM adapter/registry implementation, worker-base dependency on frontend-base, NTMON new VM UI, or second scheduler. |
+| Reference Baseline | 6caaf5d78; completed S1 shared channel/service; existing frontend_registry, lifecycle, client and IDL. |
+| Files And ABI Surface | NTSRV private records/registry/lifecycle/transport; common protocol and BaseSrv clients; NTCON adapter; owning tests and design. Instance-addressed control RPC requires a protocol revision during implementation. |
+| Applicable Rules | Current ownership, source reuse, lifecycle authority, immutable mirrors/guests, execution and document rules. |
+| Verification | Design: source-backed ownership/caller audit, documentation governance and diff checks. Implementation: two instances on one authenticated host, wrong/stale identities, independent chains, release ordering, instance/host loss, existing NTCON and Full regression, coherent package hashes. |
+| Expected Markers | Process authentication remains connection-owned; instance selection is explicit; one active worker per frontend; a VM frontend close never becomes host-worker exit. |
+| Asset Needs | Existing project-owned code and unchanged S1 test/package inputs; no import. |
+| Reporting Requirements | Distinguish planned behavior, local fixtures and actual NTVDM/guest integration; record per-P validation and publication. |
+| Stop Conditions | Need to change guest execution/scheduling, introduce reverse component dependencies or bypass peer/capability authorization; revise scope before dependent work. |
+| Exit Criteria | Explicit-instance service/client path selected by NTCON; real service multi-instance fixtures, negative/lifecycle tests and product regression pass; both publication targets match; local commits, no push. Not met by this design checkpoint. |
+| Original Owner Request | Admit S2 and provide a design following completed S1; explain host connection versus frontend instance and control RPC. |
+| Similar-Issue Sweep | Root-generation references, route ownership, participant exit, startup reservations, retained capabilities, worker watches, management projection and connection rundown. |
+| Temporary Evidence | build/t477-s2; 90-minute phase, 4 GiB, 15-minute no-progress bound. S1 delivery/rollback records remain in build/t477-s1; caches remain .ninja/.ccache. |
+
+## S1 Closure Record
+
+T477 S1 closed at 6caaf5d78. [S1 evidence](../etc/evidence/m0-t477-s1-frontend-base.md)
+records its two local deliveries, full verification and matching publication
+at both targets. No push, by explicit owner direction.
 
 ## M0 T475 S5 Closure
 
@@ -83,7 +100,7 @@ The [S2 acceptance](../etc/evidence/m0-t461-s2-binding-implementation.md)
 records the reviewed Registry bindings and product gate. S3 owns durable
 commit, restart tombstones and cross-worker serialization.
 
-## S1 Closure Record
+## T473 S1 Closure Record
 
 The [T473 baseline](../etc/evidence/m0-t473-s1-whole-closure-baseline.md) records original source and composition inventory.
 

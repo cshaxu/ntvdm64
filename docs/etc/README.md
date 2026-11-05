@@ -1,5 +1,7 @@
 # Supporting Material
 
+[T477 S2 frontend-instance design](operations/m0-t477-s2-frontend-instances-design.md) records host/instance separation, control identity and staged verification.
+
 [T477 S1 implementation evidence](evidence/m0-t477-s1-frontend-base.md) records extraction verification and publication status.
 
 [T477 S1 frontend-base design](operations/m0-t477-s1-frontend-base-design.md) records the source audit, extraction interfaces and P verification plan.

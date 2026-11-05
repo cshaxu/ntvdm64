@@ -69,7 +69,26 @@ function Assert-RelativeLinks([string[]]$MarkdownPaths) {
     }
 }
 
+function Test-IntermissionContinuation([string]$Baseline,[int]$Task,[int]$Subtask) {
+    $closed=[regex]::Match($Baseline, '(?m)^\*\*No active (?:numeric )?M/T/S packet\.\*\* T(?<task>\d+) S(?<subtask>\d+) is closed\b')
+    if(!$closed.Success){return $false}
+    $priorTask=[int]$closed.Groups['task'].Value
+    $priorS=[int]$closed.Groups['subtask'].Value
+    return $Task -eq $priorTask -and $Subtask -eq ($priorS+1) -and
+        $Baseline -match ('(?m)^T'+$priorTask+' remains open\.')
+}
+
 if ($SelfTest) {
+    $intermission="**No active M/T/S packet.** T477 S1 is closed.`nT477 remains open."
+    if(!(Test-IntermissionContinuation $intermission 477 2) -or
+        (Test-IntermissionContinuation $intermission 477 1) -or
+        (Test-IntermissionContinuation $intermission 477 3) -or
+        (Test-IntermissionContinuation $intermission 478 2) -or
+        (Test-IntermissionContinuation ($intermission.Replace('remains open','is closed')) 477 2) -or
+        (Test-IntermissionContinuation ($intermission.Replace('No active','Active')) 477 2)) {
+        throw 'Documentation governance self-test failed: intermission must continue the open T at its exact next S.'
+    }
+
     $sample = "# Title`n`n## Kept"
     if (@(Get-MarkdownHeadings $sample).Count -ne 2 -or (Get-MarkdownAnchor 'A / B') -ne 'a-b') {
         throw 'Documentation governance self-test failed: Markdown parser contract.'
@@ -248,6 +267,9 @@ if ($hasActivePacket) {
             $baselineAdmission = $baselineTask -gt $latestClosedTask -and (
                 ($activeTask -eq $baselineTask -and $activeS -ge $baselineS) -or
                 ($activeTask -eq ($baselineTask + 1) -and $activeS -eq 1))
+        }
+        if(!$baselinePacket.Success -and $activeTask -gt $latestClosedTask) {
+            $baselineAdmission=Test-IntermissionContinuation $baselineStatus $activeTask $activeS
         }
         $reopenedTask = $activeTask -eq $latestClosedTask
         $latestClosedS = 0
