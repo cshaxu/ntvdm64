@@ -132,9 +132,9 @@ int main(int argc, char **argv)
     if (!CreateProcessA(NULL,command_line,NULL,NULL,FALSE,0,NULL,NULL,&startup,&second)) return 31;
     WaitForSingleObject(first.hProcess,INFINITE); WaitForSingleObject(second.hProcess,INFINITE);
     GetExitCodeProcess(first.hProcess,&count); CloseHandle(first.hThread); CloseHandle(first.hProcess);
-    if (count) { CloseHandle(second.hThread); CloseHandle(second.hProcess); return 32; }
+    if (count) { fprintf(stderr,"FIRST_WRITER_EXIT=%lu\n",count); CloseHandle(second.hThread); CloseHandle(second.hProcess); return 32; }
     GetExitCodeProcess(second.hProcess,&count); CloseHandle(second.hThread); CloseHandle(second.hProcess);
-    if (count) return 33;
+    if (count) { fprintf(stderr,"SECOND_WRITER_EXIT=%lu\n",count); return 33; }
     ntvdm_shadow_registry_shutdown();
     if (!ntvdm_shadow_registry_initialize()) return 34;
     if (require(ntvdm_shadow_reg_open_key(HKEY_CLASSES_ROOT,"S2",&root),ERROR_SUCCESS,"concurrent reopen")) return 35;

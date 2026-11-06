@@ -1,0 +1,322 @@
+{
+  "baseline": "3f14f47af",
+  "sources": {
+    "files": [
+      {
+        "path": "src\\mvdm-host\\wow32\\mapembed.c",
+        "sha256": "21e5b1811d8be25289c87c4934edcb6738315049dae15a974daa6a6a8f0a8381"
+      },
+      {
+        "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\mapembed.c",
+        "sha256": "55c13643489f5bcc9419ce0341accb284f946d8d75352527a3b9181dfeb4a385"
+      },
+      {
+        "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow32\\mapembed.c",
+        "sha256": "55c13643489f5bcc9419ce0341accb284f946d8d75352527a3b9181dfeb4a385"
+      }
+    ],
+    "releaseBodyComparisons": [
+      {
+        "name": "UpdateEmbeddingAllKeys",
+        "matchesOpenNT": true,
+        "matchesNT45": true
+      },
+      {
+        "name": "UpdateClassesRootSubKey",
+        "matchesOpenNT": true,
+        "matchesNT45": true
+      },
+      {
+        "name": "IsWinIniHelper",
+        "matchesOpenNT": true,
+        "matchesNT45": true
+      }
+    ]
+  },
+  "rootBaseline": "FAIL original enumeration terminates\nEMBEDDING_ROOT checks=10 failures=1\n",
+  "stringBaseline": "FAIL original class stored with terminator\nFAIL original server stored with terminator\nFAIL legacy size computed from string\nEMBEDDING_ROOT checks=24 failures=3\n",
+  "directRootBaseline": "FAIL legacy direct-root set\nFAIL legacy direct-root query\nFAIL legacy direct-root delete\nEMBEDDING_ROOT checks=31 failures=3\n",
+  "focusedCurrent": "EMBEDDING_ROOT checks=31 failures=0\n",
+  "focusedHashes": [
+    {
+      "Algorithm": "SHA256",
+      "Hash": "82E8403C73EB4CB5325A6F4A735225AF2D3265462E717EB245556765D8943E15",
+      "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\ntvdm-exe\\softpc\\mvdm_shadow_registry.c"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "21E5B1811D8BE25289C87C4934EDCB6738315049DAE15A974DAA6A6A8F0A8381",
+      "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\wow32\\mapembed.c"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "89685C367B4BD91551CFD03693BF3196051C21EF7F01FE917787310B61E7AFB6",
+      "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s24\\confirmed-current\\embedding_exact.h"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "D8FE4141855464316B4FAD26B1A729EA176F9EF7E2500D09ACD75BF2BDFF663B",
+      "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s24\\confirmed-current\\embedding-test.exe"
+    }
+  ],
+  "tokenBaseline": "FAIL line 24: a != (HKEY)(ULONG_PTR)1 && b != (HKEY)(ULONG_PTR)1\n",
+  "tokenCurrent": "WOW_REGISTRY_POPULATED_SHUTDOWN_OK\n",
+  "guestBaseline": {
+    "errors": 0,
+    "worker": "532B79F4D33464D0AA70BFB17FAF019948DCC98C5F1025B683BDC5D6C2442483",
+    "wow": "647101DE85CC22EC71D3EBB47D42E5FA55DC54C454C4D55A303374B91A3F7E66",
+    "expectedStall": true,
+    "recordBytes": 12,
+    "phase": 1,
+    "returned": 0,
+    "package": "0E77BE711CE46423E5DE304278E3345F3E8E135B9EA9C12ECE96E84C6E20FD70"
+  },
+  "guestTokenFailure": {
+    "errors": 20,
+    "phase": 1,
+    "returned": 7,
+    "expectedStall": false,
+    "wow": "10BCF9FB564DEFC4B6DDFCD246BF13A63DB00033AD0DCDE966194FA4CDFBB1A6",
+    "worker": "CEC1AAE12346D9710312B0EA2742B79115EBFF0A29A3572B6AD650C752FB1C75",
+    "package": "098BB47DEDA094006FC120A1DCF75E1F8754E3A8EAC485FAEF0F9E3C95400862",
+    "recordBytes": 24,
+    "registryBytes": 20
+  },
+  "guestCurrent": {
+    "recordBytes": 24,
+    "phase": 2,
+    "registryBytes": 6,
+    "package": "10CAF34D423E334B49271F0BB2DBB2B17CE02C6215B28545C6EAC07E1D148C87",
+    "worker": "ABAC649D503F4B4FA07DF7C996601973CCB98F39FB094CE8D453779B9104E173",
+    "returned": 0,
+    "wow": "0684DE23C7DA117814446381BADE5484B607EF4BC333E588F5E0001A636877CB",
+    "expectedStall": false,
+    "errors": 0
+  },
+  "existingPersistence": {
+    "firstExit": 33,
+    "firstMeaning": "second writer nonzero, child code not retained by original harness",
+    "diagnostic": "FIRST_WRITER_EXIT=0\nSECOND_WRITER_EXIT=0\nT461_S3_REGISTRY_PERSISTENCE_OK\n",
+    "canonicalReplay": "T461_S3_REGISTRY_PERSISTENCE_OK\n",
+    "unresolved": true,
+    "finalSourceReplay": "T461_S3_REGISTRY_PERSISTENCE_OK\n",
+    "diagnosticImprovement": "Existing fixture now prints a failing writer exit code before returning 32/33."
+  },
+  "productVerification": {
+    "Suite": "Full",
+    "ElapsedMs": 441552,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 2928,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1797,
+        "CleanupMs": 563,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 452,
+        "CleanupMs": 526,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 67370,
+        "CleanupMs": 544,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 55912,
+        "CleanupMs": 514,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 51254,
+        "CleanupMs": 537,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 18576,
+        "CleanupMs": 500,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 13442,
+        "CleanupMs": 570,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 102466,
+        "CleanupMs": 551,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 13179,
+        "CleanupMs": 540,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28990,
+        "CleanupMs": 517,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30486,
+        "CleanupMs": 572,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 8744,
+        "CleanupMs": 589,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8995,
+        "CleanupMs": 540,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 12886,
+        "CleanupMs": 508,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 5758,
+        "CleanupMs": 488,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7846,
+        "CleanupMs": 502,
+        "Passed": true
+      }
+    ]
+  },
+  "tokenObjectSha256": "2501a980ae5388608ccb4aa48d81fc40843ef6c6a752377f3434ac1b569a45fa",
+  "selectedParentMap": [
+    "0001:00166ea0       _ntvdm_shadow_reg_delete_key@8 00567ea0 f   softpc-bindings:mvdm_shadow_registry.obj",
+    "0001:001670b0       _ntvdm_shadow_reg_enum_key@16 005680b0 f   softpc-bindings:mvdm_shadow_registry.obj",
+    "0001:00168690       _ntvdm_shadow_reg_set_value@20 00569690 f   softpc-bindings:mvdm_shadow_registry.obj"
+  ],
+  "aggregateBaseline": "FAIL original enumeration terminates\nFAIL short name buffer unchanged error\nFAIL original class stored with terminator\nFAIL original server stored with terminator\nFAIL legacy size computed from string\nFAIL legacy direct-root set\nFAIL legacy direct-root query\nFAIL legacy direct-root delete\nFAIL legacy string survives persistence\nFAIL original server survives persistence\nEMBEDDING_ROOT checks=29 failures=10\n",
+  "aggregateBaselineHashes": [
+    {
+      "Algorithm": "SHA256",
+      "Hash": "F4C5D63DB9E437849468537742CAC78E905BB32D4338173130EBCB02FC7F73D4",
+      "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s24\\provider-baseline.c"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "21E5B1811D8BE25289C87C4934EDCB6738315049DAE15A974DAA6A6A8F0A8381",
+      "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\wow32\\mapembed.c"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "89685C367B4BD91551CFD03693BF3196051C21EF7F01FE917787310B61E7AFB6",
+      "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s24\\aggregate-baseline\\embedding_exact.h"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "1443B3631212B80336642DF4DCFABC9BE524EBDE1D0C85174A051C41AA703491",
+      "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s24\\aggregate-baseline\\embedding-test.exe"
+    }
+  ],
+  "release": [
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "9A619AFD8593335BA34649BBCD1C504017A89EA3BCE842517ADDEDACBB3385E5",
+      "Machine": 34404,
+      "PackageId": "535a3297-cc41-4af6-8463-2998aee07cfa",
+      "InputSha256": "7147C1D721E3B2119DD868A0439FD8BCAF4042A8000F571253B5DDCE4AA166AE"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "BC88342DA93D9EF6B2575494544A89F36AD49ECFE5F71F212D647F3C9BDFCFFD",
+      "Machine": 34404,
+      "PackageId": "535a3297-cc41-4af6-8463-2998aee07cfa",
+      "InputSha256": "44AF0FF8A6D2375B778CD49542D6BD50C5C29143CA046833391CFAA73DD99A70"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "BC5CDB80D36F1E9FC7834BE7099D894642FFB91386706725A19611ADBA722FD8",
+      "Machine": 34404,
+      "PackageId": "535a3297-cc41-4af6-8463-2998aee07cfa",
+      "InputSha256": "9B641C216C109DD408D039A0A8EE8219472FBA09693430BA59270B58C2C84C5F"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "496170AF15D1E5111B8EC71B4A8DCF69E6057AA3C717B025AC7CD375231B2CDA",
+      "Machine": 332,
+      "PackageId": "535a3297-cc41-4af6-8463-2998aee07cfa",
+      "InputSha256": "F60B35DB56811E5025E7AD908F6BEEEEDFCDF659B04F0D4AF886B32408C962F4"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "2B14F1820970BEA3A0A4E1811049307B6CF4DADC6248A0A0FC9FD0967A48615D",
+      "Machine": 34404,
+      "PackageId": "535a3297-cc41-4af6-8463-2998aee07cfa",
+      "InputSha256": "9A99679759178C65A8FDD8FB6D00950DD082B82C7C6CA88FFAE9082CE324F3FA"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "44B715704FCFDBDCF965E1C93ECBA73A805B0BC4C397214463DAB7B882E0613D",
+      "Machine": 34404,
+      "PackageId": "535a3297-cc41-4af6-8463-2998aee07cfa",
+      "InputSha256": "6F42576085116F5344C34C492F6CC21BF28D423B214E7932B07E2B80A65EDDAC"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "72FA49E19498FB0FA97DDC1528A6CF1CF772697800772D73FB94430876F2019B",
+      "Machine": 332,
+      "PackageId": "535a3297-cc41-4af6-8463-2998aee07cfa",
+      "InputSha256": "B3783C72005610FA2AC191266ED46683CDEE1E83D30E1D76BD0A509AB212395E"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "6C943C3934E625C4220B617469CAC8B72E339D114B0D381F49B8443D824016D3",
+      "Machine": 332,
+      "PackageId": "535a3297-cc41-4af6-8463-2998aee07cfa",
+      "InputSha256": "B5A98766D2755810F4B97AB2953A245B6AE8C081AB6F96FAA293583B58EFE5A2"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "1DA38A34F02CEB5D43D6AF83C9BF7A91BF4D457B4E96AE9D2B8D6EFDEC3AC305",
+      "Machine": 332,
+      "PackageId": "535a3297-cc41-4af6-8463-2998aee07cfa",
+      "InputSha256": "F77987F3497D6D393AC8A45917D2354B27206B3F6CC27FB37405D036CDBBD14C"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "AEA7B8EDC8B1C9E64F6061854074FFE22653CB7C4AF6275CF9B51D60B60ADB97",
+      "Machine": 34404,
+      "PackageId": "535a3297-cc41-4af6-8463-2998aee07cfa",
+      "InputSha256": "9B9AEBF8CB200542562DF1CB4138FE128839A5ABDA76E184BBEDE7269B11C443"
+    }
+  ],
+  "publication": "PASS ten-image worktree release package=535a3297-cc41-4af6-8463-2998aee07cfa; backup=build/t478-s24/release-before; no O:/winnt write"
+}

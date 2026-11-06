@@ -71,7 +71,8 @@ typedef struct wow_registry_token {
 static INIT_ONCE wow_registry_once=INIT_ONCE_STATIC_INIT;
 static CRITICAL_SECTION wow_registry_lock;
 static wow_registry_token *wow_registry_tokens;
-static DWORD wow_registry_next_token=1;
+/* Original WS32 registry thunks reserve token 1 for HKEY_CLASSES_ROOT. */
+static DWORD wow_registry_next_token=2;
 
 static BOOL CALLBACK wow_registry_initialize(PINIT_ONCE once, PVOID parameter,
     PVOID *context)

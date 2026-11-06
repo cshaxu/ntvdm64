@@ -1261,3 +1261,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T478 S22 font output count](evidence/m0-t478-s22-font-output.md): real Win16 kerning copy-boundary repair and explicit original font-query limits.
 
 - [T478 S23 palette output count](evidence/m0-t478-s23-palette-output.md): minimal original count correction, native and real Win16 short-return evidence.
+
+- [T478 S24 embedding provider contracts](evidence/m0-t478-s24-embedding-provider.md): classes-root support, original legacy string size and reserved Win16 token repair.

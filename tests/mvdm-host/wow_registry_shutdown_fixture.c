@@ -21,6 +21,7 @@ int main(void) {
     CHECK(wow_registry_open_key(HKEY_CLASSES_ROOT,"a",&a) == ERROR_SUCCESS);
     CHECK(wow_registry_open_key(HKEY_CLASSES_ROOT,"b",&b) == ERROR_SUCCESS);
     CHECK(a && b && a != b && opens == 2 && closes == 0);
+    CHECK(a != (HKEY)(ULONG_PTR)1 && b != (HKEY)(ULONG_PTR)1);
     CHECK(wow_registry_close_key(a) == ERROR_SUCCESS);
     CHECK(closes == 1 && closed[0] == (HKEY)(ULONG_PTR)0x1001);
     wow_registry_binding_shutdown();

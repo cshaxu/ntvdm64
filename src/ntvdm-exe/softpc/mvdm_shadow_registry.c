@@ -1440,7 +1440,9 @@ LONG WINAPI ntvdm_shadow_reg_set_value(HKEY handle, LPCSTR subkey, DWORD type,
     HKEY child;
     LONG status;
     MVDM_SHADOW_OVERLAY_KEY *prior;
-    if (!key || type!=REG_SZ || !data) return ERROR_INVALID_PARAMETER;
+    if ((!key && handle!=HKEY_CLASSES_ROOT) || type!=REG_SZ || !data) return ERROR_INVALID_PARAMETER;
+    /* Legacy RegSetValue ignores cbData and stores the terminated string. */
+    data_size=(DWORD)strlen(data)+1u;
     status=shadow_begin_mutation(&prior);
     if (status!=ERROR_SUCCESS) return status;
     status=open_section(handle,subkey,TRUE,&child);
@@ -1513,7 +1515,7 @@ LONG WINAPI ntvdm_shadow_reg_delete_key(HKEY handle, LPCSTR subkey)
     MVDM_SHADOW_OVERLAY_KEY *overlay;
     char section[512], child[512]; HKEY target; LONG status;
     MVDM_SHADOW_OVERLAY_KEY *prior;
-    if (!key || !subkey || !*subkey) return ERROR_INVALID_PARAMETER;
+    if ((!key && handle!=HKEY_CLASSES_ROOT) || !subkey || !*subkey) return ERROR_INVALID_PARAMETER;
     status=shadow_begin_mutation(&prior);
     if (status!=ERROR_SUCCESS) return status;
     status=section_from_root(handle,subkey,section,sizeof(section));
@@ -1533,8 +1535,11 @@ LONG WINAPI ntvdm_shadow_reg_enum_key(HKEY handle, DWORD index, LPSTR name,
     DWORD name_size)
 {
     MVDM_SHADOW_KEY *key=validate_key(handle);
+    /* Original embedding enumeration uses the predefined classes root. */
+    LPCSTR parent_section=key ? key->section :
+        (handle==HKEY_CLASSES_ROOT && shadow_initialized ? "HKEY_CLASSES_ROOT" : NULL);
     const char *line; MVDM_SHADOW_OVERLAY_KEY *overlay; DWORD current=0;
-    if (!key || !name || !name_size) return ERROR_INVALID_HANDLE;
+    if (!parent_section || !name || !name_size) return ERROR_INVALID_HANDLE;
     for (line=shadow_contents; line && line<shadow_contents+shadow_size; line=next_line(line)) {
         const char *child; DWORD length; const char *end=line_end(line);
         if (line[0]!='[' || end<=line+2) continue;
@@ -1543,12 +1548,12 @@ LONG WINAPI ntvdm_shadow_reg_enum_key(HKEY handle, DWORD index, LPSTR name,
           memcpy(section,line+1,section_length); section[section_length]=0;
           const char *prior;
           BOOL duplicate=FALSE;
-          if (!section_is_child(key->section,section,&child,&length) || !section_visible(section)) continue;
+          if (!section_is_child(parent_section,section,&child,&length) || !section_visible(section)) continue;
           for (prior=shadow_contents; prior<line; prior=next_line(prior)) {
               const char *old_child; DWORD old_length; const char *prior_end=line_end(prior);
               if (prior[0]=='[' && prior_end>prior+2) { char old[512]; DWORD n=(DWORD)(prior_end-prior-2);
                   if (n<sizeof(old)) { memcpy(old,prior+1,n); old[n]=0;
-                      if (section_is_child(key->section,old,&old_child,&old_length) &&
+                      if (section_is_child(parent_section,old,&old_child,&old_length) &&
                           old_length==length && !_strnicmp(old_child,child,length)) { duplicate=TRUE; break; }
                   }
               }
@@ -1559,19 +1564,19 @@ LONG WINAPI ntvdm_shadow_reg_enum_key(HKEY handle, DWORD index, LPSTR name,
     }
     for (overlay=shadow_overlay_keys; overlay; overlay=overlay->next) {
         const char *child; DWORD length; DWORD prior=0; const char *scan;
-        if (overlay->deleted || !section_is_child(key->section,overlay->section,&child,&length)) continue;
+        if (overlay->deleted || !section_is_child(parent_section,overlay->section,&child,&length)) continue;
         for (scan=shadow_contents; scan && scan<shadow_contents+shadow_size; scan=next_line(scan)) {
             const char *old_child; DWORD old_length; const char *end=line_end(scan);
             if (scan[0]=='[' && end>scan+2) { char old[512]; DWORD n=(DWORD)(end-scan-2);
                 if (n<sizeof(old)) { memcpy(old,scan+1,n); old[n]=0;
-                    if (section_is_child(key->section,old,&old_child,&old_length) && old_length==length && !_strnicmp(old_child,child,length)) { prior=1; break; } }
+                    if (section_is_child(parent_section,old,&old_child,&old_length) && old_length==length && !_strnicmp(old_child,child,length)) { prior=1; break; } }
             }
         }
         if (!prior) {
             MVDM_SHADOW_OVERLAY_KEY *earlier;
             for (earlier=shadow_overlay_keys; earlier!=overlay; earlier=earlier->next) {
                 const char *old_child; DWORD old_length;
-                if (!earlier->deleted && section_is_child(key->section,earlier->section,
+                if (!earlier->deleted && section_is_child(parent_section,earlier->section,
                     &old_child,&old_length) && old_length==length &&
                     !_strnicmp(old_child,child,length)) { prior=1; break; }
             }

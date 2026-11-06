@@ -312,3 +312,14 @@ Win16 short/exact/zero/lifetime controls pass. Coherent build and unchanged-
 package Full replay pass 16/16; the first pre-worker RPC startup failure remains
 recorded as a separate unresolved risk. Exact worktree release published;
 S24/finding 56 follows.
+
+## S24 disposition
+
+[S24](../evidence/m0-t478-s24-embedding-provider.md) restores classes-root
+legacy operations, correct legacy string storage and the reserved Win16 token
+boundary in project providers. Original mirror bodies stay unchanged. Aggregate
+old-provider fixture fails ten checks; current passes 31. Actual binding lifetime,
+real Win16 embedding/SHELL lifecycle, final persistence regression, coherent
+build and Full 16/16 pass; exact worktree release published. An initial concurrent
+writer test failure remains cause-undetermined despite successful replays.
+S25/finding 57 follows.

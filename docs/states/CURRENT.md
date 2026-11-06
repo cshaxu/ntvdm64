@@ -261,3 +261,12 @@ T478 S23 [repairs original palette output count](../etc/evidence/m0-t478-s23-pal
 Full replay 16/16 pass. First Full RPC startup failure remains explicitly
 recorded, not fixed or erased. Exact worktree release published. S24 follows
 under continuous authorization; no O:/winnt write or push.
+
+## S24 Closure Record
+
+T478 S24 [restores embedding provider contracts](../etc/evidence/m0-t478-s24-embedding-provider.md):
+classes-root operations, terminated legacy strings and non-aliasing WOW tokens.
+Original mirror bodies remain unchanged. Focused 31 checks, actual binding
+lifetime, real Win16 lifecycle, persistence replay and Full 16/16 pass; exact
+worktree release published. Initial concurrent-writer failure remains explicitly
+recorded without a claimed cause/fix. S25 follows; no O:/winnt write or push.
