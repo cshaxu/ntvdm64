@@ -1241,3 +1241,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T478 S12 redirector loader ownership](evidence/m0-t478-s12-redirector-loader.md): original failed-load module cleanup and removal of the unselected local loader.
 
 - [T478 S13 keycode bounds](evidence/m0-t478-s13-keycode-bounds.md): two original exact-bound comparisons, actual-object negative/positive witness and unchanged valid mappings.
+
+- [T478 S14 resource disposition](evidence/m0-t478-s14-resource-disposition.md): original NT CMOS selection and bounded non-ROM caller evidence.

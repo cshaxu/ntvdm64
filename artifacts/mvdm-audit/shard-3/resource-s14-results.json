@@ -1,0 +1,27 @@
+{
+  "objects_scanned": 560,
+  "references": [
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_rez.obj",
+      "symbol": "_host_read_resource",
+      "section": 3
+    },
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_rez.obj",
+      "symbol": "_host_write_resource",
+      "section": 5
+    },
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\system\\rom.obj",
+      "symbol": "_host_read_resource",
+      "section": 0
+    }
+  ],
+  "finding": 29,
+  "disposition": "Original dormant non-ROM oversize leak; no applicable selected caller found",
+  "original_nt_cmos": "Both references select cmosnt.c; pickup/update intentionally do not persist files",
+  "release_package_id": "3e2e62b9-6d16-442a-9286-e169566a75e7",
+  "release_hashes_matched": 10,
+  "production_changes": false,
+  "full_test": "Reuse unchanged S13 package; no new Full run"
+}

@@ -4,9 +4,6 @@
 
 **No active M/T/S packet.**
 
-T478 S13 is closed; [keycode boundary evidence](../etc/evidence/m0-t478-s13-keycode-bounds.md).
-Sequential S14 admission is owner-authorized next.
-
 ## S1 Closure Record
 
 T478 S1 planning handoff: [classified findings](../etc/evidence/m0-t478-s1-classified-findings.md).
@@ -216,3 +213,7 @@ T460 package and Clipboard acceptance are recorded in its closure above.
 ## S13 Closure Record
 
 T478 S13 [repairs the original keycode exact bounds](../etc/evidence/m0-t478-s13-keycode-bounds.md), preserving mappings; actual-object tests, all 16 Full gates and worktree publication pass.
+
+## S14 Closure Record
+
+T478 S14 [dispositions non-ROM resource applicability](../etc/evidence/m0-t478-s14-resource-disposition.md); original NT static CMOS behavior is already connected. No production changes.

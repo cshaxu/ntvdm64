@@ -234,3 +234,10 @@ comparisons to >=. Both exact-bound sentinel witnesses now reject; 268322
 normal assertions, ABI controls and all 16 Full gates pass. Mapping tables
 remain equal to both originals. Worktree package
 3e2e62b9-6d16-442a-9286-e169566a75e7 is published locally; S14/finding 29 is next.
+
+## S14 disposition
+
+[S14](../evidence/m0-t478-s14-resource-disposition.md) confirms NT cmosnt uses
+static initialization, not generic CMOS file persistence. The only current
+reader reference is ROM loading, already routed to embedded resources. Retain
+the unused original non-ROM oversize limitation; no product changes. S15 is next.
