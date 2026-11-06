@@ -1,0 +1,153 @@
+{
+  "run-result": {
+    "ended": "2026-11-05T17:11:25.6817366-08:00",
+    "started": "2026-11-05T17:10:29.2838206-08:00",
+    "pid": 35704,
+    "exit_code": 0,
+    "command": "python artifacts/mvdm-audit/shard-3/sas-vector-s6-recheck.py"
+  },
+  "pe-vector": {
+    "ntvdm_sha256": "A4472C6DACB360B296F757CC61480EB186253A1D793478AECE428775D61629CD",
+    "map_symbols": {
+      "_cSasPtrs": "0x5b61b8",
+      "_c_sas_touch": "0x57e7c0",
+      "_c_VirtualiseInstruction": "0x57e7c0",
+      "_EDL_fast_bop": "0x57e7b0"
+    },
+    "fields_count": 58,
+    "indices": {
+      "Sas_touch": 54,
+      "SasVirtualiseInstruction": 56,
+      "IsPageInstanceData": 57
+    },
+    "vector_values": {
+      "Sas_touch": "0x57e7c0",
+      "SasVirtualiseInstruction": "0x57e7c0",
+      "IsPageInstanceData": "0x0"
+    },
+    "result": "STATIC_PE_VECTOR_POINTERS_AND_BREAKPOINT_OPCODE_OK",
+    "limitation": "Static PE inspection only; no claim about dynamic invocation, actual relocated addresses or application execution."
+  },
+  "symbol-references": {
+    "libraries_scanned": 74,
+    "references": [
+      {
+        "library": "build\\.ninja\\msvc-x86-release\\worker\\original-ccpu386.lib",
+        "sha256": "29EB3E3BE306B86F75EBF741DA93EA37978803DFE661387B7CEC1762A7DAE8DE",
+        "symbols": [
+          "034 00000000 UNDEF  notype ()    External     | _c_sas_touch",
+          "036 00000000 UNDEF  notype ()    External     | _c_VirtualiseInstruction"
+        ]
+      },
+      {
+        "library": "build\\.ninja\\msvc-x86-release\\worker\\softpc-ccpu-vector-defaults.lib",
+        "sha256": "6D30DDE5D3765477DF50C5B48E58428BB54150B0D41FB46EEDD95F6DE51E77B8",
+        "symbols": [
+          "014 00000000 SECT5  notype ()    External     | _c_VirtualiseInstruction",
+          "015 00000000 SECT7  notype ()    External     | _c_sas_touch"
+        ]
+      }
+    ]
+  },
+  "direct-object-symbols": {
+    "entries_scanned": 238,
+    "hits": []
+  },
+  "disassembly-candidates": {
+    "symbols": {
+      "_Sas": "0x811400",
+      "_Cpu": "0x810cc0",
+      "_cSasPtrs": "0x5b61b8",
+      "_c_sas_touch": "0x57e7c0",
+      "_c_VirtualiseInstruction": "0x57e7c0"
+    },
+    "candidate_lines": [],
+    "limitation": "Textual disassembly filter, not proof against computed or two-stage indirect calls."
+  },
+  "exports": {
+    "ntvdm.exe": [],
+    "WOW32.DLL": [],
+    "VDMREDIR.DLL": []
+  },
+  "identity": {
+    "raw_sha256": "A4472C6DACB360B296F757CC61480EB186253A1D793478AECE428775D61629CD",
+    "map_sha256": "73569BC92694AD9D40A18777B271683B327CA67BCD2670D0B82CAABADC5961E7",
+    "release_sha256": "BA61A9FEBFB19A523FB2151D3C6A1288691B261D7E345C5076E8A3C544975C82",
+    "identical_sections": {
+      ".text": [
+        4096,
+        1620480,
+        "64378e5b200b1768ec2545e48a33426ab69a2754b18c2f54076e61d971f7d68b"
+      ],
+      ".data": [
+        1794048,
+        36352,
+        "2d8c85c4f86031d88447fb16f0739f9108365bb31e1ee6c8d68f4fc8e27d3ec7"
+      ],
+      ".reloc": [
+        4333568,
+        208896,
+        "06f966d37bc8076b3a68ce3066825d3a718fd9ef6b206e453ba9f3b8c152c05c"
+      ]
+    },
+    "package_id": "8f9f583a-a682-4175-b82e-1f926c9dbba4",
+    "release_images_verified": 10
+  },
+  "source_sha256": {
+    "src/ntvdm-exe/softpc/mvdm_ccpu_vector_defaults.c": "9B5B9D9ED1E872E245E630C471894AA93D9FAF16DAF9D5DDFF16CF68FA17300F",
+    "src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h": "7F4520389338F9D265CE4D4A3E72980356687AEBC9ED836B4707D5A250519AFA",
+    "src/ntvdm-exe/softpc/mvdm_cvidc_vector_binding.c": "A3D6F35FEF8BAE86A04B49ECC2BC4ECE34D103C80F31B4248D403035831C3364",
+    "src/mvdm-host/softpc.new/base/ccpu386/sasCdef.c": "65D4463DEE377D22A2F4AAD5DB849E27A60E88A2FE5AE0E597DEA92F0C89CE9D",
+    "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c": "CDADAD02799C68FBBB16516145AC7DFBA31DBF53319EAE10267D2052BCD24B42",
+    "artifacts/mvdm-audit/shard-3/sas-vector-s6-recheck.py": "D58A66174F0B82E35E098F10FCD340DD5B0D4B13695E60B9CFFED92DB9DF7470"
+  },
+  "original_consumers": [
+    "O:/repos.external/OpenNT/base/mvdm/softpc.new\\base\\debug\\yoda.c:6247:\telse if ((((entry >> 9) & 7) == 6) && Sas.IsPageInstanceData(entry))",
+    "O:/repos.external/OpenNT-4.5/nt/private/mvdm/softpc.new\\base\\debug\\yoda.c:6247:\telse if ((((entry >> 9) & 7) == 6) && Sas.IsPageInstanceData(entry))",
+    "O:/repos.external/OpenNT-4.5/nt/private/mvdm/softpc.new\\base\\ccpu386\\sascdef.c:77:extern TYPE_sas_touch c_sas_touch;",
+    "O:/repos.external/OpenNT-4.5/nt/private/mvdm/softpc.new\\base\\ccpu386\\sascdef.c:79:extern TYPE_VirtualiseInstruction c_VirtualiseInstruction;",
+    "O:/repos.external/OpenNT-4.5/nt/private/mvdm/softpc.new\\base\\ccpu386\\sascdef.c:137:\tc_sas_touch,",
+    "O:/repos.external/OpenNT-4.5/nt/private/mvdm/softpc.new\\base\\ccpu386\\sascdef.c:139:\tc_VirtualiseInstruction",
+    "O:/repos.external/OpenNT/base/mvdm/softpc.new\\base\\ccpu386\\sascdef.c:77:extern TYPE_sas_touch c_sas_touch;",
+    "O:/repos.external/OpenNT/base/mvdm/softpc.new\\base\\ccpu386\\sascdef.c:79:extern TYPE_VirtualiseInstruction c_VirtualiseInstruction;",
+    "O:/repos.external/OpenNT/base/mvdm/softpc.new\\base\\ccpu386\\sascdef.c:137:\tc_sas_touch,",
+    "O:/repos.external/OpenNT/base/mvdm/softpc.new\\base\\ccpu386\\sascdef.c:139:\tc_VirtualiseInstruction"
+  ],
+  "current_consumers": [
+    "src/ntvdm-exe\\softpc\\mvdm_ccpu_vector_defaults.c:15:IU32 c_VirtualiseInstruction(IU32 eipInRom, IUH size,",
+    "src/ntvdm-exe\\softpc\\mvdm_ccpu_vector_defaults.c:22:IU8 *c_sas_touch(IU32 addr, IU32 length)",
+    "src/ntvdm-exe\\softpc\\include\\generated\\x86\\prod\\sas4gen.h:60:typedef\tIU8 *\tTYPE_sas_touch\tIPT2(IU32,\taddr, IU32,\tlength);",
+    "src/ntvdm-exe\\softpc\\include\\generated\\x86\\prod\\sas4gen.h:62:typedef\tIU32\tTYPE_VirtualiseInstruction\tIPT4(IU32,\teipInRom, IUH,\tsize, IU32,\tlinearAddrOrPort, IU32,\tdataIn);",
+    "src/ntvdm-exe\\softpc\\include\\generated\\x86\\prod\\sas4gen.h:63:typedef\tIBOOL\tTYPE_IsPageInstanceData\tIPT1(IU32,\tphysAddr);",
+    "src/ntvdm-exe\\softpc\\include\\generated\\x86\\prod\\sas4gen.h:120:\tIU8 *\t(*Sas_touch)\tIPT2(IU32,\taddr, IU32,\tlength);",
+    "src/ntvdm-exe\\softpc\\include\\generated\\x86\\prod\\sas4gen.h:122:\tIU32\t(*SasVirtualiseInstruction)\tIPT4(IU32,\teipInRom, IUH,\tsize, IU32,\tlinearAddrOrPort, IU32,\tdataIn);",
+    "src/ntvdm-exe\\softpc\\include\\generated\\x86\\prod\\sas4gen.h:123:\tIBOOL\t(*IsPageInstanceData)\tIPT1(IU32,\tphysAddr);",
+    "src/ntvdm-exe\\softpc\\include\\generated\\x86\\prod\\sas4gen.h:830:IMPORT\tIU8 *\tc_sas_touch\tIPT2(IU32, addr, IU32, length);",
+    "src/ntvdm-exe\\softpc\\include\\generated\\x86\\prod\\sas4gen.h:831:#define\tsas_touch(addr, length)\tc_sas_touch(addr, length)",
+    "src/ntvdm-exe\\softpc\\include\\generated\\x86\\prod\\sas4gen.h:835:#define\tsas_touch(addr, length)\t(*(Sas.Sas_touch))(addr, length)",
+    "src/ntvdm-exe\\softpc\\include\\generated\\x86\\prod\\sas4gen.h:837:IMPORT\tIU8 *\tsas_touch\tIPT2(IU32, addr, IU32, length);",
+    "src/ntvdm-exe\\softpc\\include\\generated\\x86\\prod\\sas4gen.h:856:IMPORT\tIU32\tc_VirtualiseInstruction\tIPT4(IU32, eipInRom, IUH, size, IU32, linearAddrOrPort, IU32, dataIn);",
+    "src/ntvdm-exe\\softpc\\include\\generated\\x86\\prod\\sas4gen.h:857:#define\tVirtualiseInstruction(eipInRom, size, linearAddrOrPort, dataIn)\tc_VirtualiseInstruction(eipInRom, size, linearAddrOrPort, dataIn)",
+    "src/ntvdm-exe\\softpc\\include\\generated\\x86\\prod\\sas4gen.h:861:#define\tVirtualiseInstruction(eipInRom, size, linearAddrOrPort, dataIn)\t(*(Sas.SasVirtualiseInstruction))(eipInRom, size, linearAddrOrPort, dataIn)",
+    "src/ntvdm-exe\\softpc\\include\\generated\\x86\\prod\\sas4gen.h:863:IMPORT\tIU32\tVirtualiseInstruction\tIPT4(IU32, eipInRom, IUH, size, IU32, linearAddrOrPort, IU32, dataIn);",
+    "src/ntvdm-exe\\softpc\\include\\generated\\x86\\prod\\sas4gen.h:873:#define\tIsPageInstanceData(physAddr)\t(*(Sas.IsPageInstanceData))(physAddr)",
+    "src/ntvdm-exe\\softpc\\include\\generated\\x86\\prod\\sas4gen.h:875:IMPORT\tIBOOL\tIsPageInstanceData\tIPT1(IU32, physAddr);",
+    "src/mvdm-host\\softpc.new\\base\\ccpu386\\sascdef.c:77:extern TYPE_sas_touch c_sas_touch;",
+    "src/mvdm-host\\softpc.new\\base\\ccpu386\\sascdef.c:79:extern TYPE_VirtualiseInstruction c_VirtualiseInstruction;",
+    "src/mvdm-host\\softpc.new\\base\\ccpu386\\sascdef.c:142:\tc_sas_touch,",
+    "src/mvdm-host\\softpc.new\\base\\ccpu386\\sascdef.c:144:\tc_VirtualiseInstruction"
+  ],
+  "limitations": [
+    "Static source and binary inspection only; no fresh runtime execution.",
+    "No proof against computed indices, two-stage loads, escaped pointers or other profiles.",
+    "Initial detached launch PID 36820 produced no result and was reaped; not a test result. Final supervised background run is recorded above."
+  ],
+  "original_source_sha256": {
+    "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\sascdef.c": "B8B7832D02BD8F4161E1F71DF2968051609DA065F4DA8287A65E6B14B38A749C",
+    "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\yoda.c": "444F1350D7C50B270652D7B062A375536E327952EBB5BA83937FBA090DB3C817",
+    "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\sascdef.c": "84EE9572F45AD66AD2A23A9DCA01407E6E0D4FC25FDD2474A1BDE8A53CBE8474",
+    "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\softpc.new\\base\\ccpu386\\sascdef.c": "B8B7832D02BD8F4161E1F71DF2968051609DA065F4DA8287A65E6B14B38A749C",
+    "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\softpc.new\\base\\debug\\yoda.c": "444F1350D7C50B270652D7B062A375536E327952EBB5BA83937FBA090DB3C817",
+    "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\softpc.new\\base\\cvidc\\sascdef.c": "84EE9572F45AD66AD2A23A9DCA01407E6E0D4FC25FDD2474A1BDE8A53CBE8474"
+  }
+}

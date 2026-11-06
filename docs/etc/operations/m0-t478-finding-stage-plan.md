@@ -46,7 +46,7 @@ source evidence.
 
 | Planned S | Finding | Objective |
 | --- | --- | --- |
-| S6 | 04 — SAS vector | Establish whether unsupported vector slots are reachable; recover or repair the host owner only if required. |
+| S6 | 04 — SAS vector | Reconcile prior successful tests and current selected consumers of unsupported SAS tail slots; repair only a demonstrated remaining original-semantics host defect. Unused slots do not justify new capability or speculative ABI cleanup. |
 | S7 | 10 — XMS block boundaries | Reproduce zero-size/equal-size paths and correct any reachable uninitialized state. |
 | S8 | 11 — suballocator rollback | Verify callback failure bitmap consistency and repair confirmed rollback defects. |
 | S9 | 13 — floppy/FDC ownership | Verify cross-thread state and actual host device lifetime; repair demonstrated ownership defects. |
@@ -138,3 +138,12 @@ new closure obligations. Preserve verified useful existing behavior.
 bounded restart and its explicit failure cases. No additional production repair
 is justified. The missing indexed kernel path is an owner-accepted registered
 gap, not a mandatory implementation item. S6/finding 04 remains proposed.
+
+## S6 disposition
+
+[S6](../evidence/m0-t478-s6-sas-vector.md) closes finding 04 as no demonstrated
+applicable repair under the original-capability ceiling. Current source, archive,
+direct-object and PE checks support preserving the coherent layout and unsupported
+tails. No product implementation changes; no universal non-reachability claim.
+Reopen only with a concrete supported caller/original contract or failure evidence.
+S7/finding 10 is next proposed, not admitted.

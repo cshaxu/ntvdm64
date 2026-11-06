@@ -4,15 +4,15 @@
 
 **No active M/T/S packet.**
 
-T478 S5 closes at [bounded directory restart](../etc/evidence/m0-t478-s5-directory-restart.md).
-Existing recovery passes 115 assertions, three real DOS pressure/control cases
-and actual FCB enumeration. No further production repair is justified. The owner
-rejects capabilities beyond original OpenNT and accepts the documented missing
-kernel indexed path; failed/missing hint recovery remains explicit failure.
-P1 updates test infrastructure and disposition only. Product/release remain the
-verified S4 package; no O:/winnt write or push. The
-[ordered plan](../etc/operations/m0-t478-finding-stage-plan.md) retains S6/finding 04
-as next proposed, not admitted. Broader S1 inventory qualification remains open.
+T478 S6 closes at [SAS tail disposition](../etc/evidence/m0-t478-s6-sas-vector.md).
+Current original-source, archive/object and PE checks establish no demonstrated
+applicable repair. Preserve the existing layout and unavailable tails; no new
+capability or repeated implementation. This is research-only closure, not proof
+of universal non-reachability. Product/release remain the verified S4 package;
+no new build/publication, O:/winnt write or push. P1 records the bounded evidence
+and disposition locally. The [ordered plan](../etc/operations/m0-t478-finding-stage-plan.md)
+retains S7/finding 10 as next proposed, not admitted. Broader S1 inventory
+qualification remains open.
 
 ## M0 T475 S5 Closure
 
