@@ -1,0 +1,34 @@
+{
+  "baseline": "c5dece1a7",
+  "finding": 42,
+  "original_comparison": {
+    "O:/repos.external/OpenNT/base/mvdm": {
+      "VdmAllocateVirtualMemory": true,
+      "VdmFreeVirtualMemory": true,
+      "VdmReallocateVirtualMemory": true,
+      "VdmCommitVirtualMemory": true,
+      "VdmDeCommitVirtualMemory": true
+    },
+    "O:/repos.external/OpenNT-4.5/nt/private/mvdm": {
+      "VdmAllocateVirtualMemory": true,
+      "VdmFreeVirtualMemory": true,
+      "VdmReallocateVirtualMemory": true,
+      "VdmCommitVirtualMemory": true,
+      "VdmDeCommitVirtualMemory": true
+    }
+  },
+  "comparison_method": "Extract actual IFN function bodies; remove balanced DEBUG_MEM blocks (including nested conditionals), comments and #line; compare tokens. Five bodies, both local originals.",
+  "fixture_exit": 0,
+  "fixture_output": "original disk-buffer alignment PASS (no disk I/O)\nword-fill 132 alignment/length cases digest=91153575\nbefore sas_init\nafter sas_init\nafter original add\nEMS cross-window original nt_emm lease copy PASS\noriginal SAS reversed-page loads/stores/move PASS\noriginal allocation grow/shrink content PASS\noriginal memory exported name/ordinal query and reallocate PASS\nreal DIB GDI/guest bidirectional sharing PASS\noriginal add/remove unaligned sharing and normal-backing PASS\n",
+  "fixture_limit": "Existing mixed host fixture /FORCE:MULTIPLE boundary warnings retained; no product frontend/broker reached. No commit failure or stale pointer injected.",
+  "production_changes": false,
+  "test_change": "Add asserted-unreached mvdm_standalone_worker_close_frontends seam with real prototype; reaching it exits ERROR_CALL_NOT_IMPLEMENTED.",
+  "package_id": "b4a13bec-806d-48d3-ad50-728178335129",
+  "release_hashes_matched": 10,
+  "hashes": {
+    "tests\\mvdm-host\\ccpu_host_fixture_seams.c": "7f9a93665c571ef9d1ad650428f1a72489180915783f59feeadc81e040d4fddf",
+    "tests\\mvdm-host\\original_external_memory_test.c": "66cf5e5be7e6fe8833f87a11f0af1435ed0acc225952f89a814504a747f722a5",
+    "build\\.ninja\\msvc-x86-release\\worker\\original-external-memory-test.exe": "694e37dba60ae54db594ea6949cc554f8e2cdc94fcd0179e8b687ecf8cd8cafd",
+    "src\\mvdm-host\\softpc.new\\host\\src\\nt_mem.c": "8f4ccdd0447f4c9d10d9a7752ca67c3a6a977a791b296289034ff4a30e910a77"
+  }
+}

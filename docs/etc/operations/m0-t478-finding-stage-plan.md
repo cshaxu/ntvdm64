@@ -256,3 +256,11 @@ retirement and stale failed-view mapping ownership. Selected-object normal
 file/mapping and controlled failure tests pass (577 checks), as do coherent
 x86/x64 build and all 16 Full gates. Exact worktree release published; no new
 cache capability. S17/finding 42 follows.
+
+## S17 disposition
+
+[S17](../evidence/m0-t478-s17-virtual-memory.md) verifies five original release
+allocator bodies and existing real allocate/grow/shrink/free sharing tests.
+Original malformed-address and commit-failure recovery limitations remain
+explicit; current query/reallocate exports already exist. Only an asserted-
+unreached test boundary is repaired. S16 release is unchanged; S18 follows.

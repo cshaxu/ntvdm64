@@ -225,3 +225,7 @@ T478 S15 [assigns the unresolved codepage defect](../etc/evidence/m0-t478-s15-co
 ## S16 Closure Record
 
 T478 S16 [repairs original file-cache retirement](../etc/evidence/m0-t478-s16-file-cache.md): full-list cleanup and cleared failed-view handle, 577 focused checks and 16 Full gates; worktree release only.
+
+## S17 Closure Record
+
+T478 S17 [verifies the original allocator and records retained limits](../etc/evidence/m0-t478-s17-virtual-memory.md); existing memory fixture passes after test-only boundary repair. Product release unchanged.

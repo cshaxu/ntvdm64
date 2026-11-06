@@ -20,6 +20,8 @@ distinguishes these from work already owned by a queued proposal.
 | P2 | Original INT31/0500 invalid-buffer behavior remains an owner-accepted boundary: the host writes without complete span validation and the guest return path clears CF. | Preserve the negative witness and valid-buffer contract; this is not a blanket exemption for host defects. [Evidence](../etc/evidence/m0-t420-s38-dpmi32-capability-review.md). |
 | P2 | Native CUI codepage changes affect NTVWM hidden Console but not NTCON frontend; historical DOS output mismatch remains consistent with current separate-Console source ownership. | Separate frontend/native-carrier lifecycle task; preserve original shared Console semantics and distinguish transition copying from parity. No missing mvdm-host getter was found. [S15 owner evidence](../etc/evidence/m0-t478-s15-codepage-owner.md). |
 
+| P3 | Original nt_mem flags precedence does not reject all aligned invalid/stale chunks; allocation commit failure can leave allocated/split header state before free accounting. | Retain original private-input and failure-recovery limits under the owner ceiling; do not claim safe repeated free or transactional rollback. Reopen for project drift, valid-caller failure requiring a separately admitted repair, or explicit stronger recovery scope. [S17 evidence](../etc/evidence/m0-t478-s17-virtual-memory.md). |
+
 ## Original guest retained limitations
 
 These entries are grouped by the original guest owner, not declared fixed.
