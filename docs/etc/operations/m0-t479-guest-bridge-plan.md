@@ -75,5 +75,8 @@ The imported range is e1867aaa2 through cd91c8a57, based on cd8c8583e;
 see [integration evidence](../evidence/m0-t479-s1-thunk-import.md).
 
 S1/generic-thunk-import is delivered with coherent 0.0.479 publication and
-Full 16/16 acceptance. S1/guest-bridge remains the active mainline; all later
-guest stages retain their planned status. See the integration evidence above.
+Full 16/16 acceptance. The owner now closes S1/guest-bridge on its current
+research results; see the [closure and mandatory handoff](../evidence/m0-t479-s1-guest-research-closure.md).
+This supersedes the earlier active-S1 wording and moves the unproved executable
+contracts to the named S2--S5 gates, without declaring them passed. T479 remains
+open; no next S is admitted by this closure.

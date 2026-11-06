@@ -1,7 +1,9 @@
 # T479 S1 guest bridge: call-chain audit and implementation decisions
 
-Status: source/design work in progress against 56be696ac. This record does
-not admit an unverified runtime bridge or close S1. The owner requests design
+Status: owner-closed research; see the [closure and handoff](../evidence/m0-t479-s1-guest-research-closure.md).
+The in-progress statements below are retained research checkpoints, superseded
+by that closure for status only; their unproved runtime claims remain unproved.
+Initial source/design work was against 56be696ac. The owner requests design
 and implementation of the mainline; the existing sequential stage plan still
 governs its delivery.
 

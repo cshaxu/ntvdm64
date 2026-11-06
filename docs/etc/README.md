@@ -1181,3 +1181,6 @@ the first cached build and bounded unit verification, with integration gaps expl
 
 [Guest call-chain audit](operations/m0-t479-s1-guest-callchain.md) records the
 current S1 source findings, ownership decisions and bounded ABI proof tasks.
+
+[T479 S1 research closure](evidence/m0-t479-s1-guest-research-closure.md) records
+owner acceptance of the research and mandatory S2--S5 verification handoff.
