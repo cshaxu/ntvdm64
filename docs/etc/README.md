@@ -1317,3 +1317,4 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T480 mirror-diff stage plan](operations/m0-t480-mirror-diff-plan.md): finite host C/H difference review and minimization.
 
 - [T480 S1 brief, audit and plan](evidence/m0-t480-s1-brief-audit-plan.md): pinned host-only diff census, stale candidate corrections and remaining consumer evidence.
+- [T480 S1 actual build and consumer closure](evidence/m0-t480-s1-build-consumers-closure.md): worktree builds, complete file consumers, link ownership, physical hunk coordinates and bounded restoration candidates.

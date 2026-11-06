@@ -29,6 +29,10 @@ publication under the owner's local-only rule; no O:/winnt write or push.
 ## Initial audit checkpoint
 
 [Brief, current findings and owner-group sequence](../evidence/m0-t480-s1-brief-audit-plan.md)
-records the current1060-file baseline and six issue/disposition groups. S1
-consumer classification remains outstanding; historical candidate counts and
-removed files must not be recycled into new implementation tasks.
+records the current1060-file baseline and six issue/disposition groups.
+The [S1 successor](../evidence/m0-t480-s1-build-consumers-closure.md) completes
+actual builds and file/include/link-input classification. All581 differing files
+have product consumers; no whole-file unconnected restoration is proved.
+S2 starts with the bounded formatting leads and independently evidenced inactive
+sub-blocks, not stale removed-file candidates. S3 retains semantic review of
+connected and mixed exclusion blocks. S1 closure does not close that review.
