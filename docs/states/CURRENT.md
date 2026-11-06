@@ -4,17 +4,17 @@
 
 **No active M/T/S packet.**
 
-T478 S7 closes at [XMS block boundaries](../etc/evidence/m0-t478-s7-xms-boundaries.md).
-Two original uninitialized return paths are corrected with two assignments:
-zero-size uses the original pool anchor without allocating storage; unchanged
-size keeps the existing address. No new XMS feature, allocator or guest change.
-Actual-provider tests pass 139 assertions (baseline: 35 failures), both real DOS
-cases pass, and all 16 selected Full gates pass. Application version is aligned
-to T478 (0.0.478); protocol remains 67. The exact tested ten-image package and
-manifest are published to worktree assets/release and hash verified. Local P1,
-no O:/winnt write or push. The [ordered plan](../etc/operations/m0-t478-finding-stage-plan.md)
-retains S8/finding 11 as next proposed, not admitted. Broader S1 qualification
-remains open.
+T478 S8 closes at [original suballocator disposition](../etc/evidence/m0-t478-s8-suballoc-disposition.md).
+Current and both original trees preprocess identically for the selected profile.
+Existing normal lifecycle cases pass; failure characterization reproduces the
+original partial-commit and failed-free limitations. These are retained known
+limitations, not repaired or passing rollback guarantees. Under the owner's
+original-semantics ceiling, no transactional recovery or production change is
+added. Local P1 records evidence and debt; no new product build/publication,
+O:/winnt write or push. The verified S7 package remains unchanged. The
+[ordered plan](../etc/operations/m0-t478-finding-stage-plan.md) applies this owner
+standard to every remaining S; S9/finding 13 is next proposed, not admitted.
+Broader S1 qualification remains open.
 
 ## M0 T475 S5 Closure
 

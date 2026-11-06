@@ -28,6 +28,24 @@ unadmitted future packets, restore the original owner where appropriate, and
 remove the displaced local implementation in the same delivery. Generic thunk
 is a missing-integration candidate, not a proven duplicate replacement.
 
+## Binding owner standard for S8 and every remaining S
+
+Conformance to the established original semantics is the acceptance target and
+ceiling. The owner explicitly rejects unlimited fault tolerance and new
+capabilities. This governs every remaining row, including any older wording
+that could otherwise imply stronger recovery, atomicity or robustness.
+
+Recover necessary original connections and correct demonstrated defects with
+the smallest justified change. Reuse working original owners, remove displaced
+duplicate/incomplete local code where justified, and do not repeat resolved work.
+Do not turn injected failures into requirements for new retry, fallback,
+transactional rollback, data recovery or guarantees absent from the original
+contract. A documented original boundary or explicit original failure may be a
+valid disposition; it is not automatically an unfinished feature. This does not
+excuse a demonstrated defect against the original contract or waive verification
+of an actual change. Stop expanding tests once the admitted semantics and
+required delivery gates are established. Future S admission remains sequential.
+
 ## Priority 2: missing original host integration
 
 | Planned S | Finding | Objective and disposition gate |
@@ -48,7 +66,7 @@ source evidence.
 | --- | --- | --- |
 | S6 | 04 — SAS vector | Reconcile prior successful tests and current selected consumers of unsupported SAS tail slots; repair only a demonstrated remaining original-semantics host defect. Unused slots do not justify new capability or speculative ABI cleanup. |
 | S7 | 10 — XMS block boundaries | Reconcile existing passed XMS cases; establish the original zero-size/equal-size contract and current host reachability, then correct only remaining applicable uninitialized-result defects. No new capability or allocator redesign. |
-| S8 | 11 — suballocator rollback | Verify callback failure bitmap consistency and repair confirmed rollback defects. |
+| S8 | 11 — suballocator rollback | Verify selected callback failure contracts and existing fixes; repair only applicable bookkeeping defects. Distinguish bitmap rollback from irreversible page effects; no generic transaction/retry layer or stronger atomicity guarantee. |
 | S9 | 13 — floppy/FDC ownership | Verify cross-thread state and actual host device lifetime; repair demonstrated ownership defects. |
 | S10 | 15 — keyboard layout | Determine whether a modifiable host boundary actually exposes the length risk; guest COMMAND changes are excluded. |
 | S11 | 22 — XMS dispatch | Check release dispatch bounds and supported invalid inputs; repair confirmed host indexing risk. |
@@ -156,3 +174,13 @@ and unchanged-size bypasses. No missing dispatcher/provider or displaced local
 implementation was found. Actual-provider, real DOS and all 16 selected Full
 gates pass; the final 0.0.478/protocol-67 package is published only to worktree
 assets/release. S8/finding 11 (suballocator callback rollback) is next proposed.
+
+## S8 disposition
+
+[S8](../evidence/m0-t478-s8-suballoc-disposition.md) confirms selected suballocator
+code equals both original families. Normal lifecycle tests pass and failure
+characterization reproduces original limitations. Under the owner's original
+semantics ceiling, no stronger rollback or new production behavior is added.
+Known limitations remain recorded, not fixed; reopen only for project drift or
+explicitly admitted stronger original-failure semantics. S9/finding 13 is next
+proposed, not admitted.

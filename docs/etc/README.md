@@ -1229,3 +1229,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T478 S6 SAS tail disposition](evidence/m0-t478-s6-sas-vector.md): current source/binary recheck, original-capability limit and no-production-change closure.
 
 - [T478 S7 XMS boundary correction](evidence/m0-t478-s7-xms-boundaries.md): original zero/equal-size return semantics, minimal host correction and verification.
+
+- [T478 S8 suballocator disposition](evidence/m0-t478-s8-suballoc-disposition.md): original-equivalence comparison, existing lifecycle tests and retained failure limits.

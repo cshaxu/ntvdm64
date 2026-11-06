@@ -1,0 +1,61 @@
+{
+  "baseline_commit": "7d49b5d2f",
+  "disposition": "Original-equivalent known limitations retained; not a rollback fix or new guarantee.",
+  "source_and_input_sha256": {
+    "src/mvdm-host/suballoc/suballoc.c": "DDE9CB4E50ACA817922649A8D6A7816F53B1C331A0FA7ED6055BE23202871B32",
+    "src/mvdm-host/suballoc/suballcp.h": "A03BE40C18D75F3B361B428DA8DDBAE452898EDDD11859154B327E7E238439E2",
+    "src/mvdm-host/xms.486/xms.c": "592F4A063AD84C21890CDC15E56D4900E6669224C7C34C829C09D25DFF9BED75",
+    "src/mvdm-host/softpc.new/host/src/nt_mem.c": "8F4CCDD0447F4C9D10D9A7752CA67C3A6A977A791B296289034FF4A30E910A77",
+    "tests/mvdm/suballoc/suballoc_lifecycle_fixture.c": "5A61AC4F547D1247672C1DAFFC0495412D476FDA7C2C50A6E91B4E109FFC1F92",
+    "build/.ninja/msvc-x86-release/worker/original-mvdm-host-suballoc.lib": "28D6155BC613C77D3EEC9333A0BC663836D7FF72950E81E56BCD61921055DBB7",
+    "build/.ninja/msvc-x86-release/worker/obj/xms/xms.obj": "4C62024D89E821BB75D99A360D33FEAAFAF4B28494DD98DE009855FCDCAD6E07",
+    "build/.ninja/msvc-x86-release/worker/ntvdm.exe.map": "FDB14FD021BC482C875580230C57C950E90475048CDD5C5642A96F966CA7D097",
+    "artifacts\\mvdm-audit\\shard-2\\suballoc-s8-recheck.ps1": "D1590962B0DE296AAFBDCDC6ABE241B5E02E7ECB5ADF584C93F50E50235F1540",
+    "O:/repos.external/OpenNT/base/mvdm/suballoc/suballoc.c": "B06496E16D551F2BBAC37D896B61857C6569EDA8C98FB3D26DBF574E594148E0",
+    "O:/repos.external/OpenNT-4.5/nt/private/mvdm/suballoc/suballoc.c": "B06496E16D551F2BBAC37D896B61857C6569EDA8C98FB3D26DBF574E594148E0",
+    "artifacts/mvdm-audit/shard-2/suballoc-s8-recheck.ps1": "EAA468C5962D9A1CEB3826369EEB6CEAFDEAEFBBF4153F2CAD13768040EE4504"
+  },
+  "preprocessed": {
+    "normalization": "Remove blank lines and trim line-edge whitespace only; preserve internal whitespace and literal contents.",
+    "rows": {
+      "current": {
+        "normalized_sha256": "58766c748bc9ee437f0b62c0b997ccd2848e1db9834fecd2cb6cc94e5d206d00",
+        "characters": 935809
+      },
+      "opennt": {
+        "normalized_sha256": "58766c748bc9ee437f0b62c0b997ccd2848e1db9834fecd2cb6cc94e5d206d00",
+        "characters": 935809
+      },
+      "opennt45": {
+        "normalized_sha256": "58766c748bc9ee437f0b62c0b997ccd2848e1db9834fecd2cb6cc94e5d206d00",
+        "characters": 935809
+      }
+    }
+  },
+  "run": {
+    "exit_code": 0,
+    "started": "2026-11-05T18:02:08.7011359-08:00",
+    "ended": "2026-11-05T18:03:01.8675229-08:00",
+    "pid": 24044
+  },
+  "normal": [
+    "SUBALLOC_ROUND_TAIL_GROW_SHRINK_OK",
+    "SUBALLOC_PRECEDING_OVERLAP_DATA_OK",
+    "SUBALLOC_ELSEWHERE_DATA_OK",
+    "SUBALLOC_FRAGMENT_EXHAUST_FAILGROW_COALESCE_OK",
+    "SUBALLOC_FIRST_COMMIT_FAILURE_REUSE_OK"
+  ],
+  "failure_characterization": [
+    "LIMITATION_PARTIAL_COMMIT_NO_ROLLBACK: first page committed; bitmap free",
+    "LIMITATION_DECOMMIT_FAILURE_BITMAP_NOT_RESTORED: failed free exposes 4096 bytes"
+  ],
+  "package_id": "25974683-9d30-4f02-a62c-32e8ca3df424",
+  "release_images_verified": 10,
+  "raw_ntvdm_matches_release_manifest_input": true,
+  "limitations": [
+    "Failure-audit exit zero means expected original limitation reproduced, not robust rollback passed.",
+    "No actual guest/native API failure injection in S8.",
+    "Existing S7 Full and guest results are reused for unchanged product inputs; no fresh product Full or publication."
+  ],
+  "unsuccessful_attempt": "Initial runner expected per-object cflags; graph uses inherited global cflags. Corrected before comparison/fixture execution."
+}
