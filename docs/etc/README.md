@@ -1303,3 +1303,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T479 S6 I/O audit](operations/m0-t479-s6-io-audit.md): all47-operation inventory and finite implementation groups; no complete I/O acceptance yet.
 
 - [T479 S6 pre-import checkpoint](evidence/m0-t479-s6-pre-import.md): owner-directed preservation commit, failed fill002 evidence and integration handoff.
+
+- [T479 S6 combined main delivery](evidence/m0-t479-s6-main-integration.md): fast-forwarded recovery, unified eleven-image build/verification/publication and retained S6 failure boundaries.

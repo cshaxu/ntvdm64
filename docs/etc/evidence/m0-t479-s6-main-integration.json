@@ -1,0 +1,428 @@
+{
+  "task": "T479 S6 P2 combined integration",
+  "base": "f095c77bf2670fa8699582feb35a28b5ae1c7603",
+  "importedTip": "661a1315f9ac1ebf9d0239e4ebd335898ed89ca2",
+  "fastForwardCommits": 67,
+  "applicationVersion": "0.0.479",
+  "protocol": 67,
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 409839,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 1940,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1787,
+        "CleanupMs": 567,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 421,
+        "CleanupMs": 563,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 67199,
+        "CleanupMs": 484,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 52669,
+        "CleanupMs": 547,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 47931,
+        "CleanupMs": 431,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 16677,
+        "CleanupMs": 577,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 12397,
+        "CleanupMs": 438,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 85883,
+        "CleanupMs": 589,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12406,
+        "CleanupMs": 656,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 30658,
+        "CleanupMs": 509,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 31165,
+        "CleanupMs": 586,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 7475,
+        "CleanupMs": 514,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7895,
+        "CleanupMs": 540,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10825,
+        "CleanupMs": 537,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 5169,
+        "CleanupMs": 453,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7301,
+        "CleanupMs": 509,
+        "Passed": true
+      }
+    ]
+  },
+  "publication": {
+    "packageId": "795498ef-6a71-4fd8-a82c-0f0a7d02e76c",
+    "destinations": [
+      "O:/repos.hobby/ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "images": [
+      {
+        "Name": "VCDEX.DLL",
+        "RelativePath": "system32\\VCDEX.DLL",
+        "Sha256": "62DD38830B988DE7518D0541DAB30CB88287FF55D4DE787F0AB35DFFF9B28775",
+        "Machine": 332,
+        "PackageId": "795498ef-6a71-4fd8-a82c-0f0a7d02e76c",
+        "InputSha256": "D19FCF16FBB25F38E73FBA7A415AAD4A132304533D7573A0EDA56A1037D68C87"
+      },
+      {
+        "Name": "run16.exe",
+        "RelativePath": "system32\\run16.exe",
+        "Sha256": "63FB222316662F08E27A70397D39BB857A06A16BD23E60C43D0B7F9EB4042EF8",
+        "Machine": 34404,
+        "PackageId": "795498ef-6a71-4fd8-a82c-0f0a7d02e76c",
+        "InputSha256": "06C65A599A60F195C39584D2530B9EA2E7ACF4AD797E7A400CE79A1AEE80D5AF"
+      },
+      {
+        "Name": "ntsrv.exe",
+        "RelativePath": "system32\\ntsrv.exe",
+        "Sha256": "BD03F2CB8373777E3CF146AB685EB389ADCBFF1BA805CC27D5167DFED92FD14B",
+        "Machine": 34404,
+        "PackageId": "795498ef-6a71-4fd8-a82c-0f0a7d02e76c",
+        "InputSha256": "3048E51258D9AE57DC29435827D19EC3FBF4E2D6F741218EA150CEB2D9AA4F40"
+      },
+      {
+        "Name": "ntcon.exe",
+        "RelativePath": "system32\\ntcon.exe",
+        "Sha256": "3B8157933D3B17420471F759E3EC924033ECB508E9842A29B936DBE0065BE04A",
+        "Machine": 34404,
+        "PackageId": "795498ef-6a71-4fd8-a82c-0f0a7d02e76c",
+        "InputSha256": "C848E13DAA76D1429A50C332DA50B0907C067AA89351B9CE6FD7EC3A7C878BD2"
+      },
+      {
+        "Name": "ntvdm.exe",
+        "RelativePath": "system32\\ntvdm.exe",
+        "Sha256": "D790968F5F2F78128C3488BBAFB954529D7B19806D23571AFC26C7FE3D3927A2",
+        "Machine": 332,
+        "PackageId": "795498ef-6a71-4fd8-a82c-0f0a7d02e76c",
+        "InputSha256": "DB09531589E5849F43BA4C9AA03618194AC6400A57A635C387C4AB9F8168FC2D"
+      },
+      {
+        "Name": "ntvwm.exe",
+        "RelativePath": "system32\\ntvwm.exe",
+        "Sha256": "1C7C21A6B60D17151ACC2DD6B8280FCA8F07A96605D4DA944154DF16AA90452F",
+        "Machine": 34404,
+        "PackageId": "795498ef-6a71-4fd8-a82c-0f0a7d02e76c",
+        "InputSha256": "35D31BB7322C68CE848D06589D7D1E0EB57B44ED7721464FCAF5937B5D8E0DB4"
+      },
+      {
+        "Name": "ntmon.exe",
+        "RelativePath": "system32\\ntmon.exe",
+        "Sha256": "EB605476E273C19AD1B40D588C3D680FC50DBFDFF1E48F84DC1BC7C36CF019CD",
+        "Machine": 34404,
+        "PackageId": "795498ef-6a71-4fd8-a82c-0f0a7d02e76c",
+        "InputSha256": "84B73E082709CD0D613B459AD6F6E6A89397928AB6348EB1FC924C0FEAFCAEA5"
+      },
+      {
+        "Name": "WOW32.DLL",
+        "RelativePath": "system32\\WOW32.DLL",
+        "Sha256": "435CA4FBC71820625EE4016661EF29F602B923ACBC02096E545DD5251BB90472",
+        "Machine": 332,
+        "PackageId": "795498ef-6a71-4fd8-a82c-0f0a7d02e76c",
+        "InputSha256": "789AAAA8746725F1679B9F6475058581BA9C543572BABBBB680A399B602F8487"
+      },
+      {
+        "Name": "VDMREDIR.DLL",
+        "RelativePath": "system32\\VDMREDIR.DLL",
+        "Sha256": "F7EFA1E9243615F676B686041C9D21619C16A4469813DC9D16A84AB0EF037167",
+        "Machine": 332,
+        "PackageId": "795498ef-6a71-4fd8-a82c-0f0a7d02e76c",
+        "InputSha256": "7F26335309249AE7C1C0E89D7F11993D853F9E80ADFDBD0C124518E66048EC22"
+      },
+      {
+        "Name": "nthook32.dll",
+        "RelativePath": "system32\\nthook32.dll",
+        "Sha256": "96F2DA3FECC75CF6AF16EBDBA006131BBCF37BDD2AD0A1D609699D3052B15ABC",
+        "Machine": 332,
+        "PackageId": "795498ef-6a71-4fd8-a82c-0f0a7d02e76c",
+        "InputSha256": "31B5F88B3F41C8CC8C8CDC72BD639FE41769803FD39858759F026F336B511872"
+      },
+      {
+        "Name": "nthook64.dll",
+        "RelativePath": "system32\\nthook64.dll",
+        "Sha256": "1FBDD3BA05C7EDC6BCFF1DD0D6C707D42C08398C16D15F36517065B18EBE6ABA",
+        "Machine": 34404,
+        "PackageId": "795498ef-6a71-4fd8-a82c-0f0a7d02e76c",
+        "InputSha256": "CADF89049F83D7919F07A30545D0F86907FB5527079386D93EA1CF6E38B8E9A6"
+      }
+    ],
+    "manifestHash": "160403EA60948A0AE12B02D0387B0DEDA9CAF2B757CBF94DCD7D8BC3A3713D94",
+    "utc": "2026-11-06T19:07:53.6937369Z"
+  },
+  "knownFailure": "fill002 remains failed/unlocalized; oldfill006 and combined fill003-005 pass, not root-cause proof",
+  "alternateRtc": "67 checks / 13 failures retained per T478 S35; actual ROM RtcEntry and RtcAlarm pass",
+  "guestUnmodified": true,
+  "stageClosed": false,
+  "artifacts": [
+    {
+      "path": "build/t479-s6-integration/build001.stdout",
+      "bytes": 212446,
+      "sha256": "BBDBEAE94642010BF787E6D33289159AB7719382FB488748BB2AB45C9D37631E"
+    },
+    {
+      "path": "build/t479-s6-integration/build001.stderr",
+      "bytes": 22,
+      "sha256": "3A1CF97D15A56535669CCB5A40687DFF36E0F08006196F0CFBBBC82A70345E7A"
+    },
+    {
+      "path": "build/t479-s6-integration/build001.exit",
+      "bytes": 1,
+      "sha256": "5FECEB66FFC86F38D952786C6D696C79C2DBC239DD4E91B46729D73A27FB57E9"
+    },
+    {
+      "path": "build/t479-s6-integration/focused001.stdout",
+      "bytes": 1299,
+      "sha256": "53A0487DD220DE4F216A6696FC01E5BCD38747F0754B2D67835C52281A49E872"
+    },
+    {
+      "path": "build/t479-s6-integration/focused001.exit",
+      "bytes": 1,
+      "sha256": "5FECEB66FFC86F38D952786C6D696C79C2DBC239DD4E91B46729D73A27FB57E9"
+    },
+    {
+      "path": "build/t479-s6-integration/focused002.stdout",
+      "bytes": 267,
+      "sha256": "DDBA142C717D3C4D69C5E744FC2513740897060FFD42D63B4953A0B878C8F761"
+    },
+    {
+      "path": "build/t479-s6-integration/focused002.stderr",
+      "bytes": 916,
+      "sha256": "8B69350A0657E5ED64CB58763AE4849CD97B71633ED2A07AF7C782B2C4B48DAE"
+    },
+    {
+      "path": "build/t479-s6-integration/focused003.stderr",
+      "bytes": 980,
+      "sha256": "E9337BDFBB09CBEAAD5C79D73AF2B3D9E930DEFA719F01C9C0FC8F4D2C4DF4AD"
+    },
+    {
+      "path": "build/t479-s6-integration/focused004.stdout",
+      "bytes": 1779,
+      "sha256": "0726766F9A128130F99B232DA97292EB1CEB860326B2F0F717E26A70B9C1B09B"
+    },
+    {
+      "path": "build/t479-s6-integration/focused004.stderr",
+      "bytes": 32,
+      "sha256": "B8434A92FE9BED5AD2E4753A20F983E211D1996069B16D085B1F2911DDFF3B97"
+    },
+    {
+      "path": "build/t479-s6-integration/focused005.stdout",
+      "bytes": 632,
+      "sha256": "8BA794A83817EE1CFCF49C040EA8B4C060A291D1D3795E5E386C6E4B4D039FAD"
+    },
+    {
+      "path": "build/t479-s6-integration/focused005.exit",
+      "bytes": 1,
+      "sha256": "5FECEB66FFC86F38D952786C6D696C79C2DBC239DD4E91B46729D73A27FB57E9"
+    },
+    {
+      "path": "build/t479-s6-integration/release001.stdout",
+      "bytes": 36126,
+      "sha256": "15FD063FFE2A775E269E83520AB75842CEDD4CE2CEAF3315DA0A1A1EB37D6C97"
+    },
+    {
+      "path": "build/t479-s6-integration/release001.stderr",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "build/t479-s6-integration/release001.exit",
+      "bytes": 1,
+      "sha256": "5FECEB66FFC86F38D952786C6D696C79C2DBC239DD4E91B46729D73A27FB57E9"
+    },
+    {
+      "path": "build/t479-s6-integration/r001-verification/full/timings.json",
+      "bytes": 2101,
+      "sha256": "AFB2D93B4EC76D83DA185A7E6580CBAA94473D02038FC38D8A961B4EC0815F1F"
+    },
+    {
+      "path": "build/t479-s6-integration/publication.json",
+      "bytes": 4144,
+      "sha256": "42E6780B8921FCECD1839F56207BF1AC0E06937EDE0A6D727A26DB0C47ED1CD3"
+    },
+    {
+      "path": "build/t479-s6-integration/r001-package/product-system32-manifest.json",
+      "bytes": 3665,
+      "sha256": "160403EA60948A0AE12B02D0387B0DEDA9CAF2B757CBF94DCD7D8BC3A3713D94"
+    },
+    {
+      "path": "build/t479-s6-integration/fill003.stdout",
+      "bytes": 65397,
+      "sha256": "A1BF53FE0748BA21111715AA09F99B038B23EB9DBE72EA7A5E16F09FB1668C16"
+    },
+    {
+      "path": "build/t479-s6-integration/fill003.exit",
+      "bytes": 1,
+      "sha256": "5FECEB66FFC86F38D952786C6D696C79C2DBC239DD4E91B46729D73A27FB57E9"
+    },
+    {
+      "path": "build/t479-s6-integration/fill-repeat.stdout",
+      "bytes": 1226,
+      "sha256": "7CF3EA2E24A03002FEC27D2EA65BE2C971441763C6127878AAD695055AFD6394"
+    },
+    {
+      "path": "build/t479-s6-integration/fill-repeat.exit",
+      "bytes": 1,
+      "sha256": "5FECEB66FFC86F38D952786C6D696C79C2DBC239DD4E91B46729D73A27FB57E9"
+    },
+    {
+      "path": "build/t479-s6-integration/oldfill006.stdout",
+      "bytes": 486,
+      "sha256": "7451F0AA038B5987514C3E10C4288F2EBCA1F1E366984F14FCB4F4D62BE599B9"
+    },
+    {
+      "path": "build/t479-s6-integration/oldfill006.stderr",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "build/t479-s6-integration/runtime-extra.stdout",
+      "bytes": 721,
+      "sha256": "018A12665FFBCA7195309C5224A8F2A0899F961C2EA9FA3E092F0DD7A80DEC39"
+    },
+    {
+      "path": "build/t479-s6-integration/runtime-extra.stderr",
+      "bytes": 332,
+      "sha256": "C8996BBA5C522EAF1FF7D4086FA44D74A1944B7E698A3E2034D6320597F1CD4A"
+    },
+    {
+      "path": "build/t479-s6-integration/runtime-extra2.stdout",
+      "bytes": 839,
+      "sha256": "5061B2166F8880D5CEFF94BA2937D1FBDA68CF871520DA4DD09768389C9C3FF2"
+    },
+    {
+      "path": "build/t479-s6-integration/runtime-extra2.stderr",
+      "bytes": 379,
+      "sha256": "55534ADC5CCA911C18488312B5F117FD6941D06F8C0340E4DE3AC3111D8EFFC8"
+    },
+    {
+      "path": "build/t479-s6-integration/gameplay.exit",
+      "bytes": 1,
+      "sha256": "5FECEB66FFC86F38D952786C6D696C79C2DBC239DD4E91B46729D73A27FB57E9"
+    },
+    {
+      "path": "build/t479-s6-integration/gameplay-r2/result.txt",
+      "bytes": 68,
+      "sha256": "C3287D42C4DEFFB9AC68A6BEE28CCF6258F354EEAC3BA9BF7A82FD1B643A09F8"
+    },
+    {
+      "path": "build/t479-s6-integration/slave-eoi-r3/result.json",
+      "bytes": 1140,
+      "sha256": "5547CFCEA7B65F7DC8DE49BDF0F53C8BAEE8E876A81B4ACCDA143913FF544B36"
+    },
+    {
+      "path": "build/t479-s6-integration/xms/result.json",
+      "bytes": 378,
+      "sha256": "CEEEFF54D91C5475944B4CB879B7E909C5BE1810F743BAEB478CA34877E6E6C9"
+    },
+    {
+      "path": "build/t479-s6-integration/rtc/result.json",
+      "bytes": 638,
+      "sha256": "A8AC9ECA7E462BF6DE51EB6DE575EAD6CF4E2C339E92C1FC6CE5ABF54B10C3EA"
+    },
+    {
+      "path": "build/t479-s6-integration/RtcEntry/result.txt",
+      "bytes": 110,
+      "sha256": "73C5BF9FD81CB1FE115AADF85630EDE02F574F6DECAE2E7EE8F5CCCB3347B2D4"
+    },
+    {
+      "path": "build/t479-s6-integration/RtcAlarm/result.txt",
+      "bytes": 110,
+      "sha256": "9CE9DA46EE2CF4E76FBC05FEB6002F4F5B864567FD5AC07FFA1EB4920FDF6136"
+    },
+    {
+      "path": "build/t479-s6-integration/checked-fill003/runtime/matrix-results.json",
+      "bytes": 369,
+      "sha256": "1277310DCC81BF5E7458EA87DD09B383606E6BA019773842D98D5EF8FB7C72CA"
+    },
+    {
+      "path": "build/t479-s6-integration/checked-fill004/runtime/matrix-results.json",
+      "bytes": 369,
+      "sha256": "7FDF289FEEC740F37FA5938B34DE5696F4118B232E14746EC4E18A27561973A1"
+    },
+    {
+      "path": "build/t479-s6-integration/checked-fill005/runtime/matrix-results.json",
+      "bytes": 369,
+      "sha256": "D1E59AB705AFD656D6281F64AF076B37468F75F3FE2A786C8F721276680A8A86"
+    },
+    {
+      "path": "build/t479-s6-integration/checked-oldfill006/runtime/matrix-results.json",
+      "bytes": 372,
+      "sha256": "326287F186095A87EC318FE44D658F3CE96E6259242EA8AF7C62CBA83828770B"
+    },
+    {
+      "path": "build/t479-s6-integration/checked-nested007/runtime/matrix-results.json",
+      "bytes": 371,
+      "sha256": "E32683092607CF1654BA27C7C53C0AF66F3B0AD0990D0BCEAAEA66D3CFEADFBD"
+    },
+    {
+      "path": "build/t479-s6-integration/governance2.stdout",
+      "bytes": 47,
+      "sha256": "CFD597275399951EA25568FAAE268FE21175399CA22C178221C702249AF14D45"
+    },
+    {
+      "path": "build/t479-s6-integration/governance2.exit",
+      "bytes": 1,
+      "sha256": "5FECEB66FFC86F38D952786C6D696C79C2DBC239DD4E91B46729D73A27FB57E9"
+    }
+  ]
+}

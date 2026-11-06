@@ -10,6 +10,8 @@
 #include <vdmapi.h>
 #include "common/base_srv/base_rpc_client.h"
 #include "ntvdm-exe/softpc/include/mvdm_standalone_worker.h"
+#include "ntvdm-exe/softpc/include/mvdm_vm_bridge.h"
+#include "ntvdm-exe/softpc/include/mvdm_vm_ingress.h"
 
 /* CPU-only fixtures cannot reach a broker or frontend. Keep new adapter
  * imports fail-closed, just like ExitVDM below; do not connect real products. */
@@ -20,6 +22,17 @@ static DWORD unexpected_broker(void)
 }
 /* These host-only fixtures never own VM frontends or activate worker close. */
 DWORD mvdm_standalone_worker_close_frontends(void) { return unexpected_broker(); }
+/* PIC/CPU fixtures do not load the independent VMM frontend driver. */
+int mvdm_vm_command_enter(uint32_t service)
+{ (void)service; return (int)unexpected_broker(); }
+int mvdm_vm_bridge_bop(uint32_t signature, uint32_t operation,
+    uint32_t low, uint32_t high, uint32_t vm, int ring0,
+    mvdm_vm_bridge_result *result)
+{
+    (void)signature; (void)operation; (void)low; (void)high;
+    (void)vm; (void)ring0; (void)result;
+    return (int)unexpected_broker();
+}
 DWORD OpenNtBaseClientConnectCurrent(void) { return unexpected_broker(); }
 DWORD OpenNtBaseClientWatchBroker(void (*lost)(void *),void *context)
 { (void)lost;(void)context;return unexpected_broker(); }

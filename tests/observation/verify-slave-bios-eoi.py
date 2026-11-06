@@ -17,6 +17,10 @@ if not out.is_relative_to(repo/'build') or out.exists():
     raise SystemExit('Fresh repository build root required')
 out.mkdir(parents=True)
 cache=repo/'build/.ninja/msvc-x86-release/worker'
+with (out/'dependencies.txt').open('w',encoding='utf-8') as log:
+    subprocess.run(['cmd.exe','/d','/c',str(cache/'run-ninja-parallel.cmd'),
+                    'pic-reset-eoi-test.exe'],cwd=repo,stdout=log,
+                   stderr=subprocess.STDOUT,check=True)
 graph=(cache/'build.ninja').read_text()
 flags=re.search(r'^cflags = (.*)$',graph,re.M)[1].replace('$:',':')
 release=re.search(r'^release_cflags = (.*)$',graph,re.M)[1]

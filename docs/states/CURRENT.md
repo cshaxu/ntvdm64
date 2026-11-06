@@ -3,9 +3,8 @@
 ## Current Work
 
 **Active: M0 T479 S6** - Win3.1 complete VM I/O and nested chains.
-Owner requests [pre-import preservation](../etc/evidence/m0-t479-s6-pre-import.md).
-Goal execution is paused; no S6 expansion before adjacent-commit integration.
-Candidate fills: unit/build pass, fill002 normal exit fails; not published.
+Owner-requested [combined integration](../etc/evidence/m0-t479-s6-main-integration.md) is delivered.
+Candidate fills pass current unit/guest tests; historical fill002 remains unlocalized, not fixed.
 
 [S5 closure](../etc/evidence/m0-t479-s5-closure.md) resolves command continuation
 and original reentry ownership with actual two-VM nested execution. The original
@@ -19,17 +18,17 @@ S6 starts with the existing47-operation protocol and actual guest transfer paths
 physical input, fonts and complete graphics/Console behavior are not accepted.
 S4 Win95 continuation remains deferred until the Win3.1 S6 path works.
 
-## T478 Integration Handoff
+## T478 Integration Delivery
 
-The mirror-source-audit branch is rebased onto mainf095c77bf, retaining the
-T479 S6 packet below and T478's [closed recovery](../history/m0-t478-closure.md).
-Owner explicitly delegates compilation, tests and publication of the combined
-source to the main worktree. Historical T478 passes do not certify this merge.
-The ten main release images/manifest remain the main snapshot; the separately
-retained VCDEX image is historical T478 output, not part of that ten-image
-manifest. Rebuild the coherent eleven-image package before claiming combined
-product acceptance. No O:/winnt write or push was performed in this worktree.
-[Rebase record](../etc/evidence/m0-t478-main-rebase.md).
+Main fast-forwarded f095c77bf to661a1315f (67 commits). Fresh combined
+x86/x64 builds, focused fixtures, actual guest regressions and Full16/16 pass.
+Package795498ef-6a71-4fd8-a82c-0f0a7d02e76c includes VCDEX.DLL: all11 images,
+license and common manifest are published and hash-verified at both destinations.
+[Delivery and remaining boundaries](../etc/evidence/m0-t479-s6-main-integration.md).
+S6 remains active; fill002 is not reclassified or declared repaired. The old
+package and three combined fill runs now exit normally, without root-cause proof.
+Temporary scope: build/t479-s6-integration; owned60-minute phases,2GiB,
+15-minute no-progress review. Retain failed and successful receipts for S6.
 
 ## Active Packet
 
