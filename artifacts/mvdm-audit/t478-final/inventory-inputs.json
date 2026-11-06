@@ -89,7 +89,8 @@
     "current-original-owner-wired; bounded-admission-worker-evidence": 2,
     "current-original-owner-wired; bounded-dual-environment-evidence": 1,
     "current-original-owner-wired; bounded-command-frame-evidence": 1,
-    "pending-product-evidence": 1033,
+    "current-original-owner-wired; bounded-dispatch-evidence": 2,
+    "pending-product-evidence": 1031,
     "inactive-edition-evidence-only": 483,
     "current-original-owner-wired; bounded-runtime-verified": 1
   },

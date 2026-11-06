@@ -658,3 +658,50 @@ larger S45/T478 reconciliation. Product source and S43 release remain unchanged;
 only focused tests/build support/evidence changed. No product rebuild, new Full,
 publication, O:/winnt write or push is claimed or required for these unchanged
 product inputs.
+
+## P17 DOS dispatcher ownership disposition
+
+The [dispatch receipt](../../../artifacts/mvdm-audit/t478-final/s45-dos-dispatch-disposition.json)
+resolves DOS16:f86c89a4009a155dd103 and DOS16:17cc7e96d45b2d3888e2.
+Current MS_bop_0 and MS_bop_4 bodies are identical to pinned OpenNT after
+newline normalization. Both retain post-handler current-IP increment and ignore
+dispatch BOOL. DEM uses its one-byte Sim32 pointer and excludes date/time from
+IDLE_disk; COMMAND uses its original real-mode sas_load expression. Register
+view/wrap semantics remain the next separate row, not inferred from names.
+
+All17 COMMAND entries match original order, header ordinals and product-map
+bindings. The new [actual-object fixture](../../../tests/mvdm-host/dos/command/command_service_fixture.c)
+links the current worker cmddisp.obj to distinct sentinel handlers. All17
+selectors invoke the expected sentinel once and return TRUE. It does not
+replace the dispatcher or execute real handlers; it proves routing only.
+The release table has no invalid-selector guard, while its excluded original
+DBG branch does. No invalid table access is executed and no new guard added.
+
+All73 DEM entries align with current dossvc.h and product map. The only
+original-table differences are slots66/67: existing DIV-188 returns CF1 to
+select original ordinary DOS read/write fallback instead of pretending that
+the unavailable kernel NTFastDOSIO executed. The [T420 S33 disposition](m0-t420-s33-dem-capability-closure.md)
+and original guest file-operation witness remain bounded supporting evidence.
+No new fast-I/O provider or stronger behavior is warranted. Three original
+comments use different spellings: SVC_FCBIO, SVC_DEMNOTYETIMPLEMENTED and
+SVC_DEMBUILDDPBLIST map to header SVC_DEMFCBIO, SVC_DEMDRIVEFROMHANDLE and
+SVC_DEMGETDPBLIST at47/64/70. The initial mechanical comment-name lookup failed
+on the first; explicit ordinal/source review resolved all three. No product
+constant discrepancy exists and original comments were not rewritten.
+
+DEM's source guard rejects selector>=0x49 with CF1/FALSE before table access;
+valid selection clears the optional hard-error flag, sets CurrentISVC and
+invokes the selected handler. TRUE is not a statement that guest CF is clear.
+The six remaining demNotYetImplemented aliases clear CF; their two historical
+fast-I/O aliases now use the registered fallback above. These DEM conditions
+are source findings, not a new73-service runtime certification.
+
+Background run-service-p17.ps1 (PID12500,120s build/30s case budgets) compiles
+and links cmd-svc-probe.exe in the stable fixture cache. Build and test exit0,
+with COMMAND_ORIGINAL_OBJECT_17_ROUTES_OK. Object, test and binary hashes are
+pinned in the receipt; production source is unchanged. The generator adds only
+this fixture target. S43 normal startup/Full remain regression context, not
+proof of every dispatcher handler or invalid-input path.
+
+1031 active inventory identities remain pending. S45/T478 remain active;
+no product change, fresh Full, publication, O:/winnt write or push.

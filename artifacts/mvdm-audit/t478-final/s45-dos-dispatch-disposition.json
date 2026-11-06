@@ -1,0 +1,618 @@
+{
+  "ids": [
+    "DOS16:f86c89a4009a155dd103",
+    "DOS16:17cc7e96d45b2d3888e2"
+  ],
+  "tables": {
+    "command": {
+      "entries": [
+        {
+          "slot": 0,
+          "handler": "cmdExitVDM",
+          "table_comment": "SVC_CMDEXITVDM",
+          "header_constant": "SVC_CMDEXITVDM"
+        },
+        {
+          "slot": 1,
+          "handler": "cmdGetNextCmd",
+          "table_comment": "SVC_CMDGETNEXTCMD",
+          "header_constant": "SVC_CMDGETNEXTCMD"
+        },
+        {
+          "slot": 2,
+          "handler": "cmdComSpec",
+          "table_comment": "SVC_CMDCOMSPEC",
+          "header_constant": "SVC_CMDCOMSPEC"
+        },
+        {
+          "slot": 3,
+          "handler": "cmdSaveWorld",
+          "table_comment": "SVC_CMDSAVEWORLD",
+          "header_constant": "SVC_CMDSAVEWORLD"
+        },
+        {
+          "slot": 4,
+          "handler": "cmdGetCurrentDir",
+          "table_comment": "SVC_CMDGETCURDIR",
+          "header_constant": "SVC_CMDGETCURDIR"
+        },
+        {
+          "slot": 5,
+          "handler": "cmdSetInfo",
+          "table_comment": "SVC_CMDSETINFO",
+          "header_constant": "SVC_CMDSETINFO"
+        },
+        {
+          "slot": 6,
+          "handler": "cmdGetStdHandle",
+          "table_comment": "SVC_GETSTDHANDLE",
+          "header_constant": "SVC_GETSTDHANDLE"
+        },
+        {
+          "slot": 7,
+          "handler": "cmdCheckBinary",
+          "table_comment": "SVC_CMDCHECKBINARY",
+          "header_constant": "SVC_CMDCHECKBINARY"
+        },
+        {
+          "slot": 8,
+          "handler": "cmdExec",
+          "table_comment": "SVC_CMDEXEC",
+          "header_constant": "SVC_CMDEXEC"
+        },
+        {
+          "slot": 9,
+          "handler": "cmdInitConsole",
+          "table_comment": "SVC_CMDINITCONSOLE",
+          "header_constant": "SVC_CMDINITCONSOLE"
+        },
+        {
+          "slot": 10,
+          "handler": "cmdExecComspec32",
+          "table_comment": "SVC_EXECCOMSPEC32",
+          "header_constant": "SVC_EXECCOMSPEC32"
+        },
+        {
+          "slot": 11,
+          "handler": "cmdReturnExitCode",
+          "table_comment": "SVC_RETURNEXITCODE",
+          "header_constant": "SVC_RETURNEXITCODE"
+        },
+        {
+          "slot": 12,
+          "handler": "cmdGetConfigSys",
+          "table_comment": "SVC_GETCONFIGSYS",
+          "header_constant": "SVC_GETCONFIGSYS"
+        },
+        {
+          "slot": 13,
+          "handler": "cmdGetAutoexecBat",
+          "table_comment": "SVC_GETAUTOEXECBAT",
+          "header_constant": "SVC_GETAUTOEXECBAT"
+        },
+        {
+          "slot": 14,
+          "handler": "cmdGetKbdLayout",
+          "table_comment": "SVC_GETKBDLAYOUT",
+          "header_constant": "SVC_GETKBDLAYOUT"
+        },
+        {
+          "slot": 15,
+          "handler": "cmdGetInitEnvironment",
+          "table_comment": "SVC_GETINITENVIRONMENT",
+          "header_constant": "SVC_GETINITENVIRONMENT"
+        },
+        {
+          "slot": 16,
+          "handler": "cmdGetStartInfo",
+          "table_comment": "SVC_GETSTARTINFO",
+          "header_constant": "SVC_GETSTARTINFO"
+        }
+      ],
+      "all_header_ordinals_match": true,
+      "all_handlers_in_product_map": true,
+      "delta": [],
+      "upstream": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmddisp.c",
+      "upstream_sha256": "2a906e7100da9db6f16bab91c767b149f28e63a0db2803297812a8e86d2b19d6"
+    },
+    "dem": {
+      "entries": [
+        {
+          "slot": 0,
+          "handler": "demChgFilePtr",
+          "table_comment": "SVC_DEMCHGFILEPTR",
+          "header_constant": "SVC_DEMCHGFILEPTR"
+        },
+        {
+          "slot": 1,
+          "handler": "demChMod",
+          "table_comment": "SVC_DEMCHMOD",
+          "header_constant": "SVC_DEMCHMOD"
+        },
+        {
+          "slot": 2,
+          "handler": "demClose",
+          "table_comment": "SVC_DEMCLOSE",
+          "header_constant": "SVC_DEMCLOSE"
+        },
+        {
+          "slot": 3,
+          "handler": "demCreate",
+          "table_comment": "SVC_DEMCREATE",
+          "header_constant": "SVC_DEMCREATE"
+        },
+        {
+          "slot": 4,
+          "handler": "demCreateDir",
+          "table_comment": "SVC_DEMCREATEDIR",
+          "header_constant": "SVC_DEMCREATEDIR"
+        },
+        {
+          "slot": 5,
+          "handler": "demDelete",
+          "table_comment": "SVC_DEMDELETE",
+          "header_constant": "SVC_DEMDELETE"
+        },
+        {
+          "slot": 6,
+          "handler": "demDeleteDir",
+          "table_comment": "SVC_DEMDELETEDIR",
+          "header_constant": "SVC_DEMDELETEDIR"
+        },
+        {
+          "slot": 7,
+          "handler": "demDeleteFCB",
+          "table_comment": "SVC_DEMDELETEFCB",
+          "header_constant": "SVC_DEMDELETEFCB"
+        },
+        {
+          "slot": 8,
+          "handler": "demFileTimes",
+          "table_comment": "SVC_DEMFILETIMES",
+          "header_constant": "SVC_DEMFILETIMES"
+        },
+        {
+          "slot": 9,
+          "handler": "demFindFirst",
+          "table_comment": "SVC_DEMFINDFIRST",
+          "header_constant": "SVC_DEMFINDFIRST"
+        },
+        {
+          "slot": 10,
+          "handler": "demFindFirstFCB",
+          "table_comment": "SVC_DEMFINDFIRSTFCB",
+          "header_constant": "SVC_DEMFINDFIRSTFCB"
+        },
+        {
+          "slot": 11,
+          "handler": "demFindNext",
+          "table_comment": "SVC_DEMFINDNEXT",
+          "header_constant": "SVC_DEMFINDNEXT"
+        },
+        {
+          "slot": 12,
+          "handler": "demFindNextFCB",
+          "table_comment": "SVC_DEMFINDNEXTFCB",
+          "header_constant": "SVC_DEMFINDNEXTFCB"
+        },
+        {
+          "slot": 13,
+          "handler": "demGetBootDrive",
+          "table_comment": "SVC_DEMGETBOOTDRIVE",
+          "header_constant": "SVC_DEMGETBOOTDRIVE"
+        },
+        {
+          "slot": 14,
+          "handler": "demGetDriveFreeSpace",
+          "table_comment": "SVC_DEMGETDRIVEFREESPACE",
+          "header_constant": "SVC_DEMGETDRIVEFREESPACE"
+        },
+        {
+          "slot": 15,
+          "handler": "demGetDrives",
+          "table_comment": "SVC_DEMGETDRIVES",
+          "header_constant": "SVC_DEMGETDRIVES"
+        },
+        {
+          "slot": 16,
+          "handler": "demGSetMediaID",
+          "table_comment": "SVC_DEMGSETMEDIAID",
+          "header_constant": "SVC_DEMGSETMEDIAID"
+        },
+        {
+          "slot": 17,
+          "handler": "demLoadDos",
+          "table_comment": "SVC_DEMLOADDOS",
+          "header_constant": "SVC_DEMLOADDOS"
+        },
+        {
+          "slot": 18,
+          "handler": "demOpen",
+          "table_comment": "SVC_DEMOPEN",
+          "header_constant": "SVC_DEMOPEN"
+        },
+        {
+          "slot": 19,
+          "handler": "demQueryCurrentDir",
+          "table_comment": "SVC_DEMQUERYCURRENTDIR",
+          "header_constant": "SVC_DEMQUERYCURRENTDIR"
+        },
+        {
+          "slot": 20,
+          "handler": "demQueryDate",
+          "table_comment": "SVC_DEMQUERYDATE",
+          "header_constant": "SVC_DEMQUERYDATE"
+        },
+        {
+          "slot": 21,
+          "handler": "demQueryTime",
+          "table_comment": "SVC_DEMQUERYTIME",
+          "header_constant": "SVC_DEMQUERYTIME"
+        },
+        {
+          "slot": 22,
+          "handler": "demRead",
+          "table_comment": "SVC_DEMREAD",
+          "header_constant": "SVC_DEMREAD"
+        },
+        {
+          "slot": 23,
+          "handler": "demRename",
+          "table_comment": "SVC_DEMRENAME",
+          "header_constant": "SVC_DEMRENAME"
+        },
+        {
+          "slot": 24,
+          "handler": "demSetCurrentDir",
+          "table_comment": "SVC_DEMSETCURRENTDIR",
+          "header_constant": "SVC_DEMSETCURRENTDIR"
+        },
+        {
+          "slot": 25,
+          "handler": "demSetDate",
+          "table_comment": "SVC_DEMSETDATE",
+          "header_constant": "SVC_DEMSETDATE"
+        },
+        {
+          "slot": 26,
+          "handler": "demSetDefaultDrive",
+          "table_comment": "SVC_DEMSETDEFAULTDRIVE",
+          "header_constant": "SVC_DEMSETDEFAULTDRIVE"
+        },
+        {
+          "slot": 27,
+          "handler": "demSetDTALocation",
+          "table_comment": "SVC_DEMSETDTALOCATION",
+          "header_constant": "SVC_DEMSETDTALOCATION"
+        },
+        {
+          "slot": 28,
+          "handler": "demSetTime",
+          "table_comment": "SVC_DEMSETTIME",
+          "header_constant": "SVC_DEMSETTIME"
+        },
+        {
+          "slot": 29,
+          "handler": "demSetV86KernelAddr",
+          "table_comment": "SVC_DEMSETV86KERNELADDR",
+          "header_constant": "SVC_DEMSETV86KERNELADDR"
+        },
+        {
+          "slot": 30,
+          "handler": "demWrite",
+          "table_comment": "SVC_DEMWRITE",
+          "header_constant": "SVC_DEMWRITE"
+        },
+        {
+          "slot": 31,
+          "handler": "demNotYetImplemented",
+          "table_comment": "SVC_GETDRIVEINFO",
+          "header_constant": "SVC_GETDRIVEINFO"
+        },
+        {
+          "slot": 32,
+          "handler": "demRenameFCB",
+          "table_comment": "SVC_DEMRENAMEFCB",
+          "header_constant": "SVC_DEMRENAMEFCB"
+        },
+        {
+          "slot": 33,
+          "handler": "demIOCTL",
+          "table_comment": "SVC_DEMIOCTL",
+          "header_constant": "SVC_DEMIOCTL"
+        },
+        {
+          "slot": 34,
+          "handler": "demCreateNew",
+          "table_comment": "SVC_DEMCREATENEW",
+          "header_constant": "SVC_DEMCREATENEW"
+        },
+        {
+          "slot": 35,
+          "handler": "demDiskReset",
+          "table_comment": "SVC_DEMDISKRESET",
+          "header_constant": "SVC_DEMDISKRESET"
+        },
+        {
+          "slot": 36,
+          "handler": "demNotYetImplemented",
+          "table_comment": "SVC_DEMSETDPB",
+          "header_constant": "SVC_DEMSETDPB"
+        },
+        {
+          "slot": 37,
+          "handler": "demGetDPB",
+          "table_comment": "SVC_DEMGETDPB",
+          "header_constant": "SVC_DEMGETDPB"
+        },
+        {
+          "slot": 38,
+          "handler": "demNotYetImplemented",
+          "table_comment": "SVC_DEMSLEAZEFUNC",
+          "header_constant": "SVC_DEMSLEAZEFUNC"
+        },
+        {
+          "slot": 39,
+          "handler": "demCommit",
+          "table_comment": "SVC_DEMCOMMIT",
+          "header_constant": "SVC_DEMCOMMIT"
+        },
+        {
+          "slot": 40,
+          "handler": "demNotYetImplemented",
+          "table_comment": "SVC_DEMEXTHANDLE",
+          "header_constant": "SVC_DEMEXTHANDLE"
+        },
+        {
+          "slot": 41,
+          "handler": "demAbsRead",
+          "table_comment": "SVC_DEMABSDRD",
+          "header_constant": "SVC_DEMABSDRD"
+        },
+        {
+          "slot": 42,
+          "handler": "demAbsWrite",
+          "table_comment": "SVC_DEMABSDWRT",
+          "header_constant": "SVC_DEMABSDWRT"
+        },
+        {
+          "slot": 43,
+          "handler": "demNotYetImplemented",
+          "table_comment": "SVC_DEMGSETCDPG",
+          "header_constant": "SVC_DEMGSETCDPG"
+        },
+        {
+          "slot": 44,
+          "handler": "demCreateFCB",
+          "table_comment": "SVC_DEMCREATEFCB",
+          "header_constant": "SVC_DEMCREATEFCB"
+        },
+        {
+          "slot": 45,
+          "handler": "demOpenFCB",
+          "table_comment": "SVC_DEMOPENFCB",
+          "header_constant": "SVC_DEMOPENFCB"
+        },
+        {
+          "slot": 46,
+          "handler": "demCloseFCB",
+          "table_comment": "SVC_DEMCLOSEFCB",
+          "header_constant": "SVC_DEMCLOSEFCB"
+        },
+        {
+          "slot": 47,
+          "handler": "demFCBIO",
+          "table_comment": "SVC_FCBIO",
+          "header_constant": "SVC_DEMFCBIO"
+        },
+        {
+          "slot": 48,
+          "handler": "demDate16",
+          "table_comment": "SVC_DEMDATE16",
+          "header_constant": "SVC_DEMDATE16"
+        },
+        {
+          "slot": 49,
+          "handler": "demGetFileInfo",
+          "table_comment": "SVC_DEMGETFILEINFO",
+          "header_constant": "SVC_DEMGETFILEINFO"
+        },
+        {
+          "slot": 50,
+          "handler": "demSetHardErrorInfo",
+          "table_comment": "SVC_DEMSETHARDERRORINFO",
+          "header_constant": "SVC_DEMSETHARDERRORINFO"
+        },
+        {
+          "slot": 51,
+          "handler": "demRetry",
+          "table_comment": "SVC_DEMRETRY",
+          "header_constant": "SVC_DEMRETRY"
+        },
+        {
+          "slot": 52,
+          "handler": "demLoadDosAppSym",
+          "table_comment": "SVC_DEMLOADDOSAPPSYM",
+          "header_constant": "SVC_DEMLOADDOSAPPSYM"
+        },
+        {
+          "slot": 53,
+          "handler": "demFreeDosAppSym",
+          "table_comment": "SVC_DEMFREEDOSAPPSYM",
+          "header_constant": "SVC_DEMFREEDOSAPPSYM"
+        },
+        {
+          "slot": 54,
+          "handler": "demEntryDosApp",
+          "table_comment": "SVC_DEMENTRYDOSAPP",
+          "header_constant": "SVC_DEMENTRYDOSAPP"
+        },
+        {
+          "slot": 55,
+          "handler": "demDOSDispCall",
+          "table_comment": "SVC_DEMDOSDISPCALL",
+          "header_constant": "SVC_DEMDOSDISPCALL"
+        },
+        {
+          "slot": 56,
+          "handler": "demDOSDispRet",
+          "table_comment": "SVC_DEMDOSDISPRET",
+          "header_constant": "SVC_DEMDOSDISPRET"
+        },
+        {
+          "slot": 57,
+          "handler": "demOutputString",
+          "table_comment": "SVC_OUTPUT_STRING",
+          "header_constant": "SVC_OUTPUT_STRING"
+        },
+        {
+          "slot": 58,
+          "handler": "demInputString",
+          "table_comment": "SVC_INPUT_STRING",
+          "header_constant": "SVC_INPUT_STRING"
+        },
+        {
+          "slot": 59,
+          "handler": "demIsDebug",
+          "table_comment": "SVC_ISDEBUG",
+          "header_constant": "SVC_ISDEBUG"
+        },
+        {
+          "slot": 60,
+          "handler": "demTerminatePDB",
+          "table_comment": "SVC_PDBTERMINATE",
+          "header_constant": "SVC_PDBTERMINATE"
+        },
+        {
+          "slot": 61,
+          "handler": "demExitVDM",
+          "table_comment": "SVC_DEMEXITVDM",
+          "header_constant": "SVC_DEMEXITVDM"
+        },
+        {
+          "slot": 62,
+          "handler": "demWOWFiles",
+          "table_comment": "SVC_DEMWOWFILES",
+          "header_constant": "SVC_DEMWOWFILES"
+        },
+        {
+          "slot": 63,
+          "handler": "demLockOper",
+          "table_comment": "SVC_DEMLOCKOPER",
+          "header_constant": "SVC_DEMLOCKOPER"
+        },
+        {
+          "slot": 64,
+          "handler": "demNotYetImplemented",
+          "table_comment": "SVC_DEMNOTYETIMPLEMENTED",
+          "header_constant": "SVC_DEMDRIVEFROMHANDLE"
+        },
+        {
+          "slot": 65,
+          "handler": "demGetComputerName",
+          "table_comment": "SVC_DEMGETCOMPUTERNAME",
+          "header_constant": "SVC_DEMGETCOMPUTERNAME"
+        },
+        {
+          "slot": 66,
+          "handler": "demFastIoUnavailable",
+          "table_comment": "SVC_DEMFASTREAD",
+          "header_constant": "SVC_DEMFASTREAD"
+        },
+        {
+          "slot": 67,
+          "handler": "demFastIoUnavailable",
+          "table_comment": "SVC_DEMFASTWRITE",
+          "header_constant": "SVC_DEMFASTWRITE"
+        },
+        {
+          "slot": 68,
+          "handler": "demCheckPath",
+          "table_comment": "SVC_DEMCHECKPATH",
+          "header_constant": "SVC_DEMCHECKPATH"
+        },
+        {
+          "slot": 69,
+          "handler": "demSystemSymbolOp",
+          "table_comment": "SVC_DEMSYSTEMSYMBOLOP",
+          "header_constant": "SVC_DEMSYSTEMSYMBOLOP"
+        },
+        {
+          "slot": 70,
+          "handler": "demGetDPBList",
+          "table_comment": "SVC_DEMBUILDDPBLIST",
+          "header_constant": "SVC_DEMGETDPBLIST"
+        },
+        {
+          "slot": 71,
+          "handler": "demPipeFileDataEOF",
+          "table_comment": "SVC_DEMPIPEFILEDATAEOF",
+          "header_constant": "SVC_DEMPIPEFILEDATAEOF"
+        },
+        {
+          "slot": 72,
+          "handler": "demPipeFileEOF",
+          "table_comment": "SVC_DEMPIPEFILEEOF",
+          "header_constant": "SVC_DEMPIPEFILEEOF"
+        }
+      ],
+      "all_header_ordinals_match": true,
+      "all_handlers_in_product_map": true,
+      "delta": [
+        {
+          "slot": 66,
+          "current": "demFastIoUnavailable",
+          "original": "demNotYetImplemented"
+        },
+        {
+          "slot": 67,
+          "current": "demFastIoUnavailable",
+          "original": "demNotYetImplemented"
+        }
+      ],
+      "upstream": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demdisp.c",
+      "upstream_sha256": "7ea3a829e3f8aad2dfe644d101cabaff514de25909db937675fc323dfce8fe3c"
+    }
+  },
+  "bop": {
+    "MS_bop_0": {
+      "equal_after_newline_normalization": true,
+      "sha256": "f3c77f9c8a802fc45dd58bb90e4a80ba9dae29d3644a4c07e22c74d22a3a71e6"
+    },
+    "MS_bop_4": {
+      "equal_after_newline_normalization": true,
+      "sha256": "98739203ac6fb0b766d137a3038607b963c383ddd6bf562bd279dd6030f3be18"
+    }
+  },
+  "sha256": {
+    "src\\mvdm-host\\dos\\command\\cmddisp.c": "91e321e7d4bf19527ef7a0371d1c6137ec056f37c2da85bc8f59d009b12c0a94",
+    "src\\mvdm-host\\inc\\cmdsvc.h": "c22d682422e2ac3200bdae808a5309b57a7a0402df2a3aa6199502d911ff6624",
+    "src\\mvdm-host\\dos\\dem\\demdisp.c": "95f0e3397e7f876d1bd57d3bc375401103482e503f4a61b26368be3fa82d98c3",
+    "src\\mvdm-host\\inc\\dossvc.h": "82b5135e78bd3010128bd5dd54978b0e00aec0073f0a7e6b547cbe8dff08a91c",
+    "src\\mvdm-host\\softpc.new\\host\\src\\nt_bop.c": "9e6fc4c1d8ee418bc32da8f5da9a22e0e40a1fae6b00a2879ca29a416b712284",
+    "tests\\mvdm-host\\dos\\command\\command_service_fixture.c": "2804f3348fe56c6d3033cf97556eae5cb4b6a1c6f34150a0970079e393d312c7",
+    "build\\.ninja\\msvc-x86-release\\worker\\obj\\command\\cmddisp.obj": "ea3093f96a4f433903a77c9d088b159731dd278026f7d319790c2d2496b187da",
+    "build\\.ninja\\msvc-x86-release\\oemuni-fixtures\\cmd-svc-probe.exe": "d8dc1e333940716a4c687c510686a419e6ca435ad94ea8e4f0a139340e588e35"
+  },
+  "bop_upstream": {
+    "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_bop.c",
+    "sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66"
+  },
+  "run": {
+    "runner": "build/t478-s45/run-service-p17.ps1",
+    "pid": 12500,
+    "build_budget_ms": 120000,
+    "case_budget_ms": 30000,
+    "build_exit": 0,
+    "test_exit": 0,
+    "marker": "COMMAND_ORIGINAL_OBJECT_17_ROUTES_OK"
+  },
+  "limits": [
+    "COMMAND actual object with sentinel handlers proves17 routing/BOOL outcomes, not actual handler semantics or guest registers.",
+    "DEM guard/hard-error flag/CurrentISVC/placeholder behavior and BOP IP/idle behavior are source evidence, not fresh fault tests.",
+    "Original COMMAND release has no invalid-index protection; DBG branch excluded; no invalid-index execution.",
+    "DEM slots66/67 retain DIV-188 CF1 to original normal-I/O fallback; no unavailable kernel fast-I/O implementation.",
+    "Three original table comment spellings differ from actual header symbols; receipt maps exact ordinal, not a code defect.",
+    "S43 Full and T420 S33 real file tests are bounded historical regression context; not all services certified."
+  ]
+}

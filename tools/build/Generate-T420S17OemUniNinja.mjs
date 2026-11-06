@@ -105,6 +105,8 @@ const lines = [
   "build obj/cmd-tail.obj: cc $root/tests/mvdm-host/dos/command/command_tail_fixture.c | cmd-tail-body.inc",
   `  cflags = $cflags /I "${build}"`,
   "build cmd-tail-fixture.exe: link obj/cmd-tail.obj",
+  "build obj/cmd-service.obj: cc $root/tests/mvdm-host/dos/command/command_service_fixture.c",
+  "build cmd-svc-probe.exe: link obj/cmd-service.obj $formal/obj/command/cmddisp.obj",
   "build obj/pif-fault.obj: cc $root/tests/mvdm/oemuni/oemuni_pif_fault_fixture.c",
   `  cflags = ${formalFlags}`,
   "build oemuni-pif-fault-fixture.exe: link obj/pif-fault.obj obj/process.obj obj/firmware-root-stub.obj",
