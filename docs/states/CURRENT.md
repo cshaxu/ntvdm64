@@ -4,8 +4,8 @@
 
 **No active M/T/S packet.**
 
-T478 S12 is closed; [redirector loader evidence](../etc/evidence/m0-t478-s12-redirector-loader.md).
-Sequential S13 admission is owner-authorized next.
+T478 S13 is closed; [keycode boundary evidence](../etc/evidence/m0-t478-s13-keycode-bounds.md).
+Sequential S14 admission is owner-authorized next.
 
 ## S1 Closure Record
 
@@ -212,3 +212,7 @@ T456 S1/S2 disposable evidence uses `build/t456-s1` and `build/t456-s2`.
 ## Recent Governance
 
 T460 package and Clipboard acceptance are recorded in its closure above.
+
+## S13 Closure Record
+
+T478 S13 [repairs the original keycode exact bounds](../etc/evidence/m0-t478-s13-keycode-bounds.md), preserving mappings; actual-object tests, all 16 Full gates and worktree publication pass.

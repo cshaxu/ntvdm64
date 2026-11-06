@@ -1,0 +1,277 @@
+{
+  "task": "T478 S13",
+  "baseline": "9e733185a",
+  "sourceCheck": {
+    "onlyTwoComparisonsAndComment": true,
+    "arraysEqualBothOriginals": true,
+    "arrayTokenHashes": {
+      "Scan1ToKeynum": "afcfea009eb5da85b9f64313efe37cece27cca5590455574c04fb8664a7b0d17",
+      "Scan1ToKeynumExtended": "d084a954085cb18d2ac76864cd4b421cf96fedf562af214a4c877bdba8dd5cef"
+    }
+  },
+  "baselineContract": {
+    "started": "2026-11-06T03:19:32.5972546Z",
+    "owner_pid": 13684,
+    "result": "pass",
+    "contract": "keycode",
+    "scope": "Actual cached original object; controlled host boundaries, no guest or production lifecycle acceptance",
+    "build_root": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s13\\baseline",
+    "fixture_path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s13\\baseline\\keycode-object-contract.exe",
+    "inputs": [
+      {
+        "sha256": "BCAF6E7579059E55886485E686CE59A6F9AFEF10E3D22837076577C996CC69DD",
+        "path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\tests\\observation\\verify-softpc-object-contract.ps1"
+      },
+      {
+        "sha256": "CDD1B91450DC725A2C629F1DDD08705DFC8D57A6BD40F5E8F3BF894D66EC9152",
+        "path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd"
+      },
+      {
+        "sha256": "DA3FD677417EB38CD2087A0B516605E20F4F2DB5724694431063E7EEE3AF793B",
+        "path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\tests\\mvdm-host\\keycode_object_contract_fixture.c"
+      },
+      {
+        "sha256": "4DE067C013B25120A09EC7D7A0BB5F0FE16EABA59B665AADBCF891CDFBA0CAEF",
+        "path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\softpc.new\\host\\src\\nt_keycd.c"
+      },
+      {
+        "sha256": "C856083172DB863FFDB70ED70A761A9FE64ACA531E9CB7A7A8562CAD3EE9ED05",
+        "path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_keycd.obj"
+      },
+      {
+        "sha256": "81C7D82758F57F609EED48744CFCADBD45B6575601CAAD65C86000745A31F5B6",
+        "path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\.ninja\\msvc-x86-release\\worker\\build.ninja"
+      },
+      {
+        "sha256": "09BFDA220052104997A13EB52354A39B7CD12684792DA9E9DBE5E0AB7E755DA4",
+        "path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\softpc.new\\host\\inc\\insignia.h"
+      },
+      {
+        "sha256": "1FE1D02140170EEF068A61E8FEEC7F2E6BAFC2D235CA6D2B345F898827F8AD9E",
+        "path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\softpc.new\\base\\inc\\keyboard.h"
+      },
+      {
+        "sha256": "25B1E93305DE28692A74F7E840D47240626F4C29EE91CEBA2A5349413FF6AC82",
+        "path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_input.obj"
+      },
+      {
+        "sha256": "E5116DE0BC34641A431956BBB3DFAF06B7D5BA21EA8675715AF0A425BE639E23",
+        "path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\softpc.new\\host\\src\\nt_input.c"
+      }
+    ],
+    "runs": [
+      {
+        "kind": "build",
+        "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /W4 /MT /Od /D_CRT_SECURE_NO_WARNINGS /DNTVDM /DSPC386 /DANSI /I\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\softpc.new\\host\\inc\" /I\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\softpc.new\\base\\inc\" \"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\tests\\mvdm-host\\keycode_object_contract_fixture.c\" \"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_keycd.obj\" \"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_input.obj\" /Fo:\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s13\\baseline\\fixture.obj\" /Fe:\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s13\\baseline\\keycode-object-contract.exe\" /link kernel32.lib user32.lib ntdll.lib\"",
+        "exit": 0,
+        "pid": 24252
+      },
+      {
+        "kind": "negative-abi-compile",
+        "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /MT /c /DMVDM_KEYCODE_EXPECT_EVENT_BYTES=4 /DNTVDM /DSPC386 /DANSI /I\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\softpc.new\\host\\inc\" /I\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\softpc.new\\base\\inc\" \"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\tests\\mvdm-host\\keycode_object_contract_fixture.c\" /Fo:\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s13\\baseline\\negative-abi.obj\"\"",
+        "exit": 2,
+        "pid": 14712
+      },
+      {
+        "kind": "fixture",
+        "diagnostic_budget_ms": 30000,
+        "exit": 0,
+        "pid": 31896
+      }
+    ],
+    "checks": 268322,
+    "callbacks": 1184,
+    "fixture_sha256": "247A57B28905D10EA06C4910334490A6AB1E59A4339A481127E3AB605D78B801",
+    "finished": "2026-11-06T03:20:04.2191280Z"
+  },
+  "currentContract": {
+    "started": "2026-11-06T03:23:12.6972752Z",
+    "owner_pid": 34764,
+    "result": "pass",
+    "contract": "keycode",
+    "scope": "Actual cached original object; controlled host boundaries, no guest or production lifecycle acceptance",
+    "build_root": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s13\\current",
+    "fixture_path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s13\\current\\keycode-object-contract.exe",
+    "inputs": [
+      {
+        "sha256": "BCAF6E7579059E55886485E686CE59A6F9AFEF10E3D22837076577C996CC69DD",
+        "path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\tests\\observation\\verify-softpc-object-contract.ps1"
+      },
+      {
+        "sha256": "CDD1B91450DC725A2C629F1DDD08705DFC8D57A6BD40F5E8F3BF894D66EC9152",
+        "path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd"
+      },
+      {
+        "sha256": "DA3FD677417EB38CD2087A0B516605E20F4F2DB5724694431063E7EEE3AF793B",
+        "path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\tests\\mvdm-host\\keycode_object_contract_fixture.c"
+      },
+      {
+        "sha256": "466D69A12CFD774F5EA373D0A3065DCC12022AC18AE9BDDD372217E9349071B7",
+        "path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\softpc.new\\host\\src\\nt_keycd.c"
+      },
+      {
+        "sha256": "72DF950EA8FB84CC022A3D85961EC6D5E54F8C2567E3E92F31E81A029B648F87",
+        "path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_keycd.obj"
+      },
+      {
+        "sha256": "81C7D82758F57F609EED48744CFCADBD45B6575601CAAD65C86000745A31F5B6",
+        "path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\.ninja\\msvc-x86-release\\worker\\build.ninja"
+      },
+      {
+        "sha256": "09BFDA220052104997A13EB52354A39B7CD12684792DA9E9DBE5E0AB7E755DA4",
+        "path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\softpc.new\\host\\inc\\insignia.h"
+      },
+      {
+        "sha256": "1FE1D02140170EEF068A61E8FEEC7F2E6BAFC2D235CA6D2B345F898827F8AD9E",
+        "path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\softpc.new\\base\\inc\\keyboard.h"
+      },
+      {
+        "sha256": "25B1E93305DE28692A74F7E840D47240626F4C29EE91CEBA2A5349413FF6AC82",
+        "path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_input.obj"
+      },
+      {
+        "sha256": "E5116DE0BC34641A431956BBB3DFAF06B7D5BA21EA8675715AF0A425BE639E23",
+        "path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\softpc.new\\host\\src\\nt_input.c"
+      }
+    ],
+    "runs": [
+      {
+        "exit": 0,
+        "kind": "build",
+        "pid": 3416,
+        "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /W4 /MT /Od /D_CRT_SECURE_NO_WARNINGS /DNTVDM /DSPC386 /DANSI /I\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\softpc.new\\host\\inc\" /I\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\softpc.new\\base\\inc\" \"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\tests\\mvdm-host\\keycode_object_contract_fixture.c\" \"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_keycd.obj\" \"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_input.obj\" /Fo:\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s13\\current\\fixture.obj\" /Fe:\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s13\\current\\keycode-object-contract.exe\" /link kernel32.lib user32.lib ntdll.lib\""
+      },
+      {
+        "exit": 2,
+        "kind": "negative-abi-compile",
+        "pid": 21712,
+        "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /MT /c /DMVDM_KEYCODE_EXPECT_EVENT_BYTES=4 /DNTVDM /DSPC386 /DANSI /I\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\softpc.new\\host\\inc\" /I\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\softpc.new\\base\\inc\" \"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\tests\\mvdm-host\\keycode_object_contract_fixture.c\" /Fo:\"O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s13\\current\\negative-abi.obj\"\""
+      },
+      {
+        "exit": 0,
+        "kind": "fixture",
+        "pid": 21128,
+        "diagnostic_budget_ms": 30000
+      }
+    ],
+    "checks": 268322,
+    "callbacks": 1184,
+    "fixture_sha256": "F1D057071BD6AE2B8442E899DDFFE66B5A4B863EF225C53EB191624605018D54",
+    "finished": "2026-11-06T03:23:37.2175924Z"
+  },
+  "baselineBoundary": "KEYCODE_BOUNDARY enhanced=0 scan=133 before=0 sentinel=123 observed=123 restored=0\nKEYCODE_BOUNDARY enhanced=1 scan=84 before=0 sentinel=123 observed=123 restored=0\nKEYCODE_BOUNDARY expected_rejected=2 actual_rejected=0\n",
+  "correctedBoundary": "KEYCODE_BOUNDARY enhanced=0 scan=133 before=0 sentinel=123 observed=0 restored=0\nKEYCODE_BOUNDARY enhanced=1 scan=84 before=0 sentinel=123 observed=0 restored=0\nKEYCODE_BOUNDARY expected_rejected=2 actual_rejected=2\n",
+  "physicalKeyboardTested": false,
+  "packageId": "3e2e62b9-6d16-442a-9286-e169566a75e7",
+  "appVersion": "0.0.478",
+  "protocol": 67,
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 402995,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 5211,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1964,
+        "CleanupMs": 630,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 377,
+        "CleanupMs": 529,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66999,
+        "CleanupMs": 504,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 52901,
+        "CleanupMs": 522,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 51067,
+        "CleanupMs": 545,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14962,
+        "CleanupMs": 537,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 12498,
+        "CleanupMs": 533,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 78937,
+        "CleanupMs": 533,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12273,
+        "CleanupMs": 575,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28500,
+        "CleanupMs": 477,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30564,
+        "CleanupMs": 594,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 5621,
+        "CleanupMs": 546,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7760,
+        "CleanupMs": 569,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10338,
+        "CleanupMs": 531,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 5278,
+        "CleanupMs": 623,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7235,
+        "CleanupMs": 473,
+        "Passed": true
+      }
+    ]
+  },
+  "rawNtvdmSha256": "DBD125AD76E1BBD98ED4F9464919ABDD46BB7DE166556C29C03E381E8FD34A82",
+  "publication": "worktree assets/release only",
+  "noPush": true,
+  "dos4gwNesticle": "owner excluded, skipped"
+}

@@ -226,3 +226,11 @@ local rooted loader is active; its unselected body/fixture/target are removed.
 77 focused checks, remaining x86/x64 resource fixtures and all 16 Full gates pass.
 Package 0c8a03f9-60e6-46dc-9638-b25d41ae8e3d is published only to this worktree.
 S13/finding 28 is next proposed.
+
+## S13 disposition
+
+[S13](../evidence/m0-t478-s13-keycode-bounds.md) changes only two original >
+comparisons to >=. Both exact-bound sentinel witnesses now reject; 268322
+normal assertions, ABI controls and all 16 Full gates pass. Mapping tables
+remain equal to both originals. Worktree package
+3e2e62b9-6d16-442a-9286-e169566a75e7 is published locally; S14/finding 29 is next.
