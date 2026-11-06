@@ -13,7 +13,7 @@
 | Objective | Map applicable stable audit identities and inherited handoffs to current original owners, local bindings, tests or explicit limitations; isolate genuinely actionable remaining host gaps. |
 | Non-goals | No new global audit, guest audit/change, speculative fault tolerance, alternate CPU, product capability, O:/winnt write or push. Source-only audit labels are not product pass/fail. |
 | Reference Baseline | 8f076ff6a; S43 eleven-image release unchanged; S44 width explained; pinned1546 inventory identities, including483 inactive-edition rows. |
-| Files And ABI Surface | Stable crosswalk, indexed evidence and status; product source/build files read-only; bounded existing-fixture link maintenance is permitted to obtain current evidence. No product ABI change admitted by this reconciliation alone. |
+| Files And ABI Surface | Stable crosswalk, indexed evidence and status; product source files read-only; bounded focused fixtures and their build maintenance are permitted to obtain current evidence. No product ABI change admitted by this reconciliation alone. |
 | Applicable Rules | Required documentation reading set and source policy; original-only semantics; owner's local-only delivery instructions. |
 | Verification | Pin audit inputs; inspect current source/composition and exact existing runtime evidence per claim; preserve unresolved coverage. Index identity/preservation checks, documentation governance and diff review. |
 | Expected Markers | Each resolved row names exact owner and bounded evidence or authorized exclusion; no bulk closure from filenames, static audit labels or Full alone. |

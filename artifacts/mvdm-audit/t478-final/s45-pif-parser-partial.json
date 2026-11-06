@@ -1,0 +1,38 @@
+{
+  "id": "DOS16:6183631816abcfe32197",
+  "status": "partial; pending remains",
+  "profile": "MSVC x86 CCPU40 formal nt_pif.obj",
+  "runner_pid": 15448,
+  "runner": "build/t478-s45/run-parser-p5-r2.ps1",
+  "timeouts_seconds": {
+    "build": 120,
+    "fixture": 30
+  },
+  "build_exit": 0,
+  "fixture_exit": 0,
+  "marker": "PIF_ORIGINAL_PARSER_8_ROWS_OK",
+  "hashes": {
+    "tests/mvdm/oemuni/oemuni_pif_parser_fixture.c": "7ac1ff28a48b51c007f745a61810bb043a065707356d924e7f1d58032ac92953",
+    "tools/build/Generate-T420S17OemUniNinja.mjs": "0b9990fda4384277960c38cc874e3fcc9d390b5a949b9147cf92a94695e8486d",
+    "src/mvdm-host/softpc.new/host/src/nt_pif.c": "94ccb215daf9dbf46f802d64d4bd5e21e9cf02452077da93df143a08c3bf6fe8",
+    "src/non-mvdm/public/internal/windows/inc/pif.h": "b1b5888072c62706c79b2ca8ee64a3e0e9abe627560286299e2eb43c2f40df82",
+    "src/mvdm-host/softpc.new/host/inc/nt_pif.h": "6ee720b91a5697745e224313655cd514dac4887b1088a5af70ad705f4d0c0206",
+    "build/.ninja/msvc-x86-release/worker/obj/host/nt_pif.obj": "fde10ba9c3ff156735c8a2cdc31457207a34c89f58e21b29eeb26bb32b643b32"
+  },
+  "coverage": [
+    "No-extension defaults",
+    "286 XMS fields",
+    "286 then386 and386 then286 precedence",
+    "386 thenWin95 andWin95 then386 priority precedence",
+    "WNT subsystem field with IgnoreConfigAutoexec",
+    "Default initialization retains existing priority globals"
+  ],
+  "remaining": [
+    "Default-path provider identity",
+    "Legacy short-read/seek/close and partial-error state",
+    "WNT retained configuration paths and repeated replacement",
+    "Allocation retry/IGNORE",
+    "Fast-paste repeated-call state"
+  ],
+  "limits": "No malformed/cyclic PIF safety claim; fail-closed root/config provider substitutes cannot serve these cases. No guest or product source change."
+}

@@ -193,3 +193,38 @@ as diagnostics and are not counted as passes. None requires a product change.
 The active packet permits this bounded existing-fixture maintenance. The release
 remains S43, with no rebuild/publication needed for unchanged products. Twelve
 startup rows and1045 active identities remain pending; S45 is not closed.
+
+## P5 bounded original PIF parser evidence; row remains pending
+
+The [partial receipt](../../../artifacts/mvdm-audit/t478-final/s45-pif-parser-partial.json)
+adds eight current production-object cases for DOS16:6183631816abcfe32197.
+The new focused fixture links formal x86 CCPU40 obj/host/nt_pif.obj, supplies
+valid packed STDPIF/extension bytes through an owned temporary file and calls
+GetPIFData. It does not copy the parser or rebuild/modify guest media. The
+maintained OEMUNI generator exposes oemuni-pif-parser-fixture.exe in the stable
+fixture cache. Run build/t478-s45/run-parser-p5-r2.ps1, background PID15448,
+completed both build and fixture with exit0 and PIF_ORIGINAL_PARSER_8_ROWS_OK.
+The runner imposes120-second build and30-second execution deadlines.
+
+Observed: no-extension defaults;286 XMS values;386 overrides286 regardless of
+ordering;Win95 idle-derived55/55 priorities override386 regardless of ordering;
+WNT subsystem extraction while config loading is ignored; original default
+initialization leaves seeded global priorities73/27 unchanged. Empty startup
+strings remain unallocated. Valid-file execution closes the handle, allowing
+fixture deletion after all cases. This does not certify failure-path close.
+
+The first link failed on three product-root/config imports. The fixture now
+supplies fail-closed substitutes for them; unexpected entry exits99. The inputs
+use explicit PIF paths and IgnoreConfigAutoexec, so those providers are not
+exercised. That failed build is retained separately and is not a pass.
+
+Reading the complete original audit acceptance narrowed the remaining work:
+default-path provider identity, exact short-read/seek/close and partial-error
+state, repeated retained WNT config paths, allocation retry/IGNORE, and fast-paste
+call history. The source checks read==-1 rather than exact byte counts and does
+not reset every process global in SetPifDefaults. These facts do not authorize
+read-exact retries, global resets or malformed/cyclic-file tolerance. Keep the
+existing DIV-157 ownership repair, whose demonstrated original defect was
+already recorded. No new product gap has been established in this checkpoint.
+The row stays pending, as do twelve startup rows and1045 active identities.
+No product change or new publication; S45 remains the sole active S.
