@@ -241,3 +241,10 @@ remain equal to both originals. Worktree package
 static initialization, not generic CMOS file persistence. The only current
 reader reference is ROM loading, already routed to embedded resources. Retain
 the unused original non-ROM oversize limitation; no product changes. S15 is next.
+
+## S15 disposition
+
+[S15](../evidence/m0-t478-s15-codepage-owner.md) confirms the mirror getter
+is connected. The remaining codepage divergence belongs to separate NTCON/NTVWM
+Consoles and their handoff; recorded in TODO, not declared fixed. No production
+changes or topology expansion. S16/finding 34 follows.

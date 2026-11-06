@@ -1243,3 +1243,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T478 S13 keycode bounds](evidence/m0-t478-s13-keycode-bounds.md): two original exact-bound comparisons, actual-object negative/positive witness and unchanged valid mappings.
 
 - [T478 S14 resource disposition](evidence/m0-t478-s14-resource-disposition.md): original NT CMOS selection and bounded non-ROM caller evidence.
+
+- [T478 S15 codepage owner](evidence/m0-t478-s15-codepage-owner.md): unresolved separate-Console defect and existing mirror query connection.

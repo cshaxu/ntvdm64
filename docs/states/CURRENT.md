@@ -217,3 +217,7 @@ T478 S13 [repairs the original keycode exact bounds](../etc/evidence/m0-t478-s13
 ## S14 Closure Record
 
 T478 S14 [dispositions non-ROM resource applicability](../etc/evidence/m0-t478-s14-resource-disposition.md); original NT static CMOS behavior is already connected. No production changes.
+
+## S15 Closure Record
+
+T478 S15 [assigns the unresolved codepage defect](../etc/evidence/m0-t478-s15-codepage-owner.md) to frontend/native Console ownership. Existing mirror query wiring is present; no product changes.
