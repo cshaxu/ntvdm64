@@ -1,5 +1,13 @@
 # M0 T478 — original host recovery closure
 
+## Subsequent main integration
+
+This closure describes the pre-rebase T478 package. The later
+[main rebase](../etc/evidence/m0-t478-main-rebase.md) preserves its source
+results but deliberately performs no combined build/test/publication at the
+owner's request. Existing receipts remain historical evidence, not acceptance
+of the merged source or current release snapshot.
+
 ## Scope and completion standard
 
 The owner requires maximum useful recovery of original mvdm-host/non-mvdm

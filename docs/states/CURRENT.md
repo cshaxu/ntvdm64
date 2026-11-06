@@ -2,142 +2,146 @@
 
 ## Current Work
 
-**No active M/T/S packet.** T478 and S45 are closed under the owner's
-concrete original-function recovery criterion. No next task is admitted.
+**Active: M0 T479 S6** - Win3.1 complete VM I/O and nested chains.
+Owner requests [pre-import preservation](../etc/evidence/m0-t479-s6-pre-import.md).
+Goal execution is paused; no S6 expansion before adjacent-commit integration.
+Candidate fills: unit/build pass, fill002 normal exit fails; not published.
 
-[T478 closure](../history/m0-t478-closure.md) records delivered original
-recovery, final package verification and retained limitations. Historical
-inventory coverage is not a pending implementation obligation.
+[S5 closure](../etc/evidence/m0-t479-s5-closure.md) resolves command continuation
+and original reentry ownership with actual two-VM nested execution. The original
+DOS reentry cycle remains in the downstream DOS worker, not the enclosing VMM
+payload. No original guest changed. S5 final tests214--216 pass.
+Published package6c79f45b-88bd-4359-a9c8-15e3a753457e at507619ea8 retains
+complete cached build211 and Full212 selected16/16 gates; both destinations
+match. External DOS4GW/Nesticle fixtures were explicitly skipped.
+The independent ntvdm64.386 remains a candidate until complete I/O acceptance.
+S6 starts with the existing47-operation protocol and actual guest transfer paths;
+physical input, fonts and complete graphics/Console behavior are not accepted.
+S4 Win95 continuation remains deferred until the Win3.1 S6 path works.
 
-CURRENT's temporary size exception retains prior closure links; the hard
-32KiB limit remains. The following entries are historical stage records;
-the T478 closure supersedes their earlier forward-looking pending statements.
+## T478 Integration Handoff
 
-## S44 Closure Record
+The mirror-source-audit branch is rebased onto mainf095c77bf, retaining the
+T479 S6 packet below and T478's [closed recovery](../history/m0-t478-closure.md).
+Owner explicitly delegates compilation, tests and publication of the combined
+source to the main worktree. Historical T478 passes do not certify this merge.
+The ten main release images/manifest remain the main snapshot; the separately
+retained VCDEX image is historical T478 output, not part of that ten-image
+manifest. Rebuild the coherent eleven-image package before claiming combined
+product acceptance. No O:/winnt write or push was performed in this worktree.
+[Rebase record](../etc/evidence/m0-t478-main-rebase.md).
 
-[Evidence](../etc/evidence/m0-t478-s44-window-sizing.md) and
-[results](../../artifacts/mvdm-audit/t478-final/sizing/results.json) trace the
-same HWND's154-to237 change to resizing while minimized. Native USER-only
-control reproduces it; explicit normal startup retains the minimized creation
-style. GETMINMAXINFO conversion is unchanged. Original xxxAdjustSize uses the
-minimized-size metric in this case. No product repair or new pixel policy.
-Diagnostic source edits are byte-restored and ordinary WOW32 rebuilt. The
-unchanged S43 release passes normal-start flag/reset/open/close/launcher exit;
-all11 published hashes match. S43 Full16/16 remains the package gate. This
-is test/evidence delivery, not a new release or broader app/T478 closure.
+## Active Packet
 
-## S43 Closure Record
+| Field | Record |
+| --- | --- |
+| Candidate Proposal | [Guest multitask frontends](../proposals/proposal-multitask-guest-vdm-frontends-001.md). |
+| Identifier Mode | M0 T479 S6/guest-io; Ordinary Mode, single implementer/reviewer. |
+| Admission And Approval | Owner approves continuous S2--S7 delivery, Win3.1 first; S5 bounded closure automatically admits S6. |
+| Objective | Complete per-VM text/graphics/Console I/O, actual input and nested task chains with final-output and cancellation guarantees while guest Windows continues. |
+| Non-goals | No original guest rebuild/patch, hardware V86 monitor, CPU30, new polling/timeouts/control transport, placeholder I/O or semantic concessions; Win95 follows Win3.1. |
+| Reference Baseline | S5 closure, P4 published package and candidate addon; real both-order continuation, retirement/reuse and DOS/native/DOS downstream reentry evidence. |
+| Files And ABI Surface | Existing NTVDM VM frontend/command/session, common I/O ownership, ntvdm64-386 bridge and integration tests; minimal registered mirror seams only if required. |
+| Applicable Rules | Execution, architecture/coding/document rules and source policy; preserve guest, provenance, minimum mirror differences and authority ownership. |
+| Verification | Audit all47 live operations by actual producer/caller; test per-VM state and identity, input consumption, geometry/fonts/graphics, final serial, cancellation and real nested chains. Cached full builds, applicable Full product gates and coherent publication. |
+| Expected Markers | Real operation results, no unsupported-success stubs; actual VM context for guest access, no native-thread CPU writes; correct generation/focus and no ancestor frontend takeover. |
+| Asset Needs | Immutable Win3.1 installation copied to isolated fixture, verified package and independent addon; stable Ninja/ccache roots. |
+| Reporting Requirements | Finite operation matrix with source owner, implementation, test evidence and explicit remaining boundaries. Distinguish provider stimulus from physical input. |
+| Stop Conditions | New semantic concession, original guest modification, unknown provenance or incompatible architecture needs explicit disposition. Missing proof is not a pass. |
+| Exit Criteria | Complete intended VM I/O and nested chains pass actual Win3.1 tests; cached build, full gates, coherent publication, review, commit/push. No S5 foundation regression may be deferred as an I/O feature. |
+| Original Owner Request | Execute host-first S2--S7 continuously; complete Win3.1 before Win95, preserve original guest and actual contracts. |
+| Similar-Issue Sweep | All47 operations, text/graphics producers, focus/keyboard/mouse, fonts, background output, final frames, redirection, nested frontends and retirement/reuse. |
+| Temporary Evidence | build/t479-s6-io; owned60-minute phases,2GiB,15-minute no-progress review. Retain build/t479-s5-command until closure evidence is durable and processes quiescent. |
 
-[Evidence](../etc/evidence/m0-t478-s43-gdi-color-alias.md) and
-[results](../../artifacts/mvdm-audit/t478-final/brush/s43-results.json) repair the
-worker-local GDI alias collision with original system-color pseudo-brushes.
-Only the alias allocation starting slot changes; original mirror conversion
-and native drawing remain. Real class-brush and11041 right-margin pixels are
-corrected, flag/reset/open/normal exit pass, existing alias/reuse/exhaustion
-checks pass. Full16/16 in372460ms verifies all11 images. Package
-22e35db2-13bb-419d-ba68-7a169cc939e1 is hash-published to this worktree
-assets/release only, with prior assets backed up. Normal outer width237 remains
-unchanged and unresolved; this is not full WINMINE handoff or T478 closure.
+## S4 Win3.1 Checkpoint And Deferred Win95
 
-## S42 Closure Record
+[Evidence and P deliveries](../etc/evidence/m0-t479-s4-driver-load.md) record
+actual identities, 320 callbacks, counted and blocked cross-VM waits, native
+thread/PIC wake, cancellation, forced queued retirement, actual handle reuse,
+normal exit and injected initialization rollback. ntvdm64.386 is published as
+a bridge candidate only. Ten host components remain the Full 16/16 P1 package.
 
-The [S42 checkpoint](../etc/evidence/m0-t478-s1-inventory-reconciliation.md)
-ends this reconciliation pass; remaining reconciliation is explicitly deferred,
-not declared complete.
-P1 is7adc89c09/bf93a88ce; P2 isab8d89a0b. The stable-ID crosswalk and all
-remaining audit/handoff rows remain outstanding under T478, to resume after
-this concrete repair. S43 has now delivered its bounded repair. The broader goal is unchanged.
-[Bounded evidence](../../artifacts/mvdm-audit/t478-final/startup-vdd-and-brush-review.md)
-confirms the VDD startup owner and reproduces this alias collision. S42's
-restored baseline game passes flag/reset/open/close; its221x181 client has a
-black right-hand background. Saved normal outer size is237x240; width remains
-a separate unresolved handoff. CURRENT's temporary size exception remains.
+[The roadmap](../etc/operations/m0-t479-guest-bridge-plan.md) retains S4's
+Win95 wait/wake/lifecycle proof after the Win3.1 S5/S6 path and before S7/T
+closure. It is not passed or dropped. Full guest ICW1-reset combinations and
+exhaustive VMM allocation failures remain explicitly unverified in S7's matrix.
 
-## S41 Closure Record
+## S3 Host Command Preparation Closure
 
-[Evidence](../etc/evidence/m0-t478-s41-vdd-optical-investigation.md) and
-[results](../../artifacts/mvdm-audit/shard-3/vcdex-s41-results.json) close finding61:
-original standalone VCDEX source/build/package restored with only required
-DLL-entry ABI and unselected-branch adaptations. Real immutable MSCDEXNT uses
-the original VDD loader; mounted ISO TOC/volume/reopen, empty virtual drive,
-unsupported-read errors, normal exit and controlled VDD cleanup pass.
-Native TOC agrees exactly. Physical optical/audio certification is not claimed;
-original unsupported APIs and allocation limits remain. Test ISO detached and
-hash-unchanged, existing I: remains empty. Full16/16 passes in382810ms; additional
-Product verification includes all11 image identities. Package
-d7ad54fc-88b2-4a5e-8c56-140a2d4a4ca3 is hash-published to this worktree
-assets/release only. S41 P1 is8dea73067; P2 is the local recovery delivery.
-No guest modification, autonomous optical implementation, O:/winnt write or push.
+[Delivery and review](../etc/evidence/m0-t479-s3-command-preparation.md) records
+independent capture and launch ownership, 31/59 assertions, cached full builds
+and Full 16/16. Package 74269114-368c-45ab-b52d-bf103d08b0b9 is published and
+hash-verified at both destinations. No mirror/guest changes. Continuous execution
+now admits S4; guest VM registration and wait/wake remain executable proof gates.
 
-## S40 Closure Record
+## S2 Host Foundation Closure
 
-[Finding54 evidence](../etc/evidence/m0-t478-s40-multimedia-investigation.md) and
-[results](../../artifacts/mvdm-audit/shard-3/multimedia-s40-results.json) verify
-real guest/native enumeration and errors, silent wave completion/reset/unprepare/
-close, MIDI open/close and MCI waveaudio open/close, with normal exit. Current
-fax source retains S25's repair and12 functions bind to release;4 multimedia
-bridge functions bind. Real fax, arbitrary task loss and device-specific callback
-certification are not claimed. No missing host connection established or product
-change needed; ten-image S38 release and Full16/16 retained. Tests/evidence P1
-only, no O:/winnt or push.
+[Implementation and closure](../etc/evidence/m0-t479-s2-host-foundation.md)
+records independent VM retirement, cancellable dispatch and paired launch
+contexts. Cached complete builds, actual RPC, 233 VM assertions and Full 16/16
+pass; package a0f0dc2c-9f29-4bbe-8dad-8859cabea128 is published and hash-verified
+at both destinations. No original mirror/guest changes. Continuous execution
+now admits S3; actual guest multitasking remains unproved until later stages.
 
-## S39 Closure Record
+## S2 Guest Design Checkpoint
 
-[Finding52 evidence](../etc/evidence/m0-t478-s39-keyboard-investigation.md) and
-[results](../../artifacts/mvdm-audit/shard-3/keyboard-s39-results.json) bind11
-original keyboard thunks to the exact release. Real guest conversion, guards,
-zero/short buffers, scalar/failure and normal exit checks pass, as do7 controlled
-dead-key/two-byte result-propagation cases. Capacity0 key-name terminator behavior
-matches original and native USER32. Actual DBCS layouts/dead-key composition are
-not certified. No product defect established or code change needed; ten-image
-S38 release and Full16/16 remain exact. Tests/evidence P1 only, no O:/winnt or push.
+[Boundary audit](../etc/operations/m0-t479-s2-guest-design-boundaries.md) records
+seven concrete hazards and selected corrections: retirement locking, dispatch
+cancellation, paired launch capabilities, single-active COMMAND state (standard handles already TLS), VM death,
+callback restoration and independent wakeup. Guest ABI/event execution and the
+complete I/O provider remain explicit S2--S5 proof gates, not passed claims.
+No runtime or published image changes accompany this research checkpoint.
 
-## S38 Closure Record
+## S2 Shared Import Closure
 
-Finding48: [evidence](../etc/evidence/m0-t478-s38-clipboard-caret-investigation.md)
-and [receipt](../../artifacts/mvdm-audit/shard-2/clipboard-caret-s38-results.json)
-record copied-format rejection cleanup and recovery of the original OLE
-conversion closure. The unavailable system kernel-WOW callback dependency is
-removed.24 controlled ownership cases, five real guest rejection cases,
-real product/guest forward/reverse conversion and current caret cases pass.
-Full16/16 passes in377985ms. All ten images of package
-818fff8c-efa7-4570-93d6-1f9c820f40ed are hash-published to this worktree
-assets/release, with prior assets backed up in build/t478-s38/release-before.
-This P1 is a local delivery only; no guest change, new tolerance, O:/winnt
-write or push. Public interactive Clipboard coverage is not inferred from the
-new isolated/provider probes; original allocation/invalid-input limits remain.
-
-## S37 Closure Record
-
-[S37 evidence](../etc/evidence/m0-t478-s37-dde-mm-investigation.md) identifies the
-original app-local DDEML owner and repairs full-HWND window-word storage;
-P1 is860ac2d91. This P2 corrects the public interrupt calling convention while
-retaining original CPU40 PIC/ring behavior. Real38-callback wrap/cancel/exit,
-window-word/DDEML, DEM115 and redirector12 checks pass. Full16/16 passes in
-388963ms. Package77579397-8a7e-4d07-add4-9a0e3e2404ac is hash-published to this
-worktree assets/release. No guest changes, new tolerance, O:/winnt write or push.
-Device-specific multimedia/fax remains finding54/S40, not claimed complete here.
-
-## S36 Closure Record
-
-Finding35: real Shell parent/child and CBT nesting/veto/explicit unhook/exit,
-original hook cleanup against real USER, native subclass/CallProc lifecycle and
-84 current image bindings passed. Existing product behavior suffices;
-[S36 evidence](../etc/evidence/m0-t478-s36-shell-hook-investigation.md) records
-failed test constructions and the exact limits. No new product capability.
-
-## S35 Closure Record
-
-Finding27: mutable INT12, original ROM async/sync RTC waits and alarm INT4A,
-PIC EOI and state restoration passed on the unchanged S34 package. Original
-ROM cancellation and alternate host BOP70 limitations remain explicit;
-[S35 evidence](../etc/evidence/m0-t478-s35-rtc-investigation.md) contains exact
-results and unsuccessful diagnostic attempts. No new product capability.
+[Delivery evidence](../etc/evidence/m0-t479-s2-shared-import.md) records 46/46
+exact upstream source files, one generic test suite, MSVC/GCC x86/x64 passes,
+both cross-width matrices and Full 16/16. The coherent ten-image package
+f86fa099-e0ba-4d7f-bbd3-721fbee9b824 is published at both destinations.
+Owner acceptance closes this side stage at 967ef3d31. Guest-bridge implementation remains a separate workline; this delivery does
+not imply guest multitasking support.
 
 ## S1 Closure Record
 
-T478 S1 planning handoff: [classified findings](../etc/evidence/m0-t478-s1-classified-findings.md).
-Broader inventory qualification remains open.
+[Closure and mandatory handoff](../etc/evidence/m0-t479-s1-guest-research-closure.md)
+records the bounded research outcome and transfers executable proof obligations
+to S2--S5. The candidate is VMM callback/semaphore plus an emulated notification
+device; exact runtime ABI, input/presentation and lifecycle behavior are not
+claimed proven. No runtime, mirror or guest bytes changed in this closure.
+
+[Stage plan](../etc/operations/m0-t479-guest-bridge-plan.md) and
+[call-chain research](../etc/operations/m0-t479-s1-guest-callchain.md) retain the
+full objective. No new semantic concession or guest modification is authorized.
+
+## Delivered S1 Side Integration
+
+[Generic-thunk integration](../etc/evidence/m0-t479-s1-thunk-import.md) retains
+its separate source history, Full 16/16 acceptance and coherent published
+0.0.479/protocol-67 ten-image package. These passes are not guest-bridge proof.
+T478 remains the independently reserved worktree task, not a local packet.
+
+## S4 Closure Record
+
+[VM groups and integrated delivery](../etc/evidence/m0-t477-s4-vm-groups.md):
+CONSOLE and VM frontend groups preserve independent worker chains; VM PID is
+hostPID-VMID, TASK is empty, and VM management remains read-only. Cached
+builds, actual RPC/renderer/service tests and Full 16/16 gates passed. All ten
+images are hash-verified at both publication destinations.
+
+## S3 Closure Record
+
+[T477 S3 host composition evidence](../etc/evidence/m0-t477-s3-host-composition.md)
+and its [design](../etc/operations/m0-t477-s3-vm-frontends-design.md).
+No guest driver or actual guest multitasking capability is claimed.
+
+## S2 Closure Record
+
+[T477 S2 P4 integrated delivery](../etc/evidence/m0-t477-s2-p4-integration.md)
+and [S2 implementation evidence](../etc/evidence/m0-t477-s2-frontend-instances.md).
+
+## T477 S1 Closure Record
+
+[T477 S1 closure evidence](../etc/evidence/m0-t477-s1-frontend-base.md).
 
 ## M0 T475 S5 Closure
 
@@ -154,21 +158,15 @@ The owner directs no push or main-runtime publication.
 
 ## S12 Closure Record
 
-T478 S12 [repairs original failed redirector module ownership](../etc/evidence/m0-t478-s12-redirector-loader.md), deletes the unselected local loader and passes 77 focused checks plus all 16 Full gates; worktree release only.
-
 The owner accepted [S12 source layout and compile-time boundaries](../etc/evidence/m0-t473-s12-source-layout-closure.md).
 
 ## S11 Closure Record
-
-T478 S11 [verifies all twelve original XMS dispatch routes](../etc/evidence/m0-t478-s11-xms-dispatch.md); the public function guard already exists, and original private-input limits are retained.
 
 The [S11 compilation-condition closure](../etc/evidence/m0-t473-s11-condition-cleanup-closure.md) records the selected non-MVDM cleanup, published package equivalence and deferred recovery boundaries.
 
 ## S10 Closure Record
 
-T478 S10 [verifies existing keyboard-layout host wiring](../etc/evidence/m0-t478-s10-keyboard-layout.md) and records the original malformed-configuration limitation without new tolerance.
-
-The [S10 audit](../etc/evidence/m0-t473-s10-closure.md) records bounded source-role decisions and S11–S19 handoff.
+The [S10 audit](../etc/evidence/m0-t473-s10-closure.md) records bounded source-role decisions and S11--S19 handoff.
 
 ## T471 Closure Record
 
@@ -207,38 +205,26 @@ The [T473 baseline](../etc/evidence/m0-t473-s1-whole-closure-baseline.md) record
 
 ## S2 Closure Record
 
-T478 S2: [bounded conclusion](../etc/evidence/m0-t478-s2-generic-thunk.md).
-
 The [T473 CPU40/DPMI reconciliation](../etc/evidence/m0-t473-s2-cpu40-dpmi-reconciliation.md) and companion owner records retain the per-package decisions.
 
 ## S3 Closure Record
-
-T478 S3: [bounded conclusion](../etc/evidence/m0-t478-s3-forcedos.md).
 
 The [T473 CPU40 lifecycle](../etc/evidence/m0-t473-s3-cpu40-execution-lifecycle.md) records the execution and retirement boundary.
 
 ## S4 Closure Record
 
-T478 S4: [bounded conclusion](../etc/evidence/m0-t478-s4-remote-rap.md).
-
 The [T473 DOS/COMMAND/XMS lifecycle](../etc/evidence/m0-t473-s4-dos-command-xms-lifecycle.md) records the selected original owner paths.
 
 ## S5 Closure Record
-
-T478 S5: [bounded conclusion](../etc/evidence/m0-t478-s5-directory-restart.md).
 
 The [T473 SoftPC device lifecycle](../etc/evidence/m0-t473-s5-softpc-device-lifecycle.md) records the bounded device-owner audit.
 
 ## S7 Closure Record
 
-T478 S7: [bounded conclusion](../etc/evidence/m0-t478-s7-xms-boundaries.md).
-
 S7 closed at [its session/callback ownership audit](../etc/evidence/m0-t473-s7-wow-session-callback-audit.md)
 without a runtime change; S8 owns public-USER object identity and retirement.
 
 ## S8 Closure Record
-
-T478 S8: [bounded conclusion](../etc/evidence/m0-t478-s8-suballoc-disposition.md).
 
 S8 closes at its [public-USER evidence](../etc/evidence/m0-t473-s8-public-user-identity-recovery.md).
 The ten-image package is published; the skipped direct completion/input
@@ -246,14 +232,9 @@ control observation remains a non-pass. S9 owns generic wrappers.
 
 ## S9 Closure Record
 
-T478 S9 [restores original FDC/COMMAND session ownership](../etc/evidence/m0-t478-s9-fdc-session.md), with actual-object tests and all 16 selected Full gates passed; worktree release only.
-
-
 The [T473 USER wrapper evidence](../etc/evidence/m0-t473-s9-generic-user-wrapper-audit.md) records the mapped carrier family and delivered r10 package.
 
 ## S6 Closure Record
-
-T478 S6: [bounded conclusion](../etc/evidence/m0-t478-s6-sas-vector.md).
 
 S6 was a no-runtime [status-sequence correction](../etc/evidence/m0-t473-s6-status-sequence-correction.md);
 S7 owns the WOW32 session/callback audit.
@@ -278,56 +259,22 @@ packet above remains the only current S authority.
 
 ## Current Technical Baseline
 
-Current product is the unchanged S43 eleven-image package
-22e35db2-13bb-419d-ba68-7a169cc939e1, published only to this worktree's
-assets/release and verified by S43 Full16/16. S44 and S45 P1-P18 change no
-product source or published package. See the S43/S44 closure records above.
-The latest owner clarification supersedes inventory-wide reconciliation as
-an exit criterion: the concrete recovery candidates are dispositioned in the T478 closure. DOS4GW/NESticle and guest modifications remain excluded;
-O:/winnt writes and pushes are prohibited.
+The delivered [T479 host foundation](../etc/evidence/m0-t479-s2-host-foundation.md) publishes
+the ten-image product at application version 0.0.479 and protocol 67. Full
+16/16 selected gates pass and both publication targets match. Guest media is unchanged.
+S3 prepares independent host requests; actual guest VM discovery and driver execution remain S4 acceptance obligations.
+The earlier [source release review](../../artifacts/mvdm-audit/latest-source-release-review.md)
+remains retained baseline evidence.
 
 ## Temporary Evidence
 
-T459 S1--S4 used `build/t459-s1` through `build/t459-s4` only for disposable
-evidence. Their retained results are indexed from the closure; stable `.ninja`
-and `.ccache` remain reusable caches and are never task evidence roots.
-
-T467 S3/S4 disposable build and acceptance evidence uses `build/t467-s3`
-(60-minute phase, 3-GiB, 10-minute no-progress budget).
-
-T471 S1 package-freeze evidence uses `build/t471-s1` (30-minute phase,
-1-GiB, 10-minute no-progress budget); S2/S3 acceptance evidence uses
-`build/t471-s2` (60-minute phase, 3-GiB, 10-minute no-progress budget).
-
-T473 S1/S9 may use only `build/t473-s9` for disposable closure-ledger and
-WOW-session evidence,
-with a 60-minute phase, 3-GiB size and 10-minute no-progress budget. Stable
-`.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
-
-T461 S1 may use only `build/t461-s1` for disposable source-audit evidence,
-with a 30-minute phase, 2-GiB size and 10-minute no-progress budget. Stable
-`.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
-
-T461 S2/S3 disposable evidence uses `build/t461-s2` and `build/t461-s3`;
-each has a 45-minute phase, 2-GiB size and 10-minute no-progress budget.
-
-T462 and T463 disposable evidence remains under their `build/t462-s1` and
-`build/t463-s2`/`s3` roots; the shared caches are not evidence roots.
-
-T457's closed-stage evidence is indexed in its [closure](../history/m0-t457-closure.md).
-
-T454 may use only declared `build/t454-s1`, `build/t454-s2`, `build/t454-s3`
-and `build/t454-s4` roots for disposable evidence; stable `.ninja` and
-`.ccache` remain reusable caches. Retain durable results before exact-target
-cleanup; never use a task root as a build cache.
-
-`build/M0-T451`, `build/t451-s3`, `build/t451-s4` and `build/t451-s5` remain
-temporary evidence, not reusable caches. Process inventory access was denied
-during closure; deletion requires verified quiescence and the existing
-exact-target ownership checks. Durable results are linked from the closure.
-Stable `.ninja` and `.ccache` caches remain untouched.
-
-T456 S1/S2 disposable evidence uses `build/t456-s1` and `build/t456-s2`.
+The active packet above owns the current temporary scope and budgets. Earlier
+T451--T473 task directories remain disposable evidence, not reusable caches;
+their stage records retain results and handoffs. This compaction does not
+authorize deletion: verify ownership, process quiescence, retained hashes and
+exact targets through the execution rules before cleanup. Historical process
+inventory failures are not proof of quiescence. Stable build/.ninja and
+build/.ccache remain reusable and untouched.
 
 ## Recent M0 Closures
 
@@ -339,115 +286,3 @@ T456 S1/S2 disposable evidence uses `build/t456-s1` and `build/t456-s2`.
 ## Recent Governance
 
 T460 package and Clipboard acceptance are recorded in its closure above.
-
-## S13 Closure Record
-
-T478 S13 [repairs the original keycode exact bounds](../etc/evidence/m0-t478-s13-keycode-bounds.md), preserving mappings; actual-object tests, all 16 Full gates and worktree publication pass.
-
-## S14 Closure Record
-
-T478 S14 [dispositions non-ROM resource applicability](../etc/evidence/m0-t478-s14-resource-disposition.md); original NT static CMOS behavior is already connected. No production changes.
-
-## S15 Closure Record
-
-T478 S15 [assigns the unresolved codepage defect](../etc/evidence/m0-t478-s15-codepage-owner.md) to frontend/native Console ownership. Existing mirror query wiring is present; no product changes.
-
-## S16 Closure Record
-
-T478 S16 [repairs original file-cache retirement](../etc/evidence/m0-t478-s16-file-cache.md): full-list cleanup and cleared failed-view handle, 577 focused checks and 16 Full gates; worktree release only.
-
-## S17 Closure Record
-
-T478 S17 [verifies the original allocator and records retained limits](../etc/evidence/m0-t478-s17-virtual-memory.md); existing memory fixture passes after test-only boundary repair. Product release unchanged.
-
-## S18 Closure Record
-
-T478 S18 [verifies existing parameter-map cleanup](../etc/evidence/m0-t478-s18-parameter-map.md): 54 scenarios pass; unproved original cross-task risk retained, no product changes.
-
-## S19 Closure Record
-
-T478 S19 [repairs EDIT tab-stop fallthrough](../etc/evidence/m0-t478-s19-edit-tabstop.md): one break, 30 object cases, 36 construction cases, gated real Win16 and 16 Full gates; worktree release only.
-
-## S20 Closure Record
-
-T478 S20 [repairs the failed DIB bitmap destructor](../etc/evidence/m0-t478-s20-dib-registration.md): 82 native resource checks and 16 Full gates pass; late selector/mapping rollback remains an explicit original limit. Worktree release only.
-
-## S21 Closure Record
-
-T478 S21 [verifies normal original DIB retirement](../etc/evidence/m0-t478-s21-dib-retirement.md): 57 bounded checks pass, failure/count limits retained, product release unchanged.
-
-## S22 Closure Record
-
-T478 S22 [repairs the confirmed kerning output count](../etc/evidence/m0-t478-s22-font-output.md)
-with 20 focused checks, a baseline-failing/current-passing real Win16 witness,
-coherent build and 16/16 Full gates. Exact worktree release published; other
-original font failure limits remain explicit. S23 follows under continuous
-authorization; no O:/winnt write or push.
-
-## S23 Closure Record
-
-T478 S23 [repairs original palette output count](../etc/evidence/m0-t478-s23-palette-output.md):
-19 focused checks, real Win16 controls, coherent build and unchanged-package
-Full replay 16/16 pass. First Full RPC startup failure remains explicitly
-recorded, not fixed or erased. Exact worktree release published. S24 follows
-under continuous authorization; no O:/winnt write or push.
-
-## S24 Closure Record
-
-T478 S24 [restores embedding provider contracts](../etc/evidence/m0-t478-s24-embedding-provider.md):
-classes-root operations, terminated legacy strings and non-aliasing WOW tokens.
-Original mirror bodies remain unchanged. Focused 31 checks, actual binding
-lifetime, real Win16 lifecycle, persistence replay and Full 16/16 pass; exact
-worktree release published. Initial concurrent-writer failure remains explicitly
-recorded without a claimed cause/fix. S25 follows; no O:/winnt write or push.
-
-## S25 Closure Record
-
-T478 S25 [repairs original fax failure ownership](../etc/evidence/m0-t478-s25-fax-failure.md):
-135 focused checks, twelve mapped functions, coherent build and Full 16/16 pass.
-Exact ten-image worktree release published; external fax deployment is not claimed.
-S26/finding 58 is next under continuous owner authorization.
-
-## S26 Closure Record
-
-T478 S26 [repairs untransferred spool ownership](../etc/evidence/m0-t478-s26-spool-failure.md)
-and resolves the ClosePrinter failure-contract audit without changing CloseJob.
-89 body checks, 72 prefix checks, three real Win16 controls, coherent build and
-Full 16/16 pass; exact worktree release published. S27/finding 59 is next.
-
-## S27 Closure Record
-
-T478 S27 [corrects the DLC second-event check](../etc/evidence/m0-t478-s27-dlc-event.md).
-33 focused checks, selected-image binding, real DOS unavailable-provider witness,
-coherent build and Full 16/16 pass; exact worktree release published.
-Original DLC capability/rollback limits remain. S28/finding 62 follows.
-
-## S28 Closure Record
-
-T478 S28 [records the owner-approved original exhaustion limit](../etc/evidence/m0-t478-s28-async-review.md).
-Fault reproduced; 24 existing publication checks pass. No product changes,
-no new drain guarantee; exact S27 release retained. S29/finding 65 follows.
-
-## S29 Closure Record
-
-[Winsock task rundown](../etc/evidence/m0-t478-s29-winsock-rundown.md) repairs project-added premature buffer release after failed cancellation. 323 focused checks, three real Win16 cases and all 16 Full gates pass. Package 7434fc0b-10e5-4081-a37f-b33031436b9e is hash-published to worktree assets/release only; no O:/winnt or push. Original and never-completing-provider limits remain explicit.
-
-## S30 Closure Record
-
-T478 S30 [confirms the prior CPU diagnostic repairs](../etc/evidence/m0-t478-s30-diagnostic-disposition.md) with current source comparisons, selected CCPU tests and exact released-image binding. Test maintenance only; no product changes or new tolerance. Exact S29 package and its Full evidence remain unchanged.
-
-## S31 Closure Record
-
-T478 S31 [verifies the current host DLL lifecycle](../etc/evidence/m0-t478-s31-dll-entry-disposition.md): BOOLEAN/OS-loader checks and actual attach-failure/early-unload default/wait cases pass. Existing fixes retained; original lifetime limits explicit. Test-only delivery retains exact S29 release; no O:/winnt or push.
-
-## S32 Closure Record
-
-T478 S32 [reconciles original exports and host consumers](../etc/evidence/m0-t478-s32-export-disposition.md), restores exact template bytes and verifies 140 original declarations, 274 current ordinals, live task lifecycle and 16 Full gates. Package 3f06f0c6-d34a-4a6d-a862-4c89ed5373b2 is hash-published in this worktree only. No O:/winnt or push; original limits retained.
-
-## S33 Closure Record
-
-T478 S33 [verifies existing DPMI buffer/state wiring](../etc/evidence/m0-t478-s33-dpmi-buffer-state.md): 133 controlled checks, 45 lease boundaries plus session test, four real INT21 cases and eleven current image bindings pass. Original caller-precondition/exhaustion limits retained; no product change. Exact S32 package remains published.
-
-## S34 Closure Record
-
-T478 S34 [repairs original slave EOI port selection](../etc/evidence/m0-t478-s34-bios-integration.md): 74 PIC checks, actual guest vectors, BIOS/EMS and related IRQ controls, 52 image bodies/286 vector entries, and Full 16/16 pass. Exact package 03d9792b-753e-4407-8a52-883ad9bc83e3 published only to worktree assets/release; no added tolerance or guest change.

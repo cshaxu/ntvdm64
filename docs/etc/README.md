@@ -1214,10 +1214,6 @@ the pinned source intersection, compatibility findings and generic-test plan.
 
 - [T479 S5 closure](evidence/m0-t479-s5-closure.md): original reentry owner attribution, real two-VM nested commands and S6 handoff.
 
-- [T479 S6 I/O audit](operations/m0-t479-s6-io-audit.md): all47-operation inventory and finite implementation groups; no complete I/O acceptance yet.
-
-- [T479 S6 pre-import checkpoint](evidence/m0-t479-s6-pre-import.md): owner-directed preservation commit, failed fill002 evidence and integration handoff.
-
 - [T478 S3 ForceDOS host integration](operations/m0-t478-s3-forcedos-plan.md): admitted scope, current flag gates and one-hop ownership design.
 
 - [T478 S3 ForceDOS evidence](evidence/m0-t478-s3-forcedos.md): host flag ownership, actual caller tests and local package identity.
@@ -1301,3 +1297,9 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T478 S43 GDI color-alias repair](evidence/m0-t478-s43-gdi-color-alias.md): delivered real-alias/pseudo-color repair, real guest gray background, Full16/16 and local release; width remains separate.
 - [T478 S44 window sizing investigation](evidence/m0-t478-s44-window-sizing.md): same-run minimized-size cause, native control reproduction and unchanged-release gameplay; no product sizing override.
 - [T478 S45 inventory reconciliation](evidence/m0-t478-s45-inventory-reconciliation.md): closed concrete recovery-candidate review; historical mapping coverage is not a completion requirement.
+
+- [T478 main rebase](evidence/m0-t478-main-rebase.md): source integration completed; combined build, tests and publication delegated to main.
+
+- [T479 S6 I/O audit](operations/m0-t479-s6-io-audit.md): all47-operation inventory and finite implementation groups; no complete I/O acceptance yet.
+
+- [T479 S6 pre-import checkpoint](evidence/m0-t479-s6-pre-import.md): owner-directed preservation commit, failed fill002 evidence and integration handoff.
