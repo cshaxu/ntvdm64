@@ -343,3 +343,13 @@ string leaks are repaired. Exact-body 89 checks, prefix 72 checks, ten mapped
 functions, three real Win16 controls, coherent build and Full 16/16 pass.
 Exact worktree release published. External raw-job and missing-provider limits
 remain explicit; S27/finding 59 follows.
+
+## S27 disposition
+
+[S27](../evidence/m0-t478-s27-dlc-event.md) corrects only the original second
+event check. Exact-body fixture passes 33 checks (baseline five failures),
+selected inlined bytes bind to the frozen DLL, real DOS confirms provider
+absence status 07, coherent build and Full 16/16 pass. Worktree release is
+hash-verified. Original partial-initialization rollback limits and the accepted
+DLC capability exclusion remain; first-launch 0x6BE is not claimed fixed.
+S28/finding 62 follows.

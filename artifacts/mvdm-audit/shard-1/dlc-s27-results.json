@@ -1,0 +1,209 @@
+{
+  "result": "pass",
+  "originals": [
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlc5c.c",
+      "sha256": "850F2F1A746EEE3610F06EBF489CB662BCD628F556299E445DAAC7FDD24E9BBF"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\vdmredir\\vrdlc5c.c",
+      "sha256": "850F2F1A746EEE3610F06EBF489CB662BCD628F556299E445DAAC7FDD24E9BBF"
+    }
+  ],
+  "package_id": "c08075be-80dc-453c-b178-b0377ff9bb14",
+  "binding": {
+    "function": "_InitializeAdapterSupport",
+    "bytes": 686,
+    "file_offset": 27328,
+    "relocations": 40
+  },
+  "inputs": [
+    {
+      "path": "src\\mvdm-host\\vdmredir\\vrdlc5c.c",
+      "sha256": "E5EA79E573003EC98CEF6F0F8A98884941D4AEF31993712FA8C732D0B8822695"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\redir\\vrdlc5c.obj",
+      "sha256": "4952C0233DCC359CE5D89C7CEED337A41964285E0325BE8E9158640E4892A11A"
+    },
+    {
+      "path": "build\\t478-s27\\package-final2\\system32\\VDMREDIR.dll",
+      "sha256": "9ED95D129F5295F4101636CC0A5EA2CA1943083BA0597DC691D926FB0FCE7C54"
+    }
+  ],
+  "fixtures": [
+    {
+      "case": "baseline",
+      "output": "FAIL both events precede thread\nFAIL initialization result\nFAIL no thread after event failure\nFAIL failure event retirement count\nFAIL no untransferred live handles\nDLC_WORKER_EVENT checks=35 failures=5\n",
+      "hashes": [
+        {
+          "Algorithm": "SHA256",
+          "Hash": "268BA26A93F969AB08BB73668C165EEECFEED5E8DBE98E4F09C8D3C26F375022",
+          "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\vdmredir\\vrdlc5c.c"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "DF95E79E2205099EF00BF4194A3CB9E1EC9A05A231360DC469B3D882387741AA",
+          "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s27\\baseline\\dlc_worker_exact.h"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "8C64F3DC60B6B8C1C0AAC662F88DB3C5639A9ECD8052ED75467C36A6394179B3",
+          "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s27\\baseline\\dlc-event-test.exe"
+        }
+      ]
+    },
+    {
+      "case": "current",
+      "output": "DLC_WORKER_EVENT checks=33 failures=0\n",
+      "hashes": [
+        {
+          "Algorithm": "SHA256",
+          "Hash": "E5EA79E573003EC98CEF6F0F8A98884941D4AEF31993712FA8C732D0B8822695",
+          "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\vdmredir\\vrdlc5c.c"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "733C16555C77B2299556F144A8CD66930D9F15DA22B0BA59C3E99ABB86820C91",
+          "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s27\\current\\dlc_worker_exact.h"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "49860319ADD1130EB3936DE87D45A708FEA62CE9AAC6D66C82496D585641C1BF",
+          "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s27\\current\\dlc-event-test.exe"
+        }
+      ]
+    }
+  ],
+  "limitations": "Exact initializer with real events/controlled thread; masked image match is static, not DLC provider or adapter execution. Original partial-initialization limits retained.",
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 384050,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 5284,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1857,
+        "CleanupMs": 463,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 388,
+        "CleanupMs": 414,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 67296,
+        "CleanupMs": 405,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 49676,
+        "CleanupMs": 320,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 42522,
+        "CleanupMs": 429,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 16827,
+        "CleanupMs": 407,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 12858,
+        "CleanupMs": 359,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 70725,
+        "CleanupMs": 432,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12260,
+        "CleanupMs": 383,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28271,
+        "CleanupMs": 371,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30321,
+        "CleanupMs": 382,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 5828,
+        "CleanupMs": 399,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8335,
+        "CleanupMs": 420,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10284,
+        "CleanupMs": 457,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 5484,
+        "CleanupMs": 376,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7765,
+        "CleanupMs": 350,
+        "Passed": true
+      }
+    ]
+  },
+  "guest": {
+    "status": "07",
+    "observation": "Console renderer displays the original embedded NUL as a space; parser corrected, no product change",
+    "meaning": "Original loader boundary only; no DLC worker or adapter execution",
+    "result": "pass",
+    "inputs": [
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\tests\\observation\\vdmredir_dlc_probe.asm",
+        "Hash": "BB99905A11F8AE313E5A38369FEDD1C00CD15C7FA1B8222173C4BA885C41416F"
+      },
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s27\\guest-dlc-replay\\VDMDLC.COM",
+        "Hash": "1FE427AF2239F5B544295E27DD2B0A0FC77C0D9A504810C3466E12BE5986A251"
+      },
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s27\\guest-dlc-replay\\observer.txt",
+        "Hash": "76CB3A8AFD05539DF10B64DB9D30B348D155928B5D47E8202C4306D1BC01E79F"
+      },
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s27\\guest-dlc-replay\\observer.txt.console.txt",
+        "Hash": "6A378CC700A6BC0546278EEF8E7C6896109377E2CD1826CADC3A53BF1690E980"
+      }
+    ]
+  },
+  "publication": "PASS ten-image worktree release package=c08075be-80dc-453c-b178-b0377ff9bb14; backup=build/t478-s27/release-before; no O:/winnt write\n"
+}

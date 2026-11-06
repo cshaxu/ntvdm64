@@ -284,3 +284,10 @@ T478 S26 [repairs untransferred spool ownership](../etc/evidence/m0-t478-s26-spo
 and resolves the ClosePrinter failure-contract audit without changing CloseJob.
 89 body checks, 72 prefix checks, three real Win16 controls, coherent build and
 Full 16/16 pass; exact worktree release published. S27/finding 59 is next.
+
+## S27 Closure Record
+
+T478 S27 [corrects the DLC second-event check](../etc/evidence/m0-t478-s27-dlc-event.md).
+33 focused checks, selected-image binding, real DOS unavailable-provider witness,
+coherent build and Full 16/16 pass; exact worktree release published.
+Original DLC capability/rollback limits remain. S28/finding 62 follows.

@@ -1267,3 +1267,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T478 S25 fax failure contracts](evidence/m0-t478-s25-fax-failure.md): original list failure and installer ownership repairs with isolated provider evidence.
 
 - [T478 S26 spool failure ownership](evidence/m0-t478-s26-spool-failure.md): provider-contract correction and untransferred printer/carrier/string cleanup.
+
+- [T478 S27 DLC completion event](evidence/m0-t478-s27-dlc-event.md): minimal original second-event check and explicit provider/initialization limits.

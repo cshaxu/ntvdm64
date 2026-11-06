@@ -3741,7 +3741,7 @@ Return Value:
         return FALSE;
     }
     DlcWorkerCompletionEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
-    if (DlcWorkerEvent == NULL) {
+    if (DlcWorkerCompletionEvent == NULL) {
         CloseHandle(DlcWorkerEvent);
         return FALSE;
     }
