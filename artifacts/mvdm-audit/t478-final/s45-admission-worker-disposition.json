@@ -1,0 +1,72 @@
+{
+  "ids": [
+    "DOS16:86818e62324bec6dccaf",
+    "DOS16:7f2437800dace598a2ec"
+  ],
+  "scope": "Current owner reconciliation; no product changes or fresh runtime certification",
+  "sha256": {
+    "src/run16-exe/main.c": "a9553c4fbdb8be7bdf37219f319cccb73075cdbc5e22f588207ab3fa2435217a",
+    "src/non-mvdm/base/win32/client/vdm.c": "5622f66074cb994abdd5d85d0884b837fc17a24d182f00907e6df07db8c7d23f",
+    "src/non-mvdm/base/win32/server/srvvdm.c": "7b37eb1ac88922a8ba0ff6106cb71f8d31697c04db95a38fef61f98140985cac",
+    "src/common/base_srv/base_rpc_client_launch.c": "a37e13534704c26169aa7ef76aa1261ab92c2f2b53b898e3bd2e857e930a1a0c",
+    "src/common/base_srv/base_command.c": "d0b15b1e5d671b37a4aef58214a24564eb4a30fe46fabaf551b6e0c3a61f6bd6",
+    "src/ntsrv-exe/opennt/source/base_service.c": "72f268424fba27d2b99d55dd4f22e5381095e87e94da93ceb0078a118bf15821",
+    "src/ntsrv-exe/opennt/source/worker_registry.c": "5cf4e47eaaff7a4a3ac0f1c65d21abedb3e103e76f851f2a7fc1bfd8bc3122d1",
+    "src/ntsrv-exe/transport/worker_spawn.c": "65d8a927d6f3536583c2526838be3d7950ac33594225d068a82d5910645ab3ab",
+    "tests/broker/original_server_lifecycle.c": "ad7590fbbb6a5fade01dbd3e5781a0783323299f44b6d20bb1617cec928df3d5",
+    "test/integration/broker_frontend_bootstrap_test.c": "66ca090c2ca5ef93f09a526643cac7c30a0211d2c95d911b8818064a7b020155"
+  },
+  "original_comparison": {
+    "BaseCheckVDM": {
+      "upstream": "O:\\repos.external\\OpenNT\\base\\win32\\client\\vdm.c",
+      "upstream_sha256": "3f03d0dbb08e0163f2d9cf415daad0981e42e1b1855f6f48a3b59022b7374173",
+      "body_equal_normalized_newlines": false,
+      "retained_difference": "OPENNT-HOST-065: DWORD hotkey scalar via ULONG_PTR; comment and #line only otherwise"
+    },
+    "BaseSrvCopyCommand": {
+      "upstream": "O:\\repos.external\\OpenNT\\base\\win32\\server\\srvvdm.c",
+      "upstream_sha256": "c1e2177c6c00679d85cfa475f620841f6736b0e56d8dbf790b71afe33e1ed80b",
+      "body_equal_normalized_newlines": true,
+      "retained_difference": "none"
+    }
+  },
+  "admission": [
+    "Run16 explicitly supplies inherited standard streams to original BaseCheckVDM and declares PIF new-console prerequisite.",
+    "Original BaseCheckVDM owns field encodings, command-tail construction, captures and temporary cleanup.",
+    "Common RPC replaces native stream values with typed receipts, retaining aliases and treating console streams through Console identity.",
+    "NTSRV validates identity/capacity before original Check dispatch; original BaseSrvCopyCommand deep-copies fields. Reply capacity is checked before publication, not after.",
+    "Ready reply waits existing parent event; NOT_PRESENT alone starts a worker. Modern execution/frontend identity binding does not import an entire CSR/CreateProcess shell."
+  ],
+  "worker": [
+    "NTSRV consumes authenticated pending Check; selects own-package worker, original BaseGetVdmConfigInfo and already-projected Unicode environment.",
+    "broker_worker_start_admitted creates suspended under transient startup Job; PrepareWorker, original Update callback, parent export and worker handle duplication precede Resume.",
+    "service_vdm_update uses original UPDATE_VDM_PROCESS_HANDLE or UPDATE_VDM_UNDO_CREATION; registered state selects FULLY/PARTIALLY_CREATED.",
+    "Original no-parent-event independent-console semantics become a service process-exit completion receipt; Run16 does not substitute worker process wait for task completion.",
+    "Pre-resume creation failure retires only its owned child; service cancels wait, closes retained process, performs original undo and releases reservation. No launcher kill policy for successfully handed-off worker."
+  ],
+  "evidence": [
+    "T412 original lifecycle fixture: command tail CRLF, copied application/environment/title/desktop/reserved and hotkey behavior; client capture allocation failure before server dispatch.",
+    "T424 S4 final original DOS/native/DOS relaunch and source-controlled service migration, with retained failed borrowed-event attempt and fix.",
+    "Current broker_frontend_bootstrap_test retains rejection without Check and malformed environment with no exported handles; historical success is not a new execution.",
+    "S43 unchanged normal startup/Full16/16 is regression context, not exhaustive startup rollback fault certification."
+  ],
+  "limits": [
+    "BaseSrvCopyCommand allocation-failure frees VDMInfo before reading its child pointers. Exact original body retained; client capture OOM fixture does not test or certify this server-side use-after-free.",
+    "Original fixed field widths, command budget and encoding conversions remain; arbitrary DBCS, long-path and every allocation failure not certified.",
+    "No new failure injection at every post-Check creation, original Update, attachment or Resume site. Historical successful startup is not proof of every rollback branch.",
+    "Older launcher-owned CreateProcess and retired adapter paths are historical architecture, not a restoration target."
+  ],
+  "maps": {
+    "build/.ninja/msvc-x64-release/launcher/run16.exe.map": [
+      "0001:00007da0       BaseCheckVDM               0000000140008da0 f   opennt-base-client:client.obj",
+      "0001:00024f00       BaseCheckVDM$fin$0         0000000140025f00 f   opennt-base-client:client.obj"
+    ],
+    "build/.ninja/msvc-x64-release/service/ntsrv.exe.map": [
+      "0001:0000d1b0       OpenNtBaseServiceStartVdmWorker 000000014000e1b0 f   opennt-base-bindings:worker-registry.obj",
+      "0001:00019930       broker_worker_start_admitted 000000014001a930 f   opennt-base-bindings:worker-spawn.obj",
+      "0001:00036bc0       BaseSrvCheckVDM            0000000140037bc0 f   opennt-base-server:srvvdm.obj",
+      "0001:00037240       BaseSrvCopyCommand         0000000140038240 f   opennt-base-server:srvvdm.obj",
+      "0001:00039050       BaseSrvUpdateVDMEntry      000000014003a050 f   opennt-base-server:srvvdm.obj"
+    ]
+  }
+}

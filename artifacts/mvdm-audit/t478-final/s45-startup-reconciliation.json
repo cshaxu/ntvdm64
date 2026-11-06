@@ -1,5 +1,5 @@
 {
-  "scope": "26 existing startup/bootstrap identities;23 bounded dispositions and3 explicitly pending subcontracts, no product change",
+  "scope": "26 existing startup/bootstrap identities;25 bounded dispositions and1 explicitly pending subcontract, no product change",
   "rows": [
     {
       "id": "DOS16:541d06932befed15a369",
@@ -157,17 +157,17 @@
       "id": "DOS16:86818e62324bec6dccaf",
       "module": "1.2",
       "contract": "Initial DOS request preparation, admission and copied payload",
-      "disposition": "pending",
+      "disposition": "wired; current ownership and bounded historical evidence",
       "current_owner": "Run16 -> original BaseCheckVDM; NTSRV -> original BaseSrvCheckVDM/CopyCommand",
-      "evidence_and_limits": "Current launcher/service maps prove original ownership. Next bind startup/copy/capacity and standard-handle tests to current worker admission."
+      "evidence_and_limits": "s45-admission-worker-disposition.json: retained original capture/deep-copy and service-owned suspended creation/Update/undo; historical focused and startup results only. Original server allocation-failure lifetime defect retained, not certified safe; no exhaustive post-Check rollback fault claim."
     },
     {
       "id": "DOS16:7f2437800dace598a2ec",
       "module": "1.2",
       "contract": "Initial worker publication, parent-wait choice and creation rollback",
-      "disposition": "pending",
+      "disposition": "wired; current ownership and bounded historical evidence",
       "current_owner": "Run16 service-start/undo -> worker_registry.c -> original BaseUpdateVDMEntry/worker-spawn",
-      "evidence_and_limits": "Current service owns launch; legacy direct-CreateProcess audit recipe is not current orchestration. Next reconcile existing ownership/rollback tests, do not reintroduce launcher-owned lifecycle."
+      "evidence_and_limits": "s45-admission-worker-disposition.json: retained original capture/deep-copy and service-owned suspended creation/Update/undo; historical focused and startup results only. Original server allocation-failure lifetime defect retained, not certified safe; no exhaustive post-Check rollback fault claim."
     },
     {
       "id": "DOS16:1f6a1765004d85a79063",

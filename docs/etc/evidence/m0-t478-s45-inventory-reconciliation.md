@@ -558,3 +558,56 @@ pending (admission, worker rollback and first COMMAND frame).1036 active
 inventory identities remain pending. S45/T478 remain active. This is evidence
 only; unchanged S43 product/release and Full evidence are retained, with no
 O:/winnt write, publication or push.
+
+## P15 admission and worker ownership disposition
+
+The [admission/worker receipt](../../../artifacts/mvdm-audit/t478-final/s45-admission-worker-disposition.json)
+resolves DOS16:86818e62324bec6dccaf and DOS16:7f2437800dace598a2ec as wired
+owners with explicitly bounded historical evidence. Source/function comparison
+against the pinned OpenNT files proves BaseSrvCopyCommand identical after
+newline normalization. BaseCheckVDM differs only by the registered hotkey
+DWORD-through-ULONG_PTR cast, its explanatory comment and line directives.
+Maps bind the launcher/server to these original bodies.
+
+Run16 supplies its inherited stream triple and original PIF new-Console flag.
+Original BaseCheckVDM retains capture, field conversion, tail and cleanup;
+common transport carries aliased streams as typed receipts and treats Console
+identity separately. Service reply capacity is validated before original Check
+publishes its record; original CopyCommand deep-copies the fields. The T412
+fixture checks tail CRLF, application/environment/startup copies and hotkey
+handling. Its allocation-failure check is at CLIENT capture allocation, not
+server deep copy. No fresh runtime run is claimed by this source checkpoint.
+
+The original server allocation failure frees VDMInfo before accessing its
+child pointers. This ordering is byte-identical in the compared body and was
+already identified in the pinned DOS16 audit. It remains an original
+memory-exhaustion limitation under the owner's no-added-tolerance direction,
+not a safe cleanup result or a newly missing provider. The client test cannot
+be cited as coverage of this unsafe server path. Original command budgets,
+USHORT widths and encoding behavior remain without an expanded fault matrix.
+
+Current worker creation belongs to NTSRV, superseding the old launcher's
+CreateProcess recipe. The service selects its trusted package worker and
+original configuration, reserves the authenticated Check result, creates
+suspended, prepares the worker, performs original Update, duplicates export
+handles and admits the frontend before Resume. The startup Job is temporary;
+pre-resume failure cleans only that owned child. Service failure cleanup
+cancels its wait, closes its process reference, invokes original partial/full
+undo and releases the reservation. Successful handoff is not launcher-owned
+process termination. The original independent-console no-parent-event branch
+uses a service process-exit receipt, retaining its completion meaning.
+
+[T424 S4](m0-t424-s4-broker-centered-launch-control.md) preserves the failed
+borrowed-event export and its correction, followed by real DOS/native/DOS
+relaunch and final delivery. Current broker_frontend_bootstrap_test still
+asserts rejection without prior Check and malformed environment without exported
+handles. These are bounded historical observations, not fresh or exhaustive
+post-Check rollback fault injection. S43's unchanged normal startup and Full
+remain regression context; neither implies all allocation/Resume/transport
+failures were exercised. No restoration of obsolete launcher ownership or
+private CSR shell is needed.
+
+Twenty-five startup identities have bounded dispositions; the first COMMAND
+frame remains pending.1034 active identities remain pending overall. This P
+changes evidence only, retains S43 assets, and leaves S45/T478 active. No
+O:/winnt write, new publication or push.
