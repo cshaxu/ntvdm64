@@ -156,3 +156,40 @@ worker publication/rollback contracts; the latter retain their separate rows.
 This evidence-only checkpoint leaves13 startup rows and1046 active inventory
 identities pending. No product change, rebuild, publication or new tolerance is
 needed for this row. S45 and the full T478 objective remain open.
+
+## P4 current PIF caller and environment-copy evidence
+
+The [receipt](../../../artifacts/mvdm-audit/t478-final/s45-pif-caller-reconciliation.json)
+resolves DOS16:e38a5b13166e6e9c8136 with current x86 CCPU40 owner inputs.
+The maintained OEMUNI generator builds in the stable
+build/.ninja/msvc-x86-release/oemuni-fixtures cache and links the formal worker's
+original cmdpif.obj. Background runner9132 completed build and both fixture
+processes with exit0; its 120-second build and30-second per-case deadlines were
+not reached. Exact commands, logs, hashes and markers are in the receipt.
+
+Caller cases cover OEM non-ASCII startup paths, original command CRLF, task
+metadata, non-PIF bypass, missing directory/file, wrong extension, four-field
+cleanup and the original64-byte startup-directory rejection. The separate
+current copy-adapter fixture covers acquire/release/allocation failure,
+unterminated input, tiny input, non-first-task bypass and snapshot disposal.
+GetPIFData is a fail-closed substitute in the caller fixture; environment
+expansion is a copying substitute. Neither proves binary PIF extension parsing
+or environment expansion. DOS16:6183631816abcfe32197 stays pending: inspection
+of the old default-parser fixture finds only a no-extension/default witness,
+not 286/386/WNT/Win95 precedence or partial-state validation.
+
+The first current build failed to link two later unrelated scalar/FDC imports.
+The test now supplies fail-closed substitutes for session_register_teardown and
+guest_memory_lease_copy; entry exits99, so neither can silently simulate success.
+The second run rejected this deep worktree's over64-byte directory before the
+caller test. The runner now accepts an explicit WorkRoot; this run used an owned
+TEMP child, not a drive alias. The third run exposed the old fixture's long-path
+spelling assertion: original cmdCheckForPIF intentionally selects GetShortPathName
+before SetCurrentDirectory. The corrected oracle compares that short spelling.
+Eight nested short components make the rejection control long even with8.3 names.
+Successful runs remove their owned directories bottom-up. Failed attempts remain
+as diagnostics and are not counted as passes. None requires a product change.
+
+The active packet permits this bounded existing-fixture maintenance. The release
+remains S43, with no rebuild/publication needed for unchanged products. Twelve
+startup rows and1045 active identities remain pending; S45 is not closed.

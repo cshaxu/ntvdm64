@@ -105,7 +105,8 @@ int main(int argc, char **argv)
             WCHAR selected[MAX_PATH], expectedFile[MAX_PATH];
             CHECK(!message && writes == 1 && info.AppLen == strlen(app)+1);
             CHECK(!strcmp(command, "argument\r\n") && DontCheckDosBinaryType);
-            CHECK(!wcscmp(actual, expected));
+            /* Original caller deliberately selects the short directory spelling. */
+            CHECK(!_wcsicmp(actual, shortDir));
             CHECK(MultiByteToWideChar(CP_OEMCP, 0, app, -1, selected, MAX_PATH));
             CHECK(GetFullPathNameW(shortName, MAX_PATH, expectedFile, NULL));
             CHECK(!_wcsicmp(selected, expectedFile));

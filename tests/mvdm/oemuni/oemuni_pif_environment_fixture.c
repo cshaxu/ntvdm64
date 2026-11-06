@@ -8,6 +8,18 @@ int session_valid(session const *value) { (void)value; ExitProcess(99); return 0
 int mvdm_guest_location_read_u16(mvdm_guest_location const *value,uint16_t *out)
 { (void)value;(void)out;ExitProcess(99);return 0; }
 
+/* Later scalar-registration and FDC helpers share the production TU but are
+ * outside this PIF copy test. Reject accidental entry instead of simulating them. */
+int session_register_teardown(session *instance, session_teardown_fn function,
+    void *context)
+{ (void)instance; (void)function; (void)context; ExitProcess(99); return 0; }
+int guest_memory_lease_copy(guest_memory_lease_context *context, uint32_t epoch,
+    uint32_t address, uint8_t *bytes, uint32_t byte_count, int write)
+{
+    (void)context; (void)epoch; (void)address; (void)bytes;
+    (void)byte_count; (void)write; ExitProcess(99); return 0;
+}
+
 VDMENVBLK cmdVDMEnvBlk;
 BOOL IsFirstVDM=TRUE;
 static char guest[]="S37_CONFIGROOT=O:\\winnt\\tests\\P37\0";

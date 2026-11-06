@@ -1,0 +1,39 @@
+{
+  "id": "DOS16:e38a5b13166e6e9c8136",
+  "profile": "MSVC x86 CCPU40 formal worker object and flags",
+  "runner": "build/t478-s45/run-pif-p4-r4.ps1",
+  "runner_pid": 9132,
+  "timeouts_seconds": {
+    "build": 120,
+    "each_case": 30
+  },
+  "sha256": {
+    "tests/mvdm/oemuni/oemuni_pif_caller_fixture.c": "b8e2477be239e5c978151c4dcc24a78059b0969362a824d7b49d53a7da411441",
+    "tests/mvdm/oemuni/oemuni_pif_environment_fixture.c": "8cca5e8986bd77893f3047e22bb291f8d965fcdee6d7c51b933b16d4eca8050f",
+    "tests/observation/verify-oemuni-pif-caller.ps1": "139f4937cba98b515933616991940775c4554769ab1ec3d4dedb2d674e7e7b60",
+    "src/mvdm-host/dos/command/cmdpif.c": "8177313a6c831a3499dd9caff7cf2347a734447553f4154293105968a16db09c",
+    "src/ntvdm-exe/command/source/mvdm_command_guest_state.c": "8fb2fb51ca69662f81dc4d4892b11d34a910b43cb507c7a0c8fc4ee63494eb77",
+    "build/.ninja/msvc-x86-release/worker/obj/command/cmdpif.obj": "ca96061e43217031844dbbdf40e8bf96a7dc499daaebdad51b1f85252dd832d8"
+  },
+  "results": {
+    "build": {
+      "exit": 0,
+      "log": "build\\t478-s45\\pif-r4-build.log"
+    },
+    "caller": {
+      "exit": 0,
+      "log": "build\\t478-s45\\pif-r4-caller.log"
+    },
+    "environment": {
+      "exit": 0,
+      "log": "build\\t478-s45\\pif-r4-environment.log"
+    }
+  },
+  "limits": [
+    "GetPIFData is a fail-closed stub: no binary PIF parser coverage",
+    "cmdExpandEnvironmentStrings is a copying stub: no expansion algorithm coverage",
+    "Guest lease provider is controlled: no new full guest runtime claim",
+    "No product changes, O:/winnt writes or push"
+  ],
+  "markers": "S37_ORIGINAL_PIF_CALLER_OEM_PATH_ERRORS_CLEANUP_OK\nS37_ORIGINAL_PIF_LONG_STARTDIR_REJECT_OK\nS37_PIF_ENV_COPY_RELEASE_FAILURE_RESTORE_OK\n"
+}

@@ -1,5 +1,5 @@
 {
-  "scope": "26 existing startup/bootstrap identities;13 bounded dispositions and13 explicitly pending subcontracts, no product change",
+  "scope": "26 existing startup/bootstrap identities;14 bounded dispositions and12 explicitly pending subcontracts, no product change",
   "rows": [
     {
       "id": "DOS16:541d06932befed15a369",
@@ -77,9 +77,9 @@
       "id": "DOS16:e38a5b13166e6e9c8136",
       "module": "1.2",
       "contract": "Application of startup PIF names and launch metadata",
-      "disposition": "pending",
+      "disposition": "wired",
       "current_owner": "cmdpif.c cmdCheckForPIF reached through mvdm_command_check_pif guest copy boundary",
-      "evidence_and_limits": "T453 S3 original-caller and environment fixtures exist; next pin current inputs and exact covered error/copy-release cases. S3 ForceDOS does not close all PIF semantics."
+      "evidence_and_limits": "s45-pif-caller-reconciliation.json: fresh current original cmdpif.obj cases verify OEM startup path, command CRLF, non-PIF bypass, missing directory/file, wrong extension, long directory rejection and cleanup. Current copy adapter verifies acquire/release/allocation failures and copied environment lifetime. Binary GetPIFData parser and environment expansion algorithm are not exercised."
     },
     {
       "id": "DOS16:4673504e1fe696895ecf",
