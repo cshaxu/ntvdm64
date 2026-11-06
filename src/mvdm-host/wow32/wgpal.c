@@ -97,7 +97,8 @@ ULONG FASTCALL WG32GetPaletteEntries(PVDMFRAME pFrame)
                                          WORD32(parg16->f3),
                                          t4));
 
-        PUTPALETTEENTRY16(parg16->f4, parg16->f3, t4);
+        /* MVDM-HOST-DIV-878: convert the returned entries, not capacity. */
+        PUTPALETTEENTRY16(parg16->f4, ul, t4);
         FREEPALETTEENTRY16(t4);
     }
 

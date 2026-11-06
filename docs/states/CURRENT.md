@@ -253,3 +253,11 @@ with 20 focused checks, a baseline-failing/current-passing real Win16 witness,
 coherent build and 16/16 Full gates. Exact worktree release published; other
 original font failure limits remain explicit. S23 follows under continuous
 authorization; no O:/winnt write or push.
+
+## S23 Closure Record
+
+T478 S23 [repairs original palette output count](../etc/evidence/m0-t478-s23-palette-output.md):
+19 focused checks, real Win16 controls, coherent build and unchanged-package
+Full replay 16/16 pass. First Full RPC startup failure remains explicitly
+recorded, not fixed or erased. Exact worktree release published. S24 follows
+under continuous authorization; no O:/winnt write or push.

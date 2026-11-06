@@ -303,3 +303,12 @@ return witness pass; the prior package fails that same guest tail check.
 Other original font failure/invalid-input boundaries remain explicitly bounded,
 not declared repaired. Coherent build, 16 Full gates and exact worktree release
 pass. S23/finding 55 follows.
+
+## S23 disposition
+
+[S23](../evidence/m0-t478-s23-palette-output.md) passes the native returned
+palette count to the original converter. Nineteen focused checks and real
+Win16 short/exact/zero/lifetime controls pass. Coherent build and unchanged-
+package Full replay pass 16/16; the first pre-worker RPC startup failure remains
+recorded as a separate unresolved risk. Exact worktree release published;
+S24/finding 56 follows.

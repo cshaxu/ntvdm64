@@ -1,0 +1,291 @@
+{
+  "baseline": "6e8ad9dff",
+  "sources": {
+    "files": [
+      {
+        "path": "src\\mvdm-host\\wow32\\wgpal.c",
+        "sha256": "cc47d423d9b8f21f490abda9c3f1f1c321a4ab4aa847602ea447d3b70b70510a"
+      },
+      {
+        "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wgpal.c",
+        "sha256": "942bd3c12615416a532638df4b53a08e963bd1e60dd0d081fd34765ace0872c8"
+      },
+      {
+        "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow32\\wgpal.c",
+        "sha256": "942bd3c12615416a532638df4b53a08e963bd1e60dd0d081fd34765ace0872c8"
+      }
+    ],
+    "baselineMatchesOriginals": [
+      true,
+      true
+    ],
+    "baselineSha256": "942bd3c12615416a532638df4b53a08e963bd1e60dd0d081fd34765ace0872c8",
+    "currentChanges": "GetPaletteEntries converter count only; system palette sibling unchanged."
+  },
+  "hostBaseline": "FAIL only valid entries converted\nFAIL guest tail retained\nFAIL only valid entries converted\nFAIL guest tail retained\nFAIL failed query has no entries\nPALETTE_OUTPUT checks=19 failures=5\n",
+  "hostCurrent": "PALETTE_OUTPUT checks=19 failures=0\n",
+  "hostFixtureHashes": [
+    {
+      "Algorithm": "SHA256",
+      "Hash": "CC47D423D9B8F21F490ABDA9C3F1F1C321A4AB4AA847602EA447D3B70B70510A",
+      "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\src\\mvdm-host\\wow32\\wgpal.c"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "2FB4F84E9C58FAFE6F53AE340BAC8D869797B68B5BA94C28217C4FBA3DF451FE",
+      "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s23\\current\\original-getpaletteentries.inc"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "116A0BF860053D21F8186E9E21FC7AB5B77DBEC2657CACECB2CD85998F5B9B18",
+      "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s23\\current\\original-putpaletteentry.inc"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "331680E79470AFA60DC1118B862F2D925C8F5B8FB0E9A9680A88DA6A1571B961",
+      "Path": "O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\build\\t478-s23\\current\\palette-test.exe"
+    }
+  ],
+  "guestBaseline": {
+    "errors": 1,
+    "package": "B33507910A3B8C4C8E3E0C6B4192AAB63257B85E36BCCA9A71956FE665ACC651",
+    "requested": 4,
+    "count": 1,
+    "returned": 1,
+    "wow": "F503E1DCFAB300A6133424E7371E3E99F330E7AAEBDCDC4BC7A2FB4D68060C71"
+  },
+  "guestCurrent": {
+    "count": 1,
+    "errors": 0,
+    "requested": 4,
+    "wow": "4DF5290E548BC73B5943445E5BE800BE55219C0E56E48939AAFDA546B6817447",
+    "returned": 1,
+    "package": "0E77BE711CE46423E5DE304278E3345F3E8E135B9EA9C12ECE96E84C6E20FD70"
+  },
+  "productVerification": {
+    "Suite": "Full",
+    "ElapsedMs": 550557,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 4940,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1977,
+        "CleanupMs": 647,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 544,
+        "CleanupMs": 601,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 68693,
+        "CleanupMs": 575,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 57890,
+        "CleanupMs": 568,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 58892,
+        "CleanupMs": 578,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 22047,
+        "CleanupMs": 590,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 19104,
+        "CleanupMs": 603,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 185378,
+        "CleanupMs": 752,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12922,
+        "CleanupMs": 632,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 30386,
+        "CleanupMs": 563,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 32092,
+        "CleanupMs": 575,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 7918,
+        "CleanupMs": 614,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8361,
+        "CleanupMs": 581,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 11616,
+        "CleanupMs": 521,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 6136,
+        "CleanupMs": 606,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 9348,
+        "CleanupMs": 611,
+        "Passed": true
+      }
+    ]
+  },
+  "guestAssertions": [
+    "short one-of-four result and tail",
+    "exact two-entry RGB values and tail",
+    "valid past-end zero result and untouched buffer",
+    "DeleteObject success and ordinary exit"
+  ],
+  "firstFullAttempt": {
+    "passed": false,
+    "case": "Console-17 command-c",
+    "expected": 0,
+    "actual": 1817,
+    "symbol": "RPC_S_NO_INTERFACES",
+    "observer": "container=console-owning-nondebug\npid=40084\nresult=exited\nexit=0x00000719\ngraphics-handshake=none\npost-exit-observation-ms=0\nconsole-owner-observer=33548\nconsole-members-after-wait=1\nconsole-member=33548\ndirect-child pid=14040 name=ntsrv.exe wait=258 exit-known=1 exit=00000103 path=O:\\tmp\\n01e\\system32\\ntsrv.exe\ntimeout-ms=20000\nmilestone-input=1 milestone-waits=0 milestone-wait-ms=0\nwindow-key-message-count=0 window-enter-count=0\nscripted-console-input=none\nconsole-mouse-mode-observed=no\nconsole-mouse-input=none\nfixed-system-root=O:\\tmp\\n01e\nfixed-system-root-chars=11\nfixed-system-root-short-chars=11\nfixed-system-root-short=O:\\tmp\\n01e\nimage-identity=unavailable\n",
+    "error": "Exception: O:\\repos.hobby\\ntvdm64\\.worktrees\\mirror-source-audit\\tools\\audit\\Verify-CommandExitStatus.ps1:318\nLine |\n 318 |  .             throw \"Unexpected $($case.Name) result: $actual; expected .\n     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n     | Unexpected command-c result: 1817; expected 0\n",
+    "interpretation": "Pre-worker service/interface startup window is the source-supported inference; no definitive scheduling trace or new retry implementation. Frozen package unchanged for replay."
+  },
+  "unchangedStartupImages": [
+    {
+      "name": "run16.exe",
+      "prior": "7147C1D721E3B2119DD868A0439FD8BCAF4042A8000F571253B5DDCE4AA166AE",
+      "current": "7147C1D721E3B2119DD868A0439FD8BCAF4042A8000F571253B5DDCE4AA166AE"
+    },
+    {
+      "name": "ntsrv.exe",
+      "prior": "44AF0FF8A6D2375B778CD49542D6BD50C5C29143CA046833391CFAA73DD99A70",
+      "current": "44AF0FF8A6D2375B778CD49542D6BD50C5C29143CA046833391CFAA73DD99A70"
+    }
+  ],
+  "zeroCapacityNativeObservation": {
+    "kerningNonNull": 0,
+    "kerningNull": 120,
+    "paletteNonNull": 0,
+    "paletteNull": 2,
+    "source": "#include <windows.h>\n#include <stdio.h>\nint main(void){HDC d=CreateCompatibleDC(NULL);HFONT f=CreateFontA(24,0,0,0,400,0,0,0,0,7,0,0,0,\"Arial\");HGDIOBJ old=SelectObject(d,f);KERNINGPAIR k[2];struct {WORD v,n;PALETTEENTRY p[2];} l={0x300,2,{{1,2,3,0},{4,5,6,0}}};HPALETTE p=CreatePalette((LOGPALETTE*)&l);PALETTEENTRY e[2];printf(\"kerning zero nonnull=%lu null=%lu palette zero nonnull=%u null=%u\\n\",GetKerningPairsA(d,0,k),GetKerningPairsA(d,0,NULL),GetPaletteEntries(p,0,0,e),GetPaletteEntries(p,0,0,NULL));DeleteObject(p);SelectObject(d,old);DeleteObject(f);DeleteDC(d);return 0;}\n",
+    "compile": "MSVC x86 cl /TC /MT zero-probe.c /link gdi32.lib user32.lib",
+    "scope": "Native API boundary observation, not another guest invocation. Non-null zero-capacity returns zero, so returned-count copy adds no entries."
+  },
+  "productVerificationAttempt": "replay 1, same frozen package",
+  "release": [
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "1FEE574FEFE294E97384856EA4D4D7DDC82D63FFE6B1092F1E726BE15C0AED24",
+      "Machine": 34404,
+      "PackageId": "fafb7ffe-9237-44a1-84bd-8e8f83ba4a05",
+      "InputSha256": "7147C1D721E3B2119DD868A0439FD8BCAF4042A8000F571253B5DDCE4AA166AE"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "6C8DB79E323EE0615A8DD691D78948C61FE8E39D318BF8A091D18B545DF68FEF",
+      "Machine": 34404,
+      "PackageId": "fafb7ffe-9237-44a1-84bd-8e8f83ba4a05",
+      "InputSha256": "44AF0FF8A6D2375B778CD49542D6BD50C5C29143CA046833391CFAA73DD99A70"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "15C0EF2A0C90CF7579960A44CC75822ED144197FEA5BE70F1435519BB206F3A8",
+      "Machine": 34404,
+      "PackageId": "fafb7ffe-9237-44a1-84bd-8e8f83ba4a05",
+      "InputSha256": "9B641C216C109DD408D039A0A8EE8219472FBA09693430BA59270B58C2C84C5F"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "0F3FB6745CABE44EB9EAECC95E2E81C1E2F0EA69731DE5E0E4AA35FFB53BB3FB",
+      "Machine": 332,
+      "PackageId": "fafb7ffe-9237-44a1-84bd-8e8f83ba4a05",
+      "InputSha256": "975FA20EEBD0BC269FB7658A6BE9C9875AF47ABE480C4B6C58316CB6337229A7"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "1140A13F0CE4BB0A2C4624B2ACF7139C827EC02AA17D4402531D67B602639005",
+      "Machine": 34404,
+      "PackageId": "fafb7ffe-9237-44a1-84bd-8e8f83ba4a05",
+      "InputSha256": "9A99679759178C65A8FDD8FB6D00950DD082B82C7C6CA88FFAE9082CE324F3FA"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "7DB33D5D060993A6E804A52B1CA4B2A2A2DF034319341E7C12EE0E72E245D570",
+      "Machine": 34404,
+      "PackageId": "fafb7ffe-9237-44a1-84bd-8e8f83ba4a05",
+      "InputSha256": "6F42576085116F5344C34C492F6CC21BF28D423B214E7932B07E2B80A65EDDAC"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "8B755EBC0E5DEB34724E90DF52C1B86C085EAD760917B39F7C3759A8C3782931",
+      "Machine": 332,
+      "PackageId": "fafb7ffe-9237-44a1-84bd-8e8f83ba4a05",
+      "InputSha256": "ADD625A34449FE4BDC5486AAABC29AC635821F086BF7CB7038C6CEB2613EDE3C"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "96DBBA05E085C1A646AEAA90B625213EA51D2F54DE3437397021895C825B78FE",
+      "Machine": 332,
+      "PackageId": "fafb7ffe-9237-44a1-84bd-8e8f83ba4a05",
+      "InputSha256": "B5A98766D2755810F4B97AB2953A245B6AE8C081AB6F96FAA293583B58EFE5A2"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "BE1DC7A560ABE95539016AB4E4B62B8D3647E51C478DC51066BEC40873566775",
+      "Machine": 332,
+      "PackageId": "fafb7ffe-9237-44a1-84bd-8e8f83ba4a05",
+      "InputSha256": "71429DC9962EB22EF79448AF4F0E5C5E00EC06EDB4F8200A4E64D34C10BA2E8A"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "672919859B01518860C8475AB9341B8E912B6FBB33B9895710AA1A5290E5EFEA",
+      "Machine": 34404,
+      "PackageId": "fafb7ffe-9237-44a1-84bd-8e8f83ba4a05",
+      "InputSha256": "9B9AEBF8CB200542562DF1CB4138FE128839A5ABDA76E184BBEDE7269B11C443"
+    }
+  ],
+  "publication": "PASS ten-image worktree release package=fafb7ffe-9237-44a1-84bd-8e8f83ba4a05; backup=build/t478-s23/release-before; no O:/winnt write"
+}

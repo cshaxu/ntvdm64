@@ -1259,3 +1259,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T478 S21 DIB retirement disposition](evidence/m0-t478-s21-dib-retirement.md): 57 native/extracted-owner checks and explicit original failure/count limits.
 
 - [T478 S22 font output count](evidence/m0-t478-s22-font-output.md): real Win16 kerning copy-boundary repair and explicit original font-query limits.
+
+- [T478 S23 palette output count](evidence/m0-t478-s23-palette-output.md): minimal original count correction, native and real Win16 short-return evidence.
