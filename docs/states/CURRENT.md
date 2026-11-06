@@ -2,32 +2,44 @@
 
 ## Current Work
 
-**Active: M0 T478 S40**
+**Active: M0 T478 S41**
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
 | Candidate Proposal | [Original inventory recovery](../proposals/proposal-mvdm-whole-closure-recovery-001.md) |
-| Identifier Mode | M0 T478 S40, Ordinary Mode, one active S. |
-| Admission And Approval | Continuous sequential owner authorization; S39 closes in this local tests/evidence delivery with [evidence](../etc/evidence/m0-t478-s39-keyboard-investigation.md). S40 implementation follows the local P1 commit. |
-| Objective | Resolve finding54: reconcile supported host wave/MIDI/MCI/fax paths, callbacks and task retirement beyond existing T466/S25/S37 work; repair only demonstrated original host gaps. |
-| Non-goals | No guest/media mutation, new multimedia capability or device emulation, revival of original disabled conversion bodies, O:/winnt write or push. No user device/settings changes. |
-| Reference Baseline | S38 package818fff8c-efa7-4570-93d6-1f9c820f40ed, Full16/16, retained by S39; [media audit](../../artifacts/mvdm-audit/shard-3/wow-multimedia-alias-consumer-followup.md) and [fax trace](../../artifacts/mvdm-audit/shard-1/wowfax-trace.md). |
-| Files And ABI Surface | Selected original WOW multimedia/fax host bindings and independent tests; no planned protocol change. |
+| Identifier Mode | M0 T478 S41, Ordinary Mode, one active S. |
+| Admission And Approval | Continuous sequential owner authorization; S40 closes in this local tests/evidence delivery with [evidence](../etc/evidence/m0-t478-s40-multimedia-investigation.md). S41 implementation follows the local P1 commit. |
+| Objective | Resolve finding61: verify original RegisterVDD/native loader and host optical call ownership; repair only demonstrated host gaps. |
+| Non-goals | No guest/media mutation, VCDEX guest packaging/installation, new VDD/device emulation, O:/winnt write or push. No physical media writes or device-setting changes. |
+| Reference Baseline | S38 package818fff8c-efa7-4570-93d6-1f9c820f40ed, Full16/16, retained by S40; [MSCDEX boundary](../../artifacts/mvdm-audit/shard-0/mscdex-package-review.md) and [VDD roles](../../artifacts/mvdm-audit/shard-3/mscdex-guest-vdd-input-role-review.md). |
+| Files And ABI Surface | Selected original VDD host loader/services and host optical interface, existing binding/tests; no planned public ABI change. |
 | Applicable Rules | EXECUTION, ARCHITECTURE, CODING, DOCUMENT and source policy; original semantics only. |
-| Verification | Reconcile previous fixes/tests and original provider ownership first. Exercise applicable device-independent callbacks/failures/lifecycle; distinguish absent external devices from missing host connections. Product changes require coherent build, focused/Full gates, worktree release and local commit. |
-| Expected Markers | Exact selected providers and existing recovery attributed; reproducible original failures or actual repairs, without claiming physical-device success from symbol binding. |
-| Asset Needs | Pinned original source, immutable guest, exact S38 package, isolated medium-token observers and existing multimedia/fax fixtures; build/t478-s40 evidence. |
-| Reporting Requirements | Separate existing verified behavior, original limitations, missing external device prerequisites and actual host defects. |
+| Verification | Reconcile earlier VDD/export/provider evidence first. Verify applicable registration, dispatch, failure and retirement through actual current images; distinguish missing optical device/media from missing host wiring. Product changes require coherent build, focused/Full gates, worktree release and local commit. |
+| Expected Markers | Original host registration/load/dispatch/optical owners identified with current source and runtime evidence; external device limits explicit. |
+| Asset Needs | Pinned original source, immutable guest, exact S38 package, existing independent VDD probes and isolated runtime; build/t478-s41 evidence. |
+| Reporting Requirements | Separate original restrictions, absent external devices/guest deployment, completed earlier repairs and actual host defects; no guest packaging admission by implication. |
 | Stop Conditions | Material new guest/provider requirement or behavior beyond original semantics. |
-| Exit Criteria | Finding54 reconciled with reproducible evidence, necessary repairs verified and indexed local delivery complete; no push. |
+| Exit Criteria | Finding61 reconciled with reproducible evidence, necessary repairs verified and indexed local delivery complete; no push. |
 | Original Owner Request | Continue existing sequence; maximize effective original recovery/minimize mirror and local implementation differences; no added tolerance or repeated completed work. |
-| Similar-Issue Sweep | Multimedia aliases, callbacks, asynchronous task lifetime, fax failure ownership, excluded MCI conversion bodies. |
+| Similar-Issue Sweep | VDD registration/export ABI, load/init/dispatch/unregister failure ownership, existing host optical control and data paths. |
 
 This is the owner's local retro-computing compatibility project. The temporary
-CURRENT size exception remains through final T478 reconciliation. S40 is
-admitted; no S40 product change or runtime conclusion has been made.
+CURRENT size exception remains through final T478 reconciliation. S41 is
+admitted; no S41 product change or runtime conclusion has been made.
+
+## S40 Closure Record
+
+[Finding54 evidence](../etc/evidence/m0-t478-s40-multimedia-investigation.md) and
+[results](../../artifacts/mvdm-audit/shard-3/multimedia-s40-results.json) verify
+real guest/native enumeration and errors, silent wave completion/reset/unprepare/
+close, MIDI open/close and MCI waveaudio open/close, with normal exit. Current
+fax source retains S25's repair and12 functions bind to release;4 multimedia
+bridge functions bind. Real fax, arbitrary task loss and device-specific callback
+certification are not claimed. No missing host connection established or product
+change needed; ten-image S38 release and Full16/16 retained. Tests/evidence P1
+only, no O:/winnt or push.
 
 ## S39 Closure Record
 

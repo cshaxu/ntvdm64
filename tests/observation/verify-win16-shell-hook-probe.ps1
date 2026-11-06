@@ -3,7 +3,7 @@ param([Parameter(Mandatory)][string]$PackageRoot,
  [Parameter(Mandatory)][string]$Observer,
  [Parameter(Mandatory)][string]$LogonHelper,
  [Parameter(Mandatory)][string]$BuildRoot,
- [ValidateSet('shell','hook','word','caret','clipreject','keyboard')][string]$Case='hook',
+ [ValidateSet('shell','hook','word','caret','clipreject','keyboard','media')][string]$Case='hook',
  [switch]$LeaveHookInstalled,
  [string]$CompilerEnvironment,
  [ValidateSet(15,3,131,49153,49154)][int]$ClipboardFormat=15,
@@ -34,7 +34,7 @@ try {
  @{pid=$PID;host=(Get-Process -Id $PID).Path;integrity=$label;script_sha256=(Get-FileHash $PSCommandPath).Hash}|ConvertTo-Json|Set-Content "$root/runner-context.json"
  $source="$PSScriptRoot/win16_${Case}_probe.asm"
  if($Case -eq 'word'){$source="$PSScriptRoot/win16_window_word_probe.asm"}
- $probe=if($Case -eq 'shell'){'SHLPROBE'}elseif($Case -eq 'word'){'WORDPROB'}elseif($Case -eq 'keyboard'){'KEYPROBE'}elseif($Case -eq 'caret'){'CARETPRB'}elseif($Case -eq 'clipreject'){'CLIPREJ1'}else{'CBTPROB'}
+ $probe=if($Case -eq 'shell'){'SHLPROBE'}elseif($Case -eq 'word'){'WORDPROB'}elseif($Case -eq 'media'){'MEDPROBE'}elseif($Case -eq 'keyboard'){'KEYPROBE'}elseif($Case -eq 'caret'){'CARETPRB'}elseif($Case -eq 'clipreject'){'CLIPREJ1'}else{'CBTPROB'}
  $assembler=(Get-Command nasm.exe).Source
  $defines=if($LeaveHookInstalled){'-DHOOK_LEAVE_INSTALLED '}elseif($Case -eq 'clipreject'){('-DFORMAT='+$ClipboardFormat+' ')}else{''}
  if($OleRoundtrip){$defines+='-DOLE_ROUNDTRIP '}
@@ -44,6 +44,20 @@ try {
  $scope=New-IsolatedPackageScope $runtime
  $tests=Join-Path $runtime 'tests';$null=New-Item -ItemType Directory $tests -Force
  Copy-Item "$root/$probe.EXE" "$tests/$probe.EXE"
+ if($Case -eq 'media'){
+  Copy-Item "$runtime/system32/MMSYSTEM.DLL" "$tests/MMSYSTEM.DLL"
+  if((Get-FileHash "$tests/MMSYSTEM.DLL").Hash -ne (Get-FileHash "$runtime/system32/MMSYSTEM.DLL").Hash){throw 'Immutable MMSYSTEM copy differs'}
+  $wave=[IO.MemoryStream]::new();$writer=[IO.BinaryWriter]::new($wave)
+  try {
+   $writer.Write([Text.Encoding]::ASCII.GetBytes('RIFF'));$writer.Write([uint32]836)
+   $writer.Write([Text.Encoding]::ASCII.GetBytes('WAVEfmt '));$writer.Write([uint32]16)
+   $writer.Write([uint16]1);$writer.Write([uint16]1);$writer.Write([uint32]8000);$writer.Write([uint32]8000)
+   $writer.Write([uint16]1);$writer.Write([uint16]8);$writer.Write([Text.Encoding]::ASCII.GetBytes('data'));$writer.Write([uint32]800)
+   for($i=0;$i -lt 800;$i++){$writer.Write([byte]128)}
+   [IO.File]::WriteAllBytes("$tests/T478.WAV",$wave.ToArray())
+  }finally{$writer.Dispose();$wave.Dispose()}
+  Get-FileHash "$tests/MMSYSTEM.DLL"|Export-Csv -NoTypeInformation "$root/guest-library.csv"
+ }
  if($OleRoundtrip){
   if(!$CompilerEnvironment -or !$ProviderBuildRoot){throw 'Require compiler environment and exact provider build root'}
   $map=(Resolve-Path "$ProviderBuildRoot/wow32.dll.map").Path
@@ -141,6 +155,20 @@ try {
         $returnPattern='(?m)^'+$entry.Groups[1].Value+' after ret=0037 .*task='+$entry.Groups[2].Value+' '
         if($callbackTrace -notmatch $returnPattern){throw 'Shell callback did not return on its original task/thread'}
         'PASS actual guest ShellExecute success/failure, child execution and parent continuation'|Set-Content "$root/result.txt"
+ }elseif($Case -eq 'media'){
+  if($bytes.Length -ne 124 -or [Text.Encoding]::ASCII.GetString($bytes,0,4) -ne 'MED1'){throw 'Bad media report'}
+  $values=@(0..10|ForEach-Object {[BitConverter]::ToUInt16($bytes,4+2*$_)})
+  @{values=$values;errorText=@($bytes[26..91]);wave=@(0..7|ForEach-Object {[BitConverter]::ToUInt16($bytes,92+2*$_)});midi=@(0..2|ForEach-Object {[BitConverter]::ToUInt16($bytes,108+2*$_)});mciOpen=[BitConverter]::ToUInt32($bytes,114);mciClose=[BitConverter]::ToUInt32($bytes,118);mciDevice=[BitConverter]::ToUInt16($bytes,122)}|ConvertTo-Json -Depth 4|Set-Content "$root/guest-report.json"
+  if($values[5] -ne 2 -or $values[6] -ne 2 -or $values[7] -ne 257 -or !$values[8]){throw 'Original multimedia failure contract mismatch'}
+  if($values[9] -or $values[10] -or $bytes[26] -eq 165 -or $bytes[26] -eq 0 -or $bytes[90] -ne 165 -or $bytes[91] -ne 165){throw 'Query/error buffer or handle ownership mismatch'}
+  if($values[4] -eq 0){
+   foreach($offset in @(92,94,96,100,102,104)){if([BitConverter]::ToUInt16($bytes,$offset) -ne 0){throw 'Silent wave operation failed'}}
+   $flags=[BitConverter]::ToUInt16($bytes,98)
+   if(($flags -band 3) -ne 3 -or ($flags -band 16)){throw 'Silent wave header not completed/prepared or still queued'}
+  }
+  if($values[2] -gt 0 -and ([BitConverter]::ToUInt16($bytes,108) -ne 0 -or [BitConverter]::ToUInt16($bytes,110) -ne 0)){throw 'Available MIDI open/close failed'}
+  if([BitConverter]::ToUInt32($bytes,114) -ne 0 -or [BitConverter]::ToUInt32($bytes,118) -ne 0 -or ![BitConverter]::ToUInt16($bytes,122)){throw 'MCI waveaudio open/close unavailable or failed'}
+  'PASS real guest multimedia queries/errors, available silent-wave completion/retirement, MIDI open/close and MCI waveaudio open/close; no input capture claim' |Set-Content "$root/result.txt"
  }elseif($Case -eq 'keyboard'){
   if($bytes.Length -ne 144 -or [Text.Encoding]::ASCII.GetString($bytes,0,4) -ne 'KBP1'){throw 'Bad keyboard report'}
   $values=@(0..11|ForEach-Object {[BitConverter]::ToUInt16($bytes,4+2*$_)})

@@ -1,0 +1,403 @@
+{
+  "scope": "S40 finding54 bounded original multimedia/fax host reconciliation",
+  "package_id": "818fff8c-efa7-4570-93d6-1f9c820f40ed",
+  "final_guest": {
+    "values": [
+      2,
+      2,
+      1,
+      0,
+      0,
+      2,
+      2,
+      257,
+      1,
+      0,
+      0
+    ],
+    "errorText": [
+      73,
+      110,
+      118,
+      97,
+      108,
+      105,
+      100,
+      32,
+      77,
+      67,
+      73,
+      32,
+      100,
+      101,
+      118,
+      105,
+      99,
+      101,
+      32,
+      73,
+      68,
+      46,
+      32,
+      32,
+      85,
+      115,
+      101,
+      32,
+      116,
+      104,
+      101,
+      32,
+      73,
+      68,
+      32,
+      114,
+      101,
+      116,
+      117,
+      114,
+      110,
+      101,
+      100,
+      32,
+      119,
+      104,
+      101,
+      110,
+      32,
+      111,
+      112,
+      101,
+      110,
+      105,
+      110,
+      103,
+      32,
+      116,
+      104,
+      101,
+      32,
+      77,
+      67,
+      0,
+      165,
+      165
+    ],
+    "mciClose": 0,
+    "mciOpen": 0,
+    "wave": [
+      0,
+      0,
+      0,
+      3,
+      0,
+      0,
+      0,
+      1926
+    ],
+    "mciDevice": 1,
+    "midi": [
+      0,
+      0,
+      1926
+    ]
+  },
+  "guest_result": "PASS real guest multimedia queries/errors, available silent-wave completion/retirement, MIDI open/close and MCI waveaudio open/close; no input capture claim",
+  "guest_exit": 0,
+  "native_output": "WOW_MULTIMEDIA_FEASIBILITY wave_out=2 wave_in=2 midi_out=1 midi_in=0 aux=0 mixer=4 joystick=16 timer_min=1 timer_max=1000000\nWOW_MULTIMEDIA_QUERY query=0 bad_wave=2 bad_midi=2 bad_mci=257\n",
+  "bindings": {
+    "result": "pass",
+    "sources": [
+      {
+        "source": "src\\mvdm-host\\wow32\\wow32fax.c",
+        "sha256": "22B1487D1377EF4D2F51BC30C0B871320641F9436D903672E3A6C919619D9722",
+        "bindings": [
+          {
+            "name": "_BuildPath@8",
+            "va": 268543984,
+            "function": true,
+            "owner": "wow32fax.obj",
+            "bytes": 197,
+            "relocation_words": 4
+          },
+          {
+            "name": "_BuildStrList@8",
+            "va": 268544192,
+            "function": true,
+            "owner": "wow32fax.obj",
+            "bytes": 132,
+            "relocation_words": 1
+          },
+          {
+            "name": "_ConvertDevMode@12",
+            "va": 268544336,
+            "function": true,
+            "owner": "wow32fax.obj",
+            "bytes": 470,
+            "relocation_words": 5
+          },
+          {
+            "name": "_DeviceCapsHandler@4",
+            "va": 268544816,
+            "function": true,
+            "owner": "wow32fax.obj",
+            "bytes": 373,
+            "relocation_words": 14
+          },
+          {
+            "name": "_ExtDevModeHandler@4",
+            "va": 268545200,
+            "function": true,
+            "owner": "wow32fax.obj",
+            "bytes": 414,
+            "relocation_words": 12
+          },
+          {
+            "name": "_GetFaxPrinterProfileString@20",
+            "va": 268545616,
+            "function": true,
+            "owner": "wow32fax.obj",
+            "bytes": 307,
+            "relocation_words": 11
+          },
+          {
+            "name": "_InstallWowFaxPrinter@12",
+            "va": 268545936,
+            "function": true,
+            "owner": "wow32fax.obj",
+            "bytes": 699,
+            "relocation_words": 47
+          },
+          {
+            "name": "_IsFaxPrinterSupportedDevice@4",
+            "va": 268546640,
+            "function": true,
+            "owner": "wow32fax.obj",
+            "bytes": 63,
+            "relocation_words": 4
+          },
+          {
+            "name": "_IsFaxPrinterWriteProfileString@12",
+            "va": 268546704,
+            "function": true,
+            "owner": "wow32fax.obj",
+            "bytes": 92,
+            "relocation_words": 5
+          },
+          {
+            "name": "_WG32DMBitBlt@4",
+            "va": 268546800,
+            "function": true,
+            "owner": "wow32fax.obj",
+            "bytes": 305,
+            "relocation_words": 6
+          },
+          {
+            "name": "_WOW32FaxHandler@8",
+            "va": 268547120,
+            "function": true,
+            "owner": "wow32fax.obj",
+            "bytes": 1420,
+            "relocation_words": 77
+          },
+          {
+            "name": "_WowFaxWndProc@16",
+            "va": 268548544,
+            "function": true,
+            "owner": "wow32fax.obj",
+            "bytes": 394,
+            "relocation_words": 22
+          }
+        ]
+      },
+      {
+        "source": "src\\mvdm-host\\wow32\\wmmedia.c",
+        "sha256": "FBC4695791937FEA487C91A0BA964E19625EBF4793C0123238100628FA95FD08",
+        "bindings": [
+          {
+            "name": "_WOW32DriverCallback@28",
+            "va": 268613184,
+            "function": true,
+            "owner": "wmmedia.obj",
+            "bytes": 104,
+            "relocation_words": 9
+          },
+          {
+            "name": "_WOW32ResolveHandle@24",
+            "va": 268613296,
+            "function": true,
+            "owner": "wmmedia.obj",
+            "bytes": 456,
+            "relocation_words": 27
+          },
+          {
+            "name": "_WOW32ResolveMemory@4",
+            "va": 268613760,
+            "function": true,
+            "owner": "wmmedia.obj",
+            "bytes": 22,
+            "relocation_words": 1
+          },
+          {
+            "name": "_wow_original_WMM32CallProc32@4",
+            "va": 268613792,
+            "function": true,
+            "owner": "wmmedia.obj",
+            "bytes": 54,
+            "relocation_words": 1
+          }
+        ]
+      }
+    ],
+    "fax_source_unchanged_since_s25": true,
+    "previous_fax_fixture": [
+      {
+        "label": "baseline",
+        "output": "FAIL empty/failure pointer null\nFAIL empty/failure pointer null\nFAIL empty/failure pointer null\nFAIL empty/failure pointer null\nFAIL empty/failure pointer null\nFAIL empty/failure heap retired\nFAIL empty/failure pointer null\nFAIL empty/failure heap retired\nFAIL list no access violation\nFAIL empty/failure count zero\nFAIL empty/failure heap retired\nFAIL list key retired\nFAIL installation result\nFAIL successful printer retired\nFAIL successful printer retired\nWOW_FAX_FAILURE checks=132 failures=15\n",
+        "inputs": [
+          {
+            "path": "build\\t478-s25\\baseline\\fax_exact.h",
+            "sha256": "339CACF7BB7B1B7C6E778AD4426BC9074A61487FAAF14D36DABC2FBE12F04689"
+          },
+          {
+            "path": "build\\t478-s25\\baseline\\fax-test.exe",
+            "sha256": "1A979AC6C242F17B2D4F42FAE30C2D2261004DCB7CC6516F174A5DEBED0B4488"
+          },
+          {
+            "path": "build\\t478-s25\\baseline\\run.txt",
+            "sha256": "F5C3738F0C4C108F58FE0D8A32C74968CFCF25E1190F063C0F1D8545AF8DBB65"
+          }
+        ]
+      },
+      {
+        "label": "confirmed-current",
+        "output": "WOW_FAX_FAILURE checks=135 failures=0\n",
+        "inputs": [
+          {
+            "path": "build\\t478-s25\\confirmed-current\\fax_exact.h",
+            "sha256": "CDC987FF4293AC8D3BD7EBD5588F0430E524CA20E32EC495B23BC97CC3391340"
+          },
+          {
+            "path": "build\\t478-s25\\confirmed-current\\fax-test.exe",
+            "sha256": "4BDDE4FD797F07ACCFB2D155416EF09B2FE8B13A1077A8C4AC2D6692BBB6A791"
+          },
+          {
+            "path": "build\\t478-s25\\confirmed-current\\run.txt",
+            "sha256": "2B1276ADA42D43727B46E2B8998663252E0F2C80F8F91ADABFA7BA18850E045C"
+          }
+        ]
+      }
+    ],
+    "limitations": "Current executable body bindings plus unchanged source; existing S25 fixture is retained evidence, not a new replay or actual fax operation."
+  },
+  "inputs": [
+    {
+      "path": "tests/observation/win16_media_probe.asm",
+      "sha256": "DE59093C5C47D650600E821A8CB4B491F4682EC92967F71D6C4CCF37AF906C14"
+    },
+    {
+      "path": "tests/observation/verify-win16-shell-hook-probe.ps1",
+      "sha256": "F61784143A6865C32D73D4F059A623D567C42645A1CB7C127995DDC229D63FF2"
+    },
+    {
+      "path": "tests/adapter-mvdm-host-out/wow/wow_multimedia_inventory_fixture.c",
+      "sha256": "1A6CF61AC9CAC66D9007B9FF320D1D3CE4B6210A0EC9CB222D1762D9FF498111"
+    },
+    {
+      "path": "tests/observation/verify-wow32-multimedia-feasibility.ps1",
+      "sha256": "C8773C85303596F2CF42B922C8065611D91DBF90A7401C5B14460EFBD8F70615"
+    },
+    {
+      "path": "C:/Windows/SysWOW64/winmm.dll",
+      "sha256": "17C0F934F543C33DFCACFCDFDA779622C7BF7F7DC8C735C560F1B339FC3C05C0"
+    }
+  ],
+  "release_verified": [
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "9A2A7C9669A09C74D8594E406D3891FCB91681AA000C6DE79582148B3899EF12",
+      "Machine": 34404,
+      "PackageId": "818fff8c-efa7-4570-93d6-1f9c820f40ed",
+      "InputSha256": "8EA5CD8AD78660E2476A4CF477FA139AD8AA3277B7F93229FFE8D8E225C28371"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "FE99B7B5703057D2F5879D14813CD29D4A90B1C5BC6BDF5092E65BB0ABAF7705",
+      "Machine": 34404,
+      "PackageId": "818fff8c-efa7-4570-93d6-1f9c820f40ed",
+      "InputSha256": "587B105D5D782212CAAE68AF76584BED4EC60814AFA660A53F12AC1EECB3F7AB"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "AC9B4BEB734565E2FB8E9D41E582F0701FCC8266F8917453939C0C01F4A47FDB",
+      "Machine": 34404,
+      "PackageId": "818fff8c-efa7-4570-93d6-1f9c820f40ed",
+      "InputSha256": "26EDC6AF999912C5F5DB1402EC734CEB6C3EE9A0A4AF7531F2710C148918C99C"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "47231D34E73EE1624A9698C06EAC1DC83FDC08C94867A3D6E2309B1092B0CE7F",
+      "Machine": 332,
+      "PackageId": "818fff8c-efa7-4570-93d6-1f9c820f40ed",
+      "InputSha256": "2895022EF530388F2A40C2C923421D32B9436F1865EA59923421826D9533A4FC"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "D9B9FF3818BA58AFE834887F8EF24669E8EF3135E6AE07EA25D1267404A85B28",
+      "Machine": 34404,
+      "PackageId": "818fff8c-efa7-4570-93d6-1f9c820f40ed",
+      "InputSha256": "7D610E22D363A5D126CD5BD4107A1CA5A1D59F0185A6D13F8E1697FAC99B7B29"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "B3BE3DE242DC9D945F8B040E5D1E2391B7D56EB2C178BD73C6F425D0F3E12AD5",
+      "Machine": 34404,
+      "PackageId": "818fff8c-efa7-4570-93d6-1f9c820f40ed",
+      "InputSha256": "6F42576085116F5344C34C492F6CC21BF28D423B214E7932B07E2B80A65EDDAC"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "3A69A376EFADF3F9882F75D5BA870B0989446F53438419D138E69161E20DEBB9",
+      "Machine": 332,
+      "PackageId": "818fff8c-efa7-4570-93d6-1f9c820f40ed",
+      "InputSha256": "19847672D7B7FD4D5769E5E7801195F3B381A53C7607CBD2E6F0FECFEDCF4606"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "8E02D424D0BB521759F60B940EFE7C40431E1768FC2658D1D100A2DCD597A5C2",
+      "Machine": 332,
+      "PackageId": "818fff8c-efa7-4570-93d6-1f9c820f40ed",
+      "InputSha256": "D5F4E5FB7FA0ADAE9D94DE6EB7A9A930BE19A1CCF6ADD682DAA9721D06FF3BC1"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "AE10C6066F4E67400A141619AFA74E6A57BF8E8D6BC8D614254AA87D87843C28",
+      "Machine": 332,
+      "PackageId": "818fff8c-efa7-4570-93d6-1f9c820f40ed",
+      "InputSha256": "7615B5C087838E8B5609C27B7FC3D6FA22BE26F08D08A57C110ADE02D2C60F8B"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "339B0B499E3A5E56195EA72E7499EF102B41623F67C760FEE108FD0DADD0CF29",
+      "Machine": 34404,
+      "PackageId": "818fff8c-efa7-4570-93d6-1f9c820f40ed",
+      "InputSha256": "9B9AEBF8CB200542562DF1CB4138FE128839A5ABDA76E184BBEDE7269B11C443"
+    }
+  ],
+  "limitations": [
+    "No audio capture, MIDI message transmission, fax transmission, new driver installation or device settings change.",
+    "Wave uses CALLBACK_NULL; application callback ring separately covered by S37 original timer evidence.",
+    "Actual fax driver deployment and physical fax operations not certified by unchanged S25 failure fixture.",
+    "Arbitrary task loss, every physical device and malformed input retain original limits; no new recovery guarantee."
+  ]
+}

@@ -25,6 +25,10 @@ function Invoke-Owned {
     $null = $process.Handle
     @{ pid = $process.Id; start = $process.StartTime.ToUniversalTime().ToString('o'); executable = 'cmd.exe'; arguments = $Arguments } |
         ConvertTo-Json | Set-Content -LiteralPath (Join-Path $root "$Name.process.json")
+    if (!$process.WaitForExit(60000)) {
+        taskkill.exe /PID $process.Id /T /F | Out-Null
+        throw "$Name exceeded its owned60-second deadline"
+    }
     $process.WaitForExit()
     $process.Refresh()
     $process.ExitCode | Set-Content -LiteralPath (Join-Path $root "$Name.exit.txt")

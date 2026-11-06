@@ -371,3 +371,13 @@ results and diacritic flags. Original zero-capacity ANSI key-name NUL behavior
 is retained; physical DBCS layouts/dead-key composition remain an explicit
 validation boundary. No missing host connection was found. Tests/evidence only,
 exact S38 release retained; S40/finding54 follows.
+
+## S40 disposition
+
+[S40](../evidence/m0-t478-s40-multimedia-investigation.md) verifies real guest
+wave completion and explicit retirement, MIDI and MCI waveaudio open/close,
+normal exit and native enumeration/error agreement. Current host fax retains
+S25's repair; deployed fax/device-specific callback and forced-task-loss
+certification are not claimed. No missing host connection found; historical
+inactive converters stay excluded. Tests/evidence only, exact S38 release
+retained; S41/finding61 follows.
