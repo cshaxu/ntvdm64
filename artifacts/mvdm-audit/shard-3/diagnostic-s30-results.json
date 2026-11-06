@@ -1,0 +1,239 @@
+{
+  "result": "pass",
+  "scope": "Finding 01 bounded already-fixed disposition; no product edits",
+  "sources": {
+    "scope": "Current six known callers and project scalar reporter; source inventory, not general runtime proof",
+    "callers": [
+      {
+        "path": "src\\mvdm-host\\softpc.new\\host\\src\\nt_bop.c",
+        "sha256": "9E6FC4C1D8EE418BC32DA8F5DA9A22E0E40A1FAE6B00A2879CA29A416B712284",
+        "calls": [
+          "mvdm_softpc_report_wow_bop_state((unsigned long)getCR0(),\n        (unsigned long)getCR3(), getCS(), getIP(),\n        (unsigned long)c_getDS_BASE(), (unsigned long)c_getDS_LIMIT());",
+          "mvdm_softpc_report_wow_stage(\"page-domain-enter-failed\",\n            (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());",
+          "mvdm_softpc_report_wow_stage(\"page-domain-entered\",\n        (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());",
+          "mvdm_softpc_report_wow_bop_state((unsigned long)getCR0(),\n        (unsigned long)getCR3(), getCS(), getIP(),\n        (unsigned long)c_getDS_BASE(), (unsigned long)c_getDS_LIMIT());",
+          "mvdm_softpc_report_wow_stage(\"load-begin\",\n        (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());",
+          "mvdm_softpc_report_wow_stage(\"load-failed\",\n            (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());",
+          "mvdm_softpc_report_wow_stage(\"init-export-missing\",\n            (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());",
+          "mvdm_softpc_report_wow_stage(\"dispatch-export-missing\",\n            (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());",
+          "mvdm_softpc_report_wow_stage(\"init-begin\",\n        (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());",
+          "mvdm_softpc_report_wow_stage(\"init-failed\",\n            (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());",
+          "mvdm_softpc_report_wow_stage(\"init-succeeded\",\n        (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());",
+          "mvdm_softpc_report_wow_stage(\"activate-failed\",\n            (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());",
+          "mvdm_softpc_report_wow_stage(\"activated\",\n        (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());",
+          "mvdm_softpc_report_wow_stage(\"dispatch-begin\",\n        (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());",
+          "mvdm_softpc_report_wow_dispatch_return_state((unsigned long)getCR0(),\n        (unsigned long)getCR3(), getCS(), getIP());",
+          "mvdm_softpc_report_xms_service(service, getAX(), getBX(), getCX(),\n        getDX(), getSS(), getBP());",
+          "mvdm_softpc_report_setup_hardware_probe(\"direct-access-error-bop\",\n        (unsigned long)getAX(), direct_access_cpu);",
+          "mvdm_softpc_report_setup_hardware_probe(\"direct-access-bop-enter\",\n        direct_access_cpu,\n        direct_access_stack_pointer);",
+          "mvdm_softpc_report_setup_hardware_probe(\"direct-access-bop-leave\",\n        direct_access_cpu,\n        direct_access_stack_pointer);"
+        ]
+      },
+      {
+        "path": "src\\mvdm-host\\softpc.new\\base\\bios\\tape_io.c",
+        "sha256": "6B45C5FC535D5344D01F8C6E4315B1F14DD618E7BC79D3BB1C7B527ADCFA36ED",
+        "calls": [
+          "mvdm_softpc_report_setup_hardware_probe(\"int15-enter\",\n\t\tsetup_int15_function, setup_int15_argument);",
+          "mvdm_softpc_report_setup_hardware_probe(\"int15-leave\",\n\t\tsetup_int15_function, (unsigned long)getAH());"
+        ]
+      },
+      {
+        "path": "src\\mvdm-host\\softpc.new\\base\\keymouse\\keybd_io.c",
+        "sha256": "235DCCD77E38ABD5397CC6B064AD297D7F0CC1406A6676801590B0BBA739F510",
+        "calls": [
+          "mvdm_softpc_report_setup_hardware_probe(\"keyboard-buffer-put\",\n                    (unsigned long)s, (unsigned long)v);",
+          "mvdm_softpc_report_setup_hardware_probe(\"keyboard-bop-enter\",\n       (unsigned long)getAH(), (unsigned long)getAL());",
+          "mvdm_softpc_report_setup_hardware_probe(\"keyboard-waitio-enter\",\n           (unsigned long)getAH(), (unsigned long)getAL());",
+          "mvdm_softpc_report_setup_hardware_probe(\"keyboard-waitio-leave\",\n           (unsigned long)getAH(), (unsigned long)getAL());"
+        ]
+      },
+      {
+        "path": "src\\mvdm-host\\softpc.new\\base\\system\\illegalp.c",
+        "sha256": "704D408866FC2BE8F0BA21E80D06032C18F2CF26A918B69DDB49F77EEFF4A23E",
+        "calls": [
+          "mvdm_softpc_report_setup_illegal_opcode(cs, ip, getSS(), getESP(), getEFLAGS());"
+        ]
+      },
+      {
+        "path": "src\\mvdm-host\\softpc.new\\base\\ccpu386\\c_xfer.c",
+        "sha256": "B893EFBE26B944614BCE4CB5A5991D21B37FDE1C92E564DEFC447347D27F87D9",
+        "calls": [
+          "mvdm_softpc_report_wow_far_call_validation((unsigned short)new_cs,\n       (unsigned long)cs_descr_addr, (unsigned long)AR,\n       (unsigned long)GET_CPL());"
+        ]
+      },
+      {
+        "path": "src\\mvdm-host\\dpmi32\\dpmiint.c",
+        "sha256": "68191102C83AAB4F54C51409E851E3E6CB2FC10FA9300E10854793831A7F2B64",
+        "calls": [
+          "mvdm_softpc_report_dpmi_swint(IntNumber, getAX(), getBX(), getCX(),\n            getCS(), getEIP());",
+          "mvdm_softpc_report_dpmi_swint_target(IntNumber,\n            Handlers[IntNumber].CsSelector, Handlers[IntNumber].Eip,\n            Handlers[IntNumber].Flags);",
+          "mvdm_softpc_report_dpmi_iret16_state(16u, getAX(), getBX(), getCX(),\n        getDX(), getSI(), getDI(), getBP(), getDS(), getES(), SegSs,\n        bSsBig ? getESP() : getSP(), *(PWORD16)(VdmStackPointer),\n        *(PWORD16)(VdmStackPointer + 2), *(PWORD16)(VdmStackPointer + 4));",
+          "mvdm_softpc_report_dpmi_iret16(16u, ServiceAX, getAX(), getBX(),\n        getCS(), getEIP(), getEFLAGS());",
+          "mvdm_softpc_report_dpmi_iret16(32u, ServiceAX, getAX(), getBX(),\n        getCS(), getEIP(), getEFLAGS());",
+          "mvdm_softpc_report_dpmi_fault_stack(\"dispatch\", (USHORT)SaveSS, SaveESP,\n        getSS(), getESP(), FaultFrameWords, 8);",
+          "mvdm_softpc_report_dpmi_fault_dispatch(IntNumber, ErrorCode,\n        Handlers[IntNumber].CsSelector, Handlers[IntNumber].Eip,\n        getCS(), getEIP(), getSS(), getESP(), Frame32, (USHORT)SaveCS,\n        SaveEIP);",
+          "mvdm_softpc_report_dpmi_fault_stack(\"iret16\", SegSs, getESP(), SegSs,\n        getESP(), FaultFrameWords, 6);"
+        ]
+      }
+    ],
+    "reporter": {
+      "path": "src\\ntvdm-exe\\softpc\\mvdm_softpc_termination.c",
+      "sha256": "CA48182CE7CF321ABA1892F3F99C09FA5E3ACBD2F339FCAA637BE86EF23A3A86",
+      "direct_guest_access_tokens": []
+    }
+  },
+  "image": {
+    "result": "pass",
+    "package_id": "7434fc0b-10e5-4081-a37f-b33031436b9e",
+    "bindings": [
+      {
+        "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_xfer.obj",
+        "object_sha256": "637FF23C39E977DBF7A5CDAECAF964365A2AF5D3C1AC5EF02E7922CC94043703",
+        "function": "_validate_far_dest",
+        "bytes": 1059,
+        "file_offset": 195936,
+        "relocations": 62
+      },
+      {
+        "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-softpc\\mvdm_softpc_termination.obj",
+        "object_sha256": "A3BE751E886F5685991935F3734BD3707321D8C4122CE5A98435BF0078D671CD",
+        "function": "_mvdm_softpc_report_wow_far_call_attempt",
+        "bytes": 324,
+        "file_offset": 1463280,
+        "relocations": 13
+      },
+      {
+        "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-softpc\\mvdm_softpc_termination.obj",
+        "object_sha256": "A3BE751E886F5685991935F3734BD3707321D8C4122CE5A98435BF0078D671CD",
+        "function": "_mvdm_softpc_report_dpmi_fault_dispatch",
+        "bytes": 294,
+        "file_offset": 1457136,
+        "relocations": 11
+      },
+      {
+        "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-softpc\\mvdm_softpc_termination.obj",
+        "object_sha256": "A3BE751E886F5685991935F3734BD3707321D8C4122CE5A98435BF0078D671CD",
+        "function": "_mvdm_softpc_report_wow_source_descriptor_store",
+        "bytes": 407,
+        "file_offset": 1464656,
+        "relocations": 22
+      },
+      {
+        "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\keymouse\\keybd_io.obj",
+        "object_sha256": "2757AE2E58A4F8DD608B1C2331E7C266955AA24AD779A340768914BB37219F09",
+        "function": "_keyboard_io",
+        "bytes": 180,
+        "file_offset": 486416,
+        "relocations": 23
+      },
+      {
+        "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\system\\illegalp.obj",
+        "object_sha256": "FA75623C9CAE657204BBAE0CF879696EC0756414AAF37DA04808AB8DF411CC86",
+        "function": "_illegal_op_int",
+        "bytes": 426,
+        "file_offset": 507472,
+        "relocations": 29
+      }
+    ],
+    "image_sha256": "CA3FE1B056D3FE93CA959F0651F81848DF6DD32FE06D702F69F9A24913007896",
+    "limitations": "Relocation-masked full bodies prove static selection, not arbitrary nested guest execution."
+  },
+  "far": {
+    "result": "pass",
+    "scope": "selected-object fixture; guest and full product remain separate",
+    "fixture_sha256": "7C674FA3650903DA5A7FADF26609E29EB42346F787CA131F4B5235CA2CFD9EEF",
+    "map_sha256": "3E29AFB5986AD2ABC464876C56C9E3814B2C01706C3E2256024AA3FEC6876DEB",
+    "object_sha256": "637FF23C39E977DBF7A5CDAECAF964365A2AF5D3C1AC5EF02E7922CC94043703",
+    "original_symbol_owners": {
+      "validate_far_dest": "c_xfer.obj",
+      "descriptor_super_type": "c_bsic.obj",
+      "xtrn2phy": "c_tlb.obj",
+      "phy_w32": "ccpusas4.obj",
+      "sas_init": "ccpusas4.obj",
+      "sas_term": "ccpusas4.obj",
+      "c_cpu_init": "c_main.obj"
+    },
+    "cases": [
+      {
+        "case": "off",
+        "exit": 0,
+        "output": "vector=13 error=8 cr2=12345000 valid=0"
+      },
+      {
+        "case": "matching",
+        "exit": 0,
+        "output": "vector=13 error=8 cr2=12345000 valid=0"
+      },
+      {
+        "case": "other",
+        "exit": 0,
+        "output": "vector=13 error=8 cr2=12345000 valid=0"
+      },
+      {
+        "case": "valid",
+        "exit": 0,
+        "output": "vector=0 error=0 cr2=12345000 valid=1"
+      }
+    ]
+  },
+  "stack": "artifacts/mvdm-audit/shard-1/bop9-source-fixture.py\noriginal source_sha256=378A34807645277090BF4B38556EA210502F79A898855B649B39D6C4CCC47F66 reads=0 handler_calls=1 ax=5a31 report_calls=0\ncurrent source_sha256=9E6FC4C1D8EE418BC32DA8F5DA9A22E0E40A1FAE6B00A2879CA29A416B712284 reads=0 handler_calls=1 ax=5a31 report_calls=3\nartifacts/mvdm-audit/shard-1/int15-source-fixture.py\noriginal sha256=3AA86F1FAF07F68937629F1D6E410EB41F498E17DC6D747647C7D6E5697C80AA reads=0 ah=91 al=25 cf=7 report_calls=0\ncurrent sha256=6B45C5FC535D5344D01F8C6E4315B1F14DD618E7BC79D3BB1C7B527ADCFA36ED reads=0 ah=91 al=25 cf=7 report_calls=2\nartifacts/mvdm-audit/shard-0/illegal-op-source-fixture.py\noriginal reads=5 writes=2 panel=1 dispatch=1 ip=1235 reports=0\ncurrent reads=5 writes=2 panel=1 dispatch=1 ip=1235 reports=1\n",
+  "dpmi": "DPMI_SWINT_DIAGNOSTIC_SOURCE_OK\nselected_source_sha256=68191102C83AAB4F54C51409E851E3E6CB2FC10FA9300E10854793831A7F2B64\n",
+  "callf": "PASS CCPU CALLF/RETF disabled, unmatched and matching trace\n",
+  "last_error": [
+    "OBSERVER_LAST_ERROR checks=53 result=0\n",
+    "OBSERVER_LAST_ERROR checks=53 result=0\n"
+  ],
+  "scalar": "SOFTPC_TRACE_NO_GUEST_READS_OK disabled=1 mismatch=1 enabled=3 error_preserved=1\n",
+  "release": [
+    {
+      "name": "run16.exe",
+      "sha256": "D279917DE06F879A3B474F16861DF122290FBFA845063FC0B04CFDC8D52E63DC",
+      "package_id": "7434fc0b-10e5-4081-a37f-b33031436b9e"
+    },
+    {
+      "name": "ntsrv.exe",
+      "sha256": "4F0A950810F5FB9508D54A7E9E336BE5DEA5F535D9E0B2BC332E7A11DD7D49A9",
+      "package_id": "7434fc0b-10e5-4081-a37f-b33031436b9e"
+    },
+    {
+      "name": "ntcon.exe",
+      "sha256": "1F722FD3FDE5209753DB3EF63AB81C508429E26A209E88FBD673D0795B048D9D",
+      "package_id": "7434fc0b-10e5-4081-a37f-b33031436b9e"
+    },
+    {
+      "name": "ntvdm.exe",
+      "sha256": "CA3FE1B056D3FE93CA959F0651F81848DF6DD32FE06D702F69F9A24913007896",
+      "package_id": "7434fc0b-10e5-4081-a37f-b33031436b9e"
+    },
+    {
+      "name": "ntvwm.exe",
+      "sha256": "082379C579A69E4AA774CFDCA34D9B5A4AE99B977B9C7255DCBB852CF7AF2C33",
+      "package_id": "7434fc0b-10e5-4081-a37f-b33031436b9e"
+    },
+    {
+      "name": "ntmon.exe",
+      "sha256": "7EA5BA80B79AADB53BEEA2346FAD2F6209DB8167DBB03DADBD7A9FA200B0E606",
+      "package_id": "7434fc0b-10e5-4081-a37f-b33031436b9e"
+    },
+    {
+      "name": "WOW32.DLL",
+      "sha256": "90D056EF8544753FE624359CB68D7DE85421ED8DD183B473A30C895EB9489B3A",
+      "package_id": "7434fc0b-10e5-4081-a37f-b33031436b9e"
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "sha256": "E5DA08C2D3989B4312A21118A13FCF1513F00B0FD6B51520FF8F3569F19247BD",
+      "package_id": "7434fc0b-10e5-4081-a37f-b33031436b9e"
+    },
+    {
+      "name": "nthook32.dll",
+      "sha256": "4A6D7A1F4A82E9FCDA7C8249189B53DE9C468957BCC96D1A900C759BEDBEBF48",
+      "package_id": "7434fc0b-10e5-4081-a37f-b33031436b9e"
+    },
+    {
+      "name": "nthook64.dll",
+      "sha256": "FA6FAC70975DDA9FA3A2401B64EE28D91304E9A74BA710265EBA4E68F9A0DD01",
+      "package_id": "7434fc0b-10e5-4081-a37f-b33031436b9e"
+    }
+  ]
+}

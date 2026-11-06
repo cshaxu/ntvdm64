@@ -1273,3 +1273,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T478 S28 async investigation](evidence/m0-t478-s28-async-review.md): owner-approved original exhaustion limit, reproduction and separated lifecycle evidence.
 
 - [T478 S29 Winsock rundown](evidence/m0-t478-s29-winsock-rundown.md): provider ownership repair, controlled failures, real Win16 cases and exact Full/release evidence.
+
+- [T478 S30 diagnostic disposition](evidence/m0-t478-s30-diagnostic-disposition.md): current source/object reconciliation confirms prior fixes; maintained fixtures and retained exact S29 package.

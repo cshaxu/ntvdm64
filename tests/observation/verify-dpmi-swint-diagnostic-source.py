@@ -1,14 +1,22 @@
 """Source-body ordering witness; not a substitute for the selected object."""
 import hashlib
+import argparse
 from pathlib import Path
 import re
 import subprocess
 import tempfile
 
 root = Path(__file__).resolve().parents[2]
+parser = argparse.ArgumentParser()
+parser.add_argument('--build-root', default='build/dpmi-swint-diagnostic-source')
+args = parser.parse_args()
+output = (root / args.build_root).resolve()
+if not output.is_relative_to((root / 'build').resolve()) or output.exists():
+    raise SystemExit('fresh repository build directory required')
+output.mkdir(parents=True)
 path = root / 'src/mvdm-host/dpmi32/dpmiint.c'
 data = path.read_bytes()
-text = data.decode('latin1')
+text = re.sub(r'(?m)^#line[^\n]*\n', '', data.decode('latin1'))
 match = re.search(r'BOOL\s+DpmiSwIntHandler\s*\(\s*ULONG\s+IntNumber\s*\)\s*/\*.*?\*/\s*\{', text, re.S)
 if not match:
     raise SystemExit('DPMI handler not found')
@@ -34,6 +42,8 @@ static unsigned report,target,reflect,frames,flags=0x4321,protected_mode;
 #define DBGTRACE(...) ((void)0)
 #define SEGMENT_IS_PRESENT(s) ((s)!=0)
 #define EFLAGS_TF_MASK 0x100
+#define EFLAGS_VM_MASK 0x20000
+#define VDM_INT_32 2
 #define MSW_PE 1
 #define NT_SUCCESS(s) ((s)==0)
 #define LOWORD(s) ((s)&0xffff)
@@ -47,7 +57,7 @@ static void setEFLAGS(unsigned v){flags=v;} static void setEAX(unsigned v){(void
 static void setCF(unsigned v){(void)v;} static void setCS(unsigned v){(void)v;}
 static void setEIP(unsigned v){(void)v;} static void setESP(unsigned v){(void)v;}
 static void setSP(unsigned v){(void)v;} static int Frame32;
-static int BuildStackFrame(int n,PUCHAR *p,ULONG *s){(void)n;(void)p;(void)s;frames++;return 0;}
+static int BuildStackFrameWithWidth(ULONG n,int wide,int native,PUCHAR *p,ULONG *s){(void)n;(void)wide;(void)native;(void)p;(void)s;frames++;return 0;}
 static void ReflectV86Int(unsigned n,unsigned f){(void)n;(void)f;reflect++;}
 static NTSTATUS DpmiSetWowLdtEntry(unsigned a,unsigned b,unsigned c){(void)a;(void)b;(void)c;return 0;}
 static void mvdm_softpc_report_dpmi_swint(unsigned a,unsigned b,unsigned c,unsigned d,unsigned e,unsigned f){(void)a;(void)b;(void)c;(void)d;(void)e;(void)f;report++;}
@@ -63,9 +73,9 @@ int main(void){
  puts("DPMI_SWINT_DIAGNOSTIC_SOURCE_OK"); return 0;
 }
 '''
-with tempfile.TemporaryDirectory(prefix='dpmi-swint-', dir=root / 'build/t473-s11') as temp:
+with tempfile.TemporaryDirectory(prefix='dpmi-swint-', dir=output) as temp:
     source, executable = Path(temp)/'fixture.c', Path(temp)/'fixture.exe'
     source.write_text(prefix + body + suffix, encoding='utf8')
-    subprocess.run(['gcc', '-std=c11', '-O0', str(source), '-o', str(executable)], check=True)
+    subprocess.run(['gcc', '-std=c11', '-DCPU_40_STYLE', '-DCCPU', '-O0', str(source), '-o', str(executable)], check=True)
     subprocess.run([str(executable)], check=True)
 print('selected_source_sha256=' + hashlib.sha256(data).hexdigest().upper())
