@@ -26,6 +26,16 @@ static BOOL CALLBACK control(HWND window,LPARAM unused)
         for(cursor=text;*cursor;++cursor)wprintf(L"%04X",(unsigned)*cursor);
         wprintf(L"\n");
     }
+    {
+        RECT outer={0},client={0};
+        BOOL outer_ok=GetWindowRect(window,&outer),client_ok=GetClientRect(window,&client);
+        /* Read-only native state, not requested-size or pixel acceptance. */
+        wprintf(L"window-geometry=%p outer-ok=%d outer=%ld,%ld,%ld,%ld client-ok=%d client=%ld,%ld,%ld,%ld dpi=%u class-brush=%p style=%08lX exstyle=%08lX\n",
+            window,outer_ok,outer.left,outer.top,outer.right,outer.bottom,
+            client_ok,client.left,client.top,client.right,client.bottom,
+            GetDpiForWindow(window),(void*)GetClassLongPtrW(window,GCLP_HBRBACKGROUND),
+            (DWORD)GetWindowLongW(window,GWL_STYLE),(DWORD)GetWindowLongW(window,GWL_EXSTYLE));
+    }
     return TRUE;
 }
 static BOOL CALLBACK window(HWND handle,LPARAM unused)

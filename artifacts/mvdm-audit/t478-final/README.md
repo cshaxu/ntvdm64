@@ -54,3 +54,10 @@ Index checkpoint validation: four build-owned cases pass (fresh identities,
 preserved reviewed evidence, changed metadata rejection and missing-identity
 rejection); documentation governance and diff checks pass. This P1 does not
 close S42 or claim product changes.
+
+## Current bounded reconciliation
+
+[Startup VDD and brush review](startup-vdd-and-brush-review.md) supersedes the
+initial VDD pending note: actual current startup loading is verified. The
+inherited class-brush collision has a current-source counterexample, while
+its exact WINMINE impact and the separate width issue remain to be observed.

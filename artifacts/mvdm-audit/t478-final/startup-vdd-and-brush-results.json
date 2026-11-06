@@ -1,0 +1,151 @@
+{
+  "baseline": "12e17a4fb",
+  "sources": {
+    "src/mvdm-host/softpc.new/host/src/nt_msscs.c": "394b6fdc6f9268345f3fc204f15c73dbc81a846d4d6b136fbde975d9e13d3c87",
+    "src/ntvdm-exe/softpc/mvdm_shadow_registry.c": "82e8403c73eb4cb5325a6f4a735225af2d3265462e717eb245556765d8943e15",
+    "src/ntvdm-exe/wow/wow_gdi_alias.c": "91dc51aa3463e482ea7d53c437c0bb4c506b70975e3db3cd6f65682be5951727",
+    "src/mvdm-host/wow32/wstruc.h": "3ceffb625000f2546954f135cb8c13cb35f2e1a55347ec75cc533a583220f808",
+    "src/compat/include/wow32_provider_private.h": "08339acb62c07806448536e737b4e71857cce411cd406d75f5dc62d687548f84",
+    "tests/observation/verify-ntvdm-export-live.ps1": "6c4eaaaef9a39cf60312b5bf065011925805cb43b53005ce145465bff4815f12",
+    "tests/adapter-mvdm-host-out/wow/wow_gdi_class_brush_boundary.c": "735a57b2ae80042d14f2bf7427d7242400c5e7786a9b5c67916dc01dd06f4c00"
+  },
+  "startup_vdd": {
+    "exit": 0,
+    "trace": [
+      "PASS NTVDM export name/ordinal query/allocate/reallocate/free",
+      "PASS failed reallocation preserves allocation and free space",
+      "PASS export query at matching task termination"
+    ],
+    "manifest": [
+      {
+        "Name": "VCDEX.DLL",
+        "RelativePath": "system32\\VCDEX.DLL",
+        "Sha256": "BA675613C02B59A642F55793DE91383347234D2A5CB8C09689B25B9651455E9A",
+        "Machine": 332,
+        "PackageId": "5a810bda-5b20-46bd-a259-8431aa981a53",
+        "InputSha256": "20314CE08E1F5109FC2725A5F94FBFD839F3776349AD270CDBB379EF0AFE03EC"
+      },
+      {
+        "Name": "run16.exe",
+        "RelativePath": "system32\\run16.exe",
+        "Sha256": "1CDD5D3B4C6E05CB333579FA9FCC9BE16B2A65D5707A861B54B4D6395490E0AD",
+        "Machine": 34404,
+        "PackageId": "5a810bda-5b20-46bd-a259-8431aa981a53",
+        "InputSha256": "8EA5CD8AD78660E2476A4CF477FA139AD8AA3277B7F93229FFE8D8E225C28371"
+      },
+      {
+        "Name": "ntsrv.exe",
+        "RelativePath": "system32\\ntsrv.exe",
+        "Sha256": "708D94540EE2C99DBAB81954FE03B1EE38442E5790E99CB7AAEE8C816BDFD28D",
+        "Machine": 34404,
+        "PackageId": "5a810bda-5b20-46bd-a259-8431aa981a53",
+        "InputSha256": "587B105D5D782212CAAE68AF76584BED4EC60814AFA660A53F12AC1EECB3F7AB"
+      },
+      {
+        "Name": "ntcon.exe",
+        "RelativePath": "system32\\ntcon.exe",
+        "Sha256": "C2DBEC0086F04E6B77D64B149CC12CBD7E62915787AB8DA0537829E27142649B",
+        "Machine": 34404,
+        "PackageId": "5a810bda-5b20-46bd-a259-8431aa981a53",
+        "InputSha256": "26EDC6AF999912C5F5DB1402EC734CEB6C3EE9A0A4AF7531F2710C148918C99C"
+      },
+      {
+        "Name": "ntvdm.exe",
+        "RelativePath": "system32\\ntvdm.exe",
+        "Sha256": "C38EE210C72E60E1199857E9C691EB767F4CBC622DBE6BA4206F2BC15D07FDEE",
+        "Machine": 332,
+        "PackageId": "5a810bda-5b20-46bd-a259-8431aa981a53",
+        "InputSha256": "0E8ADF3F7E4323A8548E82616E7E0E385EC9F7B017B2E3AEC2E20BBFA5696DD5"
+      },
+      {
+        "Name": "ntvwm.exe",
+        "RelativePath": "system32\\ntvwm.exe",
+        "Sha256": "3A39973DFD75BEB1AF43D365A2DE0DDF645EC8FD3F585729C899EA1CDF32C92C",
+        "Machine": 34404,
+        "PackageId": "5a810bda-5b20-46bd-a259-8431aa981a53",
+        "InputSha256": "7D610E22D363A5D126CD5BD4107A1CA5A1D59F0185A6D13F8E1697FAC99B7B29"
+      },
+      {
+        "Name": "ntmon.exe",
+        "RelativePath": "system32\\ntmon.exe",
+        "Sha256": "5B359768658DBDB5090E31FAD7B54A5EB2350880A3D28A8D12259043EC4607C7",
+        "Machine": 34404,
+        "PackageId": "5a810bda-5b20-46bd-a259-8431aa981a53",
+        "InputSha256": "6F42576085116F5344C34C492F6CC21BF28D423B214E7932B07E2B80A65EDDAC"
+      },
+      {
+        "Name": "WOW32.DLL",
+        "RelativePath": "system32\\WOW32.DLL",
+        "Sha256": "602F7E82A59E40E548AF1D538223F9CCB3EAACFCD7734A909C5185C75452516D",
+        "Machine": 332,
+        "PackageId": "5a810bda-5b20-46bd-a259-8431aa981a53",
+        "InputSha256": "9A551A07491905219D9FA05E4E515777D9BAB8A4677FAD5D225D0B1CCFF8B428"
+      },
+      {
+        "Name": "VDMREDIR.DLL",
+        "RelativePath": "system32\\VDMREDIR.DLL",
+        "Sha256": "9AE75C6B51E7937CBCFAB58BDBB3A3EC8A94DCC39734F6EB2DD33B4067C90667",
+        "Machine": 332,
+        "PackageId": "5a810bda-5b20-46bd-a259-8431aa981a53",
+        "InputSha256": "D5F4E5FB7FA0ADAE9D94DE6EB7A9A930BE19A1CCF6ADD682DAA9721D06FF3BC1"
+      },
+      {
+        "Name": "nthook32.dll",
+        "RelativePath": "system32\\nthook32.dll",
+        "Sha256": "010B51ACCD2D7177E4FF5A9751AA0022668C6489F96EACF4BC2695A75446940C",
+        "Machine": 332,
+        "PackageId": "5a810bda-5b20-46bd-a259-8431aa981a53",
+        "InputSha256": "2870F071412F1B94D2AEF6B10C5290F7A44C8CB1C420CA42F310381FC390580E"
+      },
+      {
+        "Name": "nthook64.dll",
+        "RelativePath": "system32\\nthook64.dll",
+        "Sha256": "30BE5BD678A47F0253AA6931EC730F605B7B1DCBE6622E8C7440D34DDBFDCA27",
+        "Machine": 34404,
+        "PackageId": "5a810bda-5b20-46bd-a259-8431aa981a53",
+        "InputSha256": "9B9AEBF8CB200542562DF1CB4138FE128839A5ABDA76E184BBEDE7269B11C443"
+      }
+    ]
+  },
+  "gdi_class_brush_counterexample": {
+    "exit": 1,
+    "output": [
+      "gdi-color-boundary.c",
+      "wow_gdi_alias.c",
+      "Generating Code...",
+      "alias=4 color_end=24 native=0C101EDA class_brush=00000004 collision=1"
+    ],
+    "scope": "actual current alias source compiled x86 with real native brush; not a WINMINE runtime root-cause proof"
+  },
+  "winmine_readonly_observation": {
+    "package": "S41 exact source package; disposable fresh identity",
+    "samples": [
+      [
+        "window=000000000040038E class=Minesweeper visible=1 text=Minesweeper",
+        "window-utf16=000000000040038E visible=1 class=004D0069006E00650073007700650065007000650072 text=004D0069006E00650073007700650065007000650072",
+        "window-geometry=000000000040038E outer-ok=1 outer=419,191,656,230 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000008 style=34CA0000 exstyle=00000100"
+      ],
+      [
+        "window=000000000040038E class=Minesweeper visible=1 text=Minesweeper",
+        "window-utf16=000000000040038E visible=1 class=004D0069006E00650073007700650065007000650072 text=004D0069006E00650073007700650065007000650072",
+        "window-geometry=000000000040038E outer-ok=1 outer=419,191,656,230 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000008 style=34CA0000 exstyle=00000100"
+      ],
+      [
+        "window=000000000040038E class=Minesweeper visible=1 text=Minesweeper",
+        "window-utf16=000000000040038E visible=1 class=004D0069006E00650073007700650065007000650072 text=004D0069006E00650073007700650065007000650072",
+        "window-geometry=000000000040038E outer-ok=1 outer=419,191,656,230 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000008 style=34CA0000 exstyle=00000100"
+      ],
+      [
+        "window=000000000040038E class=Minesweeper visible=1 text=Minesweeper",
+        "window-utf16=000000000040038E visible=1 class=004D0069006E00650073007700650065007000650072 text=004D0069006E00650073007700650065007000650072",
+        "window-geometry=000000000040038E outer-ok=1 outer=419,191,656,230 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000008 style=34CA0000 exstyle=00000100"
+      ]
+    ],
+    "status": "observed minimized window, not geometry or gameplay acceptance",
+    "first_attempt": "r1 inherited long PATH and reached an illegal-instruction dialog; retained, not acceptance",
+    "second_attempt": "r2 matched formal Full short PATH and reached Minesweeper",
+    "runner_exit": 0,
+    "observer_source_sha256": "965a68cae641677bbe538566184f5f2c632d94ac00ea8b6882e825d9cb062e38",
+    "observer_sha256": "f7f66bf62894d5ffba52cfea449f586f602f665c6561e93113f7a79c068e1577"
+  }
+}

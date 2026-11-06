@@ -76,7 +76,7 @@
   "dispositions": {
     "pending-product-evidence": 1062,
     "inactive-edition-evidence-only": 483,
-    "partial-product-evidence; startup-registry-applicability-pending": 1
+    "current-original-owner-wired; bounded-runtime-verified": 1
   },
   "qualification": "Identity accounting only; no inferred defect, product closure or new source-audit scope."
 }

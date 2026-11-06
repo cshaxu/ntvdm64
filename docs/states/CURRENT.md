@@ -30,6 +30,13 @@ The seven pinned ledger hashes still match the S1 inputs. Their labels are
 source-audit evidence, not proof of missing product behavior or runtime closure.
 CURRENT's temporary size exception remains through final reconciliation.
 
+S42 P2 [bounded evidence](../../artifacts/mvdm-audit/t478-final/startup-vdd-and-brush-review.md)
+confirms current original VDD startup loading through the existing shadow
+configuration. The class-brush alias collision is reproduced against current
+source and WINMINE's class reports pseudo-brush8; its window is minimized, so
+normal geometry/painting remains unverified. No product repair is claimed.
+
+
 ## S41 Closure Record
 
 [Evidence](../etc/evidence/m0-t478-s41-vdd-optical-investigation.md) and
