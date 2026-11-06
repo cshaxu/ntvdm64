@@ -47,7 +47,7 @@ and current ownership before considering any code change. The separate SOL
 Options historical handoff and remaining source-owner handoffs likewise require
 explicit disposition; they must not disappear behind the69-row finding table.
 
-S42 remains active. No product code or release changes are made in this index
+At this index checkpoint S42 remained active. No product code or release changes were made in this index
 checkpoint; the exact11-image S41 release and Full16/16 remain authoritative.
 
 Index checkpoint validation: four build-owned cases pass (fresh identities,
@@ -61,3 +61,11 @@ close S42 or claim product changes.
 initial VDD pending note: actual current startup loading is verified. The
 inherited class-brush collision has a current-source counterexample, while
 its exact WINMINE impact and the separate width issue remain to be observed.
+
+## S43 follow-up
+
+[Delivered brush repair](../../../docs/etc/evidence/m0-t478-s43-gdi-color-alias.md)
+restores actual gray background with the original converter unchanged, passes
+Full16/16 and publishes11 images locally. S42's remaining reconciliation is
+explicitly deferred, not completed. The normal-width handoff remains open.
+CURRENT.md alone identifies the active packet.

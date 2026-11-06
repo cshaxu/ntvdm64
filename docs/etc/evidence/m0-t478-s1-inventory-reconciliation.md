@@ -67,3 +67,10 @@ VDD registry startup is explicitly separated from S41's tested selected plugin;
 WINMINE geometry/background remains a named inherited handoff until existing
 repair and current evidence are reconciled. S42 is active; T completion is not
 claimed. No changed product or regression rerun is required for this index.
+
+S42's current pass ends at a partial checkpoint to admit S43 for the actual
+inherited class-brush defect. This does not complete the original reconciliation
+objective:1062 unmapped active identities and remaining T473 owner handoffs
+remain in the stable crosswalk for resumed reconciliation after the concrete
+repair. VDD startup now has current live evidence; background/width are separated.
+No remaining row is silently closed or replaced by the new repair's test results.

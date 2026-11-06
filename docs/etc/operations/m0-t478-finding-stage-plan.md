@@ -391,3 +391,18 @@ lifecycle pass; Full16/16 and11-image Product identity verification pass. The
 worktree release is hash-published and test attachment removed. No physical-drive
 or audio-disc acceptance and no new data-sector reader are claimed. This closes
 finding61; larger S1 inventory/handoff reconciliation remains separate.
+
+## Inherited handoff continuation
+
+S42's stable inventory reconciliation remains open after its VDD/brush checkpoint.
+S43 was admitted as the sole active packet under the owner's sequential authority:
+repair the demonstrated worker-local real-GDI-alias/pseudo-color collision from
+the inherited WINMINE background handoff. Original class conversion remains;
+coherent build, focused and actual guest/pixel checks, Full and local publication
+are required. Window geometry is separate, and the remaining S42 ledger rows
+must resume rather than be silently treated as complete.
+
+S43 result: the bounded class-brush repair is delivered with red/green alias
+checks, actual restored guest background/gameplay, Full16/16 and hash-verified
+worktree release. Original mirror conversion is unchanged. Normal-width and
+remaining S42 reconciliation are not closed by this result.

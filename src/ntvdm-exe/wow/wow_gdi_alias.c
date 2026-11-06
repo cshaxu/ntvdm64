@@ -1,6 +1,10 @@
 #include "wow_gdi_alias.h"
 
 #define MVDM_WOW_GDI_SLOT_COUNT 0x4000u
+/* Original WOW class/CTLCOLOR consumers reserve values through
+ * COLOR_ENDCOLORS (bound to COLOR_INFOBK) for system-color pseudo-brushes.
+ * A fresh worker-local table must not issue those values as real objects. */
+#define MVDM_WOW_GDI_FIRST_SLOT ((COLOR_INFOBK >> 2) + 1u)
 
 typedef struct mvdm_wow_gdi_alias_table {
     SRWLOCK lock;
@@ -16,7 +20,7 @@ WORD __cdecl mvdm_wow_gdi_handle_from_native(HANDLE native)
 
     if (native == NULL) return 0;
     AcquireSRWLockExclusive(&table.lock);
-    for (index = 1; index < MVDM_WOW_GDI_SLOT_COUNT; ++index) {
+    for (index = MVDM_WOW_GDI_FIRST_SLOT; index < MVDM_WOW_GDI_SLOT_COUNT; ++index) {
         if (table.native[index] == native) {
             ReleaseSRWLockExclusive(&table.lock);
             return (WORD)(index << 2);

@@ -2,40 +2,40 @@
 
 ## Current Work
 
-**Active: M0 T478 S42**
+**No active M/T/S packet. M0 T478 S43 is locally closed.**
 
-## Active Packet
+T478 remains unfinished. Resume the inherited normal-window geometry question
+and the explicitly deferred S42 inventory/handoff reconciliation. No new global
+audit, added tolerance, guest change, O:/winnt write or push is authorized.
+The owner's sequential continuation approval remains in force. CURRENT's
+temporary size exception remains until final reconciliation.
 
-| Field | Record |
-| --- | --- |
-| Candidate Proposal | [Existing inventory recovery](../proposals/proposal-mvdm-whole-closure-recovery-001.md) |
-| Identifier Mode | M0 T478 S42, Ordinary Mode, one active S. |
-| Admission And Approval | Owner authorizes sequential admission and self-defined original-semantics goals; S41 P2 is12e17a4fb. |
-| Objective | Finish S1's existing audit/handoff reconciliation against S2–S41 deliveries; retain every stable inventory ID and identify only evidenced residual host work. |
-| Non-goals | No new global source audit, guest/media changes, new tolerance, retired hardware monitor, external repository edits, O:/winnt write or push. |
-| Reference Baseline | S41 commit12e17a4fb and eleven-image packaged7ad54fc-88b2-4a5e-8c56-140a2d4a4ca3; Full16/16 and Product identity verification. |
-| Files And ABI Surface | Existing audit ledgers, T473 handoffs, S1 findings and S2–S41 evidence; index/closure documents only initially. |
-| Applicable Rules | EXECUTION, DOCUMENT, source policy, original-semantics-only owner standard. |
-| Verification | Pin inputs; account separately for active, inactive and unreviewed rows; inspect evidence for each actual closure claim. No name-match-only completion or rerunning unchanged product tests. |
-| Expected Markers | Stable-ID crosswalk, explicit remaining applicability/evidence decisions, source/provenance and delivery accounting. |
-| Asset Needs | Read-only DOS16/WOW32 management ledgers and existing local artifacts; current tested worktree release. |
-| Reporting Requirements | Separate old audit labels, current product evidence, accepted exclusions/limits and actual missing work. |
-| Stop Conditions | Material recovery outside original scope or conflicting owner boundary; do not infer new capability requirements from audit suggestions. |
-| Exit Criteria | All applicable existing inventory/handoff rows reconciled or explicit residual S briefs established; reviewed local documentation commit and governance pass. T completion requires no required work outstanding. |
-| Original Owner Request | Continue remaining sequence, maximize justified original recovery and minimize mirror/local duplication without added capabilities. |
-| Similar-Issue Sweep | Cross-check69 findings, two external ledgers and T473 handoffs without double counting source positions or inactive editions. |
+## S43 Closure Record
 
-S42 reopens S1's outstanding reconciliation after all40 planned S2–S41 packets.
-The seven pinned ledger hashes still match the S1 inputs. Their labels are
-source-audit evidence, not proof of missing product behavior or runtime closure.
-CURRENT's temporary size exception remains through final reconciliation.
+[Evidence](../etc/evidence/m0-t478-s43-gdi-color-alias.md) and
+[results](../../artifacts/mvdm-audit/t478-final/brush/s43-results.json) repair the
+worker-local GDI alias collision with original system-color pseudo-brushes.
+Only the alias allocation starting slot changes; original mirror conversion
+and native drawing remain. Real class-brush and11041 right-margin pixels are
+corrected, flag/reset/open/normal exit pass, existing alias/reuse/exhaustion
+checks pass. Full16/16 in372460ms verifies all11 images. Package
+22e35db2-13bb-419d-ba68-7a169cc939e1 is hash-published to this worktree
+assets/release only, with prior assets backed up. Normal outer width237 remains
+unchanged and unresolved; this is not full WINMINE handoff or T478 closure.
 
-S42 P2 [bounded evidence](../../artifacts/mvdm-audit/t478-final/startup-vdd-and-brush-review.md)
-confirms current original VDD startup loading through the existing shadow
-configuration. The class-brush alias collision is reproduced against current
-source and WINMINE's class reports pseudo-brush8; its window is minimized, so
-normal geometry/painting remains unverified. No product repair is claimed.
+## S42 Closure Record
 
+The [S42 checkpoint](../etc/evidence/m0-t478-s1-inventory-reconciliation.md)
+ends this reconciliation pass; remaining reconciliation is explicitly deferred,
+not declared complete.
+P1 is7adc89c09/bf93a88ce; P2 isab8d89a0b. The stable-ID crosswalk and all
+remaining audit/handoff rows remain outstanding under T478, to resume after
+this concrete repair. S43 has now delivered its bounded repair. The broader goal is unchanged.
+[Bounded evidence](../../artifacts/mvdm-audit/t478-final/startup-vdd-and-brush-review.md)
+confirms the VDD startup owner and reproduces this alias collision. S42's
+restored baseline game passes flag/reset/open/close; its221x181 client has a
+black right-hand background. Saved normal outer size is237x240; width remains
+a separate unresolved handoff. CURRENT's temporary size exception remains.
 
 ## S41 Closure Record
 

@@ -1,0 +1,303 @@
+{
+  "task": "M0 T478 S43 P1",
+  "package_id": "22e35db2-13bb-419d-ba68-7a169cc939e1",
+  "images": [
+    {
+      "Name": "VCDEX.DLL",
+      "RelativePath": "system32\\VCDEX.DLL",
+      "Sha256": "0258FE5E9C5E22B1C1FFC9BBA778D7F19C49CA6FEDCE56957087BCF739DD2CEC",
+      "Machine": 332,
+      "PackageId": "22e35db2-13bb-419d-ba68-7a169cc939e1",
+      "InputSha256": "20314CE08E1F5109FC2725A5F94FBFD839F3776349AD270CDBB379EF0AFE03EC"
+    },
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "D71665086F5640903C7A7BEAEE0B9341E09A90F47ECD862B72BDFB01E3B061B9",
+      "Machine": 34404,
+      "PackageId": "22e35db2-13bb-419d-ba68-7a169cc939e1",
+      "InputSha256": "8EA5CD8AD78660E2476A4CF477FA139AD8AA3277B7F93229FFE8D8E225C28371"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "AFF03F9907D809165BB14CC0E26629C5FCE508763F1EC0C1554A4197DFE12C1C",
+      "Machine": 34404,
+      "PackageId": "22e35db2-13bb-419d-ba68-7a169cc939e1",
+      "InputSha256": "587B105D5D782212CAAE68AF76584BED4EC60814AFA660A53F12AC1EECB3F7AB"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "1B154630F506CD2BAAB39A926A7700579986962C8833533527C3C10EF5CDE124",
+      "Machine": 34404,
+      "PackageId": "22e35db2-13bb-419d-ba68-7a169cc939e1",
+      "InputSha256": "26EDC6AF999912C5F5DB1402EC734CEB6C3EE9A0A4AF7531F2710C148918C99C"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "4DC0D80FD2DDB7D046C5346167FBAF63FDB2789A5E8AB9EF0C29D3CF54C357BA",
+      "Machine": 332,
+      "PackageId": "22e35db2-13bb-419d-ba68-7a169cc939e1",
+      "InputSha256": "4D72ACD6B8C02A7F63679C18C1E49A45CAD7B6F7745C7704F1E38F1AE9A68E19"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "B2BA6D8D77C9E382A9CAF05F434F392707E1CAB275224F8D57EBB31B9BC4EEE2",
+      "Machine": 34404,
+      "PackageId": "22e35db2-13bb-419d-ba68-7a169cc939e1",
+      "InputSha256": "7D610E22D363A5D126CD5BD4107A1CA5A1D59F0185A6D13F8E1697FAC99B7B29"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "99A1066954A39B03E1673201F84C52722E2EADF4B220C95B801A30C2ECE66F9A",
+      "Machine": 34404,
+      "PackageId": "22e35db2-13bb-419d-ba68-7a169cc939e1",
+      "InputSha256": "6F42576085116F5344C34C492F6CC21BF28D423B214E7932B07E2B80A65EDDAC"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "21EC23EC10BECDF3FF1A09F51067C8B733AF2FEDDD52892E70E3105AD9F19F22",
+      "Machine": 332,
+      "PackageId": "22e35db2-13bb-419d-ba68-7a169cc939e1",
+      "InputSha256": "9A551A07491905219D9FA05E4E515777D9BAB8A4677FAD5D225D0B1CCFF8B428"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "E3F1307968CD40C292E1F7122CE81CD6393F6E0F1BEAA87770AB2B56F9B0EEF0",
+      "Machine": 332,
+      "PackageId": "22e35db2-13bb-419d-ba68-7a169cc939e1",
+      "InputSha256": "D5F4E5FB7FA0ADAE9D94DE6EB7A9A930BE19A1CCF6ADD682DAA9721D06FF3BC1"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "8F8541534E7F20CBF03535059E4D0B39B4192363E541C78973C9655F07E4FA6D",
+      "Machine": 332,
+      "PackageId": "22e35db2-13bb-419d-ba68-7a169cc939e1",
+      "InputSha256": "7EE50A84AD19EC62A22F5289842542DE31FC2D4D77C80D9BE69180D36AB915BC"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "1EDD8CFAB16E0DCB10D9A3E43BDE0B0D8761801A8FA7C8F6624BAD1221FF0C47",
+      "Machine": 34404,
+      "PackageId": "22e35db2-13bb-419d-ba68-7a169cc939e1",
+      "InputSha256": "9B9AEBF8CB200542562DF1CB4138FE128839A5ABDA76E184BBEDE7269B11C443"
+    }
+  ],
+  "source_sha256": {
+    "src/ntvdm-exe/wow/wow_gdi_alias.c": "2ff646488415b39e0f5420b1190c07064ee59924895aa7492933154173f6fed3",
+    "src/mvdm-host/wow32/wstruc.h": "3ceffb625000f2546954f135cb8c13cb35f2e1a55347ec75cc533a583220f808",
+    "src/mvdm-host/wow32/walias.h": "a70043dc23477361031e427f555a11abff2218a74878258981110b70e35d4fdd",
+    "src/compat/include/wow32_provider_private.h": "08339acb62c07806448536e737b4e71857cce411cd406d75f5dc62d687548f84",
+    "tests/adapter-mvdm-host-out/wow/wow_gdi_class_brush_boundary.c": "735a57b2ae80042d14f2bf7427d7242400c5e7786a9b5c67916dc01dd06f4c00",
+    "tests/adapter-mvdm-host-out/wow/wow_gdi_alias_fixture.c": "52da18c10e584377b975104b80063e2b8e353e19b3dd53a9ff91ea29740242b9",
+    "tests/observation/wow_mine_gameplay_probe.c": "e4b009dea8b96ff846cf65ddf6c5a9976ea6bd7c80ba014b2dd3af8ace37a6ed",
+    "tests/observation/worker_window_snapshot.c": "c5f48fc75ee29d21800b018e03e9247597eef4364dc84b4c4b240af2be78eb20"
+  },
+  "original_inputs": [
+    {
+      "path": "O:/repos.external/OpenNT/base/mvdm/wow32/walias.h",
+      "sha256": "c87ae2f07b48f09276d205e2236d97f084f75f21706c524cb27734a3e36001cc",
+      "role": "read-only original contract/context, never a build/runtime input"
+    },
+    {
+      "path": "O:/repos.external/OpenNT/windows/core/ntgdi/gre/hmgrapi.cxx",
+      "sha256": "5223ea29a501400633338247aeb38bc3efcf2a6b0861a356aaba241876706bf7",
+      "role": "read-only original contract/context, never a build/runtime input"
+    }
+  ],
+  "focused_exit": 0,
+  "focused_output": [
+    "wow_gdi_class_brush_boundary.c",
+    "wow_gdi_alias.c",
+    "Generating Code...",
+    "alias=28 color_end=24 native=CC10016C class_brush=CC10016C collision=0",
+    "wow_gdi_alias_fixture.c",
+    "wow_gdi_alias.c",
+    "Generating Code...",
+    "WOW_GDI_ALIAS errors=0"
+  ],
+  "gameplay_exit": 0,
+  "gameplay_output": [
+    "window-ready elapsed=859 inherited-desktop=0",
+    "owned-window=00AB0860 pid=2268",
+    "restored-window outer=237,240 client=221,181 class-brush=00900014 iconic=0",
+    "PASS unchanged title and native frame=1",
+    "board-ready elapsed=94 cell=3cc8733b counter=49380c32",
+    "capture=before ok=1",
+    "phase=flag elapsed=31 cell=62c0567b reference=3cc8733b",
+    "capture=flag ok=1",
+    "counter-before=49380c32 counter-flag=17940c32",
+    "phase=reset elapsed=94 cell=3cc8733b reference=3cc8733b",
+    "capture=reset ok=1",
+    "phase=open elapsed=31 cell=c7639615 reference=3cc8733b",
+    "capture=open ok=1",
+    "PASS flag changed cell+counter, F2 restored covered cell, left click changed cell",
+    "PASS owned game window closed after WM_CLOSE"
+  ],
+  "background_pixels": {
+    "width": 221,
+    "height": 181,
+    "margin_rectangle": [
+      160,
+      0,
+      221,
+      181
+    ],
+    "before_rgb_counts": {
+      "(0, 0, 0)": 11041
+    },
+    "after_rgb_counts": {
+      "(192, 192, 192)": 11041
+    },
+    "files": {
+      "build/t478-s42/gameplay-baseline-r1/mine-before.bmp": "39a1a8f281cc853f8043fb61926cdfab11d2835b65226519db424c51cd4174aa",
+      "build/t478-s43/gameplay-r1/mine-before.bmp": "3ca3c69cd9489fee81f5a3b170dbe8f3dbdd40e0e6f55836f808e3076fe93067"
+    },
+    "scope": "Raw captured pixels, no crop/repaint/image substitution; other GUI behavior assessed by actual gameplay probe."
+  },
+  "baseline_saved_placement": [
+    [
+      "window=00000000006B0A9E class=Minesweeper visible=1 text=Minesweeper",
+      "window-utf16=00000000006B0A9E visible=1 class=004D0069006E00650073007700650065007000650072 text=004D0069006E00650073007700650065007000650072",
+      "window-geometry=00000000006B0A9E outer-ok=1 outer=419,191,656,230 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000008 style=34CA0000 exstyle=00000100",
+      "window-placement=00000000006B0A9E ok=1 iconic=1 show=2 normal=419,191,656,431"
+    ],
+    [
+      "window=00000000006B0A9E class=Minesweeper visible=1 text=Minesweeper",
+      "window-utf16=00000000006B0A9E visible=1 class=004D0069006E00650073007700650065007000650072 text=004D0069006E00650073007700650065007000650072",
+      "window-geometry=00000000006B0A9E outer-ok=1 outer=419,191,656,230 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000008 style=34CA0000 exstyle=00000100",
+      "window-placement=00000000006B0A9E ok=1 iconic=1 show=2 normal=419,191,656,431"
+    ],
+    [
+      "window=00000000006B0A9E class=Minesweeper visible=1 text=Minesweeper",
+      "window-utf16=00000000006B0A9E visible=1 class=004D0069006E00650073007700650065007000650072 text=004D0069006E00650073007700650065007000650072",
+      "window-geometry=00000000006B0A9E outer-ok=1 outer=419,191,656,230 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000008 style=34CA0000 exstyle=00000100",
+      "window-placement=00000000006B0A9E ok=1 iconic=1 show=2 normal=419,191,656,431"
+    ],
+    [
+      "window=00000000006B0A9E class=Minesweeper visible=1 text=Minesweeper",
+      "window-utf16=00000000006B0A9E visible=1 class=004D0069006E00650073007700650065007000650072 text=004D0069006E00650073007700650065007000650072",
+      "window-geometry=00000000006B0A9E outer-ok=1 outer=419,191,656,230 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000008 style=34CA0000 exstyle=00000100",
+      "window-placement=00000000006B0A9E ok=1 iconic=1 show=2 normal=419,191,656,431"
+    ]
+  ],
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 372460,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 3850,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1560,
+        "CleanupMs": 451,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 324,
+        "CleanupMs": 407,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 65911,
+        "CleanupMs": 426,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 48536,
+        "CleanupMs": 402,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 43501,
+        "CleanupMs": 391,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15010,
+        "CleanupMs": 381,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 11584,
+        "CleanupMs": 411,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 70212,
+        "CleanupMs": 390,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12384,
+        "CleanupMs": 431,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28061,
+        "CleanupMs": 408,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30231,
+        "CleanupMs": 435,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4021,
+        "CleanupMs": 421,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7750,
+        "CleanupMs": 455,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10073,
+        "CleanupMs": 436,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4267,
+        "CleanupMs": 420,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7007,
+        "CleanupMs": 377,
+        "Passed": true
+      }
+    ]
+  },
+  "publication": "PASS eleven-image worktree release package=22e35db2-13bb-419d-ba68-7a169cc939e1; backup=build/t478-s43/release-before; no O:/winnt write",
+  "limits": [
+    "Normal outer width237 remains, separate inherited handoff",
+    "S42 broader inventory reconciliation remains incomplete",
+    "No guest patch, O:/winnt write or push"
+  ]
+}

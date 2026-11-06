@@ -29,12 +29,18 @@ static BOOL CALLBACK control(HWND window,LPARAM unused)
     {
         RECT outer={0},client={0};
         BOOL outer_ok=GetWindowRect(window,&outer),client_ok=GetClientRect(window,&client);
+        WINDOWPLACEMENT placement={sizeof(placement)};
+        BOOL placement_ok=GetWindowPlacement(window,&placement);
         /* Read-only native state, not requested-size or pixel acceptance. */
         wprintf(L"window-geometry=%p outer-ok=%d outer=%ld,%ld,%ld,%ld client-ok=%d client=%ld,%ld,%ld,%ld dpi=%u class-brush=%p style=%08lX exstyle=%08lX\n",
             window,outer_ok,outer.left,outer.top,outer.right,outer.bottom,
             client_ok,client.left,client.top,client.right,client.bottom,
             GetDpiForWindow(window),(void*)GetClassLongPtrW(window,GCLP_HBRBACKGROUND),
             (DWORD)GetWindowLongW(window,GWL_STYLE),(DWORD)GetWindowLongW(window,GWL_EXSTYLE));
+        wprintf(L"window-placement=%p ok=%d iconic=%d show=%u normal=%ld,%ld,%ld,%ld\n",
+            window,placement_ok,IsIconic(window),placement.showCmd,
+            placement.rcNormalPosition.left,placement.rcNormalPosition.top,
+            placement.rcNormalPosition.right,placement.rcNormalPosition.bottom);
     }
     return TRUE;
 }

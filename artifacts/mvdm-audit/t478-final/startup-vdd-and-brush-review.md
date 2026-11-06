@@ -80,3 +80,9 @@ The existing frontier runner intentionally records an observation timeout;
 its zero script exit is not application completion or gameplay acceptance.
 Its owned processes/stage were cleaned. Source and observer identities plus
 four matching samples are retained in the result receipt. No product change.
+
+Later S43 [delivery](../../../docs/etc/evidence/m0-t478-s43-gdi-color-alias.md)
+repairs the confirmed local class-brush alias collision and proves real gray
+background/gameplay on its published package. This earlier record remains the
+pre-repair observation. Normal width and broad inventory reconciliation remain
+open; current scope/status is controlled by CURRENT.md.

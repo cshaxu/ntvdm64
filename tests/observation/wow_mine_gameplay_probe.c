@@ -254,6 +254,13 @@ int main(int argc,char **argv)
     if(!mine || !SendMessageTimeoutW(mine,WM_NULL,0,0,SMTO_ABORTIFHUNG,2000,&reply))return 4;
     printf("window-ready elapsed=%llu inherited-desktop=%u\n",GetTickCount64()-started,inherited_desktop);
     printf("owned-window=%p pid=%lu\n",mine,owner_pid);
+    {
+        RECT outer={0},client={0};
+        GetWindowRect(mine,&outer);GetClientRect(mine,&client);
+        printf("restored-window outer=%ld,%ld client=%ld,%ld class-brush=%p iconic=%d\n",
+            outer.right-outer.left,outer.bottom-outer.top,client.right,client.bottom,
+            (void*)GetClassLongPtrW(mine,GCLP_HBRBACKGROUND),IsIconic(mine));
+    }
     if(argc>=5){
         WCHAR caption[256];
         BOOL native_frame=FALSE;
