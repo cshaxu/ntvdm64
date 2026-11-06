@@ -3,6 +3,10 @@
 ## Current Work
 
 **Active: M0 T479 S6** - Win3.1 complete VM I/O and nested chains.
+Owner requests [pre-import preservation](../etc/evidence/m0-t479-s6-pre-import.md).
+Goal execution is paused; no S6 expansion before adjacent-commit integration.
+Candidate fills: unit/build pass, fill002 normal exit fails; not published.
+
 [S5 closure](../etc/evidence/m0-t479-s5-closure.md) resolves command continuation
 and original reentry ownership with actual two-VM nested execution. The original
 DOS reentry cycle remains in the downstream DOS worker, not the enclosing VMM

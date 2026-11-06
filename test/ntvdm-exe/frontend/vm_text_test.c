@@ -153,6 +153,57 @@ static int publication_video(void)
     return 0;
 }
 
+static int fill_transaction(void)
+{
+    struct { ntvdm_vm_text_header h; uint8_t cells[12]; } initial = {
+        {3, 2, 1, 1, 0x0607, 3, 0, 437, 16},
+        {'A', 1, 'B', 2, 'C', 3, 'D', 4, 'E', 5, 'F', 6}
+    };
+    const uint8_t expected[] = {'A', 1, 'B', 2, 'Z', 3, 'Z', 4, 'Z', 5, 'F', 6};
+    ntvdm_vm_text *text = NULL;
+    ntvdm_vm_text_publication view;
+    console_io_request q = {0};
+    console_io_reply r = {0};
+    const ntvdm_vm_text_header *h;
+    const uint8_t *cells;
+    CHECK(!ntvdm_vm_text_create(&initial, sizeof(initial), &text));
+    q.operation = CONSOLE_IO_FILL_CHARACTER;
+    q.state.x = 2; q.state.count = 3; q.state.character = 'Z';
+    CHECK(ntvdm_vm_text_dispatch(text, &q, &r) == ERROR_INVALID_STATE);
+    CHECK(!ntvdm_vm_text_begin(text, FALSE));
+    CHECK(!ntvdm_vm_text_dispatch(text, &q, &r) && r.state.count == 3);
+    CHECK(!ntvdm_vm_text_candidate(text, &view));
+    h = view.text; cells = (const uint8_t *)(h + 1);
+    CHECK(!memcmp(cells, expected, sizeof(expected)));
+    CHECK(h->x == 1 && h->y == 1);
+    CHECK(ntvdm_vm_text_finish(text, ERROR_OPERATION_ABORTED) == ERROR_OPERATION_ABORTED);
+    CHECK(!ntvdm_vm_text_begin(text, FALSE));
+    CHECK(!ntvdm_vm_text_candidate(text, &view));
+    CHECK(!memcmp((const uint8_t *)view.text + sizeof(initial.h), initial.cells, sizeof(initial.cells)));
+    q.operation = CONSOLE_IO_FILL_ATTRIBUTE;
+    q.state.x = 1; q.state.y = 1; q.state.count = UINT32_MAX; q.state.attribute = 0x1e;
+    CHECK(!ntvdm_vm_text_dispatch(text, &q, &r) && r.state.count == 2);
+    CHECK(!ntvdm_vm_text_candidate(text, &view));
+    cells = (const uint8_t *)view.text + sizeof(initial.h);
+    CHECK(!memcmp(cells, initial.cells, 8));
+    CHECK(cells[8] == 'E' && cells[9] == 0x1e && cells[10] == 'F' && cells[11] == 0x1e);
+    q.state.count = 0; q.state.attribute = 7;
+    CHECK(!ntvdm_vm_text_dispatch(text, &q, &r) && !r.state.count);
+    q.state.count = 1; q.state.attribute = 0x100;
+    CHECK(ntvdm_vm_text_dispatch(text, &q, &r) == ERROR_NOT_SUPPORTED);
+    q.state.attribute = 7; q.state.x = 3;
+    CHECK(ntvdm_vm_text_dispatch(text, &q, &r) == ERROR_INVALID_PARAMETER);
+    q.state.x = -1;
+    CHECK(ntvdm_vm_text_dispatch(text, &q, &r) == ERROR_INVALID_PARAMETER);
+    CHECK(!ntvdm_vm_text_finish(text, 0));
+    CHECK(!ntvdm_vm_text_begin(text, FALSE));
+    CHECK(!ntvdm_vm_text_candidate(text, &view));
+    cells = (const uint8_t *)view.text + sizeof(initial.h);
+    CHECK(cells[9] == 0x1e && cells[11] == 0x1e);
+    ntvdm_vm_text_destroy(text);
+    return 0;
+}
+
 int main(void)
 {
     struct { ntvdm_vm_text_header h; uint8_t cells[8]; } frame = {
@@ -167,6 +218,7 @@ int main(void)
     void *application;
     uint32_t application_bytes;
     CHECK(!publication_video());
+    CHECK(!fill_transaction());
     CHECK(ntvdm_vm_text_create(&frame, sizeof(frame) - 1, &text) == ERROR_INVALID_DATA);
     CHECK(!text);
     CHECK(!ntvdm_vm_text_create(&frame, sizeof(frame), &text));

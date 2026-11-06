@@ -1,0 +1,365 @@
+{
+  "baseline": "572d854a3",
+  "method": "Exact enum and reference inventory; not preprocessing, implementation or acceptance proof",
+  "operations": [
+    {
+      "value": 1,
+      "operation": "CONSOLE_IO_WRITE",
+      "sites": [],
+      "status": "no explicit dispatch; unsupported default candidate"
+    },
+    {
+      "value": 2,
+      "operation": "CONSOLE_IO_SCREEN_INFO",
+      "sites": [
+        "src/ntvdm-exe/frontend/vm_text.c:209"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 3,
+      "operation": "CONSOLE_IO_CURSOR_POSITION",
+      "sites": [
+        "src/ntvdm-exe/softpc/mvdm_vm_application.c:99",
+        "src/ntvdm-exe/frontend/vm_text.c:237"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 4,
+      "operation": "CONSOLE_IO_CURSOR_INFO",
+      "sites": [
+        "src/ntvdm-exe/softpc/mvdm_vm_application.c:99",
+        "src/ntvdm-exe/frontend/vm_text.c:243"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 5,
+      "operation": "CONSOLE_IO_FILL_CHARACTER",
+      "sites": [],
+      "status": "no explicit dispatch; unsupported default candidate"
+    },
+    {
+      "value": 6,
+      "operation": "CONSOLE_IO_FILL_ATTRIBUTE",
+      "sites": [],
+      "status": "no explicit dispatch; unsupported default candidate"
+    },
+    {
+      "value": 7,
+      "operation": "CONSOLE_IO_SCROLL",
+      "sites": [],
+      "status": "no explicit dispatch; unsupported default candidate"
+    },
+    {
+      "value": 8,
+      "operation": "CONSOLE_IO_ATTRIBUTE",
+      "sites": [
+        "src/ntvdm-exe/softpc/mvdm_vm_application.c:98",
+        "src/ntvdm-exe/frontend/vm_text.c:217"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 9,
+      "operation": "CONSOLE_IO_GET_MODE",
+      "sites": [
+        "src/ntvdm-exe/softpc/mvdm_vm_io.c:168",
+        "src/ntvdm-exe/softpc/mvdm_vm_io.c:174",
+        "src/ntvdm-exe/softpc/mvdm_vm_io.c:177"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 10,
+      "operation": "CONSOLE_IO_SET_MODE",
+      "sites": [
+        "src/ntvdm-exe/softpc/mvdm_vm_io.c:168"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 11,
+      "operation": "CONSOLE_IO_BARRIER",
+      "sites": [
+        "src/ntvdm-exe/frontend/vm_text.c:141"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 12,
+      "operation": "CONSOLE_IO_READ_CELLS_A",
+      "sites": [
+        "src/ntvdm-exe/frontend/vm_text.c:258"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 13,
+      "operation": "CONSOLE_IO_READ_CELLS_W",
+      "sites": [
+        "src/ntvdm-exe/frontend/vm_text.c:87",
+        "src/ntvdm-exe/frontend/vm_text.c:257"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 14,
+      "operation": "CONSOLE_IO_WRITE_CELLS_A",
+      "sites": [
+        "src/ntvdm-exe/softpc/mvdm_vm_application.c:100",
+        "src/ntvdm-exe/frontend/vm_text.c:86",
+        "src/ntvdm-exe/frontend/vm_text.c:258"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 15,
+      "operation": "CONSOLE_IO_WRITE_CELLS_W",
+      "sites": [
+        "src/ntvdm-exe/softpc/mvdm_vm_application.c:100",
+        "src/ntvdm-exe/frontend/vm_text.c:86",
+        "src/ntvdm-exe/frontend/vm_text.c:87",
+        "src/ntvdm-exe/frontend/vm_text.c:257"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 16,
+      "operation": "CONSOLE_IO_BUFFER_SIZE",
+      "sites": [],
+      "status": "no explicit dispatch; unsupported default candidate"
+    },
+    {
+      "value": 17,
+      "operation": "CONSOLE_IO_WINDOW_RECT",
+      "sites": [
+        "src/ntvdm-exe/softpc/mvdm_vm_application.c:98",
+        "src/ntvdm-exe/frontend/vm_text.c:222"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 18,
+      "operation": "CONSOLE_IO_READ_INPUT",
+      "sites": [
+        "src/ntvdm-exe/softpc/mvdm_vm_io.c:95",
+        "src/ntvdm-exe/softpc/mvdm_vm_io.c:183"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 19,
+      "operation": "CONSOLE_IO_PEEK_INPUT",
+      "sites": [
+        "src/ntvdm-exe/softpc/mvdm_vm_io.c:88",
+        "src/ntvdm-exe/softpc/mvdm_vm_io.c:183"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 20,
+      "operation": "CONSOLE_IO_GET_CURSOR_INFO",
+      "sites": [
+        "src/ntvdm-exe/frontend/vm_text.c:235"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 21,
+      "operation": "CONSOLE_IO_PREPEND_KEYS",
+      "sites": [
+        "src/ntvdm-exe/softpc/mvdm_vm_io.c:185"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 22,
+      "operation": "CONSOLE_IO_CODE_PAGE",
+      "sites": [
+        "src/ntvdm-exe/frontend/vm_text.c:145"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 23,
+      "operation": "CONSOLE_IO_WINDOW_QUERY",
+      "sites": [
+        "src/ntvdm-exe/frontend/vm_text.c:147"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 24,
+      "operation": "CONSOLE_IO_GET_TITLE_A",
+      "sites": [],
+      "status": "no explicit dispatch; unsupported default candidate"
+    },
+    {
+      "value": 25,
+      "operation": "CONSOLE_IO_SET_TITLE_A",
+      "sites": [],
+      "status": "no explicit dispatch; unsupported default candidate"
+    },
+    {
+      "value": 26,
+      "operation": "CONSOLE_IO_GET_POINTER",
+      "sites": [],
+      "status": "no explicit dispatch; unsupported default candidate"
+    },
+    {
+      "value": 27,
+      "operation": "CONSOLE_IO_SET_POINTER",
+      "sites": [],
+      "status": "no explicit dispatch; unsupported default candidate"
+    },
+    {
+      "value": 28,
+      "operation": "CONSOLE_IO_GET_POINTER_CLIP",
+      "sites": [],
+      "status": "no explicit dispatch; unsupported default candidate"
+    },
+    {
+      "value": 29,
+      "operation": "CONSOLE_IO_SET_POINTER_CLIP",
+      "sites": [],
+      "status": "no explicit dispatch; unsupported default candidate"
+    },
+    {
+      "value": 30,
+      "operation": "CONSOLE_IO_CURRENT_FONT",
+      "sites": [],
+      "status": "no explicit dispatch; unsupported default candidate"
+    },
+    {
+      "value": 31,
+      "operation": "CONSOLE_IO_FONT_SIZE",
+      "sites": [],
+      "status": "no explicit dispatch; unsupported default candidate"
+    },
+    {
+      "value": 32,
+      "operation": "CONSOLE_IO_VIDEO_BEGIN",
+      "sites": [
+        "src/ntvdm-exe/softpc/mvdm_vm_application.c:101",
+        "src/ntvdm-exe/frontend/vm_text.c:162"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 33,
+      "operation": "CONSOLE_IO_VIDEO_DATA",
+      "sites": [
+        "src/ntvdm-exe/softpc/mvdm_vm_application.c:93",
+        "src/ntvdm-exe/frontend/vm_text.c:178"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 34,
+      "operation": "CONSOLE_IO_VIDEO_TEXT",
+      "sites": [],
+      "status": "no explicit dispatch; unsupported default candidate"
+    },
+    {
+      "value": 35,
+      "operation": "CONSOLE_IO_GET_DISPLAY_MODE",
+      "sites": [],
+      "status": "no explicit dispatch; unsupported default candidate"
+    },
+    {
+      "value": 36,
+      "operation": "CONSOLE_IO_SET_DISPLAY_MODE",
+      "sites": [],
+      "status": "no explicit dispatch; unsupported default candidate"
+    },
+    {
+      "value": 37,
+      "operation": "CONSOLE_IO_KEYBOARD_LAYOUT",
+      "sites": [],
+      "status": "no explicit dispatch; unsupported default candidate"
+    },
+    {
+      "value": 39,
+      "operation": "CONSOLE_IO_READ_TEXT_CONFIGURATION",
+      "sites": [
+        "src/ntvdm-exe/frontend/vm_text.c:182"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 40,
+      "operation": "CONSOLE_IO_SNAPSHOT_BEGIN",
+      "sites": [
+        "src/ntvdm-exe/frontend/vm_text.c:150"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 41,
+      "operation": "CONSOLE_IO_SNAPSHOT_END",
+      "sites": [
+        "src/ntvdm-exe/frontend/vm_text.c:153"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 42,
+      "operation": "CONSOLE_IO_PUBLISH_TITLE_A",
+      "sites": [
+        "src/ntvdm-exe/softpc/mvdm_vm_io.c:149"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 43,
+      "operation": "CONSOLE_IO_PUBLICATION_BEGIN",
+      "sites": [
+        "src/ntvdm-exe/frontend/vm_text.c:156"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 44,
+      "operation": "CONSOLE_IO_PUBLICATION_END",
+      "sites": [
+        "src/ntvdm-exe/softpc/mvdm_vm_application.c:108"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 45,
+      "operation": "CONSOLE_IO_PUBLICATION_ABORT",
+      "sites": [
+        "src/ntvdm-exe/softpc/mvdm_vm_application.c:94",
+        "src/ntvdm-exe/frontend/vm_text.c:158"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 46,
+      "operation": "CONSOLE_IO_PREPARE_TEXT_REGION",
+      "sites": [
+        "src/ntvdm-exe/frontend/vm_text.c:133"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 47,
+      "operation": "CONSOLE_IO_GET_HANDOFF_TITLE_A",
+      "sites": [
+        "src/ntvdm-exe/softpc/mvdm_vm_io.c:161"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    },
+    {
+      "value": 48,
+      "operation": "CONSOLE_IO_PRESENT_BARRIER",
+      "sites": [
+        "src/ntvdm-exe/frontend/vm_text.c:204"
+      ],
+      "status": "dispatch reference only; semantic/guest proof required"
+    }
+  ]
+}

@@ -96,6 +96,7 @@ DWORD mvdm_vm_application_dispatch(mvdm_vm_continuation *continuation,
     }
     switch (request->operation) {
     case CONSOLE_IO_ATTRIBUTE: case CONSOLE_IO_WINDOW_RECT:
+    case CONSOLE_IO_FILL_CHARACTER: case CONSOLE_IO_FILL_ATTRIBUTE:
     case CONSOLE_IO_CURSOR_POSITION: case CONSOLE_IO_CURSOR_INFO:
     case CONSOLE_IO_WRITE_CELLS_A: case CONSOLE_IO_WRITE_CELLS_W:
     case CONSOLE_IO_VIDEO_BEGIN:

@@ -1,0 +1,48 @@
+{
+  "baseline": "572d854a3",
+  "scope": "T479 S6 P1 pre-import preservation checkpoint",
+  "ownerDirection": "Commit all current changes to clean the worktree before adjacent commits are stacked; combined build, tests and publication follow the import.",
+  "build": "Cached x86 worker build passed",
+  "unit": "mvdm-vm-text passed",
+  "integration": "fill002 failed: started and desktop/mode observed, normalExit=false",
+  "failureCause": "Not attributed; generic runner error incorrectly names probe216, actual failed run is fill002",
+  "released": false,
+  "stageClosed": false,
+  "artifacts": [
+    {
+      "path": "build/t479-s6-io/build001.stdout",
+      "bytes": 3379,
+      "sha256": "AFAC32D622ECAB9B4446F063C63B22D1E9CC9DCDCFCCF6258663B4792F0FE3B8"
+    },
+    {
+      "path": "build/t479-s6-io/build001.stderr",
+      "bytes": 11,
+      "sha256": "9FB0B803D46B2EDD81E77AAA615D5721C961271CDD410F5BDA368F36F57B57EB"
+    },
+    {
+      "path": "build/t479-s6-io/fill002.stdout",
+      "bytes": 65137,
+      "sha256": "6DEBD48659A28802B38719711F06FBB5FF5A3ADB8706D33E02A8609F4A3A62BB"
+    },
+    {
+      "path": "build/t479-s6-io/fill002.stderr",
+      "bytes": 357,
+      "sha256": "1B7B523BC7A94DB0C795B514BCCFEDCCDA4E6B992A80E8B48AB097E694EC4550"
+    },
+    {
+      "path": "build/t479-s6-io/fill002.exit",
+      "bytes": 1,
+      "sha256": "6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B"
+    },
+    {
+      "path": "build/t479-s6-io/checked-fill002/runtime/matrix-results.json",
+      "bytes": 362,
+      "sha256": "5E27E15E51CBE0AFD0C41A7945C1E71A36B8F95B6C45561A5222120E82941151"
+    },
+    {
+      "path": "build/t479-s6-io/verify-fill002.ps1",
+      "bytes": 1101,
+      "sha256": "939039CB917F20E172345D03FE064CAF32E0BB4427BD7D4BB123D403EEFCD50B"
+    }
+  ]
+}

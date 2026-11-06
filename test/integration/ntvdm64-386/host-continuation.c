@@ -224,10 +224,21 @@ static void complete_one(diagnostic_request *request)
         console_io_cell cell = {(uint16_t)(request->role + ('a' - 'A')), 0x2f};
         write.operation = CONSOLE_IO_PUBLICATION_BEGIN;
         if (ntvdm_vm_text_dispatch(text, &write, &reply)) ExitProcess(ERROR_INVALID_STATE);
-        write.operation = CONSOLE_IO_WRITE_CELLS_W;
-        write.state.width = write.state.height = 1;
-        write.bytes = sizeof(cell); write.data = (uint8_t *)&cell;
-        if (ntvdm_vm_text_dispatch(text, &write, &reply)) ExitProcess(ERROR_WRITE_FAULT);
+        if (GetEnvironmentVariableW(L"MVDM_FILL_APPLICATION", NULL, 0)) {
+            write.operation = CONSOLE_IO_FILL_CHARACTER;
+            write.state.count = 1; write.state.character = cell.character;
+            if (ntvdm_vm_text_dispatch(text, &write, &reply) || reply.state.count != 1)
+                ExitProcess(ERROR_WRITE_FAULT);
+            write.operation = CONSOLE_IO_FILL_ATTRIBUTE;
+            write.state.attribute = cell.attribute;
+            if (ntvdm_vm_text_dispatch(text, &write, &reply) || reply.state.count != 1)
+                ExitProcess(ERROR_WRITE_FAULT);
+        } else {
+            write.operation = CONSOLE_IO_WRITE_CELLS_W;
+            write.state.width = write.state.height = 1;
+            write.bytes = sizeof(cell); write.data = (uint8_t *)&cell;
+            if (ntvdm_vm_text_dispatch(text, &write, &reply)) ExitProcess(ERROR_WRITE_FAULT);
+        }
         ZeroMemory(&write, sizeof(write)); write.operation = CONSOLE_IO_CURSOR_POSITION;
         write.state.x = 4; write.state.y = 5;
         if (ntvdm_vm_text_dispatch(text, &write, &reply)) ExitProcess(ERROR_INVALID_STATE);

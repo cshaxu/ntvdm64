@@ -214,6 +214,27 @@ DWORD ntvdm_vm_text_dispatch(ntvdm_vm_text *text, const console_io_request *requ
         reply->state.right = h->columns - 1; reply->state.bottom = h->rows - 1;
         reply->state.attribute = text->staged ? text->staged_attribute : text->attribute;
         return ERROR_SUCCESS;
+    case CONSOLE_IO_FILL_CHARACTER: case CONSOLE_IO_FILL_ATTRIBUTE: {
+        const console_io_state *s = &request->state;
+        uint32_t first, count, i;
+        BOOL attribute = request->operation == CONSOLE_IO_FILL_ATTRIBUTE;
+        uint8_t *data = (uint8_t *)(h + 1);
+        if (!text->staged) return ERROR_INVALID_STATE;
+        if (request->bytes || s->x < 0 || s->y < 0 ||
+            (uint32_t)s->x >= h->columns || (uint32_t)s->y >= h->rows)
+            return ERROR_INVALID_PARAMETER;
+        if (attribute && s->attribute > UINT8_MAX) return ERROR_NOT_SUPPORTED;
+        first = (uint32_t)s->y * h->columns + (uint32_t)s->x;
+        count = min(s->count, h->columns * h->rows - first);
+        /* Console fill crosses rows, clips at the grid end, preserves the
+         * other cell component and does not move the cursor. Commit remains
+         * the application's guest-acknowledged transaction. */
+        for (i = 0; i < count; ++i)
+            data[2 * (first + i) + (attribute ? 1 : 0)] =
+                (uint8_t)(attribute ? s->attribute : s->character);
+        reply->state.count = count;
+        return ERROR_SUCCESS;
+    }
     case CONSOLE_IO_ATTRIBUTE:
         if (!text->staged) return ERROR_INVALID_STATE;
         if (request->state.attribute > UINT8_MAX) return ERROR_NOT_SUPPORTED;

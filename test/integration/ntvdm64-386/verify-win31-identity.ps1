@@ -18,6 +18,7 @@ param(
  [switch]$RealCommand,
  [switch]$NestedCommand,
  [switch]$ReentrantCommand,
+ [switch]$FillApplication,
  [string]$OrderedCommandImage,
  [ValidateSet('A','B')][string]$FirstCommand='A',
  [switch]$TraceContinuation,
@@ -31,6 +32,7 @@ param(
  [string]$DosWitnessImage
 )
 $ErrorActionPreference='Stop'
+if($FillApplication -and (!$Continuation -or $RealCommand)){throw 'Fill application requires diagnostic Continuation'}
 if($ReentrantCommand -and !$NestedCommand){throw 'Reentrant command witness requires NestedCommand'}
 if($NestedCommand -and !$RealCommand){throw 'Nested command witness requires RealCommand'}
 if($OrderedCommandImage -and !$RealCommand){throw 'Ordered native commands require RealCommand'}
@@ -270,6 +272,7 @@ if($InitializationFailure){$env:MVDM_INIT_FAILURE_REPORT="$task/initialization-r
 if($RealCommand){$env:MVDM_REAL_COMMAND='1'}
 if($NestedCommand){$env:MVDM_NESTED_COMMAND='1'}
 if($ReentrantCommand){$env:MVDM_REENTRANT_COMMAND='1'}
+if($FillApplication){$env:MVDM_FILL_APPLICATION='1'}
 if($TraceContinuation){$env:MVDM_CONTINUATION_TRACE="$task/continuation-trace.txt"}
 if($InterruptObserver){$env:MVDM_INTERRUPT_OBSERVATION='1'}
 if($BlockedKeyboard){$env:MVDM_BLOCKED_KEYBOARD='1'}

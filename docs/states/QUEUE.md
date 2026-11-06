@@ -22,6 +22,8 @@ active-packet transition does not change any candidate's proposed scope.
 | 5 | Upgrade to a Windows XP NTVDM baseline — assess and recover XP-era capabilities including audio and long file names, update all guest components, and make required modern-host compatibility repairs. | [Proposal](../proposals/proposal-windows-xp-ntvdm-baseline-upgrade-001.md) |
 | 6 | Hardware-virtualized guest CPU acceleration — investigate and implement a modern hardware-virtualization execution backend for 16/32-bit guest instructions, subject to demonstrated feasibility and compatibility. | [Proposal](../proposals/proposal-hardware-virtualized-guest-cpu-001.md) |
 | 7 | Windows 1.01 application launch from the host — classify and launch a selected application through its matching Windows 1.01 guest environment, preserving arguments, environment selection and truthful application lifecycle results. | [Proposal](../proposals/proposal-win101-host-application-launch-001.md) |
+| 8 | Guest Windows / host bidirectional launch routing research — investigate redirecting guest double-click launches to the host and routing MS-DOS VM host-command requests back to guest Windows, with explicit execution-location choices. | [Proposal](../proposals/proposal-win31-bidirectional-launch-routing-001.md) |
+| 9 | Host-rendered Win32 applications inside guest Windows — investigate host execution/rendering with guest Win3.1 window presentation and input forwarding, without Win32s or original guest modifications. | [Proposal](../proposals/proposal-win31-host-window-presentation-001.md) |
 
 The owner moved shared implementation ownership review to the front; it is
 now admitted in the independent worktree. The external system launch
